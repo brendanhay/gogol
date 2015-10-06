@@ -256,8 +256,8 @@ instance GoogleAuth TablesFeaturesList' where
 
 instance GoogleRequest TablesFeaturesList' where
         type Rs TablesFeaturesList' = FeaturesListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u TablesFeaturesList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesFeaturesList'{..}
           = go _tflId _tflInclude _tflWhere _tflOrderBy
               _tflVersion
               _tflLimit
@@ -273,7 +273,6 @@ instance GoogleRequest TablesFeaturesList' where
               _tflOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TablesFeaturesListResource)
-                      r
-                      u
+                      rq

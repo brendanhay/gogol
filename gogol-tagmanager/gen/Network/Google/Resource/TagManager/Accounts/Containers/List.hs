@@ -152,8 +152,8 @@ instance GoogleAuth AccountsContainersList' where
 instance GoogleRequest AccountsContainersList' where
         type Rs AccountsContainersList' =
              ListContainersResponse
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersList'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersList'{..}
           = go _aclAccountId _aclQuotaUser
               (Just _aclPrettyPrint)
               _aclUserIP
@@ -162,7 +162,6 @@ instance GoogleRequest AccountsContainersList' where
               _aclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsContainersListResource)
-                      r
-                      u
+                      rq

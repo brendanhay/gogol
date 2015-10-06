@@ -177,8 +177,8 @@ instance GoogleAuth CcOffersList' where
 
 instance GoogleRequest CcOffersList' where
         type Rs CcOffersList' = CcOffers
-        request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u CcOffersList'{..}
+        request = requestWith affiliatesRequest
+        requestWith rq CcOffersList'{..}
           = go _colPublisher (_colAdvertiser ^. _Default)
               _colProjection
               _colQuotaUser
@@ -189,7 +189,5 @@ instance GoogleRequest CcOffersList' where
               _colOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CcOffersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CcOffersListResource)
+                      rq

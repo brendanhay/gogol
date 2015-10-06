@@ -161,8 +161,8 @@ instance GoogleAuth CreativeGroupsGet' where
 
 instance GoogleRequest CreativeGroupsGet' where
         type Rs CreativeGroupsGet' = CreativeGroup
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeGroupsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativeGroupsGet'{..}
           = go _cggProFileId _cggId _cggQuotaUser
               (Just _cggPrettyPrint)
               _cggUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest CreativeGroupsGet' where
               _cggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CreativeGroupsGetResource)
-                      r
-                      u
+                      rq

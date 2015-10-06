@@ -197,9 +197,8 @@ instance GoogleRequest
          ManagementCustomDataSourcesList' where
         type Rs ManagementCustomDataSourcesList' =
              CustomDataSources
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementCustomDataSourcesList'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementCustomDataSourcesList'{..}
           = go _mcdslAccountId _mcdslWebPropertyId
               _mcdslStartIndex
               _mcdslMaxResults
@@ -211,8 +210,7 @@ instance GoogleRequest
               _mcdslOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementCustomDataSourcesListResource)
-                      r
-                      u
+                      rq

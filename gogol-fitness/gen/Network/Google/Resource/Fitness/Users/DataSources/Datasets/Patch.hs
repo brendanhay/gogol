@@ -215,9 +215,8 @@ instance GoogleAuth UsersDataSourcesDatasetsPatch'
 instance GoogleRequest UsersDataSourcesDatasetsPatch'
          where
         type Rs UsersDataSourcesDatasetsPatch' = Dataset
-        request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u
-          UsersDataSourcesDatasetsPatch'{..}
+        request = requestWith fitnessRequest
+        requestWith rq UsersDataSourcesDatasetsPatch'{..}
           = go _udsdpUserId _udsdpDataSourceId _udsdpDatasetId
               _udsdpCurrentTimeMillis
               _udsdpQuotaUser
@@ -229,8 +228,7 @@ instance GoogleRequest UsersDataSourcesDatasetsPatch'
               (Just AltJSON)
               _udsdpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy UsersDataSourcesDatasetsPatchResource)
-                      r
-                      u
+                      rq

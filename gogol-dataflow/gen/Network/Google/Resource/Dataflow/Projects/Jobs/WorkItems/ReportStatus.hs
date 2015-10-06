@@ -256,9 +256,8 @@ instance GoogleRequest
          ProjectsJobsWorkItemsReportStatus' where
         type Rs ProjectsJobsWorkItemsReportStatus' =
              ReportWorkItemStatusResponse
-        request = requestWithRoute defReq dataflowURL
-        requestWithRoute r u
-          ProjectsJobsWorkItemsReportStatus'{..}
+        request = requestWith dataflowRequest
+        requestWith rq ProjectsJobsWorkItemsReportStatus'{..}
           = go _pjwirsProjectId _pjwirsJobId _pjwirsXgafv
               _pjwirsUploadProtocol
               (Just _pjwirsPp)
@@ -274,8 +273,7 @@ instance GoogleRequest
               (Just AltJSON)
               _pjwirsPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ProjectsJobsWorkItemsReportStatusResource)
-                      r
-                      u
+                      rq

@@ -285,8 +285,8 @@ instance GoogleAuth EventsInstances' where
 
 instance GoogleRequest EventsInstances' where
         type Rs EventsInstances' = Events
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsInstances'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq EventsInstances'{..}
           = go _eiCalendarId _eiEventId _eiTimeMin
               _eiShowDeleted
               _eiOriginalStart
@@ -304,7 +304,6 @@ instance GoogleRequest EventsInstances' where
               _eiOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EventsInstancesResource)
-                      r
-                      u
+                      rq

@@ -181,9 +181,8 @@ instance GoogleRequest
          AccountsContainersVersionsList' where
         type Rs AccountsContainersVersionsList' =
              ListContainerVersionsResponse
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersVersionsList'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersVersionsList'{..}
           = go _acvlAccountId _acvlContainerId
               (Just _acvlHeaders)
               _acvlQuotaUser
@@ -194,8 +193,7 @@ instance GoogleRequest
               _acvlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersVersionsListResource)
-                      r
-                      u
+                      rq

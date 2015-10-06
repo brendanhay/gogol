@@ -153,8 +153,8 @@ instance GoogleAuth CustomFieldDefList' where
 instance GoogleRequest CustomFieldDefList' where
         type Rs CustomFieldDefList' =
              CustomFieldDefListResponse
-        request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u CustomFieldDefList'{..}
+        request = requestWith mapsCoordinateRequest
+        requestWith rq CustomFieldDefList'{..}
           = go _cfdlTeamId _cfdlQuotaUser
               (Just _cfdlPrettyPrint)
               _cfdlUserIP
@@ -163,7 +163,6 @@ instance GoogleRequest CustomFieldDefList' where
               _cfdlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CustomFieldDefListResource)
-                      r
-                      u
+                      rq

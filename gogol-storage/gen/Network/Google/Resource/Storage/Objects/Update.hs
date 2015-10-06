@@ -265,8 +265,8 @@ instance GoogleAuth ObjectsUpdate' where
 
 instance GoogleRequest ObjectsUpdate' where
         type Rs ObjectsUpdate' = Object
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsUpdate'{..}
+        request = requestWith storageRequest
+        requestWith rq ObjectsUpdate'{..}
           = go _ouBucket _ouObject _ouIfMetagenerationMatch
               _ouIfGenerationNotMatch
               _ouIfGenerationMatch
@@ -282,17 +282,14 @@ instance GoogleRequest ObjectsUpdate' where
               (Just AltJSON)
               _ouPayload
           where go :<|> _
-                  = clientWithRoute
-                      (Proxy :: Proxy ObjectsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ObjectsUpdateResource)
+                      rq
 
 instance GoogleRequest (MediaDownload ObjectsUpdate')
          where
         type Rs (MediaDownload ObjectsUpdate') = Body
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u
-          (MediaDownload ObjectsUpdate'{..})
+        request = requestWith storageRequest
+        requestWith rq (MediaDownload ObjectsUpdate'{..})
           = go _ouBucket _ouObject _ouIfMetagenerationMatch
               _ouIfGenerationNotMatch
               _ouIfGenerationMatch
@@ -308,7 +305,5 @@ instance GoogleRequest (MediaDownload ObjectsUpdate')
               (Just AltMedia)
               _ouPayload
           where _ :<|> go
-                  = clientWithRoute
-                      (Proxy :: Proxy ObjectsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ObjectsUpdateResource)
+                      rq

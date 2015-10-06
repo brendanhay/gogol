@@ -180,8 +180,8 @@ instance GoogleAuth ProjectsZonesOperationsGet' where
 instance GoogleRequest ProjectsZonesOperationsGet'
          where
         type Rs ProjectsZonesOperationsGet' = Operation
-        request = requestWithRoute defReq containerURL
-        requestWithRoute r u ProjectsZonesOperationsGet'{..}
+        request = requestWith containerRequest
+        requestWith rq ProjectsZonesOperationsGet'{..}
           = go _pzogProjectId _pzogZoneId _pzogOperationId
               _pzogQuotaUser
               (Just _pzogPrettyPrint)
@@ -191,7 +191,6 @@ instance GoogleRequest ProjectsZonesOperationsGet'
               _pzogOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsZonesOperationsGetResource)
-                      r
-                      u
+                      rq

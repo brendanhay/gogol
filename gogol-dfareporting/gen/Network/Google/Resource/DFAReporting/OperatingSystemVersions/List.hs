@@ -156,8 +156,8 @@ instance GoogleRequest OperatingSystemVersionsList'
          where
         type Rs OperatingSystemVersionsList' =
              OperatingSystemVersionsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u OperatingSystemVersionsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq OperatingSystemVersionsList'{..}
           = go _osvlProFileId _osvlQuotaUser
               (Just _osvlPrettyPrint)
               _osvlUserIP
@@ -166,7 +166,6 @@ instance GoogleRequest OperatingSystemVersionsList'
               _osvlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OperatingSystemVersionsListResource)
-                      r
-                      u
+                      rq

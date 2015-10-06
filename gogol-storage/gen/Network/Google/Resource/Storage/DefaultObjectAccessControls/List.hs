@@ -181,9 +181,8 @@ instance GoogleRequest
          DefaultObjectAccessControlsList' where
         type Rs DefaultObjectAccessControlsList' =
              ObjectAccessControls
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u
-          DefaultObjectAccessControlsList'{..}
+        request = requestWith storageRequest
+        requestWith rq DefaultObjectAccessControlsList'{..}
           = go _doaclBucket _doaclIfMetagenerationMatch
               _doaclIfMetagenerationNotMatch
               _doaclQuotaUser
@@ -194,8 +193,7 @@ instance GoogleRequest
               _doaclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy DefaultObjectAccessControlsListResource)
-                      r
-                      u
+                      rq

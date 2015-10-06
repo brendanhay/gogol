@@ -164,8 +164,8 @@ instance GoogleAuth URLMapsInsert' where
 
 instance GoogleRequest URLMapsInsert' where
         type Rs URLMapsInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u URLMapsInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq URLMapsInsert'{..}
           = go _umiProject _umiQuotaUser (Just _umiPrettyPrint)
               _umiUserIP
               _umiFields
@@ -174,7 +174,5 @@ instance GoogleRequest URLMapsInsert' where
               (Just AltJSON)
               _umiPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy URLMapsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy URLMapsInsertResource)
+                      rq

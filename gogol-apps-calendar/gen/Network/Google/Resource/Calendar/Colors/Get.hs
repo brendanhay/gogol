@@ -134,14 +134,12 @@ instance GoogleAuth ColorsGet' where
 
 instance GoogleRequest ColorsGet' where
         type Rs ColorsGet' = Colors
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u ColorsGet'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq ColorsGet'{..}
           = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIP
               _cgFields
               _cgKey
               _cgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ColorsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ColorsGetResource) rq

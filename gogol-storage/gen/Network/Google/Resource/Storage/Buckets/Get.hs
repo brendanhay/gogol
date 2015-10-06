@@ -182,8 +182,8 @@ instance GoogleAuth BucketsGet' where
 
 instance GoogleRequest BucketsGet' where
         type Rs BucketsGet' = Bucket
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketsGet'{..}
+        request = requestWith storageRequest
+        requestWith rq BucketsGet'{..}
           = go _bgBucket _bgIfMetagenerationMatch
               _bgIfMetagenerationNotMatch
               _bgProjection
@@ -195,6 +195,4 @@ instance GoogleRequest BucketsGet' where
               _bgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy BucketsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy BucketsGetResource) rq

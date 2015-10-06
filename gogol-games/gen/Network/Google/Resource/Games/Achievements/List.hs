@@ -198,8 +198,8 @@ instance GoogleAuth AchievementsList' where
 instance GoogleRequest AchievementsList' where
         type Rs AchievementsList' =
              PlayerAchievementListResponse
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u AchievementsList'{..}
+        request = requestWith gamesRequest
+        requestWith rq AchievementsList'{..}
           = go _alPlayerId _alState _alLanguage _alPageToken
               _alMaxResults
               _alQuotaUser
@@ -210,7 +210,6 @@ instance GoogleRequest AchievementsList' where
               _alOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AchievementsListResource)
-                      r
-                      u
+                      rq

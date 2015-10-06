@@ -21,7 +21,7 @@ module Network.Google.AppState
     -- * API
       AppStateAPI
     , appStateAPI
-    , appStateURL
+    , appStateRequest
 
     -- * Service Methods
 

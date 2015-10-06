@@ -176,8 +176,8 @@ instance GoogleAuth AssetsParentsList' where
 
 instance GoogleRequest AssetsParentsList' where
         type Rs AssetsParentsList' = ParentsListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u AssetsParentsList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq AssetsParentsList'{..}
           = go _assId _assPageToken _assMaxResults
               _assQuotaUser
               (Just _assPrettyPrint)
@@ -187,7 +187,6 @@ instance GoogleRequest AssetsParentsList' where
               _assOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AssetsParentsListResource)
-                      r
-                      u
+                      rq

@@ -16,7 +16,7 @@
 module Network.Google.Billing.Types
     (
     -- * Service URL
-      billingURL
+      billingRequest
 
     -- * BillingAccount
     , BillingAccount
@@ -50,9 +50,9 @@ import           Network.Google.Billing.Types.Product
 import           Network.Google.Billing.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Google Cloud Billing API.
-billingURL :: BaseUrl
-billingURL
-  = BaseUrl Https
+-- | Default request referring to version 'v1' of the Google Cloud Billing API.
+billingRequest :: RequestBuilder
+billingRequest
+  = defaultRequest
       "https://cloudbilling.googleapis.com/"
-      443
+      ""

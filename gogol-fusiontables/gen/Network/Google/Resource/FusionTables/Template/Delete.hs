@@ -163,8 +163,8 @@ instance GoogleAuth TemplateDelete' where
 
 instance GoogleRequest TemplateDelete' where
         type Rs TemplateDelete' = ()
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TemplateDelete'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TemplateDelete'{..}
           = go _tddTableId _tddTemplateId _tddQuotaUser
               (Just _tddPrettyPrint)
               _tddUserIP
@@ -173,7 +173,5 @@ instance GoogleRequest TemplateDelete' where
               _tddOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TemplateDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TemplateDeleteResource)
+                      rq

@@ -172,8 +172,8 @@ instance GoogleAuth AutoscalersInsert' where
 
 instance GoogleRequest AutoscalersInsert' where
         type Rs AutoscalersInsert' = Operation
-        request = requestWithRoute defReq autoscalerURL
-        requestWithRoute r u AutoscalersInsert'{..}
+        request = requestWith autoscalerRequest
+        requestWith rq AutoscalersInsert'{..}
           = go _aiProject _aiZone _aiQuotaUser
               (Just _aiPrettyPrint)
               _aiUserIP
@@ -183,7 +183,6 @@ instance GoogleRequest AutoscalersInsert' where
               (Just AltJSON)
               _aiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AutoscalersInsertResource)
-                      r
-                      u
+                      rq

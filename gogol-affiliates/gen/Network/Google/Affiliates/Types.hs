@@ -16,7 +16,7 @@
 module Network.Google.Affiliates.Types
     (
     -- * Service URL
-      affiliatesURL
+      affiliatesRequest
 
     -- * Event
     , Event
@@ -344,9 +344,8 @@ import           Network.Google.Affiliates.Types.Product
 import           Network.Google.Affiliates.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1beta1' of the Google Affiliate Network API.
-affiliatesURL :: BaseUrl
-affiliatesURL
-  = BaseUrl Https
-      "https://www.googleapis.com/gan/v1beta1/"
-      443
+-- | Default request referring to version 'v1beta1' of the Google Affiliate Network API.
+affiliatesRequest :: RequestBuilder
+affiliatesRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "gan/v1beta1/"

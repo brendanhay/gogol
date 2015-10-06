@@ -170,8 +170,8 @@ instance GoogleAuth FilesGet' where
 
 instance GoogleRequest FilesGet' where
         type Rs FilesGet' = File
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FilesGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FilesGet'{..}
           = go _fgReportId _fgFileId _fgQuotaUser
               (Just _fgPrettyPrint)
               _fgUserIP
@@ -180,14 +180,13 @@ instance GoogleRequest FilesGet' where
               _fgOAuthToken
               (Just AltJSON)
           where go :<|> _
-                  = clientWithRoute (Proxy :: Proxy FilesGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy FilesGetResource) rq
 
 instance GoogleRequest (MediaDownload FilesGet')
          where
         type Rs (MediaDownload FilesGet') = Body
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u (MediaDownload FilesGet'{..})
+        request = requestWith dFAReportingRequest
+        requestWith rq (MediaDownload FilesGet'{..})
           = go _fgReportId _fgFileId _fgQuotaUser
               (Just _fgPrettyPrint)
               _fgUserIP
@@ -196,5 +195,4 @@ instance GoogleRequest (MediaDownload FilesGet')
               _fgOAuthToken
               (Just AltMedia)
           where _ :<|> go
-                  = clientWithRoute (Proxy :: Proxy FilesGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy FilesGetResource) rq

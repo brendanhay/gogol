@@ -164,8 +164,8 @@ instance GoogleAuth WebResourceInsert' where
 instance GoogleRequest WebResourceInsert' where
         type Rs WebResourceInsert' =
              SiteVerificationWebResourceResource
-        request = requestWithRoute defReq siteVerificationURL
-        requestWithRoute r u WebResourceInsert'{..}
+        request = requestWith siteVerificationRequest
+        requestWith rq WebResourceInsert'{..}
           = go (Just _wriVerificationMethod) _wriQuotaUser
               (Just _wriPrettyPrint)
               _wriUserIP
@@ -175,7 +175,6 @@ instance GoogleRequest WebResourceInsert' where
               (Just AltJSON)
               _wriPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy WebResourceInsertResource)
-                      r
-                      u
+                      rq

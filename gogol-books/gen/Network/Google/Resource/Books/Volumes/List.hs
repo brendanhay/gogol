@@ -282,8 +282,8 @@ instance GoogleAuth VolumesList' where
 
 instance GoogleRequest VolumesList' where
         type Rs VolumesList' = Volumes
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u VolumesList'{..}
+        request = requestWith booksRequest
+        requestWith rq VolumesList'{..}
           = go (Just _vlQ) _vlOrderBy _vlLibraryRestrict
               _vlPartner
               _vlDownload
@@ -303,7 +303,4 @@ instance GoogleRequest VolumesList' where
               _vlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy VolumesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy VolumesListResource) rq

@@ -169,8 +169,8 @@ instance GoogleAuth LinksInsert' where
 
 instance GoogleRequest LinksInsert' where
         type Rs LinksInsert' = Link
-        request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u LinksInsert'{..}
+        request = requestWith affiliatesRequest
+        requestWith rq LinksInsert'{..}
           = go _liRole _liRoleId _liQuotaUser
               (Just _liPrettyPrint)
               _liUserIP
@@ -180,7 +180,4 @@ instance GoogleRequest LinksInsert' where
               (Just AltJSON)
               _liPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy LinksInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy LinksInsertResource) rq

@@ -149,8 +149,8 @@ instance GoogleAuth SettingsGet' where
 
 instance GoogleRequest SettingsGet' where
         type Rs SettingsGet' = Setting
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u SettingsGet'{..}
+        request = requestWith mirrorRequest
+        requestWith rq SettingsGet'{..}
           = go _sgId _sgQuotaUser (Just _sgPrettyPrint)
               _sgUserIP
               _sgFields
@@ -158,7 +158,4 @@ instance GoogleRequest SettingsGet' where
               _sgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SettingsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SettingsGetResource) rq

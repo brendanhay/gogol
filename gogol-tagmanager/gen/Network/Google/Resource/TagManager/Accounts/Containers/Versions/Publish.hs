@@ -197,9 +197,8 @@ instance GoogleRequest
          AccountsContainersVersionsPublish' where
         type Rs AccountsContainersVersionsPublish' =
              PublishContainerVersionResponse
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersVersionsPublish'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersVersionsPublish'{..}
           = go _acvpAccountId _acvpContainerId
               _acvpContainerVersionId
               _acvpFingerprint
@@ -211,8 +210,7 @@ instance GoogleRequest
               _acvpOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersVersionsPublishResource)
-                      r
-                      u
+                      rq

@@ -187,8 +187,8 @@ instance GoogleAuth ActivitiesList' where
 
 instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ActivityFeed
-        request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u ActivitiesList'{..}
+        request = requestWith plusDomainsRequest
+        requestWith rq ActivitiesList'{..}
           = go _aUserId _aCollection _aPageToken
               (Just _aMaxResults)
               _aQuotaUser
@@ -199,7 +199,5 @@ instance GoogleRequest ActivitiesList' where
               _aOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ActivitiesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ActivitiesListResource)
+                      rq

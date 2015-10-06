@@ -171,8 +171,8 @@ instance GoogleAuth ActivitiesInsert' where
 
 instance GoogleRequest ActivitiesInsert' where
         type Rs ActivitiesInsert' = Activity
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ActivitiesInsert'{..}
+        request = requestWith youTubeRequest
+        requestWith rq ActivitiesInsert'{..}
           = go (Just _aiPart) _aiQuotaUser
               (Just _aiPrettyPrint)
               _aiUserIP
@@ -182,7 +182,6 @@ instance GoogleRequest ActivitiesInsert' where
               (Just AltJSON)
               _aiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ActivitiesInsertResource)
-                      r
-                      u
+                      rq

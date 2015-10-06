@@ -22,7 +22,7 @@ module Network.Google.SiteVerification
     -- * API
       SiteVerificationAPI
     , siteVerificationAPI
-    , siteVerificationURL
+    , siteVerificationRequest
 
     -- * Service Methods
 

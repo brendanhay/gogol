@@ -185,8 +185,8 @@ instance GoogleRequest
          ManagementWebPropertyUserLinksInsert' where
         type Rs ManagementWebPropertyUserLinksInsert' =
              EntityUserLink
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
+        request = requestWith analyticsRequest
+        requestWith rq
           ManagementWebPropertyUserLinksInsert'{..}
           = go _mwpuliAccountId _mwpuliWebPropertyId
               _mwpuliQuotaUser
@@ -198,8 +198,7 @@ instance GoogleRequest
               (Just AltJSON)
               _mwpuliPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementWebPropertyUserLinksInsertResource)
-                      r
-                      u
+                      rq

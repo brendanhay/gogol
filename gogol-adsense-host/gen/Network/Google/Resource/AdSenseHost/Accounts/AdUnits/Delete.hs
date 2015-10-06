@@ -180,8 +180,8 @@ instance GoogleAuth AccountsAdUnitsDelete' where
 
 instance GoogleRequest AccountsAdUnitsDelete' where
         type Rs AccountsAdUnitsDelete' = AdUnit
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AccountsAdUnitsDelete'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq AccountsAdUnitsDelete'{..}
           = go _aaudAccountId _aaudAdClientId _aaudAdUnitId
               _aaudQuotaUser
               (Just _aaudPrettyPrint)
@@ -191,7 +191,6 @@ instance GoogleRequest AccountsAdUnitsDelete' where
               _aaudOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsAdUnitsDeleteResource)
-                      r
-                      u
+                      rq

@@ -201,8 +201,8 @@ instance GoogleRequest MachineTypesAggregatedList'
          where
         type Rs MachineTypesAggregatedList' =
              MachineTypeAggregatedList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u MachineTypesAggregatedList'{..}
+        request = requestWith computeRequest
+        requestWith rq MachineTypesAggregatedList'{..}
           = go _mtalProject _mtalFilter _mtalPageToken
               (Just _mtalMaxResults)
               _mtalQuotaUser
@@ -213,7 +213,6 @@ instance GoogleRequest MachineTypesAggregatedList'
               _mtalOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MachineTypesAggregatedListResource)
-                      r
-                      u
+                      rq

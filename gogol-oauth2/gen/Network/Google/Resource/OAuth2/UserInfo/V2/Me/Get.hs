@@ -139,8 +139,8 @@ instance GoogleAuth UserInfoV2MeGet' where
 
 instance GoogleRequest UserInfoV2MeGet' where
         type Rs UserInfoV2MeGet' = UserInfoplus
-        request = requestWithRoute defReq oAuth2URL
-        requestWithRoute r u UserInfoV2MeGet'{..}
+        request = requestWith oAuth2Request
+        requestWith rq UserInfoV2MeGet'{..}
           = go _uivmgQuotaUser (Just _uivmgPrettyPrint)
               _uivmgUserIP
               _uivmgFields
@@ -148,7 +148,6 @@ instance GoogleRequest UserInfoV2MeGet' where
               _uivmgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UserInfoV2MeGetResource)
-                      r
-                      u
+                      rq

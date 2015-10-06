@@ -169,9 +169,8 @@ instance GoogleAuth ProjectsSetUsageExportBucket'
 instance GoogleRequest ProjectsSetUsageExportBucket'
          where
         type Rs ProjectsSetUsageExportBucket' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u
-          ProjectsSetUsageExportBucket'{..}
+        request = requestWith computeRequest
+        requestWith rq ProjectsSetUsageExportBucket'{..}
           = go _psuebProject _psuebQuotaUser
               (Just _psuebPrettyPrint)
               _psuebUserIP
@@ -181,7 +180,6 @@ instance GoogleRequest ProjectsSetUsageExportBucket'
               (Just AltJSON)
               _psuebPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsSetUsageExportBucketResource)
-                      r
-                      u
+                      rq

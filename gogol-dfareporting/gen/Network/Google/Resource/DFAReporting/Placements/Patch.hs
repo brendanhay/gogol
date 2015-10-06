@@ -170,8 +170,8 @@ instance GoogleAuth PlacementsPatch' where
 
 instance GoogleRequest PlacementsPatch' where
         type Rs PlacementsPatch' = Placement
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementsPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PlacementsPatch'{..}
           = go _ppProFileId (Just _ppId) _ppQuotaUser
               (Just _ppPrettyPrint)
               _ppUserIP
@@ -181,7 +181,6 @@ instance GoogleRequest PlacementsPatch' where
               (Just AltJSON)
               _ppPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlacementsPatchResource)
-                      r
-                      u
+                      rq

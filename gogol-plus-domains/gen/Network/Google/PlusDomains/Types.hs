@@ -16,7 +16,7 @@
 module Network.Google.PlusDomains.Types
     (
     -- * Service URL
-      plusDomainsURL
+      plusDomainsRequest
 
     -- * Audience
     , Audience
@@ -530,9 +530,8 @@ import           Network.Google.PlusDomains.Types.Product
 import           Network.Google.PlusDomains.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Google+ Domains API.
-plusDomainsURL :: BaseUrl
-plusDomainsURL
-  = BaseUrl Https
-      "https://www.googleapis.com/plusDomains/v1/"
-      443
+-- | Default request referring to version 'v1' of the Google+ Domains API.
+plusDomainsRequest :: RequestBuilder
+plusDomainsRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "plusDomains/v1/"

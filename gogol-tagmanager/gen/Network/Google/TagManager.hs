@@ -21,7 +21,7 @@ module Network.Google.TagManager
     -- * API
       TagManagerAPI
     , tagManagerAPI
-    , tagManagerURL
+    , tagManagerRequest
 
     -- * Service Methods
 

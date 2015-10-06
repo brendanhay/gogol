@@ -234,8 +234,8 @@ instance GoogleAuth ProjectsLogsDelete' where
 
 instance GoogleRequest ProjectsLogsDelete' where
         type Rs ProjectsLogsDelete' = Empty
-        request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsLogsDelete'{..}
+        request = requestWith loggingRequest
+        requestWith rq ProjectsLogsDelete'{..}
           = go _pldProjectsId _pldLogsId _pldXgafv
               _pldUploadProtocol
               (Just _pldPp)
@@ -250,7 +250,6 @@ instance GoogleRequest ProjectsLogsDelete' where
               _pldOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsLogsDeleteResource)
-                      r
-                      u
+                      rq

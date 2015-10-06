@@ -162,8 +162,8 @@ instance GoogleAuth PretargetingConfigDelete' where
 instance GoogleRequest PretargetingConfigDelete'
          where
         type Rs PretargetingConfigDelete' = ()
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u PretargetingConfigDelete'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq PretargetingConfigDelete'{..}
           = go _pcdAccountId _pcdConfigId _pcdQuotaUser
               (Just _pcdPrettyPrint)
               _pcdUserIP
@@ -172,7 +172,6 @@ instance GoogleRequest PretargetingConfigDelete'
               _pcdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PretargetingConfigDeleteResource)
-                      r
-                      u
+                      rq

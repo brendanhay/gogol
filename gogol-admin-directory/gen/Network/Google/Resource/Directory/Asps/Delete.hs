@@ -159,8 +159,8 @@ instance GoogleAuth AspsDelete' where
 
 instance GoogleRequest AspsDelete' where
         type Rs AspsDelete' = ()
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u AspsDelete'{..}
+        request = requestWith directoryRequest
+        requestWith rq AspsDelete'{..}
           = go _adUserKey _adCodeId _adQuotaUser
               (Just _adPrettyPrint)
               _adUserIP
@@ -169,6 +169,4 @@ instance GoogleRequest AspsDelete' where
               _adOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy AspsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AspsDeleteResource) rq

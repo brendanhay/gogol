@@ -179,8 +179,8 @@ instance GoogleAuth ElectionsVoterInfoQuery' where
 
 instance GoogleRequest ElectionsVoterInfoQuery' where
         type Rs ElectionsVoterInfoQuery' = VoterInfoResponse
-        request = requestWithRoute defReq civicInfoURL
-        requestWithRoute r u ElectionsVoterInfoQuery'{..}
+        request = requestWith civicInfoRequest
+        requestWith rq ElectionsVoterInfoQuery'{..}
           = go (Just _eviqAddress) (Just _eviqElectionId)
               (Just _eviqOfficialOnly)
               _eviqQuotaUser
@@ -191,7 +191,6 @@ instance GoogleRequest ElectionsVoterInfoQuery' where
               _eviqOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ElectionsVoterInfoQueryResource)
-                      r
-                      u
+                      rq

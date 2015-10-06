@@ -21,7 +21,7 @@ module Network.Google.IdentityToolkit
     -- * API
       IdentityToolkitAPI
     , identityToolkitAPI
-    , identityToolkitURL
+    , identityToolkitRequest
 
     -- * Service Methods
 

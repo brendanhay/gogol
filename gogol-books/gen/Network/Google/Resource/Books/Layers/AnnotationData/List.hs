@@ -302,8 +302,8 @@ instance GoogleAuth LayersAnnotationDataList' where
 instance GoogleRequest LayersAnnotationDataList'
          where
         type Rs LayersAnnotationDataList' = Annotationsdata
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u LayersAnnotationDataList'{..}
+        request = requestWith booksRequest
+        requestWith rq LayersAnnotationDataList'{..}
           = go _ladlVolumeId _ladlLayerId
               (Just _ladlContentVersion)
               _ladlW
@@ -324,7 +324,6 @@ instance GoogleRequest LayersAnnotationDataList'
               _ladlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LayersAnnotationDataListResource)
-                      r
-                      u
+                      rq

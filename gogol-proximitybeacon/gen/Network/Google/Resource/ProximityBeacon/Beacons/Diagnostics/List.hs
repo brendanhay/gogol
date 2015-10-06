@@ -261,8 +261,8 @@ instance GoogleAuth BeaconsDiagnosticsList' where
 instance GoogleRequest BeaconsDiagnosticsList' where
         type Rs BeaconsDiagnosticsList' =
              ListDiagnosticsResponse
-        request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconsDiagnosticsList'{..}
+        request = requestWith proximityBeaconRequest
+        requestWith rq BeaconsDiagnosticsList'{..}
           = go _bdlBeaconName _bdlXgafv _bdlUploadProtocol
               (Just _bdlPp)
               _bdlAccessToken
@@ -279,7 +279,6 @@ instance GoogleRequest BeaconsDiagnosticsList' where
               _bdlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BeaconsDiagnosticsListResource)
-                      r
-                      u
+                      rq

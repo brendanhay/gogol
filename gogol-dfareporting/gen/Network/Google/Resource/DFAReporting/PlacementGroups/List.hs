@@ -430,8 +430,8 @@ instance GoogleAuth PlacementGroupsList' where
 instance GoogleRequest PlacementGroupsList' where
         type Rs PlacementGroupsList' =
              PlacementGroupsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementGroupsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PlacementGroupsList'{..}
           = go _pglProFileId
               (_pglPlacementStrategyIds ^. _Default)
               (_pglContentCategoryIds ^. _Default)
@@ -460,7 +460,6 @@ instance GoogleRequest PlacementGroupsList' where
               _pglOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlacementGroupsListResource)
-                      r
-                      u
+                      rq

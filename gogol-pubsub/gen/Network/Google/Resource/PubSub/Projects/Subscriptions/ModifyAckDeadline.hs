@@ -243,8 +243,8 @@ instance GoogleRequest
          ProjectsSubscriptionsModifyAckDeadline' where
         type Rs ProjectsSubscriptionsModifyAckDeadline' =
              Empty
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u
+        request = requestWith pubSubRequest
+        requestWith rq
           ProjectsSubscriptionsModifyAckDeadline'{..}
           = go _psmadSubscription _psmadXgafv
               _psmadUploadProtocol
@@ -261,8 +261,7 @@ instance GoogleRequest
               (Just AltJSON)
               _psmadPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ProjectsSubscriptionsModifyAckDeadlineResource)
-                      r
-                      u
+                      rq

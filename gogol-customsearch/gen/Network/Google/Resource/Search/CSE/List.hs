@@ -556,8 +556,8 @@ instance GoogleAuth CSEList' where
 
 instance GoogleRequest CSEList' where
         type Rs CSEList' = Search
-        request = requestWithRoute defReq customSearchURL
-        requestWithRoute r u CSEList'{..}
+        request = requestWith customSearchRequest
+        requestWith rq CSEList'{..}
           = go (Just _cselQ) _cselImgDominantColor
               _cselSiteSearchFilter
               _cselC2coff
@@ -597,5 +597,4 @@ instance GoogleRequest CSEList' where
               _cselOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy CSEListResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy CSEListResource) rq

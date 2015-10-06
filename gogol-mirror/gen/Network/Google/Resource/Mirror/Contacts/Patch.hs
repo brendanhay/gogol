@@ -157,8 +157,8 @@ instance GoogleAuth ContactsPatch' where
 
 instance GoogleRequest ContactsPatch' where
         type Rs ContactsPatch' = Contact
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u ContactsPatch'{..}
+        request = requestWith mirrorRequest
+        requestWith rq ContactsPatch'{..}
           = go _cpId _cpQuotaUser (Just _cpPrettyPrint)
               _cpUserIP
               _cpFields
@@ -167,7 +167,5 @@ instance GoogleRequest ContactsPatch' where
               (Just AltJSON)
               _cpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ContactsPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ContactsPatchResource)
+                      rq

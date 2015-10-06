@@ -215,8 +215,8 @@ instance GoogleAuth ScheduleUpdate' where
 
 instance GoogleRequest ScheduleUpdate' where
         type Rs ScheduleUpdate' = Schedule
-        request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u ScheduleUpdate'{..}
+        request = requestWith mapsCoordinateRequest
+        requestWith rq ScheduleUpdate'{..}
           = go _suTeamId _suJobId _suAllDay _suStartTime
               _suEndTime
               _suDuration
@@ -229,7 +229,5 @@ instance GoogleRequest ScheduleUpdate' where
               (Just AltJSON)
               _suPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ScheduleUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ScheduleUpdateResource)
+                      rq

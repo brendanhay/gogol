@@ -158,8 +158,8 @@ instance GoogleAuth TaskGet' where
 
 instance GoogleRequest TaskGet' where
         type Rs TaskGet' = Task
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TaskGet'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TaskGet'{..}
           = go _tgTableId _tgTaskId _tgQuotaUser
               (Just _tgPrettyPrint)
               _tgUserIP
@@ -168,5 +168,4 @@ instance GoogleRequest TaskGet' where
               _tgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TaskGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy TaskGetResource) rq

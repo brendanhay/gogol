@@ -163,8 +163,8 @@ instance GoogleAuth ScoresSubmitMultiple' where
 instance GoogleRequest ScoresSubmitMultiple' where
         type Rs ScoresSubmitMultiple' =
              PlayerScoreListResponse
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u ScoresSubmitMultiple'{..}
+        request = requestWith gamesRequest
+        requestWith rq ScoresSubmitMultiple'{..}
           = go _ssmLanguage _ssmQuotaUser
               (Just _ssmPrettyPrint)
               _ssmUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest ScoresSubmitMultiple' where
               (Just AltJSON)
               _ssmPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ScoresSubmitMultipleResource)
-                      r
-                      u
+                      rq

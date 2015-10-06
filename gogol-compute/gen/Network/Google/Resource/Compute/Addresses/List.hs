@@ -205,8 +205,8 @@ instance GoogleAuth AddressesList' where
 
 instance GoogleRequest AddressesList' where
         type Rs AddressesList' = AddressList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u AddressesList'{..}
+        request = requestWith computeRequest
+        requestWith rq AddressesList'{..}
           = go _alProject _alRegion _alFilter _alPageToken
               (Just _alMaxResults)
               _alQuotaUser
@@ -217,7 +217,5 @@ instance GoogleRequest AddressesList' where
               _alOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AddressesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AddressesListResource)
+                      rq

@@ -150,8 +150,8 @@ instance GoogleAuth ClientAccessList' where
 instance GoogleRequest ClientAccessList' where
         type Rs ClientAccessList' =
              ListClientAccessCapabilitiesResponse
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u ClientAccessList'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq ClientAccessList'{..}
           = go _calQuotaUser (Just _calPrettyPrint) _calUserIP
               _calFields
               _calKey
@@ -159,7 +159,6 @@ instance GoogleRequest ClientAccessList' where
               (Just AltJSON)
               _calPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ClientAccessListResource)
-                      r
-                      u
+                      rq

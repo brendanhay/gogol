@@ -16,7 +16,7 @@
 module Network.Google.YouTube.Types
     (
     -- * Service URL
-      youTubeURL
+      youTubeRequest
 
     -- * ContentRatingCceRating
     , ContentRatingCceRating (..)
@@ -1846,9 +1846,8 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types.Product
 import           Network.Google.YouTube.Types.Sum
 
--- | URL referring to version 'v3' of the YouTube Data API.
-youTubeURL :: BaseUrl
-youTubeURL
-  = BaseUrl Https
-      "https://www.googleapis.com/youtube/v3/"
-      443
+-- | Default request referring to version 'v3' of the YouTube Data API.
+youTubeRequest :: RequestBuilder
+youTubeRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "youtube/v3/"

@@ -184,8 +184,8 @@ instance GoogleRequest
          AccountsContainersFoldersEntitiesList' where
         type Rs AccountsContainersFoldersEntitiesList' =
              FolderEntities
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
+        request = requestWith tagManagerRequest
+        requestWith rq
           AccountsContainersFoldersEntitiesList'{..}
           = go _acfelAccountId _acfelContainerId _acfelFolderId
               _acfelQuotaUser
@@ -196,8 +196,7 @@ instance GoogleRequest
               _acfelOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersFoldersEntitiesListResource)
-                      r
-                      u
+                      rq

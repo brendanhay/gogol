@@ -166,9 +166,8 @@ instance GoogleAuth GlobalAccountsOperationsDelete'
 instance GoogleRequest
          GlobalAccountsOperationsDelete' where
         type Rs GlobalAccountsOperationsDelete' = ()
-        request = requestWithRoute defReq userAccountsURL
-        requestWithRoute r u
-          GlobalAccountsOperationsDelete'{..}
+        request = requestWith userAccountsRequest
+        requestWith rq GlobalAccountsOperationsDelete'{..}
           = go _gaodProject _gaodOperation _gaodQuotaUser
               (Just _gaodPrettyPrint)
               _gaodUserIP
@@ -177,8 +176,7 @@ instance GoogleRequest
               _gaodOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy GlobalAccountsOperationsDeleteResource)
-                      r
-                      u
+                      rq

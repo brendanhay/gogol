@@ -146,8 +146,8 @@ instance GoogleAuth GroupsDelete' where
 
 instance GoogleRequest GroupsDelete' where
         type Rs GroupsDelete' = ()
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u GroupsDelete'{..}
+        request = requestWith directoryRequest
+        requestWith rq GroupsDelete'{..}
           = go _gdGroupKey _gdQuotaUser (Just _gdPrettyPrint)
               _gdUserIP
               _gdFields
@@ -155,7 +155,5 @@ instance GoogleRequest GroupsDelete' where
               _gdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy GroupsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy GroupsDeleteResource)
+                      rq

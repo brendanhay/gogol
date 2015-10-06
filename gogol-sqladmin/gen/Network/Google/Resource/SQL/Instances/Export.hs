@@ -175,8 +175,8 @@ instance GoogleAuth InstancesExport' where
 
 instance GoogleRequest InstancesExport' where
         type Rs InstancesExport' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesExport'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq InstancesExport'{..}
           = go _ieProject _ieInstance _ieQuotaUser
               (Just _iePrettyPrint)
               _ieUserIP
@@ -186,7 +186,6 @@ instance GoogleRequest InstancesExport' where
               (Just AltJSON)
               _iePayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesExportResource)
-                      r
-                      u
+                      rq

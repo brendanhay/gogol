@@ -142,15 +142,13 @@ instance GoogleAuth EventsResetAll' where
 
 instance GoogleRequest EventsResetAll' where
         type Rs EventsResetAll' = ()
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u EventsResetAll'{..}
+        request = requestWith gamesManagementRequest
+        requestWith rq EventsResetAll'{..}
           = go _eraQuotaUser (Just _eraPrettyPrint) _eraUserIP
               _eraFields
               _eraKey
               _eraOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EventsResetAllResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EventsResetAllResource)
+                      rq

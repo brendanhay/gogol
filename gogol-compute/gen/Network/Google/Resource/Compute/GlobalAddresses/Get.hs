@@ -162,8 +162,8 @@ instance GoogleAuth GlobalAddressesGet' where
 
 instance GoogleRequest GlobalAddressesGet' where
         type Rs GlobalAddressesGet' = Address
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalAddressesGet'{..}
+        request = requestWith computeRequest
+        requestWith rq GlobalAddressesGet'{..}
           = go _gagProject _gagAddress _gagQuotaUser
               (Just _gagPrettyPrint)
               _gagUserIP
@@ -172,7 +172,6 @@ instance GoogleRequest GlobalAddressesGet' where
               _gagOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GlobalAddressesGetResource)
-                      r
-                      u
+                      rq

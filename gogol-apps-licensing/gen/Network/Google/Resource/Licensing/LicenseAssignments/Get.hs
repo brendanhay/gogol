@@ -174,8 +174,8 @@ instance GoogleAuth LicenseAssignmentsGet' where
 
 instance GoogleRequest LicenseAssignmentsGet' where
         type Rs LicenseAssignmentsGet' = LicenseAssignment
-        request = requestWithRoute defReq appsLicensingURL
-        requestWithRoute r u LicenseAssignmentsGet'{..}
+        request = requestWith appsLicensingRequest
+        requestWith rq LicenseAssignmentsGet'{..}
           = go _lagProductId _lagSKUId _lagUserId _lagQuotaUser
               (Just _lagPrettyPrint)
               _lagUserIP
@@ -184,7 +184,6 @@ instance GoogleRequest LicenseAssignmentsGet' where
               _lagOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LicenseAssignmentsGetResource)
-                      r
-                      u
+                      rq

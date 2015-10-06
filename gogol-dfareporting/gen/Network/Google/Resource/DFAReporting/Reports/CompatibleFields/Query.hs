@@ -174,9 +174,8 @@ instance GoogleRequest ReportsCompatibleFieldsQuery'
          where
         type Rs ReportsCompatibleFieldsQuery' =
              CompatibleFields
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u
-          ReportsCompatibleFieldsQuery'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ReportsCompatibleFieldsQuery'{..}
           = go _rcfqProFileId _rcfqQuotaUser
               (Just _rcfqPrettyPrint)
               _rcfqUserIP
@@ -186,7 +185,6 @@ instance GoogleRequest ReportsCompatibleFieldsQuery'
               (Just AltJSON)
               _rcfqPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReportsCompatibleFieldsQueryResource)
-                      r
-                      u
+                      rq

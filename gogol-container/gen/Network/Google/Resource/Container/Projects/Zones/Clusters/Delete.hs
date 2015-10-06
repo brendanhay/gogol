@@ -183,8 +183,8 @@ instance GoogleAuth ProjectsZonesClustersDelete'
 instance GoogleRequest ProjectsZonesClustersDelete'
          where
         type Rs ProjectsZonesClustersDelete' = Operation
-        request = requestWithRoute defReq containerURL
-        requestWithRoute r u ProjectsZonesClustersDelete'{..}
+        request = requestWith containerRequest
+        requestWith rq ProjectsZonesClustersDelete'{..}
           = go _pzcdProjectId _pzcdZoneId _pzcdClusterId
               _pzcdQuotaUser
               (Just _pzcdPrettyPrint)
@@ -194,7 +194,6 @@ instance GoogleRequest ProjectsZonesClustersDelete'
               _pzcdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsZonesClustersDeleteResource)
-                      r
-                      u
+                      rq

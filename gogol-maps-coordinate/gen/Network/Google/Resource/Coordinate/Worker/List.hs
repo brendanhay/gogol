@@ -147,8 +147,8 @@ instance GoogleAuth WorkerList' where
 
 instance GoogleRequest WorkerList' where
         type Rs WorkerList' = WorkerListResponse
-        request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u WorkerList'{..}
+        request = requestWith mapsCoordinateRequest
+        requestWith rq WorkerList'{..}
           = go _wlTeamId _wlQuotaUser (Just _wlPrettyPrint)
               _wlUserIP
               _wlFields
@@ -156,6 +156,4 @@ instance GoogleRequest WorkerList' where
               _wlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy WorkerListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy WorkerListResource) rq

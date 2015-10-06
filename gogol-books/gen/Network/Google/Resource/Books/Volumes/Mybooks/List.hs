@@ -218,8 +218,8 @@ instance GoogleAuth VolumesMybooksList' where
 
 instance GoogleRequest VolumesMybooksList' where
         type Rs VolumesMybooksList' = Volumes
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u VolumesMybooksList'{..}
+        request = requestWith booksRequest
+        requestWith rq VolumesMybooksList'{..}
           = go (_vmlProcessingState ^. _Default)
               (_vmlAcquireMethod ^. _Default)
               _vmlLocale
@@ -234,7 +234,6 @@ instance GoogleRequest VolumesMybooksList' where
               _vmlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VolumesMybooksListResource)
-                      r
-                      u
+                      rq

@@ -154,9 +154,8 @@ instance GoogleRequest
          RasterCollectionsCancelProcessing' where
         type Rs RasterCollectionsCancelProcessing' =
              ProcessResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u
-          RasterCollectionsCancelProcessing'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq RasterCollectionsCancelProcessing'{..}
           = go _rccpId _rccpQuotaUser (Just _rccpPrettyPrint)
               _rccpUserIP
               _rccpFields
@@ -164,8 +163,7 @@ instance GoogleRequest
               _rccpOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy RasterCollectionsCancelProcessingResource)
-                      r
-                      u
+                      rq

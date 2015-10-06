@@ -239,9 +239,8 @@ instance GoogleAuth
 instance GoogleRequest
          ProjectsSubscriptionsSetIAMPolicy' where
         type Rs ProjectsSubscriptionsSetIAMPolicy' = Policy
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u
-          ProjectsSubscriptionsSetIAMPolicy'{..}
+        request = requestWith pubSubRequest
+        requestWith rq ProjectsSubscriptionsSetIAMPolicy'{..}
           = go _pssipResource _pssipXgafv _pssipUploadProtocol
               (Just _pssipPp)
               _pssipAccessToken
@@ -256,8 +255,7 @@ instance GoogleRequest
               (Just AltJSON)
               _pssipPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ProjectsSubscriptionsSetIAMPolicyResource)
-                      r
-                      u
+                      rq

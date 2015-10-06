@@ -150,8 +150,8 @@ instance GoogleAuth ParentsList' where
 
 instance GoogleRequest ParentsList' where
         type Rs ParentsList' = ParentList
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u ParentsList'{..}
+        request = requestWith driveRequest
+        requestWith rq ParentsList'{..}
           = go _parFileId _parQuotaUser (Just _parPrettyPrint)
               _parUserIP
               _parFields
@@ -159,7 +159,4 @@ instance GoogleRequest ParentsList' where
               _parOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ParentsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ParentsListResource) rq

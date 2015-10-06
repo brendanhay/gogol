@@ -224,8 +224,8 @@ instance GoogleAuth ProjectsTopicsDelete' where
 
 instance GoogleRequest ProjectsTopicsDelete' where
         type Rs ProjectsTopicsDelete' = Empty
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsTopicsDelete'{..}
+        request = requestWith pubSubRequest
+        requestWith rq ProjectsTopicsDelete'{..}
           = go _ptdTopic _ptdXgafv _ptdUploadProtocol
               (Just _ptdPp)
               _ptdAccessToken
@@ -239,7 +239,6 @@ instance GoogleRequest ProjectsTopicsDelete' where
               _ptdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsTopicsDeleteResource)
-                      r
-                      u
+                      rq

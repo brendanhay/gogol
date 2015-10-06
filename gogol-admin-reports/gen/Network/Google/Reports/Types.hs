@@ -16,7 +16,7 @@
 module Network.Google.Reports.Types
     (
     -- * Service URL
-      reportsURL
+      reportsRequest
 
     -- * UsageReportParametersItem
     , UsageReportParametersItem
@@ -146,9 +146,8 @@ import           Network.Google.Prelude
 import           Network.Google.Reports.Types.Product
 import           Network.Google.Reports.Types.Sum
 
--- | URL referring to version 'reports_v1' of the Admin Reports API.
-reportsURL :: BaseUrl
-reportsURL
-  = BaseUrl Https
-      "https://www.googleapis.com/admin/reports/v1/"
-      443
+-- | Default request referring to version 'reports_v1' of the Admin Reports API.
+reportsRequest :: RequestBuilder
+reportsRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "admin/reports/v1/"

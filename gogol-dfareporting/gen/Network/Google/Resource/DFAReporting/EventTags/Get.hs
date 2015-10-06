@@ -161,8 +161,8 @@ instance GoogleAuth EventTagsGet' where
 
 instance GoogleRequest EventTagsGet' where
         type Rs EventTagsGet' = EventTag
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u EventTagsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq EventTagsGet'{..}
           = go _etgProFileId _etgId _etgQuotaUser
               (Just _etgPrettyPrint)
               _etgUserIP
@@ -171,7 +171,5 @@ instance GoogleRequest EventTagsGet' where
               _etgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EventTagsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EventTagsGetResource)
+                      rq

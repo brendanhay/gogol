@@ -180,10 +180,8 @@ instance GoogleRequest AchievementConfigurationsList'
          where
         type Rs AchievementConfigurationsList' =
              AchievementConfigurationListResponse
-        request
-          = requestWithRoute defReq gamesConfigurationURL
-        requestWithRoute r u
-          AchievementConfigurationsList'{..}
+        request = requestWith gamesConfigurationRequest
+        requestWith rq AchievementConfigurationsList'{..}
           = go _aclApplicationId _aclPageToken _aclMaxResults
               _aclQuotaUser
               (Just _aclPrettyPrint)
@@ -193,8 +191,7 @@ instance GoogleRequest AchievementConfigurationsList'
               _aclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AchievementConfigurationsListResource)
-                      r
-                      u
+                      rq

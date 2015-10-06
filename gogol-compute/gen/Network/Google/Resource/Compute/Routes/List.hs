@@ -193,8 +193,8 @@ instance GoogleAuth RoutesList' where
 
 instance GoogleRequest RoutesList' where
         type Rs RoutesList' = RouteList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u RoutesList'{..}
+        request = requestWith computeRequest
+        requestWith rq RoutesList'{..}
           = go _rlProject _rlFilter _rlPageToken
               (Just _rlMaxResults)
               _rlQuotaUser
@@ -205,6 +205,4 @@ instance GoogleRequest RoutesList' where
               _rlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy RoutesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RoutesListResource) rq

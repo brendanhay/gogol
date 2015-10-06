@@ -147,8 +147,8 @@ instance GoogleAuth TripsSearch' where
 
 instance GoogleRequest TripsSearch' where
         type Rs TripsSearch' = TripsSearchResponse
-        request = requestWithRoute defReq qPXExpressURL
-        requestWithRoute r u TripsSearch'{..}
+        request = requestWith qPXExpressRequest
+        requestWith rq TripsSearch'{..}
           = go _tsQuotaUser (Just _tsPrettyPrint) _tsUserIP
               _tsFields
               _tsKey
@@ -156,7 +156,4 @@ instance GoogleRequest TripsSearch' where
               (Just AltJSON)
               _tsPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TripsSearchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TripsSearchResource) rq

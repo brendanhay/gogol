@@ -211,8 +211,8 @@ instance GoogleAuth RegionOperationsList' where
 
 instance GoogleRequest RegionOperationsList' where
         type Rs RegionOperationsList' = OperationList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u RegionOperationsList'{..}
+        request = requestWith computeRequest
+        requestWith rq RegionOperationsList'{..}
           = go _rolProject _rolRegion _rolFilter _rolPageToken
               (Just _rolMaxResults)
               _rolQuotaUser
@@ -223,7 +223,6 @@ instance GoogleRequest RegionOperationsList' where
               _rolOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RegionOperationsListResource)
-                      r
-                      u
+                      rq

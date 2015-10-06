@@ -201,8 +201,8 @@ instance GoogleRequest AutoscalersAggregatedList'
          where
         type Rs AutoscalersAggregatedList' =
              AutoscalerAggregatedList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u AutoscalersAggregatedList'{..}
+        request = requestWith computeRequest
+        requestWith rq AutoscalersAggregatedList'{..}
           = go _aalaProject _aalaFilter _aalaPageToken
               (Just _aalaMaxResults)
               _aalaQuotaUser
@@ -213,7 +213,6 @@ instance GoogleRequest AutoscalersAggregatedList'
               _aalaOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AutoscalersAggregatedListResource)
-                      r
-                      u
+                      rq

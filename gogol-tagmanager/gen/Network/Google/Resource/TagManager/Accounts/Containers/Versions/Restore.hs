@@ -190,9 +190,8 @@ instance GoogleRequest
          AccountsContainersVersionsRestore' where
         type Rs AccountsContainersVersionsRestore' =
              ContainerVersion
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersVersionsRestore'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersVersionsRestore'{..}
           = go _acvrAccountId _acvrContainerId
               _acvrContainerVersionId
               _acvrQuotaUser
@@ -203,8 +202,7 @@ instance GoogleRequest
               _acvrOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersVersionsRestoreResource)
-                      r
-                      u
+                      rq

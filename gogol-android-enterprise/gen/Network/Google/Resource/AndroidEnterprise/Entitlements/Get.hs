@@ -172,9 +172,8 @@ instance GoogleAuth EntitlementsGet' where
 
 instance GoogleRequest EntitlementsGet' where
         type Rs EntitlementsGet' = Entitlement
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u EntitlementsGet'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq EntitlementsGet'{..}
           = go _eEnterpriseId _eUserId _eEntitlementId
               _eQuotaUser
               (Just _ePrettyPrint)
@@ -184,7 +183,6 @@ instance GoogleRequest EntitlementsGet' where
               _eOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EntitlementsGetResource)
-                      r
-                      u
+                      rq

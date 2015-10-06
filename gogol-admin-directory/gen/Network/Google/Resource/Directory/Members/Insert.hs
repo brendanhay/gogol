@@ -159,8 +159,8 @@ instance GoogleAuth MembersInsert' where
 
 instance GoogleRequest MembersInsert' where
         type Rs MembersInsert' = Member
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u MembersInsert'{..}
+        request = requestWith directoryRequest
+        requestWith rq MembersInsert'{..}
           = go _miGroupKey _miQuotaUser (Just _miPrettyPrint)
               _miUserIP
               _miFields
@@ -169,7 +169,5 @@ instance GoogleRequest MembersInsert' where
               (Just AltJSON)
               _miPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy MembersInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy MembersInsertResource)
+                      rq

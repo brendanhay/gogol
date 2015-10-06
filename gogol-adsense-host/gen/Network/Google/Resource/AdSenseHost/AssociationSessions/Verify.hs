@@ -154,8 +154,8 @@ instance GoogleRequest AssociationSessionsVerify'
          where
         type Rs AssociationSessionsVerify' =
              AssociationSession
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AssociationSessionsVerify'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq AssociationSessionsVerify'{..}
           = go (Just _asvToken) _asvQuotaUser
               (Just _asvPrettyPrint)
               _asvUserIP
@@ -164,7 +164,6 @@ instance GoogleRequest AssociationSessionsVerify'
               _asvOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AssociationSessionsVerifyResource)
-                      r
-                      u
+                      rq

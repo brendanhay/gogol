@@ -204,8 +204,8 @@ instance GoogleAuth InstancesDeleteAccessConfig'
 instance GoogleRequest InstancesDeleteAccessConfig'
          where
         type Rs InstancesDeleteAccessConfig' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesDeleteAccessConfig'{..}
+        request = requestWith computeRequest
+        requestWith rq InstancesDeleteAccessConfig'{..}
           = go _idacProject _idacZone _idacInstance
               (Just _idacAccessConfig)
               (Just _idacNetworkInterface)
@@ -217,7 +217,6 @@ instance GoogleRequest InstancesDeleteAccessConfig'
               _idacOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesDeleteAccessConfigResource)
-                      r
-                      u
+                      rq

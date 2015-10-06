@@ -184,8 +184,8 @@ instance GoogleAuth TablesFeaturesGet' where
 
 instance GoogleRequest TablesFeaturesGet' where
         type Rs TablesFeaturesGet' = Feature
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u TablesFeaturesGet'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesFeaturesGet'{..}
           = go _tfgTableId _tfgId _tfgVersion _tfgSelect
               _tfgQuotaUser
               (Just _tfgPrettyPrint)
@@ -195,7 +195,6 @@ instance GoogleRequest TablesFeaturesGet' where
               _tfgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TablesFeaturesGetResource)
-                      r
-                      u
+                      rq

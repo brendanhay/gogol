@@ -178,8 +178,8 @@ instance GoogleAuth AccountsAdUnitsUpdate' where
 
 instance GoogleRequest AccountsAdUnitsUpdate' where
         type Rs AccountsAdUnitsUpdate' = AdUnit
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AccountsAdUnitsUpdate'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq AccountsAdUnitsUpdate'{..}
           = go _aauuAccountId _aauuAdClientId _aauuQuotaUser
               (Just _aauuPrettyPrint)
               _aauuUserIP
@@ -189,7 +189,6 @@ instance GoogleRequest AccountsAdUnitsUpdate' where
               (Just AltJSON)
               _aauuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsAdUnitsUpdateResource)
-                      r
-                      u
+                      rq

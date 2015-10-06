@@ -167,8 +167,8 @@ instance GoogleAuth GroupsInsert' where
 
 instance GoogleRequest GroupsInsert' where
         type Rs GroupsInsert' = Group
-        request = requestWithRoute defReq youTubeAnalyticsURL
-        requestWithRoute r u GroupsInsert'{..}
+        request = requestWith youTubeAnalyticsRequest
+        requestWith rq GroupsInsert'{..}
           = go _giOnBehalfOfContentOwner _giQuotaUser
               (Just _giPrettyPrint)
               _giUserIP
@@ -178,7 +178,5 @@ instance GoogleRequest GroupsInsert' where
               (Just AltJSON)
               _giPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy GroupsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy GroupsInsertResource)
+                      rq

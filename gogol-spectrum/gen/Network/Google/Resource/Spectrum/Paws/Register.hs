@@ -149,8 +149,8 @@ instance GoogleAuth PawsRegister' where
 
 instance GoogleRequest PawsRegister' where
         type Rs PawsRegister' = PawsRegisterResponse
-        request = requestWithRoute defReq spectrumURL
-        requestWithRoute r u PawsRegister'{..}
+        request = requestWith spectrumRequest
+        requestWith rq PawsRegister'{..}
           = go _prQuotaUser (Just _prPrettyPrint) _prUserIP
               _prFields
               _prKey
@@ -158,7 +158,5 @@ instance GoogleRequest PawsRegister' where
               (Just AltJSON)
               _prPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PawsRegisterResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PawsRegisterResource)
+                      rq

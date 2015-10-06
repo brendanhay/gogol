@@ -325,9 +325,8 @@ instance GoogleAuth AccountsAvailsList' where
 
 instance GoogleRequest AccountsAvailsList' where
         type Rs AccountsAvailsList' = ListAvailsResponse
-        request
-          = requestWithRoute defReq playMoviesPartnerURL
-        requestWithRoute r u AccountsAvailsList'{..}
+        request = requestWith playMoviesPartnerRequest
+        requestWith rq AccountsAvailsList'{..}
           = go _aalAccountId _aalAltId
               (_aalPphNames ^. _Default)
               _aalXgafv
@@ -350,7 +349,6 @@ instance GoogleRequest AccountsAvailsList' where
               _aalOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsAvailsListResource)
-                      r
-                      u
+                      rq

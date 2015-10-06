@@ -165,8 +165,8 @@ instance GoogleRequest FloodlightActivitiesInsert'
          where
         type Rs FloodlightActivitiesInsert' =
              FloodlightActivity
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FloodlightActivitiesInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FloodlightActivitiesInsert'{..}
           = go _faiProFileId _faiQuotaUser
               (Just _faiPrettyPrint)
               _faiUserIP
@@ -176,7 +176,6 @@ instance GoogleRequest FloodlightActivitiesInsert'
               (Just AltJSON)
               _faiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy FloodlightActivitiesInsertResource)
-                      r
-                      u
+                      rq

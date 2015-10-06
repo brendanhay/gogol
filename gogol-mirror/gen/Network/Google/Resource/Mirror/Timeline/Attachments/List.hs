@@ -152,8 +152,8 @@ instance GoogleAuth TimelineAttachmentsList' where
 instance GoogleRequest TimelineAttachmentsList' where
         type Rs TimelineAttachmentsList' =
              AttachmentsListResponse
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineAttachmentsList'{..}
+        request = requestWith mirrorRequest
+        requestWith rq TimelineAttachmentsList'{..}
           = go _talItemId _talQuotaUser (Just _talPrettyPrint)
               _talUserIP
               _talFields
@@ -161,7 +161,6 @@ instance GoogleRequest TimelineAttachmentsList' where
               _talOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TimelineAttachmentsListResource)
-                      r
-                      u
+                      rq

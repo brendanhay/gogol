@@ -146,8 +146,8 @@ instance GoogleAuth CalendarsInsert' where
 
 instance GoogleRequest CalendarsInsert' where
         type Rs CalendarsInsert' = Calendar
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarsInsert'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq CalendarsInsert'{..}
           = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
               _ciFields
               _ciKey
@@ -155,7 +155,6 @@ instance GoogleRequest CalendarsInsert' where
               (Just AltJSON)
               _ciPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CalendarsInsertResource)
-                      r
-                      u
+                      rq

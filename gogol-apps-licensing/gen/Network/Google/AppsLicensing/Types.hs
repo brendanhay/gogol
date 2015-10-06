@@ -16,7 +16,7 @@
 module Network.Google.AppsLicensing.Types
     (
     -- * Service URL
-      appsLicensingURL
+      appsLicensingRequest
 
     -- * LicenseAssignmentInsert
     , LicenseAssignmentInsert
@@ -46,9 +46,8 @@ import           Network.Google.AppsLicensing.Types.Product
 import           Network.Google.AppsLicensing.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Enterprise License Manager API.
-appsLicensingURL :: BaseUrl
-appsLicensingURL
-  = BaseUrl Https
-      "https://www.googleapis.com/apps/licensing/v1/product/"
-      443
+-- | Default request referring to version 'v1' of the Enterprise License Manager API.
+appsLicensingRequest :: RequestBuilder
+appsLicensingRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "apps/licensing/v1/product/"

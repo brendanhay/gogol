@@ -263,8 +263,8 @@ instance GoogleRequest ProjectsLogsEntriesWrite'
          where
         type Rs ProjectsLogsEntriesWrite' =
              WriteLogEntriesResponse
-        request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsLogsEntriesWrite'{..}
+        request = requestWith loggingRequest
+        requestWith rq ProjectsLogsEntriesWrite'{..}
           = go _plewProjectsId _plewLogsId _plewXgafv
               _plewUploadProtocol
               (Just _plewPp)
@@ -280,7 +280,6 @@ instance GoogleRequest ProjectsLogsEntriesWrite'
               (Just AltJSON)
               _plewPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsLogsEntriesWriteResource)
-                      r
-                      u
+                      rq

@@ -178,8 +178,8 @@ instance GoogleAuth PurchasesProductsGet' where
 
 instance GoogleRequest PurchasesProductsGet' where
         type Rs PurchasesProductsGet' = ProductPurchase
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u PurchasesProductsGet'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq PurchasesProductsGet'{..}
           = go _ppgPackageName _ppgProductId _ppgToken
               _ppgQuotaUser
               (Just _ppgPrettyPrint)
@@ -189,7 +189,6 @@ instance GoogleRequest PurchasesProductsGet' where
               _ppgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PurchasesProductsGetResource)
-                      r
-                      u
+                      rq

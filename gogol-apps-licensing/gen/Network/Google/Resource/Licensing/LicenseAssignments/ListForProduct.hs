@@ -195,9 +195,8 @@ instance GoogleRequest
          LicenseAssignmentsListForProduct' where
         type Rs LicenseAssignmentsListForProduct' =
              LicenseAssignmentList
-        request = requestWithRoute defReq appsLicensingURL
-        requestWithRoute r u
-          LicenseAssignmentsListForProduct'{..}
+        request = requestWith appsLicensingRequest
+        requestWith rq LicenseAssignmentsListForProduct'{..}
           = go _lalfpProductId (Just _lalfpCustomerId)
               (Just _lalfpPageToken)
               (Just _lalfpMaxResults)
@@ -209,8 +208,7 @@ instance GoogleRequest
               _lalfpOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy LicenseAssignmentsListForProductResource)
-                      r
-                      u
+                      rq

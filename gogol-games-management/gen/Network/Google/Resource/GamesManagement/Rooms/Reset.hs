@@ -139,14 +139,12 @@ instance GoogleAuth RoomsReset' where
 
 instance GoogleRequest RoomsReset' where
         type Rs RoomsReset' = ()
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u RoomsReset'{..}
+        request = requestWith gamesManagementRequest
+        requestWith rq RoomsReset'{..}
           = go _rrQuotaUser (Just _rrPrettyPrint) _rrUserIP
               _rrFields
               _rrKey
               _rrOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy RoomsResetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RoomsResetResource) rq

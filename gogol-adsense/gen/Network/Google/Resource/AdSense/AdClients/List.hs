@@ -163,8 +163,8 @@ instance GoogleAuth AdClientsList' where
 
 instance GoogleRequest AdClientsList' where
         type Rs AdClientsList' = AdClients
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AdClientsList'{..}
+        request = requestWith adSenseRequest
+        requestWith rq AdClientsList'{..}
           = go _aclPageToken _aclMaxResults _aclQuotaUser
               (Just _aclPrettyPrint)
               _aclUserIP
@@ -173,7 +173,5 @@ instance GoogleRequest AdClientsList' where
               _aclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AdClientsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AdClientsListResource)
+                      rq

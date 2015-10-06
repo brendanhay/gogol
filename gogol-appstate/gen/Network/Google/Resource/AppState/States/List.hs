@@ -146,8 +146,8 @@ instance GoogleAuth StatesList' where
 
 instance GoogleRequest StatesList' where
         type Rs StatesList' = ListResponse
-        request = requestWithRoute defReq appStateURL
-        requestWithRoute r u StatesList'{..}
+        request = requestWith appStateRequest
+        requestWith rq StatesList'{..}
           = go (Just _slIncludeData) _slQuotaUser
               (Just _slPrettyPrint)
               _slUserIP
@@ -156,6 +156,4 @@ instance GoogleRequest StatesList' where
               _slOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy StatesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy StatesListResource) rq

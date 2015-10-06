@@ -204,8 +204,8 @@ instance GoogleAuth PromoOfferGet' where
 
 instance GoogleRequest PromoOfferGet' where
         type Rs PromoOfferGet' = Offers
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u PromoOfferGet'{..}
+        request = requestWith booksRequest
+        requestWith rq PromoOfferGet'{..}
           = go _pogManufacturer _pogSerial _pogDevice _pogModel
               _pogProduct
               _pogAndroidId
@@ -217,7 +217,5 @@ instance GoogleRequest PromoOfferGet' where
               _pogOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PromoOfferGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PromoOfferGetResource)
+                      rq

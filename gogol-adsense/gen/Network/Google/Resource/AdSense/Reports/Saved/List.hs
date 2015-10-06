@@ -164,8 +164,8 @@ instance GoogleAuth ReportsSavedList' where
 
 instance GoogleRequest ReportsSavedList' where
         type Rs ReportsSavedList' = SavedReports
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u ReportsSavedList'{..}
+        request = requestWith adSenseRequest
+        requestWith rq ReportsSavedList'{..}
           = go _rslPageToken _rslMaxResults _rslQuotaUser
               (Just _rslPrettyPrint)
               _rslUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest ReportsSavedList' where
               _rslOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReportsSavedListResource)
-                      r
-                      u
+                      rq

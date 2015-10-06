@@ -168,8 +168,8 @@ instance GoogleAuth ReadsSearch' where
 
 instance GoogleRequest ReadsSearch' where
         type Rs ReadsSearch' = SearchReadsResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReadsSearch'{..}
+        request = requestWith genomicsRequest
+        requestWith rq ReadsSearch'{..}
           = go _rsQuotaUser (Just _rsPrettyPrint) _rsUserIP
               _rsFields
               _rsKey
@@ -177,7 +177,4 @@ instance GoogleRequest ReadsSearch' where
               (Just AltJSON)
               _rsPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ReadsSearchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ReadsSearchResource) rq

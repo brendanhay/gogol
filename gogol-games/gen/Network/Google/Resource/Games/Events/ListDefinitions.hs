@@ -175,8 +175,8 @@ instance GoogleAuth EventsListDefinitions' where
 instance GoogleRequest EventsListDefinitions' where
         type Rs EventsListDefinitions' =
              EventDefinitionListResponse
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u EventsListDefinitions'{..}
+        request = requestWith gamesRequest
+        requestWith rq EventsListDefinitions'{..}
           = go _eldLanguage _eldPageToken _eldMaxResults
               _eldQuotaUser
               (Just _eldPrettyPrint)
@@ -186,7 +186,6 @@ instance GoogleRequest EventsListDefinitions' where
               _eldOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EventsListDefinitionsResource)
-                      r
-                      u
+                      rq

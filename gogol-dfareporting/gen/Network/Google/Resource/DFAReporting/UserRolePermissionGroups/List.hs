@@ -156,9 +156,8 @@ instance GoogleRequest UserRolePermissionGroupsList'
          where
         type Rs UserRolePermissionGroupsList' =
              UserRolePermissionGroupsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u
-          UserRolePermissionGroupsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq UserRolePermissionGroupsList'{..}
           = go _urpglProFileId _urpglQuotaUser
               (Just _urpglPrettyPrint)
               _urpglUserIP
@@ -167,7 +166,6 @@ instance GoogleRequest UserRolePermissionGroupsList'
               _urpglOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UserRolePermissionGroupsListResource)
-                      r
-                      u
+                      rq

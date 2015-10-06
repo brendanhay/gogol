@@ -174,8 +174,8 @@ instance GoogleAuth LicenseAssignmentsDelete' where
 instance GoogleRequest LicenseAssignmentsDelete'
          where
         type Rs LicenseAssignmentsDelete' = ()
-        request = requestWithRoute defReq appsLicensingURL
-        requestWithRoute r u LicenseAssignmentsDelete'{..}
+        request = requestWith appsLicensingRequest
+        requestWith rq LicenseAssignmentsDelete'{..}
           = go _ladProductId _ladSKUId _ladUserId _ladQuotaUser
               (Just _ladPrettyPrint)
               _ladUserIP
@@ -184,7 +184,6 @@ instance GoogleRequest LicenseAssignmentsDelete'
               _ladOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LicenseAssignmentsDeleteResource)
-                      r
-                      u
+                      rq

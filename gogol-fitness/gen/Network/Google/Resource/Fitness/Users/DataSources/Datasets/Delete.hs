@@ -219,9 +219,8 @@ instance GoogleAuth UsersDataSourcesDatasetsDelete'
 instance GoogleRequest
          UsersDataSourcesDatasetsDelete' where
         type Rs UsersDataSourcesDatasetsDelete' = ()
-        request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u
-          UsersDataSourcesDatasetsDelete'{..}
+        request = requestWith fitnessRequest
+        requestWith rq UsersDataSourcesDatasetsDelete'{..}
           = go _udsddUserId _udsddDataSourceId _udsddDatasetId
               _udsddModifiedTimeMillis
               _udsddCurrentTimeMillis
@@ -233,8 +232,7 @@ instance GoogleRequest
               _udsddOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy UsersDataSourcesDatasetsDeleteResource)
-                      r
-                      u
+                      rq

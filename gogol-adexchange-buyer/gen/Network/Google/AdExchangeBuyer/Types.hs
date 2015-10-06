@@ -16,7 +16,7 @@
 module Network.Google.AdExchangeBuyer.Types
     (
     -- * Service URL
-      adExchangeBuyerURL
+      adExchangeBuyerRequest
 
     -- * BrandDTO
     , BrandDTO
@@ -852,9 +852,8 @@ import           Network.Google.AdExchangeBuyer.Types.Product
 import           Network.Google.AdExchangeBuyer.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1.4' of the Ad Exchange Buyer API.
-adExchangeBuyerURL :: BaseUrl
-adExchangeBuyerURL
-  = BaseUrl Https
-      "https://www.googleapis.com/adexchangebuyer/v1.4/"
-      443
+-- | Default request referring to version 'v1.4' of the Ad Exchange Buyer API.
+adExchangeBuyerRequest :: RequestBuilder
+adExchangeBuyerRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "adexchangebuyer/v1.4/"

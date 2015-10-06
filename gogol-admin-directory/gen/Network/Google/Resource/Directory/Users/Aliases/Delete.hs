@@ -161,8 +161,8 @@ instance GoogleAuth UsersAliasesDelete' where
 
 instance GoogleRequest UsersAliasesDelete' where
         type Rs UsersAliasesDelete' = ()
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u UsersAliasesDelete'{..}
+        request = requestWith directoryRequest
+        requestWith rq UsersAliasesDelete'{..}
           = go _uadUserKey _uadAlias _uadQuotaUser
               (Just _uadPrettyPrint)
               _uadUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest UsersAliasesDelete' where
               _uadOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersAliasesDeleteResource)
-                      r
-                      u
+                      rq

@@ -251,8 +251,8 @@ instance GoogleAuth UserRolesList' where
 
 instance GoogleRequest UserRolesList' where
         type Rs UserRolesList' = UserRolesListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserRolesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq UserRolesList'{..}
           = go _urlProFileId _urlSearchString
               (_urlIds ^. _Default)
               _urlSortOrder
@@ -269,7 +269,5 @@ instance GoogleRequest UserRolesList' where
               _urlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy UserRolesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UserRolesListResource)
+                      rq

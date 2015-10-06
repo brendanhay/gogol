@@ -180,8 +180,8 @@ instance GoogleAuth ApplicationsListHidden' where
 
 instance GoogleRequest ApplicationsListHidden' where
         type Rs ApplicationsListHidden' = HiddenPlayerList
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u ApplicationsListHidden'{..}
+        request = requestWith gamesManagementRequest
+        requestWith rq ApplicationsListHidden'{..}
           = go _alhApplicationId _alhPageToken _alhMaxResults
               _alhQuotaUser
               (Just _alhPrettyPrint)
@@ -191,7 +191,6 @@ instance GoogleRequest ApplicationsListHidden' where
               _alhOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ApplicationsListHiddenResource)
-                      r
-                      u
+                      rq

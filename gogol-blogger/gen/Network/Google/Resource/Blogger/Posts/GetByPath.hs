@@ -186,8 +186,8 @@ instance GoogleAuth PostsGetByPath' where
 
 instance GoogleRequest PostsGetByPath' where
         type Rs PostsGetByPath' = Post'
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostsGetByPath'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PostsGetByPath'{..}
           = go _pgbpBlogId (Just _pgbpPath) _pgbpMaxComments
               _pgbpView
               _pgbpQuotaUser
@@ -198,7 +198,5 @@ instance GoogleRequest PostsGetByPath' where
               _pgbpOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PostsGetByPathResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PostsGetByPathResource)
+                      rq

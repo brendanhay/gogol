@@ -163,8 +163,8 @@ instance GoogleAuth EditsDelete' where
 
 instance GoogleRequest EditsDelete' where
         type Rs EditsDelete' = ()
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsDelete'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsDelete'{..}
           = go _edPackageName _edEditId _edQuotaUser
               (Just _edPrettyPrint)
               _edUserIP
@@ -173,7 +173,4 @@ instance GoogleRequest EditsDelete' where
               _edOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EditsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EditsDeleteResource) rq

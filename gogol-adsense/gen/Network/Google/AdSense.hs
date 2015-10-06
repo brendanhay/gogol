@@ -22,7 +22,7 @@ module Network.Google.AdSense
     -- * API
       AdSenseAPI
     , adSenseAPI
-    , adSenseURL
+    , adSenseRequest
 
     -- * Service Methods
 

@@ -22,7 +22,7 @@ module Network.Google.PageSpeed
     -- * API
       PageSpeedAPI
     , pageSpeedAPI
-    , pageSpeedURL
+    , pageSpeedRequest
 
     -- * Service Methods
 

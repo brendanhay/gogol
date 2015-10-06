@@ -156,8 +156,8 @@ instance GoogleAuth QuestsResetForAllPlayers' where
 instance GoogleRequest QuestsResetForAllPlayers'
          where
         type Rs QuestsResetForAllPlayers' = ()
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u QuestsResetForAllPlayers'{..}
+        request = requestWith gamesManagementRequest
+        requestWith rq QuestsResetForAllPlayers'{..}
           = go _qrfapQuestId _qrfapQuotaUser
               (Just _qrfapPrettyPrint)
               _qrfapUserIP
@@ -166,7 +166,6 @@ instance GoogleRequest QuestsResetForAllPlayers'
               _qrfapOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy QuestsResetForAllPlayersResource)
-                      r
-                      u
+                      rq

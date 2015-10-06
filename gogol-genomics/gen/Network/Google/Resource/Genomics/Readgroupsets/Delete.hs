@@ -148,8 +148,8 @@ instance GoogleAuth ReadgroupsetsDelete' where
 
 instance GoogleRequest ReadgroupsetsDelete' where
         type Rs ReadgroupsetsDelete' = ()
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReadgroupsetsDelete'{..}
+        request = requestWith genomicsRequest
+        requestWith rq ReadgroupsetsDelete'{..}
           = go _rdReadGroupSetId _rdQuotaUser
               (Just _rdPrettyPrint)
               _rdUserIP
@@ -158,7 +158,6 @@ instance GoogleRequest ReadgroupsetsDelete' where
               _rdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReadgroupsetsDeleteResource)
-                      r
-                      u
+                      rq

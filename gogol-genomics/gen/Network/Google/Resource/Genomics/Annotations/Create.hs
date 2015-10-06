@@ -148,8 +148,8 @@ instance GoogleAuth AnnotationsCreate' where
 
 instance GoogleRequest AnnotationsCreate' where
         type Rs AnnotationsCreate' = Annotation
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u AnnotationsCreate'{..}
+        request = requestWith genomicsRequest
+        requestWith rq AnnotationsCreate'{..}
           = go _acQuotaUser (Just _acPrettyPrint) _acUserIP
               _acFields
               _acKey
@@ -157,7 +157,6 @@ instance GoogleRequest AnnotationsCreate' where
               (Just AltJSON)
               _acPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AnnotationsCreateResource)
-                      r
-                      u
+                      rq

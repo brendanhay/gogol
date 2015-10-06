@@ -22,7 +22,7 @@ module Network.Google.Debugger
     -- * API
       DebuggerAPI
     , debuggerAPI
-    , debuggerURL
+    , debuggerRequest
 
     -- * Service Methods
 

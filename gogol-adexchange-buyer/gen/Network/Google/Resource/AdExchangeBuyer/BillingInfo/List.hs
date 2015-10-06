@@ -140,15 +140,14 @@ instance GoogleAuth BillingInfoList' where
 
 instance GoogleRequest BillingInfoList' where
         type Rs BillingInfoList' = BillingInfoList
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u BillingInfoList'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq BillingInfoList'{..}
           = go _bilQuotaUser (Just _bilPrettyPrint) _bilUserIP
               _bilFields
               _bilKey
               _bilOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BillingInfoListResource)
-                      r
-                      u
+                      rq

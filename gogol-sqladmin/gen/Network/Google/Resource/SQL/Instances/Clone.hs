@@ -174,8 +174,8 @@ instance GoogleAuth InstancesClone' where
 
 instance GoogleRequest InstancesClone' where
         type Rs InstancesClone' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesClone'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq InstancesClone'{..}
           = go _icProject _icInstance _icQuotaUser
               (Just _icPrettyPrint)
               _icUserIP
@@ -185,7 +185,5 @@ instance GoogleRequest InstancesClone' where
               (Just AltJSON)
               _icPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy InstancesCloneResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy InstancesCloneResource)
+                      rq

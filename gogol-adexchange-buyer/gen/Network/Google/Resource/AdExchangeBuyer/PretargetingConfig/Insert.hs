@@ -164,8 +164,8 @@ instance GoogleRequest PretargetingConfigInsert'
          where
         type Rs PretargetingConfigInsert' =
              PretargetingConfig
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u PretargetingConfigInsert'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq PretargetingConfigInsert'{..}
           = go _pciAccountId _pciQuotaUser
               (Just _pciPrettyPrint)
               _pciUserIP
@@ -175,7 +175,6 @@ instance GoogleRequest PretargetingConfigInsert'
               (Just AltJSON)
               _pciPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PretargetingConfigInsertResource)
-                      r
-                      u
+                      rq

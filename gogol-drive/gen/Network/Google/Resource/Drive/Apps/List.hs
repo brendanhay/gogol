@@ -178,8 +178,8 @@ instance GoogleAuth AppsList' where
 
 instance GoogleRequest AppsList' where
         type Rs AppsList' = AppList
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u AppsList'{..}
+        request = requestWith driveRequest
+        requestWith rq AppsList'{..}
           = go _alLanguageCode (Just _alAppFilterExtensions)
               (Just _alAppFilterMimeTypes)
               _alQuotaUser
@@ -190,5 +190,4 @@ instance GoogleRequest AppsList' where
               _alOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy AppsListResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy AppsListResource) rq

@@ -289,8 +289,8 @@ instance GoogleAuth ChannelsList' where
 
 instance GoogleRequest ChannelsList' where
         type Rs ChannelsList' = ChannelListResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ChannelsList'{..}
+        request = requestWith youTubeRequest
+        requestWith rq ChannelsList'{..}
           = go (Just _clPart) _clMine _clForUsername _clHl
               _clOnBehalfOfContentOwner
               _clCategoryId
@@ -307,7 +307,5 @@ instance GoogleRequest ChannelsList' where
               _clOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ChannelsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ChannelsListResource)
+                      rq

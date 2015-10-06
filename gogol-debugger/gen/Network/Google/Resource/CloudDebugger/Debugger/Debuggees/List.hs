@@ -233,8 +233,8 @@ instance GoogleAuth DebuggerDebuggeesList' where
 instance GoogleRequest DebuggerDebuggeesList' where
         type Rs DebuggerDebuggeesList' =
              ListDebuggeesResponse
-        request = requestWithRoute defReq debuggerURL
-        requestWithRoute r u DebuggerDebuggeesList'{..}
+        request = requestWith debuggerRequest
+        requestWith rq DebuggerDebuggeesList'{..}
           = go _ddlXgafv _ddlIncludeInactive _ddlUploadProtocol
               _ddlProject
               (Just _ddlPp)
@@ -249,7 +249,6 @@ instance GoogleRequest DebuggerDebuggeesList' where
               _ddlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DebuggerDebuggeesListResource)
-                      r
-                      u
+                      rq

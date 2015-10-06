@@ -310,8 +310,8 @@ instance GoogleAuth ReportsGet' where
 
 instance GoogleRequest ReportsGet' where
         type Rs ReportsGet' = Report
-        request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u ReportsGet'{..}
+        request = requestWith affiliatesRequest
+        requestWith rq ReportsGet'{..}
           = go _rgRole _rgRoleId _rgReportType _rgStatus
               (_rgAdvertiserId ^. _Default)
               _rgEndDate
@@ -331,6 +331,4 @@ instance GoogleRequest ReportsGet' where
               _rgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReportsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ReportsGetResource) rq

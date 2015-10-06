@@ -16,7 +16,7 @@
 module Network.Google.Datastore.Types
     (
     -- * Service URL
-      datastoreURL
+      datastoreRequest
 
     -- * PropertyOrderDirection
     , PropertyOrderDirection (..)
@@ -295,9 +295,8 @@ import           Network.Google.Datastore.Types.Product
 import           Network.Google.Datastore.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1beta2' of the Google Cloud Datastore API.
-datastoreURL :: BaseUrl
-datastoreURL
-  = BaseUrl Https
-      "https://www.googleapis.com/datastore/v1beta2/datasets/"
-      443
+-- | Default request referring to version 'v1beta2' of the Google Cloud Datastore API.
+datastoreRequest :: RequestBuilder
+datastoreRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "datastore/v1beta2/datasets/"

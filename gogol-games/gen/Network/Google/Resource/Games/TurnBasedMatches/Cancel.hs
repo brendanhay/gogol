@@ -151,8 +151,8 @@ instance GoogleAuth TurnBasedMatchesCancel' where
 
 instance GoogleRequest TurnBasedMatchesCancel' where
         type Rs TurnBasedMatchesCancel' = ()
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u TurnBasedMatchesCancel'{..}
+        request = requestWith gamesRequest
+        requestWith rq TurnBasedMatchesCancel'{..}
           = go _tbmcMatchId _tbmcQuotaUser
               (Just _tbmcPrettyPrint)
               _tbmcUserIP
@@ -161,7 +161,6 @@ instance GoogleRequest TurnBasedMatchesCancel' where
               _tbmcOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TurnBasedMatchesCancelResource)
-                      r
-                      u
+                      rq

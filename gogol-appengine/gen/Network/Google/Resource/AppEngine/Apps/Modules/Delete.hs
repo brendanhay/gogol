@@ -232,8 +232,8 @@ instance GoogleAuth AppsModulesDelete' where
 
 instance GoogleRequest AppsModulesDelete' where
         type Rs AppsModulesDelete' = Operation
-        request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsModulesDelete'{..}
+        request = requestWith appEngineRequest
+        requestWith rq AppsModulesDelete'{..}
           = go _amdAppsId _amdModulesId _amdXgafv
               _amdUploadProtocol
               (Just _amdPp)
@@ -248,7 +248,6 @@ instance GoogleRequest AppsModulesDelete' where
               _amdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AppsModulesDeleteResource)
-                      r
-                      u
+                      rq

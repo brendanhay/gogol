@@ -162,8 +162,8 @@ instance GoogleAuth PropertiesInsert' where
 
 instance GoogleRequest PropertiesInsert' where
         type Rs PropertiesInsert' = Property
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u PropertiesInsert'{..}
+        request = requestWith driveRequest
+        requestWith rq PropertiesInsert'{..}
           = go _proFileId _proQuotaUser (Just _proPrettyPrint)
               _proUserIP
               _proFields
@@ -172,7 +172,6 @@ instance GoogleRequest PropertiesInsert' where
               (Just AltJSON)
               _proPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PropertiesInsertResource)
-                      r
-                      u
+                      rq

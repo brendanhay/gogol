@@ -155,8 +155,8 @@ instance GoogleAuth TablesUpload' where
 
 instance GoogleRequest TablesUpload' where
         type Rs TablesUpload' = Table
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u TablesUpload'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesUpload'{..}
           = go _tuQuotaUser (Just _tuPrettyPrint) _tuUserIP
               _tuFields
               _tuKey
@@ -164,7 +164,5 @@ instance GoogleRequest TablesUpload' where
               (Just AltJSON)
               _tuPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TablesUploadResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TablesUploadResource)
+                      rq

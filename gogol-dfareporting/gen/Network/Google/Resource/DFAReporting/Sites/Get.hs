@@ -158,8 +158,8 @@ instance GoogleAuth SitesGet' where
 
 instance GoogleRequest SitesGet' where
         type Rs SitesGet' = Site
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SitesGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq SitesGet'{..}
           = go _sgProFileId _sgId _sgQuotaUser
               (Just _sgPrettyPrint)
               _sgUserIP
@@ -168,5 +168,4 @@ instance GoogleRequest SitesGet' where
               _sgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy SitesGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy SitesGetResource) rq

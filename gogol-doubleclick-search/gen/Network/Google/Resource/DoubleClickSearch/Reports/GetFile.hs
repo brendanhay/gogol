@@ -175,9 +175,8 @@ instance GoogleAuth ReportsGetFile' where
 
 instance GoogleRequest ReportsGetFile' where
         type Rs ReportsGetFile' = ()
-        request
-          = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u ReportsGetFile'{..}
+        request = requestWith doubleClickSearchRequest
+        requestWith rq ReportsGetFile'{..}
           = go _rgfReportId _rgfReportFragment _rgfQuotaUser
               (Just _rgfPrettyPrint)
               _rgfUserIP
@@ -186,18 +185,14 @@ instance GoogleRequest ReportsGetFile' where
               _rgfOAuthToken
               (Just AltJSON)
           where go :<|> _
-                  = clientWithRoute
-                      (Proxy :: Proxy ReportsGetFileResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ReportsGetFileResource)
+                      rq
 
 instance GoogleRequest
          (MediaDownload ReportsGetFile') where
         type Rs (MediaDownload ReportsGetFile') = Body
-        request
-          = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u
-          (MediaDownload ReportsGetFile'{..})
+        request = requestWith doubleClickSearchRequest
+        requestWith rq (MediaDownload ReportsGetFile'{..})
           = go _rgfReportId _rgfReportFragment _rgfQuotaUser
               (Just _rgfPrettyPrint)
               _rgfUserIP
@@ -206,7 +201,5 @@ instance GoogleRequest
               _rgfOAuthToken
               (Just AltMedia)
           where _ :<|> go
-                  = clientWithRoute
-                      (Proxy :: Proxy ReportsGetFileResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ReportsGetFileResource)
+                      rq

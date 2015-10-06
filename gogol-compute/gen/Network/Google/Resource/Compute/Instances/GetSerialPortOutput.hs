@@ -192,9 +192,8 @@ instance GoogleRequest InstancesGetSerialPortOutput'
          where
         type Rs InstancesGetSerialPortOutput' =
              SerialPortOutput
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u
-          InstancesGetSerialPortOutput'{..}
+        request = requestWith computeRequest
+        requestWith rq InstancesGetSerialPortOutput'{..}
           = go _igspoProject _igspoZone _igspoInstance
               (Just _igspoPort)
               _igspoQuotaUser
@@ -205,7 +204,6 @@ instance GoogleRequest InstancesGetSerialPortOutput'
               _igspoOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesGetSerialPortOutputResource)
-                      r
-                      u
+                      rq

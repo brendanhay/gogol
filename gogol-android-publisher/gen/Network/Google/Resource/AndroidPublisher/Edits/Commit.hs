@@ -159,8 +159,8 @@ instance GoogleAuth EditsCommit' where
 
 instance GoogleRequest EditsCommit' where
         type Rs EditsCommit' = AppEdit
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsCommit'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsCommit'{..}
           = go _ecPackageName _ecEditId _ecQuotaUser
               (Just _ecPrettyPrint)
               _ecUserIP
@@ -169,7 +169,4 @@ instance GoogleRequest EditsCommit' where
               _ecOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EditsCommitResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EditsCommitResource) rq

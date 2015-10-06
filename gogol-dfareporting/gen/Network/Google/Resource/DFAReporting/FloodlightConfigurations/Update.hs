@@ -166,9 +166,8 @@ instance GoogleRequest
          FloodlightConfigurationsUpdate' where
         type Rs FloodlightConfigurationsUpdate' =
              FloodlightConfiguration
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u
-          FloodlightConfigurationsUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FloodlightConfigurationsUpdate'{..}
           = go _fcuProFileId _fcuQuotaUser
               (Just _fcuPrettyPrint)
               _fcuUserIP
@@ -178,8 +177,7 @@ instance GoogleRequest
               (Just AltJSON)
               _fcuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy FloodlightConfigurationsUpdateResource)
-                      r
-                      u
+                      rq

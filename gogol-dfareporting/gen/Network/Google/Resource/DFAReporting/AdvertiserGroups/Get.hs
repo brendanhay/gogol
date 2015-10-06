@@ -162,8 +162,8 @@ instance GoogleAuth AdvertiserGroupsGet' where
 
 instance GoogleRequest AdvertiserGroupsGet' where
         type Rs AdvertiserGroupsGet' = AdvertiserGroup
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdvertiserGroupsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AdvertiserGroupsGet'{..}
           = go _aggProFileId _aggId _aggQuotaUser
               (Just _aggPrettyPrint)
               _aggUserIP
@@ -172,7 +172,6 @@ instance GoogleRequest AdvertiserGroupsGet' where
               _aggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AdvertiserGroupsGetResource)
-                      r
-                      u
+                      rq

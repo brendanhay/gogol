@@ -22,7 +22,7 @@ module Network.Google.Reports
     -- * API
       ReportsAPI
     , reportsAPI
-    , reportsURL
+    , reportsRequest
 
     -- * Service Methods
 

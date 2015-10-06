@@ -171,8 +171,8 @@ instance GoogleAuth BucketsDelete' where
 
 instance GoogleRequest BucketsDelete' where
         type Rs BucketsDelete' = ()
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketsDelete'{..}
+        request = requestWith storageRequest
+        requestWith rq BucketsDelete'{..}
           = go _bdBucket _bdIfMetagenerationMatch
               _bdIfMetagenerationNotMatch
               _bdQuotaUser
@@ -183,7 +183,5 @@ instance GoogleRequest BucketsDelete' where
               _bdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy BucketsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy BucketsDeleteResource)
+                      rq

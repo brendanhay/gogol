@@ -193,8 +193,8 @@ instance GoogleAuth ManagementExperimentsDelete'
 instance GoogleRequest ManagementExperimentsDelete'
          where
         type Rs ManagementExperimentsDelete' = ()
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementExperimentsDelete'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementExperimentsDelete'{..}
           = go _medAccountId _medWebPropertyId _medProFileId
               _medExperimentId
               _medQuotaUser
@@ -205,7 +205,6 @@ instance GoogleRequest ManagementExperimentsDelete'
               _medOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementExperimentsDeleteResource)
-                      r
-                      u
+                      rq

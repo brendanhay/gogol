@@ -226,8 +226,8 @@ instance GoogleAuth InvitationsAccept' where
 
 instance GoogleRequest InvitationsAccept' where
         type Rs InvitationsAccept' = Empty
-        request = requestWithRoute defReq classroomURL
-        requestWithRoute r u InvitationsAccept'{..}
+        request = requestWith classroomRequest
+        requestWith rq InvitationsAccept'{..}
           = go _iaId _iaXgafv _iaUploadProtocol (Just _iaPp)
               _iaAccessToken
               _iaUploadType
@@ -240,7 +240,6 @@ instance GoogleRequest InvitationsAccept' where
               _iaOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InvitationsAcceptResource)
-                      r
-                      u
+                      rq

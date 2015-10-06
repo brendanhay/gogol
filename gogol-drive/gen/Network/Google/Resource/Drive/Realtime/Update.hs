@@ -173,8 +173,8 @@ instance GoogleAuth RealtimeUpdate' where
 
 instance GoogleRequest RealtimeUpdate' where
         type Rs RealtimeUpdate' = ()
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u RealtimeUpdate'{..}
+        request = requestWith driveRequest
+        requestWith rq RealtimeUpdate'{..}
           = go _rFileId _rBaseRevision _rQuotaUser
               (Just _rPrettyPrint)
               _rUserIP
@@ -184,7 +184,5 @@ instance GoogleRequest RealtimeUpdate' where
               (Just AltJSON)
               _rMedia
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy RealtimeUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RealtimeUpdateResource)
+                      rq

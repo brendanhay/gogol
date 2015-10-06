@@ -184,8 +184,8 @@ instance GoogleAuth RepliesGet' where
 
 instance GoogleRequest RepliesGet' where
         type Rs RepliesGet' = CommentReply
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u RepliesGet'{..}
+        request = requestWith driveRequest
+        requestWith rq RepliesGet'{..}
           = go _rgFileId _rgCommentId _rgReplyId
               (Just _rgIncludeDeleted)
               _rgQuotaUser
@@ -196,6 +196,4 @@ instance GoogleRequest RepliesGet' where
               _rgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy RepliesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RepliesGetResource) rq

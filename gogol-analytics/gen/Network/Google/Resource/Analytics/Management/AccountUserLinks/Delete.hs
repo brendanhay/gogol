@@ -167,9 +167,8 @@ instance GoogleAuth ManagementAccountUserLinksDelete'
 instance GoogleRequest
          ManagementAccountUserLinksDelete' where
         type Rs ManagementAccountUserLinksDelete' = ()
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementAccountUserLinksDelete'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementAccountUserLinksDelete'{..}
           = go _mauldAccountId _mauldLinkId _mauldQuotaUser
               (Just _mauldPrettyPrint)
               _mauldUserIP
@@ -178,8 +177,7 @@ instance GoogleRequest
               _mauldOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementAccountUserLinksDeleteResource)
-                      r
-                      u
+                      rq

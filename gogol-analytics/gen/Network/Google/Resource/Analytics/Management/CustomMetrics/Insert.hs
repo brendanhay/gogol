@@ -182,9 +182,8 @@ instance GoogleAuth ManagementCustomMetricsInsert'
 instance GoogleRequest ManagementCustomMetricsInsert'
          where
         type Rs ManagementCustomMetricsInsert' = CustomMetric
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementCustomMetricsInsert'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementCustomMetricsInsert'{..}
           = go _mcmiAccountId _mcmiWebPropertyId _mcmiQuotaUser
               (Just _mcmiPrettyPrint)
               _mcmiUserIP
@@ -194,8 +193,7 @@ instance GoogleRequest ManagementCustomMetricsInsert'
               (Just AltJSON)
               _mcmiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementCustomMetricsInsertResource)
-                      r
-                      u
+                      rq

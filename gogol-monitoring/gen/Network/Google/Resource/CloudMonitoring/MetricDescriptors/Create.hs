@@ -163,8 +163,8 @@ instance GoogleAuth MetricDescriptorsCreate' where
 
 instance GoogleRequest MetricDescriptorsCreate' where
         type Rs MetricDescriptorsCreate' = MetricDescriptor
-        request = requestWithRoute defReq monitoringURL
-        requestWithRoute r u MetricDescriptorsCreate'{..}
+        request = requestWith monitoringRequest
+        requestWith rq MetricDescriptorsCreate'{..}
           = go _mdcProject _mdcQuotaUser (Just _mdcPrettyPrint)
               _mdcUserIP
               _mdcFields
@@ -173,7 +173,6 @@ instance GoogleRequest MetricDescriptorsCreate' where
               (Just AltJSON)
               _mdcPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MetricDescriptorsCreateResource)
-                      r
-                      u
+                      rq

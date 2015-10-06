@@ -21,7 +21,7 @@ module Network.Google.EmailMigration
     -- * API
       EmailMigrationAPI
     , emailMigrationAPI
-    , emailMigrationURL
+    , emailMigrationRequest
 
     -- * Service Methods
 

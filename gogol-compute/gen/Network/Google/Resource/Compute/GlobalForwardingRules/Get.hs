@@ -166,8 +166,8 @@ instance GoogleAuth GlobalForwardingRulesGet' where
 instance GoogleRequest GlobalForwardingRulesGet'
          where
         type Rs GlobalForwardingRulesGet' = ForwardingRule
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalForwardingRulesGet'{..}
+        request = requestWith computeRequest
+        requestWith rq GlobalForwardingRulesGet'{..}
           = go _gfrgProject _gfrgForwardingRule _gfrgQuotaUser
               (Just _gfrgPrettyPrint)
               _gfrgUserIP
@@ -176,7 +176,6 @@ instance GoogleRequest GlobalForwardingRulesGet'
               _gfrgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GlobalForwardingRulesGetResource)
-                      r
-                      u
+                      rq

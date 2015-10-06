@@ -169,9 +169,8 @@ instance GoogleAuth
 instance GoogleRequest
          DefaultObjectAccessControlsDelete' where
         type Rs DefaultObjectAccessControlsDelete' = ()
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u
-          DefaultObjectAccessControlsDelete'{..}
+        request = requestWith storageRequest
+        requestWith rq DefaultObjectAccessControlsDelete'{..}
           = go _doacdBucket _doacdEntity _doacdQuotaUser
               (Just _doacdPrettyPrint)
               _doacdUserIP
@@ -180,8 +179,7 @@ instance GoogleRequest
               _doacdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy DefaultObjectAccessControlsDeleteResource)
-                      r
-                      u
+                      rq

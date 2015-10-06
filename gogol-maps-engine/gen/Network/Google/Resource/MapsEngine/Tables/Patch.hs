@@ -157,8 +157,8 @@ instance GoogleAuth TablesPatch' where
 
 instance GoogleRequest TablesPatch' where
         type Rs TablesPatch' = ()
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u TablesPatch'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesPatch'{..}
           = go _tpId _tpQuotaUser (Just _tpPrettyPrint)
               _tpUserIP
               _tpFields
@@ -167,7 +167,4 @@ instance GoogleRequest TablesPatch' where
               (Just AltJSON)
               _tpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TablesPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TablesPatchResource) rq

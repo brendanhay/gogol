@@ -177,9 +177,8 @@ instance GoogleAuth RollingUpdatesRollback' where
 
 instance GoogleRequest RollingUpdatesRollback' where
         type Rs RollingUpdatesRollback' = Operation
-        request
-          = requestWithRoute defReq replicaPoolUpdaterURL
-        requestWithRoute r u RollingUpdatesRollback'{..}
+        request = requestWith replicaPoolUpdaterRequest
+        requestWith rq RollingUpdatesRollback'{..}
           = go _rurProject _rurZone _rurRollingUpdate
               _rurQuotaUser
               (Just _rurPrettyPrint)
@@ -189,7 +188,6 @@ instance GoogleRequest RollingUpdatesRollback' where
               _rurOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RollingUpdatesRollbackResource)
-                      r
-                      u
+                      rq

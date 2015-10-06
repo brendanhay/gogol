@@ -157,8 +157,8 @@ instance GoogleAuth URLGet' where
 
 instance GoogleRequest URLGet' where
         type Rs URLGet' = URL
-        request = requestWithRoute defReq uRLShortenerURL
-        requestWithRoute r u URLGet'{..}
+        request = requestWith uRLShortenerRequest
+        requestWith rq URLGet'{..}
           = go (Just _ugShortURL) _ugProjection _ugQuotaUser
               (Just _ugPrettyPrint)
               _ugUserIP
@@ -167,4 +167,4 @@ instance GoogleRequest URLGet' where
               _ugOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy URLGetResource) r u
+                  = clientBuild (Proxy :: Proxy URLGetResource) rq

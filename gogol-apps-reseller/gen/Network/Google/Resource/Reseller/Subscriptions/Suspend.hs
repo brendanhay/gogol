@@ -161,8 +161,8 @@ instance GoogleAuth SubscriptionsSuspend' where
 
 instance GoogleRequest SubscriptionsSuspend' where
         type Rs SubscriptionsSuspend' = Subscription
-        request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u SubscriptionsSuspend'{..}
+        request = requestWith appsResellerRequest
+        requestWith rq SubscriptionsSuspend'{..}
           = go _ssCustomerId _ssSubscriptionId _ssQuotaUser
               (Just _ssPrettyPrint)
               _ssUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest SubscriptionsSuspend' where
               _ssOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SubscriptionsSuspendResource)
-                      r
-                      u
+                      rq

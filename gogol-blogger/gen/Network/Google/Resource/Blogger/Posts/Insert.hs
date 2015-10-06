@@ -198,8 +198,8 @@ instance GoogleAuth PostsInsert' where
 
 instance GoogleRequest PostsInsert' where
         type Rs PostsInsert' = Post'
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostsInsert'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PostsInsert'{..}
           = go _piiBlogId (Just _piiFetchBody) _piiIsDraft
               _piiFetchImages
               _piiQuotaUser
@@ -211,7 +211,4 @@ instance GoogleRequest PostsInsert' where
               (Just AltJSON)
               _piiPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PostsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PostsInsertResource) rq

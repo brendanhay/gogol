@@ -159,8 +159,8 @@ instance GoogleAuth MapsGet' where
 
 instance GoogleRequest MapsGet' where
         type Rs MapsGet' = Map
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u MapsGet'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq MapsGet'{..}
           = go _mgId _mgVersion _mgQuotaUser
               (Just _mgPrettyPrint)
               _mgUserIP
@@ -169,5 +169,4 @@ instance GoogleRequest MapsGet' where
               _mgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy MapsGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy MapsGetResource) rq

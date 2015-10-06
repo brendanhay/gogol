@@ -164,8 +164,8 @@ instance GoogleAuth AccountsSavedadstylesGet' where
 instance GoogleRequest AccountsSavedadstylesGet'
          where
         type Rs AccountsSavedadstylesGet' = SavedAdStyle
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AccountsSavedadstylesGet'{..}
+        request = requestWith adSenseRequest
+        requestWith rq AccountsSavedadstylesGet'{..}
           = go _asgAccountId _asgSavedAdStyleId _asgQuotaUser
               (Just _asgPrettyPrint)
               _asgUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest AccountsSavedadstylesGet'
               _asgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsSavedadstylesGetResource)
-                      r
-                      u
+                      rq

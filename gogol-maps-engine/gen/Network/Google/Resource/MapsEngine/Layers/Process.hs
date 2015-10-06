@@ -147,8 +147,8 @@ instance GoogleAuth LayersProcess' where
 
 instance GoogleRequest LayersProcess' where
         type Rs LayersProcess' = ProcessResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u LayersProcess'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq LayersProcess'{..}
           = go _lpId _lpQuotaUser (Just _lpPrettyPrint)
               _lpUserIP
               _lpFields
@@ -156,7 +156,5 @@ instance GoogleRequest LayersProcess' where
               _lpOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy LayersProcessResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy LayersProcessResource)
+                      rq

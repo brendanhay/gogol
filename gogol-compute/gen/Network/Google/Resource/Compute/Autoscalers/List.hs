@@ -210,8 +210,8 @@ instance GoogleAuth AutoscalersList' where
 
 instance GoogleRequest AutoscalersList' where
         type Rs AutoscalersList' = AutoscalerList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u AutoscalersList'{..}
+        request = requestWith computeRequest
+        requestWith rq AutoscalersList'{..}
           = go _autProject _autZone _autFilter _autPageToken
               (Just _autMaxResults)
               _autQuotaUser
@@ -222,7 +222,6 @@ instance GoogleRequest AutoscalersList' where
               _autOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AutoscalersListResource)
-                      r
-                      u
+                      rq

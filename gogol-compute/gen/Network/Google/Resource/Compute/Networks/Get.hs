@@ -159,8 +159,8 @@ instance GoogleAuth NetworksGet' where
 
 instance GoogleRequest NetworksGet' where
         type Rs NetworksGet' = Network
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u NetworksGet'{..}
+        request = requestWith computeRequest
+        requestWith rq NetworksGet'{..}
           = go _ngProject _ngNetwork _ngQuotaUser
               (Just _ngPrettyPrint)
               _ngUserIP
@@ -169,7 +169,4 @@ instance GoogleRequest NetworksGet' where
               _ngOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy NetworksGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy NetworksGetResource) rq

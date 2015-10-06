@@ -298,8 +298,8 @@ instance GoogleAuth SubscriptionsList' where
 
 instance GoogleRequest SubscriptionsList' where
         type Rs SubscriptionsList' = SubscriptionListResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u SubscriptionsList'{..}
+        request = requestWith youTubeRequest
+        requestWith rq SubscriptionsList'{..}
           = go (Just _sPart) _sMine _sChannelId
               _sOnBehalfOfContentOwner
               _sOnBehalfOfContentOwnerChannel
@@ -317,7 +317,6 @@ instance GoogleRequest SubscriptionsList' where
               _sOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SubscriptionsListResource)
-                      r
-                      u
+                      rq

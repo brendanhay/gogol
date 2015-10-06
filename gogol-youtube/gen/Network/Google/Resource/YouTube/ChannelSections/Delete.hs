@@ -171,8 +171,8 @@ instance GoogleAuth ChannelSectionsDelete' where
 
 instance GoogleRequest ChannelSectionsDelete' where
         type Rs ChannelSectionsDelete' = ()
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ChannelSectionsDelete'{..}
+        request = requestWith youTubeRequest
+        requestWith rq ChannelSectionsDelete'{..}
           = go (Just _csdId) _csdOnBehalfOfContentOwner
               _csdQuotaUser
               (Just _csdPrettyPrint)
@@ -182,7 +182,6 @@ instance GoogleRequest ChannelSectionsDelete' where
               _csdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ChannelSectionsDeleteResource)
-                      r
-                      u
+                      rq

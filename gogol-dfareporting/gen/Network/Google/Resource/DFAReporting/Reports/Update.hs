@@ -171,8 +171,8 @@ instance GoogleAuth ReportsUpdate' where
 
 instance GoogleRequest ReportsUpdate' where
         type Rs ReportsUpdate' = Report
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ReportsUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ReportsUpdate'{..}
           = go _ruProFileId _ruReportId _ruQuotaUser
               (Just _ruPrettyPrint)
               _ruUserIP
@@ -182,7 +182,5 @@ instance GoogleRequest ReportsUpdate' where
               (Just AltJSON)
               _ruPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ReportsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ReportsUpdateResource)
+                      rq

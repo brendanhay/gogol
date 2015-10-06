@@ -160,8 +160,8 @@ instance GoogleAuth TokensGet' where
 
 instance GoogleRequest TokensGet' where
         type Rs TokensGet' = Token
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u TokensGet'{..}
+        request = requestWith directoryRequest
+        requestWith rq TokensGet'{..}
           = go _tgUserKey _tgClientId _tgQuotaUser
               (Just _tgPrettyPrint)
               _tgUserIP
@@ -170,6 +170,4 @@ instance GoogleRequest TokensGet' where
               _tgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TokensGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TokensGetResource) rq

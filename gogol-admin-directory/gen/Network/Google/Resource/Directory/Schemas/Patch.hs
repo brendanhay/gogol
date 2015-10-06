@@ -171,8 +171,8 @@ instance GoogleAuth SchemasPatch' where
 
 instance GoogleRequest SchemasPatch' where
         type Rs SchemasPatch' = Schema
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u SchemasPatch'{..}
+        request = requestWith directoryRequest
+        requestWith rq SchemasPatch'{..}
           = go _spCustomerId _spSchemaKey _spQuotaUser
               (Just _spPrettyPrint)
               _spUserIP
@@ -182,7 +182,5 @@ instance GoogleRequest SchemasPatch' where
               (Just AltJSON)
               _spPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SchemasPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SchemasPatchResource)
+                      rq

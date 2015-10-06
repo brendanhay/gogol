@@ -165,8 +165,8 @@ instance GoogleAuth AnnotationsBatchCreate' where
 instance GoogleRequest AnnotationsBatchCreate' where
         type Rs AnnotationsBatchCreate' =
              BatchAnnotationsResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u AnnotationsBatchCreate'{..}
+        request = requestWith genomicsRequest
+        requestWith rq AnnotationsBatchCreate'{..}
           = go _abcQuotaUser (Just _abcPrettyPrint) _abcUserIP
               _abcFields
               _abcKey
@@ -174,7 +174,6 @@ instance GoogleRequest AnnotationsBatchCreate' where
               (Just AltJSON)
               _abcPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AnnotationsBatchCreateResource)
-                      r
-                      u
+                      rq

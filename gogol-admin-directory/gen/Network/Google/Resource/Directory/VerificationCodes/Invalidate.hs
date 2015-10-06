@@ -153,8 +153,8 @@ instance GoogleAuth VerificationCodesInvalidate'
 instance GoogleRequest VerificationCodesInvalidate'
          where
         type Rs VerificationCodesInvalidate' = ()
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u VerificationCodesInvalidate'{..}
+        request = requestWith directoryRequest
+        requestWith rq VerificationCodesInvalidate'{..}
           = go _vciUserKey _vciQuotaUser (Just _vciPrettyPrint)
               _vciUserIP
               _vciFields
@@ -162,7 +162,6 @@ instance GoogleRequest VerificationCodesInvalidate'
               _vciOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VerificationCodesInvalidateResource)
-                      r
-                      u
+                      rq

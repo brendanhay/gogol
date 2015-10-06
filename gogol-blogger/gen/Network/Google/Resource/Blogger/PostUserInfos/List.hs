@@ -277,8 +277,8 @@ instance GoogleAuth PostUserInfosList' where
 
 instance GoogleRequest PostUserInfosList' where
         type Rs PostUserInfosList' = PostUserInfosList
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostUserInfosList'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PostUserInfosList'{..}
           = go _puilUserId _puilBlogId
               (_puilStatus ^. _Default)
               (Just _puilOrderBy)
@@ -297,7 +297,6 @@ instance GoogleRequest PostUserInfosList' where
               _puilOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PostUserInfosListResource)
-                      r
-                      u
+                      rq

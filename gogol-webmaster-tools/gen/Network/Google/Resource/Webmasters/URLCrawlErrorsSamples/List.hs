@@ -187,8 +187,8 @@ instance GoogleRequest URLCrawlErrorsSamplesList'
          where
         type Rs URLCrawlErrorsSamplesList' =
              URLCrawlErrorsSamplesListResponse
-        request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u URLCrawlErrorsSamplesList'{..}
+        request = requestWith webmasterToolsRequest
+        requestWith rq URLCrawlErrorsSamplesList'{..}
           = go _uceslSiteURL (Just _uceslCategory)
               (Just _uceslPlatform)
               _uceslQuotaUser
@@ -199,7 +199,6 @@ instance GoogleRequest URLCrawlErrorsSamplesList'
               _uceslOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy URLCrawlErrorsSamplesListResource)
-                      r
-                      u
+                      rq

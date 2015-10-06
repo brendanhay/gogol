@@ -151,8 +151,8 @@ instance GoogleAuth UsersLabelsList' where
 
 instance GoogleRequest UsersLabelsList' where
         type Rs UsersLabelsList' = ListLabelsResponse
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersLabelsList'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersLabelsList'{..}
           = go _ullUserId _ullQuotaUser (Just _ullPrettyPrint)
               _ullUserIP
               _ullFields
@@ -160,7 +160,6 @@ instance GoogleRequest UsersLabelsList' where
               _ullOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersLabelsListResource)
-                      r
-                      u
+                      rq

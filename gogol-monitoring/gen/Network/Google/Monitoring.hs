@@ -21,7 +21,7 @@ module Network.Google.Monitoring
     -- * API
       MonitoringAPI
     , monitoringAPI
-    , monitoringURL
+    , monitoringRequest
 
     -- * Service Methods
 

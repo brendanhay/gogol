@@ -158,8 +158,8 @@ instance GoogleAuth TaskDelete' where
 
 instance GoogleRequest TaskDelete' where
         type Rs TaskDelete' = ()
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TaskDelete'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TaskDelete'{..}
           = go _tTableId _tTaskId _tQuotaUser
               (Just _tPrettyPrint)
               _tUserIP
@@ -168,6 +168,4 @@ instance GoogleRequest TaskDelete' where
               _tOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TaskDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TaskDeleteResource) rq

@@ -239,8 +239,8 @@ instance GoogleAuth FilesCopy' where
 
 instance GoogleRequest FilesCopy' where
         type Rs FilesCopy' = File
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesCopy'{..}
+        request = requestWith driveRequest
+        requestWith rq FilesCopy'{..}
           = go _fcFileId (Just _fcPinned) (Just _fcVisibility)
               _fcTimedTextLanguage
               _fcTimedTextTrackName
@@ -256,6 +256,4 @@ instance GoogleRequest FilesCopy' where
               (Just AltJSON)
               _fcPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy FilesCopyResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy FilesCopyResource) rq

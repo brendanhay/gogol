@@ -180,9 +180,8 @@ instance GoogleAuth AccountsContainersFoldersCreate'
 instance GoogleRequest
          AccountsContainersFoldersCreate' where
         type Rs AccountsContainersFoldersCreate' = Folder
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersFoldersCreate'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersFoldersCreate'{..}
           = go _acfcAccountId _acfcContainerId _acfcQuotaUser
               (Just _acfcPrettyPrint)
               _acfcUserIP
@@ -192,8 +191,7 @@ instance GoogleRequest
               (Just AltJSON)
               _acfcPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersFoldersCreateResource)
-                      r
-                      u
+                      rq

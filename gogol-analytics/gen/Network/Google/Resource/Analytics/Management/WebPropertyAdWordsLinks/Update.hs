@@ -201,8 +201,8 @@ instance GoogleRequest
          ManagementWebPropertyAdWordsLinksUpdate' where
         type Rs ManagementWebPropertyAdWordsLinksUpdate' =
              EntityAdWordsLink
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
+        request = requestWith analyticsRequest
+        requestWith rq
           ManagementWebPropertyAdWordsLinksUpdate'{..}
           = go _mwpawluAccountId _mwpawluWebPropertyId
               _mwpawluWebPropertyAdWordsLinkId
@@ -215,9 +215,8 @@ instance GoogleRequest
               (Just AltJSON)
               _mwpawluPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy
                            ManagementWebPropertyAdWordsLinksUpdateResource)
-                      r
-                      u
+                      rq

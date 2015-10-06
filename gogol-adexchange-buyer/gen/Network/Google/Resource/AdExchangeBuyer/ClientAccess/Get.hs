@@ -161,8 +161,8 @@ instance GoogleAuth ClientAccessGet' where
 
 instance GoogleRequest ClientAccessGet' where
         type Rs ClientAccessGet' = ClientAccessCapabilities
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u ClientAccessGet'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq ClientAccessGet'{..}
           = go _cagClientAccountId (Just _cagSponsorAccountId)
               _cagQuotaUser
               (Just _cagPrettyPrint)
@@ -172,7 +172,6 @@ instance GoogleRequest ClientAccessGet' where
               _cagOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ClientAccessGetResource)
-                      r
-                      u
+                      rq

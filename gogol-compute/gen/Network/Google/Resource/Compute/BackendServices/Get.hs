@@ -164,8 +164,8 @@ instance GoogleAuth BackendServicesGet' where
 
 instance GoogleRequest BackendServicesGet' where
         type Rs BackendServicesGet' = BackendService
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u BackendServicesGet'{..}
+        request = requestWith computeRequest
+        requestWith rq BackendServicesGet'{..}
           = go _bsgProject _bsgBackendService _bsgQuotaUser
               (Just _bsgPrettyPrint)
               _bsgUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest BackendServicesGet' where
               _bsgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BackendServicesGetResource)
-                      r
-                      u
+                      rq

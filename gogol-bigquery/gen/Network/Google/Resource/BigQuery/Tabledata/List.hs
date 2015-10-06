@@ -209,8 +209,8 @@ instance GoogleAuth TabledataList' where
 
 instance GoogleRequest TabledataList' where
         type Rs TabledataList' = TableDataList
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u TabledataList'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq TabledataList'{..}
           = go _tProjectId _tDatasetId _tTableId _tPageToken
               _tStartIndex
               _tMaxResults
@@ -222,7 +222,5 @@ instance GoogleRequest TabledataList' where
               _tOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TabledataListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TabledataListResource)
+                      rq

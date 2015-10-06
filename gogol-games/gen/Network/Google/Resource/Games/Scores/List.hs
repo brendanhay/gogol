@@ -213,8 +213,8 @@ instance GoogleAuth ScoresList' where
 
 instance GoogleRequest ScoresList' where
         type Rs ScoresList' = LeaderboardScores
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u ScoresList'{..}
+        request = requestWith gamesRequest
+        requestWith rq ScoresList'{..}
           = go _sllLeaderboardId _sllCollection
               (Just _sllTimeSpan)
               _sllLanguage
@@ -228,6 +228,4 @@ instance GoogleRequest ScoresList' where
               _sllOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ScoresListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ScoresListResource) rq

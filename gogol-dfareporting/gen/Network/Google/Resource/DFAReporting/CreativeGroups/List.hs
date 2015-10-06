@@ -254,8 +254,8 @@ instance GoogleAuth CreativeGroupsList' where
 instance GoogleRequest CreativeGroupsList' where
         type Rs CreativeGroupsList' =
              CreativeGroupsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeGroupsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativeGroupsList'{..}
           = go _cglProFileId _cglSearchString
               (_cglIds ^. _Default)
               _cglSortOrder
@@ -272,7 +272,6 @@ instance GoogleRequest CreativeGroupsList' where
               _cglOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CreativeGroupsListResource)
-                      r
-                      u
+                      rq

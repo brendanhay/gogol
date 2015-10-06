@@ -247,8 +247,8 @@ instance GoogleAuth PlayListItemsList' where
 
 instance GoogleRequest PlayListItemsList' where
         type Rs PlayListItemsList' = PlayListItemListResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u PlayListItemsList'{..}
+        request = requestWith youTubeRequest
+        requestWith rq PlayListItemsList'{..}
           = go (Just _plilPart) _plilOnBehalfOfContentOwner
               _plilVideoId
               _plilId
@@ -263,7 +263,6 @@ instance GoogleRequest PlayListItemsList' where
               _plilOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlayListItemsListResource)
-                      r
-                      u
+                      rq

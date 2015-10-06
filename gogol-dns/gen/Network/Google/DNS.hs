@@ -22,7 +22,7 @@ module Network.Google.DNS
     -- * API
       DNSAPI
     , dNSAPI
-    , dNSURL
+    , dNSRequest
 
     -- * Service Methods
 

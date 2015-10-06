@@ -158,8 +158,8 @@ instance GoogleAuth TimelinePatch' where
 
 instance GoogleRequest TimelinePatch' where
         type Rs TimelinePatch' = TimelineItem
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelinePatch'{..}
+        request = requestWith mirrorRequest
+        requestWith rq TimelinePatch'{..}
           = go _tpId _tpQuotaUser (Just _tpPrettyPrint)
               _tpUserIP
               _tpFields
@@ -168,7 +168,5 @@ instance GoogleRequest TimelinePatch' where
               (Just AltJSON)
               _tpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TimelinePatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TimelinePatchResource)
+                      rq

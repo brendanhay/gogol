@@ -173,8 +173,8 @@ instance GoogleAuth AccountsPatch' where
 
 instance GoogleRequest AccountsPatch' where
         type Rs AccountsPatch' = Account
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountsPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AccountsPatch'{..}
           = go _ap1ProFileId (Just _ap1Id) _ap1QuotaUser
               (Just _ap1PrettyPrint)
               _ap1UserIP
@@ -184,7 +184,5 @@ instance GoogleRequest AccountsPatch' where
               (Just AltJSON)
               _ap1Payload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AccountsPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AccountsPatchResource)
+                      rq

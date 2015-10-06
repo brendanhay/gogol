@@ -258,8 +258,8 @@ instance GoogleAuth TransferOperationsList' where
 instance GoogleRequest TransferOperationsList' where
         type Rs TransferOperationsList' =
              ListOperationsResponse
-        request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferOperationsList'{..}
+        request = requestWith storageTransferRequest
+        requestWith rq TransferOperationsList'{..}
           = go _tolName _tolXgafv _tolUploadProtocol
               (Just _tolPp)
               _tolAccessToken
@@ -276,7 +276,6 @@ instance GoogleRequest TransferOperationsList' where
               _tolOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TransferOperationsListResource)
-                      r
-                      u
+                      rq

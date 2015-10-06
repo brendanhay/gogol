@@ -160,8 +160,8 @@ instance GoogleAuth LayersPatch' where
 
 instance GoogleRequest LayersPatch' where
         type Rs LayersPatch' = ()
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u LayersPatch'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq LayersPatch'{..}
           = go _layId _layQuotaUser (Just _layPrettyPrint)
               _layUserIP
               _layFields
@@ -170,7 +170,4 @@ instance GoogleRequest LayersPatch' where
               (Just AltJSON)
               _layPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy LayersPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy LayersPatchResource) rq

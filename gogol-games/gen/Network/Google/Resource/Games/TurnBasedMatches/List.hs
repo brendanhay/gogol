@@ -206,8 +206,8 @@ instance GoogleAuth TurnBasedMatchesList' where
 
 instance GoogleRequest TurnBasedMatchesList' where
         type Rs TurnBasedMatchesList' = TurnBasedMatchList
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u TurnBasedMatchesList'{..}
+        request = requestWith gamesRequest
+        requestWith rq TurnBasedMatchesList'{..}
           = go _tbmlMaxCompletedMatches _tbmlIncludeMatchData
               _tbmlLanguage
               _tbmlPageToken
@@ -220,7 +220,6 @@ instance GoogleRequest TurnBasedMatchesList' where
               _tbmlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TurnBasedMatchesListResource)
-                      r
-                      u
+                      rq

@@ -163,8 +163,8 @@ instance GoogleAuth ManagementFiltersDelete' where
 
 instance GoogleRequest ManagementFiltersDelete' where
         type Rs ManagementFiltersDelete' = Filter
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementFiltersDelete'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementFiltersDelete'{..}
           = go _mfdAccountId _mfdFilterId _mfdQuotaUser
               (Just _mfdPrettyPrint)
               _mfdUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest ManagementFiltersDelete' where
               _mfdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementFiltersDeleteResource)
-                      r
-                      u
+                      rq

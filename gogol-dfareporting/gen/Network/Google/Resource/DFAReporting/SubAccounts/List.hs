@@ -226,8 +226,8 @@ instance GoogleAuth SubAccountsList' where
 
 instance GoogleRequest SubAccountsList' where
         type Rs SubAccountsList' = SubAccountsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SubAccountsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq SubAccountsList'{..}
           = go _salProFileId _salSearchString
               (_salIds ^. _Default)
               _salSortOrder
@@ -242,7 +242,6 @@ instance GoogleRequest SubAccountsList' where
               _salOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SubAccountsListResource)
-                      r
-                      u
+                      rq

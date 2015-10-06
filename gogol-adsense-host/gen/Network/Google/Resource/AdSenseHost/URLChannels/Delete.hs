@@ -164,8 +164,8 @@ instance GoogleAuth URLChannelsDelete' where
 
 instance GoogleRequest URLChannelsDelete' where
         type Rs URLChannelsDelete' = URLChannel
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u URLChannelsDelete'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq URLChannelsDelete'{..}
           = go _ucdAdClientId _ucdURLChannelId _ucdQuotaUser
               (Just _ucdPrettyPrint)
               _ucdUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest URLChannelsDelete' where
               _ucdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy URLChannelsDeleteResource)
-                      r
-                      u
+                      rq

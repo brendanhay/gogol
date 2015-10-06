@@ -208,8 +208,8 @@ instance GoogleRequest EditsExpansionFilesUpload'
          where
         type Rs EditsExpansionFilesUpload' =
              ExpansionFilesUploadResponse
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsExpansionFilesUpload'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsExpansionFilesUpload'{..}
           = go _eefuPackageName _eefuEditId _eefuAPKVersionCode
               _eefuExpansionFileType
               _eefuQuotaUser
@@ -221,7 +221,6 @@ instance GoogleRequest EditsExpansionFilesUpload'
               (Just AltJSON)
               _eefuMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsExpansionFilesUploadResource)
-                      r
-                      u
+                      rq

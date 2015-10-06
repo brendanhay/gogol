@@ -22,7 +22,7 @@ module Network.Google.Logging
     -- * API
       LoggingAPI
     , loggingAPI
-    , loggingURL
+    , loggingRequest
 
     -- * Service Methods
 

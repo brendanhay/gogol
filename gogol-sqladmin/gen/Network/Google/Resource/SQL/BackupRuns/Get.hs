@@ -174,8 +174,8 @@ instance GoogleAuth BackupRunsGet' where
 
 instance GoogleRequest BackupRunsGet' where
         type Rs BackupRunsGet' = BackupRun
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u BackupRunsGet'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq BackupRunsGet'{..}
           = go _brgProject _brgInstance _brgId _brgQuotaUser
               (Just _brgPrettyPrint)
               _brgUserIP
@@ -184,7 +184,5 @@ instance GoogleRequest BackupRunsGet' where
               _brgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy BackupRunsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy BackupRunsGetResource)
+                      rq

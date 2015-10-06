@@ -146,8 +146,8 @@ instance GoogleAuth GroupsGet' where
 
 instance GoogleRequest GroupsGet' where
         type Rs GroupsGet' = Group
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u GroupsGet'{..}
+        request = requestWith directoryRequest
+        requestWith rq GroupsGet'{..}
           = go _ggGroupKey _ggQuotaUser (Just _ggPrettyPrint)
               _ggUserIP
               _ggFields
@@ -155,6 +155,4 @@ instance GoogleRequest GroupsGet' where
               _ggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy GroupsGetResource) rq

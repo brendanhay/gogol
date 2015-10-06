@@ -215,8 +215,8 @@ instance GoogleAuth PromoOfferDismiss' where
 
 instance GoogleRequest PromoOfferDismiss' where
         type Rs PromoOfferDismiss' = ()
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u PromoOfferDismiss'{..}
+        request = requestWith booksRequest
+        requestWith rq PromoOfferDismiss'{..}
           = go _podManufacturer _podSerial _podDevice _podModel
               _podOfferId
               _podProduct
@@ -229,7 +229,6 @@ instance GoogleRequest PromoOfferDismiss' where
               _podOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PromoOfferDismissResource)
-                      r
-                      u
+                      rq

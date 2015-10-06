@@ -147,9 +147,8 @@ instance GoogleAuth ConversionInsert' where
 
 instance GoogleRequest ConversionInsert' where
         type Rs ConversionInsert' = ConversionList
-        request
-          = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u ConversionInsert'{..}
+        request = requestWith doubleClickSearchRequest
+        requestWith rq ConversionInsert'{..}
           = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
               _ciFields
               _ciKey
@@ -157,7 +156,6 @@ instance GoogleRequest ConversionInsert' where
               (Just AltJSON)
               _ciPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ConversionInsertResource)
-                      r
-                      u
+                      rq

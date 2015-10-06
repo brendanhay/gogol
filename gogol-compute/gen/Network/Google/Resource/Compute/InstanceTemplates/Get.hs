@@ -164,8 +164,8 @@ instance GoogleAuth InstanceTemplatesGet' where
 
 instance GoogleRequest InstanceTemplatesGet' where
         type Rs InstanceTemplatesGet' = InstanceTemplate
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceTemplatesGet'{..}
+        request = requestWith computeRequest
+        requestWith rq InstanceTemplatesGet'{..}
           = go _itgProject _itgInstanceTemplate _itgQuotaUser
               (Just _itgPrettyPrint)
               _itgUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest InstanceTemplatesGet' where
               _itgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstanceTemplatesGetResource)
-                      r
-                      u
+                      rq

@@ -162,8 +162,8 @@ instance GoogleAuth CreativesUpdate' where
 
 instance GoogleRequest CreativesUpdate' where
         type Rs CreativesUpdate' = Creative
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativesUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativesUpdate'{..}
           = go _cuuProFileId _cuuQuotaUser
               (Just _cuuPrettyPrint)
               _cuuUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest CreativesUpdate' where
               (Just AltJSON)
               _cuuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CreativesUpdateResource)
-                      r
-                      u
+                      rq

@@ -178,8 +178,8 @@ instance GoogleAuth RealtimeGet' where
 
 instance GoogleRequest RealtimeGet' where
         type Rs RealtimeGet' = ()
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u RealtimeGet'{..}
+        request = requestWith driveRequest
+        requestWith rq RealtimeGet'{..}
           = go _reaFileId _reaRevision _reaQuotaUser
               (Just _reaPrettyPrint)
               _reaUserIP
@@ -188,16 +188,13 @@ instance GoogleRequest RealtimeGet' where
               _reaOAuthToken
               (Just AltJSON)
           where go :<|> _
-                  = clientWithRoute
-                      (Proxy :: Proxy RealtimeGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RealtimeGetResource) rq
 
 instance GoogleRequest (MediaDownload RealtimeGet')
          where
         type Rs (MediaDownload RealtimeGet') = Body
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u (MediaDownload RealtimeGet'{..})
+        request = requestWith driveRequest
+        requestWith rq (MediaDownload RealtimeGet'{..})
           = go _reaFileId _reaRevision _reaQuotaUser
               (Just _reaPrettyPrint)
               _reaUserIP
@@ -206,7 +203,4 @@ instance GoogleRequest (MediaDownload RealtimeGet')
               _reaOAuthToken
               (Just AltMedia)
           where _ :<|> go
-                  = clientWithRoute
-                      (Proxy :: Proxy RealtimeGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RealtimeGetResource) rq

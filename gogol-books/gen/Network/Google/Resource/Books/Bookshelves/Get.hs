@@ -167,8 +167,8 @@ instance GoogleAuth BookshelvesGet' where
 
 instance GoogleRequest BookshelvesGet' where
         type Rs BookshelvesGet' = Bookshelf
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u BookshelvesGet'{..}
+        request = requestWith booksRequest
+        requestWith rq BookshelvesGet'{..}
           = go _bgUserId _bgShelf _bgSource _bgQuotaUser
               (Just _bgPrettyPrint)
               _bgUserIP
@@ -177,7 +177,5 @@ instance GoogleRequest BookshelvesGet' where
               _bgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy BookshelvesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy BookshelvesGetResource)
+                      rq

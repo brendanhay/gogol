@@ -181,9 +181,8 @@ instance GoogleAuth CollectionviewersDelete' where
 
 instance GoogleRequest CollectionviewersDelete' where
         type Rs CollectionviewersDelete' = ()
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u CollectionviewersDelete'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq CollectionviewersDelete'{..}
           = go _cddEnterpriseId _cddCollectionId _cddUserId
               _cddQuotaUser
               (Just _cddPrettyPrint)
@@ -193,7 +192,6 @@ instance GoogleRequest CollectionviewersDelete' where
               _cddOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CollectionviewersDeleteResource)
-                      r
-                      u
+                      rq

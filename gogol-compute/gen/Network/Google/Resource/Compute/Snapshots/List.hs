@@ -194,8 +194,8 @@ instance GoogleAuth SnapshotsList' where
 
 instance GoogleRequest SnapshotsList' where
         type Rs SnapshotsList' = SnapshotList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u SnapshotsList'{..}
+        request = requestWith computeRequest
+        requestWith rq SnapshotsList'{..}
           = go _slProject _slFilter _slPageToken
               (Just _slMaxResults)
               _slQuotaUser
@@ -206,7 +206,5 @@ instance GoogleRequest SnapshotsList' where
               _slOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SnapshotsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SnapshotsListResource)
+                      rq

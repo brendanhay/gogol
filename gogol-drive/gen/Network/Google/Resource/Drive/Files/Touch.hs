@@ -146,8 +146,8 @@ instance GoogleAuth FilesTouch' where
 
 instance GoogleRequest FilesTouch' where
         type Rs FilesTouch' = File
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesTouch'{..}
+        request = requestWith driveRequest
+        requestWith rq FilesTouch'{..}
           = go _ftFileId _ftQuotaUser (Just _ftPrettyPrint)
               _ftUserIP
               _ftFields
@@ -155,6 +155,4 @@ instance GoogleRequest FilesTouch' where
               _ftOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy FilesTouchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy FilesTouchResource) rq

@@ -173,8 +173,8 @@ instance GoogleAuth UserRolesPatch' where
 
 instance GoogleRequest UserRolesPatch' where
         type Rs UserRolesPatch' = UserRole
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserRolesPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq UserRolesPatch'{..}
           = go _urpProFileId (Just _urpId) _urpQuotaUser
               (Just _urpPrettyPrint)
               _urpUserIP
@@ -184,7 +184,5 @@ instance GoogleRequest UserRolesPatch' where
               (Just AltJSON)
               _urpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy UserRolesPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UserRolesPatchResource)
+                      rq

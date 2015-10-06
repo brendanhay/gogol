@@ -160,8 +160,8 @@ instance GoogleAuth ACLDelete' where
 
 instance GoogleRequest ACLDelete' where
         type Rs ACLDelete' = ()
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u ACLDelete'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq ACLDelete'{..}
           = go _adCalendarId _adRuleId _adQuotaUser
               (Just _adPrettyPrint)
               _adUserIP
@@ -170,6 +170,4 @@ instance GoogleRequest ACLDelete' where
               _adOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ACLDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ACLDeleteResource) rq

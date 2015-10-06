@@ -154,8 +154,8 @@ instance GoogleRequest RelyingPartyGetAccountInfo'
          where
         type Rs RelyingPartyGetAccountInfo' =
              GetAccountInfoResponse
-        request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingPartyGetAccountInfo'{..}
+        request = requestWith identityToolkitRequest
+        requestWith rq RelyingPartyGetAccountInfo'{..}
           = go _rpgaiQuotaUser (Just _rpgaiPrettyPrint)
               _rpgaiUserIP
               _rpgaiFields
@@ -164,7 +164,6 @@ instance GoogleRequest RelyingPartyGetAccountInfo'
               (Just AltJSON)
               _rpgaiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RelyingPartyGetAccountInfoResource)
-                      r
-                      u
+                      rq

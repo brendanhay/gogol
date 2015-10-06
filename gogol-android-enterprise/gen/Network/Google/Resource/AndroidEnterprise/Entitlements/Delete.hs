@@ -173,9 +173,8 @@ instance GoogleAuth EntitlementsDelete' where
 
 instance GoogleRequest EntitlementsDelete' where
         type Rs EntitlementsDelete' = ()
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u EntitlementsDelete'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq EntitlementsDelete'{..}
           = go _edEnterpriseId _edUserId _edEntitlementId
               _edQuotaUser
               (Just _edPrettyPrint)
@@ -185,7 +184,6 @@ instance GoogleRequest EntitlementsDelete' where
               _edOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EntitlementsDeleteResource)
-                      r
-                      u
+                      rq

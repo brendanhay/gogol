@@ -23,7 +23,7 @@ module Network.Google.AdExchangeBuyer
     -- * API
       AdExchangeBuyerAPI
     , adExchangeBuyerAPI
-    , adExchangeBuyerURL
+    , adExchangeBuyerRequest
 
     -- * Service Methods
 

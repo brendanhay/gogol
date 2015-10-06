@@ -204,8 +204,8 @@ instance GoogleAuth PagesList' where
 
 instance GoogleRequest PagesList' where
         type Rs PagesList' = PageList
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PagesList'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PagesList'{..}
           = go _plBlogId (_plStatus ^. _Default) _plFetchBodies
               _plView
               _plPageToken
@@ -218,6 +218,4 @@ instance GoogleRequest PagesList' where
               _plOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy PagesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PagesListResource) rq

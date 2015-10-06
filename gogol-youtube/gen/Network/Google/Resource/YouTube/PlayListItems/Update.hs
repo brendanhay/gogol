@@ -176,8 +176,8 @@ instance GoogleAuth PlayListItemsUpdate' where
 
 instance GoogleRequest PlayListItemsUpdate' where
         type Rs PlayListItemsUpdate' = PlayListItem
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u PlayListItemsUpdate'{..}
+        request = requestWith youTubeRequest
+        requestWith rq PlayListItemsUpdate'{..}
           = go (Just _pliuPart) _pliuQuotaUser
               (Just _pliuPrettyPrint)
               _pliuUserIP
@@ -187,7 +187,6 @@ instance GoogleRequest PlayListItemsUpdate' where
               (Just AltJSON)
               _pliuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlayListItemsUpdateResource)
-                      r
-                      u
+                      rq

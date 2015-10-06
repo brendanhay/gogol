@@ -180,8 +180,8 @@ instance GoogleRequest UsersMessagesAttachmentsGet'
          where
         type Rs UsersMessagesAttachmentsGet' =
              MessagePartBody
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesAttachmentsGet'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersMessagesAttachmentsGet'{..}
           = go _umagUserId _umagMessageId _umagId
               _umagQuotaUser
               (Just _umagPrettyPrint)
@@ -191,7 +191,6 @@ instance GoogleRequest UsersMessagesAttachmentsGet'
               _umagOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersMessagesAttachmentsGetResource)
-                      r
-                      u
+                      rq

@@ -181,9 +181,8 @@ instance GoogleAuth ManagementWebPropertiesUpdate'
 instance GoogleRequest ManagementWebPropertiesUpdate'
          where
         type Rs ManagementWebPropertiesUpdate' = WebProperty
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementWebPropertiesUpdate'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementWebPropertiesUpdate'{..}
           = go _mwpuAccountId _mwpuWebPropertyId _mwpuQuotaUser
               (Just _mwpuPrettyPrint)
               _mwpuUserIP
@@ -193,8 +192,7 @@ instance GoogleRequest ManagementWebPropertiesUpdate'
               (Just AltJSON)
               _mwpuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementWebPropertiesUpdateResource)
-                      r
-                      u
+                      rq

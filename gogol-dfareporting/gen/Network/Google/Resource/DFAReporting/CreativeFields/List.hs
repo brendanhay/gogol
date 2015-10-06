@@ -242,8 +242,8 @@ instance GoogleAuth CreativeFieldsList' where
 instance GoogleRequest CreativeFieldsList' where
         type Rs CreativeFieldsList' =
              CreativeFieldsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativeFieldsList'{..}
           = go _cflProFileId _cflSearchString
               (_cflIds ^. _Default)
               _cflSortOrder
@@ -259,7 +259,6 @@ instance GoogleRequest CreativeFieldsList' where
               _cflOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CreativeFieldsListResource)
-                      r
-                      u
+                      rq

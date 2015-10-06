@@ -149,8 +149,8 @@ instance GoogleAuth TableInsert' where
 
 instance GoogleRequest TableInsert' where
         type Rs TableInsert' = Table
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TableInsert'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TableInsert'{..}
           = go _tiiQuotaUser (Just _tiiPrettyPrint) _tiiUserIP
               _tiiFields
               _tiiKey
@@ -158,7 +158,4 @@ instance GoogleRequest TableInsert' where
               (Just AltJSON)
               _tiiPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TableInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TableInsertResource) rq

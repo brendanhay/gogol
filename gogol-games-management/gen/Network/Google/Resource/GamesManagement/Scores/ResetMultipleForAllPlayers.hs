@@ -160,9 +160,8 @@ instance GoogleAuth ScoresResetMultipleForAllPlayers'
 instance GoogleRequest
          ScoresResetMultipleForAllPlayers' where
         type Rs ScoresResetMultipleForAllPlayers' = ()
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u
-          ScoresResetMultipleForAllPlayers'{..}
+        request = requestWith gamesManagementRequest
+        requestWith rq ScoresResetMultipleForAllPlayers'{..}
           = go _srmfapQuotaUser (Just _srmfapPrettyPrint)
               _srmfapUserIP
               _srmfapFields
@@ -171,8 +170,7 @@ instance GoogleRequest
               (Just AltJSON)
               _srmfapPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ScoresResetMultipleForAllPlayersResource)
-                      r
-                      u
+                      rq

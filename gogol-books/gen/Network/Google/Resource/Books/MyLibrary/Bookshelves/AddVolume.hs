@@ -191,9 +191,8 @@ instance GoogleAuth MyLibraryBookshelvesAddVolume'
 instance GoogleRequest MyLibraryBookshelvesAddVolume'
          where
         type Rs MyLibraryBookshelvesAddVolume' = ()
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u
-          MyLibraryBookshelvesAddVolume'{..}
+        request = requestWith booksRequest
+        requestWith rq MyLibraryBookshelvesAddVolume'{..}
           = go _mlbavShelf (Just _mlbavVolumeId) _mlbavReason
               _mlbavSource
               _mlbavQuotaUser
@@ -204,8 +203,7 @@ instance GoogleRequest MyLibraryBookshelvesAddVolume'
               _mlbavOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy MyLibraryBookshelvesAddVolumeResource)
-                      r
-                      u
+                      rq

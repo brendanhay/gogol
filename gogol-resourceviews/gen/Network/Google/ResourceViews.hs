@@ -22,7 +22,7 @@ module Network.Google.ResourceViews
     -- * API
       ResourceViewsAPI
     , resourceViewsAPI
-    , resourceViewsURL
+    , resourceViewsRequest
 
     -- * Service Methods
 

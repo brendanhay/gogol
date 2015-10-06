@@ -209,8 +209,8 @@ instance GoogleAuth FilesGet' where
 
 instance GoogleRequest FilesGet' where
         type Rs FilesGet' = File
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesGet'{..}
+        request = requestWith driveRequest
+        requestWith rq FilesGet'{..}
           = go _fgFileId (Just _fgUpdateViewedDate)
               _fgProjection
               (Just _fgAcknowledgeAbuse)
@@ -223,14 +223,13 @@ instance GoogleRequest FilesGet' where
               _fgOAuthToken
               (Just AltJSON)
           where go :<|> _
-                  = clientWithRoute (Proxy :: Proxy FilesGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy FilesGetResource) rq
 
 instance GoogleRequest (MediaDownload FilesGet')
          where
         type Rs (MediaDownload FilesGet') = Body
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u (MediaDownload FilesGet'{..})
+        request = requestWith driveRequest
+        requestWith rq (MediaDownload FilesGet'{..})
           = go _fgFileId (Just _fgUpdateViewedDate)
               _fgProjection
               (Just _fgAcknowledgeAbuse)
@@ -243,5 +242,4 @@ instance GoogleRequest (MediaDownload FilesGet')
               _fgOAuthToken
               (Just AltMedia)
           where _ :<|> go
-                  = clientWithRoute (Proxy :: Proxy FilesGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy FilesGetResource) rq

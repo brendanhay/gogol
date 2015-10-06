@@ -260,8 +260,8 @@ instance GoogleAuth AppsOperationsList' where
 
 instance GoogleRequest AppsOperationsList' where
         type Rs AppsOperationsList' = ListOperationsResponse
-        request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsOperationsList'{..}
+        request = requestWith appEngineRequest
+        requestWith rq AppsOperationsList'{..}
           = go _aolAppsId _aolXgafv _aolUploadProtocol
               (Just _aolPp)
               _aolAccessToken
@@ -278,7 +278,6 @@ instance GoogleRequest AppsOperationsList' where
               _aolOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AppsOperationsListResource)
-                      r
-                      u
+                      rq

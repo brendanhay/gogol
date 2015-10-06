@@ -171,8 +171,8 @@ instance GoogleAuth VideosReportAbuse' where
 
 instance GoogleRequest VideosReportAbuse' where
         type Rs VideosReportAbuse' = ()
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideosReportAbuse'{..}
+        request = requestWith youTubeRequest
+        requestWith rq VideosReportAbuse'{..}
           = go _vraOnBehalfOfContentOwner _vraQuotaUser
               (Just _vraPrettyPrint)
               _vraUserIP
@@ -182,7 +182,6 @@ instance GoogleRequest VideosReportAbuse' where
               (Just AltJSON)
               _vraPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VideosReportAbuseResource)
-                      r
-                      u
+                      rq

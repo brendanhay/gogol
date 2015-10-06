@@ -176,8 +176,8 @@ instance GoogleAuth InstancesRestoreBackup' where
 
 instance GoogleRequest InstancesRestoreBackup' where
         type Rs InstancesRestoreBackup' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesRestoreBackup'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq InstancesRestoreBackup'{..}
           = go _irbProject _irbInstance _irbQuotaUser
               (Just _irbPrettyPrint)
               _irbUserIP
@@ -187,7 +187,6 @@ instance GoogleRequest InstancesRestoreBackup' where
               (Just AltJSON)
               _irbPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesRestoreBackupResource)
-                      r
-                      u
+                      rq

@@ -154,8 +154,8 @@ instance GoogleAuth ReadgroupsetsSearch' where
 instance GoogleRequest ReadgroupsetsSearch' where
         type Rs ReadgroupsetsSearch' =
              SearchReadGroupSetsResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReadgroupsetsSearch'{..}
+        request = requestWith genomicsRequest
+        requestWith rq ReadgroupsetsSearch'{..}
           = go _reaQuotaUser (Just _reaPrettyPrint) _reaUserIP
               _reaFields
               _reaKey
@@ -163,7 +163,6 @@ instance GoogleRequest ReadgroupsetsSearch' where
               (Just AltJSON)
               _reaPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReadgroupsetsSearchResource)
-                      r
-                      u
+                      rq

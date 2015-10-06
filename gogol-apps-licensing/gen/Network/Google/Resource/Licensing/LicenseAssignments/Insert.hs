@@ -175,8 +175,8 @@ instance GoogleAuth LicenseAssignmentsInsert' where
 instance GoogleRequest LicenseAssignmentsInsert'
          where
         type Rs LicenseAssignmentsInsert' = LicenseAssignment
-        request = requestWithRoute defReq appsLicensingURL
-        requestWithRoute r u LicenseAssignmentsInsert'{..}
+        request = requestWith appsLicensingRequest
+        requestWith rq LicenseAssignmentsInsert'{..}
           = go _laiProductId _laiSKUId _laiQuotaUser
               (Just _laiPrettyPrint)
               _laiUserIP
@@ -186,7 +186,6 @@ instance GoogleRequest LicenseAssignmentsInsert'
               (Just AltJSON)
               _laiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LicenseAssignmentsInsertResource)
-                      r
-                      u
+                      rq

@@ -142,15 +142,13 @@ instance GoogleAuth QuestsResetAll' where
 
 instance GoogleRequest QuestsResetAll' where
         type Rs QuestsResetAll' = ()
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u QuestsResetAll'{..}
+        request = requestWith gamesManagementRequest
+        requestWith rq QuestsResetAll'{..}
           = go _qraQuotaUser (Just _qraPrettyPrint) _qraUserIP
               _qraFields
               _qraKey
               _qraOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy QuestsResetAllResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy QuestsResetAllResource)
+                      rq

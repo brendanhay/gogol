@@ -211,8 +211,8 @@ instance GoogleAuth VPNTunnelsList' where
 
 instance GoogleRequest VPNTunnelsList' where
         type Rs VPNTunnelsList' = VPNTunnelList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u VPNTunnelsList'{..}
+        request = requestWith computeRequest
+        requestWith rq VPNTunnelsList'{..}
           = go _vtlProject _vtlRegion _vtlFilter _vtlPageToken
               (Just _vtlMaxResults)
               _vtlQuotaUser
@@ -223,7 +223,5 @@ instance GoogleRequest VPNTunnelsList' where
               _vtlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy VPNTunnelsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy VPNTunnelsListResource)
+                      rq

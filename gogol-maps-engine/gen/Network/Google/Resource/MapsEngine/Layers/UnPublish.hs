@@ -150,8 +150,8 @@ instance GoogleAuth LayersUnPublish' where
 
 instance GoogleRequest LayersUnPublish' where
         type Rs LayersUnPublish' = PublishResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u LayersUnPublish'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq LayersUnPublish'{..}
           = go _lupId _lupQuotaUser (Just _lupPrettyPrint)
               _lupUserIP
               _lupFields
@@ -159,7 +159,6 @@ instance GoogleRequest LayersUnPublish' where
               _lupOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LayersUnPublishResource)
-                      r
-                      u
+                      rq

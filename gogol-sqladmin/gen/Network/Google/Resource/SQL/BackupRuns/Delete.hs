@@ -175,8 +175,8 @@ instance GoogleAuth BackupRunsDelete' where
 
 instance GoogleRequest BackupRunsDelete' where
         type Rs BackupRunsDelete' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u BackupRunsDelete'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq BackupRunsDelete'{..}
           = go _brdProject _brdInstance _brdId _brdQuotaUser
               (Just _brdPrettyPrint)
               _brdUserIP
@@ -185,7 +185,6 @@ instance GoogleRequest BackupRunsDelete' where
               _brdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BackupRunsDeleteResource)
-                      r
-                      u
+                      rq

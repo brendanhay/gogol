@@ -16,7 +16,7 @@
 module Network.Google.Container.Types
     (
     -- * Service URL
-      containerURL
+      containerRequest
 
     -- * ListOperationsResponse
     , ListOperationsResponse
@@ -115,9 +115,8 @@ import           Network.Google.Container.Types.Product
 import           Network.Google.Container.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1beta1' of the Google Container Engine API.
-containerURL :: BaseUrl
-containerURL
-  = BaseUrl Https
-      "https://www.googleapis.com/container/v1beta1/projects/"
-      443
+-- | Default request referring to version 'v1beta1' of the Google Container Engine API.
+containerRequest :: RequestBuilder
+containerRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "container/v1beta1/projects/"

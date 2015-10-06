@@ -216,9 +216,8 @@ instance GoogleAuth DeploymentsUpdate' where
 
 instance GoogleRequest DeploymentsUpdate' where
         type Rs DeploymentsUpdate' = Operation
-        request
-          = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u DeploymentsUpdate'{..}
+        request = requestWith deploymentManagerRequest
+        requestWith rq DeploymentsUpdate'{..}
           = go _duProject _duDeployment (Just _duCreatePolicy)
               (Just _duUpdatePolicy)
               (Just _duDeletePolicy)
@@ -231,7 +230,6 @@ instance GoogleRequest DeploymentsUpdate' where
               (Just AltJSON)
               _duPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DeploymentsUpdateResource)
-                      r
-                      u
+                      rq

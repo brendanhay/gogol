@@ -149,8 +149,8 @@ instance GoogleAuth BillingInfoGet' where
 
 instance GoogleRequest BillingInfoGet' where
         type Rs BillingInfoGet' = BillingInfo
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u BillingInfoGet'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq BillingInfoGet'{..}
           = go _bigAccountId _bigQuotaUser
               (Just _bigPrettyPrint)
               _bigUserIP
@@ -159,7 +159,5 @@ instance GoogleRequest BillingInfoGet' where
               _bigOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy BillingInfoGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy BillingInfoGetResource)
+                      rq

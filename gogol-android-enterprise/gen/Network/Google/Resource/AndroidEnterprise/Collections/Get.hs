@@ -164,9 +164,8 @@ instance GoogleAuth CollectionsGet' where
 
 instance GoogleRequest CollectionsGet' where
         type Rs CollectionsGet' = Collection
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u CollectionsGet'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq CollectionsGet'{..}
           = go _cggEnterpriseId _cggCollectionId _cggQuotaUser
               (Just _cggPrettyPrint)
               _cggUserIP
@@ -175,7 +174,5 @@ instance GoogleRequest CollectionsGet' where
               _cggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CollectionsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CollectionsGetResource)
+                      rq

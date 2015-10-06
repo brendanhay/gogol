@@ -197,9 +197,8 @@ instance GoogleRequest
          ManagementUnSampledReportsInsert' where
         type Rs ManagementUnSampledReportsInsert' =
              UnSampledReport
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementUnSampledReportsInsert'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementUnSampledReportsInsert'{..}
           = go _musriAccountId _musriWebPropertyId
               _musriProFileId
               _musriQuotaUser
@@ -211,8 +210,7 @@ instance GoogleRequest
               (Just AltJSON)
               _musriPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementUnSampledReportsInsertResource)
-                      r
-                      u
+                      rq

@@ -172,8 +172,8 @@ instance GoogleAuth ClientAccessInsert' where
 instance GoogleRequest ClientAccessInsert' where
         type Rs ClientAccessInsert' =
              ClientAccessCapabilities
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u ClientAccessInsert'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq ClientAccessInsert'{..}
           = go _caiSponsorAccountId _caiClientAccountId
               _caiQuotaUser
               (Just _caiPrettyPrint)
@@ -184,7 +184,6 @@ instance GoogleRequest ClientAccessInsert' where
               (Just AltJSON)
               _caiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ClientAccessInsertResource)
-                      r
-                      u
+                      rq

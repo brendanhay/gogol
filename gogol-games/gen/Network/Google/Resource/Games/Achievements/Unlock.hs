@@ -150,8 +150,8 @@ instance GoogleAuth AchievementsUnlock' where
 instance GoogleRequest AchievementsUnlock' where
         type Rs AchievementsUnlock' =
              AchievementUnlockResponse
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u AchievementsUnlock'{..}
+        request = requestWith gamesRequest
+        requestWith rq AchievementsUnlock'{..}
           = go _auAchievementId _auQuotaUser
               (Just _auPrettyPrint)
               _auUserIP
@@ -160,7 +160,6 @@ instance GoogleRequest AchievementsUnlock' where
               _auOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AchievementsUnlockResource)
-                      r
-                      u
+                      rq

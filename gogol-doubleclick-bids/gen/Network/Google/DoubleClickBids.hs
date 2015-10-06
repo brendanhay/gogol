@@ -21,7 +21,7 @@ module Network.Google.DoubleClickBids
     -- * API
       DoubleClickBidsAPI
     , doubleClickBidsAPI
-    , doubleClickBidsURL
+    , doubleClickBidsRequest
 
     -- * Service Methods
 

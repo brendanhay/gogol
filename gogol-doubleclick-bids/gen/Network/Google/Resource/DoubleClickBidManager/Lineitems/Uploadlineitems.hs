@@ -150,8 +150,8 @@ instance GoogleRequest LineitemsUploadlineitems'
          where
         type Rs LineitemsUploadlineitems' =
              UploadLineItemsResponse
-        request = requestWithRoute defReq doubleClickBidsURL
-        requestWithRoute r u LineitemsUploadlineitems'{..}
+        request = requestWith doubleClickBidsRequest
+        requestWith rq LineitemsUploadlineitems'{..}
           = go _luQuotaUser (Just _luPrettyPrint) _luUserIP
               _luFields
               _luKey
@@ -159,7 +159,6 @@ instance GoogleRequest LineitemsUploadlineitems'
               (Just AltJSON)
               _luPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LineitemsUploadlineitemsResource)
-                      r
-                      u
+                      rq

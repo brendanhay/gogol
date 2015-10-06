@@ -177,8 +177,8 @@ instance GoogleAuth OrgUnitsPatch' where
 
 instance GoogleRequest OrgUnitsPatch' where
         type Rs OrgUnitsPatch' = OrgUnit
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u OrgUnitsPatch'{..}
+        request = requestWith directoryRequest
+        requestWith rq OrgUnitsPatch'{..}
           = go _oupCustomerId _oupOrgUnitPath _oupQuotaUser
               (Just _oupPrettyPrint)
               _oupUserIP
@@ -188,7 +188,5 @@ instance GoogleRequest OrgUnitsPatch' where
               (Just AltJSON)
               _oupPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy OrgUnitsPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy OrgUnitsPatchResource)
+                      rq

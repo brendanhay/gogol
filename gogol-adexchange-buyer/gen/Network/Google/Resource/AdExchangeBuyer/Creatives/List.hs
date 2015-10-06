@@ -220,8 +220,8 @@ instance GoogleAuth CreativesList' where
 
 instance GoogleRequest CreativesList' where
         type Rs CreativesList' = CreativesList
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u CreativesList'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq CreativesList'{..}
           = go (_clBuyerCreativeId ^. _Default)
               _clOpenAuctionStatusFilter
               (_clAccountId ^. _Default)
@@ -236,7 +236,5 @@ instance GoogleRequest CreativesList' where
               _clOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CreativesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CreativesListResource)
+                      rq

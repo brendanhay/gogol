@@ -192,8 +192,8 @@ instance GoogleAuth SizesList' where
 
 instance GoogleRequest SizesList' where
         type Rs SizesList' = SizesListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SizesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq SizesList'{..}
           = go _slProFileId _slHeight (_slIds ^. _Default)
               _slWidth
               _slIabStandard
@@ -205,6 +205,4 @@ instance GoogleRequest SizesList' where
               _slOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy SizesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SizesListResource) rq

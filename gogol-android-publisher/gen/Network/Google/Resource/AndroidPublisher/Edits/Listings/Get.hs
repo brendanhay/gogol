@@ -177,8 +177,8 @@ instance GoogleAuth EditsListingsGet' where
 
 instance GoogleRequest EditsListingsGet' where
         type Rs EditsListingsGet' = Listing
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsListingsGet'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsListingsGet'{..}
           = go _elgPackageName _elgEditId _elgLanguage
               _elgQuotaUser
               (Just _elgPrettyPrint)
@@ -188,7 +188,6 @@ instance GoogleRequest EditsListingsGet' where
               _elgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsListingsGetResource)
-                      r
-                      u
+                      rq

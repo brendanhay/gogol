@@ -178,8 +178,8 @@ instance GoogleAuth BackendServicesPatch' where
 
 instance GoogleRequest BackendServicesPatch' where
         type Rs BackendServicesPatch' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u BackendServicesPatch'{..}
+        request = requestWith computeRequest
+        requestWith rq BackendServicesPatch'{..}
           = go _bspProject _bspBackendService _bspQuotaUser
               (Just _bspPrettyPrint)
               _bspUserIP
@@ -189,7 +189,6 @@ instance GoogleRequest BackendServicesPatch' where
               (Just AltJSON)
               _bspPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BackendServicesPatchResource)
-                      r
-                      u
+                      rq

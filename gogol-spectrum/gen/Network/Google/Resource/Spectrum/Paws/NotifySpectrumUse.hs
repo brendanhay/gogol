@@ -158,8 +158,8 @@ instance GoogleAuth PawsNotifySpectrumUse' where
 instance GoogleRequest PawsNotifySpectrumUse' where
         type Rs PawsNotifySpectrumUse' =
              PawsNotifySpectrumUseResponse
-        request = requestWithRoute defReq spectrumURL
-        requestWithRoute r u PawsNotifySpectrumUse'{..}
+        request = requestWith spectrumRequest
+        requestWith rq PawsNotifySpectrumUse'{..}
           = go _pnsuQuotaUser (Just _pnsuPrettyPrint)
               _pnsuUserIP
               _pnsuFields
@@ -168,7 +168,6 @@ instance GoogleRequest PawsNotifySpectrumUse' where
               (Just AltJSON)
               _pnsuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PawsNotifySpectrumUseResource)
-                      r
-                      u
+                      rq

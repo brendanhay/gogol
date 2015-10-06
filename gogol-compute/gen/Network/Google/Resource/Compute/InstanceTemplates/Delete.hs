@@ -163,8 +163,8 @@ instance GoogleAuth InstanceTemplatesDelete' where
 
 instance GoogleRequest InstanceTemplatesDelete' where
         type Rs InstanceTemplatesDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceTemplatesDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq InstanceTemplatesDelete'{..}
           = go _itdProject _itdInstanceTemplate _itdQuotaUser
               (Just _itdPrettyPrint)
               _itdUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest InstanceTemplatesDelete' where
               _itdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstanceTemplatesDeleteResource)
-                      r
-                      u
+                      rq

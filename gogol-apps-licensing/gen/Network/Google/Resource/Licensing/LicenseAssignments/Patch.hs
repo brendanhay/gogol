@@ -186,8 +186,8 @@ instance GoogleAuth LicenseAssignmentsPatch' where
 
 instance GoogleRequest LicenseAssignmentsPatch' where
         type Rs LicenseAssignmentsPatch' = LicenseAssignment
-        request = requestWithRoute defReq appsLicensingURL
-        requestWithRoute r u LicenseAssignmentsPatch'{..}
+        request = requestWith appsLicensingRequest
+        requestWith rq LicenseAssignmentsPatch'{..}
           = go _lapProductId _lapSKUId _lapUserId _lapQuotaUser
               (Just _lapPrettyPrint)
               _lapUserIP
@@ -197,7 +197,6 @@ instance GoogleRequest LicenseAssignmentsPatch' where
               (Just AltJSON)
               _lapPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LicenseAssignmentsPatchResource)
-                      r
-                      u
+                      rq

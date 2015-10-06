@@ -177,9 +177,8 @@ instance GoogleAuth PurchasesSubscriptionsRefund'
 instance GoogleRequest PurchasesSubscriptionsRefund'
          where
         type Rs PurchasesSubscriptionsRefund' = ()
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u
-          PurchasesSubscriptionsRefund'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq PurchasesSubscriptionsRefund'{..}
           = go _pPackageName _pSubscriptionId _pToken
               _pQuotaUser
               (Just _pPrettyPrint)
@@ -189,7 +188,6 @@ instance GoogleRequest PurchasesSubscriptionsRefund'
               _pOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PurchasesSubscriptionsRefundResource)
-                      r
-                      u
+                      rq

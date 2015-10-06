@@ -16,7 +16,7 @@
 module Network.Google.Spectrum.Types
     (
     -- * Service URL
-      spectrumURL
+      spectrumRequest
 
     -- * GeoLocationPolygon
     , GeoLocationPolygon
@@ -291,9 +291,8 @@ import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types.Product
 import           Network.Google.Spectrum.Types.Sum
 
--- | URL referring to version 'v1explorer' of the Google Spectrum Database API.
-spectrumURL :: BaseUrl
-spectrumURL
-  = BaseUrl Https
-      "https://www.googleapis.com/spectrum/v1explorer/paws/"
-      443
+-- | Default request referring to version 'v1explorer' of the Google Spectrum Database API.
+spectrumRequest :: RequestBuilder
+spectrumRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "spectrum/v1explorer/paws/"

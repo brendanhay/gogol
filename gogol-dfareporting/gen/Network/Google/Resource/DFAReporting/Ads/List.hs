@@ -505,8 +505,8 @@ instance GoogleAuth AdsList' where
 
 instance GoogleRequest AdsList' where
         type Rs AdsList' = AdsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AdsList'{..}
           = go _adsProFileId
               (_adsRemarketingListIds ^. _Default)
               (_adsLandingPageIds ^. _Default)
@@ -541,5 +541,4 @@ instance GoogleRequest AdsList' where
               _adsOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy AdsListResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy AdsListResource) rq

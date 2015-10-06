@@ -166,8 +166,8 @@ instance GoogleAuth EditsDetailsGet' where
 
 instance GoogleRequest EditsDetailsGet' where
         type Rs EditsDetailsGet' = AppDetails
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsDetailsGet'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsDetailsGet'{..}
           = go _edgPackageName _edgEditId _edgQuotaUser
               (Just _edgPrettyPrint)
               _edgUserIP
@@ -176,7 +176,6 @@ instance GoogleRequest EditsDetailsGet' where
               _edgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsDetailsGetResource)
-                      r
-                      u
+                      rq

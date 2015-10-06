@@ -151,8 +151,8 @@ instance GoogleAuth TablesPermissionsList' where
 instance GoogleRequest TablesPermissionsList' where
         type Rs TablesPermissionsList' =
              PermissionsListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u TablesPermissionsList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesPermissionsList'{..}
           = go _tplId _tplQuotaUser (Just _tplPrettyPrint)
               _tplUserIP
               _tplFields
@@ -160,7 +160,6 @@ instance GoogleRequest TablesPermissionsList' where
               _tplOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TablesPermissionsListResource)
-                      r
-                      u
+                      rq

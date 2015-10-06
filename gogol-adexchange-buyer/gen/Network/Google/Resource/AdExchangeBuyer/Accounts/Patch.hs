@@ -157,8 +157,8 @@ instance GoogleAuth AccountsPatch' where
 
 instance GoogleRequest AccountsPatch' where
         type Rs AccountsPatch' = Account
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u AccountsPatch'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq AccountsPatch'{..}
           = go _apId _apQuotaUser (Just _apPrettyPrint)
               _apUserIP
               _apFields
@@ -167,7 +167,5 @@ instance GoogleRequest AccountsPatch' where
               (Just AltJSON)
               _apPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AccountsPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AccountsPatchResource)
+                      rq

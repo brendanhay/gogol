@@ -202,9 +202,8 @@ instance GoogleRequest TargetInstancesAggregatedList'
          where
         type Rs TargetInstancesAggregatedList' =
              TargetInstanceAggregatedList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u
-          TargetInstancesAggregatedList'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetInstancesAggregatedList'{..}
           = go _tialProject _tialFilter _tialPageToken
               (Just _tialMaxResults)
               _tialQuotaUser
@@ -215,8 +214,7 @@ instance GoogleRequest TargetInstancesAggregatedList'
               _tialOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy TargetInstancesAggregatedListResource)
-                      r
-                      u
+                      rq

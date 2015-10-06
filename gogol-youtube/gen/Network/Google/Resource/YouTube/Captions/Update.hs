@@ -226,8 +226,8 @@ instance GoogleAuth CaptionsUpdate' where
 
 instance GoogleRequest CaptionsUpdate' where
         type Rs CaptionsUpdate' = Caption
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CaptionsUpdate'{..}
+        request = requestWith youTubeRequest
+        requestWith rq CaptionsUpdate'{..}
           = go (Just _capPart) _capOnBehalfOf
               _capOnBehalfOfContentOwner
               _capSync
@@ -241,7 +241,5 @@ instance GoogleRequest CaptionsUpdate' where
               _capPayload
               _capMedia
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CaptionsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CaptionsUpdateResource)
+                      rq

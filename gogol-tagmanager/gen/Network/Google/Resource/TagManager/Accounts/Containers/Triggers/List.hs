@@ -170,9 +170,8 @@ instance GoogleRequest
          AccountsContainersTriggersList' where
         type Rs AccountsContainersTriggersList' =
              ListTriggersResponse
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersTriggersList'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersTriggersList'{..}
           = go _actlAccountId _actlContainerId _actlQuotaUser
               (Just _actlPrettyPrint)
               _actlUserIP
@@ -181,8 +180,7 @@ instance GoogleRequest
               _actlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersTriggersListResource)
-                      r
-                      u
+                      rq

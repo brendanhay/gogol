@@ -263,8 +263,8 @@ instance GoogleAuth ObjectsInsert' where
 
 instance GoogleRequest ObjectsInsert' where
         type Rs ObjectsInsert' = Object
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsInsert'{..}
+        request = requestWith storageRequest
+        requestWith rq ObjectsInsert'{..}
           = go _oiBucket _oiIfMetagenerationMatch
               _oiIfGenerationNotMatch
               _oiIfGenerationMatch
@@ -281,17 +281,14 @@ instance GoogleRequest ObjectsInsert' where
               _oiPayload
               _oiMedia
           where go :<|> _
-                  = clientWithRoute
-                      (Proxy :: Proxy ObjectsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ObjectsInsertResource)
+                      rq
 
 instance GoogleRequest (MediaDownload ObjectsInsert')
          where
         type Rs (MediaDownload ObjectsInsert') = Body
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u
-          (MediaDownload ObjectsInsert'{..})
+        request = requestWith storageRequest
+        requestWith rq (MediaDownload ObjectsInsert'{..})
           = go _oiBucket _oiIfMetagenerationMatch
               _oiIfGenerationNotMatch
               _oiIfGenerationMatch
@@ -308,7 +305,5 @@ instance GoogleRequest (MediaDownload ObjectsInsert')
               _oiPayload
               _oiMedia
           where _ :<|> go
-                  = clientWithRoute
-                      (Proxy :: Proxy ObjectsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ObjectsInsertResource)
+                      rq

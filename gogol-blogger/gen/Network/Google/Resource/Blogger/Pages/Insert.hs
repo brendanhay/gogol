@@ -169,8 +169,8 @@ instance GoogleAuth PagesInsert' where
 
 instance GoogleRequest PagesInsert' where
         type Rs PagesInsert' = Page
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PagesInsert'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PagesInsert'{..}
           = go _piBlogId _piIsDraft _piQuotaUser
               (Just _piPrettyPrint)
               _piUserIP
@@ -180,7 +180,4 @@ instance GoogleRequest PagesInsert' where
               (Just AltJSON)
               _piPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PagesInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PagesInsertResource) rq

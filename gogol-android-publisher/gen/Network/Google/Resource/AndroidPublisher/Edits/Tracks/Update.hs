@@ -191,8 +191,8 @@ instance GoogleAuth EditsTracksUpdate' where
 
 instance GoogleRequest EditsTracksUpdate' where
         type Rs EditsTracksUpdate' = Track
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsTracksUpdate'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsTracksUpdate'{..}
           = go _etuPackageName _etuEditId _etuTrack
               _etuQuotaUser
               (Just _etuPrettyPrint)
@@ -203,7 +203,6 @@ instance GoogleRequest EditsTracksUpdate' where
               (Just AltJSON)
               _etuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsTracksUpdateResource)
-                      r
-                      u
+                      rq

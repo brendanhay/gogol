@@ -247,8 +247,8 @@ instance GoogleAuth ObjectsPatch' where
 
 instance GoogleRequest ObjectsPatch' where
         type Rs ObjectsPatch' = Object
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsPatch'{..}
+        request = requestWith storageRequest
+        requestWith rq ObjectsPatch'{..}
           = go _opBucket _opObject _opIfMetagenerationMatch
               _opIfGenerationNotMatch
               _opIfGenerationMatch
@@ -264,7 +264,5 @@ instance GoogleRequest ObjectsPatch' where
               (Just AltJSON)
               _opPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ObjectsPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ObjectsPatchResource)
+                      rq

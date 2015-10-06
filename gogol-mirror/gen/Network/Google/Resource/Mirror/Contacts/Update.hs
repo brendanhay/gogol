@@ -157,8 +157,8 @@ instance GoogleAuth ContactsUpdate' where
 
 instance GoogleRequest ContactsUpdate' where
         type Rs ContactsUpdate' = Contact
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u ContactsUpdate'{..}
+        request = requestWith mirrorRequest
+        requestWith rq ContactsUpdate'{..}
           = go _cuId _cuQuotaUser (Just _cuPrettyPrint)
               _cuUserIP
               _cuFields
@@ -167,7 +167,5 @@ instance GoogleRequest ContactsUpdate' where
               (Just AltJSON)
               _cuPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ContactsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ContactsUpdateResource)
+                      rq

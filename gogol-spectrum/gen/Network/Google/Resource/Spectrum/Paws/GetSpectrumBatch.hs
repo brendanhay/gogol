@@ -154,8 +154,8 @@ instance GoogleAuth PawsGetSpectrumBatch' where
 instance GoogleRequest PawsGetSpectrumBatch' where
         type Rs PawsGetSpectrumBatch' =
              PawsGetSpectrumBatchResponse
-        request = requestWithRoute defReq spectrumURL
-        requestWithRoute r u PawsGetSpectrumBatch'{..}
+        request = requestWith spectrumRequest
+        requestWith rq PawsGetSpectrumBatch'{..}
           = go _pgsbQuotaUser (Just _pgsbPrettyPrint)
               _pgsbUserIP
               _pgsbFields
@@ -164,7 +164,6 @@ instance GoogleRequest PawsGetSpectrumBatch' where
               (Just AltJSON)
               _pgsbPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PawsGetSpectrumBatchResource)
-                      r
-                      u
+                      rq

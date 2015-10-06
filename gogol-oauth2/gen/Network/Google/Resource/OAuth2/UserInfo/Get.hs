@@ -138,15 +138,12 @@ instance GoogleAuth UserInfoGet' where
 
 instance GoogleRequest UserInfoGet' where
         type Rs UserInfoGet' = UserInfoplus
-        request = requestWithRoute defReq oAuth2URL
-        requestWithRoute r u UserInfoGet'{..}
+        request = requestWith oAuth2Request
+        requestWith rq UserInfoGet'{..}
           = go _uigQuotaUser (Just _uigPrettyPrint) _uigUserIP
               _uigFields
               _uigKey
               _uigOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy UserInfoGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UserInfoGetResource) rq

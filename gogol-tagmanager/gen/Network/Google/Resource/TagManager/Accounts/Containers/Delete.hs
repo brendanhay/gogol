@@ -164,8 +164,8 @@ instance GoogleAuth AccountsContainersDelete' where
 instance GoogleRequest AccountsContainersDelete'
          where
         type Rs AccountsContainersDelete' = ()
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersDelete'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersDelete'{..}
           = go _acdAccountId _acdContainerId _acdQuotaUser
               (Just _acdPrettyPrint)
               _acdUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest AccountsContainersDelete'
               _acdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsContainersDeleteResource)
-                      r
-                      u
+                      rq

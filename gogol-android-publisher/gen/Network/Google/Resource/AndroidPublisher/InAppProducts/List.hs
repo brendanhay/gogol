@@ -188,8 +188,8 @@ instance GoogleAuth InAppProductsList' where
 instance GoogleRequest InAppProductsList' where
         type Rs InAppProductsList' =
              InAppProductsListResponse
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u InAppProductsList'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq InAppProductsList'{..}
           = go _iaplPackageName _iaplToken _iaplStartIndex
               _iaplMaxResults
               _iaplQuotaUser
@@ -200,7 +200,6 @@ instance GoogleRequest InAppProductsList' where
               _iaplOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InAppProductsListResource)
-                      r
-                      u
+                      rq

@@ -22,7 +22,7 @@ module Network.Google.Plus
     -- * API
       PlusAPI
     , plusAPI
-    , plusURL
+    , plusRequest
 
     -- * Service Methods
 

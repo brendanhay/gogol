@@ -21,7 +21,7 @@ module Network.Google.AppsCalendar
     -- * API
       AppsCalendarAPI
     , appsCalendarAPI
-    , appsCalendarURL
+    , appsCalendarRequest
 
     -- * Service Methods
 

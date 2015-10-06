@@ -155,8 +155,8 @@ instance GoogleRequest RelyingPartyDownloadAccount'
          where
         type Rs RelyingPartyDownloadAccount' =
              DownloadAccountResponse
-        request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingPartyDownloadAccount'{..}
+        request = requestWith identityToolkitRequest
+        requestWith rq RelyingPartyDownloadAccount'{..}
           = go _rpdaQuotaUser (Just _rpdaPrettyPrint)
               _rpdaUserIP
               _rpdaFields
@@ -165,7 +165,6 @@ instance GoogleRequest RelyingPartyDownloadAccount'
               (Just AltJSON)
               _rpdaPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RelyingPartyDownloadAccountResource)
-                      r
-                      u
+                      rq

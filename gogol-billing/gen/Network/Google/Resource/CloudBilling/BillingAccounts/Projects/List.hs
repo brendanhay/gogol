@@ -256,8 +256,8 @@ instance GoogleRequest BillingAccountsProjectsList'
          where
         type Rs BillingAccountsProjectsList' =
              ListProjectBillingInfoResponse
-        request = requestWithRoute defReq billingURL
-        requestWithRoute r u BillingAccountsProjectsList'{..}
+        request = requestWith billingRequest
+        requestWith rq BillingAccountsProjectsList'{..}
           = go _baplName _baplXgafv _baplUploadProtocol
               (Just _baplPp)
               _baplAccessToken
@@ -273,7 +273,6 @@ instance GoogleRequest BillingAccountsProjectsList'
               _baplOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BillingAccountsProjectsListResource)
-                      r
-                      u
+                      rq

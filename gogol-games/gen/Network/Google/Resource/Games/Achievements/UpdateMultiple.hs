@@ -153,8 +153,8 @@ instance GoogleRequest AchievementsUpdateMultiple'
          where
         type Rs AchievementsUpdateMultiple' =
              AchievementUpdateMultipleResponse
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u AchievementsUpdateMultiple'{..}
+        request = requestWith gamesRequest
+        requestWith rq AchievementsUpdateMultiple'{..}
           = go _aumQuotaUser (Just _aumPrettyPrint) _aumUserIP
               _aumFields
               _aumKey
@@ -162,7 +162,6 @@ instance GoogleRequest AchievementsUpdateMultiple'
               (Just AltJSON)
               _aumPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AchievementsUpdateMultipleResource)
-                      r
-                      u
+                      rq

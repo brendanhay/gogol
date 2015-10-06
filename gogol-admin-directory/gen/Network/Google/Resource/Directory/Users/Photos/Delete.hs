@@ -151,8 +151,8 @@ instance GoogleAuth UsersPhotosDelete' where
 
 instance GoogleRequest UsersPhotosDelete' where
         type Rs UsersPhotosDelete' = ()
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u UsersPhotosDelete'{..}
+        request = requestWith directoryRequest
+        requestWith rq UsersPhotosDelete'{..}
           = go _updUserKey _updQuotaUser (Just _updPrettyPrint)
               _updUserIP
               _updFields
@@ -160,7 +160,6 @@ instance GoogleRequest UsersPhotosDelete' where
               _updOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersPhotosDeleteResource)
-                      r
-                      u
+                      rq

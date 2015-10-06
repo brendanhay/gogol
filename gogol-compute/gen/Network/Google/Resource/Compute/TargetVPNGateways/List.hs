@@ -213,8 +213,8 @@ instance GoogleAuth TargetVPNGatewaysList' where
 
 instance GoogleRequest TargetVPNGatewaysList' where
         type Rs TargetVPNGatewaysList' = TargetVPNGatewayList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetVPNGatewaysList'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetVPNGatewaysList'{..}
           = go _tvglProject _tvglRegion _tvglFilter
               _tvglPageToken
               (Just _tvglMaxResults)
@@ -226,7 +226,6 @@ instance GoogleRequest TargetVPNGatewaysList' where
               _tvglOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetVPNGatewaysListResource)
-                      r
-                      u
+                      rq

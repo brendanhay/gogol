@@ -16,7 +16,7 @@
 module Network.Google.Debugger.Types
     (
     -- * Service URL
-      debuggerURL
+      debuggerRequest
 
     -- * RegisterDebuggeeResponse
     , RegisterDebuggeeResponse
@@ -199,9 +199,9 @@ import           Network.Google.Debugger.Types.Product
 import           Network.Google.Debugger.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v2' of the Google Cloud Debugger API.
-debuggerURL :: BaseUrl
-debuggerURL
-  = BaseUrl Https
+-- | Default request referring to version 'v2' of the Google Cloud Debugger API.
+debuggerRequest :: RequestBuilder
+debuggerRequest
+  = defaultRequest
       "https://clouddebugger.googleapis.com/"
-      443
+      ""

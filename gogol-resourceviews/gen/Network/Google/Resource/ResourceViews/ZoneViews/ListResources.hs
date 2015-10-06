@@ -246,8 +246,8 @@ instance GoogleAuth ZoneViewsListResources' where
 instance GoogleRequest ZoneViewsListResources' where
         type Rs ZoneViewsListResources' =
              ZoneViewsListResourcesResponse
-        request = requestWithRoute defReq resourceViewsURL
-        requestWithRoute r u ZoneViewsListResources'{..}
+        request = requestWith resourceViewsRequest
+        requestWith rq ZoneViewsListResources'{..}
           = go _zvlrProject _zvlrZone _zvlrResourceView
               (Just _zvlrListState)
               _zvlrFormat
@@ -262,7 +262,6 @@ instance GoogleRequest ZoneViewsListResources' where
               _zvlrOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ZoneViewsListResourcesResource)
-                      r
-                      u
+                      rq

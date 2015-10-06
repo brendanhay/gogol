@@ -230,8 +230,8 @@ instance GoogleAuth EventsPatch' where
 
 instance GoogleRequest EventsPatch' where
         type Rs EventsPatch' = Event
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsPatch'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq EventsPatch'{..}
           = go _epCalendarId _epEventId _epMaxAttendees
               _epSendNotifications
               _epSupportsAttachments
@@ -245,7 +245,4 @@ instance GoogleRequest EventsPatch' where
               (Just AltJSON)
               _epPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EventsPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EventsPatchResource) rq

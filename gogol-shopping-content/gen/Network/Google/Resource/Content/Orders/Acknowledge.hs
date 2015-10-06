@@ -173,8 +173,8 @@ instance GoogleAuth OrdersAcknowledge' where
 instance GoogleRequest OrdersAcknowledge' where
         type Rs OrdersAcknowledge' =
              OrdersAcknowledgeResponse
-        request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersAcknowledge'{..}
+        request = requestWith shoppingContentRequest
+        requestWith rq OrdersAcknowledge'{..}
           = go _oaMerchantId _oaOrderId _oaQuotaUser
               (Just _oaPrettyPrint)
               _oaUserIP
@@ -184,7 +184,6 @@ instance GoogleRequest OrdersAcknowledge' where
               (Just AltJSON)
               _oaPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OrdersAcknowledgeResource)
-                      r
-                      u
+                      rq

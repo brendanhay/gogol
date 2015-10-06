@@ -163,8 +163,8 @@ instance GoogleAuth UsersLabelsDelete' where
 
 instance GoogleRequest UsersLabelsDelete' where
         type Rs UsersLabelsDelete' = ()
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersLabelsDelete'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersLabelsDelete'{..}
           = go _uldUserId _uldId _uldQuotaUser
               (Just _uldPrettyPrint)
               _uldUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest UsersLabelsDelete' where
               _uldOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersLabelsDeleteResource)
-                      r
-                      u
+                      rq

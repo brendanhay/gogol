@@ -162,8 +162,8 @@ instance GoogleAuth UsersThreadsTrash' where
 
 instance GoogleRequest UsersThreadsTrash' where
         type Rs UsersThreadsTrash' = Thread
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersThreadsTrash'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersThreadsTrash'{..}
           = go _uttUserId _uttId _uttQuotaUser
               (Just _uttPrettyPrint)
               _uttUserIP
@@ -172,7 +172,6 @@ instance GoogleRequest UsersThreadsTrash' where
               _uttOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersThreadsTrashResource)
-                      r
-                      u
+                      rq

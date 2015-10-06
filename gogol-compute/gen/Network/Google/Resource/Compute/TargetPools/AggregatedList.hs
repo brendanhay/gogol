@@ -201,8 +201,8 @@ instance GoogleRequest TargetPoolsAggregatedList'
          where
         type Rs TargetPoolsAggregatedList' =
              TargetPoolAggregatedList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsAggregatedList'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetPoolsAggregatedList'{..}
           = go _tpalProject _tpalFilter _tpalPageToken
               (Just _tpalMaxResults)
               _tpalQuotaUser
@@ -213,7 +213,6 @@ instance GoogleRequest TargetPoolsAggregatedList'
               _tpalOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetPoolsAggregatedListResource)
-                      r
-                      u
+                      rq

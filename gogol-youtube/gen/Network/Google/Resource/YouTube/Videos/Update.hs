@@ -194,8 +194,8 @@ instance GoogleAuth VideosUpdate' where
 
 instance GoogleRequest VideosUpdate' where
         type Rs VideosUpdate' = Video
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideosUpdate'{..}
+        request = requestWith youTubeRequest
+        requestWith rq VideosUpdate'{..}
           = go (Just _vuPart) _vuOnBehalfOfContentOwner
               _vuQuotaUser
               (Just _vuPrettyPrint)
@@ -206,7 +206,5 @@ instance GoogleRequest VideosUpdate' where
               (Just AltJSON)
               _vuPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy VideosUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy VideosUpdateResource)
+                      rq

@@ -218,8 +218,8 @@ instance GoogleAuth ObjectsCompose' where
 
 instance GoogleRequest ObjectsCompose' where
         type Rs ObjectsCompose' = Object
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsCompose'{..}
+        request = requestWith storageRequest
+        requestWith rq ObjectsCompose'{..}
           = go _oDestinationBucket _oDestinationObject
               _oIfMetagenerationMatch
               _oIfGenerationMatch
@@ -232,17 +232,14 @@ instance GoogleRequest ObjectsCompose' where
               (Just AltJSON)
               _oPayload
           where go :<|> _
-                  = clientWithRoute
-                      (Proxy :: Proxy ObjectsComposeResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ObjectsComposeResource)
+                      rq
 
 instance GoogleRequest
          (MediaDownload ObjectsCompose') where
         type Rs (MediaDownload ObjectsCompose') = Body
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u
-          (MediaDownload ObjectsCompose'{..})
+        request = requestWith storageRequest
+        requestWith rq (MediaDownload ObjectsCompose'{..})
           = go _oDestinationBucket _oDestinationObject
               _oIfMetagenerationMatch
               _oIfGenerationMatch
@@ -255,7 +252,5 @@ instance GoogleRequest
               (Just AltMedia)
               _oPayload
           where _ :<|> go
-                  = clientWithRoute
-                      (Proxy :: Proxy ObjectsComposeResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ObjectsComposeResource)
+                      rq

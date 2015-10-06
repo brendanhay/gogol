@@ -159,8 +159,8 @@ instance GoogleAuth DatasetsGet' where
 
 instance GoogleRequest DatasetsGet' where
         type Rs DatasetsGet' = Dataset
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u DatasetsGet'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq DatasetsGet'{..}
           = go _dgProjectId _dgDatasetId _dgQuotaUser
               (Just _dgPrettyPrint)
               _dgUserIP
@@ -169,7 +169,4 @@ instance GoogleRequest DatasetsGet' where
               _dgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DatasetsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DatasetsGetResource) rq

@@ -652,8 +652,8 @@ instance GoogleAuth SearchList' where
 
 instance GoogleRequest SearchList' where
         type Rs SearchList' = SearchListResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u SearchList'{..}
+        request = requestWith youTubeRequest
+        requestWith rq SearchList'{..}
           = go (Just _slPart) _slPublishedAfter
               _slVideoDefinition
               _slVideoDuration
@@ -692,6 +692,4 @@ instance GoogleRequest SearchList' where
               _slOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy SearchListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SearchListResource) rq

@@ -203,8 +203,8 @@ instance GoogleRequest LinuxGetAuthorizedKeysView'
          where
         type Rs LinuxGetAuthorizedKeysView' =
              LinuxGetAuthorizedKeysViewResponse
-        request = requestWithRoute defReq userAccountsURL
-        requestWithRoute r u LinuxGetAuthorizedKeysView'{..}
+        request = requestWith userAccountsRequest
+        requestWith rq LinuxGetAuthorizedKeysView'{..}
           = go _lgakvProject _lgakvZone _lgakvUser
               (Just _lgakvInstance)
               _lgakvLogin
@@ -216,7 +216,6 @@ instance GoogleRequest LinuxGetAuthorizedKeysView'
               _lgakvOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LinuxGetAuthorizedKeysViewResource)
-                      r
-                      u
+                      rq

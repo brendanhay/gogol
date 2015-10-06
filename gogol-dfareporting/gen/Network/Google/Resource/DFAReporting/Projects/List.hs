@@ -236,8 +236,8 @@ instance GoogleAuth ProjectsList' where
 
 instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ProjectsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ProjectsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ProjectsList'{..}
           = go _plProFileId _plSearchString
               (_plIds ^. _Default)
               _plSortOrder
@@ -253,7 +253,5 @@ instance GoogleRequest ProjectsList' where
               _plOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ProjectsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ProjectsListResource)
+                      rq

@@ -209,8 +209,8 @@ instance GoogleAuth GroupsList' where
 
 instance GoogleRequest GroupsList' where
         type Rs GroupsList' = GroupList
-        request = requestWithRoute defReq userAccountsURL
-        requestWithRoute r u GroupsList'{..}
+        request = requestWith userAccountsRequest
+        requestWith rq GroupsList'{..}
           = go _glProject _glOrderBy _glFilter _glPageToken
               (Just _glMaxResults)
               _glQuotaUser
@@ -221,6 +221,4 @@ instance GoogleRequest GroupsList' where
               _glOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy GroupsListResource) rq

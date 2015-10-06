@@ -159,8 +159,8 @@ instance GoogleAuth GroupsPatch' where
 
 instance GoogleRequest GroupsPatch' where
         type Rs GroupsPatch' = Group
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u GroupsPatch'{..}
+        request = requestWith directoryRequest
+        requestWith rq GroupsPatch'{..}
           = go _gpGroupKey _gpQuotaUser (Just _gpPrettyPrint)
               _gpUserIP
               _gpFields
@@ -169,7 +169,4 @@ instance GoogleRequest GroupsPatch' where
               (Just AltJSON)
               _gpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy GroupsPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy GroupsPatchResource) rq

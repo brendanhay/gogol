@@ -213,8 +213,8 @@ instance GoogleAuth LiveStreamsInsert' where
 
 instance GoogleRequest LiveStreamsInsert' where
         type Rs LiveStreamsInsert' = LiveStream
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u LiveStreamsInsert'{..}
+        request = requestWith youTubeRequest
+        requestWith rq LiveStreamsInsert'{..}
           = go (Just _lsiPart) _lsiOnBehalfOfContentOwner
               _lsiOnBehalfOfContentOwnerChannel
               _lsiQuotaUser
@@ -226,7 +226,6 @@ instance GoogleRequest LiveStreamsInsert' where
               (Just AltJSON)
               _lsiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LiveStreamsInsertResource)
-                      r
-                      u
+                      rq

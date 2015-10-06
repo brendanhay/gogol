@@ -196,8 +196,8 @@ instance GoogleAuth LocationList' where
 
 instance GoogleRequest LocationList' where
         type Rs LocationList' = LocationListResponse
-        request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u LocationList'{..}
+        request = requestWith mapsCoordinateRequest
+        requestWith rq LocationList'{..}
           = go _llTeamId _llWorkerEmail
               (Just _llStartTimestampMs)
               _llPageToken
@@ -210,7 +210,5 @@ instance GoogleRequest LocationList' where
               _llOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy LocationListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy LocationListResource)
+                      rq

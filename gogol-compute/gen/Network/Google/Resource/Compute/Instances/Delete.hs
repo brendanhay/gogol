@@ -175,8 +175,8 @@ instance GoogleAuth InstancesDelete' where
 
 instance GoogleRequest InstancesDelete' where
         type Rs InstancesDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq InstancesDelete'{..}
           = go _insProject _insZone _insInstance _insQuotaUser
               (Just _insPrettyPrint)
               _insUserIP
@@ -185,7 +185,6 @@ instance GoogleRequest InstancesDelete' where
               _insOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesDeleteResource)
-                      r
-                      u
+                      rq

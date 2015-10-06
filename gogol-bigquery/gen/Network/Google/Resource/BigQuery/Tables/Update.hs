@@ -188,8 +188,8 @@ instance GoogleAuth TablesUpdate' where
 
 instance GoogleRequest TablesUpdate' where
         type Rs TablesUpdate' = Table
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u TablesUpdate'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq TablesUpdate'{..}
           = go _tuProjectId _tuDatasetId _tuTableId
               _tuQuotaUser
               (Just _tuPrettyPrint)
@@ -200,7 +200,5 @@ instance GoogleRequest TablesUpdate' where
               (Just AltJSON)
               _tuPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TablesUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TablesUpdateResource)
+                      rq

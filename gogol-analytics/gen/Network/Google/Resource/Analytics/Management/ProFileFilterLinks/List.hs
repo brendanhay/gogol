@@ -215,9 +215,8 @@ instance GoogleRequest
          ManagementProFileFilterLinksList' where
         type Rs ManagementProFileFilterLinksList' =
              ProFileFilterLinks
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementProFileFilterLinksList'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementProFileFilterLinksList'{..}
           = go _mpffllAccountId _mpffllWebPropertyId
               _mpffllProFileId
               _mpffllStartIndex
@@ -230,8 +229,7 @@ instance GoogleRequest
               _mpffllOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementProFileFilterLinksListResource)
-                      r
-                      u
+                      rq

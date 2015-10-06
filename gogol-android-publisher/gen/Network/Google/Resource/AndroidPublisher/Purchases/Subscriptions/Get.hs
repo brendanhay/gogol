@@ -183,8 +183,8 @@ instance GoogleRequest PurchasesSubscriptionsGet'
          where
         type Rs PurchasesSubscriptionsGet' =
              SubscriptionPurchase
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u PurchasesSubscriptionsGet'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq PurchasesSubscriptionsGet'{..}
           = go _psgPackageName _psgSubscriptionId _psgToken
               _psgQuotaUser
               (Just _psgPrettyPrint)
@@ -194,7 +194,6 @@ instance GoogleRequest PurchasesSubscriptionsGet'
               _psgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PurchasesSubscriptionsGetResource)
-                      r
-                      u
+                      rq

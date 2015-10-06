@@ -176,8 +176,8 @@ instance GoogleAuth ManagementFiltersList' where
 
 instance GoogleRequest ManagementFiltersList' where
         type Rs ManagementFiltersList' = Filters
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementFiltersList'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementFiltersList'{..}
           = go _mflAccountId _mflStartIndex _mflMaxResults
               _mflQuotaUser
               (Just _mflPrettyPrint)
@@ -187,7 +187,6 @@ instance GoogleRequest ManagementFiltersList' where
               _mflOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementFiltersListResource)
-                      r
-                      u
+                      rq

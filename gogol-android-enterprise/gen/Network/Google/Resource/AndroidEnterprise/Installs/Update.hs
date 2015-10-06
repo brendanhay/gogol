@@ -203,9 +203,8 @@ instance GoogleAuth InstallsUpdate' where
 
 instance GoogleRequest InstallsUpdate' where
         type Rs InstallsUpdate' = Install
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u InstallsUpdate'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq InstallsUpdate'{..}
           = go _iuEnterpriseId _iuUserId _iuDeviceId
               _iuInstallId
               _iuQuotaUser
@@ -217,7 +216,5 @@ instance GoogleRequest InstallsUpdate' where
               (Just AltJSON)
               _iuPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy InstallsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy InstallsUpdateResource)
+                      rq

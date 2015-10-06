@@ -178,8 +178,8 @@ instance GoogleAuth ChromeosDevicesGet' where
 
 instance GoogleRequest ChromeosDevicesGet' where
         type Rs ChromeosDevicesGet' = ChromeOSDevice
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u ChromeosDevicesGet'{..}
+        request = requestWith directoryRequest
+        requestWith rq ChromeosDevicesGet'{..}
           = go _cdgCustomerId _cdgDeviceId _cdgProjection
               _cdgQuotaUser
               (Just _cdgPrettyPrint)
@@ -189,7 +189,6 @@ instance GoogleRequest ChromeosDevicesGet' where
               _cdgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ChromeosDevicesGetResource)
-                      r
-                      u
+                      rq

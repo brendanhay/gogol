@@ -191,8 +191,8 @@ instance GoogleAuth CustomerUsageReportsGet' where
 
 instance GoogleRequest CustomerUsageReportsGet' where
         type Rs CustomerUsageReportsGet' = UsageReports
-        request = requestWithRoute defReq reportsURL
-        requestWithRoute r u CustomerUsageReportsGet'{..}
+        request = requestWith reportsRequest
+        requestWith rq CustomerUsageReportsGet'{..}
           = go _curgDate _curgCustomerId _curgParameters
               _curgPageToken
               _curgQuotaUser
@@ -203,7 +203,6 @@ instance GoogleRequest CustomerUsageReportsGet' where
               _curgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CustomerUsageReportsGetResource)
-                      r
-                      u
+                      rq

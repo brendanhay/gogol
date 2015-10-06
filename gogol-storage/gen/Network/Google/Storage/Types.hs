@@ -16,7 +16,7 @@
 module Network.Google.Storage.Types
     (
     -- * Service URL
-      storageURL
+      storageRequest
 
     -- * ObjectOwner
     , ObjectOwner
@@ -267,9 +267,8 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types.Product
 import           Network.Google.Storage.Types.Sum
 
--- | URL referring to version 'v1beta2' of the Cloud Storage API.
-storageURL :: BaseUrl
-storageURL
-  = BaseUrl Https
-      "https://www.googleapis.com/storage/v1beta2/"
-      443
+-- | Default request referring to version 'v1beta2' of the Cloud Storage API.
+storageRequest :: RequestBuilder
+storageRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "storage/v1beta2/"

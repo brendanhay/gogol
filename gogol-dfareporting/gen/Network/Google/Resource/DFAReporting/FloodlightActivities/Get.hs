@@ -158,8 +158,8 @@ instance GoogleAuth FloodlightActivitiesGet' where
 
 instance GoogleRequest FloodlightActivitiesGet' where
         type Rs FloodlightActivitiesGet' = FloodlightActivity
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FloodlightActivitiesGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FloodlightActivitiesGet'{..}
           = go _fProFileId _fId _fQuotaUser
               (Just _fPrettyPrint)
               _fUserIP
@@ -168,7 +168,6 @@ instance GoogleRequest FloodlightActivitiesGet' where
               _fOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy FloodlightActivitiesGetResource)
-                      r
-                      u
+                      rq

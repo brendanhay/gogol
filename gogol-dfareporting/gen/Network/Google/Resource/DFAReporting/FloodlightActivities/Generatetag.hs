@@ -168,9 +168,8 @@ instance GoogleRequest
          FloodlightActivitiesGeneratetag' where
         type Rs FloodlightActivitiesGeneratetag' =
              FloodlightActivitiesGenerateTagResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u
-          FloodlightActivitiesGeneratetag'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FloodlightActivitiesGeneratetag'{..}
           = go _fagProFileId _fagFloodlightActivityId
               _fagQuotaUser
               (Just _fagPrettyPrint)
@@ -180,8 +179,7 @@ instance GoogleRequest
               _fagOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy FloodlightActivitiesGeneratetagResource)
-                      r
-                      u
+                      rq

@@ -157,8 +157,8 @@ instance GoogleAuth MapsPatch' where
 
 instance GoogleRequest MapsPatch' where
         type Rs MapsPatch' = ()
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u MapsPatch'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq MapsPatch'{..}
           = go _mpId _mpQuotaUser (Just _mpPrettyPrint)
               _mpUserIP
               _mpFields
@@ -167,6 +167,4 @@ instance GoogleRequest MapsPatch' where
               (Just AltJSON)
               _mpPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy MapsPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy MapsPatchResource) rq

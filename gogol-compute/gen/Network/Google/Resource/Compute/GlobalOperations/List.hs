@@ -199,8 +199,8 @@ instance GoogleAuth GlobalOperationsList' where
 
 instance GoogleRequest GlobalOperationsList' where
         type Rs GlobalOperationsList' = OperationList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalOperationsList'{..}
+        request = requestWith computeRequest
+        requestWith rq GlobalOperationsList'{..}
           = go _golProject _golFilter _golPageToken
               (Just _golMaxResults)
               _golQuotaUser
@@ -211,7 +211,6 @@ instance GoogleRequest GlobalOperationsList' where
               _golOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GlobalOperationsListResource)
-                      r
-                      u
+                      rq

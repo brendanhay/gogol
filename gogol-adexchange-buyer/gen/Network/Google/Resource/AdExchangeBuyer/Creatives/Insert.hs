@@ -146,8 +146,8 @@ instance GoogleAuth CreativesInsert' where
 
 instance GoogleRequest CreativesInsert' where
         type Rs CreativesInsert' = Creative
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u CreativesInsert'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq CreativesInsert'{..}
           = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
               _ciFields
               _ciKey
@@ -155,7 +155,6 @@ instance GoogleRequest CreativesInsert' where
               (Just AltJSON)
               _ciPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CreativesInsertResource)
-                      r
-                      u
+                      rq

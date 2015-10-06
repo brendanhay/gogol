@@ -200,8 +200,8 @@ instance GoogleAuth VolumesGet' where
 
 instance GoogleRequest VolumesGet' where
         type Rs VolumesGet' = Volume
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u VolumesGet'{..}
+        request = requestWith booksRequest
+        requestWith rq VolumesGet'{..}
           = go _vgVolumeId _vgCountry _vgPartner _vgSource
               _vgProjection
               _vgUserLibraryConsistentRead
@@ -213,6 +213,4 @@ instance GoogleRequest VolumesGet' where
               _vgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy VolumesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy VolumesGetResource) rq

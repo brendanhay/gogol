@@ -162,8 +162,8 @@ instance GoogleAuth JobsGet' where
 
 instance GoogleRequest JobsGet' where
         type Rs JobsGet' = Job
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u JobsGet'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq JobsGet'{..}
           = go _jgProjectId _jgJobId _jgQuotaUser
               (Just _jgPrettyPrint)
               _jgUserIP
@@ -172,5 +172,4 @@ instance GoogleRequest JobsGet' where
               _jgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy JobsGetResource) rq

@@ -148,8 +148,8 @@ instance GoogleAuth AspsList' where
 
 instance GoogleRequest AspsList' where
         type Rs AspsList' = Asps
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u AspsList'{..}
+        request = requestWith directoryRequest
+        requestWith rq AspsList'{..}
           = go _alUserKey _alQuotaUser (Just _alPrettyPrint)
               _alUserIP
               _alFields
@@ -157,5 +157,4 @@ instance GoogleRequest AspsList' where
               _alOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy AspsListResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy AspsListResource) rq

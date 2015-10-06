@@ -164,8 +164,8 @@ instance GoogleAuth CommentThreadsUpdate' where
 
 instance GoogleRequest CommentThreadsUpdate' where
         type Rs CommentThreadsUpdate' = CommentThread
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CommentThreadsUpdate'{..}
+        request = requestWith youTubeRequest
+        requestWith rq CommentThreadsUpdate'{..}
           = go (Just _ctuPart) _ctuQuotaUser
               (Just _ctuPrettyPrint)
               _ctuUserIP
@@ -175,7 +175,6 @@ instance GoogleRequest CommentThreadsUpdate' where
               (Just AltJSON)
               _ctuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CommentThreadsUpdateResource)
-                      r
-                      u
+                      rq

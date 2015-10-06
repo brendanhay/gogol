@@ -273,9 +273,8 @@ instance GoogleAuth ConversionGet' where
 
 instance GoogleRequest ConversionGet' where
         type Rs ConversionGet' = ConversionList
-        request
-          = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u ConversionGet'{..}
+        request = requestWith doubleClickSearchRequest
+        requestWith rq ConversionGet'{..}
           = go _cgAgencyId _cgAdvertiserId _cgEngineAccountId
               (Just _cgEndDate)
               (Just _cgRowCount)
@@ -293,7 +292,5 @@ instance GoogleRequest ConversionGet' where
               _cgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ConversionGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ConversionGetResource)
+                      rq

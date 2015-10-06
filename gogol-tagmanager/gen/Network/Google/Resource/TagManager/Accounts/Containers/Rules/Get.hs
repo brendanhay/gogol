@@ -179,8 +179,8 @@ instance GoogleAuth AccountsContainersRulesGet' where
 instance GoogleRequest AccountsContainersRulesGet'
          where
         type Rs AccountsContainersRulesGet' = Rule
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersRulesGet'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersRulesGet'{..}
           = go _acrgAccountId _acrgContainerId _acrgRuleId
               _acrgQuotaUser
               (Just _acrgPrettyPrint)
@@ -190,7 +190,6 @@ instance GoogleRequest AccountsContainersRulesGet'
               _acrgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsContainersRulesGetResource)
-                      r
-                      u
+                      rq

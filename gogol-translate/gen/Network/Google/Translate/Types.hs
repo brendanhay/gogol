@@ -16,7 +16,7 @@
 module Network.Google.Translate.Types
     (
     -- * Service URL
-      translateURL
+      translateRequest
 
     -- * TranslationsResource
     , TranslationsResource
@@ -60,9 +60,8 @@ import           Network.Google.Prelude
 import           Network.Google.Translate.Types.Product
 import           Network.Google.Translate.Types.Sum
 
--- | URL referring to version 'v2' of the Translate API.
-translateURL :: BaseUrl
-translateURL
-  = BaseUrl Https
-      "https://www.googleapis.com/language/translate/"
-      443
+-- | Default request referring to version 'v2' of the Translate API.
+translateRequest :: RequestBuilder
+translateRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "language/translate/"

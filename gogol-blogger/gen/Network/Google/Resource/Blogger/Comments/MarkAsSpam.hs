@@ -178,8 +178,8 @@ instance GoogleAuth CommentsMarkAsSpam' where
 
 instance GoogleRequest CommentsMarkAsSpam' where
         type Rs CommentsMarkAsSpam' = Comment
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u CommentsMarkAsSpam'{..}
+        request = requestWith bloggerRequest
+        requestWith rq CommentsMarkAsSpam'{..}
           = go _cmasBlogId _cmasPostId _cmasCommentId
               _cmasQuotaUser
               (Just _cmasPrettyPrint)
@@ -189,7 +189,6 @@ instance GoogleRequest CommentsMarkAsSpam' where
               _cmasOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CommentsMarkAsSpamResource)
-                      r
-                      u
+                      rq

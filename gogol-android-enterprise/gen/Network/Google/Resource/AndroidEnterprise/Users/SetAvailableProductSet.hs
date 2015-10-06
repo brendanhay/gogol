@@ -180,9 +180,8 @@ instance GoogleAuth UsersSetAvailableProductSet'
 instance GoogleRequest UsersSetAvailableProductSet'
          where
         type Rs UsersSetAvailableProductSet' = ProductSet
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u UsersSetAvailableProductSet'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq UsersSetAvailableProductSet'{..}
           = go _usapsEnterpriseId _usapsUserId _usapsQuotaUser
               (Just _usapsPrettyPrint)
               _usapsUserIP
@@ -192,7 +191,6 @@ instance GoogleRequest UsersSetAvailableProductSet'
               (Just AltJSON)
               _usapsPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersSetAvailableProductSetResource)
-                      r
-                      u
+                      rq

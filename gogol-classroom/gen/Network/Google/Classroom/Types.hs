@@ -16,7 +16,7 @@
 module Network.Google.Classroom.Types
     (
     -- * Service URL
-      classroomURL
+      classroomRequest
 
     -- * ListCourseAliasesResponse
     , ListCourseAliasesResponse
@@ -121,8 +121,8 @@ import           Network.Google.Classroom.Types.Product
 import           Network.Google.Classroom.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Google Classroom API.
-classroomURL :: BaseUrl
-classroomURL
-  = BaseUrl Https "https://classroom.googleapis.com/"
-      443
+-- | Default request referring to version 'v1' of the Google Classroom API.
+classroomRequest :: RequestBuilder
+classroomRequest
+  = defaultRequest "https://classroom.googleapis.com/"
+      ""

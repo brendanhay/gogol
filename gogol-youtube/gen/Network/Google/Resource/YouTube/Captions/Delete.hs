@@ -184,8 +184,8 @@ instance GoogleAuth CaptionsDelete' where
 
 instance GoogleRequest CaptionsDelete' where
         type Rs CaptionsDelete' = ()
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CaptionsDelete'{..}
+        request = requestWith youTubeRequest
+        requestWith rq CaptionsDelete'{..}
           = go (Just _cddId) _cddOnBehalfOf
               _cddOnBehalfOfContentOwner
               _cddQuotaUser
@@ -196,7 +196,5 @@ instance GoogleRequest CaptionsDelete' where
               _cddOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CaptionsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CaptionsDeleteResource)
+                      rq

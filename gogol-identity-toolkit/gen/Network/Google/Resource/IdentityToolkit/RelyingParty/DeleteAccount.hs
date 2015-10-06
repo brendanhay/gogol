@@ -148,8 +148,8 @@ instance GoogleRequest RelyingPartyDeleteAccount'
          where
         type Rs RelyingPartyDeleteAccount' =
              DeleteAccountResponse
-        request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingPartyDeleteAccount'{..}
+        request = requestWith identityToolkitRequest
+        requestWith rq RelyingPartyDeleteAccount'{..}
           = go _rQuotaUser (Just _rPrettyPrint) _rUserIP
               _rFields
               _rKey
@@ -157,7 +157,6 @@ instance GoogleRequest RelyingPartyDeleteAccount'
               (Just AltJSON)
               _rPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RelyingPartyDeleteAccountResource)
-                      r
-                      u
+                      rq

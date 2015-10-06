@@ -142,9 +142,8 @@ instance GoogleRequest RelyingPartyGetRecaptchaParam'
          where
         type Rs RelyingPartyGetRecaptchaParam' =
              GetRecaptchaParamResponse
-        request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u
-          RelyingPartyGetRecaptchaParam'{..}
+        request = requestWith identityToolkitRequest
+        requestWith rq RelyingPartyGetRecaptchaParam'{..}
           = go _rpgrpQuotaUser (Just _rpgrpPrettyPrint)
               _rpgrpUserIP
               _rpgrpFields
@@ -152,8 +151,7 @@ instance GoogleRequest RelyingPartyGetRecaptchaParam'
               _rpgrpOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy RelyingPartyGetRecaptchaParamResource)
-                      r
-                      u
+                      rq

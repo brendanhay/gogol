@@ -160,8 +160,8 @@ instance GoogleAuth TableList' where
 
 instance GoogleRequest TableList' where
         type Rs TableList' = TableList
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TableList'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TableList'{..}
           = go _tabPageToken _tabMaxResults _tabQuotaUser
               (Just _tabPrettyPrint)
               _tabUserIP
@@ -170,6 +170,4 @@ instance GoogleRequest TableList' where
               _tabOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TableListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TableListResource) rq

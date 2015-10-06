@@ -176,8 +176,8 @@ instance GoogleAuth InstancesUpdate' where
 
 instance GoogleRequest InstancesUpdate' where
         type Rs InstancesUpdate' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesUpdate'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq InstancesUpdate'{..}
           = go _iuProject _iuInstance _iuQuotaUser
               (Just _iuPrettyPrint)
               _iuUserIP
@@ -187,7 +187,6 @@ instance GoogleRequest InstancesUpdate' where
               (Just AltJSON)
               _iuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesUpdateResource)
-                      r
-                      u
+                      rq

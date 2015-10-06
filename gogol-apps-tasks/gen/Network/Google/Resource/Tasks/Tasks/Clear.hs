@@ -151,8 +151,8 @@ instance GoogleAuth TasksClear' where
 
 instance GoogleRequest TasksClear' where
         type Rs TasksClear' = ()
-        request = requestWithRoute defReq appsTasksURL
-        requestWithRoute r u TasksClear'{..}
+        request = requestWith appsTasksRequest
+        requestWith rq TasksClear'{..}
           = go _tcTaskList _tcQuotaUser (Just _tcPrettyPrint)
               _tcUserIP
               _tcFields
@@ -160,6 +160,4 @@ instance GoogleRequest TasksClear' where
               _tcOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TasksClearResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TasksClearResource) rq

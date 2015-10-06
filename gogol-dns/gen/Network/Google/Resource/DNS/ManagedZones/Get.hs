@@ -163,8 +163,8 @@ instance GoogleAuth ManagedZonesGet' where
 
 instance GoogleRequest ManagedZonesGet' where
         type Rs ManagedZonesGet' = ManagedZone
-        request = requestWithRoute defReq dNSURL
-        requestWithRoute r u ManagedZonesGet'{..}
+        request = requestWith dNSRequest
+        requestWith rq ManagedZonesGet'{..}
           = go _mzgProject _mzgManagedZone _mzgQuotaUser
               (Just _mzgPrettyPrint)
               _mzgUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest ManagedZonesGet' where
               _mzgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagedZonesGetResource)
-                      r
-                      u
+                      rq

@@ -158,8 +158,8 @@ instance GoogleAuth TasksGet' where
 
 instance GoogleRequest TasksGet' where
         type Rs TasksGet' = Task
-        request = requestWithRoute defReq appsTasksURL
-        requestWithRoute r u TasksGet'{..}
+        request = requestWith appsTasksRequest
+        requestWith rq TasksGet'{..}
           = go _tgTaskList _tgTask _tgQuotaUser
               (Just _tgPrettyPrint)
               _tgUserIP
@@ -168,5 +168,4 @@ instance GoogleRequest TasksGet' where
               _tgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TasksGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy TasksGetResource) rq

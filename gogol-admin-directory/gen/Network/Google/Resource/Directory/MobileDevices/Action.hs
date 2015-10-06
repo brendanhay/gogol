@@ -179,8 +179,8 @@ instance GoogleAuth MobileDevicesAction' where
 
 instance GoogleRequest MobileDevicesAction' where
         type Rs MobileDevicesAction' = ()
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u MobileDevicesAction'{..}
+        request = requestWith directoryRequest
+        requestWith rq MobileDevicesAction'{..}
           = go _mdaCustomerId _mdaResourceId _mdaQuotaUser
               (Just _mdaPrettyPrint)
               _mdaUserIP
@@ -190,7 +190,6 @@ instance GoogleRequest MobileDevicesAction' where
               (Just AltJSON)
               _mdaPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MobileDevicesActionResource)
-                      r
-                      u
+                      rq

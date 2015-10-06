@@ -162,8 +162,8 @@ instance GoogleAuth URLMapsDelete' where
 
 instance GoogleRequest URLMapsDelete' where
         type Rs URLMapsDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u URLMapsDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq URLMapsDelete'{..}
           = go _umdProject _umdURLMap _umdQuotaUser
               (Just _umdPrettyPrint)
               _umdUserIP
@@ -172,7 +172,5 @@ instance GoogleRequest URLMapsDelete' where
               _umdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy URLMapsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy URLMapsDeleteResource)
+                      rq

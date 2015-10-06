@@ -282,9 +282,8 @@ instance GoogleRequest FloodlightActivityGroupsList'
          where
         type Rs FloodlightActivityGroupsList' =
              FloodlightActivityGroupsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u
-          FloodlightActivityGroupsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FloodlightActivityGroupsList'{..}
           = go _faglProFileId _faglFloodlightConfigurationId
               _faglAdvertiserId
               _faglSearchString
@@ -302,7 +301,6 @@ instance GoogleRequest FloodlightActivityGroupsList'
               _faglOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy FloodlightActivityGroupsListResource)
-                      r
-                      u
+                      rq

@@ -166,8 +166,8 @@ instance GoogleAuth AnnotationsPatch' where
 
 instance GoogleRequest AnnotationsPatch' where
         type Rs AnnotationsPatch' = Annotation
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u AnnotationsPatch'{..}
+        request = requestWith genomicsRequest
+        requestWith rq AnnotationsPatch'{..}
           = go _apAnnotationId _apQuotaUser
               (Just _apPrettyPrint)
               _apUserIP
@@ -177,7 +177,6 @@ instance GoogleRequest AnnotationsPatch' where
               (Just AltJSON)
               _apPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AnnotationsPatchResource)
-                      r
-                      u
+                      rq

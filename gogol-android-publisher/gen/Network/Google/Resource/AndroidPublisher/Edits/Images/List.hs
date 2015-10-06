@@ -190,8 +190,8 @@ instance GoogleAuth EditsImagesList' where
 
 instance GoogleRequest EditsImagesList' where
         type Rs EditsImagesList' = ImagesListResponse
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsImagesList'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsImagesList'{..}
           = go _eilPackageName _eilEditId _eilLanguage
               _eilImageType
               _eilQuotaUser
@@ -202,7 +202,6 @@ instance GoogleRequest EditsImagesList' where
               _eilOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsImagesListResource)
-                      r
-                      u
+                      rq

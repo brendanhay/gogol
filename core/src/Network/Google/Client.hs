@@ -333,8 +333,6 @@ instance ( MimeRender   c a
       where
         p = Proxy :: Proxy c
 
--- instance GoogleClient fn => GoogleClient (ReqBody (c ': cs) Body :> fn) where
-
 instance {-# OVERLAPPABLE #-}
   MimeUnrender c a => GoogleClient (Get (c ': cs) a) where
     type Fn (Get (c ': cs) a) = Client a

@@ -157,8 +157,8 @@ instance GoogleAuth ProjectsList' where
 
 instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ProjectList
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u ProjectsList'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq ProjectsList'{..}
           = go _plPageToken _plMaxResults _plQuotaUser
               (Just _plPrettyPrint)
               _plUserIP
@@ -167,7 +167,5 @@ instance GoogleRequest ProjectsList' where
               _plOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ProjectsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ProjectsListResource)
+                      rq

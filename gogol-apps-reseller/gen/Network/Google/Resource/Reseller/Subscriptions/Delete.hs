@@ -175,8 +175,8 @@ instance GoogleAuth SubscriptionsDelete' where
 
 instance GoogleRequest SubscriptionsDelete' where
         type Rs SubscriptionsDelete' = ()
-        request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u SubscriptionsDelete'{..}
+        request = requestWith appsResellerRequest
+        requestWith rq SubscriptionsDelete'{..}
           = go _sdCustomerId _sdSubscriptionId
               (Just _sdDeletionType)
               _sdQuotaUser
@@ -187,7 +187,6 @@ instance GoogleRequest SubscriptionsDelete' where
               _sdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SubscriptionsDeleteResource)
-                      r
-                      u
+                      rq

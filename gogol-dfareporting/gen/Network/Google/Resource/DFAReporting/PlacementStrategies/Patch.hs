@@ -177,8 +177,8 @@ instance GoogleAuth PlacementStrategiesPatch' where
 instance GoogleRequest PlacementStrategiesPatch'
          where
         type Rs PlacementStrategiesPatch' = PlacementStrategy
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementStrategiesPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PlacementStrategiesPatch'{..}
           = go _pspProFileId (Just _pspId) _pspQuotaUser
               (Just _pspPrettyPrint)
               _pspUserIP
@@ -188,7 +188,6 @@ instance GoogleRequest PlacementStrategiesPatch'
               (Just AltJSON)
               _pspPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlacementStrategiesPatchResource)
-                      r
-                      u
+                      rq

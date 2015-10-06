@@ -21,7 +21,7 @@ module Network.Google.TaskQueue
     -- * API
       TaskQueueAPI
     , taskQueueAPI
-    , taskQueueURL
+    , taskQueueRequest
 
     -- * Service Methods
 

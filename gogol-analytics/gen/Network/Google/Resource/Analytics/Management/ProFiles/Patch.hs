@@ -195,8 +195,8 @@ instance GoogleAuth ManagementProFilesPatch' where
 
 instance GoogleRequest ManagementProFilesPatch' where
         type Rs ManagementProFilesPatch' = ProFile
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementProFilesPatch'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementProFilesPatch'{..}
           = go _mpfpAccountId _mpfpWebPropertyId _mpfpProFileId
               _mpfpQuotaUser
               (Just _mpfpPrettyPrint)
@@ -207,7 +207,6 @@ instance GoogleRequest ManagementProFilesPatch' where
               (Just AltJSON)
               _mpfpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementProFilesPatchResource)
-                      r
-                      u
+                      rq

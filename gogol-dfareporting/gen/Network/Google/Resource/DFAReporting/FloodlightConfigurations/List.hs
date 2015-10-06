@@ -167,9 +167,8 @@ instance GoogleRequest FloodlightConfigurationsList'
          where
         type Rs FloodlightConfigurationsList' =
              FloodlightConfigurationsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u
-          FloodlightConfigurationsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FloodlightConfigurationsList'{..}
           = go _fclProFileId (_fclIds ^. _Default)
               _fclQuotaUser
               (Just _fclPrettyPrint)
@@ -179,7 +178,6 @@ instance GoogleRequest FloodlightConfigurationsList'
               _fclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy FloodlightConfigurationsListResource)
-                      r
-                      u
+                      rq

@@ -224,8 +224,8 @@ instance GoogleAuth ChromeosDevicesList' where
 
 instance GoogleRequest ChromeosDevicesList' where
         type Rs ChromeosDevicesList' = ChromeOSDevices
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u ChromeosDevicesList'{..}
+        request = requestWith directoryRequest
+        requestWith rq ChromeosDevicesList'{..}
           = go _cdlCustomerId _cdlOrderBy _cdlSortOrder
               _cdlQuery
               _cdlProjection
@@ -239,7 +239,6 @@ instance GoogleRequest ChromeosDevicesList' where
               _cdlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ChromeosDevicesListResource)
-                      r
-                      u
+                      rq

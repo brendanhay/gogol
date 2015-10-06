@@ -179,9 +179,8 @@ instance GoogleRequest FloodlightConfigurationsPatch'
          where
         type Rs FloodlightConfigurationsPatch' =
              FloodlightConfiguration
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u
-          FloodlightConfigurationsPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FloodlightConfigurationsPatch'{..}
           = go _fcpProFileId (Just _fcpId) _fcpQuotaUser
               (Just _fcpPrettyPrint)
               _fcpUserIP
@@ -191,8 +190,7 @@ instance GoogleRequest FloodlightConfigurationsPatch'
               (Just AltJSON)
               _fcpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy FloodlightConfigurationsPatchResource)
-                      r
-                      u
+                      rq

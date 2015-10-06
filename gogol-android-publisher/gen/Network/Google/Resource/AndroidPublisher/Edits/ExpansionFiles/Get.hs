@@ -195,8 +195,8 @@ instance GoogleAuth EditsExpansionFilesGet' where
 
 instance GoogleRequest EditsExpansionFilesGet' where
         type Rs EditsExpansionFilesGet' = ExpansionFile
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsExpansionFilesGet'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsExpansionFilesGet'{..}
           = go _eefgPackageName _eefgEditId _eefgAPKVersionCode
               _eefgExpansionFileType
               _eefgQuotaUser
@@ -207,7 +207,6 @@ instance GoogleRequest EditsExpansionFilesGet' where
               _eefgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsExpansionFilesGetResource)
-                      r
-                      u
+                      rq

@@ -172,8 +172,8 @@ instance GoogleAuth StylePatch' where
 
 instance GoogleRequest StylePatch' where
         type Rs StylePatch' = StyleSetting
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u StylePatch'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq StylePatch'{..}
           = go _spTableId _spStyleId _spQuotaUser
               (Just _spPrettyPrint)
               _spUserIP
@@ -183,6 +183,4 @@ instance GoogleRequest StylePatch' where
               (Just AltJSON)
               _spPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy StylePatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy StylePatchResource) rq

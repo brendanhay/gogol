@@ -21,7 +21,7 @@ module Network.Google.Genomics
     -- * API
       GenomicsAPI
     , genomicsAPI
-    , genomicsURL
+    , genomicsRequest
 
     -- * Service Methods
 

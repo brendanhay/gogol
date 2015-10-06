@@ -166,8 +166,8 @@ instance GoogleRequest BucketAccessControlsInsert'
          where
         type Rs BucketAccessControlsInsert' =
              BucketAccessControl
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketAccessControlsInsert'{..}
+        request = requestWith storageRequest
+        requestWith rq BucketAccessControlsInsert'{..}
           = go _baciBucket _baciQuotaUser
               (Just _baciPrettyPrint)
               _baciUserIP
@@ -177,7 +177,6 @@ instance GoogleRequest BucketAccessControlsInsert'
               (Just AltJSON)
               _baciPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BucketAccessControlsInsertResource)
-                      r
-                      u
+                      rq

@@ -183,8 +183,8 @@ instance GoogleAuth UsersDelete' where
 
 instance GoogleRequest UsersDelete' where
         type Rs UsersDelete' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u UsersDelete'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq UsersDelete'{..}
           = go _udProject _udInstance (Just _udHost)
               (Just _udName)
               _udQuotaUser
@@ -195,7 +195,4 @@ instance GoogleRequest UsersDelete' where
               _udOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy UsersDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersDeleteResource) rq

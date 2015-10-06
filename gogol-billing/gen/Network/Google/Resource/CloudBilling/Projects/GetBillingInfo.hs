@@ -226,8 +226,8 @@ instance GoogleAuth ProjectsGetBillingInfo' where
 
 instance GoogleRequest ProjectsGetBillingInfo' where
         type Rs ProjectsGetBillingInfo' = ProjectBillingInfo
-        request = requestWithRoute defReq billingURL
-        requestWithRoute r u ProjectsGetBillingInfo'{..}
+        request = requestWith billingRequest
+        requestWith rq ProjectsGetBillingInfo'{..}
           = go _pgbiName _pgbiXgafv _pgbiUploadProtocol
               (Just _pgbiPp)
               _pgbiAccessToken
@@ -241,7 +241,6 @@ instance GoogleRequest ProjectsGetBillingInfo' where
               _pgbiOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsGetBillingInfoResource)
-                      r
-                      u
+                      rq

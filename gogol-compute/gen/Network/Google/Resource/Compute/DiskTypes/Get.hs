@@ -173,8 +173,8 @@ instance GoogleAuth DiskTypesGet' where
 
 instance GoogleRequest DiskTypesGet' where
         type Rs DiskTypesGet' = DiskType
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u DiskTypesGet'{..}
+        request = requestWith computeRequest
+        requestWith rq DiskTypesGet'{..}
           = go _dtgProject _dtgZone _dtgDiskType _dtgQuotaUser
               (Just _dtgPrettyPrint)
               _dtgUserIP
@@ -183,7 +183,5 @@ instance GoogleRequest DiskTypesGet' where
               _dtgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DiskTypesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DiskTypesGetResource)
+                      rq

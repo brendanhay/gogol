@@ -160,8 +160,8 @@ instance GoogleAuth InstancesRestart' where
 
 instance GoogleRequest InstancesRestart' where
         type Rs InstancesRestart' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesRestart'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq InstancesRestart'{..}
           = go _irProject _irInstance _irQuotaUser
               (Just _irPrettyPrint)
               _irUserIP
@@ -170,7 +170,6 @@ instance GoogleRequest InstancesRestart' where
               _irOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesRestartResource)
-                      r
-                      u
+                      rq

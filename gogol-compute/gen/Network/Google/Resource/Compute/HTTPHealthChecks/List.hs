@@ -206,8 +206,8 @@ instance GoogleAuth HTTPHealthChecksList' where
 
 instance GoogleRequest HTTPHealthChecksList' where
         type Rs HTTPHealthChecksList' = HTTPHealthCheckList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u HTTPHealthChecksList'{..}
+        request = requestWith computeRequest
+        requestWith rq HTTPHealthChecksList'{..}
           = go _httphclProject _httphclFilter _httphclPageToken
               (Just _httphclMaxResults)
               _httphclQuotaUser
@@ -218,7 +218,6 @@ instance GoogleRequest HTTPHealthChecksList' where
               _httphclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy HTTPHealthChecksListResource)
-                      r
-                      u
+                      rq

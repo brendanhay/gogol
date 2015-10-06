@@ -202,8 +202,8 @@ instance GoogleAuth UsersSessionsList' where
 
 instance GoogleRequest UsersSessionsList' where
         type Rs UsersSessionsList' = ListSessionsResponse
-        request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersSessionsList'{..}
+        request = requestWith fitnessRequest
+        requestWith rq UsersSessionsList'{..}
           = go _uslUserId _uslStartTime _uslEndTime
               _uslPageToken
               _uslIncludeDeleted
@@ -215,7 +215,6 @@ instance GoogleRequest UsersSessionsList' where
               _uslOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersSessionsListResource)
-                      r
-                      u
+                      rq

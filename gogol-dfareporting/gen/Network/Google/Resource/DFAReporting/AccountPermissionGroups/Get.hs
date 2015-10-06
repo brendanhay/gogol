@@ -166,8 +166,8 @@ instance GoogleRequest AccountPermissionGroupsGet'
          where
         type Rs AccountPermissionGroupsGet' =
              AccountPermissionGroup
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountPermissionGroupsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AccountPermissionGroupsGet'{..}
           = go _apggProFileId _apggId _apggQuotaUser
               (Just _apggPrettyPrint)
               _apggUserIP
@@ -176,7 +176,6 @@ instance GoogleRequest AccountPermissionGroupsGet'
               _apggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountPermissionGroupsGetResource)
-                      r
-                      u
+                      rq

@@ -176,8 +176,8 @@ instance GoogleAuth VPNTunnelsInsert' where
 
 instance GoogleRequest VPNTunnelsInsert' where
         type Rs VPNTunnelsInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u VPNTunnelsInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq VPNTunnelsInsert'{..}
           = go _vtiProject _vtiRegion _vtiQuotaUser
               (Just _vtiPrettyPrint)
               _vtiUserIP
@@ -187,7 +187,6 @@ instance GoogleRequest VPNTunnelsInsert' where
               (Just AltJSON)
               _vtiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VPNTunnelsInsertResource)
-                      r
-                      u
+                      rq

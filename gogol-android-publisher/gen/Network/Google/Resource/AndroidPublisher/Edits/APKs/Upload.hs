@@ -175,8 +175,8 @@ instance GoogleAuth EditsAPKsUpload' where
 
 instance GoogleRequest EditsAPKsUpload' where
         type Rs EditsAPKsUpload' = APK
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsAPKsUpload'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsAPKsUpload'{..}
           = go _eapkuPackageName _eapkuEditId _eapkuQuotaUser
               (Just _eapkuPrettyPrint)
               _eapkuUserIP
@@ -186,7 +186,6 @@ instance GoogleRequest EditsAPKsUpload' where
               (Just AltJSON)
               _eapkuMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsAPKsUploadResource)
-                      r
-                      u
+                      rq

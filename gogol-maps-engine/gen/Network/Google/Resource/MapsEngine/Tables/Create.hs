@@ -146,8 +146,8 @@ instance GoogleAuth TablesCreate' where
 
 instance GoogleRequest TablesCreate' where
         type Rs TablesCreate' = Table
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u TablesCreate'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesCreate'{..}
           = go _tcQuotaUser (Just _tcPrettyPrint) _tcUserIP
               _tcFields
               _tcKey
@@ -155,7 +155,5 @@ instance GoogleRequest TablesCreate' where
               (Just AltJSON)
               _tcPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TablesCreateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TablesCreateResource)
+                      rq

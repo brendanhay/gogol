@@ -168,9 +168,8 @@ instance GoogleAuth UsersGenerateToken' where
 
 instance GoogleRequest UsersGenerateToken' where
         type Rs UsersGenerateToken' = UserToken
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u UsersGenerateToken'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq UsersGenerateToken'{..}
           = go _ugtEnterpriseId _ugtUserId _ugtQuotaUser
               (Just _ugtPrettyPrint)
               _ugtUserIP
@@ -179,7 +178,6 @@ instance GoogleRequest UsersGenerateToken' where
               _ugtOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersGenerateTokenResource)
-                      r
-                      u
+                      rq

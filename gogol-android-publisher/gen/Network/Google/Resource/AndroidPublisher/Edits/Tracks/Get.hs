@@ -177,8 +177,8 @@ instance GoogleAuth EditsTracksGet' where
 
 instance GoogleRequest EditsTracksGet' where
         type Rs EditsTracksGet' = Track
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsTracksGet'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsTracksGet'{..}
           = go _etgPackageName _etgEditId _etgTrack
               _etgQuotaUser
               (Just _etgPrettyPrint)
@@ -188,7 +188,5 @@ instance GoogleRequest EditsTracksGet' where
               _etgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EditsTracksGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EditsTracksGetResource)
+                      rq

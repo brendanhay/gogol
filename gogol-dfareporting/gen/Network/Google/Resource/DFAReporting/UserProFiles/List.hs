@@ -139,8 +139,8 @@ instance GoogleAuth UserProFilesList' where
 
 instance GoogleRequest UserProFilesList' where
         type Rs UserProFilesList' = UserProFileList
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserProFilesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq UserProFilesList'{..}
           = go _upflQuotaUser (Just _upflPrettyPrint)
               _upflUserIP
               _upflFields
@@ -148,7 +148,6 @@ instance GoogleRequest UserProFilesList' where
               _upflOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UserProFilesListResource)
-                      r
-                      u
+                      rq

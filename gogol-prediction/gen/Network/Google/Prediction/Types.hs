@@ -16,7 +16,7 @@
 module Network.Google.Prediction.Types
     (
     -- * Service URL
-      predictionURL
+      predictionRequest
 
     -- * Insert2ModelInfo
     , Insert2ModelInfo
@@ -196,9 +196,8 @@ import           Network.Google.Prediction.Types.Product
 import           Network.Google.Prediction.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1.6' of the Prediction API.
-predictionURL :: BaseUrl
-predictionURL
-  = BaseUrl Https
-      "https://www.googleapis.com/prediction/v1.6/projects/"
-      443
+-- | Default request referring to version 'v1.6' of the Prediction API.
+predictionRequest :: RequestBuilder
+predictionRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "prediction/v1.6/projects/"

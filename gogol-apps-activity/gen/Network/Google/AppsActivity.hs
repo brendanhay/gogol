@@ -21,7 +21,7 @@ module Network.Google.AppsActivity
     -- * API
       AppsActivityAPI
     , appsActivityAPI
-    , appsActivityURL
+    , appsActivityRequest
 
     -- * Service Methods
 

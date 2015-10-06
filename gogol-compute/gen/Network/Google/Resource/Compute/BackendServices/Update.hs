@@ -176,8 +176,8 @@ instance GoogleAuth BackendServicesUpdate' where
 
 instance GoogleRequest BackendServicesUpdate' where
         type Rs BackendServicesUpdate' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u BackendServicesUpdate'{..}
+        request = requestWith computeRequest
+        requestWith rq BackendServicesUpdate'{..}
           = go _bsuProject _bsuBackendService _bsuQuotaUser
               (Just _bsuPrettyPrint)
               _bsuUserIP
@@ -187,7 +187,6 @@ instance GoogleRequest BackendServicesUpdate' where
               (Just AltJSON)
               _bsuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BackendServicesUpdateResource)
-                      r
-                      u
+                      rq

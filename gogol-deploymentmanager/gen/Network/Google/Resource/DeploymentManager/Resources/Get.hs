@@ -172,9 +172,8 @@ instance GoogleAuth ResourcesGet' where
 
 instance GoogleRequest ResourcesGet' where
         type Rs ResourcesGet' = Resource
-        request
-          = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u ResourcesGet'{..}
+        request = requestWith deploymentManagerRequest
+        requestWith rq ResourcesGet'{..}
           = go _rgProject _rgDeployment _rgResource
               _rgQuotaUser
               (Just _rgPrettyPrint)
@@ -184,7 +183,5 @@ instance GoogleRequest ResourcesGet' where
               _rgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ResourcesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ResourcesGetResource)
+                      rq

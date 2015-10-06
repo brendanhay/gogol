@@ -158,8 +158,8 @@ instance GoogleAuth RoutesDelete' where
 
 instance GoogleRequest RoutesDelete' where
         type Rs RoutesDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u RoutesDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq RoutesDelete'{..}
           = go _rdProject _rdRoute _rdQuotaUser
               (Just _rdPrettyPrint)
               _rdUserIP
@@ -168,7 +168,5 @@ instance GoogleRequest RoutesDelete' where
               _rdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy RoutesDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RoutesDeleteResource)
+                      rq

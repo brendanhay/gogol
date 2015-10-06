@@ -176,8 +176,8 @@ instance GoogleAuth PlacementGroupsPatch' where
 
 instance GoogleRequest PlacementGroupsPatch' where
         type Rs PlacementGroupsPatch' = PlacementGroup
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementGroupsPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PlacementGroupsPatch'{..}
           = go _pgpProFileId (Just _pgpId) _pgpQuotaUser
               (Just _pgpPrettyPrint)
               _pgpUserIP
@@ -187,7 +187,6 @@ instance GoogleRequest PlacementGroupsPatch' where
               (Just AltJSON)
               _pgpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlacementGroupsPatchResource)
-                      r
-                      u
+                      rq

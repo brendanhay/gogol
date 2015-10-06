@@ -146,8 +146,8 @@ instance GoogleAuth PushtokensUpdate' where
 
 instance GoogleRequest PushtokensUpdate' where
         type Rs PushtokensUpdate' = ()
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u PushtokensUpdate'{..}
+        request = requestWith gamesRequest
+        requestWith rq PushtokensUpdate'{..}
           = go _puQuotaUser (Just _puPrettyPrint) _puUserIP
               _puFields
               _puKey
@@ -155,7 +155,6 @@ instance GoogleRequest PushtokensUpdate' where
               (Just AltJSON)
               _puPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PushtokensUpdateResource)
-                      r
-                      u
+                      rq

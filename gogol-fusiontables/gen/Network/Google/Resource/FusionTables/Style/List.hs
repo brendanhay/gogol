@@ -170,8 +170,8 @@ instance GoogleAuth StyleList' where
 
 instance GoogleRequest StyleList' where
         type Rs StyleList' = StyleSettingList
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u StyleList'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq StyleList'{..}
           = go _slTableId _slPageToken _slMaxResults
               _slQuotaUser
               (Just _slPrettyPrint)
@@ -181,6 +181,4 @@ instance GoogleRequest StyleList' where
               _slOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy StyleListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy StyleListResource) rq

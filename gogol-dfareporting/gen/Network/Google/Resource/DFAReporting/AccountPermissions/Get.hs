@@ -162,8 +162,8 @@ instance GoogleAuth AccountPermissionsGet' where
 
 instance GoogleRequest AccountPermissionsGet' where
         type Rs AccountPermissionsGet' = AccountPermission
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountPermissionsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AccountPermissionsGet'{..}
           = go _accProFileId _accId _accQuotaUser
               (Just _accPrettyPrint)
               _accUserIP
@@ -172,7 +172,6 @@ instance GoogleRequest AccountPermissionsGet' where
               _accOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountPermissionsGetResource)
-                      r
-                      u
+                      rq

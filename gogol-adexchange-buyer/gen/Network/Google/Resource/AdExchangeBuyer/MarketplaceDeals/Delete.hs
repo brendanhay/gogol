@@ -165,8 +165,8 @@ instance GoogleAuth MarketplaceDealsDelete' where
 instance GoogleRequest MarketplaceDealsDelete' where
         type Rs MarketplaceDealsDelete' =
              DeleteOrderDealsResponse
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplaceDealsDelete'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq MarketplaceDealsDelete'{..}
           = go _mddOrderId _mddQuotaUser (Just _mddPrettyPrint)
               _mddUserIP
               _mddFields
@@ -175,7 +175,6 @@ instance GoogleRequest MarketplaceDealsDelete' where
               (Just AltJSON)
               _mddPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MarketplaceDealsDeleteResource)
-                      r
-                      u
+                      rq

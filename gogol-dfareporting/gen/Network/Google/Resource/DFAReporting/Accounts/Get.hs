@@ -161,8 +161,8 @@ instance GoogleAuth AccountsGet' where
 
 instance GoogleRequest AccountsGet' where
         type Rs AccountsGet' = Account
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AccountsGet'{..}
           = go _ag1ProFileId _ag1Id _ag1QuotaUser
               (Just _ag1PrettyPrint)
               _ag1UserIP
@@ -171,7 +171,4 @@ instance GoogleRequest AccountsGet' where
               _ag1OAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AccountsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AccountsGetResource) rq

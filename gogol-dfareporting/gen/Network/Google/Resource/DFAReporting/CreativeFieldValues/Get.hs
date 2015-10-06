@@ -178,8 +178,8 @@ instance GoogleAuth CreativeFieldValuesGet' where
 
 instance GoogleRequest CreativeFieldValuesGet' where
         type Rs CreativeFieldValuesGet' = CreativeFieldValue
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldValuesGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativeFieldValuesGet'{..}
           = go _cfvgProFileId _cfvgCreativeFieldId _cfvgId
               _cfvgQuotaUser
               (Just _cfvgPrettyPrint)
@@ -189,7 +189,6 @@ instance GoogleRequest CreativeFieldValuesGet' where
               _cfvgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CreativeFieldValuesGetResource)
-                      r
-                      u
+                      rq

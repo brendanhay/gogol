@@ -149,8 +149,8 @@ instance GoogleAuth PawsInit' where
 
 instance GoogleRequest PawsInit' where
         type Rs PawsInit' = PawsInitResponse
-        request = requestWithRoute defReq spectrumURL
-        requestWithRoute r u PawsInit'{..}
+        request = requestWith spectrumRequest
+        requestWith rq PawsInit'{..}
           = go _piQuotaUser (Just _piPrettyPrint) _piUserIP
               _piFields
               _piKey
@@ -158,5 +158,4 @@ instance GoogleRequest PawsInit' where
               (Just AltJSON)
               _piPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy PawsInitResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy PawsInitResource) rq

@@ -238,8 +238,8 @@ instance GoogleAuth
 instance GoogleRequest
          DebuggerDebuggeesBreakpointsDelete' where
         type Rs DebuggerDebuggeesBreakpointsDelete' = Empty
-        request = requestWithRoute defReq debuggerURL
-        requestWithRoute r u
+        request = requestWith debuggerRequest
+        requestWith rq
           DebuggerDebuggeesBreakpointsDelete'{..}
           = go _ddbdDebuggeeId _ddbdBreakpointId _ddbdXgafv
               _ddbdUploadProtocol
@@ -255,8 +255,7 @@ instance GoogleRequest
               _ddbdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy DebuggerDebuggeesBreakpointsDeleteResource)
-                      r
-                      u
+                      rq

@@ -152,8 +152,8 @@ instance GoogleAuth OperatingSystemsList' where
 instance GoogleRequest OperatingSystemsList' where
         type Rs OperatingSystemsList' =
              OperatingSystemsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u OperatingSystemsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq OperatingSystemsList'{..}
           = go _oslProFileId _oslQuotaUser
               (Just _oslPrettyPrint)
               _oslUserIP
@@ -162,7 +162,6 @@ instance GoogleRequest OperatingSystemsList' where
               _oslOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OperatingSystemsListResource)
-                      r
-                      u
+                      rq

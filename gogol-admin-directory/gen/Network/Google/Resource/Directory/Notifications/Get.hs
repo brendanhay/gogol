@@ -161,8 +161,8 @@ instance GoogleAuth NotificationsGet' where
 
 instance GoogleRequest NotificationsGet' where
         type Rs NotificationsGet' = Notification
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u NotificationsGet'{..}
+        request = requestWith directoryRequest
+        requestWith rq NotificationsGet'{..}
           = go _ngCustomer _ngNotificationId _ngQuotaUser
               (Just _ngPrettyPrint)
               _ngUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest NotificationsGet' where
               _ngOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy NotificationsGetResource)
-                      r
-                      u
+                      rq

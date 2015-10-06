@@ -187,8 +187,8 @@ instance GoogleAuth DatabasesPatch' where
 
 instance GoogleRequest DatabasesPatch' where
         type Rs DatabasesPatch' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u DatabasesPatch'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq DatabasesPatch'{..}
           = go _dpProject _dpInstance _dpDatabase _dpQuotaUser
               (Just _dpPrettyPrint)
               _dpUserIP
@@ -198,7 +198,5 @@ instance GoogleRequest DatabasesPatch' where
               (Just AltJSON)
               _dpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DatabasesPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DatabasesPatchResource)
+                      rq

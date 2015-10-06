@@ -228,8 +228,8 @@ instance GoogleAuth TransferOperationsPause' where
 
 instance GoogleRequest TransferOperationsPause' where
         type Rs TransferOperationsPause' = Empty
-        request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferOperationsPause'{..}
+        request = requestWith storageTransferRequest
+        requestWith rq TransferOperationsPause'{..}
           = go _topName _topXgafv _topUploadProtocol
               (Just _topPp)
               _topAccessToken
@@ -244,7 +244,6 @@ instance GoogleRequest TransferOperationsPause' where
               (Just AltJSON)
               _topPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TransferOperationsPauseResource)
-                      r
-                      u
+                      rq

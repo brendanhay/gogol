@@ -160,8 +160,8 @@ instance GoogleAuth VariantsUpdate' where
 
 instance GoogleRequest VariantsUpdate' where
         type Rs VariantsUpdate' = Variant
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsUpdate'{..}
+        request = requestWith genomicsRequest
+        requestWith rq VariantsUpdate'{..}
           = go _vuVariantId _vuQuotaUser (Just _vuPrettyPrint)
               _vuUserIP
               _vuFields
@@ -170,7 +170,5 @@ instance GoogleRequest VariantsUpdate' where
               (Just AltJSON)
               _vuPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy VariantsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy VariantsUpdateResource)
+                      rq

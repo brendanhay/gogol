@@ -147,8 +147,8 @@ instance GoogleAuth RastersDelete' where
 
 instance GoogleRequest RastersDelete' where
         type Rs RastersDelete' = ()
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u RastersDelete'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq RastersDelete'{..}
           = go _rdId _rdQuotaUser (Just _rdPrettyPrint)
               _rdUserIP
               _rdFields
@@ -156,7 +156,5 @@ instance GoogleRequest RastersDelete' where
               _rdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy RastersDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RastersDeleteResource)
+                      rq

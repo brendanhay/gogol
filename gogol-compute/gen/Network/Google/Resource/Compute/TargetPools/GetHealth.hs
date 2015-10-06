@@ -192,8 +192,8 @@ instance GoogleAuth TargetPoolsGetHealth' where
 instance GoogleRequest TargetPoolsGetHealth' where
         type Rs TargetPoolsGetHealth' =
              TargetPoolInstanceHealth
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsGetHealth'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetPoolsGetHealth'{..}
           = go _tpghProject _tpghRegion _tpghTargetPool
               _tpghQuotaUser
               (Just _tpghPrettyPrint)
@@ -204,7 +204,6 @@ instance GoogleRequest TargetPoolsGetHealth' where
               (Just AltJSON)
               _tpghPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetPoolsGetHealthResource)
-                      r
-                      u
+                      rq

@@ -292,8 +292,8 @@ instance GoogleAuth TimeseriesList' where
 
 instance GoogleRequest TimeseriesList' where
         type Rs TimeseriesList' = ListTimeseriesResponse
-        request = requestWithRoute defReq monitoringURL
-        requestWithRoute r u TimeseriesList'{..}
+        request = requestWith monitoringRequest
+        requestWith rq TimeseriesList'{..}
           = go _tlProject _tlMetric (Just _tlYoungest)
               _tlWindow
               (Just _tlCount)
@@ -311,7 +311,5 @@ instance GoogleRequest TimeseriesList' where
               (Just AltJSON)
               _tlPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TimeseriesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TimeseriesListResource)
+                      rq

@@ -196,8 +196,8 @@ instance GoogleRequest AssociationSessionsStart'
          where
         type Rs AssociationSessionsStart' =
              AssociationSession
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AssociationSessionsStart'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq AssociationSessionsStart'{..}
           = go _assProductCode (Just _assWebsiteURL)
               _assWebsiteLocale
               _assUserLocale
@@ -209,7 +209,6 @@ instance GoogleRequest AssociationSessionsStart'
               _assOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AssociationSessionsStartResource)
-                      r
-                      u
+                      rq

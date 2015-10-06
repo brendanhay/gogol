@@ -162,8 +162,8 @@ instance GoogleAuth UsersMessagesUntrash' where
 
 instance GoogleRequest UsersMessagesUntrash' where
         type Rs UsersMessagesUntrash' = Message
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesUntrash'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersMessagesUntrash'{..}
           = go _umuUserId _umuId _umuQuotaUser
               (Just _umuPrettyPrint)
               _umuUserIP
@@ -172,7 +172,6 @@ instance GoogleRequest UsersMessagesUntrash' where
               _umuOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersMessagesUntrashResource)
-                      r
-                      u
+                      rq

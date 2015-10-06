@@ -16,7 +16,7 @@
 module Network.Google.PageSpeed.Types
     (
     -- * Service URL
-      pageSpeedURL
+      pageSpeedRequest
 
     -- * PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
     , PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
@@ -126,9 +126,8 @@ import           Network.Google.PageSpeed.Types.Product
 import           Network.Google.PageSpeed.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v2' of the PageSpeed Insights API.
-pageSpeedURL :: BaseUrl
-pageSpeedURL
-  = BaseUrl Https
-      "https://www.googleapis.com/pagespeedonline/v2/"
-      443
+-- | Default request referring to version 'v2' of the PageSpeed Insights API.
+pageSpeedRequest :: RequestBuilder
+pageSpeedRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "pagespeedonline/v2/"

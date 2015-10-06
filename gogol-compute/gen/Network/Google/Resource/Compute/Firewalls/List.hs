@@ -194,8 +194,8 @@ instance GoogleAuth FirewallsList' where
 
 instance GoogleRequest FirewallsList' where
         type Rs FirewallsList' = FirewallList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u FirewallsList'{..}
+        request = requestWith computeRequest
+        requestWith rq FirewallsList'{..}
           = go _flProject _flFilter _flPageToken
               (Just _flMaxResults)
               _flQuotaUser
@@ -206,7 +206,5 @@ instance GoogleRequest FirewallsList' where
               _flOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy FirewallsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy FirewallsListResource)
+                      rq

@@ -196,8 +196,8 @@ instance GoogleAuth PeopleListByActivity' where
 
 instance GoogleRequest PeopleListByActivity' where
         type Rs PeopleListByActivity' = PeopleFeed
-        request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u PeopleListByActivity'{..}
+        request = requestWith plusDomainsRequest
+        requestWith rq PeopleListByActivity'{..}
           = go _plbaActivityId _plbaCollection _plbaPageToken
               (Just _plbaMaxResults)
               _plbaQuotaUser
@@ -208,7 +208,6 @@ instance GoogleRequest PeopleListByActivity' where
               _plbaOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PeopleListByActivityResource)
-                      r
-                      u
+                      rq

@@ -151,8 +151,8 @@ instance GoogleAuth ProjectsOperationsList' where
 instance GoogleRequest ProjectsOperationsList' where
         type Rs ProjectsOperationsList' =
              ListAggregatedOperationsResponse
-        request = requestWithRoute defReq containerURL
-        requestWithRoute r u ProjectsOperationsList'{..}
+        request = requestWith containerRequest
+        requestWith rq ProjectsOperationsList'{..}
           = go _polProjectId _polQuotaUser
               (Just _polPrettyPrint)
               _polUserIP
@@ -161,7 +161,6 @@ instance GoogleRequest ProjectsOperationsList' where
               _polOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsOperationsListResource)
-                      r
-                      u
+                      rq

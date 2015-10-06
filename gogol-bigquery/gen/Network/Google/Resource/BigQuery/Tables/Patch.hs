@@ -190,8 +190,8 @@ instance GoogleAuth TablesPatch' where
 
 instance GoogleRequest TablesPatch' where
         type Rs TablesPatch' = Table
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u TablesPatch'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq TablesPatch'{..}
           = go _tpProjectId _tpDatasetId _tpTableId
               _tpQuotaUser
               (Just _tpPrettyPrint)
@@ -202,7 +202,4 @@ instance GoogleRequest TablesPatch' where
               (Just AltJSON)
               _tpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TablesPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TablesPatchResource) rq

@@ -159,8 +159,8 @@ instance GoogleAuth ReportsDelete' where
 
 instance GoogleRequest ReportsDelete' where
         type Rs ReportsDelete' = ()
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ReportsDelete'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ReportsDelete'{..}
           = go _rdProFileId _rdReportId _rdQuotaUser
               (Just _rdPrettyPrint)
               _rdUserIP
@@ -169,7 +169,5 @@ instance GoogleRequest ReportsDelete' where
               _rdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ReportsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ReportsDeleteResource)
+                      rq

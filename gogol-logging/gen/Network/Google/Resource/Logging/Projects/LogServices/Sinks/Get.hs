@@ -252,8 +252,8 @@ instance GoogleAuth ProjectsLogServicesSinksGet'
 instance GoogleRequest ProjectsLogServicesSinksGet'
          where
         type Rs ProjectsLogServicesSinksGet' = LogSink
-        request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsLogServicesSinksGet'{..}
+        request = requestWith loggingRequest
+        requestWith rq ProjectsLogServicesSinksGet'{..}
           = go _plssgProjectsId _plssgLogServicesId
               _plssgSinksId
               _plssgXgafv
@@ -270,7 +270,6 @@ instance GoogleRequest ProjectsLogServicesSinksGet'
               _plssgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsLogServicesSinksGetResource)
-                      r
-                      u
+                      rq

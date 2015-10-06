@@ -163,8 +163,8 @@ instance GoogleAuth UsersPhotosUpdate' where
 
 instance GoogleRequest UsersPhotosUpdate' where
         type Rs UsersPhotosUpdate' = UserPhoto
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u UsersPhotosUpdate'{..}
+        request = requestWith directoryRequest
+        requestWith rq UsersPhotosUpdate'{..}
           = go _upuUserKey _upuQuotaUser (Just _upuPrettyPrint)
               _upuUserIP
               _upuFields
@@ -173,7 +173,6 @@ instance GoogleRequest UsersPhotosUpdate' where
               (Just AltJSON)
               _upuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersPhotosUpdateResource)
-                      r
-                      u
+                      rq

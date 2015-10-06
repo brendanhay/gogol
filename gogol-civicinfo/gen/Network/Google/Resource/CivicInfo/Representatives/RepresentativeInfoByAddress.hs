@@ -204,8 +204,8 @@ instance GoogleRequest
          RepresentativesRepresentativeInfoByAddress' where
         type Rs RepresentativesRepresentativeInfoByAddress' =
              RepresentativeInfoResponse
-        request = requestWithRoute defReq civicInfoURL
-        requestWithRoute r u
+        request = requestWith civicInfoRequest
+        requestWith rq
           RepresentativesRepresentativeInfoByAddress'{..}
           = go (_rribaRoles ^. _Default) _rribaAddress
               (Just _rribaIncludeOffices)
@@ -218,9 +218,8 @@ instance GoogleRequest
               _rribaOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy
                            RepresentativesRepresentativeInfoByAddressResource)
-                      r
-                      u
+                      rq

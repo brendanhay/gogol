@@ -221,8 +221,8 @@ instance GoogleAuth ProjectsCreate' where
 
 instance GoogleRequest ProjectsCreate' where
         type Rs ProjectsCreate' = Project
-        request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsCreate'{..}
+        request = requestWith resourceManagerRequest
+        requestWith rq ProjectsCreate'{..}
           = go _pcXgafv _pcUploadProtocol (Just _pcPp)
               _pcAccessToken
               _pcUploadType
@@ -236,7 +236,5 @@ instance GoogleRequest ProjectsCreate' where
               (Just AltJSON)
               _pcPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ProjectsCreateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ProjectsCreateResource)
+                      rq

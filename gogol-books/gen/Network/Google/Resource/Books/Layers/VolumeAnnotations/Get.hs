@@ -203,8 +203,8 @@ instance GoogleRequest LayersVolumeAnnotationsGet'
          where
         type Rs LayersVolumeAnnotationsGet' =
              Volumeannotation
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u LayersVolumeAnnotationsGet'{..}
+        request = requestWith booksRequest
+        requestWith rq LayersVolumeAnnotationsGet'{..}
           = go _lvagVolumeId _lvagLayerId _lvagAnnotationId
               _lvagLocale
               _lvagSource
@@ -216,7 +216,6 @@ instance GoogleRequest LayersVolumeAnnotationsGet'
               _lvagOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LayersVolumeAnnotationsGetResource)
-                      r
-                      u
+                      rq

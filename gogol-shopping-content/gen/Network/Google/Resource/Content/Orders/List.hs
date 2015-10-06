@@ -246,8 +246,8 @@ instance GoogleAuth OrdersList' where
 
 instance GoogleRequest OrdersList' where
         type Rs OrdersList' = OrdersListResponse
-        request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersList'{..}
+        request = requestWith shoppingContentRequest
+        requestWith rq OrdersList'{..}
           = go _olMerchantId _olPlacedDateEnd _olOrderBy
               _olAcknowledged
               (_olStatuses ^. _Default)
@@ -262,6 +262,4 @@ instance GoogleRequest OrdersList' where
               _olOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy OrdersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy OrdersListResource) rq

@@ -172,8 +172,8 @@ instance GoogleAuth UsersDraftsCreate' where
 
 instance GoogleRequest UsersDraftsCreate' where
         type Rs UsersDraftsCreate' = Draft
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersDraftsCreate'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersDraftsCreate'{..}
           = go _udcUserId _udcQuotaUser (Just _udcPrettyPrint)
               _udcUserIP
               _udcFields
@@ -183,7 +183,6 @@ instance GoogleRequest UsersDraftsCreate' where
               _udcPayload
               _udcMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersDraftsCreateResource)
-                      r
-                      u
+                      rq

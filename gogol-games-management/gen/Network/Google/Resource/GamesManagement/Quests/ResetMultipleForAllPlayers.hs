@@ -160,9 +160,8 @@ instance GoogleAuth QuestsResetMultipleForAllPlayers'
 instance GoogleRequest
          QuestsResetMultipleForAllPlayers' where
         type Rs QuestsResetMultipleForAllPlayers' = ()
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u
-          QuestsResetMultipleForAllPlayers'{..}
+        request = requestWith gamesManagementRequest
+        requestWith rq QuestsResetMultipleForAllPlayers'{..}
           = go _qrmfapQuotaUser (Just _qrmfapPrettyPrint)
               _qrmfapUserIP
               _qrmfapFields
@@ -171,8 +170,7 @@ instance GoogleRequest
               (Just AltJSON)
               _qrmfapPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy QuestsResetMultipleForAllPlayersResource)
-                      r
-                      u
+                      rq

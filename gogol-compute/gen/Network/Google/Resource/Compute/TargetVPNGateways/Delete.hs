@@ -176,8 +176,8 @@ instance GoogleAuth TargetVPNGatewaysDelete' where
 
 instance GoogleRequest TargetVPNGatewaysDelete' where
         type Rs TargetVPNGatewaysDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetVPNGatewaysDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetVPNGatewaysDelete'{..}
           = go _tvgdProject _tvgdRegion _tvgdTargetVPNGateway
               _tvgdQuotaUser
               (Just _tvgdPrettyPrint)
@@ -187,7 +187,6 @@ instance GoogleRequest TargetVPNGatewaysDelete' where
               _tvgdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetVPNGatewaysDeleteResource)
-                      r
-                      u
+                      rq

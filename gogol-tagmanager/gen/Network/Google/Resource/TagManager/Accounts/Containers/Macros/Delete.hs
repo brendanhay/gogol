@@ -180,9 +180,8 @@ instance GoogleAuth AccountsContainersMacrosDelete'
 instance GoogleRequest
          AccountsContainersMacrosDelete' where
         type Rs AccountsContainersMacrosDelete' = ()
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersMacrosDelete'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersMacrosDelete'{..}
           = go _acmdAccountId _acmdContainerId _acmdMacroId
               _acmdQuotaUser
               (Just _acmdPrettyPrint)
@@ -192,8 +191,7 @@ instance GoogleRequest
               _acmdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersMacrosDeleteResource)
-                      r
-                      u
+                      rq

@@ -22,7 +22,7 @@ module Network.Google.MapsEngine
     -- * API
       MapsEngineAPI
     , mapsEngineAPI
-    , mapsEngineURL
+    , mapsEngineRequest
 
     -- * Service Methods
 

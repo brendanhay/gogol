@@ -187,8 +187,8 @@ instance GoogleAuth QuestsList' where
 
 instance GoogleRequest QuestsList' where
         type Rs QuestsList' = QuestListResponse
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u QuestsList'{..}
+        request = requestWith gamesRequest
+        requestWith rq QuestsList'{..}
           = go _qlPlayerId _qlLanguage _qlPageToken
               _qlMaxResults
               _qlQuotaUser
@@ -199,6 +199,4 @@ instance GoogleRequest QuestsList' where
               _qlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy QuestsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy QuestsListResource) rq

@@ -583,8 +583,8 @@ instance GoogleAuth CompaniesList' where
 
 instance GoogleRequest CompaniesList' where
         type Rs CompaniesList' = ListCompaniesResponse
-        request = requestWithRoute defReq partnersURL
-        requestWithRoute r u CompaniesList'{..}
+        request = requestWith partnersRequest
+        requestWith rq CompaniesList'{..}
           = go (_clLanguageCodes ^. _Default) _clXgafv
               _clMaxMonthlyBudgetUnits
               _clUploadProtocol
@@ -622,7 +622,5 @@ instance GoogleRequest CompaniesList' where
               _clOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CompaniesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CompaniesListResource)
+                      rq

@@ -173,8 +173,8 @@ instance GoogleAuth CreativesPatch' where
 
 instance GoogleRequest CreativesPatch' where
         type Rs CreativesPatch' = Creative
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativesPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativesPatch'{..}
           = go _cppProFileId (Just _cppId) _cppQuotaUser
               (Just _cppPrettyPrint)
               _cppUserIP
@@ -184,7 +184,5 @@ instance GoogleRequest CreativesPatch' where
               (Just AltJSON)
               _cppPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CreativesPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CreativesPatchResource)
+                      rq

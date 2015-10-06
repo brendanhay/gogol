@@ -175,8 +175,8 @@ instance GoogleAuth TargetPoolsDelete' where
 
 instance GoogleRequest TargetPoolsDelete' where
         type Rs TargetPoolsDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetPoolsDelete'{..}
           = go _tpdProject _tpdRegion _tpdTargetPool
               _tpdQuotaUser
               (Just _tpdPrettyPrint)
@@ -186,7 +186,6 @@ instance GoogleRequest TargetPoolsDelete' where
               _tpdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetPoolsDeleteResource)
-                      r
-                      u
+                      rq

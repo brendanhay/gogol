@@ -288,8 +288,8 @@ instance GoogleAuth DataGaGet' where
 
 instance GoogleRequest DataGaGet' where
         type Rs DataGaGet' = GaData
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u DataGaGet'{..}
+        request = requestWith analyticsRequest
+        requestWith rq DataGaGet'{..}
           = go (Just _dggIds) (Just _dggStartDate)
               (Just _dggEndDate)
               (Just _dggMetrics)
@@ -309,6 +309,4 @@ instance GoogleRequest DataGaGet' where
               _dggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy DataGaGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DataGaGetResource) rq

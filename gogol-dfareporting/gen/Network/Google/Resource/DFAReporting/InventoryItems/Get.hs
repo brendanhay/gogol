@@ -175,8 +175,8 @@ instance GoogleAuth InventoryItemsGet' where
 
 instance GoogleRequest InventoryItemsGet' where
         type Rs InventoryItemsGet' = InventoryItem
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u InventoryItemsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq InventoryItemsGet'{..}
           = go _iigProFileId _iigProjectId _iigId _iigQuotaUser
               (Just _iigPrettyPrint)
               _iigUserIP
@@ -185,7 +185,6 @@ instance GoogleRequest InventoryItemsGet' where
               _iigOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InventoryItemsGetResource)
-                      r
-                      u
+                      rq

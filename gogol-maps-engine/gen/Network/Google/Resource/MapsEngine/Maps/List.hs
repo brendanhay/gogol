@@ -306,8 +306,8 @@ instance GoogleAuth MapsList' where
 
 instance GoogleRequest MapsList' where
         type Rs MapsList' = MapsListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u MapsList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq MapsList'{..}
           = go _mllCreatedAfter _mllCreatorEmail _mllRole
               _mllBbox
               _mllProcessingStatus
@@ -327,5 +327,4 @@ instance GoogleRequest MapsList' where
               _mllOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy MapsListResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy MapsListResource) rq

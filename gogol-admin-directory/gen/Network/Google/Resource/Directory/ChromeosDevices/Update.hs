@@ -191,8 +191,8 @@ instance GoogleAuth ChromeosDevicesUpdate' where
 
 instance GoogleRequest ChromeosDevicesUpdate' where
         type Rs ChromeosDevicesUpdate' = ChromeOSDevice
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u ChromeosDevicesUpdate'{..}
+        request = requestWith directoryRequest
+        requestWith rq ChromeosDevicesUpdate'{..}
           = go _cduCustomerId _cduDeviceId _cduProjection
               _cduQuotaUser
               (Just _cduPrettyPrint)
@@ -203,7 +203,6 @@ instance GoogleRequest ChromeosDevicesUpdate' where
               (Just AltJSON)
               _cduPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ChromeosDevicesUpdateResource)
-                      r
-                      u
+                      rq

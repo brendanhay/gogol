@@ -21,7 +21,7 @@ module Network.Google.GamesConfiguration
     -- * API
       GamesConfigurationAPI
     , gamesConfigurationAPI
-    , gamesConfigurationURL
+    , gamesConfigurationRequest
 
     -- * Service Methods
 

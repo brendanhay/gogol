@@ -148,8 +148,8 @@ instance GoogleAuth BrowsersList' where
 
 instance GoogleRequest BrowsersList' where
         type Rs BrowsersList' = BrowsersListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u BrowsersList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq BrowsersList'{..}
           = go _blProFileId _blQuotaUser (Just _blPrettyPrint)
               _blUserIP
               _blFields
@@ -157,7 +157,5 @@ instance GoogleRequest BrowsersList' where
               _blOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy BrowsersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy BrowsersListResource)
+                      rq

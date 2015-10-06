@@ -156,8 +156,8 @@ instance GoogleAuth RoomsGet' where
 
 instance GoogleRequest RoomsGet' where
         type Rs RoomsGet' = Room
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u RoomsGet'{..}
+        request = requestWith gamesRequest
+        requestWith rq RoomsGet'{..}
           = go _rgRoomId _rgLanguage _rgQuotaUser
               (Just _rgPrettyPrint)
               _rgUserIP
@@ -166,5 +166,4 @@ instance GoogleRequest RoomsGet' where
               _rgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy RoomsGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy RoomsGetResource) rq

@@ -285,8 +285,8 @@ instance GoogleAuth UsersWatch' where
 
 instance GoogleRequest UsersWatch' where
         type Rs UsersWatch' = Channel
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u UsersWatch'{..}
+        request = requestWith directoryRequest
+        requestWith rq UsersWatch'{..}
           = go _uwEvent _uwOrderBy (Just _uwViewType)
               _uwCustomFieldMask
               _uwDomain
@@ -306,6 +306,4 @@ instance GoogleRequest UsersWatch' where
               (Just AltJSON)
               _uwPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersWatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersWatchResource) rq

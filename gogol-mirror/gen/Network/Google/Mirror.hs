@@ -21,7 +21,7 @@ module Network.Google.Mirror
     -- * API
       MirrorAPI
     , mirrorAPI
-    , mirrorURL
+    , mirrorRequest
 
     -- * Service Methods
 

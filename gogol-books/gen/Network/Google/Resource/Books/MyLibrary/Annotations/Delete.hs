@@ -164,8 +164,8 @@ instance GoogleAuth MyLibraryAnnotationsDelete' where
 instance GoogleRequest MyLibraryAnnotationsDelete'
          where
         type Rs MyLibraryAnnotationsDelete' = ()
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u MyLibraryAnnotationsDelete'{..}
+        request = requestWith booksRequest
+        requestWith rq MyLibraryAnnotationsDelete'{..}
           = go _mladAnnotationId _mladSource _mladQuotaUser
               (Just _mladPrettyPrint)
               _mladUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest MyLibraryAnnotationsDelete'
               _mladOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MyLibraryAnnotationsDeleteResource)
-                      r
-                      u
+                      rq

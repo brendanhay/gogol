@@ -16,7 +16,7 @@
 module Network.Google.WebmasterTools.Types
     (
     -- * Service URL
-      webmasterToolsURL
+      webmasterToolsRequest
 
     -- * WmxSitemapContent
     , WmxSitemapContent
@@ -160,9 +160,8 @@ import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types.Product
 import           Network.Google.WebmasterTools.Types.Sum
 
--- | URL referring to version 'v3' of the Webmaster Tools API.
-webmasterToolsURL :: BaseUrl
-webmasterToolsURL
-  = BaseUrl Https
-      "https://www.googleapis.com/webmasters/v3/"
-      443
+-- | Default request referring to version 'v3' of the Webmaster Tools API.
+webmasterToolsRequest :: RequestBuilder
+webmasterToolsRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "webmasters/v3/"

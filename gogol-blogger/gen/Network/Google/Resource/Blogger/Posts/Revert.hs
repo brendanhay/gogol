@@ -158,8 +158,8 @@ instance GoogleAuth PostsRevert' where
 
 instance GoogleRequest PostsRevert' where
         type Rs PostsRevert' = Post'
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostsRevert'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PostsRevert'{..}
           = go _prBlogId _prPostId _prQuotaUser
               (Just _prPrettyPrint)
               _prUserIP
@@ -168,7 +168,4 @@ instance GoogleRequest PostsRevert' where
               _prOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PostsRevertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PostsRevertResource) rq

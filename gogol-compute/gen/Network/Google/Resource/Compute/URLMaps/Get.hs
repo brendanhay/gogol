@@ -162,8 +162,8 @@ instance GoogleAuth URLMapsGet' where
 
 instance GoogleRequest URLMapsGet' where
         type Rs URLMapsGet' = URLMap
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u URLMapsGet'{..}
+        request = requestWith computeRequest
+        requestWith rq URLMapsGet'{..}
           = go _umgProject _umgURLMap _umgQuotaUser
               (Just _umgPrettyPrint)
               _umgUserIP
@@ -172,6 +172,4 @@ instance GoogleRequest URLMapsGet' where
               _umgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy URLMapsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy URLMapsGetResource) rq

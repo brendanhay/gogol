@@ -176,8 +176,8 @@ instance GoogleAuth TablesParentsList' where
 
 instance GoogleRequest TablesParentsList' where
         type Rs TablesParentsList' = ParentsListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u TablesParentsList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesParentsList'{..}
           = go _tabId _tabPageToken _tabMaxResults
               _tabQuotaUser
               (Just _tabPrettyPrint)
@@ -187,7 +187,6 @@ instance GoogleRequest TablesParentsList' where
               _tabOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TablesParentsListResource)
-                      r
-                      u
+                      rq

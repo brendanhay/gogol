@@ -160,8 +160,8 @@ instance GoogleAuth ACLGet' where
 
 instance GoogleRequest ACLGet' where
         type Rs ACLGet' = ACLRule
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u ACLGet'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq ACLGet'{..}
           = go _agCalendarId _agRuleId _agQuotaUser
               (Just _agPrettyPrint)
               _agUserIP
@@ -170,4 +170,4 @@ instance GoogleRequest ACLGet' where
               _agOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ACLGetResource) r u
+                  = clientBuild (Proxy :: Proxy ACLGetResource) rq

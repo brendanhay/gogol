@@ -150,8 +150,8 @@ instance GoogleAuth AdClientsGet' where
 
 instance GoogleRequest AdClientsGet' where
         type Rs AdClientsGet' = AdClient
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AdClientsGet'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq AdClientsGet'{..}
           = go _acgAdClientId _acgQuotaUser
               (Just _acgPrettyPrint)
               _acgUserIP
@@ -160,7 +160,5 @@ instance GoogleRequest AdClientsGet' where
               _acgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AdClientsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AdClientsGetResource)
+                      rq

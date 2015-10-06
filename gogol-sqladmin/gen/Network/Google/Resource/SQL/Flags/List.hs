@@ -135,14 +135,12 @@ instance GoogleAuth FlagsList' where
 
 instance GoogleRequest FlagsList' where
         type Rs FlagsList' = FlagsListResponse
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u FlagsList'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq FlagsList'{..}
           = go _flQuotaUser (Just _flPrettyPrint) _flUserIP
               _flFields
               _flKey
               _flOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy FlagsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy FlagsListResource) rq

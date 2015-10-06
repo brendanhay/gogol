@@ -186,8 +186,8 @@ instance GoogleAuth TasksMove' where
 
 instance GoogleRequest TasksMove' where
         type Rs TasksMove' = Task
-        request = requestWithRoute defReq appsTasksURL
-        requestWithRoute r u TasksMove'{..}
+        request = requestWith appsTasksRequest
+        requestWith rq TasksMove'{..}
           = go _tmTaskList _tmTask _tmParent _tmPrevious
               _tmQuotaUser
               (Just _tmPrettyPrint)
@@ -197,6 +197,4 @@ instance GoogleRequest TasksMove' where
               _tmOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TasksMoveResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TasksMoveResource) rq

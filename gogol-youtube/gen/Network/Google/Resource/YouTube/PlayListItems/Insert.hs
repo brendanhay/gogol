@@ -185,8 +185,8 @@ instance GoogleAuth PlayListItemsInsert' where
 
 instance GoogleRequest PlayListItemsInsert' where
         type Rs PlayListItemsInsert' = PlayListItem
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u PlayListItemsInsert'{..}
+        request = requestWith youTubeRequest
+        requestWith rq PlayListItemsInsert'{..}
           = go (Just _pliiPart) _pliiOnBehalfOfContentOwner
               _pliiQuotaUser
               (Just _pliiPrettyPrint)
@@ -197,7 +197,6 @@ instance GoogleRequest PlayListItemsInsert' where
               (Just AltJSON)
               _pliiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlayListItemsInsertResource)
-                      r
-                      u
+                      rq

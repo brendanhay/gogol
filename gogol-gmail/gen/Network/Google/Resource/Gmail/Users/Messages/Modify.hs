@@ -175,8 +175,8 @@ instance GoogleAuth UsersMessagesModify' where
 
 instance GoogleRequest UsersMessagesModify' where
         type Rs UsersMessagesModify' = Message
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesModify'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersMessagesModify'{..}
           = go _ummUserId _ummId _ummQuotaUser
               (Just _ummPrettyPrint)
               _ummUserIP
@@ -186,7 +186,6 @@ instance GoogleRequest UsersMessagesModify' where
               (Just AltJSON)
               _ummPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersMessagesModifyResource)
-                      r
-                      u
+                      rq

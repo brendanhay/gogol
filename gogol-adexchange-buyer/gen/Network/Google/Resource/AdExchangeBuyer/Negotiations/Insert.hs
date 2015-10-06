@@ -147,8 +147,8 @@ instance GoogleAuth NegotiationsInsert' where
 
 instance GoogleRequest NegotiationsInsert' where
         type Rs NegotiationsInsert' = NegotiationDTO
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u NegotiationsInsert'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq NegotiationsInsert'{..}
           = go _niQuotaUser (Just _niPrettyPrint) _niUserIP
               _niFields
               _niKey
@@ -156,7 +156,6 @@ instance GoogleRequest NegotiationsInsert' where
               (Just AltJSON)
               _niPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy NegotiationsInsertResource)
-                      r
-                      u
+                      rq

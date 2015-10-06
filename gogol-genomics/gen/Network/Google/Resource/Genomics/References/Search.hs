@@ -153,8 +153,8 @@ instance GoogleAuth ReferencesSearch' where
 
 instance GoogleRequest ReferencesSearch' where
         type Rs ReferencesSearch' = SearchReferencesResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReferencesSearch'{..}
+        request = requestWith genomicsRequest
+        requestWith rq ReferencesSearch'{..}
           = go _refQuotaUser (Just _refPrettyPrint) _refUserIP
               _refFields
               _refKey
@@ -162,7 +162,6 @@ instance GoogleRequest ReferencesSearch' where
               (Just AltJSON)
               _refPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReferencesSearchResource)
-                      r
-                      u
+                      rq

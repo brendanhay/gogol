@@ -163,8 +163,8 @@ instance GoogleAuth PagesRevert' where
 
 instance GoogleRequest PagesRevert' where
         type Rs PagesRevert' = Page
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PagesRevert'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PagesRevert'{..}
           = go _pagBlogId _pagPageId _pagQuotaUser
               (Just _pagPrettyPrint)
               _pagUserIP
@@ -173,7 +173,4 @@ instance GoogleRequest PagesRevert' where
               _pagOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PagesRevertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PagesRevertResource) rq

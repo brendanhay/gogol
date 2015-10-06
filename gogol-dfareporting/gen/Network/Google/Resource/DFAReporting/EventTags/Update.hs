@@ -162,8 +162,8 @@ instance GoogleAuth EventTagsUpdate' where
 
 instance GoogleRequest EventTagsUpdate' where
         type Rs EventTagsUpdate' = EventTag
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u EventTagsUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq EventTagsUpdate'{..}
           = go _etuProFileId _etuQuotaUser
               (Just _etuPrettyPrint)
               _etuUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest EventTagsUpdate' where
               (Just AltJSON)
               _etuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EventTagsUpdateResource)
-                      r
-                      u
+                      rq

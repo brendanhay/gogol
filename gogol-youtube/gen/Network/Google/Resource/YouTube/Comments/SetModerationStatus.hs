@@ -187,8 +187,8 @@ instance GoogleAuth CommentsSetModerationStatus'
 instance GoogleRequest CommentsSetModerationStatus'
          where
         type Rs CommentsSetModerationStatus' = ()
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CommentsSetModerationStatus'{..}
+        request = requestWith youTubeRequest
+        requestWith rq CommentsSetModerationStatus'{..}
           = go (Just _csmsId) (Just _csmsModerationStatus)
               (Just _csmsBanAuthor)
               _csmsQuotaUser
@@ -199,7 +199,6 @@ instance GoogleRequest CommentsSetModerationStatus'
               _csmsOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CommentsSetModerationStatusResource)
-                      r
-                      u
+                      rq

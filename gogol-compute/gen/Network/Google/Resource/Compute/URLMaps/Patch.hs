@@ -176,8 +176,8 @@ instance GoogleAuth URLMapsPatch' where
 
 instance GoogleRequest URLMapsPatch' where
         type Rs URLMapsPatch' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u URLMapsPatch'{..}
+        request = requestWith computeRequest
+        requestWith rq URLMapsPatch'{..}
           = go _umpProject _umpURLMap _umpQuotaUser
               (Just _umpPrettyPrint)
               _umpUserIP
@@ -187,7 +187,5 @@ instance GoogleRequest URLMapsPatch' where
               (Just AltJSON)
               _umpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy URLMapsPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy URLMapsPatchResource)
+                      rq

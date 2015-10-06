@@ -167,9 +167,8 @@ instance GoogleRequest RastersPermissionsBatchDelete'
          where
         type Rs RastersPermissionsBatchDelete' =
              PermissionsBatchDeleteResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u
-          RastersPermissionsBatchDelete'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq RastersPermissionsBatchDelete'{..}
           = go _rpbdId _rpbdQuotaUser (Just _rpbdPrettyPrint)
               _rpbdUserIP
               _rpbdFields
@@ -178,8 +177,7 @@ instance GoogleRequest RastersPermissionsBatchDelete'
               (Just AltJSON)
               _rpbdPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy RastersPermissionsBatchDeleteResource)
-                      r
-                      u
+                      rq

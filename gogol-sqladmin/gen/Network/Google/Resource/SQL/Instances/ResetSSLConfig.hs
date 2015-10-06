@@ -170,8 +170,8 @@ instance GoogleAuth InstancesResetSSLConfig' where
 
 instance GoogleRequest InstancesResetSSLConfig' where
         type Rs InstancesResetSSLConfig' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesResetSSLConfig'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq InstancesResetSSLConfig'{..}
           = go _irscProject _irscInstance _irscQuotaUser
               (Just _irscPrettyPrint)
               _irscUserIP
@@ -180,7 +180,6 @@ instance GoogleRequest InstancesResetSSLConfig' where
               _irscOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesResetSSLConfigResource)
-                      r
-                      u
+                      rq

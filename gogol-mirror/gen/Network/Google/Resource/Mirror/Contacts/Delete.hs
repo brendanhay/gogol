@@ -145,8 +145,8 @@ instance GoogleAuth ContactsDelete' where
 
 instance GoogleRequest ContactsDelete' where
         type Rs ContactsDelete' = ()
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u ContactsDelete'{..}
+        request = requestWith mirrorRequest
+        requestWith rq ContactsDelete'{..}
           = go _cdId _cdQuotaUser (Just _cdPrettyPrint)
               _cdUserIP
               _cdFields
@@ -154,7 +154,5 @@ instance GoogleRequest ContactsDelete' where
               _cdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ContactsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ContactsDeleteResource)
+                      rq

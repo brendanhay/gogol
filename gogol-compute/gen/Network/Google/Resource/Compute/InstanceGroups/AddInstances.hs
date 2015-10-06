@@ -192,8 +192,8 @@ instance GoogleAuth InstanceGroupsAddInstances' where
 instance GoogleRequest InstanceGroupsAddInstances'
          where
         type Rs InstanceGroupsAddInstances' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceGroupsAddInstances'{..}
+        request = requestWith computeRequest
+        requestWith rq InstanceGroupsAddInstances'{..}
           = go _igaiProject _igaiZone _igaiInstanceGroup
               _igaiQuotaUser
               (Just _igaiPrettyPrint)
@@ -204,7 +204,6 @@ instance GoogleRequest InstanceGroupsAddInstances'
               (Just AltJSON)
               _igaiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstanceGroupsAddInstancesResource)
-                      r
-                      u
+                      rq

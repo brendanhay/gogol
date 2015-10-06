@@ -171,9 +171,8 @@ instance GoogleRequest RastersPermissionsBatchUpdate'
          where
         type Rs RastersPermissionsBatchUpdate' =
              PermissionsBatchUpdateResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u
-          RastersPermissionsBatchUpdate'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq RastersPermissionsBatchUpdate'{..}
           = go _rpbuId _rpbuQuotaUser (Just _rpbuPrettyPrint)
               _rpbuUserIP
               _rpbuFields
@@ -182,8 +181,7 @@ instance GoogleRequest RastersPermissionsBatchUpdate'
               (Just AltJSON)
               _rpbuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy RastersPermissionsBatchUpdateResource)
-                      r
-                      u
+                      rq

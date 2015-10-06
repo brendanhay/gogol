@@ -193,8 +193,8 @@ instance GoogleAuth ManagementExperimentsGet' where
 instance GoogleRequest ManagementExperimentsGet'
          where
         type Rs ManagementExperimentsGet' = Experiment
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementExperimentsGet'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementExperimentsGet'{..}
           = go _megAccountId _megWebPropertyId _megProFileId
               _megExperimentId
               _megQuotaUser
@@ -205,7 +205,6 @@ instance GoogleRequest ManagementExperimentsGet'
               _megOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementExperimentsGetResource)
-                      r
-                      u
+                      rq

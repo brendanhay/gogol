@@ -22,7 +22,7 @@ module Network.Google.AdSenseHost
     -- * API
       AdSenseHostAPI
     , adSenseHostAPI
-    , adSenseHostURL
+    , adSenseHostRequest
 
     -- * Service Methods
 

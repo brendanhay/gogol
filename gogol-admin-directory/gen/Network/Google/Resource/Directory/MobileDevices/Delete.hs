@@ -165,8 +165,8 @@ instance GoogleAuth MobileDevicesDelete' where
 
 instance GoogleRequest MobileDevicesDelete' where
         type Rs MobileDevicesDelete' = ()
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u MobileDevicesDelete'{..}
+        request = requestWith directoryRequest
+        requestWith rq MobileDevicesDelete'{..}
           = go _mddCustomerId _mddResourceId _mddQuotaUser
               (Just _mddPrettyPrint)
               _mddUserIP
@@ -175,7 +175,6 @@ instance GoogleRequest MobileDevicesDelete' where
               _mddOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MobileDevicesDeleteResource)
-                      r
-                      u
+                      rq

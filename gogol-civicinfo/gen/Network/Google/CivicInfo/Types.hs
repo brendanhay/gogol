@@ -16,7 +16,7 @@
 module Network.Google.CivicInfo.Types
     (
     -- * Service URL
-      civicInfoURL
+      civicInfoRequest
 
     -- * RepresentativeInfoResponseDivisions
     , RepresentativeInfoResponseDivisions
@@ -248,9 +248,8 @@ import           Network.Google.CivicInfo.Types.Product
 import           Network.Google.CivicInfo.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v2' of the Google Civic Information API.
-civicInfoURL :: BaseUrl
-civicInfoURL
-  = BaseUrl Https
-      "https://www.googleapis.com/civicinfo/v2/"
-      443
+-- | Default request referring to version 'v2' of the Google Civic Information API.
+civicInfoRequest :: RequestBuilder
+civicInfoRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "civicinfo/v2/"

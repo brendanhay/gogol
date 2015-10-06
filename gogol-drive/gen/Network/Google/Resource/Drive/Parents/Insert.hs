@@ -163,8 +163,8 @@ instance GoogleAuth ParentsInsert' where
 
 instance GoogleRequest ParentsInsert' where
         type Rs ParentsInsert' = ParentReference
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u ParentsInsert'{..}
+        request = requestWith driveRequest
+        requestWith rq ParentsInsert'{..}
           = go _piiFileId _piiQuotaUser (Just _piiPrettyPrint)
               _piiUserIP
               _piiFields
@@ -173,7 +173,5 @@ instance GoogleRequest ParentsInsert' where
               (Just AltJSON)
               _piiPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ParentsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ParentsInsertResource)
+                      rq

@@ -231,8 +231,8 @@ instance GoogleAuth ProjectsUpdate' where
 
 instance GoogleRequest ProjectsUpdate' where
         type Rs ProjectsUpdate' = Project
-        request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsUpdate'{..}
+        request = requestWith resourceManagerRequest
+        requestWith rq ProjectsUpdate'{..}
           = go _puProjectId _puXgafv _puUploadProtocol
               (Just _puPp)
               _puAccessToken
@@ -247,7 +247,5 @@ instance GoogleRequest ProjectsUpdate' where
               (Just AltJSON)
               _puPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ProjectsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ProjectsUpdateResource)
+                      rq

@@ -173,9 +173,8 @@ instance GoogleAuth CollectionsUpdate' where
 
 instance GoogleRequest CollectionsUpdate' where
         type Rs CollectionsUpdate' = Collection
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u CollectionsUpdate'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq CollectionsUpdate'{..}
           = go _cuEnterpriseId _cuCollectionId _cuQuotaUser
               (Just _cuPrettyPrint)
               _cuUserIP
@@ -185,7 +184,6 @@ instance GoogleRequest CollectionsUpdate' where
               (Just AltJSON)
               _cuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CollectionsUpdateResource)
-                      r
-                      u
+                      rq

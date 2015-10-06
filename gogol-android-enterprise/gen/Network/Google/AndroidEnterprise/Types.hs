@@ -16,7 +16,7 @@
 module Network.Google.AndroidEnterprise.Types
     (
     -- * Service URL
-      androidEnterpriseURL
+      androidEnterpriseRequest
 
     -- * GroupLicense
     , GroupLicense
@@ -247,9 +247,8 @@ import           Network.Google.AndroidEnterprise.Types.Product
 import           Network.Google.AndroidEnterprise.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Google Play EMM API.
-androidEnterpriseURL :: BaseUrl
-androidEnterpriseURL
-  = BaseUrl Https
-      "https://www.googleapis.com/androidenterprise/v1/"
-      443
+-- | Default request referring to version 'v1' of the Google Play EMM API.
+androidEnterpriseRequest :: RequestBuilder
+androidEnterpriseRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "androidenterprise/v1/"

@@ -186,9 +186,8 @@ instance GoogleAuth DevicesGetState' where
 
 instance GoogleRequest DevicesGetState' where
         type Rs DevicesGetState' = DeviceState
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u DevicesGetState'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq DevicesGetState'{..}
           = go _dgsEnterpriseId _dgsUserId _dgsDeviceId
               _dgsQuotaUser
               (Just _dgsPrettyPrint)
@@ -198,7 +197,6 @@ instance GoogleRequest DevicesGetState' where
               _dgsOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DevicesGetStateResource)
-                      r
-                      u
+                      rq

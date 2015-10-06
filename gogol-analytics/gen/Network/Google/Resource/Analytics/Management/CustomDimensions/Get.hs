@@ -184,9 +184,8 @@ instance GoogleRequest ManagementCustomDimensionsGet'
          where
         type Rs ManagementCustomDimensionsGet' =
              CustomDimension
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementCustomDimensionsGet'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementCustomDimensionsGet'{..}
           = go _mcdgAccountId _mcdgWebPropertyId
               _mcdgCustomDimensionId
               _mcdgQuotaUser
@@ -197,8 +196,7 @@ instance GoogleRequest ManagementCustomDimensionsGet'
               _mcdgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementCustomDimensionsGetResource)
-                      r
-                      u
+                      rq

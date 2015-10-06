@@ -179,8 +179,8 @@ instance GoogleAuth SSLCertsDelete' where
 
 instance GoogleRequest SSLCertsDelete' where
         type Rs SSLCertsDelete' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u SSLCertsDelete'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq SSLCertsDelete'{..}
           = go _scdProject _scdInstance _scdSha1Fingerprint
               _scdQuotaUser
               (Just _scdPrettyPrint)
@@ -190,7 +190,5 @@ instance GoogleRequest SSLCertsDelete' where
               _scdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SSLCertsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SSLCertsDeleteResource)
+                      rq

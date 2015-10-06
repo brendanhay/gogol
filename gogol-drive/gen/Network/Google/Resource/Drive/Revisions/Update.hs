@@ -170,8 +170,8 @@ instance GoogleAuth RevisionsUpdate' where
 
 instance GoogleRequest RevisionsUpdate' where
         type Rs RevisionsUpdate' = Revision
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u RevisionsUpdate'{..}
+        request = requestWith driveRequest
+        requestWith rq RevisionsUpdate'{..}
           = go _ruFileId _ruRevisionId _ruQuotaUser
               (Just _ruPrettyPrint)
               _ruUserIP
@@ -181,7 +181,6 @@ instance GoogleRequest RevisionsUpdate' where
               (Just AltJSON)
               _ruPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RevisionsUpdateResource)
-                      r
-                      u
+                      rq

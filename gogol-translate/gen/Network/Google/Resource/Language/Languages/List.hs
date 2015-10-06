@@ -147,8 +147,8 @@ instance GoogleAuth LanguagesList' where
 
 instance GoogleRequest LanguagesList' where
         type Rs LanguagesList' = LanguagesListResponse
-        request = requestWithRoute defReq translateURL
-        requestWithRoute r u LanguagesList'{..}
+        request = requestWith translateRequest
+        requestWith rq LanguagesList'{..}
           = go _llTarget _llQuotaUser (Just _llPrettyPrint)
               _llUserIP
               _llFields
@@ -156,7 +156,5 @@ instance GoogleRequest LanguagesList' where
               _llOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy LanguagesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy LanguagesListResource)
+                      rq

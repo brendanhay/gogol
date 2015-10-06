@@ -16,7 +16,7 @@
 module Network.Google.MapsCoordinate.Types
     (
     -- * Service URL
-      mapsCoordinateURL
+      mapsCoordinateRequest
 
     -- * LocationListResponse
     , LocationListResponse
@@ -167,9 +167,8 @@ import           Network.Google.MapsCoordinate.Types.Product
 import           Network.Google.MapsCoordinate.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Google Maps Coordinate API.
-mapsCoordinateURL :: BaseUrl
-mapsCoordinateURL
-  = BaseUrl Https
-      "https://www.googleapis.com/coordinate/v1/"
-      443
+-- | Default request referring to version 'v1' of the Google Maps Coordinate API.
+mapsCoordinateRequest :: RequestBuilder
+mapsCoordinateRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "coordinate/v1/"

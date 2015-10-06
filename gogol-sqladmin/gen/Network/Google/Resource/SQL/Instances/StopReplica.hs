@@ -163,8 +163,8 @@ instance GoogleAuth InstancesStopReplica' where
 
 instance GoogleRequest InstancesStopReplica' where
         type Rs InstancesStopReplica' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesStopReplica'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq InstancesStopReplica'{..}
           = go _isrProject _isrInstance _isrQuotaUser
               (Just _isrPrettyPrint)
               _isrUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest InstancesStopReplica' where
               _isrOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesStopReplicaResource)
-                      r
-                      u
+                      rq

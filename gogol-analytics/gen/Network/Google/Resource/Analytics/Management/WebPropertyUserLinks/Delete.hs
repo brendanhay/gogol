@@ -182,8 +182,8 @@ instance GoogleAuth
 instance GoogleRequest
          ManagementWebPropertyUserLinksDelete' where
         type Rs ManagementWebPropertyUserLinksDelete' = ()
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
+        request = requestWith analyticsRequest
+        requestWith rq
           ManagementWebPropertyUserLinksDelete'{..}
           = go _mwpuldAccountId _mwpuldWebPropertyId
               _mwpuldLinkId
@@ -195,8 +195,7 @@ instance GoogleRequest
               _mwpuldOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementWebPropertyUserLinksDeleteResource)
-                      r
-                      u
+                      rq

@@ -148,8 +148,8 @@ instance GoogleAuth StatesGet' where
 
 instance GoogleRequest StatesGet' where
         type Rs StatesGet' = GetResponse
-        request = requestWithRoute defReq appStateURL
-        requestWithRoute r u StatesGet'{..}
+        request = requestWith appStateRequest
+        requestWith rq StatesGet'{..}
           = go _sgStateKey _sgQuotaUser (Just _sgPrettyPrint)
               _sgUserIP
               _sgFields
@@ -157,6 +157,4 @@ instance GoogleRequest StatesGet' where
               _sgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy StatesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy StatesGetResource) rq

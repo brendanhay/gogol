@@ -198,8 +198,8 @@ instance GoogleAuth AddressesAggregatedList' where
 instance GoogleRequest AddressesAggregatedList' where
         type Rs AddressesAggregatedList' =
              AddressAggregatedList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u AddressesAggregatedList'{..}
+        request = requestWith computeRequest
+        requestWith rq AddressesAggregatedList'{..}
           = go _aalProject _aalFilter _aalPageToken
               (Just _aalMaxResults)
               _aalQuotaUser
@@ -210,7 +210,6 @@ instance GoogleRequest AddressesAggregatedList' where
               _aalOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AddressesAggregatedListResource)
-                      r
-                      u
+                      rq

@@ -145,8 +145,8 @@ instance GoogleAuth AlertsList' where
 
 instance GoogleRequest AlertsList' where
         type Rs AlertsList' = Alerts
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AlertsList'{..}
+        request = requestWith adSenseRequest
+        requestWith rq AlertsList'{..}
           = go _aLocale _aQuotaUser (Just _aPrettyPrint)
               _aUserIP
               _aFields
@@ -154,6 +154,4 @@ instance GoogleRequest AlertsList' where
               _aOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy AlertsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AlertsListResource) rq

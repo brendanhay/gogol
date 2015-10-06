@@ -173,8 +173,8 @@ instance GoogleAuth UsersLabelsPatch' where
 
 instance GoogleRequest UsersLabelsPatch' where
         type Rs UsersLabelsPatch' = Label
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersLabelsPatch'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersLabelsPatch'{..}
           = go _ulpUserId _ulpId _ulpQuotaUser
               (Just _ulpPrettyPrint)
               _ulpUserIP
@@ -184,7 +184,6 @@ instance GoogleRequest UsersLabelsPatch' where
               (Just AltJSON)
               _ulpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersLabelsPatchResource)
-                      r
-                      u
+                      rq

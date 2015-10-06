@@ -248,8 +248,8 @@ instance GoogleAuth ProjectsJobsGetMetrics' where
 
 instance GoogleRequest ProjectsJobsGetMetrics' where
         type Rs ProjectsJobsGetMetrics' = JobMetrics
-        request = requestWithRoute defReq dataflowURL
-        requestWithRoute r u ProjectsJobsGetMetrics'{..}
+        request = requestWith dataflowRequest
+        requestWith rq ProjectsJobsGetMetrics'{..}
           = go _pjgmProjectId _pjgmJobId _pjgmXgafv
               _pjgmUploadProtocol
               _pjgmStartTime
@@ -265,7 +265,6 @@ instance GoogleRequest ProjectsJobsGetMetrics' where
               _pjgmOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsJobsGetMetricsResource)
-                      r
-                      u
+                      rq

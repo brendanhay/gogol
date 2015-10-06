@@ -21,7 +21,7 @@ module Network.Google.FusionTables
     -- * API
       FusionTablesAPI
     , fusionTablesAPI
-    , fusionTablesURL
+    , fusionTablesRequest
 
     -- * Service Methods
 

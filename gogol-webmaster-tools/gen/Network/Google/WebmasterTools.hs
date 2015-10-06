@@ -21,7 +21,7 @@ module Network.Google.WebmasterTools
     -- * API
       WebmasterToolsAPI
     , webmasterToolsAPI
-    , webmasterToolsURL
+    , webmasterToolsRequest
 
     -- * Service Methods
 

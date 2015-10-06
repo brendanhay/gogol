@@ -222,8 +222,8 @@ instance GoogleAuth
 instance GoogleRequest
          AccountsContainersMoveFoldersUpdate' where
         type Rs AccountsContainersMoveFoldersUpdate' = ()
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
+        request = requestWith tagManagerRequest
+        requestWith rq
           AccountsContainersMoveFoldersUpdate'{..}
           = go _acmfuAccountId _acmfuContainerId _acmfuFolderId
               (_acmfuTriggerId ^. _Default)
@@ -237,8 +237,7 @@ instance GoogleRequest
               _acmfuOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersMoveFoldersUpdateResource)
-                      r
-                      u
+                      rq

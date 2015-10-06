@@ -178,8 +178,8 @@ instance GoogleAuth StatesUpdate' where
 
 instance GoogleRequest StatesUpdate' where
         type Rs StatesUpdate' = WriteResult
-        request = requestWithRoute defReq appStateURL
-        requestWithRoute r u StatesUpdate'{..}
+        request = requestWith appStateRequest
+        requestWith rq StatesUpdate'{..}
           = go _suStateKey _suCurrentStateVersion _suQuotaUser
               (Just _suPrettyPrint)
               _suUserIP
@@ -189,7 +189,5 @@ instance GoogleRequest StatesUpdate' where
               (Just AltJSON)
               _suPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy StatesUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy StatesUpdateResource)
+                      rq

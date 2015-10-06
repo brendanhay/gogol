@@ -218,8 +218,8 @@ instance GoogleAuth ObjectsList' where
 
 instance GoogleRequest ObjectsList' where
         type Rs ObjectsList' = Objects
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsList'{..}
+        request = requestWith storageRequest
+        requestWith rq ObjectsList'{..}
           = go _olBucket _olPrefix _olVersions _olProjection
               _olPageToken
               _olDelimiter
@@ -232,7 +232,4 @@ instance GoogleRequest ObjectsList' where
               _olOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ObjectsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ObjectsListResource) rq

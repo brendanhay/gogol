@@ -177,8 +177,8 @@ instance GoogleAuth LandingPagesInsert' where
 
 instance GoogleRequest LandingPagesInsert' where
         type Rs LandingPagesInsert' = LandingPage
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u LandingPagesInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq LandingPagesInsert'{..}
           = go _lpiProFileId _lpiCampaignId _lpiQuotaUser
               (Just _lpiPrettyPrint)
               _lpiUserIP
@@ -188,7 +188,6 @@ instance GoogleRequest LandingPagesInsert' where
               (Just AltJSON)
               _lpiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LandingPagesInsertResource)
-                      r
-                      u
+                      rq

@@ -302,8 +302,8 @@ instance GoogleAuth RastersList' where
 
 instance GoogleRequest RastersList' where
         type Rs RastersList' = RastersListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u RastersList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq RastersList'{..}
           = go (Just _rlProjectId) _rlCreatedAfter
               _rlCreatorEmail
               _rlRole
@@ -324,7 +324,4 @@ instance GoogleRequest RastersList' where
               _rlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy RastersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RastersListResource) rq

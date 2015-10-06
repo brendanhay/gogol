@@ -186,8 +186,8 @@ instance GoogleAuth UsersSessionsUpdate' where
 
 instance GoogleRequest UsersSessionsUpdate' where
         type Rs UsersSessionsUpdate' = Session
-        request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersSessionsUpdate'{..}
+        request = requestWith fitnessRequest
+        requestWith rq UsersSessionsUpdate'{..}
           = go _usuUserId _usuSessionId _usuCurrentTimeMillis
               _usuQuotaUser
               (Just _usuPrettyPrint)
@@ -198,7 +198,6 @@ instance GoogleRequest UsersSessionsUpdate' where
               (Just AltJSON)
               _usuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersSessionsUpdateResource)
-                      r
-                      u
+                      rq

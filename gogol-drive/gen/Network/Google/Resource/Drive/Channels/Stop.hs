@@ -147,8 +147,8 @@ instance GoogleAuth ChannelsStop' where
 
 instance GoogleRequest ChannelsStop' where
         type Rs ChannelsStop' = ()
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u ChannelsStop'{..}
+        request = requestWith driveRequest
+        requestWith rq ChannelsStop'{..}
           = go _csQuotaUser (Just _csPrettyPrint) _csUserIP
               _csFields
               _csKey
@@ -156,7 +156,5 @@ instance GoogleRequest ChannelsStop' where
               (Just AltJSON)
               _csPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ChannelsStopResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ChannelsStopResource)
+                      rq

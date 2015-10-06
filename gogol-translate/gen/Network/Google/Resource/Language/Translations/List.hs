@@ -189,8 +189,8 @@ instance GoogleAuth TranslationsList' where
 
 instance GoogleRequest TranslationsList' where
         type Rs TranslationsList' = TranslationsListResponse
-        request = requestWithRoute defReq translateURL
-        requestWithRoute r u TranslationsList'{..}
+        request = requestWith translateRequest
+        requestWith rq TranslationsList'{..}
           = go _tlQ (Just _tlTarget) _tlFormat _tlSource
               (_tlCid ^. _Default)
               _tlQuotaUser
@@ -201,7 +201,6 @@ instance GoogleRequest TranslationsList' where
               _tlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TranslationsListResource)
-                      r
-                      u
+                      rq

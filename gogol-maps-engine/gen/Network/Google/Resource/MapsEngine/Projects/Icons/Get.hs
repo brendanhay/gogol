@@ -173,8 +173,8 @@ instance GoogleAuth ProjectsIconsGet' where
 
 instance GoogleRequest ProjectsIconsGet' where
         type Rs ProjectsIconsGet' = Icon
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u ProjectsIconsGet'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq ProjectsIconsGet'{..}
           = go _pigProjectId _pigId _pigQuotaUser
               (Just _pigPrettyPrint)
               _pigUserIP
@@ -183,17 +183,15 @@ instance GoogleRequest ProjectsIconsGet' where
               _pigOAuthToken
               (Just AltJSON)
           where go :<|> _
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsIconsGetResource)
-                      r
-                      u
+                      rq
 
 instance GoogleRequest
          (MediaDownload ProjectsIconsGet') where
         type Rs (MediaDownload ProjectsIconsGet') = Body
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u
-          (MediaDownload ProjectsIconsGet'{..})
+        request = requestWith mapsEngineRequest
+        requestWith rq (MediaDownload ProjectsIconsGet'{..})
           = go _pigProjectId _pigId _pigQuotaUser
               (Just _pigPrettyPrint)
               _pigUserIP
@@ -202,7 +200,6 @@ instance GoogleRequest
               _pigOAuthToken
               (Just AltMedia)
           where _ :<|> go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsIconsGetResource)
-                      r
-                      u
+                      rq

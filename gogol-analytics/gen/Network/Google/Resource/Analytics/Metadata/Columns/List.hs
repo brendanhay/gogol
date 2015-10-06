@@ -152,8 +152,8 @@ instance GoogleAuth MetadataColumnsList' where
 
 instance GoogleRequest MetadataColumnsList' where
         type Rs MetadataColumnsList' = Columns
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u MetadataColumnsList'{..}
+        request = requestWith analyticsRequest
+        requestWith rq MetadataColumnsList'{..}
           = go _mclReportType _mclQuotaUser
               (Just _mclPrettyPrint)
               _mclUserIP
@@ -162,7 +162,6 @@ instance GoogleRequest MetadataColumnsList' where
               _mclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MetadataColumnsListResource)
-                      r
-                      u
+                      rq

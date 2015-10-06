@@ -461,8 +461,8 @@ instance GoogleAuth Search' where
 
 instance GoogleRequest Search' where
         type Rs Search' = ()
-        request = requestWithRoute defReq freebaseSearchURL
-        requestWithRoute r u Search'{..}
+        request = requestWith freebaseSearchRequest
+        requestWith rq Search'{..}
           = go (_sWithout ^. _Default) _sCursor
               (_sWith ^. _Default)
               (_sDomain ^. _Default)
@@ -493,12 +493,12 @@ instance GoogleRequest Search' where
               _sOAuthToken
               (Just AltJSON)
           where go :<|> _
-                  = clientWithRoute (Proxy :: Proxy SearchMethod) r u
+                  = clientBuild (Proxy :: Proxy SearchMethod) rq
 
 instance GoogleRequest (MediaDownload Search') where
         type Rs (MediaDownload Search') = Body
-        request = requestWithRoute defReq freebaseSearchURL
-        requestWithRoute r u (MediaDownload Search'{..})
+        request = requestWith freebaseSearchRequest
+        requestWith rq (MediaDownload Search'{..})
           = go (_sWithout ^. _Default) _sCursor
               (_sWith ^. _Default)
               (_sDomain ^. _Default)
@@ -529,4 +529,4 @@ instance GoogleRequest (MediaDownload Search') where
               _sOAuthToken
               (Just AltMedia)
           where _ :<|> go
-                  = clientWithRoute (Proxy :: Proxy SearchMethod) r u
+                  = clientBuild (Proxy :: Proxy SearchMethod) rq

@@ -16,7 +16,7 @@
 module Network.Google.YouTubeAnalytics.Types
     (
     -- * Service URL
-      youTubeAnalyticsURL
+      youTubeAnalyticsRequest
 
     -- * GroupContentDetails
     , GroupContentDetails
@@ -131,9 +131,8 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types.Product
 import           Network.Google.YouTubeAnalytics.Types.Sum
 
--- | URL referring to version 'v1beta1' of the YouTube Analytics API.
-youTubeAnalyticsURL :: BaseUrl
-youTubeAnalyticsURL
-  = BaseUrl Https
-      "https://www.googleapis.com/youtube/analytics/v1beta1/"
-      443
+-- | Default request referring to version 'v1beta1' of the YouTube Analytics API.
+youTubeAnalyticsRequest :: RequestBuilder
+youTubeAnalyticsRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "youtube/analytics/v1beta1/"

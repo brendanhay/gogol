@@ -186,8 +186,8 @@ instance GoogleAuth UsersMessagesGet' where
 
 instance GoogleRequest UsersMessagesGet' where
         type Rs UsersMessagesGet' = Message
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesGet'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersMessagesGet'{..}
           = go _umgUserId _umgId (Just _umgFormat)
               (_umgMetadataHeaders ^. _Default)
               _umgQuotaUser
@@ -198,7 +198,6 @@ instance GoogleRequest UsersMessagesGet' where
               _umgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersMessagesGetResource)
-                      r
-                      u
+                      rq

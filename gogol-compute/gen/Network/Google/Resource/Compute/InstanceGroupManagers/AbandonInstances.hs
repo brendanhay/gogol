@@ -200,8 +200,8 @@ instance GoogleRequest
          InstanceGroupManagersAbandonInstances' where
         type Rs InstanceGroupManagersAbandonInstances' =
              Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u
+        request = requestWith computeRequest
+        requestWith rq
           InstanceGroupManagersAbandonInstances'{..}
           = go _igmaiProject _igmaiZone
               _igmaiInstanceGroupManager
@@ -214,8 +214,7 @@ instance GoogleRequest
               (Just AltJSON)
               _igmaiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy InstanceGroupManagersAbandonInstancesResource)
-                      r
-                      u
+                      rq

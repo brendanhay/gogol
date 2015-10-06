@@ -172,8 +172,8 @@ instance GoogleAuth AddressesInsert' where
 
 instance GoogleRequest AddressesInsert' where
         type Rs AddressesInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u AddressesInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq AddressesInsert'{..}
           = go _aiProject _aiRegion _aiQuotaUser
               (Just _aiPrettyPrint)
               _aiUserIP
@@ -183,7 +183,6 @@ instance GoogleRequest AddressesInsert' where
               (Just AltJSON)
               _aiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AddressesInsertResource)
-                      r
-                      u
+                      rq

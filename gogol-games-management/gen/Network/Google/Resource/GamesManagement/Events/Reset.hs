@@ -153,8 +153,8 @@ instance GoogleAuth EventsReset' where
 
 instance GoogleRequest EventsReset' where
         type Rs EventsReset' = ()
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u EventsReset'{..}
+        request = requestWith gamesManagementRequest
+        requestWith rq EventsReset'{..}
           = go _erEventId _erQuotaUser (Just _erPrettyPrint)
               _erUserIP
               _erFields
@@ -162,7 +162,4 @@ instance GoogleRequest EventsReset' where
               _erOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EventsResetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EventsResetResource) rq

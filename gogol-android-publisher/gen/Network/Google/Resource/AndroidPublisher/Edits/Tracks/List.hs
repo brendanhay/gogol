@@ -165,8 +165,8 @@ instance GoogleAuth EditsTracksList' where
 
 instance GoogleRequest EditsTracksList' where
         type Rs EditsTracksList' = TracksListResponse
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsTracksList'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsTracksList'{..}
           = go _etlPackageName _etlEditId _etlQuotaUser
               (Just _etlPrettyPrint)
               _etlUserIP
@@ -175,7 +175,6 @@ instance GoogleRequest EditsTracksList' where
               _etlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsTracksListResource)
-                      r
-                      u
+                      rq

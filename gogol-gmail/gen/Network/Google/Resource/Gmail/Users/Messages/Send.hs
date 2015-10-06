@@ -175,8 +175,8 @@ instance GoogleAuth UsersMessagesSend' where
 
 instance GoogleRequest UsersMessagesSend' where
         type Rs UsersMessagesSend' = Message
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesSend'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersMessagesSend'{..}
           = go _umsUserId _umsQuotaUser (Just _umsPrettyPrint)
               _umsUserIP
               _umsFields
@@ -186,7 +186,6 @@ instance GoogleRequest UsersMessagesSend' where
               _umsPayload
               _umsMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersMessagesSendResource)
-                      r
-                      u
+                      rq

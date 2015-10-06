@@ -172,9 +172,8 @@ instance GoogleAuth ManifestsGet' where
 
 instance GoogleRequest ManifestsGet' where
         type Rs ManifestsGet' = Manifest
-        request
-          = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u ManifestsGet'{..}
+        request = requestWith deploymentManagerRequest
+        requestWith rq ManifestsGet'{..}
           = go _mgProject _mgDeployment _mgManifest
               _mgQuotaUser
               (Just _mgPrettyPrint)
@@ -184,7 +183,5 @@ instance GoogleRequest ManifestsGet' where
               _mgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ManifestsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ManifestsGetResource)
+                      rq

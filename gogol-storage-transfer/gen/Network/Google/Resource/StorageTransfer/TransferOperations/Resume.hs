@@ -230,8 +230,8 @@ instance GoogleAuth TransferOperationsResume' where
 instance GoogleRequest TransferOperationsResume'
          where
         type Rs TransferOperationsResume' = Empty
-        request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferOperationsResume'{..}
+        request = requestWith storageTransferRequest
+        requestWith rq TransferOperationsResume'{..}
           = go _torName _torXgafv _torUploadProtocol
               (Just _torPp)
               _torAccessToken
@@ -246,7 +246,6 @@ instance GoogleRequest TransferOperationsResume'
               (Just AltJSON)
               _torPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TransferOperationsResumeResource)
-                      r
-                      u
+                      rq

@@ -16,7 +16,7 @@
 module Network.Google.DeploymentManager.Types
     (
     -- * Service URL
-      deploymentManagerURL
+      deploymentManagerRequest
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -199,9 +199,8 @@ import           Network.Google.DeploymentManager.Types.Product
 import           Network.Google.DeploymentManager.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v2beta2' of the Google Cloud Deployment Manager API.
-deploymentManagerURL :: BaseUrl
-deploymentManagerURL
-  = BaseUrl Https
-      "https://www.googleapis.com/deploymentmanager/v2beta2/projects/"
-      443
+-- | Default request referring to version 'v2beta2' of the Google Cloud Deployment Manager API.
+deploymentManagerRequest :: RequestBuilder
+deploymentManagerRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "deploymentmanager/v2beta2/projects/"

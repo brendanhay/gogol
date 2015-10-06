@@ -163,8 +163,8 @@ instance GoogleAuth TokenInfo' where
 
 instance GoogleRequest TokenInfo' where
         type Rs TokenInfo' = TokenInfo
-        request = requestWithRoute defReq oAuth2URL
-        requestWithRoute r u TokenInfo'{..}
+        request = requestWith oAuth2Request
+        requestWith rq TokenInfo'{..}
           = go _tAccessToken _tTokenHandle _tIdToken
               _tQuotaUser
               (Just _tPrettyPrint)
@@ -174,5 +174,4 @@ instance GoogleRequest TokenInfo' where
               _tOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TokenInfoMethod) r
-                      u
+                  = clientBuild (Proxy :: Proxy TokenInfoMethod) rq

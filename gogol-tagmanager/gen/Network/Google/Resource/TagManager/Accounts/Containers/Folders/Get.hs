@@ -180,9 +180,8 @@ instance GoogleAuth AccountsContainersFoldersGet'
 instance GoogleRequest AccountsContainersFoldersGet'
          where
         type Rs AccountsContainersFoldersGet' = Folder
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersFoldersGet'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersFoldersGet'{..}
           = go _acfgAccountId _acfgContainerId _acfgFolderId
               _acfgQuotaUser
               (Just _acfgPrettyPrint)
@@ -192,7 +191,6 @@ instance GoogleRequest AccountsContainersFoldersGet'
               _acfgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsContainersFoldersGetResource)
-                      r
-                      u
+                      rq

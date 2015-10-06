@@ -16,7 +16,7 @@
 module Network.Google.QPXExpress.Types
     (
     -- * Service URL
-      qPXExpressURL
+      qPXExpressRequest
 
     -- * TripOptionsResponse
     , TripOptionsResponse
@@ -254,9 +254,8 @@ import           Network.Google.Prelude
 import           Network.Google.QPXExpress.Types.Product
 import           Network.Google.QPXExpress.Types.Sum
 
--- | URL referring to version 'v1' of the QPX Express API.
-qPXExpressURL :: BaseUrl
-qPXExpressURL
-  = BaseUrl Https
-      "https://www.googleapis.com/qpxExpress/v1/trips/"
-      443
+-- | Default request referring to version 'v1' of the QPX Express API.
+qPXExpressRequest :: RequestBuilder
+qPXExpressRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "qpxExpress/v1/trips/"

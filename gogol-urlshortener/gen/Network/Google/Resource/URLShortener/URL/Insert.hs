@@ -146,8 +146,8 @@ instance GoogleAuth URLInsert' where
 
 instance GoogleRequest URLInsert' where
         type Rs URLInsert' = URL
-        request = requestWithRoute defReq uRLShortenerURL
-        requestWithRoute r u URLInsert'{..}
+        request = requestWith uRLShortenerRequest
+        requestWith rq URLInsert'{..}
           = go _uiQuotaUser (Just _uiPrettyPrint) _uiUserIP
               _uiFields
               _uiKey
@@ -155,6 +155,4 @@ instance GoogleRequest URLInsert' where
               (Just AltJSON)
               _uiPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy URLInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy URLInsertResource) rq

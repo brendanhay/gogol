@@ -194,8 +194,8 @@ instance GoogleAuth ObjectAccessControlsDelete' where
 instance GoogleRequest ObjectAccessControlsDelete'
          where
         type Rs ObjectAccessControlsDelete' = ()
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectAccessControlsDelete'{..}
+        request = requestWith storageRequest
+        requestWith rq ObjectAccessControlsDelete'{..}
           = go _oacdBucket _oacdObject _oacdEntity
               _oacdGeneration
               _oacdQuotaUser
@@ -206,7 +206,6 @@ instance GoogleRequest ObjectAccessControlsDelete'
               _oacdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ObjectAccessControlsDeleteResource)
-                      r
-                      u
+                      rq

@@ -160,8 +160,8 @@ instance GoogleAuth SubscriptionsInsert' where
 
 instance GoogleRequest SubscriptionsInsert' where
         type Rs SubscriptionsInsert' = Subscription
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u SubscriptionsInsert'{..}
+        request = requestWith youTubeRequest
+        requestWith rq SubscriptionsInsert'{..}
           = go (Just _siPart) _siQuotaUser
               (Just _siPrettyPrint)
               _siUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest SubscriptionsInsert' where
               (Just AltJSON)
               _siPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SubscriptionsInsertResource)
-                      r
-                      u
+                      rq

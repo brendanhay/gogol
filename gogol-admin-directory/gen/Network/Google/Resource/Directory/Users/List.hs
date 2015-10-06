@@ -271,8 +271,8 @@ instance GoogleAuth UsersList' where
 
 instance GoogleRequest UsersList' where
         type Rs UsersList' = Users
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u UsersList'{..}
+        request = requestWith directoryRequest
+        requestWith rq UsersList'{..}
           = go _ulEvent _ulOrderBy (Just _ulViewType)
               _ulCustomFieldMask
               _ulDomain
@@ -291,6 +291,4 @@ instance GoogleRequest UsersList' where
               _ulOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersListResource) rq

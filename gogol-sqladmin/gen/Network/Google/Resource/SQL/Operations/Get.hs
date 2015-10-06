@@ -159,8 +159,8 @@ instance GoogleAuth OperationsGet' where
 
 instance GoogleRequest OperationsGet' where
         type Rs OperationsGet' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u OperationsGet'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq OperationsGet'{..}
           = go _ogProject _ogOperation _ogQuotaUser
               (Just _ogPrettyPrint)
               _ogUserIP
@@ -169,7 +169,5 @@ instance GoogleRequest OperationsGet' where
               _ogOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy OperationsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy OperationsGetResource)
+                      rq

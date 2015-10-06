@@ -151,8 +151,8 @@ instance GoogleAuth CloudLoadingDeleteBook' where
 
 instance GoogleRequest CloudLoadingDeleteBook' where
         type Rs CloudLoadingDeleteBook' = ()
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u CloudLoadingDeleteBook'{..}
+        request = requestWith booksRequest
+        requestWith rq CloudLoadingDeleteBook'{..}
           = go (Just _cldbVolumeId) _cldbQuotaUser
               (Just _cldbPrettyPrint)
               _cldbUserIP
@@ -161,7 +161,6 @@ instance GoogleRequest CloudLoadingDeleteBook' where
               _cldbOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CloudLoadingDeleteBookResource)
-                      r
-                      u
+                      rq

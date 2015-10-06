@@ -163,8 +163,8 @@ instance GoogleAuth CreativesGet' where
 
 instance GoogleRequest CreativesGet' where
         type Rs CreativesGet' = Creative
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativesGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativesGet'{..}
           = go _crerProFileId _crerId _crerQuotaUser
               (Just _crerPrettyPrint)
               _crerUserIP
@@ -173,7 +173,5 @@ instance GoogleRequest CreativesGet' where
               _crerOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CreativesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CreativesGetResource)
+                      rq

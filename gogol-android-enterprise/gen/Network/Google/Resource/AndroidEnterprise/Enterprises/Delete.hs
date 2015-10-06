@@ -156,9 +156,8 @@ instance GoogleAuth EnterprisesDelete' where
 
 instance GoogleRequest EnterprisesDelete' where
         type Rs EnterprisesDelete' = ()
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u EnterprisesDelete'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq EnterprisesDelete'{..}
           = go _eddEnterpriseId _eddQuotaUser
               (Just _eddPrettyPrint)
               _eddUserIP
@@ -167,7 +166,6 @@ instance GoogleRequest EnterprisesDelete' where
               _eddOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EnterprisesDeleteResource)
-                      r
-                      u
+                      rq

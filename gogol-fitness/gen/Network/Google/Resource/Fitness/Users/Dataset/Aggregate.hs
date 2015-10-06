@@ -169,8 +169,8 @@ instance GoogleAuth UsersDatasetAggregate' where
 
 instance GoogleRequest UsersDatasetAggregate' where
         type Rs UsersDatasetAggregate' = AggregateResponse
-        request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersDatasetAggregate'{..}
+        request = requestWith fitnessRequest
+        requestWith rq UsersDatasetAggregate'{..}
           = go _udaUserId _udaQuotaUser (Just _udaPrettyPrint)
               _udaUserIP
               _udaFields
@@ -179,7 +179,6 @@ instance GoogleRequest UsersDatasetAggregate' where
               (Just AltJSON)
               _udaPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersDatasetAggregateResource)
-                      r
-                      u
+                      rq

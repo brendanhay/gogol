@@ -172,8 +172,8 @@ instance GoogleAuth TimeseriesWrite' where
 
 instance GoogleRequest TimeseriesWrite' where
         type Rs TimeseriesWrite' = WriteTimeseriesResponse
-        request = requestWithRoute defReq monitoringURL
-        requestWithRoute r u TimeseriesWrite'{..}
+        request = requestWith monitoringRequest
+        requestWith rq TimeseriesWrite'{..}
           = go _twProject _twQuotaUser (Just _twPrettyPrint)
               _twUserIP
               _twFields
@@ -182,7 +182,6 @@ instance GoogleRequest TimeseriesWrite' where
               (Just AltJSON)
               _twPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TimeseriesWriteResource)
-                      r
-                      u
+                      rq

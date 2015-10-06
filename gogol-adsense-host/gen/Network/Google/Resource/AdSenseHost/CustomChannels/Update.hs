@@ -164,8 +164,8 @@ instance GoogleAuth CustomChannelsUpdate' where
 
 instance GoogleRequest CustomChannelsUpdate' where
         type Rs CustomChannelsUpdate' = CustomChannel
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u CustomChannelsUpdate'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq CustomChannelsUpdate'{..}
           = go _ccuAdClientId _ccuQuotaUser
               (Just _ccuPrettyPrint)
               _ccuUserIP
@@ -175,7 +175,6 @@ instance GoogleRequest CustomChannelsUpdate' where
               (Just AltJSON)
               _ccuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CustomChannelsUpdateResource)
-                      r
-                      u
+                      rq

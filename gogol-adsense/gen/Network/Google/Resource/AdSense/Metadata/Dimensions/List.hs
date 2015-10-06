@@ -138,15 +138,14 @@ instance GoogleAuth MetadataDimensionsList' where
 
 instance GoogleRequest MetadataDimensionsList' where
         type Rs MetadataDimensionsList' = Metadata
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u MetadataDimensionsList'{..}
+        request = requestWith adSenseRequest
+        requestWith rq MetadataDimensionsList'{..}
           = go _mdlQuotaUser (Just _mdlPrettyPrint) _mdlUserIP
               _mdlFields
               _mdlKey
               _mdlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MetadataDimensionsListResource)
-                      r
-                      u
+                      rq

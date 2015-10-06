@@ -134,15 +134,13 @@ instance GoogleAuth AccountsList' where
 
 instance GoogleRequest AccountsList' where
         type Rs AccountsList' = AccountsList
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u AccountsList'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq AccountsList'{..}
           = go _alQuotaUser (Just _alPrettyPrint) _alUserIP
               _alFields
               _alKey
               _alOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AccountsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AccountsListResource)
+                      rq

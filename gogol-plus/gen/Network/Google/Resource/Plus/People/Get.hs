@@ -150,8 +150,8 @@ instance GoogleAuth PeopleGet' where
 
 instance GoogleRequest PeopleGet' where
         type Rs PeopleGet' = Person
-        request = requestWithRoute defReq plusURL
-        requestWithRoute r u PeopleGet'{..}
+        request = requestWith plusRequest
+        requestWith rq PeopleGet'{..}
           = go _pgUserId _pgQuotaUser (Just _pgPrettyPrint)
               _pgUserIP
               _pgFields
@@ -159,6 +159,4 @@ instance GoogleRequest PeopleGet' where
               _pgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy PeopleGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PeopleGetResource) rq

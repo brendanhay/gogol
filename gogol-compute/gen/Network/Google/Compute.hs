@@ -21,7 +21,7 @@ module Network.Google.Compute
     -- * API
       ComputeAPI
     , computeAPI
-    , computeURL
+    , computeRequest
 
     -- * Service Methods
 

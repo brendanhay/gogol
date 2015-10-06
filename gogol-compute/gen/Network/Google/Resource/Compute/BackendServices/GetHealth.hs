@@ -180,8 +180,8 @@ instance GoogleRequest BackendServicesGetHealth'
          where
         type Rs BackendServicesGetHealth' =
              BackendServiceGroupHealth
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u BackendServicesGetHealth'{..}
+        request = requestWith computeRequest
+        requestWith rq BackendServicesGetHealth'{..}
           = go _bsghProject _bsghBackendService _bsghQuotaUser
               (Just _bsghPrettyPrint)
               _bsghUserIP
@@ -191,7 +191,6 @@ instance GoogleRequest BackendServicesGetHealth'
               (Just AltJSON)
               _bsghPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BackendServicesGetHealthResource)
-                      r
-                      u
+                      rq

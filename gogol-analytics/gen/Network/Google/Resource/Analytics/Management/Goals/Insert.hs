@@ -190,8 +190,8 @@ instance GoogleAuth ManagementGoalsInsert' where
 
 instance GoogleRequest ManagementGoalsInsert' where
         type Rs ManagementGoalsInsert' = Goal
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementGoalsInsert'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementGoalsInsert'{..}
           = go _mgiAccountId _mgiWebPropertyId _mgiProFileId
               _mgiQuotaUser
               (Just _mgiPrettyPrint)
@@ -202,7 +202,6 @@ instance GoogleRequest ManagementGoalsInsert' where
               (Just AltJSON)
               _mgiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementGoalsInsertResource)
-                      r
-                      u
+                      rq

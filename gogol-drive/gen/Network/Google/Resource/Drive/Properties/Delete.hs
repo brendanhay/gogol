@@ -170,8 +170,8 @@ instance GoogleAuth PropertiesDelete' where
 
 instance GoogleRequest PropertiesDelete' where
         type Rs PropertiesDelete' = ()
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u PropertiesDelete'{..}
+        request = requestWith driveRequest
+        requestWith rq PropertiesDelete'{..}
           = go _pdFileId _pdPropertyKey (Just _pdVisibility)
               _pdQuotaUser
               (Just _pdPrettyPrint)
@@ -181,7 +181,6 @@ instance GoogleRequest PropertiesDelete' where
               _pdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PropertiesDeleteResource)
-                      r
-                      u
+                      rq

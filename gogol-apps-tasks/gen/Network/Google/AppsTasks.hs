@@ -21,7 +21,7 @@ module Network.Google.AppsTasks
     -- * API
       AppsTasksAPI
     , appsTasksAPI
-    , appsTasksURL
+    , appsTasksRequest
 
     -- * Service Methods
 

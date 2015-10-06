@@ -169,8 +169,8 @@ instance GoogleAuth TargetHTTPProxiesGet' where
 
 instance GoogleRequest TargetHTTPProxiesGet' where
         type Rs TargetHTTPProxiesGet' = TargetHTTPProxy
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetHTTPProxiesGet'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetHTTPProxiesGet'{..}
           = go _thttppgProject _thttppgTargetHTTPProxy
               _thttppgQuotaUser
               (Just _thttppgPrettyPrint)
@@ -180,7 +180,6 @@ instance GoogleRequest TargetHTTPProxiesGet' where
               _thttppgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetHTTPProxiesGetResource)
-                      r
-                      u
+                      rq

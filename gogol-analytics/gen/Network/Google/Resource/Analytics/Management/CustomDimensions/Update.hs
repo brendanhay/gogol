@@ -209,9 +209,8 @@ instance GoogleRequest
          ManagementCustomDimensionsUpdate' where
         type Rs ManagementCustomDimensionsUpdate' =
              CustomDimension
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementCustomDimensionsUpdate'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementCustomDimensionsUpdate'{..}
           = go _mcduAccountId _mcduWebPropertyId
               _mcduCustomDimensionId
               (Just _mcduIgnoreCustomDataSourceLinks)
@@ -224,8 +223,7 @@ instance GoogleRequest
               (Just AltJSON)
               _mcduPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementCustomDimensionsUpdateResource)
-                      r
-                      u
+                      rq

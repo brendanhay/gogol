@@ -149,8 +149,8 @@ instance GoogleAuth PushtokensRemove' where
 
 instance GoogleRequest PushtokensRemove' where
         type Rs PushtokensRemove' = ()
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u PushtokensRemove'{..}
+        request = requestWith gamesRequest
+        requestWith rq PushtokensRemove'{..}
           = go _prQuotaUser (Just _prPrettyPrint) _prUserIP
               _prFields
               _prKey
@@ -158,7 +158,6 @@ instance GoogleRequest PushtokensRemove' where
               (Just AltJSON)
               _prPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PushtokensRemoveResource)
-                      r
-                      u
+                      rq

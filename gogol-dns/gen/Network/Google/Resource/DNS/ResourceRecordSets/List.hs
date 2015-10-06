@@ -215,8 +215,8 @@ instance GoogleAuth ResourceRecordSetsList' where
 instance GoogleRequest ResourceRecordSetsList' where
         type Rs ResourceRecordSetsList' =
              ResourceRecordSetsListResponse
-        request = requestWithRoute defReq dNSURL
-        requestWithRoute r u ResourceRecordSetsList'{..}
+        request = requestWith dNSRequest
+        requestWith rq ResourceRecordSetsList'{..}
           = go _rrslProject _rrslManagedZone _rrslName
               _rrslPageToken
               _rrslType
@@ -229,7 +229,6 @@ instance GoogleRequest ResourceRecordSetsList' where
               _rrslOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ResourceRecordSetsListResource)
-                      r
-                      u
+                      rq

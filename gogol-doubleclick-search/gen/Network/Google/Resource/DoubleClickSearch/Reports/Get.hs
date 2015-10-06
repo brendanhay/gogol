@@ -146,9 +146,8 @@ instance GoogleAuth ReportsGet' where
 
 instance GoogleRequest ReportsGet' where
         type Rs ReportsGet' = Report
-        request
-          = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u ReportsGet'{..}
+        request = requestWith doubleClickSearchRequest
+        requestWith rq ReportsGet'{..}
           = go _rgReportId _rgQuotaUser (Just _rgPrettyPrint)
               _rgUserIP
               _rgFields
@@ -156,6 +155,4 @@ instance GoogleRequest ReportsGet' where
               _rgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReportsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ReportsGetResource) rq

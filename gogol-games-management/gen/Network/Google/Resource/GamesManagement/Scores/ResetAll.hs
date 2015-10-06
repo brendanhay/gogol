@@ -143,15 +143,13 @@ instance GoogleAuth ScoresResetAll' where
 
 instance GoogleRequest ScoresResetAll' where
         type Rs ScoresResetAll' = PlayerScoreResetAllResponse
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u ScoresResetAll'{..}
+        request = requestWith gamesManagementRequest
+        requestWith rq ScoresResetAll'{..}
           = go _sraQuotaUser (Just _sraPrettyPrint) _sraUserIP
               _sraFields
               _sraKey
               _sraOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ScoresResetAllResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ScoresResetAllResource)
+                      rq

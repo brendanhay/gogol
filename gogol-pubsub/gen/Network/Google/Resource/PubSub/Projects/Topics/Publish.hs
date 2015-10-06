@@ -232,8 +232,8 @@ instance GoogleAuth ProjectsTopicsPublish' where
 
 instance GoogleRequest ProjectsTopicsPublish' where
         type Rs ProjectsTopicsPublish' = PublishResponse
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsTopicsPublish'{..}
+        request = requestWith pubSubRequest
+        requestWith rq ProjectsTopicsPublish'{..}
           = go _ptpTopic _ptpXgafv _ptpUploadProtocol
               (Just _ptpPp)
               _ptpAccessToken
@@ -248,7 +248,6 @@ instance GoogleRequest ProjectsTopicsPublish' where
               (Just AltJSON)
               _ptpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsTopicsPublishResource)
-                      r
-                      u
+                      rq

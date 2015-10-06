@@ -199,8 +199,8 @@ instance GoogleAuth PagesPatch' where
 
 instance GoogleRequest PagesPatch' where
         type Rs PagesPatch' = Page
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PagesPatch'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PagesPatch'{..}
           = go _pagaBlogId _pagaPageId _pagaRevert _pagaPublish
               _pagaQuotaUser
               (Just _pagaPrettyPrint)
@@ -211,6 +211,4 @@ instance GoogleRequest PagesPatch' where
               (Just AltJSON)
               _pagaPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy PagesPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PagesPatchResource) rq

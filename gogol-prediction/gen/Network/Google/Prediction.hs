@@ -22,7 +22,7 @@ module Network.Google.Prediction
     -- * API
       PredictionAPI
     , predictionAPI
-    , predictionURL
+    , predictionRequest
 
     -- * Service Methods
 

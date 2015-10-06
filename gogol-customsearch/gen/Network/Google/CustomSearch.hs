@@ -21,7 +21,7 @@ module Network.Google.CustomSearch
     -- * API
       CustomSearchAPI
     , customSearchAPI
-    , customSearchURL
+    , customSearchRequest
 
     -- * Service Methods
 

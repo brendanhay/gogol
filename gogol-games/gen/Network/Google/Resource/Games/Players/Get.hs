@@ -160,8 +160,8 @@ instance GoogleAuth PlayersGet' where
 
 instance GoogleRequest PlayersGet' where
         type Rs PlayersGet' = Player
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u PlayersGet'{..}
+        request = requestWith gamesRequest
+        requestWith rq PlayersGet'{..}
           = go _pgPlayerId _pgLanguage _pgQuotaUser
               (Just _pgPrettyPrint)
               _pgUserIP
@@ -170,6 +170,4 @@ instance GoogleRequest PlayersGet' where
               _pgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy PlayersGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PlayersGetResource) rq

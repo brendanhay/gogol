@@ -174,8 +174,8 @@ instance GoogleRequest
          RasterCollectionsRastersBatchDelete' where
         type Rs RasterCollectionsRastersBatchDelete' =
              RasterCollectionsRastersBatchDeleteResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u
+        request = requestWith mapsEngineRequest
+        requestWith rq
           RasterCollectionsRastersBatchDelete'{..}
           = go _rcrbdId _rcrbdQuotaUser
               (Just _rcrbdPrettyPrint)
@@ -186,8 +186,7 @@ instance GoogleRequest
               (Just AltJSON)
               _rcrbdPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy RasterCollectionsRastersBatchDeleteResource)
-                      r
-                      u
+                      rq

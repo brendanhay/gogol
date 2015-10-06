@@ -254,8 +254,8 @@ instance GoogleAuth ProjectsList' where
 
 instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ListProjectsResponse
-        request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsList'{..}
+        request = requestWith resourceManagerRequest
+        requestWith rq ProjectsList'{..}
           = go _plXgafv _plUploadProtocol (Just _plPp)
               _plAccessToken
               _plUploadType
@@ -271,7 +271,5 @@ instance GoogleRequest ProjectsList' where
               _plOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ProjectsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ProjectsListResource)
+                      rq

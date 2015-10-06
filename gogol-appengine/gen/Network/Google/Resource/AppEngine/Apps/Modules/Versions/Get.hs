@@ -260,8 +260,8 @@ instance GoogleAuth AppsModulesVersionsGet' where
 
 instance GoogleRequest AppsModulesVersionsGet' where
         type Rs AppsModulesVersionsGet' = Version
-        request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsModulesVersionsGet'{..}
+        request = requestWith appEngineRequest
+        requestWith rq AppsModulesVersionsGet'{..}
           = go _amvgAppsId _amvgModulesId _amvgVersionsId
               _amvgXgafv
               _amvgUploadProtocol
@@ -278,7 +278,6 @@ instance GoogleRequest AppsModulesVersionsGet' where
               _amvgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AppsModulesVersionsGetResource)
-                      r
-                      u
+                      rq

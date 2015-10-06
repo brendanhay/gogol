@@ -174,8 +174,8 @@ instance GoogleAuth URLMapsUpdate' where
 
 instance GoogleRequest URLMapsUpdate' where
         type Rs URLMapsUpdate' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u URLMapsUpdate'{..}
+        request = requestWith computeRequest
+        requestWith rq URLMapsUpdate'{..}
           = go _umuProject _umuURLMap _umuQuotaUser
               (Just _umuPrettyPrint)
               _umuUserIP
@@ -185,7 +185,5 @@ instance GoogleRequest URLMapsUpdate' where
               (Just AltJSON)
               _umuPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy URLMapsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy URLMapsUpdateResource)
+                      rq

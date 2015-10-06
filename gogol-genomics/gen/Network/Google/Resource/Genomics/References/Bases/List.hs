@@ -199,8 +199,8 @@ instance GoogleAuth ReferencesBasesList' where
 
 instance GoogleRequest ReferencesBasesList' where
         type Rs ReferencesBasesList' = ListBasesResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReferencesBasesList'{..}
+        request = requestWith genomicsRequest
+        requestWith rq ReferencesBasesList'{..}
           = go _rblReferenceId _rblStart _rblEnd _rblPageToken
               _rblPageSize
               _rblQuotaUser
@@ -211,7 +211,6 @@ instance GoogleRequest ReferencesBasesList' where
               _rblOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReferencesBasesListResource)
-                      r
-                      u
+                      rq

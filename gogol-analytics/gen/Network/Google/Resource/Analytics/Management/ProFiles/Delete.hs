@@ -181,8 +181,8 @@ instance GoogleAuth ManagementProFilesDelete' where
 instance GoogleRequest ManagementProFilesDelete'
          where
         type Rs ManagementProFilesDelete' = ()
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementProFilesDelete'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementProFilesDelete'{..}
           = go _mpfdAccountId _mpfdWebPropertyId _mpfdProFileId
               _mpfdQuotaUser
               (Just _mpfdPrettyPrint)
@@ -192,7 +192,6 @@ instance GoogleRequest ManagementProFilesDelete'
               _mpfdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementProFilesDeleteResource)
-                      r
-                      u
+                      rq

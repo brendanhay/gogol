@@ -195,8 +195,8 @@ instance GoogleAuth ManagementCustomMetricsList'
 instance GoogleRequest ManagementCustomMetricsList'
          where
         type Rs ManagementCustomMetricsList' = CustomMetrics
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementCustomMetricsList'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementCustomMetricsList'{..}
           = go _mcmlAccountId _mcmlWebPropertyId
               _mcmlStartIndex
               _mcmlMaxResults
@@ -208,7 +208,6 @@ instance GoogleRequest ManagementCustomMetricsList'
               _mcmlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementCustomMetricsListResource)
-                      r
-                      u
+                      rq

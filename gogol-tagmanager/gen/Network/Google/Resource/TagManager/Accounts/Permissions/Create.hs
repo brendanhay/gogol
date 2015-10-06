@@ -163,8 +163,8 @@ instance GoogleAuth AccountsPermissionsCreate' where
 instance GoogleRequest AccountsPermissionsCreate'
          where
         type Rs AccountsPermissionsCreate' = UserAccess
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsPermissionsCreate'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsPermissionsCreate'{..}
           = go _apcAccountId _apcQuotaUser
               (Just _apcPrettyPrint)
               _apcUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest AccountsPermissionsCreate'
               (Just AltJSON)
               _apcPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsPermissionsCreateResource)
-                      r
-                      u
+                      rq

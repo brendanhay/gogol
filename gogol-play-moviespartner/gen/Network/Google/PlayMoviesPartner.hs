@@ -22,7 +22,7 @@ module Network.Google.PlayMoviesPartner
     -- * API
       PlayMoviesPartnerAPI
     , playMoviesPartnerAPI
-    , playMoviesPartnerURL
+    , playMoviesPartnerRequest
 
     -- * Service Methods
 

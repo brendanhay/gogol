@@ -159,8 +159,8 @@ instance GoogleAuth AdsInsert' where
 
 instance GoogleRequest AdsInsert' where
         type Rs AdsInsert' = Ad
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdsInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AdsInsert'{..}
           = go _aiProFileId _aiQuotaUser (Just _aiPrettyPrint)
               _aiUserIP
               _aiFields
@@ -169,6 +169,4 @@ instance GoogleRequest AdsInsert' where
               (Just AltJSON)
               _aiPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy AdsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AdsInsertResource) rq

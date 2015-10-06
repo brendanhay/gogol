@@ -151,8 +151,8 @@ instance GoogleAuth CountriesList' where
 
 instance GoogleRequest CountriesList' where
         type Rs CountriesList' = CountriesListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CountriesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CountriesList'{..}
           = go _couProFileId _couQuotaUser
               (Just _couPrettyPrint)
               _couUserIP
@@ -161,7 +161,5 @@ instance GoogleRequest CountriesList' where
               _couOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CountriesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CountriesListResource)
+                      rq

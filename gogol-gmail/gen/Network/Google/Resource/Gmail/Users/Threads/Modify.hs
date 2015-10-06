@@ -177,8 +177,8 @@ instance GoogleAuth UsersThreadsModify' where
 
 instance GoogleRequest UsersThreadsModify' where
         type Rs UsersThreadsModify' = Thread
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersThreadsModify'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersThreadsModify'{..}
           = go _utmUserId _utmId _utmQuotaUser
               (Just _utmPrettyPrint)
               _utmUserIP
@@ -188,7 +188,6 @@ instance GoogleRequest UsersThreadsModify' where
               (Just AltJSON)
               _utmPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersThreadsModifyResource)
-                      r
-                      u
+                      rq

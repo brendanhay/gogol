@@ -16,7 +16,7 @@
 module Network.Google.Dataflow.Types
     (
     -- * Service URL
-      dataflowURL
+      dataflowRequest
 
     -- * JobExecutionInfoStages
     , JobExecutionInfoStages
@@ -678,8 +678,8 @@ import           Network.Google.Dataflow.Types.Product
 import           Network.Google.Dataflow.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1b3' of the Google Dataflow API.
-dataflowURL :: BaseUrl
-dataflowURL
-  = BaseUrl Https "https://dataflow.googleapis.com/"
-      443
+-- | Default request referring to version 'v1b3' of the Google Dataflow API.
+dataflowRequest :: RequestBuilder
+dataflowRequest
+  = defaultRequest "https://dataflow.googleapis.com/"
+      ""

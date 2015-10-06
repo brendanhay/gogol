@@ -196,8 +196,8 @@ instance GoogleRequest
          InstanceGroupManagersRecreateInstances' where
         type Rs InstanceGroupManagersRecreateInstances' =
              Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u
+        request = requestWith computeRequest
+        requestWith rq
           InstanceGroupManagersRecreateInstances'{..}
           = go _igmriProject _igmriZone
               _igmriInstanceGroupManager
@@ -210,8 +210,7 @@ instance GoogleRequest
               (Just AltJSON)
               _igmriPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy InstanceGroupManagersRecreateInstancesResource)
-                      r
-                      u
+                      rq

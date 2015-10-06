@@ -173,8 +173,8 @@ instance GoogleAuth ClientAccessPatch' where
 
 instance GoogleRequest ClientAccessPatch' where
         type Rs ClientAccessPatch' = ClientAccessCapabilities
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u ClientAccessPatch'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq ClientAccessPatch'{..}
           = go _capClientAccountId (Just _capSponsorAccountId)
               _capQuotaUser
               (Just _capPrettyPrint)
@@ -185,7 +185,6 @@ instance GoogleRequest ClientAccessPatch' where
               (Just AltJSON)
               _capPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ClientAccessPatchResource)
-                      r
-                      u
+                      rq

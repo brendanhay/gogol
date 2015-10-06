@@ -175,8 +175,8 @@ instance GoogleAuth ManagementFiltersUpdate' where
 
 instance GoogleRequest ManagementFiltersUpdate' where
         type Rs ManagementFiltersUpdate' = Filter
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementFiltersUpdate'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementFiltersUpdate'{..}
           = go _mfuAccountId _mfuFilterId _mfuQuotaUser
               (Just _mfuPrettyPrint)
               _mfuUserIP
@@ -186,7 +186,6 @@ instance GoogleRequest ManagementFiltersUpdate' where
               (Just AltJSON)
               _mfuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementFiltersUpdateResource)
-                      r
-                      u
+                      rq

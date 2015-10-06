@@ -164,8 +164,8 @@ instance GoogleAuth SitemapsDelete' where
 
 instance GoogleRequest SitemapsDelete' where
         type Rs SitemapsDelete' = ()
-        request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u SitemapsDelete'{..}
+        request = requestWith webmasterToolsRequest
+        requestWith rq SitemapsDelete'{..}
           = go _sitSiteURL _sitFeedpath _sitQuotaUser
               (Just _sitPrettyPrint)
               _sitUserIP
@@ -174,7 +174,5 @@ instance GoogleRequest SitemapsDelete' where
               _sitOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SitemapsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SitemapsDeleteResource)
+                      rq

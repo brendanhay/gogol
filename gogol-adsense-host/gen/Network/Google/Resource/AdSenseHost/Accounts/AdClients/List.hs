@@ -179,8 +179,8 @@ instance GoogleAuth AccountsAdClientsList' where
 
 instance GoogleRequest AccountsAdClientsList' where
         type Rs AccountsAdClientsList' = AdClients
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AccountsAdClientsList'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq AccountsAdClientsList'{..}
           = go _aaclAccountId _aaclPageToken _aaclMaxResults
               _aaclQuotaUser
               (Just _aaclPrettyPrint)
@@ -190,7 +190,6 @@ instance GoogleRequest AccountsAdClientsList' where
               _aaclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsAdClientsListResource)
-                      r
-                      u
+                      rq

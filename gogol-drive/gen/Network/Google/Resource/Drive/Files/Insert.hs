@@ -249,8 +249,8 @@ instance GoogleAuth FilesInsert' where
 
 instance GoogleRequest FilesInsert' where
         type Rs FilesInsert' = File
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesInsert'{..}
+        request = requestWith driveRequest
+        requestWith rq FilesInsert'{..}
           = go (Just _fiPinned) (Just _fiVisibility)
               _fiTimedTextLanguage
               (Just _fiUseContentAsIndexableText)
@@ -268,7 +268,4 @@ instance GoogleRequest FilesInsert' where
               _fiPayload
               _fiMedia
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy FilesInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy FilesInsertResource) rq

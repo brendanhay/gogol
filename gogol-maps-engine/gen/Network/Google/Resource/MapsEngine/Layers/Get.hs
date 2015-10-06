@@ -159,8 +159,8 @@ instance GoogleAuth LayersGet' where
 
 instance GoogleRequest LayersGet' where
         type Rs LayersGet' = Layer
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u LayersGet'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq LayersGet'{..}
           = go _lgId _lgVersion _lgQuotaUser
               (Just _lgPrettyPrint)
               _lgUserIP
@@ -169,6 +169,4 @@ instance GoogleRequest LayersGet' where
               _lgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy LayersGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy LayersGetResource) rq

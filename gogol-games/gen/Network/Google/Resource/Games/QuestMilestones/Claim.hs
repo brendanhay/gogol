@@ -181,8 +181,8 @@ instance GoogleAuth QuestMilestonesClaim' where
 
 instance GoogleRequest QuestMilestonesClaim' where
         type Rs QuestMilestonesClaim' = ()
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u QuestMilestonesClaim'{..}
+        request = requestWith gamesRequest
+        requestWith rq QuestMilestonesClaim'{..}
           = go _qmcQuestId _qmcMilestoneId (Just _qmcRequestId)
               _qmcQuotaUser
               (Just _qmcPrettyPrint)
@@ -192,7 +192,6 @@ instance GoogleRequest QuestMilestonesClaim' where
               _qmcOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy QuestMilestonesClaimResource)
-                      r
-                      u
+                      rq

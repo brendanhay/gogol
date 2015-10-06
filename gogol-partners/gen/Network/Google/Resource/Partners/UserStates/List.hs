@@ -315,8 +315,8 @@ instance GoogleAuth UserStatesList' where
 
 instance GoogleRequest UserStatesList' where
         type Rs UserStatesList' = ListUserStatesResponse
-        request = requestWithRoute defReq partnersURL
-        requestWithRoute r u UserStatesList'{..}
+        request = requestWith partnersRequest
+        requestWith rq UserStatesList'{..}
           = go _uslXgafv _uslUploadProtocol (Just _uslPp)
               _uslAccessToken
               _uslUploadType
@@ -336,7 +336,5 @@ instance GoogleRequest UserStatesList' where
               _uslOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy UserStatesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UserStatesListResource)
+                      rq

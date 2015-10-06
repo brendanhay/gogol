@@ -180,8 +180,8 @@ instance GoogleAuth MapsListPublished' where
 instance GoogleRequest MapsListPublished' where
         type Rs MapsListPublished' =
              PublishedMapsListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u MapsListPublished'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq MapsListPublished'{..}
           = go _mlpPageToken _mlpProjectId _mlpMaxResults
               _mlpQuotaUser
               (Just _mlpPrettyPrint)
@@ -191,7 +191,6 @@ instance GoogleRequest MapsListPublished' where
               _mlpOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MapsListPublishedResource)
-                      r
-                      u
+                      rq

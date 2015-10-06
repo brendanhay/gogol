@@ -161,8 +161,8 @@ instance GoogleAuth ReadgroupsetsUpdate' where
 
 instance GoogleRequest ReadgroupsetsUpdate' where
         type Rs ReadgroupsetsUpdate' = ReadGroupSet
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReadgroupsetsUpdate'{..}
+        request = requestWith genomicsRequest
+        requestWith rq ReadgroupsetsUpdate'{..}
           = go _ruReadGroupSetId _ruQuotaUser
               (Just _ruPrettyPrint)
               _ruUserIP
@@ -172,7 +172,6 @@ instance GoogleRequest ReadgroupsetsUpdate' where
               (Just AltJSON)
               _ruPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReadgroupsetsUpdateResource)
-                      r
-                      u
+                      rq

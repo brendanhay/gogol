@@ -22,7 +22,7 @@ module Network.Google.DeploymentManager
     -- * API
       DeploymentManagerAPI
     , deploymentManagerAPI
-    , deploymentManagerURL
+    , deploymentManagerRequest
 
     -- * Service Methods
 

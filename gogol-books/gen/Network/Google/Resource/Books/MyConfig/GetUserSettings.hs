@@ -139,8 +139,8 @@ instance GoogleAuth MyConfigGetUserSettings' where
 
 instance GoogleRequest MyConfigGetUserSettings' where
         type Rs MyConfigGetUserSettings' = Usersettings
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u MyConfigGetUserSettings'{..}
+        request = requestWith booksRequest
+        requestWith rq MyConfigGetUserSettings'{..}
           = go _mcgusQuotaUser (Just _mcgusPrettyPrint)
               _mcgusUserIP
               _mcgusFields
@@ -148,7 +148,6 @@ instance GoogleRequest MyConfigGetUserSettings' where
               _mcgusOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MyConfigGetUserSettingsResource)
-                      r
-                      u
+                      rq

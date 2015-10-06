@@ -135,15 +135,14 @@ instance GoogleAuth QueriesListqueries' where
 
 instance GoogleRequest QueriesListqueries' where
         type Rs QueriesListqueries' = ListQueriesResponse
-        request = requestWithRoute defReq doubleClickBidsURL
-        requestWithRoute r u QueriesListqueries'{..}
+        request = requestWith doubleClickBidsRequest
+        requestWith rq QueriesListqueries'{..}
           = go _qlQuotaUser (Just _qlPrettyPrint) _qlUserIP
               _qlFields
               _qlKey
               _qlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy QueriesListqueriesResource)
-                      r
-                      u
+                      rq

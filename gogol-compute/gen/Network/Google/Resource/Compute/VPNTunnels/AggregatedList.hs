@@ -201,8 +201,8 @@ instance GoogleRequest VPNTunnelsAggregatedList'
          where
         type Rs VPNTunnelsAggregatedList' =
              VPNTunnelAggregatedList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u VPNTunnelsAggregatedList'{..}
+        request = requestWith computeRequest
+        requestWith rq VPNTunnelsAggregatedList'{..}
           = go _vtalProject _vtalFilter _vtalPageToken
               (Just _vtalMaxResults)
               _vtalQuotaUser
@@ -213,7 +213,6 @@ instance GoogleRequest VPNTunnelsAggregatedList'
               _vtalOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VPNTunnelsAggregatedListResource)
-                      r
-                      u
+                      rq

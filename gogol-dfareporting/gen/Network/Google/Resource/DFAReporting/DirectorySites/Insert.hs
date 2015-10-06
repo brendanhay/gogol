@@ -163,8 +163,8 @@ instance GoogleAuth DirectorySitesInsert' where
 
 instance GoogleRequest DirectorySitesInsert' where
         type Rs DirectorySitesInsert' = DirectorySite
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u DirectorySitesInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq DirectorySitesInsert'{..}
           = go _dsiProFileId _dsiQuotaUser
               (Just _dsiPrettyPrint)
               _dsiUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest DirectorySitesInsert' where
               (Just AltJSON)
               _dsiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DirectorySitesInsertResource)
-                      r
-                      u
+                      rq

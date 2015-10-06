@@ -21,7 +21,7 @@ module Network.Google.FreebaseSearch
     -- * API
       FreebaseSearchAPI
     , freebaseSearchAPI
-    , freebaseSearchURL
+    , freebaseSearchRequest
 
     -- * Service Methods
 

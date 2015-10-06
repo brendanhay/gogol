@@ -16,7 +16,7 @@
 module Network.Google.Discovery.Types
     (
     -- * Service URL
-      discoveryURL
+      discoveryRequest
 
     -- * RestMethodResponse
     , RestMethodResponse
@@ -239,9 +239,8 @@ import           Network.Google.Discovery.Types.Product
 import           Network.Google.Discovery.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the APIs Discovery Service.
-discoveryURL :: BaseUrl
-discoveryURL
-  = BaseUrl Https
-      "https://www.googleapis.com/discovery/v1/"
-      443
+-- | Default request referring to version 'v1' of the APIs Discovery Service.
+discoveryRequest :: RequestBuilder
+discoveryRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "discovery/v1/"

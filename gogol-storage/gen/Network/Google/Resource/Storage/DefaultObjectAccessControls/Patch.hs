@@ -183,9 +183,8 @@ instance GoogleRequest
          DefaultObjectAccessControlsPatch' where
         type Rs DefaultObjectAccessControlsPatch' =
              ObjectAccessControl
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u
-          DefaultObjectAccessControlsPatch'{..}
+        request = requestWith storageRequest
+        requestWith rq DefaultObjectAccessControlsPatch'{..}
           = go _doacpBucket _doacpEntity _doacpQuotaUser
               (Just _doacpPrettyPrint)
               _doacpUserIP
@@ -195,8 +194,7 @@ instance GoogleRequest
               (Just AltJSON)
               _doacpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy DefaultObjectAccessControlsPatchResource)
-                      r
-                      u
+                      rq

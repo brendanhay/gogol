@@ -198,8 +198,8 @@ instance GoogleAuth URLMapsList' where
 
 instance GoogleRequest URLMapsList' where
         type Rs URLMapsList' = URLMapList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u URLMapsList'{..}
+        request = requestWith computeRequest
+        requestWith rq URLMapsList'{..}
           = go _umlProject _umlFilter _umlPageToken
               (Just _umlMaxResults)
               _umlQuotaUser
@@ -210,7 +210,4 @@ instance GoogleRequest URLMapsList' where
               _umlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy URLMapsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy URLMapsListResource) rq

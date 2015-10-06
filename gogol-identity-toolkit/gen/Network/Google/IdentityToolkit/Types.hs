@@ -16,7 +16,7 @@
 module Network.Google.IdentityToolkit.Types
     (
     -- * Service URL
-      identityToolkitURL
+      identityToolkitRequest
 
     -- * UploadAccountResponseErrorItem
     , UploadAccountResponseErrorItem
@@ -271,9 +271,8 @@ import           Network.Google.IdentityToolkit.Types.Product
 import           Network.Google.IdentityToolkit.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v3' of the Google Identity Toolkit API.
-identityToolkitURL :: BaseUrl
-identityToolkitURL
-  = BaseUrl Https
-      "https://www.googleapis.com/identitytoolkit/v3/relyingparty/"
-      443
+-- | Default request referring to version 'v3' of the Google Identity Toolkit API.
+identityToolkitRequest :: RequestBuilder
+identityToolkitRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "identitytoolkit/v3/relyingparty/"

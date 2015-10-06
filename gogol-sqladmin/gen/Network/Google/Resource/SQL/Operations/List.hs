@@ -185,8 +185,8 @@ instance GoogleAuth OperationsList' where
 
 instance GoogleRequest OperationsList' where
         type Rs OperationsList' = OperationsListResponse
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u OperationsList'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq OperationsList'{..}
           = go _olProject (Just _olInstance) _olPageToken
               _olMaxResults
               _olQuotaUser
@@ -197,7 +197,5 @@ instance GoogleRequest OperationsList' where
               _olOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy OperationsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy OperationsListResource)
+                      rq

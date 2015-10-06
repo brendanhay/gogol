@@ -153,8 +153,8 @@ instance GoogleAuth TaskListsInsert' where
 
 instance GoogleRequest TaskListsInsert' where
         type Rs TaskListsInsert' = TaskList
-        request = requestWithRoute defReq appsTasksURL
-        requestWithRoute r u TaskListsInsert'{..}
+        request = requestWith appsTasksRequest
+        requestWith rq TaskListsInsert'{..}
           = go _tliQuotaUser (Just _tliPrettyPrint) _tliUserIP
               _tliFields
               _tliKey
@@ -162,7 +162,6 @@ instance GoogleRequest TaskListsInsert' where
               (Just AltJSON)
               _tliPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TaskListsInsertResource)
-                      r
-                      u
+                      rq

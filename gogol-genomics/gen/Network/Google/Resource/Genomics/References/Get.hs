@@ -150,8 +150,8 @@ instance GoogleAuth ReferencesGet' where
 
 instance GoogleRequest ReferencesGet' where
         type Rs ReferencesGet' = Reference
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReferencesGet'{..}
+        request = requestWith genomicsRequest
+        requestWith rq ReferencesGet'{..}
           = go _rggReferenceId _rggQuotaUser
               (Just _rggPrettyPrint)
               _rggUserIP
@@ -160,7 +160,5 @@ instance GoogleRequest ReferencesGet' where
               _rggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ReferencesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ReferencesGetResource)
+                      rq

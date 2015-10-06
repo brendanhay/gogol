@@ -186,8 +186,8 @@ instance GoogleAuth QuerySQL' where
 
 instance GoogleRequest QuerySQL' where
         type Rs QuerySQL' = SQLresponse
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u QuerySQL'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq QuerySQL'{..}
           = go (Just _qsqlSQL) _qsqlTyped _qsqlHdrs
               _qsqlQuotaUser
               (Just _qsqlPrettyPrint)
@@ -197,14 +197,13 @@ instance GoogleRequest QuerySQL' where
               _qsqlOAuthToken
               (Just AltJSON)
           where go :<|> _
-                  = clientWithRoute (Proxy :: Proxy QuerySQLResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy QuerySQLResource) rq
 
 instance GoogleRequest (MediaDownload QuerySQL')
          where
         type Rs (MediaDownload QuerySQL') = Body
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u (MediaDownload QuerySQL'{..})
+        request = requestWith fusionTablesRequest
+        requestWith rq (MediaDownload QuerySQL'{..})
           = go (Just _qsqlSQL) _qsqlTyped _qsqlHdrs
               _qsqlQuotaUser
               (Just _qsqlPrettyPrint)
@@ -214,5 +213,4 @@ instance GoogleRequest (MediaDownload QuerySQL')
               _qsqlOAuthToken
               (Just AltMedia)
           where _ :<|> go
-                  = clientWithRoute (Proxy :: Proxy QuerySQLResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy QuerySQLResource) rq

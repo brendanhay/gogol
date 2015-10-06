@@ -170,8 +170,8 @@ instance GoogleAuth CommentsPatch' where
 
 instance GoogleRequest CommentsPatch' where
         type Rs CommentsPatch' = Comment
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u CommentsPatch'{..}
+        request = requestWith driveRequest
+        requestWith rq CommentsPatch'{..}
           = go _cpFileId _cpCommentId _cpQuotaUser
               (Just _cpPrettyPrint)
               _cpUserIP
@@ -181,7 +181,5 @@ instance GoogleRequest CommentsPatch' where
               (Just AltJSON)
               _cpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CommentsPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CommentsPatchResource)
+                      rq

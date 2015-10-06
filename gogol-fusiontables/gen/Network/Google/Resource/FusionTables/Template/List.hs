@@ -173,8 +173,8 @@ instance GoogleAuth TemplateList' where
 
 instance GoogleRequest TemplateList' where
         type Rs TemplateList' = TemplateList
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TemplateList'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TemplateList'{..}
           = go _tllTableId _tllPageToken _tllMaxResults
               _tllQuotaUser
               (Just _tllPrettyPrint)
@@ -184,7 +184,5 @@ instance GoogleRequest TemplateList' where
               _tllOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TemplateListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TemplateListResource)
+                      rq

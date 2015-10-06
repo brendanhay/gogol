@@ -222,8 +222,8 @@ instance GoogleAuth ClientMessagesLog' where
 
 instance GoogleRequest ClientMessagesLog' where
         type Rs ClientMessagesLog' = LogMessageResponse
-        request = requestWithRoute defReq partnersURL
-        requestWithRoute r u ClientMessagesLog'{..}
+        request = requestWith partnersRequest
+        requestWith rq ClientMessagesLog'{..}
           = go _cmlXgafv _cmlUploadProtocol (Just _cmlPp)
               _cmlAccessToken
               _cmlUploadType
@@ -237,7 +237,6 @@ instance GoogleRequest ClientMessagesLog' where
               (Just AltJSON)
               _cmlPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ClientMessagesLogResource)
-                      r
-                      u
+                      rq

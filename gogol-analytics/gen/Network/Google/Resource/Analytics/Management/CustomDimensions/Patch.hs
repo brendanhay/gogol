@@ -211,9 +211,8 @@ instance GoogleRequest
          ManagementCustomDimensionsPatch' where
         type Rs ManagementCustomDimensionsPatch' =
              CustomDimension
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementCustomDimensionsPatch'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementCustomDimensionsPatch'{..}
           = go _mcdpAccountId _mcdpWebPropertyId
               _mcdpCustomDimensionId
               (Just _mcdpIgnoreCustomDataSourceLinks)
@@ -226,8 +225,7 @@ instance GoogleRequest
               (Just AltJSON)
               _mcdpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementCustomDimensionsPatchResource)
-                      r
-                      u
+                      rq

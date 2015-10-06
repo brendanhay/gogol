@@ -197,8 +197,8 @@ instance GoogleAuth DisksAggregatedList' where
 
 instance GoogleRequest DisksAggregatedList' where
         type Rs DisksAggregatedList' = DiskAggregatedList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u DisksAggregatedList'{..}
+        request = requestWith computeRequest
+        requestWith rq DisksAggregatedList'{..}
           = go _dalProject _dalFilter _dalPageToken
               (Just _dalMaxResults)
               _dalQuotaUser
@@ -209,7 +209,6 @@ instance GoogleRequest DisksAggregatedList' where
               _dalOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DisksAggregatedListResource)
-                      r
-                      u
+                      rq

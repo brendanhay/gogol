@@ -159,8 +159,8 @@ instance GoogleAuth MembersDelete' where
 
 instance GoogleRequest MembersDelete' where
         type Rs MembersDelete' = ()
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u MembersDelete'{..}
+        request = requestWith directoryRequest
+        requestWith rq MembersDelete'{..}
           = go _mdGroupKey _mdMemberKey _mdQuotaUser
               (Just _mdPrettyPrint)
               _mdUserIP
@@ -169,7 +169,5 @@ instance GoogleRequest MembersDelete' where
               _mdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy MembersDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy MembersDeleteResource)
+                      rq

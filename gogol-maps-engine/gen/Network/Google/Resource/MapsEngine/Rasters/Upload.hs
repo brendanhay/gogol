@@ -147,8 +147,8 @@ instance GoogleAuth RastersUpload' where
 
 instance GoogleRequest RastersUpload' where
         type Rs RastersUpload' = Raster
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u RastersUpload'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq RastersUpload'{..}
           = go _ruQuotaUser (Just _ruPrettyPrint) _ruUserIP
               _ruFields
               _ruKey
@@ -156,7 +156,5 @@ instance GoogleRequest RastersUpload' where
               (Just AltJSON)
               _ruPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy RastersUploadResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RastersUploadResource)
+                      rq

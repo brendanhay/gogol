@@ -174,8 +174,8 @@ instance GoogleAuth RegionOperationsGet' where
 
 instance GoogleRequest RegionOperationsGet' where
         type Rs RegionOperationsGet' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u RegionOperationsGet'{..}
+        request = requestWith computeRequest
+        requestWith rq RegionOperationsGet'{..}
           = go _rogProject _rogRegion _rogOperation
               _rogQuotaUser
               (Just _rogPrettyPrint)
@@ -185,7 +185,6 @@ instance GoogleRequest RegionOperationsGet' where
               _rogOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RegionOperationsGetResource)
-                      r
-                      u
+                      rq

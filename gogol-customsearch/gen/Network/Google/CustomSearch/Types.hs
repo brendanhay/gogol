@@ -16,7 +16,7 @@
 module Network.Google.CustomSearch.Types
     (
     -- * Service URL
-      customSearchURL
+      customSearchRequest
 
     -- * CSEListImgType
     , CSEListImgType (..)
@@ -206,9 +206,8 @@ import           Network.Google.CustomSearch.Types.Product
 import           Network.Google.CustomSearch.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the CustomSearch API.
-customSearchURL :: BaseUrl
-customSearchURL
-  = BaseUrl Https
-      "https://www.googleapis.com/customsearch/"
-      443
+-- | Default request referring to version 'v1' of the CustomSearch API.
+customSearchRequest :: RequestBuilder
+customSearchRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "customsearch/"

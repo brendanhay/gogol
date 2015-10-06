@@ -157,8 +157,8 @@ instance GoogleAuth ZonesGet' where
 
 instance GoogleRequest ZonesGet' where
         type Rs ZonesGet' = Zone
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u ZonesGet'{..}
+        request = requestWith computeRequest
+        requestWith rq ZonesGet'{..}
           = go _zgProject _zgZone _zgQuotaUser
               (Just _zgPrettyPrint)
               _zgUserIP
@@ -167,5 +167,4 @@ instance GoogleRequest ZonesGet' where
               _zgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ZonesGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy ZonesGetResource) rq

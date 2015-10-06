@@ -180,8 +180,8 @@ instance GoogleRequest AccountUserProFilesPatch'
          where
         type Rs AccountUserProFilesPatch' =
              AccountUserProFile
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountUserProFilesPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AccountUserProFilesPatch'{..}
           = go _aupfpProFileId (Just _aupfpId) _aupfpQuotaUser
               (Just _aupfpPrettyPrint)
               _aupfpUserIP
@@ -191,7 +191,6 @@ instance GoogleRequest AccountUserProFilesPatch'
               (Just AltJSON)
               _aupfpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountUserProFilesPatchResource)
-                      r
-                      u
+                      rq

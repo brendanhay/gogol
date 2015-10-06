@@ -16,7 +16,7 @@
 module Network.Google.UserAccounts.Types
     (
     -- * Service URL
-      userAccountsURL
+      userAccountsRequest
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -190,9 +190,8 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types.Product
 import           Network.Google.UserAccounts.Types.Sum
 
--- | URL referring to version 'vm_beta' of the Cloud User Accounts API.
-userAccountsURL :: BaseUrl
-userAccountsURL
-  = BaseUrl Https
-      "https://www.googleapis.com/clouduseraccounts/vm_beta/projects/"
-      443
+-- | Default request referring to version 'vm_beta' of the Cloud User Accounts API.
+userAccountsRequest :: RequestBuilder
+userAccountsRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "clouduseraccounts/vm_beta/projects/"

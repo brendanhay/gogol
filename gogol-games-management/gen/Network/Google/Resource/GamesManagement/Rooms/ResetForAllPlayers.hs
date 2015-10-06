@@ -143,8 +143,8 @@ instance GoogleAuth RoomsResetForAllPlayers' where
 
 instance GoogleRequest RoomsResetForAllPlayers' where
         type Rs RoomsResetForAllPlayers' = ()
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u RoomsResetForAllPlayers'{..}
+        request = requestWith gamesManagementRequest
+        requestWith rq RoomsResetForAllPlayers'{..}
           = go _rrfapQuotaUser (Just _rrfapPrettyPrint)
               _rrfapUserIP
               _rrfapFields
@@ -152,7 +152,6 @@ instance GoogleRequest RoomsResetForAllPlayers' where
               _rrfapOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RoomsResetForAllPlayersResource)
-                      r
-                      u
+                      rq

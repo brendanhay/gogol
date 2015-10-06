@@ -222,8 +222,8 @@ instance GoogleAuth InvitationsGet' where
 
 instance GoogleRequest InvitationsGet' where
         type Rs InvitationsGet' = Invitation
-        request = requestWithRoute defReq classroomURL
-        requestWithRoute r u InvitationsGet'{..}
+        request = requestWith classroomRequest
+        requestWith rq InvitationsGet'{..}
           = go _igId _igXgafv _igUploadProtocol (Just _igPp)
               _igAccessToken
               _igUploadType
@@ -236,7 +236,5 @@ instance GoogleRequest InvitationsGet' where
               _igOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy InvitationsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy InvitationsGetResource)
+                      rq

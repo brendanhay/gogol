@@ -153,8 +153,8 @@ instance GoogleAuth ReadgroupsetsAlign' where
 instance GoogleRequest ReadgroupsetsAlign' where
         type Rs ReadgroupsetsAlign' =
              AlignReadGroupSetsResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReadgroupsetsAlign'{..}
+        request = requestWith genomicsRequest
+        requestWith rq ReadgroupsetsAlign'{..}
           = go _raQuotaUser (Just _raPrettyPrint) _raUserIP
               _raFields
               _raKey
@@ -162,7 +162,6 @@ instance GoogleRequest ReadgroupsetsAlign' where
               (Just AltJSON)
               _raPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReadgroupsetsAlignResource)
-                      r
-                      u
+                      rq

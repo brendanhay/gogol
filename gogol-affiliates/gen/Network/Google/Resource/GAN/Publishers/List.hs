@@ -254,8 +254,8 @@ instance GoogleAuth PublishersList' where
 
 instance GoogleRequest PublishersList' where
         type Rs PublishersList' = Publishers
-        request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u PublishersList'{..}
+        request = requestWith affiliatesRequest
+        requestWith rq PublishersList'{..}
           = go _plRole _plRoleId _plRelationshipStatus
               _plMinSevenDayEpc
               _plMinNinetyDayEpc
@@ -271,7 +271,5 @@ instance GoogleRequest PublishersList' where
               _plOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PublishersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PublishersListResource)
+                      rq

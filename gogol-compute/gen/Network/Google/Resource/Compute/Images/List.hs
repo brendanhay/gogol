@@ -193,8 +193,8 @@ instance GoogleAuth ImagesList' where
 
 instance GoogleRequest ImagesList' where
         type Rs ImagesList' = ImageList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u ImagesList'{..}
+        request = requestWith computeRequest
+        requestWith rq ImagesList'{..}
           = go _ilProject _ilFilter _ilPageToken
               (Just _ilMaxResults)
               _ilQuotaUser
@@ -205,6 +205,4 @@ instance GoogleRequest ImagesList' where
               _ilOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ImagesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ImagesListResource) rq

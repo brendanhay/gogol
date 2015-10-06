@@ -152,8 +152,8 @@ instance GoogleAuth VerificationCodesGenerate' where
 instance GoogleRequest VerificationCodesGenerate'
          where
         type Rs VerificationCodesGenerate' = ()
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u VerificationCodesGenerate'{..}
+        request = requestWith directoryRequest
+        requestWith rq VerificationCodesGenerate'{..}
           = go _vcgUserKey _vcgQuotaUser (Just _vcgPrettyPrint)
               _vcgUserIP
               _vcgFields
@@ -161,7 +161,6 @@ instance GoogleRequest VerificationCodesGenerate'
               _vcgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VerificationCodesGenerateResource)
-                      r
-                      u
+                      rq

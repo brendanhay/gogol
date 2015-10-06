@@ -161,8 +161,8 @@ instance GoogleAuth ProjectsGet' where
 
 instance GoogleRequest ProjectsGet' where
         type Rs ProjectsGet' = Project
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ProjectsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ProjectsGet'{..}
           = go _proProFileId _proId _proQuotaUser
               (Just _proPrettyPrint)
               _proUserIP
@@ -171,7 +171,4 @@ instance GoogleRequest ProjectsGet' where
               _proOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ProjectsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ProjectsGetResource) rq

@@ -218,8 +218,8 @@ instance GoogleAuth TransferOperationsCancel' where
 instance GoogleRequest TransferOperationsCancel'
          where
         type Rs TransferOperationsCancel' = Empty
-        request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferOperationsCancel'{..}
+        request = requestWith storageTransferRequest
+        requestWith rq TransferOperationsCancel'{..}
           = go _tocName _tocXgafv _tocUploadProtocol
               (Just _tocPp)
               _tocAccessToken
@@ -233,7 +233,6 @@ instance GoogleRequest TransferOperationsCancel'
               _tocOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TransferOperationsCancelResource)
-                      r
-                      u
+                      rq

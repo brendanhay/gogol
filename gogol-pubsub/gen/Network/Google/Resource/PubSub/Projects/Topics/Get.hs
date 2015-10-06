@@ -215,8 +215,8 @@ instance GoogleAuth ProjectsTopicsGet' where
 
 instance GoogleRequest ProjectsTopicsGet' where
         type Rs ProjectsTopicsGet' = Topic
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsTopicsGet'{..}
+        request = requestWith pubSubRequest
+        requestWith rq ProjectsTopicsGet'{..}
           = go _ptgTopic _ptgXgafv _ptgUploadProtocol
               (Just _ptgPp)
               _ptgAccessToken
@@ -230,7 +230,6 @@ instance GoogleRequest ProjectsTopicsGet' where
               _ptgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsTopicsGetResource)
-                      r
-                      u
+                      rq

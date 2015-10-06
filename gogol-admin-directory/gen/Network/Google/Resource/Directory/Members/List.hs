@@ -179,8 +179,8 @@ instance GoogleAuth MembersList' where
 
 instance GoogleRequest MembersList' where
         type Rs MembersList' = Members
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u MembersList'{..}
+        request = requestWith directoryRequest
+        requestWith rq MembersList'{..}
           = go _mlGroupKey _mlRoles _mlPageToken _mlMaxResults
               _mlQuotaUser
               (Just _mlPrettyPrint)
@@ -190,7 +190,4 @@ instance GoogleRequest MembersList' where
               _mlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy MembersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy MembersListResource) rq

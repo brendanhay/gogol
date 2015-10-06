@@ -190,8 +190,8 @@ instance GoogleAuth PlacementsGeneratetags' where
 instance GoogleRequest PlacementsGeneratetags' where
         type Rs PlacementsGeneratetags' =
              PlacementsGenerateTagsResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementsGeneratetags'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PlacementsGeneratetags'{..}
           = go _pProFileId (_pTagFormats ^. _Default)
               _pCampaignId
               (_pPlacementIds ^. _Default)
@@ -203,7 +203,6 @@ instance GoogleRequest PlacementsGeneratetags' where
               _pOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlacementsGeneratetagsResource)
-                      r
-                      u
+                      rq

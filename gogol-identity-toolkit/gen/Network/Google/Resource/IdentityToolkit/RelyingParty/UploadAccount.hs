@@ -154,8 +154,8 @@ instance GoogleRequest RelyingPartyUploadAccount'
          where
         type Rs RelyingPartyUploadAccount' =
              UploadAccountResponse
-        request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingPartyUploadAccount'{..}
+        request = requestWith identityToolkitRequest
+        requestWith rq RelyingPartyUploadAccount'{..}
           = go _rpuaQuotaUser (Just _rpuaPrettyPrint)
               _rpuaUserIP
               _rpuaFields
@@ -164,7 +164,6 @@ instance GoogleRequest RelyingPartyUploadAccount'
               (Just AltJSON)
               _rpuaPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RelyingPartyUploadAccountResource)
-                      r
-                      u
+                      rq

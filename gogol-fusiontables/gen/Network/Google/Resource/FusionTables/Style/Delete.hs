@@ -159,8 +159,8 @@ instance GoogleAuth StyleDelete' where
 
 instance GoogleRequest StyleDelete' where
         type Rs StyleDelete' = ()
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u StyleDelete'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq StyleDelete'{..}
           = go _sdTableId _sdStyleId _sdQuotaUser
               (Just _sdPrettyPrint)
               _sdUserIP
@@ -169,7 +169,4 @@ instance GoogleRequest StyleDelete' where
               _sdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy StyleDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy StyleDeleteResource) rq

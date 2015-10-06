@@ -165,8 +165,8 @@ instance GoogleAuth LandingPagesList' where
 
 instance GoogleRequest LandingPagesList' where
         type Rs LandingPagesList' = LandingPagesListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u LandingPagesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq LandingPagesList'{..}
           = go _lplProFileId _lplCampaignId _lplQuotaUser
               (Just _lplPrettyPrint)
               _lplUserIP
@@ -175,7 +175,6 @@ instance GoogleRequest LandingPagesList' where
               _lplOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LandingPagesListResource)
-                      r
-                      u
+                      rq

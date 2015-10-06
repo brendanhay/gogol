@@ -171,9 +171,8 @@ instance GoogleRequest
          ManagementAccountSummariesList' where
         type Rs ManagementAccountSummariesList' =
              AccountSummaries
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementAccountSummariesList'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementAccountSummariesList'{..}
           = go _maslStartIndex _maslMaxResults _maslQuotaUser
               (Just _maslPrettyPrint)
               _maslUserIP
@@ -182,8 +181,7 @@ instance GoogleRequest
               _maslOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementAccountSummariesListResource)
-                      r
-                      u
+                      rq

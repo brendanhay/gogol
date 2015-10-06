@@ -180,9 +180,8 @@ instance GoogleAuth
 instance GoogleRequest
          AccountsContainersVariablesCreate' where
         type Rs AccountsContainersVariablesCreate' = Variable
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersVariablesCreate'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersVariablesCreate'{..}
           = go _acvccAccountId _acvccContainerId
               _acvccQuotaUser
               (Just _acvccPrettyPrint)
@@ -193,8 +192,7 @@ instance GoogleRequest
               (Just AltJSON)
               _acvccPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersVariablesCreateResource)
-                      r
-                      u
+                      rq

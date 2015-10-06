@@ -213,8 +213,8 @@ instance GoogleAuth BeaconsGet' where
 
 instance GoogleRequest BeaconsGet' where
         type Rs BeaconsGet' = Beacon
-        request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconsGet'{..}
+        request = requestWith proximityBeaconRequest
+        requestWith rq BeaconsGet'{..}
           = go _bgBeaconName _bgXgafv _bgUploadProtocol
               (Just _bgPp)
               _bgAccessToken
@@ -228,6 +228,4 @@ instance GoogleRequest BeaconsGet' where
               _bgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy BeaconsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy BeaconsGetResource) rq

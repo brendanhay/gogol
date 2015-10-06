@@ -209,8 +209,8 @@ instance GoogleAuth PagespeedapiRunpagespeed' where
 instance GoogleRequest PagespeedapiRunpagespeed'
          where
         type Rs PagespeedapiRunpagespeed' = Result
-        request = requestWithRoute defReq pageSpeedURL
-        requestWithRoute r u PagespeedapiRunpagespeed'{..}
+        request = requestWith pageSpeedRequest
+        requestWith rq PagespeedapiRunpagespeed'{..}
           = go (Just _prURL) (Just _prScreenshot) _prLocale
               (Just _prFilterThirdPartyResources)
               _prStrategy
@@ -223,7 +223,6 @@ instance GoogleRequest PagespeedapiRunpagespeed'
               _prOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PagespeedapiRunpagespeedResource)
-                      r
-                      u
+                      rq

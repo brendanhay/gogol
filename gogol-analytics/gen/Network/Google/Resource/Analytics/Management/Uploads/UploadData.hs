@@ -195,8 +195,8 @@ instance GoogleAuth ManagementUploadsUploadData'
 instance GoogleRequest ManagementUploadsUploadData'
          where
         type Rs ManagementUploadsUploadData' = Upload
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementUploadsUploadData'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementUploadsUploadData'{..}
           = go _muudAccountId _muudWebPropertyId
               _muudCustomDataSourceId
               _muudQuotaUser
@@ -208,7 +208,6 @@ instance GoogleRequest ManagementUploadsUploadData'
               (Just AltJSON)
               _muudMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementUploadsUploadDataResource)
-                      r
-                      u
+                      rq

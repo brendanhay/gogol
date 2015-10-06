@@ -230,8 +230,8 @@ instance GoogleAuth OrganizationsUpdate' where
 
 instance GoogleRequest OrganizationsUpdate' where
         type Rs OrganizationsUpdate' = Organization
-        request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u OrganizationsUpdate'{..}
+        request = requestWith resourceManagerRequest
+        requestWith rq OrganizationsUpdate'{..}
           = go _ouOrganizationId _ouXgafv _ouUploadProtocol
               (Just _ouPp)
               _ouAccessToken
@@ -246,7 +246,6 @@ instance GoogleRequest OrganizationsUpdate' where
               (Just AltJSON)
               _ouPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OrganizationsUpdateResource)
-                      r
-                      u
+                      rq

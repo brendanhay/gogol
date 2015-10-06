@@ -174,8 +174,8 @@ instance GoogleAuth GroupItemsList' where
 
 instance GoogleRequest GroupItemsList' where
         type Rs GroupItemsList' = GroupItemListResponse
-        request = requestWithRoute defReq youTubeAnalyticsURL
-        requestWithRoute r u GroupItemsList'{..}
+        request = requestWith youTubeAnalyticsRequest
+        requestWith rq GroupItemsList'{..}
           = go (Just _gilGroupId) _gilOnBehalfOfContentOwner
               _gilQuotaUser
               (Just _gilPrettyPrint)
@@ -185,7 +185,5 @@ instance GoogleRequest GroupItemsList' where
               _gilOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy GroupItemsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy GroupItemsListResource)
+                      rq

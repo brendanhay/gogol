@@ -149,8 +149,8 @@ instance GoogleAuth VariantsGet' where
 
 instance GoogleRequest VariantsGet' where
         type Rs VariantsGet' = Variant
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsGet'{..}
+        request = requestWith genomicsRequest
+        requestWith rq VariantsGet'{..}
           = go _vggVariantId _vggQuotaUser
               (Just _vggPrettyPrint)
               _vggUserIP
@@ -159,7 +159,4 @@ instance GoogleRequest VariantsGet' where
               _vggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy VariantsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy VariantsGetResource) rq

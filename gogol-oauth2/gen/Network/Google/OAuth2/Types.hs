@@ -16,7 +16,7 @@
 module Network.Google.OAuth2.Types
     (
     -- * Service URL
-      oAuth2URL
+      oAuth2Request
 
     -- * TokenInfo
     , TokenInfo
@@ -66,7 +66,7 @@ import           Network.Google.OAuth2.Types.Product
 import           Network.Google.OAuth2.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v2' of the Google OAuth2 API.
-oAuth2URL :: BaseUrl
-oAuth2URL
-  = BaseUrl Https "https://www.googleapis.com/" 443
+-- | Default request referring to version 'v2' of the Google OAuth2 API.
+oAuth2Request :: RequestBuilder
+oAuth2Request
+  = defaultRequest "https://www.googleapis.com/" ""

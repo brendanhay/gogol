@@ -174,9 +174,8 @@ instance GoogleAuth RollingUpdatesInsert' where
 
 instance GoogleRequest RollingUpdatesInsert' where
         type Rs RollingUpdatesInsert' = Operation
-        request
-          = requestWithRoute defReq replicaPoolUpdaterURL
-        requestWithRoute r u RollingUpdatesInsert'{..}
+        request = requestWith replicaPoolUpdaterRequest
+        requestWith rq RollingUpdatesInsert'{..}
           = go _ruiProject _ruiZone _ruiQuotaUser
               (Just _ruiPrettyPrint)
               _ruiUserIP
@@ -186,7 +185,6 @@ instance GoogleRequest RollingUpdatesInsert' where
               (Just AltJSON)
               _ruiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RollingUpdatesInsertResource)
-                      r
-                      u
+                      rq

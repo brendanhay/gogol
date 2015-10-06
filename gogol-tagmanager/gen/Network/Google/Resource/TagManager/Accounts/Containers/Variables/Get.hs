@@ -181,9 +181,8 @@ instance GoogleAuth AccountsContainersVariablesGet'
 instance GoogleRequest
          AccountsContainersVariablesGet' where
         type Rs AccountsContainersVariablesGet' = Variable
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersVariablesGet'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersVariablesGet'{..}
           = go _acvgAccountId _acvgContainerId _acvgVariableId
               _acvgQuotaUser
               (Just _acvgPrettyPrint)
@@ -193,8 +192,7 @@ instance GoogleRequest
               _acvgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersVariablesGetResource)
-                      r
-                      u
+                      rq

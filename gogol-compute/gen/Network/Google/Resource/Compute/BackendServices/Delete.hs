@@ -163,8 +163,8 @@ instance GoogleAuth BackendServicesDelete' where
 
 instance GoogleRequest BackendServicesDelete' where
         type Rs BackendServicesDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u BackendServicesDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq BackendServicesDelete'{..}
           = go _bsdProject _bsdBackendService _bsdQuotaUser
               (Just _bsdPrettyPrint)
               _bsdUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest BackendServicesDelete' where
               _bsdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BackendServicesDeleteResource)
-                      r
-                      u
+                      rq

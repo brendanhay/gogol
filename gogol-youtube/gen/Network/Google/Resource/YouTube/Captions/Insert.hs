@@ -217,8 +217,8 @@ instance GoogleAuth CaptionsInsert' where
 
 instance GoogleRequest CaptionsInsert' where
         type Rs CaptionsInsert' = Caption
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CaptionsInsert'{..}
+        request = requestWith youTubeRequest
+        requestWith rq CaptionsInsert'{..}
           = go (Just _ciPart) _ciOnBehalfOf
               _ciOnBehalfOfContentOwner
               _ciSync
@@ -232,7 +232,5 @@ instance GoogleRequest CaptionsInsert' where
               _ciPayload
               _ciMedia
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CaptionsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CaptionsInsertResource)
+                      rq

@@ -215,9 +215,8 @@ instance GoogleRequest
          ManagementProFileUserLinksList' where
         type Rs ManagementProFileUserLinksList' =
              EntityUserLinks
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementProFileUserLinksList'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementProFileUserLinksList'{..}
           = go _mpfullAccountId _mpfullWebPropertyId
               _mpfullProFileId
               _mpfullStartIndex
@@ -230,8 +229,7 @@ instance GoogleRequest
               _mpfullOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementProFileUserLinksListResource)
-                      r
-                      u
+                      rq

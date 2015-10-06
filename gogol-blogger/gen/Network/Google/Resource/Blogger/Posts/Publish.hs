@@ -181,8 +181,8 @@ instance GoogleAuth PostsPublish' where
 
 instance GoogleRequest PostsPublish' where
         type Rs PostsPublish' = Post'
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostsPublish'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PostsPublish'{..}
           = go _posBlogId _posPostId _posPublishDate
               _posQuotaUser
               (Just _posPrettyPrint)
@@ -192,7 +192,5 @@ instance GoogleRequest PostsPublish' where
               _posOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PostsPublishResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PostsPublishResource)
+                      rq

@@ -316,8 +316,8 @@ instance GoogleAuth DirectorySitesList' where
 instance GoogleRequest DirectorySitesList' where
         type Rs DirectorySitesList' =
              DirectorySitesListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u DirectorySitesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq DirectorySitesList'{..}
           = go _dslProFileId _dslSearchString
               _dslAcceptsInterstitialPlacements
               _dslAcceptsPublisherPaidPlacements
@@ -339,7 +339,6 @@ instance GoogleRequest DirectorySitesList' where
               _dslOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DirectorySitesListResource)
-                      r
-                      u
+                      rq

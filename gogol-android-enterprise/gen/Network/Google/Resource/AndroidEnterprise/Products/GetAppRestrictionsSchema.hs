@@ -187,10 +187,8 @@ instance GoogleRequest
          ProductsGetAppRestrictionsSchema' where
         type Rs ProductsGetAppRestrictionsSchema' =
              AppRestrictionsSchema
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u
-          ProductsGetAppRestrictionsSchema'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq ProductsGetAppRestrictionsSchema'{..}
           = go _pgarsEnterpriseId _pgarsProductId
               _pgarsLanguage
               _pgarsQuotaUser
@@ -201,8 +199,7 @@ instance GoogleRequest
               _pgarsOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ProductsGetAppRestrictionsSchemaResource)
-                      r
-                      u
+                      rq

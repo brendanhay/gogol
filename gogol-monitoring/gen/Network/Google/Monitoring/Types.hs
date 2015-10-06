@@ -16,7 +16,7 @@
 module Network.Google.Monitoring.Types
     (
     -- * Service URL
-      monitoringURL
+      monitoringRequest
 
     -- * MetricDescriptorTypeDescriptor
     , MetricDescriptorTypeDescriptor
@@ -176,9 +176,8 @@ import           Network.Google.Monitoring.Types.Product
 import           Network.Google.Monitoring.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v2beta2' of the Cloud Monitoring API.
-monitoringURL :: BaseUrl
-monitoringURL
-  = BaseUrl Https
-      "https://www.googleapis.com/cloudmonitoring/v2beta2/projects/"
-      443
+-- | Default request referring to version 'v2beta2' of the Cloud Monitoring API.
+monitoringRequest :: RequestBuilder
+monitoringRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "cloudmonitoring/v2beta2/projects/"

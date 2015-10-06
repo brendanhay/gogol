@@ -164,8 +164,8 @@ instance GoogleAuth SSLCertsList' where
 
 instance GoogleRequest SSLCertsList' where
         type Rs SSLCertsList' = SSLCertsListResponse
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u SSLCertsList'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq SSLCertsList'{..}
           = go _sclProject _sclInstance _sclQuotaUser
               (Just _sclPrettyPrint)
               _sclUserIP
@@ -174,7 +174,5 @@ instance GoogleRequest SSLCertsList' where
               _sclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SSLCertsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SSLCertsListResource)
+                      rq

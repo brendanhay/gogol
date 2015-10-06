@@ -175,8 +175,8 @@ instance GoogleAuth VideosGetRating' where
 
 instance GoogleRequest VideosGetRating' where
         type Rs VideosGetRating' = VideoGetRatingResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideosGetRating'{..}
+        request = requestWith youTubeRequest
+        requestWith rq VideosGetRating'{..}
           = go (Just _vgrId) _vgrOnBehalfOfContentOwner
               _vgrQuotaUser
               (Just _vgrPrettyPrint)
@@ -186,7 +186,6 @@ instance GoogleRequest VideosGetRating' where
               _vgrOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VideosGetRatingResource)
-                      r
-                      u
+                      rq

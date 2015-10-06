@@ -170,8 +170,8 @@ instance GoogleRequest OrdersGettestOrdertemplate'
          where
         type Rs OrdersGettestOrdertemplate' =
              OrdersGetTestOrderTemplateResponse
-        request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersGettestOrdertemplate'{..}
+        request = requestWith shoppingContentRequest
+        requestWith rq OrdersGettestOrdertemplate'{..}
           = go _ogoMerchantId _ogoTemplateName _ogoQuotaUser
               (Just _ogoPrettyPrint)
               _ogoUserIP
@@ -180,7 +180,6 @@ instance GoogleRequest OrdersGettestOrdertemplate'
               _ogoOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OrdersGettestOrdertemplateResource)
-                      r
-                      u
+                      rq

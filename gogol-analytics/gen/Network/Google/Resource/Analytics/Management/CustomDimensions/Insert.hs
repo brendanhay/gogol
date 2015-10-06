@@ -183,9 +183,8 @@ instance GoogleRequest
          ManagementCustomDimensionsInsert' where
         type Rs ManagementCustomDimensionsInsert' =
              CustomDimension
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementCustomDimensionsInsert'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementCustomDimensionsInsert'{..}
           = go _mcdiAccountId _mcdiWebPropertyId _mcdiQuotaUser
               (Just _mcdiPrettyPrint)
               _mcdiUserIP
@@ -195,8 +194,7 @@ instance GoogleRequest
               (Just AltJSON)
               _mcdiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementCustomDimensionsInsertResource)
-                      r
-                      u
+                      rq

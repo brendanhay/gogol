@@ -166,8 +166,8 @@ instance GoogleRequest DirectorySiteContactsGet'
          where
         type Rs DirectorySiteContactsGet' =
              DirectorySiteContact
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u DirectorySiteContactsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq DirectorySiteContactsGet'{..}
           = go _dscgProFileId _dscgId _dscgQuotaUser
               (Just _dscgPrettyPrint)
               _dscgUserIP
@@ -176,7 +176,6 @@ instance GoogleRequest DirectorySiteContactsGet'
               _dscgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DirectorySiteContactsGetResource)
-                      r
-                      u
+                      rq

@@ -145,9 +145,8 @@ instance GoogleAuth ReportsGenerate' where
 
 instance GoogleRequest ReportsGenerate' where
         type Rs ReportsGenerate' = Report
-        request
-          = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u ReportsGenerate'{..}
+        request = requestWith doubleClickSearchRequest
+        requestWith rq ReportsGenerate'{..}
           = go _rQuotaUser (Just _rPrettyPrint) _rUserIP
               _rFields
               _rKey
@@ -155,7 +154,6 @@ instance GoogleRequest ReportsGenerate' where
               (Just AltJSON)
               _rPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReportsGenerateResource)
-                      r
-                      u
+                      rq

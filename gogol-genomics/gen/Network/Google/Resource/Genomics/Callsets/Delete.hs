@@ -146,8 +146,8 @@ instance GoogleAuth CallsetsDelete' where
 
 instance GoogleRequest CallsetsDelete' where
         type Rs CallsetsDelete' = ()
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u CallsetsDelete'{..}
+        request = requestWith genomicsRequest
+        requestWith rq CallsetsDelete'{..}
           = go _cdCallSetId _cdQuotaUser (Just _cdPrettyPrint)
               _cdUserIP
               _cdFields
@@ -155,7 +155,5 @@ instance GoogleRequest CallsetsDelete' where
               _cdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CallsetsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CallsetsDeleteResource)
+                      rq

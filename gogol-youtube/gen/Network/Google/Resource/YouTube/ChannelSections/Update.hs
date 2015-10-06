@@ -185,8 +185,8 @@ instance GoogleAuth ChannelSectionsUpdate' where
 
 instance GoogleRequest ChannelSectionsUpdate' where
         type Rs ChannelSectionsUpdate' = ChannelSection
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ChannelSectionsUpdate'{..}
+        request = requestWith youTubeRequest
+        requestWith rq ChannelSectionsUpdate'{..}
           = go (Just _csuPart) _csuOnBehalfOfContentOwner
               _csuQuotaUser
               (Just _csuPrettyPrint)
@@ -197,7 +197,6 @@ instance GoogleRequest ChannelSectionsUpdate' where
               (Just AltJSON)
               _csuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ChannelSectionsUpdateResource)
-                      r
-                      u
+                      rq

@@ -163,8 +163,8 @@ instance GoogleAuth URLChannelsInsert' where
 
 instance GoogleRequest URLChannelsInsert' where
         type Rs URLChannelsInsert' = URLChannel
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u URLChannelsInsert'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq URLChannelsInsert'{..}
           = go _uciAdClientId _uciQuotaUser
               (Just _uciPrettyPrint)
               _uciUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest URLChannelsInsert' where
               (Just AltJSON)
               _uciPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy URLChannelsInsertResource)
-                      r
-                      u
+                      rq

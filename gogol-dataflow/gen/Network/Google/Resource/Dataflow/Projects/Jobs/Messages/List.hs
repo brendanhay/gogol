@@ -303,8 +303,8 @@ instance GoogleRequest ProjectsJobsMessagesList'
          where
         type Rs ProjectsJobsMessagesList' =
              ListJobMessagesResponse
-        request = requestWithRoute defReq dataflowURL
-        requestWithRoute r u ProjectsJobsMessagesList'{..}
+        request = requestWith dataflowRequest
+        requestWith rq ProjectsJobsMessagesList'{..}
           = go _pjmlProjectId _pjmlJobId _pjmlXgafv
               _pjmlUploadProtocol
               _pjmlStartTime
@@ -324,7 +324,6 @@ instance GoogleRequest ProjectsJobsMessagesList'
               _pjmlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsJobsMessagesListResource)
-                      r
-                      u
+                      rq

@@ -16,7 +16,7 @@
 module Network.Google.DoubleClickBids.Types
     (
     -- * Service URL
-      doubleClickBidsURL
+      doubleClickBidsRequest
 
     -- * ListReportsResponse
     , ListReportsResponse
@@ -209,9 +209,8 @@ import           Network.Google.DoubleClickBids.Types.Product
 import           Network.Google.DoubleClickBids.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the DoubleClick Bid Manager API.
-doubleClickBidsURL :: BaseUrl
-doubleClickBidsURL
-  = BaseUrl Https
-      "https://www.googleapis.com/doubleclickbidmanager/v1/"
-      443
+-- | Default request referring to version 'v1' of the DoubleClick Bid Manager API.
+doubleClickBidsRequest :: RequestBuilder
+doubleClickBidsRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "doubleclickbidmanager/v1/"

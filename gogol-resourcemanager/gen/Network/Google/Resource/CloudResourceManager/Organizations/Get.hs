@@ -216,8 +216,8 @@ instance GoogleAuth OrganizationsGet' where
 
 instance GoogleRequest OrganizationsGet' where
         type Rs OrganizationsGet' = Organization
-        request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u OrganizationsGet'{..}
+        request = requestWith resourceManagerRequest
+        requestWith rq OrganizationsGet'{..}
           = go _ogOrganizationId _ogXgafv _ogUploadProtocol
               (Just _ogPp)
               _ogAccessToken
@@ -231,7 +231,6 @@ instance GoogleRequest OrganizationsGet' where
               _ogOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OrganizationsGetResource)
-                      r
-                      u
+                      rq

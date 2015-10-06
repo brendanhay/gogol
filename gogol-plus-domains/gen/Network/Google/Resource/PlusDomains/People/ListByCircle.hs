@@ -179,8 +179,8 @@ instance GoogleAuth PeopleListByCircle' where
 
 instance GoogleRequest PeopleListByCircle' where
         type Rs PeopleListByCircle' = PeopleFeed
-        request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u PeopleListByCircle'{..}
+        request = requestWith plusDomainsRequest
+        requestWith rq PeopleListByCircle'{..}
           = go _plbcCircleId _plbcPageToken
               (Just _plbcMaxResults)
               _plbcQuotaUser
@@ -191,7 +191,6 @@ instance GoogleRequest PeopleListByCircle' where
               _plbcOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PeopleListByCircleResource)
-                      r
-                      u
+                      rq

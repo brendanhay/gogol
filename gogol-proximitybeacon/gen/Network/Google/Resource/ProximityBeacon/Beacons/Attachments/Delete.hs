@@ -230,8 +230,8 @@ instance GoogleAuth BeaconsAttachmentsDelete' where
 instance GoogleRequest BeaconsAttachmentsDelete'
          where
         type Rs BeaconsAttachmentsDelete' = Empty
-        request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconsAttachmentsDelete'{..}
+        request = requestWith proximityBeaconRequest
+        requestWith rq BeaconsAttachmentsDelete'{..}
           = go _badAttachmentName _badXgafv _badUploadProtocol
               (Just _badPp)
               _badAccessToken
@@ -245,7 +245,6 @@ instance GoogleRequest BeaconsAttachmentsDelete'
               _badOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BeaconsAttachmentsDeleteResource)
-                      r
-                      u
+                      rq

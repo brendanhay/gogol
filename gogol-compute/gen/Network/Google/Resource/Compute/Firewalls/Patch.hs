@@ -173,8 +173,8 @@ instance GoogleAuth FirewallsPatch' where
 
 instance GoogleRequest FirewallsPatch' where
         type Rs FirewallsPatch' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u FirewallsPatch'{..}
+        request = requestWith computeRequest
+        requestWith rq FirewallsPatch'{..}
           = go _fpProject _fpFirewall _fpQuotaUser
               (Just _fpPrettyPrint)
               _fpUserIP
@@ -184,7 +184,5 @@ instance GoogleRequest FirewallsPatch' where
               (Just AltJSON)
               _fpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy FirewallsPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy FirewallsPatchResource)
+                      rq

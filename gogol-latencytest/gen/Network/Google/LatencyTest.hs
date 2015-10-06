@@ -21,7 +21,7 @@ module Network.Google.LatencyTest
     -- * API
       LatencyTestAPI
     , latencyTestAPI
-    , latencyTestURL
+    , latencyTestRequest
 
     -- * Service Methods
 

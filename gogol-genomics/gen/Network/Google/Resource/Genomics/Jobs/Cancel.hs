@@ -148,8 +148,8 @@ instance GoogleAuth JobsCancel' where
 
 instance GoogleRequest JobsCancel' where
         type Rs JobsCancel' = ()
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u JobsCancel'{..}
+        request = requestWith genomicsRequest
+        requestWith rq JobsCancel'{..}
           = go _jcJobId _jcQuotaUser (Just _jcPrettyPrint)
               _jcUserIP
               _jcFields
@@ -157,6 +157,4 @@ instance GoogleRequest JobsCancel' where
               _jcOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsCancelResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy JobsCancelResource) rq

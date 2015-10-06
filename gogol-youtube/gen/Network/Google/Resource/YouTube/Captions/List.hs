@@ -215,8 +215,8 @@ instance GoogleAuth CaptionsList' where
 
 instance GoogleRequest CaptionsList' where
         type Rs CaptionsList' = CaptionListResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CaptionsList'{..}
+        request = requestWith youTubeRequest
+        requestWith rq CaptionsList'{..}
           = go (Just _cllPart) (Just _cllVideoId)
               _cllOnBehalfOf
               _cllOnBehalfOfContentOwner
@@ -229,7 +229,5 @@ instance GoogleRequest CaptionsList' where
               _cllOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CaptionsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CaptionsListResource)
+                      rq

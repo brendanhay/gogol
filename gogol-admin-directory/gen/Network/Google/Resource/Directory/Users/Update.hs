@@ -159,8 +159,8 @@ instance GoogleAuth UsersUpdate' where
 
 instance GoogleRequest UsersUpdate' where
         type Rs UsersUpdate' = User
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u UsersUpdate'{..}
+        request = requestWith directoryRequest
+        requestWith rq UsersUpdate'{..}
           = go _uuUserKey _uuQuotaUser (Just _uuPrettyPrint)
               _uuUserIP
               _uuFields
@@ -169,7 +169,4 @@ instance GoogleRequest UsersUpdate' where
               (Just AltJSON)
               _uuPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy UsersUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersUpdateResource) rq

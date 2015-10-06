@@ -22,7 +22,7 @@ module Network.Google.ResourceManager
     -- * API
       ResourceManagerAPI
     , resourceManagerAPI
-    , resourceManagerURL
+    , resourceManagerRequest
 
     -- * Service Methods
 

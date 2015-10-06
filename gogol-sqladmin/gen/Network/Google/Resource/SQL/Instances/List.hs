@@ -173,8 +173,8 @@ instance GoogleAuth InstancesList' where
 
 instance GoogleRequest InstancesList' where
         type Rs InstancesList' = InstancesListResponse
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesList'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq InstancesList'{..}
           = go _ilProject _ilPageToken _ilMaxResults
               _ilQuotaUser
               (Just _ilPrettyPrint)
@@ -184,7 +184,5 @@ instance GoogleRequest InstancesList' where
               _ilOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy InstancesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy InstancesListResource)
+                      rq

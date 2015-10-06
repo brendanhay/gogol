@@ -206,8 +206,8 @@ instance GoogleAuth ACLList' where
 
 instance GoogleRequest ACLList' where
         type Rs ACLList' = ACL
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u ACLList'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq ACLList'{..}
           = go _alCalendarId _alSyncToken _alShowDeleted
               _alPageToken
               _alMaxResults
@@ -219,5 +219,4 @@ instance GoogleRequest ACLList' where
               _alOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ACLListResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy ACLListResource) rq

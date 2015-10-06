@@ -167,8 +167,8 @@ instance GoogleAuth ManagementWebPropertiesGet' where
 instance GoogleRequest ManagementWebPropertiesGet'
          where
         type Rs ManagementWebPropertiesGet' = WebProperty
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementWebPropertiesGet'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementWebPropertiesGet'{..}
           = go _mwpgAccountId _mwpgWebPropertyId _mwpgQuotaUser
               (Just _mwpgPrettyPrint)
               _mwpgUserIP
@@ -177,7 +177,6 @@ instance GoogleRequest ManagementWebPropertiesGet'
               _mwpgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementWebPropertiesGetResource)
-                      r
-                      u
+                      rq

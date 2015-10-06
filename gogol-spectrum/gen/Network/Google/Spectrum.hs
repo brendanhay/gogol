@@ -21,7 +21,7 @@ module Network.Google.Spectrum
     -- * API
       SpectrumAPI
     , spectrumAPI
-    , spectrumURL
+    , spectrumRequest
 
     -- * Service Methods
 

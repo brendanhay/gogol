@@ -154,8 +154,8 @@ instance GoogleAuth AccountsPermissionsList' where
 instance GoogleRequest AccountsPermissionsList' where
         type Rs AccountsPermissionsList' =
              ListAccountUsersResponse
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsPermissionsList'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsPermissionsList'{..}
           = go _aplAccountId _aplQuotaUser
               (Just _aplPrettyPrint)
               _aplUserIP
@@ -164,7 +164,6 @@ instance GoogleRequest AccountsPermissionsList' where
               _aplOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsPermissionsListResource)
-                      r
-                      u
+                      rq

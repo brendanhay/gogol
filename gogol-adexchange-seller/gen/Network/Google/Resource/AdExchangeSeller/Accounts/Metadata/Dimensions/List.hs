@@ -157,9 +157,8 @@ instance GoogleAuth AccountsMetadataDimensionsList'
 instance GoogleRequest
          AccountsMetadataDimensionsList' where
         type Rs AccountsMetadataDimensionsList' = Metadata
-        request = requestWithRoute defReq adExchangeSellerURL
-        requestWithRoute r u
-          AccountsMetadataDimensionsList'{..}
+        request = requestWith adExchangeSellerRequest
+        requestWith rq AccountsMetadataDimensionsList'{..}
           = go _amdlAccountId _amdlQuotaUser
               (Just _amdlPrettyPrint)
               _amdlUserIP
@@ -168,8 +167,7 @@ instance GoogleRequest
               _amdlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsMetadataDimensionsListResource)
-                      r
-                      u
+                      rq

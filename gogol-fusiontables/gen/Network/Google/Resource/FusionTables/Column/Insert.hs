@@ -159,8 +159,8 @@ instance GoogleAuth ColumnInsert' where
 
 instance GoogleRequest ColumnInsert' where
         type Rs ColumnInsert' = Column
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u ColumnInsert'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq ColumnInsert'{..}
           = go _ciTableId _ciQuotaUser (Just _ciPrettyPrint)
               _ciUserIP
               _ciFields
@@ -169,7 +169,5 @@ instance GoogleRequest ColumnInsert' where
               (Just AltJSON)
               _ciPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ColumnInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ColumnInsertResource)
+                      rq

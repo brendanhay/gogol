@@ -213,9 +213,8 @@ instance GoogleRequest
          ManagementProFileFilterLinksPatch' where
         type Rs ManagementProFileFilterLinksPatch' =
              ProFileFilterLink
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementProFileFilterLinksPatch'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementProFileFilterLinksPatch'{..}
           = go _mpfflpAccountId _mpfflpWebPropertyId
               _mpfflpProFileId
               _mpfflpLinkId
@@ -228,8 +227,7 @@ instance GoogleRequest
               (Just AltJSON)
               _mpfflpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementProFileFilterLinksPatchResource)
-                      r
-                      u
+                      rq

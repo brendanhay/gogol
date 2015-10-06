@@ -173,8 +173,8 @@ instance GoogleAuth OrdersUpdateshipment' where
 instance GoogleRequest OrdersUpdateshipment' where
         type Rs OrdersUpdateshipment' =
              OrdersUpdateShipmentResponse
-        request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersUpdateshipment'{..}
+        request = requestWith shoppingContentRequest
+        requestWith rq OrdersUpdateshipment'{..}
           = go _ouMerchantId _ouOrderId _ouQuotaUser
               (Just _ouPrettyPrint)
               _ouUserIP
@@ -184,7 +184,6 @@ instance GoogleRequest OrdersUpdateshipment' where
               (Just AltJSON)
               _ouPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OrdersUpdateshipmentResource)
-                      r
-                      u
+                      rq

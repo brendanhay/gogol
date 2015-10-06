@@ -148,8 +148,8 @@ instance GoogleAuth
 instance GoogleRequest
          TurnBasedMatchesResetForAllPlayers' where
         type Rs TurnBasedMatchesResetForAllPlayers' = ()
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u
+        request = requestWith gamesManagementRequest
+        requestWith rq
           TurnBasedMatchesResetForAllPlayers'{..}
           = go _tbmrfapQuotaUser (Just _tbmrfapPrettyPrint)
               _tbmrfapUserIP
@@ -158,8 +158,7 @@ instance GoogleRequest
               _tbmrfapOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy TurnBasedMatchesResetForAllPlayersResource)
-                      r
-                      u
+                      rq

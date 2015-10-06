@@ -164,8 +164,8 @@ instance GoogleAuth UsersDataSourcesGet' where
 
 instance GoogleRequest UsersDataSourcesGet' where
         type Rs UsersDataSourcesGet' = DataSource
-        request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersDataSourcesGet'{..}
+        request = requestWith fitnessRequest
+        requestWith rq UsersDataSourcesGet'{..}
           = go _udsgUserId _udsgDataSourceId _udsgQuotaUser
               (Just _udsgPrettyPrint)
               _udsgUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest UsersDataSourcesGet' where
               _udsgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersDataSourcesGetResource)
-                      r
-                      u
+                      rq

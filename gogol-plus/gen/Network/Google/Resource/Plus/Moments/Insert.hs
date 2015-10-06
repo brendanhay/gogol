@@ -183,8 +183,8 @@ instance GoogleAuth MomentsInsert' where
 
 instance GoogleRequest MomentsInsert' where
         type Rs MomentsInsert' = Moment
-        request = requestWithRoute defReq plusURL
-        requestWithRoute r u MomentsInsert'{..}
+        request = requestWith plusRequest
+        requestWith rq MomentsInsert'{..}
           = go _miUserId _miCollection _miDebug _miQuotaUser
               (Just _miPrettyPrint)
               _miUserIP
@@ -194,7 +194,5 @@ instance GoogleRequest MomentsInsert' where
               (Just AltJSON)
               _miPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy MomentsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy MomentsInsertResource)
+                      rq

@@ -160,8 +160,8 @@ instance GoogleAuth EventsRecord' where
 
 instance GoogleRequest EventsRecord' where
         type Rs EventsRecord' = EventUpdateResponse
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u EventsRecord'{..}
+        request = requestWith gamesRequest
+        requestWith rq EventsRecord'{..}
           = go _erLanguage _erQuotaUser (Just _erPrettyPrint)
               _erUserIP
               _erFields
@@ -170,7 +170,5 @@ instance GoogleRequest EventsRecord' where
               (Just AltJSON)
               _erPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EventsRecordResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EventsRecordResource)
+                      rq

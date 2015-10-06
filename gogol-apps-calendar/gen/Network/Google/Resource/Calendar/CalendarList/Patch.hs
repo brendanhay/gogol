@@ -184,8 +184,8 @@ instance GoogleAuth CalendarListPatch' where
 
 instance GoogleRequest CalendarListPatch' where
         type Rs CalendarListPatch' = CalendarListEntry
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarListPatch'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq CalendarListPatch'{..}
           = go _clpCalendarId _clpColorRgbFormat _clpQuotaUser
               (Just _clpPrettyPrint)
               _clpUserIP
@@ -195,7 +195,6 @@ instance GoogleRequest CalendarListPatch' where
               (Just AltJSON)
               _clpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CalendarListPatchResource)
-                      r
-                      u
+                      rq

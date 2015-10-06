@@ -197,8 +197,8 @@ instance GoogleAuth LiveBroadcastsDelete' where
 
 instance GoogleRequest LiveBroadcastsDelete' where
         type Rs LiveBroadcastsDelete' = ()
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u LiveBroadcastsDelete'{..}
+        request = requestWith youTubeRequest
+        requestWith rq LiveBroadcastsDelete'{..}
           = go (Just _lbdId) _lbdOnBehalfOfContentOwner
               _lbdOnBehalfOfContentOwnerChannel
               _lbdQuotaUser
@@ -209,7 +209,6 @@ instance GoogleRequest LiveBroadcastsDelete' where
               _lbdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LiveBroadcastsDeleteResource)
-                      r
-                      u
+                      rq

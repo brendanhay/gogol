@@ -181,8 +181,8 @@ instance GoogleRequest CreativeFieldValuesInsert'
          where
         type Rs CreativeFieldValuesInsert' =
              CreativeFieldValue
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldValuesInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativeFieldValuesInsert'{..}
           = go _cfviProFileId _cfviCreativeFieldId
               _cfviQuotaUser
               (Just _cfviPrettyPrint)
@@ -193,7 +193,6 @@ instance GoogleRequest CreativeFieldValuesInsert'
               (Just AltJSON)
               _cfviPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CreativeFieldValuesInsertResource)
-                      r
-                      u
+                      rq

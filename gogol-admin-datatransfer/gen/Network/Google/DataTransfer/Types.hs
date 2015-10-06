@@ -16,7 +16,7 @@
 module Network.Google.DataTransfer.Types
     (
     -- * Service URL
-      dataTransferURL
+      dataTransferRequest
 
     -- * Application
     , Application
@@ -73,9 +73,8 @@ import           Network.Google.DataTransfer.Types.Product
 import           Network.Google.DataTransfer.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'datatransfer_v1' of the Admin Data Transfer API.
-dataTransferURL :: BaseUrl
-dataTransferURL
-  = BaseUrl Https
-      "https://www.googleapis.com/admin/datatransfer/v1/"
-      443
+-- | Default request referring to version 'datatransfer_v1' of the Admin Data Transfer API.
+dataTransferRequest :: RequestBuilder
+dataTransferRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "admin/datatransfer/v1/"

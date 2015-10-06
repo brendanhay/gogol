@@ -164,8 +164,8 @@ instance GoogleAuth StatesClear' where
 
 instance GoogleRequest StatesClear' where
         type Rs StatesClear' = WriteResult
-        request = requestWithRoute defReq appStateURL
-        requestWithRoute r u StatesClear'{..}
+        request = requestWith appStateRequest
+        requestWith rq StatesClear'{..}
           = go _scStateKey _scCurrentDataVersion _scQuotaUser
               (Just _scPrettyPrint)
               _scUserIP
@@ -174,7 +174,4 @@ instance GoogleRequest StatesClear' where
               _scOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy StatesClearResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy StatesClearResource) rq

@@ -255,8 +255,8 @@ instance GoogleAuth CoursesStudentsList' where
 
 instance GoogleRequest CoursesStudentsList' where
         type Rs CoursesStudentsList' = ListStudentsResponse
-        request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesStudentsList'{..}
+        request = requestWith classroomRequest
+        requestWith rq CoursesStudentsList'{..}
           = go _cslCourseId _cslXgafv _cslUploadProtocol
               (Just _cslPp)
               _cslAccessToken
@@ -272,7 +272,6 @@ instance GoogleRequest CoursesStudentsList' where
               _cslOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CoursesStudentsListResource)
-                      r
-                      u
+                      rq

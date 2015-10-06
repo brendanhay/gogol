@@ -148,8 +148,8 @@ instance GoogleAuth MetrosList' where
 
 instance GoogleRequest MetrosList' where
         type Rs MetrosList' = MetrosListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u MetrosList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq MetrosList'{..}
           = go _mlProFileId _mlQuotaUser (Just _mlPrettyPrint)
               _mlUserIP
               _mlFields
@@ -157,6 +157,4 @@ instance GoogleRequest MetrosList' where
               _mlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy MetrosListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy MetrosListResource) rq

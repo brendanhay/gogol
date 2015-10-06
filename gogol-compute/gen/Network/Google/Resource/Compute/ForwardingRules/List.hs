@@ -211,8 +211,8 @@ instance GoogleAuth ForwardingRulesList' where
 
 instance GoogleRequest ForwardingRulesList' where
         type Rs ForwardingRulesList' = ForwardingRuleList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u ForwardingRulesList'{..}
+        request = requestWith computeRequest
+        requestWith rq ForwardingRulesList'{..}
           = go _frlProject _frlRegion _frlFilter _frlPageToken
               (Just _frlMaxResults)
               _frlQuotaUser
@@ -223,7 +223,6 @@ instance GoogleRequest ForwardingRulesList' where
               _frlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ForwardingRulesListResource)
-                      r
-                      u
+                      rq

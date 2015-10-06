@@ -170,8 +170,8 @@ instance GoogleAuth GroupItemsDelete' where
 
 instance GoogleRequest GroupItemsDelete' where
         type Rs GroupItemsDelete' = ()
-        request = requestWithRoute defReq youTubeAnalyticsURL
-        requestWithRoute r u GroupItemsDelete'{..}
+        request = requestWith youTubeAnalyticsRequest
+        requestWith rq GroupItemsDelete'{..}
           = go (Just _gidId) _gidOnBehalfOfContentOwner
               _gidQuotaUser
               (Just _gidPrettyPrint)
@@ -181,7 +181,6 @@ instance GoogleRequest GroupItemsDelete' where
               _gidOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GroupItemsDeleteResource)
-                      r
-                      u
+                      rq

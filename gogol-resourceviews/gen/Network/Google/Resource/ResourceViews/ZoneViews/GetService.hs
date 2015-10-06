@@ -191,8 +191,8 @@ instance GoogleAuth ZoneViewsGetService' where
 instance GoogleRequest ZoneViewsGetService' where
         type Rs ZoneViewsGetService' =
              ZoneViewsGetServiceResponse
-        request = requestWithRoute defReq resourceViewsURL
-        requestWithRoute r u ZoneViewsGetService'{..}
+        request = requestWith resourceViewsRequest
+        requestWith rq ZoneViewsGetService'{..}
           = go _zvgsProject _zvgsZone _zvgsResourceView
               _zvgsResourceName
               _zvgsQuotaUser
@@ -203,7 +203,6 @@ instance GoogleRequest ZoneViewsGetService' where
               _zvgsOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ZoneViewsGetServiceResource)
-                      r
-                      u
+                      rq

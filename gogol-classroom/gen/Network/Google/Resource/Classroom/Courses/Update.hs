@@ -236,8 +236,8 @@ instance GoogleAuth CoursesUpdate' where
 
 instance GoogleRequest CoursesUpdate' where
         type Rs CoursesUpdate' = Course
-        request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesUpdate'{..}
+        request = requestWith classroomRequest
+        requestWith rq CoursesUpdate'{..}
           = go _cuId _cuXgafv _cuUploadProtocol (Just _cuPp)
               _cuAccessToken
               _cuUploadType
@@ -251,7 +251,5 @@ instance GoogleRequest CoursesUpdate' where
               (Just AltJSON)
               _cuPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CoursesUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CoursesUpdateResource)
+                      rq

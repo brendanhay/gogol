@@ -164,8 +164,8 @@ instance GoogleAuth AccountUserProFilesGet' where
 
 instance GoogleRequest AccountUserProFilesGet' where
         type Rs AccountUserProFilesGet' = AccountUserProFile
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountUserProFilesGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AccountUserProFilesGet'{..}
           = go _aupfgProFileId _aupfgId _aupfgQuotaUser
               (Just _aupfgPrettyPrint)
               _aupfgUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest AccountUserProFilesGet' where
               _aupfgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountUserProFilesGetResource)
-                      r
-                      u
+                      rq

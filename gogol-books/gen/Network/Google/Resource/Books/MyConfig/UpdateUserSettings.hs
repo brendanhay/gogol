@@ -157,8 +157,8 @@ instance GoogleAuth MyConfigUpdateUserSettings' where
 instance GoogleRequest MyConfigUpdateUserSettings'
          where
         type Rs MyConfigUpdateUserSettings' = Usersettings
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u MyConfigUpdateUserSettings'{..}
+        request = requestWith booksRequest
+        requestWith rq MyConfigUpdateUserSettings'{..}
           = go _mcuusQuotaUser (Just _mcuusPrettyPrint)
               _mcuusUserIP
               _mcuusFields
@@ -167,7 +167,6 @@ instance GoogleRequest MyConfigUpdateUserSettings'
               (Just AltJSON)
               _mcuusPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MyConfigUpdateUserSettingsResource)
-                      r
-                      u
+                      rq

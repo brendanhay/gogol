@@ -187,8 +187,8 @@ instance GoogleAuth DimensionValuesQuery' where
 
 instance GoogleRequest DimensionValuesQuery' where
         type Rs DimensionValuesQuery' = DimensionValueList
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u DimensionValuesQuery'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq DimensionValuesQuery'{..}
           = go _dvqProFileId _dvqPageToken _dvqMaxResults
               _dvqQuotaUser
               (Just _dvqPrettyPrint)
@@ -199,7 +199,6 @@ instance GoogleRequest DimensionValuesQuery' where
               (Just AltJSON)
               _dvqPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DimensionValuesQueryResource)
-                      r
-                      u
+                      rq

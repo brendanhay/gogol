@@ -153,8 +153,8 @@ instance GoogleAuth CommentsMarkAsSpam' where
 
 instance GoogleRequest CommentsMarkAsSpam' where
         type Rs CommentsMarkAsSpam' = ()
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CommentsMarkAsSpam'{..}
+        request = requestWith youTubeRequest
+        requestWith rq CommentsMarkAsSpam'{..}
           = go (Just _cmasId) _cmasQuotaUser
               (Just _cmasPrettyPrint)
               _cmasUserIP
@@ -163,7 +163,6 @@ instance GoogleRequest CommentsMarkAsSpam' where
               _cmasOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CommentsMarkAsSpamResource)
-                      r
-                      u
+                      rq

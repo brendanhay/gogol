@@ -199,8 +199,8 @@ instance GoogleAuth BackendServicesList' where
 
 instance GoogleRequest BackendServicesList' where
         type Rs BackendServicesList' = BackendServiceList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u BackendServicesList'{..}
+        request = requestWith computeRequest
+        requestWith rq BackendServicesList'{..}
           = go _bslProject _bslFilter _bslPageToken
               (Just _bslMaxResults)
               _bslQuotaUser
@@ -211,7 +211,6 @@ instance GoogleRequest BackendServicesList' where
               _bslOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BackendServicesListResource)
-                      r
-                      u
+                      rq

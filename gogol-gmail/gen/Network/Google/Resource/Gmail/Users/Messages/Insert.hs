@@ -203,8 +203,8 @@ instance GoogleAuth UsersMessagesInsert' where
 
 instance GoogleRequest UsersMessagesInsert' where
         type Rs UsersMessagesInsert' = Message
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesInsert'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersMessagesInsert'{..}
           = go _umiUserId (Just _umiDeleted)
               (Just _umiInternalDateSource)
               _umiQuotaUser
@@ -217,7 +217,6 @@ instance GoogleRequest UsersMessagesInsert' where
               _umiPayload
               _umiMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersMessagesInsertResource)
-                      r
-                      u
+                      rq

@@ -209,8 +209,8 @@ instance GoogleAuth UsersHistoryList' where
 
 instance GoogleRequest UsersHistoryList' where
         type Rs UsersHistoryList' = ListHistoryResponse
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersHistoryList'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersHistoryList'{..}
           = go _uhlUserId _uhlStartHistoryId _uhlPageToken
               _uhlLabelId
               (Just _uhlMaxResults)
@@ -222,7 +222,6 @@ instance GoogleRequest UsersHistoryList' where
               _uhlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersHistoryListResource)
-                      r
-                      u
+                      rq

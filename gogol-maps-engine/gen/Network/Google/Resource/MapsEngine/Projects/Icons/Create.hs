@@ -172,8 +172,8 @@ instance GoogleAuth ProjectsIconsCreate' where
 
 instance GoogleRequest ProjectsIconsCreate' where
         type Rs ProjectsIconsCreate' = Icon
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u ProjectsIconsCreate'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq ProjectsIconsCreate'{..}
           = go _picProjectId _picQuotaUser
               (Just _picPrettyPrint)
               _picUserIP
@@ -184,7 +184,6 @@ instance GoogleRequest ProjectsIconsCreate' where
               _picPayload
               _picMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsIconsCreateResource)
-                      r
-                      u
+                      rq

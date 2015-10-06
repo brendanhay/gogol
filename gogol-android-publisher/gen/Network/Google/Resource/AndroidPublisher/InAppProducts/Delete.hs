@@ -163,8 +163,8 @@ instance GoogleAuth InAppProductsDelete' where
 
 instance GoogleRequest InAppProductsDelete' where
         type Rs InAppProductsDelete' = ()
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u InAppProductsDelete'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq InAppProductsDelete'{..}
           = go _iapdPackageName _iapdSKU _iapdQuotaUser
               (Just _iapdPrettyPrint)
               _iapdUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest InAppProductsDelete' where
               _iapdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InAppProductsDeleteResource)
-                      r
-                      u
+                      rq

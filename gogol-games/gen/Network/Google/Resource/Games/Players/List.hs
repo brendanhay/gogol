@@ -184,8 +184,8 @@ instance GoogleAuth PlayersList' where
 
 instance GoogleRequest PlayersList' where
         type Rs PlayersList' = PlayerListResponse
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u PlayersList'{..}
+        request = requestWith gamesRequest
+        requestWith rq PlayersList'{..}
           = go _plCollection _plLanguage _plPageToken
               _plMaxResults
               _plQuotaUser
@@ -196,7 +196,4 @@ instance GoogleRequest PlayersList' where
               _plOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PlayersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PlayersListResource) rq

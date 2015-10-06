@@ -174,8 +174,8 @@ instance GoogleAuth AddressesGet' where
 
 instance GoogleRequest AddressesGet' where
         type Rs AddressesGet' = Address
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u AddressesGet'{..}
+        request = requestWith computeRequest
+        requestWith rq AddressesGet'{..}
           = go _aggProject _aggRegion _aggAddress _aggQuotaUser
               (Just _aggPrettyPrint)
               _aggUserIP
@@ -184,7 +184,5 @@ instance GoogleRequest AddressesGet' where
               _aggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AddressesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AddressesGetResource)
+                      rq

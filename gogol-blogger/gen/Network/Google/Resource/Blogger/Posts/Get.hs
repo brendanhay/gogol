@@ -205,8 +205,8 @@ instance GoogleAuth PostsGet' where
 
 instance GoogleRequest PostsGet' where
         type Rs PostsGet' = Post'
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostsGet'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PostsGet'{..}
           = go _pgBlogId _pgPostId (Just _pgFetchBody)
               _pgFetchImages
               _pgMaxComments
@@ -219,5 +219,4 @@ instance GoogleRequest PostsGet' where
               _pgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy PostsGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy PostsGetResource) rq

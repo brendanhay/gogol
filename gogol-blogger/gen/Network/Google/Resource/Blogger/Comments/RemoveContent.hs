@@ -176,8 +176,8 @@ instance GoogleAuth CommentsRemoveContent' where
 
 instance GoogleRequest CommentsRemoveContent' where
         type Rs CommentsRemoveContent' = Comment
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u CommentsRemoveContent'{..}
+        request = requestWith bloggerRequest
+        requestWith rq CommentsRemoveContent'{..}
           = go _crcBlogId _crcPostId _crcCommentId
               _crcQuotaUser
               (Just _crcPrettyPrint)
@@ -187,7 +187,6 @@ instance GoogleRequest CommentsRemoveContent' where
               _crcOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CommentsRemoveContentResource)
-                      r
-                      u
+                      rq

@@ -210,8 +210,8 @@ instance GoogleAuth InstancesList' where
 
 instance GoogleRequest InstancesList' where
         type Rs InstancesList' = InstanceList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesList'{..}
+        request = requestWith computeRequest
+        requestWith rq InstancesList'{..}
           = go _illProject _illZone _illFilter _illPageToken
               (Just _illMaxResults)
               _illQuotaUser
@@ -222,7 +222,5 @@ instance GoogleRequest InstancesList' where
               _illOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy InstancesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy InstancesListResource)
+                      rq

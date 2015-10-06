@@ -178,8 +178,8 @@ instance GoogleRequest FloodlightActivitiesPatch'
          where
         type Rs FloodlightActivitiesPatch' =
              FloodlightActivity
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FloodlightActivitiesPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FloodlightActivitiesPatch'{..}
           = go _fapProFileId (Just _fapId) _fapQuotaUser
               (Just _fapPrettyPrint)
               _fapUserIP
@@ -189,7 +189,6 @@ instance GoogleRequest FloodlightActivitiesPatch'
               (Just AltJSON)
               _fapPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy FloodlightActivitiesPatchResource)
-                      r
-                      u
+                      rq

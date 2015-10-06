@@ -182,8 +182,8 @@ instance GoogleRequest
          SubscriptionsChangeRenewalSettings' where
         type Rs SubscriptionsChangeRenewalSettings' =
              Subscription
-        request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u
+        request = requestWith appsResellerRequest
+        requestWith rq
           SubscriptionsChangeRenewalSettings'{..}
           = go _scrsCustomerId _scrsSubscriptionId
               _scrsQuotaUser
@@ -195,8 +195,7 @@ instance GoogleRequest
               (Just AltJSON)
               _scrsPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy SubscriptionsChangeRenewalSettingsResource)
-                      r
-                      u
+                      rq

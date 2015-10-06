@@ -155,8 +155,8 @@ instance GoogleAuth AccountsMetadataMetricsList'
 instance GoogleRequest AccountsMetadataMetricsList'
          where
         type Rs AccountsMetadataMetricsList' = Metadata
-        request = requestWithRoute defReq adExchangeSellerURL
-        requestWithRoute r u AccountsMetadataMetricsList'{..}
+        request = requestWith adExchangeSellerRequest
+        requestWith rq AccountsMetadataMetricsList'{..}
           = go _ammlAccountId _ammlQuotaUser
               (Just _ammlPrettyPrint)
               _ammlUserIP
@@ -165,7 +165,6 @@ instance GoogleRequest AccountsMetadataMetricsList'
               _ammlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsMetadataMetricsListResource)
-                      r
-                      u
+                      rq

@@ -22,7 +22,7 @@ module Network.Google.AdExchangeSeller
     -- * API
       AdExchangeSellerAPI
     , adExchangeSellerAPI
-    , adExchangeSellerURL
+    , adExchangeSellerRequest
 
     -- * Service Methods
 

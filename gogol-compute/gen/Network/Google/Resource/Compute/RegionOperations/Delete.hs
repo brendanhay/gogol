@@ -174,8 +174,8 @@ instance GoogleAuth RegionOperationsDelete' where
 
 instance GoogleRequest RegionOperationsDelete' where
         type Rs RegionOperationsDelete' = ()
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u RegionOperationsDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq RegionOperationsDelete'{..}
           = go _rodProject _rodRegion _rodOperation
               _rodQuotaUser
               (Just _rodPrettyPrint)
@@ -185,7 +185,6 @@ instance GoogleRequest RegionOperationsDelete' where
               _rodOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RegionOperationsDeleteResource)
-                      r
-                      u
+                      rq

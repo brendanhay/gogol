@@ -200,8 +200,8 @@ instance GoogleRequest
          InstanceGroupManagersDeleteInstances' where
         type Rs InstanceGroupManagersDeleteInstances' =
              Operation
-        request = requestWithRoute defReq replicaPoolURL
-        requestWithRoute r u
+        request = requestWith replicaPoolRequest
+        requestWith rq
           InstanceGroupManagersDeleteInstances'{..}
           = go _igmdiProject _igmdiZone
               _igmdiInstanceGroupManager
@@ -214,8 +214,7 @@ instance GoogleRequest
               (Just AltJSON)
               _igmdiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy InstanceGroupManagersDeleteInstancesResource)
-                      r
-                      u
+                      rq

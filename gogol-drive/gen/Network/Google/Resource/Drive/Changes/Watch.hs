@@ -219,8 +219,8 @@ instance GoogleAuth ChangesWatch' where
 
 instance GoogleRequest ChangesWatch' where
         type Rs ChangesWatch' = Channel
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u ChangesWatch'{..}
+        request = requestWith driveRequest
+        requestWith rq ChangesWatch'{..}
           = go (Just _cwIncludeSubscribed) _cwStartChangeId
               _cwSpaces
               _cwPageToken
@@ -235,7 +235,5 @@ instance GoogleRequest ChangesWatch' where
               (Just AltJSON)
               _cwPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ChangesWatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ChangesWatchResource)
+                      rq

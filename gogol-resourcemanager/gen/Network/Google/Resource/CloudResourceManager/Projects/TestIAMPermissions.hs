@@ -239,8 +239,8 @@ instance GoogleRequest ProjectsTestIAMPermissions'
          where
         type Rs ProjectsTestIAMPermissions' =
              TestIAMPermissionsResponse
-        request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsTestIAMPermissions'{..}
+        request = requestWith resourceManagerRequest
+        requestWith rq ProjectsTestIAMPermissions'{..}
           = go _ptipResource _ptipXgafv _ptipUploadProtocol
               (Just _ptipPp)
               _ptipAccessToken
@@ -255,7 +255,6 @@ instance GoogleRequest ProjectsTestIAMPermissions'
               (Just AltJSON)
               _ptipPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsTestIAMPermissionsResource)
-                      r
-                      u
+                      rq

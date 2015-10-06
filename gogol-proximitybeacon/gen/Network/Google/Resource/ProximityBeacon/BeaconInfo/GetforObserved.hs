@@ -227,8 +227,8 @@ instance GoogleRequest BeaconInfoGetforObserved'
          where
         type Rs BeaconInfoGetforObserved' =
              GetInfoForObservedBeaconsResponse
-        request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconInfoGetforObserved'{..}
+        request = requestWith proximityBeaconRequest
+        requestWith rq BeaconInfoGetforObserved'{..}
           = go _bigoXgafv _bigoUploadProtocol (Just _bigoPp)
               _bigoAccessToken
               _bigoUploadType
@@ -242,7 +242,6 @@ instance GoogleRequest BeaconInfoGetforObserved'
               (Just AltJSON)
               _bigoPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BeaconInfoGetforObservedResource)
-                      r
-                      u
+                      rq

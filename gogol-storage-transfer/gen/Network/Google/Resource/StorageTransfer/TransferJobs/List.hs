@@ -246,8 +246,8 @@ instance GoogleAuth TransferJobsList' where
 
 instance GoogleRequest TransferJobsList' where
         type Rs TransferJobsList' = ListTransferJobsResponse
-        request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferJobsList'{..}
+        request = requestWith storageTransferRequest
+        requestWith rq TransferJobsList'{..}
           = go _tjlXgafv _tjlUploadProtocol (Just _tjlPp)
               _tjlAccessToken
               _tjlUploadType
@@ -263,7 +263,6 @@ instance GoogleRequest TransferJobsList' where
               _tjlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TransferJobsListResource)
-                      r
-                      u
+                      rq

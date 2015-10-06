@@ -164,8 +164,8 @@ instance GoogleAuth GlobalAddressesInsert' where
 
 instance GoogleRequest GlobalAddressesInsert' where
         type Rs GlobalAddressesInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalAddressesInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq GlobalAddressesInsert'{..}
           = go _gaiProject _gaiQuotaUser (Just _gaiPrettyPrint)
               _gaiUserIP
               _gaiFields
@@ -174,7 +174,6 @@ instance GoogleRequest GlobalAddressesInsert' where
               (Just AltJSON)
               _gaiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GlobalAddressesInsertResource)
-                      r
-                      u
+                      rq

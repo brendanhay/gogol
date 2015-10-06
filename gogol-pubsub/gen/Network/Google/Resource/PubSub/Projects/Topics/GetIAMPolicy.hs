@@ -224,8 +224,8 @@ instance GoogleAuth ProjectsTopicsGetIAMPolicy' where
 instance GoogleRequest ProjectsTopicsGetIAMPolicy'
          where
         type Rs ProjectsTopicsGetIAMPolicy' = Policy
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsTopicsGetIAMPolicy'{..}
+        request = requestWith pubSubRequest
+        requestWith rq ProjectsTopicsGetIAMPolicy'{..}
           = go _ptgipResource _ptgipXgafv _ptgipUploadProtocol
               (Just _ptgipPp)
               _ptgipAccessToken
@@ -239,7 +239,6 @@ instance GoogleRequest ProjectsTopicsGetIAMPolicy'
               _ptgipOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsTopicsGetIAMPolicyResource)
-                      r
-                      u
+                      rq

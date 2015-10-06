@@ -16,7 +16,7 @@
 module Network.Google.Games.Types
     (
     -- * Service URL
-      gamesURL
+      gamesRequest
 
     -- * PlayersListCollection
     , PlayersListCollection (..)
@@ -916,9 +916,8 @@ import           Network.Google.Games.Types.Product
 import           Network.Google.Games.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Google Play Game Services API.
-gamesURL :: BaseUrl
-gamesURL
-  = BaseUrl Https
-      "https://www.googleapis.com/games/v1/"
-      443
+-- | Default request referring to version 'v1' of the Google Play Game Services API.
+gamesRequest :: RequestBuilder
+gamesRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "games/v1/"

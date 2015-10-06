@@ -161,8 +161,8 @@ instance GoogleAuth UsersInsert' where
 
 instance GoogleRequest UsersInsert' where
         type Rs UsersInsert' = Operation
-        request = requestWithRoute defReq userAccountsURL
-        requestWithRoute r u UsersInsert'{..}
+        request = requestWith userAccountsRequest
+        requestWith rq UsersInsert'{..}
           = go _uiProject _uiQuotaUser (Just _uiPrettyPrint)
               _uiUserIP
               _uiFields
@@ -171,7 +171,4 @@ instance GoogleRequest UsersInsert' where
               (Just AltJSON)
               _uiPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy UsersInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersInsertResource) rq

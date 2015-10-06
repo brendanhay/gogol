@@ -16,7 +16,7 @@
 module Network.Google.AppsCalendar.Types
     (
     -- * Service URL
-      appsCalendarURL
+      appsCalendarRequest
 
     -- * CalendarListEntry
     , CalendarListEntry
@@ -375,9 +375,8 @@ import           Network.Google.AppsCalendar.Types.Product
 import           Network.Google.AppsCalendar.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v3' of the Calendar API.
-appsCalendarURL :: BaseUrl
-appsCalendarURL
-  = BaseUrl Https
-      "https://www.googleapis.com/calendar/v3/"
-      443
+-- | Default request referring to version 'v3' of the Calendar API.
+appsCalendarRequest :: RequestBuilder
+appsCalendarRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "calendar/v3/"

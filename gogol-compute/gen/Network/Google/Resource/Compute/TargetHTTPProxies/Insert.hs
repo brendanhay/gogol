@@ -171,8 +171,8 @@ instance GoogleAuth TargetHTTPProxiesInsert' where
 
 instance GoogleRequest TargetHTTPProxiesInsert' where
         type Rs TargetHTTPProxiesInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetHTTPProxiesInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetHTTPProxiesInsert'{..}
           = go _thttppiProject _thttppiQuotaUser
               (Just _thttppiPrettyPrint)
               _thttppiUserIP
@@ -182,7 +182,6 @@ instance GoogleRequest TargetHTTPProxiesInsert' where
               (Just AltJSON)
               _thttppiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetHTTPProxiesInsertResource)
-                      r
-                      u
+                      rq

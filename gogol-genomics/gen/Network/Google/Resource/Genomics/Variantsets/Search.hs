@@ -149,8 +149,8 @@ instance GoogleAuth VariantsetsSearch' where
 instance GoogleRequest VariantsetsSearch' where
         type Rs VariantsetsSearch' =
              SearchVariantSetsResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsetsSearch'{..}
+        request = requestWith genomicsRequest
+        requestWith rq VariantsetsSearch'{..}
           = go _vQuotaUser (Just _vPrettyPrint) _vUserIP
               _vFields
               _vKey
@@ -158,7 +158,6 @@ instance GoogleRequest VariantsetsSearch' where
               (Just AltJSON)
               _vPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VariantsetsSearchResource)
-                      r
-                      u
+                      rq

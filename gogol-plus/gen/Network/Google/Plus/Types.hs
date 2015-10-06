@@ -16,7 +16,7 @@
 module Network.Google.Plus.Types
     (
     -- * Service URL
-      plusURL
+      plusRequest
 
     -- * ActivityProvider
     , ActivityProvider
@@ -515,8 +515,8 @@ import           Network.Google.Plus.Types.Product
 import           Network.Google.Plus.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Google+ API.
-plusURL :: BaseUrl
-plusURL
-  = BaseUrl Https "https://www.googleapis.com/plus/v1/"
-      443
+-- | Default request referring to version 'v1' of the Google+ API.
+plusRequest :: RequestBuilder
+plusRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "plus/v1/"

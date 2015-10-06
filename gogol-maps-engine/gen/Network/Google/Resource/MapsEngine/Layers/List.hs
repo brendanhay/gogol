@@ -301,8 +301,8 @@ instance GoogleAuth LayersList' where
 
 instance GoogleRequest LayersList' where
         type Rs LayersList' = LayersListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u LayersList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq LayersList'{..}
           = go _llCreatedAfter _llCreatorEmail _llRole _llBbox
               _llProcessingStatus
               _llModifiedAfter
@@ -321,6 +321,4 @@ instance GoogleRequest LayersList' where
               _llOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy LayersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy LayersListResource) rq

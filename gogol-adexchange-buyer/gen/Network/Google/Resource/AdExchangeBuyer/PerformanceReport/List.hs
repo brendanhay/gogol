@@ -203,8 +203,8 @@ instance GoogleAuth PerformanceReportList' where
 instance GoogleRequest PerformanceReportList' where
         type Rs PerformanceReportList' =
              PerformanceReportList
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u PerformanceReportList'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq PerformanceReportList'{..}
           = go (Just _prlAccountId) (Just _prlEndDateTime)
               (Just _prlStartDateTime)
               _prlPageToken
@@ -217,7 +217,6 @@ instance GoogleRequest PerformanceReportList' where
               _prlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PerformanceReportListResource)
-                      r
-                      u
+                      rq

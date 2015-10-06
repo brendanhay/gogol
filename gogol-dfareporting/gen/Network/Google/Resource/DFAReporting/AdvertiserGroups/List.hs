@@ -230,8 +230,8 @@ instance GoogleAuth AdvertiserGroupsList' where
 instance GoogleRequest AdvertiserGroupsList' where
         type Rs AdvertiserGroupsList' =
              AdvertiserGroupsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdvertiserGroupsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AdvertiserGroupsList'{..}
           = go _aglProFileId _aglSearchString
               (_aglIds ^. _Default)
               _aglSortOrder
@@ -246,7 +246,6 @@ instance GoogleRequest AdvertiserGroupsList' where
               _aglOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AdvertiserGroupsListResource)
-                      r
-                      u
+                      rq

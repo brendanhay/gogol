@@ -178,9 +178,8 @@ instance GoogleRequest ImageConfigurationsUpload'
          where
         type Rs ImageConfigurationsUpload' =
              ImageConfiguration
-        request
-          = requestWithRoute defReq gamesConfigurationURL
-        requestWithRoute r u ImageConfigurationsUpload'{..}
+        request = requestWith gamesConfigurationRequest
+        requestWith rq ImageConfigurationsUpload'{..}
           = go _icuResourceId _icuImageType _icuQuotaUser
               (Just _icuPrettyPrint)
               _icuUserIP
@@ -190,7 +189,6 @@ instance GoogleRequest ImageConfigurationsUpload'
               (Just AltJSON)
               _icuMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ImageConfigurationsUploadResource)
-                      r
-                      u
+                      rq

@@ -161,8 +161,8 @@ instance GoogleAuth AdvertiserGroupsDelete' where
 
 instance GoogleRequest AdvertiserGroupsDelete' where
         type Rs AdvertiserGroupsDelete' = ()
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdvertiserGroupsDelete'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AdvertiserGroupsDelete'{..}
           = go _agdProFileId _agdId _agdQuotaUser
               (Just _agdPrettyPrint)
               _agdUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest AdvertiserGroupsDelete' where
               _agdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AdvertiserGroupsDeleteResource)
-                      r
-                      u
+                      rq

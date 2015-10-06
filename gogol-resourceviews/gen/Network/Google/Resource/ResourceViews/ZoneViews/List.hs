@@ -188,8 +188,8 @@ instance GoogleAuth ZoneViewsList' where
 
 instance GoogleRequest ZoneViewsList' where
         type Rs ZoneViewsList' = ZoneViewsList
-        request = requestWithRoute defReq resourceViewsURL
-        requestWithRoute r u ZoneViewsList'{..}
+        request = requestWith resourceViewsRequest
+        requestWith rq ZoneViewsList'{..}
           = go _zvlProject _zvlZone _zvlPageToken
               (Just _zvlMaxResults)
               _zvlQuotaUser
@@ -200,7 +200,5 @@ instance GoogleRequest ZoneViewsList' where
               _zvlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ZoneViewsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ZoneViewsListResource)
+                      rq

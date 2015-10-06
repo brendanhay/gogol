@@ -154,8 +154,8 @@ instance GoogleAuth PawsGetSpectrum' where
 
 instance GoogleRequest PawsGetSpectrum' where
         type Rs PawsGetSpectrum' = PawsGetSpectrumResponse
-        request = requestWithRoute defReq spectrumURL
-        requestWithRoute r u PawsGetSpectrum'{..}
+        request = requestWith spectrumRequest
+        requestWith rq PawsGetSpectrum'{..}
           = go _pgsQuotaUser (Just _pgsPrettyPrint) _pgsUserIP
               _pgsFields
               _pgsKey
@@ -163,7 +163,6 @@ instance GoogleRequest PawsGetSpectrum' where
               (Just AltJSON)
               _pgsPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PawsGetSpectrumResource)
-                      r
-                      u
+                      rq

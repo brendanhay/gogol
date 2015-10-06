@@ -158,8 +158,8 @@ instance GoogleAuth ImagesInsert' where
 
 instance GoogleRequest ImagesInsert' where
         type Rs ImagesInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u ImagesInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq ImagesInsert'{..}
           = go _iProject _iQuotaUser (Just _iPrettyPrint)
               _iUserIP
               _iFields
@@ -168,7 +168,5 @@ instance GoogleRequest ImagesInsert' where
               (Just AltJSON)
               _iPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ImagesInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ImagesInsertResource)
+                      rq

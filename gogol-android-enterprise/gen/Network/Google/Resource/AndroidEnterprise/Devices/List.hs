@@ -161,9 +161,8 @@ instance GoogleAuth DevicesList' where
 
 instance GoogleRequest DevicesList' where
         type Rs DevicesList' = DevicesListResponse
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u DevicesList'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq DevicesList'{..}
           = go _dlEnterpriseId _dlUserId _dlQuotaUser
               (Just _dlPrettyPrint)
               _dlUserIP
@@ -172,7 +171,4 @@ instance GoogleRequest DevicesList' where
               _dlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DevicesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DevicesListResource) rq

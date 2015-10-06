@@ -150,8 +150,8 @@ instance GoogleAuth CalendarsDelete' where
 
 instance GoogleRequest CalendarsDelete' where
         type Rs CalendarsDelete' = ()
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarsDelete'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq CalendarsDelete'{..}
           = go _cdCalendarId _cdQuotaUser (Just _cdPrettyPrint)
               _cdUserIP
               _cdFields
@@ -159,7 +159,6 @@ instance GoogleRequest CalendarsDelete' where
               _cdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CalendarsDeleteResource)
-                      r
-                      u
+                      rq

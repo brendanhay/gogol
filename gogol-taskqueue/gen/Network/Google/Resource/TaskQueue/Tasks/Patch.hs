@@ -195,8 +195,8 @@ instance GoogleAuth TasksPatch' where
 
 instance GoogleRequest TasksPatch' where
         type Rs TasksPatch' = Task
-        request = requestWithRoute defReq taskQueueURL
-        requestWithRoute r u TasksPatch'{..}
+        request = requestWith taskQueueRequest
+        requestWith rq TasksPatch'{..}
           = go _tpProject _tpTaskqueue _tpTask
               (Just _tpNewLeaseSeconds)
               _tpQuotaUser
@@ -208,6 +208,4 @@ instance GoogleRequest TasksPatch' where
               (Just AltJSON)
               _tpPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy TasksPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TasksPatchResource) rq

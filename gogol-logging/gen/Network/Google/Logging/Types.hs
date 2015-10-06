@@ -16,7 +16,7 @@
 module Network.Google.Logging.Types
     (
     -- * Service URL
-      loggingURL
+      loggingRequest
 
     -- * Log
     , Log
@@ -216,7 +216,7 @@ import           Network.Google.Logging.Types.Product
 import           Network.Google.Logging.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1beta3' of the Google Cloud Logging API.
-loggingURL :: BaseUrl
-loggingURL
-  = BaseUrl Https "https://logging.googleapis.com/" 443
+-- | Default request referring to version 'v1beta3' of the Google Cloud Logging API.
+loggingRequest :: RequestBuilder
+loggingRequest
+  = defaultRequest "https://logging.googleapis.com/" ""

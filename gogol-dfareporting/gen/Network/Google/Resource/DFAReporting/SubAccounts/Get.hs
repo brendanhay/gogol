@@ -161,8 +161,8 @@ instance GoogleAuth SubAccountsGet' where
 
 instance GoogleRequest SubAccountsGet' where
         type Rs SubAccountsGet' = SubAccount
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SubAccountsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq SubAccountsGet'{..}
           = go _sagProFileId _sagId _sagQuotaUser
               (Just _sagPrettyPrint)
               _sagUserIP
@@ -171,7 +171,5 @@ instance GoogleRequest SubAccountsGet' where
               _sagOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SubAccountsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SubAccountsGetResource)
+                      rq

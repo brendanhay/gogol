@@ -192,8 +192,8 @@ instance GoogleAuth LayersList' where
 
 instance GoogleRequest LayersList' where
         type Rs LayersList' = Layersummaries
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u LayersList'{..}
+        request = requestWith booksRequest
+        requestWith rq LayersList'{..}
           = go _llVolumeId _llContentVersion _llSource
               _llPageToken
               _llMaxResults
@@ -205,6 +205,4 @@ instance GoogleRequest LayersList' where
               _llOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy LayersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy LayersListResource) rq

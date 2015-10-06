@@ -162,8 +162,8 @@ instance GoogleAuth PlacementStrategiesGet' where
 
 instance GoogleRequest PlacementStrategiesGet' where
         type Rs PlacementStrategiesGet' = PlacementStrategy
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementStrategiesGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PlacementStrategiesGet'{..}
           = go _psgProFileId _psgId _psgQuotaUser
               (Just _psgPrettyPrint)
               _psgUserIP
@@ -172,7 +172,6 @@ instance GoogleRequest PlacementStrategiesGet' where
               _psgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlacementStrategiesGetResource)
-                      r
-                      u
+                      rq

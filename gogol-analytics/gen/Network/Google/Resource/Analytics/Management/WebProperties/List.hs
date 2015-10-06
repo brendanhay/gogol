@@ -183,8 +183,8 @@ instance GoogleAuth ManagementWebPropertiesList'
 instance GoogleRequest ManagementWebPropertiesList'
          where
         type Rs ManagementWebPropertiesList' = WebProperties
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementWebPropertiesList'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementWebPropertiesList'{..}
           = go _mwplAccountId _mwplStartIndex _mwplMaxResults
               _mwplQuotaUser
               (Just _mwplPrettyPrint)
@@ -194,7 +194,6 @@ instance GoogleRequest ManagementWebPropertiesList'
               _mwplOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementWebPropertiesListResource)
-                      r
-                      u
+                      rq

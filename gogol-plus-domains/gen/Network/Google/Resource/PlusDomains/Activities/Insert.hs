@@ -172,8 +172,8 @@ instance GoogleAuth ActivitiesInsert' where
 
 instance GoogleRequest ActivitiesInsert' where
         type Rs ActivitiesInsert' = Activity
-        request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u ActivitiesInsert'{..}
+        request = requestWith plusDomainsRequest
+        requestWith rq ActivitiesInsert'{..}
           = go _aiUserId _aiPreview _aiQuotaUser
               (Just _aiPrettyPrint)
               _aiUserIP
@@ -183,7 +183,6 @@ instance GoogleRequest ActivitiesInsert' where
               (Just AltJSON)
               _aiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ActivitiesInsertResource)
-                      r
-                      u
+                      rq

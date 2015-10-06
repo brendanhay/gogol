@@ -140,8 +140,8 @@ instance GoogleAuth MetagameGetMetagameConfig' where
 instance GoogleRequest MetagameGetMetagameConfig'
          where
         type Rs MetagameGetMetagameConfig' = MetagameConfig
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u MetagameGetMetagameConfig'{..}
+        request = requestWith gamesRequest
+        requestWith rq MetagameGetMetagameConfig'{..}
           = go _mgmcQuotaUser (Just _mgmcPrettyPrint)
               _mgmcUserIP
               _mgmcFields
@@ -149,7 +149,6 @@ instance GoogleRequest MetagameGetMetagameConfig'
               _mgmcOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MetagameGetMetagameConfigResource)
-                      r
-                      u
+                      rq

@@ -157,8 +157,8 @@ instance GoogleAuth TasksList' where
 
 instance GoogleRequest TasksList' where
         type Rs TasksList' = Tasks2
-        request = requestWithRoute defReq taskQueueURL
-        requestWithRoute r u TasksList'{..}
+        request = requestWith taskQueueRequest
+        requestWith rq TasksList'{..}
           = go _tProject _tTaskqueue _tQuotaUser
               (Just _tPrettyPrint)
               _tUserIP
@@ -167,6 +167,4 @@ instance GoogleRequest TasksList' where
               _tOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TasksListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TasksListResource) rq

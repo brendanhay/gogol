@@ -148,8 +148,8 @@ instance GoogleAuth WebResourceDelete' where
 
 instance GoogleRequest WebResourceDelete' where
         type Rs WebResourceDelete' = ()
-        request = requestWithRoute defReq siteVerificationURL
-        requestWithRoute r u WebResourceDelete'{..}
+        request = requestWith siteVerificationRequest
+        requestWith rq WebResourceDelete'{..}
           = go _wrdId _wrdQuotaUser (Just _wrdPrettyPrint)
               _wrdUserIP
               _wrdFields
@@ -157,7 +157,6 @@ instance GoogleRequest WebResourceDelete' where
               _wrdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy WebResourceDeleteResource)
-                      r
-                      u
+                      rq

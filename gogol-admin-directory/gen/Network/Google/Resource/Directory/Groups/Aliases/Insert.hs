@@ -162,8 +162,8 @@ instance GoogleAuth GroupsAliasesInsert' where
 
 instance GoogleRequest GroupsAliasesInsert' where
         type Rs GroupsAliasesInsert' = Alias
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u GroupsAliasesInsert'{..}
+        request = requestWith directoryRequest
+        requestWith rq GroupsAliasesInsert'{..}
           = go _gaiGroupKey _gaiQuotaUser
               (Just _gaiPrettyPrint)
               _gaiUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest GroupsAliasesInsert' where
               (Just AltJSON)
               _gaiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GroupsAliasesInsertResource)
-                      r
-                      u
+                      rq

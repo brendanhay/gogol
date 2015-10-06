@@ -235,8 +235,8 @@ instance GoogleAuth ProjectsSinksCreate' where
 
 instance GoogleRequest ProjectsSinksCreate' where
         type Rs ProjectsSinksCreate' = LogSink
-        request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsSinksCreate'{..}
+        request = requestWith loggingRequest
+        requestWith rq ProjectsSinksCreate'{..}
           = go _pscProjectsId _pscXgafv _pscUploadProtocol
               (Just _pscPp)
               _pscAccessToken
@@ -251,7 +251,6 @@ instance GoogleRequest ProjectsSinksCreate' where
               (Just AltJSON)
               _pscPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsSinksCreateResource)
-                      r
-                      u
+                      rq

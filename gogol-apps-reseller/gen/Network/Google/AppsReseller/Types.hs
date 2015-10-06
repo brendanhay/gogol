@@ -16,7 +16,7 @@
 module Network.Google.AppsReseller.Types
     (
     -- * Service URL
-      appsResellerURL
+      appsResellerRequest
 
     -- * SubscriptionTrialSettings
     , SubscriptionTrialSettings
@@ -124,9 +124,8 @@ import           Network.Google.AppsReseller.Types.Product
 import           Network.Google.AppsReseller.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1sandbox' of the Enterprise Apps Reseller API.
-appsResellerURL :: BaseUrl
-appsResellerURL
-  = BaseUrl Https
-      "https://www.googleapis.com/apps/reseller/v1sandbox/"
-      443
+-- | Default request referring to version 'v1sandbox' of the Enterprise Apps Reseller API.
+appsResellerRequest :: RequestBuilder
+appsResellerRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "apps/reseller/v1sandbox/"

@@ -146,8 +146,8 @@ instance GoogleAuth OffersInsert' where
 
 instance GoogleRequest OffersInsert' where
         type Rs OffersInsert' = OfferDTO
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u OffersInsert'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq OffersInsert'{..}
           = go _oiQuotaUser (Just _oiPrettyPrint) _oiUserIP
               _oiFields
               _oiKey
@@ -155,7 +155,5 @@ instance GoogleRequest OffersInsert' where
               (Just AltJSON)
               _oiPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy OffersInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy OffersInsertResource)
+                      rq

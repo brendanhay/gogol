@@ -159,8 +159,8 @@ instance GoogleAuth SitesUpdate' where
 
 instance GoogleRequest SitesUpdate' where
         type Rs SitesUpdate' = Site
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SitesUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq SitesUpdate'{..}
           = go _suProFileId _suQuotaUser (Just _suPrettyPrint)
               _suUserIP
               _suFields
@@ -169,7 +169,4 @@ instance GoogleRequest SitesUpdate' where
               (Just AltJSON)
               _suPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SitesUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SitesUpdateResource) rq

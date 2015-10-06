@@ -145,8 +145,8 @@ instance GoogleAuth ContactsGet' where
 
 instance GoogleRequest ContactsGet' where
         type Rs ContactsGet' = Contact
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u ContactsGet'{..}
+        request = requestWith mirrorRequest
+        requestWith rq ContactsGet'{..}
           = go _cgId _cgQuotaUser (Just _cgPrettyPrint)
               _cgUserIP
               _cgFields
@@ -154,7 +154,4 @@ instance GoogleRequest ContactsGet' where
               _cgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ContactsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ContactsGetResource) rq

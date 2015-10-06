@@ -159,8 +159,8 @@ instance GoogleAuth AspsGet' where
 
 instance GoogleRequest AspsGet' where
         type Rs AspsGet' = Asp
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u AspsGet'{..}
+        request = requestWith directoryRequest
+        requestWith rq AspsGet'{..}
           = go _agUserKey _agCodeId _agQuotaUser
               (Just _agPrettyPrint)
               _agUserIP
@@ -169,5 +169,4 @@ instance GoogleRequest AspsGet' where
               _agOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy AspsGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy AspsGetResource) rq

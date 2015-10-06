@@ -159,8 +159,8 @@ instance GoogleAuth CommentsInsert' where
 
 instance GoogleRequest CommentsInsert' where
         type Rs CommentsInsert' = Comment
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CommentsInsert'{..}
+        request = requestWith youTubeRequest
+        requestWith rq CommentsInsert'{..}
           = go (Just _cPart) _cQuotaUser (Just _cPrettyPrint)
               _cUserIP
               _cFields
@@ -169,7 +169,5 @@ instance GoogleRequest CommentsInsert' where
               (Just AltJSON)
               _cPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CommentsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CommentsInsertResource)
+                      rq

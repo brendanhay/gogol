@@ -150,8 +150,8 @@ instance GoogleAuth AccountsPaymentsList' where
 
 instance GoogleRequest AccountsPaymentsList' where
         type Rs AccountsPaymentsList' = Payments
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AccountsPaymentsList'{..}
+        request = requestWith adSenseRequest
+        requestWith rq AccountsPaymentsList'{..}
           = go _aplAccountId _aplQuotaUser
               (Just _aplPrettyPrint)
               _aplUserIP
@@ -160,7 +160,6 @@ instance GoogleRequest AccountsPaymentsList' where
               _aplOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsPaymentsListResource)
-                      r
-                      u
+                      rq

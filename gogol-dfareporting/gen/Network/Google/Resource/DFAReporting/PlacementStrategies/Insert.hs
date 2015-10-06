@@ -165,8 +165,8 @@ instance GoogleRequest PlacementStrategiesInsert'
          where
         type Rs PlacementStrategiesInsert' =
              PlacementStrategy
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementStrategiesInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PlacementStrategiesInsert'{..}
           = go _psiProFileId _psiQuotaUser
               (Just _psiPrettyPrint)
               _psiUserIP
@@ -176,7 +176,6 @@ instance GoogleRequest PlacementStrategiesInsert'
               (Just AltJSON)
               _psiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlacementStrategiesInsertResource)
-                      r
-                      u
+                      rq

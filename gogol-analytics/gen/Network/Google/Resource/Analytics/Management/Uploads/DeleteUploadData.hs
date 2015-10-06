@@ -197,9 +197,8 @@ instance GoogleAuth
 instance GoogleRequest
          ManagementUploadsDeleteUploadData' where
         type Rs ManagementUploadsDeleteUploadData' = ()
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementUploadsDeleteUploadData'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementUploadsDeleteUploadData'{..}
           = go _mududAccountId _mududWebPropertyId
               _mududCustomDataSourceId
               _mududQuotaUser
@@ -211,8 +210,7 @@ instance GoogleRequest
               (Just AltJSON)
               _mududPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementUploadsDeleteUploadDataResource)
-                      r
-                      u
+                      rq

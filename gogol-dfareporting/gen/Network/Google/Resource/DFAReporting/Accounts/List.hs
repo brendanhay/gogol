@@ -233,8 +233,8 @@ instance GoogleAuth AccountsList' where
 
 instance GoogleRequest AccountsList' where
         type Rs AccountsList' = AccountsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AccountsList'{..}
           = go _alProFileId _alSearchString
               (_alIds ^. _Default)
               _alSortOrder
@@ -250,7 +250,5 @@ instance GoogleRequest AccountsList' where
               _alOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AccountsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AccountsListResource)
+                      rq

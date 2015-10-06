@@ -172,8 +172,8 @@ instance GoogleAuth RepliesInsert' where
 
 instance GoogleRequest RepliesInsert' where
         type Rs RepliesInsert' = CommentReply
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u RepliesInsert'{..}
+        request = requestWith driveRequest
+        requestWith rq RepliesInsert'{..}
           = go _riFileId _riCommentId _riQuotaUser
               (Just _riPrettyPrint)
               _riUserIP
@@ -183,7 +183,5 @@ instance GoogleRequest RepliesInsert' where
               (Just AltJSON)
               _riPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy RepliesInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RepliesInsertResource)
+                      rq

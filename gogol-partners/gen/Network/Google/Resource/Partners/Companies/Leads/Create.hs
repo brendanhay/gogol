@@ -231,8 +231,8 @@ instance GoogleAuth CompaniesLeadsCreate' where
 
 instance GoogleRequest CompaniesLeadsCreate' where
         type Rs CompaniesLeadsCreate' = CreateLeadResponse
-        request = requestWithRoute defReq partnersURL
-        requestWithRoute r u CompaniesLeadsCreate'{..}
+        request = requestWith partnersRequest
+        requestWith rq CompaniesLeadsCreate'{..}
           = go _clcCompanyId _clcXgafv _clcUploadProtocol
               (Just _clcPp)
               _clcAccessToken
@@ -247,7 +247,6 @@ instance GoogleRequest CompaniesLeadsCreate' where
               (Just AltJSON)
               _clcPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CompaniesLeadsCreateResource)
-                      r
-                      u
+                      rq

@@ -223,8 +223,8 @@ instance GoogleAuth MobileDevicesList' where
 
 instance GoogleRequest MobileDevicesList' where
         type Rs MobileDevicesList' = MobileDevices
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u MobileDevicesList'{..}
+        request = requestWith directoryRequest
+        requestWith rq MobileDevicesList'{..}
           = go _mdlCustomerId _mdlOrderBy _mdlSortOrder
               _mdlQuery
               _mdlProjection
@@ -238,7 +238,6 @@ instance GoogleRequest MobileDevicesList' where
               _mdlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MobileDevicesListResource)
-                      r
-                      u
+                      rq

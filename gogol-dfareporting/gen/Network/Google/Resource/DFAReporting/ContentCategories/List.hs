@@ -230,8 +230,8 @@ instance GoogleAuth ContentCategoriesList' where
 instance GoogleRequest ContentCategoriesList' where
         type Rs ContentCategoriesList' =
              ContentCategoriesListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ContentCategoriesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ContentCategoriesList'{..}
           = go _cclProFileId _cclSearchString
               (_cclIds ^. _Default)
               _cclSortOrder
@@ -246,7 +246,6 @@ instance GoogleRequest ContentCategoriesList' where
               _cclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ContentCategoriesListResource)
-                      r
-                      u
+                      rq

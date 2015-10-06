@@ -161,8 +161,8 @@ instance GoogleAuth NotificationsDelete' where
 
 instance GoogleRequest NotificationsDelete' where
         type Rs NotificationsDelete' = ()
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u NotificationsDelete'{..}
+        request = requestWith directoryRequest
+        requestWith rq NotificationsDelete'{..}
           = go _ndCustomer _ndNotificationId _ndQuotaUser
               (Just _ndPrettyPrint)
               _ndUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest NotificationsDelete' where
               _ndOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy NotificationsDeleteResource)
-                      r
-                      u
+                      rq

@@ -204,8 +204,8 @@ instance GoogleAuth TransfersList' where
 
 instance GoogleRequest TransfersList' where
         type Rs TransfersList' = DataTransfersListResponse
-        request = requestWithRoute defReq dataTransferURL
-        requestWithRoute r u TransfersList'{..}
+        request = requestWith dataTransferRequest
+        requestWith rq TransfersList'{..}
           = go _tlStatus _tlOldOwnerUserId _tlNewOwnerUserId
               _tlCustomerId
               _tlPageToken
@@ -218,7 +218,5 @@ instance GoogleRequest TransfersList' where
               _tlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TransfersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TransfersListResource)
+                      rq

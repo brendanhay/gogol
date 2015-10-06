@@ -240,9 +240,8 @@ instance GoogleAuth ProjectsSubscriptionsAcknowledge'
 instance GoogleRequest
          ProjectsSubscriptionsAcknowledge' where
         type Rs ProjectsSubscriptionsAcknowledge' = Empty
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u
-          ProjectsSubscriptionsAcknowledge'{..}
+        request = requestWith pubSubRequest
+        requestWith rq ProjectsSubscriptionsAcknowledge'{..}
           = go _psaSubscription _psaXgafv _psaUploadProtocol
               (Just _psaPp)
               _psaAccessToken
@@ -257,8 +256,7 @@ instance GoogleRequest
               (Just AltJSON)
               _psaPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ProjectsSubscriptionsAcknowledgeResource)
-                      r
-                      u
+                      rq

@@ -169,9 +169,8 @@ instance GoogleRequest
          ManagementAccountUserLinksInsert' where
         type Rs ManagementAccountUserLinksInsert' =
              EntityUserLink
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementAccountUserLinksInsert'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementAccountUserLinksInsert'{..}
           = go _mauliAccountId _mauliQuotaUser
               (Just _mauliPrettyPrint)
               _mauliUserIP
@@ -181,8 +180,7 @@ instance GoogleRequest
               (Just AltJSON)
               _mauliPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementAccountUserLinksInsertResource)
-                      r
-                      u
+                      rq

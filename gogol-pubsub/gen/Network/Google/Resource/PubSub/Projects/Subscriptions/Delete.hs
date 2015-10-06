@@ -228,8 +228,8 @@ instance GoogleAuth ProjectsSubscriptionsDelete'
 instance GoogleRequest ProjectsSubscriptionsDelete'
          where
         type Rs ProjectsSubscriptionsDelete' = Empty
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsSubscriptionsDelete'{..}
+        request = requestWith pubSubRequest
+        requestWith rq ProjectsSubscriptionsDelete'{..}
           = go _psdSubscription _psdXgafv _psdUploadProtocol
               (Just _psdPp)
               _psdAccessToken
@@ -243,7 +243,6 @@ instance GoogleRequest ProjectsSubscriptionsDelete'
               _psdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsSubscriptionsDeleteResource)
-                      r
-                      u
+                      rq

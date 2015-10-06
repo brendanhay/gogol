@@ -170,8 +170,8 @@ instance GoogleRequest MapsPermissionsBatchUpdate'
          where
         type Rs MapsPermissionsBatchUpdate' =
              PermissionsBatchUpdateResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u MapsPermissionsBatchUpdate'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq MapsPermissionsBatchUpdate'{..}
           = go _mpbuId _mpbuQuotaUser (Just _mpbuPrettyPrint)
               _mpbuUserIP
               _mpbuFields
@@ -180,7 +180,6 @@ instance GoogleRequest MapsPermissionsBatchUpdate'
               (Just AltJSON)
               _mpbuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MapsPermissionsBatchUpdateResource)
-                      r
-                      u
+                      rq

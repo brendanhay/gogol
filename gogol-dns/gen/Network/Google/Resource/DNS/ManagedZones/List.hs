@@ -186,8 +186,8 @@ instance GoogleAuth ManagedZonesList' where
 
 instance GoogleRequest ManagedZonesList' where
         type Rs ManagedZonesList' = ManagedZonesListResponse
-        request = requestWithRoute defReq dNSURL
-        requestWithRoute r u ManagedZonesList'{..}
+        request = requestWith dNSRequest
+        requestWith rq ManagedZonesList'{..}
           = go _mzlProject _mzlPageToken _mzlDNSName
               _mzlMaxResults
               _mzlQuotaUser
@@ -198,7 +198,6 @@ instance GoogleRequest ManagedZonesList' where
               _mzlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagedZonesListResource)
-                      r
-                      u
+                      rq

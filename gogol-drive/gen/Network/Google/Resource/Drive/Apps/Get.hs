@@ -144,8 +144,8 @@ instance GoogleAuth AppsGet' where
 
 instance GoogleRequest AppsGet' where
         type Rs AppsGet' = App
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u AppsGet'{..}
+        request = requestWith driveRequest
+        requestWith rq AppsGet'{..}
           = go _aAppId _aQuotaUser (Just _aPrettyPrint)
               _aUserIP
               _aFields
@@ -153,5 +153,4 @@ instance GoogleRequest AppsGet' where
               _aOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy AppsGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy AppsGetResource) rq

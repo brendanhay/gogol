@@ -137,15 +137,14 @@ instance GoogleAuth ApplicationsPlayed' where
 
 instance GoogleRequest ApplicationsPlayed' where
         type Rs ApplicationsPlayed' = ()
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u ApplicationsPlayed'{..}
+        request = requestWith gamesRequest
+        requestWith rq ApplicationsPlayed'{..}
           = go _apQuotaUser (Just _apPrettyPrint) _apUserIP
               _apFields
               _apKey
               _apOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ApplicationsPlayedResource)
-                      r
-                      u
+                      rq

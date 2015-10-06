@@ -166,8 +166,8 @@ instance GoogleAuth BatchReportsList' where
 
 instance GoogleRequest BatchReportsList' where
         type Rs BatchReportsList' = BatchReportList
-        request = requestWithRoute defReq youTubeAnalyticsURL
-        requestWithRoute r u BatchReportsList'{..}
+        request = requestWith youTubeAnalyticsRequest
+        requestWith rq BatchReportsList'{..}
           = go (Just _brlBatchReportDefinitionId)
               (Just _brlOnBehalfOfContentOwner)
               _brlQuotaUser
@@ -178,7 +178,6 @@ instance GoogleRequest BatchReportsList' where
               _brlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BatchReportsListResource)
-                      r
-                      u
+                      rq

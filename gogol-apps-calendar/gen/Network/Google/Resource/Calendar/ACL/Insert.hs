@@ -161,8 +161,8 @@ instance GoogleAuth ACLInsert' where
 
 instance GoogleRequest ACLInsert' where
         type Rs ACLInsert' = ACLRule
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u ACLInsert'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq ACLInsert'{..}
           = go _aiCalendarId _aiQuotaUser (Just _aiPrettyPrint)
               _aiUserIP
               _aiFields
@@ -171,6 +171,4 @@ instance GoogleRequest ACLInsert' where
               (Just AltJSON)
               _aiPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy ACLInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ACLInsertResource) rq

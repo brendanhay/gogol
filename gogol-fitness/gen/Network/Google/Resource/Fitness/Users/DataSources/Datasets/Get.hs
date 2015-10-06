@@ -220,8 +220,8 @@ instance GoogleAuth UsersDataSourcesDatasetsGet'
 instance GoogleRequest UsersDataSourcesDatasetsGet'
          where
         type Rs UsersDataSourcesDatasetsGet' = Dataset
-        request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersDataSourcesDatasetsGet'{..}
+        request = requestWith fitnessRequest
+        requestWith rq UsersDataSourcesDatasetsGet'{..}
           = go _udsdgUserId _udsdgDataSourceId _udsdgDatasetId
               _udsdgLimit
               _udsdgPageToken
@@ -233,7 +233,6 @@ instance GoogleRequest UsersDataSourcesDatasetsGet'
               _udsdgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersDataSourcesDatasetsGetResource)
-                      r
-                      u
+                      rq

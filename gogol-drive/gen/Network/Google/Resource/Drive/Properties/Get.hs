@@ -170,8 +170,8 @@ instance GoogleAuth PropertiesGet' where
 
 instance GoogleRequest PropertiesGet' where
         type Rs PropertiesGet' = Property
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u PropertiesGet'{..}
+        request = requestWith driveRequest
+        requestWith rq PropertiesGet'{..}
           = go _pgFileId _pgPropertyKey (Just _pgVisibility)
               _pgQuotaUser
               (Just _pgPrettyPrint)
@@ -181,7 +181,5 @@ instance GoogleRequest PropertiesGet' where
               _pgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PropertiesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PropertiesGetResource)
+                      rq

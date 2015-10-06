@@ -211,8 +211,8 @@ instance GoogleAuth TargetPoolsList' where
 
 instance GoogleRequest TargetPoolsList' where
         type Rs TargetPoolsList' = TargetPoolList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsList'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetPoolsList'{..}
           = go _tplProject _tplRegion _tplFilter _tplPageToken
               (Just _tplMaxResults)
               _tplQuotaUser
@@ -223,7 +223,6 @@ instance GoogleRequest TargetPoolsList' where
               _tplOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetPoolsListResource)
-                      r
-                      u
+                      rq

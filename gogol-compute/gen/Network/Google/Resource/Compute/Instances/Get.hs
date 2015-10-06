@@ -170,8 +170,8 @@ instance GoogleAuth InstancesGet' where
 
 instance GoogleRequest InstancesGet' where
         type Rs InstancesGet' = Instance
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesGet'{..}
+        request = requestWith computeRequest
+        requestWith rq InstancesGet'{..}
           = go _igProject _igZone _igInstance _igQuotaUser
               (Just _igPrettyPrint)
               _igUserIP
@@ -180,7 +180,5 @@ instance GoogleRequest InstancesGet' where
               _igOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy InstancesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy InstancesGetResource)
+                      rq

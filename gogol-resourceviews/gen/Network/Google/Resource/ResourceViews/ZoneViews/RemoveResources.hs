@@ -190,8 +190,8 @@ instance GoogleAuth ZoneViewsRemoveResources' where
 instance GoogleRequest ZoneViewsRemoveResources'
          where
         type Rs ZoneViewsRemoveResources' = Operation
-        request = requestWithRoute defReq resourceViewsURL
-        requestWithRoute r u ZoneViewsRemoveResources'{..}
+        request = requestWith resourceViewsRequest
+        requestWith rq ZoneViewsRemoveResources'{..}
           = go _zvrrProject _zvrrZone _zvrrResourceView
               _zvrrQuotaUser
               (Just _zvrrPrettyPrint)
@@ -202,7 +202,6 @@ instance GoogleRequest ZoneViewsRemoveResources'
               (Just AltJSON)
               _zvrrPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ZoneViewsRemoveResourcesResource)
-                      r
-                      u
+                      rq

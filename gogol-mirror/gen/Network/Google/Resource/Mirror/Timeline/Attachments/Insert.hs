@@ -162,8 +162,8 @@ instance GoogleAuth TimelineAttachmentsInsert' where
 instance GoogleRequest TimelineAttachmentsInsert'
          where
         type Rs TimelineAttachmentsInsert' = Attachment
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineAttachmentsInsert'{..}
+        request = requestWith mirrorRequest
+        requestWith rq TimelineAttachmentsInsert'{..}
           = go _taiItemId _taiQuotaUser (Just _taiPrettyPrint)
               _taiUserIP
               _taiFields
@@ -172,7 +172,6 @@ instance GoogleRequest TimelineAttachmentsInsert'
               (Just AltJSON)
               _taiMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TimelineAttachmentsInsertResource)
-                      r
-                      u
+                      rq

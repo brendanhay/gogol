@@ -225,8 +225,8 @@ instance GoogleAuth ObjectsDelete' where
 
 instance GoogleRequest ObjectsDelete' where
         type Rs ObjectsDelete' = ()
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsDelete'{..}
+        request = requestWith storageRequest
+        requestWith rq ObjectsDelete'{..}
           = go _odBucket _odObject _odIfMetagenerationMatch
               _odIfGenerationNotMatch
               _odIfGenerationMatch
@@ -240,7 +240,5 @@ instance GoogleRequest ObjectsDelete' where
               _odOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ObjectsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ObjectsDeleteResource)
+                      rq

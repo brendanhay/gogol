@@ -163,8 +163,8 @@ instance GoogleAuth PermissionsGet' where
 
 instance GoogleRequest PermissionsGet' where
         type Rs PermissionsGet' = Permission
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u PermissionsGet'{..}
+        request = requestWith driveRequest
+        requestWith rq PermissionsGet'{..}
           = go _pggFileId _pggPermissionId _pggQuotaUser
               (Just _pggPrettyPrint)
               _pggUserIP
@@ -173,7 +173,5 @@ instance GoogleRequest PermissionsGet' where
               _pggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PermissionsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PermissionsGetResource)
+                      rq

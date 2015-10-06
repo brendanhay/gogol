@@ -174,8 +174,8 @@ instance GoogleAuth UsersDraftsList' where
 
 instance GoogleRequest UsersDraftsList' where
         type Rs UsersDraftsList' = ListDraftsResponse
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersDraftsList'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersDraftsList'{..}
           = go _udlUserId _udlPageToken (Just _udlMaxResults)
               _udlQuotaUser
               (Just _udlPrettyPrint)
@@ -185,7 +185,6 @@ instance GoogleRequest UsersDraftsList' where
               _udlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersDraftsListResource)
-                      r
-                      u
+                      rq

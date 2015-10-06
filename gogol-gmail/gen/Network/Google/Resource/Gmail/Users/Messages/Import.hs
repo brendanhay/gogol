@@ -223,8 +223,8 @@ instance GoogleAuth UsersMessagesImport' where
 
 instance GoogleRequest UsersMessagesImport' where
         type Rs UsersMessagesImport' = Message
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesImport'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersMessagesImport'{..}
           = go _uUserId (Just _uProcessForCalendar)
               (Just _uDeleted)
               (Just _uNeverMarkSpam)
@@ -239,7 +239,6 @@ instance GoogleRequest UsersMessagesImport' where
               _uPayload
               _uMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersMessagesImportResource)
-                      r
-                      u
+                      rq

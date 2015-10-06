@@ -287,8 +287,8 @@ instance GoogleAuth JobsUpdate' where
 
 instance GoogleRequest JobsUpdate' where
         type Rs JobsUpdate' = Job
-        request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u JobsUpdate'{..}
+        request = requestWith mapsCoordinateRequest
+        requestWith rq JobsUpdate'{..}
           = go _juTeamId _juJobId _juProgress _juNote
               _juCustomerPhoneNumber
               _juCustomerName
@@ -307,6 +307,4 @@ instance GoogleRequest JobsUpdate' where
               (Just AltJSON)
               _juPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy JobsUpdateResource) rq

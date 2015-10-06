@@ -155,8 +155,8 @@ instance GoogleAuth ExperimentalJobsCreate' where
 instance GoogleRequest ExperimentalJobsCreate' where
         type Rs ExperimentalJobsCreate' =
              ExperimentalCreateJobResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ExperimentalJobsCreate'{..}
+        request = requestWith genomicsRequest
+        requestWith rq ExperimentalJobsCreate'{..}
           = go _ejcQuotaUser (Just _ejcPrettyPrint) _ejcUserIP
               _ejcFields
               _ejcKey
@@ -164,7 +164,6 @@ instance GoogleRequest ExperimentalJobsCreate' where
               (Just AltJSON)
               _ejcPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ExperimentalJobsCreateResource)
-                      r
-                      u
+                      rq

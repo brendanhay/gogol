@@ -21,7 +21,7 @@ module Network.Google.UserAccounts
     -- * API
       UserAccountsAPI
     , userAccountsAPI
-    , userAccountsURL
+    , userAccountsRequest
 
     -- * Service Methods
 

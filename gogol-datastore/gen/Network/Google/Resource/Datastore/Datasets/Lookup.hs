@@ -159,8 +159,8 @@ instance GoogleAuth DatasetsLookup' where
 
 instance GoogleRequest DatasetsLookup' where
         type Rs DatasetsLookup' = LookupResponse
-        request = requestWithRoute defReq datastoreURL
-        requestWithRoute r u DatasetsLookup'{..}
+        request = requestWith datastoreRequest
+        requestWith rq DatasetsLookup'{..}
           = go _dlDatasetId _dlQuotaUser (Just _dlPrettyPrint)
               _dlUserIP
               _dlFields
@@ -169,7 +169,5 @@ instance GoogleRequest DatasetsLookup' where
               (Just AltJSON)
               _dlPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DatasetsLookupResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DatasetsLookupResource)
+                      rq

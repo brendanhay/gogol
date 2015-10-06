@@ -21,7 +21,7 @@ module Network.Google.Classroom
     -- * API
       ClassroomAPI
     , classroomAPI
-    , classroomURL
+    , classroomRequest
 
     -- * Service Methods
 

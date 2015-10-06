@@ -174,8 +174,8 @@ instance GoogleAuth AddressesDelete' where
 
 instance GoogleRequest AddressesDelete' where
         type Rs AddressesDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u AddressesDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq AddressesDelete'{..}
           = go _addProject _addRegion _addAddress _addQuotaUser
               (Just _addPrettyPrint)
               _addUserIP
@@ -184,7 +184,6 @@ instance GoogleRequest AddressesDelete' where
               _addOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AddressesDeleteResource)
-                      r
-                      u
+                      rq

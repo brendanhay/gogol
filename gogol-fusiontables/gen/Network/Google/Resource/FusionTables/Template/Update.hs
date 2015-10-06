@@ -175,8 +175,8 @@ instance GoogleAuth TemplateUpdate' where
 
 instance GoogleRequest TemplateUpdate' where
         type Rs TemplateUpdate' = Template
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TemplateUpdate'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TemplateUpdate'{..}
           = go _temTableId _temTemplateId _temQuotaUser
               (Just _temPrettyPrint)
               _temUserIP
@@ -186,7 +186,5 @@ instance GoogleRequest TemplateUpdate' where
               (Just AltJSON)
               _temPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TemplateUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TemplateUpdateResource)
+                      rq

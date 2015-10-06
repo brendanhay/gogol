@@ -180,8 +180,8 @@ instance GoogleRequest BucketAccessControlsUpdate'
          where
         type Rs BucketAccessControlsUpdate' =
              BucketAccessControl
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketAccessControlsUpdate'{..}
+        request = requestWith storageRequest
+        requestWith rq BucketAccessControlsUpdate'{..}
           = go _bacuBucket _bacuEntity _bacuQuotaUser
               (Just _bacuPrettyPrint)
               _bacuUserIP
@@ -191,7 +191,6 @@ instance GoogleRequest BucketAccessControlsUpdate'
               (Just AltJSON)
               _bacuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BucketAccessControlsUpdateResource)
-                      r
-                      u
+                      rq

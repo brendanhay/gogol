@@ -224,8 +224,8 @@ instance GoogleAuth TableImportRows' where
 
 instance GoogleRequest TableImportRows' where
         type Rs TableImportRows' = Import
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TableImportRows'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TableImportRows'{..}
           = go _tirTableId _tirStartLine _tirEndLine
               _tirDelimiter
               _tirEncoding
@@ -239,7 +239,6 @@ instance GoogleRequest TableImportRows' where
               (Just AltJSON)
               _tirMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TableImportRowsResource)
-                      r
-                      u
+                      rq

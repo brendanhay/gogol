@@ -152,8 +152,8 @@ instance GoogleAuth MobileCarriersList' where
 instance GoogleRequest MobileCarriersList' where
         type Rs MobileCarriersList' =
              MobileCarriersListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u MobileCarriersList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq MobileCarriersList'{..}
           = go _mclProFileId _mclQuotaUser
               (Just _mclPrettyPrint)
               _mclUserIP
@@ -162,7 +162,6 @@ instance GoogleRequest MobileCarriersList' where
               _mclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MobileCarriersListResource)
-                      r
-                      u
+                      rq

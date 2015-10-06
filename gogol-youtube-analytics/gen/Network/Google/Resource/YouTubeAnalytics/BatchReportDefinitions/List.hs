@@ -155,8 +155,8 @@ instance GoogleRequest BatchReportDefinitionsList'
          where
         type Rs BatchReportDefinitionsList' =
              BatchReportDefinitionList
-        request = requestWithRoute defReq youTubeAnalyticsURL
-        requestWithRoute r u BatchReportDefinitionsList'{..}
+        request = requestWith youTubeAnalyticsRequest
+        requestWith rq BatchReportDefinitionsList'{..}
           = go (Just _brdlOnBehalfOfContentOwner)
               _brdlQuotaUser
               (Just _brdlPrettyPrint)
@@ -166,7 +166,6 @@ instance GoogleRequest BatchReportDefinitionsList'
               _brdlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BatchReportDefinitionsListResource)
-                      r
-                      u
+                      rq

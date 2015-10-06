@@ -175,8 +175,8 @@ instance GoogleAuth ApplicationsGet' where
 
 instance GoogleRequest ApplicationsGet' where
         type Rs ApplicationsGet' = Application
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u ApplicationsGet'{..}
+        request = requestWith gamesRequest
+        requestWith rq ApplicationsGet'{..}
           = go _agApplicationId _agPlatformType _agLanguage
               _agQuotaUser
               (Just _agPrettyPrint)
@@ -186,7 +186,6 @@ instance GoogleRequest ApplicationsGet' where
               _agOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ApplicationsGetResource)
-                      r
-                      u
+                      rq

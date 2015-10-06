@@ -150,8 +150,8 @@ instance GoogleAuth LayersGetPublished' where
 
 instance GoogleRequest LayersGetPublished' where
         type Rs LayersGetPublished' = PublishedLayer
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u LayersGetPublished'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq LayersGetPublished'{..}
           = go _lgpId _lgpQuotaUser (Just _lgpPrettyPrint)
               _lgpUserIP
               _lgpFields
@@ -159,7 +159,6 @@ instance GoogleRequest LayersGetPublished' where
               _lgpOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LayersGetPublishedResource)
-                      r
-                      u
+                      rq

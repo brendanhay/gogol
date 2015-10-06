@@ -212,8 +212,8 @@ instance GoogleRequest
          LicenseAssignmentsListForProductAndSKU' where
         type Rs LicenseAssignmentsListForProductAndSKU' =
              LicenseAssignmentList
-        request = requestWithRoute defReq appsLicensingURL
-        requestWithRoute r u
+        request = requestWith appsLicensingRequest
+        requestWith rq
           LicenseAssignmentsListForProductAndSKU'{..}
           = go _lalfpaskuProductId _lalfpaskuSKUId
               (Just _lalfpaskuCustomerId)
@@ -227,8 +227,7 @@ instance GoogleRequest
               _lalfpaskuOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy LicenseAssignmentsListForProductAndSKUResource)
-                      r
-                      u
+                      rq

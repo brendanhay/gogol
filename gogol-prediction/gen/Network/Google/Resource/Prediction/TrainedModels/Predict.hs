@@ -173,8 +173,8 @@ instance GoogleAuth TrainedModelsPredict' where
 
 instance GoogleRequest TrainedModelsPredict' where
         type Rs TrainedModelsPredict' = Output
-        request = requestWithRoute defReq predictionURL
-        requestWithRoute r u TrainedModelsPredict'{..}
+        request = requestWith predictionRequest
+        requestWith rq TrainedModelsPredict'{..}
           = go _tmpProject _tmpId _tmpQuotaUser
               (Just _tmpPrettyPrint)
               _tmpUserIP
@@ -184,7 +184,6 @@ instance GoogleRequest TrainedModelsPredict' where
               (Just AltJSON)
               _tmpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TrainedModelsPredictResource)
-                      r
-                      u
+                      rq

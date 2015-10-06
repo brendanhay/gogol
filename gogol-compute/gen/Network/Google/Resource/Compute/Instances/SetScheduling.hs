@@ -187,8 +187,8 @@ instance GoogleAuth InstancesSetScheduling' where
 
 instance GoogleRequest InstancesSetScheduling' where
         type Rs InstancesSetScheduling' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesSetScheduling'{..}
+        request = requestWith computeRequest
+        requestWith rq InstancesSetScheduling'{..}
           = go _issProject _issZone _issInstance _issQuotaUser
               (Just _issPrettyPrint)
               _issUserIP
@@ -198,7 +198,6 @@ instance GoogleRequest InstancesSetScheduling' where
               (Just AltJSON)
               _issPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesSetSchedulingResource)
-                      r
-                      u
+                      rq

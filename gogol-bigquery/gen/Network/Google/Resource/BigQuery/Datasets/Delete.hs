@@ -178,8 +178,8 @@ instance GoogleAuth DatasetsDelete' where
 
 instance GoogleRequest DatasetsDelete' where
         type Rs DatasetsDelete' = ()
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u DatasetsDelete'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq DatasetsDelete'{..}
           = go _ddProjectId _ddDatasetId _ddDeleteContents
               _ddQuotaUser
               (Just _ddPrettyPrint)
@@ -189,7 +189,5 @@ instance GoogleRequest DatasetsDelete' where
               _ddOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DatasetsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DatasetsDeleteResource)
+                      rq

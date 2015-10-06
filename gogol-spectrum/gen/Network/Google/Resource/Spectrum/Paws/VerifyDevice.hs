@@ -154,8 +154,8 @@ instance GoogleAuth PawsVerifyDevice' where
 
 instance GoogleRequest PawsVerifyDevice' where
         type Rs PawsVerifyDevice' = PawsVerifyDeviceResponse
-        request = requestWithRoute defReq spectrumURL
-        requestWithRoute r u PawsVerifyDevice'{..}
+        request = requestWith spectrumRequest
+        requestWith rq PawsVerifyDevice'{..}
           = go _pvdQuotaUser (Just _pvdPrettyPrint) _pvdUserIP
               _pvdFields
               _pvdKey
@@ -163,7 +163,6 @@ instance GoogleRequest PawsVerifyDevice' where
               (Just AltJSON)
               _pvdPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PawsVerifyDeviceResource)
-                      r
-                      u
+                      rq

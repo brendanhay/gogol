@@ -22,7 +22,7 @@ module Network.Google.Billing
     -- * API
       BillingAPI
     , billingAPI
-    , billingURL
+    , billingRequest
 
     -- * Service Methods
 

@@ -152,8 +152,8 @@ instance GoogleAuth FilesTrash' where
 
 instance GoogleRequest FilesTrash' where
         type Rs FilesTrash' = File
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesTrash'{..}
+        request = requestWith driveRequest
+        requestWith rq FilesTrash'{..}
           = go _filFileId _filQuotaUser (Just _filPrettyPrint)
               _filUserIP
               _filFields
@@ -161,6 +161,4 @@ instance GoogleRequest FilesTrash' where
               _filOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy FilesTrashResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy FilesTrashResource) rq

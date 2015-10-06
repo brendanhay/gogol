@@ -167,9 +167,8 @@ instance GoogleAuth UsersGetAvailableProductSet'
 instance GoogleRequest UsersGetAvailableProductSet'
          where
         type Rs UsersGetAvailableProductSet' = ProductSet
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u UsersGetAvailableProductSet'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq UsersGetAvailableProductSet'{..}
           = go _ugapsEnterpriseId _ugapsUserId _ugapsQuotaUser
               (Just _ugapsPrettyPrint)
               _ugapsUserIP
@@ -178,7 +177,6 @@ instance GoogleRequest UsersGetAvailableProductSet'
               _ugapsOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersGetAvailableProductSetResource)
-                      r
-                      u
+                      rq

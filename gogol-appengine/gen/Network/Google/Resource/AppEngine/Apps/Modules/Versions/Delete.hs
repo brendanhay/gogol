@@ -250,8 +250,8 @@ instance GoogleAuth AppsModulesVersionsDelete' where
 instance GoogleRequest AppsModulesVersionsDelete'
          where
         type Rs AppsModulesVersionsDelete' = Operation
-        request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsModulesVersionsDelete'{..}
+        request = requestWith appEngineRequest
+        requestWith rq AppsModulesVersionsDelete'{..}
           = go _amvdAppsId _amvdModulesId _amvdVersionsId
               _amvdXgafv
               _amvdUploadProtocol
@@ -267,7 +267,6 @@ instance GoogleRequest AppsModulesVersionsDelete'
               _amvdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AppsModulesVersionsDeleteResource)
-                      r
-                      u
+                      rq

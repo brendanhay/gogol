@@ -149,8 +149,8 @@ instance GoogleAuth DivisionsSearch' where
 
 instance GoogleRequest DivisionsSearch' where
         type Rs DivisionsSearch' = DivisionSearchResponse
-        request = requestWithRoute defReq civicInfoURL
-        requestWithRoute r u DivisionsSearch'{..}
+        request = requestWith civicInfoRequest
+        requestWith rq DivisionsSearch'{..}
           = go _dsQuery _dsQuotaUser (Just _dsPrettyPrint)
               _dsUserIP
               _dsFields
@@ -158,7 +158,6 @@ instance GoogleRequest DivisionsSearch' where
               _dsOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DivisionsSearchResource)
-                      r
-                      u
+                      rq

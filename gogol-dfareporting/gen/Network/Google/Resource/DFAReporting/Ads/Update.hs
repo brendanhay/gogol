@@ -157,8 +157,8 @@ instance GoogleAuth AdsUpdate' where
 
 instance GoogleRequest AdsUpdate' where
         type Rs AdsUpdate' = Ad
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdsUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AdsUpdate'{..}
           = go _aProFileId _aQuotaUser (Just _aPrettyPrint)
               _aUserIP
               _aFields
@@ -167,6 +167,4 @@ instance GoogleRequest AdsUpdate' where
               (Just AltJSON)
               _aPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy AdsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AdsUpdateResource) rq

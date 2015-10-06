@@ -200,8 +200,8 @@ instance GoogleRequest
          InstanceGroupManagersSetInstanceTemplate' where
         type Rs InstanceGroupManagersSetInstanceTemplate' =
              Operation
-        request = requestWithRoute defReq replicaPoolURL
-        requestWithRoute r u
+        request = requestWith replicaPoolRequest
+        requestWith rq
           InstanceGroupManagersSetInstanceTemplate'{..}
           = go _igmsitProject _igmsitZone
               _igmsitInstanceGroupManager
@@ -214,9 +214,8 @@ instance GoogleRequest
               (Just AltJSON)
               _igmsitPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy
                            InstanceGroupManagersSetInstanceTemplateResource)
-                      r
-                      u
+                      rq

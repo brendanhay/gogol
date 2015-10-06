@@ -146,8 +146,8 @@ instance GoogleAuth CustomersGet' where
 
 instance GoogleRequest CustomersGet' where
         type Rs CustomersGet' = Customer
-        request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u CustomersGet'{..}
+        request = requestWith appsResellerRequest
+        requestWith rq CustomersGet'{..}
           = go _cgCustomerId _cgQuotaUser (Just _cgPrettyPrint)
               _cgUserIP
               _cgFields
@@ -155,7 +155,5 @@ instance GoogleRequest CustomersGet' where
               _cgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CustomersGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CustomersGetResource)
+                      rq

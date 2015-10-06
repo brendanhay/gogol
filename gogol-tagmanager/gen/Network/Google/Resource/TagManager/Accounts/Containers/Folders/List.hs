@@ -170,9 +170,8 @@ instance GoogleRequest AccountsContainersFoldersList'
          where
         type Rs AccountsContainersFoldersList' =
              ListFoldersResponse
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersFoldersList'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersFoldersList'{..}
           = go _acflAccountId _acflContainerId _acflQuotaUser
               (Just _acflPrettyPrint)
               _acflUserIP
@@ -181,8 +180,7 @@ instance GoogleRequest AccountsContainersFoldersList'
               _acflOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersFoldersListResource)
-                      r
-                      u
+                      rq

@@ -167,8 +167,8 @@ instance GoogleRequest AccountUserProFilesInsert'
          where
         type Rs AccountUserProFilesInsert' =
              AccountUserProFile
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountUserProFilesInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AccountUserProFilesInsert'{..}
           = go _aupfiProFileId _aupfiQuotaUser
               (Just _aupfiPrettyPrint)
               _aupfiUserIP
@@ -178,7 +178,6 @@ instance GoogleRequest AccountUserProFilesInsert'
               (Just AltJSON)
               _aupfiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountUserProFilesInsertResource)
-                      r
-                      u
+                      rq

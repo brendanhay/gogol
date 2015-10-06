@@ -191,8 +191,8 @@ instance GoogleAuth EditsListingsPatch' where
 
 instance GoogleRequest EditsListingsPatch' where
         type Rs EditsListingsPatch' = Listing
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsListingsPatch'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsListingsPatch'{..}
           = go _elpPackageName _elpEditId _elpLanguage
               _elpQuotaUser
               (Just _elpPrettyPrint)
@@ -203,7 +203,6 @@ instance GoogleRequest EditsListingsPatch' where
               (Just AltJSON)
               _elpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsListingsPatchResource)
-                      r
-                      u
+                      rq

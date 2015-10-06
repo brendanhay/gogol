@@ -167,8 +167,8 @@ instance GoogleRequest ProjectsZonesClustersList'
          where
         type Rs ProjectsZonesClustersList' =
              ListClustersResponse
-        request = requestWithRoute defReq containerURL
-        requestWithRoute r u ProjectsZonesClustersList'{..}
+        request = requestWith containerRequest
+        requestWith rq ProjectsZonesClustersList'{..}
           = go _pzclProjectId _pzclZoneId _pzclQuotaUser
               (Just _pzclPrettyPrint)
               _pzclUserIP
@@ -177,7 +177,6 @@ instance GoogleRequest ProjectsZonesClustersList'
               _pzclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsZonesClustersListResource)
-                      r
-                      u
+                      rq

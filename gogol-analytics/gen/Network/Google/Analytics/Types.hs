@@ -16,7 +16,7 @@
 module Network.Google.Analytics.Types
     (
     -- * Service URL
-      analyticsURL
+      analyticsRequest
 
     -- * UnSampledReports
     , UnSampledReports
@@ -1005,9 +1005,8 @@ import           Network.Google.Analytics.Types.Product
 import           Network.Google.Analytics.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v3' of the Google Analytics API.
-analyticsURL :: BaseUrl
-analyticsURL
-  = BaseUrl Https
-      "https://www.googleapis.com/analytics/v3/"
-      443
+-- | Default request referring to version 'v3' of the Google Analytics API.
+analyticsRequest :: RequestBuilder
+analyticsRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "analytics/v3/"

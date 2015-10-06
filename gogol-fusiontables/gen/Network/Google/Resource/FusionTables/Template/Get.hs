@@ -163,8 +163,8 @@ instance GoogleAuth TemplateGet' where
 
 instance GoogleRequest TemplateGet' where
         type Rs TemplateGet' = Template
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TemplateGet'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TemplateGet'{..}
           = go _tggTableId _tggTemplateId _tggQuotaUser
               (Just _tggPrettyPrint)
               _tggUserIP
@@ -173,7 +173,4 @@ instance GoogleRequest TemplateGet' where
               _tggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TemplateGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TemplateGetResource) rq

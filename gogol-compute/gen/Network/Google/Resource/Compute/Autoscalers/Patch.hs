@@ -185,8 +185,8 @@ instance GoogleAuth AutoscalersPatch' where
 
 instance GoogleRequest AutoscalersPatch' where
         type Rs AutoscalersPatch' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u AutoscalersPatch'{..}
+        request = requestWith computeRequest
+        requestWith rq AutoscalersPatch'{..}
           = go _apProject _apZone (Just _apAutoscaler)
               _apQuotaUser
               (Just _apPrettyPrint)
@@ -197,7 +197,6 @@ instance GoogleRequest AutoscalersPatch' where
               (Just AltJSON)
               _apPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AutoscalersPatchResource)
-                      r
-                      u
+                      rq

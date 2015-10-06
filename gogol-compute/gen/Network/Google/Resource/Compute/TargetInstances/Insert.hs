@@ -176,8 +176,8 @@ instance GoogleAuth TargetInstancesInsert' where
 
 instance GoogleRequest TargetInstancesInsert' where
         type Rs TargetInstancesInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetInstancesInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetInstancesInsert'{..}
           = go _tiiProject _tiiZone _tiiQuotaUser
               (Just _tiiPrettyPrint)
               _tiiUserIP
@@ -187,7 +187,6 @@ instance GoogleRequest TargetInstancesInsert' where
               (Just AltJSON)
               _tiiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetInstancesInsertResource)
-                      r
-                      u
+                      rq

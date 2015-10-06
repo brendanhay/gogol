@@ -22,7 +22,7 @@ module Network.Google.PlusDomains
     -- * API
       PlusDomainsAPI
     , plusDomainsAPI
-    , plusDomainsURL
+    , plusDomainsRequest
 
     -- * Service Methods
 

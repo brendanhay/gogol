@@ -188,8 +188,8 @@ instance GoogleRequest
          ManagementWebPropertyAdWordsLinksInsert' where
         type Rs ManagementWebPropertyAdWordsLinksInsert' =
              EntityAdWordsLink
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
+        request = requestWith analyticsRequest
+        requestWith rq
           ManagementWebPropertyAdWordsLinksInsert'{..}
           = go _mwpawliAccountId _mwpawliWebPropertyId
               _mwpawliQuotaUser
@@ -201,9 +201,8 @@ instance GoogleRequest
               (Just AltJSON)
               _mwpawliPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy
                            ManagementWebPropertyAdWordsLinksInsertResource)
-                      r
-                      u
+                      rq

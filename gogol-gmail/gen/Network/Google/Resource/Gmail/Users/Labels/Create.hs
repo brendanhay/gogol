@@ -162,8 +162,8 @@ instance GoogleAuth UsersLabelsCreate' where
 
 instance GoogleRequest UsersLabelsCreate' where
         type Rs UsersLabelsCreate' = Label
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersLabelsCreate'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersLabelsCreate'{..}
           = go _ulcUserId _ulcQuotaUser (Just _ulcPrettyPrint)
               _ulcUserIP
               _ulcFields
@@ -172,7 +172,6 @@ instance GoogleRequest UsersLabelsCreate' where
               (Just AltJSON)
               _ulcPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersLabelsCreateResource)
-                      r
-                      u
+                      rq

@@ -162,8 +162,8 @@ instance GoogleAuth RemarketingListsGet' where
 
 instance GoogleRequest RemarketingListsGet' where
         type Rs RemarketingListsGet' = RemarketingList
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u RemarketingListsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq RemarketingListsGet'{..}
           = go _rlgProFileId _rlgId _rlgQuotaUser
               (Just _rlgPrettyPrint)
               _rlgUserIP
@@ -172,7 +172,6 @@ instance GoogleRequest RemarketingListsGet' where
               _rlgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RemarketingListsGetResource)
-                      r
-                      u
+                      rq

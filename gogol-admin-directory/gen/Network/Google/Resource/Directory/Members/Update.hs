@@ -173,8 +173,8 @@ instance GoogleAuth MembersUpdate' where
 
 instance GoogleRequest MembersUpdate' where
         type Rs MembersUpdate' = Member
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u MembersUpdate'{..}
+        request = requestWith directoryRequest
+        requestWith rq MembersUpdate'{..}
           = go _muGroupKey _muMemberKey _muQuotaUser
               (Just _muPrettyPrint)
               _muUserIP
@@ -184,7 +184,5 @@ instance GoogleRequest MembersUpdate' where
               (Just AltJSON)
               _muPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy MembersUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy MembersUpdateResource)
+                      rq

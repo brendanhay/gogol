@@ -151,8 +151,8 @@ instance GoogleAuth PermissionsGetIdForEmail' where
 instance GoogleRequest PermissionsGetIdForEmail'
          where
         type Rs PermissionsGetIdForEmail' = PermissionId
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u PermissionsGetIdForEmail'{..}
+        request = requestWith driveRequest
+        requestWith rq PermissionsGetIdForEmail'{..}
           = go _pgifeEmail _pgifeQuotaUser
               (Just _pgifePrettyPrint)
               _pgifeUserIP
@@ -161,7 +161,6 @@ instance GoogleRequest PermissionsGetIdForEmail'
               _pgifeOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PermissionsGetIdForEmailResource)
-                      r
-                      u
+                      rq

@@ -147,8 +147,8 @@ instance GoogleAuth MapsDelete' where
 
 instance GoogleRequest MapsDelete' where
         type Rs MapsDelete' = ()
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u MapsDelete'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq MapsDelete'{..}
           = go _mdId _mdQuotaUser (Just _mdPrettyPrint)
               _mdUserIP
               _mdFields
@@ -156,6 +156,4 @@ instance GoogleRequest MapsDelete' where
               _mdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy MapsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy MapsDeleteResource) rq

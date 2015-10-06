@@ -261,8 +261,8 @@ instance GoogleAuth ProjectsDelete' where
 
 instance GoogleRequest ProjectsDelete' where
         type Rs ProjectsDelete' = Empty
-        request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsDelete'{..}
+        request = requestWith resourceManagerRequest
+        requestWith rq ProjectsDelete'{..}
           = go _pdProjectId _pdXgafv _pdUploadProtocol
               (Just _pdPp)
               _pdAccessToken
@@ -276,7 +276,5 @@ instance GoogleRequest ProjectsDelete' where
               _pdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ProjectsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ProjectsDeleteResource)
+                      rq

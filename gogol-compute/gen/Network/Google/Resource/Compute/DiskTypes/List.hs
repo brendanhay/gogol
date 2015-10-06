@@ -210,8 +210,8 @@ instance GoogleAuth DiskTypesList' where
 
 instance GoogleRequest DiskTypesList' where
         type Rs DiskTypesList' = DiskTypeList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u DiskTypesList'{..}
+        request = requestWith computeRequest
+        requestWith rq DiskTypesList'{..}
           = go _dtlProject _dtlZone _dtlFilter _dtlPageToken
               (Just _dtlMaxResults)
               _dtlQuotaUser
@@ -222,7 +222,5 @@ instance GoogleRequest DiskTypesList' where
               _dtlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DiskTypesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DiskTypesListResource)
+                      rq

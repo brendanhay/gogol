@@ -191,8 +191,8 @@ instance GoogleAuth WatermarksSet' where
 
 instance GoogleRequest WatermarksSet' where
         type Rs WatermarksSet' = ()
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u WatermarksSet'{..}
+        request = requestWith youTubeRequest
+        requestWith rq WatermarksSet'{..}
           = go (Just _wsChannelId) _wsOnBehalfOfContentOwner
               _wsQuotaUser
               (Just _wsPrettyPrint)
@@ -204,7 +204,5 @@ instance GoogleRequest WatermarksSet' where
               _wsPayload
               _wsMedia
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy WatermarksSetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy WatermarksSetResource)
+                      rq

@@ -165,9 +165,8 @@ instance GoogleAuth ProductsGetPermissions' where
 
 instance GoogleRequest ProductsGetPermissions' where
         type Rs ProductsGetPermissions' = ProductPermissions
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u ProductsGetPermissions'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq ProductsGetPermissions'{..}
           = go _pgpEnterpriseId _pgpProductId _pgpQuotaUser
               (Just _pgpPrettyPrint)
               _pgpUserIP
@@ -176,7 +175,6 @@ instance GoogleRequest ProductsGetPermissions' where
               _pgpOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProductsGetPermissionsResource)
-                      r
-                      u
+                      rq

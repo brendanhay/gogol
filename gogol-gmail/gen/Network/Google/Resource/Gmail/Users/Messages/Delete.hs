@@ -163,8 +163,8 @@ instance GoogleAuth UsersMessagesDelete' where
 
 instance GoogleRequest UsersMessagesDelete' where
         type Rs UsersMessagesDelete' = ()
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesDelete'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersMessagesDelete'{..}
           = go _umdUserId _umdId _umdQuotaUser
               (Just _umdPrettyPrint)
               _umdUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest UsersMessagesDelete' where
               _umdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersMessagesDeleteResource)
-                      r
-                      u
+                      rq

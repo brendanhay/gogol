@@ -193,8 +193,8 @@ instance GoogleAuth ObjectAccessControlsGet' where
 instance GoogleRequest ObjectAccessControlsGet' where
         type Rs ObjectAccessControlsGet' =
              ObjectAccessControl
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectAccessControlsGet'{..}
+        request = requestWith storageRequest
+        requestWith rq ObjectAccessControlsGet'{..}
           = go _oacgBucket _oacgObject _oacgEntity
               _oacgGeneration
               _oacgQuotaUser
@@ -205,7 +205,6 @@ instance GoogleRequest ObjectAccessControlsGet' where
               _oacgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ObjectAccessControlsGetResource)
-                      r
-                      u
+                      rq

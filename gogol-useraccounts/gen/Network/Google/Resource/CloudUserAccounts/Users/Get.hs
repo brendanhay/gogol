@@ -158,8 +158,8 @@ instance GoogleAuth UsersGet' where
 
 instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
-        request = requestWithRoute defReq userAccountsURL
-        requestWithRoute r u UsersGet'{..}
+        request = requestWith userAccountsRequest
+        requestWith rq UsersGet'{..}
           = go _ugProject _ugUser _ugQuotaUser
               (Just _ugPrettyPrint)
               _ugUserIP
@@ -168,5 +168,4 @@ instance GoogleRequest UsersGet' where
               _ugOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersGetResource) rq

@@ -242,8 +242,8 @@ instance GoogleAuth ProjectsTopicsList' where
 
 instance GoogleRequest ProjectsTopicsList' where
         type Rs ProjectsTopicsList' = ListTopicsResponse
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsTopicsList'{..}
+        request = requestWith pubSubRequest
+        requestWith rq ProjectsTopicsList'{..}
           = go _ptlProject _ptlXgafv _ptlUploadProtocol
               (Just _ptlPp)
               _ptlAccessToken
@@ -259,7 +259,6 @@ instance GoogleRequest ProjectsTopicsList' where
               _ptlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsTopicsListResource)
-                      r
-                      u
+                      rq

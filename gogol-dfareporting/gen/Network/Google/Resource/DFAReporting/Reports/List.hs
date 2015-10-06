@@ -201,8 +201,8 @@ instance GoogleAuth ReportsList' where
 
 instance GoogleRequest ReportsList' where
         type Rs ReportsList' = ReportList
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ReportsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ReportsList'{..}
           = go _rProFileId (Just _rSortOrder) (Just _rScope)
               _rPageToken
               (Just _rSortField)
@@ -215,7 +215,4 @@ instance GoogleRequest ReportsList' where
               _rOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ReportsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ReportsListResource) rq

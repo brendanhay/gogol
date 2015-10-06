@@ -212,8 +212,8 @@ instance GoogleAuth UsersMessagesList' where
 
 instance GoogleRequest UsersMessagesList' where
         type Rs UsersMessagesList' = ListMessagesResponse
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesList'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersMessagesList'{..}
           = go _umlUserId _umlQ (Just _umlIncludeSpamTrash)
               (_umlLabelIds ^. _Default)
               _umlPageToken
@@ -226,7 +226,6 @@ instance GoogleRequest UsersMessagesList' where
               _umlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersMessagesListResource)
-                      r
-                      u
+                      rq

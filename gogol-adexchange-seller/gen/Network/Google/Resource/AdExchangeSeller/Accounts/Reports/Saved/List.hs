@@ -182,8 +182,8 @@ instance GoogleAuth AccountsReportsSavedList' where
 instance GoogleRequest AccountsReportsSavedList'
          where
         type Rs AccountsReportsSavedList' = SavedReports
-        request = requestWithRoute defReq adExchangeSellerURL
-        requestWithRoute r u AccountsReportsSavedList'{..}
+        request = requestWith adExchangeSellerRequest
+        requestWith rq AccountsReportsSavedList'{..}
           = go _arslAccountId _arslPageToken _arslMaxResults
               _arslQuotaUser
               (Just _arslPrettyPrint)
@@ -193,7 +193,6 @@ instance GoogleRequest AccountsReportsSavedList'
               _arslOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsReportsSavedListResource)
-                      r
-                      u
+                      rq

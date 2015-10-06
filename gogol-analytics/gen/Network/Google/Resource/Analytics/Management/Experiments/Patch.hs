@@ -205,8 +205,8 @@ instance GoogleAuth ManagementExperimentsPatch' where
 instance GoogleRequest ManagementExperimentsPatch'
          where
         type Rs ManagementExperimentsPatch' = Experiment
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementExperimentsPatch'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementExperimentsPatch'{..}
           = go _mepAccountId _mepWebPropertyId _mepProFileId
               _mepExperimentId
               _mepQuotaUser
@@ -218,7 +218,6 @@ instance GoogleRequest ManagementExperimentsPatch'
               (Just AltJSON)
               _mepPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementExperimentsPatchResource)
-                      r
-                      u
+                      rq

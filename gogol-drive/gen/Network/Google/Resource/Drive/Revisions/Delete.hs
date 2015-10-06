@@ -158,8 +158,8 @@ instance GoogleAuth RevisionsDelete' where
 
 instance GoogleRequest RevisionsDelete' where
         type Rs RevisionsDelete' = ()
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u RevisionsDelete'{..}
+        request = requestWith driveRequest
+        requestWith rq RevisionsDelete'{..}
           = go _rdFileId _rdRevisionId _rdQuotaUser
               (Just _rdPrettyPrint)
               _rdUserIP
@@ -168,7 +168,6 @@ instance GoogleRequest RevisionsDelete' where
               _rdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RevisionsDeleteResource)
-                      r
-                      u
+                      rq

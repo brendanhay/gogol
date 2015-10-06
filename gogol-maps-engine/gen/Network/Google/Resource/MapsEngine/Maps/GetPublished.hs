@@ -149,8 +149,8 @@ instance GoogleAuth MapsGetPublished' where
 
 instance GoogleRequest MapsGetPublished' where
         type Rs MapsGetPublished' = PublishedMap
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u MapsGetPublished'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq MapsGetPublished'{..}
           = go _mgpId _mgpQuotaUser (Just _mgpPrettyPrint)
               _mgpUserIP
               _mgpFields
@@ -158,7 +158,6 @@ instance GoogleRequest MapsGetPublished' where
               _mgpOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MapsGetPublishedResource)
-                      r
-                      u
+                      rq

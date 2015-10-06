@@ -162,8 +162,8 @@ instance GoogleAuth TurnBasedMatchesCreate' where
 
 instance GoogleRequest TurnBasedMatchesCreate' where
         type Rs TurnBasedMatchesCreate' = TurnBasedMatch
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u TurnBasedMatchesCreate'{..}
+        request = requestWith gamesRequest
+        requestWith rq TurnBasedMatchesCreate'{..}
           = go _turLanguage _turQuotaUser
               (Just _turPrettyPrint)
               _turUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest TurnBasedMatchesCreate' where
               (Just AltJSON)
               _turPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TurnBasedMatchesCreateResource)
-                      r
-                      u
+                      rq

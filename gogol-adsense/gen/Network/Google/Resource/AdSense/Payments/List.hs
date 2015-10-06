@@ -134,15 +134,13 @@ instance GoogleAuth PaymentsList' where
 
 instance GoogleRequest PaymentsList' where
         type Rs PaymentsList' = Payments
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u PaymentsList'{..}
+        request = requestWith adSenseRequest
+        requestWith rq PaymentsList'{..}
           = go _plQuotaUser (Just _plPrettyPrint) _plUserIP
               _plFields
               _plKey
               _plOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PaymentsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PaymentsListResource)
+                      rq

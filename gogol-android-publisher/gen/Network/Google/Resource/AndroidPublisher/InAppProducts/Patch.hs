@@ -193,8 +193,8 @@ instance GoogleAuth InAppProductsPatch' where
 
 instance GoogleRequest InAppProductsPatch' where
         type Rs InAppProductsPatch' = InAppProduct
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u InAppProductsPatch'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq InAppProductsPatch'{..}
           = go _iAppPackageName _iAppSKU
               _iAppAutoConvertMissingPrices
               _iAppQuotaUser
@@ -206,7 +206,6 @@ instance GoogleRequest InAppProductsPatch' where
               (Just AltJSON)
               _iAppPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InAppProductsPatchResource)
-                      r
-                      u
+                      rq

@@ -162,8 +162,8 @@ instance GoogleAuth PageViewsGet' where
 
 instance GoogleRequest PageViewsGet' where
         type Rs PageViewsGet' = Pageviews
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PageViewsGet'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PageViewsGet'{..}
           = go _pvgBlogId (_pvgRange ^. _Default) _pvgQuotaUser
               (Just _pvgPrettyPrint)
               _pvgUserIP
@@ -172,7 +172,5 @@ instance GoogleRequest PageViewsGet' where
               _pvgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PageViewsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PageViewsGetResource)
+                      rq

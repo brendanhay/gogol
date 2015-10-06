@@ -174,8 +174,8 @@ instance GoogleAuth DatabasesInsert' where
 
 instance GoogleRequest DatabasesInsert' where
         type Rs DatabasesInsert' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u DatabasesInsert'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq DatabasesInsert'{..}
           = go _diProject _diInstance _diQuotaUser
               (Just _diPrettyPrint)
               _diUserIP
@@ -185,7 +185,6 @@ instance GoogleRequest DatabasesInsert' where
               (Just AltJSON)
               _diPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DatabasesInsertResource)
-                      r
-                      u
+                      rq

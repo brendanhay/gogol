@@ -295,8 +295,8 @@ instance GoogleRequest TimeseriesDescriptorsList'
          where
         type Rs TimeseriesDescriptorsList' =
              ListTimeseriesDescriptorsResponse
-        request = requestWithRoute defReq monitoringURL
-        requestWithRoute r u TimeseriesDescriptorsList'{..}
+        request = requestWith monitoringRequest
+        requestWith rq TimeseriesDescriptorsList'{..}
           = go _tProject _tMetric (Just _tYoungest) _tWindow
               (Just _tCount)
               _tAggregator
@@ -313,7 +313,6 @@ instance GoogleRequest TimeseriesDescriptorsList'
               (Just AltJSON)
               _tPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TimeseriesDescriptorsListResource)
-                      r
-                      u
+                      rq

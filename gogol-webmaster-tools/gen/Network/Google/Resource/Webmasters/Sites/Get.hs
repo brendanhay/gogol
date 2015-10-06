@@ -145,8 +145,8 @@ instance GoogleAuth SitesGet' where
 
 instance GoogleRequest SitesGet' where
         type Rs SitesGet' = WmxSite
-        request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u SitesGet'{..}
+        request = requestWith webmasterToolsRequest
+        requestWith rq SitesGet'{..}
           = go _sSiteURL _sQuotaUser (Just _sPrettyPrint)
               _sUserIP
               _sFields
@@ -154,5 +154,4 @@ instance GoogleRequest SitesGet' where
               _sOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy SitesGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy SitesGetResource) rq

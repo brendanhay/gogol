@@ -238,8 +238,8 @@ instance GoogleAuth ObjectsWatchAll' where
 
 instance GoogleRequest ObjectsWatchAll' where
         type Rs ObjectsWatchAll' = Channel
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsWatchAll'{..}
+        request = requestWith storageRequest
+        requestWith rq ObjectsWatchAll'{..}
           = go _owaBucket _owaPrefix _owaVersions
               _owaProjection
               _owaPageToken
@@ -254,7 +254,6 @@ instance GoogleRequest ObjectsWatchAll' where
               (Just AltJSON)
               _owaPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ObjectsWatchAllResource)
-                      r
-                      u
+                      rq

@@ -16,7 +16,7 @@
 module Network.Google.SQLAdmin.Types
     (
     -- * Service URL
-      sQLAdminURL
+      sQLAdminRequest
 
     -- * SSLCert
     , SSLCert
@@ -387,9 +387,8 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types.Product
 import           Network.Google.SQLAdmin.Types.Sum
 
--- | URL referring to version 'v1beta4' of the Cloud SQL Administration API.
-sQLAdminURL :: BaseUrl
-sQLAdminURL
-  = BaseUrl Https
-      "https://www.googleapis.com/sql/v1beta4/"
-      443
+-- | Default request referring to version 'v1beta4' of the Cloud SQL Administration API.
+sQLAdminRequest :: RequestBuilder
+sQLAdminRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "sql/v1beta4/"

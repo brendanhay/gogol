@@ -147,8 +147,8 @@ instance GoogleAuth TablesDelete' where
 
 instance GoogleRequest TablesDelete' where
         type Rs TablesDelete' = ()
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u TablesDelete'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesDelete'{..}
           = go _tdId _tdQuotaUser (Just _tdPrettyPrint)
               _tdUserIP
               _tdFields
@@ -156,7 +156,5 @@ instance GoogleRequest TablesDelete' where
               _tdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TablesDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TablesDeleteResource)
+                      rq

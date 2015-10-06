@@ -21,7 +21,7 @@ module Network.Google.Gmail
     -- * API
       GmailAPI
     , gmailAPI
-    , gmailURL
+    , gmailRequest
 
     -- * Service Methods
 

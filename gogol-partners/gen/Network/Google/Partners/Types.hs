@@ -16,7 +16,7 @@
 module Network.Google.Partners.Types
     (
     -- * Service URL
-      partnersURL
+      partnersRequest
 
     -- * LatLng
     , LatLng
@@ -218,8 +218,8 @@ import           Network.Google.Partners.Types.Product
 import           Network.Google.Partners.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v2' of the Google Partners API.
-partnersURL :: BaseUrl
-partnersURL
-  = BaseUrl Https "https://partners.googleapis.com/"
-      443
+-- | Default request referring to version 'v2' of the Google Partners API.
+partnersRequest :: RequestBuilder
+partnersRequest
+  = defaultRequest "https://partners.googleapis.com/"
+      ""

@@ -238,8 +238,8 @@ instance GoogleAuth ProjectsSetIAMPolicy' where
 
 instance GoogleRequest ProjectsSetIAMPolicy' where
         type Rs ProjectsSetIAMPolicy' = Policy
-        request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsSetIAMPolicy'{..}
+        request = requestWith resourceManagerRequest
+        requestWith rq ProjectsSetIAMPolicy'{..}
           = go _psipResource _psipXgafv _psipUploadProtocol
               (Just _psipPp)
               _psipAccessToken
@@ -254,7 +254,6 @@ instance GoogleRequest ProjectsSetIAMPolicy' where
               (Just AltJSON)
               _psipPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsSetIAMPolicyResource)
-                      r
-                      u
+                      rq

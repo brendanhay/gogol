@@ -181,8 +181,8 @@ instance GoogleAuth UsersGet' where
 
 instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u UsersGet'{..}
+        request = requestWith directoryRequest
+        requestWith rq UsersGet'{..}
           = go _ugUserKey (Just _ugViewType) _ugCustomFieldMask
               (Just _ugProjection)
               _ugQuotaUser
@@ -193,5 +193,4 @@ instance GoogleRequest UsersGet' where
               _ugOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersGetResource) rq

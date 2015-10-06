@@ -210,8 +210,8 @@ instance GoogleAuth MetricDescriptorsList' where
 instance GoogleRequest MetricDescriptorsList' where
         type Rs MetricDescriptorsList' =
              ListMetricDescriptorsResponse
-        request = requestWithRoute defReq monitoringURL
-        requestWithRoute r u MetricDescriptorsList'{..}
+        request = requestWith monitoringRequest
+        requestWith rq MetricDescriptorsList'{..}
           = go _mdlProject (Just _mdlCount) _mdlQuery
               _mdlPageToken
               _mdlQuotaUser
@@ -223,7 +223,6 @@ instance GoogleRequest MetricDescriptorsList' where
               (Just AltJSON)
               _mdlPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MetricDescriptorsListResource)
-                      r
-                      u
+                      rq

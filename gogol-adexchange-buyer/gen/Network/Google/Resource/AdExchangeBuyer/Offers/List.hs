@@ -147,8 +147,8 @@ instance GoogleAuth OffersList' where
 
 instance GoogleRequest OffersList' where
         type Rs OffersList' = ListOffersResponse
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u OffersList'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq OffersList'{..}
           = go _olQuotaUser (Just _olPrettyPrint) _olUserIP
               _olFields
               _olKey
@@ -156,6 +156,4 @@ instance GoogleRequest OffersList' where
               (Just AltJSON)
               _olPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy OffersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy OffersListResource) rq

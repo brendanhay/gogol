@@ -154,9 +154,8 @@ instance GoogleRequest
          RasterCollectionsPermissionsList' where
         type Rs RasterCollectionsPermissionsList' =
              PermissionsListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u
-          RasterCollectionsPermissionsList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq RasterCollectionsPermissionsList'{..}
           = go _rcplcId _rcplcQuotaUser
               (Just _rcplcPrettyPrint)
               _rcplcUserIP
@@ -165,8 +164,7 @@ instance GoogleRequest
               _rcplcOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy RasterCollectionsPermissionsListResource)
-                      r
-                      u
+                      rq

@@ -190,8 +190,8 @@ instance GoogleAuth SettingsWatch' where
 
 instance GoogleRequest SettingsWatch' where
         type Rs SettingsWatch' = Channel
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u SettingsWatch'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq SettingsWatch'{..}
           = go _swSyncToken _swPageToken _swMaxResults
               _swQuotaUser
               (Just _swPrettyPrint)
@@ -202,7 +202,5 @@ instance GoogleRequest SettingsWatch' where
               (Just AltJSON)
               _swPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SettingsWatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SettingsWatchResource)
+                      rq

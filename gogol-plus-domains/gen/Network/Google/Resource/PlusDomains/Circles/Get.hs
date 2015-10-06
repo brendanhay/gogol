@@ -146,8 +146,8 @@ instance GoogleAuth CirclesGet' where
 
 instance GoogleRequest CirclesGet' where
         type Rs CirclesGet' = Circle
-        request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u CirclesGet'{..}
+        request = requestWith plusDomainsRequest
+        requestWith rq CirclesGet'{..}
           = go _cgCircleId _cgQuotaUser (Just _cgPrettyPrint)
               _cgUserIP
               _cgFields
@@ -155,6 +155,4 @@ instance GoogleRequest CirclesGet' where
               _cgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy CirclesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CirclesGetResource) rq

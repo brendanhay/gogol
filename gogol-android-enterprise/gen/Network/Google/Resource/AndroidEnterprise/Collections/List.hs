@@ -148,9 +148,8 @@ instance GoogleAuth CollectionsList' where
 
 instance GoogleRequest CollectionsList' where
         type Rs CollectionsList' = CollectionsListResponse
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u CollectionsList'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq CollectionsList'{..}
           = go _cEnterpriseId _cQuotaUser (Just _cPrettyPrint)
               _cUserIP
               _cFields
@@ -158,7 +157,6 @@ instance GoogleRequest CollectionsList' where
               _cOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CollectionsListResource)
-                      r
-                      u
+                      rq

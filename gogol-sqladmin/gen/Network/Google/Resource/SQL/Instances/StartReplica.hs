@@ -158,8 +158,8 @@ instance GoogleAuth InstancesStartReplica' where
 
 instance GoogleRequest InstancesStartReplica' where
         type Rs InstancesStartReplica' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesStartReplica'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq InstancesStartReplica'{..}
           = go _iProject _iInstance _iQuotaUser
               (Just _iPrettyPrint)
               _iUserIP
@@ -168,7 +168,6 @@ instance GoogleRequest InstancesStartReplica' where
               _iOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesStartReplicaResource)
-                      r
-                      u
+                      rq

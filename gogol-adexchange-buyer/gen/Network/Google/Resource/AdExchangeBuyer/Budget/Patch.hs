@@ -174,8 +174,8 @@ instance GoogleAuth BudgetPatch' where
 
 instance GoogleRequest BudgetPatch' where
         type Rs BudgetPatch' = Budget
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u BudgetPatch'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq BudgetPatch'{..}
           = go _bpAccountId _bpBillingId _bpQuotaUser
               (Just _bpPrettyPrint)
               _bpUserIP
@@ -185,7 +185,4 @@ instance GoogleRequest BudgetPatch' where
               (Just AltJSON)
               _bpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy BudgetPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy BudgetPatchResource) rq

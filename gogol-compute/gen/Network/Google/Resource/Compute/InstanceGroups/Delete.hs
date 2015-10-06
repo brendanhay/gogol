@@ -174,8 +174,8 @@ instance GoogleAuth InstanceGroupsDelete' where
 
 instance GoogleRequest InstanceGroupsDelete' where
         type Rs InstanceGroupsDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceGroupsDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq InstanceGroupsDelete'{..}
           = go _igdProject _igdZone _igdInstanceGroup
               _igdQuotaUser
               (Just _igdPrettyPrint)
@@ -185,7 +185,6 @@ instance GoogleRequest InstanceGroupsDelete' where
               _igdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstanceGroupsDeleteResource)
-                      r
-                      u
+                      rq

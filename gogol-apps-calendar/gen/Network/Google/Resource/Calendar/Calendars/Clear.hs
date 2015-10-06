@@ -151,8 +151,8 @@ instance GoogleAuth CalendarsClear' where
 
 instance GoogleRequest CalendarsClear' where
         type Rs CalendarsClear' = ()
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarsClear'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq CalendarsClear'{..}
           = go _ccCalendarId _ccQuotaUser (Just _ccPrettyPrint)
               _ccUserIP
               _ccFields
@@ -160,7 +160,5 @@ instance GoogleRequest CalendarsClear' where
               _ccOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CalendarsClearResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CalendarsClearResource)
+                      rq

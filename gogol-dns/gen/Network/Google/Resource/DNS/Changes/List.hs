@@ -207,8 +207,8 @@ instance GoogleAuth ChangesList' where
 
 instance GoogleRequest ChangesList' where
         type Rs ChangesList' = ChangesListResponse
-        request = requestWithRoute defReq dNSURL
-        requestWithRoute r u ChangesList'{..}
+        request = requestWith dNSRequest
+        requestWith rq ChangesList'{..}
           = go _clProject _clManagedZone _clSortOrder
               _clPageToken
               _clMaxResults
@@ -221,7 +221,4 @@ instance GoogleRequest ChangesList' where
               _clOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ChangesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ChangesListResource) rq

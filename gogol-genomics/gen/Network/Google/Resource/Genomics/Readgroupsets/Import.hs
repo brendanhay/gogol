@@ -163,8 +163,8 @@ instance GoogleAuth ReadgroupsetsImport' where
 instance GoogleRequest ReadgroupsetsImport' where
         type Rs ReadgroupsetsImport' =
              ImportReadGroupSetsResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReadgroupsetsImport'{..}
+        request = requestWith genomicsRequest
+        requestWith rq ReadgroupsetsImport'{..}
           = go _riQuotaUser (Just _riPrettyPrint) _riUserIP
               _riFields
               _riKey
@@ -172,7 +172,6 @@ instance GoogleRequest ReadgroupsetsImport' where
               (Just AltJSON)
               _riPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReadgroupsetsImportResource)
-                      r
-                      u
+                      rq

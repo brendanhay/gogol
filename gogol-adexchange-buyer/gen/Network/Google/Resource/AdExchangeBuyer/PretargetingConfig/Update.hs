@@ -176,8 +176,8 @@ instance GoogleRequest PretargetingConfigUpdate'
          where
         type Rs PretargetingConfigUpdate' =
              PretargetingConfig
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u PretargetingConfigUpdate'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq PretargetingConfigUpdate'{..}
           = go _pcuAccountId _pcuConfigId _pcuQuotaUser
               (Just _pcuPrettyPrint)
               _pcuUserIP
@@ -187,7 +187,6 @@ instance GoogleRequest PretargetingConfigUpdate'
               (Just AltJSON)
               _pcuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PretargetingConfigUpdateResource)
-                      r
-                      u
+                      rq

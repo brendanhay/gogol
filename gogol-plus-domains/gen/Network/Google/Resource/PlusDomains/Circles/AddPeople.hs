@@ -178,8 +178,8 @@ instance GoogleAuth CirclesAddPeople' where
 
 instance GoogleRequest CirclesAddPeople' where
         type Rs CirclesAddPeople' = Circle
-        request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u CirclesAddPeople'{..}
+        request = requestWith plusDomainsRequest
+        requestWith rq CirclesAddPeople'{..}
           = go _capCircleId (_capEmail ^. _Default)
               (_capUserId ^. _Default)
               _capQuotaUser
@@ -190,7 +190,6 @@ instance GoogleRequest CirclesAddPeople' where
               _capOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CirclesAddPeopleResource)
-                      r
-                      u
+                      rq

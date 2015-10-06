@@ -162,8 +162,8 @@ instance GoogleAuth ChildrenDelete' where
 
 instance GoogleRequest ChildrenDelete' where
         type Rs ChildrenDelete' = ()
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u ChildrenDelete'{..}
+        request = requestWith driveRequest
+        requestWith rq ChildrenDelete'{..}
           = go _cddFolderId _cddChildId _cddQuotaUser
               (Just _cddPrettyPrint)
               _cddUserIP
@@ -172,7 +172,5 @@ instance GoogleRequest ChildrenDelete' where
               _cddOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ChildrenDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ChildrenDeleteResource)
+                      rq

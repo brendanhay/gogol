@@ -165,9 +165,8 @@ instance GoogleAuth SavedColumnsList' where
 
 instance GoogleRequest SavedColumnsList' where
         type Rs SavedColumnsList' = SavedColumnList
-        request
-          = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u SavedColumnsList'{..}
+        request = requestWith doubleClickSearchRequest
+        requestWith rq SavedColumnsList'{..}
           = go _sclAgencyId _sclAdvertiserId _sclQuotaUser
               (Just _sclPrettyPrint)
               _sclUserIP
@@ -176,7 +175,6 @@ instance GoogleRequest SavedColumnsList' where
               _sclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SavedColumnsListResource)
-                      r
-                      u
+                      rq

@@ -168,8 +168,8 @@ instance GoogleAuth ApplicationsList' where
 
 instance GoogleRequest ApplicationsList' where
         type Rs ApplicationsList' = ApplicationsListResponse
-        request = requestWithRoute defReq dataTransferURL
-        requestWithRoute r u ApplicationsList'{..}
+        request = requestWith dataTransferRequest
+        requestWith rq ApplicationsList'{..}
           = go _alCustomerId _alPageToken _alMaxResults
               _alQuotaUser
               (Just _alPrettyPrint)
@@ -179,7 +179,6 @@ instance GoogleRequest ApplicationsList' where
               _alOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ApplicationsListResource)
-                      r
-                      u
+                      rq

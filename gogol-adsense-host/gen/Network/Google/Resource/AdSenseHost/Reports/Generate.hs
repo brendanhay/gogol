@@ -250,8 +250,8 @@ instance GoogleAuth ReportsGenerate' where
 
 instance GoogleRequest ReportsGenerate' where
         type Rs ReportsGenerate' = Report
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u ReportsGenerate'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq ReportsGenerate'{..}
           = go (Just _rgStartDate) (Just _rgEndDate)
               (_rgDimension ^. _Default)
               _rgLocale
@@ -268,7 +268,6 @@ instance GoogleRequest ReportsGenerate' where
               _rgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReportsGenerateResource)
-                      r
-                      u
+                      rq

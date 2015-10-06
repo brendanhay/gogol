@@ -260,8 +260,8 @@ instance GoogleAuth InventoryItemsList' where
 instance GoogleRequest InventoryItemsList' where
         type Rs InventoryItemsList' =
              InventoryItemsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u InventoryItemsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq InventoryItemsList'{..}
           = go _iilProFileId _iilProjectId
               (_iilIds ^. _Default)
               _iilSortOrder
@@ -279,7 +279,6 @@ instance GoogleRequest InventoryItemsList' where
               _iilOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InventoryItemsListResource)
-                      r
-                      u
+                      rq

@@ -192,8 +192,8 @@ instance GoogleAuth TabledataInsertAll' where
 instance GoogleRequest TabledataInsertAll' where
         type Rs TabledataInsertAll' =
              TableDataInsertAllResponse
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u TabledataInsertAll'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq TabledataInsertAll'{..}
           = go _tiaProjectId _tiaDatasetId _tiaTableId
               _tiaQuotaUser
               (Just _tiaPrettyPrint)
@@ -204,7 +204,6 @@ instance GoogleRequest TabledataInsertAll' where
               (Just AltJSON)
               _tiaPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TabledataInsertAllResource)
-                      r
-                      u
+                      rq

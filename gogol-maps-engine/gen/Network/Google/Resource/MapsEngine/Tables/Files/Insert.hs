@@ -177,8 +177,8 @@ instance GoogleAuth TablesFilesInsert' where
 
 instance GoogleRequest TablesFilesInsert' where
         type Rs TablesFilesInsert' = ()
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u TablesFilesInsert'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesFilesInsert'{..}
           = go _tfiId (Just _tfiFilename) _tfiQuotaUser
               (Just _tfiPrettyPrint)
               _tfiUserIP
@@ -188,7 +188,6 @@ instance GoogleRequest TablesFilesInsert' where
               (Just AltJSON)
               _tfiMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TablesFilesInsertResource)
-                      r
-                      u
+                      rq

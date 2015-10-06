@@ -217,8 +217,8 @@ instance GoogleAuth CommentsList' where
 
 instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentListResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CommentsList'{..}
+        request = requestWith youTubeRequest
+        requestWith rq CommentsList'{..}
           = go (Just _comPart) _comId _comPageToken
               (Just _comTextFormat)
               (Just _comMaxResults)
@@ -231,7 +231,5 @@ instance GoogleRequest CommentsList' where
               _comOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CommentsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CommentsListResource)
+                      rq

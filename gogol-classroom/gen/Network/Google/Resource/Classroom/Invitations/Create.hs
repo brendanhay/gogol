@@ -233,8 +233,8 @@ instance GoogleAuth InvitationsCreate' where
 
 instance GoogleRequest InvitationsCreate' where
         type Rs InvitationsCreate' = Invitation
-        request = requestWithRoute defReq classroomURL
-        requestWithRoute r u InvitationsCreate'{..}
+        request = requestWith classroomRequest
+        requestWith rq InvitationsCreate'{..}
           = go _icXgafv _icUploadProtocol (Just _icPp)
               _icAccessToken
               _icUploadType
@@ -248,7 +248,6 @@ instance GoogleRequest InvitationsCreate' where
               (Just AltJSON)
               _icPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InvitationsCreateResource)
-                      r
-                      u
+                      rq

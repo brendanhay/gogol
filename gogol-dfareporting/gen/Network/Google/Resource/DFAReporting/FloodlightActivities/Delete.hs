@@ -162,8 +162,8 @@ instance GoogleAuth FloodlightActivitiesDelete' where
 instance GoogleRequest FloodlightActivitiesDelete'
          where
         type Rs FloodlightActivitiesDelete' = ()
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FloodlightActivitiesDelete'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FloodlightActivitiesDelete'{..}
           = go _fadProFileId _fadId _fadQuotaUser
               (Just _fadPrettyPrint)
               _fadUserIP
@@ -172,7 +172,6 @@ instance GoogleRequest FloodlightActivitiesDelete'
               _fadOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy FloodlightActivitiesDeleteResource)
-                      r
-                      u
+                      rq

@@ -145,8 +145,8 @@ instance GoogleAuth UsersGet' where
 
 instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u UsersGet'{..}
+        request = requestWith bloggerRequest
+        requestWith rq UsersGet'{..}
           = go _ugUserId _ugQuotaUser (Just _ugPrettyPrint)
               _ugUserIP
               _ugFields
@@ -154,5 +154,4 @@ instance GoogleRequest UsersGet' where
               _ugOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersGetResource) rq

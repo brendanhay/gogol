@@ -16,7 +16,7 @@
 module Network.Google.TagManager.Types
     (
     -- * Service URL
-      tagManagerURL
+      tagManagerRequest
 
     -- * ListVariablesResponse
     , ListVariablesResponse
@@ -327,9 +327,8 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types.Product
 import           Network.Google.TagManager.Types.Sum
 
--- | URL referring to version 'v1' of the Tag Manager API.
-tagManagerURL :: BaseUrl
-tagManagerURL
-  = BaseUrl Https
-      "https://www.googleapis.com/tagmanager/v1/"
-      443
+-- | Default request referring to version 'v1' of the Tag Manager API.
+tagManagerRequest :: RequestBuilder
+tagManagerRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "tagmanager/v1/"

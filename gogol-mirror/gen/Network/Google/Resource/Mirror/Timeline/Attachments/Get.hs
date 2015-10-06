@@ -175,8 +175,8 @@ instance GoogleAuth TimelineAttachmentsGet' where
 
 instance GoogleRequest TimelineAttachmentsGet' where
         type Rs TimelineAttachmentsGet' = Attachment
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineAttachmentsGet'{..}
+        request = requestWith mirrorRequest
+        requestWith rq TimelineAttachmentsGet'{..}
           = go _tagItemId _tagAttachmentId _tagQuotaUser
               (Just _tagPrettyPrint)
               _tagUserIP
@@ -185,17 +185,16 @@ instance GoogleRequest TimelineAttachmentsGet' where
               _tagOAuthToken
               (Just AltJSON)
           where go :<|> _
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TimelineAttachmentsGetResource)
-                      r
-                      u
+                      rq
 
 instance GoogleRequest
          (MediaDownload TimelineAttachmentsGet') where
         type Rs (MediaDownload TimelineAttachmentsGet') =
              Body
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u
+        request = requestWith mirrorRequest
+        requestWith rq
           (MediaDownload TimelineAttachmentsGet'{..})
           = go _tagItemId _tagAttachmentId _tagQuotaUser
               (Just _tagPrettyPrint)
@@ -205,7 +204,6 @@ instance GoogleRequest
               _tagOAuthToken
               (Just AltMedia)
           where _ :<|> go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TimelineAttachmentsGetResource)
-                      r
-                      u
+                      rq

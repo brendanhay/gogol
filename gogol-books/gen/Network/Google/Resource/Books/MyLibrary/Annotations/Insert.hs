@@ -188,8 +188,8 @@ instance GoogleAuth MyLibraryAnnotationsInsert' where
 instance GoogleRequest MyLibraryAnnotationsInsert'
          where
         type Rs MyLibraryAnnotationsInsert' = Annotation
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u MyLibraryAnnotationsInsert'{..}
+        request = requestWith booksRequest
+        requestWith rq MyLibraryAnnotationsInsert'{..}
           = go _mlaiCountry _mlaiShowOnlySummaryInResponse
               _mlaiSource
               _mlaiQuotaUser
@@ -201,7 +201,6 @@ instance GoogleRequest MyLibraryAnnotationsInsert'
               (Just AltJSON)
               _mlaiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MyLibraryAnnotationsInsertResource)
-                      r
-                      u
+                      rq

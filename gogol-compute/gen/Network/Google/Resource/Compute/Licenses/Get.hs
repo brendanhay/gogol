@@ -159,8 +159,8 @@ instance GoogleAuth LicensesGet' where
 
 instance GoogleRequest LicensesGet' where
         type Rs LicensesGet' = License
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u LicensesGet'{..}
+        request = requestWith computeRequest
+        requestWith rq LicensesGet'{..}
           = go _lgProject _lgLicense _lgQuotaUser
               (Just _lgPrettyPrint)
               _lgUserIP
@@ -169,7 +169,4 @@ instance GoogleRequest LicensesGet' where
               _lgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy LicensesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy LicensesGetResource) rq

@@ -192,8 +192,8 @@ instance GoogleRequest ObjectAccessControlsInsert'
          where
         type Rs ObjectAccessControlsInsert' =
              ObjectAccessControl
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectAccessControlsInsert'{..}
+        request = requestWith storageRequest
+        requestWith rq ObjectAccessControlsInsert'{..}
           = go _oaciBucket _oaciObject _oaciGeneration
               _oaciQuotaUser
               (Just _oaciPrettyPrint)
@@ -204,7 +204,6 @@ instance GoogleRequest ObjectAccessControlsInsert'
               (Just AltJSON)
               _oaciPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ObjectAccessControlsInsertResource)
-                      r
-                      u
+                      rq

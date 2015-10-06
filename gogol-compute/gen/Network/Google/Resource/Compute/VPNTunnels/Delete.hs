@@ -174,8 +174,8 @@ instance GoogleAuth VPNTunnelsDelete' where
 
 instance GoogleRequest VPNTunnelsDelete' where
         type Rs VPNTunnelsDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u VPNTunnelsDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq VPNTunnelsDelete'{..}
           = go _vtdProject _vtdRegion _vtdVPNTunnel
               _vtdQuotaUser
               (Just _vtdPrettyPrint)
@@ -185,7 +185,6 @@ instance GoogleRequest VPNTunnelsDelete' where
               _vtdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VPNTunnelsDeleteResource)
-                      r
-                      u
+                      rq

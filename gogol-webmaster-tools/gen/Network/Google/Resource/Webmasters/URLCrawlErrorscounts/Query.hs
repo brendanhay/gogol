@@ -198,8 +198,8 @@ instance GoogleRequest URLCrawlErrorscountsQuery'
          where
         type Rs URLCrawlErrorscountsQuery' =
              URLCrawlErrorsCountsQueryResponse
-        request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u URLCrawlErrorscountsQuery'{..}
+        request = requestWith webmasterToolsRequest
+        requestWith rq URLCrawlErrorscountsQuery'{..}
           = go _uceqSiteURL _uceqPlatform _uceqCategory
               (Just _uceqLatestCountsOnly)
               _uceqQuotaUser
@@ -210,7 +210,6 @@ instance GoogleRequest URLCrawlErrorscountsQuery'
               _uceqOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy URLCrawlErrorscountsQueryResource)
-                      r
-                      u
+                      rq

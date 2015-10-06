@@ -172,8 +172,8 @@ instance GoogleAuth TablesInsert' where
 
 instance GoogleRequest TablesInsert' where
         type Rs TablesInsert' = Table
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u TablesInsert'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq TablesInsert'{..}
           = go _tiProjectId _tiDatasetId _tiQuotaUser
               (Just _tiPrettyPrint)
               _tiUserIP
@@ -183,7 +183,5 @@ instance GoogleRequest TablesInsert' where
               (Just AltJSON)
               _tiPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TablesInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TablesInsertResource)
+                      rq

@@ -176,8 +176,8 @@ instance GoogleAuth EditsDetailsUpdate' where
 
 instance GoogleRequest EditsDetailsUpdate' where
         type Rs EditsDetailsUpdate' = AppDetails
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsDetailsUpdate'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsDetailsUpdate'{..}
           = go _eduPackageName _eduEditId _eduQuotaUser
               (Just _eduPrettyPrint)
               _eduUserIP
@@ -187,7 +187,6 @@ instance GoogleRequest EditsDetailsUpdate' where
               (Just AltJSON)
               _eduPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsDetailsUpdateResource)
-                      r
-                      u
+                      rq

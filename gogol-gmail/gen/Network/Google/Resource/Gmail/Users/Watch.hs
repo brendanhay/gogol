@@ -159,8 +159,8 @@ instance GoogleAuth UsersWatch' where
 
 instance GoogleRequest UsersWatch' where
         type Rs UsersWatch' = WatchResponse
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersWatch'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersWatch'{..}
           = go _uwUserId _uwQuotaUser (Just _uwPrettyPrint)
               _uwUserIP
               _uwFields
@@ -169,6 +169,4 @@ instance GoogleRequest UsersWatch' where
               (Just AltJSON)
               _uwPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersWatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersWatchResource) rq

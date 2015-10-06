@@ -159,8 +159,8 @@ instance GoogleAuth StyleGet' where
 
 instance GoogleRequest StyleGet' where
         type Rs StyleGet' = StyleSetting
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u StyleGet'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq StyleGet'{..}
           = go _sgTableId _sgStyleId _sgQuotaUser
               (Just _sgPrettyPrint)
               _sgUserIP
@@ -169,5 +169,4 @@ instance GoogleRequest StyleGet' where
               _sgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy StyleGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy StyleGetResource) rq

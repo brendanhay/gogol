@@ -171,8 +171,8 @@ instance GoogleAuth CommentsApprove' where
 
 instance GoogleRequest CommentsApprove' where
         type Rs CommentsApprove' = Comment
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u CommentsApprove'{..}
+        request = requestWith bloggerRequest
+        requestWith rq CommentsApprove'{..}
           = go _caBlogId _caPostId _caCommentId _caQuotaUser
               (Just _caPrettyPrint)
               _caUserIP
@@ -181,7 +181,6 @@ instance GoogleRequest CommentsApprove' where
               _caOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CommentsApproveResource)
-                      r
-                      u
+                      rq

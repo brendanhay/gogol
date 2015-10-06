@@ -154,8 +154,8 @@ instance GoogleRequest RelyingPartyVerifyPassword'
          where
         type Rs RelyingPartyVerifyPassword' =
              VerifyPasswordResponse
-        request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingPartyVerifyPassword'{..}
+        request = requestWith identityToolkitRequest
+        requestWith rq RelyingPartyVerifyPassword'{..}
           = go _rpvpQuotaUser (Just _rpvpPrettyPrint)
               _rpvpUserIP
               _rpvpFields
@@ -164,7 +164,6 @@ instance GoogleRequest RelyingPartyVerifyPassword'
               (Just AltJSON)
               _rpvpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RelyingPartyVerifyPasswordResource)
-                      r
-                      u
+                      rq

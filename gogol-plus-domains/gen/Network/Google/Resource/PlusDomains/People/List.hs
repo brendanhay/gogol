@@ -197,8 +197,8 @@ instance GoogleAuth PeopleList' where
 
 instance GoogleRequest PeopleList' where
         type Rs PeopleList' = PeopleFeed
-        request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u PeopleList'{..}
+        request = requestWith plusDomainsRequest
+        requestWith rq PeopleList'{..}
           = go _plUserId _plCollection _plOrderBy _plPageToken
               (Just _plMaxResults)
               _plQuotaUser
@@ -209,6 +209,4 @@ instance GoogleRequest PeopleList' where
               _plOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy PeopleListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PeopleListResource) rq

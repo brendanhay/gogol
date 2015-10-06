@@ -237,9 +237,8 @@ instance GoogleAuth MyLibraryBookshelvesVolumesList'
 instance GoogleRequest
          MyLibraryBookshelvesVolumesList' where
         type Rs MyLibraryBookshelvesVolumesList' = Volumes
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u
-          MyLibraryBookshelvesVolumesList'{..}
+        request = requestWith booksRequest
+        requestWith rq MyLibraryBookshelvesVolumesList'{..}
           = go _mlbvlShelf _mlbvlCountry _mlbvlQ _mlbvlSource
               _mlbvlProjection
               _mlbvlStartIndex
@@ -253,8 +252,7 @@ instance GoogleRequest
               _mlbvlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy MyLibraryBookshelvesVolumesListResource)
-                      r
-                      u
+                      rq

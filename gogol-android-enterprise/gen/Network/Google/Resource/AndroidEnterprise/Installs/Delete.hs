@@ -190,9 +190,8 @@ instance GoogleAuth InstallsDelete' where
 
 instance GoogleRequest InstallsDelete' where
         type Rs InstallsDelete' = ()
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u InstallsDelete'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq InstallsDelete'{..}
           = go _idEnterpriseId _idUserId _idDeviceId
               _idInstallId
               _idQuotaUser
@@ -203,7 +202,5 @@ instance GoogleRequest InstallsDelete' where
               _idOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy InstallsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy InstallsDeleteResource)
+                      rq

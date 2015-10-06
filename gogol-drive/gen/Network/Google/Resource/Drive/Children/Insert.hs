@@ -163,8 +163,8 @@ instance GoogleAuth ChildrenInsert' where
 
 instance GoogleRequest ChildrenInsert' where
         type Rs ChildrenInsert' = ChildReference
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u ChildrenInsert'{..}
+        request = requestWith driveRequest
+        requestWith rq ChildrenInsert'{..}
           = go _chiFolderId _chiQuotaUser
               (Just _chiPrettyPrint)
               _chiUserIP
@@ -174,7 +174,5 @@ instance GoogleRequest ChildrenInsert' where
               (Just AltJSON)
               _chiPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ChildrenInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ChildrenInsertResource)
+                      rq

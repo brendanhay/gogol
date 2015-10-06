@@ -293,8 +293,8 @@ instance GoogleAuth VideosList' where
 
 instance GoogleRequest VideosList' where
         type Rs VideosList' = VideoListResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideosList'{..}
+        request = requestWith youTubeRequest
+        requestWith rq VideosList'{..}
           = go (Just _vlPart) _vlChart _vlRegionCode _vlLocale
               _vlMyRating
               _vlHl
@@ -311,6 +311,4 @@ instance GoogleRequest VideosList' where
               _vlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy VideosListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy VideosListResource) rq

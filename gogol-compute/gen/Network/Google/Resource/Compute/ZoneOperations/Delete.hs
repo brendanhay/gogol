@@ -173,8 +173,8 @@ instance GoogleAuth ZoneOperationsDelete' where
 
 instance GoogleRequest ZoneOperationsDelete' where
         type Rs ZoneOperationsDelete' = ()
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u ZoneOperationsDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq ZoneOperationsDelete'{..}
           = go _zodProject _zodZone _zodOperation _zodQuotaUser
               (Just _zodPrettyPrint)
               _zodUserIP
@@ -183,7 +183,6 @@ instance GoogleRequest ZoneOperationsDelete' where
               _zodOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ZoneOperationsDeleteResource)
-                      r
-                      u
+                      rq

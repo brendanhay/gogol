@@ -161,8 +161,8 @@ instance GoogleAuth EventTagsDelete' where
 
 instance GoogleRequest EventTagsDelete' where
         type Rs EventTagsDelete' = ()
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u EventTagsDelete'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq EventTagsDelete'{..}
           = go _etdProFileId _etdId _etdQuotaUser
               (Just _etdPrettyPrint)
               _etdUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest EventTagsDelete' where
               _etdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EventTagsDeleteResource)
-                      r
-                      u
+                      rq

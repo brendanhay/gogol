@@ -196,8 +196,8 @@ instance GoogleAuth ActivitiesSearch' where
 
 instance GoogleRequest ActivitiesSearch' where
         type Rs ActivitiesSearch' = ActivityFeed
-        request = requestWithRoute defReq plusURL
-        requestWithRoute r u ActivitiesSearch'{..}
+        request = requestWith plusRequest
+        requestWith rq ActivitiesSearch'{..}
           = go (Just _asQuery) (Just _asOrderBy)
               (Just _asLanguage)
               _asPageToken
@@ -210,7 +210,6 @@ instance GoogleRequest ActivitiesSearch' where
               _asOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ActivitiesSearchResource)
-                      r
-                      u
+                      rq

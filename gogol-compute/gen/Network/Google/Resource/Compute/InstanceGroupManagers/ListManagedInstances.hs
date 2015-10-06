@@ -185,8 +185,8 @@ instance GoogleRequest
          InstanceGroupManagersListManagedInstances' where
         type Rs InstanceGroupManagersListManagedInstances' =
              InstanceGroupManagersListManagedInstancesResponse
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u
+        request = requestWith computeRequest
+        requestWith rq
           InstanceGroupManagersListManagedInstances'{..}
           = go _igmlmiProject _igmlmiZone
               _igmlmiInstanceGroupManager
@@ -198,9 +198,8 @@ instance GoogleRequest
               _igmlmiOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy
                            InstanceGroupManagersListManagedInstancesResource)
-                      r
-                      u
+                      rq

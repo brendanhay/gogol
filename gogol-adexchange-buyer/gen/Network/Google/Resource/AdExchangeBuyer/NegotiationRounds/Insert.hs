@@ -164,8 +164,8 @@ instance GoogleAuth NegotiationRoundsInsert' where
 instance GoogleRequest NegotiationRoundsInsert' where
         type Rs NegotiationRoundsInsert' =
              NegotiationRoundDTO
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u NegotiationRoundsInsert'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq NegotiationRoundsInsert'{..}
           = go _nriNegotiationId _nriQuotaUser
               (Just _nriPrettyPrint)
               _nriUserIP
@@ -175,7 +175,6 @@ instance GoogleRequest NegotiationRoundsInsert' where
               (Just AltJSON)
               _nriPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy NegotiationRoundsInsertResource)
-                      r
-                      u
+                      rq

@@ -160,8 +160,8 @@ instance GoogleAuth TrainedModelsGet' where
 
 instance GoogleRequest TrainedModelsGet' where
         type Rs TrainedModelsGet' = Insert2
-        request = requestWithRoute defReq predictionURL
-        requestWithRoute r u TrainedModelsGet'{..}
+        request = requestWith predictionRequest
+        requestWith rq TrainedModelsGet'{..}
           = go _tmgProject _tmgId _tmgQuotaUser
               (Just _tmgPrettyPrint)
               _tmgUserIP
@@ -170,7 +170,6 @@ instance GoogleRequest TrainedModelsGet' where
               _tmgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TrainedModelsGetResource)
-                      r
-                      u
+                      rq

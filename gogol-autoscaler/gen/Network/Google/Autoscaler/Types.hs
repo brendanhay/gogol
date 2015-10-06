@@ -16,7 +16,7 @@
 module Network.Google.Autoscaler.Types
     (
     -- * Service URL
-      autoscalerURL
+      autoscalerRequest
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -169,9 +169,8 @@ import           Network.Google.Autoscaler.Types.Product
 import           Network.Google.Autoscaler.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1beta2' of the Google Compute Engine Autoscaler API.
-autoscalerURL :: BaseUrl
-autoscalerURL
-  = BaseUrl Https
-      "https://www.googleapis.com/autoscaler/v1beta2/"
-      443
+-- | Default request referring to version 'v1beta2' of the Google Compute Engine Autoscaler API.
+autoscalerRequest :: RequestBuilder
+autoscalerRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "autoscaler/v1beta2/"

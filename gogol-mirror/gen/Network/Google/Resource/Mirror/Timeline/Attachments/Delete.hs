@@ -164,8 +164,8 @@ instance GoogleAuth TimelineAttachmentsDelete' where
 instance GoogleRequest TimelineAttachmentsDelete'
          where
         type Rs TimelineAttachmentsDelete' = ()
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineAttachmentsDelete'{..}
+        request = requestWith mirrorRequest
+        requestWith rq TimelineAttachmentsDelete'{..}
           = go _tadItemId _tadAttachmentId _tadQuotaUser
               (Just _tadPrettyPrint)
               _tadUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest TimelineAttachmentsDelete'
               _tadOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TimelineAttachmentsDeleteResource)
-                      r
-                      u
+                      rq

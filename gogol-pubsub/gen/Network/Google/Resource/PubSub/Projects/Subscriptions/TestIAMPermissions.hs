@@ -238,8 +238,8 @@ instance GoogleRequest
          ProjectsSubscriptionsTestIAMPermissions' where
         type Rs ProjectsSubscriptionsTestIAMPermissions' =
              TestIAMPermissionsResponse
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u
+        request = requestWith pubSubRequest
+        requestWith rq
           ProjectsSubscriptionsTestIAMPermissions'{..}
           = go _pstipResource _pstipXgafv _pstipUploadProtocol
               (Just _pstipPp)
@@ -255,9 +255,8 @@ instance GoogleRequest
               (Just AltJSON)
               _pstipPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy
                            ProjectsSubscriptionsTestIAMPermissionsResource)
-                      r
-                      u
+                      rq

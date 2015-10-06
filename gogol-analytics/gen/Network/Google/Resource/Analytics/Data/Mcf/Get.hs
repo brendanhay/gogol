@@ -266,8 +266,8 @@ instance GoogleAuth DataMcfGet' where
 
 instance GoogleRequest DataMcfGet' where
         type Rs DataMcfGet' = McfData
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u DataMcfGet'{..}
+        request = requestWith analyticsRequest
+        requestWith rq DataMcfGet'{..}
           = go (Just _dmgIds) (Just _dmgStartDate)
               (Just _dmgEndDate)
               (Just _dmgMetrics)
@@ -285,6 +285,4 @@ instance GoogleRequest DataMcfGet' where
               _dmgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy DataMcfGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DataMcfGetResource) rq

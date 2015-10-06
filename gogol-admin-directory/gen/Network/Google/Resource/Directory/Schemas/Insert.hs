@@ -159,8 +159,8 @@ instance GoogleAuth SchemasInsert' where
 
 instance GoogleRequest SchemasInsert' where
         type Rs SchemasInsert' = Schema
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u SchemasInsert'{..}
+        request = requestWith directoryRequest
+        requestWith rq SchemasInsert'{..}
           = go _siCustomerId _siQuotaUser (Just _siPrettyPrint)
               _siUserIP
               _siFields
@@ -169,7 +169,5 @@ instance GoogleRequest SchemasInsert' where
               (Just AltJSON)
               _siPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SchemasInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SchemasInsertResource)
+                      rq

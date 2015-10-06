@@ -175,8 +175,8 @@ instance GoogleAuth TargetInstancesGet' where
 
 instance GoogleRequest TargetInstancesGet' where
         type Rs TargetInstancesGet' = TargetInstance
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetInstancesGet'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetInstancesGet'{..}
           = go _tigProject _tigZone _tigTargetInstance
               _tigQuotaUser
               (Just _tigPrettyPrint)
@@ -186,7 +186,6 @@ instance GoogleRequest TargetInstancesGet' where
               _tigOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetInstancesGetResource)
-                      r
-                      u
+                      rq

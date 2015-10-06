@@ -181,9 +181,8 @@ instance GoogleAuth AccountsContainersTriggersGet'
 instance GoogleRequest AccountsContainersTriggersGet'
          where
         type Rs AccountsContainersTriggersGet' = Trigger
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersTriggersGet'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersTriggersGet'{..}
           = go _actgAccountId _actgContainerId _actgTriggerId
               _actgQuotaUser
               (Just _actgPrettyPrint)
@@ -193,8 +192,7 @@ instance GoogleRequest AccountsContainersTriggersGet'
               _actgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersTriggersGetResource)
-                      r
-                      u
+                      rq

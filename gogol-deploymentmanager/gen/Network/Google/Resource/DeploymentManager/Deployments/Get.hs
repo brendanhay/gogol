@@ -159,9 +159,8 @@ instance GoogleAuth DeploymentsGet' where
 
 instance GoogleRequest DeploymentsGet' where
         type Rs DeploymentsGet' = Deployment
-        request
-          = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u DeploymentsGet'{..}
+        request = requestWith deploymentManagerRequest
+        requestWith rq DeploymentsGet'{..}
           = go _dgProject _dgDeployment _dgQuotaUser
               (Just _dgPrettyPrint)
               _dgUserIP
@@ -170,7 +169,5 @@ instance GoogleRequest DeploymentsGet' where
               _dgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DeploymentsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DeploymentsGetResource)
+                      rq

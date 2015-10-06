@@ -21,7 +21,7 @@ module Network.Google.YouTube
     -- * API
       YouTubeAPI
     , youTubeAPI
-    , youTubeURL
+    , youTubeRequest
 
     -- * Service Methods
 

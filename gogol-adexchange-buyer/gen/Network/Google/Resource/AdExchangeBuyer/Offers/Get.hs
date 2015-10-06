@@ -145,8 +145,8 @@ instance GoogleAuth OffersGet' where
 
 instance GoogleRequest OffersGet' where
         type Rs OffersGet' = OfferDTO
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u OffersGet'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq OffersGet'{..}
           = go _ogOfferId _ogQuotaUser (Just _ogPrettyPrint)
               _ogUserIP
               _ogFields
@@ -154,6 +154,4 @@ instance GoogleRequest OffersGet' where
               _ogOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy OffersGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy OffersGetResource) rq

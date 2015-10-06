@@ -161,8 +161,8 @@ instance GoogleAuth UserRolesGet' where
 
 instance GoogleRequest UserRolesGet' where
         type Rs UserRolesGet' = UserRole
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserRolesGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq UserRolesGet'{..}
           = go _urgProFileId _urgId _urgQuotaUser
               (Just _urgPrettyPrint)
               _urgUserIP
@@ -171,7 +171,5 @@ instance GoogleRequest UserRolesGet' where
               _urgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy UserRolesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UserRolesGetResource)
+                      rq

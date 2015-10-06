@@ -199,8 +199,8 @@ instance GoogleAuth CitiesList' where
 
 instance GoogleRequest CitiesList' where
         type Rs CitiesList' = CitiesListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CitiesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CitiesList'{..}
           = go _cProFileId (_cRegionDartIds ^. _Default)
               _cNamePrefix
               (_cCountryDartIds ^. _Default)
@@ -213,6 +213,4 @@ instance GoogleRequest CitiesList' where
               _cOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy CitiesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CitiesListResource) rq

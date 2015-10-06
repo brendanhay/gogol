@@ -162,8 +162,8 @@ instance GoogleAuth SubAccountsUpdate' where
 
 instance GoogleRequest SubAccountsUpdate' where
         type Rs SubAccountsUpdate' = SubAccount
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SubAccountsUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq SubAccountsUpdate'{..}
           = go _sauProFileId _sauQuotaUser
               (Just _sauPrettyPrint)
               _sauUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest SubAccountsUpdate' where
               (Just AltJSON)
               _sauPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SubAccountsUpdateResource)
-                      r
-                      u
+                      rq

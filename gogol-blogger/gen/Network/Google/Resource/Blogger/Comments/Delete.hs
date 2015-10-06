@@ -170,8 +170,8 @@ instance GoogleAuth CommentsDelete' where
 
 instance GoogleRequest CommentsDelete' where
         type Rs CommentsDelete' = ()
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u CommentsDelete'{..}
+        request = requestWith bloggerRequest
+        requestWith rq CommentsDelete'{..}
           = go _cdBlogId _cdPostId _cdCommentId _cdQuotaUser
               (Just _cdPrettyPrint)
               _cdUserIP
@@ -180,7 +180,5 @@ instance GoogleRequest CommentsDelete' where
               _cdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CommentsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CommentsDeleteResource)
+                      rq

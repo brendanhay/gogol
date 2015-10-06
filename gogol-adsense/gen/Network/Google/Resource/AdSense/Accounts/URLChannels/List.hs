@@ -196,8 +196,8 @@ instance GoogleAuth AccountsURLChannelsList' where
 
 instance GoogleRequest AccountsURLChannelsList' where
         type Rs AccountsURLChannelsList' = URLChannels
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AccountsURLChannelsList'{..}
+        request = requestWith adSenseRequest
+        requestWith rq AccountsURLChannelsList'{..}
           = go _auclAccountId _auclAdClientId _auclPageToken
               _auclMaxResults
               _auclQuotaUser
@@ -208,7 +208,6 @@ instance GoogleRequest AccountsURLChannelsList' where
               _auclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsURLChannelsListResource)
-                      r
-                      u
+                      rq

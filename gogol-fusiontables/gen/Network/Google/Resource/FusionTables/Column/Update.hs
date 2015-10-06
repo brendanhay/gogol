@@ -171,8 +171,8 @@ instance GoogleAuth ColumnUpdate' where
 
 instance GoogleRequest ColumnUpdate' where
         type Rs ColumnUpdate' = Column
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u ColumnUpdate'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq ColumnUpdate'{..}
           = go _cuTableId _cuColumnId _cuQuotaUser
               (Just _cuPrettyPrint)
               _cuUserIP
@@ -182,7 +182,5 @@ instance GoogleRequest ColumnUpdate' where
               (Just AltJSON)
               _cuPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ColumnUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ColumnUpdateResource)
+                      rq

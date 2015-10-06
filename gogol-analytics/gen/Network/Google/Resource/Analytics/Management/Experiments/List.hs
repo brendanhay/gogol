@@ -205,8 +205,8 @@ instance GoogleAuth ManagementExperimentsList' where
 instance GoogleRequest ManagementExperimentsList'
          where
         type Rs ManagementExperimentsList' = Experiments
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementExperimentsList'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementExperimentsList'{..}
           = go _melAccountId _melWebPropertyId _melProFileId
               _melStartIndex
               _melMaxResults
@@ -218,7 +218,6 @@ instance GoogleRequest ManagementExperimentsList'
               _melOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementExperimentsListResource)
-                      r
-                      u
+                      rq

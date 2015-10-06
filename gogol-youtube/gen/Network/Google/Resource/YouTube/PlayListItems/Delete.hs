@@ -151,8 +151,8 @@ instance GoogleAuth PlayListItemsDelete' where
 
 instance GoogleRequest PlayListItemsDelete' where
         type Rs PlayListItemsDelete' = ()
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u PlayListItemsDelete'{..}
+        request = requestWith youTubeRequest
+        requestWith rq PlayListItemsDelete'{..}
           = go (Just _plidId) _plidQuotaUser
               (Just _plidPrettyPrint)
               _plidUserIP
@@ -161,7 +161,6 @@ instance GoogleRequest PlayListItemsDelete' where
               _plidOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlayListItemsDeleteResource)
-                      r
-                      u
+                      rq

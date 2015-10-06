@@ -174,8 +174,8 @@ instance GoogleAuth SubAccountsPatch' where
 
 instance GoogleRequest SubAccountsPatch' where
         type Rs SubAccountsPatch' = SubAccount
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SubAccountsPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq SubAccountsPatch'{..}
           = go _sapProFileId (Just _sapId) _sapQuotaUser
               (Just _sapPrettyPrint)
               _sapUserIP
@@ -185,7 +185,6 @@ instance GoogleRequest SubAccountsPatch' where
               (Just AltJSON)
               _sapPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SubAccountsPatchResource)
-                      r
-                      u
+                      rq

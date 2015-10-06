@@ -194,8 +194,8 @@ instance GoogleAuth BucketsPatch' where
 
 instance GoogleRequest BucketsPatch' where
         type Rs BucketsPatch' = Bucket
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketsPatch'{..}
+        request = requestWith storageRequest
+        requestWith rq BucketsPatch'{..}
           = go _bpBucket _bpIfMetagenerationMatch
               _bpIfMetagenerationNotMatch
               _bpProjection
@@ -208,7 +208,5 @@ instance GoogleRequest BucketsPatch' where
               (Just AltJSON)
               _bpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy BucketsPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy BucketsPatchResource)
+                      rq

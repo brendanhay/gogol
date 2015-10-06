@@ -16,7 +16,7 @@
 module Network.Google.GamesManagement.Types
     (
     -- * Service URL
-      gamesManagementURL
+      gamesManagementRequest
 
     -- * GamesPlayerExperienceInfoResource
     , GamesPlayerExperienceInfoResource
@@ -127,9 +127,8 @@ import           Network.Google.GamesManagement.Types.Product
 import           Network.Google.GamesManagement.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1management' of the Google Play Game Services Management API.
-gamesManagementURL :: BaseUrl
-gamesManagementURL
-  = BaseUrl Https
-      "https://www.googleapis.com/games/v1management/"
-      443
+-- | Default request referring to version 'v1management' of the Google Play Game Services Management API.
+gamesManagementRequest :: RequestBuilder
+gamesManagementRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "games/v1management/"

@@ -151,8 +151,8 @@ instance GoogleAuth AssetsPermissionsList' where
 instance GoogleRequest AssetsPermissionsList' where
         type Rs AssetsPermissionsList' =
              PermissionsListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u AssetsPermissionsList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq AssetsPermissionsList'{..}
           = go _aplId _aplQuotaUser (Just _aplPrettyPrint)
               _aplUserIP
               _aplFields
@@ -160,7 +160,6 @@ instance GoogleRequest AssetsPermissionsList' where
               _aplOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AssetsPermissionsListResource)
-                      r
-                      u
+                      rq

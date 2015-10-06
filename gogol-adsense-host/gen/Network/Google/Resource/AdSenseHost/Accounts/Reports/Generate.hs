@@ -269,8 +269,8 @@ instance GoogleAuth AccountsReportsGenerate' where
 
 instance GoogleRequest AccountsReportsGenerate' where
         type Rs AccountsReportsGenerate' = Report
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AccountsReportsGenerate'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq AccountsReportsGenerate'{..}
           = go _argAccountId (Just _argStartDate)
               (Just _argEndDate)
               (_argDimension ^. _Default)
@@ -288,7 +288,6 @@ instance GoogleRequest AccountsReportsGenerate' where
               _argOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsReportsGenerateResource)
-                      r
-                      u
+                      rq

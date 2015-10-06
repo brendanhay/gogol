@@ -163,8 +163,8 @@ instance GoogleAuth MetricDescriptorsDelete' where
 instance GoogleRequest MetricDescriptorsDelete' where
         type Rs MetricDescriptorsDelete' =
              DeleteMetricDescriptorResponse
-        request = requestWithRoute defReq monitoringURL
-        requestWithRoute r u MetricDescriptorsDelete'{..}
+        request = requestWith monitoringRequest
+        requestWith rq MetricDescriptorsDelete'{..}
           = go _mddProject _mddMetric _mddQuotaUser
               (Just _mddPrettyPrint)
               _mddUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest MetricDescriptorsDelete' where
               _mddOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MetricDescriptorsDeleteResource)
-                      r
-                      u
+                      rq

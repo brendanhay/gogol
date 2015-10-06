@@ -163,8 +163,8 @@ instance GoogleAuth PlacementGroupsInsert' where
 
 instance GoogleRequest PlacementGroupsInsert' where
         type Rs PlacementGroupsInsert' = PlacementGroup
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementGroupsInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PlacementGroupsInsert'{..}
           = go _pgiProFileId _pgiQuotaUser
               (Just _pgiPrettyPrint)
               _pgiUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest PlacementGroupsInsert' where
               (Just AltJSON)
               _pgiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlacementGroupsInsertResource)
-                      r
-                      u
+                      rq

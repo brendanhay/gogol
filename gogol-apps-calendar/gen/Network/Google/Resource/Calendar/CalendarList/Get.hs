@@ -155,8 +155,8 @@ instance GoogleAuth CalendarListGet' where
 
 instance GoogleRequest CalendarListGet' where
         type Rs CalendarListGet' = CalendarListEntry
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarListGet'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq CalendarListGet'{..}
           = go _clgCalendarId _clgQuotaUser
               (Just _clgPrettyPrint)
               _clgUserIP
@@ -165,7 +165,6 @@ instance GoogleRequest CalendarListGet' where
               _clgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CalendarListGetResource)
-                      r
-                      u
+                      rq

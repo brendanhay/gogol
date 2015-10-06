@@ -205,9 +205,8 @@ instance GoogleAuth OnboardingListCategoryVolumes'
 instance GoogleRequest OnboardingListCategoryVolumes'
          where
         type Rs OnboardingListCategoryVolumes' = Volume2
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u
-          OnboardingListCategoryVolumes'{..}
+        request = requestWith booksRequest
+        requestWith rq OnboardingListCategoryVolumes'{..}
           = go _olcvLocale _olcvMaxAllowedMaturityRating
               (_olcvCategoryId ^. _Default)
               _olcvPageToken
@@ -220,8 +219,7 @@ instance GoogleRequest OnboardingListCategoryVolumes'
               _olcvOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy OnboardingListCategoryVolumesResource)
-                      r
-                      u
+                      rq

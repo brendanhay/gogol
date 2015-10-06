@@ -175,8 +175,8 @@ instance GoogleAuth DatasetsUpdate' where
 
 instance GoogleRequest DatasetsUpdate' where
         type Rs DatasetsUpdate' = Dataset
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u DatasetsUpdate'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq DatasetsUpdate'{..}
           = go _duProjectId _duDatasetId _duQuotaUser
               (Just _duPrettyPrint)
               _duUserIP
@@ -186,7 +186,5 @@ instance GoogleRequest DatasetsUpdate' where
               (Just AltJSON)
               _duPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DatasetsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DatasetsUpdateResource)
+                      rq

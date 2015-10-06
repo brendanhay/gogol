@@ -178,8 +178,8 @@ instance GoogleRequest InstanceGroupManagersGet'
          where
         type Rs InstanceGroupManagersGet' =
              InstanceGroupManager
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceGroupManagersGet'{..}
+        request = requestWith computeRequest
+        requestWith rq InstanceGroupManagersGet'{..}
           = go _igmgProject _igmgZone _igmgInstanceGroupManager
               _igmgQuotaUser
               (Just _igmgPrettyPrint)
@@ -189,7 +189,6 @@ instance GoogleRequest InstanceGroupManagersGet'
               _igmgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstanceGroupManagersGetResource)
-                      r
-                      u
+                      rq

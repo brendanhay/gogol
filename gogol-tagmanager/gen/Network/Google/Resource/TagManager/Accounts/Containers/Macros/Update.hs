@@ -205,9 +205,8 @@ instance GoogleAuth AccountsContainersMacrosUpdate'
 instance GoogleRequest
          AccountsContainersMacrosUpdate' where
         type Rs AccountsContainersMacrosUpdate' = Macro
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersMacrosUpdate'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersMacrosUpdate'{..}
           = go _acmuAccountId _acmuContainerId _acmuMacroId
               _acmuFingerprint
               _acmuQuotaUser
@@ -219,8 +218,7 @@ instance GoogleRequest
               (Just AltJSON)
               _acmuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersMacrosUpdateResource)
-                      r
-                      u
+                      rq

@@ -175,8 +175,8 @@ instance GoogleAuth OrderDocumentsGet' where
 
 instance GoogleRequest OrderDocumentsGet' where
         type Rs OrderDocumentsGet' = OrderDocument
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u OrderDocumentsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq OrderDocumentsGet'{..}
           = go _odgProFileId _odgProjectId _odgId _odgQuotaUser
               (Just _odgPrettyPrint)
               _odgUserIP
@@ -185,7 +185,6 @@ instance GoogleRequest OrderDocumentsGet' where
               _odgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OrderDocumentsGetResource)
-                      r
-                      u
+                      rq

@@ -16,7 +16,7 @@
 module Network.Google.BigQuery.Types
     (
     -- * Service URL
-      bigQueryURL
+      bigQueryRequest
 
     -- * JobReference
     , JobReference
@@ -462,9 +462,8 @@ import           Network.Google.BigQuery.Types.Product
 import           Network.Google.BigQuery.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v2' of the BigQuery API.
-bigQueryURL :: BaseUrl
-bigQueryURL
-  = BaseUrl Https
-      "https://www.googleapis.com/bigquery/v2/"
-      443
+-- | Default request referring to version 'v2' of the BigQuery API.
+bigQueryRequest :: RequestBuilder
+bigQueryRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "bigquery/v2/"

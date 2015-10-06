@@ -239,9 +239,8 @@ instance GoogleRequest
          DebuggerDebuggeesBreakpointsGet' where
         type Rs DebuggerDebuggeesBreakpointsGet' =
              GetBreakpointResponse
-        request = requestWithRoute defReq debuggerURL
-        requestWithRoute r u
-          DebuggerDebuggeesBreakpointsGet'{..}
+        request = requestWith debuggerRequest
+        requestWith rq DebuggerDebuggeesBreakpointsGet'{..}
           = go _ddbgDebuggeeId _ddbgBreakpointId _ddbgXgafv
               _ddbgUploadProtocol
               (Just _ddbgPp)
@@ -256,8 +255,7 @@ instance GoogleRequest
               _ddbgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy DebuggerDebuggeesBreakpointsGetResource)
-                      r
-                      u
+                      rq

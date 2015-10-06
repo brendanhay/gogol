@@ -334,8 +334,8 @@ instance GoogleRequest FloodlightActivitiesList'
          where
         type Rs FloodlightActivitiesList' =
              FloodlightActivitiesListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FloodlightActivitiesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FloodlightActivitiesList'{..}
           = go _falProFileId _falTagString
               _falFloodlightActivityGroupTagString
               _falFloodlightConfigurationId
@@ -357,7 +357,6 @@ instance GoogleRequest FloodlightActivitiesList'
               _falOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy FloodlightActivitiesListResource)
-                      r
-                      u
+                      rq

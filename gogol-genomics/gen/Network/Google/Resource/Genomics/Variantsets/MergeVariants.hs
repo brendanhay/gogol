@@ -175,8 +175,8 @@ instance GoogleAuth VariantsetsMergeVariants' where
 instance GoogleRequest VariantsetsMergeVariants'
          where
         type Rs VariantsetsMergeVariants' = ()
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsetsMergeVariants'{..}
+        request = requestWith genomicsRequest
+        requestWith rq VariantsetsMergeVariants'{..}
           = go _vmvVariantSetId _vmvQuotaUser
               (Just _vmvPrettyPrint)
               _vmvUserIP
@@ -186,7 +186,6 @@ instance GoogleRequest VariantsetsMergeVariants'
               (Just AltJSON)
               _vmvPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VariantsetsMergeVariantsResource)
-                      r
-                      u
+                      rq

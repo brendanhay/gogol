@@ -237,8 +237,8 @@ instance GoogleAuth ProjectsSubscriptionsPull' where
 instance GoogleRequest ProjectsSubscriptionsPull'
          where
         type Rs ProjectsSubscriptionsPull' = PullResponse
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsSubscriptionsPull'{..}
+        request = requestWith pubSubRequest
+        requestWith rq ProjectsSubscriptionsPull'{..}
           = go _pspSubscription _pspXgafv _pspUploadProtocol
               (Just _pspPp)
               _pspAccessToken
@@ -253,7 +253,6 @@ instance GoogleRequest ProjectsSubscriptionsPull'
               (Just AltJSON)
               _pspPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsSubscriptionsPullResource)
-                      r
-                      u
+                      rq

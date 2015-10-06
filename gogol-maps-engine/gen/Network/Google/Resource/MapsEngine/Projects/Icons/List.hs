@@ -177,8 +177,8 @@ instance GoogleAuth ProjectsIconsList' where
 
 instance GoogleRequest ProjectsIconsList' where
         type Rs ProjectsIconsList' = IconsListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u ProjectsIconsList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq ProjectsIconsList'{..}
           = go _pilProjectId _pilPageToken _pilMaxResults
               _pilQuotaUser
               (Just _pilPrettyPrint)
@@ -188,7 +188,6 @@ instance GoogleRequest ProjectsIconsList' where
               _pilOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsIconsListResource)
-                      r
-                      u
+                      rq

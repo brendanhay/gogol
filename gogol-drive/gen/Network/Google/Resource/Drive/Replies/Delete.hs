@@ -175,8 +175,8 @@ instance GoogleAuth RepliesDelete' where
 
 instance GoogleRequest RepliesDelete' where
         type Rs RepliesDelete' = ()
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u RepliesDelete'{..}
+        request = requestWith driveRequest
+        requestWith rq RepliesDelete'{..}
           = go _rddFileId _rddCommentId _rddReplyId
               _rddQuotaUser
               (Just _rddPrettyPrint)
@@ -186,7 +186,5 @@ instance GoogleRequest RepliesDelete' where
               _rddOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy RepliesDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RepliesDeleteResource)
+                      rq

@@ -190,8 +190,8 @@ instance GoogleAuth EntitlementsList' where
 
 instance GoogleRequest EntitlementsList' where
         type Rs EntitlementsList' = EntitlementsListResponse
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EntitlementsList'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EntitlementsList'{..}
           = go _elPackageName _elToken _elStartIndex
               _elProductId
               _elMaxResults
@@ -203,7 +203,6 @@ instance GoogleRequest EntitlementsList' where
               _elOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EntitlementsListResource)
-                      r
-                      u
+                      rq

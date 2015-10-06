@@ -176,8 +176,8 @@ instance GoogleAuth RastersParentsList' where
 
 instance GoogleRequest RastersParentsList' where
         type Rs RastersParentsList' = ParentsListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u RastersParentsList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq RastersParentsList'{..}
           = go _rasId _rasPageToken _rasMaxResults
               _rasQuotaUser
               (Just _rasPrettyPrint)
@@ -187,7 +187,6 @@ instance GoogleRequest RastersParentsList' where
               _rasOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RastersParentsListResource)
-                      r
-                      u
+                      rq

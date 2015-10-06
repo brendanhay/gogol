@@ -174,8 +174,8 @@ instance GoogleAuth TablesDelete' where
 
 instance GoogleRequest TablesDelete' where
         type Rs TablesDelete' = ()
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u TablesDelete'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq TablesDelete'{..}
           = go _tdProjectId _tdDatasetId _tdTableId
               _tdQuotaUser
               (Just _tdPrettyPrint)
@@ -185,7 +185,5 @@ instance GoogleRequest TablesDelete' where
               _tdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TablesDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TablesDeleteResource)
+                      rq

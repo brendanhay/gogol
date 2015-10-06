@@ -186,8 +186,8 @@ instance GoogleAuth CloudLoadingAddBook' where
 instance GoogleRequest CloudLoadingAddBook' where
         type Rs CloudLoadingAddBook' =
              BooksCloudLoadingResource
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u CloudLoadingAddBook'{..}
+        request = requestWith booksRequest
+        requestWith rq CloudLoadingAddBook'{..}
           = go _clabMimeType _clabUploadClientToken _clabName
               _clabDriveDocumentId
               _clabQuotaUser
@@ -198,7 +198,6 @@ instance GoogleRequest CloudLoadingAddBook' where
               _clabOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CloudLoadingAddBookResource)
-                      r
-                      u
+                      rq

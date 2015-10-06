@@ -176,8 +176,8 @@ instance GoogleAuth ContentCategoriesPatch' where
 
 instance GoogleRequest ContentCategoriesPatch' where
         type Rs ContentCategoriesPatch' = ContentCategory
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ContentCategoriesPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ContentCategoriesPatch'{..}
           = go _ccpProFileId (Just _ccpId) _ccpQuotaUser
               (Just _ccpPrettyPrint)
               _ccpUserIP
@@ -187,7 +187,6 @@ instance GoogleRequest ContentCategoriesPatch' where
               (Just AltJSON)
               _ccpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ContentCategoriesPatchResource)
-                      r
-                      u
+                      rq

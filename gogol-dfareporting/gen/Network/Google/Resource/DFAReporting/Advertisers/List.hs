@@ -306,8 +306,8 @@ instance GoogleAuth AdvertisersList' where
 
 instance GoogleRequest AdvertisersList' where
         type Rs AdvertisersList' = AdvertisersListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdvertisersList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AdvertisersList'{..}
           = go _allProFileId _allStatus _allOnlyParent
               _allSearchString
               (_allIds ^. _Default)
@@ -327,7 +327,6 @@ instance GoogleRequest AdvertisersList' where
               _allOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AdvertisersListResource)
-                      r
-                      u
+                      rq

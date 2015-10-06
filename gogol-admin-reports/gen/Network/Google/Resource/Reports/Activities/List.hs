@@ -255,8 +255,8 @@ instance GoogleAuth ActivitiesList' where
 
 instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = Activities
-        request = requestWithRoute defReq reportsURL
-        requestWithRoute r u ActivitiesList'{..}
+        request = requestWith reportsRequest
+        requestWith rq ActivitiesList'{..}
           = go _alUserKey _alApplicationName _alStartTime
               _alFilters
               _alCustomerId
@@ -273,7 +273,5 @@ instance GoogleRequest ActivitiesList' where
               _alOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ActivitiesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ActivitiesListResource)
+                      rq

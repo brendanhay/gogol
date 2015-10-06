@@ -197,8 +197,8 @@ instance GoogleAuth ChildrenList' where
 
 instance GoogleRequest ChildrenList' where
         type Rs ChildrenList' = ChildList
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u ChildrenList'{..}
+        request = requestWith driveRequest
+        requestWith rq ChildrenList'{..}
           = go _clFolderId _clOrderBy _clQ _clPageToken
               (Just _clMaxResults)
               _clQuotaUser
@@ -209,7 +209,5 @@ instance GoogleRequest ChildrenList' where
               _clOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ChildrenListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ChildrenListResource)
+                      rq

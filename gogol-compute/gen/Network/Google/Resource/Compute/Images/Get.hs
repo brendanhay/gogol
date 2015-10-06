@@ -161,8 +161,8 @@ instance GoogleAuth ImagesGet' where
 
 instance GoogleRequest ImagesGet' where
         type Rs ImagesGet' = Image
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u ImagesGet'{..}
+        request = requestWith computeRequest
+        requestWith rq ImagesGet'{..}
           = go _imaProject _imaImage _imaQuotaUser
               (Just _imaPrettyPrint)
               _imaUserIP
@@ -171,6 +171,4 @@ instance GoogleRequest ImagesGet' where
               _imaOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ImagesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ImagesGetResource) rq

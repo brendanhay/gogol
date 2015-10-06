@@ -16,7 +16,7 @@
 module Network.Google.Genomics.Types
     (
     -- * Service URL
-      genomicsURL
+      genomicsRequest
 
     -- * FastqMetadata
     , FastqMetadata
@@ -723,9 +723,8 @@ import           Network.Google.Genomics.Types.Product
 import           Network.Google.Genomics.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1beta2' of the Genomics API.
-genomicsURL :: BaseUrl
-genomicsURL
-  = BaseUrl Https
-      "https://www.googleapis.com/genomics/v1beta2/"
-      443
+-- | Default request referring to version 'v1beta2' of the Genomics API.
+genomicsRequest :: RequestBuilder
+genomicsRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "genomics/v1beta2/"

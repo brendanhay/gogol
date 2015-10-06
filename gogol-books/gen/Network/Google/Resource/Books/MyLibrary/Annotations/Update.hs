@@ -176,8 +176,8 @@ instance GoogleAuth MyLibraryAnnotationsUpdate' where
 instance GoogleRequest MyLibraryAnnotationsUpdate'
          where
         type Rs MyLibraryAnnotationsUpdate' = Annotation
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u MyLibraryAnnotationsUpdate'{..}
+        request = requestWith booksRequest
+        requestWith rq MyLibraryAnnotationsUpdate'{..}
           = go _mlauAnnotationId _mlauSource _mlauQuotaUser
               (Just _mlauPrettyPrint)
               _mlauUserIP
@@ -187,7 +187,6 @@ instance GoogleRequest MyLibraryAnnotationsUpdate'
               (Just AltJSON)
               _mlauPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MyLibraryAnnotationsUpdateResource)
-                      r
-                      u
+                      rq

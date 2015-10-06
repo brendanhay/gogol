@@ -422,8 +422,8 @@ instance GoogleAuth EventsWatch' where
 
 instance GoogleRequest EventsWatch' where
         type Rs EventsWatch' = Channel
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsWatch'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq EventsWatch'{..}
           = go _ewCalendarId _ewSyncToken _ewTimeMin _ewOrderBy
               _ewSingleEvents
               (_ewPrivateExtendedProperty ^. _Default)
@@ -448,7 +448,4 @@ instance GoogleRequest EventsWatch' where
               (Just AltJSON)
               _ewPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EventsWatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EventsWatchResource) rq

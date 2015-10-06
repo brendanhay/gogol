@@ -186,9 +186,8 @@ instance GoogleAuth InstallsGet' where
 
 instance GoogleRequest InstallsGet' where
         type Rs InstallsGet' = Install
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u InstallsGet'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq InstallsGet'{..}
           = go _igEnterpriseId _igUserId _igDeviceId
               _igInstallId
               _igQuotaUser
@@ -199,7 +198,4 @@ instance GoogleRequest InstallsGet' where
               _igOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy InstallsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy InstallsGetResource) rq

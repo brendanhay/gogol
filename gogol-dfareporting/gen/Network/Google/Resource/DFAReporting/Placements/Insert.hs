@@ -159,8 +159,8 @@ instance GoogleAuth PlacementsInsert' where
 
 instance GoogleRequest PlacementsInsert' where
         type Rs PlacementsInsert' = Placement
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementsInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PlacementsInsert'{..}
           = go _piProFileId _piQuotaUser (Just _piPrettyPrint)
               _piUserIP
               _piFields
@@ -169,7 +169,6 @@ instance GoogleRequest PlacementsInsert' where
               (Just AltJSON)
               _piPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlacementsInsertResource)
-                      r
-                      u
+                      rq

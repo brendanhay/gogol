@@ -329,8 +329,8 @@ instance GoogleRequest LayersVolumeAnnotationsList'
          where
         type Rs LayersVolumeAnnotationsList' =
              Volumeannotations
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u LayersVolumeAnnotationsList'{..}
+        request = requestWith booksRequest
+        requestWith rq LayersVolumeAnnotationsList'{..}
           = go _lvalVolumeId _lvalLayerId
               (Just _lvalContentVersion)
               _lvalStartOffset
@@ -353,7 +353,6 @@ instance GoogleRequest LayersVolumeAnnotationsList'
               _lvalOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LayersVolumeAnnotationsListResource)
-                      r
-                      u
+                      rq

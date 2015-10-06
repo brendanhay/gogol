@@ -151,8 +151,8 @@ instance GoogleAuth ProjectsClustersList' where
 instance GoogleRequest ProjectsClustersList' where
         type Rs ProjectsClustersList' =
              ListAggregatedClustersResponse
-        request = requestWithRoute defReq containerURL
-        requestWithRoute r u ProjectsClustersList'{..}
+        request = requestWith containerRequest
+        requestWith rq ProjectsClustersList'{..}
           = go _pclProjectId _pclQuotaUser
               (Just _pclPrettyPrint)
               _pclUserIP
@@ -161,7 +161,6 @@ instance GoogleRequest ProjectsClustersList' where
               _pclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsClustersListResource)
-                      r
-                      u
+                      rq

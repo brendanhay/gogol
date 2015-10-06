@@ -196,8 +196,8 @@ instance GoogleAuth InstanceGroupManagersResize'
 instance GoogleRequest InstanceGroupManagersResize'
          where
         type Rs InstanceGroupManagersResize' = Operation
-        request = requestWithRoute defReq replicaPoolURL
-        requestWithRoute r u InstanceGroupManagersResize'{..}
+        request = requestWith replicaPoolRequest
+        requestWith rq InstanceGroupManagersResize'{..}
           = go _igmrProject _igmrZone _igmrInstanceGroupManager
               (Just _igmrSize)
               _igmrQuotaUser
@@ -208,7 +208,6 @@ instance GoogleRequest InstanceGroupManagersResize'
               _igmrOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstanceGroupManagersResizeResource)
-                      r
-                      u
+                      rq

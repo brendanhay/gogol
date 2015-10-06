@@ -167,8 +167,8 @@ instance GoogleAuth GroupsUpdate' where
 
 instance GoogleRequest GroupsUpdate' where
         type Rs GroupsUpdate' = Group
-        request = requestWithRoute defReq youTubeAnalyticsURL
-        requestWithRoute r u GroupsUpdate'{..}
+        request = requestWith youTubeAnalyticsRequest
+        requestWith rq GroupsUpdate'{..}
           = go _guOnBehalfOfContentOwner _guQuotaUser
               (Just _guPrettyPrint)
               _guUserIP
@@ -178,7 +178,5 @@ instance GoogleRequest GroupsUpdate' where
               (Just AltJSON)
               _guPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy GroupsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy GroupsUpdateResource)
+                      rq

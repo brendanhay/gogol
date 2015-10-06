@@ -161,8 +161,8 @@ instance GoogleAuth FilesGenerateIds' where
 
 instance GoogleRequest FilesGenerateIds' where
         type Rs FilesGenerateIds' = GeneratedIds
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesGenerateIds'{..}
+        request = requestWith driveRequest
+        requestWith rq FilesGenerateIds'{..}
           = go (Just _fgiSpace) (Just _fgiMaxResults)
               _fgiQuotaUser
               (Just _fgiPrettyPrint)
@@ -172,7 +172,6 @@ instance GoogleRequest FilesGenerateIds' where
               _fgiOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy FilesGenerateIdsResource)
-                      r
-                      u
+                      rq

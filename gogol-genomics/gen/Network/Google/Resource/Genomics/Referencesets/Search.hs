@@ -154,8 +154,8 @@ instance GoogleAuth ReferencesetsSearch' where
 instance GoogleRequest ReferencesetsSearch' where
         type Rs ReferencesetsSearch' =
              SearchReferenceSetsResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReferencesetsSearch'{..}
+        request = requestWith genomicsRequest
+        requestWith rq ReferencesetsSearch'{..}
           = go _rssQuotaUser (Just _rssPrettyPrint) _rssUserIP
               _rssFields
               _rssKey
@@ -163,7 +163,6 @@ instance GoogleRequest ReferencesetsSearch' where
               (Just AltJSON)
               _rssPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReferencesetsSearchResource)
-                      r
-                      u
+                      rq

@@ -173,8 +173,8 @@ instance GoogleAuth TrainedModelsList' where
 
 instance GoogleRequest TrainedModelsList' where
         type Rs TrainedModelsList' = List
-        request = requestWithRoute defReq predictionURL
-        requestWithRoute r u TrainedModelsList'{..}
+        request = requestWith predictionRequest
+        requestWith rq TrainedModelsList'{..}
           = go _tmlProject _tmlPageToken _tmlMaxResults
               _tmlQuotaUser
               (Just _tmlPrettyPrint)
@@ -184,7 +184,6 @@ instance GoogleRequest TrainedModelsList' where
               _tmlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TrainedModelsListResource)
-                      r
-                      u
+                      rq

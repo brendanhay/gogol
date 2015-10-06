@@ -147,8 +147,8 @@ instance GoogleAuth FilesDelete' where
 
 instance GoogleRequest FilesDelete' where
         type Rs FilesDelete' = ()
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesDelete'{..}
+        request = requestWith driveRequest
+        requestWith rq FilesDelete'{..}
           = go _fdFileId _fdQuotaUser (Just _fdPrettyPrint)
               _fdUserIP
               _fdFields
@@ -156,7 +156,4 @@ instance GoogleRequest FilesDelete' where
               _fdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy FilesDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy FilesDeleteResource) rq

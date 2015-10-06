@@ -158,9 +158,8 @@ instance GoogleAuth EnterprisesEnroll' where
 
 instance GoogleRequest EnterprisesEnroll' where
         type Rs EnterprisesEnroll' = Enterprise
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u EnterprisesEnroll'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq EnterprisesEnroll'{..}
           = go (Just _eeToken) _eeQuotaUser
               (Just _eePrettyPrint)
               _eeUserIP
@@ -170,7 +169,6 @@ instance GoogleRequest EnterprisesEnroll' where
               (Just AltJSON)
               _eePayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EnterprisesEnrollResource)
-                      r
-                      u
+                      rq

@@ -161,8 +161,8 @@ instance GoogleAuth DatasetsCommit' where
 
 instance GoogleRequest DatasetsCommit' where
         type Rs DatasetsCommit' = CommitResponse
-        request = requestWithRoute defReq datastoreURL
-        requestWithRoute r u DatasetsCommit'{..}
+        request = requestWith datastoreRequest
+        requestWith rq DatasetsCommit'{..}
           = go _dcDatasetId _dcQuotaUser (Just _dcPrettyPrint)
               _dcUserIP
               _dcFields
@@ -171,7 +171,5 @@ instance GoogleRequest DatasetsCommit' where
               (Just AltJSON)
               _dcPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DatasetsCommitResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DatasetsCommitResource)
+                      rq

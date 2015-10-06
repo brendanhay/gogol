@@ -156,8 +156,8 @@ instance GoogleAuth SnapshotsGet' where
 
 instance GoogleRequest SnapshotsGet' where
         type Rs SnapshotsGet' = Snapshot
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u SnapshotsGet'{..}
+        request = requestWith gamesRequest
+        requestWith rq SnapshotsGet'{..}
           = go _sSnapshotId _sLanguage _sQuotaUser
               (Just _sPrettyPrint)
               _sUserIP
@@ -166,7 +166,5 @@ instance GoogleRequest SnapshotsGet' where
               _sOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SnapshotsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SnapshotsGetResource)
+                      rq

@@ -21,7 +21,7 @@ module Network.Google.Fonts
     -- * API
       FontsAPI
     , fontsAPI
-    , fontsURL
+    , fontsRequest
 
     -- * Service Methods
 

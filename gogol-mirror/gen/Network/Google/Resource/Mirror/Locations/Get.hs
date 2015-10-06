@@ -145,8 +145,8 @@ instance GoogleAuth LocationsGet' where
 
 instance GoogleRequest LocationsGet' where
         type Rs LocationsGet' = Location
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u LocationsGet'{..}
+        request = requestWith mirrorRequest
+        requestWith rq LocationsGet'{..}
           = go _lgId _lgQuotaUser (Just _lgPrettyPrint)
               _lgUserIP
               _lgFields
@@ -154,7 +154,5 @@ instance GoogleRequest LocationsGet' where
               _lgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy LocationsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy LocationsGetResource)
+                      rq

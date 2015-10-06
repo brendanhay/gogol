@@ -22,7 +22,7 @@ module Network.Google.Discovery
     -- * API
       DiscoveryAPI
     , discoveryAPI
-    , discoveryURL
+    , discoveryRequest
 
     -- * Service Methods
 

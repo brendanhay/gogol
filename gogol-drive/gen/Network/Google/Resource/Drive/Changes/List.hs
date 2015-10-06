@@ -211,8 +211,8 @@ instance GoogleAuth ChangesList' where
 
 instance GoogleRequest ChangesList' where
         type Rs ChangesList' = ChangeList
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u ChangesList'{..}
+        request = requestWith driveRequest
+        requestWith rq ChangesList'{..}
           = go (Just _chaIncludeSubscribed) _chaStartChangeId
               _chaSpaces
               _chaPageToken
@@ -226,7 +226,4 @@ instance GoogleRequest ChangesList' where
               _chaOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ChangesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ChangesListResource) rq

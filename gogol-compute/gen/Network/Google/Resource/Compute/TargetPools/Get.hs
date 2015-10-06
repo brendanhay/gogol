@@ -175,8 +175,8 @@ instance GoogleAuth TargetPoolsGet' where
 
 instance GoogleRequest TargetPoolsGet' where
         type Rs TargetPoolsGet' = TargetPool
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsGet'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetPoolsGet'{..}
           = go _tpgProject _tpgRegion _tpgTargetPool
               _tpgQuotaUser
               (Just _tpgPrettyPrint)
@@ -186,7 +186,5 @@ instance GoogleRequest TargetPoolsGet' where
               _tpgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TargetPoolsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TargetPoolsGetResource)
+                      rq

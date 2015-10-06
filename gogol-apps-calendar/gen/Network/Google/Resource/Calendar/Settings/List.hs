@@ -177,8 +177,8 @@ instance GoogleAuth SettingsList' where
 
 instance GoogleRequest SettingsList' where
         type Rs SettingsList' = Settings
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u SettingsList'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq SettingsList'{..}
           = go _slSyncToken _slPageToken _slMaxResults
               _slQuotaUser
               (Just _slPrettyPrint)
@@ -188,7 +188,5 @@ instance GoogleRequest SettingsList' where
               _slOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SettingsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SettingsListResource)
+                      rq

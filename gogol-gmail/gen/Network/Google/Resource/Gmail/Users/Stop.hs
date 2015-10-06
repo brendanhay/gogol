@@ -146,8 +146,8 @@ instance GoogleAuth UsersStop' where
 
 instance GoogleRequest UsersStop' where
         type Rs UsersStop' = ()
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersStop'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersStop'{..}
           = go _usUserId _usQuotaUser (Just _usPrettyPrint)
               _usUserIP
               _usFields
@@ -155,6 +155,4 @@ instance GoogleRequest UsersStop' where
               _usOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersStopResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersStopResource) rq

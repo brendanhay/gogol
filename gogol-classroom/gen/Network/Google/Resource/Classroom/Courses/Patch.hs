@@ -254,8 +254,8 @@ instance GoogleAuth CoursesPatch' where
 
 instance GoogleRequest CoursesPatch' where
         type Rs CoursesPatch' = Course
-        request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesPatch'{..}
+        request = requestWith classroomRequest
+        requestWith rq CoursesPatch'{..}
           = go _cpId _cpXgafv _cpUploadProtocol _cpUpdateMask
               (Just _cpPp)
               _cpAccessToken
@@ -270,7 +270,5 @@ instance GoogleRequest CoursesPatch' where
               (Just AltJSON)
               _cpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CoursesPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CoursesPatchResource)
+                      rq

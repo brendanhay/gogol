@@ -174,9 +174,8 @@ instance GoogleAuth RollingUpdatesGet' where
 
 instance GoogleRequest RollingUpdatesGet' where
         type Rs RollingUpdatesGet' = RollingUpdate
-        request
-          = requestWithRoute defReq replicaPoolUpdaterURL
-        requestWithRoute r u RollingUpdatesGet'{..}
+        request = requestWith replicaPoolUpdaterRequest
+        requestWith rq RollingUpdatesGet'{..}
           = go _rugProject _rugZone _rugRollingUpdate
               _rugQuotaUser
               (Just _rugPrettyPrint)
@@ -186,7 +185,6 @@ instance GoogleRequest RollingUpdatesGet' where
               _rugOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RollingUpdatesGetResource)
-                      r
-                      u
+                      rq

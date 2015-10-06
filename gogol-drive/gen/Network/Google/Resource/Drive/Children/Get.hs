@@ -163,8 +163,8 @@ instance GoogleAuth ChildrenGet' where
 
 instance GoogleRequest ChildrenGet' where
         type Rs ChildrenGet' = ChildReference
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u ChildrenGet'{..}
+        request = requestWith driveRequest
+        requestWith rq ChildrenGet'{..}
           = go _cggFolderId _cggChildId _cggQuotaUser
               (Just _cggPrettyPrint)
               _cggUserIP
@@ -173,7 +173,4 @@ instance GoogleRequest ChildrenGet' where
               _cggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ChildrenGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ChildrenGetResource) rq

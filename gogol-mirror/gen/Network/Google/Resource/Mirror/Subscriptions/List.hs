@@ -138,15 +138,14 @@ instance GoogleAuth SubscriptionsList' where
 instance GoogleRequest SubscriptionsList' where
         type Rs SubscriptionsList' =
              SubscriptionsListResponse
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u SubscriptionsList'{..}
+        request = requestWith mirrorRequest
+        requestWith rq SubscriptionsList'{..}
           = go _slQuotaUser (Just _slPrettyPrint) _slUserIP
               _slFields
               _slKey
               _slOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SubscriptionsListResource)
-                      r
-                      u
+                      rq

@@ -147,9 +147,8 @@ instance GoogleAuth EnterprisesGet' where
 
 instance GoogleRequest EnterprisesGet' where
         type Rs EnterprisesGet' = Enterprise
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u EnterprisesGet'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq EnterprisesGet'{..}
           = go _egEnterpriseId _egQuotaUser
               (Just _egPrettyPrint)
               _egUserIP
@@ -158,7 +157,5 @@ instance GoogleRequest EnterprisesGet' where
               _egOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EnterprisesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EnterprisesGetResource)
+                      rq

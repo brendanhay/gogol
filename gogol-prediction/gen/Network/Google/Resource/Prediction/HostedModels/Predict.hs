@@ -175,8 +175,8 @@ instance GoogleAuth HostedModelsPredict' where
 
 instance GoogleRequest HostedModelsPredict' where
         type Rs HostedModelsPredict' = Output
-        request = requestWithRoute defReq predictionURL
-        requestWithRoute r u HostedModelsPredict'{..}
+        request = requestWith predictionRequest
+        requestWith rq HostedModelsPredict'{..}
           = go _hmpProject _hmpHostedModelName _hmpQuotaUser
               (Just _hmpPrettyPrint)
               _hmpUserIP
@@ -186,7 +186,6 @@ instance GoogleRequest HostedModelsPredict' where
               (Just AltJSON)
               _hmpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy HostedModelsPredictResource)
-                      r
-                      u
+                      rq

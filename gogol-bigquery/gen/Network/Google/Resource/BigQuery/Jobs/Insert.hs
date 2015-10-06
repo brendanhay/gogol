@@ -168,8 +168,8 @@ instance GoogleAuth JobsInsert' where
 
 instance GoogleRequest JobsInsert' where
         type Rs JobsInsert' = Job
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u JobsInsert'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq JobsInsert'{..}
           = go _jiProjectId _jiQuotaUser (Just _jiPrettyPrint)
               _jiUserIP
               _jiFields
@@ -179,6 +179,4 @@ instance GoogleRequest JobsInsert' where
               _jiPayload
               _jiMedia
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy JobsInsertResource) rq

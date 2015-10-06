@@ -152,8 +152,8 @@ instance GoogleAuth AnnotationSetsGet' where
 
 instance GoogleRequest AnnotationSetsGet' where
         type Rs AnnotationSetsGet' = AnnotationSet
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u AnnotationSetsGet'{..}
+        request = requestWith genomicsRequest
+        requestWith rq AnnotationSetsGet'{..}
           = go _asgAnnotationSetId _asgQuotaUser
               (Just _asgPrettyPrint)
               _asgUserIP
@@ -162,7 +162,6 @@ instance GoogleRequest AnnotationSetsGet' where
               _asgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AnnotationSetsGetResource)
-                      r
-                      u
+                      rq

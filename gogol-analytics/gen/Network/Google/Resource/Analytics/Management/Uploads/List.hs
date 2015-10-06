@@ -205,8 +205,8 @@ instance GoogleAuth ManagementUploadsList' where
 
 instance GoogleRequest ManagementUploadsList' where
         type Rs ManagementUploadsList' = Uploads
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementUploadsList'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementUploadsList'{..}
           = go _mulAccountId _mulWebPropertyId
               _mulCustomDataSourceId
               _mulStartIndex
@@ -219,7 +219,6 @@ instance GoogleRequest ManagementUploadsList' where
               _mulOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementUploadsListResource)
-                      r
-                      u
+                      rq

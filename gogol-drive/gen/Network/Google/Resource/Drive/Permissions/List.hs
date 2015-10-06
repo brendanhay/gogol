@@ -151,8 +151,8 @@ instance GoogleAuth PermissionsList' where
 
 instance GoogleRequest PermissionsList' where
         type Rs PermissionsList' = PermissionList
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u PermissionsList'{..}
+        request = requestWith driveRequest
+        requestWith rq PermissionsList'{..}
           = go _pllFileId _pllQuotaUser (Just _pllPrettyPrint)
               _pllUserIP
               _pllFields
@@ -160,7 +160,6 @@ instance GoogleRequest PermissionsList' where
               _pllOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PermissionsListResource)
-                      r
-                      u
+                      rq

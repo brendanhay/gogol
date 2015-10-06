@@ -297,9 +297,8 @@ instance GoogleRequest RasterCollectionsRastersList'
          where
         type Rs RasterCollectionsRastersList' =
              RasterCollectionsRastersListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u
-          RasterCollectionsRastersList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq RasterCollectionsRastersList'{..}
           = go _rcrlId _rcrlCreatedAfter _rcrlCreatorEmail
               _rcrlRole
               _rcrlBbox
@@ -318,7 +317,6 @@ instance GoogleRequest RasterCollectionsRastersList'
               _rcrlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RasterCollectionsRastersListResource)
-                      r
-                      u
+                      rq

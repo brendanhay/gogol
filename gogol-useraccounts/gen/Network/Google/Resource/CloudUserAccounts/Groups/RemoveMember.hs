@@ -176,8 +176,8 @@ instance GoogleAuth GroupsRemoveMember' where
 
 instance GoogleRequest GroupsRemoveMember' where
         type Rs GroupsRemoveMember' = Operation
-        request = requestWithRoute defReq userAccountsURL
-        requestWithRoute r u GroupsRemoveMember'{..}
+        request = requestWith userAccountsRequest
+        requestWith rq GroupsRemoveMember'{..}
           = go _grmProject _grmGroupName _grmQuotaUser
               (Just _grmPrettyPrint)
               _grmUserIP
@@ -187,7 +187,6 @@ instance GoogleRequest GroupsRemoveMember' where
               (Just AltJSON)
               _grmPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GroupsRemoveMemberResource)
-                      r
-                      u
+                      rq

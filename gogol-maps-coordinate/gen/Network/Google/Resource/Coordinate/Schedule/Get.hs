@@ -158,8 +158,8 @@ instance GoogleAuth ScheduleGet' where
 
 instance GoogleRequest ScheduleGet' where
         type Rs ScheduleGet' = Schedule
-        request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u ScheduleGet'{..}
+        request = requestWith mapsCoordinateRequest
+        requestWith rq ScheduleGet'{..}
           = go _sgTeamId _sgJobId _sgQuotaUser
               (Just _sgPrettyPrint)
               _sgUserIP
@@ -168,7 +168,4 @@ instance GoogleRequest ScheduleGet' where
               _sgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ScheduleGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ScheduleGetResource) rq

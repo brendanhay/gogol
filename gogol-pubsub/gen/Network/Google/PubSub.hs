@@ -22,7 +22,7 @@ module Network.Google.PubSub
     -- * API
       PubSubAPI
     , pubSubAPI
-    , pubSubURL
+    , pubSubRequest
 
     -- * Service Methods
 

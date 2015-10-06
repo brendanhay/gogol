@@ -183,8 +183,8 @@ instance GoogleAuth UsersDraftsUpdate' where
 
 instance GoogleRequest UsersDraftsUpdate' where
         type Rs UsersDraftsUpdate' = Draft
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersDraftsUpdate'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersDraftsUpdate'{..}
           = go _uduUserId _uduId _uduQuotaUser
               (Just _uduPrettyPrint)
               _uduUserIP
@@ -195,7 +195,6 @@ instance GoogleRequest UsersDraftsUpdate' where
               _uduPayload
               _uduMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersDraftsUpdateResource)
-                      r
-                      u
+                      rq

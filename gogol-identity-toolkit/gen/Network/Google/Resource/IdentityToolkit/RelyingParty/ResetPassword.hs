@@ -154,8 +154,8 @@ instance GoogleRequest RelyingPartyResetPassword'
          where
         type Rs RelyingPartyResetPassword' =
              ResetPasswordResponse
-        request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingPartyResetPassword'{..}
+        request = requestWith identityToolkitRequest
+        requestWith rq RelyingPartyResetPassword'{..}
           = go _rprpQuotaUser (Just _rprpPrettyPrint)
               _rprpUserIP
               _rprpFields
@@ -164,7 +164,6 @@ instance GoogleRequest RelyingPartyResetPassword'
               (Just AltJSON)
               _rprpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RelyingPartyResetPasswordResource)
-                      r
-                      u
+                      rq

@@ -168,10 +168,8 @@ instance GoogleRequest
          LeaderboardConfigurationsPatch' where
         type Rs LeaderboardConfigurationsPatch' =
              LeaderboardConfiguration
-        request
-          = requestWithRoute defReq gamesConfigurationURL
-        requestWithRoute r u
-          LeaderboardConfigurationsPatch'{..}
+        request = requestWith gamesConfigurationRequest
+        requestWith rq LeaderboardConfigurationsPatch'{..}
           = go _lcpLeaderboardId _lcpQuotaUser
               (Just _lcpPrettyPrint)
               _lcpUserIP
@@ -181,8 +179,7 @@ instance GoogleRequest
               (Just AltJSON)
               _lcpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy LeaderboardConfigurationsPatchResource)
-                      r
-                      u
+                      rq

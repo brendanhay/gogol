@@ -148,8 +148,8 @@ instance GoogleAuth RegionsList' where
 
 instance GoogleRequest RegionsList' where
         type Rs RegionsList' = RegionsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u RegionsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq RegionsList'{..}
           = go _rlProFileId _rlQuotaUser (Just _rlPrettyPrint)
               _rlUserIP
               _rlFields
@@ -157,7 +157,4 @@ instance GoogleRequest RegionsList' where
               _rlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy RegionsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RegionsListResource) rq

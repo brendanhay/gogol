@@ -171,9 +171,8 @@ instance GoogleRequest LayersPermissionsBatchUpdate'
          where
         type Rs LayersPermissionsBatchUpdate' =
              PermissionsBatchUpdateResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u
-          LayersPermissionsBatchUpdate'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq LayersPermissionsBatchUpdate'{..}
           = go _lpbuId _lpbuQuotaUser (Just _lpbuPrettyPrint)
               _lpbuUserIP
               _lpbuFields
@@ -182,7 +181,6 @@ instance GoogleRequest LayersPermissionsBatchUpdate'
               (Just AltJSON)
               _lpbuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LayersPermissionsBatchUpdateResource)
-                      r
-                      u
+                      rq

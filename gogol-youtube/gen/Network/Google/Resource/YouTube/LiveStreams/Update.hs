@@ -219,8 +219,8 @@ instance GoogleAuth LiveStreamsUpdate' where
 
 instance GoogleRequest LiveStreamsUpdate' where
         type Rs LiveStreamsUpdate' = LiveStream
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u LiveStreamsUpdate'{..}
+        request = requestWith youTubeRequest
+        requestWith rq LiveStreamsUpdate'{..}
           = go (Just _lsuPart) _lsuOnBehalfOfContentOwner
               _lsuOnBehalfOfContentOwnerChannel
               _lsuQuotaUser
@@ -232,7 +232,6 @@ instance GoogleRequest LiveStreamsUpdate' where
               (Just AltJSON)
               _lsuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LiveStreamsUpdateResource)
-                      r
-                      u
+                      rq

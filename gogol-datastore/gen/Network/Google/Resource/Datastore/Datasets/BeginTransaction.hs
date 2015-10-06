@@ -164,8 +164,8 @@ instance GoogleRequest DatasetsBeginTransaction'
          where
         type Rs DatasetsBeginTransaction' =
              BeginTransactionResponse
-        request = requestWithRoute defReq datastoreURL
-        requestWithRoute r u DatasetsBeginTransaction'{..}
+        request = requestWith datastoreRequest
+        requestWith rq DatasetsBeginTransaction'{..}
           = go _dbtDatasetId _dbtQuotaUser
               (Just _dbtPrettyPrint)
               _dbtUserIP
@@ -175,7 +175,6 @@ instance GoogleRequest DatasetsBeginTransaction'
               (Just AltJSON)
               _dbtPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DatasetsBeginTransactionResource)
-                      r
-                      u
+                      rq

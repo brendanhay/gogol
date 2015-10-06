@@ -193,8 +193,8 @@ instance GoogleAuth NetworksList' where
 
 instance GoogleRequest NetworksList' where
         type Rs NetworksList' = NetworkList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u NetworksList'{..}
+        request = requestWith computeRequest
+        requestWith rq NetworksList'{..}
           = go _nlProject _nlFilter _nlPageToken
               (Just _nlMaxResults)
               _nlQuotaUser
@@ -205,7 +205,5 @@ instance GoogleRequest NetworksList' where
               _nlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy NetworksListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy NetworksListResource)
+                      rq

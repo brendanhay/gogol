@@ -22,7 +22,7 @@ module Network.Google.ProximityBeacon
     -- * API
       ProximityBeaconAPI
     , proximityBeaconAPI
-    , proximityBeaconURL
+    , proximityBeaconRequest
 
     -- * Service Methods
 

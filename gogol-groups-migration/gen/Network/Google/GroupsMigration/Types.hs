@@ -16,7 +16,7 @@
 module Network.Google.GroupsMigration.Types
     (
     -- * Service URL
-      groupsMigrationURL
+      groupsMigrationRequest
 
     -- * Groups
     , Groups
@@ -29,9 +29,8 @@ import           Network.Google.GroupsMigration.Types.Product
 import           Network.Google.GroupsMigration.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Groups Migration API.
-groupsMigrationURL :: BaseUrl
-groupsMigrationURL
-  = BaseUrl Https
-      "https://www.googleapis.com/groups/v1/groups/"
-      443
+-- | Default request referring to version 'v1' of the Groups Migration API.
+groupsMigrationRequest :: RequestBuilder
+groupsMigrationRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "groups/v1/groups/"

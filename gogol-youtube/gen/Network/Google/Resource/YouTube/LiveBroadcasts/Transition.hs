@@ -242,8 +242,8 @@ instance GoogleAuth LiveBroadcastsTransition' where
 instance GoogleRequest LiveBroadcastsTransition'
          where
         type Rs LiveBroadcastsTransition' = LiveBroadcast
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u LiveBroadcastsTransition'{..}
+        request = requestWith youTubeRequest
+        requestWith rq LiveBroadcastsTransition'{..}
           = go (Just _lbtBroadcastStatus) (Just _lbtId)
               (Just _lbtPart)
               _lbtOnBehalfOfContentOwner
@@ -256,7 +256,6 @@ instance GoogleRequest LiveBroadcastsTransition'
               _lbtOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LiveBroadcastsTransitionResource)
-                      r
-                      u
+                      rq

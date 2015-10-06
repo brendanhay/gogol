@@ -163,8 +163,8 @@ instance GoogleAuth AccountsPermissionsGet' where
 
 instance GoogleRequest AccountsPermissionsGet' where
         type Rs AccountsPermissionsGet' = UserAccess
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsPermissionsGet'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsPermissionsGet'{..}
           = go _apgAccountId _apgPermissionId _apgQuotaUser
               (Just _apgPrettyPrint)
               _apgUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest AccountsPermissionsGet' where
               _apgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsPermissionsGetResource)
-                      r
-                      u
+                      rq

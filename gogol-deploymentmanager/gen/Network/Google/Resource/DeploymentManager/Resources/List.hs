@@ -205,9 +205,8 @@ instance GoogleAuth ResourcesList' where
 
 instance GoogleRequest ResourcesList' where
         type Rs ResourcesList' = ResourcesListResponse
-        request
-          = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u ResourcesList'{..}
+        request = requestWith deploymentManagerRequest
+        requestWith rq ResourcesList'{..}
           = go _rlProject _rlDeployment _rlFilter _rlPageToken
               (Just _rlMaxResults)
               _rlQuotaUser
@@ -218,7 +217,5 @@ instance GoogleRequest ResourcesList' where
               _rlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ResourcesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ResourcesListResource)
+                      rq

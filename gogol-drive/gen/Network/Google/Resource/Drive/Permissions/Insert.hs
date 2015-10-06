@@ -184,8 +184,8 @@ instance GoogleAuth PermissionsInsert' where
 
 instance GoogleRequest PermissionsInsert' where
         type Rs PermissionsInsert' = Permission
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u PermissionsInsert'{..}
+        request = requestWith driveRequest
+        requestWith rq PermissionsInsert'{..}
           = go _piFileId _piEmailMessage
               (Just _piSendNotificationEmails)
               _piQuotaUser
@@ -197,7 +197,6 @@ instance GoogleRequest PermissionsInsert' where
               (Just AltJSON)
               _piPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PermissionsInsertResource)
-                      r
-                      u
+                      rq

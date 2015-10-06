@@ -156,8 +156,8 @@ instance GoogleAuth AccountsGet' where
 
 instance GoogleRequest AccountsGet' where
         type Rs AccountsGet' = Account
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AccountsGet'{..}
+        request = requestWith adSenseRequest
+        requestWith rq AccountsGet'{..}
           = go _agAccountId _agTree _agQuotaUser
               (Just _agPrettyPrint)
               _agUserIP
@@ -166,7 +166,4 @@ instance GoogleRequest AccountsGet' where
               _agOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AccountsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AccountsGetResource) rq

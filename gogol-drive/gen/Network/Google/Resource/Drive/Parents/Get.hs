@@ -164,8 +164,8 @@ instance GoogleAuth ParentsGet' where
 
 instance GoogleRequest ParentsGet' where
         type Rs ParentsGet' = ParentReference
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u ParentsGet'{..}
+        request = requestWith driveRequest
+        requestWith rq ParentsGet'{..}
           = go _paraFileId _paraParentId _paraQuotaUser
               (Just _paraPrettyPrint)
               _paraUserIP
@@ -174,6 +174,4 @@ instance GoogleRequest ParentsGet' where
               _paraOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ParentsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ParentsGetResource) rq

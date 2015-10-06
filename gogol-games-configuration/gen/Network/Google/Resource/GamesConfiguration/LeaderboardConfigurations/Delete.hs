@@ -152,10 +152,8 @@ instance GoogleAuth LeaderboardConfigurationsDelete'
 instance GoogleRequest
          LeaderboardConfigurationsDelete' where
         type Rs LeaderboardConfigurationsDelete' = ()
-        request
-          = requestWithRoute defReq gamesConfigurationURL
-        requestWithRoute r u
-          LeaderboardConfigurationsDelete'{..}
+        request = requestWith gamesConfigurationRequest
+        requestWith rq LeaderboardConfigurationsDelete'{..}
           = go _lcdLeaderboardId _lcdQuotaUser
               (Just _lcdPrettyPrint)
               _lcdUserIP
@@ -164,8 +162,7 @@ instance GoogleRequest
               _lcdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy LeaderboardConfigurationsDeleteResource)
-                      r
-                      u
+                      rq

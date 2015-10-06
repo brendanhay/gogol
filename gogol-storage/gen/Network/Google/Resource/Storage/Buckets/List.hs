@@ -180,8 +180,8 @@ instance GoogleAuth BucketsList' where
 
 instance GoogleRequest BucketsList' where
         type Rs BucketsList' = Buckets
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketsList'{..}
+        request = requestWith storageRequest
+        requestWith rq BucketsList'{..}
           = go (Just _blProject) _blProjection _blPageToken
               _blMaxResults
               _blQuotaUser
@@ -192,7 +192,4 @@ instance GoogleRequest BucketsList' where
               _blOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy BucketsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy BucketsListResource) rq

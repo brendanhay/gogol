@@ -272,8 +272,8 @@ instance GoogleAuth AppsModulesVersionsList' where
 instance GoogleRequest AppsModulesVersionsList' where
         type Rs AppsModulesVersionsList' =
              ListVersionsResponse
-        request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsModulesVersionsList'{..}
+        request = requestWith appEngineRequest
+        requestWith rq AppsModulesVersionsList'{..}
           = go _amvlAppsId _amvlModulesId _amvlXgafv
               _amvlUploadProtocol
               (Just _amvlPp)
@@ -291,7 +291,6 @@ instance GoogleRequest AppsModulesVersionsList' where
               _amvlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AppsModulesVersionsListResource)
-                      r
-                      u
+                      rq

@@ -211,8 +211,8 @@ instance GoogleRequest
          ManagementProFileFilterLinksUpdate' where
         type Rs ManagementProFileFilterLinksUpdate' =
              ProFileFilterLink
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
+        request = requestWith analyticsRequest
+        requestWith rq
           ManagementProFileFilterLinksUpdate'{..}
           = go _mpffluAccountId _mpffluWebPropertyId
               _mpffluProFileId
@@ -226,8 +226,7 @@ instance GoogleRequest
               (Just AltJSON)
               _mpffluPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementProFileFilterLinksUpdateResource)
-                      r
-                      u
+                      rq

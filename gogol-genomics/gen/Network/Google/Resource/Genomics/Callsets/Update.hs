@@ -158,8 +158,8 @@ instance GoogleAuth CallsetsUpdate' where
 
 instance GoogleRequest CallsetsUpdate' where
         type Rs CallsetsUpdate' = CallSet
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u CallsetsUpdate'{..}
+        request = requestWith genomicsRequest
+        requestWith rq CallsetsUpdate'{..}
           = go _cuCallSetId _cuQuotaUser (Just _cuPrettyPrint)
               _cuUserIP
               _cuFields
@@ -168,7 +168,5 @@ instance GoogleRequest CallsetsUpdate' where
               (Just AltJSON)
               _cuPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CallsetsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CallsetsUpdateResource)
+                      rq

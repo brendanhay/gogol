@@ -160,9 +160,8 @@ instance GoogleAuth CollectionsInsert' where
 
 instance GoogleRequest CollectionsInsert' where
         type Rs CollectionsInsert' = Collection
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u CollectionsInsert'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq CollectionsInsert'{..}
           = go _ciEnterpriseId _ciQuotaUser
               (Just _ciPrettyPrint)
               _ciUserIP
@@ -172,7 +171,6 @@ instance GoogleRequest CollectionsInsert' where
               (Just AltJSON)
               _ciPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CollectionsInsertResource)
-                      r
-                      u
+                      rq

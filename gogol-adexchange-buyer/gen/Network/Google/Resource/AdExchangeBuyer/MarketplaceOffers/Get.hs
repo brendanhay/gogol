@@ -150,8 +150,8 @@ instance GoogleAuth MarketplaceOffersGet' where
 
 instance GoogleRequest MarketplaceOffersGet' where
         type Rs MarketplaceOffersGet' = MarketplaceOffer
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplaceOffersGet'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq MarketplaceOffersGet'{..}
           = go _mogOfferId _mogQuotaUser (Just _mogPrettyPrint)
               _mogUserIP
               _mogFields
@@ -159,7 +159,6 @@ instance GoogleRequest MarketplaceOffersGet' where
               _mogOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MarketplaceOffersGetResource)
-                      r
-                      u
+                      rq

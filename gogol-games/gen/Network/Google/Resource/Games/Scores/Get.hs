@@ -235,8 +235,8 @@ instance GoogleAuth ScoresGet' where
 instance GoogleRequest ScoresGet' where
         type Rs ScoresGet' =
              PlayerLeaderboardScoreListResponse
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u ScoresGet'{..}
+        request = requestWith gamesRequest
+        requestWith rq ScoresGet'{..}
           = go _sgPlayerId _sgLeaderboardId _sgTimeSpan
               _sgIncludeRankType
               _sgLanguage
@@ -250,6 +250,4 @@ instance GoogleRequest ScoresGet' where
               _sgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ScoresGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ScoresGetResource) rq

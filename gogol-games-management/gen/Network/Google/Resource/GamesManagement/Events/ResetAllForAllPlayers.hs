@@ -146,8 +146,8 @@ instance GoogleAuth EventsResetAllForAllPlayers'
 instance GoogleRequest EventsResetAllForAllPlayers'
          where
         type Rs EventsResetAllForAllPlayers' = ()
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u EventsResetAllForAllPlayers'{..}
+        request = requestWith gamesManagementRequest
+        requestWith rq EventsResetAllForAllPlayers'{..}
           = go _erafapQuotaUser (Just _erafapPrettyPrint)
               _erafapUserIP
               _erafapFields
@@ -155,7 +155,6 @@ instance GoogleRequest EventsResetAllForAllPlayers'
               _erafapOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EventsResetAllForAllPlayersResource)
-                      r
-                      u
+                      rq

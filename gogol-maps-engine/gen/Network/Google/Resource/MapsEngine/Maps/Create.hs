@@ -146,8 +146,8 @@ instance GoogleAuth MapsCreate' where
 
 instance GoogleRequest MapsCreate' where
         type Rs MapsCreate' = Map
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u MapsCreate'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq MapsCreate'{..}
           = go _mcQuotaUser (Just _mcPrettyPrint) _mcUserIP
               _mcFields
               _mcKey
@@ -155,6 +155,4 @@ instance GoogleRequest MapsCreate' where
               (Just AltJSON)
               _mcPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy MapsCreateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy MapsCreateResource) rq

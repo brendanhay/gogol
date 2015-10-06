@@ -208,8 +208,8 @@ instance GoogleRequest ObjectAccessControlsPatch'
          where
         type Rs ObjectAccessControlsPatch' =
              ObjectAccessControl
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectAccessControlsPatch'{..}
+        request = requestWith storageRequest
+        requestWith rq ObjectAccessControlsPatch'{..}
           = go _oacpBucket _oacpObject _oacpEntity
               _oacpGeneration
               _oacpQuotaUser
@@ -221,7 +221,6 @@ instance GoogleRequest ObjectAccessControlsPatch'
               (Just AltJSON)
               _oacpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ObjectAccessControlsPatchResource)
-                      r
-                      u
+                      rq

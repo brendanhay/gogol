@@ -320,8 +320,8 @@ instance GoogleAuth LinksList' where
 
 instance GoogleRequest LinksList' where
         type Rs LinksList' = Links
-        request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u LinksList'{..}
+        request = requestWith affiliatesRequest
+        requestWith rq LinksList'{..}
           = go _llRole _llRoleId _llCreateDateMax _llAuthorship
               (_llAssetSize ^. _Default)
               _llRelationshipStatus
@@ -342,6 +342,4 @@ instance GoogleRequest LinksList' where
               _llOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy LinksListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy LinksListResource) rq

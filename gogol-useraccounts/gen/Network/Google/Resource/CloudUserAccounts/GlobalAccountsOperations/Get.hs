@@ -166,8 +166,8 @@ instance GoogleAuth GlobalAccountsOperationsGet'
 instance GoogleRequest GlobalAccountsOperationsGet'
          where
         type Rs GlobalAccountsOperationsGet' = Operation
-        request = requestWithRoute defReq userAccountsURL
-        requestWithRoute r u GlobalAccountsOperationsGet'{..}
+        request = requestWith userAccountsRequest
+        requestWith rq GlobalAccountsOperationsGet'{..}
           = go _gaogProject _gaogOperation _gaogQuotaUser
               (Just _gaogPrettyPrint)
               _gaogUserIP
@@ -176,7 +176,6 @@ instance GoogleRequest GlobalAccountsOperationsGet'
               _gaogOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GlobalAccountsOperationsGetResource)
-                      r
-                      u
+                      rq

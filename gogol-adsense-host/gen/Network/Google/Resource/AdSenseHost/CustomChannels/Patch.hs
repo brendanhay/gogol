@@ -179,8 +179,8 @@ instance GoogleAuth CustomChannelsPatch' where
 
 instance GoogleRequest CustomChannelsPatch' where
         type Rs CustomChannelsPatch' = CustomChannel
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u CustomChannelsPatch'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq CustomChannelsPatch'{..}
           = go _ccpAdClientId (Just _ccpCustomChannelId)
               _ccpQuotaUser
               (Just _ccpPrettyPrint)
@@ -191,7 +191,6 @@ instance GoogleRequest CustomChannelsPatch' where
               (Just AltJSON)
               _ccpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CustomChannelsPatchResource)
-                      r
-                      u
+                      rq

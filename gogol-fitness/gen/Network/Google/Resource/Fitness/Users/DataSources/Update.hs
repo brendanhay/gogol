@@ -184,8 +184,8 @@ instance GoogleAuth UsersDataSourcesUpdate' where
 
 instance GoogleRequest UsersDataSourcesUpdate' where
         type Rs UsersDataSourcesUpdate' = DataSource
-        request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersDataSourcesUpdate'{..}
+        request = requestWith fitnessRequest
+        requestWith rq UsersDataSourcesUpdate'{..}
           = go _udsuUserId _udsuDataSourceId _udsuQuotaUser
               (Just _udsuPrettyPrint)
               _udsuUserIP
@@ -195,7 +195,6 @@ instance GoogleRequest UsersDataSourcesUpdate' where
               (Just AltJSON)
               _udsuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersDataSourcesUpdateResource)
-                      r
-                      u
+                      rq

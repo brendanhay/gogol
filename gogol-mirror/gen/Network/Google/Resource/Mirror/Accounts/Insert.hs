@@ -184,8 +184,8 @@ instance GoogleAuth AccountsInsert' where
 
 instance GoogleRequest AccountsInsert' where
         type Rs AccountsInsert' = Account
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u AccountsInsert'{..}
+        request = requestWith mirrorRequest
+        requestWith rq AccountsInsert'{..}
           = go _aiUserToken _aiAccountType _aiAccountName
               _aiQuotaUser
               (Just _aiPrettyPrint)
@@ -196,7 +196,5 @@ instance GoogleRequest AccountsInsert' where
               (Just AltJSON)
               _aiPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AccountsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AccountsInsertResource)
+                      rq

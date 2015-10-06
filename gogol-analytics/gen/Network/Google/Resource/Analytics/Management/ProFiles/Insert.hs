@@ -180,8 +180,8 @@ instance GoogleAuth ManagementProFilesInsert' where
 instance GoogleRequest ManagementProFilesInsert'
          where
         type Rs ManagementProFilesInsert' = ProFile
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementProFilesInsert'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementProFilesInsert'{..}
           = go _mpfiAccountId _mpfiWebPropertyId _mpfiQuotaUser
               (Just _mpfiPrettyPrint)
               _mpfiUserIP
@@ -191,7 +191,6 @@ instance GoogleRequest ManagementProFilesInsert'
               (Just AltJSON)
               _mpfiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementProFilesInsertResource)
-                      r
-                      u
+                      rq

@@ -164,8 +164,8 @@ instance GoogleAuth CustomChannelsInsert' where
 
 instance GoogleRequest CustomChannelsInsert' where
         type Rs CustomChannelsInsert' = CustomChannel
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u CustomChannelsInsert'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq CustomChannelsInsert'{..}
           = go _cciAdClientId _cciQuotaUser
               (Just _cciPrettyPrint)
               _cciUserIP
@@ -175,7 +175,6 @@ instance GoogleRequest CustomChannelsInsert' where
               (Just AltJSON)
               _cciPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CustomChannelsInsertResource)
-                      r
-                      u
+                      rq

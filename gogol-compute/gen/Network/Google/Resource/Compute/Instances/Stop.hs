@@ -181,8 +181,8 @@ instance GoogleAuth InstancesStop' where
 
 instance GoogleRequest InstancesStop' where
         type Rs InstancesStop' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesStop'{..}
+        request = requestWith computeRequest
+        requestWith rq InstancesStop'{..}
           = go _isProject _isZone _isInstance _isQuotaUser
               (Just _isPrettyPrint)
               _isUserIP
@@ -191,7 +191,5 @@ instance GoogleRequest InstancesStop' where
               _isOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy InstancesStopResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy InstancesStopResource)
+                      rq

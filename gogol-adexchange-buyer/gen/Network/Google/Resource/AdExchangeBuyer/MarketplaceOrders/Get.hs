@@ -145,8 +145,8 @@ instance GoogleAuth MarketplaceOrdersGet' where
 
 instance GoogleRequest MarketplaceOrdersGet' where
         type Rs MarketplaceOrdersGet' = MarketplaceOrder
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplaceOrdersGet'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq MarketplaceOrdersGet'{..}
           = go _mOrderId _mQuotaUser (Just _mPrettyPrint)
               _mUserIP
               _mFields
@@ -154,7 +154,6 @@ instance GoogleRequest MarketplaceOrdersGet' where
               _mOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MarketplaceOrdersGetResource)
-                      r
-                      u
+                      rq

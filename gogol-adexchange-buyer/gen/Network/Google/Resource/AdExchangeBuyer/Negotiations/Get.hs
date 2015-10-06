@@ -159,8 +159,8 @@ instance GoogleAuth NegotiationsGet' where
 
 instance GoogleRequest NegotiationsGet' where
         type Rs NegotiationsGet' = NegotiationDTO
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u NegotiationsGet'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq NegotiationsGet'{..}
           = go _ngNegotiationId _ngQuotaUser
               (Just _ngPrettyPrint)
               _ngUserIP
@@ -170,7 +170,6 @@ instance GoogleRequest NegotiationsGet' where
               (Just AltJSON)
               _ngPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy NegotiationsGetResource)
-                      r
-                      u
+                      rq

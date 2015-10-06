@@ -183,8 +183,8 @@ instance GoogleAuth SSLCertsCreateEphemeral' where
 
 instance GoogleRequest SSLCertsCreateEphemeral' where
         type Rs SSLCertsCreateEphemeral' = SSLCert
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u SSLCertsCreateEphemeral'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq SSLCertsCreateEphemeral'{..}
           = go _scceProject _scceInstance _scceQuotaUser
               (Just _sccePrettyPrint)
               _scceUserIP
@@ -194,7 +194,6 @@ instance GoogleRequest SSLCertsCreateEphemeral' where
               (Just AltJSON)
               _sccePayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SSLCertsCreateEphemeralResource)
-                      r
-                      u
+                      rq

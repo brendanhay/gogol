@@ -178,8 +178,8 @@ instance GoogleAuth RoomsReportStatus' where
 
 instance GoogleRequest RoomsReportStatus' where
         type Rs RoomsReportStatus' = RoomStatus
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u RoomsReportStatus'{..}
+        request = requestWith gamesRequest
+        requestWith rq RoomsReportStatus'{..}
           = go _rrsRoomId _rrsLanguage _rrsQuotaUser
               (Just _rrsPrettyPrint)
               _rrsUserIP
@@ -189,7 +189,6 @@ instance GoogleRequest RoomsReportStatus' where
               (Just AltJSON)
               _rrsPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RoomsReportStatusResource)
-                      r
-                      u
+                      rq

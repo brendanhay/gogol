@@ -161,9 +161,8 @@ instance GoogleAuth PermissionsGet' where
 
 instance GoogleRequest PermissionsGet' where
         type Rs PermissionsGet' = Permission
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u PermissionsGet'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq PermissionsGet'{..}
           = go _pgPermissionId _pgLanguage _pgQuotaUser
               (Just _pgPrettyPrint)
               _pgUserIP
@@ -172,7 +171,5 @@ instance GoogleRequest PermissionsGet' where
               _pgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PermissionsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PermissionsGetResource)
+                      rq

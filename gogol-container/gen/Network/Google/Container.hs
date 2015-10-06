@@ -23,7 +23,7 @@ module Network.Google.Container
     -- * API
       ContainerAPI
     , containerAPI
-    , containerURL
+    , containerRequest
 
     -- * Service Methods
 

@@ -21,7 +21,7 @@ module Network.Google.GroupsMigration
     -- * API
       GroupsMigrationAPI
     , groupsMigrationAPI
-    , groupsMigrationURL
+    , groupsMigrationRequest
 
     -- * Service Methods
 

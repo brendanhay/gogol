@@ -147,8 +147,8 @@ instance GoogleAuth NegotiationsList' where
 
 instance GoogleRequest NegotiationsList' where
         type Rs NegotiationsList' = GetNegotiationsResponse
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u NegotiationsList'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq NegotiationsList'{..}
           = go _nlQuotaUser (Just _nlPrettyPrint) _nlUserIP
               _nlFields
               _nlKey
@@ -156,7 +156,6 @@ instance GoogleRequest NegotiationsList' where
               (Just AltJSON)
               _nlPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy NegotiationsListResource)
-                      r
-                      u
+                      rq

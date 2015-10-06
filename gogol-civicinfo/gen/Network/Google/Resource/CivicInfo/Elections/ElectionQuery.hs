@@ -139,15 +139,14 @@ instance GoogleAuth ElectionsElectionQuery' where
 instance GoogleRequest ElectionsElectionQuery' where
         type Rs ElectionsElectionQuery' =
              ElectionsQueryResponse
-        request = requestWithRoute defReq civicInfoURL
-        requestWithRoute r u ElectionsElectionQuery'{..}
+        request = requestWith civicInfoRequest
+        requestWith rq ElectionsElectionQuery'{..}
           = go _eeqQuotaUser (Just _eeqPrettyPrint) _eeqUserIP
               _eeqFields
               _eeqKey
               _eeqOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ElectionsElectionQueryResource)
-                      r
-                      u
+                      rq

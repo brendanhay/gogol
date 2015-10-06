@@ -187,8 +187,8 @@ instance GoogleAuth InstancesAttachDisk' where
 
 instance GoogleRequest InstancesAttachDisk' where
         type Rs InstancesAttachDisk' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesAttachDisk'{..}
+        request = requestWith computeRequest
+        requestWith rq InstancesAttachDisk'{..}
           = go _iadProject _iadZone _iadInstance _iadQuotaUser
               (Just _iadPrettyPrint)
               _iadUserIP
@@ -198,7 +198,6 @@ instance GoogleRequest InstancesAttachDisk' where
               (Just AltJSON)
               _iadPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesAttachDiskResource)
-                      r
-                      u
+                      rq

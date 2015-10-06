@@ -142,8 +142,8 @@ instance GoogleRequest RelyingPartyGetPublicKeys'
          where
         type Rs RelyingPartyGetPublicKeys' =
              IdentitytoolkitRelyingPartyGetPublicKeysResponse
-        request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingPartyGetPublicKeys'{..}
+        request = requestWith identityToolkitRequest
+        requestWith rq RelyingPartyGetPublicKeys'{..}
           = go _rpgpkQuotaUser (Just _rpgpkPrettyPrint)
               _rpgpkUserIP
               _rpgpkFields
@@ -151,7 +151,6 @@ instance GoogleRequest RelyingPartyGetPublicKeys'
               _rpgpkOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RelyingPartyGetPublicKeysResource)
-                      r
-                      u
+                      rq

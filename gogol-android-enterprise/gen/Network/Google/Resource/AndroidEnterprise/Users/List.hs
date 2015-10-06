@@ -160,9 +160,8 @@ instance GoogleAuth UsersList' where
 
 instance GoogleRequest UsersList' where
         type Rs UsersList' = UsersListResponse
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u UsersList'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq UsersList'{..}
           = go _ulEnterpriseId (Just _ulEmail) _ulQuotaUser
               (Just _ulPrettyPrint)
               _ulUserIP
@@ -171,6 +170,4 @@ instance GoogleRequest UsersList' where
               _ulOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersListResource) rq

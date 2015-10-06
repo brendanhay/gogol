@@ -181,8 +181,8 @@ instance GoogleAuth SSLCertsInsert' where
 
 instance GoogleRequest SSLCertsInsert' where
         type Rs SSLCertsInsert' = SSLCertsInsertResponse
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u SSLCertsInsert'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq SSLCertsInsert'{..}
           = go _sciProject _sciInstance _sciQuotaUser
               (Just _sciPrettyPrint)
               _sciUserIP
@@ -192,7 +192,5 @@ instance GoogleRequest SSLCertsInsert' where
               (Just AltJSON)
               _sciPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SSLCertsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SSLCertsInsertResource)
+                      rq

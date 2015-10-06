@@ -171,8 +171,8 @@ instance GoogleAuth HTTPHealthChecksInsert' where
 
 instance GoogleRequest HTTPHealthChecksInsert' where
         type Rs HTTPHealthChecksInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u HTTPHealthChecksInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq HTTPHealthChecksInsert'{..}
           = go _httphciProject _httphciQuotaUser
               (Just _httphciPrettyPrint)
               _httphciUserIP
@@ -182,7 +182,6 @@ instance GoogleRequest HTTPHealthChecksInsert' where
               (Just AltJSON)
               _httphciPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy HTTPHealthChecksInsertResource)
-                      r
-                      u
+                      rq

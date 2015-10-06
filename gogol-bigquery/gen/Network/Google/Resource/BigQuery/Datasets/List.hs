@@ -182,8 +182,8 @@ instance GoogleAuth DatasetsList' where
 
 instance GoogleRequest DatasetsList' where
         type Rs DatasetsList' = DatasetList
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u DatasetsList'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq DatasetsList'{..}
           = go _dlProjectId _dlAll _dlPageToken _dlMaxResults
               _dlQuotaUser
               (Just _dlPrettyPrint)
@@ -193,7 +193,5 @@ instance GoogleRequest DatasetsList' where
               _dlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DatasetsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DatasetsListResource)
+                      rq

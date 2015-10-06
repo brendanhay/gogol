@@ -169,8 +169,8 @@ instance GoogleAuth WatermarksUnset' where
 
 instance GoogleRequest WatermarksUnset' where
         type Rs WatermarksUnset' = ()
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u WatermarksUnset'{..}
+        request = requestWith youTubeRequest
+        requestWith rq WatermarksUnset'{..}
           = go (Just _wuChannelId) _wuOnBehalfOfContentOwner
               _wuQuotaUser
               (Just _wuPrettyPrint)
@@ -180,7 +180,6 @@ instance GoogleRequest WatermarksUnset' where
               _wuOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy WatermarksUnsetResource)
-                      r
-                      u
+                      rq

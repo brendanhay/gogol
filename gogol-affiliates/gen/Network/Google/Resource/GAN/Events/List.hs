@@ -359,8 +359,8 @@ instance GoogleAuth EventsList' where
 
 instance GoogleRequest EventsList' where
         type Rs EventsList' = Events
-        request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u EventsList'{..}
+        request = requestWith affiliatesRequest
+        requestWith rq EventsList'{..}
           = go _elRole _elRoleId _elStatus _elEventDateMin
               _elChargeType
               _elMemberId
@@ -384,6 +384,4 @@ instance GoogleRequest EventsList' where
               _elOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EventsListResource) rq

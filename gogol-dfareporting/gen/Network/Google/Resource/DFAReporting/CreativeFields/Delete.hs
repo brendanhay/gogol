@@ -161,8 +161,8 @@ instance GoogleAuth CreativeFieldsDelete' where
 
 instance GoogleRequest CreativeFieldsDelete' where
         type Rs CreativeFieldsDelete' = ()
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldsDelete'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativeFieldsDelete'{..}
           = go _cfdProFileId _cfdId _cfdQuotaUser
               (Just _cfdPrettyPrint)
               _cfdUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest CreativeFieldsDelete' where
               _cfdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CreativeFieldsDeleteResource)
-                      r
-                      u
+                      rq

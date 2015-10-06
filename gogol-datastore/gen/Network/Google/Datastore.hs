@@ -21,7 +21,7 @@ module Network.Google.Datastore
     -- * API
       DatastoreAPI
     , datastoreAPI
-    , datastoreURL
+    , datastoreRequest
 
     -- * Service Methods
 

@@ -214,8 +214,8 @@ instance GoogleAuth TimelineList' where
 
 instance GoogleRequest TimelineList' where
         type Rs TimelineList' = TimelineListResponse
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineList'{..}
+        request = requestWith mirrorRequest
+        requestWith rq TimelineList'{..}
           = go _tlPinnedOnly _tlOrderBy _tlBundleId
               _tlSourceItemId
               _tlPageToken
@@ -229,7 +229,5 @@ instance GoogleRequest TimelineList' where
               _tlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TimelineListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TimelineListResource)
+                      rq

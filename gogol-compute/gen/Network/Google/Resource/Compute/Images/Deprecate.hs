@@ -179,8 +179,8 @@ instance GoogleAuth ImagesDeprecate' where
 
 instance GoogleRequest ImagesDeprecate' where
         type Rs ImagesDeprecate' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u ImagesDeprecate'{..}
+        request = requestWith computeRequest
+        requestWith rq ImagesDeprecate'{..}
           = go _imamProject _imamImage _imamQuotaUser
               (Just _imamPrettyPrint)
               _imamUserIP
@@ -190,7 +190,6 @@ instance GoogleRequest ImagesDeprecate' where
               (Just AltJSON)
               _imamPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ImagesDeprecateResource)
-                      r
-                      u
+                      rq

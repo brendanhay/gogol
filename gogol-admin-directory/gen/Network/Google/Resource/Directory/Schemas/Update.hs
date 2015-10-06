@@ -171,8 +171,8 @@ instance GoogleAuth SchemasUpdate' where
 
 instance GoogleRequest SchemasUpdate' where
         type Rs SchemasUpdate' = Schema
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u SchemasUpdate'{..}
+        request = requestWith directoryRequest
+        requestWith rq SchemasUpdate'{..}
           = go _suCustomerId _suSchemaKey _suQuotaUser
               (Just _suPrettyPrint)
               _suUserIP
@@ -182,7 +182,5 @@ instance GoogleRequest SchemasUpdate' where
               (Just AltJSON)
               _suPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SchemasUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SchemasUpdateResource)
+                      rq

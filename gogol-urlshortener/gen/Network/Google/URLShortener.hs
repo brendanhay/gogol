@@ -21,7 +21,7 @@ module Network.Google.URLShortener
     -- * API
       URLShortenerAPI
     , uRLShortenerAPI
-    , uRLShortenerURL
+    , uRLShortenerRequest
 
     -- * Service Methods
 

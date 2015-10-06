@@ -166,8 +166,8 @@ instance GoogleAuth TeamList' where
 
 instance GoogleRequest TeamList' where
         type Rs TeamList' = TeamListResponse
-        request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u TeamList'{..}
+        request = requestWith mapsCoordinateRequest
+        requestWith rq TeamList'{..}
           = go _tlDispatcher _tlAdmin _tlWorker _tlQuotaUser
               (Just _tlPrettyPrint)
               _tlUserIP
@@ -176,5 +176,4 @@ instance GoogleRequest TeamList' where
               _tlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TeamListResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy TeamListResource) rq

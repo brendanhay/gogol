@@ -162,8 +162,8 @@ instance GoogleAuth UserRolesUpdate' where
 
 instance GoogleRequest UserRolesUpdate' where
         type Rs UserRolesUpdate' = UserRole
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserRolesUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq UserRolesUpdate'{..}
           = go _uruProFileId _uruQuotaUser
               (Just _uruPrettyPrint)
               _uruUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest UserRolesUpdate' where
               (Just AltJSON)
               _uruPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UserRolesUpdateResource)
-                      r
-                      u
+                      rq

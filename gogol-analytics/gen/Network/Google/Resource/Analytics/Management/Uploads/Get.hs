@@ -192,8 +192,8 @@ instance GoogleAuth ManagementUploadsGet' where
 
 instance GoogleRequest ManagementUploadsGet' where
         type Rs ManagementUploadsGet' = Upload
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementUploadsGet'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementUploadsGet'{..}
           = go _mugAccountId _mugWebPropertyId
               _mugCustomDataSourceId
               _mugUploadId
@@ -205,7 +205,6 @@ instance GoogleRequest ManagementUploadsGet' where
               _mugOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementUploadsGetResource)
-                      r
-                      u
+                      rq

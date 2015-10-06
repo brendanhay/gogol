@@ -193,8 +193,8 @@ instance GoogleAuth EditsImagesDeleteall' where
 instance GoogleRequest EditsImagesDeleteall' where
         type Rs EditsImagesDeleteall' =
              ImagesDeleteAllResponse
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsImagesDeleteall'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsImagesDeleteall'{..}
           = go _eidiPackageName _eidiEditId _eidiLanguage
               _eidiImageType
               _eidiQuotaUser
@@ -205,7 +205,6 @@ instance GoogleRequest EditsImagesDeleteall' where
               _eidiOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsImagesDeleteallResource)
-                      r
-                      u
+                      rq

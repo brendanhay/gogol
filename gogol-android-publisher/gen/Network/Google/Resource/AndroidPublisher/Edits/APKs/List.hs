@@ -165,8 +165,8 @@ instance GoogleAuth EditsAPKsList' where
 
 instance GoogleRequest EditsAPKsList' where
         type Rs EditsAPKsList' = APKsListResponse
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsAPKsList'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsAPKsList'{..}
           = go _eapklPackageName _eapklEditId _eapklQuotaUser
               (Just _eapklPrettyPrint)
               _eapklUserIP
@@ -175,7 +175,5 @@ instance GoogleRequest EditsAPKsList' where
               _eapklOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EditsAPKsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EditsAPKsListResource)
+                      rq

@@ -146,8 +146,8 @@ instance GoogleAuth VariantsDelete' where
 
 instance GoogleRequest VariantsDelete' where
         type Rs VariantsDelete' = ()
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsDelete'{..}
+        request = requestWith genomicsRequest
+        requestWith rq VariantsDelete'{..}
           = go _vdVariantId _vdQuotaUser (Just _vdPrettyPrint)
               _vdUserIP
               _vdFields
@@ -155,7 +155,5 @@ instance GoogleRequest VariantsDelete' where
               _vdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy VariantsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy VariantsDeleteResource)
+                      rq

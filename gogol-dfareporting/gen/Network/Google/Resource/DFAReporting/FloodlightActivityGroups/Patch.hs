@@ -181,9 +181,8 @@ instance GoogleRequest FloodlightActivityGroupsPatch'
          where
         type Rs FloodlightActivityGroupsPatch' =
              FloodlightActivityGroup
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u
-          FloodlightActivityGroupsPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FloodlightActivityGroupsPatch'{..}
           = go _fagpProFileId (Just _fagpId) _fagpQuotaUser
               (Just _fagpPrettyPrint)
               _fagpUserIP
@@ -193,8 +192,7 @@ instance GoogleRequest FloodlightActivityGroupsPatch'
               (Just AltJSON)
               _fagpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy FloodlightActivityGroupsPatchResource)
-                      r
-                      u
+                      rq

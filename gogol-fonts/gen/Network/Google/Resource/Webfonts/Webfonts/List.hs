@@ -146,8 +146,8 @@ instance GoogleAuth WebfontsList' where
 
 instance GoogleRequest WebfontsList' where
         type Rs WebfontsList' = WebfontList
-        request = requestWithRoute defReq fontsURL
-        requestWithRoute r u WebfontsList'{..}
+        request = requestWith fontsRequest
+        requestWith rq WebfontsList'{..}
           = go _wlSort _wlQuotaUser (Just _wlPrettyPrint)
               _wlUserIP
               _wlFields
@@ -155,7 +155,5 @@ instance GoogleRequest WebfontsList' where
               _wlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy WebfontsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy WebfontsListResource)
+                      rq

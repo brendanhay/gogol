@@ -165,8 +165,8 @@ instance GoogleAuth BackendServicesInsert' where
 
 instance GoogleRequest BackendServicesInsert' where
         type Rs BackendServicesInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u BackendServicesInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq BackendServicesInsert'{..}
           = go _bsiProject _bsiQuotaUser (Just _bsiPrettyPrint)
               _bsiUserIP
               _bsiFields
@@ -175,7 +175,6 @@ instance GoogleRequest BackendServicesInsert' where
               (Just AltJSON)
               _bsiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BackendServicesInsertResource)
-                      r
-                      u
+                      rq

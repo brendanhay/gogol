@@ -152,8 +152,8 @@ instance GoogleAuth PlatformTypesList' where
 instance GoogleRequest PlatformTypesList' where
         type Rs PlatformTypesList' =
              PlatformTypesListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlatformTypesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PlatformTypesList'{..}
           = go _ptlProFileId _ptlQuotaUser
               (Just _ptlPrettyPrint)
               _ptlUserIP
@@ -162,7 +162,6 @@ instance GoogleRequest PlatformTypesList' where
               _ptlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlatformTypesListResource)
-                      r
-                      u
+                      rq

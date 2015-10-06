@@ -158,8 +158,8 @@ instance GoogleAuth MapsPublish' where
 
 instance GoogleRequest MapsPublish' where
         type Rs MapsPublish' = PublishResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u MapsPublish'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq MapsPublish'{..}
           = go _mId _mForce _mQuotaUser (Just _mPrettyPrint)
               _mUserIP
               _mFields
@@ -167,7 +167,4 @@ instance GoogleRequest MapsPublish' where
               _mOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy MapsPublishResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy MapsPublishResource) rq

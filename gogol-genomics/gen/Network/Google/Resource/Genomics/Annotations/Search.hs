@@ -155,8 +155,8 @@ instance GoogleAuth AnnotationsSearch' where
 instance GoogleRequest AnnotationsSearch' where
         type Rs AnnotationsSearch' =
              SearchAnnotationsResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u AnnotationsSearch'{..}
+        request = requestWith genomicsRequest
+        requestWith rq AnnotationsSearch'{..}
           = go _asQuotaUser (Just _asPrettyPrint) _asUserIP
               _asFields
               _asKey
@@ -164,7 +164,6 @@ instance GoogleRequest AnnotationsSearch' where
               (Just AltJSON)
               _asPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AnnotationsSearchResource)
-                      r
-                      u
+                      rq

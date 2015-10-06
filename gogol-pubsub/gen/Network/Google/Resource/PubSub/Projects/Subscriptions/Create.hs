@@ -244,8 +244,8 @@ instance GoogleAuth ProjectsSubscriptionsCreate'
 instance GoogleRequest ProjectsSubscriptionsCreate'
          where
         type Rs ProjectsSubscriptionsCreate' = Subscription
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsSubscriptionsCreate'{..}
+        request = requestWith pubSubRequest
+        requestWith rq ProjectsSubscriptionsCreate'{..}
           = go _pscName _pscXgafv _pscUploadProtocol
               (Just _pscPp)
               _pscAccessToken
@@ -260,7 +260,6 @@ instance GoogleRequest ProjectsSubscriptionsCreate'
               (Just AltJSON)
               _pscPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsSubscriptionsCreateResource)
-                      r
-                      u
+                      rq

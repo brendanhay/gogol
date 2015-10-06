@@ -207,8 +207,8 @@ instance GoogleAuth NamespacesList' where
 
 instance GoogleRequest NamespacesList' where
         type Rs NamespacesList' = ListNamespacesResponse
-        request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u NamespacesList'{..}
+        request = requestWith proximityBeaconRequest
+        requestWith rq NamespacesList'{..}
           = go _nlXgafv _nlUploadProtocol (Just _nlPp)
               _nlAccessToken
               _nlUploadType
@@ -221,7 +221,5 @@ instance GoogleRequest NamespacesList' where
               _nlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy NamespacesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy NamespacesListResource)
+                      rq

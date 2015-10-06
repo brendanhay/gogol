@@ -275,8 +275,8 @@ instance GoogleAuth ReportsQuery' where
 
 instance GoogleRequest ReportsQuery' where
         type Rs ReportsQuery' = ResultTable
-        request = requestWithRoute defReq youTubeAnalyticsURL
-        requestWithRoute r u ReportsQuery'{..}
+        request = requestWith youTubeAnalyticsRequest
+        requestWith rq ReportsQuery'{..}
           = go (Just _rqIds) (Just _rqStartDate)
               (Just _rqEndDate)
               (Just _rqMetrics)
@@ -294,7 +294,5 @@ instance GoogleRequest ReportsQuery' where
               _rqOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ReportsQueryResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ReportsQueryResource)
+                      rq

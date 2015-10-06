@@ -21,7 +21,7 @@ module Network.Google.Translate
     -- * API
       TranslateAPI
     , translateAPI
-    , translateURL
+    , translateRequest
 
     -- * Service Methods
 

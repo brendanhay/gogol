@@ -194,8 +194,8 @@ instance GoogleAuth PostUserInfosGet' where
 
 instance GoogleRequest PostUserInfosGet' where
         type Rs PostUserInfosGet' = PostUserInfo
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostUserInfosGet'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PostUserInfosGet'{..}
           = go _puigUserId _puigBlogId _puigPostId
               _puigMaxComments
               _puigQuotaUser
@@ -206,7 +206,6 @@ instance GoogleRequest PostUserInfosGet' where
               _puigOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PostUserInfosGetResource)
-                      r
-                      u
+                      rq

@@ -180,8 +180,8 @@ instance GoogleAuth SSLCertsGet' where
 
 instance GoogleRequest SSLCertsGet' where
         type Rs SSLCertsGet' = SSLCert
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u SSLCertsGet'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq SSLCertsGet'{..}
           = go _scgProject _scgInstance _scgSha1Fingerprint
               _scgQuotaUser
               (Just _scgPrettyPrint)
@@ -191,7 +191,4 @@ instance GoogleRequest SSLCertsGet' where
               _scgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SSLCertsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SSLCertsGetResource) rq

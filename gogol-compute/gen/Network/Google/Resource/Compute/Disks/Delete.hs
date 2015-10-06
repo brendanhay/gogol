@@ -175,8 +175,8 @@ instance GoogleAuth DisksDelete' where
 
 instance GoogleRequest DisksDelete' where
         type Rs DisksDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u DisksDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq DisksDelete'{..}
           = go _ddProject _ddZone _ddDisk _ddQuotaUser
               (Just _ddPrettyPrint)
               _ddUserIP
@@ -185,7 +185,4 @@ instance GoogleRequest DisksDelete' where
               _ddOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DisksDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DisksDeleteResource) rq

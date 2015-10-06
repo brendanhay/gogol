@@ -16,7 +16,7 @@
 module Network.Google.DNS.Types
     (
     -- * Service URL
-      dNSURL
+      dNSRequest
 
     -- * ChangesListResponse
     , ChangesListResponse
@@ -97,9 +97,8 @@ import           Network.Google.DNS.Types.Product
 import           Network.Google.DNS.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1beta1' of the Google Cloud DNS API.
-dNSURL :: BaseUrl
-dNSURL
-  = BaseUrl Https
-      "https://www.googleapis.com/dns/v1beta1/projects/"
-      443
+-- | Default request referring to version 'v1beta1' of the Google Cloud DNS API.
+dNSRequest :: RequestBuilder
+dNSRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "dns/v1beta1/projects/"

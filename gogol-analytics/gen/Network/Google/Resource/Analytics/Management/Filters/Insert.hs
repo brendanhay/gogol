@@ -163,8 +163,8 @@ instance GoogleAuth ManagementFiltersInsert' where
 
 instance GoogleRequest ManagementFiltersInsert' where
         type Rs ManagementFiltersInsert' = Filter
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementFiltersInsert'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementFiltersInsert'{..}
           = go _mfiAccountId _mfiQuotaUser
               (Just _mfiPrettyPrint)
               _mfiUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest ManagementFiltersInsert' where
               (Just AltJSON)
               _mfiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementFiltersInsertResource)
-                      r
-                      u
+                      rq

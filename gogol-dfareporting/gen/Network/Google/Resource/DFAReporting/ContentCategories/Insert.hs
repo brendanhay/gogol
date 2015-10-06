@@ -163,8 +163,8 @@ instance GoogleAuth ContentCategoriesInsert' where
 
 instance GoogleRequest ContentCategoriesInsert' where
         type Rs ContentCategoriesInsert' = ContentCategory
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ContentCategoriesInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ContentCategoriesInsert'{..}
           = go _cciProFileId _cciQuotaUser
               (Just _cciPrettyPrint)
               _cciUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest ContentCategoriesInsert' where
               (Just AltJSON)
               _cciPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ContentCategoriesInsertResource)
-                      r
-                      u
+                      rq

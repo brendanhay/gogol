@@ -168,8 +168,8 @@ instance GoogleAuth GlobalForwardingRulesInsert'
 instance GoogleRequest GlobalForwardingRulesInsert'
          where
         type Rs GlobalForwardingRulesInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalForwardingRulesInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq GlobalForwardingRulesInsert'{..}
           = go _gfriProject _gfriQuotaUser
               (Just _gfriPrettyPrint)
               _gfriUserIP
@@ -179,7 +179,6 @@ instance GoogleRequest GlobalForwardingRulesInsert'
               (Just AltJSON)
               _gfriPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GlobalForwardingRulesInsertResource)
-                      r
-                      u
+                      rq

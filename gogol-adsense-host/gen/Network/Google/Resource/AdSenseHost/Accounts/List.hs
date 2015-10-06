@@ -150,8 +150,8 @@ instance GoogleAuth AccountsList' where
 
 instance GoogleRequest AccountsList' where
         type Rs AccountsList' = Accounts
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AccountsList'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq AccountsList'{..}
           = go _alFilterAdClientId _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP
@@ -160,7 +160,5 @@ instance GoogleRequest AccountsList' where
               _alOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AccountsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AccountsListResource)
+                      rq

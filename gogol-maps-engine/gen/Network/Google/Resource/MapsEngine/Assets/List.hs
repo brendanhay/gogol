@@ -300,8 +300,8 @@ instance GoogleAuth AssetsList' where
 
 instance GoogleRequest AssetsList' where
         type Rs AssetsList' = AssetsListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u AssetsList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq AssetsList'{..}
           = go _alCreatedAfter _alCreatorEmail _alRole _alBbox
               _alModifiedAfter
               _alModifiedBefore
@@ -320,6 +320,4 @@ instance GoogleRequest AssetsList' where
               _alOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy AssetsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AssetsListResource) rq

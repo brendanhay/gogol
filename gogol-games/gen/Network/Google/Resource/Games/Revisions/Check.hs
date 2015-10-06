@@ -152,8 +152,8 @@ instance GoogleAuth RevisionsCheck' where
 
 instance GoogleRequest RevisionsCheck' where
         type Rs RevisionsCheck' = RevisionCheckResponse
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u RevisionsCheck'{..}
+        request = requestWith gamesRequest
+        requestWith rq RevisionsCheck'{..}
           = go (Just _rcClientRevision) _rcQuotaUser
               (Just _rcPrettyPrint)
               _rcUserIP
@@ -162,7 +162,5 @@ instance GoogleRequest RevisionsCheck' where
               _rcOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy RevisionsCheckResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RevisionsCheckResource)
+                      rq

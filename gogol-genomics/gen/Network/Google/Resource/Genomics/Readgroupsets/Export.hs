@@ -155,8 +155,8 @@ instance GoogleAuth ReadgroupsetsExport' where
 instance GoogleRequest ReadgroupsetsExport' where
         type Rs ReadgroupsetsExport' =
              ExportReadGroupSetsResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReadgroupsetsExport'{..}
+        request = requestWith genomicsRequest
+        requestWith rq ReadgroupsetsExport'{..}
           = go _reQuotaUser (Just _rePrettyPrint) _reUserIP
               _reFields
               _reKey
@@ -164,7 +164,6 @@ instance GoogleRequest ReadgroupsetsExport' where
               (Just AltJSON)
               _rePayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReadgroupsetsExportResource)
-                      r
-                      u
+                      rq

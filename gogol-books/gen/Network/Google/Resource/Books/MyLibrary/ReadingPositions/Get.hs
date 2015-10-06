@@ -179,9 +179,8 @@ instance GoogleRequest MyLibraryReadingPositionsGet'
          where
         type Rs MyLibraryReadingPositionsGet' =
              ReadingPosition
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u
-          MyLibraryReadingPositionsGet'{..}
+        request = requestWith booksRequest
+        requestWith rq MyLibraryReadingPositionsGet'{..}
           = go _mlrpgVolumeId _mlrpgContentVersion _mlrpgSource
               _mlrpgQuotaUser
               (Just _mlrpgPrettyPrint)
@@ -191,7 +190,6 @@ instance GoogleRequest MyLibraryReadingPositionsGet'
               _mlrpgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MyLibraryReadingPositionsGetResource)
-                      r
-                      u
+                      rq

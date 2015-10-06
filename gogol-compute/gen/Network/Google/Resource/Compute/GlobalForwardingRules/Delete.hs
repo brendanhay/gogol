@@ -166,8 +166,8 @@ instance GoogleAuth GlobalForwardingRulesDelete'
 instance GoogleRequest GlobalForwardingRulesDelete'
          where
         type Rs GlobalForwardingRulesDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalForwardingRulesDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq GlobalForwardingRulesDelete'{..}
           = go _gfrdProject _gfrdForwardingRule _gfrdQuotaUser
               (Just _gfrdPrettyPrint)
               _gfrdUserIP
@@ -176,7 +176,6 @@ instance GoogleRequest GlobalForwardingRulesDelete'
               _gfrdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GlobalForwardingRulesDeleteResource)
-                      r
-                      u
+                      rq

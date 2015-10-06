@@ -161,8 +161,8 @@ instance GoogleAuth UsersList' where
 
 instance GoogleRequest UsersList' where
         type Rs UsersList' = UsersListResponse
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u UsersList'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq UsersList'{..}
           = go _ulProject _ulInstance _ulQuotaUser
               (Just _ulPrettyPrint)
               _ulUserIP
@@ -171,6 +171,4 @@ instance GoogleRequest UsersList' where
               _ulOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersListResource) rq

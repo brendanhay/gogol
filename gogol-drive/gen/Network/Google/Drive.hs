@@ -21,7 +21,7 @@ module Network.Google.Drive
     -- * API
       DriveAPI
     , driveAPI
-    , driveURL
+    , driveRequest
 
     -- * Service Methods
 

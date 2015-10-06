@@ -178,8 +178,8 @@ instance GoogleAuth EventsQuickAdd' where
 
 instance GoogleRequest EventsQuickAdd' where
         type Rs EventsQuickAdd' = Event
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsQuickAdd'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq EventsQuickAdd'{..}
           = go _eqaCalendarId (Just _eqaText)
               _eqaSendNotifications
               _eqaQuotaUser
@@ -190,7 +190,5 @@ instance GoogleRequest EventsQuickAdd' where
               _eqaOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EventsQuickAddResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EventsQuickAddResource)
+                      rq

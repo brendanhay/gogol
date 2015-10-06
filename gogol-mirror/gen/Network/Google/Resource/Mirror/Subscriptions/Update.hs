@@ -158,8 +158,8 @@ instance GoogleAuth SubscriptionsUpdate' where
 
 instance GoogleRequest SubscriptionsUpdate' where
         type Rs SubscriptionsUpdate' = Subscription
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u SubscriptionsUpdate'{..}
+        request = requestWith mirrorRequest
+        requestWith rq SubscriptionsUpdate'{..}
           = go _suId _suQuotaUser (Just _suPrettyPrint)
               _suUserIP
               _suFields
@@ -168,7 +168,6 @@ instance GoogleRequest SubscriptionsUpdate' where
               (Just AltJSON)
               _suPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SubscriptionsUpdateResource)
-                      r
-                      u
+                      rq

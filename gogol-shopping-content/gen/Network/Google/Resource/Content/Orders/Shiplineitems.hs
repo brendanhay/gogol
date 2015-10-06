@@ -173,8 +173,8 @@ instance GoogleAuth OrdersShiplineitems' where
 instance GoogleRequest OrdersShiplineitems' where
         type Rs OrdersShiplineitems' =
              OrdersShipLineItemsResponse
-        request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersShiplineitems'{..}
+        request = requestWith shoppingContentRequest
+        requestWith rq OrdersShiplineitems'{..}
           = go _osMerchantId _osOrderId _osQuotaUser
               (Just _osPrettyPrint)
               _osUserIP
@@ -184,7 +184,6 @@ instance GoogleRequest OrdersShiplineitems' where
               (Just AltJSON)
               _osPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OrdersShiplineitemsResource)
-                      r
-                      u
+                      rq

@@ -163,8 +163,8 @@ instance GoogleAuth PermissionsDelete' where
 
 instance GoogleRequest PermissionsDelete' where
         type Rs PermissionsDelete' = ()
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u PermissionsDelete'{..}
+        request = requestWith driveRequest
+        requestWith rq PermissionsDelete'{..}
           = go _perFileId _perPermissionId _perQuotaUser
               (Just _perPrettyPrint)
               _perUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest PermissionsDelete' where
               _perOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PermissionsDeleteResource)
-                      r
-                      u
+                      rq

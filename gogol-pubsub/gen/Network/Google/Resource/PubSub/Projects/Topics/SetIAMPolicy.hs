@@ -238,8 +238,8 @@ instance GoogleAuth ProjectsTopicsSetIAMPolicy' where
 instance GoogleRequest ProjectsTopicsSetIAMPolicy'
          where
         type Rs ProjectsTopicsSetIAMPolicy' = Policy
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsTopicsSetIAMPolicy'{..}
+        request = requestWith pubSubRequest
+        requestWith rq ProjectsTopicsSetIAMPolicy'{..}
           = go _ptsipResource _ptsipXgafv _ptsipUploadProtocol
               (Just _ptsipPp)
               _ptsipAccessToken
@@ -254,7 +254,6 @@ instance GoogleRequest ProjectsTopicsSetIAMPolicy'
               (Just AltJSON)
               _ptsipPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsTopicsSetIAMPolicyResource)
-                      r
-                      u
+                      rq

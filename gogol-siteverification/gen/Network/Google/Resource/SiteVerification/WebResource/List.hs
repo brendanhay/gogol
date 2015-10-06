@@ -139,15 +139,14 @@ instance GoogleAuth WebResourceList' where
 instance GoogleRequest WebResourceList' where
         type Rs WebResourceList' =
              SiteVerificationWebResourceListResponse
-        request = requestWithRoute defReq siteVerificationURL
-        requestWithRoute r u WebResourceList'{..}
+        request = requestWith siteVerificationRequest
+        requestWith rq WebResourceList'{..}
           = go _wrlQuotaUser (Just _wrlPrettyPrint) _wrlUserIP
               _wrlFields
               _wrlKey
               _wrlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy WebResourceListResource)
-                      r
-                      u
+                      rq

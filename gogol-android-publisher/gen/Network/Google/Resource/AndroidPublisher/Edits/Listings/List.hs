@@ -165,8 +165,8 @@ instance GoogleAuth EditsListingsList' where
 
 instance GoogleRequest EditsListingsList' where
         type Rs EditsListingsList' = ListingsListResponse
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsListingsList'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsListingsList'{..}
           = go _ellPackageName _ellEditId _ellQuotaUser
               (Just _ellPrettyPrint)
               _ellUserIP
@@ -175,7 +175,6 @@ instance GoogleRequest EditsListingsList' where
               _ellOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsListingsListResource)
-                      r
-                      u
+                      rq

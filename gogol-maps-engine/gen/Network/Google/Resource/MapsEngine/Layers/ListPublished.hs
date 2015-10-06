@@ -180,8 +180,8 @@ instance GoogleAuth LayersListPublished' where
 instance GoogleRequest LayersListPublished' where
         type Rs LayersListPublished' =
              PublishedLayersListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u LayersListPublished'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq LayersListPublished'{..}
           = go _llpPageToken _llpProjectId _llpMaxResults
               _llpQuotaUser
               (Just _llpPrettyPrint)
@@ -191,7 +191,6 @@ instance GoogleRequest LayersListPublished' where
               _llpOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LayersListPublishedResource)
-                      r
-                      u
+                      rq

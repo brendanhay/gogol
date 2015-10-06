@@ -162,8 +162,8 @@ instance GoogleAuth UserRolesInsert' where
 
 instance GoogleRequest UserRolesInsert' where
         type Rs UserRolesInsert' = UserRole
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserRolesInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq UserRolesInsert'{..}
           = go _uriProFileId _uriQuotaUser
               (Just _uriPrettyPrint)
               _uriUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest UserRolesInsert' where
               (Just AltJSON)
               _uriPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UserRolesInsertResource)
-                      r
-                      u
+                      rq

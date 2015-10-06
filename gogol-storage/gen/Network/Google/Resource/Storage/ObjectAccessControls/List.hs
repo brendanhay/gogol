@@ -180,8 +180,8 @@ instance GoogleRequest ObjectAccessControlsList'
          where
         type Rs ObjectAccessControlsList' =
              ObjectAccessControls
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectAccessControlsList'{..}
+        request = requestWith storageRequest
+        requestWith rq ObjectAccessControlsList'{..}
           = go _oaclBucket _oaclObject _oaclGeneration
               _oaclQuotaUser
               (Just _oaclPrettyPrint)
@@ -191,7 +191,6 @@ instance GoogleRequest ObjectAccessControlsList'
               _oaclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ObjectAccessControlsListResource)
-                      r
-                      u
+                      rq

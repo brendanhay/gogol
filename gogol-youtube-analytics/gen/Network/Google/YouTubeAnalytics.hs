@@ -21,7 +21,7 @@ module Network.Google.YouTubeAnalytics
     -- * API
       YouTubeAnalyticsAPI
     , youTubeAnalyticsAPI
-    , youTubeAnalyticsURL
+    , youTubeAnalyticsRequest
 
     -- * Service Methods
 

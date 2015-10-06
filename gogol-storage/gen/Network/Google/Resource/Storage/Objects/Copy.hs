@@ -393,8 +393,8 @@ instance GoogleAuth ObjectsCopy' where
 
 instance GoogleRequest ObjectsCopy' where
         type Rs ObjectsCopy' = Object
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsCopy'{..}
+        request = requestWith storageRequest
+        requestWith rq ObjectsCopy'{..}
           = go _ocSourceBucket _ocSourceObject
               _ocDestinationBucket
               _ocDestinationObject
@@ -417,16 +417,13 @@ instance GoogleRequest ObjectsCopy' where
               (Just AltJSON)
               _ocPayload
           where go :<|> _
-                  = clientWithRoute
-                      (Proxy :: Proxy ObjectsCopyResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ObjectsCopyResource) rq
 
 instance GoogleRequest (MediaDownload ObjectsCopy')
          where
         type Rs (MediaDownload ObjectsCopy') = Body
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u (MediaDownload ObjectsCopy'{..})
+        request = requestWith storageRequest
+        requestWith rq (MediaDownload ObjectsCopy'{..})
           = go _ocSourceBucket _ocSourceObject
               _ocDestinationBucket
               _ocDestinationObject
@@ -449,7 +446,4 @@ instance GoogleRequest (MediaDownload ObjectsCopy')
               (Just AltMedia)
               _ocPayload
           where _ :<|> go
-                  = clientWithRoute
-                      (Proxy :: Proxy ObjectsCopyResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ObjectsCopyResource) rq

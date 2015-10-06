@@ -163,8 +163,8 @@ instance GoogleAuth OperatingSystemsGet' where
 
 instance GoogleRequest OperatingSystemsGet' where
         type Rs OperatingSystemsGet' = OperatingSystem
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u OperatingSystemsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq OperatingSystemsGet'{..}
           = go _osgProFileId _osgDartId _osgQuotaUser
               (Just _osgPrettyPrint)
               _osgUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest OperatingSystemsGet' where
               _osgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OperatingSystemsGetResource)
-                      r
-                      u
+                      rq

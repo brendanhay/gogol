@@ -478,8 +478,8 @@ instance GoogleAuth PlacementsList' where
 
 instance GoogleRequest PlacementsList' where
         type Rs PlacementsList' = PlacementsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PlacementsList'{..}
           = go _plaProFileId
               (_plaPlacementStrategyIds ^. _Default)
               (_plaContentCategoryIds ^. _Default)
@@ -511,7 +511,5 @@ instance GoogleRequest PlacementsList' where
               _plaOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PlacementsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PlacementsListResource)
+                      rq

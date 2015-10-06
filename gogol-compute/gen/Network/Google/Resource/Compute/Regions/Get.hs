@@ -157,8 +157,8 @@ instance GoogleAuth RegionsGet' where
 
 instance GoogleRequest RegionsGet' where
         type Rs RegionsGet' = Region
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u RegionsGet'{..}
+        request = requestWith computeRequest
+        requestWith rq RegionsGet'{..}
           = go _rgProject _rgRegion _rgQuotaUser
               (Just _rgPrettyPrint)
               _rgUserIP
@@ -167,6 +167,4 @@ instance GoogleRequest RegionsGet' where
               _rgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy RegionsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RegionsGetResource) rq

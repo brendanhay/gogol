@@ -159,8 +159,8 @@ instance GoogleAuth TemplateInsert' where
 
 instance GoogleRequest TemplateInsert' where
         type Rs TemplateInsert' = Template
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TemplateInsert'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TemplateInsert'{..}
           = go _tiTableId _tiQuotaUser (Just _tiPrettyPrint)
               _tiUserIP
               _tiFields
@@ -169,7 +169,5 @@ instance GoogleRequest TemplateInsert' where
               (Just AltJSON)
               _tiPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TemplateInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TemplateInsertResource)
+                      rq

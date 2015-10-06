@@ -202,8 +202,8 @@ instance GoogleAuth TargetPoolsSetBackup' where
 
 instance GoogleRequest TargetPoolsSetBackup' where
         type Rs TargetPoolsSetBackup' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsSetBackup'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetPoolsSetBackup'{..}
           = go _tpsbProject _tpsbRegion _tpsbTargetPool
               _tpsbFailoverRatio
               _tpsbQuotaUser
@@ -215,7 +215,6 @@ instance GoogleRequest TargetPoolsSetBackup' where
               (Just AltJSON)
               _tpsbPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetPoolsSetBackupResource)
-                      r
-                      u
+                      rq

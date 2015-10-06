@@ -161,8 +161,8 @@ instance GoogleAuth ChangeLogsGet' where
 
 instance GoogleRequest ChangeLogsGet' where
         type Rs ChangeLogsGet' = ChangeLog
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ChangeLogsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ChangeLogsGet'{..}
           = go _clgProFileId _clgId _clgQuotaUser
               (Just _clgPrettyPrint)
               _clgUserIP
@@ -171,7 +171,5 @@ instance GoogleRequest ChangeLogsGet' where
               _clgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ChangeLogsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ChangeLogsGetResource)
+                      rq

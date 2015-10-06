@@ -159,8 +159,8 @@ instance GoogleAuth SitesInsert' where
 
 instance GoogleRequest SitesInsert' where
         type Rs SitesInsert' = Site
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SitesInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq SitesInsert'{..}
           = go _siProFileId _siQuotaUser (Just _siPrettyPrint)
               _siUserIP
               _siFields
@@ -169,7 +169,4 @@ instance GoogleRequest SitesInsert' where
               (Just AltJSON)
               _siPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SitesInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SitesInsertResource) rq

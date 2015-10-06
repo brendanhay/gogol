@@ -165,8 +165,8 @@ instance GoogleRequest FloodlightConfigurationsGet'
          where
         type Rs FloodlightConfigurationsGet' =
              FloodlightConfiguration
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FloodlightConfigurationsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FloodlightConfigurationsGet'{..}
           = go _fcgProFileId _fcgId _fcgQuotaUser
               (Just _fcgPrettyPrint)
               _fcgUserIP
@@ -175,7 +175,6 @@ instance GoogleRequest FloodlightConfigurationsGet'
               _fcgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy FloodlightConfigurationsGetResource)
-                      r
-                      u
+                      rq

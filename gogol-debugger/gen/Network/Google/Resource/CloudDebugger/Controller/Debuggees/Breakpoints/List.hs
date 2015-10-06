@@ -261,8 +261,8 @@ instance GoogleRequest
          ControllerDebuggeesBreakpointsList' where
         type Rs ControllerDebuggeesBreakpointsList' =
              ListActiveBreakpointsResponse
-        request = requestWithRoute defReq debuggerURL
-        requestWithRoute r u
+        request = requestWith debuggerRequest
+        requestWith rq
           ControllerDebuggeesBreakpointsList'{..}
           = go _cdblDebuggeeId _cdblXgafv _cdblUploadProtocol
               (Just _cdblPp)
@@ -278,8 +278,7 @@ instance GoogleRequest
               _cdblOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ControllerDebuggeesBreakpointsListResource)
-                      r
-                      u
+                      rq

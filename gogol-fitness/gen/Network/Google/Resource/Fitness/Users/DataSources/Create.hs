@@ -177,8 +177,8 @@ instance GoogleAuth UsersDataSourcesCreate' where
 
 instance GoogleRequest UsersDataSourcesCreate' where
         type Rs UsersDataSourcesCreate' = DataSource
-        request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersDataSourcesCreate'{..}
+        request = requestWith fitnessRequest
+        requestWith rq UsersDataSourcesCreate'{..}
           = go _udscUserId _udscQuotaUser
               (Just _udscPrettyPrint)
               _udscUserIP
@@ -188,7 +188,6 @@ instance GoogleRequest UsersDataSourcesCreate' where
               (Just AltJSON)
               _udscPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersDataSourcesCreateResource)
-                      r
-                      u
+                      rq

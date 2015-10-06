@@ -182,8 +182,8 @@ instance GoogleAuth LayersGet' where
 
 instance GoogleRequest LayersGet' where
         type Rs LayersGet' = Layersummary
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u LayersGet'{..}
+        request = requestWith booksRequest
+        requestWith rq LayersGet'{..}
           = go _lgVolumeId _lgSummaryId _lgContentVersion
               _lgSource
               _lgQuotaUser
@@ -194,6 +194,4 @@ instance GoogleRequest LayersGet' where
               _lgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy LayersGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy LayersGetResource) rq

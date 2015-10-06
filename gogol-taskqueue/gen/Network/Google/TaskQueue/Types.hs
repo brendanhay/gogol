@@ -16,7 +16,7 @@
 module Network.Google.TaskQueue.Types
     (
     -- * Service URL
-      taskQueueURL
+      taskQueueRequest
 
     -- * Tasks2
     , Tasks2
@@ -71,9 +71,8 @@ import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types.Product
 import           Network.Google.TaskQueue.Types.Sum
 
--- | URL referring to version 'v1beta2' of the TaskQueue API.
-taskQueueURL :: BaseUrl
-taskQueueURL
-  = BaseUrl Https
-      "https://www.googleapis.com/taskqueue/v1beta2/projects/"
-      443
+-- | Default request referring to version 'v1beta2' of the TaskQueue API.
+taskQueueRequest :: RequestBuilder
+taskQueueRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "taskqueue/v1beta2/projects/"

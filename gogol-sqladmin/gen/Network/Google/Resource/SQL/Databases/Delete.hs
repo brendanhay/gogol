@@ -175,8 +175,8 @@ instance GoogleAuth DatabasesDelete' where
 
 instance GoogleRequest DatabasesDelete' where
         type Rs DatabasesDelete' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u DatabasesDelete'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq DatabasesDelete'{..}
           = go _ddProject _ddInstance _ddDatabase _ddQuotaUser
               (Just _ddPrettyPrint)
               _ddUserIP
@@ -185,7 +185,6 @@ instance GoogleRequest DatabasesDelete' where
               _ddOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DatabasesDeleteResource)
-                      r
-                      u
+                      rq

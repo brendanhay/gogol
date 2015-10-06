@@ -156,10 +156,8 @@ instance GoogleRequest ConversionUpdateAvailability'
          where
         type Rs ConversionUpdateAvailability' =
              UpdateAvailabilityResponse
-        request
-          = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u
-          ConversionUpdateAvailability'{..}
+        request = requestWith doubleClickSearchRequest
+        requestWith rq ConversionUpdateAvailability'{..}
           = go _cuaQuotaUser (Just _cuaPrettyPrint) _cuaUserIP
               _cuaFields
               _cuaKey
@@ -167,7 +165,6 @@ instance GoogleRequest ConversionUpdateAvailability'
               (Just AltJSON)
               _cuaPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ConversionUpdateAvailabilityResource)
-                      r
-                      u
+                      rq

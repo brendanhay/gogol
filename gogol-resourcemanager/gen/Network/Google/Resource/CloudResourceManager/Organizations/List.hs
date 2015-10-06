@@ -246,8 +246,8 @@ instance GoogleAuth OrganizationsList' where
 instance GoogleRequest OrganizationsList' where
         type Rs OrganizationsList' =
              ListOrganizationsResponse
-        request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u OrganizationsList'{..}
+        request = requestWith resourceManagerRequest
+        requestWith rq OrganizationsList'{..}
           = go _olXgafv _olUploadProtocol (Just _olPp)
               _olAccessToken
               _olUploadType
@@ -263,7 +263,6 @@ instance GoogleRequest OrganizationsList' where
               _olOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OrganizationsListResource)
-                      r
-                      u
+                      rq

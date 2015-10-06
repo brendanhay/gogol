@@ -148,8 +148,8 @@ instance GoogleAuth SettingsGet' where
 
 instance GoogleRequest SettingsGet' where
         type Rs SettingsGet' = Setting
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u SettingsGet'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq SettingsGet'{..}
           = go _sgSetting _sgQuotaUser (Just _sgPrettyPrint)
               _sgUserIP
               _sgFields
@@ -157,7 +157,4 @@ instance GoogleRequest SettingsGet' where
               _sgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SettingsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SettingsGetResource) rq

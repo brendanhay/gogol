@@ -175,8 +175,8 @@ instance GoogleAuth AdvertisersGet' where
 
 instance GoogleRequest AdvertisersGet' where
         type Rs AdvertisersGet' = Advertiser
-        request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u AdvertisersGet'{..}
+        request = requestWith affiliatesRequest
+        requestWith rq AdvertisersGet'{..}
           = go _agRole _agRoleId _agAdvertiserId _agQuotaUser
               (Just _agPrettyPrint)
               _agUserIP
@@ -185,7 +185,5 @@ instance GoogleRequest AdvertisersGet' where
               _agOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AdvertisersGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AdvertisersGetResource)
+                      rq

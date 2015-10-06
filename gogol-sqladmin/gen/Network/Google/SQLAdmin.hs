@@ -21,7 +21,7 @@ module Network.Google.SQLAdmin
     -- * API
       SQLAdminAPI
     , sQLAdminAPI
-    , sQLAdminURL
+    , sQLAdminRequest
 
     -- * Service Methods
 

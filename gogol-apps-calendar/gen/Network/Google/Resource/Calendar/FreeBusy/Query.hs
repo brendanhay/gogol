@@ -150,8 +150,8 @@ instance GoogleAuth FreeBusyQuery' where
 
 instance GoogleRequest FreeBusyQuery' where
         type Rs FreeBusyQuery' = FreeBusyResponse
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u FreeBusyQuery'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq FreeBusyQuery'{..}
           = go _fbqQuotaUser (Just _fbqPrettyPrint) _fbqUserIP
               _fbqFields
               _fbqKey
@@ -159,7 +159,5 @@ instance GoogleRequest FreeBusyQuery' where
               (Just AltJSON)
               _fbqPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy FreeBusyQueryResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy FreeBusyQueryResource)
+                      rq

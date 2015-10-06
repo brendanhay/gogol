@@ -184,8 +184,8 @@ instance GoogleRequest
          AccountsContainersVersionsUndelete' where
         type Rs AccountsContainersVersionsUndelete' =
              ContainerVersion
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
+        request = requestWith tagManagerRequest
+        requestWith rq
           AccountsContainersVersionsUndelete'{..}
           = go _acvuAccountId _acvuContainerId
               _acvuContainerVersionId
@@ -197,8 +197,7 @@ instance GoogleRequest
               _acvuOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersVersionsUndeleteResource)
-                      r
-                      u
+                      rq

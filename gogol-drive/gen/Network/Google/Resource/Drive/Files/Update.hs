@@ -330,8 +330,8 @@ instance GoogleAuth FilesUpdate' where
 
 instance GoogleRequest FilesUpdate' where
         type Rs FilesUpdate' = File
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesUpdate'{..}
+        request = requestWith driveRequest
+        requestWith rq FilesUpdate'{..}
           = go _fuFileId (Just _fuNewRevision) (Just _fuPinned)
               _fuTimedTextLanguage
               (Just _fuUpdateViewedDate)
@@ -354,7 +354,4 @@ instance GoogleRequest FilesUpdate' where
               _fuPayload
               _fuMedia
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy FilesUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy FilesUpdateResource) rq

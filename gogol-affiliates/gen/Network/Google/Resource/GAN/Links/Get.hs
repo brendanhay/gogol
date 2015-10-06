@@ -174,8 +174,8 @@ instance GoogleAuth LinksGet' where
 
 instance GoogleRequest LinksGet' where
         type Rs LinksGet' = Link
-        request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u LinksGet'{..}
+        request = requestWith affiliatesRequest
+        requestWith rq LinksGet'{..}
           = go _lgRole _lgRoleId _lgLinkId _lgQuotaUser
               (Just _lgPrettyPrint)
               _lgUserIP
@@ -184,5 +184,4 @@ instance GoogleRequest LinksGet' where
               _lgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy LinksGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy LinksGetResource) rq

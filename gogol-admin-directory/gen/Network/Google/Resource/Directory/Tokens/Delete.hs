@@ -160,8 +160,8 @@ instance GoogleAuth TokensDelete' where
 
 instance GoogleRequest TokensDelete' where
         type Rs TokensDelete' = ()
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u TokensDelete'{..}
+        request = requestWith directoryRequest
+        requestWith rq TokensDelete'{..}
           = go _tdUserKey _tdClientId _tdQuotaUser
               (Just _tdPrettyPrint)
               _tdUserIP
@@ -170,7 +170,5 @@ instance GoogleRequest TokensDelete' where
               _tdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TokensDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TokensDeleteResource)
+                      rq

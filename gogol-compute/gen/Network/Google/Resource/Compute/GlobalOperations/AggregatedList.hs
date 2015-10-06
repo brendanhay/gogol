@@ -202,9 +202,8 @@ instance GoogleRequest
          GlobalOperationsAggregatedList' where
         type Rs GlobalOperationsAggregatedList' =
              OperationAggregatedList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u
-          GlobalOperationsAggregatedList'{..}
+        request = requestWith computeRequest
+        requestWith rq GlobalOperationsAggregatedList'{..}
           = go _goalProject _goalFilter _goalPageToken
               (Just _goalMaxResults)
               _goalQuotaUser
@@ -215,8 +214,7 @@ instance GoogleRequest
               _goalOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy GlobalOperationsAggregatedListResource)
-                      r
-                      u
+                      rq

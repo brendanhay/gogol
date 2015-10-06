@@ -154,8 +154,8 @@ instance GoogleAuth VerificationCodesList' where
 
 instance GoogleRequest VerificationCodesList' where
         type Rs VerificationCodesList' = VerificationCodes
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u VerificationCodesList'{..}
+        request = requestWith directoryRequest
+        requestWith rq VerificationCodesList'{..}
           = go _vclUserKey _vclQuotaUser (Just _vclPrettyPrint)
               _vclUserIP
               _vclFields
@@ -163,7 +163,6 @@ instance GoogleRequest VerificationCodesList' where
               _vclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VerificationCodesListResource)
-                      r
-                      u
+                      rq

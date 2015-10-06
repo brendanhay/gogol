@@ -161,8 +161,8 @@ instance GoogleAuth SizesGet' where
 
 instance GoogleRequest SizesGet' where
         type Rs SizesGet' = Size
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SizesGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq SizesGet'{..}
           = go _sizProFileId _sizId _sizQuotaUser
               (Just _sizPrettyPrint)
               _sizUserIP
@@ -171,5 +171,4 @@ instance GoogleRequest SizesGet' where
               _sizOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy SizesGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy SizesGetResource) rq

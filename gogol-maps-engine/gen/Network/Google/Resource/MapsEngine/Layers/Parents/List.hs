@@ -178,8 +178,8 @@ instance GoogleAuth LayersParentsList' where
 
 instance GoogleRequest LayersParentsList' where
         type Rs LayersParentsList' = ParentsListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u LayersParentsList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq LayersParentsList'{..}
           = go _lplpId _lplpPageToken _lplpMaxResults
               _lplpQuotaUser
               (Just _lplpPrettyPrint)
@@ -189,7 +189,6 @@ instance GoogleRequest LayersParentsList' where
               _lplpOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LayersParentsListResource)
-                      r
-                      u
+                      rq

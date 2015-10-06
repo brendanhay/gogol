@@ -179,8 +179,8 @@ instance GoogleAuth InstanceGroupManagersInsert'
 instance GoogleRequest InstanceGroupManagersInsert'
          where
         type Rs InstanceGroupManagersInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceGroupManagersInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq InstanceGroupManagersInsert'{..}
           = go _igmiProject _igmiZone _igmiQuotaUser
               (Just _igmiPrettyPrint)
               _igmiUserIP
@@ -190,7 +190,6 @@ instance GoogleRequest InstanceGroupManagersInsert'
               (Just AltJSON)
               _igmiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstanceGroupManagersInsertResource)
-                      r
-                      u
+                      rq

@@ -220,8 +220,8 @@ instance GoogleAuth TransferOperationsGet' where
 
 instance GoogleRequest TransferOperationsGet' where
         type Rs TransferOperationsGet' = Operation
-        request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferOperationsGet'{..}
+        request = requestWith storageTransferRequest
+        requestWith rq TransferOperationsGet'{..}
           = go _togName _togXgafv _togUploadProtocol
               (Just _togPp)
               _togAccessToken
@@ -235,7 +235,6 @@ instance GoogleRequest TransferOperationsGet' where
               _togOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TransferOperationsGetResource)
-                      r
-                      u
+                      rq

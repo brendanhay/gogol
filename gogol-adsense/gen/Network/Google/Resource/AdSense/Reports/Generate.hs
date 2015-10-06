@@ -313,8 +313,8 @@ instance GoogleAuth ReportsGenerate' where
 instance GoogleRequest ReportsGenerate' where
         type Rs ReportsGenerate' =
              AdsenseReportsGenerateResponse
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u ReportsGenerate'{..}
+        request = requestWith adSenseRequest
+        requestWith rq ReportsGenerate'{..}
           = go (Just _rgStartDate) (Just _rgEndDate)
               (_rgDimension ^. _Default)
               _rgLocale
@@ -334,17 +334,15 @@ instance GoogleRequest ReportsGenerate' where
               _rgOAuthToken
               (Just AltJSON)
           where go :<|> _
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReportsGenerateResource)
-                      r
-                      u
+                      rq
 
 instance GoogleRequest
          (MediaDownload ReportsGenerate') where
         type Rs (MediaDownload ReportsGenerate') = Body
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u
-          (MediaDownload ReportsGenerate'{..})
+        request = requestWith adSenseRequest
+        requestWith rq (MediaDownload ReportsGenerate'{..})
           = go (Just _rgStartDate) (Just _rgEndDate)
               (_rgDimension ^. _Default)
               _rgLocale
@@ -364,7 +362,6 @@ instance GoogleRequest
               _rgOAuthToken
               (Just AltMedia)
           where _ :<|> go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReportsGenerateResource)
-                      r
-                      u
+                      rq

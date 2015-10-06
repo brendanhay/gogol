@@ -167,9 +167,8 @@ instance GoogleRequest TargetableRemarketingListsGet'
          where
         type Rs TargetableRemarketingListsGet' =
              TargetableRemarketingList
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u
-          TargetableRemarketingListsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq TargetableRemarketingListsGet'{..}
           = go _trlgProFileId _trlgId _trlgQuotaUser
               (Just _trlgPrettyPrint)
               _trlgUserIP
@@ -178,8 +177,7 @@ instance GoogleRequest TargetableRemarketingListsGet'
               _trlgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy TargetableRemarketingListsGetResource)
-                      r
-                      u
+                      rq

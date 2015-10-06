@@ -180,8 +180,8 @@ instance GoogleAuth ThumbnailsSet' where
 
 instance GoogleRequest ThumbnailsSet' where
         type Rs ThumbnailsSet' = ThumbnailSetResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ThumbnailsSet'{..}
+        request = requestWith youTubeRequest
+        requestWith rq ThumbnailsSet'{..}
           = go (Just _tsVideoId) _tsOnBehalfOfContentOwner
               _tsQuotaUser
               (Just _tsPrettyPrint)
@@ -192,7 +192,5 @@ instance GoogleRequest ThumbnailsSet' where
               (Just AltJSON)
               _tsMedia
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ThumbnailsSetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ThumbnailsSetResource)
+                      rq

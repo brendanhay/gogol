@@ -254,10 +254,8 @@ instance GoogleAuth AccountsStoreInfosCountryGet'
 instance GoogleRequest AccountsStoreInfosCountryGet'
          where
         type Rs AccountsStoreInfosCountryGet' = StoreInfo
-        request
-          = requestWithRoute defReq playMoviesPartnerURL
-        requestWithRoute r u
-          AccountsStoreInfosCountryGet'{..}
+        request = requestWith playMoviesPartnerRequest
+        requestWith rq AccountsStoreInfosCountryGet'{..}
           = go _asicgAccountId _asicgVideoId _asicgCountry
               _asicgXgafv
               _asicgUploadProtocol
@@ -273,7 +271,6 @@ instance GoogleRequest AccountsStoreInfosCountryGet'
               _asicgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsStoreInfosCountryGetResource)
-                      r
-                      u
+                      rq

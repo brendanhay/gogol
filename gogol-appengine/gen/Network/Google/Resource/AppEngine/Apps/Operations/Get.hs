@@ -236,8 +236,8 @@ instance GoogleAuth AppsOperationsGet' where
 
 instance GoogleRequest AppsOperationsGet' where
         type Rs AppsOperationsGet' = Operation
-        request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsOperationsGet'{..}
+        request = requestWith appEngineRequest
+        requestWith rq AppsOperationsGet'{..}
           = go _aogAppsId _aogOperationsId _aogXgafv
               _aogUploadProtocol
               (Just _aogPp)
@@ -252,7 +252,6 @@ instance GoogleRequest AppsOperationsGet' where
               _aogOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AppsOperationsGetResource)
-                      r
-                      u
+                      rq

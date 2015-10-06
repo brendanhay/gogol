@@ -180,10 +180,8 @@ instance GoogleRequest LeaderboardConfigurationsList'
          where
         type Rs LeaderboardConfigurationsList' =
              LeaderboardConfigurationListResponse
-        request
-          = requestWithRoute defReq gamesConfigurationURL
-        requestWithRoute r u
-          LeaderboardConfigurationsList'{..}
+        request = requestWith gamesConfigurationRequest
+        requestWith rq LeaderboardConfigurationsList'{..}
           = go _lclApplicationId _lclPageToken _lclMaxResults
               _lclQuotaUser
               (Just _lclPrettyPrint)
@@ -193,8 +191,7 @@ instance GoogleRequest LeaderboardConfigurationsList'
               _lclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy LeaderboardConfigurationsListResource)
-                      r
-                      u
+                      rq

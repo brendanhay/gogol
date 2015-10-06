@@ -163,8 +163,8 @@ instance GoogleAuth TaskListsUpdate' where
 
 instance GoogleRequest TaskListsUpdate' where
         type Rs TaskListsUpdate' = TaskList
-        request = requestWithRoute defReq appsTasksURL
-        requestWithRoute r u TaskListsUpdate'{..}
+        request = requestWith appsTasksRequest
+        requestWith rq TaskListsUpdate'{..}
           = go _tluTaskList _tluQuotaUser
               (Just _tluPrettyPrint)
               _tluUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest TaskListsUpdate' where
               (Just AltJSON)
               _tluPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TaskListsUpdateResource)
-                      r
-                      u
+                      rq

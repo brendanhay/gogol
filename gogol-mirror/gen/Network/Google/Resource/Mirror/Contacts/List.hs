@@ -135,15 +135,13 @@ instance GoogleAuth ContactsList' where
 
 instance GoogleRequest ContactsList' where
         type Rs ContactsList' = ContactsListResponse
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u ContactsList'{..}
+        request = requestWith mirrorRequest
+        requestWith rq ContactsList'{..}
           = go _clQuotaUser (Just _clPrettyPrint) _clUserIP
               _clFields
               _clKey
               _clOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ContactsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ContactsListResource)
+                      rq

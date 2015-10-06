@@ -149,8 +149,8 @@ instance GoogleAuth AnnotationsDelete' where
 
 instance GoogleRequest AnnotationsDelete' where
         type Rs AnnotationsDelete' = ()
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u AnnotationsDelete'{..}
+        request = requestWith genomicsRequest
+        requestWith rq AnnotationsDelete'{..}
           = go _adAnnotationId _adQuotaUser
               (Just _adPrettyPrint)
               _adUserIP
@@ -159,7 +159,6 @@ instance GoogleRequest AnnotationsDelete' where
               _adOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AnnotationsDeleteResource)
-                      r
-                      u
+                      rq

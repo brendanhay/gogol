@@ -171,8 +171,8 @@ instance GoogleAuth TemplatePatch' where
 
 instance GoogleRequest TemplatePatch' where
         type Rs TemplatePatch' = Template
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TemplatePatch'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TemplatePatch'{..}
           = go _tpTableId _tpTemplateId _tpQuotaUser
               (Just _tpPrettyPrint)
               _tpUserIP
@@ -182,7 +182,5 @@ instance GoogleRequest TemplatePatch' where
               (Just AltJSON)
               _tpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TemplatePatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TemplatePatchResource)
+                      rq

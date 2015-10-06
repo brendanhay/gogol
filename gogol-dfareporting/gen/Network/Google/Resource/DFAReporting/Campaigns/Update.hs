@@ -159,8 +159,8 @@ instance GoogleAuth CampaignsUpdate' where
 
 instance GoogleRequest CampaignsUpdate' where
         type Rs CampaignsUpdate' = Campaign
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CampaignsUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CampaignsUpdate'{..}
           = go _cuProFileId _cuQuotaUser (Just _cuPrettyPrint)
               _cuUserIP
               _cuFields
@@ -169,7 +169,6 @@ instance GoogleRequest CampaignsUpdate' where
               (Just AltJSON)
               _cuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CampaignsUpdateResource)
-                      r
-                      u
+                      rq

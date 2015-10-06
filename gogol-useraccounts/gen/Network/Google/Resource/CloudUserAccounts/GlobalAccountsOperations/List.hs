@@ -221,9 +221,8 @@ instance GoogleAuth GlobalAccountsOperationsList'
 instance GoogleRequest GlobalAccountsOperationsList'
          where
         type Rs GlobalAccountsOperationsList' = OperationList
-        request = requestWithRoute defReq userAccountsURL
-        requestWithRoute r u
-          GlobalAccountsOperationsList'{..}
+        request = requestWith userAccountsRequest
+        requestWith rq GlobalAccountsOperationsList'{..}
           = go _gaolProject _gaolOrderBy _gaolFilter
               _gaolPageToken
               (Just _gaolMaxResults)
@@ -235,7 +234,6 @@ instance GoogleRequest GlobalAccountsOperationsList'
               _gaolOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GlobalAccountsOperationsListResource)
-                      r
-                      u
+                      rq

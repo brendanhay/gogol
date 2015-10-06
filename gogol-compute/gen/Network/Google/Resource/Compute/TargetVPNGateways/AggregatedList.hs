@@ -202,9 +202,8 @@ instance GoogleRequest
          TargetVPNGatewaysAggregatedList' where
         type Rs TargetVPNGatewaysAggregatedList' =
              TargetVPNGatewayAggregatedList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u
-          TargetVPNGatewaysAggregatedList'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetVPNGatewaysAggregatedList'{..}
           = go _tvgalProject _tvgalFilter _tvgalPageToken
               (Just _tvgalMaxResults)
               _tvgalQuotaUser
@@ -215,8 +214,7 @@ instance GoogleRequest
               _tvgalOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy TargetVPNGatewaysAggregatedListResource)
-                      r
-                      u
+                      rq

@@ -281,8 +281,8 @@ instance GoogleAuth OrderDocumentsList' where
 instance GoogleRequest OrderDocumentsList' where
         type Rs OrderDocumentsList' =
              OrderDocumentsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u OrderDocumentsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq OrderDocumentsList'{..}
           = go _odlProFileId _odlProjectId _odlSearchString
               (_odlIds ^. _Default)
               _odlSortOrder
@@ -300,7 +300,6 @@ instance GoogleRequest OrderDocumentsList' where
               _odlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OrderDocumentsListResource)
-                      r
-                      u
+                      rq

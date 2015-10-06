@@ -220,8 +220,8 @@ instance GoogleAuth ProjectsSinksList' where
 
 instance GoogleRequest ProjectsSinksList' where
         type Rs ProjectsSinksList' = ListSinksResponse
-        request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsSinksList'{..}
+        request = requestWith loggingRequest
+        requestWith rq ProjectsSinksList'{..}
           = go _pslProjectsId _pslXgafv _pslUploadProtocol
               (Just _pslPp)
               _pslAccessToken
@@ -235,7 +235,6 @@ instance GoogleRequest ProjectsSinksList' where
               _pslOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsSinksListResource)
-                      r
-                      u
+                      rq

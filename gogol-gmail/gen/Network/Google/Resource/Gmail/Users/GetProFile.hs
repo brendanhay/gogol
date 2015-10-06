@@ -151,8 +151,8 @@ instance GoogleAuth UsersGetProFile' where
 
 instance GoogleRequest UsersGetProFile' where
         type Rs UsersGetProFile' = ProFile
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersGetProFile'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersGetProFile'{..}
           = go _ugpfUserId _ugpfQuotaUser
               (Just _ugpfPrettyPrint)
               _ugpfUserIP
@@ -161,7 +161,6 @@ instance GoogleRequest UsersGetProFile' where
               _ugpfOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersGetProFileResource)
-                      r
-                      u
+                      rq

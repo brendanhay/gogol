@@ -205,9 +205,8 @@ instance GoogleAuth AccountsContainersRulesUpdate'
 instance GoogleRequest AccountsContainersRulesUpdate'
          where
         type Rs AccountsContainersRulesUpdate' = Rule
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersRulesUpdate'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersRulesUpdate'{..}
           = go _acruAccountId _acruContainerId _acruRuleId
               _acruFingerprint
               _acruQuotaUser
@@ -219,8 +218,7 @@ instance GoogleRequest AccountsContainersRulesUpdate'
               (Just AltJSON)
               _acruPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersRulesUpdateResource)
-                      r
-                      u
+                      rq

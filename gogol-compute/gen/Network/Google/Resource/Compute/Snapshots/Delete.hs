@@ -167,8 +167,8 @@ instance GoogleAuth SnapshotsDelete' where
 
 instance GoogleRequest SnapshotsDelete' where
         type Rs SnapshotsDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u SnapshotsDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq SnapshotsDelete'{..}
           = go _sdProject _sdSnapshot _sdQuotaUser
               (Just _sdPrettyPrint)
               _sdUserIP
@@ -177,7 +177,6 @@ instance GoogleRequest SnapshotsDelete' where
               _sdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SnapshotsDeleteResource)
-                      r
-                      u
+                      rq

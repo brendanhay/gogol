@@ -202,9 +202,8 @@ instance GoogleRequest InstanceGroupsAggregatedList'
          where
         type Rs InstanceGroupsAggregatedList' =
              InstanceGroupAggregatedList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u
-          InstanceGroupsAggregatedList'{..}
+        request = requestWith computeRequest
+        requestWith rq InstanceGroupsAggregatedList'{..}
           = go _igalProject _igalFilter _igalPageToken
               (Just _igalMaxResults)
               _igalQuotaUser
@@ -215,7 +214,6 @@ instance GoogleRequest InstanceGroupsAggregatedList'
               _igalOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstanceGroupsAggregatedListResource)
-                      r
-                      u
+                      rq

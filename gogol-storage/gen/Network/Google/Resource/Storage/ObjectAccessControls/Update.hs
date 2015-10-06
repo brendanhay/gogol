@@ -206,8 +206,8 @@ instance GoogleRequest ObjectAccessControlsUpdate'
          where
         type Rs ObjectAccessControlsUpdate' =
              ObjectAccessControl
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectAccessControlsUpdate'{..}
+        request = requestWith storageRequest
+        requestWith rq ObjectAccessControlsUpdate'{..}
           = go _oacuBucket _oacuObject _oacuEntity
               _oacuGeneration
               _oacuQuotaUser
@@ -219,7 +219,6 @@ instance GoogleRequest ObjectAccessControlsUpdate'
               (Just AltJSON)
               _oacuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ObjectAccessControlsUpdateResource)
-                      r
-                      u
+                      rq

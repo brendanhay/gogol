@@ -146,8 +146,8 @@ instance GoogleAuth DatasetsDelete' where
 
 instance GoogleRequest DatasetsDelete' where
         type Rs DatasetsDelete' = ()
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u DatasetsDelete'{..}
+        request = requestWith genomicsRequest
+        requestWith rq DatasetsDelete'{..}
           = go _ddDatasetId _ddQuotaUser (Just _ddPrettyPrint)
               _ddUserIP
               _ddFields
@@ -155,7 +155,5 @@ instance GoogleRequest DatasetsDelete' where
               _ddOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DatasetsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DatasetsDeleteResource)
+                      rq

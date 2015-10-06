@@ -172,8 +172,8 @@ instance GoogleAuth TrainedModelsUpdate' where
 
 instance GoogleRequest TrainedModelsUpdate' where
         type Rs TrainedModelsUpdate' = Insert2
-        request = requestWithRoute defReq predictionURL
-        requestWithRoute r u TrainedModelsUpdate'{..}
+        request = requestWith predictionRequest
+        requestWith rq TrainedModelsUpdate'{..}
           = go _tmuProject _tmuId _tmuQuotaUser
               (Just _tmuPrettyPrint)
               _tmuUserIP
@@ -183,7 +183,6 @@ instance GoogleRequest TrainedModelsUpdate' where
               (Just AltJSON)
               _tmuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TrainedModelsUpdateResource)
-                      r
-                      u
+                      rq

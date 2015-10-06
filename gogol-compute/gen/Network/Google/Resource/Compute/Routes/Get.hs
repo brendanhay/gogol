@@ -161,8 +161,8 @@ instance GoogleAuth RoutesGet' where
 
 instance GoogleRequest RoutesGet' where
         type Rs RoutesGet' = Route
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u RoutesGet'{..}
+        request = requestWith computeRequest
+        requestWith rq RoutesGet'{..}
           = go _rouProject _rouRoute _rouQuotaUser
               (Just _rouPrettyPrint)
               _rouUserIP
@@ -171,6 +171,4 @@ instance GoogleRequest RoutesGet' where
               _rouOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy RoutesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RoutesGetResource) rq

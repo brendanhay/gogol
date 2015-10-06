@@ -177,8 +177,8 @@ instance GoogleAuth TargetVPNGatewaysGet' where
 
 instance GoogleRequest TargetVPNGatewaysGet' where
         type Rs TargetVPNGatewaysGet' = TargetVPNGateway
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetVPNGatewaysGet'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetVPNGatewaysGet'{..}
           = go _tvggProject _tvggRegion _tvggTargetVPNGateway
               _tvggQuotaUser
               (Just _tvggPrettyPrint)
@@ -188,7 +188,6 @@ instance GoogleRequest TargetVPNGatewaysGet' where
               _tvggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetVPNGatewaysGetResource)
-                      r
-                      u
+                      rq

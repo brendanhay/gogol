@@ -150,8 +150,8 @@ instance GoogleAuth TiersList' where
 
 instance GoogleRequest TiersList' where
         type Rs TiersList' = TiersListResponse
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u TiersList'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq TiersList'{..}
           = go _tlProject _tlQuotaUser (Just _tlPrettyPrint)
               _tlUserIP
               _tlFields
@@ -159,6 +159,4 @@ instance GoogleRequest TiersList' where
               _tlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TiersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TiersListResource) rq

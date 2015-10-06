@@ -159,8 +159,8 @@ instance GoogleAuth SavedadstylesList' where
 
 instance GoogleRequest SavedadstylesList' where
         type Rs SavedadstylesList' = SavedAdStyles
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u SavedadstylesList'{..}
+        request = requestWith adSenseRequest
+        requestWith rq SavedadstylesList'{..}
           = go _slPageToken _slMaxResults _slQuotaUser
               (Just _slPrettyPrint)
               _slUserIP
@@ -169,7 +169,6 @@ instance GoogleRequest SavedadstylesList' where
               _slOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SavedadstylesListResource)
-                      r
-                      u
+                      rq

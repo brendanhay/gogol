@@ -271,8 +271,8 @@ instance GoogleAuth ActivitiesList' where
 
 instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ActivityListResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ActivitiesList'{..}
+        request = requestWith youTubeRequest
+        requestWith rq ActivitiesList'{..}
           = go (Just _alPart) _alPublishedAfter _alHome _alMine
               _alRegionCode
               _alChannelId
@@ -287,7 +287,5 @@ instance GoogleRequest ActivitiesList' where
               _alOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ActivitiesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ActivitiesListResource)
+                      rq

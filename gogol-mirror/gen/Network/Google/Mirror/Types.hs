@@ -16,7 +16,7 @@
 module Network.Google.Mirror.Types
     (
     -- * Service URL
-      mirrorURL
+      mirrorRequest
 
     -- * TimelineListOrderBy
     , TimelineListOrderBy (..)
@@ -207,9 +207,8 @@ import           Network.Google.Mirror.Types.Product
 import           Network.Google.Mirror.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Google Mirror API.
-mirrorURL :: BaseUrl
-mirrorURL
-  = BaseUrl Https
-      "https://www.googleapis.com/mirror/v1/"
-      443
+-- | Default request referring to version 'v1' of the Google Mirror API.
+mirrorRequest :: RequestBuilder
+mirrorRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "mirror/v1/"

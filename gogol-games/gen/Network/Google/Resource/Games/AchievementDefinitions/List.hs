@@ -176,8 +176,8 @@ instance GoogleRequest AchievementDefinitionsList'
          where
         type Rs AchievementDefinitionsList' =
              AchievementDefinitionsListResponse
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u AchievementDefinitionsList'{..}
+        request = requestWith gamesRequest
+        requestWith rq AchievementDefinitionsList'{..}
           = go _adlLanguage _adlPageToken _adlMaxResults
               _adlQuotaUser
               (Just _adlPrettyPrint)
@@ -187,7 +187,6 @@ instance GoogleRequest AchievementDefinitionsList'
               _adlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AchievementDefinitionsListResource)
-                      r
-                      u
+                      rq

@@ -165,9 +165,8 @@ instance GoogleAuth FloodlightActivityGroupsDelete'
 instance GoogleRequest
          FloodlightActivityGroupsDelete' where
         type Rs FloodlightActivityGroupsDelete' = ()
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u
-          FloodlightActivityGroupsDelete'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FloodlightActivityGroupsDelete'{..}
           = go _fagdProFileId _fagdId _fagdQuotaUser
               (Just _fagdPrettyPrint)
               _fagdUserIP
@@ -176,8 +175,7 @@ instance GoogleRequest
               _fagdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy FloodlightActivityGroupsDeleteResource)
-                      r
-                      u
+                      rq

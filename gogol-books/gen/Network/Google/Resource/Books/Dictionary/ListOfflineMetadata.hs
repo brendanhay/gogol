@@ -153,9 +153,8 @@ instance GoogleAuth DictionaryListOfflineMetadata'
 instance GoogleRequest DictionaryListOfflineMetadata'
          where
         type Rs DictionaryListOfflineMetadata' = Metadata
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u
-          DictionaryListOfflineMetadata'{..}
+        request = requestWith booksRequest
+        requestWith rq DictionaryListOfflineMetadata'{..}
           = go (Just _dlomCpksver) _dlomQuotaUser
               (Just _dlomPrettyPrint)
               _dlomUserIP
@@ -164,8 +163,7 @@ instance GoogleRequest DictionaryListOfflineMetadata'
               _dlomOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy DictionaryListOfflineMetadataResource)
-                      r
-                      u
+                      rq

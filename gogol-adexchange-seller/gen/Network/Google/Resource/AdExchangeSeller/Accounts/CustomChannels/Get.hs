@@ -181,8 +181,8 @@ instance GoogleAuth AccountsCustomChannelsGet' where
 instance GoogleRequest AccountsCustomChannelsGet'
          where
         type Rs AccountsCustomChannelsGet' = CustomChannel
-        request = requestWithRoute defReq adExchangeSellerURL
-        requestWithRoute r u AccountsCustomChannelsGet'{..}
+        request = requestWith adExchangeSellerRequest
+        requestWith rq AccountsCustomChannelsGet'{..}
           = go _accgAccountId _accgAdClientId
               _accgCustomChannelId
               _accgQuotaUser
@@ -193,7 +193,6 @@ instance GoogleRequest AccountsCustomChannelsGet'
               _accgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsCustomChannelsGetResource)
-                      r
-                      u
+                      rq

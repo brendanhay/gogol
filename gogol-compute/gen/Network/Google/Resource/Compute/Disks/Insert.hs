@@ -184,8 +184,8 @@ instance GoogleAuth DisksInsert' where
 
 instance GoogleRequest DisksInsert' where
         type Rs DisksInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u DisksInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq DisksInsert'{..}
           = go _diProject _diZone _diSourceImage _diQuotaUser
               (Just _diPrettyPrint)
               _diUserIP
@@ -195,7 +195,4 @@ instance GoogleRequest DisksInsert' where
               (Just AltJSON)
               _diPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DisksInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DisksInsertResource) rq

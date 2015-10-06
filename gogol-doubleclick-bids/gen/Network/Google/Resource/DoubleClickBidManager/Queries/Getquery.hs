@@ -146,8 +146,8 @@ instance GoogleAuth QueriesGetquery' where
 
 instance GoogleRequest QueriesGetquery' where
         type Rs QueriesGetquery' = Query
-        request = requestWithRoute defReq doubleClickBidsURL
-        requestWithRoute r u QueriesGetquery'{..}
+        request = requestWith doubleClickBidsRequest
+        requestWith rq QueriesGetquery'{..}
           = go _qgQueryId _qgQuotaUser (Just _qgPrettyPrint)
               _qgUserIP
               _qgFields
@@ -155,7 +155,6 @@ instance GoogleRequest QueriesGetquery' where
               _qgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy QueriesGetqueryResource)
-                      r
-                      u
+                      rq

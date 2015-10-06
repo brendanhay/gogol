@@ -233,9 +233,8 @@ instance GoogleAuth AccountsOrdersGet' where
 
 instance GoogleRequest AccountsOrdersGet' where
         type Rs AccountsOrdersGet' = Order
-        request
-          = requestWithRoute defReq playMoviesPartnerURL
-        requestWithRoute r u AccountsOrdersGet'{..}
+        request = requestWith playMoviesPartnerRequest
+        requestWith rq AccountsOrdersGet'{..}
           = go _aogAccountId _aogOrderId _aogXgafv
               _aogUploadProtocol
               (Just _aogPp)
@@ -250,7 +249,6 @@ instance GoogleRequest AccountsOrdersGet' where
               _aogOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsOrdersGetResource)
-                      r
-                      u
+                      rq

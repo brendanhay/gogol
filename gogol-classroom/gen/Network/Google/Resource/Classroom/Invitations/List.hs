@@ -266,8 +266,8 @@ instance GoogleAuth InvitationsList' where
 
 instance GoogleRequest InvitationsList' where
         type Rs InvitationsList' = ListInvitationsResponse
-        request = requestWithRoute defReq classroomURL
-        requestWithRoute r u InvitationsList'{..}
+        request = requestWith classroomRequest
+        requestWith rq InvitationsList'{..}
           = go _ilXgafv _ilUploadProtocol (Just _ilPp)
               _ilCourseId
               _ilAccessToken
@@ -284,7 +284,6 @@ instance GoogleRequest InvitationsList' where
               _ilOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InvitationsListResource)
-                      r
-                      u
+                      rq

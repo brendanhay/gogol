@@ -16,7 +16,7 @@
 module Network.Google.AdExchangeSeller.Types
     (
     -- * Service URL
-      adExchangeSellerURL
+      adExchangeSellerRequest
 
     -- * AdClients
     , AdClients
@@ -178,9 +178,8 @@ import           Network.Google.AdExchangeSeller.Types.Product
 import           Network.Google.AdExchangeSeller.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v2.0' of the Ad Exchange Seller API.
-adExchangeSellerURL :: BaseUrl
-adExchangeSellerURL
-  = BaseUrl Https
-      "https://www.googleapis.com/adexchangeseller/v2.0/"
-      443
+-- | Default request referring to version 'v2.0' of the Ad Exchange Seller API.
+adExchangeSellerRequest :: RequestBuilder
+adExchangeSellerRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "adexchangeseller/v2.0/"

@@ -247,8 +247,8 @@ instance GoogleRequest LinuxGetLinuxAccountViews'
          where
         type Rs LinuxGetLinuxAccountViews' =
              LinuxGetLinuxAccountViewsResponse
-        request = requestWithRoute defReq userAccountsURL
-        requestWithRoute r u LinuxGetLinuxAccountViews'{..}
+        request = requestWith userAccountsRequest
+        requestWith rq LinuxGetLinuxAccountViews'{..}
           = go _lglavProject _lglavZone (Just _lglavInstance)
               _lglavOrderBy
               _lglavFilter
@@ -262,7 +262,6 @@ instance GoogleRequest LinuxGetLinuxAccountViews'
               _lglavOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LinuxGetLinuxAccountViewsResource)
-                      r
-                      u
+                      rq

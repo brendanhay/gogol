@@ -225,8 +225,8 @@ instance GoogleAuth CommentsListByBlog' where
 
 instance GoogleRequest CommentsListByBlog' where
         type Rs CommentsListByBlog' = CommentList
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u CommentsListByBlog'{..}
+        request = requestWith bloggerRequest
+        requestWith rq CommentsListByBlog'{..}
           = go _clbbBlogId (_clbbStatus ^. _Default)
               _clbbEndDate
               _clbbStartDate
@@ -241,7 +241,6 @@ instance GoogleRequest CommentsListByBlog' where
               _clbbOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CommentsListByBlogResource)
-                      r
-                      u
+                      rq

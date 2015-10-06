@@ -179,8 +179,8 @@ instance GoogleRequest OrdersUpdatemerchantOrderid'
          where
         type Rs OrdersUpdatemerchantOrderid' =
              OrdersUpdateMerchantOrderIdResponse
-        request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersUpdatemerchantOrderid'{..}
+        request = requestWith shoppingContentRequest
+        requestWith rq OrdersUpdatemerchantOrderid'{..}
           = go _ouoMerchantId _ouoOrderId _ouoQuotaUser
               (Just _ouoPrettyPrint)
               _ouoUserIP
@@ -190,7 +190,6 @@ instance GoogleRequest OrdersUpdatemerchantOrderid'
               (Just AltJSON)
               _ouoPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OrdersUpdatemerchantOrderidResource)
-                      r
-                      u
+                      rq

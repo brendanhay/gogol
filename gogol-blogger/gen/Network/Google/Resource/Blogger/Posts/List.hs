@@ -270,8 +270,8 @@ instance GoogleAuth PostsList' where
 
 instance GoogleRequest PostsList' where
         type Rs PostsList' = PostList
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostsList'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PostsList'{..}
           = go _pllBlogId (_pllStatus ^. _Default)
               (Just _pllOrderBy)
               _pllFetchImages
@@ -290,6 +290,4 @@ instance GoogleRequest PostsList' where
               _pllOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy PostsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PostsListResource) rq

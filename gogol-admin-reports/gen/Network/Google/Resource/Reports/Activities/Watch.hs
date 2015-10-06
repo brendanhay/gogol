@@ -269,8 +269,8 @@ instance GoogleAuth ActivitiesWatch' where
 
 instance GoogleRequest ActivitiesWatch' where
         type Rs ActivitiesWatch' = Channel
-        request = requestWithRoute defReq reportsURL
-        requestWithRoute r u ActivitiesWatch'{..}
+        request = requestWith reportsRequest
+        requestWith rq ActivitiesWatch'{..}
           = go _awUserKey _awApplicationName _awStartTime
               _awFilters
               _awCustomerId
@@ -288,7 +288,6 @@ instance GoogleRequest ActivitiesWatch' where
               (Just AltJSON)
               _awPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ActivitiesWatchResource)
-                      r
-                      u
+                      rq

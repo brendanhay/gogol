@@ -219,8 +219,8 @@ instance GoogleAuth ProjectsGet' where
 
 instance GoogleRequest ProjectsGet' where
         type Rs ProjectsGet' = Project
-        request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsGet'{..}
+        request = requestWith resourceManagerRequest
+        requestWith rq ProjectsGet'{..}
           = go _pgProjectId _pgXgafv _pgUploadProtocol
               (Just _pgPp)
               _pgAccessToken
@@ -234,7 +234,4 @@ instance GoogleRequest ProjectsGet' where
               _pgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ProjectsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ProjectsGetResource) rq

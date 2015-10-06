@@ -21,7 +21,7 @@ module Network.Google.Blogger
     -- * API
       BloggerAPI
     , bloggerAPI
-    , bloggerURL
+    , bloggerRequest
 
     -- * Service Methods
 

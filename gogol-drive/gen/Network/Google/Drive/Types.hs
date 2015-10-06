@@ -16,7 +16,7 @@
 module Network.Google.Drive.Types
     (
     -- * Service URL
-      driveURL
+      driveRequest
 
     -- * CommentContext
     , CommentContext
@@ -535,9 +535,8 @@ import           Network.Google.Drive.Types.Product
 import           Network.Google.Drive.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v2' of the Drive API.
-driveURL :: BaseUrl
-driveURL
-  = BaseUrl Https
-      "https://www.googleapis.com/drive/v2/"
-      443
+-- | Default request referring to version 'v2' of the Drive API.
+driveRequest :: RequestBuilder
+driveRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "drive/v2/"

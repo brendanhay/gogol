@@ -237,9 +237,8 @@ instance GoogleAuth ConversionPatch' where
 
 instance GoogleRequest ConversionPatch' where
         type Rs ConversionPatch' = ConversionList
-        request
-          = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u ConversionPatch'{..}
+        request = requestWith doubleClickSearchRequest
+        requestWith rq ConversionPatch'{..}
           = go (Just _cpAdvertiserId) (Just _cpAgencyId)
               (Just _cpEndDate)
               (Just _cpEngineAccountId)
@@ -255,7 +254,6 @@ instance GoogleRequest ConversionPatch' where
               (Just AltJSON)
               _cpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ConversionPatchResource)
-                      r
-                      u
+                      rq

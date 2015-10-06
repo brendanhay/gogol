@@ -289,8 +289,8 @@ instance GoogleAuth JobsPatch' where
 
 instance GoogleRequest JobsPatch' where
         type Rs JobsPatch' = Job
-        request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u JobsPatch'{..}
+        request = requestWith mapsCoordinateRequest
+        requestWith rq JobsPatch'{..}
           = go _jpTeamId _jpJobId _jpProgress _jpNote
               _jpCustomerPhoneNumber
               _jpCustomerName
@@ -309,6 +309,4 @@ instance GoogleRequest JobsPatch' where
               (Just AltJSON)
               _jpPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy JobsPatchResource) rq

@@ -167,8 +167,8 @@ instance GoogleRequest FloodlightActivityGroupsGet'
          where
         type Rs FloodlightActivityGroupsGet' =
              FloodlightActivityGroup
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FloodlightActivityGroupsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FloodlightActivityGroupsGet'{..}
           = go _faggProFileId _faggId _faggQuotaUser
               (Just _faggPrettyPrint)
               _faggUserIP
@@ -177,7 +177,6 @@ instance GoogleRequest FloodlightActivityGroupsGet'
               _faggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy FloodlightActivityGroupsGetResource)
-                      r
-                      u
+                      rq

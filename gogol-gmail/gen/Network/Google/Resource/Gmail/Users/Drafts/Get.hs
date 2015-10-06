@@ -172,8 +172,8 @@ instance GoogleAuth UsersDraftsGet' where
 
 instance GoogleRequest UsersDraftsGet' where
         type Rs UsersDraftsGet' = Draft
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersDraftsGet'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersDraftsGet'{..}
           = go _udgUserId _udgId (Just _udgFormat)
               _udgQuotaUser
               (Just _udgPrettyPrint)
@@ -183,7 +183,5 @@ instance GoogleRequest UsersDraftsGet' where
               _udgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy UsersDraftsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersDraftsGetResource)
+                      rq

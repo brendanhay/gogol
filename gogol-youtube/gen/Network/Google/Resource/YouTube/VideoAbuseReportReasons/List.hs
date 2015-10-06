@@ -168,8 +168,8 @@ instance GoogleRequest VideoAbuseReportReasonsList'
          where
         type Rs VideoAbuseReportReasonsList' =
              VideoAbuseReportReasonListResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideoAbuseReportReasonsList'{..}
+        request = requestWith youTubeRequest
+        requestWith rq VideoAbuseReportReasonsList'{..}
           = go (Just _varrlPart) (Just _varrlHl)
               _varrlQuotaUser
               (Just _varrlPrettyPrint)
@@ -179,7 +179,6 @@ instance GoogleRequest VideoAbuseReportReasonsList'
               _varrlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VideoAbuseReportReasonsListResource)
-                      r
-                      u
+                      rq

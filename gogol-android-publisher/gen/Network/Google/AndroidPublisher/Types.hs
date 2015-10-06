@@ -16,7 +16,7 @@
 module Network.Google.AndroidPublisher.Types
     (
     -- * Service URL
-      androidPublisherURL
+      androidPublisherRequest
 
     -- * InAppProductListings
     , InAppProductListings
@@ -372,9 +372,8 @@ import           Network.Google.AndroidPublisher.Types.Product
 import           Network.Google.AndroidPublisher.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v2' of the Google Play Developer API.
-androidPublisherURL :: BaseUrl
-androidPublisherURL
-  = BaseUrl Https
-      "https://www.googleapis.com/androidpublisher/v2/applications/"
-      443
+-- | Default request referring to version 'v2' of the Google Play Developer API.
+androidPublisherRequest :: RequestBuilder
+androidPublisherRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "androidpublisher/v2/applications/"

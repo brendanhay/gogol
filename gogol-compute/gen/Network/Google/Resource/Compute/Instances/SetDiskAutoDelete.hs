@@ -205,8 +205,8 @@ instance GoogleAuth InstancesSetDiskAutoDelete' where
 instance GoogleRequest InstancesSetDiskAutoDelete'
          where
         type Rs InstancesSetDiskAutoDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesSetDiskAutoDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq InstancesSetDiskAutoDelete'{..}
           = go _isdadProject _isdadZone _isdadInstance
               (Just _isdadAutoDelete)
               (Just _isdadDeviceName)
@@ -218,7 +218,6 @@ instance GoogleRequest InstancesSetDiskAutoDelete'
               _isdadOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesSetDiskAutoDeleteResource)
-                      r
-                      u
+                      rq

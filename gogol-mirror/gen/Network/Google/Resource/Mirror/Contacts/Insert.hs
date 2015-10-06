@@ -146,8 +146,8 @@ instance GoogleAuth ContactsInsert' where
 
 instance GoogleRequest ContactsInsert' where
         type Rs ContactsInsert' = Contact
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u ContactsInsert'{..}
+        request = requestWith mirrorRequest
+        requestWith rq ContactsInsert'{..}
           = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
               _ciFields
               _ciKey
@@ -155,7 +155,5 @@ instance GoogleRequest ContactsInsert' where
               (Just AltJSON)
               _ciPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ContactsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ContactsInsertResource)
+                      rq

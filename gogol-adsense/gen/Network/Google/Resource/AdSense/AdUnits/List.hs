@@ -189,8 +189,8 @@ instance GoogleAuth AdUnitsList' where
 
 instance GoogleRequest AdUnitsList' where
         type Rs AdUnitsList' = AdUnits
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AdUnitsList'{..}
+        request = requestWith adSenseRequest
+        requestWith rq AdUnitsList'{..}
           = go _aulAdClientId _aulIncludeInactive _aulPageToken
               _aulMaxResults
               _aulQuotaUser
@@ -201,7 +201,4 @@ instance GoogleRequest AdUnitsList' where
               _aulOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AdUnitsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AdUnitsListResource) rq

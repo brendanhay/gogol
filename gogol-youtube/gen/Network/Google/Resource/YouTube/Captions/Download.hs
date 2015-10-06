@@ -233,8 +233,8 @@ instance GoogleAuth CaptionsDownload' where
 
 instance GoogleRequest CaptionsDownload' where
         type Rs CaptionsDownload' = ()
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CaptionsDownload'{..}
+        request = requestWith youTubeRequest
+        requestWith rq CaptionsDownload'{..}
           = go _capaId _capaOnBehalfOf _capaTlang
               _capaOnBehalfOfContentOwner
               _capaTfmt
@@ -246,17 +246,15 @@ instance GoogleRequest CaptionsDownload' where
               _capaOAuthToken
               (Just AltJSON)
           where go :<|> _
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CaptionsDownloadResource)
-                      r
-                      u
+                      rq
 
 instance GoogleRequest
          (MediaDownload CaptionsDownload') where
         type Rs (MediaDownload CaptionsDownload') = Body
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u
-          (MediaDownload CaptionsDownload'{..})
+        request = requestWith youTubeRequest
+        requestWith rq (MediaDownload CaptionsDownload'{..})
           = go _capaId _capaOnBehalfOf _capaTlang
               _capaOnBehalfOfContentOwner
               _capaTfmt
@@ -268,7 +266,6 @@ instance GoogleRequest
               _capaOAuthToken
               (Just AltMedia)
           where _ :<|> go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CaptionsDownloadResource)
-                      r
-                      u
+                      rq

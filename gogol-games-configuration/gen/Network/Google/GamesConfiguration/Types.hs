@@ -16,7 +16,7 @@
 module Network.Google.GamesConfiguration.Types
     (
     -- * Service URL
-      gamesConfigurationURL
+      gamesConfigurationRequest
 
     -- * ImageConfiguration
     , ImageConfiguration
@@ -122,9 +122,8 @@ import           Network.Google.GamesConfiguration.Types.Product
 import           Network.Google.GamesConfiguration.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1configuration' of the Google Play Game Services Publishing API.
-gamesConfigurationURL :: BaseUrl
-gamesConfigurationURL
-  = BaseUrl Https
-      "https://www.googleapis.com/games/v1configuration/"
-      443
+-- | Default request referring to version 'v1configuration' of the Google Play Game Services Publishing API.
+gamesConfigurationRequest :: RequestBuilder
+gamesConfigurationRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "games/v1configuration/"

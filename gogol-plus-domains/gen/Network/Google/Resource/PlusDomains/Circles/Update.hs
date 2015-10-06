@@ -158,8 +158,8 @@ instance GoogleAuth CirclesUpdate' where
 
 instance GoogleRequest CirclesUpdate' where
         type Rs CirclesUpdate' = Circle
-        request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u CirclesUpdate'{..}
+        request = requestWith plusDomainsRequest
+        requestWith rq CirclesUpdate'{..}
           = go _cuCircleId _cuQuotaUser (Just _cuPrettyPrint)
               _cuUserIP
               _cuFields
@@ -168,7 +168,5 @@ instance GoogleRequest CirclesUpdate' where
               (Just AltJSON)
               _cuPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CirclesUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CirclesUpdateResource)
+                      rq

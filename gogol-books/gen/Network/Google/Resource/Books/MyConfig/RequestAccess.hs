@@ -214,8 +214,8 @@ instance GoogleAuth MyConfigRequestAccess' where
 
 instance GoogleRequest MyConfigRequestAccess' where
         type Rs MyConfigRequestAccess' = RequestAccess
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u MyConfigRequestAccess'{..}
+        request = requestWith booksRequest
+        requestWith rq MyConfigRequestAccess'{..}
           = go (Just _mcraSource) (Just _mcraVolumeId)
               (Just _mcraNonce)
               (Just _mcraCpksver)
@@ -229,7 +229,6 @@ instance GoogleRequest MyConfigRequestAccess' where
               _mcraOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MyConfigRequestAccessResource)
-                      r
-                      u
+                      rq

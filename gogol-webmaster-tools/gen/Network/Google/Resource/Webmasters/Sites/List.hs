@@ -135,14 +135,12 @@ instance GoogleAuth SitesList' where
 
 instance GoogleRequest SitesList' where
         type Rs SitesList' = SitesListResponse
-        request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u SitesList'{..}
+        request = requestWith webmasterToolsRequest
+        requestWith rq SitesList'{..}
           = go _slQuotaUser (Just _slPrettyPrint) _slUserIP
               _slFields
               _slKey
               _slOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy SitesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SitesListResource) rq

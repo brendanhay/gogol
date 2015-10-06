@@ -170,8 +170,8 @@ instance GoogleAuth SitesPatch' where
 
 instance GoogleRequest SitesPatch' where
         type Rs SitesPatch' = Site
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SitesPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq SitesPatch'{..}
           = go _spProFileId (Just _spId) _spQuotaUser
               (Just _spPrettyPrint)
               _spUserIP
@@ -181,6 +181,4 @@ instance GoogleRequest SitesPatch' where
               (Just AltJSON)
               _spPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy SitesPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SitesPatchResource) rq

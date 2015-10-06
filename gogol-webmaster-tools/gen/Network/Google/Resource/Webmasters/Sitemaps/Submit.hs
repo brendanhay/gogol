@@ -161,8 +161,8 @@ instance GoogleAuth SitemapsSubmit' where
 
 instance GoogleRequest SitemapsSubmit' where
         type Rs SitemapsSubmit' = ()
-        request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u SitemapsSubmit'{..}
+        request = requestWith webmasterToolsRequest
+        requestWith rq SitemapsSubmit'{..}
           = go _ssSiteURL _ssFeedpath _ssQuotaUser
               (Just _ssPrettyPrint)
               _ssUserIP
@@ -171,7 +171,5 @@ instance GoogleRequest SitemapsSubmit' where
               _ssOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SitemapsSubmitResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SitemapsSubmitResource)
+                      rq

@@ -22,7 +22,7 @@ module Network.Google.ReplicaPoolUpdater
     -- * API
       ReplicaPoolUpdaterAPI
     , replicaPoolUpdaterAPI
-    , replicaPoolUpdaterURL
+    , replicaPoolUpdaterRequest
 
     -- * Service Methods
 

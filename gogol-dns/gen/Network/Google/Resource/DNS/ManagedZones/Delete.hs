@@ -163,8 +163,8 @@ instance GoogleAuth ManagedZonesDelete' where
 
 instance GoogleRequest ManagedZonesDelete' where
         type Rs ManagedZonesDelete' = ()
-        request = requestWithRoute defReq dNSURL
-        requestWithRoute r u ManagedZonesDelete'{..}
+        request = requestWith dNSRequest
+        requestWith rq ManagedZonesDelete'{..}
           = go _mzdProject _mzdManagedZone _mzdQuotaUser
               (Just _mzdPrettyPrint)
               _mzdUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest ManagedZonesDelete' where
               _mzdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagedZonesDeleteResource)
-                      r
-                      u
+                      rq

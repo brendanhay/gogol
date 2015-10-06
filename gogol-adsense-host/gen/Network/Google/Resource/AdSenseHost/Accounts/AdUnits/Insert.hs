@@ -180,8 +180,8 @@ instance GoogleAuth AccountsAdUnitsInsert' where
 
 instance GoogleRequest AccountsAdUnitsInsert' where
         type Rs AccountsAdUnitsInsert' = AdUnit
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AccountsAdUnitsInsert'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq AccountsAdUnitsInsert'{..}
           = go _aauiAccountId _aauiAdClientId _aauiQuotaUser
               (Just _aauiPrettyPrint)
               _aauiUserIP
@@ -191,7 +191,6 @@ instance GoogleRequest AccountsAdUnitsInsert' where
               (Just AltJSON)
               _aauiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsAdUnitsInsertResource)
-                      r
-                      u
+                      rq

@@ -255,8 +255,8 @@ instance GoogleRequest DirectorySiteContactsList'
          where
         type Rs DirectorySiteContactsList' =
              DirectorySiteContactsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u DirectorySiteContactsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq DirectorySiteContactsList'{..}
           = go _dsclProFileId _dsclSearchString
               (_dsclIds ^. _Default)
               (_dsclDirectorySiteIds ^. _Default)
@@ -272,7 +272,6 @@ instance GoogleRequest DirectorySiteContactsList'
               _dsclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DirectorySiteContactsListResource)
-                      r
-                      u
+                      rq

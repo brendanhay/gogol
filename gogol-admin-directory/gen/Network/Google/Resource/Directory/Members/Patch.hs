@@ -175,8 +175,8 @@ instance GoogleAuth MembersPatch' where
 
 instance GoogleRequest MembersPatch' where
         type Rs MembersPatch' = Member
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u MembersPatch'{..}
+        request = requestWith directoryRequest
+        requestWith rq MembersPatch'{..}
           = go _mpGroupKey _mpMemberKey _mpQuotaUser
               (Just _mpPrettyPrint)
               _mpUserIP
@@ -186,7 +186,5 @@ instance GoogleRequest MembersPatch' where
               (Just AltJSON)
               _mpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy MembersPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy MembersPatchResource)
+                      rq

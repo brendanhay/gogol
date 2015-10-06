@@ -165,8 +165,8 @@ instance GoogleAuth InstancesPromoteReplica' where
 
 instance GoogleRequest InstancesPromoteReplica' where
         type Rs InstancesPromoteReplica' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesPromoteReplica'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq InstancesPromoteReplica'{..}
           = go _iprProject _iprInstance _iprQuotaUser
               (Just _iprPrettyPrint)
               _iprUserIP
@@ -175,7 +175,6 @@ instance GoogleRequest InstancesPromoteReplica' where
               _iprOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesPromoteReplicaResource)
-                      r
-                      u
+                      rq

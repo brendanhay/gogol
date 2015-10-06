@@ -173,8 +173,8 @@ instance GoogleAuth ChangesCreate' where
 
 instance GoogleRequest ChangesCreate' where
         type Rs ChangesCreate' = Change
-        request = requestWithRoute defReq dNSURL
-        requestWithRoute r u ChangesCreate'{..}
+        request = requestWith dNSRequest
+        requestWith rq ChangesCreate'{..}
           = go _ccProject _ccManagedZone _ccQuotaUser
               (Just _ccPrettyPrint)
               _ccUserIP
@@ -184,7 +184,5 @@ instance GoogleRequest ChangesCreate' where
               (Just AltJSON)
               _ccPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ChangesCreateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ChangesCreateResource)
+                      rq

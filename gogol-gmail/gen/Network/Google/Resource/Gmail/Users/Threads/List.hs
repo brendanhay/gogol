@@ -212,8 +212,8 @@ instance GoogleAuth UsersThreadsList' where
 
 instance GoogleRequest UsersThreadsList' where
         type Rs UsersThreadsList' = ListThreadsResponse
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersThreadsList'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersThreadsList'{..}
           = go _utlUserId _utlQ (Just _utlIncludeSpamTrash)
               (_utlLabelIds ^. _Default)
               _utlPageToken
@@ -226,7 +226,6 @@ instance GoogleRequest UsersThreadsList' where
               _utlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersThreadsListResource)
-                      r
-                      u
+                      rq

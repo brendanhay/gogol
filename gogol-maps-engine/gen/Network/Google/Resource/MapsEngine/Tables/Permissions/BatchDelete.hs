@@ -167,9 +167,8 @@ instance GoogleRequest TablesPermissionsBatchDelete'
          where
         type Rs TablesPermissionsBatchDelete' =
              PermissionsBatchDeleteResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u
-          TablesPermissionsBatchDelete'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesPermissionsBatchDelete'{..}
           = go _tpbdId _tpbdQuotaUser (Just _tpbdPrettyPrint)
               _tpbdUserIP
               _tpbdFields
@@ -178,7 +177,6 @@ instance GoogleRequest TablesPermissionsBatchDelete'
               (Just AltJSON)
               _tpbdPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TablesPermissionsBatchDeleteResource)
-                      r
-                      u
+                      rq

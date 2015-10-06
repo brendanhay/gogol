@@ -171,9 +171,8 @@ instance GoogleRequest TablesPermissionsBatchUpdate'
          where
         type Rs TablesPermissionsBatchUpdate' =
              PermissionsBatchUpdateResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u
-          TablesPermissionsBatchUpdate'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesPermissionsBatchUpdate'{..}
           = go _tpbuId _tpbuQuotaUser (Just _tpbuPrettyPrint)
               _tpbuUserIP
               _tpbuFields
@@ -182,7 +181,6 @@ instance GoogleRequest TablesPermissionsBatchUpdate'
               (Just AltJSON)
               _tpbuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TablesPermissionsBatchUpdateResource)
-                      r
-                      u
+                      rq

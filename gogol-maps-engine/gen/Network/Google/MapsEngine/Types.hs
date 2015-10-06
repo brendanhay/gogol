@@ -16,7 +16,7 @@
 module Network.Google.MapsEngine.Types
     (
     -- * Service URL
-      mapsEngineURL
+      mapsEngineRequest
 
     -- * ValueRange
     , ValueRange
@@ -757,9 +757,8 @@ import           Network.Google.MapsEngine.Types.Product
 import           Network.Google.MapsEngine.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Google Maps Engine API.
-mapsEngineURL :: BaseUrl
-mapsEngineURL
-  = BaseUrl Https
-      "https://www.googleapis.com/mapsengine/v1/"
-      443
+-- | Default request referring to version 'v1' of the Google Maps Engine API.
+mapsEngineRequest :: RequestBuilder
+mapsEngineRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "mapsengine/v1/"

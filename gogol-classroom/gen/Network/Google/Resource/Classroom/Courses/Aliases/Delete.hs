@@ -238,8 +238,8 @@ instance GoogleAuth CoursesAliasesDelete' where
 
 instance GoogleRequest CoursesAliasesDelete' where
         type Rs CoursesAliasesDelete' = Empty
-        request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesAliasesDelete'{..}
+        request = requestWith classroomRequest
+        requestWith rq CoursesAliasesDelete'{..}
           = go _cadCourseId _cadAlias _cadXgafv
               _cadUploadProtocol
               (Just _cadPp)
@@ -254,7 +254,6 @@ instance GoogleRequest CoursesAliasesDelete' where
               _cadOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CoursesAliasesDeleteResource)
-                      r
-                      u
+                      rq

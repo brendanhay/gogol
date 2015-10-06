@@ -168,8 +168,8 @@ instance GoogleRequest RemarketingListSharesGet'
          where
         type Rs RemarketingListSharesGet' =
              RemarketingListShare
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u RemarketingListSharesGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq RemarketingListSharesGet'{..}
           = go _rlsgProFileId _rlsgRemarketingListId
               _rlsgQuotaUser
               (Just _rlsgPrettyPrint)
@@ -179,7 +179,6 @@ instance GoogleRequest RemarketingListSharesGet'
               _rlsgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RemarketingListSharesGetResource)
-                      r
-                      u
+                      rq

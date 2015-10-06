@@ -197,8 +197,8 @@ instance GoogleRequest PurchasesSubscriptionsDefer'
          where
         type Rs PurchasesSubscriptionsDefer' =
              SubscriptionPurchasesDeferResponse
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u PurchasesSubscriptionsDefer'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq PurchasesSubscriptionsDefer'{..}
           = go _psdPackageName _psdSubscriptionId _psdToken
               _psdQuotaUser
               (Just _psdPrettyPrint)
@@ -209,7 +209,6 @@ instance GoogleRequest PurchasesSubscriptionsDefer'
               (Just AltJSON)
               _psdPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PurchasesSubscriptionsDeferResource)
-                      r
-                      u
+                      rq

@@ -174,8 +174,8 @@ instance GoogleAuth TableUpdate' where
 
 instance GoogleRequest TableUpdate' where
         type Rs TableUpdate' = Table
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TableUpdate'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TableUpdate'{..}
           = go _tuTableId _tuReplaceViewDefinition _tuQuotaUser
               (Just _tuPrettyPrint)
               _tuUserIP
@@ -185,7 +185,4 @@ instance GoogleRequest TableUpdate' where
               (Just AltJSON)
               _tuPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TableUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TableUpdateResource) rq

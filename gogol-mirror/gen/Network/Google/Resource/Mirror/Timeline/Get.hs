@@ -145,8 +145,8 @@ instance GoogleAuth TimelineGet' where
 
 instance GoogleRequest TimelineGet' where
         type Rs TimelineGet' = TimelineItem
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineGet'{..}
+        request = requestWith mirrorRequest
+        requestWith rq TimelineGet'{..}
           = go _tgId _tgQuotaUser (Just _tgPrettyPrint)
               _tgUserIP
               _tgFields
@@ -154,7 +154,4 @@ instance GoogleRequest TimelineGet' where
               _tgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TimelineGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TimelineGetResource) rq

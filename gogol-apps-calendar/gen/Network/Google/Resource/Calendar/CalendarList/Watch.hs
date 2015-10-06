@@ -241,8 +241,8 @@ instance GoogleAuth CalendarListWatch' where
 
 instance GoogleRequest CalendarListWatch' where
         type Rs CalendarListWatch' = Channel
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarListWatch'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq CalendarListWatch'{..}
           = go _clwSyncToken _clwMinAccessRole _clwShowDeleted
               _clwShowHidden
               _clwPageToken
@@ -256,7 +256,6 @@ instance GoogleRequest CalendarListWatch' where
               (Just AltJSON)
               _clwPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CalendarListWatchResource)
-                      r
-                      u
+                      rq

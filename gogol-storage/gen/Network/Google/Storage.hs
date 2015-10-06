@@ -21,7 +21,7 @@ module Network.Google.Storage
     -- * API
       StorageAPI
     , storageAPI
-    , storageURL
+    , storageRequest
 
     -- * Service Methods
 

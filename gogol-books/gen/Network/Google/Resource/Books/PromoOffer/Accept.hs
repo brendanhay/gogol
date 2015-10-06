@@ -225,8 +225,8 @@ instance GoogleAuth PromoOfferAccept' where
 
 instance GoogleRequest PromoOfferAccept' where
         type Rs PromoOfferAccept' = ()
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u PromoOfferAccept'{..}
+        request = requestWith booksRequest
+        requestWith rq PromoOfferAccept'{..}
           = go _poaManufacturer _poaSerial _poaDevice _poaModel
               _poaVolumeId
               _poaOfferId
@@ -240,7 +240,6 @@ instance GoogleRequest PromoOfferAccept' where
               _poaOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PromoOfferAcceptResource)
-                      r
-                      u
+                      rq

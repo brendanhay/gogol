@@ -159,8 +159,8 @@ instance GoogleAuth ReportsInsert' where
 
 instance GoogleRequest ReportsInsert' where
         type Rs ReportsInsert' = Report
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ReportsInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ReportsInsert'{..}
           = go _riProFileId _riQuotaUser (Just _riPrettyPrint)
               _riUserIP
               _riFields
@@ -169,7 +169,5 @@ instance GoogleRequest ReportsInsert' where
               (Just AltJSON)
               _riPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ReportsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ReportsInsertResource)
+                      rq

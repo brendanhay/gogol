@@ -202,8 +202,8 @@ instance GoogleAuth ManagementGoalsUpdate' where
 
 instance GoogleRequest ManagementGoalsUpdate' where
         type Rs ManagementGoalsUpdate' = Goal
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementGoalsUpdate'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementGoalsUpdate'{..}
           = go _mguAccountId _mguWebPropertyId _mguProFileId
               _mguGoalId
               _mguQuotaUser
@@ -215,7 +215,6 @@ instance GoogleRequest ManagementGoalsUpdate' where
               (Just AltJSON)
               _mguPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementGoalsUpdateResource)
-                      r
-                      u
+                      rq

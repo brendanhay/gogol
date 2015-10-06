@@ -16,7 +16,7 @@
 module Network.Google.Compute.Types
     (
     -- * Service URL
-      computeURL
+      computeRequest
 
     -- * AddressesScopedList
     , AddressesScopedList
@@ -1748,9 +1748,8 @@ import           Network.Google.Compute.Types.Product
 import           Network.Google.Compute.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Compute Engine API.
-computeURL :: BaseUrl
-computeURL
-  = BaseUrl Https
-      "https://www.googleapis.com/compute/v1/projects/"
-      443
+-- | Default request referring to version 'v1' of the Compute Engine API.
+computeRequest :: RequestBuilder
+computeRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "compute/v1/projects/"

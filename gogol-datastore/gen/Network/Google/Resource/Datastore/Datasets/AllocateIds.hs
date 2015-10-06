@@ -164,8 +164,8 @@ instance GoogleAuth DatasetsAllocateIds' where
 
 instance GoogleRequest DatasetsAllocateIds' where
         type Rs DatasetsAllocateIds' = AllocateIdsResponse
-        request = requestWithRoute defReq datastoreURL
-        requestWithRoute r u DatasetsAllocateIds'{..}
+        request = requestWith datastoreRequest
+        requestWith rq DatasetsAllocateIds'{..}
           = go _daiDatasetId _daiQuotaUser
               (Just _daiPrettyPrint)
               _daiUserIP
@@ -175,7 +175,6 @@ instance GoogleRequest DatasetsAllocateIds' where
               (Just AltJSON)
               _daiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DatasetsAllocateIdsResource)
-                      r
-                      u
+                      rq

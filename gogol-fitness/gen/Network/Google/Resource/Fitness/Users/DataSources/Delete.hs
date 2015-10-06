@@ -164,8 +164,8 @@ instance GoogleAuth UsersDataSourcesDelete' where
 
 instance GoogleRequest UsersDataSourcesDelete' where
         type Rs UsersDataSourcesDelete' = DataSource
-        request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersDataSourcesDelete'{..}
+        request = requestWith fitnessRequest
+        requestWith rq UsersDataSourcesDelete'{..}
           = go _udsdUserId _udsdDataSourceId _udsdQuotaUser
               (Just _udsdPrettyPrint)
               _udsdUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest UsersDataSourcesDelete' where
               _udsdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersDataSourcesDeleteResource)
-                      r
-                      u
+                      rq

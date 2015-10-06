@@ -180,8 +180,8 @@ instance GoogleAuth URLMapsValidate' where
 
 instance GoogleRequest URLMapsValidate' where
         type Rs URLMapsValidate' = URLMapsValidateResponse
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u URLMapsValidate'{..}
+        request = requestWith computeRequest
+        requestWith rq URLMapsValidate'{..}
           = go _umvProject _umvURLMap _umvQuotaUser
               (Just _umvPrettyPrint)
               _umvUserIP
@@ -191,7 +191,6 @@ instance GoogleRequest URLMapsValidate' where
               (Just AltJSON)
               _umvPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy URLMapsValidateResource)
-                      r
-                      u
+                      rq

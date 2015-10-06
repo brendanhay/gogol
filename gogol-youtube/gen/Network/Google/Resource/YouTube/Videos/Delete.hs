@@ -168,8 +168,8 @@ instance GoogleAuth VideosDelete' where
 
 instance GoogleRequest VideosDelete' where
         type Rs VideosDelete' = ()
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideosDelete'{..}
+        request = requestWith youTubeRequest
+        requestWith rq VideosDelete'{..}
           = go (Just _vdId) _vdOnBehalfOfContentOwner
               _vdQuotaUser
               (Just _vdPrettyPrint)
@@ -179,7 +179,5 @@ instance GoogleRequest VideosDelete' where
               _vdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy VideosDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy VideosDeleteResource)
+                      rq

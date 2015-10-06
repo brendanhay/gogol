@@ -171,8 +171,8 @@ instance GoogleAuth TasksInsert' where
 
 instance GoogleRequest TasksInsert' where
         type Rs TasksInsert' = Task
-        request = requestWithRoute defReq taskQueueURL
-        requestWithRoute r u TasksInsert'{..}
+        request = requestWith taskQueueRequest
+        requestWith rq TasksInsert'{..}
           = go _tiProject _tiTaskqueue _tiQuotaUser
               (Just _tiPrettyPrint)
               _tiUserIP
@@ -182,7 +182,4 @@ instance GoogleRequest TasksInsert' where
               (Just AltJSON)
               _tiPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TasksInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TasksInsertResource) rq

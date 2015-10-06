@@ -165,8 +165,8 @@ instance GoogleAuth InstanceTemplatesInsert' where
 
 instance GoogleRequest InstanceTemplatesInsert' where
         type Rs InstanceTemplatesInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceTemplatesInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq InstanceTemplatesInsert'{..}
           = go _itiProject _itiQuotaUser (Just _itiPrettyPrint)
               _itiUserIP
               _itiFields
@@ -175,7 +175,6 @@ instance GoogleRequest InstanceTemplatesInsert' where
               (Just AltJSON)
               _itiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstanceTemplatesInsertResource)
-                      r
-                      u
+                      rq

@@ -163,8 +163,8 @@ instance GoogleAuth AdsGet' where
 
 instance GoogleRequest AdsGet' where
         type Rs AdsGet' = Ad
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AdsGet'{..}
           = go _adsdProFileId _adsdId _adsdQuotaUser
               (Just _adsdPrettyPrint)
               _adsdUserIP
@@ -173,4 +173,4 @@ instance GoogleRequest AdsGet' where
               _adsdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy AdsGetResource) r u
+                  = clientBuild (Proxy :: Proxy AdsGetResource) rq

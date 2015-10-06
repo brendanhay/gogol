@@ -218,10 +218,8 @@ instance GoogleRequest
          RollingUpdatesListInstanceUpdates' where
         type Rs RollingUpdatesListInstanceUpdates' =
              InstanceUpdateList
-        request
-          = requestWithRoute defReq replicaPoolUpdaterURL
-        requestWithRoute r u
-          RollingUpdatesListInstanceUpdates'{..}
+        request = requestWith replicaPoolUpdaterRequest
+        requestWith rq RollingUpdatesListInstanceUpdates'{..}
           = go _ruliuProject _ruliuZone _ruliuRollingUpdate
               _ruliuFilter
               _ruliuPageToken
@@ -234,8 +232,7 @@ instance GoogleRequest
               _ruliuOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy RollingUpdatesListInstanceUpdatesResource)
-                      r
-                      u
+                      rq

@@ -175,8 +175,8 @@ instance GoogleAuth EventsImport' where
 
 instance GoogleRequest EventsImport' where
         type Rs EventsImport' = Event
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsImport'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq EventsImport'{..}
           = go _eCalendarId _eSupportsAttachments _eQuotaUser
               (Just _ePrettyPrint)
               _eUserIP
@@ -186,7 +186,5 @@ instance GoogleRequest EventsImport' where
               (Just AltJSON)
               _ePayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EventsImportResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EventsImportResource)
+                      rq

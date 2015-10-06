@@ -159,8 +159,8 @@ instance GoogleAuth PlacementsUpdate' where
 
 instance GoogleRequest PlacementsUpdate' where
         type Rs PlacementsUpdate' = Placement
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementsUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PlacementsUpdate'{..}
           = go _puProFileId _puQuotaUser (Just _puPrettyPrint)
               _puUserIP
               _puFields
@@ -169,7 +169,6 @@ instance GoogleRequest PlacementsUpdate' where
               (Just AltJSON)
               _puPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlacementsUpdateResource)
-                      r
-                      u
+                      rq

@@ -161,9 +161,8 @@ instance GoogleAuth DeploymentsInsert' where
 
 instance GoogleRequest DeploymentsInsert' where
         type Rs DeploymentsInsert' = Operation
-        request
-          = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u DeploymentsInsert'{..}
+        request = requestWith deploymentManagerRequest
+        requestWith rq DeploymentsInsert'{..}
           = go _diProject _diQuotaUser (Just _diPrettyPrint)
               _diUserIP
               _diFields
@@ -172,7 +171,6 @@ instance GoogleRequest DeploymentsInsert' where
               (Just AltJSON)
               _diPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DeploymentsInsertResource)
-                      r
-                      u
+                      rq

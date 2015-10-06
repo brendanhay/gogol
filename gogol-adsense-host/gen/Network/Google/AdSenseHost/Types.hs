@@ -16,7 +16,7 @@
 module Network.Google.AdSenseHost.Types
     (
     -- * Service URL
-      adSenseHostURL
+      adSenseHostRequest
 
     -- * AdClients
     , AdClients
@@ -191,9 +191,8 @@ import           Network.Google.AdSenseHost.Types.Product
 import           Network.Google.AdSenseHost.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v4.1' of the AdSense Host API.
-adSenseHostURL :: BaseUrl
-adSenseHostURL
-  = BaseUrl Https
-      "https://www.googleapis.com/adsensehost/v4.1/"
-      443
+-- | Default request referring to version 'v4.1' of the AdSense Host API.
+adSenseHostRequest :: RequestBuilder
+adSenseHostRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "adsensehost/v4.1/"

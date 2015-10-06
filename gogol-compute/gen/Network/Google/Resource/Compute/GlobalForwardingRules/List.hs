@@ -203,8 +203,8 @@ instance GoogleRequest GlobalForwardingRulesList'
          where
         type Rs GlobalForwardingRulesList' =
              ForwardingRuleList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalForwardingRulesList'{..}
+        request = requestWith computeRequest
+        requestWith rq GlobalForwardingRulesList'{..}
           = go _gfrlProject _gfrlFilter _gfrlPageToken
               (Just _gfrlMaxResults)
               _gfrlQuotaUser
@@ -215,7 +215,6 @@ instance GoogleRequest GlobalForwardingRulesList'
               _gfrlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GlobalForwardingRulesListResource)
-                      r
-                      u
+                      rq

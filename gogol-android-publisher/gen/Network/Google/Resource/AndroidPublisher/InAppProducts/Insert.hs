@@ -179,8 +179,8 @@ instance GoogleAuth InAppProductsInsert' where
 
 instance GoogleRequest InAppProductsInsert' where
         type Rs InAppProductsInsert' = InAppProduct
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u InAppProductsInsert'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq InAppProductsInsert'{..}
           = go _iapiPackageName _iapiAutoConvertMissingPrices
               _iapiQuotaUser
               (Just _iapiPrettyPrint)
@@ -191,7 +191,6 @@ instance GoogleRequest InAppProductsInsert' where
               (Just AltJSON)
               _iapiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InAppProductsInsertResource)
-                      r
-                      u
+                      rq

@@ -162,8 +162,8 @@ instance GoogleAuth APIsGetRest' where
 
 instance GoogleRequest APIsGetRest' where
         type Rs APIsGetRest' = RestDescription
-        request = requestWithRoute defReq discoveryURL
-        requestWithRoute r u APIsGetRest'{..}
+        request = requestWith discoveryRequest
+        requestWith rq APIsGetRest'{..}
           = go _agrAPI _agrVersion _agrQuotaUser
               (Just _agrPrettyPrint)
               _agrUserIP
@@ -172,7 +172,4 @@ instance GoogleRequest APIsGetRest' where
               _agrOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy APIsGetRestResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy APIsGetRestResource) rq

@@ -167,9 +167,8 @@ instance GoogleRequest
          ProjectsSetCommonInstanceMetadata' where
         type Rs ProjectsSetCommonInstanceMetadata' =
              Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u
-          ProjectsSetCommonInstanceMetadata'{..}
+        request = requestWith computeRequest
+        requestWith rq ProjectsSetCommonInstanceMetadata'{..}
           = go _pscimProject _pscimQuotaUser
               (Just _pscimPrettyPrint)
               _pscimUserIP
@@ -179,8 +178,7 @@ instance GoogleRequest
               (Just AltJSON)
               _pscimPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ProjectsSetCommonInstanceMetadataResource)
-                      r
-                      u
+                      rq

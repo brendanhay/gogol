@@ -165,8 +165,8 @@ instance GoogleAuth TablesFeaturesBatchDelete' where
 instance GoogleRequest TablesFeaturesBatchDelete'
          where
         type Rs TablesFeaturesBatchDelete' = ()
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u TablesFeaturesBatchDelete'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesFeaturesBatchDelete'{..}
           = go _tfbdId _tfbdQuotaUser (Just _tfbdPrettyPrint)
               _tfbdUserIP
               _tfbdFields
@@ -175,7 +175,6 @@ instance GoogleRequest TablesFeaturesBatchDelete'
               (Just AltJSON)
               _tfbdPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TablesFeaturesBatchDeleteResource)
-                      r
-                      u
+                      rq

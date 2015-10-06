@@ -152,8 +152,8 @@ instance GoogleAuth ConnectionTypesList' where
 instance GoogleRequest ConnectionTypesList' where
         type Rs ConnectionTypesList' =
              ConnectionTypesListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ConnectionTypesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ConnectionTypesList'{..}
           = go _ctlProFileId _ctlQuotaUser
               (Just _ctlPrettyPrint)
               _ctlUserIP
@@ -162,7 +162,6 @@ instance GoogleRequest ConnectionTypesList' where
               _ctlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ConnectionTypesListResource)
-                      r
-                      u
+                      rq

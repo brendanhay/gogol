@@ -164,8 +164,8 @@ instance GoogleAuth JobsCancel' where
 
 instance GoogleRequest JobsCancel' where
         type Rs JobsCancel' = JobCancelResponse
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u JobsCancel'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq JobsCancel'{..}
           = go _jcProjectId _jcJobId _jcQuotaUser
               (Just _jcPrettyPrint)
               _jcUserIP
@@ -174,6 +174,4 @@ instance GoogleRequest JobsCancel' where
               _jcOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsCancelResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy JobsCancelResource) rq

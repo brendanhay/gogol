@@ -187,8 +187,8 @@ instance GoogleAuth TablesFeaturesBatchPatch' where
 instance GoogleRequest TablesFeaturesBatchPatch'
          where
         type Rs TablesFeaturesBatchPatch' = ()
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u TablesFeaturesBatchPatch'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesFeaturesBatchPatch'{..}
           = go _tfbpId _tfbpQuotaUser (Just _tfbpPrettyPrint)
               _tfbpUserIP
               _tfbpFields
@@ -197,7 +197,6 @@ instance GoogleRequest TablesFeaturesBatchPatch'
               (Just AltJSON)
               _tfbpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TablesFeaturesBatchPatchResource)
-                      r
-                      u
+                      rq

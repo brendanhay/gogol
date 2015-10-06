@@ -178,8 +178,8 @@ instance GoogleAuth InstancesImport' where
 
 instance GoogleRequest InstancesImport' where
         type Rs InstancesImport' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesImport'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq InstancesImport'{..}
           = go _insProject _insInstance _insQuotaUser
               (Just _insPrettyPrint)
               _insUserIP
@@ -189,7 +189,6 @@ instance GoogleRequest InstancesImport' where
               (Just AltJSON)
               _insPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesImportResource)
-                      r
-                      u
+                      rq

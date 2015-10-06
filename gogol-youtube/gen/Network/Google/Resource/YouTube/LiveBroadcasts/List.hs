@@ -268,8 +268,8 @@ instance GoogleAuth LiveBroadcastsList' where
 instance GoogleRequest LiveBroadcastsList' where
         type Rs LiveBroadcastsList' =
              LiveBroadcastListResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u LiveBroadcastsList'{..}
+        request = requestWith youTubeRequest
+        requestWith rq LiveBroadcastsList'{..}
           = go (Just _lblPart) _lblMine _lblBroadcastStatus
               _lblOnBehalfOfContentOwner
               _lblOnBehalfOfContentOwnerChannel
@@ -284,7 +284,6 @@ instance GoogleRequest LiveBroadcastsList' where
               _lblOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LiveBroadcastsListResource)
-                      r
-                      u
+                      rq

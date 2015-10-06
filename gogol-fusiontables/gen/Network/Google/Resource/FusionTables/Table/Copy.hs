@@ -159,8 +159,8 @@ instance GoogleAuth TableCopy' where
 
 instance GoogleRequest TableCopy' where
         type Rs TableCopy' = Table
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TableCopy'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TableCopy'{..}
           = go _tcTableId _tcCopyPresentation _tcQuotaUser
               (Just _tcPrettyPrint)
               _tcUserIP
@@ -169,6 +169,4 @@ instance GoogleRequest TableCopy' where
               _tcOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TableCopyResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TableCopyResource) rq

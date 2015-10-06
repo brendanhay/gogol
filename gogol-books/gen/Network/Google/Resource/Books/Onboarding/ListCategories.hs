@@ -151,8 +151,8 @@ instance GoogleAuth OnboardingListCategories' where
 instance GoogleRequest OnboardingListCategories'
          where
         type Rs OnboardingListCategories' = Category
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u OnboardingListCategories'{..}
+        request = requestWith booksRequest
+        requestWith rq OnboardingListCategories'{..}
           = go _olcLocale _olcQuotaUser (Just _olcPrettyPrint)
               _olcUserIP
               _olcFields
@@ -160,7 +160,6 @@ instance GoogleRequest OnboardingListCategories'
               _olcOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OnboardingListCategoriesResource)
-                      r
-                      u
+                      rq

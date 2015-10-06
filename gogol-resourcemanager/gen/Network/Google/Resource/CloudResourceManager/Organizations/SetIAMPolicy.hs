@@ -237,8 +237,8 @@ instance GoogleAuth OrganizationsSetIAMPolicy' where
 instance GoogleRequest OrganizationsSetIAMPolicy'
          where
         type Rs OrganizationsSetIAMPolicy' = Policy
-        request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u OrganizationsSetIAMPolicy'{..}
+        request = requestWith resourceManagerRequest
+        requestWith rq OrganizationsSetIAMPolicy'{..}
           = go _osipResource _osipXgafv _osipUploadProtocol
               (Just _osipPp)
               _osipAccessToken
@@ -253,7 +253,6 @@ instance GoogleRequest OrganizationsSetIAMPolicy'
               (Just AltJSON)
               _osipPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OrganizationsSetIAMPolicyResource)
-                      r
-                      u
+                      rq

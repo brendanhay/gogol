@@ -192,9 +192,8 @@ instance GoogleAuth TypesList' where
 
 instance GoogleRequest TypesList' where
         type Rs TypesList' = TypesListResponse
-        request
-          = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u TypesList'{..}
+        request = requestWith deploymentManagerRequest
+        requestWith rq TypesList'{..}
           = go _tlProject _tlFilter _tlPageToken
               (Just _tlMaxResults)
               _tlQuotaUser
@@ -205,6 +204,4 @@ instance GoogleRequest TypesList' where
               _tlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TypesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TypesListResource) rq

@@ -171,8 +171,8 @@ instance GoogleAuth BucketsInsert' where
 
 instance GoogleRequest BucketsInsert' where
         type Rs BucketsInsert' = Bucket
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketsInsert'{..}
+        request = requestWith storageRequest
+        requestWith rq BucketsInsert'{..}
           = go (Just _biProject) _biProjection _biQuotaUser
               (Just _biPrettyPrint)
               _biUserIP
@@ -182,7 +182,5 @@ instance GoogleRequest BucketsInsert' where
               (Just AltJSON)
               _biPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy BucketsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy BucketsInsertResource)
+                      rq

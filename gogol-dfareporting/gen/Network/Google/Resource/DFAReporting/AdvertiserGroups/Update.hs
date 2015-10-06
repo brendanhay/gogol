@@ -163,8 +163,8 @@ instance GoogleAuth AdvertiserGroupsUpdate' where
 
 instance GoogleRequest AdvertiserGroupsUpdate' where
         type Rs AdvertiserGroupsUpdate' = AdvertiserGroup
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdvertiserGroupsUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AdvertiserGroupsUpdate'{..}
           = go _aguProFileId _aguQuotaUser
               (Just _aguPrettyPrint)
               _aguUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest AdvertiserGroupsUpdate' where
               (Just AltJSON)
               _aguPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AdvertiserGroupsUpdateResource)
-                      r
-                      u
+                      rq

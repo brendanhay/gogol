@@ -207,8 +207,8 @@ instance GoogleAuth MomentsList' where
 
 instance GoogleRequest MomentsList' where
         type Rs MomentsList' = MomentsFeed
-        request = requestWithRoute defReq plusURL
-        requestWithRoute r u MomentsList'{..}
+        request = requestWith plusRequest
+        requestWith rq MomentsList'{..}
           = go _mlUserId _mlCollection _mlTargetURL
               _mlPageToken
               _mlType
@@ -221,7 +221,4 @@ instance GoogleRequest MomentsList' where
               _mlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy MomentsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy MomentsListResource) rq

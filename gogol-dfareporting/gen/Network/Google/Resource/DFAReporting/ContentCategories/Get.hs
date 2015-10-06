@@ -162,8 +162,8 @@ instance GoogleAuth ContentCategoriesGet' where
 
 instance GoogleRequest ContentCategoriesGet' where
         type Rs ContentCategoriesGet' = ContentCategory
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ContentCategoriesGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ContentCategoriesGet'{..}
           = go _ccgProFileId _ccgId _ccgQuotaUser
               (Just _ccgPrettyPrint)
               _ccgUserIP
@@ -172,7 +172,6 @@ instance GoogleRequest ContentCategoriesGet' where
               _ccgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ContentCategoriesGetResource)
-                      r
-                      u
+                      rq

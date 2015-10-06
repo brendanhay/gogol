@@ -205,9 +205,8 @@ instance GoogleAuth AccountsContainersFoldersUpdate'
 instance GoogleRequest
          AccountsContainersFoldersUpdate' where
         type Rs AccountsContainersFoldersUpdate' = Folder
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersFoldersUpdate'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersFoldersUpdate'{..}
           = go _acfuAccountId _acfuContainerId _acfuFolderId
               _acfuFingerprint
               _acfuQuotaUser
@@ -219,8 +218,7 @@ instance GoogleRequest
               (Just AltJSON)
               _acfuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersFoldersUpdateResource)
-                      r
-                      u
+                      rq

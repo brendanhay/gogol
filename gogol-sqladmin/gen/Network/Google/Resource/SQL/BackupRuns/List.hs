@@ -190,8 +190,8 @@ instance GoogleAuth BackupRunsList' where
 
 instance GoogleRequest BackupRunsList' where
         type Rs BackupRunsList' = BackupRunsListResponse
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u BackupRunsList'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq BackupRunsList'{..}
           = go _brlProject _brlInstance _brlPageToken
               _brlMaxResults
               _brlQuotaUser
@@ -202,7 +202,5 @@ instance GoogleRequest BackupRunsList' where
               _brlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy BackupRunsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy BackupRunsListResource)
+                      rq

@@ -174,8 +174,8 @@ instance GoogleAuth SubscriptionsInsert' where
 
 instance GoogleRequest SubscriptionsInsert' where
         type Rs SubscriptionsInsert' = Subscription
-        request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u SubscriptionsInsert'{..}
+        request = requestWith appsResellerRequest
+        requestWith rq SubscriptionsInsert'{..}
           = go _siCustomerId _siCustomerAuthToken _siQuotaUser
               (Just _siPrettyPrint)
               _siUserIP
@@ -185,7 +185,6 @@ instance GoogleRequest SubscriptionsInsert' where
               (Just AltJSON)
               _siPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SubscriptionsInsertResource)
-                      r
-                      u
+                      rq

@@ -177,9 +177,8 @@ instance GoogleAuth CollectionviewersGet' where
 
 instance GoogleRequest CollectionviewersGet' where
         type Rs CollectionviewersGet' = User
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u CollectionviewersGet'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq CollectionviewersGet'{..}
           = go _cgEnterpriseId _cgCollectionId _cgUserId
               _cgQuotaUser
               (Just _cgPrettyPrint)
@@ -189,7 +188,6 @@ instance GoogleRequest CollectionviewersGet' where
               _cgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CollectionviewersGetResource)
-                      r
-                      u
+                      rq

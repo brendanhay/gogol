@@ -166,8 +166,8 @@ instance GoogleAuth UserRolePermissionsList' where
 instance GoogleRequest UserRolePermissionsList' where
         type Rs UserRolePermissionsList' =
              UserRolePermissionsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserRolePermissionsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq UserRolePermissionsList'{..}
           = go _urplProFileId (_urplIds ^. _Default)
               _urplQuotaUser
               (Just _urplPrettyPrint)
@@ -177,7 +177,6 @@ instance GoogleRequest UserRolePermissionsList' where
               _urplOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UserRolePermissionsListResource)
-                      r
-                      u
+                      rq

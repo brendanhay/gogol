@@ -189,8 +189,8 @@ instance GoogleAuth VolumesRecommendedRate' where
 instance GoogleRequest VolumesRecommendedRate' where
         type Rs VolumesRecommendedRate' =
              BooksVolumesRecommendedRateResponse
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u VolumesRecommendedRate'{..}
+        request = requestWith booksRequest
+        requestWith rq VolumesRecommendedRate'{..}
           = go (Just _vrrRating) (Just _vrrVolumeId) _vrrLocale
               _vrrSource
               _vrrQuotaUser
@@ -201,7 +201,6 @@ instance GoogleRequest VolumesRecommendedRate' where
               _vrrOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VolumesRecommendedRateResource)
-                      r
-                      u
+                      rq

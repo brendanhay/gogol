@@ -232,8 +232,8 @@ instance GoogleAuth MyConfigSyncVolumeLicenses' where
 instance GoogleRequest MyConfigSyncVolumeLicenses'
          where
         type Rs MyConfigSyncVolumeLicenses' = Volumes
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u MyConfigSyncVolumeLicenses'{..}
+        request = requestWith booksRequest
+        requestWith rq MyConfigSyncVolumeLicenses'{..}
           = go (Just _mcsvlSource) (Just _mcsvlNonce)
               (Just _mcsvlCpksver)
               _mcsvlLocale
@@ -248,7 +248,6 @@ instance GoogleRequest MyConfigSyncVolumeLicenses'
               _mcsvlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MyConfigSyncVolumeLicensesResource)
-                      r
-                      u
+                      rq

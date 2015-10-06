@@ -161,8 +161,8 @@ instance GoogleAuth TrainedModelsAnalyze' where
 
 instance GoogleRequest TrainedModelsAnalyze' where
         type Rs TrainedModelsAnalyze' = Analyze
-        request = requestWithRoute defReq predictionURL
-        requestWithRoute r u TrainedModelsAnalyze'{..}
+        request = requestWith predictionRequest
+        requestWith rq TrainedModelsAnalyze'{..}
           = go _tmaProject _tmaId _tmaQuotaUser
               (Just _tmaPrettyPrint)
               _tmaUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest TrainedModelsAnalyze' where
               _tmaOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TrainedModelsAnalyzeResource)
-                      r
-                      u
+                      rq

@@ -150,8 +150,8 @@ instance GoogleAuth MapsUnPublish' where
 
 instance GoogleRequest MapsUnPublish' where
         type Rs MapsUnPublish' = PublishResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u MapsUnPublish'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq MapsUnPublish'{..}
           = go _mupId _mupQuotaUser (Just _mupPrettyPrint)
               _mupUserIP
               _mupFields
@@ -159,7 +159,5 @@ instance GoogleRequest MapsUnPublish' where
               _mupOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy MapsUnPublishResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy MapsUnPublishResource)
+                      rq

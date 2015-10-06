@@ -216,8 +216,8 @@ instance GoogleAuth VolumesUserUploadedList' where
 
 instance GoogleRequest VolumesUserUploadedList' where
         type Rs VolumesUserUploadedList' = Volumes
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u VolumesUserUploadedList'{..}
+        request = requestWith booksRequest
+        requestWith rq VolumesUserUploadedList'{..}
           = go (_vuulProcessingState ^. _Default) _vuulLocale
               (_vuulVolumeId ^. _Default)
               _vuulSource
@@ -231,7 +231,6 @@ instance GoogleRequest VolumesUserUploadedList' where
               _vuulOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VolumesUserUploadedListResource)
-                      r
-                      u
+                      rq

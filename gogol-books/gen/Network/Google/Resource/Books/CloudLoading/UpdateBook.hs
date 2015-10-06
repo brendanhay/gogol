@@ -153,8 +153,8 @@ instance GoogleAuth CloudLoadingUpdateBook' where
 instance GoogleRequest CloudLoadingUpdateBook' where
         type Rs CloudLoadingUpdateBook' =
              BooksCloudLoadingResource
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u CloudLoadingUpdateBook'{..}
+        request = requestWith booksRequest
+        requestWith rq CloudLoadingUpdateBook'{..}
           = go _clubQuotaUser (Just _clubPrettyPrint)
               _clubUserIP
               _clubFields
@@ -163,7 +163,6 @@ instance GoogleRequest CloudLoadingUpdateBook' where
               (Just AltJSON)
               _clubPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CloudLoadingUpdateBookResource)
-                      r
-                      u
+                      rq

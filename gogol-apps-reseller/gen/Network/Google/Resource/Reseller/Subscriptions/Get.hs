@@ -160,8 +160,8 @@ instance GoogleAuth SubscriptionsGet' where
 
 instance GoogleRequest SubscriptionsGet' where
         type Rs SubscriptionsGet' = Subscription
-        request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u SubscriptionsGet'{..}
+        request = requestWith appsResellerRequest
+        requestWith rq SubscriptionsGet'{..}
           = go _sgCustomerId _sgSubscriptionId _sgQuotaUser
               (Just _sgPrettyPrint)
               _sgUserIP
@@ -170,7 +170,6 @@ instance GoogleRequest SubscriptionsGet' where
               _sgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SubscriptionsGetResource)
-                      r
-                      u
+                      rq

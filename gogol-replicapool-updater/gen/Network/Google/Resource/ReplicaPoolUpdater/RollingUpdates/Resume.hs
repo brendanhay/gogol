@@ -172,9 +172,8 @@ instance GoogleAuth RollingUpdatesResume' where
 
 instance GoogleRequest RollingUpdatesResume' where
         type Rs RollingUpdatesResume' = Operation
-        request
-          = requestWithRoute defReq replicaPoolUpdaterURL
-        requestWithRoute r u RollingUpdatesResume'{..}
+        request = requestWith replicaPoolUpdaterRequest
+        requestWith rq RollingUpdatesResume'{..}
           = go _rProject _rZone _rRollingUpdate _rQuotaUser
               (Just _rPrettyPrint)
               _rUserIP
@@ -183,7 +182,6 @@ instance GoogleRequest RollingUpdatesResume' where
               _rOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RollingUpdatesResumeResource)
-                      r
-                      u
+                      rq

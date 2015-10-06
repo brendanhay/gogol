@@ -161,8 +161,8 @@ instance GoogleAuth PostalCodesGet' where
 
 instance GoogleRequest PostalCodesGet' where
         type Rs PostalCodesGet' = PostalCode
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PostalCodesGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PostalCodesGet'{..}
           = go _pcgProFileId _pcgCode _pcgQuotaUser
               (Just _pcgPrettyPrint)
               _pcgUserIP
@@ -171,7 +171,5 @@ instance GoogleRequest PostalCodesGet' where
               _pcgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PostalCodesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PostalCodesGetResource)
+                      rq

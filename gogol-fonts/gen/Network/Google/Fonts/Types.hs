@@ -16,7 +16,7 @@
 module Network.Google.Fonts.Types
     (
     -- * Service URL
-      fontsURL
+      fontsRequest
 
     -- * Webfont
     , Webfont
@@ -48,9 +48,8 @@ import           Network.Google.Fonts.Types.Product
 import           Network.Google.Fonts.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Google Fonts Developer API.
-fontsURL :: BaseUrl
-fontsURL
-  = BaseUrl Https
-      "https://www.googleapis.com/webfonts/v1/"
-      443
+-- | Default request referring to version 'v1' of the Google Fonts Developer API.
+fontsRequest :: RequestBuilder
+fontsRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "webfonts/v1/"

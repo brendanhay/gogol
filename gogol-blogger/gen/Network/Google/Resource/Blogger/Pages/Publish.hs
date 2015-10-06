@@ -163,8 +163,8 @@ instance GoogleAuth PagesPublish' where
 
 instance GoogleRequest PagesPublish' where
         type Rs PagesPublish' = Page
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PagesPublish'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PagesPublish'{..}
           = go _pppBlogId _pppPageId _pppQuotaUser
               (Just _pppPrettyPrint)
               _pppUserIP
@@ -173,7 +173,5 @@ instance GoogleRequest PagesPublish' where
               _pppOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PagesPublishResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PagesPublishResource)
+                      rq

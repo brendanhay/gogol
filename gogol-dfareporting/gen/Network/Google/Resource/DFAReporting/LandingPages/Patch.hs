@@ -190,8 +190,8 @@ instance GoogleAuth LandingPagesPatch' where
 
 instance GoogleRequest LandingPagesPatch' where
         type Rs LandingPagesPatch' = LandingPage
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u LandingPagesPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq LandingPagesPatch'{..}
           = go _lppProFileId _lppCampaignId (Just _lppId)
               _lppQuotaUser
               (Just _lppPrettyPrint)
@@ -202,7 +202,6 @@ instance GoogleRequest LandingPagesPatch' where
               (Just AltJSON)
               _lppPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LandingPagesPatchResource)
-                      r
-                      u
+                      rq

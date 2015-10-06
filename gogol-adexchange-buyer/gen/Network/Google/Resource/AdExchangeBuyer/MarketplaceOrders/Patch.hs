@@ -193,8 +193,8 @@ instance GoogleAuth MarketplaceOrdersPatch' where
 
 instance GoogleRequest MarketplaceOrdersPatch' where
         type Rs MarketplaceOrdersPatch' = MarketplaceOrder
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplaceOrdersPatch'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq MarketplaceOrdersPatch'{..}
           = go _mopOrderId _mopRevisionNumber _mopUpdateAction
               _mopQuotaUser
               (Just _mopPrettyPrint)
@@ -205,7 +205,6 @@ instance GoogleRequest MarketplaceOrdersPatch' where
               (Just AltJSON)
               _mopPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MarketplaceOrdersPatchResource)
-                      r
-                      u
+                      rq

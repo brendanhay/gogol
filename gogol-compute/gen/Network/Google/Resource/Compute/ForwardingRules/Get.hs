@@ -176,8 +176,8 @@ instance GoogleAuth ForwardingRulesGet' where
 
 instance GoogleRequest ForwardingRulesGet' where
         type Rs ForwardingRulesGet' = ForwardingRule
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u ForwardingRulesGet'{..}
+        request = requestWith computeRequest
+        requestWith rq ForwardingRulesGet'{..}
           = go _frgProject _frgRegion _frgForwardingRule
               _frgQuotaUser
               (Just _frgPrettyPrint)
@@ -187,7 +187,6 @@ instance GoogleRequest ForwardingRulesGet' where
               _frgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ForwardingRulesGetResource)
-                      r
-                      u
+                      rq

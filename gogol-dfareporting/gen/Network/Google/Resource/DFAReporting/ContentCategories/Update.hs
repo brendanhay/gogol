@@ -163,8 +163,8 @@ instance GoogleAuth ContentCategoriesUpdate' where
 
 instance GoogleRequest ContentCategoriesUpdate' where
         type Rs ContentCategoriesUpdate' = ContentCategory
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ContentCategoriesUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ContentCategoriesUpdate'{..}
           = go _ccuProFileId _ccuQuotaUser
               (Just _ccuPrettyPrint)
               _ccuUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest ContentCategoriesUpdate' where
               (Just AltJSON)
               _ccuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ContentCategoriesUpdateResource)
-                      r
-                      u
+                      rq

@@ -171,8 +171,8 @@ instance GoogleAuth AutoscalersGet' where
 
 instance GoogleRequest AutoscalersGet' where
         type Rs AutoscalersGet' = Autoscaler
-        request = requestWithRoute defReq autoscalerURL
-        requestWithRoute r u AutoscalersGet'{..}
+        request = requestWith autoscalerRequest
+        requestWith rq AutoscalersGet'{..}
           = go _agProject _agZone _agAutoscaler _agQuotaUser
               (Just _agPrettyPrint)
               _agUserIP
@@ -181,7 +181,5 @@ instance GoogleRequest AutoscalersGet' where
               _agOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AutoscalersGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AutoscalersGetResource)
+                      rq

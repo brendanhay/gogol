@@ -181,9 +181,8 @@ instance GoogleRequest
          DefaultObjectAccessControlsUpdate' where
         type Rs DefaultObjectAccessControlsUpdate' =
              ObjectAccessControl
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u
-          DefaultObjectAccessControlsUpdate'{..}
+        request = requestWith storageRequest
+        requestWith rq DefaultObjectAccessControlsUpdate'{..}
           = go _doacuBucket _doacuEntity _doacuQuotaUser
               (Just _doacuPrettyPrint)
               _doacuUserIP
@@ -193,8 +192,7 @@ instance GoogleRequest
               (Just AltJSON)
               _doacuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy DefaultObjectAccessControlsUpdateResource)
-                      r
-                      u
+                      rq

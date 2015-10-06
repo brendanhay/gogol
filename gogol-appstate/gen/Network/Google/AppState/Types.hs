@@ -16,7 +16,7 @@
 module Network.Google.AppState.Types
     (
     -- * Service URL
-      appStateURL
+      appStateRequest
 
     -- * WriteResult
     , WriteResult
@@ -51,9 +51,8 @@ import           Network.Google.AppState.Types.Product
 import           Network.Google.AppState.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Google App State API.
-appStateURL :: BaseUrl
-appStateURL
-  = BaseUrl Https
-      "https://www.googleapis.com/appstate/v1/"
-      443
+-- | Default request referring to version 'v1' of the Google App State API.
+appStateRequest :: RequestBuilder
+appStateRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "appstate/v1/"

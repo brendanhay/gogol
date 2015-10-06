@@ -301,8 +301,8 @@ instance GoogleAuth TablesList' where
 
 instance GoogleRequest TablesList' where
         type Rs TablesList' = TablesListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u TablesList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesList'{..}
           = go _tlCreatedAfter _tlCreatorEmail _tlRole _tlBbox
               _tlProcessingStatus
               _tlModifiedAfter
@@ -321,6 +321,4 @@ instance GoogleRequest TablesList' where
               _tlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TablesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TablesListResource) rq

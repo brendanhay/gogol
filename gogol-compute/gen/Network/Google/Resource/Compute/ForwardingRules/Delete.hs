@@ -175,8 +175,8 @@ instance GoogleAuth ForwardingRulesDelete' where
 
 instance GoogleRequest ForwardingRulesDelete' where
         type Rs ForwardingRulesDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u ForwardingRulesDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq ForwardingRulesDelete'{..}
           = go _frdProject _frdRegion _frdForwardingRule
               _frdQuotaUser
               (Just _frdPrettyPrint)
@@ -186,7 +186,6 @@ instance GoogleRequest ForwardingRulesDelete' where
               _frdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ForwardingRulesDeleteResource)
-                      r
-                      u
+                      rq

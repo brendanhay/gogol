@@ -151,8 +151,8 @@ instance GoogleAuth UsersPhotosGet' where
 
 instance GoogleRequest UsersPhotosGet' where
         type Rs UsersPhotosGet' = UserPhoto
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u UsersPhotosGet'{..}
+        request = requestWith directoryRequest
+        requestWith rq UsersPhotosGet'{..}
           = go _upgUserKey _upgQuotaUser (Just _upgPrettyPrint)
               _upgUserIP
               _upgFields
@@ -160,7 +160,5 @@ instance GoogleRequest UsersPhotosGet' where
               _upgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy UsersPhotosGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersPhotosGetResource)
+                      rq

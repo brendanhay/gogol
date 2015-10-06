@@ -198,9 +198,8 @@ instance GoogleRequest ManagementUnSampledReportsGet'
          where
         type Rs ManagementUnSampledReportsGet' =
              UnSampledReport
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementUnSampledReportsGet'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementUnSampledReportsGet'{..}
           = go _musrgAccountId _musrgWebPropertyId
               _musrgProFileId
               _musrgUnSampledReportId
@@ -212,8 +211,7 @@ instance GoogleRequest ManagementUnSampledReportsGet'
               _musrgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementUnSampledReportsGetResource)
-                      r
-                      u
+                      rq

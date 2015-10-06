@@ -16,7 +16,7 @@
 module Network.Google.ReplicaPool.Types
     (
     -- * Service URL
-      replicaPoolURL
+      replicaPoolRequest
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -151,9 +151,8 @@ import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types.Product
 import           Network.Google.ReplicaPool.Types.Sum
 
--- | URL referring to version 'v1beta2' of the Google Compute Engine Instance Group Manager API.
-replicaPoolURL :: BaseUrl
-replicaPoolURL
-  = BaseUrl Https
-      "https://www.googleapis.com/replicapool/v1beta2/projects/"
-      443
+-- | Default request referring to version 'v1beta2' of the Google Compute Engine Instance Group Manager API.
+replicaPoolRequest :: RequestBuilder
+replicaPoolRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "replicapool/v1beta2/projects/"

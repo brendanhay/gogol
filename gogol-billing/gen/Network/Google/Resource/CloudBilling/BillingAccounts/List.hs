@@ -235,8 +235,8 @@ instance GoogleAuth BillingAccountsList' where
 instance GoogleRequest BillingAccountsList' where
         type Rs BillingAccountsList' =
              ListBillingAccountsResponse
-        request = requestWithRoute defReq billingURL
-        requestWithRoute r u BillingAccountsList'{..}
+        request = requestWith billingRequest
+        requestWith rq BillingAccountsList'{..}
           = go _balXgafv _balUploadProtocol (Just _balPp)
               _balAccessToken
               _balUploadType
@@ -251,7 +251,6 @@ instance GoogleRequest BillingAccountsList' where
               _balOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BillingAccountsListResource)
-                      r
-                      u
+                      rq

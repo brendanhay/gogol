@@ -267,8 +267,8 @@ instance GoogleAuth AppsModulesPatch' where
 
 instance GoogleRequest AppsModulesPatch' where
         type Rs AppsModulesPatch' = Operation
-        request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsModulesPatch'{..}
+        request = requestWith appEngineRequest
+        requestWith rq AppsModulesPatch'{..}
           = go _ampAppsId _ampModulesId _ampXgafv
               _ampUploadProtocol
               (Just _ampPp)
@@ -286,7 +286,6 @@ instance GoogleRequest AppsModulesPatch' where
               (Just AltJSON)
               _ampPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AppsModulesPatchResource)
-                      r
-                      u
+                      rq

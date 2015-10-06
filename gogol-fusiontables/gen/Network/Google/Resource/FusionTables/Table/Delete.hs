@@ -146,8 +146,8 @@ instance GoogleAuth TableDelete' where
 
 instance GoogleRequest TableDelete' where
         type Rs TableDelete' = ()
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TableDelete'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TableDelete'{..}
           = go _tdTableId _tdQuotaUser (Just _tdPrettyPrint)
               _tdUserIP
               _tdFields
@@ -155,7 +155,4 @@ instance GoogleRequest TableDelete' where
               _tdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TableDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TableDeleteResource) rq

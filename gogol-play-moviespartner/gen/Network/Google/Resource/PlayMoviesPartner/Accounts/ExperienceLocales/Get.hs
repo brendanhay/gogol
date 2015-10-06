@@ -240,10 +240,8 @@ instance GoogleRequest AccountsExperienceLocalesGet'
          where
         type Rs AccountsExperienceLocalesGet' =
              ExperienceLocale
-        request
-          = requestWithRoute defReq playMoviesPartnerURL
-        requestWithRoute r u
-          AccountsExperienceLocalesGet'{..}
+        request = requestWith playMoviesPartnerRequest
+        requestWith rq AccountsExperienceLocalesGet'{..}
           = go _aelgAccountId _aelgElId _aelgXgafv
               _aelgUploadProtocol
               (Just _aelgPp)
@@ -258,7 +256,6 @@ instance GoogleRequest AccountsExperienceLocalesGet'
               _aelgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsExperienceLocalesGetResource)
-                      r
-                      u
+                      rq

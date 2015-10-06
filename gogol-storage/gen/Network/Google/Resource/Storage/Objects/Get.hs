@@ -252,8 +252,8 @@ instance GoogleAuth ObjectsGet' where
 
 instance GoogleRequest ObjectsGet' where
         type Rs ObjectsGet' = Object
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsGet'{..}
+        request = requestWith storageRequest
+        requestWith rq ObjectsGet'{..}
           = go _ogBucket _ogObject _ogIfMetagenerationMatch
               _ogIfGenerationNotMatch
               _ogIfGenerationMatch
@@ -268,15 +268,13 @@ instance GoogleRequest ObjectsGet' where
               _ogOAuthToken
               (Just AltJSON)
           where go :<|> _
-                  = clientWithRoute (Proxy :: Proxy ObjectsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ObjectsGetResource) rq
 
 instance GoogleRequest (MediaDownload ObjectsGet')
          where
         type Rs (MediaDownload ObjectsGet') = Body
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u (MediaDownload ObjectsGet'{..})
+        request = requestWith storageRequest
+        requestWith rq (MediaDownload ObjectsGet'{..})
           = go _ogBucket _ogObject _ogIfMetagenerationMatch
               _ogIfGenerationNotMatch
               _ogIfGenerationMatch
@@ -291,6 +289,4 @@ instance GoogleRequest (MediaDownload ObjectsGet')
               _ogOAuthToken
               (Just AltMedia)
           where _ :<|> go
-                  = clientWithRoute (Proxy :: Proxy ObjectsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ObjectsGetResource) rq

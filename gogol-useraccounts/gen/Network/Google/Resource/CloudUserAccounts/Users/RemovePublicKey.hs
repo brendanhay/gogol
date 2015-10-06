@@ -178,8 +178,8 @@ instance GoogleAuth UsersRemovePublicKey' where
 
 instance GoogleRequest UsersRemovePublicKey' where
         type Rs UsersRemovePublicKey' = Operation
-        request = requestWithRoute defReq userAccountsURL
-        requestWithRoute r u UsersRemovePublicKey'{..}
+        request = requestWith userAccountsRequest
+        requestWith rq UsersRemovePublicKey'{..}
           = go _urpkProject _urpkUser (Just _urpkFingerprint)
               _urpkQuotaUser
               (Just _urpkPrettyPrint)
@@ -189,7 +189,6 @@ instance GoogleRequest UsersRemovePublicKey' where
               _urpkOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersRemovePublicKeyResource)
-                      r
-                      u
+                      rq

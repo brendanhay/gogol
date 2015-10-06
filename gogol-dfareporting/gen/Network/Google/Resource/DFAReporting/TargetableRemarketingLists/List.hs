@@ -251,9 +251,8 @@ instance GoogleRequest
          TargetableRemarketingListsList' where
         type Rs TargetableRemarketingListsList' =
              TargetableRemarketingListsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u
-          TargetableRemarketingListsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq TargetableRemarketingListsList'{..}
           = go _trllProFileId (Just _trllAdvertiserId)
               _trllSortOrder
               _trllActive
@@ -269,8 +268,7 @@ instance GoogleRequest
               _trllOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy TargetableRemarketingListsListResource)
-                      r
-                      u
+                      rq

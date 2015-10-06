@@ -144,9 +144,8 @@ instance GoogleAuth
 instance GoogleRequest
          AchievementsResetAllForAllPlayers' where
         type Rs AchievementsResetAllForAllPlayers' = ()
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u
-          AchievementsResetAllForAllPlayers'{..}
+        request = requestWith gamesManagementRequest
+        requestWith rq AchievementsResetAllForAllPlayers'{..}
           = go _arafapQuotaUser (Just _arafapPrettyPrint)
               _arafapUserIP
               _arafapFields
@@ -154,8 +153,7 @@ instance GoogleRequest
               _arafapOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AchievementsResetAllForAllPlayersResource)
-                      r
-                      u
+                      rq

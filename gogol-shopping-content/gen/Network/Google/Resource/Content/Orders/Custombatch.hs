@@ -152,8 +152,8 @@ instance GoogleAuth OrdersCustombatch' where
 instance GoogleRequest OrdersCustombatch' where
         type Rs OrdersCustombatch' =
              OrdersCustomBatchResponse
-        request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersCustombatch'{..}
+        request = requestWith shoppingContentRequest
+        requestWith rq OrdersCustombatch'{..}
           = go _ordQuotaUser (Just _ordPrettyPrint) _ordUserIP
               _ordFields
               _ordKey
@@ -161,7 +161,6 @@ instance GoogleRequest OrdersCustombatch' where
               (Just AltJSON)
               _ordPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OrdersCustombatchResource)
-                      r
-                      u
+                      rq

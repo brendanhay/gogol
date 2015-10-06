@@ -163,8 +163,8 @@ instance GoogleAuth ManagementSegmentsList' where
 
 instance GoogleRequest ManagementSegmentsList' where
         type Rs ManagementSegmentsList' = Segments
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementSegmentsList'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementSegmentsList'{..}
           = go _mslStartIndex _mslMaxResults _mslQuotaUser
               (Just _mslPrettyPrint)
               _mslUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest ManagementSegmentsList' where
               _mslOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementSegmentsListResource)
-                      r
-                      u
+                      rq

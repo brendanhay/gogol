@@ -162,8 +162,8 @@ instance GoogleAuth PlacementStrategiesDelete' where
 instance GoogleRequest PlacementStrategiesDelete'
          where
         type Rs PlacementStrategiesDelete' = ()
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementStrategiesDelete'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PlacementStrategiesDelete'{..}
           = go _psdProFileId _psdId _psdQuotaUser
               (Just _psdPrettyPrint)
               _psdUserIP
@@ -172,7 +172,6 @@ instance GoogleRequest PlacementStrategiesDelete'
               _psdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlacementStrategiesDeleteResource)
-                      r
-                      u
+                      rq

@@ -146,8 +146,8 @@ instance GoogleAuth PropertiesList' where
 
 instance GoogleRequest PropertiesList' where
         type Rs PropertiesList' = PropertyList
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u PropertiesList'{..}
+        request = requestWith driveRequest
+        requestWith rq PropertiesList'{..}
           = go _plFileId _plQuotaUser (Just _plPrettyPrint)
               _plUserIP
               _plFields
@@ -155,7 +155,5 @@ instance GoogleRequest PropertiesList' where
               _plOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PropertiesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PropertiesListResource)
+                      rq

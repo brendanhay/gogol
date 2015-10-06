@@ -160,8 +160,8 @@ instance GoogleAuth TrainedModelsDelete' where
 
 instance GoogleRequest TrainedModelsDelete' where
         type Rs TrainedModelsDelete' = ()
-        request = requestWithRoute defReq predictionURL
-        requestWithRoute r u TrainedModelsDelete'{..}
+        request = requestWith predictionRequest
+        requestWith rq TrainedModelsDelete'{..}
           = go _tmdProject _tmdId _tmdQuotaUser
               (Just _tmdPrettyPrint)
               _tmdUserIP
@@ -170,7 +170,6 @@ instance GoogleRequest TrainedModelsDelete' where
               _tmdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TrainedModelsDeleteResource)
-                      r
-                      u
+                      rq

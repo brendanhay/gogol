@@ -145,8 +145,8 @@ instance GoogleAuth AssetsGet' where
 
 instance GoogleRequest AssetsGet' where
         type Rs AssetsGet' = Asset
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u AssetsGet'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq AssetsGet'{..}
           = go _agId _agQuotaUser (Just _agPrettyPrint)
               _agUserIP
               _agFields
@@ -154,6 +154,4 @@ instance GoogleRequest AssetsGet' where
               _agOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy AssetsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AssetsGetResource) rq

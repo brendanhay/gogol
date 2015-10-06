@@ -146,8 +146,8 @@ instance GoogleAuth QueriesDeletequery' where
 
 instance GoogleRequest QueriesDeletequery' where
         type Rs QueriesDeletequery' = ()
-        request = requestWithRoute defReq doubleClickBidsURL
-        requestWithRoute r u QueriesDeletequery'{..}
+        request = requestWith doubleClickBidsRequest
+        requestWith rq QueriesDeletequery'{..}
           = go _qdQueryId _qdQuotaUser (Just _qdPrettyPrint)
               _qdUserIP
               _qdFields
@@ -155,7 +155,6 @@ instance GoogleRequest QueriesDeletequery' where
               _qdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy QueriesDeletequeryResource)
-                      r
-                      u
+                      rq

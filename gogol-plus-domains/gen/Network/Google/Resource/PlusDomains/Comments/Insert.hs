@@ -159,8 +159,8 @@ instance GoogleAuth CommentsInsert' where
 
 instance GoogleRequest CommentsInsert' where
         type Rs CommentsInsert' = Comment
-        request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u CommentsInsert'{..}
+        request = requestWith plusDomainsRequest
+        requestWith rq CommentsInsert'{..}
           = go _ciActivityId _ciQuotaUser (Just _ciPrettyPrint)
               _ciUserIP
               _ciFields
@@ -169,7 +169,5 @@ instance GoogleRequest CommentsInsert' where
               (Just AltJSON)
               _ciPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CommentsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CommentsInsertResource)
+                      rq

@@ -165,8 +165,8 @@ instance GoogleRequest PlacementStrategiesUpdate'
          where
         type Rs PlacementStrategiesUpdate' =
              PlacementStrategy
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementStrategiesUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PlacementStrategiesUpdate'{..}
           = go _psuProFileId _psuQuotaUser
               (Just _psuPrettyPrint)
               _psuUserIP
@@ -176,7 +176,6 @@ instance GoogleRequest PlacementStrategiesUpdate'
               (Just AltJSON)
               _psuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlacementStrategiesUpdateResource)
-                      r
-                      u
+                      rq

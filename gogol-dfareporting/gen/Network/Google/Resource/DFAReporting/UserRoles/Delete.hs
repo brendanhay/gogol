@@ -161,8 +161,8 @@ instance GoogleAuth UserRolesDelete' where
 
 instance GoogleRequest UserRolesDelete' where
         type Rs UserRolesDelete' = ()
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserRolesDelete'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq UserRolesDelete'{..}
           = go _urdProFileId _urdId _urdQuotaUser
               (Just _urdPrettyPrint)
               _urdUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest UserRolesDelete' where
               _urdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UserRolesDeleteResource)
-                      r
-                      u
+                      rq

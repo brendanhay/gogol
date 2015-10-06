@@ -161,8 +161,8 @@ instance GoogleAuth GroupsAliasesDelete' where
 
 instance GoogleRequest GroupsAliasesDelete' where
         type Rs GroupsAliasesDelete' = ()
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u GroupsAliasesDelete'{..}
+        request = requestWith directoryRequest
+        requestWith rq GroupsAliasesDelete'{..}
           = go _gadGroupKey _gadAlias _gadQuotaUser
               (Just _gadPrettyPrint)
               _gadUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest GroupsAliasesDelete' where
               _gadOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GroupsAliasesDeleteResource)
-                      r
-                      u
+                      rq

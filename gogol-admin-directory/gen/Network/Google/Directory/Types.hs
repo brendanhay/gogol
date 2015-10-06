@@ -16,7 +16,7 @@
 module Network.Google.Directory.Types
     (
     -- * Service URL
-      directoryURL
+      directoryRequest
 
     -- * VerificationCode
     , VerificationCode
@@ -577,9 +577,8 @@ import           Network.Google.Directory.Types.Product
 import           Network.Google.Directory.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'directory_v1' of the Admin Directory API.
-directoryURL :: BaseUrl
-directoryURL
-  = BaseUrl Https
-      "https://www.googleapis.com/admin/directory/v1/"
-      443
+-- | Default request referring to version 'directory_v1' of the Admin Directory API.
+directoryRequest :: RequestBuilder
+directoryRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "admin/directory/v1/"

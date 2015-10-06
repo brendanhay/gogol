@@ -223,9 +223,8 @@ instance GoogleAuth
 instance GoogleRequest
          AccountsCustomChannelsAdUnitsList' where
         type Rs AccountsCustomChannelsAdUnitsList' = AdUnits
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u
-          AccountsCustomChannelsAdUnitsList'{..}
+        request = requestWith adSenseRequest
+        requestWith rq AccountsCustomChannelsAdUnitsList'{..}
           = go _accaulAccountId _accaulAdClientId
               _accaulCustomChannelId
               _accaulIncludeInactive
@@ -239,8 +238,7 @@ instance GoogleRequest
               _accaulOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsCustomChannelsAdUnitsListResource)
-                      r
-                      u
+                      rq

@@ -147,8 +147,8 @@ instance GoogleAuth DetectionsList' where
 
 instance GoogleRequest DetectionsList' where
         type Rs DetectionsList' = DetectionsListResponse
-        request = requestWithRoute defReq translateURL
-        requestWithRoute r u DetectionsList'{..}
+        request = requestWith translateRequest
+        requestWith rq DetectionsList'{..}
           = go _dlQ _dlQuotaUser (Just _dlPrettyPrint)
               _dlUserIP
               _dlFields
@@ -156,7 +156,5 @@ instance GoogleRequest DetectionsList' where
               _dlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DetectionsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DetectionsListResource)
+                      rq

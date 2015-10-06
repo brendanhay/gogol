@@ -186,8 +186,8 @@ instance GoogleAuth CampaignsInsert' where
 
 instance GoogleRequest CampaignsInsert' where
         type Rs CampaignsInsert' = Campaign
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CampaignsInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CampaignsInsert'{..}
           = go _ciProFileId (Just _ciDefaultLandingPageName)
               (Just _ciDefaultLandingPageURL)
               _ciQuotaUser
@@ -199,7 +199,6 @@ instance GoogleRequest CampaignsInsert' where
               (Just AltJSON)
               _ciPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CampaignsInsertResource)
-                      r
-                      u
+                      rq

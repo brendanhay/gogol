@@ -21,7 +21,7 @@ module Network.Google.Dataflow
     -- * API
       DataflowAPI
     , dataflowAPI
-    , dataflowURL
+    , dataflowRequest
 
     -- * Service Methods
 

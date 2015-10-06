@@ -167,8 +167,8 @@ instance GoogleAuth OrdersAdvancetestOrder' where
 instance GoogleRequest OrdersAdvancetestOrder' where
         type Rs OrdersAdvancetestOrder' =
              OrdersAdvanceTestOrderResponse
-        request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersAdvancetestOrder'{..}
+        request = requestWith shoppingContentRequest
+        requestWith rq OrdersAdvancetestOrder'{..}
           = go _oaoMerchantId _oaoOrderId _oaoQuotaUser
               (Just _oaoPrettyPrint)
               _oaoUserIP
@@ -177,7 +177,6 @@ instance GoogleRequest OrdersAdvancetestOrder' where
               _oaoOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OrdersAdvancetestOrderResource)
-                      r
-                      u
+                      rq

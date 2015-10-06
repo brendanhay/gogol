@@ -176,8 +176,8 @@ instance GoogleAuth TablesGet' where
 
 instance GoogleRequest TablesGet' where
         type Rs TablesGet' = Table
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u TablesGet'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq TablesGet'{..}
           = go _tgProjectId _tgDatasetId _tgTableId
               _tgQuotaUser
               (Just _tgPrettyPrint)
@@ -187,6 +187,4 @@ instance GoogleRequest TablesGet' where
               _tgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TablesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TablesGetResource) rq

@@ -162,8 +162,8 @@ instance GoogleAuth ProjectsMoveDisk' where
 
 instance GoogleRequest ProjectsMoveDisk' where
         type Rs ProjectsMoveDisk' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u ProjectsMoveDisk'{..}
+        request = requestWith computeRequest
+        requestWith rq ProjectsMoveDisk'{..}
           = go _pmdProject _pmdQuotaUser (Just _pmdPrettyPrint)
               _pmdUserIP
               _pmdFields
@@ -172,7 +172,6 @@ instance GoogleRequest ProjectsMoveDisk' where
               (Just AltJSON)
               _pmdPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsMoveDiskResource)
-                      r
-                      u
+                      rq

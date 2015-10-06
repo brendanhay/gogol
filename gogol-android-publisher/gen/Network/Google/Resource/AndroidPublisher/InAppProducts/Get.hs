@@ -161,8 +161,8 @@ instance GoogleAuth InAppProductsGet' where
 
 instance GoogleRequest InAppProductsGet' where
         type Rs InAppProductsGet' = InAppProduct
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u InAppProductsGet'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq InAppProductsGet'{..}
           = go _iapgPackageName _iapgSKU _iapgQuotaUser
               (Just _iapgPrettyPrint)
               _iapgUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest InAppProductsGet' where
               _iapgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InAppProductsGetResource)
-                      r
-                      u
+                      rq

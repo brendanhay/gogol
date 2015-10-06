@@ -146,8 +146,8 @@ instance GoogleAuth CommentsDelete' where
 
 instance GoogleRequest CommentsDelete' where
         type Rs CommentsDelete' = ()
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CommentsDelete'{..}
+        request = requestWith youTubeRequest
+        requestWith rq CommentsDelete'{..}
           = go (Just _cdId) _cdQuotaUser (Just _cdPrettyPrint)
               _cdUserIP
               _cdFields
@@ -155,7 +155,5 @@ instance GoogleRequest CommentsDelete' where
               _cdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CommentsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CommentsDeleteResource)
+                      rq

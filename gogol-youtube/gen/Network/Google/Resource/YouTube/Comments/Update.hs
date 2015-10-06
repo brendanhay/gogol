@@ -160,8 +160,8 @@ instance GoogleAuth CommentsUpdate' where
 
 instance GoogleRequest CommentsUpdate' where
         type Rs CommentsUpdate' = Comment
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CommentsUpdate'{..}
+        request = requestWith youTubeRequest
+        requestWith rq CommentsUpdate'{..}
           = go (Just _cuPart) _cuQuotaUser
               (Just _cuPrettyPrint)
               _cuUserIP
@@ -171,7 +171,5 @@ instance GoogleRequest CommentsUpdate' where
               (Just AltJSON)
               _cuPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CommentsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CommentsUpdateResource)
+                      rq

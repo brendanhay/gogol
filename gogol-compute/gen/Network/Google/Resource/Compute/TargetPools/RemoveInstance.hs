@@ -190,8 +190,8 @@ instance GoogleAuth TargetPoolsRemoveInstance' where
 instance GoogleRequest TargetPoolsRemoveInstance'
          where
         type Rs TargetPoolsRemoveInstance' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsRemoveInstance'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetPoolsRemoveInstance'{..}
           = go _tpriProject _tpriRegion _tpriTargetPool
               _tpriQuotaUser
               (Just _tpriPrettyPrint)
@@ -202,7 +202,6 @@ instance GoogleRequest TargetPoolsRemoveInstance'
               (Just AltJSON)
               _tpriPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetPoolsRemoveInstanceResource)
-                      r
-                      u
+                      rq

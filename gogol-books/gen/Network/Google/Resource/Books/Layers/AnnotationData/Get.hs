@@ -259,8 +259,8 @@ instance GoogleAuth LayersAnnotationDataGet' where
 
 instance GoogleRequest LayersAnnotationDataGet' where
         type Rs LayersAnnotationDataGet' = Annotationdata
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u LayersAnnotationDataGet'{..}
+        request = requestWith booksRequest
+        requestWith rq LayersAnnotationDataGet'{..}
           = go _ladgVolumeId _ladgLayerId _ladgAnnotationDataId
               (Just _ladgContentVersion)
               _ladgW
@@ -277,7 +277,6 @@ instance GoogleRequest LayersAnnotationDataGet' where
               _ladgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LayersAnnotationDataGetResource)
-                      r
-                      u
+                      rq

@@ -156,8 +156,8 @@ instance GoogleAuth TimelineInsert' where
 
 instance GoogleRequest TimelineInsert' where
         type Rs TimelineInsert' = TimelineItem
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineInsert'{..}
+        request = requestWith mirrorRequest
+        requestWith rq TimelineInsert'{..}
           = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIP
               _tiFields
               _tiKey
@@ -166,7 +166,5 @@ instance GoogleRequest TimelineInsert' where
               _tiPayload
               _tiMedia
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TimelineInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TimelineInsertResource)
+                      rq

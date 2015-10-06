@@ -178,8 +178,8 @@ instance GoogleAuth InstancesPatch' where
 
 instance GoogleRequest InstancesPatch' where
         type Rs InstancesPatch' = Operation
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesPatch'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq InstancesPatch'{..}
           = go _ipProject _ipInstance _ipQuotaUser
               (Just _ipPrettyPrint)
               _ipUserIP
@@ -189,7 +189,5 @@ instance GoogleRequest InstancesPatch' where
               (Just AltJSON)
               _ipPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy InstancesPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy InstancesPatchResource)
+                      rq

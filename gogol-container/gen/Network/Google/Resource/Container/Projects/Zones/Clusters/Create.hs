@@ -193,8 +193,8 @@ instance GoogleAuth ProjectsZonesClustersCreate'
 instance GoogleRequest ProjectsZonesClustersCreate'
          where
         type Rs ProjectsZonesClustersCreate' = Operation
-        request = requestWithRoute defReq containerURL
-        requestWithRoute r u ProjectsZonesClustersCreate'{..}
+        request = requestWith containerRequest
+        requestWith rq ProjectsZonesClustersCreate'{..}
           = go _pzccProjectId _pzccZoneId _pzccQuotaUser
               (Just _pzccPrettyPrint)
               _pzccUserIP
@@ -204,7 +204,6 @@ instance GoogleRequest ProjectsZonesClustersCreate'
               (Just AltJSON)
               _pzccPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsZonesClustersCreateResource)
-                      r
-                      u
+                      rq

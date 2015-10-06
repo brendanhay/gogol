@@ -168,8 +168,8 @@ instance GoogleAuth TargetHTTPProxiesDelete' where
 
 instance GoogleRequest TargetHTTPProxiesDelete' where
         type Rs TargetHTTPProxiesDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetHTTPProxiesDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetHTTPProxiesDelete'{..}
           = go _thttppdProject _thttppdTargetHTTPProxy
               _thttppdQuotaUser
               (Just _thttppdPrettyPrint)
@@ -179,7 +179,6 @@ instance GoogleRequest TargetHTTPProxiesDelete' where
               _thttppdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetHTTPProxiesDeleteResource)
-                      r
-                      u
+                      rq

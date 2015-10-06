@@ -174,8 +174,8 @@ instance GoogleAuth InstancesReset' where
 
 instance GoogleRequest InstancesReset' where
         type Rs InstancesReset' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesReset'{..}
+        request = requestWith computeRequest
+        requestWith rq InstancesReset'{..}
           = go _irrProject _irrZone _irrInstance _irrQuotaUser
               (Just _irrPrettyPrint)
               _irrUserIP
@@ -184,7 +184,5 @@ instance GoogleRequest InstancesReset' where
               _irrOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy InstancesResetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy InstancesResetResource)
+                      rq

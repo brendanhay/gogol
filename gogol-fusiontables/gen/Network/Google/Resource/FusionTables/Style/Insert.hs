@@ -160,8 +160,8 @@ instance GoogleAuth StyleInsert' where
 
 instance GoogleRequest StyleInsert' where
         type Rs StyleInsert' = StyleSetting
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u StyleInsert'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq StyleInsert'{..}
           = go _siTableId _siQuotaUser (Just _siPrettyPrint)
               _siUserIP
               _siFields
@@ -170,7 +170,4 @@ instance GoogleRequest StyleInsert' where
               (Just AltJSON)
               _siPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy StyleInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy StyleInsertResource) rq

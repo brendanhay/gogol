@@ -218,8 +218,8 @@ instance GoogleAuth UserEventsLog' where
 
 instance GoogleRequest UserEventsLog' where
         type Rs UserEventsLog' = LogUserEventResponse
-        request = requestWithRoute defReq partnersURL
-        requestWithRoute r u UserEventsLog'{..}
+        request = requestWith partnersRequest
+        requestWith rq UserEventsLog'{..}
           = go _uelXgafv _uelUploadProtocol (Just _uelPp)
               _uelAccessToken
               _uelUploadType
@@ -233,7 +233,5 @@ instance GoogleRequest UserEventsLog' where
               (Just AltJSON)
               _uelPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy UserEventsLogResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UserEventsLogResource)
+                      rq

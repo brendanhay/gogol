@@ -188,9 +188,8 @@ instance GoogleRequest EditsAPKsAddexternallyhosted'
          where
         type Rs EditsAPKsAddexternallyhosted' =
              APKsAddExternallyHostedResponse
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u
-          EditsAPKsAddexternallyhosted'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsAPKsAddexternallyhosted'{..}
           = go _eapkaPackageName _eapkaEditId _eapkaQuotaUser
               (Just _eapkaPrettyPrint)
               _eapkaUserIP
@@ -200,7 +199,6 @@ instance GoogleRequest EditsAPKsAddexternallyhosted'
               (Just AltJSON)
               _eapkaPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsAPKsAddexternallyhostedResource)
-                      r
-                      u
+                      rq

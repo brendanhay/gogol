@@ -322,8 +322,8 @@ instance GoogleAuth FilesPatch' where
 
 instance GoogleRequest FilesPatch' where
         type Rs FilesPatch' = File
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesPatch'{..}
+        request = requestWith driveRequest
+        requestWith rq FilesPatch'{..}
           = go _fpFileId (Just _fpNewRevision) (Just _fpPinned)
               _fpTimedTextLanguage
               (Just _fpUpdateViewedDate)
@@ -345,6 +345,4 @@ instance GoogleRequest FilesPatch' where
               (Just AltJSON)
               _fpPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy FilesPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy FilesPatchResource) rq

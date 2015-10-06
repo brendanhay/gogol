@@ -198,8 +198,8 @@ instance GoogleAuth EditsAPKListingsDelete' where
 
 instance GoogleRequest EditsAPKListingsDelete' where
         type Rs EditsAPKListingsDelete' = ()
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsAPKListingsDelete'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsAPKListingsDelete'{..}
           = go _eapkldPackageName _eapkldEditId
               _eapkldAPKVersionCode
               _eapkldLanguage
@@ -211,7 +211,6 @@ instance GoogleRequest EditsAPKListingsDelete' where
               _eapkldOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsAPKListingsDeleteResource)
-                      r
-                      u
+                      rq

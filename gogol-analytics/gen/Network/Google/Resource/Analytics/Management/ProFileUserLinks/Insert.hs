@@ -199,9 +199,8 @@ instance GoogleRequest
          ManagementProFileUserLinksInsert' where
         type Rs ManagementProFileUserLinksInsert' =
              EntityUserLink
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementProFileUserLinksInsert'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementProFileUserLinksInsert'{..}
           = go _mpfuliAccountId _mpfuliWebPropertyId
               _mpfuliProFileId
               _mpfuliQuotaUser
@@ -213,8 +212,7 @@ instance GoogleRequest
               (Just AltJSON)
               _mpfuliPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementProFileUserLinksInsertResource)
-                      r
-                      u
+                      rq

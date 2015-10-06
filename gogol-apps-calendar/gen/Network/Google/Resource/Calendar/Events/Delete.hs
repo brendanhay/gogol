@@ -174,8 +174,8 @@ instance GoogleAuth EventsDelete' where
 
 instance GoogleRequest EventsDelete' where
         type Rs EventsDelete' = ()
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsDelete'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq EventsDelete'{..}
           = go _edCalendarId _edEventId _edSendNotifications
               _edQuotaUser
               (Just _edPrettyPrint)
@@ -185,7 +185,5 @@ instance GoogleRequest EventsDelete' where
               _edOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EventsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EventsDeleteResource)
+                      rq

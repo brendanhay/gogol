@@ -167,9 +167,8 @@ instance GoogleRequest
          DefaultObjectAccessControlsInsert' where
         type Rs DefaultObjectAccessControlsInsert' =
              ObjectAccessControl
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u
-          DefaultObjectAccessControlsInsert'{..}
+        request = requestWith storageRequest
+        requestWith rq DefaultObjectAccessControlsInsert'{..}
           = go _doaciBucket _doaciQuotaUser
               (Just _doaciPrettyPrint)
               _doaciUserIP
@@ -179,8 +178,7 @@ instance GoogleRequest
               (Just AltJSON)
               _doaciPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy DefaultObjectAccessControlsInsertResource)
-                      r
-                      u
+                      rq

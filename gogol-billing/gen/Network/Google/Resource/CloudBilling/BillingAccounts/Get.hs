@@ -221,8 +221,8 @@ instance GoogleAuth BillingAccountsGet' where
 
 instance GoogleRequest BillingAccountsGet' where
         type Rs BillingAccountsGet' = BillingAccount
-        request = requestWithRoute defReq billingURL
-        requestWithRoute r u BillingAccountsGet'{..}
+        request = requestWith billingRequest
+        requestWith rq BillingAccountsGet'{..}
           = go _bagName _bagXgafv _bagUploadProtocol
               (Just _bagPp)
               _bagAccessToken
@@ -236,7 +236,6 @@ instance GoogleRequest BillingAccountsGet' where
               _bagOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BillingAccountsGetResource)
-                      r
-                      u
+                      rq

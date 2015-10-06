@@ -204,8 +204,8 @@ instance GoogleRequest
          RepresentativesRepresentativeInfoByDivision' where
         type Rs RepresentativesRepresentativeInfoByDivision'
              = RepresentativeInfoData
-        request = requestWithRoute defReq civicInfoURL
-        requestWithRoute r u
+        request = requestWith civicInfoRequest
+        requestWith rq
           RepresentativesRepresentativeInfoByDivision'{..}
           = go _rribdOcdId (_rribdRoles ^. _Default)
               _rribdRecursive
@@ -218,9 +218,8 @@ instance GoogleRequest
               _rribdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy
                            RepresentativesRepresentativeInfoByDivisionResource)
-                      r
-                      u
+                      rq

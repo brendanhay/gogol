@@ -16,7 +16,7 @@
 module Network.Google.GroupsSettings.Types
     (
     -- * Service URL
-      groupsSettingsURL
+      groupsSettingsRequest
 
     -- * Groups
     , Groups
@@ -55,9 +55,8 @@ import           Network.Google.GroupsSettings.Types.Product
 import           Network.Google.GroupsSettings.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Groups Settings API.
-groupsSettingsURL :: BaseUrl
-groupsSettingsURL
-  = BaseUrl Https
-      "https://www.googleapis.com/groups/v1/groups/"
-      443
+-- | Default request referring to version 'v1' of the Groups Settings API.
+groupsSettingsRequest :: RequestBuilder
+groupsSettingsRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "groups/v1/groups/"

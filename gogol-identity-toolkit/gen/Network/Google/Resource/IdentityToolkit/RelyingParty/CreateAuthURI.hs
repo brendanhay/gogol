@@ -154,8 +154,8 @@ instance GoogleRequest RelyingPartyCreateAuthURI'
          where
         type Rs RelyingPartyCreateAuthURI' =
              CreateAuthURIResponse
-        request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingPartyCreateAuthURI'{..}
+        request = requestWith identityToolkitRequest
+        requestWith rq RelyingPartyCreateAuthURI'{..}
           = go _rpcauQuotaUser (Just _rpcauPrettyPrint)
               _rpcauUserIP
               _rpcauFields
@@ -164,7 +164,6 @@ instance GoogleRequest RelyingPartyCreateAuthURI'
               (Just AltJSON)
               _rpcauPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RelyingPartyCreateAuthURIResource)
-                      r
-                      u
+                      rq

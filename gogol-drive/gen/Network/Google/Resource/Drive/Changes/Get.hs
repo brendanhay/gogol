@@ -145,8 +145,8 @@ instance GoogleAuth ChangesGet' where
 
 instance GoogleRequest ChangesGet' where
         type Rs ChangesGet' = Change
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u ChangesGet'{..}
+        request = requestWith driveRequest
+        requestWith rq ChangesGet'{..}
           = go _cChangeId _cQuotaUser (Just _cPrettyPrint)
               _cUserIP
               _cFields
@@ -154,6 +154,4 @@ instance GoogleRequest ChangesGet' where
               _cOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ChangesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ChangesGetResource) rq

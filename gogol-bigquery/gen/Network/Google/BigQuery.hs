@@ -21,7 +21,7 @@ module Network.Google.BigQuery
     -- * API
       BigQueryAPI
     , bigQueryAPI
-    , bigQueryURL
+    , bigQueryRequest
 
     -- * Service Methods
 

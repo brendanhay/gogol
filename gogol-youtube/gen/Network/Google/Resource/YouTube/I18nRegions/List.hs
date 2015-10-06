@@ -161,8 +161,8 @@ instance GoogleAuth I18nRegionsList' where
 
 instance GoogleRequest I18nRegionsList' where
         type Rs I18nRegionsList' = I18nRegionListResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u I18nRegionsList'{..}
+        request = requestWith youTubeRequest
+        requestWith rq I18nRegionsList'{..}
           = go (Just _irlPart) (Just _irlHl) _irlQuotaUser
               (Just _irlPrettyPrint)
               _irlUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest I18nRegionsList' where
               _irlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy I18nRegionsListResource)
-                      r
-                      u
+                      rq

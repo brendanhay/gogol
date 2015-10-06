@@ -210,8 +210,8 @@ instance GoogleAuth MachineTypesList' where
 
 instance GoogleRequest MachineTypesList' where
         type Rs MachineTypesList' = MachineTypeList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u MachineTypesList'{..}
+        request = requestWith computeRequest
+        requestWith rq MachineTypesList'{..}
           = go _mtlProject _mtlZone _mtlFilter _mtlPageToken
               (Just _mtlMaxResults)
               _mtlQuotaUser
@@ -222,7 +222,6 @@ instance GoogleRequest MachineTypesList' where
               _mtlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MachineTypesListResource)
-                      r
-                      u
+                      rq

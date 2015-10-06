@@ -174,8 +174,8 @@ instance GoogleAuth MachineTypesGet' where
 
 instance GoogleRequest MachineTypesGet' where
         type Rs MachineTypesGet' = MachineType
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u MachineTypesGet'{..}
+        request = requestWith computeRequest
+        requestWith rq MachineTypesGet'{..}
           = go _mtgProject _mtgZone _mtgMachineType
               _mtgQuotaUser
               (Just _mtgPrettyPrint)
@@ -185,7 +185,6 @@ instance GoogleRequest MachineTypesGet' where
               _mtgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MachineTypesGetResource)
-                      r
-                      u
+                      rq

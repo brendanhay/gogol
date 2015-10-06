@@ -182,8 +182,8 @@ instance GoogleAuth PropertiesPatch' where
 
 instance GoogleRequest PropertiesPatch' where
         type Rs PropertiesPatch' = Property
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u PropertiesPatch'{..}
+        request = requestWith driveRequest
+        requestWith rq PropertiesPatch'{..}
           = go _ppFileId _ppPropertyKey (Just _ppVisibility)
               _ppQuotaUser
               (Just _ppPrettyPrint)
@@ -194,7 +194,6 @@ instance GoogleRequest PropertiesPatch' where
               (Just AltJSON)
               _ppPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PropertiesPatchResource)
-                      r
-                      u
+                      rq

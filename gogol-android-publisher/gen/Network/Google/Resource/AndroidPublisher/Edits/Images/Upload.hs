@@ -202,8 +202,8 @@ instance GoogleAuth EditsImagesUpload' where
 
 instance GoogleRequest EditsImagesUpload' where
         type Rs EditsImagesUpload' = ImagesUploadResponse
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsImagesUpload'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsImagesUpload'{..}
           = go _eiuPackageName _eiuEditId _eiuLanguage
               _eiuImageType
               _eiuQuotaUser
@@ -215,7 +215,6 @@ instance GoogleRequest EditsImagesUpload' where
               (Just AltJSON)
               _eiuMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsImagesUploadResource)
-                      r
-                      u
+                      rq

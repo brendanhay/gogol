@@ -173,9 +173,8 @@ instance GoogleAuth ZoneOperationsGet' where
 
 instance GoogleRequest ZoneOperationsGet' where
         type Rs ZoneOperationsGet' = Operation
-        request
-          = requestWithRoute defReq replicaPoolUpdaterURL
-        requestWithRoute r u ZoneOperationsGet'{..}
+        request = requestWith replicaPoolUpdaterRequest
+        requestWith rq ZoneOperationsGet'{..}
           = go _zogProject _zogZone _zogOperation _zogQuotaUser
               (Just _zogPrettyPrint)
               _zogUserIP
@@ -184,7 +183,6 @@ instance GoogleRequest ZoneOperationsGet' where
               _zogOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ZoneOperationsGetResource)
-                      r
-                      u
+                      rq

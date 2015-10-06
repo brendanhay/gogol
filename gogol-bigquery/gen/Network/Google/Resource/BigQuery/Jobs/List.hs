@@ -214,8 +214,8 @@ instance GoogleAuth JobsList' where
 
 instance GoogleRequest JobsList' where
         type Rs JobsList' = JobList
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u JobsList'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq JobsList'{..}
           = go _jlProjectId (_jlStateFilter ^. _Default)
               _jlProjection
               _jlPageToken
@@ -229,5 +229,4 @@ instance GoogleRequest JobsList' where
               _jlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsListResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy JobsListResource) rq

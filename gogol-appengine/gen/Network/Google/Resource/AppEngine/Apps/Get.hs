@@ -230,8 +230,8 @@ instance GoogleAuth AppsGet' where
 
 instance GoogleRequest AppsGet' where
         type Rs AppsGet' = Application
-        request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsGet'{..}
+        request = requestWith appEngineRequest
+        requestWith rq AppsGet'{..}
           = go _agAppsId _agXgafv _agUploadProtocol
               (Just _agPp)
               _agAccessToken
@@ -246,5 +246,4 @@ instance GoogleRequest AppsGet' where
               _agOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy AppsGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy AppsGetResource) rq

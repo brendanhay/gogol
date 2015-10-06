@@ -148,8 +148,8 @@ instance GoogleAuth AlertsDelete' where
 
 instance GoogleRequest AlertsDelete' where
         type Rs AlertsDelete' = ()
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AlertsDelete'{..}
+        request = requestWith adSenseRequest
+        requestWith rq AlertsDelete'{..}
           = go _adAlertId _adQuotaUser (Just _adPrettyPrint)
               _adUserIP
               _adFields
@@ -157,7 +157,5 @@ instance GoogleRequest AlertsDelete' where
               _adOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AlertsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AlertsDeleteResource)
+                      rq

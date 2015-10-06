@@ -205,9 +205,8 @@ instance GoogleAuth URLCrawlErrorsSamplesMarkAsFixed'
 instance GoogleRequest
          URLCrawlErrorsSamplesMarkAsFixed' where
         type Rs URLCrawlErrorsSamplesMarkAsFixed' = ()
-        request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u
-          URLCrawlErrorsSamplesMarkAsFixed'{..}
+        request = requestWith webmasterToolsRequest
+        requestWith rq URLCrawlErrorsSamplesMarkAsFixed'{..}
           = go _ucesmafSiteURL _ucesmafURL
               (Just _ucesmafCategory)
               (Just _ucesmafPlatform)
@@ -219,8 +218,7 @@ instance GoogleRequest
               _ucesmafOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy URLCrawlErrorsSamplesMarkAsFixedResource)
-                      r
-                      u
+                      rq

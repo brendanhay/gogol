@@ -150,8 +150,8 @@ instance GoogleAuth TokensList' where
 
 instance GoogleRequest TokensList' where
         type Rs TokensList' = Tokens
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u TokensList'{..}
+        request = requestWith directoryRequest
+        requestWith rq TokensList'{..}
           = go _tlUserKey _tlQuotaUser (Just _tlPrettyPrint)
               _tlUserIP
               _tlFields
@@ -159,6 +159,4 @@ instance GoogleRequest TokensList' where
               _tlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TokensListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TokensListResource) rq

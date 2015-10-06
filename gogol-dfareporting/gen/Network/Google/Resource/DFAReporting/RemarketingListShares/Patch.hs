@@ -182,8 +182,8 @@ instance GoogleRequest RemarketingListSharesPatch'
          where
         type Rs RemarketingListSharesPatch' =
              RemarketingListShare
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u RemarketingListSharesPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq RemarketingListSharesPatch'{..}
           = go _rlspProFileId (Just _rlspRemarketingListId)
               _rlspQuotaUser
               (Just _rlspPrettyPrint)
@@ -194,7 +194,6 @@ instance GoogleRequest RemarketingListSharesPatch'
               (Just AltJSON)
               _rlspPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RemarketingListSharesPatchResource)
-                      r
-                      u
+                      rq

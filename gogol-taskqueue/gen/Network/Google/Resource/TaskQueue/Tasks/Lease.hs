@@ -209,8 +209,8 @@ instance GoogleAuth TasksLease' where
 
 instance GoogleRequest TasksLease' where
         type Rs TasksLease' = Tasks
-        request = requestWithRoute defReq taskQueueURL
-        requestWithRoute r u TasksLease'{..}
+        request = requestWith taskQueueRequest
+        requestWith rq TasksLease'{..}
           = go _tlProject _tlTaskqueue (Just _tlNumTasks)
               (Just _tlLeaseSecs)
               _tlTag
@@ -223,6 +223,4 @@ instance GoogleRequest TasksLease' where
               _tlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TasksLeaseResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TasksLeaseResource) rq

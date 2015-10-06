@@ -174,8 +174,8 @@ instance GoogleAuth ClientAccessUpdate' where
 instance GoogleRequest ClientAccessUpdate' where
         type Rs ClientAccessUpdate' =
              ClientAccessCapabilities
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u ClientAccessUpdate'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq ClientAccessUpdate'{..}
           = go _cauClientAccountId (Just _cauSponsorAccountId)
               _cauQuotaUser
               (Just _cauPrettyPrint)
@@ -186,7 +186,6 @@ instance GoogleRequest ClientAccessUpdate' where
               (Just AltJSON)
               _cauPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ClientAccessUpdateResource)
-                      r
-                      u
+                      rq

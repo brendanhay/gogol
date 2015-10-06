@@ -186,8 +186,8 @@ instance GoogleAuth DisksCreateSnapshot' where
 
 instance GoogleRequest DisksCreateSnapshot' where
         type Rs DisksCreateSnapshot' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u DisksCreateSnapshot'{..}
+        request = requestWith computeRequest
+        requestWith rq DisksCreateSnapshot'{..}
           = go _dcsProject _dcsZone _dcsDisk _dcsQuotaUser
               (Just _dcsPrettyPrint)
               _dcsUserIP
@@ -197,7 +197,6 @@ instance GoogleRequest DisksCreateSnapshot' where
               (Just AltJSON)
               _dcsPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DisksCreateSnapshotResource)
-                      r
-                      u
+                      rq

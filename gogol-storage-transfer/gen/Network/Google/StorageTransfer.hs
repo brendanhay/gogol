@@ -22,7 +22,7 @@ module Network.Google.StorageTransfer
     -- * API
       StorageTransferAPI
     , storageTransferAPI
-    , storageTransferURL
+    , storageTransferRequest
 
     -- * Service Methods
 

@@ -159,8 +159,8 @@ instance GoogleAuth DatasetsInsert' where
 
 instance GoogleRequest DatasetsInsert' where
         type Rs DatasetsInsert' = Dataset
-        request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u DatasetsInsert'{..}
+        request = requestWith bigQueryRequest
+        requestWith rq DatasetsInsert'{..}
           = go _diProjectId _diQuotaUser (Just _diPrettyPrint)
               _diUserIP
               _diFields
@@ -169,7 +169,5 @@ instance GoogleRequest DatasetsInsert' where
               (Just AltJSON)
               _diPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DatasetsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DatasetsInsertResource)
+                      rq

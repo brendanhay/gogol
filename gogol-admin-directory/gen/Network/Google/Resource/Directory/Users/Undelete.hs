@@ -156,8 +156,8 @@ instance GoogleAuth UsersUndelete' where
 
 instance GoogleRequest UsersUndelete' where
         type Rs UsersUndelete' = ()
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u UsersUndelete'{..}
+        request = requestWith directoryRequest
+        requestWith rq UsersUndelete'{..}
           = go _uUserKey _uQuotaUser (Just _uPrettyPrint)
               _uUserIP
               _uFields
@@ -166,7 +166,5 @@ instance GoogleRequest UsersUndelete' where
               (Just AltJSON)
               _uPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy UsersUndeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersUndeleteResource)
+                      rq

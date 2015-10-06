@@ -182,8 +182,8 @@ instance GoogleAuth PropertiesUpdate' where
 
 instance GoogleRequest PropertiesUpdate' where
         type Rs PropertiesUpdate' = Property
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u PropertiesUpdate'{..}
+        request = requestWith driveRequest
+        requestWith rq PropertiesUpdate'{..}
           = go _puFileId _puPropertyKey (Just _puVisibility)
               _puQuotaUser
               (Just _puPrettyPrint)
@@ -194,7 +194,6 @@ instance GoogleRequest PropertiesUpdate' where
               (Just AltJSON)
               _puPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PropertiesUpdateResource)
-                      r
-                      u
+                      rq

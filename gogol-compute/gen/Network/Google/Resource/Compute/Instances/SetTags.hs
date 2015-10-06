@@ -188,8 +188,8 @@ instance GoogleAuth InstancesSetTags' where
 
 instance GoogleRequest InstancesSetTags' where
         type Rs InstancesSetTags' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesSetTags'{..}
+        request = requestWith computeRequest
+        requestWith rq InstancesSetTags'{..}
           = go _istProject _istZone _istInstance _istQuotaUser
               (Just _istPrettyPrint)
               _istUserIP
@@ -199,7 +199,6 @@ instance GoogleRequest InstancesSetTags' where
               (Just AltJSON)
               _istPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesSetTagsResource)
-                      r
-                      u
+                      rq

@@ -21,7 +21,7 @@ module Network.Google.Analytics
     -- * API
       AnalyticsAPI
     , analyticsAPI
-    , analyticsURL
+    , analyticsRequest
 
     -- * Service Methods
 

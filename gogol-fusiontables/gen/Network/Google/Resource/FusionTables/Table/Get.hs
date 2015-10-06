@@ -146,8 +146,8 @@ instance GoogleAuth TableGet' where
 
 instance GoogleRequest TableGet' where
         type Rs TableGet' = Table
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TableGet'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TableGet'{..}
           = go _ttTableId _ttQuotaUser (Just _ttPrettyPrint)
               _ttUserIP
               _ttFields
@@ -155,5 +155,4 @@ instance GoogleRequest TableGet' where
               _ttOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TableGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy TableGetResource) rq

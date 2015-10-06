@@ -157,8 +157,8 @@ instance GoogleAuth URLList' where
 
 instance GoogleRequest URLList' where
         type Rs URLList' = URLHistory
-        request = requestWithRoute defReq uRLShortenerURL
-        requestWithRoute r u URLList'{..}
+        request = requestWith uRLShortenerRequest
+        requestWith rq URLList'{..}
           = go _ulStartToken _ulProjection _ulQuotaUser
               (Just _ulPrettyPrint)
               _ulUserIP
@@ -167,5 +167,4 @@ instance GoogleRequest URLList' where
               _ulOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy URLListResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy URLListResource) rq

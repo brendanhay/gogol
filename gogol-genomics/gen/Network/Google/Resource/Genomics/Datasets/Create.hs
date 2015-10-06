@@ -146,8 +146,8 @@ instance GoogleAuth DatasetsCreate' where
 
 instance GoogleRequest DatasetsCreate' where
         type Rs DatasetsCreate' = Dataset
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u DatasetsCreate'{..}
+        request = requestWith genomicsRequest
+        requestWith rq DatasetsCreate'{..}
           = go _dcQuotaUser (Just _dcPrettyPrint) _dcUserIP
               _dcFields
               _dcKey
@@ -155,7 +155,5 @@ instance GoogleRequest DatasetsCreate' where
               (Just AltJSON)
               _dcPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DatasetsCreateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DatasetsCreateResource)
+                      rq

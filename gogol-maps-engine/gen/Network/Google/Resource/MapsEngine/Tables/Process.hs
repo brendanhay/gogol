@@ -146,15 +146,13 @@ instance GoogleAuth TablesProcess' where
 
 instance GoogleRequest TablesProcess' where
         type Rs TablesProcess' = ProcessResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u TablesProcess'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesProcess'{..}
           = go _tId _tQuotaUser (Just _tPrettyPrint) _tUserIP
               _tFields
               _tKey
               _tOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TablesProcessResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TablesProcessResource)
+                      rq

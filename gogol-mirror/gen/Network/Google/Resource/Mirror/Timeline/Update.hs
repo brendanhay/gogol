@@ -167,8 +167,8 @@ instance GoogleAuth TimelineUpdate' where
 
 instance GoogleRequest TimelineUpdate' where
         type Rs TimelineUpdate' = TimelineItem
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineUpdate'{..}
+        request = requestWith mirrorRequest
+        requestWith rq TimelineUpdate'{..}
           = go _tuId _tuQuotaUser (Just _tuPrettyPrint)
               _tuUserIP
               _tuFields
@@ -178,7 +178,5 @@ instance GoogleRequest TimelineUpdate' where
               _tuPayload
               _tuMedia
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TimelineUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TimelineUpdateResource)
+                      rq

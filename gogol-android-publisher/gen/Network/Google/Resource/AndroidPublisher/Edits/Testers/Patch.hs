@@ -187,8 +187,8 @@ instance GoogleAuth EditsTestersPatch' where
 
 instance GoogleRequest EditsTestersPatch' where
         type Rs EditsTestersPatch' = Testers
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsTestersPatch'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsTestersPatch'{..}
           = go _etptPackageName _etptEditId _etptTrack
               _etptQuotaUser
               (Just _etptPrettyPrint)
@@ -199,7 +199,6 @@ instance GoogleRequest EditsTestersPatch' where
               (Just AltJSON)
               _etptPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsTestersPatchResource)
-                      r
-                      u
+                      rq

@@ -145,8 +145,8 @@ instance GoogleAuth StatscollectionUpdatestats' where
 instance GoogleRequest StatscollectionUpdatestats'
          where
         type Rs StatscollectionUpdatestats' = StatsReply
-        request = requestWithRoute defReq latencyTestURL
-        requestWithRoute r u StatscollectionUpdatestats'{..}
+        request = requestWith latencyTestRequest
+        requestWith rq StatscollectionUpdatestats'{..}
           = go _sQuotaUser (Just _sPrettyPrint) _sUserIP
               _sFields
               _sKey
@@ -154,7 +154,6 @@ instance GoogleRequest StatscollectionUpdatestats'
               (Just AltJSON)
               _sPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy StatscollectionUpdatestatsResource)
-                      r
-                      u
+                      rq

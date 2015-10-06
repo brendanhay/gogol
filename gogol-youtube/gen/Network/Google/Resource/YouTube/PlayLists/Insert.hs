@@ -210,8 +210,8 @@ instance GoogleAuth PlayListsInsert' where
 
 instance GoogleRequest PlayListsInsert' where
         type Rs PlayListsInsert' = PlayList
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u PlayListsInsert'{..}
+        request = requestWith youTubeRequest
+        requestWith rq PlayListsInsert'{..}
           = go (Just _pliPart) _pliOnBehalfOfContentOwner
               _pliOnBehalfOfContentOwnerChannel
               _pliQuotaUser
@@ -223,7 +223,6 @@ instance GoogleRequest PlayListsInsert' where
               (Just AltJSON)
               _pliPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlayListsInsertResource)
-                      r
-                      u
+                      rq

@@ -285,8 +285,8 @@ instance GoogleAuth ChangeLogsList' where
 
 instance GoogleRequest ChangeLogsList' where
         type Rs ChangeLogsList' = ChangeLogsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ChangeLogsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ChangeLogsList'{..}
           = go _cllProFileId (_cllUserProFileIds ^. _Default)
               _cllObjectType
               _cllSearchString
@@ -305,7 +305,5 @@ instance GoogleRequest ChangeLogsList' where
               _cllOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ChangeLogsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ChangeLogsListResource)
+                      rq

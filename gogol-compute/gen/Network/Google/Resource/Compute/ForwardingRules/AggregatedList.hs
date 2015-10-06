@@ -202,9 +202,8 @@ instance GoogleRequest ForwardingRulesAggregatedList'
          where
         type Rs ForwardingRulesAggregatedList' =
              ForwardingRuleAggregatedList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u
-          ForwardingRulesAggregatedList'{..}
+        request = requestWith computeRequest
+        requestWith rq ForwardingRulesAggregatedList'{..}
           = go _fralProject _fralFilter _fralPageToken
               (Just _fralMaxResults)
               _fralQuotaUser
@@ -215,8 +214,7 @@ instance GoogleRequest ForwardingRulesAggregatedList'
               _fralOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ForwardingRulesAggregatedListResource)
-                      r
-                      u
+                      rq

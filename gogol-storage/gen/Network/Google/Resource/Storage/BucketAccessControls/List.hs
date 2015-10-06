@@ -154,8 +154,8 @@ instance GoogleRequest BucketAccessControlsList'
          where
         type Rs BucketAccessControlsList' =
              BucketAccessControls
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketAccessControlsList'{..}
+        request = requestWith storageRequest
+        requestWith rq BucketAccessControlsList'{..}
           = go _baclBucket _baclQuotaUser
               (Just _baclPrettyPrint)
               _baclUserIP
@@ -164,7 +164,6 @@ instance GoogleRequest BucketAccessControlsList'
               _baclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BucketAccessControlsListResource)
-                      r
-                      u
+                      rq

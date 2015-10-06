@@ -180,8 +180,8 @@ instance GoogleAuth AccountsContainersMacrosGet'
 instance GoogleRequest AccountsContainersMacrosGet'
          where
         type Rs AccountsContainersMacrosGet' = Macro
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersMacrosGet'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersMacrosGet'{..}
           = go _acmgAccountId _acmgContainerId _acmgMacroId
               _acmgQuotaUser
               (Just _acmgPrettyPrint)
@@ -191,7 +191,6 @@ instance GoogleRequest AccountsContainersMacrosGet'
               _acmgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsContainersMacrosGetResource)
-                      r
-                      u
+                      rq

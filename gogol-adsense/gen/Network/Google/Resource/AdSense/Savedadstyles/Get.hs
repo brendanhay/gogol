@@ -147,8 +147,8 @@ instance GoogleAuth SavedadstylesGet' where
 
 instance GoogleRequest SavedadstylesGet' where
         type Rs SavedadstylesGet' = SavedAdStyle
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u SavedadstylesGet'{..}
+        request = requestWith adSenseRequest
+        requestWith rq SavedadstylesGet'{..}
           = go _sgSavedAdStyleId _sgQuotaUser
               (Just _sgPrettyPrint)
               _sgUserIP
@@ -157,7 +157,6 @@ instance GoogleRequest SavedadstylesGet' where
               _sgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SavedadstylesGetResource)
-                      r
-                      u
+                      rq

@@ -184,8 +184,8 @@ instance GoogleAuth CommentsList' where
 
 instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentFeed
-        request = requestWithRoute defReq plusURL
-        requestWithRoute r u CommentsList'{..}
+        request = requestWith plusRequest
+        requestWith rq CommentsList'{..}
           = go _clActivityId (Just _clSortOrder) _clPageToken
               (Just _clMaxResults)
               _clQuotaUser
@@ -196,7 +196,5 @@ instance GoogleRequest CommentsList' where
               _clOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CommentsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CommentsListResource)
+                      rq

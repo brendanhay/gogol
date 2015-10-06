@@ -172,8 +172,8 @@ instance GoogleAuth ACLUpdate' where
 
 instance GoogleRequest ACLUpdate' where
         type Rs ACLUpdate' = ACLRule
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u ACLUpdate'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq ACLUpdate'{..}
           = go _auCalendarId _auRuleId _auQuotaUser
               (Just _auPrettyPrint)
               _auUserIP
@@ -183,6 +183,4 @@ instance GoogleRequest ACLUpdate' where
               (Just AltJSON)
               _auPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy ACLUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ACLUpdateResource) rq

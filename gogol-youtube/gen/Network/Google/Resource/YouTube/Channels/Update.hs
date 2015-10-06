@@ -190,8 +190,8 @@ instance GoogleAuth ChannelsUpdate' where
 
 instance GoogleRequest ChannelsUpdate' where
         type Rs ChannelsUpdate' = Channel
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ChannelsUpdate'{..}
+        request = requestWith youTubeRequest
+        requestWith rq ChannelsUpdate'{..}
           = go (Just _chaPart) _chaOnBehalfOfContentOwner
               _chaQuotaUser
               (Just _chaPrettyPrint)
@@ -202,7 +202,5 @@ instance GoogleRequest ChannelsUpdate' where
               (Just AltJSON)
               _chaPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ChannelsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ChannelsUpdateResource)
+                      rq

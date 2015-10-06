@@ -164,8 +164,8 @@ instance GoogleAuth CustomChannelsGet' where
 
 instance GoogleRequest CustomChannelsGet' where
         type Rs CustomChannelsGet' = CustomChannel
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u CustomChannelsGet'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq CustomChannelsGet'{..}
           = go _ccgAdClientId _ccgCustomChannelId _ccgQuotaUser
               (Just _ccgPrettyPrint)
               _ccgUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest CustomChannelsGet' where
               _ccgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CustomChannelsGetResource)
-                      r
-                      u
+                      rq

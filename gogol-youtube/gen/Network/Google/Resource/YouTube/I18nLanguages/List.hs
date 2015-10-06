@@ -163,8 +163,8 @@ instance GoogleAuth I18nLanguagesList' where
 
 instance GoogleRequest I18nLanguagesList' where
         type Rs I18nLanguagesList' = I18nLanguageListResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u I18nLanguagesList'{..}
+        request = requestWith youTubeRequest
+        requestWith rq I18nLanguagesList'{..}
           = go (Just _illPart) (Just _illHl) _illQuotaUser
               (Just _illPrettyPrint)
               _illUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest I18nLanguagesList' where
               _illOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy I18nLanguagesListResource)
-                      r
-                      u
+                      rq

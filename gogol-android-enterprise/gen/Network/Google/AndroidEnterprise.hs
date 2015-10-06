@@ -22,7 +22,7 @@ module Network.Google.AndroidEnterprise
     -- * API
       AndroidEnterpriseAPI
     , androidEnterpriseAPI
-    , androidEnterpriseURL
+    , androidEnterpriseRequest
 
     -- * Service Methods
 

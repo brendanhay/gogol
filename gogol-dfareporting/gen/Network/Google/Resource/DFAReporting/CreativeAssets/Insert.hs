@@ -186,8 +186,8 @@ instance GoogleAuth CreativeAssetsInsert' where
 
 instance GoogleRequest CreativeAssetsInsert' where
         type Rs CreativeAssetsInsert' = CreativeAssetMetadata
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeAssetsInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativeAssetsInsert'{..}
           = go _caiProFileId _caiAdvertiserId _caiQuotaUser
               (Just _caiPrettyPrint)
               _caiUserIP
@@ -198,7 +198,6 @@ instance GoogleRequest CreativeAssetsInsert' where
               _caiPayload
               _caiMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CreativeAssetsInsertResource)
-                      r
-                      u
+                      rq

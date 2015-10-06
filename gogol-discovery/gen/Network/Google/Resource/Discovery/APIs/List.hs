@@ -155,8 +155,8 @@ instance GoogleAuth APIsList' where
 
 instance GoogleRequest APIsList' where
         type Rs APIsList' = DirectoryList
-        request = requestWithRoute defReq discoveryURL
-        requestWithRoute r u APIsList'{..}
+        request = requestWith discoveryRequest
+        requestWith rq APIsList'{..}
           = go (Just _alPreferred) _alName _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP
@@ -165,5 +165,4 @@ instance GoogleRequest APIsList' where
               _alOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy APIsListResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy APIsListResource) rq

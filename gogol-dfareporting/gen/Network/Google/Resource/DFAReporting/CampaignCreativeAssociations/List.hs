@@ -211,9 +211,8 @@ instance GoogleRequest
          CampaignCreativeAssociationsList' where
         type Rs CampaignCreativeAssociationsList' =
              CampaignCreativeAssociationsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u
-          CampaignCreativeAssociationsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CampaignCreativeAssociationsList'{..}
           = go _ccalProFileId _ccalCampaignId _ccalSortOrder
               _ccalPageToken
               _ccalMaxResults
@@ -225,8 +224,7 @@ instance GoogleRequest
               _ccalOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy CampaignCreativeAssociationsListResource)
-                      r
-                      u
+                      rq

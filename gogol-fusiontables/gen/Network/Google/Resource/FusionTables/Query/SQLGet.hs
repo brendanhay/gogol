@@ -184,8 +184,8 @@ instance GoogleAuth QuerySQLGet' where
 
 instance GoogleRequest QuerySQLGet' where
         type Rs QuerySQLGet' = SQLresponse
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u QuerySQLGet'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq QuerySQLGet'{..}
           = go (Just _qsqlgSQL) _qsqlgTyped _qsqlgHdrs
               _qsqlgQuotaUser
               (Just _qsqlgPrettyPrint)
@@ -195,16 +195,13 @@ instance GoogleRequest QuerySQLGet' where
               _qsqlgOAuthToken
               (Just AltJSON)
           where go :<|> _
-                  = clientWithRoute
-                      (Proxy :: Proxy QuerySQLGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy QuerySQLGetResource) rq
 
 instance GoogleRequest (MediaDownload QuerySQLGet')
          where
         type Rs (MediaDownload QuerySQLGet') = Body
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u (MediaDownload QuerySQLGet'{..})
+        request = requestWith fusionTablesRequest
+        requestWith rq (MediaDownload QuerySQLGet'{..})
           = go (Just _qsqlgSQL) _qsqlgTyped _qsqlgHdrs
               _qsqlgQuotaUser
               (Just _qsqlgPrettyPrint)
@@ -214,7 +211,4 @@ instance GoogleRequest (MediaDownload QuerySQLGet')
               _qsqlgOAuthToken
               (Just AltMedia)
           where _ :<|> go
-                  = clientWithRoute
-                      (Proxy :: Proxy QuerySQLGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy QuerySQLGetResource) rq

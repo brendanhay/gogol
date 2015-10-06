@@ -151,8 +151,8 @@ instance GoogleAuth MapsPermissionsList' where
 instance GoogleRequest MapsPermissionsList' where
         type Rs MapsPermissionsList' =
              PermissionsListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u MapsPermissionsList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq MapsPermissionsList'{..}
           = go _mplId _mplQuotaUser (Just _mplPrettyPrint)
               _mplUserIP
               _mplFields
@@ -160,7 +160,6 @@ instance GoogleRequest MapsPermissionsList' where
               _mplOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MapsPermissionsListResource)
-                      r
-                      u
+                      rq

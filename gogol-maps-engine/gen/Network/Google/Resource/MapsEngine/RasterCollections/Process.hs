@@ -152,8 +152,8 @@ instance GoogleAuth RasterCollectionsProcess' where
 instance GoogleRequest RasterCollectionsProcess'
          where
         type Rs RasterCollectionsProcess' = ProcessResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u RasterCollectionsProcess'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq RasterCollectionsProcess'{..}
           = go _rcpcId _rcpcQuotaUser (Just _rcpcPrettyPrint)
               _rcpcUserIP
               _rcpcFields
@@ -161,7 +161,6 @@ instance GoogleRequest RasterCollectionsProcess'
               _rcpcOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RasterCollectionsProcessResource)
-                      r
-                      u
+                      rq

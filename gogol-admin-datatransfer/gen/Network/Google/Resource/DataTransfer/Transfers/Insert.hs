@@ -147,8 +147,8 @@ instance GoogleAuth TransfersInsert' where
 
 instance GoogleRequest TransfersInsert' where
         type Rs TransfersInsert' = DataTransfer
-        request = requestWithRoute defReq dataTransferURL
-        requestWithRoute r u TransfersInsert'{..}
+        request = requestWith dataTransferRequest
+        requestWith rq TransfersInsert'{..}
           = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIP
               _tiFields
               _tiKey
@@ -156,7 +156,6 @@ instance GoogleRequest TransfersInsert' where
               (Just AltJSON)
               _tiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TransfersInsertResource)
-                      r
-                      u
+                      rq

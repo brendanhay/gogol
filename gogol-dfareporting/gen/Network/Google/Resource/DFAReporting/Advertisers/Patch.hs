@@ -171,8 +171,8 @@ instance GoogleAuth AdvertisersPatch' where
 
 instance GoogleRequest AdvertisersPatch' where
         type Rs AdvertisersPatch' = Advertiser
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdvertisersPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AdvertisersPatch'{..}
           = go _apProFileId (Just _apId) _apQuotaUser
               (Just _apPrettyPrint)
               _apUserIP
@@ -182,7 +182,6 @@ instance GoogleRequest AdvertisersPatch' where
               (Just AltJSON)
               _apPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AdvertisersPatchResource)
-                      r
-                      u
+                      rq

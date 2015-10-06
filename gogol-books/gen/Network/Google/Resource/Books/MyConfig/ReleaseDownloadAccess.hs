@@ -191,9 +191,8 @@ instance GoogleRequest MyConfigReleaseDownloadAccess'
          where
         type Rs MyConfigReleaseDownloadAccess' =
              DownloadAccesses
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u
-          MyConfigReleaseDownloadAccess'{..}
+        request = requestWith booksRequest
+        requestWith rq MyConfigReleaseDownloadAccess'{..}
           = go _mcrdaVolumeIds (Just _mcrdaCpksver)
               _mcrdaLocale
               _mcrdaSource
@@ -205,8 +204,7 @@ instance GoogleRequest MyConfigReleaseDownloadAccess'
               _mcrdaOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy MyConfigReleaseDownloadAccessResource)
-                      r
-                      u
+                      rq

@@ -328,9 +328,8 @@ instance GoogleRequest
          ProjectsLogServicesIndexesList' where
         type Rs ProjectsLogServicesIndexesList' =
              ListLogServiceIndexesResponse
-        request = requestWithRoute defReq loggingURL
-        requestWithRoute r u
-          ProjectsLogServicesIndexesList'{..}
+        request = requestWith loggingRequest
+        requestWith rq ProjectsLogServicesIndexesList'{..}
           = go _plsilProjectsId _plsilLogServicesId _plsilLog
               _plsilXgafv
               _plsilUploadProtocol
@@ -350,8 +349,7 @@ instance GoogleRequest
               _plsilOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ProjectsLogServicesIndexesListResource)
-                      r
-                      u
+                      rq

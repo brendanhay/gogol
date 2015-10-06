@@ -165,8 +165,8 @@ instance GoogleAuth CustomChannelsDelete' where
 
 instance GoogleRequest CustomChannelsDelete' where
         type Rs CustomChannelsDelete' = CustomChannel
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u CustomChannelsDelete'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq CustomChannelsDelete'{..}
           = go _ccdAdClientId _ccdCustomChannelId _ccdQuotaUser
               (Just _ccdPrettyPrint)
               _ccdUserIP
@@ -175,7 +175,6 @@ instance GoogleRequest CustomChannelsDelete' where
               _ccdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CustomChannelsDeleteResource)
-                      r
-                      u
+                      rq

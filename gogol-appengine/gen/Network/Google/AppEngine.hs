@@ -22,7 +22,7 @@ module Network.Google.AppEngine
     -- * API
       AppEngineAPI
     , appEngineAPI
-    , appEngineURL
+    , appEngineRequest
 
     -- * Service Methods
 

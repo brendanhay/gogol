@@ -162,8 +162,8 @@ instance GoogleAuth GlobalOperationsGet' where
 
 instance GoogleRequest GlobalOperationsGet' where
         type Rs GlobalOperationsGet' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalOperationsGet'{..}
+        request = requestWith computeRequest
+        requestWith rq GlobalOperationsGet'{..}
           = go _gogProject _gogOperation _gogQuotaUser
               (Just _gogPrettyPrint)
               _gogUserIP
@@ -172,7 +172,6 @@ instance GoogleRequest GlobalOperationsGet' where
               _gogOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GlobalOperationsGetResource)
-                      r
-                      u
+                      rq

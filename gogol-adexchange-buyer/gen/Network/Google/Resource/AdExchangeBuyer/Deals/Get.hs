@@ -158,8 +158,8 @@ instance GoogleAuth DealsGet' where
 
 instance GoogleRequest DealsGet' where
         type Rs DealsGet' = NegotiationDTO
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u DealsGet'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq DealsGet'{..}
           = go _dgDealId _dgQuotaUser (Just _dgPrettyPrint)
               _dgUserIP
               _dgFields
@@ -168,5 +168,4 @@ instance GoogleRequest DealsGet' where
               (Just AltJSON)
               _dgPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy DealsGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy DealsGetResource) rq

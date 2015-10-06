@@ -212,9 +212,8 @@ instance GoogleRequest
          AccountsAdUnitsCustomChannelsList' where
         type Rs AccountsAdUnitsCustomChannelsList' =
              CustomChannels
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u
-          AccountsAdUnitsCustomChannelsList'{..}
+        request = requestWith adSenseRequest
+        requestWith rq AccountsAdUnitsCustomChannelsList'{..}
           = go _aaucclAccountId _aaucclAdClientId
               _aaucclAdUnitId
               _aaucclPageToken
@@ -227,8 +226,7 @@ instance GoogleRequest
               _aaucclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsAdUnitsCustomChannelsListResource)
-                      r
-                      u
+                      rq

@@ -288,8 +288,8 @@ instance GoogleAuth CommentThreadsList' where
 instance GoogleRequest CommentThreadsList' where
         type Rs CommentThreadsList' =
              CommentThreadListResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CommentThreadsList'{..}
+        request = requestWith youTubeRequest
+        requestWith rq CommentThreadsList'{..}
           = go (Just _ctlPart) (Just _ctlModerationStatus)
               _ctlSearchTerms
               _ctlChannelId
@@ -308,7 +308,6 @@ instance GoogleRequest CommentThreadsList' where
               _ctlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CommentThreadsListResource)
-                      r
-                      u
+                      rq

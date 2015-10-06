@@ -343,8 +343,8 @@ instance GoogleAuth SitesList' where
 
 instance GoogleRequest SitesList' where
         type Rs SitesList' = SitesListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SitesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq SitesList'{..}
           = go _sitProFileId _sitUnmAppedSite
               (_sitCampaignIds ^. _Default)
               _sitSearchString
@@ -368,6 +368,4 @@ instance GoogleRequest SitesList' where
               _sitOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy SitesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SitesListResource) rq

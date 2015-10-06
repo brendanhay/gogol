@@ -170,9 +170,8 @@ instance GoogleAuth GrouplicenseUsersList' where
 instance GoogleRequest GrouplicenseUsersList' where
         type Rs GrouplicenseUsersList' =
              GroupLicenseUsersListResponse
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u GrouplicenseUsersList'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq GrouplicenseUsersList'{..}
           = go _gulEnterpriseId _gulGroupLicenseId
               _gulQuotaUser
               (Just _gulPrettyPrint)
@@ -182,7 +181,6 @@ instance GoogleRequest GrouplicenseUsersList' where
               _gulOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GrouplicenseUsersListResource)
-                      r
-                      u
+                      rq

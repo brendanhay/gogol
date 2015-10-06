@@ -255,8 +255,8 @@ instance GoogleAuth AdvertisersList' where
 
 instance GoogleRequest AdvertisersList' where
         type Rs AdvertisersList' = Advertisers
-        request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u AdvertisersList'{..}
+        request = requestWith affiliatesRequest
+        requestWith rq AdvertisersList'{..}
           = go _alRole _alRoleId _alRelationshipStatus
               _alMinSevenDayEpc
               _alMinNinetyDayEpc
@@ -272,7 +272,6 @@ instance GoogleRequest AdvertisersList' where
               _alOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AdvertisersListResource)
-                      r
-                      u
+                      rq

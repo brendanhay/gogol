@@ -144,8 +144,8 @@ instance GoogleAuth ScoresResetAllForAllPlayers'
 instance GoogleRequest ScoresResetAllForAllPlayers'
          where
         type Rs ScoresResetAllForAllPlayers' = ()
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u ScoresResetAllForAllPlayers'{..}
+        request = requestWith gamesManagementRequest
+        requestWith rq ScoresResetAllForAllPlayers'{..}
           = go _srafapQuotaUser (Just _srafapPrettyPrint)
               _srafapUserIP
               _srafapFields
@@ -153,7 +153,6 @@ instance GoogleRequest ScoresResetAllForAllPlayers'
               _srafapOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ScoresResetAllForAllPlayersResource)
-                      r
-                      u
+                      rq

@@ -176,8 +176,8 @@ instance GoogleAuth CreativeFieldsPatch' where
 
 instance GoogleRequest CreativeFieldsPatch' where
         type Rs CreativeFieldsPatch' = CreativeField
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldsPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativeFieldsPatch'{..}
           = go _cfpProFileId (Just _cfpId) _cfpQuotaUser
               (Just _cfpPrettyPrint)
               _cfpUserIP
@@ -187,7 +187,6 @@ instance GoogleRequest CreativeFieldsPatch' where
               (Just AltJSON)
               _cfpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CreativeFieldsPatchResource)
-                      r
-                      u
+                      rq

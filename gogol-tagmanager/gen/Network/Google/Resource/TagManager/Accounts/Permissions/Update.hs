@@ -176,8 +176,8 @@ instance GoogleAuth AccountsPermissionsUpdate' where
 instance GoogleRequest AccountsPermissionsUpdate'
          where
         type Rs AccountsPermissionsUpdate' = UserAccess
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsPermissionsUpdate'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsPermissionsUpdate'{..}
           = go _apuAccountId _apuPermissionId _apuQuotaUser
               (Just _apuPrettyPrint)
               _apuUserIP
@@ -187,7 +187,6 @@ instance GoogleRequest AccountsPermissionsUpdate'
               (Just AltJSON)
               _apuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsPermissionsUpdateResource)
-                      r
-                      u
+                      rq

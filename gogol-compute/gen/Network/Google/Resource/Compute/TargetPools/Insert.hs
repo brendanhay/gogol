@@ -176,8 +176,8 @@ instance GoogleAuth TargetPoolsInsert' where
 
 instance GoogleRequest TargetPoolsInsert' where
         type Rs TargetPoolsInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetPoolsInsert'{..}
           = go _tpiProject _tpiRegion _tpiQuotaUser
               (Just _tpiPrettyPrint)
               _tpiUserIP
@@ -187,7 +187,6 @@ instance GoogleRequest TargetPoolsInsert' where
               (Just AltJSON)
               _tpiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetPoolsInsertResource)
-                      r
-                      u
+                      rq

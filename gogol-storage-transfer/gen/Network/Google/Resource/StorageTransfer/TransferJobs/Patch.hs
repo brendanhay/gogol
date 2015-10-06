@@ -233,8 +233,8 @@ instance GoogleAuth TransferJobsPatch' where
 
 instance GoogleRequest TransferJobsPatch' where
         type Rs TransferJobsPatch' = TransferJob
-        request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferJobsPatch'{..}
+        request = requestWith storageTransferRequest
+        requestWith rq TransferJobsPatch'{..}
           = go _tjpJobName _tjpXgafv _tjpUploadProtocol
               (Just _tjpPp)
               _tjpAccessToken
@@ -249,7 +249,6 @@ instance GoogleRequest TransferJobsPatch' where
               (Just AltJSON)
               _tjpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TransferJobsPatchResource)
-                      r
-                      u
+                      rq

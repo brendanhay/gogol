@@ -197,9 +197,8 @@ instance GoogleAuth
 instance GoogleRequest
          AccountsContainersVariablesUpdate' where
         type Rs AccountsContainersVariablesUpdate' = Variable
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersVariablesUpdate'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersVariablesUpdate'{..}
           = go _aAccountId _aContainerId _aVariableId
               _aFingerprint
               _aQuotaUser
@@ -211,8 +210,7 @@ instance GoogleRequest
               (Just AltJSON)
               _aPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersVariablesUpdateResource)
-                      r
-                      u
+                      rq

@@ -178,8 +178,8 @@ instance GoogleAuth AchievementsIncrement' where
 instance GoogleRequest AchievementsIncrement' where
         type Rs AchievementsIncrement' =
              AchievementIncrementResponse
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u AchievementsIncrement'{..}
+        request = requestWith gamesRequest
+        requestWith rq AchievementsIncrement'{..}
           = go _aiAchievementId (Just _aiStepsToIncrement)
               _aiRequestId
               _aiQuotaUser
@@ -190,7 +190,6 @@ instance GoogleRequest AchievementsIncrement' where
               _aiOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AchievementsIncrementResource)
-                      r
-                      u
+                      rq

@@ -174,8 +174,8 @@ instance GoogleRequest AchievementsSetStepsAtLeast'
          where
         type Rs AchievementsSetStepsAtLeast' =
              AchievementSetStepsAtLeastResponse
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u AchievementsSetStepsAtLeast'{..}
+        request = requestWith gamesRequest
+        requestWith rq AchievementsSetStepsAtLeast'{..}
           = go _assalAchievementId (Just _assalSteps)
               _assalQuotaUser
               (Just _assalPrettyPrint)
@@ -185,7 +185,6 @@ instance GoogleRequest AchievementsSetStepsAtLeast'
               _assalOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AchievementsSetStepsAtLeastResource)
-                      r
-                      u
+                      rq

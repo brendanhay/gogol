@@ -183,8 +183,8 @@ instance GoogleAuth CommentsGet' where
 
 instance GoogleRequest CommentsGet' where
         type Rs CommentsGet' = Comment
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u CommentsGet'{..}
+        request = requestWith bloggerRequest
+        requestWith rq CommentsGet'{..}
           = go _cgBlogId _cgPostId _cgCommentId _cgView
               _cgQuotaUser
               (Just _cgPrettyPrint)
@@ -194,7 +194,4 @@ instance GoogleRequest CommentsGet' where
               _cgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CommentsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CommentsGetResource) rq

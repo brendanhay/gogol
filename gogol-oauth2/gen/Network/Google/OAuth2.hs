@@ -21,7 +21,7 @@ module Network.Google.OAuth2
     -- * API
       OAuth2API
     , oAuth2API
-    , oAuth2URL
+    , oAuth2Request
 
     -- * Service Methods
 

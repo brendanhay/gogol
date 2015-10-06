@@ -187,8 +187,8 @@ instance GoogleAuth VideoCategoriesList' where
 instance GoogleRequest VideoCategoriesList' where
         type Rs VideoCategoriesList' =
              VideoCategoryListResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideoCategoriesList'{..}
+        request = requestWith youTubeRequest
+        requestWith rq VideoCategoriesList'{..}
           = go (Just _vclPart) _vclRegionCode (Just _vclHl)
               _vclId
               _vclQuotaUser
@@ -199,7 +199,6 @@ instance GoogleRequest VideoCategoriesList' where
               _vclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VideoCategoriesListResource)
-                      r
-                      u
+                      rq

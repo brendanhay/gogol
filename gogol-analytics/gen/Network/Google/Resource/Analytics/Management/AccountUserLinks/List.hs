@@ -182,9 +182,8 @@ instance GoogleRequest
          ManagementAccountUserLinksList' where
         type Rs ManagementAccountUserLinksList' =
              EntityUserLinks
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementAccountUserLinksList'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementAccountUserLinksList'{..}
           = go _maullAccountId _maullStartIndex
               _maullMaxResults
               _maullQuotaUser
@@ -195,8 +194,7 @@ instance GoogleRequest
               _maullOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementAccountUserLinksListResource)
-                      r
-                      u
+                      rq

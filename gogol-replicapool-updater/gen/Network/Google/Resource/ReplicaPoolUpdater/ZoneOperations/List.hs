@@ -200,9 +200,8 @@ instance GoogleAuth ZoneOperationsList' where
 
 instance GoogleRequest ZoneOperationsList' where
         type Rs ZoneOperationsList' = OperationList
-        request
-          = requestWithRoute defReq replicaPoolUpdaterURL
-        requestWithRoute r u ZoneOperationsList'{..}
+        request = requestWith replicaPoolUpdaterRequest
+        requestWith rq ZoneOperationsList'{..}
           = go _zolProject _zolZone _zolFilter _zolPageToken
               (Just _zolMaxResults)
               _zolQuotaUser
@@ -213,7 +212,6 @@ instance GoogleRequest ZoneOperationsList' where
               _zolOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ZoneOperationsListResource)
-                      r
-                      u
+                      rq

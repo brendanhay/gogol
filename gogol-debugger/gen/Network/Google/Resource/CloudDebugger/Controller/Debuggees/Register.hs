@@ -236,8 +236,8 @@ instance GoogleRequest ControllerDebuggeesRegister'
          where
         type Rs ControllerDebuggeesRegister' =
              RegisterDebuggeeResponse
-        request = requestWithRoute defReq debuggerURL
-        requestWithRoute r u ControllerDebuggeesRegister'{..}
+        request = requestWith debuggerRequest
+        requestWith rq ControllerDebuggeesRegister'{..}
           = go _cdrXgafv _cdrUploadProtocol (Just _cdrPp)
               _cdrAccessToken
               _cdrUploadType
@@ -251,7 +251,6 @@ instance GoogleRequest ControllerDebuggeesRegister'
               (Just AltJSON)
               _cdrPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ControllerDebuggeesRegisterResource)
-                      r
-                      u
+                      rq

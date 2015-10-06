@@ -233,8 +233,8 @@ instance GoogleAuth GetGoogleServiceAccount' where
 instance GoogleRequest GetGoogleServiceAccount' where
         type Rs GetGoogleServiceAccount' =
              GoogleServiceAccount
-        request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u GetGoogleServiceAccount'{..}
+        request = requestWith storageTransferRequest
+        requestWith rq GetGoogleServiceAccount'{..}
           = go _ggsaXgafv _ggsaUploadProtocol (Just _ggsaPp)
               _ggsaAccessToken
               _ggsaUploadType
@@ -248,7 +248,6 @@ instance GoogleRequest GetGoogleServiceAccount' where
               _ggsaOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GetGoogleServiceAccountResource)
-                      r
-                      u
+                      rq

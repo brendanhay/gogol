@@ -268,8 +268,8 @@ instance GoogleAuth JobsInsert' where
 
 instance GoogleRequest JobsInsert' where
         type Rs JobsInsert' = Job
-        request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u JobsInsert'{..}
+        request = requestWith mapsCoordinateRequest
+        requestWith rq JobsInsert'{..}
           = go _jiTeamId (Just _jiAddress) (Just _jiLat)
               (Just _jiLng)
               (Just _jiTitle)
@@ -287,6 +287,4 @@ instance GoogleRequest JobsInsert' where
               (Just AltJSON)
               _jiPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy JobsInsertResource) rq

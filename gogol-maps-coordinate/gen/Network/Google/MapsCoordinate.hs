@@ -21,7 +21,7 @@ module Network.Google.MapsCoordinate
     -- * API
       MapsCoordinateAPI
     , mapsCoordinateAPI
-    , mapsCoordinateURL
+    , mapsCoordinateRequest
 
     -- * Service Methods
 

@@ -16,7 +16,7 @@
 module Network.Google.Gmail.Types
     (
     -- * Service URL
-      gmailURL
+      gmailRequest
 
     -- * UsersMessagesGetFormat
     , UsersMessagesGetFormat (..)
@@ -211,9 +211,8 @@ import           Network.Google.Gmail.Types.Product
 import           Network.Google.Gmail.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Gmail API.
-gmailURL :: BaseUrl
-gmailURL
-  = BaseUrl Https
-      "https://www.googleapis.com/gmail/v1/users/"
-      443
+-- | Default request referring to version 'v1' of the Gmail API.
+gmailRequest :: RequestBuilder
+gmailRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "gmail/v1/users/"

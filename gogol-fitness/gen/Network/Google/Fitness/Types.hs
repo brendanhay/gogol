@@ -16,7 +16,7 @@
 module Network.Google.Fitness.Types
     (
     -- * Service URL
-      fitnessURL
+      fitnessRequest
 
     -- * AggregateBucketType
     , AggregateBucketType (..)
@@ -189,9 +189,8 @@ import           Network.Google.Fitness.Types.Product
 import           Network.Google.Fitness.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Fitness.
-fitnessURL :: BaseUrl
-fitnessURL
-  = BaseUrl Https
-      "https://www.googleapis.com/fitness/v1/users/"
-      443
+-- | Default request referring to version 'v1' of the Fitness.
+fitnessRequest :: RequestBuilder
+fitnessRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "fitness/v1/users/"

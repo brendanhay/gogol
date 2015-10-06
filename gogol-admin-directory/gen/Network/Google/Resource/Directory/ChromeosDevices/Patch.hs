@@ -191,8 +191,8 @@ instance GoogleAuth ChromeosDevicesPatch' where
 
 instance GoogleRequest ChromeosDevicesPatch' where
         type Rs ChromeosDevicesPatch' = ChromeOSDevice
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u ChromeosDevicesPatch'{..}
+        request = requestWith directoryRequest
+        requestWith rq ChromeosDevicesPatch'{..}
           = go _cdpCustomerId _cdpDeviceId _cdpProjection
               _cdpQuotaUser
               (Just _cdpPrettyPrint)
@@ -203,7 +203,6 @@ instance GoogleRequest ChromeosDevicesPatch' where
               (Just AltJSON)
               _cdpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ChromeosDevicesPatchResource)
-                      r
-                      u
+                      rq

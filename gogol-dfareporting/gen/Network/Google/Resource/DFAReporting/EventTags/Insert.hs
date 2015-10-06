@@ -162,8 +162,8 @@ instance GoogleAuth EventTagsInsert' where
 
 instance GoogleRequest EventTagsInsert' where
         type Rs EventTagsInsert' = EventTag
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u EventTagsInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq EventTagsInsert'{..}
           = go _etiProFileId _etiQuotaUser
               (Just _etiPrettyPrint)
               _etiUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest EventTagsInsert' where
               (Just AltJSON)
               _etiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EventTagsInsertResource)
-                      r
-                      u
+                      rq

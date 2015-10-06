@@ -181,9 +181,8 @@ instance GoogleRequest RasterCollectionsParentsList'
          where
         type Rs RasterCollectionsParentsList' =
              ParentsListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u
-          RasterCollectionsParentsList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq RasterCollectionsParentsList'{..}
           = go _rcplId _rcplPageToken _rcplMaxResults
               _rcplQuotaUser
               (Just _rcplPrettyPrint)
@@ -193,7 +192,6 @@ instance GoogleRequest RasterCollectionsParentsList'
               _rcplOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RasterCollectionsParentsListResource)
-                      r
-                      u
+                      rq

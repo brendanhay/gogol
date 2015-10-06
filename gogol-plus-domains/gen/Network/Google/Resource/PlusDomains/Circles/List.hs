@@ -173,8 +173,8 @@ instance GoogleAuth CirclesList' where
 
 instance GoogleRequest CirclesList' where
         type Rs CirclesList' = CircleFeed
-        request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u CirclesList'{..}
+        request = requestWith plusDomainsRequest
+        requestWith rq CirclesList'{..}
           = go _clUserId _clPageToken (Just _clMaxResults)
               _clQuotaUser
               (Just _clPrettyPrint)
@@ -184,7 +184,4 @@ instance GoogleRequest CirclesList' where
               _clOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CirclesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CirclesListResource) rq

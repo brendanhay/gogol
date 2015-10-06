@@ -154,8 +154,8 @@ instance GoogleAuth StatesDelete' where
 
 instance GoogleRequest StatesDelete' where
         type Rs StatesDelete' = ()
-        request = requestWithRoute defReq appStateURL
-        requestWithRoute r u StatesDelete'{..}
+        request = requestWith appStateRequest
+        requestWith rq StatesDelete'{..}
           = go _sdStateKey _sdQuotaUser (Just _sdPrettyPrint)
               _sdUserIP
               _sdFields
@@ -163,7 +163,5 @@ instance GoogleRequest StatesDelete' where
               _sdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy StatesDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy StatesDeleteResource)
+                      rq

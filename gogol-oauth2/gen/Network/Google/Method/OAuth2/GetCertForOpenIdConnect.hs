@@ -140,8 +140,8 @@ instance GoogleAuth GetCertForOpenIdConnect' where
 
 instance GoogleRequest GetCertForOpenIdConnect' where
         type Rs GetCertForOpenIdConnect' = JWK
-        request = requestWithRoute defReq oAuth2URL
-        requestWithRoute r u GetCertForOpenIdConnect'{..}
+        request = requestWith oAuth2Request
+        requestWith rq GetCertForOpenIdConnect'{..}
           = go _gcfoicQuotaUser (Just _gcfoicPrettyPrint)
               _gcfoicUserIP
               _gcfoicFields
@@ -149,7 +149,6 @@ instance GoogleRequest GetCertForOpenIdConnect' where
               _gcfoicOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GetCertForOpenIdConnectMethod)
-                      r
-                      u
+                      rq

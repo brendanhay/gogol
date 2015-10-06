@@ -177,8 +177,8 @@ instance GoogleAuth LandingPagesUpdate' where
 
 instance GoogleRequest LandingPagesUpdate' where
         type Rs LandingPagesUpdate' = LandingPage
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u LandingPagesUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq LandingPagesUpdate'{..}
           = go _lpuProFileId _lpuCampaignId _lpuQuotaUser
               (Just _lpuPrettyPrint)
               _lpuUserIP
@@ -188,7 +188,6 @@ instance GoogleRequest LandingPagesUpdate' where
               (Just AltJSON)
               _lpuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LandingPagesUpdateResource)
-                      r
-                      u
+                      rq

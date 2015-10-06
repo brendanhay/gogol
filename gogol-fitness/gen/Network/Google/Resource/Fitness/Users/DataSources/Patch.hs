@@ -187,8 +187,8 @@ instance GoogleAuth UsersDataSourcesPatch' where
 
 instance GoogleRequest UsersDataSourcesPatch' where
         type Rs UsersDataSourcesPatch' = DataSource
-        request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersDataSourcesPatch'{..}
+        request = requestWith fitnessRequest
+        requestWith rq UsersDataSourcesPatch'{..}
           = go _udspUserId _udspDataSourceId _udspQuotaUser
               (Just _udspPrettyPrint)
               _udspUserIP
@@ -198,7 +198,6 @@ instance GoogleRequest UsersDataSourcesPatch' where
               (Just AltJSON)
               _udspPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersDataSourcesPatchResource)
-                      r
-                      u
+                      rq

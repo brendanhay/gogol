@@ -21,7 +21,7 @@ module Network.Google.Games
     -- * API
       GamesAPI
     , gamesAPI
-    , gamesURL
+    , gamesRequest
 
     -- * Service Methods
 

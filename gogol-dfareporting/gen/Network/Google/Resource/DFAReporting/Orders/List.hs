@@ -247,8 +247,8 @@ instance GoogleAuth OrdersList' where
 
 instance GoogleRequest OrdersList' where
         type Rs OrdersList' = OrdersListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u OrdersList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq OrdersList'{..}
           = go _olProFileId _olProjectId _olSearchString
               (_olIds ^. _Default)
               _olSortOrder
@@ -264,6 +264,4 @@ instance GoogleRequest OrdersList' where
               _olOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy OrdersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy OrdersListResource) rq

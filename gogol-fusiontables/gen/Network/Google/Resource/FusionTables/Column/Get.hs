@@ -159,8 +159,8 @@ instance GoogleAuth ColumnGet' where
 
 instance GoogleRequest ColumnGet' where
         type Rs ColumnGet' = Column
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u ColumnGet'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq ColumnGet'{..}
           = go _cgTableId _cgColumnId _cgQuotaUser
               (Just _cgPrettyPrint)
               _cgUserIP
@@ -169,6 +169,4 @@ instance GoogleRequest ColumnGet' where
               _cgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ColumnGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ColumnGetResource) rq

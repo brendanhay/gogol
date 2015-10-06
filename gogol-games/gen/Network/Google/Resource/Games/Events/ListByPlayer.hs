@@ -178,8 +178,8 @@ instance GoogleAuth EventsListByPlayer' where
 
 instance GoogleRequest EventsListByPlayer' where
         type Rs EventsListByPlayer' = PlayerEventListResponse
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u EventsListByPlayer'{..}
+        request = requestWith gamesRequest
+        requestWith rq EventsListByPlayer'{..}
           = go _elbpLanguage _elbpPageToken _elbpMaxResults
               _elbpQuotaUser
               (Just _elbpPrettyPrint)
@@ -189,7 +189,6 @@ instance GoogleRequest EventsListByPlayer' where
               _elbpOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EventsListByPlayerResource)
-                      r
-                      u
+                      rq

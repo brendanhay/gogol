@@ -161,9 +161,8 @@ instance GoogleAuth CollectionsDelete' where
 
 instance GoogleRequest CollectionsDelete' where
         type Rs CollectionsDelete' = ()
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u CollectionsDelete'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq CollectionsDelete'{..}
           = go _cdEnterpriseId _cdCollectionId _cdQuotaUser
               (Just _cdPrettyPrint)
               _cdUserIP
@@ -172,7 +171,6 @@ instance GoogleRequest CollectionsDelete' where
               _cdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CollectionsDeleteResource)
-                      r
-                      u
+                      rq

@@ -159,9 +159,8 @@ instance GoogleAuth DeploymentsDelete' where
 
 instance GoogleRequest DeploymentsDelete' where
         type Rs DeploymentsDelete' = Operation
-        request
-          = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u DeploymentsDelete'{..}
+        request = requestWith deploymentManagerRequest
+        requestWith rq DeploymentsDelete'{..}
           = go _ddProject _ddDeployment _ddQuotaUser
               (Just _ddPrettyPrint)
               _ddUserIP
@@ -170,7 +169,6 @@ instance GoogleRequest DeploymentsDelete' where
               _ddOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DeploymentsDeleteResource)
-                      r
-                      u
+                      rq

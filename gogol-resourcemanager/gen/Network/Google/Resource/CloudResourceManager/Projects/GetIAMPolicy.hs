@@ -233,8 +233,8 @@ instance GoogleAuth ProjectsGetIAMPolicy' where
 
 instance GoogleRequest ProjectsGetIAMPolicy' where
         type Rs ProjectsGetIAMPolicy' = Policy
-        request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsGetIAMPolicy'{..}
+        request = requestWith resourceManagerRequest
+        requestWith rq ProjectsGetIAMPolicy'{..}
           = go _pgipResource _pgipXgafv _pgipUploadProtocol
               (Just _pgipPp)
               _pgipAccessToken
@@ -249,7 +249,6 @@ instance GoogleRequest ProjectsGetIAMPolicy' where
               (Just AltJSON)
               _pgipPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsGetIAMPolicyResource)
-                      r
-                      u
+                      rq

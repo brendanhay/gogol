@@ -186,8 +186,8 @@ instance GoogleAuth UsersThreadsGet' where
 
 instance GoogleRequest UsersThreadsGet' where
         type Rs UsersThreadsGet' = Thread
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersThreadsGet'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersThreadsGet'{..}
           = go _utgUserId _utgId (Just _utgFormat)
               (_utgMetadataHeaders ^. _Default)
               _utgQuotaUser
@@ -198,7 +198,6 @@ instance GoogleRequest UsersThreadsGet' where
               _utgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersThreadsGetResource)
-                      r
-                      u
+                      rq

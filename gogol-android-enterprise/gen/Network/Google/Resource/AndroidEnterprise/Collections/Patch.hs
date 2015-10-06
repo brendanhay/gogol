@@ -177,9 +177,8 @@ instance GoogleAuth CollectionsPatch' where
 
 instance GoogleRequest CollectionsPatch' where
         type Rs CollectionsPatch' = Collection
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u CollectionsPatch'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq CollectionsPatch'{..}
           = go _colEnterpriseId _colCollectionId _colQuotaUser
               (Just _colPrettyPrint)
               _colUserIP
@@ -189,7 +188,6 @@ instance GoogleRequest CollectionsPatch' where
               (Just AltJSON)
               _colPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CollectionsPatchResource)
-                      r
-                      u
+                      rq

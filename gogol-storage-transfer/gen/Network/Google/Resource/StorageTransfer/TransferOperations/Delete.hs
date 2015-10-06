@@ -217,8 +217,8 @@ instance GoogleAuth TransferOperationsDelete' where
 instance GoogleRequest TransferOperationsDelete'
          where
         type Rs TransferOperationsDelete' = Empty
-        request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferOperationsDelete'{..}
+        request = requestWith storageTransferRequest
+        requestWith rq TransferOperationsDelete'{..}
           = go _todName _todXgafv _todUploadProtocol
               (Just _todPp)
               _todAccessToken
@@ -232,7 +232,6 @@ instance GoogleRequest TransferOperationsDelete'
               _todOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TransferOperationsDeleteResource)
-                      r
-                      u
+                      rq

@@ -181,9 +181,8 @@ instance GoogleAuth
 instance GoogleRequest
          AccountsContainersVariablesDelete' where
         type Rs AccountsContainersVariablesDelete' = ()
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersVariablesDelete'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersVariablesDelete'{..}
           = go _acvdAccountId _acvdContainerId _acvdVariableId
               _acvdQuotaUser
               (Just _acvdPrettyPrint)
@@ -193,8 +192,7 @@ instance GoogleRequest
               _acvdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersVariablesDeleteResource)
-                      r
-                      u
+                      rq

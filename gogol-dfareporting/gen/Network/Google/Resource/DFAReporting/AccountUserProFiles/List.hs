@@ -273,8 +273,8 @@ instance GoogleAuth AccountUserProFilesList' where
 instance GoogleRequest AccountUserProFilesList' where
         type Rs AccountUserProFilesList' =
              AccountUserProFilesListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountUserProFilesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AccountUserProFilesList'{..}
           = go _aupflProFileId _aupflUserRoleId
               _aupflSearchString
               (_aupflIds ^. _Default)
@@ -292,7 +292,6 @@ instance GoogleRequest AccountUserProFilesList' where
               _aupflOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountUserProFilesListResource)
-                      r
-                      u
+                      rq

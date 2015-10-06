@@ -171,8 +171,8 @@ instance GoogleAuth RastersFilesInsert' where
 
 instance GoogleRequest RastersFilesInsert' where
         type Rs RastersFilesInsert' = ()
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u RastersFilesInsert'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq RastersFilesInsert'{..}
           = go _rfiId (Just _rfiFilename) _rfiQuotaUser
               (Just _rfiPrettyPrint)
               _rfiUserIP
@@ -182,7 +182,6 @@ instance GoogleRequest RastersFilesInsert' where
               (Just AltJSON)
               _rfiMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RastersFilesInsertResource)
-                      r
-                      u
+                      rq

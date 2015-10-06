@@ -177,8 +177,8 @@ instance GoogleAuth ForwardingRulesInsert' where
 
 instance GoogleRequest ForwardingRulesInsert' where
         type Rs ForwardingRulesInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u ForwardingRulesInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq ForwardingRulesInsert'{..}
           = go _friProject _friRegion _friQuotaUser
               (Just _friPrettyPrint)
               _friUserIP
@@ -188,7 +188,6 @@ instance GoogleRequest ForwardingRulesInsert' where
               (Just AltJSON)
               _friPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ForwardingRulesInsertResource)
-                      r
-                      u
+                      rq

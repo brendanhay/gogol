@@ -152,8 +152,8 @@ instance GoogleAuth MarketplaceOrdersInsert' where
 instance GoogleRequest MarketplaceOrdersInsert' where
         type Rs MarketplaceOrdersInsert' =
              CreateOrdersResponse
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplaceOrdersInsert'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq MarketplaceOrdersInsert'{..}
           = go _moiQuotaUser (Just _moiPrettyPrint) _moiUserIP
               _moiFields
               _moiKey
@@ -161,7 +161,6 @@ instance GoogleRequest MarketplaceOrdersInsert' where
               (Just AltJSON)
               _moiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MarketplaceOrdersInsertResource)
-                      r
-                      u
+                      rq

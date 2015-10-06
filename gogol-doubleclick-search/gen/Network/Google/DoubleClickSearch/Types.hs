@@ -16,7 +16,7 @@
 module Network.Google.DoubleClickSearch.Types
     (
     -- * Service URL
-      doubleClickSearchURL
+      doubleClickSearchRequest
 
     -- * ReportRow
     , ReportRow
@@ -197,9 +197,8 @@ import           Network.Google.DoubleClickSearch.Types.Product
 import           Network.Google.DoubleClickSearch.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v2' of the DoubleClick Search API.
-doubleClickSearchURL :: BaseUrl
-doubleClickSearchURL
-  = BaseUrl Https
-      "https://www.googleapis.com/doubleclicksearch/v2/"
-      443
+-- | Default request referring to version 'v2' of the DoubleClick Search API.
+doubleClickSearchRequest :: RequestBuilder
+doubleClickSearchRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "doubleclicksearch/v2/"

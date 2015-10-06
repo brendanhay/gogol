@@ -176,8 +176,8 @@ instance GoogleAuth GroupsAddMember' where
 
 instance GoogleRequest GroupsAddMember' where
         type Rs GroupsAddMember' = Operation
-        request = requestWithRoute defReq userAccountsURL
-        requestWithRoute r u GroupsAddMember'{..}
+        request = requestWith userAccountsRequest
+        requestWith rq GroupsAddMember'{..}
           = go _gamProject _gamGroupName _gamQuotaUser
               (Just _gamPrettyPrint)
               _gamUserIP
@@ -187,7 +187,6 @@ instance GoogleRequest GroupsAddMember' where
               (Just AltJSON)
               _gamPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GroupsAddMemberResource)
-                      r
-                      u
+                      rq

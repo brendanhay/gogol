@@ -197,9 +197,8 @@ instance GoogleRequest ProductsGenerateApprovalURL'
          where
         type Rs ProductsGenerateApprovalURL' =
              ProductsGenerateApprovalURLResponse
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u ProductsGenerateApprovalURL'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq ProductsGenerateApprovalURL'{..}
           = go _pgauEnterpriseId _pgauProductId
               _pgauLanguageCode
               _pgauQuotaUser
@@ -210,7 +209,6 @@ instance GoogleRequest ProductsGenerateApprovalURL'
               _pgauOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProductsGenerateApprovalURLResource)
-                      r
-                      u
+                      rq

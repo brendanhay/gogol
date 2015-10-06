@@ -160,8 +160,8 @@ instance GoogleAuth CustomersInsert' where
 
 instance GoogleRequest CustomersInsert' where
         type Rs CustomersInsert' = Customer
-        request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u CustomersInsert'{..}
+        request = requestWith appsResellerRequest
+        requestWith rq CustomersInsert'{..}
           = go _ciCustomerAuthToken _ciQuotaUser
               (Just _ciPrettyPrint)
               _ciUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest CustomersInsert' where
               (Just AltJSON)
               _ciPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CustomersInsertResource)
-                      r
-                      u
+                      rq

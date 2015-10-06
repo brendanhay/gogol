@@ -184,8 +184,8 @@ instance GoogleAuth HTTPHealthChecksUpdate' where
 
 instance GoogleRequest HTTPHealthChecksUpdate' where
         type Rs HTTPHealthChecksUpdate' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u HTTPHealthChecksUpdate'{..}
+        request = requestWith computeRequest
+        requestWith rq HTTPHealthChecksUpdate'{..}
           = go _httphcuProject _httphcuHTTPHealthCheck
               _httphcuQuotaUser
               (Just _httphcuPrettyPrint)
@@ -196,7 +196,6 @@ instance GoogleRequest HTTPHealthChecksUpdate' where
               (Just AltJSON)
               _httphcuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy HTTPHealthChecksUpdateResource)
-                      r
-                      u
+                      rq

@@ -158,8 +158,8 @@ instance GoogleAuth DatasetsPatch' where
 
 instance GoogleRequest DatasetsPatch' where
         type Rs DatasetsPatch' = Dataset
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u DatasetsPatch'{..}
+        request = requestWith genomicsRequest
+        requestWith rq DatasetsPatch'{..}
           = go _dpDatasetId _dpQuotaUser (Just _dpPrettyPrint)
               _dpUserIP
               _dpFields
@@ -168,7 +168,5 @@ instance GoogleRequest DatasetsPatch' where
               (Just AltJSON)
               _dpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DatasetsPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DatasetsPatchResource)
+                      rq

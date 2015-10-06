@@ -212,8 +212,8 @@ instance GoogleAuth DataRealtimeGet' where
 
 instance GoogleRequest DataRealtimeGet' where
         type Rs DataRealtimeGet' = RealtimeData
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u DataRealtimeGet'{..}
+        request = requestWith analyticsRequest
+        requestWith rq DataRealtimeGet'{..}
           = go (Just _drgIds) (Just _drgMetrics) _drgFilters
               _drgSort
               _drgDimensions
@@ -226,7 +226,6 @@ instance GoogleRequest DataRealtimeGet' where
               _drgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DataRealtimeGetResource)
-                      r
-                      u
+                      rq

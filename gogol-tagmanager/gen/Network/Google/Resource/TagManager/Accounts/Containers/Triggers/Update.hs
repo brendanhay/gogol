@@ -206,9 +206,8 @@ instance GoogleAuth AccountsContainersTriggersUpdate'
 instance GoogleRequest
          AccountsContainersTriggersUpdate' where
         type Rs AccountsContainersTriggersUpdate' = Trigger
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersTriggersUpdate'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersTriggersUpdate'{..}
           = go _actuAccountId _actuContainerId _actuTriggerId
               _actuFingerprint
               _actuQuotaUser
@@ -220,8 +219,7 @@ instance GoogleRequest
               (Just AltJSON)
               _actuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersTriggersUpdateResource)
-                      r
-                      u
+                      rq

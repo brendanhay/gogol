@@ -182,8 +182,8 @@ instance GoogleAuth AccountsAdUnitsGetAdCode' where
 instance GoogleRequest AccountsAdUnitsGetAdCode'
          where
         type Rs AccountsAdUnitsGetAdCode' = AdCode
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AccountsAdUnitsGetAdCode'{..}
+        request = requestWith adSenseRequest
+        requestWith rq AccountsAdUnitsGetAdCode'{..}
           = go _aaugacAccountId _aaugacAdClientId
               _aaugacAdUnitId
               _aaugacQuotaUser
@@ -194,7 +194,6 @@ instance GoogleRequest AccountsAdUnitsGetAdCode'
               _aaugacOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsAdUnitsGetAdCodeResource)
-                      r
-                      u
+                      rq

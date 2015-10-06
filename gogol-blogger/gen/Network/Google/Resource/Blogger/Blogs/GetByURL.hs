@@ -161,8 +161,8 @@ instance GoogleAuth BlogsGetByURL' where
 
 instance GoogleRequest BlogsGetByURL' where
         type Rs BlogsGetByURL' = Blog
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u BlogsGetByURL'{..}
+        request = requestWith bloggerRequest
+        requestWith rq BlogsGetByURL'{..}
           = go (Just _bgbuURL) _bgbuView _bgbuQuotaUser
               (Just _bgbuPrettyPrint)
               _bgbuUserIP
@@ -171,7 +171,5 @@ instance GoogleRequest BlogsGetByURL' where
               _bgbuOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy BlogsGetByURLResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy BlogsGetByURLResource)
+                      rq

@@ -147,9 +147,8 @@ instance GoogleAuth ConversionUpdate' where
 
 instance GoogleRequest ConversionUpdate' where
         type Rs ConversionUpdate' = ConversionList
-        request
-          = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u ConversionUpdate'{..}
+        request = requestWith doubleClickSearchRequest
+        requestWith rq ConversionUpdate'{..}
           = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIP
               _cuFields
               _cuKey
@@ -157,7 +156,6 @@ instance GoogleRequest ConversionUpdate' where
               (Just AltJSON)
               _cuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ConversionUpdateResource)
-                      r
-                      u
+                      rq

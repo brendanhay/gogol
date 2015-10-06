@@ -168,8 +168,8 @@ instance GoogleAuth HTTPHealthChecksDelete' where
 
 instance GoogleRequest HTTPHealthChecksDelete' where
         type Rs HTTPHealthChecksDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u HTTPHealthChecksDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq HTTPHealthChecksDelete'{..}
           = go _httphcdProject _httphcdHTTPHealthCheck
               _httphcdQuotaUser
               (Just _httphcdPrettyPrint)
@@ -179,7 +179,6 @@ instance GoogleRequest HTTPHealthChecksDelete' where
               _httphcdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy HTTPHealthChecksDeleteResource)
-                      r
-                      u
+                      rq

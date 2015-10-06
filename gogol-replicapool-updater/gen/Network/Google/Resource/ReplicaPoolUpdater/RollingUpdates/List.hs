@@ -200,9 +200,8 @@ instance GoogleAuth RollingUpdatesList' where
 
 instance GoogleRequest RollingUpdatesList' where
         type Rs RollingUpdatesList' = RollingUpdateList
-        request
-          = requestWithRoute defReq replicaPoolUpdaterURL
-        requestWithRoute r u RollingUpdatesList'{..}
+        request = requestWith replicaPoolUpdaterRequest
+        requestWith rq RollingUpdatesList'{..}
           = go _rulProject _rulZone _rulFilter _rulPageToken
               (Just _rulMaxResults)
               _rulQuotaUser
@@ -213,7 +212,6 @@ instance GoogleRequest RollingUpdatesList' where
               _rulOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RollingUpdatesListResource)
-                      r
-                      u
+                      rq

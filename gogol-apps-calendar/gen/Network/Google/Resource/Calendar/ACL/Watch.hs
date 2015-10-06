@@ -220,8 +220,8 @@ instance GoogleAuth ACLWatch' where
 
 instance GoogleRequest ACLWatch' where
         type Rs ACLWatch' = Channel
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u ACLWatch'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq ACLWatch'{..}
           = go _awCalendarId _awSyncToken _awShowDeleted
               _awPageToken
               _awMaxResults
@@ -234,5 +234,4 @@ instance GoogleRequest ACLWatch' where
               (Just AltJSON)
               _awPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy ACLWatchResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy ACLWatchResource) rq

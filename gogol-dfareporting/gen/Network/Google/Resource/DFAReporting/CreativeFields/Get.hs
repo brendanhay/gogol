@@ -161,8 +161,8 @@ instance GoogleAuth CreativeFieldsGet' where
 
 instance GoogleRequest CreativeFieldsGet' where
         type Rs CreativeFieldsGet' = CreativeField
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativeFieldsGet'{..}
           = go _cfgProFileId _cfgId _cfgQuotaUser
               (Just _cfgPrettyPrint)
               _cfgUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest CreativeFieldsGet' where
               _cfgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CreativeFieldsGetResource)
-                      r
-                      u
+                      rq

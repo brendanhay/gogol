@@ -219,8 +219,8 @@ instance GoogleAuth ProjectsSubscriptionsGet' where
 instance GoogleRequest ProjectsSubscriptionsGet'
          where
         type Rs ProjectsSubscriptionsGet' = Subscription
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsSubscriptionsGet'{..}
+        request = requestWith pubSubRequest
+        requestWith rq ProjectsSubscriptionsGet'{..}
           = go _psgSubscription _psgXgafv _psgUploadProtocol
               (Just _psgPp)
               _psgAccessToken
@@ -234,7 +234,6 @@ instance GoogleRequest ProjectsSubscriptionsGet'
               _psgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsSubscriptionsGetResource)
-                      r
-                      u
+                      rq

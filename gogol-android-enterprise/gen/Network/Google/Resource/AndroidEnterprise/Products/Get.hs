@@ -171,9 +171,8 @@ instance GoogleAuth ProductsGet' where
 
 instance GoogleRequest ProductsGet' where
         type Rs ProductsGet' = Product
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u ProductsGet'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq ProductsGet'{..}
           = go _pEnterpriseId _pProductId _pLanguage
               _pQuotaUser
               (Just _pPrettyPrint)
@@ -183,7 +182,4 @@ instance GoogleRequest ProductsGet' where
               _pOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ProductsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ProductsGetResource) rq

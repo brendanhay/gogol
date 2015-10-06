@@ -16,7 +16,7 @@
 module Network.Google.AppsTasks.Types
     (
     -- * Service URL
-      appsTasksURL
+      appsTasksRequest
 
     -- * TaskLinksItem
     , TaskLinksItem
@@ -75,9 +75,8 @@ import           Network.Google.AppsTasks.Types.Product
 import           Network.Google.AppsTasks.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Tasks API.
-appsTasksURL :: BaseUrl
-appsTasksURL
-  = BaseUrl Https
-      "https://www.googleapis.com/tasks/v1/"
-      443
+-- | Default request referring to version 'v1' of the Tasks API.
+appsTasksRequest :: RequestBuilder
+appsTasksRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "tasks/v1/"

@@ -23,7 +23,7 @@ module Network.Google.Directory
     -- * API
       DirectoryAPI
     , directoryAPI
-    , directoryURL
+    , directoryRequest
 
     -- * Service Methods
 

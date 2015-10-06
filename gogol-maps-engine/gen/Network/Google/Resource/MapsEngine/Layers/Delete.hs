@@ -148,8 +148,8 @@ instance GoogleAuth LayersDelete' where
 
 instance GoogleRequest LayersDelete' where
         type Rs LayersDelete' = ()
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u LayersDelete'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq LayersDelete'{..}
           = go _ldId _ldQuotaUser (Just _ldPrettyPrint)
               _ldUserIP
               _ldFields
@@ -157,7 +157,5 @@ instance GoogleRequest LayersDelete' where
               _ldOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy LayersDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy LayersDeleteResource)
+                      rq

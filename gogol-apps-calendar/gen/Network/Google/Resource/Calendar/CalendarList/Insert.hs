@@ -167,8 +167,8 @@ instance GoogleAuth CalendarListInsert' where
 
 instance GoogleRequest CalendarListInsert' where
         type Rs CalendarListInsert' = CalendarListEntry
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarListInsert'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq CalendarListInsert'{..}
           = go _cliColorRgbFormat _cliQuotaUser
               (Just _cliPrettyPrint)
               _cliUserIP
@@ -178,7 +178,6 @@ instance GoogleRequest CalendarListInsert' where
               (Just AltJSON)
               _cliPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CalendarListInsertResource)
-                      r
-                      u
+                      rq

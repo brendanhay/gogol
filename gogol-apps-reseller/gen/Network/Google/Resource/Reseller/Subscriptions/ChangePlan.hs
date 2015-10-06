@@ -178,8 +178,8 @@ instance GoogleAuth SubscriptionsChangePlan' where
 
 instance GoogleRequest SubscriptionsChangePlan' where
         type Rs SubscriptionsChangePlan' = Subscription
-        request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u SubscriptionsChangePlan'{..}
+        request = requestWith appsResellerRequest
+        requestWith rq SubscriptionsChangePlan'{..}
           = go _scpCustomerId _scpSubscriptionId _scpQuotaUser
               (Just _scpPrettyPrint)
               _scpUserIP
@@ -189,7 +189,6 @@ instance GoogleRequest SubscriptionsChangePlan' where
               (Just AltJSON)
               _scpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SubscriptionsChangePlanResource)
-                      r
-                      u
+                      rq

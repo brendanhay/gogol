@@ -208,9 +208,8 @@ instance GoogleRequest
          AccountsContainersVersionsUpdate' where
         type Rs AccountsContainersVersionsUpdate' =
              ContainerVersion
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersVersionsUpdate'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersVersionsUpdate'{..}
           = go _acvucAccountId _acvucContainerId
               _acvucContainerVersionId
               _acvucFingerprint
@@ -223,8 +222,7 @@ instance GoogleRequest
               (Just AltJSON)
               _acvucPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersVersionsUpdateResource)
-                      r
-                      u
+                      rq

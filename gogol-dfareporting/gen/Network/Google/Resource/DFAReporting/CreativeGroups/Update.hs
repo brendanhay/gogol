@@ -163,8 +163,8 @@ instance GoogleAuth CreativeGroupsUpdate' where
 
 instance GoogleRequest CreativeGroupsUpdate' where
         type Rs CreativeGroupsUpdate' = CreativeGroup
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeGroupsUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativeGroupsUpdate'{..}
           = go _cguProFileId _cguQuotaUser
               (Just _cguPrettyPrint)
               _cguUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest CreativeGroupsUpdate' where
               (Just AltJSON)
               _cguPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CreativeGroupsUpdateResource)
-                      r
-                      u
+                      rq

@@ -158,8 +158,8 @@ instance GoogleRequest
          RelyingPartyGetOOBConfirmationCode' where
         type Rs RelyingPartyGetOOBConfirmationCode' =
              GetOOBConfirmationCodeResponse
-        request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u
+        request = requestWith identityToolkitRequest
+        requestWith rq
           RelyingPartyGetOOBConfirmationCode'{..}
           = go _rpgoobccQuotaUser (Just _rpgoobccPrettyPrint)
               _rpgoobccUserIP
@@ -169,8 +169,7 @@ instance GoogleRequest
               (Just AltJSON)
               _rpgoobccPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy RelyingPartyGetOOBConfirmationCodeResource)
-                      r
-                      u
+                      rq

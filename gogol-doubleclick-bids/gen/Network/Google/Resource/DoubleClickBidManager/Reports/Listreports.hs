@@ -148,8 +148,8 @@ instance GoogleAuth ReportsListreports' where
 
 instance GoogleRequest ReportsListreports' where
         type Rs ReportsListreports' = ListReportsResponse
-        request = requestWithRoute defReq doubleClickBidsURL
-        requestWithRoute r u ReportsListreports'{..}
+        request = requestWith doubleClickBidsRequest
+        requestWith rq ReportsListreports'{..}
           = go _rlQueryId _rlQuotaUser (Just _rlPrettyPrint)
               _rlUserIP
               _rlFields
@@ -157,7 +157,6 @@ instance GoogleRequest ReportsListreports' where
               _rlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReportsListreportsResource)
-                      r
-                      u
+                      rq

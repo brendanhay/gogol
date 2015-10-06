@@ -135,15 +135,13 @@ instance GoogleAuth ProjectsList' where
 
 instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ProjectsListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u ProjectsList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq ProjectsList'{..}
           = go _plQuotaUser (Just _plPrettyPrint) _plUserIP
               _plFields
               _plKey
               _plOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ProjectsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ProjectsListResource)
+                      rq

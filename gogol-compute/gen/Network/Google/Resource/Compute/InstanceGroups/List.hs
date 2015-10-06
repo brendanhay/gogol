@@ -210,8 +210,8 @@ instance GoogleAuth InstanceGroupsList' where
 
 instance GoogleRequest InstanceGroupsList' where
         type Rs InstanceGroupsList' = InstanceGroupList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceGroupsList'{..}
+        request = requestWith computeRequest
+        requestWith rq InstanceGroupsList'{..}
           = go _iglProject _iglZone _iglFilter _iglPageToken
               (Just _iglMaxResults)
               _iglQuotaUser
@@ -222,7 +222,6 @@ instance GoogleRequest InstanceGroupsList' where
               _iglOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstanceGroupsListResource)
-                      r
-                      u
+                      rq

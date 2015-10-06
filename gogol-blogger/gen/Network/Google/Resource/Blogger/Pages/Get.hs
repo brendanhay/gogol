@@ -171,8 +171,8 @@ instance GoogleAuth PagesGet' where
 
 instance GoogleRequest PagesGet' where
         type Rs PagesGet' = Page
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PagesGet'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PagesGet'{..}
           = go _pggBlogId _pggPageId _pggView _pggQuotaUser
               (Just _pggPrettyPrint)
               _pggUserIP
@@ -181,5 +181,4 @@ instance GoogleRequest PagesGet' where
               _pggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy PagesGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy PagesGetResource) rq

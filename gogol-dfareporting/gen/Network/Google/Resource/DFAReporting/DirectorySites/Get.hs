@@ -161,8 +161,8 @@ instance GoogleAuth DirectorySitesGet' where
 
 instance GoogleRequest DirectorySitesGet' where
         type Rs DirectorySitesGet' = DirectorySite
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u DirectorySitesGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq DirectorySitesGet'{..}
           = go _dsgProFileId _dsgId _dsgQuotaUser
               (Just _dsgPrettyPrint)
               _dsgUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest DirectorySitesGet' where
               _dsgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DirectorySitesGetResource)
-                      r
-                      u
+                      rq

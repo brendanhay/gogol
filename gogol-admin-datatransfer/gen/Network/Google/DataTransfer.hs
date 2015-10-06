@@ -22,7 +22,7 @@ module Network.Google.DataTransfer
     -- * API
       DataTransferAPI
     , dataTransferAPI
-    , dataTransferURL
+    , dataTransferRequest
 
     -- * Service Methods
 

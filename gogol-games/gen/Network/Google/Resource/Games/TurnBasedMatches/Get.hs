@@ -174,8 +174,8 @@ instance GoogleAuth TurnBasedMatchesGet' where
 
 instance GoogleRequest TurnBasedMatchesGet' where
         type Rs TurnBasedMatchesGet' = TurnBasedMatch
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u TurnBasedMatchesGet'{..}
+        request = requestWith gamesRequest
+        requestWith rq TurnBasedMatchesGet'{..}
           = go _tbmgMatchId _tbmgIncludeMatchData _tbmgLanguage
               _tbmgQuotaUser
               (Just _tbmgPrettyPrint)
@@ -185,7 +185,6 @@ instance GoogleRequest TurnBasedMatchesGet' where
               _tbmgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TurnBasedMatchesGetResource)
-                      r
-                      u
+                      rq

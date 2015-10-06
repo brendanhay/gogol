@@ -174,8 +174,8 @@ instance GoogleAuth UsersSessionsDelete' where
 
 instance GoogleRequest UsersSessionsDelete' where
         type Rs UsersSessionsDelete' = ()
-        request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersSessionsDelete'{..}
+        request = requestWith fitnessRequest
+        requestWith rq UsersSessionsDelete'{..}
           = go _usdUserId _usdSessionId _usdCurrentTimeMillis
               _usdQuotaUser
               (Just _usdPrettyPrint)
@@ -185,7 +185,6 @@ instance GoogleRequest UsersSessionsDelete' where
               _usdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersSessionsDeleteResource)
-                      r
-                      u
+                      rq

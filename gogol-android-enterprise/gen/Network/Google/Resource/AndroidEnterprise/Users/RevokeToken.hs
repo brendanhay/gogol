@@ -164,9 +164,8 @@ instance GoogleAuth UsersRevokeToken' where
 
 instance GoogleRequest UsersRevokeToken' where
         type Rs UsersRevokeToken' = ()
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u UsersRevokeToken'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq UsersRevokeToken'{..}
           = go _urtEnterpriseId _urtUserId _urtQuotaUser
               (Just _urtPrettyPrint)
               _urtUserIP
@@ -175,7 +174,6 @@ instance GoogleRequest UsersRevokeToken' where
               _urtOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersRevokeTokenResource)
-                      r
-                      u
+                      rq

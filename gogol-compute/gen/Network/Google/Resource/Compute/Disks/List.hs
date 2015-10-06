@@ -204,8 +204,8 @@ instance GoogleAuth DisksList' where
 
 instance GoogleRequest DisksList' where
         type Rs DisksList' = DiskList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u DisksList'{..}
+        request = requestWith computeRequest
+        requestWith rq DisksList'{..}
           = go _dlProject _dlZone _dlFilter _dlPageToken
               (Just _dlMaxResults)
               _dlQuotaUser
@@ -216,6 +216,4 @@ instance GoogleRequest DisksList' where
               _dlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy DisksListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DisksListResource) rq

@@ -290,8 +290,8 @@ instance GoogleAuth AccountsReportsGenerate' where
 
 instance GoogleRequest AccountsReportsGenerate' where
         type Rs AccountsReportsGenerate' = Report
-        request = requestWithRoute defReq adExchangeSellerURL
-        requestWithRoute r u AccountsReportsGenerate'{..}
+        request = requestWith adExchangeSellerRequest
+        requestWith rq AccountsReportsGenerate'{..}
           = go _argAccountId (Just _argStartDate)
               (Just _argEndDate)
               (_argDimension ^. _Default)
@@ -309,17 +309,16 @@ instance GoogleRequest AccountsReportsGenerate' where
               _argOAuthToken
               (Just AltJSON)
           where go :<|> _
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsReportsGenerateResource)
-                      r
-                      u
+                      rq
 
 instance GoogleRequest
          (MediaDownload AccountsReportsGenerate') where
         type Rs (MediaDownload AccountsReportsGenerate') =
              Body
-        request = requestWithRoute defReq adExchangeSellerURL
-        requestWithRoute r u
+        request = requestWith adExchangeSellerRequest
+        requestWith rq
           (MediaDownload AccountsReportsGenerate'{..})
           = go _argAccountId (Just _argStartDate)
               (Just _argEndDate)
@@ -338,7 +337,6 @@ instance GoogleRequest
               _argOAuthToken
               (Just AltMedia)
           where _ :<|> go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsReportsGenerateResource)
-                      r
-                      u
+                      rq

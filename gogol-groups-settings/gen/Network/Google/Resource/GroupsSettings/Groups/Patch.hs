@@ -158,8 +158,8 @@ instance GoogleAuth GroupsPatch' where
 
 instance GoogleRequest GroupsPatch' where
         type Rs GroupsPatch' = Groups
-        request = requestWithRoute defReq groupsSettingsURL
-        requestWithRoute r u GroupsPatch'{..}
+        request = requestWith groupsSettingsRequest
+        requestWith rq GroupsPatch'{..}
           = go _gpGroupUniqueId _gpQuotaUser
               (Just _gpPrettyPrint)
               _gpUserIP
@@ -169,7 +169,4 @@ instance GoogleRequest GroupsPatch' where
               (Just AltATOM)
               _gpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy GroupsPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy GroupsPatchResource) rq

@@ -146,8 +146,8 @@ instance GoogleAuth CirclesRemove' where
 
 instance GoogleRequest CirclesRemove' where
         type Rs CirclesRemove' = ()
-        request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u CirclesRemove'{..}
+        request = requestWith plusDomainsRequest
+        requestWith rq CirclesRemove'{..}
           = go _crCircleId _crQuotaUser (Just _crPrettyPrint)
               _crUserIP
               _crFields
@@ -155,7 +155,5 @@ instance GoogleRequest CirclesRemove' where
               _crOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CirclesRemoveResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CirclesRemoveResource)
+                      rq

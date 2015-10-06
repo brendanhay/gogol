@@ -148,8 +148,8 @@ instance GoogleAuth TransfersGet' where
 
 instance GoogleRequest TransfersGet' where
         type Rs TransfersGet' = DataTransfer
-        request = requestWithRoute defReq dataTransferURL
-        requestWithRoute r u TransfersGet'{..}
+        request = requestWith dataTransferRequest
+        requestWith rq TransfersGet'{..}
           = go _tgDataTransferId _tgQuotaUser
               (Just _tgPrettyPrint)
               _tgUserIP
@@ -158,7 +158,5 @@ instance GoogleRequest TransfersGet' where
               _tgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TransfersGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TransfersGetResource)
+                      rq

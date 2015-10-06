@@ -352,8 +352,8 @@ instance GoogleAuth CreativesList' where
 
 instance GoogleRequest CreativesList' where
         type Rs CreativesList' = CreativesListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativesList'{..}
           = go _clProFileId (_clRenderingIds ^. _Default)
               _clAdvertiserId
               _clSearchString
@@ -378,7 +378,5 @@ instance GoogleRequest CreativesList' where
               _clOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CreativesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CreativesListResource)
+                      rq

@@ -190,8 +190,8 @@ instance GoogleAuth ManagementGoalsGet' where
 
 instance GoogleRequest ManagementGoalsGet' where
         type Rs ManagementGoalsGet' = Goal
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementGoalsGet'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementGoalsGet'{..}
           = go _mggAccountId _mggWebPropertyId _mggProFileId
               _mggGoalId
               _mggQuotaUser
@@ -202,7 +202,6 @@ instance GoogleRequest ManagementGoalsGet' where
               _mggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementGoalsGetResource)
-                      r
-                      u
+                      rq

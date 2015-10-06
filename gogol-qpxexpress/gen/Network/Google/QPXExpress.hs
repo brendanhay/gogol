@@ -22,7 +22,7 @@ module Network.Google.QPXExpress
     -- * API
       QPXExpressAPI
     , qPXExpressAPI
-    , qPXExpressURL
+    , qPXExpressRequest
 
     -- * Service Methods
 

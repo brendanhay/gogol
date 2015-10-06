@@ -21,7 +21,7 @@ module Network.Google.CivicInfo
     -- * API
       CivicInfoAPI
     , civicInfoAPI
-    , civicInfoURL
+    , civicInfoRequest
 
     -- * Service Methods
 

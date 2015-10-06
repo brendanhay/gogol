@@ -244,8 +244,8 @@ instance GoogleAuth BeaconsAttachmentsCreate' where
 instance GoogleRequest BeaconsAttachmentsCreate'
          where
         type Rs BeaconsAttachmentsCreate' = BeaconAttachment
-        request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconsAttachmentsCreate'{..}
+        request = requestWith proximityBeaconRequest
+        requestWith rq BeaconsAttachmentsCreate'{..}
           = go _bacBeaconName _bacXgafv _bacUploadProtocol
               (Just _bacPp)
               _bacAccessToken
@@ -260,7 +260,6 @@ instance GoogleRequest BeaconsAttachmentsCreate'
               (Just AltJSON)
               _bacPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BeaconsAttachmentsCreateResource)
-                      r
-                      u
+                      rq

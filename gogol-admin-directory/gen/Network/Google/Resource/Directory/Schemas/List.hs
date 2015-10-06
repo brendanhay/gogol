@@ -147,8 +147,8 @@ instance GoogleAuth SchemasList' where
 
 instance GoogleRequest SchemasList' where
         type Rs SchemasList' = Schemas
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u SchemasList'{..}
+        request = requestWith directoryRequest
+        requestWith rq SchemasList'{..}
           = go _slCustomerId _slQuotaUser (Just _slPrettyPrint)
               _slUserIP
               _slFields
@@ -156,7 +156,4 @@ instance GoogleRequest SchemasList' where
               _slOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SchemasListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SchemasListResource) rq

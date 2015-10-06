@@ -162,8 +162,8 @@ instance GoogleAuth ParentsDelete' where
 
 instance GoogleRequest ParentsDelete' where
         type Rs ParentsDelete' = ()
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u ParentsDelete'{..}
+        request = requestWith driveRequest
+        requestWith rq ParentsDelete'{..}
           = go _pddFileId _pddParentId _pddQuotaUser
               (Just _pddPrettyPrint)
               _pddUserIP
@@ -172,7 +172,5 @@ instance GoogleRequest ParentsDelete' where
               _pddOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ParentsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ParentsDeleteResource)
+                      rq

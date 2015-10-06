@@ -188,8 +188,8 @@ instance GoogleAuth EventsMove' where
 
 instance GoogleRequest EventsMove' where
         type Rs EventsMove' = Event
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsMove'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq EventsMove'{..}
           = go _emCalendarId _emEventId (Just _emDestination)
               _emSendNotifications
               _emQuotaUser
@@ -200,6 +200,4 @@ instance GoogleRequest EventsMove' where
               _emOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventsMoveResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EventsMoveResource) rq

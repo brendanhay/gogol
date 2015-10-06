@@ -197,8 +197,8 @@ instance GoogleAuth ChannelBannersInsert' where
 
 instance GoogleRequest ChannelBannersInsert' where
         type Rs ChannelBannersInsert' = ChannelBannerResource
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ChannelBannersInsert'{..}
+        request = requestWith youTubeRequest
+        requestWith rq ChannelBannersInsert'{..}
           = go _cbiOnBehalfOfContentOwner _cbiQuotaUser
               (Just _cbiPrettyPrint)
               _cbiUserIP
@@ -209,7 +209,6 @@ instance GoogleRequest ChannelBannersInsert' where
               _cbiPayload
               _cbiMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ChannelBannersInsertResource)
-                      r
-                      u
+                      rq

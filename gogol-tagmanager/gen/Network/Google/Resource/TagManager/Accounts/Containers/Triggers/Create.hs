@@ -180,9 +180,8 @@ instance GoogleAuth AccountsContainersTriggersCreate'
 instance GoogleRequest
          AccountsContainersTriggersCreate' where
         type Rs AccountsContainersTriggersCreate' = Trigger
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersTriggersCreate'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersTriggersCreate'{..}
           = go _actccAccountId _actccContainerId
               _actccQuotaUser
               (Just _actccPrettyPrint)
@@ -193,8 +192,7 @@ instance GoogleRequest
               (Just AltJSON)
               _actccPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersTriggersCreateResource)
-                      r
-                      u
+                      rq

@@ -16,7 +16,7 @@
 module Network.Google.AppsActivity.Types
     (
     -- * Service URL
-      appsActivityURL
+      appsActivityRequest
 
     -- * Parent
     , Parent
@@ -116,9 +116,8 @@ import           Network.Google.AppsActivity.Types.Product
 import           Network.Google.AppsActivity.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Google Apps Activity API.
-appsActivityURL :: BaseUrl
-appsActivityURL
-  = BaseUrl Https
-      "https://www.googleapis.com/appsactivity/v1/"
-      443
+-- | Default request referring to version 'v1' of the Google Apps Activity API.
+appsActivityRequest :: RequestBuilder
+appsActivityRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "appsactivity/v1/"

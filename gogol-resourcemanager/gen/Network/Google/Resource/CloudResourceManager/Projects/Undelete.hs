@@ -234,8 +234,8 @@ instance GoogleAuth ProjectsUndelete' where
 
 instance GoogleRequest ProjectsUndelete' where
         type Rs ProjectsUndelete' = Empty
-        request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsUndelete'{..}
+        request = requestWith resourceManagerRequest
+        requestWith rq ProjectsUndelete'{..}
           = go _proProjectId _proXgafv _proUploadProtocol
               (Just _proPp)
               _proAccessToken
@@ -249,7 +249,6 @@ instance GoogleRequest ProjectsUndelete' where
               _proOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsUndeleteResource)
-                      r
-                      u
+                      rq

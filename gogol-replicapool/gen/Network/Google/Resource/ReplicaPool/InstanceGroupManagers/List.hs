@@ -204,8 +204,8 @@ instance GoogleRequest InstanceGroupManagersList'
          where
         type Rs InstanceGroupManagersList' =
              InstanceGroupManagerList
-        request = requestWithRoute defReq replicaPoolURL
-        requestWithRoute r u InstanceGroupManagersList'{..}
+        request = requestWith replicaPoolRequest
+        requestWith rq InstanceGroupManagersList'{..}
           = go _igmlProject _igmlZone _igmlFilter
               _igmlPageToken
               (Just _igmlMaxResults)
@@ -217,7 +217,6 @@ instance GoogleRequest InstanceGroupManagersList'
               _igmlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstanceGroupManagersListResource)
-                      r
-                      u
+                      rq

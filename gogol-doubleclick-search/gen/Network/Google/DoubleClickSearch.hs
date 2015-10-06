@@ -22,7 +22,7 @@ module Network.Google.DoubleClickSearch
     -- * API
       DoubleClickSearchAPI
     , doubleClickSearchAPI
-    , doubleClickSearchURL
+    , doubleClickSearchRequest
 
     -- * Service Methods
 

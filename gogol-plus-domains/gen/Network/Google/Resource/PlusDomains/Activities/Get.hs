@@ -146,8 +146,8 @@ instance GoogleAuth ActivitiesGet' where
 
 instance GoogleRequest ActivitiesGet' where
         type Rs ActivitiesGet' = Activity
-        request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u ActivitiesGet'{..}
+        request = requestWith plusDomainsRequest
+        requestWith rq ActivitiesGet'{..}
           = go _agActivityId _agQuotaUser (Just _agPrettyPrint)
               _agUserIP
               _agFields
@@ -155,7 +155,5 @@ instance GoogleRequest ActivitiesGet' where
               _agOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ActivitiesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ActivitiesGetResource)
+                      rq

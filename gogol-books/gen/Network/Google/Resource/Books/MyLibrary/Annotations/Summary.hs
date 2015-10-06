@@ -169,8 +169,8 @@ instance GoogleRequest MyLibraryAnnotationsSummary'
          where
         type Rs MyLibraryAnnotationsSummary' =
              AnnotationsSummary
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u MyLibraryAnnotationsSummary'{..}
+        request = requestWith booksRequest
+        requestWith rq MyLibraryAnnotationsSummary'{..}
           = go _mlasLayerIds (Just _mlasVolumeId)
               _mlasQuotaUser
               (Just _mlasPrettyPrint)
@@ -180,7 +180,6 @@ instance GoogleRequest MyLibraryAnnotationsSummary'
               _mlasOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MyLibraryAnnotationsSummaryResource)
-                      r
-                      u
+                      rq

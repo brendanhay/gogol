@@ -228,8 +228,8 @@ instance GoogleAuth CoursesCreate' where
 
 instance GoogleRequest CoursesCreate' where
         type Rs CoursesCreate' = Course
-        request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesCreate'{..}
+        request = requestWith classroomRequest
+        requestWith rq CoursesCreate'{..}
           = go _ccXgafv _ccUploadProtocol (Just _ccPp)
               _ccAccessToken
               _ccUploadType
@@ -243,7 +243,5 @@ instance GoogleRequest CoursesCreate' where
               (Just AltJSON)
               _ccPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CoursesCreateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CoursesCreateResource)
+                      rq

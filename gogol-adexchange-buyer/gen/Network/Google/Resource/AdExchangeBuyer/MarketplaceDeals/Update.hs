@@ -165,8 +165,8 @@ instance GoogleAuth MarketplaceDealsUpdate' where
 instance GoogleRequest MarketplaceDealsUpdate' where
         type Rs MarketplaceDealsUpdate' =
              EditAllOrderDealsResponse
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplaceDealsUpdate'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq MarketplaceDealsUpdate'{..}
           = go _mduOrderId _mduQuotaUser (Just _mduPrettyPrint)
               _mduUserIP
               _mduFields
@@ -175,7 +175,6 @@ instance GoogleRequest MarketplaceDealsUpdate' where
               (Just AltJSON)
               _mduPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MarketplaceDealsUpdateResource)
-                      r
-                      u
+                      rq

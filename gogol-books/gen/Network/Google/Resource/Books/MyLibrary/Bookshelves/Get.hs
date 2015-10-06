@@ -164,8 +164,8 @@ instance GoogleAuth MyLibraryBookshelvesGet' where
 
 instance GoogleRequest MyLibraryBookshelvesGet' where
         type Rs MyLibraryBookshelvesGet' = Bookshelf
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u MyLibraryBookshelvesGet'{..}
+        request = requestWith booksRequest
+        requestWith rq MyLibraryBookshelvesGet'{..}
           = go _mlbgShelf _mlbgSource _mlbgQuotaUser
               (Just _mlbgPrettyPrint)
               _mlbgUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest MyLibraryBookshelvesGet' where
               _mlbgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MyLibraryBookshelvesGetResource)
-                      r
-                      u
+                      rq

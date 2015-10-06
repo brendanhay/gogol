@@ -243,8 +243,8 @@ instance GoogleAuth ScoresListWindow' where
 
 instance GoogleRequest ScoresListWindow' where
         type Rs ScoresListWindow' = LeaderboardScores
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u ScoresListWindow'{..}
+        request = requestWith gamesRequest
+        requestWith rq ScoresListWindow'{..}
           = go _slwLeaderboardId _slwCollection
               (Just _slwTimeSpan)
               _slwReturnTopIfAbsent
@@ -260,7 +260,6 @@ instance GoogleRequest ScoresListWindow' where
               _slwOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ScoresListWindowResource)
-                      r
-                      u
+                      rq

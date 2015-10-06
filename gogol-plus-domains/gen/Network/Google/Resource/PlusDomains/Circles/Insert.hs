@@ -163,8 +163,8 @@ instance GoogleAuth CirclesInsert' where
 
 instance GoogleRequest CirclesInsert' where
         type Rs CirclesInsert' = Circle
-        request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u CirclesInsert'{..}
+        request = requestWith plusDomainsRequest
+        requestWith rq CirclesInsert'{..}
           = go _cirUserId _cirQuotaUser (Just _cirPrettyPrint)
               _cirUserIP
               _cirFields
@@ -173,7 +173,5 @@ instance GoogleRequest CirclesInsert' where
               (Just AltJSON)
               _cirPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CirclesInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CirclesInsertResource)
+                      rq

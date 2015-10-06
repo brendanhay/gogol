@@ -163,8 +163,8 @@ instance GoogleAuth RemarketingListsUpdate' where
 
 instance GoogleRequest RemarketingListsUpdate' where
         type Rs RemarketingListsUpdate' = RemarketingList
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u RemarketingListsUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq RemarketingListsUpdate'{..}
           = go _rluProFileId _rluQuotaUser
               (Just _rluPrettyPrint)
               _rluUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest RemarketingListsUpdate' where
               (Just AltJSON)
               _rluPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RemarketingListsUpdateResource)
-                      r
-                      u
+                      rq

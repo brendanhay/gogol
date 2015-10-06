@@ -173,8 +173,8 @@ instance GoogleAuth SearchanalyticsQuery' where
 instance GoogleRequest SearchanalyticsQuery' where
         type Rs SearchanalyticsQuery' =
              SearchAnalyticsQueryResponse
-        request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u SearchanalyticsQuery'{..}
+        request = requestWith webmasterToolsRequest
+        requestWith rq SearchanalyticsQuery'{..}
           = go _sqSiteURL _sqQuotaUser (Just _sqPrettyPrint)
               _sqUserIP
               _sqFields
@@ -183,7 +183,6 @@ instance GoogleRequest SearchanalyticsQuery' where
               (Just AltJSON)
               _sqPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SearchanalyticsQueryResource)
-                      r
-                      u
+                      rq

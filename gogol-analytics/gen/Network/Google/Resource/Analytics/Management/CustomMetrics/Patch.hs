@@ -208,9 +208,8 @@ instance GoogleAuth ManagementCustomMetricsPatch'
 instance GoogleRequest ManagementCustomMetricsPatch'
          where
         type Rs ManagementCustomMetricsPatch' = CustomMetric
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementCustomMetricsPatch'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementCustomMetricsPatch'{..}
           = go _mcmpAccountId _mcmpWebPropertyId
               _mcmpCustomMetricId
               (Just _mcmpIgnoreCustomDataSourceLinks)
@@ -223,7 +222,6 @@ instance GoogleRequest ManagementCustomMetricsPatch'
               (Just AltJSON)
               _mcmpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementCustomMetricsPatchResource)
-                      r
-                      u
+                      rq

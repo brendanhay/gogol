@@ -192,9 +192,8 @@ instance GoogleAuth DeploymentsList' where
 
 instance GoogleRequest DeploymentsList' where
         type Rs DeploymentsList' = DeploymentsListResponse
-        request
-          = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u DeploymentsList'{..}
+        request = requestWith deploymentManagerRequest
+        requestWith rq DeploymentsList'{..}
           = go _dlProject _dlFilter _dlPageToken
               (Just _dlMaxResults)
               _dlQuotaUser
@@ -205,7 +204,6 @@ instance GoogleRequest DeploymentsList' where
               _dlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DeploymentsListResource)
-                      r
-                      u
+                      rq

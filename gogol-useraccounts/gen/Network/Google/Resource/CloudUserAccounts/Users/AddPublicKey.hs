@@ -177,8 +177,8 @@ instance GoogleAuth UsersAddPublicKey' where
 
 instance GoogleRequest UsersAddPublicKey' where
         type Rs UsersAddPublicKey' = Operation
-        request = requestWithRoute defReq userAccountsURL
-        requestWithRoute r u UsersAddPublicKey'{..}
+        request = requestWith userAccountsRequest
+        requestWith rq UsersAddPublicKey'{..}
           = go _uapkProject _uapkUser _uapkQuotaUser
               (Just _uapkPrettyPrint)
               _uapkUserIP
@@ -188,7 +188,6 @@ instance GoogleRequest UsersAddPublicKey' where
               (Just AltJSON)
               _uapkPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersAddPublicKeyResource)
-                      r
-                      u
+                      rq

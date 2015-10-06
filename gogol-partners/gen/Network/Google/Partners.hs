@@ -22,7 +22,7 @@ module Network.Google.Partners
     -- * API
       PartnersAPI
     , partnersAPI
-    , partnersURL
+    , partnersRequest
 
     -- * Service Methods
 

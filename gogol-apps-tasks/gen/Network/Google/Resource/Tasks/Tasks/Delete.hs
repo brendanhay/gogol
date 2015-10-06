@@ -158,8 +158,8 @@ instance GoogleAuth TasksDelete' where
 
 instance GoogleRequest TasksDelete' where
         type Rs TasksDelete' = ()
-        request = requestWithRoute defReq appsTasksURL
-        requestWithRoute r u TasksDelete'{..}
+        request = requestWith appsTasksRequest
+        requestWith rq TasksDelete'{..}
           = go _tdTaskList _tdTask _tdQuotaUser
               (Just _tdPrettyPrint)
               _tdUserIP
@@ -168,7 +168,4 @@ instance GoogleRequest TasksDelete' where
               _tdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TasksDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TasksDeleteResource) rq

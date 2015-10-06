@@ -239,9 +239,8 @@ instance GoogleRequest
          DebuggerDebuggeesBreakpointsSet' where
         type Rs DebuggerDebuggeesBreakpointsSet' =
              SetBreakpointResponse
-        request = requestWithRoute defReq debuggerURL
-        requestWithRoute r u
-          DebuggerDebuggeesBreakpointsSet'{..}
+        request = requestWith debuggerRequest
+        requestWith rq DebuggerDebuggeesBreakpointsSet'{..}
           = go _ddbsDebuggeeId _ddbsXgafv _ddbsUploadProtocol
               (Just _ddbsPp)
               _ddbsAccessToken
@@ -256,8 +255,7 @@ instance GoogleRequest
               (Just AltJSON)
               _ddbsPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy DebuggerDebuggeesBreakpointsSetResource)
-                      r
-                      u
+                      rq

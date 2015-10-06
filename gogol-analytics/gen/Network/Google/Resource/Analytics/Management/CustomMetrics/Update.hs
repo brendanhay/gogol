@@ -208,9 +208,8 @@ instance GoogleAuth ManagementCustomMetricsUpdate'
 instance GoogleRequest ManagementCustomMetricsUpdate'
          where
         type Rs ManagementCustomMetricsUpdate' = CustomMetric
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementCustomMetricsUpdate'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementCustomMetricsUpdate'{..}
           = go _mcmuAccountId _mcmuWebPropertyId
               _mcmuCustomMetricId
               (Just _mcmuIgnoreCustomDataSourceLinks)
@@ -223,8 +222,7 @@ instance GoogleRequest ManagementCustomMetricsUpdate'
               (Just AltJSON)
               _mcmuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementCustomMetricsUpdateResource)
-                      r
-                      u
+                      rq

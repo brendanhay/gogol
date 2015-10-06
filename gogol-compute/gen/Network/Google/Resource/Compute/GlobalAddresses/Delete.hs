@@ -162,8 +162,8 @@ instance GoogleAuth GlobalAddressesDelete' where
 
 instance GoogleRequest GlobalAddressesDelete' where
         type Rs GlobalAddressesDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalAddressesDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq GlobalAddressesDelete'{..}
           = go _gadProject _gadAddress _gadQuotaUser
               (Just _gadPrettyPrint)
               _gadUserIP
@@ -172,7 +172,6 @@ instance GoogleRequest GlobalAddressesDelete' where
               _gadOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GlobalAddressesDeleteResource)
-                      r
-                      u
+                      rq

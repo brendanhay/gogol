@@ -238,9 +238,8 @@ instance GoogleRequest
          OrganizationsTestIAMPermissions' where
         type Rs OrganizationsTestIAMPermissions' =
              TestIAMPermissionsResponse
-        request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u
-          OrganizationsTestIAMPermissions'{..}
+        request = requestWith resourceManagerRequest
+        requestWith rq OrganizationsTestIAMPermissions'{..}
           = go _otipResource _otipXgafv _otipUploadProtocol
               (Just _otipPp)
               _otipAccessToken
@@ -255,8 +254,7 @@ instance GoogleRequest
               (Just AltJSON)
               _otipPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy OrganizationsTestIAMPermissionsResource)
-                      r
-                      u
+                      rq

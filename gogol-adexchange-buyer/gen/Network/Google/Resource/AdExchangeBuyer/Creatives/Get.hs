@@ -161,8 +161,8 @@ instance GoogleAuth CreativesGet' where
 
 instance GoogleRequest CreativesGet' where
         type Rs CreativesGet' = Creative
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u CreativesGet'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq CreativesGet'{..}
           = go _cgAccountId _cgBuyerCreativeId _cgQuotaUser
               (Just _cgPrettyPrint)
               _cgUserIP
@@ -171,7 +171,5 @@ instance GoogleRequest CreativesGet' where
               _cgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CreativesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CreativesGetResource)
+                      rq

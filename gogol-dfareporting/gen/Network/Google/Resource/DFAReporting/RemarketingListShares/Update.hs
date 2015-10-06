@@ -168,8 +168,8 @@ instance GoogleRequest RemarketingListSharesUpdate'
          where
         type Rs RemarketingListSharesUpdate' =
              RemarketingListShare
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u RemarketingListSharesUpdate'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq RemarketingListSharesUpdate'{..}
           = go _rlsuProFileId _rlsuQuotaUser
               (Just _rlsuPrettyPrint)
               _rlsuUserIP
@@ -179,7 +179,6 @@ instance GoogleRequest RemarketingListSharesUpdate'
               (Just AltJSON)
               _rlsuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RemarketingListSharesUpdateResource)
-                      r
-                      u
+                      rq

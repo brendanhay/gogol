@@ -172,8 +172,8 @@ instance GoogleAuth AutoscalersDelete' where
 
 instance GoogleRequest AutoscalersDelete' where
         type Rs AutoscalersDelete' = Operation
-        request = requestWithRoute defReq autoscalerURL
-        requestWithRoute r u AutoscalersDelete'{..}
+        request = requestWith autoscalerRequest
+        requestWith rq AutoscalersDelete'{..}
           = go _adProject _adZone _adAutoscaler _adQuotaUser
               (Just _adPrettyPrint)
               _adUserIP
@@ -182,7 +182,6 @@ instance GoogleRequest AutoscalersDelete' where
               _adOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AutoscalersDeleteResource)
-                      r
-                      u
+                      rq

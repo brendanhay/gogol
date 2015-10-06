@@ -145,8 +145,8 @@ instance GoogleAuth TimelineDelete' where
 
 instance GoogleRequest TimelineDelete' where
         type Rs TimelineDelete' = ()
-        request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineDelete'{..}
+        request = requestWith mirrorRequest
+        requestWith rq TimelineDelete'{..}
           = go _tdId _tdQuotaUser (Just _tdPrettyPrint)
               _tdUserIP
               _tdFields
@@ -154,7 +154,5 @@ instance GoogleRequest TimelineDelete' where
               _tdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TimelineDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TimelineDeleteResource)
+                      rq

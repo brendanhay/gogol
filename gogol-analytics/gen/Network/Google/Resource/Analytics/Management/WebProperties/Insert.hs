@@ -172,9 +172,8 @@ instance GoogleAuth ManagementWebPropertiesInsert'
 instance GoogleRequest ManagementWebPropertiesInsert'
          where
         type Rs ManagementWebPropertiesInsert' = WebProperty
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementWebPropertiesInsert'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementWebPropertiesInsert'{..}
           = go _mwpiAccountId _mwpiQuotaUser
               (Just _mwpiPrettyPrint)
               _mwpiUserIP
@@ -184,8 +183,7 @@ instance GoogleRequest ManagementWebPropertiesInsert'
               (Just AltJSON)
               _mwpiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementWebPropertiesInsertResource)
-                      r
-                      u
+                      rq

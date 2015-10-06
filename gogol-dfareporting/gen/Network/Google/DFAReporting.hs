@@ -21,7 +21,7 @@ module Network.Google.DFAReporting
     -- * API
       DFAReportingAPI
     , dFAReportingAPI
-    , dFAReportingURL
+    , dFAReportingRequest
 
     -- * Service Methods
 

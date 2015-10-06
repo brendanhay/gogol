@@ -230,8 +230,8 @@ instance GoogleAuth ActivitiesList' where
 
 instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ListActivitiesResponse
-        request = requestWithRoute defReq appsActivityURL
-        requestWithRoute r u ActivitiesList'{..}
+        request = requestWith appsActivityRequest
+        requestWith rq ActivitiesList'{..}
           = go _alDriveFileId _alDriveAncestorId
               (Just _alGroupingStrategy)
               (Just _alUserId)
@@ -246,7 +246,5 @@ instance GoogleRequest ActivitiesList' where
               _alOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ActivitiesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ActivitiesListResource)
+                      rq

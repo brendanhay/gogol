@@ -16,7 +16,7 @@
 module Network.Google.FusionTables.Types
     (
     -- * Service URL
-      fusionTablesURL
+      fusionTablesRequest
 
     -- * ColumnList
     , ColumnList
@@ -227,9 +227,8 @@ import           Network.Google.FusionTables.Types.Product
 import           Network.Google.FusionTables.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v2' of the Fusion Tables API.
-fusionTablesURL :: BaseUrl
-fusionTablesURL
-  = BaseUrl Https
-      "https://www.googleapis.com/fusiontables/v2/"
-      443
+-- | Default request referring to version 'v2' of the Fusion Tables API.
+fusionTablesRequest :: RequestBuilder
+fusionTablesRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "fusiontables/v2/"

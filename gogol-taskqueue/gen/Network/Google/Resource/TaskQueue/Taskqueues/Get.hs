@@ -172,8 +172,8 @@ instance GoogleAuth TaskqueuesGet' where
 
 instance GoogleRequest TaskqueuesGet' where
         type Rs TaskqueuesGet' = TaskQueue
-        request = requestWithRoute defReq taskQueueURL
-        requestWithRoute r u TaskqueuesGet'{..}
+        request = requestWith taskQueueRequest
+        requestWith rq TaskqueuesGet'{..}
           = go _tasProject _tasTaskqueue _tasGetStats
               _tasQuotaUser
               (Just _tasPrettyPrint)
@@ -183,7 +183,5 @@ instance GoogleRequest TaskqueuesGet' where
               _tasOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy TaskqueuesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TaskqueuesGetResource)
+                      rq

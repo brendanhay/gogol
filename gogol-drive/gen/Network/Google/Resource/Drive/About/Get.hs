@@ -176,8 +176,8 @@ instance GoogleAuth AboutGet' where
 
 instance GoogleRequest AboutGet' where
         type Rs AboutGet' = About
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u AboutGet'{..}
+        request = requestWith driveRequest
+        requestWith rq AboutGet'{..}
           = go (Just _agIncludeSubscribed) _agStartChangeId
               (Just _agMaxChangeIdCount)
               _agQuotaUser
@@ -188,5 +188,4 @@ instance GoogleRequest AboutGet' where
               _agOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy AboutGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy AboutGetResource) rq

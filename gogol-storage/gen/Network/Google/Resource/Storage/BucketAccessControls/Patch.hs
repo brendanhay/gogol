@@ -182,8 +182,8 @@ instance GoogleRequest BucketAccessControlsPatch'
          where
         type Rs BucketAccessControlsPatch' =
              BucketAccessControl
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketAccessControlsPatch'{..}
+        request = requestWith storageRequest
+        requestWith rq BucketAccessControlsPatch'{..}
           = go _bacpBucket _bacpEntity _bacpQuotaUser
               (Just _bacpPrettyPrint)
               _bacpUserIP
@@ -193,7 +193,6 @@ instance GoogleRequest BucketAccessControlsPatch'
               (Just AltJSON)
               _bacpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BucketAccessControlsPatchResource)
-                      r
-                      u
+                      rq

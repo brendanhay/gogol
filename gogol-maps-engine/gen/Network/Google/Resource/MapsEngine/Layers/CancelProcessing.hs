@@ -150,8 +150,8 @@ instance GoogleAuth LayersCancelProcessing' where
 
 instance GoogleRequest LayersCancelProcessing' where
         type Rs LayersCancelProcessing' = ProcessResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u LayersCancelProcessing'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq LayersCancelProcessing'{..}
           = go _lcpId _lcpQuotaUser (Just _lcpPrettyPrint)
               _lcpUserIP
               _lcpFields
@@ -159,7 +159,6 @@ instance GoogleRequest LayersCancelProcessing' where
               _lcpOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LayersCancelProcessingResource)
-                      r
-                      u
+                      rq

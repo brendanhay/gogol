@@ -158,8 +158,8 @@ instance GoogleAuth GroupsUpdate' where
 
 instance GoogleRequest GroupsUpdate' where
         type Rs GroupsUpdate' = Groups
-        request = requestWithRoute defReq groupsSettingsURL
-        requestWithRoute r u GroupsUpdate'{..}
+        request = requestWith groupsSettingsRequest
+        requestWith rq GroupsUpdate'{..}
           = go _guGroupUniqueId _guQuotaUser
               (Just _guPrettyPrint)
               _guUserIP
@@ -169,7 +169,5 @@ instance GoogleRequest GroupsUpdate' where
               (Just AltATOM)
               _guPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy GroupsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy GroupsUpdateResource)
+                      rq

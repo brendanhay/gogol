@@ -225,8 +225,8 @@ instance GoogleAuth BeaconsDeactivate' where
 
 instance GoogleRequest BeaconsDeactivate' where
         type Rs BeaconsDeactivate' = Empty
-        request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconsDeactivate'{..}
+        request = requestWith proximityBeaconRequest
+        requestWith rq BeaconsDeactivate'{..}
           = go _beaBeaconName _beaXgafv _beaUploadProtocol
               (Just _beaPp)
               _beaAccessToken
@@ -240,7 +240,6 @@ instance GoogleRequest BeaconsDeactivate' where
               _beaOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BeaconsDeactivateResource)
-                      r
-                      u
+                      rq

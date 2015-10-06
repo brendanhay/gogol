@@ -254,8 +254,8 @@ instance GoogleAuth ProjectsJobsList' where
 
 instance GoogleRequest ProjectsJobsList' where
         type Rs ProjectsJobsList' = ListJobsResponse
-        request = requestWithRoute defReq dataflowURL
-        requestWithRoute r u ProjectsJobsList'{..}
+        request = requestWith dataflowRequest
+        requestWith rq ProjectsJobsList'{..}
           = go _pjlProjectId _pjlXgafv _pjlUploadProtocol
               (Just _pjlPp)
               _pjlAccessToken
@@ -272,7 +272,6 @@ instance GoogleRequest ProjectsJobsList' where
               _pjlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsJobsListResource)
-                      r
-                      u
+                      rq

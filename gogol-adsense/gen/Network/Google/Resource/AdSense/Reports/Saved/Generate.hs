@@ -190,8 +190,8 @@ instance GoogleAuth ReportsSavedGenerate' where
 instance GoogleRequest ReportsSavedGenerate' where
         type Rs ReportsSavedGenerate' =
              AdsenseReportsGenerateResponse
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u ReportsSavedGenerate'{..}
+        request = requestWith adSenseRequest
+        requestWith rq ReportsSavedGenerate'{..}
           = go _rsgSavedReportId _rsgLocale _rsgStartIndex
               _rsgMaxResults
               _rsgQuotaUser
@@ -202,7 +202,6 @@ instance GoogleRequest ReportsSavedGenerate' where
               _rsgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReportsSavedGenerateResource)
-                      r
-                      u
+                      rq

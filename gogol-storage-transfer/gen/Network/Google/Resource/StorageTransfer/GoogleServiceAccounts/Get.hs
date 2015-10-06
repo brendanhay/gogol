@@ -236,8 +236,8 @@ instance GoogleRequest GoogleServiceAccountsGet'
          where
         type Rs GoogleServiceAccountsGet' =
              GoogleServiceAccount
-        request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u GoogleServiceAccountsGet'{..}
+        request = requestWith storageTransferRequest
+        requestWith rq GoogleServiceAccountsGet'{..}
           = go _gsagProjectId _gsagXgafv _gsagUploadProtocol
               (Just _gsagPp)
               _gsagAccessToken
@@ -251,7 +251,6 @@ instance GoogleRequest GoogleServiceAccountsGet'
               _gsagOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GoogleServiceAccountsGetResource)
-                      r
-                      u
+                      rq

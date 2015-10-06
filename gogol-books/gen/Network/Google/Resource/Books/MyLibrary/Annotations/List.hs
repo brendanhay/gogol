@@ -262,8 +262,8 @@ instance GoogleAuth MyLibraryAnnotationsList' where
 instance GoogleRequest MyLibraryAnnotationsList'
          where
         type Rs MyLibraryAnnotationsList' = Annotations
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u MyLibraryAnnotationsList'{..}
+        request = requestWith booksRequest
+        requestWith rq MyLibraryAnnotationsList'{..}
           = go _mlalContentVersion _mlalShowDeleted
               _mlalUpdatedMax
               _mlalUpdatedMin
@@ -281,7 +281,6 @@ instance GoogleRequest MyLibraryAnnotationsList'
               _mlalOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MyLibraryAnnotationsListResource)
-                      r
-                      u
+                      rq

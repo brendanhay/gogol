@@ -185,8 +185,8 @@ instance GoogleAuth MediaInsert' where
 
 instance GoogleRequest MediaInsert' where
         type Rs MediaInsert' = Media
-        request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u MediaInsert'{..}
+        request = requestWith plusDomainsRequest
+        requestWith rq MediaInsert'{..}
           = go _miUserId _miCollection _miQuotaUser
               (Just _miPrettyPrint)
               _miUserIP
@@ -197,7 +197,4 @@ instance GoogleRequest MediaInsert' where
               _miPayload
               _miMedia
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy MediaInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy MediaInsertResource) rq

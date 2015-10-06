@@ -219,8 +219,8 @@ instance GoogleAuth BeaconsDecommission' where
 
 instance GoogleRequest BeaconsDecommission' where
         type Rs BeaconsDecommission' = Empty
-        request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconsDecommission'{..}
+        request = requestWith proximityBeaconRequest
+        requestWith rq BeaconsDecommission'{..}
           = go _bdBeaconName _bdXgafv _bdUploadProtocol
               (Just _bdPp)
               _bdAccessToken
@@ -234,7 +234,6 @@ instance GoogleRequest BeaconsDecommission' where
               _bdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BeaconsDecommissionResource)
-                      r
-                      u
+                      rq

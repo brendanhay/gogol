@@ -163,8 +163,8 @@ instance GoogleAuth CreativeFieldsInsert' where
 
 instance GoogleRequest CreativeFieldsInsert' where
         type Rs CreativeFieldsInsert' = CreativeField
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldsInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativeFieldsInsert'{..}
           = go _cfiProFileId _cfiQuotaUser
               (Just _cfiPrettyPrint)
               _cfiUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest CreativeFieldsInsert' where
               (Just AltJSON)
               _cfiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CreativeFieldsInsertResource)
-                      r
-                      u
+                      rq

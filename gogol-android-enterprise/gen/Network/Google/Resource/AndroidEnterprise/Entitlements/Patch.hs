@@ -202,9 +202,8 @@ instance GoogleAuth EntitlementsPatch' where
 
 instance GoogleRequest EntitlementsPatch' where
         type Rs EntitlementsPatch' = Entitlement
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u EntitlementsPatch'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq EntitlementsPatch'{..}
           = go _epEnterpriseId _epUserId _epEntitlementId
               _epInstall
               _epQuotaUser
@@ -216,7 +215,6 @@ instance GoogleRequest EntitlementsPatch' where
               (Just AltJSON)
               _epPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EntitlementsPatchResource)
-                      r
-                      u
+                      rq

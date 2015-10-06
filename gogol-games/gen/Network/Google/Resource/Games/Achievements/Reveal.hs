@@ -152,8 +152,8 @@ instance GoogleAuth AchievementsReveal' where
 instance GoogleRequest AchievementsReveal' where
         type Rs AchievementsReveal' =
              AchievementRevealResponse
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u AchievementsReveal'{..}
+        request = requestWith gamesRequest
+        requestWith rq AchievementsReveal'{..}
           = go _arAchievementId _arQuotaUser
               (Just _arPrettyPrint)
               _arUserIP
@@ -162,7 +162,6 @@ instance GoogleRequest AchievementsReveal' where
               _arOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AchievementsRevealResource)
-                      r
-                      u
+                      rq

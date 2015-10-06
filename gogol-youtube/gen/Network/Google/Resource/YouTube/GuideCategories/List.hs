@@ -191,8 +191,8 @@ instance GoogleAuth GuideCategoriesList' where
 instance GoogleRequest GuideCategoriesList' where
         type Rs GuideCategoriesList' =
              GuideCategoryListResponse
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u GuideCategoriesList'{..}
+        request = requestWith youTubeRequest
+        requestWith rq GuideCategoriesList'{..}
           = go (Just _gclPart) _gclRegionCode (Just _gclHl)
               _gclId
               _gclQuotaUser
@@ -203,7 +203,6 @@ instance GoogleRequest GuideCategoriesList' where
               _gclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GuideCategoriesListResource)
-                      r
-                      u
+                      rq

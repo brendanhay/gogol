@@ -165,8 +165,8 @@ instance GoogleAuth OrgUnitsDelete' where
 
 instance GoogleRequest OrgUnitsDelete' where
         type Rs OrgUnitsDelete' = ()
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u OrgUnitsDelete'{..}
+        request = requestWith directoryRequest
+        requestWith rq OrgUnitsDelete'{..}
           = go _oudCustomerId _oudOrgUnitPath _oudQuotaUser
               (Just _oudPrettyPrint)
               _oudUserIP
@@ -175,7 +175,5 @@ instance GoogleRequest OrgUnitsDelete' where
               _oudOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy OrgUnitsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy OrgUnitsDeleteResource)
+                      rq

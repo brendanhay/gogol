@@ -160,9 +160,8 @@ instance GoogleAuth EventsResetMultipleForAllPlayers'
 instance GoogleRequest
          EventsResetMultipleForAllPlayers' where
         type Rs EventsResetMultipleForAllPlayers' = ()
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u
-          EventsResetMultipleForAllPlayers'{..}
+        request = requestWith gamesManagementRequest
+        requestWith rq EventsResetMultipleForAllPlayers'{..}
           = go _ermfapQuotaUser (Just _ermfapPrettyPrint)
               _ermfapUserIP
               _ermfapFields
@@ -171,8 +170,7 @@ instance GoogleRequest
               (Just AltJSON)
               _ermfapPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy EventsResetMultipleForAllPlayersResource)
-                      r
-                      u
+                      rq

@@ -155,9 +155,8 @@ instance GoogleRequest
          ProvisioningCreateAccountTicket' where
         type Rs ProvisioningCreateAccountTicket' =
              AccountTicket
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ProvisioningCreateAccountTicket'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ProvisioningCreateAccountTicket'{..}
           = go _pcatQuotaUser (Just _pcatPrettyPrint)
               _pcatUserIP
               _pcatFields
@@ -166,8 +165,7 @@ instance GoogleRequest
               (Just AltJSON)
               _pcatPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ProvisioningCreateAccountTicketResource)
-                      r
-                      u
+                      rq

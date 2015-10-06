@@ -189,8 +189,8 @@ instance GoogleAuth PermissionsUpdate' where
 
 instance GoogleRequest PermissionsUpdate' where
         type Rs PermissionsUpdate' = Permission
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u PermissionsUpdate'{..}
+        request = requestWith driveRequest
+        requestWith rq PermissionsUpdate'{..}
           = go _puuFileId _puuPermissionId
               (Just _puuTransferOwnership)
               _puuQuotaUser
@@ -202,7 +202,6 @@ instance GoogleRequest PermissionsUpdate' where
               (Just AltJSON)
               _puuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PermissionsUpdateResource)
-                      r
-                      u
+                      rq

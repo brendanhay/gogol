@@ -153,8 +153,8 @@ instance GoogleAuth TurnBasedMatchesDismiss' where
 
 instance GoogleRequest TurnBasedMatchesDismiss' where
         type Rs TurnBasedMatchesDismiss' = ()
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u TurnBasedMatchesDismiss'{..}
+        request = requestWith gamesRequest
+        requestWith rq TurnBasedMatchesDismiss'{..}
           = go _tbmdMatchId _tbmdQuotaUser
               (Just _tbmdPrettyPrint)
               _tbmdUserIP
@@ -163,7 +163,6 @@ instance GoogleRequest TurnBasedMatchesDismiss' where
               _tbmdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TurnBasedMatchesDismissResource)
-                      r
-                      u
+                      rq

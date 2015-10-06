@@ -168,8 +168,8 @@ instance GoogleAuth BucketAccessControlsDelete' where
 instance GoogleRequest BucketAccessControlsDelete'
          where
         type Rs BucketAccessControlsDelete' = ()
-        request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketAccessControlsDelete'{..}
+        request = requestWith storageRequest
+        requestWith rq BucketAccessControlsDelete'{..}
           = go _bacdBucket _bacdEntity _bacdQuotaUser
               (Just _bacdPrettyPrint)
               _bacdUserIP
@@ -178,7 +178,6 @@ instance GoogleRequest BucketAccessControlsDelete'
               _bacdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BucketAccessControlsDeleteResource)
-                      r
-                      u
+                      rq

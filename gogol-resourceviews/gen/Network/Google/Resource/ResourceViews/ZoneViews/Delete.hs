@@ -174,8 +174,8 @@ instance GoogleAuth ZoneViewsDelete' where
 
 instance GoogleRequest ZoneViewsDelete' where
         type Rs ZoneViewsDelete' = Operation
-        request = requestWithRoute defReq resourceViewsURL
-        requestWithRoute r u ZoneViewsDelete'{..}
+        request = requestWith resourceViewsRequest
+        requestWith rq ZoneViewsDelete'{..}
           = go _zvdProject _zvdZone _zvdResourceView
               _zvdQuotaUser
               (Just _zvdPrettyPrint)
@@ -185,7 +185,6 @@ instance GoogleRequest ZoneViewsDelete' where
               _zvdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ZoneViewsDeleteResource)
-                      r
-                      u
+                      rq

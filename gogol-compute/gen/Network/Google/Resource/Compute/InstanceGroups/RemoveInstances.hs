@@ -193,9 +193,8 @@ instance GoogleAuth InstanceGroupsRemoveInstances'
 instance GoogleRequest InstanceGroupsRemoveInstances'
          where
         type Rs InstanceGroupsRemoveInstances' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u
-          InstanceGroupsRemoveInstances'{..}
+        request = requestWith computeRequest
+        requestWith rq InstanceGroupsRemoveInstances'{..}
           = go _igriProject _igriZone _igriInstanceGroup
               _igriQuotaUser
               (Just _igriPrettyPrint)
@@ -206,8 +205,7 @@ instance GoogleRequest InstanceGroupsRemoveInstances'
               (Just AltJSON)
               _igriPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy InstanceGroupsRemoveInstancesResource)
-                      r
-                      u
+                      rq

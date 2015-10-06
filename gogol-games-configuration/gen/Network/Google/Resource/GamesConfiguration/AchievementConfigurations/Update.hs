@@ -166,10 +166,8 @@ instance GoogleRequest
          AchievementConfigurationsUpdate' where
         type Rs AchievementConfigurationsUpdate' =
              AchievementConfiguration
-        request
-          = requestWithRoute defReq gamesConfigurationURL
-        requestWithRoute r u
-          AchievementConfigurationsUpdate'{..}
+        request = requestWith gamesConfigurationRequest
+        requestWith rq AchievementConfigurationsUpdate'{..}
           = go _acuAchievementId _acuQuotaUser
               (Just _acuPrettyPrint)
               _acuUserIP
@@ -179,8 +177,7 @@ instance GoogleRequest
               (Just AltJSON)
               _acuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AchievementConfigurationsUpdateResource)
-                      r
-                      u
+                      rq

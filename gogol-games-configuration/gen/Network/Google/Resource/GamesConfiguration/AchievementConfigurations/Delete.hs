@@ -152,10 +152,8 @@ instance GoogleAuth AchievementConfigurationsDelete'
 instance GoogleRequest
          AchievementConfigurationsDelete' where
         type Rs AchievementConfigurationsDelete' = ()
-        request
-          = requestWithRoute defReq gamesConfigurationURL
-        requestWithRoute r u
-          AchievementConfigurationsDelete'{..}
+        request = requestWith gamesConfigurationRequest
+        requestWith rq AchievementConfigurationsDelete'{..}
           = go _acdAchievementId _acdQuotaUser
               (Just _acdPrettyPrint)
               _acdUserIP
@@ -164,8 +162,7 @@ instance GoogleRequest
               _acdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AchievementConfigurationsDeleteResource)
-                      r
-                      u
+                      rq

@@ -21,7 +21,7 @@ module Network.Google.Books
     -- * API
       BooksAPI
     , booksAPI
-    , booksURL
+    , booksRequest
 
     -- * Service Methods
 

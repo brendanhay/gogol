@@ -157,8 +157,8 @@ instance GoogleAuth PostsDelete' where
 
 instance GoogleRequest PostsDelete' where
         type Rs PostsDelete' = ()
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostsDelete'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PostsDelete'{..}
           = go _pdBlogId _pdPostId _pdQuotaUser
               (Just _pdPrettyPrint)
               _pdUserIP
@@ -167,7 +167,4 @@ instance GoogleRequest PostsDelete' where
               _pdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PostsDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PostsDeleteResource) rq

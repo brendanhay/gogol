@@ -166,8 +166,8 @@ instance GoogleAuth AccountsPermissionsDelete' where
 instance GoogleRequest AccountsPermissionsDelete'
          where
         type Rs AccountsPermissionsDelete' = ()
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsPermissionsDelete'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsPermissionsDelete'{..}
           = go _apdAccountId _apdPermissionId _apdQuotaUser
               (Just _apdPrettyPrint)
               _apdUserIP
@@ -176,7 +176,6 @@ instance GoogleRequest AccountsPermissionsDelete'
               _apdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsPermissionsDeleteResource)
-                      r
-                      u
+                      rq

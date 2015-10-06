@@ -163,8 +163,8 @@ instance GoogleAuth VariantsetsExport' where
 
 instance GoogleRequest VariantsetsExport' where
         type Rs VariantsetsExport' = ExportVariantSetResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsetsExport'{..}
+        request = requestWith genomicsRequest
+        requestWith rq VariantsetsExport'{..}
           = go _veVariantSetId _veQuotaUser
               (Just _vePrettyPrint)
               _veUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest VariantsetsExport' where
               (Just AltJSON)
               _vePayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VariantsetsExportResource)
-                      r
-                      u
+                      rq

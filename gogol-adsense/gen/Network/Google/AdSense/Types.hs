@@ -16,7 +16,7 @@
 module Network.Google.AdSense.Types
     (
     -- * Service URL
-      adSenseURL
+      adSenseRequest
 
     -- * AdClients
     , AdClients
@@ -279,9 +279,8 @@ import           Network.Google.AdSense.Types.Product
 import           Network.Google.AdSense.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1.4' of the AdSense Management API.
-adSenseURL :: BaseUrl
-adSenseURL
-  = BaseUrl Https
-      "https://www.googleapis.com/adsense/v1.4/"
-      443
+-- | Default request referring to version 'v1.4' of the AdSense Management API.
+adSenseRequest :: RequestBuilder
+adSenseRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "adsense/v1.4/"

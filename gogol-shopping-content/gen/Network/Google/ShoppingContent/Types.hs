@@ -16,7 +16,7 @@
 module Network.Google.ShoppingContent.Types
     (
     -- * Service URL
-      shoppingContentURL
+      shoppingContentRequest
 
     -- * OrdersAcknowledgeRequest
     , OrdersAcknowledgeRequest
@@ -499,9 +499,8 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types.Product
 import           Network.Google.ShoppingContent.Types.Sum
 
--- | URL referring to version 'v2sandbox' of the Content API for Shopping.
-shoppingContentURL :: BaseUrl
-shoppingContentURL
-  = BaseUrl Https
-      "https://www.googleapis.com/content/v2sandbox/"
-      443
+-- | Default request referring to version 'v2sandbox' of the Content API for Shopping.
+shoppingContentRequest :: RequestBuilder
+shoppingContentRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "content/v2sandbox/"

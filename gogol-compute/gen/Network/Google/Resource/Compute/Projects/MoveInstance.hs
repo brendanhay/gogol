@@ -164,8 +164,8 @@ instance GoogleAuth ProjectsMoveInstance' where
 
 instance GoogleRequest ProjectsMoveInstance' where
         type Rs ProjectsMoveInstance' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u ProjectsMoveInstance'{..}
+        request = requestWith computeRequest
+        requestWith rq ProjectsMoveInstance'{..}
           = go _pmiProject _pmiQuotaUser (Just _pmiPrettyPrint)
               _pmiUserIP
               _pmiFields
@@ -174,7 +174,6 @@ instance GoogleRequest ProjectsMoveInstance' where
               (Just AltJSON)
               _pmiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsMoveInstanceResource)
-                      r
-                      u
+                      rq

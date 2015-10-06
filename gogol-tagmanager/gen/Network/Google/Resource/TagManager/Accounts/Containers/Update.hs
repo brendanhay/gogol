@@ -189,8 +189,8 @@ instance GoogleAuth AccountsContainersUpdate' where
 instance GoogleRequest AccountsContainersUpdate'
          where
         type Rs AccountsContainersUpdate' = Container
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersUpdate'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersUpdate'{..}
           = go _acuAccountId _acuContainerId _acuFingerprint
               _acuQuotaUser
               (Just _acuPrettyPrint)
@@ -201,7 +201,6 @@ instance GoogleRequest AccountsContainersUpdate'
               (Just AltJSON)
               _acuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsContainersUpdateResource)
-                      r
-                      u
+                      rq

@@ -212,8 +212,8 @@ instance GoogleAuth ChannelSectionsInsert' where
 
 instance GoogleRequest ChannelSectionsInsert' where
         type Rs ChannelSectionsInsert' = ChannelSection
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ChannelSectionsInsert'{..}
+        request = requestWith youTubeRequest
+        requestWith rq ChannelSectionsInsert'{..}
           = go (Just _csiPart) _csiOnBehalfOfContentOwner
               _csiOnBehalfOfContentOwnerChannel
               _csiQuotaUser
@@ -225,7 +225,6 @@ instance GoogleRequest ChannelSectionsInsert' where
               (Just AltJSON)
               _csiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ChannelSectionsInsertResource)
-                      r
-                      u
+                      rq

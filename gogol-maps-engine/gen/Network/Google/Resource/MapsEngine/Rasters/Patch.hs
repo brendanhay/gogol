@@ -155,8 +155,8 @@ instance GoogleAuth RastersPatch' where
 
 instance GoogleRequest RastersPatch' where
         type Rs RastersPatch' = ()
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u RastersPatch'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq RastersPatch'{..}
           = go _rId _rQuotaUser (Just _rPrettyPrint) _rUserIP
               _rFields
               _rKey
@@ -164,7 +164,5 @@ instance GoogleRequest RastersPatch' where
               (Just AltJSON)
               _rPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy RastersPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RastersPatchResource)
+                      rq

@@ -158,8 +158,8 @@ instance GoogleAuth ImagesDelete' where
 
 instance GoogleRequest ImagesDelete' where
         type Rs ImagesDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u ImagesDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq ImagesDelete'{..}
           = go _idProject _idImage _idQuotaUser
               (Just _idPrettyPrint)
               _idUserIP
@@ -168,7 +168,5 @@ instance GoogleRequest ImagesDelete' where
               _idOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ImagesDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ImagesDeleteResource)
+                      rq

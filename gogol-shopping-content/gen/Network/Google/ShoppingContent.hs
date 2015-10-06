@@ -22,7 +22,7 @@ module Network.Google.ShoppingContent
     -- * API
       ShoppingContentAPI
     , shoppingContentAPI
-    , shoppingContentURL
+    , shoppingContentRequest
 
     -- * Service Methods
 

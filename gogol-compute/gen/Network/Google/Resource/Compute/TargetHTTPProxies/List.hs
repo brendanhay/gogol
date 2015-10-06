@@ -206,8 +206,8 @@ instance GoogleAuth TargetHTTPProxiesList' where
 
 instance GoogleRequest TargetHTTPProxiesList' where
         type Rs TargetHTTPProxiesList' = TargetHTTPProxyList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetHTTPProxiesList'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetHTTPProxiesList'{..}
           = go _thttpplProject _thttpplFilter _thttpplPageToken
               (Just _thttpplMaxResults)
               _thttpplQuotaUser
@@ -218,7 +218,6 @@ instance GoogleRequest TargetHTTPProxiesList' where
               _thttpplOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetHTTPProxiesListResource)
-                      r
-                      u
+                      rq

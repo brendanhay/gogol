@@ -246,8 +246,8 @@ instance GoogleRequest InstanceGroupsListInstances'
          where
         type Rs InstanceGroupsListInstances' =
              InstanceGroupsListInstances
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceGroupsListInstances'{..}
+        request = requestWith computeRequest
+        requestWith rq InstanceGroupsListInstances'{..}
           = go _igliProject _igliZone _igliInstanceGroup
               _igliFilter
               _igliPageToken
@@ -261,7 +261,6 @@ instance GoogleRequest InstanceGroupsListInstances'
               (Just AltJSON)
               _igliPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstanceGroupsListInstancesResource)
-                      r
-                      u
+                      rq

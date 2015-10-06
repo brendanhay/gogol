@@ -157,8 +157,8 @@ instance GoogleAuth AccountsUpdate' where
 
 instance GoogleRequest AccountsUpdate' where
         type Rs AccountsUpdate' = Account
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u AccountsUpdate'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq AccountsUpdate'{..}
           = go _auId _auQuotaUser (Just _auPrettyPrint)
               _auUserIP
               _auFields
@@ -167,7 +167,5 @@ instance GoogleRequest AccountsUpdate' where
               (Just AltJSON)
               _auPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AccountsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AccountsUpdateResource)
+                      rq

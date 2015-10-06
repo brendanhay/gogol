@@ -138,15 +138,14 @@ instance GoogleAuth FilesEmptyTrash' where
 
 instance GoogleRequest FilesEmptyTrash' where
         type Rs FilesEmptyTrash' = ()
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesEmptyTrash'{..}
+        request = requestWith driveRequest
+        requestWith rq FilesEmptyTrash'{..}
           = go _fetQuotaUser (Just _fetPrettyPrint) _fetUserIP
               _fetFields
               _fetKey
               _fetOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy FilesEmptyTrashResource)
-                      r
-                      u
+                      rq

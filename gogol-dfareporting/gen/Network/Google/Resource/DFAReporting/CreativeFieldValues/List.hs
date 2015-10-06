@@ -246,8 +246,8 @@ instance GoogleAuth CreativeFieldValuesList' where
 instance GoogleRequest CreativeFieldValuesList' where
         type Rs CreativeFieldValuesList' =
              CreativeFieldValuesListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldValuesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativeFieldValuesList'{..}
           = go _cfvlProFileId _cfvlCreativeFieldId
               _cfvlSearchString
               (_cfvlIds ^. _Default)
@@ -263,7 +263,6 @@ instance GoogleRequest CreativeFieldValuesList' where
               _cfvlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CreativeFieldValuesListResource)
-                      r
-                      u
+                      rq

@@ -157,8 +157,8 @@ instance GoogleAuth SizesInsert' where
 
 instance GoogleRequest SizesInsert' where
         type Rs SizesInsert' = Size
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SizesInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq SizesInsert'{..}
           = go _sProFileId _sQuotaUser (Just _sPrettyPrint)
               _sUserIP
               _sFields
@@ -167,7 +167,4 @@ instance GoogleRequest SizesInsert' where
               (Just AltJSON)
               _sPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SizesInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SizesInsertResource) rq

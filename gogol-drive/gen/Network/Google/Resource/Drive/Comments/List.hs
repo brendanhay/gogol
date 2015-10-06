@@ -203,8 +203,8 @@ instance GoogleAuth CommentsList' where
 
 instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentList
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u CommentsList'{..}
+        request = requestWith driveRequest
+        requestWith rq CommentsList'{..}
           = go _comFileId _comUpdatedMin _comPageToken
               (Just _comMaxResults)
               (Just _comIncludeDeleted)
@@ -216,7 +216,5 @@ instance GoogleRequest CommentsList' where
               _comOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CommentsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CommentsListResource)
+                      rq

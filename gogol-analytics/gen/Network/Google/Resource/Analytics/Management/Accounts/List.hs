@@ -163,8 +163,8 @@ instance GoogleAuth ManagementAccountsList' where
 
 instance GoogleRequest ManagementAccountsList' where
         type Rs ManagementAccountsList' = Accounts
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementAccountsList'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementAccountsList'{..}
           = go _malStartIndex _malMaxResults _malQuotaUser
               (Just _malPrettyPrint)
               _malUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest ManagementAccountsList' where
               _malOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementAccountsListResource)
-                      r
-                      u
+                      rq

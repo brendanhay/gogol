@@ -199,8 +199,8 @@ instance GoogleAuth InstanceTemplatesList' where
 
 instance GoogleRequest InstanceTemplatesList' where
         type Rs InstanceTemplatesList' = InstanceTemplateList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceTemplatesList'{..}
+        request = requestWith computeRequest
+        requestWith rq InstanceTemplatesList'{..}
           = go _itlProject _itlFilter _itlPageToken
               (Just _itlMaxResults)
               _itlQuotaUser
@@ -211,7 +211,6 @@ instance GoogleRequest InstanceTemplatesList' where
               _itlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstanceTemplatesListResource)
-                      r
-                      u
+                      rq

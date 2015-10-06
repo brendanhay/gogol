@@ -21,7 +21,7 @@ module Network.Google.Fitness
     -- * API
       FitnessAPI
     , fitnessAPI
-    , fitnessURL
+    , fitnessRequest
 
     -- * Service Methods
 

@@ -159,8 +159,8 @@ instance GoogleAuth MembersGet' where
 
 instance GoogleRequest MembersGet' where
         type Rs MembersGet' = Member
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u MembersGet'{..}
+        request = requestWith directoryRequest
+        requestWith rq MembersGet'{..}
           = go _mgGroupKey _mgMemberKey _mgQuotaUser
               (Just _mgPrettyPrint)
               _mgUserIP
@@ -169,6 +169,4 @@ instance GoogleRequest MembersGet' where
               _mgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy MembersGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy MembersGetResource) rq

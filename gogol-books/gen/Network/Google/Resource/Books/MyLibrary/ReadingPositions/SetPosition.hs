@@ -230,8 +230,8 @@ instance GoogleAuth
 instance GoogleRequest
          MyLibraryReadingPositionsSetPosition' where
         type Rs MyLibraryReadingPositionsSetPosition' = ()
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u
+        request = requestWith booksRequest
+        requestWith rq
           MyLibraryReadingPositionsSetPosition'{..}
           = go _mlrpspVolumeId (Just _mlrpspTimestamp)
               (Just _mlrpspPosition)
@@ -247,8 +247,7 @@ instance GoogleRequest
               _mlrpspOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy MyLibraryReadingPositionsSetPositionResource)
-                      r
-                      u
+                      rq

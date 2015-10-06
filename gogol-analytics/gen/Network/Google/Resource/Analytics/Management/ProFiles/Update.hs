@@ -193,8 +193,8 @@ instance GoogleAuth ManagementProFilesUpdate' where
 instance GoogleRequest ManagementProFilesUpdate'
          where
         type Rs ManagementProFilesUpdate' = ProFile
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementProFilesUpdate'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementProFilesUpdate'{..}
           = go _mpfuAccountId _mpfuWebPropertyId _mpfuProFileId
               _mpfuQuotaUser
               (Just _mpfuPrettyPrint)
@@ -205,7 +205,6 @@ instance GoogleRequest ManagementProFilesUpdate'
               (Just AltJSON)
               _mpfuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementProFilesUpdateResource)
-                      r
-                      u
+                      rq

@@ -152,8 +152,8 @@ instance GoogleAuth InAppProductsBatch' where
 instance GoogleRequest InAppProductsBatch' where
         type Rs InAppProductsBatch' =
              InAppProductsBatchResponse
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u InAppProductsBatch'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq InAppProductsBatch'{..}
           = go _iapbQuotaUser (Just _iapbPrettyPrint)
               _iapbUserIP
               _iapbFields
@@ -162,7 +162,6 @@ instance GoogleRequest InAppProductsBatch' where
               (Just AltJSON)
               _iapbPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InAppProductsBatchResource)
-                      r
-                      u
+                      rq

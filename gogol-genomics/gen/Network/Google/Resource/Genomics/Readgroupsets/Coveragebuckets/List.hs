@@ -248,9 +248,8 @@ instance GoogleRequest
          ReadgroupsetsCoveragebucketsList' where
         type Rs ReadgroupsetsCoveragebucketsList' =
              ListCoverageBucketsResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u
-          ReadgroupsetsCoveragebucketsList'{..}
+        request = requestWith genomicsRequest
+        requestWith rq ReadgroupsetsCoveragebucketsList'{..}
           = go _rclReadGroupSetId _rclRangeEnd _rclRangeStart
               _rclTargetBucketWidth
               _rclRangeReferenceName
@@ -264,8 +263,7 @@ instance GoogleRequest
               _rclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ReadgroupsetsCoveragebucketsListResource)
-                      r
-                      u
+                      rq

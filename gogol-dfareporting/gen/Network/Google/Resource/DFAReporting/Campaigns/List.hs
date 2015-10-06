@@ -316,8 +316,8 @@ instance GoogleAuth CampaignsList' where
 
 instance GoogleRequest CampaignsList' where
         type Rs CampaignsList' = CampaignsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CampaignsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CampaignsList'{..}
           = go _ccProFileId (_ccExcludedIds ^. _Default)
               _ccSearchString
               (_ccIds ^. _Default)
@@ -339,7 +339,5 @@ instance GoogleRequest CampaignsList' where
               _ccOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CampaignsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CampaignsListResource)
+                      rq

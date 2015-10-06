@@ -249,8 +249,8 @@ instance GoogleAuth AppsModulesVersionsCreate' where
 instance GoogleRequest AppsModulesVersionsCreate'
          where
         type Rs AppsModulesVersionsCreate' = Operation
-        request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsModulesVersionsCreate'{..}
+        request = requestWith appEngineRequest
+        requestWith rq AppsModulesVersionsCreate'{..}
           = go _amvcAppsId _amvcModulesId _amvcXgafv
               _amvcUploadProtocol
               (Just _amvcPp)
@@ -266,7 +266,6 @@ instance GoogleRequest AppsModulesVersionsCreate'
               (Just AltJSON)
               _amvcPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AppsModulesVersionsCreateResource)
-                      r
-                      u
+                      rq

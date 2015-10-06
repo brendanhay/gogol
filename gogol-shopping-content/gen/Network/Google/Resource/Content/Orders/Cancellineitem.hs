@@ -170,8 +170,8 @@ instance GoogleAuth OrdersCancellineitem' where
 instance GoogleRequest OrdersCancellineitem' where
         type Rs OrdersCancellineitem' =
              OrdersCancelLineItemResponse
-        request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersCancellineitem'{..}
+        request = requestWith shoppingContentRequest
+        requestWith rq OrdersCancellineitem'{..}
           = go _oMerchantId _oOrderId _oQuotaUser
               (Just _oPrettyPrint)
               _oUserIP
@@ -181,7 +181,6 @@ instance GoogleRequest OrdersCancellineitem' where
               (Just AltJSON)
               _oPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OrdersCancellineitemResource)
-                      r
-                      u
+                      rq

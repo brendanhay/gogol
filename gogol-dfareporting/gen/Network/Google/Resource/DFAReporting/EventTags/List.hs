@@ -290,8 +290,8 @@ instance GoogleAuth EventTagsList' where
 
 instance GoogleRequest EventTagsList' where
         type Rs EventTagsList' = EventTagsListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u EventTagsList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq EventTagsList'{..}
           = go _etlProFileId _etlDefinitionsOnly
               (_etlEventTagTypes ^. _Default)
               _etlEnabled
@@ -310,7 +310,5 @@ instance GoogleRequest EventTagsList' where
               _etlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EventTagsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EventTagsListResource)
+                      rq

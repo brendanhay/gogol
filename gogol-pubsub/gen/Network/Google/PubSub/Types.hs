@@ -16,7 +16,7 @@
 module Network.Google.PubSub.Types
     (
     -- * Service URL
-      pubSubURL
+      pubSubRequest
 
     -- * PushConfig
     , PushConfig
@@ -151,7 +151,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types.Product
 import           Network.Google.PubSub.Types.Sum
 
--- | URL referring to version 'v1beta2' of the Google Cloud Pub/Sub API.
-pubSubURL :: BaseUrl
-pubSubURL
-  = BaseUrl Https "https://pubsub.googleapis.com/" 443
+-- | Default request referring to version 'v1beta2' of the Google Cloud Pub/Sub API.
+pubSubRequest :: RequestBuilder
+pubSubRequest
+  = defaultRequest "https://pubsub.googleapis.com/" ""

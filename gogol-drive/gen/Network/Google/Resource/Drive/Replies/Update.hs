@@ -188,8 +188,8 @@ instance GoogleAuth RepliesUpdate' where
 
 instance GoogleRequest RepliesUpdate' where
         type Rs RepliesUpdate' = CommentReply
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u RepliesUpdate'{..}
+        request = requestWith driveRequest
+        requestWith rq RepliesUpdate'{..}
           = go _repFileId _repCommentId _repReplyId
               _repQuotaUser
               (Just _repPrettyPrint)
@@ -200,7 +200,5 @@ instance GoogleRequest RepliesUpdate' where
               (Just AltJSON)
               _repPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy RepliesUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RepliesUpdateResource)
+                      rq

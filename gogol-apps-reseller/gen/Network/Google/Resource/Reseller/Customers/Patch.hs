@@ -160,8 +160,8 @@ instance GoogleAuth CustomersPatch' where
 
 instance GoogleRequest CustomersPatch' where
         type Rs CustomersPatch' = Customer
-        request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u CustomersPatch'{..}
+        request = requestWith appsResellerRequest
+        requestWith rq CustomersPatch'{..}
           = go _cpCustomerId _cpQuotaUser (Just _cpPrettyPrint)
               _cpUserIP
               _cpFields
@@ -170,7 +170,5 @@ instance GoogleRequest CustomersPatch' where
               (Just AltJSON)
               _cpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CustomersPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CustomersPatchResource)
+                      rq

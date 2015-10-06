@@ -174,8 +174,8 @@ instance GoogleAuth ZonesList' where
 
 instance GoogleRequest ZonesList' where
         type Rs ZonesList' = ZoneList
-        request = requestWithRoute defReq autoscalerURL
-        requestWithRoute r u ZonesList'{..}
+        request = requestWith autoscalerRequest
+        requestWith rq ZonesList'{..}
           = go _zlProject _zlFilter _zlPageToken
               (Just _zlMaxResults)
               _zlQuotaUser
@@ -186,6 +186,4 @@ instance GoogleRequest ZonesList' where
               _zlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ZonesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ZonesListResource) rq

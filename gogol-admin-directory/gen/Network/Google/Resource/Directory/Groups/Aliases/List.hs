@@ -150,8 +150,8 @@ instance GoogleAuth GroupsAliasesList' where
 
 instance GoogleRequest GroupsAliasesList' where
         type Rs GroupsAliasesList' = Aliases
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u GroupsAliasesList'{..}
+        request = requestWith directoryRequest
+        requestWith rq GroupsAliasesList'{..}
           = go _galGroupKey _galQuotaUser
               (Just _galPrettyPrint)
               _galUserIP
@@ -160,7 +160,6 @@ instance GoogleRequest GroupsAliasesList' where
               _galOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GroupsAliasesListResource)
-                      r
-                      u
+                      rq

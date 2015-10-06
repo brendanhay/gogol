@@ -155,8 +155,8 @@ instance GoogleAuth TablesGet' where
 
 instance GoogleRequest TablesGet' where
         type Rs TablesGet' = Table
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u TablesGet'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesGet'{..}
           = go _tgId _tgVersion _tgQuotaUser
               (Just _tgPrettyPrint)
               _tgUserIP
@@ -165,6 +165,4 @@ instance GoogleRequest TablesGet' where
               _tgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TablesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy TablesGetResource) rq

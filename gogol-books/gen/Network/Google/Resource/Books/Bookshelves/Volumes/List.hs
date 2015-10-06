@@ -210,8 +210,8 @@ instance GoogleAuth BookshelvesVolumesList' where
 
 instance GoogleRequest BookshelvesVolumesList' where
         type Rs BookshelvesVolumesList' = Volumes
-        request = requestWithRoute defReq booksURL
-        requestWithRoute r u BookshelvesVolumesList'{..}
+        request = requestWith booksRequest
+        requestWith rq BookshelvesVolumesList'{..}
           = go _bvlUserId _bvlShelf _bvlSource _bvlStartIndex
               _bvlMaxResults
               _bvlShowPreOrders
@@ -223,7 +223,6 @@ instance GoogleRequest BookshelvesVolumesList' where
               _bvlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BookshelvesVolumesListResource)
-                      r
-                      u
+                      rq

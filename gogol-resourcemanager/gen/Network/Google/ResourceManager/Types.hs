@@ -16,7 +16,7 @@
 module Network.Google.ResourceManager.Types
     (
     -- * Service URL
-      resourceManagerURL
+      resourceManagerRequest
 
     -- * ResourceId
     , ResourceId
@@ -104,9 +104,9 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types.Product
 import           Network.Google.ResourceManager.Types.Sum
 
--- | URL referring to version 'v1beta1' of the Google Cloud Resource Manager API.
-resourceManagerURL :: BaseUrl
-resourceManagerURL
-  = BaseUrl Https
+-- | Default request referring to version 'v1beta1' of the Google Cloud Resource Manager API.
+resourceManagerRequest :: RequestBuilder
+resourceManagerRequest
+  = defaultRequest
       "https://cloudresourcemanager.googleapis.com/"
-      443
+      ""

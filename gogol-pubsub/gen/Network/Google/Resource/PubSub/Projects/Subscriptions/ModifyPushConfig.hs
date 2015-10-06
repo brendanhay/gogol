@@ -244,8 +244,8 @@ instance GoogleRequest
          ProjectsSubscriptionsModifyPushConfig' where
         type Rs ProjectsSubscriptionsModifyPushConfig' =
              Empty
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u
+        request = requestWith pubSubRequest
+        requestWith rq
           ProjectsSubscriptionsModifyPushConfig'{..}
           = go _psmpcSubscription _psmpcXgafv
               _psmpcUploadProtocol
@@ -262,8 +262,7 @@ instance GoogleRequest
               (Just AltJSON)
               _psmpcPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ProjectsSubscriptionsModifyPushConfigResource)
-                      r
-                      u
+                      rq

@@ -16,7 +16,7 @@
 module Network.Google.LatencyTest.Types
     (
     -- * Service URL
-      latencyTestURL
+      latencyTestRequest
 
     -- * IntValue
     , IntValue
@@ -64,9 +64,9 @@ import           Network.Google.LatencyTest.Types.Product
 import           Network.Google.LatencyTest.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v2' of the Google Cloud Network Performance Monitoring API.
-latencyTestURL :: BaseUrl
-latencyTestURL
-  = BaseUrl Https
-      "https://cloudlatencytest-pa.googleapis.com/v2/statscollection/"
-      443
+-- | Default request referring to version 'v2' of the Google Cloud Network Performance Monitoring API.
+latencyTestRequest :: RequestBuilder
+latencyTestRequest
+  = defaultRequest
+      "https://cloudlatencytest-pa.googleapis.com/"
+      "v2/statscollection/"

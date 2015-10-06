@@ -190,8 +190,8 @@ instance GoogleAuth RegionsList' where
 
 instance GoogleRequest RegionsList' where
         type Rs RegionsList' = RegionList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u RegionsList'{..}
+        request = requestWith computeRequest
+        requestWith rq RegionsList'{..}
           = go _rProject _rFilter _rPageToken
               (Just _rMaxResults)
               _rQuotaUser
@@ -202,7 +202,4 @@ instance GoogleRequest RegionsList' where
               _rOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy RegionsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RegionsListResource) rq

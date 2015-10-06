@@ -196,9 +196,8 @@ instance GoogleRequest
          ManagementCustomDimensionsList' where
         type Rs ManagementCustomDimensionsList' =
              CustomDimensions
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementCustomDimensionsList'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementCustomDimensionsList'{..}
           = go _mcdlAccountId _mcdlWebPropertyId
               _mcdlStartIndex
               _mcdlMaxResults
@@ -210,8 +209,7 @@ instance GoogleRequest
               _mcdlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementCustomDimensionsListResource)
-                      r
-                      u
+                      rq

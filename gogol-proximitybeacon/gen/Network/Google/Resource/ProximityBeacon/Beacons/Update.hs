@@ -240,8 +240,8 @@ instance GoogleAuth BeaconsUpdate' where
 
 instance GoogleRequest BeaconsUpdate' where
         type Rs BeaconsUpdate' = Beacon
-        request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconsUpdate'{..}
+        request = requestWith proximityBeaconRequest
+        requestWith rq BeaconsUpdate'{..}
           = go _buBeaconName _buXgafv _buUploadProtocol
               (Just _buPp)
               _buAccessToken
@@ -256,7 +256,5 @@ instance GoogleRequest BeaconsUpdate' where
               (Just AltJSON)
               _buPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy BeaconsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy BeaconsUpdateResource)
+                      rq

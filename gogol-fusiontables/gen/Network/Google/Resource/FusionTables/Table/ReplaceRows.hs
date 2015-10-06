@@ -227,8 +227,8 @@ instance GoogleAuth TableReplaceRows' where
 
 instance GoogleRequest TableReplaceRows' where
         type Rs TableReplaceRows' = Task
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TableReplaceRows'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TableReplaceRows'{..}
           = go _trrTableId _trrStartLine _trrEndLine
               _trrDelimiter
               _trrEncoding
@@ -242,7 +242,6 @@ instance GoogleRequest TableReplaceRows' where
               (Just AltJSON)
               _trrMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TableReplaceRowsResource)
-                      r
-                      u
+                      rq

@@ -153,8 +153,8 @@ instance GoogleAuth PretargetingConfigList' where
 instance GoogleRequest PretargetingConfigList' where
         type Rs PretargetingConfigList' =
              PretargetingConfigList
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u PretargetingConfigList'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq PretargetingConfigList'{..}
           = go _pclAccountId _pclQuotaUser
               (Just _pclPrettyPrint)
               _pclUserIP
@@ -163,7 +163,6 @@ instance GoogleRequest PretargetingConfigList' where
               _pclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PretargetingConfigListResource)
-                      r
-                      u
+                      rq

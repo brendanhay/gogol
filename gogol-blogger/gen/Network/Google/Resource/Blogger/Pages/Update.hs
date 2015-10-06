@@ -198,8 +198,8 @@ instance GoogleAuth PagesUpdate' where
 
 instance GoogleRequest PagesUpdate' where
         type Rs PagesUpdate' = Page
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PagesUpdate'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PagesUpdate'{..}
           = go _puuBlogId _puuPageId _puuRevert _puuPublish
               _puuQuotaUser
               (Just _puuPrettyPrint)
@@ -210,7 +210,4 @@ instance GoogleRequest PagesUpdate' where
               (Just AltJSON)
               _puuPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PagesUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PagesUpdateResource) rq

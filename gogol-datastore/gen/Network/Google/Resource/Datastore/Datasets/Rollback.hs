@@ -159,8 +159,8 @@ instance GoogleAuth DatasetsRollback' where
 
 instance GoogleRequest DatasetsRollback' where
         type Rs DatasetsRollback' = RollbackResponse
-        request = requestWithRoute defReq datastoreURL
-        requestWithRoute r u DatasetsRollback'{..}
+        request = requestWith datastoreRequest
+        requestWith rq DatasetsRollback'{..}
           = go _drDatasetId _drQuotaUser (Just _drPrettyPrint)
               _drUserIP
               _drFields
@@ -169,7 +169,6 @@ instance GoogleRequest DatasetsRollback' where
               (Just AltJSON)
               _drPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DatasetsRollbackResource)
-                      r
-                      u
+                      rq

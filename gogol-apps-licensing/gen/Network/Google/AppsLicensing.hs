@@ -21,7 +21,7 @@ module Network.Google.AppsLicensing
     -- * API
       AppsLicensingAPI
     , appsLicensingAPI
-    , appsLicensingURL
+    , appsLicensingRequest
 
     -- * Service Methods
 

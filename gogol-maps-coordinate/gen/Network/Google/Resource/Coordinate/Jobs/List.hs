@@ -193,8 +193,8 @@ instance GoogleAuth JobsList' where
 
 instance GoogleRequest JobsList' where
         type Rs JobsList' = JobListResponse
-        request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u JobsList'{..}
+        request = requestWith mapsCoordinateRequest
+        requestWith rq JobsList'{..}
           = go _jlTeamId _jlMinModifiedTimestampMs
               _jlOmitJobChanges
               _jlPageToken
@@ -207,5 +207,4 @@ instance GoogleRequest JobsList' where
               _jlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsListResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy JobsListResource) rq

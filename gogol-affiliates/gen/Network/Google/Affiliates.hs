@@ -21,7 +21,7 @@ module Network.Google.Affiliates
     -- * API
       AffiliatesAPI
     , affiliatesAPI
-    , affiliatesURL
+    , affiliatesRequest
 
     -- * Service Methods
 

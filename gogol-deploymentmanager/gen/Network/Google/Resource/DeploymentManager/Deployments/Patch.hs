@@ -216,9 +216,8 @@ instance GoogleAuth DeploymentsPatch' where
 
 instance GoogleRequest DeploymentsPatch' where
         type Rs DeploymentsPatch' = Operation
-        request
-          = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u DeploymentsPatch'{..}
+        request = requestWith deploymentManagerRequest
+        requestWith rq DeploymentsPatch'{..}
           = go _dpProject _dpDeployment (Just _dpCreatePolicy)
               (Just _dpUpdatePolicy)
               (Just _dpDeletePolicy)
@@ -231,7 +230,6 @@ instance GoogleRequest DeploymentsPatch' where
               (Just AltJSON)
               _dpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DeploymentsPatchResource)
-                      r
-                      u
+                      rq

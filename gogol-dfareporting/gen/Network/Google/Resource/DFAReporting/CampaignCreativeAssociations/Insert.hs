@@ -186,8 +186,8 @@ instance GoogleRequest
          CampaignCreativeAssociationsInsert' where
         type Rs CampaignCreativeAssociationsInsert' =
              CampaignCreativeAssociation
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u
+        request = requestWith dFAReportingRequest
+        requestWith rq
           CampaignCreativeAssociationsInsert'{..}
           = go _ccaiProFileId _ccaiCampaignId _ccaiQuotaUser
               (Just _ccaiPrettyPrint)
@@ -198,8 +198,7 @@ instance GoogleRequest
               (Just AltJSON)
               _ccaiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy CampaignCreativeAssociationsInsertResource)
-                      r
-                      u
+                      rq

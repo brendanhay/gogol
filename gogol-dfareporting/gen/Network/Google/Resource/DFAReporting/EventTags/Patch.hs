@@ -173,8 +173,8 @@ instance GoogleAuth EventTagsPatch' where
 
 instance GoogleRequest EventTagsPatch' where
         type Rs EventTagsPatch' = EventTag
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u EventTagsPatch'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq EventTagsPatch'{..}
           = go _etpProFileId (Just _etpId) _etpQuotaUser
               (Just _etpPrettyPrint)
               _etpUserIP
@@ -184,7 +184,5 @@ instance GoogleRequest EventTagsPatch' where
               (Just AltJSON)
               _etpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EventTagsPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EventTagsPatchResource)
+                      rq

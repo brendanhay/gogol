@@ -381,8 +381,8 @@ instance GoogleAuth CompaniesGet' where
 
 instance GoogleRequest CompaniesGet' where
         type Rs CompaniesGet' = GetCompanyResponse
-        request = requestWithRoute defReq partnersURL
-        requestWithRoute r u CompaniesGet'{..}
+        request = requestWith partnersRequest
+        requestWith rq CompaniesGet'{..}
           = go _cgCompanyId _cgXgafv _cgCurrencyCode
               _cgUploadProtocol
               _cgOrderBy
@@ -407,7 +407,5 @@ instance GoogleRequest CompaniesGet' where
               _cgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CompaniesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CompaniesGetResource)
+                      rq

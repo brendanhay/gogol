@@ -157,8 +157,8 @@ instance GoogleAuth LayersCreate' where
 
 instance GoogleRequest LayersCreate' where
         type Rs LayersCreate' = Layer
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u LayersCreate'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq LayersCreate'{..}
           = go _lcProcess _lcQuotaUser (Just _lcPrettyPrint)
               _lcUserIP
               _lcFields
@@ -167,7 +167,5 @@ instance GoogleRequest LayersCreate' where
               (Just AltJSON)
               _lcPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy LayersCreateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy LayersCreateResource)
+                      rq

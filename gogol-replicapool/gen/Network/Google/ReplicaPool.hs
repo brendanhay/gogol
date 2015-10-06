@@ -22,7 +22,7 @@ module Network.Google.ReplicaPool
     -- * API
       ReplicaPoolAPI
     , replicaPoolAPI
-    , replicaPoolURL
+    , replicaPoolRequest
 
     -- * Service Methods
 

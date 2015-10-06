@@ -183,8 +183,8 @@ instance GoogleAuth GroupsList' where
 
 instance GoogleRequest GroupsList' where
         type Rs GroupsList' = GroupListResponse
-        request = requestWithRoute defReq youTubeAnalyticsURL
-        requestWithRoute r u GroupsList'{..}
+        request = requestWith youTubeAnalyticsRequest
+        requestWith rq GroupsList'{..}
           = go _glMine _glOnBehalfOfContentOwner _glId
               _glQuotaUser
               (Just _glPrettyPrint)
@@ -194,6 +194,4 @@ instance GoogleRequest GroupsList' where
               _glOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy GroupsListResource) rq

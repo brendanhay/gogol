@@ -172,8 +172,8 @@ instance GoogleAuth ACLPatch' where
 
 instance GoogleRequest ACLPatch' where
         type Rs ACLPatch' = ACLRule
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u ACLPatch'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq ACLPatch'{..}
           = go _apCalendarId _apRuleId _apQuotaUser
               (Just _apPrettyPrint)
               _apUserIP
@@ -183,5 +183,4 @@ instance GoogleRequest ACLPatch' where
               (Just AltJSON)
               _apPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy ACLPatchResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy ACLPatchResource) rq

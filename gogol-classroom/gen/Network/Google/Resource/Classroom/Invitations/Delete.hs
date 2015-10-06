@@ -222,8 +222,8 @@ instance GoogleAuth InvitationsDelete' where
 
 instance GoogleRequest InvitationsDelete' where
         type Rs InvitationsDelete' = Empty
-        request = requestWithRoute defReq classroomURL
-        requestWithRoute r u InvitationsDelete'{..}
+        request = requestWith classroomRequest
+        requestWith rq InvitationsDelete'{..}
           = go _idId _idXgafv _idUploadProtocol (Just _idPp)
               _idAccessToken
               _idUploadType
@@ -236,7 +236,6 @@ instance GoogleRequest InvitationsDelete' where
               _idOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InvitationsDeleteResource)
-                      r
-                      u
+                      rq

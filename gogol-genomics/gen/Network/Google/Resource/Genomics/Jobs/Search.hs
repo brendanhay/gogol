@@ -148,8 +148,8 @@ instance GoogleAuth JobsSearch' where
 
 instance GoogleRequest JobsSearch' where
         type Rs JobsSearch' = SearchJobsResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u JobsSearch'{..}
+        request = requestWith genomicsRequest
+        requestWith rq JobsSearch'{..}
           = go _jsQuotaUser (Just _jsPrettyPrint) _jsUserIP
               _jsFields
               _jsKey
@@ -157,6 +157,4 @@ instance GoogleRequest JobsSearch' where
               (Just AltJSON)
               _jsPayload
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsSearchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy JobsSearchResource) rq

@@ -154,8 +154,8 @@ instance GoogleAuth AccountsPreferredDealsList' where
 instance GoogleRequest AccountsPreferredDealsList'
          where
         type Rs AccountsPreferredDealsList' = PreferredDeals
-        request = requestWithRoute defReq adExchangeSellerURL
-        requestWithRoute r u AccountsPreferredDealsList'{..}
+        request = requestWith adExchangeSellerRequest
+        requestWith rq AccountsPreferredDealsList'{..}
           = go _apdlAccountId _apdlQuotaUser
               (Just _apdlPrettyPrint)
               _apdlUserIP
@@ -164,7 +164,6 @@ instance GoogleRequest AccountsPreferredDealsList'
               _apdlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsPreferredDealsListResource)
-                      r
-                      u
+                      rq

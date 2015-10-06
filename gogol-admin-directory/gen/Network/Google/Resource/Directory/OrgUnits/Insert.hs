@@ -163,8 +163,8 @@ instance GoogleAuth OrgUnitsInsert' where
 
 instance GoogleRequest OrgUnitsInsert' where
         type Rs OrgUnitsInsert' = OrgUnit
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u OrgUnitsInsert'{..}
+        request = requestWith directoryRequest
+        requestWith rq OrgUnitsInsert'{..}
           = go _ouiCustomerId _ouiQuotaUser
               (Just _ouiPrettyPrint)
               _ouiUserIP
@@ -174,7 +174,5 @@ instance GoogleRequest OrgUnitsInsert' where
               (Just AltJSON)
               _ouiPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy OrgUnitsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy OrgUnitsInsertResource)
+                      rq

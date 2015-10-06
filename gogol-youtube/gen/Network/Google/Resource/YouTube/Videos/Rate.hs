@@ -158,8 +158,8 @@ instance GoogleAuth VideosRate' where
 
 instance GoogleRequest VideosRate' where
         type Rs VideosRate' = ()
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideosRate'{..}
+        request = requestWith youTubeRequest
+        requestWith rq VideosRate'{..}
           = go (Just _vrId) (Just _vrRating) _vrQuotaUser
               (Just _vrPrettyPrint)
               _vrUserIP
@@ -168,6 +168,4 @@ instance GoogleRequest VideosRate' where
               _vrOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy VideosRateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy VideosRateResource) rq

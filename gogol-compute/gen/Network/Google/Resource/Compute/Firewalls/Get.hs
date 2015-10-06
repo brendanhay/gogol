@@ -159,8 +159,8 @@ instance GoogleAuth FirewallsGet' where
 
 instance GoogleRequest FirewallsGet' where
         type Rs FirewallsGet' = Firewall
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u FirewallsGet'{..}
+        request = requestWith computeRequest
+        requestWith rq FirewallsGet'{..}
           = go _fgProject _fgFirewall _fgQuotaUser
               (Just _fgPrettyPrint)
               _fgUserIP
@@ -169,7 +169,5 @@ instance GoogleRequest FirewallsGet' where
               _fgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy FirewallsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy FirewallsGetResource)
+                      rq

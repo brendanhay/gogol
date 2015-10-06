@@ -167,9 +167,8 @@ instance GoogleRequest LayersPermissionsBatchDelete'
          where
         type Rs LayersPermissionsBatchDelete' =
              PermissionsBatchDeleteResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u
-          LayersPermissionsBatchDelete'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq LayersPermissionsBatchDelete'{..}
           = go _lpbdId _lpbdQuotaUser (Just _lpbdPrettyPrint)
               _lpbdUserIP
               _lpbdFields
@@ -178,7 +177,6 @@ instance GoogleRequest LayersPermissionsBatchDelete'
               (Just AltJSON)
               _lpbdPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LayersPermissionsBatchDeleteResource)
-                      r
-                      u
+                      rq

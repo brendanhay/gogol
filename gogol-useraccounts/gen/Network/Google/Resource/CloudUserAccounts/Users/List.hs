@@ -209,8 +209,8 @@ instance GoogleAuth UsersList' where
 
 instance GoogleRequest UsersList' where
         type Rs UsersList' = UserList
-        request = requestWithRoute defReq userAccountsURL
-        requestWithRoute r u UsersList'{..}
+        request = requestWith userAccountsRequest
+        requestWith rq UsersList'{..}
           = go _ulProject _ulOrderBy _ulFilter _ulPageToken
               (Just _ulMaxResults)
               _ulQuotaUser
@@ -221,6 +221,4 @@ instance GoogleRequest UsersList' where
               _ulOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersListResource) rq

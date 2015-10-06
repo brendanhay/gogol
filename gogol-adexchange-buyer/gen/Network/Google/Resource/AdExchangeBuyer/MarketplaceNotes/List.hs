@@ -151,8 +151,8 @@ instance GoogleAuth MarketplaceNotesList' where
 
 instance GoogleRequest MarketplaceNotesList' where
         type Rs MarketplaceNotesList' = GetOrderNotesResponse
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplaceNotesList'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq MarketplaceNotesList'{..}
           = go _mnlOrderId _mnlQuotaUser (Just _mnlPrettyPrint)
               _mnlUserIP
               _mnlFields
@@ -160,7 +160,6 @@ instance GoogleRequest MarketplaceNotesList' where
               _mnlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MarketplaceNotesListResource)
-                      r
-                      u
+                      rq

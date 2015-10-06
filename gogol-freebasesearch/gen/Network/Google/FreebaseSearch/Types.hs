@@ -16,7 +16,7 @@
 module Network.Google.FreebaseSearch.Types
     (
     -- * Service URL
-      freebaseSearchURL
+      freebaseSearchRequest
 
     -- * FreebaseSearchFormat
     , FreebaseSearchFormat (..)
@@ -74,9 +74,8 @@ import           Network.Google.FreebaseSearch.Types.Product
 import           Network.Google.FreebaseSearch.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Freebase Search.
-freebaseSearchURL :: BaseUrl
-freebaseSearchURL
-  = BaseUrl Https
-      "https://www.googleapis.com/freebase/v1/"
-      443
+-- | Default request referring to version 'v1' of the Freebase Search.
+freebaseSearchRequest :: RequestBuilder
+freebaseSearchRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "freebase/v1/"

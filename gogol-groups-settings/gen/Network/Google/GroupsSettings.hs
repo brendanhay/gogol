@@ -21,7 +21,7 @@ module Network.Google.GroupsSettings
     -- * API
       GroupsSettingsAPI
     , groupsSettingsAPI
-    , groupsSettingsURL
+    , groupsSettingsRequest
 
     -- * Service Methods
 

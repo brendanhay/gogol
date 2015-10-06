@@ -181,9 +181,8 @@ instance GoogleRequest ProductsUpdatePermissions'
          where
         type Rs ProductsUpdatePermissions' =
              ProductPermissions
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u ProductsUpdatePermissions'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq ProductsUpdatePermissions'{..}
           = go _pupEnterpriseId _pupProductId _pupQuotaUser
               (Just _pupPrettyPrint)
               _pupUserIP
@@ -193,7 +192,6 @@ instance GoogleRequest ProductsUpdatePermissions'
               (Just AltJSON)
               _pupPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProductsUpdatePermissionsResource)
-                      r
-                      u
+                      rq

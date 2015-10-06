@@ -178,8 +178,8 @@ instance GoogleAuth TargetVPNGatewaysInsert' where
 
 instance GoogleRequest TargetVPNGatewaysInsert' where
         type Rs TargetVPNGatewaysInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetVPNGatewaysInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetVPNGatewaysInsert'{..}
           = go _tvgiProject _tvgiRegion _tvgiQuotaUser
               (Just _tvgiPrettyPrint)
               _tvgiUserIP
@@ -189,7 +189,6 @@ instance GoogleRequest TargetVPNGatewaysInsert' where
               (Just AltJSON)
               _tvgiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetVPNGatewaysInsertResource)
-                      r
-                      u
+                      rq

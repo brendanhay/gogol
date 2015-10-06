@@ -173,8 +173,8 @@ instance GoogleAuth AudiencesList' where
 
 instance GoogleRequest AudiencesList' where
         type Rs AudiencesList' = AudiencesFeed
-        request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u AudiencesList'{..}
+        request = requestWith plusDomainsRequest
+        requestWith rq AudiencesList'{..}
           = go _alUserId _alPageToken (Just _alMaxResults)
               _alQuotaUser
               (Just _alPrettyPrint)
@@ -184,7 +184,5 @@ instance GoogleRequest AudiencesList' where
               _alOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AudiencesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AudiencesListResource)
+                      rq

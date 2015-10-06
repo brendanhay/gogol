@@ -162,8 +162,8 @@ instance GoogleAuth SubAccountsInsert' where
 
 instance GoogleRequest SubAccountsInsert' where
         type Rs SubAccountsInsert' = SubAccount
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SubAccountsInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq SubAccountsInsert'{..}
           = go _saiProFileId _saiQuotaUser
               (Just _saiPrettyPrint)
               _saiUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest SubAccountsInsert' where
               (Just AltJSON)
               _saiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SubAccountsInsertResource)
-                      r
-                      u
+                      rq

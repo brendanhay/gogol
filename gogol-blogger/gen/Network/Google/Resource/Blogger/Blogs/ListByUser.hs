@@ -204,8 +204,8 @@ instance GoogleAuth BlogsListByUser' where
 
 instance GoogleRequest BlogsListByUser' where
         type Rs BlogsListByUser' = BlogList
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u BlogsListByUser'{..}
+        request = requestWith bloggerRequest
+        requestWith rq BlogsListByUser'{..}
           = go _blbuUserId _blbuStatus _blbuFetchUserInfo
               (_blbuRole ^. _Default)
               _blbuView
@@ -217,7 +217,6 @@ instance GoogleRequest BlogsListByUser' where
               _blbuOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy BlogsListByUserResource)
-                      r
-                      u
+                      rq

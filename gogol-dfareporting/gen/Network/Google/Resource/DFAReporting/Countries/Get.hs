@@ -158,8 +158,8 @@ instance GoogleAuth CountriesGet' where
 
 instance GoogleRequest CountriesGet' where
         type Rs CountriesGet' = Country
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CountriesGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CountriesGet'{..}
           = go _cgProFileId _cgDartId _cgQuotaUser
               (Just _cgPrettyPrint)
               _cgUserIP
@@ -168,7 +168,5 @@ instance GoogleRequest CountriesGet' where
               _cgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CountriesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CountriesGetResource)
+                      rq

@@ -242,8 +242,8 @@ instance GoogleAuth AppsModulesList' where
 
 instance GoogleRequest AppsModulesList' where
         type Rs AppsModulesList' = ListModulesResponse
-        request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsModulesList'{..}
+        request = requestWith appEngineRequest
+        requestWith rq AppsModulesList'{..}
           = go _amlAppsId _amlXgafv _amlUploadProtocol
               (Just _amlPp)
               _amlAccessToken
@@ -259,7 +259,6 @@ instance GoogleRequest AppsModulesList' where
               _amlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AppsModulesListResource)
-                      r
-                      u
+                      rq

@@ -188,8 +188,8 @@ instance GoogleAuth InstancesDetachDisk' where
 
 instance GoogleRequest InstancesDetachDisk' where
         type Rs InstancesDetachDisk' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesDetachDisk'{..}
+        request = requestWith computeRequest
+        requestWith rq InstancesDetachDisk'{..}
           = go _iddProject _iddZone _iddInstance
               (Just _iddDeviceName)
               _iddQuotaUser
@@ -200,7 +200,6 @@ instance GoogleRequest InstancesDetachDisk' where
               _iddOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesDetachDiskResource)
-                      r
-                      u
+                      rq

@@ -182,8 +182,8 @@ instance GoogleRequest VariantsetsImportVariants'
          where
         type Rs VariantsetsImportVariants' =
              ImportVariantsResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsetsImportVariants'{..}
+        request = requestWith genomicsRequest
+        requestWith rq VariantsetsImportVariants'{..}
           = go _vivVariantSetId _vivQuotaUser
               (Just _vivPrettyPrint)
               _vivUserIP
@@ -193,7 +193,6 @@ instance GoogleRequest VariantsetsImportVariants'
               (Just AltJSON)
               _vivPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy VariantsetsImportVariantsResource)
-                      r
-                      u
+                      rq

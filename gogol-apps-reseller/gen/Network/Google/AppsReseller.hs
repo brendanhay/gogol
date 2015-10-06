@@ -21,7 +21,7 @@ module Network.Google.AppsReseller
     -- * API
       AppsResellerAPI
     , appsResellerAPI
-    , appsResellerURL
+    , appsResellerRequest
 
     -- * Service Methods
 

@@ -16,7 +16,7 @@
 module Network.Google.AppEngine.Types
     (
     -- * Service URL
-      appEngineURL
+      appEngineRequest
 
     -- * Status
     , Status
@@ -308,8 +308,8 @@ import           Network.Google.AppEngine.Types.Product
 import           Network.Google.AppEngine.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1beta4' of the Google App Engine Admin API.
-appEngineURL :: BaseUrl
-appEngineURL
-  = BaseUrl Https "https://appengine.googleapis.com/"
-      443
+-- | Default request referring to version 'v1beta4' of the Google App Engine Admin API.
+appEngineRequest :: RequestBuilder
+appEngineRequest
+  = defaultRequest "https://appengine.googleapis.com/"
+      ""

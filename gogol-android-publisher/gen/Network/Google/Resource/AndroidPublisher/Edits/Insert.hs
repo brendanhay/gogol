@@ -160,8 +160,8 @@ instance GoogleAuth EditsInsert' where
 
 instance GoogleRequest EditsInsert' where
         type Rs EditsInsert' = AppEdit
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsInsert'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsInsert'{..}
           = go _eiPackageName _eiQuotaUser
               (Just _eiPrettyPrint)
               _eiUserIP
@@ -171,7 +171,4 @@ instance GoogleRequest EditsInsert' where
               (Just AltJSON)
               _eiPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EditsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EditsInsertResource) rq

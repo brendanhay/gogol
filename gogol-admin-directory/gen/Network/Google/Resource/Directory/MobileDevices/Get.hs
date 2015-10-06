@@ -178,8 +178,8 @@ instance GoogleAuth MobileDevicesGet' where
 
 instance GoogleRequest MobileDevicesGet' where
         type Rs MobileDevicesGet' = MobileDevice
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u MobileDevicesGet'{..}
+        request = requestWith directoryRequest
+        requestWith rq MobileDevicesGet'{..}
           = go _mdgCustomerId _mdgResourceId _mdgProjection
               _mdgQuotaUser
               (Just _mdgPrettyPrint)
@@ -189,7 +189,6 @@ instance GoogleRequest MobileDevicesGet' where
               _mdgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MobileDevicesGetResource)
-                      r
-                      u
+                      rq

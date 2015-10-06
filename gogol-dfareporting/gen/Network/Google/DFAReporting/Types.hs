@@ -16,7 +16,7 @@
 module Network.Google.DFAReporting.Types
     (
     -- * Service URL
-      dFAReportingURL
+      dFAReportingRequest
 
     -- * PlacementsListSortOrder
     , PlacementsListSortOrder (..)
@@ -2516,9 +2516,8 @@ import           Network.Google.DFAReporting.Types.Product
 import           Network.Google.DFAReporting.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v2.2' of the DCM/DFA Reporting And Trafficking API.
-dFAReportingURL :: BaseUrl
-dFAReportingURL
-  = BaseUrl Https
-      "https://www.googleapis.com/dfareporting/v2.2/"
-      443
+-- | Default request referring to version 'v2.2' of the DCM/DFA Reporting And Trafficking API.
+dFAReportingRequest :: RequestBuilder
+dFAReportingRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "dfareporting/v2.2/"

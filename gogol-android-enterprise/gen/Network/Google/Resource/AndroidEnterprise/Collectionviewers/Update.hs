@@ -193,9 +193,8 @@ instance GoogleAuth CollectionviewersUpdate' where
 
 instance GoogleRequest CollectionviewersUpdate' where
         type Rs CollectionviewersUpdate' = User
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u CollectionviewersUpdate'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq CollectionviewersUpdate'{..}
           = go _cuuEnterpriseId _cuuCollectionId _cuuUserId
               _cuuQuotaUser
               (Just _cuuPrettyPrint)
@@ -206,7 +205,6 @@ instance GoogleRequest CollectionviewersUpdate' where
               (Just AltJSON)
               _cuuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CollectionviewersUpdateResource)
-                      r
-                      u
+                      rq

@@ -178,8 +178,8 @@ instance GoogleAuth SubscriptionsChangeSeats' where
 instance GoogleRequest SubscriptionsChangeSeats'
          where
         type Rs SubscriptionsChangeSeats' = Subscription
-        request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u SubscriptionsChangeSeats'{..}
+        request = requestWith appsResellerRequest
+        requestWith rq SubscriptionsChangeSeats'{..}
           = go _scsCustomerId _scsSubscriptionId _scsQuotaUser
               (Just _scsPrettyPrint)
               _scsUserIP
@@ -189,7 +189,6 @@ instance GoogleRequest SubscriptionsChangeSeats'
               (Just AltJSON)
               _scsPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy SubscriptionsChangeSeatsResource)
-                      r
-                      u
+                      rq

@@ -168,9 +168,8 @@ instance GoogleRequest
          FloodlightActivityGroupsInsert' where
         type Rs FloodlightActivityGroupsInsert' =
              FloodlightActivityGroup
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u
-          FloodlightActivityGroupsInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FloodlightActivityGroupsInsert'{..}
           = go _fagiProFileId _fagiQuotaUser
               (Just _fagiPrettyPrint)
               _fagiUserIP
@@ -180,8 +179,7 @@ instance GoogleRequest
               (Just AltJSON)
               _fagiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy FloodlightActivityGroupsInsertResource)
-                      r
-                      u
+                      rq

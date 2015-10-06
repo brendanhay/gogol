@@ -146,8 +146,8 @@ instance GoogleAuth SitesAdd' where
 
 instance GoogleRequest SitesAdd' where
         type Rs SitesAdd' = ()
-        request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u SitesAdd'{..}
+        request = requestWith webmasterToolsRequest
+        requestWith rq SitesAdd'{..}
           = go _saSiteURL _saQuotaUser (Just _saPrettyPrint)
               _saUserIP
               _saFields
@@ -155,5 +155,4 @@ instance GoogleRequest SitesAdd' where
               _saOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy SitesAddResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy SitesAddResource) rq

@@ -174,8 +174,8 @@ instance GoogleAuth InstanceGroupsGet' where
 
 instance GoogleRequest InstanceGroupsGet' where
         type Rs InstanceGroupsGet' = InstanceGroup
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceGroupsGet'{..}
+        request = requestWith computeRequest
+        requestWith rq InstanceGroupsGet'{..}
           = go _iggProject _iggZone _iggInstanceGroup
               _iggQuotaUser
               (Just _iggPrettyPrint)
@@ -185,7 +185,6 @@ instance GoogleRequest InstanceGroupsGet' where
               _iggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstanceGroupsGetResource)
-                      r
-                      u
+                      rq

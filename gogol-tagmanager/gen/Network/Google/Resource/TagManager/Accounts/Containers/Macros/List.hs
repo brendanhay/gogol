@@ -170,9 +170,8 @@ instance GoogleRequest AccountsContainersMacrosList'
          where
         type Rs AccountsContainersMacrosList' =
              ListMacrosResponse
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersMacrosList'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersMacrosList'{..}
           = go _acmlAccountId _acmlContainerId _acmlQuotaUser
               (Just _acmlPrettyPrint)
               _acmlUserIP
@@ -181,7 +180,6 @@ instance GoogleRequest AccountsContainersMacrosList'
               _acmlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsContainersMacrosListResource)
-                      r
-                      u
+                      rq

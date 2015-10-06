@@ -159,8 +159,8 @@ instance GoogleAuth ColumnDelete' where
 
 instance GoogleRequest ColumnDelete' where
         type Rs ColumnDelete' = ()
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u ColumnDelete'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq ColumnDelete'{..}
           = go _cdTableId _cdColumnId _cdQuotaUser
               (Just _cdPrettyPrint)
               _cdUserIP
@@ -169,7 +169,5 @@ instance GoogleRequest ColumnDelete' where
               _cdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ColumnDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ColumnDeleteResource)
+                      rq

@@ -247,8 +247,8 @@ instance GoogleAuth CoursesTeachersDelete' where
 
 instance GoogleRequest CoursesTeachersDelete' where
         type Rs CoursesTeachersDelete' = Empty
-        request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesTeachersDelete'{..}
+        request = requestWith classroomRequest
+        requestWith rq CoursesTeachersDelete'{..}
           = go _ctdCourseId _ctdUserId _ctdXgafv
               _ctdUploadProtocol
               (Just _ctdPp)
@@ -263,7 +263,6 @@ instance GoogleRequest CoursesTeachersDelete' where
               _ctdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CoursesTeachersDeleteResource)
-                      r
-                      u
+                      rq

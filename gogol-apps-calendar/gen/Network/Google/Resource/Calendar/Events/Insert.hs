@@ -205,8 +205,8 @@ instance GoogleAuth EventsInsert' where
 
 instance GoogleRequest EventsInsert' where
         type Rs EventsInsert' = Event
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsInsert'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq EventsInsert'{..}
           = go _eveCalendarId _eveMaxAttendees
               _eveSendNotifications
               _eveSupportsAttachments
@@ -219,7 +219,5 @@ instance GoogleRequest EventsInsert' where
               (Just AltJSON)
               _evePayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EventsInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EventsInsertResource)
+                      rq

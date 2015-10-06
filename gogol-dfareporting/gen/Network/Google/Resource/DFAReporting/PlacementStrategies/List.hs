@@ -232,8 +232,8 @@ instance GoogleAuth PlacementStrategiesList' where
 instance GoogleRequest PlacementStrategiesList' where
         type Rs PlacementStrategiesList' =
              PlacementStrategiesListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementStrategiesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PlacementStrategiesList'{..}
           = go _pslProFileId _pslSearchString
               (_pslIds ^. _Default)
               _pslSortOrder
@@ -248,7 +248,6 @@ instance GoogleRequest PlacementStrategiesList' where
               _pslOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlacementStrategiesListResource)
-                      r
-                      u
+                      rq

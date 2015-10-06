@@ -163,8 +163,8 @@ instance GoogleAuth UsersThreadsDelete' where
 
 instance GoogleRequest UsersThreadsDelete' where
         type Rs UsersThreadsDelete' = ()
-        request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersThreadsDelete'{..}
+        request = requestWith gmailRequest
+        requestWith rq UsersThreadsDelete'{..}
           = go _utdUserId _utdId _utdQuotaUser
               (Just _utdPrettyPrint)
               _utdUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest UsersThreadsDelete' where
               _utdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersThreadsDeleteResource)
-                      r
-                      u
+                      rq

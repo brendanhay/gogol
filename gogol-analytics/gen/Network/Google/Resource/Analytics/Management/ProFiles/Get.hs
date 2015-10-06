@@ -180,8 +180,8 @@ instance GoogleAuth ManagementProFilesGet' where
 
 instance GoogleRequest ManagementProFilesGet' where
         type Rs ManagementProFilesGet' = ProFile
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementProFilesGet'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementProFilesGet'{..}
           = go _mpfgAccountId _mpfgWebPropertyId _mpfgProFileId
               _mpfgQuotaUser
               (Just _mpfgPrettyPrint)
@@ -191,7 +191,6 @@ instance GoogleRequest ManagementProFilesGet' where
               _mpfgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementProFilesGetResource)
-                      r
-                      u
+                      rq

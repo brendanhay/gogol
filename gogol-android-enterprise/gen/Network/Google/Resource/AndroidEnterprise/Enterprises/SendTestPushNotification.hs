@@ -159,9 +159,8 @@ instance GoogleRequest
          EnterprisesSendTestPushNotification' where
         type Rs EnterprisesSendTestPushNotification' =
              EnterprisesSendTestPushNotificationResponse
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u
+        request = requestWith androidEnterpriseRequest
+        requestWith rq
           EnterprisesSendTestPushNotification'{..}
           = go _estpnEnterpriseId _estpnQuotaUser
               (Just _estpnPrettyPrint)
@@ -171,8 +170,7 @@ instance GoogleRequest
               _estpnOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy EnterprisesSendTestPushNotificationResource)
-                      r
-                      u
+                      rq

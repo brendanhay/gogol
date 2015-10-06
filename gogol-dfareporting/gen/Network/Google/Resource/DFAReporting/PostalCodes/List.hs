@@ -151,8 +151,8 @@ instance GoogleAuth PostalCodesList' where
 
 instance GoogleRequest PostalCodesList' where
         type Rs PostalCodesList' = PostalCodesListResponse
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PostalCodesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PostalCodesList'{..}
           = go _pclProFileId _pclQuotaUser
               (Just _pclPrettyPrint)
               _pclUserIP
@@ -161,7 +161,6 @@ instance GoogleRequest PostalCodesList' where
               _pclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PostalCodesListResource)
-                      r
-                      u
+                      rq

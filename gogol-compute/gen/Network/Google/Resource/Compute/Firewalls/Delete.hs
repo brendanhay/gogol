@@ -159,8 +159,8 @@ instance GoogleAuth FirewallsDelete' where
 
 instance GoogleRequest FirewallsDelete' where
         type Rs FirewallsDelete' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u FirewallsDelete'{..}
+        request = requestWith computeRequest
+        requestWith rq FirewallsDelete'{..}
           = go _fdProject _fdFirewall _fdQuotaUser
               (Just _fdPrettyPrint)
               _fdUserIP
@@ -169,7 +169,6 @@ instance GoogleRequest FirewallsDelete' where
               _fdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy FirewallsDeleteResource)
-                      r
-                      u
+                      rq

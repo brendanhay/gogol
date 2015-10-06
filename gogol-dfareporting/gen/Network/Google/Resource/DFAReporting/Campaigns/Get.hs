@@ -163,8 +163,8 @@ instance GoogleAuth CampaignsGet' where
 
 instance GoogleRequest CampaignsGet' where
         type Rs CampaignsGet' = Campaign
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CampaignsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CampaignsGet'{..}
           = go _camaProFileId _camaId _camaQuotaUser
               (Just _camaPrettyPrint)
               _camaUserIP
@@ -173,7 +173,5 @@ instance GoogleRequest CampaignsGet' where
               _camaOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CampaignsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CampaignsGetResource)
+                      rq

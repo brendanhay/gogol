@@ -155,8 +155,8 @@ instance GoogleRequest RelyingPartyVerifyAssertion'
          where
         type Rs RelyingPartyVerifyAssertion' =
              VerifyAssertionResponse
-        request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingPartyVerifyAssertion'{..}
+        request = requestWith identityToolkitRequest
+        requestWith rq RelyingPartyVerifyAssertion'{..}
           = go _rpvaQuotaUser (Just _rpvaPrettyPrint)
               _rpvaUserIP
               _rpvaFields
@@ -165,7 +165,6 @@ instance GoogleRequest RelyingPartyVerifyAssertion'
               (Just AltJSON)
               _rpvaPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RelyingPartyVerifyAssertionResource)
-                      r
-                      u
+                      rq

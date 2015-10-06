@@ -183,8 +183,8 @@ instance GoogleAuth AutoscalersUpdate' where
 
 instance GoogleRequest AutoscalersUpdate' where
         type Rs AutoscalersUpdate' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u AutoscalersUpdate'{..}
+        request = requestWith computeRequest
+        requestWith rq AutoscalersUpdate'{..}
           = go _auProject _auZone _auAutoscaler _auQuotaUser
               (Just _auPrettyPrint)
               _auUserIP
@@ -194,7 +194,6 @@ instance GoogleRequest AutoscalersUpdate' where
               (Just AltJSON)
               _auPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AutoscalersUpdateResource)
-                      r
-                      u
+                      rq

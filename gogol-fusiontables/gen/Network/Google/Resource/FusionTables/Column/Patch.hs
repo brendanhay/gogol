@@ -173,8 +173,8 @@ instance GoogleAuth ColumnPatch' where
 
 instance GoogleRequest ColumnPatch' where
         type Rs ColumnPatch' = Column
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u ColumnPatch'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq ColumnPatch'{..}
           = go _cpTableId _cpColumnId _cpQuotaUser
               (Just _cpPrettyPrint)
               _cpUserIP
@@ -184,7 +184,4 @@ instance GoogleRequest ColumnPatch' where
               (Just AltJSON)
               _cpPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ColumnPatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ColumnPatchResource) rq

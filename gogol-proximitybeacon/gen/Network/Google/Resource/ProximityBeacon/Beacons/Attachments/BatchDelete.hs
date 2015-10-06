@@ -248,9 +248,8 @@ instance GoogleRequest BeaconsAttachmentsBatchDelete'
          where
         type Rs BeaconsAttachmentsBatchDelete' =
              DeleteAttachmentsResponse
-        request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u
-          BeaconsAttachmentsBatchDelete'{..}
+        request = requestWith proximityBeaconRequest
+        requestWith rq BeaconsAttachmentsBatchDelete'{..}
           = go _babdBeaconName _babdXgafv _babdUploadProtocol
               (Just _babdPp)
               _babdAccessToken
@@ -265,8 +264,7 @@ instance GoogleRequest BeaconsAttachmentsBatchDelete'
               _babdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy BeaconsAttachmentsBatchDeleteResource)
-                      r
-                      u
+                      rq

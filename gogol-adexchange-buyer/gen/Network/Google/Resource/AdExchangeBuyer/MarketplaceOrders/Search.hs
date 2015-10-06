@@ -150,8 +150,8 @@ instance GoogleAuth MarketplaceOrdersSearch' where
 
 instance GoogleRequest MarketplaceOrdersSearch' where
         type Rs MarketplaceOrdersSearch' = GetOrdersResponse
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplaceOrdersSearch'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq MarketplaceOrdersSearch'{..}
           = go _marPqlQuery _marQuotaUser
               (Just _marPrettyPrint)
               _marUserIP
@@ -160,7 +160,6 @@ instance GoogleRequest MarketplaceOrdersSearch' where
               _marOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MarketplaceOrdersSearchResource)
-                      r
-                      u
+                      rq

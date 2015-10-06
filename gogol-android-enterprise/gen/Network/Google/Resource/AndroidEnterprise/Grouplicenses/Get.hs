@@ -162,9 +162,8 @@ instance GoogleAuth GrouplicensesGet' where
 
 instance GoogleRequest GrouplicensesGet' where
         type Rs GrouplicensesGet' = GroupLicense
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u GrouplicensesGet'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq GrouplicensesGet'{..}
           = go _ggEnterpriseId _ggGroupLicenseId _ggQuotaUser
               (Just _ggPrettyPrint)
               _ggUserIP
@@ -173,7 +172,6 @@ instance GoogleRequest GrouplicensesGet' where
               _ggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GrouplicensesGetResource)
-                      r
-                      u
+                      rq

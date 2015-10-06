@@ -166,8 +166,8 @@ instance GoogleAuth TurnBasedMatchesLeave' where
 
 instance GoogleRequest TurnBasedMatchesLeave' where
         type Rs TurnBasedMatchesLeave' = TurnBasedMatch
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u TurnBasedMatchesLeave'{..}
+        request = requestWith gamesRequest
+        requestWith rq TurnBasedMatchesLeave'{..}
           = go _tbmlbMatchId _tbmlbLanguage _tbmlbQuotaUser
               (Just _tbmlbPrettyPrint)
               _tbmlbUserIP
@@ -176,7 +176,6 @@ instance GoogleRequest TurnBasedMatchesLeave' where
               _tbmlbOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TurnBasedMatchesLeaveResource)
-                      r
-                      u
+                      rq

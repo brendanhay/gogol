@@ -203,8 +203,8 @@ instance GoogleAuth RepliesList' where
 
 instance GoogleRequest RepliesList' where
         type Rs RepliesList' = CommentReplyList
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u RepliesList'{..}
+        request = requestWith driveRequest
+        requestWith rq RepliesList'{..}
           = go _rllFileId _rllCommentId _rllPageToken
               (Just _rllMaxResults)
               (Just _rllIncludeDeleted)
@@ -216,7 +216,4 @@ instance GoogleRequest RepliesList' where
               _rllOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy RepliesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy RepliesListResource) rq

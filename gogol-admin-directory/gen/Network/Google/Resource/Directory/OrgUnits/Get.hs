@@ -165,8 +165,8 @@ instance GoogleAuth OrgUnitsGet' where
 
 instance GoogleRequest OrgUnitsGet' where
         type Rs OrgUnitsGet' = OrgUnit
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u OrgUnitsGet'{..}
+        request = requestWith directoryRequest
+        requestWith rq OrgUnitsGet'{..}
           = go _ougCustomerId _ougOrgUnitPath _ougQuotaUser
               (Just _ougPrettyPrint)
               _ougUserIP
@@ -175,7 +175,4 @@ instance GoogleRequest OrgUnitsGet' where
               _ougOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy OrgUnitsGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy OrgUnitsGetResource) rq

@@ -228,8 +228,8 @@ instance GoogleAuth UserProFilesGet' where
 
 instance GoogleRequest UserProFilesGet' where
         type Rs UserProFilesGet' = UserProFile
-        request = requestWithRoute defReq classroomURL
-        requestWithRoute r u UserProFilesGet'{..}
+        request = requestWith classroomRequest
+        requestWith rq UserProFilesGet'{..}
           = go _upfgUserId _upfgXgafv _upfgUploadProtocol
               (Just _upfgPp)
               _upfgAccessToken
@@ -243,7 +243,6 @@ instance GoogleRequest UserProFilesGet' where
               _upfgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UserProFilesGetResource)
-                      r
-                      u
+                      rq

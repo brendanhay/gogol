@@ -229,8 +229,8 @@ instance GoogleAuth PostsUpdate' where
 
 instance GoogleRequest PostsUpdate' where
         type Rs PostsUpdate' = Post'
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostsUpdate'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PostsUpdate'{..}
           = go _puBlogId _puPostId (Just _puFetchBody)
               _puFetchImages
               _puMaxComments
@@ -245,7 +245,4 @@ instance GoogleRequest PostsUpdate' where
               (Just AltJSON)
               _puPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PostsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PostsUpdateResource) rq

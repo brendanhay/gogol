@@ -201,8 +201,8 @@ instance GoogleRequest
          InstanceGroupManagersSetTargetPools' where
         type Rs InstanceGroupManagersSetTargetPools' =
              Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u
+        request = requestWith computeRequest
+        requestWith rq
           InstanceGroupManagersSetTargetPools'{..}
           = go _igmstpProject _igmstpZone
               _igmstpInstanceGroupManager
@@ -215,8 +215,7 @@ instance GoogleRequest
               (Just AltJSON)
               _igmstpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy InstanceGroupManagersSetTargetPoolsResource)
-                      r
-                      u
+                      rq

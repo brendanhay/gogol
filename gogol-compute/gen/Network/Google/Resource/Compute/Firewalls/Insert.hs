@@ -161,8 +161,8 @@ instance GoogleAuth FirewallsInsert' where
 
 instance GoogleRequest FirewallsInsert' where
         type Rs FirewallsInsert' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u FirewallsInsert'{..}
+        request = requestWith computeRequest
+        requestWith rq FirewallsInsert'{..}
           = go _fiProject _fiQuotaUser (Just _fiPrettyPrint)
               _fiUserIP
               _fiFields
@@ -171,7 +171,6 @@ instance GoogleRequest FirewallsInsert' where
               (Just AltJSON)
               _fiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy FirewallsInsertResource)
-                      r
-                      u
+                      rq

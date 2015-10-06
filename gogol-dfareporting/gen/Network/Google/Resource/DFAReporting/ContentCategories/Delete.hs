@@ -161,8 +161,8 @@ instance GoogleAuth ContentCategoriesDelete' where
 
 instance GoogleRequest ContentCategoriesDelete' where
         type Rs ContentCategoriesDelete' = ()
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ContentCategoriesDelete'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ContentCategoriesDelete'{..}
           = go _ccdProFileId _ccdId _ccdQuotaUser
               (Just _ccdPrettyPrint)
               _ccdUserIP
@@ -171,7 +171,6 @@ instance GoogleRequest ContentCategoriesDelete' where
               _ccdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ContentCategoriesDeleteResource)
-                      r
-                      u
+                      rq

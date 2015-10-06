@@ -168,8 +168,8 @@ instance GoogleAuth MailInsert' where
 
 instance GoogleRequest MailInsert' where
         type Rs MailInsert' = ()
-        request = requestWithRoute defReq emailMigrationURL
-        requestWithRoute r u MailInsert'{..}
+        request = requestWith emailMigrationRequest
+        requestWith rq MailInsert'{..}
           = go _miUserKey _miQuotaUser (Just _miPrettyPrint)
               _miUserIP
               _miFields
@@ -179,6 +179,4 @@ instance GoogleRequest MailInsert' where
               _miPayload
               _miMedia
           where go
-                  = clientWithRoute (Proxy :: Proxy MailInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy MailInsertResource) rq

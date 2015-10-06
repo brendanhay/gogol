@@ -175,8 +175,8 @@ instance GoogleAuth PublishersGet' where
 
 instance GoogleRequest PublishersGet' where
         type Rs PublishersGet' = Publisher
-        request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u PublishersGet'{..}
+        request = requestWith affiliatesRequest
+        requestWith rq PublishersGet'{..}
           = go _pgRole _pgRoleId _pgPublisherId _pgQuotaUser
               (Just _pgPrettyPrint)
               _pgUserIP
@@ -185,7 +185,5 @@ instance GoogleRequest PublishersGet' where
               _pgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PublishersGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PublishersGetResource)
+                      rq

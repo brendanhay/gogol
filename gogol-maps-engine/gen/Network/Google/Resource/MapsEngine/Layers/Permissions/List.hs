@@ -151,8 +151,8 @@ instance GoogleAuth LayersPermissionsList' where
 instance GoogleRequest LayersPermissionsList' where
         type Rs LayersPermissionsList' =
              PermissionsListResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u LayersPermissionsList'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq LayersPermissionsList'{..}
           = go _lplId _lplQuotaUser (Just _lplPrettyPrint)
               _lplUserIP
               _lplFields
@@ -160,7 +160,6 @@ instance GoogleRequest LayersPermissionsList' where
               _lplOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LayersPermissionsListResource)
-                      r
-                      u
+                      rq

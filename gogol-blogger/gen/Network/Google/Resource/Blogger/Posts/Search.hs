@@ -183,8 +183,8 @@ instance GoogleAuth PostsSearch' where
 
 instance GoogleRequest PostsSearch' where
         type Rs PostsSearch' = PostList
-        request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostsSearch'{..}
+        request = requestWith bloggerRequest
+        requestWith rq PostsSearch'{..}
           = go _psBlogId (Just _psQ) (Just _psOrderBy)
               (Just _psFetchBodies)
               _psQuotaUser
@@ -195,7 +195,4 @@ instance GoogleRequest PostsSearch' where
               _psOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PostsSearchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PostsSearchResource) rq

@@ -150,8 +150,8 @@ instance GoogleAuth CallsetsSearch' where
 
 instance GoogleRequest CallsetsSearch' where
         type Rs CallsetsSearch' = SearchCallSetsResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u CallsetsSearch'{..}
+        request = requestWith genomicsRequest
+        requestWith rq CallsetsSearch'{..}
           = go _csQuotaUser (Just _csPrettyPrint) _csUserIP
               _csFields
               _csKey
@@ -159,7 +159,5 @@ instance GoogleRequest CallsetsSearch' where
               (Just AltJSON)
               _csPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy CallsetsSearchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy CallsetsSearchResource)
+                      rq

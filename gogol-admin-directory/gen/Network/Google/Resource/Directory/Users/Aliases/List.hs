@@ -160,8 +160,8 @@ instance GoogleAuth UsersAliasesList' where
 
 instance GoogleRequest UsersAliasesList' where
         type Rs UsersAliasesList' = Aliases
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u UsersAliasesList'{..}
+        request = requestWith directoryRequest
+        requestWith rq UsersAliasesList'{..}
           = go _ualUserKey _ualEvent _ualQuotaUser
               (Just _ualPrettyPrint)
               _ualUserIP
@@ -170,7 +170,6 @@ instance GoogleRequest UsersAliasesList' where
               _ualOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersAliasesListResource)
-                      r
-                      u
+                      rq

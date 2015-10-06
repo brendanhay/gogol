@@ -149,8 +149,8 @@ instance GoogleAuth VariantsCreate' where
 
 instance GoogleRequest VariantsCreate' where
         type Rs VariantsCreate' = Variant
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsCreate'{..}
+        request = requestWith genomicsRequest
+        requestWith rq VariantsCreate'{..}
           = go _varQuotaUser (Just _varPrettyPrint) _varUserIP
               _varFields
               _varKey
@@ -158,7 +158,5 @@ instance GoogleRequest VariantsCreate' where
               (Just AltJSON)
               _varPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy VariantsCreateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy VariantsCreateResource)
+                      rq

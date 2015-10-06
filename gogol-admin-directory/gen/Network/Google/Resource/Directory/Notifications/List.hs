@@ -182,8 +182,8 @@ instance GoogleAuth NotificationsList' where
 
 instance GoogleRequest NotificationsList' where
         type Rs NotificationsList' = Notifications
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u NotificationsList'{..}
+        request = requestWith directoryRequest
+        requestWith rq NotificationsList'{..}
           = go _nlCustomer _nlLanguage _nlPageToken
               _nlMaxResults
               _nlQuotaUser
@@ -194,7 +194,6 @@ instance GoogleRequest NotificationsList' where
               _nlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy NotificationsListResource)
-                      r
-                      u
+                      rq

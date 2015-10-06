@@ -162,8 +162,8 @@ instance GoogleAuth DatasetsRunQuery' where
 
 instance GoogleRequest DatasetsRunQuery' where
         type Rs DatasetsRunQuery' = RunQueryResponse
-        request = requestWithRoute defReq datastoreURL
-        requestWithRoute r u DatasetsRunQuery'{..}
+        request = requestWith datastoreRequest
+        requestWith rq DatasetsRunQuery'{..}
           = go _drqDatasetId _drqQuotaUser
               (Just _drqPrettyPrint)
               _drqUserIP
@@ -173,7 +173,6 @@ instance GoogleRequest DatasetsRunQuery' where
               (Just AltJSON)
               _drqPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DatasetsRunQueryResource)
-                      r
-                      u
+                      rq

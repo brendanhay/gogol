@@ -178,8 +178,8 @@ instance GoogleAuth CustomChannelsList' where
 
 instance GoogleRequest CustomChannelsList' where
         type Rs CustomChannelsList' = CustomChannels
-        request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u CustomChannelsList'{..}
+        request = requestWith adSenseHostRequest
+        requestWith rq CustomChannelsList'{..}
           = go _cclAdClientId _cclPageToken _cclMaxResults
               _cclQuotaUser
               (Just _cclPrettyPrint)
@@ -189,7 +189,6 @@ instance GoogleRequest CustomChannelsList' where
               _cclOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CustomChannelsListResource)
-                      r
-                      u
+                      rq

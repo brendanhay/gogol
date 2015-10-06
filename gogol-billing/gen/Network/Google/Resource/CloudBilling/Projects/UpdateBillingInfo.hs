@@ -286,8 +286,8 @@ instance GoogleRequest ProjectsUpdateBillingInfo'
          where
         type Rs ProjectsUpdateBillingInfo' =
              ProjectBillingInfo
-        request = requestWithRoute defReq billingURL
-        requestWithRoute r u ProjectsUpdateBillingInfo'{..}
+        request = requestWith billingRequest
+        requestWith rq ProjectsUpdateBillingInfo'{..}
           = go _pubiName _pubiXgafv _pubiUploadProtocol
               (Just _pubiPp)
               _pubiAccessToken
@@ -302,7 +302,6 @@ instance GoogleRequest ProjectsUpdateBillingInfo'
               (Just AltJSON)
               _pubiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsUpdateBillingInfoResource)
-                      r
-                      u
+                      rq

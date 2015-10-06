@@ -177,8 +177,8 @@ instance GoogleAuth EditsListingsDelete' where
 
 instance GoogleRequest EditsListingsDelete' where
         type Rs EditsListingsDelete' = ()
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsListingsDelete'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsListingsDelete'{..}
           = go _eldPackageName _eldEditId _eldLanguage
               _eldQuotaUser
               (Just _eldPrettyPrint)
@@ -188,7 +188,6 @@ instance GoogleRequest EditsListingsDelete' where
               _eldOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EditsListingsDeleteResource)
-                      r
-                      u
+                      rq

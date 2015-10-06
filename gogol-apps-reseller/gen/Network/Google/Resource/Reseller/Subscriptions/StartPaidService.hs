@@ -168,9 +168,8 @@ instance GoogleAuth SubscriptionsStartPaidService'
 instance GoogleRequest SubscriptionsStartPaidService'
          where
         type Rs SubscriptionsStartPaidService' = Subscription
-        request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u
-          SubscriptionsStartPaidService'{..}
+        request = requestWith appsResellerRequest
+        requestWith rq SubscriptionsStartPaidService'{..}
           = go _sspsCustomerId _sspsSubscriptionId
               _sspsQuotaUser
               (Just _sspsPrettyPrint)
@@ -180,8 +179,7 @@ instance GoogleRequest SubscriptionsStartPaidService'
               _sspsOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy SubscriptionsStartPaidServiceResource)
-                      r
-                      u
+                      rq

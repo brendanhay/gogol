@@ -197,8 +197,8 @@ instance GoogleAuth ManagementProFilesList' where
 
 instance GoogleRequest ManagementProFilesList' where
         type Rs ManagementProFilesList' = ProFiles
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementProFilesList'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementProFilesList'{..}
           = go _mpflAccountId _mpflWebPropertyId
               _mpflStartIndex
               _mpflMaxResults
@@ -210,7 +210,6 @@ instance GoogleRequest ManagementProFilesList' where
               _mpflOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ManagementProFilesListResource)
-                      r
-                      u
+                      rq

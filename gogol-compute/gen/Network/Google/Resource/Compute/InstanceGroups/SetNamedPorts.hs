@@ -193,8 +193,8 @@ instance GoogleAuth InstanceGroupsSetNamedPorts'
 instance GoogleRequest InstanceGroupsSetNamedPorts'
          where
         type Rs InstanceGroupsSetNamedPorts' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceGroupsSetNamedPorts'{..}
+        request = requestWith computeRequest
+        requestWith rq InstanceGroupsSetNamedPorts'{..}
           = go _igsnpProject _igsnpZone _igsnpInstanceGroup
               _igsnpQuotaUser
               (Just _igsnpPrettyPrint)
@@ -205,7 +205,6 @@ instance GoogleRequest InstanceGroupsSetNamedPorts'
               (Just AltJSON)
               _igsnpPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstanceGroupsSetNamedPortsResource)
-                      r
-                      u
+                      rq

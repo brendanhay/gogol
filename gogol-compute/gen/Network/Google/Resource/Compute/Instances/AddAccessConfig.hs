@@ -202,8 +202,8 @@ instance GoogleAuth InstancesAddAccessConfig' where
 instance GoogleRequest InstancesAddAccessConfig'
          where
         type Rs InstancesAddAccessConfig' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesAddAccessConfig'{..}
+        request = requestWith computeRequest
+        requestWith rq InstancesAddAccessConfig'{..}
           = go _iaacProject _iaacZone _iaacInstance
               (Just _iaacNetworkInterface)
               _iaacQuotaUser
@@ -215,7 +215,6 @@ instance GoogleRequest InstancesAddAccessConfig'
               (Just AltJSON)
               _iaacPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesAddAccessConfigResource)
-                      r
-                      u
+                      rq

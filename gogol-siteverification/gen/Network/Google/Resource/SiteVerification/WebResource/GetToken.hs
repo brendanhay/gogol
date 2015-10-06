@@ -155,8 +155,8 @@ instance GoogleAuth WebResourceGetToken' where
 instance GoogleRequest WebResourceGetToken' where
         type Rs WebResourceGetToken' =
              SiteVerificationWebResourceGettokenResponse
-        request = requestWithRoute defReq siteVerificationURL
-        requestWithRoute r u WebResourceGetToken'{..}
+        request = requestWith siteVerificationRequest
+        requestWith rq WebResourceGetToken'{..}
           = go _wrgtQuotaUser (Just _wrgtPrettyPrint)
               _wrgtUserIP
               _wrgtFields
@@ -165,7 +165,6 @@ instance GoogleRequest WebResourceGetToken' where
               (Just AltJSON)
               _wrgtPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy WebResourceGetTokenResource)
-                      r
-                      u
+                      rq

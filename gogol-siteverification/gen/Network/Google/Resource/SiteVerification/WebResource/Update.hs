@@ -162,8 +162,8 @@ instance GoogleAuth WebResourceUpdate' where
 instance GoogleRequest WebResourceUpdate' where
         type Rs WebResourceUpdate' =
              SiteVerificationWebResourceResource
-        request = requestWithRoute defReq siteVerificationURL
-        requestWithRoute r u WebResourceUpdate'{..}
+        request = requestWith siteVerificationRequest
+        requestWith rq WebResourceUpdate'{..}
           = go _wruId _wruQuotaUser (Just _wruPrettyPrint)
               _wruUserIP
               _wruFields
@@ -172,7 +172,6 @@ instance GoogleRequest WebResourceUpdate' where
               (Just AltJSON)
               _wruPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy WebResourceUpdateResource)
-                      r
-                      u
+                      rq

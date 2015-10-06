@@ -202,8 +202,8 @@ instance GoogleAuth Reconcile' where
 
 instance GoogleRequest Reconcile' where
         type Rs Reconcile' = ReconcileGet
-        request = requestWithRoute defReq freebaseSearchURL
-        requestWithRoute r u Reconcile'{..}
+        request = requestWith freebaseSearchRequest
+        requestWith rq Reconcile'{..}
           = go (_rKind ^. _Default) (_rLang ^. _Default)
               (Just _rConfidence)
               _rName
@@ -217,5 +217,4 @@ instance GoogleRequest Reconcile' where
               _rOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReconcileMethod) r
-                      u
+                  = clientBuild (Proxy :: Proxy ReconcileMethod) rq

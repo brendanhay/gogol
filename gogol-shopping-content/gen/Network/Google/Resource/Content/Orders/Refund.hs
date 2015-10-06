@@ -172,8 +172,8 @@ instance GoogleAuth OrdersRefund' where
 
 instance GoogleRequest OrdersRefund' where
         type Rs OrdersRefund' = OrdersRefundResponse
-        request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersRefund'{..}
+        request = requestWith shoppingContentRequest
+        requestWith rq OrdersRefund'{..}
           = go _orMerchantId _orOrderId _orQuotaUser
               (Just _orPrettyPrint)
               _orUserIP
@@ -183,7 +183,5 @@ instance GoogleRequest OrdersRefund' where
               (Just AltJSON)
               _orPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy OrdersRefundResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy OrdersRefundResource)
+                      rq

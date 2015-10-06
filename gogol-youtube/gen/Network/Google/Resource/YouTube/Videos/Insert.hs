@@ -264,8 +264,8 @@ instance GoogleAuth VideosInsert' where
 
 instance GoogleRequest VideosInsert' where
         type Rs VideosInsert' = Video
-        request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideosInsert'{..}
+        request = requestWith youTubeRequest
+        requestWith rq VideosInsert'{..}
           = go (Just _viPart) _viStabilize
               _viOnBehalfOfContentOwner
               _viOnBehalfOfContentOwnerChannel
@@ -281,7 +281,5 @@ instance GoogleRequest VideosInsert' where
               _viPayload
               _viMedia
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy VideosInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy VideosInsertResource)
+                      rq

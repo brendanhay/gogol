@@ -180,9 +180,8 @@ instance GoogleAuth AccountsContainersFoldersDelete'
 instance GoogleRequest
          AccountsContainersFoldersDelete' where
         type Rs AccountsContainersFoldersDelete' = ()
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersFoldersDelete'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersFoldersDelete'{..}
           = go _acfdAccountId _acfdContainerId _acfdFolderId
               _acfdQuotaUser
               (Just _acfdPrettyPrint)
@@ -192,8 +191,7 @@ instance GoogleRequest
               _acfdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy AccountsContainersFoldersDeleteResource)
-                      r
-                      u
+                      rq

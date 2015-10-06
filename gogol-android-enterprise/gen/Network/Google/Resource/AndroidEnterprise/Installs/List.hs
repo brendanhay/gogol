@@ -174,9 +174,8 @@ instance GoogleAuth InstallsList' where
 
 instance GoogleRequest InstallsList' where
         type Rs InstallsList' = InstallsListResponse
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u InstallsList'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq InstallsList'{..}
           = go _ilEnterpriseId _ilUserId _ilDeviceId
               _ilQuotaUser
               (Just _ilPrettyPrint)
@@ -186,7 +185,5 @@ instance GoogleRequest InstallsList' where
               _ilOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy InstallsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy InstallsListResource)
+                      rq

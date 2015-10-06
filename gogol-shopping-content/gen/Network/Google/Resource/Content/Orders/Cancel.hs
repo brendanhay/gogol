@@ -172,8 +172,8 @@ instance GoogleAuth OrdersCancel' where
 
 instance GoogleRequest OrdersCancel' where
         type Rs OrdersCancel' = OrdersCancelResponse
-        request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersCancel'{..}
+        request = requestWith shoppingContentRequest
+        requestWith rq OrdersCancel'{..}
           = go _ocMerchantId _ocOrderId _ocQuotaUser
               (Just _ocPrettyPrint)
               _ocUserIP
@@ -183,7 +183,5 @@ instance GoogleRequest OrdersCancel' where
               (Just AltJSON)
               _ocPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy OrdersCancelResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy OrdersCancelResource)
+                      rq

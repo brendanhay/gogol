@@ -168,8 +168,8 @@ instance GoogleRequest ProjectsZonesOperationsList'
          where
         type Rs ProjectsZonesOperationsList' =
              ListOperationsResponse
-        request = requestWithRoute defReq containerURL
-        requestWithRoute r u ProjectsZonesOperationsList'{..}
+        request = requestWith containerRequest
+        requestWith rq ProjectsZonesOperationsList'{..}
           = go _pzolProjectId _pzolZoneId _pzolQuotaUser
               (Just _pzolPrettyPrint)
               _pzolUserIP
@@ -178,7 +178,6 @@ instance GoogleRequest ProjectsZonesOperationsList'
               _pzolOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsZonesOperationsListResource)
-                      r
-                      u
+                      rq

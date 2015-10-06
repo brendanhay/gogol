@@ -189,8 +189,8 @@ instance GoogleAuth InstancesSetMetadata' where
 
 instance GoogleRequest InstancesSetMetadata' where
         type Rs InstancesSetMetadata' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesSetMetadata'{..}
+        request = requestWith computeRequest
+        requestWith rq InstancesSetMetadata'{..}
           = go _ismProject _ismZone _ismInstance _ismQuotaUser
               (Just _ismPrettyPrint)
               _ismUserIP
@@ -200,7 +200,6 @@ instance GoogleRequest InstancesSetMetadata' where
               (Just AltJSON)
               _ismPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy InstancesSetMetadataResource)
-                      r
-                      u
+                      rq

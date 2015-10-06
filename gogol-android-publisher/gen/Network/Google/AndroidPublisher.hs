@@ -21,7 +21,7 @@ module Network.Google.AndroidPublisher
     -- * API
       AndroidPublisherAPI
     , androidPublisherAPI
-    , androidPublisherURL
+    , androidPublisherRequest
 
     -- * Service Methods
 

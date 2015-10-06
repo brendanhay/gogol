@@ -233,8 +233,8 @@ instance GoogleAuth ProjectsTopicsCreate' where
 
 instance GoogleRequest ProjectsTopicsCreate' where
         type Rs ProjectsTopicsCreate' = Topic
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsTopicsCreate'{..}
+        request = requestWith pubSubRequest
+        requestWith rq ProjectsTopicsCreate'{..}
           = go _ptcName _ptcXgafv _ptcUploadProtocol
               (Just _ptcPp)
               _ptcAccessToken
@@ -249,7 +249,6 @@ instance GoogleRequest ProjectsTopicsCreate' where
               (Just AltJSON)
               _ptcPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsTopicsCreateResource)
-                      r
-                      u
+                      rq

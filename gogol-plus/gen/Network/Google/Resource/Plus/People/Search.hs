@@ -185,8 +185,8 @@ instance GoogleAuth PeopleSearch' where
 
 instance GoogleRequest PeopleSearch' where
         type Rs PeopleSearch' = PeopleFeed
-        request = requestWithRoute defReq plusURL
-        requestWithRoute r u PeopleSearch'{..}
+        request = requestWith plusRequest
+        requestWith rq PeopleSearch'{..}
           = go (Just _psQuery) (Just _psLanguage) _psPageToken
               (Just _psMaxResults)
               _psQuotaUser
@@ -197,7 +197,5 @@ instance GoogleRequest PeopleSearch' where
               _psOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PeopleSearchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PeopleSearchResource)
+                      rq

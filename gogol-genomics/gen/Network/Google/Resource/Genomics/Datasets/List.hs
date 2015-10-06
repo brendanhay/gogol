@@ -172,8 +172,8 @@ instance GoogleAuth DatasetsList' where
 
 instance GoogleRequest DatasetsList' where
         type Rs DatasetsList' = ListDatasetsResponse
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u DatasetsList'{..}
+        request = requestWith genomicsRequest
+        requestWith rq DatasetsList'{..}
           = go _dlProjectNumber _dlPageToken _dlPageSize
               _dlQuotaUser
               (Just _dlPrettyPrint)
@@ -183,7 +183,5 @@ instance GoogleRequest DatasetsList' where
               _dlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DatasetsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DatasetsListResource)
+                      rq

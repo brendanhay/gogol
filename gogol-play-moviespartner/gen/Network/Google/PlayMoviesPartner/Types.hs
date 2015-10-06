@@ -16,7 +16,7 @@
 module Network.Google.PlayMoviesPartner.Types
     (
     -- * Service URL
-      playMoviesPartnerURL
+      playMoviesPartnerRequest
 
     -- * Avail
     , Avail
@@ -166,9 +166,9 @@ import           Network.Google.PlayMoviesPartner.Types.Product
 import           Network.Google.PlayMoviesPartner.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Google Play Movies Partner API.
-playMoviesPartnerURL :: BaseUrl
-playMoviesPartnerURL
-  = BaseUrl Https
+-- | Default request referring to version 'v1' of the Google Play Movies Partner API.
+playMoviesPartnerRequest :: RequestBuilder
+playMoviesPartnerRequest
+  = defaultRequest
       "https://playmoviespartner.googleapis.com/"
-      443
+      ""

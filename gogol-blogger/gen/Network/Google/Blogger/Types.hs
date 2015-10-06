@@ -16,7 +16,7 @@
 module Network.Google.Blogger.Types
     (
     -- * Service URL
-      bloggerURL
+      bloggerRequest
 
     -- * PostsListOrderBy
     , PostsListOrderBy (..)
@@ -374,9 +374,8 @@ import           Network.Google.Blogger.Types.Product
 import           Network.Google.Blogger.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v3' of the Blogger API.
-bloggerURL :: BaseUrl
-bloggerURL
-  = BaseUrl Https
-      "https://www.googleapis.com/blogger/v3/"
-      443
+-- | Default request referring to version 'v3' of the Blogger API.
+bloggerRequest :: RequestBuilder
+bloggerRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "blogger/v3/"

@@ -138,15 +138,14 @@ instance GoogleAuth MetadataMetricsList' where
 
 instance GoogleRequest MetadataMetricsList' where
         type Rs MetadataMetricsList' = Metadata
-        request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u MetadataMetricsList'{..}
+        request = requestWith adSenseRequest
+        requestWith rq MetadataMetricsList'{..}
           = go _mmlQuotaUser (Just _mmlPrettyPrint) _mmlUserIP
               _mmlFields
               _mmlKey
               _mmlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy MetadataMetricsListResource)
-                      r
-                      u
+                      rq

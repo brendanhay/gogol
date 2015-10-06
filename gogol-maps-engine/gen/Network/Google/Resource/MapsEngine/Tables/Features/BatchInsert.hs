@@ -177,8 +177,8 @@ instance GoogleAuth TablesFeaturesBatchInsert' where
 instance GoogleRequest TablesFeaturesBatchInsert'
          where
         type Rs TablesFeaturesBatchInsert' = ()
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u TablesFeaturesBatchInsert'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq TablesFeaturesBatchInsert'{..}
           = go _tfbiId _tfbiQuotaUser (Just _tfbiPrettyPrint)
               _tfbiUserIP
               _tfbiFields
@@ -187,7 +187,6 @@ instance GoogleRequest TablesFeaturesBatchInsert'
               (Just AltJSON)
               _tfbiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TablesFeaturesBatchInsertResource)
-                      r
-                      u
+                      rq

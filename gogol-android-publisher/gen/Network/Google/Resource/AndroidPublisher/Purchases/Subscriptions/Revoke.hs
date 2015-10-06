@@ -184,9 +184,8 @@ instance GoogleAuth PurchasesSubscriptionsRevoke'
 instance GoogleRequest PurchasesSubscriptionsRevoke'
          where
         type Rs PurchasesSubscriptionsRevoke' = ()
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u
-          PurchasesSubscriptionsRevoke'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq PurchasesSubscriptionsRevoke'{..}
           = go _psrPackageName _psrSubscriptionId _psrToken
               _psrQuotaUser
               (Just _psrPrettyPrint)
@@ -196,7 +195,6 @@ instance GoogleRequest PurchasesSubscriptionsRevoke'
               _psrOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PurchasesSubscriptionsRevokeResource)
-                      r
-                      u
+                      rq

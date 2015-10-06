@@ -175,8 +175,8 @@ instance GoogleAuth LandingPagesDelete' where
 
 instance GoogleRequest LandingPagesDelete' where
         type Rs LandingPagesDelete' = ()
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u LandingPagesDelete'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq LandingPagesDelete'{..}
           = go _lpdProFileId _lpdCampaignId _lpdId
               _lpdQuotaUser
               (Just _lpdPrettyPrint)
@@ -186,7 +186,6 @@ instance GoogleRequest LandingPagesDelete' where
               _lpdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy LandingPagesDeleteResource)
-                      r
-                      u
+                      rq

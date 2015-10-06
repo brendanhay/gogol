@@ -174,8 +174,8 @@ instance GoogleAuth ChangesGet' where
 
 instance GoogleRequest ChangesGet' where
         type Rs ChangesGet' = Change
-        request = requestWithRoute defReq dNSURL
-        requestWithRoute r u ChangesGet'{..}
+        request = requestWith dNSRequest
+        requestWith rq ChangesGet'{..}
           = go _cgProject _cgManagedZone _cgChangeId
               _cgQuotaUser
               (Just _cgPrettyPrint)
@@ -185,6 +185,4 @@ instance GoogleRequest ChangesGet' where
               _cgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ChangesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ChangesGetResource) rq

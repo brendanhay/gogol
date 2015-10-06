@@ -205,9 +205,8 @@ instance GoogleAuth ManifestsList' where
 
 instance GoogleRequest ManifestsList' where
         type Rs ManifestsList' = ManifestsListResponse
-        request
-          = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u ManifestsList'{..}
+        request = requestWith deploymentManagerRequest
+        requestWith rq ManifestsList'{..}
           = go _mlProject _mlDeployment _mlFilter _mlPageToken
               (Just _mlMaxResults)
               _mlQuotaUser
@@ -218,7 +217,5 @@ instance GoogleRequest ManifestsList' where
               _mlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ManifestsListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ManifestsListResource)
+                      rq

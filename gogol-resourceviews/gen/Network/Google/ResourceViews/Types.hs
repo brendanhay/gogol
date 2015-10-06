@@ -16,7 +16,7 @@
 module Network.Google.ResourceViews.Types
     (
     -- * Service URL
-      resourceViewsURL
+      resourceViewsRequest
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -165,9 +165,8 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types.Product
 import           Network.Google.ResourceViews.Types.Sum
 
--- | URL referring to version 'v1beta2' of the Google Compute Engine Instance Groups API.
-resourceViewsURL :: BaseUrl
-resourceViewsURL
-  = BaseUrl Https
-      "https://www.googleapis.com/resourceviews/v1beta2/projects/"
-      443
+-- | Default request referring to version 'v1beta2' of the Google Compute Engine Instance Groups API.
+resourceViewsRequest :: RequestBuilder
+resourceViewsRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "resourceviews/v1beta2/projects/"

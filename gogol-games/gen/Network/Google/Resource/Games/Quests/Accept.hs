@@ -160,8 +160,8 @@ instance GoogleAuth QuestsAccept' where
 
 instance GoogleRequest QuestsAccept' where
         type Rs QuestsAccept' = Quest
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u QuestsAccept'{..}
+        request = requestWith gamesRequest
+        requestWith rq QuestsAccept'{..}
           = go _qaQuestId _qaLanguage _qaQuotaUser
               (Just _qaPrettyPrint)
               _qaUserIP
@@ -170,7 +170,5 @@ instance GoogleRequest QuestsAccept' where
               _qaOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy QuestsAcceptResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy QuestsAcceptResource)
+                      rq

@@ -180,8 +180,8 @@ instance GoogleAuth TaskList' where
 
 instance GoogleRequest TaskList' where
         type Rs TaskList' = TaskList
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TaskList'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TaskList'{..}
           = go _tlTableId _tlPageToken _tlStartIndex
               _tlMaxResults
               _tlQuotaUser
@@ -192,5 +192,4 @@ instance GoogleRequest TaskList' where
               _tlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy TaskListResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy TaskListResource) rq

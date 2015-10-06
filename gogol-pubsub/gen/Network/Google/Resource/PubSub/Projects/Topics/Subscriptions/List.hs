@@ -249,9 +249,8 @@ instance GoogleRequest
          ProjectsTopicsSubscriptionsList' where
         type Rs ProjectsTopicsSubscriptionsList' =
              ListTopicSubscriptionsResponse
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u
-          ProjectsTopicsSubscriptionsList'{..}
+        request = requestWith pubSubRequest
+        requestWith rq ProjectsTopicsSubscriptionsList'{..}
           = go _ptslTopic _ptslXgafv _ptslUploadProtocol
               (Just _ptslPp)
               _ptslAccessToken
@@ -267,8 +266,7 @@ instance GoogleRequest
               _ptslOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ProjectsTopicsSubscriptionsListResource)
-                      r
-                      u
+                      rq

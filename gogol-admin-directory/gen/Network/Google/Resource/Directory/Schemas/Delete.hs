@@ -159,8 +159,8 @@ instance GoogleAuth SchemasDelete' where
 
 instance GoogleRequest SchemasDelete' where
         type Rs SchemasDelete' = ()
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u SchemasDelete'{..}
+        request = requestWith directoryRequest
+        requestWith rq SchemasDelete'{..}
           = go _sdCustomerId _sdSchemaKey _sdQuotaUser
               (Just _sdPrettyPrint)
               _sdUserIP
@@ -169,7 +169,5 @@ instance GoogleRequest SchemasDelete' where
               _sdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SchemasDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SchemasDeleteResource)
+                      rq

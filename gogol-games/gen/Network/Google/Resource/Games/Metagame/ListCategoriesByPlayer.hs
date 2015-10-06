@@ -212,9 +212,8 @@ instance GoogleRequest
          MetagameListCategoriesByPlayer' where
         type Rs MetagameListCategoriesByPlayer' =
              CategoryListResponse
-        request = requestWithRoute defReq gamesURL
-        requestWithRoute r u
-          MetagameListCategoriesByPlayer'{..}
+        request = requestWith gamesRequest
+        requestWith rq MetagameListCategoriesByPlayer'{..}
           = go _mlcbpPlayerId _mlcbpCollection _mlcbpLanguage
               _mlcbpPageToken
               _mlcbpMaxResults
@@ -226,8 +225,7 @@ instance GoogleRequest
               _mlcbpOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy MetagameListCategoriesByPlayerResource)
-                      r
-                      u
+                      rq

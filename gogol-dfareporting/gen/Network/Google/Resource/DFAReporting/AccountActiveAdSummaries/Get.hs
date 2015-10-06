@@ -169,8 +169,8 @@ instance GoogleRequest AccountActiveAdSummariesGet'
          where
         type Rs AccountActiveAdSummariesGet' =
              AccountActiveAdSummary
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountActiveAdSummariesGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq AccountActiveAdSummariesGet'{..}
           = go _aaasgProFileId _aaasgSummaryAccountId
               _aaasgQuotaUser
               (Just _aaasgPrettyPrint)
@@ -180,7 +180,6 @@ instance GoogleRequest AccountActiveAdSummariesGet'
               _aaasgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountActiveAdSummariesGetResource)
-                      r
-                      u
+                      rq

@@ -147,8 +147,8 @@ instance GoogleAuth ReadgroupsetsGet' where
 
 instance GoogleRequest ReadgroupsetsGet' where
         type Rs ReadgroupsetsGet' = ReadGroupSet
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReadgroupsetsGet'{..}
+        request = requestWith genomicsRequest
+        requestWith rq ReadgroupsetsGet'{..}
           = go _rgReadGroupSetId _rgQuotaUser
               (Just _rgPrettyPrint)
               _rgUserIP
@@ -157,7 +157,6 @@ instance GoogleRequest ReadgroupsetsGet' where
               _rgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ReadgroupsetsGetResource)
-                      r
-                      u
+                      rq

@@ -232,8 +232,8 @@ instance GoogleAuth AppsModulesGet' where
 
 instance GoogleRequest AppsModulesGet' where
         type Rs AppsModulesGet' = Module
-        request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsModulesGet'{..}
+        request = requestWith appEngineRequest
+        requestWith rq AppsModulesGet'{..}
           = go _amgAppsId _amgModulesId _amgXgafv
               _amgUploadProtocol
               (Just _amgPp)
@@ -248,7 +248,5 @@ instance GoogleRequest AppsModulesGet' where
               _amgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AppsModulesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AppsModulesGetResource)
+                      rq

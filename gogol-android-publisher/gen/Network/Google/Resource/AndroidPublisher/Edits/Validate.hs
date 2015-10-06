@@ -161,8 +161,8 @@ instance GoogleAuth EditsValidate' where
 
 instance GoogleRequest EditsValidate' where
         type Rs EditsValidate' = AppEdit
-        request = requestWithRoute defReq androidPublisherURL
-        requestWithRoute r u EditsValidate'{..}
+        request = requestWith androidPublisherRequest
+        requestWith rq EditsValidate'{..}
           = go _evPackageName _evEditId _evQuotaUser
               (Just _evPrettyPrint)
               _evUserIP
@@ -171,7 +171,5 @@ instance GoogleRequest EditsValidate' where
               _evOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy EditsValidateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy EditsValidateResource)
+                      rq

@@ -173,8 +173,8 @@ instance GoogleAuth FirewallsUpdate' where
 
 instance GoogleRequest FirewallsUpdate' where
         type Rs FirewallsUpdate' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u FirewallsUpdate'{..}
+        request = requestWith computeRequest
+        requestWith rq FirewallsUpdate'{..}
           = go _fuProject _fuFirewall _fuQuotaUser
               (Just _fuPrettyPrint)
               _fuUserIP
@@ -184,7 +184,6 @@ instance GoogleRequest FirewallsUpdate' where
               (Just AltJSON)
               _fuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy FirewallsUpdateResource)
-                      r
-                      u
+                      rq

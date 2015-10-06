@@ -162,8 +162,8 @@ instance GoogleAuth PlacementGroupsGet' where
 
 instance GoogleRequest PlacementGroupsGet' where
         type Rs PlacementGroupsGet' = PlacementGroup
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementGroupsGet'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq PlacementGroupsGet'{..}
           = go _pggProFileId _pggId _pggQuotaUser
               (Just _pggPrettyPrint)
               _pggUserIP
@@ -172,7 +172,6 @@ instance GoogleRequest PlacementGroupsGet' where
               _pggOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PlacementGroupsGetResource)
-                      r
-                      u
+                      rq

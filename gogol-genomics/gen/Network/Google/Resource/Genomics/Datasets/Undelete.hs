@@ -151,8 +151,8 @@ instance GoogleAuth DatasetsUndelete' where
 
 instance GoogleRequest DatasetsUndelete' where
         type Rs DatasetsUndelete' = Dataset
-        request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u DatasetsUndelete'{..}
+        request = requestWith genomicsRequest
+        requestWith rq DatasetsUndelete'{..}
           = go _duDatasetId _duQuotaUser (Just _duPrettyPrint)
               _duUserIP
               _duFields
@@ -160,7 +160,6 @@ instance GoogleRequest DatasetsUndelete' where
               _duOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DatasetsUndeleteResource)
-                      r
-                      u
+                      rq

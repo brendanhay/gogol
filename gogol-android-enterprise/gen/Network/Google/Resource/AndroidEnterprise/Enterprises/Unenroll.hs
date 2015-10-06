@@ -148,9 +148,8 @@ instance GoogleAuth EnterprisesUnenroll' where
 
 instance GoogleRequest EnterprisesUnenroll' where
         type Rs EnterprisesUnenroll' = ()
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u EnterprisesUnenroll'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq EnterprisesUnenroll'{..}
           = go _euEnterpriseId _euQuotaUser
               (Just _euPrettyPrint)
               _euUserIP
@@ -159,7 +158,6 @@ instance GoogleRequest EnterprisesUnenroll' where
               _euOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EnterprisesUnenrollResource)
-                      r
-                      u
+                      rq

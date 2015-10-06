@@ -163,8 +163,8 @@ instance GoogleAuth CreativeGroupsInsert' where
 
 instance GoogleRequest CreativeGroupsInsert' where
         type Rs CreativeGroupsInsert' = CreativeGroup
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeGroupsInsert'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq CreativeGroupsInsert'{..}
           = go _cgiProFileId _cgiQuotaUser
               (Just _cgiPrettyPrint)
               _cgiUserIP
@@ -174,7 +174,6 @@ instance GoogleRequest CreativeGroupsInsert' where
               (Just AltJSON)
               _cgiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CreativeGroupsInsertResource)
-                      r
-                      u
+                      rq

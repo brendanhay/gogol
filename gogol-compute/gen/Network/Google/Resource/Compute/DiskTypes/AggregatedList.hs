@@ -200,8 +200,8 @@ instance GoogleAuth DiskTypesAggregatedList' where
 instance GoogleRequest DiskTypesAggregatedList' where
         type Rs DiskTypesAggregatedList' =
              DiskTypeAggregatedList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u DiskTypesAggregatedList'{..}
+        request = requestWith computeRequest
+        requestWith rq DiskTypesAggregatedList'{..}
           = go _dtalProject _dtalFilter _dtalPageToken
               (Just _dtalMaxResults)
               _dtalQuotaUser
@@ -212,7 +212,6 @@ instance GoogleRequest DiskTypesAggregatedList' where
               _dtalOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy DiskTypesAggregatedListResource)
-                      r
-                      u
+                      rq

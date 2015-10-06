@@ -180,9 +180,8 @@ instance GoogleAuth AccountsContainersTagsDelete'
 instance GoogleRequest AccountsContainersTagsDelete'
          where
         type Rs AccountsContainersTagsDelete' = ()
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u
-          AccountsContainersTagsDelete'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersTagsDelete'{..}
           = go _actdcAccountId _actdcContainerId _actdcTagId
               _actdcQuotaUser
               (Just _actdcPrettyPrint)
@@ -192,7 +191,6 @@ instance GoogleRequest AccountsContainersTagsDelete'
               _actdcOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsContainersTagsDeleteResource)
-                      r
-                      u
+                      rq

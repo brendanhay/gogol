@@ -217,8 +217,8 @@ instance GoogleAuth FilesList' where
 
 instance GoogleRequest FilesList' where
         type Rs FilesList' = FileList
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesList'{..}
+        request = requestWith driveRequest
+        requestWith rq FilesList'{..}
           = go _flOrderBy _flQ _flSpaces _flProjection
               _flCorpus
               _flPageToken
@@ -231,6 +231,4 @@ instance GoogleRequest FilesList' where
               _flOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy FilesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy FilesListResource) rq

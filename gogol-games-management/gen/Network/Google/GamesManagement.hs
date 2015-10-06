@@ -21,7 +21,7 @@ module Network.Google.GamesManagement
     -- * API
       GamesManagementAPI
     , gamesManagementAPI
-    , gamesManagementURL
+    , gamesManagementRequest
 
     -- * Service Methods
 

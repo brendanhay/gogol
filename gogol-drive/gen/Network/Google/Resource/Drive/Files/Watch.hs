@@ -224,8 +224,8 @@ instance GoogleAuth FilesWatch' where
 
 instance GoogleRequest FilesWatch' where
         type Rs FilesWatch' = Channel
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesWatch'{..}
+        request = requestWith driveRequest
+        requestWith rq FilesWatch'{..}
           = go _fwFileId (Just _fwUpdateViewedDate)
               _fwProjection
               (Just _fwAcknowledgeAbuse)
@@ -239,15 +239,13 @@ instance GoogleRequest FilesWatch' where
               (Just AltJSON)
               _fwPayload
           where go :<|> _
-                  = clientWithRoute (Proxy :: Proxy FilesWatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy FilesWatchResource) rq
 
 instance GoogleRequest (MediaDownload FilesWatch')
          where
         type Rs (MediaDownload FilesWatch') = Body
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u (MediaDownload FilesWatch'{..})
+        request = requestWith driveRequest
+        requestWith rq (MediaDownload FilesWatch'{..})
           = go _fwFileId (Just _fwUpdateViewedDate)
               _fwProjection
               (Just _fwAcknowledgeAbuse)
@@ -261,6 +259,4 @@ instance GoogleRequest (MediaDownload FilesWatch')
               (Just AltMedia)
               _fwPayload
           where _ :<|> go
-                  = clientWithRoute (Proxy :: Proxy FilesWatchResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy FilesWatchResource) rq

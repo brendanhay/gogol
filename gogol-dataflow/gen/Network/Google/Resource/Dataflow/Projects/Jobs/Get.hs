@@ -240,8 +240,8 @@ instance GoogleAuth ProjectsJobsGet' where
 
 instance GoogleRequest ProjectsJobsGet' where
         type Rs ProjectsJobsGet' = Job
-        request = requestWithRoute defReq dataflowURL
-        requestWithRoute r u ProjectsJobsGet'{..}
+        request = requestWith dataflowRequest
+        requestWith rq ProjectsJobsGet'{..}
           = go _pjgProjectId _pjgJobId _pjgXgafv
               _pjgUploadProtocol
               (Just _pjgPp)
@@ -257,7 +257,6 @@ instance GoogleRequest ProjectsJobsGet' where
               _pjgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProjectsJobsGetResource)
-                      r
-                      u
+                      rq

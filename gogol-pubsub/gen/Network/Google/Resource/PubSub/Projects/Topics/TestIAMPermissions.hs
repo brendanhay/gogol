@@ -237,9 +237,8 @@ instance GoogleRequest
          ProjectsTopicsTestIAMPermissions' where
         type Rs ProjectsTopicsTestIAMPermissions' =
              TestIAMPermissionsResponse
-        request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u
-          ProjectsTopicsTestIAMPermissions'{..}
+        request = requestWith pubSubRequest
+        requestWith rq ProjectsTopicsTestIAMPermissions'{..}
           = go _pttipResource _pttipXgafv _pttipUploadProtocol
               (Just _pttipPp)
               _pttipAccessToken
@@ -254,8 +253,7 @@ instance GoogleRequest
               (Just AltJSON)
               _pttipPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ProjectsTopicsTestIAMPermissionsResource)
-                      r
-                      u
+                      rq

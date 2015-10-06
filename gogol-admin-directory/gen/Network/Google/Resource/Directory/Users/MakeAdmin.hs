@@ -162,8 +162,8 @@ instance GoogleAuth UsersMakeAdmin' where
 
 instance GoogleRequest UsersMakeAdmin' where
         type Rs UsersMakeAdmin' = ()
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u UsersMakeAdmin'{..}
+        request = requestWith directoryRequest
+        requestWith rq UsersMakeAdmin'{..}
           = go _umaUserKey _umaQuotaUser (Just _umaPrettyPrint)
               _umaUserIP
               _umaFields
@@ -172,7 +172,5 @@ instance GoogleRequest UsersMakeAdmin' where
               (Just AltJSON)
               _umaPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy UsersMakeAdminResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy UsersMakeAdminResource)
+                      rq

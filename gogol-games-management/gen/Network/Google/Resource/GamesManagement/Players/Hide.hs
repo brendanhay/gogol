@@ -166,8 +166,8 @@ instance GoogleAuth PlayersHide' where
 
 instance GoogleRequest PlayersHide' where
         type Rs PlayersHide' = ()
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u PlayersHide'{..}
+        request = requestWith gamesManagementRequest
+        requestWith rq PlayersHide'{..}
           = go _phApplicationId _phPlayerId _phQuotaUser
               (Just _phPrettyPrint)
               _phUserIP
@@ -176,7 +176,4 @@ instance GoogleRequest PlayersHide' where
               _phOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy PlayersHideResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy PlayersHideResource) rq

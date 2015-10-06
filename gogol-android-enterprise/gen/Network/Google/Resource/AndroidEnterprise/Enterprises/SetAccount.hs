@@ -166,9 +166,8 @@ instance GoogleAuth EnterprisesSetAccount' where
 
 instance GoogleRequest EnterprisesSetAccount' where
         type Rs EnterprisesSetAccount' = EnterpriseAccount
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u EnterprisesSetAccount'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq EnterprisesSetAccount'{..}
           = go _esaEnterpriseId _esaQuotaUser
               (Just _esaPrettyPrint)
               _esaUserIP
@@ -178,7 +177,6 @@ instance GoogleRequest EnterprisesSetAccount' where
               (Just AltJSON)
               _esaPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy EnterprisesSetAccountResource)
-                      r
-                      u
+                      rq

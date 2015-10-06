@@ -149,8 +149,8 @@ instance GoogleAuth RasterCollectionsGet' where
 
 instance GoogleRequest RasterCollectionsGet' where
         type Rs RasterCollectionsGet' = RasterCollection
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u RasterCollectionsGet'{..}
+        request = requestWith mapsEngineRequest
+        requestWith rq RasterCollectionsGet'{..}
           = go _rcgId _rcgQuotaUser (Just _rcgPrettyPrint)
               _rcgUserIP
               _rcgFields
@@ -158,7 +158,6 @@ instance GoogleRequest RasterCollectionsGet' where
               _rcgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy RasterCollectionsGetResource)
-                      r
-                      u
+                      rq

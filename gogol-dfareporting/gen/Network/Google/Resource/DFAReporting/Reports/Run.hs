@@ -172,8 +172,8 @@ instance GoogleAuth ReportsRun' where
 
 instance GoogleRequest ReportsRun' where
         type Rs ReportsRun' = File
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ReportsRun'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq ReportsRun'{..}
           = go _rrProFileId _rrReportId _rrSynchronous
               _rrQuotaUser
               (Just _rrPrettyPrint)
@@ -183,6 +183,4 @@ instance GoogleRequest ReportsRun' where
               _rrOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReportsRunResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ReportsRunResource) rq

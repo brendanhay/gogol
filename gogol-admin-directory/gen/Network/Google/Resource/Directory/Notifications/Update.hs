@@ -173,8 +173,8 @@ instance GoogleAuth NotificationsUpdate' where
 
 instance GoogleRequest NotificationsUpdate' where
         type Rs NotificationsUpdate' = Notification
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u NotificationsUpdate'{..}
+        request = requestWith directoryRequest
+        requestWith rq NotificationsUpdate'{..}
           = go _nuCustomer _nuNotificationId _nuQuotaUser
               (Just _nuPrettyPrint)
               _nuUserIP
@@ -184,7 +184,6 @@ instance GoogleRequest NotificationsUpdate' where
               (Just AltJSON)
               _nuPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy NotificationsUpdateResource)
-                      r
-                      u
+                      rq

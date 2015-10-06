@@ -167,8 +167,8 @@ instance GoogleRequest OrdersGetbymerchantOrderid'
          where
         type Rs OrdersGetbymerchantOrderid' =
              OrdersGetByMerchantOrderIdResponse
-        request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersGetbymerchantOrderid'{..}
+        request = requestWith shoppingContentRequest
+        requestWith rq OrdersGetbymerchantOrderid'{..}
           = go _ogogMerchantId _ogogMerchantOrderId
               _ogogQuotaUser
               (Just _ogogPrettyPrint)
@@ -178,7 +178,6 @@ instance GoogleRequest OrdersGetbymerchantOrderid'
               _ogogOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy OrdersGetbymerchantOrderidResource)
-                      r
-                      u
+                      rq

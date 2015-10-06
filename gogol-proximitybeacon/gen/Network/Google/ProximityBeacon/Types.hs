@@ -16,7 +16,7 @@
 module Network.Google.ProximityBeacon.Types
     (
     -- * Service URL
-      proximityBeaconURL
+      proximityBeaconRequest
 
     -- * LatLng
     , LatLng
@@ -148,9 +148,9 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types.Product
 import           Network.Google.ProximityBeacon.Types.Sum
 
--- | URL referring to version 'v1beta1' of the Google Proximity Beacon API.
-proximityBeaconURL :: BaseUrl
-proximityBeaconURL
-  = BaseUrl Https
+-- | Default request referring to version 'v1beta1' of the Google Proximity Beacon API.
+proximityBeaconRequest :: RequestBuilder
+proximityBeaconRequest
+  = defaultRequest
       "https://proximitybeacon.googleapis.com/"
-      443
+      ""

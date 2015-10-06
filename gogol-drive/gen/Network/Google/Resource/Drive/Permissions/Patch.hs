@@ -189,8 +189,8 @@ instance GoogleAuth PermissionsPatch' where
 
 instance GoogleRequest PermissionsPatch' where
         type Rs PermissionsPatch' = Permission
-        request = requestWithRoute defReq driveURL
-        requestWithRoute r u PermissionsPatch'{..}
+        request = requestWith driveRequest
+        requestWith rq PermissionsPatch'{..}
           = go _pppFileId _pppPermissionId
               (Just _pppTransferOwnership)
               _pppQuotaUser
@@ -202,7 +202,6 @@ instance GoogleRequest PermissionsPatch' where
               (Just AltJSON)
               _pppPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy PermissionsPatchResource)
-                      r
-                      u
+                      rq

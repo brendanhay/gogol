@@ -204,8 +204,8 @@ instance GoogleRequest
          InstanceGroupManagersAggregatedList' where
         type Rs InstanceGroupManagersAggregatedList' =
              InstanceGroupManagerAggregatedList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u
+        request = requestWith computeRequest
+        requestWith rq
           InstanceGroupManagersAggregatedList'{..}
           = go _igmalProject _igmalFilter _igmalPageToken
               (Just _igmalMaxResults)
@@ -217,8 +217,7 @@ instance GoogleRequest
               _igmalOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy InstanceGroupManagersAggregatedListResource)
-                      r
-                      u
+                      rq

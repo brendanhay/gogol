@@ -228,8 +228,8 @@ instance GoogleAuth CalendarListList' where
 
 instance GoogleRequest CalendarListList' where
         type Rs CalendarListList' = CalendarList
-        request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarListList'{..}
+        request = requestWith appsCalendarRequest
+        requestWith rq CalendarListList'{..}
           = go _cllSyncToken _cllMinAccessRole _cllShowDeleted
               _cllShowHidden
               _cllPageToken
@@ -242,7 +242,6 @@ instance GoogleRequest CalendarListList' where
               _cllOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CalendarListListResource)
-                      r
-                      u
+                      rq

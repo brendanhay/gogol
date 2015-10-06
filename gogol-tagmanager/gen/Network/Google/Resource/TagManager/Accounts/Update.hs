@@ -171,8 +171,8 @@ instance GoogleAuth AccountsUpdate' where
 
 instance GoogleRequest AccountsUpdate' where
         type Rs AccountsUpdate' = Account
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsUpdate'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsUpdate'{..}
           = go _auAccountId _auFingerprint _auQuotaUser
               (Just _auPrettyPrint)
               _auUserIP
@@ -182,7 +182,5 @@ instance GoogleRequest AccountsUpdate' where
               (Just AltJSON)
               _auPayload
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy AccountsUpdateResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy AccountsUpdateResource)
+                      rq

@@ -183,8 +183,8 @@ instance GoogleAuth TableImportTable' where
 
 instance GoogleRequest TableImportTable' where
         type Rs TableImportTable' = Table
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TableImportTable'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq TableImportTable'{..}
           = go (Just _titName) _titDelimiter _titEncoding
               _titQuotaUser
               (Just _titPrettyPrint)
@@ -195,7 +195,6 @@ instance GoogleRequest TableImportTable' where
               (Just AltJSON)
               _titMedia
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TableImportTableResource)
-                      r
-                      u
+                      rq

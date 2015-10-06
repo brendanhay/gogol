@@ -170,8 +170,8 @@ instance GoogleRequest AccountsContainersRulesList'
          where
         type Rs AccountsContainersRulesList' =
              ListRulesResponse
-        request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersRulesList'{..}
+        request = requestWith tagManagerRequest
+        requestWith rq AccountsContainersRulesList'{..}
           = go _acrlAccountId _acrlContainerId _acrlQuotaUser
               (Just _acrlPrettyPrint)
               _acrlUserIP
@@ -180,7 +180,6 @@ instance GoogleRequest AccountsContainersRulesList'
               _acrlOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsContainersRulesListResource)
-                      r
-                      u
+                      rq

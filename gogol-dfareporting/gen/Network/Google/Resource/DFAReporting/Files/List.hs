@@ -202,8 +202,8 @@ instance GoogleAuth FilesList' where
 
 instance GoogleRequest FilesList' where
         type Rs FilesList' = FileList
-        request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FilesList'{..}
+        request = requestWith dFAReportingRequest
+        requestWith rq FilesList'{..}
           = go _flProFileId (Just _flSortOrder) (Just _flScope)
               _flPageToken
               (Just _flSortField)
@@ -216,6 +216,4 @@ instance GoogleRequest FilesList' where
               _flOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy FilesListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy FilesListResource) rq

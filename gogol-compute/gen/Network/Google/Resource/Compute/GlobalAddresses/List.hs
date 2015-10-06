@@ -196,8 +196,8 @@ instance GoogleAuth GlobalAddressesList' where
 
 instance GoogleRequest GlobalAddressesList' where
         type Rs GlobalAddressesList' = AddressList
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalAddressesList'{..}
+        request = requestWith computeRequest
+        requestWith rq GlobalAddressesList'{..}
           = go _galProject _galFilter _galPageToken
               (Just _galMaxResults)
               _galQuotaUser
@@ -208,7 +208,6 @@ instance GoogleRequest GlobalAddressesList' where
               _galOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GlobalAddressesListResource)
-                      r
-                      u
+                      rq

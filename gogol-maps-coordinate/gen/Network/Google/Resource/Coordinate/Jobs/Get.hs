@@ -157,8 +157,8 @@ instance GoogleAuth JobsGet' where
 
 instance GoogleRequest JobsGet' where
         type Rs JobsGet' = Job
-        request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u JobsGet'{..}
+        request = requestWith mapsCoordinateRequest
+        requestWith rq JobsGet'{..}
           = go _jgTeamId _jgJobId _jgQuotaUser
               (Just _jgPrettyPrint)
               _jgUserIP
@@ -167,5 +167,4 @@ instance GoogleRequest JobsGet' where
               _jgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsGetResource) r
-                      u
+                  = clientBuild (Proxy :: Proxy JobsGetResource) rq

@@ -160,8 +160,8 @@ instance GoogleAuth ClientAccessDelete' where
 
 instance GoogleRequest ClientAccessDelete' where
         type Rs ClientAccessDelete' = ()
-        request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u ClientAccessDelete'{..}
+        request = requestWith adExchangeBuyerRequest
+        requestWith rq ClientAccessDelete'{..}
           = go _cadClientAccountId (Just _cadSponsorAccountId)
               _cadQuotaUser
               (Just _cadPrettyPrint)
@@ -171,7 +171,6 @@ instance GoogleRequest ClientAccessDelete' where
               _cadOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ClientAccessDeleteResource)
-                      r
-                      u
+                      rq

@@ -333,9 +333,8 @@ instance GoogleAuth AccountsStoreInfosList' where
 instance GoogleRequest AccountsStoreInfosList' where
         type Rs AccountsStoreInfosList' =
              ListStoreInfosResponse
-        request
-          = requestWithRoute defReq playMoviesPartnerURL
-        requestWithRoute r u AccountsStoreInfosList'{..}
+        request = requestWith playMoviesPartnerRequest
+        requestWith rq AccountsStoreInfosList'{..}
           = go _asilAccountId (_asilPphNames ^. _Default)
               _asilXgafv
               (_asilStudioNames ^. _Default)
@@ -358,7 +357,6 @@ instance GoogleRequest AccountsStoreInfosList' where
               _asilOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsStoreInfosListResource)
-                      r
-                      u
+                      rq

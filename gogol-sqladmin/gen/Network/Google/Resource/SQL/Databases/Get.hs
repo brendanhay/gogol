@@ -174,8 +174,8 @@ instance GoogleAuth DatabasesGet' where
 
 instance GoogleRequest DatabasesGet' where
         type Rs DatabasesGet' = Database
-        request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u DatabasesGet'{..}
+        request = requestWith sQLAdminRequest
+        requestWith rq DatabasesGet'{..}
           = go _dgProject _dgInstance _dgDatabase _dgQuotaUser
               (Just _dgPrettyPrint)
               _dgUserIP
@@ -184,7 +184,5 @@ instance GoogleRequest DatabasesGet' where
               _dgOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy DatabasesGetResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy DatabasesGetResource)
+                      rq

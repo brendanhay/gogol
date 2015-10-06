@@ -169,8 +169,8 @@ instance GoogleAuth ColumnList' where
 
 instance GoogleRequest ColumnList' where
         type Rs ColumnList' = ColumnList
-        request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u ColumnList'{..}
+        request = requestWith fusionTablesRequest
+        requestWith rq ColumnList'{..}
           = go _clTableId _clPageToken _clMaxResults
               _clQuotaUser
               (Just _clPrettyPrint)
@@ -180,6 +180,4 @@ instance GoogleRequest ColumnList' where
               _clOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ColumnListResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ColumnListResource) rq

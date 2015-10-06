@@ -170,8 +170,8 @@ instance GoogleAuth GroupItemsInsert' where
 
 instance GoogleRequest GroupItemsInsert' where
         type Rs GroupItemsInsert' = GroupItem
-        request = requestWithRoute defReq youTubeAnalyticsURL
-        requestWithRoute r u GroupItemsInsert'{..}
+        request = requestWith youTubeAnalyticsRequest
+        requestWith rq GroupItemsInsert'{..}
           = go _giiOnBehalfOfContentOwner _giiQuotaUser
               (Just _giiPrettyPrint)
               _giiUserIP
@@ -181,7 +181,6 @@ instance GoogleRequest GroupItemsInsert' where
               (Just AltJSON)
               _giiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy GroupItemsInsertResource)
-                      r
-                      u
+                      rq

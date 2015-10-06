@@ -173,8 +173,8 @@ instance GoogleAuth UsersAliasesWatch' where
 
 instance GoogleRequest UsersAliasesWatch' where
         type Rs UsersAliasesWatch' = Channel
-        request = requestWithRoute defReq directoryURL
-        requestWithRoute r u UsersAliasesWatch'{..}
+        request = requestWith directoryRequest
+        requestWith rq UsersAliasesWatch'{..}
           = go _uawUserKey _uawEvent _uawQuotaUser
               (Just _uawPrettyPrint)
               _uawUserIP
@@ -184,7 +184,6 @@ instance GoogleRequest UsersAliasesWatch' where
               (Just AltJSON)
               _uawPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy UsersAliasesWatchResource)
-                      r
-                      u
+                      rq

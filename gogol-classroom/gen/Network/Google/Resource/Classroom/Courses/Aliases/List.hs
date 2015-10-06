@@ -259,8 +259,8 @@ instance GoogleAuth CoursesAliasesList' where
 instance GoogleRequest CoursesAliasesList' where
         type Rs CoursesAliasesList' =
              ListCourseAliasesResponse
-        request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesAliasesList'{..}
+        request = requestWith classroomRequest
+        requestWith rq CoursesAliasesList'{..}
           = go _calCourseId _calXgafv _calUploadProtocol
               (Just _calPp)
               _calAccessToken
@@ -276,7 +276,6 @@ instance GoogleRequest CoursesAliasesList' where
               _calOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy CoursesAliasesListResource)
-                      r
-                      u
+                      rq

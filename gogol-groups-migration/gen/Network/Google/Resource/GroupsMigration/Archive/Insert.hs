@@ -156,8 +156,8 @@ instance GoogleAuth ArchiveInsert' where
 
 instance GoogleRequest ArchiveInsert' where
         type Rs ArchiveInsert' = Groups
-        request = requestWithRoute defReq groupsMigrationURL
-        requestWithRoute r u ArchiveInsert'{..}
+        request = requestWith groupsMigrationRequest
+        requestWith rq ArchiveInsert'{..}
           = go _aiGroupId _aiQuotaUser (Just _aiPrettyPrint)
               _aiUserIP
               _aiFields
@@ -166,7 +166,5 @@ instance GoogleRequest ArchiveInsert' where
               (Just AltJSON)
               _aiMedia
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy ArchiveInsertResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy ArchiveInsertResource)
+                      rq

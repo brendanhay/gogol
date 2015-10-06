@@ -176,9 +176,8 @@ instance GoogleAuth ProductsApprove' where
 
 instance GoogleRequest ProductsApprove' where
         type Rs ProductsApprove' = ()
-        request
-          = requestWithRoute defReq androidEnterpriseURL
-        requestWithRoute r u ProductsApprove'{..}
+        request = requestWith androidEnterpriseRequest
+        requestWith rq ProductsApprove'{..}
           = go _paEnterpriseId _paProductId _paQuotaUser
               (Just _paPrettyPrint)
               _paUserIP
@@ -188,7 +187,6 @@ instance GoogleRequest ProductsApprove' where
               (Just AltJSON)
               _paPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy ProductsApproveResource)
-                      r
-                      u
+                      rq

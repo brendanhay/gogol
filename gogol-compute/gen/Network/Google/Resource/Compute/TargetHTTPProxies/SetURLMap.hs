@@ -183,8 +183,8 @@ instance GoogleAuth TargetHTTPProxiesSetURLMap' where
 instance GoogleRequest TargetHTTPProxiesSetURLMap'
          where
         type Rs TargetHTTPProxiesSetURLMap' = Operation
-        request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetHTTPProxiesSetURLMap'{..}
+        request = requestWith computeRequest
+        requestWith rq TargetHTTPProxiesSetURLMap'{..}
           = go _thttppsumProject _thttppsumTargetHTTPProxy
               _thttppsumQuotaUser
               (Just _thttppsumPrettyPrint)
@@ -195,7 +195,6 @@ instance GoogleRequest TargetHTTPProxiesSetURLMap'
               (Just AltJSON)
               _thttppsumPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy TargetHTTPProxiesSetURLMapResource)
-                      r
-                      u
+                      rq

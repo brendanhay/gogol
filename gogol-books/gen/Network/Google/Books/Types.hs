@@ -16,7 +16,7 @@
 module Network.Google.Books.Types
     (
     -- * Service URL
-      booksURL
+      booksRequest
 
     -- * Usersettings
     , Usersettings
@@ -807,9 +807,8 @@ import           Network.Google.Books.Types.Product
 import           Network.Google.Books.Types.Sum
 import           Network.Google.Prelude
 
--- | URL referring to version 'v1' of the Books API.
-booksURL :: BaseUrl
-booksURL
-  = BaseUrl Https
-      "https://www.googleapis.com/books/v1/"
-      443
+-- | Default request referring to version 'v1' of the Books API.
+booksRequest :: RequestBuilder
+booksRequest
+  = defaultRequest "https://www.googleapis.com/"
+      "books/v1/"

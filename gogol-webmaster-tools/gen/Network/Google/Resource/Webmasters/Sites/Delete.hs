@@ -147,8 +147,8 @@ instance GoogleAuth SitesDelete' where
 
 instance GoogleRequest SitesDelete' where
         type Rs SitesDelete' = ()
-        request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u SitesDelete'{..}
+        request = requestWith webmasterToolsRequest
+        requestWith rq SitesDelete'{..}
           = go _sdSiteURL _sdQuotaUser (Just _sdPrettyPrint)
               _sdUserIP
               _sdFields
@@ -156,7 +156,4 @@ instance GoogleRequest SitesDelete' where
               _sdOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
-                      (Proxy :: Proxy SitesDeleteResource)
-                      r
-                      u
+                  = clientBuild (Proxy :: Proxy SitesDeleteResource) rq

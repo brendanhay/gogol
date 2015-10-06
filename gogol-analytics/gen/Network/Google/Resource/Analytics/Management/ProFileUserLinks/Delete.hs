@@ -196,9 +196,8 @@ instance GoogleAuth ManagementProFileUserLinksDelete'
 instance GoogleRequest
          ManagementProFileUserLinksDelete' where
         type Rs ManagementProFileUserLinksDelete' = ()
-        request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u
-          ManagementProFileUserLinksDelete'{..}
+        request = requestWith analyticsRequest
+        requestWith rq ManagementProFileUserLinksDelete'{..}
           = go _mpfuldAccountId _mpfuldWebPropertyId
               _mpfuldProFileId
               _mpfuldLinkId
@@ -210,8 +209,7 @@ instance GoogleRequest
               _mpfuldOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy ManagementProFileUserLinksDeleteResource)
-                      r
-                      u
+                      rq

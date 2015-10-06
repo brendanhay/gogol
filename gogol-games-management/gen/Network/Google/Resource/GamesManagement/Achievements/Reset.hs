@@ -153,8 +153,8 @@ instance GoogleAuth AchievementsReset' where
 
 instance GoogleRequest AchievementsReset' where
         type Rs AchievementsReset' = AchievementResetResponse
-        request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u AchievementsReset'{..}
+        request = requestWith gamesManagementRequest
+        requestWith rq AchievementsReset'{..}
           = go _arAchievementId _arQuotaUser
               (Just _arPrettyPrint)
               _arUserIP
@@ -163,7 +163,6 @@ instance GoogleRequest AchievementsReset' where
               _arOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AchievementsResetResource)
-                      r
-                      u
+                      rq

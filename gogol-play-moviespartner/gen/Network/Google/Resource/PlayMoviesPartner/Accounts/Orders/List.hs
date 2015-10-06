@@ -310,9 +310,8 @@ instance GoogleAuth AccountsOrdersList' where
 
 instance GoogleRequest AccountsOrdersList' where
         type Rs AccountsOrdersList' = ListOrdersResponse
-        request
-          = requestWithRoute defReq playMoviesPartnerURL
-        requestWithRoute r u AccountsOrdersList'{..}
+        request = requestWith playMoviesPartnerRequest
+        requestWith rq AccountsOrdersList'{..}
           = go _aolAccountId (_aolStatus ^. _Default)
               (_aolPphNames ^. _Default)
               _aolXgafv
@@ -334,7 +333,6 @@ instance GoogleRequest AccountsOrdersList' where
               _aolOAuthToken
               (Just AltJSON)
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy :: Proxy AccountsOrdersListResource)
-                      r
-                      u
+                      rq

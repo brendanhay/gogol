@@ -176,8 +176,8 @@ instance GoogleRequest
          RasterCollectionsRastersBatchInsert' where
         type Rs RasterCollectionsRastersBatchInsert' =
              RasterCollectionsRastersBatchInsertResponse
-        request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u
+        request = requestWith mapsEngineRequest
+        requestWith rq
           RasterCollectionsRastersBatchInsert'{..}
           = go _rcrbiId _rcrbiQuotaUser
               (Just _rcrbiPrettyPrint)
@@ -188,8 +188,7 @@ instance GoogleRequest
               (Just AltJSON)
               _rcrbiPayload
           where go
-                  = clientWithRoute
+                  = clientBuild
                       (Proxy ::
                          Proxy RasterCollectionsRastersBatchInsertResource)
-                      r
-                      u
+                      rq
