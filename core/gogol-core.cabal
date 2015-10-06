@@ -51,7 +51,7 @@ library
         , dlist              >= 0.7
         , exceptions         >= 0.6
         , hashable           >= 1.2
-        , http-client        >= 0.8
+        , http-client        >= 0.4.4
         , http-media         >= 0.4
         , http-types         >= 0.8
         , lens               >= 4.4
