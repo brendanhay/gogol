@@ -59,7 +59,7 @@ type TimelineUpdateResource =
                  QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       MultipartRelated '[JSON] TimelineItem Body :>
+                       MultipartRelated '[JSON] TimelineItem Stream :>
                          Put '[JSON] TimelineItem
 
 -- | Updates a timeline item in place.
@@ -70,12 +70,12 @@ data TimelineUpdate' = TimelineUpdate'
     , _tuPrettyPrint :: !Bool
     , _tuUserIP      :: !(Maybe Text)
     , _tuPayload     :: !TimelineItem
-    , _tuMedia       :: !Body
+    , _tuMedia       :: !Stream
     , _tuKey         :: !(Maybe AuthKey)
     , _tuId          :: !Text
     , _tuOAuthToken  :: !(Maybe OAuthToken)
     , _tuFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'TimelineUpdate'' with the minimum fields required to make a request.
 --
@@ -100,7 +100,7 @@ data TimelineUpdate' = TimelineUpdate'
 -- * 'tuFields'
 timelineUpdate'
     :: TimelineItem -- ^ 'payload'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> Text -- ^ 'id'
     -> TimelineUpdate'
 timelineUpdate' pTuPayload_ pTuMedia_ pTuId_ =
@@ -139,7 +139,7 @@ tuPayload :: Lens' TimelineUpdate' TimelineItem
 tuPayload
   = lens _tuPayload (\ s a -> s{_tuPayload = a})
 
-tuMedia :: Lens' TimelineUpdate' Body
+tuMedia :: Lens' TimelineUpdate' Stream
 tuMedia = lens _tuMedia (\ s a -> s{_tuMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

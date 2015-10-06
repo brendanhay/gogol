@@ -82,7 +82,7 @@ type CaptionsDownloadResource =
                            QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltMedia :>
-                                 Get '[OctetStream] Body
+                                 Get '[OctetStream] Stream
 
 -- | Downloads a caption track. The caption track is returned in its original
 -- format unless the request specifies a value for the tfmt parameter and
@@ -252,7 +252,7 @@ instance GoogleRequest CaptionsDownload' where
 
 instance GoogleRequest
          (MediaDownload CaptionsDownload') where
-        type Rs (MediaDownload CaptionsDownload') = Body
+        type Rs (MediaDownload CaptionsDownload') = Stream
         request = requestWith youTubeRequest
         requestWith rq (MediaDownload CaptionsDownload'{..})
           = go _capaId _capaOnBehalfOf _capaTlang

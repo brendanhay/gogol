@@ -71,7 +71,8 @@ type ReportsGetFileResource =
                      QueryParam "fields" Text :>
                        QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" AltMedia :> Get '[OctetStream] Body
+                           QueryParam "alt" AltMedia :>
+                             Get '[OctetStream] Stream
 
 -- | Downloads a report file encoded in UTF-8.
 --
@@ -190,7 +191,7 @@ instance GoogleRequest ReportsGetFile' where
 
 instance GoogleRequest
          (MediaDownload ReportsGetFile') where
-        type Rs (MediaDownload ReportsGetFile') = Body
+        type Rs (MediaDownload ReportsGetFile') = Stream
         request = requestWith doubleClickSearchRequest
         requestWith rq (MediaDownload ReportsGetFile'{..})
           = go _rgfReportId _rgfReportFragment _rgfQuotaUser

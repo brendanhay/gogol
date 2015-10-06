@@ -61,7 +61,7 @@ type ThumbnailsSetResource =
                      QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Body :>
+                           ReqBody '[OctetStream] Stream :>
                              Post '[JSON] ThumbnailSetResponse
 
 -- | Uploads a custom video thumbnail to YouTube and sets it for a video.
@@ -71,13 +71,13 @@ data ThumbnailsSet' = ThumbnailsSet'
     { _tsQuotaUser              :: !(Maybe Text)
     , _tsPrettyPrint            :: !Bool
     , _tsUserIP                 :: !(Maybe Text)
-    , _tsMedia                  :: !Body
+    , _tsMedia                  :: !Stream
     , _tsOnBehalfOfContentOwner :: !(Maybe Text)
     , _tsVideoId                :: !Text
     , _tsKey                    :: !(Maybe AuthKey)
     , _tsOAuthToken             :: !(Maybe OAuthToken)
     , _tsFields                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'ThumbnailsSet'' with the minimum fields required to make a request.
 --
@@ -101,7 +101,7 @@ data ThumbnailsSet' = ThumbnailsSet'
 --
 -- * 'tsFields'
 thumbnailsSet'
-    :: Body -- ^ 'media'
+    :: Stream -- ^ 'media'
     -> Text -- ^ 'videoId'
     -> ThumbnailsSet'
 thumbnailsSet' pTsMedia_ pTsVideoId_ =
@@ -135,7 +135,7 @@ tsPrettyPrint
 tsUserIP :: Lens' ThumbnailsSet' (Maybe Text)
 tsUserIP = lens _tsUserIP (\ s a -> s{_tsUserIP = a})
 
-tsMedia :: Lens' ThumbnailsSet' Body
+tsMedia :: Lens' ThumbnailsSet' Stream
 tsMedia = lens _tsMedia (\ s a -> s{_tsMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content

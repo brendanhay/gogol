@@ -132,7 +132,7 @@ getDerive g = loc "getDerive" g $ memo derived g go
         Bool  -> enum
         Time  -> DRead : base
         Date  -> DRead : base
-        Body  -> base
+        Body  -> []
         Alt _ -> DRead : base
         Key   -> DRead : base
         -- FIXME: Add numeric cases

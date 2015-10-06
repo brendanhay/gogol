@@ -72,7 +72,7 @@ type UsersMessagesImportResource =
                            QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 MultipartRelated '[JSON] Message Body :>
+                                 MultipartRelated '[JSON] Message Stream :>
                                    Post '[JSON] Message
 
 -- | Imports a message into only this user\'s mailbox, with standard email
@@ -86,7 +86,7 @@ data UsersMessagesImport' = UsersMessagesImport'
     , _uUserIP             :: !(Maybe Text)
     , _uPayload            :: !Message
     , _uUserId             :: !Text
-    , _uMedia              :: !Body
+    , _uMedia              :: !Stream
     , _uKey                :: !(Maybe AuthKey)
     , _uProcessForCalendar :: !Bool
     , _uDeleted            :: !Bool
@@ -94,7 +94,7 @@ data UsersMessagesImport' = UsersMessagesImport'
     , _uOAuthToken         :: !(Maybe OAuthToken)
     , _uInternalDateSource :: !UsersMessagesImportInternalDateSource
     , _uFields             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'UsersMessagesImport'' with the minimum fields required to make a request.
 --
@@ -128,7 +128,7 @@ data UsersMessagesImport' = UsersMessagesImport'
 usersMessagesImport'
     :: Message -- ^ 'payload'
     -> Text -- ^ 'media'
-    -> Body
+    -> Stream
     -> UsersMessagesImport'
 usersMessagesImport' pUPayload_ pUUserId_ pUMedia_ =
     UsersMessagesImport'
@@ -173,7 +173,7 @@ uPayload = lens _uPayload (\ s a -> s{_uPayload = a})
 uUserId :: Lens' UsersMessagesImport' Text
 uUserId = lens _uUserId (\ s a -> s{_uUserId = a})
 
-uMedia :: Lens' UsersMessagesImport' Body
+uMedia :: Lens' UsersMessagesImport' Stream
 uMedia = lens _uMedia (\ s a -> s{_uMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

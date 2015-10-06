@@ -61,7 +61,7 @@ type EditsAPKsUploadResource =
                      QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Body :> Post '[JSON] APK
+                           ReqBody '[OctetStream] Stream :> Post '[JSON] APK
 
 --
 -- /See:/ 'editsAPKsUpload'' smart constructor.
@@ -70,12 +70,12 @@ data EditsAPKsUpload' = EditsAPKsUpload'
     , _eapkuPrettyPrint :: !Bool
     , _eapkuPackageName :: !Text
     , _eapkuUserIP      :: !(Maybe Text)
-    , _eapkuMedia       :: !Body
+    , _eapkuMedia       :: !Stream
     , _eapkuKey         :: !(Maybe AuthKey)
     , _eapkuOAuthToken  :: !(Maybe OAuthToken)
     , _eapkuEditId      :: !Text
     , _eapkuFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'EditsAPKsUpload'' with the minimum fields required to make a request.
 --
@@ -100,7 +100,7 @@ data EditsAPKsUpload' = EditsAPKsUpload'
 -- * 'eapkuFields'
 editsAPKsUpload'
     :: Text -- ^ 'packageName'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> Text -- ^ 'editId'
     -> EditsAPKsUpload'
 editsAPKsUpload' pEapkuPackageName_ pEapkuMedia_ pEapkuEditId_ =
@@ -143,7 +143,7 @@ eapkuUserIP :: Lens' EditsAPKsUpload' (Maybe Text)
 eapkuUserIP
   = lens _eapkuUserIP (\ s a -> s{_eapkuUserIP = a})
 
-eapkuMedia :: Lens' EditsAPKsUpload' Body
+eapkuMedia :: Lens' EditsAPKsUpload' Stream
 eapkuMedia
   = lens _eapkuMedia (\ s a -> s{_eapkuMedia = a})
 

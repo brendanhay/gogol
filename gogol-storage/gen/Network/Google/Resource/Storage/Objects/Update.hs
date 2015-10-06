@@ -94,7 +94,7 @@ type ObjectsUpdateResource =
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltMedia :>
                                          ReqBody '[JSON] Object :>
-                                           Put '[OctetStream] Body
+                                           Put '[OctetStream] Stream
 
 -- | Updates a data blob\'s associated metadata.
 --
@@ -287,7 +287,7 @@ instance GoogleRequest ObjectsUpdate' where
 
 instance GoogleRequest (MediaDownload ObjectsUpdate')
          where
-        type Rs (MediaDownload ObjectsUpdate') = Body
+        type Rs (MediaDownload ObjectsUpdate') = Stream
         request = requestWith storageRequest
         requestWith rq (MediaDownload ObjectsUpdate'{..})
           = go _ouBucket _ouObject _ouIfMetagenerationMatch

@@ -63,7 +63,7 @@ type TableImportTableResource =
                        QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Body :> Post '[JSON] Table
+                             ReqBody '[OctetStream] Stream :> Post '[JSON] Table
 
 -- | Imports a new table.
 --
@@ -72,14 +72,14 @@ data TableImportTable' = TableImportTable'
     { _titQuotaUser   :: !(Maybe Text)
     , _titPrettyPrint :: !Bool
     , _titUserIP      :: !(Maybe Text)
-    , _titMedia       :: !Body
+    , _titMedia       :: !Stream
     , _titKey         :: !(Maybe AuthKey)
     , _titName        :: !Text
     , _titOAuthToken  :: !(Maybe OAuthToken)
     , _titDelimiter   :: !(Maybe Text)
     , _titEncoding    :: !(Maybe Text)
     , _titFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'TableImportTable'' with the minimum fields required to make a request.
 --
@@ -105,7 +105,7 @@ data TableImportTable' = TableImportTable'
 --
 -- * 'titFields'
 tableImportTable'
-    :: Body -- ^ 'media'
+    :: Stream -- ^ 'media'
     -> Text -- ^ 'name'
     -> TableImportTable'
 tableImportTable' pTitMedia_ pTitName_ =
@@ -141,7 +141,7 @@ titUserIP :: Lens' TableImportTable' (Maybe Text)
 titUserIP
   = lens _titUserIP (\ s a -> s{_titUserIP = a})
 
-titMedia :: Lens' TableImportTable' Body
+titMedia :: Lens' TableImportTable' Stream
 titMedia = lens _titMedia (\ s a -> s{_titMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

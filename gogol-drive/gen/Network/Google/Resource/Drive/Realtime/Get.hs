@@ -72,7 +72,8 @@ type RealtimeGetResource =
                      QueryParam "fields" Text :>
                        QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" AltMedia :> Get '[OctetStream] Body
+                           QueryParam "alt" AltMedia :>
+                             Get '[OctetStream] Stream
 
 -- | Exports the contents of the Realtime API data model associated with this
 -- file as JSON.
@@ -192,7 +193,7 @@ instance GoogleRequest RealtimeGet' where
 
 instance GoogleRequest (MediaDownload RealtimeGet')
          where
-        type Rs (MediaDownload RealtimeGet') = Body
+        type Rs (MediaDownload RealtimeGet') = Stream
         request = requestWith driveRequest
         requestWith rq (MediaDownload RealtimeGet'{..})
           = go _reaFileId _reaRevision _reaQuotaUser

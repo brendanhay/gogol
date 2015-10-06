@@ -72,7 +72,7 @@ type ObjectsInsertResource =
                                QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     MultipartRelated '[JSON] Object Body :>
+                                     MultipartRelated '[JSON] Object Stream :>
                                        Post '[JSON] Object
        :<|>
        "b" :>
@@ -91,8 +91,8 @@ type ObjectsInsertResource =
                                  QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltMedia :>
-                                       MultipartRelated '[JSON] Object Body :>
-                                         Post '[OctetStream] Body
+                                       MultipartRelated '[JSON] Object Stream :>
+                                         Post '[OctetStream] Stream
 
 -- | Stores new data blobs and associated metadata.
 --
@@ -106,14 +106,14 @@ data ObjectsInsert' = ObjectsInsert'
     , _oiUserIP                   :: !(Maybe Text)
     , _oiBucket                   :: !Text
     , _oiPayload                  :: !Object
-    , _oiMedia                    :: !Body
+    , _oiMedia                    :: !Stream
     , _oiKey                      :: !(Maybe AuthKey)
     , _oiName                     :: !(Maybe Text)
     , _oiIfMetagenerationNotMatch :: !(Maybe Word64)
     , _oiProjection               :: !(Maybe ObjectsInsertProjection)
     , _oiOAuthToken               :: !(Maybe OAuthToken)
     , _oiFields                   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'ObjectsInsert'' with the minimum fields required to make a request.
 --
@@ -151,7 +151,7 @@ data ObjectsInsert' = ObjectsInsert'
 objectsInsert'
     :: Text -- ^ 'bucket'
     -> Object -- ^ 'payload'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> ObjectsInsert'
 objectsInsert' pOiBucket_ pOiPayload_ pOiMedia_ =
     ObjectsInsert'
@@ -221,7 +221,7 @@ oiPayload :: Lens' ObjectsInsert' Object
 oiPayload
   = lens _oiPayload (\ s a -> s{_oiPayload = a})
 
-oiMedia :: Lens' ObjectsInsert' Body
+oiMedia :: Lens' ObjectsInsert' Stream
 oiMedia = lens _oiMedia (\ s a -> s{_oiMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -286,7 +286,7 @@ instance GoogleRequest ObjectsInsert' where
 
 instance GoogleRequest (MediaDownload ObjectsInsert')
          where
-        type Rs (MediaDownload ObjectsInsert') = Body
+        type Rs (MediaDownload ObjectsInsert') = Stream
         request = requestWith storageRequest
         requestWith rq (MediaDownload ObjectsInsert'{..})
           = go _oiBucket _oiIfMetagenerationMatch

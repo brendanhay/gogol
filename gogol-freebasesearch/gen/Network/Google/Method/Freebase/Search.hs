@@ -178,7 +178,7 @@ type SearchMethod =
                                                                      :>
                                                                      Get
                                                                        '[OctetStream]
-                                                                       Body
+                                                                       Stream
 
 -- | Search Freebase open data.
 --
@@ -496,7 +496,7 @@ instance GoogleRequest Search' where
                   = clientBuild (Proxy :: Proxy SearchMethod) rq
 
 instance GoogleRequest (MediaDownload Search') where
-        type Rs (MediaDownload Search') = Body
+        type Rs (MediaDownload Search') = Stream
         request = requestWith freebaseSearchRequest
         requestWith rq (MediaDownload Search'{..})
           = go (_sWithout ^. _Default) _sCursor

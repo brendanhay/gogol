@@ -61,7 +61,7 @@ type RastersFilesInsertResource =
                      QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Body :> Post '[JSON] ()
+                           ReqBody '[OctetStream] Stream :> Post '[JSON] ()
 
 -- | Upload a file to a raster asset.
 --
@@ -70,13 +70,13 @@ data RastersFilesInsert' = RastersFilesInsert'
     { _rfiQuotaUser   :: !(Maybe Text)
     , _rfiPrettyPrint :: !Bool
     , _rfiUserIP      :: !(Maybe Text)
-    , _rfiMedia       :: !Body
+    , _rfiMedia       :: !Stream
     , _rfiKey         :: !(Maybe AuthKey)
     , _rfiId          :: !Text
     , _rfiOAuthToken  :: !(Maybe OAuthToken)
     , _rfiFilename    :: !Text
     , _rfiFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'RastersFilesInsert'' with the minimum fields required to make a request.
 --
@@ -100,7 +100,7 @@ data RastersFilesInsert' = RastersFilesInsert'
 --
 -- * 'rfiFields'
 rastersFilesInsert'
-    :: Body -- ^ 'media'
+    :: Stream -- ^ 'media'
     -> Text -- ^ 'id'
     -> Text -- ^ 'filename'
     -> RastersFilesInsert'
@@ -136,7 +136,7 @@ rfiUserIP :: Lens' RastersFilesInsert' (Maybe Text)
 rfiUserIP
   = lens _rfiUserIP (\ s a -> s{_rfiUserIP = a})
 
-rfiMedia :: Lens' RastersFilesInsert' Body
+rfiMedia :: Lens' RastersFilesInsert' Stream
 rfiMedia = lens _rfiMedia (\ s a -> s{_rfiMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

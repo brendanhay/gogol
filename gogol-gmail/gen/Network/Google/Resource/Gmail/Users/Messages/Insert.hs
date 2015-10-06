@@ -67,7 +67,7 @@ type UsersMessagesInsertResource =
                      QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           MultipartRelated '[JSON] Message Body :>
+                           MultipartRelated '[JSON] Message Stream :>
                              Post '[JSON] Message
 
 -- | Directly inserts a message into only this user\'s mailbox similar to
@@ -81,13 +81,13 @@ data UsersMessagesInsert' = UsersMessagesInsert'
     , _umiUserIP             :: !(Maybe Text)
     , _umiPayload            :: !Message
     , _umiUserId             :: !Text
-    , _umiMedia              :: !Body
+    , _umiMedia              :: !Stream
     , _umiKey                :: !(Maybe AuthKey)
     , _umiDeleted            :: !Bool
     , _umiOAuthToken         :: !(Maybe OAuthToken)
     , _umiInternalDateSource :: !UsersMessagesInsertInternalDateSource
     , _umiFields             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'UsersMessagesInsert'' with the minimum fields required to make a request.
 --
@@ -117,7 +117,7 @@ data UsersMessagesInsert' = UsersMessagesInsert'
 usersMessagesInsert'
     :: Message -- ^ 'payload'
     -> Text -- ^ 'media'
-    -> Body
+    -> Stream
     -> UsersMessagesInsert'
 usersMessagesInsert' pUmiPayload_ pUmiUserId_ pUmiMedia_ =
     UsersMessagesInsert'
@@ -164,7 +164,7 @@ umiUserId :: Lens' UsersMessagesInsert' Text
 umiUserId
   = lens _umiUserId (\ s a -> s{_umiUserId = a})
 
-umiMedia :: Lens' UsersMessagesInsert' Body
+umiMedia :: Lens' UsersMessagesInsert' Stream
 umiMedia = lens _umiMedia (\ s a -> s{_umiMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

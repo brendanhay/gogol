@@ -61,7 +61,7 @@ type UsersDraftsUpdateResource =
                    QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         MultipartRelated '[JSON] Draft Body :>
+                         MultipartRelated '[JSON] Draft Stream :>
                            Put '[JSON] Draft
 
 -- | Replaces a draft\'s content.
@@ -73,12 +73,12 @@ data UsersDraftsUpdate' = UsersDraftsUpdate'
     , _uduUserIP      :: !(Maybe Text)
     , _uduPayload     :: !Draft
     , _uduUserId      :: !Text
-    , _uduMedia       :: !Body
+    , _uduMedia       :: !Stream
     , _uduKey         :: !(Maybe AuthKey)
     , _uduId          :: !Text
     , _uduOAuthToken  :: !(Maybe OAuthToken)
     , _uduFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'UsersDraftsUpdate'' with the minimum fields required to make a request.
 --
@@ -106,7 +106,7 @@ data UsersDraftsUpdate' = UsersDraftsUpdate'
 usersDraftsUpdate'
     :: Draft -- ^ 'payload'
     -> Text -- ^ 'media'
-    -> Body -- ^ 'id'
+    -> Stream -- ^ 'id'
     -> Text
     -> UsersDraftsUpdate'
 usersDraftsUpdate' pUduPayload_ pUduUserId_ pUduMedia_ pUduId_ =
@@ -153,7 +153,7 @@ uduUserId :: Lens' UsersDraftsUpdate' Text
 uduUserId
   = lens _uduUserId (\ s a -> s{_uduUserId = a})
 
-uduMedia :: Lens' UsersDraftsUpdate' Body
+uduMedia :: Lens' UsersDraftsUpdate' Stream
 uduMedia = lens _uduMedia (\ s a -> s{_uduMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

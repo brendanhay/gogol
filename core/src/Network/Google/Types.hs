@@ -26,7 +26,6 @@ import           Control.Lens                 hiding (coerce)
 import           Control.Monad.Catch
 import           Control.Monad.Trans.Resource
 import           Data.Aeson
-import           Data.Bifunctor
 import           Data.ByteString              (ByteString)
 import qualified Data.ByteString.Lazy         as LBS
 import           Data.Coerce

@@ -71,7 +71,8 @@ type ProjectsIconsGetResource =
                      QueryParam "fields" Text :>
                        QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" AltMedia :> Get '[OctetStream] Body
+                           QueryParam "alt" AltMedia :>
+                             Get '[OctetStream] Stream
 
 -- | Return an icon or its associated metadata
 --
@@ -189,7 +190,7 @@ instance GoogleRequest ProjectsIconsGet' where
 
 instance GoogleRequest
          (MediaDownload ProjectsIconsGet') where
-        type Rs (MediaDownload ProjectsIconsGet') = Body
+        type Rs (MediaDownload ProjectsIconsGet') = Stream
         request = requestWith mapsEngineRequest
         requestWith rq (MediaDownload ProjectsIconsGet'{..})
           = go _pigProjectId _pigId _pigQuotaUser

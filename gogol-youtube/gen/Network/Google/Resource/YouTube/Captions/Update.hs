@@ -67,7 +67,7 @@ type CaptionsUpdateResource =
                        QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             MultipartRelated '[JSON] Caption Body :>
+                             MultipartRelated '[JSON] Caption Stream :>
                                Put '[JSON] Caption
 
 -- | Updates a caption track. When updating a caption track, you can change
@@ -82,13 +82,13 @@ data CaptionsUpdate' = CaptionsUpdate'
     , _capPrettyPrint            :: !Bool
     , _capUserIP                 :: !(Maybe Text)
     , _capPayload                :: !Caption
-    , _capMedia                  :: !Body
+    , _capMedia                  :: !Stream
     , _capOnBehalfOfContentOwner :: !(Maybe Text)
     , _capKey                    :: !(Maybe AuthKey)
     , _capSync                   :: !(Maybe Bool)
     , _capOAuthToken             :: !(Maybe OAuthToken)
     , _capFields                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'CaptionsUpdate'' with the minimum fields required to make a request.
 --
@@ -120,7 +120,7 @@ data CaptionsUpdate' = CaptionsUpdate'
 captionsUpdate'
     :: Text -- ^ 'part'
     -> Caption -- ^ 'payload'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> CaptionsUpdate'
 captionsUpdate' pCapPart_ pCapPayload_ pCapMedia_ =
     CaptionsUpdate'
@@ -177,7 +177,7 @@ capPayload :: Lens' CaptionsUpdate' Caption
 capPayload
   = lens _capPayload (\ s a -> s{_capPayload = a})
 
-capMedia :: Lens' CaptionsUpdate' Body
+capMedia :: Lens' CaptionsUpdate' Stream
 capMedia = lens _capMedia (\ s a -> s{_capMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content

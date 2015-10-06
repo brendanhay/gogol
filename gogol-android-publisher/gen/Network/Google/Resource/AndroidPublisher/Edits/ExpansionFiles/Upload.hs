@@ -68,7 +68,7 @@ type EditsExpansionFilesUploadResource =
                            QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[OctetStream] Body :>
+                                 ReqBody '[OctetStream] Stream :>
                                    Post '[JSON] ExpansionFilesUploadResponse
 
 -- | Uploads and attaches a new Expansion File to the APK specified.
@@ -80,13 +80,13 @@ data EditsExpansionFilesUpload' = EditsExpansionFilesUpload'
     , _eefuPackageName       :: !Text
     , _eefuAPKVersionCode    :: !Int32
     , _eefuUserIP            :: !(Maybe Text)
-    , _eefuMedia             :: !Body
+    , _eefuMedia             :: !Stream
     , _eefuKey               :: !(Maybe AuthKey)
     , _eefuExpansionFileType :: !EditsExpansionFilesUploadExpansionFileType
     , _eefuOAuthToken        :: !(Maybe OAuthToken)
     , _eefuEditId            :: !Text
     , _eefuFields            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'EditsExpansionFilesUpload'' with the minimum fields required to make a request.
 --
@@ -116,7 +116,7 @@ data EditsExpansionFilesUpload' = EditsExpansionFilesUpload'
 editsExpansionFilesUpload'
     :: Text -- ^ 'packageName'
     -> Int32 -- ^ 'apkVersionCode'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> EditsExpansionFilesUploadExpansionFileType -- ^ 'expansionFileType'
     -> Text -- ^ 'editId'
     -> EditsExpansionFilesUpload'
@@ -169,7 +169,7 @@ eefuUserIP :: Lens' EditsExpansionFilesUpload' (Maybe Text)
 eefuUserIP
   = lens _eefuUserIP (\ s a -> s{_eefuUserIP = a})
 
-eefuMedia :: Lens' EditsExpansionFilesUpload' Body
+eefuMedia :: Lens' EditsExpansionFilesUpload' Stream
 eefuMedia
   = lens _eefuMedia (\ s a -> s{_eefuMedia = a})
 

@@ -66,7 +66,7 @@ type ManagementUploadsUploadDataResource =
                              QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] Body :>
+                                   ReqBody '[OctetStream] Stream :>
                                      Post '[JSON] Upload
 
 -- | Upload data for a custom data source.
@@ -78,12 +78,12 @@ data ManagementUploadsUploadData' = ManagementUploadsUploadData'
     , _muudWebPropertyId      :: !Text
     , _muudUserIP             :: !(Maybe Text)
     , _muudCustomDataSourceId :: !Text
-    , _muudMedia              :: !Body
+    , _muudMedia              :: !Stream
     , _muudAccountId          :: !Text
     , _muudKey                :: !(Maybe AuthKey)
     , _muudOAuthToken         :: !(Maybe OAuthToken)
     , _muudFields             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'ManagementUploadsUploadData'' with the minimum fields required to make a request.
 --
@@ -111,7 +111,7 @@ data ManagementUploadsUploadData' = ManagementUploadsUploadData'
 managementUploadsUploadData'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'customDataSourceId'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> Text -- ^ 'accountId'
     -> ManagementUploadsUploadData'
 managementUploadsUploadData' pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudMedia_ pMuudAccountId_ =
@@ -160,7 +160,7 @@ muudCustomDataSourceId
   = lens _muudCustomDataSourceId
       (\ s a -> s{_muudCustomDataSourceId = a})
 
-muudMedia :: Lens' ManagementUploadsUploadData' Body
+muudMedia :: Lens' ManagementUploadsUploadData' Stream
 muudMedia
   = lens _muudMedia (\ s a -> s{_muudMedia = a})
 

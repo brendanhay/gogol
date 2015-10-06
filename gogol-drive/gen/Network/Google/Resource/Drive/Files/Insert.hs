@@ -73,7 +73,7 @@ type FilesInsertResource =
                                QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     MultipartRelated '[JSON] File Body :>
+                                     MultipartRelated '[JSON] File Stream :>
                                        Post '[JSON] File
 
 -- | Insert a new file.
@@ -88,7 +88,7 @@ data FilesInsert' = FilesInsert'
     , _fiTimedTextLanguage         :: !(Maybe Text)
     , _fiPayload                   :: !File
     , _fiUseContentAsIndexableText :: !Bool
-    , _fiMedia                     :: !Body
+    , _fiMedia                     :: !Stream
     , _fiTimedTextTrackName        :: !(Maybe Text)
     , _fiOCRLanguage               :: !(Maybe Text)
     , _fiKey                       :: !(Maybe AuthKey)
@@ -96,7 +96,7 @@ data FilesInsert' = FilesInsert'
     , _fiOAuthToken                :: !(Maybe OAuthToken)
     , _fiOCR                       :: !Bool
     , _fiFields                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'FilesInsert'' with the minimum fields required to make a request.
 --
@@ -135,7 +135,7 @@ data FilesInsert' = FilesInsert'
 -- * 'fiFields'
 filesInsert'
     :: File -- ^ 'payload'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> FilesInsert'
 filesInsert' pFiPayload_ pFiMedia_ =
     FilesInsert'
@@ -203,7 +203,7 @@ fiUseContentAsIndexableText
   = lens _fiUseContentAsIndexableText
       (\ s a -> s{_fiUseContentAsIndexableText = a})
 
-fiMedia :: Lens' FilesInsert' Body
+fiMedia :: Lens' FilesInsert' Stream
 fiMedia = lens _fiMedia (\ s a -> s{_fiMedia = a})
 
 -- | The timed text track name.

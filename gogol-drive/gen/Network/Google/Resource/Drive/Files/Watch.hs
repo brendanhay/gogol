@@ -84,7 +84,7 @@ type FilesWatchResource =
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltMedia :>
                                    ReqBody '[JSON] Channel :>
-                                     Post '[OctetStream] Body
+                                     Post '[OctetStream] Stream
 
 -- | Subscribe to changes on a file
 --
@@ -243,7 +243,7 @@ instance GoogleRequest FilesWatch' where
 
 instance GoogleRequest (MediaDownload FilesWatch')
          where
-        type Rs (MediaDownload FilesWatch') = Body
+        type Rs (MediaDownload FilesWatch') = Stream
         request = requestWith driveRequest
         requestWith rq (MediaDownload FilesWatch'{..})
           = go _fwFileId (Just _fwUpdateViewedDate)

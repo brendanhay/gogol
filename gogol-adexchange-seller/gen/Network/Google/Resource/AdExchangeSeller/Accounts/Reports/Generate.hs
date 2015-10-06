@@ -99,7 +99,7 @@ type AccountsReportsGenerateResource =
                                        QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltMedia :>
-                                             Get '[OctetStream] Body
+                                             Get '[OctetStream] Stream
 
 -- | Generate an Ad Exchange report based on the report request sent in the
 -- query parameters. Returns the result as JSON; to retrieve output in CSV
@@ -316,7 +316,7 @@ instance GoogleRequest AccountsReportsGenerate' where
 instance GoogleRequest
          (MediaDownload AccountsReportsGenerate') where
         type Rs (MediaDownload AccountsReportsGenerate') =
-             Body
+             Stream
         request = requestWith adExchangeSellerRequest
         requestWith rq
           (MediaDownload AccountsReportsGenerate'{..})

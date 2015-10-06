@@ -71,7 +71,8 @@ type FilesGetResource =
                      QueryParam "fields" Text :>
                        QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" AltMedia :> Get '[OctetStream] Body
+                           QueryParam "alt" AltMedia :>
+                             Get '[OctetStream] Stream
 
 -- | Retrieves a report file by its report ID and file ID.
 --
@@ -184,7 +185,7 @@ instance GoogleRequest FilesGet' where
 
 instance GoogleRequest (MediaDownload FilesGet')
          where
-        type Rs (MediaDownload FilesGet') = Body
+        type Rs (MediaDownload FilesGet') = Stream
         request = requestWith dFAReportingRequest
         requestWith rq (MediaDownload FilesGet'{..})
           = go _fgReportId _fgFileId _fgQuotaUser

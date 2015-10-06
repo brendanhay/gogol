@@ -89,7 +89,7 @@ type FilesUpdateResource =
                                                :>
                                                QueryParam "alt" AltJSON :>
                                                  MultipartRelated '[JSON] File
-                                                   Body
+                                                   Stream
                                                    :> Put '[JSON] File
 
 -- | Updates file metadata and\/or content.
@@ -107,7 +107,7 @@ data FilesUpdate' = FilesUpdate'
     , _fuRemoveParents             :: !(Maybe Text)
     , _fuModifiedDateBehavior      :: !(Maybe FilesUpdateModifiedDateBehavior)
     , _fuUseContentAsIndexableText :: !Bool
-    , _fuMedia                     :: !Body
+    , _fuMedia                     :: !Stream
     , _fuTimedTextTrackName        :: !(Maybe Text)
     , _fuOCRLanguage               :: !(Maybe Text)
     , _fuKey                       :: !(Maybe AuthKey)
@@ -118,7 +118,7 @@ data FilesUpdate' = FilesUpdate'
     , _fuAddParents                :: !(Maybe Text)
     , _fuOCR                       :: !Bool
     , _fuFields                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'FilesUpdate'' with the minimum fields required to make a request.
 --
@@ -169,7 +169,7 @@ data FilesUpdate' = FilesUpdate'
 -- * 'fuFields'
 filesUpdate'
     :: File -- ^ 'payload'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> Text -- ^ 'fileId'
     -> FilesUpdate'
 filesUpdate' pFuPayload_ pFuMedia_ pFuFileId_ =
@@ -269,7 +269,7 @@ fuUseContentAsIndexableText
   = lens _fuUseContentAsIndexableText
       (\ s a -> s{_fuUseContentAsIndexableText = a})
 
-fuMedia :: Lens' FilesUpdate' Body
+fuMedia :: Lens' FilesUpdate' Stream
 fuMedia = lens _fuMedia (\ s a -> s{_fuMedia = a})
 
 -- | The timed text track name.

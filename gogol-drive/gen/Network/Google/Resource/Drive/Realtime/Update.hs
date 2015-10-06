@@ -62,7 +62,7 @@ type RealtimeUpdateResource =
                      QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Body :> Put '[JSON] ()
+                           ReqBody '[OctetStream] Stream :> Put '[JSON] ()
 
 -- | Overwrites the Realtime API data model associated with this file with
 -- the provided JSON data model.
@@ -73,12 +73,12 @@ data RealtimeUpdate' = RealtimeUpdate'
     , _rPrettyPrint  :: !Bool
     , _rUserIP       :: !(Maybe Text)
     , _rBaseRevision :: !(Maybe Text)
-    , _rMedia        :: !Body
+    , _rMedia        :: !Stream
     , _rKey          :: !(Maybe AuthKey)
     , _rFileId       :: !Text
     , _rOAuthToken   :: !(Maybe OAuthToken)
     , _rFields       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'RealtimeUpdate'' with the minimum fields required to make a request.
 --
@@ -102,7 +102,7 @@ data RealtimeUpdate' = RealtimeUpdate'
 --
 -- * 'rFields'
 realtimeUpdate'
-    :: Body -- ^ 'media'
+    :: Stream -- ^ 'media'
     -> Text -- ^ 'fileId'
     -> RealtimeUpdate'
 realtimeUpdate' pRMedia_ pRFileId_ =
@@ -145,7 +145,7 @@ rBaseRevision
   = lens _rBaseRevision
       (\ s a -> s{_rBaseRevision = a})
 
-rMedia :: Lens' RealtimeUpdate' Body
+rMedia :: Lens' RealtimeUpdate' Stream
 rMedia = lens _rMedia (\ s a -> s{_rMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

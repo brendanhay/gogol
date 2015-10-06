@@ -72,7 +72,8 @@ type QuerySQLGetResource =
                      QueryParam "fields" Text :>
                        QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" AltMedia :> Get '[OctetStream] Body
+                           QueryParam "alt" AltMedia :>
+                             Get '[OctetStream] Stream
 
 -- | Executes a SQL statement which can be any of - SELECT - SHOW - DESCRIBE
 --
@@ -199,7 +200,7 @@ instance GoogleRequest QuerySQLGet' where
 
 instance GoogleRequest (MediaDownload QuerySQLGet')
          where
-        type Rs (MediaDownload QuerySQLGet') = Body
+        type Rs (MediaDownload QuerySQLGet') = Stream
         request = requestWith fusionTablesRequest
         requestWith rq (MediaDownload QuerySQLGet'{..})
           = go (Just _qsqlgSQL) _qsqlgTyped _qsqlgHdrs

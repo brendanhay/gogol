@@ -79,7 +79,7 @@ type FilesGetResource =
                            QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltMedia :>
-                                 Get '[OctetStream] Body
+                                 Get '[OctetStream] Stream
 
 -- | Gets a file\'s metadata by ID.
 --
@@ -227,7 +227,7 @@ instance GoogleRequest FilesGet' where
 
 instance GoogleRequest (MediaDownload FilesGet')
          where
-        type Rs (MediaDownload FilesGet') = Body
+        type Rs (MediaDownload FilesGet') = Stream
         request = requestWith driveRequest
         requestWith rq (MediaDownload FilesGet'{..})
           = go _fgFileId (Just _fgUpdateViewedDate)

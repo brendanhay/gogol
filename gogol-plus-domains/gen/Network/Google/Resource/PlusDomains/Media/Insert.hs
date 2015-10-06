@@ -65,7 +65,7 @@ type MediaInsertResource =
                      QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           MultipartRelated '[JSON] Media Body :>
+                           MultipartRelated '[JSON] Media Stream :>
                              Post '[JSON] Media
 
 -- | Add a new media item to an album. The current upload size limitations
@@ -81,11 +81,11 @@ data MediaInsert' = MediaInsert'
     , _miCollection  :: !MediaInsertCollection
     , _miPayload     :: !Media
     , _miUserId      :: !Text
-    , _miMedia       :: !Body
+    , _miMedia       :: !Stream
     , _miKey         :: !(Maybe AuthKey)
     , _miOAuthToken  :: !(Maybe OAuthToken)
     , _miFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'MediaInsert'' with the minimum fields required to make a request.
 --
@@ -114,7 +114,7 @@ mediaInsert'
     :: MediaInsertCollection -- ^ 'collection'
     -> Media -- ^ 'payload'
     -> Text -- ^ 'userId'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> MediaInsert'
 mediaInsert' pMiCollection_ pMiPayload_ pMiUserId_ pMiMedia_ =
     MediaInsert'
@@ -161,7 +161,7 @@ miPayload
 miUserId :: Lens' MediaInsert' Text
 miUserId = lens _miUserId (\ s a -> s{_miUserId = a})
 
-miMedia :: Lens' MediaInsert' Body
+miMedia :: Lens' MediaInsert' Stream
 miMedia = lens _miMedia (\ s a -> s{_miMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

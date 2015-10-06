@@ -61,7 +61,7 @@ type UsersDraftsSendResource =
                    QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         MultipartRelated '[JSON] Draft Body :>
+                         MultipartRelated '[JSON] Draft Stream :>
                            Post '[JSON] Message
 
 -- | Sends the specified, existing draft to the recipients in the To, Cc, and
@@ -74,11 +74,11 @@ data UsersDraftsSend' = UsersDraftsSend'
     , _udsUserIP      :: !(Maybe Text)
     , _udsPayload     :: !Draft
     , _udsUserId      :: !Text
-    , _udsMedia       :: !Body
+    , _udsMedia       :: !Stream
     , _udsKey         :: !(Maybe AuthKey)
     , _udsOAuthToken  :: !(Maybe OAuthToken)
     , _udsFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'UsersDraftsSend'' with the minimum fields required to make a request.
 --
@@ -104,7 +104,7 @@ data UsersDraftsSend' = UsersDraftsSend'
 usersDraftsSend'
     :: Draft -- ^ 'payload'
     -> Text -- ^ 'media'
-    -> Body
+    -> Stream
     -> UsersDraftsSend'
 usersDraftsSend' pUdsPayload_ pUdsUserId_ pUdsMedia_ =
     UsersDraftsSend'
@@ -149,7 +149,7 @@ udsUserId :: Lens' UsersDraftsSend' Text
 udsUserId
   = lens _udsUserId (\ s a -> s{_udsUserId = a})
 
-udsMedia :: Lens' UsersDraftsSend' Body
+udsMedia :: Lens' UsersDraftsSend' Stream
 udsMedia = lens _udsMedia (\ s a -> s{_udsMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

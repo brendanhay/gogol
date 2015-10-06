@@ -61,7 +61,7 @@ type UsersMessagesSendResource =
                    QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         MultipartRelated '[JSON] Message Body :>
+                         MultipartRelated '[JSON] Message Stream :>
                            Post '[JSON] Message
 
 -- | Sends the specified message to the recipients in the To, Cc, and Bcc
@@ -74,11 +74,11 @@ data UsersMessagesSend' = UsersMessagesSend'
     , _umsUserIP      :: !(Maybe Text)
     , _umsPayload     :: !Message
     , _umsUserId      :: !Text
-    , _umsMedia       :: !Body
+    , _umsMedia       :: !Stream
     , _umsKey         :: !(Maybe AuthKey)
     , _umsOAuthToken  :: !(Maybe OAuthToken)
     , _umsFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'UsersMessagesSend'' with the minimum fields required to make a request.
 --
@@ -104,7 +104,7 @@ data UsersMessagesSend' = UsersMessagesSend'
 usersMessagesSend'
     :: Message -- ^ 'payload'
     -> Text -- ^ 'media'
-    -> Body
+    -> Stream
     -> UsersMessagesSend'
 usersMessagesSend' pUmsPayload_ pUmsUserId_ pUmsMedia_ =
     UsersMessagesSend'
@@ -149,7 +149,7 @@ umsUserId :: Lens' UsersMessagesSend' Text
 umsUserId
   = lens _umsUserId (\ s a -> s{_umsUserId = a})
 
-umsMedia :: Lens' UsersMessagesSend' Body
+umsMedia :: Lens' UsersMessagesSend' Stream
 umsMedia = lens _umsMedia (\ s a -> s{_umsMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

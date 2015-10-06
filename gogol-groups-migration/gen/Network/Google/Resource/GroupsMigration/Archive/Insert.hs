@@ -58,7 +58,7 @@ type ArchiveInsertResource =
                  QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Body :> Post '[JSON] Groups
+                       ReqBody '[OctetStream] Stream :> Post '[JSON] Groups
 
 -- | Inserts a new mail into the archive of the Google group.
 --
@@ -67,12 +67,12 @@ data ArchiveInsert' = ArchiveInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiPrettyPrint :: !Bool
     , _aiUserIP      :: !(Maybe Text)
-    , _aiMedia       :: !Body
+    , _aiMedia       :: !Stream
     , _aiKey         :: !(Maybe AuthKey)
     , _aiGroupId     :: !Text
     , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'ArchiveInsert'' with the minimum fields required to make a request.
 --
@@ -94,7 +94,7 @@ data ArchiveInsert' = ArchiveInsert'
 --
 -- * 'aiFields'
 archiveInsert'
-    :: Body -- ^ 'media'
+    :: Stream -- ^ 'media'
     -> Text -- ^ 'groupId'
     -> ArchiveInsert'
 archiveInsert' pAiMedia_ pAiGroupId_ =
@@ -127,7 +127,7 @@ aiPrettyPrint
 aiUserIP :: Lens' ArchiveInsert' (Maybe Text)
 aiUserIP = lens _aiUserIP (\ s a -> s{_aiUserIP = a})
 
-aiMedia :: Lens' ArchiveInsert' Body
+aiMedia :: Lens' ArchiveInsert' Stream
 aiMedia = lens _aiMedia (\ s a -> s{_aiMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

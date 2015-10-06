@@ -57,7 +57,7 @@ type TimelineInsertResource =
                QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     MultipartRelated '[JSON] TimelineItem Body :>
+                     MultipartRelated '[JSON] TimelineItem Stream :>
                        Post '[JSON] TimelineItem
 
 -- | Inserts a new item into the timeline.
@@ -68,11 +68,11 @@ data TimelineInsert' = TimelineInsert'
     , _tiPrettyPrint :: !Bool
     , _tiUserIP      :: !(Maybe Text)
     , _tiPayload     :: !TimelineItem
-    , _tiMedia       :: !Body
+    , _tiMedia       :: !Stream
     , _tiKey         :: !(Maybe AuthKey)
     , _tiOAuthToken  :: !(Maybe OAuthToken)
     , _tiFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'TimelineInsert'' with the minimum fields required to make a request.
 --
@@ -95,7 +95,7 @@ data TimelineInsert' = TimelineInsert'
 -- * 'tiFields'
 timelineInsert'
     :: TimelineItem -- ^ 'payload'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> TimelineInsert'
 timelineInsert' pTiPayload_ pTiMedia_ =
     TimelineInsert'
@@ -132,7 +132,7 @@ tiPayload :: Lens' TimelineInsert' TimelineItem
 tiPayload
   = lens _tiPayload (\ s a -> s{_tiPayload = a})
 
-tiMedia :: Lens' TimelineInsert' Body
+tiMedia :: Lens' TimelineInsert' Stream
 tiMedia = lens _tiMedia (\ s a -> s{_tiMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

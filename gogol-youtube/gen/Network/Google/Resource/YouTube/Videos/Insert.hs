@@ -69,7 +69,7 @@ type VideosInsertResource =
                            QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 MultipartRelated '[JSON] Video Body :>
+                                 MultipartRelated '[JSON] Video Stream :>
                                    Post '[JSON] Video
 
 -- | Uploads a video to YouTube and optionally sets the video\'s metadata.
@@ -82,7 +82,7 @@ data VideosInsert' = VideosInsert'
     , _viStabilize                     :: !(Maybe Bool)
     , _viUserIP                        :: !(Maybe Text)
     , _viPayload                       :: !Video
-    , _viMedia                         :: !Body
+    , _viMedia                         :: !Stream
     , _viOnBehalfOfContentOwner        :: !(Maybe Text)
     , _viKey                           :: !(Maybe AuthKey)
     , _viOnBehalfOfContentOwnerChannel :: !(Maybe Text)
@@ -90,7 +90,7 @@ data VideosInsert' = VideosInsert'
     , _viAutoLevels                    :: !(Maybe Bool)
     , _viOAuthToken                    :: !(Maybe OAuthToken)
     , _viFields                        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'VideosInsert'' with the minimum fields required to make a request.
 --
@@ -126,7 +126,7 @@ data VideosInsert' = VideosInsert'
 videosInsert'
     :: Text -- ^ 'part'
     -> Video -- ^ 'payload'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> VideosInsert'
 videosInsert' pViPart_ pViPayload_ pViMedia_ =
     VideosInsert'
@@ -186,7 +186,7 @@ viPayload :: Lens' VideosInsert' Video
 viPayload
   = lens _viPayload (\ s a -> s{_viPayload = a})
 
-viMedia :: Lens' VideosInsert' Body
+viMedia :: Lens' VideosInsert' Stream
 viMedia = lens _viMedia (\ s a -> s{_viMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content

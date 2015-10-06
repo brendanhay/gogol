@@ -59,7 +59,7 @@ type MailInsertResource =
                  QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       MultipartRelated '[JSON] MailItem Body :>
+                       MultipartRelated '[JSON] MailItem Stream :>
                          Post '[JSON] ()
 
 -- | Insert Mail into Google\'s Gmail backends
@@ -70,12 +70,12 @@ data MailInsert' = MailInsert'
     , _miPrettyPrint :: !Bool
     , _miUserIP      :: !(Maybe Text)
     , _miPayload     :: !MailItem
-    , _miMedia       :: !Body
+    , _miMedia       :: !Stream
     , _miKey         :: !(Maybe AuthKey)
     , _miOAuthToken  :: !(Maybe OAuthToken)
     , _miUserKey     :: !Text
     , _miFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'MailInsert'' with the minimum fields required to make a request.
 --
@@ -100,7 +100,7 @@ data MailInsert' = MailInsert'
 -- * 'miFields'
 mailInsert'
     :: MailItem -- ^ 'payload'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> Text -- ^ 'userKey'
     -> MailInsert'
 mailInsert' pMiPayload_ pMiMedia_ pMiUserKey_ =
@@ -139,7 +139,7 @@ miPayload :: Lens' MailInsert' MailItem
 miPayload
   = lens _miPayload (\ s a -> s{_miPayload = a})
 
-miMedia :: Lens' MailInsert' Body
+miMedia :: Lens' MailInsert' Stream
 miMedia = lens _miMedia (\ s a -> s{_miMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

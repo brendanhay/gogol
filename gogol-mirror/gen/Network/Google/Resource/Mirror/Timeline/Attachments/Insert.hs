@@ -59,7 +59,7 @@ type TimelineAttachmentsInsertResource =
                    QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Body :>
+                         ReqBody '[OctetStream] Stream :>
                            Post '[JSON] Attachment
 
 -- | Adds a new attachment to a timeline item.
@@ -70,11 +70,11 @@ data TimelineAttachmentsInsert' = TimelineAttachmentsInsert'
     , _taiPrettyPrint :: !Bool
     , _taiUserIP      :: !(Maybe Text)
     , _taiItemId      :: !Text
-    , _taiMedia       :: !Body
+    , _taiMedia       :: !Stream
     , _taiKey         :: !(Maybe AuthKey)
     , _taiOAuthToken  :: !(Maybe OAuthToken)
     , _taiFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'TimelineAttachmentsInsert'' with the minimum fields required to make a request.
 --
@@ -97,7 +97,7 @@ data TimelineAttachmentsInsert' = TimelineAttachmentsInsert'
 -- * 'taiFields'
 timelineAttachmentsInsert'
     :: Text -- ^ 'itemId'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> TimelineAttachmentsInsert'
 timelineAttachmentsInsert' pTaiItemId_ pTaiMedia_ =
     TimelineAttachmentsInsert'
@@ -135,7 +135,7 @@ taiItemId :: Lens' TimelineAttachmentsInsert' Text
 taiItemId
   = lens _taiItemId (\ s a -> s{_taiItemId = a})
 
-taiMedia :: Lens' TimelineAttachmentsInsert' Body
+taiMedia :: Lens' TimelineAttachmentsInsert' Stream
 taiMedia = lens _taiMedia (\ s a -> s{_taiMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

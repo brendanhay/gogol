@@ -60,7 +60,8 @@ type JobsInsertResource =
                    QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         MultipartRelated '[JSON] Job Body :> Post '[JSON] Job
+                         MultipartRelated '[JSON] Job Stream :>
+                           Post '[JSON] Job
 
 -- | Starts a new asynchronous job. Requires the Can View project role.
 --
@@ -70,12 +71,12 @@ data JobsInsert' = JobsInsert'
     , _jiPrettyPrint :: !Bool
     , _jiUserIP      :: !(Maybe Text)
     , _jiPayload     :: !Job
-    , _jiMedia       :: !Body
+    , _jiMedia       :: !Stream
     , _jiKey         :: !(Maybe AuthKey)
     , _jiProjectId   :: !Text
     , _jiOAuthToken  :: !(Maybe OAuthToken)
     , _jiFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'JobsInsert'' with the minimum fields required to make a request.
 --
@@ -100,7 +101,7 @@ data JobsInsert' = JobsInsert'
 -- * 'jiFields'
 jobsInsert'
     :: Job -- ^ 'payload'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> Text -- ^ 'projectId'
     -> JobsInsert'
 jobsInsert' pJiPayload_ pJiMedia_ pJiProjectId_ =
@@ -139,7 +140,7 @@ jiPayload :: Lens' JobsInsert' Job
 jiPayload
   = lens _jiPayload (\ s a -> s{_jiPayload = a})
 
-jiMedia :: Lens' JobsInsert' Body
+jiMedia :: Lens' JobsInsert' Stream
 jiMedia = lens _jiMedia (\ s a -> s{_jiMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

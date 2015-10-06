@@ -60,7 +60,7 @@ type ProjectsIconsCreateResource =
                    QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         MultipartRelated '[JSON] Icon Body :>
+                         MultipartRelated '[JSON] Icon Stream :>
                            Post '[JSON] Icon
 
 -- | Create an icon.
@@ -71,12 +71,12 @@ data ProjectsIconsCreate' = ProjectsIconsCreate'
     , _picPrettyPrint :: !Bool
     , _picUserIP      :: !(Maybe Text)
     , _picPayload     :: !Icon
-    , _picMedia       :: !Body
+    , _picMedia       :: !Stream
     , _picKey         :: !(Maybe AuthKey)
     , _picProjectId   :: !Text
     , _picOAuthToken  :: !(Maybe OAuthToken)
     , _picFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'ProjectsIconsCreate'' with the minimum fields required to make a request.
 --
@@ -101,7 +101,7 @@ data ProjectsIconsCreate' = ProjectsIconsCreate'
 -- * 'picFields'
 projectsIconsCreate'
     :: Icon -- ^ 'payload'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> Text -- ^ 'projectId'
     -> ProjectsIconsCreate'
 projectsIconsCreate' pPicPayload_ pPicMedia_ pPicProjectId_ =
@@ -141,7 +141,7 @@ picPayload :: Lens' ProjectsIconsCreate' Icon
 picPayload
   = lens _picPayload (\ s a -> s{_picPayload = a})
 
-picMedia :: Lens' ProjectsIconsCreate' Body
+picMedia :: Lens' ProjectsIconsCreate' Stream
 picMedia = lens _picMedia (\ s a -> s{_picMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

@@ -64,7 +64,7 @@ type TablesFilesInsertResource =
                      QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Body :> Post '[JSON] ()
+                           ReqBody '[OctetStream] Stream :> Post '[JSON] ()
 
 -- | Upload a file to a placeholder table asset. See Table Upload in the
 -- Developer\'s Guide for more information. Supported file types are listed
@@ -76,13 +76,13 @@ data TablesFilesInsert' = TablesFilesInsert'
     { _tfiQuotaUser   :: !(Maybe Text)
     , _tfiPrettyPrint :: !Bool
     , _tfiUserIP      :: !(Maybe Text)
-    , _tfiMedia       :: !Body
+    , _tfiMedia       :: !Stream
     , _tfiKey         :: !(Maybe AuthKey)
     , _tfiId          :: !Text
     , _tfiOAuthToken  :: !(Maybe OAuthToken)
     , _tfiFilename    :: !Text
     , _tfiFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'TablesFilesInsert'' with the minimum fields required to make a request.
 --
@@ -106,7 +106,7 @@ data TablesFilesInsert' = TablesFilesInsert'
 --
 -- * 'tfiFields'
 tablesFilesInsert'
-    :: Body -- ^ 'media'
+    :: Stream -- ^ 'media'
     -> Text -- ^ 'id'
     -> Text -- ^ 'filename'
     -> TablesFilesInsert'
@@ -142,7 +142,7 @@ tfiUserIP :: Lens' TablesFilesInsert' (Maybe Text)
 tfiUserIP
   = lens _tfiUserIP (\ s a -> s{_tfiUserIP = a})
 
-tfiMedia :: Lens' TablesFilesInsert' Body
+tfiMedia :: Lens' TablesFilesInsert' Stream
 tfiMedia = lens _tfiMedia (\ s a -> s{_tfiMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

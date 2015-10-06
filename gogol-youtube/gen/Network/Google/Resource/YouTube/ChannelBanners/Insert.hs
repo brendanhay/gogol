@@ -68,7 +68,7 @@ type ChannelBannersInsertResource =
                    QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         MultipartRelated '[JSON] ChannelBannerResource Body
+                         MultipartRelated '[JSON] ChannelBannerResource Stream
                            :> Post '[JSON] ChannelBannerResource
 
 -- | Uploads a channel banner image to YouTube. This method represents the
@@ -87,12 +87,12 @@ data ChannelBannersInsert' = ChannelBannersInsert'
     , _cbiPrettyPrint            :: !Bool
     , _cbiUserIP                 :: !(Maybe Text)
     , _cbiPayload                :: !ChannelBannerResource
-    , _cbiMedia                  :: !Body
+    , _cbiMedia                  :: !Stream
     , _cbiOnBehalfOfContentOwner :: !(Maybe Text)
     , _cbiKey                    :: !(Maybe AuthKey)
     , _cbiOAuthToken             :: !(Maybe OAuthToken)
     , _cbiFields                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'ChannelBannersInsert'' with the minimum fields required to make a request.
 --
@@ -117,7 +117,7 @@ data ChannelBannersInsert' = ChannelBannersInsert'
 -- * 'cbiFields'
 channelBannersInsert'
     :: ChannelBannerResource -- ^ 'payload'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> ChannelBannersInsert'
 channelBannersInsert' pCbiPayload_ pCbiMedia_ =
     ChannelBannersInsert'
@@ -156,7 +156,7 @@ cbiPayload :: Lens' ChannelBannersInsert' ChannelBannerResource
 cbiPayload
   = lens _cbiPayload (\ s a -> s{_cbiPayload = a})
 
-cbiMedia :: Lens' ChannelBannersInsert' Body
+cbiMedia :: Lens' ChannelBannersInsert' Stream
 cbiMedia = lens _cbiMedia (\ s a -> s{_cbiMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content

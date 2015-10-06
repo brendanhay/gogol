@@ -60,7 +60,7 @@ verbAlias n m
   where
     rest     = alias verb (path ++ qry params ++ media)
     download = TyInfix rest (UnQual (sym ":<|>")) $
-        alias (TyApp (TyApp meth octet) (TyCon "Body"))
+        alias (TyApp (TyApp meth octet) (TyCon "Stream"))
         (path ++ qry (Map.delete "alt" (_mParameters m)) ++ [alt] ++ media)
 
     alias = foldr' (\l r -> TyInfix l (UnQual (sym ":>")) r)
@@ -107,13 +107,13 @@ verbAlias n m
           , _mSupportsMediaUpload m =
               [TyApp (TyApp (TyApp (TyCon "MultipartRelated") json)
                             (tycon (ref b)))
-                     (TyCon "Body")]
+                     (TyCon "Stream")]
 
           | Just b <- _mRequest m =
               [TyApp (TyApp (TyCon "ReqBody") json) (tycon (ref b))]
 
           | _mSupportsMediaUpload m =
-              [TyApp (TyApp (TyCon "ReqBody") octet) (TyCon "Body")]
+              [TyApp (TyApp (TyCon "ReqBody") octet) (TyCon "Stream")]
 
           | otherwise = []
 
@@ -140,7 +140,7 @@ downloadDecl n p api url fs m =
     googleRequestDecl n ty rs alt p api url fs m pat prec
   where
     ty = TyApp (TyCon "MediaDownload") (tycon n)
-    rs = InsType noLoc (TyApp (TyCon "Rs") ty) (TyCon "Body")
+    rs = InsType noLoc (TyApp (TyCon "Rs") ty) (TyCon "Stream")
 
     alt = Just (var "AltMedia")
 
@@ -445,7 +445,7 @@ externalLit = \case
     Alt t      -> TyCon (unqual (Text.unpack t))
     Key        -> TyCon "AuthKey"
     OAuthToken -> TyCon "OAuthToken"
-    Body       -> TyCon "Body"
+    Body       -> TyCon "Stream"
 
 internalLit :: Lit -> Type
 internalLit = \case
@@ -466,7 +466,7 @@ internalLit = \case
     Alt t      -> TyCon (unqual (Text.unpack t))
     Key        -> TyCon "AuthKey"
     OAuthToken -> TyCon "OAuthToken"
-    Body       -> TyCon "Body"
+    Body       -> TyCon "Stream"
 
 mapping :: TType -> Exp -> Exp
 mapping t e = infixE e "." (go t)

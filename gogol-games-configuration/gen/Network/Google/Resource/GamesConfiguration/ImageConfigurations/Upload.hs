@@ -63,7 +63,7 @@ type ImageConfigurationsUploadResource =
                      QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Body :>
+                           ReqBody '[OctetStream] Stream :>
                              Post '[JSON] ImageConfiguration
 
 -- | Uploads an image for a resource with the given ID and image type.
@@ -74,12 +74,12 @@ data ImageConfigurationsUpload' = ImageConfigurationsUpload'
     , _icuResourceId  :: !Text
     , _icuPrettyPrint :: !Bool
     , _icuUserIP      :: !(Maybe Text)
-    , _icuMedia       :: !Body
+    , _icuMedia       :: !Stream
     , _icuImageType   :: !ImageConfigurationsUploadImageType
     , _icuKey         :: !(Maybe AuthKey)
     , _icuOAuthToken  :: !(Maybe OAuthToken)
     , _icuFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'ImageConfigurationsUpload'' with the minimum fields required to make a request.
 --
@@ -104,7 +104,7 @@ data ImageConfigurationsUpload' = ImageConfigurationsUpload'
 -- * 'icuFields'
 imageConfigurationsUpload'
     :: Text -- ^ 'resourceId'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> ImageConfigurationsUploadImageType -- ^ 'imageType'
     -> ImageConfigurationsUpload'
 imageConfigurationsUpload' pIcuResourceId_ pIcuMedia_ pIcuImageType_ =
@@ -145,7 +145,7 @@ icuUserIP :: Lens' ImageConfigurationsUpload' (Maybe Text)
 icuUserIP
   = lens _icuUserIP (\ s a -> s{_icuUserIP = a})
 
-icuMedia :: Lens' ImageConfigurationsUpload' Body
+icuMedia :: Lens' ImageConfigurationsUpload' Stream
 icuMedia = lens _icuMedia (\ s a -> s{_icuMedia = a})
 
 -- | Selects which image in a resource for this method.

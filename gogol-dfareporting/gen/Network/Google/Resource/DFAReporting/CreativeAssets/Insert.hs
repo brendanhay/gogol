@@ -63,7 +63,8 @@ type CreativeAssetsInsertResource =
                        QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             MultipartRelated '[JSON] CreativeAssetMetadata Body
+                             MultipartRelated '[JSON] CreativeAssetMetadata
+                               Stream
                                :> Post '[JSON] CreativeAssetMetadata
 
 -- | Inserts a new creative asset.
@@ -76,11 +77,11 @@ data CreativeAssetsInsert' = CreativeAssetsInsert'
     , _caiAdvertiserId :: !Int64
     , _caiProFileId    :: !Int64
     , _caiPayload      :: !CreativeAssetMetadata
-    , _caiMedia        :: !Body
+    , _caiMedia        :: !Stream
     , _caiKey          :: !(Maybe AuthKey)
     , _caiOAuthToken   :: !(Maybe OAuthToken)
     , _caiFields       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'CreativeAssetsInsert'' with the minimum fields required to make a request.
 --
@@ -109,7 +110,7 @@ creativeAssetsInsert'
     :: Int64 -- ^ 'advertiserId'
     -> Int64 -- ^ 'profileId'
     -> CreativeAssetMetadata -- ^ 'payload'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> CreativeAssetsInsert'
 creativeAssetsInsert' pCaiAdvertiserId_ pCaiProFileId_ pCaiPayload_ pCaiMedia_ =
     CreativeAssetsInsert'
@@ -160,7 +161,7 @@ caiPayload :: Lens' CreativeAssetsInsert' CreativeAssetMetadata
 caiPayload
   = lens _caiPayload (\ s a -> s{_caiPayload = a})
 
-caiMedia :: Lens' CreativeAssetsInsert' Body
+caiMedia :: Lens' CreativeAssetsInsert' Stream
 caiMedia = lens _caiMedia (\ s a -> s{_caiMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

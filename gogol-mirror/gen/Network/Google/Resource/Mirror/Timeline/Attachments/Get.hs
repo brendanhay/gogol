@@ -71,7 +71,8 @@ type TimelineAttachmentsGetResource =
                      QueryParam "fields" Text :>
                        QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" AltMedia :> Get '[OctetStream] Body
+                           QueryParam "alt" AltMedia :>
+                             Get '[OctetStream] Stream
 
 -- | Retrieves an attachment on a timeline item by item ID and attachment ID.
 --
@@ -192,7 +193,7 @@ instance GoogleRequest TimelineAttachmentsGet' where
 instance GoogleRequest
          (MediaDownload TimelineAttachmentsGet') where
         type Rs (MediaDownload TimelineAttachmentsGet') =
-             Body
+             Stream
         request = requestWith mirrorRequest
         requestWith rq
           (MediaDownload TimelineAttachmentsGet'{..})

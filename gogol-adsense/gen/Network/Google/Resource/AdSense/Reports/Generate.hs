@@ -105,7 +105,7 @@ type ReportsGenerateResource =
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltMedia :>
-                                               Get '[OctetStream] Body
+                                               Get '[OctetStream] Stream
 
 -- | Generate an AdSense report based on the report request sent in the query
 -- parameters. Returns the result as JSON; to retrieve output in CSV format
@@ -340,7 +340,7 @@ instance GoogleRequest ReportsGenerate' where
 
 instance GoogleRequest
          (MediaDownload ReportsGenerate') where
-        type Rs (MediaDownload ReportsGenerate') = Body
+        type Rs (MediaDownload ReportsGenerate') = Stream
         request = requestWith adSenseRequest
         requestWith rq (MediaDownload ReportsGenerate'{..})
           = go (Just _rgStartDate) (Just _rgEndDate)

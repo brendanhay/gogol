@@ -73,7 +73,8 @@ type QuerySQLResource =
                      QueryParam "fields" Text :>
                        QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" AltMedia :> Post '[OctetStream] Body
+                           QueryParam "alt" AltMedia :>
+                             Post '[OctetStream] Stream
 
 -- | Executes a Fusion Tables SQL statement, which can be any of - SELECT -
 -- INSERT - UPDATE - DELETE - SHOW - DESCRIBE - CREATE statement.
@@ -201,7 +202,7 @@ instance GoogleRequest QuerySQL' where
 
 instance GoogleRequest (MediaDownload QuerySQL')
          where
-        type Rs (MediaDownload QuerySQL') = Body
+        type Rs (MediaDownload QuerySQL') = Stream
         request = requestWith fusionTablesRequest
         requestWith rq (MediaDownload QuerySQL'{..})
           = go (Just _qsqlSQL) _qsqlTyped _qsqlHdrs

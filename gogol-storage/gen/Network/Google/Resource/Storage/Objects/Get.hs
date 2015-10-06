@@ -91,7 +91,7 @@ type ObjectsGetResource =
                                    QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltMedia :>
-                                         Get '[OctetStream] Body
+                                         Get '[OctetStream] Stream
 
 -- | Retrieves objects or their associated metadata.
 --
@@ -272,7 +272,7 @@ instance GoogleRequest ObjectsGet' where
 
 instance GoogleRequest (MediaDownload ObjectsGet')
          where
-        type Rs (MediaDownload ObjectsGet') = Body
+        type Rs (MediaDownload ObjectsGet') = Stream
         request = requestWith storageRequest
         requestWith rq (MediaDownload ObjectsGet'{..})
           = go _ogBucket _ogObject _ogIfMetagenerationMatch

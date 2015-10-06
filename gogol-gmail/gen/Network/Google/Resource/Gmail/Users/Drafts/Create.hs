@@ -59,7 +59,7 @@ type UsersDraftsCreateResource =
                  QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       MultipartRelated '[JSON] Draft Body :>
+                       MultipartRelated '[JSON] Draft Stream :>
                          Post '[JSON] Draft
 
 -- | Creates a new draft with the DRAFT label.
@@ -71,11 +71,11 @@ data UsersDraftsCreate' = UsersDraftsCreate'
     , _udcUserIP      :: !(Maybe Text)
     , _udcPayload     :: !Draft
     , _udcUserId      :: !Text
-    , _udcMedia       :: !Body
+    , _udcMedia       :: !Stream
     , _udcKey         :: !(Maybe AuthKey)
     , _udcOAuthToken  :: !(Maybe OAuthToken)
     , _udcFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'UsersDraftsCreate'' with the minimum fields required to make a request.
 --
@@ -101,7 +101,7 @@ data UsersDraftsCreate' = UsersDraftsCreate'
 usersDraftsCreate'
     :: Draft -- ^ 'payload'
     -> Text -- ^ 'media'
-    -> Body
+    -> Stream
     -> UsersDraftsCreate'
 usersDraftsCreate' pUdcPayload_ pUdcUserId_ pUdcMedia_ =
     UsersDraftsCreate'
@@ -146,7 +146,7 @@ udcUserId :: Lens' UsersDraftsCreate' Text
 udcUserId
   = lens _udcUserId (\ s a -> s{_udcUserId = a})
 
-udcMedia :: Lens' UsersDraftsCreate' Body
+udcMedia :: Lens' UsersDraftsCreate' Stream
 udcMedia = lens _udcMedia (\ s a -> s{_udcMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

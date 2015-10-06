@@ -69,7 +69,7 @@ type TableImportRowsResource =
                              QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] Body :>
+                                   ReqBody '[OctetStream] Stream :>
                                      Post '[JSON] Import
 
 -- | Imports more rows into a table.
@@ -81,7 +81,7 @@ data TableImportRows' = TableImportRows'
     , _tirUserIP      :: !(Maybe Text)
     , _tirStartLine   :: !(Maybe Int32)
     , _tirEndLine     :: !(Maybe Int32)
-    , _tirMedia       :: !Body
+    , _tirMedia       :: !Stream
     , _tirKey         :: !(Maybe AuthKey)
     , _tirOAuthToken  :: !(Maybe OAuthToken)
     , _tirTableId     :: !Text
@@ -89,7 +89,7 @@ data TableImportRows' = TableImportRows'
     , _tirEncoding    :: !(Maybe Text)
     , _tirIsStrict    :: !(Maybe Bool)
     , _tirFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'TableImportRows'' with the minimum fields required to make a request.
 --
@@ -121,7 +121,7 @@ data TableImportRows' = TableImportRows'
 --
 -- * 'tirFields'
 tableImportRows'
-    :: Body -- ^ 'media'
+    :: Stream -- ^ 'media'
     -> Text -- ^ 'tableId'
     -> TableImportRows'
 tableImportRows' pTirMedia_ pTirTableId_ =
@@ -174,7 +174,7 @@ tirEndLine :: Lens' TableImportRows' (Maybe Int32)
 tirEndLine
   = lens _tirEndLine (\ s a -> s{_tirEndLine = a})
 
-tirMedia :: Lens' TableImportRows' Body
+tirMedia :: Lens' TableImportRows' Stream
 tirMedia = lens _tirMedia (\ s a -> s{_tirMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

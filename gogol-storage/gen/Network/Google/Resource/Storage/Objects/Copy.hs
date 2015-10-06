@@ -147,7 +147,7 @@ type ObjectsCopyResource =
                                                              Object
                                                              :>
                                                              Post '[OctetStream]
-                                                               Body
+                                                               Stream
 
 -- | Copies an object to a destination in the same location. Optionally
 -- overrides metadata.
@@ -421,7 +421,7 @@ instance GoogleRequest ObjectsCopy' where
 
 instance GoogleRequest (MediaDownload ObjectsCopy')
          where
-        type Rs (MediaDownload ObjectsCopy') = Body
+        type Rs (MediaDownload ObjectsCopy') = Stream
         request = requestWith storageRequest
         requestWith rq (MediaDownload ObjectsCopy'{..})
           = go _ocSourceBucket _ocSourceObject

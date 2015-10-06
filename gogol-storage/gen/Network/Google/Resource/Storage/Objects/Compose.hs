@@ -85,7 +85,7 @@ type ObjectsComposeResource =
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltMedia :>
                                    ReqBody '[JSON] ComposeRequest :>
-                                     Post '[OctetStream] Body
+                                     Post '[OctetStream] Stream
 
 -- | Concatenates a list of existing objects into a new object in the same
 -- bucket.
@@ -237,7 +237,7 @@ instance GoogleRequest ObjectsCompose' where
 
 instance GoogleRequest
          (MediaDownload ObjectsCompose') where
-        type Rs (MediaDownload ObjectsCompose') = Body
+        type Rs (MediaDownload ObjectsCompose') = Stream
         request = requestWith storageRequest
         requestWith rq (MediaDownload ObjectsCompose'{..})
           = go _oDestinationBucket _oDestinationObject

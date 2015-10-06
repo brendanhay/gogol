@@ -70,7 +70,7 @@ type TableReplaceRowsResource =
                              QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] Body :>
+                                   ReqBody '[OctetStream] Stream :>
                                      Post '[JSON] Task
 
 -- | Replaces rows of an existing table. Current rows remain visible until
@@ -83,7 +83,7 @@ data TableReplaceRows' = TableReplaceRows'
     , _trrUserIP      :: !(Maybe Text)
     , _trrStartLine   :: !(Maybe Int32)
     , _trrEndLine     :: !(Maybe Int32)
-    , _trrMedia       :: !Body
+    , _trrMedia       :: !Stream
     , _trrKey         :: !(Maybe AuthKey)
     , _trrOAuthToken  :: !(Maybe OAuthToken)
     , _trrTableId     :: !Text
@@ -91,7 +91,7 @@ data TableReplaceRows' = TableReplaceRows'
     , _trrEncoding    :: !(Maybe Text)
     , _trrIsStrict    :: !(Maybe Bool)
     , _trrFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'TableReplaceRows'' with the minimum fields required to make a request.
 --
@@ -123,7 +123,7 @@ data TableReplaceRows' = TableReplaceRows'
 --
 -- * 'trrFields'
 tableReplaceRows'
-    :: Body -- ^ 'media'
+    :: Stream -- ^ 'media'
     -> Text -- ^ 'tableId'
     -> TableReplaceRows'
 tableReplaceRows' pTrrMedia_ pTrrTableId_ =
@@ -176,7 +176,7 @@ trrEndLine :: Lens' TableReplaceRows' (Maybe Int32)
 trrEndLine
   = lens _trrEndLine (\ s a -> s{_trrEndLine = a})
 
-trrMedia :: Lens' TableReplaceRows' Body
+trrMedia :: Lens' TableReplaceRows' Stream
 trrMedia = lens _trrMedia (\ s a -> s{_trrMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API

@@ -66,7 +66,7 @@ type EditsImagesUploadResource =
                          QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] Body :>
+                               ReqBody '[OctetStream] Stream :>
                                  Post '[JSON] ImagesUploadResponse
 
 -- | Uploads a new image and adds it to the list of images for the specified
@@ -78,14 +78,14 @@ data EditsImagesUpload' = EditsImagesUpload'
     , _eiuPrettyPrint :: !Bool
     , _eiuPackageName :: !Text
     , _eiuUserIP      :: !(Maybe Text)
-    , _eiuMedia       :: !Body
+    , _eiuMedia       :: !Stream
     , _eiuImageType   :: !EditsImagesUploadImageType
     , _eiuKey         :: !(Maybe AuthKey)
     , _eiuLanguage    :: !Text
     , _eiuOAuthToken  :: !(Maybe OAuthToken)
     , _eiuEditId      :: !Text
     , _eiuFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
 
 -- | Creates a value of 'EditsImagesUpload'' with the minimum fields required to make a request.
 --
@@ -114,7 +114,7 @@ data EditsImagesUpload' = EditsImagesUpload'
 -- * 'eiuFields'
 editsImagesUpload'
     :: Text -- ^ 'packageName'
-    -> Body -- ^ 'media'
+    -> Stream -- ^ 'media'
     -> EditsImagesUploadImageType -- ^ 'imageType'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
@@ -160,7 +160,7 @@ eiuUserIP :: Lens' EditsImagesUpload' (Maybe Text)
 eiuUserIP
   = lens _eiuUserIP (\ s a -> s{_eiuUserIP = a})
 
-eiuMedia :: Lens' EditsImagesUpload' Body
+eiuMedia :: Lens' EditsImagesUpload' Stream
 eiuMedia = lens _eiuMedia (\ s a -> s{_eiuMedia = a})
 
 eiuImageType :: Lens' EditsImagesUpload' EditsImagesUploadImageType
