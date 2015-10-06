@@ -155,8 +155,8 @@ bgFields :: Lens' BudgetGet' (Maybe Text)
 bgFields = lens _bgFields (\ s a -> s{_bgFields = a})
 
 instance GoogleAuth BudgetGet' where
-        authKey = bgKey . _Just
-        authToken = bgOAuthToken . _Just
+        _AuthKey = bgKey . _Just
+        _AuthToken = bgOAuthToken . _Just
 
 instance GoogleRequest BudgetGet' where
         type Rs BudgetGet' = Budget

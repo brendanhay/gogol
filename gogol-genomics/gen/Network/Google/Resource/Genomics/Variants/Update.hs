@@ -155,8 +155,8 @@ vuFields :: Lens' VariantsUpdate' (Maybe Text)
 vuFields = lens _vuFields (\ s a -> s{_vuFields = a})
 
 instance GoogleAuth VariantsUpdate' where
-        authKey = vuKey . _Just
-        authToken = vuOAuthToken . _Just
+        _AuthKey = vuKey . _Just
+        _AuthToken = vuOAuthToken . _Just
 
 instance GoogleRequest VariantsUpdate' where
         type Rs VariantsUpdate' = Variant

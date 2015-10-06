@@ -156,8 +156,8 @@ cdFields :: Lens' CollectionsDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
 instance GoogleAuth CollectionsDelete' where
-        authKey = cdKey . _Just
-        authToken = cdOAuthToken . _Just
+        _AuthKey = cdKey . _Just
+        _AuthToken = cdOAuthToken . _Just
 
 instance GoogleRequest CollectionsDelete' where
         type Rs CollectionsDelete' = ()

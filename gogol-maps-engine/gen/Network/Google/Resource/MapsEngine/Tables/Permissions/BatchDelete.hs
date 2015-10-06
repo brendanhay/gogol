@@ -160,8 +160,8 @@ tpbdFields
 
 instance GoogleAuth TablesPermissionsBatchDelete'
          where
-        authKey = tpbdKey . _Just
-        authToken = tpbdOAuthToken . _Just
+        _AuthKey = tpbdKey . _Just
+        _AuthToken = tpbdOAuthToken . _Just
 
 instance GoogleRequest TablesPermissionsBatchDelete'
          where

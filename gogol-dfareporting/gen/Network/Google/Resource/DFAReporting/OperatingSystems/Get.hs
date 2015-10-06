@@ -158,8 +158,8 @@ osgFields
   = lens _osgFields (\ s a -> s{_osgFields = a})
 
 instance GoogleAuth OperatingSystemsGet' where
-        authKey = osgKey . _Just
-        authToken = osgOAuthToken . _Just
+        _AuthKey = osgKey . _Just
+        _AuthToken = osgOAuthToken . _Just
 
 instance GoogleRequest OperatingSystemsGet' where
         type Rs OperatingSystemsGet' = OperatingSystem

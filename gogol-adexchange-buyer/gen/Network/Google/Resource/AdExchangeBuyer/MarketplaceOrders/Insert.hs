@@ -146,8 +146,8 @@ moiFields
   = lens _moiFields (\ s a -> s{_moiFields = a})
 
 instance GoogleAuth MarketplaceOrdersInsert' where
-        authKey = moiKey . _Just
-        authToken = moiOAuthToken . _Just
+        _AuthKey = moiKey . _Just
+        _AuthToken = moiOAuthToken . _Just
 
 instance GoogleRequest MarketplaceOrdersInsert' where
         type Rs MarketplaceOrdersInsert' =

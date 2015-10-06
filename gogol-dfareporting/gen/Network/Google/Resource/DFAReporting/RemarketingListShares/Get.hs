@@ -161,8 +161,8 @@ rlsgFields
   = lens _rlsgFields (\ s a -> s{_rlsgFields = a})
 
 instance GoogleAuth RemarketingListSharesGet' where
-        authKey = rlsgKey . _Just
-        authToken = rlsgOAuthToken . _Just
+        _AuthKey = rlsgKey . _Just
+        _AuthToken = rlsgOAuthToken . _Just
 
 instance GoogleRequest RemarketingListSharesGet'
          where

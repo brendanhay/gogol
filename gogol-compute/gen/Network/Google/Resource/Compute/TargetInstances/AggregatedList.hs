@@ -195,8 +195,8 @@ tialFields
 
 instance GoogleAuth TargetInstancesAggregatedList'
          where
-        authKey = tialKey . _Just
-        authToken = tialOAuthToken . _Just
+        _AuthKey = tialKey . _Just
+        _AuthToken = tialOAuthToken . _Just
 
 instance GoogleRequest TargetInstancesAggregatedList'
          where

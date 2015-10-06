@@ -170,8 +170,8 @@ lpdFields
   = lens _lpdFields (\ s a -> s{_lpdFields = a})
 
 instance GoogleAuth LandingPagesDelete' where
-        authKey = lpdKey . _Just
-        authToken = lpdOAuthToken . _Just
+        _AuthKey = lpdKey . _Just
+        _AuthToken = lpdOAuthToken . _Just
 
 instance GoogleRequest LandingPagesDelete' where
         type Rs LandingPagesDelete' = ()

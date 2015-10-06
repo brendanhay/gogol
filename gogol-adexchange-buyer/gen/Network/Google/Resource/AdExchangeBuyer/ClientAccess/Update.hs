@@ -168,8 +168,8 @@ cauFields
   = lens _cauFields (\ s a -> s{_cauFields = a})
 
 instance GoogleAuth ClientAccessUpdate' where
-        authKey = cauKey . _Just
-        authToken = cauOAuthToken . _Just
+        _AuthKey = cauKey . _Just
+        _AuthToken = cauOAuthToken . _Just
 
 instance GoogleRequest ClientAccessUpdate' where
         type Rs ClientAccessUpdate' =

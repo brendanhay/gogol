@@ -142,8 +142,8 @@ slFields :: Lens' SchemasList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
 instance GoogleAuth SchemasList' where
-        authKey = slKey . _Just
-        authToken = slOAuthToken . _Just
+        _AuthKey = slKey . _Just
+        _AuthToken = slOAuthToken . _Just
 
 instance GoogleRequest SchemasList' where
         type Rs SchemasList' = Schemas

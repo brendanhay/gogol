@@ -153,8 +153,8 @@ fFields :: Lens' FloodlightActivitiesGet' (Maybe Text)
 fFields = lens _fFields (\ s a -> s{_fFields = a})
 
 instance GoogleAuth FloodlightActivitiesGet' where
-        authKey = fKey . _Just
-        authToken = fOAuthToken . _Just
+        _AuthKey = fKey . _Just
+        _AuthToken = fOAuthToken . _Just
 
 instance GoogleRequest FloodlightActivitiesGet' where
         type Rs FloodlightActivitiesGet' = FloodlightActivity

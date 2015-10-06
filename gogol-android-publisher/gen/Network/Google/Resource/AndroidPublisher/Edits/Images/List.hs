@@ -185,8 +185,8 @@ eilFields
   = lens _eilFields (\ s a -> s{_eilFields = a})
 
 instance GoogleAuth EditsImagesList' where
-        authKey = eilKey . _Just
-        authToken = eilOAuthToken . _Just
+        _AuthKey = eilKey . _Just
+        _AuthToken = eilOAuthToken . _Just
 
 instance GoogleRequest EditsImagesList' where
         type Rs EditsImagesList' = ImagesListResponse

@@ -195,8 +195,8 @@ mwpawlpFields
 
 instance GoogleAuth
          ManagementWebPropertyAdWordsLinksPatch' where
-        authKey = mwpawlpKey . _Just
-        authToken = mwpawlpOAuthToken . _Just
+        _AuthKey = mwpawlpKey . _Just
+        _AuthToken = mwpawlpOAuthToken . _Just
 
 instance GoogleRequest
          ManagementWebPropertyAdWordsLinksPatch' where

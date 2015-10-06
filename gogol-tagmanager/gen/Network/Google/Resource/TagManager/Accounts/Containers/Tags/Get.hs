@@ -173,8 +173,8 @@ actgcFields
   = lens _actgcFields (\ s a -> s{_actgcFields = a})
 
 instance GoogleAuth AccountsContainersTagsGet' where
-        authKey = actgcKey . _Just
-        authToken = actgcOAuthToken . _Just
+        _AuthKey = actgcKey . _Just
+        _AuthToken = actgcOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersTagsGet'
          where

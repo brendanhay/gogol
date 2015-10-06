@@ -162,8 +162,8 @@ actlcFields
   = lens _actlcFields (\ s a -> s{_actlcFields = a})
 
 instance GoogleAuth AccountsContainersTagsList' where
-        authKey = actlcKey . _Just
-        authToken = actlcOAuthToken . _Just
+        _AuthKey = actlcKey . _Just
+        _AuthToken = actlcOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersTagsList'
          where

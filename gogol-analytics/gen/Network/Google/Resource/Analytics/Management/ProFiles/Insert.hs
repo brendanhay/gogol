@@ -174,8 +174,8 @@ mpfiFields
   = lens _mpfiFields (\ s a -> s{_mpfiFields = a})
 
 instance GoogleAuth ManagementProFilesInsert' where
-        authKey = mpfiKey . _Just
-        authToken = mpfiOAuthToken . _Just
+        _AuthKey = mpfiKey . _Just
+        _AuthToken = mpfiOAuthToken . _Just
 
 instance GoogleRequest ManagementProFilesInsert'
          where

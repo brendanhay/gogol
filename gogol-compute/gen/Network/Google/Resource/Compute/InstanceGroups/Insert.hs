@@ -171,8 +171,8 @@ igiFields
   = lens _igiFields (\ s a -> s{_igiFields = a})
 
 instance GoogleAuth InstanceGroupsInsert' where
-        authKey = igiKey . _Just
-        authToken = igiOAuthToken . _Just
+        _AuthKey = igiKey . _Just
+        _AuthToken = igiOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupsInsert' where
         type Rs InstanceGroupsInsert' = Operation

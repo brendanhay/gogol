@@ -193,8 +193,8 @@ umlFields
   = lens _umlFields (\ s a -> s{_umlFields = a})
 
 instance GoogleAuth URLMapsList' where
-        authKey = umlKey . _Just
-        authToken = umlOAuthToken . _Just
+        _AuthKey = umlKey . _Just
+        _AuthToken = umlOAuthToken . _Just
 
 instance GoogleRequest URLMapsList' where
         type Rs URLMapsList' = URLMapList

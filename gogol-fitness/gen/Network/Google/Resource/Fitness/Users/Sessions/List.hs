@@ -197,8 +197,8 @@ uslFields
   = lens _uslFields (\ s a -> s{_uslFields = a})
 
 instance GoogleAuth UsersSessionsList' where
-        authKey = uslKey . _Just
-        authToken = uslOAuthToken . _Just
+        _AuthKey = uslKey . _Just
+        _AuthToken = uslOAuthToken . _Just
 
 instance GoogleRequest UsersSessionsList' where
         type Rs UsersSessionsList' = ListSessionsResponse

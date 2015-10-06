@@ -161,8 +161,8 @@ acpFields
 
 instance GoogleAuth AchievementConfigurationsPatch'
          where
-        authKey = acpKey . _Just
-        authToken = acpOAuthToken . _Just
+        _AuthKey = acpKey . _Just
+        _AuthToken = acpOAuthToken . _Just
 
 instance GoogleRequest
          AchievementConfigurationsPatch' where

@@ -195,8 +195,8 @@ rulFields
   = lens _rulFields (\ s a -> s{_rulFields = a})
 
 instance GoogleAuth RollingUpdatesList' where
-        authKey = rulKey . _Just
-        authToken = rulOAuthToken . _Just
+        _AuthKey = rulKey . _Just
+        _AuthToken = rulOAuthToken . _Just
 
 instance GoogleRequest RollingUpdatesList' where
         type Rs RollingUpdatesList' = RollingUpdateList

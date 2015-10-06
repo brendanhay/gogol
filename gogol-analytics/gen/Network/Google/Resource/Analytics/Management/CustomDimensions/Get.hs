@@ -177,8 +177,8 @@ mcdgFields
 
 instance GoogleAuth ManagementCustomDimensionsGet'
          where
-        authKey = mcdgKey . _Just
-        authToken = mcdgOAuthToken . _Just
+        _AuthKey = mcdgKey . _Just
+        _AuthToken = mcdgOAuthToken . _Just
 
 instance GoogleRequest ManagementCustomDimensionsGet'
          where

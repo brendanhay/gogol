@@ -174,8 +174,8 @@ plbcFields
   = lens _plbcFields (\ s a -> s{_plbcFields = a})
 
 instance GoogleAuth PeopleListByCircle' where
-        authKey = plbcKey . _Just
-        authToken = plbcOAuthToken . _Just
+        _AuthKey = plbcKey . _Just
+        _AuthToken = plbcOAuthToken . _Just
 
 instance GoogleRequest PeopleListByCircle' where
         type Rs PeopleListByCircle' = PeopleFeed

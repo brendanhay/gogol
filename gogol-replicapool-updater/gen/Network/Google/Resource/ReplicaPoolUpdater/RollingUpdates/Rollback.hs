@@ -172,8 +172,8 @@ rurFields
   = lens _rurFields (\ s a -> s{_rurFields = a})
 
 instance GoogleAuth RollingUpdatesRollback' where
-        authKey = rurKey . _Just
-        authToken = rurOAuthToken . _Just
+        _AuthKey = rurKey . _Just
+        _AuthToken = rurOAuthToken . _Just
 
 instance GoogleRequest RollingUpdatesRollback' where
         type Rs RollingUpdatesRollback' = Operation

@@ -244,8 +244,8 @@ pjwilCallback
       (\ s a -> s{_pjwilCallback = a})
 
 instance GoogleAuth ProjectsJobsWorkItemsLease' where
-        authKey = pjwilKey . _Just
-        authToken = pjwilOAuthToken . _Just
+        _AuthKey = pjwilKey . _Just
+        _AuthToken = pjwilOAuthToken . _Just
 
 instance GoogleRequest ProjectsJobsWorkItemsLease'
          where

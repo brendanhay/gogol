@@ -145,8 +145,8 @@ rccFields
   = lens _rccFields (\ s a -> s{_rccFields = a})
 
 instance GoogleAuth RasterCollectionsCreate' where
-        authKey = rccKey . _Just
-        authToken = rccOAuthToken . _Just
+        _AuthKey = rccKey . _Just
+        _AuthToken = rccOAuthToken . _Just
 
 instance GoogleRequest RasterCollectionsCreate' where
         type Rs RasterCollectionsCreate' = RasterCollection

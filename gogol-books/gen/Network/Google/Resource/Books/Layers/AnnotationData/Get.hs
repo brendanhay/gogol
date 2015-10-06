@@ -254,8 +254,8 @@ ladgFields
   = lens _ladgFields (\ s a -> s{_ladgFields = a})
 
 instance GoogleAuth LayersAnnotationDataGet' where
-        authKey = ladgKey . _Just
-        authToken = ladgOAuthToken . _Just
+        _AuthKey = ladgKey . _Just
+        _AuthToken = ladgOAuthToken . _Just
 
 instance GoogleRequest LayersAnnotationDataGet' where
         type Rs LayersAnnotationDataGet' = Annotationdata

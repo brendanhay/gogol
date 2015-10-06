@@ -187,8 +187,8 @@ llFields :: Lens' LayersList' (Maybe Text)
 llFields = lens _llFields (\ s a -> s{_llFields = a})
 
 instance GoogleAuth LayersList' where
-        authKey = llKey . _Just
-        authToken = llOAuthToken . _Just
+        _AuthKey = llKey . _Just
+        _AuthToken = llOAuthToken . _Just
 
 instance GoogleRequest LayersList' where
         type Rs LayersList' = Layersummaries

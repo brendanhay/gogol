@@ -222,8 +222,8 @@ trrFields
   = lens _trrFields (\ s a -> s{_trrFields = a})
 
 instance GoogleAuth TableReplaceRows' where
-        authKey = trrKey . _Just
-        authToken = trrOAuthToken . _Just
+        _AuthKey = trrKey . _Just
+        _AuthToken = trrOAuthToken . _Just
 
 instance GoogleRequest TableReplaceRows' where
         type Rs TableReplaceRows' = Task

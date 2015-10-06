@@ -142,8 +142,8 @@ olFields :: Lens' OffersList' (Maybe Text)
 olFields = lens _olFields (\ s a -> s{_olFields = a})
 
 instance GoogleAuth OffersList' where
-        authKey = olKey . _Just
-        authToken = olOAuthToken . _Just
+        _AuthKey = olKey . _Just
+        _AuthToken = olOAuthToken . _Just
 
 instance GoogleRequest OffersList' where
         type Rs OffersList' = ListOffersResponse

@@ -146,8 +146,8 @@ qrFields :: Lens' QuestsReset' (Maybe Text)
 qrFields = lens _qrFields (\ s a -> s{_qrFields = a})
 
 instance GoogleAuth QuestsReset' where
-        authKey = qrKey . _Just
-        authToken = qrOAuthToken . _Just
+        _AuthKey = qrKey . _Just
+        _AuthToken = qrOAuthToken . _Just
 
 instance GoogleRequest QuestsReset' where
         type Rs QuestsReset' = ()

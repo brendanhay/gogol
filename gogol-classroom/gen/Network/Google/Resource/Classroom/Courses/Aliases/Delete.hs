@@ -233,8 +233,8 @@ cadCallback
   = lens _cadCallback (\ s a -> s{_cadCallback = a})
 
 instance GoogleAuth CoursesAliasesDelete' where
-        authKey = cadKey . _Just
-        authToken = cadOAuthToken . _Just
+        _AuthKey = cadKey . _Just
+        _AuthToken = cadOAuthToken . _Just
 
 instance GoogleRequest CoursesAliasesDelete' where
         type Rs CoursesAliasesDelete' = Empty

@@ -140,8 +140,8 @@ aFields :: Lens' AlertsList' (Maybe Text)
 aFields = lens _aFields (\ s a -> s{_aFields = a})
 
 instance GoogleAuth AlertsList' where
-        authKey = aKey . _Just
-        authToken = aOAuthToken . _Just
+        _AuthKey = aKey . _Just
+        _AuthToken = aOAuthToken . _Just
 
 instance GoogleRequest AlertsList' where
         type Rs AlertsList' = Alerts

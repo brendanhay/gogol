@@ -157,8 +157,8 @@ pggFields
   = lens _pggFields (\ s a -> s{_pggFields = a})
 
 instance GoogleAuth PlacementGroupsGet' where
-        authKey = pggKey . _Just
-        authToken = pggOAuthToken . _Just
+        _AuthKey = pggKey . _Just
+        _AuthToken = pggOAuthToken . _Just
 
 instance GoogleRequest PlacementGroupsGet' where
         type Rs PlacementGroupsGet' = PlacementGroup

@@ -154,8 +154,8 @@ upFields :: Lens' UsersPatch' (Maybe Text)
 upFields = lens _upFields (\ s a -> s{_upFields = a})
 
 instance GoogleAuth UsersPatch' where
-        authKey = upKey . _Just
-        authToken = upOAuthToken . _Just
+        _AuthKey = upKey . _Just
+        _AuthToken = upOAuthToken . _Just
 
 instance GoogleRequest UsersPatch' where
         type Rs UsersPatch' = User

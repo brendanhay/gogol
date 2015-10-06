@@ -167,8 +167,8 @@ spFields :: Lens' StylePatch' (Maybe Text)
 spFields = lens _spFields (\ s a -> s{_spFields = a})
 
 instance GoogleAuth StylePatch' where
-        authKey = spKey . _Just
-        authToken = spOAuthToken . _Just
+        _AuthKey = spKey . _Just
+        _AuthToken = spOAuthToken . _Just
 
 instance GoogleRequest StylePatch' where
         type Rs StylePatch' = StyleSetting

@@ -184,8 +184,8 @@ ismInstance
   = lens _ismInstance (\ s a -> s{_ismInstance = a})
 
 instance GoogleAuth InstancesSetMetadata' where
-        authKey = ismKey . _Just
-        authToken = ismOAuthToken . _Just
+        _AuthKey = ismKey . _Just
+        _AuthToken = ismOAuthToken . _Just
 
 instance GoogleRequest InstancesSetMetadata' where
         type Rs InstancesSetMetadata' = Operation

@@ -158,8 +158,8 @@ tllFields
   = lens _tllFields (\ s a -> s{_tllFields = a})
 
 instance GoogleAuth TaskListsList' where
-        authKey = tllKey . _Just
-        authToken = tllOAuthToken . _Just
+        _AuthKey = tllKey . _Just
+        _AuthToken = tllOAuthToken . _Just
 
 instance GoogleRequest TaskListsList' where
         type Rs TaskListsList' = TaskLists

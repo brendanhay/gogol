@@ -154,8 +154,8 @@ ngFields :: Lens' NetworksGet' (Maybe Text)
 ngFields = lens _ngFields (\ s a -> s{_ngFields = a})
 
 instance GoogleAuth NetworksGet' where
-        authKey = ngKey . _Just
-        authToken = ngOAuthToken . _Just
+        _AuthKey = ngKey . _Just
+        _AuthToken = ngOAuthToken . _Just
 
 instance GoogleRequest NetworksGet' where
         type Rs NetworksGet' = Network

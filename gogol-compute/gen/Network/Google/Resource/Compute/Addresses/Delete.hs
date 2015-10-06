@@ -169,8 +169,8 @@ addFields
   = lens _addFields (\ s a -> s{_addFields = a})
 
 instance GoogleAuth AddressesDelete' where
-        authKey = addKey . _Just
-        authToken = addOAuthToken . _Just
+        _AuthKey = addKey . _Just
+        _AuthToken = addOAuthToken . _Just
 
 instance GoogleRequest AddressesDelete' where
         type Rs AddressesDelete' = Operation

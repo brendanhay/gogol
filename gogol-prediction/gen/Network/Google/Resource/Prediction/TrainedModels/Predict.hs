@@ -168,8 +168,8 @@ tmpFields
   = lens _tmpFields (\ s a -> s{_tmpFields = a})
 
 instance GoogleAuth TrainedModelsPredict' where
-        authKey = tmpKey . _Just
-        authToken = tmpOAuthToken . _Just
+        _AuthKey = tmpKey . _Just
+        _AuthToken = tmpOAuthToken . _Just
 
 instance GoogleRequest TrainedModelsPredict' where
         type Rs TrainedModelsPredict' = Output

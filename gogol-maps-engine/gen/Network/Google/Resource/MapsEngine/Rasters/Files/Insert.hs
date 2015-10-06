@@ -166,8 +166,8 @@ rfiFields
   = lens _rfiFields (\ s a -> s{_rfiFields = a})
 
 instance GoogleAuth RastersFilesInsert' where
-        authKey = rfiKey . _Just
-        authToken = rfiOAuthToken . _Just
+        _AuthKey = rfiKey . _Just
+        _AuthToken = rfiOAuthToken . _Just
 
 instance GoogleRequest RastersFilesInsert' where
         type Rs RastersFilesInsert' = ()

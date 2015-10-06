@@ -154,8 +154,8 @@ ciFields :: Lens' ColumnInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
 instance GoogleAuth ColumnInsert' where
-        authKey = ciKey . _Just
-        authToken = ciOAuthToken . _Just
+        _AuthKey = ciKey . _Just
+        _AuthToken = ciOAuthToken . _Just
 
 instance GoogleRequest ColumnInsert' where
         type Rs ColumnInsert' = Column

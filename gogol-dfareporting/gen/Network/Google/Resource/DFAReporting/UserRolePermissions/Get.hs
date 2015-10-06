@@ -159,8 +159,8 @@ urpgFields
   = lens _urpgFields (\ s a -> s{_urpgFields = a})
 
 instance GoogleAuth UserRolePermissionsGet' where
-        authKey = urpgKey . _Just
-        authToken = urpgOAuthToken . _Just
+        _AuthKey = urpgKey . _Just
+        _AuthToken = urpgOAuthToken . _Just
 
 instance GoogleRequest UserRolePermissionsGet' where
         type Rs UserRolePermissionsGet' = UserRolePermission

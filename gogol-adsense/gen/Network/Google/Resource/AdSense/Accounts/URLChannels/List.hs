@@ -191,8 +191,8 @@ auclFields
   = lens _auclFields (\ s a -> s{_auclFields = a})
 
 instance GoogleAuth AccountsURLChannelsList' where
-        authKey = auclKey . _Just
-        authToken = auclOAuthToken . _Just
+        _AuthKey = auclKey . _Just
+        _AuthToken = auclOAuthToken . _Just
 
 instance GoogleRequest AccountsURLChannelsList' where
         type Rs AccountsURLChannelsList' = URLChannels

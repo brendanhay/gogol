@@ -145,8 +145,8 @@ rplFields
   = lens _rplFields (\ s a -> s{_rplFields = a})
 
 instance GoogleAuth RastersPermissionsList' where
-        authKey = rplKey . _Just
-        authToken = rplOAuthToken . _Just
+        _AuthKey = rplKey . _Just
+        _AuthToken = rplOAuthToken . _Just
 
 instance GoogleRequest RastersPermissionsList' where
         type Rs RastersPermissionsList' =

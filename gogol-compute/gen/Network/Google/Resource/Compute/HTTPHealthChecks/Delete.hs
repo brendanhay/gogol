@@ -163,8 +163,8 @@ httphcdFields
       (\ s a -> s{_httphcdFields = a})
 
 instance GoogleAuth HTTPHealthChecksDelete' where
-        authKey = httphcdKey . _Just
-        authToken = httphcdOAuthToken . _Just
+        _AuthKey = httphcdKey . _Just
+        _AuthToken = httphcdOAuthToken . _Just
 
 instance GoogleRequest HTTPHealthChecksDelete' where
         type Rs HTTPHealthChecksDelete' = Operation

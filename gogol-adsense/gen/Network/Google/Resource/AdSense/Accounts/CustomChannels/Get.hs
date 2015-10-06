@@ -177,8 +177,8 @@ accgFields
   = lens _accgFields (\ s a -> s{_accgFields = a})
 
 instance GoogleAuth AccountsCustomChannelsGet' where
-        authKey = accgKey . _Just
-        authToken = accgOAuthToken . _Just
+        _AuthKey = accgKey . _Just
+        _AuthToken = accgOAuthToken . _Just
 
 instance GoogleRequest AccountsCustomChannelsGet'
          where

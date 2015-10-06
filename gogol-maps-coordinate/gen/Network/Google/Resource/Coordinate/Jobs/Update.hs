@@ -282,8 +282,8 @@ juCustomField
       . _Coerce
 
 instance GoogleAuth JobsUpdate' where
-        authKey = juKey . _Just
-        authToken = juOAuthToken . _Just
+        _AuthKey = juKey . _Just
+        _AuthToken = juOAuthToken . _Just
 
 instance GoogleRequest JobsUpdate' where
         type Rs JobsUpdate' = Job

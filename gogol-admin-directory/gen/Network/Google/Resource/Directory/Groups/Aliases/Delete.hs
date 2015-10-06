@@ -156,8 +156,8 @@ gadFields
   = lens _gadFields (\ s a -> s{_gadFields = a})
 
 instance GoogleAuth GroupsAliasesDelete' where
-        authKey = gadKey . _Just
-        authToken = gadOAuthToken . _Just
+        _AuthKey = gadKey . _Just
+        _AuthToken = gadOAuthToken . _Just
 
 instance GoogleRequest GroupsAliasesDelete' where
         type Rs GroupsAliasesDelete' = ()

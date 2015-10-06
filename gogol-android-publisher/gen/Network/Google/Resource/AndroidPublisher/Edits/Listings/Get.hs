@@ -172,8 +172,8 @@ elgFields
   = lens _elgFields (\ s a -> s{_elgFields = a})
 
 instance GoogleAuth EditsListingsGet' where
-        authKey = elgKey . _Just
-        authToken = elgOAuthToken . _Just
+        _AuthKey = elgKey . _Just
+        _AuthToken = elgOAuthToken . _Just
 
 instance GoogleRequest EditsListingsGet' where
         type Rs EditsListingsGet' = Listing

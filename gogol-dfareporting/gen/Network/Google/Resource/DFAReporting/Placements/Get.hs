@@ -153,8 +153,8 @@ pgFields :: Lens' PlacementsGet' (Maybe Text)
 pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
 
 instance GoogleAuth PlacementsGet' where
-        authKey = pgKey . _Just
-        authToken = pgOAuthToken . _Just
+        _AuthKey = pgKey . _Just
+        _AuthToken = pgOAuthToken . _Just
 
 instance GoogleRequest PlacementsGet' where
         type Rs PlacementsGet' = Placement

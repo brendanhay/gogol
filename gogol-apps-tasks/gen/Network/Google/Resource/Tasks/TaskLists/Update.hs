@@ -158,8 +158,8 @@ tluFields
   = lens _tluFields (\ s a -> s{_tluFields = a})
 
 instance GoogleAuth TaskListsUpdate' where
-        authKey = tluKey . _Just
-        authToken = tluOAuthToken . _Just
+        _AuthKey = tluKey . _Just
+        _AuthToken = tluOAuthToken . _Just
 
 instance GoogleRequest TaskListsUpdate' where
         type Rs TaskListsUpdate' = TaskList

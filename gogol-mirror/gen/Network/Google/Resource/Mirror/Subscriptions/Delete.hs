@@ -140,8 +140,8 @@ sdFields :: Lens' SubscriptionsDelete' (Maybe Text)
 sdFields = lens _sdFields (\ s a -> s{_sdFields = a})
 
 instance GoogleAuth SubscriptionsDelete' where
-        authKey = sdKey . _Just
-        authToken = sdOAuthToken . _Just
+        _AuthKey = sdKey . _Just
+        _AuthToken = sdOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsDelete' where
         type Rs SubscriptionsDelete' = ()

@@ -145,8 +145,8 @@ galFields
   = lens _galFields (\ s a -> s{_galFields = a})
 
 instance GoogleAuth GroupsAliasesList' where
-        authKey = galKey . _Just
-        authToken = galOAuthToken . _Just
+        _AuthKey = galKey . _Just
+        _AuthToken = galOAuthToken . _Just
 
 instance GoogleRequest GroupsAliasesList' where
         type Rs GroupsAliasesList' = Aliases

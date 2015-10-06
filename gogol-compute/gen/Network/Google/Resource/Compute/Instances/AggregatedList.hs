@@ -191,8 +191,8 @@ ialFields
   = lens _ialFields (\ s a -> s{_ialFields = a})
 
 instance GoogleAuth InstancesAggregatedList' where
-        authKey = ialKey . _Just
-        authToken = ialOAuthToken . _Just
+        _AuthKey = ialKey . _Just
+        _AuthToken = ialOAuthToken . _Just
 
 instance GoogleRequest InstancesAggregatedList' where
         type Rs InstancesAggregatedList' =

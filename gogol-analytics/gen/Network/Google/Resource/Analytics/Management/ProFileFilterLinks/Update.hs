@@ -204,8 +204,8 @@ mpffluFields
 
 instance GoogleAuth
          ManagementProFileFilterLinksUpdate' where
-        authKey = mpffluKey . _Just
-        authToken = mpffluOAuthToken . _Just
+        _AuthKey = mpffluKey . _Just
+        _AuthToken = mpffluOAuthToken . _Just
 
 instance GoogleRequest
          ManagementProFileFilterLinksUpdate' where

@@ -164,8 +164,8 @@ tpbuFields
 
 instance GoogleAuth TablesPermissionsBatchUpdate'
          where
-        authKey = tpbuKey . _Just
-        authToken = tpbuOAuthToken . _Just
+        _AuthKey = tpbuKey . _Just
+        _AuthToken = tpbuOAuthToken . _Just
 
 instance GoogleRequest TablesPermissionsBatchUpdate'
          where

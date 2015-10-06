@@ -197,8 +197,8 @@ prlFields
   = lens _prlFields (\ s a -> s{_prlFields = a})
 
 instance GoogleAuth PerformanceReportList' where
-        authKey = prlKey . _Just
-        authToken = prlOAuthToken . _Just
+        _AuthKey = prlKey . _Just
+        _AuthToken = prlOAuthToken . _Just
 
 instance GoogleRequest PerformanceReportList' where
         type Rs PerformanceReportList' =

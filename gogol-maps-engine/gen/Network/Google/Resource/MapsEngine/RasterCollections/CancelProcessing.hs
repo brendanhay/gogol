@@ -147,8 +147,8 @@ rccpFields
 
 instance GoogleAuth
          RasterCollectionsCancelProcessing' where
-        authKey = rccpKey . _Just
-        authToken = rccpOAuthToken . _Just
+        _AuthKey = rccpKey . _Just
+        _AuthToken = rccpOAuthToken . _Just
 
 instance GoogleRequest
          RasterCollectionsCancelProcessing' where

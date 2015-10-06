@@ -184,8 +184,8 @@ zvrrFields
   = lens _zvrrFields (\ s a -> s{_zvrrFields = a})
 
 instance GoogleAuth ZoneViewsRemoveResources' where
-        authKey = zvrrKey . _Just
-        authToken = zvrrOAuthToken . _Just
+        _AuthKey = zvrrKey . _Just
+        _AuthToken = zvrrOAuthToken . _Just
 
 instance GoogleRequest ZoneViewsRemoveResources'
          where

@@ -237,8 +237,8 @@ amlCallback
   = lens _amlCallback (\ s a -> s{_amlCallback = a})
 
 instance GoogleAuth AppsModulesList' where
-        authKey = amlKey . _Just
-        authToken = amlOAuthToken . _Just
+        _AuthKey = amlKey . _Just
+        _AuthToken = amlOAuthToken . _Just
 
 instance GoogleRequest AppsModulesList' where
         type Rs AppsModulesList' = ListModulesResponse

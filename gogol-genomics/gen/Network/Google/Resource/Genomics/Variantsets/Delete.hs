@@ -147,8 +147,8 @@ vddFields
   = lens _vddFields (\ s a -> s{_vddFields = a})
 
 instance GoogleAuth VariantsetsDelete' where
-        authKey = vddKey . _Just
-        authToken = vddOAuthToken . _Just
+        _AuthKey = vddKey . _Just
+        _AuthToken = vddOAuthToken . _Just
 
 instance GoogleRequest VariantsetsDelete' where
         type Rs VariantsetsDelete' = ()

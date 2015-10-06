@@ -170,8 +170,8 @@ iigFields
   = lens _iigFields (\ s a -> s{_iigFields = a})
 
 instance GoogleAuth InventoryItemsGet' where
-        authKey = iigKey . _Just
-        authToken = iigOAuthToken . _Just
+        _AuthKey = iigKey . _Just
+        _AuthToken = iigOAuthToken . _Just
 
 instance GoogleRequest InventoryItemsGet' where
         type Rs InventoryItemsGet' = InventoryItem

@@ -258,8 +258,8 @@ lbcFields
   = lens _lbcFields (\ s a -> s{_lbcFields = a})
 
 instance GoogleAuth LiveBroadcastsControl' where
-        authKey = lbcKey . _Just
-        authToken = lbcOAuthToken . _Just
+        _AuthKey = lbcKey . _Just
+        _AuthToken = lbcOAuthToken . _Just
 
 instance GoogleRequest LiveBroadcastsControl' where
         type Rs LiveBroadcastsControl' = LiveBroadcast

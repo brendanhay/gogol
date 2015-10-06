@@ -168,8 +168,8 @@ udslFields
   = lens _udslFields (\ s a -> s{_udslFields = a})
 
 instance GoogleAuth UsersDataSourcesList' where
-        authKey = udslKey . _Just
-        authToken = udslOAuthToken . _Just
+        _AuthKey = udslKey . _Just
+        _AuthToken = udslOAuthToken . _Just
 
 instance GoogleRequest UsersDataSourcesList' where
         type Rs UsersDataSourcesList' =

@@ -170,8 +170,8 @@ umsFields
   = lens _umsFields (\ s a -> s{_umsFields = a})
 
 instance GoogleAuth UsersMessagesSend' where
-        authKey = umsKey . _Just
-        authToken = umsOAuthToken . _Just
+        _AuthKey = umsKey . _Just
+        _AuthToken = umsOAuthToken . _Just
 
 instance GoogleRequest UsersMessagesSend' where
         type Rs UsersMessagesSend' = Message

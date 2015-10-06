@@ -157,8 +157,8 @@ cddFields
   = lens _cddFields (\ s a -> s{_cddFields = a})
 
 instance GoogleAuth ChildrenDelete' where
-        authKey = cddKey . _Just
-        authToken = cddOAuthToken . _Just
+        _AuthKey = cddKey . _Just
+        _AuthToken = cddOAuthToken . _Just
 
 instance GoogleRequest ChildrenDelete' where
         type Rs ChildrenDelete' = ()

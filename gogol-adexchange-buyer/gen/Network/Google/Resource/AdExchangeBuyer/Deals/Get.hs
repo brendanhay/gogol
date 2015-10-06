@@ -153,8 +153,8 @@ dgFields :: Lens' DealsGet' (Maybe Text)
 dgFields = lens _dgFields (\ s a -> s{_dgFields = a})
 
 instance GoogleAuth DealsGet' where
-        authKey = dgKey . _Just
-        authToken = dgOAuthToken . _Just
+        _AuthKey = dgKey . _Just
+        _AuthToken = dgOAuthToken . _Just
 
 instance GoogleRequest DealsGet' where
         type Rs DealsGet' = NegotiationDTO

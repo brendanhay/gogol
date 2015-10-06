@@ -161,8 +161,8 @@ rcpbdFields
 
 instance GoogleAuth
          RasterCollectionsPermissionsBatchDelete' where
-        authKey = rcpbdKey . _Just
-        authToken = rcpbdOAuthToken . _Just
+        _AuthKey = rcpbdKey . _Just
+        _AuthToken = rcpbdOAuthToken . _Just
 
 instance GoogleRequest
          RasterCollectionsPermissionsBatchDelete' where

@@ -226,8 +226,8 @@ clcCallback
   = lens _clcCallback (\ s a -> s{_clcCallback = a})
 
 instance GoogleAuth CompaniesLeadsCreate' where
-        authKey = clcKey . _Just
-        authToken = clcOAuthToken . _Just
+        _AuthKey = clcKey . _Just
+        _AuthToken = clcOAuthToken . _Just
 
 instance GoogleRequest CompaniesLeadsCreate' where
         type Rs CompaniesLeadsCreate' = CreateLeadResponse

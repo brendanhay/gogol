@@ -156,8 +156,8 @@ wruFields
   = lens _wruFields (\ s a -> s{_wruFields = a})
 
 instance GoogleAuth WebResourceUpdate' where
-        authKey = wruKey . _Just
-        authToken = wruOAuthToken . _Just
+        _AuthKey = wruKey . _Just
+        _AuthToken = wruOAuthToken . _Just
 
 instance GoogleRequest WebResourceUpdate' where
         type Rs WebResourceUpdate' =

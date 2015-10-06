@@ -236,8 +236,8 @@ pjuCallback
   = lens _pjuCallback (\ s a -> s{_pjuCallback = a})
 
 instance GoogleAuth ProjectsJobsUpdate' where
-        authKey = pjuKey . _Just
-        authToken = pjuOAuthToken . _Just
+        _AuthKey = pjuKey . _Just
+        _AuthToken = pjuOAuthToken . _Just
 
 instance GoogleRequest ProjectsJobsUpdate' where
         type Rs ProjectsJobsUpdate' = Job

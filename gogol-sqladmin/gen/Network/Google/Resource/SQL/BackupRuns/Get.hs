@@ -169,8 +169,8 @@ brgInstance
   = lens _brgInstance (\ s a -> s{_brgInstance = a})
 
 instance GoogleAuth BackupRunsGet' where
-        authKey = brgKey . _Just
-        authToken = brgOAuthToken . _Just
+        _AuthKey = brgKey . _Just
+        _AuthToken = brgOAuthToken . _Just
 
 instance GoogleRequest BackupRunsGet' where
         type Rs BackupRunsGet' = BackupRun

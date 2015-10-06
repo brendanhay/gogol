@@ -153,8 +153,8 @@ cuFields :: Lens' CirclesUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
 instance GoogleAuth CirclesUpdate' where
-        authKey = cuKey . _Just
-        authToken = cuOAuthToken . _Just
+        _AuthKey = cuKey . _Just
+        _AuthToken = cuOAuthToken . _Just
 
 instance GoogleRequest CirclesUpdate' where
         type Rs CirclesUpdate' = Circle

@@ -157,8 +157,8 @@ godFields
   = lens _godFields (\ s a -> s{_godFields = a})
 
 instance GoogleAuth GlobalOperationsDelete' where
-        authKey = godKey . _Just
-        authToken = godOAuthToken . _Just
+        _AuthKey = godKey . _Just
+        _AuthToken = godOAuthToken . _Just
 
 instance GoogleRequest GlobalOperationsDelete' where
         type Rs GlobalOperationsDelete' = ()

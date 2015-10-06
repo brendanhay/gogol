@@ -165,8 +165,8 @@ giiFields
   = lens _giiFields (\ s a -> s{_giiFields = a})
 
 instance GoogleAuth GroupItemsInsert' where
-        authKey = giiKey . _Just
-        authToken = giiOAuthToken . _Just
+        _AuthKey = giiKey . _Just
+        _AuthToken = giiOAuthToken . _Just
 
 instance GoogleRequest GroupItemsInsert' where
         type Rs GroupItemsInsert' = GroupItem

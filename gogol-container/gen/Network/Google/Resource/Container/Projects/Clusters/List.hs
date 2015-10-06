@@ -145,8 +145,8 @@ pclFields
   = lens _pclFields (\ s a -> s{_pclFields = a})
 
 instance GoogleAuth ProjectsClustersList' where
-        authKey = pclKey . _Just
-        authToken = pclOAuthToken . _Just
+        _AuthKey = pclKey . _Just
+        _AuthToken = pclOAuthToken . _Just
 
 instance GoogleRequest ProjectsClustersList' where
         type Rs ProjectsClustersList' =

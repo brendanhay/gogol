@@ -158,8 +158,8 @@ ocoFields
   = lens _ocoFields (\ s a -> s{_ocoFields = a})
 
 instance GoogleAuth OrdersCreatetestOrder' where
-        authKey = ocoKey . _Just
-        authToken = ocoOAuthToken . _Just
+        _AuthKey = ocoKey . _Just
+        _AuthToken = ocoOAuthToken . _Just
 
 instance GoogleRequest OrdersCreatetestOrder' where
         type Rs OrdersCreatetestOrder' =

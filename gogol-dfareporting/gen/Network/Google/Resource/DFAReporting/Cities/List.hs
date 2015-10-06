@@ -194,8 +194,8 @@ cFields :: Lens' CitiesList' (Maybe Text)
 cFields = lens _cFields (\ s a -> s{_cFields = a})
 
 instance GoogleAuth CitiesList' where
-        authKey = cKey . _Just
-        authToken = cOAuthToken . _Just
+        _AuthKey = cKey . _Just
+        _AuthToken = cOAuthToken . _Just
 
 instance GoogleRequest CitiesList' where
         type Rs CitiesList' = CitiesListResponse

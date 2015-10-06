@@ -173,8 +173,8 @@ cdgFields
   = lens _cdgFields (\ s a -> s{_cdgFields = a})
 
 instance GoogleAuth ChromeosDevicesGet' where
-        authKey = cdgKey . _Just
-        authToken = cdgOAuthToken . _Just
+        _AuthKey = cdgKey . _Just
+        _AuthToken = cdgOAuthToken . _Just
 
 instance GoogleRequest ChromeosDevicesGet' where
         type Rs ChromeosDevicesGet' = ChromeOSDevice

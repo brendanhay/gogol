@@ -156,8 +156,8 @@ ssFields :: Lens' SitemapsSubmit' (Maybe Text)
 ssFields = lens _ssFields (\ s a -> s{_ssFields = a})
 
 instance GoogleAuth SitemapsSubmit' where
-        authKey = ssKey . _Just
-        authToken = ssOAuthToken . _Just
+        _AuthKey = ssKey . _Just
+        _AuthToken = ssOAuthToken . _Just
 
 instance GoogleRequest SitemapsSubmit' where
         type Rs SitemapsSubmit' = ()

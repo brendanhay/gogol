@@ -165,8 +165,8 @@ pgFields :: Lens' PropertiesGet' (Maybe Text)
 pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
 
 instance GoogleAuth PropertiesGet' where
-        authKey = pgKey . _Just
-        authToken = pgOAuthToken . _Just
+        _AuthKey = pgKey . _Just
+        _AuthToken = pgOAuthToken . _Just
 
 instance GoogleRequest PropertiesGet' where
         type Rs PropertiesGet' = Property

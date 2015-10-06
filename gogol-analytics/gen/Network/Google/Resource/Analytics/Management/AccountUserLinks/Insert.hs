@@ -162,8 +162,8 @@ mauliFields
 
 instance GoogleAuth ManagementAccountUserLinksInsert'
          where
-        authKey = mauliKey . _Just
-        authToken = mauliOAuthToken . _Just
+        _AuthKey = mauliKey . _Just
+        _AuthToken = mauliOAuthToken . _Just
 
 instance GoogleRequest
          ManagementAccountUserLinksInsert' where

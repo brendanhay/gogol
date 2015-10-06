@@ -238,8 +238,8 @@ slwFields
   = lens _slwFields (\ s a -> s{_slwFields = a})
 
 instance GoogleAuth ScoresListWindow' where
-        authKey = slwKey . _Just
-        authToken = slwOAuthToken . _Just
+        _AuthKey = slwKey . _Just
+        _AuthToken = slwOAuthToken . _Just
 
 instance GoogleRequest ScoresListWindow' where
         type Rs ScoresListWindow' = LeaderboardScores

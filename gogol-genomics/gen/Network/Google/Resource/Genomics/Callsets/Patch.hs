@@ -153,8 +153,8 @@ cpFields :: Lens' CallsetsPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 instance GoogleAuth CallsetsPatch' where
-        authKey = cpKey . _Just
-        authToken = cpOAuthToken . _Just
+        _AuthKey = cpKey . _Just
+        _AuthToken = cpOAuthToken . _Just
 
 instance GoogleRequest CallsetsPatch' where
         type Rs CallsetsPatch' = CallSet

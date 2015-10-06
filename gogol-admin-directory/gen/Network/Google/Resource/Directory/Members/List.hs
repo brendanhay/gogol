@@ -174,8 +174,8 @@ mlFields :: Lens' MembersList' (Maybe Text)
 mlFields = lens _mlFields (\ s a -> s{_mlFields = a})
 
 instance GoogleAuth MembersList' where
-        authKey = mlKey . _Just
-        authToken = mlOAuthToken . _Just
+        _AuthKey = mlKey . _Just
+        _AuthToken = mlOAuthToken . _Just
 
 instance GoogleRequest MembersList' where
         type Rs MembersList' = Members

@@ -171,8 +171,8 @@ igmgFields
   = lens _igmgFields (\ s a -> s{_igmgFields = a})
 
 instance GoogleAuth InstanceGroupManagersGet' where
-        authKey = igmgKey . _Just
-        authToken = igmgOAuthToken . _Just
+        _AuthKey = igmgKey . _Just
+        _AuthToken = igmgOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupManagersGet'
          where

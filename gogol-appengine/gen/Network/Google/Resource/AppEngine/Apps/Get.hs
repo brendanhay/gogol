@@ -225,8 +225,8 @@ agCallback
   = lens _agCallback (\ s a -> s{_agCallback = a})
 
 instance GoogleAuth AppsGet' where
-        authKey = agKey . _Just
-        authToken = agOAuthToken . _Just
+        _AuthKey = agKey . _Just
+        _AuthToken = agOAuthToken . _Just
 
 instance GoogleRequest AppsGet' where
         type Rs AppsGet' = Application

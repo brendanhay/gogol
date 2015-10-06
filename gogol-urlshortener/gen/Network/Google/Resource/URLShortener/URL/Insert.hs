@@ -141,8 +141,8 @@ uiFields :: Lens' URLInsert' (Maybe Text)
 uiFields = lens _uiFields (\ s a -> s{_uiFields = a})
 
 instance GoogleAuth URLInsert' where
-        authKey = uiKey . _Just
-        authToken = uiOAuthToken . _Just
+        _AuthKey = uiKey . _Just
+        _AuthToken = uiOAuthToken . _Just
 
 instance GoogleRequest URLInsert' where
         type Rs URLInsert' = URL

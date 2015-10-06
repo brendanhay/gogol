@@ -174,8 +174,8 @@ acfdFields
 
 instance GoogleAuth AccountsContainersFoldersDelete'
          where
-        authKey = acfdKey . _Just
-        authToken = acfdOAuthToken . _Just
+        _AuthKey = acfdKey . _Just
+        _AuthToken = acfdOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersFoldersDelete' where

@@ -184,8 +184,8 @@ puuFields
   = lens _puuFields (\ s a -> s{_puuFields = a})
 
 instance GoogleAuth PermissionsUpdate' where
-        authKey = puuKey . _Just
-        authToken = puuOAuthToken . _Just
+        _AuthKey = puuKey . _Just
+        _AuthToken = puuOAuthToken . _Just
 
 instance GoogleRequest PermissionsUpdate' where
         type Rs PermissionsUpdate' = Permission

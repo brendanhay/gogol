@@ -160,8 +160,8 @@ urpggFields
 
 instance GoogleAuth UserRolePermissionGroupsGet'
          where
-        authKey = urpggKey . _Just
-        authToken = urpggOAuthToken . _Just
+        _AuthKey = urpggKey . _Just
+        _AuthToken = urpggOAuthToken . _Just
 
 instance GoogleRequest UserRolePermissionGroupsGet'
          where

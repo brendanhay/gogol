@@ -221,8 +221,8 @@ salFields
   = lens _salFields (\ s a -> s{_salFields = a})
 
 instance GoogleAuth SubAccountsList' where
-        authKey = salKey . _Just
-        authToken = salOAuthToken . _Just
+        _AuthKey = salKey . _Just
+        _AuthToken = salOAuthToken . _Just
 
 instance GoogleRequest SubAccountsList' where
         type Rs SubAccountsList' = SubAccountsListResponse

@@ -184,8 +184,8 @@ aulFields
   = lens _aulFields (\ s a -> s{_aulFields = a})
 
 instance GoogleAuth AdUnitsList' where
-        authKey = aulKey . _Just
-        authToken = aulOAuthToken . _Just
+        _AuthKey = aulKey . _Just
+        _AuthToken = aulOAuthToken . _Just
 
 instance GoogleRequest AdUnitsList' where
         type Rs AdUnitsList' = AdUnits

@@ -174,8 +174,8 @@ llpFields
   = lens _llpFields (\ s a -> s{_llpFields = a})
 
 instance GoogleAuth LayersListPublished' where
-        authKey = llpKey . _Just
-        authToken = llpOAuthToken . _Just
+        _AuthKey = llpKey . _Just
+        _AuthToken = llpOAuthToken . _Just
 
 instance GoogleRequest LayersListPublished' where
         type Rs LayersListPublished' =

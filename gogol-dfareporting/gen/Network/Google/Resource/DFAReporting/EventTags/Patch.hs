@@ -168,8 +168,8 @@ etpFields
   = lens _etpFields (\ s a -> s{_etpFields = a})
 
 instance GoogleAuth EventTagsPatch' where
-        authKey = etpKey . _Just
-        authToken = etpOAuthToken . _Just
+        _AuthKey = etpKey . _Just
+        _AuthToken = etpOAuthToken . _Just
 
 instance GoogleRequest EventTagsPatch' where
         type Rs EventTagsPatch' = EventTag

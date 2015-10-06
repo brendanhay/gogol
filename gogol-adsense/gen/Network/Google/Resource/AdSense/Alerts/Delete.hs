@@ -143,8 +143,8 @@ adFields :: Lens' AlertsDelete' (Maybe Text)
 adFields = lens _adFields (\ s a -> s{_adFields = a})
 
 instance GoogleAuth AlertsDelete' where
-        authKey = adKey . _Just
-        authToken = adOAuthToken . _Just
+        _AuthKey = adKey . _Just
+        _AuthToken = adOAuthToken . _Just
 
 instance GoogleRequest AlertsDelete' where
         type Rs AlertsDelete' = ()

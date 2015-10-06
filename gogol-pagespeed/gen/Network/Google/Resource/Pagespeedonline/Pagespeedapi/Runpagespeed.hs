@@ -203,8 +203,8 @@ prFields :: Lens' PagespeedapiRunpagespeed' (Maybe Text)
 prFields = lens _prFields (\ s a -> s{_prFields = a})
 
 instance GoogleAuth PagespeedapiRunpagespeed' where
-        authKey = prKey . _Just
-        authToken = prOAuthToken . _Just
+        _AuthKey = prKey . _Just
+        _AuthToken = prOAuthToken . _Just
 
 instance GoogleRequest PagespeedapiRunpagespeed'
          where

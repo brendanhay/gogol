@@ -157,8 +157,8 @@ accFields
   = lens _accFields (\ s a -> s{_accFields = a})
 
 instance GoogleAuth AccountPermissionsGet' where
-        authKey = accKey . _Just
-        authToken = accOAuthToken . _Just
+        _AuthKey = accKey . _Just
+        _AuthToken = accOAuthToken . _Just
 
 instance GoogleRequest AccountPermissionsGet' where
         type Rs AccountPermissionsGet' = AccountPermission

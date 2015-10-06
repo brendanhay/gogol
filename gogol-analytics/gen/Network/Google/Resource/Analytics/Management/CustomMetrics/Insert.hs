@@ -176,8 +176,8 @@ mcmiFields
 
 instance GoogleAuth ManagementCustomMetricsInsert'
          where
-        authKey = mcmiKey . _Just
-        authToken = mcmiOAuthToken . _Just
+        _AuthKey = mcmiKey . _Just
+        _AuthToken = mcmiOAuthToken . _Just
 
 instance GoogleRequest ManagementCustomMetricsInsert'
          where

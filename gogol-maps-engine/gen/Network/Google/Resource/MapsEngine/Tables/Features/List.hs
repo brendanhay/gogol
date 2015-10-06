@@ -251,8 +251,8 @@ tflFields
   = lens _tflFields (\ s a -> s{_tflFields = a})
 
 instance GoogleAuth TablesFeaturesList' where
-        authKey = tflKey . _Just
-        authToken = tflOAuthToken . _Just
+        _AuthKey = tflKey . _Just
+        _AuthToken = tflOAuthToken . _Just
 
 instance GoogleRequest TablesFeaturesList' where
         type Rs TablesFeaturesList' = FeaturesListResponse

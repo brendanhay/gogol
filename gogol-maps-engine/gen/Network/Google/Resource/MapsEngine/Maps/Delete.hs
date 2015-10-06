@@ -142,8 +142,8 @@ mdFields :: Lens' MapsDelete' (Maybe Text)
 mdFields = lens _mdFields (\ s a -> s{_mdFields = a})
 
 instance GoogleAuth MapsDelete' where
-        authKey = mdKey . _Just
-        authToken = mdOAuthToken . _Just
+        _AuthKey = mdKey . _Just
+        _AuthToken = mdOAuthToken . _Just
 
 instance GoogleRequest MapsDelete' where
         type Rs MapsDelete' = ()

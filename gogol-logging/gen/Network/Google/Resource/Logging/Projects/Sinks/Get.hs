@@ -227,8 +227,8 @@ psgCallback
   = lens _psgCallback (\ s a -> s{_psgCallback = a})
 
 instance GoogleAuth ProjectsSinksGet' where
-        authKey = psgKey . _Just
-        authToken = psgOAuthToken . _Just
+        _AuthKey = psgKey . _Just
+        _AuthToken = psgOAuthToken . _Just
 
 instance GoogleRequest ProjectsSinksGet' where
         type Rs ProjectsSinksGet' = LogSink

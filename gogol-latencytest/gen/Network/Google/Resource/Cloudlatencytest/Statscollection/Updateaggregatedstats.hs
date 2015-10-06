@@ -143,8 +143,8 @@ suFields = lens _suFields (\ s a -> s{_suFields = a})
 
 instance GoogleAuth
          StatscollectionUpdateaggregatedstats' where
-        authKey = suKey . _Just
-        authToken = suOAuthToken . _Just
+        _AuthKey = suKey . _Just
+        _AuthToken = suOAuthToken . _Just
 
 instance GoogleRequest
          StatscollectionUpdateaggregatedstats' where

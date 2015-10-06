@@ -158,8 +158,8 @@ revFields
   = lens _revFields (\ s a -> s{_revFields = a})
 
 instance GoogleAuth RevisionsGet' where
-        authKey = revKey . _Just
-        authToken = revOAuthToken . _Just
+        _AuthKey = revKey . _Just
+        _AuthToken = revOAuthToken . _Just
 
 instance GoogleRequest RevisionsGet' where
         type Rs RevisionsGet' = Revision

@@ -246,8 +246,8 @@ urlFields
   = lens _urlFields (\ s a -> s{_urlFields = a})
 
 instance GoogleAuth UserRolesList' where
-        authKey = urlKey . _Just
-        authToken = urlOAuthToken . _Just
+        _AuthKey = urlKey . _Just
+        _AuthToken = urlOAuthToken . _Just
 
 instance GoogleRequest UserRolesList' where
         type Rs UserRolesList' = UserRolesListResponse

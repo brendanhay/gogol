@@ -172,8 +172,8 @@ rupFields
   = lens _rupFields (\ s a -> s{_rupFields = a})
 
 instance GoogleAuth RollingUpdatesPause' where
-        authKey = rupKey . _Just
-        authToken = rupOAuthToken . _Just
+        _AuthKey = rupKey . _Just
+        _AuthToken = rupOAuthToken . _Just
 
 instance GoogleRequest RollingUpdatesPause' where
         type Rs RollingUpdatesPause' = Operation

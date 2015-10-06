@@ -178,8 +178,8 @@ psrFields
 
 instance GoogleAuth PurchasesSubscriptionsRevoke'
          where
-        authKey = psrKey . _Just
-        authToken = psrOAuthToken . _Just
+        _AuthKey = psrKey . _Just
+        _AuthToken = psrOAuthToken . _Just
 
 instance GoogleRequest PurchasesSubscriptionsRevoke'
          where

@@ -147,8 +147,8 @@ asvFields
   = lens _asvFields (\ s a -> s{_asvFields = a})
 
 instance GoogleAuth AssociationSessionsVerify' where
-        authKey = asvKey . _Just
-        authToken = asvOAuthToken . _Just
+        _AuthKey = asvKey . _Just
+        _AuthToken = asvOAuthToken . _Just
 
 instance GoogleRequest AssociationSessionsVerify'
          where

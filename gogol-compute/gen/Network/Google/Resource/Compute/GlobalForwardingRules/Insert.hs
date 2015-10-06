@@ -162,8 +162,8 @@ gfriFields
 
 instance GoogleAuth GlobalForwardingRulesInsert'
          where
-        authKey = gfriKey . _Just
-        authToken = gfriOAuthToken . _Just
+        _AuthKey = gfriKey . _Just
+        _AuthToken = gfriOAuthToken . _Just
 
 instance GoogleRequest GlobalForwardingRulesInsert'
          where

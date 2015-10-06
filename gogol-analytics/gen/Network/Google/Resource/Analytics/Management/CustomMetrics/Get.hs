@@ -176,8 +176,8 @@ mcmgFields
   = lens _mcmgFields (\ s a -> s{_mcmgFields = a})
 
 instance GoogleAuth ManagementCustomMetricsGet' where
-        authKey = mcmgKey . _Just
-        authToken = mcmgOAuthToken . _Just
+        _AuthKey = mcmgKey . _Just
+        _AuthToken = mcmgOAuthToken . _Just
 
 instance GoogleRequest ManagementCustomMetricsGet'
          where

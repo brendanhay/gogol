@@ -395,8 +395,8 @@ elFields :: Lens' EventsList' (Maybe Text)
 elFields = lens _elFields (\ s a -> s{_elFields = a})
 
 instance GoogleAuth EventsList' where
-        authKey = elKey . _Just
-        authToken = elOAuthToken . _Just
+        _AuthKey = elKey . _Just
+        _AuthToken = elOAuthToken . _Just
 
 instance GoogleRequest EventsList' where
         type Rs EventsList' = Events

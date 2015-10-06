@@ -238,8 +238,8 @@ pscCallback
 
 instance GoogleAuth ProjectsSubscriptionsCreate'
          where
-        authKey = pscKey . _Just
-        authToken = pscOAuthToken . _Just
+        _AuthKey = pscKey . _Just
+        _AuthToken = pscOAuthToken . _Just
 
 instance GoogleRequest ProjectsSubscriptionsCreate'
          where

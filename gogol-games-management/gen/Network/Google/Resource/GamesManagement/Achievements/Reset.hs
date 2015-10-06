@@ -148,8 +148,8 @@ arFields :: Lens' AchievementsReset' (Maybe Text)
 arFields = lens _arFields (\ s a -> s{_arFields = a})
 
 instance GoogleAuth AchievementsReset' where
-        authKey = arKey . _Just
-        authToken = arOAuthToken . _Just
+        _AuthKey = arKey . _Just
+        _AuthToken = arOAuthToken . _Just
 
 instance GoogleRequest AchievementsReset' where
         type Rs AchievementsReset' = AchievementResetResponse

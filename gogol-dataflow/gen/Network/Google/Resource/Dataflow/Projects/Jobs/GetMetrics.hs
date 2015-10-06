@@ -243,8 +243,8 @@ pjgmCallback
   = lens _pjgmCallback (\ s a -> s{_pjgmCallback = a})
 
 instance GoogleAuth ProjectsJobsGetMetrics' where
-        authKey = pjgmKey . _Just
-        authToken = pjgmOAuthToken . _Just
+        _AuthKey = pjgmKey . _Just
+        _AuthToken = pjgmOAuthToken . _Just
 
 instance GoogleRequest ProjectsJobsGetMetrics' where
         type Rs ProjectsJobsGetMetrics' = JobMetrics

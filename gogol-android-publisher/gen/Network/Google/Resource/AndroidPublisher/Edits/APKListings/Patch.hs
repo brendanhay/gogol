@@ -207,8 +207,8 @@ eapklpFields
   = lens _eapklpFields (\ s a -> s{_eapklpFields = a})
 
 instance GoogleAuth EditsAPKListingsPatch' where
-        authKey = eapklpKey . _Just
-        authToken = eapklpOAuthToken . _Just
+        _AuthKey = eapklpKey . _Just
+        _AuthToken = eapklpOAuthToken . _Just
 
 instance GoogleRequest EditsAPKListingsPatch' where
         type Rs EditsAPKListingsPatch' = APKListing

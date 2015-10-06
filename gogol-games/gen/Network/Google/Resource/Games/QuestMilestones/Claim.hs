@@ -176,8 +176,8 @@ qmcFields
   = lens _qmcFields (\ s a -> s{_qmcFields = a})
 
 instance GoogleAuth QuestMilestonesClaim' where
-        authKey = qmcKey . _Just
-        authToken = qmcOAuthToken . _Just
+        _AuthKey = qmcKey . _Just
+        _AuthToken = qmcOAuthToken . _Just
 
 instance GoogleRequest QuestMilestonesClaim' where
         type Rs QuestMilestonesClaim' = ()

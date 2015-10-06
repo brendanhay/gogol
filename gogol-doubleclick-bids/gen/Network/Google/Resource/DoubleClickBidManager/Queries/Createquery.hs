@@ -141,8 +141,8 @@ qcFields :: Lens' QueriesCreatequery' (Maybe Text)
 qcFields = lens _qcFields (\ s a -> s{_qcFields = a})
 
 instance GoogleAuth QueriesCreatequery' where
-        authKey = qcKey . _Just
-        authToken = qcOAuthToken . _Just
+        _AuthKey = qcKey . _Just
+        _AuthToken = qcOAuthToken . _Just
 
 instance GoogleRequest QueriesCreatequery' where
         type Rs QueriesCreatequery' = Query

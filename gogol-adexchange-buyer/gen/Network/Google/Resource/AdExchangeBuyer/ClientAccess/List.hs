@@ -144,8 +144,8 @@ calFields
   = lens _calFields (\ s a -> s{_calFields = a})
 
 instance GoogleAuth ClientAccessList' where
-        authKey = calKey . _Just
-        authToken = calOAuthToken . _Just
+        _AuthKey = calKey . _Just
+        _AuthToken = calOAuthToken . _Just
 
 instance GoogleRequest ClientAccessList' where
         type Rs ClientAccessList' =

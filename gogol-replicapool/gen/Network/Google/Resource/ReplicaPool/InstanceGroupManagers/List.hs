@@ -197,8 +197,8 @@ igmlFields
   = lens _igmlFields (\ s a -> s{_igmlFields = a})
 
 instance GoogleAuth InstanceGroupManagersList' where
-        authKey = igmlKey . _Just
-        authToken = igmlOAuthToken . _Just
+        _AuthKey = igmlKey . _Just
+        _AuthToken = igmlOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupManagersList'
          where

@@ -159,8 +159,8 @@ udsgFields
   = lens _udsgFields (\ s a -> s{_udsgFields = a})
 
 instance GoogleAuth UsersDataSourcesGet' where
-        authKey = udsgKey . _Just
-        authToken = udsgOAuthToken . _Just
+        _AuthKey = udsgKey . _Just
+        _AuthToken = udsgOAuthToken . _Just
 
 instance GoogleRequest UsersDataSourcesGet' where
         type Rs UsersDataSourcesGet' = DataSource

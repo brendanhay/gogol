@@ -146,8 +146,8 @@ mclFields
   = lens _mclFields (\ s a -> s{_mclFields = a})
 
 instance GoogleAuth MobileCarriersList' where
-        authKey = mclKey . _Just
-        authToken = mclOAuthToken . _Just
+        _AuthKey = mclKey . _Just
+        _AuthToken = mclOAuthToken . _Just
 
 instance GoogleRequest MobileCarriersList' where
         type Rs MobileCarriersList' =

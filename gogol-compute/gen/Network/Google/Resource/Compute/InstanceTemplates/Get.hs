@@ -159,8 +159,8 @@ itgFields
   = lens _itgFields (\ s a -> s{_itgFields = a})
 
 instance GoogleAuth InstanceTemplatesGet' where
-        authKey = itgKey . _Just
-        authToken = itgOAuthToken . _Just
+        _AuthKey = itgKey . _Just
+        _AuthToken = itgOAuthToken . _Just
 
 instance GoogleRequest InstanceTemplatesGet' where
         type Rs InstanceTemplatesGet' = InstanceTemplate

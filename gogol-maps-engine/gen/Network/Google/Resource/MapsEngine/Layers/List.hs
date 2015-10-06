@@ -296,8 +296,8 @@ llCreatedBefore
       . mapping _DateTime
 
 instance GoogleAuth LayersList' where
-        authKey = llKey . _Just
-        authToken = llOAuthToken . _Just
+        _AuthKey = llKey . _Just
+        _AuthToken = llOAuthToken . _Just
 
 instance GoogleRequest LayersList' where
         type Rs LayersList' = LayersListResponse

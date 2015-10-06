@@ -169,8 +169,8 @@ rogFields
   = lens _rogFields (\ s a -> s{_rogFields = a})
 
 instance GoogleAuth RegionOperationsGet' where
-        authKey = rogKey . _Just
-        authToken = rogOAuthToken . _Just
+        _AuthKey = rogKey . _Just
+        _AuthToken = rogOAuthToken . _Just
 
 instance GoogleRequest RegionOperationsGet' where
         type Rs RegionOperationsGet' = Operation

@@ -165,8 +165,8 @@ ppFields :: Lens' PlacementsPatch' (Maybe Text)
 ppFields = lens _ppFields (\ s a -> s{_ppFields = a})
 
 instance GoogleAuth PlacementsPatch' where
-        authKey = ppKey . _Just
-        authToken = ppOAuthToken . _Just
+        _AuthKey = ppKey . _Just
+        _AuthToken = ppOAuthToken . _Just
 
 instance GoogleRequest PlacementsPatch' where
         type Rs PlacementsPatch' = Placement

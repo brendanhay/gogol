@@ -147,8 +147,8 @@ rcplcFields
 
 instance GoogleAuth RasterCollectionsPermissionsList'
          where
-        authKey = rcplcKey . _Just
-        authToken = rcplcOAuthToken . _Just
+        _AuthKey = rcplcKey . _Just
+        _AuthToken = rcplcOAuthToken . _Just
 
 instance GoogleRequest
          RasterCollectionsPermissionsList' where

@@ -160,8 +160,8 @@ itiFields
   = lens _itiFields (\ s a -> s{_itiFields = a})
 
 instance GoogleAuth InstanceTemplatesInsert' where
-        authKey = itiKey . _Just
-        authToken = itiOAuthToken . _Just
+        _AuthKey = itiKey . _Just
+        _AuthToken = itiOAuthToken . _Just
 
 instance GoogleRequest InstanceTemplatesInsert' where
         type Rs InstanceTemplatesInsert' = Operation

@@ -159,8 +159,8 @@ aupfgFields
   = lens _aupfgFields (\ s a -> s{_aupfgFields = a})
 
 instance GoogleAuth AccountUserProFilesGet' where
-        authKey = aupfgKey . _Just
-        authToken = aupfgOAuthToken . _Just
+        _AuthKey = aupfgKey . _Just
+        _AuthToken = aupfgOAuthToken . _Just
 
 instance GoogleRequest AccountUserProFilesGet' where
         type Rs AccountUserProFilesGet' = AccountUserProFile

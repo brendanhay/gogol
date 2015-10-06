@@ -228,8 +228,8 @@ capaFields
   = lens _capaFields (\ s a -> s{_capaFields = a})
 
 instance GoogleAuth CaptionsDownload' where
-        authKey = capaKey . _Just
-        authToken = capaOAuthToken . _Just
+        _AuthKey = capaKey . _Just
+        _AuthToken = capaOAuthToken . _Just
 
 instance GoogleRequest CaptionsDownload' where
         type Rs CaptionsDownload' = ()

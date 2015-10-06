@@ -261,8 +261,8 @@ ilCallback
   = lens _ilCallback (\ s a -> s{_ilCallback = a})
 
 instance GoogleAuth InvitationsList' where
-        authKey = ilKey . _Just
-        authToken = ilOAuthToken . _Just
+        _AuthKey = ilKey . _Just
+        _AuthToken = ilOAuthToken . _Just
 
 instance GoogleRequest InvitationsList' where
         type Rs InvitationsList' = ListInvitationsResponse

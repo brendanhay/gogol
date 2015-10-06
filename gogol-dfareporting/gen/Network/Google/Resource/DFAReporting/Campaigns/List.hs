@@ -311,8 +311,8 @@ ccFields :: Lens' CampaignsList' (Maybe Text)
 ccFields = lens _ccFields (\ s a -> s{_ccFields = a})
 
 instance GoogleAuth CampaignsList' where
-        authKey = ccKey . _Just
-        authToken = ccOAuthToken . _Just
+        _AuthKey = ccKey . _Just
+        _AuthToken = ccOAuthToken . _Just
 
 instance GoogleRequest CampaignsList' where
         type Rs CampaignsList' = CampaignsListResponse

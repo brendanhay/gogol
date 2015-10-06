@@ -151,8 +151,8 @@ blFields :: Lens' BookshelvesList' (Maybe Text)
 blFields = lens _blFields (\ s a -> s{_blFields = a})
 
 instance GoogleAuth BookshelvesList' where
-        authKey = blKey . _Just
-        authToken = blOAuthToken . _Just
+        _AuthKey = blKey . _Just
+        _AuthToken = blOAuthToken . _Just
 
 instance GoogleRequest BookshelvesList' where
         type Rs BookshelvesList' = Bookshelves

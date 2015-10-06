@@ -158,8 +158,8 @@ cgiFields
   = lens _cgiFields (\ s a -> s{_cgiFields = a})
 
 instance GoogleAuth CreativeGroupsInsert' where
-        authKey = cgiKey . _Just
-        authToken = cgiOAuthToken . _Just
+        _AuthKey = cgiKey . _Just
+        _AuthToken = cgiOAuthToken . _Just
 
 instance GoogleRequest CreativeGroupsInsert' where
         type Rs CreativeGroupsInsert' = CreativeGroup

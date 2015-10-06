@@ -159,8 +159,8 @@ fagdFields
 
 instance GoogleAuth FloodlightActivityGroupsDelete'
          where
-        authKey = fagdKey . _Just
-        authToken = fagdOAuthToken . _Just
+        _AuthKey = fagdKey . _Just
+        _AuthToken = fagdOAuthToken . _Just
 
 instance GoogleRequest
          FloodlightActivityGroupsDelete' where

@@ -158,8 +158,8 @@ crerFields
   = lens _crerFields (\ s a -> s{_crerFields = a})
 
 instance GoogleAuth CreativesGet' where
-        authKey = crerKey . _Just
-        authToken = crerOAuthToken . _Just
+        _AuthKey = crerKey . _Just
+        _AuthToken = crerOAuthToken . _Just
 
 instance GoogleRequest CreativesGet' where
         type Rs CreativesGet' = Creative

@@ -160,8 +160,8 @@ gfrgFields
   = lens _gfrgFields (\ s a -> s{_gfrgFields = a})
 
 instance GoogleAuth GlobalForwardingRulesGet' where
-        authKey = gfrgKey . _Just
-        authToken = gfrgOAuthToken . _Just
+        _AuthKey = gfrgKey . _Just
+        _AuthToken = gfrgOAuthToken . _Just
 
 instance GoogleRequest GlobalForwardingRulesGet'
          where

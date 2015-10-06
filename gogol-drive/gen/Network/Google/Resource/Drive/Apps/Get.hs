@@ -139,8 +139,8 @@ aFields :: Lens' AppsGet' (Maybe Text)
 aFields = lens _aFields (\ s a -> s{_aFields = a})
 
 instance GoogleAuth AppsGet' where
-        authKey = aKey . _Just
-        authToken = aOAuthToken . _Just
+        _AuthKey = aKey . _Just
+        _AuthToken = aOAuthToken . _Just
 
 instance GoogleRequest AppsGet' where
         type Rs AppsGet' = App

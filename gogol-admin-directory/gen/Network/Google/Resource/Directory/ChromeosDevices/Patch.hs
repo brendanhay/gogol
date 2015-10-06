@@ -186,8 +186,8 @@ cdpFields
   = lens _cdpFields (\ s a -> s{_cdpFields = a})
 
 instance GoogleAuth ChromeosDevicesPatch' where
-        authKey = cdpKey . _Just
-        authToken = cdpOAuthToken . _Just
+        _AuthKey = cdpKey . _Just
+        _AuthToken = cdpOAuthToken . _Just
 
 instance GoogleRequest ChromeosDevicesPatch' where
         type Rs ChromeosDevicesPatch' = ChromeOSDevice

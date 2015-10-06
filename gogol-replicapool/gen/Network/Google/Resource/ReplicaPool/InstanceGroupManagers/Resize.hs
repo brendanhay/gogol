@@ -190,8 +190,8 @@ igmrFields
 
 instance GoogleAuth InstanceGroupManagersResize'
          where
-        authKey = igmrKey . _Just
-        authToken = igmrOAuthToken . _Just
+        _AuthKey = igmrKey . _Just
+        _AuthToken = igmrOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupManagersResize'
          where

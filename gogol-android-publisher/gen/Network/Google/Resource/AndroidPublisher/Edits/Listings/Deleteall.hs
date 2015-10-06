@@ -159,8 +159,8 @@ ediFields
   = lens _ediFields (\ s a -> s{_ediFields = a})
 
 instance GoogleAuth EditsListingsDeleteall' where
-        authKey = ediKey . _Just
-        authToken = ediOAuthToken . _Just
+        _AuthKey = ediKey . _Just
+        _AuthToken = ediOAuthToken . _Just
 
 instance GoogleRequest EditsListingsDeleteall' where
         type Rs EditsListingsDeleteall' = ()

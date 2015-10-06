@@ -185,8 +185,8 @@ tpahcFields
   = lens _tpahcFields (\ s a -> s{_tpahcFields = a})
 
 instance GoogleAuth TargetPoolsAddHealthCheck' where
-        authKey = tpahcKey . _Just
-        authToken = tpahcOAuthToken . _Just
+        _AuthKey = tpahcKey . _Just
+        _AuthToken = tpahcOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsAddHealthCheck'
          where

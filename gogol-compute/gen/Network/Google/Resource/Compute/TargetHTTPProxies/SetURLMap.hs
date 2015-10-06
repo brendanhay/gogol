@@ -177,8 +177,8 @@ thttppsumFields
       (\ s a -> s{_thttppsumFields = a})
 
 instance GoogleAuth TargetHTTPProxiesSetURLMap' where
-        authKey = thttppsumKey . _Just
-        authToken = thttppsumOAuthToken . _Just
+        _AuthKey = thttppsumKey . _Just
+        _AuthToken = thttppsumOAuthToken . _Just
 
 instance GoogleRequest TargetHTTPProxiesSetURLMap'
          where

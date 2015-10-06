@@ -337,8 +337,8 @@ aellCallback
 
 instance GoogleAuth AccountsExperienceLocalesList'
          where
-        authKey = aellKey . _Just
-        authToken = aellOAuthToken . _Just
+        _AuthKey = aellKey . _Just
+        _AuthToken = aellOAuthToken . _Just
 
 instance GoogleRequest AccountsExperienceLocalesList'
          where

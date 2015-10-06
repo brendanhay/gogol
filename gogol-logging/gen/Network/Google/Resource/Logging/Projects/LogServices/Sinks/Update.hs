@@ -258,8 +258,8 @@ plssuCallback
 
 instance GoogleAuth ProjectsLogServicesSinksUpdate'
          where
-        authKey = plssuKey . _Just
-        authToken = plssuOAuthToken . _Just
+        _AuthKey = plssuKey . _Just
+        _AuthToken = plssuOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsLogServicesSinksUpdate' where

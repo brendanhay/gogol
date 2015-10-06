@@ -134,8 +134,8 @@ upflFields
   = lens _upflFields (\ s a -> s{_upflFields = a})
 
 instance GoogleAuth UserProFilesList' where
-        authKey = upflKey . _Just
-        authToken = upflOAuthToken . _Just
+        _AuthKey = upflKey . _Just
+        _AuthToken = upflOAuthToken . _Just
 
 instance GoogleRequest UserProFilesList' where
         type Rs UserProFilesList' = UserProFileList

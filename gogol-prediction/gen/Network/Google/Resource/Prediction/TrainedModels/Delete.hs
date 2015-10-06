@@ -155,8 +155,8 @@ tmdFields
   = lens _tmdFields (\ s a -> s{_tmdFields = a})
 
 instance GoogleAuth TrainedModelsDelete' where
-        authKey = tmdKey . _Just
-        authToken = tmdOAuthToken . _Just
+        _AuthKey = tmdKey . _Just
+        _AuthToken = tmdOAuthToken . _Just
 
 instance GoogleRequest TrainedModelsDelete' where
         type Rs TrainedModelsDelete' = ()

@@ -182,8 +182,8 @@ iaplFields
   = lens _iaplFields (\ s a -> s{_iaplFields = a})
 
 instance GoogleAuth InAppProductsList' where
-        authKey = iaplKey . _Just
-        authToken = iaplOAuthToken . _Just
+        _AuthKey = iaplKey . _Just
+        _AuthToken = iaplOAuthToken . _Just
 
 instance GoogleRequest InAppProductsList' where
         type Rs InAppProductsList' =

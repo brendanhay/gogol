@@ -209,8 +209,8 @@ udsdpFields
 
 instance GoogleAuth UsersDataSourcesDatasetsPatch'
          where
-        authKey = udsdpKey . _Just
-        authToken = udsdpOAuthToken . _Just
+        _AuthKey = udsdpKey . _Just
+        _AuthToken = udsdpOAuthToken . _Just
 
 instance GoogleRequest UsersDataSourcesDatasetsPatch'
          where

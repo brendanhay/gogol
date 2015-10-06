@@ -158,8 +158,8 @@ fcgFields
 
 instance GoogleAuth FloodlightConfigurationsGet'
          where
-        authKey = fcgKey . _Just
-        authToken = fcgOAuthToken . _Just
+        _AuthKey = fcgKey . _Just
+        _AuthToken = fcgOAuthToken . _Just
 
 instance GoogleRequest FloodlightConfigurationsGet'
          where

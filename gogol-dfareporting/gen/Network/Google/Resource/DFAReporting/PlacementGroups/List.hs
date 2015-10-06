@@ -424,8 +424,8 @@ pglFields
   = lens _pglFields (\ s a -> s{_pglFields = a})
 
 instance GoogleAuth PlacementGroupsList' where
-        authKey = pglKey . _Just
-        authToken = pglOAuthToken . _Just
+        _AuthKey = pglKey . _Just
+        _AuthToken = pglOAuthToken . _Just
 
 instance GoogleRequest PlacementGroupsList' where
         type Rs PlacementGroupsList' =

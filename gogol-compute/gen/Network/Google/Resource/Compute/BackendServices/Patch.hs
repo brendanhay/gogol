@@ -173,8 +173,8 @@ bspBackendService
       (\ s a -> s{_bspBackendService = a})
 
 instance GoogleAuth BackendServicesPatch' where
-        authKey = bspKey . _Just
-        authToken = bspOAuthToken . _Just
+        _AuthKey = bspKey . _Just
+        _AuthToken = bspOAuthToken . _Just
 
 instance GoogleRequest BackendServicesPatch' where
         type Rs BackendServicesPatch' = Operation

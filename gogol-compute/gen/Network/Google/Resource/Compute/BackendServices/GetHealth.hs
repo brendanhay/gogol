@@ -173,8 +173,8 @@ bsghBackendService
       (\ s a -> s{_bsghBackendService = a})
 
 instance GoogleAuth BackendServicesGetHealth' where
-        authKey = bsghKey . _Just
-        authToken = bsghOAuthToken . _Just
+        _AuthKey = bsghKey . _Just
+        _AuthToken = bsghOAuthToken . _Just
 
 instance GoogleRequest BackendServicesGetHealth'
          where

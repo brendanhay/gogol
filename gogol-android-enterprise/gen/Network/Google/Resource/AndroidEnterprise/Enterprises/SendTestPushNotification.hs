@@ -152,8 +152,8 @@ estpnFields
 
 instance GoogleAuth
          EnterprisesSendTestPushNotification' where
-        authKey = estpnKey . _Just
-        authToken = estpnOAuthToken . _Just
+        _AuthKey = estpnKey . _Just
+        _AuthToken = estpnOAuthToken . _Just
 
 instance GoogleRequest
          EnterprisesSendTestPushNotification' where

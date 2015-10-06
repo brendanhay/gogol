@@ -149,8 +149,8 @@ reFields :: Lens' ReadgroupsetsExport' (Maybe Text)
 reFields = lens _reFields (\ s a -> s{_reFields = a})
 
 instance GoogleAuth ReadgroupsetsExport' where
-        authKey = reKey . _Just
-        authToken = reOAuthToken . _Just
+        _AuthKey = reKey . _Just
+        _AuthToken = reOAuthToken . _Just
 
 instance GoogleRequest ReadgroupsetsExport' where
         type Rs ReadgroupsetsExport' =

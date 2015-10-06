@@ -184,8 +184,8 @@ ssFields :: Lens' ScoresSubmit' (Maybe Text)
 ssFields = lens _ssFields (\ s a -> s{_ssFields = a})
 
 instance GoogleAuth ScoresSubmit' where
-        authKey = ssKey . _Just
-        authToken = ssOAuthToken . _Just
+        _AuthKey = ssKey . _Just
+        _AuthToken = ssOAuthToken . _Just
 
 instance GoogleRequest ScoresSubmit' where
         type Rs ScoresSubmit' = PlayerScoreResponse

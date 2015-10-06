@@ -213,8 +213,8 @@ vmlFields
   = lens _vmlFields (\ s a -> s{_vmlFields = a})
 
 instance GoogleAuth VolumesMybooksList' where
-        authKey = vmlKey . _Just
-        authToken = vmlOAuthToken . _Just
+        _AuthKey = vmlKey . _Just
+        _AuthToken = vmlOAuthToken . _Just
 
 instance GoogleRequest VolumesMybooksList' where
         type Rs VolumesMybooksList' = Volumes

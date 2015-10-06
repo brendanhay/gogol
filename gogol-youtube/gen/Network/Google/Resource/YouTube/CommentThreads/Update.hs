@@ -159,8 +159,8 @@ ctuFields
   = lens _ctuFields (\ s a -> s{_ctuFields = a})
 
 instance GoogleAuth CommentThreadsUpdate' where
-        authKey = ctuKey . _Just
-        authToken = ctuOAuthToken . _Just
+        _AuthKey = ctuKey . _Just
+        _AuthToken = ctuOAuthToken . _Just
 
 instance GoogleRequest CommentThreadsUpdate' where
         type Rs CommentThreadsUpdate' = CommentThread

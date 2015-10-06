@@ -175,8 +175,8 @@ mpfgFields
   = lens _mpfgFields (\ s a -> s{_mpfgFields = a})
 
 instance GoogleAuth ManagementProFilesGet' where
-        authKey = mpfgKey . _Just
-        authToken = mpfgOAuthToken . _Just
+        _AuthKey = mpfgKey . _Just
+        _AuthToken = mpfgOAuthToken . _Just
 
 instance GoogleRequest ManagementProFilesGet' where
         type Rs ManagementProFilesGet' = ProFile

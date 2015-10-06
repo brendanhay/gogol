@@ -144,8 +144,8 @@ bigFields
   = lens _bigFields (\ s a -> s{_bigFields = a})
 
 instance GoogleAuth BillingInfoGet' where
-        authKey = bigKey . _Just
-        authToken = bigOAuthToken . _Just
+        _AuthKey = bigKey . _Just
+        _AuthToken = bigOAuthToken . _Just
 
 instance GoogleRequest BillingInfoGet' where
         type Rs BillingInfoGet' = BillingInfo

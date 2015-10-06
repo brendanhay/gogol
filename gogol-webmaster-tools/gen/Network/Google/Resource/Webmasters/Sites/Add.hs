@@ -141,8 +141,8 @@ saFields :: Lens' SitesAdd' (Maybe Text)
 saFields = lens _saFields (\ s a -> s{_saFields = a})
 
 instance GoogleAuth SitesAdd' where
-        authKey = saKey . _Just
-        authToken = saOAuthToken . _Just
+        _AuthKey = saKey . _Just
+        _AuthToken = saOAuthToken . _Just
 
 instance GoogleRequest SitesAdd' where
         type Rs SitesAdd' = ()

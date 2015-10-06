@@ -169,8 +169,8 @@ adlFields
   = lens _adlFields (\ s a -> s{_adlFields = a})
 
 instance GoogleAuth AchievementDefinitionsList' where
-        authKey = adlKey . _Just
-        authToken = adlOAuthToken . _Just
+        _AuthKey = adlKey . _Just
+        _AuthToken = adlOAuthToken . _Just
 
 instance GoogleRequest AchievementDefinitionsList'
          where

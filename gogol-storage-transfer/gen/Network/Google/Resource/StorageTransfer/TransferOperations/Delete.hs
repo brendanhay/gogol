@@ -211,8 +211,8 @@ todCallback
   = lens _todCallback (\ s a -> s{_todCallback = a})
 
 instance GoogleAuth TransferOperationsDelete' where
-        authKey = todKey . _Just
-        authToken = todOAuthToken . _Just
+        _AuthKey = todKey . _Just
+        _AuthToken = todOAuthToken . _Just
 
 instance GoogleRequest TransferOperationsDelete'
          where

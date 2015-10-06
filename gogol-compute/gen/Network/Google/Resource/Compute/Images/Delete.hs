@@ -153,8 +153,8 @@ idFields :: Lens' ImagesDelete' (Maybe Text)
 idFields = lens _idFields (\ s a -> s{_idFields = a})
 
 instance GoogleAuth ImagesDelete' where
-        authKey = idKey . _Just
-        authToken = idOAuthToken . _Just
+        _AuthKey = idKey . _Just
+        _AuthToken = idOAuthToken . _Just
 
 instance GoogleRequest ImagesDelete' where
         type Rs ImagesDelete' = Operation

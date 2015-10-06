@@ -159,8 +159,8 @@ abcFields
   = lens _abcFields (\ s a -> s{_abcFields = a})
 
 instance GoogleAuth AnnotationsBatchCreate' where
-        authKey = abcKey . _Just
-        authToken = abcOAuthToken . _Just
+        _AuthKey = abcKey . _Just
+        _AuthToken = abcOAuthToken . _Just
 
 instance GoogleRequest AnnotationsBatchCreate' where
         type Rs AnnotationsBatchCreate' =

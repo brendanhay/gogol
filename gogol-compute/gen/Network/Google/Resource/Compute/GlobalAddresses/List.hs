@@ -191,8 +191,8 @@ galFields
   = lens _galFields (\ s a -> s{_galFields = a})
 
 instance GoogleAuth GlobalAddressesList' where
-        authKey = galKey . _Just
-        authToken = galOAuthToken . _Just
+        _AuthKey = galKey . _Just
+        _AuthToken = galOAuthToken . _Just
 
 instance GoogleRequest GlobalAddressesList' where
         type Rs GlobalAddressesList' = AddressList

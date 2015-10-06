@@ -185,8 +185,8 @@ mlbavFields
 
 instance GoogleAuth MyLibraryBookshelvesAddVolume'
          where
-        authKey = mlbavKey . _Just
-        authToken = mlbavOAuthToken . _Just
+        _AuthKey = mlbavKey . _Just
+        _AuthToken = mlbavOAuthToken . _Just
 
 instance GoogleRequest MyLibraryBookshelvesAddVolume'
          where

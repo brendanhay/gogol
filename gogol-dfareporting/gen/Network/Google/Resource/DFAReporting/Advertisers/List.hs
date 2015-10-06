@@ -301,8 +301,8 @@ allFields
   = lens _allFields (\ s a -> s{_allFields = a})
 
 instance GoogleAuth AdvertisersList' where
-        authKey = allKey . _Just
-        authToken = allOAuthToken . _Just
+        _AuthKey = allKey . _Just
+        _AuthToken = allOAuthToken . _Just
 
 instance GoogleRequest AdvertisersList' where
         type Rs AdvertisersList' = AdvertisersListResponse

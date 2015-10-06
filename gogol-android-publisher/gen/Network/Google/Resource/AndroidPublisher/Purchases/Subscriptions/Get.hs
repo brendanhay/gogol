@@ -176,8 +176,8 @@ psgFields
   = lens _psgFields (\ s a -> s{_psgFields = a})
 
 instance GoogleAuth PurchasesSubscriptionsGet' where
-        authKey = psgKey . _Just
-        authToken = psgOAuthToken . _Just
+        _AuthKey = psgKey . _Just
+        _AuthToken = psgOAuthToken . _Just
 
 instance GoogleRequest PurchasesSubscriptionsGet'
          where

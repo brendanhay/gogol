@@ -174,8 +174,8 @@ imamFields
   = lens _imamFields (\ s a -> s{_imamFields = a})
 
 instance GoogleAuth ImagesDeprecate' where
-        authKey = imamKey . _Just
-        authToken = imamOAuthToken . _Just
+        _AuthKey = imamKey . _Just
+        _AuthToken = imamOAuthToken . _Just
 
 instance GoogleRequest ImagesDeprecate' where
         type Rs ImagesDeprecate' = Operation

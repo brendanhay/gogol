@@ -169,8 +169,8 @@ rugFields
   = lens _rugFields (\ s a -> s{_rugFields = a})
 
 instance GoogleAuth RollingUpdatesGet' where
-        authKey = rugKey . _Just
-        authToken = rugOAuthToken . _Just
+        _AuthKey = rugKey . _Just
+        _AuthToken = rugOAuthToken . _Just
 
 instance GoogleRequest RollingUpdatesGet' where
         type Rs RollingUpdatesGet' = RollingUpdate

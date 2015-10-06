@@ -174,8 +174,8 @@ tbmfFields
   = lens _tbmfFields (\ s a -> s{_tbmfFields = a})
 
 instance GoogleAuth TurnBasedMatchesFinish' where
-        authKey = tbmfKey . _Just
-        authToken = tbmfOAuthToken . _Just
+        _AuthKey = tbmfKey . _Just
+        _AuthToken = tbmfOAuthToken . _Just
 
 instance GoogleRequest TurnBasedMatchesFinish' where
         type Rs TurnBasedMatchesFinish' = TurnBasedMatch

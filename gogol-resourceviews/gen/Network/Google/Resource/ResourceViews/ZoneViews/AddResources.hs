@@ -184,8 +184,8 @@ zvarFields
   = lens _zvarFields (\ s a -> s{_zvarFields = a})
 
 instance GoogleAuth ZoneViewsAddResources' where
-        authKey = zvarKey . _Just
-        authToken = zvarOAuthToken . _Just
+        _AuthKey = zvarKey . _Just
+        _AuthToken = zvarOAuthToken . _Just
 
 instance GoogleRequest ZoneViewsAddResources' where
         type Rs ZoneViewsAddResources' = Operation

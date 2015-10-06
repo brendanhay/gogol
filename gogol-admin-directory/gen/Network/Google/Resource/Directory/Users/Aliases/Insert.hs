@@ -157,8 +157,8 @@ uaiFields
   = lens _uaiFields (\ s a -> s{_uaiFields = a})
 
 instance GoogleAuth UsersAliasesInsert' where
-        authKey = uaiKey . _Just
-        authToken = uaiOAuthToken . _Just
+        _AuthKey = uaiKey . _Just
+        _AuthToken = uaiOAuthToken . _Just
 
 instance GoogleRequest UsersAliasesInsert' where
         type Rs UsersAliasesInsert' = Alias

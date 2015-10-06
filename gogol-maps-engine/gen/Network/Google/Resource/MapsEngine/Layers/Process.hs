@@ -142,8 +142,8 @@ lpFields :: Lens' LayersProcess' (Maybe Text)
 lpFields = lens _lpFields (\ s a -> s{_lpFields = a})
 
 instance GoogleAuth LayersProcess' where
-        authKey = lpKey . _Just
-        authToken = lpOAuthToken . _Just
+        _AuthKey = lpKey . _Just
+        _AuthToken = lpOAuthToken . _Just
 
 instance GoogleRequest LayersProcess' where
         type Rs LayersProcess' = ProcessResponse

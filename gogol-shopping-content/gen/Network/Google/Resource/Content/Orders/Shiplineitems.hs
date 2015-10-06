@@ -167,8 +167,8 @@ osFields :: Lens' OrdersShiplineitems' (Maybe Text)
 osFields = lens _osFields (\ s a -> s{_osFields = a})
 
 instance GoogleAuth OrdersShiplineitems' where
-        authKey = osKey . _Just
-        authToken = osOAuthToken . _Just
+        _AuthKey = osKey . _Just
+        _AuthToken = osOAuthToken . _Just
 
 instance GoogleRequest OrdersShiplineitems' where
         type Rs OrdersShiplineitems' =

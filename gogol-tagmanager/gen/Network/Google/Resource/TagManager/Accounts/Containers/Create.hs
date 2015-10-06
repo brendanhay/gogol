@@ -157,8 +157,8 @@ accFields
   = lens _accFields (\ s a -> s{_accFields = a})
 
 instance GoogleAuth AccountsContainersCreate' where
-        authKey = accKey . _Just
-        authToken = accOAuthToken . _Just
+        _AuthKey = accKey . _Just
+        _AuthToken = accOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersCreate'
          where

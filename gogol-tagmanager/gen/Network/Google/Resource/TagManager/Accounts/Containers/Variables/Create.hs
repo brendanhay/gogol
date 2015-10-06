@@ -174,8 +174,8 @@ acvccFields
 
 instance GoogleAuth
          AccountsContainersVariablesCreate' where
-        authKey = acvccKey . _Just
-        authToken = acvccOAuthToken . _Just
+        _AuthKey = acvccKey . _Just
+        _AuthToken = acvccOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVariablesCreate' where

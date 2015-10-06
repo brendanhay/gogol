@@ -159,8 +159,8 @@ pmiFields
   = lens _pmiFields (\ s a -> s{_pmiFields = a})
 
 instance GoogleAuth ProjectsMoveInstance' where
-        authKey = pmiKey . _Just
-        authToken = pmiOAuthToken . _Just
+        _AuthKey = pmiKey . _Just
+        _AuthToken = pmiOAuthToken . _Just
 
 instance GoogleRequest ProjectsMoveInstance' where
         type Rs ProjectsMoveInstance' = Operation

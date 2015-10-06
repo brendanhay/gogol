@@ -168,8 +168,8 @@ fpFields :: Lens' FirewallsPatch' (Maybe Text)
 fpFields = lens _fpFields (\ s a -> s{_fpFields = a})
 
 instance GoogleAuth FirewallsPatch' where
-        authKey = fpKey . _Just
-        authToken = fpOAuthToken . _Just
+        _AuthKey = fpKey . _Just
+        _AuthToken = fpOAuthToken . _Just
 
 instance GoogleRequest FirewallsPatch' where
         type Rs FirewallsPatch' = Operation

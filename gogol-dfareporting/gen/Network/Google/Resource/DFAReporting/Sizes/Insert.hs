@@ -152,8 +152,8 @@ sFields :: Lens' SizesInsert' (Maybe Text)
 sFields = lens _sFields (\ s a -> s{_sFields = a})
 
 instance GoogleAuth SizesInsert' where
-        authKey = sKey . _Just
-        authToken = sOAuthToken . _Just
+        _AuthKey = sKey . _Just
+        _AuthToken = sOAuthToken . _Just
 
 instance GoogleRequest SizesInsert' where
         type Rs SizesInsert' = Size

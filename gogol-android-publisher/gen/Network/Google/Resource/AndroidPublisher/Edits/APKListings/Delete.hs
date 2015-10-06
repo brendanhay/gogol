@@ -193,8 +193,8 @@ eapkldFields
   = lens _eapkldFields (\ s a -> s{_eapkldFields = a})
 
 instance GoogleAuth EditsAPKListingsDelete' where
-        authKey = eapkldKey . _Just
-        authToken = eapkldOAuthToken . _Just
+        _AuthKey = eapkldKey . _Just
+        _AuthToken = eapkldOAuthToken . _Just
 
 instance GoogleRequest EditsAPKListingsDelete' where
         type Rs EditsAPKListingsDelete' = ()

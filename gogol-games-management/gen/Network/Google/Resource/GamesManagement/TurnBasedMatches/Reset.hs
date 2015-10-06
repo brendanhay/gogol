@@ -136,8 +136,8 @@ tbmrFields
   = lens _tbmrFields (\ s a -> s{_tbmrFields = a})
 
 instance GoogleAuth TurnBasedMatchesReset' where
-        authKey = tbmrKey . _Just
-        authToken = tbmrOAuthToken . _Just
+        _AuthKey = tbmrKey . _Just
+        _AuthToken = tbmrOAuthToken . _Just
 
 instance GoogleRequest TurnBasedMatchesReset' where
         type Rs TurnBasedMatchesReset' = ()

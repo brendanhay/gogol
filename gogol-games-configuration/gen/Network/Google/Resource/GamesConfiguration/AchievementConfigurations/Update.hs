@@ -159,8 +159,8 @@ acuFields
 
 instance GoogleAuth AchievementConfigurationsUpdate'
          where
-        authKey = acuKey . _Just
-        authToken = acuOAuthToken . _Just
+        _AuthKey = acuKey . _Just
+        _AuthToken = acuOAuthToken . _Just
 
 instance GoogleRequest
          AchievementConfigurationsUpdate' where

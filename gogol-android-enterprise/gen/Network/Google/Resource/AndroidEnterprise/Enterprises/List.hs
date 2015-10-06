@@ -145,8 +145,8 @@ ellFields
   = lens _ellFields (\ s a -> s{_ellFields = a})
 
 instance GoogleAuth EnterprisesList' where
-        authKey = ellKey . _Just
-        authToken = ellOAuthToken . _Just
+        _AuthKey = ellKey . _Just
+        _AuthToken = ellOAuthToken . _Just
 
 instance GoogleRequest EnterprisesList' where
         type Rs EnterprisesList' = EnterprisesListResponse

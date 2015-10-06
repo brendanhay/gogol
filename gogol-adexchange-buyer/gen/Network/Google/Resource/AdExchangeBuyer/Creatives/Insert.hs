@@ -141,8 +141,8 @@ ciFields :: Lens' CreativesInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
 instance GoogleAuth CreativesInsert' where
-        authKey = ciKey . _Just
-        authToken = ciOAuthToken . _Just
+        _AuthKey = ciKey . _Just
+        _AuthToken = ciOAuthToken . _Just
 
 instance GoogleRequest CreativesInsert' where
         type Rs CreativesInsert' = Creative

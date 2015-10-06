@@ -149,8 +149,8 @@ acgFields
 
 instance GoogleAuth AchievementConfigurationsGet'
          where
-        authKey = acgKey . _Just
-        authToken = acgOAuthToken . _Just
+        _AuthKey = acgKey . _Just
+        _AuthToken = acgOAuthToken . _Just
 
 instance GoogleRequest AchievementConfigurationsGet'
          where

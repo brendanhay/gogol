@@ -156,8 +156,8 @@ fiFields :: Lens' FirewallsInsert' (Maybe Text)
 fiFields = lens _fiFields (\ s a -> s{_fiFields = a})
 
 instance GoogleAuth FirewallsInsert' where
-        authKey = fiKey . _Just
-        authToken = fiOAuthToken . _Just
+        _AuthKey = fiKey . _Just
+        _AuthToken = fiOAuthToken . _Just
 
 instance GoogleRequest FirewallsInsert' where
         type Rs FirewallsInsert' = Operation

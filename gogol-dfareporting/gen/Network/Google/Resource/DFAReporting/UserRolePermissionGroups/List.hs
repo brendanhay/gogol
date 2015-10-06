@@ -149,8 +149,8 @@ urpglFields
 
 instance GoogleAuth UserRolePermissionGroupsList'
          where
-        authKey = urpglKey . _Just
-        authToken = urpglOAuthToken . _Just
+        _AuthKey = urpglKey . _Just
+        _AuthToken = urpglOAuthToken . _Just
 
 instance GoogleRequest UserRolePermissionGroupsList'
          where

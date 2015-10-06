@@ -154,8 +154,8 @@ ngFields :: Lens' NegotiationsGet' (Maybe Text)
 ngFields = lens _ngFields (\ s a -> s{_ngFields = a})
 
 instance GoogleAuth NegotiationsGet' where
-        authKey = ngKey . _Just
-        authToken = ngOAuthToken . _Just
+        _AuthKey = ngKey . _Just
+        _AuthToken = ngOAuthToken . _Just
 
 instance GoogleRequest NegotiationsGet' where
         type Rs NegotiationsGet' = NegotiationDTO

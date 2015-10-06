@@ -158,8 +158,8 @@ mfgFields
   = lens _mfgFields (\ s a -> s{_mfgFields = a})
 
 instance GoogleAuth ManagementFiltersGet' where
-        authKey = mfgKey . _Just
-        authToken = mfgOAuthToken . _Just
+        _AuthKey = mfgKey . _Just
+        _AuthToken = mfgOAuthToken . _Just
 
 instance GoogleRequest ManagementFiltersGet' where
         type Rs ManagementFiltersGet' = Filter

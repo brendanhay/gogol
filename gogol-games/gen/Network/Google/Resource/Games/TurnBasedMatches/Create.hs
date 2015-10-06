@@ -157,8 +157,8 @@ turFields
   = lens _turFields (\ s a -> s{_turFields = a})
 
 instance GoogleAuth TurnBasedMatchesCreate' where
-        authKey = turKey . _Just
-        authToken = turOAuthToken . _Just
+        _AuthKey = turKey . _Just
+        _AuthToken = turOAuthToken . _Just
 
 instance GoogleRequest TurnBasedMatchesCreate' where
         type Rs TurnBasedMatchesCreate' = TurnBasedMatch

@@ -155,8 +155,8 @@ cadFields
   = lens _cadFields (\ s a -> s{_cadFields = a})
 
 instance GoogleAuth ClientAccessDelete' where
-        authKey = cadKey . _Just
-        authToken = cadOAuthToken . _Just
+        _AuthKey = cadKey . _Just
+        _AuthToken = cadOAuthToken . _Just
 
 instance GoogleRequest ClientAccessDelete' where
         type Rs ClientAccessDelete' = ()

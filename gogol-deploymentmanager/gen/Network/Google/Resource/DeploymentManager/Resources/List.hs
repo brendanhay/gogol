@@ -200,8 +200,8 @@ rlDeployment
   = lens _rlDeployment (\ s a -> s{_rlDeployment = a})
 
 instance GoogleAuth ResourcesList' where
-        authKey = rlKey . _Just
-        authToken = rlOAuthToken . _Just
+        _AuthKey = rlKey . _Just
+        _AuthToken = rlOAuthToken . _Just
 
 instance GoogleRequest ResourcesList' where
         type Rs ResourcesList' = ResourcesListResponse

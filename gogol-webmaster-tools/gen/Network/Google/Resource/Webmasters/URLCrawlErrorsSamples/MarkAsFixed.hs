@@ -199,8 +199,8 @@ ucesmafFields
 
 instance GoogleAuth URLCrawlErrorsSamplesMarkAsFixed'
          where
-        authKey = ucesmafKey . _Just
-        authToken = ucesmafOAuthToken . _Just
+        _AuthKey = ucesmafKey . _Just
+        _AuthToken = ucesmafOAuthToken . _Just
 
 instance GoogleRequest
          URLCrawlErrorsSamplesMarkAsFixed' where

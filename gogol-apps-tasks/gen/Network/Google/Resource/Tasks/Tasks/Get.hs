@@ -153,8 +153,8 @@ tgFields :: Lens' TasksGet' (Maybe Text)
 tgFields = lens _tgFields (\ s a -> s{_tgFields = a})
 
 instance GoogleAuth TasksGet' where
-        authKey = tgKey . _Just
-        authToken = tgOAuthToken . _Just
+        _AuthKey = tgKey . _Just
+        _AuthToken = tgOAuthToken . _Just
 
 instance GoogleRequest TasksGet' where
         type Rs TasksGet' = Task

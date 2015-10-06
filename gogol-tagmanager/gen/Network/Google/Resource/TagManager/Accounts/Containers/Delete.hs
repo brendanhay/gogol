@@ -158,8 +158,8 @@ acdFields
   = lens _acdFields (\ s a -> s{_acdFields = a})
 
 instance GoogleAuth AccountsContainersDelete' where
-        authKey = acdKey . _Just
-        authToken = acdOAuthToken . _Just
+        _AuthKey = acdKey . _Just
+        _AuthToken = acdOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersDelete'
          where

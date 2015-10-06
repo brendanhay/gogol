@@ -181,8 +181,8 @@ mzlFields
   = lens _mzlFields (\ s a -> s{_mzlFields = a})
 
 instance GoogleAuth ManagedZonesList' where
-        authKey = mzlKey . _Just
-        authToken = mzlOAuthToken . _Just
+        _AuthKey = mzlKey . _Just
+        _AuthToken = mzlOAuthToken . _Just
 
 instance GoogleRequest ManagedZonesList' where
         type Rs ManagedZonesList' = ManagedZonesListResponse

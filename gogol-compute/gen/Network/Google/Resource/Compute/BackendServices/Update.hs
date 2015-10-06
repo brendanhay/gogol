@@ -171,8 +171,8 @@ bsuBackendService
       (\ s a -> s{_bsuBackendService = a})
 
 instance GoogleAuth BackendServicesUpdate' where
-        authKey = bsuKey . _Just
-        authToken = bsuOAuthToken . _Just
+        _AuthKey = bsuKey . _Just
+        _AuthToken = bsuOAuthToken . _Just
 
 instance GoogleRequest BackendServicesUpdate' where
         type Rs BackendServicesUpdate' = Operation

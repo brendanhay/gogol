@@ -160,8 +160,8 @@ pgpFields
   = lens _pgpFields (\ s a -> s{_pgpFields = a})
 
 instance GoogleAuth ProductsGetPermissions' where
-        authKey = pgpKey . _Just
-        authToken = pgpOAuthToken . _Just
+        _AuthKey = pgpKey . _Just
+        _AuthToken = pgpOAuthToken . _Just
 
 instance GoogleRequest ProductsGetPermissions' where
         type Rs ProductsGetPermissions' = ProductPermissions

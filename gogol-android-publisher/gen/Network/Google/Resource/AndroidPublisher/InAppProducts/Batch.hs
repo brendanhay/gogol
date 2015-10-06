@@ -146,8 +146,8 @@ iapbFields
   = lens _iapbFields (\ s a -> s{_iapbFields = a})
 
 instance GoogleAuth InAppProductsBatch' where
-        authKey = iapbKey . _Just
-        authToken = iapbOAuthToken . _Just
+        _AuthKey = iapbKey . _Just
+        _AuthToken = iapbOAuthToken . _Just
 
 instance GoogleRequest InAppProductsBatch' where
         type Rs InAppProductsBatch' =

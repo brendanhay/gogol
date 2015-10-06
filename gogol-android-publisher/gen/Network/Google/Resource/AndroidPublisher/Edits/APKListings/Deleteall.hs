@@ -179,8 +179,8 @@ eapkldaFields
       (\ s a -> s{_eapkldaFields = a})
 
 instance GoogleAuth EditsAPKListingsDeleteall' where
-        authKey = eapkldaKey . _Just
-        authToken = eapkldaOAuthToken . _Just
+        _AuthKey = eapkldaKey . _Just
+        _AuthToken = eapkldaOAuthToken . _Just
 
 instance GoogleRequest EditsAPKListingsDeleteall'
          where

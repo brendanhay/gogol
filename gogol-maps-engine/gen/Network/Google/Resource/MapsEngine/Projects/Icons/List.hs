@@ -172,8 +172,8 @@ pilFields
   = lens _pilFields (\ s a -> s{_pilFields = a})
 
 instance GoogleAuth ProjectsIconsList' where
-        authKey = pilKey . _Just
-        authToken = pilOAuthToken . _Just
+        _AuthKey = pilKey . _Just
+        _AuthToken = pilOAuthToken . _Just
 
 instance GoogleRequest ProjectsIconsList' where
         type Rs ProjectsIconsList' = IconsListResponse

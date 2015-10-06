@@ -143,8 +143,8 @@ ldFields :: Lens' LineitemsDownloadlineitems' (Maybe Text)
 ldFields = lens _ldFields (\ s a -> s{_ldFields = a})
 
 instance GoogleAuth LineitemsDownloadlineitems' where
-        authKey = ldKey . _Just
-        authToken = ldOAuthToken . _Just
+        _AuthKey = ldKey . _Just
+        _AuthToken = ldOAuthToken . _Just
 
 instance GoogleRequest LineitemsDownloadlineitems'
          where

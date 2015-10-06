@@ -154,8 +154,8 @@ mgFields :: Lens' MembersGet' (Maybe Text)
 mgFields = lens _mgFields (\ s a -> s{_mgFields = a})
 
 instance GoogleAuth MembersGet' where
-        authKey = mgKey . _Just
-        authToken = mgOAuthToken . _Just
+        _AuthKey = mgKey . _Just
+        _AuthToken = mgOAuthToken . _Just
 
 instance GoogleRequest MembersGet' where
         type Rs MembersGet' = Member

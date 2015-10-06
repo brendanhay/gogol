@@ -205,8 +205,8 @@ bvlFields
   = lens _bvlFields (\ s a -> s{_bvlFields = a})
 
 instance GoogleAuth BookshelvesVolumesList' where
-        authKey = bvlKey . _Just
-        authToken = bvlOAuthToken . _Just
+        _AuthKey = bvlKey . _Just
+        _AuthToken = bvlOAuthToken . _Just
 
 instance GoogleRequest BookshelvesVolumesList' where
         type Rs BookshelvesVolumesList' = Volumes

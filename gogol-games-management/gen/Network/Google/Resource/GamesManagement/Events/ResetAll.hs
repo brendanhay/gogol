@@ -137,8 +137,8 @@ eraFields
   = lens _eraFields (\ s a -> s{_eraFields = a})
 
 instance GoogleAuth EventsResetAll' where
-        authKey = eraKey . _Just
-        authToken = eraOAuthToken . _Just
+        _AuthKey = eraKey . _Just
+        _AuthToken = eraOAuthToken . _Just
 
 instance GoogleRequest EventsResetAll' where
         type Rs EventsResetAll' = ()

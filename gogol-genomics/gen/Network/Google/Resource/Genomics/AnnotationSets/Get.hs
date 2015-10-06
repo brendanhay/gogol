@@ -147,8 +147,8 @@ asgFields
   = lens _asgFields (\ s a -> s{_asgFields = a})
 
 instance GoogleAuth AnnotationSetsGet' where
-        authKey = asgKey . _Just
-        authToken = asgOAuthToken . _Just
+        _AuthKey = asgKey . _Just
+        _AuthToken = asgOAuthToken . _Just
 
 instance GoogleRequest AnnotationSetsGet' where
         type Rs AnnotationSetsGet' = AnnotationSet

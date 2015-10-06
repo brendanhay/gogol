@@ -219,8 +219,8 @@ cgCallback
   = lens _cgCallback (\ s a -> s{_cgCallback = a})
 
 instance GoogleAuth CoursesGet' where
-        authKey = cgKey . _Just
-        authToken = cgOAuthToken . _Just
+        _AuthKey = cgKey . _Just
+        _AuthToken = cgOAuthToken . _Just
 
 instance GoogleRequest CoursesGet' where
         type Rs CoursesGet' = Course

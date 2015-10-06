@@ -264,8 +264,8 @@ awFields :: Lens' ActivitiesWatch' (Maybe Text)
 awFields = lens _awFields (\ s a -> s{_awFields = a})
 
 instance GoogleAuth ActivitiesWatch' where
-        authKey = awKey . _Just
-        authToken = awOAuthToken . _Just
+        _AuthKey = awKey . _Just
+        _AuthToken = awOAuthToken . _Just
 
 instance GoogleRequest ActivitiesWatch' where
         type Rs ActivitiesWatch' = Channel

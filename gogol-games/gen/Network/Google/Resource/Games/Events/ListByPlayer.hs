@@ -173,8 +173,8 @@ elbpFields
   = lens _elbpFields (\ s a -> s{_elbpFields = a})
 
 instance GoogleAuth EventsListByPlayer' where
-        authKey = elbpKey . _Just
-        authToken = elbpOAuthToken . _Just
+        _AuthKey = elbpKey . _Just
+        _AuthToken = elbpOAuthToken . _Just
 
 instance GoogleRequest EventsListByPlayer' where
         type Rs EventsListByPlayer' = PlayerEventListResponse

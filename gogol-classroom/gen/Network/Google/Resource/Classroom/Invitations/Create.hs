@@ -228,8 +228,8 @@ icCallback
   = lens _icCallback (\ s a -> s{_icCallback = a})
 
 instance GoogleAuth InvitationsCreate' where
-        authKey = icKey . _Just
-        authToken = icOAuthToken . _Just
+        _AuthKey = icKey . _Just
+        _AuthToken = icOAuthToken . _Just
 
 instance GoogleRequest InvitationsCreate' where
         type Rs InvitationsCreate' = Invitation

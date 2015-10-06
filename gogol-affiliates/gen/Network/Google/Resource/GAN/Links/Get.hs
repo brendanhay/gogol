@@ -169,8 +169,8 @@ lgFields :: Lens' LinksGet' (Maybe Text)
 lgFields = lens _lgFields (\ s a -> s{_lgFields = a})
 
 instance GoogleAuth LinksGet' where
-        authKey = lgKey . _Just
-        authToken = lgOAuthToken . _Just
+        _AuthKey = lgKey . _Just
+        _AuthToken = lgOAuthToken . _Just
 
 instance GoogleRequest LinksGet' where
         type Rs LinksGet' = Link

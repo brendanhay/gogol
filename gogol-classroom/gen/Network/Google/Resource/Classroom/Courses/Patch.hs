@@ -249,8 +249,8 @@ cpCallback
   = lens _cpCallback (\ s a -> s{_cpCallback = a})
 
 instance GoogleAuth CoursesPatch' where
-        authKey = cpKey . _Just
-        authToken = cpOAuthToken . _Just
+        _AuthKey = cpKey . _Just
+        _AuthToken = cpOAuthToken . _Just
 
 instance GoogleRequest CoursesPatch' where
         type Rs CoursesPatch' = Course

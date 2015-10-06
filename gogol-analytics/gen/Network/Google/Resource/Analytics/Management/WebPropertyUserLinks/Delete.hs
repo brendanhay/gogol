@@ -176,8 +176,8 @@ mwpuldFields
 
 instance GoogleAuth
          ManagementWebPropertyUserLinksDelete' where
-        authKey = mwpuldKey . _Just
-        authToken = mwpuldOAuthToken . _Just
+        _AuthKey = mwpuldKey . _Just
+        _AuthToken = mwpuldOAuthToken . _Just
 
 instance GoogleRequest
          ManagementWebPropertyUserLinksDelete' where

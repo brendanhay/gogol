@@ -155,8 +155,8 @@ tabFields
   = lens _tabFields (\ s a -> s{_tabFields = a})
 
 instance GoogleAuth TableList' where
-        authKey = tabKey . _Just
-        authToken = tabOAuthToken . _Just
+        _AuthKey = tabKey . _Just
+        _AuthToken = tabOAuthToken . _Just
 
 instance GoogleRequest TableList' where
         type Rs TableList' = TableList

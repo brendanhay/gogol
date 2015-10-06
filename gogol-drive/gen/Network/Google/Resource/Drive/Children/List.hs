@@ -192,8 +192,8 @@ clFields :: Lens' ChildrenList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
 instance GoogleAuth ChildrenList' where
-        authKey = clKey . _Just
-        authToken = clOAuthToken . _Just
+        _AuthKey = clKey . _Just
+        _AuthToken = clOAuthToken . _Just
 
 instance GoogleRequest ChildrenList' where
         type Rs ChildrenList' = ChildList

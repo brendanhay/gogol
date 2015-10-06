@@ -159,8 +159,8 @@ tfbdFields
   = lens _tfbdFields (\ s a -> s{_tfbdFields = a})
 
 instance GoogleAuth TablesFeaturesBatchDelete' where
-        authKey = tfbdKey . _Just
-        authToken = tfbdOAuthToken . _Just
+        _AuthKey = tfbdKey . _Just
+        _AuthToken = tfbdOAuthToken . _Just
 
 instance GoogleRequest TablesFeaturesBatchDelete'
          where

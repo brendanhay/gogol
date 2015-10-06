@@ -143,8 +143,8 @@ acFields :: Lens' AnnotationsCreate' (Maybe Text)
 acFields = lens _acFields (\ s a -> s{_acFields = a})
 
 instance GoogleAuth AnnotationsCreate' where
-        authKey = acKey . _Just
-        authToken = acOAuthToken . _Just
+        _AuthKey = acKey . _Just
+        _AuthToken = acOAuthToken . _Just
 
 instance GoogleRequest AnnotationsCreate' where
         type Rs AnnotationsCreate' = Annotation

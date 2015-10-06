@@ -171,8 +171,8 @@ vtiFields
   = lens _vtiFields (\ s a -> s{_vtiFields = a})
 
 instance GoogleAuth VPNTunnelsInsert' where
-        authKey = vtiKey . _Just
-        authToken = vtiOAuthToken . _Just
+        _AuthKey = vtiKey . _Just
+        _AuthToken = vtiOAuthToken . _Just
 
 instance GoogleRequest VPNTunnelsInsert' where
         type Rs VPNTunnelsInsert' = Operation

@@ -180,8 +180,8 @@ mwpawlgFields
 
 instance GoogleAuth
          ManagementWebPropertyAdWordsLinksGet' where
-        authKey = mwpawlgKey . _Just
-        authToken = mwpawlgOAuthToken . _Just
+        _AuthKey = mwpawlgKey . _Just
+        _AuthToken = mwpawlgOAuthToken . _Just
 
 instance GoogleRequest
          ManagementWebPropertyAdWordsLinksGet' where

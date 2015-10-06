@@ -158,8 +158,8 @@ camaFields
   = lens _camaFields (\ s a -> s{_camaFields = a})
 
 instance GoogleAuth CampaignsGet' where
-        authKey = camaKey . _Just
-        authToken = camaOAuthToken . _Just
+        _AuthKey = camaKey . _Just
+        _AuthToken = camaOAuthToken . _Just
 
 instance GoogleRequest CampaignsGet' where
         type Rs CampaignsGet' = Campaign

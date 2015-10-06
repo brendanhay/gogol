@@ -173,8 +173,8 @@ igmiFields
 
 instance GoogleAuth InstanceGroupManagersInsert'
          where
-        authKey = igmiKey . _Just
-        authToken = igmiOAuthToken . _Just
+        _AuthKey = igmiKey . _Just
+        _AuthToken = igmiOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupManagersInsert'
          where

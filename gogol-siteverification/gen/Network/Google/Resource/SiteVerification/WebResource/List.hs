@@ -133,8 +133,8 @@ wrlFields
   = lens _wrlFields (\ s a -> s{_wrlFields = a})
 
 instance GoogleAuth WebResourceList' where
-        authKey = wrlKey . _Just
-        authToken = wrlOAuthToken . _Just
+        _AuthKey = wrlKey . _Just
+        _AuthToken = wrlOAuthToken . _Just
 
 instance GoogleRequest WebResourceList' where
         type Rs WebResourceList' =

@@ -185,8 +185,8 @@ zvgsFields
   = lens _zvgsFields (\ s a -> s{_zvgsFields = a})
 
 instance GoogleAuth ZoneViewsGetService' where
-        authKey = zvgsKey . _Just
-        authToken = zvgsOAuthToken . _Just
+        _AuthKey = zvgsKey . _Just
+        _AuthToken = zvgsOAuthToken . _Just
 
 instance GoogleRequest ZoneViewsGetService' where
         type Rs ZoneViewsGetService' =

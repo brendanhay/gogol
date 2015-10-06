@@ -196,8 +196,8 @@ iaacInstance
   = lens _iaacInstance (\ s a -> s{_iaacInstance = a})
 
 instance GoogleAuth InstancesAddAccessConfig' where
-        authKey = iaacKey . _Just
-        authToken = iaacOAuthToken . _Just
+        _AuthKey = iaacKey . _Just
+        _AuthToken = iaacOAuthToken . _Just
 
 instance GoogleRequest InstancesAddAccessConfig'
          where

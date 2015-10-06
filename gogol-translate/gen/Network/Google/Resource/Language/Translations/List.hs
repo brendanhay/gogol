@@ -184,8 +184,8 @@ tlFields :: Lens' TranslationsList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
 instance GoogleAuth TranslationsList' where
-        authKey = tlKey . _Just
-        authToken = tlOAuthToken . _Just
+        _AuthKey = tlKey . _Just
+        _AuthToken = tlOAuthToken . _Just
 
 instance GoogleRequest TranslationsList' where
         type Rs TranslationsList' = TranslationsListResponse

@@ -200,8 +200,8 @@ meuFields
 
 instance GoogleAuth ManagementExperimentsUpdate'
          where
-        authKey = meuKey . _Just
-        authToken = meuOAuthToken . _Just
+        _AuthKey = meuKey . _Just
+        _AuthToken = meuOAuthToken . _Just
 
 instance GoogleRequest ManagementExperimentsUpdate'
          where

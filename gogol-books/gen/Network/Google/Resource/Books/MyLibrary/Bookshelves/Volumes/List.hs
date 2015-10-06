@@ -231,8 +231,8 @@ mlbvlFields
 
 instance GoogleAuth MyLibraryBookshelvesVolumesList'
          where
-        authKey = mlbvlKey . _Just
-        authToken = mlbvlOAuthToken . _Just
+        _AuthKey = mlbvlKey . _Just
+        _AuthToken = mlbvlOAuthToken . _Just
 
 instance GoogleRequest
          MyLibraryBookshelvesVolumesList' where

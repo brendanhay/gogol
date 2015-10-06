@@ -201,8 +201,8 @@ thttpplFields
       (\ s a -> s{_thttpplFields = a})
 
 instance GoogleAuth TargetHTTPProxiesList' where
-        authKey = thttpplKey . _Just
-        authToken = thttpplOAuthToken . _Just
+        _AuthKey = thttpplKey . _Just
+        _AuthToken = thttpplOAuthToken . _Just
 
 instance GoogleRequest TargetHTTPProxiesList' where
         type Rs TargetHTTPProxiesList' = TargetHTTPProxyList

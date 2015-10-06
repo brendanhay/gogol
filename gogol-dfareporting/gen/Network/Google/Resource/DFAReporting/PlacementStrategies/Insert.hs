@@ -158,8 +158,8 @@ psiFields
   = lens _psiFields (\ s a -> s{_psiFields = a})
 
 instance GoogleAuth PlacementStrategiesInsert' where
-        authKey = psiKey . _Just
-        authToken = psiOAuthToken . _Just
+        _AuthKey = psiKey . _Just
+        _AuthToken = psiOAuthToken . _Just
 
 instance GoogleRequest PlacementStrategiesInsert'
          where

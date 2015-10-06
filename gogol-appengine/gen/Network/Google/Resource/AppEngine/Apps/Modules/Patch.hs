@@ -262,8 +262,8 @@ ampCallback
   = lens _ampCallback (\ s a -> s{_ampCallback = a})
 
 instance GoogleAuth AppsModulesPatch' where
-        authKey = ampKey . _Just
-        authToken = ampOAuthToken . _Just
+        _AuthKey = ampKey . _Just
+        _AuthToken = ampOAuthToken . _Just
 
 instance GoogleRequest AppsModulesPatch' where
         type Rs AppsModulesPatch' = Operation

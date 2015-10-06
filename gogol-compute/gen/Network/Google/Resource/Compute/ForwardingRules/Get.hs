@@ -171,8 +171,8 @@ frgFields
   = lens _frgFields (\ s a -> s{_frgFields = a})
 
 instance GoogleAuth ForwardingRulesGet' where
-        authKey = frgKey . _Just
-        authToken = frgOAuthToken . _Just
+        _AuthKey = frgKey . _Just
+        _AuthToken = frgOAuthToken . _Just
 
 instance GoogleRequest ForwardingRulesGet' where
         type Rs ForwardingRulesGet' = ForwardingRule

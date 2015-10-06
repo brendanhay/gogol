@@ -158,8 +158,8 @@ rluFields
   = lens _rluFields (\ s a -> s{_rluFields = a})
 
 instance GoogleAuth RemarketingListsUpdate' where
-        authKey = rluKey . _Just
-        authToken = rluOAuthToken . _Just
+        _AuthKey = rluKey . _Just
+        _AuthToken = rluOAuthToken . _Just
 
 instance GoogleRequest RemarketingListsUpdate' where
         type Rs RemarketingListsUpdate' = RemarketingList

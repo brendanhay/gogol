@@ -173,8 +173,8 @@ urpkFields
   = lens _urpkFields (\ s a -> s{_urpkFields = a})
 
 instance GoogleAuth UsersRemovePublicKey' where
-        authKey = urpkKey . _Just
-        authToken = urpkOAuthToken . _Just
+        _AuthKey = urpkKey . _Just
+        _AuthToken = urpkOAuthToken . _Just
 
 instance GoogleRequest UsersRemovePublicKey' where
         type Rs UsersRemovePublicKey' = Operation

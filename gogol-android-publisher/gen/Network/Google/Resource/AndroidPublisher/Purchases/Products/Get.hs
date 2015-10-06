@@ -173,8 +173,8 @@ ppgFields
   = lens _ppgFields (\ s a -> s{_ppgFields = a})
 
 instance GoogleAuth PurchasesProductsGet' where
-        authKey = ppgKey . _Just
-        authToken = ppgOAuthToken . _Just
+        _AuthKey = ppgKey . _Just
+        _AuthToken = ppgOAuthToken . _Just
 
 instance GoogleRequest PurchasesProductsGet' where
         type Rs PurchasesProductsGet' = ProductPurchase

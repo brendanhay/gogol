@@ -187,8 +187,8 @@ megFields
   = lens _megFields (\ s a -> s{_megFields = a})
 
 instance GoogleAuth ManagementExperimentsGet' where
-        authKey = megKey . _Just
-        authToken = megOAuthToken . _Just
+        _AuthKey = megKey . _Just
+        _AuthToken = megOAuthToken . _Just
 
 instance GoogleRequest ManagementExperimentsGet'
          where

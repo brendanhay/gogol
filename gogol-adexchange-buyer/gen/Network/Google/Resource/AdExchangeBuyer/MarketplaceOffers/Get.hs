@@ -145,8 +145,8 @@ mogFields
   = lens _mogFields (\ s a -> s{_mogFields = a})
 
 instance GoogleAuth MarketplaceOffersGet' where
-        authKey = mogKey . _Just
-        authToken = mogOAuthToken . _Just
+        _AuthKey = mogKey . _Just
+        _AuthToken = mogOAuthToken . _Just
 
 instance GoogleRequest MarketplaceOffersGet' where
         type Rs MarketplaceOffersGet' = MarketplaceOffer

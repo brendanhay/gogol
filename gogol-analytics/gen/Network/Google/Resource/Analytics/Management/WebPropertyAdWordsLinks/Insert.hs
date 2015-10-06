@@ -181,8 +181,8 @@ mwpawliFields
 
 instance GoogleAuth
          ManagementWebPropertyAdWordsLinksInsert' where
-        authKey = mwpawliKey . _Just
-        authToken = mwpawliOAuthToken . _Just
+        _AuthKey = mwpawliKey . _Just
+        _AuthToken = mwpawliOAuthToken . _Just
 
 instance GoogleRequest
          ManagementWebPropertyAdWordsLinksInsert' where

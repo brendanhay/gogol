@@ -196,8 +196,8 @@ lvagFields
   = lens _lvagFields (\ s a -> s{_lvagFields = a})
 
 instance GoogleAuth LayersVolumeAnnotationsGet' where
-        authKey = lvagKey . _Just
-        authToken = lvagOAuthToken . _Just
+        _AuthKey = lvagKey . _Just
+        _AuthToken = lvagOAuthToken . _Just
 
 instance GoogleRequest LayersVolumeAnnotationsGet'
          where

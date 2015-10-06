@@ -141,8 +141,8 @@ usFields :: Lens' UsersStop' (Maybe Text)
 usFields = lens _usFields (\ s a -> s{_usFields = a})
 
 instance GoogleAuth UsersStop' where
-        authKey = usKey . _Just
-        authToken = usOAuthToken . _Just
+        _AuthKey = usKey . _Just
+        _AuthToken = usOAuthToken . _Just
 
 instance GoogleRequest UsersStop' where
         type Rs UsersStop' = ()

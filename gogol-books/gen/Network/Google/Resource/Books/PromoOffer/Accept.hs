@@ -220,8 +220,8 @@ poaFields
   = lens _poaFields (\ s a -> s{_poaFields = a})
 
 instance GoogleAuth PromoOfferAccept' where
-        authKey = poaKey . _Just
-        authToken = poaOAuthToken . _Just
+        _AuthKey = poaKey . _Just
+        _AuthToken = poaOAuthToken . _Just
 
 instance GoogleRequest PromoOfferAccept' where
         type Rs PromoOfferAccept' = ()

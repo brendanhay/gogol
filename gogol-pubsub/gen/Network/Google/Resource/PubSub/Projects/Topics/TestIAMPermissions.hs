@@ -230,8 +230,8 @@ pttipCallback
 
 instance GoogleAuth ProjectsTopicsTestIAMPermissions'
          where
-        authKey = pttipKey . _Just
-        authToken = pttipOAuthToken . _Just
+        _AuthKey = pttipKey . _Just
+        _AuthToken = pttipOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsTopicsTestIAMPermissions' where

@@ -172,8 +172,8 @@ lpiFields
   = lens _lpiFields (\ s a -> s{_lpiFields = a})
 
 instance GoogleAuth LandingPagesInsert' where
-        authKey = lpiKey . _Just
-        authToken = lpiOAuthToken . _Just
+        _AuthKey = lpiKey . _Just
+        _AuthToken = lpiOAuthToken . _Just
 
 instance GoogleRequest LandingPagesInsert' where
         type Rs LandingPagesInsert' = LandingPage

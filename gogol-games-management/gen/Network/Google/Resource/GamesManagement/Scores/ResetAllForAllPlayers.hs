@@ -138,8 +138,8 @@ srafapFields
 
 instance GoogleAuth ScoresResetAllForAllPlayers'
          where
-        authKey = srafapKey . _Just
-        authToken = srafapOAuthToken . _Just
+        _AuthKey = srafapKey . _Just
+        _AuthToken = srafapOAuthToken . _Just
 
 instance GoogleRequest ScoresResetAllForAllPlayers'
          where

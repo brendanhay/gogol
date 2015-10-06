@@ -217,8 +217,8 @@ cmlCallback
   = lens _cmlCallback (\ s a -> s{_cmlCallback = a})
 
 instance GoogleAuth ClientMessagesLog' where
-        authKey = cmlKey . _Just
-        authToken = cmlOAuthToken . _Just
+        _AuthKey = cmlKey . _Just
+        _AuthToken = cmlOAuthToken . _Just
 
 instance GoogleRequest ClientMessagesLog' where
         type Rs ClientMessagesLog' = LogMessageResponse

@@ -235,8 +235,8 @@ pjgCallback
   = lens _pjgCallback (\ s a -> s{_pjgCallback = a})
 
 instance GoogleAuth ProjectsJobsGet' where
-        authKey = pjgKey . _Just
-        authToken = pjgOAuthToken . _Just
+        _AuthKey = pjgKey . _Just
+        _AuthToken = pjgOAuthToken . _Just
 
 instance GoogleRequest ProjectsJobsGet' where
         type Rs ProjectsJobsGet' = Job

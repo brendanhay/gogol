@@ -159,8 +159,8 @@ apggFields
   = lens _apggFields (\ s a -> s{_apggFields = a})
 
 instance GoogleAuth AccountPermissionGroupsGet' where
-        authKey = apggKey . _Just
-        authToken = apggOAuthToken . _Just
+        _AuthKey = apggKey . _Just
+        _AuthToken = apggOAuthToken . _Just
 
 instance GoogleRequest AccountPermissionGroupsGet'
          where

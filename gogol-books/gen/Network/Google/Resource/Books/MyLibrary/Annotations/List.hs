@@ -256,8 +256,8 @@ mlalFields
   = lens _mlalFields (\ s a -> s{_mlalFields = a})
 
 instance GoogleAuth MyLibraryAnnotationsList' where
-        authKey = mlalKey . _Just
-        authToken = mlalOAuthToken . _Just
+        _AuthKey = mlalKey . _Just
+        _AuthToken = mlalOAuthToken . _Just
 
 instance GoogleRequest MyLibraryAnnotationsList'
          where

@@ -211,8 +211,8 @@ duDeployment
   = lens _duDeployment (\ s a -> s{_duDeployment = a})
 
 instance GoogleAuth DeploymentsUpdate' where
-        authKey = duKey . _Just
-        authToken = duOAuthToken . _Just
+        _AuthKey = duKey . _Just
+        _AuthToken = duOAuthToken . _Just
 
 instance GoogleRequest DeploymentsUpdate' where
         type Rs DeploymentsUpdate' = Operation

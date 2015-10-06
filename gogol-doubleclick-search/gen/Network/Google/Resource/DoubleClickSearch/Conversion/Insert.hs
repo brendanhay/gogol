@@ -142,8 +142,8 @@ ciFields :: Lens' ConversionInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
 instance GoogleAuth ConversionInsert' where
-        authKey = ciKey . _Just
-        authToken = ciOAuthToken . _Just
+        _AuthKey = ciKey . _Just
+        _AuthToken = ciOAuthToken . _Just
 
 instance GoogleRequest ConversionInsert' where
         type Rs ConversionInsert' = ConversionList

@@ -184,8 +184,8 @@ mcrdaFields
 
 instance GoogleAuth MyConfigReleaseDownloadAccess'
          where
-        authKey = mcrdaKey . _Just
-        authToken = mcrdaOAuthToken . _Just
+        _AuthKey = mcrdaKey . _Just
+        _AuthToken = mcrdaOAuthToken . _Just
 
 instance GoogleRequest MyConfigReleaseDownloadAccess'
          where

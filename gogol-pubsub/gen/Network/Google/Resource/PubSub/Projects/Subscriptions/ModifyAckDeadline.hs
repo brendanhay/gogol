@@ -236,8 +236,8 @@ psmadCallback
 
 instance GoogleAuth
          ProjectsSubscriptionsModifyAckDeadline' where
-        authKey = psmadKey . _Just
-        authToken = psmadOAuthToken . _Just
+        _AuthKey = psmadKey . _Just
+        _AuthToken = psmadOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsSubscriptionsModifyAckDeadline' where

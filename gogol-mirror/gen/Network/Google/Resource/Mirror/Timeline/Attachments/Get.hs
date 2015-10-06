@@ -171,8 +171,8 @@ tagFields
   = lens _tagFields (\ s a -> s{_tagFields = a})
 
 instance GoogleAuth TimelineAttachmentsGet' where
-        authKey = tagKey . _Just
-        authToken = tagOAuthToken . _Just
+        _AuthKey = tagKey . _Just
+        _AuthToken = tagOAuthToken . _Just
 
 instance GoogleRequest TimelineAttachmentsGet' where
         type Rs TimelineAttachmentsGet' = Attachment

@@ -133,8 +133,8 @@ uigFields
   = lens _uigFields (\ s a -> s{_uigFields = a})
 
 instance GoogleAuth UserInfoGet' where
-        authKey = uigKey . _Just
-        authToken = uigOAuthToken . _Just
+        _AuthKey = uigKey . _Just
+        _AuthToken = uigOAuthToken . _Just
 
 instance GoogleRequest UserInfoGet' where
         type Rs UserInfoGet' = UserInfoplus

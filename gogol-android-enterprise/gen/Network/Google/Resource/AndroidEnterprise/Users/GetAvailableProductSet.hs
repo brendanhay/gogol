@@ -161,8 +161,8 @@ ugapsFields
 
 instance GoogleAuth UsersGetAvailableProductSet'
          where
-        authKey = ugapsKey . _Just
-        authToken = ugapsOAuthToken . _Just
+        _AuthKey = ugapsKey . _Just
+        _AuthToken = ugapsOAuthToken . _Just
 
 instance GoogleRequest UsersGetAvailableProductSet'
          where

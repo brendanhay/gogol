@@ -170,8 +170,8 @@ eFields :: Lens' EventsImport' (Maybe Text)
 eFields = lens _eFields (\ s a -> s{_eFields = a})
 
 instance GoogleAuth EventsImport' where
-        authKey = eKey . _Just
-        authToken = eOAuthToken . _Just
+        _AuthKey = eKey . _Just
+        _AuthToken = eOAuthToken . _Just
 
 instance GoogleRequest EventsImport' where
         type Rs EventsImport' = Event

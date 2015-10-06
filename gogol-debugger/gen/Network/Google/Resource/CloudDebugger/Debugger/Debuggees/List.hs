@@ -227,8 +227,8 @@ ddlCallback
   = lens _ddlCallback (\ s a -> s{_ddlCallback = a})
 
 instance GoogleAuth DebuggerDebuggeesList' where
-        authKey = ddlKey . _Just
-        authToken = ddlOAuthToken . _Just
+        _AuthKey = ddlKey . _Just
+        _AuthToken = ddlOAuthToken . _Just
 
 instance GoogleRequest DebuggerDebuggeesList' where
         type Rs DebuggerDebuggeesList' =

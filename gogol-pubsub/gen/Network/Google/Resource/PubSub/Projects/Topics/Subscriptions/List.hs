@@ -242,8 +242,8 @@ ptslCallback
 
 instance GoogleAuth ProjectsTopicsSubscriptionsList'
          where
-        authKey = ptslKey . _Just
-        authToken = ptslOAuthToken . _Just
+        _AuthKey = ptslKey . _Just
+        _AuthToken = ptslOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsTopicsSubscriptionsList' where

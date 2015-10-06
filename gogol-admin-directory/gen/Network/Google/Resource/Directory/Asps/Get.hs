@@ -154,8 +154,8 @@ agFields :: Lens' AspsGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 instance GoogleAuth AspsGet' where
-        authKey = agKey . _Just
-        authToken = agOAuthToken . _Just
+        _AuthKey = agKey . _Just
+        _AuthToken = agOAuthToken . _Just
 
 instance GoogleRequest AspsGet' where
         type Rs AspsGet' = Asp

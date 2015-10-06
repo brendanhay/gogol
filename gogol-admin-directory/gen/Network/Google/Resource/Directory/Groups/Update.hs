@@ -154,8 +154,8 @@ guFields :: Lens' GroupsUpdate' (Maybe Text)
 guFields = lens _guFields (\ s a -> s{_guFields = a})
 
 instance GoogleAuth GroupsUpdate' where
-        authKey = guKey . _Just
-        authToken = guOAuthToken . _Just
+        _AuthKey = guKey . _Just
+        _AuthToken = guOAuthToken . _Just
 
 instance GoogleRequest GroupsUpdate' where
         type Rs GroupsUpdate' = Group

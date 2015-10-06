@@ -146,8 +146,8 @@ tlgFields
   = lens _tlgFields (\ s a -> s{_tlgFields = a})
 
 instance GoogleAuth TaskListsGet' where
-        authKey = tlgKey . _Just
-        authToken = tlgOAuthToken . _Just
+        _AuthKey = tlgKey . _Just
+        _AuthToken = tlgOAuthToken . _Just
 
 instance GoogleRequest TaskListsGet' where
         type Rs TaskListsGet' = TaskList

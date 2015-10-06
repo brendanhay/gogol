@@ -189,8 +189,8 @@ mcmlFields
 
 instance GoogleAuth ManagementCustomMetricsList'
          where
-        authKey = mcmlKey . _Just
-        authToken = mcmlOAuthToken . _Just
+        _AuthKey = mcmlKey . _Just
+        _AuthToken = mcmlOAuthToken . _Just
 
 instance GoogleRequest ManagementCustomMetricsList'
          where

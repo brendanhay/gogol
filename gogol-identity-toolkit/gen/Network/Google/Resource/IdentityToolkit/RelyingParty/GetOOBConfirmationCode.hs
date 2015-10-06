@@ -151,8 +151,8 @@ rpgoobccFields
 
 instance GoogleAuth
          RelyingPartyGetOOBConfirmationCode' where
-        authKey = rpgoobccKey . _Just
-        authToken = rpgoobccOAuthToken . _Just
+        _AuthKey = rpgoobccKey . _Just
+        _AuthToken = rpgoobccOAuthToken . _Just
 
 instance GoogleRequest
          RelyingPartyGetOOBConfirmationCode' where

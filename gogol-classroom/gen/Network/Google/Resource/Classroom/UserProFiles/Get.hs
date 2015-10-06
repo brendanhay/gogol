@@ -223,8 +223,8 @@ upfgCallback
   = lens _upfgCallback (\ s a -> s{_upfgCallback = a})
 
 instance GoogleAuth UserProFilesGet' where
-        authKey = upfgKey . _Just
-        authToken = upfgOAuthToken . _Just
+        _AuthKey = upfgKey . _Just
+        _AuthToken = upfgOAuthToken . _Just
 
 instance GoogleRequest UserProFilesGet' where
         type Rs UserProFilesGet' = UserProFile

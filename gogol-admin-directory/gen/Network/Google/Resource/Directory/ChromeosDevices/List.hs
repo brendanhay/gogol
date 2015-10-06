@@ -219,8 +219,8 @@ cdlFields
   = lens _cdlFields (\ s a -> s{_cdlFields = a})
 
 instance GoogleAuth ChromeosDevicesList' where
-        authKey = cdlKey . _Just
-        authToken = cdlOAuthToken . _Just
+        _AuthKey = cdlKey . _Just
+        _AuthToken = cdlOAuthToken . _Just
 
 instance GoogleRequest ChromeosDevicesList' where
         type Rs ChromeosDevicesList' = ChromeOSDevices

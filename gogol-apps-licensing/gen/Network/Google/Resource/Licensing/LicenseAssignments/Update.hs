@@ -181,8 +181,8 @@ lauFields
   = lens _lauFields (\ s a -> s{_lauFields = a})
 
 instance GoogleAuth LicenseAssignmentsUpdate' where
-        authKey = lauKey . _Just
-        authToken = lauOAuthToken . _Just
+        _AuthKey = lauKey . _Just
+        _AuthToken = lauOAuthToken . _Just
 
 instance GoogleRequest LicenseAssignmentsUpdate'
          where

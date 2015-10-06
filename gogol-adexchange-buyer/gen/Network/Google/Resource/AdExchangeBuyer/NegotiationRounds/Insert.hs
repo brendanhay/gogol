@@ -158,8 +158,8 @@ nriFields
   = lens _nriFields (\ s a -> s{_nriFields = a})
 
 instance GoogleAuth NegotiationRoundsInsert' where
-        authKey = nriKey . _Just
-        authToken = nriOAuthToken . _Just
+        _AuthKey = nriKey . _Just
+        _AuthToken = nriOAuthToken . _Just
 
 instance GoogleRequest NegotiationRoundsInsert' where
         type Rs NegotiationRoundsInsert' =

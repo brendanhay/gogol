@@ -223,8 +223,8 @@ cllFields
   = lens _cllFields (\ s a -> s{_cllFields = a})
 
 instance GoogleAuth CalendarListList' where
-        authKey = cllKey . _Just
-        authToken = cllOAuthToken . _Just
+        _AuthKey = cllKey . _Just
+        _AuthToken = cllOAuthToken . _Just
 
 instance GoogleRequest CalendarListList' where
         type Rs CalendarListList' = CalendarList

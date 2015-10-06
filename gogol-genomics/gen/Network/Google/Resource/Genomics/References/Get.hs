@@ -145,8 +145,8 @@ rggFields
   = lens _rggFields (\ s a -> s{_rggFields = a})
 
 instance GoogleAuth ReferencesGet' where
-        authKey = rggKey . _Just
-        authToken = rggOAuthToken . _Just
+        _AuthKey = rggKey . _Just
+        _AuthToken = rggOAuthToken . _Just
 
 instance GoogleRequest ReferencesGet' where
         type Rs ReferencesGet' = Reference

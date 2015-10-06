@@ -165,8 +165,8 @@ slFields :: Lens' StyleList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
 instance GoogleAuth StyleList' where
-        authKey = slKey . _Just
-        authToken = slOAuthToken . _Just
+        _AuthKey = slKey . _Just
+        _AuthToken = slOAuthToken . _Just
 
 instance GoogleRequest StyleList' where
         type Rs StyleList' = StyleSettingList

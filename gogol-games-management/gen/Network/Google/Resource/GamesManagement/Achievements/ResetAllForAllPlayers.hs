@@ -138,8 +138,8 @@ arafapFields
 
 instance GoogleAuth
          AchievementsResetAllForAllPlayers' where
-        authKey = arafapKey . _Just
-        authToken = arafapOAuthToken . _Just
+        _AuthKey = arafapKey . _Just
+        _AuthToken = arafapOAuthToken . _Just
 
 instance GoogleRequest
          AchievementsResetAllForAllPlayers' where

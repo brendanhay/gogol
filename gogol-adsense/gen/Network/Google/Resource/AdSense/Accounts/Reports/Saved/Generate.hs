@@ -200,8 +200,8 @@ arsgFields
 
 instance GoogleAuth AccountsReportsSavedGenerate'
          where
-        authKey = arsgKey . _Just
-        authToken = arsgOAuthToken . _Just
+        _AuthKey = arsgKey . _Just
+        _AuthToken = arsgOAuthToken . _Just
 
 instance GoogleRequest AccountsReportsSavedGenerate'
          where

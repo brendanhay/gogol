@@ -184,8 +184,8 @@ zvssFields
   = lens _zvssFields (\ s a -> s{_zvssFields = a})
 
 instance GoogleAuth ZoneViewsSetService' where
-        authKey = zvssKey . _Just
-        authToken = zvssOAuthToken . _Just
+        _AuthKey = zvssKey . _Just
+        _AuthToken = zvssOAuthToken . _Just
 
 instance GoogleRequest ZoneViewsSetService' where
         type Rs ZoneViewsSetService' = Operation

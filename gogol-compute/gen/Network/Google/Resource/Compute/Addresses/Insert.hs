@@ -167,8 +167,8 @@ aiFields :: Lens' AddressesInsert' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
 instance GoogleAuth AddressesInsert' where
-        authKey = aiKey . _Just
-        authToken = aiOAuthToken . _Just
+        _AuthKey = aiKey . _Just
+        _AuthToken = aiOAuthToken . _Just
 
 instance GoogleRequest AddressesInsert' where
         type Rs AddressesInsert' = Operation

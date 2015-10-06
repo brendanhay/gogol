@@ -157,8 +157,8 @@ riFields :: Lens' ReadgroupsetsImport' (Maybe Text)
 riFields = lens _riFields (\ s a -> s{_riFields = a})
 
 instance GoogleAuth ReadgroupsetsImport' where
-        authKey = riKey . _Just
-        authToken = riOAuthToken . _Just
+        _AuthKey = riKey . _Just
+        _AuthToken = riOAuthToken . _Just
 
 instance GoogleRequest ReadgroupsetsImport' where
         type Rs ReadgroupsetsImport' =

@@ -192,8 +192,8 @@ mpffliFields
 
 instance GoogleAuth
          ManagementProFileFilterLinksInsert' where
-        authKey = mpffliKey . _Just
-        authToken = mpffliOAuthToken . _Just
+        _AuthKey = mpffliKey . _Just
+        _AuthToken = mpffliOAuthToken . _Just
 
 instance GoogleRequest
          ManagementProFileFilterLinksInsert' where

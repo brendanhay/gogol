@@ -157,8 +157,8 @@ aggFields
   = lens _aggFields (\ s a -> s{_aggFields = a})
 
 instance GoogleAuth AdvertiserGroupsGet' where
-        authKey = aggKey . _Just
-        authToken = aggOAuthToken . _Just
+        _AuthKey = aggKey . _Just
+        _AuthToken = aggOAuthToken . _Just
 
 instance GoogleRequest AdvertiserGroupsGet' where
         type Rs AdvertiserGroupsGet' = AdvertiserGroup

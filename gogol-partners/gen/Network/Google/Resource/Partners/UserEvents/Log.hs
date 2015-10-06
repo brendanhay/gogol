@@ -213,8 +213,8 @@ uelCallback
   = lens _uelCallback (\ s a -> s{_uelCallback = a})
 
 instance GoogleAuth UserEventsLog' where
-        authKey = uelKey . _Just
-        authToken = uelOAuthToken . _Just
+        _AuthKey = uelKey . _Just
+        _AuthToken = uelOAuthToken . _Just
 
 instance GoogleRequest UserEventsLog' where
         type Rs UserEventsLog' = LogUserEventResponse

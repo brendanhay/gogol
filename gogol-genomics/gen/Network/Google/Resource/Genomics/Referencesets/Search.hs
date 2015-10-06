@@ -148,8 +148,8 @@ rssFields
   = lens _rssFields (\ s a -> s{_rssFields = a})
 
 instance GoogleAuth ReferencesetsSearch' where
-        authKey = rssKey . _Just
-        authToken = rssOAuthToken . _Just
+        _AuthKey = rssKey . _Just
+        _AuthToken = rssOAuthToken . _Just
 
 instance GoogleRequest ReferencesetsSearch' where
         type Rs ReferencesetsSearch' =

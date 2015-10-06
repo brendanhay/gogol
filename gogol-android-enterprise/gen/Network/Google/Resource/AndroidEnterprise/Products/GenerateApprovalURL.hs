@@ -190,8 +190,8 @@ pgauFields
 
 instance GoogleAuth ProductsGenerateApprovalURL'
          where
-        authKey = pgauKey . _Just
-        authToken = pgauOAuthToken . _Just
+        _AuthKey = pgauKey . _Just
+        _AuthToken = pgauOAuthToken . _Just
 
 instance GoogleRequest ProductsGenerateApprovalURL'
          where

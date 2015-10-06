@@ -161,8 +161,8 @@ esaFields
   = lens _esaFields (\ s a -> s{_esaFields = a})
 
 instance GoogleAuth EnterprisesSetAccount' where
-        authKey = esaKey . _Just
-        authToken = esaOAuthToken . _Just
+        _AuthKey = esaKey . _Just
+        _AuthToken = esaOAuthToken . _Just
 
 instance GoogleRequest EnterprisesSetAccount' where
         type Rs EnterprisesSetAccount' = EnterpriseAccount

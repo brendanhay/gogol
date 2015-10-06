@@ -159,8 +159,8 @@ cciFields
   = lens _cciFields (\ s a -> s{_cciFields = a})
 
 instance GoogleAuth CustomChannelsInsert' where
-        authKey = cciKey . _Just
-        authToken = cciOAuthToken . _Just
+        _AuthKey = cciKey . _Just
+        _AuthToken = cciOAuthToken . _Just
 
 instance GoogleRequest CustomChannelsInsert' where
         type Rs CustomChannelsInsert' = CustomChannel

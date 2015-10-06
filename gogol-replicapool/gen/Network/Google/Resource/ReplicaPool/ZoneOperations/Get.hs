@@ -168,8 +168,8 @@ zogFields
   = lens _zogFields (\ s a -> s{_zogFields = a})
 
 instance GoogleAuth ZoneOperationsGet' where
-        authKey = zogKey . _Just
-        authToken = zogOAuthToken . _Just
+        _AuthKey = zogKey . _Just
+        _AuthToken = zogOAuthToken . _Just
 
 instance GoogleRequest ZoneOperationsGet' where
         type Rs ZoneOperationsGet' = Operation

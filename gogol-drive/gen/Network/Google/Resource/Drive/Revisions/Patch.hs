@@ -170,8 +170,8 @@ rppFields
   = lens _rppFields (\ s a -> s{_rppFields = a})
 
 instance GoogleAuth RevisionsPatch' where
-        authKey = rppKey . _Just
-        authToken = rppOAuthToken . _Just
+        _AuthKey = rppKey . _Just
+        _AuthToken = rppOAuthToken . _Just
 
 instance GoogleRequest RevisionsPatch' where
         type Rs RevisionsPatch' = Revision

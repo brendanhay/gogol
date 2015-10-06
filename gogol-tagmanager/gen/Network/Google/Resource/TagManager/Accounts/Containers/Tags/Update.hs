@@ -199,8 +199,8 @@ actucFields
 
 instance GoogleAuth AccountsContainersTagsUpdate'
          where
-        authKey = actucKey . _Just
-        authToken = actucOAuthToken . _Just
+        _AuthKey = actucKey . _Just
+        _AuthToken = actucOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersTagsUpdate'
          where

@@ -138,8 +138,8 @@ qrafapFields
 
 instance GoogleAuth QuestsResetAllForAllPlayers'
          where
-        authKey = qrafapKey . _Just
-        authToken = qrafapOAuthToken . _Just
+        _AuthKey = qrafapKey . _Just
+        _AuthToken = qrafapOAuthToken . _Just
 
 instance GoogleRequest QuestsResetAllForAllPlayers'
          where

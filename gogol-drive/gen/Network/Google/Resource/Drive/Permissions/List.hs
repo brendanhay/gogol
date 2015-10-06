@@ -146,8 +146,8 @@ pllFields
   = lens _pllFields (\ s a -> s{_pllFields = a})
 
 instance GoogleAuth PermissionsList' where
-        authKey = pllKey . _Just
-        authToken = pllOAuthToken . _Just
+        _AuthKey = pllKey . _Just
+        _AuthToken = pllOAuthToken . _Just
 
 instance GoogleRequest PermissionsList' where
         type Rs PermissionsList' = PermissionList

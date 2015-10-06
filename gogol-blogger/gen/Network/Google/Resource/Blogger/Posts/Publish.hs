@@ -176,8 +176,8 @@ posFields
   = lens _posFields (\ s a -> s{_posFields = a})
 
 instance GoogleAuth PostsPublish' where
-        authKey = posKey . _Just
-        authToken = posOAuthToken . _Just
+        _AuthKey = posKey . _Just
+        _AuthToken = posOAuthToken . _Just
 
 instance GoogleRequest PostsPublish' where
         type Rs PostsPublish' = Post'

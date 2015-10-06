@@ -174,8 +174,8 @@ acrdFields
 
 instance GoogleAuth AccountsContainersRulesDelete'
          where
-        authKey = acrdKey . _Just
-        authToken = acrdOAuthToken . _Just
+        _AuthKey = acrdKey . _Just
+        _AuthToken = acrdOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersRulesDelete'
          where

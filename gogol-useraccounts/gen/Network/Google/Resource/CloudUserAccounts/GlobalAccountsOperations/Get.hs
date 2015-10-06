@@ -160,8 +160,8 @@ gaogFields
 
 instance GoogleAuth GlobalAccountsOperationsGet'
          where
-        authKey = gaogKey . _Just
-        authToken = gaogOAuthToken . _Just
+        _AuthKey = gaogKey . _Just
+        _AuthToken = gaogOAuthToken . _Just
 
 instance GoogleRequest GlobalAccountsOperationsGet'
          where

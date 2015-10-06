@@ -164,8 +164,8 @@ thttppgFields
       (\ s a -> s{_thttppgFields = a})
 
 instance GoogleAuth TargetHTTPProxiesGet' where
-        authKey = thttppgKey . _Just
-        authToken = thttppgOAuthToken . _Just
+        _AuthKey = thttppgKey . _Just
+        _AuthToken = thttppgOAuthToken . _Just
 
 instance GoogleRequest TargetHTTPProxiesGet' where
         type Rs TargetHTTPProxiesGet' = TargetHTTPProxy

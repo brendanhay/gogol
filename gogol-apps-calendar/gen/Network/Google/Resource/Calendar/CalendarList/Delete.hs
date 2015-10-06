@@ -149,8 +149,8 @@ cldFields
   = lens _cldFields (\ s a -> s{_cldFields = a})
 
 instance GoogleAuth CalendarListDelete' where
-        authKey = cldKey . _Just
-        authToken = cldOAuthToken . _Just
+        _AuthKey = cldKey . _Just
+        _AuthToken = cldOAuthToken . _Just
 
 instance GoogleRequest CalendarListDelete' where
         type Rs CalendarListDelete' = ()

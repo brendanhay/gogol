@@ -150,8 +150,8 @@ erfapFields
   = lens _erfapFields (\ s a -> s{_erfapFields = a})
 
 instance GoogleAuth EventsResetForAllPlayers' where
-        authKey = erfapKey . _Just
-        authToken = erfapOAuthToken . _Just
+        _AuthKey = erfapKey . _Just
+        _AuthToken = erfapOAuthToken . _Just
 
 instance GoogleRequest EventsResetForAllPlayers'
          where

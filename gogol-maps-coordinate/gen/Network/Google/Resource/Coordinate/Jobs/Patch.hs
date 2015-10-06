@@ -284,8 +284,8 @@ jpCustomField
       . _Coerce
 
 instance GoogleAuth JobsPatch' where
-        authKey = jpKey . _Just
-        authToken = jpOAuthToken . _Just
+        _AuthKey = jpKey . _Just
+        _AuthToken = jpOAuthToken . _Just
 
 instance GoogleRequest JobsPatch' where
         type Rs JobsPatch' = Job

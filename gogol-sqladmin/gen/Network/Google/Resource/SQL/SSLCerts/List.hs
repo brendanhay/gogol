@@ -159,8 +159,8 @@ sclInstance
   = lens _sclInstance (\ s a -> s{_sclInstance = a})
 
 instance GoogleAuth SSLCertsList' where
-        authKey = sclKey . _Just
-        authToken = sclOAuthToken . _Just
+        _AuthKey = sclKey . _Just
+        _AuthToken = sclOAuthToken . _Just
 
 instance GoogleRequest SSLCertsList' where
         type Rs SSLCertsList' = SSLCertsListResponse

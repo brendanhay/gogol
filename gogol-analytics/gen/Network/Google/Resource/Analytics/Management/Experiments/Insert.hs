@@ -187,8 +187,8 @@ meiFields
 
 instance GoogleAuth ManagementExperimentsInsert'
          where
-        authKey = meiKey . _Just
-        authToken = meiOAuthToken . _Just
+        _AuthKey = meiKey . _Just
+        _AuthToken = meiOAuthToken . _Just
 
 instance GoogleRequest ManagementExperimentsInsert'
          where

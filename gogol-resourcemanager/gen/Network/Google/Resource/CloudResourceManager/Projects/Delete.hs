@@ -256,8 +256,8 @@ pdCallback
   = lens _pdCallback (\ s a -> s{_pdCallback = a})
 
 instance GoogleAuth ProjectsDelete' where
-        authKey = pdKey . _Just
-        authToken = pdOAuthToken . _Just
+        _AuthKey = pdKey . _Just
+        _AuthToken = pdOAuthToken . _Just
 
 instance GoogleRequest ProjectsDelete' where
         type Rs ProjectsDelete' = Empty

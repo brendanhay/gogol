@@ -156,8 +156,8 @@ rouFields
   = lens _rouFields (\ s a -> s{_rouFields = a})
 
 instance GoogleAuth RoutesGet' where
-        authKey = rouKey . _Just
-        authToken = rouOAuthToken . _Just
+        _AuthKey = rouKey . _Just
+        _AuthToken = rouOAuthToken . _Just
 
 instance GoogleRequest RoutesGet' where
         type Rs RoutesGet' = Route

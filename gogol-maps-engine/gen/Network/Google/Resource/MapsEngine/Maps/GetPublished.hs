@@ -144,8 +144,8 @@ mgpFields
   = lens _mgpFields (\ s a -> s{_mgpFields = a})
 
 instance GoogleAuth MapsGetPublished' where
-        authKey = mgpKey . _Just
-        authToken = mgpOAuthToken . _Just
+        _AuthKey = mgpKey . _Just
+        _AuthToken = mgpOAuthToken . _Just
 
 instance GoogleRequest MapsGetPublished' where
         type Rs MapsGetPublished' = PublishedMap

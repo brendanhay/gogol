@@ -211,8 +211,8 @@ jgqrFields
   = lens _jgqrFields (\ s a -> s{_jgqrFields = a})
 
 instance GoogleAuth JobsGetQueryResults' where
-        authKey = jgqrKey . _Just
-        authToken = jgqrOAuthToken . _Just
+        _AuthKey = jgqrKey . _Just
+        _AuthToken = jgqrOAuthToken . _Just
 
 instance GoogleRequest JobsGetQueryResults' where
         type Rs JobsGetQueryResults' =

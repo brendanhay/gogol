@@ -201,8 +201,8 @@ tbmlFields
   = lens _tbmlFields (\ s a -> s{_tbmlFields = a})
 
 instance GoogleAuth TurnBasedMatchesList' where
-        authKey = tbmlKey . _Just
-        authToken = tbmlOAuthToken . _Just
+        _AuthKey = tbmlKey . _Just
+        _AuthToken = tbmlOAuthToken . _Just
 
 instance GoogleRequest TurnBasedMatchesList' where
         type Rs TurnBasedMatchesList' = TurnBasedMatchList

@@ -172,8 +172,8 @@ mlrpgFields
 
 instance GoogleAuth MyLibraryReadingPositionsGet'
          where
-        authKey = mlrpgKey . _Just
-        authToken = mlrpgOAuthToken . _Just
+        _AuthKey = mlrpgKey . _Just
+        _AuthToken = mlrpgOAuthToken . _Just
 
 instance GoogleRequest MyLibraryReadingPositionsGet'
          where

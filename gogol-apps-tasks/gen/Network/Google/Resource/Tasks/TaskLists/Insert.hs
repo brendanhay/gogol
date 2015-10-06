@@ -148,8 +148,8 @@ tliFields
   = lens _tliFields (\ s a -> s{_tliFields = a})
 
 instance GoogleAuth TaskListsInsert' where
-        authKey = tliKey . _Just
-        authToken = tliOAuthToken . _Just
+        _AuthKey = tliKey . _Just
+        _AuthToken = tliOAuthToken . _Just
 
 instance GoogleRequest TaskListsInsert' where
         type Rs TaskListsInsert' = TaskList

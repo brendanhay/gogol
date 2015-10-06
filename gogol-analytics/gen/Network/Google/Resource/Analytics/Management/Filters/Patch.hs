@@ -170,8 +170,8 @@ mfpFields
   = lens _mfpFields (\ s a -> s{_mfpFields = a})
 
 instance GoogleAuth ManagementFiltersPatch' where
-        authKey = mfpKey . _Just
-        authToken = mfpOAuthToken . _Just
+        _AuthKey = mfpKey . _Just
+        _AuthToken = mfpOAuthToken . _Just
 
 instance GoogleRequest ManagementFiltersPatch' where
         type Rs ManagementFiltersPatch' = Filter

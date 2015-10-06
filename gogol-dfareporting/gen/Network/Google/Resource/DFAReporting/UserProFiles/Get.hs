@@ -146,8 +146,8 @@ upfgFields
   = lens _upfgFields (\ s a -> s{_upfgFields = a})
 
 instance GoogleAuth UserProFilesGet' where
-        authKey = upfgKey . _Just
-        authToken = upfgOAuthToken . _Just
+        _AuthKey = upfgKey . _Just
+        _AuthToken = upfgOAuthToken . _Just
 
 instance GoogleRequest UserProFilesGet' where
         type Rs UserProFilesGet' = UserProFile

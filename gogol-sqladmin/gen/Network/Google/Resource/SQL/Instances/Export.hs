@@ -170,8 +170,8 @@ ieInstance
   = lens _ieInstance (\ s a -> s{_ieInstance = a})
 
 instance GoogleAuth InstancesExport' where
-        authKey = ieKey . _Just
-        authToken = ieOAuthToken . _Just
+        _AuthKey = ieKey . _Just
+        _AuthToken = ieOAuthToken . _Just
 
 instance GoogleRequest InstancesExport' where
         type Rs InstancesExport' = Operation

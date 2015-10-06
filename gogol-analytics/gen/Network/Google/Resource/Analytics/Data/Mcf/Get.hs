@@ -261,8 +261,8 @@ dmgFields
   = lens _dmgFields (\ s a -> s{_dmgFields = a})
 
 instance GoogleAuth DataMcfGet' where
-        authKey = dmgKey . _Just
-        authToken = dmgOAuthToken . _Just
+        _AuthKey = dmgKey . _Just
+        _AuthToken = dmgOAuthToken . _Just
 
 instance GoogleRequest DataMcfGet' where
         type Rs DataMcfGet' = McfData

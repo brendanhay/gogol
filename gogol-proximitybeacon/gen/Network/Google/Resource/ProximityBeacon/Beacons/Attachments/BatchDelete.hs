@@ -241,8 +241,8 @@ babdCallback
 
 instance GoogleAuth BeaconsAttachmentsBatchDelete'
          where
-        authKey = babdKey . _Just
-        authToken = babdOAuthToken . _Just
+        _AuthKey = babdKey . _Just
+        _AuthToken = babdOAuthToken . _Just
 
 instance GoogleRequest BeaconsAttachmentsBatchDelete'
          where

@@ -143,8 +143,8 @@ euFields :: Lens' EnterprisesUnenroll' (Maybe Text)
 euFields = lens _euFields (\ s a -> s{_euFields = a})
 
 instance GoogleAuth EnterprisesUnenroll' where
-        authKey = euKey . _Just
-        authToken = euOAuthToken . _Just
+        _AuthKey = euKey . _Just
+        _AuthToken = euOAuthToken . _Just
 
 instance GoogleRequest EnterprisesUnenroll' where
         type Rs EnterprisesUnenroll' = ()

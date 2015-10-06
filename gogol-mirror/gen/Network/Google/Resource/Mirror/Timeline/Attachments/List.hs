@@ -146,8 +146,8 @@ talFields
   = lens _talFields (\ s a -> s{_talFields = a})
 
 instance GoogleAuth TimelineAttachmentsList' where
-        authKey = talKey . _Just
-        authToken = talOAuthToken . _Just
+        _AuthKey = talKey . _Just
+        _AuthToken = talOAuthToken . _Just
 
 instance GoogleRequest TimelineAttachmentsList' where
         type Rs TimelineAttachmentsList' =

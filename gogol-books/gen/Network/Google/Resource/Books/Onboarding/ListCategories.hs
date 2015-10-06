@@ -145,8 +145,8 @@ olcFields
   = lens _olcFields (\ s a -> s{_olcFields = a})
 
 instance GoogleAuth OnboardingListCategories' where
-        authKey = olcKey . _Just
-        authToken = olcOAuthToken . _Just
+        _AuthKey = olcKey . _Just
+        _AuthToken = olcOAuthToken . _Just
 
 instance GoogleRequest OnboardingListCategories'
          where

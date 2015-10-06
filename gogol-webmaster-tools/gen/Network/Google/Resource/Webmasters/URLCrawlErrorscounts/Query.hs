@@ -191,8 +191,8 @@ uceqFields
   = lens _uceqFields (\ s a -> s{_uceqFields = a})
 
 instance GoogleAuth URLCrawlErrorscountsQuery' where
-        authKey = uceqKey . _Just
-        authToken = uceqOAuthToken . _Just
+        _AuthKey = uceqKey . _Just
+        _AuthToken = uceqOAuthToken . _Just
 
 instance GoogleRequest URLCrawlErrorscountsQuery'
          where

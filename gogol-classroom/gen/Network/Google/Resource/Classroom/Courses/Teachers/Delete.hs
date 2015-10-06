@@ -242,8 +242,8 @@ ctdCallback
   = lens _ctdCallback (\ s a -> s{_ctdCallback = a})
 
 instance GoogleAuth CoursesTeachersDelete' where
-        authKey = ctdKey . _Just
-        authToken = ctdOAuthToken . _Just
+        _AuthKey = ctdKey . _Just
+        _AuthToken = ctdOAuthToken . _Just
 
 instance GoogleRequest CoursesTeachersDelete' where
         type Rs CoursesTeachersDelete' = Empty

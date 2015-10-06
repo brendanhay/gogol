@@ -154,8 +154,8 @@ cFields :: Lens' CommentsInsert' (Maybe Text)
 cFields = lens _cFields (\ s a -> s{_cFields = a})
 
 instance GoogleAuth CommentsInsert' where
-        authKey = cKey . _Just
-        authToken = cOAuthToken . _Just
+        _AuthKey = cKey . _Just
+        _AuthToken = cOAuthToken . _Just
 
 instance GoogleRequest CommentsInsert' where
         type Rs CommentsInsert' = Comment

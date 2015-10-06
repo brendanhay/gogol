@@ -144,8 +144,8 @@ prFields :: Lens' PushtokensRemove' (Maybe Text)
 prFields = lens _prFields (\ s a -> s{_prFields = a})
 
 instance GoogleAuth PushtokensRemove' where
-        authKey = prKey . _Just
-        authToken = prOAuthToken . _Just
+        _AuthKey = prKey . _Just
+        _AuthToken = prOAuthToken . _Just
 
 instance GoogleRequest PushtokensRemove' where
         type Rs PushtokensRemove' = ()

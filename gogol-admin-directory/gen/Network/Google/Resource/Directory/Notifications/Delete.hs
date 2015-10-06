@@ -156,8 +156,8 @@ ndFields :: Lens' NotificationsDelete' (Maybe Text)
 ndFields = lens _ndFields (\ s a -> s{_ndFields = a})
 
 instance GoogleAuth NotificationsDelete' where
-        authKey = ndKey . _Just
-        authToken = ndOAuthToken . _Just
+        _AuthKey = ndKey . _Just
+        _AuthToken = ndOAuthToken . _Just
 
 instance GoogleRequest NotificationsDelete' where
         type Rs NotificationsDelete' = ()

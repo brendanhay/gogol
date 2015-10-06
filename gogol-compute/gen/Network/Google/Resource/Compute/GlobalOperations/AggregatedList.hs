@@ -195,8 +195,8 @@ goalFields
 
 instance GoogleAuth GlobalOperationsAggregatedList'
          where
-        authKey = goalKey . _Just
-        authToken = goalOAuthToken . _Just
+        _AuthKey = goalKey . _Just
+        _AuthToken = goalOAuthToken . _Just
 
 instance GoogleRequest
          GlobalOperationsAggregatedList' where

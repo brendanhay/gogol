@@ -169,8 +169,8 @@ eldFields
   = lens _eldFields (\ s a -> s{_eldFields = a})
 
 instance GoogleAuth EventsListDefinitions' where
-        authKey = eldKey . _Just
-        authToken = eldOAuthToken . _Just
+        _AuthKey = eldKey . _Just
+        _AuthToken = eldOAuthToken . _Just
 
 instance GoogleRequest EventsListDefinitions' where
         type Rs EventsListDefinitions' =

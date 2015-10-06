@@ -241,8 +241,8 @@ rclFields
 
 instance GoogleAuth ReadgroupsetsCoveragebucketsList'
          where
-        authKey = rclKey . _Just
-        authToken = rclOAuthToken . _Just
+        _AuthKey = rclKey . _Just
+        _AuthToken = rclOAuthToken . _Just
 
 instance GoogleRequest
          ReadgroupsetsCoveragebucketsList' where

@@ -161,8 +161,8 @@ phFields :: Lens' PlayersHide' (Maybe Text)
 phFields = lens _phFields (\ s a -> s{_phFields = a})
 
 instance GoogleAuth PlayersHide' where
-        authKey = phKey . _Just
-        authToken = phOAuthToken . _Just
+        _AuthKey = phKey . _Just
+        _AuthToken = phOAuthToken . _Just
 
 instance GoogleRequest PlayersHide' where
         type Rs PlayersHide' = ()

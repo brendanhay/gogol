@@ -168,8 +168,8 @@ ilFields :: Lens' InstancesList' (Maybe Text)
 ilFields = lens _ilFields (\ s a -> s{_ilFields = a})
 
 instance GoogleAuth InstancesList' where
-        authKey = ilKey . _Just
-        authToken = ilOAuthToken . _Just
+        _AuthKey = ilKey . _Just
+        _AuthToken = ilOAuthToken . _Just
 
 instance GoogleRequest InstancesList' where
         type Rs InstancesList' = InstancesListResponse

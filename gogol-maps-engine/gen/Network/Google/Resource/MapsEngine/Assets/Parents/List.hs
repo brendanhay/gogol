@@ -171,8 +171,8 @@ assFields
   = lens _assFields (\ s a -> s{_assFields = a})
 
 instance GoogleAuth AssetsParentsList' where
-        authKey = assKey . _Just
-        authToken = assOAuthToken . _Just
+        _AuthKey = assKey . _Just
+        _AuthToken = assOAuthToken . _Just
 
 instance GoogleRequest AssetsParentsList' where
         type Rs AssetsParentsList' = ParentsListResponse

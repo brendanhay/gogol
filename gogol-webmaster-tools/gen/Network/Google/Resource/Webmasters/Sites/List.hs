@@ -130,8 +130,8 @@ slFields :: Lens' SitesList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
 instance GoogleAuth SitesList' where
-        authKey = slKey . _Just
-        authToken = slOAuthToken . _Just
+        _AuthKey = slKey . _Just
+        _AuthToken = slOAuthToken . _Just
 
 instance GoogleRequest SitesList' where
         type Rs SitesList' = SitesListResponse

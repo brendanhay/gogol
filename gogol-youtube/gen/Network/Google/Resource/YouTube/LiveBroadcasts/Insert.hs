@@ -208,8 +208,8 @@ lbiFields
   = lens _lbiFields (\ s a -> s{_lbiFields = a})
 
 instance GoogleAuth LiveBroadcastsInsert' where
-        authKey = lbiKey . _Just
-        authToken = lbiOAuthToken . _Just
+        _AuthKey = lbiKey . _Just
+        _AuthToken = lbiOAuthToken . _Just
 
 instance GoogleRequest LiveBroadcastsInsert' where
         type Rs LiveBroadcastsInsert' = LiveBroadcast

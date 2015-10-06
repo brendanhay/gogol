@@ -174,8 +174,8 @@ acmcFields
 
 instance GoogleAuth AccountsContainersMacrosCreate'
          where
-        authKey = acmcKey . _Just
-        authToken = acmcOAuthToken . _Just
+        _AuthKey = acmcKey . _Just
+        _AuthToken = acmcOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersMacrosCreate' where

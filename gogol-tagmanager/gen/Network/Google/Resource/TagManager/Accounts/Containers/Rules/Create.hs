@@ -174,8 +174,8 @@ acrcFields
 
 instance GoogleAuth AccountsContainersRulesCreate'
          where
-        authKey = acrcKey . _Just
-        authToken = acrcOAuthToken . _Just
+        _AuthKey = acrcKey . _Just
+        _AuthToken = acrcOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersRulesCreate'
          where

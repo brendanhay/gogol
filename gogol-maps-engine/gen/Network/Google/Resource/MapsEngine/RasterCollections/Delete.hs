@@ -146,8 +146,8 @@ rcdFields
   = lens _rcdFields (\ s a -> s{_rcdFields = a})
 
 instance GoogleAuth RasterCollectionsDelete' where
-        authKey = rcdKey . _Just
-        authToken = rcdOAuthToken . _Just
+        _AuthKey = rcdKey . _Just
+        _AuthToken = rcdOAuthToken . _Just
 
 instance GoogleRequest RasterCollectionsDelete' where
         type Rs RasterCollectionsDelete' = ()

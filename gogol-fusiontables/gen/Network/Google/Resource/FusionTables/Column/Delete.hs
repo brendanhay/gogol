@@ -154,8 +154,8 @@ cdFields :: Lens' ColumnDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
 instance GoogleAuth ColumnDelete' where
-        authKey = cdKey . _Just
-        authToken = cdOAuthToken . _Just
+        _AuthKey = cdKey . _Just
+        _AuthToken = cdOAuthToken . _Just
 
 instance GoogleRequest ColumnDelete' where
         type Rs ColumnDelete' = ()

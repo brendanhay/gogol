@@ -171,8 +171,8 @@ tfbiFields
   = lens _tfbiFields (\ s a -> s{_tfbiFields = a})
 
 instance GoogleAuth TablesFeaturesBatchInsert' where
-        authKey = tfbiKey . _Just
-        authToken = tfbiOAuthToken . _Just
+        _AuthKey = tfbiKey . _Just
+        _AuthToken = tfbiOAuthToken . _Just
 
 instance GoogleRequest TablesFeaturesBatchInsert'
          where

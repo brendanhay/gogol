@@ -327,8 +327,8 @@ falFields
   = lens _falFields (\ s a -> s{_falFields = a})
 
 instance GoogleAuth FloodlightActivitiesList' where
-        authKey = falKey . _Just
-        authToken = falOAuthToken . _Just
+        _AuthKey = falKey . _Just
+        _AuthToken = falOAuthToken . _Just
 
 instance GoogleRequest FloodlightActivitiesList'
          where

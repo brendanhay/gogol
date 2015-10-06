@@ -142,8 +142,8 @@ nlFields :: Lens' NegotiationsList' (Maybe Text)
 nlFields = lens _nlFields (\ s a -> s{_nlFields = a})
 
 instance GoogleAuth NegotiationsList' where
-        authKey = nlKey . _Just
-        authToken = nlOAuthToken . _Just
+        _AuthKey = nlKey . _Just
+        _AuthToken = nlOAuthToken . _Just
 
 instance GoogleRequest NegotiationsList' where
         type Rs NegotiationsList' = GetNegotiationsResponse

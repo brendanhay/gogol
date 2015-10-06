@@ -182,8 +182,8 @@ mlaiFields
   = lens _mlaiFields (\ s a -> s{_mlaiFields = a})
 
 instance GoogleAuth MyLibraryAnnotationsInsert' where
-        authKey = mlaiKey . _Just
-        authToken = mlaiOAuthToken . _Just
+        _AuthKey = mlaiKey . _Just
+        _AuthToken = mlaiOAuthToken . _Just
 
 instance GoogleRequest MyLibraryAnnotationsInsert'
          where

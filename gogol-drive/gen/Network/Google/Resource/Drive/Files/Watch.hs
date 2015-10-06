@@ -219,8 +219,8 @@ fwFields :: Lens' FilesWatch' (Maybe Text)
 fwFields = lens _fwFields (\ s a -> s{_fwFields = a})
 
 instance GoogleAuth FilesWatch' where
-        authKey = fwKey . _Just
-        authToken = fwOAuthToken . _Just
+        _AuthKey = fwKey . _Just
+        _AuthToken = fwOAuthToken . _Just
 
 instance GoogleRequest FilesWatch' where
         type Rs FilesWatch' = Channel

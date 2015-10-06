@@ -141,8 +141,8 @@ cdFields :: Lens' CallsetsDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
 instance GoogleAuth CallsetsDelete' where
-        authKey = cdKey . _Just
-        authToken = cdOAuthToken . _Just
+        _AuthKey = cdKey . _Just
+        _AuthToken = cdOAuthToken . _Just
 
 instance GoogleRequest CallsetsDelete' where
         type Rs CallsetsDelete' = ()

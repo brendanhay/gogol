@@ -159,8 +159,8 @@ apdgFields
   = lens _apdgFields (\ s a -> s{_apdgFields = a})
 
 instance GoogleAuth AccountsPreferredDealsGet' where
-        authKey = apdgKey . _Just
-        authToken = apdgOAuthToken . _Just
+        _AuthKey = apdgKey . _Just
+        _AuthToken = apdgOAuthToken . _Just
 
 instance GoogleRequest AccountsPreferredDealsGet'
          where

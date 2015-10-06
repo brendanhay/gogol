@@ -158,8 +158,8 @@ perFields
   = lens _perFields (\ s a -> s{_perFields = a})
 
 instance GoogleAuth PermissionsDelete' where
-        authKey = perKey . _Just
-        authToken = perOAuthToken . _Just
+        _AuthKey = perKey . _Just
+        _AuthToken = perOAuthToken . _Just
 
 instance GoogleRequest PermissionsDelete' where
         type Rs PermissionsDelete' = ()

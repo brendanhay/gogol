@@ -147,8 +147,8 @@ rpcauFields
   = lens _rpcauFields (\ s a -> s{_rpcauFields = a})
 
 instance GoogleAuth RelyingPartyCreateAuthURI' where
-        authKey = rpcauKey . _Just
-        authToken = rpcauOAuthToken . _Just
+        _AuthKey = rpcauKey . _Just
+        _AuthToken = rpcauOAuthToken . _Just
 
 instance GoogleRequest RelyingPartyCreateAuthURI'
          where

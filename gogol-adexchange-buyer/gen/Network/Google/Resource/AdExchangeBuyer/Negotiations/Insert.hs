@@ -142,8 +142,8 @@ niFields :: Lens' NegotiationsInsert' (Maybe Text)
 niFields = lens _niFields (\ s a -> s{_niFields = a})
 
 instance GoogleAuth NegotiationsInsert' where
-        authKey = niKey . _Just
-        authToken = niOAuthToken . _Just
+        _AuthKey = niKey . _Just
+        _AuthToken = niOAuthToken . _Just
 
 instance GoogleRequest NegotiationsInsert' where
         type Rs NegotiationsInsert' = NegotiationDTO

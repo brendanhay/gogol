@@ -175,8 +175,8 @@ acvdFields
 
 instance GoogleAuth
          AccountsContainersVariablesDelete' where
-        authKey = acvdKey . _Just
-        authToken = acvdOAuthToken . _Just
+        _AuthKey = acvdKey . _Just
+        _AuthToken = acvdOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVariablesDelete' where

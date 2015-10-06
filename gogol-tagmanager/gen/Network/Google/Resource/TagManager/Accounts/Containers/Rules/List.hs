@@ -163,8 +163,8 @@ acrlFields
 
 instance GoogleAuth AccountsContainersRulesList'
          where
-        authKey = acrlKey . _Just
-        authToken = acrlOAuthToken . _Just
+        _AuthKey = acrlKey . _Just
+        _AuthToken = acrlOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersRulesList'
          where

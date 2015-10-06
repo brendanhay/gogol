@@ -147,8 +147,8 @@ rprpFields
   = lens _rprpFields (\ s a -> s{_rprpFields = a})
 
 instance GoogleAuth RelyingPartyResetPassword' where
-        authKey = rprpKey . _Just
-        authToken = rprpOAuthToken . _Just
+        _AuthKey = rprpKey . _Just
+        _AuthToken = rprpOAuthToken . _Just
 
 instance GoogleRequest RelyingPartyResetPassword'
          where

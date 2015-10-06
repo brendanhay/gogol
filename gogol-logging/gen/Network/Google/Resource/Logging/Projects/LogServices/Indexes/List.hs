@@ -321,8 +321,8 @@ plsilCallback
 
 instance GoogleAuth ProjectsLogServicesIndexesList'
          where
-        authKey = plsilKey . _Just
-        authToken = plsilOAuthToken . _Just
+        _AuthKey = plsilKey . _Just
+        _AuthToken = plsilOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsLogServicesIndexesList' where

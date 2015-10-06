@@ -166,8 +166,8 @@ bdFields :: Lens' BucketsDelete' (Maybe Text)
 bdFields = lens _bdFields (\ s a -> s{_bdFields = a})
 
 instance GoogleAuth BucketsDelete' where
-        authKey = bdKey . _Just
-        authToken = bdOAuthToken . _Just
+        _AuthKey = bdKey . _Just
+        _AuthToken = bdOAuthToken . _Just
 
 instance GoogleRequest BucketsDelete' where
         type Rs BucketsDelete' = ()

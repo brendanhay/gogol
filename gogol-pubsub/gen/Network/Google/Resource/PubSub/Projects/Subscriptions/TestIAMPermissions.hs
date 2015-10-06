@@ -231,8 +231,8 @@ pstipCallback
 
 instance GoogleAuth
          ProjectsSubscriptionsTestIAMPermissions' where
-        authKey = pstipKey . _Just
-        authToken = pstipOAuthToken . _Just
+        _AuthKey = pstipKey . _Just
+        _AuthToken = pstipOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsSubscriptionsTestIAMPermissions' where

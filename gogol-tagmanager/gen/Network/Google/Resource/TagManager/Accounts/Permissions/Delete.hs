@@ -160,8 +160,8 @@ apdFields
   = lens _apdFields (\ s a -> s{_apdFields = a})
 
 instance GoogleAuth AccountsPermissionsDelete' where
-        authKey = apdKey . _Just
-        authToken = apdOAuthToken . _Just
+        _AuthKey = apdKey . _Just
+        _AuthToken = apdOAuthToken . _Just
 
 instance GoogleRequest AccountsPermissionsDelete'
          where

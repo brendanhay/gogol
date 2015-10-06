@@ -242,8 +242,8 @@ googleRequestDecl g n assoc alt p api url fields m pat prec =
 
 authDecl :: Global -> Prefix -> [Local] -> Decl
 authDecl g p fs = InstDecl noLoc Nothing [] [] (unqual "GoogleAuth") [tycon g]
-   [ method "authKey" "key"
-   , method "authToken" "oauth_token"
+   [ method "_AuthKey" "key"
+   , method "_AuthToken" "oauth_token"
    ]
   where
     method l f

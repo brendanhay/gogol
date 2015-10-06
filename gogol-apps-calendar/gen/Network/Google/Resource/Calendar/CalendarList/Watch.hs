@@ -236,8 +236,8 @@ clwFields
   = lens _clwFields (\ s a -> s{_clwFields = a})
 
 instance GoogleAuth CalendarListWatch' where
-        authKey = clwKey . _Just
-        authToken = clwOAuthToken . _Just
+        _AuthKey = clwKey . _Just
+        _AuthToken = clwOAuthToken . _Just
 
 instance GoogleRequest CalendarListWatch' where
         type Rs CalendarListWatch' = Channel

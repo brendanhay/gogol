@@ -168,8 +168,8 @@ zodFields
   = lens _zodFields (\ s a -> s{_zodFields = a})
 
 instance GoogleAuth ZoneOperationsDelete' where
-        authKey = zodKey . _Just
-        authToken = zodOAuthToken . _Just
+        _AuthKey = zodKey . _Just
+        _AuthToken = zodOAuthToken . _Just
 
 instance GoogleRequest ZoneOperationsDelete' where
         type Rs ZoneOperationsDelete' = ()

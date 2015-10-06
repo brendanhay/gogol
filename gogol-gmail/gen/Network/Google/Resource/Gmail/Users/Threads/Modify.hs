@@ -172,8 +172,8 @@ utmFields
   = lens _utmFields (\ s a -> s{_utmFields = a})
 
 instance GoogleAuth UsersThreadsModify' where
-        authKey = utmKey . _Just
-        authToken = utmOAuthToken . _Just
+        _AuthKey = utmKey . _Just
+        _AuthToken = utmOAuthToken . _Just
 
 instance GoogleRequest UsersThreadsModify' where
         type Rs UsersThreadsModify' = Thread

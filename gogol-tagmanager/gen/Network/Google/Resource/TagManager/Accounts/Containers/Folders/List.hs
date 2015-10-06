@@ -163,8 +163,8 @@ acflFields
 
 instance GoogleAuth AccountsContainersFoldersList'
          where
-        authKey = acflKey . _Just
-        authToken = acflOAuthToken . _Just
+        _AuthKey = acflKey . _Just
+        _AuthToken = acflOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersFoldersList'
          where

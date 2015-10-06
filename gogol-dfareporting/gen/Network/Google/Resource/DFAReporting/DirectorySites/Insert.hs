@@ -158,8 +158,8 @@ dsiFields
   = lens _dsiFields (\ s a -> s{_dsiFields = a})
 
 instance GoogleAuth DirectorySitesInsert' where
-        authKey = dsiKey . _Just
-        authToken = dsiOAuthToken . _Just
+        _AuthKey = dsiKey . _Just
+        _AuthToken = dsiOAuthToken . _Just
 
 instance GoogleRequest DirectorySitesInsert' where
         type Rs DirectorySitesInsert' = DirectorySite

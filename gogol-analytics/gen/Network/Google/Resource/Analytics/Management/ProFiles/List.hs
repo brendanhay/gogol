@@ -192,8 +192,8 @@ mpflFields
   = lens _mpflFields (\ s a -> s{_mpflFields = a})
 
 instance GoogleAuth ManagementProFilesList' where
-        authKey = mpflKey . _Just
-        authToken = mpflOAuthToken . _Just
+        _AuthKey = mpflKey . _Just
+        _AuthToken = mpflOAuthToken . _Just
 
 instance GoogleRequest ManagementProFilesList' where
         type Rs ManagementProFilesList' = ProFiles

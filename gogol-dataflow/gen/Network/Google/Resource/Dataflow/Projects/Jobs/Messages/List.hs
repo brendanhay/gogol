@@ -296,8 +296,8 @@ pjmlCallback
   = lens _pjmlCallback (\ s a -> s{_pjmlCallback = a})
 
 instance GoogleAuth ProjectsJobsMessagesList' where
-        authKey = pjmlKey . _Just
-        authToken = pjmlOAuthToken . _Just
+        _AuthKey = pjmlKey . _Just
+        _AuthToken = pjmlOAuthToken . _Just
 
 instance GoogleRequest ProjectsJobsMessagesList'
          where

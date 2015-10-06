@@ -187,8 +187,8 @@ eidiFields
   = lens _eidiFields (\ s a -> s{_eidiFields = a})
 
 instance GoogleAuth EditsImagesDeleteall' where
-        authKey = eidiKey . _Just
-        authToken = eidiOAuthToken . _Just
+        _AuthKey = eidiKey . _Just
+        _AuthToken = eidiOAuthToken . _Just
 
 instance GoogleRequest EditsImagesDeleteall' where
         type Rs EditsImagesDeleteall' =

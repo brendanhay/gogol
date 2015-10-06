@@ -182,8 +182,8 @@ udspFields
   = lens _udspFields (\ s a -> s{_udspFields = a})
 
 instance GoogleAuth UsersDataSourcesPatch' where
-        authKey = udspKey . _Just
-        authToken = udspOAuthToken . _Just
+        _AuthKey = udspKey . _Just
+        _AuthToken = udspOAuthToken . _Just
 
 instance GoogleRequest UsersDataSourcesPatch' where
         type Rs UsersDataSourcesPatch' = DataSource

@@ -180,8 +180,8 @@ tlFields :: Lens' TablesList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
 instance GoogleAuth TablesList' where
-        authKey = tlKey . _Just
-        authToken = tlOAuthToken . _Just
+        _AuthKey = tlKey . _Just
+        _AuthToken = tlOAuthToken . _Just
 
 instance GoogleRequest TablesList' where
         type Rs TablesList' = TableList

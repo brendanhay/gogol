@@ -199,8 +199,8 @@ mepFields
   = lens _mepFields (\ s a -> s{_mepFields = a})
 
 instance GoogleAuth ManagementExperimentsPatch' where
-        authKey = mepKey . _Just
-        authToken = mepOAuthToken . _Just
+        _AuthKey = mepKey . _Just
+        _AuthToken = mepOAuthToken . _Just
 
 instance GoogleRequest ManagementExperimentsPatch'
          where

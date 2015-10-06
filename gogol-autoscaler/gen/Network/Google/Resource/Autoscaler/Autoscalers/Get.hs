@@ -166,8 +166,8 @@ agFields :: Lens' AutoscalersGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 instance GoogleAuth AutoscalersGet' where
-        authKey = agKey . _Just
-        authToken = agOAuthToken . _Just
+        _AuthKey = agKey . _Just
+        _AuthToken = agOAuthToken . _Just
 
 instance GoogleRequest AutoscalersGet' where
         type Rs AutoscalersGet' = Autoscaler

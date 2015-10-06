@@ -233,8 +233,8 @@ aelgCallback
 
 instance GoogleAuth AccountsExperienceLocalesGet'
          where
-        authKey = aelgKey . _Just
-        authToken = aelgOAuthToken . _Just
+        _AuthKey = aelgKey . _Just
+        _AuthToken = aelgOAuthToken . _Just
 
 instance GoogleRequest AccountsExperienceLocalesGet'
          where

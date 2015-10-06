@@ -161,8 +161,8 @@ mwpgFields
   = lens _mwpgFields (\ s a -> s{_mwpgFields = a})
 
 instance GoogleAuth ManagementWebPropertiesGet' where
-        authKey = mwpgKey . _Just
-        authToken = mwpgOAuthToken . _Just
+        _AuthKey = mwpgKey . _Just
+        _AuthToken = mwpgOAuthToken . _Just
 
 instance GoogleRequest ManagementWebPropertiesGet'
          where

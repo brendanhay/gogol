@@ -199,8 +199,8 @@ olcvFields
 
 instance GoogleAuth OnboardingListCategoryVolumes'
          where
-        authKey = olcvKey . _Just
-        authToken = olcvOAuthToken . _Just
+        _AuthKey = olcvKey . _Just
+        _AuthToken = olcvOAuthToken . _Just
 
 instance GoogleRequest OnboardingListCategoryVolumes'
          where

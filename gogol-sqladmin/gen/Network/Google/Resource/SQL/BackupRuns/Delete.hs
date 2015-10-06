@@ -170,8 +170,8 @@ brdInstance
   = lens _brdInstance (\ s a -> s{_brdInstance = a})
 
 instance GoogleAuth BackupRunsDelete' where
-        authKey = brdKey . _Just
-        authToken = brdOAuthToken . _Just
+        _AuthKey = brdKey . _Just
+        _AuthToken = brdOAuthToken . _Just
 
 instance GoogleRequest BackupRunsDelete' where
         type Rs BackupRunsDelete' = Operation

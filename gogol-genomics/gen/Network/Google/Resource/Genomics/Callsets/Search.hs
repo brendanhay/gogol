@@ -145,8 +145,8 @@ csFields :: Lens' CallsetsSearch' (Maybe Text)
 csFields = lens _csFields (\ s a -> s{_csFields = a})
 
 instance GoogleAuth CallsetsSearch' where
-        authKey = csKey . _Just
-        authToken = csOAuthToken . _Just
+        _AuthKey = csKey . _Just
+        _AuthToken = csOAuthToken . _Just
 
 instance GoogleRequest CallsetsSearch' where
         type Rs CallsetsSearch' = SearchCallSetsResponse

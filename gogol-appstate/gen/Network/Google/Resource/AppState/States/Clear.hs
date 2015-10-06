@@ -159,8 +159,8 @@ scFields :: Lens' StatesClear' (Maybe Text)
 scFields = lens _scFields (\ s a -> s{_scFields = a})
 
 instance GoogleAuth StatesClear' where
-        authKey = scKey . _Just
-        authToken = scOAuthToken . _Just
+        _AuthKey = scKey . _Just
+        _AuthToken = scOAuthToken . _Just
 
 instance GoogleRequest StatesClear' where
         type Rs StatesClear' = WriteResult

@@ -141,8 +141,8 @@ giFields :: Lens' GroupsInsert' (Maybe Text)
 giFields = lens _giFields (\ s a -> s{_giFields = a})
 
 instance GoogleAuth GroupsInsert' where
-        authKey = giKey . _Just
-        authToken = giOAuthToken . _Just
+        _AuthKey = giKey . _Just
+        _AuthToken = giOAuthToken . _Just
 
 instance GoogleRequest GroupsInsert' where
         type Rs GroupsInsert' = Group

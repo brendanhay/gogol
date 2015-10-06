@@ -142,8 +142,8 @@ cFields :: Lens' CalendarsGet' (Maybe Text)
 cFields = lens _cFields (\ s a -> s{_cFields = a})
 
 instance GoogleAuth CalendarsGet' where
-        authKey = cKey . _Just
-        authToken = cOAuthToken . _Just
+        _AuthKey = cKey . _Just
+        _AuthToken = cOAuthToken . _Just
 
 instance GoogleRequest CalendarsGet' where
         type Rs CalendarsGet' = Calendar

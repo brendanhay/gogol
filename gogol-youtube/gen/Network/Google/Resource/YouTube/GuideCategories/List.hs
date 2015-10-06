@@ -185,8 +185,8 @@ gclFields
   = lens _gclFields (\ s a -> s{_gclFields = a})
 
 instance GoogleAuth GuideCategoriesList' where
-        authKey = gclKey . _Just
-        authToken = gclOAuthToken . _Just
+        _AuthKey = gclKey . _Just
+        _AuthToken = gclOAuthToken . _Just
 
 instance GoogleRequest GuideCategoriesList' where
         type Rs GuideCategoriesList' =

@@ -214,8 +214,8 @@ baCallback
   = lens _baCallback (\ s a -> s{_baCallback = a})
 
 instance GoogleAuth BeaconsActivate' where
-        authKey = baKey . _Just
-        authToken = baOAuthToken . _Just
+        _AuthKey = baKey . _Just
+        _AuthToken = baOAuthToken . _Just
 
 instance GoogleRequest BeaconsActivate' where
         type Rs BeaconsActivate' = Empty

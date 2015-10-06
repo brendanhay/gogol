@@ -158,8 +158,8 @@ ccuFields
   = lens _ccuFields (\ s a -> s{_ccuFields = a})
 
 instance GoogleAuth ContentCategoriesUpdate' where
-        authKey = ccuKey . _Just
-        authToken = ccuOAuthToken . _Just
+        _AuthKey = ccuKey . _Just
+        _AuthToken = ccuOAuthToken . _Just
 
 instance GoogleRequest ContentCategoriesUpdate' where
         type Rs ContentCategoriesUpdate' = ContentCategory

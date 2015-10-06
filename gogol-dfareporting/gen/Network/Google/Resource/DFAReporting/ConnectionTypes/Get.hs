@@ -157,8 +157,8 @@ ctgFields
   = lens _ctgFields (\ s a -> s{_ctgFields = a})
 
 instance GoogleAuth ConnectionTypesGet' where
-        authKey = ctgKey . _Just
-        authToken = ctgOAuthToken . _Just
+        _AuthKey = ctgKey . _Just
+        _AuthToken = ctgOAuthToken . _Just
 
 instance GoogleRequest ConnectionTypesGet' where
         type Rs ConnectionTypesGet' = ConnectionType

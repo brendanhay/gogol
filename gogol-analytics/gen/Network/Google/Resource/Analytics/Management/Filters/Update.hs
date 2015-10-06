@@ -170,8 +170,8 @@ mfuFields
   = lens _mfuFields (\ s a -> s{_mfuFields = a})
 
 instance GoogleAuth ManagementFiltersUpdate' where
-        authKey = mfuKey . _Just
-        authToken = mfuOAuthToken . _Just
+        _AuthKey = mfuKey . _Just
+        _AuthToken = mfuOAuthToken . _Just
 
 instance GoogleRequest ManagementFiltersUpdate' where
         type Rs ManagementFiltersUpdate' = Filter

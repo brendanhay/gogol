@@ -173,8 +173,8 @@ aauuFields
   = lens _aauuFields (\ s a -> s{_aauuFields = a})
 
 instance GoogleAuth AccountsAdUnitsUpdate' where
-        authKey = aauuKey . _Just
-        authToken = aauuOAuthToken . _Just
+        _AuthKey = aauuKey . _Just
+        _AuthToken = aauuOAuthToken . _Just
 
 instance GoogleRequest AccountsAdUnitsUpdate' where
         type Rs AccountsAdUnitsUpdate' = AdUnit

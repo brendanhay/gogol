@@ -219,8 +219,8 @@ cdCallback
   = lens _cdCallback (\ s a -> s{_cdCallback = a})
 
 instance GoogleAuth CoursesDelete' where
-        authKey = cdKey . _Just
-        authToken = cdOAuthToken . _Just
+        _AuthKey = cdKey . _Just
+        _AuthToken = cdOAuthToken . _Just
 
 instance GoogleRequest CoursesDelete' where
         type Rs CoursesDelete' = Empty

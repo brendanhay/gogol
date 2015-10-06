@@ -154,8 +154,8 @@ cgFields :: Lens' ColumnGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 instance GoogleAuth ColumnGet' where
-        authKey = cgKey . _Just
-        authToken = cgOAuthToken . _Just
+        _AuthKey = cgKey . _Just
+        _AuthToken = cgOAuthToken . _Just
 
 instance GoogleRequest ColumnGet' where
         type Rs ColumnGet' = Column

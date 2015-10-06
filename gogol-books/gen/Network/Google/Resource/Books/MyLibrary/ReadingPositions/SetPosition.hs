@@ -224,8 +224,8 @@ mlrpspPosition
 
 instance GoogleAuth
          MyLibraryReadingPositionsSetPosition' where
-        authKey = mlrpspKey . _Just
-        authToken = mlrpspOAuthToken . _Just
+        _AuthKey = mlrpspKey . _Just
+        _AuthToken = mlrpspOAuthToken . _Just
 
 instance GoogleRequest
          MyLibraryReadingPositionsSetPosition' where

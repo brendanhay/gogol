@@ -155,8 +155,8 @@ cpFields :: Lens' CalendarsPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 instance GoogleAuth CalendarsPatch' where
-        authKey = cpKey . _Just
-        authToken = cpOAuthToken . _Just
+        _AuthKey = cpKey . _Just
+        _AuthToken = cpOAuthToken . _Just
 
 instance GoogleRequest CalendarsPatch' where
         type Rs CalendarsPatch' = Calendar

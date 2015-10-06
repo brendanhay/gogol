@@ -388,8 +388,8 @@ ocDestinationObject
       (\ s a -> s{_ocDestinationObject = a})
 
 instance GoogleAuth ObjectsCopy' where
-        authKey = ocKey . _Just
-        authToken = ocOAuthToken . _Just
+        _AuthKey = ocKey . _Just
+        _AuthToken = ocOAuthToken . _Just
 
 instance GoogleRequest ObjectsCopy' where
         type Rs ObjectsCopy' = Object

@@ -236,8 +236,8 @@ lbtFields
   = lens _lbtFields (\ s a -> s{_lbtFields = a})
 
 instance GoogleAuth LiveBroadcastsTransition' where
-        authKey = lbtKey . _Just
-        authToken = lbtOAuthToken . _Just
+        _AuthKey = lbtKey . _Just
+        _AuthToken = lbtOAuthToken . _Just
 
 instance GoogleRequest LiveBroadcastsTransition'
          where

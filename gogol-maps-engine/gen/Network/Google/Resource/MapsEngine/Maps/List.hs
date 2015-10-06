@@ -301,8 +301,8 @@ mllCreatedBefore
       . mapping _DateTime
 
 instance GoogleAuth MapsList' where
-        authKey = mllKey . _Just
-        authToken = mllOAuthToken . _Just
+        _AuthKey = mllKey . _Just
+        _AuthToken = mllOAuthToken . _Just
 
 instance GoogleRequest MapsList' where
         type Rs MapsList' = MapsListResponse

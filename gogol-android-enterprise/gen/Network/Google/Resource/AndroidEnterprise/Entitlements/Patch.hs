@@ -197,8 +197,8 @@ epFields :: Lens' EntitlementsPatch' (Maybe Text)
 epFields = lens _epFields (\ s a -> s{_epFields = a})
 
 instance GoogleAuth EntitlementsPatch' where
-        authKey = epKey . _Just
-        authToken = epOAuthToken . _Just
+        _AuthKey = epKey . _Just
+        _AuthToken = epOAuthToken . _Just
 
 instance GoogleRequest EntitlementsPatch' where
         type Rs EntitlementsPatch' = Entitlement

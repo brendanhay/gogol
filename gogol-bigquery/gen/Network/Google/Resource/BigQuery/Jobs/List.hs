@@ -209,8 +209,8 @@ jlFields :: Lens' JobsList' (Maybe Text)
 jlFields = lens _jlFields (\ s a -> s{_jlFields = a})
 
 instance GoogleAuth JobsList' where
-        authKey = jlKey . _Just
-        authToken = jlOAuthToken . _Just
+        _AuthKey = jlKey . _Just
+        _AuthToken = jlOAuthToken . _Just
 
 instance GoogleRequest JobsList' where
         type Rs JobsList' = JobList

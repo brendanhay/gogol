@@ -290,8 +290,8 @@ rcrlCreatedBefore
 
 instance GoogleAuth RasterCollectionsRastersList'
          where
-        authKey = rcrlKey . _Just
-        authToken = rcrlOAuthToken . _Just
+        _AuthKey = rcrlKey . _Just
+        _AuthToken = rcrlOAuthToken . _Just
 
 instance GoogleRequest RasterCollectionsRastersList'
          where

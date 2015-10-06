@@ -158,8 +158,8 @@ aguFields
   = lens _aguFields (\ s a -> s{_aguFields = a})
 
 instance GoogleAuth AdvertiserGroupsUpdate' where
-        authKey = aguKey . _Just
-        authToken = aguOAuthToken . _Just
+        _AuthKey = aguKey . _Just
+        _AuthToken = aguOAuthToken . _Just
 
 instance GoogleRequest AdvertiserGroupsUpdate' where
         type Rs AdvertiserGroupsUpdate' = AdvertiserGroup

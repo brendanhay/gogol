@@ -160,8 +160,8 @@ ougFields
   = lens _ougFields (\ s a -> s{_ougFields = a})
 
 instance GoogleAuth OrgUnitsGet' where
-        authKey = ougKey . _Just
-        authToken = ougOAuthToken . _Just
+        _AuthKey = ougKey . _Just
+        _AuthToken = ougOAuthToken . _Just
 
 instance GoogleRequest OrgUnitsGet' where
         type Rs OrgUnitsGet' = OrgUnit

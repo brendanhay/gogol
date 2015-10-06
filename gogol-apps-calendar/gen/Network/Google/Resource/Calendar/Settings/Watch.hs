@@ -185,8 +185,8 @@ swFields :: Lens' SettingsWatch' (Maybe Text)
 swFields = lens _swFields (\ s a -> s{_swFields = a})
 
 instance GoogleAuth SettingsWatch' where
-        authKey = swKey . _Just
-        authToken = swOAuthToken . _Just
+        _AuthKey = swKey . _Just
+        _AuthToken = swOAuthToken . _Just
 
 instance GoogleRequest SettingsWatch' where
         type Rs SettingsWatch' = Channel

@@ -255,8 +255,8 @@ amvgCallback
   = lens _amvgCallback (\ s a -> s{_amvgCallback = a})
 
 instance GoogleAuth AppsModulesVersionsGet' where
-        authKey = amvgKey . _Just
-        authToken = amvgOAuthToken . _Just
+        _AuthKey = amvgKey . _Just
+        _AuthToken = amvgOAuthToken . _Just
 
 instance GoogleRequest AppsModulesVersionsGet' where
         type Rs AppsModulesVersionsGet' = Version

@@ -154,8 +154,8 @@ lgFields :: Lens' LayersGet' (Maybe Text)
 lgFields = lens _lgFields (\ s a -> s{_lgFields = a})
 
 instance GoogleAuth LayersGet' where
-        authKey = lgKey . _Just
-        authToken = lgOAuthToken . _Just
+        _AuthKey = lgKey . _Just
+        _AuthToken = lgOAuthToken . _Just
 
 instance GoogleRequest LayersGet' where
         type Rs LayersGet' = Layer

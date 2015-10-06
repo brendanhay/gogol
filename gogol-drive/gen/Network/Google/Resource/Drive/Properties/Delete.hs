@@ -165,8 +165,8 @@ pdFields :: Lens' PropertiesDelete' (Maybe Text)
 pdFields = lens _pdFields (\ s a -> s{_pdFields = a})
 
 instance GoogleAuth PropertiesDelete' where
-        authKey = pdKey . _Just
-        authToken = pdOAuthToken . _Just
+        _AuthKey = pdKey . _Just
+        _AuthToken = pdOAuthToken . _Just
 
 instance GoogleRequest PropertiesDelete' where
         type Rs PropertiesDelete' = ()

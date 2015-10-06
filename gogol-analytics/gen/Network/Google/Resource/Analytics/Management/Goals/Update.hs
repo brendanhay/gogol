@@ -197,8 +197,8 @@ mguFields
   = lens _mguFields (\ s a -> s{_mguFields = a})
 
 instance GoogleAuth ManagementGoalsUpdate' where
-        authKey = mguKey . _Just
-        authToken = mguOAuthToken . _Just
+        _AuthKey = mguKey . _Just
+        _AuthToken = mguOAuthToken . _Just
 
 instance GoogleRequest ManagementGoalsUpdate' where
         type Rs ManagementGoalsUpdate' = Goal

@@ -172,8 +172,8 @@ edpFields
   = lens _edpFields (\ s a -> s{_edpFields = a})
 
 instance GoogleAuth EditsDetailsPatch' where
-        authKey = edpKey . _Just
-        authToken = edpOAuthToken . _Just
+        _AuthKey = edpKey . _Just
+        _AuthToken = edpOAuthToken . _Just
 
 instance GoogleRequest EditsDetailsPatch' where
         type Rs EditsDetailsPatch' = AppDetails

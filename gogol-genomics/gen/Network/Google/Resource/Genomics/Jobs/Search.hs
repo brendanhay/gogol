@@ -143,8 +143,8 @@ jsFields :: Lens' JobsSearch' (Maybe Text)
 jsFields = lens _jsFields (\ s a -> s{_jsFields = a})
 
 instance GoogleAuth JobsSearch' where
-        authKey = jsKey . _Just
-        authToken = jsOAuthToken . _Just
+        _AuthKey = jsKey . _Just
+        _AuthToken = jsOAuthToken . _Just
 
 instance GoogleRequest JobsSearch' where
         type Rs JobsSearch' = SearchJobsResponse

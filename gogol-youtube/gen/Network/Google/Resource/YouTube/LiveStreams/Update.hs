@@ -214,8 +214,8 @@ lsuFields
   = lens _lsuFields (\ s a -> s{_lsuFields = a})
 
 instance GoogleAuth LiveStreamsUpdate' where
-        authKey = lsuKey . _Just
-        authToken = lsuOAuthToken . _Just
+        _AuthKey = lsuKey . _Just
+        _AuthToken = lsuOAuthToken . _Just
 
 instance GoogleRequest LiveStreamsUpdate' where
         type Rs LiveStreamsUpdate' = LiveStream

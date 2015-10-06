@@ -194,8 +194,8 @@ tpalFields
   = lens _tpalFields (\ s a -> s{_tpalFields = a})
 
 instance GoogleAuth TargetPoolsAggregatedList' where
-        authKey = tpalKey . _Just
-        authToken = tpalOAuthToken . _Just
+        _AuthKey = tpalKey . _Just
+        _AuthToken = tpalOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsAggregatedList'
          where

@@ -152,8 +152,8 @@ zgFields :: Lens' ZonesGet' (Maybe Text)
 zgFields = lens _zgFields (\ s a -> s{_zgFields = a})
 
 instance GoogleAuth ZonesGet' where
-        authKey = zgKey . _Just
-        authToken = zgOAuthToken . _Just
+        _AuthKey = zgKey . _Just
+        _AuthToken = zgOAuthToken . _Just
 
 instance GoogleRequest ZonesGet' where
         type Rs ZonesGet' = Zone

@@ -154,8 +154,8 @@ puFields :: Lens' PlacementsUpdate' (Maybe Text)
 puFields = lens _puFields (\ s a -> s{_puFields = a})
 
 instance GoogleAuth PlacementsUpdate' where
-        authKey = puKey . _Just
-        authToken = puOAuthToken . _Just
+        _AuthKey = puKey . _Just
+        _AuthToken = puOAuthToken . _Just
 
 instance GoogleRequest PlacementsUpdate' where
         type Rs PlacementsUpdate' = Placement

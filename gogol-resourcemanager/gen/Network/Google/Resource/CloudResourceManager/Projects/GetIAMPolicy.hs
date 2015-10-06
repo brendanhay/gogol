@@ -228,8 +228,8 @@ pgipCallback
   = lens _pgipCallback (\ s a -> s{_pgipCallback = a})
 
 instance GoogleAuth ProjectsGetIAMPolicy' where
-        authKey = pgipKey . _Just
-        authToken = pgipOAuthToken . _Just
+        _AuthKey = pgipKey . _Just
+        _AuthToken = pgipOAuthToken . _Just
 
 instance GoogleRequest ProjectsGetIAMPolicy' where
         type Rs ProjectsGetIAMPolicy' = Policy

@@ -259,8 +259,8 @@ viFields :: Lens' VideosInsert' (Maybe Text)
 viFields = lens _viFields (\ s a -> s{_viFields = a})
 
 instance GoogleAuth VideosInsert' where
-        authKey = viKey . _Just
-        authToken = viOAuthToken . _Just
+        _AuthKey = viKey . _Just
+        _AuthToken = viOAuthToken . _Just
 
 instance GoogleRequest VideosInsert' where
         type Rs VideosInsert' = Video

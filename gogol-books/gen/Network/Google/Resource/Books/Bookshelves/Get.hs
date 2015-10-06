@@ -162,8 +162,8 @@ bgFields :: Lens' BookshelvesGet' (Maybe Text)
 bgFields = lens _bgFields (\ s a -> s{_bgFields = a})
 
 instance GoogleAuth BookshelvesGet' where
-        authKey = bgKey . _Just
-        authToken = bgOAuthToken . _Just
+        _AuthKey = bgKey . _Just
+        _AuthToken = bgOAuthToken . _Just
 
 instance GoogleRequest BookshelvesGet' where
         type Rs BookshelvesGet' = Bookshelf

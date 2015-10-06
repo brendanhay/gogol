@@ -142,8 +142,8 @@ llFields :: Lens' LanguagesList' (Maybe Text)
 llFields = lens _llFields (\ s a -> s{_llFields = a})
 
 instance GoogleAuth LanguagesList' where
-        authKey = llKey . _Just
-        authToken = llOAuthToken . _Just
+        _AuthKey = llKey . _Just
+        _AuthToken = llOAuthToken . _Just
 
 instance GoogleRequest LanguagesList' where
         type Rs LanguagesList' = LanguagesListResponse

@@ -199,8 +199,8 @@ acruFields
 
 instance GoogleAuth AccountsContainersRulesUpdate'
          where
-        authKey = acruKey . _Just
-        authToken = acruOAuthToken . _Just
+        _AuthKey = acruKey . _Just
+        _AuthToken = acruOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersRulesUpdate'
          where

@@ -182,8 +182,8 @@ qsqlFields
   = lens _qsqlFields (\ s a -> s{_qsqlFields = a})
 
 instance GoogleAuth QuerySQL' where
-        authKey = qsqlKey . _Just
-        authToken = qsqlOAuthToken . _Just
+        _AuthKey = qsqlKey . _Just
+        _AuthToken = qsqlOAuthToken . _Just
 
 instance GoogleRequest QuerySQL' where
         type Rs QuerySQL' = SQLresponse

@@ -154,8 +154,8 @@ piFields :: Lens' PlacementsInsert' (Maybe Text)
 piFields = lens _piFields (\ s a -> s{_piFields = a})
 
 instance GoogleAuth PlacementsInsert' where
-        authKey = piKey . _Just
-        authToken = piOAuthToken . _Just
+        _AuthKey = piKey . _Just
+        _AuthToken = piOAuthToken . _Just
 
 instance GoogleRequest PlacementsInsert' where
         type Rs PlacementsInsert' = Placement

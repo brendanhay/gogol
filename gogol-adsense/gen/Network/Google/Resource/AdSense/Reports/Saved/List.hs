@@ -159,8 +159,8 @@ rslFields
   = lens _rslFields (\ s a -> s{_rslFields = a})
 
 instance GoogleAuth ReportsSavedList' where
-        authKey = rslKey . _Just
-        authToken = rslOAuthToken . _Just
+        _AuthKey = rslKey . _Just
+        _AuthToken = rslOAuthToken . _Just
 
 instance GoogleRequest ReportsSavedList' where
         type Rs ReportsSavedList' = SavedReports

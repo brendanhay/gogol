@@ -169,8 +169,8 @@ lagFields
   = lens _lagFields (\ s a -> s{_lagFields = a})
 
 instance GoogleAuth LicenseAssignmentsGet' where
-        authKey = lagKey . _Just
-        authToken = lagOAuthToken . _Just
+        _AuthKey = lagKey . _Just
+        _AuthToken = lagOAuthToken . _Just
 
 instance GoogleRequest LicenseAssignmentsGet' where
         type Rs LicenseAssignmentsGet' = LicenseAssignment

@@ -141,8 +141,8 @@ tFields :: Lens' TablesProcess' (Maybe Text)
 tFields = lens _tFields (\ s a -> s{_tFields = a})
 
 instance GoogleAuth TablesProcess' where
-        authKey = tKey . _Just
-        authToken = tOAuthToken . _Just
+        _AuthKey = tKey . _Just
+        _AuthToken = tOAuthToken . _Just
 
 instance GoogleRequest TablesProcess' where
         type Rs TablesProcess' = ProcessResponse

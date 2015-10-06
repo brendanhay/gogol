@@ -171,8 +171,8 @@ paFields :: Lens' ProductsApprove' (Maybe Text)
 paFields = lens _paFields (\ s a -> s{_paFields = a})
 
 instance GoogleAuth ProductsApprove' where
-        authKey = paKey . _Just
-        authToken = paOAuthToken . _Just
+        _AuthKey = paKey . _Just
+        _AuthToken = paOAuthToken . _Just
 
 instance GoogleRequest ProductsApprove' where
         type Rs ProductsApprove' = ()

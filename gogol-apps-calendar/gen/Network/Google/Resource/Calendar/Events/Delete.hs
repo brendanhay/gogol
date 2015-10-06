@@ -169,8 +169,8 @@ edFields :: Lens' EventsDelete' (Maybe Text)
 edFields = lens _edFields (\ s a -> s{_edFields = a})
 
 instance GoogleAuth EventsDelete' where
-        authKey = edKey . _Just
-        authToken = edOAuthToken . _Just
+        _AuthKey = edKey . _Just
+        _AuthToken = edOAuthToken . _Just
 
 instance GoogleRequest EventsDelete' where
         type Rs EventsDelete' = ()

@@ -173,8 +173,8 @@ capFields
   = lens _capFields (\ s a -> s{_capFields = a})
 
 instance GoogleAuth CirclesAddPeople' where
-        authKey = capKey . _Just
-        authToken = capOAuthToken . _Just
+        _AuthKey = capKey . _Just
+        _AuthToken = capOAuthToken . _Just
 
 instance GoogleRequest CirclesAddPeople' where
         type Rs CirclesAddPeople' = Circle

@@ -164,8 +164,8 @@ udaFields
   = lens _udaFields (\ s a -> s{_udaFields = a})
 
 instance GoogleAuth UsersDatasetAggregate' where
-        authKey = udaKey . _Just
-        authToken = udaOAuthToken . _Just
+        _AuthKey = udaKey . _Just
+        _AuthToken = udaOAuthToken . _Just
 
 instance GoogleRequest UsersDatasetAggregate' where
         type Rs UsersDatasetAggregate' = AggregateResponse

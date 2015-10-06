@@ -158,8 +158,8 @@ rliFields
   = lens _rliFields (\ s a -> s{_rliFields = a})
 
 instance GoogleAuth RemarketingListsInsert' where
-        authKey = rliKey . _Just
-        authToken = rliOAuthToken . _Just
+        _AuthKey = rliKey . _Just
+        _AuthToken = rliOAuthToken . _Just
 
 instance GoogleRequest RemarketingListsInsert' where
         type Rs RemarketingListsInsert' = RemarketingList

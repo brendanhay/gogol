@@ -199,8 +199,8 @@ egFields :: Lens' EventsGet' (Maybe Text)
 egFields = lens _egFields (\ s a -> s{_egFields = a})
 
 instance GoogleAuth EventsGet' where
-        authKey = egKey . _Just
-        authToken = egOAuthToken . _Just
+        _AuthKey = egKey . _Just
+        _AuthToken = egOAuthToken . _Just
 
 instance GoogleRequest EventsGet' where
         type Rs EventsGet' = Event

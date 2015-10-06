@@ -150,8 +150,8 @@ qrfapFields
   = lens _qrfapFields (\ s a -> s{_qrfapFields = a})
 
 instance GoogleAuth QuestsResetForAllPlayers' where
-        authKey = qrfapKey . _Just
-        authToken = qrfapOAuthToken . _Just
+        _AuthKey = qrfapKey . _Just
+        _AuthToken = qrfapOAuthToken . _Just
 
 instance GoogleRequest QuestsResetForAllPlayers'
          where

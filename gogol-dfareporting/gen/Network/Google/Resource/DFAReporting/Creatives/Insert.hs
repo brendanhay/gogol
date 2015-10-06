@@ -157,8 +157,8 @@ creFields
   = lens _creFields (\ s a -> s{_creFields = a})
 
 instance GoogleAuth CreativesInsert' where
-        authKey = creKey . _Just
-        authToken = creOAuthToken . _Just
+        _AuthKey = creKey . _Just
+        _AuthToken = creOAuthToken . _Just
 
 instance GoogleRequest CreativesInsert' where
         type Rs CreativesInsert' = Creative

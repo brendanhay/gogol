@@ -160,8 +160,8 @@ ogogFields
   = lens _ogogFields (\ s a -> s{_ogogFields = a})
 
 instance GoogleAuth OrdersGetbymerchantOrderid' where
-        authKey = ogogKey . _Just
-        authToken = ogogOAuthToken . _Just
+        _AuthKey = ogogKey . _Just
+        _AuthToken = ogogOAuthToken . _Just
 
 instance GoogleRequest OrdersGetbymerchantOrderid'
          where

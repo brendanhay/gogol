@@ -158,8 +158,8 @@ pppFields
   = lens _pppFields (\ s a -> s{_pppFields = a})
 
 instance GoogleAuth PagesPublish' where
-        authKey = pppKey . _Just
-        authToken = pppOAuthToken . _Just
+        _AuthKey = pppKey . _Just
+        _AuthToken = pppOAuthToken . _Just
 
 instance GoogleRequest PagesPublish' where
         type Rs PagesPublish' = Page

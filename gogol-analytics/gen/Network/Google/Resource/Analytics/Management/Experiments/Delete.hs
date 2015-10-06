@@ -187,8 +187,8 @@ medFields
 
 instance GoogleAuth ManagementExperimentsDelete'
          where
-        authKey = medKey . _Just
-        authToken = medOAuthToken . _Just
+        _AuthKey = medKey . _Just
+        _AuthToken = medOAuthToken . _Just
 
 instance GoogleRequest ManagementExperimentsDelete'
          where

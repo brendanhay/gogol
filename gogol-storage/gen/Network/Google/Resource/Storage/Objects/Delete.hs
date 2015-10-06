@@ -220,8 +220,8 @@ odFields :: Lens' ObjectsDelete' (Maybe Text)
 odFields = lens _odFields (\ s a -> s{_odFields = a})
 
 instance GoogleAuth ObjectsDelete' where
-        authKey = odKey . _Just
-        authToken = odOAuthToken . _Just
+        _AuthKey = odKey . _Just
+        _AuthToken = odOAuthToken . _Just
 
 instance GoogleRequest ObjectsDelete' where
         type Rs ObjectsDelete' = ()

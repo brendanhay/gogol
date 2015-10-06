@@ -190,8 +190,8 @@ mcdslFields
 
 instance GoogleAuth ManagementCustomDataSourcesList'
          where
-        authKey = mcdslKey . _Just
-        authToken = mcdslOAuthToken . _Just
+        _AuthKey = mcdslKey . _Just
+        _AuthToken = mcdslOAuthToken . _Just
 
 instance GoogleRequest
          ManagementCustomDataSourcesList' where

@@ -197,8 +197,8 @@ eiuFields
   = lens _eiuFields (\ s a -> s{_eiuFields = a})
 
 instance GoogleAuth EditsImagesUpload' where
-        authKey = eiuKey . _Just
-        authToken = eiuOAuthToken . _Just
+        _AuthKey = eiuKey . _Just
+        _AuthToken = eiuOAuthToken . _Just
 
 instance GoogleRequest EditsImagesUpload' where
         type Rs EditsImagesUpload' = ImagesUploadResponse

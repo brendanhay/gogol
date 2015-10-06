@@ -160,8 +160,8 @@ bsiFields
   = lens _bsiFields (\ s a -> s{_bsiFields = a})
 
 instance GoogleAuth BackendServicesInsert' where
-        authKey = bsiKey . _Just
-        authToken = bsiOAuthToken . _Just
+        _AuthKey = bsiKey . _Just
+        _AuthToken = bsiOAuthToken . _Just
 
 instance GoogleRequest BackendServicesInsert' where
         type Rs BackendServicesInsert' = Operation

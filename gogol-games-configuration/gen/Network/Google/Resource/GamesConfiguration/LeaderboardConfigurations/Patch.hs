@@ -161,8 +161,8 @@ lcpFields
 
 instance GoogleAuth LeaderboardConfigurationsPatch'
          where
-        authKey = lcpKey . _Just
-        authToken = lcpOAuthToken . _Just
+        _AuthKey = lcpKey . _Just
+        _AuthToken = lcpOAuthToken . _Just
 
 instance GoogleRequest
          LeaderboardConfigurationsPatch' where

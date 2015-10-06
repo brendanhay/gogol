@@ -168,8 +168,8 @@ nuFields :: Lens' NotificationsUpdate' (Maybe Text)
 nuFields = lens _nuFields (\ s a -> s{_nuFields = a})
 
 instance GoogleAuth NotificationsUpdate' where
-        authKey = nuKey . _Just
-        authToken = nuOAuthToken . _Just
+        _AuthKey = nuKey . _Just
+        _AuthToken = nuOAuthToken . _Just
 
 instance GoogleRequest NotificationsUpdate' where
         type Rs NotificationsUpdate' = Notification

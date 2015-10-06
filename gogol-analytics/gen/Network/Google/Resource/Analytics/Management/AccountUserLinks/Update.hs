@@ -174,8 +174,8 @@ mauluFields
 
 instance GoogleAuth ManagementAccountUserLinksUpdate'
          where
-        authKey = mauluKey . _Just
-        authToken = mauluOAuthToken . _Just
+        _AuthKey = mauluKey . _Just
+        _AuthToken = mauluOAuthToken . _Just
 
 instance GoogleRequest
          ManagementAccountUserLinksUpdate' where

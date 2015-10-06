@@ -148,8 +148,8 @@ rpdaFields
 
 instance GoogleAuth RelyingPartyDownloadAccount'
          where
-        authKey = rpdaKey . _Just
-        authToken = rpdaOAuthToken . _Just
+        _AuthKey = rpdaKey . _Just
+        _AuthToken = rpdaOAuthToken . _Just
 
 instance GoogleRequest RelyingPartyDownloadAccount'
          where

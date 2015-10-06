@@ -164,8 +164,8 @@ dgFields :: Lens' DisksGet' (Maybe Text)
 dgFields = lens _dgFields (\ s a -> s{_dgFields = a})
 
 instance GoogleAuth DisksGet' where
-        authKey = dgKey . _Just
-        authToken = dgOAuthToken . _Just
+        _AuthKey = dgKey . _Just
+        _AuthToken = dgOAuthToken . _Just
 
 instance GoogleRequest DisksGet' where
         type Rs DisksGet' = Disk

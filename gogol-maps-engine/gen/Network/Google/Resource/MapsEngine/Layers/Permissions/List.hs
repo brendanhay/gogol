@@ -145,8 +145,8 @@ lplFields
   = lens _lplFields (\ s a -> s{_lplFields = a})
 
 instance GoogleAuth LayersPermissionsList' where
-        authKey = lplKey . _Just
-        authToken = lplOAuthToken . _Just
+        _AuthKey = lplKey . _Just
+        _AuthToken = lplOAuthToken . _Just
 
 instance GoogleRequest LayersPermissionsList' where
         type Rs LayersPermissionsList' =

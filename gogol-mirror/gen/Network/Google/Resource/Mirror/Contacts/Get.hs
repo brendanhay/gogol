@@ -140,8 +140,8 @@ cgFields :: Lens' ContactsGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 instance GoogleAuth ContactsGet' where
-        authKey = cgKey . _Just
-        authToken = cgOAuthToken . _Just
+        _AuthKey = cgKey . _Just
+        _AuthToken = cgOAuthToken . _Just
 
 instance GoogleRequest ContactsGet' where
         type Rs ContactsGet' = Contact

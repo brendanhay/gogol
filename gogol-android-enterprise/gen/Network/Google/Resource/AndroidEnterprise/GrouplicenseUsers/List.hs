@@ -164,8 +164,8 @@ gulFields
   = lens _gulFields (\ s a -> s{_gulFields = a})
 
 instance GoogleAuth GrouplicenseUsersList' where
-        authKey = gulKey . _Just
-        authToken = gulOAuthToken . _Just
+        _AuthKey = gulKey . _Just
+        _AuthToken = gulOAuthToken . _Just
 
 instance GoogleRequest GrouplicenseUsersList' where
         type Rs GrouplicenseUsersList' =

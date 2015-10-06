@@ -279,8 +279,8 @@ pubiCallback
   = lens _pubiCallback (\ s a -> s{_pubiCallback = a})
 
 instance GoogleAuth ProjectsUpdateBillingInfo' where
-        authKey = pubiKey . _Just
-        authToken = pubiOAuthToken . _Just
+        _AuthKey = pubiKey . _Just
+        _AuthToken = pubiOAuthToken . _Just
 
 instance GoogleRequest ProjectsUpdateBillingInfo'
          where

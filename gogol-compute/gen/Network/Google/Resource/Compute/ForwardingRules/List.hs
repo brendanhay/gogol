@@ -206,8 +206,8 @@ frlFields
   = lens _frlFields (\ s a -> s{_frlFields = a})
 
 instance GoogleAuth ForwardingRulesList' where
-        authKey = frlKey . _Just
-        authToken = frlOAuthToken . _Just
+        _AuthKey = frlKey . _Just
+        _AuthToken = frlOAuthToken . _Just
 
 instance GoogleRequest ForwardingRulesList' where
         type Rs ForwardingRulesList' = ForwardingRuleList

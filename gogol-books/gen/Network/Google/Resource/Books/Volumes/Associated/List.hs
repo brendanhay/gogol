@@ -197,8 +197,8 @@ valAssociation
       (\ s a -> s{_valAssociation = a})
 
 instance GoogleAuth VolumesAssociatedList' where
-        authKey = valKey . _Just
-        authToken = valOAuthToken . _Just
+        _AuthKey = valKey . _Just
+        _AuthToken = valOAuthToken . _Just
 
 instance GoogleRequest VolumesAssociatedList' where
         type Rs VolumesAssociatedList' = Volumes

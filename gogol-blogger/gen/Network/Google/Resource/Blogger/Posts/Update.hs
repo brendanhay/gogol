@@ -224,8 +224,8 @@ puFields :: Lens' PostsUpdate' (Maybe Text)
 puFields = lens _puFields (\ s a -> s{_puFields = a})
 
 instance GoogleAuth PostsUpdate' where
-        authKey = puKey . _Just
-        authToken = puOAuthToken . _Just
+        _AuthKey = puKey . _Just
+        _AuthToken = puOAuthToken . _Just
 
 instance GoogleRequest PostsUpdate' where
         type Rs PostsUpdate' = Post'

@@ -149,8 +149,8 @@ osvlFields
 
 instance GoogleAuth OperatingSystemVersionsList'
          where
-        authKey = osvlKey . _Just
-        authToken = osvlOAuthToken . _Just
+        _AuthKey = osvlKey . _Just
+        _AuthToken = osvlOAuthToken . _Just
 
 instance GoogleRequest OperatingSystemVersionsList'
          where

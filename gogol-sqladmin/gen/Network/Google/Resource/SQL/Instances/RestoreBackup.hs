@@ -171,8 +171,8 @@ irbInstance
   = lens _irbInstance (\ s a -> s{_irbInstance = a})
 
 instance GoogleAuth InstancesRestoreBackup' where
-        authKey = irbKey . _Just
-        authToken = irbOAuthToken . _Just
+        _AuthKey = irbKey . _Just
+        _AuthToken = irbOAuthToken . _Just
 
 instance GoogleRequest InstancesRestoreBackup' where
         type Rs InstancesRestoreBackup' = Operation

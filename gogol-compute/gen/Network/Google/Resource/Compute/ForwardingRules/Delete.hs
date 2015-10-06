@@ -170,8 +170,8 @@ frdFields
   = lens _frdFields (\ s a -> s{_frdFields = a})
 
 instance GoogleAuth ForwardingRulesDelete' where
-        authKey = frdKey . _Just
-        authToken = frdOAuthToken . _Just
+        _AuthKey = frdKey . _Just
+        _AuthToken = frdOAuthToken . _Just
 
 instance GoogleRequest ForwardingRulesDelete' where
         type Rs ForwardingRulesDelete' = Operation

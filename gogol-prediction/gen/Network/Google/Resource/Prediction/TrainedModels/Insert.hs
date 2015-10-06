@@ -156,8 +156,8 @@ tmiFields
   = lens _tmiFields (\ s a -> s{_tmiFields = a})
 
 instance GoogleAuth TrainedModelsInsert' where
-        authKey = tmiKey . _Just
-        authToken = tmiOAuthToken . _Just
+        _AuthKey = tmiKey . _Just
+        _AuthToken = tmiOAuthToken . _Just
 
 instance GoogleRequest TrainedModelsInsert' where
         type Rs TrainedModelsInsert' = Insert2

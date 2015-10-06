@@ -184,8 +184,8 @@ tpaiFields
   = lens _tpaiFields (\ s a -> s{_tpaiFields = a})
 
 instance GoogleAuth TargetPoolsAddInstance' where
-        authKey = tpaiKey . _Just
-        authToken = tpaiOAuthToken . _Just
+        _AuthKey = tpaiKey . _Just
+        _AuthToken = tpaiOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsAddInstance' where
         type Rs TargetPoolsAddInstance' = Operation

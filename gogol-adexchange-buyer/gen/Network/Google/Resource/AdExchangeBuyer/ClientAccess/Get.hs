@@ -156,8 +156,8 @@ cagFields
   = lens _cagFields (\ s a -> s{_cagFields = a})
 
 instance GoogleAuth ClientAccessGet' where
-        authKey = cagKey . _Just
-        authToken = cagOAuthToken . _Just
+        _AuthKey = cagKey . _Just
+        _AuthToken = cagOAuthToken . _Just
 
 instance GoogleRequest ClientAccessGet' where
         type Rs ClientAccessGet' = ClientAccessCapabilities

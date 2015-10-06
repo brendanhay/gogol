@@ -220,8 +220,8 @@ beaCallback
   = lens _beaCallback (\ s a -> s{_beaCallback = a})
 
 instance GoogleAuth BeaconsDeactivate' where
-        authKey = beaKey . _Just
-        authToken = beaOAuthToken . _Just
+        _AuthKey = beaKey . _Just
+        _AuthToken = beaOAuthToken . _Just
 
 instance GoogleRequest BeaconsDeactivate' where
         type Rs BeaconsDeactivate' = Empty

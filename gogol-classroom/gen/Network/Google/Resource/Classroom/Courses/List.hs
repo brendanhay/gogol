@@ -265,8 +265,8 @@ clCallback
   = lens _clCallback (\ s a -> s{_clCallback = a})
 
 instance GoogleAuth CoursesList' where
-        authKey = clKey . _Just
-        authToken = clOAuthToken . _Just
+        _AuthKey = clKey . _Just
+        _AuthToken = clOAuthToken . _Just
 
 instance GoogleRequest CoursesList' where
         type Rs CoursesList' = ListCoursesResponse

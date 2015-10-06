@@ -184,8 +184,8 @@ eluFields
   = lens _eluFields (\ s a -> s{_eluFields = a})
 
 instance GoogleAuth EditsListingsUpdate' where
-        authKey = eluKey . _Just
-        authToken = eluOAuthToken . _Just
+        _AuthKey = eluKey . _Just
+        _AuthToken = eluOAuthToken . _Just
 
 instance GoogleRequest EditsListingsUpdate' where
         type Rs EditsListingsUpdate' = Listing

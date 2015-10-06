@@ -160,8 +160,8 @@ etlFields
   = lens _etlFields (\ s a -> s{_etlFields = a})
 
 instance GoogleAuth EditsTracksList' where
-        authKey = etlKey . _Just
-        authToken = etlOAuthToken . _Just
+        _AuthKey = etlKey . _Just
+        _AuthToken = etlOAuthToken . _Just
 
 instance GoogleRequest EditsTracksList' where
         type Rs EditsTracksList' = TracksListResponse

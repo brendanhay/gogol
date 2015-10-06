@@ -171,8 +171,8 @@ tvgdFields
   = lens _tvgdFields (\ s a -> s{_tvgdFields = a})
 
 instance GoogleAuth TargetVPNGatewaysDelete' where
-        authKey = tvgdKey . _Just
-        authToken = tvgdOAuthToken . _Just
+        _AuthKey = tvgdKey . _Just
+        _AuthToken = tvgdOAuthToken . _Just
 
 instance GoogleRequest TargetVPNGatewaysDelete' where
         type Rs TargetVPNGatewaysDelete' = Operation

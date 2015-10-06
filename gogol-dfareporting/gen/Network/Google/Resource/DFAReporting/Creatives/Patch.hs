@@ -168,8 +168,8 @@ cppFields
   = lens _cppFields (\ s a -> s{_cppFields = a})
 
 instance GoogleAuth CreativesPatch' where
-        authKey = cppKey . _Just
-        authToken = cppOAuthToken . _Just
+        _AuthKey = cppKey . _Just
+        _AuthToken = cppOAuthToken . _Just
 
 instance GoogleRequest CreativesPatch' where
         type Rs CreativesPatch' = Creative

@@ -135,8 +135,8 @@ gcfoicFields
   = lens _gcfoicFields (\ s a -> s{_gcfoicFields = a})
 
 instance GoogleAuth GetCertForOpenIdConnect' where
-        authKey = gcfoicKey . _Just
-        authToken = gcfoicOAuthToken . _Just
+        _AuthKey = gcfoicKey . _Just
+        _AuthToken = gcfoicOAuthToken . _Just
 
 instance GoogleRequest GetCertForOpenIdConnect' where
         type Rs GetCertForOpenIdConnect' = JWK

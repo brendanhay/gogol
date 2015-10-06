@@ -185,8 +185,8 @@ oaciFields
   = lens _oaciFields (\ s a -> s{_oaciFields = a})
 
 instance GoogleAuth ObjectAccessControlsInsert' where
-        authKey = oaciKey . _Just
-        authToken = oaciOAuthToken . _Just
+        _AuthKey = oaciKey . _Just
+        _AuthToken = oaciOAuthToken . _Just
 
 instance GoogleRequest ObjectAccessControlsInsert'
          where

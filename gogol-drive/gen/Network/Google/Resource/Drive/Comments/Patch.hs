@@ -165,8 +165,8 @@ cpFields :: Lens' CommentsPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 instance GoogleAuth CommentsPatch' where
-        authKey = cpKey . _Just
-        authToken = cpOAuthToken . _Just
+        _AuthKey = cpKey . _Just
+        _AuthToken = cpOAuthToken . _Just
 
 instance GoogleRequest CommentsPatch' where
         type Rs CommentsPatch' = Comment

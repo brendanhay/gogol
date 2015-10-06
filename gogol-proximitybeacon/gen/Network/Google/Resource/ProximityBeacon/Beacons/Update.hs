@@ -235,8 +235,8 @@ buCallback
   = lens _buCallback (\ s a -> s{_buCallback = a})
 
 instance GoogleAuth BeaconsUpdate' where
-        authKey = buKey . _Just
-        authToken = buOAuthToken . _Just
+        _AuthKey = buKey . _Just
+        _AuthToken = buOAuthToken . _Just
 
 instance GoogleRequest BeaconsUpdate' where
         type Rs BeaconsUpdate' = Beacon

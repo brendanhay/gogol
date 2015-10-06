@@ -135,8 +135,8 @@ rpgrpFields
 
 instance GoogleAuth RelyingPartyGetRecaptchaParam'
          where
-        authKey = rpgrpKey . _Just
-        authToken = rpgrpOAuthToken . _Just
+        _AuthKey = rpgrpKey . _Just
+        _AuthToken = rpgrpOAuthToken . _Just
 
 instance GoogleRequest RelyingPartyGetRecaptchaParam'
          where

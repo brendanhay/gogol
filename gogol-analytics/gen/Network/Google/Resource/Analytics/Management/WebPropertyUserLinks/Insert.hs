@@ -178,8 +178,8 @@ mwpuliFields
 
 instance GoogleAuth
          ManagementWebPropertyUserLinksInsert' where
-        authKey = mwpuliKey . _Just
-        authToken = mwpuliOAuthToken . _Just
+        _AuthKey = mwpuliKey . _Just
+        _AuthToken = mwpuliOAuthToken . _Just
 
 instance GoogleRequest
          ManagementWebPropertyUserLinksInsert' where

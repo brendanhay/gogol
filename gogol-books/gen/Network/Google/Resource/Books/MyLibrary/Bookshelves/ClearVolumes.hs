@@ -159,8 +159,8 @@ mlbcvFields
 
 instance GoogleAuth MyLibraryBookshelvesClearVolumes'
          where
-        authKey = mlbcvKey . _Just
-        authToken = mlbcvOAuthToken . _Just
+        _AuthKey = mlbcvKey . _Just
+        _AuthToken = mlbcvOAuthToken . _Just
 
 instance GoogleRequest
          MyLibraryBookshelvesClearVolumes' where

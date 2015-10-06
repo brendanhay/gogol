@@ -262,8 +262,8 @@ lblFields
   = lens _lblFields (\ s a -> s{_lblFields = a})
 
 instance GoogleAuth LiveBroadcastsList' where
-        authKey = lblKey . _Just
-        authToken = lblOAuthToken . _Just
+        _AuthKey = lblKey . _Just
+        _AuthToken = lblOAuthToken . _Just
 
 instance GoogleRequest LiveBroadcastsList' where
         type Rs LiveBroadcastsList' =

@@ -144,8 +144,8 @@ dsFields :: Lens' DivisionsSearch' (Maybe Text)
 dsFields = lens _dsFields (\ s a -> s{_dsFields = a})
 
 instance GoogleAuth DivisionsSearch' where
-        authKey = dsKey . _Just
-        authToken = dsOAuthToken . _Just
+        _AuthKey = dsKey . _Just
+        _AuthToken = dsOAuthToken . _Just
 
 instance GoogleRequest DivisionsSearch' where
         type Rs DivisionsSearch' = DivisionSearchResponse

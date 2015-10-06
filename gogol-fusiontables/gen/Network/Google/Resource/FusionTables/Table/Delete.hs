@@ -141,8 +141,8 @@ tdFields :: Lens' TableDelete' (Maybe Text)
 tdFields = lens _tdFields (\ s a -> s{_tdFields = a})
 
 instance GoogleAuth TableDelete' where
-        authKey = tdKey . _Just
-        authToken = tdOAuthToken . _Just
+        _AuthKey = tdKey . _Just
+        _AuthToken = tdOAuthToken . _Just
 
 instance GoogleRequest TableDelete' where
         type Rs TableDelete' = ()

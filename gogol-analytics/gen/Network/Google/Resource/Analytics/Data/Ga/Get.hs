@@ -283,8 +283,8 @@ dggFields
   = lens _dggFields (\ s a -> s{_dggFields = a})
 
 instance GoogleAuth DataGaGet' where
-        authKey = dggKey . _Just
-        authToken = dggOAuthToken . _Just
+        _AuthKey = dggKey . _Just
+        _AuthToken = dggOAuthToken . _Just
 
 instance GoogleRequest DataGaGet' where
         type Rs DataGaGet' = GaData

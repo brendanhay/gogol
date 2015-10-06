@@ -213,8 +213,8 @@ udsddFields
 
 instance GoogleAuth UsersDataSourcesDatasetsDelete'
          where
-        authKey = udsddKey . _Just
-        authToken = udsddOAuthToken . _Just
+        _AuthKey = udsddKey . _Just
+        _AuthToken = udsddOAuthToken . _Just
 
 instance GoogleRequest
          UsersDataSourcesDatasetsDelete' where

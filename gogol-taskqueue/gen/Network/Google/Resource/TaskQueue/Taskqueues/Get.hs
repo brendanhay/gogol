@@ -167,8 +167,8 @@ tasFields
   = lens _tasFields (\ s a -> s{_tasFields = a})
 
 instance GoogleAuth TaskqueuesGet' where
-        authKey = tasKey . _Just
-        authToken = tasOAuthToken . _Just
+        _AuthKey = tasKey . _Just
+        _AuthToken = tasOAuthToken . _Just
 
 instance GoogleRequest TaskqueuesGet' where
         type Rs TaskqueuesGet' = TaskQueue

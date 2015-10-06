@@ -142,8 +142,8 @@ tiFields :: Lens' TransfersInsert' (Maybe Text)
 tiFields = lens _tiFields (\ s a -> s{_tiFields = a})
 
 instance GoogleAuth TransfersInsert' where
-        authKey = tiKey . _Just
-        authToken = tiOAuthToken . _Just
+        _AuthKey = tiKey . _Just
+        _AuthToken = tiOAuthToken . _Just
 
 instance GoogleRequest TransfersInsert' where
         type Rs TransfersInsert' = DataTransfer

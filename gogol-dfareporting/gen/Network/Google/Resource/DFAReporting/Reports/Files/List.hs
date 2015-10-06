@@ -204,8 +204,8 @@ rflFields
   = lens _rflFields (\ s a -> s{_rflFields = a})
 
 instance GoogleAuth ReportsFilesList' where
-        authKey = rflKey . _Just
-        authToken = rflOAuthToken . _Just
+        _AuthKey = rflKey . _Just
+        _AuthToken = rflOAuthToken . _Just
 
 instance GoogleRequest ReportsFilesList' where
         type Rs ReportsFilesList' = FileList

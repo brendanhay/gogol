@@ -188,8 +188,8 @@ mopFields
   = lens _mopFields (\ s a -> s{_mopFields = a})
 
 instance GoogleAuth MarketplaceOrdersPatch' where
-        authKey = mopKey . _Just
-        authToken = mopOAuthToken . _Just
+        _AuthKey = mopKey . _Just
+        _AuthToken = mopOAuthToken . _Just
 
 instance GoogleRequest MarketplaceOrdersPatch' where
         type Rs MarketplaceOrdersPatch' = MarketplaceOrder

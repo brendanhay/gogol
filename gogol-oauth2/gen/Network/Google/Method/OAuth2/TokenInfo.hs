@@ -158,8 +158,8 @@ tIdToken :: Lens' TokenInfo' (Maybe Text)
 tIdToken = lens _tIdToken (\ s a -> s{_tIdToken = a})
 
 instance GoogleAuth TokenInfo' where
-        authKey = tKey . _Just
-        authToken = tOAuthToken . _Just
+        _AuthKey = tKey . _Just
+        _AuthToken = tOAuthToken . _Just
 
 instance GoogleRequest TokenInfo' where
         type Rs TokenInfo' = TokenInfo

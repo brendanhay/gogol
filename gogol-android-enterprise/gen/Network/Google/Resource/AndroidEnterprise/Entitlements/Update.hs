@@ -199,8 +199,8 @@ entFields
   = lens _entFields (\ s a -> s{_entFields = a})
 
 instance GoogleAuth EntitlementsUpdate' where
-        authKey = entKey . _Just
-        authToken = entOAuthToken . _Just
+        _AuthKey = entKey . _Just
+        _AuthToken = entOAuthToken . _Just
 
 instance GoogleRequest EntitlementsUpdate' where
         type Rs EntitlementsUpdate' = Entitlement

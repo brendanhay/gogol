@@ -189,8 +189,8 @@ mcdlFields
 
 instance GoogleAuth ManagementCustomDimensionsList'
          where
-        authKey = mcdlKey . _Just
-        authToken = mcdlOAuthToken . _Just
+        _AuthKey = mcdlKey . _Just
+        _AuthToken = mcdlOAuthToken . _Just
 
 instance GoogleRequest
          ManagementCustomDimensionsList' where

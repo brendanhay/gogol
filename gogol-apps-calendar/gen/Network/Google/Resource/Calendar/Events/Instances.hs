@@ -280,8 +280,8 @@ eiFields :: Lens' EventsInstances' (Maybe Text)
 eiFields = lens _eiFields (\ s a -> s{_eiFields = a})
 
 instance GoogleAuth EventsInstances' where
-        authKey = eiKey . _Just
-        authToken = eiOAuthToken . _Just
+        _AuthKey = eiKey . _Just
+        _AuthToken = eiOAuthToken . _Just
 
 instance GoogleRequest EventsInstances' where
         type Rs EventsInstances' = Events

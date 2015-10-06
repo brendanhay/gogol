@@ -227,8 +227,8 @@ amdCallback
   = lens _amdCallback (\ s a -> s{_amdCallback = a})
 
 instance GoogleAuth AppsModulesDelete' where
-        authKey = amdKey . _Just
-        authToken = amdOAuthToken . _Just
+        _AuthKey = amdKey . _Just
+        _AuthToken = amdOAuthToken . _Just
 
 instance GoogleRequest AppsModulesDelete' where
         type Rs AppsModulesDelete' = Operation

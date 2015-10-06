@@ -231,8 +231,8 @@ otipCallback
 
 instance GoogleAuth OrganizationsTestIAMPermissions'
          where
-        authKey = otipKey . _Just
-        authToken = otipOAuthToken . _Just
+        _AuthKey = otipKey . _Just
+        _AuthToken = otipOAuthToken . _Just
 
 instance GoogleRequest
          OrganizationsTestIAMPermissions' where

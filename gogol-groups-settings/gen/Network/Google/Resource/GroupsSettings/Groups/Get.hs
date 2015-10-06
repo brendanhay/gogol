@@ -141,8 +141,8 @@ ggFields :: Lens' GroupsGet' (Maybe Text)
 ggFields = lens _ggFields (\ s a -> s{_ggFields = a})
 
 instance GoogleAuth GroupsGet' where
-        authKey = ggKey . _Just
-        authToken = ggOAuthToken . _Just
+        _AuthKey = ggKey . _Just
+        _AuthToken = ggOAuthToken . _Just
 
 instance GoogleRequest GroupsGet' where
         type Rs GroupsGet' = Groups

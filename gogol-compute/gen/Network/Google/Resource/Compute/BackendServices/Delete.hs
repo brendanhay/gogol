@@ -158,8 +158,8 @@ bsdBackendService
       (\ s a -> s{_bsdBackendService = a})
 
 instance GoogleAuth BackendServicesDelete' where
-        authKey = bsdKey . _Just
-        authToken = bsdOAuthToken . _Just
+        _AuthKey = bsdKey . _Just
+        _AuthToken = bsdOAuthToken . _Just
 
 instance GoogleRequest BackendServicesDelete' where
         type Rs BackendServicesDelete' = Operation

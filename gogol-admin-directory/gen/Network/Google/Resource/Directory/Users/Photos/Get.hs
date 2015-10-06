@@ -146,8 +146,8 @@ upgFields
   = lens _upgFields (\ s a -> s{_upgFields = a})
 
 instance GoogleAuth UsersPhotosGet' where
-        authKey = upgKey . _Just
-        authToken = upgOAuthToken . _Just
+        _AuthKey = upgKey . _Just
+        _AuthToken = upgOAuthToken . _Just
 
 instance GoogleRequest UsersPhotosGet' where
         type Rs UsersPhotosGet' = UserPhoto

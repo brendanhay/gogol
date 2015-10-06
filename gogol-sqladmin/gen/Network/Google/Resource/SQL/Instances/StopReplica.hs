@@ -158,8 +158,8 @@ isrInstance
   = lens _isrInstance (\ s a -> s{_isrInstance = a})
 
 instance GoogleAuth InstancesStopReplica' where
-        authKey = isrKey . _Just
-        authToken = isrOAuthToken . _Just
+        _AuthKey = isrKey . _Just
+        _AuthToken = isrOAuthToken . _Just
 
 instance GoogleRequest InstancesStopReplica' where
         type Rs InstancesStopReplica' = Operation

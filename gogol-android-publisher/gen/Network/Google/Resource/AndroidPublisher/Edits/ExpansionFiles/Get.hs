@@ -190,8 +190,8 @@ eefgFields
   = lens _eefgFields (\ s a -> s{_eefgFields = a})
 
 instance GoogleAuth EditsExpansionFilesGet' where
-        authKey = eefgKey . _Just
-        authToken = eefgOAuthToken . _Just
+        _AuthKey = eefgKey . _Just
+        _AuthToken = eefgOAuthToken . _Just
 
 instance GoogleRequest EditsExpansionFilesGet' where
         type Rs EditsExpansionFilesGet' = ExpansionFile

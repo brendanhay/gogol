@@ -221,8 +221,8 @@ iaCallback
   = lens _iaCallback (\ s a -> s{_iaCallback = a})
 
 instance GoogleAuth InvitationsAccept' where
-        authKey = iaKey . _Just
-        authToken = iaOAuthToken . _Just
+        _AuthKey = iaKey . _Just
+        _AuthToken = iaOAuthToken . _Just
 
 instance GoogleRequest InvitationsAccept' where
         type Rs InvitationsAccept' = Empty

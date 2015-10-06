@@ -157,8 +157,8 @@ advFields
   = lens _advFields (\ s a -> s{_advFields = a})
 
 instance GoogleAuth AdvertisersUpdate' where
-        authKey = advKey . _Just
-        authToken = advOAuthToken . _Just
+        _AuthKey = advKey . _Just
+        _AuthToken = advOAuthToken . _Just
 
 instance GoogleRequest AdvertisersUpdate' where
         type Rs AdvertisersUpdate' = Advertiser

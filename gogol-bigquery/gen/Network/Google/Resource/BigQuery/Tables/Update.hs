@@ -183,8 +183,8 @@ tuFields :: Lens' TablesUpdate' (Maybe Text)
 tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
 
 instance GoogleAuth TablesUpdate' where
-        authKey = tuKey . _Just
-        authToken = tuOAuthToken . _Just
+        _AuthKey = tuKey . _Just
+        _AuthToken = tuOAuthToken . _Just
 
 instance GoogleRequest TablesUpdate' where
         type Rs TablesUpdate' = Table

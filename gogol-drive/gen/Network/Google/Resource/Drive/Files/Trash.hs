@@ -147,8 +147,8 @@ filFields
   = lens _filFields (\ s a -> s{_filFields = a})
 
 instance GoogleAuth FilesTrash' where
-        authKey = filKey . _Just
-        authToken = filOAuthToken . _Just
+        _AuthKey = filKey . _Just
+        _AuthToken = filOAuthToken . _Just
 
 instance GoogleRequest FilesTrash' where
         type Rs FilesTrash' = File

@@ -188,8 +188,8 @@ cuuFields
   = lens _cuuFields (\ s a -> s{_cuuFields = a})
 
 instance GoogleAuth CollectionviewersUpdate' where
-        authKey = cuuKey . _Just
-        authToken = cuuOAuthToken . _Just
+        _AuthKey = cuuKey . _Just
+        _AuthToken = cuuOAuthToken . _Just
 
 instance GoogleRequest CollectionviewersUpdate' where
         type Rs CollectionviewersUpdate' = User

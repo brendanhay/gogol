@@ -155,8 +155,8 @@ eiFields :: Lens' EditsInsert' (Maybe Text)
 eiFields = lens _eiFields (\ s a -> s{_eiFields = a})
 
 instance GoogleAuth EditsInsert' where
-        authKey = eiKey . _Just
-        authToken = eiOAuthToken . _Just
+        _AuthKey = eiKey . _Just
+        _AuthToken = eiOAuthToken . _Just
 
 instance GoogleRequest EditsInsert' where
         type Rs EditsInsert' = AppEdit

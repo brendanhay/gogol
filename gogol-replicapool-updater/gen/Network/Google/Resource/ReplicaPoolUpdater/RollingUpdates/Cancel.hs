@@ -172,8 +172,8 @@ rucFields
   = lens _rucFields (\ s a -> s{_rucFields = a})
 
 instance GoogleAuth RollingUpdatesCancel' where
-        authKey = rucKey . _Just
-        authToken = rucOAuthToken . _Just
+        _AuthKey = rucKey . _Just
+        _AuthToken = rucOAuthToken . _Just
 
 instance GoogleRequest RollingUpdatesCancel' where
         type Rs RollingUpdatesCancel' = Operation

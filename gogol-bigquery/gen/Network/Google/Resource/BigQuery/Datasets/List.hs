@@ -177,8 +177,8 @@ dlFields :: Lens' DatasetsList' (Maybe Text)
 dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
 
 instance GoogleAuth DatasetsList' where
-        authKey = dlKey . _Just
-        authToken = dlOAuthToken . _Just
+        _AuthKey = dlKey . _Just
+        _AuthToken = dlOAuthToken . _Just
 
 instance GoogleRequest DatasetsList' where
         type Rs DatasetsList' = DatasetList

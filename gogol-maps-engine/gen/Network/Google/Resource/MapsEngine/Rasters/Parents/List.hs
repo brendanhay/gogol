@@ -171,8 +171,8 @@ rasFields
   = lens _rasFields (\ s a -> s{_rasFields = a})
 
 instance GoogleAuth RastersParentsList' where
-        authKey = rasKey . _Just
-        authToken = rasOAuthToken . _Just
+        _AuthKey = rasKey . _Just
+        _AuthToken = rasOAuthToken . _Just
 
 instance GoogleRequest RastersParentsList' where
         type Rs RastersParentsList' = ParentsListResponse

@@ -130,8 +130,8 @@ flFields :: Lens' FlagsList' (Maybe Text)
 flFields = lens _flFields (\ s a -> s{_flFields = a})
 
 instance GoogleAuth FlagsList' where
-        authKey = flKey . _Just
-        authToken = flOAuthToken . _Just
+        _AuthKey = flKey . _Just
+        _AuthToken = flOAuthToken . _Just
 
 instance GoogleRequest FlagsList' where
         type Rs FlagsList' = FlagsListResponse

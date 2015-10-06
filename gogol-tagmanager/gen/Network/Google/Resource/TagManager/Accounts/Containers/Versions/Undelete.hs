@@ -177,8 +177,8 @@ acvuFields
 
 instance GoogleAuth
          AccountsContainersVersionsUndelete' where
-        authKey = acvuKey . _Just
-        authToken = acvuOAuthToken . _Just
+        _AuthKey = acvuKey . _Just
+        _AuthToken = acvuOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVersionsUndelete' where

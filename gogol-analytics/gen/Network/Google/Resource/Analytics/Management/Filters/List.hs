@@ -171,8 +171,8 @@ mflFields
   = lens _mflFields (\ s a -> s{_mflFields = a})
 
 instance GoogleAuth ManagementFiltersList' where
-        authKey = mflKey . _Just
-        authToken = mflOAuthToken . _Just
+        _AuthKey = mflKey . _Just
+        _AuthToken = mflOAuthToken . _Just
 
 instance GoogleRequest ManagementFiltersList' where
         type Rs ManagementFiltersList' = Filters

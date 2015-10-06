@@ -158,8 +158,8 @@ pggFields
   = lens _pggFields (\ s a -> s{_pggFields = a})
 
 instance GoogleAuth PermissionsGet' where
-        authKey = pggKey . _Just
-        authToken = pggOAuthToken . _Just
+        _AuthKey = pggKey . _Just
+        _AuthToken = pggOAuthToken . _Just
 
 instance GoogleRequest PermissionsGet' where
         type Rs PermissionsGet' = Permission

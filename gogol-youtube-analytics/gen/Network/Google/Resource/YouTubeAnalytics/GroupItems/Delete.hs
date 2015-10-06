@@ -165,8 +165,8 @@ gidFields
   = lens _gidFields (\ s a -> s{_gidFields = a})
 
 instance GoogleAuth GroupItemsDelete' where
-        authKey = gidKey . _Just
-        authToken = gidOAuthToken . _Just
+        _AuthKey = gidKey . _Just
+        _AuthToken = gidOAuthToken . _Just
 
 instance GoogleRequest GroupItemsDelete' where
         type Rs GroupItemsDelete' = ()

@@ -171,8 +171,8 @@ icuFields
   = lens _icuFields (\ s a -> s{_icuFields = a})
 
 instance GoogleAuth ImageConfigurationsUpload' where
-        authKey = icuKey . _Just
-        authToken = icuOAuthToken . _Just
+        _AuthKey = icuKey . _Just
+        _AuthToken = icuOAuthToken . _Just
 
 instance GoogleRequest ImageConfigurationsUpload'
          where

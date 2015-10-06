@@ -208,8 +208,8 @@ sllFields
   = lens _sllFields (\ s a -> s{_sllFields = a})
 
 instance GoogleAuth ScoresList' where
-        authKey = sllKey . _Just
-        authToken = sllOAuthToken . _Just
+        _AuthKey = sllKey . _Just
+        _AuthToken = sllOAuthToken . _Just
 
 instance GoogleRequest ScoresList' where
         type Rs ScoresList' = LeaderboardScores

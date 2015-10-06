@@ -183,8 +183,8 @@ vrrFields
   = lens _vrrFields (\ s a -> s{_vrrFields = a})
 
 instance GoogleAuth VolumesRecommendedRate' where
-        authKey = vrrKey . _Just
-        authToken = vrrOAuthToken . _Just
+        _AuthKey = vrrKey . _Just
+        _AuthToken = vrrOAuthToken . _Just
 
 instance GoogleRequest VolumesRecommendedRate' where
         type Rs VolumesRecommendedRate' =

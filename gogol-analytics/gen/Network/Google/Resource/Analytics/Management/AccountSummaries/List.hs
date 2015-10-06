@@ -164,8 +164,8 @@ maslFields
 
 instance GoogleAuth ManagementAccountSummariesList'
          where
-        authKey = maslKey . _Just
-        authToken = maslOAuthToken . _Just
+        _AuthKey = maslKey . _Just
+        _AuthToken = maslOAuthToken . _Just
 
 instance GoogleRequest
          ManagementAccountSummariesList' where

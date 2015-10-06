@@ -238,8 +238,8 @@ ctgCallback
   = lens _ctgCallback (\ s a -> s{_ctgCallback = a})
 
 instance GoogleAuth CoursesTeachersGet' where
-        authKey = ctgKey . _Just
-        authToken = ctgOAuthToken . _Just
+        _AuthKey = ctgKey . _Just
+        _AuthToken = ctgOAuthToken . _Just
 
 instance GoogleRequest CoursesTeachersGet' where
         type Rs CoursesTeachersGet' = Teacher

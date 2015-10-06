@@ -140,8 +140,8 @@ ugFields :: Lens' UsersGet' (Maybe Text)
 ugFields = lens _ugFields (\ s a -> s{_ugFields = a})
 
 instance GoogleAuth UsersGet' where
-        authKey = ugKey . _Just
-        authToken = ugOAuthToken . _Just
+        _AuthKey = ugKey . _Just
+        _AuthToken = ugOAuthToken . _Just
 
 instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User

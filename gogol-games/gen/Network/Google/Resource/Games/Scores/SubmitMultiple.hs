@@ -157,8 +157,8 @@ ssmFields
   = lens _ssmFields (\ s a -> s{_ssmFields = a})
 
 instance GoogleAuth ScoresSubmitMultiple' where
-        authKey = ssmKey . _Just
-        authToken = ssmOAuthToken . _Just
+        _AuthKey = ssmKey . _Just
+        _AuthToken = ssmOAuthToken . _Just
 
 instance GoogleRequest ScoresSubmitMultiple' where
         type Rs ScoresSubmitMultiple' =

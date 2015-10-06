@@ -157,8 +157,8 @@ umuFields
   = lens _umuFields (\ s a -> s{_umuFields = a})
 
 instance GoogleAuth UsersMessagesUntrash' where
-        authKey = umuKey . _Just
-        authToken = umuOAuthToken . _Just
+        _AuthKey = umuKey . _Just
+        _AuthToken = umuOAuthToken . _Just
 
 instance GoogleRequest UsersMessagesUntrash' where
         type Rs UsersMessagesUntrash' = Message

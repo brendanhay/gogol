@@ -175,8 +175,8 @@ blFields :: Lens' BucketsList' (Maybe Text)
 blFields = lens _blFields (\ s a -> s{_blFields = a})
 
 instance GoogleAuth BucketsList' where
-        authKey = blKey . _Just
-        authToken = blOAuthToken . _Just
+        _AuthKey = blKey . _Just
+        _AuthToken = blOAuthToken . _Just
 
 instance GoogleRequest BucketsList' where
         type Rs BucketsList' = Buckets

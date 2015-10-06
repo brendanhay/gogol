@@ -141,8 +141,8 @@ wlFields :: Lens' WebfontsList' (Maybe Text)
 wlFields = lens _wlFields (\ s a -> s{_wlFields = a})
 
 instance GoogleAuth WebfontsList' where
-        authKey = wlKey . _Just
-        authToken = wlOAuthToken . _Just
+        _AuthKey = wlKey . _Just
+        _AuthToken = wlOAuthToken . _Just
 
 instance GoogleRequest WebfontsList' where
         type Rs WebfontsList' = WebfontList

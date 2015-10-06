@@ -146,8 +146,8 @@ ctlFields
   = lens _ctlFields (\ s a -> s{_ctlFields = a})
 
 instance GoogleAuth ConnectionTypesList' where
-        authKey = ctlKey . _Just
-        authToken = ctlOAuthToken . _Just
+        _AuthKey = ctlKey . _Just
+        _AuthToken = ctlOAuthToken . _Just
 
 instance GoogleRequest ConnectionTypesList' where
         type Rs ConnectionTypesList' =

@@ -216,8 +216,8 @@ pcCallback
   = lens _pcCallback (\ s a -> s{_pcCallback = a})
 
 instance GoogleAuth ProjectsCreate' where
-        authKey = pcKey . _Just
-        authToken = pcOAuthToken . _Just
+        _AuthKey = pcKey . _Just
+        _AuthToken = pcOAuthToken . _Just
 
 instance GoogleRequest ProjectsCreate' where
         type Rs ProjectsCreate' = Project

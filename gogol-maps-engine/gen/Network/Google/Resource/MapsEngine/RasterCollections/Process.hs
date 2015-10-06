@@ -146,8 +146,8 @@ rcpcFields
   = lens _rcpcFields (\ s a -> s{_rcpcFields = a})
 
 instance GoogleAuth RasterCollectionsProcess' where
-        authKey = rcpcKey . _Just
-        authToken = rcpcOAuthToken . _Just
+        _AuthKey = rcpcKey . _Just
+        _AuthToken = rcpcOAuthToken . _Just
 
 instance GoogleRequest RasterCollectionsProcess'
          where

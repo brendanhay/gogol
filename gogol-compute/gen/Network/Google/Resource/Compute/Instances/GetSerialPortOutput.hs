@@ -185,8 +185,8 @@ igspoInstance
 
 instance GoogleAuth InstancesGetSerialPortOutput'
          where
-        authKey = igspoKey . _Just
-        authToken = igspoOAuthToken . _Just
+        _AuthKey = igspoKey . _Just
+        _AuthToken = igspoOAuthToken . _Just
 
 instance GoogleRequest InstancesGetSerialPortOutput'
          where

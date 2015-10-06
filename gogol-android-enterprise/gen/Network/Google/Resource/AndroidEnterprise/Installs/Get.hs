@@ -181,8 +181,8 @@ igFields :: Lens' InstallsGet' (Maybe Text)
 igFields = lens _igFields (\ s a -> s{_igFields = a})
 
 instance GoogleAuth InstallsGet' where
-        authKey = igKey . _Just
-        authToken = igOAuthToken . _Just
+        _AuthKey = igKey . _Just
+        _AuthToken = igOAuthToken . _Just
 
 instance GoogleRequest InstallsGet' where
         type Rs InstallsGet' = Install

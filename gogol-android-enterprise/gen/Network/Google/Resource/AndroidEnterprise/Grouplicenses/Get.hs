@@ -157,8 +157,8 @@ ggFields :: Lens' GrouplicensesGet' (Maybe Text)
 ggFields = lens _ggFields (\ s a -> s{_ggFields = a})
 
 instance GoogleAuth GrouplicensesGet' where
-        authKey = ggKey . _Just
-        authToken = ggOAuthToken . _Just
+        _AuthKey = ggKey . _Just
+        _AuthToken = ggOAuthToken . _Just
 
 instance GoogleRequest GrouplicensesGet' where
         type Rs GrouplicensesGet' = GroupLicense

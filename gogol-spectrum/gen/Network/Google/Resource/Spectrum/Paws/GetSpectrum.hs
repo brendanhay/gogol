@@ -149,8 +149,8 @@ pgsFields
   = lens _pgsFields (\ s a -> s{_pgsFields = a})
 
 instance GoogleAuth PawsGetSpectrum' where
-        authKey = pgsKey . _Just
-        authToken = pgsOAuthToken . _Just
+        _AuthKey = pgsKey . _Just
+        _AuthToken = pgsOAuthToken . _Just
 
 instance GoogleRequest PawsGetSpectrum' where
         type Rs PawsGetSpectrum' = PawsGetSpectrumResponse

@@ -179,8 +179,8 @@ plFields :: Lens' PlayersList' (Maybe Text)
 plFields = lens _plFields (\ s a -> s{_plFields = a})
 
 instance GoogleAuth PlayersList' where
-        authKey = plKey . _Just
-        authToken = plOAuthToken . _Just
+        _AuthKey = plKey . _Just
+        _AuthToken = plOAuthToken . _Just
 
 instance GoogleRequest PlayersList' where
         type Rs PlayersList' = PlayerListResponse

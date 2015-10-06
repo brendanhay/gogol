@@ -170,8 +170,8 @@ vgrFields
   = lens _vgrFields (\ s a -> s{_vgrFields = a})
 
 instance GoogleAuth VideosGetRating' where
-        authKey = vgrKey . _Just
-        authToken = vgrOAuthToken . _Just
+        _AuthKey = vgrKey . _Just
+        _AuthToken = vgrOAuthToken . _Just
 
 instance GoogleRequest VideosGetRating' where
         type Rs VideosGetRating' = VideoGetRatingResponse

@@ -154,8 +154,8 @@ auFields :: Lens' AccountsUpdate' (Maybe Text)
 auFields = lens _auFields (\ s a -> s{_auFields = a})
 
 instance GoogleAuth AccountsUpdate' where
-        authKey = auKey . _Just
-        authToken = auOAuthToken . _Just
+        _AuthKey = auKey . _Just
+        _AuthToken = auOAuthToken . _Just
 
 instance GoogleRequest AccountsUpdate' where
         type Rs AccountsUpdate' = Account

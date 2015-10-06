@@ -161,8 +161,8 @@ varrlFields
 
 instance GoogleAuth VideoAbuseReportReasonsList'
          where
-        authKey = varrlKey . _Just
-        authToken = varrlOAuthToken . _Just
+        _AuthKey = varrlKey . _Just
+        _AuthToken = varrlOAuthToken . _Just
 
 instance GoogleRequest VideoAbuseReportReasonsList'
          where

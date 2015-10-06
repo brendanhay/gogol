@@ -168,8 +168,8 @@ tllFields
   = lens _tllFields (\ s a -> s{_tllFields = a})
 
 instance GoogleAuth TemplateList' where
-        authKey = tllKey . _Just
-        authToken = tllOAuthToken . _Just
+        _AuthKey = tllKey . _Just
+        _AuthToken = tllOAuthToken . _Just
 
 instance GoogleRequest TemplateList' where
         type Rs TemplateList' = TemplateList

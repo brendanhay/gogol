@@ -144,8 +144,8 @@ adFields :: Lens' AnnotationsDelete' (Maybe Text)
 adFields = lens _adFields (\ s a -> s{_adFields = a})
 
 instance GoogleAuth AnnotationsDelete' where
-        authKey = adKey . _Just
-        authToken = adOAuthToken . _Just
+        _AuthKey = adKey . _Just
+        _AuthToken = adOAuthToken . _Just
 
 instance GoogleRequest AnnotationsDelete' where
         type Rs AnnotationsDelete' = ()

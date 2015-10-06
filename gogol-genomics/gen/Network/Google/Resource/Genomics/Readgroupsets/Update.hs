@@ -156,8 +156,8 @@ ruFields :: Lens' ReadgroupsetsUpdate' (Maybe Text)
 ruFields = lens _ruFields (\ s a -> s{_ruFields = a})
 
 instance GoogleAuth ReadgroupsetsUpdate' where
-        authKey = ruKey . _Just
-        authToken = ruOAuthToken . _Just
+        _AuthKey = ruKey . _Just
+        _AuthToken = ruOAuthToken . _Just
 
 instance GoogleRequest ReadgroupsetsUpdate' where
         type Rs ReadgroupsetsUpdate' = ReadGroupSet

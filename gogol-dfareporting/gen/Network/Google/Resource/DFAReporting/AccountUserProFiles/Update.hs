@@ -160,8 +160,8 @@ aupfuFields
   = lens _aupfuFields (\ s a -> s{_aupfuFields = a})
 
 instance GoogleAuth AccountUserProFilesUpdate' where
-        authKey = aupfuKey . _Just
-        authToken = aupfuOAuthToken . _Just
+        _AuthKey = aupfuKey . _Just
+        _AuthToken = aupfuOAuthToken . _Just
 
 instance GoogleRequest AccountUserProFilesUpdate'
          where

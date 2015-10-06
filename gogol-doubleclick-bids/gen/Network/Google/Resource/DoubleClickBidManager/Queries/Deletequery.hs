@@ -141,8 +141,8 @@ qdFields :: Lens' QueriesDeletequery' (Maybe Text)
 qdFields = lens _qdFields (\ s a -> s{_qdFields = a})
 
 instance GoogleAuth QueriesDeletequery' where
-        authKey = qdKey . _Just
-        authToken = qdOAuthToken . _Just
+        _AuthKey = qdKey . _Just
+        _AuthToken = qdOAuthToken . _Just
 
 instance GoogleRequest QueriesDeletequery' where
         type Rs QueriesDeletequery' = ()

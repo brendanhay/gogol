@@ -184,8 +184,8 @@ pFields :: Lens' PlacementsGeneratetags' (Maybe Text)
 pFields = lens _pFields (\ s a -> s{_pFields = a})
 
 instance GoogleAuth PlacementsGeneratetags' where
-        authKey = pKey . _Just
-        authToken = pOAuthToken . _Just
+        _AuthKey = pKey . _Just
+        _AuthToken = pOAuthToken . _Just
 
 instance GoogleRequest PlacementsGeneratetags' where
         type Rs PlacementsGeneratetags' =

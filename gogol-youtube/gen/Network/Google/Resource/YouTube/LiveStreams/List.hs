@@ -245,8 +245,8 @@ lslFields
   = lens _lslFields (\ s a -> s{_lslFields = a})
 
 instance GoogleAuth LiveStreamsList' where
-        authKey = lslKey . _Just
-        authToken = lslOAuthToken . _Just
+        _AuthKey = lslKey . _Just
+        _AuthToken = lslOAuthToken . _Just
 
 instance GoogleRequest LiveStreamsList' where
         type Rs LiveStreamsList' = LiveStreamListResponse

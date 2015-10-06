@@ -219,8 +219,8 @@ tirFields
   = lens _tirFields (\ s a -> s{_tirFields = a})
 
 instance GoogleAuth TableImportRows' where
-        authKey = tirKey . _Just
-        authToken = tirOAuthToken . _Just
+        _AuthKey = tirKey . _Just
+        _AuthToken = tirOAuthToken . _Just
 
 instance GoogleRequest TableImportRows' where
         type Rs TableImportRows' = Import

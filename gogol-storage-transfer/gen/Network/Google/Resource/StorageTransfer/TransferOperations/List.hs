@@ -252,8 +252,8 @@ tolCallback
   = lens _tolCallback (\ s a -> s{_tolCallback = a})
 
 instance GoogleAuth TransferOperationsList' where
-        authKey = tolKey . _Just
-        authToken = tolOAuthToken . _Just
+        _AuthKey = tolKey . _Just
+        _AuthToken = tolOAuthToken . _Just
 
 instance GoogleRequest TransferOperationsList' where
         type Rs TransferOperationsList' =

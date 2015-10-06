@@ -267,8 +267,8 @@ aupflFields
   = lens _aupflFields (\ s a -> s{_aupflFields = a})
 
 instance GoogleAuth AccountUserProFilesList' where
-        authKey = aupflKey . _Just
-        authToken = aupflOAuthToken . _Just
+        _AuthKey = aupflKey . _Just
+        _AuthToken = aupflOAuthToken . _Just
 
 instance GoogleRequest AccountUserProFilesList' where
         type Rs AccountUserProFilesList' =

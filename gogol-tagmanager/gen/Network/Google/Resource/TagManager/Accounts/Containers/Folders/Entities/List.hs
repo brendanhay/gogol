@@ -177,8 +177,8 @@ acfelFields
 
 instance GoogleAuth
          AccountsContainersFoldersEntitiesList' where
-        authKey = acfelKey . _Just
-        authToken = acfelOAuthToken . _Just
+        _AuthKey = acfelKey . _Just
+        _AuthToken = acfelOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersFoldersEntitiesList' where

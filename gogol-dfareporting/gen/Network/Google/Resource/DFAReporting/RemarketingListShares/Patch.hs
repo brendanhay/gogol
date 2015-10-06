@@ -175,8 +175,8 @@ rlspFields
   = lens _rlspFields (\ s a -> s{_rlspFields = a})
 
 instance GoogleAuth RemarketingListSharesPatch' where
-        authKey = rlspKey . _Just
-        authToken = rlspOAuthToken . _Just
+        _AuthKey = rlspKey . _Just
+        _AuthToken = rlspOAuthToken . _Just
 
 instance GoogleRequest RemarketingListSharesPatch'
          where

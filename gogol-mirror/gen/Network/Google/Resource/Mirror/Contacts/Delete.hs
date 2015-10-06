@@ -140,8 +140,8 @@ cdFields :: Lens' ContactsDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
 instance GoogleAuth ContactsDelete' where
-        authKey = cdKey . _Just
-        authToken = cdOAuthToken . _Just
+        _AuthKey = cdKey . _Just
+        _AuthToken = cdOAuthToken . _Just
 
 instance GoogleRequest ContactsDelete' where
         type Rs ContactsDelete' = ()

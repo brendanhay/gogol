@@ -170,8 +170,8 @@ ddFields :: Lens' DisksDelete' (Maybe Text)
 ddFields = lens _ddFields (\ s a -> s{_ddFields = a})
 
 instance GoogleAuth DisksDelete' where
-        authKey = ddKey . _Just
-        authToken = ddOAuthToken . _Just
+        _AuthKey = ddKey . _Just
+        _AuthToken = ddOAuthToken . _Just
 
 instance GoogleRequest DisksDelete' where
         type Rs DisksDelete' = Operation

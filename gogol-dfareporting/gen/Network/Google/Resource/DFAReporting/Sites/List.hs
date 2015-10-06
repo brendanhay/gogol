@@ -338,8 +338,8 @@ sitFields
   = lens _sitFields (\ s a -> s{_sitFields = a})
 
 instance GoogleAuth SitesList' where
-        authKey = sitKey . _Just
-        authToken = sitOAuthToken . _Just
+        _AuthKey = sitKey . _Just
+        _AuthToken = sitOAuthToken . _Just
 
 instance GoogleRequest SitesList' where
         type Rs SitesList' = SitesListResponse

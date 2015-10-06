@@ -161,8 +161,8 @@ brlFields
   = lens _brlFields (\ s a -> s{_brlFields = a})
 
 instance GoogleAuth BatchReportsList' where
-        authKey = brlKey . _Just
-        authToken = brlOAuthToken . _Just
+        _AuthKey = brlKey . _Just
+        _AuthToken = brlOAuthToken . _Just
 
 instance GoogleRequest BatchReportsList' where
         type Rs BatchReportsList' = BatchReportList

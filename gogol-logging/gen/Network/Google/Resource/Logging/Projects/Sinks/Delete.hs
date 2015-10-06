@@ -229,8 +229,8 @@ psdCallback
   = lens _psdCallback (\ s a -> s{_psdCallback = a})
 
 instance GoogleAuth ProjectsSinksDelete' where
-        authKey = psdKey . _Just
-        authToken = psdOAuthToken . _Just
+        _AuthKey = psdKey . _Just
+        _AuthToken = psdOAuthToken . _Just
 
 instance GoogleRequest ProjectsSinksDelete' where
         type Rs ProjectsSinksDelete' = Empty

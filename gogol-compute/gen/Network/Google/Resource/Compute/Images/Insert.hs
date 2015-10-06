@@ -153,8 +153,8 @@ iFields :: Lens' ImagesInsert' (Maybe Text)
 iFields = lens _iFields (\ s a -> s{_iFields = a})
 
 instance GoogleAuth ImagesInsert' where
-        authKey = iKey . _Just
-        authToken = iOAuthToken . _Just
+        _AuthKey = iKey . _Just
+        _AuthToken = iOAuthToken . _Just
 
 instance GoogleRequest ImagesInsert' where
         type Rs ImagesInsert' = Operation

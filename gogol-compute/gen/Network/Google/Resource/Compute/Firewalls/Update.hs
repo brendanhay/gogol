@@ -168,8 +168,8 @@ fuFields :: Lens' FirewallsUpdate' (Maybe Text)
 fuFields = lens _fuFields (\ s a -> s{_fuFields = a})
 
 instance GoogleAuth FirewallsUpdate' where
-        authKey = fuKey . _Just
-        authToken = fuOAuthToken . _Just
+        _AuthKey = fuKey . _Just
+        _AuthToken = fuOAuthToken . _Just
 
 instance GoogleRequest FirewallsUpdate' where
         type Rs FirewallsUpdate' = Operation

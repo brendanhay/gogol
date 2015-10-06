@@ -230,8 +230,8 @@ lbbdFields
   = lens _lbbdFields (\ s a -> s{_lbbdFields = a})
 
 instance GoogleAuth LiveBroadcastsBindDirect' where
-        authKey = lbbdKey . _Just
-        authToken = lbbdOAuthToken . _Just
+        _AuthKey = lbbdKey . _Just
+        _AuthToken = lbbdOAuthToken . _Just
 
 instance GoogleRequest LiveBroadcastsBindDirect'
          where

@@ -174,8 +174,8 @@ reaFields
   = lens _reaFields (\ s a -> s{_reaFields = a})
 
 instance GoogleAuth RealtimeGet' where
-        authKey = reaKey . _Just
-        authToken = reaOAuthToken . _Just
+        _AuthKey = reaKey . _Just
+        _AuthToken = reaOAuthToken . _Just
 
 instance GoogleRequest RealtimeGet' where
         type Rs RealtimeGet' = ()

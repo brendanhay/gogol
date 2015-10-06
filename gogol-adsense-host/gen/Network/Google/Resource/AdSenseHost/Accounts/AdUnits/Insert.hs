@@ -175,8 +175,8 @@ aauiFields
   = lens _aauiFields (\ s a -> s{_aauiFields = a})
 
 instance GoogleAuth AccountsAdUnitsInsert' where
-        authKey = aauiKey . _Just
-        authToken = aauiOAuthToken . _Just
+        _AuthKey = aauiKey . _Just
+        _AuthToken = aauiOAuthToken . _Just
 
 instance GoogleRequest AccountsAdUnitsInsert' where
         type Rs AccountsAdUnitsInsert' = AdUnit

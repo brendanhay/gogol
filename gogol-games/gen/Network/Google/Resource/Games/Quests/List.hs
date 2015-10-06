@@ -182,8 +182,8 @@ qlFields :: Lens' QuestsList' (Maybe Text)
 qlFields = lens _qlFields (\ s a -> s{_qlFields = a})
 
 instance GoogleAuth QuestsList' where
-        authKey = qlKey . _Just
-        authToken = qlOAuthToken . _Just
+        _AuthKey = qlKey . _Just
+        _AuthToken = qlOAuthToken . _Just
 
 instance GoogleRequest QuestsList' where
         type Rs QuestsList' = QuestListResponse

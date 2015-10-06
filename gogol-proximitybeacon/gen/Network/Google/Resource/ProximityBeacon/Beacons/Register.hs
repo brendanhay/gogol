@@ -213,8 +213,8 @@ brCallback
   = lens _brCallback (\ s a -> s{_brCallback = a})
 
 instance GoogleAuth BeaconsRegister' where
-        authKey = brKey . _Just
-        authToken = brOAuthToken . _Just
+        _AuthKey = brKey . _Just
+        _AuthToken = brOAuthToken . _Just
 
 instance GoogleRequest BeaconsRegister' where
         type Rs BeaconsRegister' = Beacon

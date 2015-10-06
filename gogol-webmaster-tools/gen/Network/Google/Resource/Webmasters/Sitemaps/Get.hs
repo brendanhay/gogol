@@ -156,8 +156,8 @@ sgFields :: Lens' SitemapsGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
 instance GoogleAuth SitemapsGet' where
-        authKey = sgKey . _Just
-        authToken = sgOAuthToken . _Just
+        _AuthKey = sgKey . _Just
+        _AuthToken = sgOAuthToken . _Just
 
 instance GoogleRequest SitemapsGet' where
         type Rs SitemapsGet' = WmxSitemap

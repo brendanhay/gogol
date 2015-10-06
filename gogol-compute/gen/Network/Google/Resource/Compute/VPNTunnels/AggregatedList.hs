@@ -194,8 +194,8 @@ vtalFields
   = lens _vtalFields (\ s a -> s{_vtalFields = a})
 
 instance GoogleAuth VPNTunnelsAggregatedList' where
-        authKey = vtalKey . _Just
-        authToken = vtalOAuthToken . _Just
+        _AuthKey = vtalKey . _Just
+        _AuthToken = vtalOAuthToken . _Just
 
 instance GoogleRequest VPNTunnelsAggregatedList'
          where

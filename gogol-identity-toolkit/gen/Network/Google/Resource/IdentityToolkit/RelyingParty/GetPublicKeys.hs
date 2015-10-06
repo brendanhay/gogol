@@ -135,8 +135,8 @@ rpgpkFields
   = lens _rpgpkFields (\ s a -> s{_rpgpkFields = a})
 
 instance GoogleAuth RelyingPartyGetPublicKeys' where
-        authKey = rpgpkKey . _Just
-        authToken = rpgpkOAuthToken . _Just
+        _AuthKey = rpgpkKey . _Just
+        _AuthToken = rpgpkOAuthToken . _Just
 
 instance GoogleRequest RelyingPartyGetPublicKeys'
          where

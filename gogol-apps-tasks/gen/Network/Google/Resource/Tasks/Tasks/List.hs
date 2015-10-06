@@ -265,8 +265,8 @@ tlFields :: Lens' TasksList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
 instance GoogleAuth TasksList' where
-        authKey = tlKey . _Just
-        authToken = tlOAuthToken . _Just
+        _AuthKey = tlKey . _Just
+        _AuthToken = tlOAuthToken . _Just
 
 instance GoogleRequest TasksList' where
         type Rs TasksList' = Tasks

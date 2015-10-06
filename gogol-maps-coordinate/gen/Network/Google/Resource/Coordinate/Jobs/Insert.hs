@@ -263,8 +263,8 @@ jiCustomField
       . _Coerce
 
 instance GoogleAuth JobsInsert' where
-        authKey = jiKey . _Just
-        authToken = jiOAuthToken . _Just
+        _AuthKey = jiKey . _Just
+        _AuthToken = jiOAuthToken . _Just
 
 instance GoogleRequest JobsInsert' where
         type Rs JobsInsert' = Job

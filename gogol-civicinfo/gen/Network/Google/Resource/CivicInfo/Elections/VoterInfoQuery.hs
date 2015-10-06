@@ -174,8 +174,8 @@ eviqFields
   = lens _eviqFields (\ s a -> s{_eviqFields = a})
 
 instance GoogleAuth ElectionsVoterInfoQuery' where
-        authKey = eviqKey . _Just
-        authToken = eviqOAuthToken . _Just
+        _AuthKey = eviqKey . _Just
+        _AuthToken = eviqOAuthToken . _Just
 
 instance GoogleRequest ElectionsVoterInfoQuery' where
         type Rs ElectionsVoterInfoQuery' = VoterInfoResponse

@@ -145,8 +145,8 @@ mupFields
   = lens _mupFields (\ s a -> s{_mupFields = a})
 
 instance GoogleAuth MapsUnPublish' where
-        authKey = mupKey . _Just
-        authToken = mupOAuthToken . _Just
+        _AuthKey = mupKey . _Just
+        _AuthToken = mupOAuthToken . _Just
 
 instance GoogleRequest MapsUnPublish' where
         type Rs MapsUnPublish' = PublishResponse

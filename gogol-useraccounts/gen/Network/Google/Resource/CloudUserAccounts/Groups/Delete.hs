@@ -154,8 +154,8 @@ gdFields :: Lens' GroupsDelete' (Maybe Text)
 gdFields = lens _gdFields (\ s a -> s{_gdFields = a})
 
 instance GoogleAuth GroupsDelete' where
-        authKey = gdKey . _Just
-        authToken = gdOAuthToken . _Just
+        _AuthKey = gdKey . _Just
+        _AuthToken = gdOAuthToken . _Just
 
 instance GoogleRequest GroupsDelete' where
         type Rs GroupsDelete' = Operation

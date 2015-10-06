@@ -297,8 +297,8 @@ rlCreatedBefore
       . mapping _DateTime
 
 instance GoogleAuth RastersList' where
-        authKey = rlKey . _Just
-        authToken = rlOAuthToken . _Just
+        _AuthKey = rlKey . _Just
+        _AuthToken = rlOAuthToken . _Just
 
 instance GoogleRequest RastersList' where
         type Rs RastersList' = RastersListResponse

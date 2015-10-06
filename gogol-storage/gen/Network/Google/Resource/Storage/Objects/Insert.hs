@@ -258,8 +258,8 @@ oiFields :: Lens' ObjectsInsert' (Maybe Text)
 oiFields = lens _oiFields (\ s a -> s{_oiFields = a})
 
 instance GoogleAuth ObjectsInsert' where
-        authKey = oiKey . _Just
-        authToken = oiOAuthToken . _Just
+        _AuthKey = oiKey . _Just
+        _AuthToken = oiOAuthToken . _Just
 
 instance GoogleRequest ObjectsInsert' where
         type Rs ObjectsInsert' = Object

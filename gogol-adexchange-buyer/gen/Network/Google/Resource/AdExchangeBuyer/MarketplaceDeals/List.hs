@@ -146,8 +146,8 @@ mdlFields
   = lens _mdlFields (\ s a -> s{_mdlFields = a})
 
 instance GoogleAuth MarketplaceDealsList' where
-        authKey = mdlKey . _Just
-        authToken = mdlOAuthToken . _Just
+        _AuthKey = mdlKey . _Just
+        _AuthToken = mdlOAuthToken . _Just
 
 instance GoogleRequest MarketplaceDealsList' where
         type Rs MarketplaceDealsList' = GetOrderDealsResponse

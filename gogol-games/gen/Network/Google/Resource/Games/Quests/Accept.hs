@@ -155,8 +155,8 @@ qaFields :: Lens' QuestsAccept' (Maybe Text)
 qaFields = lens _qaFields (\ s a -> s{_qaFields = a})
 
 instance GoogleAuth QuestsAccept' where
-        authKey = qaKey . _Just
-        authToken = qaOAuthToken . _Just
+        _AuthKey = qaKey . _Just
+        _AuthToken = qaOAuthToken . _Just
 
 instance GoogleRequest QuestsAccept' where
         type Rs QuestsAccept' = Quest

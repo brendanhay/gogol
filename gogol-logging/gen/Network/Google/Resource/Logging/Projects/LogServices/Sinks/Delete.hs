@@ -248,8 +248,8 @@ plssdCallback
 
 instance GoogleAuth ProjectsLogServicesSinksDelete'
          where
-        authKey = plssdKey . _Just
-        authToken = plssdOAuthToken . _Just
+        _AuthKey = plssdKey . _Just
+        _AuthToken = plssdOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsLogServicesSinksDelete' where

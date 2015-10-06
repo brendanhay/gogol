@@ -147,8 +147,8 @@ vcFields :: Lens' VariantsetsCreate' (Maybe Text)
 vcFields = lens _vcFields (\ s a -> s{_vcFields = a})
 
 instance GoogleAuth VariantsetsCreate' where
-        authKey = vcKey . _Just
-        authToken = vcOAuthToken . _Just
+        _AuthKey = vcKey . _Just
+        _AuthToken = vcOAuthToken . _Just
 
 instance GoogleRequest VariantsetsCreate' where
         type Rs VariantsetsCreate' = VariantSet

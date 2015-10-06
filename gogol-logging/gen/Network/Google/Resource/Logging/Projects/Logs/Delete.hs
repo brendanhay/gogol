@@ -229,8 +229,8 @@ pldCallback
   = lens _pldCallback (\ s a -> s{_pldCallback = a})
 
 instance GoogleAuth ProjectsLogsDelete' where
-        authKey = pldKey . _Just
-        authToken = pldOAuthToken . _Just
+        _AuthKey = pldKey . _Just
+        _AuthToken = pldOAuthToken . _Just
 
 instance GoogleRequest ProjectsLogsDelete' where
         type Rs ProjectsLogsDelete' = Empty

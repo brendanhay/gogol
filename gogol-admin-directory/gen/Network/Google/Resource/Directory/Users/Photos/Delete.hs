@@ -146,8 +146,8 @@ updFields
   = lens _updFields (\ s a -> s{_updFields = a})
 
 instance GoogleAuth UsersPhotosDelete' where
-        authKey = updKey . _Just
-        authToken = updOAuthToken . _Just
+        _AuthKey = updKey . _Just
+        _AuthToken = updOAuthToken . _Just
 
 instance GoogleRequest UsersPhotosDelete' where
         type Rs UsersPhotosDelete' = ()

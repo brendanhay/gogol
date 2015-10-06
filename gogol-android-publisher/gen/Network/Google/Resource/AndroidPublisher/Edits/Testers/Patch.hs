@@ -182,8 +182,8 @@ etptFields
   = lens _etptFields (\ s a -> s{_etptFields = a})
 
 instance GoogleAuth EditsTestersPatch' where
-        authKey = etptKey . _Just
-        authToken = etptOAuthToken . _Just
+        _AuthKey = etptKey . _Just
+        _AuthToken = etptOAuthToken . _Just
 
 instance GoogleRequest EditsTestersPatch' where
         type Rs EditsTestersPatch' = Testers

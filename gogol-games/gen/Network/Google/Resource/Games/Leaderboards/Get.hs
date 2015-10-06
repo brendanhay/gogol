@@ -153,8 +153,8 @@ lgFields :: Lens' LeaderboardsGet' (Maybe Text)
 lgFields = lens _lgFields (\ s a -> s{_lgFields = a})
 
 instance GoogleAuth LeaderboardsGet' where
-        authKey = lgKey . _Just
-        authToken = lgOAuthToken . _Just
+        _AuthKey = lgKey . _Just
+        _AuthToken = lgOAuthToken . _Just
 
 instance GoogleRequest LeaderboardsGet' where
         type Rs LeaderboardsGet' = Leaderboard

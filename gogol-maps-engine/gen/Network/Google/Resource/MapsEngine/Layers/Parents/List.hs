@@ -173,8 +173,8 @@ lplpFields
   = lens _lplpFields (\ s a -> s{_lplpFields = a})
 
 instance GoogleAuth LayersParentsList' where
-        authKey = lplpKey . _Just
-        authToken = lplpOAuthToken . _Just
+        _AuthKey = lplpKey . _Just
+        _AuthToken = lplpOAuthToken . _Just
 
 instance GoogleRequest LayersParentsList' where
         type Rs LayersParentsList' = ParentsListResponse

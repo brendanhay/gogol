@@ -171,8 +171,8 @@ crpFields
   = lens _crpFields (\ s a -> s{_crpFields = a})
 
 instance GoogleAuth CirclesRemovePeople' where
-        authKey = crpKey . _Just
-        authToken = crpOAuthToken . _Just
+        _AuthKey = crpKey . _Just
+        _AuthToken = crpOAuthToken . _Just
 
 instance GoogleRequest CirclesRemovePeople' where
         type Rs CirclesRemovePeople' = ()

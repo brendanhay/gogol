@@ -210,8 +210,8 @@ cllFields
   = lens _cllFields (\ s a -> s{_cllFields = a})
 
 instance GoogleAuth CaptionsList' where
-        authKey = cllKey . _Just
-        authToken = cllOAuthToken . _Just
+        _AuthKey = cllKey . _Just
+        _AuthToken = cllOAuthToken . _Just
 
 instance GoogleRequest CaptionsList' where
         type Rs CaptionsList' = CaptionListResponse

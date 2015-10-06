@@ -204,8 +204,8 @@ ccalFields
 
 instance GoogleAuth CampaignCreativeAssociationsList'
          where
-        authKey = ccalKey . _Just
-        authToken = ccalOAuthToken . _Just
+        _AuthKey = ccalKey . _Just
+        _AuthToken = ccalOAuthToken . _Just
 
 instance GoogleRequest
          CampaignCreativeAssociationsList' where

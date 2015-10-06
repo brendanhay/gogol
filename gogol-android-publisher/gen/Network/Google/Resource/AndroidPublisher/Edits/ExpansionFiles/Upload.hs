@@ -201,8 +201,8 @@ eefuFields
   = lens _eefuFields (\ s a -> s{_eefuFields = a})
 
 instance GoogleAuth EditsExpansionFilesUpload' where
-        authKey = eefuKey . _Just
-        authToken = eefuOAuthToken . _Just
+        _AuthKey = eefuKey . _Just
+        _AuthToken = eefuOAuthToken . _Just
 
 instance GoogleRequest EditsExpansionFilesUpload'
          where

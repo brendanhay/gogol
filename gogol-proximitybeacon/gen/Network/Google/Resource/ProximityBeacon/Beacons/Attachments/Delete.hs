@@ -224,8 +224,8 @@ badCallback
   = lens _badCallback (\ s a -> s{_badCallback = a})
 
 instance GoogleAuth BeaconsAttachmentsDelete' where
-        authKey = badKey . _Just
-        authToken = badOAuthToken . _Just
+        _AuthKey = badKey . _Just
+        _AuthToken = badOAuthToken . _Just
 
 instance GoogleRequest BeaconsAttachmentsDelete'
          where

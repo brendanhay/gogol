@@ -155,8 +155,8 @@ ualFields
   = lens _ualFields (\ s a -> s{_ualFields = a})
 
 instance GoogleAuth UsersAliasesList' where
-        authKey = ualKey . _Just
-        authToken = ualOAuthToken . _Just
+        _AuthKey = ualKey . _Just
+        _AuthToken = ualOAuthToken . _Just
 
 instance GoogleRequest UsersAliasesList' where
         type Rs UsersAliasesList' = Aliases

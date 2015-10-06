@@ -160,8 +160,8 @@ lciFields
 
 instance GoogleAuth LeaderboardConfigurationsInsert'
          where
-        authKey = lciKey . _Just
-        authToken = lciOAuthToken . _Just
+        _AuthKey = lciKey . _Just
+        _AuthToken = lciOAuthToken . _Just
 
 instance GoogleRequest
          LeaderboardConfigurationsInsert' where

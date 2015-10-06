@@ -320,8 +320,8 @@ aalCallback
   = lens _aalCallback (\ s a -> s{_aalCallback = a})
 
 instance GoogleAuth AccountsAvailsList' where
-        authKey = aalKey . _Just
-        authToken = aalOAuthToken . _Just
+        _AuthKey = aalKey . _Just
+        _AuthToken = aalOAuthToken . _Just
 
 instance GoogleRequest AccountsAvailsList' where
         type Rs AccountsAvailsList' = ListAvailsResponse

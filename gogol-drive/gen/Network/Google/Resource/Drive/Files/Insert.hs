@@ -244,8 +244,8 @@ fiFields :: Lens' FilesInsert' (Maybe Text)
 fiFields = lens _fiFields (\ s a -> s{_fiFields = a})
 
 instance GoogleAuth FilesInsert' where
-        authKey = fiKey . _Just
-        authToken = fiOAuthToken . _Just
+        _AuthKey = fiKey . _Just
+        _AuthToken = fiOAuthToken . _Just
 
 instance GoogleRequest FilesInsert' where
         type Rs FilesInsert' = File

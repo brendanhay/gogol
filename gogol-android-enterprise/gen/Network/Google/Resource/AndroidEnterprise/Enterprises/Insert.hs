@@ -154,8 +154,8 @@ eiFields :: Lens' EnterprisesInsert' (Maybe Text)
 eiFields = lens _eiFields (\ s a -> s{_eiFields = a})
 
 instance GoogleAuth EnterprisesInsert' where
-        authKey = eiKey . _Just
-        authToken = eiOAuthToken . _Just
+        _AuthKey = eiKey . _Just
+        _AuthToken = eiOAuthToken . _Just
 
 instance GoogleRequest EnterprisesInsert' where
         type Rs EnterprisesInsert' = Enterprise

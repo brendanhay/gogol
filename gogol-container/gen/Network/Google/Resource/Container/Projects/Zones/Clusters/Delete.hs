@@ -177,8 +177,8 @@ pzcdFields
 
 instance GoogleAuth ProjectsZonesClustersDelete'
          where
-        authKey = pzcdKey . _Just
-        authToken = pzcdOAuthToken . _Just
+        _AuthKey = pzcdKey . _Just
+        _AuthToken = pzcdOAuthToken . _Just
 
 instance GoogleRequest ProjectsZonesClustersDelete'
          where

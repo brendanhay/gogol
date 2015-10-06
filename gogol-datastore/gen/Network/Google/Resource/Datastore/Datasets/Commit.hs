@@ -156,8 +156,8 @@ dcFields :: Lens' DatasetsCommit' (Maybe Text)
 dcFields = lens _dcFields (\ s a -> s{_dcFields = a})
 
 instance GoogleAuth DatasetsCommit' where
-        authKey = dcKey . _Just
-        authToken = dcOAuthToken . _Just
+        _AuthKey = dcKey . _Just
+        _AuthToken = dcOAuthToken . _Just
 
 instance GoogleRequest DatasetsCommit' where
         type Rs DatasetsCommit' = CommitResponse

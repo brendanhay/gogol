@@ -199,8 +199,8 @@ pogFields
   = lens _pogFields (\ s a -> s{_pogFields = a})
 
 instance GoogleAuth PromoOfferGet' where
-        authKey = pogKey . _Just
-        authToken = pogOAuthToken . _Just
+        _AuthKey = pogKey . _Just
+        _AuthToken = pogOAuthToken . _Just
 
 instance GoogleRequest PromoOfferGet' where
         type Rs PromoOfferGet' = Offers

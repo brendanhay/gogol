@@ -211,8 +211,8 @@ vuulFields
   = lens _vuulFields (\ s a -> s{_vuulFields = a})
 
 instance GoogleAuth VolumesUserUploadedList' where
-        authKey = vuulKey . _Just
-        authToken = vuulOAuthToken . _Just
+        _AuthKey = vuulKey . _Just
+        _AuthToken = vuulOAuthToken . _Just
 
 instance GoogleRequest VolumesUserUploadedList' where
         type Rs VolumesUserUploadedList' = Volumes

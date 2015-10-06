@@ -186,8 +186,8 @@ mlbmvFields
 
 instance GoogleAuth MyLibraryBookshelvesMoveVolume'
          where
-        authKey = mlbmvKey . _Just
-        authToken = mlbmvOAuthToken . _Just
+        _AuthKey = mlbmvKey . _Just
+        _AuthToken = mlbmvOAuthToken . _Just
 
 instance GoogleRequest
          MyLibraryBookshelvesMoveVolume' where

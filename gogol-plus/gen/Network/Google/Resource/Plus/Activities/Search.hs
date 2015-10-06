@@ -191,8 +191,8 @@ asFields :: Lens' ActivitiesSearch' (Maybe Text)
 asFields = lens _asFields (\ s a -> s{_asFields = a})
 
 instance GoogleAuth ActivitiesSearch' where
-        authKey = asKey . _Just
-        authToken = asOAuthToken . _Just
+        _AuthKey = asKey . _Just
+        _AuthToken = asOAuthToken . _Just
 
 instance GoogleRequest ActivitiesSearch' where
         type Rs ActivitiesSearch' = ActivityFeed

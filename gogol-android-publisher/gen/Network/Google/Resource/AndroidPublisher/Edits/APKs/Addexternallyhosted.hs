@@ -181,8 +181,8 @@ eapkaFields
 
 instance GoogleAuth EditsAPKsAddexternallyhosted'
          where
-        authKey = eapkaKey . _Just
-        authToken = eapkaOAuthToken . _Just
+        _AuthKey = eapkaKey . _Just
+        _AuthToken = eapkaOAuthToken . _Just
 
 instance GoogleRequest EditsAPKsAddexternallyhosted'
          where

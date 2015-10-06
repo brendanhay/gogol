@@ -184,8 +184,8 @@ pppFields
   = lens _pppFields (\ s a -> s{_pppFields = a})
 
 instance GoogleAuth PermissionsPatch' where
-        authKey = pppKey . _Just
-        authToken = pppOAuthToken . _Just
+        _AuthKey = pppKey . _Just
+        _AuthToken = pppOAuthToken . _Just
 
 instance GoogleRequest PermissionsPatch' where
         type Rs PermissionsPatch' = Permission

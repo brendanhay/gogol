@@ -157,8 +157,8 @@ vpFields :: Lens' VariantsetsPatch' (Maybe Text)
 vpFields = lens _vpFields (\ s a -> s{_vpFields = a})
 
 instance GoogleAuth VariantsetsPatch' where
-        authKey = vpKey . _Just
-        authToken = vpOAuthToken . _Just
+        _AuthKey = vpKey . _Just
+        _AuthToken = vpOAuthToken . _Just
 
 instance GoogleRequest VariantsetsPatch' where
         type Rs VariantsetsPatch' = VariantSet

@@ -175,8 +175,8 @@ actdFields
 
 instance GoogleAuth AccountsContainersTriggersDelete'
          where
-        authKey = actdKey . _Just
-        authToken = actdOAuthToken . _Just
+        _AuthKey = actdKey . _Just
+        _AuthToken = actdOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersTriggersDelete' where

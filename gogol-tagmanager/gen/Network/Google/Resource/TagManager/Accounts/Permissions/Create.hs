@@ -157,8 +157,8 @@ apcFields
   = lens _apcFields (\ s a -> s{_apcFields = a})
 
 instance GoogleAuth AccountsPermissionsCreate' where
-        authKey = apcKey . _Just
-        authToken = apcOAuthToken . _Just
+        _AuthKey = apcKey . _Just
+        _AuthToken = apcOAuthToken . _Just
 
 instance GoogleRequest AccountsPermissionsCreate'
          where

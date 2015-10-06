@@ -192,8 +192,8 @@ dalFields
   = lens _dalFields (\ s a -> s{_dalFields = a})
 
 instance GoogleAuth DisksAggregatedList' where
-        authKey = dalKey . _Just
-        authToken = dalOAuthToken . _Just
+        _AuthKey = dalKey . _Just
+        _AuthToken = dalOAuthToken . _Just
 
 instance GoogleRequest DisksAggregatedList' where
         type Rs DisksAggregatedList' = DiskAggregatedList

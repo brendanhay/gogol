@@ -157,8 +157,8 @@ saiFields
   = lens _saiFields (\ s a -> s{_saiFields = a})
 
 instance GoogleAuth SubAccountsInsert' where
-        authKey = saiKey . _Just
-        authToken = saiOAuthToken . _Just
+        _AuthKey = saiKey . _Just
+        _AuthToken = saiOAuthToken . _Just
 
 instance GoogleRequest SubAccountsInsert' where
         type Rs SubAccountsInsert' = SubAccount

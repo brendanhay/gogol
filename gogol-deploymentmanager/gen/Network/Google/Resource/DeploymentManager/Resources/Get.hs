@@ -167,8 +167,8 @@ rgDeployment
   = lens _rgDeployment (\ s a -> s{_rgDeployment = a})
 
 instance GoogleAuth ResourcesGet' where
-        authKey = rgKey . _Just
-        authToken = rgOAuthToken . _Just
+        _AuthKey = rgKey . _Just
+        _AuthToken = rgOAuthToken . _Just
 
 instance GoogleRequest ResourcesGet' where
         type Rs ResourcesGet' = Resource

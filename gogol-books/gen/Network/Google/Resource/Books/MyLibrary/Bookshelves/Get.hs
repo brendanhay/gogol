@@ -159,8 +159,8 @@ mlbgFields
   = lens _mlbgFields (\ s a -> s{_mlbgFields = a})
 
 instance GoogleAuth MyLibraryBookshelvesGet' where
-        authKey = mlbgKey . _Just
-        authToken = mlbgOAuthToken . _Just
+        _AuthKey = mlbgKey . _Just
+        _AuthToken = mlbgOAuthToken . _Just
 
 instance GoogleRequest MyLibraryBookshelvesGet' where
         type Rs MyLibraryBookshelvesGet' = Bookshelf

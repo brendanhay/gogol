@@ -191,8 +191,8 @@ mududFields
 
 instance GoogleAuth
          ManagementUploadsDeleteUploadData' where
-        authKey = mududKey . _Just
-        authToken = mududOAuthToken . _Just
+        _AuthKey = mududKey . _Just
+        _AuthToken = mududOAuthToken . _Just
 
 instance GoogleRequest
          ManagementUploadsDeleteUploadData' where

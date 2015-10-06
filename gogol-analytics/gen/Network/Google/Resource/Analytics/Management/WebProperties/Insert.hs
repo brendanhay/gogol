@@ -166,8 +166,8 @@ mwpiFields
 
 instance GoogleAuth ManagementWebPropertiesInsert'
          where
-        authKey = mwpiKey . _Just
-        authToken = mwpiOAuthToken . _Just
+        _AuthKey = mwpiKey . _Just
+        _AuthToken = mwpiOAuthToken . _Just
 
 instance GoogleRequest ManagementWebPropertiesInsert'
          where

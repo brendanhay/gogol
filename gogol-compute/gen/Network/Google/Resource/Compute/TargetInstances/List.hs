@@ -205,8 +205,8 @@ tilFields
   = lens _tilFields (\ s a -> s{_tilFields = a})
 
 instance GoogleAuth TargetInstancesList' where
-        authKey = tilKey . _Just
-        authToken = tilOAuthToken . _Just
+        _AuthKey = tilKey . _Just
+        _AuthToken = tilOAuthToken . _Just
 
 instance GoogleRequest TargetInstancesList' where
         type Rs TargetInstancesList' = TargetInstanceList

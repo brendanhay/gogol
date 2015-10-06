@@ -158,8 +158,8 @@ agiFields
   = lens _agiFields (\ s a -> s{_agiFields = a})
 
 instance GoogleAuth AdvertiserGroupsInsert' where
-        authKey = agiKey . _Just
-        authToken = agiOAuthToken . _Just
+        _AuthKey = agiKey . _Just
+        _AuthToken = agiOAuthToken . _Just
 
 instance GoogleRequest AdvertiserGroupsInsert' where
         type Rs AdvertiserGroupsInsert' = AdvertiserGroup

@@ -213,8 +213,8 @@ tjcCallback
   = lens _tjcCallback (\ s a -> s{_tjcCallback = a})
 
 instance GoogleAuth TransferJobsCreate' where
-        authKey = tjcKey . _Just
-        authToken = tjcOAuthToken . _Just
+        _AuthKey = tjcKey . _Just
+        _AuthToken = tjcOAuthToken . _Just
 
 instance GoogleRequest TransferJobsCreate' where
         type Rs TransferJobsCreate' = TransferJob

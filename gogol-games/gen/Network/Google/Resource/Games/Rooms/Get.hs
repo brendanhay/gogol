@@ -151,8 +151,8 @@ rgFields :: Lens' RoomsGet' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
 instance GoogleAuth RoomsGet' where
-        authKey = rgKey . _Just
-        authToken = rgOAuthToken . _Just
+        _AuthKey = rgKey . _Just
+        _AuthToken = rgOAuthToken . _Just
 
 instance GoogleRequest RoomsGet' where
         type Rs RoomsGet' = Room

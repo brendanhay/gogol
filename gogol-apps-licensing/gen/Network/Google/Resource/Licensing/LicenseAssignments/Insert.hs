@@ -169,8 +169,8 @@ laiFields
   = lens _laiFields (\ s a -> s{_laiFields = a})
 
 instance GoogleAuth LicenseAssignmentsInsert' where
-        authKey = laiKey . _Just
-        authToken = laiOAuthToken . _Just
+        _AuthKey = laiKey . _Just
+        _AuthToken = laiOAuthToken . _Just
 
 instance GoogleRequest LicenseAssignmentsInsert'
          where

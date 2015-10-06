@@ -175,8 +175,8 @@ maullFields
 
 instance GoogleAuth ManagementAccountUserLinksList'
          where
-        authKey = maullKey . _Just
-        authToken = maullOAuthToken . _Just
+        _AuthKey = maullKey . _Just
+        _AuthToken = maullOAuthToken . _Just
 
 instance GoogleRequest
          ManagementAccountUserLinksList' where

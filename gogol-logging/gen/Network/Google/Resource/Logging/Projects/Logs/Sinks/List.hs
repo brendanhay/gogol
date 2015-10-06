@@ -221,8 +221,8 @@ pCallback
   = lens _pCallback (\ s a -> s{_pCallback = a})
 
 instance GoogleAuth ProjectsLogsSinksList' where
-        authKey = pKey . _Just
-        authToken = pOAuthToken . _Just
+        _AuthKey = pKey . _Just
+        _AuthToken = pOAuthToken . _Just
 
 instance GoogleRequest ProjectsLogsSinksList' where
         type Rs ProjectsLogsSinksList' = ListLogSinksResponse

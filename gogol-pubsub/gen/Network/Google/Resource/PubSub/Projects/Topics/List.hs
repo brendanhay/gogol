@@ -237,8 +237,8 @@ ptlCallback
   = lens _ptlCallback (\ s a -> s{_ptlCallback = a})
 
 instance GoogleAuth ProjectsTopicsList' where
-        authKey = ptlKey . _Just
-        authToken = ptlOAuthToken . _Just
+        _AuthKey = ptlKey . _Just
+        _AuthToken = ptlOAuthToken . _Just
 
 instance GoogleRequest ProjectsTopicsList' where
         type Rs ProjectsTopicsList' = ListTopicsResponse

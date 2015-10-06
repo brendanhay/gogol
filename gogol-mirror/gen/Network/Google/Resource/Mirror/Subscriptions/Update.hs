@@ -153,8 +153,8 @@ suFields :: Lens' SubscriptionsUpdate' (Maybe Text)
 suFields = lens _suFields (\ s a -> s{_suFields = a})
 
 instance GoogleAuth SubscriptionsUpdate' where
-        authKey = suKey . _Just
-        authToken = suOAuthToken . _Just
+        _AuthKey = suKey . _Just
+        _AuthToken = suOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsUpdate' where
         type Rs SubscriptionsUpdate' = Subscription

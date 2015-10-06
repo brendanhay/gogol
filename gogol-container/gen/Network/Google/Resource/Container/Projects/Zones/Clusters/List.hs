@@ -160,8 +160,8 @@ pzclFields
   = lens _pzclFields (\ s a -> s{_pzclFields = a})
 
 instance GoogleAuth ProjectsZonesClustersList' where
-        authKey = pzclKey . _Just
-        authToken = pzclOAuthToken . _Just
+        _AuthKey = pzclKey . _Just
+        _AuthToken = pzclOAuthToken . _Just
 
 instance GoogleRequest ProjectsZonesClustersList'
          where

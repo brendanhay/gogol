@@ -254,8 +254,8 @@ cdblCallback
 
 instance GoogleAuth
          ControllerDebuggeesBreakpointsList' where
-        authKey = cdblKey . _Just
-        authToken = cdblOAuthToken . _Just
+        _AuthKey = cdblKey . _Just
+        _AuthToken = cdblOAuthToken . _Just
 
 instance GoogleRequest
          ControllerDebuggeesBreakpointsList' where

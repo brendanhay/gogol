@@ -218,8 +218,8 @@ uFields :: Lens' UsersMessagesImport' (Maybe Text)
 uFields = lens _uFields (\ s a -> s{_uFields = a})
 
 instance GoogleAuth UsersMessagesImport' where
-        authKey = uKey . _Just
-        authToken = uOAuthToken . _Just
+        _AuthKey = uKey . _Just
+        _AuthToken = uOAuthToken . _Just
 
 instance GoogleRequest UsersMessagesImport' where
         type Rs UsersMessagesImport' = Message

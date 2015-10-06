@@ -156,8 +156,8 @@ ulgFields
   = lens _ulgFields (\ s a -> s{_ulgFields = a})
 
 instance GoogleAuth UsersLabelsGet' where
-        authKey = ulgKey . _Just
-        authToken = ulgOAuthToken . _Just
+        _AuthKey = ulgKey . _Just
+        _AuthToken = ulgOAuthToken . _Just
 
 instance GoogleRequest UsersLabelsGet' where
         type Rs UsersLabelsGet' = Label

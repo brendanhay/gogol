@@ -187,8 +187,8 @@ tprhcFields
 
 instance GoogleAuth TargetPoolsRemoveHealthCheck'
          where
-        authKey = tprhcKey . _Just
-        authToken = tprhcOAuthToken . _Just
+        _AuthKey = tprhcKey . _Just
+        _AuthToken = tprhcOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsRemoveHealthCheck'
          where

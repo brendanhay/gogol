@@ -157,8 +157,8 @@ uruFields
   = lens _uruFields (\ s a -> s{_uruFields = a})
 
 instance GoogleAuth UserRolesUpdate' where
-        authKey = uruKey . _Just
-        authToken = uruOAuthToken . _Just
+        _AuthKey = uruKey . _Just
+        _AuthToken = uruOAuthToken . _Just
 
 instance GoogleRequest UserRolesUpdate' where
         type Rs UserRolesUpdate' = UserRole

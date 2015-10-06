@@ -171,8 +171,8 @@ eduFields
   = lens _eduFields (\ s a -> s{_eduFields = a})
 
 instance GoogleAuth EditsDetailsUpdate' where
-        authKey = eduKey . _Just
-        authToken = eduOAuthToken . _Just
+        _AuthKey = eduKey . _Just
+        _AuthToken = eduOAuthToken . _Just
 
 instance GoogleRequest EditsDetailsUpdate' where
         type Rs EditsDetailsUpdate' = AppDetails

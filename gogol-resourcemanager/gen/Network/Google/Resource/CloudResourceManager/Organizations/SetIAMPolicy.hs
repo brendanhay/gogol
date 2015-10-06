@@ -231,8 +231,8 @@ osipCallback
   = lens _osipCallback (\ s a -> s{_osipCallback = a})
 
 instance GoogleAuth OrganizationsSetIAMPolicy' where
-        authKey = osipKey . _Just
-        authToken = osipOAuthToken . _Just
+        _AuthKey = osipKey . _Just
+        _AuthToken = osipOAuthToken . _Just
 
 instance GoogleRequest OrganizationsSetIAMPolicy'
          where

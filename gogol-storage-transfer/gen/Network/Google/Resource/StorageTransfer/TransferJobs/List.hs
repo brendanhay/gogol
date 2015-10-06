@@ -241,8 +241,8 @@ tjlCallback
   = lens _tjlCallback (\ s a -> s{_tjlCallback = a})
 
 instance GoogleAuth TransferJobsList' where
-        authKey = tjlKey . _Just
-        authToken = tjlOAuthToken . _Just
+        _AuthKey = tjlKey . _Just
+        _AuthToken = tjlOAuthToken . _Just
 
 instance GoogleRequest TransferJobsList' where
         type Rs TransferJobsList' = ListTransferJobsResponse

@@ -142,8 +142,8 @@ tbmrfapFields
 
 instance GoogleAuth
          TurnBasedMatchesResetForAllPlayers' where
-        authKey = tbmrfapKey . _Just
-        authToken = tbmrfapOAuthToken . _Just
+        _AuthKey = tbmrfapKey . _Just
+        _AuthToken = tbmrfapOAuthToken . _Just
 
 instance GoogleRequest
          TurnBasedMatchesResetForAllPlayers' where

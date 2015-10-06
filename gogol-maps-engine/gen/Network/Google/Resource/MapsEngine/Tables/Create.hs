@@ -141,8 +141,8 @@ tcFields :: Lens' TablesCreate' (Maybe Text)
 tcFields = lens _tcFields (\ s a -> s{_tcFields = a})
 
 instance GoogleAuth TablesCreate' where
-        authKey = tcKey . _Just
-        authToken = tcOAuthToken . _Just
+        _AuthKey = tcKey . _Just
+        _AuthToken = tcOAuthToken . _Just
 
 instance GoogleRequest TablesCreate' where
         type Rs TablesCreate' = Table

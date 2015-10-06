@@ -160,8 +160,8 @@ urplFields
   = lens _urplFields (\ s a -> s{_urplFields = a})
 
 instance GoogleAuth UserRolePermissionsList' where
-        authKey = urplKey . _Just
-        authToken = urplOAuthToken . _Just
+        _AuthKey = urplKey . _Just
+        _AuthToken = urplOAuthToken . _Just
 
 instance GoogleRequest UserRolePermissionsList' where
         type Rs UserRolePermissionsList' =

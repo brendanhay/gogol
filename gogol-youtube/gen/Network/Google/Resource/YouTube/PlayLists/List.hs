@@ -275,8 +275,8 @@ pllFields
   = lens _pllFields (\ s a -> s{_pllFields = a})
 
 instance GoogleAuth PlayListsList' where
-        authKey = pllKey . _Just
-        authToken = pllOAuthToken . _Just
+        _AuthKey = pllKey . _Just
+        _AuthToken = pllOAuthToken . _Just
 
 instance GoogleRequest PlayListsList' where
         type Rs PlayListsList' = PlayListListResponse

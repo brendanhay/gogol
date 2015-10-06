@@ -185,8 +185,8 @@ lppFields
   = lens _lppFields (\ s a -> s{_lppFields = a})
 
 instance GoogleAuth LandingPagesPatch' where
-        authKey = lppKey . _Just
-        authToken = lppOAuthToken . _Just
+        _AuthKey = lppKey . _Just
+        _AuthToken = lppOAuthToken . _Just
 
 instance GoogleRequest LandingPagesPatch' where
         type Rs LandingPagesPatch' = LandingPage

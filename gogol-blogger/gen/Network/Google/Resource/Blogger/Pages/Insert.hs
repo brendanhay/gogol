@@ -164,8 +164,8 @@ piFields :: Lens' PagesInsert' (Maybe Text)
 piFields = lens _piFields (\ s a -> s{_piFields = a})
 
 instance GoogleAuth PagesInsert' where
-        authKey = piKey . _Just
-        authToken = piOAuthToken . _Just
+        _AuthKey = piKey . _Just
+        _AuthToken = piOAuthToken . _Just
 
 instance GoogleRequest PagesInsert' where
         type Rs PagesInsert' = Page

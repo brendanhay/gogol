@@ -214,8 +214,8 @@ pgCallback
   = lens _pgCallback (\ s a -> s{_pgCallback = a})
 
 instance GoogleAuth ProjectsGet' where
-        authKey = pgKey . _Just
-        authToken = pgOAuthToken . _Just
+        _AuthKey = pgKey . _Just
+        _AuthToken = pgOAuthToken . _Just
 
 instance GoogleRequest ProjectsGet' where
         type Rs ProjectsGet' = Project

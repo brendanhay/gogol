@@ -190,8 +190,8 @@ mwpuluFields
 
 instance GoogleAuth
          ManagementWebPropertyUserLinksUpdate' where
-        authKey = mwpuluKey . _Just
-        authToken = mwpuluOAuthToken . _Just
+        _AuthKey = mwpuluKey . _Just
+        _AuthToken = mwpuluOAuthToken . _Just
 
 instance GoogleRequest
          ManagementWebPropertyUserLinksUpdate' where

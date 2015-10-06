@@ -193,8 +193,8 @@ igmdiFields
 
 instance GoogleAuth
          InstanceGroupManagersDeleteInstances' where
-        authKey = igmdiKey . _Just
-        authToken = igmdiOAuthToken . _Just
+        _AuthKey = igmdiKey . _Just
+        _AuthToken = igmdiOAuthToken . _Just
 
 instance GoogleRequest
          InstanceGroupManagersDeleteInstances' where

@@ -160,8 +160,8 @@ mddFields
   = lens _mddFields (\ s a -> s{_mddFields = a})
 
 instance GoogleAuth MobileDevicesDelete' where
-        authKey = mddKey . _Just
-        authToken = mddOAuthToken . _Just
+        _AuthKey = mddKey . _Just
+        _AuthToken = mddOAuthToken . _Just
 
 instance GoogleRequest MobileDevicesDelete' where
         type Rs MobileDevicesDelete' = ()

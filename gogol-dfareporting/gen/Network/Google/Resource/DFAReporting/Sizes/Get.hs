@@ -156,8 +156,8 @@ sizFields
   = lens _sizFields (\ s a -> s{_sizFields = a})
 
 instance GoogleAuth SizesGet' where
-        authKey = sizKey . _Just
-        authToken = sizOAuthToken . _Just
+        _AuthKey = sizKey . _Just
+        _AuthToken = sizOAuthToken . _Just
 
 instance GoogleRequest SizesGet' where
         type Rs SizesGet' = Size

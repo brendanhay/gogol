@@ -174,8 +174,8 @@ scdInstance
   = lens _scdInstance (\ s a -> s{_scdInstance = a})
 
 instance GoogleAuth SSLCertsDelete' where
-        authKey = scdKey . _Just
-        authToken = scdOAuthToken . _Just
+        _AuthKey = scdKey . _Just
+        _AuthToken = scdOAuthToken . _Just
 
 instance GoogleRequest SSLCertsDelete' where
         type Rs SSLCertsDelete' = Operation

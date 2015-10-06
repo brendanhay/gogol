@@ -174,8 +174,8 @@ rcplFields
 
 instance GoogleAuth RasterCollectionsParentsList'
          where
-        authKey = rcplKey . _Just
-        authToken = rcplOAuthToken . _Just
+        _AuthKey = rcplKey . _Just
+        _AuthToken = rcplOAuthToken . _Just
 
 instance GoogleRequest RasterCollectionsParentsList'
          where

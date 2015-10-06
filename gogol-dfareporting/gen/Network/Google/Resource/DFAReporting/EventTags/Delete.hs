@@ -156,8 +156,8 @@ etdFields
   = lens _etdFields (\ s a -> s{_etdFields = a})
 
 instance GoogleAuth EventTagsDelete' where
-        authKey = etdKey . _Just
-        authToken = etdOAuthToken . _Just
+        _AuthKey = etdKey . _Just
+        _AuthToken = etdOAuthToken . _Just
 
 instance GoogleRequest EventTagsDelete' where
         type Rs EventTagsDelete' = ()

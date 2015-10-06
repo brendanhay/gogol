@@ -189,8 +189,8 @@ aucclFields
   = lens _aucclFields (\ s a -> s{_aucclFields = a})
 
 instance GoogleAuth AdUnitsCustomChannelsList' where
-        authKey = aucclKey . _Just
-        authToken = aucclOAuthToken . _Just
+        _AuthKey = aucclKey . _Just
+        _AuthToken = aucclOAuthToken . _Just
 
 instance GoogleRequest AdUnitsCustomChannelsList'
          where

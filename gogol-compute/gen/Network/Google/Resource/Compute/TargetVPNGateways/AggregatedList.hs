@@ -195,8 +195,8 @@ tvgalFields
 
 instance GoogleAuth TargetVPNGatewaysAggregatedList'
          where
-        authKey = tvgalKey . _Just
-        authToken = tvgalOAuthToken . _Just
+        _AuthKey = tvgalKey . _Just
+        _AuthToken = tvgalOAuthToken . _Just
 
 instance GoogleRequest
          TargetVPNGatewaysAggregatedList' where

@@ -149,8 +149,8 @@ wrgtFields
   = lens _wrgtFields (\ s a -> s{_wrgtFields = a})
 
 instance GoogleAuth WebResourceGetToken' where
-        authKey = wrgtKey . _Just
-        authToken = wrgtOAuthToken . _Just
+        _AuthKey = wrgtKey . _Just
+        _AuthToken = wrgtOAuthToken . _Just
 
 instance GoogleRequest WebResourceGetToken' where
         type Rs WebResourceGetToken' =

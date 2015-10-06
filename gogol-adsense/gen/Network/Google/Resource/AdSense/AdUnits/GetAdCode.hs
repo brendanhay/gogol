@@ -161,8 +161,8 @@ augacFields
   = lens _augacFields (\ s a -> s{_augacFields = a})
 
 instance GoogleAuth AdUnitsGetAdCode' where
-        authKey = augacKey . _Just
-        authToken = augacOAuthToken . _Just
+        _AuthKey = augacKey . _Just
+        _AuthToken = augacOAuthToken . _Just
 
 instance GoogleRequest AdUnitsGetAdCode' where
         type Rs AdUnitsGetAdCode' = AdCode

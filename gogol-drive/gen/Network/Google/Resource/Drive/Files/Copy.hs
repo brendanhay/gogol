@@ -234,8 +234,8 @@ fcFields :: Lens' FilesCopy' (Maybe Text)
 fcFields = lens _fcFields (\ s a -> s{_fcFields = a})
 
 instance GoogleAuth FilesCopy' where
-        authKey = fcKey . _Just
-        authToken = fcOAuthToken . _Just
+        _AuthKey = fcKey . _Just
+        _AuthToken = fcOAuthToken . _Just
 
 instance GoogleRequest FilesCopy' where
         type Rs FilesCopy' = File

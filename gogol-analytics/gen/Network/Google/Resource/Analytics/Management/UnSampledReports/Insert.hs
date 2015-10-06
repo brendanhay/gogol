@@ -190,8 +190,8 @@ musriFields
 
 instance GoogleAuth ManagementUnSampledReportsInsert'
          where
-        authKey = musriKey . _Just
-        authToken = musriOAuthToken . _Just
+        _AuthKey = musriKey . _Just
+        _AuthToken = musriOAuthToken . _Just
 
 instance GoogleRequest
          ManagementUnSampledReportsInsert' where

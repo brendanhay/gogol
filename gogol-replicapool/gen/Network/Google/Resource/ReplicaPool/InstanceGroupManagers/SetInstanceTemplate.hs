@@ -193,8 +193,8 @@ igmsitFields
 
 instance GoogleAuth
          InstanceGroupManagersSetInstanceTemplate' where
-        authKey = igmsitKey . _Just
-        authToken = igmsitOAuthToken . _Just
+        _AuthKey = igmsitKey . _Just
+        _AuthToken = igmsitOAuthToken . _Just
 
 instance GoogleRequest
          InstanceGroupManagersSetInstanceTemplate' where

@@ -190,8 +190,8 @@ mpfuldFields
 
 instance GoogleAuth ManagementProFileUserLinksDelete'
          where
-        authKey = mpfuldKey . _Just
-        authToken = mpfuldOAuthToken . _Just
+        _AuthKey = mpfuldKey . _Just
+        _AuthToken = mpfuldOAuthToken . _Just
 
 instance GoogleRequest
          ManagementProFileUserLinksDelete' where

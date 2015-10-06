@@ -305,8 +305,8 @@ rgFields :: Lens' ReportsGet' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
 instance GoogleAuth ReportsGet' where
-        authKey = rgKey . _Just
-        authToken = rgOAuthToken . _Just
+        _AuthKey = rgKey . _Just
+        _AuthToken = rgOAuthToken . _Just
 
 instance GoogleRequest ReportsGet' where
         type Rs ReportsGet' = Report

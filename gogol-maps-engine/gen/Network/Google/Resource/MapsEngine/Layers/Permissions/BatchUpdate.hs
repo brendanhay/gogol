@@ -164,8 +164,8 @@ lpbuFields
 
 instance GoogleAuth LayersPermissionsBatchUpdate'
          where
-        authKey = lpbuKey . _Just
-        authToken = lpbuOAuthToken . _Just
+        _AuthKey = lpbuKey . _Just
+        _AuthToken = lpbuOAuthToken . _Just
 
 instance GoogleRequest LayersPermissionsBatchUpdate'
          where

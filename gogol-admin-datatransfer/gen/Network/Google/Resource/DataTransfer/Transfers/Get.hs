@@ -143,8 +143,8 @@ tgFields :: Lens' TransfersGet' (Maybe Text)
 tgFields = lens _tgFields (\ s a -> s{_tgFields = a})
 
 instance GoogleAuth TransfersGet' where
-        authKey = tgKey . _Just
-        authToken = tgOAuthToken . _Just
+        _AuthKey = tgKey . _Just
+        _AuthToken = tgOAuthToken . _Just
 
 instance GoogleRequest TransfersGet' where
         type Rs TransfersGet' = DataTransfer

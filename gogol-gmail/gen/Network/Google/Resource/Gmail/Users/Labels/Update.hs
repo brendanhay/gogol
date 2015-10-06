@@ -168,8 +168,8 @@ uluFields
   = lens _uluFields (\ s a -> s{_uluFields = a})
 
 instance GoogleAuth UsersLabelsUpdate' where
-        authKey = uluKey . _Just
-        authToken = uluOAuthToken . _Just
+        _AuthKey = uluKey . _Just
+        _AuthToken = uluOAuthToken . _Just
 
 instance GoogleRequest UsersLabelsUpdate' where
         type Rs UsersLabelsUpdate' = Label

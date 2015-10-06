@@ -147,8 +147,8 @@ dlomFields
 
 instance GoogleAuth DictionaryListOfflineMetadata'
          where
-        authKey = dlomKey . _Just
-        authToken = dlomOAuthToken . _Just
+        _AuthKey = dlomKey . _Just
+        _AuthToken = dlomOAuthToken . _Just
 
 instance GoogleRequest DictionaryListOfflineMetadata'
          where

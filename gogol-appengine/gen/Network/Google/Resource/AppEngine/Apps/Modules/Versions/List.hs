@@ -266,8 +266,8 @@ amvlCallback
   = lens _amvlCallback (\ s a -> s{_amvlCallback = a})
 
 instance GoogleAuth AppsModulesVersionsList' where
-        authKey = amvlKey . _Just
-        authToken = amvlOAuthToken . _Just
+        _AuthKey = amvlKey . _Just
+        _AuthToken = amvlOAuthToken . _Just
 
 instance GoogleRequest AppsModulesVersionsList' where
         type Rs AppsModulesVersionsList' =

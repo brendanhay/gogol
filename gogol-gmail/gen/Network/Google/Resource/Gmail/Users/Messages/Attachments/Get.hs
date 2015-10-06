@@ -173,8 +173,8 @@ umagFields
 
 instance GoogleAuth UsersMessagesAttachmentsGet'
          where
-        authKey = umagKey . _Just
-        authToken = umagOAuthToken . _Just
+        _AuthKey = umagKey . _Just
+        _AuthToken = umagOAuthToken . _Just
 
 instance GoogleRequest UsersMessagesAttachmentsGet'
          where

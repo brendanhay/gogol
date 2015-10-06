@@ -169,8 +169,8 @@ rodFields
   = lens _rodFields (\ s a -> s{_rodFields = a})
 
 instance GoogleAuth RegionOperationsDelete' where
-        authKey = rodKey . _Just
-        authToken = rodOAuthToken . _Just
+        _AuthKey = rodKey . _Just
+        _AuthToken = rodOAuthToken . _Just
 
 instance GoogleRequest RegionOperationsDelete' where
         type Rs RegionOperationsDelete' = ()

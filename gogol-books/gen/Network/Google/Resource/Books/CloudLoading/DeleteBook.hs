@@ -146,8 +146,8 @@ cldbFields
   = lens _cldbFields (\ s a -> s{_cldbFields = a})
 
 instance GoogleAuth CloudLoadingDeleteBook' where
-        authKey = cldbKey . _Just
-        authToken = cldbOAuthToken . _Just
+        _AuthKey = cldbKey . _Just
+        _AuthToken = cldbOAuthToken . _Just
 
 instance GoogleRequest CloudLoadingDeleteBook' where
         type Rs CloudLoadingDeleteBook' = ()

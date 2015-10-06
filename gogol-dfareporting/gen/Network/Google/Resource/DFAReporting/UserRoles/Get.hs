@@ -156,8 +156,8 @@ urgFields
   = lens _urgFields (\ s a -> s{_urgFields = a})
 
 instance GoogleAuth UserRolesGet' where
-        authKey = urgKey . _Just
-        authToken = urgOAuthToken . _Just
+        _AuthKey = urgKey . _Just
+        _AuthToken = urgOAuthToken . _Just
 
 instance GoogleRequest UserRolesGet' where
         type Rs UserRolesGet' = UserRole

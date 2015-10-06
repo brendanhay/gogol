@@ -169,8 +169,8 @@ diInstance
   = lens _diInstance (\ s a -> s{_diInstance = a})
 
 instance GoogleAuth DatabasesInsert' where
-        authKey = diKey . _Just
-        authToken = diOAuthToken . _Just
+        _AuthKey = diKey . _Just
+        _AuthToken = diOAuthToken . _Just
 
 instance GoogleRequest DatabasesInsert' where
         type Rs DatabasesInsert' = Operation

@@ -202,8 +202,8 @@ mcduFields
 
 instance GoogleAuth ManagementCustomDimensionsUpdate'
          where
-        authKey = mcduKey . _Just
-        authToken = mcduOAuthToken . _Just
+        _AuthKey = mcduKey . _Just
+        _AuthToken = mcduOAuthToken . _Just
 
 instance GoogleRequest
          ManagementCustomDimensionsUpdate' where

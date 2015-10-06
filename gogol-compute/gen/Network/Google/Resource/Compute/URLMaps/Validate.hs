@@ -175,8 +175,8 @@ umvFields
   = lens _umvFields (\ s a -> s{_umvFields = a})
 
 instance GoogleAuth URLMapsValidate' where
-        authKey = umvKey . _Just
-        authToken = umvOAuthToken . _Just
+        _AuthKey = umvKey . _Just
+        _AuthToken = umvOAuthToken . _Just
 
 instance GoogleRequest URLMapsValidate' where
         type Rs URLMapsValidate' = URLMapsValidateResponse

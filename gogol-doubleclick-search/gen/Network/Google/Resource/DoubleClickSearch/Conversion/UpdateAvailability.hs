@@ -149,8 +149,8 @@ cuaFields
 
 instance GoogleAuth ConversionUpdateAvailability'
          where
-        authKey = cuaKey . _Just
-        authToken = cuaOAuthToken . _Just
+        _AuthKey = cuaKey . _Just
+        _AuthToken = cuaOAuthToken . _Just
 
 instance GoogleRequest ConversionUpdateAvailability'
          where

@@ -194,8 +194,8 @@ rblFields
   = lens _rblFields (\ s a -> s{_rblFields = a})
 
 instance GoogleAuth ReferencesBasesList' where
-        authKey = rblKey . _Just
-        authToken = rblOAuthToken . _Just
+        _AuthKey = rblKey . _Just
+        _AuthToken = rblOAuthToken . _Just
 
 instance GoogleRequest ReferencesBasesList' where
         type Rs ReferencesBasesList' = ListBasesResponse

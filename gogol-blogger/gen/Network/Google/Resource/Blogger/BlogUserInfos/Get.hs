@@ -170,8 +170,8 @@ buigFields
   = lens _buigFields (\ s a -> s{_buigFields = a})
 
 instance GoogleAuth BlogUserInfosGet' where
-        authKey = buigKey . _Just
-        authToken = buigOAuthToken . _Just
+        _AuthKey = buigKey . _Just
+        _AuthToken = buigOAuthToken . _Just
 
 instance GoogleRequest BlogUserInfosGet' where
         type Rs BlogUserInfosGet' = BlogUserInfo

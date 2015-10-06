@@ -157,8 +157,8 @@ ulcFields
   = lens _ulcFields (\ s a -> s{_ulcFields = a})
 
 instance GoogleAuth UsersLabelsCreate' where
-        authKey = ulcKey . _Just
-        authToken = ulcOAuthToken . _Just
+        _AuthKey = ulcKey . _Just
+        _AuthToken = ulcOAuthToken . _Just
 
 instance GoogleRequest UsersLabelsCreate' where
         type Rs UsersLabelsCreate' = Label

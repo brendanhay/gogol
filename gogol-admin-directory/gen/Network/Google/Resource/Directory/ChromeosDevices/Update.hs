@@ -186,8 +186,8 @@ cduFields
   = lens _cduFields (\ s a -> s{_cduFields = a})
 
 instance GoogleAuth ChromeosDevicesUpdate' where
-        authKey = cduKey . _Just
-        authToken = cduOAuthToken . _Just
+        _AuthKey = cduKey . _Just
+        _AuthToken = cduOAuthToken . _Just
 
 instance GoogleRequest ChromeosDevicesUpdate' where
         type Rs ChromeosDevicesUpdate' = ChromeOSDevice

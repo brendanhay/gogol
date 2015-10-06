@@ -163,8 +163,8 @@ thttppdFields
       (\ s a -> s{_thttppdFields = a})
 
 instance GoogleAuth TargetHTTPProxiesDelete' where
-        authKey = thttppdKey . _Just
-        authToken = thttppdOAuthToken . _Just
+        _AuthKey = thttppdKey . _Just
+        _AuthToken = thttppdOAuthToken . _Just
 
 instance GoogleRequest TargetHTTPProxiesDelete' where
         type Rs TargetHTTPProxiesDelete' = Operation

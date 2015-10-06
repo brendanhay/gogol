@@ -170,8 +170,8 @@ rddFields
   = lens _rddFields (\ s a -> s{_rddFields = a})
 
 instance GoogleAuth RepliesDelete' where
-        authKey = rddKey . _Just
-        authToken = rddOAuthToken . _Just
+        _AuthKey = rddKey . _Just
+        _AuthToken = rddOAuthToken . _Just
 
 instance GoogleRequest RepliesDelete' where
         type Rs RepliesDelete' = ()

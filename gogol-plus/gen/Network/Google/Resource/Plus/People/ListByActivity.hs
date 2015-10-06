@@ -191,8 +191,8 @@ plbaFields
   = lens _plbaFields (\ s a -> s{_plbaFields = a})
 
 instance GoogleAuth PeopleListByActivity' where
-        authKey = plbaKey . _Just
-        authToken = plbaOAuthToken . _Just
+        _AuthKey = plbaKey . _Just
+        _AuthToken = plbaOAuthToken . _Just
 
 instance GoogleRequest PeopleListByActivity' where
         type Rs PeopleListByActivity' = PeopleFeed

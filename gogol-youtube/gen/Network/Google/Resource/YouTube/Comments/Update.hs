@@ -155,8 +155,8 @@ cuFields :: Lens' CommentsUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
 instance GoogleAuth CommentsUpdate' where
-        authKey = cuKey . _Just
-        authToken = cuOAuthToken . _Just
+        _AuthKey = cuKey . _Just
+        _AuthToken = cuOAuthToken . _Just
 
 instance GoogleRequest CommentsUpdate' where
         type Rs CommentsUpdate' = Comment

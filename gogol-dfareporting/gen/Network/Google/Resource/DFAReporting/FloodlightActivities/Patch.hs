@@ -171,8 +171,8 @@ fapFields
   = lens _fapFields (\ s a -> s{_fapFields = a})
 
 instance GoogleAuth FloodlightActivitiesPatch' where
-        authKey = fapKey . _Just
-        authToken = fapOAuthToken . _Just
+        _AuthKey = fapKey . _Just
+        _AuthToken = fapOAuthToken . _Just
 
 instance GoogleRequest FloodlightActivitiesPatch'
          where

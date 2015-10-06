@@ -163,8 +163,8 @@ rsFields :: Lens' ReadsSearch' (Maybe Text)
 rsFields = lens _rsFields (\ s a -> s{_rsFields = a})
 
 instance GoogleAuth ReadsSearch' where
-        authKey = rsKey . _Just
-        authToken = rsOAuthToken . _Just
+        _AuthKey = rsKey . _Just
+        _AuthToken = rsOAuthToken . _Just
 
 instance GoogleRequest ReadsSearch' where
         type Rs ReadsSearch' = SearchReadsResponse

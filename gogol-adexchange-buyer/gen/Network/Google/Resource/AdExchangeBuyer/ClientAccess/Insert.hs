@@ -166,8 +166,8 @@ caiFields
   = lens _caiFields (\ s a -> s{_caiFields = a})
 
 instance GoogleAuth ClientAccessInsert' where
-        authKey = caiKey . _Just
-        authToken = caiOAuthToken . _Just
+        _AuthKey = caiKey . _Just
+        _AuthToken = caiOAuthToken . _Just
 
 instance GoogleRequest ClientAccessInsert' where
         type Rs ClientAccessInsert' =

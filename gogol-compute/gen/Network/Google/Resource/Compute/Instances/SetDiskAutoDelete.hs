@@ -199,8 +199,8 @@ isdadInstance
       (\ s a -> s{_isdadInstance = a})
 
 instance GoogleAuth InstancesSetDiskAutoDelete' where
-        authKey = isdadKey . _Just
-        authToken = isdadOAuthToken . _Just
+        _AuthKey = isdadKey . _Just
+        _AuthToken = isdadOAuthToken . _Just
 
 instance GoogleRequest InstancesSetDiskAutoDelete'
          where

@@ -221,8 +221,8 @@ capFields
   = lens _capFields (\ s a -> s{_capFields = a})
 
 instance GoogleAuth CaptionsUpdate' where
-        authKey = capKey . _Just
-        authToken = capOAuthToken . _Just
+        _AuthKey = capKey . _Just
+        _AuthToken = capOAuthToken . _Just
 
 instance GoogleRequest CaptionsUpdate' where
         type Rs CaptionsUpdate' = Caption

@@ -158,8 +158,8 @@ cfuFields
   = lens _cfuFields (\ s a -> s{_cfuFields = a})
 
 instance GoogleAuth CreativeFieldsUpdate' where
-        authKey = cfuKey . _Just
-        authToken = cfuOAuthToken . _Just
+        _AuthKey = cfuKey . _Just
+        _AuthToken = cfuOAuthToken . _Just
 
 instance GoogleRequest CreativeFieldsUpdate' where
         type Rs CreativeFieldsUpdate' = CreativeField

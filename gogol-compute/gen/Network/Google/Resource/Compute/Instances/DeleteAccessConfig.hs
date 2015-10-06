@@ -198,8 +198,8 @@ idacInstance
 
 instance GoogleAuth InstancesDeleteAccessConfig'
          where
-        authKey = idacKey . _Just
-        authToken = idacOAuthToken . _Just
+        _AuthKey = idacKey . _Just
+        _AuthToken = idacOAuthToken . _Just
 
 instance GoogleRequest InstancesDeleteAccessConfig'
          where

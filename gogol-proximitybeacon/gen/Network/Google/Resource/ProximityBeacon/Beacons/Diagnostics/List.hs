@@ -255,8 +255,8 @@ bdlCallback
   = lens _bdlCallback (\ s a -> s{_bdlCallback = a})
 
 instance GoogleAuth BeaconsDiagnosticsList' where
-        authKey = bdlKey . _Just
-        authToken = bdlOAuthToken . _Just
+        _AuthKey = bdlKey . _Just
+        _AuthToken = bdlOAuthToken . _Just
 
 instance GoogleRequest BeaconsDiagnosticsList' where
         type Rs BeaconsDiagnosticsList' =

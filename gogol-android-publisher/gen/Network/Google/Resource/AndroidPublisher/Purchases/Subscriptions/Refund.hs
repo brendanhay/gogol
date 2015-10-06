@@ -171,8 +171,8 @@ pFields = lens _pFields (\ s a -> s{_pFields = a})
 
 instance GoogleAuth PurchasesSubscriptionsRefund'
          where
-        authKey = pKey . _Just
-        authToken = pOAuthToken . _Just
+        _AuthKey = pKey . _Just
+        _AuthToken = pOAuthToken . _Just
 
 instance GoogleRequest PurchasesSubscriptionsRefund'
          where

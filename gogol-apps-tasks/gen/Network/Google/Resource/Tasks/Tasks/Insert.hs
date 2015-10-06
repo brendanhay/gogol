@@ -177,8 +177,8 @@ tiPrevious
   = lens _tiPrevious (\ s a -> s{_tiPrevious = a})
 
 instance GoogleAuth TasksInsert' where
-        authKey = tiKey . _Just
-        authToken = tiOAuthToken . _Just
+        _AuthKey = tiKey . _Just
+        _AuthToken = tiOAuthToken . _Just
 
 instance GoogleRequest TasksInsert' where
         type Rs TasksInsert' = Task

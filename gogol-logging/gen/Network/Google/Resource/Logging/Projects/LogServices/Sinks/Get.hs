@@ -246,8 +246,8 @@ plssgCallback
 
 instance GoogleAuth ProjectsLogServicesSinksGet'
          where
-        authKey = plssgKey . _Just
-        authToken = plssgOAuthToken . _Just
+        _AuthKey = plssgKey . _Just
+        _AuthToken = plssgOAuthToken . _Just
 
 instance GoogleRequest ProjectsLogServicesSinksGet'
          where

@@ -210,8 +210,8 @@ ptgCallback
   = lens _ptgCallback (\ s a -> s{_ptgCallback = a})
 
 instance GoogleAuth ProjectsTopicsGet' where
-        authKey = ptgKey . _Just
-        authToken = ptgOAuthToken . _Just
+        _AuthKey = ptgKey . _Just
+        _AuthToken = ptgOAuthToken . _Just
 
 instance GoogleRequest ProjectsTopicsGet' where
         type Rs ProjectsTopicsGet' = Topic

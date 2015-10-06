@@ -164,8 +164,8 @@ doacgFields
 
 instance GoogleAuth DefaultObjectAccessControlsGet'
          where
-        authKey = doacgKey . _Just
-        authToken = doacgOAuthToken . _Just
+        _AuthKey = doacgKey . _Just
+        _AuthToken = doacgOAuthToken . _Just
 
 instance GoogleRequest
          DefaultObjectAccessControlsGet' where

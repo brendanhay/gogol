@@ -204,8 +204,8 @@ ulFields :: Lens' UsersList' (Maybe Text)
 ulFields = lens _ulFields (\ s a -> s{_ulFields = a})
 
 instance GoogleAuth UsersList' where
-        authKey = ulKey . _Just
-        authToken = ulOAuthToken . _Just
+        _AuthKey = ulKey . _Just
+        _AuthToken = ulOAuthToken . _Just
 
 instance GoogleRequest UsersList' where
         type Rs UsersList' = UserList

@@ -296,8 +296,8 @@ ladlFields
   = lens _ladlFields (\ s a -> s{_ladlFields = a})
 
 instance GoogleAuth LayersAnnotationDataList' where
-        authKey = ladlKey . _Just
-        authToken = ladlOAuthToken . _Just
+        _AuthKey = ladlKey . _Just
+        _AuthToken = ladlOAuthToken . _Just
 
 instance GoogleRequest LayersAnnotationDataList'
          where

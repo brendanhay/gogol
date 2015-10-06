@@ -146,8 +146,8 @@ arFields :: Lens' AchievementsReveal' (Maybe Text)
 arFields = lens _arFields (\ s a -> s{_arFields = a})
 
 instance GoogleAuth AchievementsReveal' where
-        authKey = arKey . _Just
-        authToken = arOAuthToken . _Just
+        _AuthKey = arKey . _Just
+        _AuthToken = arOAuthToken . _Just
 
 instance GoogleRequest AchievementsReveal' where
         type Rs AchievementsReveal' =

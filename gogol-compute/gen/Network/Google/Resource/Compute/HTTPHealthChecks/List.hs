@@ -201,8 +201,8 @@ httphclFields
       (\ s a -> s{_httphclFields = a})
 
 instance GoogleAuth HTTPHealthChecksList' where
-        authKey = httphclKey . _Just
-        authToken = httphclOAuthToken . _Just
+        _AuthKey = httphclKey . _Just
+        _AuthToken = httphclOAuthToken . _Just
 
 instance GoogleRequest HTTPHealthChecksList' where
         type Rs HTTPHealthChecksList' = HTTPHealthCheckList

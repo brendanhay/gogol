@@ -162,8 +162,8 @@ aaasgFields
 
 instance GoogleAuth AccountActiveAdSummariesGet'
          where
-        authKey = aaasgKey . _Just
-        authToken = aaasgOAuthToken . _Just
+        _AuthKey = aaasgKey . _Just
+        _AuthToken = aaasgOAuthToken . _Just
 
 instance GoogleRequest AccountActiveAdSummariesGet'
          where

@@ -146,8 +146,8 @@ plidFields
   = lens _plidFields (\ s a -> s{_plidFields = a})
 
 instance GoogleAuth PlayListItemsDelete' where
-        authKey = plidKey . _Just
-        authToken = plidOAuthToken . _Just
+        _AuthKey = plidKey . _Just
+        _AuthToken = plidOAuthToken . _Just
 
 instance GoogleRequest PlayListItemsDelete' where
         type Rs PlayListItemsDelete' = ()

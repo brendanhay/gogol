@@ -165,8 +165,8 @@ cdFields :: Lens' CommentsDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
 instance GoogleAuth CommentsDelete' where
-        authKey = cdKey . _Just
-        authToken = cdOAuthToken . _Just
+        _AuthKey = cdKey . _Just
+        _AuthToken = cdOAuthToken . _Just
 
 instance GoogleRequest CommentsDelete' where
         type Rs CommentsDelete' = ()

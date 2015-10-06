@@ -143,8 +143,8 @@ vFields :: Lens' VariantsetsSearch' (Maybe Text)
 vFields = lens _vFields (\ s a -> s{_vFields = a})
 
 instance GoogleAuth VariantsetsSearch' where
-        authKey = vKey . _Just
-        authToken = vOAuthToken . _Just
+        _AuthKey = vKey . _Just
+        _AuthToken = vOAuthToken . _Just
 
 instance GoogleRequest VariantsetsSearch' where
         type Rs VariantsetsSearch' =

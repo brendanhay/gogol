@@ -158,8 +158,8 @@ umdFields
   = lens _umdFields (\ s a -> s{_umdFields = a})
 
 instance GoogleAuth UsersMessagesDelete' where
-        authKey = umdKey . _Just
-        authToken = umdOAuthToken . _Just
+        _AuthKey = umdKey . _Just
+        _AuthToken = umdOAuthToken . _Just
 
 instance GoogleRequest UsersMessagesDelete' where
         type Rs UsersMessagesDelete' = ()

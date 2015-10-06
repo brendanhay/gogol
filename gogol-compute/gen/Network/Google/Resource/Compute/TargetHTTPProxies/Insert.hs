@@ -166,8 +166,8 @@ thttppiFields
       (\ s a -> s{_thttppiFields = a})
 
 instance GoogleAuth TargetHTTPProxiesInsert' where
-        authKey = thttppiKey . _Just
-        authToken = thttppiOAuthToken . _Just
+        _AuthKey = thttppiKey . _Just
+        _AuthToken = thttppiOAuthToken . _Just
 
 instance GoogleRequest TargetHTTPProxiesInsert' where
         type Rs TargetHTTPProxiesInsert' = Operation

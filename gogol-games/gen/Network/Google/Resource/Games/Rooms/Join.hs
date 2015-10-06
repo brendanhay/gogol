@@ -166,8 +166,8 @@ rjFields :: Lens' RoomsJoin' (Maybe Text)
 rjFields = lens _rjFields (\ s a -> s{_rjFields = a})
 
 instance GoogleAuth RoomsJoin' where
-        authKey = rjKey . _Just
-        authToken = rjOAuthToken . _Just
+        _AuthKey = rjKey . _Just
+        _AuthToken = rjOAuthToken . _Just
 
 instance GoogleRequest RoomsJoin' where
         type Rs RoomsJoin' = Room

@@ -211,8 +211,8 @@ ruliuFields
 
 instance GoogleAuth
          RollingUpdatesListInstanceUpdates' where
-        authKey = ruliuKey . _Just
-        authToken = ruliuOAuthToken . _Just
+        _AuthKey = ruliuKey . _Just
+        _AuthToken = ruliuOAuthToken . _Just
 
 instance GoogleRequest
          RollingUpdatesListInstanceUpdates' where

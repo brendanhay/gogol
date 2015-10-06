@@ -158,8 +158,8 @@ tggFields
   = lens _tggFields (\ s a -> s{_tggFields = a})
 
 instance GoogleAuth TemplateGet' where
-        authKey = tggKey . _Just
-        authToken = tggOAuthToken . _Just
+        _AuthKey = tggKey . _Just
+        _AuthToken = tggOAuthToken . _Just
 
 instance GoogleRequest TemplateGet' where
         type Rs TemplateGet' = Template

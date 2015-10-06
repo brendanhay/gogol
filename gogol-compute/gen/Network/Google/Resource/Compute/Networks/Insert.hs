@@ -156,8 +156,8 @@ niFields :: Lens' NetworksInsert' (Maybe Text)
 niFields = lens _niFields (\ s a -> s{_niFields = a})
 
 instance GoogleAuth NetworksInsert' where
-        authKey = niKey . _Just
-        authToken = niOAuthToken . _Just
+        _AuthKey = niKey . _Just
+        _AuthToken = niOAuthToken . _Just
 
 instance GoogleRequest NetworksInsert' where
         type Rs NetworksInsert' = Operation

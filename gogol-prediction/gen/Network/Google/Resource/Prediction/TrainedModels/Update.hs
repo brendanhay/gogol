@@ -167,8 +167,8 @@ tmuFields
   = lens _tmuFields (\ s a -> s{_tmuFields = a})
 
 instance GoogleAuth TrainedModelsUpdate' where
-        authKey = tmuKey . _Just
-        authToken = tmuOAuthToken . _Just
+        _AuthKey = tmuKey . _Just
+        _AuthToken = tmuOAuthToken . _Just
 
 instance GoogleRequest TrainedModelsUpdate' where
         type Rs TrainedModelsUpdate' = Insert2

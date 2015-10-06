@@ -183,8 +183,8 @@ emFields :: Lens' EventsMove' (Maybe Text)
 emFields = lens _emFields (\ s a -> s{_emFields = a})
 
 instance GoogleAuth EventsMove' where
-        authKey = emKey . _Just
-        authToken = emOAuthToken . _Just
+        _AuthKey = emKey . _Just
+        _AuthToken = emOAuthToken . _Just
 
 instance GoogleRequest EventsMove' where
         type Rs EventsMove' = Event

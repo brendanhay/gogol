@@ -229,8 +229,8 @@ proCallback
   = lens _proCallback (\ s a -> s{_proCallback = a})
 
 instance GoogleAuth ProjectsUndelete' where
-        authKey = proKey . _Just
-        authToken = proOAuthToken . _Just
+        _AuthKey = proKey . _Just
+        _AuthToken = proOAuthToken . _Just
 
 instance GoogleRequest ProjectsUndelete' where
         type Rs ProjectsUndelete' = Empty

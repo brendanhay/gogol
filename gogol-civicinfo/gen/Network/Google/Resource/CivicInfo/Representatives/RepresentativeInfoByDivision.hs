@@ -197,8 +197,8 @@ rribdFields
 
 instance GoogleAuth
          RepresentativesRepresentativeInfoByDivision' where
-        authKey = rribdKey . _Just
-        authToken = rribdOAuthToken . _Just
+        _AuthKey = rribdKey . _Just
+        _AuthToken = rribdOAuthToken . _Just
 
 instance GoogleRequest
          RepresentativesRepresentativeInfoByDivision' where

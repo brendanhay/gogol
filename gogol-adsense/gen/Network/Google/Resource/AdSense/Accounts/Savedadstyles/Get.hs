@@ -158,8 +158,8 @@ asgFields
   = lens _asgFields (\ s a -> s{_asgFields = a})
 
 instance GoogleAuth AccountsSavedadstylesGet' where
-        authKey = asgKey . _Just
-        authToken = asgOAuthToken . _Just
+        _AuthKey = asgKey . _Just
+        _AuthToken = asgOAuthToken . _Just
 
 instance GoogleRequest AccountsSavedadstylesGet'
          where

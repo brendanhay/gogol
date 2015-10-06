@@ -216,8 +216,8 @@ acmfuFields
 
 instance GoogleAuth
          AccountsContainersMoveFoldersUpdate' where
-        authKey = acmfuKey . _Just
-        authToken = acmfuOAuthToken . _Just
+        _AuthKey = acmfuKey . _Just
+        _AuthToken = acmfuOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersMoveFoldersUpdate' where

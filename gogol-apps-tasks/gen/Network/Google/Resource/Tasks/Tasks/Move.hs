@@ -181,8 +181,8 @@ tmPrevious
   = lens _tmPrevious (\ s a -> s{_tmPrevious = a})
 
 instance GoogleAuth TasksMove' where
-        authKey = tmKey . _Just
-        authToken = tmOAuthToken . _Just
+        _AuthKey = tmKey . _Just
+        _AuthToken = tmOAuthToken . _Just
 
 instance GoogleRequest TasksMove' where
         type Rs TasksMove' = Task

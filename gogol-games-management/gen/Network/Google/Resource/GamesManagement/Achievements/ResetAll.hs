@@ -138,8 +138,8 @@ araFields
   = lens _araFields (\ s a -> s{_araFields = a})
 
 instance GoogleAuth AchievementsResetAll' where
-        authKey = araKey . _Just
-        authToken = araOAuthToken . _Just
+        _AuthKey = araKey . _Just
+        _AuthToken = araOAuthToken . _Just
 
 instance GoogleRequest AchievementsResetAll' where
         type Rs AchievementsResetAll' =

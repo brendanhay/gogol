@@ -169,8 +169,8 @@ pigFields
   = lens _pigFields (\ s a -> s{_pigFields = a})
 
 instance GoogleAuth ProjectsIconsGet' where
-        authKey = pigKey . _Just
-        authToken = pigOAuthToken . _Just
+        _AuthKey = pigKey . _Just
+        _AuthToken = pigOAuthToken . _Just
 
 instance GoogleRequest ProjectsIconsGet' where
         type Rs ProjectsIconsGet' = Icon

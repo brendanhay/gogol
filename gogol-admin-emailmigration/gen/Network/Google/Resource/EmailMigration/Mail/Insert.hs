@@ -163,8 +163,8 @@ miFields :: Lens' MailInsert' (Maybe Text)
 miFields = lens _miFields (\ s a -> s{_miFields = a})
 
 instance GoogleAuth MailInsert' where
-        authKey = miKey . _Just
-        authToken = miOAuthToken . _Just
+        _AuthKey = miKey . _Just
+        _AuthToken = miOAuthToken . _Just
 
 instance GoogleRequest MailInsert' where
         type Rs MailInsert' = ()

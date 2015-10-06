@@ -182,8 +182,8 @@ dvqFields
   = lens _dvqFields (\ s a -> s{_dvqFields = a})
 
 instance GoogleAuth DimensionValuesQuery' where
-        authKey = dvqKey . _Just
-        authToken = dvqOAuthToken . _Just
+        _AuthKey = dvqKey . _Just
+        _AuthToken = dvqOAuthToken . _Just
 
 instance GoogleRequest DimensionValuesQuery' where
         type Rs DimensionValuesQuery' = DimensionValueList

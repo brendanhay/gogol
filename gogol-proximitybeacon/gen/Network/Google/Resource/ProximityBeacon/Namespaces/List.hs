@@ -202,8 +202,8 @@ nlCallback
   = lens _nlCallback (\ s a -> s{_nlCallback = a})
 
 instance GoogleAuth NamespacesList' where
-        authKey = nlKey . _Just
-        authToken = nlOAuthToken . _Just
+        _AuthKey = nlKey . _Just
+        _AuthToken = nlOAuthToken . _Just
 
 instance GoogleRequest NamespacesList' where
         type Rs NamespacesList' = ListNamespacesResponse

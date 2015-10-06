@@ -146,8 +146,8 @@ oslFields
   = lens _oslFields (\ s a -> s{_oslFields = a})
 
 instance GoogleAuth OperatingSystemsList' where
-        authKey = oslKey . _Just
-        authToken = oslOAuthToken . _Just
+        _AuthKey = oslKey . _Just
+        _AuthToken = oslOAuthToken . _Just
 
 instance GoogleRequest OperatingSystemsList' where
         type Rs OperatingSystemsList' =

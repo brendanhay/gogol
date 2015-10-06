@@ -158,8 +158,8 @@ aclFields
   = lens _aclFields (\ s a -> s{_aclFields = a})
 
 instance GoogleAuth AdClientsList' where
-        authKey = aclKey . _Just
-        authToken = aclOAuthToken . _Just
+        _AuthKey = aclKey . _Just
+        _AuthToken = aclOAuthToken . _Just
 
 instance GoogleRequest AdClientsList' where
         type Rs AdClientsList' = AdClients

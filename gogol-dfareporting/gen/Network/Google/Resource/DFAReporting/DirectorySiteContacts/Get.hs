@@ -159,8 +159,8 @@ dscgFields
   = lens _dscgFields (\ s a -> s{_dscgFields = a})
 
 instance GoogleAuth DirectorySiteContactsGet' where
-        authKey = dscgKey . _Just
-        authToken = dscgOAuthToken . _Just
+        _AuthKey = dscgKey . _Just
+        _AuthToken = dscgOAuthToken . _Just
 
 instance GoogleRequest DirectorySiteContactsGet'
          where

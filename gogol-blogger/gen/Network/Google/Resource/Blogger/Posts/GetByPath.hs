@@ -181,8 +181,8 @@ pgbpFields
   = lens _pgbpFields (\ s a -> s{_pgbpFields = a})
 
 instance GoogleAuth PostsGetByPath' where
-        authKey = pgbpKey . _Just
-        authToken = pgbpOAuthToken . _Just
+        _AuthKey = pgbpKey . _Just
+        _AuthToken = pgbpOAuthToken . _Just
 
 instance GoogleRequest PostsGetByPath' where
         type Rs PostsGetByPath' = Post'

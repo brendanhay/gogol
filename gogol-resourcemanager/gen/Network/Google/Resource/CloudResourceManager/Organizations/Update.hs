@@ -225,8 +225,8 @@ ouCallback
   = lens _ouCallback (\ s a -> s{_ouCallback = a})
 
 instance GoogleAuth OrganizationsUpdate' where
-        authKey = ouKey . _Just
-        authToken = ouOAuthToken . _Just
+        _AuthKey = ouKey . _Just
+        _AuthToken = ouOAuthToken . _Just
 
 instance GoogleRequest OrganizationsUpdate' where
         type Rs OrganizationsUpdate' = Organization

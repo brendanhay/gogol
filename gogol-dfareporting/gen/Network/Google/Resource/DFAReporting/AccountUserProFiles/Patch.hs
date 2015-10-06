@@ -173,8 +173,8 @@ aupfpFields
   = lens _aupfpFields (\ s a -> s{_aupfpFields = a})
 
 instance GoogleAuth AccountUserProFilesPatch' where
-        authKey = aupfpKey . _Just
-        authToken = aupfpOAuthToken . _Just
+        _AuthKey = aupfpKey . _Just
+        _AuthToken = aupfpOAuthToken . _Just
 
 instance GoogleRequest AccountUserProFilesPatch'
          where

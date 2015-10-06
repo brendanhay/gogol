@@ -151,8 +151,8 @@ tiFields :: Lens' TimelineInsert' (Maybe Text)
 tiFields = lens _tiFields (\ s a -> s{_tiFields = a})
 
 instance GoogleAuth TimelineInsert' where
-        authKey = tiKey . _Just
-        authToken = tiOAuthToken . _Just
+        _AuthKey = tiKey . _Just
+        _AuthToken = tiOAuthToken . _Just
 
 instance GoogleRequest TimelineInsert' where
         type Rs TimelineInsert' = TimelineItem

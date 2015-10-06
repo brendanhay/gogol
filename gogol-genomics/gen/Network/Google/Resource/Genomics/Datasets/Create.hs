@@ -141,8 +141,8 @@ dcFields :: Lens' DatasetsCreate' (Maybe Text)
 dcFields = lens _dcFields (\ s a -> s{_dcFields = a})
 
 instance GoogleAuth DatasetsCreate' where
-        authKey = dcKey . _Just
-        authToken = dcOAuthToken . _Just
+        _AuthKey = dcKey . _Just
+        _AuthToken = dcOAuthToken . _Just
 
 instance GoogleRequest DatasetsCreate' where
         type Rs DatasetsCreate' = Dataset

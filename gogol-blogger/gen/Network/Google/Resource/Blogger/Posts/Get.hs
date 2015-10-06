@@ -200,8 +200,8 @@ pgFields :: Lens' PostsGet' (Maybe Text)
 pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
 
 instance GoogleAuth PostsGet' where
-        authKey = pgKey . _Just
-        authToken = pgOAuthToken . _Just
+        _AuthKey = pgKey . _Just
+        _AuthToken = pgOAuthToken . _Just
 
 instance GoogleRequest PostsGet' where
         type Rs PostsGet' = Post'

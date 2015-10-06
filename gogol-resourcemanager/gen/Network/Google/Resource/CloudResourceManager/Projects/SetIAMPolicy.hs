@@ -233,8 +233,8 @@ psipCallback
   = lens _psipCallback (\ s a -> s{_psipCallback = a})
 
 instance GoogleAuth ProjectsSetIAMPolicy' where
-        authKey = psipKey . _Just
-        authToken = psipOAuthToken . _Just
+        _AuthKey = psipKey . _Just
+        _AuthToken = psipOAuthToken . _Just
 
 instance GoogleRequest ProjectsSetIAMPolicy' where
         type Rs ProjectsSetIAMPolicy' = Policy

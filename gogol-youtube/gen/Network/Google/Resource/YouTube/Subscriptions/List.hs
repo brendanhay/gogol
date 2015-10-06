@@ -293,8 +293,8 @@ sFields :: Lens' SubscriptionsList' (Maybe Text)
 sFields = lens _sFields (\ s a -> s{_sFields = a})
 
 instance GoogleAuth SubscriptionsList' where
-        authKey = sKey . _Just
-        authToken = sOAuthToken . _Just
+        _AuthKey = sKey . _Just
+        _AuthToken = sOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsList' where
         type Rs SubscriptionsList' = SubscriptionListResponse

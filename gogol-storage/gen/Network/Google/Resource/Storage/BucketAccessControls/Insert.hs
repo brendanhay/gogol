@@ -159,8 +159,8 @@ baciFields
   = lens _baciFields (\ s a -> s{_baciFields = a})
 
 instance GoogleAuth BucketAccessControlsInsert' where
-        authKey = baciKey . _Just
-        authToken = baciOAuthToken . _Just
+        _AuthKey = baciKey . _Just
+        _AuthToken = baciOAuthToken . _Just
 
 instance GoogleRequest BucketAccessControlsInsert'
          where

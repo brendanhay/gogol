@@ -179,8 +179,8 @@ rpFields :: Lens' RepliesPatch' (Maybe Text)
 rpFields = lens _rpFields (\ s a -> s{_rpFields = a})
 
 instance GoogleAuth RepliesPatch' where
-        authKey = rpKey . _Just
-        authToken = rpOAuthToken . _Just
+        _AuthKey = rpKey . _Just
+        _AuthToken = rpOAuthToken . _Just
 
 instance GoogleRequest RepliesPatch' where
         type Rs RepliesPatch' = CommentReply

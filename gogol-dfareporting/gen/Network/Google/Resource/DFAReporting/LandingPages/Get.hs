@@ -170,8 +170,8 @@ lpgFields
   = lens _lpgFields (\ s a -> s{_lpgFields = a})
 
 instance GoogleAuth LandingPagesGet' where
-        authKey = lpgKey . _Just
-        authToken = lpgOAuthToken . _Just
+        _AuthKey = lpgKey . _Just
+        _AuthToken = lpgOAuthToken . _Just
 
 instance GoogleRequest LandingPagesGet' where
         type Rs LandingPagesGet' = LandingPage

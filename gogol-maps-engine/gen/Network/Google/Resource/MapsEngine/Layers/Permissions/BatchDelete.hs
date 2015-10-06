@@ -160,8 +160,8 @@ lpbdFields
 
 instance GoogleAuth LayersPermissionsBatchDelete'
          where
-        authKey = lpbdKey . _Just
-        authToken = lpbdOAuthToken . _Just
+        _AuthKey = lpbdKey . _Just
+        _AuthToken = lpbdOAuthToken . _Just
 
 instance GoogleRequest LayersPermissionsBatchDelete'
          where

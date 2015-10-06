@@ -158,8 +158,8 @@ tddFields
   = lens _tddFields (\ s a -> s{_tddFields = a})
 
 instance GoogleAuth TemplateDelete' where
-        authKey = tddKey . _Just
-        authToken = tddOAuthToken . _Just
+        _AuthKey = tddKey . _Just
+        _AuthToken = tddOAuthToken . _Just
 
 instance GoogleRequest TemplateDelete' where
         type Rs TemplateDelete' = ()

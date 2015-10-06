@@ -172,8 +172,8 @@ etgFields
   = lens _etgFields (\ s a -> s{_etgFields = a})
 
 instance GoogleAuth EditsTracksGet' where
-        authKey = etgKey . _Just
-        authToken = etgOAuthToken . _Just
+        _AuthKey = etgKey . _Just
+        _AuthToken = etgOAuthToken . _Just
 
 instance GoogleRequest EditsTracksGet' where
         type Rs EditsTracksGet' = Track

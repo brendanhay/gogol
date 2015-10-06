@@ -187,8 +187,8 @@ igriFields
 
 instance GoogleAuth InstanceGroupsRemoveInstances'
          where
-        authKey = igriKey . _Just
-        authToken = igriOAuthToken . _Just
+        _AuthKey = igriKey . _Just
+        _AuthToken = igriOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupsRemoveInstances'
          where

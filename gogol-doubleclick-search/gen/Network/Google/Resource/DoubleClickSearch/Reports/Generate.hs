@@ -140,8 +140,8 @@ rFields :: Lens' ReportsGenerate' (Maybe Text)
 rFields = lens _rFields (\ s a -> s{_rFields = a})
 
 instance GoogleAuth ReportsGenerate' where
-        authKey = rKey . _Just
-        authToken = rOAuthToken . _Just
+        _AuthKey = rKey . _Just
+        _AuthToken = rOAuthToken . _Just
 
 instance GoogleRequest ReportsGenerate' where
         type Rs ReportsGenerate' = Report

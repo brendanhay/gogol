@@ -154,8 +154,8 @@ tcFields :: Lens' TableCopy' (Maybe Text)
 tcFields = lens _tcFields (\ s a -> s{_tcFields = a})
 
 instance GoogleAuth TableCopy' where
-        authKey = tcKey . _Just
-        authToken = tcOAuthToken . _Just
+        _AuthKey = tcKey . _Just
+        _AuthToken = tcOAuthToken . _Just
 
 instance GoogleRequest TableCopy' where
         type Rs TableCopy' = Table

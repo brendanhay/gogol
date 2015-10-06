@@ -154,8 +154,8 @@ lgFields :: Lens' LicensesGet' (Maybe Text)
 lgFields = lens _lgFields (\ s a -> s{_lgFields = a})
 
 instance GoogleAuth LicensesGet' where
-        authKey = lgKey . _Just
-        authToken = lgOAuthToken . _Just
+        _AuthKey = lgKey . _Just
+        _AuthToken = lgOAuthToken . _Just
 
 instance GoogleRequest LicensesGet' where
         type Rs LicensesGet' = License

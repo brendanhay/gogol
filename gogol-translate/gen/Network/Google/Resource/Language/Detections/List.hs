@@ -142,8 +142,8 @@ dlFields :: Lens' DetectionsList' (Maybe Text)
 dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
 
 instance GoogleAuth DetectionsList' where
-        authKey = dlKey . _Just
-        authToken = dlOAuthToken . _Just
+        _AuthKey = dlKey . _Just
+        _AuthToken = dlOAuthToken . _Just
 
 instance GoogleRequest DetectionsList' where
         type Rs DetectionsList' = DetectionsListResponse

@@ -226,8 +226,8 @@ cslFields
   = lens _cslFields (\ s a -> s{_cslFields = a})
 
 instance GoogleAuth ChannelSectionsList' where
-        authKey = cslKey . _Just
-        authToken = cslOAuthToken . _Just
+        _AuthKey = cslKey . _Just
+        _AuthToken = cslOAuthToken . _Just
 
 instance GoogleRequest ChannelSectionsList' where
         type Rs ChannelSectionsList' =

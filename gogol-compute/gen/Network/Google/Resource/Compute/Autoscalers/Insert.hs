@@ -170,8 +170,8 @@ aiiFields
   = lens _aiiFields (\ s a -> s{_aiiFields = a})
 
 instance GoogleAuth AutoscalersInsert' where
-        authKey = aiiKey . _Just
-        authToken = aiiOAuthToken . _Just
+        _AuthKey = aiiKey . _Just
+        _AuthToken = aiiOAuthToken . _Just
 
 instance GoogleRequest AutoscalersInsert' where
         type Rs AutoscalersInsert' = Operation

@@ -147,8 +147,8 @@ clubFields
   = lens _clubFields (\ s a -> s{_clubFields = a})
 
 instance GoogleAuth CloudLoadingUpdateBook' where
-        authKey = clubKey . _Just
-        authToken = clubOAuthToken . _Just
+        _AuthKey = clubKey . _Just
+        _AuthToken = clubOAuthToken . _Just
 
 instance GoogleRequest CloudLoadingUpdateBook' where
         type Rs CloudLoadingUpdateBook' =

@@ -142,8 +142,8 @@ rdFields :: Lens' RastersDelete' (Maybe Text)
 rdFields = lens _rdFields (\ s a -> s{_rdFields = a})
 
 instance GoogleAuth RastersDelete' where
-        authKey = rdKey . _Just
-        authToken = rdOAuthToken . _Just
+        _AuthKey = rdKey . _Just
+        _AuthToken = rdOAuthToken . _Just
 
 instance GoogleRequest RastersDelete' where
         type Rs RastersDelete' = ()

@@ -176,8 +176,8 @@ isInstance
   = lens _isInstance (\ s a -> s{_isInstance = a})
 
 instance GoogleAuth InstancesStop' where
-        authKey = isKey . _Just
-        authToken = isOAuthToken . _Just
+        _AuthKey = isKey . _Just
+        _AuthToken = isOAuthToken . _Just
 
 instance GoogleRequest InstancesStop' where
         type Rs InstancesStop' = Operation

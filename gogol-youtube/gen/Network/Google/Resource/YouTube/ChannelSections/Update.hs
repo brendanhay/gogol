@@ -180,8 +180,8 @@ csuFields
   = lens _csuFields (\ s a -> s{_csuFields = a})
 
 instance GoogleAuth ChannelSectionsUpdate' where
-        authKey = csuKey . _Just
-        authToken = csuOAuthToken . _Just
+        _AuthKey = csuKey . _Just
+        _AuthToken = csuOAuthToken . _Just
 
 instance GoogleRequest ChannelSectionsUpdate' where
         type Rs ChannelSectionsUpdate' = ChannelSection

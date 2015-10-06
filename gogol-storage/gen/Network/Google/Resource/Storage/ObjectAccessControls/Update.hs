@@ -199,8 +199,8 @@ oacuFields
   = lens _oacuFields (\ s a -> s{_oacuFields = a})
 
 instance GoogleAuth ObjectAccessControlsUpdate' where
-        authKey = oacuKey . _Just
-        authToken = oacuOAuthToken . _Just
+        _AuthKey = oacuKey . _Just
+        _AuthToken = oacuOAuthToken . _Just
 
 instance GoogleRequest ObjectAccessControlsUpdate'
          where

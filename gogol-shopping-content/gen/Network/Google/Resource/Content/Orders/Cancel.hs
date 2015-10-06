@@ -167,8 +167,8 @@ ocFields :: Lens' OrdersCancel' (Maybe Text)
 ocFields = lens _ocFields (\ s a -> s{_ocFields = a})
 
 instance GoogleAuth OrdersCancel' where
-        authKey = ocKey . _Just
-        authToken = ocOAuthToken . _Just
+        _AuthKey = ocKey . _Just
+        _AuthToken = ocOAuthToken . _Just
 
 instance GoogleRequest OrdersCancel' where
         type Rs OrdersCancel' = OrdersCancelResponse

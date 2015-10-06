@@ -260,8 +260,8 @@ ouFields :: Lens' ObjectsUpdate' (Maybe Text)
 ouFields = lens _ouFields (\ s a -> s{_ouFields = a})
 
 instance GoogleAuth ObjectsUpdate' where
-        authKey = ouKey . _Just
-        authToken = ouOAuthToken . _Just
+        _AuthKey = ouKey . _Just
+        _AuthToken = ouOAuthToken . _Just
 
 instance GoogleRequest ObjectsUpdate' where
         type Rs ObjectsUpdate' = Object

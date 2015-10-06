@@ -218,8 +218,8 @@ lbuFields
   = lens _lbuFields (\ s a -> s{_lbuFields = a})
 
 instance GoogleAuth LiveBroadcastsUpdate' where
-        authKey = lbuKey . _Just
-        authToken = lbuOAuthToken . _Just
+        _AuthKey = lbuKey . _Just
+        _AuthToken = lbuOAuthToken . _Just
 
 instance GoogleRequest LiveBroadcastsUpdate' where
         type Rs LiveBroadcastsUpdate' = LiveBroadcast

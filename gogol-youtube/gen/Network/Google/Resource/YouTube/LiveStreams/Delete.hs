@@ -192,8 +192,8 @@ lsdFields
   = lens _lsdFields (\ s a -> s{_lsdFields = a})
 
 instance GoogleAuth LiveStreamsDelete' where
-        authKey = lsdKey . _Just
-        authToken = lsdOAuthToken . _Just
+        _AuthKey = lsdKey . _Just
+        _AuthToken = lsdOAuthToken . _Just
 
 instance GoogleRequest LiveStreamsDelete' where
         type Rs LiveStreamsDelete' = ()

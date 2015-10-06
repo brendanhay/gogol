@@ -186,8 +186,8 @@ igaiFields
   = lens _igaiFields (\ s a -> s{_igaiFields = a})
 
 instance GoogleAuth InstanceGroupsAddInstances' where
-        authKey = igaiKey . _Just
-        authToken = igaiOAuthToken . _Just
+        _AuthKey = igaiKey . _Just
+        _AuthToken = igaiOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupsAddInstances'
          where

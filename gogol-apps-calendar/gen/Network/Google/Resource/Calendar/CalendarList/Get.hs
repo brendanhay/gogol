@@ -150,8 +150,8 @@ clgFields
   = lens _clgFields (\ s a -> s{_clgFields = a})
 
 instance GoogleAuth CalendarListGet' where
-        authKey = clgKey . _Just
-        authToken = clgOAuthToken . _Just
+        _AuthKey = clgKey . _Just
+        _AuthToken = clgOAuthToken . _Just
 
 instance GoogleRequest CalendarListGet' where
         type Rs CalendarListGet' = CalendarListEntry

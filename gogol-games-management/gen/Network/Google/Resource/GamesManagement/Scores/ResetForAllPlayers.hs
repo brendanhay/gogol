@@ -152,8 +152,8 @@ srfapFields
   = lens _srfapFields (\ s a -> s{_srfapFields = a})
 
 instance GoogleAuth ScoresResetForAllPlayers' where
-        authKey = srfapKey . _Just
-        authToken = srfapOAuthToken . _Just
+        _AuthKey = srfapKey . _Just
+        _AuthToken = srfapOAuthToken . _Just
 
 instance GoogleRequest ScoresResetForAllPlayers'
          where

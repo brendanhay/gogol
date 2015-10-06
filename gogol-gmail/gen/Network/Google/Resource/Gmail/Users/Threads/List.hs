@@ -207,8 +207,8 @@ utlFields
   = lens _utlFields (\ s a -> s{_utlFields = a})
 
 instance GoogleAuth UsersThreadsList' where
-        authKey = utlKey . _Just
-        authToken = utlOAuthToken . _Just
+        _AuthKey = utlKey . _Just
+        _AuthToken = utlOAuthToken . _Just
 
 instance GoogleRequest UsersThreadsList' where
         type Rs UsersThreadsList' = ListThreadsResponse

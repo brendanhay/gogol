@@ -254,8 +254,8 @@ plsuCallback
   = lens _plsuCallback (\ s a -> s{_plsuCallback = a})
 
 instance GoogleAuth ProjectsLogsSinksUpdate' where
-        authKey = plsuKey . _Just
-        authToken = plsuOAuthToken . _Just
+        _AuthKey = plsuKey . _Just
+        _AuthToken = plsuOAuthToken . _Just
 
 instance GoogleRequest ProjectsLogsSinksUpdate' where
         type Rs ProjectsLogsSinksUpdate' = LogSink

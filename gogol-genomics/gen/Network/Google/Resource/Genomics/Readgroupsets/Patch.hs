@@ -156,8 +156,8 @@ rpFields :: Lens' ReadgroupsetsPatch' (Maybe Text)
 rpFields = lens _rpFields (\ s a -> s{_rpFields = a})
 
 instance GoogleAuth ReadgroupsetsPatch' where
-        authKey = rpKey . _Just
-        authToken = rpOAuthToken . _Just
+        _AuthKey = rpKey . _Just
+        _AuthToken = rpOAuthToken . _Just
 
 instance GoogleRequest ReadgroupsetsPatch' where
         type Rs ReadgroupsetsPatch' = ReadGroupSet

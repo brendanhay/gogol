@@ -196,8 +196,8 @@ lgakvInstance
       (\ s a -> s{_lgakvInstance = a})
 
 instance GoogleAuth LinuxGetAuthorizedKeysView' where
-        authKey = lgakvKey . _Just
-        authToken = lgakvOAuthToken . _Just
+        _AuthKey = lgakvKey . _Just
+        _AuthToken = lgakvOAuthToken . _Just
 
 instance GoogleRequest LinuxGetAuthorizedKeysView'
          where

@@ -159,8 +159,8 @@ paraFields
   = lens _paraFields (\ s a -> s{_paraFields = a})
 
 instance GoogleAuth ParentsGet' where
-        authKey = paraKey . _Just
-        authToken = paraOAuthToken . _Just
+        _AuthKey = paraKey . _Just
+        _AuthToken = paraOAuthToken . _Just
 
 instance GoogleRequest ParentsGet' where
         type Rs ParentsGet' = ParentReference

@@ -249,8 +249,8 @@ pjwirsCallback
 
 instance GoogleAuth
          ProjectsJobsWorkItemsReportStatus' where
-        authKey = pjwirsKey . _Just
-        authToken = pjwirsOAuthToken . _Just
+        _AuthKey = pjwirsKey . _Just
+        _AuthToken = pjwirsOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsJobsWorkItemsReportStatus' where

@@ -146,8 +146,8 @@ mnlFields
   = lens _mnlFields (\ s a -> s{_mnlFields = a})
 
 instance GoogleAuth MarketplaceNotesList' where
-        authKey = mnlKey . _Just
-        authToken = mnlOAuthToken . _Just
+        _AuthKey = mnlKey . _Just
+        _AuthToken = mnlOAuthToken . _Just
 
 instance GoogleRequest MarketplaceNotesList' where
         type Rs MarketplaceNotesList' = GetOrderNotesResponse

@@ -206,8 +206,8 @@ chaFields
   = lens _chaFields (\ s a -> s{_chaFields = a})
 
 instance GoogleAuth ChangesList' where
-        authKey = chaKey . _Just
-        authToken = chaOAuthToken . _Just
+        _AuthKey = chaKey . _Just
+        _AuthToken = chaOAuthToken . _Just
 
 instance GoogleRequest ChangesList' where
         type Rs ChangesList' = ChangeList

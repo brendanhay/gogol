@@ -224,8 +224,8 @@ torCallback
   = lens _torCallback (\ s a -> s{_torCallback = a})
 
 instance GoogleAuth TransferOperationsResume' where
-        authKey = torKey . _Just
-        authToken = torOAuthToken . _Just
+        _AuthKey = torKey . _Just
+        _AuthToken = torOAuthToken . _Just
 
 instance GoogleRequest TransferOperationsResume'
          where

@@ -162,8 +162,8 @@ sllFields
   = lens _sllFields (\ s a -> s{_sllFields = a})
 
 instance GoogleAuth SitemapsList' where
-        authKey = sllKey . _Just
-        authToken = sllOAuthToken . _Just
+        _AuthKey = sllKey . _Just
+        _AuthToken = sllOAuthToken . _Just
 
 instance GoogleRequest SitemapsList' where
         type Rs SitemapsList' = SitemapsListResponse

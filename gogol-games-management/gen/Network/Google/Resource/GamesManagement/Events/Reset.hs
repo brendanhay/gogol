@@ -148,8 +148,8 @@ erFields :: Lens' EventsReset' (Maybe Text)
 erFields = lens _erFields (\ s a -> s{_erFields = a})
 
 instance GoogleAuth EventsReset' where
-        authKey = erKey . _Just
-        authToken = erOAuthToken . _Just
+        _AuthKey = erKey . _Just
+        _AuthToken = erOAuthToken . _Just
 
 instance GoogleRequest EventsReset' where
         type Rs EventsReset' = ()

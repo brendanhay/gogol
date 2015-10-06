@@ -160,8 +160,8 @@ ctiFields
   = lens _ctiFields (\ s a -> s{_ctiFields = a})
 
 instance GoogleAuth CommentThreadsInsert' where
-        authKey = ctiKey . _Just
-        authToken = ctiOAuthToken . _Just
+        _AuthKey = ctiKey . _Just
+        _AuthToken = ctiOAuthToken . _Just
 
 instance GoogleRequest CommentThreadsInsert' where
         type Rs CommentThreadsInsert' = CommentThread

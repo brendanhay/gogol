@@ -159,8 +159,8 @@ fcuFields
 
 instance GoogleAuth FloodlightConfigurationsUpdate'
          where
-        authKey = fcuKey . _Just
-        authToken = fcuOAuthToken . _Just
+        _AuthKey = fcuKey . _Just
+        _AuthToken = fcuOAuthToken . _Just
 
 instance GoogleRequest
          FloodlightConfigurationsUpdate' where

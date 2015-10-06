@@ -158,8 +158,8 @@ mladFields
   = lens _mladFields (\ s a -> s{_mladFields = a})
 
 instance GoogleAuth MyLibraryAnnotationsDelete' where
-        authKey = mladKey . _Just
-        authToken = mladOAuthToken . _Just
+        _AuthKey = mladKey . _Just
+        _AuthToken = mladOAuthToken . _Just
 
 instance GoogleRequest MyLibraryAnnotationsDelete'
          where

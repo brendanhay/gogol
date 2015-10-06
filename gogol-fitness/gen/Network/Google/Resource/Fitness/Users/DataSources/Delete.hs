@@ -159,8 +159,8 @@ udsdFields
   = lens _udsdFields (\ s a -> s{_udsdFields = a})
 
 instance GoogleAuth UsersDataSourcesDelete' where
-        authKey = udsdKey . _Just
-        authToken = udsdOAuthToken . _Just
+        _AuthKey = udsdKey . _Just
+        _AuthToken = udsdOAuthToken . _Just
 
 instance GoogleRequest UsersDataSourcesDelete' where
         type Rs UsersDataSourcesDelete' = DataSource

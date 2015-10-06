@@ -215,8 +215,8 @@ awFields :: Lens' ACLWatch' (Maybe Text)
 awFields = lens _awFields (\ s a -> s{_awFields = a})
 
 instance GoogleAuth ACLWatch' where
-        authKey = awKey . _Just
-        authToken = awOAuthToken . _Just
+        _AuthKey = awKey . _Just
+        _AuthToken = awOAuthToken . _Just
 
 instance GoogleRequest ACLWatch' where
         type Rs ACLWatch' = Channel

@@ -147,8 +147,8 @@ raFields :: Lens' ReadgroupsetsAlign' (Maybe Text)
 raFields = lens _raFields (\ s a -> s{_raFields = a})
 
 instance GoogleAuth ReadgroupsetsAlign' where
-        authKey = raKey . _Just
-        authToken = raOAuthToken . _Just
+        _AuthKey = raKey . _Just
+        _AuthToken = raOAuthToken . _Just
 
 instance GoogleRequest ReadgroupsetsAlign' where
         type Rs ReadgroupsetsAlign' =

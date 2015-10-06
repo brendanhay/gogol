@@ -163,8 +163,8 @@ psuebFields
 
 instance GoogleAuth ProjectsSetUsageExportBucket'
          where
-        authKey = psuebKey . _Just
-        authToken = psuebOAuthToken . _Just
+        _AuthKey = psuebKey . _Just
+        _AuthToken = psuebOAuthToken . _Just
 
 instance GoogleRequest ProjectsSetUsageExportBucket'
          where

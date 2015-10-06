@@ -183,8 +183,8 @@ istInstance
   = lens _istInstance (\ s a -> s{_istInstance = a})
 
 instance GoogleAuth InstancesSetTags' where
-        authKey = istKey . _Just
-        authToken = istOAuthToken . _Just
+        _AuthKey = istKey . _Just
+        _AuthToken = istOAuthToken . _Just
 
 instance GoogleRequest InstancesSetTags' where
         type Rs InstancesSetTags' = Operation

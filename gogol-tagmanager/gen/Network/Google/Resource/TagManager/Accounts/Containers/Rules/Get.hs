@@ -173,8 +173,8 @@ acrgFields
   = lens _acrgFields (\ s a -> s{_acrgFields = a})
 
 instance GoogleAuth AccountsContainersRulesGet' where
-        authKey = acrgKey . _Just
-        authToken = acrgOAuthToken . _Just
+        _AuthKey = acrgKey . _Just
+        _AuthToken = acrgOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersRulesGet'
          where

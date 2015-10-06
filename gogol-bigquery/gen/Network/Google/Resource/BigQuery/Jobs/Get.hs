@@ -157,8 +157,8 @@ jgFields :: Lens' JobsGet' (Maybe Text)
 jgFields = lens _jgFields (\ s a -> s{_jgFields = a})
 
 instance GoogleAuth JobsGet' where
-        authKey = jgKey . _Just
-        authToken = jgOAuthToken . _Just
+        _AuthKey = jgKey . _Just
+        _AuthToken = jgOAuthToken . _Just
 
 instance GoogleRequest JobsGet' where
         type Rs JobsGet' = Job

@@ -157,8 +157,8 @@ pddFields
   = lens _pddFields (\ s a -> s{_pddFields = a})
 
 instance GoogleAuth PagesDelete' where
-        authKey = pddKey . _Just
-        authToken = pddOAuthToken . _Just
+        _AuthKey = pddKey . _Just
+        _AuthToken = pddOAuthToken . _Just
 
 instance GoogleRequest PagesDelete' where
         type Rs PagesDelete' = ()

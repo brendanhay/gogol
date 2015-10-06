@@ -188,8 +188,8 @@ lalfpFields
 
 instance GoogleAuth LicenseAssignmentsListForProduct'
          where
-        authKey = lalfpKey . _Just
-        authToken = lalfpOAuthToken . _Just
+        _AuthKey = lalfpKey . _Just
+        _AuthToken = lalfpOAuthToken . _Just
 
 instance GoogleRequest
          LicenseAssignmentsListForProduct' where

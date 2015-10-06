@@ -236,8 +236,8 @@ cacCallback
   = lens _cacCallback (\ s a -> s{_cacCallback = a})
 
 instance GoogleAuth CoursesAliasesCreate' where
-        authKey = cacKey . _Just
-        authToken = cacOAuthToken . _Just
+        _AuthKey = cacKey . _Just
+        _AuthToken = cacOAuthToken . _Just
 
 instance GoogleRequest CoursesAliasesCreate' where
         type Rs CoursesAliasesCreate' = CourseAlias

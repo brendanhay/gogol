@@ -161,8 +161,8 @@ pzolFields
 
 instance GoogleAuth ProjectsZonesOperationsList'
          where
-        authKey = pzolKey . _Just
-        authToken = pzolOAuthToken . _Just
+        _AuthKey = pzolKey . _Just
+        _AuthToken = pzolOAuthToken . _Just
 
 instance GoogleRequest ProjectsZonesOperationsList'
          where

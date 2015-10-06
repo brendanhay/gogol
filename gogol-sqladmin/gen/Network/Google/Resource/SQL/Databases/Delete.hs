@@ -170,8 +170,8 @@ ddInstance
   = lens _ddInstance (\ s a -> s{_ddInstance = a})
 
 instance GoogleAuth DatabasesDelete' where
-        authKey = ddKey . _Just
-        authToken = ddOAuthToken . _Just
+        _AuthKey = ddKey . _Just
+        _AuthToken = ddOAuthToken . _Just
 
 instance GoogleRequest DatabasesDelete' where
         type Rs DatabasesDelete' = Operation

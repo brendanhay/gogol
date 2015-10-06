@@ -167,8 +167,8 @@ buFields :: Lens' BudgetUpdate' (Maybe Text)
 buFields = lens _buFields (\ s a -> s{_buFields = a})
 
 instance GoogleAuth BudgetUpdate' where
-        authKey = buKey . _Just
-        authToken = buOAuthToken . _Just
+        _AuthKey = buKey . _Just
+        _AuthToken = buOAuthToken . _Just
 
 instance GoogleRequest BudgetUpdate' where
         type Rs BudgetUpdate' = Budget

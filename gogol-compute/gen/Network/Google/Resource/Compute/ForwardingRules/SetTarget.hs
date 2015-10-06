@@ -185,8 +185,8 @@ frstFields
   = lens _frstFields (\ s a -> s{_frstFields = a})
 
 instance GoogleAuth ForwardingRulesSetTarget' where
-        authKey = frstKey . _Just
-        authToken = frstOAuthToken . _Just
+        _AuthKey = frstKey . _Just
+        _AuthToken = frstOAuthToken . _Just
 
 instance GoogleRequest ForwardingRulesSetTarget'
          where

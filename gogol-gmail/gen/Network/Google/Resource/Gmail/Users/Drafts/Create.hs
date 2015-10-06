@@ -167,8 +167,8 @@ udcFields
   = lens _udcFields (\ s a -> s{_udcFields = a})
 
 instance GoogleAuth UsersDraftsCreate' where
-        authKey = udcKey . _Just
-        authToken = udcOAuthToken . _Just
+        _AuthKey = udcKey . _Just
+        _AuthToken = udcOAuthToken . _Just
 
 instance GoogleRequest UsersDraftsCreate' where
         type Rs UsersDraftsCreate' = Draft

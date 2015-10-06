@@ -163,8 +163,8 @@ ogoFields
   = lens _ogoFields (\ s a -> s{_ogoFields = a})
 
 instance GoogleAuth OrdersGettestOrdertemplate' where
-        authKey = ogoKey . _Just
-        authToken = ogoOAuthToken . _Just
+        _AuthKey = ogoKey . _Just
+        _AuthToken = ogoOAuthToken . _Just
 
 instance GoogleRequest OrdersGettestOrdertemplate'
          where

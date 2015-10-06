@@ -144,8 +144,8 @@ piFields :: Lens' PawsInit' (Maybe Text)
 piFields = lens _piFields (\ s a -> s{_piFields = a})
 
 instance GoogleAuth PawsInit' where
-        authKey = piKey . _Just
-        authToken = piOAuthToken . _Just
+        _AuthKey = piKey . _Just
+        _AuthToken = piOAuthToken . _Just
 
 instance GoogleRequest PawsInit' where
         type Rs PawsInit' = PawsInitResponse

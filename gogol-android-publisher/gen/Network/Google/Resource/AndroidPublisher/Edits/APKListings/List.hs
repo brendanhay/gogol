@@ -177,8 +177,8 @@ eapkllFields
   = lens _eapkllFields (\ s a -> s{_eapkllFields = a})
 
 instance GoogleAuth EditsAPKListingsList' where
-        authKey = eapkllKey . _Just
-        authToken = eapkllOAuthToken . _Just
+        _AuthKey = eapkllKey . _Just
+        _AuthToken = eapkllOAuthToken . _Just
 
 instance GoogleRequest EditsAPKListingsList' where
         type Rs EditsAPKListingsList' =

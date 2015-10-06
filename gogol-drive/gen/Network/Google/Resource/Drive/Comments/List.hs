@@ -198,8 +198,8 @@ comFields
   = lens _comFields (\ s a -> s{_comFields = a})
 
 instance GoogleAuth CommentsList' where
-        authKey = comKey . _Just
-        authToken = comOAuthToken . _Just
+        _AuthKey = comKey . _Just
+        _AuthToken = comOAuthToken . _Just
 
 instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentList

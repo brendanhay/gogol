@@ -167,8 +167,8 @@ rrFields :: Lens' ReportsRun' (Maybe Text)
 rrFields = lens _rrFields (\ s a -> s{_rrFields = a})
 
 instance GoogleAuth ReportsRun' where
-        authKey = rrKey . _Just
-        authToken = rrOAuthToken . _Just
+        _AuthKey = rrKey . _Just
+        _AuthToken = rrOAuthToken . _Just
 
 instance GoogleRequest ReportsRun' where
         type Rs ReportsRun' = File

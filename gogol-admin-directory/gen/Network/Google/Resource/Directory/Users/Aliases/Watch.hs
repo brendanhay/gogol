@@ -168,8 +168,8 @@ uawFields
   = lens _uawFields (\ s a -> s{_uawFields = a})
 
 instance GoogleAuth UsersAliasesWatch' where
-        authKey = uawKey . _Just
-        authToken = uawOAuthToken . _Just
+        _AuthKey = uawKey . _Just
+        _AuthToken = uawOAuthToken . _Just
 
 instance GoogleRequest UsersAliasesWatch' where
         type Rs UsersAliasesWatch' = Channel

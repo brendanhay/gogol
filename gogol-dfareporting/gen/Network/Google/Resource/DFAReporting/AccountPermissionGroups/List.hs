@@ -149,8 +149,8 @@ apglFields
 
 instance GoogleAuth AccountPermissionGroupsList'
          where
-        authKey = apglKey . _Just
-        authToken = apglOAuthToken . _Just
+        _AuthKey = apglKey . _Just
+        _AuthToken = apglOAuthToken . _Just
 
 instance GoogleRequest AccountPermissionGroupsList'
          where

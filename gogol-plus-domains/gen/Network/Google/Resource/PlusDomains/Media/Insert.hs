@@ -180,8 +180,8 @@ miFields :: Lens' MediaInsert' (Maybe Text)
 miFields = lens _miFields (\ s a -> s{_miFields = a})
 
 instance GoogleAuth MediaInsert' where
-        authKey = miKey . _Just
-        authToken = miOAuthToken . _Just
+        _AuthKey = miKey . _Just
+        _AuthToken = miOAuthToken . _Just
 
 instance GoogleRequest MediaInsert' where
         type Rs MediaInsert' = Media

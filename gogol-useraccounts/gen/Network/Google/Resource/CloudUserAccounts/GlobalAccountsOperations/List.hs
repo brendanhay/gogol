@@ -215,8 +215,8 @@ gaolFields
 
 instance GoogleAuth GlobalAccountsOperationsList'
          where
-        authKey = gaolKey . _Just
-        authToken = gaolOAuthToken . _Just
+        _AuthKey = gaolKey . _Just
+        _AuthToken = gaolOAuthToken . _Just
 
 instance GoogleRequest GlobalAccountsOperationsList'
          where

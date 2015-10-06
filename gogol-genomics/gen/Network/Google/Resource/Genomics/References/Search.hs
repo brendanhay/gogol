@@ -148,8 +148,8 @@ refFields
   = lens _refFields (\ s a -> s{_refFields = a})
 
 instance GoogleAuth ReferencesSearch' where
-        authKey = refKey . _Just
-        authToken = refOAuthToken . _Just
+        _AuthKey = refKey . _Just
+        _AuthToken = refOAuthToken . _Just
 
 instance GoogleRequest ReferencesSearch' where
         type Rs ReferencesSearch' = SearchReferencesResponse

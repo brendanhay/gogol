@@ -322,8 +322,8 @@ lvalFields
 
 instance GoogleAuth LayersVolumeAnnotationsList'
          where
-        authKey = lvalKey . _Just
-        authToken = lvalOAuthToken . _Just
+        _AuthKey = lvalKey . _Just
+        _AuthToken = lvalOAuthToken . _Just
 
 instance GoogleRequest LayersVolumeAnnotationsList'
          where

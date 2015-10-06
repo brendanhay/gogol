@@ -198,8 +198,8 @@ iuFields :: Lens' InstallsUpdate' (Maybe Text)
 iuFields = lens _iuFields (\ s a -> s{_iuFields = a})
 
 instance GoogleAuth InstallsUpdate' where
-        authKey = iuKey . _Just
-        authToken = iuOAuthToken . _Just
+        _AuthKey = iuKey . _Just
+        _AuthToken = iuOAuthToken . _Just
 
 instance GoogleRequest InstallsUpdate' where
         type Rs InstallsUpdate' = Install

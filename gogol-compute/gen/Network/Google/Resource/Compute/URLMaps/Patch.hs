@@ -171,8 +171,8 @@ umpFields
   = lens _umpFields (\ s a -> s{_umpFields = a})
 
 instance GoogleAuth URLMapsPatch' where
-        authKey = umpKey . _Just
-        authToken = umpOAuthToken . _Just
+        _AuthKey = umpKey . _Just
+        _AuthToken = umpOAuthToken . _Just
 
 instance GoogleRequest URLMapsPatch' where
         type Rs URLMapsPatch' = Operation

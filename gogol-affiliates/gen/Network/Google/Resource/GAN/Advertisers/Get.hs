@@ -170,8 +170,8 @@ agFields :: Lens' AdvertisersGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 instance GoogleAuth AdvertisersGet' where
-        authKey = agKey . _Just
-        authToken = agOAuthToken . _Just
+        _AuthKey = agKey . _Just
+        _AuthToken = agOAuthToken . _Just
 
 instance GoogleRequest AdvertisersGet' where
         type Rs AdvertisersGet' = Advertiser

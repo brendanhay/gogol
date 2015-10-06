@@ -199,8 +199,8 @@ melFields
   = lens _melFields (\ s a -> s{_melFields = a})
 
 instance GoogleAuth ManagementExperimentsList' where
-        authKey = melKey . _Just
-        authToken = melOAuthToken . _Just
+        _AuthKey = melKey . _Just
+        _AuthToken = melOAuthToken . _Just
 
 instance GoogleRequest ManagementExperimentsList'
          where

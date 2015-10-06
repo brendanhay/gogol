@@ -151,8 +151,8 @@ amdlFields
 
 instance GoogleAuth AccountsMetadataDimensionsList'
          where
-        authKey = amdlKey . _Just
-        authToken = amdlOAuthToken . _Just
+        _AuthKey = amdlKey . _Just
+        _AuthToken = amdlOAuthToken . _Just
 
 instance GoogleRequest
          AccountsMetadataDimensionsList' where

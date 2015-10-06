@@ -156,8 +156,8 @@ tmaFields
   = lens _tmaFields (\ s a -> s{_tmaFields = a})
 
 instance GoogleAuth TrainedModelsAnalyze' where
-        authKey = tmaKey . _Just
-        authToken = tmaOAuthToken . _Just
+        _AuthKey = tmaKey . _Just
+        _AuthToken = tmaOAuthToken . _Just
 
 instance GoogleRequest TrainedModelsAnalyze' where
         type Rs TrainedModelsAnalyze' = Analyze

@@ -160,8 +160,8 @@ aciFields
 
 instance GoogleAuth AchievementConfigurationsInsert'
          where
-        authKey = aciKey . _Just
-        authToken = aciOAuthToken . _Just
+        _AuthKey = aciKey . _Just
+        _AuthToken = aciOAuthToken . _Just
 
 instance GoogleRequest
          AchievementConfigurationsInsert' where

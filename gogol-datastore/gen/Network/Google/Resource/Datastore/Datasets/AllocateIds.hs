@@ -159,8 +159,8 @@ daiFields
   = lens _daiFields (\ s a -> s{_daiFields = a})
 
 instance GoogleAuth DatasetsAllocateIds' where
-        authKey = daiKey . _Just
-        authToken = daiOAuthToken . _Just
+        _AuthKey = daiKey . _Just
+        _AuthToken = daiOAuthToken . _Just
 
 instance GoogleRequest DatasetsAllocateIds' where
         type Rs DatasetsAllocateIds' = AllocateIdsResponse

@@ -156,8 +156,8 @@ imaFields
   = lens _imaFields (\ s a -> s{_imaFields = a})
 
 instance GoogleAuth ImagesGet' where
-        authKey = imaKey . _Just
-        authToken = imaOAuthToken . _Just
+        _AuthKey = imaKey . _Just
+        _AuthToken = imaOAuthToken . _Just
 
 instance GoogleRequest ImagesGet' where
         type Rs ImagesGet' = Image

@@ -195,8 +195,8 @@ zolFields
   = lens _zolFields (\ s a -> s{_zolFields = a})
 
 instance GoogleAuth ZoneOperationsList' where
-        authKey = zolKey . _Just
-        authToken = zolOAuthToken . _Just
+        _AuthKey = zolKey . _Just
+        _AuthToken = zolOAuthToken . _Just
 
 instance GoogleRequest ZoneOperationsList' where
         type Rs ZoneOperationsList' = OperationList

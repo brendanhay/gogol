@@ -159,8 +159,8 @@ vuuFields
   = lens _vuuFields (\ s a -> s{_vuuFields = a})
 
 instance GoogleAuth VariantsetsUpdate' where
-        authKey = vuuKey . _Just
-        authToken = vuuOAuthToken . _Just
+        _AuthKey = vuuKey . _Just
+        _AuthToken = vuuOAuthToken . _Just
 
 instance GoogleRequest VariantsetsUpdate' where
         type Rs VariantsetsUpdate' = VariantSet

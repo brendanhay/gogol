@@ -184,8 +184,8 @@ rsgFields
   = lens _rsgFields (\ s a -> s{_rsgFields = a})
 
 instance GoogleAuth ReportsSavedGenerate' where
-        authKey = rsgKey . _Just
-        authToken = rsgOAuthToken . _Just
+        _AuthKey = rsgKey . _Just
+        _AuthToken = rsgOAuthToken . _Just
 
 instance GoogleRequest ReportsSavedGenerate' where
         type Rs ReportsSavedGenerate' =

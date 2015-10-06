@@ -183,8 +183,8 @@ repFields
   = lens _repFields (\ s a -> s{_repFields = a})
 
 instance GoogleAuth RepliesUpdate' where
-        authKey = repKey . _Just
-        authToken = repOAuthToken . _Just
+        _AuthKey = repKey . _Just
+        _AuthToken = repOAuthToken . _Just
 
 instance GoogleRequest RepliesUpdate' where
         type Rs RepliesUpdate' = CommentReply

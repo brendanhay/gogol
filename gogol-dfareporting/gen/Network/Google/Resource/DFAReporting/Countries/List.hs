@@ -146,8 +146,8 @@ couFields
   = lens _couFields (\ s a -> s{_couFields = a})
 
 instance GoogleAuth CountriesList' where
-        authKey = couKey . _Just
-        authToken = couOAuthToken . _Just
+        _AuthKey = couKey . _Just
+        _AuthToken = couOAuthToken . _Just
 
 instance GoogleRequest CountriesList' where
         type Rs CountriesList' = CountriesListResponse

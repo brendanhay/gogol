@@ -236,8 +236,8 @@ cflFields
   = lens _cflFields (\ s a -> s{_cflFields = a})
 
 instance GoogleAuth CreativeFieldsList' where
-        authKey = cflKey . _Just
-        authToken = cflOAuthToken . _Just
+        _AuthKey = cflKey . _Just
+        _AuthToken = cflOAuthToken . _Just
 
 instance GoogleRequest CreativeFieldsList' where
         type Rs CreativeFieldsList' =

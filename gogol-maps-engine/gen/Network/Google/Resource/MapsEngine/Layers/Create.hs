@@ -152,8 +152,8 @@ lcFields :: Lens' LayersCreate' (Maybe Text)
 lcFields = lens _lcFields (\ s a -> s{_lcFields = a})
 
 instance GoogleAuth LayersCreate' where
-        authKey = lcKey . _Just
-        authToken = lcOAuthToken . _Just
+        _AuthKey = lcKey . _Just
+        _AuthToken = lcOAuthToken . _Just
 
 instance GoogleRequest LayersCreate' where
         type Rs LayersCreate' = Layer

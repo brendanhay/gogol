@@ -191,8 +191,8 @@ aFields = lens _aFields (\ s a -> s{_aFields = a})
 
 instance GoogleAuth
          AccountsContainersVariablesUpdate' where
-        authKey = aKey . _Just
-        authToken = aOAuthToken . _Just
+        _AuthKey = aKey . _Just
+        _AuthToken = aOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVariablesUpdate' where

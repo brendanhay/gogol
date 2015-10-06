@@ -187,8 +187,8 @@ pzccFields
 
 instance GoogleAuth ProjectsZonesClustersCreate'
          where
-        authKey = pzccKey . _Just
-        authToken = pzccOAuthToken . _Just
+        _AuthKey = pzccKey . _Just
+        _AuthToken = pzccOAuthToken . _Just
 
 instance GoogleRequest ProjectsZonesClustersCreate'
          where

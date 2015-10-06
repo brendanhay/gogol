@@ -156,8 +156,8 @@ ngFields :: Lens' NotificationsGet' (Maybe Text)
 ngFields = lens _ngFields (\ s a -> s{_ngFields = a})
 
 instance GoogleAuth NotificationsGet' where
-        authKey = ngKey . _Just
-        authToken = ngOAuthToken . _Just
+        _AuthKey = ngKey . _Just
+        _AuthToken = ngOAuthToken . _Just
 
 instance GoogleRequest NotificationsGet' where
         type Rs NotificationsGet' = Notification

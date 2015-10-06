@@ -168,8 +168,8 @@ appFields
   = lens _appFields (\ s a -> s{_appFields = a})
 
 instance GoogleAuth AdsPatch' where
-        authKey = appKey . _Just
-        authToken = appOAuthToken . _Just
+        _AuthKey = appKey . _Just
+        _AuthToken = appOAuthToken . _Just
 
 instance GoogleRequest AdsPatch' where
         type Rs AdsPatch' = Ad

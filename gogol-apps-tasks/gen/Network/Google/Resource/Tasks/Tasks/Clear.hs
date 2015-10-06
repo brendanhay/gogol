@@ -146,8 +146,8 @@ tcFields :: Lens' TasksClear' (Maybe Text)
 tcFields = lens _tcFields (\ s a -> s{_tcFields = a})
 
 instance GoogleAuth TasksClear' where
-        authKey = tcKey . _Just
-        authToken = tcOAuthToken . _Just
+        _AuthKey = tcKey . _Just
+        _AuthToken = tcOAuthToken . _Just
 
 instance GoogleRequest TasksClear' where
         type Rs TasksClear' = ()

@@ -250,8 +250,8 @@ ctlCallback
   = lens _ctlCallback (\ s a -> s{_ctlCallback = a})
 
 instance GoogleAuth CoursesTeachersList' where
-        authKey = ctlKey . _Just
-        authToken = ctlOAuthToken . _Just
+        _AuthKey = ctlKey . _Just
+        _AuthToken = ctlOAuthToken . _Just
 
 instance GoogleRequest CoursesTeachersList' where
         type Rs CoursesTeachersList' = ListTeachersResponse

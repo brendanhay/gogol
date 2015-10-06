@@ -172,8 +172,8 @@ ouoFields
 
 instance GoogleAuth OrdersUpdatemerchantOrderid'
          where
-        authKey = ouoKey . _Just
-        authToken = ouoOAuthToken . _Just
+        _AuthKey = ouoKey . _Just
+        _AuthToken = ouoOAuthToken . _Just
 
 instance GoogleRequest OrdersUpdatemerchantOrderid'
          where

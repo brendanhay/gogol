@@ -151,8 +151,8 @@ eddFields
   = lens _eddFields (\ s a -> s{_eddFields = a})
 
 instance GoogleAuth EnterprisesDelete' where
-        authKey = eddKey . _Just
-        authToken = eddOAuthToken . _Just
+        _AuthKey = eddKey . _Just
+        _AuthToken = eddOAuthToken . _Just
 
 instance GoogleRequest EnterprisesDelete' where
         type Rs EnterprisesDelete' = ()

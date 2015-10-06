@@ -205,8 +205,8 @@ mtlFields
   = lens _mtlFields (\ s a -> s{_mtlFields = a})
 
 instance GoogleAuth MachineTypesList' where
-        authKey = mtlKey . _Just
-        authToken = mtlOAuthToken . _Just
+        _AuthKey = mtlKey . _Just
+        _AuthToken = mtlOAuthToken . _Just
 
 instance GoogleRequest MachineTypesList' where
         type Rs MachineTypesList' = MachineTypeList

@@ -149,8 +149,8 @@ pvdFields
   = lens _pvdFields (\ s a -> s{_pvdFields = a})
 
 instance GoogleAuth PawsVerifyDevice' where
-        authKey = pvdKey . _Just
-        authToken = pvdOAuthToken . _Just
+        _AuthKey = pvdKey . _Just
+        _AuthToken = pvdOAuthToken . _Just
 
 instance GoogleRequest PawsVerifyDevice' where
         type Rs PawsVerifyDevice' = PawsVerifyDeviceResponse

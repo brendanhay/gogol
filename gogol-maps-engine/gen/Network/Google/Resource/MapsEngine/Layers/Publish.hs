@@ -153,8 +153,8 @@ lFields :: Lens' LayersPublish' (Maybe Text)
 lFields = lens _lFields (\ s a -> s{_lFields = a})
 
 instance GoogleAuth LayersPublish' where
-        authKey = lKey . _Just
-        authToken = lOAuthToken . _Just
+        _AuthKey = lKey . _Just
+        _AuthToken = lOAuthToken . _Just
 
 instance GoogleRequest LayersPublish' where
         type Rs LayersPublish' = PublishResponse

@@ -158,8 +158,8 @@ adsdFields
   = lens _adsdFields (\ s a -> s{_adsdFields = a})
 
 instance GoogleAuth AdsGet' where
-        authKey = adsdKey . _Just
-        authToken = adsdOAuthToken . _Just
+        _AuthKey = adsdKey . _Just
+        _AuthToken = adsdOAuthToken . _Just
 
 instance GoogleRequest AdsGet' where
         type Rs AdsGet' = Ad

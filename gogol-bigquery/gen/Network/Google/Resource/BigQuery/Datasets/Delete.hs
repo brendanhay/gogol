@@ -173,8 +173,8 @@ ddFields :: Lens' DatasetsDelete' (Maybe Text)
 ddFields = lens _ddFields (\ s a -> s{_ddFields = a})
 
 instance GoogleAuth DatasetsDelete' where
-        authKey = ddKey . _Just
-        authToken = ddOAuthToken . _Just
+        _AuthKey = ddKey . _Just
+        _AuthToken = ddOAuthToken . _Just
 
 instance GoogleRequest DatasetsDelete' where
         type Rs DatasetsDelete' = ()

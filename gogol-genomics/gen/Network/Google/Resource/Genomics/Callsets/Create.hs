@@ -141,8 +141,8 @@ ccFields :: Lens' CallsetsCreate' (Maybe Text)
 ccFields = lens _ccFields (\ s a -> s{_ccFields = a})
 
 instance GoogleAuth CallsetsCreate' where
-        authKey = ccKey . _Just
-        authToken = ccOAuthToken . _Just
+        _AuthKey = ccKey . _Just
+        _AuthToken = ccOAuthToken . _Just
 
 instance GoogleRequest CallsetsCreate' where
         type Rs CallsetsCreate' = CallSet

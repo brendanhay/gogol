@@ -189,8 +189,8 @@ vuFields :: Lens' VideosUpdate' (Maybe Text)
 vuFields = lens _vuFields (\ s a -> s{_vuFields = a})
 
 instance GoogleAuth VideosUpdate' where
-        authKey = vuKey . _Just
-        authToken = vuOAuthToken . _Just
+        _AuthKey = vuKey . _Just
+        _AuthToken = vuOAuthToken . _Just
 
 instance GoogleRequest VideosUpdate' where
         type Rs VideosUpdate' = Video

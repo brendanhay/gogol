@@ -171,8 +171,8 @@ gamFields
   = lens _gamFields (\ s a -> s{_gamFields = a})
 
 instance GoogleAuth GroupsAddMember' where
-        authKey = gamKey . _Just
-        authToken = gamOAuthToken . _Just
+        _AuthKey = gamKey . _Just
+        _AuthToken = gamOAuthToken . _Just
 
 instance GoogleRequest GroupsAddMember' where
         type Rs GroupsAddMember' = Operation

@@ -194,8 +194,8 @@ dtalFields
   = lens _dtalFields (\ s a -> s{_dtalFields = a})
 
 instance GoogleAuth DiskTypesAggregatedList' where
-        authKey = dtalKey . _Just
-        authToken = dtalOAuthToken . _Just
+        _AuthKey = dtalKey . _Just
+        _AuthToken = dtalOAuthToken . _Just
 
 instance GoogleRequest DiskTypesAggregatedList' where
         type Rs DiskTypesAggregatedList' =

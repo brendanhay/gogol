@@ -169,8 +169,8 @@ udlFields
   = lens _udlFields (\ s a -> s{_udlFields = a})
 
 instance GoogleAuth UsersDraftsList' where
-        authKey = udlKey . _Just
-        authToken = udlOAuthToken . _Just
+        _AuthKey = udlKey . _Just
+        _AuthToken = udlOAuthToken . _Just
 
 instance GoogleRequest UsersDraftsList' where
         type Rs UsersDraftsList' = ListDraftsResponse

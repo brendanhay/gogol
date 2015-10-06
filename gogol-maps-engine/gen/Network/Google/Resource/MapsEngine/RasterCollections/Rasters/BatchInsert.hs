@@ -169,8 +169,8 @@ rcrbiFields
 
 instance GoogleAuth
          RasterCollectionsRastersBatchInsert' where
-        authKey = rcrbiKey . _Just
-        authToken = rcrbiOAuthToken . _Just
+        _AuthKey = rcrbiKey . _Just
+        _AuthToken = rcrbiOAuthToken . _Just
 
 instance GoogleRequest
          RasterCollectionsRastersBatchInsert' where

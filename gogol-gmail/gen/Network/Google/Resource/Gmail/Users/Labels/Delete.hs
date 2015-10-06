@@ -158,8 +158,8 @@ uldFields
   = lens _uldFields (\ s a -> s{_uldFields = a})
 
 instance GoogleAuth UsersLabelsDelete' where
-        authKey = uldKey . _Just
-        authToken = uldOAuthToken . _Just
+        _AuthKey = uldKey . _Just
+        _AuthToken = uldOAuthToken . _Just
 
 instance GoogleRequest UsersLabelsDelete' where
         type Rs UsersLabelsDelete' = ()

@@ -248,8 +248,8 @@ pjcCallback
   = lens _pjcCallback (\ s a -> s{_pjcCallback = a})
 
 instance GoogleAuth ProjectsJobsCreate' where
-        authKey = pjcKey . _Just
-        authToken = pjcOAuthToken . _Just
+        _AuthKey = pjcKey . _Just
+        _AuthToken = pjcOAuthToken . _Just
 
 instance GoogleRequest ProjectsJobsCreate' where
         type Rs ProjectsJobsCreate' = Job

@@ -171,8 +171,8 @@ tiiFields
   = lens _tiiFields (\ s a -> s{_tiiFields = a})
 
 instance GoogleAuth TargetInstancesInsert' where
-        authKey = tiiKey . _Just
-        authToken = tiiOAuthToken . _Just
+        _AuthKey = tiiKey . _Just
+        _AuthToken = tiiOAuthToken . _Just
 
 instance GoogleRequest TargetInstancesInsert' where
         type Rs TargetInstancesInsert' = Operation

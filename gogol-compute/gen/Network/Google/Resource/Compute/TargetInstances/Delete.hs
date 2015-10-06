@@ -169,8 +169,8 @@ tidFields
   = lens _tidFields (\ s a -> s{_tidFields = a})
 
 instance GoogleAuth TargetInstancesDelete' where
-        authKey = tidKey . _Just
-        authToken = tidOAuthToken . _Just
+        _AuthKey = tidKey . _Just
+        _AuthToken = tidOAuthToken . _Just
 
 instance GoogleRequest TargetInstancesDelete' where
         type Rs TargetInstancesDelete' = Operation

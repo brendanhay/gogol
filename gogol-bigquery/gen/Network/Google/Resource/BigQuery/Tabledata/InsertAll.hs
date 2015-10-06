@@ -186,8 +186,8 @@ tiaFields
   = lens _tiaFields (\ s a -> s{_tiaFields = a})
 
 instance GoogleAuth TabledataInsertAll' where
-        authKey = tiaKey . _Just
-        authToken = tiaOAuthToken . _Just
+        _AuthKey = tiaKey . _Just
+        _AuthToken = tiaOAuthToken . _Just
 
 instance GoogleRequest TabledataInsertAll' where
         type Rs TabledataInsertAll' =

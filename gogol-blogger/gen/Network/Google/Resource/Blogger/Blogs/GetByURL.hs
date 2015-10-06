@@ -156,8 +156,8 @@ bgbuFields
   = lens _bgbuFields (\ s a -> s{_bgbuFields = a})
 
 instance GoogleAuth BlogsGetByURL' where
-        authKey = bgbuKey . _Just
-        authToken = bgbuOAuthToken . _Just
+        _AuthKey = bgbuKey . _Just
+        _AuthToken = bgbuOAuthToken . _Just
 
 instance GoogleRequest BlogsGetByURL' where
         type Rs BlogsGetByURL' = Blog

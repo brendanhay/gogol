@@ -156,8 +156,8 @@ pgFields :: Lens' PermissionsGet' (Maybe Text)
 pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
 
 instance GoogleAuth PermissionsGet' where
-        authKey = pgKey . _Just
-        authToken = pgOAuthToken . _Just
+        _AuthKey = pgKey . _Just
+        _AuthToken = pgOAuthToken . _Just
 
 instance GoogleRequest PermissionsGet' where
         type Rs PermissionsGet' = Permission

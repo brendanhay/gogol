@@ -155,8 +155,8 @@ cuFields :: Lens' CalendarsUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
 instance GoogleAuth CalendarsUpdate' where
-        authKey = cuKey . _Just
-        authToken = cuOAuthToken . _Just
+        _AuthKey = cuKey . _Just
+        _AuthToken = cuOAuthToken . _Just
 
 instance GoogleRequest CalendarsUpdate' where
         type Rs CalendarsUpdate' = Calendar

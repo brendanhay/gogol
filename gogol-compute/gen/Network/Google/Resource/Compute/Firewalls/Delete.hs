@@ -154,8 +154,8 @@ fdFields :: Lens' FirewallsDelete' (Maybe Text)
 fdFields = lens _fdFields (\ s a -> s{_fdFields = a})
 
 instance GoogleAuth FirewallsDelete' where
-        authKey = fdKey . _Just
-        authToken = fdOAuthToken . _Just
+        _AuthKey = fdKey . _Just
+        _AuthToken = fdOAuthToken . _Just
 
 instance GoogleRequest FirewallsDelete' where
         type Rs FirewallsDelete' = Operation

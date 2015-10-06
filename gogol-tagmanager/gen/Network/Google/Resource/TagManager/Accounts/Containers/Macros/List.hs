@@ -163,8 +163,8 @@ acmlFields
 
 instance GoogleAuth AccountsContainersMacrosList'
          where
-        authKey = acmlKey . _Just
-        authToken = acmlOAuthToken . _Just
+        _AuthKey = acmlKey . _Just
+        _AuthToken = acmlOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersMacrosList'
          where

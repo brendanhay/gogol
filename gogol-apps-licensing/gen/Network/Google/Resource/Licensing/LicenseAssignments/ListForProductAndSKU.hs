@@ -205,8 +205,8 @@ lalfpaskuFields
 
 instance GoogleAuth
          LicenseAssignmentsListForProductAndSKU' where
-        authKey = lalfpaskuKey . _Just
-        authToken = lalfpaskuOAuthToken . _Just
+        _AuthKey = lalfpaskuKey . _Just
+        _AuthToken = lalfpaskuOAuthToken . _Just
 
 instance GoogleRequest
          LicenseAssignmentsListForProductAndSKU' where

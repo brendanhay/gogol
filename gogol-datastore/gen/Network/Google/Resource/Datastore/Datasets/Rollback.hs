@@ -154,8 +154,8 @@ drFields :: Lens' DatasetsRollback' (Maybe Text)
 drFields = lens _drFields (\ s a -> s{_drFields = a})
 
 instance GoogleAuth DatasetsRollback' where
-        authKey = drKey . _Just
-        authToken = drOAuthToken . _Just
+        _AuthKey = drKey . _Just
+        _AuthToken = drOAuthToken . _Just
 
 instance GoogleRequest DatasetsRollback' where
         type Rs DatasetsRollback' = RollbackResponse

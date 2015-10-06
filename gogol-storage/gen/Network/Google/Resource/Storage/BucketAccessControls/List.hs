@@ -147,8 +147,8 @@ baclFields
   = lens _baclFields (\ s a -> s{_baclFields = a})
 
 instance GoogleAuth BucketAccessControlsList' where
-        authKey = baclKey . _Just
-        authToken = baclOAuthToken . _Just
+        _AuthKey = baclKey . _Just
+        _AuthToken = baclOAuthToken . _Just
 
 instance GoogleRequest BucketAccessControlsList'
          where

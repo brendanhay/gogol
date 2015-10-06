@@ -163,8 +163,8 @@ vdFields :: Lens' VideosDelete' (Maybe Text)
 vdFields = lens _vdFields (\ s a -> s{_vdFields = a})
 
 instance GoogleAuth VideosDelete' where
-        authKey = vdKey . _Just
-        authToken = vdOAuthToken . _Just
+        _AuthKey = vdKey . _Just
+        _AuthToken = vdOAuthToken . _Just
 
 instance GoogleRequest VideosDelete' where
         type Rs VideosDelete' = ()

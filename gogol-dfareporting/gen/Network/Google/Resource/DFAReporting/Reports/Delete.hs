@@ -154,8 +154,8 @@ rdFields :: Lens' ReportsDelete' (Maybe Text)
 rdFields = lens _rdFields (\ s a -> s{_rdFields = a})
 
 instance GoogleAuth ReportsDelete' where
-        authKey = rdKey . _Just
-        authToken = rdOAuthToken . _Just
+        _AuthKey = rdKey . _Just
+        _AuthToken = rdOAuthToken . _Just
 
 instance GoogleRequest ReportsDelete' where
         type Rs ReportsDelete' = ()

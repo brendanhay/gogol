@@ -159,8 +159,8 @@ gaiFields
   = lens _gaiFields (\ s a -> s{_gaiFields = a})
 
 instance GoogleAuth GlobalAddressesInsert' where
-        authKey = gaiKey . _Just
-        authToken = gaiOAuthToken . _Just
+        _AuthKey = gaiKey . _Just
+        _AuthToken = gaiOAuthToken . _Just
 
 instance GoogleRequest GlobalAddressesInsert' where
         type Rs GlobalAddressesInsert' = Operation

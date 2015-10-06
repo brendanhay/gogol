@@ -181,8 +181,8 @@ lapFields
   = lens _lapFields (\ s a -> s{_lapFields = a})
 
 instance GoogleAuth LicenseAssignmentsPatch' where
-        authKey = lapKey . _Just
-        authToken = lapOAuthToken . _Just
+        _AuthKey = lapKey . _Just
+        _AuthToken = lapOAuthToken . _Just
 
 instance GoogleRequest LicenseAssignmentsPatch' where
         type Rs LicenseAssignmentsPatch' = LicenseAssignment

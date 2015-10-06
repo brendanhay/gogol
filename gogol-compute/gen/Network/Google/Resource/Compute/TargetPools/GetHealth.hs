@@ -186,8 +186,8 @@ tpghFields
   = lens _tpghFields (\ s a -> s{_tpghFields = a})
 
 instance GoogleAuth TargetPoolsGetHealth' where
-        authKey = tpghKey . _Just
-        authToken = tpghOAuthToken . _Just
+        _AuthKey = tpghKey . _Just
+        _AuthToken = tpghOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsGetHealth' where
         type Rs TargetPoolsGetHealth' =

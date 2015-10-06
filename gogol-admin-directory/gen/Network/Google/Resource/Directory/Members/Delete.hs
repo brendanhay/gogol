@@ -154,8 +154,8 @@ mdFields :: Lens' MembersDelete' (Maybe Text)
 mdFields = lens _mdFields (\ s a -> s{_mdFields = a})
 
 instance GoogleAuth MembersDelete' where
-        authKey = mdKey . _Just
-        authToken = mdOAuthToken . _Just
+        _AuthKey = mdKey . _Just
+        _AuthToken = mdOAuthToken . _Just
 
 instance GoogleRequest MembersDelete' where
         type Rs MembersDelete' = ()

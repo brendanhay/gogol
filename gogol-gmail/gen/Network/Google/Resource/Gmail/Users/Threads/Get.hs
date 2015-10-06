@@ -181,8 +181,8 @@ utgFields
   = lens _utgFields (\ s a -> s{_utgFields = a})
 
 instance GoogleAuth UsersThreadsGet' where
-        authKey = utgKey . _Just
-        authToken = utgOAuthToken . _Just
+        _AuthKey = utgKey . _Just
+        _AuthToken = utgOAuthToken . _Just
 
 instance GoogleRequest UsersThreadsGet' where
         type Rs UsersThreadsGet' = Thread

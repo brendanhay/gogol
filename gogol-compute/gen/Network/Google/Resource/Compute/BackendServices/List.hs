@@ -194,8 +194,8 @@ bslFields
   = lens _bslFields (\ s a -> s{_bslFields = a})
 
 instance GoogleAuth BackendServicesList' where
-        authKey = bslKey . _Just
-        authToken = bslOAuthToken . _Just
+        _AuthKey = bslKey . _Just
+        _AuthToken = bslOAuthToken . _Just
 
 instance GoogleRequest BackendServicesList' where
         type Rs BackendServicesList' = BackendServiceList

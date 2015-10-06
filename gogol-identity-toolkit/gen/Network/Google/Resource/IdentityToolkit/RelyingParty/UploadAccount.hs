@@ -147,8 +147,8 @@ rpuaFields
   = lens _rpuaFields (\ s a -> s{_rpuaFields = a})
 
 instance GoogleAuth RelyingPartyUploadAccount' where
-        authKey = rpuaKey . _Just
-        authToken = rpuaOAuthToken . _Just
+        _AuthKey = rpuaKey . _Just
+        _AuthToken = rpuaOAuthToken . _Just
 
 instance GoogleRequest RelyingPartyUploadAccount'
          where

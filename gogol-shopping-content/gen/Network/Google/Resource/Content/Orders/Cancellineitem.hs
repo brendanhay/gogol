@@ -164,8 +164,8 @@ oFields :: Lens' OrdersCancellineitem' (Maybe Text)
 oFields = lens _oFields (\ s a -> s{_oFields = a})
 
 instance GoogleAuth OrdersCancellineitem' where
-        authKey = oKey . _Just
-        authToken = oOAuthToken . _Just
+        _AuthKey = oKey . _Just
+        _AuthToken = oOAuthToken . _Just
 
 instance GoogleRequest OrdersCancellineitem' where
         type Rs OrdersCancellineitem' =

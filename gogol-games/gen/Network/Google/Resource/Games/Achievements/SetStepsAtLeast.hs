@@ -167,8 +167,8 @@ assalFields
 
 instance GoogleAuth AchievementsSetStepsAtLeast'
          where
-        authKey = assalKey . _Just
-        authToken = assalOAuthToken . _Just
+        _AuthKey = assalKey . _Just
+        _AuthToken = assalOAuthToken . _Just
 
 instance GoogleRequest AchievementsSetStepsAtLeast'
          where

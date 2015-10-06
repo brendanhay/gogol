@@ -185,8 +185,8 @@ mlbrvFields
 
 instance GoogleAuth MyLibraryBookshelvesRemoveVolume'
          where
-        authKey = mlbrvKey . _Just
-        authToken = mlbrvOAuthToken . _Just
+        _AuthKey = mlbrvKey . _Just
+        _AuthToken = mlbrvOAuthToken . _Just
 
 instance GoogleRequest
          MyLibraryBookshelvesRemoveVolume' where

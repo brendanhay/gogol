@@ -175,8 +175,8 @@ scrsFields
 
 instance GoogleAuth
          SubscriptionsChangeRenewalSettings' where
-        authKey = scrsKey . _Just
-        authToken = scrsOAuthToken . _Just
+        _AuthKey = scrsKey . _Just
+        _AuthToken = scrsOAuthToken . _Just
 
 instance GoogleRequest
          SubscriptionsChangeRenewalSettings' where

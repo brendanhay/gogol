@@ -173,8 +173,8 @@ lclFields
 
 instance GoogleAuth LeaderboardConfigurationsList'
          where
-        authKey = lclKey . _Just
-        authToken = lclOAuthToken . _Just
+        _AuthKey = lclKey . _Just
+        _AuthToken = lclOAuthToken . _Just
 
 instance GoogleRequest LeaderboardConfigurationsList'
          where

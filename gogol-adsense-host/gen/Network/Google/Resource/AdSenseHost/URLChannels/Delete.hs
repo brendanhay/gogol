@@ -159,8 +159,8 @@ ucdFields
   = lens _ucdFields (\ s a -> s{_ucdFields = a})
 
 instance GoogleAuth URLChannelsDelete' where
-        authKey = ucdKey . _Just
-        authToken = ucdOAuthToken . _Just
+        _AuthKey = ucdKey . _Just
+        _AuthToken = ucdOAuthToken . _Just
 
 instance GoogleRequest URLChannelsDelete' where
         type Rs URLChannelsDelete' = URLChannel

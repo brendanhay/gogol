@@ -238,8 +238,8 @@ balCallback
   = lens _balCallback (\ s a -> s{_balCallback = a})
 
 instance GoogleAuth BeaconsAttachmentsList' where
-        authKey = balKey . _Just
-        authToken = balOAuthToken . _Just
+        _AuthKey = balKey . _Just
+        _AuthToken = balOAuthToken . _Just
 
 instance GoogleRequest BeaconsAttachmentsList' where
         type Rs BeaconsAttachmentsList' =

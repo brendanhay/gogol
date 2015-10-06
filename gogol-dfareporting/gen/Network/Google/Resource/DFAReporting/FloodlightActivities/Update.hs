@@ -158,8 +158,8 @@ fauFields
   = lens _fauFields (\ s a -> s{_fauFields = a})
 
 instance GoogleAuth FloodlightActivitiesUpdate' where
-        authKey = fauKey . _Just
-        authToken = fauOAuthToken . _Just
+        _AuthKey = fauKey . _Just
+        _AuthToken = fauOAuthToken . _Just
 
 instance GoogleRequest FloodlightActivitiesUpdate'
          where

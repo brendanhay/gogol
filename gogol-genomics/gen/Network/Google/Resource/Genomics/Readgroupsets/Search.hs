@@ -148,8 +148,8 @@ reaFields
   = lens _reaFields (\ s a -> s{_reaFields = a})
 
 instance GoogleAuth ReadgroupsetsSearch' where
-        authKey = reaKey . _Just
-        authToken = reaOAuthToken . _Just
+        _AuthKey = reaKey . _Just
+        _AuthToken = reaOAuthToken . _Just
 
 instance GoogleRequest ReadgroupsetsSearch' where
         type Rs ReadgroupsetsSearch' =

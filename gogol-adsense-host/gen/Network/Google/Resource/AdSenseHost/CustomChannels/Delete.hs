@@ -160,8 +160,8 @@ ccdFields
   = lens _ccdFields (\ s a -> s{_ccdFields = a})
 
 instance GoogleAuth CustomChannelsDelete' where
-        authKey = ccdKey . _Just
-        authToken = ccdOAuthToken . _Just
+        _AuthKey = ccdKey . _Just
+        _AuthToken = ccdOAuthToken . _Just
 
 instance GoogleRequest CustomChannelsDelete' where
         type Rs CustomChannelsDelete' = CustomChannel

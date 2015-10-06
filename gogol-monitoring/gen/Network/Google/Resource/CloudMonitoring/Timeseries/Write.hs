@@ -167,8 +167,8 @@ twFields :: Lens' TimeseriesWrite' (Maybe Text)
 twFields = lens _twFields (\ s a -> s{_twFields = a})
 
 instance GoogleAuth TimeseriesWrite' where
-        authKey = twKey . _Just
-        authToken = twOAuthToken . _Just
+        _AuthKey = twKey . _Just
+        _AuthToken = twOAuthToken . _Just
 
 instance GoogleRequest TimeseriesWrite' where
         type Rs TimeseriesWrite' = WriteTimeseriesResponse

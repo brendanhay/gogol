@@ -205,8 +205,8 @@ aaucclFields
 
 instance GoogleAuth
          AccountsAdUnitsCustomChannelsList' where
-        authKey = aaucclKey . _Just
-        authToken = aaucclOAuthToken . _Just
+        _AuthKey = aaucclKey . _Just
+        _AuthToken = aaucclOAuthToken . _Just
 
 instance GoogleRequest
          AccountsAdUnitsCustomChannelsList' where

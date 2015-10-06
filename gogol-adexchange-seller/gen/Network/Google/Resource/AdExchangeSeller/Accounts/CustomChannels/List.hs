@@ -191,8 +191,8 @@ acclFields
   = lens _acclFields (\ s a -> s{_acclFields = a})
 
 instance GoogleAuth AccountsCustomChannelsList' where
-        authKey = acclKey . _Just
-        authToken = acclOAuthToken . _Just
+        _AuthKey = acclKey . _Just
+        _AuthToken = acclOAuthToken . _Just
 
 instance GoogleRequest AccountsCustomChannelsList'
          where

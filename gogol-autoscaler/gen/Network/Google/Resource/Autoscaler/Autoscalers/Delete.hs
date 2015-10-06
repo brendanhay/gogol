@@ -167,8 +167,8 @@ adFields :: Lens' AutoscalersDelete' (Maybe Text)
 adFields = lens _adFields (\ s a -> s{_adFields = a})
 
 instance GoogleAuth AutoscalersDelete' where
-        authKey = adKey . _Just
-        authToken = adOAuthToken . _Just
+        _AuthKey = adKey . _Just
+        _AuthToken = adOAuthToken . _Just
 
 instance GoogleRequest AutoscalersDelete' where
         type Rs AutoscalersDelete' = Operation

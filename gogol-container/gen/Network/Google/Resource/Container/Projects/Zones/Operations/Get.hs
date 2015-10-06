@@ -174,8 +174,8 @@ pzogFields
   = lens _pzogFields (\ s a -> s{_pzogFields = a})
 
 instance GoogleAuth ProjectsZonesOperationsGet' where
-        authKey = pzogKey . _Just
-        authToken = pzogOAuthToken . _Just
+        _AuthKey = pzogKey . _Just
+        _AuthToken = pzogOAuthToken . _Just
 
 instance GoogleRequest ProjectsZonesOperationsGet'
          where

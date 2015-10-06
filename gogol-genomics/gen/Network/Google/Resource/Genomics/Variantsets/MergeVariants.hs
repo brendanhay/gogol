@@ -169,8 +169,8 @@ vmvFields
   = lens _vmvFields (\ s a -> s{_vmvFields = a})
 
 instance GoogleAuth VariantsetsMergeVariants' where
-        authKey = vmvKey . _Just
-        authToken = vmvOAuthToken . _Just
+        _AuthKey = vmvKey . _Just
+        _AuthToken = vmvOAuthToken . _Just
 
 instance GoogleRequest VariantsetsMergeVariants'
          where

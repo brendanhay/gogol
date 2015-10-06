@@ -141,8 +141,8 @@ crFields :: Lens' CirclesRemove' (Maybe Text)
 crFields = lens _crFields (\ s a -> s{_crFields = a})
 
 instance GoogleAuth CirclesRemove' where
-        authKey = crKey . _Just
-        authToken = crOAuthToken . _Just
+        _AuthKey = crKey . _Just
+        _AuthToken = crOAuthToken . _Just
 
 instance GoogleRequest CirclesRemove' where
         type Rs CirclesRemove' = ()

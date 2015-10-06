@@ -171,8 +171,8 @@ pliuFields
   = lens _pliuFields (\ s a -> s{_pliuFields = a})
 
 instance GoogleAuth PlayListItemsUpdate' where
-        authKey = pliuKey . _Just
-        authToken = pliuOAuthToken . _Just
+        _AuthKey = pliuKey . _Just
+        _AuthToken = pliuOAuthToken . _Just
 
 instance GoogleRequest PlayListItemsUpdate' where
         type Rs PlayListItemsUpdate' = PlayListItem

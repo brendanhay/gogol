@@ -169,8 +169,8 @@ ruiFields
   = lens _ruiFields (\ s a -> s{_ruiFields = a})
 
 instance GoogleAuth RollingUpdatesInsert' where
-        authKey = ruiKey . _Just
-        authToken = ruiOAuthToken . _Just
+        _AuthKey = ruiKey . _Just
+        _AuthToken = ruiOAuthToken . _Just
 
 instance GoogleRequest RollingUpdatesInsert' where
         type Rs RollingUpdatesInsert' = Operation

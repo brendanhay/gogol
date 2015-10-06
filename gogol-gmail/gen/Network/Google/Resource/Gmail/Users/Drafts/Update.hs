@@ -178,8 +178,8 @@ uduFields
   = lens _uduFields (\ s a -> s{_uduFields = a})
 
 instance GoogleAuth UsersDraftsUpdate' where
-        authKey = uduKey . _Just
-        authToken = uduOAuthToken . _Just
+        _AuthKey = uduKey . _Just
+        _AuthToken = uduOAuthToken . _Just
 
 instance GoogleRequest UsersDraftsUpdate' where
         type Rs UsersDraftsUpdate' = Draft

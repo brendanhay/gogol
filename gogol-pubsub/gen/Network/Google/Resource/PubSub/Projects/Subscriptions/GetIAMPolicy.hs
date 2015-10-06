@@ -219,8 +219,8 @@ psgipCallback
 
 instance GoogleAuth
          ProjectsSubscriptionsGetIAMPolicy' where
-        authKey = psgipKey . _Just
-        authToken = psgipOAuthToken . _Just
+        _AuthKey = psgipKey . _Just
+        _AuthToken = psgipOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsSubscriptionsGetIAMPolicy' where

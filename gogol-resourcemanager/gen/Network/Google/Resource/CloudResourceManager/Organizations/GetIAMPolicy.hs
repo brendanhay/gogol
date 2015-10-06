@@ -230,8 +230,8 @@ ogipCallback
   = lens _ogipCallback (\ s a -> s{_ogipCallback = a})
 
 instance GoogleAuth OrganizationsGetIAMPolicy' where
-        authKey = ogipKey . _Just
-        authToken = ogipOAuthToken . _Just
+        _AuthKey = ogipKey . _Just
+        _AuthToken = ogipOAuthToken . _Just
 
 instance GoogleRequest OrganizationsGetIAMPolicy'
          where

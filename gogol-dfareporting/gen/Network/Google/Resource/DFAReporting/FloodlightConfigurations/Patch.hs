@@ -172,8 +172,8 @@ fcpFields
 
 instance GoogleAuth FloodlightConfigurationsPatch'
          where
-        authKey = fcpKey . _Just
-        authToken = fcpOAuthToken . _Just
+        _AuthKey = fcpKey . _Just
+        _AuthToken = fcpOAuthToken . _Just
 
 instance GoogleRequest FloodlightConfigurationsPatch'
          where

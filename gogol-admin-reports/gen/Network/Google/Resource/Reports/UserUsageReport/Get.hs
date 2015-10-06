@@ -223,8 +223,8 @@ uurgFields
   = lens _uurgFields (\ s a -> s{_uurgFields = a})
 
 instance GoogleAuth UserUsageReportGet' where
-        authKey = uurgKey . _Just
-        authToken = uurgOAuthToken . _Just
+        _AuthKey = uurgKey . _Just
+        _AuthToken = uurgOAuthToken . _Just
 
 instance GoogleRequest UserUsageReportGet' where
         type Rs UserUsageReportGet' = UsageReports

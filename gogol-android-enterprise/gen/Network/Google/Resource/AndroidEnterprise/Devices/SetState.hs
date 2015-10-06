@@ -193,8 +193,8 @@ dssFields
   = lens _dssFields (\ s a -> s{_dssFields = a})
 
 instance GoogleAuth DevicesSetState' where
-        authKey = dssKey . _Just
-        authToken = dssOAuthToken . _Just
+        _AuthKey = dssKey . _Just
+        _AuthToken = dssOAuthToken . _Just
 
 instance GoogleRequest DevicesSetState' where
         type Rs DevicesSetState' = DeviceState

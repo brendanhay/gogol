@@ -161,8 +161,8 @@ tbmlbFields
   = lens _tbmlbFields (\ s a -> s{_tbmlbFields = a})
 
 instance GoogleAuth TurnBasedMatchesLeave' where
-        authKey = tbmlbKey . _Just
-        authToken = tbmlbOAuthToken . _Just
+        _AuthKey = tbmlbKey . _Just
+        _AuthToken = tbmlbOAuthToken . _Just
 
 instance GoogleRequest TurnBasedMatchesLeave' where
         type Rs TurnBasedMatchesLeave' = TurnBasedMatch

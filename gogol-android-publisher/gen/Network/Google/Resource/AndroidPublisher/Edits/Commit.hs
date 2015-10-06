@@ -154,8 +154,8 @@ ecFields :: Lens' EditsCommit' (Maybe Text)
 ecFields = lens _ecFields (\ s a -> s{_ecFields = a})
 
 instance GoogleAuth EditsCommit' where
-        authKey = ecKey . _Just
-        authToken = ecOAuthToken . _Just
+        _AuthKey = ecKey . _Just
+        _AuthToken = ecOAuthToken . _Just
 
 instance GoogleRequest EditsCommit' where
         type Rs EditsCommit' = AppEdit

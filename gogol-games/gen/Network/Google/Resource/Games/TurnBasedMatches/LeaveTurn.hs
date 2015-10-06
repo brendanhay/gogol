@@ -189,8 +189,8 @@ tbmltFields
   = lens _tbmltFields (\ s a -> s{_tbmltFields = a})
 
 instance GoogleAuth TurnBasedMatchesLeaveTurn' where
-        authKey = tbmltKey . _Just
-        authToken = tbmltOAuthToken . _Just
+        _AuthKey = tbmltKey . _Just
+        _AuthToken = tbmltOAuthToken . _Just
 
 instance GoogleRequest TurnBasedMatchesLeaveTurn'
          where

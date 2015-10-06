@@ -174,8 +174,8 @@ actccFields
 
 instance GoogleAuth AccountsContainersTriggersCreate'
          where
-        authKey = actccKey . _Just
-        authToken = actccOAuthToken . _Just
+        _AuthKey = actccKey . _Just
+        _AuthToken = actccOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersTriggersCreate' where

@@ -143,8 +143,8 @@ luFields :: Lens' LineitemsUploadlineitems' (Maybe Text)
 luFields = lens _luFields (\ s a -> s{_luFields = a})
 
 instance GoogleAuth LineitemsUploadlineitems' where
-        authKey = luKey . _Just
-        authToken = luOAuthToken . _Just
+        _AuthKey = luKey . _Just
+        _AuthToken = luOAuthToken . _Just
 
 instance GoogleRequest LineitemsUploadlineitems'
          where

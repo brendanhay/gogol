@@ -178,8 +178,8 @@ igmlmiFields
 
 instance GoogleAuth
          InstanceGroupManagersListManagedInstances' where
-        authKey = igmlmiKey . _Just
-        authToken = igmlmiOAuthToken . _Just
+        _AuthKey = igmlmiKey . _Just
+        _AuthToken = igmlmiOAuthToken . _Just
 
 instance GoogleRequest
          InstanceGroupManagersListManagedInstances' where

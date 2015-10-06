@@ -223,8 +223,8 @@ topCallback
   = lens _topCallback (\ s a -> s{_topCallback = a})
 
 instance GoogleAuth TransferOperationsPause' where
-        authKey = topKey . _Just
-        authToken = topOAuthToken . _Just
+        _AuthKey = topKey . _Just
+        _AuthToken = topOAuthToken . _Just
 
 instance GoogleRequest TransferOperationsPause' where
         type Rs TransferOperationsPause' = Empty

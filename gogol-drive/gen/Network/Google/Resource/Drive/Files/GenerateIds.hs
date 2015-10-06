@@ -156,8 +156,8 @@ fgiFields
   = lens _fgiFields (\ s a -> s{_fgiFields = a})
 
 instance GoogleAuth FilesGenerateIds' where
-        authKey = fgiKey . _Just
-        authToken = fgiOAuthToken . _Just
+        _AuthKey = fgiKey . _Just
+        _AuthToken = fgiOAuthToken . _Just
 
 instance GoogleRequest FilesGenerateIds' where
         type Rs FilesGenerateIds' = GeneratedIds

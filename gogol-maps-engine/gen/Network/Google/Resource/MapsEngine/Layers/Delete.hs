@@ -143,8 +143,8 @@ ldFields :: Lens' LayersDelete' (Maybe Text)
 ldFields = lens _ldFields (\ s a -> s{_ldFields = a})
 
 instance GoogleAuth LayersDelete' where
-        authKey = ldKey . _Just
-        authToken = ldOAuthToken . _Just
+        _AuthKey = ldKey . _Just
+        _AuthToken = ldOAuthToken . _Just
 
 instance GoogleRequest LayersDelete' where
         type Rs LayersDelete' = ()

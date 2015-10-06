@@ -220,8 +220,8 @@ clbbFields
   = lens _clbbFields (\ s a -> s{_clbbFields = a})
 
 instance GoogleAuth CommentsListByBlog' where
-        authKey = clbbKey . _Just
-        authToken = clbbOAuthToken . _Just
+        _AuthKey = clbbKey . _Just
+        _AuthToken = clbbOAuthToken . _Just
 
 instance GoogleRequest CommentsListByBlog' where
         type Rs CommentsListByBlog' = CommentList

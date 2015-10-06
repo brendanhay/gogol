@@ -169,8 +169,8 @@ aggFields
   = lens _aggFields (\ s a -> s{_aggFields = a})
 
 instance GoogleAuth AddressesGet' where
-        authKey = aggKey . _Just
-        authToken = aggOAuthToken . _Just
+        _AuthKey = aggKey . _Just
+        _AuthToken = aggOAuthToken . _Just
 
 instance GoogleRequest AddressesGet' where
         type Rs AddressesGet' = Address

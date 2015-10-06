@@ -159,8 +159,8 @@ mniFields
   = lens _mniFields (\ s a -> s{_mniFields = a})
 
 instance GoogleAuth MarketplaceNotesInsert' where
-        authKey = mniKey . _Just
-        authToken = mniOAuthToken . _Just
+        _AuthKey = mniKey . _Just
+        _AuthToken = mniOAuthToken . _Just
 
 instance GoogleRequest MarketplaceNotesInsert' where
         type Rs MarketplaceNotesInsert' =

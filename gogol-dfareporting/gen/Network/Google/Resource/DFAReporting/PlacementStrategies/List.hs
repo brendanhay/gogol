@@ -226,8 +226,8 @@ pslFields
   = lens _pslFields (\ s a -> s{_pslFields = a})
 
 instance GoogleAuth PlacementStrategiesList' where
-        authKey = pslKey . _Just
-        authToken = pslOAuthToken . _Just
+        _AuthKey = pslKey . _Just
+        _AuthToken = pslOAuthToken . _Just
 
 instance GoogleRequest PlacementStrategiesList' where
         type Rs PlacementStrategiesList' =

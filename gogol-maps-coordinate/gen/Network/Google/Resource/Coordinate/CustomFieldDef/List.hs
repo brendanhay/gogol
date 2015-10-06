@@ -147,8 +147,8 @@ cfdlFields
   = lens _cfdlFields (\ s a -> s{_cfdlFields = a})
 
 instance GoogleAuth CustomFieldDefList' where
-        authKey = cfdlKey . _Just
-        authToken = cfdlOAuthToken . _Just
+        _AuthKey = cfdlKey . _Just
+        _AuthToken = cfdlOAuthToken . _Just
 
 instance GoogleRequest CustomFieldDefList' where
         type Rs CustomFieldDefList' =

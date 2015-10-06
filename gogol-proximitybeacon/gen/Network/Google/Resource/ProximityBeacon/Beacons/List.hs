@@ -280,8 +280,8 @@ blCallback
   = lens _blCallback (\ s a -> s{_blCallback = a})
 
 instance GoogleAuth BeaconsList' where
-        authKey = blKey . _Just
-        authToken = blOAuthToken . _Just
+        _AuthKey = blKey . _Just
+        _AuthToken = blOAuthToken . _Just
 
 instance GoogleRequest BeaconsList' where
         type Rs BeaconsList' = ListBeaconsResponse

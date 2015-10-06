@@ -158,8 +158,8 @@ apgFields
   = lens _apgFields (\ s a -> s{_apgFields = a})
 
 instance GoogleAuth AccountsPermissionsGet' where
-        authKey = apgKey . _Just
-        authToken = apgOAuthToken . _Just
+        _AuthKey = apgKey . _Just
+        _AuthToken = apgOAuthToken . _Just
 
 instance GoogleRequest AccountsPermissionsGet' where
         type Rs AccountsPermissionsGet' = UserAccess

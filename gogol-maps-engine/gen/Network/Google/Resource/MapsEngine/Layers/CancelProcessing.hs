@@ -145,8 +145,8 @@ lcpFields
   = lens _lcpFields (\ s a -> s{_lcpFields = a})
 
 instance GoogleAuth LayersCancelProcessing' where
-        authKey = lcpKey . _Just
-        authToken = lcpOAuthToken . _Just
+        _AuthKey = lcpKey . _Just
+        _AuthToken = lcpOAuthToken . _Just
 
 instance GoogleRequest LayersCancelProcessing' where
         type Rs LayersCancelProcessing' = ProcessResponse

@@ -162,8 +162,8 @@ sspsFields
 
 instance GoogleAuth SubscriptionsStartPaidService'
          where
-        authKey = sspsKey . _Just
-        authToken = sspsOAuthToken . _Just
+        _AuthKey = sspsKey . _Just
+        _AuthToken = sspsOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsStartPaidService'
          where

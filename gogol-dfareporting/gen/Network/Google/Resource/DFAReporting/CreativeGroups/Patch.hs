@@ -171,8 +171,8 @@ cgpFields
   = lens _cgpFields (\ s a -> s{_cgpFields = a})
 
 instance GoogleAuth CreativeGroupsPatch' where
-        authKey = cgpKey . _Just
-        authToken = cgpOAuthToken . _Just
+        _AuthKey = cgpKey . _Just
+        _AuthToken = cgpOAuthToken . _Just
 
 instance GoogleRequest CreativeGroupsPatch' where
         type Rs CreativeGroupsPatch' = CreativeGroup

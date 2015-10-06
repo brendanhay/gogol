@@ -156,8 +156,8 @@ psdFields
   = lens _psdFields (\ s a -> s{_psdFields = a})
 
 instance GoogleAuth PlacementStrategiesDelete' where
-        authKey = psdKey . _Just
-        authToken = psdOAuthToken . _Just
+        _AuthKey = psdKey . _Just
+        _AuthToken = psdOAuthToken . _Just
 
 instance GoogleRequest PlacementStrategiesDelete'
          where

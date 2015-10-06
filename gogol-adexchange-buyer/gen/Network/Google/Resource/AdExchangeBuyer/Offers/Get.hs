@@ -140,8 +140,8 @@ ogFields :: Lens' OffersGet' (Maybe Text)
 ogFields = lens _ogFields (\ s a -> s{_ogFields = a})
 
 instance GoogleAuth OffersGet' where
-        authKey = ogKey . _Just
-        authToken = ogOAuthToken . _Just
+        _AuthKey = ogKey . _Just
+        _AuthToken = ogOAuthToken . _Just
 
 instance GoogleRequest OffersGet' where
         type Rs OffersGet' = OfferDTO

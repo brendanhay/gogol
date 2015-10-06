@@ -143,8 +143,8 @@ blFields :: Lens' BrowsersList' (Maybe Text)
 blFields = lens _blFields (\ s a -> s{_blFields = a})
 
 instance GoogleAuth BrowsersList' where
-        authKey = blKey . _Just
-        authToken = blOAuthToken . _Just
+        _AuthKey = blKey . _Just
+        _AuthToken = blOAuthToken . _Just
 
 instance GoogleRequest BrowsersList' where
         type Rs BrowsersList' = BrowsersListResponse

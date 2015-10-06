@@ -187,8 +187,8 @@ mugFields
   = lens _mugFields (\ s a -> s{_mugFields = a})
 
 instance GoogleAuth ManagementUploadsGet' where
-        authKey = mugKey . _Just
-        authToken = mugOAuthToken . _Just
+        _AuthKey = mugKey . _Just
+        _AuthToken = mugOAuthToken . _Just
 
 instance GoogleRequest ManagementUploadsGet' where
         type Rs ManagementUploadsGet' = Upload

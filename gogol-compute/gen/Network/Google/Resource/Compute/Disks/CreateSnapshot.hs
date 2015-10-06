@@ -181,8 +181,8 @@ dcsFields
   = lens _dcsFields (\ s a -> s{_dcsFields = a})
 
 instance GoogleAuth DisksCreateSnapshot' where
-        authKey = dcsKey . _Just
-        authToken = dcsOAuthToken . _Just
+        _AuthKey = dcsKey . _Just
+        _AuthToken = dcsOAuthToken . _Just
 
 instance GoogleRequest DisksCreateSnapshot' where
         type Rs DisksCreateSnapshot' = Operation

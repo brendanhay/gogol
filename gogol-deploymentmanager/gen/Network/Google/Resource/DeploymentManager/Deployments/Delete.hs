@@ -154,8 +154,8 @@ ddDeployment
   = lens _ddDeployment (\ s a -> s{_ddDeployment = a})
 
 instance GoogleAuth DeploymentsDelete' where
-        authKey = ddKey . _Just
-        authToken = ddOAuthToken . _Just
+        _AuthKey = ddKey . _Just
+        _AuthToken = ddOAuthToken . _Just
 
 instance GoogleRequest DeploymentsDelete' where
         type Rs DeploymentsDelete' = Operation

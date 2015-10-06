@@ -153,8 +153,8 @@ vrFields :: Lens' VideosRate' (Maybe Text)
 vrFields = lens _vrFields (\ s a -> s{_vrFields = a})
 
 instance GoogleAuth VideosRate' where
-        authKey = vrKey . _Just
-        authToken = vrOAuthToken . _Just
+        _AuthKey = vrKey . _Just
+        _AuthToken = vrOAuthToken . _Just
 
 instance GoogleRequest VideosRate' where
         type Rs VideosRate' = ()

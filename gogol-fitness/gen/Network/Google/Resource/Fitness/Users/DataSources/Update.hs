@@ -179,8 +179,8 @@ udsuFields
   = lens _udsuFields (\ s a -> s{_udsuFields = a})
 
 instance GoogleAuth UsersDataSourcesUpdate' where
-        authKey = udsuKey . _Just
-        authToken = udsuOAuthToken . _Just
+        _AuthKey = udsuKey . _Just
+        _AuthToken = udsuOAuthToken . _Just
 
 instance GoogleRequest UsersDataSourcesUpdate' where
         type Rs UsersDataSourcesUpdate' = DataSource

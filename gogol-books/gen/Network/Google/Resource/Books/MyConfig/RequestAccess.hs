@@ -209,8 +209,8 @@ mcraNonce
   = lens _mcraNonce (\ s a -> s{_mcraNonce = a})
 
 instance GoogleAuth MyConfigRequestAccess' where
-        authKey = mcraKey . _Just
-        authToken = mcraOAuthToken . _Just
+        _AuthKey = mcraKey . _Just
+        _AuthToken = mcraOAuthToken . _Just
 
 instance GoogleRequest MyConfigRequestAccess' where
         type Rs MyConfigRequestAccess' = RequestAccess

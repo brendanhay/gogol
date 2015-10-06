@@ -153,8 +153,8 @@ iInstance
   = lens _iInstance (\ s a -> s{_iInstance = a})
 
 instance GoogleAuth InstancesStartReplica' where
-        authKey = iKey . _Just
-        authToken = iOAuthToken . _Just
+        _AuthKey = iKey . _Just
+        _AuthToken = iOAuthToken . _Just
 
 instance GoogleRequest InstancesStartReplica' where
         type Rs InstancesStartReplica' = Operation

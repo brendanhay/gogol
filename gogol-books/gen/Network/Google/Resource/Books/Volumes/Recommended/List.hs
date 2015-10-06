@@ -171,8 +171,8 @@ vrlFields
   = lens _vrlFields (\ s a -> s{_vrlFields = a})
 
 instance GoogleAuth VolumesRecommendedList' where
-        authKey = vrlKey . _Just
-        authToken = vrlOAuthToken . _Just
+        _AuthKey = vrlKey . _Just
+        _AuthToken = vrlOAuthToken . _Just
 
 instance GoogleRequest VolumesRecommendedList' where
         type Rs VolumesRecommendedList' = Volumes

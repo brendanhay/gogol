@@ -168,8 +168,8 @@ ccFields :: Lens' ChangesCreate' (Maybe Text)
 ccFields = lens _ccFields (\ s a -> s{_ccFields = a})
 
 instance GoogleAuth ChangesCreate' where
-        authKey = ccKey . _Just
-        authToken = ccOAuthToken . _Just
+        _AuthKey = ccKey . _Just
+        _AuthToken = ccOAuthToken . _Just
 
 instance GoogleRequest ChangesCreate' where
         type Rs ChangesCreate' = Change

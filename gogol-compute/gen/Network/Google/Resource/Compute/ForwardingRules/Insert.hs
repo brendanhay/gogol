@@ -172,8 +172,8 @@ friFields
   = lens _friFields (\ s a -> s{_friFields = a})
 
 instance GoogleAuth ForwardingRulesInsert' where
-        authKey = friKey . _Just
-        authToken = friOAuthToken . _Just
+        _AuthKey = friKey . _Just
+        _AuthToken = friOAuthToken . _Just
 
 instance GoogleRequest ForwardingRulesInsert' where
         type Rs ForwardingRulesInsert' = Operation

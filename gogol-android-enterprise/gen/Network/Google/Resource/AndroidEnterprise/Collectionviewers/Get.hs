@@ -172,8 +172,8 @@ cgFields :: Lens' CollectionviewersGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 instance GoogleAuth CollectionviewersGet' where
-        authKey = cgKey . _Just
-        authToken = cgOAuthToken . _Just
+        _AuthKey = cgKey . _Just
+        _AuthToken = cgOAuthToken . _Just
 
 instance GoogleRequest CollectionviewersGet' where
         type Rs CollectionviewersGet' = User

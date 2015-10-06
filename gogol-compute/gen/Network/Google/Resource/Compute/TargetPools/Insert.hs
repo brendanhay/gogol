@@ -171,8 +171,8 @@ tpiFields
   = lens _tpiFields (\ s a -> s{_tpiFields = a})
 
 instance GoogleAuth TargetPoolsInsert' where
-        authKey = tpiKey . _Just
-        authToken = tpiOAuthToken . _Just
+        _AuthKey = tpiKey . _Just
+        _AuthToken = tpiOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsInsert' where
         type Rs TargetPoolsInsert' = Operation

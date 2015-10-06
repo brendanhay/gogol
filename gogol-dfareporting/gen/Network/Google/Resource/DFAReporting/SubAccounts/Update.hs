@@ -157,8 +157,8 @@ sauFields
   = lens _sauFields (\ s a -> s{_sauFields = a})
 
 instance GoogleAuth SubAccountsUpdate' where
-        authKey = sauKey . _Just
-        authToken = sauOAuthToken . _Just
+        _AuthKey = sauKey . _Just
+        _AuthToken = sauOAuthToken . _Just
 
 instance GoogleRequest SubAccountsUpdate' where
         type Rs SubAccountsUpdate' = SubAccount

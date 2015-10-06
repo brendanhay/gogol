@@ -134,8 +134,8 @@ uivmgFields
   = lens _uivmgFields (\ s a -> s{_uivmgFields = a})
 
 instance GoogleAuth UserInfoV2MeGet' where
-        authKey = uivmgKey . _Just
-        authToken = uivmgOAuthToken . _Just
+        _AuthKey = uivmgKey . _Just
+        _AuthToken = uivmgOAuthToken . _Just
 
 instance GoogleRequest UserInfoV2MeGet' where
         type Rs UserInfoV2MeGet' = UserInfoplus

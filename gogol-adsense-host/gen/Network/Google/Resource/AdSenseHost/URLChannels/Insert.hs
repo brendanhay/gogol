@@ -158,8 +158,8 @@ uciFields
   = lens _uciFields (\ s a -> s{_uciFields = a})
 
 instance GoogleAuth URLChannelsInsert' where
-        authKey = uciKey . _Just
-        authToken = uciOAuthToken . _Just
+        _AuthKey = uciKey . _Just
+        _AuthToken = uciOAuthToken . _Just
 
 instance GoogleRequest URLChannelsInsert' where
         type Rs URLChannelsInsert' = URLChannel

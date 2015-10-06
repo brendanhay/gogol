@@ -166,8 +166,8 @@ biFields :: Lens' BucketsInsert' (Maybe Text)
 biFields = lens _biFields (\ s a -> s{_biFields = a})
 
 instance GoogleAuth BucketsInsert' where
-        authKey = biKey . _Just
-        authToken = biOAuthToken . _Just
+        _AuthKey = biKey . _Just
+        _AuthToken = biOAuthToken . _Just
 
 instance GoogleRequest BucketsInsert' where
         type Rs BucketsInsert' = Bucket

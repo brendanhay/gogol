@@ -205,8 +205,8 @@ iglFields
   = lens _iglFields (\ s a -> s{_iglFields = a})
 
 instance GoogleAuth InstanceGroupsList' where
-        authKey = iglKey . _Just
-        authToken = iglOAuthToken . _Just
+        _AuthKey = iglKey . _Just
+        _AuthToken = iglOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupsList' where
         type Rs InstanceGroupsList' = InstanceGroupList

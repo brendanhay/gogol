@@ -214,8 +214,8 @@ udsdgFields
 
 instance GoogleAuth UsersDataSourcesDatasetsGet'
          where
-        authKey = udsdgKey . _Just
-        authToken = udsdgOAuthToken . _Just
+        _AuthKey = udsdgKey . _Just
+        _AuthToken = udsdgOAuthToken . _Just
 
 instance GoogleRequest UsersDataSourcesDatasetsGet'
          where

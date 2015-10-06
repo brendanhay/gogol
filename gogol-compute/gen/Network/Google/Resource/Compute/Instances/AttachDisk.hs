@@ -182,8 +182,8 @@ iadInstance
   = lens _iadInstance (\ s a -> s{_iadInstance = a})
 
 instance GoogleAuth InstancesAttachDisk' where
-        authKey = iadKey . _Just
-        authToken = iadOAuthToken . _Just
+        _AuthKey = iadKey . _Just
+        _AuthToken = iadOAuthToken . _Just
 
 instance GoogleRequest InstancesAttachDisk' where
         type Rs InstancesAttachDisk' = Operation

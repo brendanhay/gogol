@@ -277,8 +277,8 @@ vlFields :: Lens' VolumesList' (Maybe Text)
 vlFields = lens _vlFields (\ s a -> s{_vlFields = a})
 
 instance GoogleAuth VolumesList' where
-        authKey = vlKey . _Just
-        authToken = vlOAuthToken . _Just
+        _AuthKey = vlKey . _Just
+        _AuthToken = vlOAuthToken . _Just
 
 instance GoogleRequest VolumesList' where
         type Rs VolumesList' = Volumes

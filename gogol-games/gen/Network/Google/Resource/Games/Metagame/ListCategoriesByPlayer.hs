@@ -205,8 +205,8 @@ mlcbpFields
 
 instance GoogleAuth MetagameListCategoriesByPlayer'
          where
-        authKey = mlcbpKey . _Just
-        authToken = mlcbpOAuthToken . _Just
+        _AuthKey = mlcbpKey . _Just
+        _AuthToken = mlcbpOAuthToken . _Just
 
 instance GoogleRequest
          MetagameListCategoriesByPlayer' where

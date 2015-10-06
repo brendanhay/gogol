@@ -190,8 +190,8 @@ acvpFields
 
 instance GoogleAuth
          AccountsContainersVersionsPublish' where
-        authKey = acvpKey . _Just
-        authToken = acvpOAuthToken . _Just
+        _AuthKey = acvpKey . _Just
+        _AuthToken = acvpOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVersionsPublish' where

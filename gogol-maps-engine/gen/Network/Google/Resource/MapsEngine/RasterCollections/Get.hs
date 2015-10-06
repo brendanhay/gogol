@@ -144,8 +144,8 @@ rcgFields
   = lens _rcgFields (\ s a -> s{_rcgFields = a})
 
 instance GoogleAuth RasterCollectionsGet' where
-        authKey = rcgKey . _Just
-        authToken = rcgOAuthToken . _Just
+        _AuthKey = rcgKey . _Just
+        _AuthToken = rcgOAuthToken . _Just
 
 instance GoogleRequest RasterCollectionsGet' where
         type Rs RasterCollectionsGet' = RasterCollection

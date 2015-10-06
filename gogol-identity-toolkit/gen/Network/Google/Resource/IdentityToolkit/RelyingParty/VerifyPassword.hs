@@ -147,8 +147,8 @@ rpvpFields
   = lens _rpvpFields (\ s a -> s{_rpvpFields = a})
 
 instance GoogleAuth RelyingPartyVerifyPassword' where
-        authKey = rpvpKey . _Just
-        authToken = rpvpOAuthToken . _Just
+        _AuthKey = rpvpKey . _Just
+        _AuthToken = rpvpOAuthToken . _Just
 
 instance GoogleRequest RelyingPartyVerifyPassword'
          where

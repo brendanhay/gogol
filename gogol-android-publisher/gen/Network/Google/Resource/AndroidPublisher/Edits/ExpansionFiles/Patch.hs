@@ -206,8 +206,8 @@ eefpFields
   = lens _eefpFields (\ s a -> s{_eefpFields = a})
 
 instance GoogleAuth EditsExpansionFilesPatch' where
-        authKey = eefpKey . _Just
-        authToken = eefpOAuthToken . _Just
+        _AuthKey = eefpKey . _Just
+        _AuthToken = eefpOAuthToken . _Just
 
 instance GoogleRequest EditsExpansionFilesPatch'
          where

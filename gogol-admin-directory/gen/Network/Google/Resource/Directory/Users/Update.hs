@@ -154,8 +154,8 @@ uuFields :: Lens' UsersUpdate' (Maybe Text)
 uuFields = lens _uuFields (\ s a -> s{_uuFields = a})
 
 instance GoogleAuth UsersUpdate' where
-        authKey = uuKey . _Just
-        authToken = uuOAuthToken . _Just
+        _AuthKey = uuKey . _Just
+        _AuthToken = uuOAuthToken . _Just
 
 instance GoogleRequest UsersUpdate' where
         type Rs UsersUpdate' = User

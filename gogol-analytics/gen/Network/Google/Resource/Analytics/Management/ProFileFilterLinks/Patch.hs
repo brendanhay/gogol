@@ -206,8 +206,8 @@ mpfflpFields
 
 instance GoogleAuth
          ManagementProFileFilterLinksPatch' where
-        authKey = mpfflpKey . _Just
-        authToken = mpfflpOAuthToken . _Just
+        _AuthKey = mpfflpKey . _Just
+        _AuthToken = mpfflpOAuthToken . _Just
 
 instance GoogleRequest
          ManagementProFileFilterLinksPatch' where

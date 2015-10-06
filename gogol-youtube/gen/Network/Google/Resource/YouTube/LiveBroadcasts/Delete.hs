@@ -192,8 +192,8 @@ lbdFields
   = lens _lbdFields (\ s a -> s{_lbdFields = a})
 
 instance GoogleAuth LiveBroadcastsDelete' where
-        authKey = lbdKey . _Just
-        authToken = lbdOAuthToken . _Just
+        _AuthKey = lbdKey . _Just
+        _AuthToken = lbdOAuthToken . _Just
 
 instance GoogleRequest LiveBroadcastsDelete' where
         type Rs LiveBroadcastsDelete' = ()

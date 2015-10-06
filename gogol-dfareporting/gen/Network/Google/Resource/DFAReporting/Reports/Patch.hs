@@ -166,8 +166,8 @@ rpFields :: Lens' ReportsPatch' (Maybe Text)
 rpFields = lens _rpFields (\ s a -> s{_rpFields = a})
 
 instance GoogleAuth ReportsPatch' where
-        authKey = rpKey . _Just
-        authToken = rpOAuthToken . _Just
+        _AuthKey = rpKey . _Just
+        _AuthToken = rpOAuthToken . _Just
 
 instance GoogleRequest ReportsPatch' where
         type Rs ReportsPatch' = Report

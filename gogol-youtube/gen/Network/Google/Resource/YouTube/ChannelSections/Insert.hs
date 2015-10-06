@@ -207,8 +207,8 @@ csiFields
   = lens _csiFields (\ s a -> s{_csiFields = a})
 
 instance GoogleAuth ChannelSectionsInsert' where
-        authKey = csiKey . _Just
-        authToken = csiOAuthToken . _Just
+        _AuthKey = csiKey . _Just
+        _AuthToken = csiOAuthToken . _Just
 
 instance GoogleRequest ChannelSectionsInsert' where
         type Rs ChannelSectionsInsert' = ChannelSection

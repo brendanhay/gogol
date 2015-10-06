@@ -256,8 +256,8 @@ plewCallback
   = lens _plewCallback (\ s a -> s{_plewCallback = a})
 
 instance GoogleAuth ProjectsLogsEntriesWrite' where
-        authKey = plewKey . _Just
-        authToken = plewOAuthToken . _Just
+        _AuthKey = plewKey . _Just
+        _AuthToken = plewOAuthToken . _Just
 
 instance GoogleRequest ProjectsLogsEntriesWrite'
          where

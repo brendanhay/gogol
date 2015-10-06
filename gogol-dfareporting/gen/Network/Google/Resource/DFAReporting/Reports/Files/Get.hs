@@ -185,8 +185,8 @@ rfgFields
   = lens _rfgFields (\ s a -> s{_rfgFields = a})
 
 instance GoogleAuth ReportsFilesGet' where
-        authKey = rfgKey . _Just
-        authToken = rfgOAuthToken . _Just
+        _AuthKey = rfgKey . _Just
+        _AuthToken = rfgOAuthToken . _Just
 
 instance GoogleRequest ReportsFilesGet' where
         type Rs ReportsFilesGet' = File

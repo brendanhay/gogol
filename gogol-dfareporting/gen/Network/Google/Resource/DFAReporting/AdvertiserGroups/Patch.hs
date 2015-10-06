@@ -171,8 +171,8 @@ agpFields
   = lens _agpFields (\ s a -> s{_agpFields = a})
 
 instance GoogleAuth AdvertiserGroupsPatch' where
-        authKey = agpKey . _Just
-        authToken = agpOAuthToken . _Just
+        _AuthKey = agpKey . _Just
+        _AuthToken = agpOAuthToken . _Just
 
 instance GoogleRequest AdvertiserGroupsPatch' where
         type Rs AdvertiserGroupsPatch' = AdvertiserGroup

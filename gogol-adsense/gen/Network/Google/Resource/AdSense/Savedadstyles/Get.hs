@@ -142,8 +142,8 @@ sgFields :: Lens' SavedadstylesGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
 instance GoogleAuth SavedadstylesGet' where
-        authKey = sgKey . _Just
-        authToken = sgOAuthToken . _Just
+        _AuthKey = sgKey . _Just
+        _AuthToken = sgOAuthToken . _Just
 
 instance GoogleRequest SavedadstylesGet' where
         type Rs SavedadstylesGet' = SavedAdStyle

@@ -153,8 +153,8 @@ cuFields :: Lens' CallsetsUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
 instance GoogleAuth CallsetsUpdate' where
-        authKey = cuKey . _Just
-        authToken = cuOAuthToken . _Just
+        _AuthKey = cuKey . _Just
+        _AuthToken = cuOAuthToken . _Just
 
 instance GoogleRequest CallsetsUpdate' where
         type Rs CallsetsUpdate' = CallSet

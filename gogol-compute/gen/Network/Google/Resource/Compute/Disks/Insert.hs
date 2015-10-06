@@ -179,8 +179,8 @@ diFields :: Lens' DisksInsert' (Maybe Text)
 diFields = lens _diFields (\ s a -> s{_diFields = a})
 
 instance GoogleAuth DisksInsert' where
-        authKey = diKey . _Just
-        authToken = diOAuthToken . _Just
+        _AuthKey = diKey . _Just
+        _AuthToken = diOAuthToken . _Just
 
 instance GoogleRequest DisksInsert' where
         type Rs DisksInsert' = Operation

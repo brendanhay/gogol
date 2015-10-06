@@ -179,8 +179,8 @@ ccaiFields
 
 instance GoogleAuth
          CampaignCreativeAssociationsInsert' where
-        authKey = ccaiKey . _Just
-        authToken = ccaiOAuthToken . _Just
+        _AuthKey = ccaiKey . _Just
+        _AuthToken = ccaiOAuthToken . _Just
 
 instance GoogleRequest
          CampaignCreativeAssociationsInsert' where

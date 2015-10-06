@@ -208,8 +208,8 @@ bgCallback
   = lens _bgCallback (\ s a -> s{_bgCallback = a})
 
 instance GoogleAuth BeaconsGet' where
-        authKey = bgKey . _Just
-        authToken = bgOAuthToken . _Just
+        _AuthKey = bgKey . _Just
+        _AuthToken = bgOAuthToken . _Just
 
 instance GoogleRequest BeaconsGet' where
         type Rs BeaconsGet' = Beacon

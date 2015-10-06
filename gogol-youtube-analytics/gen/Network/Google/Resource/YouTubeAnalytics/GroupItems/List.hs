@@ -169,8 +169,8 @@ gilFields
   = lens _gilFields (\ s a -> s{_gilFields = a})
 
 instance GoogleAuth GroupItemsList' where
-        authKey = gilKey . _Just
-        authToken = gilOAuthToken . _Just
+        _AuthKey = gilKey . _Just
+        _AuthToken = gilOAuthToken . _Just
 
 instance GoogleRequest GroupItemsList' where
         type Rs GroupItemsList' = GroupItemListResponse

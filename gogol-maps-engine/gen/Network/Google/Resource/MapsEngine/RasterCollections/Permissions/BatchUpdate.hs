@@ -165,8 +165,8 @@ rcpbuFields
 
 instance GoogleAuth
          RasterCollectionsPermissionsBatchUpdate' where
-        authKey = rcpbuKey . _Just
-        authToken = rcpbuOAuthToken . _Just
+        _AuthKey = rcpbuKey . _Just
+        _AuthToken = rcpbuOAuthToken . _Just
 
 instance GoogleRequest
          RasterCollectionsPermissionsBatchUpdate' where

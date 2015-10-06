@@ -158,8 +158,8 @@ mdcFields
   = lens _mdcFields (\ s a -> s{_mdcFields = a})
 
 instance GoogleAuth MetricDescriptorsCreate' where
-        authKey = mdcKey . _Just
-        authToken = mdcOAuthToken . _Just
+        _AuthKey = mdcKey . _Just
+        _AuthToken = mdcOAuthToken . _Just
 
 instance GoogleRequest MetricDescriptorsCreate' where
         type Rs MetricDescriptorsCreate' = MetricDescriptor

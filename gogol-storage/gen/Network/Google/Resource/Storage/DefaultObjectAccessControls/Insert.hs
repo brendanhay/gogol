@@ -160,8 +160,8 @@ doaciFields
 
 instance GoogleAuth
          DefaultObjectAccessControlsInsert' where
-        authKey = doaciKey . _Just
-        authToken = doaciOAuthToken . _Just
+        _AuthKey = doaciKey . _Just
+        _AuthToken = doaciOAuthToken . _Just
 
 instance GoogleRequest
          DefaultObjectAccessControlsInsert' where

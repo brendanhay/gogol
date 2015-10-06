@@ -146,8 +146,8 @@ acdFields
 
 instance GoogleAuth AchievementConfigurationsDelete'
          where
-        authKey = acdKey . _Just
-        authToken = acdOAuthToken . _Just
+        _AuthKey = acdKey . _Just
+        _AuthToken = acdOAuthToken . _Just
 
 instance GoogleRequest
          AchievementConfigurationsDelete' where

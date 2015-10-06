@@ -170,8 +170,8 @@ tigFields
   = lens _tigFields (\ s a -> s{_tigFields = a})
 
 instance GoogleAuth TargetInstancesGet' where
-        authKey = tigKey . _Just
-        authToken = tigOAuthToken . _Just
+        _AuthKey = tigKey . _Just
+        _AuthToken = tigOAuthToken . _Just
 
 instance GoogleRequest TargetInstancesGet' where
         type Rs TargetInstancesGet' = TargetInstance

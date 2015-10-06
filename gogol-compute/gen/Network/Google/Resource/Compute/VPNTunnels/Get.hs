@@ -169,8 +169,8 @@ vtgFields
   = lens _vtgFields (\ s a -> s{_vtgFields = a})
 
 instance GoogleAuth VPNTunnelsGet' where
-        authKey = vtgKey . _Just
-        authToken = vtgOAuthToken . _Just
+        _AuthKey = vtgKey . _Just
+        _AuthToken = vtgOAuthToken . _Just
 
 instance GoogleRequest VPNTunnelsGet' where
         type Rs VPNTunnelsGet' = VPNTunnel

@@ -183,8 +183,8 @@ iddInstance
   = lens _iddInstance (\ s a -> s{_iddInstance = a})
 
 instance GoogleAuth InstancesDetachDisk' where
-        authKey = iddKey . _Just
-        authToken = iddOAuthToken . _Just
+        _AuthKey = iddKey . _Just
+        _AuthToken = iddOAuthToken . _Just
 
 instance GoogleRequest InstancesDetachDisk' where
         type Rs InstancesDetachDisk' = Operation

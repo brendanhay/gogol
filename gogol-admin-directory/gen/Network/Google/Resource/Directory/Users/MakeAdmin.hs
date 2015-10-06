@@ -157,8 +157,8 @@ umaFields
   = lens _umaFields (\ s a -> s{_umaFields = a})
 
 instance GoogleAuth UsersMakeAdmin' where
-        authKey = umaKey . _Just
-        authToken = umaOAuthToken . _Just
+        _AuthKey = umaKey . _Just
+        _AuthToken = umaOAuthToken . _Just
 
 instance GoogleRequest UsersMakeAdmin' where
         type Rs UsersMakeAdmin' = ()

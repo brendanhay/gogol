@@ -141,8 +141,8 @@ mcFields :: Lens' MapsCreate' (Maybe Text)
 mcFields = lens _mcFields (\ s a -> s{_mcFields = a})
 
 instance GoogleAuth MapsCreate' where
-        authKey = mcKey . _Just
-        authToken = mcOAuthToken . _Just
+        _AuthKey = mcKey . _Just
+        _AuthToken = mcOAuthToken . _Just
 
 instance GoogleRequest MapsCreate' where
         type Rs MapsCreate' = Map

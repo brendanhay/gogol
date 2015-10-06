@@ -147,8 +147,8 @@ vciFields
 
 instance GoogleAuth VerificationCodesInvalidate'
          where
-        authKey = vciKey . _Just
-        authToken = vciOAuthToken . _Just
+        _AuthKey = vciKey . _Just
+        _AuthToken = vciOAuthToken . _Just
 
 instance GoogleRequest VerificationCodesInvalidate'
          where

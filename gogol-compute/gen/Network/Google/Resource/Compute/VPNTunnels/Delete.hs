@@ -169,8 +169,8 @@ vtdFields
   = lens _vtdFields (\ s a -> s{_vtdFields = a})
 
 instance GoogleAuth VPNTunnelsDelete' where
-        authKey = vtdKey . _Just
-        authToken = vtdOAuthToken . _Just
+        _AuthKey = vtdKey . _Just
+        _AuthToken = vtdOAuthToken . _Just
 
 instance GoogleRequest VPNTunnelsDelete' where
         type Rs VPNTunnelsDelete' = Operation

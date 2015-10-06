@@ -158,8 +158,8 @@ illFields
   = lens _illFields (\ s a -> s{_illFields = a})
 
 instance GoogleAuth I18nLanguagesList' where
-        authKey = illKey . _Just
-        authToken = illOAuthToken . _Just
+        _AuthKey = illKey . _Just
+        _AuthToken = illOAuthToken . _Just
 
 instance GoogleRequest I18nLanguagesList' where
         type Rs I18nLanguagesList' = I18nLanguageListResponse

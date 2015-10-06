@@ -473,8 +473,8 @@ plaFields
   = lens _plaFields (\ s a -> s{_plaFields = a})
 
 instance GoogleAuth PlacementsList' where
-        authKey = plaKey . _Just
-        authToken = plaOAuthToken . _Just
+        _AuthKey = plaKey . _Just
+        _AuthToken = plaOAuthToken . _Just
 
 instance GoogleRequest PlacementsList' where
         type Rs PlacementsList' = PlacementsListResponse

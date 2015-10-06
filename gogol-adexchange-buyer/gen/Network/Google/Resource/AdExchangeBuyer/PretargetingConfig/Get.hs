@@ -157,8 +157,8 @@ pcgFields
   = lens _pcgFields (\ s a -> s{_pcgFields = a})
 
 instance GoogleAuth PretargetingConfigGet' where
-        authKey = pcgKey . _Just
-        authToken = pcgOAuthToken . _Just
+        _AuthKey = pcgKey . _Just
+        _AuthToken = pcgOAuthToken . _Just
 
 instance GoogleRequest PretargetingConfigGet' where
         type Rs PretargetingConfigGet' = PretargetingConfig

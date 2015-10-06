@@ -160,8 +160,8 @@ tlpFields
   = lens _tlpFields (\ s a -> s{_tlpFields = a})
 
 instance GoogleAuth TaskListsPatch' where
-        authKey = tlpKey . _Just
-        authToken = tlpOAuthToken . _Just
+        _AuthKey = tlpKey . _Just
+        _AuthToken = tlpOAuthToken . _Just
 
 instance GoogleRequest TaskListsPatch' where
         type Rs TaskListsPatch' = TaskList

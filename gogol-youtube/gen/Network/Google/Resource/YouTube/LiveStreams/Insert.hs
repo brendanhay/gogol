@@ -208,8 +208,8 @@ lsiFields
   = lens _lsiFields (\ s a -> s{_lsiFields = a})
 
 instance GoogleAuth LiveStreamsInsert' where
-        authKey = lsiKey . _Just
-        authToken = lsiOAuthToken . _Just
+        _AuthKey = lsiKey . _Just
+        _AuthToken = lsiOAuthToken . _Just
 
 instance GoogleRequest LiveStreamsInsert' where
         type Rs LiveStreamsInsert' = LiveStream

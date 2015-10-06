@@ -156,8 +156,8 @@ uiFields :: Lens' UsersInsert' (Maybe Text)
 uiFields = lens _uiFields (\ s a -> s{_uiFields = a})
 
 instance GoogleAuth UsersInsert' where
-        authKey = uiKey . _Just
-        authToken = uiOAuthToken . _Just
+        _AuthKey = uiKey . _Just
+        _AuthToken = uiOAuthToken . _Just
 
 instance GoogleRequest UsersInsert' where
         type Rs UsersInsert' = Operation

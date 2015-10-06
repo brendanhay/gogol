@@ -175,8 +175,8 @@ scgInstance
   = lens _scgInstance (\ s a -> s{_scgInstance = a})
 
 instance GoogleAuth SSLCertsGet' where
-        authKey = scgKey . _Just
-        authToken = scgOAuthToken . _Just
+        _AuthKey = scgKey . _Just
+        _AuthToken = scgOAuthToken . _Just
 
 instance GoogleRequest SSLCertsGet' where
         type Rs SSLCertsGet' = SSLCert

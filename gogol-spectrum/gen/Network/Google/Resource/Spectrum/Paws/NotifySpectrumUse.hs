@@ -152,8 +152,8 @@ pnsuFields
   = lens _pnsuFields (\ s a -> s{_pnsuFields = a})
 
 instance GoogleAuth PawsNotifySpectrumUse' where
-        authKey = pnsuKey . _Just
-        authToken = pnsuOAuthToken . _Just
+        _AuthKey = pnsuKey . _Just
+        _AuthToken = pnsuOAuthToken . _Just
 
 instance GoogleRequest PawsNotifySpectrumUse' where
         type Rs PawsNotifySpectrumUse' =

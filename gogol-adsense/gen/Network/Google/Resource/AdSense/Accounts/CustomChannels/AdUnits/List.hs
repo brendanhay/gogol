@@ -217,8 +217,8 @@ accaulFields
 
 instance GoogleAuth
          AccountsCustomChannelsAdUnitsList' where
-        authKey = accaulKey . _Just
-        authToken = accaulOAuthToken . _Just
+        _AuthKey = accaulKey . _Just
+        _AuthToken = accaulOAuthToken . _Just
 
 instance GoogleRequest
          AccountsCustomChannelsAdUnitsList' where

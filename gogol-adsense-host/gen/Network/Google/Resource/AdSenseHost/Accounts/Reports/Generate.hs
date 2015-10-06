@@ -264,8 +264,8 @@ argFields
   = lens _argFields (\ s a -> s{_argFields = a})
 
 instance GoogleAuth AccountsReportsGenerate' where
-        authKey = argKey . _Just
-        authToken = argOAuthToken . _Just
+        _AuthKey = argKey . _Just
+        _AuthToken = argOAuthToken . _Just
 
 instance GoogleRequest AccountsReportsGenerate' where
         type Rs AccountsReportsGenerate' = Report

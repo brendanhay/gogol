@@ -249,8 +249,8 @@ baplCallback
 
 instance GoogleAuth BillingAccountsProjectsList'
          where
-        authKey = baplKey . _Just
-        authToken = baplOAuthToken . _Just
+        _AuthKey = baplKey . _Just
+        _AuthToken = baplOAuthToken . _Just
 
 instance GoogleRequest BillingAccountsProjectsList'
          where

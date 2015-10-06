@@ -157,8 +157,8 @@ dbtFields
   = lens _dbtFields (\ s a -> s{_dbtFields = a})
 
 instance GoogleAuth DatasetsBeginTransaction' where
-        authKey = dbtKey . _Just
-        authToken = dbtOAuthToken . _Just
+        _AuthKey = dbtKey . _Just
+        _AuthToken = dbtOAuthToken . _Just
 
 instance GoogleRequest DatasetsBeginTransaction'
          where

@@ -170,8 +170,8 @@ etgtFields
   = lens _etgtFields (\ s a -> s{_etgtFields = a})
 
 instance GoogleAuth EditsTestersGet' where
-        authKey = etgtKey . _Just
-        authToken = etgtOAuthToken . _Just
+        _AuthKey = etgtKey . _Just
+        _AuthToken = etgtOAuthToken . _Just
 
 instance GoogleRequest EditsTestersGet' where
         type Rs EditsTestersGet' = Testers

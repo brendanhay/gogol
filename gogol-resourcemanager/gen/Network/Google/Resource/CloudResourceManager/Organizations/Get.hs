@@ -211,8 +211,8 @@ ogCallback
   = lens _ogCallback (\ s a -> s{_ogCallback = a})
 
 instance GoogleAuth OrganizationsGet' where
-        authKey = ogKey . _Just
-        authToken = ogOAuthToken . _Just
+        _AuthKey = ogKey . _Just
+        _AuthToken = ogOAuthToken . _Just
 
 instance GoogleRequest OrganizationsGet' where
         type Rs OrganizationsGet' = Organization

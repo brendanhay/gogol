@@ -204,8 +204,8 @@ glFields :: Lens' GroupsList' (Maybe Text)
 glFields = lens _glFields (\ s a -> s{_glFields = a})
 
 instance GoogleAuth GroupsList' where
-        authKey = glKey . _Just
-        authToken = glOAuthToken . _Just
+        _AuthKey = glKey . _Just
+        _AuthToken = glOAuthToken . _Just
 
 instance GoogleRequest GroupsList' where
         type Rs GroupsList' = GroupList

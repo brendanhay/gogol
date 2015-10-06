@@ -174,8 +174,8 @@ acmdFields
 
 instance GoogleAuth AccountsContainersMacrosDelete'
          where
-        authKey = acmdKey . _Just
-        authToken = acmdOAuthToken . _Just
+        _AuthKey = acmdKey . _Just
+        _AuthToken = acmdOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersMacrosDelete' where

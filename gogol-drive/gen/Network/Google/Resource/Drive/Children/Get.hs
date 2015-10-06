@@ -158,8 +158,8 @@ cggFields
   = lens _cggFields (\ s a -> s{_cggFields = a})
 
 instance GoogleAuth ChildrenGet' where
-        authKey = cggKey . _Just
-        authToken = cggOAuthToken . _Just
+        _AuthKey = cggKey . _Just
+        _AuthToken = cggOAuthToken . _Just
 
 instance GoogleRequest ChildrenGet' where
         type Rs ChildrenGet' = ChildReference

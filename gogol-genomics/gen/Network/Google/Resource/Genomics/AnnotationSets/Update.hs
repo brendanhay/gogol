@@ -162,8 +162,8 @@ asuFields
   = lens _asuFields (\ s a -> s{_asuFields = a})
 
 instance GoogleAuth AnnotationSetsUpdate' where
-        authKey = asuKey . _Just
-        authToken = asuOAuthToken . _Just
+        _AuthKey = asuKey . _Just
+        _AuthToken = asuOAuthToken . _Just
 
 instance GoogleRequest AnnotationSetsUpdate' where
         type Rs AnnotationSetsUpdate' = AnnotationSet

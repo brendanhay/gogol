@@ -172,8 +172,8 @@ insnInstance
   = lens _insnInstance (\ s a -> s{_insnInstance = a})
 
 instance GoogleAuth InstancesStart' where
-        authKey = insnKey . _Just
-        authToken = insnOAuthToken . _Just
+        _AuthKey = insnKey . _Just
+        _AuthToken = insnOAuthToken . _Just
 
 instance GoogleRequest InstancesStart' where
         type Rs InstancesStart' = Operation

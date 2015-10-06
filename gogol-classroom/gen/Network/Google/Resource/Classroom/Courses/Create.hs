@@ -223,8 +223,8 @@ ccCallback
   = lens _ccCallback (\ s a -> s{_ccCallback = a})
 
 instance GoogleAuth CoursesCreate' where
-        authKey = ccKey . _Just
-        authToken = ccOAuthToken . _Just
+        _AuthKey = ccKey . _Just
+        _AuthToken = ccOAuthToken . _Just
 
 instance GoogleRequest CoursesCreate' where
         type Rs CoursesCreate' = Course

@@ -161,8 +161,8 @@ bacgFields
   = lens _bacgFields (\ s a -> s{_bacgFields = a})
 
 instance GoogleAuth BucketAccessControlsGet' where
-        authKey = bacgKey . _Just
-        authToken = bacgOAuthToken . _Just
+        _AuthKey = bacgKey . _Just
+        _AuthToken = bacgOAuthToken . _Just
 
 instance GoogleRequest BucketAccessControlsGet' where
         type Rs BucketAccessControlsGet' =

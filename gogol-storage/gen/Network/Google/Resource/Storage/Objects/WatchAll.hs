@@ -233,8 +233,8 @@ owaFields
   = lens _owaFields (\ s a -> s{_owaFields = a})
 
 instance GoogleAuth ObjectsWatchAll' where
-        authKey = owaKey . _Just
-        authToken = owaOAuthToken . _Just
+        _AuthKey = owaKey . _Just
+        _AuthToken = owaOAuthToken . _Just
 
 instance GoogleRequest ObjectsWatchAll' where
         type Rs ObjectsWatchAll' = Channel

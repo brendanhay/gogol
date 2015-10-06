@@ -134,8 +134,8 @@ rrFields :: Lens' RoomsReset' (Maybe Text)
 rrFields = lens _rrFields (\ s a -> s{_rrFields = a})
 
 instance GoogleAuth RoomsReset' where
-        authKey = rrKey . _Just
-        authToken = rrOAuthToken . _Just
+        _AuthKey = rrKey . _Just
+        _AuthToken = rrOAuthToken . _Just
 
 instance GoogleRequest RoomsReset' where
         type Rs RoomsReset' = ()

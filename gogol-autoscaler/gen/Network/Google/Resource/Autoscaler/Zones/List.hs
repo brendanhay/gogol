@@ -169,8 +169,8 @@ zlFields :: Lens' ZonesList' (Maybe Text)
 zlFields = lens _zlFields (\ s a -> s{_zlFields = a})
 
 instance GoogleAuth ZonesList' where
-        authKey = zlKey . _Just
-        authToken = zlOAuthToken . _Just
+        _AuthKey = zlKey . _Just
+        _AuthToken = zlOAuthToken . _Just
 
 instance GoogleRequest ZonesList' where
         type Rs ZonesList' = ZoneList

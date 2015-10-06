@@ -154,8 +154,8 @@ dgDeployment
   = lens _dgDeployment (\ s a -> s{_dgDeployment = a})
 
 instance GoogleAuth DeploymentsGet' where
-        authKey = dgKey . _Just
-        authToken = dgOAuthToken . _Just
+        _AuthKey = dgKey . _Just
+        _AuthToken = dgOAuthToken . _Just
 
 instance GoogleRequest DeploymentsGet' where
         type Rs DeploymentsGet' = Deployment

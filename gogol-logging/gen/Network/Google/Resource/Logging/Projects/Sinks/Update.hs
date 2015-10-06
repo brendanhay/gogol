@@ -241,8 +241,8 @@ psuCallback
   = lens _psuCallback (\ s a -> s{_psuCallback = a})
 
 instance GoogleAuth ProjectsSinksUpdate' where
-        authKey = psuKey . _Just
-        authToken = psuOAuthToken . _Just
+        _AuthKey = psuKey . _Just
+        _AuthToken = psuOAuthToken . _Just
 
 instance GoogleRequest ProjectsSinksUpdate' where
         type Rs ProjectsSinksUpdate' = LogSink

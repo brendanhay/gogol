@@ -192,8 +192,8 @@ mpfuliFields
 
 instance GoogleAuth ManagementProFileUserLinksInsert'
          where
-        authKey = mpfuliKey . _Just
-        authToken = mpfuliOAuthToken . _Just
+        _AuthKey = mpfuliKey . _Just
+        _AuthToken = mpfuliOAuthToken . _Just
 
 instance GoogleRequest
          ManagementProFileUserLinksInsert' where

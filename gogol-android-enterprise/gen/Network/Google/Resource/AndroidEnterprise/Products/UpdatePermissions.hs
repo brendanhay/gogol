@@ -174,8 +174,8 @@ pupFields
   = lens _pupFields (\ s a -> s{_pupFields = a})
 
 instance GoogleAuth ProductsUpdatePermissions' where
-        authKey = pupKey . _Just
-        authToken = pupOAuthToken . _Just
+        _AuthKey = pupKey . _Just
+        _AuthToken = pupOAuthToken . _Just
 
 instance GoogleRequest ProductsUpdatePermissions'
          where

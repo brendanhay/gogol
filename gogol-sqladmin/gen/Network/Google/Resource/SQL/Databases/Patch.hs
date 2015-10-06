@@ -182,8 +182,8 @@ dpInstance
   = lens _dpInstance (\ s a -> s{_dpInstance = a})
 
 instance GoogleAuth DatabasesPatch' where
-        authKey = dpKey . _Just
-        authToken = dpOAuthToken . _Just
+        _AuthKey = dpKey . _Just
+        _AuthToken = dpOAuthToken . _Just
 
 instance GoogleRequest DatabasesPatch' where
         type Rs DatabasesPatch' = Operation

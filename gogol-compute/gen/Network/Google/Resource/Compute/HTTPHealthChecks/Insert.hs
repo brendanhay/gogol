@@ -166,8 +166,8 @@ httphciFields
       (\ s a -> s{_httphciFields = a})
 
 instance GoogleAuth HTTPHealthChecksInsert' where
-        authKey = httphciKey . _Just
-        authToken = httphciOAuthToken . _Just
+        _AuthKey = httphciKey . _Just
+        _AuthToken = httphciOAuthToken . _Just
 
 instance GoogleRequest HTTPHealthChecksInsert' where
         type Rs HTTPHealthChecksInsert' = Operation

@@ -190,8 +190,8 @@ mpfpFields
   = lens _mpfpFields (\ s a -> s{_mpfpFields = a})
 
 instance GoogleAuth ManagementProFilesPatch' where
-        authKey = mpfpKey . _Just
-        authToken = mpfpOAuthToken . _Just
+        _AuthKey = mpfpKey . _Just
+        _AuthToken = mpfpOAuthToken . _Just
 
 instance GoogleRequest ManagementProFilesPatch' where
         type Rs ManagementProFilesPatch' = ProFile

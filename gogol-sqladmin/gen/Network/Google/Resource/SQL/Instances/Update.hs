@@ -171,8 +171,8 @@ iuInstance
   = lens _iuInstance (\ s a -> s{_iuInstance = a})
 
 instance GoogleAuth InstancesUpdate' where
-        authKey = iuKey . _Just
-        authToken = iuOAuthToken . _Just
+        _AuthKey = iuKey . _Just
+        _AuthToken = iuOAuthToken . _Just
 
 instance GoogleRequest InstancesUpdate' where
         type Rs InstancesUpdate' = Operation

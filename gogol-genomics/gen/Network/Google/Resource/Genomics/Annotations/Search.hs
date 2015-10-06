@@ -149,8 +149,8 @@ asFields :: Lens' AnnotationsSearch' (Maybe Text)
 asFields = lens _asFields (\ s a -> s{_asFields = a})
 
 instance GoogleAuth AnnotationsSearch' where
-        authKey = asKey . _Just
-        authToken = asOAuthToken . _Just
+        _AuthKey = asKey . _Just
+        _AuthToken = asOAuthToken . _Just
 
 instance GoogleRequest AnnotationsSearch' where
         type Rs AnnotationsSearch' =

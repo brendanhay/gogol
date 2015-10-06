@@ -170,8 +170,8 @@ udsFields
   = lens _udsFields (\ s a -> s{_udsFields = a})
 
 instance GoogleAuth UsersDraftsSend' where
-        authKey = udsKey . _Just
-        authToken = udsOAuthToken . _Just
+        _AuthKey = udsKey . _Just
+        _AuthToken = udsOAuthToken . _Just
 
 instance GoogleRequest UsersDraftsSend' where
         type Rs UsersDraftsSend' = Message

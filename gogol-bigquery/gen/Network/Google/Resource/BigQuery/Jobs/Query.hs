@@ -157,8 +157,8 @@ jqFields :: Lens' JobsQuery' (Maybe Text)
 jqFields = lens _jqFields (\ s a -> s{_jqFields = a})
 
 instance GoogleAuth JobsQuery' where
-        authKey = jqKey . _Just
-        authToken = jqOAuthToken . _Just
+        _AuthKey = jqKey . _Just
+        _AuthToken = jqOAuthToken . _Just
 
 instance GoogleRequest JobsQuery' where
         type Rs JobsQuery' = QueryResponse

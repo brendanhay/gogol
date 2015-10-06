@@ -169,8 +169,8 @@ pcuFields
   = lens _pcuFields (\ s a -> s{_pcuFields = a})
 
 instance GoogleAuth PretargetingConfigUpdate' where
-        authKey = pcuKey . _Just
-        authToken = pcuOAuthToken . _Just
+        _AuthKey = pcuKey . _Just
+        _AuthToken = pcuOAuthToken . _Just
 
 instance GoogleRequest PretargetingConfigUpdate'
          where

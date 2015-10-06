@@ -157,8 +157,8 @@ gogFields
   = lens _gogFields (\ s a -> s{_gogFields = a})
 
 instance GoogleAuth GlobalOperationsGet' where
-        authKey = gogKey . _Just
-        authToken = gogOAuthToken . _Just
+        _AuthKey = gogKey . _Just
+        _AuthToken = gogOAuthToken . _Just
 
 instance GoogleRequest GlobalOperationsGet' where
         type Rs GlobalOperationsGet' = Operation

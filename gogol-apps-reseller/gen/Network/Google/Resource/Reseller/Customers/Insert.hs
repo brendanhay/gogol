@@ -155,8 +155,8 @@ ciFields :: Lens' CustomersInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
 instance GoogleAuth CustomersInsert' where
-        authKey = ciKey . _Just
-        authToken = ciOAuthToken . _Just
+        _AuthKey = ciKey . _Just
+        _AuthToken = ciOAuthToken . _Just
 
 instance GoogleRequest CustomersInsert' where
         type Rs CustomersInsert' = Customer

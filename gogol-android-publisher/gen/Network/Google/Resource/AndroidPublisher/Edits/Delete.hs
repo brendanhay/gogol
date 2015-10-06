@@ -158,8 +158,8 @@ edFields :: Lens' EditsDelete' (Maybe Text)
 edFields = lens _edFields (\ s a -> s{_edFields = a})
 
 instance GoogleAuth EditsDelete' where
-        authKey = edKey . _Just
-        authToken = edOAuthToken . _Just
+        _AuthKey = edKey . _Just
+        _AuthToken = edOAuthToken . _Just
 
 instance GoogleRequest EditsDelete' where
         type Rs EditsDelete' = ()

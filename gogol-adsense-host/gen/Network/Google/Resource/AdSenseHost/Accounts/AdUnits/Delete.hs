@@ -175,8 +175,8 @@ aaudFields
   = lens _aaudFields (\ s a -> s{_aaudFields = a})
 
 instance GoogleAuth AccountsAdUnitsDelete' where
-        authKey = aaudKey . _Just
-        authToken = aaudOAuthToken . _Just
+        _AuthKey = aaudKey . _Just
+        _AuthToken = aaudOAuthToken . _Just
 
 instance GoogleRequest AccountsAdUnitsDelete' where
         type Rs AccountsAdUnitsDelete' = AdUnit

@@ -310,8 +310,8 @@ uslCallback
   = lens _uslCallback (\ s a -> s{_uslCallback = a})
 
 instance GoogleAuth UserStatesList' where
-        authKey = uslKey . _Just
-        authToken = uslOAuthToken . _Just
+        _AuthKey = uslKey . _Just
+        _AuthToken = uslOAuthToken . _Just
 
 instance GoogleRequest UserStatesList' where
         type Rs UserStatesList' = ListUserStatesResponse

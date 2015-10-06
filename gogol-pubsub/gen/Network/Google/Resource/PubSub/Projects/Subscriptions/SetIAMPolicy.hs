@@ -233,8 +233,8 @@ pssipCallback
 
 instance GoogleAuth
          ProjectsSubscriptionsSetIAMPolicy' where
-        authKey = pssipKey . _Just
-        authToken = pssipOAuthToken . _Just
+        _AuthKey = pssipKey . _Just
+        _AuthToken = pssipOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsSubscriptionsSetIAMPolicy' where

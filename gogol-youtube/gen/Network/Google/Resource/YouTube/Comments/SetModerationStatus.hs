@@ -181,8 +181,8 @@ csmsFields
 
 instance GoogleAuth CommentsSetModerationStatus'
          where
-        authKey = csmsKey . _Just
-        authToken = csmsOAuthToken . _Just
+        _AuthKey = csmsKey . _Just
+        _AuthToken = csmsOAuthToken . _Just
 
 instance GoogleRequest CommentsSetModerationStatus'
          where

@@ -144,8 +144,8 @@ vggFields
   = lens _vggFields (\ s a -> s{_vggFields = a})
 
 instance GoogleAuth VariantsGet' where
-        authKey = vggKey . _Just
-        authToken = vggOAuthToken . _Just
+        _AuthKey = vggKey . _Just
+        _AuthToken = vggOAuthToken . _Just
 
 instance GoogleRequest VariantsGet' where
         type Rs VariantsGet' = Variant

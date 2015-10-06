@@ -156,8 +156,8 @@ ptgFields
   = lens _ptgFields (\ s a -> s{_ptgFields = a})
 
 instance GoogleAuth PlatformTypesGet' where
-        authKey = ptgKey . _Just
-        authToken = ptgOAuthToken . _Just
+        _AuthKey = ptgKey . _Just
+        _AuthToken = ptgOAuthToken . _Just
 
 instance GoogleRequest PlatformTypesGet' where
         type Rs PlatformTypesGet' = PlatformType

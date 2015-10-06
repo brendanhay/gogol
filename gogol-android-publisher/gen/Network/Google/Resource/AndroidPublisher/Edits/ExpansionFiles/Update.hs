@@ -198,8 +198,8 @@ eFields :: Lens' EditsExpansionFilesUpdate' (Maybe Text)
 eFields = lens _eFields (\ s a -> s{_eFields = a})
 
 instance GoogleAuth EditsExpansionFilesUpdate' where
-        authKey = eKey . _Just
-        authToken = eOAuthToken . _Just
+        _AuthKey = eKey . _Just
+        _AuthToken = eOAuthToken . _Just
 
 instance GoogleRequest EditsExpansionFilesUpdate'
          where

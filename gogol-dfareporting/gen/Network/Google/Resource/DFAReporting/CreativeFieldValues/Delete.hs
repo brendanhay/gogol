@@ -172,8 +172,8 @@ cfvdFields
   = lens _cfvdFields (\ s a -> s{_cfvdFields = a})
 
 instance GoogleAuth CreativeFieldValuesDelete' where
-        authKey = cfvdKey . _Just
-        authToken = cfvdOAuthToken . _Just
+        _AuthKey = cfvdKey . _Just
+        _AuthToken = cfvdOAuthToken . _Just
 
 instance GoogleRequest CreativeFieldValuesDelete'
          where

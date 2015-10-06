@@ -170,8 +170,8 @@ duFields :: Lens' DatasetsUpdate' (Maybe Text)
 duFields = lens _duFields (\ s a -> s{_duFields = a})
 
 instance GoogleAuth DatasetsUpdate' where
-        authKey = duKey . _Just
-        authToken = duOAuthToken . _Just
+        _AuthKey = duKey . _Just
+        _AuthToken = duOAuthToken . _Just
 
 instance GoogleRequest DatasetsUpdate' where
         type Rs DatasetsUpdate' = Dataset

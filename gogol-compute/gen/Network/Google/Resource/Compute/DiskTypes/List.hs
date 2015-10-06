@@ -205,8 +205,8 @@ dtlFields
   = lens _dtlFields (\ s a -> s{_dtlFields = a})
 
 instance GoogleAuth DiskTypesList' where
-        authKey = dtlKey . _Just
-        authToken = dtlOAuthToken . _Just
+        _AuthKey = dtlKey . _Just
+        _AuthToken = dtlOAuthToken . _Just
 
 instance GoogleRequest DiskTypesList' where
         type Rs DiskTypesList' = DiskTypeList

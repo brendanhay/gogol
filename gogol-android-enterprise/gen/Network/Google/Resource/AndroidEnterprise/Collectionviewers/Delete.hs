@@ -176,8 +176,8 @@ cddFields
   = lens _cddFields (\ s a -> s{_cddFields = a})
 
 instance GoogleAuth CollectionviewersDelete' where
-        authKey = cddKey . _Just
-        authToken = cddOAuthToken . _Just
+        _AuthKey = cddKey . _Just
+        _AuthToken = cddOAuthToken . _Just
 
 instance GoogleRequest CollectionviewersDelete' where
         type Rs CollectionviewersDelete' = ()

@@ -157,8 +157,8 @@ cuuFields
   = lens _cuuFields (\ s a -> s{_cuuFields = a})
 
 instance GoogleAuth CreativesUpdate' where
-        authKey = cuuKey . _Just
-        authToken = cuuOAuthToken . _Just
+        _AuthKey = cuuKey . _Just
+        _AuthToken = cuuOAuthToken . _Just
 
 instance GoogleRequest CreativesUpdate' where
         type Rs CreativesUpdate' = Creative

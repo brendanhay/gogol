@@ -156,8 +156,8 @@ evFields :: Lens' EditsValidate' (Maybe Text)
 evFields = lens _evFields (\ s a -> s{_evFields = a})
 
 instance GoogleAuth EditsValidate' where
-        authKey = evKey . _Just
-        authToken = evOAuthToken . _Just
+        _AuthKey = evKey . _Just
+        _AuthToken = evOAuthToken . _Just
 
 instance GoogleRequest EditsValidate' where
         type Rs EditsValidate' = AppEdit

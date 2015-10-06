@@ -182,8 +182,8 @@ issInstance
   = lens _issInstance (\ s a -> s{_issInstance = a})
 
 instance GoogleAuth InstancesSetScheduling' where
-        authKey = issKey . _Just
-        authToken = issOAuthToken . _Just
+        _AuthKey = issKey . _Just
+        _AuthToken = issOAuthToken . _Just
 
 instance GoogleRequest InstancesSetScheduling' where
         type Rs InstancesSetScheduling' = Operation

@@ -215,8 +215,8 @@ pslCallback
   = lens _pslCallback (\ s a -> s{_pslCallback = a})
 
 instance GoogleAuth ProjectsSinksList' where
-        authKey = pslKey . _Just
-        authToken = pslOAuthToken . _Just
+        _AuthKey = pslKey . _Just
+        _AuthToken = pslOAuthToken . _Just
 
 instance GoogleRequest ProjectsSinksList' where
         type Rs ProjectsSinksList' = ListSinksResponse

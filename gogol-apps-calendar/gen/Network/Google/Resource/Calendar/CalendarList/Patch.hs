@@ -179,8 +179,8 @@ clpFields
   = lens _clpFields (\ s a -> s{_clpFields = a})
 
 instance GoogleAuth CalendarListPatch' where
-        authKey = clpKey . _Just
-        authToken = clpOAuthToken . _Just
+        _AuthKey = clpKey . _Just
+        _AuthToken = clpOAuthToken . _Just
 
 instance GoogleRequest CalendarListPatch' where
         type Rs CalendarListPatch' = CalendarListEntry

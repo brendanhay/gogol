@@ -156,8 +156,8 @@ aiFields :: Lens' ACLInsert' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
 instance GoogleAuth ACLInsert' where
-        authKey = aiKey . _Just
-        authToken = aiOAuthToken . _Just
+        _AuthKey = aiKey . _Just
+        _AuthToken = aiOAuthToken . _Just
 
 instance GoogleRequest ACLInsert' where
         type Rs ACLInsert' = ACLRule

@@ -305,8 +305,8 @@ aolCallback
   = lens _aolCallback (\ s a -> s{_aolCallback = a})
 
 instance GoogleAuth AccountsOrdersList' where
-        authKey = aolKey . _Just
-        authToken = aolOAuthToken . _Just
+        _AuthKey = aolKey . _Just
+        _AuthToken = aolOAuthToken . _Just
 
 instance GoogleRequest AccountsOrdersList' where
         type Rs AccountsOrdersList' = ListOrdersResponse

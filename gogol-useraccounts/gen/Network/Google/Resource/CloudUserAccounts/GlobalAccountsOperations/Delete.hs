@@ -160,8 +160,8 @@ gaodFields
 
 instance GoogleAuth GlobalAccountsOperationsDelete'
          where
-        authKey = gaodKey . _Just
-        authToken = gaodOAuthToken . _Just
+        _AuthKey = gaodKey . _Just
+        _AuthToken = gaodOAuthToken . _Just
 
 instance GoogleRequest
          GlobalAccountsOperationsDelete' where

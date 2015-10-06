@@ -145,8 +145,8 @@ parFields
   = lens _parFields (\ s a -> s{_parFields = a})
 
 instance GoogleAuth ParentsList' where
-        authKey = parKey . _Just
-        authToken = parOAuthToken . _Just
+        _AuthKey = parKey . _Just
+        _AuthToken = parOAuthToken . _Just
 
 instance GoogleRequest ParentsList' where
         type Rs ParentsList' = ParentList

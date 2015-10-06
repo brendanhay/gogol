@@ -189,8 +189,8 @@ igmriFields
 
 instance GoogleAuth
          InstanceGroupManagersRecreateInstances' where
-        authKey = igmriKey . _Just
-        authToken = igmriOAuthToken . _Just
+        _AuthKey = igmriKey . _Just
+        _AuthToken = igmriOAuthToken . _Just
 
 instance GoogleRequest
          InstanceGroupManagersRecreateInstances' where

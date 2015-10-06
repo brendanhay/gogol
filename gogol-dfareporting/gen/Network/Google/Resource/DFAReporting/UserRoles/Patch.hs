@@ -168,8 +168,8 @@ urpFields
   = lens _urpFields (\ s a -> s{_urpFields = a})
 
 instance GoogleAuth UserRolesPatch' where
-        authKey = urpKey . _Just
-        authToken = urpOAuthToken . _Just
+        _AuthKey = urpKey . _Just
+        _AuthToken = urpOAuthToken . _Just
 
 instance GoogleRequest UserRolesPatch' where
         type Rs UserRolesPatch' = UserRole

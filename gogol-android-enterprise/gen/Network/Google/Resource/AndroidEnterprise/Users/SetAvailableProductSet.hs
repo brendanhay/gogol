@@ -174,8 +174,8 @@ usapsFields
 
 instance GoogleAuth UsersSetAvailableProductSet'
          where
-        authKey = usapsKey . _Just
-        authToken = usapsOAuthToken . _Just
+        _AuthKey = usapsKey . _Just
+        _AuthToken = usapsOAuthToken . _Just
 
 instance GoogleRequest UsersSetAvailableProductSet'
          where

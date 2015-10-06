@@ -168,8 +168,8 @@ alFields :: Lens' AudiencesList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 instance GoogleAuth AudiencesList' where
-        authKey = alKey . _Just
-        authToken = alOAuthToken . _Just
+        _AuthKey = alKey . _Just
+        _AuthToken = alOAuthToken . _Just
 
 instance GoogleRequest AudiencesList' where
         type Rs AudiencesList' = AudiencesFeed

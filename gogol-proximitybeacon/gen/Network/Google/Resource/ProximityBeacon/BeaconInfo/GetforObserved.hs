@@ -220,8 +220,8 @@ bigoCallback
   = lens _bigoCallback (\ s a -> s{_bigoCallback = a})
 
 instance GoogleAuth BeaconInfoGetforObserved' where
-        authKey = bigoKey . _Just
-        authToken = bigoOAuthToken . _Just
+        _AuthKey = bigoKey . _Just
+        _AuthToken = bigoOAuthToken . _Just
 
 instance GoogleRequest BeaconInfoGetforObserved'
          where

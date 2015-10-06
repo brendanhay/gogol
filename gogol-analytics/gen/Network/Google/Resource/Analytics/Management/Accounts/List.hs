@@ -158,8 +158,8 @@ malFields
   = lens _malFields (\ s a -> s{_malFields = a})
 
 instance GoogleAuth ManagementAccountsList' where
-        authKey = malKey . _Just
-        authToken = malOAuthToken . _Just
+        _AuthKey = malKey . _Just
+        _AuthToken = malOAuthToken . _Just
 
 instance GoogleRequest ManagementAccountsList' where
         type Rs ManagementAccountsList' = Accounts

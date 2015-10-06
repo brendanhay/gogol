@@ -151,8 +151,8 @@ aiFields :: Lens' ArchiveInsert' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
 instance GoogleAuth ArchiveInsert' where
-        authKey = aiKey . _Just
-        authToken = aiOAuthToken . _Just
+        _AuthKey = aiKey . _Just
+        _AuthToken = aiOAuthToken . _Just
 
 instance GoogleRequest ArchiveInsert' where
         type Rs ArchiveInsert' = Groups

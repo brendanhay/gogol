@@ -231,8 +231,8 @@ pspCallback
   = lens _pspCallback (\ s a -> s{_pspCallback = a})
 
 instance GoogleAuth ProjectsSubscriptionsPull' where
-        authKey = pspKey . _Just
-        authToken = pspOAuthToken . _Just
+        _AuthKey = pspKey . _Just
+        _AuthToken = pspOAuthToken . _Just
 
 instance GoogleRequest ProjectsSubscriptionsPull'
          where

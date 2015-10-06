@@ -153,8 +153,8 @@ gpFields :: Lens' GroupsPatch' (Maybe Text)
 gpFields = lens _gpFields (\ s a -> s{_gpFields = a})
 
 instance GoogleAuth GroupsPatch' where
-        authKey = gpKey . _Just
-        authToken = gpOAuthToken . _Just
+        _AuthKey = gpKey . _Just
+        _AuthToken = gpOAuthToken . _Just
 
 instance GoogleRequest GroupsPatch' where
         type Rs GroupsPatch' = Groups

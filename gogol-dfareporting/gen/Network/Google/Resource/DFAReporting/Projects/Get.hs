@@ -156,8 +156,8 @@ proFields
   = lens _proFields (\ s a -> s{_proFields = a})
 
 instance GoogleAuth ProjectsGet' where
-        authKey = proKey . _Just
-        authToken = proOAuthToken . _Just
+        _AuthKey = proKey . _Just
+        _AuthToken = proOAuthToken . _Just
 
 instance GoogleRequest ProjectsGet' where
         type Rs ProjectsGet' = Project

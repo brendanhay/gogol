@@ -225,8 +225,8 @@ epFields :: Lens' EventsPatch' (Maybe Text)
 epFields = lens _epFields (\ s a -> s{_epFields = a})
 
 instance GoogleAuth EventsPatch' where
-        authKey = epKey . _Just
-        authToken = epOAuthToken . _Just
+        _AuthKey = epKey . _Just
+        _AuthToken = epOAuthToken . _Just
 
 instance GoogleRequest EventsPatch' where
         type Rs EventsPatch' = Event

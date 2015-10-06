@@ -156,8 +156,8 @@ ulInstance
   = lens _ulInstance (\ s a -> s{_ulInstance = a})
 
 instance GoogleAuth UsersList' where
-        authKey = ulKey . _Just
-        authToken = ulOAuthToken . _Just
+        _AuthKey = ulKey . _Just
+        _AuthToken = ulOAuthToken . _Just
 
 instance GoogleRequest UsersList' where
         type Rs UsersList' = UsersListResponse

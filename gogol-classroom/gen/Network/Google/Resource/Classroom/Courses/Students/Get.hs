@@ -238,8 +238,8 @@ csgCallback
   = lens _csgCallback (\ s a -> s{_csgCallback = a})
 
 instance GoogleAuth CoursesStudentsGet' where
-        authKey = csgKey . _Just
-        authToken = csgOAuthToken . _Just
+        _AuthKey = csgKey . _Just
+        _AuthToken = csgOAuthToken . _Just
 
 instance GoogleRequest CoursesStudentsGet' where
         type Rs CoursesStudentsGet' = Student

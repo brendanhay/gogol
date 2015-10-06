@@ -166,8 +166,8 @@ caFields :: Lens' CommentsApprove' (Maybe Text)
 caFields = lens _caFields (\ s a -> s{_caFields = a})
 
 instance GoogleAuth CommentsApprove' where
-        authKey = caKey . _Just
-        authToken = caOAuthToken . _Just
+        _AuthKey = caKey . _Just
+        _AuthToken = caOAuthToken . _Just
 
 instance GoogleRequest CommentsApprove' where
         type Rs CommentsApprove' = Comment

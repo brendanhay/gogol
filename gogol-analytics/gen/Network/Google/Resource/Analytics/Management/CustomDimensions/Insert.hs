@@ -176,8 +176,8 @@ mcdiFields
 
 instance GoogleAuth ManagementCustomDimensionsInsert'
          where
-        authKey = mcdiKey . _Just
-        authToken = mcdiOAuthToken . _Just
+        _AuthKey = mcdiKey . _Just
+        _AuthToken = mcdiOAuthToken . _Just
 
 instance GoogleRequest
          ManagementCustomDimensionsInsert' where

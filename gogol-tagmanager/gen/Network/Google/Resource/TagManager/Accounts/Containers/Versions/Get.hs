@@ -177,8 +177,8 @@ acvgcFields
 
 instance GoogleAuth AccountsContainersVersionsGet'
          where
-        authKey = acvgcKey . _Just
-        authToken = acvgcOAuthToken . _Just
+        _AuthKey = acvgcKey . _Just
+        _AuthToken = acvgcOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersVersionsGet'
          where

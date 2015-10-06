@@ -222,8 +222,8 @@ psdCallback
 
 instance GoogleAuth ProjectsSubscriptionsDelete'
          where
-        authKey = psdKey . _Just
-        authToken = psdOAuthToken . _Just
+        _AuthKey = psdKey . _Just
+        _AuthToken = psdOAuthToken . _Just
 
 instance GoogleRequest ProjectsSubscriptionsDelete'
          where

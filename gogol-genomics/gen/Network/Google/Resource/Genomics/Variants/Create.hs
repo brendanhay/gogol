@@ -144,8 +144,8 @@ varFields
   = lens _varFields (\ s a -> s{_varFields = a})
 
 instance GoogleAuth VariantsCreate' where
-        authKey = varKey . _Just
-        authToken = varOAuthToken . _Just
+        _AuthKey = varKey . _Just
+        _AuthToken = varOAuthToken . _Just
 
 instance GoogleRequest VariantsCreate' where
         type Rs VariantsCreate' = Variant

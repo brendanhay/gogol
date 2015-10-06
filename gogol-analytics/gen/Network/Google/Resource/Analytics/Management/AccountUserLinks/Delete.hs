@@ -161,8 +161,8 @@ mauldFields
 
 instance GoogleAuth ManagementAccountUserLinksDelete'
          where
-        authKey = mauldKey . _Just
-        authToken = mauldOAuthToken . _Just
+        _AuthKey = mauldKey . _Just
+        _AuthToken = mauldOAuthToken . _Just
 
 instance GoogleRequest
          ManagementAccountUserLinksDelete' where

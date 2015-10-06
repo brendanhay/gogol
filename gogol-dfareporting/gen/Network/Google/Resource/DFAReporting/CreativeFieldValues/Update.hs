@@ -174,8 +174,8 @@ cfvuFields
   = lens _cfvuFields (\ s a -> s{_cfvuFields = a})
 
 instance GoogleAuth CreativeFieldValuesUpdate' where
-        authKey = cfvuKey . _Just
-        authToken = cfvuOAuthToken . _Just
+        _AuthKey = cfvuKey . _Just
+        _AuthToken = cfvuOAuthToken . _Just
 
 instance GoogleRequest CreativeFieldValuesUpdate'
          where

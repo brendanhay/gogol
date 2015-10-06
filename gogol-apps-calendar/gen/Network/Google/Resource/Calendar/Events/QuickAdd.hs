@@ -173,8 +173,8 @@ eqaFields
   = lens _eqaFields (\ s a -> s{_eqaFields = a})
 
 instance GoogleAuth EventsQuickAdd' where
-        authKey = eqaKey . _Just
-        authToken = eqaOAuthToken . _Just
+        _AuthKey = eqaKey . _Just
+        _AuthToken = eqaOAuthToken . _Just
 
 instance GoogleRequest EventsQuickAdd' where
         type Rs EventsQuickAdd' = Event

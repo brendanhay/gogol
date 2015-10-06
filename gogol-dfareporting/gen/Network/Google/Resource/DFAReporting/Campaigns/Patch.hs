@@ -165,8 +165,8 @@ cpFields :: Lens' CampaignsPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 instance GoogleAuth CampaignsPatch' where
-        authKey = cpKey . _Just
-        authToken = cpOAuthToken . _Just
+        _AuthKey = cpKey . _Just
+        _AuthToken = cpOAuthToken . _Just
 
 instance GoogleRequest CampaignsPatch' where
         type Rs CampaignsPatch' = Campaign

@@ -146,8 +146,8 @@ tldFields
   = lens _tldFields (\ s a -> s{_tldFields = a})
 
 instance GoogleAuth TaskListsDelete' where
-        authKey = tldKey . _Just
-        authToken = tldOAuthToken . _Just
+        _AuthKey = tldKey . _Just
+        _AuthToken = tldOAuthToken . _Just
 
 instance GoogleRequest TaskListsDelete' where
         type Rs TaskListsDelete' = ()

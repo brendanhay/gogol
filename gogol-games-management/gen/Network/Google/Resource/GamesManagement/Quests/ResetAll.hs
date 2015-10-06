@@ -137,8 +137,8 @@ qraFields
   = lens _qraFields (\ s a -> s{_qraFields = a})
 
 instance GoogleAuth QuestsResetAll' where
-        authKey = qraKey . _Just
-        authToken = qraOAuthToken . _Just
+        _AuthKey = qraKey . _Just
+        _AuthToken = qraOAuthToken . _Just
 
 instance GoogleRequest QuestsResetAll' where
         type Rs QuestsResetAll' = ()

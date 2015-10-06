@@ -141,8 +141,8 @@ cgFields :: Lens' CallsetsGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 instance GoogleAuth CallsetsGet' where
-        authKey = cgKey . _Just
-        authToken = cgOAuthToken . _Just
+        _AuthKey = cgKey . _Just
+        _AuthToken = cgOAuthToken . _Just
 
 instance GoogleRequest CallsetsGet' where
         type Rs CallsetsGet' = CallSet

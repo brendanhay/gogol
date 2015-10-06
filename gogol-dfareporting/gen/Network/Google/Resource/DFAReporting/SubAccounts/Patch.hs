@@ -169,8 +169,8 @@ sapFields
   = lens _sapFields (\ s a -> s{_sapFields = a})
 
 instance GoogleAuth SubAccountsPatch' where
-        authKey = sapKey . _Just
-        authToken = sapOAuthToken . _Just
+        _AuthKey = sapKey . _Just
+        _AuthToken = sapOAuthToken . _Just
 
 instance GoogleRequest SubAccountsPatch' where
         type Rs SubAccountsPatch' = SubAccount

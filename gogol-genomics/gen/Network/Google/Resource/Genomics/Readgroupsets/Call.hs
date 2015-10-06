@@ -147,8 +147,8 @@ rcFields :: Lens' ReadgroupsetsCall' (Maybe Text)
 rcFields = lens _rcFields (\ s a -> s{_rcFields = a})
 
 instance GoogleAuth ReadgroupsetsCall' where
-        authKey = rcKey . _Just
-        authToken = rcOAuthToken . _Just
+        _AuthKey = rcKey . _Just
+        _AuthToken = rcOAuthToken . _Just
 
 instance GoogleRequest ReadgroupsetsCall' where
         type Rs ReadgroupsetsCall' =

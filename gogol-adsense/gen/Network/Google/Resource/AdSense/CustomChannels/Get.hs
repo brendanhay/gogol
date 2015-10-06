@@ -159,8 +159,8 @@ ccgFields
   = lens _ccgFields (\ s a -> s{_ccgFields = a})
 
 instance GoogleAuth CustomChannelsGet' where
-        authKey = ccgKey . _Just
-        authToken = ccgOAuthToken . _Just
+        _AuthKey = ccgKey . _Just
+        _AuthToken = ccgOAuthToken . _Just
 
 instance GoogleRequest CustomChannelsGet' where
         type Rs CustomChannelsGet' = CustomChannel

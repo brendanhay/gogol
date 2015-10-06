@@ -198,8 +198,8 @@ ipFields :: Lens' InstallsPatch' (Maybe Text)
 ipFields = lens _ipFields (\ s a -> s{_ipFields = a})
 
 instance GoogleAuth InstallsPatch' where
-        authKey = ipKey . _Just
-        authToken = ipOAuthToken . _Just
+        _AuthKey = ipKey . _Just
+        _AuthToken = ipOAuthToken . _Just
 
 instance GoogleRequest InstallsPatch' where
         type Rs InstallsPatch' = Install

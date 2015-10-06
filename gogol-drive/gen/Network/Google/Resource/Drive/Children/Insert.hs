@@ -158,8 +158,8 @@ chiFields
   = lens _chiFields (\ s a -> s{_chiFields = a})
 
 instance GoogleAuth ChildrenInsert' where
-        authKey = chiKey . _Just
-        authToken = chiOAuthToken . _Just
+        _AuthKey = chiKey . _Just
+        _AuthToken = chiOAuthToken . _Just
 
 instance GoogleRequest ChildrenInsert' where
         type Rs ChildrenInsert' = ChildReference

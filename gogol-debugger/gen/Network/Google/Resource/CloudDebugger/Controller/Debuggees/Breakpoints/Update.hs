@@ -257,8 +257,8 @@ cdbuCallback
 
 instance GoogleAuth
          ControllerDebuggeesBreakpointsUpdate' where
-        authKey = cdbuKey . _Just
-        authToken = cdbuOAuthToken . _Just
+        _AuthKey = cdbuKey . _Just
+        _AuthToken = cdbuOAuthToken . _Just
 
 instance GoogleRequest
          ControllerDebuggeesBreakpointsUpdate' where

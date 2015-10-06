@@ -158,8 +158,8 @@ tadFields
   = lens _tadFields (\ s a -> s{_tadFields = a})
 
 instance GoogleAuth TimelineAttachmentsDelete' where
-        authKey = tadKey . _Just
-        authToken = tadOAuthToken . _Just
+        _AuthKey = tadKey . _Just
+        _AuthToken = tadOAuthToken . _Just
 
 instance GoogleRequest TimelineAttachmentsDelete'
          where

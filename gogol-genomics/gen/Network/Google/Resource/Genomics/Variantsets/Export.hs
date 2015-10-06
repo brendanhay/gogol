@@ -158,8 +158,8 @@ veFields :: Lens' VariantsetsExport' (Maybe Text)
 veFields = lens _veFields (\ s a -> s{_veFields = a})
 
 instance GoogleAuth VariantsetsExport' where
-        authKey = veKey . _Just
-        authToken = veOAuthToken . _Just
+        _AuthKey = veKey . _Just
+        _AuthToken = veOAuthToken . _Just
 
 instance GoogleRequest VariantsetsExport' where
         type Rs VariantsetsExport' = ExportVariantSetResponse

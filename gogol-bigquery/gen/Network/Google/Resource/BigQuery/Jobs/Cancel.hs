@@ -159,8 +159,8 @@ jcFields :: Lens' JobsCancel' (Maybe Text)
 jcFields = lens _jcFields (\ s a -> s{_jcFields = a})
 
 instance GoogleAuth JobsCancel' where
-        authKey = jcKey . _Just
-        authToken = jcOAuthToken . _Just
+        _AuthKey = jcKey . _Just
+        _AuthToken = jcOAuthToken . _Just
 
 instance GoogleRequest JobsCancel' where
         type Rs JobsCancel' = JobCancelResponse

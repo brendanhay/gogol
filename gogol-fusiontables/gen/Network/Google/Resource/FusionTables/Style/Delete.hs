@@ -154,8 +154,8 @@ sdFields :: Lens' StyleDelete' (Maybe Text)
 sdFields = lens _sdFields (\ s a -> s{_sdFields = a})
 
 instance GoogleAuth StyleDelete' where
-        authKey = sdKey . _Just
-        authToken = sdOAuthToken . _Just
+        _AuthKey = sdKey . _Just
+        _AuthToken = sdOAuthToken . _Just
 
 instance GoogleRequest StyleDelete' where
         type Rs StyleDelete' = ()

@@ -201,8 +201,8 @@ oacpFields
   = lens _oacpFields (\ s a -> s{_oacpFields = a})
 
 instance GoogleAuth ObjectAccessControlsPatch' where
-        authKey = oacpKey . _Just
-        authToken = oacpOAuthToken . _Just
+        _AuthKey = oacpKey . _Just
+        _AuthToken = oacpOAuthToken . _Just
 
 instance GoogleRequest ObjectAccessControlsPatch'
          where

@@ -270,8 +270,8 @@ rqFields :: Lens' ReportsQuery' (Maybe Text)
 rqFields = lens _rqFields (\ s a -> s{_rqFields = a})
 
 instance GoogleAuth ReportsQuery' where
-        authKey = rqKey . _Just
-        authToken = rqOAuthToken . _Just
+        _AuthKey = rqKey . _Just
+        _AuthToken = rqOAuthToken . _Just
 
 instance GoogleRequest ReportsQuery' where
         type Rs ReportsQuery' = ResultTable

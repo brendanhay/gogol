@@ -171,8 +171,8 @@ pspFields
   = lens _pspFields (\ s a -> s{_pspFields = a})
 
 instance GoogleAuth PlacementStrategiesPatch' where
-        authKey = pspKey . _Just
-        authToken = pspOAuthToken . _Just
+        _AuthKey = pspKey . _Just
+        _AuthToken = pspOAuthToken . _Just
 
 instance GoogleRequest PlacementStrategiesPatch'
          where

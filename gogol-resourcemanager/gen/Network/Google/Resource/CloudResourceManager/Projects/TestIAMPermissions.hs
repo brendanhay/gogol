@@ -232,8 +232,8 @@ ptipCallback
   = lens _ptipCallback (\ s a -> s{_ptipCallback = a})
 
 instance GoogleAuth ProjectsTestIAMPermissions' where
-        authKey = ptipKey . _Just
-        authToken = ptipOAuthToken . _Just
+        _AuthKey = ptipKey . _Just
+        _AuthToken = ptipOAuthToken . _Just
 
 instance GoogleRequest ProjectsTestIAMPermissions'
          where

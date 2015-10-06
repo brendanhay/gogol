@@ -145,8 +145,8 @@ lupFields
   = lens _lupFields (\ s a -> s{_lupFields = a})
 
 instance GoogleAuth LayersUnPublish' where
-        authKey = lupKey . _Just
-        authToken = lupOAuthToken . _Just
+        _AuthKey = lupKey . _Just
+        _AuthToken = lupOAuthToken . _Just
 
 instance GoogleRequest LayersUnPublish' where
         type Rs LayersUnPublish' = PublishResponse

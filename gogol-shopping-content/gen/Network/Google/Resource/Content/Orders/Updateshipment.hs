@@ -167,8 +167,8 @@ ouFields :: Lens' OrdersUpdateshipment' (Maybe Text)
 ouFields = lens _ouFields (\ s a -> s{_ouFields = a})
 
 instance GoogleAuth OrdersUpdateshipment' where
-        authKey = ouKey . _Just
-        authToken = ouOAuthToken . _Just
+        _AuthKey = ouKey . _Just
+        _AuthToken = ouOAuthToken . _Just
 
 instance GoogleRequest OrdersUpdateshipment' where
         type Rs OrdersUpdateshipment' =

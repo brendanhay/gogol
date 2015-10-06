@@ -173,8 +173,8 @@ oaclFields
   = lens _oaclFields (\ s a -> s{_oaclFields = a})
 
 instance GoogleAuth ObjectAccessControlsList' where
-        authKey = oaclKey . _Just
-        authToken = oaclOAuthToken . _Just
+        _AuthKey = oaclKey . _Just
+        _AuthToken = oaclOAuthToken . _Just
 
 instance GoogleRequest ObjectAccessControlsList'
          where

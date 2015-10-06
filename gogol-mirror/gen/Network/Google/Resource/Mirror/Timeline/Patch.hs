@@ -153,8 +153,8 @@ tpFields :: Lens' TimelinePatch' (Maybe Text)
 tpFields = lens _tpFields (\ s a -> s{_tpFields = a})
 
 instance GoogleAuth TimelinePatch' where
-        authKey = tpKey . _Just
-        authToken = tpOAuthToken . _Just
+        _AuthKey = tpKey . _Just
+        _AuthToken = tpOAuthToken . _Just
 
 instance GoogleRequest TimelinePatch' where
         type Rs TimelinePatch' = TimelineItem

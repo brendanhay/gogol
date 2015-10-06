@@ -161,8 +161,8 @@ oaoFields
   = lens _oaoFields (\ s a -> s{_oaoFields = a})
 
 instance GoogleAuth OrdersAdvancetestOrder' where
-        authKey = oaoKey . _Just
-        authToken = oaoOAuthToken . _Just
+        _AuthKey = oaoKey . _Just
+        _AuthToken = oaoOAuthToken . _Just
 
 instance GoogleRequest OrdersAdvancetestOrder' where
         type Rs OrdersAdvancetestOrder' =

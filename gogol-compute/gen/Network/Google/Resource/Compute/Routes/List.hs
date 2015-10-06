@@ -188,8 +188,8 @@ rlFields :: Lens' RoutesList' (Maybe Text)
 rlFields = lens _rlFields (\ s a -> s{_rlFields = a})
 
 instance GoogleAuth RoutesList' where
-        authKey = rlKey . _Just
-        authToken = rlOAuthToken . _Just
+        _AuthKey = rlKey . _Just
+        _AuthToken = rlOAuthToken . _Just
 
 instance GoogleRequest RoutesList' where
         type Rs RoutesList' = RouteList

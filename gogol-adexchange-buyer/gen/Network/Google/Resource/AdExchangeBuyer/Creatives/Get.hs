@@ -156,8 +156,8 @@ cgFields :: Lens' CreativesGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 instance GoogleAuth CreativesGet' where
-        authKey = cgKey . _Just
-        authToken = cgOAuthToken . _Just
+        _AuthKey = cgKey . _Just
+        _AuthToken = cgOAuthToken . _Just
 
 instance GoogleRequest CreativesGet' where
         type Rs CreativesGet' = Creative

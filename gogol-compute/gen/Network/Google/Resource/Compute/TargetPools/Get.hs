@@ -170,8 +170,8 @@ tpgFields
   = lens _tpgFields (\ s a -> s{_tpgFields = a})
 
 instance GoogleAuth TargetPoolsGet' where
-        authKey = tpgKey . _Just
-        authToken = tpgOAuthToken . _Just
+        _AuthKey = tpgKey . _Just
+        _AuthToken = tpgOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsGet' where
         type Rs TargetPoolsGet' = TargetPool

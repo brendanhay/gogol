@@ -166,8 +166,8 @@ pFields :: Lens' ProductsGet' (Maybe Text)
 pFields = lens _pFields (\ s a -> s{_pFields = a})
 
 instance GoogleAuth ProductsGet' where
-        authKey = pKey . _Just
-        authToken = pOAuthToken . _Just
+        _AuthKey = pKey . _Just
+        _AuthToken = pOAuthToken . _Just
 
 instance GoogleRequest ProductsGet' where
         type Rs ProductsGet' = Product

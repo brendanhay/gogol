@@ -275,8 +275,8 @@ faglFields
 
 instance GoogleAuth FloodlightActivityGroupsList'
          where
-        authKey = faglKey . _Just
-        authToken = faglOAuthToken . _Just
+        _AuthKey = faglKey . _Just
+        _AuthToken = faglOAuthToken . _Just
 
 instance GoogleRequest FloodlightActivityGroupsList'
          where

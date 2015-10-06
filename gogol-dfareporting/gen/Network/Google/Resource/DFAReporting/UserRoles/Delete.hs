@@ -156,8 +156,8 @@ urdFields
   = lens _urdFields (\ s a -> s{_urdFields = a})
 
 instance GoogleAuth UserRolesDelete' where
-        authKey = urdKey . _Just
-        authToken = urdOAuthToken . _Just
+        _AuthKey = urdKey . _Just
+        _AuthToken = urdOAuthToken . _Just
 
 instance GoogleRequest UserRolesDelete' where
         type Rs UserRolesDelete' = ()

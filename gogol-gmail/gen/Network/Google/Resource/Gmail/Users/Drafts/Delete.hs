@@ -158,8 +158,8 @@ uddFields
   = lens _uddFields (\ s a -> s{_uddFields = a})
 
 instance GoogleAuth UsersDraftsDelete' where
-        authKey = uddKey . _Just
-        authToken = uddOAuthToken . _Just
+        _AuthKey = uddKey . _Just
+        _AuthToken = uddOAuthToken . _Just
 
 instance GoogleRequest UsersDraftsDelete' where
         type Rs UsersDraftsDelete' = ()

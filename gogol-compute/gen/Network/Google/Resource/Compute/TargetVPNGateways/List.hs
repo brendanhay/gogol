@@ -208,8 +208,8 @@ tvglFields
   = lens _tvglFields (\ s a -> s{_tvglFields = a})
 
 instance GoogleAuth TargetVPNGatewaysList' where
-        authKey = tvglKey . _Just
-        authToken = tvglOAuthToken . _Just
+        _AuthKey = tvglKey . _Just
+        _AuthToken = tvglOAuthToken . _Just
 
 instance GoogleRequest TargetVPNGatewaysList' where
         type Rs TargetVPNGatewaysList' = TargetVPNGatewayList

@@ -456,8 +456,8 @@ sCallback
   = lens _sCallback (\ s a -> s{_sCallback = a})
 
 instance GoogleAuth Search' where
-        authKey = sKey . _Just
-        authToken = sOAuthToken . _Just
+        _AuthKey = sKey . _Just
+        _AuthToken = sOAuthToken . _Just
 
 instance GoogleRequest Search' where
         type Rs Search' = ()

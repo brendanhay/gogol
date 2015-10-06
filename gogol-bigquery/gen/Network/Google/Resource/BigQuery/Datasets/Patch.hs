@@ -172,8 +172,8 @@ dpFields :: Lens' DatasetsPatch' (Maybe Text)
 dpFields = lens _dpFields (\ s a -> s{_dpFields = a})
 
 instance GoogleAuth DatasetsPatch' where
-        authKey = dpKey . _Just
-        authToken = dpOAuthToken . _Just
+        _AuthKey = dpKey . _Just
+        _AuthToken = dpOAuthToken . _Just
 
 instance GoogleRequest DatasetsPatch' where
         type Rs DatasetsPatch' = Dataset

@@ -161,8 +161,8 @@ edgFields
   = lens _edgFields (\ s a -> s{_edgFields = a})
 
 instance GoogleAuth EditsDetailsGet' where
-        authKey = edgKey . _Just
-        authToken = edgOAuthToken . _Just
+        _AuthKey = edgKey . _Just
+        _AuthToken = edgOAuthToken . _Just
 
 instance GoogleRequest EditsDetailsGet' where
         type Rs EditsDetailsGet' = AppDetails

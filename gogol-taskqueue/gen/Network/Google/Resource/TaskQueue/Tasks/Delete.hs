@@ -165,8 +165,8 @@ tdFields :: Lens' TasksDelete' (Maybe Text)
 tdFields = lens _tdFields (\ s a -> s{_tdFields = a})
 
 instance GoogleAuth TasksDelete' where
-        authKey = tdKey . _Just
-        authToken = tdOAuthToken . _Just
+        _AuthKey = tdKey . _Just
+        _AuthToken = tdOAuthToken . _Just
 
 instance GoogleRequest TasksDelete' where
         type Rs TasksDelete' = ()

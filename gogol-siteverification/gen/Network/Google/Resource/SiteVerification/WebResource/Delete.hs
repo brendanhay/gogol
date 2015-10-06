@@ -143,8 +143,8 @@ wrdFields
   = lens _wrdFields (\ s a -> s{_wrdFields = a})
 
 instance GoogleAuth WebResourceDelete' where
-        authKey = wrdKey . _Just
-        authToken = wrdOAuthToken . _Just
+        _AuthKey = wrdKey . _Just
+        _AuthToken = wrdOAuthToken . _Just
 
 instance GoogleRequest WebResourceDelete' where
         type Rs WebResourceDelete' = ()

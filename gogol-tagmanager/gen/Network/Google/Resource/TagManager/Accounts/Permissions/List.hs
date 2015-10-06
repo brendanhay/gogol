@@ -148,8 +148,8 @@ aplFields
   = lens _aplFields (\ s a -> s{_aplFields = a})
 
 instance GoogleAuth AccountsPermissionsList' where
-        authKey = aplKey . _Just
-        authToken = aplOAuthToken . _Just
+        _AuthKey = aplKey . _Just
+        _AuthToken = aplOAuthToken . _Just
 
 instance GoogleRequest AccountsPermissionsList' where
         type Rs AccountsPermissionsList' =

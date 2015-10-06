@@ -208,8 +208,8 @@ mpfullFields
 
 instance GoogleAuth ManagementProFileUserLinksList'
          where
-        authKey = mpfullKey . _Just
-        authToken = mpfullOAuthToken . _Just
+        _AuthKey = mpfullKey . _Just
+        _AuthToken = mpfullOAuthToken . _Just
 
 instance GoogleRequest
          ManagementProFileUserLinksList' where

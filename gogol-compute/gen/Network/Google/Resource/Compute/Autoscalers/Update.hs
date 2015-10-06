@@ -178,8 +178,8 @@ auFields :: Lens' AutoscalersUpdate' (Maybe Text)
 auFields = lens _auFields (\ s a -> s{_auFields = a})
 
 instance GoogleAuth AutoscalersUpdate' where
-        authKey = auKey . _Just
-        authToken = auOAuthToken . _Just
+        _AuthKey = auKey . _Just
+        _AuthToken = auOAuthToken . _Just
 
 instance GoogleRequest AutoscalersUpdate' where
         type Rs AutoscalersUpdate' = Operation

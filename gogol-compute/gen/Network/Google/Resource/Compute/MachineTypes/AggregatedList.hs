@@ -194,8 +194,8 @@ mtalFields
   = lens _mtalFields (\ s a -> s{_mtalFields = a})
 
 instance GoogleAuth MachineTypesAggregatedList' where
-        authKey = mtalKey . _Just
-        authToken = mtalOAuthToken . _Just
+        _AuthKey = mtalKey . _Just
+        _AuthToken = mtalOAuthToken . _Just
 
 instance GoogleRequest MachineTypesAggregatedList'
          where

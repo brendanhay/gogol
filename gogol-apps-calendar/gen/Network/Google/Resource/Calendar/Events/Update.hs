@@ -225,8 +225,8 @@ euFields :: Lens' EventsUpdate' (Maybe Text)
 euFields = lens _euFields (\ s a -> s{_euFields = a})
 
 instance GoogleAuth EventsUpdate' where
-        authKey = euKey . _Just
-        authToken = euOAuthToken . _Just
+        _AuthKey = euKey . _Just
+        _AuthToken = euOAuthToken . _Just
 
 instance GoogleRequest EventsUpdate' where
         type Rs EventsUpdate' = Event

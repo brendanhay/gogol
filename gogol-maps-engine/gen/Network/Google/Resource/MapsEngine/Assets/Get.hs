@@ -140,8 +140,8 @@ agFields :: Lens' AssetsGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 instance GoogleAuth AssetsGet' where
-        authKey = agKey . _Just
-        authToken = agOAuthToken . _Just
+        _AuthKey = agKey . _Just
+        _AuthToken = agOAuthToken . _Just
 
 instance GoogleRequest AssetsGet' where
         type Rs AssetsGet' = Asset

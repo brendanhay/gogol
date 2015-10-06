@@ -157,8 +157,8 @@ ccgFields
   = lens _ccgFields (\ s a -> s{_ccgFields = a})
 
 instance GoogleAuth ContentCategoriesGet' where
-        authKey = ccgKey . _Just
-        authToken = ccgOAuthToken . _Just
+        _AuthKey = ccgKey . _Just
+        _AuthToken = ccgOAuthToken . _Just
 
 instance GoogleRequest ContentCategoriesGet' where
         type Rs ContentCategoriesGet' = ContentCategory

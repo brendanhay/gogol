@@ -146,8 +146,8 @@ vcgFields
   = lens _vcgFields (\ s a -> s{_vcgFields = a})
 
 instance GoogleAuth VerificationCodesGenerate' where
-        authKey = vcgKey . _Just
-        authToken = vcgOAuthToken . _Just
+        _AuthKey = vcgKey . _Just
+        _AuthToken = vcgOAuthToken . _Just
 
 instance GoogleRequest VerificationCodesGenerate'
          where

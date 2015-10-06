@@ -146,8 +146,8 @@ aumFields
   = lens _aumFields (\ s a -> s{_aumFields = a})
 
 instance GoogleAuth AchievementsUpdateMultiple' where
-        authKey = aumKey . _Just
-        authToken = aumOAuthToken . _Just
+        _AuthKey = aumKey . _Just
+        _AuthToken = aumOAuthToken . _Just
 
 instance GoogleRequest AchievementsUpdateMultiple'
          where

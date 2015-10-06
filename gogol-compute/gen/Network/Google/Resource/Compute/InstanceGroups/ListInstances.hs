@@ -239,8 +239,8 @@ igliFields
 
 instance GoogleAuth InstanceGroupsListInstances'
          where
-        authKey = igliKey . _Just
-        authToken = igliOAuthToken . _Just
+        _AuthKey = igliKey . _Just
+        _AuthToken = igliOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupsListInstances'
          where

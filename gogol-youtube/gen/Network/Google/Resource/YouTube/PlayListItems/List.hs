@@ -242,8 +242,8 @@ plilFields
   = lens _plilFields (\ s a -> s{_plilFields = a})
 
 instance GoogleAuth PlayListItemsList' where
-        authKey = plilKey . _Just
-        authToken = plilOAuthToken . _Just
+        _AuthKey = plilKey . _Just
+        _AuthToken = plilOAuthToken . _Just
 
 instance GoogleRequest PlayListItemsList' where
         type Rs PlayListItemsList' = PlayListItemListResponse

@@ -154,8 +154,8 @@ uwFields :: Lens' UsersWatch' (Maybe Text)
 uwFields = lens _uwFields (\ s a -> s{_uwFields = a})
 
 instance GoogleAuth UsersWatch' where
-        authKey = uwKey . _Just
-        authToken = uwOAuthToken . _Just
+        _AuthKey = uwKey . _Just
+        _AuthToken = uwOAuthToken . _Just
 
 instance GoogleRequest UsersWatch' where
         type Rs UsersWatch' = WatchResponse

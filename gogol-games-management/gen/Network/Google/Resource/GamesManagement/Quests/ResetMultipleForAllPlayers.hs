@@ -154,8 +154,8 @@ qrmfapFields
 
 instance GoogleAuth QuestsResetMultipleForAllPlayers'
          where
-        authKey = qrmfapKey . _Just
-        authToken = qrmfapOAuthToken . _Just
+        _AuthKey = qrmfapKey . _Just
+        _AuthToken = qrmfapOAuthToken . _Just
 
 instance GoogleRequest
          QuestsResetMultipleForAllPlayers' where

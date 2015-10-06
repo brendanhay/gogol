@@ -201,8 +201,8 @@ acvucFields
 
 instance GoogleAuth AccountsContainersVersionsUpdate'
          where
-        authKey = acvucKey . _Just
-        authToken = acvucOAuthToken . _Just
+        _AuthKey = acvucKey . _Just
+        _AuthToken = acvucOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVersionsUpdate' where

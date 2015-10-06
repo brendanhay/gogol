@@ -154,8 +154,8 @@ suFields :: Lens' SitesUpdate' (Maybe Text)
 suFields = lens _suFields (\ s a -> s{_suFields = a})
 
 instance GoogleAuth SitesUpdate' where
-        authKey = suKey . _Just
-        authToken = suOAuthToken . _Just
+        _AuthKey = suKey . _Just
+        _AuthToken = suOAuthToken . _Just
 
 instance GoogleRequest SitesUpdate' where
         type Rs SitesUpdate' = Site

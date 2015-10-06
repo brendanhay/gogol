@@ -156,8 +156,8 @@ agdFields
   = lens _agdFields (\ s a -> s{_agdFields = a})
 
 instance GoogleAuth AdvertiserGroupsDelete' where
-        authKey = agdKey . _Just
-        authToken = agdOAuthToken . _Just
+        _AuthKey = agdKey . _Just
+        _AuthToken = agdOAuthToken . _Just
 
 instance GoogleRequest AdvertiserGroupsDelete' where
         type Rs AdvertiserGroupsDelete' = ()

@@ -376,8 +376,8 @@ cgCallback
   = lens _cgCallback (\ s a -> s{_cgCallback = a})
 
 instance GoogleAuth CompaniesGet' where
-        authKey = cgKey . _Just
-        authToken = cgOAuthToken . _Just
+        _AuthKey = cgKey . _Just
+        _AuthToken = cgOAuthToken . _Just
 
 instance GoogleRequest CompaniesGet' where
         type Rs CompaniesGet' = GetCompanyResponse

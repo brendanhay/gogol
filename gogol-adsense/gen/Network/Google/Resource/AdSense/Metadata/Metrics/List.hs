@@ -133,8 +133,8 @@ mmlFields
   = lens _mmlFields (\ s a -> s{_mmlFields = a})
 
 instance GoogleAuth MetadataMetricsList' where
-        authKey = mmlKey . _Just
-        authToken = mmlOAuthToken . _Just
+        _AuthKey = mmlKey . _Just
+        _AuthToken = mmlOAuthToken . _Just
 
 instance GoogleRequest MetadataMetricsList' where
         type Rs MetadataMetricsList' = Metadata

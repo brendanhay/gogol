@@ -132,8 +132,8 @@ apFields :: Lens' ApplicationsPlayed' (Maybe Text)
 apFields = lens _apFields (\ s a -> s{_apFields = a})
 
 instance GoogleAuth ApplicationsPlayed' where
-        authKey = apKey . _Just
-        authToken = apOAuthToken . _Just
+        _AuthKey = apKey . _Just
+        _AuthToken = apOAuthToken . _Just
 
 instance GoogleRequest ApplicationsPlayed' where
         type Rs ApplicationsPlayed' = ()

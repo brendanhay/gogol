@@ -164,8 +164,8 @@ aspFields
   = lens _aspFields (\ s a -> s{_aspFields = a})
 
 instance GoogleAuth AnnotationSetsPatch' where
-        authKey = aspKey . _Just
-        authToken = aspOAuthToken . _Just
+        _AuthKey = aspKey . _Just
+        _AuthToken = aspOAuthToken . _Just
 
 instance GoogleRequest AnnotationSetsPatch' where
         type Rs AnnotationSetsPatch' = AnnotationSet

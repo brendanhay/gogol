@@ -174,8 +174,8 @@ acfcFields
 
 instance GoogleAuth AccountsContainersFoldersCreate'
          where
-        authKey = acfcKey . _Just
-        authToken = acfcOAuthToken . _Just
+        _AuthKey = acfcKey . _Just
+        _AuthToken = acfcOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersFoldersCreate' where

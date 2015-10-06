@@ -185,8 +185,8 @@ mgiFields
   = lens _mgiFields (\ s a -> s{_mgiFields = a})
 
 instance GoogleAuth ManagementGoalsInsert' where
-        authKey = mgiKey . _Just
-        authToken = mgiOAuthToken . _Just
+        _AuthKey = mgiKey . _Just
+        _AuthToken = mgiOAuthToken . _Just
 
 instance GoogleRequest ManagementGoalsInsert' where
         type Rs ManagementGoalsInsert' = Goal

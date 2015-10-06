@@ -148,8 +148,8 @@ apdlFields
   = lens _apdlFields (\ s a -> s{_apdlFields = a})
 
 instance GoogleAuth AccountsPreferredDealsList' where
-        authKey = apdlKey . _Just
-        authToken = apdlOAuthToken . _Just
+        _AuthKey = apdlKey . _Just
+        _AuthToken = apdlOAuthToken . _Just
 
 instance GoogleRequest AccountsPreferredDealsList'
          where

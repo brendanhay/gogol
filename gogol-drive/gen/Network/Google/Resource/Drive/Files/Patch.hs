@@ -317,8 +317,8 @@ fpFields :: Lens' FilesPatch' (Maybe Text)
 fpFields = lens _fpFields (\ s a -> s{_fpFields = a})
 
 instance GoogleAuth FilesPatch' where
-        authKey = fpKey . _Just
-        authToken = fpOAuthToken . _Just
+        _AuthKey = fpKey . _Just
+        _AuthToken = fpOAuthToken . _Just
 
 instance GoogleRequest FilesPatch' where
         type Rs FilesPatch' = File

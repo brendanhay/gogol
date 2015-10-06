@@ -146,8 +146,8 @@ lcdFields
 
 instance GoogleAuth LeaderboardConfigurationsDelete'
          where
-        authKey = lcdKey . _Just
-        authToken = lcdOAuthToken . _Just
+        _AuthKey = lcdKey . _Just
+        _AuthToken = lcdOAuthToken . _Just
 
 instance GoogleRequest
          LeaderboardConfigurationsDelete' where

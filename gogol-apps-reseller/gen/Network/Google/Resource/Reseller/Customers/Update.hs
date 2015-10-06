@@ -155,8 +155,8 @@ cuFields :: Lens' CustomersUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
 instance GoogleAuth CustomersUpdate' where
-        authKey = cuKey . _Just
-        authToken = cuOAuthToken . _Just
+        _AuthKey = cuKey . _Just
+        _AuthToken = cuOAuthToken . _Just
 
 instance GoogleRequest CustomersUpdate' where
         type Rs CustomersUpdate' = Customer

@@ -154,8 +154,8 @@ tiFields :: Lens' TemplateInsert' (Maybe Text)
 tiFields = lens _tiFields (\ s a -> s{_tiFields = a})
 
 instance GoogleAuth TemplateInsert' where
-        authKey = tiKey . _Just
-        authToken = tiOAuthToken . _Just
+        _AuthKey = tiKey . _Just
+        _AuthToken = tiOAuthToken . _Just
 
 instance GoogleRequest TemplateInsert' where
         type Rs TemplateInsert' = Template

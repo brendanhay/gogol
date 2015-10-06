@@ -173,8 +173,8 @@ bacuFields
   = lens _bacuFields (\ s a -> s{_bacuFields = a})
 
 instance GoogleAuth BucketAccessControlsUpdate' where
-        authKey = bacuKey . _Just
-        authToken = bacuOAuthToken . _Just
+        _AuthKey = bacuKey . _Just
+        _AuthToken = bacuOAuthToken . _Just
 
 instance GoogleRequest BucketAccessControlsUpdate'
          where

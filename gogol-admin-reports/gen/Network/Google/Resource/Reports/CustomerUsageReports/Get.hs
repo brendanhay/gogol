@@ -186,8 +186,8 @@ curgFields
   = lens _curgFields (\ s a -> s{_curgFields = a})
 
 instance GoogleAuth CustomerUsageReportsGet' where
-        authKey = curgKey . _Just
-        authToken = curgOAuthToken . _Just
+        _AuthKey = curgKey . _Just
+        _AuthToken = curgOAuthToken . _Just
 
 instance GoogleRequest CustomerUsageReportsGet' where
         type Rs CustomerUsageReportsGet' = UsageReports

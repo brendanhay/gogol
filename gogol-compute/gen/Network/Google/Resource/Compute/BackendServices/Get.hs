@@ -159,8 +159,8 @@ bsgBackendService
       (\ s a -> s{_bsgBackendService = a})
 
 instance GoogleAuth BackendServicesGet' where
-        authKey = bsgKey . _Just
-        authToken = bsgOAuthToken . _Just
+        _AuthKey = bsgKey . _Just
+        _AuthToken = bsgOAuthToken . _Just
 
 instance GoogleRequest BackendServicesGet' where
         type Rs BackendServicesGet' = BackendService

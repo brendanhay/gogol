@@ -240,8 +240,8 @@ olCallback
   = lens _olCallback (\ s a -> s{_olCallback = a})
 
 instance GoogleAuth OrganizationsList' where
-        authKey = olKey . _Just
-        authToken = olOAuthToken . _Just
+        _AuthKey = olKey . _Just
+        _AuthToken = olOAuthToken . _Just
 
 instance GoogleRequest OrganizationsList' where
         type Rs OrganizationsList' =

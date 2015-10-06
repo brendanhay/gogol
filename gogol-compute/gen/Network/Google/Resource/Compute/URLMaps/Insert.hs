@@ -159,8 +159,8 @@ umiFields
   = lens _umiFields (\ s a -> s{_umiFields = a})
 
 instance GoogleAuth URLMapsInsert' where
-        authKey = umiKey . _Just
-        authToken = umiOAuthToken . _Just
+        _AuthKey = umiKey . _Just
+        _AuthToken = umiOAuthToken . _Just
 
 instance GoogleRequest URLMapsInsert' where
         type Rs URLMapsInsert' = Operation

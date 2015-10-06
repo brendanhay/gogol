@@ -190,8 +190,8 @@ mpffldFields
 
 instance GoogleAuth
          ManagementProFileFilterLinksDelete' where
-        authKey = mpffldKey . _Just
-        authToken = mpffldOAuthToken . _Just
+        _AuthKey = mpffldKey . _Just
+        _AuthToken = mpffldOAuthToken . _Just
 
 instance GoogleRequest
          ManagementProFileFilterLinksDelete' where

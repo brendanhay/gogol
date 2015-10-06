@@ -133,8 +133,8 @@ mdlFields
   = lens _mdlFields (\ s a -> s{_mdlFields = a})
 
 instance GoogleAuth MetadataDimensionsList' where
-        authKey = mdlKey . _Just
-        authToken = mdlOAuthToken . _Just
+        _AuthKey = mdlKey . _Just
+        _AuthToken = mdlOAuthToken . _Just
 
 instance GoogleRequest MetadataDimensionsList' where
         type Rs MetadataDimensionsList' = Metadata

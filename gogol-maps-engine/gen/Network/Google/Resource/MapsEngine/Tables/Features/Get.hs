@@ -179,8 +179,8 @@ tfgFields
   = lens _tfgFields (\ s a -> s{_tfgFields = a})
 
 instance GoogleAuth TablesFeaturesGet' where
-        authKey = tfgKey . _Just
-        authToken = tfgOAuthToken . _Just
+        _AuthKey = tfgKey . _Just
+        _AuthToken = tfgOAuthToken . _Just
 
 instance GoogleRequest TablesFeaturesGet' where
         type Rs TablesFeaturesGet' = Feature

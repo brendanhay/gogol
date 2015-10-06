@@ -186,8 +186,8 @@ wsFields :: Lens' WatermarksSet' (Maybe Text)
 wsFields = lens _wsFields (\ s a -> s{_wsFields = a})
 
 instance GoogleAuth WatermarksSet' where
-        authKey = wsKey . _Just
-        authToken = wsOAuthToken . _Just
+        _AuthKey = wsKey . _Just
+        _AuthToken = wsOAuthToken . _Just
 
 instance GoogleRequest WatermarksSet' where
         type Rs WatermarksSet' = ()

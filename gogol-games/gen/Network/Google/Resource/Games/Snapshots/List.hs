@@ -181,8 +181,8 @@ slFields :: Lens' SnapshotsList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
 instance GoogleAuth SnapshotsList' where
-        authKey = slKey . _Just
-        authToken = slOAuthToken . _Just
+        _AuthKey = slKey . _Just
+        _AuthToken = slOAuthToken . _Just
 
 instance GoogleRequest SnapshotsList' where
         type Rs SnapshotsList' = SnapshotListResponse

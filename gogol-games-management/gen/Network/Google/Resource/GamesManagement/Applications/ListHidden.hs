@@ -175,8 +175,8 @@ alhFields
   = lens _alhFields (\ s a -> s{_alhFields = a})
 
 instance GoogleAuth ApplicationsListHidden' where
-        authKey = alhKey . _Just
-        authToken = alhOAuthToken . _Just
+        _AuthKey = alhKey . _Just
+        _AuthToken = alhOAuthToken . _Just
 
 instance GoogleRequest ApplicationsListHidden' where
         type Rs ApplicationsListHidden' = HiddenPlayerList

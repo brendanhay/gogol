@@ -154,8 +154,8 @@ fgFields :: Lens' FirewallsGet' (Maybe Text)
 fgFields = lens _fgFields (\ s a -> s{_fgFields = a})
 
 instance GoogleAuth FirewallsGet' where
-        authKey = fgKey . _Just
-        authToken = fgOAuthToken . _Just
+        _AuthKey = fgKey . _Just
+        _AuthToken = fgOAuthToken . _Just
 
 instance GoogleRequest FirewallsGet' where
         type Rs FirewallsGet' = Firewall

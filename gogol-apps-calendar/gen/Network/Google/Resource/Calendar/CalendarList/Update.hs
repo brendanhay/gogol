@@ -177,8 +177,8 @@ cluFields
   = lens _cluFields (\ s a -> s{_cluFields = a})
 
 instance GoogleAuth CalendarListUpdate' where
-        authKey = cluKey . _Just
-        authToken = cluOAuthToken . _Just
+        _AuthKey = cluKey . _Just
+        _AuthToken = cluOAuthToken . _Just
 
 instance GoogleRequest CalendarListUpdate' where
         type Rs CalendarListUpdate' = CalendarListEntry

@@ -217,8 +217,8 @@ idCallback
   = lens _idCallback (\ s a -> s{_idCallback = a})
 
 instance GoogleAuth InvitationsDelete' where
-        authKey = idKey . _Just
-        authToken = idOAuthToken . _Just
+        _AuthKey = idKey . _Just
+        _AuthToken = idOAuthToken . _Just
 
 instance GoogleRequest InvitationsDelete' where
         type Rs InvitationsDelete' = Empty

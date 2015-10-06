@@ -180,8 +180,8 @@ psFields :: Lens' PeopleSearch' (Maybe Text)
 psFields = lens _psFields (\ s a -> s{_psFields = a})
 
 instance GoogleAuth PeopleSearch' where
-        authKey = psKey . _Just
-        authToken = psOAuthToken . _Just
+        _AuthKey = psKey . _Just
+        _AuthToken = psOAuthToken . _Just
 
 instance GoogleRequest PeopleSearch' where
         type Rs PeopleSearch' = PeopleFeed

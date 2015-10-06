@@ -248,8 +248,8 @@ asicgCallback
 
 instance GoogleAuth AccountsStoreInfosCountryGet'
          where
-        authKey = asicgKey . _Just
-        authToken = asicgOAuthToken . _Just
+        _AuthKey = asicgKey . _Just
+        _AuthToken = asicgOAuthToken . _Just
 
 instance GoogleRequest AccountsStoreInfosCountryGet'
          where

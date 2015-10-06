@@ -146,8 +146,8 @@ ordFields
   = lens _ordFields (\ s a -> s{_ordFields = a})
 
 instance GoogleAuth OrdersCustombatch' where
-        authKey = ordKey . _Just
-        authToken = ordOAuthToken . _Just
+        _AuthKey = ordKey . _Just
+        _AuthToken = ordOAuthToken . _Just
 
 instance GoogleRequest OrdersCustombatch' where
         type Rs OrdersCustombatch' =

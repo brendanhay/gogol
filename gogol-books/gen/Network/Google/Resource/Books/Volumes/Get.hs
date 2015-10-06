@@ -195,8 +195,8 @@ vgFields :: Lens' VolumesGet' (Maybe Text)
 vgFields = lens _vgFields (\ s a -> s{_vgFields = a})
 
 instance GoogleAuth VolumesGet' where
-        authKey = vgKey . _Just
-        authToken = vgOAuthToken . _Just
+        _AuthKey = vgKey . _Just
+        _AuthToken = vgOAuthToken . _Just
 
 instance GoogleRequest VolumesGet' where
         type Rs VolumesGet' = Volume

@@ -189,8 +189,8 @@ buFields :: Lens' BucketsUpdate' (Maybe Text)
 buFields = lens _buFields (\ s a -> s{_buFields = a})
 
 instance GoogleAuth BucketsUpdate' where
-        authKey = buKey . _Just
-        authToken = buOAuthToken . _Just
+        _AuthKey = buKey . _Just
+        _AuthToken = buOAuthToken . _Just
 
 instance GoogleRequest BucketsUpdate' where
         type Rs BucketsUpdate' = Bucket

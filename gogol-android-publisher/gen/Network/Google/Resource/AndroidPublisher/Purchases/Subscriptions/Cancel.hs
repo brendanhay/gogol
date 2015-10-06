@@ -176,8 +176,8 @@ pscFields
 
 instance GoogleAuth PurchasesSubscriptionsCancel'
          where
-        authKey = pscKey . _Just
-        authToken = pscOAuthToken . _Just
+        _AuthKey = pscKey . _Just
+        _AuthToken = pscOAuthToken . _Just
 
 instance GoogleRequest PurchasesSubscriptionsCancel'
          where

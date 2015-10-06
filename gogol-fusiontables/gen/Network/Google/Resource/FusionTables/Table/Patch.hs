@@ -174,8 +174,8 @@ tppFields
   = lens _tppFields (\ s a -> s{_tppFields = a})
 
 instance GoogleAuth TablePatch' where
-        authKey = tppKey . _Just
-        authToken = tppOAuthToken . _Just
+        _AuthKey = tppKey . _Just
+        _AuthToken = tppOAuthToken . _Just
 
 instance GoogleRequest TablePatch' where
         type Rs TablePatch' = Table

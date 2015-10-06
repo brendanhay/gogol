@@ -248,8 +248,8 @@ cglFields
   = lens _cglFields (\ s a -> s{_cglFields = a})
 
 instance GoogleAuth CreativeGroupsList' where
-        authKey = cglKey . _Just
-        authToken = cglOAuthToken . _Just
+        _AuthKey = cglKey . _Just
+        _AuthToken = cglOAuthToken . _Just
 
 instance GoogleRequest CreativeGroupsList' where
         type Rs CreativeGroupsList' =

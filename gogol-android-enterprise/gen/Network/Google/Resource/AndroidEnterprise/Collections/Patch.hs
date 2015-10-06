@@ -172,8 +172,8 @@ colFields
   = lens _colFields (\ s a -> s{_colFields = a})
 
 instance GoogleAuth CollectionsPatch' where
-        authKey = colKey . _Just
-        authToken = colOAuthToken . _Just
+        _AuthKey = colKey . _Just
+        _AuthToken = colOAuthToken . _Just
 
 instance GoogleRequest CollectionsPatch' where
         type Rs CollectionsPatch' = Collection

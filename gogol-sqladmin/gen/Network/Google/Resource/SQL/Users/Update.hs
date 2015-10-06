@@ -189,8 +189,8 @@ uuInstance
   = lens _uuInstance (\ s a -> s{_uuInstance = a})
 
 instance GoogleAuth UsersUpdate' where
-        authKey = uuKey . _Just
-        authToken = uuOAuthToken . _Just
+        _AuthKey = uuKey . _Just
+        _AuthToken = uuOAuthToken . _Just
 
 instance GoogleRequest UsersUpdate' where
         type Rs UsersUpdate' = Operation

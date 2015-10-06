@@ -157,8 +157,8 @@ uttFields
   = lens _uttFields (\ s a -> s{_uttFields = a})
 
 instance GoogleAuth UsersThreadsTrash' where
-        authKey = uttKey . _Just
-        authToken = uttOAuthToken . _Just
+        _AuthKey = uttKey . _Just
+        _AuthToken = uttOAuthToken . _Just
 
 instance GoogleRequest UsersThreadsTrash' where
         type Rs UsersThreadsTrash' = Thread

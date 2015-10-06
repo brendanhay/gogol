@@ -162,8 +162,8 @@ bacdFields
   = lens _bacdFields (\ s a -> s{_bacdFields = a})
 
 instance GoogleAuth BucketAccessControlsDelete' where
-        authKey = bacdKey . _Just
-        authToken = bacdOAuthToken . _Just
+        _AuthKey = bacdKey . _Just
+        _AuthToken = bacdOAuthToken . _Just
 
 instance GoogleRequest BucketAccessControlsDelete'
          where

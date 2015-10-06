@@ -139,8 +139,8 @@ sFields :: Lens' StatscollectionUpdatestats' (Maybe Text)
 sFields = lens _sFields (\ s a -> s{_sFields = a})
 
 instance GoogleAuth StatscollectionUpdatestats' where
-        authKey = sKey . _Just
-        authToken = sOAuthToken . _Just
+        _AuthKey = sKey . _Just
+        _AuthToken = sOAuthToken . _Just
 
 instance GoogleRequest StatscollectionUpdatestats'
          where

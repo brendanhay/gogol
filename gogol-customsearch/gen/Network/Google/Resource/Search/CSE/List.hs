@@ -551,8 +551,8 @@ cselHighRange
       (\ s a -> s{_cselHighRange = a})
 
 instance GoogleAuth CSEList' where
-        authKey = cselKey . _Just
-        authToken = cselOAuthToken . _Just
+        _AuthKey = cselKey . _Just
+        _AuthToken = cselOAuthToken . _Just
 
 instance GoogleRequest CSEList' where
         type Rs CSEList' = Search

@@ -327,8 +327,8 @@ asilCallback
   = lens _asilCallback (\ s a -> s{_asilCallback = a})
 
 instance GoogleAuth AccountsStoreInfosList' where
-        authKey = asilKey . _Just
-        authToken = asilOAuthToken . _Just
+        _AuthKey = asilKey . _Just
+        _AuthToken = asilOAuthToken . _Just
 
 instance GoogleRequest AccountsStoreInfosList' where
         type Rs AccountsStoreInfosList' =

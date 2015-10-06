@@ -175,8 +175,8 @@ acvdcFields
 
 instance GoogleAuth AccountsContainersVersionsDelete'
          where
-        authKey = acvdcKey . _Just
-        authToken = acvdcOAuthToken . _Just
+        _AuthKey = acvdcKey . _Just
+        _AuthToken = acvdcOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVersionsDelete' where

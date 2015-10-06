@@ -167,8 +167,8 @@ orFields :: Lens' OrdersRefund' (Maybe Text)
 orFields = lens _orFields (\ s a -> s{_orFields = a})
 
 instance GoogleAuth OrdersRefund' where
-        authKey = orKey . _Just
-        authToken = orOAuthToken . _Just
+        _AuthKey = orKey . _Just
+        _AuthToken = orOAuthToken . _Just
 
 instance GoogleRequest OrdersRefund' where
         type Rs OrdersRefund' = OrdersRefundResponse

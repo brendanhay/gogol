@@ -202,8 +202,8 @@ mcmuFields
 
 instance GoogleAuth ManagementCustomMetricsUpdate'
          where
-        authKey = mcmuKey . _Just
-        authToken = mcmuOAuthToken . _Just
+        _AuthKey = mcmuKey . _Just
+        _AuthToken = mcmuOAuthToken . _Just
 
 instance GoogleRequest ManagementCustomMetricsUpdate'
          where

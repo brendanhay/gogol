@@ -134,8 +134,8 @@ mcgusFields
   = lens _mcgusFields (\ s a -> s{_mcgusFields = a})
 
 instance GoogleAuth MyConfigGetUserSettings' where
-        authKey = mcgusKey . _Just
-        authToken = mcgusOAuthToken . _Just
+        _AuthKey = mcgusKey . _Just
+        _AuthToken = mcgusOAuthToken . _Just
 
 instance GoogleRequest MyConfigGetUserSettings' where
         type Rs MyConfigGetUserSettings' = Usersettings

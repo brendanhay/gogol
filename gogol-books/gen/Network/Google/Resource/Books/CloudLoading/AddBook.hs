@@ -180,8 +180,8 @@ clabFields
   = lens _clabFields (\ s a -> s{_clabFields = a})
 
 instance GoogleAuth CloudLoadingAddBook' where
-        authKey = clabKey . _Just
-        authToken = clabOAuthToken . _Just
+        _AuthKey = clabKey . _Just
+        _AuthToken = clabOAuthToken . _Just
 
 instance GoogleRequest CloudLoadingAddBook' where
         type Rs CloudLoadingAddBook' =

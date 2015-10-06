@@ -205,8 +205,8 @@ pliFields
   = lens _pliFields (\ s a -> s{_pliFields = a})
 
 instance GoogleAuth PlayListsInsert' where
-        authKey = pliKey . _Just
-        authToken = pliOAuthToken . _Just
+        _AuthKey = pliKey . _Just
+        _AuthToken = pliOAuthToken . _Just
 
 instance GoogleRequest PlayListsInsert' where
         type Rs PlayListsInsert' = PlayList

@@ -171,8 +171,8 @@ pgpFields
   = lens _pgpFields (\ s a -> s{_pgpFields = a})
 
 instance GoogleAuth PlacementGroupsPatch' where
-        authKey = pgpKey . _Just
-        authToken = pgpOAuthToken . _Just
+        _AuthKey = pgpKey . _Just
+        _AuthToken = pgpOAuthToken . _Just
 
 instance GoogleRequest PlacementGroupsPatch' where
         type Rs PlacementGroupsPatch' = PlacementGroup

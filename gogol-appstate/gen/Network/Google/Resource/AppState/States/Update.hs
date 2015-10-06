@@ -173,8 +173,8 @@ suFields :: Lens' StatesUpdate' (Maybe Text)
 suFields = lens _suFields (\ s a -> s{_suFields = a})
 
 instance GoogleAuth StatesUpdate' where
-        authKey = suKey . _Just
-        authToken = suOAuthToken . _Just
+        _AuthKey = suKey . _Just
+        _AuthToken = suOAuthToken . _Just
 
 instance GoogleRequest StatesUpdate' where
         type Rs StatesUpdate' = WriteResult

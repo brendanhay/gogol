@@ -188,8 +188,8 @@ tuFields :: Lens' TasksUpdate' (Maybe Text)
 tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
 
 instance GoogleAuth TasksUpdate' where
-        authKey = tuKey . _Just
-        authToken = tuOAuthToken . _Just
+        _AuthKey = tuKey . _Just
+        _AuthToken = tuOAuthToken . _Just
 
 instance GoogleRequest TasksUpdate' where
         type Rs TasksUpdate' = Task

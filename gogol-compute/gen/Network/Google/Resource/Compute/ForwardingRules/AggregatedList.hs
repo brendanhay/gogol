@@ -195,8 +195,8 @@ fralFields
 
 instance GoogleAuth ForwardingRulesAggregatedList'
          where
-        authKey = fralKey . _Just
-        authToken = fralOAuthToken . _Just
+        _AuthKey = fralKey . _Just
+        _AuthToken = fralOAuthToken . _Just
 
 instance GoogleRequest ForwardingRulesAggregatedList'
          where

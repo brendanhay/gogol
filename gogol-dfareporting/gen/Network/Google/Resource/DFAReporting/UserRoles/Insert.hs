@@ -157,8 +157,8 @@ uriFields
   = lens _uriFields (\ s a -> s{_uriFields = a})
 
 instance GoogleAuth UserRolesInsert' where
-        authKey = uriKey . _Just
-        authToken = uriOAuthToken . _Just
+        _AuthKey = uriKey . _Just
+        _AuthToken = uriOAuthToken . _Just
 
 instance GoogleRequest UserRolesInsert' where
         type Rs UserRolesInsert' = UserRole

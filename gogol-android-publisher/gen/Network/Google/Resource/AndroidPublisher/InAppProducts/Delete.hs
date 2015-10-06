@@ -158,8 +158,8 @@ iapdFields
   = lens _iapdFields (\ s a -> s{_iapdFields = a})
 
 instance GoogleAuth InAppProductsDelete' where
-        authKey = iapdKey . _Just
-        authToken = iapdOAuthToken . _Just
+        _AuthKey = iapdKey . _Just
+        _AuthToken = iapdOAuthToken . _Just
 
 instance GoogleRequest InAppProductsDelete' where
         type Rs InAppProductsDelete' = ()

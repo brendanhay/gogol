@@ -229,8 +229,8 @@ cdrCallback
 
 instance GoogleAuth ControllerDebuggeesRegister'
          where
-        authKey = cdrKey . _Just
-        authToken = cdrOAuthToken . _Just
+        _AuthKey = cdrKey . _Just
+        _AuthToken = cdrOAuthToken . _Just
 
 instance GoogleRequest ControllerDebuggeesRegister'
          where

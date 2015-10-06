@@ -167,8 +167,8 @@ dgFields :: Lens' DevicesGet' (Maybe Text)
 dgFields = lens _dgFields (\ s a -> s{_dgFields = a})
 
 instance GoogleAuth DevicesGet' where
-        authKey = dgKey . _Just
-        authToken = dgOAuthToken . _Just
+        _AuthKey = dgKey . _Just
+        _AuthToken = dgOAuthToken . _Just
 
 instance GoogleRequest DevicesGet' where
         type Rs DevicesGet' = Device

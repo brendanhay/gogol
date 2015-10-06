@@ -183,8 +183,8 @@ acuFields
   = lens _acuFields (\ s a -> s{_acuFields = a})
 
 instance GoogleAuth AccountsContainersUpdate' where
-        authKey = acuKey . _Just
-        authToken = acuOAuthToken . _Just
+        _AuthKey = acuKey . _Just
+        _AuthToken = acuOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersUpdate'
          where

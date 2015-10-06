@@ -193,8 +193,8 @@ piiFields
   = lens _piiFields (\ s a -> s{_piiFields = a})
 
 instance GoogleAuth PostsInsert' where
-        authKey = piiKey . _Just
-        authToken = piiOAuthToken . _Just
+        _AuthKey = piiKey . _Just
+        _AuthToken = piiOAuthToken . _Just
 
 instance GoogleRequest PostsInsert' where
         type Rs PostsInsert' = Post'

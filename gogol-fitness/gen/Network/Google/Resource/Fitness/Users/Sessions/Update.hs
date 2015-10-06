@@ -181,8 +181,8 @@ usuFields
   = lens _usuFields (\ s a -> s{_usuFields = a})
 
 instance GoogleAuth UsersSessionsUpdate' where
-        authKey = usuKey . _Just
-        authToken = usuOAuthToken . _Just
+        _AuthKey = usuKey . _Just
+        _AuthToken = usuOAuthToken . _Just
 
 instance GoogleRequest UsersSessionsUpdate' where
         type Rs UsersSessionsUpdate' = Session

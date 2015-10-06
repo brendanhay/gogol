@@ -168,8 +168,8 @@ rFields :: Lens' RealtimeUpdate' (Maybe Text)
 rFields = lens _rFields (\ s a -> s{_rFields = a})
 
 instance GoogleAuth RealtimeUpdate' where
-        authKey = rKey . _Just
-        authToken = rOAuthToken . _Just
+        _AuthKey = rKey . _Just
+        _AuthToken = rOAuthToken . _Just
 
 instance GoogleRequest RealtimeUpdate' where
         type Rs RealtimeUpdate' = ()

@@ -145,8 +145,8 @@ polFields
   = lens _polFields (\ s a -> s{_polFields = a})
 
 instance GoogleAuth ProjectsOperationsList' where
-        authKey = polKey . _Just
-        authToken = polOAuthToken . _Just
+        _AuthKey = polKey . _Just
+        _AuthToken = polOAuthToken . _Just
 
 instance GoogleRequest ProjectsOperationsList' where
         type Rs ProjectsOperationsList' =

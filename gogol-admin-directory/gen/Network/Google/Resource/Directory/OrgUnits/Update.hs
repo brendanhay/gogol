@@ -172,8 +172,8 @@ ouuFields
   = lens _ouuFields (\ s a -> s{_ouuFields = a})
 
 instance GoogleAuth OrgUnitsUpdate' where
-        authKey = ouuKey . _Just
-        authToken = ouuOAuthToken . _Just
+        _AuthKey = ouuKey . _Just
+        _AuthToken = ouuOAuthToken . _Just
 
 instance GoogleRequest OrgUnitsUpdate' where
         type Rs OrgUnitsUpdate' = OrgUnit

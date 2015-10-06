@@ -204,8 +204,8 @@ tFields :: Lens' TabledataList' (Maybe Text)
 tFields = lens _tFields (\ s a -> s{_tFields = a})
 
 instance GoogleAuth TabledataList' where
-        authKey = tKey . _Just
-        authToken = tOAuthToken . _Just
+        _AuthKey = tKey . _Just
+        _AuthToken = tOAuthToken . _Just
 
 instance GoogleRequest TabledataList' where
         type Rs TabledataList' = TableDataList

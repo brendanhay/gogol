@@ -145,8 +145,8 @@ marFields
   = lens _marFields (\ s a -> s{_marFields = a})
 
 instance GoogleAuth MarketplaceOrdersSearch' where
-        authKey = marKey . _Just
-        authToken = marOAuthToken . _Just
+        _AuthKey = marKey . _Just
+        _AuthToken = marOAuthToken . _Just
 
 instance GoogleRequest MarketplaceOrdersSearch' where
         type Rs MarketplaceOrdersSearch' = GetOrdersResponse

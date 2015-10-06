@@ -232,8 +232,8 @@ cpFields :: Lens' ConversionPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 instance GoogleAuth ConversionPatch' where
-        authKey = cpKey . _Just
-        authToken = cpOAuthToken . _Just
+        _AuthKey = cpKey . _Just
+        _AuthToken = cpOAuthToken . _Just
 
 instance GoogleRequest ConversionPatch' where
         type Rs ConversionPatch' = ConversionList

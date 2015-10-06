@@ -166,8 +166,8 @@ suFields :: Lens' SchemasUpdate' (Maybe Text)
 suFields = lens _suFields (\ s a -> s{_suFields = a})
 
 instance GoogleAuth SchemasUpdate' where
-        authKey = suKey . _Just
-        authToken = suOAuthToken . _Just
+        _AuthKey = suKey . _Just
+        _AuthToken = suOAuthToken . _Just
 
 instance GoogleRequest SchemasUpdate' where
         type Rs SchemasUpdate' = Schema

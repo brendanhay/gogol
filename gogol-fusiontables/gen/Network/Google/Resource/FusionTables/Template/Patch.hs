@@ -166,8 +166,8 @@ tpFields :: Lens' TemplatePatch' (Maybe Text)
 tpFields = lens _tpFields (\ s a -> s{_tpFields = a})
 
 instance GoogleAuth TemplatePatch' where
-        authKey = tpKey . _Just
-        authToken = tpOAuthToken . _Just
+        _AuthKey = tpKey . _Just
+        _AuthToken = tpOAuthToken . _Just
 
 instance GoogleRequest TemplatePatch' where
         type Rs TemplatePatch' = Template

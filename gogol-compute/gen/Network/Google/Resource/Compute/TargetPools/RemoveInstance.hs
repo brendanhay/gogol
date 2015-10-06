@@ -184,8 +184,8 @@ tpriFields
   = lens _tpriFields (\ s a -> s{_tpriFields = a})
 
 instance GoogleAuth TargetPoolsRemoveInstance' where
-        authKey = tpriKey . _Just
-        authToken = tpriOAuthToken . _Just
+        _AuthKey = tpriKey . _Just
+        _AuthToken = tpriOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsRemoveInstance'
          where

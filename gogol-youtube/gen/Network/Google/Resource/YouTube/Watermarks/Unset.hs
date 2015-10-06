@@ -164,8 +164,8 @@ wuFields :: Lens' WatermarksUnset' (Maybe Text)
 wuFields = lens _wuFields (\ s a -> s{_wuFields = a})
 
 instance GoogleAuth WatermarksUnset' where
-        authKey = wuKey . _Just
-        authToken = wuOAuthToken . _Just
+        _AuthKey = wuKey . _Just
+        _AuthToken = wuOAuthToken . _Just
 
 instance GoogleRequest WatermarksUnset' where
         type Rs WatermarksUnset' = ()

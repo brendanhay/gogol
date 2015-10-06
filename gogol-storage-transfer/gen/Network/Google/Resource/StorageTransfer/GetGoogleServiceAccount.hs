@@ -227,8 +227,8 @@ ggsaCallback
   = lens _ggsaCallback (\ s a -> s{_ggsaCallback = a})
 
 instance GoogleAuth GetGoogleServiceAccount' where
-        authKey = ggsaKey . _Just
-        authToken = ggsaOAuthToken . _Just
+        _AuthKey = ggsaKey . _Just
+        _AuthToken = ggsaOAuthToken . _Just
 
 instance GoogleRequest GetGoogleServiceAccount' where
         type Rs GetGoogleServiceAccount' =

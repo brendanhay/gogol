@@ -205,8 +205,8 @@ illFields
   = lens _illFields (\ s a -> s{_illFields = a})
 
 instance GoogleAuth InstancesList' where
-        authKey = illKey . _Just
-        authToken = illOAuthToken . _Just
+        _AuthKey = illKey . _Just
+        _AuthToken = illOAuthToken . _Just
 
 instance GoogleRequest InstancesList' where
         type Rs InstancesList' = InstanceList

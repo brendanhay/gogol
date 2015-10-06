@@ -178,8 +178,8 @@ udInstance
   = lens _udInstance (\ s a -> s{_udInstance = a})
 
 instance GoogleAuth UsersDelete' where
-        authKey = udKey . _Just
-        authToken = udOAuthToken . _Just
+        _AuthKey = udKey . _Just
+        _AuthToken = udOAuthToken . _Just
 
 instance GoogleRequest UsersDelete' where
         type Rs UsersDelete' = Operation

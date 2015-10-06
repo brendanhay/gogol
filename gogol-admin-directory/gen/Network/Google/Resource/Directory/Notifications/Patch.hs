@@ -168,8 +168,8 @@ npFields :: Lens' NotificationsPatch' (Maybe Text)
 npFields = lens _npFields (\ s a -> s{_npFields = a})
 
 instance GoogleAuth NotificationsPatch' where
-        authKey = npKey . _Just
-        authToken = npOAuthToken . _Just
+        _AuthKey = npKey . _Just
+        _AuthToken = npOAuthToken . _Just
 
 instance GoogleRequest NotificationsPatch' where
         type Rs NotificationsPatch' = Notification

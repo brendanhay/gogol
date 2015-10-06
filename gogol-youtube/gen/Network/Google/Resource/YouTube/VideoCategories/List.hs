@@ -181,8 +181,8 @@ vclFields
   = lens _vclFields (\ s a -> s{_vclFields = a})
 
 instance GoogleAuth VideoCategoriesList' where
-        authKey = vclKey . _Just
-        authToken = vclOAuthToken . _Just
+        _AuthKey = vclKey . _Just
+        _AuthToken = vclOAuthToken . _Just
 
 instance GoogleRequest VideoCategoriesList' where
         type Rs VideoCategoriesList' =

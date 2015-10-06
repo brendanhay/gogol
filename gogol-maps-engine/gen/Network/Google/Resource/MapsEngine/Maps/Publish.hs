@@ -153,8 +153,8 @@ mFields :: Lens' MapsPublish' (Maybe Text)
 mFields = lens _mFields (\ s a -> s{_mFields = a})
 
 instance GoogleAuth MapsPublish' where
-        authKey = mKey . _Just
-        authToken = mOAuthToken . _Just
+        _AuthKey = mKey . _Just
+        _AuthToken = mOAuthToken . _Just
 
 instance GoogleRequest MapsPublish' where
         type Rs MapsPublish' = PublishResponse

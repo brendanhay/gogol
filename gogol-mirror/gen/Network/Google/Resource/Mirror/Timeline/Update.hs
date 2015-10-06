@@ -162,8 +162,8 @@ tuFields :: Lens' TimelineUpdate' (Maybe Text)
 tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
 
 instance GoogleAuth TimelineUpdate' where
-        authKey = tuKey . _Just
-        authToken = tuOAuthToken . _Just
+        _AuthKey = tuKey . _Just
+        _AuthToken = tuOAuthToken . _Just
 
 instance GoogleRequest TimelineUpdate' where
         type Rs TimelineUpdate' = TimelineItem

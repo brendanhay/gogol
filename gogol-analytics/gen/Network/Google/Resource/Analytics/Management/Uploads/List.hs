@@ -200,8 +200,8 @@ mulFields
   = lens _mulFields (\ s a -> s{_mulFields = a})
 
 instance GoogleAuth ManagementUploadsList' where
-        authKey = mulKey . _Just
-        authToken = mulOAuthToken . _Just
+        _AuthKey = mulKey . _Just
+        _AuthToken = mulOAuthToken . _Just
 
 instance GoogleRequest ManagementUploadsList' where
         type Rs ManagementUploadsList' = Uploads

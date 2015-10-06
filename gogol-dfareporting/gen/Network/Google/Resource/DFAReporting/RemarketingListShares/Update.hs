@@ -161,8 +161,8 @@ rlsuFields
 
 instance GoogleAuth RemarketingListSharesUpdate'
          where
-        authKey = rlsuKey . _Just
-        authToken = rlsuOAuthToken . _Just
+        _AuthKey = rlsuKey . _Just
+        _AuthToken = rlsuOAuthToken . _Just
 
 instance GoogleRequest RemarketingListSharesUpdate'
          where

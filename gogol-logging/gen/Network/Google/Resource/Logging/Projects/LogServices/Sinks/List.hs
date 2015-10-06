@@ -234,8 +234,8 @@ plsslCallback
 
 instance GoogleAuth ProjectsLogServicesSinksList'
          where
-        authKey = plsslKey . _Just
-        authToken = plsslOAuthToken . _Just
+        _AuthKey = plsslKey . _Just
+        _AuthToken = plsslOAuthToken . _Just
 
 instance GoogleRequest ProjectsLogServicesSinksList'
          where

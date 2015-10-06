@@ -157,8 +157,8 @@ pciFields
   = lens _pciFields (\ s a -> s{_pciFields = a})
 
 instance GoogleAuth PretargetingConfigInsert' where
-        authKey = pciKey . _Just
-        authToken = pciOAuthToken . _Just
+        _AuthKey = pciKey . _Just
+        _AuthToken = pciOAuthToken . _Just
 
 instance GoogleRequest PretargetingConfigInsert'
          where

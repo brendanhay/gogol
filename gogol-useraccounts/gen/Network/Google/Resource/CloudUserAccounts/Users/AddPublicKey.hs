@@ -172,8 +172,8 @@ uapkFields
   = lens _uapkFields (\ s a -> s{_uapkFields = a})
 
 instance GoogleAuth UsersAddPublicKey' where
-        authKey = uapkKey . _Just
-        authToken = uapkOAuthToken . _Just
+        _AuthKey = uapkKey . _Just
+        _AuthToken = uapkOAuthToken . _Just
 
 instance GoogleRequest UsersAddPublicKey' where
         type Rs UsersAddPublicKey' = Operation

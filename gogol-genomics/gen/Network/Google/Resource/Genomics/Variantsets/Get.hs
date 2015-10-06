@@ -142,8 +142,8 @@ vgFields :: Lens' VariantsetsGet' (Maybe Text)
 vgFields = lens _vgFields (\ s a -> s{_vgFields = a})
 
 instance GoogleAuth VariantsetsGet' where
-        authKey = vgKey . _Just
-        authToken = vgOAuthToken . _Just
+        _AuthKey = vgKey . _Just
+        _AuthToken = vgOAuthToken . _Just
 
 instance GoogleRequest VariantsetsGet' where
         type Rs VariantsetsGet' = VariantSet

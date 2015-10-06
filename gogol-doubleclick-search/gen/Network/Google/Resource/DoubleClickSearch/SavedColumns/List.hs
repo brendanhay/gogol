@@ -160,8 +160,8 @@ sclFields
   = lens _sclFields (\ s a -> s{_sclFields = a})
 
 instance GoogleAuth SavedColumnsList' where
-        authKey = sclKey . _Just
-        authToken = sclOAuthToken . _Just
+        _AuthKey = sclKey . _Just
+        _AuthToken = sclOAuthToken . _Just
 
 instance GoogleRequest SavedColumnsList' where
         type Rs SavedColumnsList' = SavedColumnList

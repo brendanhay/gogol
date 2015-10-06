@@ -189,8 +189,8 @@ flFields :: Lens' FirewallsList' (Maybe Text)
 flFields = lens _flFields (\ s a -> s{_flFields = a})
 
 instance GoogleAuth FirewallsList' where
-        authKey = flKey . _Just
-        authToken = flOAuthToken . _Just
+        _AuthKey = flKey . _Just
+        _AuthToken = flOAuthToken . _Just
 
 instance GoogleRequest FirewallsList' where
         type Rs FirewallsList' = FirewallList

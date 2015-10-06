@@ -171,8 +171,8 @@ aslFields
   = lens _aslFields (\ s a -> s{_aslFields = a})
 
 instance GoogleAuth AccountsSavedadstylesList' where
-        authKey = aslKey . _Just
-        authToken = aslOAuthToken . _Just
+        _AuthKey = aslKey . _Just
+        _AuthToken = aslOAuthToken . _Just
 
 instance GoogleRequest AccountsSavedadstylesList'
          where

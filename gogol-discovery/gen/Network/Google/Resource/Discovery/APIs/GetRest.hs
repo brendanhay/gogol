@@ -157,8 +157,8 @@ agrFields
   = lens _agrFields (\ s a -> s{_agrFields = a})
 
 instance GoogleAuth APIsGetRest' where
-        authKey = agrKey . _Just
-        authToken = agrOAuthToken . _Just
+        _AuthKey = agrKey . _Just
+        _AuthToken = agrOAuthToken . _Just
 
 instance GoogleRequest APIsGetRest' where
         type Rs APIsGetRest' = RestDescription

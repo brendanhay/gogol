@@ -194,8 +194,8 @@ pagaFields
   = lens _pagaFields (\ s a -> s{_pagaFields = a})
 
 instance GoogleAuth PagesPatch' where
-        authKey = pagaKey . _Just
-        authToken = pagaOAuthToken . _Just
+        _AuthKey = pagaKey . _Just
+        _AuthToken = pagaOAuthToken . _Just
 
 instance GoogleRequest PagesPatch' where
         type Rs PagesPatch' = Page

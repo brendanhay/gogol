@@ -186,8 +186,8 @@ etuFields
   = lens _etuFields (\ s a -> s{_etuFields = a})
 
 instance GoogleAuth EditsTracksUpdate' where
-        authKey = etuKey . _Just
-        authToken = etuOAuthToken . _Just
+        _AuthKey = etuKey . _Just
+        _AuthToken = etuOAuthToken . _Just
 
 instance GoogleRequest EditsTracksUpdate' where
         type Rs EditsTracksUpdate' = Track

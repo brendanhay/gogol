@@ -172,8 +172,8 @@ lpuFields
   = lens _lpuFields (\ s a -> s{_lpuFields = a})
 
 instance GoogleAuth LandingPagesUpdate' where
-        authKey = lpuKey . _Just
-        authToken = lpuOAuthToken . _Just
+        _AuthKey = lpuKey . _Just
+        _AuthToken = lpuOAuthToken . _Just
 
 instance GoogleRequest LandingPagesUpdate' where
         type Rs LandingPagesUpdate' = LandingPage

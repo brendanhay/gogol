@@ -159,8 +159,8 @@ mpbdFields
   = lens _mpbdFields (\ s a -> s{_mpbdFields = a})
 
 instance GoogleAuth MapsPermissionsBatchDelete' where
-        authKey = mpbdKey . _Just
-        authToken = mpbdOAuthToken . _Just
+        _AuthKey = mpbdKey . _Just
+        _AuthToken = mpbdOAuthToken . _Just
 
 instance GoogleRequest MapsPermissionsBatchDelete'
          where

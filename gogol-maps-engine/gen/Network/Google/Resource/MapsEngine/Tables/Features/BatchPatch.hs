@@ -181,8 +181,8 @@ tfbpFields
   = lens _tfbpFields (\ s a -> s{_tfbpFields = a})
 
 instance GoogleAuth TablesFeaturesBatchPatch' where
-        authKey = tfbpKey . _Just
-        authToken = tfbpOAuthToken . _Just
+        _AuthKey = tfbpKey . _Just
+        _AuthToken = tfbpOAuthToken . _Just
 
 instance GoogleRequest TablesFeaturesBatchPatch'
          where

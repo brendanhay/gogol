@@ -164,8 +164,8 @@ liFields :: Lens' LinksInsert' (Maybe Text)
 liFields = lens _liFields (\ s a -> s{_liFields = a})
 
 instance GoogleAuth LinksInsert' where
-        authKey = liKey . _Just
-        authToken = liOAuthToken . _Just
+        _AuthKey = liKey . _Just
+        _AuthToken = liOAuthToken . _Just
 
 instance GoogleRequest LinksInsert' where
         type Rs LinksInsert' = Link

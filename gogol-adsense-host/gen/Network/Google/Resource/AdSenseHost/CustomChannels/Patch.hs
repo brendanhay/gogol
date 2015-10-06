@@ -174,8 +174,8 @@ ccpFields
   = lens _ccpFields (\ s a -> s{_ccpFields = a})
 
 instance GoogleAuth CustomChannelsPatch' where
-        authKey = ccpKey . _Just
-        authToken = ccpOAuthToken . _Just
+        _AuthKey = ccpKey . _Just
+        _AuthToken = ccpOAuthToken . _Just
 
 instance GoogleRequest CustomChannelsPatch' where
         type Rs CustomChannelsPatch' = CustomChannel

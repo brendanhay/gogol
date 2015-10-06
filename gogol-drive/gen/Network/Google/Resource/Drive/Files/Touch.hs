@@ -141,8 +141,8 @@ ftFields :: Lens' FilesTouch' (Maybe Text)
 ftFields = lens _ftFields (\ s a -> s{_ftFields = a})
 
 instance GoogleAuth FilesTouch' where
-        authKey = ftKey . _Just
-        authToken = ftOAuthToken . _Just
+        _AuthKey = ftKey . _Just
+        _AuthToken = ftOAuthToken . _Just
 
 instance GoogleRequest FilesTouch' where
         type Rs FilesTouch' = File

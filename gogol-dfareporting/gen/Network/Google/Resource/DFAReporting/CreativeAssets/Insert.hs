@@ -182,8 +182,8 @@ caiFields
   = lens _caiFields (\ s a -> s{_caiFields = a})
 
 instance GoogleAuth CreativeAssetsInsert' where
-        authKey = caiKey . _Just
-        authToken = caiOAuthToken . _Just
+        _AuthKey = caiKey . _Just
+        _AuthToken = caiOAuthToken . _Just
 
 instance GoogleRequest CreativeAssetsInsert' where
         type Rs CreativeAssetsInsert' = CreativeAssetMetadata

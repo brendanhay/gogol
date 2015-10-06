@@ -156,8 +156,8 @@ ssFields :: Lens' SubscriptionsSuspend' (Maybe Text)
 ssFields = lens _ssFields (\ s a -> s{_ssFields = a})
 
 instance GoogleAuth SubscriptionsSuspend' where
-        authKey = ssKey . _Just
-        authToken = ssOAuthToken . _Just
+        _AuthKey = ssKey . _Just
+        _AuthToken = ssOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsSuspend' where
         type Rs SubscriptionsSuspend' = Subscription

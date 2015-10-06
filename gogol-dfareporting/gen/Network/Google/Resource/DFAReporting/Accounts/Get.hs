@@ -156,8 +156,8 @@ ag1Fields
   = lens _ag1Fields (\ s a -> s{_ag1Fields = a})
 
 instance GoogleAuth AccountsGet' where
-        authKey = ag1Key . _Just
-        authToken = ag1OAuthToken . _Just
+        _AuthKey = ag1Key . _Just
+        _AuthToken = ag1OAuthToken . _Just
 
 instance GoogleRequest AccountsGet' where
         type Rs AccountsGet' = Account

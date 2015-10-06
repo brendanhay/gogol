@@ -185,8 +185,8 @@ idFields :: Lens' InstallsDelete' (Maybe Text)
 idFields = lens _idFields (\ s a -> s{_idFields = a})
 
 instance GoogleAuth InstallsDelete' where
-        authKey = idKey . _Just
-        authToken = idOAuthToken . _Just
+        _AuthKey = idKey . _Just
+        _AuthToken = idOAuthToken . _Just
 
 instance GoogleRequest InstallsDelete' where
         type Rs InstallsDelete' = ()

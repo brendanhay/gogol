@@ -210,8 +210,8 @@ podFields
   = lens _podFields (\ s a -> s{_podFields = a})
 
 instance GoogleAuth PromoOfferDismiss' where
-        authKey = podKey . _Just
-        authToken = podOAuthToken . _Just
+        _AuthKey = podKey . _Just
+        _AuthToken = podOAuthToken . _Just
 
 instance GoogleRequest PromoOfferDismiss' where
         type Rs PromoOfferDismiss' = ()

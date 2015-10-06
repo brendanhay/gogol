@@ -145,8 +145,8 @@ fbqFields
   = lens _fbqFields (\ s a -> s{_fbqFields = a})
 
 instance GoogleAuth FreeBusyQuery' where
-        authKey = fbqKey . _Just
-        authToken = fbqOAuthToken . _Just
+        _AuthKey = fbqKey . _Just
+        _AuthToken = fbqOAuthToken . _Just
 
 instance GoogleRequest FreeBusyQuery' where
         type Rs FreeBusyQuery' = FreeBusyResponse

@@ -157,8 +157,8 @@ pvgFields
   = lens _pvgFields (\ s a -> s{_pvgFields = a})
 
 instance GoogleAuth PageViewsGet' where
-        authKey = pvgKey . _Just
-        authToken = pvgOAuthToken . _Just
+        _AuthKey = pvgKey . _Just
+        _AuthToken = pvgOAuthToken . _Just
 
 instance GoogleRequest PageViewsGet' where
         type Rs PageViewsGet' = Pageviews

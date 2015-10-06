@@ -143,8 +143,8 @@ cFields :: Lens' CollectionsList' (Maybe Text)
 cFields = lens _cFields (\ s a -> s{_cFields = a})
 
 instance GoogleAuth CollectionsList' where
-        authKey = cKey . _Just
-        authToken = cOAuthToken . _Just
+        _AuthKey = cKey . _Just
+        _AuthToken = cOAuthToken . _Just
 
 instance GoogleRequest CollectionsList' where
         type Rs CollectionsList' = CollectionsListResponse

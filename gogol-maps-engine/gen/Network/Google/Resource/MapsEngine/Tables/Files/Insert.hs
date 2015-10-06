@@ -172,8 +172,8 @@ tfiFields
   = lens _tfiFields (\ s a -> s{_tfiFields = a})
 
 instance GoogleAuth TablesFilesInsert' where
-        authKey = tfiKey . _Just
-        authToken = tfiOAuthToken . _Just
+        _AuthKey = tfiKey . _Just
+        _AuthToken = tfiOAuthToken . _Just
 
 instance GoogleRequest TablesFilesInsert' where
         type Rs TablesFilesInsert' = ()

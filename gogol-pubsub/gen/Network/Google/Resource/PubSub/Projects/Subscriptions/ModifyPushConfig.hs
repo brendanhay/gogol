@@ -237,8 +237,8 @@ psmpcCallback
 
 instance GoogleAuth
          ProjectsSubscriptionsModifyPushConfig' where
-        authKey = psmpcKey . _Just
-        authToken = psmpcOAuthToken . _Just
+        _AuthKey = psmpcKey . _Just
+        _AuthToken = psmpcOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsSubscriptionsModifyPushConfig' where

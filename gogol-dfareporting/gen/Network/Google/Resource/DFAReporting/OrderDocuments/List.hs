@@ -275,8 +275,8 @@ odlFields
   = lens _odlFields (\ s a -> s{_odlFields = a})
 
 instance GoogleAuth OrderDocumentsList' where
-        authKey = odlKey . _Just
-        authToken = odlOAuthToken . _Just
+        _AuthKey = odlKey . _Just
+        _AuthToken = odlOAuthToken . _Just
 
 instance GoogleRequest OrderDocumentsList' where
         type Rs OrderDocumentsList' =

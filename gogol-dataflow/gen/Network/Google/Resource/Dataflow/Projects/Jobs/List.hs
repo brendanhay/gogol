@@ -249,8 +249,8 @@ pjlCallback
   = lens _pjlCallback (\ s a -> s{_pjlCallback = a})
 
 instance GoogleAuth ProjectsJobsList' where
-        authKey = pjlKey . _Just
-        authToken = pjlOAuthToken . _Just
+        _AuthKey = pjlKey . _Just
+        _AuthToken = pjlOAuthToken . _Just
 
 instance GoogleRequest ProjectsJobsList' where
         type Rs ProjectsJobsList' = ListJobsResponse

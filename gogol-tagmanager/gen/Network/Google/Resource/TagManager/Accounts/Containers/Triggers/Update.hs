@@ -200,8 +200,8 @@ actuFields
 
 instance GoogleAuth AccountsContainersTriggersUpdate'
          where
-        authKey = actuKey . _Just
-        authToken = actuOAuthToken . _Just
+        _AuthKey = actuKey . _Just
+        _AuthToken = actuOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersTriggersUpdate' where

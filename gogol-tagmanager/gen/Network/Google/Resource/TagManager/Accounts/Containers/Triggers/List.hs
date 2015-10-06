@@ -163,8 +163,8 @@ actlFields
 
 instance GoogleAuth AccountsContainersTriggersList'
          where
-        authKey = actlKey . _Just
-        authToken = actlOAuthToken . _Just
+        _AuthKey = actlKey . _Just
+        _AuthToken = actlOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersTriggersList' where

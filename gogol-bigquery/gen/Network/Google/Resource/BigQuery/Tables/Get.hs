@@ -171,8 +171,8 @@ tgFields :: Lens' TablesGet' (Maybe Text)
 tgFields = lens _tgFields (\ s a -> s{_tgFields = a})
 
 instance GoogleAuth TablesGet' where
-        authKey = tgKey . _Just
-        authToken = tgOAuthToken . _Just
+        _AuthKey = tgKey . _Just
+        _AuthToken = tgOAuthToken . _Just
 
 instance GoogleRequest TablesGet' where
         type Rs TablesGet' = Table

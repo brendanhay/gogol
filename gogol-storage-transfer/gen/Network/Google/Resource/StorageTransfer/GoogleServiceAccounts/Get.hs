@@ -229,8 +229,8 @@ gsagCallback
   = lens _gsagCallback (\ s a -> s{_gsagCallback = a})
 
 instance GoogleAuth GoogleServiceAccountsGet' where
-        authKey = gsagKey . _Just
-        authToken = gsagOAuthToken . _Just
+        _AuthKey = gsagKey . _Just
+        _AuthToken = gsagOAuthToken . _Just
 
 instance GoogleRequest GoogleServiceAccountsGet'
          where

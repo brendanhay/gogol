@@ -173,8 +173,8 @@ scpFields
   = lens _scpFields (\ s a -> s{_scpFields = a})
 
 instance GoogleAuth SubscriptionsChangePlan' where
-        authKey = scpKey . _Just
-        authToken = scpOAuthToken . _Just
+        _AuthKey = scpKey . _Just
+        _AuthToken = scpOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsChangePlan' where
         type Rs SubscriptionsChangePlan' = Subscription

@@ -148,8 +148,8 @@ rpvaFields
 
 instance GoogleAuth RelyingPartyVerifyAssertion'
          where
-        authKey = rpvaKey . _Just
-        authToken = rpvaOAuthToken . _Just
+        _AuthKey = rpvaKey . _Just
+        _AuthToken = rpvaOAuthToken . _Just
 
 instance GoogleRequest RelyingPartyVerifyAssertion'
          where

@@ -160,8 +160,8 @@ faggFields
 
 instance GoogleAuth FloodlightActivityGroupsGet'
          where
-        authKey = faggKey . _Just
-        authToken = faggOAuthToken . _Just
+        _AuthKey = faggKey . _Just
+        _AuthToken = faggOAuthToken . _Just
 
 instance GoogleRequest FloodlightActivityGroupsGet'
          where

@@ -157,8 +157,8 @@ pmdFields
   = lens _pmdFields (\ s a -> s{_pmdFields = a})
 
 instance GoogleAuth ProjectsMoveDisk' where
-        authKey = pmdKey . _Just
-        authToken = pmdOAuthToken . _Just
+        _AuthKey = pmdKey . _Just
+        _AuthToken = pmdOAuthToken . _Just
 
 instance GoogleRequest ProjectsMoveDisk' where
         type Rs ProjectsMoveDisk' = Operation

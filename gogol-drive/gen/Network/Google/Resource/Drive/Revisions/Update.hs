@@ -165,8 +165,8 @@ ruFields :: Lens' RevisionsUpdate' (Maybe Text)
 ruFields = lens _ruFields (\ s a -> s{_ruFields = a})
 
 instance GoogleAuth RevisionsUpdate' where
-        authKey = ruKey . _Just
-        authToken = ruOAuthToken . _Just
+        _AuthKey = ruKey . _Just
+        _AuthToken = ruOAuthToken . _Just
 
 instance GoogleRequest RevisionsUpdate' where
         type Rs RevisionsUpdate' = Revision

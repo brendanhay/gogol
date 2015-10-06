@@ -248,8 +248,8 @@ dsclFields
   = lens _dsclFields (\ s a -> s{_dsclFields = a})
 
 instance GoogleAuth DirectorySiteContactsList' where
-        authKey = dsclKey . _Just
-        authToken = dsclOAuthToken . _Just
+        _AuthKey = dsclKey . _Just
+        _AuthToken = dsclOAuthToken . _Just
 
 instance GoogleRequest DirectorySiteContactsList'
          where

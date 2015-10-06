@@ -152,8 +152,8 @@ pdFields :: Lens' PostsDelete' (Maybe Text)
 pdFields = lens _pdFields (\ s a -> s{_pdFields = a})
 
 instance GoogleAuth PostsDelete' where
-        authKey = pdKey . _Just
-        authToken = pdOAuthToken . _Just
+        _AuthKey = pdKey . _Just
+        _AuthToken = pdOAuthToken . _Just
 
 instance GoogleRequest PostsDelete' where
         type Rs PostsDelete' = ()

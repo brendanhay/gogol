@@ -158,8 +158,8 @@ cciFields
   = lens _cciFields (\ s a -> s{_cciFields = a})
 
 instance GoogleAuth ContentCategoriesInsert' where
-        authKey = cciKey . _Just
-        authToken = cciOAuthToken . _Just
+        _AuthKey = cciKey . _Just
+        _AuthToken = cciOAuthToken . _Just
 
 instance GoogleRequest ContentCategoriesInsert' where
         type Rs ContentCategoriesInsert' = ContentCategory

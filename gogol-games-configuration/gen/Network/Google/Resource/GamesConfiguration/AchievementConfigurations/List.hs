@@ -173,8 +173,8 @@ aclFields
 
 instance GoogleAuth AchievementConfigurationsList'
          where
-        authKey = aclKey . _Just
-        authToken = aclOAuthToken . _Just
+        _AuthKey = aclKey . _Just
+        _AuthToken = aclOAuthToken . _Just
 
 instance GoogleRequest AchievementConfigurationsList'
          where

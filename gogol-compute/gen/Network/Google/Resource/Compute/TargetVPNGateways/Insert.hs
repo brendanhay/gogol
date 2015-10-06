@@ -173,8 +173,8 @@ tvgiFields
   = lens _tvgiFields (\ s a -> s{_tvgiFields = a})
 
 instance GoogleAuth TargetVPNGatewaysInsert' where
-        authKey = tvgiKey . _Just
-        authToken = tvgiOAuthToken . _Just
+        _AuthKey = tvgiKey . _Just
+        _AuthToken = tvgiOAuthToken . _Just
 
 instance GoogleRequest TargetVPNGatewaysInsert' where
         type Rs TargetVPNGatewaysInsert' = Operation

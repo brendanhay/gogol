@@ -177,8 +177,8 @@ mwplFields
 
 instance GoogleAuth ManagementWebPropertiesList'
          where
-        authKey = mwplKey . _Just
-        authToken = mwplOAuthToken . _Just
+        _AuthKey = mwplKey . _Just
+        _AuthToken = mwplOAuthToken . _Just
 
 instance GoogleRequest ManagementWebPropertiesList'
          where

@@ -169,8 +169,8 @@ usdFields
   = lens _usdFields (\ s a -> s{_usdFields = a})
 
 instance GoogleAuth UsersSessionsDelete' where
-        authKey = usdKey . _Just
-        authToken = usdOAuthToken . _Just
+        _AuthKey = usdKey . _Just
+        _AuthToken = usdOAuthToken . _Just
 
 instance GoogleRequest UsersSessionsDelete' where
         type Rs UsersSessionsDelete' = ()

@@ -255,8 +255,8 @@ cscCallback
   = lens _cscCallback (\ s a -> s{_cscCallback = a})
 
 instance GoogleAuth CoursesStudentsCreate' where
-        authKey = cscKey . _Just
-        authToken = cscOAuthToken . _Just
+        _AuthKey = cscKey . _Just
+        _AuthToken = cscOAuthToken . _Just
 
 instance GoogleRequest CoursesStudentsCreate' where
         type Rs CoursesStudentsCreate' = Student

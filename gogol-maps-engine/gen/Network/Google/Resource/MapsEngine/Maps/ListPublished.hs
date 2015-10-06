@@ -174,8 +174,8 @@ mlpFields
   = lens _mlpFields (\ s a -> s{_mlpFields = a})
 
 instance GoogleAuth MapsListPublished' where
-        authKey = mlpKey . _Just
-        authToken = mlpOAuthToken . _Just
+        _AuthKey = mlpKey . _Just
+        _AuthToken = mlpOAuthToken . _Just
 
 instance GoogleRequest MapsListPublished' where
         type Rs MapsListPublished' =

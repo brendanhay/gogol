@@ -156,8 +156,8 @@ cfdFields
   = lens _cfdFields (\ s a -> s{_cfdFields = a})
 
 instance GoogleAuth CreativeFieldsDelete' where
-        authKey = cfdKey . _Just
-        authToken = cfdOAuthToken . _Just
+        _AuthKey = cfdKey . _Just
+        _AuthToken = cfdOAuthToken . _Just
 
 instance GoogleRequest CreativeFieldsDelete' where
         type Rs CreativeFieldsDelete' = ()

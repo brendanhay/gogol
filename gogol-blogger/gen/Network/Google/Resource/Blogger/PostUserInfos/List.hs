@@ -272,8 +272,8 @@ puilFields
   = lens _puilFields (\ s a -> s{_puilFields = a})
 
 instance GoogleAuth PostUserInfosList' where
-        authKey = puilKey . _Just
-        authToken = puilOAuthToken . _Just
+        _AuthKey = puilKey . _Just
+        _AuthToken = puilOAuthToken . _Just
 
 instance GoogleRequest PostUserInfosList' where
         type Rs PostUserInfosList' = PostUserInfosList

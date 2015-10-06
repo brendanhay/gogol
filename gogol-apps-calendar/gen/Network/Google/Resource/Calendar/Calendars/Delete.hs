@@ -145,8 +145,8 @@ cdFields :: Lens' CalendarsDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
 instance GoogleAuth CalendarsDelete' where
-        authKey = cdKey . _Just
-        authToken = cdOAuthToken . _Just
+        _AuthKey = cdKey . _Just
+        _AuthToken = cdOAuthToken . _Just
 
 instance GoogleRequest CalendarsDelete' where
         type Rs CalendarsDelete' = ()

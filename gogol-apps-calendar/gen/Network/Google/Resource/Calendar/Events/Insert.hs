@@ -200,8 +200,8 @@ eveFields
   = lens _eveFields (\ s a -> s{_eveFields = a})
 
 instance GoogleAuth EventsInsert' where
-        authKey = eveKey . _Just
-        authToken = eveOAuthToken . _Just
+        _AuthKey = eveKey . _Just
+        _AuthToken = eveOAuthToken . _Just
 
 instance GoogleRequest EventsInsert' where
         type Rs EventsInsert' = Event

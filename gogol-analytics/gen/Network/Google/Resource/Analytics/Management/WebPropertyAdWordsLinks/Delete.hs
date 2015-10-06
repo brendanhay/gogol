@@ -180,8 +180,8 @@ mwpawldFields
 
 instance GoogleAuth
          ManagementWebPropertyAdWordsLinksDelete' where
-        authKey = mwpawldKey . _Just
-        authToken = mwpawldOAuthToken . _Just
+        _AuthKey = mwpawldKey . _Just
+        _AuthToken = mwpawldOAuthToken . _Just
 
 instance GoogleRequest
          ManagementWebPropertyAdWordsLinksDelete' where

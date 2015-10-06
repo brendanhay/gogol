@@ -179,8 +179,8 @@ cddFields
   = lens _cddFields (\ s a -> s{_cddFields = a})
 
 instance GoogleAuth CaptionsDelete' where
-        authKey = cddKey . _Just
-        authToken = cddOAuthToken . _Just
+        _AuthKey = cddKey . _Just
+        _AuthToken = cddOAuthToken . _Just
 
 instance GoogleRequest CaptionsDelete' where
         type Rs CaptionsDelete' = ()

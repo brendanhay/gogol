@@ -173,8 +173,8 @@ mdgFields
   = lens _mdgFields (\ s a -> s{_mdgFields = a})
 
 instance GoogleAuth MobileDevicesGet' where
-        authKey = mdgKey . _Just
-        authToken = mdgOAuthToken . _Just
+        _AuthKey = mdgKey . _Just
+        _AuthToken = mdgOAuthToken . _Just
 
 instance GoogleRequest MobileDevicesGet' where
         type Rs MobileDevicesGet' = MobileDevice

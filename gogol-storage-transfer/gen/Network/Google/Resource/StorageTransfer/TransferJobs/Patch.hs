@@ -228,8 +228,8 @@ tjpCallback
   = lens _tjpCallback (\ s a -> s{_tjpCallback = a})
 
 instance GoogleAuth TransferJobsPatch' where
-        authKey = tjpKey . _Just
-        authToken = tjpOAuthToken . _Just
+        _AuthKey = tjpKey . _Just
+        _AuthToken = tjpOAuthToken . _Just
 
 instance GoogleRequest TransferJobsPatch' where
         type Rs TransferJobsPatch' = TransferJob

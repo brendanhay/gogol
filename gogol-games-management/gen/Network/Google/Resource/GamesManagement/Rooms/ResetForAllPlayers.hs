@@ -138,8 +138,8 @@ rrfapFields
   = lens _rrfapFields (\ s a -> s{_rrfapFields = a})
 
 instance GoogleAuth RoomsResetForAllPlayers' where
-        authKey = rrfapKey . _Just
-        authToken = rrfapOAuthToken . _Just
+        _AuthKey = rrfapKey . _Just
+        _AuthToken = rrfapOAuthToken . _Just
 
 instance GoogleRequest RoomsResetForAllPlayers' where
         type Rs RoomsResetForAllPlayers' = ()

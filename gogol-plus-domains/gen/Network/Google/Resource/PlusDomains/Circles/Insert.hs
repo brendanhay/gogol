@@ -158,8 +158,8 @@ cirFields
   = lens _cirFields (\ s a -> s{_cirFields = a})
 
 instance GoogleAuth CirclesInsert' where
-        authKey = cirKey . _Just
-        authToken = cirOAuthToken . _Just
+        _AuthKey = cirKey . _Just
+        _AuthToken = cirOAuthToken . _Just
 
 instance GoogleRequest CirclesInsert' where
         type Rs CirclesInsert' = Circle

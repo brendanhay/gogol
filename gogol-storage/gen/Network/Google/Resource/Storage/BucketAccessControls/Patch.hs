@@ -175,8 +175,8 @@ bacpFields
   = lens _bacpFields (\ s a -> s{_bacpFields = a})
 
 instance GoogleAuth BucketAccessControlsPatch' where
-        authKey = bacpKey . _Just
-        authToken = bacpOAuthToken . _Just
+        _AuthKey = bacpKey . _Just
+        _AuthToken = bacpOAuthToken . _Just
 
 instance GoogleRequest BucketAccessControlsPatch'
          where

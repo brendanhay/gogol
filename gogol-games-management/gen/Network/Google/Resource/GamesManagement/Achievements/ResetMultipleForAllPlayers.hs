@@ -154,8 +154,8 @@ armfapFields
 
 instance GoogleAuth
          AchievementsResetMultipleForAllPlayers' where
-        authKey = armfapKey . _Just
-        authToken = armfapOAuthToken . _Just
+        _AuthKey = armfapKey . _Just
+        _AuthToken = armfapOAuthToken . _Just
 
 instance GoogleRequest
          AchievementsResetMultipleForAllPlayers' where

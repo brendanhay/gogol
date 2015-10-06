@@ -170,8 +170,8 @@ hmpHostedModelName
       (\ s a -> s{_hmpHostedModelName = a})
 
 instance GoogleAuth HostedModelsPredict' where
-        authKey = hmpKey . _Just
-        authToken = hmpOAuthToken . _Just
+        _AuthKey = hmpKey . _Just
+        _AuthToken = hmpOAuthToken . _Just
 
 instance GoogleRequest HostedModelsPredict' where
         type Rs HostedModelsPredict' = Output

@@ -161,8 +161,8 @@ fagFields
 
 instance GoogleAuth FloodlightActivitiesGeneratetag'
          where
-        authKey = fagKey . _Just
-        authToken = fagOAuthToken . _Just
+        _AuthKey = fagKey . _Just
+        _AuthToken = fagOAuthToken . _Just
 
 instance GoogleRequest
          FloodlightActivitiesGeneratetag' where

@@ -161,8 +161,8 @@ faguFields
 
 instance GoogleAuth FloodlightActivityGroupsUpdate'
          where
-        authKey = faguKey . _Just
-        authToken = faguOAuthToken . _Just
+        _AuthKey = faguKey . _Just
+        _AuthToken = faguOAuthToken . _Just
 
 instance GoogleRequest
          FloodlightActivityGroupsUpdate' where

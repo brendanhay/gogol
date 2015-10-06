@@ -155,8 +155,8 @@ layFields
   = lens _layFields (\ s a -> s{_layFields = a})
 
 instance GoogleAuth LayersPatch' where
-        authKey = layKey . _Just
-        authToken = layOAuthToken . _Just
+        _AuthKey = layKey . _Just
+        _AuthToken = layOAuthToken . _Just
 
 instance GoogleRequest LayersPatch' where
         type Rs LayersPatch' = ()

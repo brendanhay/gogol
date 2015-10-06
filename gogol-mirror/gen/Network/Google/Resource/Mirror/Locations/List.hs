@@ -130,8 +130,8 @@ llFields :: Lens' LocationsList' (Maybe Text)
 llFields = lens _llFields (\ s a -> s{_llFields = a})
 
 instance GoogleAuth LocationsList' where
-        authKey = llKey . _Just
-        authToken = llOAuthToken . _Just
+        _AuthKey = llKey . _Just
+        _AuthToken = llOAuthToken . _Just
 
 instance GoogleRequest LocationsList' where
         type Rs LocationsList' = LocationsListResponse

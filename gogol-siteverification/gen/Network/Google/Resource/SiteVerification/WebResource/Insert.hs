@@ -158,8 +158,8 @@ wriFields
   = lens _wriFields (\ s a -> s{_wriFields = a})
 
 instance GoogleAuth WebResourceInsert' where
-        authKey = wriKey . _Just
-        authToken = wriOAuthToken . _Just
+        _AuthKey = wriKey . _Just
+        _AuthToken = wriOAuthToken . _Just
 
 instance GoogleRequest WebResourceInsert' where
         type Rs WebResourceInsert' =

@@ -162,8 +162,8 @@ cliFields
   = lens _cliFields (\ s a -> s{_cliFields = a})
 
 instance GoogleAuth CalendarListInsert' where
-        authKey = cliKey . _Just
-        authToken = cliOAuthToken . _Just
+        _AuthKey = cliKey . _Just
+        _AuthToken = cliOAuthToken . _Just
 
 instance GoogleRequest CalendarListInsert' where
         type Rs CalendarListInsert' = CalendarListEntry

@@ -172,8 +172,8 @@ oupFields
   = lens _oupFields (\ s a -> s{_oupFields = a})
 
 instance GoogleAuth OrgUnitsPatch' where
-        authKey = oupKey . _Just
-        authToken = oupOAuthToken . _Just
+        _AuthKey = oupKey . _Just
+        _AuthToken = oupOAuthToken . _Just
 
 instance GoogleRequest OrgUnitsPatch' where
         type Rs OrgUnitsPatch' = OrgUnit

@@ -191,8 +191,8 @@ musrgFields
 
 instance GoogleAuth ManagementUnSampledReportsGet'
          where
-        authKey = musrgKey . _Just
-        authToken = musrgOAuthToken . _Just
+        _AuthKey = musrgKey . _Just
+        _AuthToken = musrgOAuthToken . _Just
 
 instance GoogleRequest ManagementUnSampledReportsGet'
          where

@@ -181,8 +181,8 @@ dgsFields
   = lens _dgsFields (\ s a -> s{_dgsFields = a})
 
 instance GoogleAuth DevicesGetState' where
-        authKey = dgsKey . _Just
-        authToken = dgsOAuthToken . _Just
+        _AuthKey = dgsKey . _Just
+        _AuthToken = dgsOAuthToken . _Just
 
 instance GoogleRequest DevicesGetState' where
         type Rs DevicesGetState' = DeviceState

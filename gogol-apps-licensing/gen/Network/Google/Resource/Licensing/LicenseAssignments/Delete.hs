@@ -168,8 +168,8 @@ ladFields
   = lens _ladFields (\ s a -> s{_ladFields = a})
 
 instance GoogleAuth LicenseAssignmentsDelete' where
-        authKey = ladKey . _Just
-        authToken = ladOAuthToken . _Just
+        _AuthKey = ladKey . _Just
+        _AuthToken = ladOAuthToken . _Just
 
 instance GoogleRequest LicenseAssignmentsDelete'
          where

@@ -169,8 +169,8 @@ ilFields :: Lens' InstallsList' (Maybe Text)
 ilFields = lens _ilFields (\ s a -> s{_ilFields = a})
 
 instance GoogleAuth InstallsList' where
-        authKey = ilKey . _Just
-        authToken = ilOAuthToken . _Just
+        _AuthKey = ilKey . _Just
+        _AuthToken = ilOAuthToken . _Just
 
 instance GoogleRequest InstallsList' where
         type Rs InstallsList' = InstallsListResponse

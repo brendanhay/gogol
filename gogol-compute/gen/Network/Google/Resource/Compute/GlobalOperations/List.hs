@@ -194,8 +194,8 @@ golFields
   = lens _golFields (\ s a -> s{_golFields = a})
 
 instance GoogleAuth GlobalOperationsList' where
-        authKey = golKey . _Just
-        authToken = golOAuthToken . _Just
+        _AuthKey = golKey . _Just
+        _AuthToken = golOAuthToken . _Just
 
 instance GoogleRequest GlobalOperationsList' where
         type Rs GlobalOperationsList' = OperationList

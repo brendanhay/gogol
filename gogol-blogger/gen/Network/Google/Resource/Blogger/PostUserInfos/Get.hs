@@ -189,8 +189,8 @@ puigFields
   = lens _puigFields (\ s a -> s{_puigFields = a})
 
 instance GoogleAuth PostUserInfosGet' where
-        authKey = puigKey . _Just
-        authToken = puigOAuthToken . _Just
+        _AuthKey = puigKey . _Just
+        _AuthToken = puigOAuthToken . _Just
 
 instance GoogleRequest PostUserInfosGet' where
         type Rs PostUserInfosGet' = PostUserInfo

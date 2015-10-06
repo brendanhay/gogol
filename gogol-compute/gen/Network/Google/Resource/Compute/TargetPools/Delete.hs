@@ -170,8 +170,8 @@ tpdFields
   = lens _tpdFields (\ s a -> s{_tpdFields = a})
 
 instance GoogleAuth TargetPoolsDelete' where
-        authKey = tpdKey . _Just
-        authToken = tpdOAuthToken . _Just
+        _AuthKey = tpdKey . _Just
+        _AuthToken = tpdOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsDelete' where
         type Rs TargetPoolsDelete' = Operation

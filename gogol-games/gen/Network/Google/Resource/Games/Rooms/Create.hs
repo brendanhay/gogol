@@ -159,8 +159,8 @@ rooFields
   = lens _rooFields (\ s a -> s{_rooFields = a})
 
 instance GoogleAuth RoomsCreate' where
-        authKey = rooKey . _Just
-        authToken = rooOAuthToken . _Just
+        _AuthKey = rooKey . _Just
+        _AuthToken = rooOAuthToken . _Just
 
 instance GoogleRequest RoomsCreate' where
         type Rs RoomsCreate' = Room

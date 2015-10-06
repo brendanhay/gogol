@@ -186,8 +186,8 @@ elpFields
   = lens _elpFields (\ s a -> s{_elpFields = a})
 
 instance GoogleAuth EditsListingsPatch' where
-        authKey = elpKey . _Just
-        authToken = elpOAuthToken . _Just
+        _AuthKey = elpKey . _Just
+        _AuthToken = elpOAuthToken . _Just
 
 instance GoogleRequest EditsListingsPatch' where
         type Rs EditsListingsPatch' = Listing

@@ -138,8 +138,8 @@ sraFields
   = lens _sraFields (\ s a -> s{_sraFields = a})
 
 instance GoogleAuth ScoresResetAll' where
-        authKey = sraKey . _Just
-        authToken = sraOAuthToken . _Just
+        _AuthKey = sraKey . _Just
+        _AuthToken = sraOAuthToken . _Just
 
 instance GoogleRequest ScoresResetAll' where
         type Rs ScoresResetAll' = PlayerScoreResetAllResponse

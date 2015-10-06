@@ -199,8 +199,8 @@ blbuFields
   = lens _blbuFields (\ s a -> s{_blbuFields = a})
 
 instance GoogleAuth BlogsListByUser' where
-        authKey = blbuKey . _Just
-        authToken = blbuOAuthToken . _Just
+        _AuthKey = blbuKey . _Just
+        _AuthToken = blbuOAuthToken . _Just
 
 instance GoogleRequest BlogsListByUser' where
         type Rs BlogsListByUser' = BlogList

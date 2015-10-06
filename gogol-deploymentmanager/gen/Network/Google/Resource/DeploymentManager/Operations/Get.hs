@@ -154,8 +154,8 @@ ogFields :: Lens' OperationsGet' (Maybe Text)
 ogFields = lens _ogFields (\ s a -> s{_ogFields = a})
 
 instance GoogleAuth OperationsGet' where
-        authKey = ogKey . _Just
-        authToken = ogOAuthToken . _Just
+        _AuthKey = ogKey . _Just
+        _AuthToken = ogOAuthToken . _Just
 
 instance GoogleRequest OperationsGet' where
         type Rs OperationsGet' = Operation

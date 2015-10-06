@@ -170,8 +170,8 @@ mlauFields
   = lens _mlauFields (\ s a -> s{_mlauFields = a})
 
 instance GoogleAuth MyLibraryAnnotationsUpdate' where
-        authKey = mlauKey . _Just
-        authToken = mlauOAuthToken . _Just
+        _AuthKey = mlauKey . _Just
+        _AuthToken = mlauOAuthToken . _Just
 
 instance GoogleRequest MyLibraryAnnotationsUpdate'
          where

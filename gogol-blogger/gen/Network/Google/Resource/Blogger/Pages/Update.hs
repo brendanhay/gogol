@@ -193,8 +193,8 @@ puuFields
   = lens _puuFields (\ s a -> s{_puuFields = a})
 
 instance GoogleAuth PagesUpdate' where
-        authKey = puuKey . _Just
-        authToken = puuOAuthToken . _Just
+        _AuthKey = puuKey . _Just
+        _AuthToken = puuOAuthToken . _Just
 
 instance GoogleRequest PagesUpdate' where
         type Rs PagesUpdate' = Page

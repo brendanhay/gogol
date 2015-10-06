@@ -160,8 +160,8 @@ iprInstance
   = lens _iprInstance (\ s a -> s{_iprInstance = a})
 
 instance GoogleAuth InstancesPromoteReplica' where
-        authKey = iprKey . _Just
-        authToken = iprOAuthToken . _Just
+        _AuthKey = iprKey . _Just
+        _AuthToken = iprOAuthToken . _Just
 
 instance GoogleRequest InstancesPromoteReplica' where
         type Rs InstancesPromoteReplica' = Operation

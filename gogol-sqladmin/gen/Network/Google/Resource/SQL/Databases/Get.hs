@@ -169,8 +169,8 @@ dgInstance
   = lens _dgInstance (\ s a -> s{_dgInstance = a})
 
 instance GoogleAuth DatabasesGet' where
-        authKey = dgKey . _Just
-        authToken = dgOAuthToken . _Just
+        _AuthKey = dgKey . _Just
+        _AuthToken = dgOAuthToken . _Just
 
 instance GoogleRequest DatabasesGet' where
         type Rs DatabasesGet' = Database

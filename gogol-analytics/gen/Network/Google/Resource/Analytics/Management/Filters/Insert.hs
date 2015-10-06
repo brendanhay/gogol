@@ -158,8 +158,8 @@ mfiFields
   = lens _mfiFields (\ s a -> s{_mfiFields = a})
 
 instance GoogleAuth ManagementFiltersInsert' where
-        authKey = mfiKey . _Just
-        authToken = mfiOAuthToken . _Just
+        _AuthKey = mfiKey . _Just
+        _AuthToken = mfiOAuthToken . _Just
 
 instance GoogleRequest ManagementFiltersInsert' where
         type Rs ManagementFiltersInsert' = Filter

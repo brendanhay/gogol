@@ -159,8 +159,8 @@ lcuFields
 
 instance GoogleAuth LeaderboardConfigurationsUpdate'
          where
-        authKey = lcuKey . _Just
-        authToken = lcuOAuthToken . _Just
+        _AuthKey = lcuKey . _Just
+        _AuthToken = lcuOAuthToken . _Just
 
 instance GoogleRequest
          LeaderboardConfigurationsUpdate' where

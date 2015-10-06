@@ -152,8 +152,8 @@ mpFields :: Lens' MapsPatch' (Maybe Text)
 mpFields = lens _mpFields (\ s a -> s{_mpFields = a})
 
 instance GoogleAuth MapsPatch' where
-        authKey = mpKey . _Just
-        authToken = mpOAuthToken . _Just
+        _AuthKey = mpKey . _Just
+        _AuthToken = mpOAuthToken . _Just
 
 instance GoogleRequest MapsPatch' where
         type Rs MapsPatch' = ()

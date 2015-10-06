@@ -177,8 +177,8 @@ bgFields :: Lens' BucketsGet' (Maybe Text)
 bgFields = lens _bgFields (\ s a -> s{_bgFields = a})
 
 instance GoogleAuth BucketsGet' where
-        authKey = bgKey . _Just
-        authToken = bgOAuthToken . _Just
+        _AuthKey = bgKey . _Just
+        _AuthToken = bgOAuthToken . _Just
 
 instance GoogleRequest BucketsGet' where
         type Rs BucketsGet' = Bucket

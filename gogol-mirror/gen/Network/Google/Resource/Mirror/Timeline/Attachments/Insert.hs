@@ -156,8 +156,8 @@ taiFields
   = lens _taiFields (\ s a -> s{_taiFields = a})
 
 instance GoogleAuth TimelineAttachmentsInsert' where
-        authKey = taiKey . _Just
-        authToken = taiOAuthToken . _Just
+        _AuthKey = taiKey . _Just
+        _AuthToken = taiOAuthToken . _Just
 
 instance GoogleRequest TimelineAttachmentsInsert'
          where

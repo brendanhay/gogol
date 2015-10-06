@@ -156,8 +156,8 @@ pcgFields
   = lens _pcgFields (\ s a -> s{_pcgFields = a})
 
 instance GoogleAuth PostalCodesGet' where
-        authKey = pcgKey . _Just
-        authToken = pcgOAuthToken . _Just
+        _AuthKey = pcgKey . _Just
+        _AuthToken = pcgOAuthToken . _Just
 
 instance GoogleRequest PostalCodesGet' where
         type Rs PostalCodesGet' = PostalCode

@@ -207,8 +207,8 @@ drgFields
   = lens _drgFields (\ s a -> s{_drgFields = a})
 
 instance GoogleAuth DataRealtimeGet' where
-        authKey = drgKey . _Just
-        authToken = drgOAuthToken . _Just
+        _AuthKey = drgKey . _Just
+        _AuthToken = drgOAuthToken . _Just
 
 instance GoogleRequest DataRealtimeGet' where
         type Rs DataRealtimeGet' = RealtimeData

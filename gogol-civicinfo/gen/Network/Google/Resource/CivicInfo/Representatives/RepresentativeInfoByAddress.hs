@@ -197,8 +197,8 @@ rribaFields
 
 instance GoogleAuth
          RepresentativesRepresentativeInfoByAddress' where
-        authKey = rribaKey . _Just
-        authToken = rribaOAuthToken . _Just
+        _AuthKey = rribaKey . _Just
+        _AuthToken = rribaOAuthToken . _Just
 
 instance GoogleRequest
          RepresentativesRepresentativeInfoByAddress' where

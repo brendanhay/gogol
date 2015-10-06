@@ -141,8 +141,8 @@ rlFields :: Lens' RevisionsList' (Maybe Text)
 rlFields = lens _rlFields (\ s a -> s{_rlFields = a})
 
 instance GoogleAuth RevisionsList' where
-        authKey = rlKey . _Just
-        authToken = rlOAuthToken . _Just
+        _AuthKey = rlKey . _Just
+        _AuthToken = rlOAuthToken . _Just
 
 instance GoogleRequest RevisionsList' where
         type Rs RevisionsList' = RevisionList

@@ -149,8 +149,8 @@ srFields :: Lens' ScoresReset' (Maybe Text)
 srFields = lens _srFields (\ s a -> s{_srFields = a})
 
 instance GoogleAuth ScoresReset' where
-        authKey = srKey . _Just
-        authToken = srOAuthToken . _Just
+        _AuthKey = srKey . _Just
+        _AuthToken = srOAuthToken . _Just
 
 instance GoogleRequest ScoresReset' where
         type Rs ScoresReset' = PlayerScoreResetResponse

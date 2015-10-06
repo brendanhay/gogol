@@ -204,8 +204,8 @@ mdlFields
   = lens _mdlFields (\ s a -> s{_mdlFields = a})
 
 instance GoogleAuth MetricDescriptorsList' where
-        authKey = mdlKey . _Just
-        authToken = mdlOAuthToken . _Just
+        _AuthKey = mdlKey . _Just
+        _AuthToken = mdlOAuthToken . _Just
 
 instance GoogleRequest MetricDescriptorsList' where
         type Rs MetricDescriptorsList' =

@@ -187,8 +187,8 @@ slFields :: Lens' SizesList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
 instance GoogleAuth SizesList' where
-        authKey = slKey . _Just
-        authToken = slOAuthToken . _Just
+        _AuthKey = slKey . _Just
+        _AuthToken = slOAuthToken . _Just
 
 instance GoogleRequest SizesList' where
         type Rs SizesList' = SizesListResponse

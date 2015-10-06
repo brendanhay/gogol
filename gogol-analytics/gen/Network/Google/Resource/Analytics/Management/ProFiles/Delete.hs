@@ -175,8 +175,8 @@ mpfdFields
   = lens _mpfdFields (\ s a -> s{_mpfdFields = a})
 
 instance GoogleAuth ManagementProFilesDelete' where
-        authKey = mpfdKey . _Just
-        authToken = mpfdOAuthToken . _Just
+        _AuthKey = mpfdKey . _Just
+        _AuthToken = mpfdOAuthToken . _Just
 
 instance GoogleRequest ManagementProFilesDelete'
          where

@@ -159,8 +159,8 @@ mduFields
   = lens _mduFields (\ s a -> s{_mduFields = a})
 
 instance GoogleAuth MarketplaceDealsUpdate' where
-        authKey = mduKey . _Just
-        authToken = mduOAuthToken . _Just
+        _AuthKey = mduKey . _Just
+        _AuthToken = mduOAuthToken . _Just
 
 instance GoogleRequest MarketplaceDealsUpdate' where
         type Rs MarketplaceDealsUpdate' =

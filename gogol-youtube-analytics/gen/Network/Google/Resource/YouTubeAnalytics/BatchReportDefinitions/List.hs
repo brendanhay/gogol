@@ -148,8 +148,8 @@ brdlFields
   = lens _brdlFields (\ s a -> s{_brdlFields = a})
 
 instance GoogleAuth BatchReportDefinitionsList' where
-        authKey = brdlKey . _Just
-        authToken = brdlOAuthToken . _Just
+        _AuthKey = brdlKey . _Just
+        _AuthToken = brdlOAuthToken . _Just
 
 instance GoogleRequest BatchReportDefinitionsList'
          where

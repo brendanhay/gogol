@@ -167,8 +167,8 @@ eFields :: Lens' EntitlementsGet' (Maybe Text)
 eFields = lens _eFields (\ s a -> s{_eFields = a})
 
 instance GoogleAuth EntitlementsGet' where
-        authKey = eKey . _Just
-        authToken = eOAuthToken . _Just
+        _AuthKey = eKey . _Just
+        _AuthToken = eOAuthToken . _Just
 
 instance GoogleRequest EntitlementsGet' where
         type Rs EntitlementsGet' = Entitlement

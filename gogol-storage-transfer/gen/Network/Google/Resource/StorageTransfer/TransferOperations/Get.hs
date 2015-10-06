@@ -215,8 +215,8 @@ togCallback
   = lens _togCallback (\ s a -> s{_togCallback = a})
 
 instance GoogleAuth TransferOperationsGet' where
-        authKey = togKey . _Just
-        authToken = togOAuthToken . _Just
+        _AuthKey = togKey . _Just
+        _AuthToken = togOAuthToken . _Just
 
 instance GoogleRequest TransferOperationsGet' where
         type Rs TransferOperationsGet' = Operation

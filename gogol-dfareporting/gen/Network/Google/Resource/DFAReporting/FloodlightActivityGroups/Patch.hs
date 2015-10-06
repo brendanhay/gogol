@@ -174,8 +174,8 @@ fagpFields
 
 instance GoogleAuth FloodlightActivityGroupsPatch'
          where
-        authKey = fagpKey . _Just
-        authToken = fagpOAuthToken . _Just
+        _AuthKey = fagpKey . _Just
+        _AuthToken = fagpOAuthToken . _Just
 
 instance GoogleRequest FloodlightActivityGroupsPatch'
          where

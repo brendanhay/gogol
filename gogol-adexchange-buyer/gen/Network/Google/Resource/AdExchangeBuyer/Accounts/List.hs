@@ -129,8 +129,8 @@ alFields :: Lens' AccountsList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 instance GoogleAuth AccountsList' where
-        authKey = alKey . _Just
-        authToken = alOAuthToken . _Just
+        _AuthKey = alKey . _Just
+        _AuthToken = alOAuthToken . _Just
 
 instance GoogleRequest AccountsList' where
         type Rs AccountsList' = AccountsList

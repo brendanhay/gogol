@@ -175,8 +175,8 @@ vivFields
   = lens _vivFields (\ s a -> s{_vivFields = a})
 
 instance GoogleAuth VariantsetsImportVariants' where
-        authKey = vivKey . _Just
-        authToken = vivOAuthToken . _Just
+        _AuthKey = vivKey . _Just
+        _AuthToken = vivOAuthToken . _Just
 
 instance GoogleRequest VariantsetsImportVariants'
          where

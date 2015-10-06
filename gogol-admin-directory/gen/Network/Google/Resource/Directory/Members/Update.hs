@@ -168,8 +168,8 @@ muFields :: Lens' MembersUpdate' (Maybe Text)
 muFields = lens _muFields (\ s a -> s{_muFields = a})
 
 instance GoogleAuth MembersUpdate' where
-        authKey = muKey . _Just
-        authToken = muOAuthToken . _Just
+        _AuthKey = muKey . _Just
+        _AuthToken = muOAuthToken . _Just
 
 instance GoogleRequest MembersUpdate' where
         type Rs MembersUpdate' = Member

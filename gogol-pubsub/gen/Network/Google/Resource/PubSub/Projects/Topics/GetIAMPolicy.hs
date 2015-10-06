@@ -218,8 +218,8 @@ ptgipCallback
       (\ s a -> s{_ptgipCallback = a})
 
 instance GoogleAuth ProjectsTopicsGetIAMPolicy' where
-        authKey = ptgipKey . _Just
-        authToken = ptgipOAuthToken . _Just
+        _AuthKey = ptgipKey . _Just
+        _AuthToken = ptgipOAuthToken . _Just
 
 instance GoogleRequest ProjectsTopicsGetIAMPolicy'
          where

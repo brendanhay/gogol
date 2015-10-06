@@ -158,8 +158,8 @@ pguFields
   = lens _pguFields (\ s a -> s{_pguFields = a})
 
 instance GoogleAuth PlacementGroupsUpdate' where
-        authKey = pguKey . _Just
-        authToken = pguOAuthToken . _Just
+        _AuthKey = pguKey . _Just
+        _AuthToken = pguOAuthToken . _Just
 
 instance GoogleRequest PlacementGroupsUpdate' where
         type Rs PlacementGroupsUpdate' = PlacementGroup

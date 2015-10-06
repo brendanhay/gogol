@@ -200,8 +200,8 @@ ccaulFields
   = lens _ccaulFields (\ s a -> s{_ccaulFields = a})
 
 instance GoogleAuth CustomChannelsAdUnitsList' where
-        authKey = ccaulKey . _Just
-        authToken = ccaulOAuthToken . _Just
+        _AuthKey = ccaulKey . _Just
+        _AuthToken = ccaulOAuthToken . _Just
 
 instance GoogleRequest CustomChannelsAdUnitsList'
          where

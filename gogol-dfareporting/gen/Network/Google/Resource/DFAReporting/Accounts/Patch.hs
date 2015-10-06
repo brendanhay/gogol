@@ -168,8 +168,8 @@ ap1Fields
   = lens _ap1Fields (\ s a -> s{_ap1Fields = a})
 
 instance GoogleAuth AccountsPatch' where
-        authKey = ap1Key . _Just
-        authToken = ap1OAuthToken . _Just
+        _AuthKey = ap1Key . _Just
+        _AuthToken = ap1OAuthToken . _Just
 
 instance GoogleRequest AccountsPatch' where
         type Rs AccountsPatch' = Account

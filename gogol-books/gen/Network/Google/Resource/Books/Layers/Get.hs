@@ -177,8 +177,8 @@ lgSummaryId
   = lens _lgSummaryId (\ s a -> s{_lgSummaryId = a})
 
 instance GoogleAuth LayersGet' where
-        authKey = lgKey . _Just
-        authToken = lgOAuthToken . _Just
+        _AuthKey = lgKey . _Just
+        _AuthToken = lgOAuthToken . _Just
 
 instance GoogleRequest LayersGet' where
         type Rs LayersGet' = Layersummary

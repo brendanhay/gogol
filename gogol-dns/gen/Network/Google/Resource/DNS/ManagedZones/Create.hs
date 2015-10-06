@@ -157,8 +157,8 @@ mzcFields
   = lens _mzcFields (\ s a -> s{_mzcFields = a})
 
 instance GoogleAuth ManagedZonesCreate' where
-        authKey = mzcKey . _Just
-        authToken = mzcOAuthToken . _Just
+        _AuthKey = mzcKey . _Just
+        _AuthToken = mzcOAuthToken . _Just
 
 instance GoogleRequest ManagedZonesCreate' where
         type Rs ManagedZonesCreate' = ManagedZone

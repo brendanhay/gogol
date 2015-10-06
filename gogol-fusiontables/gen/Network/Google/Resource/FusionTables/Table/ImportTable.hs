@@ -178,8 +178,8 @@ titFields
   = lens _titFields (\ s a -> s{_titFields = a})
 
 instance GoogleAuth TableImportTable' where
-        authKey = titKey . _Just
-        authToken = titOAuthToken . _Just
+        _AuthKey = titKey . _Just
+        _AuthToken = titOAuthToken . _Just
 
 instance GoogleRequest TableImportTable' where
         type Rs TableImportTable' = Table

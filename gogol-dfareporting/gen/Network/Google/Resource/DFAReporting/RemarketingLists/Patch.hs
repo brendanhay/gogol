@@ -171,8 +171,8 @@ rlpFields
   = lens _rlpFields (\ s a -> s{_rlpFields = a})
 
 instance GoogleAuth RemarketingListsPatch' where
-        authKey = rlpKey . _Just
-        authToken = rlpOAuthToken . _Just
+        _AuthKey = rlpKey . _Just
+        _AuthToken = rlpOAuthToken . _Just
 
 instance GoogleRequest RemarketingListsPatch' where
         type Rs RemarketingListsPatch' = RemarketingList

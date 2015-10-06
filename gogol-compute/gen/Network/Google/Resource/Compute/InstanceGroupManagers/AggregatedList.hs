@@ -197,8 +197,8 @@ igmalFields
 
 instance GoogleAuth
          InstanceGroupManagersAggregatedList' where
-        authKey = igmalKey . _Just
-        authToken = igmalOAuthToken . _Just
+        _AuthKey = igmalKey . _Just
+        _AuthToken = igmalOAuthToken . _Just
 
 instance GoogleRequest
          InstanceGroupManagersAggregatedList' where

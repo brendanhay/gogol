@@ -168,8 +168,8 @@ tmlFields
   = lens _tmlFields (\ s a -> s{_tmlFields = a})
 
 instance GoogleAuth TrainedModelsList' where
-        authKey = tmlKey . _Just
-        authToken = tmlOAuthToken . _Just
+        _AuthKey = tmlKey . _Just
+        _AuthToken = tmlOAuthToken . _Just
 
 instance GoogleRequest TrainedModelsList' where
         type Rs TrainedModelsList' = List

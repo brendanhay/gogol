@@ -154,8 +154,8 @@ srmfapFields
 
 instance GoogleAuth ScoresResetMultipleForAllPlayers'
          where
-        authKey = srmfapKey . _Just
-        authToken = srmfapOAuthToken . _Just
+        _AuthKey = srmfapKey . _Just
+        _AuthToken = srmfapOAuthToken . _Just
 
 instance GoogleRequest
          ScoresResetMultipleForAllPlayers' where

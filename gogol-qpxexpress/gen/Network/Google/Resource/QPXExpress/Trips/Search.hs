@@ -142,8 +142,8 @@ tsFields :: Lens' TripsSearch' (Maybe Text)
 tsFields = lens _tsFields (\ s a -> s{_tsFields = a})
 
 instance GoogleAuth TripsSearch' where
-        authKey = tsKey . _Just
-        authToken = tsOAuthToken . _Just
+        _AuthKey = tsKey . _Just
+        _AuthToken = tsOAuthToken . _Just
 
 instance GoogleRequest TripsSearch' where
         type Rs TripsSearch' = TripsSearchResponse

@@ -171,8 +171,8 @@ crcFields
   = lens _crcFields (\ s a -> s{_crcFields = a})
 
 instance GoogleAuth CommentsRemoveContent' where
-        authKey = crcKey . _Just
-        authToken = crcOAuthToken . _Just
+        _AuthKey = crcKey . _Just
+        _AuthToken = crcOAuthToken . _Just
 
 instance GoogleRequest CommentsRemoveContent' where
         type Rs CommentsRemoveContent' = Comment

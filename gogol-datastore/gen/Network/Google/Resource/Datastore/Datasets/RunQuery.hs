@@ -157,8 +157,8 @@ drqFields
   = lens _drqFields (\ s a -> s{_drqFields = a})
 
 instance GoogleAuth DatasetsRunQuery' where
-        authKey = drqKey . _Just
-        authToken = drqOAuthToken . _Just
+        _AuthKey = drqKey . _Just
+        _AuthToken = drqOAuthToken . _Just
 
 instance GoogleRequest DatasetsRunQuery' where
         type Rs DatasetsRunQuery' = RunQueryResponse

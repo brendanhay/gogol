@@ -142,8 +142,8 @@ fdFields :: Lens' FilesDelete' (Maybe Text)
 fdFields = lens _fdFields (\ s a -> s{_fdFields = a})
 
 instance GoogleAuth FilesDelete' where
-        authKey = fdKey . _Just
-        authToken = fdOAuthToken . _Just
+        _AuthKey = fdKey . _Just
+        _AuthToken = fdOAuthToken . _Just
 
 instance GoogleRequest FilesDelete' where
         type Rs FilesDelete' = ()

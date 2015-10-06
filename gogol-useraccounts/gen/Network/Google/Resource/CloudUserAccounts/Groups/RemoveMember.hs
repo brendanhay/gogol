@@ -171,8 +171,8 @@ grmFields
   = lens _grmFields (\ s a -> s{_grmFields = a})
 
 instance GoogleAuth GroupsRemoveMember' where
-        authKey = grmKey . _Just
-        authToken = grmOAuthToken . _Just
+        _AuthKey = grmKey . _Just
+        _AuthToken = grmOAuthToken . _Just
 
 instance GoogleRequest GroupsRemoveMember' where
         type Rs GroupsRemoveMember' = Operation

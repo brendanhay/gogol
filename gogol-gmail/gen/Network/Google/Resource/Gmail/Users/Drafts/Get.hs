@@ -167,8 +167,8 @@ udgFields
   = lens _udgFields (\ s a -> s{_udgFields = a})
 
 instance GoogleAuth UsersDraftsGet' where
-        authKey = udgKey . _Just
-        authToken = udgOAuthToken . _Just
+        _AuthKey = udgKey . _Just
+        _AuthToken = udgOAuthToken . _Just
 
 instance GoogleRequest UsersDraftsGet' where
         type Rs UsersDraftsGet' = Draft

@@ -200,8 +200,8 @@ mlDeployment
   = lens _mlDeployment (\ s a -> s{_mlDeployment = a})
 
 instance GoogleAuth ManifestsList' where
-        authKey = mlKey . _Just
-        authToken = mlOAuthToken . _Just
+        _AuthKey = mlKey . _Just
+        _AuthToken = mlOAuthToken . _Just
 
 instance GoogleRequest ManifestsList' where
         type Rs ManifestsList' = ManifestsListResponse

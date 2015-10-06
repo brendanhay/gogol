@@ -169,8 +169,8 @@ umuFields
   = lens _umuFields (\ s a -> s{_umuFields = a})
 
 instance GoogleAuth URLMapsUpdate' where
-        authKey = umuKey . _Just
-        authToken = umuOAuthToken . _Just
+        _AuthKey = umuKey . _Just
+        _AuthToken = umuOAuthToken . _Just
 
 instance GoogleRequest URLMapsUpdate' where
         type Rs URLMapsUpdate' = Operation

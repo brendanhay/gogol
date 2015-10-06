@@ -141,8 +141,8 @@ dgFields :: Lens' DatasetsGet' (Maybe Text)
 dgFields = lens _dgFields (\ s a -> s{_dgFields = a})
 
 instance GoogleAuth DatasetsGet' where
-        authKey = dgKey . _Just
-        authToken = dgOAuthToken . _Just
+        _AuthKey = dgKey . _Just
+        _AuthToken = dgOAuthToken . _Just
 
 instance GoogleRequest DatasetsGet' where
         type Rs DatasetsGet' = Dataset

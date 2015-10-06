@@ -180,8 +180,8 @@ pliiFields
   = lens _pliiFields (\ s a -> s{_pliiFields = a})
 
 instance GoogleAuth PlayListItemsInsert' where
-        authKey = pliiKey . _Just
-        authToken = pliiOAuthToken . _Just
+        _AuthKey = pliiKey . _Just
+        _AuthToken = pliiOAuthToken . _Just
 
 instance GoogleRequest PlayListItemsInsert' where
         type Rs PlayListItemsInsert' = PlayListItem

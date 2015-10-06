@@ -231,8 +231,8 @@ cuCallback
   = lens _cuCallback (\ s a -> s{_cuCallback = a})
 
 instance GoogleAuth CoursesUpdate' where
-        authKey = cuKey . _Just
-        authToken = cuOAuthToken . _Just
+        _AuthKey = cuKey . _Just
+        _AuthToken = cuOAuthToken . _Just
 
 instance GoogleRequest CoursesUpdate' where
         type Rs CoursesUpdate' = Course

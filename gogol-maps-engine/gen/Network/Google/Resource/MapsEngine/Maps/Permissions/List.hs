@@ -145,8 +145,8 @@ mplFields
   = lens _mplFields (\ s a -> s{_mplFields = a})
 
 instance GoogleAuth MapsPermissionsList' where
-        authKey = mplKey . _Just
-        authToken = mplOAuthToken . _Just
+        _AuthKey = mplKey . _Just
+        _AuthToken = mplOAuthToken . _Just
 
 instance GoogleRequest MapsPermissionsList' where
         type Rs MapsPermissionsList' =

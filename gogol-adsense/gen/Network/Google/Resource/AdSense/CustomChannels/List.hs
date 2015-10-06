@@ -175,8 +175,8 @@ cclFields
   = lens _cclFields (\ s a -> s{_cclFields = a})
 
 instance GoogleAuth CustomChannelsList' where
-        authKey = cclKey . _Just
-        authToken = cclOAuthToken . _Just
+        _AuthKey = cclKey . _Just
+        _AuthToken = cclOAuthToken . _Just
 
 instance GoogleRequest CustomChannelsList' where
         type Rs CustomChannelsList' = CustomChannels

@@ -156,8 +156,8 @@ cfgFields
   = lens _cfgFields (\ s a -> s{_cfgFields = a})
 
 instance GoogleAuth CreativeFieldsGet' where
-        authKey = cfgKey . _Just
-        authToken = cfgOAuthToken . _Just
+        _AuthKey = cfgKey . _Just
+        _AuthToken = cfgOAuthToken . _Just
 
 instance GoogleRequest CreativeFieldsGet' where
         type Rs CreativeFieldsGet' = CreativeField

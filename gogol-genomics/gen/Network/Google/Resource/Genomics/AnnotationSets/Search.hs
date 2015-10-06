@@ -150,8 +150,8 @@ assFields
   = lens _assFields (\ s a -> s{_assFields = a})
 
 instance GoogleAuth AnnotationSetsSearch' where
-        authKey = assKey . _Just
-        authToken = assOAuthToken . _Just
+        _AuthKey = assKey . _Just
+        _AuthToken = assOAuthToken . _Just
 
 instance GoogleRequest AnnotationSetsSearch' where
         type Rs AnnotationSetsSearch' =

@@ -156,8 +156,8 @@ fadFields
   = lens _fadFields (\ s a -> s{_fadFields = a})
 
 instance GoogleAuth FloodlightActivitiesDelete' where
-        authKey = fadKey . _Just
-        authToken = fadOAuthToken . _Just
+        _AuthKey = fadKey . _Just
+        _AuthToken = fadOAuthToken . _Just
 
 instance GoogleRequest FloodlightActivitiesDelete'
          where

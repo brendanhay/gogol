@@ -153,8 +153,8 @@ sgFields :: Lens' SitesGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
 instance GoogleAuth SitesGet' where
-        authKey = sgKey . _Just
-        authToken = sgOAuthToken . _Just
+        _AuthKey = sgKey . _Just
+        _AuthToken = sgOAuthToken . _Just
 
 instance GoogleRequest SitesGet' where
         type Rs SitesGet' = Site

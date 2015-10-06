@@ -187,8 +187,8 @@ igsnpFields
 
 instance GoogleAuth InstanceGroupsSetNamedPorts'
          where
-        authKey = igsnpKey . _Just
-        authToken = igsnpOAuthToken . _Just
+        _AuthKey = igsnpKey . _Just
+        _AuthToken = igsnpOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupsSetNamedPorts'
          where

@@ -169,8 +169,8 @@ bpFields :: Lens' BudgetPatch' (Maybe Text)
 bpFields = lens _bpFields (\ s a -> s{_bpFields = a})
 
 instance GoogleAuth BudgetPatch' where
-        authKey = bpKey . _Just
-        authToken = bpOAuthToken . _Just
+        _AuthKey = bpKey . _Just
+        _AuthToken = bpOAuthToken . _Just
 
 instance GoogleRequest BudgetPatch' where
         type Rs BudgetPatch' = Budget

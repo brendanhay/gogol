@@ -158,8 +158,8 @@ mslFields
   = lens _mslFields (\ s a -> s{_mslFields = a})
 
 instance GoogleAuth ManagementSegmentsList' where
-        authKey = mslKey . _Just
-        authToken = mslOAuthToken . _Just
+        _AuthKey = mslKey . _Just
+        _AuthToken = mslOAuthToken . _Just
 
 instance GoogleRequest ManagementSegmentsList' where
         type Rs ManagementSegmentsList' = Segments

@@ -146,8 +146,8 @@ tbmcFields
   = lens _tbmcFields (\ s a -> s{_tbmcFields = a})
 
 instance GoogleAuth TurnBasedMatchesCancel' where
-        authKey = tbmcKey . _Just
-        authToken = tbmcOAuthToken . _Just
+        _AuthKey = tbmcKey . _Just
+        _AuthToken = tbmcOAuthToken . _Just
 
 instance GoogleRequest TurnBasedMatchesCancel' where
         type Rs TurnBasedMatchesCancel' = ()

@@ -155,8 +155,8 @@ irInstance
   = lens _irInstance (\ s a -> s{_irInstance = a})
 
 instance GoogleAuth InstancesRestart' where
-        authKey = irKey . _Just
-        authToken = irOAuthToken . _Just
+        _AuthKey = irKey . _Just
+        _AuthToken = irOAuthToken . _Just
 
 instance GoogleRequest InstancesRestart' where
         type Rs InstancesRestart' = Operation

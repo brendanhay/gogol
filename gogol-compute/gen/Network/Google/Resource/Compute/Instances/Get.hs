@@ -165,8 +165,8 @@ igInstance
   = lens _igInstance (\ s a -> s{_igInstance = a})
 
 instance GoogleAuth InstancesGet' where
-        authKey = igKey . _Just
-        authToken = igOAuthToken . _Just
+        _AuthKey = igKey . _Just
+        _AuthToken = igOAuthToken . _Just
 
 instance GoogleRequest InstancesGet' where
         type Rs InstancesGet' = Instance

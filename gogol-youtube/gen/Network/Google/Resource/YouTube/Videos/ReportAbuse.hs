@@ -166,8 +166,8 @@ vraFields
   = lens _vraFields (\ s a -> s{_vraFields = a})
 
 instance GoogleAuth VideosReportAbuse' where
-        authKey = vraKey . _Just
-        authToken = vraOAuthToken . _Just
+        _AuthKey = vraKey . _Just
+        _AuthToken = vraOAuthToken . _Just
 
 instance GoogleRequest VideosReportAbuse' where
         type Rs VideosReportAbuse' = ()

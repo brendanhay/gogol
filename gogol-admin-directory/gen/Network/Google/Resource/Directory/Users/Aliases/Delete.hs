@@ -156,8 +156,8 @@ uadFields
   = lens _uadFields (\ s a -> s{_uadFields = a})
 
 instance GoogleAuth UsersAliasesDelete' where
-        authKey = uadKey . _Just
-        authToken = uadOAuthToken . _Just
+        _AuthKey = uadKey . _Just
+        _AuthToken = uadOAuthToken . _Just
 
 instance GoogleRequest UsersAliasesDelete' where
         type Rs UsersAliasesDelete' = ()

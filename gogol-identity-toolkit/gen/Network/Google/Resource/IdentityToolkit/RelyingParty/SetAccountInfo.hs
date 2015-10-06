@@ -147,8 +147,8 @@ rpsaiFields
   = lens _rpsaiFields (\ s a -> s{_rpsaiFields = a})
 
 instance GoogleAuth RelyingPartySetAccountInfo' where
-        authKey = rpsaiKey . _Just
-        authToken = rpsaiOAuthToken . _Just
+        _AuthKey = rpsaiKey . _Just
+        _AuthToken = rpsaiOAuthToken . _Just
 
 instance GoogleRequest RelyingPartySetAccountInfo'
          where

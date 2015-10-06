@@ -167,8 +167,8 @@ sqFields :: Lens' SearchanalyticsQuery' (Maybe Text)
 sqFields = lens _sqFields (\ s a -> s{_sqFields = a})
 
 instance GoogleAuth SearchanalyticsQuery' where
-        authKey = sqKey . _Just
-        authToken = sqOAuthToken . _Just
+        _AuthKey = sqKey . _Just
+        _AuthToken = sqOAuthToken . _Just
 
 instance GoogleRequest SearchanalyticsQuery' where
         type Rs SearchanalyticsQuery' =

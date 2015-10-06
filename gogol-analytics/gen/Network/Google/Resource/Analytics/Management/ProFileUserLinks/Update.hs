@@ -204,8 +204,8 @@ mpfuluFields
 
 instance GoogleAuth ManagementProFileUserLinksUpdate'
          where
-        authKey = mpfuluKey . _Just
-        authToken = mpfuluOAuthToken . _Just
+        _AuthKey = mpfuluKey . _Just
+        _AuthToken = mpfuluOAuthToken . _Just
 
 instance GoogleRequest
          ManagementProFileUserLinksUpdate' where

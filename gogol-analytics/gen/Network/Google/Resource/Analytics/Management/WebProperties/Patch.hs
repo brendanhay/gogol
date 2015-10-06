@@ -175,8 +175,8 @@ mwppFields
 
 instance GoogleAuth ManagementWebPropertiesPatch'
          where
-        authKey = mwppKey . _Just
-        authToken = mwppOAuthToken . _Just
+        _AuthKey = mwppKey . _Just
+        _AuthToken = mwppOAuthToken . _Just
 
 instance GoogleRequest ManagementWebPropertiesPatch'
          where

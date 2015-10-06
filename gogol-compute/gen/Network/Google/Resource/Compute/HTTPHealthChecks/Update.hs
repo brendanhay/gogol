@@ -179,8 +179,8 @@ httphcuFields
       (\ s a -> s{_httphcuFields = a})
 
 instance GoogleAuth HTTPHealthChecksUpdate' where
-        authKey = httphcuKey . _Just
-        authToken = httphcuOAuthToken . _Just
+        _AuthKey = httphcuKey . _Just
+        _AuthToken = httphcuOAuthToken . _Just
 
 instance GoogleRequest HTTPHealthChecksUpdate' where
         type Rs HTTPHealthChecksUpdate' = Operation

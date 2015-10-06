@@ -151,8 +151,8 @@ mcuusFields
   = lens _mcuusFields (\ s a -> s{_mcuusFields = a})
 
 instance GoogleAuth MyConfigUpdateUserSettings' where
-        authKey = mcuusKey . _Just
-        authToken = mcuusOAuthToken . _Just
+        _AuthKey = mcuusKey . _Just
+        _AuthToken = mcuusOAuthToken . _Just
 
 instance GoogleRequest MyConfigUpdateUserSettings'
          where

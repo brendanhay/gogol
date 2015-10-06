@@ -156,8 +156,8 @@ pcdFields
   = lens _pcdFields (\ s a -> s{_pcdFields = a})
 
 instance GoogleAuth PretargetingConfigDelete' where
-        authKey = pcdKey . _Just
-        authToken = pcdOAuthToken . _Just
+        _AuthKey = pcdKey . _Just
+        _AuthToken = pcdOAuthToken . _Just
 
 instance GoogleRequest PretargetingConfigDelete'
          where

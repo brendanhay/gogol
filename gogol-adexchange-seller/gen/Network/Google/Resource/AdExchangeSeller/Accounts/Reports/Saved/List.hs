@@ -176,8 +176,8 @@ arslFields
   = lens _arslFields (\ s a -> s{_arslFields = a})
 
 instance GoogleAuth AccountsReportsSavedList' where
-        authKey = arslKey . _Just
-        authToken = arslOAuthToken . _Just
+        _AuthKey = arslKey . _Just
+        _AuthToken = arslOAuthToken . _Just
 
 instance GoogleRequest AccountsReportsSavedList'
          where

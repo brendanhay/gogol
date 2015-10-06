@@ -140,8 +140,8 @@ erafapFields
 
 instance GoogleAuth EventsResetAllForAllPlayers'
          where
-        authKey = erafapKey . _Just
-        authToken = erafapOAuthToken . _Just
+        _AuthKey = erafapKey . _Just
+        _AuthToken = erafapOAuthToken . _Just
 
 instance GoogleRequest EventsResetAllForAllPlayers'
          where

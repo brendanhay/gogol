@@ -174,8 +174,8 @@ iapiFields
   = lens _iapiFields (\ s a -> s{_iapiFields = a})
 
 instance GoogleAuth InAppProductsInsert' where
-        authKey = iapiKey . _Just
-        authToken = iapiOAuthToken . _Just
+        _AuthKey = iapiKey . _Just
+        _AuthToken = iapiOAuthToken . _Just
 
 instance GoogleRequest InAppProductsInsert' where
         type Rs InAppProductsInsert' = InAppProduct

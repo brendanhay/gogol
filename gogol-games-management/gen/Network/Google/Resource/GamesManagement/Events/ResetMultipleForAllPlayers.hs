@@ -154,8 +154,8 @@ ermfapFields
 
 instance GoogleAuth EventsResetMultipleForAllPlayers'
          where
-        authKey = ermfapKey . _Just
-        authToken = ermfapOAuthToken . _Just
+        _AuthKey = ermfapKey . _Just
+        _AuthToken = ermfapOAuthToken . _Just
 
 instance GoogleRequest
          EventsResetMultipleForAllPlayers' where

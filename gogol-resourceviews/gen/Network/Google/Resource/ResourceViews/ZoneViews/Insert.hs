@@ -169,8 +169,8 @@ zviFields
   = lens _zviFields (\ s a -> s{_zviFields = a})
 
 instance GoogleAuth ZoneViewsInsert' where
-        authKey = zviKey . _Just
-        authToken = zviOAuthToken . _Just
+        _AuthKey = zviKey . _Just
+        _AuthToken = zviOAuthToken . _Just
 
 instance GoogleRequest ZoneViewsInsert' where
         type Rs ZoneViewsInsert' = Operation

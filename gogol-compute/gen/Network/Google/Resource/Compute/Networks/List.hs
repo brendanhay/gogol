@@ -188,8 +188,8 @@ nlFields :: Lens' NetworksList' (Maybe Text)
 nlFields = lens _nlFields (\ s a -> s{_nlFields = a})
 
 instance GoogleAuth NetworksList' where
-        authKey = nlKey . _Just
-        authToken = nlOAuthToken . _Just
+        _AuthKey = nlKey . _Just
+        _AuthToken = nlOAuthToken . _Just
 
 instance GoogleRequest NetworksList' where
         type Rs NetworksList' = NetworkList

@@ -202,8 +202,8 @@ clSortBy :: Lens' ChangesList' ChangesListSortBy
 clSortBy = lens _clSortBy (\ s a -> s{_clSortBy = a})
 
 instance GoogleAuth ChangesList' where
-        authKey = clKey . _Just
-        authToken = clOAuthToken . _Just
+        _AuthKey = clKey . _Just
+        _AuthToken = clOAuthToken . _Just
 
 instance GoogleRequest ChangesList' where
         type Rs ChangesList' = ChangesListResponse

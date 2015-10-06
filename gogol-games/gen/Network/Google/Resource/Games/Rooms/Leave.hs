@@ -166,8 +166,8 @@ rlFields :: Lens' RoomsLeave' (Maybe Text)
 rlFields = lens _rlFields (\ s a -> s{_rlFields = a})
 
 instance GoogleAuth RoomsLeave' where
-        authKey = rlKey . _Just
-        authToken = rlOAuthToken . _Just
+        _AuthKey = rlKey . _Just
+        _AuthToken = rlOAuthToken . _Just
 
 instance GoogleRequest RoomsLeave' where
         type Rs RoomsLeave' = Room

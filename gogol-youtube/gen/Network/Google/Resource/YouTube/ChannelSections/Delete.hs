@@ -166,8 +166,8 @@ csdFields
   = lens _csdFields (\ s a -> s{_csdFields = a})
 
 instance GoogleAuth ChannelSectionsDelete' where
-        authKey = csdKey . _Just
-        authToken = csdOAuthToken . _Just
+        _AuthKey = csdKey . _Just
+        _AuthToken = csdOAuthToken . _Just
 
 instance GoogleRequest ChannelSectionsDelete' where
         type Rs ChannelSectionsDelete' = ()

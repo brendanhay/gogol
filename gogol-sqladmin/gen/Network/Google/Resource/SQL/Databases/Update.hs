@@ -181,8 +181,8 @@ duInstance
   = lens _duInstance (\ s a -> s{_duInstance = a})
 
 instance GoogleAuth DatabasesUpdate' where
-        authKey = duKey . _Just
-        authToken = duOAuthToken . _Just
+        _AuthKey = duKey . _Just
+        _AuthToken = duOAuthToken . _Just
 
 instance GoogleRequest DatabasesUpdate' where
         type Rs DatabasesUpdate' = Operation

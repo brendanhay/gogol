@@ -174,8 +174,8 @@ mdaFields
   = lens _mdaFields (\ s a -> s{_mdaFields = a})
 
 instance GoogleAuth MobileDevicesAction' where
-        authKey = mdaKey . _Just
-        authToken = mdaOAuthToken . _Just
+        _AuthKey = mdaKey . _Just
+        _AuthToken = mdaOAuthToken . _Just
 
 instance GoogleRequest MobileDevicesAction' where
         type Rs MobileDevicesAction' = ()

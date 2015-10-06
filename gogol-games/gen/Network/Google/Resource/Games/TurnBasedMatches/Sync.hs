@@ -208,8 +208,8 @@ tbmsFields
   = lens _tbmsFields (\ s a -> s{_tbmsFields = a})
 
 instance GoogleAuth TurnBasedMatchesSync' where
-        authKey = tbmsKey . _Just
-        authToken = tbmsOAuthToken . _Just
+        _AuthKey = tbmsKey . _Just
+        _AuthToken = tbmsOAuthToken . _Just
 
 instance GoogleRequest TurnBasedMatchesSync' where
         type Rs TurnBasedMatchesSync' = TurnBasedMatchSync

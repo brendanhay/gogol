@@ -146,8 +146,8 @@ ugpfFields
   = lens _ugpfFields (\ s a -> s{_ugpfFields = a})
 
 instance GoogleAuth UsersGetProFile' where
-        authKey = ugpfKey . _Just
-        authToken = ugpfOAuthToken . _Just
+        _AuthKey = ugpfKey . _Just
+        _AuthToken = ugpfOAuthToken . _Just
 
 instance GoogleRequest UsersGetProFile' where
         type Rs UsersGetProFile' = ProFile

@@ -160,8 +160,8 @@ gfrdFields
 
 instance GoogleAuth GlobalForwardingRulesDelete'
          where
-        authKey = gfrdKey . _Just
-        authToken = gfrdOAuthToken . _Just
+        _AuthKey = gfrdKey . _Just
+        _AuthToken = gfrdOAuthToken . _Just
 
 instance GoogleRequest GlobalForwardingRulesDelete'
          where

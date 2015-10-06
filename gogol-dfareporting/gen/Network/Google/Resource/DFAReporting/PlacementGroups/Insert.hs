@@ -158,8 +158,8 @@ pgiFields
   = lens _pgiFields (\ s a -> s{_pgiFields = a})
 
 instance GoogleAuth PlacementGroupsInsert' where
-        authKey = pgiKey . _Just
-        authToken = pgiOAuthToken . _Just
+        _AuthKey = pgiKey . _Just
+        _AuthToken = pgiOAuthToken . _Just
 
 instance GoogleRequest PlacementGroupsInsert' where
         type Rs PlacementGroupsInsert' = PlacementGroup

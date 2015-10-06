@@ -156,8 +156,8 @@ sagFields
   = lens _sagFields (\ s a -> s{_sagFields = a})
 
 instance GoogleAuth SubAccountsGet' where
-        authKey = sagKey . _Just
-        authToken = sagOAuthToken . _Just
+        _AuthKey = sagKey . _Just
+        _AuthToken = sagOAuthToken . _Just
 
 instance GoogleRequest SubAccountsGet' where
         type Rs SubAccountsGet' = SubAccount

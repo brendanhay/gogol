@@ -186,8 +186,8 @@ pluFields
   = lens _pluFields (\ s a -> s{_pluFields = a})
 
 instance GoogleAuth PlayListsUpdate' where
-        authKey = pluKey . _Just
-        authToken = pluOAuthToken . _Just
+        _AuthKey = pluKey . _Just
+        _AuthToken = pluOAuthToken . _Just
 
 instance GoogleRequest PlayListsUpdate' where
         type Rs PlayListsUpdate' = PlayList

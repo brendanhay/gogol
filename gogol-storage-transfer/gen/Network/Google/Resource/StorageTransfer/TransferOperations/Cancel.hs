@@ -212,8 +212,8 @@ tocCallback
   = lens _tocCallback (\ s a -> s{_tocCallback = a})
 
 instance GoogleAuth TransferOperationsCancel' where
-        authKey = tocKey . _Just
-        authToken = tocOAuthToken . _Just
+        _AuthKey = tocKey . _Just
+        _AuthToken = tocOAuthToken . _Just
 
 instance GoogleRequest TransferOperationsCancel'
          where

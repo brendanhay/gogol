@@ -144,8 +144,8 @@ prFields :: Lens' PawsRegister' (Maybe Text)
 prFields = lens _prFields (\ s a -> s{_prFields = a})
 
 instance GoogleAuth PawsRegister' where
-        authKey = prKey . _Just
-        authToken = prOAuthToken . _Just
+        _AuthKey = prKey . _Just
+        _AuthToken = prOAuthToken . _Just
 
 instance GoogleRequest PawsRegister' where
         type Rs PawsRegister' = PawsRegisterResponse

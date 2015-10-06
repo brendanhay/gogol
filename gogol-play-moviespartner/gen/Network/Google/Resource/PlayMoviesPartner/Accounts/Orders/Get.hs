@@ -228,8 +228,8 @@ aogCallback
   = lens _aogCallback (\ s a -> s{_aogCallback = a})
 
 instance GoogleAuth AccountsOrdersGet' where
-        authKey = aogKey . _Just
-        authToken = aogOAuthToken . _Just
+        _AuthKey = aogKey . _Just
+        _AuthToken = aogOAuthToken . _Just
 
 instance GoogleRequest AccountsOrdersGet' where
         type Rs AccountsOrdersGet' = Order

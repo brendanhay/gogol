@@ -173,8 +173,8 @@ ipInstance
   = lens _ipInstance (\ s a -> s{_ipInstance = a})
 
 instance GoogleAuth InstancesPatch' where
-        authKey = ipKey . _Just
-        authToken = ipOAuthToken . _Just
+        _AuthKey = ipKey . _Just
+        _AuthToken = ipOAuthToken . _Just
 
 instance GoogleRequest InstancesPatch' where
         type Rs InstancesPatch' = Operation

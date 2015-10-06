@@ -254,8 +254,8 @@ iilFields
   = lens _iilFields (\ s a -> s{_iilFields = a})
 
 instance GoogleAuth InventoryItemsList' where
-        authKey = iilKey . _Just
-        authToken = iilOAuthToken . _Just
+        _AuthKey = iilKey . _Just
+        _AuthToken = iilOAuthToken . _Just
 
 instance GoogleRequest InventoryItemsList' where
         type Rs InventoryItemsList' =

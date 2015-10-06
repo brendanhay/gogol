@@ -189,8 +189,8 @@ muudFields
 
 instance GoogleAuth ManagementUploadsUploadData'
          where
-        authKey = muudKey . _Just
-        authToken = muudOAuthToken . _Just
+        _AuthKey = muudKey . _Just
+        _AuthToken = muudOAuthToken . _Just
 
 instance GoogleRequest ManagementUploadsUploadData'
          where

@@ -154,8 +154,8 @@ idInstance
   = lens _idInstance (\ s a -> s{_idInstance = a})
 
 instance GoogleAuth InstancesDelete' where
-        authKey = idKey . _Just
-        authToken = idOAuthToken . _Just
+        _AuthKey = idKey . _Just
+        _AuthToken = idOAuthToken . _Just
 
 instance GoogleRequest InstancesDelete' where
         type Rs InstancesDelete' = Operation

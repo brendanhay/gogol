@@ -253,8 +253,8 @@ calCallback
   = lens _calCallback (\ s a -> s{_calCallback = a})
 
 instance GoogleAuth CoursesAliasesList' where
-        authKey = calKey . _Just
-        authToken = calOAuthToken . _Just
+        _AuthKey = calKey . _Just
+        _AuthToken = calOAuthToken . _Just
 
 instance GoogleRequest CoursesAliasesList' where
         type Rs CoursesAliasesList' =

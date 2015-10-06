@@ -243,8 +243,8 @@ amvcCallback
   = lens _amvcCallback (\ s a -> s{_amvcCallback = a})
 
 instance GoogleAuth AppsModulesVersionsCreate' where
-        authKey = amvcKey . _Just
-        authToken = amvcOAuthToken . _Just
+        _AuthKey = amvcKey . _Just
+        _AuthToken = amvcOAuthToken . _Just
 
 instance GoogleRequest AppsModulesVersionsCreate'
          where

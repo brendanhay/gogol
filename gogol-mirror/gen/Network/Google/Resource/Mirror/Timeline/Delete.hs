@@ -140,8 +140,8 @@ tdFields :: Lens' TimelineDelete' (Maybe Text)
 tdFields = lens _tdFields (\ s a -> s{_tdFields = a})
 
 instance GoogleAuth TimelineDelete' where
-        authKey = tdKey . _Just
-        authToken = tdOAuthToken . _Just
+        _AuthKey = tdKey . _Just
+        _AuthToken = tdOAuthToken . _Just
 
 instance GoogleRequest TimelineDelete' where
         type Rs TimelineDelete' = ()

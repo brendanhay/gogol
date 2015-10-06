@@ -199,8 +199,8 @@ dlFields :: Lens' DisksList' (Maybe Text)
 dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
 
 instance GoogleAuth DisksList' where
-        authKey = dlKey . _Just
-        authToken = dlOAuthToken . _Just
+        _AuthKey = dlKey . _Just
+        _AuthToken = dlOAuthToken . _Just
 
 instance GoogleRequest DisksList' where
         type Rs DisksList' = DiskList

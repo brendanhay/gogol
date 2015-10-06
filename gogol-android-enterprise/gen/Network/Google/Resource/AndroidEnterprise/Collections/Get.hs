@@ -159,8 +159,8 @@ cggFields
   = lens _cggFields (\ s a -> s{_cggFields = a})
 
 instance GoogleAuth CollectionsGet' where
-        authKey = cggKey . _Just
-        authToken = cggOAuthToken . _Just
+        _AuthKey = cggKey . _Just
+        _AuthToken = cggOAuthToken . _Just
 
 instance GoogleRequest CollectionsGet' where
         type Rs CollectionsGet' = Collection

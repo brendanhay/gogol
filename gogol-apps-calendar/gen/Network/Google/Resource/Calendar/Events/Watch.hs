@@ -417,8 +417,8 @@ ewFields :: Lens' EventsWatch' (Maybe Text)
 ewFields = lens _ewFields (\ s a -> s{_ewFields = a})
 
 instance GoogleAuth EventsWatch' where
-        authKey = ewKey . _Just
-        authToken = ewOAuthToken . _Just
+        _AuthKey = ewKey . _Just
+        _AuthToken = ewOAuthToken . _Just
 
 instance GoogleRequest EventsWatch' where
         type Rs EventsWatch' = Channel

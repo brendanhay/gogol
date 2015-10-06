@@ -154,8 +154,8 @@ riFields :: Lens' ReportsInsert' (Maybe Text)
 riFields = lens _riFields (\ s a -> s{_riFields = a})
 
 instance GoogleAuth ReportsInsert' where
-        authKey = riKey . _Just
-        authToken = riOAuthToken . _Just
+        _AuthKey = riKey . _Just
+        _AuthToken = riOAuthToken . _Just
 
 instance GoogleRequest ReportsInsert' where
         type Rs ReportsInsert' = Report

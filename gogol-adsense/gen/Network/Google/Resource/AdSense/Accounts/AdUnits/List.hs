@@ -200,8 +200,8 @@ aaulFields
   = lens _aaulFields (\ s a -> s{_aaulFields = a})
 
 instance GoogleAuth AccountsAdUnitsList' where
-        authKey = aaulKey . _Just
-        authToken = aaulOAuthToken . _Just
+        _AuthKey = aaulKey . _Just
+        _AuthToken = aaulOAuthToken . _Just
 
 instance GoogleRequest AccountsAdUnitsList' where
         type Rs AccountsAdUnitsList' = AdUnits

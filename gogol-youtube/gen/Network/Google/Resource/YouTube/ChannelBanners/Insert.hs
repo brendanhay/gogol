@@ -192,8 +192,8 @@ cbiFields
   = lens _cbiFields (\ s a -> s{_cbiFields = a})
 
 instance GoogleAuth ChannelBannersInsert' where
-        authKey = cbiKey . _Just
-        authToken = cbiOAuthToken . _Just
+        _AuthKey = cbiKey . _Just
+        _AuthToken = cbiOAuthToken . _Just
 
 instance GoogleRequest ChannelBannersInsert' where
         type Rs ChannelBannersInsert' = ChannelBannerResource

@@ -199,8 +199,8 @@ acmuFields
 
 instance GoogleAuth AccountsContainersMacrosUpdate'
          where
-        authKey = acmuKey . _Just
-        authToken = acmuOAuthToken . _Just
+        _AuthKey = acmuKey . _Just
+        _AuthToken = acmuOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersMacrosUpdate' where

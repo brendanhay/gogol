@@ -156,8 +156,8 @@ elFields :: Lens' EntitlementsList' (Maybe Text)
 elFields = lens _elFields (\ s a -> s{_elFields = a})
 
 instance GoogleAuth EntitlementsList' where
-        authKey = elKey . _Just
-        authToken = elOAuthToken . _Just
+        _AuthKey = elKey . _Just
+        _AuthToken = elOAuthToken . _Just
 
 instance GoogleRequest EntitlementsList' where
         type Rs EntitlementsList' = EntitlementsListResponse

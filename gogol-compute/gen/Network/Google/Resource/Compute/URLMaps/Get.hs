@@ -157,8 +157,8 @@ umgFields
   = lens _umgFields (\ s a -> s{_umgFields = a})
 
 instance GoogleAuth URLMapsGet' where
-        authKey = umgKey . _Just
-        authToken = umgOAuthToken . _Just
+        _AuthKey = umgKey . _Just
+        _AuthToken = umgOAuthToken . _Just
 
 instance GoogleRequest URLMapsGet' where
         type Rs URLMapsGet' = URLMap

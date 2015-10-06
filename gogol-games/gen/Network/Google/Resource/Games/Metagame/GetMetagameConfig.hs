@@ -134,8 +134,8 @@ mgmcFields
   = lens _mgmcFields (\ s a -> s{_mgmcFields = a})
 
 instance GoogleAuth MetagameGetMetagameConfig' where
-        authKey = mgmcKey . _Just
-        authToken = mgmcOAuthToken . _Just
+        _AuthKey = mgmcKey . _Just
+        _AuthToken = mgmcOAuthToken . _Just
 
 instance GoogleRequest MetagameGetMetagameConfig'
          where

@@ -224,8 +224,8 @@ aglFields
   = lens _aglFields (\ s a -> s{_aglFields = a})
 
 instance GoogleAuth AdvertiserGroupsList' where
-        authKey = aglKey . _Just
-        authToken = aglOAuthToken . _Just
+        _AuthKey = aglKey . _Just
+        _AuthToken = aglOAuthToken . _Just
 
 instance GoogleRequest AdvertiserGroupsList' where
         type Rs AdvertiserGroupsList' =

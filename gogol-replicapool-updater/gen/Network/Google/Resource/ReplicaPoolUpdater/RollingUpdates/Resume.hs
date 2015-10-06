@@ -167,8 +167,8 @@ rFields :: Lens' RollingUpdatesResume' (Maybe Text)
 rFields = lens _rFields (\ s a -> s{_rFields = a})
 
 instance GoogleAuth RollingUpdatesResume' where
-        authKey = rKey . _Just
-        authToken = rOAuthToken . _Just
+        _AuthKey = rKey . _Just
+        _AuthToken = rOAuthToken . _Just
 
 instance GoogleRequest RollingUpdatesResume' where
         type Rs RollingUpdatesResume' = Operation

@@ -168,8 +168,8 @@ dtgFields
   = lens _dtgFields (\ s a -> s{_dtgFields = a})
 
 instance GoogleAuth DiskTypesGet' where
-        authKey = dtgKey . _Just
-        authToken = dtgOAuthToken . _Just
+        _AuthKey = dtgKey . _Just
+        _AuthToken = dtgOAuthToken . _Just
 
 instance GoogleRequest DiskTypesGet' where
         type Rs DiskTypesGet' = DiskType

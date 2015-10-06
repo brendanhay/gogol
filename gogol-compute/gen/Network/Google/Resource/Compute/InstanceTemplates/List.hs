@@ -194,8 +194,8 @@ itlFields
   = lens _itlFields (\ s a -> s{_itlFields = a})
 
 instance GoogleAuth InstanceTemplatesList' where
-        authKey = itlKey . _Just
-        authToken = itlOAuthToken . _Just
+        _AuthKey = itlKey . _Just
+        _AuthToken = itlOAuthToken . _Just
 
 instance GoogleRequest InstanceTemplatesList' where
         type Rs InstanceTemplatesList' = InstanceTemplateList

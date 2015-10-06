@@ -172,8 +172,8 @@ eldFields
   = lens _eldFields (\ s a -> s{_eldFields = a})
 
 instance GoogleAuth EditsListingsDelete' where
-        authKey = eldKey . _Just
-        authToken = eldOAuthToken . _Just
+        _AuthKey = eldKey . _Just
+        _AuthToken = eldOAuthToken . _Just
 
 instance GoogleRequest EditsListingsDelete' where
         type Rs EditsListingsDelete' = ()

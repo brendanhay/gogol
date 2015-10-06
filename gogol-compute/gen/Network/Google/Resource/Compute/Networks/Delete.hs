@@ -154,8 +154,8 @@ ndFields :: Lens' NetworksDelete' (Maybe Text)
 ndFields = lens _ndFields (\ s a -> s{_ndFields = a})
 
 instance GoogleAuth NetworksDelete' where
-        authKey = ndKey . _Just
-        authToken = ndOAuthToken . _Just
+        _AuthKey = ndKey . _Just
+        _AuthToken = ndOAuthToken . _Just
 
 instance GoogleRequest NetworksDelete' where
         type Rs NetworksDelete' = Operation

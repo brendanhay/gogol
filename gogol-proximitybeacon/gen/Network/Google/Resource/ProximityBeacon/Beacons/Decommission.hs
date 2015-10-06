@@ -214,8 +214,8 @@ bdCallback
   = lens _bdCallback (\ s a -> s{_bdCallback = a})
 
 instance GoogleAuth BeaconsDecommission' where
-        authKey = bdKey . _Just
-        authToken = bdOAuthToken . _Just
+        _AuthKey = bdKey . _Just
+        _AuthToken = bdOAuthToken . _Just
 
 instance GoogleRequest BeaconsDecommission' where
         type Rs BeaconsDecommission' = Empty

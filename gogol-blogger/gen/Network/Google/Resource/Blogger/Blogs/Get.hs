@@ -162,8 +162,8 @@ bgFields :: Lens' BlogsGet' (Maybe Text)
 bgFields = lens _bgFields (\ s a -> s{_bgFields = a})
 
 instance GoogleAuth BlogsGet' where
-        authKey = bgKey . _Just
-        authToken = bgOAuthToken . _Just
+        _AuthKey = bgKey . _Just
+        _AuthToken = bgOAuthToken . _Just
 
 instance GoogleRequest BlogsGet' where
         type Rs BlogsGet' = Blog

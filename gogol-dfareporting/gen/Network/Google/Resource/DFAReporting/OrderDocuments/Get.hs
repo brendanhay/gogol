@@ -170,8 +170,8 @@ odgFields
   = lens _odgFields (\ s a -> s{_odgFields = a})
 
 instance GoogleAuth OrderDocumentsGet' where
-        authKey = odgKey . _Just
-        authToken = odgOAuthToken . _Just
+        _AuthKey = odgKey . _Just
+        _AuthToken = odgOAuthToken . _Just
 
 instance GoogleRequest OrderDocumentsGet' where
         type Rs OrderDocumentsGet' = OrderDocument

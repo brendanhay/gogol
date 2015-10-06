@@ -204,8 +204,8 @@ mcdpFields
 
 instance GoogleAuth ManagementCustomDimensionsPatch'
          where
-        authKey = mcdpKey . _Just
-        authToken = mcdpOAuthToken . _Just
+        _AuthKey = mcdpKey . _Just
+        _AuthToken = mcdpOAuthToken . _Just
 
 instance GoogleRequest
          ManagementCustomDimensionsPatch' where

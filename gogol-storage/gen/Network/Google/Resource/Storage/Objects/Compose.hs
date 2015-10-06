@@ -213,8 +213,8 @@ oDestinationObject
       (\ s a -> s{_oDestinationObject = a})
 
 instance GoogleAuth ObjectsCompose' where
-        authKey = oKey . _Just
-        authToken = oOAuthToken . _Just
+        _AuthKey = oKey . _Just
+        _AuthToken = oOAuthToken . _Just
 
 instance GoogleRequest ObjectsCompose' where
         type Rs ObjectsCompose' = Object

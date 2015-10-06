@@ -215,8 +215,8 @@ clFields :: Lens' CreativesList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
 instance GoogleAuth CreativesList' where
-        authKey = clKey . _Just
-        authToken = clOAuthToken . _Just
+        _AuthKey = clKey . _Just
+        _AuthToken = clOAuthToken . _Just
 
 instance GoogleRequest CreativesList' where
         type Rs CreativesList' = CreativesList

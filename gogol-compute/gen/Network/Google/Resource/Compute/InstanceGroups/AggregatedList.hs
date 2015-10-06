@@ -195,8 +195,8 @@ igalFields
 
 instance GoogleAuth InstanceGroupsAggregatedList'
          where
-        authKey = igalKey . _Just
-        authToken = igalOAuthToken . _Just
+        _AuthKey = igalKey . _Just
+        _AuthToken = igalOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupsAggregatedList'
          where

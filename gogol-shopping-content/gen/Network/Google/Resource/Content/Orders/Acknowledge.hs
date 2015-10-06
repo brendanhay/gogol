@@ -167,8 +167,8 @@ oaFields :: Lens' OrdersAcknowledge' (Maybe Text)
 oaFields = lens _oaFields (\ s a -> s{_oaFields = a})
 
 instance GoogleAuth OrdersAcknowledge' where
-        authKey = oaKey . _Just
-        authToken = oaOAuthToken . _Just
+        _AuthKey = oaKey . _Just
+        _AuthToken = oaOAuthToken . _Just
 
 instance GoogleRequest OrdersAcknowledge' where
         type Rs OrdersAcknowledge' =

@@ -295,8 +295,8 @@ alCreatedBefore
       . mapping _DateTime
 
 instance GoogleAuth AssetsList' where
-        authKey = alKey . _Just
-        authToken = alOAuthToken . _Just
+        _AuthKey = alKey . _Just
+        _AuthToken = alOAuthToken . _Just
 
 instance GoogleRequest AssetsList' where
         type Rs AssetsList' = AssetsListResponse

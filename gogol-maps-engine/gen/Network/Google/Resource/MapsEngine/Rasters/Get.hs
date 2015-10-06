@@ -140,8 +140,8 @@ rgFields :: Lens' RastersGet' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
 instance GoogleAuth RastersGet' where
-        authKey = rgKey . _Just
-        authToken = rgOAuthToken . _Just
+        _AuthKey = rgKey . _Just
+        _AuthToken = rgOAuthToken . _Just
 
 instance GoogleRequest RastersGet' where
         type Rs RastersGet' = Raster

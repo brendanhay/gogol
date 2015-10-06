@@ -205,8 +205,8 @@ autFields
   = lens _autFields (\ s a -> s{_autFields = a})
 
 instance GoogleAuth AutoscalersList' where
-        authKey = autKey . _Just
-        authToken = autOAuthToken . _Just
+        _AuthKey = autKey . _Just
+        _AuthToken = autOAuthToken . _Just
 
 instance GoogleRequest AutoscalersList' where
         type Rs AutoscalersList' = AutoscalerList

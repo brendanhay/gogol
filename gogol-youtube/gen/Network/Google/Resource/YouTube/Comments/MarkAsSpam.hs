@@ -148,8 +148,8 @@ cmasFields
   = lens _cmasFields (\ s a -> s{_cmasFields = a})
 
 instance GoogleAuth CommentsMarkAsSpam' where
-        authKey = cmasKey . _Just
-        authToken = cmasOAuthToken . _Just
+        _AuthKey = cmasKey . _Just
+        _AuthToken = cmasOAuthToken . _Just
 
 instance GoogleRequest CommentsMarkAsSpam' where
         type Rs CommentsMarkAsSpam' = ()

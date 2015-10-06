@@ -167,8 +167,8 @@ rcfqFields
 
 instance GoogleAuth ReportsCompatibleFieldsQuery'
          where
-        authKey = rcfqKey . _Just
-        authToken = rcfqOAuthToken . _Just
+        _AuthKey = rcfqKey . _Just
+        _AuthToken = rcfqOAuthToken . _Just
 
 instance GoogleRequest ReportsCompatibleFieldsQuery'
          where

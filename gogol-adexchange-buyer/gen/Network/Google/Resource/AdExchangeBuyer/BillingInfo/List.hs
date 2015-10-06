@@ -135,8 +135,8 @@ bilFields
   = lens _bilFields (\ s a -> s{_bilFields = a})
 
 instance GoogleAuth BillingInfoList' where
-        authKey = bilKey . _Just
-        authToken = bilOAuthToken . _Just
+        _AuthKey = bilKey . _Just
+        _AuthToken = bilOAuthToken . _Just
 
 instance GoogleRequest BillingInfoList' where
         type Rs BillingInfoList' = BillingInfoList

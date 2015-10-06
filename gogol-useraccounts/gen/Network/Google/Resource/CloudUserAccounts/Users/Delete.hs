@@ -153,8 +153,8 @@ udFields :: Lens' UsersDelete' (Maybe Text)
 udFields = lens _udFields (\ s a -> s{_udFields = a})
 
 instance GoogleAuth UsersDelete' where
-        authKey = udKey . _Just
-        authToken = udOAuthToken . _Just
+        _AuthKey = udKey . _Just
+        _AuthToken = udOAuthToken . _Just
 
 instance GoogleRequest UsersDelete' where
         type Rs UsersDelete' = Operation

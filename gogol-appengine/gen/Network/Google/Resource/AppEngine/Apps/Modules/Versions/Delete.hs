@@ -244,8 +244,8 @@ amvdCallback
   = lens _amvdCallback (\ s a -> s{_amvdCallback = a})
 
 instance GoogleAuth AppsModulesVersionsDelete' where
-        authKey = amvdKey . _Just
-        authToken = amvdOAuthToken . _Just
+        _AuthKey = amvdKey . _Just
+        _AuthToken = amvdOAuthToken . _Just
 
 instance GoogleRequest AppsModulesVersionsDelete'
          where

@@ -163,8 +163,8 @@ ugtFields
   = lens _ugtFields (\ s a -> s{_ugtFields = a})
 
 instance GoogleAuth UsersGenerateToken' where
-        authKey = ugtKey . _Just
-        authToken = ugtOAuthToken . _Just
+        _AuthKey = ugtKey . _Just
+        _AuthToken = ugtOAuthToken . _Just
 
 instance GoogleRequest UsersGenerateToken' where
         type Rs UsersGenerateToken' = UserToken

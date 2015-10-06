@@ -160,8 +160,8 @@ fclFields
 
 instance GoogleAuth FloodlightConfigurationsList'
          where
-        authKey = fclKey . _Just
-        authToken = fclOAuthToken . _Just
+        _AuthKey = fclKey . _Just
+        _AuthToken = fclOAuthToken . _Just
 
 instance GoogleRequest FloodlightConfigurationsList'
          where

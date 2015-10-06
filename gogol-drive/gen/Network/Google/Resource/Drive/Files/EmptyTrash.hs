@@ -133,8 +133,8 @@ fetFields
   = lens _fetFields (\ s a -> s{_fetFields = a})
 
 instance GoogleAuth FilesEmptyTrash' where
-        authKey = fetKey . _Just
-        authToken = fetOAuthToken . _Just
+        _AuthKey = fetKey . _Just
+        _AuthToken = fetOAuthToken . _Just
 
 instance GoogleRequest FilesEmptyTrash' where
         type Rs FilesEmptyTrash' = ()

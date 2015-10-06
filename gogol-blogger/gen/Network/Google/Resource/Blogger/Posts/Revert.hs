@@ -153,8 +153,8 @@ prFields :: Lens' PostsRevert' (Maybe Text)
 prFields = lens _prFields (\ s a -> s{_prFields = a})
 
 instance GoogleAuth PostsRevert' where
-        authKey = prKey . _Just
-        authToken = prOAuthToken . _Just
+        _AuthKey = prKey . _Just
+        _AuthToken = prOAuthToken . _Just
 
 instance GoogleRequest PostsRevert' where
         type Rs PostsRevert' = Post'

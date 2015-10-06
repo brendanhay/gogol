@@ -209,8 +209,8 @@ rrslFields
   = lens _rrslFields (\ s a -> s{_rrslFields = a})
 
 instance GoogleAuth ResourceRecordSetsList' where
-        authKey = rrslKey . _Just
-        authToken = rrslOAuthToken . _Just
+        _AuthKey = rrslKey . _Just
+        _AuthToken = rrslOAuthToken . _Just
 
 instance GoogleRequest ResourceRecordSetsList' where
         type Rs ResourceRecordSetsList' =

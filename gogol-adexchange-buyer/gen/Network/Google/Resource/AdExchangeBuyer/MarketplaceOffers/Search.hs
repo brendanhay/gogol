@@ -145,8 +145,8 @@ mosFields
   = lens _mosFields (\ s a -> s{_mosFields = a})
 
 instance GoogleAuth MarketplaceOffersSearch' where
-        authKey = mosKey . _Just
-        authToken = mosOAuthToken . _Just
+        _AuthKey = mosKey . _Just
+        _AuthToken = mosOAuthToken . _Just
 
 instance GoogleRequest MarketplaceOffersSearch' where
         type Rs MarketplaceOffersSearch' = GetOffersResponse

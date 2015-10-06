@@ -177,8 +177,8 @@ puFields :: Lens' PropertiesUpdate' (Maybe Text)
 puFields = lens _puFields (\ s a -> s{_puFields = a})
 
 instance GoogleAuth PropertiesUpdate' where
-        authKey = puKey . _Just
-        authToken = puOAuthToken . _Just
+        _AuthKey = puKey . _Just
+        _AuthToken = puOAuthToken . _Just
 
 instance GoogleRequest PropertiesUpdate' where
         type Rs PropertiesUpdate' = Property

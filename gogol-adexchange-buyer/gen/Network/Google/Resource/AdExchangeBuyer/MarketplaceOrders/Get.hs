@@ -140,8 +140,8 @@ mFields :: Lens' MarketplaceOrdersGet' (Maybe Text)
 mFields = lens _mFields (\ s a -> s{_mFields = a})
 
 instance GoogleAuth MarketplaceOrdersGet' where
-        authKey = mKey . _Just
-        authToken = mOAuthToken . _Just
+        _AuthKey = mKey . _Just
+        _AuthToken = mOAuthToken . _Just
 
 instance GoogleRequest MarketplaceOrdersGet' where
         type Rs MarketplaceOrdersGet' = MarketplaceOrder

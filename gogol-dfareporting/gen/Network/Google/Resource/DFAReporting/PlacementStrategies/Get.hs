@@ -157,8 +157,8 @@ psgFields
   = lens _psgFields (\ s a -> s{_psgFields = a})
 
 instance GoogleAuth PlacementStrategiesGet' where
-        authKey = psgKey . _Just
-        authToken = psgOAuthToken . _Just
+        _AuthKey = psgKey . _Just
+        _AuthToken = psgOAuthToken . _Just
 
 instance GoogleRequest PlacementStrategiesGet' where
         type Rs PlacementStrategiesGet' = PlacementStrategy

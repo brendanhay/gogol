@@ -217,8 +217,8 @@ igCallback
   = lens _igCallback (\ s a -> s{_igCallback = a})
 
 instance GoogleAuth InvitationsGet' where
-        authKey = igKey . _Just
-        authToken = igOAuthToken . _Just
+        _AuthKey = igKey . _Just
+        _AuthToken = igOAuthToken . _Just
 
 instance GoogleRequest InvitationsGet' where
         type Rs InvitationsGet' = Invitation

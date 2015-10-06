@@ -159,8 +159,8 @@ urtFields
   = lens _urtFields (\ s a -> s{_urtFields = a})
 
 instance GoogleAuth UsersRevokeToken' where
-        authKey = urtKey . _Just
-        authToken = urtOAuthToken . _Just
+        _AuthKey = urtKey . _Just
+        _AuthToken = urtOAuthToken . _Just
 
 instance GoogleRequest UsersRevokeToken' where
         type Rs UsersRevokeToken' = ()

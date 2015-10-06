@@ -141,8 +141,8 @@ agFields :: Lens' ActivitiesGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 instance GoogleAuth ActivitiesGet' where
-        authKey = agKey . _Just
-        authToken = agOAuthToken . _Just
+        _AuthKey = agKey . _Just
+        _AuthToken = agOAuthToken . _Just
 
 instance GoogleRequest ActivitiesGet' where
         type Rs ActivitiesGet' = Activity

@@ -170,8 +170,8 @@ ummFields
   = lens _ummFields (\ s a -> s{_ummFields = a})
 
 instance GoogleAuth UsersMessagesModify' where
-        authKey = ummKey . _Just
-        authToken = ummOAuthToken . _Just
+        _AuthKey = ummKey . _Just
+        _AuthToken = ummOAuthToken . _Just
 
 instance GoogleRequest UsersMessagesModify' where
         type Rs UsersMessagesModify' = Message

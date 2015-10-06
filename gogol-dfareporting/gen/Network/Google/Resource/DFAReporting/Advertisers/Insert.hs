@@ -157,8 +157,8 @@ aiiFields
   = lens _aiiFields (\ s a -> s{_aiiFields = a})
 
 instance GoogleAuth AdvertisersInsert' where
-        authKey = aiiKey . _Just
-        authToken = aiiOAuthToken . _Just
+        _AuthKey = aiiKey . _Just
+        _AuthToken = aiiOAuthToken . _Just
 
 instance GoogleRequest AdvertisersInsert' where
         type Rs AdvertisersInsert' = Advertiser

@@ -221,8 +221,8 @@ pgbiCallback
   = lens _pgbiCallback (\ s a -> s{_pgbiCallback = a})
 
 instance GoogleAuth ProjectsGetBillingInfo' where
-        authKey = pgbiKey . _Just
-        authToken = pgbiOAuthToken . _Just
+        _AuthKey = pgbiKey . _Just
+        _AuthToken = pgbiOAuthToken . _Just
 
 instance GoogleRequest ProjectsGetBillingInfo' where
         type Rs ProjectsGetBillingInfo' = ProjectBillingInfo

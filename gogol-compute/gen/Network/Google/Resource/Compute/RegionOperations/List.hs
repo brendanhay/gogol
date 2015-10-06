@@ -206,8 +206,8 @@ rolFields
   = lens _rolFields (\ s a -> s{_rolFields = a})
 
 instance GoogleAuth RegionOperationsList' where
-        authKey = rolKey . _Just
-        authToken = rolOAuthToken . _Just
+        _AuthKey = rolKey . _Just
+        _AuthToken = rolOAuthToken . _Just
 
 instance GoogleRequest RegionOperationsList' where
         type Rs RegionOperationsList' = OperationList

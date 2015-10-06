@@ -174,8 +174,8 @@ uclFields
   = lens _uclFields (\ s a -> s{_uclFields = a})
 
 instance GoogleAuth URLChannelsList' where
-        authKey = uclKey . _Just
-        authToken = uclOAuthToken . _Just
+        _AuthKey = uclKey . _Just
+        _AuthToken = uclOAuthToken . _Just
 
 instance GoogleRequest URLChannelsList' where
         type Rs URLChannelsList' = URLChannels

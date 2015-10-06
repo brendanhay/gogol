@@ -232,8 +232,8 @@ ddbdCallback
 
 instance GoogleAuth
          DebuggerDebuggeesBreakpointsDelete' where
-        authKey = ddbdKey . _Just
-        authToken = ddbdOAuthToken . _Just
+        _AuthKey = ddbdKey . _Just
+        _AuthToken = ddbdOAuthToken . _Just
 
 instance GoogleRequest
          DebuggerDebuggeesBreakpointsDelete' where

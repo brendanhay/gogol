@@ -162,8 +162,8 @@ aacgFields
   = lens _aacgFields (\ s a -> s{_aacgFields = a})
 
 instance GoogleAuth AccountsAdClientsGet' where
-        authKey = aacgKey . _Just
-        authToken = aacgOAuthToken . _Just
+        _AuthKey = aacgKey . _Just
+        _AuthToken = aacgOAuthToken . _Just
 
 instance GoogleRequest AccountsAdClientsGet' where
         type Rs AccountsAdClientsGet' = AdClient

@@ -133,8 +133,8 @@ eeqFields
   = lens _eeqFields (\ s a -> s{_eeqFields = a})
 
 instance GoogleAuth ElectionsElectionQuery' where
-        authKey = eeqKey . _Just
-        authToken = eeqOAuthToken . _Just
+        _AuthKey = eeqKey . _Just
+        _AuthToken = eeqOAuthToken . _Just
 
 instance GoogleRequest ElectionsElectionQuery' where
         type Rs ElectionsElectionQuery' =

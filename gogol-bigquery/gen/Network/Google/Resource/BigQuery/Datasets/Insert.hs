@@ -154,8 +154,8 @@ diFields :: Lens' DatasetsInsert' (Maybe Text)
 diFields = lens _diFields (\ s a -> s{_diFields = a})
 
 instance GoogleAuth DatasetsInsert' where
-        authKey = diKey . _Just
-        authToken = diOAuthToken . _Just
+        _AuthKey = diKey . _Just
+        _AuthToken = diOAuthToken . _Just
 
 instance GoogleRequest DatasetsInsert' where
         type Rs DatasetsInsert' = Dataset

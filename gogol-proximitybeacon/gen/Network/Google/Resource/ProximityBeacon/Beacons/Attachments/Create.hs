@@ -238,8 +238,8 @@ bacCallback
   = lens _bacCallback (\ s a -> s{_bacCallback = a})
 
 instance GoogleAuth BeaconsAttachmentsCreate' where
-        authKey = bacKey . _Just
-        authToken = bacOAuthToken . _Just
+        _AuthKey = bacKey . _Just
+        _AuthToken = bacOAuthToken . _Just
 
 instance GoogleRequest BeaconsAttachmentsCreate'
          where

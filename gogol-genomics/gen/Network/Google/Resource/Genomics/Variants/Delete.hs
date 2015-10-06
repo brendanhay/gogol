@@ -141,8 +141,8 @@ vdFields :: Lens' VariantsDelete' (Maybe Text)
 vdFields = lens _vdFields (\ s a -> s{_vdFields = a})
 
 instance GoogleAuth VariantsDelete' where
-        authKey = vdKey . _Just
-        authToken = vdOAuthToken . _Just
+        _AuthKey = vdKey . _Just
+        _AuthToken = vdOAuthToken . _Just
 
 instance GoogleRequest VariantsDelete' where
         type Rs VariantsDelete' = ()

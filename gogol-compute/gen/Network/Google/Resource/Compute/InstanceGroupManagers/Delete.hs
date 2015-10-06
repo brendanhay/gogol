@@ -171,8 +171,8 @@ igmdFields
 
 instance GoogleAuth InstanceGroupManagersDelete'
          where
-        authKey = igmdKey . _Just
-        authToken = igmdOAuthToken . _Just
+        _AuthKey = igmdKey . _Just
+        _AuthToken = igmdOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupManagersDelete'
          where

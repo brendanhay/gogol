@@ -194,8 +194,8 @@ mwpullFields
 
 instance GoogleAuth
          ManagementWebPropertyUserLinksList' where
-        authKey = mwpullKey . _Just
-        authToken = mwpullOAuthToken . _Just
+        _AuthKey = mwpullKey . _Just
+        _AuthToken = mwpullOAuthToken . _Just
 
 instance GoogleRequest
          ManagementWebPropertyUserLinksList' where

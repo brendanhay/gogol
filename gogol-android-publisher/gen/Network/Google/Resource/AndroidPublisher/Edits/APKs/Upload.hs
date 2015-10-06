@@ -170,8 +170,8 @@ eapkuFields
   = lens _eapkuFields (\ s a -> s{_eapkuFields = a})
 
 instance GoogleAuth EditsAPKsUpload' where
-        authKey = eapkuKey . _Just
-        authToken = eapkuOAuthToken . _Just
+        _AuthKey = eapkuKey . _Just
+        _AuthToken = eapkuOAuthToken . _Just
 
 instance GoogleRequest EditsAPKsUpload' where
         type Rs EditsAPKsUpload' = APK

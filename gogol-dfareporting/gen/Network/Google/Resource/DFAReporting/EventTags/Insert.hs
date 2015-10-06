@@ -157,8 +157,8 @@ etiFields
   = lens _etiFields (\ s a -> s{_etiFields = a})
 
 instance GoogleAuth EventTagsInsert' where
-        authKey = etiKey . _Just
-        authToken = etiOAuthToken . _Just
+        _AuthKey = etiKey . _Just
+        _AuthToken = etiOAuthToken . _Just
 
 instance GoogleRequest EventTagsInsert' where
         type Rs EventTagsInsert' = EventTag

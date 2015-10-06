@@ -234,8 +234,8 @@ psaCallback
 
 instance GoogleAuth ProjectsSubscriptionsAcknowledge'
          where
-        authKey = psaKey . _Just
-        authToken = psaOAuthToken . _Just
+        _AuthKey = psaKey . _Just
+        _AuthToken = psaOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsSubscriptionsAcknowledge' where

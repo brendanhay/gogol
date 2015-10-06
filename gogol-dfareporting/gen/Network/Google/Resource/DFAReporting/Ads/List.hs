@@ -500,8 +500,8 @@ adsAudienceSegmentIds
       . _Coerce
 
 instance GoogleAuth AdsList' where
-        authKey = adsKey . _Just
-        authToken = adsOAuthToken . _Just
+        _AuthKey = adsKey . _Just
+        _AuthToken = adsOAuthToken . _Just
 
 instance GoogleRequest AdsList' where
         type Rs AdsList' = AdsListResponse

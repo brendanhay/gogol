@@ -155,8 +155,8 @@ erFields :: Lens' EventsRecord' (Maybe Text)
 erFields = lens _erFields (\ s a -> s{_erFields = a})
 
 instance GoogleAuth EventsRecord' where
-        authKey = erKey . _Just
-        authToken = erOAuthToken . _Just
+        _AuthKey = erKey . _Just
+        _AuthToken = erOAuthToken . _Just
 
 instance GoogleRequest EventsRecord' where
         type Rs EventsRecord' = EventUpdateResponse

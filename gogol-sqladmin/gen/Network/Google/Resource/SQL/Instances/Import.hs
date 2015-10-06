@@ -173,8 +173,8 @@ insInstance
   = lens _insInstance (\ s a -> s{_insInstance = a})
 
 instance GoogleAuth InstancesImport' where
-        authKey = insKey . _Just
-        authToken = insOAuthToken . _Just
+        _AuthKey = insKey . _Just
+        _AuthToken = insOAuthToken . _Just
 
 instance GoogleRequest InstancesImport' where
         type Rs InstancesImport' = Operation

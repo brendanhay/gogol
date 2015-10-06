@@ -174,8 +174,8 @@ gfrstFields
 
 instance GoogleAuth GlobalForwardingRulesSetTarget'
          where
-        authKey = gfrstKey . _Just
-        authToken = gfrstOAuthToken . _Just
+        _AuthKey = gfrstKey . _Just
+        _AuthToken = gfrstOAuthToken . _Just
 
 instance GoogleRequest
          GlobalForwardingRulesSetTarget' where

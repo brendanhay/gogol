@@ -194,8 +194,8 @@ aalaFields
   = lens _aalaFields (\ s a -> s{_aalaFields = a})
 
 instance GoogleAuth AutoscalersAggregatedList' where
-        authKey = aalaKey . _Just
-        authToken = aalaOAuthToken . _Just
+        _AuthKey = aalaKey . _Just
+        _AuthToken = aalaOAuthToken . _Just
 
 instance GoogleRequest AutoscalersAggregatedList'
          where

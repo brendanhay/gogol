@@ -197,8 +197,8 @@ tpsbFields
   = lens _tpsbFields (\ s a -> s{_tpsbFields = a})
 
 instance GoogleAuth TargetPoolsSetBackup' where
-        authKey = tpsbKey . _Just
-        authToken = tpsbOAuthToken . _Just
+        _AuthKey = tpsbKey . _Just
+        _AuthToken = tpsbOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsSetBackup' where
         type Rs TargetPoolsSetBackup' = Operation

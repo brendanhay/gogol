@@ -219,8 +219,8 @@ ptdCallback
   = lens _ptdCallback (\ s a -> s{_ptdCallback = a})
 
 instance GoogleAuth ProjectsTopicsDelete' where
-        authKey = ptdKey . _Just
-        authToken = ptdOAuthToken . _Just
+        _AuthKey = ptdKey . _Just
+        _AuthToken = ptdOAuthToken . _Just
 
 instance GoogleRequest ProjectsTopicsDelete' where
         type Rs ProjectsTopicsDelete' = Empty

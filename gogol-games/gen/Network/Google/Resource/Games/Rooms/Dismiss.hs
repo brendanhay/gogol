@@ -147,8 +147,8 @@ rddFields
   = lens _rddFields (\ s a -> s{_rddFields = a})
 
 instance GoogleAuth RoomsDismiss' where
-        authKey = rddKey . _Just
-        authToken = rddOAuthToken . _Just
+        _AuthKey = rddKey . _Just
+        _AuthToken = rddOAuthToken . _Just
 
 instance GoogleRequest RoomsDismiss' where
         type Rs RoomsDismiss' = ()

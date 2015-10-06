@@ -172,8 +172,8 @@ scsFields
   = lens _scsFields (\ s a -> s{_scsFields = a})
 
 instance GoogleAuth SubscriptionsChangeSeats' where
-        authKey = scsKey . _Just
-        authToken = scsOAuthToken . _Just
+        _AuthKey = scsKey . _Just
+        _AuthToken = scsOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsChangeSeats'
          where

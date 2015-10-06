@@ -163,8 +163,8 @@ acvlcFields
 
 instance GoogleAuth AccountsContainersVariablesList'
          where
-        authKey = acvlcKey . _Just
-        authToken = acvlcOAuthToken . _Just
+        _AuthKey = acvlcKey . _Just
+        _AuthToken = acvlcOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVariablesList' where

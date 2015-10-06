@@ -194,8 +194,8 @@ igmstpFields
 
 instance GoogleAuth
          InstanceGroupManagersSetTargetPools' where
-        authKey = igmstpKey . _Just
-        authToken = igmstpOAuthToken . _Just
+        _AuthKey = igmstpKey . _Just
+        _AuthToken = igmstpOAuthToken . _Just
 
 instance GoogleRequest
          InstanceGroupManagersSetTargetPools' where

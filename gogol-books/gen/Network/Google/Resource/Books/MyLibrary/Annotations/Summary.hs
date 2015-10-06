@@ -162,8 +162,8 @@ mlasFields
 
 instance GoogleAuth MyLibraryAnnotationsSummary'
          where
-        authKey = mlasKey . _Just
-        authToken = mlasOAuthToken . _Just
+        _AuthKey = mlasKey . _Just
+        _AuthToken = mlasOAuthToken . _Just
 
 instance GoogleRequest MyLibraryAnnotationsSummary'
          where

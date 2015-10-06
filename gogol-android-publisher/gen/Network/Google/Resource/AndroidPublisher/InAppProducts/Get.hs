@@ -156,8 +156,8 @@ iapgFields
   = lens _iapgFields (\ s a -> s{_iapgFields = a})
 
 instance GoogleAuth InAppProductsGet' where
-        authKey = iapgKey . _Just
-        authToken = iapgOAuthToken . _Just
+        _AuthKey = iapgKey . _Just
+        _AuthToken = iapgOAuthToken . _Just
 
 instance GoogleRequest InAppProductsGet' where
         type Rs InAppProductsGet' = InAppProduct

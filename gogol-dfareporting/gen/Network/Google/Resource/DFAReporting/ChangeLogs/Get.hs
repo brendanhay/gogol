@@ -156,8 +156,8 @@ clgFields
   = lens _clgFields (\ s a -> s{_clgFields = a})
 
 instance GoogleAuth ChangeLogsGet' where
-        authKey = clgKey . _Just
-        authToken = clgOAuthToken . _Just
+        _AuthKey = clgKey . _Just
+        _AuthToken = clgOAuthToken . _Just
 
 instance GoogleRequest ChangeLogsGet' where
         type Rs ChangeLogsGet' = ChangeLog

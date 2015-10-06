@@ -227,8 +227,8 @@ amgCallback
   = lens _amgCallback (\ s a -> s{_amgCallback = a})
 
 instance GoogleAuth AppsModulesGet' where
-        authKey = amgKey . _Just
-        authToken = amgOAuthToken . _Just
+        _AuthKey = amgKey . _Just
+        _AuthToken = amgOAuthToken . _Just
 
 instance GoogleRequest AppsModulesGet' where
         type Rs AppsModulesGet' = Module

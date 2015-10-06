@@ -177,8 +177,8 @@ ppFields :: Lens' PropertiesPatch' (Maybe Text)
 ppFields = lens _ppFields (\ s a -> s{_ppFields = a})
 
 instance GoogleAuth PropertiesPatch' where
-        authKey = ppKey . _Just
-        authToken = ppOAuthToken . _Just
+        _AuthKey = ppKey . _Just
+        _AuthToken = ppOAuthToken . _Just
 
 instance GoogleRequest PropertiesPatch' where
         type Rs PropertiesPatch' = Property

@@ -199,8 +199,8 @@ acfuFields
 
 instance GoogleAuth AccountsContainersFoldersUpdate'
          where
-        authKey = acfuKey . _Just
-        authToken = acfuOAuthToken . _Just
+        _AuthKey = acfuKey . _Just
+        _AuthToken = acfuOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersFoldersUpdate' where

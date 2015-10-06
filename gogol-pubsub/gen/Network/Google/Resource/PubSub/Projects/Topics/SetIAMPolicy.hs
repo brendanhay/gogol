@@ -232,8 +232,8 @@ ptsipCallback
       (\ s a -> s{_ptsipCallback = a})
 
 instance GoogleAuth ProjectsTopicsSetIAMPolicy' where
-        authKey = ptsipKey . _Just
-        authToken = ptsipOAuthToken . _Just
+        _AuthKey = ptsipKey . _Just
+        _AuthToken = ptsipOAuthToken . _Just
 
 instance GoogleRequest ProjectsTopicsSetIAMPolicy'
          where

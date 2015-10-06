@@ -242,8 +242,8 @@ opFields :: Lens' ObjectsPatch' (Maybe Text)
 opFields = lens _opFields (\ s a -> s{_opFields = a})
 
 instance GoogleAuth ObjectsPatch' where
-        authKey = opKey . _Just
-        authToken = opOAuthToken . _Just
+        _AuthKey = opKey . _Just
+        _AuthToken = opOAuthToken . _Just
 
 instance GoogleRequest ObjectsPatch' where
         type Rs ObjectsPatch' = Object

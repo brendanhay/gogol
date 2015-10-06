@@ -142,8 +142,8 @@ rpFields :: Lens' RastersProcess' (Maybe Text)
 rpFields = lens _rpFields (\ s a -> s{_rpFields = a})
 
 instance GoogleAuth RastersProcess' where
-        authKey = rpKey . _Just
-        authToken = rpOAuthToken . _Just
+        _AuthKey = rpKey . _Just
+        _AuthToken = rpOAuthToken . _Just
 
 instance GoogleRequest RastersProcess' where
         type Rs RastersProcess' = ProcessResponse

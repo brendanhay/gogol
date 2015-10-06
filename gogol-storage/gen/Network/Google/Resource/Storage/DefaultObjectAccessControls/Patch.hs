@@ -176,8 +176,8 @@ doacpFields
 
 instance GoogleAuth DefaultObjectAccessControlsPatch'
          where
-        authKey = doacpKey . _Just
-        authToken = doacpOAuthToken . _Just
+        _AuthKey = doacpKey . _Just
+        _AuthToken = doacpOAuthToken . _Just
 
 instance GoogleRequest
          DefaultObjectAccessControlsPatch' where

@@ -302,8 +302,8 @@ rclCreatedBefore
       . mapping _DateTime
 
 instance GoogleAuth RasterCollectionsList' where
-        authKey = rclKey . _Just
-        authToken = rclOAuthToken . _Just
+        _AuthKey = rclKey . _Just
+        _AuthToken = rclOAuthToken . _Just
 
 instance GoogleRequest RasterCollectionsList' where
         type Rs RasterCollectionsList' =

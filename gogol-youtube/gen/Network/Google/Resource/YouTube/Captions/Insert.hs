@@ -212,8 +212,8 @@ ciFields :: Lens' CaptionsInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
 instance GoogleAuth CaptionsInsert' where
-        authKey = ciKey . _Just
-        authToken = ciOAuthToken . _Just
+        _AuthKey = ciKey . _Just
+        _AuthToken = ciOAuthToken . _Just
 
 instance GoogleRequest CaptionsInsert' where
         type Rs CaptionsInsert' = Caption

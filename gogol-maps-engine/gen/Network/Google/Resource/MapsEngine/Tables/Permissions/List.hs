@@ -145,8 +145,8 @@ tplFields
   = lens _tplFields (\ s a -> s{_tplFields = a})
 
 instance GoogleAuth TablesPermissionsList' where
-        authKey = tplKey . _Just
-        authToken = tplOAuthToken . _Just
+        _AuthKey = tplKey . _Just
+        _AuthToken = tplOAuthToken . _Just
 
 instance GoogleRequest TablesPermissionsList' where
         type Rs TablesPermissionsList' =

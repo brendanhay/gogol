@@ -325,8 +325,8 @@ fuFields :: Lens' FilesUpdate' (Maybe Text)
 fuFields = lens _fuFields (\ s a -> s{_fuFields = a})
 
 instance GoogleAuth FilesUpdate' where
-        authKey = fuKey . _Just
-        authToken = fuOAuthToken . _Just
+        _AuthKey = fuKey . _Just
+        _AuthToken = fuOAuthToken . _Just
 
 instance GoogleRequest FilesUpdate' where
         type Rs FilesUpdate' = File

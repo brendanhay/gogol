@@ -173,8 +173,8 @@ rrsFields
   = lens _rrsFields (\ s a -> s{_rrsFields = a})
 
 instance GoogleAuth RoomsReportStatus' where
-        authKey = rrsKey . _Just
-        authToken = rrsOAuthToken . _Just
+        _AuthKey = rrsKey . _Just
+        _AuthToken = rrsOAuthToken . _Just
 
 instance GoogleRequest RoomsReportStatus' where
         type Rs RoomsReportStatus' = RoomStatus

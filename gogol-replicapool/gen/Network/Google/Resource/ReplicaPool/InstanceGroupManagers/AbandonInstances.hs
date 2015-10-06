@@ -191,8 +191,8 @@ igmaiFields
 
 instance GoogleAuth
          InstanceGroupManagersAbandonInstances' where
-        authKey = igmaiKey . _Just
-        authToken = igmaiOAuthToken . _Just
+        _AuthKey = igmaiKey . _Just
+        _AuthToken = igmaiOAuthToken . _Just
 
 instance GoogleRequest
          InstanceGroupManagersAbandonInstances' where

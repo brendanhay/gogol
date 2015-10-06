@@ -247,8 +247,8 @@ rllFields
   = lens _rllFields (\ s a -> s{_rllFields = a})
 
 instance GoogleAuth RemarketingListsList' where
-        authKey = rllKey . _Just
-        authToken = rllOAuthToken . _Just
+        _AuthKey = rllKey . _Just
+        _AuthToken = rllOAuthToken . _Just
 
 instance GoogleRequest RemarketingListsList' where
         type Rs RemarketingListsList' =

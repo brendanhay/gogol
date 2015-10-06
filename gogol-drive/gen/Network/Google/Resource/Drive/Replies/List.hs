@@ -198,8 +198,8 @@ rllFields
   = lens _rllFields (\ s a -> s{_rllFields = a})
 
 instance GoogleAuth RepliesList' where
-        authKey = rllKey . _Just
-        authToken = rllOAuthToken . _Just
+        _AuthKey = rllKey . _Just
+        _AuthToken = rllOAuthToken . _Just
 
 instance GoogleRequest RepliesList' where
         type Rs RepliesList' = CommentReplyList

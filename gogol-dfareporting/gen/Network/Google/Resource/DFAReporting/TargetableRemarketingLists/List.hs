@@ -244,8 +244,8 @@ trllFields
 
 instance GoogleAuth TargetableRemarketingListsList'
          where
-        authKey = trllKey . _Just
-        authToken = trllOAuthToken . _Just
+        _AuthKey = trllKey . _Just
+        _AuthToken = trllOAuthToken . _Just
 
 instance GoogleRequest
          TargetableRemarketingListsList' where

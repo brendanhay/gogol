@@ -143,8 +143,8 @@ rlFields :: Lens' RegionsList' (Maybe Text)
 rlFields = lens _rlFields (\ s a -> s{_rlFields = a})
 
 instance GoogleAuth RegionsList' where
-        authKey = rlKey . _Just
-        authToken = rlOAuthToken . _Just
+        _AuthKey = rlKey . _Just
+        _AuthToken = rlOAuthToken . _Just
 
 instance GoogleRequest RegionsList' where
         type Rs RegionsList' = RegionsListResponse

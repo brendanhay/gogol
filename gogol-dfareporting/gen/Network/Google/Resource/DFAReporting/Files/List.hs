@@ -197,8 +197,8 @@ flFields :: Lens' FilesList' (Maybe Text)
 flFields = lens _flFields (\ s a -> s{_flFields = a})
 
 instance GoogleAuth FilesList' where
-        authKey = flKey . _Just
-        authToken = flOAuthToken . _Just
+        _AuthKey = flKey . _Just
+        _AuthToken = flOAuthToken . _Just
 
 instance GoogleRequest FilesList' where
         type Rs FilesList' = FileList

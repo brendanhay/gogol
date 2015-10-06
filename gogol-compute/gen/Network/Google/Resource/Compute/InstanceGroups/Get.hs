@@ -169,8 +169,8 @@ iggFields
   = lens _iggFields (\ s a -> s{_iggFields = a})
 
 instance GoogleAuth InstanceGroupsGet' where
-        authKey = iggKey . _Just
-        authToken = iggOAuthToken . _Just
+        _AuthKey = iggKey . _Just
+        _AuthToken = iggOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupsGet' where
         type Rs InstanceGroupsGet' = InstanceGroup

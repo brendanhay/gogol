@@ -149,8 +149,8 @@ vclFields
   = lens _vclFields (\ s a -> s{_vclFields = a})
 
 instance GoogleAuth VerificationCodesList' where
-        authKey = vclKey . _Just
-        authToken = vclOAuthToken . _Just
+        _AuthKey = vclKey . _Just
+        _AuthToken = vclOAuthToken . _Just
 
 instance GoogleRequest VerificationCodesList' where
         type Rs VerificationCodesList' = VerificationCodes

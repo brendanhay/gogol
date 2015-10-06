@@ -204,8 +204,8 @@ mglFields
   = lens _mglFields (\ s a -> s{_mglFields = a})
 
 instance GoogleAuth ManagementGoalsList' where
-        authKey = mglKey . _Just
-        authToken = mglOAuthToken . _Just
+        _AuthKey = mglKey . _Just
+        _AuthToken = mglOAuthToken . _Just
 
 instance GoogleRequest ManagementGoalsList' where
         type Rs ManagementGoalsList' = Goals

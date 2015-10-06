@@ -310,8 +310,8 @@ dslFields
   = lens _dslFields (\ s a -> s{_dslFields = a})
 
 instance GoogleAuth DirectorySitesList' where
-        authKey = dslKey . _Just
-        authToken = dslOAuthToken . _Just
+        _AuthKey = dslKey . _Just
+        _AuthToken = dslOAuthToken . _Just
 
 instance GoogleRequest DirectorySitesList' where
         type Rs DirectorySitesList' =

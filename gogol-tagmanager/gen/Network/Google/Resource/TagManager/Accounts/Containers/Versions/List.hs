@@ -174,8 +174,8 @@ acvlFields
 
 instance GoogleAuth AccountsContainersVersionsList'
          where
-        authKey = acvlKey . _Just
-        authToken = acvlOAuthToken . _Just
+        _AuthKey = acvlKey . _Just
+        _AuthToken = acvlOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVersionsList' where

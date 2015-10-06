@@ -141,8 +141,8 @@ oiFields :: Lens' OffersInsert' (Maybe Text)
 oiFields = lens _oiFields (\ s a -> s{_oiFields = a})
 
 instance GoogleAuth OffersInsert' where
-        authKey = oiKey . _Just
-        authToken = oiOAuthToken . _Just
+        _AuthKey = oiKey . _Just
+        _AuthToken = oiOAuthToken . _Just
 
 instance GoogleRequest OffersInsert' where
         type Rs OffersInsert' = OfferDTO

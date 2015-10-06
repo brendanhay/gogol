@@ -285,8 +285,8 @@ etlFields
   = lens _etlFields (\ s a -> s{_etlFields = a})
 
 instance GoogleAuth EventTagsList' where
-        authKey = etlKey . _Just
-        authToken = etlOAuthToken . _Just
+        _AuthKey = etlKey . _Just
+        _AuthToken = etlOAuthToken . _Just
 
 instance GoogleRequest EventTagsList' where
         type Rs EventTagsList' = EventTagsListResponse

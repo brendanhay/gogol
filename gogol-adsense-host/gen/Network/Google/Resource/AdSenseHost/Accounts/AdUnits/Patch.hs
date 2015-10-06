@@ -187,8 +187,8 @@ aaupFields
   = lens _aaupFields (\ s a -> s{_aaupFields = a})
 
 instance GoogleAuth AccountsAdUnitsPatch' where
-        authKey = aaupKey . _Just
-        authToken = aaupOAuthToken . _Just
+        _AuthKey = aaupKey . _Just
+        _AuthToken = aaupOAuthToken . _Just
 
 instance GoogleRequest AccountsAdUnitsPatch' where
         type Rs AccountsAdUnitsPatch' = AdUnit

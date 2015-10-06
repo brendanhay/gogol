@@ -156,8 +156,8 @@ irlFields
   = lens _irlFields (\ s a -> s{_irlFields = a})
 
 instance GoogleAuth I18nRegionsList' where
-        authKey = irlKey . _Just
-        authToken = irlOAuthToken . _Just
+        _AuthKey = irlKey . _Just
+        _AuthToken = irlOAuthToken . _Just
 
 instance GoogleRequest I18nRegionsList' where
         type Rs I18nRegionsList' = I18nRegionListResponse

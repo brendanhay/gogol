@@ -169,8 +169,8 @@ igdFields
   = lens _igdFields (\ s a -> s{_igdFields = a})
 
 instance GoogleAuth InstanceGroupsDelete' where
-        authKey = igdKey . _Just
-        authToken = igdOAuthToken . _Just
+        _AuthKey = igdKey . _Just
+        _AuthToken = igdOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupsDelete' where
         type Rs InstanceGroupsDelete' = Operation

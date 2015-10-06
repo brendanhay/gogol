@@ -158,8 +158,8 @@ upuFields
   = lens _upuFields (\ s a -> s{_upuFields = a})
 
 instance GoogleAuth UsersPhotosUpdate' where
-        authKey = upuKey . _Just
-        authToken = upuOAuthToken . _Just
+        _AuthKey = upuKey . _Just
+        _AuthToken = upuOAuthToken . _Just
 
 instance GoogleRequest UsersPhotosUpdate' where
         type Rs UsersPhotosUpdate' = UserPhoto

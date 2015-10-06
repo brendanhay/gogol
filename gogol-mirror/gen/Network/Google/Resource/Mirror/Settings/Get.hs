@@ -144,8 +144,8 @@ sgFields :: Lens' SettingsGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
 instance GoogleAuth SettingsGet' where
-        authKey = sgKey . _Just
-        authToken = sgOAuthToken . _Just
+        _AuthKey = sgKey . _Just
+        _AuthToken = sgOAuthToken . _Just
 
 instance GoogleRequest SettingsGet' where
         type Rs SettingsGet' = Setting

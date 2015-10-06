@@ -178,8 +178,8 @@ miFields :: Lens' MomentsInsert' (Maybe Text)
 miFields = lens _miFields (\ s a -> s{_miFields = a})
 
 instance GoogleAuth MomentsInsert' where
-        authKey = miKey . _Just
-        authToken = miOAuthToken . _Just
+        _AuthKey = miKey . _Just
+        _AuthToken = miOAuthToken . _Just
 
 instance GoogleRequest MomentsInsert' where
         type Rs MomentsInsert' = Moment

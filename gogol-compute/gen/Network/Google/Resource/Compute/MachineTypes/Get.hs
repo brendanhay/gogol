@@ -169,8 +169,8 @@ mtgFields
   = lens _mtgFields (\ s a -> s{_mtgFields = a})
 
 instance GoogleAuth MachineTypesGet' where
-        authKey = mtgKey . _Just
-        authToken = mtgOAuthToken . _Just
+        _AuthKey = mtgKey . _Just
+        _AuthToken = mtgOAuthToken . _Just
 
 instance GoogleRequest MachineTypesGet' where
         type Rs MachineTypesGet' = MachineType

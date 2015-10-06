@@ -149,8 +149,8 @@ ammlFields
 
 instance GoogleAuth AccountsMetadataMetricsList'
          where
-        authKey = ammlKey . _Just
-        authToken = ammlOAuthToken . _Just
+        _AuthKey = ammlKey . _Just
+        _AuthToken = ammlOAuthToken . _Just
 
 instance GoogleRequest AccountsMetadataMetricsList'
          where

@@ -192,8 +192,8 @@ ucesgFields
   = lens _ucesgFields (\ s a -> s{_ucesgFields = a})
 
 instance GoogleAuth URLCrawlErrorsSamplesGet' where
-        authKey = ucesgKey . _Just
-        authToken = ucesgOAuthToken . _Just
+        _AuthKey = ucesgKey . _Just
+        _AuthToken = ucesgOAuthToken . _Just
 
 instance GoogleRequest URLCrawlErrorsSamplesGet'
          where

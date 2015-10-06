@@ -170,8 +170,8 @@ apuFields
   = lens _apuFields (\ s a -> s{_apuFields = a})
 
 instance GoogleAuth AccountsPermissionsUpdate' where
-        authKey = apuKey . _Just
-        authToken = apuOAuthToken . _Just
+        _AuthKey = apuKey . _Just
+        _AuthToken = apuOAuthToken . _Just
 
 instance GoogleRequest AccountsPermissionsUpdate'
          where

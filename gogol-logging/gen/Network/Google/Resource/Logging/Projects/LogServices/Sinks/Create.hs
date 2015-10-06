@@ -248,8 +248,8 @@ plsscCallback
 
 instance GoogleAuth ProjectsLogServicesSinksCreate'
          where
-        authKey = plsscKey . _Just
-        authToken = plsscOAuthToken . _Just
+        _AuthKey = plsscKey . _Just
+        _AuthToken = plsscOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsLogServicesSinksCreate' where

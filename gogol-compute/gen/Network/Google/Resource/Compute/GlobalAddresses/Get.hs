@@ -157,8 +157,8 @@ gagFields
   = lens _gagFields (\ s a -> s{_gagFields = a})
 
 instance GoogleAuth GlobalAddressesGet' where
-        authKey = gagKey . _Just
-        authToken = gagOAuthToken . _Just
+        _AuthKey = gagKey . _Just
+        _AuthToken = gagOAuthToken . _Just
 
 instance GoogleRequest GlobalAddressesGet' where
         type Rs GlobalAddressesGet' = Address

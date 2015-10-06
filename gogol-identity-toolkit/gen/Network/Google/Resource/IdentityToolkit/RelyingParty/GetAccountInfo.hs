@@ -147,8 +147,8 @@ rpgaiFields
   = lens _rpgaiFields (\ s a -> s{_rpgaiFields = a})
 
 instance GoogleAuth RelyingPartyGetAccountInfo' where
-        authKey = rpgaiKey . _Just
-        authToken = rpgaiOAuthToken . _Just
+        _AuthKey = rpgaiKey . _Just
+        _AuthToken = rpgaiOAuthToken . _Just
 
 instance GoogleRequest RelyingPartyGetAccountInfo'
          where

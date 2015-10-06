@@ -164,8 +164,8 @@ jiFields :: Lens' JobsInsert' (Maybe Text)
 jiFields = lens _jiFields (\ s a -> s{_jiFields = a})
 
 instance GoogleAuth JobsInsert' where
-        authKey = jiKey . _Just
-        authToken = jiOAuthToken . _Just
+        _AuthKey = jiKey . _Just
+        _AuthToken = jiOAuthToken . _Just
 
 instance GoogleRequest JobsInsert' where
         type Rs JobsInsert' = Job

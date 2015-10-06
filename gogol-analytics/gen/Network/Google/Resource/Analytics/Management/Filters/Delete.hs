@@ -158,8 +158,8 @@ mfdFields
   = lens _mfdFields (\ s a -> s{_mfdFields = a})
 
 instance GoogleAuth ManagementFiltersDelete' where
-        authKey = mfdKey . _Just
-        authToken = mfdOAuthToken . _Just
+        _AuthKey = mfdKey . _Just
+        _AuthToken = mfdOAuthToken . _Just
 
 instance GoogleRequest ManagementFiltersDelete' where
         type Rs ManagementFiltersDelete' = Filter

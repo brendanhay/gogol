@@ -163,8 +163,8 @@ mpbuFields
   = lens _mpbuFields (\ s a -> s{_mpbuFields = a})
 
 instance GoogleAuth MapsPermissionsBatchUpdate' where
-        authKey = mpbuKey . _Just
-        authToken = mpbuOAuthToken . _Just
+        _AuthKey = mpbuKey . _Just
+        _AuthToken = mpbuOAuthToken . _Just
 
 instance GoogleRequest MapsPermissionsBatchUpdate'
          where

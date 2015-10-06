@@ -240,8 +240,8 @@ zvlrFields
   = lens _zvlrFields (\ s a -> s{_zvlrFields = a})
 
 instance GoogleAuth ZoneViewsListResources' where
-        authKey = zvlrKey . _Just
-        authToken = zvlrOAuthToken . _Just
+        _AuthKey = zvlrKey . _Just
+        _AuthToken = zvlrOAuthToken . _Just
 
 instance GoogleRequest ZoneViewsListResources' where
         type Rs ZoneViewsListResources' =

@@ -157,8 +157,8 @@ proFields
   = lens _proFields (\ s a -> s{_proFields = a})
 
 instance GoogleAuth PropertiesInsert' where
-        authKey = proKey . _Just
-        authToken = proOAuthToken . _Just
+        _AuthKey = proKey . _Just
+        _AuthToken = proOAuthToken . _Just
 
 instance GoogleRequest PropertiesInsert' where
         type Rs PropertiesInsert' = Property

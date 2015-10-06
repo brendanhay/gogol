@@ -146,8 +146,8 @@ ullFields
   = lens _ullFields (\ s a -> s{_ullFields = a})
 
 instance GoogleAuth UsersLabelsList' where
-        authKey = ullKey . _Just
-        authToken = ullOAuthToken . _Just
+        _AuthKey = ullKey . _Just
+        _AuthToken = ullOAuthToken . _Just
 
 instance GoogleRequest UsersLabelsList' where
         type Rs UsersLabelsList' = ListLabelsResponse

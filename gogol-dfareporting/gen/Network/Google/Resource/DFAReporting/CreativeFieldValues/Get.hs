@@ -173,8 +173,8 @@ cfvgFields
   = lens _cfvgFields (\ s a -> s{_cfvgFields = a})
 
 instance GoogleAuth CreativeFieldValuesGet' where
-        authKey = cfvgKey . _Just
-        authToken = cfvgOAuthToken . _Just
+        _AuthKey = cfvgKey . _Just
+        _AuthToken = cfvgOAuthToken . _Just
 
 instance GoogleRequest CreativeFieldValuesGet' where
         type Rs CreativeFieldValuesGet' = CreativeFieldValue

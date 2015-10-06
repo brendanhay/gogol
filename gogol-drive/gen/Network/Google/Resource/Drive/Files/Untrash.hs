@@ -140,8 +140,8 @@ fFields :: Lens' FilesUntrash' (Maybe Text)
 fFields = lens _fFields (\ s a -> s{_fFields = a})
 
 instance GoogleAuth FilesUntrash' where
-        authKey = fKey . _Just
-        authToken = fOAuthToken . _Just
+        _AuthKey = fKey . _Just
+        _AuthToken = fOAuthToken . _Just
 
 instance GoogleRequest FilesUntrash' where
         type Rs FilesUntrash' = File

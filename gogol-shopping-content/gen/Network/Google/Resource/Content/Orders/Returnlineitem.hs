@@ -171,8 +171,8 @@ orrFields
   = lens _orrFields (\ s a -> s{_orrFields = a})
 
 instance GoogleAuth OrdersReturnlineitem' where
-        authKey = orrKey . _Just
-        authToken = orrOAuthToken . _Just
+        _AuthKey = orrKey . _Just
+        _AuthToken = orrOAuthToken . _Just
 
 instance GoogleRequest OrdersReturnlineitem' where
         type Rs OrdersReturnlineitem' =

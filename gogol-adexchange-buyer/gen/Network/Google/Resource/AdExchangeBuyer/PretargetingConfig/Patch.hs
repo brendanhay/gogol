@@ -171,8 +171,8 @@ pcpFields
   = lens _pcpFields (\ s a -> s{_pcpFields = a})
 
 instance GoogleAuth PretargetingConfigPatch' where
-        authKey = pcpKey . _Just
-        authToken = pcpOAuthToken . _Just
+        _AuthKey = pcpKey . _Just
+        _AuthToken = pcpOAuthToken . _Just
 
 instance GoogleRequest PretargetingConfigPatch' where
         type Rs PretargetingConfigPatch' = PretargetingConfig

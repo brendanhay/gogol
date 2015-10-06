@@ -178,8 +178,8 @@ scceInstance
   = lens _scceInstance (\ s a -> s{_scceInstance = a})
 
 instance GoogleAuth SSLCertsCreateEphemeral' where
-        authKey = scceKey . _Just
-        authToken = scceOAuthToken . _Just
+        _AuthKey = scceKey . _Just
+        _AuthToken = scceOAuthToken . _Just
 
 instance GoogleRequest SSLCertsCreateEphemeral' where
         type Rs SSLCertsCreateEphemeral' = SSLCert

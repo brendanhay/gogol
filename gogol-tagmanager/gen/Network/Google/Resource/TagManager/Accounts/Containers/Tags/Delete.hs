@@ -174,8 +174,8 @@ actdcFields
 
 instance GoogleAuth AccountsContainersTagsDelete'
          where
-        authKey = actdcKey . _Just
-        authToken = actdcOAuthToken . _Just
+        _AuthKey = actdcKey . _Just
+        _AuthToken = actdcOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersTagsDelete'
          where

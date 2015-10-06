@@ -214,8 +214,8 @@ cwFields :: Lens' ChangesWatch' (Maybe Text)
 cwFields = lens _cwFields (\ s a -> s{_cwFields = a})
 
 instance GoogleAuth ChangesWatch' where
-        authKey = cwKey . _Just
-        authToken = cwOAuthToken . _Just
+        _AuthKey = cwKey . _Just
+        _AuthToken = cwOAuthToken . _Just
 
 instance GoogleRequest ChangesWatch' where
         type Rs ChangesWatch' = Channel

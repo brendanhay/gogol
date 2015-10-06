@@ -163,8 +163,8 @@ doacdFields
 
 instance GoogleAuth
          DefaultObjectAccessControlsDelete' where
-        authKey = doacdKey . _Just
-        authToken = doacdOAuthToken . _Just
+        _AuthKey = doacdKey . _Just
+        _AuthToken = doacdOAuthToken . _Just
 
 instance GoogleRequest
          DefaultObjectAccessControlsDelete' where

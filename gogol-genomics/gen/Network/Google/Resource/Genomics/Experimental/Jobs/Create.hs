@@ -149,8 +149,8 @@ ejcFields
   = lens _ejcFields (\ s a -> s{_ejcFields = a})
 
 instance GoogleAuth ExperimentalJobsCreate' where
-        authKey = ejcKey . _Just
-        authToken = ejcOAuthToken . _Just
+        _AuthKey = ejcKey . _Just
+        _AuthToken = ejcOAuthToken . _Just
 
 instance GoogleRequest ExperimentalJobsCreate' where
         type Rs ExperimentalJobsCreate' =

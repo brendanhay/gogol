@@ -158,8 +158,8 @@ mzdFields
   = lens _mzdFields (\ s a -> s{_mzdFields = a})
 
 instance GoogleAuth ManagedZonesDelete' where
-        authKey = mzdKey . _Just
-        authToken = mzdOAuthToken . _Just
+        _AuthKey = mzdKey . _Just
+        _AuthToken = mzdOAuthToken . _Just
 
 instance GoogleRequest ManagedZonesDelete' where
         type Rs ManagedZonesDelete' = ()

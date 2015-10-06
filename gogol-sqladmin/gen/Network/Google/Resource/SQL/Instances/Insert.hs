@@ -156,8 +156,8 @@ iiFields :: Lens' InstancesInsert' (Maybe Text)
 iiFields = lens _iiFields (\ s a -> s{_iiFields = a})
 
 instance GoogleAuth InstancesInsert' where
-        authKey = iiKey . _Just
-        authToken = iiOAuthToken . _Just
+        _AuthKey = iiKey . _Just
+        _AuthToken = iiOAuthToken . _Just
 
 instance GoogleRequest InstancesInsert' where
         type Rs InstancesInsert' = Operation

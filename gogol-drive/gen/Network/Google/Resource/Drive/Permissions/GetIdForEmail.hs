@@ -145,8 +145,8 @@ pgifeFields
   = lens _pgifeFields (\ s a -> s{_pgifeFields = a})
 
 instance GoogleAuth PermissionsGetIdForEmail' where
-        authKey = pgifeKey . _Just
-        authToken = pgifeOAuthToken . _Just
+        _AuthKey = pgifeKey . _Just
+        _AuthToken = pgifeOAuthToken . _Just
 
 instance GoogleRequest PermissionsGetIdForEmail'
          where

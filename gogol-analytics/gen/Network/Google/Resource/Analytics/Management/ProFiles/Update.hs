@@ -187,8 +187,8 @@ mpfuFields
   = lens _mpfuFields (\ s a -> s{_mpfuFields = a})
 
 instance GoogleAuth ManagementProFilesUpdate' where
-        authKey = mpfuKey . _Just
-        authToken = mpfuOAuthToken . _Just
+        _AuthKey = mpfuKey . _Just
+        _AuthToken = mpfuOAuthToken . _Just
 
 instance GoogleRequest ManagementProFilesUpdate'
          where

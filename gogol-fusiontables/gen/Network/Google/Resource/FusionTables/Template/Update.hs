@@ -170,8 +170,8 @@ temFields
   = lens _temFields (\ s a -> s{_temFields = a})
 
 instance GoogleAuth TemplateUpdate' where
-        authKey = temKey . _Just
-        authToken = temOAuthToken . _Just
+        _AuthKey = temKey . _Just
+        _AuthToken = temOAuthToken . _Just
 
 instance GoogleRequest TemplateUpdate' where
         type Rs TemplateUpdate' = Template

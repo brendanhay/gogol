@@ -169,8 +169,8 @@ icInstance
   = lens _icInstance (\ s a -> s{_icInstance = a})
 
 instance GoogleAuth InstancesClone' where
-        authKey = icKey . _Just
-        authToken = icOAuthToken . _Just
+        _AuthKey = icKey . _Just
+        _AuthToken = icOAuthToken . _Just
 
 instance GoogleRequest InstancesClone' where
         type Rs InstancesClone' = Operation

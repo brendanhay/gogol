@@ -165,8 +165,8 @@ irscInstance
   = lens _irscInstance (\ s a -> s{_irscInstance = a})
 
 instance GoogleAuth InstancesResetSSLConfig' where
-        authKey = irscKey . _Just
-        authToken = irscOAuthToken . _Just
+        _AuthKey = irscKey . _Just
+        _AuthToken = irscOAuthToken . _Just
 
 instance GoogleRequest InstancesResetSSLConfig' where
         type Rs InstancesResetSSLConfig' = Operation

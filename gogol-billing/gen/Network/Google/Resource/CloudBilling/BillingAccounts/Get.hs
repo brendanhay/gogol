@@ -216,8 +216,8 @@ bagCallback
   = lens _bagCallback (\ s a -> s{_bagCallback = a})
 
 instance GoogleAuth BillingAccountsGet' where
-        authKey = bagKey . _Just
-        authToken = bagOAuthToken . _Just
+        _AuthKey = bagKey . _Just
+        _AuthToken = bagOAuthToken . _Just
 
 instance GoogleRequest BillingAccountsGet' where
         type Rs BillingAccountsGet' = BillingAccount

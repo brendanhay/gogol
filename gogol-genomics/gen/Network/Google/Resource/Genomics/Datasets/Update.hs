@@ -151,8 +151,8 @@ dFields :: Lens' DatasetsUpdate' (Maybe Text)
 dFields = lens _dFields (\ s a -> s{_dFields = a})
 
 instance GoogleAuth DatasetsUpdate' where
-        authKey = dKey . _Just
-        authToken = dOAuthToken . _Just
+        _AuthKey = dKey . _Just
+        _AuthToken = dOAuthToken . _Just
 
 instance GoogleRequest DatasetsUpdate' where
         type Rs DatasetsUpdate' = Dataset

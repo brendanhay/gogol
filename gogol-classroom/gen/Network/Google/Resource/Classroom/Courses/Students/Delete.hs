@@ -238,8 +238,8 @@ csdCallback
   = lens _csdCallback (\ s a -> s{_csdCallback = a})
 
 instance GoogleAuth CoursesStudentsDelete' where
-        authKey = csdKey . _Just
-        authToken = csdOAuthToken . _Just
+        _AuthKey = csdKey . _Just
+        _AuthToken = csdOAuthToken . _Just
 
 instance GoogleRequest CoursesStudentsDelete' where
         type Rs CoursesStudentsDelete' = Empty

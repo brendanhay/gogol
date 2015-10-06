@@ -148,8 +148,8 @@ pcatFields
 
 instance GoogleAuth ProvisioningCreateAccountTicket'
          where
-        authKey = pcatKey . _Just
-        authToken = pcatOAuthToken . _Just
+        _AuthKey = pcatKey . _Just
+        _AuthToken = pcatOAuthToken . _Just
 
 instance GoogleRequest
          ProvisioningCreateAccountTicket' where

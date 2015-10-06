@@ -211,8 +211,8 @@ dpDeployment
   = lens _dpDeployment (\ s a -> s{_dpDeployment = a})
 
 instance GoogleAuth DeploymentsPatch' where
-        authKey = dpKey . _Just
-        authToken = dpOAuthToken . _Just
+        _AuthKey = dpKey . _Just
+        _AuthToken = dpOAuthToken . _Just
 
 instance GoogleRequest DeploymentsPatch' where
         type Rs DeploymentsPatch' = Operation

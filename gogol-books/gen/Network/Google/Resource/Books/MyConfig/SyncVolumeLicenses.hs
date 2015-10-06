@@ -226,8 +226,8 @@ mcsvlNonce
   = lens _mcsvlNonce (\ s a -> s{_mcsvlNonce = a})
 
 instance GoogleAuth MyConfigSyncVolumeLicenses' where
-        authKey = mcsvlKey . _Just
-        authToken = mcsvlOAuthToken . _Just
+        _AuthKey = mcsvlKey . _Just
+        _AuthToken = mcsvlOAuthToken . _Just
 
 instance GoogleRequest MyConfigSyncVolumeLicenses'
          where

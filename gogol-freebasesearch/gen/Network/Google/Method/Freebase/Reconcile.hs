@@ -197,8 +197,8 @@ rFields :: Lens' Reconcile' (Maybe Text)
 rFields = lens _rFields (\ s a -> s{_rFields = a})
 
 instance GoogleAuth Reconcile' where
-        authKey = rKey . _Just
-        authToken = rOAuthToken . _Just
+        _AuthKey = rKey . _Just
+        _AuthToken = rOAuthToken . _Just
 
 instance GoogleRequest Reconcile' where
         type Rs Reconcile' = ReconcileGet

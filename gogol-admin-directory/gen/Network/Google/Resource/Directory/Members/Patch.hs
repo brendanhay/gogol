@@ -170,8 +170,8 @@ mpFields :: Lens' MembersPatch' (Maybe Text)
 mpFields = lens _mpFields (\ s a -> s{_mpFields = a})
 
 instance GoogleAuth MembersPatch' where
-        authKey = mpKey . _Just
-        authToken = mpOAuthToken . _Just
+        _AuthKey = mpKey . _Just
+        _AuthToken = mpOAuthToken . _Just
 
 instance GoogleRequest MembersPatch' where
         type Rs MembersPatch' = Member

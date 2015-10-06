@@ -147,8 +147,8 @@ ascFields
   = lens _ascFields (\ s a -> s{_ascFields = a})
 
 instance GoogleAuth AnnotationSetsCreate' where
-        authKey = ascKey . _Just
-        authToken = ascOAuthToken . _Just
+        _AuthKey = ascKey . _Just
+        _AuthToken = ascOAuthToken . _Just
 
 instance GoogleRequest AnnotationSetsCreate' where
         type Rs AnnotationSetsCreate' = AnnotationSet

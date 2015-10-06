@@ -226,8 +226,8 @@ puCallback
   = lens _puCallback (\ s a -> s{_puCallback = a})
 
 instance GoogleAuth ProjectsUpdate' where
-        authKey = puKey . _Just
-        authToken = puOAuthToken . _Just
+        _AuthKey = puKey . _Just
+        _AuthToken = puOAuthToken . _Just
 
 instance GoogleRequest ProjectsUpdate' where
         type Rs ProjectsUpdate' = Project

@@ -168,8 +168,8 @@ ulpFields
   = lens _ulpFields (\ s a -> s{_ulpFields = a})
 
 instance GoogleAuth UsersLabelsPatch' where
-        authKey = ulpKey . _Just
-        authToken = ulpOAuthToken . _Just
+        _AuthKey = ulpKey . _Just
+        _AuthToken = ulpOAuthToken . _Just
 
 instance GoogleRequest UsersLabelsPatch' where
         type Rs UsersLabelsPatch' = Label

@@ -160,8 +160,8 @@ oudFields
   = lens _oudFields (\ s a -> s{_oudFields = a})
 
 instance GoogleAuth OrgUnitsDelete' where
-        authKey = oudKey . _Just
-        authToken = oudOAuthToken . _Just
+        _AuthKey = oudKey . _Just
+        _AuthToken = oudOAuthToken . _Just
 
 instance GoogleRequest OrgUnitsDelete' where
         type Rs OrgUnitsDelete' = ()

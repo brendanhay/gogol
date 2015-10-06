@@ -158,8 +158,8 @@ pagFields
   = lens _pagFields (\ s a -> s{_pagFields = a})
 
 instance GoogleAuth PagesRevert' where
-        authKey = pagKey . _Just
-        authToken = pagOAuthToken . _Just
+        _AuthKey = pagKey . _Just
+        _AuthToken = pagOAuthToken . _Just
 
 instance GoogleRequest PagesRevert' where
         type Rs PagesRevert' = Page

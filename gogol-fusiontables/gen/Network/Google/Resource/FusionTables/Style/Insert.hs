@@ -155,8 +155,8 @@ siFields :: Lens' StyleInsert' (Maybe Text)
 siFields = lens _siFields (\ s a -> s{_siFields = a})
 
 instance GoogleAuth StyleInsert' where
-        authKey = siKey . _Just
-        authToken = siOAuthToken . _Just
+        _AuthKey = siKey . _Just
+        _AuthToken = siOAuthToken . _Just
 
 instance GoogleRequest StyleInsert' where
         type Rs StyleInsert' = StyleSetting

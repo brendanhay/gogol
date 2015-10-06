@@ -185,8 +185,8 @@ brlInstance
   = lens _brlInstance (\ s a -> s{_brlInstance = a})
 
 instance GoogleAuth BackupRunsList' where
-        authKey = brlKey . _Just
-        authToken = brlOAuthToken . _Just
+        _AuthKey = brlKey . _Just
+        _AuthToken = brlOAuthToken . _Just
 
 instance GoogleRequest BackupRunsList' where
         type Rs BackupRunsList' = BackupRunsListResponse

@@ -159,8 +159,8 @@ aadFields
   = lens _aadFields (\ s a -> s{_aadFields = a})
 
 instance GoogleAuth AccountsAlertsDelete' where
-        authKey = aadKey . _Just
-        authToken = aadOAuthToken . _Just
+        _AuthKey = aadKey . _Just
+        _AuthToken = aadOAuthToken . _Just
 
 instance GoogleRequest AccountsAlertsDelete' where
         type Rs AccountsAlertsDelete' = ()

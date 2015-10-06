@@ -227,8 +227,8 @@ ptpCallback
   = lens _ptpCallback (\ s a -> s{_ptpCallback = a})
 
 instance GoogleAuth ProjectsTopicsPublish' where
-        authKey = ptpKey . _Just
-        authToken = ptpOAuthToken . _Just
+        _AuthKey = ptpKey . _Just
+        _AuthToken = ptpOAuthToken . _Just
 
 instance GoogleRequest ProjectsTopicsPublish' where
         type Rs ProjectsTopicsPublish' = PublishResponse

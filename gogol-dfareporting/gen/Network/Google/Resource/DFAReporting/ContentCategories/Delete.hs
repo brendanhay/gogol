@@ -156,8 +156,8 @@ ccdFields
   = lens _ccdFields (\ s a -> s{_ccdFields = a})
 
 instance GoogleAuth ContentCategoriesDelete' where
-        authKey = ccdKey . _Just
-        authToken = ccdOAuthToken . _Just
+        _AuthKey = ccdKey . _Just
+        _AuthToken = ccdOAuthToken . _Just
 
 instance GoogleRequest ContentCategoriesDelete' where
         type Rs ContentCategoriesDelete' = ()

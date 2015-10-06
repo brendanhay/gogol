@@ -156,8 +156,8 @@ dsgFields
   = lens _dsgFields (\ s a -> s{_dsgFields = a})
 
 instance GoogleAuth DirectorySitesGet' where
-        authKey = dsgKey . _Just
-        authToken = dsgOAuthToken . _Just
+        _AuthKey = dsgKey . _Just
+        _AuthToken = dsgOAuthToken . _Just
 
 instance GoogleRequest DirectorySitesGet' where
         type Rs DirectorySitesGet' = DirectorySite

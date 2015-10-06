@@ -158,8 +158,8 @@ itdFields
   = lens _itdFields (\ s a -> s{_itdFields = a})
 
 instance GoogleAuth InstanceTemplatesDelete' where
-        authKey = itdKey . _Just
-        authToken = itdOAuthToken . _Just
+        _AuthKey = itdKey . _Just
+        _AuthToken = itdOAuthToken . _Just
 
 instance GoogleRequest InstanceTemplatesDelete' where
         type Rs InstanceTemplatesDelete' = Operation

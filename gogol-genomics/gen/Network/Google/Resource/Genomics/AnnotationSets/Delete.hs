@@ -147,8 +147,8 @@ asdFields
   = lens _asdFields (\ s a -> s{_asdFields = a})
 
 instance GoogleAuth AnnotationSetsDelete' where
-        authKey = asdKey . _Just
-        authToken = asdOAuthToken . _Just
+        _AuthKey = asdKey . _Just
+        _AuthToken = asdOAuthToken . _Just
 
 instance GoogleRequest AnnotationSetsDelete' where
         type Rs AnnotationSetsDelete' = ()

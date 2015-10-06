@@ -168,8 +168,8 @@ oulFields
   = lens _oulFields (\ s a -> s{_oulFields = a})
 
 instance GoogleAuth OrgUnitsList' where
-        authKey = oulKey . _Just
-        authToken = oulOAuthToken . _Just
+        _AuthKey = oulKey . _Just
+        _AuthToken = oulOAuthToken . _Just
 
 instance GoogleRequest OrgUnitsList' where
         type Rs OrgUnitsList' = OrgUnits

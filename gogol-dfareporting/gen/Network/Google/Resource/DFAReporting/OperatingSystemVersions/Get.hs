@@ -159,8 +159,8 @@ osvgFields
   = lens _osvgFields (\ s a -> s{_osvgFields = a})
 
 instance GoogleAuth OperatingSystemVersionsGet' where
-        authKey = osvgKey . _Just
-        authToken = osvgOAuthToken . _Just
+        _AuthKey = osvgKey . _Just
+        _AuthToken = osvgOAuthToken . _Just
 
 instance GoogleRequest OperatingSystemVersionsGet'
          where

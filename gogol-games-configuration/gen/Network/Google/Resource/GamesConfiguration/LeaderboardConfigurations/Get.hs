@@ -149,8 +149,8 @@ lcgFields
 
 instance GoogleAuth LeaderboardConfigurationsGet'
          where
-        authKey = lcgKey . _Just
-        authToken = lcgOAuthToken . _Just
+        _AuthKey = lcgKey . _Just
+        _AuthToken = lcgOAuthToken . _Just
 
 instance GoogleRequest LeaderboardConfigurationsGet'
          where

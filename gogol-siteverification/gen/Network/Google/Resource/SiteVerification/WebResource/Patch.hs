@@ -158,8 +158,8 @@ wrpFields
   = lens _wrpFields (\ s a -> s{_wrpFields = a})
 
 instance GoogleAuth WebResourcePatch' where
-        authKey = wrpKey . _Just
-        authToken = wrpOAuthToken . _Just
+        _AuthKey = wrpKey . _Just
+        _AuthToken = wrpOAuthToken . _Just
 
 instance GoogleRequest WebResourcePatch' where
         type Rs WebResourcePatch' =

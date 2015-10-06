@@ -156,8 +156,8 @@ dlInstance
   = lens _dlInstance (\ s a -> s{_dlInstance = a})
 
 instance GoogleAuth DatabasesList' where
-        authKey = dlKey . _Just
-        authToken = dlOAuthToken . _Just
+        _AuthKey = dlKey . _Just
+        _AuthToken = dlOAuthToken . _Just
 
 instance GoogleRequest DatabasesList' where
         type Rs DatabasesList' = DatabasesListResponse

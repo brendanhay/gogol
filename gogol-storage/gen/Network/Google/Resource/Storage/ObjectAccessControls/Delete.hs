@@ -188,8 +188,8 @@ oacdFields
   = lens _oacdFields (\ s a -> s{_oacdFields = a})
 
 instance GoogleAuth ObjectAccessControlsDelete' where
-        authKey = oacdKey . _Just
-        authToken = oacdOAuthToken . _Just
+        _AuthKey = oacdKey . _Just
+        _AuthToken = oacdOAuthToken . _Just
 
 instance GoogleRequest ObjectAccessControlsDelete'
          where

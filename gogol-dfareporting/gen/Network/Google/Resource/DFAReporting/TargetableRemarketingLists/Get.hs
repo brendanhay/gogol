@@ -160,8 +160,8 @@ trlgFields
 
 instance GoogleAuth TargetableRemarketingListsGet'
          where
-        authKey = trlgKey . _Just
-        authToken = trlgOAuthToken . _Just
+        _AuthKey = trlgKey . _Just
+        _AuthToken = trlgOAuthToken . _Just
 
 instance GoogleRequest TargetableRemarketingListsGet'
          where

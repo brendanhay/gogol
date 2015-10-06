@@ -158,8 +158,8 @@ cguFields
   = lens _cguFields (\ s a -> s{_cguFields = a})
 
 instance GoogleAuth CreativeGroupsUpdate' where
-        authKey = cguKey . _Just
-        authToken = cguOAuthToken . _Just
+        _AuthKey = cguKey . _Just
+        _AuthToken = cguOAuthToken . _Just
 
 instance GoogleRequest CreativeGroupsUpdate' where
         type Rs CreativeGroupsUpdate' = CreativeGroup

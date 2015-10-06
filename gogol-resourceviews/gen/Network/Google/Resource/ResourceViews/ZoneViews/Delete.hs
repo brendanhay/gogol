@@ -169,8 +169,8 @@ zvdFields
   = lens _zvdFields (\ s a -> s{_zvdFields = a})
 
 instance GoogleAuth ZoneViewsDelete' where
-        authKey = zvdKey . _Just
-        authToken = zvdOAuthToken . _Just
+        _AuthKey = zvdKey . _Just
+        _AuthToken = zvdOAuthToken . _Just
 
 instance GoogleRequest ZoneViewsDelete' where
         type Rs ZoneViewsDelete' = Operation

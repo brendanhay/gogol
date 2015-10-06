@@ -176,8 +176,8 @@ sciInstance
   = lens _sciInstance (\ s a -> s{_sciInstance = a})
 
 instance GoogleAuth SSLCertsInsert' where
-        authKey = sciKey . _Just
-        authToken = sciOAuthToken . _Just
+        _AuthKey = sciKey . _Just
+        _AuthToken = sciOAuthToken . _Just
 
 instance GoogleRequest SSLCertsInsert' where
         type Rs SSLCertsInsert' = SSLCertsInsertResponse

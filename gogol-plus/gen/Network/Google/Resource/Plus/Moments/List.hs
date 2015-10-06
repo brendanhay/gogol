@@ -202,8 +202,8 @@ mlFields :: Lens' MomentsList' (Maybe Text)
 mlFields = lens _mlFields (\ s a -> s{_mlFields = a})
 
 instance GoogleAuth MomentsList' where
-        authKey = mlKey . _Just
-        authToken = mlOAuthToken . _Just
+        _AuthKey = mlKey . _Just
+        _AuthToken = mlOAuthToken . _Just
 
 instance GoogleRequest MomentsList' where
         type Rs MomentsList' = MomentsFeed

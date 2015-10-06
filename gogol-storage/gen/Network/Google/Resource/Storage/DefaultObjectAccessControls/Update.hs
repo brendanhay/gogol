@@ -174,8 +174,8 @@ doacuFields
 
 instance GoogleAuth
          DefaultObjectAccessControlsUpdate' where
-        authKey = doacuKey . _Just
-        authToken = doacuOAuthToken . _Just
+        _AuthKey = doacuKey . _Just
+        _AuthToken = doacuOAuthToken . _Just
 
 instance GoogleRequest
          DefaultObjectAccessControlsUpdate' where

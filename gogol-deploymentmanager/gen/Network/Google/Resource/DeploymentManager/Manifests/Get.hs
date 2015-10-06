@@ -167,8 +167,8 @@ mgDeployment
   = lens _mgDeployment (\ s a -> s{_mgDeployment = a})
 
 instance GoogleAuth ManifestsGet' where
-        authKey = mgKey . _Just
-        authToken = mgOAuthToken . _Just
+        _AuthKey = mgKey . _Just
+        _AuthToken = mgOAuthToken . _Just
 
 instance GoogleRequest ManifestsGet' where
         type Rs ManifestsGet' = Manifest

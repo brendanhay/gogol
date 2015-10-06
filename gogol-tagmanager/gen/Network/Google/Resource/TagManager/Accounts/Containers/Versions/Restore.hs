@@ -183,8 +183,8 @@ acvrFields
 
 instance GoogleAuth
          AccountsContainersVersionsRestore' where
-        authKey = acvrKey . _Just
-        authToken = acvrOAuthToken . _Just
+        _AuthKey = acvrKey . _Just
+        _AuthToken = acvrOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVersionsRestore' where

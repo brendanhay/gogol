@@ -151,8 +151,8 @@ sSnapshotId
   = lens _sSnapshotId (\ s a -> s{_sSnapshotId = a})
 
 instance GoogleAuth SnapshotsGet' where
-        authKey = sKey . _Just
-        authToken = sOAuthToken . _Just
+        _AuthKey = sKey . _Just
+        _AuthToken = sOAuthToken . _Just
 
 instance GoogleRequest SnapshotsGet' where
         type Rs SnapshotsGet' = Snapshot

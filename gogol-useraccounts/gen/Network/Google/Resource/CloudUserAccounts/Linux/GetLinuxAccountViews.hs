@@ -240,8 +240,8 @@ lglavInstance
       (\ s a -> s{_lglavInstance = a})
 
 instance GoogleAuth LinuxGetLinuxAccountViews' where
-        authKey = lglavKey . _Just
-        authToken = lglavOAuthToken . _Just
+        _AuthKey = lglavKey . _Just
+        _AuthToken = lglavOAuthToken . _Just
 
 instance GoogleRequest LinuxGetLinuxAccountViews'
          where

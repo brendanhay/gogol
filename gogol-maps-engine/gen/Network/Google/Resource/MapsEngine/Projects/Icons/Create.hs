@@ -167,8 +167,8 @@ picFields
   = lens _picFields (\ s a -> s{_picFields = a})
 
 instance GoogleAuth ProjectsIconsCreate' where
-        authKey = picKey . _Just
-        authToken = picOAuthToken . _Just
+        _AuthKey = picKey . _Just
+        _AuthToken = picOAuthToken . _Just
 
 instance GoogleRequest ProjectsIconsCreate' where
         type Rs ProjectsIconsCreate' = Icon

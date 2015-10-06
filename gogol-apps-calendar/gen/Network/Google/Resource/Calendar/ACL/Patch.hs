@@ -167,8 +167,8 @@ apFields :: Lens' ACLPatch' (Maybe Text)
 apFields = lens _apFields (\ s a -> s{_apFields = a})
 
 instance GoogleAuth ACLPatch' where
-        authKey = apKey . _Just
-        authToken = apOAuthToken . _Just
+        _AuthKey = apKey . _Just
+        _AuthToken = apOAuthToken . _Just
 
 instance GoogleRequest ACLPatch' where
         type Rs ACLPatch' = ACLRule

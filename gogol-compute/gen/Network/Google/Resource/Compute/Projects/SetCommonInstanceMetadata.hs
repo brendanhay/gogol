@@ -160,8 +160,8 @@ pscimFields
 
 instance GoogleAuth
          ProjectsSetCommonInstanceMetadata' where
-        authKey = pscimKey . _Just
-        authToken = pscimOAuthToken . _Just
+        _AuthKey = pscimKey . _Just
+        _AuthToken = pscimOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsSetCommonInstanceMetadata' where

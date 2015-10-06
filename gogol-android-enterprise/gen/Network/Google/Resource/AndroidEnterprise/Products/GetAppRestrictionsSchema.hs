@@ -180,8 +180,8 @@ pgarsFields
 
 instance GoogleAuth ProductsGetAppRestrictionsSchema'
          where
-        authKey = pgarsKey . _Just
-        authToken = pgarsOAuthToken . _Just
+        _AuthKey = pgarsKey . _Just
+        _AuthToken = pgarsOAuthToken . _Just
 
 instance GoogleRequest
          ProductsGetAppRestrictionsSchema' where

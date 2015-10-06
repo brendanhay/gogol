@@ -174,8 +174,8 @@ acfgFields
 
 instance GoogleAuth AccountsContainersFoldersGet'
          where
-        authKey = acfgKey . _Just
-        authToken = acfgOAuthToken . _Just
+        _AuthKey = acfgKey . _Just
+        _AuthToken = acfgOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersFoldersGet'
          where

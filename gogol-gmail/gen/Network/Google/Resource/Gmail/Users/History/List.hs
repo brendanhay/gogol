@@ -204,8 +204,8 @@ uhlFields
   = lens _uhlFields (\ s a -> s{_uhlFields = a})
 
 instance GoogleAuth UsersHistoryList' where
-        authKey = uhlKey . _Just
-        authToken = uhlOAuthToken . _Just
+        _AuthKey = uhlKey . _Just
+        _AuthToken = uhlOAuthToken . _Just
 
 instance GoogleRequest UsersHistoryList' where
         type Rs UsersHistoryList' = ListHistoryResponse

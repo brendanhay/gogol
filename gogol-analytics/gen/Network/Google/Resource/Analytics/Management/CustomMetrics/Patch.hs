@@ -202,8 +202,8 @@ mcmpFields
 
 instance GoogleAuth ManagementCustomMetricsPatch'
          where
-        authKey = mcmpKey . _Just
-        authToken = mcmpOAuthToken . _Just
+        _AuthKey = mcmpKey . _Just
+        _AuthToken = mcmpOAuthToken . _Just
 
 instance GoogleRequest ManagementCustomMetricsPatch'
          where
