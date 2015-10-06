@@ -1,4 +1,4 @@
-# gogol-games-appstate
+# gogol-appstate
 
 * [Version](#version)
 * [Description](#description)
@@ -25,4 +25,4 @@ For any problems, comments, or feedback please create an issue [here on GitHub](
 
 ## Licence
 
-`gogol-games-appstate` is released under the [Mozilla Public License Version 2.0](http://www.mozilla.org/MPL/).
+`gogol-appstate` is released under the [Mozilla Public License Version 2.0](http://www.mozilla.org/MPL/).

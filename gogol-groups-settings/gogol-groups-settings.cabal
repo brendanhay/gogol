@@ -1,6 +1,6 @@
-name:                  gogol-games-appstate
+name:                  gogol-groups-settings
 version:               0.0.1
-synopsis:              Google App State API Client.
+synopsis:              Groups Settings API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,7 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    The Google App State API.
+    Lets you manage permission levels and related settings of a group.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -30,17 +30,15 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.AppState
-        , Network.Google.AppState.Types
-        , Network.Google.Resource.AppState.States.Clear
-        , Network.Google.Resource.AppState.States.Delete
-        , Network.Google.Resource.AppState.States.Get
-        , Network.Google.Resource.AppState.States.List
-        , Network.Google.Resource.AppState.States.Update
+          Network.Google.GroupsSettings
+        , Network.Google.GroupsSettings.Types
+        , Network.Google.Resource.GroupsSettings.Groups.Get
+        , Network.Google.Resource.GroupsSettings.Groups.Patch
+        , Network.Google.Resource.GroupsSettings.Groups.Update
 
     other-modules:
-          Network.Google.AppState.Types.Product
-        , Network.Google.AppState.Types.Sum
+          Network.Google.GroupsSettings.Types.Product
+        , Network.Google.GroupsSettings.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

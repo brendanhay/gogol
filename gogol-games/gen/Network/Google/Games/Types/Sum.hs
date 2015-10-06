@@ -21,10 +21,6 @@ import           Network.Google.Prelude
 -- | Collection of players being retrieved
 data PlayersListCollection
     = PlayedWith
-      -- ^ @playedWith@
-      -- (DEPRECATED: please use played_with!) Retrieve a list of players you
-      -- have played a multiplayer game (realtime or turn-based) with recently.
-    | PlayedWith
       -- ^ @played_with@
       -- Retrieve a list of players you have played a multiplayer game (realtime
       -- or turn-based) with recently.
@@ -34,13 +30,11 @@ instance Hashable PlayersListCollection
 
 instance FromText PlayersListCollection where
     fromText = \case
-        "playedWith" -> Just PlayedWith
         "played_with" -> Just PlayedWith
         _ -> Nothing
 
 instance ToText PlayersListCollection where
     toText = \case
-        PlayedWith -> "playedWith"
         PlayedWith -> "played_with"
 
 instance FromJSON PlayersListCollection where

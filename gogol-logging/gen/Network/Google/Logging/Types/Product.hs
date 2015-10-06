@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 -- | _Output only._ Describes a log, which is a named stream of log entries.
 --
--- /See:/ 'log' smart constructor.
+-- /See:/ 'log'' smart constructor.
 data Log = Log
     { _lName        :: !(Maybe Text)
     , _lDisplayName :: !(Maybe Text)
@@ -38,9 +38,9 @@ data Log = Log
 -- * 'lDisplayName'
 --
 -- * 'lPayloadType'
-log
+log'
     :: Log
-log =
+log' =
     Log
     { _lName = Nothing
     , _lDisplayName = Nothing

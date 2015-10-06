@@ -20,7 +20,7 @@ module Network.Google.Logging.Types
 
     -- * Log
     , Log
-    , log
+    , log'
     , lName
     , lDisplayName
     , lPayloadType

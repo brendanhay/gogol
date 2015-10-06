@@ -1,4 +1,4 @@
-# gogol-groups-migration
+# gogol-groups-settings
 
 * [Version](#version)
 * [Description](#description)
@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Groups Migration API.
+A client library for the Groups Settings API.
 
 
 ## Contribute
@@ -25,4 +25,4 @@ For any problems, comments, or feedback please create an issue [here on GitHub](
 
 ## Licence
 
-`gogol-groups-migration` is released under the [Mozilla Public License Version 2.0](http://www.mozilla.org/MPL/).
+`gogol-groups-settings` is released under the [Mozilla Public License Version 2.0](http://www.mozilla.org/MPL/).

@@ -92,7 +92,7 @@ module Network.Google.Logging
 
     -- ** Log
     , Log
-    , log
+    , log'
     , lName
     , lDisplayName
     , lPayloadType
