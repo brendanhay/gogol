@@ -56,7 +56,7 @@ type GroupsPatchResource =
              QueryParam "fields" Text :>
                QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "alt" AltATOM :>
+                   QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Groups :> Patch '[JSON] Groups
 
 -- | Updates an existing resource. This method supports patch semantics.
@@ -166,7 +166,7 @@ instance GoogleRequest GroupsPatch' where
               _gpFields
               _gpKey
               _gpOAuthToken
-              (Just AltATOM)
+              (Just AltJSON)
               _gpPayload
           where go
                   = clientBuild (Proxy :: Proxy GroupsPatchResource) rq

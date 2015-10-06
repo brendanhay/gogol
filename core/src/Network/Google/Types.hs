@@ -72,9 +72,8 @@ newtype OAuthToken = OAuthToken Text
     deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToText, FromText)
 
 class GoogleAuth a where
-    authKey   :: Traversal' a AuthKey
-    authToken :: Traversal' a OAuthToken
-    -- ^ only set if unset semantics?
+    _AuthKey   :: Traversal' a AuthKey
+    _AuthToken :: Traversal' a OAuthToken
 
 newtype MediaDownload a = MediaDownload a
 
@@ -82,8 +81,8 @@ _MediaDownload :: Iso' (MediaDownload a) a
 _MediaDownload = iso (\(MediaDownload x) -> x) MediaDownload
 
 instance GoogleAuth a => GoogleAuth (MediaDownload a) where
-    authKey   = _MediaDownload . authKey
-    authToken = _MediaDownload . authToken
+    _AuthKey   = _MediaDownload . _AuthKey
+    _AuthToken = _MediaDownload . _AuthToken
 
 _Coerce :: (Coercible a b, Coercible b a) => Iso' a b
 _Coerce = iso coerce coerce

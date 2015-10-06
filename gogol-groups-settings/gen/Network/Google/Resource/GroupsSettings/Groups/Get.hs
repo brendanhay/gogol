@@ -55,7 +55,7 @@ type GroupsGetResource =
              QueryParam "fields" Text :>
                QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "alt" AltATOM :> Get '[JSON] Groups
+                   QueryParam "alt" AltJSON :> Get '[JSON] Groups
 
 -- | Gets one resource by id.
 --
@@ -154,6 +154,6 @@ instance GoogleRequest GroupsGet' where
               _ggFields
               _ggKey
               _ggOAuthToken
-              (Just AltATOM)
+              (Just AltJSON)
           where go
                   = clientBuild (Proxy :: Proxy GroupsGetResource) rq

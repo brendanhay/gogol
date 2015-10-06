@@ -50,8 +50,8 @@ module Network.Google.QPXExpress.Types
     , todrLatestTime
     , todrEarliestTime
 
-    -- * Data
-    , Data
+    -- * Data'
+    , Data'
     , data'
     , dCarrier
     , dKind

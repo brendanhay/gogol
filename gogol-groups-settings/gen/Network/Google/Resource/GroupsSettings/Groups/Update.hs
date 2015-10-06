@@ -56,7 +56,7 @@ type GroupsUpdateResource =
              QueryParam "fields" Text :>
                QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "alt" AltATOM :>
+                   QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Groups :> Put '[JSON] Groups
 
 -- | Updates an existing resource.
@@ -166,7 +166,7 @@ instance GoogleRequest GroupsUpdate' where
               _guFields
               _guKey
               _guOAuthToken
-              (Just AltATOM)
+              (Just AltJSON)
               _guPayload
           where go
                   = clientBuild (Proxy :: Proxy GroupsUpdateResource)

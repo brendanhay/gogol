@@ -26,7 +26,7 @@ import           Network.Google.QPXExpress.Types.Sum
 data TripOptionsResponse = TripOptionsResponse
     { _torRequestId  :: !(Maybe Text)
     , _torKind       :: !Text
-    , _torData       :: !(Maybe Data)
+    , _torData       :: !(Maybe Data')
     , _torTripOption :: !(Maybe [TripOption])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -62,7 +62,7 @@ torKind :: Lens' TripOptionsResponse Text
 torKind = lens _torKind (\ s a -> s{_torKind = a})
 
 -- | Informational data global to list of solutions.
-torData :: Lens' TripOptionsResponse (Maybe Data)
+torData :: Lens' TripOptionsResponse (Maybe Data')
 torData = lens _torData (\ s a -> s{_torData = a})
 
 -- | A list of priced itinerary solutions to the QPX Express query.
@@ -312,7 +312,7 @@ instance ToJSON TimeOfDayRange where
 -- aircraft.
 --
 -- /See:/ 'data'' smart constructor.
-data Data = Data
+data Data' = Data'
     { _dCarrier  :: !(Maybe [CarrierData])
     , _dKind     :: !Text
     , _dAircraft :: !(Maybe [AircraftData])
@@ -337,9 +337,9 @@ data Data = Data
 --
 -- * 'dTax'
 data'
-    :: Data
+    :: Data'
 data' =
-    Data
+    Data'
     { _dCarrier = Nothing
     , _dKind = "qpxexpress#data"
     , _dAircraft = Nothing
@@ -350,7 +350,7 @@ data' =
 
 -- | The airline carrier of the aircraft flying between an origin and
 -- destination. Allowed values are IATA carrier codes.
-dCarrier :: Lens' Data [CarrierData]
+dCarrier :: Lens' Data' [CarrierData]
 dCarrier
   = lens _dCarrier (\ s a -> s{_dCarrier = a}) .
       _Default
@@ -359,40 +359,40 @@ dCarrier
 -- | Identifies this as QPX Express response resource, including a trip\'s
 -- airport, city, taxes, airline, and aircraft. Value: the fixed string
 -- qpxexpress#data.
-dKind :: Lens' Data Text
+dKind :: Lens' Data' Text
 dKind = lens _dKind (\ s a -> s{_dKind = a})
 
 -- | The aircraft that is flying between an origin and destination.
-dAircraft :: Lens' Data [AircraftData]
+dAircraft :: Lens' Data' [AircraftData]
 dAircraft
   = lens _dAircraft (\ s a -> s{_dAircraft = a}) .
       _Default
       . _Coerce
 
 -- | The airport of an origin or destination.
-dAirport :: Lens' Data [AirportData]
+dAirport :: Lens' Data' [AirportData]
 dAirport
   = lens _dAirport (\ s a -> s{_dAirport = a}) .
       _Default
       . _Coerce
 
 -- | The city that is either the origin or destination of part of a trip.
-dCity :: Lens' Data [CityData]
+dCity :: Lens' Data' [CityData]
 dCity
   = lens _dCity (\ s a -> s{_dCity = a}) . _Default .
       _Coerce
 
 -- | The taxes due for flying between an origin and a destination.
-dTax :: Lens' Data [TaxData]
+dTax :: Lens' Data' [TaxData]
 dTax
   = lens _dTax (\ s a -> s{_dTax = a}) . _Default .
       _Coerce
 
-instance FromJSON Data where
+instance FromJSON Data' where
         parseJSON
           = withObject "Data"
               (\ o ->
-                 Data <$>
+                 Data' <$>
                    (o .:? "carrier" .!= mempty) <*>
                      (o .:? "kind" .!= "qpxexpress#data")
                      <*> (o .:? "aircraft" .!= mempty)
@@ -400,8 +400,8 @@ instance FromJSON Data where
                      <*> (o .:? "city" .!= mempty)
                      <*> (o .:? "tax" .!= mempty))
 
-instance ToJSON Data where
-        toJSON Data{..}
+instance ToJSON Data' where
+        toJSON Data'{..}
           = object
               (catMaybes
                  [("carrier" .=) <$> _dCarrier,
