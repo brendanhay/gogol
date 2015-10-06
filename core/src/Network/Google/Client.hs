@@ -7,6 +7,7 @@
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE MultiParamTypeClasses      #-}
 {-# LANGUAGE OverloadedStrings          #-}
+{-# LANGUAGE RankNTypes                 #-}
 {-# LANGUAGE RecordWildCards            #-}
 {-# LANGUAGE ScopedTypeVariables        #-}
 {-# LANGUAGE TypeFamilies               #-}
@@ -23,7 +24,8 @@
 --
 module Network.Google.Client where
 
-import           Control.Exception
+import           Control.Monad.Catch
+-- import           Control.Exception
 import           Control.Lens
 import           Control.Monad.Trans.Class
 import           Control.Monad.Trans.Reader
@@ -50,9 +52,8 @@ import           GHC.Generics
 import           GHC.TypeLits
 import           Network.Google.Types
 import           Network.HTTP.Client          (HttpException)
-import           Network.HTTP.Conduit         (Manager)
-import qualified Network.HTTP.Conduit         as Client
-import           Network.HTTP.Media
+import qualified Network.HTTP.Client          as Client
+import           Network.HTTP.Media           hiding (Accept)
 import           Network.HTTP.Types
 import           Servant.API                  hiding (Header)
 
@@ -70,45 +71,6 @@ type ResponseBody = ResumableSource (ResourceT IO) ByteString
 
 data Body = Body -- MediaType
     deriving (Eq, Show, Generic, Data, Typeable)
-
-data Request = Request
-    { _rqHost     :: ByteString
-    , _rqPort     :: Int
-    , _rqBasePath :: ByteString
-    , _rqPath     :: Builder
-    , _rqQuery    :: DList (Text, Maybe Text)
-    , _rqHeaders  :: [Header]
-    , _rqBody     :: Maybe (MediaType, LBS.ByteString)
-    }
-
-initialRequest :: ByteString -- ^ Host.
-               -> Int        -- ^ Port.
-               -> ByteString -- ^ Base Path.
-               -> Request
-initialRequest h n p = Request
-    { _rqHost     = h
-    , _rqPort     = n
-    , _rqBasePath = p
-    , _rqPath     = mempty
-    , _rqQuery    = mempty
-    , _rqHeaders  = mempty
-    , _rqBody     = Nothing
-    }
-
-appendPath :: Request -> Builder -> Request
-appendPath rq x = rq { _rqPath = _rqPath rq <> "/" <> x }
-
-appendPaths :: ToText a => Request -> [a] -> Request
-appendPaths rq = appendPath rq . foldMap (mappend "/" . buildText)
-
-appendQuery :: Request -> Text -> Maybe Text -> Request
-appendQuery rq k v = rq { _rqQuery = DList.snoc (_rqQuery rq) (k, v) }
-
-setBody :: Request -> MediaType -> LBS.ByteString -> Request
-setBody rq c x = rq { _rqBody = Just (c, x) }
-
--- setAccept :: Reuqest -> [MediaType] -> Request
--- setAccept rq xs = rq { _rqAccept = xs }
 
 data Error
     = TransportError HttpException
@@ -167,14 +129,118 @@ instance AsError Error where
         ServiceError e -> Right e
         x              -> Left  x
 
+-- | Multiple path captures, with @[xs]@ forming @/<x1>/<x2>/<x2>/...@.
 data Captures (s :: Symbol) a
     deriving (Typeable)
 
+-- | Form a Google style sub-resource, such as @/<capture>:<mode>@.
 data CaptureMode (s :: Symbol) (m :: Symbol) a
     deriving (Typeable)
 
 data MultipartRelated (cs :: [*]) m b
     deriving (Typeable)
+
+-- | An intermediary request builder.
+data RequestBuilder = RequestBuilder
+    { _rqHost     :: ByteString
+    , _rqBasePath :: ByteString
+    , _rqPath     :: Builder
+    , _rqQuery    :: DList (Text, Maybe Text)
+    , _rqBody     :: Maybe (MediaType, LBS.ByteString)
+    }
+
+-- | Construct a default request builder. Since the Google service descriptions
+-- have http/https in the host (rootUrl), the scheme is assumed.
+defaultRequest :: ByteString -- ^ Host. (rootUrl)
+               -> ByteString -- ^ Path. (servicePath)
+               -> RequestBuilder
+defaultRequest h p = RequestBuilder
+    { _rqHost     = h
+    , _rqBasePath = p
+    , _rqPath     = mempty
+    , _rqQuery    = mempty
+    , _rqBody     = Nothing
+    }
+
+appendPath :: RequestBuilder -> Builder -> RequestBuilder
+appendPath rq x = rq { _rqPath = _rqPath rq <> "/" <> x }
+
+appendPaths :: ToText a => RequestBuilder -> [a] -> RequestBuilder
+appendPaths rq = appendPath rq . foldMap (mappend "/" . buildText)
+
+appendQuery :: RequestBuilder -> Text -> Maybe Text -> RequestBuilder
+appendQuery rq k v = rq { _rqQuery = DList.snoc (_rqQuery rq) (k, v) }
+
+setBody :: RequestBuilder -> MediaType -> LBS.ByteString -> RequestBuilder
+setBody rq c x = rq { _rqBody = Just (c, x) }
+
+-- | A materialised 'http-client' request and associated response parser.
+data Client a = Client
+    { _clientAccept   :: Maybe MediaType
+    , _clientCheck    :: Int -> Bool
+    , _clientResponse :: ResponseBody -> ResourceT IO (Either SerializeError a)
+    , _clientRequest  :: ClientRequest
+    }
+
+client :: (ResponseBody -> ResourceT IO (Either SerializeError a))
+       -> Maybe MediaType
+       -> Method
+       -> [Int]
+       -> RequestBuilder
+       -> Client a
+client f cs m ns rq = Client
+    { _clientAccept   = cs
+    , _clientCheck    = (`elem` ns)
+    , _clientResponse = f
+    , _clientRequest  = clientRequest cs m rq
+    }
+
+clientRequest :: Maybe MediaType -> Method -> RequestBuilder -> ClientRequest
+clientRequest cs m RequestBuilder {..} = def
+     { Client.method      = m
+     , Client.checkStatus = \_ _ _ -> Nothing
+     }
+
+clientMime :: MimeUnrender c a
+           => Proxy c
+           -> Method
+           -> [Int]
+           -> RequestBuilder
+           -> Client a
+clientMime p = client go (Just (contentType p))
+  where
+    go b = do
+        lbs <- sinkLBS b
+        case mimeUnrender p lbs of
+            Left  e -> undefined
+            Right x -> pure (Right x)
+
+clientStream :: Accept c
+             => Proxy  c
+             -> Method
+             -> [Int]
+             -> RequestBuilder
+             -> Client ResponseBody
+clientStream p = client (pure . Right) (Just (contentType p))
+
+clientEmpty :: Method -> [Int] -> RequestBuilder -> Client ()
+clientEmpty = client go Nothing
+  where
+    go b = closeResumableSource b >> pure (Right ())
+
+-- sinkLBS :: ResponseBody -> Client LBS.ByteString
+sinkLBS = fmap LBS.fromChunks . ($$+- CL.consume)
+
+class GoogleRequest a where
+    type Rs a :: *
+
+    request     ::                   a -> Client (Rs a)
+    requestWith :: RequestBuilder -> a -> Client (Rs a)
+
+class GoogleClient fn where
+    type Fn fn :: *
+
+    clientBuild :: Proxy fn -> RequestBuilder -> Fn fn
 
 instance ( MimeRender   c m
          , GoogleClient fn
@@ -187,30 +253,18 @@ instance ( MimeRender   c m
     --   where
     --     p = Proxy :: Proxy c
 
-
-class GoogleRequest a where
-    type Rs a :: *
-
-    request     ::            a -> IO (Either Error (Rs a))
-    requestWith :: Request -> a -> IO (Either Error (Rs a))
-
-class GoogleClient fn where
-    type Fn fn :: *
-
-    requestBuild :: Proxy fn -> Request -> Fn fn
-
 instance (KnownSymbol s, GoogleClient fn) => GoogleClient (s :> fn) where
     type Fn (s :> fn) = Fn fn
 
-    requestBuild Proxy rq = requestBuild (Proxy :: Proxy fn) $
+    clientBuild Proxy rq = clientBuild (Proxy :: Proxy fn) $
         appendPath rq (buildSymbol (Proxy :: Proxy s))
 
 instance (GoogleClient a, GoogleClient b) => GoogleClient (a :<|> b) where
     type Fn (a :<|> b) = Fn a :<|> Fn b
 
-    requestBuild Proxy rq =
-             requestBuild (Proxy :: Proxy a) rq
-        :<|> requestBuild (Proxy :: Proxy b) rq
+    clientBuild Proxy rq =
+             clientBuild (Proxy :: Proxy a) rq
+        :<|> clientBuild (Proxy :: Proxy b) rq
 
 instance ( KnownSymbol  s
          , ToText       a
@@ -218,7 +272,7 @@ instance ( KnownSymbol  s
          ) => GoogleClient (Capture s a :> fn) where
     type Fn (Capture s a :> fn) = a -> Fn fn
 
-    requestBuild Proxy rq = requestBuild (Proxy :: Proxy fn)
+    clientBuild Proxy rq = clientBuild (Proxy :: Proxy fn)
         . appendPath rq
         . buildText
 
@@ -228,7 +282,7 @@ instance ( KnownSymbol  s
          ) => GoogleClient (Captures s a :> fn) where
     type Fn (Captures s a :> fn) = [a] -> Fn fn
 
-    requestBuild Proxy rq = requestBuild (Proxy :: Proxy fn)
+    clientBuild Proxy rq = clientBuild (Proxy :: Proxy fn)
         . appendPaths rq
 
 instance ( KnownSymbol  s
@@ -238,7 +292,7 @@ instance ( KnownSymbol  s
          ) => GoogleClient (CaptureMode s m a :> fn) where
     type Fn (CaptureMode s m a :> fn) = a -> Fn fn
 
-    requestBuild Proxy rq x = requestBuild (Proxy :: Proxy fn)
+    clientBuild Proxy rq x = clientBuild (Proxy :: Proxy fn)
         . appendPath rq
         $ buildText x <> buildSymbol (Proxy :: Proxy m)
 
@@ -248,7 +302,7 @@ instance ( KnownSymbol  s
          ) => GoogleClient (QueryParam s a :> fn) where
     type Fn (QueryParam s a :> fn) = Maybe a -> Fn fn
 
-    requestBuild Proxy rq mx = requestBuild (Proxy :: Proxy fn) $
+    clientBuild Proxy rq mx = clientBuild (Proxy :: Proxy fn) $
         case mx of
             Nothing -> rq
             Just x  -> appendQuery rq k v
@@ -262,7 +316,7 @@ instance ( KnownSymbol  s
          ) => GoogleClient (QueryParams s a :> fn) where
     type Fn (QueryParams s a :> fn) = [a] -> Fn fn
 
-    requestBuild Proxy rq = requestBuild (Proxy :: Proxy fn) . foldl' go rq
+    clientBuild Proxy rq = clientBuild (Proxy :: Proxy fn) . foldl' go rq
       where
         go r = appendQuery r k . Just . toText
 
@@ -273,7 +327,7 @@ instance ( MimeRender   c a
          ) => GoogleClient (ReqBody (c ': cs) a :> fn) where
     type Fn (ReqBody (c ': cs) a :> fn) = a -> Fn fn
 
-    requestBuild Proxy rq = requestBuild (Proxy :: Proxy fn)
+    clientBuild Proxy rq = clientBuild (Proxy :: Proxy fn)
         . setBody rq (contentType p)
         . mimeRender p
       where
@@ -284,128 +338,89 @@ instance ( MimeRender   c a
 instance MimeUnrender c a => GoogleClient (Get (c ': cs) a) where
     type Fn (Get (c ': cs) a) = Client a
 
-    requestBuild Proxy = requestMime (Proxy :: Proxy c) methodGet [200, 203]
+    clientBuild Proxy = clientMime (Proxy :: Proxy c) methodGet [200, 203]
 
-instance GoogleClient (Get (c ': cs) ResponseBody) where
+instance Accept c => GoogleClient (Get (c ': cs) ResponseBody) where
     type Fn (Get (c ': cs) ResponseBody) = Client ResponseBody
 
-    requestBuild Proxy = requestBody (Proxy :: Proxy c) methodGet [200, 203]
+    clientBuild Proxy = clientStream (Proxy :: Proxy c) methodGet [200, 203]
 
 instance GoogleClient (Get (c ': cs) ()) where
     type Fn (Get (c ': cs) ()) = Client ()
 
-    requestBuild Proxy = requestMime (Proxy :: Proxy c) methodGet [204]
+    clientBuild Proxy = clientEmpty methodGet [204]
 
 instance MimeUnrender c a => GoogleClient (Post (c ': cs) a) where
     type Fn (Post (c ': cs) a) = Client a
 
-    requestBuild Proxy = requestMime (Proxy :: Proxy c) methodPost [200, 201]
+    clientBuild Proxy = clientMime (Proxy :: Proxy c) methodPost [200, 201]
 
 instance GoogleClient (Post (c ': cs) ()) where
     type Fn (Post (c ': cs) ()) = Client ()
 
-    requestBuild Proxy = requestMime (Proxy :: Proxy c) methodPost [204]
+    clientBuild Proxy = clientEmpty methodPost [204]
 
 instance MimeUnrender c a => GoogleClient (Put (c ': cs) a) where
     type Fn (Put (c ': cs) a) = Client a
 
-    requestBuild Proxy = requestMime (Proxy :: Proxy c) methodPut [200, 201]
+    clientBuild Proxy = clientMime (Proxy :: Proxy c) methodPut [200, 201]
 
 instance GoogleClient (Put (c ': cs) ()) where
     type Fn (Put (c ': cs) ()) = Client ()
 
-    requestBuild Proxy = requestMime (Proxy :: Proxy c) methodPut [204]
+    clientBuild Proxy = clientEmpty methodPut [204]
 
 instance MimeUnrender c a => GoogleClient (Patch (c ': cs) a) where
     type Fn (Patch (c ': cs) a) = Client a
 
-    requestBuild Proxy = requestMime (Proxy :: Proxy c) methodPatch [200, 201]
+    clientBuild Proxy = clientMime (Proxy :: Proxy c) methodPatch [200, 201]
 
 instance GoogleClient (Patch (c ': cs) ()) where
     type Fn (Patch (c ': cs) ()) = Client ()
 
-    requestBuild Proxy = requestMime (Proxy :: Proxy c) methodPatch [204]
+    clientBuild Proxy = clientEmpty methodPatch [204]
 
-type Client a = ReaderT Manager IO (Either Error a)
+-- perform :: Accept
+--         -> (ResponseBody -> Client (Either SerializeError a))
+--         -> Method
+--         -> [Int]
+--         -> RequestBuilder
+--         -> Client a
+-- perform a meth ns f rq = undefined -- do
+  --   m <- ask
+  --   x <- lift . try $ Client.http m (clientRequest meth a rq)
+  --   either (failure . TransportError) success x
+  -- where
+  --   failure = pure . Left
 
-requestMime :: MimeUnrender c a
-            => Proxy c
-            -> Method
-            -> [Int]
-            -> Request
-            -> Client a
-requestMime p = perform c go
-  where
-    c = contentType p
+  --   success rs = do
+  --       let s  = Client.responseStatus  rs
+  --           b  = Client.responseBody    rs
+  --           hs = Client.responseHeaders rs
+  --       case content hs of
+  --       unless (matches respCT (acceptCT)) $
+  --           left $ UnsupportedContentType respCT respBody
 
-    go b = do
-        lbs <- sinkLBS b
-        case mimeUnrender c lbs of
-            Left  e -> SerializeError
-            Right x -> undefined
+  --           Nothing -> failure (SerializeError' (SerializeError hs))
 
-requestbody :: Accept c
-            => Proxy  c
-            -> Method
-            -> [Int]
-            -> Request
-            -> Client ResponseBody
-requestBody p = perform c (pure . Right)
-  where
-    c = contentType p
+  --           Just _ | statusInvalid s -> do
+  --               lbs <- sinkLBS b
+  --               failure (ServiceError' (ServiceError s c hs lbs))
 
--- performNoBody = httpNoBody
-
-perform :: Accept
-        -> (ResponseBody -> Client (Either SerializeError a))
-        -> Method
-        -> [Int]
-        -> Request
-        -> Client a
-perform a meth ns f rq = do
-    m <- ask
-    x <- lift . try $ Client.http m (clientRequest meth a rq)
-    either (failure . TransportError) success x
-  where
-    failure = pure . Left
-
-    success rs = do
-        let s  = Client.responseStatus  rs
-            b  = Client.responseBody    rs
-            hs = Client.responseHeaders rs
-        case content hs of
-        unless (matches respCT (acceptCT)) $
-            left $ UnsupportedContentType respCT respBody
-
-            Nothing -> failure (SerializeError' (SerializeError hs))
-
-            Just _ | statusInvalid s -> do
-                lbs <- sinkLBS b
-                failure (ServiceError' (ServiceError s c hs lbs))
-
-            Just c | contentInvalid c -> do
-                lbs <- sinkLBS b
-                failure (SerializeError' (SerializeError s c hs lbs))
+  --           Just c | contentInvalid c -> do
+  --               lbs <- sinkLBS b
+  --               failure (SerializeError' (SerializeError s c hs lbs))
 
 
-            Just c -> first SerializeError' <$> f b
+  --           Just c -> first SerializeError' <$> f b
 
-    content :: [Header] -> Maybe c
-    content = parseAccept
-        . fromMaybe "application/octet-stream"
-        . lookup hContentType
+  --   content :: [Header] -> Maybe c
+  --   content = parseAccept
+  --       . fromMaybe "application/octet-stream"
+  --       . lookup hContentType
 
-    statusCheck s = fromEnum s `elem` ns
-    contentCheck  = matches a
-
-clientRequest :: Method -> MediaType -> Request -> ClientRequest
-clientRequest m c Request {..} = def
-     { Client.method      = m
-     , Client.checkStatus = \_ _ _ -> Nothing
-     }
-
-sinkLBS :: ResponseBody -> Client LBS.ByteString
-sinkLBS = fmap LBS.fromChunks . ($$+- CL.consme)
+  --   statusCheck s = fromEnum s `elem` ns
+  --   contentCheck  = matches a
 
 buildText :: ToText a => a -> Builder
 buildText = Build.fromText . toText

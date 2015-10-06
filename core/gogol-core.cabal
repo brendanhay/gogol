@@ -46,18 +46,18 @@ library
     build-depends:
           aeson      >= 0.8
         , base       >= 4.7 && < 5
-        , conduit
         , bifunctors
         , bytestring
+        , conduit
+        , data-default-class
         , dlist      >= 0.7
+        , exceptions
         , hashable   >= 1.2
         , http-client
-        , data-default-class
-        , resourcet
-        , http-conduit
         , http-media
         , http-types
         , lens       >= 4.4
+        , resourcet
         , scientific >= 0.3
         , servant    >= 0.4.4
         , text       >= 1.1
