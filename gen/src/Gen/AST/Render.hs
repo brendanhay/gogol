@@ -108,15 +108,10 @@ renderAPI s = do
     url = name (Text.unpack (urlName s))
 
     serviceURL = Fun' url (Just (rawHelpText h))
-        <$> pp None (urlSig url)
-        <*> pp Print d
+        <$> pp None  (urlSig url)
+        <*> pp Print (urlDecl s url)
       where
-        d | "http://" `Text.isPrefixOf` u = urlDecl url "Http"  u 80
-          | otherwise                     = urlDecl url "Https" u 443
-
-        u = s ^. dBaseUrl
-
-        h = sformat ("URL referring to version @" % stext %
+        h = sformat ("Default request referring to version @" % stext %
                      "@ of the " % stext % ".")
                      (s ^. dVersion) (s ^. dTitle)
 

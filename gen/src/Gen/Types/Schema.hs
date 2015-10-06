@@ -434,4 +434,4 @@ instance HasDescription (Service a) a where
     description = sDescription
 
 urlName :: Service a -> Text
-urlName = (<> "URL") . lowerHead . _sCanonicalName
+urlName = (<> "Request") . lowerHead . _sCanonicalName

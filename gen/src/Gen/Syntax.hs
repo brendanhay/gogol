@@ -34,12 +34,15 @@ import           Language.Haskell.Exts.SrcLoc
 import           Language.Haskell.Exts.Syntax hiding (Alt, Int, Lit)
 
 urlSig :: Name -> Decl
-urlSig n = TypeSig noLoc [n] (TyCon "BaseUrl")
+urlSig n = TypeSig noLoc [n] (TyCon "RequestBuilder")
 
-urlDecl :: Name -> String -> Text -> Integer -> Decl
-urlDecl n s u p = sfun noLoc n [] (UnGuardedRhs rhs) noBinds
+urlDecl :: Service a -> Name -> Decl
+urlDecl s n = sfun noLoc n [] (UnGuardedRhs rhs) noBinds
   where
-    rhs = appFun (var "BaseUrl") [var (name s), str u, intE p]
+    rhs = appFun (var "defaultRequest")
+        [ str (s ^. dRootUrl)
+        , str (s ^. dServicePath)
+        ]
 
  -- type API = :<|> ...
 apiAlias :: Name -> [Name] -> Decl
@@ -183,23 +186,21 @@ googleRequestDecl g n assoc alt p api url fields m pat prec =
     InstDecl noLoc Nothing [] [] (unqual "GoogleRequest") [n]
         [ assoc
         , request
-        , requestWithRoute
+        , requestWith
         ]
   where
-    request = funD "request" $
-        appFun (var "requestWithRoute") [var "defReq", var url]
+    request = funD "request" $ app (var "requestWith") (var url)
 
-    requestWithRoute = InsDecl (FunBind [match])
+    requestWith = InsDecl (FunBind [match])
       where
-        match = Match noLoc (name "requestWithRoute") pats Nothing rhs decls
+        match = Match noLoc (name "requestWith") pats Nothing rhs decls
 
         decls = BDecls
             [ patBind noLoc pat $
-                appFun (var "clientWithRoute") $
+                appFun (var "clientBuild") $
                     [ ExpTypeSig noLoc (var "Proxy") $
                         TyApp (TyCon "Proxy") (TyCon (UnQual api))
-                    , var "r"
-                    , var "u"
+                    , var "rq"
                     ]
             ]
 
@@ -237,7 +238,7 @@ googleRequestDecl g n assoc alt p api url fields m pat prec =
        . nub
        $ map fst (rights (extractPath (_mPath m))) ++ _mParameterOrder m
 
-    pats = [pvar "r", pvar "u", prec]
+    pats = [pvar "rq", prec]
 
 authDecl :: Global -> Prefix -> [Local] -> Decl
 authDecl g p fs = InstDecl noLoc Nothing [] [] (unqual "GoogleAuth") [tycon g]
