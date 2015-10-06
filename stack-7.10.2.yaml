@@ -17,12 +17,12 @@ packages:
   - gogol-android-enterprise
   - gogol-android-publisher
   - gogol-appengine
-  - gogol-taskqueue
   - gogol-apps-activity
   - gogol-apps-calendar
   - gogol-apps-licensing
   - gogol-apps-reseller
   - gogol-apps-tasks
+  - gogol-appstate
   - gogol-autoscaler
   - gogol-bigquery
   - gogol-billing
@@ -48,12 +48,12 @@ packages:
   - gogol-freebasesearch
   - gogol-fusiontables
   - gogol-games
-  - gogol-games-appstate
   - gogol-games-configuration
   - gogol-games-management
   - gogol-genomics
   - gogol-gmail
   - gogol-groups-migration
+  - gogol-groups-settings
   - gogol-identity-toolkit
   - gogol-latencytest
   - gogol-logging
@@ -82,6 +82,7 @@ packages:
   - gogol-storage
   - gogol-storage-transfer
   - gogol-tagmanager
+  - gogol-taskqueue
   - gogol-translate
   - gogol-urlshortener
   - gogol-useraccounts
