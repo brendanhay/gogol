@@ -20,7 +20,7 @@ import           Data.Maybe                  as Export
 import           Data.Monoid                 as Export (mempty, (<>))
 import           Data.Proxy                  as Export
 import           Data.Text                   as Export (Text)
-import           Data.Time                   as Export
+import           Data.Time                   as Export (UTCTime)
 import           Data.Word                   as Export (Word32, Word64, Word8)
 import           GHC.Generics                as Export (Generic)
 import           Network.Google.Data.JSON    as Export

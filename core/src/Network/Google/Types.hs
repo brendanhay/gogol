@@ -235,6 +235,9 @@ clientEmpty = clientRequest go Nothing
 class Accept c => ToStream c a where
     toStream :: Proxy c -> a -> Stream
 
+instance ToStream OctetStream Stream where
+    toStream Proxy = id
+
 instance ToJSON a => ToStream JSON a where
     toStream Proxy = newResumableSource . CL.sourceList . LBS.toChunks . encode
 

@@ -3,7 +3,7 @@ LIBRARIES ?= core gogol $(SERVICES)
 FORWARD   := sdist upload candidate
 
 build:
-	stack build
+	stack --docker --docker-run-args '--memory=3G --cpuset-cpus=0,1' build
 
 clean:
 	stack clean
