@@ -44,8 +44,8 @@ module Network.Google.PageSpeed.Types
     , pafsvairiWidth
     , pafsvairiTop
 
-    -- * PagespeedapiRunpagespeedStrategy
-    , PagespeedapiRunpagespeedStrategy (..)
+    -- * PagespeedAPIRunPagespeedStrategy
+    , PagespeedAPIRunPagespeedStrategy (..)
 
     -- * ResultVersion
     , ResultVersion

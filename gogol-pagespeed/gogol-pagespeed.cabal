@@ -33,7 +33,7 @@ library
     exposed-modules:
           Network.Google.PageSpeed
         , Network.Google.PageSpeed.Types
-        , Network.Google.Resource.Pagespeedonline.Pagespeedapi.Runpagespeed
+        , Network.Google.Resource.PagespeedOnline.PagespeedAPI.RunPagespeed
 
     other-modules:
           Network.Google.PageSpeed.Types.Product

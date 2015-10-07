@@ -28,8 +28,8 @@ module Network.Google.PageSpeed
 
     -- * REST Resources
 
-    -- ** PagespeedonlinePagespeedapiRunpagespeed
-    , module Network.Google.Resource.Pagespeedonline.Pagespeedapi.Runpagespeed
+    -- ** PagespeedOnlinePagespeedAPIRunPagespeed
+    , module Network.Google.Resource.PagespeedOnline.PagespeedAPI.RunPagespeed
 
     -- * Types
 
@@ -59,8 +59,8 @@ module Network.Google.PageSpeed
     , pafsvairiWidth
     , pafsvairiTop
 
-    -- ** PagespeedapiRunpagespeedStrategy
-    , PagespeedapiRunpagespeedStrategy (..)
+    -- ** PagespeedAPIRunPagespeedStrategy
+    , PagespeedAPIRunPagespeedStrategy (..)
 
     -- ** ResultVersion
     , ResultVersion
@@ -139,13 +139,13 @@ module Network.Google.PageSpeed
 
 import           Network.Google.PageSpeed.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Pagespeedonline.Pagespeedapi.Runpagespeed
+import           Network.Google.Resource.PagespeedOnline.PagespeedAPI.RunPagespeed
 
 {- $resources
 TODO
 -}
 
-type PageSpeedAPI = PagespeedapiRunpagespeedResource
+type PageSpeedAPI = PagespeedAPIRunPagespeedResource
 
 pageSpeedAPI :: Proxy PageSpeedAPI
 pageSpeedAPI = Proxy
