@@ -239,7 +239,7 @@ instance ToJSON ListOperationsResponse where
 data Schedule = Schedule
     { _sScheduleEndDate   :: !(Maybe Date)
     , _sScheduleStartDate :: !(Maybe Date)
-    , _sStartTimeOfDay    :: !(Maybe TimeOfDay)
+    , _sStartTimeOfDay    :: !(Maybe TimeOfDay')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Schedule' with the minimum fields required to make a request.
@@ -277,7 +277,7 @@ sScheduleStartDate
 -- | The time in UTC at which the transfer will be scheduled to start in a
 -- day. Transfers may start later than this time. If not specified,
 -- transfers are scheduled to start at midnight UTC.
-sStartTimeOfDay :: Lens' Schedule (Maybe TimeOfDay)
+sStartTimeOfDay :: Lens' Schedule (Maybe TimeOfDay')
 sStartTimeOfDay
   = lens _sStartTimeOfDay
       (\ s a -> s{_sStartTimeOfDay = a})
@@ -1258,7 +1258,7 @@ instance ToJSON HTTPData where
 -- \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'timeOfDay' smart constructor.
-data TimeOfDay = TimeOfDay
+data TimeOfDay' = TimeOfDay'
     { _todNanos   :: !(Maybe Int32)
     , _todHours   :: !(Maybe Int32)
     , _todMinutes :: !(Maybe Int32)
@@ -1277,9 +1277,9 @@ data TimeOfDay = TimeOfDay
 --
 -- * 'todSeconds'
 timeOfDay
-    :: TimeOfDay
+    :: TimeOfDay'
 timeOfDay =
-    TimeOfDay
+    TimeOfDay'
     { _todNanos = Nothing
     , _todHours = Nothing
     , _todMinutes = Nothing
@@ -1287,37 +1287,37 @@ timeOfDay =
     }
 
 -- | Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
-todNanos :: Lens' TimeOfDay (Maybe Int32)
+todNanos :: Lens' TimeOfDay' (Maybe Int32)
 todNanos = lens _todNanos (\ s a -> s{_todNanos = a})
 
 -- | Hours of day in 24 hour format. Should be from 0 to 23. An API may
 -- choose to allow the value \"24:00:00\" for scenarios like business
 -- closing time.
-todHours :: Lens' TimeOfDay (Maybe Int32)
+todHours :: Lens' TimeOfDay' (Maybe Int32)
 todHours = lens _todHours (\ s a -> s{_todHours = a})
 
 -- | Minutes of hour of day. Must be from 0 to 59.
-todMinutes :: Lens' TimeOfDay (Maybe Int32)
+todMinutes :: Lens' TimeOfDay' (Maybe Int32)
 todMinutes
   = lens _todMinutes (\ s a -> s{_todMinutes = a})
 
 -- | Seconds of minutes of the time. Must normally be from 0 to 59. An API
 -- may allow the value 60 if it allows leap-seconds.
-todSeconds :: Lens' TimeOfDay (Maybe Int32)
+todSeconds :: Lens' TimeOfDay' (Maybe Int32)
 todSeconds
   = lens _todSeconds (\ s a -> s{_todSeconds = a})
 
-instance FromJSON TimeOfDay where
+instance FromJSON TimeOfDay' where
         parseJSON
           = withObject "TimeOfDay"
               (\ o ->
-                 TimeOfDay <$>
+                 TimeOfDay' <$>
                    (o .:? "nanos") <*> (o .:? "hours") <*>
                      (o .:? "minutes")
                      <*> (o .:? "seconds"))
 
-instance ToJSON TimeOfDay where
-        toJSON TimeOfDay{..}
+instance ToJSON TimeOfDay' where
+        toJSON TimeOfDay'{..}
           = object
               (catMaybes
                  [("nanos" .=) <$> _todNanos,

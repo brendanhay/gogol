@@ -142,8 +142,8 @@ module Network.Google.StorageTransfer.Types
     , hTTPData
     , httpdListURL
 
-    -- * TimeOfDay
-    , TimeOfDay
+    -- * TimeOfDay'
+    , TimeOfDay'
     , timeOfDay
     , todNanos
     , todHours

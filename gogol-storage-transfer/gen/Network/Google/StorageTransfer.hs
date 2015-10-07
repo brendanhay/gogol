@@ -190,8 +190,8 @@ module Network.Google.StorageTransfer
     , hTTPData
     , httpdListURL
 
-    -- ** TimeOfDay
-    , TimeOfDay
+    -- ** TimeOfDay'
+    , TimeOfDay'
     , timeOfDay
     , todNanos
     , todHours
