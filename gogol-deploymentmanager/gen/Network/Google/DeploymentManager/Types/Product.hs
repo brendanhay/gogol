@@ -65,6 +65,39 @@ instance ToJSON OperationWarningsItemDataItem where
                  [("value" .=) <$> _owidiValue,
                   ("key" .=) <$> _owidiKey])
 
+-- |
+--
+-- /See:/ 'configFile' smart constructor.
+newtype ConfigFile = ConfigFile
+    { _cfContent :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConfigFile' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cfContent'
+configFile
+    :: ConfigFile
+configFile =
+    ConfigFile
+    { _cfContent = Nothing
+    }
+
+-- | The contents of the file.
+cfContent :: Lens' ConfigFile (Maybe Text)
+cfContent
+  = lens _cfContent (\ s a -> s{_cfContent = a})
+
+instance FromJSON ConfigFile where
+        parseJSON
+          = withObject "ConfigFile"
+              (\ o -> ConfigFile <$> (o .:? "content"))
+
+instance ToJSON ConfigFile where
+        toJSON ConfigFile{..}
+          = object (catMaybes [("content" .=) <$> _cfContent])
+
 -- | A response containing a partial list of operations and a page token used
 -- to build the next request if the request has been truncated.
 --
@@ -117,6 +150,54 @@ instance ToJSON OperationsListResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _olrNextPageToken,
                   ("operations" .=) <$> _olrOperations])
+
+--
+-- /See:/ 'resourceUpdateWarningsItemDataItem' smart constructor.
+data ResourceUpdateWarningsItemDataItem = ResourceUpdateWarningsItemDataItem
+    { _ruwidiValue :: !(Maybe Text)
+    , _ruwidiKey   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResourceUpdateWarningsItemDataItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ruwidiValue'
+--
+-- * 'ruwidiKey'
+resourceUpdateWarningsItemDataItem
+    :: ResourceUpdateWarningsItemDataItem
+resourceUpdateWarningsItemDataItem =
+    ResourceUpdateWarningsItemDataItem
+    { _ruwidiValue = Nothing
+    , _ruwidiKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+ruwidiValue :: Lens' ResourceUpdateWarningsItemDataItem (Maybe Text)
+ruwidiValue
+  = lens _ruwidiValue (\ s a -> s{_ruwidiValue = a})
+
+-- | [Output Only] A key for the warning data.
+ruwidiKey :: Lens' ResourceUpdateWarningsItemDataItem (Maybe Text)
+ruwidiKey
+  = lens _ruwidiKey (\ s a -> s{_ruwidiKey = a})
+
+instance FromJSON ResourceUpdateWarningsItemDataItem
+         where
+        parseJSON
+          = withObject "ResourceUpdateWarningsItemDataItem"
+              (\ o ->
+                 ResourceUpdateWarningsItemDataItem <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON ResourceUpdateWarningsItemDataItem
+         where
+        toJSON ResourceUpdateWarningsItemDataItem{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _ruwidiValue,
+                  ("key" .=) <$> _ruwidiKey])
 
 -- | A response that returns all Types supported by Deployment Manager
 --
@@ -507,9 +588,8 @@ instance ToJSON ResourcesListResponse where
 -- |
 --
 -- /See:/ 'deploymentUpdate' smart constructor.
-data DeploymentUpdate = DeploymentUpdate
-    { _duManifest :: !(Maybe Text)
-    , _duErrors   :: !(Maybe [Text])
+newtype DeploymentUpdate = DeploymentUpdate
+    { _duManifest :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentUpdate' with the minimum fields required to make a request.
@@ -517,14 +597,11 @@ data DeploymentUpdate = DeploymentUpdate
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'duManifest'
---
--- * 'duErrors'
 deploymentUpdate
     :: DeploymentUpdate
 deploymentUpdate =
     DeploymentUpdate
     { _duManifest = Nothing
-    , _duErrors = Nothing
     }
 
 -- | [Output Only] URL of the manifest representing the update configuration
@@ -533,37 +610,26 @@ duManifest :: Lens' DeploymentUpdate (Maybe Text)
 duManifest
   = lens _duManifest (\ s a -> s{_duManifest = a})
 
--- | [Output Only] List of all errors encountered while trying to enact the
--- update.
-duErrors :: Lens' DeploymentUpdate [Text]
-duErrors
-  = lens _duErrors (\ s a -> s{_duErrors = a}) .
-      _Default
-      . _Coerce
-
 instance FromJSON DeploymentUpdate where
         parseJSON
           = withObject "DeploymentUpdate"
-              (\ o ->
-                 DeploymentUpdate <$>
-                   (o .:? "manifest") <*> (o .:? "errors" .!= mempty))
+              (\ o -> DeploymentUpdate <$> (o .:? "manifest"))
 
 instance ToJSON DeploymentUpdate where
         toJSON DeploymentUpdate{..}
           = object
-              (catMaybes
-                 [("manifest" .=) <$> _duManifest,
-                  ("errors" .=) <$> _duErrors])
+              (catMaybes [("manifest" .=) <$> _duManifest])
 
 -- |
 --
 -- /See:/ 'resourceUpdate' smart constructor.
 data ResourceUpdate = ResourceUpdate
     { _ruState           :: !(Maybe Text)
+    , _ruError           :: !(Maybe ResourceUpdateError)
+    , _ruWarnings        :: !(Maybe [ResourceUpdateWarningsItem])
     , _ruIntent          :: !(Maybe Text)
     , _ruManifest        :: !(Maybe Text)
     , _ruFinalProperties :: !(Maybe Text)
-    , _ruErrors          :: !(Maybe [Text])
     , _ruProperties      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -573,13 +639,15 @@ data ResourceUpdate = ResourceUpdate
 --
 -- * 'ruState'
 --
+-- * 'ruError'
+--
+-- * 'ruWarnings'
+--
 -- * 'ruIntent'
 --
 -- * 'ruManifest'
 --
 -- * 'ruFinalProperties'
---
--- * 'ruErrors'
 --
 -- * 'ruProperties'
 resourceUpdate
@@ -587,16 +655,30 @@ resourceUpdate
 resourceUpdate =
     ResourceUpdate
     { _ruState = Nothing
+    , _ruError = Nothing
+    , _ruWarnings = Nothing
     , _ruIntent = Nothing
     , _ruManifest = Nothing
     , _ruFinalProperties = Nothing
-    , _ruErrors = Nothing
     , _ruProperties = Nothing
     }
 
 -- | [Output Only] The state of the resource.
 ruState :: Lens' ResourceUpdate (Maybe Text)
 ruState = lens _ruState (\ s a -> s{_ruState = a})
+
+-- | [Output Only] If errors are generated during update of the resource,
+-- this field will be populated.
+ruError :: Lens' ResourceUpdate (Maybe ResourceUpdateError)
+ruError = lens _ruError (\ s a -> s{_ruError = a})
+
+-- | [Output Only] If warning messages are generated during processing of
+-- this resource, this field will be populated.
+ruWarnings :: Lens' ResourceUpdate [ResourceUpdateWarningsItem]
+ruWarnings
+  = lens _ruWarnings (\ s a -> s{_ruWarnings = a}) .
+      _Default
+      . _Coerce
 
 -- | [Output Only] The intent of the resource: PREVIEW, UPDATE, or CANCEL.
 ruIntent :: Lens' ResourceUpdate (Maybe Text)
@@ -615,14 +697,6 @@ ruFinalProperties
   = lens _ruFinalProperties
       (\ s a -> s{_ruFinalProperties = a})
 
--- | [Output Only] List of all errors encountered while trying to enact
--- update.intent.
-ruErrors :: Lens' ResourceUpdate [Text]
-ruErrors
-  = lens _ruErrors (\ s a -> s{_ruErrors = a}) .
-      _Default
-      . _Coerce
-
 -- | [Output Only] The set of updated properties for this resource, before
 -- references are expanded. Returned as serialized YAML.
 ruProperties :: Lens' ResourceUpdate (Maybe Text)
@@ -634,10 +708,11 @@ instance FromJSON ResourceUpdate where
           = withObject "ResourceUpdate"
               (\ o ->
                  ResourceUpdate <$>
-                   (o .:? "state") <*> (o .:? "intent") <*>
-                     (o .:? "manifest")
+                   (o .:? "state") <*> (o .:? "error") <*>
+                     (o .:? "warnings" .!= mempty)
+                     <*> (o .:? "intent")
+                     <*> (o .:? "manifest")
                      <*> (o .:? "finalProperties")
-                     <*> (o .:? "errors" .!= mempty)
                      <*> (o .:? "properties"))
 
 instance ToJSON ResourceUpdate where
@@ -645,24 +720,25 @@ instance ToJSON ResourceUpdate where
           = object
               (catMaybes
                  [("state" .=) <$> _ruState,
+                  ("error" .=) <$> _ruError,
+                  ("warnings" .=) <$> _ruWarnings,
                   ("intent" .=) <$> _ruIntent,
                   ("manifest" .=) <$> _ruManifest,
                   ("finalProperties" .=) <$> _ruFinalProperties,
-                  ("errors" .=) <$> _ruErrors,
                   ("properties" .=) <$> _ruProperties])
 
 -- |
 --
 -- /See:/ 'manifest' smart constructor.
 data Manifest = Manifest
-    { _mInsertTime      :: !(Maybe Text)
-    , _mLayout          :: !(Maybe Text)
-    , _mConfig          :: !(Maybe Text)
-    , _mImports         :: !(Maybe [ImportFile])
-    , _mSelfLink        :: !(Maybe Text)
-    , _mName            :: !(Maybe Text)
-    , _mEvaluatedConfig :: !(Maybe Text)
-    , _mId              :: !(Maybe Word64)
+    { _mInsertTime     :: !(Maybe Text)
+    , _mLayout         :: !(Maybe Text)
+    , _mConfig         :: !(Maybe ConfigFile)
+    , _mExpandedConfig :: !(Maybe Text)
+    , _mImports        :: !(Maybe [ImportFile])
+    , _mSelfLink       :: !(Maybe Text)
+    , _mName           :: !(Maybe Text)
+    , _mId             :: !(Maybe Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Manifest' with the minimum fields required to make a request.
@@ -675,13 +751,13 @@ data Manifest = Manifest
 --
 -- * 'mConfig'
 --
+-- * 'mExpandedConfig'
+--
 -- * 'mImports'
 --
 -- * 'mSelfLink'
 --
 -- * 'mName'
---
--- * 'mEvaluatedConfig'
 --
 -- * 'mId'
 manifest
@@ -691,10 +767,10 @@ manifest =
     { _mInsertTime = Nothing
     , _mLayout = Nothing
     , _mConfig = Nothing
+    , _mExpandedConfig = Nothing
     , _mImports = Nothing
     , _mSelfLink = Nothing
     , _mName = Nothing
-    , _mEvaluatedConfig = Nothing
     , _mId = Nothing
     }
 
@@ -709,8 +785,15 @@ mLayout :: Lens' Manifest (Maybe Text)
 mLayout = lens _mLayout (\ s a -> s{_mLayout = a})
 
 -- | [Output Only] The YAML configuration for this manifest.
-mConfig :: Lens' Manifest (Maybe Text)
+mConfig :: Lens' Manifest (Maybe ConfigFile)
 mConfig = lens _mConfig (\ s a -> s{_mConfig = a})
+
+-- | [Output Only] The fully-expanded configuration file, including any
+-- templates and references.
+mExpandedConfig :: Lens' Manifest (Maybe Text)
+mExpandedConfig
+  = lens _mExpandedConfig
+      (\ s a -> s{_mExpandedConfig = a})
 
 -- | [Output Only] The imported files for this manifest.
 mImports :: Lens' Manifest [ImportFile]
@@ -728,13 +811,6 @@ mSelfLink
 mName :: Lens' Manifest (Maybe Text)
 mName = lens _mName (\ s a -> s{_mName = a})
 
--- | [Output Only] The fully-expanded configuration file, including any
--- templates and references.
-mEvaluatedConfig :: Lens' Manifest (Maybe Text)
-mEvaluatedConfig
-  = lens _mEvaluatedConfig
-      (\ s a -> s{_mEvaluatedConfig = a})
-
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 mId :: Lens' Manifest (Maybe Word64)
 mId = lens _mId (\ s a -> s{_mId = a})
@@ -746,10 +822,10 @@ instance FromJSON Manifest where
                  Manifest <$>
                    (o .:? "insertTime") <*> (o .:? "layout") <*>
                      (o .:? "config")
+                     <*> (o .:? "expandedConfig")
                      <*> (o .:? "imports" .!= mempty)
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
-                     <*> (o .:? "evaluatedConfig")
                      <*> (o .:? "id"))
 
 instance ToJSON Manifest where
@@ -759,11 +835,114 @@ instance ToJSON Manifest where
                  [("insertTime" .=) <$> _mInsertTime,
                   ("layout" .=) <$> _mLayout,
                   ("config" .=) <$> _mConfig,
+                  ("expandedConfig" .=) <$> _mExpandedConfig,
                   ("imports" .=) <$> _mImports,
                   ("selfLink" .=) <$> _mSelfLink,
-                  ("name" .=) <$> _mName,
-                  ("evaluatedConfig" .=) <$> _mEvaluatedConfig,
-                  ("id" .=) <$> _mId])
+                  ("name" .=) <$> _mName, ("id" .=) <$> _mId])
+
+--
+-- /See:/ 'resourceUpdateWarningsItem' smart constructor.
+data ResourceUpdateWarningsItem = ResourceUpdateWarningsItem
+    { _ruwiData    :: !(Maybe [ResourceUpdateWarningsItemDataItem])
+    , _ruwiCode    :: !(Maybe Text)
+    , _ruwiMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResourceUpdateWarningsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ruwiData'
+--
+-- * 'ruwiCode'
+--
+-- * 'ruwiMessage'
+resourceUpdateWarningsItem
+    :: ResourceUpdateWarningsItem
+resourceUpdateWarningsItem =
+    ResourceUpdateWarningsItem
+    { _ruwiData = Nothing
+    , _ruwiCode = Nothing
+    , _ruwiMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+ruwiData :: Lens' ResourceUpdateWarningsItem [ResourceUpdateWarningsItemDataItem]
+ruwiData
+  = lens _ruwiData (\ s a -> s{_ruwiData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+ruwiCode :: Lens' ResourceUpdateWarningsItem (Maybe Text)
+ruwiCode = lens _ruwiCode (\ s a -> s{_ruwiCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+ruwiMessage :: Lens' ResourceUpdateWarningsItem (Maybe Text)
+ruwiMessage
+  = lens _ruwiMessage (\ s a -> s{_ruwiMessage = a})
+
+instance FromJSON ResourceUpdateWarningsItem where
+        parseJSON
+          = withObject "ResourceUpdateWarningsItem"
+              (\ o ->
+                 ResourceUpdateWarningsItem <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON ResourceUpdateWarningsItem where
+        toJSON ResourceUpdateWarningsItem{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _ruwiData,
+                  ("code" .=) <$> _ruwiCode,
+                  ("message" .=) <$> _ruwiMessage])
+
+-- |
+--
+-- /See:/ 'deploymentsCancelPreviewRequest' smart constructor.
+newtype DeploymentsCancelPreviewRequest = DeploymentsCancelPreviewRequest
+    { _dcprFingerprint :: Maybe Word8
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeploymentsCancelPreviewRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dcprFingerprint'
+deploymentsCancelPreviewRequest
+    :: DeploymentsCancelPreviewRequest
+deploymentsCancelPreviewRequest =
+    DeploymentsCancelPreviewRequest
+    { _dcprFingerprint = Nothing
+    }
+
+-- | Specifies a fingerprint for cancelPreview() requests. A fingerprint is a
+-- randomly generated value that must be provided in cancelPreview()
+-- requests to perform optimistic locking. This ensures optimistic
+-- concurrency so that the deployment does not have conflicting requests
+-- (e.g. if someone attempts to make a new update request while another
+-- user attempts to cancel a preview, this would prevent one of the
+-- requests). The fingerprint is initially generated by Deployment Manager
+-- and changes after every request to modify a deployment. To get the
+-- latest fingerprint value, perform a get() request to a deployment.
+dcprFingerprint :: Lens' DeploymentsCancelPreviewRequest (Maybe Word8)
+dcprFingerprint
+  = lens _dcprFingerprint
+      (\ s a -> s{_dcprFingerprint = a})
+
+instance FromJSON DeploymentsCancelPreviewRequest
+         where
+        parseJSON
+          = withObject "DeploymentsCancelPreviewRequest"
+              (\ o ->
+                 DeploymentsCancelPreviewRequest <$>
+                   (o .:? "fingerprint"))
+
+instance ToJSON DeploymentsCancelPreviewRequest where
+        toJSON DeploymentsCancelPreviewRequest{..}
+          = object
+              (catMaybes [("fingerprint" .=) <$> _dcprFingerprint])
 
 -- |
 --
@@ -771,6 +950,7 @@ instance ToJSON Manifest where
 data Resource = Resource
     { _rInsertTime      :: !(Maybe Text)
     , _rURL             :: !(Maybe Text)
+    , _rWarnings        :: !(Maybe [ResourceWarningsItem])
     , _rUpdateTime      :: !(Maybe Text)
     , _rName            :: !(Maybe Text)
     , _rManifest        :: !(Maybe Text)
@@ -788,6 +968,8 @@ data Resource = Resource
 -- * 'rInsertTime'
 --
 -- * 'rURL'
+--
+-- * 'rWarnings'
 --
 -- * 'rUpdateTime'
 --
@@ -810,6 +992,7 @@ resource =
     Resource
     { _rInsertTime = Nothing
     , _rURL = Nothing
+    , _rWarnings = Nothing
     , _rUpdateTime = Nothing
     , _rName = Nothing
     , _rManifest = Nothing
@@ -829,6 +1012,14 @@ rInsertTime
 -- | [Output Only] The URL of the actual resource.
 rURL :: Lens' Resource (Maybe Text)
 rURL = lens _rURL (\ s a -> s{_rURL = a})
+
+-- | [Output Only] If warning messages are generated during processing of
+-- this resource, this field will be populated.
+rWarnings :: Lens' Resource [ResourceWarningsItem]
+rWarnings
+  = lens _rWarnings (\ s a -> s{_rWarnings = a}) .
+      _Default
+      . _Coerce
 
 -- | [Output Only] Timestamp when the resource was updated, in RFC3339 text
 -- format .
@@ -879,7 +1070,8 @@ instance FromJSON Resource where
               (\ o ->
                  Resource <$>
                    (o .:? "insertTime") <*> (o .:? "url") <*>
-                     (o .:? "updateTime")
+                     (o .:? "warnings" .!= mempty)
+                     <*> (o .:? "updateTime")
                      <*> (o .:? "name")
                      <*> (o .:? "manifest")
                      <*> (o .:? "finalProperties")
@@ -893,7 +1085,7 @@ instance ToJSON Resource where
           = object
               (catMaybes
                  [("insertTime" .=) <$> _rInsertTime,
-                  ("url" .=) <$> _rURL,
+                  ("url" .=) <$> _rURL, ("warnings" .=) <$> _rWarnings,
                   ("updateTime" .=) <$> _rUpdateTime,
                   ("name" .=) <$> _rName,
                   ("manifest" .=) <$> _rManifest,
@@ -901,6 +1093,65 @@ instance ToJSON Resource where
                   ("id" .=) <$> _rId, ("type" .=) <$> _rType,
                   ("update" .=) <$> _rUpdate,
                   ("properties" .=) <$> _rProperties])
+
+--
+-- /See:/ 'resourceUpdateErrorErrorsItem' smart constructor.
+data ResourceUpdateErrorErrorsItem = ResourceUpdateErrorErrorsItem
+    { _rueeiLocation :: !(Maybe Text)
+    , _rueeiCode     :: !(Maybe Text)
+    , _rueeiMessage  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResourceUpdateErrorErrorsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rueeiLocation'
+--
+-- * 'rueeiCode'
+--
+-- * 'rueeiMessage'
+resourceUpdateErrorErrorsItem
+    :: ResourceUpdateErrorErrorsItem
+resourceUpdateErrorErrorsItem =
+    ResourceUpdateErrorErrorsItem
+    { _rueeiLocation = Nothing
+    , _rueeiCode = Nothing
+    , _rueeiMessage = Nothing
+    }
+
+-- | [Output Only] Indicates the field in the request which caused the error.
+-- This property is optional.
+rueeiLocation :: Lens' ResourceUpdateErrorErrorsItem (Maybe Text)
+rueeiLocation
+  = lens _rueeiLocation
+      (\ s a -> s{_rueeiLocation = a})
+
+-- | [Output Only] The error type identifier for this error.
+rueeiCode :: Lens' ResourceUpdateErrorErrorsItem (Maybe Text)
+rueeiCode
+  = lens _rueeiCode (\ s a -> s{_rueeiCode = a})
+
+-- | [Output Only] An optional, human-readable error message.
+rueeiMessage :: Lens' ResourceUpdateErrorErrorsItem (Maybe Text)
+rueeiMessage
+  = lens _rueeiMessage (\ s a -> s{_rueeiMessage = a})
+
+instance FromJSON ResourceUpdateErrorErrorsItem where
+        parseJSON
+          = withObject "ResourceUpdateErrorErrorsItem"
+              (\ o ->
+                 ResourceUpdateErrorErrorsItem <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON ResourceUpdateErrorErrorsItem where
+        toJSON ResourceUpdateErrorErrorsItem{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _rueeiLocation,
+                  ("code" .=) <$> _rueeiCode,
+                  ("message" .=) <$> _rueeiMessage])
 
 -- | A response containing a partial list of manifests and a page token used
 -- to build the next request if the request has been truncated.
@@ -1161,6 +1412,133 @@ instance ToJSON OperationErrorErrorsItem where
                   ("code" .=) <$> _oeeiCode,
                   ("message" .=) <$> _oeeiMessage])
 
+-- |
+--
+-- /See:/ 'deploymentsStopRequest' smart constructor.
+newtype DeploymentsStopRequest = DeploymentsStopRequest
+    { _dsrFingerprint :: Maybe Word8
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeploymentsStopRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsrFingerprint'
+deploymentsStopRequest
+    :: DeploymentsStopRequest
+deploymentsStopRequest =
+    DeploymentsStopRequest
+    { _dsrFingerprint = Nothing
+    }
+
+-- | Specifies a fingerprint for stop() requests. A fingerprint is a randomly
+-- generated value that must be provided in stop() requests to perform
+-- optimistic locking. This ensures optimistic concurrency so that the
+-- deployment does not have conflicting requests (e.g. if someone attempts
+-- to make a new update request while another user attempts to stop an
+-- ongoing update request, this would prevent a collision). The fingerprint
+-- is initially generated by Deployment Manager and changes after every
+-- request to modify a deployment. To get the latest fingerprint value,
+-- perform a get() request to a deployment.
+dsrFingerprint :: Lens' DeploymentsStopRequest (Maybe Word8)
+dsrFingerprint
+  = lens _dsrFingerprint
+      (\ s a -> s{_dsrFingerprint = a})
+
+instance FromJSON DeploymentsStopRequest where
+        parseJSON
+          = withObject "DeploymentsStopRequest"
+              (\ o ->
+                 DeploymentsStopRequest <$> (o .:? "fingerprint"))
+
+instance ToJSON DeploymentsStopRequest where
+        toJSON DeploymentsStopRequest{..}
+          = object
+              (catMaybes [("fingerprint" .=) <$> _dsrFingerprint])
+
+--
+-- /See:/ 'resourceWarningsItemDataItem' smart constructor.
+data ResourceWarningsItemDataItem = ResourceWarningsItemDataItem
+    { _rwidiValue :: !(Maybe Text)
+    , _rwidiKey   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResourceWarningsItemDataItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rwidiValue'
+--
+-- * 'rwidiKey'
+resourceWarningsItemDataItem
+    :: ResourceWarningsItemDataItem
+resourceWarningsItemDataItem =
+    ResourceWarningsItemDataItem
+    { _rwidiValue = Nothing
+    , _rwidiKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+rwidiValue :: Lens' ResourceWarningsItemDataItem (Maybe Text)
+rwidiValue
+  = lens _rwidiValue (\ s a -> s{_rwidiValue = a})
+
+-- | [Output Only] A key for the warning data.
+rwidiKey :: Lens' ResourceWarningsItemDataItem (Maybe Text)
+rwidiKey = lens _rwidiKey (\ s a -> s{_rwidiKey = a})
+
+instance FromJSON ResourceWarningsItemDataItem where
+        parseJSON
+          = withObject "ResourceWarningsItemDataItem"
+              (\ o ->
+                 ResourceWarningsItemDataItem <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON ResourceWarningsItemDataItem where
+        toJSON ResourceWarningsItemDataItem{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _rwidiValue,
+                  ("key" .=) <$> _rwidiKey])
+
+-- | [Output Only] If errors are generated during update of the resource,
+-- this field will be populated.
+--
+-- /See:/ 'resourceUpdateError' smart constructor.
+newtype ResourceUpdateError = ResourceUpdateError
+    { _rueErrors :: Maybe [ResourceUpdateErrorErrorsItem]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResourceUpdateError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rueErrors'
+resourceUpdateError
+    :: ResourceUpdateError
+resourceUpdateError =
+    ResourceUpdateError
+    { _rueErrors = Nothing
+    }
+
+-- | [Output Only] The array of errors encountered while processing this
+-- operation.
+rueErrors :: Lens' ResourceUpdateError [ResourceUpdateErrorErrorsItem]
+rueErrors
+  = lens _rueErrors (\ s a -> s{_rueErrors = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ResourceUpdateError where
+        parseJSON
+          = withObject "ResourceUpdateError"
+              (\ o ->
+                 ResourceUpdateError <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON ResourceUpdateError where
+        toJSON ResourceUpdateError{..}
+          = object (catMaybes [("errors" .=) <$> _rueErrors])
+
 -- | A response containing a partial list of deployments and a page token
 -- used to build the next request if the request has been truncated.
 --
@@ -1214,11 +1592,67 @@ instance ToJSON DeploymentsListResponse where
                  [("nextPageToken" .=) <$> _dlrNextPageToken,
                   ("deployments" .=) <$> _dlrDeployments])
 
+--
+-- /See:/ 'resourceWarningsItem' smart constructor.
+data ResourceWarningsItem = ResourceWarningsItem
+    { _rwiData    :: !(Maybe [ResourceWarningsItemDataItem])
+    , _rwiCode    :: !(Maybe Text)
+    , _rwiMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResourceWarningsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rwiData'
+--
+-- * 'rwiCode'
+--
+-- * 'rwiMessage'
+resourceWarningsItem
+    :: ResourceWarningsItem
+resourceWarningsItem =
+    ResourceWarningsItem
+    { _rwiData = Nothing
+    , _rwiCode = Nothing
+    , _rwiMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+rwiData :: Lens' ResourceWarningsItem [ResourceWarningsItemDataItem]
+rwiData
+  = lens _rwiData (\ s a -> s{_rwiData = a}) . _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+rwiCode :: Lens' ResourceWarningsItem (Maybe Text)
+rwiCode = lens _rwiCode (\ s a -> s{_rwiCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+rwiMessage :: Lens' ResourceWarningsItem (Maybe Text)
+rwiMessage
+  = lens _rwiMessage (\ s a -> s{_rwiMessage = a})
+
+instance FromJSON ResourceWarningsItem where
+        parseJSON
+          = withObject "ResourceWarningsItem"
+              (\ o ->
+                 ResourceWarningsItem <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON ResourceWarningsItem where
+        toJSON ResourceWarningsItem{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _rwiData, ("code" .=) <$> _rwiCode,
+                  ("message" .=) <$> _rwiMessage])
+
 -- |
 --
 -- /See:/ 'targetConfiguration' smart constructor.
 data TargetConfiguration = TargetConfiguration
-    { _tcConfig  :: !(Maybe Text)
+    { _tcConfig  :: !(Maybe ConfigFile)
     , _tcImports :: !(Maybe [ImportFile])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1238,7 +1672,7 @@ targetConfiguration =
     }
 
 -- | The configuration to use for this deployment.
-tcConfig :: Lens' TargetConfiguration (Maybe Text)
+tcConfig :: Lens' TargetConfiguration (Maybe ConfigFile)
 tcConfig = lens _tcConfig (\ s a -> s{_tcConfig = a})
 
 -- | Specifies any files to import for this configuration. This can be used
@@ -1324,11 +1758,9 @@ instance ToJSON OperationWarningsItem where
 --
 -- /See:/ 'deployment' smart constructor.
 data Deployment = Deployment
-    { _dState       :: !(Maybe Text)
-    , _dInsertTime  :: !(Maybe Text)
+    { _dInsertTime  :: !(Maybe Text)
+    , _dOperation   :: !(Maybe Operation)
     , _dFingerprint :: !(Maybe Word8)
-    , _dIntent      :: !(Maybe Text)
-    , _dUpdateTime  :: !(Maybe Text)
     , _dName        :: !(Maybe Text)
     , _dManifest    :: !(Maybe Text)
     , _dId          :: !(Maybe Word64)
@@ -1341,15 +1773,11 @@ data Deployment = Deployment
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dState'
---
 -- * 'dInsertTime'
 --
+-- * 'dOperation'
+--
 -- * 'dFingerprint'
---
--- * 'dIntent'
---
--- * 'dUpdateTime'
 --
 -- * 'dName'
 --
@@ -1366,11 +1794,9 @@ deployment
     :: Deployment
 deployment =
     Deployment
-    { _dState = Nothing
-    , _dInsertTime = Nothing
+    { _dInsertTime = Nothing
+    , _dOperation = Nothing
     , _dFingerprint = Nothing
-    , _dIntent = Nothing
-    , _dUpdateTime = Nothing
     , _dName = Nothing
     , _dManifest = Nothing
     , _dId = Nothing
@@ -1379,54 +1805,29 @@ deployment =
     , _dTarget = Nothing
     }
 
--- | [Output Only] The current state of the deployment. This can be DEPLOYED,
--- DEPLOYMENT_FAILED, PREVIEWING, UPDATING, and CANCELING.
-dState :: Lens' Deployment (Maybe Text)
-dState = lens _dState (\ s a -> s{_dState = a})
-
 -- | [Output Only] Timestamp when the deployment was created, in RFC3339 text
 -- format .
 dInsertTime :: Lens' Deployment (Maybe Text)
 dInsertTime
   = lens _dInsertTime (\ s a -> s{_dInsertTime = a})
 
--- | Specifies a fingerprint for update() requests. A fingerprint is a
--- randomly generated value that must be provided in update() requests to
--- perform optimistic locking. This ensures optimistic concurrency so that
--- only one update can be performed at a time. The fingerprint is initially
--- generated by Deployment Manager and changes after every request to
--- modify data. To get the latest fingerprint value, perform a get()
--- request to a deployment.
+-- | [Output Only] The Operation that most recently ran, or is currently
+-- running, on this deployment.
+dOperation :: Lens' Deployment (Maybe Operation)
+dOperation
+  = lens _dOperation (\ s a -> s{_dOperation = a})
+
+-- | Provides a fingerprint to use in requests to modify a deployment, such
+-- as update(), stop(), and cancelPreview() requests. A fingerprint is a
+-- randomly generated value that must be provided with update(), stop(),
+-- and cancelPreview() requests to perform optimistic locking. This ensures
+-- optimistic concurrency so that only one request happens at a time. The
+-- fingerprint is initially generated by Deployment Manager and changes
+-- after every request to modify data. To get the latest fingerprint value,
+-- perform a get() request to a deployment.
 dFingerprint :: Lens' Deployment (Maybe Word8)
 dFingerprint
   = lens _dFingerprint (\ s a -> s{_dFingerprint = a})
-
--- | [Input Only] Specifies how Deployment Manager should apply this
--- template. Possible options are PREVIEW, UPDATE, and CANCEL. PREVIEW
--- creates a deployment and creates \"shell\" resources but does not
--- actually instantiate these resources. This allows you to preview what
--- your deployment looks like. You can use this intent to preview updates
--- to deployments or preview new deployments. You must provide a
--- target.config with a configuration for this intent. After previewing a
--- deployment, you can deploy your resources by making a request with the
--- UPDATE intent or you can CANCEL the preview altogether. Note that the
--- deployment will still exist after you cancel the preview and you must
--- separately delete this deployment if you want to remove it. UPDATE
--- performs an update to the underlying resources in a deployment. If you
--- provide a populated target.config field with this request, Deployment
--- Manager uses that configuration to perform an update. If you had
--- previewed this update beforehand, and do not supply a target.config or
--- provide an empty target.config, Deployment Manager uses the last
--- previewed configuration. CANCEL cancels an update that is in PREVIEW or
--- UPDATE but does not undo any changes already made.
-dIntent :: Lens' Deployment (Maybe Text)
-dIntent = lens _dIntent (\ s a -> s{_dIntent = a})
-
--- | [Output Only] Timestamp when the deployment was updated, in RFC3339 text
--- format .
-dUpdateTime :: Lens' Deployment (Maybe Text)
-dUpdateTime
-  = lens _dUpdateTime (\ s a -> s{_dUpdateTime = a})
 
 -- | Name of the resource; provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
@@ -1468,10 +1869,8 @@ instance FromJSON Deployment where
           = withObject "Deployment"
               (\ o ->
                  Deployment <$>
-                   (o .:? "state") <*> (o .:? "insertTime") <*>
+                   (o .:? "insertTime") <*> (o .:? "operation") <*>
                      (o .:? "fingerprint")
-                     <*> (o .:? "intent")
-                     <*> (o .:? "updateTime")
                      <*> (o .:? "name")
                      <*> (o .:? "manifest")
                      <*> (o .:? "id")
@@ -1483,11 +1882,9 @@ instance ToJSON Deployment where
         toJSON Deployment{..}
           = object
               (catMaybes
-                 [("state" .=) <$> _dState,
-                  ("insertTime" .=) <$> _dInsertTime,
+                 [("insertTime" .=) <$> _dInsertTime,
+                  ("operation" .=) <$> _dOperation,
                   ("fingerprint" .=) <$> _dFingerprint,
-                  ("intent" .=) <$> _dIntent,
-                  ("updateTime" .=) <$> _dUpdateTime,
                   ("name" .=) <$> _dName,
                   ("manifest" .=) <$> _dManifest, ("id" .=) <$> _dId,
                   ("description" .=) <$> _dDescription,

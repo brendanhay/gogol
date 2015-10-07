@@ -58,7 +58,7 @@ import           Network.Google.PubSub.Types
 -- | A resource alias for @PubsubProjectsTopicsDelete@ method which the
 -- 'ProjectsTopicsDelete'' request conforms to.
 type ProjectsTopicsDeleteResource =
-     "v1beta2" :>
+     "v1" :>
        Capture "topic" Text :>
          QueryParam "$.xgafv" Text :>
            QueryParam "upload_protocol" Text :>

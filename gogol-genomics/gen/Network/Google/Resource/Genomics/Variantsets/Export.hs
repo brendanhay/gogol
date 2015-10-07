@@ -22,7 +22,7 @@
 --
 -- | Exports variant set data to an external destination.
 --
--- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsVariantsetsExport@.
+-- /See:/ < Genomics API Reference> for @GenomicsVariantsetsExport@.
 module Network.Google.Resource.Genomics.Variantsets.Export
     (
     -- * REST Resource
@@ -33,14 +33,20 @@ module Network.Google.Resource.Genomics.Variantsets.Export
     , VariantsetsExport'
 
     -- * Request Lenses
+    , veXgafv
     , veQuotaUser
     , vePrettyPrint
+    , veUploadProtocol
+    , vePp
     , veVariantSetId
-    , veUserIP
+    , veAccessToken
+    , veUploadType
     , vePayload
+    , veBearerToken
     , veKey
     , veOAuthToken
     , veFields
+    , veCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -49,71 +55,105 @@ import           Network.Google.Prelude
 -- | A resource alias for @GenomicsVariantsetsExport@ method which the
 -- 'VariantsetsExport'' request conforms to.
 type VariantsetsExportResource =
-     "variantsets" :>
-       Capture "variantSetId" Text :>
-         "export" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ExportVariantSetRequest :>
-                           Post '[JSON] ExportVariantSetResponse
+     "v1" :>
+       "variantsets" :>
+         CaptureMode "variantSetId" "export" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" AuthKey :>
+                                 QueryParam "oauth_token" OAuthToken :>
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] ExportVariantSetRequest :>
+                                       Post '[JSON] Operation
 
 -- | Exports variant set data to an external destination.
 --
 -- /See:/ 'variantsetsExport'' smart constructor.
 data VariantsetsExport' = VariantsetsExport'
-    { _veQuotaUser    :: !(Maybe Text)
-    , _vePrettyPrint  :: !Bool
-    , _veVariantSetId :: !Text
-    , _veUserIP       :: !(Maybe Text)
-    , _vePayload      :: !ExportVariantSetRequest
-    , _veKey          :: !(Maybe AuthKey)
-    , _veOAuthToken   :: !(Maybe OAuthToken)
-    , _veFields       :: !(Maybe Text)
+    { _veXgafv          :: !(Maybe Text)
+    , _veQuotaUser      :: !(Maybe Text)
+    , _vePrettyPrint    :: !Bool
+    , _veUploadProtocol :: !(Maybe Text)
+    , _vePp             :: !Bool
+    , _veVariantSetId   :: !Text
+    , _veAccessToken    :: !(Maybe Text)
+    , _veUploadType     :: !(Maybe Text)
+    , _vePayload        :: !ExportVariantSetRequest
+    , _veBearerToken    :: !(Maybe Text)
+    , _veKey            :: !(Maybe AuthKey)
+    , _veOAuthToken     :: !(Maybe OAuthToken)
+    , _veFields         :: !(Maybe Text)
+    , _veCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsExport'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'veXgafv'
+--
 -- * 'veQuotaUser'
 --
 -- * 'vePrettyPrint'
 --
+-- * 'veUploadProtocol'
+--
+-- * 'vePp'
+--
 -- * 'veVariantSetId'
 --
--- * 'veUserIP'
+-- * 'veAccessToken'
+--
+-- * 'veUploadType'
 --
 -- * 'vePayload'
+--
+-- * 'veBearerToken'
 --
 -- * 'veKey'
 --
 -- * 'veOAuthToken'
 --
 -- * 'veFields'
+--
+-- * 'veCallback'
 variantsetsExport'
     :: Text -- ^ 'variantSetId'
     -> ExportVariantSetRequest -- ^ 'payload'
     -> VariantsetsExport'
 variantsetsExport' pVeVariantSetId_ pVePayload_ =
     VariantsetsExport'
-    { _veQuotaUser = Nothing
+    { _veXgafv = Nothing
+    , _veQuotaUser = Nothing
     , _vePrettyPrint = True
+    , _veUploadProtocol = Nothing
+    , _vePp = True
     , _veVariantSetId = pVeVariantSetId_
-    , _veUserIP = Nothing
+    , _veAccessToken = Nothing
+    , _veUploadType = Nothing
     , _vePayload = pVePayload_
+    , _veBearerToken = Nothing
     , _veKey = Nothing
     , _veOAuthToken = Nothing
     , _veFields = Nothing
+    , _veCallback = Nothing
     }
+
+-- | V1 error format.
+veXgafv :: Lens' VariantsetsExport' (Maybe Text)
+veXgafv = lens _veXgafv (\ s a -> s{_veXgafv = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
+-- characters.
 veQuotaUser :: Lens' VariantsetsExport' (Maybe Text)
 veQuotaUser
   = lens _veQuotaUser (\ s a -> s{_veQuotaUser = a})
@@ -124,6 +164,16 @@ vePrettyPrint
   = lens _vePrettyPrint
       (\ s a -> s{_vePrettyPrint = a})
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+veUploadProtocol :: Lens' VariantsetsExport' (Maybe Text)
+veUploadProtocol
+  = lens _veUploadProtocol
+      (\ s a -> s{_veUploadProtocol = a})
+
+-- | Pretty-print response.
+vePp :: Lens' VariantsetsExport' Bool
+vePp = lens _vePp (\ s a -> s{_vePp = a})
+
 -- | Required. The ID of the variant set that contains variant data which
 -- should be exported. The caller must have READ access to this variant
 -- set.
@@ -132,15 +182,27 @@ veVariantSetId
   = lens _veVariantSetId
       (\ s a -> s{_veVariantSetId = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-veUserIP :: Lens' VariantsetsExport' (Maybe Text)
-veUserIP = lens _veUserIP (\ s a -> s{_veUserIP = a})
+-- | OAuth access token.
+veAccessToken :: Lens' VariantsetsExport' (Maybe Text)
+veAccessToken
+  = lens _veAccessToken
+      (\ s a -> s{_veAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+veUploadType :: Lens' VariantsetsExport' (Maybe Text)
+veUploadType
+  = lens _veUploadType (\ s a -> s{_veUploadType = a})
 
 -- | Multipart request metadata.
 vePayload :: Lens' VariantsetsExport' ExportVariantSetRequest
 vePayload
   = lens _vePayload (\ s a -> s{_vePayload = a})
+
+-- | OAuth bearer token.
+veBearerToken :: Lens' VariantsetsExport' (Maybe Text)
+veBearerToken
+  = lens _veBearerToken
+      (\ s a -> s{_veBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -157,17 +219,27 @@ veOAuthToken
 veFields :: Lens' VariantsetsExport' (Maybe Text)
 veFields = lens _veFields (\ s a -> s{_veFields = a})
 
+-- | JSONP
+veCallback :: Lens' VariantsetsExport' (Maybe Text)
+veCallback
+  = lens _veCallback (\ s a -> s{_veCallback = a})
+
 instance GoogleAuth VariantsetsExport' where
         _AuthKey = veKey . _Just
         _AuthToken = veOAuthToken . _Just
 
 instance GoogleRequest VariantsetsExport' where
-        type Rs VariantsetsExport' = ExportVariantSetResponse
+        type Rs VariantsetsExport' = Operation
         request = requestWith genomicsRequest
         requestWith rq VariantsetsExport'{..}
-          = go _veVariantSetId _veQuotaUser
+          = go _veVariantSetId _veXgafv _veUploadProtocol
+              (Just _vePp)
+              _veAccessToken
+              _veUploadType
+              _veBearerToken
+              _veCallback
+              _veQuotaUser
               (Just _vePrettyPrint)
-              _veUserIP
               _veFields
               _veKey
               _veOAuthToken

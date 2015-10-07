@@ -22,7 +22,7 @@
 --
 -- | Permanently deletes an empty bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketsDelete@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketsDelete@.
 module Network.Google.Resource.Storage.Buckets.Delete
     (
     -- * REST Resource
@@ -52,8 +52,8 @@ import           Network.Google.Storage.Types
 type BucketsDeleteResource =
      "b" :>
        Capture "bucket" Text :>
-         QueryParam "ifMetagenerationMatch" Word64 :>
-           QueryParam "ifMetagenerationNotMatch" Word64 :>
+         QueryParam "ifMetagenerationMatch" Int64 :>
+           QueryParam "ifMetagenerationNotMatch" Int64 :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -67,12 +67,12 @@ type BucketsDeleteResource =
 -- /See:/ 'bucketsDelete'' smart constructor.
 data BucketsDelete' = BucketsDelete'
     { _bdQuotaUser                :: !(Maybe Text)
-    , _bdIfMetagenerationMatch    :: !(Maybe Word64)
+    , _bdIfMetagenerationMatch    :: !(Maybe Int64)
     , _bdPrettyPrint              :: !Bool
     , _bdUserIP                   :: !(Maybe Text)
     , _bdBucket                   :: !Text
     , _bdKey                      :: !(Maybe AuthKey)
-    , _bdIfMetagenerationNotMatch :: !(Maybe Word64)
+    , _bdIfMetagenerationNotMatch :: !(Maybe Int64)
     , _bdOAuthToken               :: !(Maybe OAuthToken)
     , _bdFields                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -121,9 +121,9 @@ bdQuotaUser :: Lens' BucketsDelete' (Maybe Text)
 bdQuotaUser
   = lens _bdQuotaUser (\ s a -> s{_bdQuotaUser = a})
 
--- | Makes the return of the bucket metadata conditional on whether the
--- bucket\'s current metageneration matches the given value.
-bdIfMetagenerationMatch :: Lens' BucketsDelete' (Maybe Word64)
+-- | If set, only deletes the bucket if its metageneration matches this
+-- value.
+bdIfMetagenerationMatch :: Lens' BucketsDelete' (Maybe Int64)
 bdIfMetagenerationMatch
   = lens _bdIfMetagenerationMatch
       (\ s a -> s{_bdIfMetagenerationMatch = a})
@@ -149,9 +149,9 @@ bdBucket = lens _bdBucket (\ s a -> s{_bdBucket = a})
 bdKey :: Lens' BucketsDelete' (Maybe AuthKey)
 bdKey = lens _bdKey (\ s a -> s{_bdKey = a})
 
--- | Makes the return of the bucket metadata conditional on whether the
--- bucket\'s current metageneration does not match the given value.
-bdIfMetagenerationNotMatch :: Lens' BucketsDelete' (Maybe Word64)
+-- | If set, only deletes the bucket if its metageneration does not match
+-- this value.
+bdIfMetagenerationNotMatch :: Lens' BucketsDelete' (Maybe Int64)
 bdIfMetagenerationNotMatch
   = lens _bdIfMetagenerationNotMatch
       (\ s a -> s{_bdIfMetagenerationNotMatch = a})

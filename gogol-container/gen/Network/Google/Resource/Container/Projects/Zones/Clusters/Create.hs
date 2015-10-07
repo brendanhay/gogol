@@ -21,15 +21,16 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- | Creates a cluster, consisting of the specified number and type of Google
--- Compute Engine instances, plus a Kubernetes master instance. The cluster
--- is created in the project\'s default network. A firewall is added that
--- allows traffic into port 443 on the master, which enables HTTPS. A
--- firewall and a route is added for each node to allow the containers on
--- that node to communicate with all other instances in the cluster.
--- Finally, an entry is added to the project\'s global metadata indicating
--- which CIDR range is being used by the cluster.
+-- Compute Engine instances, plus a Kubernetes master endpoint. By default,
+-- the cluster is created in the project\'s [default
+-- network](\/compute\/docs\/networking#networks_1). One firewall is added
+-- for the cluster. After cluster creation, the cluster creates routes for
+-- each node to allow the containers on that node to communicate with all
+-- other instances in the cluster. Finally, an entry is added to the
+-- project\'s global metadata indicating which CIDR range is being used by
+-- the cluster.
 --
--- /See:/ <https://cloud.google.com/container-engine/docs/v1beta1/ Google Container Engine API Reference> for @ContainerProjectsZonesClustersCreate@.
+-- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @ContainerProjectsZonesClustersCreate@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
     (
     -- * REST Resource
@@ -40,15 +41,21 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
     , ProjectsZonesClustersCreate'
 
     -- * Request Lenses
+    , pzccXgafv
     , pzccQuotaUser
     , pzccPrettyPrint
-    , pzccUserIP
-    , pzccZoneId
+    , pzccUploadProtocol
+    , pzccPp
+    , pzccAccessToken
+    , pzccUploadType
+    , pzccZone
     , pzccPayload
+    , pzccBearerToken
     , pzccKey
     , pzccProjectId
     , pzccOAuthToken
     , pzccFields
+    , pzccCallback
     ) where
 
 import           Network.Google.Container.Types
@@ -57,55 +64,80 @@ import           Network.Google.Prelude
 -- | A resource alias for @ContainerProjectsZonesClustersCreate@ method which the
 -- 'ProjectsZonesClustersCreate'' request conforms to.
 type ProjectsZonesClustersCreateResource =
-     Capture "projectId" Text :>
-       "zones" :>
-         Capture "zoneId" Text :>
-           "clusters" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] CreateClusterRequest :>
-                             Post '[JSON] Operation
+     "v1" :>
+       "projects" :>
+         Capture "projectId" Text :>
+           "zones" :>
+             Capture "zone" Text :>
+               "clusters" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" AuthKey :>
+                                       QueryParam "oauth_token" OAuthToken :>
+                                         QueryParam "alt" AltJSON :>
+                                           ReqBody '[JSON] CreateClusterRequest
+                                             :> Post '[JSON] Operation
 
 -- | Creates a cluster, consisting of the specified number and type of Google
--- Compute Engine instances, plus a Kubernetes master instance. The cluster
--- is created in the project\'s default network. A firewall is added that
--- allows traffic into port 443 on the master, which enables HTTPS. A
--- firewall and a route is added for each node to allow the containers on
--- that node to communicate with all other instances in the cluster.
--- Finally, an entry is added to the project\'s global metadata indicating
--- which CIDR range is being used by the cluster.
+-- Compute Engine instances, plus a Kubernetes master endpoint. By default,
+-- the cluster is created in the project\'s [default
+-- network](\/compute\/docs\/networking#networks_1). One firewall is added
+-- for the cluster. After cluster creation, the cluster creates routes for
+-- each node to allow the containers on that node to communicate with all
+-- other instances in the cluster. Finally, an entry is added to the
+-- project\'s global metadata indicating which CIDR range is being used by
+-- the cluster.
 --
 -- /See:/ 'projectsZonesClustersCreate'' smart constructor.
 data ProjectsZonesClustersCreate' = ProjectsZonesClustersCreate'
-    { _pzccQuotaUser   :: !(Maybe Text)
-    , _pzccPrettyPrint :: !Bool
-    , _pzccUserIP      :: !(Maybe Text)
-    , _pzccZoneId      :: !Text
-    , _pzccPayload     :: !CreateClusterRequest
-    , _pzccKey         :: !(Maybe AuthKey)
-    , _pzccProjectId   :: !Text
-    , _pzccOAuthToken  :: !(Maybe OAuthToken)
-    , _pzccFields      :: !(Maybe Text)
+    { _pzccXgafv          :: !(Maybe Text)
+    , _pzccQuotaUser      :: !(Maybe Text)
+    , _pzccPrettyPrint    :: !Bool
+    , _pzccUploadProtocol :: !(Maybe Text)
+    , _pzccPp             :: !Bool
+    , _pzccAccessToken    :: !(Maybe Text)
+    , _pzccUploadType     :: !(Maybe Text)
+    , _pzccZone           :: !Text
+    , _pzccPayload        :: !CreateClusterRequest
+    , _pzccBearerToken    :: !(Maybe Text)
+    , _pzccKey            :: !(Maybe AuthKey)
+    , _pzccProjectId      :: !Text
+    , _pzccOAuthToken     :: !(Maybe OAuthToken)
+    , _pzccFields         :: !(Maybe Text)
+    , _pzccCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersCreate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'pzccXgafv'
+--
 -- * 'pzccQuotaUser'
 --
 -- * 'pzccPrettyPrint'
 --
--- * 'pzccUserIP'
+-- * 'pzccUploadProtocol'
 --
--- * 'pzccZoneId'
+-- * 'pzccPp'
+--
+-- * 'pzccAccessToken'
+--
+-- * 'pzccUploadType'
+--
+-- * 'pzccZone'
 --
 -- * 'pzccPayload'
+--
+-- * 'pzccBearerToken'
 --
 -- * 'pzccKey'
 --
@@ -114,27 +146,40 @@ data ProjectsZonesClustersCreate' = ProjectsZonesClustersCreate'
 -- * 'pzccOAuthToken'
 --
 -- * 'pzccFields'
+--
+-- * 'pzccCallback'
 projectsZonesClustersCreate'
-    :: Text -- ^ 'zoneId'
+    :: Text -- ^ 'zone'
     -> CreateClusterRequest -- ^ 'payload'
     -> Text -- ^ 'projectId'
     -> ProjectsZonesClustersCreate'
-projectsZonesClustersCreate' pPzccZoneId_ pPzccPayload_ pPzccProjectId_ =
+projectsZonesClustersCreate' pPzccZone_ pPzccPayload_ pPzccProjectId_ =
     ProjectsZonesClustersCreate'
-    { _pzccQuotaUser = Nothing
+    { _pzccXgafv = Nothing
+    , _pzccQuotaUser = Nothing
     , _pzccPrettyPrint = True
-    , _pzccUserIP = Nothing
-    , _pzccZoneId = pPzccZoneId_
+    , _pzccUploadProtocol = Nothing
+    , _pzccPp = True
+    , _pzccAccessToken = Nothing
+    , _pzccUploadType = Nothing
+    , _pzccZone = pPzccZone_
     , _pzccPayload = pPzccPayload_
+    , _pzccBearerToken = Nothing
     , _pzccKey = Nothing
     , _pzccProjectId = pPzccProjectId_
     , _pzccOAuthToken = Nothing
     , _pzccFields = Nothing
+    , _pzccCallback = Nothing
     }
+
+-- | V1 error format.
+pzccXgafv :: Lens' ProjectsZonesClustersCreate' (Maybe Text)
+pzccXgafv
+  = lens _pzccXgafv (\ s a -> s{_pzccXgafv = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
+-- characters.
 pzccQuotaUser :: Lens' ProjectsZonesClustersCreate' (Maybe Text)
 pzccQuotaUser
   = lens _pzccQuotaUser
@@ -146,21 +191,43 @@ pzccPrettyPrint
   = lens _pzccPrettyPrint
       (\ s a -> s{_pzccPrettyPrint = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-pzccUserIP :: Lens' ProjectsZonesClustersCreate' (Maybe Text)
-pzccUserIP
-  = lens _pzccUserIP (\ s a -> s{_pzccUserIP = a})
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+pzccUploadProtocol :: Lens' ProjectsZonesClustersCreate' (Maybe Text)
+pzccUploadProtocol
+  = lens _pzccUploadProtocol
+      (\ s a -> s{_pzccUploadProtocol = a})
 
--- | The name of the Google Compute Engine zone in which the cluster resides.
-pzccZoneId :: Lens' ProjectsZonesClustersCreate' Text
-pzccZoneId
-  = lens _pzccZoneId (\ s a -> s{_pzccZoneId = a})
+-- | Pretty-print response.
+pzccPp :: Lens' ProjectsZonesClustersCreate' Bool
+pzccPp = lens _pzccPp (\ s a -> s{_pzccPp = a})
+
+-- | OAuth access token.
+pzccAccessToken :: Lens' ProjectsZonesClustersCreate' (Maybe Text)
+pzccAccessToken
+  = lens _pzccAccessToken
+      (\ s a -> s{_pzccAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+pzccUploadType :: Lens' ProjectsZonesClustersCreate' (Maybe Text)
+pzccUploadType
+  = lens _pzccUploadType
+      (\ s a -> s{_pzccUploadType = a})
+
+-- | The name of the Google Compute Engine
+-- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
+pzccZone :: Lens' ProjectsZonesClustersCreate' Text
+pzccZone = lens _pzccZone (\ s a -> s{_pzccZone = a})
 
 -- | Multipart request metadata.
 pzccPayload :: Lens' ProjectsZonesClustersCreate' CreateClusterRequest
 pzccPayload
   = lens _pzccPayload (\ s a -> s{_pzccPayload = a})
+
+-- | OAuth bearer token.
+pzccBearerToken :: Lens' ProjectsZonesClustersCreate' (Maybe Text)
+pzccBearerToken
+  = lens _pzccBearerToken
+      (\ s a -> s{_pzccBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -168,7 +235,8 @@ pzccPayload
 pzccKey :: Lens' ProjectsZonesClustersCreate' (Maybe AuthKey)
 pzccKey = lens _pzccKey (\ s a -> s{_pzccKey = a})
 
--- | The Google Developers Console project ID or project number.
+-- | The Google Developers Console [project ID or project
+-- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
 pzccProjectId :: Lens' ProjectsZonesClustersCreate' Text
 pzccProjectId
   = lens _pzccProjectId
@@ -185,6 +253,11 @@ pzccFields :: Lens' ProjectsZonesClustersCreate' (Maybe Text)
 pzccFields
   = lens _pzccFields (\ s a -> s{_pzccFields = a})
 
+-- | JSONP
+pzccCallback :: Lens' ProjectsZonesClustersCreate' (Maybe Text)
+pzccCallback
+  = lens _pzccCallback (\ s a -> s{_pzccCallback = a})
+
 instance GoogleAuth ProjectsZonesClustersCreate'
          where
         _AuthKey = pzccKey . _Just
@@ -195,9 +268,15 @@ instance GoogleRequest ProjectsZonesClustersCreate'
         type Rs ProjectsZonesClustersCreate' = Operation
         request = requestWith containerRequest
         requestWith rq ProjectsZonesClustersCreate'{..}
-          = go _pzccProjectId _pzccZoneId _pzccQuotaUser
+          = go _pzccProjectId _pzccZone _pzccXgafv
+              _pzccUploadProtocol
+              (Just _pzccPp)
+              _pzccAccessToken
+              _pzccUploadType
+              _pzccBearerToken
+              _pzccCallback
+              _pzccQuotaUser
               (Just _pzccPrettyPrint)
-              _pzccUserIP
               _pzccFields
               _pzccKey
               _pzccOAuthToken

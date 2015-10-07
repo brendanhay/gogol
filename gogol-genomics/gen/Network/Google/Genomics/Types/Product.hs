@@ -20,112 +20,8 @@ module Network.Google.Genomics.Types.Product where
 import           Network.Google.Genomics.Types.Sum
 import           Network.Google.Prelude
 
---
--- /See:/ 'fastqMetadata' smart constructor.
-data FastqMetadata = FastqMetadata
-    { _fmPlatformUnit  :: !(Maybe Text)
-    , _fmReadGroupName :: !(Maybe Text)
-    , _fmLibraryName   :: !(Maybe Text)
-    , _fmPlatformName  :: !(Maybe Text)
-    , _fmSampleName    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FastqMetadata' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'fmPlatformUnit'
---
--- * 'fmReadGroupName'
---
--- * 'fmLibraryName'
---
--- * 'fmPlatformName'
---
--- * 'fmSampleName'
-fastqMetadata
-    :: FastqMetadata
-fastqMetadata =
-    FastqMetadata
-    { _fmPlatformUnit = Nothing
-    , _fmReadGroupName = Nothing
-    , _fmLibraryName = Nothing
-    , _fmPlatformName = Nothing
-    , _fmSampleName = Nothing
-    }
-
--- | Optionally specifies the platform unit for alignment from FASTQ. For
--- example: flowcell-barcode.lane for Illumina or slide for SOLID.
-fmPlatformUnit :: Lens' FastqMetadata (Maybe Text)
-fmPlatformUnit
-  = lens _fmPlatformUnit
-      (\ s a -> s{_fmPlatformUnit = a})
-
--- | Optionally specifies the read group name for alignment from FASTQ.
-fmReadGroupName :: Lens' FastqMetadata (Maybe Text)
-fmReadGroupName
-  = lens _fmReadGroupName
-      (\ s a -> s{_fmReadGroupName = a})
-
--- | Optionally specifies the library name for alignment from FASTQ.
-fmLibraryName :: Lens' FastqMetadata (Maybe Text)
-fmLibraryName
-  = lens _fmLibraryName
-      (\ s a -> s{_fmLibraryName = a})
-
--- | Optionally specifies the platform name for alignment from FASTQ. For
--- example: CAPILLARY, LS454, ILLUMINA, SOLID, HELICOS, IONTORRENT, PACBIO.
-fmPlatformName :: Lens' FastqMetadata (Maybe Text)
-fmPlatformName
-  = lens _fmPlatformName
-      (\ s a -> s{_fmPlatformName = a})
-
--- | Optionally specifies the sample name for alignment from FASTQ.
-fmSampleName :: Lens' FastqMetadata (Maybe Text)
-fmSampleName
-  = lens _fmSampleName (\ s a -> s{_fmSampleName = a})
-
-instance FromJSON FastqMetadata where
-        parseJSON
-          = withObject "FastqMetadata"
-              (\ o ->
-                 FastqMetadata <$>
-                   (o .:? "platformUnit") <*> (o .:? "readGroupName")
-                     <*> (o .:? "libraryName")
-                     <*> (o .:? "platformName")
-                     <*> (o .:? "sampleName"))
-
-instance ToJSON FastqMetadata where
-        toJSON FastqMetadata{..}
-          = object
-              (catMaybes
-                 [("platformUnit" .=) <$> _fmPlatformUnit,
-                  ("readGroupName" .=) <$> _fmReadGroupName,
-                  ("libraryName" .=) <$> _fmLibraryName,
-                  ("platformName" .=) <$> _fmPlatformName,
-                  ("sampleName" .=) <$> _fmSampleName])
-
--- | A string which maps to an array of values.
---
--- /See:/ 'callInfo' smart constructor.
-data CallInfo =
-    CallInfo
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CallInfo' with the minimum fields required to make a request.
---
-callInfo
-    :: CallInfo
-callInfo = CallInfo
-
-instance FromJSON CallInfo where
-        parseJSON
-          = withObject "CallInfo" (\ o -> pure CallInfo)
-
-instance ToJSON CallInfo where
-        toJSON = const emptyObject
-
--- | A string which maps to an array of values.
+-- | A map of additional read alignment information. This must be of the form
+-- map (string key mapping to a list of string values).
 --
 -- /See:/ 'readInfo' smart constructor.
 data ReadInfo =
@@ -145,127 +41,122 @@ instance FromJSON ReadInfo where
 instance ToJSON ReadInfo where
         toJSON = const emptyObject
 
+-- | The \`Status\` type defines a logical error model that is suitable for
+-- different programming environments, including REST APIs and RPC APIs. It
+-- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
+-- designed to be: - Simple to use and understand for most users - Flexible
+-- enough to meet unexpected needs # Overview The \`Status\` message
+-- contains three pieces of data: error code, error message, and error
+-- details. The error code should be an enum value of google.rpc.Code, but
+-- it may accept additional error codes if needed. The error message should
+-- be a developer-facing English message that helps developers *understand*
+-- and *resolve* the error. If a localized user-facing error message is
+-- needed, put the localized message in the error details or localize it in
+-- the client. The optional error details may contain arbitrary information
+-- about the error. There is a predefined set of error detail types in the
+-- package \`google.rpc\` which can be used for common error conditions. #
+-- Language mapping The \`Status\` message is the logical representation of
+-- the error model, but it is not necessarily the actual wire format. When
+-- the \`Status\` message is exposed in different client libraries and
+-- different wire protocols, it can be mapped differently. For example, it
+-- will likely be mapped to some exceptions in Java, but more likely mapped
+-- to some error codes in C. # Other uses The error model and the
+-- \`Status\` message can be used in a variety of environments, either with
+-- or without APIs, to provide a consistent developer experience across
+-- different environments. Example uses of this error model include: -
+-- Partial errors. If a service needs to return partial errors to the
+-- client, it may embed the \`Status\` in the normal response to indicate
+-- the partial errors. - Workflow errors. A typical workflow has multiple
+-- steps. Each step may have a \`Status\` message for error reporting
+-- purpose. - Batch operations. If a client uses batch request and batch
+-- response, the \`Status\` message should be used directly inside batch
+-- response, one for each error sub-response. - Asynchronous operations. If
+-- an API call embeds asynchronous operation results in its response, the
+-- status of those operations should be represented directly using the
+-- \`Status\` message. - Logging. If some API errors are stored in logs,
+-- the message \`Status\` could be used directly after any stripping needed
+-- for security\/privacy reasons.
 --
--- /See:/ 'readGroupExperiment' smart constructor.
-data ReadGroupExperiment = ReadGroupExperiment
-    { _rgeInstrumentModel  :: !(Maybe Text)
-    , _rgePlatformUnit     :: !(Maybe Text)
-    , _rgeSequencingCenter :: !(Maybe Text)
-    , _rgeLibraryId        :: !(Maybe Text)
+-- /See:/ 'status' smart constructor.
+data Status = Status
+    { _sDetails :: !(Maybe [StatusDetailsItem])
+    , _sCode    :: !(Maybe Int32)
+    , _sMessage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReadGroupExperiment' with the minimum fields required to make a request.
+-- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rgeInstrumentModel'
+-- * 'sDetails'
 --
--- * 'rgePlatformUnit'
+-- * 'sCode'
 --
--- * 'rgeSequencingCenter'
---
--- * 'rgeLibraryId'
-readGroupExperiment
-    :: ReadGroupExperiment
-readGroupExperiment =
-    ReadGroupExperiment
-    { _rgeInstrumentModel = Nothing
-    , _rgePlatformUnit = Nothing
-    , _rgeSequencingCenter = Nothing
-    , _rgeLibraryId = Nothing
+-- * 'sMessage'
+status
+    :: Status
+status =
+    Status
+    { _sDetails = Nothing
+    , _sCode = Nothing
+    , _sMessage = Nothing
     }
 
--- | The instrument model used as part of this experiment. This maps to
--- sequencing technology in BAM.
-rgeInstrumentModel :: Lens' ReadGroupExperiment (Maybe Text)
-rgeInstrumentModel
-  = lens _rgeInstrumentModel
-      (\ s a -> s{_rgeInstrumentModel = a})
-
--- | The platform unit used as part of this experiment e.g.
--- flowcell-barcode.lane for Illumina or slide for SOLiD. Corresponds to
--- the
-rgePlatformUnit :: Lens' ReadGroupExperiment (Maybe Text)
-rgePlatformUnit
-  = lens _rgePlatformUnit
-      (\ s a -> s{_rgePlatformUnit = a})
-
--- | The sequencing center used as part of this experiment.
-rgeSequencingCenter :: Lens' ReadGroupExperiment (Maybe Text)
-rgeSequencingCenter
-  = lens _rgeSequencingCenter
-      (\ s a -> s{_rgeSequencingCenter = a})
-
--- | The library used as part of this experiment. Note: This is not an actual
--- ID within this repository, but rather an identifier for a library which
--- may be meaningful to some external system.
-rgeLibraryId :: Lens' ReadGroupExperiment (Maybe Text)
-rgeLibraryId
-  = lens _rgeLibraryId (\ s a -> s{_rgeLibraryId = a})
-
-instance FromJSON ReadGroupExperiment where
-        parseJSON
-          = withObject "ReadGroupExperiment"
-              (\ o ->
-                 ReadGroupExperiment <$>
-                   (o .:? "instrumentModel") <*> (o .:? "platformUnit")
-                     <*> (o .:? "sequencingCenter")
-                     <*> (o .:? "libraryId"))
-
-instance ToJSON ReadGroupExperiment where
-        toJSON ReadGroupExperiment{..}
-          = object
-              (catMaybes
-                 [("instrumentModel" .=) <$> _rgeInstrumentModel,
-                  ("platformUnit" .=) <$> _rgePlatformUnit,
-                  ("sequencingCenter" .=) <$> _rgeSequencingCenter,
-                  ("libraryId" .=) <$> _rgeLibraryId])
-
--- | Used to hold basic key value information.
---
--- /See:/ 'keyValue' smart constructor.
-data KeyValue = KeyValue
-    { _kvValue :: !(Maybe [Text])
-    , _kvKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'KeyValue' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'kvValue'
---
--- * 'kvKey'
-keyValue
-    :: KeyValue
-keyValue =
-    KeyValue
-    { _kvValue = Nothing
-    , _kvKey = Nothing
-    }
-
--- | The string values.
-kvValue :: Lens' KeyValue [Text]
-kvValue
-  = lens _kvValue (\ s a -> s{_kvValue = a}) . _Default
+-- | A list of messages that carry the error details. There will be a common
+-- set of message types for APIs to use.
+sDetails :: Lens' Status [StatusDetailsItem]
+sDetails
+  = lens _sDetails (\ s a -> s{_sDetails = a}) .
+      _Default
       . _Coerce
 
--- | A string which maps to an array of values.
-kvKey :: Lens' KeyValue (Maybe Text)
-kvKey = lens _kvKey (\ s a -> s{_kvKey = a})
+-- | The status code, which should be an enum value of google.rpc.Code.
+sCode :: Lens' Status (Maybe Int32)
+sCode = lens _sCode (\ s a -> s{_sCode = a})
 
-instance FromJSON KeyValue where
+-- | A developer-facing error message, which should be in English. Any
+-- user-facing error message should be localized and sent in the
+-- google.rpc.Status.details field, or localized by the client.
+sMessage :: Lens' Status (Maybe Text)
+sMessage = lens _sMessage (\ s a -> s{_sMessage = a})
+
+instance FromJSON Status where
         parseJSON
-          = withObject "KeyValue"
+          = withObject "Status"
               (\ o ->
-                 KeyValue <$>
-                   (o .:? "value" .!= mempty) <*> (o .:? "key"))
+                 Status <$>
+                   (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
 
-instance ToJSON KeyValue where
-        toJSON KeyValue{..}
+instance ToJSON Status where
+        toJSON Status{..}
           = object
               (catMaybes
-                 [("value" .=) <$> _kvValue, ("key" .=) <$> _kvKey])
+                 [("details" .=) <$> _sDetails,
+                  ("code" .=) <$> _sCode,
+                  ("message" .=) <$> _sMessage])
+
+-- | An OperationMetadata object. This will always be returned with the
+-- Operation.
+--
+-- /See:/ 'operationSchema' smart constructor.
+data OperationSchema =
+    OperationSchema
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
+--
+operationSchema
+    :: OperationSchema
+operationSchema = OperationSchema
+
+instance FromJSON OperationSchema where
+        parseJSON
+          = withObject "OperationSchema"
+              (\ o -> pure OperationSchema)
+
+instance ToJSON OperationSchema where
+        toJSON = const emptyObject
 
 -- | A variant represents a change in DNA sequence relative to a reference
 -- sequence. For example, a variant could represent a SNP or an insertion.
@@ -289,7 +180,7 @@ data Variant = Variant
     , _vQuality        :: !(Maybe Double)
     , _vFilter         :: !(Maybe [Text])
     , _vInfo           :: !(Maybe VariantInfo)
-    , _vCalls          :: !(Maybe [Call])
+    , _vCalls          :: !(Maybe [VariantCall])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Variant' with the minimum fields required to make a request.
@@ -363,7 +254,7 @@ vAlternateBases
       . _Default
       . _Coerce
 
--- | The reference on which this variant occurs. (such as chr20 or X)
+-- | The reference on which this variant occurs. (such as \`chr20\` or \`X\`)
 vReferenceName :: Lens' Variant (Maybe Text)
 vReferenceName
   = lens _vReferenceName
@@ -389,7 +280,7 @@ vReferenceBases
   = lens _vReferenceBases
       (\ s a -> s{_vReferenceBases = a})
 
--- | The Google generated ID of the variant, immutable.
+-- | The server-generated variant ID, unique across all variants.
 vId :: Lens' Variant (Maybe Text)
 vId = lens _vId (\ s a -> s{_vId = a})
 
@@ -399,19 +290,20 @@ vQuality :: Lens' Variant (Maybe Double)
 vQuality = lens _vQuality (\ s a -> s{_vQuality = a})
 
 -- | A list of filters (normally quality filters) this variant has failed.
--- PASS indicates this variant has passed all filters.
+-- \`PASS\` indicates this variant has passed all filters.
 vFilter :: Lens' Variant [Text]
 vFilter
   = lens _vFilter (\ s a -> s{_vFilter = a}) . _Default
       . _Coerce
 
--- | A string which maps to an array of values.
+-- | A map of additional variant information. This must be of the form map
+-- (string key mapping to a list of string values).
 vInfo :: Lens' Variant (Maybe VariantInfo)
 vInfo = lens _vInfo (\ s a -> s{_vInfo = a})
 
 -- | The variant calls for this particular variant. Each one represents the
 -- determination of genotype with respect to this variant.
-vCalls :: Lens' Variant [Call]
+vCalls :: Lens' Variant [VariantCall]
 vCalls
   = lens _vCalls (\ s a -> s{_vCalls = a}) . _Default .
       _Coerce
@@ -449,297 +341,6 @@ instance ToJSON Variant where
                   ("filter" .=) <$> _vFilter, ("info" .=) <$> _vInfo,
                   ("calls" .=) <$> _vCalls])
 
--- | An annotation describes a region of reference genome. The value of an
--- annotation may be one of several canonical types, supplemented by
--- arbitrary info tags. A variant annotation is represented by one or more
--- of these canonical types. An annotation is not inherently associated
--- with a specific sample or individual (though a client could choose to
--- use annotations in this way). Example canonical annotation types are
--- \'Gene\' and \'Variant\'.
---
--- /See:/ 'annotation' smart constructor.
-data Annotation = Annotation
-    { _aVariant         :: !(Maybe VariantAnnotation)
-    , _aAnnotationSetId :: !(Maybe Text)
-    , _aName            :: !(Maybe Text)
-    , _aId              :: !(Maybe Text)
-    , _aType            :: !(Maybe AnnotationType)
-    , _aTranscript      :: !(Maybe Transcript)
-    , _aInfo            :: !(Maybe AnnotationInfo)
-    , _aPosition        :: !(Maybe RangePosition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Annotation' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aVariant'
---
--- * 'aAnnotationSetId'
---
--- * 'aName'
---
--- * 'aId'
---
--- * 'aType'
---
--- * 'aTranscript'
---
--- * 'aInfo'
---
--- * 'aPosition'
-annotation
-    :: Annotation
-annotation =
-    Annotation
-    { _aVariant = Nothing
-    , _aAnnotationSetId = Nothing
-    , _aName = Nothing
-    , _aId = Nothing
-    , _aType = Nothing
-    , _aTranscript = Nothing
-    , _aInfo = Nothing
-    , _aPosition = Nothing
-    }
-
--- | A variant annotation, which describes the effect of a variant on the
--- genome, the coding sequence, and\/or higher level consequences at the
--- organism level e.g. pathogenicity. This field is only set for
--- annotations of type VARIANT.
-aVariant :: Lens' Annotation (Maybe VariantAnnotation)
-aVariant = lens _aVariant (\ s a -> s{_aVariant = a})
-
--- | The ID of the containing annotation set.
-aAnnotationSetId :: Lens' Annotation (Maybe Text)
-aAnnotationSetId
-  = lens _aAnnotationSetId
-      (\ s a -> s{_aAnnotationSetId = a})
-
--- | The display name of this annotation.
-aName :: Lens' Annotation (Maybe Text)
-aName = lens _aName (\ s a -> s{_aName = a})
-
--- | The generated unique ID for this annotation.
-aId :: Lens' Annotation (Maybe Text)
-aId = lens _aId (\ s a -> s{_aId = a})
-
--- | The data type for this annotation. Must match the containing annotation
--- set\'s type.
-aType :: Lens' Annotation (Maybe AnnotationType)
-aType = lens _aType (\ s a -> s{_aType = a})
-
--- | A transcript value represents the assertion that a particular region of
--- the reference genome may be transcribed as RNA. An alternative splicing
--- pattern would be represented as a separate transcript object. This field
--- is only set for annotations of type TRANSCRIPT.
-aTranscript :: Lens' Annotation (Maybe Transcript)
-aTranscript
-  = lens _aTranscript (\ s a -> s{_aTranscript = a})
-
--- | A string which maps to an array of values.
-aInfo :: Lens' Annotation (Maybe AnnotationInfo)
-aInfo = lens _aInfo (\ s a -> s{_aInfo = a})
-
--- | The position of this annotation on the reference sequence.
-aPosition :: Lens' Annotation (Maybe RangePosition)
-aPosition
-  = lens _aPosition (\ s a -> s{_aPosition = a})
-
-instance FromJSON Annotation where
-        parseJSON
-          = withObject "Annotation"
-              (\ o ->
-                 Annotation <$>
-                   (o .:? "variant") <*> (o .:? "annotationSetId") <*>
-                     (o .:? "name")
-                     <*> (o .:? "id")
-                     <*> (o .:? "type")
-                     <*> (o .:? "transcript")
-                     <*> (o .:? "info")
-                     <*> (o .:? "position"))
-
-instance ToJSON Annotation where
-        toJSON Annotation{..}
-          = object
-              (catMaybes
-                 [("variant" .=) <$> _aVariant,
-                  ("annotationSetId" .=) <$> _aAnnotationSetId,
-                  ("name" .=) <$> _aName, ("id" .=) <$> _aId,
-                  ("type" .=) <$> _aType,
-                  ("transcript" .=) <$> _aTranscript,
-                  ("info" .=) <$> _aInfo,
-                  ("position" .=) <$> _aPosition])
-
--- | Describes an interleaved FASTQ file source for alignment.
---
--- /See:/ 'interleavedFastqSource' smart constructor.
-data InterleavedFastqSource = InterleavedFastqSource
-    { _ifsMetadata   :: !(Maybe FastqMetadata)
-    , _ifsSourceURIs :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InterleavedFastqSource' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ifsMetadata'
---
--- * 'ifsSourceURIs'
-interleavedFastqSource
-    :: InterleavedFastqSource
-interleavedFastqSource =
-    InterleavedFastqSource
-    { _ifsMetadata = Nothing
-    , _ifsSourceURIs = Nothing
-    }
-
--- | Optionally specifies the metadata to be associated with the final
--- aligned read group set.
-ifsMetadata :: Lens' InterleavedFastqSource (Maybe FastqMetadata)
-ifsMetadata
-  = lens _ifsMetadata (\ s a -> s{_ifsMetadata = a})
-
--- | A list of URIs pointing at interleaved FASTQ files in Google Cloud
--- Storage which will be aligned. The caller must have READ permissions for
--- these files.
-ifsSourceURIs :: Lens' InterleavedFastqSource [Text]
-ifsSourceURIs
-  = lens _ifsSourceURIs
-      (\ s a -> s{_ifsSourceURIs = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON InterleavedFastqSource where
-        parseJSON
-          = withObject "InterleavedFastqSource"
-              (\ o ->
-                 InterleavedFastqSource <$>
-                   (o .:? "metadata") <*>
-                     (o .:? "sourceUris" .!= mempty))
-
-instance ToJSON InterleavedFastqSource where
-        toJSON InterleavedFastqSource{..}
-          = object
-              (catMaybes
-                 [("metadata" .=) <$> _ifsMetadata,
-                  ("sourceUris" .=) <$> _ifsSourceURIs])
-
--- | The read group set call request.
---
--- /See:/ 'callReadGroupSetsRequest' smart constructor.
-data CallReadGroupSetsRequest = CallReadGroupSetsRequest
-    { _crgsrReadGroupSetId :: !(Maybe Text)
-    , _crgsrDatasetId      :: !(Maybe Text)
-    , _crgsrSourceURIs     :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CallReadGroupSetsRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'crgsrReadGroupSetId'
---
--- * 'crgsrDatasetId'
---
--- * 'crgsrSourceURIs'
-callReadGroupSetsRequest
-    :: CallReadGroupSetsRequest
-callReadGroupSetsRequest =
-    CallReadGroupSetsRequest
-    { _crgsrReadGroupSetId = Nothing
-    , _crgsrDatasetId = Nothing
-    , _crgsrSourceURIs = Nothing
-    }
-
--- | The IDs of the read group sets which will be called. The caller must
--- have READ permissions for these read group sets. One of readGroupSetId
--- or sourceUris must be provided.
-crgsrReadGroupSetId :: Lens' CallReadGroupSetsRequest (Maybe Text)
-crgsrReadGroupSetId
-  = lens _crgsrReadGroupSetId
-      (\ s a -> s{_crgsrReadGroupSetId = a})
-
--- | Required. The ID of the dataset the called variants will belong to. The
--- caller must have WRITE permissions to this dataset.
-crgsrDatasetId :: Lens' CallReadGroupSetsRequest (Maybe Text)
-crgsrDatasetId
-  = lens _crgsrDatasetId
-      (\ s a -> s{_crgsrDatasetId = a})
-
--- | A list of URIs pointing at BAM files in Google Cloud Storage which will
--- be called. FASTQ files are not allowed. The caller must have READ
--- permissions for these files. One of readGroupSetId or sourceUris must be
--- provided.
-crgsrSourceURIs :: Lens' CallReadGroupSetsRequest [Text]
-crgsrSourceURIs
-  = lens _crgsrSourceURIs
-      (\ s a -> s{_crgsrSourceURIs = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON CallReadGroupSetsRequest where
-        parseJSON
-          = withObject "CallReadGroupSetsRequest"
-              (\ o ->
-                 CallReadGroupSetsRequest <$>
-                   (o .:? "readGroupSetId") <*> (o .:? "datasetId") <*>
-                     (o .:? "sourceUris" .!= mempty))
-
-instance ToJSON CallReadGroupSetsRequest where
-        toJSON CallReadGroupSetsRequest{..}
-          = object
-              (catMaybes
-                 [("readGroupSetId" .=) <$> _crgsrReadGroupSetId,
-                  ("datasetId" .=) <$> _crgsrDatasetId,
-                  ("sourceUris" .=) <$> _crgsrSourceURIs])
-
---
--- /See:/ 'batchAnnotationsResponseEntry' smart constructor.
-data BatchAnnotationsResponseEntry = BatchAnnotationsResponseEntry
-    { _bareStatus     :: !(Maybe BatchAnnotationsResponseEntryStatus)
-    , _bareAnnotation :: !(Maybe Annotation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BatchAnnotationsResponseEntry' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'bareStatus'
---
--- * 'bareAnnotation'
-batchAnnotationsResponseEntry
-    :: BatchAnnotationsResponseEntry
-batchAnnotationsResponseEntry =
-    BatchAnnotationsResponseEntry
-    { _bareStatus = Nothing
-    , _bareAnnotation = Nothing
-    }
-
--- | The resulting status for this annotation operation.
-bareStatus :: Lens' BatchAnnotationsResponseEntry (Maybe BatchAnnotationsResponseEntryStatus)
-bareStatus
-  = lens _bareStatus (\ s a -> s{_bareStatus = a})
-
--- | The annotation, if any.
-bareAnnotation :: Lens' BatchAnnotationsResponseEntry (Maybe Annotation)
-bareAnnotation
-  = lens _bareAnnotation
-      (\ s a -> s{_bareAnnotation = a})
-
-instance FromJSON BatchAnnotationsResponseEntry where
-        parseJSON
-          = withObject "BatchAnnotationsResponseEntry"
-              (\ o ->
-                 BatchAnnotationsResponseEntry <$>
-                   (o .:? "status") <*> (o .:? "annotation"))
-
-instance ToJSON BatchAnnotationsResponseEntry where
-        toJSON BatchAnnotationsResponseEntry{..}
-          = object
-              (catMaybes
-                 [("status" .=) <$> _bareStatus,
-                  ("annotation" .=) <$> _bareAnnotation])
-
 --
 -- /See:/ 'listBasesResponse' smart constructor.
 data ListBasesResponse = ListBasesResponse
@@ -775,9 +376,9 @@ lbrNextPageToken
   = lens _lbrNextPageToken
       (\ s a -> s{_lbrNextPageToken = a})
 
--- | The offset position (0-based) of the given sequence from the start of
--- this Reference. This value will differ for each page in a paginated
--- request.
+-- | The offset position (0-based) of the given \`sequence\` from the start
+-- of this \`Reference\`. This value will differ for each page in a
+-- paginated request.
 lbrOffset :: Lens' ListBasesResponse (Maybe Int64)
 lbrOffset
   = lens _lbrOffset (\ s a -> s{_lbrOffset = a})
@@ -803,64 +404,146 @@ instance ToJSON ListBasesResponse where
                   ("offset" .=) <$> _lbrOffset,
                   ("sequence" .=) <$> _lbrSequence])
 
+-- | The response message for Operations.ListOperations.
+--
+-- /See:/ 'listOperationsResponse' smart constructor.
+data ListOperationsResponse = ListOperationsResponse
+    { _lorNextPageToken :: !(Maybe Text)
+    , _lorOperations    :: !(Maybe [Operation])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lorNextPageToken'
+--
+-- * 'lorOperations'
+listOperationsResponse
+    :: ListOperationsResponse
+listOperationsResponse =
+    ListOperationsResponse
+    { _lorNextPageToken = Nothing
+    , _lorOperations = Nothing
+    }
+
+-- | The standard List next-page token.
+lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
+lorNextPageToken
+  = lens _lorNextPageToken
+      (\ s a -> s{_lorNextPageToken = a})
+
+-- | A list of operations that matches the specified filter in the request.
+lorOperations :: Lens' ListOperationsResponse [Operation]
+lorOperations
+  = lens _lorOperations
+      (\ s a -> s{_lorOperations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListOperationsResponse where
+        parseJSON
+          = withObject "ListOperationsResponse"
+              (\ o ->
+                 ListOperationsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "operations" .!= mempty))
+
+instance ToJSON ListOperationsResponse where
+        toJSON ListOperationsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lorNextPageToken,
+                  ("operations" .=) <$> _lorOperations])
+
+-- | Request message for \`GetIamPolicy\` method.
+--
+-- /See:/ 'getIAMPolicyRequest' smart constructor.
+data GetIAMPolicyRequest =
+    GetIAMPolicyRequest
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
+--
+getIAMPolicyRequest
+    :: GetIAMPolicyRequest
+getIAMPolicyRequest = GetIAMPolicyRequest
+
+instance FromJSON GetIAMPolicyRequest where
+        parseJSON
+          = withObject "GetIAMPolicyRequest"
+              (\ o -> pure GetIAMPolicyRequest)
+
+instance ToJSON GetIAMPolicyRequest where
+        toJSON = const emptyObject
+
+-- | The request message for Operations.CancelOperation.
+--
+-- /See:/ 'cancelOperationRequest' smart constructor.
+data CancelOperationRequest =
+    CancelOperationRequest
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
+--
+cancelOperationRequest
+    :: CancelOperationRequest
+cancelOperationRequest = CancelOperationRequest
+
+instance FromJSON CancelOperationRequest where
+        parseJSON
+          = withObject "CancelOperationRequest"
+              (\ o -> pure CancelOperationRequest)
+
+instance ToJSON CancelOperationRequest where
+        toJSON = const emptyObject
+
 -- | A Dataset is a collection of genomic data.
 --
 -- /See:/ 'dataset' smart constructor.
 data Dataset = Dataset
-    { _dIsPublic      :: !(Maybe Bool)
-    , _dProjectNumber :: !(Maybe Int64)
-    , _dName          :: !(Maybe Text)
-    , _dId            :: !(Maybe Text)
-    , _dCreateTime    :: !(Maybe Int64)
+    { _dName       :: !(Maybe Text)
+    , _dId         :: !(Maybe Text)
+    , _dProjectId  :: !(Maybe Text)
+    , _dCreateTime :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Dataset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dIsPublic'
---
--- * 'dProjectNumber'
---
 -- * 'dName'
 --
 -- * 'dId'
+--
+-- * 'dProjectId'
 --
 -- * 'dCreateTime'
 dataset
     :: Dataset
 dataset =
     Dataset
-    { _dIsPublic = Nothing
-    , _dProjectNumber = Nothing
-    , _dName = Nothing
+    { _dName = Nothing
     , _dId = Nothing
+    , _dProjectId = Nothing
     , _dCreateTime = Nothing
     }
-
--- | Flag indicating whether or not a dataset is publicly viewable. If a
--- dataset is not public, it inherits viewing permissions from its project.
-dIsPublic :: Lens' Dataset (Maybe Bool)
-dIsPublic
-  = lens _dIsPublic (\ s a -> s{_dIsPublic = a})
-
--- | The Google Developers Console project number that this dataset belongs
--- to.
-dProjectNumber :: Lens' Dataset (Maybe Int64)
-dProjectNumber
-  = lens _dProjectNumber
-      (\ s a -> s{_dProjectNumber = a})
 
 -- | The dataset name.
 dName :: Lens' Dataset (Maybe Text)
 dName = lens _dName (\ s a -> s{_dName = a})
 
--- | The Google generated ID of the dataset, immutable.
+-- | The server-generated dataset ID, unique across all datasets.
 dId :: Lens' Dataset (Maybe Text)
 dId = lens _dId (\ s a -> s{_dId = a})
 
+-- | The Google Developers Console project ID that this dataset belongs to.
+dProjectId :: Lens' Dataset (Maybe Text)
+dProjectId
+  = lens _dProjectId (\ s a -> s{_dProjectId = a})
+
 -- | The time this dataset was created, in seconds from the epoch.
-dCreateTime :: Lens' Dataset (Maybe Int64)
+dCreateTime :: Lens' Dataset (Maybe Text)
 dCreateTime
   = lens _dCreateTime (\ s a -> s{_dCreateTime = a})
 
@@ -869,25 +552,23 @@ instance FromJSON Dataset where
           = withObject "Dataset"
               (\ o ->
                  Dataset <$>
-                   (o .:? "isPublic") <*> (o .:? "projectNumber") <*>
-                     (o .:? "name")
-                     <*> (o .:? "id")
+                   (o .:? "name") <*> (o .:? "id") <*>
+                     (o .:? "projectId")
                      <*> (o .:? "createTime"))
 
 instance ToJSON Dataset where
         toJSON Dataset{..}
           = object
               (catMaybes
-                 [("isPublic" .=) <$> _dIsPublic,
-                  ("projectNumber" .=) <$> _dProjectNumber,
-                  ("name" .=) <$> _dName, ("id" .=) <$> _dId,
+                 [("name" .=) <$> _dName, ("id" .=) <$> _dId,
+                  ("projectId" .=) <$> _dProjectId,
                   ("createTime" .=) <$> _dCreateTime])
 
 -- | A read alignment describes a linear alignment of a string of DNA to a
 -- reference sequence, in addition to metadata about the fragment (the
 -- molecule of DNA sequenced) and the read (the bases which were read by
 -- the sequencer). A read is equivalent to a line in a SAM file. A read
--- belongs to exactly one read group and exactly one read group set.
+-- belongs to exactly one read group and exactly one read group set. ###
 -- Generating a reference-aligned sequence string When interacting with
 -- mapped reads, it\'s often useful to produce a string representing the
 -- local alignment of the read to reference. The following pseudocode
@@ -899,10 +580,10 @@ instance ToJSON Dataset where
 -- c.operationLength break case \"PAD\": out += repeat(\"*\",
 -- c.operationLength) break case \"DELETE\": out += repeat(\"-\",
 -- c.operationLength) break case \"SKIP\": out += repeat(\" \",
--- c.operationLength) break case \"CLIP_HARD\": break } } return out
+-- c.operationLength) break case \"CLIP_HARD\": break } } return out ###
 -- Converting to SAM\'s CIGAR string The following pseudocode generates a
--- SAM CIGAR string from the cigar field. Note that this is a lossy
--- conversion (cigar.referenceSequence is lost). cigarMap = {
+-- SAM CIGAR string from the \`cigar\` field. Note that this is a lossy
+-- conversion (\`cigar.referenceSequence\` is lost). cigarMap = {
 -- \"ALIGNMENT_MATCH\": \"M\", \"INSERT\": \"I\", \"DELETE\": \"D\",
 -- \"SKIP\": \"N\", \"CLIP_SOFT\": \"S\", \"CLIP_HARD\": \"H\", \"PAD\":
 -- \"P\", \"SEQUENCE_MATCH\": \"=\", \"SEQUENCE_MISMATCH\": \"X\", }
@@ -1009,10 +690,9 @@ rReadGroupSetId
   = lens _rReadGroupSetId
       (\ s a -> s{_rReadGroupSetId = a})
 
--- | The position of the primary alignment of the (readNumber+1)%numberReads
--- read in the fragment. It replaces mate position and mate strand in SAM.
--- This field will be unset if that read is unmapped or if the fragment
--- only has a single read.
+-- | The mapping of the primary alignment of the
+-- \`(readNumber+1)%numberReads\` read in the fragment. It replaces mate
+-- position and mate strand in SAM.
 rNextMatePosition :: Lens' Read' (Maybe Position)
 rNextMatePosition
   = lens _rNextMatePosition
@@ -1024,7 +704,7 @@ rFailedVendorQualityChecks
   = lens _rFailedVendorQualityChecks
       (\ s a -> s{_rFailedVendorQualityChecks = a})
 
--- | The linear alignment for this alignment record. This field will be unset
+-- | The linear alignment for this alignment record. This field will be null
 -- if the read is unmapped.
 rAlignment :: Lens' Read' (Maybe LinearAlignment)
 rAlignment
@@ -1041,8 +721,8 @@ rNumberReads :: Lens' Read' (Maybe Int32)
 rNumberReads
   = lens _rNumberReads (\ s a -> s{_rNumberReads = a})
 
--- | The unique ID for this read. This is a generated unique ID, not to be
--- confused with fragmentName.
+-- | The server-generated read ID, unique across all reads. This is different
+-- from the \`fragmentName\`.
 rId :: Lens' Read' (Maybe Text)
 rId = lens _rId (\ s a -> s{_rId = a})
 
@@ -1050,8 +730,8 @@ rId = lens _rId (\ s a -> s{_rId = a})
 -- secondary alignment represents an alternative to the primary alignment
 -- for this read. Aligners may return secondary alignments if a read can
 -- map ambiguously to multiple coordinates in the genome. By convention,
--- each read has one and only one alignment where both secondaryAlignment
--- and supplementaryAlignment are false.
+-- each read has one and only one alignment where both
+-- \`secondaryAlignment\` and \`supplementaryAlignment\` are false.
 rSecondaryAlignment :: Lens' Read' (Maybe Bool)
 rSecondaryAlignment
   = lens _rSecondaryAlignment
@@ -1071,21 +751,21 @@ rReadGroupId
 -- alignment; the remaining linear alignments will be designated as
 -- supplementary alignments. These alignments may have different mapping
 -- quality scores. In each linear alignment in a chimeric alignment, the
--- read will be hard clipped. The alignedSequence and alignedQuality fields
--- in the alignment record will only represent the bases for its respective
--- linear alignment.
+-- read will be hard clipped. The \`alignedSequence\` and
+-- \`alignedQuality\` fields in the alignment record will only represent
+-- the bases for its respective linear alignment.
 rSupplementaryAlignment :: Lens' Read' (Maybe Bool)
 rSupplementaryAlignment
   = lens _rSupplementaryAlignment
       (\ s a -> s{_rSupplementaryAlignment = a})
 
 -- | The bases of the read sequence contained in this alignment record,
--- without CIGAR operations applied. alignedSequence and alignedQuality may
--- be shorter than the full read sequence and quality. This will occur if
--- the alignment is part of a chimeric alignment, or if the read was
--- trimmed. When this occurs, the CIGAR for this read will begin\/end with
--- a hard clip operator that will indicate the length of the excised
--- sequence.
+-- *without CIGAR operations applied*. \`alignedSequence\` and
+-- \`alignedQuality\` may be shorter than the full read sequence and
+-- quality. This will occur if the alignment is part of a chimeric
+-- alignment, or if the read was trimmed. When this occurs, the CIGAR for
+-- this read will begin\/end with a hard clip operator that will indicate
+-- the length of the excised sequence.
 rAlignedSequence :: Lens' Read' (Maybe Text)
 rAlignedSequence
   = lens _rAlignedSequence
@@ -1098,7 +778,8 @@ rProperPlacement
   = lens _rProperPlacement
       (\ s a -> s{_rProperPlacement = a})
 
--- | A string which maps to an array of values.
+-- | A map of additional read alignment information. This must be of the form
+-- map (string key mapping to a list of string values).
 rInfo :: Lens' Read' (Maybe ReadInfo)
 rInfo = lens _rInfo (\ s a -> s{_rInfo = a})
 
@@ -1109,8 +790,8 @@ rReadNumber
   = lens _rReadNumber (\ s a -> s{_rReadNumber = a})
 
 -- | The quality of the read sequence contained in this alignment record.
--- alignedSequence and alignedQuality may be shorter than the full read
--- sequence and quality. This will occur if the alignment is part of a
+-- \`alignedSequence\` and \`alignedQuality\` may be shorter than the full
+-- read sequence and quality. This will occur if the alignment is part of a
 -- chimeric alignment, or if the read was trimmed. When this occurs, the
 -- CIGAR for this read will begin\/end with a hard clip operator that will
 -- indicate the length of the excised sequence.
@@ -1168,112 +849,47 @@ instance ToJSON Read' where
                   ("readNumber" .=) <$> _rReadNumber,
                   ("alignedQuality" .=) <$> _rAlignedQuality])
 
---
--- /See:/ 'transcriptExon' smart constructor.
-data TranscriptExon = TranscriptExon
-    { _teStart :: !(Maybe Int64)
-    , _teEnd   :: !(Maybe Int64)
-    , _teFrame :: !(Maybe Int32Value)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TranscriptExon' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'teStart'
---
--- * 'teEnd'
---
--- * 'teFrame'
-transcriptExon
-    :: TranscriptExon
-transcriptExon =
-    TranscriptExon
-    { _teStart = Nothing
-    , _teEnd = Nothing
-    , _teFrame = Nothing
-    }
-
--- | The start position of the exon on this annotation\'s reference sequence,
--- 0-based inclusive. Note that this is relative to the reference start,
--- and not the containing annotation start.
-teStart :: Lens' TranscriptExon (Maybe Int64)
-teStart = lens _teStart (\ s a -> s{_teStart = a})
-
--- | The end position of the exon on this annotation\'s reference sequence,
--- 0-based exclusive. Note that this is relative to the reference start,
--- and not the containing annotation start.
-teEnd :: Lens' TranscriptExon (Maybe Int64)
-teEnd = lens _teEnd (\ s a -> s{_teEnd = a})
-
--- | The frame of this exon. Contains a value of 0, 1, or 2, which indicates
--- the offset of the first coding base of the exon within the reading frame
--- of the coding DNA sequence, if any. This field is dependent on the
--- strandedness of this annotation (see Annotation.position.reverseStrand).
--- For forward stranded annotations, this offset is relative to the
--- exon.start. For reverse strand annotations, this offset is relative to
--- the exon.end-1. Unset if this exon does not intersect the coding
--- sequence. Upon creation of a transcript, the frame must be populated for
--- all or none of the coding exons.
-teFrame :: Lens' TranscriptExon (Maybe Int32Value)
-teFrame = lens _teFrame (\ s a -> s{_teFrame = a})
-
-instance FromJSON TranscriptExon where
-        parseJSON
-          = withObject "TranscriptExon"
-              (\ o ->
-                 TranscriptExon <$>
-                   (o .:? "start") <*> (o .:? "end") <*>
-                     (o .:? "frame"))
-
-instance ToJSON TranscriptExon where
-        toJSON TranscriptExon{..}
-          = object
-              (catMaybes
-                 [("start" .=) <$> _teStart, ("end" .=) <$> _teEnd,
-                  ("frame" .=) <$> _teFrame])
-
 -- | A call represents the determination of genotype with respect to a
 -- particular variant. It may include associated information such as
 -- quality and phasing. For example, a call might assign a probability of
 -- 0.32 to the occurrence of a SNP named rs1234 in a call set with the name
 -- NA12345.
 --
--- /See:/ 'call' smart constructor.
-data Call = Call
-    { _cGenotypeLikelihood :: !(Maybe [Double])
-    , _cCallSetName        :: !(Maybe Text)
-    , _cPhaseset           :: !(Maybe Text)
-    , _cCallSetId          :: !(Maybe Text)
-    , _cGenotype           :: !(Maybe [Int32])
-    , _cInfo               :: !(Maybe CallInfo)
+-- /See:/ 'variantCall' smart constructor.
+data VariantCall = VariantCall
+    { _vcGenotypeLikelihood :: !(Maybe [Double])
+    , _vcCallSetName        :: !(Maybe Text)
+    , _vcPhaseset           :: !(Maybe Text)
+    , _vcCallSetId          :: !(Maybe Text)
+    , _vcGenotype           :: !(Maybe [Int32])
+    , _vcInfo               :: !(Maybe VariantCallInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Call' with the minimum fields required to make a request.
+-- | Creates a value of 'VariantCall' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cGenotypeLikelihood'
+-- * 'vcGenotypeLikelihood'
 --
--- * 'cCallSetName'
+-- * 'vcCallSetName'
 --
--- * 'cPhaseset'
+-- * 'vcPhaseset'
 --
--- * 'cCallSetId'
+-- * 'vcCallSetId'
 --
--- * 'cGenotype'
+-- * 'vcGenotype'
 --
--- * 'cInfo'
-call
-    :: Call
-call =
-    Call
-    { _cGenotypeLikelihood = Nothing
-    , _cCallSetName = Nothing
-    , _cPhaseset = Nothing
-    , _cCallSetId = Nothing
-    , _cGenotype = Nothing
-    , _cInfo = Nothing
+-- * 'vcInfo'
+variantCall
+    :: VariantCall
+variantCall =
+    VariantCall
+    { _vcGenotypeLikelihood = Nothing
+    , _vcCallSetName = Nothing
+    , _vcPhaseset = Nothing
+    , _vcCallSetId = Nothing
+    , _vcGenotype = Nothing
+    , _vcInfo = Nothing
     }
 
 -- | The genotype likelihoods for this variant call. Each array entry
@@ -1281,57 +897,60 @@ call =
 -- ordering is defined by the GL tag in the VCF spec. If Phred-scaled
 -- genotype likelihood scores (PL) are available and log10(P) genotype
 -- likelihood scores (GL) are not, PL scores are converted to GL scores. If
--- both are available, PL scores are stored in info.
-cGenotypeLikelihood :: Lens' Call [Double]
-cGenotypeLikelihood
-  = lens _cGenotypeLikelihood
-      (\ s a -> s{_cGenotypeLikelihood = a})
+-- both are available, PL scores are stored in \`info\`.
+vcGenotypeLikelihood :: Lens' VariantCall [Double]
+vcGenotypeLikelihood
+  = lens _vcGenotypeLikelihood
+      (\ s a -> s{_vcGenotypeLikelihood = a})
       . _Default
       . _Coerce
 
 -- | The name of the call set this variant call belongs to.
-cCallSetName :: Lens' Call (Maybe Text)
-cCallSetName
-  = lens _cCallSetName (\ s a -> s{_cCallSetName = a})
+vcCallSetName :: Lens' VariantCall (Maybe Text)
+vcCallSetName
+  = lens _vcCallSetName
+      (\ s a -> s{_vcCallSetName = a})
 
 -- | If this field is present, this variant call\'s genotype ordering implies
 -- the phase of the bases and is consistent with any other variant calls in
 -- the same reference sequence which have the same phaseset value. When
 -- importing data from VCF, if the genotype data was phased but no phase
--- set was specified this field will be set to *.
-cPhaseset :: Lens' Call (Maybe Text)
-cPhaseset
-  = lens _cPhaseset (\ s a -> s{_cPhaseset = a})
+-- set was specified this field will be set to \`*\`.
+vcPhaseset :: Lens' VariantCall (Maybe Text)
+vcPhaseset
+  = lens _vcPhaseset (\ s a -> s{_vcPhaseset = a})
 
 -- | The ID of the call set this variant call belongs to.
-cCallSetId :: Lens' Call (Maybe Text)
-cCallSetId
-  = lens _cCallSetId (\ s a -> s{_cCallSetId = a})
+vcCallSetId :: Lens' VariantCall (Maybe Text)
+vcCallSetId
+  = lens _vcCallSetId (\ s a -> s{_vcCallSetId = a})
 
 -- | The genotype of this variant call. Each value represents either the
--- value of the referenceBases field or a 1-based index into
--- alternateBases. If a variant had a referenceBases value of T and an
--- alternateBases value of [\"A\", \"C\"], and the genotype was [2, 1],
--- that would mean the call represented the heterozygous value CA for this
--- variant. If the genotype was instead [0, 1], the represented value would
--- be TA. Ordering of the genotype values is important if the phaseset is
--- present. If a genotype is not called (that is, a . is present in the GT
--- string) -1 is returned.
-cGenotype :: Lens' Call [Int32]
-cGenotype
-  = lens _cGenotype (\ s a -> s{_cGenotype = a}) .
+-- value of the \`referenceBases\` field or a 1-based index into
+-- \`alternateBases\`. If a variant had a \`referenceBases\` value of \`T\`
+-- and an \`alternateBases\` value of \`[\"A\", \"C\"]\`, and the
+-- \`genotype\` was \`[2, 1]\`, that would mean the call represented the
+-- heterozygous value \`CA\` for this variant. If the \`genotype\` was
+-- instead \`[0, 1]\`, the represented value would be \`TA\`. Ordering of
+-- the genotype values is important if the \`phaseset\` is present. If a
+-- genotype is not called (that is, a \`.\` is present in the GT string) -1
+-- is returned.
+vcGenotype :: Lens' VariantCall [Int32]
+vcGenotype
+  = lens _vcGenotype (\ s a -> s{_vcGenotype = a}) .
       _Default
       . _Coerce
 
--- | A string which maps to an array of values.
-cInfo :: Lens' Call (Maybe CallInfo)
-cInfo = lens _cInfo (\ s a -> s{_cInfo = a})
+-- | A map of additional variant call information. This must be of the form
+-- map (string key mapping to a list of string values).
+vcInfo :: Lens' VariantCall (Maybe VariantCallInfo)
+vcInfo = lens _vcInfo (\ s a -> s{_vcInfo = a})
 
-instance FromJSON Call where
+instance FromJSON VariantCall where
         parseJSON
-          = withObject "Call"
+          = withObject "VariantCall"
               (\ o ->
-                 Call <$>
+                 VariantCall <$>
                    (o .:? "genotypeLikelihood" .!= mempty) <*>
                      (o .:? "callSetName")
                      <*> (o .:? "phaseset")
@@ -1339,168 +958,16 @@ instance FromJSON Call where
                      <*> (o .:? "genotype" .!= mempty)
                      <*> (o .:? "info"))
 
-instance ToJSON Call where
-        toJSON Call{..}
+instance ToJSON VariantCall where
+        toJSON VariantCall{..}
           = object
               (catMaybes
-                 [("genotypeLikelihood" .=) <$> _cGenotypeLikelihood,
-                  ("callSetName" .=) <$> _cCallSetName,
-                  ("phaseset" .=) <$> _cPhaseset,
-                  ("callSetId" .=) <$> _cCallSetId,
-                  ("genotype" .=) <$> _cGenotype,
-                  ("info" .=) <$> _cInfo])
-
--- | A 0-based half-open genomic coordinate range for search requests.
---
--- /See:/ 'queryRange' smart constructor.
-data QueryRange = QueryRange
-    { _qrStart         :: !(Maybe Int64)
-    , _qrReferenceId   :: !(Maybe Text)
-    , _qrReferenceName :: !(Maybe Text)
-    , _qrEnd           :: !(Maybe Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'QueryRange' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'qrStart'
---
--- * 'qrReferenceId'
---
--- * 'qrReferenceName'
---
--- * 'qrEnd'
-queryRange
-    :: QueryRange
-queryRange =
-    QueryRange
-    { _qrStart = Nothing
-    , _qrReferenceId = Nothing
-    , _qrReferenceName = Nothing
-    , _qrEnd = Nothing
-    }
-
--- | The start position of the range on the reference, 0-based inclusive. If
--- specified, referenceId or referenceName must also be specified. Defaults
--- to 0.
-qrStart :: Lens' QueryRange (Maybe Int64)
-qrStart = lens _qrStart (\ s a -> s{_qrStart = a})
-
--- | The ID of the reference to query. At most one of referenceId and
--- referenceName should be specified.
-qrReferenceId :: Lens' QueryRange (Maybe Text)
-qrReferenceId
-  = lens _qrReferenceId
-      (\ s a -> s{_qrReferenceId = a})
-
--- | The name of the reference to query, within the reference set associated
--- with this query. At most one of referenceId and referenceName pshould be
--- specified.
-qrReferenceName :: Lens' QueryRange (Maybe Text)
-qrReferenceName
-  = lens _qrReferenceName
-      (\ s a -> s{_qrReferenceName = a})
-
--- | The end position of the range on the reference, 0-based exclusive. If
--- specified, referenceId or referenceName must also be specified. If unset
--- or 0, defaults to the length of the reference.
-qrEnd :: Lens' QueryRange (Maybe Int64)
-qrEnd = lens _qrEnd (\ s a -> s{_qrEnd = a})
-
-instance FromJSON QueryRange where
-        parseJSON
-          = withObject "QueryRange"
-              (\ o ->
-                 QueryRange <$>
-                   (o .:? "start") <*> (o .:? "referenceId") <*>
-                     (o .:? "referenceName")
-                     <*> (o .:? "end"))
-
-instance ToJSON QueryRange where
-        toJSON QueryRange{..}
-          = object
-              (catMaybes
-                 [("start" .=) <$> _qrStart,
-                  ("referenceId" .=) <$> _qrReferenceId,
-                  ("referenceName" .=) <$> _qrReferenceName,
-                  ("end" .=) <$> _qrEnd])
-
---
--- /See:/ 'batchCreateAnnotationsRequest' smart constructor.
-newtype BatchCreateAnnotationsRequest = BatchCreateAnnotationsRequest
-    { _bcarAnnotations :: Maybe [Annotation]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BatchCreateAnnotationsRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'bcarAnnotations'
-batchCreateAnnotationsRequest
-    :: BatchCreateAnnotationsRequest
-batchCreateAnnotationsRequest =
-    BatchCreateAnnotationsRequest
-    { _bcarAnnotations = Nothing
-    }
-
--- | The annotations to be created. At most 4096 can be specified in a single
--- request.
-bcarAnnotations :: Lens' BatchCreateAnnotationsRequest [Annotation]
-bcarAnnotations
-  = lens _bcarAnnotations
-      (\ s a -> s{_bcarAnnotations = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON BatchCreateAnnotationsRequest where
-        parseJSON
-          = withObject "BatchCreateAnnotationsRequest"
-              (\ o ->
-                 BatchCreateAnnotationsRequest <$>
-                   (o .:? "annotations" .!= mempty))
-
-instance ToJSON BatchCreateAnnotationsRequest where
-        toJSON BatchCreateAnnotationsRequest{..}
-          = object
-              (catMaybes [("annotations" .=) <$> _bcarAnnotations])
-
---
--- /See:/ 'mergeVariantsRequest' smart constructor.
-newtype MergeVariantsRequest = MergeVariantsRequest
-    { _mvrVariants :: Maybe [Variant]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'MergeVariantsRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mvrVariants'
-mergeVariantsRequest
-    :: MergeVariantsRequest
-mergeVariantsRequest =
-    MergeVariantsRequest
-    { _mvrVariants = Nothing
-    }
-
--- | The variants to be merged with existing variants.
-mvrVariants :: Lens' MergeVariantsRequest [Variant]
-mvrVariants
-  = lens _mvrVariants (\ s a -> s{_mvrVariants = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON MergeVariantsRequest where
-        parseJSON
-          = withObject "MergeVariantsRequest"
-              (\ o ->
-                 MergeVariantsRequest <$>
-                   (o .:? "variants" .!= mempty))
-
-instance ToJSON MergeVariantsRequest where
-        toJSON MergeVariantsRequest{..}
-          = object
-              (catMaybes [("variants" .=) <$> _mvrVariants])
+                 [("genotypeLikelihood" .=) <$> _vcGenotypeLikelihood,
+                  ("callSetName" .=) <$> _vcCallSetName,
+                  ("phaseset" .=) <$> _vcPhaseset,
+                  ("callSetId" .=) <$> _vcCallSetId,
+                  ("genotype" .=) <$> _vcGenotype,
+                  ("info" .=) <$> _vcInfo])
 
 -- | A read group is all the data that\'s processed the same way by the
 -- sequencer.
@@ -1508,8 +975,8 @@ instance ToJSON MergeVariantsRequest where
 -- /See:/ 'readGroup' smart constructor.
 data ReadGroup = ReadGroup
     { _rgReferenceSetId      :: !(Maybe Text)
-    , _rgPrograms            :: !(Maybe [ReadGroupProgram])
-    , _rgExperiment          :: !(Maybe ReadGroupExperiment)
+    , _rgPrograms            :: !(Maybe [Program])
+    , _rgExperiment          :: !(Maybe Experiment)
     , _rgName                :: !(Maybe Text)
     , _rgDatasetId           :: !(Maybe Text)
     , _rgId                  :: !(Maybe Text)
@@ -1569,14 +1036,14 @@ rgReferenceSetId
 -- identical for all read groups within a read group set. For this reason,
 -- only the first read group in a returned set will have this field
 -- populated.
-rgPrograms :: Lens' ReadGroup [ReadGroupProgram]
+rgPrograms :: Lens' ReadGroup [Program]
 rgPrograms
   = lens _rgPrograms (\ s a -> s{_rgPrograms = a}) .
       _Default
       . _Coerce
 
 -- | The experiment used to generate this read group.
-rgExperiment :: Lens' ReadGroup (Maybe ReadGroupExperiment)
+rgExperiment :: Lens' ReadGroup (Maybe Experiment)
 rgExperiment
   = lens _rgExperiment (\ s a -> s{_rgExperiment = a})
 
@@ -1590,8 +1057,9 @@ rgDatasetId :: Lens' ReadGroup (Maybe Text)
 rgDatasetId
   = lens _rgDatasetId (\ s a -> s{_rgDatasetId = a})
 
--- | The generated unique read group ID. Note: This is different than the
--- \'RG ID field in the SAM spec. For that value, see the name field.
+-- | The server-generated read group ID, unique for all read groups. Note:
+-- This is different than the \`\'RG ID\` field in the SAM spec. For that
+-- value, see the \`name\` field.
 rgId :: Lens' ReadGroup (Maybe Text)
 rgId = lens _rgId (\ s a -> s{_rgId = a})
 
@@ -1616,7 +1084,8 @@ rgDescription
   = lens _rgDescription
       (\ s a -> s{_rgDescription = a})
 
--- | A string which maps to an array of values.
+-- | A map of additional read group information. This must be of the form map
+-- (string key mapping to a list of string values).
 rgInfo :: Lens' ReadGroup (Maybe ReadGroupInfo)
 rgInfo = lens _rgInfo (\ s a -> s{_rgInfo = a})
 
@@ -1651,7 +1120,90 @@ instance ToJSON ReadGroup where
                   ("description" .=) <$> _rgDescription,
                   ("info" .=) <$> _rgInfo])
 
--- |
+-- | This resource represents a long-running operation that is the result of
+-- a network API call.
+--
+-- /See:/ 'operation' smart constructor.
+data Operation = Operation
+    { _oDone     :: !(Maybe Bool)
+    , _oError    :: !(Maybe Status)
+    , _oResponse :: !(Maybe OperationResponse)
+    , _oName     :: !(Maybe Text)
+    , _oMetadata :: !(Maybe OperationSchema)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Operation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oDone'
+--
+-- * 'oError'
+--
+-- * 'oResponse'
+--
+-- * 'oName'
+--
+-- * 'oMetadata'
+operation
+    :: Operation
+operation =
+    Operation
+    { _oDone = Nothing
+    , _oError = Nothing
+    , _oResponse = Nothing
+    , _oName = Nothing
+    , _oMetadata = Nothing
+    }
+
+-- | If the value is \`false\`, it means the operation is still in progress.
+-- If true, the operation is completed, and either \`error\` or
+-- \`response\` is available.
+oDone :: Lens' Operation (Maybe Bool)
+oDone = lens _oDone (\ s a -> s{_oDone = a})
+
+-- | The error result of the operation in case of failure.
+oError :: Lens' Operation (Maybe Status)
+oError = lens _oError (\ s a -> s{_oError = a})
+
+-- | If importing ReadGroupSets, an ImportReadGroupSetsResponse is returned.
+-- If importing Variants, an ImportVariantsResponse is returned. For
+-- exports, an empty response is returned.
+oResponse :: Lens' Operation (Maybe OperationResponse)
+oResponse
+  = lens _oResponse (\ s a -> s{_oResponse = a})
+
+-- | The server-assigned name, which is only unique within the same service
+-- that originally returns it. For example:
+-- \`operations\/CJHU7Oi_ChDrveSpBRjfuL-qzoWAgEw\`
+oName :: Lens' Operation (Maybe Text)
+oName = lens _oName (\ s a -> s{_oName = a})
+
+-- | An OperationMetadata object. This will always be returned with the
+-- Operation.
+oMetadata :: Lens' Operation (Maybe OperationSchema)
+oMetadata
+  = lens _oMetadata (\ s a -> s{_oMetadata = a})
+
+instance FromJSON Operation where
+        parseJSON
+          = withObject "Operation"
+              (\ o ->
+                 Operation <$>
+                   (o .:? "done") <*> (o .:? "error") <*>
+                     (o .:? "response")
+                     <*> (o .:? "name")
+                     <*> (o .:? "metadata"))
+
+instance ToJSON Operation where
+        toJSON Operation{..}
+          = object
+              (catMaybes
+                 [("done" .=) <$> _oDone, ("error" .=) <$> _oError,
+                  ("response" .=) <$> _oResponse,
+                  ("name" .=) <$> _oName,
+                  ("metadata" .=) <$> _oMetadata])
+
 --
 -- /See:/ 'searchReferenceSetsRequest' smart constructor.
 data SearchReferenceSetsRequest = SearchReferenceSetsRequest
@@ -1686,8 +1238,8 @@ searchReferenceSetsRequest =
     , _srsrPageSize = Nothing
     }
 
--- | If present, return references for which the md5checksum matches. See
--- ReferenceSet.md5checksum for details.
+-- | If present, return references for which the \`md5checksum\` matches. See
+-- \`ReferenceSet.md5checksum\` for details.
 srsrMD5checksums :: Lens' SearchReferenceSetsRequest [Text]
 srsrMD5checksums
   = lens _srsrMD5checksums
@@ -1697,9 +1249,9 @@ srsrMD5checksums
 
 -- | If present, return references for which the accession matches any of
 -- these strings. Best to give a version number, for example
--- GCF_000001405.26. If only the main accession number is given then all
--- records with that main accession will be returned, whichever version.
--- Note that different versions will have different sequences.
+-- \`GCF_000001405.26\`. If only the main accession number is given then
+-- all records with that main accession will be returned, whichever
+-- version. Note that different versions will have different sequences.
 srsrAccessions :: Lens' SearchReferenceSetsRequest [Text]
 srsrAccessions
   = lens _srsrAccessions
@@ -1709,14 +1261,14 @@ srsrAccessions
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
--- nextPageToken from the previous response.
+-- \`nextPageToken\` from the previous response.
 srsrPageToken :: Lens' SearchReferenceSetsRequest (Maybe Text)
 srsrPageToken
   = lens _srsrPageToken
       (\ s a -> s{_srsrPageToken = a})
 
 -- | If present, return reference sets for which a substring of their
--- assemblyId matches this string (case insensitive).
+-- \`assemblyId\` matches this string (case insensitive).
 srsrAssemblyId :: Lens' SearchReferenceSetsRequest (Maybe Text)
 srsrAssemblyId
   = lens _srsrAssemblyId
@@ -1747,6 +1299,29 @@ instance ToJSON SearchReferenceSetsRequest where
                   ("pageToken" .=) <$> _srsrPageToken,
                   ("assemblyId" .=) <$> _srsrAssemblyId,
                   ("pageSize" .=) <$> _srsrPageSize])
+
+-- | A generic empty message that you can re-use to avoid defining duplicated
+-- empty messages in your APIs. A typical example is to use it as the
+-- request or the response type of an API method. For instance: service Foo
+-- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
+-- JSON representation for \`Empty\` is empty JSON object \`{}\`.
+--
+-- /See:/ 'empty' smart constructor.
+data Empty =
+    Empty
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Empty' with the minimum fields required to make a request.
+--
+empty
+    :: Empty
+empty = Empty
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty)
+
+instance ToJSON Empty where
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'searchReferencesResponse' smart constructor.
@@ -1802,6 +1377,108 @@ instance ToJSON SearchReferencesResponse where
                  [("nextPageToken" .=) <$> _srrNextPageToken,
                   ("references" .=) <$> _srrReferences])
 
+-- | Metadata describes a single piece of variant call metadata. These data
+-- include a top level key and either a single value string (value) or a
+-- list of key-value pairs (info.) Value and info are mutually exclusive.
+--
+-- /See:/ 'variantSetMetadata' smart constructor.
+data VariantSetMetadata = VariantSetMetadata
+    { _vsmValue       :: !(Maybe Text)
+    , _vsmKey         :: !(Maybe Text)
+    , _vsmId          :: !(Maybe Text)
+    , _vsmType        :: !(Maybe Text)
+    , _vsmNumber      :: !(Maybe Text)
+    , _vsmDescription :: !(Maybe Text)
+    , _vsmInfo        :: !(Maybe VariantSetMetadataInfo)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VariantSetMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vsmValue'
+--
+-- * 'vsmKey'
+--
+-- * 'vsmId'
+--
+-- * 'vsmType'
+--
+-- * 'vsmNumber'
+--
+-- * 'vsmDescription'
+--
+-- * 'vsmInfo'
+variantSetMetadata
+    :: VariantSetMetadata
+variantSetMetadata =
+    VariantSetMetadata
+    { _vsmValue = Nothing
+    , _vsmKey = Nothing
+    , _vsmId = Nothing
+    , _vsmType = Nothing
+    , _vsmNumber = Nothing
+    , _vsmDescription = Nothing
+    , _vsmInfo = Nothing
+    }
+
+-- | The value field for simple metadata
+vsmValue :: Lens' VariantSetMetadata (Maybe Text)
+vsmValue = lens _vsmValue (\ s a -> s{_vsmValue = a})
+
+-- | The top-level key.
+vsmKey :: Lens' VariantSetMetadata (Maybe Text)
+vsmKey = lens _vsmKey (\ s a -> s{_vsmKey = a})
+
+-- | User-provided ID field, not enforced by this API. Two or more pieces of
+-- structured metadata with identical id and key fields are considered
+-- equivalent.
+vsmId :: Lens' VariantSetMetadata (Maybe Text)
+vsmId = lens _vsmId (\ s a -> s{_vsmId = a})
+
+-- | The type of data. Possible types include: Integer, Float, Flag,
+-- Character, and String.
+vsmType :: Lens' VariantSetMetadata (Maybe Text)
+vsmType = lens _vsmType (\ s a -> s{_vsmType = a})
+
+-- | The number of values that can be included in a field described by this
+-- metadata.
+vsmNumber :: Lens' VariantSetMetadata (Maybe Text)
+vsmNumber
+  = lens _vsmNumber (\ s a -> s{_vsmNumber = a})
+
+-- | A textual description of this metadata.
+vsmDescription :: Lens' VariantSetMetadata (Maybe Text)
+vsmDescription
+  = lens _vsmDescription
+      (\ s a -> s{_vsmDescription = a})
+
+-- | Remaining structured metadata key-value pairs. This must be of the form
+-- map (string key mapping to a list of string values).
+vsmInfo :: Lens' VariantSetMetadata (Maybe VariantSetMetadataInfo)
+vsmInfo = lens _vsmInfo (\ s a -> s{_vsmInfo = a})
+
+instance FromJSON VariantSetMetadata where
+        parseJSON
+          = withObject "VariantSetMetadata"
+              (\ o ->
+                 VariantSetMetadata <$>
+                   (o .:? "value") <*> (o .:? "key") <*> (o .:? "id")
+                     <*> (o .:? "type")
+                     <*> (o .:? "number")
+                     <*> (o .:? "description")
+                     <*> (o .:? "info"))
+
+instance ToJSON VariantSetMetadata where
+        toJSON VariantSetMetadata{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _vsmValue, ("key" .=) <$> _vsmKey,
+                  ("id" .=) <$> _vsmId, ("type" .=) <$> _vsmType,
+                  ("number" .=) <$> _vsmNumber,
+                  ("description" .=) <$> _vsmDescription,
+                  ("info" .=) <$> _vsmInfo])
+
 -- | A call set is a collection of variant calls, typically for one sample.
 -- It belongs to a variant set.
 --
@@ -1851,7 +1528,7 @@ csCreated
 csName :: Lens' CallSet (Maybe Text)
 csName = lens _csName (\ s a -> s{_csName = a})
 
--- | The Google generated ID of the call set, immutable.
+-- | The server-generated call set ID, unique across all call sets.
 csId :: Lens' CallSet (Maybe Text)
 csId = lens _csId (\ s a -> s{_csId = a})
 
@@ -1860,7 +1537,10 @@ csSampleId :: Lens' CallSet (Maybe Text)
 csSampleId
   = lens _csSampleId (\ s a -> s{_csSampleId = a})
 
--- | The IDs of the variant sets this call set belongs to.
+-- | The IDs of the variant sets this call set belongs to. This field must
+-- have exactly length one, as a call set belongs to a single variant set.
+-- This field is repeated for compatibility with the [GA4GH 0.5.1
+-- API](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variants.avdl#L76).
 csVariantSetIds :: Lens' CallSet [Text]
 csVariantSetIds
   = lens _csVariantSetIds
@@ -1868,7 +1548,8 @@ csVariantSetIds
       . _Default
       . _Coerce
 
--- | A string which maps to an array of values.
+-- | A map of additional call set information. This must be of the form map
+-- (string key mapping to a list of string values).
 csInfo :: Lens' CallSet (Maybe CallSetInfo)
 csInfo = lens _csInfo (\ s a -> s{_csInfo = a})
 
@@ -1941,120 +1622,6 @@ instance ToJSON CoverageBucket where
                  [("range" .=) <$> _cbRange,
                   ("meanCoverage" .=) <$> _cbMeanCoverage])
 
--- | A Variant annotation.
---
--- /See:/ 'variantAnnotation' smart constructor.
-data VariantAnnotation = VariantAnnotation
-    { _vaEffect               :: !(Maybe VariantAnnotationEffect)
-    , _vaClinicalSignificance :: !(Maybe VariantAnnotationClinicalSignificance)
-    , _vaAlternateBases       :: !(Maybe Text)
-    , _vaGeneId               :: !(Maybe Text)
-    , _vaConditions           :: !(Maybe [VariantAnnotationCondition])
-    , _vaType                 :: !(Maybe VariantAnnotationType)
-    , _vaTranscriptIds        :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VariantAnnotation' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vaEffect'
---
--- * 'vaClinicalSignificance'
---
--- * 'vaAlternateBases'
---
--- * 'vaGeneId'
---
--- * 'vaConditions'
---
--- * 'vaType'
---
--- * 'vaTranscriptIds'
-variantAnnotation
-    :: VariantAnnotation
-variantAnnotation =
-    VariantAnnotation
-    { _vaEffect = Nothing
-    , _vaClinicalSignificance = Nothing
-    , _vaAlternateBases = Nothing
-    , _vaGeneId = Nothing
-    , _vaConditions = Nothing
-    , _vaType = Nothing
-    , _vaTranscriptIds = Nothing
-    }
-
--- | Effect of the variant on the coding sequence.
-vaEffect :: Lens' VariantAnnotation (Maybe VariantAnnotationEffect)
-vaEffect = lens _vaEffect (\ s a -> s{_vaEffect = a})
-
--- | Describes the clinical significance of a variant. It is adapted from the
--- ClinVar controlled vocabulary for clinical significance described at:
--- http:\/\/www.ncbi.nlm.nih.gov\/clinvar\/docs\/clinsig\/
-vaClinicalSignificance :: Lens' VariantAnnotation (Maybe VariantAnnotationClinicalSignificance)
-vaClinicalSignificance
-  = lens _vaClinicalSignificance
-      (\ s a -> s{_vaClinicalSignificance = a})
-
--- | The alternate allele for this variant. If multiple alternate alleles
--- exist at this location, create a separate variant for each one, as they
--- may represent distinct conditions.
-vaAlternateBases :: Lens' VariantAnnotation (Maybe Text)
-vaAlternateBases
-  = lens _vaAlternateBases
-      (\ s a -> s{_vaAlternateBases = a})
-
--- | Google annotation ID of the gene affected by this variant. This should
--- be provided when the variant is created.
-vaGeneId :: Lens' VariantAnnotation (Maybe Text)
-vaGeneId = lens _vaGeneId (\ s a -> s{_vaGeneId = a})
-
--- | The set of conditions associated with this variant. A condition
--- describes the way a variant influences human health.
-vaConditions :: Lens' VariantAnnotation [VariantAnnotationCondition]
-vaConditions
-  = lens _vaConditions (\ s a -> s{_vaConditions = a})
-      . _Default
-      . _Coerce
-
--- | Type has been adapted from ClinVar\'s list of variant types.
-vaType :: Lens' VariantAnnotation (Maybe VariantAnnotationType)
-vaType = lens _vaType (\ s a -> s{_vaType = a})
-
--- | Google annotation IDs of the transcripts affected by this variant. These
--- should be provided when the variant is created.
-vaTranscriptIds :: Lens' VariantAnnotation [Text]
-vaTranscriptIds
-  = lens _vaTranscriptIds
-      (\ s a -> s{_vaTranscriptIds = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON VariantAnnotation where
-        parseJSON
-          = withObject "VariantAnnotation"
-              (\ o ->
-                 VariantAnnotation <$>
-                   (o .:? "effect") <*> (o .:? "clinicalSignificance")
-                     <*> (o .:? "alternateBases")
-                     <*> (o .:? "geneId")
-                     <*> (o .:? "conditions" .!= mempty)
-                     <*> (o .:? "type")
-                     <*> (o .:? "transcriptIds" .!= mempty))
-
-instance ToJSON VariantAnnotation where
-        toJSON VariantAnnotation{..}
-          = object
-              (catMaybes
-                 [("effect" .=) <$> _vaEffect,
-                  ("clinicalSignificance" .=) <$>
-                    _vaClinicalSignificance,
-                  ("alternateBases" .=) <$> _vaAlternateBases,
-                  ("geneId" .=) <$> _vaGeneId,
-                  ("conditions" .=) <$> _vaConditions,
-                  ("type" .=) <$> _vaType,
-                  ("transcriptIds" .=) <$> _vaTranscriptIds])
-
 -- | The read group set search request.
 --
 -- /See:/ 'searchReadGroupSetsRequest' smart constructor.
@@ -2103,7 +1670,7 @@ srgsrName
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
--- nextPageToken from the previous response.
+-- \`nextPageToken\` from the previous response.
 srgsrPageToken :: Lens' SearchReadGroupSetsRequest (Maybe Text)
 srgsrPageToken
   = lens _srgsrPageToken
@@ -2133,55 +1700,6 @@ instance ToJSON SearchReadGroupSetsRequest where
                   ("name" .=) <$> _srgsrName,
                   ("pageToken" .=) <$> _srgsrPageToken,
                   ("pageSize" .=) <$> _srgsrPageSize])
-
--- |
---
--- /See:/ 'batchAnnotationsResponseEntryStatus' smart constructor.
-data BatchAnnotationsResponseEntryStatus = BatchAnnotationsResponseEntryStatus
-    { _baresCode    :: !(Maybe Int32)
-    , _baresMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BatchAnnotationsResponseEntryStatus' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'baresCode'
---
--- * 'baresMessage'
-batchAnnotationsResponseEntryStatus
-    :: BatchAnnotationsResponseEntryStatus
-batchAnnotationsResponseEntryStatus =
-    BatchAnnotationsResponseEntryStatus
-    { _baresCode = Nothing
-    , _baresMessage = Nothing
-    }
-
--- | The HTTP status code for this operation.
-baresCode :: Lens' BatchAnnotationsResponseEntryStatus (Maybe Int32)
-baresCode
-  = lens _baresCode (\ s a -> s{_baresCode = a})
-
--- | Error message for this status, if any.
-baresMessage :: Lens' BatchAnnotationsResponseEntryStatus (Maybe Text)
-baresMessage
-  = lens _baresMessage (\ s a -> s{_baresMessage = a})
-
-instance FromJSON BatchAnnotationsResponseEntryStatus
-         where
-        parseJSON
-          = withObject "BatchAnnotationsResponseEntryStatus"
-              (\ o ->
-                 BatchAnnotationsResponseEntryStatus <$>
-                   (o .:? "code") <*> (o .:? "message"))
-
-instance ToJSON BatchAnnotationsResponseEntryStatus
-         where
-        toJSON BatchAnnotationsResponseEntryStatus{..}
-          = object
-              (catMaybes
-                 [("code" .=) <$> _baresCode,
-                  ("message" .=) <$> _baresMessage])
 
 -- | A reference is a canonical assembled DNA sequence, intended to act as a
 -- reference coordinate space for other genomic annotations. A single
@@ -2235,7 +1753,7 @@ refLength
   = lens _refLength (\ s a -> s{_refLength = a})
 
 -- | All known corresponding accession IDs in INSDC (GenBank\/ENA\/DDBJ)
--- ideally with a version number, for example GCF_000001405.26.
+-- ideally with a version number, for example \`GCF_000001405.26\`.
 refSourceAccessions :: Lens' Reference [Text]
 refSourceAccessions
   = lens _refSourceAccessions
@@ -2251,7 +1769,7 @@ refMD5checksum
   = lens _refMD5checksum
       (\ s a -> s{_refMD5checksum = a})
 
--- | The name of this reference, for example 22.
+-- | The name of this reference, for example \`22\`.
 refName :: Lens' Reference (Maybe Text)
 refName = lens _refName (\ s a -> s{_refName = a})
 
@@ -2262,7 +1780,7 @@ refNcbiTaxonId
   = lens _refNcbiTaxonId
       (\ s a -> s{_refNcbiTaxonId = a})
 
--- | The Google generated immutable ID of the reference.
+-- | The server-generated reference ID, unique across all references.
 refId :: Lens' Reference (Maybe Text)
 refId = lens _refId (\ s a -> s{_refId = a})
 
@@ -2283,7 +1801,7 @@ instance FromJSON Reference where
                      <*> (o .:? "name")
                      <*> (o .:? "ncbiTaxonId")
                      <*> (o .:? "id")
-                     <*> (o .:? "sourceURI"))
+                     <*> (o .:? "sourceUri"))
 
 instance ToJSON Reference where
         toJSON Reference{..}
@@ -2295,46 +1813,32 @@ instance ToJSON Reference where
                   ("name" .=) <$> _refName,
                   ("ncbiTaxonId" .=) <$> _refNcbiTaxonId,
                   ("id" .=) <$> _refId,
-                  ("sourceURI" .=) <$> _refSourceURI])
+                  ("sourceUri" .=) <$> _refSourceURI])
 
+-- | A map of additional variant call information. This must be of the form
+-- map (string key mapping to a list of string values).
 --
--- /See:/ 'batchAnnotationsResponse' smart constructor.
-newtype BatchAnnotationsResponse = BatchAnnotationsResponse
-    { _barEntries :: Maybe [BatchAnnotationsResponseEntry]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'variantCallInfo' smart constructor.
+data VariantCallInfo =
+    VariantCallInfo
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BatchAnnotationsResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'VariantCallInfo' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'barEntries'
-batchAnnotationsResponse
-    :: BatchAnnotationsResponse
-batchAnnotationsResponse =
-    BatchAnnotationsResponse
-    { _barEntries = Nothing
-    }
+variantCallInfo
+    :: VariantCallInfo
+variantCallInfo = VariantCallInfo
 
--- | The resulting per-annotation entries, ordered consistently with the
--- original request.
-barEntries :: Lens' BatchAnnotationsResponse [BatchAnnotationsResponseEntry]
-barEntries
-  = lens _barEntries (\ s a -> s{_barEntries = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON BatchAnnotationsResponse where
+instance FromJSON VariantCallInfo where
         parseJSON
-          = withObject "BatchAnnotationsResponse"
-              (\ o ->
-                 BatchAnnotationsResponse <$>
-                   (o .:? "entries" .!= mempty))
+          = withObject "VariantCallInfo"
+              (\ o -> pure VariantCallInfo)
 
-instance ToJSON BatchAnnotationsResponse where
-        toJSON BatchAnnotationsResponse{..}
-          = object (catMaybes [("entries" .=) <$> _barEntries])
+instance ToJSON VariantCallInfo where
+        toJSON = const emptyObject
 
--- | A string which maps to an array of values.
+-- | A map of additional read group information. This must be of the form map
+-- (string key mapping to a list of string values).
 --
 -- /See:/ 'readGroupInfo' smart constructor.
 data ReadGroupInfo =
@@ -2355,108 +1859,25 @@ instance FromJSON ReadGroupInfo where
 instance ToJSON ReadGroupInfo where
         toJSON = const emptyObject
 
--- | The jobs search request.
 --
--- /See:/ 'searchJobsRequest' smart constructor.
-data SearchJobsRequest = SearchJobsRequest
-    { _sjrCreatedAfter  :: !(Maybe Int64)
-    , _sjrStatus        :: !(Maybe [SearchJobsRequestStatusItem])
-    , _sjrProjectNumber :: !(Maybe Int64)
-    , _sjrPageToken     :: !(Maybe Text)
-    , _sjrPageSize      :: !(Maybe Int32)
-    , _sjrCreatedBefore :: !(Maybe Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'statusDetailsItem' smart constructor.
+data StatusDetailsItem =
+    StatusDetailsItem
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SearchJobsRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sjrCreatedAfter'
---
--- * 'sjrStatus'
---
--- * 'sjrProjectNumber'
---
--- * 'sjrPageToken'
---
--- * 'sjrPageSize'
---
--- * 'sjrCreatedBefore'
-searchJobsRequest
-    :: SearchJobsRequest
-searchJobsRequest =
-    SearchJobsRequest
-    { _sjrCreatedAfter = Nothing
-    , _sjrStatus = Nothing
-    , _sjrProjectNumber = Nothing
-    , _sjrPageToken = Nothing
-    , _sjrPageSize = Nothing
-    , _sjrCreatedBefore = Nothing
-    }
+statusDetailsItem
+    :: StatusDetailsItem
+statusDetailsItem = StatusDetailsItem
 
--- | If specified, only jobs created on or after this date, given in
--- milliseconds since Unix epoch, will be returned.
-sjrCreatedAfter :: Lens' SearchJobsRequest (Maybe Int64)
-sjrCreatedAfter
-  = lens _sjrCreatedAfter
-      (\ s a -> s{_sjrCreatedAfter = a})
-
--- | Only return jobs which have a matching status.
-sjrStatus :: Lens' SearchJobsRequest [SearchJobsRequestStatusItem]
-sjrStatus
-  = lens _sjrStatus (\ s a -> s{_sjrStatus = a}) .
-      _Default
-      . _Coerce
-
--- | Required. Only return jobs which belong to this Google Developers
--- Console project.
-sjrProjectNumber :: Lens' SearchJobsRequest (Maybe Int64)
-sjrProjectNumber
-  = lens _sjrProjectNumber
-      (\ s a -> s{_sjrProjectNumber = a})
-
--- | The continuation token which is used to page through large result sets.
--- To get the next page of results, set this parameter to the value of the
--- nextPageToken from the previous response.
-sjrPageToken :: Lens' SearchJobsRequest (Maybe Text)
-sjrPageToken
-  = lens _sjrPageToken (\ s a -> s{_sjrPageToken = a})
-
--- | Specifies the number of results to return in a single page. Defaults to
--- 128. The maximum value is 256.
-sjrPageSize :: Lens' SearchJobsRequest (Maybe Int32)
-sjrPageSize
-  = lens _sjrPageSize (\ s a -> s{_sjrPageSize = a})
-
--- | If specified, only jobs created prior to this date, given in
--- milliseconds since Unix epoch, will be returned.
-sjrCreatedBefore :: Lens' SearchJobsRequest (Maybe Int64)
-sjrCreatedBefore
-  = lens _sjrCreatedBefore
-      (\ s a -> s{_sjrCreatedBefore = a})
-
-instance FromJSON SearchJobsRequest where
+instance FromJSON StatusDetailsItem where
         parseJSON
-          = withObject "SearchJobsRequest"
-              (\ o ->
-                 SearchJobsRequest <$>
-                   (o .:? "createdAfter") <*>
-                     (o .:? "status" .!= mempty)
-                     <*> (o .:? "projectNumber")
-                     <*> (o .:? "pageToken")
-                     <*> (o .:? "pageSize")
-                     <*> (o .:? "createdBefore"))
+          = withObject "StatusDetailsItem"
+              (\ o -> pure StatusDetailsItem)
 
-instance ToJSON SearchJobsRequest where
-        toJSON SearchJobsRequest{..}
-          = object
-              (catMaybes
-                 [("createdAfter" .=) <$> _sjrCreatedAfter,
-                  ("status" .=) <$> _sjrStatus,
-                  ("projectNumber" .=) <$> _sjrProjectNumber,
-                  ("pageToken" .=) <$> _sjrPageToken,
-                  ("pageSize" .=) <$> _sjrPageSize,
-                  ("createdBefore" .=) <$> _sjrCreatedBefore])
+instance ToJSON StatusDetailsItem where
+        toJSON = const emptyObject
 
 -- | The call set search response.
 --
@@ -2512,180 +1933,41 @@ instance ToJSON SearchCallSetsResponse where
                  [("nextPageToken" .=) <$> _scsrNextPageToken,
                   ("callSets" .=) <$> _scsrCallSets])
 
--- | The job creation request.
+-- | Request message for \`SetIamPolicy\` method.
 --
--- /See:/ 'experimentalCreateJobRequest' smart constructor.
-data ExperimentalCreateJobRequest = ExperimentalCreateJobRequest
-    { _ecjrGcsOutputPath    :: !(Maybe Text)
-    , _ecjrProjectNumber    :: !(Maybe Int64)
-    , _ecjrAlign            :: !(Maybe Bool)
-    , _ecjrSourceURIs       :: !(Maybe [Text])
-    , _ecjrPairedSourceURIs :: !(Maybe [Text])
-    , _ecjrCallVariants     :: !(Maybe Bool)
+-- /See:/ 'setIAMPolicyRequest' smart constructor.
+newtype SetIAMPolicyRequest = SetIAMPolicyRequest
+    { _siprPolicy :: Maybe Policy
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ExperimentalCreateJobRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ecjrGcsOutputPath'
---
--- * 'ecjrProjectNumber'
---
--- * 'ecjrAlign'
---
--- * 'ecjrSourceURIs'
---
--- * 'ecjrPairedSourceURIs'
---
--- * 'ecjrCallVariants'
-experimentalCreateJobRequest
-    :: ExperimentalCreateJobRequest
-experimentalCreateJobRequest =
-    ExperimentalCreateJobRequest
-    { _ecjrGcsOutputPath = Nothing
-    , _ecjrProjectNumber = Nothing
-    , _ecjrAlign = Nothing
-    , _ecjrSourceURIs = Nothing
-    , _ecjrPairedSourceURIs = Nothing
-    , _ecjrCallVariants = Nothing
+-- * 'siprPolicy'
+setIAMPolicyRequest
+    :: SetIAMPolicyRequest
+setIAMPolicyRequest =
+    SetIAMPolicyRequest
+    { _siprPolicy = Nothing
     }
 
--- | Specifies where to copy the results of certain pipelines. This should be
--- in the form of gs:\/\/bucket\/path.
-ecjrGcsOutputPath :: Lens' ExperimentalCreateJobRequest (Maybe Text)
-ecjrGcsOutputPath
-  = lens _ecjrGcsOutputPath
-      (\ s a -> s{_ecjrGcsOutputPath = a})
+-- | REQUIRED: The complete policy to be applied to the \`resource\`. The
+-- size of the policy is limited to a few 10s of KB. An empty policy is a
+-- valid policy but certain Cloud Platform services (such as Projects)
+-- might reject them.
+siprPolicy :: Lens' SetIAMPolicyRequest (Maybe Policy)
+siprPolicy
+  = lens _siprPolicy (\ s a -> s{_siprPolicy = a})
 
--- | Required. The Google Cloud Project ID with which to associate the
--- request.
-ecjrProjectNumber :: Lens' ExperimentalCreateJobRequest (Maybe Int64)
-ecjrProjectNumber
-  = lens _ecjrProjectNumber
-      (\ s a -> s{_ecjrProjectNumber = a})
-
--- | Specifies whether or not to run the alignment pipeline. Either align or
--- callVariants must be set.
-ecjrAlign :: Lens' ExperimentalCreateJobRequest (Maybe Bool)
-ecjrAlign
-  = lens _ecjrAlign (\ s a -> s{_ecjrAlign = a})
-
--- | A list of Google Cloud Storage URIs of data files to operate upon. These
--- can be .bam, interleaved .fastq, or paired .fastq. If specifying paired
--- .fastq files, the first of each pair of files should be listed here, and
--- the second of each pair should be listed in pairedSourceUris.
-ecjrSourceURIs :: Lens' ExperimentalCreateJobRequest [Text]
-ecjrSourceURIs
-  = lens _ecjrSourceURIs
-      (\ s a -> s{_ecjrSourceURIs = a})
-      . _Default
-      . _Coerce
-
--- | A list of Google Cloud Storage URIs of paired end .fastq files to
--- operate upon. If specified, this represents the second file of each
--- paired .fastq file. The first file of each pair should be specified in
--- sourceUris.
-ecjrPairedSourceURIs :: Lens' ExperimentalCreateJobRequest [Text]
-ecjrPairedSourceURIs
-  = lens _ecjrPairedSourceURIs
-      (\ s a -> s{_ecjrPairedSourceURIs = a})
-      . _Default
-      . _Coerce
-
--- | Specifies whether or not to run the variant calling pipeline. Either
--- align or callVariants must be set.
-ecjrCallVariants :: Lens' ExperimentalCreateJobRequest (Maybe Bool)
-ecjrCallVariants
-  = lens _ecjrCallVariants
-      (\ s a -> s{_ecjrCallVariants = a})
-
-instance FromJSON ExperimentalCreateJobRequest where
+instance FromJSON SetIAMPolicyRequest where
         parseJSON
-          = withObject "ExperimentalCreateJobRequest"
-              (\ o ->
-                 ExperimentalCreateJobRequest <$>
-                   (o .:? "gcsOutputPath") <*> (o .:? "projectNumber")
-                     <*> (o .:? "align")
-                     <*> (o .:? "sourceUris" .!= mempty)
-                     <*> (o .:? "pairedSourceUris" .!= mempty)
-                     <*> (o .:? "callVariants"))
+          = withObject "SetIAMPolicyRequest"
+              (\ o -> SetIAMPolicyRequest <$> (o .:? "policy"))
 
-instance ToJSON ExperimentalCreateJobRequest where
-        toJSON ExperimentalCreateJobRequest{..}
-          = object
-              (catMaybes
-                 [("gcsOutputPath" .=) <$> _ecjrGcsOutputPath,
-                  ("projectNumber" .=) <$> _ecjrProjectNumber,
-                  ("align" .=) <$> _ecjrAlign,
-                  ("sourceUris" .=) <$> _ecjrSourceURIs,
-                  ("pairedSourceUris" .=) <$> _ecjrPairedSourceURIs,
-                  ("callVariants" .=) <$> _ecjrCallVariants])
-
--- | A summary representation of the service request that spawned the job.
---
--- /See:/ 'jobRequest' smart constructor.
-data JobRequest = JobRequest
-    { _jrDestination :: !(Maybe [Text])
-    , _jrSource      :: !(Maybe [Text])
-    , _jrType        :: !(Maybe JobRequestType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'JobRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'jrDestination'
---
--- * 'jrSource'
---
--- * 'jrType'
-jobRequest
-    :: JobRequest
-jobRequest =
-    JobRequest
-    { _jrDestination = Nothing
-    , _jrSource = Nothing
-    , _jrType = Nothing
-    }
-
--- | The data destination of the request, for example, a Google BigQuery
--- Table or Dataset ID.
-jrDestination :: Lens' JobRequest [Text]
-jrDestination
-  = lens _jrDestination
-      (\ s a -> s{_jrDestination = a})
-      . _Default
-      . _Coerce
-
--- | The data source of the request, for example, a Google Cloud Storage
--- object path or Readset ID.
-jrSource :: Lens' JobRequest [Text]
-jrSource
-  = lens _jrSource (\ s a -> s{_jrSource = a}) .
-      _Default
-      . _Coerce
-
--- | The original request type.
-jrType :: Lens' JobRequest (Maybe JobRequestType)
-jrType = lens _jrType (\ s a -> s{_jrType = a})
-
-instance FromJSON JobRequest where
-        parseJSON
-          = withObject "JobRequest"
-              (\ o ->
-                 JobRequest <$>
-                   (o .:? "destination" .!= mempty) <*>
-                     (o .:? "source" .!= mempty)
-                     <*> (o .:? "type"))
-
-instance ToJSON JobRequest where
-        toJSON JobRequest{..}
-          = object
-              (catMaybes
-                 [("destination" .=) <$> _jrDestination,
-                  ("source" .=) <$> _jrSource,
-                  ("type" .=) <$> _jrType])
+instance ToJSON SetIAMPolicyRequest where
+        toJSON SetIAMPolicyRequest{..}
+          = object (catMaybes [("policy" .=) <$> _siprPolicy])
 
 -- | The read search request.
 --
@@ -2731,13 +2013,13 @@ searchReadsRequest =
     }
 
 -- | The start position of the range on the reference, 0-based inclusive. If
--- specified, referenceName must also be specified.
+-- specified, \`referenceName\` must also be specified.
 srrStart :: Lens' SearchReadsRequest (Maybe Int64)
 srrStart = lens _srrStart (\ s a -> s{_srrStart = a})
 
 -- | The IDs of the read groups within which to search for reads. All
 -- specified read groups must belong to the same read group sets. Must
--- specify one of readGroupSetIds or readGroupIds.
+-- specify one of \`readGroupSetIds\` or \`readGroupIds\`.
 srrReadGroupIds :: Lens' SearchReadsRequest [Text]
 srrReadGroupIds
   = lens _srrReadGroupIds
@@ -2745,21 +2027,21 @@ srrReadGroupIds
       . _Default
       . _Coerce
 
--- | The reference sequence name, for example chr1, 1, or chrX. If set to *,
--- only unmapped reads are returned.
+-- | The reference sequence name, for example \`chr1\`, \`1\`, or \`chrX\`.
+-- If set to *, only unmapped reads are returned.
 srrReferenceName :: Lens' SearchReadsRequest (Maybe Text)
 srrReferenceName
   = lens _srrReferenceName
       (\ s a -> s{_srrReferenceName = a})
 
 -- | The end position of the range on the reference, 0-based exclusive. If
--- specified, referenceName must also be specified.
+-- specified, \`referenceName\` must also be specified.
 srrEnd :: Lens' SearchReadsRequest (Maybe Int64)
 srrEnd = lens _srrEnd (\ s a -> s{_srrEnd = a})
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
--- nextPageToken from the previous response.
+-- \`nextPageToken\` from the previous response.
 srrPageToken :: Lens' SearchReadsRequest (Maybe Text)
 srrPageToken
   = lens _srrPageToken (\ s a -> s{_srrPageToken = a})
@@ -2773,7 +2055,7 @@ srrPageSize
 -- | The IDs of the read groups sets within which to search for reads. All
 -- specified read group sets must be aligned against a common set of
 -- reference sequences; this defines the genomic coordinates for the query.
--- Must specify one of readGroupSetIds or readGroupIds.
+-- Must specify one of \`readGroupSetIds\` or \`readGroupIds\`.
 srrReadGroupSetIds :: Lens' SearchReadsRequest [Text]
 srrReadGroupSetIds
   = lens _srrReadGroupSetIds
@@ -2805,7 +2087,32 @@ instance ToJSON SearchReadsRequest where
                   ("pageSize" .=) <$> _srrPageSize,
                   ("readGroupSetIds" .=) <$> _srrReadGroupSetIds])
 
--- | A string which maps to an array of values.
+-- | The original request that started the operation. Note that this will be
+-- in current version of the API. If the operation was started with v1beta2
+-- API and a GetOperation is performed on v1 API, a v1 request will be
+-- returned.
+--
+-- /See:/ 'operationMetadataRequest' smart constructor.
+data OperationMetadataRequest =
+    OperationMetadataRequest
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationMetadataRequest' with the minimum fields required to make a request.
+--
+operationMetadataRequest
+    :: OperationMetadataRequest
+operationMetadataRequest = OperationMetadataRequest
+
+instance FromJSON OperationMetadataRequest where
+        parseJSON
+          = withObject "OperationMetadataRequest"
+              (\ o -> pure OperationMetadataRequest)
+
+instance ToJSON OperationMetadataRequest where
+        toJSON = const emptyObject
+
+-- | A map of additional variant information. This must be of the form map
+-- (string key mapping to a list of string values).
 --
 -- /See:/ 'variantInfo' smart constructor.
 data VariantInfo =
@@ -2824,6 +2131,82 @@ instance FromJSON VariantInfo where
 
 instance ToJSON VariantInfo where
         toJSON = const emptyObject
+
+--
+-- /See:/ 'experiment' smart constructor.
+data Experiment = Experiment
+    { _eInstrumentModel  :: !(Maybe Text)
+    , _ePlatformUnit     :: !(Maybe Text)
+    , _eSequencingCenter :: !(Maybe Text)
+    , _eLibraryId        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Experiment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eInstrumentModel'
+--
+-- * 'ePlatformUnit'
+--
+-- * 'eSequencingCenter'
+--
+-- * 'eLibraryId'
+experiment
+    :: Experiment
+experiment =
+    Experiment
+    { _eInstrumentModel = Nothing
+    , _ePlatformUnit = Nothing
+    , _eSequencingCenter = Nothing
+    , _eLibraryId = Nothing
+    }
+
+-- | The instrument model used as part of this experiment. This maps to
+-- sequencing technology in BAM.
+eInstrumentModel :: Lens' Experiment (Maybe Text)
+eInstrumentModel
+  = lens _eInstrumentModel
+      (\ s a -> s{_eInstrumentModel = a})
+
+-- | The platform unit used as part of this experiment e.g.
+-- flowcell-barcode.lane for Illumina or slide for SOLiD. Corresponds to
+-- the \'RG PU field in the SAM spec.
+ePlatformUnit :: Lens' Experiment (Maybe Text)
+ePlatformUnit
+  = lens _ePlatformUnit
+      (\ s a -> s{_ePlatformUnit = a})
+
+-- | The sequencing center used as part of this experiment.
+eSequencingCenter :: Lens' Experiment (Maybe Text)
+eSequencingCenter
+  = lens _eSequencingCenter
+      (\ s a -> s{_eSequencingCenter = a})
+
+-- | The library used as part of this experiment. Note: This is not an actual
+-- ID within this repository, but rather an identifier for a library which
+-- may be meaningful to some external system.
+eLibraryId :: Lens' Experiment (Maybe Text)
+eLibraryId
+  = lens _eLibraryId (\ s a -> s{_eLibraryId = a})
+
+instance FromJSON Experiment where
+        parseJSON
+          = withObject "Experiment"
+              (\ o ->
+                 Experiment <$>
+                   (o .:? "instrumentModel") <*> (o .:? "platformUnit")
+                     <*> (o .:? "sequencingCenter")
+                     <*> (o .:? "libraryId"))
+
+instance ToJSON Experiment where
+        toJSON Experiment{..}
+          = object
+              (catMaybes
+                 [("instrumentModel" .=) <$> _eInstrumentModel,
+                  ("platformUnit" .=) <$> _ePlatformUnit,
+                  ("sequencingCenter" .=) <$> _eSequencingCenter,
+                  ("libraryId" .=) <$> _eLibraryId])
 
 -- | The search variant sets request.
 --
@@ -2863,7 +2246,7 @@ svsrDatasetIds
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
--- nextPageToken from the previous response.
+-- \`nextPageToken\` from the previous response.
 svsrPageToken :: Lens' SearchVariantSetsRequest (Maybe Text)
 svsrPageToken
   = lens _svsrPageToken
@@ -2890,380 +2273,6 @@ instance ToJSON SearchVariantSetsRequest where
                  [("datasetIds" .=) <$> _svsrDatasetIds,
                   ("pageToken" .=) <$> _svsrPageToken,
                   ("pageSize" .=) <$> _svsrPageSize])
-
---
--- /See:/ 'readGroupProgram' smart constructor.
-data ReadGroupProgram = ReadGroupProgram
-    { _rgpPrevProgramId :: !(Maybe Text)
-    , _rgpName          :: !(Maybe Text)
-    , _rgpVersion       :: !(Maybe Text)
-    , _rgpId            :: !(Maybe Text)
-    , _rgpCommandLine   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ReadGroupProgram' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rgpPrevProgramId'
---
--- * 'rgpName'
---
--- * 'rgpVersion'
---
--- * 'rgpId'
---
--- * 'rgpCommandLine'
-readGroupProgram
-    :: ReadGroupProgram
-readGroupProgram =
-    ReadGroupProgram
-    { _rgpPrevProgramId = Nothing
-    , _rgpName = Nothing
-    , _rgpVersion = Nothing
-    , _rgpId = Nothing
-    , _rgpCommandLine = Nothing
-    }
-
--- | The ID of the program run before this one.
-rgpPrevProgramId :: Lens' ReadGroupProgram (Maybe Text)
-rgpPrevProgramId
-  = lens _rgpPrevProgramId
-      (\ s a -> s{_rgpPrevProgramId = a})
-
--- | The name of the program.
-rgpName :: Lens' ReadGroupProgram (Maybe Text)
-rgpName = lens _rgpName (\ s a -> s{_rgpName = a})
-
--- | The version of the program run.
-rgpVersion :: Lens' ReadGroupProgram (Maybe Text)
-rgpVersion
-  = lens _rgpVersion (\ s a -> s{_rgpVersion = a})
-
--- | The user specified locally unique ID of the program. Used along with
--- prevProgramId to define an ordering between programs.
-rgpId :: Lens' ReadGroupProgram (Maybe Text)
-rgpId = lens _rgpId (\ s a -> s{_rgpId = a})
-
--- | The command line used to run this program.
-rgpCommandLine :: Lens' ReadGroupProgram (Maybe Text)
-rgpCommandLine
-  = lens _rgpCommandLine
-      (\ s a -> s{_rgpCommandLine = a})
-
-instance FromJSON ReadGroupProgram where
-        parseJSON
-          = withObject "ReadGroupProgram"
-              (\ o ->
-                 ReadGroupProgram <$>
-                   (o .:? "prevProgramId") <*> (o .:? "name") <*>
-                     (o .:? "version")
-                     <*> (o .:? "id")
-                     <*> (o .:? "commandLine"))
-
-instance ToJSON ReadGroupProgram where
-        toJSON ReadGroupProgram{..}
-          = object
-              (catMaybes
-                 [("prevProgramId" .=) <$> _rgpPrevProgramId,
-                  ("name" .=) <$> _rgpName,
-                  ("version" .=) <$> _rgpVersion, ("id" .=) <$> _rgpId,
-                  ("commandLine" .=) <$> _rgpCommandLine])
-
--- | Wrapper message for \`int32\`. The JSON representation for
--- \`Int32Value\` is JSON number.
---
--- /See:/ 'int32Value' smart constructor.
-newtype Int32Value = Int32Value
-    { _ivValue :: Maybe Int32
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Int32Value' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ivValue'
-int32Value
-    :: Int32Value
-int32Value =
-    Int32Value
-    { _ivValue = Nothing
-    }
-
--- | The int32 value.
-ivValue :: Lens' Int32Value (Maybe Int32)
-ivValue = lens _ivValue (\ s a -> s{_ivValue = a})
-
-instance FromJSON Int32Value where
-        parseJSON
-          = withObject "Int32Value"
-              (\ o -> Int32Value <$> (o .:? "value"))
-
-instance ToJSON Int32Value where
-        toJSON Int32Value{..}
-          = object (catMaybes [("value" .=) <$> _ivValue])
-
--- | A string which maps to an array of values.
---
--- /See:/ 'annotationInfo' smart constructor.
-data AnnotationInfo =
-    AnnotationInfo
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AnnotationInfo' with the minimum fields required to make a request.
---
-annotationInfo
-    :: AnnotationInfo
-annotationInfo = AnnotationInfo
-
-instance FromJSON AnnotationInfo where
-        parseJSON
-          = withObject "AnnotationInfo"
-              (\ o -> pure AnnotationInfo)
-
-instance ToJSON AnnotationInfo where
-        toJSON = const emptyObject
-
--- | The read group set export request.
---
--- /See:/ 'exportReadGroupSetsRequest' smart constructor.
-data ExportReadGroupSetsRequest = ExportReadGroupSetsRequest
-    { _ergsrReferenceNames  :: !(Maybe [Text])
-    , _ergsrProjectNumber   :: !(Maybe Int64)
-    , _ergsrExportURI       :: !(Maybe Text)
-    , _ergsrReadGroupSetIds :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ExportReadGroupSetsRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ergsrReferenceNames'
---
--- * 'ergsrProjectNumber'
---
--- * 'ergsrExportURI'
---
--- * 'ergsrReadGroupSetIds'
-exportReadGroupSetsRequest
-    :: ExportReadGroupSetsRequest
-exportReadGroupSetsRequest =
-    ExportReadGroupSetsRequest
-    { _ergsrReferenceNames = Nothing
-    , _ergsrProjectNumber = Nothing
-    , _ergsrExportURI = Nothing
-    , _ergsrReadGroupSetIds = Nothing
-    }
-
--- | The reference names to export. If this is not specified, all reference
--- sequences, including unmapped reads, are exported. Use * to export only
--- unmapped reads.
-ergsrReferenceNames :: Lens' ExportReadGroupSetsRequest [Text]
-ergsrReferenceNames
-  = lens _ergsrReferenceNames
-      (\ s a -> s{_ergsrReferenceNames = a})
-      . _Default
-      . _Coerce
-
--- | Required. The Google Developers Console project number that owns this
--- export.
-ergsrProjectNumber :: Lens' ExportReadGroupSetsRequest (Maybe Int64)
-ergsrProjectNumber
-  = lens _ergsrProjectNumber
-      (\ s a -> s{_ergsrProjectNumber = a})
-
--- | Required. A Google Cloud Storage URI for the exported BAM file. The
--- currently authenticated user must have write access to the new file. An
--- error will be returned if the URI already contains data.
-ergsrExportURI :: Lens' ExportReadGroupSetsRequest (Maybe Text)
-ergsrExportURI
-  = lens _ergsrExportURI
-      (\ s a -> s{_ergsrExportURI = a})
-
--- | Required. The IDs of the read group sets to export.
-ergsrReadGroupSetIds :: Lens' ExportReadGroupSetsRequest [Text]
-ergsrReadGroupSetIds
-  = lens _ergsrReadGroupSetIds
-      (\ s a -> s{_ergsrReadGroupSetIds = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ExportReadGroupSetsRequest where
-        parseJSON
-          = withObject "ExportReadGroupSetsRequest"
-              (\ o ->
-                 ExportReadGroupSetsRequest <$>
-                   (o .:? "referenceNames" .!= mempty) <*>
-                     (o .:? "projectNumber")
-                     <*> (o .:? "exportUri")
-                     <*> (o .:? "readGroupSetIds" .!= mempty))
-
-instance ToJSON ExportReadGroupSetsRequest where
-        toJSON ExportReadGroupSetsRequest{..}
-          = object
-              (catMaybes
-                 [("referenceNames" .=) <$> _ergsrReferenceNames,
-                  ("projectNumber" .=) <$> _ergsrProjectNumber,
-                  ("exportUri" .=) <$> _ergsrExportURI,
-                  ("readGroupSetIds" .=) <$> _ergsrReadGroupSetIds])
-
---
--- /See:/ 'searchAnnotationsResponse' smart constructor.
-data SearchAnnotationsResponse = SearchAnnotationsResponse
-    { _sarAnnotations   :: !(Maybe [Annotation])
-    , _sarNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SearchAnnotationsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sarAnnotations'
---
--- * 'sarNextPageToken'
-searchAnnotationsResponse
-    :: SearchAnnotationsResponse
-searchAnnotationsResponse =
-    SearchAnnotationsResponse
-    { _sarAnnotations = Nothing
-    , _sarNextPageToken = Nothing
-    }
-
--- | The matching annotations.
-sarAnnotations :: Lens' SearchAnnotationsResponse [Annotation]
-sarAnnotations
-  = lens _sarAnnotations
-      (\ s a -> s{_sarAnnotations = a})
-      . _Default
-      . _Coerce
-
--- | The continuation token, which is used to page through large result sets.
--- Provide this value in a subsequent request to return the next page of
--- results. This field will be empty if there aren\'t any additional
--- results.
-sarNextPageToken :: Lens' SearchAnnotationsResponse (Maybe Text)
-sarNextPageToken
-  = lens _sarNextPageToken
-      (\ s a -> s{_sarNextPageToken = a})
-
-instance FromJSON SearchAnnotationsResponse where
-        parseJSON
-          = withObject "SearchAnnotationsResponse"
-              (\ o ->
-                 SearchAnnotationsResponse <$>
-                   (o .:? "annotations" .!= mempty) <*>
-                     (o .:? "nextPageToken"))
-
-instance ToJSON SearchAnnotationsResponse where
-        toJSON SearchAnnotationsResponse{..}
-          = object
-              (catMaybes
-                 [("annotations" .=) <$> _sarAnnotations,
-                  ("nextPageToken" .=) <$> _sarNextPageToken])
-
---
--- /See:/ 'searchAnnotationSetsRequest' smart constructor.
-data SearchAnnotationSetsRequest = SearchAnnotationSetsRequest
-    { _sasrReferenceSetId :: !(Maybe Text)
-    , _sasrTypes          :: !(Maybe [SearchAnnotationSetsRequestTypesItem])
-    , _sasrDatasetIds     :: !(Maybe [Text])
-    , _sasrName           :: !(Maybe Text)
-    , _sasrPageToken      :: !(Maybe Text)
-    , _sasrPageSize       :: !(Maybe Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SearchAnnotationSetsRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sasrReferenceSetId'
---
--- * 'sasrTypes'
---
--- * 'sasrDatasetIds'
---
--- * 'sasrName'
---
--- * 'sasrPageToken'
---
--- * 'sasrPageSize'
-searchAnnotationSetsRequest
-    :: SearchAnnotationSetsRequest
-searchAnnotationSetsRequest =
-    SearchAnnotationSetsRequest
-    { _sasrReferenceSetId = Nothing
-    , _sasrTypes = Nothing
-    , _sasrDatasetIds = Nothing
-    , _sasrName = Nothing
-    , _sasrPageToken = Nothing
-    , _sasrPageSize = Nothing
-    }
-
--- | If specified, only annotation sets associated with the given reference
--- set are returned.
-sasrReferenceSetId :: Lens' SearchAnnotationSetsRequest (Maybe Text)
-sasrReferenceSetId
-  = lens _sasrReferenceSetId
-      (\ s a -> s{_sasrReferenceSetId = a})
-
--- | If specified, only annotation sets that have any of these types are
--- returned.
-sasrTypes :: Lens' SearchAnnotationSetsRequest [SearchAnnotationSetsRequestTypesItem]
-sasrTypes
-  = lens _sasrTypes (\ s a -> s{_sasrTypes = a}) .
-      _Default
-      . _Coerce
-
--- | The dataset IDs to search within. Caller must have READ access to these
--- datasets.
-sasrDatasetIds :: Lens' SearchAnnotationSetsRequest [Text]
-sasrDatasetIds
-  = lens _sasrDatasetIds
-      (\ s a -> s{_sasrDatasetIds = a})
-      . _Default
-      . _Coerce
-
--- | Only return annotations sets for which a substring of the name matches
--- this string (case insensitive).
-sasrName :: Lens' SearchAnnotationSetsRequest (Maybe Text)
-sasrName = lens _sasrName (\ s a -> s{_sasrName = a})
-
--- | The continuation token, which is used to page through large result sets.
--- To get the next page of results, set this parameter to the value of
--- nextPageToken from the previous response.
-sasrPageToken :: Lens' SearchAnnotationSetsRequest (Maybe Text)
-sasrPageToken
-  = lens _sasrPageToken
-      (\ s a -> s{_sasrPageToken = a})
-
--- | Specifies number of results to return in a single page. If unspecified,
--- it will default to 128. The maximum value is 1024.
-sasrPageSize :: Lens' SearchAnnotationSetsRequest (Maybe Int32)
-sasrPageSize
-  = lens _sasrPageSize (\ s a -> s{_sasrPageSize = a})
-
-instance FromJSON SearchAnnotationSetsRequest where
-        parseJSON
-          = withObject "SearchAnnotationSetsRequest"
-              (\ o ->
-                 SearchAnnotationSetsRequest <$>
-                   (o .:? "referenceSetId") <*>
-                     (o .:? "types" .!= mempty)
-                     <*> (o .:? "datasetIds" .!= mempty)
-                     <*> (o .:? "name")
-                     <*> (o .:? "pageToken")
-                     <*> (o .:? "pageSize"))
-
-instance ToJSON SearchAnnotationSetsRequest where
-        toJSON SearchAnnotationSetsRequest{..}
-          = object
-              (catMaybes
-                 [("referenceSetId" .=) <$> _sasrReferenceSetId,
-                  ("types" .=) <$> _sasrTypes,
-                  ("datasetIds" .=) <$> _sasrDatasetIds,
-                  ("name" .=) <$> _sasrName,
-                  ("pageToken" .=) <$> _sasrPageToken,
-                  ("pageSize" .=) <$> _sasrPageSize])
 
 -- | The variant search response.
 --
@@ -3319,40 +2328,6 @@ instance ToJSON SearchVariantsResponse where
                  [("variants" .=) <$> _svrVariants,
                   ("nextPageToken" .=) <$> _svrNextPageToken])
 
--- | The job creation response.
---
--- /See:/ 'experimentalCreateJobResponse' smart constructor.
-newtype ExperimentalCreateJobResponse = ExperimentalCreateJobResponse
-    { _ecjrJobId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ExperimentalCreateJobResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ecjrJobId'
-experimentalCreateJobResponse
-    :: ExperimentalCreateJobResponse
-experimentalCreateJobResponse =
-    ExperimentalCreateJobResponse
-    { _ecjrJobId = Nothing
-    }
-
--- | A job ID that can be used to get status information.
-ecjrJobId :: Lens' ExperimentalCreateJobResponse (Maybe Text)
-ecjrJobId
-  = lens _ecjrJobId (\ s a -> s{_ecjrJobId = a})
-
-instance FromJSON ExperimentalCreateJobResponse where
-        parseJSON
-          = withObject "ExperimentalCreateJobResponse"
-              (\ o ->
-                 ExperimentalCreateJobResponse <$> (o .:? "jobId"))
-
-instance ToJSON ExperimentalCreateJobResponse where
-        toJSON ExperimentalCreateJobResponse{..}
-          = object (catMaybes [("jobId" .=) <$> _ecjrJobId])
-
 -- | The call set search request.
 --
 -- /See:/ 'searchCallSetsRequest' smart constructor.
@@ -3391,7 +2366,7 @@ scsrName = lens _scsrName (\ s a -> s{_scsrName = a})
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
--- nextPageToken from the previous response.
+-- \`nextPageToken\` from the previous response.
 scsrPageToken :: Lens' SearchCallSetsRequest (Maybe Text)
 scsrPageToken
   = lens _scsrPageToken
@@ -3487,83 +2462,83 @@ instance ToJSON SearchReadsResponse where
                  [("nextPageToken" .=) <$> _sNextPageToken,
                   ("alignments" .=) <$> _sAlignments])
 
--- | Describes a paired-end FASTQ file source for alignment.
 --
--- /See:/ 'pairedFastqSource' smart constructor.
-data PairedFastqSource = PairedFastqSource
-    { _pfsFirstSourceURIs  :: !(Maybe [Text])
-    , _pfsMetadata         :: !(Maybe FastqMetadata)
-    , _pfsSecondSourceURIs :: !(Maybe [Text])
+-- /See:/ 'program' smart constructor.
+data Program = Program
+    { _pPrevProgramId :: !(Maybe Text)
+    , _pName          :: !(Maybe Text)
+    , _pVersion       :: !(Maybe Text)
+    , _pId            :: !(Maybe Text)
+    , _pCommandLine   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PairedFastqSource' with the minimum fields required to make a request.
+-- | Creates a value of 'Program' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pfsFirstSourceURIs'
+-- * 'pPrevProgramId'
 --
--- * 'pfsMetadata'
+-- * 'pName'
 --
--- * 'pfsSecondSourceURIs'
-pairedFastqSource
-    :: PairedFastqSource
-pairedFastqSource =
-    PairedFastqSource
-    { _pfsFirstSourceURIs = Nothing
-    , _pfsMetadata = Nothing
-    , _pfsSecondSourceURIs = Nothing
+-- * 'pVersion'
+--
+-- * 'pId'
+--
+-- * 'pCommandLine'
+program
+    :: Program
+program =
+    Program
+    { _pPrevProgramId = Nothing
+    , _pName = Nothing
+    , _pVersion = Nothing
+    , _pId = Nothing
+    , _pCommandLine = Nothing
     }
 
--- | A list of URIs pointing at paired end FASTQ files in Google Cloud
--- Storage which will be aligned. The first of each paired file should be
--- specified here, in an order that matches the second of each paired file
--- specified in secondSourceUris. For example: firstSourceUris:
--- [file1_1.fq, file2_1.fq], secondSourceUris: [file1_2.fq, file2_2.fq].
--- The caller must have READ permissions for these files.
-pfsFirstSourceURIs :: Lens' PairedFastqSource [Text]
-pfsFirstSourceURIs
-  = lens _pfsFirstSourceURIs
-      (\ s a -> s{_pfsFirstSourceURIs = a})
-      . _Default
-      . _Coerce
+-- | The ID of the program run before this one.
+pPrevProgramId :: Lens' Program (Maybe Text)
+pPrevProgramId
+  = lens _pPrevProgramId
+      (\ s a -> s{_pPrevProgramId = a})
 
--- | Optionally specifies the metadata to be associated with the final
--- aligned read group set.
-pfsMetadata :: Lens' PairedFastqSource (Maybe FastqMetadata)
-pfsMetadata
-  = lens _pfsMetadata (\ s a -> s{_pfsMetadata = a})
+-- | The name of the program.
+pName :: Lens' Program (Maybe Text)
+pName = lens _pName (\ s a -> s{_pName = a})
 
--- | A list of URIs pointing at paired end FASTQ files in Google Cloud
--- Storage which will be aligned. The second of each paired file should be
--- specified here, in an order that matches the first of each paired file
--- specified in firstSourceUris. For example: firstSourceUris: [file1_1.fq,
--- file2_1.fq], secondSourceUris: [file1_2.fq, file2_2.fq]. The caller must
--- have READ permissions for these files.
-pfsSecondSourceURIs :: Lens' PairedFastqSource [Text]
-pfsSecondSourceURIs
-  = lens _pfsSecondSourceURIs
-      (\ s a -> s{_pfsSecondSourceURIs = a})
-      . _Default
-      . _Coerce
+-- | The version of the program run.
+pVersion :: Lens' Program (Maybe Text)
+pVersion = lens _pVersion (\ s a -> s{_pVersion = a})
 
-instance FromJSON PairedFastqSource where
+-- | The user specified locally unique ID of the program. Used along with
+-- \`prevProgramId\` to define an ordering between programs.
+pId :: Lens' Program (Maybe Text)
+pId = lens _pId (\ s a -> s{_pId = a})
+
+-- | The command line used to run this program.
+pCommandLine :: Lens' Program (Maybe Text)
+pCommandLine
+  = lens _pCommandLine (\ s a -> s{_pCommandLine = a})
+
+instance FromJSON Program where
         parseJSON
-          = withObject "PairedFastqSource"
+          = withObject "Program"
               (\ o ->
-                 PairedFastqSource <$>
-                   (o .:? "firstSourceUris" .!= mempty) <*>
-                     (o .:? "metadata")
-                     <*> (o .:? "secondSourceUris" .!= mempty))
+                 Program <$>
+                   (o .:? "prevProgramId") <*> (o .:? "name") <*>
+                     (o .:? "version")
+                     <*> (o .:? "id")
+                     <*> (o .:? "commandLine"))
 
-instance ToJSON PairedFastqSource where
-        toJSON PairedFastqSource{..}
+instance ToJSON Program where
+        toJSON Program{..}
           = object
               (catMaybes
-                 [("firstSourceUris" .=) <$> _pfsFirstSourceURIs,
-                  ("metadata" .=) <$> _pfsMetadata,
-                  ("secondSourceUris" .=) <$> _pfsSecondSourceURIs])
+                 [("prevProgramId" .=) <$> _pPrevProgramId,
+                  ("name" .=) <$> _pName, ("version" .=) <$> _pVersion,
+                  ("id" .=) <$> _pId,
+                  ("commandLine" .=) <$> _pCommandLine])
 
--- |
 --
 -- /See:/ 'searchReferencesRequest' smart constructor.
 data SearchReferencesRequest = SearchReferencesRequest
@@ -3604,8 +2579,8 @@ sReferenceSetId
   = lens _sReferenceSetId
       (\ s a -> s{_sReferenceSetId = a})
 
--- | If present, return references for which the md5checksum matches. See
--- Reference.md5checksum for construction details.
+-- | If present, return references for which the \`md5checksum\` matches. See
+-- \`Reference.md5checksum\` for construction details.
 sMD5checksums :: Lens' SearchReferencesRequest [Text]
 sMD5checksums
   = lens _sMD5checksums
@@ -3614,9 +2589,9 @@ sMD5checksums
       . _Coerce
 
 -- | If present, return references for which the accession matches this
--- string. Best to give a version number, for example GCF_000001405.26. If
--- only the main accession number is given then all records with that main
--- accession will be returned, whichever version. Note that different
+-- string. Best to give a version number, for example \`GCF_000001405.26\`.
+-- If only the main accession number is given then all records with that
+-- main accession will be returned, whichever version. Note that different
 -- versions will have different sequences.
 sAccessions :: Lens' SearchReferencesRequest [Text]
 sAccessions
@@ -3626,7 +2601,7 @@ sAccessions
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
--- nextPageToken from the previous response.
+-- \`nextPageToken\` from the previous response.
 sPageToken :: Lens' SearchReferencesRequest (Maybe Text)
 sPageToken
   = lens _sPageToken (\ s a -> s{_sPageToken = a})
@@ -3711,7 +2686,7 @@ instance ToJSON SearchReferenceSetsResponse where
                  [("nextPageToken" .=) <$> _srsrNextPageToken,
                   ("referenceSets" .=) <$> _srsrReferenceSets])
 
--- | A 0-based half-open genomic coordinate range over a reference sequence.
+-- | A 0-based half-open genomic coordinate range for search requests.
 --
 -- /See:/ 'range' smart constructor.
 data Range = Range
@@ -3738,19 +2713,17 @@ range =
     , _rEnd = Nothing
     }
 
--- | The start position of the range on the reference, 0-based inclusive. If
--- specified, referenceName must also be specified.
+-- | The start position of the range on the reference, 0-based inclusive.
 rStart :: Lens' Range (Maybe Int64)
 rStart = lens _rStart (\ s a -> s{_rStart = a})
 
--- | The reference sequence name, for example chr1, 1, or chrX.
+-- | The reference sequence name, for example \`chr1\`, \`1\`, or \`chrX\`.
 rReferenceName :: Lens' Range (Maybe Text)
 rReferenceName
   = lens _rReferenceName
       (\ s a -> s{_rReferenceName = a})
 
--- | The end position of the range on the reference, 0-based exclusive. If
--- specified, referenceName must also be specified.
+-- | The end position of the range on the reference, 0-based exclusive.
 rEnd :: Lens' Range (Maybe Int64)
 rEnd = lens _rEnd (\ s a -> s{_rEnd = a})
 
@@ -3773,8 +2746,8 @@ instance ToJSON Range where
 -- | A read group set is a logical collection of read groups, which are
 -- collections of reads produced by a sequencer. A read group set typically
 -- models reads corresponding to one sample, sequenced one way, and aligned
--- one way. - A read group set belongs to one dataset. - A read group
--- belongs to one read group set. - A read belongs to one read group.
+-- one way. * A read group set belongs to one dataset. * A read group
+-- belongs to one read group set. * A read belongs to one read group.
 --
 -- /See:/ 'readGroupSet' smart constructor.
 data ReadGroupSet = ReadGroupSet
@@ -3833,11 +2806,11 @@ rgsDatasetId :: Lens' ReadGroupSet (Maybe Text)
 rgsDatasetId
   = lens _rgsDatasetId (\ s a -> s{_rgsDatasetId = a})
 
--- | The read group set ID.
+-- | The server-generated read group set ID, unique for all read group sets.
 rgsId :: Lens' ReadGroupSet (Maybe Text)
 rgsId = lens _rgsId (\ s a -> s{_rgsId = a})
 
--- | A string which maps to an array of values.
+-- | A map of additional read group set information.
 rgsInfo :: Lens' ReadGroupSet (Maybe ReadGroupSetInfo)
 rgsInfo = lens _rgsInfo (\ s a -> s{_rgsInfo = a})
 
@@ -3879,232 +2852,113 @@ instance ToJSON ReadGroupSet where
                   ("readGroups" .=) <$> _rgsReadGroups,
                   ("filename" .=) <$> _rgsFilename])
 
--- | A Job represents an ongoing process that can be monitored for status
--- information.
+-- | The read group set export request.
 --
--- /See:/ 'job' smart constructor.
-data Job = Job
-    { _jDetailedStatus :: !(Maybe Text)
-    , _jStatus         :: !(Maybe JobStatus)
-    , _jCreated        :: !(Maybe Int64)
-    , _jProjectNumber  :: !(Maybe Int64)
-    , _jWarnings       :: !(Maybe [Text])
-    , _jImportedIds    :: !(Maybe [Text])
-    , _jId             :: !(Maybe Text)
-    , _jErrors         :: !(Maybe [Text])
-    , _jRequest        :: !(Maybe JobRequest)
+-- /See:/ 'exportReadGroupSetRequest' smart constructor.
+data ExportReadGroupSetRequest = ExportReadGroupSetRequest
+    { _ergsrReferenceNames :: !(Maybe [Text])
+    , _ergsrExportURI      :: !(Maybe Text)
+    , _ergsrProjectId      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Job' with the minimum fields required to make a request.
+-- | Creates a value of 'ExportReadGroupSetRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'jDetailedStatus'
+-- * 'ergsrReferenceNames'
 --
--- * 'jStatus'
+-- * 'ergsrExportURI'
 --
--- * 'jCreated'
---
--- * 'jProjectNumber'
---
--- * 'jWarnings'
---
--- * 'jImportedIds'
---
--- * 'jId'
---
--- * 'jErrors'
---
--- * 'jRequest'
-job
-    :: Job
-job =
-    Job
-    { _jDetailedStatus = Nothing
-    , _jStatus = Nothing
-    , _jCreated = Nothing
-    , _jProjectNumber = Nothing
-    , _jWarnings = Nothing
-    , _jImportedIds = Nothing
-    , _jId = Nothing
-    , _jErrors = Nothing
-    , _jRequest = Nothing
+-- * 'ergsrProjectId'
+exportReadGroupSetRequest
+    :: ExportReadGroupSetRequest
+exportReadGroupSetRequest =
+    ExportReadGroupSetRequest
+    { _ergsrReferenceNames = Nothing
+    , _ergsrExportURI = Nothing
+    , _ergsrProjectId = Nothing
     }
 
--- | A more detailed description of this job\'s current status.
-jDetailedStatus :: Lens' Job (Maybe Text)
-jDetailedStatus
-  = lens _jDetailedStatus
-      (\ s a -> s{_jDetailedStatus = a})
-
--- | The status of this job.
-jStatus :: Lens' Job (Maybe JobStatus)
-jStatus = lens _jStatus (\ s a -> s{_jStatus = a})
-
--- | The date this job was created, in milliseconds from the epoch.
-jCreated :: Lens' Job (Maybe Int64)
-jCreated = lens _jCreated (\ s a -> s{_jCreated = a})
-
--- | The Google Developers Console project number to which this job belongs.
-jProjectNumber :: Lens' Job (Maybe Int64)
-jProjectNumber
-  = lens _jProjectNumber
-      (\ s a -> s{_jProjectNumber = a})
-
--- | Any warnings that occurred during processing.
-jWarnings :: Lens' Job [Text]
-jWarnings
-  = lens _jWarnings (\ s a -> s{_jWarnings = a}) .
-      _Default
-      . _Coerce
-
--- | If this Job represents an import, this field will contain the IDs of the
--- objects that were successfully imported.
-jImportedIds :: Lens' Job [Text]
-jImportedIds
-  = lens _jImportedIds (\ s a -> s{_jImportedIds = a})
+-- | The reference names to export. If this is not specified, all reference
+-- sequences, including unmapped reads, are exported. Use \`*\` to export
+-- only unmapped reads.
+ergsrReferenceNames :: Lens' ExportReadGroupSetRequest [Text]
+ergsrReferenceNames
+  = lens _ergsrReferenceNames
+      (\ s a -> s{_ergsrReferenceNames = a})
       . _Default
       . _Coerce
 
--- | The job ID.
-jId :: Lens' Job (Maybe Text)
-jId = lens _jId (\ s a -> s{_jId = a})
+-- | Required. A Google Cloud Storage URI for the exported BAM file. The
+-- currently authenticated user must have write access to the new file. An
+-- error will be returned if the URI already contains data.
+ergsrExportURI :: Lens' ExportReadGroupSetRequest (Maybe Text)
+ergsrExportURI
+  = lens _ergsrExportURI
+      (\ s a -> s{_ergsrExportURI = a})
 
--- | Any errors that occurred during processing.
-jErrors :: Lens' Job [Text]
-jErrors
-  = lens _jErrors (\ s a -> s{_jErrors = a}) . _Default
-      . _Coerce
+-- | Required. The Google Developers Console project ID that owns this
+-- export.
+ergsrProjectId :: Lens' ExportReadGroupSetRequest (Maybe Text)
+ergsrProjectId
+  = lens _ergsrProjectId
+      (\ s a -> s{_ergsrProjectId = a})
 
--- | A summarized representation of the original service request.
-jRequest :: Lens' Job (Maybe JobRequest)
-jRequest = lens _jRequest (\ s a -> s{_jRequest = a})
-
-instance FromJSON Job where
+instance FromJSON ExportReadGroupSetRequest where
         parseJSON
-          = withObject "Job"
+          = withObject "ExportReadGroupSetRequest"
               (\ o ->
-                 Job <$>
-                   (o .:? "detailedStatus") <*> (o .:? "status") <*>
-                     (o .:? "created")
-                     <*> (o .:? "projectNumber")
-                     <*> (o .:? "warnings" .!= mempty)
-                     <*> (o .:? "importedIds" .!= mempty)
-                     <*> (o .:? "id")
-                     <*> (o .:? "errors" .!= mempty)
-                     <*> (o .:? "request"))
+                 ExportReadGroupSetRequest <$>
+                   (o .:? "referenceNames" .!= mempty) <*>
+                     (o .:? "exportUri")
+                     <*> (o .:? "projectId"))
 
-instance ToJSON Job where
-        toJSON Job{..}
+instance ToJSON ExportReadGroupSetRequest where
+        toJSON ExportReadGroupSetRequest{..}
           = object
               (catMaybes
-                 [("detailedStatus" .=) <$> _jDetailedStatus,
-                  ("status" .=) <$> _jStatus,
-                  ("created" .=) <$> _jCreated,
-                  ("projectNumber" .=) <$> _jProjectNumber,
-                  ("warnings" .=) <$> _jWarnings,
-                  ("importedIds" .=) <$> _jImportedIds,
-                  ("id" .=) <$> _jId, ("errors" .=) <$> _jErrors,
-                  ("request" .=) <$> _jRequest])
-
--- | The variant data export response.
---
--- /See:/ 'exportVariantSetResponse' smart constructor.
-newtype ExportVariantSetResponse = ExportVariantSetResponse
-    { _evsrJobId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ExportVariantSetResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'evsrJobId'
-exportVariantSetResponse
-    :: ExportVariantSetResponse
-exportVariantSetResponse =
-    ExportVariantSetResponse
-    { _evsrJobId = Nothing
-    }
-
--- | A job ID that can be used to get status information.
-evsrJobId :: Lens' ExportVariantSetResponse (Maybe Text)
-evsrJobId
-  = lens _evsrJobId (\ s a -> s{_evsrJobId = a})
-
-instance FromJSON ExportVariantSetResponse where
-        parseJSON
-          = withObject "ExportVariantSetResponse"
-              (\ o -> ExportVariantSetResponse <$> (o .:? "jobId"))
-
-instance ToJSON ExportVariantSetResponse where
-        toJSON ExportVariantSetResponse{..}
-          = object (catMaybes [("jobId" .=) <$> _evsrJobId])
-
--- | The read group set align response.
---
--- /See:/ 'alignReadGroupSetsResponse' smart constructor.
-newtype AlignReadGroupSetsResponse = AlignReadGroupSetsResponse
-    { _argsrJobId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AlignReadGroupSetsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'argsrJobId'
-alignReadGroupSetsResponse
-    :: AlignReadGroupSetsResponse
-alignReadGroupSetsResponse =
-    AlignReadGroupSetsResponse
-    { _argsrJobId = Nothing
-    }
-
--- | A job ID that can be used to get status information.
-argsrJobId :: Lens' AlignReadGroupSetsResponse (Maybe Text)
-argsrJobId
-  = lens _argsrJobId (\ s a -> s{_argsrJobId = a})
-
-instance FromJSON AlignReadGroupSetsResponse where
-        parseJSON
-          = withObject "AlignReadGroupSetsResponse"
-              (\ o ->
-                 AlignReadGroupSetsResponse <$> (o .:? "jobId"))
-
-instance ToJSON AlignReadGroupSetsResponse where
-        toJSON AlignReadGroupSetsResponse{..}
-          = object (catMaybes [("jobId" .=) <$> _argsrJobId])
+                 [("referenceNames" .=) <$> _ergsrReferenceNames,
+                  ("exportUri" .=) <$> _ergsrExportURI,
+                  ("projectId" .=) <$> _ergsrProjectId])
 
 -- | The variant data import response.
 --
 -- /See:/ 'importVariantsResponse' smart constructor.
 newtype ImportVariantsResponse = ImportVariantsResponse
-    { _ivrJobId :: Maybe Text
+    { _ivrCallSetIds :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImportVariantsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ivrJobId'
+-- * 'ivrCallSetIds'
 importVariantsResponse
     :: ImportVariantsResponse
 importVariantsResponse =
     ImportVariantsResponse
-    { _ivrJobId = Nothing
+    { _ivrCallSetIds = Nothing
     }
 
--- | A job ID that can be used to get status information.
-ivrJobId :: Lens' ImportVariantsResponse (Maybe Text)
-ivrJobId = lens _ivrJobId (\ s a -> s{_ivrJobId = a})
+-- | IDs of the call sets that were created.
+ivrCallSetIds :: Lens' ImportVariantsResponse [Text]
+ivrCallSetIds
+  = lens _ivrCallSetIds
+      (\ s a -> s{_ivrCallSetIds = a})
+      . _Default
+      . _Coerce
 
 instance FromJSON ImportVariantsResponse where
         parseJSON
           = withObject "ImportVariantsResponse"
-              (\ o -> ImportVariantsResponse <$> (o .:? "jobId"))
+              (\ o ->
+                 ImportVariantsResponse <$>
+                   (o .:? "callSetIds" .!= mempty))
 
 instance ToJSON ImportVariantsResponse where
         toJSON ImportVariantsResponse{..}
-          = object (catMaybes [("jobId" .=) <$> _ivrJobId])
+          = object
+              (catMaybes [("callSetIds" .=) <$> _ivrCallSetIds])
 
 --
 -- /See:/ 'listCoverageBucketsResponse' smart constructor.
@@ -4144,7 +2998,7 @@ lcbrNextPageToken
 -- | The length of each coverage bucket in base pairs. Note that buckets at
 -- the end of a reference sequence may be shorter. This value is omitted if
 -- the bucket width is infinity (the default behaviour, with no range or
--- targetBucketWidth).
+-- \`targetBucketWidth\`).
 lcbrBucketWidth :: Lens' ListCoverageBucketsResponse (Maybe Int64)
 lcbrBucketWidth
   = lens _lcbrBucketWidth
@@ -4152,8 +3006,8 @@ lcbrBucketWidth
 
 -- | The coverage buckets. The list of buckets is sparse; a bucket with 0
 -- overlapping reads is not returned. A bucket never crosses more than one
--- reference sequence. Each bucket has width bucketWidth, unless its end is
--- the end of the reference sequence.
+-- reference sequence. Each bucket has width \`bucketWidth\`, unless its
+-- end is the end of the reference sequence.
 lcbrCoverageBuckets :: Lens' ListCoverageBucketsResponse [CoverageBucket]
 lcbrCoverageBuckets
   = lens _lcbrCoverageBuckets
@@ -4177,39 +3031,89 @@ instance ToJSON ListCoverageBucketsResponse where
                   ("bucketWidth" .=) <$> _lcbrBucketWidth,
                   ("coverageBuckets" .=) <$> _lcbrCoverageBuckets])
 
+-- | Request message for \`TestIamPermissions\` method.
+--
+-- /See:/ 'testIAMPermissionsRequest' smart constructor.
+newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest
+    { _tiprPermissions :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tiprPermissions'
+testIAMPermissionsRequest
+    :: TestIAMPermissionsRequest
+testIAMPermissionsRequest =
+    TestIAMPermissionsRequest
+    { _tiprPermissions = Nothing
+    }
+
+-- | REQUIRED: The set of permissions to check for the \'resource\'.
+-- Permissions with wildcards (such as \'*\' or \'storage.*\') are not
+-- allowed. Allowed permissions are: * \`genomics.datasets.create\` *
+-- \`genomics.datasets.delete\` * \`genomics.datasets.get\` *
+-- \`genomics.datasets.list\` * \`genomics.datasets.update\` *
+-- \`genomics.datasets.getIamPolicy\` * \`genomics.datasets.setIamPolicy\`
+tiprPermissions :: Lens' TestIAMPermissionsRequest [Text]
+tiprPermissions
+  = lens _tiprPermissions
+      (\ s a -> s{_tiprPermissions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON TestIAMPermissionsRequest where
+        parseJSON
+          = withObject "TestIAMPermissionsRequest"
+              (\ o ->
+                 TestIAMPermissionsRequest <$>
+                   (o .:? "permissions" .!= mempty))
+
+instance ToJSON TestIAMPermissionsRequest where
+        toJSON TestIAMPermissionsRequest{..}
+          = object
+              (catMaybes [("permissions" .=) <$> _tiprPermissions])
+
 -- | The read group set import response.
 --
 -- /See:/ 'importReadGroupSetsResponse' smart constructor.
 newtype ImportReadGroupSetsResponse = ImportReadGroupSetsResponse
-    { _irgsrJobId :: Maybe Text
+    { _irgsrReadGroupSetIds :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImportReadGroupSetsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'irgsrJobId'
+-- * 'irgsrReadGroupSetIds'
 importReadGroupSetsResponse
     :: ImportReadGroupSetsResponse
 importReadGroupSetsResponse =
     ImportReadGroupSetsResponse
-    { _irgsrJobId = Nothing
+    { _irgsrReadGroupSetIds = Nothing
     }
 
--- | A job ID that can be used to get status information.
-irgsrJobId :: Lens' ImportReadGroupSetsResponse (Maybe Text)
-irgsrJobId
-  = lens _irgsrJobId (\ s a -> s{_irgsrJobId = a})
+-- | IDs of the read group sets that were created.
+irgsrReadGroupSetIds :: Lens' ImportReadGroupSetsResponse [Text]
+irgsrReadGroupSetIds
+  = lens _irgsrReadGroupSetIds
+      (\ s a -> s{_irgsrReadGroupSetIds = a})
+      . _Default
+      . _Coerce
 
 instance FromJSON ImportReadGroupSetsResponse where
         parseJSON
           = withObject "ImportReadGroupSetsResponse"
               (\ o ->
-                 ImportReadGroupSetsResponse <$> (o .:? "jobId"))
+                 ImportReadGroupSetsResponse <$>
+                   (o .:? "readGroupSetIds" .!= mempty))
 
 instance ToJSON ImportReadGroupSetsResponse where
         toJSON ImportReadGroupSetsResponse{..}
-          = object (catMaybes [("jobId" .=) <$> _irgsrJobId])
+          = object
+              (catMaybes
+                 [("readGroupSetIds" .=) <$> _irgsrReadGroupSetIds])
 
 -- | A linear alignment can be represented by one CIGAR string. Describes the
 -- mapped position and local alignment of the read to the reference.
@@ -4275,242 +3179,6 @@ instance ToJSON LinearAlignment where
                   ("mappingQuality" .=) <$> _laMAppingQuality,
                   ("position" .=) <$> _laPosition])
 
--- | Metadata describes a single piece of variant call metadata. These data
--- include a top level key and either a single value string (value) or a
--- list of key-value pairs (info.) Value and info are mutually exclusive.
---
--- /See:/ 'metadata' smart constructor.
-data Metadata = Metadata
-    { _mValue       :: !(Maybe Text)
-    , _mKey         :: !(Maybe Text)
-    , _mId          :: !(Maybe Text)
-    , _mType        :: !(Maybe MetadataType)
-    , _mNumber      :: !(Maybe Text)
-    , _mDescription :: !(Maybe Text)
-    , _mInfo        :: !(Maybe MetadataInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Metadata' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mValue'
---
--- * 'mKey'
---
--- * 'mId'
---
--- * 'mType'
---
--- * 'mNumber'
---
--- * 'mDescription'
---
--- * 'mInfo'
-metadata
-    :: Metadata
-metadata =
-    Metadata
-    { _mValue = Nothing
-    , _mKey = Nothing
-    , _mId = Nothing
-    , _mType = Nothing
-    , _mNumber = Nothing
-    , _mDescription = Nothing
-    , _mInfo = Nothing
-    }
-
--- | The value field for simple metadata
-mValue :: Lens' Metadata (Maybe Text)
-mValue = lens _mValue (\ s a -> s{_mValue = a})
-
--- | The top-level key.
-mKey :: Lens' Metadata (Maybe Text)
-mKey = lens _mKey (\ s a -> s{_mKey = a})
-
--- | User-provided ID field, not enforced by this API. Two or more pieces of
--- structured metadata with identical id and key fields are considered
--- equivalent.
-mId :: Lens' Metadata (Maybe Text)
-mId = lens _mId (\ s a -> s{_mId = a})
-
--- | The type of data. Possible types include: Integer, Float, Flag,
--- Character, and String.
-mType :: Lens' Metadata (Maybe MetadataType)
-mType = lens _mType (\ s a -> s{_mType = a})
-
--- | The number of values that can be included in a field described by this
--- metadata.
-mNumber :: Lens' Metadata (Maybe Text)
-mNumber = lens _mNumber (\ s a -> s{_mNumber = a})
-
--- | A textual description of this metadata.
-mDescription :: Lens' Metadata (Maybe Text)
-mDescription
-  = lens _mDescription (\ s a -> s{_mDescription = a})
-
--- | A string which maps to an array of values.
-mInfo :: Lens' Metadata (Maybe MetadataInfo)
-mInfo = lens _mInfo (\ s a -> s{_mInfo = a})
-
-instance FromJSON Metadata where
-        parseJSON
-          = withObject "Metadata"
-              (\ o ->
-                 Metadata <$>
-                   (o .:? "value") <*> (o .:? "key") <*> (o .:? "id")
-                     <*> (o .:? "type")
-                     <*> (o .:? "number")
-                     <*> (o .:? "description")
-                     <*> (o .:? "info"))
-
-instance ToJSON Metadata where
-        toJSON Metadata{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _mValue, ("key" .=) <$> _mKey,
-                  ("id" .=) <$> _mId, ("type" .=) <$> _mType,
-                  ("number" .=) <$> _mNumber,
-                  ("description" .=) <$> _mDescription,
-                  ("info" .=) <$> _mInfo])
-
--- | The read group set call response.
---
--- /See:/ 'callReadGroupSetsResponse' smart constructor.
-newtype CallReadGroupSetsResponse = CallReadGroupSetsResponse
-    { _crgsrJobId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CallReadGroupSetsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'crgsrJobId'
-callReadGroupSetsResponse
-    :: CallReadGroupSetsResponse
-callReadGroupSetsResponse =
-    CallReadGroupSetsResponse
-    { _crgsrJobId = Nothing
-    }
-
--- | A job ID that can be used to get status information.
-crgsrJobId :: Lens' CallReadGroupSetsResponse (Maybe Text)
-crgsrJobId
-  = lens _crgsrJobId (\ s a -> s{_crgsrJobId = a})
-
-instance FromJSON CallReadGroupSetsResponse where
-        parseJSON
-          = withObject "CallReadGroupSetsResponse"
-              (\ o ->
-                 CallReadGroupSetsResponse <$> (o .:? "jobId"))
-
-instance ToJSON CallReadGroupSetsResponse where
-        toJSON CallReadGroupSetsResponse{..}
-          = object (catMaybes [("jobId" .=) <$> _crgsrJobId])
-
--- | An annotation set is a logical grouping of annotations that share
--- consistent type information and provenance. Examples of annotation sets
--- include \'all genes from refseq\', and \'all variant annotations from
--- ClinVar\'.
---
--- /See:/ 'annotationSet' smart constructor.
-data AnnotationSet = AnnotationSet
-    { _asReferenceSetId :: !(Maybe Text)
-    , _asName           :: !(Maybe Text)
-    , _asDatasetId      :: !(Maybe Text)
-    , _asId             :: !(Maybe Text)
-    , _asType           :: !(Maybe AnnotationSetType)
-    , _asSourceURI      :: !(Maybe Text)
-    , _asInfo           :: !(Maybe AnnotationSetInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AnnotationSet' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'asReferenceSetId'
---
--- * 'asName'
---
--- * 'asDatasetId'
---
--- * 'asId'
---
--- * 'asType'
---
--- * 'asSourceURI'
---
--- * 'asInfo'
-annotationSet
-    :: AnnotationSet
-annotationSet =
-    AnnotationSet
-    { _asReferenceSetId = Nothing
-    , _asName = Nothing
-    , _asDatasetId = Nothing
-    , _asId = Nothing
-    , _asType = Nothing
-    , _asSourceURI = Nothing
-    , _asInfo = Nothing
-    }
-
--- | The ID of the reference set that defines the coordinate space for this
--- set\'s annotations.
-asReferenceSetId :: Lens' AnnotationSet (Maybe Text)
-asReferenceSetId
-  = lens _asReferenceSetId
-      (\ s a -> s{_asReferenceSetId = a})
-
--- | The display name for this annotation set.
-asName :: Lens' AnnotationSet (Maybe Text)
-asName = lens _asName (\ s a -> s{_asName = a})
-
--- | The ID of the containing dataset.
-asDatasetId :: Lens' AnnotationSet (Maybe Text)
-asDatasetId
-  = lens _asDatasetId (\ s a -> s{_asDatasetId = a})
-
--- | The generated unique ID for this annotation set.
-asId :: Lens' AnnotationSet (Maybe Text)
-asId = lens _asId (\ s a -> s{_asId = a})
-
--- | The type of annotations contained within this set.
-asType :: Lens' AnnotationSet (Maybe AnnotationSetType)
-asType = lens _asType (\ s a -> s{_asType = a})
-
--- | The source URI describing the file from which this annotation set was
--- generated, if any.
-asSourceURI :: Lens' AnnotationSet (Maybe Text)
-asSourceURI
-  = lens _asSourceURI (\ s a -> s{_asSourceURI = a})
-
--- | A string which maps to an array of values.
-asInfo :: Lens' AnnotationSet (Maybe AnnotationSetInfo)
-asInfo = lens _asInfo (\ s a -> s{_asInfo = a})
-
-instance FromJSON AnnotationSet where
-        parseJSON
-          = withObject "AnnotationSet"
-              (\ o ->
-                 AnnotationSet <$>
-                   (o .:? "referenceSetId") <*> (o .:? "name") <*>
-                     (o .:? "datasetId")
-                     <*> (o .:? "id")
-                     <*> (o .:? "type")
-                     <*> (o .:? "sourceUri")
-                     <*> (o .:? "info"))
-
-instance ToJSON AnnotationSet where
-        toJSON AnnotationSet{..}
-          = object
-              (catMaybes
-                 [("referenceSetId" .=) <$> _asReferenceSetId,
-                  ("name" .=) <$> _asName,
-                  ("datasetId" .=) <$> _asDatasetId,
-                  ("id" .=) <$> _asId, ("type" .=) <$> _asType,
-                  ("sourceUri" .=) <$> _asSourceURI,
-                  ("info" .=) <$> _asInfo])
-
 -- | A variant set is a collection of call sets and variants. It contains
 -- summary statistics of those contents. A variant set belongs to a
 -- dataset.
@@ -4519,7 +3187,7 @@ instance ToJSON AnnotationSet where
 data VariantSet = VariantSet
     { _vsDatasetId       :: !(Maybe Text)
     , _vsReferenceBounds :: !(Maybe [ReferenceBound])
-    , _vsMetadata        :: !(Maybe [Metadata])
+    , _vsMetadata        :: !(Maybe [VariantSetMetadata])
     , _vsId              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4544,7 +3212,7 @@ variantSet =
     , _vsId = Nothing
     }
 
--- | The dataset to which this variant set belongs. Immutable.
+-- | The dataset to which this variant set belongs.
 vsDatasetId :: Lens' VariantSet (Maybe Text)
 vsDatasetId
   = lens _vsDatasetId (\ s a -> s{_vsDatasetId = a})
@@ -4559,13 +3227,13 @@ vsReferenceBounds
       . _Coerce
 
 -- | The metadata associated with this variant set.
-vsMetadata :: Lens' VariantSet [Metadata]
+vsMetadata :: Lens' VariantSet [VariantSetMetadata]
 vsMetadata
   = lens _vsMetadata (\ s a -> s{_vsMetadata = a}) .
       _Default
       . _Coerce
 
--- | The Google-generated ID of the variant set. Immutable.
+-- | The server-generated variant set ID, unique across all variant sets.
 vsId :: Lens' VariantSet (Maybe Text)
 vsId = lens _vsId (\ s a -> s{_vsId = a})
 
@@ -4587,6 +3255,47 @@ instance ToJSON VariantSet where
                   ("referenceBounds" .=) <$> _vsReferenceBounds,
                   ("metadata" .=) <$> _vsMetadata,
                   ("id" .=) <$> _vsId])
+
+-- | Response message for \`TestIamPermissions\` method.
+--
+-- /See:/ 'testIAMPermissionsResponse' smart constructor.
+newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse
+    { _tiamprPermissions :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tiamprPermissions'
+testIAMPermissionsResponse
+    :: TestIAMPermissionsResponse
+testIAMPermissionsResponse =
+    TestIAMPermissionsResponse
+    { _tiamprPermissions = Nothing
+    }
+
+-- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
+-- allowed.
+tiamprPermissions :: Lens' TestIAMPermissionsResponse [Text]
+tiamprPermissions
+  = lens _tiamprPermissions
+      (\ s a -> s{_tiamprPermissions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON TestIAMPermissionsResponse where
+        parseJSON
+          = withObject "TestIAMPermissionsResponse"
+              (\ o ->
+                 TestIAMPermissionsResponse <$>
+                   (o .:? "permissions" .!= mempty))
+
+instance ToJSON TestIAMPermissionsResponse where
+        toJSON TestIAMPermissionsResponse{..}
+          = object
+              (catMaybes
+                 [("permissions" .=) <$> _tiamprPermissions])
 
 -- | The dataset list response.
 --
@@ -4649,7 +3358,7 @@ data ImportReadGroupSetsRequest = ImportReadGroupSetsRequest
     { _irgsrReferenceSetId    :: !(Maybe Text)
     , _irgsrDatasetId         :: !(Maybe Text)
     , _irgsrSourceURIs        :: !(Maybe [Text])
-    , _irgsrPartitionStrategy :: !(Maybe ImportReadGroupSetsRequestPartitionStrategy)
+    , _irgsrPartitionStrategy :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImportReadGroupSetsRequest' with the minimum fields required to make a request.
@@ -4690,7 +3399,9 @@ irgsrDatasetId
   = lens _irgsrDatasetId
       (\ s a -> s{_irgsrDatasetId = a})
 
--- | A list of URIs pointing at BAM files in Google Cloud Storage.
+-- | A list of URIs pointing at [BAM
+-- files](https:\/\/samtools.github.io\/hts-specs\/SAMv1.pdf) in Google
+-- Cloud Storage.
 irgsrSourceURIs :: Lens' ImportReadGroupSetsRequest [Text]
 irgsrSourceURIs
   = lens _irgsrSourceURIs
@@ -4700,7 +3411,7 @@ irgsrSourceURIs
 
 -- | The partition strategy describes how read groups are partitioned into
 -- read group sets.
-irgsrPartitionStrategy :: Lens' ImportReadGroupSetsRequest (Maybe ImportReadGroupSetsRequestPartitionStrategy)
+irgsrPartitionStrategy :: Lens' ImportReadGroupSetsRequest (Maybe Text)
 irgsrPartitionStrategy
   = lens _irgsrPartitionStrategy
       (\ s a -> s{_irgsrPartitionStrategy = a})
@@ -4728,7 +3439,8 @@ instance ToJSON ImportReadGroupSetsRequest where
 --
 -- /See:/ 'importVariantsRequest' smart constructor.
 data ImportVariantsRequest = ImportVariantsRequest
-    { _ivrFormat                  :: !(Maybe ImportVariantsRequestFormat)
+    { _ivrVariantSetId            :: !(Maybe Text)
+    , _ivrFormat                  :: !(Maybe Text)
     , _ivrNormalizeReferenceNames :: !(Maybe Bool)
     , _ivrSourceURIs              :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4736,6 +3448,8 @@ data ImportVariantsRequest = ImportVariantsRequest
 -- | Creates a value of 'ImportVariantsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ivrVariantSetId'
 --
 -- * 'ivrFormat'
 --
@@ -4746,14 +3460,21 @@ importVariantsRequest
     :: ImportVariantsRequest
 importVariantsRequest =
     ImportVariantsRequest
-    { _ivrFormat = Nothing
+    { _ivrVariantSetId = Nothing
+    , _ivrFormat = Nothing
     , _ivrNormalizeReferenceNames = Nothing
     , _ivrSourceURIs = Nothing
     }
 
+-- | Required. The variant set to which variant data should be imported.
+ivrVariantSetId :: Lens' ImportVariantsRequest (Maybe Text)
+ivrVariantSetId
+  = lens _ivrVariantSetId
+      (\ s a -> s{_ivrVariantSetId = a})
+
 -- | The format of the variant data being imported. If unspecified, defaults
--- to to \"VCF\".
-ivrFormat :: Lens' ImportVariantsRequest (Maybe ImportVariantsRequestFormat)
+-- to to \`VCF\`.
+ivrFormat :: Lens' ImportVariantsRequest (Maybe Text)
 ivrFormat
   = lens _ivrFormat (\ s a -> s{_ivrFormat = a})
 
@@ -4770,8 +3491,9 @@ ivrNormalizeReferenceNames
       (\ s a -> s{_ivrNormalizeReferenceNames = a})
 
 -- | A list of URIs referencing variant files in Google Cloud Storage. URIs
--- can include wildcards as described here. Note that recursive wildcards
--- (\'**\') are not supported.
+-- can include wildcards [as described
+-- here](https:\/\/cloud.google.com\/storage\/docs\/gsutil\/addlhelp\/WildcardNames).
+-- Note that recursive wildcards (\'**\') are not supported.
 ivrSourceURIs :: Lens' ImportVariantsRequest [Text]
 ivrSourceURIs
   = lens _ivrSourceURIs
@@ -4784,7 +3506,7 @@ instance FromJSON ImportVariantsRequest where
           = withObject "ImportVariantsRequest"
               (\ o ->
                  ImportVariantsRequest <$>
-                   (o .:? "format") <*>
+                   (o .:? "variantSetId") <*> (o .:? "format") <*>
                      (o .:? "normalizeReferenceNames")
                      <*> (o .:? "sourceUris" .!= mempty))
 
@@ -4792,61 +3514,17 @@ instance ToJSON ImportVariantsRequest where
         toJSON ImportVariantsRequest{..}
           = object
               (catMaybes
-                 [("format" .=) <$> _ivrFormat,
+                 [("variantSetId" .=) <$> _ivrVariantSetId,
+                  ("format" .=) <$> _ivrFormat,
                   ("normalizeReferenceNames" .=) <$>
                     _ivrNormalizeReferenceNames,
                   ("sourceUris" .=) <$> _ivrSourceURIs])
-
--- |
---
--- /See:/ 'externalId' smart constructor.
-data ExternalId = ExternalId
-    { _eiSourceName :: !(Maybe Text)
-    , _eiId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ExternalId' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'eiSourceName'
---
--- * 'eiId'
-externalId
-    :: ExternalId
-externalId =
-    ExternalId
-    { _eiSourceName = Nothing
-    , _eiId = Nothing
-    }
-
--- | The name of the source of this data.
-eiSourceName :: Lens' ExternalId (Maybe Text)
-eiSourceName
-  = lens _eiSourceName (\ s a -> s{_eiSourceName = a})
-
--- | The id used by the source of this data.
-eiId :: Lens' ExternalId (Maybe Text)
-eiId = lens _eiId (\ s a -> s{_eiId = a})
-
-instance FromJSON ExternalId where
-        parseJSON
-          = withObject "ExternalId"
-              (\ o ->
-                 ExternalId <$> (o .:? "sourceName") <*> (o .:? "id"))
-
-instance ToJSON ExternalId where
-        toJSON ExternalId{..}
-          = object
-              (catMaybes
-                 [("sourceName" .=) <$> _eiSourceName,
-                  ("id" .=) <$> _eiId])
 
 -- | A single CIGAR operation.
 --
 -- /See:/ 'cigarUnit' smart constructor.
 data CigarUnit = CigarUnit
-    { _cuOperation         :: !(Maybe CigarUnitOperation)
+    { _cuOperation         :: !(Maybe Text)
     , _cuOperationLength   :: !(Maybe Int64)
     , _cuReferenceSequence :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4869,19 +3547,19 @@ cigarUnit =
     , _cuReferenceSequence = Nothing
     }
 
-cuOperation :: Lens' CigarUnit (Maybe CigarUnitOperation)
+cuOperation :: Lens' CigarUnit (Maybe Text)
 cuOperation
   = lens _cuOperation (\ s a -> s{_cuOperation = a})
 
--- | The number of bases that the operation runs for. Required.
+-- | The number of genomic bases that the operation runs for. Required.
 cuOperationLength :: Lens' CigarUnit (Maybe Int64)
 cuOperationLength
   = lens _cuOperationLength
       (\ s a -> s{_cuOperationLength = a})
 
--- | referenceSequence is only used at mismatches (SEQUENCE_MISMATCH) and
--- deletions (DELETE). Filling this field replaces SAM\'s MD tag. If the
--- relevant information is not available, this field is unset.
+-- | \`referenceSequence\` is only used at mismatches (\`SEQUENCE_MISMATCH\`)
+-- and deletions (\`DELETE\`). Filling this field replaces SAM\'s MD tag.
+-- If the relevant information is not available, this field is unset.
 cuReferenceSequence :: Lens' CigarUnit (Maybe Text)
 cuReferenceSequence
   = lens _cuReferenceSequence
@@ -4903,107 +3581,78 @@ instance ToJSON CigarUnit where
                   ("operationLength" .=) <$> _cuOperationLength,
                   ("referenceSequence" .=) <$> _cuReferenceSequence])
 
--- | The read group set align request.
+-- | Defines an Identity and Access Management (IAM) policy. It is used to
+-- specify access control policies for Cloud Platform resources. A
+-- \`Policy\` consists of a list of \`bindings\`. A \`Binding\` binds a
+-- list of \`members\` to a \`role\`, where the members can be user
+-- accounts, Google groups, Google domains, and service accounts. A
+-- \`role\` is a named list of permissions defined by IAM. **Example** {
+-- \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
+-- \"user:mike\'example.com\", \"group:admins\'example.com\",
+-- \"domain:google.com\",
+-- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\"] }, {
+-- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
+-- ] } For a description of IAM and its features, see the [IAM developer\'s
+-- guide](https:\/\/cloud.google.com\/iam).
 --
--- /See:/ 'alignReadGroupSetsRequest' smart constructor.
-data AlignReadGroupSetsRequest = AlignReadGroupSetsRequest
-    { _argsrInterleavedFastqSource :: !(Maybe InterleavedFastqSource)
-    , _argsrReadGroupSetId         :: !(Maybe Text)
-    , _argsrBamSourceURIs          :: !(Maybe [Text])
-    , _argsrPairedFastqSource      :: !(Maybe PairedFastqSource)
-    , _argsrDatasetId              :: !(Maybe Text)
+-- /See:/ 'policy' smart constructor.
+data Policy = Policy
+    { _polEtag     :: !(Maybe Word8)
+    , _polVersion  :: !(Maybe Int32)
+    , _polBindings :: !(Maybe [Binding])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AlignReadGroupSetsRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'argsrInterleavedFastqSource'
+-- * 'polEtag'
 --
--- * 'argsrReadGroupSetId'
+-- * 'polVersion'
 --
--- * 'argsrBamSourceURIs'
---
--- * 'argsrPairedFastqSource'
---
--- * 'argsrDatasetId'
-alignReadGroupSetsRequest
-    :: AlignReadGroupSetsRequest
-alignReadGroupSetsRequest =
-    AlignReadGroupSetsRequest
-    { _argsrInterleavedFastqSource = Nothing
-    , _argsrReadGroupSetId = Nothing
-    , _argsrBamSourceURIs = Nothing
-    , _argsrPairedFastqSource = Nothing
-    , _argsrDatasetId = Nothing
+-- * 'polBindings'
+policy
+    :: Policy
+policy =
+    Policy
+    { _polEtag = Nothing
+    , _polVersion = Nothing
+    , _polBindings = Nothing
     }
 
--- | The interleaved FASTQ source files for alignment, where both members of
--- each pair of reads are found on consecutive records within the same
--- FASTQ file. Exactly one of readGroupSetId, bamSourceUris,
--- interleavedFastqSource or pairedFastqSource must be provided.
-argsrInterleavedFastqSource :: Lens' AlignReadGroupSetsRequest (Maybe InterleavedFastqSource)
-argsrInterleavedFastqSource
-  = lens _argsrInterleavedFastqSource
-      (\ s a -> s{_argsrInterleavedFastqSource = a})
+-- | Can be used to perform a read-modify-write.
+polEtag :: Lens' Policy (Maybe Word8)
+polEtag = lens _polEtag (\ s a -> s{_polEtag = a})
 
--- | The ID of the read group set which will be aligned. A new read group set
--- will be generated to hold the aligned data, the originals will not be
--- modified. The caller must have READ permissions for this read group set.
--- Exactly one of readGroupSetId, bamSourceUris, interleavedFastqSource or
--- pairedFastqSource must be provided.
-argsrReadGroupSetId :: Lens' AlignReadGroupSetsRequest (Maybe Text)
-argsrReadGroupSetId
-  = lens _argsrReadGroupSetId
-      (\ s a -> s{_argsrReadGroupSetId = a})
+-- | Version of the \`Policy\`. The default version is 0.
+polVersion :: Lens' Policy (Maybe Int32)
+polVersion
+  = lens _polVersion (\ s a -> s{_polVersion = a})
 
--- | The BAM source files for alignment. Exactly one of readGroupSetId,
--- bamSourceUris, interleavedFastqSource or pairedFastqSource must be
--- provided. The caller must have READ permissions for these files.
-argsrBamSourceURIs :: Lens' AlignReadGroupSetsRequest [Text]
-argsrBamSourceURIs
-  = lens _argsrBamSourceURIs
-      (\ s a -> s{_argsrBamSourceURIs = a})
-      . _Default
+-- | Associates a list of \`members\` to a \`role\`. Multiple \`bindings\`
+-- must not be specified for the same \`role\`. \`bindings\` with no
+-- members will result in an error.
+polBindings :: Lens' Policy [Binding]
+polBindings
+  = lens _polBindings (\ s a -> s{_polBindings = a}) .
+      _Default
       . _Coerce
 
--- | The paired end FASTQ source files for alignment, where each member of a
--- pair of reads are found in separate files. Exactly one of
--- readGroupSetId, bamSourceUris, interleavedFastqSource or
--- pairedFastqSource must be provided.
-argsrPairedFastqSource :: Lens' AlignReadGroupSetsRequest (Maybe PairedFastqSource)
-argsrPairedFastqSource
-  = lens _argsrPairedFastqSource
-      (\ s a -> s{_argsrPairedFastqSource = a})
-
--- | Required. The ID of the dataset the newly aligned read group sets will
--- belong to. The caller must have WRITE permissions to this dataset.
-argsrDatasetId :: Lens' AlignReadGroupSetsRequest (Maybe Text)
-argsrDatasetId
-  = lens _argsrDatasetId
-      (\ s a -> s{_argsrDatasetId = a})
-
-instance FromJSON AlignReadGroupSetsRequest where
+instance FromJSON Policy where
         parseJSON
-          = withObject "AlignReadGroupSetsRequest"
+          = withObject "Policy"
               (\ o ->
-                 AlignReadGroupSetsRequest <$>
-                   (o .:? "interleavedFastqSource") <*>
-                     (o .:? "readGroupSetId")
-                     <*> (o .:? "bamSourceUris" .!= mempty)
-                     <*> (o .:? "pairedFastqSource")
-                     <*> (o .:? "datasetId"))
+                 Policy <$>
+                   (o .:? "etag") <*> (o .:? "version") <*>
+                     (o .:? "bindings" .!= mempty))
 
-instance ToJSON AlignReadGroupSetsRequest where
-        toJSON AlignReadGroupSetsRequest{..}
+instance ToJSON Policy where
+        toJSON Policy{..}
           = object
               (catMaybes
-                 [("interleavedFastqSource" .=) <$>
-                    _argsrInterleavedFastqSource,
-                  ("readGroupSetId" .=) <$> _argsrReadGroupSetId,
-                  ("bamSourceUris" .=) <$> _argsrBamSourceURIs,
-                  ("pairedFastqSource" .=) <$> _argsrPairedFastqSource,
-                  ("datasetId" .=) <$> _argsrDatasetId])
+                 [("etag" .=) <$> _polEtag,
+                  ("version" .=) <$> _polVersion,
+                  ("bindings" .=) <$> _polBindings])
 
 -- | The variant data export request.
 --
@@ -5011,9 +3660,9 @@ instance ToJSON AlignReadGroupSetsRequest where
 data ExportVariantSetRequest = ExportVariantSetRequest
     { _evsrBigQueryDataset :: !(Maybe Text)
     , _evsrBigQueryTable   :: !(Maybe Text)
-    , _evsrFormat          :: !(Maybe ExportVariantSetRequestFormat)
-    , _evsrProjectNumber   :: !(Maybe Int64)
+    , _evsrFormat          :: !(Maybe Text)
     , _evsrCallSetIds      :: !(Maybe [Text])
+    , _evsrProjectId       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExportVariantSetRequest' with the minimum fields required to make a request.
@@ -5026,9 +3675,9 @@ data ExportVariantSetRequest = ExportVariantSetRequest
 --
 -- * 'evsrFormat'
 --
--- * 'evsrProjectNumber'
---
 -- * 'evsrCallSetIds'
+--
+-- * 'evsrProjectId'
 exportVariantSetRequest
     :: ExportVariantSetRequest
 exportVariantSetRequest =
@@ -5036,8 +3685,8 @@ exportVariantSetRequest =
     { _evsrBigQueryDataset = Nothing
     , _evsrBigQueryTable = Nothing
     , _evsrFormat = Nothing
-    , _evsrProjectNumber = Nothing
     , _evsrCallSetIds = Nothing
+    , _evsrProjectId = Nothing
     }
 
 -- | Required. The BigQuery dataset to export data to. This dataset must
@@ -5056,17 +3705,9 @@ evsrBigQueryTable
       (\ s a -> s{_evsrBigQueryTable = a})
 
 -- | The format for the exported data.
-evsrFormat :: Lens' ExportVariantSetRequest (Maybe ExportVariantSetRequestFormat)
+evsrFormat :: Lens' ExportVariantSetRequest (Maybe Text)
 evsrFormat
   = lens _evsrFormat (\ s a -> s{_evsrFormat = a})
-
--- | Required. The Google Cloud project number that owns the destination
--- BigQuery dataset. The caller must have WRITE access to this project.
--- This project will also own the resulting export job.
-evsrProjectNumber :: Lens' ExportVariantSetRequest (Maybe Int64)
-evsrProjectNumber
-  = lens _evsrProjectNumber
-      (\ s a -> s{_evsrProjectNumber = a})
 
 -- | If provided, only variant call information from the specified call sets
 -- will be exported. By default all variant calls are exported.
@@ -5077,6 +3718,14 @@ evsrCallSetIds
       . _Default
       . _Coerce
 
+-- | Required. The Google Cloud project ID that owns the destination BigQuery
+-- dataset. The caller must have WRITE access to this project. This project
+-- will also own the resulting export job.
+evsrProjectId :: Lens' ExportVariantSetRequest (Maybe Text)
+evsrProjectId
+  = lens _evsrProjectId
+      (\ s a -> s{_evsrProjectId = a})
+
 instance FromJSON ExportVariantSetRequest where
         parseJSON
           = withObject "ExportVariantSetRequest"
@@ -5084,8 +3733,8 @@ instance FromJSON ExportVariantSetRequest where
                  ExportVariantSetRequest <$>
                    (o .:? "bigqueryDataset") <*> (o .:? "bigqueryTable")
                      <*> (o .:? "format")
-                     <*> (o .:? "projectNumber")
-                     <*> (o .:? "callSetIds" .!= mempty))
+                     <*> (o .:? "callSetIds" .!= mempty)
+                     <*> (o .:? "projectId"))
 
 instance ToJSON ExportVariantSetRequest where
         toJSON ExportVariantSetRequest{..}
@@ -5094,139 +3743,84 @@ instance ToJSON ExportVariantSetRequest where
                  [("bigqueryDataset" .=) <$> _evsrBigQueryDataset,
                   ("bigqueryTable" .=) <$> _evsrBigQueryTable,
                   ("format" .=) <$> _evsrFormat,
-                  ("projectNumber" .=) <$> _evsrProjectNumber,
-                  ("callSetIds" .=) <$> _evsrCallSetIds])
+                  ("callSetIds" .=) <$> _evsrCallSetIds,
+                  ("projectId" .=) <$> _evsrProjectId])
 
--- | The read group set export response.
+-- | Metadata describing an Operation.
 --
--- /See:/ 'exportReadGroupSetsResponse' smart constructor.
-newtype ExportReadGroupSetsResponse = ExportReadGroupSetsResponse
-    { _ergsrJobId :: Maybe Text
+-- /See:/ 'operationMetadata' smart constructor.
+data OperationMetadata = OperationMetadata
+    { _omEvents     :: !(Maybe [OperationEvent])
+    , _omProjectId  :: !(Maybe Text)
+    , _omCreateTime :: !(Maybe Text)
+    , _omRequest    :: !(Maybe OperationMetadataRequest)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ExportReadGroupSetsResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ergsrJobId'
-exportReadGroupSetsResponse
-    :: ExportReadGroupSetsResponse
-exportReadGroupSetsResponse =
-    ExportReadGroupSetsResponse
-    { _ergsrJobId = Nothing
+-- * 'omEvents'
+--
+-- * 'omProjectId'
+--
+-- * 'omCreateTime'
+--
+-- * 'omRequest'
+operationMetadata
+    :: OperationMetadata
+operationMetadata =
+    OperationMetadata
+    { _omEvents = Nothing
+    , _omProjectId = Nothing
+    , _omCreateTime = Nothing
+    , _omRequest = Nothing
     }
 
--- | A job ID that can be used to get status information.
-ergsrJobId :: Lens' ExportReadGroupSetsResponse (Maybe Text)
-ergsrJobId
-  = lens _ergsrJobId (\ s a -> s{_ergsrJobId = a})
-
-instance FromJSON ExportReadGroupSetsResponse where
-        parseJSON
-          = withObject "ExportReadGroupSetsResponse"
-              (\ o ->
-                 ExportReadGroupSetsResponse <$> (o .:? "jobId"))
-
-instance ToJSON ExportReadGroupSetsResponse where
-        toJSON ExportReadGroupSetsResponse{..}
-          = object (catMaybes [("jobId" .=) <$> _ergsrJobId])
-
---
--- /See:/ 'searchAnnotationsRequest' smart constructor.
-data SearchAnnotationsRequest = SearchAnnotationsRequest
-    { _sarRange            :: !(Maybe QueryRange)
-    , _sarPageToken        :: !(Maybe Text)
-    , _sarAnnotationSetIds :: !(Maybe [Text])
-    , _sarPageSize         :: !(Maybe Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SearchAnnotationsRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sarRange'
---
--- * 'sarPageToken'
---
--- * 'sarAnnotationSetIds'
---
--- * 'sarPageSize'
-searchAnnotationsRequest
-    :: SearchAnnotationsRequest
-searchAnnotationsRequest =
-    SearchAnnotationsRequest
-    { _sarRange = Nothing
-    , _sarPageToken = Nothing
-    , _sarAnnotationSetIds = Nothing
-    , _sarPageSize = Nothing
-    }
-
--- | If specified, this query matches only annotations that overlap this
--- range.
-sarRange :: Lens' SearchAnnotationsRequest (Maybe QueryRange)
-sarRange = lens _sarRange (\ s a -> s{_sarRange = a})
-
--- | The continuation token, which is used to page through large result sets.
--- To get the next page of results, set this parameter to the value of
--- nextPageToken from the previous response.
-sarPageToken :: Lens' SearchAnnotationsRequest (Maybe Text)
-sarPageToken
-  = lens _sarPageToken (\ s a -> s{_sarPageToken = a})
-
--- | The annotation sets to search within. The caller must have READ access
--- to these annotation sets. Required. All queried annotation sets must
--- have the same type.
-sarAnnotationSetIds :: Lens' SearchAnnotationsRequest [Text]
-sarAnnotationSetIds
-  = lens _sarAnnotationSetIds
-      (\ s a -> s{_sarAnnotationSetIds = a})
-      . _Default
+-- | Optional event messages that were generated during the job\'s execution.
+-- This also contains any warnings that were generated during import or
+-- export.
+omEvents :: Lens' OperationMetadata [OperationEvent]
+omEvents
+  = lens _omEvents (\ s a -> s{_omEvents = a}) .
+      _Default
       . _Coerce
 
--- | Specifies number of results to return in a single page. If unspecified,
--- it will default to 256. The maximum value is 2048.
-sarPageSize :: Lens' SearchAnnotationsRequest (Maybe Int32)
-sarPageSize
-  = lens _sarPageSize (\ s a -> s{_sarPageSize = a})
+-- | The Google Cloud Project in which the job is scoped.
+omProjectId :: Lens' OperationMetadata (Maybe Text)
+omProjectId
+  = lens _omProjectId (\ s a -> s{_omProjectId = a})
 
-instance FromJSON SearchAnnotationsRequest where
+-- | The time at which the job was submitted to the Genomics service.
+omCreateTime :: Lens' OperationMetadata (Maybe Text)
+omCreateTime
+  = lens _omCreateTime (\ s a -> s{_omCreateTime = a})
+
+-- | The original request that started the operation. Note that this will be
+-- in current version of the API. If the operation was started with v1beta2
+-- API and a GetOperation is performed on v1 API, a v1 request will be
+-- returned.
+omRequest :: Lens' OperationMetadata (Maybe OperationMetadataRequest)
+omRequest
+  = lens _omRequest (\ s a -> s{_omRequest = a})
+
+instance FromJSON OperationMetadata where
         parseJSON
-          = withObject "SearchAnnotationsRequest"
+          = withObject "OperationMetadata"
               (\ o ->
-                 SearchAnnotationsRequest <$>
-                   (o .:? "range") <*> (o .:? "pageToken") <*>
-                     (o .:? "annotationSetIds" .!= mempty)
-                     <*> (o .:? "pageSize"))
+                 OperationMetadata <$>
+                   (o .:? "events" .!= mempty) <*> (o .:? "projectId")
+                     <*> (o .:? "createTime")
+                     <*> (o .:? "request"))
 
-instance ToJSON SearchAnnotationsRequest where
-        toJSON SearchAnnotationsRequest{..}
+instance ToJSON OperationMetadata where
+        toJSON OperationMetadata{..}
           = object
               (catMaybes
-                 [("range" .=) <$> _sarRange,
-                  ("pageToken" .=) <$> _sarPageToken,
-                  ("annotationSetIds" .=) <$> _sarAnnotationSetIds,
-                  ("pageSize" .=) <$> _sarPageSize])
-
--- | A string which maps to an array of values.
---
--- /See:/ 'metadataInfo' smart constructor.
-data MetadataInfo =
-    MetadataInfo
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'MetadataInfo' with the minimum fields required to make a request.
---
-metadataInfo
-    :: MetadataInfo
-metadataInfo = MetadataInfo
-
-instance FromJSON MetadataInfo where
-        parseJSON
-          = withObject "MetadataInfo"
-              (\ o -> pure MetadataInfo)
-
-instance ToJSON MetadataInfo where
-        toJSON = const emptyObject
+                 [("events" .=) <$> _omEvents,
+                  ("projectId" .=) <$> _omProjectId,
+                  ("createTime" .=) <$> _omCreateTime,
+                  ("request" .=) <$> _omRequest])
 
 -- | The search variant sets response.
 --
@@ -5371,7 +3965,7 @@ svrMaxCalls
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
--- nextPageToken from the previous response.
+-- \`nextPageToken\` from the previous response.
 svrPageToken :: Lens' SearchVariantsRequest (Maybe Text)
 svrPageToken
   = lens _svrPageToken (\ s a -> s{_svrPageToken = a})
@@ -5426,159 +4020,8 @@ instance ToJSON SearchVariantsRequest where
                   ("variantSetIds" .=) <$> _svrVariantSetIds,
                   ("pageSize" .=) <$> _svrPageSize])
 
--- | A string which maps to an array of values.
---
--- /See:/ 'annotationSetInfo' smart constructor.
-data AnnotationSetInfo =
-    AnnotationSetInfo
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AnnotationSetInfo' with the minimum fields required to make a request.
---
-annotationSetInfo
-    :: AnnotationSetInfo
-annotationSetInfo = AnnotationSetInfo
-
-instance FromJSON AnnotationSetInfo where
-        parseJSON
-          = withObject "AnnotationSetInfo"
-              (\ o -> pure AnnotationSetInfo)
-
-instance ToJSON AnnotationSetInfo where
-        toJSON = const emptyObject
-
--- |
---
--- /See:/ 'variantAnnotationCondition' smart constructor.
-data VariantAnnotationCondition = VariantAnnotationCondition
-    { _vacExternalIds :: !(Maybe [ExternalId])
-    , _vacNames       :: !(Maybe [Text])
-    , _vacConceptId   :: !(Maybe Text)
-    , _vacOmimId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VariantAnnotationCondition' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vacExternalIds'
---
--- * 'vacNames'
---
--- * 'vacConceptId'
---
--- * 'vacOmimId'
-variantAnnotationCondition
-    :: VariantAnnotationCondition
-variantAnnotationCondition =
-    VariantAnnotationCondition
-    { _vacExternalIds = Nothing
-    , _vacNames = Nothing
-    , _vacConceptId = Nothing
-    , _vacOmimId = Nothing
-    }
-
--- | The set of external IDs for this condition.
-vacExternalIds :: Lens' VariantAnnotationCondition [ExternalId]
-vacExternalIds
-  = lens _vacExternalIds
-      (\ s a -> s{_vacExternalIds = a})
-      . _Default
-      . _Coerce
-
--- | A set of names for the condition.
-vacNames :: Lens' VariantAnnotationCondition [Text]
-vacNames
-  = lens _vacNames (\ s a -> s{_vacNames = a}) .
-      _Default
-      . _Coerce
-
--- | The MedGen concept id associated with this gene. Search for these IDs at
--- http:\/\/www.ncbi.nlm.nih.gov\/medgen\/
-vacConceptId :: Lens' VariantAnnotationCondition (Maybe Text)
-vacConceptId
-  = lens _vacConceptId (\ s a -> s{_vacConceptId = a})
-
--- | The OMIM id for this condition. Search for these IDs at
--- http:\/\/omim.org\/
-vacOmimId :: Lens' VariantAnnotationCondition (Maybe Text)
-vacOmimId
-  = lens _vacOmimId (\ s a -> s{_vacOmimId = a})
-
-instance FromJSON VariantAnnotationCondition where
-        parseJSON
-          = withObject "VariantAnnotationCondition"
-              (\ o ->
-                 VariantAnnotationCondition <$>
-                   (o .:? "externalIds" .!= mempty) <*>
-                     (o .:? "names" .!= mempty)
-                     <*> (o .:? "conceptId")
-                     <*> (o .:? "omimId"))
-
-instance ToJSON VariantAnnotationCondition where
-        toJSON VariantAnnotationCondition{..}
-          = object
-              (catMaybes
-                 [("externalIds" .=) <$> _vacExternalIds,
-                  ("names" .=) <$> _vacNames,
-                  ("conceptId" .=) <$> _vacConceptId,
-                  ("omimId" .=) <$> _vacOmimId])
-
---
--- /See:/ 'searchAnnotationSetsResponse' smart constructor.
-data SearchAnnotationSetsResponse = SearchAnnotationSetsResponse
-    { _sasrNextPageToken  :: !(Maybe Text)
-    , _sasrAnnotationSets :: !(Maybe [AnnotationSet])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SearchAnnotationSetsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sasrNextPageToken'
---
--- * 'sasrAnnotationSets'
-searchAnnotationSetsResponse
-    :: SearchAnnotationSetsResponse
-searchAnnotationSetsResponse =
-    SearchAnnotationSetsResponse
-    { _sasrNextPageToken = Nothing
-    , _sasrAnnotationSets = Nothing
-    }
-
--- | The continuation token, which is used to page through large result sets.
--- Provide this value in a subsequent request to return the next page of
--- results. This field will be empty if there aren\'t any additional
--- results.
-sasrNextPageToken :: Lens' SearchAnnotationSetsResponse (Maybe Text)
-sasrNextPageToken
-  = lens _sasrNextPageToken
-      (\ s a -> s{_sasrNextPageToken = a})
-
--- | The matching annotation sets.
-sasrAnnotationSets :: Lens' SearchAnnotationSetsResponse [AnnotationSet]
-sasrAnnotationSets
-  = lens _sasrAnnotationSets
-      (\ s a -> s{_sasrAnnotationSets = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON SearchAnnotationSetsResponse where
-        parseJSON
-          = withObject "SearchAnnotationSetsResponse"
-              (\ o ->
-                 SearchAnnotationSetsResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "annotationSets" .!= mempty))
-
-instance ToJSON SearchAnnotationSetsResponse where
-        toJSON SearchAnnotationSetsResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _sasrNextPageToken,
-                  ("annotationSets" .=) <$> _sasrAnnotationSets])
-
--- | A string which maps to an array of values.
+-- | A map of additional call set information. This must be of the form map
+-- (string key mapping to a list of string values).
 --
 -- /See:/ 'callSetInfo' smart constructor.
 data CallSetInfo =
@@ -5598,265 +4041,85 @@ instance FromJSON CallSetInfo where
 instance ToJSON CallSetInfo where
         toJSON = const emptyObject
 
--- | A 0-based half-open genomic coordinate range over a reference sequence,
--- for representing the position of a genomic resource.
+-- | Remaining structured metadata key-value pairs. This must be of the form
+-- map (string key mapping to a list of string values).
 --
--- /See:/ 'rangePosition' smart constructor.
-data RangePosition = RangePosition
-    { _rpStart         :: !(Maybe Int64)
-    , _rpReverseStrand :: !(Maybe Bool)
-    , _rpReferenceId   :: !(Maybe Text)
-    , _rpReferenceName :: !(Maybe Text)
-    , _rpEnd           :: !(Maybe Int64)
+-- /See:/ 'variantSetMetadataInfo' smart constructor.
+data VariantSetMetadataInfo =
+    VariantSetMetadataInfo
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VariantSetMetadataInfo' with the minimum fields required to make a request.
+--
+variantSetMetadataInfo
+    :: VariantSetMetadataInfo
+variantSetMetadataInfo = VariantSetMetadataInfo
+
+instance FromJSON VariantSetMetadataInfo where
+        parseJSON
+          = withObject "VariantSetMetadataInfo"
+              (\ o -> pure VariantSetMetadataInfo)
+
+instance ToJSON VariantSetMetadataInfo where
+        toJSON = const emptyObject
+
+-- | If importing ReadGroupSets, an ImportReadGroupSetsResponse is returned.
+-- If importing Variants, an ImportVariantsResponse is returned. For
+-- exports, an empty response is returned.
+--
+-- /See:/ 'operationResponse' smart constructor.
+data OperationResponse =
+    OperationResponse
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
+--
+operationResponse
+    :: OperationResponse
+operationResponse = OperationResponse
+
+instance FromJSON OperationResponse where
+        parseJSON
+          = withObject "OperationResponse"
+              (\ o -> pure OperationResponse)
+
+instance ToJSON OperationResponse where
+        toJSON = const emptyObject
+
+-- | An event that occurred during an Operation.
+--
+-- /See:/ 'operationEvent' smart constructor.
+newtype OperationEvent = OperationEvent
+    { _oeDescription :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RangePosition' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rpStart'
---
--- * 'rpReverseStrand'
---
--- * 'rpReferenceId'
---
--- * 'rpReferenceName'
---
--- * 'rpEnd'
-rangePosition
-    :: RangePosition
-rangePosition =
-    RangePosition
-    { _rpStart = Nothing
-    , _rpReverseStrand = Nothing
-    , _rpReferenceId = Nothing
-    , _rpReferenceName = Nothing
-    , _rpEnd = Nothing
+-- * 'oeDescription'
+operationEvent
+    :: OperationEvent
+operationEvent =
+    OperationEvent
+    { _oeDescription = Nothing
     }
 
--- | The start position of the range on the reference, 0-based inclusive.
-rpStart :: Lens' RangePosition (Maybe Int64)
-rpStart = lens _rpStart (\ s a -> s{_rpStart = a})
+-- | Required description of event.
+oeDescription :: Lens' OperationEvent (Maybe Text)
+oeDescription
+  = lens _oeDescription
+      (\ s a -> s{_oeDescription = a})
 
--- | Whether this range refers to the reverse strand, as opposed to the
--- forward strand. Note that regardless of this field, the start\/end
--- position of the range always refer to the forward strand.
-rpReverseStrand :: Lens' RangePosition (Maybe Bool)
-rpReverseStrand
-  = lens _rpReverseStrand
-      (\ s a -> s{_rpReverseStrand = a})
-
--- | The ID of the Google Genomics reference associated with this range.
-rpReferenceId :: Lens' RangePosition (Maybe Text)
-rpReferenceId
-  = lens _rpReferenceId
-      (\ s a -> s{_rpReferenceId = a})
-
--- | The display name corresponding to the reference specified by
--- referenceId, for example chr1, 1, or chrX.
-rpReferenceName :: Lens' RangePosition (Maybe Text)
-rpReferenceName
-  = lens _rpReferenceName
-      (\ s a -> s{_rpReferenceName = a})
-
--- | The end position of the range on the reference, 0-based exclusive.
-rpEnd :: Lens' RangePosition (Maybe Int64)
-rpEnd = lens _rpEnd (\ s a -> s{_rpEnd = a})
-
-instance FromJSON RangePosition where
+instance FromJSON OperationEvent where
         parseJSON
-          = withObject "RangePosition"
-              (\ o ->
-                 RangePosition <$>
-                   (o .:? "start") <*> (o .:? "reverseStrand") <*>
-                     (o .:? "referenceId")
-                     <*> (o .:? "referenceName")
-                     <*> (o .:? "end"))
+          = withObject "OperationEvent"
+              (\ o -> OperationEvent <$> (o .:? "description"))
 
-instance ToJSON RangePosition where
-        toJSON RangePosition{..}
+instance ToJSON OperationEvent where
+        toJSON OperationEvent{..}
           = object
-              (catMaybes
-                 [("start" .=) <$> _rpStart,
-                  ("reverseStrand" .=) <$> _rpReverseStrand,
-                  ("referenceId" .=) <$> _rpReferenceId,
-                  ("referenceName" .=) <$> _rpReferenceName,
-                  ("end" .=) <$> _rpEnd])
-
--- | A transcript represents the assertion that a particular region of the
--- reference genome may be transcribed as RNA.
---
--- /See:/ 'transcript' smart constructor.
-data Transcript = Transcript
-    { _tGeneId         :: !(Maybe Text)
-    , _tCodingSequence :: !(Maybe TranscriptCodingSequence)
-    , _tExons          :: !(Maybe [TranscriptExon])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Transcript' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tGeneId'
---
--- * 'tCodingSequence'
---
--- * 'tExons'
-transcript
-    :: Transcript
-transcript =
-    Transcript
-    { _tGeneId = Nothing
-    , _tCodingSequence = Nothing
-    , _tExons = Nothing
-    }
-
--- | The annotation ID of the gene from which this transcript is transcribed.
-tGeneId :: Lens' Transcript (Maybe Text)
-tGeneId = lens _tGeneId (\ s a -> s{_tGeneId = a})
-
--- | The range of the coding sequence for this transcript, if any. To
--- determine the exact ranges of coding sequence, intersect this range with
--- those of the exons, if any. If there are any exons, the codingSequence
--- must start and end within them. Note that in some cases, the reference
--- genome will not exactly match the observed mRNA transcript e.g. due to
--- variance in the source genome from reference. In these cases, exon.frame
--- will not necessarily match the expected reference reading frame and
--- coding exon reference bases cannot necessarily be concatenated to
--- produce the original transcript mRNA.
-tCodingSequence :: Lens' Transcript (Maybe TranscriptCodingSequence)
-tCodingSequence
-  = lens _tCodingSequence
-      (\ s a -> s{_tCodingSequence = a})
-
--- | The exons that compose this transcript. This field should be unset for
--- genomes where transcript splicing does not occur, for example
--- prokaryotes. Introns are regions of the transcript that are not included
--- in the spliced RNA product. Though not explicitly modeled here, intron
--- ranges can be deduced; all regions of this transcript that are not exons
--- are introns. Exonic sequences do not necessarily code for a
--- translational product (amino acids). Only the regions of exons bounded
--- by the codingSequence correspond to coding DNA sequence. Exons are
--- ordered by start position and may not overlap.
-tExons :: Lens' Transcript [TranscriptExon]
-tExons
-  = lens _tExons (\ s a -> s{_tExons = a}) . _Default .
-      _Coerce
-
-instance FromJSON Transcript where
-        parseJSON
-          = withObject "Transcript"
-              (\ o ->
-                 Transcript <$>
-                   (o .:? "geneId") <*> (o .:? "codingSequence") <*>
-                     (o .:? "exons" .!= mempty))
-
-instance ToJSON Transcript where
-        toJSON Transcript{..}
-          = object
-              (catMaybes
-                 [("geneId" .=) <$> _tGeneId,
-                  ("codingSequence" .=) <$> _tCodingSequence,
-                  ("exons" .=) <$> _tExons])
-
---
--- /See:/ 'transcriptCodingSequence' smart constructor.
-data TranscriptCodingSequence = TranscriptCodingSequence
-    { _tcsStart :: !(Maybe Int64)
-    , _tcsEnd   :: !(Maybe Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TranscriptCodingSequence' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tcsStart'
---
--- * 'tcsEnd'
-transcriptCodingSequence
-    :: TranscriptCodingSequence
-transcriptCodingSequence =
-    TranscriptCodingSequence
-    { _tcsStart = Nothing
-    , _tcsEnd = Nothing
-    }
-
--- | The start of the coding sequence on this annotation\'s reference
--- sequence, 0-based inclusive. Note that this position is relative to the
--- reference start, and not the containing annotation start.
-tcsStart :: Lens' TranscriptCodingSequence (Maybe Int64)
-tcsStart = lens _tcsStart (\ s a -> s{_tcsStart = a})
-
--- | The end of the coding sequence on this annotation\'s reference sequence,
--- 0-based exclusive. Note that this position is relative to the reference
--- start, and not the containing annotation start.
-tcsEnd :: Lens' TranscriptCodingSequence (Maybe Int64)
-tcsEnd = lens _tcsEnd (\ s a -> s{_tcsEnd = a})
-
-instance FromJSON TranscriptCodingSequence where
-        parseJSON
-          = withObject "TranscriptCodingSequence"
-              (\ o ->
-                 TranscriptCodingSequence <$>
-                   (o .:? "start") <*> (o .:? "end"))
-
-instance ToJSON TranscriptCodingSequence where
-        toJSON TranscriptCodingSequence{..}
-          = object
-              (catMaybes
-                 [("start" .=) <$> _tcsStart, ("end" .=) <$> _tcsEnd])
-
--- | The job search response.
---
--- /See:/ 'searchJobsResponse' smart constructor.
-data SearchJobsResponse = SearchJobsResponse
-    { _sjrNextPageToken :: !(Maybe Text)
-    , _sjrJobs          :: !(Maybe [Job])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SearchJobsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sjrNextPageToken'
---
--- * 'sjrJobs'
-searchJobsResponse
-    :: SearchJobsResponse
-searchJobsResponse =
-    SearchJobsResponse
-    { _sjrNextPageToken = Nothing
-    , _sjrJobs = Nothing
-    }
-
--- | The continuation token which is used to page through large result sets.
--- Provide this value is a subsequent request to return the next page of
--- results. This field will be empty if there are no more results.
-sjrNextPageToken :: Lens' SearchJobsResponse (Maybe Text)
-sjrNextPageToken
-  = lens _sjrNextPageToken
-      (\ s a -> s{_sjrNextPageToken = a})
-
--- | The list of jobs results, ordered newest to oldest.
-sjrJobs :: Lens' SearchJobsResponse [Job]
-sjrJobs
-  = lens _sjrJobs (\ s a -> s{_sjrJobs = a}) . _Default
-      . _Coerce
-
-instance FromJSON SearchJobsResponse where
-        parseJSON
-          = withObject "SearchJobsResponse"
-              (\ o ->
-                 SearchJobsResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "jobs" .!= mempty))
-
-instance ToJSON SearchJobsResponse where
-        toJSON SearchJobsResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _sjrNextPageToken,
-                  ("jobs" .=) <$> _sjrJobs])
+              (catMaybes [("description" .=) <$> _oeDescription])
 
 -- | ReferenceBound records an upper bound for the starting coordinate of
 -- variants in a particular reference.
@@ -5907,6 +4170,88 @@ instance ToJSON ReferenceBound where
               (catMaybes
                  [("upperBound" .=) <$> _rbUpperBound,
                   ("referenceName" .=) <$> _rbReferenceName])
+
+--
+-- /See:/ 'undeleteDatasetRequest' smart constructor.
+data UndeleteDatasetRequest =
+    UndeleteDatasetRequest
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UndeleteDatasetRequest' with the minimum fields required to make a request.
+--
+undeleteDatasetRequest
+    :: UndeleteDatasetRequest
+undeleteDatasetRequest = UndeleteDatasetRequest
+
+instance FromJSON UndeleteDatasetRequest where
+        parseJSON
+          = withObject "UndeleteDatasetRequest"
+              (\ o -> pure UndeleteDatasetRequest)
+
+instance ToJSON UndeleteDatasetRequest where
+        toJSON = const emptyObject
+
+-- | Associates \`members\` with a \`role\`.
+--
+-- /See:/ 'binding' smart constructor.
+data Binding = Binding
+    { _bMembers :: !(Maybe [Text])
+    , _bRole    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Binding' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bMembers'
+--
+-- * 'bRole'
+binding
+    :: Binding
+binding =
+    Binding
+    { _bMembers = Nothing
+    , _bRole = Nothing
+    }
+
+-- | Specifies the identities requesting access for a Cloud Platform
+-- resource. \`members\` can have the following formats: * \`allUsers\`: A
+-- special identifier that represents anyone who is on the internet; with
+-- or without a Google account. * \`allAuthenticatedUsers\`: A special
+-- identifier that represents anyone who is authenticated with a Google
+-- account or a service account. * \`user:{emailid}\`: An email address
+-- that represents a specific Google account. For example,
+-- \`alice\'gmail.com\` or \`joe\'example.com\`. *
+-- \`serviceAccount:{emailid}\`: An email address that represents a service
+-- account. For example, \`my-other-app\'appspot.gserviceaccount.com\`. *
+-- \`group:{emailid}\`: An email address that represents a Google group.
+-- For example, \`admins\'example.com\`. * \`domain:{domain}\`: A Google
+-- Apps domain name that represents all the users of that domain. For
+-- example, \`google.com\` or \`example.com\`.
+bMembers :: Lens' Binding [Text]
+bMembers
+  = lens _bMembers (\ s a -> s{_bMembers = a}) .
+      _Default
+      . _Coerce
+
+-- | Role that is assigned to \`members\`. For example, \`roles\/viewer\`,
+-- \`roles\/editor\`, or \`roles\/owner\`. Required
+bRole :: Lens' Binding (Maybe Text)
+bRole = lens _bRole (\ s a -> s{_bRole = a})
+
+instance FromJSON Binding where
+        parseJSON
+          = withObject "Binding"
+              (\ o ->
+                 Binding <$>
+                   (o .:? "members" .!= mempty) <*> (o .:? "role"))
+
+instance ToJSON Binding where
+        toJSON Binding{..}
+          = object
+              (catMaybes
+                 [("members" .=) <$> _bMembers,
+                  ("role" .=) <$> _bRole])
 
 -- | An abstraction for referring to a genomic position, in relation to some
 -- already known reference. For now, represents a genomic position as a
@@ -6028,7 +4373,7 @@ instance ToJSON SearchReadGroupSetsResponse where
                  [("nextPageToken" .=) <$> _srgsrNextPageToken,
                   ("readGroupSets" .=) <$> _srgsrReadGroupSets])
 
--- | A string which maps to an array of values.
+-- | A map of additional read group set information.
 --
 -- /See:/ 'readGroupSetInfo' smart constructor.
 data ReadGroupSetInfo =
@@ -6050,10 +4395,10 @@ instance ToJSON ReadGroupSetInfo where
         toJSON = const emptyObject
 
 -- | A reference set is a set of references which typically comprise a
--- reference assembly for a species, such as GRCh38 which is representative
--- of the human genome. A reference set defines a common coordinate space
--- for comparing reference-aligned experimental data. A reference set
--- contains 1 or more references.
+-- reference assembly for a species, such as \`GRCh38\` which is
+-- representative of the human genome. A reference set defines a common
+-- coordinate space for comparing reference-aligned experimental data. A
+-- reference set contains 1 or more references.
 --
 -- /See:/ 'referenceSet' smart constructor.
 data ReferenceSet = ReferenceSet
@@ -6101,7 +4446,7 @@ referenceSet =
     }
 
 -- | All known corresponding accession IDs in INSDC (GenBank\/ENA\/DDBJ)
--- ideally with a version number, for example NC_000001.11.
+-- ideally with a version number, for example \`NC_000001.11\`.
 rsSourceAccessions :: Lens' ReferenceSet [Text]
 rsSourceAccessions
   = lens _rsSourceAccessions
@@ -6110,7 +4455,7 @@ rsSourceAccessions
       . _Coerce
 
 -- | The IDs of the reference objects that are part of this set.
--- Reference.md5checksum must be unique within this set.
+-- \`Reference.md5checksum\` must be unique within this set.
 rsReferenceIds :: Lens' ReferenceSet [Text]
 rsReferenceIds
   = lens _rsReferenceIds
@@ -6120,7 +4465,7 @@ rsReferenceIds
 
 -- | Order-independent MD5 checksum which identifies this reference set. The
 -- checksum is computed by sorting all lower case hexidecimal string
--- reference.md5checksum (for all reference in this set) in ascending
+-- \`reference.md5checksum\` (for all reference in this set) in ascending
 -- lexicographic order, concatenating, and taking the MD5 of that value.
 -- The resulting value is represented in lower case hexadecimal format.
 rsMD5checksum :: Lens' ReferenceSet (Maybe Text)
@@ -6130,7 +4475,7 @@ rsMD5checksum
 
 -- | ID from http:\/\/www.ncbi.nlm.nih.gov\/taxonomy (e.g. 9606->human)
 -- indicating the species which this assembly is intended to model. Note
--- that contained references may specify a different ncbiTaxonId, as
+-- that contained references may specify a different \`ncbiTaxonId\`, as
 -- assemblies may contain reference sequences which do not belong to the
 -- modeled species, e.g. EBV in a human reference genome.
 rsNcbiTaxonId :: Lens' ReferenceSet (Maybe Int32)
@@ -6138,11 +4483,11 @@ rsNcbiTaxonId
   = lens _rsNcbiTaxonId
       (\ s a -> s{_rsNcbiTaxonId = a})
 
--- | The Google generated immutable ID of the reference set.
+-- | The server-generated reference set ID, unique across all reference sets.
 rsId :: Lens' ReferenceSet (Maybe Text)
 rsId = lens _rsId (\ s a -> s{_rsId = a})
 
--- | Public id of this reference set, such as GRCh37.
+-- | Public id of this reference set, such as \`GRCh37\`.
 rsAssemblyId :: Lens' ReferenceSet (Maybe Text)
 rsAssemblyId
   = lens _rsAssemblyId (\ s a -> s{_rsAssemblyId = a})
@@ -6169,7 +4514,7 @@ instance FromJSON ReferenceSet where
                      <*> (o .:? "ncbiTaxonId")
                      <*> (o .:? "id")
                      <*> (o .:? "assemblyId")
-                     <*> (o .:? "sourceURI")
+                     <*> (o .:? "sourceUri")
                      <*> (o .:? "description"))
 
 instance ToJSON ReferenceSet where
@@ -6182,5 +4527,5 @@ instance ToJSON ReferenceSet where
                   ("ncbiTaxonId" .=) <$> _rsNcbiTaxonId,
                   ("id" .=) <$> _rsId,
                   ("assemblyId" .=) <$> _rsAssemblyId,
-                  ("sourceURI" .=) <$> _rsSourceURI,
+                  ("sourceUri" .=) <$> _rsSourceURI,
                   ("description" .=) <$> _rsDescription])

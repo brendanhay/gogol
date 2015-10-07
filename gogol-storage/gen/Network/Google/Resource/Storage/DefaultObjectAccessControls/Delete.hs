@@ -23,7 +23,7 @@
 -- | Permanently deletes the default object ACL entry for the specified
 -- entity on the specified bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageDefaultObjectAccessControlsDelete@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageDefaultObjectAccessControlsDelete@.
 module Network.Google.Resource.Storage.DefaultObjectAccessControls.Delete
     (
     -- * REST Resource

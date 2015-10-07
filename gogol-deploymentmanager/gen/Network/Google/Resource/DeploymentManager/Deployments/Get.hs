@@ -22,7 +22,7 @@
 --
 -- | Gets information about a specific deployment.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsGet@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsGet@.
 module Network.Google.Resource.DeploymentManager.Deployments.Get
     (
     -- * REST Resource

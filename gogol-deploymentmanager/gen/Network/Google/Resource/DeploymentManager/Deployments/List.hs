@@ -22,7 +22,7 @@
 --
 -- | Lists all deployments for a given project.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsList@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsList@.
 module Network.Google.Resource.DeploymentManager.Deployments.List
     (
     -- * REST Resource

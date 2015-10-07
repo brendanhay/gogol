@@ -53,6 +53,9 @@ module Network.Google.DNS.Types
     , rrslrKind
     , rrslrRrsets
 
+    -- * ChangeStatus
+    , ChangeStatus (..)
+
     -- * ResourceRecordSet
     , ResourceRecordSet
     , resourceRecordSet
@@ -97,8 +100,8 @@ import           Network.Google.DNS.Types.Product
 import           Network.Google.DNS.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1beta1' of the Google Cloud DNS API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Google Cloud DNS API. This contains the host and root path used as a starting point for constructing service requests.
 dNSRequest :: RequestBuilder
 dNSRequest
   = defaultRequest "https://www.googleapis.com/"
-      "dns/v1beta1/projects/"
+      "dns/v1/projects/"

@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all operations in a project in a specific zone.
+-- | Lists all operations in a project in a specific zone or all zones.
 --
--- /See:/ <https://cloud.google.com/container-engine/docs/v1beta1/ Google Container Engine API Reference> for @ContainerProjectsZonesOperationsList@.
+-- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @ContainerProjectsZonesOperationsList@.
 module Network.Google.Resource.Container.Projects.Zones.Operations.List
     (
     -- * REST Resource
@@ -33,14 +33,20 @@ module Network.Google.Resource.Container.Projects.Zones.Operations.List
     , ProjectsZonesOperationsList'
 
     -- * Request Lenses
+    , pzolXgafv
     , pzolQuotaUser
     , pzolPrettyPrint
-    , pzolUserIP
-    , pzolZoneId
+    , pzolUploadProtocol
+    , pzolPp
+    , pzolAccessToken
+    , pzolUploadType
+    , pzolZone
+    , pzolBearerToken
     , pzolKey
     , pzolProjectId
     , pzolOAuthToken
     , pzolFields
+    , pzolCallback
     ) where
 
 import           Network.Google.Container.Types
@@ -49,44 +55,68 @@ import           Network.Google.Prelude
 -- | A resource alias for @ContainerProjectsZonesOperationsList@ method which the
 -- 'ProjectsZonesOperationsList'' request conforms to.
 type ProjectsZonesOperationsListResource =
-     Capture "projectId" Text :>
-       "zones" :>
-         Capture "zoneId" Text :>
-           "operations" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ListOperationsResponse
+     "v1" :>
+       "projects" :>
+         Capture "projectId" Text :>
+           "zones" :>
+             Capture "zone" Text :>
+               "operations" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" AuthKey :>
+                                       QueryParam "oauth_token" OAuthToken :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON] ListOperationsResponse
 
--- | Lists all operations in a project in a specific zone.
+-- | Lists all operations in a project in a specific zone or all zones.
 --
 -- /See:/ 'projectsZonesOperationsList'' smart constructor.
 data ProjectsZonesOperationsList' = ProjectsZonesOperationsList'
-    { _pzolQuotaUser   :: !(Maybe Text)
-    , _pzolPrettyPrint :: !Bool
-    , _pzolUserIP      :: !(Maybe Text)
-    , _pzolZoneId      :: !Text
-    , _pzolKey         :: !(Maybe AuthKey)
-    , _pzolProjectId   :: !Text
-    , _pzolOAuthToken  :: !(Maybe OAuthToken)
-    , _pzolFields      :: !(Maybe Text)
+    { _pzolXgafv          :: !(Maybe Text)
+    , _pzolQuotaUser      :: !(Maybe Text)
+    , _pzolPrettyPrint    :: !Bool
+    , _pzolUploadProtocol :: !(Maybe Text)
+    , _pzolPp             :: !Bool
+    , _pzolAccessToken    :: !(Maybe Text)
+    , _pzolUploadType     :: !(Maybe Text)
+    , _pzolZone           :: !Text
+    , _pzolBearerToken    :: !(Maybe Text)
+    , _pzolKey            :: !(Maybe AuthKey)
+    , _pzolProjectId      :: !Text
+    , _pzolOAuthToken     :: !(Maybe OAuthToken)
+    , _pzolFields         :: !(Maybe Text)
+    , _pzolCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesOperationsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'pzolXgafv'
+--
 -- * 'pzolQuotaUser'
 --
 -- * 'pzolPrettyPrint'
 --
--- * 'pzolUserIP'
+-- * 'pzolUploadProtocol'
 --
--- * 'pzolZoneId'
+-- * 'pzolPp'
+--
+-- * 'pzolAccessToken'
+--
+-- * 'pzolUploadType'
+--
+-- * 'pzolZone'
+--
+-- * 'pzolBearerToken'
 --
 -- * 'pzolKey'
 --
@@ -95,25 +125,38 @@ data ProjectsZonesOperationsList' = ProjectsZonesOperationsList'
 -- * 'pzolOAuthToken'
 --
 -- * 'pzolFields'
+--
+-- * 'pzolCallback'
 projectsZonesOperationsList'
-    :: Text -- ^ 'zoneId'
+    :: Text -- ^ 'zone'
     -> Text -- ^ 'projectId'
     -> ProjectsZonesOperationsList'
-projectsZonesOperationsList' pPzolZoneId_ pPzolProjectId_ =
+projectsZonesOperationsList' pPzolZone_ pPzolProjectId_ =
     ProjectsZonesOperationsList'
-    { _pzolQuotaUser = Nothing
+    { _pzolXgafv = Nothing
+    , _pzolQuotaUser = Nothing
     , _pzolPrettyPrint = True
-    , _pzolUserIP = Nothing
-    , _pzolZoneId = pPzolZoneId_
+    , _pzolUploadProtocol = Nothing
+    , _pzolPp = True
+    , _pzolAccessToken = Nothing
+    , _pzolUploadType = Nothing
+    , _pzolZone = pPzolZone_
+    , _pzolBearerToken = Nothing
     , _pzolKey = Nothing
     , _pzolProjectId = pPzolProjectId_
     , _pzolOAuthToken = Nothing
     , _pzolFields = Nothing
+    , _pzolCallback = Nothing
     }
+
+-- | V1 error format.
+pzolXgafv :: Lens' ProjectsZonesOperationsList' (Maybe Text)
+pzolXgafv
+  = lens _pzolXgafv (\ s a -> s{_pzolXgafv = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
+-- characters.
 pzolQuotaUser :: Lens' ProjectsZonesOperationsList' (Maybe Text)
 pzolQuotaUser
   = lens _pzolQuotaUser
@@ -125,16 +168,39 @@ pzolPrettyPrint
   = lens _pzolPrettyPrint
       (\ s a -> s{_pzolPrettyPrint = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-pzolUserIP :: Lens' ProjectsZonesOperationsList' (Maybe Text)
-pzolUserIP
-  = lens _pzolUserIP (\ s a -> s{_pzolUserIP = a})
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+pzolUploadProtocol :: Lens' ProjectsZonesOperationsList' (Maybe Text)
+pzolUploadProtocol
+  = lens _pzolUploadProtocol
+      (\ s a -> s{_pzolUploadProtocol = a})
 
--- | The name of the Google Compute Engine zone to return operations for.
-pzolZoneId :: Lens' ProjectsZonesOperationsList' Text
-pzolZoneId
-  = lens _pzolZoneId (\ s a -> s{_pzolZoneId = a})
+-- | Pretty-print response.
+pzolPp :: Lens' ProjectsZonesOperationsList' Bool
+pzolPp = lens _pzolPp (\ s a -> s{_pzolPp = a})
+
+-- | OAuth access token.
+pzolAccessToken :: Lens' ProjectsZonesOperationsList' (Maybe Text)
+pzolAccessToken
+  = lens _pzolAccessToken
+      (\ s a -> s{_pzolAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+pzolUploadType :: Lens' ProjectsZonesOperationsList' (Maybe Text)
+pzolUploadType
+  = lens _pzolUploadType
+      (\ s a -> s{_pzolUploadType = a})
+
+-- | The name of the Google Compute Engine
+-- [zone](\/compute\/docs\/zones#available) to return operations for, or
+-- \"-\" for all zones.
+pzolZone :: Lens' ProjectsZonesOperationsList' Text
+pzolZone = lens _pzolZone (\ s a -> s{_pzolZone = a})
+
+-- | OAuth bearer token.
+pzolBearerToken :: Lens' ProjectsZonesOperationsList' (Maybe Text)
+pzolBearerToken
+  = lens _pzolBearerToken
+      (\ s a -> s{_pzolBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -142,7 +208,8 @@ pzolZoneId
 pzolKey :: Lens' ProjectsZonesOperationsList' (Maybe AuthKey)
 pzolKey = lens _pzolKey (\ s a -> s{_pzolKey = a})
 
--- | The Google Developers Console project ID or project number.
+-- | The Google Developers Console [project ID or project
+-- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
 pzolProjectId :: Lens' ProjectsZonesOperationsList' Text
 pzolProjectId
   = lens _pzolProjectId
@@ -159,6 +226,11 @@ pzolFields :: Lens' ProjectsZonesOperationsList' (Maybe Text)
 pzolFields
   = lens _pzolFields (\ s a -> s{_pzolFields = a})
 
+-- | JSONP
+pzolCallback :: Lens' ProjectsZonesOperationsList' (Maybe Text)
+pzolCallback
+  = lens _pzolCallback (\ s a -> s{_pzolCallback = a})
+
 instance GoogleAuth ProjectsZonesOperationsList'
          where
         _AuthKey = pzolKey . _Just
@@ -170,9 +242,15 @@ instance GoogleRequest ProjectsZonesOperationsList'
              ListOperationsResponse
         request = requestWith containerRequest
         requestWith rq ProjectsZonesOperationsList'{..}
-          = go _pzolProjectId _pzolZoneId _pzolQuotaUser
+          = go _pzolProjectId _pzolZone _pzolXgafv
+              _pzolUploadProtocol
+              (Just _pzolPp)
+              _pzolAccessToken
+              _pzolUploadType
+              _pzolBearerToken
+              _pzolCallback
+              _pzolQuotaUser
               (Just _pzolPrettyPrint)
-              _pzolUserIP
               _pzolFields
               _pzolKey
               _pzolOAuthToken

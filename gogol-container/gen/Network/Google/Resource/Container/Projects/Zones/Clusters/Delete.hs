@@ -20,11 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the cluster, including the Kubernetes master and all worker
--- nodes. Firewalls and routes that were configured at cluster creation are
--- also deleted.
+-- | Deletes the cluster, including the Kubernetes endpoint and all worker
+-- nodes. Firewalls and routes that were configured during cluster creation
+-- are also deleted.
 --
--- /See:/ <https://cloud.google.com/container-engine/docs/v1beta1/ Google Container Engine API Reference> for @ContainerProjectsZonesClustersDelete@.
+-- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @ContainerProjectsZonesClustersDelete@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
     (
     -- * REST Resource
@@ -35,15 +35,21 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
     , ProjectsZonesClustersDelete'
 
     -- * Request Lenses
+    , pzcdXgafv
     , pzcdQuotaUser
     , pzcdPrettyPrint
-    , pzcdUserIP
-    , pzcdZoneId
+    , pzcdUploadProtocol
+    , pzcdPp
+    , pzcdAccessToken
+    , pzcdUploadType
+    , pzcdZone
+    , pzcdBearerToken
     , pzcdKey
     , pzcdClusterId
     , pzcdProjectId
     , pzcdOAuthToken
     , pzcdFields
+    , pzcdCallback
     ) where
 
 import           Network.Google.Container.Types
@@ -52,47 +58,72 @@ import           Network.Google.Prelude
 -- | A resource alias for @ContainerProjectsZonesClustersDelete@ method which the
 -- 'ProjectsZonesClustersDelete'' request conforms to.
 type ProjectsZonesClustersDeleteResource =
-     Capture "projectId" Text :>
-       "zones" :>
-         Capture "zoneId" Text :>
-           "clusters" :>
-             Capture "clusterId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "v1" :>
+       "projects" :>
+         Capture "projectId" Text :>
+           "zones" :>
+             Capture "zone" Text :>
+               "clusters" :>
+                 Capture "clusterId" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" AuthKey :>
+                                         QueryParam "oauth_token" OAuthToken :>
+                                           QueryParam "alt" AltJSON :>
+                                             Delete '[JSON] Operation
 
--- | Deletes the cluster, including the Kubernetes master and all worker
--- nodes. Firewalls and routes that were configured at cluster creation are
--- also deleted.
+-- | Deletes the cluster, including the Kubernetes endpoint and all worker
+-- nodes. Firewalls and routes that were configured during cluster creation
+-- are also deleted.
 --
 -- /See:/ 'projectsZonesClustersDelete'' smart constructor.
 data ProjectsZonesClustersDelete' = ProjectsZonesClustersDelete'
-    { _pzcdQuotaUser   :: !(Maybe Text)
-    , _pzcdPrettyPrint :: !Bool
-    , _pzcdUserIP      :: !(Maybe Text)
-    , _pzcdZoneId      :: !Text
-    , _pzcdKey         :: !(Maybe AuthKey)
-    , _pzcdClusterId   :: !Text
-    , _pzcdProjectId   :: !Text
-    , _pzcdOAuthToken  :: !(Maybe OAuthToken)
-    , _pzcdFields      :: !(Maybe Text)
+    { _pzcdXgafv          :: !(Maybe Text)
+    , _pzcdQuotaUser      :: !(Maybe Text)
+    , _pzcdPrettyPrint    :: !Bool
+    , _pzcdUploadProtocol :: !(Maybe Text)
+    , _pzcdPp             :: !Bool
+    , _pzcdAccessToken    :: !(Maybe Text)
+    , _pzcdUploadType     :: !(Maybe Text)
+    , _pzcdZone           :: !Text
+    , _pzcdBearerToken    :: !(Maybe Text)
+    , _pzcdKey            :: !(Maybe AuthKey)
+    , _pzcdClusterId      :: !Text
+    , _pzcdProjectId      :: !Text
+    , _pzcdOAuthToken     :: !(Maybe OAuthToken)
+    , _pzcdFields         :: !(Maybe Text)
+    , _pzcdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'pzcdXgafv'
+--
 -- * 'pzcdQuotaUser'
 --
 -- * 'pzcdPrettyPrint'
 --
--- * 'pzcdUserIP'
+-- * 'pzcdUploadProtocol'
 --
--- * 'pzcdZoneId'
+-- * 'pzcdPp'
+--
+-- * 'pzcdAccessToken'
+--
+-- * 'pzcdUploadType'
+--
+-- * 'pzcdZone'
+--
+-- * 'pzcdBearerToken'
 --
 -- * 'pzcdKey'
 --
@@ -103,27 +134,40 @@ data ProjectsZonesClustersDelete' = ProjectsZonesClustersDelete'
 -- * 'pzcdOAuthToken'
 --
 -- * 'pzcdFields'
+--
+-- * 'pzcdCallback'
 projectsZonesClustersDelete'
-    :: Text -- ^ 'zoneId'
+    :: Text -- ^ 'zone'
     -> Text -- ^ 'clusterId'
     -> Text -- ^ 'projectId'
     -> ProjectsZonesClustersDelete'
-projectsZonesClustersDelete' pPzcdZoneId_ pPzcdClusterId_ pPzcdProjectId_ =
+projectsZonesClustersDelete' pPzcdZone_ pPzcdClusterId_ pPzcdProjectId_ =
     ProjectsZonesClustersDelete'
-    { _pzcdQuotaUser = Nothing
+    { _pzcdXgafv = Nothing
+    , _pzcdQuotaUser = Nothing
     , _pzcdPrettyPrint = True
-    , _pzcdUserIP = Nothing
-    , _pzcdZoneId = pPzcdZoneId_
+    , _pzcdUploadProtocol = Nothing
+    , _pzcdPp = True
+    , _pzcdAccessToken = Nothing
+    , _pzcdUploadType = Nothing
+    , _pzcdZone = pPzcdZone_
+    , _pzcdBearerToken = Nothing
     , _pzcdKey = Nothing
     , _pzcdClusterId = pPzcdClusterId_
     , _pzcdProjectId = pPzcdProjectId_
     , _pzcdOAuthToken = Nothing
     , _pzcdFields = Nothing
+    , _pzcdCallback = Nothing
     }
+
+-- | V1 error format.
+pzcdXgafv :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
+pzcdXgafv
+  = lens _pzcdXgafv (\ s a -> s{_pzcdXgafv = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
+-- characters.
 pzcdQuotaUser :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
 pzcdQuotaUser
   = lens _pzcdQuotaUser
@@ -135,16 +179,38 @@ pzcdPrettyPrint
   = lens _pzcdPrettyPrint
       (\ s a -> s{_pzcdPrettyPrint = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-pzcdUserIP :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
-pzcdUserIP
-  = lens _pzcdUserIP (\ s a -> s{_pzcdUserIP = a})
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+pzcdUploadProtocol :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
+pzcdUploadProtocol
+  = lens _pzcdUploadProtocol
+      (\ s a -> s{_pzcdUploadProtocol = a})
 
--- | The name of the Google Compute Engine zone in which the cluster resides.
-pzcdZoneId :: Lens' ProjectsZonesClustersDelete' Text
-pzcdZoneId
-  = lens _pzcdZoneId (\ s a -> s{_pzcdZoneId = a})
+-- | Pretty-print response.
+pzcdPp :: Lens' ProjectsZonesClustersDelete' Bool
+pzcdPp = lens _pzcdPp (\ s a -> s{_pzcdPp = a})
+
+-- | OAuth access token.
+pzcdAccessToken :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
+pzcdAccessToken
+  = lens _pzcdAccessToken
+      (\ s a -> s{_pzcdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+pzcdUploadType :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
+pzcdUploadType
+  = lens _pzcdUploadType
+      (\ s a -> s{_pzcdUploadType = a})
+
+-- | The name of the Google Compute Engine
+-- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
+pzcdZone :: Lens' ProjectsZonesClustersDelete' Text
+pzcdZone = lens _pzcdZone (\ s a -> s{_pzcdZone = a})
+
+-- | OAuth bearer token.
+pzcdBearerToken :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
+pzcdBearerToken
+  = lens _pzcdBearerToken
+      (\ s a -> s{_pzcdBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -158,7 +224,8 @@ pzcdClusterId
   = lens _pzcdClusterId
       (\ s a -> s{_pzcdClusterId = a})
 
--- | The Google Developers Console project ID or project number.
+-- | The Google Developers Console [project ID or project
+-- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
 pzcdProjectId :: Lens' ProjectsZonesClustersDelete' Text
 pzcdProjectId
   = lens _pzcdProjectId
@@ -175,6 +242,11 @@ pzcdFields :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
 pzcdFields
   = lens _pzcdFields (\ s a -> s{_pzcdFields = a})
 
+-- | JSONP
+pzcdCallback :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
+pzcdCallback
+  = lens _pzcdCallback (\ s a -> s{_pzcdCallback = a})
+
 instance GoogleAuth ProjectsZonesClustersDelete'
          where
         _AuthKey = pzcdKey . _Just
@@ -185,10 +257,16 @@ instance GoogleRequest ProjectsZonesClustersDelete'
         type Rs ProjectsZonesClustersDelete' = Operation
         request = requestWith containerRequest
         requestWith rq ProjectsZonesClustersDelete'{..}
-          = go _pzcdProjectId _pzcdZoneId _pzcdClusterId
+          = go _pzcdProjectId _pzcdZone _pzcdClusterId
+              _pzcdXgafv
+              _pzcdUploadProtocol
+              (Just _pzcdPp)
+              _pzcdAccessToken
+              _pzcdUploadType
+              _pzcdBearerToken
+              _pzcdCallback
               _pzcdQuotaUser
               (Just _pzcdPrettyPrint)
-              _pzcdUserIP
               _pzcdFields
               _pzcdKey
               _pzcdOAuthToken

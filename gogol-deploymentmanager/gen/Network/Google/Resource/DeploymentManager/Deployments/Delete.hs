@@ -22,7 +22,7 @@
 --
 -- | Deletes a deployment and all of the resources in the deployment.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsDelete@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsDelete@.
 module Network.Google.Resource.DeploymentManager.Deployments.Delete
     (
     -- * REST Resource

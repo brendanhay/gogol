@@ -22,7 +22,7 @@
 --
 -- | Retrieves ACL entries on the specified bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketAccessControlsList@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketAccessControlsList@.
 module Network.Google.Resource.Storage.BucketAccessControls.List
     (
     -- * REST Resource

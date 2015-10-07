@@ -56,7 +56,7 @@ import           Network.Google.PubSub.Types
 -- | A resource alias for @PubsubProjectsSubscriptionsSetIAMPolicy@ method which the
 -- 'ProjectsSubscriptionsSetIAMPolicy'' request conforms to.
 type ProjectsSubscriptionsSetIAMPolicyResource =
-     "v1beta2" :>
+     "v1" :>
        CaptureMode "resource" "setIamPolicy" Text :>
          QueryParam "$.xgafv" Text :>
            QueryParam "upload_protocol" Text :>

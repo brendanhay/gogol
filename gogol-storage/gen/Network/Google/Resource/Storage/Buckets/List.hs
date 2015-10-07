@@ -22,7 +22,7 @@
 --
 -- | Retrieves a list of buckets for a given project.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketsList@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketsList@.
 module Network.Google.Resource.Storage.Buckets.List
     (
     -- * REST Resource
@@ -36,6 +36,7 @@ module Network.Google.Resource.Storage.Buckets.List
     , blQuotaUser
     , blPrettyPrint
     , blProject
+    , blPrefix
     , blUserIP
     , blKey
     , blProjection
@@ -53,16 +54,17 @@ import           Network.Google.Storage.Types
 type BucketsListResource =
      "b" :>
        QueryParam "project" Text :>
-         QueryParam "projection" BucketsListProjection :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" AltJSON :> Get '[JSON] Buckets
+         QueryParam "prefix" Text :>
+           QueryParam "projection" BucketsListProjection :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" AuthKey :>
+                           QueryParam "oauth_token" OAuthToken :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Buckets
 
 -- | Retrieves a list of buckets for a given project.
 --
@@ -71,6 +73,7 @@ data BucketsList' = BucketsList'
     { _blQuotaUser   :: !(Maybe Text)
     , _blPrettyPrint :: !Bool
     , _blProject     :: !Text
+    , _blPrefix      :: !(Maybe Text)
     , _blUserIP      :: !(Maybe Text)
     , _blKey         :: !(Maybe AuthKey)
     , _blProjection  :: !(Maybe BucketsListProjection)
@@ -89,6 +92,8 @@ data BucketsList' = BucketsList'
 -- * 'blPrettyPrint'
 --
 -- * 'blProject'
+--
+-- * 'blPrefix'
 --
 -- * 'blUserIP'
 --
@@ -111,6 +116,7 @@ bucketsList' pBlProject_ =
     { _blQuotaUser = Nothing
     , _blPrettyPrint = True
     , _blProject = pBlProject_
+    , _blPrefix = Nothing
     , _blUserIP = Nothing
     , _blKey = Nothing
     , _blProjection = Nothing
@@ -137,6 +143,10 @@ blPrettyPrint
 blProject :: Lens' BucketsList' Text
 blProject
   = lens _blProject (\ s a -> s{_blProject = a})
+
+-- | Filter results to buckets whose names begin with this prefix.
+blPrefix :: Lens' BucketsList' (Maybe Text)
+blPrefix = lens _blPrefix (\ s a -> s{_blPrefix = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
@@ -182,7 +192,8 @@ instance GoogleRequest BucketsList' where
         type Rs BucketsList' = Buckets
         request = requestWith storageRequest
         requestWith rq BucketsList'{..}
-          = go (Just _blProject) _blProjection _blPageToken
+          = go (Just _blProject) _blPrefix _blProjection
+              _blPageToken
               _blMaxResults
               _blQuotaUser
               (Just _blPrettyPrint)

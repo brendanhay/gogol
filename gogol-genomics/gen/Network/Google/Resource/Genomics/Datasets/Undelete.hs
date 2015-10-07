@@ -24,7 +24,7 @@
 -- API. This operation is only possible for a week after the deletion
 -- occurred.
 --
--- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsDatasetsUndelete@.
+-- /See:/ < Genomics API Reference> for @GenomicsDatasetsUndelete@.
 module Network.Google.Resource.Genomics.Datasets.Undelete
     (
     -- * REST Resource
@@ -35,13 +35,20 @@ module Network.Google.Resource.Genomics.Datasets.Undelete
     , DatasetsUndelete'
 
     -- * Request Lenses
+    , duXgafv
     , duQuotaUser
     , duPrettyPrint
-    , duUserIP
+    , duUploadProtocol
+    , duPp
+    , duAccessToken
+    , duUploadType
+    , duPayload
+    , duBearerToken
     , duKey
     , duDatasetId
     , duOAuthToken
     , duFields
+    , duCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -50,16 +57,24 @@ import           Network.Google.Prelude
 -- | A resource alias for @GenomicsDatasetsUndelete@ method which the
 -- 'DatasetsUndelete'' request conforms to.
 type DatasetsUndeleteResource =
-     "datasets" :>
-       Capture "datasetId" Text :>
-         "undelete" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] Dataset
+     "v1" :>
+       "datasets" :>
+         CaptureMode "datasetId" "undelete" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" AuthKey :>
+                                 QueryParam "oauth_token" OAuthToken :>
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] UndeleteDatasetRequest :>
+                                       Post '[JSON] Dataset
 
 -- | Undeletes a dataset by restoring a dataset which was deleted via this
 -- API. This operation is only possible for a week after the deletion
@@ -67,24 +82,43 @@ type DatasetsUndeleteResource =
 --
 -- /See:/ 'datasetsUndelete'' smart constructor.
 data DatasetsUndelete' = DatasetsUndelete'
-    { _duQuotaUser   :: !(Maybe Text)
-    , _duPrettyPrint :: !Bool
-    , _duUserIP      :: !(Maybe Text)
-    , _duKey         :: !(Maybe AuthKey)
-    , _duDatasetId   :: !Text
-    , _duOAuthToken  :: !(Maybe OAuthToken)
-    , _duFields      :: !(Maybe Text)
+    { _duXgafv          :: !(Maybe Text)
+    , _duQuotaUser      :: !(Maybe Text)
+    , _duPrettyPrint    :: !Bool
+    , _duUploadProtocol :: !(Maybe Text)
+    , _duPp             :: !Bool
+    , _duAccessToken    :: !(Maybe Text)
+    , _duUploadType     :: !(Maybe Text)
+    , _duPayload        :: !UndeleteDatasetRequest
+    , _duBearerToken    :: !(Maybe Text)
+    , _duKey            :: !(Maybe AuthKey)
+    , _duDatasetId      :: !Text
+    , _duOAuthToken     :: !(Maybe OAuthToken)
+    , _duFields         :: !(Maybe Text)
+    , _duCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsUndelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'duXgafv'
+--
 -- * 'duQuotaUser'
 --
 -- * 'duPrettyPrint'
 --
--- * 'duUserIP'
+-- * 'duUploadProtocol'
+--
+-- * 'duPp'
+--
+-- * 'duAccessToken'
+--
+-- * 'duUploadType'
+--
+-- * 'duPayload'
+--
+-- * 'duBearerToken'
 --
 -- * 'duKey'
 --
@@ -93,23 +127,37 @@ data DatasetsUndelete' = DatasetsUndelete'
 -- * 'duOAuthToken'
 --
 -- * 'duFields'
+--
+-- * 'duCallback'
 datasetsUndelete'
-    :: Text -- ^ 'datasetId'
+    :: UndeleteDatasetRequest -- ^ 'payload'
+    -> Text -- ^ 'datasetId'
     -> DatasetsUndelete'
-datasetsUndelete' pDuDatasetId_ =
+datasetsUndelete' pDuPayload_ pDuDatasetId_ =
     DatasetsUndelete'
-    { _duQuotaUser = Nothing
+    { _duXgafv = Nothing
+    , _duQuotaUser = Nothing
     , _duPrettyPrint = True
-    , _duUserIP = Nothing
+    , _duUploadProtocol = Nothing
+    , _duPp = True
+    , _duAccessToken = Nothing
+    , _duUploadType = Nothing
+    , _duPayload = pDuPayload_
+    , _duBearerToken = Nothing
     , _duKey = Nothing
     , _duDatasetId = pDuDatasetId_
     , _duOAuthToken = Nothing
     , _duFields = Nothing
+    , _duCallback = Nothing
     }
+
+-- | V1 error format.
+duXgafv :: Lens' DatasetsUndelete' (Maybe Text)
+duXgafv = lens _duXgafv (\ s a -> s{_duXgafv = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
+-- characters.
 duQuotaUser :: Lens' DatasetsUndelete' (Maybe Text)
 duQuotaUser
   = lens _duQuotaUser (\ s a -> s{_duQuotaUser = a})
@@ -120,10 +168,37 @@ duPrettyPrint
   = lens _duPrettyPrint
       (\ s a -> s{_duPrettyPrint = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-duUserIP :: Lens' DatasetsUndelete' (Maybe Text)
-duUserIP = lens _duUserIP (\ s a -> s{_duUserIP = a})
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+duUploadProtocol :: Lens' DatasetsUndelete' (Maybe Text)
+duUploadProtocol
+  = lens _duUploadProtocol
+      (\ s a -> s{_duUploadProtocol = a})
+
+-- | Pretty-print response.
+duPp :: Lens' DatasetsUndelete' Bool
+duPp = lens _duPp (\ s a -> s{_duPp = a})
+
+-- | OAuth access token.
+duAccessToken :: Lens' DatasetsUndelete' (Maybe Text)
+duAccessToken
+  = lens _duAccessToken
+      (\ s a -> s{_duAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+duUploadType :: Lens' DatasetsUndelete' (Maybe Text)
+duUploadType
+  = lens _duUploadType (\ s a -> s{_duUploadType = a})
+
+-- | Multipart request metadata.
+duPayload :: Lens' DatasetsUndelete' UndeleteDatasetRequest
+duPayload
+  = lens _duPayload (\ s a -> s{_duPayload = a})
+
+-- | OAuth bearer token.
+duBearerToken :: Lens' DatasetsUndelete' (Maybe Text)
+duBearerToken
+  = lens _duBearerToken
+      (\ s a -> s{_duBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -145,6 +220,11 @@ duOAuthToken
 duFields :: Lens' DatasetsUndelete' (Maybe Text)
 duFields = lens _duFields (\ s a -> s{_duFields = a})
 
+-- | JSONP
+duCallback :: Lens' DatasetsUndelete' (Maybe Text)
+duCallback
+  = lens _duCallback (\ s a -> s{_duCallback = a})
+
 instance GoogleAuth DatasetsUndelete' where
         _AuthKey = duKey . _Just
         _AuthToken = duOAuthToken . _Just
@@ -153,12 +233,19 @@ instance GoogleRequest DatasetsUndelete' where
         type Rs DatasetsUndelete' = Dataset
         request = requestWith genomicsRequest
         requestWith rq DatasetsUndelete'{..}
-          = go _duDatasetId _duQuotaUser (Just _duPrettyPrint)
-              _duUserIP
+          = go _duDatasetId _duXgafv _duUploadProtocol
+              (Just _duPp)
+              _duAccessToken
+              _duUploadType
+              _duBearerToken
+              _duCallback
+              _duQuotaUser
+              (Just _duPrettyPrint)
               _duFields
               _duKey
               _duOAuthToken
               (Just AltJSON)
+              _duPayload
           where go
                   = clientBuild
                       (Proxy :: Proxy DatasetsUndeleteResource)

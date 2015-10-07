@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Copies an object to a destination in the same location. Optionally
--- overrides metadata.
+-- | Copies a source object to a destination object. Optionally overrides
+-- metadata.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsCopy@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsCopy@.
 module Network.Google.Resource.Storage.Objects.Copy
     (
     -- * REST Resource
@@ -34,6 +34,7 @@ module Network.Google.Resource.Storage.Objects.Copy
     , ObjectsCopy'
 
     -- * Request Lenses
+    , ocDestinationPredefinedACL
     , ocQuotaUser
     , ocIfSourceGenerationMatch
     , ocIfMetagenerationMatch
@@ -72,65 +73,26 @@ type ObjectsCopyResource =
                  Capture "destinationBucket" Text :>
                    "o" :>
                      Capture "destinationObject" Text :>
-                       QueryParam "ifSourceGenerationMatch" Word64 :>
-                         QueryParam "ifMetagenerationMatch" Word64 :>
-                           QueryParam "ifGenerationNotMatch" Word64 :>
-                             QueryParam "ifSourceMetagenerationNotMatch" Word64
-                               :>
-                               QueryParam "ifSourceMetagenerationMatch" Word64
+                       QueryParam "destinationPredefinedAcl"
+                         ObjectsCopyDestinationPredefinedACL
+                         :>
+                         QueryParam "ifSourceGenerationMatch" Int64 :>
+                           QueryParam "ifMetagenerationMatch" Int64 :>
+                             QueryParam "ifGenerationNotMatch" Int64 :>
+                               QueryParam "ifSourceMetagenerationNotMatch" Int64
                                  :>
-                                 QueryParam "ifGenerationMatch" Word64 :>
-                                   QueryParam "ifMetagenerationNotMatch" Word64
-                                     :>
-                                     QueryParam "ifSourceGenerationNotMatch"
-                                       Word64
-                                       :>
-                                       QueryParam "projection"
-                                         ObjectsCopyProjection
-                                         :>
-                                         QueryParam "sourceGeneration" Word64 :>
-                                           QueryParam "quotaUser" Text :>
-                                             QueryParam "prettyPrint" Bool :>
-                                               QueryParam "userIp" Text :>
-                                                 QueryParam "fields" Text :>
-                                                   QueryParam "key" AuthKey :>
-                                                     QueryParam "oauth_token"
-                                                       OAuthToken
-                                                       :>
-                                                       QueryParam "alt" AltJSON
-                                                         :>
-                                                         ReqBody '[JSON] Object
-                                                           :>
-                                                           Post '[JSON] Object
-       :<|>
-       "b" :>
-         Capture "sourceBucket" Text :>
-           "o" :>
-             Capture "sourceObject" Text :>
-               "copyTo" :>
-                 "b" :>
-                   Capture "destinationBucket" Text :>
-                     "o" :>
-                       Capture "destinationObject" Text :>
-                         QueryParam "ifSourceGenerationMatch" Word64 :>
-                           QueryParam "ifMetagenerationMatch" Word64 :>
-                             QueryParam "ifGenerationNotMatch" Word64 :>
-                               QueryParam "ifSourceMetagenerationNotMatch"
-                                 Word64
-                                 :>
-                                 QueryParam "ifSourceMetagenerationMatch" Word64
+                                 QueryParam "ifSourceMetagenerationMatch" Int64
                                    :>
-                                   QueryParam "ifGenerationMatch" Word64 :>
-                                     QueryParam "ifMetagenerationNotMatch"
-                                       Word64
+                                   QueryParam "ifGenerationMatch" Int64 :>
+                                     QueryParam "ifMetagenerationNotMatch" Int64
                                        :>
                                        QueryParam "ifSourceGenerationNotMatch"
-                                         Word64
+                                         Int64
                                          :>
                                          QueryParam "projection"
                                            ObjectsCopyProjection
                                            :>
-                                           QueryParam "sourceGeneration" Word64
+                                           QueryParam "sourceGeneration" Int64
                                              :>
                                              QueryParam "quotaUser" Text :>
                                                QueryParam "prettyPrint" Bool :>
@@ -141,38 +103,92 @@ type ObjectsCopyResource =
                                                          OAuthToken
                                                          :>
                                                          QueryParam "alt"
-                                                           AltMedia
+                                                           AltJSON
                                                            :>
                                                            ReqBody '[JSON]
                                                              Object
                                                              :>
-                                                             Post '[OctetStream]
-                                                               Stream
+                                                             Post '[JSON] Object
+       :<|>
+       "b" :>
+         Capture "sourceBucket" Text :>
+           "o" :>
+             Capture "sourceObject" Text :>
+               "copyTo" :>
+                 "b" :>
+                   Capture "destinationBucket" Text :>
+                     "o" :>
+                       Capture "destinationObject" Text :>
+                         QueryParam "destinationPredefinedAcl"
+                           ObjectsCopyDestinationPredefinedACL
+                           :>
+                           QueryParam "ifSourceGenerationMatch" Int64 :>
+                             QueryParam "ifMetagenerationMatch" Int64 :>
+                               QueryParam "ifGenerationNotMatch" Int64 :>
+                                 QueryParam "ifSourceMetagenerationNotMatch"
+                                   Int64
+                                   :>
+                                   QueryParam "ifSourceMetagenerationMatch"
+                                     Int64
+                                     :>
+                                     QueryParam "ifGenerationMatch" Int64 :>
+                                       QueryParam "ifMetagenerationNotMatch"
+                                         Int64
+                                         :>
+                                         QueryParam "ifSourceGenerationNotMatch"
+                                           Int64
+                                           :>
+                                           QueryParam "projection"
+                                             ObjectsCopyProjection
+                                             :>
+                                             QueryParam "sourceGeneration" Int64
+                                               :>
+                                               QueryParam "quotaUser" Text :>
+                                                 QueryParam "prettyPrint" Bool
+                                                   :>
+                                                   QueryParam "userIp" Text :>
+                                                     QueryParam "fields" Text :>
+                                                       QueryParam "key" AuthKey
+                                                         :>
+                                                         QueryParam
+                                                           "oauth_token"
+                                                           OAuthToken
+                                                           :>
+                                                           QueryParam "alt"
+                                                             AltMedia
+                                                             :>
+                                                             ReqBody '[JSON]
+                                                               Object
+                                                               :>
+                                                               Post
+                                                                 '[OctetStream]
+                                                                 Stream
 
--- | Copies an object to a destination in the same location. Optionally
--- overrides metadata.
+-- | Copies a source object to a destination object. Optionally overrides
+-- metadata.
 --
 -- /See:/ 'objectsCopy'' smart constructor.
 data ObjectsCopy' = ObjectsCopy'
-    { _ocQuotaUser                      :: !(Maybe Text)
-    , _ocIfSourceGenerationMatch        :: !(Maybe Word64)
-    , _ocIfMetagenerationMatch          :: !(Maybe Word64)
-    , _ocIfGenerationNotMatch           :: !(Maybe Word64)
+    { _ocDestinationPredefinedACL       :: !(Maybe ObjectsCopyDestinationPredefinedACL)
+    , _ocQuotaUser                      :: !(Maybe Text)
+    , _ocIfSourceGenerationMatch        :: !(Maybe Int64)
+    , _ocIfMetagenerationMatch          :: !(Maybe Int64)
+    , _ocIfGenerationNotMatch           :: !(Maybe Int64)
     , _ocPrettyPrint                    :: !Bool
-    , _ocIfSourceMetagenerationNotMatch :: !(Maybe Word64)
-    , _ocIfSourceMetagenerationMatch    :: !(Maybe Word64)
-    , _ocIfGenerationMatch              :: !(Maybe Word64)
+    , _ocIfSourceMetagenerationNotMatch :: !(Maybe Int64)
+    , _ocIfSourceMetagenerationMatch    :: !(Maybe Int64)
+    , _ocIfGenerationMatch              :: !(Maybe Int64)
     , _ocUserIP                         :: !(Maybe Text)
     , _ocSourceObject                   :: !Text
     , _ocSourceBucket                   :: !Text
     , _ocPayload                        :: !Object
     , _ocKey                            :: !(Maybe AuthKey)
     , _ocDestinationBucket              :: !Text
-    , _ocIfMetagenerationNotMatch       :: !(Maybe Word64)
-    , _ocIfSourceGenerationNotMatch     :: !(Maybe Word64)
+    , _ocIfMetagenerationNotMatch       :: !(Maybe Int64)
+    , _ocIfSourceGenerationNotMatch     :: !(Maybe Int64)
     , _ocProjection                     :: !(Maybe ObjectsCopyProjection)
     , _ocOAuthToken                     :: !(Maybe OAuthToken)
-    , _ocSourceGeneration               :: !(Maybe Word64)
+    , _ocSourceGeneration               :: !(Maybe Int64)
     , _ocFields                         :: !(Maybe Text)
     , _ocDestinationObject              :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -180,6 +196,8 @@ data ObjectsCopy' = ObjectsCopy'
 -- | Creates a value of 'ObjectsCopy'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ocDestinationPredefinedACL'
 --
 -- * 'ocQuotaUser'
 --
@@ -231,7 +249,8 @@ objectsCopy'
     -> ObjectsCopy'
 objectsCopy' pOcSourceObject_ pOcSourceBucket_ pOcPayload_ pOcDestinationBucket_ pOcDestinationObject_ =
     ObjectsCopy'
-    { _ocQuotaUser = Nothing
+    { _ocDestinationPredefinedACL = Nothing
+    , _ocQuotaUser = Nothing
     , _ocIfSourceGenerationMatch = Nothing
     , _ocIfMetagenerationMatch = Nothing
     , _ocIfGenerationNotMatch = Nothing
@@ -254,6 +273,12 @@ objectsCopy' pOcSourceObject_ pOcSourceBucket_ pOcPayload_ pOcDestinationBucket_
     , _ocDestinationObject = pOcDestinationObject_
     }
 
+-- | Apply a predefined set of access controls to the destination object.
+ocDestinationPredefinedACL :: Lens' ObjectsCopy' (Maybe ObjectsCopyDestinationPredefinedACL)
+ocDestinationPredefinedACL
+  = lens _ocDestinationPredefinedACL
+      (\ s a -> s{_ocDestinationPredefinedACL = a})
+
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
@@ -263,21 +288,21 @@ ocQuotaUser
 
 -- | Makes the operation conditional on whether the source object\'s
 -- generation matches the given value.
-ocIfSourceGenerationMatch :: Lens' ObjectsCopy' (Maybe Word64)
+ocIfSourceGenerationMatch :: Lens' ObjectsCopy' (Maybe Int64)
 ocIfSourceGenerationMatch
   = lens _ocIfSourceGenerationMatch
       (\ s a -> s{_ocIfSourceGenerationMatch = a})
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current metageneration matches the given value.
-ocIfMetagenerationMatch :: Lens' ObjectsCopy' (Maybe Word64)
+ocIfMetagenerationMatch :: Lens' ObjectsCopy' (Maybe Int64)
 ocIfMetagenerationMatch
   = lens _ocIfMetagenerationMatch
       (\ s a -> s{_ocIfMetagenerationMatch = a})
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current generation does not match the given value.
-ocIfGenerationNotMatch :: Lens' ObjectsCopy' (Maybe Word64)
+ocIfGenerationNotMatch :: Lens' ObjectsCopy' (Maybe Int64)
 ocIfGenerationNotMatch
   = lens _ocIfGenerationNotMatch
       (\ s a -> s{_ocIfGenerationNotMatch = a})
@@ -290,21 +315,21 @@ ocPrettyPrint
 
 -- | Makes the operation conditional on whether the source object\'s current
 -- metageneration does not match the given value.
-ocIfSourceMetagenerationNotMatch :: Lens' ObjectsCopy' (Maybe Word64)
+ocIfSourceMetagenerationNotMatch :: Lens' ObjectsCopy' (Maybe Int64)
 ocIfSourceMetagenerationNotMatch
   = lens _ocIfSourceMetagenerationNotMatch
       (\ s a -> s{_ocIfSourceMetagenerationNotMatch = a})
 
 -- | Makes the operation conditional on whether the source object\'s current
 -- metageneration matches the given value.
-ocIfSourceMetagenerationMatch :: Lens' ObjectsCopy' (Maybe Word64)
+ocIfSourceMetagenerationMatch :: Lens' ObjectsCopy' (Maybe Int64)
 ocIfSourceMetagenerationMatch
   = lens _ocIfSourceMetagenerationMatch
       (\ s a -> s{_ocIfSourceMetagenerationMatch = a})
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current generation matches the given value.
-ocIfGenerationMatch :: Lens' ObjectsCopy' (Maybe Word64)
+ocIfGenerationMatch :: Lens' ObjectsCopy' (Maybe Int64)
 ocIfGenerationMatch
   = lens _ocIfGenerationMatch
       (\ s a -> s{_ocIfGenerationMatch = a})
@@ -314,7 +339,8 @@ ocIfGenerationMatch
 ocUserIP :: Lens' ObjectsCopy' (Maybe Text)
 ocUserIP = lens _ocUserIP (\ s a -> s{_ocUserIP = a})
 
--- | Name of the source object.
+-- | Name of the source object. For information about how to URL encode
+-- object names to be path safe, see Encoding URI Path Parts.
 ocSourceObject :: Lens' ObjectsCopy' Text
 ocSourceObject
   = lens _ocSourceObject
@@ -338,7 +364,9 @@ ocKey :: Lens' ObjectsCopy' (Maybe AuthKey)
 ocKey = lens _ocKey (\ s a -> s{_ocKey = a})
 
 -- | Name of the bucket in which to store the new object. Overrides the
--- provided object metadata\'s bucket value, if any.
+-- provided object metadata\'s bucket value, if any.For information about
+-- how to URL encode object names to be path safe, see Encoding URI Path
+-- Parts.
 ocDestinationBucket :: Lens' ObjectsCopy' Text
 ocDestinationBucket
   = lens _ocDestinationBucket
@@ -346,14 +374,14 @@ ocDestinationBucket
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current metageneration does not match the given value.
-ocIfMetagenerationNotMatch :: Lens' ObjectsCopy' (Maybe Word64)
+ocIfMetagenerationNotMatch :: Lens' ObjectsCopy' (Maybe Int64)
 ocIfMetagenerationNotMatch
   = lens _ocIfMetagenerationNotMatch
       (\ s a -> s{_ocIfMetagenerationNotMatch = a})
 
 -- | Makes the operation conditional on whether the source object\'s
 -- generation does not match the given value.
-ocIfSourceGenerationNotMatch :: Lens' ObjectsCopy' (Maybe Word64)
+ocIfSourceGenerationNotMatch :: Lens' ObjectsCopy' (Maybe Int64)
 ocIfSourceGenerationNotMatch
   = lens _ocIfSourceGenerationNotMatch
       (\ s a -> s{_ocIfSourceGenerationNotMatch = a})
@@ -371,7 +399,7 @@ ocOAuthToken
 
 -- | If present, selects a specific revision of the source object (as opposed
 -- to the latest version, the default).
-ocSourceGeneration :: Lens' ObjectsCopy' (Maybe Word64)
+ocSourceGeneration :: Lens' ObjectsCopy' (Maybe Int64)
 ocSourceGeneration
   = lens _ocSourceGeneration
       (\ s a -> s{_ocSourceGeneration = a})
@@ -398,6 +426,7 @@ instance GoogleRequest ObjectsCopy' where
           = go _ocSourceBucket _ocSourceObject
               _ocDestinationBucket
               _ocDestinationObject
+              _ocDestinationPredefinedACL
               _ocIfSourceGenerationMatch
               _ocIfMetagenerationMatch
               _ocIfGenerationNotMatch
@@ -427,6 +456,7 @@ instance GoogleRequest (MediaDownload ObjectsCopy')
           = go _ocSourceBucket _ocSourceObject
               _ocDestinationBucket
               _ocDestinationObject
+              _ocDestinationPredefinedACL
               _ocIfSourceGenerationMatch
               _ocIfMetagenerationMatch
               _ocIfGenerationNotMatch

@@ -22,7 +22,7 @@
 --
 -- | Deletes a call set.
 --
--- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsCallsetsDelete@.
+-- /See:/ < Genomics API Reference> for @GenomicsCallsetsDelete@.
 module Network.Google.Resource.Genomics.Callsets.Delete
     (
     -- * REST Resource
@@ -33,13 +33,19 @@ module Network.Google.Resource.Genomics.Callsets.Delete
     , CallsetsDelete'
 
     -- * Request Lenses
+    , cdXgafv
     , cdQuotaUser
     , cdPrettyPrint
-    , cdUserIP
+    , cdUploadProtocol
+    , cdPp
+    , cdAccessToken
+    , cdUploadType
+    , cdBearerToken
     , cdKey
     , cdCallSetId
     , cdOAuthToken
     , cdFields
+    , cdCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -48,38 +54,62 @@ import           Network.Google.Prelude
 -- | A resource alias for @GenomicsCallsetsDelete@ method which the
 -- 'CallsetsDelete'' request conforms to.
 type CallsetsDeleteResource =
-     "callsets" :>
-       Capture "callSetId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "v1" :>
+       "callsets" :>
+         Capture "callSetId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" AuthKey :>
+                                 QueryParam "oauth_token" OAuthToken :>
+                                   QueryParam "alt" AltJSON :>
+                                     Delete '[JSON] Empty
 
 -- | Deletes a call set.
 --
 -- /See:/ 'callsetsDelete'' smart constructor.
 data CallsetsDelete' = CallsetsDelete'
-    { _cdQuotaUser   :: !(Maybe Text)
-    , _cdPrettyPrint :: !Bool
-    , _cdUserIP      :: !(Maybe Text)
-    , _cdKey         :: !(Maybe AuthKey)
-    , _cdCallSetId   :: !Text
-    , _cdOAuthToken  :: !(Maybe OAuthToken)
-    , _cdFields      :: !(Maybe Text)
+    { _cdXgafv          :: !(Maybe Text)
+    , _cdQuotaUser      :: !(Maybe Text)
+    , _cdPrettyPrint    :: !Bool
+    , _cdUploadProtocol :: !(Maybe Text)
+    , _cdPp             :: !Bool
+    , _cdAccessToken    :: !(Maybe Text)
+    , _cdUploadType     :: !(Maybe Text)
+    , _cdBearerToken    :: !(Maybe Text)
+    , _cdKey            :: !(Maybe AuthKey)
+    , _cdCallSetId      :: !Text
+    , _cdOAuthToken     :: !(Maybe OAuthToken)
+    , _cdFields         :: !(Maybe Text)
+    , _cdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cdXgafv'
+--
 -- * 'cdQuotaUser'
 --
 -- * 'cdPrettyPrint'
 --
--- * 'cdUserIP'
+-- * 'cdUploadProtocol'
+--
+-- * 'cdPp'
+--
+-- * 'cdAccessToken'
+--
+-- * 'cdUploadType'
+--
+-- * 'cdBearerToken'
 --
 -- * 'cdKey'
 --
@@ -88,23 +118,35 @@ data CallsetsDelete' = CallsetsDelete'
 -- * 'cdOAuthToken'
 --
 -- * 'cdFields'
+--
+-- * 'cdCallback'
 callsetsDelete'
     :: Text -- ^ 'callSetId'
     -> CallsetsDelete'
 callsetsDelete' pCdCallSetId_ =
     CallsetsDelete'
-    { _cdQuotaUser = Nothing
+    { _cdXgafv = Nothing
+    , _cdQuotaUser = Nothing
     , _cdPrettyPrint = True
-    , _cdUserIP = Nothing
+    , _cdUploadProtocol = Nothing
+    , _cdPp = True
+    , _cdAccessToken = Nothing
+    , _cdUploadType = Nothing
+    , _cdBearerToken = Nothing
     , _cdKey = Nothing
     , _cdCallSetId = pCdCallSetId_
     , _cdOAuthToken = Nothing
     , _cdFields = Nothing
+    , _cdCallback = Nothing
     }
+
+-- | V1 error format.
+cdXgafv :: Lens' CallsetsDelete' (Maybe Text)
+cdXgafv = lens _cdXgafv (\ s a -> s{_cdXgafv = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
+-- characters.
 cdQuotaUser :: Lens' CallsetsDelete' (Maybe Text)
 cdQuotaUser
   = lens _cdQuotaUser (\ s a -> s{_cdQuotaUser = a})
@@ -115,10 +157,32 @@ cdPrettyPrint
   = lens _cdPrettyPrint
       (\ s a -> s{_cdPrettyPrint = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-cdUserIP :: Lens' CallsetsDelete' (Maybe Text)
-cdUserIP = lens _cdUserIP (\ s a -> s{_cdUserIP = a})
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cdUploadProtocol :: Lens' CallsetsDelete' (Maybe Text)
+cdUploadProtocol
+  = lens _cdUploadProtocol
+      (\ s a -> s{_cdUploadProtocol = a})
+
+-- | Pretty-print response.
+cdPp :: Lens' CallsetsDelete' Bool
+cdPp = lens _cdPp (\ s a -> s{_cdPp = a})
+
+-- | OAuth access token.
+cdAccessToken :: Lens' CallsetsDelete' (Maybe Text)
+cdAccessToken
+  = lens _cdAccessToken
+      (\ s a -> s{_cdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cdUploadType :: Lens' CallsetsDelete' (Maybe Text)
+cdUploadType
+  = lens _cdUploadType (\ s a -> s{_cdUploadType = a})
+
+-- | OAuth bearer token.
+cdBearerToken :: Lens' CallsetsDelete' (Maybe Text)
+cdBearerToken
+  = lens _cdBearerToken
+      (\ s a -> s{_cdBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -140,16 +204,27 @@ cdOAuthToken
 cdFields :: Lens' CallsetsDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
+-- | JSONP
+cdCallback :: Lens' CallsetsDelete' (Maybe Text)
+cdCallback
+  = lens _cdCallback (\ s a -> s{_cdCallback = a})
+
 instance GoogleAuth CallsetsDelete' where
         _AuthKey = cdKey . _Just
         _AuthToken = cdOAuthToken . _Just
 
 instance GoogleRequest CallsetsDelete' where
-        type Rs CallsetsDelete' = ()
+        type Rs CallsetsDelete' = Empty
         request = requestWith genomicsRequest
         requestWith rq CallsetsDelete'{..}
-          = go _cdCallSetId _cdQuotaUser (Just _cdPrettyPrint)
-              _cdUserIP
+          = go _cdCallSetId _cdXgafv _cdUploadProtocol
+              (Just _cdPp)
+              _cdAccessToken
+              _cdUploadType
+              _cdBearerToken
+              _cdCallback
+              _cdQuotaUser
+              (Just _cdPrettyPrint)
               _cdFields
               _cdKey
               _cdOAuthToken

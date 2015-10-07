@@ -22,7 +22,7 @@
 --
 -- | Updates a call set. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsCallsetsPatch@.
+-- /See:/ < Genomics API Reference> for @GenomicsCallsetsPatch@.
 module Network.Google.Resource.Genomics.Callsets.Patch
     (
     -- * REST Resource
@@ -33,14 +33,21 @@ module Network.Google.Resource.Genomics.Callsets.Patch
     , CallsetsPatch'
 
     -- * Request Lenses
+    , cpXgafv
     , cpQuotaUser
     , cpPrettyPrint
-    , cpUserIP
+    , cpUploadProtocol
+    , cpUpdateMask
+    , cpPp
+    , cpAccessToken
+    , cpUploadType
     , cpPayload
+    , cpBearerToken
     , cpKey
     , cpCallSetId
     , cpOAuthToken
     , cpFields
+    , cpCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -49,42 +56,70 @@ import           Network.Google.Prelude
 -- | A resource alias for @GenomicsCallsetsPatch@ method which the
 -- 'CallsetsPatch'' request conforms to.
 type CallsetsPatchResource =
-     "callsets" :>
-       Capture "callSetId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] CallSet :> Patch '[JSON] CallSet
+     "v1" :>
+       "callsets" :>
+         Capture "callSetId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "updateMask" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" AuthKey :>
+                                   QueryParam "oauth_token" OAuthToken :>
+                                     QueryParam "alt" AltJSON :>
+                                       ReqBody '[JSON] CallSet :>
+                                         Patch '[JSON] CallSet
 
 -- | Updates a call set. This method supports patch semantics.
 --
 -- /See:/ 'callsetsPatch'' smart constructor.
 data CallsetsPatch' = CallsetsPatch'
-    { _cpQuotaUser   :: !(Maybe Text)
-    , _cpPrettyPrint :: !Bool
-    , _cpUserIP      :: !(Maybe Text)
-    , _cpPayload     :: !CallSet
-    , _cpKey         :: !(Maybe AuthKey)
-    , _cpCallSetId   :: !Text
-    , _cpOAuthToken  :: !(Maybe OAuthToken)
-    , _cpFields      :: !(Maybe Text)
+    { _cpXgafv          :: !(Maybe Text)
+    , _cpQuotaUser      :: !(Maybe Text)
+    , _cpPrettyPrint    :: !Bool
+    , _cpUploadProtocol :: !(Maybe Text)
+    , _cpUpdateMask     :: !(Maybe Text)
+    , _cpPp             :: !Bool
+    , _cpAccessToken    :: !(Maybe Text)
+    , _cpUploadType     :: !(Maybe Text)
+    , _cpPayload        :: !CallSet
+    , _cpBearerToken    :: !(Maybe Text)
+    , _cpKey            :: !(Maybe AuthKey)
+    , _cpCallSetId      :: !Text
+    , _cpOAuthToken     :: !(Maybe OAuthToken)
+    , _cpFields         :: !(Maybe Text)
+    , _cpCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cpXgafv'
+--
 -- * 'cpQuotaUser'
 --
 -- * 'cpPrettyPrint'
 --
--- * 'cpUserIP'
+-- * 'cpUploadProtocol'
+--
+-- * 'cpUpdateMask'
+--
+-- * 'cpPp'
+--
+-- * 'cpAccessToken'
+--
+-- * 'cpUploadType'
 --
 -- * 'cpPayload'
+--
+-- * 'cpBearerToken'
 --
 -- * 'cpKey'
 --
@@ -93,25 +128,38 @@ data CallsetsPatch' = CallsetsPatch'
 -- * 'cpOAuthToken'
 --
 -- * 'cpFields'
+--
+-- * 'cpCallback'
 callsetsPatch'
     :: CallSet -- ^ 'payload'
     -> Text -- ^ 'callSetId'
     -> CallsetsPatch'
 callsetsPatch' pCpPayload_ pCpCallSetId_ =
     CallsetsPatch'
-    { _cpQuotaUser = Nothing
+    { _cpXgafv = Nothing
+    , _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
-    , _cpUserIP = Nothing
+    , _cpUploadProtocol = Nothing
+    , _cpUpdateMask = Nothing
+    , _cpPp = True
+    , _cpAccessToken = Nothing
+    , _cpUploadType = Nothing
     , _cpPayload = pCpPayload_
+    , _cpBearerToken = Nothing
     , _cpKey = Nothing
     , _cpCallSetId = pCpCallSetId_
     , _cpOAuthToken = Nothing
     , _cpFields = Nothing
+    , _cpCallback = Nothing
     }
+
+-- | V1 error format.
+cpXgafv :: Lens' CallsetsPatch' (Maybe Text)
+cpXgafv = lens _cpXgafv (\ s a -> s{_cpXgafv = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
+-- characters.
 cpQuotaUser :: Lens' CallsetsPatch' (Maybe Text)
 cpQuotaUser
   = lens _cpQuotaUser (\ s a -> s{_cpQuotaUser = a})
@@ -122,15 +170,44 @@ cpPrettyPrint
   = lens _cpPrettyPrint
       (\ s a -> s{_cpPrettyPrint = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-cpUserIP :: Lens' CallsetsPatch' (Maybe Text)
-cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cpUploadProtocol :: Lens' CallsetsPatch' (Maybe Text)
+cpUploadProtocol
+  = lens _cpUploadProtocol
+      (\ s a -> s{_cpUploadProtocol = a})
+
+-- | An optional mask specifying which fields to update. At this time, the
+-- only mutable field is name. The only acceptable value is \"name\". If
+-- unspecified, all mutable fields will be updated.
+cpUpdateMask :: Lens' CallsetsPatch' (Maybe Text)
+cpUpdateMask
+  = lens _cpUpdateMask (\ s a -> s{_cpUpdateMask = a})
+
+-- | Pretty-print response.
+cpPp :: Lens' CallsetsPatch' Bool
+cpPp = lens _cpPp (\ s a -> s{_cpPp = a})
+
+-- | OAuth access token.
+cpAccessToken :: Lens' CallsetsPatch' (Maybe Text)
+cpAccessToken
+  = lens _cpAccessToken
+      (\ s a -> s{_cpAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cpUploadType :: Lens' CallsetsPatch' (Maybe Text)
+cpUploadType
+  = lens _cpUploadType (\ s a -> s{_cpUploadType = a})
 
 -- | Multipart request metadata.
 cpPayload :: Lens' CallsetsPatch' CallSet
 cpPayload
   = lens _cpPayload (\ s a -> s{_cpPayload = a})
+
+-- | OAuth bearer token.
+cpBearerToken :: Lens' CallsetsPatch' (Maybe Text)
+cpBearerToken
+  = lens _cpBearerToken
+      (\ s a -> s{_cpBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -152,6 +229,11 @@ cpOAuthToken
 cpFields :: Lens' CallsetsPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
+-- | JSONP
+cpCallback :: Lens' CallsetsPatch' (Maybe Text)
+cpCallback
+  = lens _cpCallback (\ s a -> s{_cpCallback = a})
+
 instance GoogleAuth CallsetsPatch' where
         _AuthKey = cpKey . _Just
         _AuthToken = cpOAuthToken . _Just
@@ -160,8 +242,15 @@ instance GoogleRequest CallsetsPatch' where
         type Rs CallsetsPatch' = CallSet
         request = requestWith genomicsRequest
         requestWith rq CallsetsPatch'{..}
-          = go _cpCallSetId _cpQuotaUser (Just _cpPrettyPrint)
-              _cpUserIP
+          = go _cpCallSetId _cpXgafv _cpUploadProtocol
+              _cpUpdateMask
+              (Just _cpPp)
+              _cpAccessToken
+              _cpUploadType
+              _cpBearerToken
+              _cpCallback
+              _cpQuotaUser
+              (Just _cpPrettyPrint)
               _cpFields
               _cpKey
               _cpOAuthToken

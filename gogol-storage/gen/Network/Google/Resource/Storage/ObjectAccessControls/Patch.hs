@@ -23,7 +23,7 @@
 -- | Updates an ACL entry on the specified object. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectAccessControlsPatch@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectAccessControlsPatch@.
 module Network.Google.Resource.Storage.ObjectAccessControls.Patch
     (
     -- * REST Resource
@@ -59,7 +59,7 @@ type ObjectAccessControlsPatchResource =
            Capture "object" Text :>
              "acl" :>
                Capture "entity" Text :>
-                 QueryParam "generation" Word64 :>
+                 QueryParam "generation" Int64 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -84,7 +84,7 @@ data ObjectAccessControlsPatch' = ObjectAccessControlsPatch'
     , _oacpObject      :: !Text
     , _oacpOAuthToken  :: !(Maybe OAuthToken)
     , _oacpEntity      :: !Text
-    , _oacpGeneration  :: !(Maybe Word64)
+    , _oacpGeneration  :: !(Maybe Int64)
     , _oacpFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -170,7 +170,8 @@ oacpPayload
 oacpKey :: Lens' ObjectAccessControlsPatch' (Maybe AuthKey)
 oacpKey = lens _oacpKey (\ s a -> s{_oacpKey = a})
 
--- | Name of the object.
+-- | Name of the object. For information about how to URL encode object names
+-- to be path safe, see Encoding URI Path Parts.
 oacpObject :: Lens' ObjectAccessControlsPatch' Text
 oacpObject
   = lens _oacpObject (\ s a -> s{_oacpObject = a})
@@ -190,7 +191,7 @@ oacpEntity
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
-oacpGeneration :: Lens' ObjectAccessControlsPatch' (Maybe Word64)
+oacpGeneration :: Lens' ObjectAccessControlsPatch' (Maybe Int64)
 oacpGeneration
   = lens _oacpGeneration
       (\ s a -> s{_oacpGeneration = a})

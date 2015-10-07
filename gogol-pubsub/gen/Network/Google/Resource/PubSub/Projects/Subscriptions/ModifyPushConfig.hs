@@ -59,7 +59,7 @@ import           Network.Google.PubSub.Types
 -- | A resource alias for @PubsubProjectsSubscriptionsModifyPushConfig@ method which the
 -- 'ProjectsSubscriptionsModifyPushConfig'' request conforms to.
 type ProjectsSubscriptionsModifyPushConfigResource =
-     "v1beta2" :>
+     "v1" :>
        CaptureMode "subscription" "modifyPushConfig" Text :>
          QueryParam "$.xgafv" Text :>
            QueryParam "upload_protocol" Text :>

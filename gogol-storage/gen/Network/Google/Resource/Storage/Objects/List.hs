@@ -22,7 +22,7 @@
 --
 -- | Retrieves a list of objects matching the criteria.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsList@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsList@.
 module Network.Google.Resource.Storage.Objects.List
     (
     -- * REST Resource
@@ -166,7 +166,8 @@ olUserIP = lens _olUserIP (\ s a -> s{_olUserIP = a})
 olBucket :: Lens' ObjectsList' Text
 olBucket = lens _olBucket (\ s a -> s{_olBucket = a})
 
--- | If true, lists all versions of a file as distinct results.
+-- | If true, lists all versions of an object as distinct results. The
+-- default is false. For more information, see Object Versioning.
 olVersions :: Lens' ObjectsList' (Maybe Bool)
 olVersions
   = lens _olVersions (\ s a -> s{_olVersions = a})
@@ -203,7 +204,8 @@ olDelimiter
   = lens _olDelimiter (\ s a -> s{_olDelimiter = a})
 
 -- | Maximum number of items plus prefixes to return. As duplicate prefixes
--- are omitted, fewer total results may be returned than requested.
+-- are omitted, fewer total results may be returned than requested. The
+-- default value of this parameter is 1,000 items.
 olMaxResults :: Lens' ObjectsList' (Maybe Word32)
 olMaxResults
   = lens _olMaxResults (\ s a -> s{_olMaxResults = a})

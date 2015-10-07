@@ -20,6 +20,7 @@ module Network.Google.Container.Types.Product where
 import           Network.Google.Container.Types.Sum
 import           Network.Google.Prelude
 
+-- | ListOperationsResponse is the result of ListOperationsRequest.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
 newtype ListOperationsResponse = ListOperationsResponse
@@ -58,6 +59,7 @@ instance ToJSON ListOperationsResponse where
           = object
               (catMaybes [("operations" .=) <$> _lorOperations])
 
+-- | CreateClusterRequest creates a cluster.
 --
 -- /See:/ 'createClusterRequest' smart constructor.
 newtype CreateClusterRequest = CreateClusterRequest
@@ -76,7 +78,8 @@ createClusterRequest =
     { _ccrCluster = Nothing
     }
 
--- | A cluster resource.
+-- | A [cluster
+-- resource](\/container-engine\/reference\/rest\/v1\/projects.zones.clusters)
 ccrCluster :: Lens' CreateClusterRequest (Maybe Cluster)
 ccrCluster
   = lens _ccrCluster (\ s a -> s{_ccrCluster = a})
@@ -90,28 +93,31 @@ instance ToJSON CreateClusterRequest where
         toJSON CreateClusterRequest{..}
           = object (catMaybes [("cluster" .=) <$> _ccrCluster])
 
+-- | A Google Container Engine cluster.
 --
 -- /See:/ 'cluster' smart constructor.
 data Cluster = Cluster
-    { _cStatus                :: !(Maybe ClusterStatus)
+    { _cStatus                :: !(Maybe Text)
     , _cNodeConfig            :: !(Maybe NodeConfig)
-    , _cNumNodes              :: !(Maybe Int32)
-    , _cClusterAPIVersion     :: !(Maybe Text)
+    , _cNodeIPv4CIdRSize      :: !(Maybe Int32)
+    , _cClusterIPv4CIdR       :: !(Maybe Text)
+    , _cInitialNodeCount      :: !(Maybe Int32)
+    , _cCurrentNodeVersion    :: !(Maybe Text)
     , _cNetwork               :: !(Maybe Text)
+    , _cInitialClusterVersion :: !(Maybe Text)
     , _cZone                  :: !(Maybe Text)
     , _cServicesIPv4CIdR      :: !(Maybe Text)
     , _cMasterAuth            :: !(Maybe MasterAuth)
     , _cSelfLink              :: !(Maybe Text)
-    , _cEnableCloudMonitoring :: !(Maybe Bool)
     , _cName                  :: !(Maybe Text)
+    , _cCurrentMasterVersion  :: !(Maybe Text)
     , _cStatusMessage         :: !(Maybe Text)
-    , _cCreationTimestamp     :: !(Maybe Text)
-    , _cContainerIPv4CIdR     :: !(Maybe Text)
     , _cEndpoint              :: !(Maybe Text)
-    , _cEnableCloudLogging    :: !(Maybe Bool)
+    , _cLoggingService        :: !(Maybe Text)
     , _cDescription           :: !(Maybe Text)
     , _cInstanceGroupURLs     :: !(Maybe [Text])
-    , _cNodeRoutingPrefixSize :: !(Maybe Int32)
+    , _cMonitoringService     :: !(Maybe Text)
+    , _cCreateTime            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Cluster' with the minimum fields required to make a request.
@@ -122,11 +128,17 @@ data Cluster = Cluster
 --
 -- * 'cNodeConfig'
 --
--- * 'cNumNodes'
+-- * 'cNodeIPv4CIdRSize'
 --
--- * 'cClusterAPIVersion'
+-- * 'cClusterIPv4CIdR'
+--
+-- * 'cInitialNodeCount'
+--
+-- * 'cCurrentNodeVersion'
 --
 -- * 'cNetwork'
+--
+-- * 'cInitialClusterVersion'
 --
 -- * 'cZone'
 --
@@ -136,92 +148,119 @@ data Cluster = Cluster
 --
 -- * 'cSelfLink'
 --
--- * 'cEnableCloudMonitoring'
---
 -- * 'cName'
+--
+-- * 'cCurrentMasterVersion'
 --
 -- * 'cStatusMessage'
 --
--- * 'cCreationTimestamp'
---
--- * 'cContainerIPv4CIdR'
---
 -- * 'cEndpoint'
 --
--- * 'cEnableCloudLogging'
+-- * 'cLoggingService'
 --
 -- * 'cDescription'
 --
 -- * 'cInstanceGroupURLs'
 --
--- * 'cNodeRoutingPrefixSize'
+-- * 'cMonitoringService'
+--
+-- * 'cCreateTime'
 cluster
     :: Cluster
 cluster =
     Cluster
     { _cStatus = Nothing
     , _cNodeConfig = Nothing
-    , _cNumNodes = Nothing
-    , _cClusterAPIVersion = Nothing
+    , _cNodeIPv4CIdRSize = Nothing
+    , _cClusterIPv4CIdR = Nothing
+    , _cInitialNodeCount = Nothing
+    , _cCurrentNodeVersion = Nothing
     , _cNetwork = Nothing
+    , _cInitialClusterVersion = Nothing
     , _cZone = Nothing
     , _cServicesIPv4CIdR = Nothing
     , _cMasterAuth = Nothing
     , _cSelfLink = Nothing
-    , _cEnableCloudMonitoring = Nothing
     , _cName = Nothing
+    , _cCurrentMasterVersion = Nothing
     , _cStatusMessage = Nothing
-    , _cCreationTimestamp = Nothing
-    , _cContainerIPv4CIdR = Nothing
     , _cEndpoint = Nothing
-    , _cEnableCloudLogging = Nothing
+    , _cLoggingService = Nothing
     , _cDescription = Nothing
     , _cInstanceGroupURLs = Nothing
-    , _cNodeRoutingPrefixSize = Nothing
+    , _cMonitoringService = Nothing
+    , _cCreateTime = Nothing
     }
 
 -- | [Output only] The current status of this cluster.
-cStatus :: Lens' Cluster (Maybe ClusterStatus)
+cStatus :: Lens' Cluster (Maybe Text)
 cStatus = lens _cStatus (\ s a -> s{_cStatus = a})
 
--- | The machine type and image to use for all nodes in this cluster. See the
--- descriptions of the child properties of nodeConfig.
+-- | Parameters used in creating the cluster\'s nodes. See the descriptions
+-- of the child properties of \`nodeConfig\`. If unspecified, the defaults
+-- for all child properties are used.
 cNodeConfig :: Lens' Cluster (Maybe NodeConfig)
 cNodeConfig
   = lens _cNodeConfig (\ s a -> s{_cNodeConfig = a})
 
+-- | [Output only] The size of the address space on each node for hosting
+-- containers. This is provisioned from within the container_ipv4_cidr
+-- range.
+cNodeIPv4CIdRSize :: Lens' Cluster (Maybe Int32)
+cNodeIPv4CIdRSize
+  = lens _cNodeIPv4CIdRSize
+      (\ s a -> s{_cNodeIPv4CIdRSize = a})
+
+-- | The IP address range of the container pods in this cluster, in
+-- [CIDR](http:\/\/en.wikipedia.org\/wiki\/Classless_Inter-Domain_Routing)
+-- notation (e.g. \`10.96.0.0\/14\`). Leave blank to have one automatically
+-- chosen or specify a \`\/14\` block in \`10.0.0.0\/8\`.
+cClusterIPv4CIdR :: Lens' Cluster (Maybe Text)
+cClusterIPv4CIdR
+  = lens _cClusterIPv4CIdR
+      (\ s a -> s{_cClusterIPv4CIdR = a})
+
 -- | The number of nodes to create in this cluster. You must ensure that your
--- Compute Engine resource quota is sufficient for this number of instances
--- plus one (to include the master). You must also have available firewall
--- and routes quota.
-cNumNodes :: Lens' Cluster (Maybe Int32)
-cNumNodes
-  = lens _cNumNodes (\ s a -> s{_cNumNodes = a})
+-- Compute Engine [resource quota](\/compute\/docs\/resource-quotas) is
+-- sufficient for this number of instances. You must also have available
+-- firewall and routes quota.
+cInitialNodeCount :: Lens' Cluster (Maybe Int32)
+cInitialNodeCount
+  = lens _cInitialNodeCount
+      (\ s a -> s{_cInitialNodeCount = a})
 
--- | The API version of the Kubernetes master and kubelets running in this
--- cluster. Leave blank to pick up the latest stable release, or specify a
--- version of the form \"x.y.z\". The Google Container Engine release notes
--- lists the currently supported versions. If an incorrect version is
--- specified, the server returns an error listing the currently supported
--- versions.
-cClusterAPIVersion :: Lens' Cluster (Maybe Text)
-cClusterAPIVersion
-  = lens _cClusterAPIVersion
-      (\ s a -> s{_cClusterAPIVersion = a})
+-- | [Output only] The current version of the node software components. If
+-- they are currently at different versions because they\'re in the process
+-- of being upgraded, this reflects the minimum version of any of them.
+cCurrentNodeVersion :: Lens' Cluster (Maybe Text)
+cCurrentNodeVersion
+  = lens _cCurrentNodeVersion
+      (\ s a -> s{_cCurrentNodeVersion = a})
 
--- | The name of the Google Compute Engine network to which the cluster is
--- connected.
+-- | The name of the Google Compute Engine
+-- [network](\/compute\/docs\/networking#networks_1) to which the cluster
+-- is connected. If left unspecified, the \"default\" network will be used.
 cNetwork :: Lens' Cluster (Maybe Text)
 cNetwork = lens _cNetwork (\ s a -> s{_cNetwork = a})
 
--- | [Output only] The name of the Google Compute Engine zone in which the
--- cluster resides.
+-- | [Output only] The software version of Kubernetes master and kubelets
+-- used in the cluster when it was first created. The version can be
+-- upgraded over time.
+cInitialClusterVersion :: Lens' Cluster (Maybe Text)
+cInitialClusterVersion
+  = lens _cInitialClusterVersion
+      (\ s a -> s{_cInitialClusterVersion = a})
+
+-- | [Output only] The name of the Google Compute Engine
+-- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
 cZone :: Lens' Cluster (Maybe Text)
 cZone = lens _cZone (\ s a -> s{_cZone = a})
 
 -- | [Output only] The IP address range of the Kubernetes services in this
--- cluster, in CIDR notation (e.g. 1.2.3.4\/29). Service addresses are
--- typically put in the last \/16 from the container CIDR.
+-- cluster, in
+-- [CIDR](http:\/\/en.wikipedia.org\/wiki\/Classless_Inter-Domain_Routing)
+-- notation (e.g. \`1.2.3.4\/29\`). Service addresses are typically put in
+-- the last \/16 from the container CIDR.
 cServicesIPv4CIdR :: Lens' Cluster (Maybe Text)
 cServicesIPv4CIdR
   = lens _cServicesIPv4CIdR
@@ -237,19 +276,18 @@ cSelfLink :: Lens' Cluster (Maybe Text)
 cSelfLink
   = lens _cSelfLink (\ s a -> s{_cSelfLink = a})
 
--- | Whether metrics from the cluster should be made available via the Google
--- Cloud Monitoring service.
-cEnableCloudMonitoring :: Lens' Cluster (Maybe Bool)
-cEnableCloudMonitoring
-  = lens _cEnableCloudMonitoring
-      (\ s a -> s{_cEnableCloudMonitoring = a})
-
 -- | The name of this cluster. The name must be unique within this project
 -- and zone, and can be up to 40 characters with the following
--- restrictions: - Lowercase letters, numbers, and hyphens only. - Must
--- start with a letter. - Must end with a number or a letter.
+-- restrictions: * Lowercase letters, numbers, and hyphens only. * Must
+-- start with a letter. * Must end with a number or a letter.
 cName :: Lens' Cluster (Maybe Text)
 cName = lens _cName (\ s a -> s{_cName = a})
+
+-- | [Output only] The current software version of the master endpoint.
+cCurrentMasterVersion :: Lens' Cluster (Maybe Text)
+cCurrentMasterVersion
+  = lens _cCurrentMasterVersion
+      (\ s a -> s{_cCurrentMasterVersion = a})
 
 -- | [Output only] Additional information about the current status of this
 -- cluster, if available.
@@ -258,36 +296,22 @@ cStatusMessage
   = lens _cStatusMessage
       (\ s a -> s{_cStatusMessage = a})
 
--- | [Output only] The time the cluster was created, in RFC3339 text format.
-cCreationTimestamp :: Lens' Cluster (Maybe Text)
-cCreationTimestamp
-  = lens _cCreationTimestamp
-      (\ s a -> s{_cCreationTimestamp = a})
-
--- | The IP address range of the container pods in this cluster, in CIDR
--- notation (e.g. 10.96.0.0\/14). Leave blank to have one automatically
--- chosen or specify a \/14 block in 10.0.0.0\/8.
-cContainerIPv4CIdR :: Lens' Cluster (Maybe Text)
-cContainerIPv4CIdR
-  = lens _cContainerIPv4CIdR
-      (\ s a -> s{_cContainerIPv4CIdR = a})
-
--- | [Output only] The IP address of this cluster\'s Kubernetes master. The
--- endpoint can be accessed from the internet at
--- https:\/\/username:password\'endpoint\/. See the masterAuth property of
--- this resource for username and password information.
+-- | [Output only] The IP address of this cluster\'s Kubernetes master
+-- endpoint. The endpoint can be accessed from the internet at
+-- \`https:\/\/username:password\'endpoint\/\`. See the \`masterAuth\`
+-- property of this resource for username and password information.
 cEndpoint :: Lens' Cluster (Maybe Text)
 cEndpoint
   = lens _cEndpoint (\ s a -> s{_cEndpoint = a})
 
--- | Whether logs from the cluster should be made available via the Google
--- Cloud Logging service. This includes both logs from your applications
--- running in the cluster as well as logs from the Kubernetes components
--- themselves.
-cEnableCloudLogging :: Lens' Cluster (Maybe Bool)
-cEnableCloudLogging
-  = lens _cEnableCloudLogging
-      (\ s a -> s{_cEnableCloudLogging = a})
+-- | The logging service that the cluster should write logs to. Currently
+-- available options: * \"logging.googleapis.com\" - the Google Cloud
+-- Logging service * \"none\" - no logs will be exported from the cluster *
+-- \"\" - default value; the default is \"logging.googleapis.com\"
+cLoggingService :: Lens' Cluster (Maybe Text)
+cLoggingService
+  = lens _cLoggingService
+      (\ s a -> s{_cLoggingService = a})
 
 -- | An optional description of this cluster.
 cDescription :: Lens' Cluster (Maybe Text)
@@ -304,12 +328,21 @@ cInstanceGroupURLs
       . _Default
       . _Coerce
 
--- | [Output only] The size of the address space on each node for hosting
--- containers.
-cNodeRoutingPrefixSize :: Lens' Cluster (Maybe Int32)
-cNodeRoutingPrefixSize
-  = lens _cNodeRoutingPrefixSize
-      (\ s a -> s{_cNodeRoutingPrefixSize = a})
+-- | The monitoring service that the cluster should write metrics to.
+-- Currently available options: * \"monitoring.googleapis.com\" - the
+-- Google Cloud Monitoring service * \"none\" - no metrics will be exported
+-- from the cluster * \"\" - default value; the default is
+-- \"monitoring.googleapis.com\"
+cMonitoringService :: Lens' Cluster (Maybe Text)
+cMonitoringService
+  = lens _cMonitoringService
+      (\ s a -> s{_cMonitoringService = a})
+
+-- | [Output only] The time the cluster was created, in
+-- [RFC3339](https:\/\/www.ietf.org\/rfc\/rfc3339.txt) text format.
+cCreateTime :: Lens' Cluster (Maybe Text)
+cCreateTime
+  = lens _cCreateTime (\ s a -> s{_cCreateTime = a})
 
 instance FromJSON Cluster where
         parseJSON
@@ -317,23 +350,25 @@ instance FromJSON Cluster where
               (\ o ->
                  Cluster <$>
                    (o .:? "status") <*> (o .:? "nodeConfig") <*>
-                     (o .:? "numNodes")
-                     <*> (o .:? "clusterApiVersion")
+                     (o .:? "nodeIpv4CidrSize")
+                     <*> (o .:? "clusterIpv4Cidr")
+                     <*> (o .:? "initialNodeCount")
+                     <*> (o .:? "currentNodeVersion")
                      <*> (o .:? "network")
+                     <*> (o .:? "initialClusterVersion")
                      <*> (o .:? "zone")
                      <*> (o .:? "servicesIpv4Cidr")
                      <*> (o .:? "masterAuth")
                      <*> (o .:? "selfLink")
-                     <*> (o .:? "enableCloudMonitoring")
                      <*> (o .:? "name")
+                     <*> (o .:? "currentMasterVersion")
                      <*> (o .:? "statusMessage")
-                     <*> (o .:? "creationTimestamp")
-                     <*> (o .:? "containerIpv4Cidr")
                      <*> (o .:? "endpoint")
-                     <*> (o .:? "enableCloudLogging")
+                     <*> (o .:? "loggingService")
                      <*> (o .:? "description")
                      <*> (o .:? "instanceGroupUrls" .!= mempty)
-                     <*> (o .:? "nodeRoutingPrefixSize"))
+                     <*> (o .:? "monitoringService")
+                     <*> (o .:? "createTime"))
 
 instance ToJSON Cluster where
         toJSON Cluster{..}
@@ -341,117 +376,112 @@ instance ToJSON Cluster where
               (catMaybes
                  [("status" .=) <$> _cStatus,
                   ("nodeConfig" .=) <$> _cNodeConfig,
-                  ("numNodes" .=) <$> _cNumNodes,
-                  ("clusterApiVersion" .=) <$> _cClusterAPIVersion,
-                  ("network" .=) <$> _cNetwork, ("zone" .=) <$> _cZone,
+                  ("nodeIpv4CidrSize" .=) <$> _cNodeIPv4CIdRSize,
+                  ("clusterIpv4Cidr" .=) <$> _cClusterIPv4CIdR,
+                  ("initialNodeCount" .=) <$> _cInitialNodeCount,
+                  ("currentNodeVersion" .=) <$> _cCurrentNodeVersion,
+                  ("network" .=) <$> _cNetwork,
+                  ("initialClusterVersion" .=) <$>
+                    _cInitialClusterVersion,
+                  ("zone" .=) <$> _cZone,
                   ("servicesIpv4Cidr" .=) <$> _cServicesIPv4CIdR,
                   ("masterAuth" .=) <$> _cMasterAuth,
                   ("selfLink" .=) <$> _cSelfLink,
-                  ("enableCloudMonitoring" .=) <$>
-                    _cEnableCloudMonitoring,
                   ("name" .=) <$> _cName,
+                  ("currentMasterVersion" .=) <$>
+                    _cCurrentMasterVersion,
                   ("statusMessage" .=) <$> _cStatusMessage,
-                  ("creationTimestamp" .=) <$> _cCreationTimestamp,
-                  ("containerIpv4Cidr" .=) <$> _cContainerIPv4CIdR,
                   ("endpoint" .=) <$> _cEndpoint,
-                  ("enableCloudLogging" .=) <$> _cEnableCloudLogging,
+                  ("loggingService" .=) <$> _cLoggingService,
                   ("description" .=) <$> _cDescription,
                   ("instanceGroupUrls" .=) <$> _cInstanceGroupURLs,
-                  ("nodeRoutingPrefixSize" .=) <$>
-                    _cNodeRoutingPrefixSize])
+                  ("monitoringService" .=) <$> _cMonitoringService,
+                  ("createTime" .=) <$> _cCreateTime])
 
+-- | UpdateClusterRequest updates a cluster.
 --
--- /See:/ 'listAggregatedOperationsResponse' smart constructor.
-newtype ListAggregatedOperationsResponse = ListAggregatedOperationsResponse
-    { _laorOperations :: Maybe [Operation]
+-- /See:/ 'updateClusterRequest' smart constructor.
+newtype UpdateClusterRequest = UpdateClusterRequest
+    { _ucrUpdate :: Maybe ClusterUpdate
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ListAggregatedOperationsResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'UpdateClusterRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'laorOperations'
-listAggregatedOperationsResponse
-    :: ListAggregatedOperationsResponse
-listAggregatedOperationsResponse =
-    ListAggregatedOperationsResponse
-    { _laorOperations = Nothing
+-- * 'ucrUpdate'
+updateClusterRequest
+    :: UpdateClusterRequest
+updateClusterRequest =
+    UpdateClusterRequest
+    { _ucrUpdate = Nothing
     }
 
--- | A list of operations in the project, across all zones.
-laorOperations :: Lens' ListAggregatedOperationsResponse [Operation]
-laorOperations
-  = lens _laorOperations
-      (\ s a -> s{_laorOperations = a})
-      . _Default
-      . _Coerce
+-- | A description of the update.
+ucrUpdate :: Lens' UpdateClusterRequest (Maybe ClusterUpdate)
+ucrUpdate
+  = lens _ucrUpdate (\ s a -> s{_ucrUpdate = a})
 
-instance FromJSON ListAggregatedOperationsResponse
-         where
+instance FromJSON UpdateClusterRequest where
         parseJSON
-          = withObject "ListAggregatedOperationsResponse"
-              (\ o ->
-                 ListAggregatedOperationsResponse <$>
-                   (o .:? "operations" .!= mempty))
+          = withObject "UpdateClusterRequest"
+              (\ o -> UpdateClusterRequest <$> (o .:? "update"))
 
-instance ToJSON ListAggregatedOperationsResponse
-         where
-        toJSON ListAggregatedOperationsResponse{..}
-          = object
-              (catMaybes [("operations" .=) <$> _laorOperations])
+instance ToJSON UpdateClusterRequest where
+        toJSON UpdateClusterRequest{..}
+          = object (catMaybes [("update" .=) <$> _ucrUpdate])
 
+-- | Per-node parameters.
 --
 -- /See:/ 'nodeConfig' smart constructor.
 data NodeConfig = NodeConfig
-    { _ncServiceAccounts :: !(Maybe [ServiceAccount])
-    , _ncSourceImage     :: !(Maybe Text)
-    , _ncMachineType     :: !(Maybe Text)
+    { _ncDiskSizeGb  :: !(Maybe Int32)
+    , _ncOAuthScopes :: !(Maybe [Text])
+    , _ncMachineType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NodeConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ncServiceAccounts'
+-- * 'ncDiskSizeGb'
 --
--- * 'ncSourceImage'
+-- * 'ncOAuthScopes'
 --
 -- * 'ncMachineType'
 nodeConfig
     :: NodeConfig
 nodeConfig =
     NodeConfig
-    { _ncServiceAccounts = Nothing
-    , _ncSourceImage = Nothing
+    { _ncDiskSizeGb = Nothing
+    , _ncOAuthScopes = Nothing
     , _ncMachineType = Nothing
     }
 
--- | The optional list of ServiceAccounts, each with their specified scopes,
--- to be made available on all of the node VMs. In addition to the service
--- accounts and scopes specified, the \"default\" account will always be
--- created with the following scopes to ensure the correct functioning of
--- the cluster: - https:\/\/www.googleapis.com\/auth\/compute, -
--- https:\/\/www.googleapis.com\/auth\/devstorage.read_only
-ncServiceAccounts :: Lens' NodeConfig [ServiceAccount]
-ncServiceAccounts
-  = lens _ncServiceAccounts
-      (\ s a -> s{_ncServiceAccounts = a})
+-- | Size of the disk attached to each node, specified in GB. The smallest
+-- allowed disk size is 10GB. If unspecified, the default disk size is
+-- 100GB.
+ncDiskSizeGb :: Lens' NodeConfig (Maybe Int32)
+ncDiskSizeGb
+  = lens _ncDiskSizeGb (\ s a -> s{_ncDiskSizeGb = a})
+
+-- | The set of Google API scopes to be made available on all of the node VMs
+-- under the \"default\" service account. The following scopes are
+-- recommended, but not required, and by default are not included: *
+-- \`https:\/\/www.googleapis.com\/auth\/compute\` is required for mounting
+-- persistent storage on your nodes. *
+-- \`https:\/\/www.googleapis.com\/auth\/devstorage.read_only\` is required
+-- for communicating with *gcr.io*. If unspecified, no scopes are added.
+ncOAuthScopes :: Lens' NodeConfig [Text]
+ncOAuthScopes
+  = lens _ncOAuthScopes
+      (\ s a -> s{_ncOAuthScopes = a})
       . _Default
       . _Coerce
 
--- | The fully-specified name of a Google Compute Engine image. For example:
--- https:\/\/www.googleapis.com\/compute\/v1\/projects\/debian-cloud\/global\/images\/backports-debian-7-wheezy-vYYYYMMDD
--- (where YYYMMDD is the version date). If specifying an image, you are
--- responsible for ensuring its compatibility with the Debian 7 backports
--- image. We recommend leaving this field blank to accept the default
--- backports-debian-7-wheezy value.
-ncSourceImage :: Lens' NodeConfig (Maybe Text)
-ncSourceImage
-  = lens _ncSourceImage
-      (\ s a -> s{_ncSourceImage = a})
-
--- | The name of a Google Compute Engine machine type (e.g. n1-standard-1).
--- If unspecified, the default machine type is n1-standard-1.
+-- | The name of a Google Compute Engine [machine
+-- type](\/compute\/docs\/machine-types) (e.g. \`n1-standard-1\`). If
+-- unspecified, the default machine type is \`n1-standard-1\`.
 ncMachineType :: Lens' NodeConfig (Maybe Text)
 ncMachineType
   = lens _ncMachineType
@@ -462,30 +492,29 @@ instance FromJSON NodeConfig where
           = withObject "NodeConfig"
               (\ o ->
                  NodeConfig <$>
-                   (o .:? "serviceAccounts" .!= mempty) <*>
-                     (o .:? "sourceImage")
+                   (o .:? "diskSizeGb") <*>
+                     (o .:? "oauthScopes" .!= mempty)
                      <*> (o .:? "machineType"))
 
 instance ToJSON NodeConfig where
         toJSON NodeConfig{..}
           = object
               (catMaybes
-                 [("serviceAccounts" .=) <$> _ncServiceAccounts,
-                  ("sourceImage" .=) <$> _ncSourceImage,
+                 [("diskSizeGb" .=) <$> _ncDiskSizeGb,
+                  ("oauthScopes" .=) <$> _ncOAuthScopes,
                   ("machineType" .=) <$> _ncMachineType])
 
 -- | Defines the operation resource. All fields are output only.
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
-    { _oStatus        :: !(Maybe OperationStatus)
+    { _oStatus        :: !(Maybe Text)
     , _oZone          :: !(Maybe Text)
     , _oSelfLink      :: !(Maybe Text)
     , _oName          :: !(Maybe Text)
-    , _oOperationType :: !(Maybe OperationOperationType)
-    , _oErrorMessage  :: !(Maybe Text)
+    , _oStatusMessage :: !(Maybe Text)
+    , _oOperationType :: !(Maybe Text)
     , _oTargetLink    :: !(Maybe Text)
-    , _oTarget        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
@@ -500,13 +529,11 @@ data Operation = Operation
 --
 -- * 'oName'
 --
+-- * 'oStatusMessage'
+--
 -- * 'oOperationType'
 --
--- * 'oErrorMessage'
---
 -- * 'oTargetLink'
---
--- * 'oTarget'
 operation
     :: Operation
 operation =
@@ -515,17 +542,17 @@ operation =
     , _oZone = Nothing
     , _oSelfLink = Nothing
     , _oName = Nothing
+    , _oStatusMessage = Nothing
     , _oOperationType = Nothing
-    , _oErrorMessage = Nothing
     , _oTargetLink = Nothing
-    , _oTarget = Nothing
     }
 
 -- | The current status of the operation.
-oStatus :: Lens' Operation (Maybe OperationStatus)
+oStatus :: Lens' Operation (Maybe Text)
 oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
 
--- | The name of the Google Compute Engine zone in which the operation is
+-- | The name of the Google Compute Engine
+-- [zone](\/compute\/docs\/zones#available) in which the operation is
 -- taking place.
 oZone :: Lens' Operation (Maybe Text)
 oZone = lens _oZone (\ s a -> s{_oZone = a})
@@ -539,27 +566,22 @@ oSelfLink
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
+-- | If an error has occurred, a textual description of the error.
+oStatusMessage :: Lens' Operation (Maybe Text)
+oStatusMessage
+  = lens _oStatusMessage
+      (\ s a -> s{_oStatusMessage = a})
+
 -- | The operation type.
-oOperationType :: Lens' Operation (Maybe OperationOperationType)
+oOperationType :: Lens' Operation (Maybe Text)
 oOperationType
   = lens _oOperationType
       (\ s a -> s{_oOperationType = a})
-
--- | If an error has occurred, a textual description of the error.
-oErrorMessage :: Lens' Operation (Maybe Text)
-oErrorMessage
-  = lens _oErrorMessage
-      (\ s a -> s{_oErrorMessage = a})
 
 -- | Server-defined URL for the target of the operation.
 oTargetLink :: Lens' Operation (Maybe Text)
 oTargetLink
   = lens _oTargetLink (\ s a -> s{_oTargetLink = a})
-
--- | [Optional] The URL of the cluster resource that this operation is
--- associated with.
-oTarget :: Lens' Operation (Maybe Text)
-oTarget = lens _oTarget (\ s a -> s{_oTarget = a})
 
 instance FromJSON Operation where
         parseJSON
@@ -569,10 +591,9 @@ instance FromJSON Operation where
                    (o .:? "status") <*> (o .:? "zone") <*>
                      (o .:? "selfLink")
                      <*> (o .:? "name")
+                     <*> (o .:? "statusMessage")
                      <*> (o .:? "operationType")
-                     <*> (o .:? "errorMessage")
-                     <*> (o .:? "targetLink")
-                     <*> (o .:? "target"))
+                     <*> (o .:? "targetLink"))
 
 instance ToJSON Operation where
         toJSON Operation{..}
@@ -581,67 +602,18 @@ instance ToJSON Operation where
                  [("status" .=) <$> _oStatus, ("zone" .=) <$> _oZone,
                   ("selfLink" .=) <$> _oSelfLink,
                   ("name" .=) <$> _oName,
+                  ("statusMessage" .=) <$> _oStatusMessage,
                   ("operationType" .=) <$> _oOperationType,
-                  ("errorMessage" .=) <$> _oErrorMessage,
-                  ("targetLink" .=) <$> _oTargetLink,
-                  ("target" .=) <$> _oTarget])
+                  ("targetLink" .=) <$> _oTargetLink])
 
--- | A Compute Engine service account.
---
--- /See:/ 'serviceAccount' smart constructor.
-data ServiceAccount = ServiceAccount
-    { _saEmail  :: !(Maybe Text)
-    , _saScopes :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'saEmail'
---
--- * 'saScopes'
-serviceAccount
-    :: ServiceAccount
-serviceAccount =
-    ServiceAccount
-    { _saEmail = Nothing
-    , _saScopes = Nothing
-    }
-
--- | Email address of the service account.
-saEmail :: Lens' ServiceAccount (Maybe Text)
-saEmail = lens _saEmail (\ s a -> s{_saEmail = a})
-
--- | The list of scopes to be made available for this service account.
-saScopes :: Lens' ServiceAccount [Text]
-saScopes
-  = lens _saScopes (\ s a -> s{_saScopes = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ServiceAccount where
-        parseJSON
-          = withObject "ServiceAccount"
-              (\ o ->
-                 ServiceAccount <$>
-                   (o .:? "email") <*> (o .:? "scopes" .!= mempty))
-
-instance ToJSON ServiceAccount where
-        toJSON ServiceAccount{..}
-          = object
-              (catMaybes
-                 [("email" .=) <$> _saEmail,
-                  ("scopes" .=) <$> _saScopes])
-
--- | The authentication information for accessing the master. Authentication
--- is either done using HTTP basic authentication or using a bearer token.
+-- | The authentication information for accessing the master endpoint.
+-- Authentication can be done using HTTP basic auth or using client
+-- certificates.
 --
 -- /See:/ 'masterAuth' smart constructor.
 data MasterAuth = MasterAuth
-    { _maBearerToken          :: !(Maybe Text)
-    , _maClientKey            :: !(Maybe Text)
-    , _maUser                 :: !(Maybe Text)
+    { _maClientKey            :: !(Maybe Text)
+    , _maUsername             :: !(Maybe Text)
     , _maClientCertificate    :: !(Maybe Text)
     , _maPassword             :: !(Maybe Text)
     , _maClusterCaCertificate :: !(Maybe Text)
@@ -651,11 +623,9 @@ data MasterAuth = MasterAuth
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'maBearerToken'
---
 -- * 'maClientKey'
 --
--- * 'maUser'
+-- * 'maUsername'
 --
 -- * 'maClientCertificate'
 --
@@ -666,22 +636,12 @@ masterAuth
     :: MasterAuth
 masterAuth =
     MasterAuth
-    { _maBearerToken = Nothing
-    , _maClientKey = Nothing
-    , _maUser = Nothing
+    { _maClientKey = Nothing
+    , _maUsername = Nothing
     , _maClientCertificate = Nothing
     , _maPassword = Nothing
     , _maClusterCaCertificate = Nothing
     }
-
--- | The token used to authenticate API requests to the master. The token is
--- to be included in an HTTP Authorization Header in all requests to the
--- master endpoint. The format of the header is: \"Authorization: Bearer
--- \".
-maBearerToken :: Lens' MasterAuth (Maybe Text)
-maBearerToken
-  = lens _maBearerToken
-      (\ s a -> s{_maBearerToken = a})
 
 -- | [Output only] Base64 encoded private key used by clients to authenticate
 -- to the cluster endpoint.
@@ -691,8 +651,9 @@ maClientKey
 
 -- | The username to use for HTTP basic authentication when accessing the
 -- Kubernetes master endpoint.
-maUser :: Lens' MasterAuth (Maybe Text)
-maUser = lens _maUser (\ s a -> s{_maUser = a})
+maUsername :: Lens' MasterAuth (Maybe Text)
+maUsername
+  = lens _maUsername (\ s a -> s{_maUsername = a})
 
 -- | [Output only] Base64 encoded public certificate used by clients to
 -- authenticate to the cluster endpoint.
@@ -720,9 +681,8 @@ instance FromJSON MasterAuth where
           = withObject "MasterAuth"
               (\ o ->
                  MasterAuth <$>
-                   (o .:? "bearerToken") <*> (o .:? "clientKey") <*>
-                     (o .:? "user")
-                     <*> (o .:? "clientCertificate")
+                   (o .:? "clientKey") <*> (o .:? "username") <*>
+                     (o .:? "clientCertificate")
                      <*> (o .:? "password")
                      <*> (o .:? "clusterCaCertificate"))
 
@@ -730,52 +690,67 @@ instance ToJSON MasterAuth where
         toJSON MasterAuth{..}
           = object
               (catMaybes
-                 [("bearerToken" .=) <$> _maBearerToken,
-                  ("clientKey" .=) <$> _maClientKey,
-                  ("user" .=) <$> _maUser,
+                 [("clientKey" .=) <$> _maClientKey,
+                  ("username" .=) <$> _maUsername,
                   ("clientCertificate" .=) <$> _maClientCertificate,
                   ("password" .=) <$> _maPassword,
                   ("clusterCaCertificate" .=) <$>
                     _maClusterCaCertificate])
 
+-- | Container Engine Server configuration.
 --
--- /See:/ 'listAggregatedClustersResponse' smart constructor.
-newtype ListAggregatedClustersResponse = ListAggregatedClustersResponse
-    { _lacrClusters :: Maybe [Cluster]
+-- /See:/ 'serverConfig' smart constructor.
+data ServerConfig = ServerConfig
+    { _scValidNodeVersions     :: !(Maybe [Text])
+    , _scDefaultClusterVersion :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ListAggregatedClustersResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'ServerConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lacrClusters'
-listAggregatedClustersResponse
-    :: ListAggregatedClustersResponse
-listAggregatedClustersResponse =
-    ListAggregatedClustersResponse
-    { _lacrClusters = Nothing
+-- * 'scValidNodeVersions'
+--
+-- * 'scDefaultClusterVersion'
+serverConfig
+    :: ServerConfig
+serverConfig =
+    ServerConfig
+    { _scValidNodeVersions = Nothing
+    , _scDefaultClusterVersion = Nothing
     }
 
--- | A list of clusters in the project, across all zones.
-lacrClusters :: Lens' ListAggregatedClustersResponse [Cluster]
-lacrClusters
-  = lens _lacrClusters (\ s a -> s{_lacrClusters = a})
+-- | List of valid node upgrade target versions.
+scValidNodeVersions :: Lens' ServerConfig [Text]
+scValidNodeVersions
+  = lens _scValidNodeVersions
+      (\ s a -> s{_scValidNodeVersions = a})
       . _Default
       . _Coerce
 
-instance FromJSON ListAggregatedClustersResponse
-         where
+-- | What version this server deploys by default.
+scDefaultClusterVersion :: Lens' ServerConfig (Maybe Text)
+scDefaultClusterVersion
+  = lens _scDefaultClusterVersion
+      (\ s a -> s{_scDefaultClusterVersion = a})
+
+instance FromJSON ServerConfig where
         parseJSON
-          = withObject "ListAggregatedClustersResponse"
+          = withObject "ServerConfig"
               (\ o ->
-                 ListAggregatedClustersResponse <$>
-                   (o .:? "clusters" .!= mempty))
+                 ServerConfig <$>
+                   (o .:? "validNodeVersions" .!= mempty) <*>
+                     (o .:? "defaultClusterVersion"))
 
-instance ToJSON ListAggregatedClustersResponse where
-        toJSON ListAggregatedClustersResponse{..}
+instance ToJSON ServerConfig where
+        toJSON ServerConfig{..}
           = object
-              (catMaybes [("clusters" .=) <$> _lacrClusters])
+              (catMaybes
+                 [("validNodeVersions" .=) <$> _scValidNodeVersions,
+                  ("defaultClusterVersion" .=) <$>
+                    _scDefaultClusterVersion])
 
+-- | ListClustersResponse is the result of ListClustersRequest.
 --
 -- /See:/ 'listClustersResponse' smart constructor.
 newtype ListClustersResponse = ListClustersResponse
@@ -794,7 +769,8 @@ listClustersResponse =
     { _lcrClusters = Nothing
     }
 
--- | A list of clusters in the project in the specified zone.
+-- | A list of clusters in the project in the specified zone, or across all
+-- ones.
 lcrClusters :: Lens' ListClustersResponse [Cluster]
 lcrClusters
   = lens _lcrClusters (\ s a -> s{_lcrClusters = a}) .
@@ -812,3 +788,42 @@ instance ToJSON ListClustersResponse where
         toJSON ListClustersResponse{..}
           = object
               (catMaybes [("clusters" .=) <$> _lcrClusters])
+
+-- | ClusterUpdate describes an update to the cluster.
+--
+-- /See:/ 'clusterUpdate' smart constructor.
+newtype ClusterUpdate = ClusterUpdate
+    { _cuDesiredNodeVersion :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ClusterUpdate' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cuDesiredNodeVersion'
+clusterUpdate
+    :: ClusterUpdate
+clusterUpdate =
+    ClusterUpdate
+    { _cuDesiredNodeVersion = Nothing
+    }
+
+-- | The Kubernetes version to change the nodes to (typically an upgrade).
+-- Use \"-\" to upgrade to the latest version supported by the server.
+cuDesiredNodeVersion :: Lens' ClusterUpdate (Maybe Text)
+cuDesiredNodeVersion
+  = lens _cuDesiredNodeVersion
+      (\ s a -> s{_cuDesiredNodeVersion = a})
+
+instance FromJSON ClusterUpdate where
+        parseJSON
+          = withObject "ClusterUpdate"
+              (\ o ->
+                 ClusterUpdate <$> (o .:? "desiredNodeVersion"))
+
+instance ToJSON ClusterUpdate where
+        toJSON ClusterUpdate{..}
+          = object
+              (catMaybes
+                 [("desiredNodeVersion" .=) <$>
+                    _cuDesiredNodeVersion])

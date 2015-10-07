@@ -40,3 +40,30 @@ instance FromJSON ChangesListSortBy where
 
 instance ToJSON ChangesListSortBy where
     toJSON = toJSONText
+
+-- | Status of the operation (output only).
+data ChangeStatus
+    = Done
+      -- ^ @done@
+    | Pending
+      -- ^ @pending@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ChangeStatus
+
+instance FromText ChangeStatus where
+    fromText = \case
+        "done" -> Just Done
+        "pending" -> Just Pending
+        _ -> Nothing
+
+instance ToText ChangeStatus where
+    toText = \case
+        Done -> "done"
+        Pending -> "pending"
+
+instance FromJSON ChangeStatus where
+    parseJSON = parseJSONText "ChangeStatus"
+
+instance ToJSON ChangeStatus where
+    toJSON = toJSONText

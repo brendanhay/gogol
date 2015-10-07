@@ -15,7 +15,7 @@
 --
 -- | Lets you store and retrieve potentially-large, immutable data objects.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference>
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference>
 module Network.Google.Storage
     (
     -- * API Declaration
@@ -119,6 +119,9 @@ module Network.Google.Storage
     -- ** StorageObjectsPatch
     , module Network.Google.Resource.Storage.Objects.Patch
 
+    -- ** StorageObjectsRewrite
+    , module Network.Google.Resource.Storage.Objects.Rewrite
+
     -- ** StorageObjectsUpdate
     , module Network.Google.Resource.Storage.Objects.Update
 
@@ -141,6 +144,15 @@ module Network.Google.Storage
     , bucketVersioning
     , bvEnabled
 
+    -- ** BucketsUpdatePredefinedDefaultObjectACL
+    , BucketsUpdatePredefinedDefaultObjectACL (..)
+
+    -- ** ObjectsComposeDestinationPredefinedACL
+    , ObjectsComposeDestinationPredefinedACL (..)
+
+    -- ** BucketsInsertPredefinedACL
+    , BucketsInsertPredefinedACL (..)
+
     -- ** Buckets
     , Buckets
     , buckets
@@ -158,6 +170,9 @@ module Network.Google.Storage
     , ObjectMetadata
     , objectMetadata
 
+    -- ** ObjectsPatchPredefinedACL
+    , ObjectsPatchPredefinedACL (..)
+
     -- ** BucketLifecycleRuleItemCondition
     , BucketLifecycleRuleItemCondition
     , bucketLifecycleRuleItemCondition
@@ -165,6 +180,9 @@ module Network.Google.Storage
     , blricIsLive
     , blricNumNewerVersions
     , blricCreatedBefore
+
+    -- ** ObjectsRewriteDestinationPredefinedACL
+    , ObjectsRewriteDestinationPredefinedACL (..)
 
     -- ** BucketLifecycle
     , BucketLifecycle
@@ -202,6 +220,12 @@ module Network.Google.Storage
     , bciResponseHeader
     , bciMethod
 
+    -- ** ObjectAccessControlProjectTeam
+    , ObjectAccessControlProjectTeam
+    , objectAccessControlProjectTeam
+    , oacptProjectNumber
+    , oacptTeam
+
     -- ** Bucket
     , Bucket
     , bucket
@@ -209,6 +233,7 @@ module Network.Google.Storage
     , bucLocation
     , bucKind
     , bucWebsite
+    , bucProjectNumber
     , bucLifecycle
     , bucOwner
     , bucSelfLink
@@ -253,8 +278,23 @@ module Network.Google.Storage
     , crKind
     , crSourceObjects
 
+    -- ** ObjectsInsertPredefinedACL
+    , ObjectsInsertPredefinedACL (..)
+
     -- ** ObjectsListProjection
     , ObjectsListProjection (..)
+
+    -- ** BucketsInsertPredefinedDefaultObjectACL
+    , BucketsInsertPredefinedDefaultObjectACL (..)
+
+    -- ** BucketsUpdatePredefinedACL
+    , BucketsUpdatePredefinedACL (..)
+
+    -- ** ObjectsCopyDestinationPredefinedACL
+    , ObjectsCopyDestinationPredefinedACL (..)
+
+    -- ** ObjectsUpdatePredefinedACL
+    , ObjectsUpdatePredefinedACL (..)
 
     -- ** BucketOwner
     , BucketOwner
@@ -318,6 +358,12 @@ module Network.Google.Storage
     , composeRequestSourceObjectsItemObjectPreconditions
     , crsoiopIfGenerationMatch
 
+    -- ** BucketAccessControlProjectTeam
+    , BucketAccessControlProjectTeam
+    , bucketAccessControlProjectTeam
+    , bacptProjectNumber
+    , bacptTeam
+
     -- ** ObjectAccessControls
     , ObjectAccessControls
     , objectAccessControls
@@ -341,6 +387,7 @@ module Network.Google.Storage
     , bacaRole
     , bacaSelfLink
     , bacaId
+    , bacaProjectTeam
     , bacaEntity
     , bacaEntityId
 
@@ -351,6 +398,12 @@ module Network.Google.Storage
 
     -- ** ObjectsGetProjection
     , ObjectsGetProjection (..)
+
+    -- ** BucketsPatchPredefinedDefaultObjectACL
+    , BucketsPatchPredefinedDefaultObjectACL (..)
+
+    -- ** BucketsPatchPredefinedACL
+    , BucketsPatchPredefinedACL (..)
 
     -- ** ObjectAccessControl
     , ObjectAccessControl
@@ -364,12 +417,26 @@ module Network.Google.Storage
     , oacaSelfLink
     , oacaObject
     , oacaId
+    , oacaProjectTeam
     , oacaEntity
     , oacaGeneration
     , oacaEntityId
 
     -- ** ObjectsCopyProjection
     , ObjectsCopyProjection (..)
+
+    -- ** RewriteResponse
+    , RewriteResponse
+    , rewriteResponse
+    , rrKind
+    , rrDone
+    , rrResource
+    , rrObjectSize
+    , rrTotalBytesRewritten
+    , rrRewriteToken
+
+    -- ** ObjectsRewriteProjection
+    , ObjectsRewriteProjection (..)
     ) where
 
 import           Network.Google.Prelude
@@ -405,6 +472,7 @@ import           Network.Google.Resource.Storage.Objects.Get
 import           Network.Google.Resource.Storage.Objects.Insert
 import           Network.Google.Resource.Storage.Objects.List
 import           Network.Google.Resource.Storage.Objects.Patch
+import           Network.Google.Resource.Storage.Objects.Rewrite
 import           Network.Google.Resource.Storage.Objects.Update
 import           Network.Google.Resource.Storage.Objects.WatchAll
 import           Network.Google.Storage.Types
@@ -413,7 +481,7 @@ import           Network.Google.Storage.Types
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Cloud Storage API service.
+-- | Represents the entirety of the methods and resources available for the Cloud Storage JSON API service.
 type StorageAPI =
      BucketsInsertResource :<|> BucketsListResource :<|>
        BucketsPatchResource
@@ -433,6 +501,7 @@ type StorageAPI =
        :<|> ObjectsWatchAllResource
        :<|> ObjectsPatchResource
        :<|> ObjectsGetResource
+       :<|> ObjectsRewriteResource
        :<|> ObjectsComposeResource
        :<|> ObjectsDeleteResource
        :<|> ObjectsUpdateResource

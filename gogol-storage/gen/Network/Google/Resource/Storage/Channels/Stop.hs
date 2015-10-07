@@ -22,7 +22,7 @@
 --
 -- | Stop watching resources through this channel
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageChannelsStop@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageChannelsStop@.
 module Network.Google.Resource.Storage.Channels.Stop
     (
     -- * REST Resource

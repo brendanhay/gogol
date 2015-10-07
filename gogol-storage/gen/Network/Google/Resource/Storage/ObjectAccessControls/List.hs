@@ -22,7 +22,7 @@
 --
 -- | Retrieves ACL entries on the specified object.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectAccessControlsList@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectAccessControlsList@.
 module Network.Google.Resource.Storage.ObjectAccessControls.List
     (
     -- * REST Resource
@@ -55,7 +55,7 @@ type ObjectAccessControlsListResource =
          "o" :>
            Capture "object" Text :>
              "acl" :>
-               QueryParam "generation" Word64 :>
+               QueryParam "generation" Int64 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -76,7 +76,7 @@ data ObjectAccessControlsList' = ObjectAccessControlsList'
     , _oaclKey         :: !(Maybe AuthKey)
     , _oaclObject      :: !Text
     , _oaclOAuthToken  :: !(Maybe OAuthToken)
-    , _oaclGeneration  :: !(Maybe Word64)
+    , _oaclGeneration  :: !(Maybe Int64)
     , _oaclFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -149,7 +149,8 @@ oaclBucket
 oaclKey :: Lens' ObjectAccessControlsList' (Maybe AuthKey)
 oaclKey = lens _oaclKey (\ s a -> s{_oaclKey = a})
 
--- | Name of the object.
+-- | Name of the object. For information about how to URL encode object names
+-- to be path safe, see Encoding URI Path Parts.
 oaclObject :: Lens' ObjectAccessControlsList' Text
 oaclObject
   = lens _oaclObject (\ s a -> s{_oaclObject = a})
@@ -162,7 +163,7 @@ oaclOAuthToken
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
-oaclGeneration :: Lens' ObjectAccessControlsList' (Maybe Word64)
+oaclGeneration :: Lens' ObjectAccessControlsList' (Maybe Int64)
 oaclGeneration
   = lens _oaclGeneration
       (\ s a -> s{_oaclGeneration = a})

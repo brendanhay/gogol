@@ -162,7 +162,7 @@ instance ToJSON Project where
 --
 -- /See:/ 'change' smart constructor.
 data Change = Change
-    { _cStatus    :: !(Maybe Text)
+    { _cStatus    :: !(Maybe ChangeStatus)
     , _cAdditions :: !(Maybe [ResourceRecordSet])
     , _cStartTime :: !(Maybe Text)
     , _cKind      :: !Text
@@ -198,7 +198,7 @@ change =
     }
 
 -- | Status of the operation (output only).
-cStatus :: Lens' Change (Maybe Text)
+cStatus :: Lens' Change (Maybe ChangeStatus)
 cStatus = lens _cStatus (\ s a -> s{_cStatus = a})
 
 -- | Which ResourceRecordSets to add?

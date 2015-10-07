@@ -56,7 +56,7 @@ import           Network.Google.PubSub.Types
 -- | A resource alias for @PubsubProjectsTopicsList@ method which the
 -- 'ProjectsTopicsList'' request conforms to.
 type ProjectsTopicsListResource =
-     "v1beta2" :>
+     "v1" :>
        Capture "project" Text :>
          "topics" :>
            QueryParam "$.xgafv" Text :>

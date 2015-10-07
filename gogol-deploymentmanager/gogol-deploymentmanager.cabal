@@ -20,7 +20,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v2beta2@
+    This library is compatible with version @v2@
     of the API.
 
 source-repository head
@@ -36,11 +36,13 @@ library
     exposed-modules:
           Network.Google.DeploymentManager
         , Network.Google.DeploymentManager.Types
+        , Network.Google.Resource.DeploymentManager.Deployments.CancelPreview
         , Network.Google.Resource.DeploymentManager.Deployments.Delete
         , Network.Google.Resource.DeploymentManager.Deployments.Get
         , Network.Google.Resource.DeploymentManager.Deployments.Insert
         , Network.Google.Resource.DeploymentManager.Deployments.List
         , Network.Google.Resource.DeploymentManager.Deployments.Patch
+        , Network.Google.Resource.DeploymentManager.Deployments.Stop
         , Network.Google.Resource.DeploymentManager.Deployments.Update
         , Network.Google.Resource.DeploymentManager.Manifests.Get
         , Network.Google.Resource.DeploymentManager.Manifests.List

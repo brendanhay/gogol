@@ -33,34 +33,36 @@ module Network.Google.Container.Types
     , cluster
     , cStatus
     , cNodeConfig
-    , cNumNodes
-    , cClusterAPIVersion
+    , cNodeIPv4CIdRSize
+    , cClusterIPv4CIdR
+    , cInitialNodeCount
+    , cCurrentNodeVersion
     , cNetwork
+    , cInitialClusterVersion
     , cZone
     , cServicesIPv4CIdR
     , cMasterAuth
     , cSelfLink
-    , cEnableCloudMonitoring
     , cName
+    , cCurrentMasterVersion
     , cStatusMessage
-    , cCreationTimestamp
-    , cContainerIPv4CIdR
     , cEndpoint
-    , cEnableCloudLogging
+    , cLoggingService
     , cDescription
     , cInstanceGroupURLs
-    , cNodeRoutingPrefixSize
+    , cMonitoringService
+    , cCreateTime
 
-    -- * ListAggregatedOperationsResponse
-    , ListAggregatedOperationsResponse
-    , listAggregatedOperationsResponse
-    , laorOperations
+    -- * UpdateClusterRequest
+    , UpdateClusterRequest
+    , updateClusterRequest
+    , ucrUpdate
 
     -- * NodeConfig
     , NodeConfig
     , nodeConfig
-    , ncServiceAccounts
-    , ncSourceImage
+    , ncDiskSizeGb
+    , ncOAuthScopes
     , ncMachineType
 
     -- * Operation
@@ -70,53 +72,42 @@ module Network.Google.Container.Types
     , oZone
     , oSelfLink
     , oName
+    , oStatusMessage
     , oOperationType
-    , oErrorMessage
     , oTargetLink
-    , oTarget
-
-    -- * OperationOperationType
-    , OperationOperationType (..)
-
-    -- * OperationStatus
-    , OperationStatus (..)
-
-    -- * ServiceAccount
-    , ServiceAccount
-    , serviceAccount
-    , saEmail
-    , saScopes
 
     -- * MasterAuth
     , MasterAuth
     , masterAuth
-    , maBearerToken
     , maClientKey
-    , maUser
+    , maUsername
     , maClientCertificate
     , maPassword
     , maClusterCaCertificate
 
-    -- * ListAggregatedClustersResponse
-    , ListAggregatedClustersResponse
-    , listAggregatedClustersResponse
-    , lacrClusters
+    -- * ServerConfig
+    , ServerConfig
+    , serverConfig
+    , scValidNodeVersions
+    , scDefaultClusterVersion
 
     -- * ListClustersResponse
     , ListClustersResponse
     , listClustersResponse
     , lcrClusters
 
-    -- * ClusterStatus
-    , ClusterStatus (..)
+    -- * ClusterUpdate
+    , ClusterUpdate
+    , clusterUpdate
+    , cuDesiredNodeVersion
     ) where
 
 import           Network.Google.Container.Types.Product
 import           Network.Google.Container.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1beta1' of the Google Container Engine API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Google Container Engine API. This contains the host and root path used as a starting point for constructing service requests.
 containerRequest :: RequestBuilder
 containerRequest
-  = defaultRequest "https://www.googleapis.com/"
-      "container/v1beta1/projects/"
+  = defaultRequest "https://container.googleapis.com/"
+      ""

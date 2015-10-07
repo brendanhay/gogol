@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a data blob\'s associated metadata.
+-- | Updates an object\'s metadata.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsUpdate@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsUpdate@.
 module Network.Google.Resource.Storage.Objects.Update
     (
     -- * REST Resource
@@ -39,6 +39,7 @@ module Network.Google.Resource.Storage.Objects.Update
     , ouPrettyPrint
     , ouIfGenerationMatch
     , ouUserIP
+    , ouPredefinedACL
     , ouBucket
     , ouPayload
     , ouKey
@@ -60,60 +61,65 @@ type ObjectsUpdateResource =
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
-             QueryParam "ifMetagenerationMatch" Word64 :>
-               QueryParam "ifGenerationNotMatch" Word64 :>
-                 QueryParam "ifGenerationMatch" Word64 :>
-                   QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "projection" ObjectsUpdateProjection :>
-                       QueryParam "generation" Word64 :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] Object :>
-                                         Put '[JSON] Object
-       :<|>
-       "b" :>
-         Capture "bucket" Text :>
-           "o" :>
-             Capture "object" Text :>
-               QueryParam "ifMetagenerationMatch" Word64 :>
-                 QueryParam "ifGenerationNotMatch" Word64 :>
-                   QueryParam "ifGenerationMatch" Word64 :>
-                     QueryParam "ifMetagenerationNotMatch" Word64 :>
+             QueryParam "ifMetagenerationMatch" Int64 :>
+               QueryParam "ifGenerationNotMatch" Int64 :>
+                 QueryParam "ifGenerationMatch" Int64 :>
+                   QueryParam "predefinedAcl" ObjectsUpdatePredefinedACL
+                     :>
+                     QueryParam "ifMetagenerationNotMatch" Int64 :>
                        QueryParam "projection" ObjectsUpdateProjection :>
-                         QueryParam "generation" Word64 :>
+                         QueryParam "generation" Int64 :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
                                  QueryParam "fields" Text :>
                                    QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
-                                       QueryParam "alt" AltMedia :>
+                                       QueryParam "alt" AltJSON :>
                                          ReqBody '[JSON] Object :>
-                                           Put '[OctetStream] Stream
+                                           Put '[JSON] Object
+       :<|>
+       "b" :>
+         Capture "bucket" Text :>
+           "o" :>
+             Capture "object" Text :>
+               QueryParam "ifMetagenerationMatch" Int64 :>
+                 QueryParam "ifGenerationNotMatch" Int64 :>
+                   QueryParam "ifGenerationMatch" Int64 :>
+                     QueryParam "predefinedAcl" ObjectsUpdatePredefinedACL
+                       :>
+                       QueryParam "ifMetagenerationNotMatch" Int64 :>
+                         QueryParam "projection" ObjectsUpdateProjection :>
+                           QueryParam "generation" Int64 :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "userIp" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" AuthKey :>
+                                       QueryParam "oauth_token" OAuthToken :>
+                                         QueryParam "alt" AltMedia :>
+                                           ReqBody '[JSON] Object :>
+                                             Put '[OctetStream] Stream
 
--- | Updates a data blob\'s associated metadata.
+-- | Updates an object\'s metadata.
 --
 -- /See:/ 'objectsUpdate'' smart constructor.
 data ObjectsUpdate' = ObjectsUpdate'
     { _ouQuotaUser                :: !(Maybe Text)
-    , _ouIfMetagenerationMatch    :: !(Maybe Word64)
-    , _ouIfGenerationNotMatch     :: !(Maybe Word64)
+    , _ouIfMetagenerationMatch    :: !(Maybe Int64)
+    , _ouIfGenerationNotMatch     :: !(Maybe Int64)
     , _ouPrettyPrint              :: !Bool
-    , _ouIfGenerationMatch        :: !(Maybe Word64)
+    , _ouIfGenerationMatch        :: !(Maybe Int64)
     , _ouUserIP                   :: !(Maybe Text)
+    , _ouPredefinedACL            :: !(Maybe ObjectsUpdatePredefinedACL)
     , _ouBucket                   :: !Text
     , _ouPayload                  :: !Object
     , _ouKey                      :: !(Maybe AuthKey)
-    , _ouIfMetagenerationNotMatch :: !(Maybe Word64)
+    , _ouIfMetagenerationNotMatch :: !(Maybe Int64)
     , _ouObject                   :: !Text
     , _ouProjection               :: !(Maybe ObjectsUpdateProjection)
     , _ouOAuthToken               :: !(Maybe OAuthToken)
-    , _ouGeneration               :: !(Maybe Word64)
+    , _ouGeneration               :: !(Maybe Int64)
     , _ouFields                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -132,6 +138,8 @@ data ObjectsUpdate' = ObjectsUpdate'
 -- * 'ouIfGenerationMatch'
 --
 -- * 'ouUserIP'
+--
+-- * 'ouPredefinedACL'
 --
 -- * 'ouBucket'
 --
@@ -163,6 +171,7 @@ objectsUpdate' pOuBucket_ pOuPayload_ pOuObject_ =
     , _ouPrettyPrint = True
     , _ouIfGenerationMatch = Nothing
     , _ouUserIP = Nothing
+    , _ouPredefinedACL = Nothing
     , _ouBucket = pOuBucket_
     , _ouPayload = pOuPayload_
     , _ouKey = Nothing
@@ -183,14 +192,14 @@ ouQuotaUser
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.
-ouIfMetagenerationMatch :: Lens' ObjectsUpdate' (Maybe Word64)
+ouIfMetagenerationMatch :: Lens' ObjectsUpdate' (Maybe Int64)
 ouIfMetagenerationMatch
   = lens _ouIfMetagenerationMatch
       (\ s a -> s{_ouIfMetagenerationMatch = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation does not match the given value.
-ouIfGenerationNotMatch :: Lens' ObjectsUpdate' (Maybe Word64)
+ouIfGenerationNotMatch :: Lens' ObjectsUpdate' (Maybe Int64)
 ouIfGenerationNotMatch
   = lens _ouIfGenerationNotMatch
       (\ s a -> s{_ouIfGenerationNotMatch = a})
@@ -203,7 +212,7 @@ ouPrettyPrint
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation matches the given value.
-ouIfGenerationMatch :: Lens' ObjectsUpdate' (Maybe Word64)
+ouIfGenerationMatch :: Lens' ObjectsUpdate' (Maybe Int64)
 ouIfGenerationMatch
   = lens _ouIfGenerationMatch
       (\ s a -> s{_ouIfGenerationMatch = a})
@@ -212,6 +221,12 @@ ouIfGenerationMatch
 -- want to enforce per-user limits.
 ouUserIP :: Lens' ObjectsUpdate' (Maybe Text)
 ouUserIP = lens _ouUserIP (\ s a -> s{_ouUserIP = a})
+
+-- | Apply a predefined set of access controls to this object.
+ouPredefinedACL :: Lens' ObjectsUpdate' (Maybe ObjectsUpdatePredefinedACL)
+ouPredefinedACL
+  = lens _ouPredefinedACL
+      (\ s a -> s{_ouPredefinedACL = a})
 
 -- | Name of the bucket in which the object resides.
 ouBucket :: Lens' ObjectsUpdate' Text
@@ -230,12 +245,13 @@ ouKey = lens _ouKey (\ s a -> s{_ouKey = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration does not match the given value.
-ouIfMetagenerationNotMatch :: Lens' ObjectsUpdate' (Maybe Word64)
+ouIfMetagenerationNotMatch :: Lens' ObjectsUpdate' (Maybe Int64)
 ouIfMetagenerationNotMatch
   = lens _ouIfMetagenerationNotMatch
       (\ s a -> s{_ouIfMetagenerationNotMatch = a})
 
--- | Name of the object.
+-- | Name of the object. For information about how to URL encode object names
+-- to be path safe, see Encoding URI Path Parts.
 ouObject :: Lens' ObjectsUpdate' Text
 ouObject = lens _ouObject (\ s a -> s{_ouObject = a})
 
@@ -251,7 +267,7 @@ ouOAuthToken
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
-ouGeneration :: Lens' ObjectsUpdate' (Maybe Word64)
+ouGeneration :: Lens' ObjectsUpdate' (Maybe Int64)
 ouGeneration
   = lens _ouGeneration (\ s a -> s{_ouGeneration = a})
 
@@ -270,6 +286,7 @@ instance GoogleRequest ObjectsUpdate' where
           = go _ouBucket _ouObject _ouIfMetagenerationMatch
               _ouIfGenerationNotMatch
               _ouIfGenerationMatch
+              _ouPredefinedACL
               _ouIfMetagenerationNotMatch
               _ouProjection
               _ouGeneration
@@ -293,6 +310,7 @@ instance GoogleRequest (MediaDownload ObjectsUpdate')
           = go _ouBucket _ouObject _ouIfMetagenerationMatch
               _ouIfGenerationNotMatch
               _ouIfGenerationMatch
+              _ouPredefinedACL
               _ouIfMetagenerationNotMatch
               _ouProjection
               _ouGeneration

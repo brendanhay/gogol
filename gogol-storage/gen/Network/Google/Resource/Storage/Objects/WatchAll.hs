@@ -22,7 +22,7 @@
 --
 -- | Watch for changes on all objects in a bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsWatchAll@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsWatchAll@.
 module Network.Google.Resource.Storage.Objects.WatchAll
     (
     -- * REST Resource
@@ -182,7 +182,8 @@ owaPayload :: Lens' ObjectsWatchAll' Channel
 owaPayload
   = lens _owaPayload (\ s a -> s{_owaPayload = a})
 
--- | If true, lists all versions of a file as distinct results.
+-- | If true, lists all versions of an object as distinct results. The
+-- default is false. For more information, see Object Versioning.
 owaVersions :: Lens' ObjectsWatchAll' (Maybe Bool)
 owaVersions
   = lens _owaVersions (\ s a -> s{_owaVersions = a})
@@ -221,7 +222,8 @@ owaDelimiter
   = lens _owaDelimiter (\ s a -> s{_owaDelimiter = a})
 
 -- | Maximum number of items plus prefixes to return. As duplicate prefixes
--- are omitted, fewer total results may be returned than requested.
+-- are omitted, fewer total results may be returned than requested. The
+-- default value of this parameter is 1,000 items.
 owaMaxResults :: Lens' ObjectsWatchAll' (Maybe Word32)
 owaMaxResults
   = lens _owaMaxResults

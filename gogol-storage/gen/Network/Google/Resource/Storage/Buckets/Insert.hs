@@ -22,7 +22,7 @@
 --
 -- | Creates a new bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketsInsert@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketsInsert@.
 module Network.Google.Resource.Storage.Buckets.Insert
     (
     -- * REST Resource
@@ -37,7 +37,9 @@ module Network.Google.Resource.Storage.Buckets.Insert
     , biPrettyPrint
     , biProject
     , biUserIP
+    , biPredefinedACL
     , biPayload
+    , biPredefinedDefaultObjectACL
     , biKey
     , biProjection
     , biOAuthToken
@@ -52,29 +54,36 @@ import           Network.Google.Storage.Types
 type BucketsInsertResource =
      "b" :>
        QueryParam "project" Text :>
-         QueryParam "projection" BucketsInsertProjection :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Bucket :> Post '[JSON] Bucket
+         QueryParam "predefinedAcl" BucketsInsertPredefinedACL
+           :>
+           QueryParam "predefinedDefaultObjectAcl"
+             BucketsInsertPredefinedDefaultObjectACL
+             :>
+             QueryParam "projection" BucketsInsertProjection :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" AuthKey :>
+                         QueryParam "oauth_token" OAuthToken :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Bucket :> Post '[JSON] Bucket
 
 -- | Creates a new bucket.
 --
 -- /See:/ 'bucketsInsert'' smart constructor.
 data BucketsInsert' = BucketsInsert'
-    { _biQuotaUser   :: !(Maybe Text)
-    , _biPrettyPrint :: !Bool
-    , _biProject     :: !Text
-    , _biUserIP      :: !(Maybe Text)
-    , _biPayload     :: !Bucket
-    , _biKey         :: !(Maybe AuthKey)
-    , _biProjection  :: !(Maybe BucketsInsertProjection)
-    , _biOAuthToken  :: !(Maybe OAuthToken)
-    , _biFields      :: !(Maybe Text)
+    { _biQuotaUser                  :: !(Maybe Text)
+    , _biPrettyPrint                :: !Bool
+    , _biProject                    :: !Text
+    , _biUserIP                     :: !(Maybe Text)
+    , _biPredefinedACL              :: !(Maybe BucketsInsertPredefinedACL)
+    , _biPayload                    :: !Bucket
+    , _biPredefinedDefaultObjectACL :: !(Maybe BucketsInsertPredefinedDefaultObjectACL)
+    , _biKey                        :: !(Maybe AuthKey)
+    , _biProjection                 :: !(Maybe BucketsInsertProjection)
+    , _biOAuthToken                 :: !(Maybe OAuthToken)
+    , _biFields                     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsInsert'' with the minimum fields required to make a request.
@@ -89,7 +98,11 @@ data BucketsInsert' = BucketsInsert'
 --
 -- * 'biUserIP'
 --
+-- * 'biPredefinedACL'
+--
 -- * 'biPayload'
+--
+-- * 'biPredefinedDefaultObjectACL'
 --
 -- * 'biKey'
 --
@@ -108,7 +121,9 @@ bucketsInsert' pBiProject_ pBiPayload_ =
     , _biPrettyPrint = True
     , _biProject = pBiProject_
     , _biUserIP = Nothing
+    , _biPredefinedACL = Nothing
     , _biPayload = pBiPayload_
+    , _biPredefinedDefaultObjectACL = Nothing
     , _biKey = Nothing
     , _biProjection = Nothing
     , _biOAuthToken = Nothing
@@ -138,10 +153,22 @@ biProject
 biUserIP :: Lens' BucketsInsert' (Maybe Text)
 biUserIP = lens _biUserIP (\ s a -> s{_biUserIP = a})
 
+-- | Apply a predefined set of access controls to this bucket.
+biPredefinedACL :: Lens' BucketsInsert' (Maybe BucketsInsertPredefinedACL)
+biPredefinedACL
+  = lens _biPredefinedACL
+      (\ s a -> s{_biPredefinedACL = a})
+
 -- | Multipart request metadata.
 biPayload :: Lens' BucketsInsert' Bucket
 biPayload
   = lens _biPayload (\ s a -> s{_biPayload = a})
+
+-- | Apply a predefined set of default object access controls to this bucket.
+biPredefinedDefaultObjectACL :: Lens' BucketsInsert' (Maybe BucketsInsertPredefinedDefaultObjectACL)
+biPredefinedDefaultObjectACL
+  = lens _biPredefinedDefaultObjectACL
+      (\ s a -> s{_biPredefinedDefaultObjectACL = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -173,7 +200,10 @@ instance GoogleRequest BucketsInsert' where
         type Rs BucketsInsert' = Bucket
         request = requestWith storageRequest
         requestWith rq BucketsInsert'{..}
-          = go (Just _biProject) _biProjection _biQuotaUser
+          = go (Just _biProject) _biPredefinedACL
+              _biPredefinedDefaultObjectACL
+              _biProjection
+              _biQuotaUser
               (Just _biPrettyPrint)
               _biUserIP
               _biFields

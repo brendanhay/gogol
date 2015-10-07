@@ -134,7 +134,6 @@ instance ToJSON ReceivedMessage where
 -- /See:/ 'modifyAckDeadlineRequest' smart constructor.
 data ModifyAckDeadlineRequest = ModifyAckDeadlineRequest
     { _madrAckIds             :: !(Maybe [Text])
-    , _madrAckId              :: !(Maybe Text)
     , _madrAckDeadlineSeconds :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -144,15 +143,12 @@ data ModifyAckDeadlineRequest = ModifyAckDeadlineRequest
 --
 -- * 'madrAckIds'
 --
--- * 'madrAckId'
---
 -- * 'madrAckDeadlineSeconds'
 modifyAckDeadlineRequest
     :: ModifyAckDeadlineRequest
 modifyAckDeadlineRequest =
     ModifyAckDeadlineRequest
     { _madrAckIds = Nothing
-    , _madrAckId = Nothing
     , _madrAckDeadlineSeconds = Nothing
     }
 
@@ -162,12 +158,6 @@ madrAckIds
   = lens _madrAckIds (\ s a -> s{_madrAckIds = a}) .
       _Default
       . _Coerce
-
--- | The acknowledgment ID. Either this or ack_ids must be populated, but not
--- both.
-madrAckId :: Lens' ModifyAckDeadlineRequest (Maybe Text)
-madrAckId
-  = lens _madrAckId (\ s a -> s{_madrAckId = a})
 
 -- | The new ack deadline with respect to the time this request was sent to
 -- the Pub\/Sub system. Must be >= 0. For example, if the value is 10, the
@@ -184,7 +174,7 @@ instance FromJSON ModifyAckDeadlineRequest where
           = withObject "ModifyAckDeadlineRequest"
               (\ o ->
                  ModifyAckDeadlineRequest <$>
-                   (o .:? "ackIds" .!= mempty) <*> (o .:? "ackId") <*>
+                   (o .:? "ackIds" .!= mempty) <*>
                      (o .:? "ackDeadlineSeconds"))
 
 instance ToJSON ModifyAckDeadlineRequest where
@@ -192,7 +182,6 @@ instance ToJSON ModifyAckDeadlineRequest where
           = object
               (catMaybes
                  [("ackIds" .=) <$> _madrAckIds,
-                  ("ackId" .=) <$> _madrAckId,
                   ("ackDeadlineSeconds" .=) <$>
                     _madrAckDeadlineSeconds])
 

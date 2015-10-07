@@ -22,7 +22,7 @@
 --
 -- | Retrieves default object ACL entries on the specified bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageDefaultObjectAccessControlsList@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageDefaultObjectAccessControlsList@.
 module Network.Google.Resource.Storage.DefaultObjectAccessControls.List
     (
     -- * REST Resource

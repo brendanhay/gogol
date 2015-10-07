@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a reference set. Implements GlobalAllianceApi.getReferenceSet.
+-- | Gets a reference set. Implements
+-- [GlobalAllianceApi.getReferenceSet](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L83).
 --
--- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReferencesetsGet@.
+-- /See:/ < Genomics API Reference> for @GenomicsReferencesetsGet@.
 module Network.Google.Resource.Genomics.Referencesets.Get
     (
     -- * REST Resource
@@ -34,12 +35,18 @@ module Network.Google.Resource.Genomics.Referencesets.Get
 
     -- * Request Lenses
     , rReferenceSetId
+    , rXgafv
     , rQuotaUser
     , rPrettyPrint
-    , rUserIP
+    , rUploadProtocol
+    , rPp
+    , rAccessToken
+    , rUploadType
+    , rBearerToken
     , rKey
     , rOAuthToken
     , rFields
+    , rCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -48,27 +55,42 @@ import           Network.Google.Prelude
 -- | A resource alias for @GenomicsReferencesetsGet@ method which the
 -- 'ReferencesetsGet'' request conforms to.
 type ReferencesetsGetResource =
-     "referencesets" :>
-       Capture "referenceSetId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] ReferenceSet
+     "v1" :>
+       "referencesets" :>
+         Capture "referenceSetId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" AuthKey :>
+                                 QueryParam "oauth_token" OAuthToken :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] ReferenceSet
 
--- | Gets a reference set. Implements GlobalAllianceApi.getReferenceSet.
+-- | Gets a reference set. Implements
+-- [GlobalAllianceApi.getReferenceSet](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L83).
 --
 -- /See:/ 'referencesetsGet'' smart constructor.
 data ReferencesetsGet' = ReferencesetsGet'
     { _rReferenceSetId :: !Text
+    , _rXgafv          :: !(Maybe Text)
     , _rQuotaUser      :: !(Maybe Text)
     , _rPrettyPrint    :: !Bool
-    , _rUserIP         :: !(Maybe Text)
+    , _rUploadProtocol :: !(Maybe Text)
+    , _rPp             :: !Bool
+    , _rAccessToken    :: !(Maybe Text)
+    , _rUploadType     :: !(Maybe Text)
+    , _rBearerToken    :: !(Maybe Text)
     , _rKey            :: !(Maybe AuthKey)
     , _rOAuthToken     :: !(Maybe OAuthToken)
     , _rFields         :: !(Maybe Text)
+    , _rCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesetsGet'' with the minimum fields required to make a request.
@@ -77,29 +99,47 @@ data ReferencesetsGet' = ReferencesetsGet'
 --
 -- * 'rReferenceSetId'
 --
+-- * 'rXgafv'
+--
 -- * 'rQuotaUser'
 --
 -- * 'rPrettyPrint'
 --
--- * 'rUserIP'
+-- * 'rUploadProtocol'
+--
+-- * 'rPp'
+--
+-- * 'rAccessToken'
+--
+-- * 'rUploadType'
+--
+-- * 'rBearerToken'
 --
 -- * 'rKey'
 --
 -- * 'rOAuthToken'
 --
 -- * 'rFields'
+--
+-- * 'rCallback'
 referencesetsGet'
     :: Text -- ^ 'referenceSetId'
     -> ReferencesetsGet'
 referencesetsGet' pRReferenceSetId_ =
     ReferencesetsGet'
     { _rReferenceSetId = pRReferenceSetId_
+    , _rXgafv = Nothing
     , _rQuotaUser = Nothing
     , _rPrettyPrint = True
-    , _rUserIP = Nothing
+    , _rUploadProtocol = Nothing
+    , _rPp = True
+    , _rAccessToken = Nothing
+    , _rUploadType = Nothing
+    , _rBearerToken = Nothing
     , _rKey = Nothing
     , _rOAuthToken = Nothing
     , _rFields = Nothing
+    , _rCallback = Nothing
     }
 
 -- | The ID of the reference set.
@@ -108,9 +148,13 @@ rReferenceSetId
   = lens _rReferenceSetId
       (\ s a -> s{_rReferenceSetId = a})
 
+-- | V1 error format.
+rXgafv :: Lens' ReferencesetsGet' (Maybe Text)
+rXgafv = lens _rXgafv (\ s a -> s{_rXgafv = a})
+
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
+-- characters.
 rQuotaUser :: Lens' ReferencesetsGet' (Maybe Text)
 rQuotaUser
   = lens _rQuotaUser (\ s a -> s{_rQuotaUser = a})
@@ -120,10 +164,30 @@ rPrettyPrint :: Lens' ReferencesetsGet' Bool
 rPrettyPrint
   = lens _rPrettyPrint (\ s a -> s{_rPrettyPrint = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rUserIP :: Lens' ReferencesetsGet' (Maybe Text)
-rUserIP = lens _rUserIP (\ s a -> s{_rUserIP = a})
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rUploadProtocol :: Lens' ReferencesetsGet' (Maybe Text)
+rUploadProtocol
+  = lens _rUploadProtocol
+      (\ s a -> s{_rUploadProtocol = a})
+
+-- | Pretty-print response.
+rPp :: Lens' ReferencesetsGet' Bool
+rPp = lens _rPp (\ s a -> s{_rPp = a})
+
+-- | OAuth access token.
+rAccessToken :: Lens' ReferencesetsGet' (Maybe Text)
+rAccessToken
+  = lens _rAccessToken (\ s a -> s{_rAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rUploadType :: Lens' ReferencesetsGet' (Maybe Text)
+rUploadType
+  = lens _rUploadType (\ s a -> s{_rUploadType = a})
+
+-- | OAuth bearer token.
+rBearerToken :: Lens' ReferencesetsGet' (Maybe Text)
+rBearerToken
+  = lens _rBearerToken (\ s a -> s{_rBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -140,6 +204,11 @@ rOAuthToken
 rFields :: Lens' ReferencesetsGet' (Maybe Text)
 rFields = lens _rFields (\ s a -> s{_rFields = a})
 
+-- | JSONP
+rCallback :: Lens' ReferencesetsGet' (Maybe Text)
+rCallback
+  = lens _rCallback (\ s a -> s{_rCallback = a})
+
 instance GoogleAuth ReferencesetsGet' where
         _AuthKey = rKey . _Just
         _AuthToken = rOAuthToken . _Just
@@ -148,9 +217,14 @@ instance GoogleRequest ReferencesetsGet' where
         type Rs ReferencesetsGet' = ReferenceSet
         request = requestWith genomicsRequest
         requestWith rq ReferencesetsGet'{..}
-          = go _rReferenceSetId _rQuotaUser
+          = go _rReferenceSetId _rXgafv _rUploadProtocol
+              (Just _rPp)
+              _rAccessToken
+              _rUploadType
+              _rBearerToken
+              _rCallback
+              _rQuotaUser
               (Just _rPrettyPrint)
-              _rUserIP
               _rFields
               _rKey
               _rOAuthToken

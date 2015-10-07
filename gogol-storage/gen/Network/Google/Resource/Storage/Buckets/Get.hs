@@ -22,7 +22,7 @@
 --
 -- | Returns metadata for the specified bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketsGet@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketsGet@.
 module Network.Google.Resource.Storage.Buckets.Get
     (
     -- * REST Resource
@@ -53,8 +53,8 @@ import           Network.Google.Storage.Types
 type BucketsGetResource =
      "b" :>
        Capture "bucket" Text :>
-         QueryParam "ifMetagenerationMatch" Word64 :>
-           QueryParam "ifMetagenerationNotMatch" Word64 :>
+         QueryParam "ifMetagenerationMatch" Int64 :>
+           QueryParam "ifMetagenerationNotMatch" Int64 :>
              QueryParam "projection" BucketsGetProjection :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
@@ -69,12 +69,12 @@ type BucketsGetResource =
 -- /See:/ 'bucketsGet'' smart constructor.
 data BucketsGet' = BucketsGet'
     { _bgQuotaUser                :: !(Maybe Text)
-    , _bgIfMetagenerationMatch    :: !(Maybe Word64)
+    , _bgIfMetagenerationMatch    :: !(Maybe Int64)
     , _bgPrettyPrint              :: !Bool
     , _bgUserIP                   :: !(Maybe Text)
     , _bgBucket                   :: !Text
     , _bgKey                      :: !(Maybe AuthKey)
-    , _bgIfMetagenerationNotMatch :: !(Maybe Word64)
+    , _bgIfMetagenerationNotMatch :: !(Maybe Int64)
     , _bgProjection               :: !(Maybe BucketsGetProjection)
     , _bgOAuthToken               :: !(Maybe OAuthToken)
     , _bgFields                   :: !(Maybe Text)
@@ -129,7 +129,7 @@ bgQuotaUser
 
 -- | Makes the return of the bucket metadata conditional on whether the
 -- bucket\'s current metageneration matches the given value.
-bgIfMetagenerationMatch :: Lens' BucketsGet' (Maybe Word64)
+bgIfMetagenerationMatch :: Lens' BucketsGet' (Maybe Int64)
 bgIfMetagenerationMatch
   = lens _bgIfMetagenerationMatch
       (\ s a -> s{_bgIfMetagenerationMatch = a})
@@ -157,7 +157,7 @@ bgKey = lens _bgKey (\ s a -> s{_bgKey = a})
 
 -- | Makes the return of the bucket metadata conditional on whether the
 -- bucket\'s current metageneration does not match the given value.
-bgIfMetagenerationNotMatch :: Lens' BucketsGet' (Maybe Word64)
+bgIfMetagenerationNotMatch :: Lens' BucketsGet' (Maybe Int64)
 bgIfMetagenerationNotMatch
   = lens _bgIfMetagenerationNotMatch
       (\ s a -> s{_bgIfMetagenerationNotMatch = a})

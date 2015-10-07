@@ -45,33 +45,6 @@ instance FromJSON DeploymentsUpdateCreatePolicy where
 instance ToJSON DeploymentsUpdateCreatePolicy where
     toJSON = toJSONText
 
--- | Sets the policy to use for updating resources.
-data DeploymentsUpdateUpdatePolicy
-    = Patch'
-      -- ^ @PATCH@
-    | Update
-      -- ^ @UPDATE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DeploymentsUpdateUpdatePolicy
-
-instance FromText DeploymentsUpdateUpdatePolicy where
-    fromText = \case
-        "PATCH" -> Just Patch'
-        "UPDATE" -> Just Update
-        _ -> Nothing
-
-instance ToText DeploymentsUpdateUpdatePolicy where
-    toText = \case
-        Patch' -> "PATCH"
-        Update -> "UPDATE"
-
-instance FromJSON DeploymentsUpdateUpdatePolicy where
-    parseJSON = parseJSONText "DeploymentsUpdateUpdatePolicy"
-
-instance ToJSON DeploymentsUpdateUpdatePolicy where
-    toJSON = toJSONText
-
 -- | Sets the policy to use for deleting resources.
 data DeploymentsUpdateDeletePolicy
     = Abandon
@@ -124,33 +97,6 @@ instance FromJSON DeploymentsPatchDeletePolicy where
     parseJSON = parseJSONText "DeploymentsPatchDeletePolicy"
 
 instance ToJSON DeploymentsPatchDeletePolicy where
-    toJSON = toJSONText
-
--- | Sets the policy to use for updating resources.
-data DeploymentsPatchUpdatePolicy
-    = DPUPPatch'
-      -- ^ @PATCH@
-    | DPUPUpdate
-      -- ^ @UPDATE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DeploymentsPatchUpdatePolicy
-
-instance FromText DeploymentsPatchUpdatePolicy where
-    fromText = \case
-        "PATCH" -> Just DPUPPatch'
-        "UPDATE" -> Just DPUPUpdate
-        _ -> Nothing
-
-instance ToText DeploymentsPatchUpdatePolicy where
-    toText = \case
-        DPUPPatch' -> "PATCH"
-        DPUPUpdate -> "UPDATE"
-
-instance FromJSON DeploymentsPatchUpdatePolicy where
-    parseJSON = parseJSONText "DeploymentsPatchUpdatePolicy"
-
-instance ToJSON DeploymentsPatchUpdatePolicy where
     toJSON = toJSONText
 
 -- | Sets the policy to use for creating new resources.

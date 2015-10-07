@@ -22,7 +22,7 @@
 --
 -- | Gets information about a specific manifest.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerManifestsGet@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerManifestsGet@.
 module Network.Google.Resource.DeploymentManager.Manifests.Get
     (
     -- * REST Resource

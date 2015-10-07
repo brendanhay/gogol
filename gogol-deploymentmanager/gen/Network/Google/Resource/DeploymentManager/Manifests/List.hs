@@ -22,7 +22,7 @@
 --
 -- | Lists all manifests for a given deployment.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerManifestsList@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerManifestsList@.
 module Network.Google.Resource.DeploymentManager.Manifests.List
     (
     -- * REST Resource

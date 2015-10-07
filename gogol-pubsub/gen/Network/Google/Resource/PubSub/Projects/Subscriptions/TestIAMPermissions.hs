@@ -56,7 +56,7 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsSubscriptionsTestIAMPermissions'' request conforms to.
 type ProjectsSubscriptionsTestIAMPermissionsResource
      =
-     "v1beta2" :>
+     "v1" :>
        CaptureMode "resource" "testIamPermissions" Text :>
          QueryParam "$.xgafv" Text :>
            QueryParam "upload_protocol" Text :>

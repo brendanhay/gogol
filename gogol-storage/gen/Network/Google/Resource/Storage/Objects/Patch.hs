@@ -20,10 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a data blob\'s associated metadata. This method supports patch
--- semantics.
+-- | Updates an object\'s metadata. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsPatch@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsPatch@.
 module Network.Google.Resource.Storage.Objects.Patch
     (
     -- * REST Resource
@@ -40,6 +39,7 @@ module Network.Google.Resource.Storage.Objects.Patch
     , opPrettyPrint
     , opIfGenerationMatch
     , opUserIP
+    , opPredefinedACL
     , opBucket
     , opPayload
     , opKey
@@ -61,41 +61,43 @@ type ObjectsPatchResource =
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
-             QueryParam "ifMetagenerationMatch" Word64 :>
-               QueryParam "ifGenerationNotMatch" Word64 :>
-                 QueryParam "ifGenerationMatch" Word64 :>
-                   QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "projection" ObjectsPatchProjection :>
-                       QueryParam "generation" Word64 :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] Object :>
-                                         Patch '[JSON] Object
+             QueryParam "ifMetagenerationMatch" Int64 :>
+               QueryParam "ifGenerationNotMatch" Int64 :>
+                 QueryParam "ifGenerationMatch" Int64 :>
+                   QueryParam "predefinedAcl" ObjectsPatchPredefinedACL
+                     :>
+                     QueryParam "ifMetagenerationNotMatch" Int64 :>
+                       QueryParam "projection" ObjectsPatchProjection :>
+                         QueryParam "generation" Int64 :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" AuthKey :>
+                                     QueryParam "oauth_token" OAuthToken :>
+                                       QueryParam "alt" AltJSON :>
+                                         ReqBody '[JSON] Object :>
+                                           Patch '[JSON] Object
 
--- | Updates a data blob\'s associated metadata. This method supports patch
--- semantics.
+-- | Updates an object\'s metadata. This method supports patch semantics.
 --
 -- /See:/ 'objectsPatch'' smart constructor.
 data ObjectsPatch' = ObjectsPatch'
     { _opQuotaUser                :: !(Maybe Text)
-    , _opIfMetagenerationMatch    :: !(Maybe Word64)
-    , _opIfGenerationNotMatch     :: !(Maybe Word64)
+    , _opIfMetagenerationMatch    :: !(Maybe Int64)
+    , _opIfGenerationNotMatch     :: !(Maybe Int64)
     , _opPrettyPrint              :: !Bool
-    , _opIfGenerationMatch        :: !(Maybe Word64)
+    , _opIfGenerationMatch        :: !(Maybe Int64)
     , _opUserIP                   :: !(Maybe Text)
+    , _opPredefinedACL            :: !(Maybe ObjectsPatchPredefinedACL)
     , _opBucket                   :: !Text
     , _opPayload                  :: !Object
     , _opKey                      :: !(Maybe AuthKey)
-    , _opIfMetagenerationNotMatch :: !(Maybe Word64)
+    , _opIfMetagenerationNotMatch :: !(Maybe Int64)
     , _opObject                   :: !Text
     , _opProjection               :: !(Maybe ObjectsPatchProjection)
     , _opOAuthToken               :: !(Maybe OAuthToken)
-    , _opGeneration               :: !(Maybe Word64)
+    , _opGeneration               :: !(Maybe Int64)
     , _opFields                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -114,6 +116,8 @@ data ObjectsPatch' = ObjectsPatch'
 -- * 'opIfGenerationMatch'
 --
 -- * 'opUserIP'
+--
+-- * 'opPredefinedACL'
 --
 -- * 'opBucket'
 --
@@ -145,6 +149,7 @@ objectsPatch' pOpBucket_ pOpPayload_ pOpObject_ =
     , _opPrettyPrint = True
     , _opIfGenerationMatch = Nothing
     , _opUserIP = Nothing
+    , _opPredefinedACL = Nothing
     , _opBucket = pOpBucket_
     , _opPayload = pOpPayload_
     , _opKey = Nothing
@@ -165,14 +170,14 @@ opQuotaUser
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.
-opIfMetagenerationMatch :: Lens' ObjectsPatch' (Maybe Word64)
+opIfMetagenerationMatch :: Lens' ObjectsPatch' (Maybe Int64)
 opIfMetagenerationMatch
   = lens _opIfMetagenerationMatch
       (\ s a -> s{_opIfMetagenerationMatch = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation does not match the given value.
-opIfGenerationNotMatch :: Lens' ObjectsPatch' (Maybe Word64)
+opIfGenerationNotMatch :: Lens' ObjectsPatch' (Maybe Int64)
 opIfGenerationNotMatch
   = lens _opIfGenerationNotMatch
       (\ s a -> s{_opIfGenerationNotMatch = a})
@@ -185,7 +190,7 @@ opPrettyPrint
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation matches the given value.
-opIfGenerationMatch :: Lens' ObjectsPatch' (Maybe Word64)
+opIfGenerationMatch :: Lens' ObjectsPatch' (Maybe Int64)
 opIfGenerationMatch
   = lens _opIfGenerationMatch
       (\ s a -> s{_opIfGenerationMatch = a})
@@ -194,6 +199,12 @@ opIfGenerationMatch
 -- want to enforce per-user limits.
 opUserIP :: Lens' ObjectsPatch' (Maybe Text)
 opUserIP = lens _opUserIP (\ s a -> s{_opUserIP = a})
+
+-- | Apply a predefined set of access controls to this object.
+opPredefinedACL :: Lens' ObjectsPatch' (Maybe ObjectsPatchPredefinedACL)
+opPredefinedACL
+  = lens _opPredefinedACL
+      (\ s a -> s{_opPredefinedACL = a})
 
 -- | Name of the bucket in which the object resides.
 opBucket :: Lens' ObjectsPatch' Text
@@ -212,12 +223,13 @@ opKey = lens _opKey (\ s a -> s{_opKey = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration does not match the given value.
-opIfMetagenerationNotMatch :: Lens' ObjectsPatch' (Maybe Word64)
+opIfMetagenerationNotMatch :: Lens' ObjectsPatch' (Maybe Int64)
 opIfMetagenerationNotMatch
   = lens _opIfMetagenerationNotMatch
       (\ s a -> s{_opIfMetagenerationNotMatch = a})
 
--- | Name of the object.
+-- | Name of the object. For information about how to URL encode object names
+-- to be path safe, see Encoding URI Path Parts.
 opObject :: Lens' ObjectsPatch' Text
 opObject = lens _opObject (\ s a -> s{_opObject = a})
 
@@ -233,7 +245,7 @@ opOAuthToken
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
-opGeneration :: Lens' ObjectsPatch' (Maybe Word64)
+opGeneration :: Lens' ObjectsPatch' (Maybe Int64)
 opGeneration
   = lens _opGeneration (\ s a -> s{_opGeneration = a})
 
@@ -252,6 +264,7 @@ instance GoogleRequest ObjectsPatch' where
           = go _opBucket _opObject _opIfMetagenerationMatch
               _opIfGenerationNotMatch
               _opIfGenerationMatch
+              _opPredefinedACL
               _opIfMetagenerationNotMatch
               _opProjection
               _opGeneration

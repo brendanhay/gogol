@@ -22,7 +22,7 @@
 --
 -- | Lists all operations for a project.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerOperationsList@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerOperationsList@.
 module Network.Google.Resource.DeploymentManager.Operations.List
     (
     -- * REST Resource

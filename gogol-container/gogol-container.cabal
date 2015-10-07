@@ -21,7 +21,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1beta1@
+    This library is compatible with version @v1@
     of the API.
 
 source-repository head
@@ -37,12 +37,12 @@ library
     exposed-modules:
           Network.Google.Container
         , Network.Google.Container.Types
-        , Network.Google.Resource.Container.Projects.Clusters.List
-        , Network.Google.Resource.Container.Projects.Operations.List
         , Network.Google.Resource.Container.Projects.Zones.Clusters.Create
         , Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
         , Network.Google.Resource.Container.Projects.Zones.Clusters.Get
         , Network.Google.Resource.Container.Projects.Zones.Clusters.List
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.Update
+        , Network.Google.Resource.Container.Projects.Zones.GetServerConfig
         , Network.Google.Resource.Container.Projects.Zones.Operations.Get
         , Network.Google.Resource.Container.Projects.Zones.Operations.List
 

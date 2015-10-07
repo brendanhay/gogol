@@ -22,7 +22,7 @@
 --
 -- | Updates an ACL entry on the specified bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketAccessControlsUpdate@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketAccessControlsUpdate@.
 module Network.Google.Resource.Storage.BucketAccessControls.Update
     (
     -- * REST Resource

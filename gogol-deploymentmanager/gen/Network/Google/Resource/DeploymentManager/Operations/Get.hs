@@ -22,7 +22,7 @@
 --
 -- | Gets information about a specific operation.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerOperationsGet@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerOperationsGet@.
 module Network.Google.Resource.DeploymentManager.Operations.Get
     (
     -- * REST Resource

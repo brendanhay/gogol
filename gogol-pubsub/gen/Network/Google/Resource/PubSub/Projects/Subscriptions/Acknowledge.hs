@@ -59,7 +59,7 @@ import           Network.Google.PubSub.Types
 -- | A resource alias for @PubsubProjectsSubscriptionsAcknowledge@ method which the
 -- 'ProjectsSubscriptionsAcknowledge'' request conforms to.
 type ProjectsSubscriptionsAcknowledgeResource =
-     "v1beta2" :>
+     "v1" :>
        CaptureMode "subscription" "acknowledge" Text :>
          QueryParam "$.xgafv" Text :>
            QueryParam "upload_protocol" Text :>

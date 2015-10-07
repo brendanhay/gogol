@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves objects or their associated metadata.
+-- | Retrieves an object or its metadata.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsGet@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsGet@.
 module Network.Google.Resource.Storage.Objects.Get
     (
     -- * REST Resource
@@ -59,12 +59,12 @@ type ObjectsGetResource =
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
-             QueryParam "ifMetagenerationMatch" Word64 :>
-               QueryParam "ifGenerationNotMatch" Word64 :>
-                 QueryParam "ifGenerationMatch" Word64 :>
-                   QueryParam "ifMetagenerationNotMatch" Word64 :>
+             QueryParam "ifMetagenerationMatch" Int64 :>
+               QueryParam "ifGenerationNotMatch" Int64 :>
+                 QueryParam "ifGenerationMatch" Int64 :>
+                   QueryParam "ifMetagenerationNotMatch" Int64 :>
                      QueryParam "projection" ObjectsGetProjection :>
-                       QueryParam "generation" Word64 :>
+                       QueryParam "generation" Int64 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -78,12 +78,12 @@ type ObjectsGetResource =
          Capture "bucket" Text :>
            "o" :>
              Capture "object" Text :>
-               QueryParam "ifMetagenerationMatch" Word64 :>
-                 QueryParam "ifGenerationNotMatch" Word64 :>
-                   QueryParam "ifGenerationMatch" Word64 :>
-                     QueryParam "ifMetagenerationNotMatch" Word64 :>
+               QueryParam "ifMetagenerationMatch" Int64 :>
+                 QueryParam "ifGenerationNotMatch" Int64 :>
+                   QueryParam "ifGenerationMatch" Int64 :>
+                     QueryParam "ifMetagenerationNotMatch" Int64 :>
                        QueryParam "projection" ObjectsGetProjection :>
-                         QueryParam "generation" Word64 :>
+                         QueryParam "generation" Int64 :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
@@ -93,23 +93,23 @@ type ObjectsGetResource =
                                        QueryParam "alt" AltMedia :>
                                          Get '[OctetStream] Stream
 
--- | Retrieves objects or their associated metadata.
+-- | Retrieves an object or its metadata.
 --
 -- /See:/ 'objectsGet'' smart constructor.
 data ObjectsGet' = ObjectsGet'
     { _ogQuotaUser                :: !(Maybe Text)
-    , _ogIfMetagenerationMatch    :: !(Maybe Word64)
-    , _ogIfGenerationNotMatch     :: !(Maybe Word64)
+    , _ogIfMetagenerationMatch    :: !(Maybe Int64)
+    , _ogIfGenerationNotMatch     :: !(Maybe Int64)
     , _ogPrettyPrint              :: !Bool
-    , _ogIfGenerationMatch        :: !(Maybe Word64)
+    , _ogIfGenerationMatch        :: !(Maybe Int64)
     , _ogUserIP                   :: !(Maybe Text)
     , _ogBucket                   :: !Text
     , _ogKey                      :: !(Maybe AuthKey)
-    , _ogIfMetagenerationNotMatch :: !(Maybe Word64)
+    , _ogIfMetagenerationNotMatch :: !(Maybe Int64)
     , _ogObject                   :: !Text
     , _ogProjection               :: !(Maybe ObjectsGetProjection)
     , _ogOAuthToken               :: !(Maybe OAuthToken)
-    , _ogGeneration               :: !(Maybe Word64)
+    , _ogGeneration               :: !(Maybe Int64)
     , _ogFields                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -175,14 +175,14 @@ ogQuotaUser
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.
-ogIfMetagenerationMatch :: Lens' ObjectsGet' (Maybe Word64)
+ogIfMetagenerationMatch :: Lens' ObjectsGet' (Maybe Int64)
 ogIfMetagenerationMatch
   = lens _ogIfMetagenerationMatch
       (\ s a -> s{_ogIfMetagenerationMatch = a})
 
 -- | Makes the operation conditional on whether the object\'s generation does
 -- not match the given value.
-ogIfGenerationNotMatch :: Lens' ObjectsGet' (Maybe Word64)
+ogIfGenerationNotMatch :: Lens' ObjectsGet' (Maybe Int64)
 ogIfGenerationNotMatch
   = lens _ogIfGenerationNotMatch
       (\ s a -> s{_ogIfGenerationNotMatch = a})
@@ -195,7 +195,7 @@ ogPrettyPrint
 
 -- | Makes the operation conditional on whether the object\'s generation
 -- matches the given value.
-ogIfGenerationMatch :: Lens' ObjectsGet' (Maybe Word64)
+ogIfGenerationMatch :: Lens' ObjectsGet' (Maybe Int64)
 ogIfGenerationMatch
   = lens _ogIfGenerationMatch
       (\ s a -> s{_ogIfGenerationMatch = a})
@@ -217,12 +217,13 @@ ogKey = lens _ogKey (\ s a -> s{_ogKey = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration does not match the given value.
-ogIfMetagenerationNotMatch :: Lens' ObjectsGet' (Maybe Word64)
+ogIfMetagenerationNotMatch :: Lens' ObjectsGet' (Maybe Int64)
 ogIfMetagenerationNotMatch
   = lens _ogIfMetagenerationNotMatch
       (\ s a -> s{_ogIfMetagenerationNotMatch = a})
 
--- | Name of the object.
+-- | Name of the object. For information about how to URL encode object names
+-- to be path safe, see Encoding URI Path Parts.
 ogObject :: Lens' ObjectsGet' Text
 ogObject = lens _ogObject (\ s a -> s{_ogObject = a})
 
@@ -238,7 +239,7 @@ ogOAuthToken
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
-ogGeneration :: Lens' ObjectsGet' (Maybe Word64)
+ogGeneration :: Lens' ObjectsGet' (Maybe Int64)
 ogGeneration
   = lens _ogGeneration (\ s a -> s{_ogGeneration = a})
 

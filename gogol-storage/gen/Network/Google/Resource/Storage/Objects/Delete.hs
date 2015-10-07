@@ -20,11 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes data blobs and associated metadata. Deletions are permanent if
+-- | Deletes an object and its metadata. Deletions are permanent if
 -- versioning is not enabled for the bucket, or if the generation parameter
 -- is used.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsDelete@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsDelete@.
 module Network.Google.Resource.Storage.Objects.Delete
     (
     -- * REST Resource
@@ -60,11 +60,11 @@ type ObjectsDeleteResource =
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
-             QueryParam "ifMetagenerationMatch" Word64 :>
-               QueryParam "ifGenerationNotMatch" Word64 :>
-                 QueryParam "ifGenerationMatch" Word64 :>
-                   QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "generation" Word64 :>
+             QueryParam "ifMetagenerationMatch" Int64 :>
+               QueryParam "ifGenerationNotMatch" Int64 :>
+                 QueryParam "ifGenerationMatch" Int64 :>
+                   QueryParam "ifMetagenerationNotMatch" Int64 :>
+                     QueryParam "generation" Int64 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -73,24 +73,24 @@ type ObjectsDeleteResource =
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Deletes data blobs and associated metadata. Deletions are permanent if
+-- | Deletes an object and its metadata. Deletions are permanent if
 -- versioning is not enabled for the bucket, or if the generation parameter
 -- is used.
 --
 -- /See:/ 'objectsDelete'' smart constructor.
 data ObjectsDelete' = ObjectsDelete'
     { _odQuotaUser                :: !(Maybe Text)
-    , _odIfMetagenerationMatch    :: !(Maybe Word64)
-    , _odIfGenerationNotMatch     :: !(Maybe Word64)
+    , _odIfMetagenerationMatch    :: !(Maybe Int64)
+    , _odIfGenerationNotMatch     :: !(Maybe Int64)
     , _odPrettyPrint              :: !Bool
-    , _odIfGenerationMatch        :: !(Maybe Word64)
+    , _odIfGenerationMatch        :: !(Maybe Int64)
     , _odUserIP                   :: !(Maybe Text)
     , _odBucket                   :: !Text
     , _odKey                      :: !(Maybe AuthKey)
-    , _odIfMetagenerationNotMatch :: !(Maybe Word64)
+    , _odIfMetagenerationNotMatch :: !(Maybe Int64)
     , _odObject                   :: !Text
     , _odOAuthToken               :: !(Maybe OAuthToken)
-    , _odGeneration               :: !(Maybe Word64)
+    , _odGeneration               :: !(Maybe Int64)
     , _odFields                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -153,14 +153,14 @@ odQuotaUser
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.
-odIfMetagenerationMatch :: Lens' ObjectsDelete' (Maybe Word64)
+odIfMetagenerationMatch :: Lens' ObjectsDelete' (Maybe Int64)
 odIfMetagenerationMatch
   = lens _odIfMetagenerationMatch
       (\ s a -> s{_odIfMetagenerationMatch = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation does not match the given value.
-odIfGenerationNotMatch :: Lens' ObjectsDelete' (Maybe Word64)
+odIfGenerationNotMatch :: Lens' ObjectsDelete' (Maybe Int64)
 odIfGenerationNotMatch
   = lens _odIfGenerationNotMatch
       (\ s a -> s{_odIfGenerationNotMatch = a})
@@ -173,7 +173,7 @@ odPrettyPrint
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation matches the given value.
-odIfGenerationMatch :: Lens' ObjectsDelete' (Maybe Word64)
+odIfGenerationMatch :: Lens' ObjectsDelete' (Maybe Int64)
 odIfGenerationMatch
   = lens _odIfGenerationMatch
       (\ s a -> s{_odIfGenerationMatch = a})
@@ -195,12 +195,13 @@ odKey = lens _odKey (\ s a -> s{_odKey = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration does not match the given value.
-odIfMetagenerationNotMatch :: Lens' ObjectsDelete' (Maybe Word64)
+odIfMetagenerationNotMatch :: Lens' ObjectsDelete' (Maybe Int64)
 odIfMetagenerationNotMatch
   = lens _odIfMetagenerationNotMatch
       (\ s a -> s{_odIfMetagenerationNotMatch = a})
 
--- | Name of the object.
+-- | Name of the object. For information about how to URL encode object names
+-- to be path safe, see Encoding URI Path Parts.
 odObject :: Lens' ObjectsDelete' Text
 odObject = lens _odObject (\ s a -> s{_odObject = a})
 
@@ -211,7 +212,7 @@ odOAuthToken
 
 -- | If present, permanently deletes a specific revision of this object (as
 -- opposed to the latest version, the default).
-odGeneration :: Lens' ObjectsDelete' (Maybe Word64)
+odGeneration :: Lens' ObjectsDelete' (Maybe Int64)
 odGeneration
   = lens _odGeneration (\ s a -> s{_odGeneration = a})
 

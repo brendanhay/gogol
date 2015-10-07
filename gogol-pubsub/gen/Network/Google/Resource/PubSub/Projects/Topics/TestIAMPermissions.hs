@@ -55,7 +55,7 @@ import           Network.Google.PubSub.Types
 -- | A resource alias for @PubsubProjectsTopicsTestIAMPermissions@ method which the
 -- 'ProjectsTopicsTestIAMPermissions'' request conforms to.
 type ProjectsTopicsTestIAMPermissionsResource =
-     "v1beta2" :>
+     "v1" :>
        CaptureMode "resource" "testIamPermissions" Text :>
          QueryParam "$.xgafv" Text :>
            QueryParam "upload_protocol" Text :>

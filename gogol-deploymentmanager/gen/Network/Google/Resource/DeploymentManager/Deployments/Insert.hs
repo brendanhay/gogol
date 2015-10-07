@@ -23,7 +23,7 @@
 -- | Creates a deployment and all of the resources described by the
 -- deployment manifest.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsInsert@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsInsert@.
 module Network.Google.Resource.DeploymentManager.Deployments.Insert
     (
     -- * REST Resource
@@ -40,6 +40,7 @@ module Network.Google.Resource.DeploymentManager.Deployments.Insert
     , diUserIP
     , diPayload
     , diKey
+    , diPreview
     , diOAuthToken
     , diFields
     ) where
@@ -53,14 +54,15 @@ type DeploymentsInsertResource =
      Capture "project" Text :>
        "global" :>
          "deployments" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Deployment :> Post '[JSON] Operation
+           QueryParam "preview" Bool :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" AuthKey :>
+                       QueryParam "oauth_token" OAuthToken :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Deployment :> Post '[JSON] Operation
 
 -- | Creates a deployment and all of the resources described by the
 -- deployment manifest.
@@ -73,6 +75,7 @@ data DeploymentsInsert' = DeploymentsInsert'
     , _diUserIP      :: !(Maybe Text)
     , _diPayload     :: !Deployment
     , _diKey         :: !(Maybe AuthKey)
+    , _diPreview     :: !(Maybe Bool)
     , _diOAuthToken  :: !(Maybe OAuthToken)
     , _diFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -93,6 +96,8 @@ data DeploymentsInsert' = DeploymentsInsert'
 --
 -- * 'diKey'
 --
+-- * 'diPreview'
+--
 -- * 'diOAuthToken'
 --
 -- * 'diFields'
@@ -108,6 +113,7 @@ deploymentsInsert' pDiProject_ pDiPayload_ =
     , _diUserIP = Nothing
     , _diPayload = pDiPayload_
     , _diKey = Nothing
+    , _diPreview = Nothing
     , _diOAuthToken = Nothing
     , _diFields = Nothing
     }
@@ -146,6 +152,18 @@ diPayload
 diKey :: Lens' DeploymentsInsert' (Maybe AuthKey)
 diKey = lens _diKey (\ s a -> s{_diKey = a})
 
+-- | If set to true, creates a deployment and creates \"shell\" resources but
+-- does not actually instantiate these resources. This allows you to
+-- preview what your deployment looks like. After previewing a deployment,
+-- you can deploy your resources by making a request with the update()
+-- method or you can use the cancelPreview() method to cancel the preview
+-- altogether. Note that the deployment will still exist after you cancel
+-- the preview and you must separately delete this deployment if you want
+-- to remove it.
+diPreview :: Lens' DeploymentsInsert' (Maybe Bool)
+diPreview
+  = lens _diPreview (\ s a -> s{_diPreview = a})
+
 -- | OAuth 2.0 token for the current user.
 diOAuthToken :: Lens' DeploymentsInsert' (Maybe OAuthToken)
 diOAuthToken
@@ -163,7 +181,8 @@ instance GoogleRequest DeploymentsInsert' where
         type Rs DeploymentsInsert' = Operation
         request = requestWith deploymentManagerRequest
         requestWith rq DeploymentsInsert'{..}
-          = go _diProject _diQuotaUser (Just _diPrettyPrint)
+          = go _diProject _diPreview _diQuotaUser
+              (Just _diPrettyPrint)
               _diUserIP
               _diFields
               _diKey

@@ -131,8 +131,8 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types.Product
 import           Network.Google.YouTubeAnalytics.Types.Sum
 
--- | Default request referring to version 'v1beta1' of the YouTube Analytics API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the YouTube Analytics API. This contains the host and root path used as a starting point for constructing service requests.
 youTubeAnalyticsRequest :: RequestBuilder
 youTubeAnalyticsRequest
   = defaultRequest "https://www.googleapis.com/"
-      "youtube/analytics/v1beta1/"
+      "youtube/analytics/v1/"

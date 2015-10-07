@@ -22,7 +22,7 @@
 --
 -- | Returns the ACL entry for the specified entity on the specified object.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectAccessControlsGet@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectAccessControlsGet@.
 module Network.Google.Resource.Storage.ObjectAccessControls.Get
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ type ObjectAccessControlsGetResource =
            Capture "object" Text :>
              "acl" :>
                Capture "entity" Text :>
-                 QueryParam "generation" Word64 :>
+                 QueryParam "generation" Int64 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -79,7 +79,7 @@ data ObjectAccessControlsGet' = ObjectAccessControlsGet'
     , _oacgObject      :: !Text
     , _oacgOAuthToken  :: !(Maybe OAuthToken)
     , _oacgEntity      :: !Text
-    , _oacgGeneration  :: !(Maybe Word64)
+    , _oacgGeneration  :: !(Maybe Int64)
     , _oacgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -156,7 +156,8 @@ oacgBucket
 oacgKey :: Lens' ObjectAccessControlsGet' (Maybe AuthKey)
 oacgKey = lens _oacgKey (\ s a -> s{_oacgKey = a})
 
--- | Name of the object.
+-- | Name of the object. For information about how to URL encode object names
+-- to be path safe, see Encoding URI Path Parts.
 oacgObject :: Lens' ObjectAccessControlsGet' Text
 oacgObject
   = lens _oacgObject (\ s a -> s{_oacgObject = a})
@@ -176,7 +177,7 @@ oacgEntity
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
-oacgGeneration :: Lens' ObjectAccessControlsGet' (Maybe Word64)
+oacgGeneration :: Lens' ObjectAccessControlsGet' (Maybe Int64)
 oacgGeneration
   = lens _oacgGeneration
       (\ s a -> s{_oacgGeneration = a})

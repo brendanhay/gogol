@@ -22,7 +22,7 @@
 --
 -- | Lists all resource types for Deployment Manager.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerTypesList@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerTypesList@.
 module Network.Google.Resource.DeploymentManager.Types.List
     (
     -- * REST Resource

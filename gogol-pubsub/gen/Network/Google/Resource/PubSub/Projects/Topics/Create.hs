@@ -55,7 +55,7 @@ import           Network.Google.PubSub.Types
 -- | A resource alias for @PubsubProjectsTopicsCreate@ method which the
 -- 'ProjectsTopicsCreate'' request conforms to.
 type ProjectsTopicsCreateResource =
-     "v1beta2" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Text :>
            QueryParam "upload_protocol" Text :>

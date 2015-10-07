@@ -23,7 +23,7 @@
 -- | Deletes the contents of a variant set. The variant set object is not
 -- deleted.
 --
--- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsVariantsetsDelete@.
+-- /See:/ < Genomics API Reference> for @GenomicsVariantsetsDelete@.
 module Network.Google.Resource.Genomics.Variantsets.Delete
     (
     -- * REST Resource
@@ -34,13 +34,19 @@ module Network.Google.Resource.Genomics.Variantsets.Delete
     , VariantsetsDelete'
 
     -- * Request Lenses
+    , vddXgafv
     , vddQuotaUser
     , vddPrettyPrint
+    , vddUploadProtocol
+    , vddPp
     , vddVariantSetId
-    , vddUserIP
+    , vddAccessToken
+    , vddUploadType
+    , vddBearerToken
     , vddKey
     , vddOAuthToken
     , vddFields
+    , vddCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -49,64 +55,100 @@ import           Network.Google.Prelude
 -- | A resource alias for @GenomicsVariantsetsDelete@ method which the
 -- 'VariantsetsDelete'' request conforms to.
 type VariantsetsDeleteResource =
-     "variantsets" :>
-       Capture "variantSetId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "v1" :>
+       "variantsets" :>
+         Capture "variantSetId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" AuthKey :>
+                                 QueryParam "oauth_token" OAuthToken :>
+                                   QueryParam "alt" AltJSON :>
+                                     Delete '[JSON] Empty
 
 -- | Deletes the contents of a variant set. The variant set object is not
 -- deleted.
 --
 -- /See:/ 'variantsetsDelete'' smart constructor.
 data VariantsetsDelete' = VariantsetsDelete'
-    { _vddQuotaUser    :: !(Maybe Text)
-    , _vddPrettyPrint  :: !Bool
-    , _vddVariantSetId :: !Text
-    , _vddUserIP       :: !(Maybe Text)
-    , _vddKey          :: !(Maybe AuthKey)
-    , _vddOAuthToken   :: !(Maybe OAuthToken)
-    , _vddFields       :: !(Maybe Text)
+    { _vddXgafv          :: !(Maybe Text)
+    , _vddQuotaUser      :: !(Maybe Text)
+    , _vddPrettyPrint    :: !Bool
+    , _vddUploadProtocol :: !(Maybe Text)
+    , _vddPp             :: !Bool
+    , _vddVariantSetId   :: !Text
+    , _vddAccessToken    :: !(Maybe Text)
+    , _vddUploadType     :: !(Maybe Text)
+    , _vddBearerToken    :: !(Maybe Text)
+    , _vddKey            :: !(Maybe AuthKey)
+    , _vddOAuthToken     :: !(Maybe OAuthToken)
+    , _vddFields         :: !(Maybe Text)
+    , _vddCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'vddXgafv'
+--
 -- * 'vddQuotaUser'
 --
 -- * 'vddPrettyPrint'
 --
+-- * 'vddUploadProtocol'
+--
+-- * 'vddPp'
+--
 -- * 'vddVariantSetId'
 --
--- * 'vddUserIP'
+-- * 'vddAccessToken'
+--
+-- * 'vddUploadType'
+--
+-- * 'vddBearerToken'
 --
 -- * 'vddKey'
 --
 -- * 'vddOAuthToken'
 --
 -- * 'vddFields'
+--
+-- * 'vddCallback'
 variantsetsDelete'
     :: Text -- ^ 'variantSetId'
     -> VariantsetsDelete'
 variantsetsDelete' pVddVariantSetId_ =
     VariantsetsDelete'
-    { _vddQuotaUser = Nothing
+    { _vddXgafv = Nothing
+    , _vddQuotaUser = Nothing
     , _vddPrettyPrint = True
+    , _vddUploadProtocol = Nothing
+    , _vddPp = True
     , _vddVariantSetId = pVddVariantSetId_
-    , _vddUserIP = Nothing
+    , _vddAccessToken = Nothing
+    , _vddUploadType = Nothing
+    , _vddBearerToken = Nothing
     , _vddKey = Nothing
     , _vddOAuthToken = Nothing
     , _vddFields = Nothing
+    , _vddCallback = Nothing
     }
+
+-- | V1 error format.
+vddXgafv :: Lens' VariantsetsDelete' (Maybe Text)
+vddXgafv = lens _vddXgafv (\ s a -> s{_vddXgafv = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
+-- characters.
 vddQuotaUser :: Lens' VariantsetsDelete' (Maybe Text)
 vddQuotaUser
   = lens _vddQuotaUser (\ s a -> s{_vddQuotaUser = a})
@@ -117,17 +159,39 @@ vddPrettyPrint
   = lens _vddPrettyPrint
       (\ s a -> s{_vddPrettyPrint = a})
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+vddUploadProtocol :: Lens' VariantsetsDelete' (Maybe Text)
+vddUploadProtocol
+  = lens _vddUploadProtocol
+      (\ s a -> s{_vddUploadProtocol = a})
+
+-- | Pretty-print response.
+vddPp :: Lens' VariantsetsDelete' Bool
+vddPp = lens _vddPp (\ s a -> s{_vddPp = a})
+
 -- | The ID of the variant set to be deleted.
 vddVariantSetId :: Lens' VariantsetsDelete' Text
 vddVariantSetId
   = lens _vddVariantSetId
       (\ s a -> s{_vddVariantSetId = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-vddUserIP :: Lens' VariantsetsDelete' (Maybe Text)
-vddUserIP
-  = lens _vddUserIP (\ s a -> s{_vddUserIP = a})
+-- | OAuth access token.
+vddAccessToken :: Lens' VariantsetsDelete' (Maybe Text)
+vddAccessToken
+  = lens _vddAccessToken
+      (\ s a -> s{_vddAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+vddUploadType :: Lens' VariantsetsDelete' (Maybe Text)
+vddUploadType
+  = lens _vddUploadType
+      (\ s a -> s{_vddUploadType = a})
+
+-- | OAuth bearer token.
+vddBearerToken :: Lens' VariantsetsDelete' (Maybe Text)
+vddBearerToken
+  = lens _vddBearerToken
+      (\ s a -> s{_vddBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -146,17 +210,27 @@ vddFields :: Lens' VariantsetsDelete' (Maybe Text)
 vddFields
   = lens _vddFields (\ s a -> s{_vddFields = a})
 
+-- | JSONP
+vddCallback :: Lens' VariantsetsDelete' (Maybe Text)
+vddCallback
+  = lens _vddCallback (\ s a -> s{_vddCallback = a})
+
 instance GoogleAuth VariantsetsDelete' where
         _AuthKey = vddKey . _Just
         _AuthToken = vddOAuthToken . _Just
 
 instance GoogleRequest VariantsetsDelete' where
-        type Rs VariantsetsDelete' = ()
+        type Rs VariantsetsDelete' = Empty
         request = requestWith genomicsRequest
         requestWith rq VariantsetsDelete'{..}
-          = go _vddVariantSetId _vddQuotaUser
+          = go _vddVariantSetId _vddXgafv _vddUploadProtocol
+              (Just _vddPp)
+              _vddAccessToken
+              _vddUploadType
+              _vddBearerToken
+              _vddCallback
+              _vddQuotaUser
               (Just _vddPrettyPrint)
-              _vddUserIP
               _vddFields
               _vddKey
               _vddOAuthToken

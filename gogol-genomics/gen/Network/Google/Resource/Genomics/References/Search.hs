@@ -21,9 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- | Searches for references which match the given criteria. Implements
--- GlobalAllianceApi.searchReferences.
+-- [GlobalAllianceApi.searchReferences](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L146).
 --
--- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReferencesSearch@.
+-- /See:/ < Genomics API Reference> for @GenomicsReferencesSearch@.
 module Network.Google.Resource.Genomics.References.Search
     (
     -- * REST Resource
@@ -34,13 +34,19 @@ module Network.Google.Resource.Genomics.References.Search
     , ReferencesSearch'
 
     -- * Request Lenses
+    , refXgafv
     , refQuotaUser
     , refPrettyPrint
-    , refUserIP
+    , refUploadProtocol
+    , refPp
+    , refAccessToken
+    , refUploadType
     , refPayload
+    , refBearerToken
     , refKey
     , refOAuthToken
     , refFields
+    , refCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -49,66 +55,101 @@ import           Network.Google.Prelude
 -- | A resource alias for @GenomicsReferencesSearch@ method which the
 -- 'ReferencesSearch'' request conforms to.
 type ReferencesSearchResource =
-     "references" :>
-       "search" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] SearchReferencesRequest :>
-                         Post '[JSON] SearchReferencesResponse
+     "v1" :>
+       "references" :>
+         "search" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" AuthKey :>
+                                 QueryParam "oauth_token" OAuthToken :>
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] SearchReferencesRequest :>
+                                       Post '[JSON] SearchReferencesResponse
 
 -- | Searches for references which match the given criteria. Implements
--- GlobalAllianceApi.searchReferences.
+-- [GlobalAllianceApi.searchReferences](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L146).
 --
 -- /See:/ 'referencesSearch'' smart constructor.
 data ReferencesSearch' = ReferencesSearch'
-    { _refQuotaUser   :: !(Maybe Text)
-    , _refPrettyPrint :: !Bool
-    , _refUserIP      :: !(Maybe Text)
-    , _refPayload     :: !SearchReferencesRequest
-    , _refKey         :: !(Maybe AuthKey)
-    , _refOAuthToken  :: !(Maybe OAuthToken)
-    , _refFields      :: !(Maybe Text)
+    { _refXgafv          :: !(Maybe Text)
+    , _refQuotaUser      :: !(Maybe Text)
+    , _refPrettyPrint    :: !Bool
+    , _refUploadProtocol :: !(Maybe Text)
+    , _refPp             :: !Bool
+    , _refAccessToken    :: !(Maybe Text)
+    , _refUploadType     :: !(Maybe Text)
+    , _refPayload        :: !SearchReferencesRequest
+    , _refBearerToken    :: !(Maybe Text)
+    , _refKey            :: !(Maybe AuthKey)
+    , _refOAuthToken     :: !(Maybe OAuthToken)
+    , _refFields         :: !(Maybe Text)
+    , _refCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesSearch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'refXgafv'
+--
 -- * 'refQuotaUser'
 --
 -- * 'refPrettyPrint'
 --
--- * 'refUserIP'
+-- * 'refUploadProtocol'
+--
+-- * 'refPp'
+--
+-- * 'refAccessToken'
+--
+-- * 'refUploadType'
 --
 -- * 'refPayload'
+--
+-- * 'refBearerToken'
 --
 -- * 'refKey'
 --
 -- * 'refOAuthToken'
 --
 -- * 'refFields'
+--
+-- * 'refCallback'
 referencesSearch'
     :: SearchReferencesRequest -- ^ 'payload'
     -> ReferencesSearch'
 referencesSearch' pRefPayload_ =
     ReferencesSearch'
-    { _refQuotaUser = Nothing
+    { _refXgafv = Nothing
+    , _refQuotaUser = Nothing
     , _refPrettyPrint = True
-    , _refUserIP = Nothing
+    , _refUploadProtocol = Nothing
+    , _refPp = True
+    , _refAccessToken = Nothing
+    , _refUploadType = Nothing
     , _refPayload = pRefPayload_
+    , _refBearerToken = Nothing
     , _refKey = Nothing
     , _refOAuthToken = Nothing
     , _refFields = Nothing
+    , _refCallback = Nothing
     }
+
+-- | V1 error format.
+refXgafv :: Lens' ReferencesSearch' (Maybe Text)
+refXgafv = lens _refXgafv (\ s a -> s{_refXgafv = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
+-- characters.
 refQuotaUser :: Lens' ReferencesSearch' (Maybe Text)
 refQuotaUser
   = lens _refQuotaUser (\ s a -> s{_refQuotaUser = a})
@@ -119,16 +160,38 @@ refPrettyPrint
   = lens _refPrettyPrint
       (\ s a -> s{_refPrettyPrint = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-refUserIP :: Lens' ReferencesSearch' (Maybe Text)
-refUserIP
-  = lens _refUserIP (\ s a -> s{_refUserIP = a})
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+refUploadProtocol :: Lens' ReferencesSearch' (Maybe Text)
+refUploadProtocol
+  = lens _refUploadProtocol
+      (\ s a -> s{_refUploadProtocol = a})
+
+-- | Pretty-print response.
+refPp :: Lens' ReferencesSearch' Bool
+refPp = lens _refPp (\ s a -> s{_refPp = a})
+
+-- | OAuth access token.
+refAccessToken :: Lens' ReferencesSearch' (Maybe Text)
+refAccessToken
+  = lens _refAccessToken
+      (\ s a -> s{_refAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+refUploadType :: Lens' ReferencesSearch' (Maybe Text)
+refUploadType
+  = lens _refUploadType
+      (\ s a -> s{_refUploadType = a})
 
 -- | Multipart request metadata.
 refPayload :: Lens' ReferencesSearch' SearchReferencesRequest
 refPayload
   = lens _refPayload (\ s a -> s{_refPayload = a})
+
+-- | OAuth bearer token.
+refBearerToken :: Lens' ReferencesSearch' (Maybe Text)
+refBearerToken
+  = lens _refBearerToken
+      (\ s a -> s{_refBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -147,6 +210,11 @@ refFields :: Lens' ReferencesSearch' (Maybe Text)
 refFields
   = lens _refFields (\ s a -> s{_refFields = a})
 
+-- | JSONP
+refCallback :: Lens' ReferencesSearch' (Maybe Text)
+refCallback
+  = lens _refCallback (\ s a -> s{_refCallback = a})
+
 instance GoogleAuth ReferencesSearch' where
         _AuthKey = refKey . _Just
         _AuthToken = refOAuthToken . _Just
@@ -155,7 +223,13 @@ instance GoogleRequest ReferencesSearch' where
         type Rs ReferencesSearch' = SearchReferencesResponse
         request = requestWith genomicsRequest
         requestWith rq ReferencesSearch'{..}
-          = go _refQuotaUser (Just _refPrettyPrint) _refUserIP
+          = go _refXgafv _refUploadProtocol (Just _refPp)
+              _refAccessToken
+              _refUploadType
+              _refBearerToken
+              _refCallback
+              _refQuotaUser
+              (Just _refPrettyPrint)
               _refFields
               _refKey
               _refOAuthToken

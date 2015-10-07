@@ -88,6 +88,9 @@ module Network.Google.DNS
     , rrslrKind
     , rrslrRrsets
 
+    -- ** ChangeStatus
+    , ChangeStatus (..)
+
     -- ** ResourceRecordSet
     , ResourceRecordSet
     , resourceRecordSet

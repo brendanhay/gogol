@@ -21,15 +21,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- | Creates read group sets by asynchronously importing the provided
--- information. The caller must have WRITE permissions to the dataset.
--- Notes on BAM import: - Tags will be converted to strings - tag types are
--- not preserved - Comments (\'CO) in the input file header are not
--- imported - Original order of reference headers is not preserved - Any
--- reverse stranded unmapped reads will be reverse complemented, and their
--- qualities (and \"BQ\" tag, if any) will be reversed - Unmapped reads
--- will be stripped of positional information (referenceName and position)
+-- information. The caller must have WRITE permissions to the dataset. ##
+-- Notes on [BAM](https:\/\/samtools.github.io\/hts-specs\/SAMv1.pdf)
+-- import - Tags will be converted to strings - tag types are not preserved
+-- - Comments (\`\'CO\`) in the input file header will not be preserved -
+-- Original header order of references (\`\'SQ\`) will not be preserved -
+-- Any reverse stranded unmapped reads will be reverse complemented, and
+-- their qualities (and \"BQ\" tag, if any) will be reversed - Unmapped
+-- reads will be stripped of positional information (reference name and
+-- position)
 --
--- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReadgroupsetsImport@.
+-- /See:/ < Genomics API Reference> for @GenomicsReadgroupsetsImport@.
 module Network.Google.Resource.Genomics.Readgroupsets.Import
     (
     -- * REST Resource
@@ -40,13 +42,19 @@ module Network.Google.Resource.Genomics.Readgroupsets.Import
     , ReadgroupsetsImport'
 
     -- * Request Lenses
+    , riXgafv
     , riQuotaUser
     , riPrettyPrint
-    , riUserIP
+    , riUploadProtocol
+    , riPp
+    , riAccessToken
+    , riUploadType
     , riPayload
+    , riBearerToken
     , riKey
     , riOAuthToken
     , riFields
+    , riCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -55,72 +63,108 @@ import           Network.Google.Prelude
 -- | A resource alias for @GenomicsReadgroupsetsImport@ method which the
 -- 'ReadgroupsetsImport'' request conforms to.
 type ReadgroupsetsImportResource =
-     "readgroupsets" :>
-       "import" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] ImportReadGroupSetsRequest :>
-                         Post '[JSON] ImportReadGroupSetsResponse
+     "v1" :>
+       "readgroupsets:import" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" AuthKey :>
+                               QueryParam "oauth_token" OAuthToken :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] ImportReadGroupSetsRequest :>
+                                     Post '[JSON] Operation
 
 -- | Creates read group sets by asynchronously importing the provided
--- information. The caller must have WRITE permissions to the dataset.
--- Notes on BAM import: - Tags will be converted to strings - tag types are
--- not preserved - Comments (\'CO) in the input file header are not
--- imported - Original order of reference headers is not preserved - Any
--- reverse stranded unmapped reads will be reverse complemented, and their
--- qualities (and \"BQ\" tag, if any) will be reversed - Unmapped reads
--- will be stripped of positional information (referenceName and position)
+-- information. The caller must have WRITE permissions to the dataset. ##
+-- Notes on [BAM](https:\/\/samtools.github.io\/hts-specs\/SAMv1.pdf)
+-- import - Tags will be converted to strings - tag types are not preserved
+-- - Comments (\`\'CO\`) in the input file header will not be preserved -
+-- Original header order of references (\`\'SQ\`) will not be preserved -
+-- Any reverse stranded unmapped reads will be reverse complemented, and
+-- their qualities (and \"BQ\" tag, if any) will be reversed - Unmapped
+-- reads will be stripped of positional information (reference name and
+-- position)
 --
 -- /See:/ 'readgroupsetsImport'' smart constructor.
 data ReadgroupsetsImport' = ReadgroupsetsImport'
-    { _riQuotaUser   :: !(Maybe Text)
-    , _riPrettyPrint :: !Bool
-    , _riUserIP      :: !(Maybe Text)
-    , _riPayload     :: !ImportReadGroupSetsRequest
-    , _riKey         :: !(Maybe AuthKey)
-    , _riOAuthToken  :: !(Maybe OAuthToken)
-    , _riFields      :: !(Maybe Text)
+    { _riXgafv          :: !(Maybe Text)
+    , _riQuotaUser      :: !(Maybe Text)
+    , _riPrettyPrint    :: !Bool
+    , _riUploadProtocol :: !(Maybe Text)
+    , _riPp             :: !Bool
+    , _riAccessToken    :: !(Maybe Text)
+    , _riUploadType     :: !(Maybe Text)
+    , _riPayload        :: !ImportReadGroupSetsRequest
+    , _riBearerToken    :: !(Maybe Text)
+    , _riKey            :: !(Maybe AuthKey)
+    , _riOAuthToken     :: !(Maybe OAuthToken)
+    , _riFields         :: !(Maybe Text)
+    , _riCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsImport'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'riXgafv'
+--
 -- * 'riQuotaUser'
 --
 -- * 'riPrettyPrint'
 --
--- * 'riUserIP'
+-- * 'riUploadProtocol'
+--
+-- * 'riPp'
+--
+-- * 'riAccessToken'
+--
+-- * 'riUploadType'
 --
 -- * 'riPayload'
+--
+-- * 'riBearerToken'
 --
 -- * 'riKey'
 --
 -- * 'riOAuthToken'
 --
 -- * 'riFields'
+--
+-- * 'riCallback'
 readgroupsetsImport'
     :: ImportReadGroupSetsRequest -- ^ 'payload'
     -> ReadgroupsetsImport'
 readgroupsetsImport' pRiPayload_ =
     ReadgroupsetsImport'
-    { _riQuotaUser = Nothing
+    { _riXgafv = Nothing
+    , _riQuotaUser = Nothing
     , _riPrettyPrint = True
-    , _riUserIP = Nothing
+    , _riUploadProtocol = Nothing
+    , _riPp = True
+    , _riAccessToken = Nothing
+    , _riUploadType = Nothing
     , _riPayload = pRiPayload_
+    , _riBearerToken = Nothing
     , _riKey = Nothing
     , _riOAuthToken = Nothing
     , _riFields = Nothing
+    , _riCallback = Nothing
     }
+
+-- | V1 error format.
+riXgafv :: Lens' ReadgroupsetsImport' (Maybe Text)
+riXgafv = lens _riXgafv (\ s a -> s{_riXgafv = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
+-- characters.
 riQuotaUser :: Lens' ReadgroupsetsImport' (Maybe Text)
 riQuotaUser
   = lens _riQuotaUser (\ s a -> s{_riQuotaUser = a})
@@ -131,15 +175,37 @@ riPrettyPrint
   = lens _riPrettyPrint
       (\ s a -> s{_riPrettyPrint = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-riUserIP :: Lens' ReadgroupsetsImport' (Maybe Text)
-riUserIP = lens _riUserIP (\ s a -> s{_riUserIP = a})
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+riUploadProtocol :: Lens' ReadgroupsetsImport' (Maybe Text)
+riUploadProtocol
+  = lens _riUploadProtocol
+      (\ s a -> s{_riUploadProtocol = a})
+
+-- | Pretty-print response.
+riPp :: Lens' ReadgroupsetsImport' Bool
+riPp = lens _riPp (\ s a -> s{_riPp = a})
+
+-- | OAuth access token.
+riAccessToken :: Lens' ReadgroupsetsImport' (Maybe Text)
+riAccessToken
+  = lens _riAccessToken
+      (\ s a -> s{_riAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+riUploadType :: Lens' ReadgroupsetsImport' (Maybe Text)
+riUploadType
+  = lens _riUploadType (\ s a -> s{_riUploadType = a})
 
 -- | Multipart request metadata.
 riPayload :: Lens' ReadgroupsetsImport' ImportReadGroupSetsRequest
 riPayload
   = lens _riPayload (\ s a -> s{_riPayload = a})
+
+-- | OAuth bearer token.
+riBearerToken :: Lens' ReadgroupsetsImport' (Maybe Text)
+riBearerToken
+  = lens _riBearerToken
+      (\ s a -> s{_riBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -156,16 +222,26 @@ riOAuthToken
 riFields :: Lens' ReadgroupsetsImport' (Maybe Text)
 riFields = lens _riFields (\ s a -> s{_riFields = a})
 
+-- | JSONP
+riCallback :: Lens' ReadgroupsetsImport' (Maybe Text)
+riCallback
+  = lens _riCallback (\ s a -> s{_riCallback = a})
+
 instance GoogleAuth ReadgroupsetsImport' where
         _AuthKey = riKey . _Just
         _AuthToken = riOAuthToken . _Just
 
 instance GoogleRequest ReadgroupsetsImport' where
-        type Rs ReadgroupsetsImport' =
-             ImportReadGroupSetsResponse
+        type Rs ReadgroupsetsImport' = Operation
         request = requestWith genomicsRequest
         requestWith rq ReadgroupsetsImport'{..}
-          = go _riQuotaUser (Just _riPrettyPrint) _riUserIP
+          = go _riXgafv _riUploadProtocol (Just _riPp)
+              _riAccessToken
+              _riUploadType
+              _riBearerToken
+              _riCallback
+              _riQuotaUser
+              (Just _riPrettyPrint)
               _riFields
               _riKey
               _riOAuthToken

@@ -21,9 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- | Searches for reference sets which match the given criteria. Implements
--- GlobalAllianceApi.searchReferenceSets.
+-- [GlobalAllianceApi.searchReferenceSets](http:\/\/ga4gh.org\/documentation\/api\/v0.5.1\/ga4gh_api.html#\/schema\/org.ga4gh.searchReferenceSets).
 --
--- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReferencesetsSearch@.
+-- /See:/ < Genomics API Reference> for @GenomicsReferencesetsSearch@.
 module Network.Google.Resource.Genomics.Referencesets.Search
     (
     -- * REST Resource
@@ -34,13 +34,19 @@ module Network.Google.Resource.Genomics.Referencesets.Search
     , ReferencesetsSearch'
 
     -- * Request Lenses
+    , rssXgafv
     , rssQuotaUser
     , rssPrettyPrint
-    , rssUserIP
+    , rssUploadProtocol
+    , rssPp
+    , rssAccessToken
+    , rssUploadType
     , rssPayload
+    , rssBearerToken
     , rssKey
     , rssOAuthToken
     , rssFields
+    , rssCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -49,66 +55,102 @@ import           Network.Google.Prelude
 -- | A resource alias for @GenomicsReferencesetsSearch@ method which the
 -- 'ReferencesetsSearch'' request conforms to.
 type ReferencesetsSearchResource =
-     "referencesets" :>
-       "search" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] SearchReferenceSetsRequest :>
-                         Post '[JSON] SearchReferenceSetsResponse
+     "v1" :>
+       "referencesets" :>
+         "search" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" AuthKey :>
+                                 QueryParam "oauth_token" OAuthToken :>
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] SearchReferenceSetsRequest
+                                       :>
+                                       Post '[JSON] SearchReferenceSetsResponse
 
 -- | Searches for reference sets which match the given criteria. Implements
--- GlobalAllianceApi.searchReferenceSets.
+-- [GlobalAllianceApi.searchReferenceSets](http:\/\/ga4gh.org\/documentation\/api\/v0.5.1\/ga4gh_api.html#\/schema\/org.ga4gh.searchReferenceSets).
 --
 -- /See:/ 'referencesetsSearch'' smart constructor.
 data ReferencesetsSearch' = ReferencesetsSearch'
-    { _rssQuotaUser   :: !(Maybe Text)
-    , _rssPrettyPrint :: !Bool
-    , _rssUserIP      :: !(Maybe Text)
-    , _rssPayload     :: !SearchReferenceSetsRequest
-    , _rssKey         :: !(Maybe AuthKey)
-    , _rssOAuthToken  :: !(Maybe OAuthToken)
-    , _rssFields      :: !(Maybe Text)
+    { _rssXgafv          :: !(Maybe Text)
+    , _rssQuotaUser      :: !(Maybe Text)
+    , _rssPrettyPrint    :: !Bool
+    , _rssUploadProtocol :: !(Maybe Text)
+    , _rssPp             :: !Bool
+    , _rssAccessToken    :: !(Maybe Text)
+    , _rssUploadType     :: !(Maybe Text)
+    , _rssPayload        :: !SearchReferenceSetsRequest
+    , _rssBearerToken    :: !(Maybe Text)
+    , _rssKey            :: !(Maybe AuthKey)
+    , _rssOAuthToken     :: !(Maybe OAuthToken)
+    , _rssFields         :: !(Maybe Text)
+    , _rssCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesetsSearch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rssXgafv'
+--
 -- * 'rssQuotaUser'
 --
 -- * 'rssPrettyPrint'
 --
--- * 'rssUserIP'
+-- * 'rssUploadProtocol'
+--
+-- * 'rssPp'
+--
+-- * 'rssAccessToken'
+--
+-- * 'rssUploadType'
 --
 -- * 'rssPayload'
+--
+-- * 'rssBearerToken'
 --
 -- * 'rssKey'
 --
 -- * 'rssOAuthToken'
 --
 -- * 'rssFields'
+--
+-- * 'rssCallback'
 referencesetsSearch'
     :: SearchReferenceSetsRequest -- ^ 'payload'
     -> ReferencesetsSearch'
 referencesetsSearch' pRssPayload_ =
     ReferencesetsSearch'
-    { _rssQuotaUser = Nothing
+    { _rssXgafv = Nothing
+    , _rssQuotaUser = Nothing
     , _rssPrettyPrint = True
-    , _rssUserIP = Nothing
+    , _rssUploadProtocol = Nothing
+    , _rssPp = True
+    , _rssAccessToken = Nothing
+    , _rssUploadType = Nothing
     , _rssPayload = pRssPayload_
+    , _rssBearerToken = Nothing
     , _rssKey = Nothing
     , _rssOAuthToken = Nothing
     , _rssFields = Nothing
+    , _rssCallback = Nothing
     }
+
+-- | V1 error format.
+rssXgafv :: Lens' ReferencesetsSearch' (Maybe Text)
+rssXgafv = lens _rssXgafv (\ s a -> s{_rssXgafv = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
+-- characters.
 rssQuotaUser :: Lens' ReferencesetsSearch' (Maybe Text)
 rssQuotaUser
   = lens _rssQuotaUser (\ s a -> s{_rssQuotaUser = a})
@@ -119,16 +161,38 @@ rssPrettyPrint
   = lens _rssPrettyPrint
       (\ s a -> s{_rssPrettyPrint = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rssUserIP :: Lens' ReferencesetsSearch' (Maybe Text)
-rssUserIP
-  = lens _rssUserIP (\ s a -> s{_rssUserIP = a})
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rssUploadProtocol :: Lens' ReferencesetsSearch' (Maybe Text)
+rssUploadProtocol
+  = lens _rssUploadProtocol
+      (\ s a -> s{_rssUploadProtocol = a})
+
+-- | Pretty-print response.
+rssPp :: Lens' ReferencesetsSearch' Bool
+rssPp = lens _rssPp (\ s a -> s{_rssPp = a})
+
+-- | OAuth access token.
+rssAccessToken :: Lens' ReferencesetsSearch' (Maybe Text)
+rssAccessToken
+  = lens _rssAccessToken
+      (\ s a -> s{_rssAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rssUploadType :: Lens' ReferencesetsSearch' (Maybe Text)
+rssUploadType
+  = lens _rssUploadType
+      (\ s a -> s{_rssUploadType = a})
 
 -- | Multipart request metadata.
 rssPayload :: Lens' ReferencesetsSearch' SearchReferenceSetsRequest
 rssPayload
   = lens _rssPayload (\ s a -> s{_rssPayload = a})
+
+-- | OAuth bearer token.
+rssBearerToken :: Lens' ReferencesetsSearch' (Maybe Text)
+rssBearerToken
+  = lens _rssBearerToken
+      (\ s a -> s{_rssBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -147,6 +211,11 @@ rssFields :: Lens' ReferencesetsSearch' (Maybe Text)
 rssFields
   = lens _rssFields (\ s a -> s{_rssFields = a})
 
+-- | JSONP
+rssCallback :: Lens' ReferencesetsSearch' (Maybe Text)
+rssCallback
+  = lens _rssCallback (\ s a -> s{_rssCallback = a})
+
 instance GoogleAuth ReferencesetsSearch' where
         _AuthKey = rssKey . _Just
         _AuthToken = rssOAuthToken . _Just
@@ -156,7 +225,13 @@ instance GoogleRequest ReferencesetsSearch' where
              SearchReferenceSetsResponse
         request = requestWith genomicsRequest
         requestWith rq ReferencesetsSearch'{..}
-          = go _rssQuotaUser (Just _rssPrettyPrint) _rssUserIP
+          = go _rssXgafv _rssUploadProtocol (Just _rssPp)
+              _rssAccessToken
+              _rssUploadType
+              _rssBearerToken
+              _rssCallback
+              _rssQuotaUser
+              (Just _rssPrettyPrint)
               _rssFields
               _rssKey
               _rssOAuthToken

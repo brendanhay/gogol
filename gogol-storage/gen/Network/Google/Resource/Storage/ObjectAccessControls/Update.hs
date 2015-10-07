@@ -22,7 +22,7 @@
 --
 -- | Updates an ACL entry on the specified object.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectAccessControlsUpdate@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectAccessControlsUpdate@.
 module Network.Google.Resource.Storage.ObjectAccessControls.Update
     (
     -- * REST Resource
@@ -58,7 +58,7 @@ type ObjectAccessControlsUpdateResource =
            Capture "object" Text :>
              "acl" :>
                Capture "entity" Text :>
-                 QueryParam "generation" Word64 :>
+                 QueryParam "generation" Int64 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +82,7 @@ data ObjectAccessControlsUpdate' = ObjectAccessControlsUpdate'
     , _oacuObject      :: !Text
     , _oacuOAuthToken  :: !(Maybe OAuthToken)
     , _oacuEntity      :: !Text
-    , _oacuGeneration  :: !(Maybe Word64)
+    , _oacuGeneration  :: !(Maybe Int64)
     , _oacuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -168,7 +168,8 @@ oacuPayload
 oacuKey :: Lens' ObjectAccessControlsUpdate' (Maybe AuthKey)
 oacuKey = lens _oacuKey (\ s a -> s{_oacuKey = a})
 
--- | Name of the object.
+-- | Name of the object. For information about how to URL encode object names
+-- to be path safe, see Encoding URI Path Parts.
 oacuObject :: Lens' ObjectAccessControlsUpdate' Text
 oacuObject
   = lens _oacuObject (\ s a -> s{_oacuObject = a})
@@ -188,7 +189,7 @@ oacuEntity
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
-oacuGeneration :: Lens' ObjectAccessControlsUpdate' (Maybe Word64)
+oacuGeneration :: Lens' ObjectAccessControlsUpdate' (Maybe Int64)
 oacuGeneration
   = lens _oacuGeneration
       (\ s a -> s{_oacuGeneration = a})

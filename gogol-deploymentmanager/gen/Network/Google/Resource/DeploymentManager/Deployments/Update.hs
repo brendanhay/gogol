@@ -23,7 +23,7 @@
 -- | Updates a deployment and all of the resources described by the
 -- deployment manifest.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsUpdate@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsUpdate@.
 module Network.Google.Resource.DeploymentManager.Deployments.Update
     (
     -- * REST Resource
@@ -40,9 +40,9 @@ module Network.Google.Resource.DeploymentManager.Deployments.Update
     , duProject
     , duUserIP
     , duPayload
-    , duUpdatePolicy
     , duDeletePolicy
     , duKey
+    , duPreview
     , duOAuthToken
     , duFields
     , duDeployment
@@ -61,12 +61,10 @@ type DeploymentsUpdateResource =
              QueryParam "createPolicy"
                DeploymentsUpdateCreatePolicy
                :>
-               QueryParam "updatePolicy"
-                 DeploymentsUpdateUpdatePolicy
+               QueryParam "deletePolicy"
+                 DeploymentsUpdateDeletePolicy
                  :>
-                 QueryParam "deletePolicy"
-                   DeploymentsUpdateDeletePolicy
-                   :>
+                 QueryParam "preview" Bool :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -88,9 +86,9 @@ data DeploymentsUpdate' = DeploymentsUpdate'
     , _duProject      :: !Text
     , _duUserIP       :: !(Maybe Text)
     , _duPayload      :: !Deployment
-    , _duUpdatePolicy :: !DeploymentsUpdateUpdatePolicy
     , _duDeletePolicy :: !DeploymentsUpdateDeletePolicy
     , _duKey          :: !(Maybe AuthKey)
+    , _duPreview      :: !Bool
     , _duOAuthToken   :: !(Maybe OAuthToken)
     , _duFields       :: !(Maybe Text)
     , _duDeployment   :: !Text
@@ -112,11 +110,11 @@ data DeploymentsUpdate' = DeploymentsUpdate'
 --
 -- * 'duPayload'
 --
--- * 'duUpdatePolicy'
---
 -- * 'duDeletePolicy'
 --
 -- * 'duKey'
+--
+-- * 'duPreview'
 --
 -- * 'duOAuthToken'
 --
@@ -136,9 +134,9 @@ deploymentsUpdate' pDuProject_ pDuPayload_ pDuDeployment_ =
     , _duProject = pDuProject_
     , _duUserIP = Nothing
     , _duPayload = pDuPayload_
-    , _duUpdatePolicy = Patch'
     , _duDeletePolicy = Delete'
     , _duKey = Nothing
+    , _duPreview = False
     , _duOAuthToken = Nothing
     , _duFields = Nothing
     , _duDeployment = pDuDeployment_
@@ -178,12 +176,6 @@ duPayload :: Lens' DeploymentsUpdate' Deployment
 duPayload
   = lens _duPayload (\ s a -> s{_duPayload = a})
 
--- | Sets the policy to use for updating resources.
-duUpdatePolicy :: Lens' DeploymentsUpdate' DeploymentsUpdateUpdatePolicy
-duUpdatePolicy
-  = lens _duUpdatePolicy
-      (\ s a -> s{_duUpdatePolicy = a})
-
 -- | Sets the policy to use for deleting resources.
 duDeletePolicy :: Lens' DeploymentsUpdate' DeploymentsUpdateDeletePolicy
 duDeletePolicy
@@ -195,6 +187,20 @@ duDeletePolicy
 -- token.
 duKey :: Lens' DeploymentsUpdate' (Maybe AuthKey)
 duKey = lens _duKey (\ s a -> s{_duKey = a})
+
+-- | If set to true, updates the deployment and creates and updates the
+-- \"shell\" resources but does not actually alter or instantiate these
+-- resources. This allows you to preview what your deployment looks like.
+-- You can use this intent to preview how an update would affect your
+-- deployment. You must provide a target.config with a configuration if
+-- this is set to true. After previewing a deployment, you can deploy your
+-- resources by making a request with the update() or you can
+-- cancelPreview() to remove the preview altogether. Note that the
+-- deployment will still exist after you cancel the preview and you must
+-- separately delete this deployment if you want to remove it.
+duPreview :: Lens' DeploymentsUpdate' Bool
+duPreview
+  = lens _duPreview (\ s a -> s{_duPreview = a})
 
 -- | OAuth 2.0 token for the current user.
 duOAuthToken :: Lens' DeploymentsUpdate' (Maybe OAuthToken)
@@ -219,8 +225,8 @@ instance GoogleRequest DeploymentsUpdate' where
         request = requestWith deploymentManagerRequest
         requestWith rq DeploymentsUpdate'{..}
           = go _duProject _duDeployment (Just _duCreatePolicy)
-              (Just _duUpdatePolicy)
               (Just _duDeletePolicy)
+              (Just _duPreview)
               _duQuotaUser
               (Just _duPrettyPrint)
               _duUserIP

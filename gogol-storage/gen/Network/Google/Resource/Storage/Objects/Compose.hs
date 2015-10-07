@@ -23,7 +23,7 @@
 -- | Concatenates a list of existing objects into a new object in the same
 -- bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsCompose@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsCompose@.
 module Network.Google.Resource.Storage.Objects.Compose
     (
     -- * REST Resource
@@ -34,6 +34,7 @@ module Network.Google.Resource.Storage.Objects.Compose
     , ObjectsCompose'
 
     -- * Request Lenses
+    , oDestinationPredefinedACL
     , oQuotaUser
     , oIfMetagenerationMatch
     , oPrettyPrint
@@ -58,56 +59,65 @@ type ObjectsComposeResource =
          "o" :>
            Capture "destinationObject" Text :>
              "compose" :>
-               QueryParam "ifMetagenerationMatch" Word64 :>
-                 QueryParam "ifGenerationMatch" Word64 :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] ComposeRequest :>
-                                   Post '[JSON] Object
-       :<|>
-       "b" :>
-         Capture "destinationBucket" Text :>
-           "o" :>
-             Capture "destinationObject" Text :>
-               "compose" :>
-                 QueryParam "ifMetagenerationMatch" Word64 :>
-                   QueryParam "ifGenerationMatch" Word64 :>
+               QueryParam "destinationPredefinedAcl"
+                 ObjectsComposeDestinationPredefinedACL
+                 :>
+                 QueryParam "ifMetagenerationMatch" Int64 :>
+                   QueryParam "ifGenerationMatch" Int64 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
                              QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "alt" AltMedia :>
+                                 QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] ComposeRequest :>
-                                     Post '[OctetStream] Stream
+                                     Post '[JSON] Object
+       :<|>
+       "b" :>
+         Capture "destinationBucket" Text :>
+           "o" :>
+             Capture "destinationObject" Text :>
+               "compose" :>
+                 QueryParam "destinationPredefinedAcl"
+                   ObjectsComposeDestinationPredefinedACL
+                   :>
+                   QueryParam "ifMetagenerationMatch" Int64 :>
+                     QueryParam "ifGenerationMatch" Int64 :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" AuthKey :>
+                                 QueryParam "oauth_token" OAuthToken :>
+                                   QueryParam "alt" AltMedia :>
+                                     ReqBody '[JSON] ComposeRequest :>
+                                       Post '[OctetStream] Stream
 
 -- | Concatenates a list of existing objects into a new object in the same
 -- bucket.
 --
 -- /See:/ 'objectsCompose'' smart constructor.
 data ObjectsCompose' = ObjectsCompose'
-    { _oQuotaUser             :: !(Maybe Text)
-    , _oIfMetagenerationMatch :: !(Maybe Word64)
-    , _oPrettyPrint           :: !Bool
-    , _oIfGenerationMatch     :: !(Maybe Word64)
-    , _oUserIP                :: !(Maybe Text)
-    , _oPayload               :: !ComposeRequest
-    , _oKey                   :: !(Maybe AuthKey)
-    , _oDestinationBucket     :: !Text
-    , _oOAuthToken            :: !(Maybe OAuthToken)
-    , _oFields                :: !(Maybe Text)
-    , _oDestinationObject     :: !Text
+    { _oDestinationPredefinedACL :: !(Maybe ObjectsComposeDestinationPredefinedACL)
+    , _oQuotaUser                :: !(Maybe Text)
+    , _oIfMetagenerationMatch    :: !(Maybe Int64)
+    , _oPrettyPrint              :: !Bool
+    , _oIfGenerationMatch        :: !(Maybe Int64)
+    , _oUserIP                   :: !(Maybe Text)
+    , _oPayload                  :: !ComposeRequest
+    , _oKey                      :: !(Maybe AuthKey)
+    , _oDestinationBucket        :: !Text
+    , _oOAuthToken               :: !(Maybe OAuthToken)
+    , _oFields                   :: !(Maybe Text)
+    , _oDestinationObject        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsCompose'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oDestinationPredefinedACL'
 --
 -- * 'oQuotaUser'
 --
@@ -137,7 +147,8 @@ objectsCompose'
     -> ObjectsCompose'
 objectsCompose' pOPayload_ pODestinationBucket_ pODestinationObject_ =
     ObjectsCompose'
-    { _oQuotaUser = Nothing
+    { _oDestinationPredefinedACL = Nothing
+    , _oQuotaUser = Nothing
     , _oIfMetagenerationMatch = Nothing
     , _oPrettyPrint = True
     , _oIfGenerationMatch = Nothing
@@ -150,6 +161,12 @@ objectsCompose' pOPayload_ pODestinationBucket_ pODestinationObject_ =
     , _oDestinationObject = pODestinationObject_
     }
 
+-- | Apply a predefined set of access controls to the destination object.
+oDestinationPredefinedACL :: Lens' ObjectsCompose' (Maybe ObjectsComposeDestinationPredefinedACL)
+oDestinationPredefinedACL
+  = lens _oDestinationPredefinedACL
+      (\ s a -> s{_oDestinationPredefinedACL = a})
+
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
@@ -159,7 +176,7 @@ oQuotaUser
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.
-oIfMetagenerationMatch :: Lens' ObjectsCompose' (Maybe Word64)
+oIfMetagenerationMatch :: Lens' ObjectsCompose' (Maybe Int64)
 oIfMetagenerationMatch
   = lens _oIfMetagenerationMatch
       (\ s a -> s{_oIfMetagenerationMatch = a})
@@ -171,7 +188,7 @@ oPrettyPrint
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation matches the given value.
-oIfGenerationMatch :: Lens' ObjectsCompose' (Maybe Word64)
+oIfGenerationMatch :: Lens' ObjectsCompose' (Maybe Int64)
 oIfGenerationMatch
   = lens _oIfGenerationMatch
       (\ s a -> s{_oIfGenerationMatch = a})
@@ -206,7 +223,8 @@ oOAuthToken
 oFields :: Lens' ObjectsCompose' (Maybe Text)
 oFields = lens _oFields (\ s a -> s{_oFields = a})
 
--- | Name of the new object.
+-- | Name of the new object. For information about how to URL encode object
+-- names to be path safe, see Encoding URI Path Parts.
 oDestinationObject :: Lens' ObjectsCompose' Text
 oDestinationObject
   = lens _oDestinationObject
@@ -221,6 +239,7 @@ instance GoogleRequest ObjectsCompose' where
         request = requestWith storageRequest
         requestWith rq ObjectsCompose'{..}
           = go _oDestinationBucket _oDestinationObject
+              _oDestinationPredefinedACL
               _oIfMetagenerationMatch
               _oIfGenerationMatch
               _oQuotaUser
@@ -241,6 +260,7 @@ instance GoogleRequest
         request = requestWith storageRequest
         requestWith rq (MediaDownload ObjectsCompose'{..})
           = go _oDestinationBucket _oDestinationObject
+              _oDestinationPredefinedACL
               _oIfMetagenerationMatch
               _oIfGenerationMatch
               _oQuotaUser

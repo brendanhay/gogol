@@ -23,7 +23,7 @@
 -- | Permanently deletes the ACL entry for the specified entity on the
 -- specified object.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectAccessControlsDelete@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectAccessControlsDelete@.
 module Network.Google.Resource.Storage.ObjectAccessControls.Delete
     (
     -- * REST Resource
@@ -58,7 +58,7 @@ type ObjectAccessControlsDeleteResource =
            Capture "object" Text :>
              "acl" :>
                Capture "entity" Text :>
-                 QueryParam "generation" Word64 :>
+                 QueryParam "generation" Int64 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -80,7 +80,7 @@ data ObjectAccessControlsDelete' = ObjectAccessControlsDelete'
     , _oacdObject      :: !Text
     , _oacdOAuthToken  :: !(Maybe OAuthToken)
     , _oacdEntity      :: !Text
-    , _oacdGeneration  :: !(Maybe Word64)
+    , _oacdGeneration  :: !(Maybe Int64)
     , _oacdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -157,7 +157,8 @@ oacdBucket
 oacdKey :: Lens' ObjectAccessControlsDelete' (Maybe AuthKey)
 oacdKey = lens _oacdKey (\ s a -> s{_oacdKey = a})
 
--- | Name of the object.
+-- | Name of the object. For information about how to URL encode object names
+-- to be path safe, see Encoding URI Path Parts.
 oacdObject :: Lens' ObjectAccessControlsDelete' Text
 oacdObject
   = lens _oacdObject (\ s a -> s{_oacdObject = a})
@@ -177,7 +178,7 @@ oacdEntity
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
-oacdGeneration :: Lens' ObjectAccessControlsDelete' (Maybe Word64)
+oacdGeneration :: Lens' ObjectAccessControlsDelete' (Maybe Int64)
 oacdGeneration
   = lens _oacdGeneration
       (\ s a -> s{_oacdGeneration = a})

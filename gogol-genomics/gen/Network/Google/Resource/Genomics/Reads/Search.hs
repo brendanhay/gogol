@@ -30,9 +30,9 @@
 -- returned (including reads on subsequent pages) are ordered by genomic
 -- coordinate (reference sequence & position). Reads with equivalent
 -- genomic coordinates are returned in a deterministic order. Implements
--- GlobalAllianceApi.searchReads.
+-- [GlobalAllianceApi.searchReads](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/readmethods.avdl#L85).
 --
--- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReadsSearch@.
+-- /See:/ < Genomics API Reference> for @GenomicsReadsSearch@.
 module Network.Google.Resource.Genomics.Reads.Search
     (
     -- * REST Resource
@@ -43,13 +43,19 @@ module Network.Google.Resource.Genomics.Reads.Search
     , ReadsSearch'
 
     -- * Request Lenses
+    , rsXgafv
     , rsQuotaUser
     , rsPrettyPrint
-    , rsUserIP
+    , rsUploadProtocol
+    , rsPp
+    , rsAccessToken
+    , rsUploadType
     , rsPayload
+    , rsBearerToken
     , rsKey
     , rsOAuthToken
     , rsFields
+    , rsCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -58,17 +64,24 @@ import           Network.Google.Prelude
 -- | A resource alias for @GenomicsReadsSearch@ method which the
 -- 'ReadsSearch'' request conforms to.
 type ReadsSearchResource =
-     "reads" :>
-       "search" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] SearchReadsRequest :>
-                         Post '[JSON] SearchReadsResponse
+     "v1" :>
+       "reads" :>
+         "search" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" AuthKey :>
+                                 QueryParam "oauth_token" OAuthToken :>
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] SearchReadsRequest :>
+                                       Post '[JSON] SearchReadsResponse
 
 -- | Gets a list of reads for one or more read group sets. Reads search
 -- operates over a genomic coordinate space of reference sequence &
@@ -80,53 +93,81 @@ type ReadsSearchResource =
 -- returned (including reads on subsequent pages) are ordered by genomic
 -- coordinate (reference sequence & position). Reads with equivalent
 -- genomic coordinates are returned in a deterministic order. Implements
--- GlobalAllianceApi.searchReads.
+-- [GlobalAllianceApi.searchReads](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/readmethods.avdl#L85).
 --
 -- /See:/ 'readsSearch'' smart constructor.
 data ReadsSearch' = ReadsSearch'
-    { _rsQuotaUser   :: !(Maybe Text)
-    , _rsPrettyPrint :: !Bool
-    , _rsUserIP      :: !(Maybe Text)
-    , _rsPayload     :: !SearchReadsRequest
-    , _rsKey         :: !(Maybe AuthKey)
-    , _rsOAuthToken  :: !(Maybe OAuthToken)
-    , _rsFields      :: !(Maybe Text)
+    { _rsXgafv          :: !(Maybe Text)
+    , _rsQuotaUser      :: !(Maybe Text)
+    , _rsPrettyPrint    :: !Bool
+    , _rsUploadProtocol :: !(Maybe Text)
+    , _rsPp             :: !Bool
+    , _rsAccessToken    :: !(Maybe Text)
+    , _rsUploadType     :: !(Maybe Text)
+    , _rsPayload        :: !SearchReadsRequest
+    , _rsBearerToken    :: !(Maybe Text)
+    , _rsKey            :: !(Maybe AuthKey)
+    , _rsOAuthToken     :: !(Maybe OAuthToken)
+    , _rsFields         :: !(Maybe Text)
+    , _rsCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadsSearch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rsXgafv'
+--
 -- * 'rsQuotaUser'
 --
 -- * 'rsPrettyPrint'
 --
--- * 'rsUserIP'
+-- * 'rsUploadProtocol'
+--
+-- * 'rsPp'
+--
+-- * 'rsAccessToken'
+--
+-- * 'rsUploadType'
 --
 -- * 'rsPayload'
+--
+-- * 'rsBearerToken'
 --
 -- * 'rsKey'
 --
 -- * 'rsOAuthToken'
 --
 -- * 'rsFields'
+--
+-- * 'rsCallback'
 readsSearch'
     :: SearchReadsRequest -- ^ 'payload'
     -> ReadsSearch'
 readsSearch' pRsPayload_ =
     ReadsSearch'
-    { _rsQuotaUser = Nothing
+    { _rsXgafv = Nothing
+    , _rsQuotaUser = Nothing
     , _rsPrettyPrint = True
-    , _rsUserIP = Nothing
+    , _rsUploadProtocol = Nothing
+    , _rsPp = True
+    , _rsAccessToken = Nothing
+    , _rsUploadType = Nothing
     , _rsPayload = pRsPayload_
+    , _rsBearerToken = Nothing
     , _rsKey = Nothing
     , _rsOAuthToken = Nothing
     , _rsFields = Nothing
+    , _rsCallback = Nothing
     }
+
+-- | V1 error format.
+rsXgafv :: Lens' ReadsSearch' (Maybe Text)
+rsXgafv = lens _rsXgafv (\ s a -> s{_rsXgafv = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
+-- characters.
 rsQuotaUser :: Lens' ReadsSearch' (Maybe Text)
 rsQuotaUser
   = lens _rsQuotaUser (\ s a -> s{_rsQuotaUser = a})
@@ -137,15 +178,37 @@ rsPrettyPrint
   = lens _rsPrettyPrint
       (\ s a -> s{_rsPrettyPrint = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rsUserIP :: Lens' ReadsSearch' (Maybe Text)
-rsUserIP = lens _rsUserIP (\ s a -> s{_rsUserIP = a})
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rsUploadProtocol :: Lens' ReadsSearch' (Maybe Text)
+rsUploadProtocol
+  = lens _rsUploadProtocol
+      (\ s a -> s{_rsUploadProtocol = a})
+
+-- | Pretty-print response.
+rsPp :: Lens' ReadsSearch' Bool
+rsPp = lens _rsPp (\ s a -> s{_rsPp = a})
+
+-- | OAuth access token.
+rsAccessToken :: Lens' ReadsSearch' (Maybe Text)
+rsAccessToken
+  = lens _rsAccessToken
+      (\ s a -> s{_rsAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rsUploadType :: Lens' ReadsSearch' (Maybe Text)
+rsUploadType
+  = lens _rsUploadType (\ s a -> s{_rsUploadType = a})
 
 -- | Multipart request metadata.
 rsPayload :: Lens' ReadsSearch' SearchReadsRequest
 rsPayload
   = lens _rsPayload (\ s a -> s{_rsPayload = a})
+
+-- | OAuth bearer token.
+rsBearerToken :: Lens' ReadsSearch' (Maybe Text)
+rsBearerToken
+  = lens _rsBearerToken
+      (\ s a -> s{_rsBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,6 +225,11 @@ rsOAuthToken
 rsFields :: Lens' ReadsSearch' (Maybe Text)
 rsFields = lens _rsFields (\ s a -> s{_rsFields = a})
 
+-- | JSONP
+rsCallback :: Lens' ReadsSearch' (Maybe Text)
+rsCallback
+  = lens _rsCallback (\ s a -> s{_rsCallback = a})
+
 instance GoogleAuth ReadsSearch' where
         _AuthKey = rsKey . _Just
         _AuthToken = rsOAuthToken . _Just
@@ -170,7 +238,13 @@ instance GoogleRequest ReadsSearch' where
         type Rs ReadsSearch' = SearchReadsResponse
         request = requestWith genomicsRequest
         requestWith rq ReadsSearch'{..}
-          = go _rsQuotaUser (Just _rsPrettyPrint) _rsUserIP
+          = go _rsXgafv _rsUploadProtocol (Just _rsPp)
+              _rsAccessToken
+              _rsUploadType
+              _rsBearerToken
+              _rsCallback
+              _rsQuotaUser
+              (Just _rsPrettyPrint)
               _rsFields
               _rsKey
               _rsOAuthToken

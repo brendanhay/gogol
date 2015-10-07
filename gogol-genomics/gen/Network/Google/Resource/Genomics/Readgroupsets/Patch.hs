@@ -22,7 +22,7 @@
 --
 -- | Updates a read group set. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReadgroupsetsPatch@.
+-- /See:/ < Genomics API Reference> for @GenomicsReadgroupsetsPatch@.
 module Network.Google.Resource.Genomics.Readgroupsets.Patch
     (
     -- * REST Resource
@@ -33,14 +33,21 @@ module Network.Google.Resource.Genomics.Readgroupsets.Patch
     , ReadgroupsetsPatch'
 
     -- * Request Lenses
+    , rpXgafv
     , rpQuotaUser
     , rpPrettyPrint
     , rpReadGroupSetId
-    , rpUserIP
+    , rpUploadProtocol
+    , rpUpdateMask
+    , rpPp
+    , rpAccessToken
+    , rpUploadType
     , rpPayload
+    , rpBearerToken
     , rpKey
     , rpOAuthToken
     , rpFields
+    , rpCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -49,35 +56,52 @@ import           Network.Google.Prelude
 -- | A resource alias for @GenomicsReadgroupsetsPatch@ method which the
 -- 'ReadgroupsetsPatch'' request conforms to.
 type ReadgroupsetsPatchResource =
-     "readgroupsets" :>
-       Capture "readGroupSetId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] ReadGroupSet :>
-                         Patch '[JSON] ReadGroupSet
+     "v1" :>
+       "readgroupsets" :>
+         Capture "readGroupSetId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "updateMask" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" AuthKey :>
+                                   QueryParam "oauth_token" OAuthToken :>
+                                     QueryParam "alt" AltJSON :>
+                                       ReqBody '[JSON] ReadGroupSet :>
+                                         Patch '[JSON] ReadGroupSet
 
 -- | Updates a read group set. This method supports patch semantics.
 --
 -- /See:/ 'readgroupsetsPatch'' smart constructor.
 data ReadgroupsetsPatch' = ReadgroupsetsPatch'
-    { _rpQuotaUser      :: !(Maybe Text)
+    { _rpXgafv          :: !(Maybe Text)
+    , _rpQuotaUser      :: !(Maybe Text)
     , _rpPrettyPrint    :: !Bool
     , _rpReadGroupSetId :: !Text
-    , _rpUserIP         :: !(Maybe Text)
+    , _rpUploadProtocol :: !(Maybe Text)
+    , _rpUpdateMask     :: !(Maybe Text)
+    , _rpPp             :: !Bool
+    , _rpAccessToken    :: !(Maybe Text)
+    , _rpUploadType     :: !(Maybe Text)
     , _rpPayload        :: !ReadGroupSet
+    , _rpBearerToken    :: !(Maybe Text)
     , _rpKey            :: !(Maybe AuthKey)
     , _rpOAuthToken     :: !(Maybe OAuthToken)
     , _rpFields         :: !(Maybe Text)
+    , _rpCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rpXgafv'
 --
 -- * 'rpQuotaUser'
 --
@@ -85,34 +109,57 @@ data ReadgroupsetsPatch' = ReadgroupsetsPatch'
 --
 -- * 'rpReadGroupSetId'
 --
--- * 'rpUserIP'
+-- * 'rpUploadProtocol'
+--
+-- * 'rpUpdateMask'
+--
+-- * 'rpPp'
+--
+-- * 'rpAccessToken'
+--
+-- * 'rpUploadType'
 --
 -- * 'rpPayload'
+--
+-- * 'rpBearerToken'
 --
 -- * 'rpKey'
 --
 -- * 'rpOAuthToken'
 --
 -- * 'rpFields'
+--
+-- * 'rpCallback'
 readgroupsetsPatch'
     :: Text -- ^ 'readGroupSetId'
     -> ReadGroupSet -- ^ 'payload'
     -> ReadgroupsetsPatch'
 readgroupsetsPatch' pRpReadGroupSetId_ pRpPayload_ =
     ReadgroupsetsPatch'
-    { _rpQuotaUser = Nothing
+    { _rpXgafv = Nothing
+    , _rpQuotaUser = Nothing
     , _rpPrettyPrint = True
     , _rpReadGroupSetId = pRpReadGroupSetId_
-    , _rpUserIP = Nothing
+    , _rpUploadProtocol = Nothing
+    , _rpUpdateMask = Nothing
+    , _rpPp = True
+    , _rpAccessToken = Nothing
+    , _rpUploadType = Nothing
     , _rpPayload = pRpPayload_
+    , _rpBearerToken = Nothing
     , _rpKey = Nothing
     , _rpOAuthToken = Nothing
     , _rpFields = Nothing
+    , _rpCallback = Nothing
     }
+
+-- | V1 error format.
+rpXgafv :: Lens' ReadgroupsetsPatch' (Maybe Text)
+rpXgafv = lens _rpXgafv (\ s a -> s{_rpXgafv = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
+-- characters.
 rpQuotaUser :: Lens' ReadgroupsetsPatch' (Maybe Text)
 rpQuotaUser
   = lens _rpQuotaUser (\ s a -> s{_rpQuotaUser = a})
@@ -130,15 +177,45 @@ rpReadGroupSetId
   = lens _rpReadGroupSetId
       (\ s a -> s{_rpReadGroupSetId = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rpUserIP :: Lens' ReadgroupsetsPatch' (Maybe Text)
-rpUserIP = lens _rpUserIP (\ s a -> s{_rpUserIP = a})
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rpUploadProtocol :: Lens' ReadgroupsetsPatch' (Maybe Text)
+rpUploadProtocol
+  = lens _rpUploadProtocol
+      (\ s a -> s{_rpUploadProtocol = a})
+
+-- | An optional mask specifying which fields to update. At this time,
+-- mutable fields are referenceSetId and name. Acceptable values are
+-- \"referenceSetId\" and \"name\". If unspecified, all mutable fields will
+-- be updated.
+rpUpdateMask :: Lens' ReadgroupsetsPatch' (Maybe Text)
+rpUpdateMask
+  = lens _rpUpdateMask (\ s a -> s{_rpUpdateMask = a})
+
+-- | Pretty-print response.
+rpPp :: Lens' ReadgroupsetsPatch' Bool
+rpPp = lens _rpPp (\ s a -> s{_rpPp = a})
+
+-- | OAuth access token.
+rpAccessToken :: Lens' ReadgroupsetsPatch' (Maybe Text)
+rpAccessToken
+  = lens _rpAccessToken
+      (\ s a -> s{_rpAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rpUploadType :: Lens' ReadgroupsetsPatch' (Maybe Text)
+rpUploadType
+  = lens _rpUploadType (\ s a -> s{_rpUploadType = a})
 
 -- | Multipart request metadata.
 rpPayload :: Lens' ReadgroupsetsPatch' ReadGroupSet
 rpPayload
   = lens _rpPayload (\ s a -> s{_rpPayload = a})
+
+-- | OAuth bearer token.
+rpBearerToken :: Lens' ReadgroupsetsPatch' (Maybe Text)
+rpBearerToken
+  = lens _rpBearerToken
+      (\ s a -> s{_rpBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -155,6 +232,11 @@ rpOAuthToken
 rpFields :: Lens' ReadgroupsetsPatch' (Maybe Text)
 rpFields = lens _rpFields (\ s a -> s{_rpFields = a})
 
+-- | JSONP
+rpCallback :: Lens' ReadgroupsetsPatch' (Maybe Text)
+rpCallback
+  = lens _rpCallback (\ s a -> s{_rpCallback = a})
+
 instance GoogleAuth ReadgroupsetsPatch' where
         _AuthKey = rpKey . _Just
         _AuthToken = rpOAuthToken . _Just
@@ -163,9 +245,15 @@ instance GoogleRequest ReadgroupsetsPatch' where
         type Rs ReadgroupsetsPatch' = ReadGroupSet
         request = requestWith genomicsRequest
         requestWith rq ReadgroupsetsPatch'{..}
-          = go _rpReadGroupSetId _rpQuotaUser
+          = go _rpReadGroupSetId _rpXgafv _rpUploadProtocol
+              _rpUpdateMask
+              (Just _rpPp)
+              _rpAccessToken
+              _rpUploadType
+              _rpBearerToken
+              _rpCallback
+              _rpQuotaUser
               (Just _rpPrettyPrint)
-              _rpUserIP
               _rpFields
               _rpKey
               _rpOAuthToken

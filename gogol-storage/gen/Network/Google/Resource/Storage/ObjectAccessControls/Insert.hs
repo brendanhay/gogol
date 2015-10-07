@@ -22,7 +22,7 @@
 --
 -- | Creates a new ACL entry on the specified object.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectAccessControlsInsert@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectAccessControlsInsert@.
 module Network.Google.Resource.Storage.ObjectAccessControls.Insert
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ type ObjectAccessControlsInsertResource =
          "o" :>
            Capture "object" Text :>
              "acl" :>
-               QueryParam "generation" Word64 :>
+               QueryParam "generation" Int64 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +79,7 @@ data ObjectAccessControlsInsert' = ObjectAccessControlsInsert'
     , _oaciKey         :: !(Maybe AuthKey)
     , _oaciObject      :: !Text
     , _oaciOAuthToken  :: !(Maybe OAuthToken)
-    , _oaciGeneration  :: !(Maybe Word64)
+    , _oaciGeneration  :: !(Maybe Int64)
     , _oaciFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -161,7 +161,8 @@ oaciPayload
 oaciKey :: Lens' ObjectAccessControlsInsert' (Maybe AuthKey)
 oaciKey = lens _oaciKey (\ s a -> s{_oaciKey = a})
 
--- | Name of the object.
+-- | Name of the object. For information about how to URL encode object names
+-- to be path safe, see Encoding URI Path Parts.
 oaciObject :: Lens' ObjectAccessControlsInsert' Text
 oaciObject
   = lens _oaciObject (\ s a -> s{_oaciObject = a})
@@ -174,7 +175,7 @@ oaciOAuthToken
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
-oaciGeneration :: Lens' ObjectAccessControlsInsert' (Maybe Word64)
+oaciGeneration :: Lens' ObjectAccessControlsInsert' (Maybe Int64)
 oaciGeneration
   = lens _oaciGeneration
       (\ s a -> s{_oaciGeneration = a})

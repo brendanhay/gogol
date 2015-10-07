@@ -17,19 +17,13 @@
 -- container based applications, powered by the open source Kubernetes
 -- technology.
 --
--- /See:/ <https://cloud.google.com/container-engine/docs/v1beta1/ Google Container Engine API Reference>
+-- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference>
 module Network.Google.Container
     (
     -- * API Declaration
       ContainerAPI
 
     -- * Resources
-
-    -- ** ContainerProjectsClustersList
-    , module Network.Google.Resource.Container.Projects.Clusters.List
-
-    -- ** ContainerProjectsOperationsList
-    , module Network.Google.Resource.Container.Projects.Operations.List
 
     -- ** ContainerProjectsZonesClustersCreate
     , module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
@@ -42,6 +36,12 @@ module Network.Google.Container
 
     -- ** ContainerProjectsZonesClustersList
     , module Network.Google.Resource.Container.Projects.Zones.Clusters.List
+
+    -- ** ContainerProjectsZonesClustersUpdate
+    , module Network.Google.Resource.Container.Projects.Zones.Clusters.Update
+
+    -- ** ContainerProjectsZonesGetServerConfig
+    , module Network.Google.Resource.Container.Projects.Zones.GetServerConfig
 
     -- ** ContainerProjectsZonesOperationsGet
     , module Network.Google.Resource.Container.Projects.Zones.Operations.Get
@@ -66,34 +66,36 @@ module Network.Google.Container
     , cluster
     , cStatus
     , cNodeConfig
-    , cNumNodes
-    , cClusterAPIVersion
+    , cNodeIPv4CIdRSize
+    , cClusterIPv4CIdR
+    , cInitialNodeCount
+    , cCurrentNodeVersion
     , cNetwork
+    , cInitialClusterVersion
     , cZone
     , cServicesIPv4CIdR
     , cMasterAuth
     , cSelfLink
-    , cEnableCloudMonitoring
     , cName
+    , cCurrentMasterVersion
     , cStatusMessage
-    , cCreationTimestamp
-    , cContainerIPv4CIdR
     , cEndpoint
-    , cEnableCloudLogging
+    , cLoggingService
     , cDescription
     , cInstanceGroupURLs
-    , cNodeRoutingPrefixSize
+    , cMonitoringService
+    , cCreateTime
 
-    -- ** ListAggregatedOperationsResponse
-    , ListAggregatedOperationsResponse
-    , listAggregatedOperationsResponse
-    , laorOperations
+    -- ** UpdateClusterRequest
+    , UpdateClusterRequest
+    , updateClusterRequest
+    , ucrUpdate
 
     -- ** NodeConfig
     , NodeConfig
     , nodeConfig
-    , ncServiceAccounts
-    , ncSourceImage
+    , ncDiskSizeGb
+    , ncOAuthScopes
     , ncMachineType
 
     -- ** Operation
@@ -103,55 +105,44 @@ module Network.Google.Container
     , oZone
     , oSelfLink
     , oName
+    , oStatusMessage
     , oOperationType
-    , oErrorMessage
     , oTargetLink
-    , oTarget
-
-    -- ** OperationOperationType
-    , OperationOperationType (..)
-
-    -- ** OperationStatus
-    , OperationStatus (..)
-
-    -- ** ServiceAccount
-    , ServiceAccount
-    , serviceAccount
-    , saEmail
-    , saScopes
 
     -- ** MasterAuth
     , MasterAuth
     , masterAuth
-    , maBearerToken
     , maClientKey
-    , maUser
+    , maUsername
     , maClientCertificate
     , maPassword
     , maClusterCaCertificate
 
-    -- ** ListAggregatedClustersResponse
-    , ListAggregatedClustersResponse
-    , listAggregatedClustersResponse
-    , lacrClusters
+    -- ** ServerConfig
+    , ServerConfig
+    , serverConfig
+    , scValidNodeVersions
+    , scDefaultClusterVersion
 
     -- ** ListClustersResponse
     , ListClustersResponse
     , listClustersResponse
     , lcrClusters
 
-    -- ** ClusterStatus
-    , ClusterStatus (..)
+    -- ** ClusterUpdate
+    , ClusterUpdate
+    , clusterUpdate
+    , cuDesiredNodeVersion
     ) where
 
 import           Network.Google.Container.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Container.Projects.Clusters.List
-import           Network.Google.Resource.Container.Projects.Operations.List
 import           Network.Google.Resource.Container.Projects.Zones.Clusters.Create
 import           Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
 import           Network.Google.Resource.Container.Projects.Zones.Clusters.Get
 import           Network.Google.Resource.Container.Projects.Zones.Clusters.List
+import           Network.Google.Resource.Container.Projects.Zones.Clusters.Update
+import           Network.Google.Resource.Container.Projects.Zones.GetServerConfig
 import           Network.Google.Resource.Container.Projects.Zones.Operations.Get
 import           Network.Google.Resource.Container.Projects.Zones.Operations.List
 
@@ -167,5 +158,5 @@ type ContainerAPI =
        :<|> ProjectsZonesClustersGetResource
        :<|> ProjectsZonesClustersCreateResource
        :<|> ProjectsZonesClustersDeleteResource
-       :<|> ProjectsOperationsListResource
-       :<|> ProjectsClustersListResource
+       :<|> ProjectsZonesClustersUpdateResource
+       :<|> ProjectsZonesGetServerConfigResource

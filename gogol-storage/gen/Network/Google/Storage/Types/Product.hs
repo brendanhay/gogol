@@ -282,9 +282,9 @@ blricNumNewerVersions
   = lens _blricNumNewerVersions
       (\ s a -> s{_blricNumNewerVersions = a})
 
--- | A date in RFC 3339 format with only the date part, e.g. \"2013-01-15\".
--- This condition is satisfied when an object is created before midnight of
--- the specified date in UTC.
+-- | A date in RFC 3339 format with only the date part (for instance,
+-- \"2013-01-15\"). This condition is satisfied when an object is created
+-- before midnight of the specified date in UTC.
 blricCreatedBefore :: Lens' BucketLifecycleRuleItemCondition (Maybe LocalTime)
 blricCreatedBefore
   = lens _blricCreatedBefore
@@ -311,8 +311,8 @@ instance ToJSON BucketLifecycleRuleItemCondition
                   ("numNewerVersions" .=) <$> _blricNumNewerVersions,
                   ("createdBefore" .=) <$> _blricCreatedBefore])
 
--- | The bucket\'s lifecycle configuration. See object lifecycle management
--- for more information.
+-- | The bucket\'s lifecycle configuration. See lifecycle management for more
+-- information.
 --
 -- /See:/ 'bucketLifecycle' smart constructor.
 newtype BucketLifecycle = BucketLifecycle
@@ -580,9 +580,9 @@ bciResponseHeader
       . _Default
       . _Coerce
 
--- | The list of HTTP methods on which to include CORS response headers: GET,
--- OPTIONS, POST, etc. Note, \"*\" is permitted in the list of methods, and
--- means \"any method\".
+-- | The list of HTTP methods on which to include CORS response headers,
+-- (GET, OPTIONS, POST, etc) Note: \"*\" is permitted in the list of
+-- methods, and means \"any method\".
 bciMethod :: Lens' BucketCORSItem [Text]
 bciMethod
   = lens _bciMethod (\ s a -> s{_bciMethod = a}) .
@@ -608,6 +608,55 @@ instance ToJSON BucketCORSItem where
                   ("responseHeader" .=) <$> _bciResponseHeader,
                   ("method" .=) <$> _bciMethod])
 
+-- | The project team associated with the entity, if any.
+--
+-- /See:/ 'objectAccessControlProjectTeam' smart constructor.
+data ObjectAccessControlProjectTeam = ObjectAccessControlProjectTeam
+    { _oacptProjectNumber :: !(Maybe Text)
+    , _oacptTeam          :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ObjectAccessControlProjectTeam' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oacptProjectNumber'
+--
+-- * 'oacptTeam'
+objectAccessControlProjectTeam
+    :: ObjectAccessControlProjectTeam
+objectAccessControlProjectTeam =
+    ObjectAccessControlProjectTeam
+    { _oacptProjectNumber = Nothing
+    , _oacptTeam = Nothing
+    }
+
+-- | The project number.
+oacptProjectNumber :: Lens' ObjectAccessControlProjectTeam (Maybe Text)
+oacptProjectNumber
+  = lens _oacptProjectNumber
+      (\ s a -> s{_oacptProjectNumber = a})
+
+-- | The team. Can be owners, editors, or viewers.
+oacptTeam :: Lens' ObjectAccessControlProjectTeam (Maybe Text)
+oacptTeam
+  = lens _oacptTeam (\ s a -> s{_oacptTeam = a})
+
+instance FromJSON ObjectAccessControlProjectTeam
+         where
+        parseJSON
+          = withObject "ObjectAccessControlProjectTeam"
+              (\ o ->
+                 ObjectAccessControlProjectTeam <$>
+                   (o .:? "projectNumber") <*> (o .:? "team"))
+
+instance ToJSON ObjectAccessControlProjectTeam where
+        toJSON ObjectAccessControlProjectTeam{..}
+          = object
+              (catMaybes
+                 [("projectNumber" .=) <$> _oacptProjectNumber,
+                  ("team" .=) <$> _oacptTeam])
+
 -- | A bucket.
 --
 -- /See:/ 'bucket' smart constructor.
@@ -616,6 +665,7 @@ data Bucket = Bucket
     , _bucLocation         :: !(Maybe Text)
     , _bucKind             :: !Text
     , _bucWebsite          :: !(Maybe BucketWebsite)
+    , _bucProjectNumber    :: !(Maybe Word64)
     , _bucLifecycle        :: !(Maybe BucketLifecycle)
     , _bucOwner            :: !(Maybe BucketOwner)
     , _bucSelfLink         :: !(Maybe Text)
@@ -642,6 +692,8 @@ data Bucket = Bucket
 -- * 'bucKind'
 --
 -- * 'bucWebsite'
+--
+-- * 'bucProjectNumber'
 --
 -- * 'bucLifecycle'
 --
@@ -676,6 +728,7 @@ bucket =
     , _bucLocation = Nothing
     , _bucKind = "storage#bucket"
     , _bucWebsite = Nothing
+    , _bucProjectNumber = Nothing
     , _bucLifecycle = Nothing
     , _bucOwner = Nothing
     , _bucSelfLink = Nothing
@@ -696,9 +749,8 @@ bucEtag :: Lens' Bucket (Maybe Text)
 bucEtag = lens _bucEtag (\ s a -> s{_bucEtag = a})
 
 -- | The location of the bucket. Object data for objects in the bucket
--- resides in physical storage within this region. Typical values are US
--- and EU. Defaults to US. See the developer\'s guide for the authoritative
--- list.
+-- resides in physical storage within this region. Defaults to US. See the
+-- developer\'s guide for the authoritative list.
 bucLocation :: Lens' Bucket (Maybe Text)
 bucLocation
   = lens _bucLocation (\ s a -> s{_bucLocation = a})
@@ -712,8 +764,14 @@ bucWebsite :: Lens' Bucket (Maybe BucketWebsite)
 bucWebsite
   = lens _bucWebsite (\ s a -> s{_bucWebsite = a})
 
--- | The bucket\'s lifecycle configuration. See object lifecycle management
--- for more information.
+-- | The project number of the project the bucket belongs to.
+bucProjectNumber :: Lens' Bucket (Maybe Word64)
+bucProjectNumber
+  = lens _bucProjectNumber
+      (\ s a -> s{_bucProjectNumber = a})
+
+-- | The bucket\'s lifecycle configuration. See lifecycle management for more
+-- information.
 bucLifecycle :: Lens' Bucket (Maybe BucketLifecycle)
 bucLifecycle
   = lens _bucLifecycle (\ s a -> s{_bucLifecycle = a})
@@ -732,9 +790,9 @@ bucName :: Lens' Bucket (Maybe Text)
 bucName = lens _bucName (\ s a -> s{_bucName = a})
 
 -- | The bucket\'s storage class. This defines how objects in the bucket are
--- stored and determines the SLA and the cost of storage. Typical values
--- are STANDARD and DURABLE_REDUCED_AVAILABILITY. Defaults to STANDARD. See
--- the developer\'s guide for the authoritative list.
+-- stored and determines the SLA and the cost of storage. Values include
+-- STANDARD, NEARLINE and DURABLE_REDUCED_AVAILABILITY. Defaults to
+-- STANDARD. For more information, see storage classes.
 bucStorageClass :: Lens' Bucket (Maybe Text)
 bucStorageClass
   = lens _bucStorageClass
@@ -797,6 +855,7 @@ instance FromJSON Bucket where
                    (o .:? "etag") <*> (o .:? "location") <*>
                      (o .:? "kind" .!= "storage#bucket")
                      <*> (o .:? "website")
+                     <*> (o .:? "projectNumber")
                      <*> (o .:? "lifecycle")
                      <*> (o .:? "owner")
                      <*> (o .:? "selfLink")
@@ -819,6 +878,7 @@ instance ToJSON Bucket where
                   ("location" .=) <$> _bucLocation,
                   Just ("kind" .= _bucKind),
                   ("website" .=) <$> _bucWebsite,
+                  ("projectNumber" .=) <$> _bucProjectNumber,
                   ("lifecycle" .=) <$> _bucLifecycle,
                   ("owner" .=) <$> _bucOwner,
                   ("selfLink" .=) <$> _bucSelfLink,
@@ -985,7 +1045,7 @@ composeRequest =
     , _crSourceObjects = Nothing
     }
 
--- | Properties of the resulting object
+-- | Properties of the resulting object.
 crDestination :: Lens' ComposeRequest (Maybe Object)
 crDestination
   = lens _crDestination
@@ -1044,7 +1104,7 @@ bucketOwner =
     , _boEntityId = Nothing
     }
 
--- | The entity, in the form group-groupId.
+-- | The entity, in the form project-owner-projectId.
 boEntity :: Lens' BucketOwner (Maybe Text)
 boEntity = lens _boEntity (\ s a -> s{_boEntity = a})
 
@@ -1273,8 +1333,8 @@ objSize = lens _objSize (\ s a -> s{_objSize = a})
 objKind :: Lens' Object Text
 objKind = lens _objKind (\ s a -> s{_objKind = a})
 
--- | Deletion time of the object in RFC 3339 format. Will be returned if and
--- only if this version of the object has been deleted.
+-- | The deletion time of the object in RFC 3339 format. Will be returned if
+-- and only if this version of the object has been deleted.
 objTimeDeleted :: Lens' Object (Maybe UTCTime)
 objTimeDeleted
   = lens _objTimeDeleted
@@ -1282,12 +1342,13 @@ objTimeDeleted
       . mapping _DateTime
 
 -- | CRC32c checksum, as described in RFC 4960, Appendix B; encoded using
--- base64.
+-- base64 in big-endian byte order. For more information about using the
+-- CRC32c checksum, see Hashes and ETags: Best Practices.
 objCrc32c :: Lens' Object (Maybe Text)
 objCrc32c
   = lens _objCrc32c (\ s a -> s{_objCrc32c = a})
 
--- | The bucket containing this object.
+-- | The name of the bucket containing this object.
 objBucket :: Lens' Object (Maybe Text)
 objBucket
   = lens _objBucket (\ s a -> s{_objBucket = a})
@@ -1307,7 +1368,7 @@ objMediaLink
   = lens _objMediaLink (\ s a -> s{_objMediaLink = a})
 
 -- | Number of underlying components that make up this object. Components are
--- accumulated by compose operations and are limited to a count of 32.
+-- accumulated by compose operations.
 objComponentCount :: Lens' Object (Maybe Int32)
 objComponentCount
   = lens _objComponentCount
@@ -1338,7 +1399,9 @@ objMetadata
 objId :: Lens' Object (Maybe Text)
 objId = lens _objId (\ s a -> s{_objId = a})
 
--- | Modification time of the object metadata in RFC 3339 format.
+-- | The creation or modification time of the object in RFC 3339 format. For
+-- buckets with versioning enabled, changing an object\'s metadata does not
+-- change this property.
 objUpdated :: Lens' Object (Maybe UTCTime)
 objUpdated
   = lens _objUpdated (\ s a -> s{_objUpdated = a}) .
@@ -1356,9 +1419,10 @@ objCacheControl
   = lens _objCacheControl
       (\ s a -> s{_objCacheControl = a})
 
--- | The generation of the metadata for this object at this generation. Used
--- for metadata versioning. Has no meaning outside of the context of this
--- generation.
+-- | The version of the metadata for this object at this generation. Used for
+-- preconditions and for detecting changes in metadata. A metageneration
+-- number is only meaningful in the context of a particular generation of a
+-- particular object.
 objMetageneration :: Lens' Object (Maybe Int64)
 objMetageneration
   = lens _objMetageneration
@@ -1382,7 +1446,8 @@ objContentDisPosition
   = lens _objContentDisPosition
       (\ s a -> s{_objContentDisPosition = a})
 
--- | MD5 hash of the data; encoded using base64.
+-- | MD5 hash of the data; encoded using base64. For more information about
+-- using the MD5 hash, see Hashes and ETags: Best Practices.
 objMD5Hash :: Lens' Object (Maybe Text)
 objMD5Hash
   = lens _objMD5Hash (\ s a -> s{_objMD5Hash = a})
@@ -1496,6 +1561,55 @@ instance ToJSON
                  [("ifGenerationMatch" .=) <$>
                     _crsoiopIfGenerationMatch])
 
+-- | The project team associated with the entity, if any.
+--
+-- /See:/ 'bucketAccessControlProjectTeam' smart constructor.
+data BucketAccessControlProjectTeam = BucketAccessControlProjectTeam
+    { _bacptProjectNumber :: !(Maybe Text)
+    , _bacptTeam          :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BucketAccessControlProjectTeam' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bacptProjectNumber'
+--
+-- * 'bacptTeam'
+bucketAccessControlProjectTeam
+    :: BucketAccessControlProjectTeam
+bucketAccessControlProjectTeam =
+    BucketAccessControlProjectTeam
+    { _bacptProjectNumber = Nothing
+    , _bacptTeam = Nothing
+    }
+
+-- | The project number.
+bacptProjectNumber :: Lens' BucketAccessControlProjectTeam (Maybe Text)
+bacptProjectNumber
+  = lens _bacptProjectNumber
+      (\ s a -> s{_bacptProjectNumber = a})
+
+-- | The team. Can be owners, editors, or viewers.
+bacptTeam :: Lens' BucketAccessControlProjectTeam (Maybe Text)
+bacptTeam
+  = lens _bacptTeam (\ s a -> s{_bacptTeam = a})
+
+instance FromJSON BucketAccessControlProjectTeam
+         where
+        parseJSON
+          = withObject "BucketAccessControlProjectTeam"
+              (\ o ->
+                 BucketAccessControlProjectTeam <$>
+                   (o .:? "projectNumber") <*> (o .:? "team"))
+
+instance ToJSON BucketAccessControlProjectTeam where
+        toJSON BucketAccessControlProjectTeam{..}
+          = object
+              (catMaybes
+                 [("projectNumber" .=) <$> _bacptProjectNumber,
+                  ("team" .=) <$> _bacptTeam])
+
 -- | An access-control list.
 --
 -- /See:/ 'objectAccessControls' smart constructor.
@@ -1600,16 +1714,17 @@ instance ToJSON BucketWebsite where
 --
 -- /See:/ 'bucketAccessControl' smart constructor.
 data BucketAccessControl = BucketAccessControl
-    { _bacaEmail    :: !(Maybe Text)
-    , _bacaEtag     :: !(Maybe Text)
-    , _bacaKind     :: !Text
-    , _bacaDomain   :: !(Maybe Text)
-    , _bacaBucket   :: !(Maybe Text)
-    , _bacaRole     :: !(Maybe Text)
-    , _bacaSelfLink :: !(Maybe Text)
-    , _bacaId       :: !(Maybe Text)
-    , _bacaEntity   :: !(Maybe Text)
-    , _bacaEntityId :: !(Maybe Text)
+    { _bacaEmail       :: !(Maybe Text)
+    , _bacaEtag        :: !(Maybe Text)
+    , _bacaKind        :: !Text
+    , _bacaDomain      :: !(Maybe Text)
+    , _bacaBucket      :: !(Maybe Text)
+    , _bacaRole        :: !(Maybe Text)
+    , _bacaSelfLink    :: !(Maybe Text)
+    , _bacaId          :: !(Maybe Text)
+    , _bacaProjectTeam :: !(Maybe BucketAccessControlProjectTeam)
+    , _bacaEntity      :: !(Maybe Text)
+    , _bacaEntityId    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControl' with the minimum fields required to make a request.
@@ -1632,6 +1747,8 @@ data BucketAccessControl = BucketAccessControl
 --
 -- * 'bacaId'
 --
+-- * 'bacaProjectTeam'
+--
 -- * 'bacaEntity'
 --
 -- * 'bacaEntityId'
@@ -1647,6 +1764,7 @@ bucketAccessControl =
     , _bacaRole = Nothing
     , _bacaSelfLink = Nothing
     , _bacaId = Nothing
+    , _bacaProjectTeam = Nothing
     , _bacaEntity = Nothing
     , _bacaEntityId = Nothing
     }
@@ -1688,13 +1806,19 @@ bacaSelfLink
 bacaId :: Lens' BucketAccessControl (Maybe Text)
 bacaId = lens _bacaId (\ s a -> s{_bacaId = a})
 
+-- | The project team associated with the entity, if any.
+bacaProjectTeam :: Lens' BucketAccessControl (Maybe BucketAccessControlProjectTeam)
+bacaProjectTeam
+  = lens _bacaProjectTeam
+      (\ s a -> s{_bacaProjectTeam = a})
+
 -- | The entity holding the permission, in one of the following forms: -
 -- user-userId - user-email - group-groupId - group-email - domain-domain -
--- allUsers - allAuthenticatedUsers Examples: - The user liz\'example.com
--- would be user-liz\'example.com. - The group example\'googlegroups.com
--- would be group-example\'googlegroups.com. - To refer to all members of
--- the Google Apps for Business domain example.com, the entity would be
--- domain-example.com.
+-- project-team-projectId - allUsers - allAuthenticatedUsers Examples: -
+-- The user liz\'example.com would be user-liz\'example.com. - The group
+-- example\'googlegroups.com would be group-example\'googlegroups.com. - To
+-- refer to all members of the Google Apps for Business domain example.com,
+-- the entity would be domain-example.com.
 bacaEntity :: Lens' BucketAccessControl (Maybe Text)
 bacaEntity
   = lens _bacaEntity (\ s a -> s{_bacaEntity = a})
@@ -1716,6 +1840,7 @@ instance FromJSON BucketAccessControl where
                      <*> (o .:? "role")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "id")
+                     <*> (o .:? "projectTeam")
                      <*> (o .:? "entity")
                      <*> (o .:? "entityId"))
 
@@ -1730,7 +1855,9 @@ instance ToJSON BucketAccessControl where
                   ("bucket" .=) <$> _bacaBucket,
                   ("role" .=) <$> _bacaRole,
                   ("selfLink" .=) <$> _bacaSelfLink,
-                  ("id" .=) <$> _bacaId, ("entity" .=) <$> _bacaEntity,
+                  ("id" .=) <$> _bacaId,
+                  ("projectTeam" .=) <$> _bacaProjectTeam,
+                  ("entity" .=) <$> _bacaEntity,
                   ("entityId" .=) <$> _bacaEntityId])
 
 -- | The action to take.
@@ -1752,7 +1879,7 @@ bucketLifecycleRuleItemAction =
     { _blriaType = Nothing
     }
 
--- | Type of the action. Currently only Delete is supported.
+-- | Type of the action. Currently, only Delete is supported.
 blriaType :: Lens' BucketLifecycleRuleItemAction (Maybe Text)
 blriaType
   = lens _blriaType (\ s a -> s{_blriaType = a})
@@ -1771,18 +1898,19 @@ instance ToJSON BucketLifecycleRuleItemAction where
 --
 -- /See:/ 'objectAccessControl' smart constructor.
 data ObjectAccessControl = ObjectAccessControl
-    { _oacaEmail      :: !(Maybe Text)
-    , _oacaEtag       :: !(Maybe Text)
-    , _oacaKind       :: !Text
-    , _oacaDomain     :: !(Maybe Text)
-    , _oacaBucket     :: !(Maybe Text)
-    , _oacaRole       :: !(Maybe Text)
-    , _oacaSelfLink   :: !(Maybe Text)
-    , _oacaObject     :: !(Maybe Text)
-    , _oacaId         :: !(Maybe Text)
-    , _oacaEntity     :: !(Maybe Text)
-    , _oacaGeneration :: !(Maybe Int64)
-    , _oacaEntityId   :: !(Maybe Text)
+    { _oacaEmail       :: !(Maybe Text)
+    , _oacaEtag        :: !(Maybe Text)
+    , _oacaKind        :: !Text
+    , _oacaDomain      :: !(Maybe Text)
+    , _oacaBucket      :: !(Maybe Text)
+    , _oacaRole        :: !(Maybe Text)
+    , _oacaSelfLink    :: !(Maybe Text)
+    , _oacaObject      :: !(Maybe Text)
+    , _oacaId          :: !(Maybe Text)
+    , _oacaProjectTeam :: !(Maybe ObjectAccessControlProjectTeam)
+    , _oacaEntity      :: !(Maybe Text)
+    , _oacaGeneration  :: !(Maybe Int64)
+    , _oacaEntityId    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControl' with the minimum fields required to make a request.
@@ -1807,6 +1935,8 @@ data ObjectAccessControl = ObjectAccessControl
 --
 -- * 'oacaId'
 --
+-- * 'oacaProjectTeam'
+--
 -- * 'oacaEntity'
 --
 -- * 'oacaGeneration'
@@ -1825,6 +1955,7 @@ objectAccessControl =
     , _oacaSelfLink = Nothing
     , _oacaObject = Nothing
     , _oacaId = Nothing
+    , _oacaProjectTeam = Nothing
     , _oacaEntity = Nothing
     , _oacaGeneration = Nothing
     , _oacaEntityId = Nothing
@@ -1872,13 +2003,19 @@ oacaObject
 oacaId :: Lens' ObjectAccessControl (Maybe Text)
 oacaId = lens _oacaId (\ s a -> s{_oacaId = a})
 
+-- | The project team associated with the entity, if any.
+oacaProjectTeam :: Lens' ObjectAccessControl (Maybe ObjectAccessControlProjectTeam)
+oacaProjectTeam
+  = lens _oacaProjectTeam
+      (\ s a -> s{_oacaProjectTeam = a})
+
 -- | The entity holding the permission, in one of the following forms: -
 -- user-userId - user-email - group-groupId - group-email - domain-domain -
--- allUsers - allAuthenticatedUsers Examples: - The user liz\'example.com
--- would be user-liz\'example.com. - The group example\'googlegroups.com
--- would be group-example\'googlegroups.com. - To refer to all members of
--- the Google Apps for Business domain example.com, the entity would be
--- domain-example.com.
+-- project-team-projectId - allUsers - allAuthenticatedUsers Examples: -
+-- The user liz\'example.com would be user-liz\'example.com. - The group
+-- example\'googlegroups.com would be group-example\'googlegroups.com. - To
+-- refer to all members of the Google Apps for Business domain example.com,
+-- the entity would be domain-example.com.
 oacaEntity :: Lens' ObjectAccessControl (Maybe Text)
 oacaEntity
   = lens _oacaEntity (\ s a -> s{_oacaEntity = a})
@@ -1907,6 +2044,7 @@ instance FromJSON ObjectAccessControl where
                      <*> (o .:? "selfLink")
                      <*> (o .:? "object")
                      <*> (o .:? "id")
+                     <*> (o .:? "projectTeam")
                      <*> (o .:? "entity")
                      <*> (o .:? "generation")
                      <*> (o .:? "entityId"))
@@ -1923,6 +2061,105 @@ instance ToJSON ObjectAccessControl where
                   ("role" .=) <$> _oacaRole,
                   ("selfLink" .=) <$> _oacaSelfLink,
                   ("object" .=) <$> _oacaObject, ("id" .=) <$> _oacaId,
+                  ("projectTeam" .=) <$> _oacaProjectTeam,
                   ("entity" .=) <$> _oacaEntity,
                   ("generation" .=) <$> _oacaGeneration,
                   ("entityId" .=) <$> _oacaEntityId])
+
+-- | A rewrite response.
+--
+-- /See:/ 'rewriteResponse' smart constructor.
+data RewriteResponse = RewriteResponse
+    { _rrKind                :: !Text
+    , _rrDone                :: !(Maybe Bool)
+    , _rrResource            :: !(Maybe Object)
+    , _rrObjectSize          :: !(Maybe Word64)
+    , _rrTotalBytesRewritten :: !(Maybe Word64)
+    , _rrRewriteToken        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RewriteResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrKind'
+--
+-- * 'rrDone'
+--
+-- * 'rrResource'
+--
+-- * 'rrObjectSize'
+--
+-- * 'rrTotalBytesRewritten'
+--
+-- * 'rrRewriteToken'
+rewriteResponse
+    :: RewriteResponse
+rewriteResponse =
+    RewriteResponse
+    { _rrKind = "storage#rewriteResponse"
+    , _rrDone = Nothing
+    , _rrResource = Nothing
+    , _rrObjectSize = Nothing
+    , _rrTotalBytesRewritten = Nothing
+    , _rrRewriteToken = Nothing
+    }
+
+-- | The kind of item this is.
+rrKind :: Lens' RewriteResponse Text
+rrKind = lens _rrKind (\ s a -> s{_rrKind = a})
+
+-- | true if the copy is finished; otherwise, false if the copy is in
+-- progress. This property is always present in the response.
+rrDone :: Lens' RewriteResponse (Maybe Bool)
+rrDone = lens _rrDone (\ s a -> s{_rrDone = a})
+
+-- | A resource containing the metadata for the copied-to object. This
+-- property is present in the response only when copying completes.
+rrResource :: Lens' RewriteResponse (Maybe Object)
+rrResource
+  = lens _rrResource (\ s a -> s{_rrResource = a})
+
+-- | The total size of the object being copied in bytes. This property is
+-- always present in the response.
+rrObjectSize :: Lens' RewriteResponse (Maybe Word64)
+rrObjectSize
+  = lens _rrObjectSize (\ s a -> s{_rrObjectSize = a})
+
+-- | The total bytes written so far, which can be used to provide a waiting
+-- user with a progress indicator. This property is always present in the
+-- response.
+rrTotalBytesRewritten :: Lens' RewriteResponse (Maybe Word64)
+rrTotalBytesRewritten
+  = lens _rrTotalBytesRewritten
+      (\ s a -> s{_rrTotalBytesRewritten = a})
+
+-- | A token to use in subsequent requests to continue copying data. This
+-- token is present in the response only when there is more data to copy.
+rrRewriteToken :: Lens' RewriteResponse (Maybe Text)
+rrRewriteToken
+  = lens _rrRewriteToken
+      (\ s a -> s{_rrRewriteToken = a})
+
+instance FromJSON RewriteResponse where
+        parseJSON
+          = withObject "RewriteResponse"
+              (\ o ->
+                 RewriteResponse <$>
+                   (o .:? "kind" .!= "storage#rewriteResponse") <*>
+                     (o .:? "done")
+                     <*> (o .:? "resource")
+                     <*> (o .:? "objectSize")
+                     <*> (o .:? "totalBytesRewritten")
+                     <*> (o .:? "rewriteToken"))
+
+instance ToJSON RewriteResponse where
+        toJSON RewriteResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rrKind), ("done" .=) <$> _rrDone,
+                  ("resource" .=) <$> _rrResource,
+                  ("objectSize" .=) <$> _rrObjectSize,
+                  ("totalBytesRewritten" .=) <$>
+                    _rrTotalBytesRewritten,
+                  ("rewriteToken" .=) <$> _rrRewriteToken])

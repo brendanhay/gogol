@@ -58,7 +58,7 @@ import           Network.Google.PubSub.Types
 -- | A resource alias for @PubsubProjectsSubscriptionsModifyAckDeadline@ method which the
 -- 'ProjectsSubscriptionsModifyAckDeadline'' request conforms to.
 type ProjectsSubscriptionsModifyAckDeadlineResource =
-     "v1beta2" :>
+     "v1" :>
        CaptureMode "subscription" "modifyAckDeadline" Text
          :>
          QueryParam "$.xgafv" Text :>

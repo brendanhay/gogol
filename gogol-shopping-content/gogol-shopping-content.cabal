@@ -20,7 +20,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v2sandbox@
+    This library is compatible with version @v2@
     of the API.
 
 source-repository head
@@ -34,7 +34,40 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Resource.Content.Orders.Acknowledge
+          Network.Google.Resource.Content.Accounts.AuthInfo
+        , Network.Google.Resource.Content.Accounts.Custombatch
+        , Network.Google.Resource.Content.Accounts.Delete
+        , Network.Google.Resource.Content.Accounts.Get
+        , Network.Google.Resource.Content.Accounts.Insert
+        , Network.Google.Resource.Content.Accounts.List
+        , Network.Google.Resource.Content.Accounts.Patch
+        , Network.Google.Resource.Content.Accounts.Update
+        , Network.Google.Resource.Content.Accountshipping.Custombatch
+        , Network.Google.Resource.Content.Accountshipping.Get
+        , Network.Google.Resource.Content.Accountshipping.List
+        , Network.Google.Resource.Content.Accountshipping.Patch
+        , Network.Google.Resource.Content.Accountshipping.Update
+        , Network.Google.Resource.Content.Accountstatuses.Custombatch
+        , Network.Google.Resource.Content.Accountstatuses.Get
+        , Network.Google.Resource.Content.Accountstatuses.List
+        , Network.Google.Resource.Content.Accounttax.Custombatch
+        , Network.Google.Resource.Content.Accounttax.Get
+        , Network.Google.Resource.Content.Accounttax.List
+        , Network.Google.Resource.Content.Accounttax.Patch
+        , Network.Google.Resource.Content.Accounttax.Update
+        , Network.Google.Resource.Content.Datafeeds.Custombatch
+        , Network.Google.Resource.Content.Datafeeds.Delete
+        , Network.Google.Resource.Content.Datafeeds.Get
+        , Network.Google.Resource.Content.Datafeeds.Insert
+        , Network.Google.Resource.Content.Datafeeds.List
+        , Network.Google.Resource.Content.Datafeeds.Patch
+        , Network.Google.Resource.Content.Datafeeds.Update
+        , Network.Google.Resource.Content.Datafeedstatuses.Custombatch
+        , Network.Google.Resource.Content.Datafeedstatuses.Get
+        , Network.Google.Resource.Content.Datafeedstatuses.List
+        , Network.Google.Resource.Content.Inventory.Custombatch
+        , Network.Google.Resource.Content.Inventory.Set
+        , Network.Google.Resource.Content.Orders.Acknowledge
         , Network.Google.Resource.Content.Orders.AdvancetestOrder
         , Network.Google.Resource.Content.Orders.Cancel
         , Network.Google.Resource.Content.Orders.Cancellineitem
@@ -49,6 +82,14 @@ library
         , Network.Google.Resource.Content.Orders.Shiplineitems
         , Network.Google.Resource.Content.Orders.UpdatemerchantOrderid
         , Network.Google.Resource.Content.Orders.Updateshipment
+        , Network.Google.Resource.Content.Products.Custombatch
+        , Network.Google.Resource.Content.Products.Delete
+        , Network.Google.Resource.Content.Products.Get
+        , Network.Google.Resource.Content.Products.Insert
+        , Network.Google.Resource.Content.Products.List
+        , Network.Google.Resource.Content.Productstatuses.Custombatch
+        , Network.Google.Resource.Content.Productstatuses.Get
+        , Network.Google.Resource.Content.Productstatuses.List
         , Network.Google.ShoppingContent
         , Network.Google.ShoppingContent.Types
 

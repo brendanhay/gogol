@@ -21,9 +21,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- | Lists the bases in a reference, optionally restricted to a range.
--- Implements GlobalAllianceApi.getReferenceBases.
+-- Implements
+-- [GlobalAllianceApi.getReferenceBases](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L221).
 --
--- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReferencesBasesList@.
+-- /See:/ < Genomics API Reference> for @GenomicsReferencesBasesList@.
 module Network.Google.Resource.Genomics.References.Bases.List
     (
     -- * REST Resource
@@ -34,17 +35,23 @@ module Network.Google.Resource.Genomics.References.Bases.List
     , ReferencesBasesList'
 
     -- * Request Lenses
+    , rblXgafv
     , rblQuotaUser
     , rblPrettyPrint
-    , rblUserIP
+    , rblUploadProtocol
+    , rblPp
+    , rblAccessToken
     , rblStart
+    , rblUploadType
     , rblReferenceId
+    , rblBearerToken
     , rblKey
     , rblEnd
     , rblPageToken
     , rblOAuthToken
     , rblPageSize
     , rblFields
+    , rblCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -53,53 +60,78 @@ import           Network.Google.Prelude
 -- | A resource alias for @GenomicsReferencesBasesList@ method which the
 -- 'ReferencesBasesList'' request conforms to.
 type ReferencesBasesListResource =
-     "references" :>
-       Capture "referenceId" Text :>
-         "bases" :>
-           QueryParam "start" Int64 :>
-             QueryParam "end" Int64 :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "pageSize" Int32 :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ListBasesResponse
+     "v1" :>
+       "references" :>
+         Capture "referenceId" Text :>
+           "bases" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "start" Int64 :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "end" Int64 :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "pageSize" Int32 :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "quotaUser" Text :>
+                                     QueryParam "prettyPrint" Bool :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" AuthKey :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
+                                             QueryParam "alt" AltJSON :>
+                                               Get '[JSON] ListBasesResponse
 
 -- | Lists the bases in a reference, optionally restricted to a range.
--- Implements GlobalAllianceApi.getReferenceBases.
+-- Implements
+-- [GlobalAllianceApi.getReferenceBases](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L221).
 --
 -- /See:/ 'referencesBasesList'' smart constructor.
 data ReferencesBasesList' = ReferencesBasesList'
-    { _rblQuotaUser   :: !(Maybe Text)
-    , _rblPrettyPrint :: !Bool
-    , _rblUserIP      :: !(Maybe Text)
-    , _rblStart       :: !(Maybe Int64)
-    , _rblReferenceId :: !Text
-    , _rblKey         :: !(Maybe AuthKey)
-    , _rblEnd         :: !(Maybe Int64)
-    , _rblPageToken   :: !(Maybe Text)
-    , _rblOAuthToken  :: !(Maybe OAuthToken)
-    , _rblPageSize    :: !(Maybe Int32)
-    , _rblFields      :: !(Maybe Text)
+    { _rblXgafv          :: !(Maybe Text)
+    , _rblQuotaUser      :: !(Maybe Text)
+    , _rblPrettyPrint    :: !Bool
+    , _rblUploadProtocol :: !(Maybe Text)
+    , _rblPp             :: !Bool
+    , _rblAccessToken    :: !(Maybe Text)
+    , _rblStart          :: !(Maybe Int64)
+    , _rblUploadType     :: !(Maybe Text)
+    , _rblReferenceId    :: !Text
+    , _rblBearerToken    :: !(Maybe Text)
+    , _rblKey            :: !(Maybe AuthKey)
+    , _rblEnd            :: !(Maybe Int64)
+    , _rblPageToken      :: !(Maybe Text)
+    , _rblOAuthToken     :: !(Maybe OAuthToken)
+    , _rblPageSize       :: !(Maybe Int32)
+    , _rblFields         :: !(Maybe Text)
+    , _rblCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesBasesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rblXgafv'
+--
 -- * 'rblQuotaUser'
 --
 -- * 'rblPrettyPrint'
 --
--- * 'rblUserIP'
+-- * 'rblUploadProtocol'
+--
+-- * 'rblPp'
+--
+-- * 'rblAccessToken'
 --
 -- * 'rblStart'
 --
+-- * 'rblUploadType'
+--
 -- * 'rblReferenceId'
+--
+-- * 'rblBearerToken'
 --
 -- * 'rblKey'
 --
@@ -112,27 +144,39 @@ data ReferencesBasesList' = ReferencesBasesList'
 -- * 'rblPageSize'
 --
 -- * 'rblFields'
+--
+-- * 'rblCallback'
 referencesBasesList'
     :: Text -- ^ 'referenceId'
     -> ReferencesBasesList'
 referencesBasesList' pRblReferenceId_ =
     ReferencesBasesList'
-    { _rblQuotaUser = Nothing
+    { _rblXgafv = Nothing
+    , _rblQuotaUser = Nothing
     , _rblPrettyPrint = True
-    , _rblUserIP = Nothing
+    , _rblUploadProtocol = Nothing
+    , _rblPp = True
+    , _rblAccessToken = Nothing
     , _rblStart = Nothing
+    , _rblUploadType = Nothing
     , _rblReferenceId = pRblReferenceId_
+    , _rblBearerToken = Nothing
     , _rblKey = Nothing
     , _rblEnd = Nothing
     , _rblPageToken = Nothing
     , _rblOAuthToken = Nothing
     , _rblPageSize = Nothing
     , _rblFields = Nothing
+    , _rblCallback = Nothing
     }
+
+-- | V1 error format.
+rblXgafv :: Lens' ReferencesBasesList' (Maybe Text)
+rblXgafv = lens _rblXgafv (\ s a -> s{_rblXgafv = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
+-- characters.
 rblQuotaUser :: Lens' ReferencesBasesList' (Maybe Text)
 rblQuotaUser
   = lens _rblQuotaUser (\ s a -> s{_rblQuotaUser = a})
@@ -143,21 +187,43 @@ rblPrettyPrint
   = lens _rblPrettyPrint
       (\ s a -> s{_rblPrettyPrint = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rblUserIP :: Lens' ReferencesBasesList' (Maybe Text)
-rblUserIP
-  = lens _rblUserIP (\ s a -> s{_rblUserIP = a})
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rblUploadProtocol :: Lens' ReferencesBasesList' (Maybe Text)
+rblUploadProtocol
+  = lens _rblUploadProtocol
+      (\ s a -> s{_rblUploadProtocol = a})
+
+-- | Pretty-print response.
+rblPp :: Lens' ReferencesBasesList' Bool
+rblPp = lens _rblPp (\ s a -> s{_rblPp = a})
+
+-- | OAuth access token.
+rblAccessToken :: Lens' ReferencesBasesList' (Maybe Text)
+rblAccessToken
+  = lens _rblAccessToken
+      (\ s a -> s{_rblAccessToken = a})
 
 -- | The start position (0-based) of this query. Defaults to 0.
 rblStart :: Lens' ReferencesBasesList' (Maybe Int64)
 rblStart = lens _rblStart (\ s a -> s{_rblStart = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rblUploadType :: Lens' ReferencesBasesList' (Maybe Text)
+rblUploadType
+  = lens _rblUploadType
+      (\ s a -> s{_rblUploadType = a})
 
 -- | The ID of the reference.
 rblReferenceId :: Lens' ReferencesBasesList' Text
 rblReferenceId
   = lens _rblReferenceId
       (\ s a -> s{_rblReferenceId = a})
+
+-- | OAuth bearer token.
+rblBearerToken :: Lens' ReferencesBasesList' (Maybe Text)
+rblBearerToken
+  = lens _rblBearerToken
+      (\ s a -> s{_rblBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -172,7 +238,7 @@ rblEnd = lens _rblEnd (\ s a -> s{_rblEnd = a})
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
--- nextPageToken from the previous response.
+-- \`nextPageToken\` from the previous response.
 rblPageToken :: Lens' ReferencesBasesList' (Maybe Text)
 rblPageToken
   = lens _rblPageToken (\ s a -> s{_rblPageToken = a})
@@ -193,6 +259,11 @@ rblFields :: Lens' ReferencesBasesList' (Maybe Text)
 rblFields
   = lens _rblFields (\ s a -> s{_rblFields = a})
 
+-- | JSONP
+rblCallback :: Lens' ReferencesBasesList' (Maybe Text)
+rblCallback
+  = lens _rblCallback (\ s a -> s{_rblCallback = a})
+
 instance GoogleAuth ReferencesBasesList' where
         _AuthKey = rblKey . _Just
         _AuthToken = rblOAuthToken . _Just
@@ -201,11 +272,18 @@ instance GoogleRequest ReferencesBasesList' where
         type Rs ReferencesBasesList' = ListBasesResponse
         request = requestWith genomicsRequest
         requestWith rq ReferencesBasesList'{..}
-          = go _rblReferenceId _rblStart _rblEnd _rblPageToken
+          = go _rblReferenceId _rblXgafv _rblUploadProtocol
+              (Just _rblPp)
+              _rblAccessToken
+              _rblStart
+              _rblUploadType
+              _rblBearerToken
+              _rblEnd
+              _rblPageToken
               _rblPageSize
+              _rblCallback
               _rblQuotaUser
               (Just _rblPrettyPrint)
-              _rblUserIP
               _rblFields
               _rblKey
               _rblOAuthToken

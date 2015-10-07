@@ -23,7 +23,7 @@
 -- | Updates a deployment and all of the resources described by the
 -- deployment manifest. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsPatch@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsPatch@.
 module Network.Google.Resource.DeploymentManager.Deployments.Patch
     (
     -- * REST Resource
@@ -40,9 +40,9 @@ module Network.Google.Resource.DeploymentManager.Deployments.Patch
     , dpProject
     , dpUserIP
     , dpPayload
-    , dpUpdatePolicy
     , dpDeletePolicy
     , dpKey
+    , dpPreview
     , dpOAuthToken
     , dpFields
     , dpDeployment
@@ -61,12 +61,10 @@ type DeploymentsPatchResource =
              QueryParam "createPolicy"
                DeploymentsPatchCreatePolicy
                :>
-               QueryParam "updatePolicy"
-                 DeploymentsPatchUpdatePolicy
+               QueryParam "deletePolicy"
+                 DeploymentsPatchDeletePolicy
                  :>
-                 QueryParam "deletePolicy"
-                   DeploymentsPatchDeletePolicy
-                   :>
+                 QueryParam "preview" Bool :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -88,9 +86,9 @@ data DeploymentsPatch' = DeploymentsPatch'
     , _dpProject      :: !Text
     , _dpUserIP       :: !(Maybe Text)
     , _dpPayload      :: !Deployment
-    , _dpUpdatePolicy :: !DeploymentsPatchUpdatePolicy
     , _dpDeletePolicy :: !DeploymentsPatchDeletePolicy
     , _dpKey          :: !(Maybe AuthKey)
+    , _dpPreview      :: !Bool
     , _dpOAuthToken   :: !(Maybe OAuthToken)
     , _dpFields       :: !(Maybe Text)
     , _dpDeployment   :: !Text
@@ -112,11 +110,11 @@ data DeploymentsPatch' = DeploymentsPatch'
 --
 -- * 'dpPayload'
 --
--- * 'dpUpdatePolicy'
---
 -- * 'dpDeletePolicy'
 --
 -- * 'dpKey'
+--
+-- * 'dpPreview'
 --
 -- * 'dpOAuthToken'
 --
@@ -136,9 +134,9 @@ deploymentsPatch' pDpProject_ pDpPayload_ pDpDeployment_ =
     , _dpProject = pDpProject_
     , _dpUserIP = Nothing
     , _dpPayload = pDpPayload_
-    , _dpUpdatePolicy = DPUPPatch'
     , _dpDeletePolicy = DPDPDelete'
     , _dpKey = Nothing
+    , _dpPreview = False
     , _dpOAuthToken = Nothing
     , _dpFields = Nothing
     , _dpDeployment = pDpDeployment_
@@ -178,12 +176,6 @@ dpPayload :: Lens' DeploymentsPatch' Deployment
 dpPayload
   = lens _dpPayload (\ s a -> s{_dpPayload = a})
 
--- | Sets the policy to use for updating resources.
-dpUpdatePolicy :: Lens' DeploymentsPatch' DeploymentsPatchUpdatePolicy
-dpUpdatePolicy
-  = lens _dpUpdatePolicy
-      (\ s a -> s{_dpUpdatePolicy = a})
-
 -- | Sets the policy to use for deleting resources.
 dpDeletePolicy :: Lens' DeploymentsPatch' DeploymentsPatchDeletePolicy
 dpDeletePolicy
@@ -195,6 +187,20 @@ dpDeletePolicy
 -- token.
 dpKey :: Lens' DeploymentsPatch' (Maybe AuthKey)
 dpKey = lens _dpKey (\ s a -> s{_dpKey = a})
+
+-- | If set to true, updates the deployment and creates and updates the
+-- \"shell\" resources but does not actually alter or instantiate these
+-- resources. This allows you to preview what your deployment looks like.
+-- You can use this intent to preview how an update would affect your
+-- deployment. You must provide a target.config with a configuration if
+-- this is set to true. After previewing a deployment, you can deploy your
+-- resources by making a request with the update() or you can
+-- cancelPreview() to remove the preview altogether. Note that the
+-- deployment will still exist after you cancel the preview and you must
+-- separately delete this deployment if you want to remove it.
+dpPreview :: Lens' DeploymentsPatch' Bool
+dpPreview
+  = lens _dpPreview (\ s a -> s{_dpPreview = a})
 
 -- | OAuth 2.0 token for the current user.
 dpOAuthToken :: Lens' DeploymentsPatch' (Maybe OAuthToken)
@@ -219,8 +225,8 @@ instance GoogleRequest DeploymentsPatch' where
         request = requestWith deploymentManagerRequest
         requestWith rq DeploymentsPatch'{..}
           = go _dpProject _dpDeployment (Just _dpCreatePolicy)
-              (Just _dpUpdatePolicy)
               (Just _dpDeletePolicy)
+              (Just _dpPreview)
               _dpQuotaUser
               (Just _dpPrettyPrint)
               _dpUserIP

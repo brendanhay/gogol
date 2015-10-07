@@ -102,7 +102,6 @@ module Network.Google.PubSub
     , ModifyAckDeadlineRequest
     , modifyAckDeadlineRequest
     , madrAckIds
-    , madrAckId
     , madrAckDeadlineSeconds
 
     -- ** ModifyPushConfigRequest

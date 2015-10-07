@@ -24,6 +24,11 @@ module Network.Google.DeploymentManager.Types
     , owidiValue
     , owidiKey
 
+    -- * ConfigFile
+    , ConfigFile
+    , configFile
+    , cfContent
+
     -- * DeploymentsUpdateCreatePolicy
     , DeploymentsUpdateCreatePolicy (..)
 
@@ -33,14 +38,17 @@ module Network.Google.DeploymentManager.Types
     , olrNextPageToken
     , olrOperations
 
+    -- * ResourceUpdateWarningsItemDataItem
+    , ResourceUpdateWarningsItemDataItem
+    , resourceUpdateWarningsItemDataItem
+    , ruwidiValue
+    , ruwidiKey
+
     -- * TypesListResponse
     , TypesListResponse
     , typesListResponse
     , tlrNextPageToken
     , tlrTypes
-
-    -- * DeploymentsUpdateUpdatePolicy
-    , DeploymentsUpdateUpdatePolicy (..)
 
     -- * DeploymentsUpdateDeletePolicy
     , DeploymentsUpdateDeletePolicy (..)
@@ -74,9 +82,6 @@ module Network.Google.DeploymentManager.Types
     , oTargetLink
     , oClientOperationId
 
-    -- * DeploymentsPatchUpdatePolicy
-    , DeploymentsPatchUpdatePolicy (..)
-
     -- * DeploymentsPatchCreatePolicy
     , DeploymentsPatchCreatePolicy (..)
 
@@ -90,16 +95,16 @@ module Network.Google.DeploymentManager.Types
     , DeploymentUpdate
     , deploymentUpdate
     , duManifest
-    , duErrors
 
     -- * ResourceUpdate
     , ResourceUpdate
     , resourceUpdate
     , ruState
+    , ruError
+    , ruWarnings
     , ruIntent
     , ruManifest
     , ruFinalProperties
-    , ruErrors
     , ruProperties
 
     -- * Manifest
@@ -108,17 +113,30 @@ module Network.Google.DeploymentManager.Types
     , mInsertTime
     , mLayout
     , mConfig
+    , mExpandedConfig
     , mImports
     , mSelfLink
     , mName
-    , mEvaluatedConfig
     , mId
+
+    -- * ResourceUpdateWarningsItem
+    , ResourceUpdateWarningsItem
+    , resourceUpdateWarningsItem
+    , ruwiData
+    , ruwiCode
+    , ruwiMessage
+
+    -- * DeploymentsCancelPreviewRequest
+    , DeploymentsCancelPreviewRequest
+    , deploymentsCancelPreviewRequest
+    , dcprFingerprint
 
     -- * Resource
     , Resource
     , resource
     , rInsertTime
     , rURL
+    , rWarnings
     , rUpdateTime
     , rName
     , rManifest
@@ -127,6 +145,13 @@ module Network.Google.DeploymentManager.Types
     , rType
     , rUpdate
     , rProperties
+
+    -- * ResourceUpdateErrorErrorsItem
+    , ResourceUpdateErrorErrorsItem
+    , resourceUpdateErrorErrorsItem
+    , rueeiLocation
+    , rueeiCode
+    , rueeiMessage
 
     -- * ManifestsListResponse
     , ManifestsListResponse
@@ -160,11 +185,34 @@ module Network.Google.DeploymentManager.Types
     , oeeiCode
     , oeeiMessage
 
+    -- * DeploymentsStopRequest
+    , DeploymentsStopRequest
+    , deploymentsStopRequest
+    , dsrFingerprint
+
+    -- * ResourceWarningsItemDataItem
+    , ResourceWarningsItemDataItem
+    , resourceWarningsItemDataItem
+    , rwidiValue
+    , rwidiKey
+
+    -- * ResourceUpdateError
+    , ResourceUpdateError
+    , resourceUpdateError
+    , rueErrors
+
     -- * DeploymentsListResponse
     , DeploymentsListResponse
     , deploymentsListResponse
     , dlrNextPageToken
     , dlrDeployments
+
+    -- * ResourceWarningsItem
+    , ResourceWarningsItem
+    , resourceWarningsItem
+    , rwiData
+    , rwiCode
+    , rwiMessage
 
     -- * TargetConfiguration
     , TargetConfiguration
@@ -182,11 +230,9 @@ module Network.Google.DeploymentManager.Types
     -- * Deployment
     , Deployment
     , deployment
-    , dState
     , dInsertTime
+    , dOperation
     , dFingerprint
-    , dIntent
-    , dUpdateTime
     , dName
     , dManifest
     , dId
@@ -199,8 +245,8 @@ import           Network.Google.DeploymentManager.Types.Product
 import           Network.Google.DeploymentManager.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2beta2' of the Google Cloud Deployment Manager API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2' of the Google Cloud Deployment Manager API. This contains the host and root path used as a starting point for constructing service requests.
 deploymentManagerRequest :: RequestBuilder
 deploymentManagerRequest
   = defaultRequest "https://www.googleapis.com/"
-      "deploymentmanager/v2beta2/projects/"
+      "deploymentmanager/v2/projects/"

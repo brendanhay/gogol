@@ -32,6 +32,15 @@ module Network.Google.Storage.Types
     , bucketVersioning
     , bvEnabled
 
+    -- * BucketsUpdatePredefinedDefaultObjectACL
+    , BucketsUpdatePredefinedDefaultObjectACL (..)
+
+    -- * ObjectsComposeDestinationPredefinedACL
+    , ObjectsComposeDestinationPredefinedACL (..)
+
+    -- * BucketsInsertPredefinedACL
+    , BucketsInsertPredefinedACL (..)
+
     -- * Buckets
     , Buckets
     , buckets
@@ -49,6 +58,9 @@ module Network.Google.Storage.Types
     , ObjectMetadata
     , objectMetadata
 
+    -- * ObjectsPatchPredefinedACL
+    , ObjectsPatchPredefinedACL (..)
+
     -- * BucketLifecycleRuleItemCondition
     , BucketLifecycleRuleItemCondition
     , bucketLifecycleRuleItemCondition
@@ -56,6 +68,9 @@ module Network.Google.Storage.Types
     , blricIsLive
     , blricNumNewerVersions
     , blricCreatedBefore
+
+    -- * ObjectsRewriteDestinationPredefinedACL
+    , ObjectsRewriteDestinationPredefinedACL (..)
 
     -- * BucketLifecycle
     , BucketLifecycle
@@ -93,6 +108,12 @@ module Network.Google.Storage.Types
     , bciResponseHeader
     , bciMethod
 
+    -- * ObjectAccessControlProjectTeam
+    , ObjectAccessControlProjectTeam
+    , objectAccessControlProjectTeam
+    , oacptProjectNumber
+    , oacptTeam
+
     -- * Bucket
     , Bucket
     , bucket
@@ -100,6 +121,7 @@ module Network.Google.Storage.Types
     , bucLocation
     , bucKind
     , bucWebsite
+    , bucProjectNumber
     , bucLifecycle
     , bucOwner
     , bucSelfLink
@@ -144,8 +166,23 @@ module Network.Google.Storage.Types
     , crKind
     , crSourceObjects
 
+    -- * ObjectsInsertPredefinedACL
+    , ObjectsInsertPredefinedACL (..)
+
     -- * ObjectsListProjection
     , ObjectsListProjection (..)
+
+    -- * BucketsInsertPredefinedDefaultObjectACL
+    , BucketsInsertPredefinedDefaultObjectACL (..)
+
+    -- * BucketsUpdatePredefinedACL
+    , BucketsUpdatePredefinedACL (..)
+
+    -- * ObjectsCopyDestinationPredefinedACL
+    , ObjectsCopyDestinationPredefinedACL (..)
+
+    -- * ObjectsUpdatePredefinedACL
+    , ObjectsUpdatePredefinedACL (..)
 
     -- * BucketOwner
     , BucketOwner
@@ -209,6 +246,12 @@ module Network.Google.Storage.Types
     , composeRequestSourceObjectsItemObjectPreconditions
     , crsoiopIfGenerationMatch
 
+    -- * BucketAccessControlProjectTeam
+    , BucketAccessControlProjectTeam
+    , bucketAccessControlProjectTeam
+    , bacptProjectNumber
+    , bacptTeam
+
     -- * ObjectAccessControls
     , ObjectAccessControls
     , objectAccessControls
@@ -232,6 +275,7 @@ module Network.Google.Storage.Types
     , bacaRole
     , bacaSelfLink
     , bacaId
+    , bacaProjectTeam
     , bacaEntity
     , bacaEntityId
 
@@ -242,6 +286,12 @@ module Network.Google.Storage.Types
 
     -- * ObjectsGetProjection
     , ObjectsGetProjection (..)
+
+    -- * BucketsPatchPredefinedDefaultObjectACL
+    , BucketsPatchPredefinedDefaultObjectACL (..)
+
+    -- * BucketsPatchPredefinedACL
+    , BucketsPatchPredefinedACL (..)
 
     -- * ObjectAccessControl
     , ObjectAccessControl
@@ -255,20 +305,34 @@ module Network.Google.Storage.Types
     , oacaSelfLink
     , oacaObject
     , oacaId
+    , oacaProjectTeam
     , oacaEntity
     , oacaGeneration
     , oacaEntityId
 
     -- * ObjectsCopyProjection
     , ObjectsCopyProjection (..)
+
+    -- * RewriteResponse
+    , RewriteResponse
+    , rewriteResponse
+    , rrKind
+    , rrDone
+    , rrResource
+    , rrObjectSize
+    , rrTotalBytesRewritten
+    , rrRewriteToken
+
+    -- * ObjectsRewriteProjection
+    , ObjectsRewriteProjection (..)
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types.Product
 import           Network.Google.Storage.Types.Sum
 
--- | Default request referring to version 'v1beta2' of the Cloud Storage API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Cloud Storage JSON API. This contains the host and root path used as a starting point for constructing service requests.
 storageRequest :: RequestBuilder
 storageRequest
   = defaultRequest "https://www.googleapis.com/"
-      "storage/v1beta2/"
+      "storage/v1/"
