@@ -15,7 +15,7 @@
 --
 module Network.Google.DFAReporting.Types
     (
-    -- * Service URL
+    -- * Service Request
       dFAReportingRequest
 
     -- * PlacementsListSortOrder
@@ -2516,7 +2516,7 @@ import           Network.Google.DFAReporting.Types.Product
 import           Network.Google.DFAReporting.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2.2' of the DCM/DFA Reporting And Trafficking API.
+-- | Default request referring to version 'v2.2' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
 dFAReportingRequest :: RequestBuilder
 dFAReportingRequest
   = defaultRequest "https://www.googleapis.com/"

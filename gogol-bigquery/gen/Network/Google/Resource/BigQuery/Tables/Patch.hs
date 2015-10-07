@@ -25,7 +25,7 @@
 -- that are provided in the submitted table resource. This method supports
 -- patch semantics.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryTablesPatch@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryTablesPatch@.
 module Network.Google.Resource.BigQuery.Tables.Patch
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.BigQuery.Tables.Patch
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigqueryTablesPatch@ which the
+-- | A resource alias for @BigQueryTablesPatch@ method which the
 -- 'TablesPatch'' request conforms to.
 type TablesPatchResource =
      "projects" :>

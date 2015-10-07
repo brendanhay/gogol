@@ -48,7 +48,7 @@ module Network.Google.Resource.Blogger.Comments.Get
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerCommentsGet@ which the
+-- | A resource alias for @BloggerCommentsGet@ method which the
 -- 'CommentsGet'' request conforms to.
 type CommentsGetResource =
      "blogs" :>

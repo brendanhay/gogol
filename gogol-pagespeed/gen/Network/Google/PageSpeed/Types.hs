@@ -15,7 +15,7 @@
 --
 module Network.Google.PageSpeed.Types
     (
-    -- * Service URL
+    -- * Service Request
       pageSpeedRequest
 
     -- * PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
@@ -126,7 +126,7 @@ import           Network.Google.PageSpeed.Types.Product
 import           Network.Google.PageSpeed.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2' of the PageSpeed Insights API.
+-- | Default request referring to version 'v2' of the PageSpeed Insights API. This contains the host and root path used as a starting point for constructing service requests.
 pageSpeedRequest :: RequestBuilder
 pageSpeedRequest
   = defaultRequest "https://www.googleapis.com/"

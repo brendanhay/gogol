@@ -15,7 +15,7 @@
 --
 module Network.Google.Debugger.Types
     (
-    -- * Service URL
+    -- * Service Request
       debuggerRequest
 
     -- * RegisterDebuggeeResponse
@@ -199,7 +199,7 @@ import           Network.Google.Debugger.Types.Product
 import           Network.Google.Debugger.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2' of the Google Cloud Debugger API.
+-- | Default request referring to version 'v2' of the Google Cloud Debugger API. This contains the host and root path used as a starting point for constructing service requests.
 debuggerRequest :: RequestBuilder
 debuggerRequest
   = defaultRequest

@@ -49,7 +49,7 @@ module Network.Google.Resource.DeploymentManager.Resources.List
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerResourcesList@ which the
+-- | A resource alias for @DeploymentManagerResourcesList@ method which the
 -- 'ResourcesList'' request conforms to.
 type ResourcesListResource =
      Capture "project" Text :>

@@ -51,7 +51,7 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.Create
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferTransferJobsCreate@ which the
+-- | A resource alias for @StorageTransferTransferJobsCreate@ method which the
 -- 'TransferJobsCreate'' request conforms to.
 type TransferJobsCreateResource =
      "v1" :>

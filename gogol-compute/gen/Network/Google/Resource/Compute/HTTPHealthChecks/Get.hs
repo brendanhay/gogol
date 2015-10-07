@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeHTTPHealthChecksGet@ which the
+-- | A resource alias for @ComputeHTTPHealthChecksGet@ method which the
 -- 'HTTPHealthChecksGet'' request conforms to.
 type HTTPHealthChecksGetResource =
      Capture "project" Text :>

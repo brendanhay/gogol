@@ -50,7 +50,7 @@ module Network.Google.Resource.Games.Metagame.ListCategoriesByPlayer
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesMetagameListCategoriesByPlayer@ which the
+-- | A resource alias for @GamesMetagameListCategoriesByPlayer@ method which the
 -- 'MetagameListCategoriesByPlayer'' request conforms to.
 type MetagameListCategoriesByPlayerResource =
      "players" :>

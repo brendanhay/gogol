@@ -47,7 +47,7 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeFieldValuesInsert@ which the
+-- | A resource alias for @DfareportingCreativeFieldValuesInsert@ method which the
 -- 'CreativeFieldValuesInsert'' request conforms to.
 type CreativeFieldValuesInsertResource =
      "userprofiles" :>

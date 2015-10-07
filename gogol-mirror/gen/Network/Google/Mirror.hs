@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference>
 module Network.Google.Mirror
     (
-    -- * API
+    -- * API Declaration
       MirrorAPI
-    , mirrorAPI
-    , mirrorRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** MirrorAccountsInsert
     , module Network.Google.Resource.Mirror.Accounts.Insert
@@ -317,6 +313,7 @@ import           Network.Google.Resource.Mirror.Timeline.Update
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Mirror API service.
 type MirrorAPI =
      AccountsInsertResource :<|> SettingsGetResource :<|>
        SubscriptionsInsertResource
@@ -341,6 +338,3 @@ type MirrorAPI =
        :<|> ContactsUpdateResource
        :<|> LocationsListResource
        :<|> LocationsGetResource
-
-mirrorAPI :: Proxy MirrorAPI
-mirrorAPI = Proxy

@@ -54,7 +54,7 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviesPartnerAccountsExperienceLocalesGet@ which the
+-- | A resource alias for @PlaymoviesPartnerAccountsExperienceLocalesGet@ method which the
 -- 'AccountsExperienceLocalesGet'' request conforms to.
 type AccountsExperienceLocalesGetResource =
      "v1" :>

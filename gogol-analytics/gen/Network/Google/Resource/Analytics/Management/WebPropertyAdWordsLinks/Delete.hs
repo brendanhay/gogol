@@ -47,7 +47,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Dele
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksDelete@ which the
+-- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksDelete@ method which the
 -- 'ManagementWebPropertyAdWordsLinksDelete'' request conforms to.
 type ManagementWebPropertyAdWordsLinksDeleteResource
      =

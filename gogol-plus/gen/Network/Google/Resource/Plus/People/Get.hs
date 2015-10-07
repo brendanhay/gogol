@@ -47,7 +47,7 @@ module Network.Google.Resource.Plus.People.Get
 import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusPeopleGet@ which the
+-- | A resource alias for @PlusPeopleGet@ method which the
 -- 'PeopleGet'' request conforms to.
 type PeopleGetResource =
      "people" :>

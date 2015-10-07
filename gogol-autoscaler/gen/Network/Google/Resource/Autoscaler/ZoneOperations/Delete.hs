@@ -47,7 +47,7 @@ module Network.Google.Resource.Autoscaler.ZoneOperations.Delete
 import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AutoscalerZoneOperationsDelete@ which the
+-- | A resource alias for @AutoscalerZoneOperationsDelete@ method which the
 -- 'ZoneOperationsDelete'' request conforms to.
 type ZoneOperationsDeleteResource =
      Capture "project" Text :>

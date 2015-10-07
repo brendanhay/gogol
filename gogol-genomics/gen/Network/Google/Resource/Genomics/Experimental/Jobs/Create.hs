@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.Experimental.Jobs.Create
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsExperimentalJobsCreate@ which the
+-- | A resource alias for @GenomicsExperimentalJobsCreate@ method which the
 -- 'ExperimentalJobsCreate'' request conforms to.
 type ExperimentalJobsCreateResource =
      "experimental" :>

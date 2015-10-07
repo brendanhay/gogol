@@ -15,7 +15,7 @@
 --
 module Network.Google.AppsTasks.Types
     (
-    -- * Service URL
+    -- * Service Request
       appsTasksRequest
 
     -- * TaskLinksItem
@@ -75,7 +75,7 @@ import           Network.Google.AppsTasks.Types.Product
 import           Network.Google.AppsTasks.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Tasks API.
+-- | Default request referring to version 'v1' of the Tasks API. This contains the host and root path used as a starting point for constructing service requests.
 appsTasksRequest :: RequestBuilder
 appsTasksRequest
   = defaultRequest "https://www.googleapis.com/"

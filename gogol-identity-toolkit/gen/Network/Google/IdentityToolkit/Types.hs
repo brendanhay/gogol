@@ -15,7 +15,7 @@
 --
 module Network.Google.IdentityToolkit.Types
     (
-    -- * Service URL
+    -- * Service Request
       identityToolkitRequest
 
     -- * UploadAccountResponseErrorItem
@@ -271,7 +271,7 @@ import           Network.Google.IdentityToolkit.Types.Product
 import           Network.Google.IdentityToolkit.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v3' of the Google Identity Toolkit API.
+-- | Default request referring to version 'v3' of the Google Identity Toolkit API. This contains the host and root path used as a starting point for constructing service requests.
 identityToolkitRequest :: RequestBuilder
 identityToolkitRequest
   = defaultRequest "https://www.googleapis.com/"

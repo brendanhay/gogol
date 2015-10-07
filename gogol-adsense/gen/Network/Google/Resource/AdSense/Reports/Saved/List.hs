@@ -46,7 +46,7 @@ module Network.Google.Resource.AdSense.Reports.Saved.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseReportsSavedList@ which the
+-- | A resource alias for @AdsenseReportsSavedList@ method which the
 -- 'ReportsSavedList'' request conforms to.
 type ReportsSavedListResource =
      "reports" :>

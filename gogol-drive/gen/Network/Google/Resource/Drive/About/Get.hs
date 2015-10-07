@@ -48,7 +48,7 @@ module Network.Google.Resource.Drive.About.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveAboutGet@ which the
+-- | A resource alias for @DriveAboutGet@ method which the
 -- 'AboutGet'' request conforms to.
 type AboutGetResource =
      "about" :>

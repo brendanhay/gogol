@@ -48,7 +48,7 @@ module Network.Google.Resource.Drive.Permissions.Insert
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePermissionsInsert@ which the
+-- | A resource alias for @DrivePermissionsInsert@ method which the
 -- 'PermissionsInsert'' request conforms to.
 type PermissionsInsertResource =
      "files" :>

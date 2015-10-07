@@ -48,7 +48,7 @@ module Network.Google.Resource.Analytics.Management.Uploads.UploadData
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementUploadsUploadData@ which the
+-- | A resource alias for @AnalyticsManagementUploadsUploadData@ method which the
 -- 'ManagementUploadsUploadData'' request conforms to.
 type ManagementUploadsUploadDataResource =
      "management" :>

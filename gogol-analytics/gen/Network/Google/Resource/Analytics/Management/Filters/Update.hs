@@ -47,7 +47,7 @@ module Network.Google.Resource.Analytics.Management.Filters.Update
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementFiltersUpdate@ which the
+-- | A resource alias for @AnalyticsManagementFiltersUpdate@ method which the
 -- 'ManagementFiltersUpdate'' request conforms to.
 type ManagementFiltersUpdateResource =
      "management" :>

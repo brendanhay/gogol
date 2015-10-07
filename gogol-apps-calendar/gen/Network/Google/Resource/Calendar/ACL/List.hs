@@ -49,7 +49,7 @@ module Network.Google.Resource.Calendar.ACL.List
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarACLList@ which the
+-- | A resource alias for @CalendarACLList@ method which the
 -- 'ACLList'' request conforms to.
 type ACLListResource =
      "calendars" :>

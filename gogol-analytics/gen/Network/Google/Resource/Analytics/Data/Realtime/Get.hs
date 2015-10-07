@@ -50,7 +50,7 @@ module Network.Google.Resource.Analytics.Data.Realtime.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsDataRealtimeGet@ which the
+-- | A resource alias for @AnalyticsDataRealtimeGet@ method which the
 -- 'DataRealtimeGet'' request conforms to.
 type DataRealtimeGetResource =
      "data" :>

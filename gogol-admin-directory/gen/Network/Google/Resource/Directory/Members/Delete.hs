@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.Members.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryMembersDelete@ which the
+-- | A resource alias for @DirectoryMembersDelete@ method which the
 -- 'MembersDelete'' request conforms to.
 type MembersDeleteResource =
      "groups" :>

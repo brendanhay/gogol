@@ -48,7 +48,7 @@ module Network.Google.Resource.Games.Achievements.Increment
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesAchievementsIncrement@ which the
+-- | A resource alias for @GamesAchievementsIncrement@ method which the
 -- 'AchievementsIncrement'' request conforms to.
 type AchievementsIncrementResource =
      "achievements" :>

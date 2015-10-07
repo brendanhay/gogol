@@ -15,7 +15,7 @@
 --
 module Network.Google.Dataflow.Types
     (
-    -- * Service URL
+    -- * Service Request
       dataflowRequest
 
     -- * JobExecutionInfoStages
@@ -678,7 +678,7 @@ import           Network.Google.Dataflow.Types.Product
 import           Network.Google.Dataflow.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1b3' of the Google Dataflow API.
+-- | Default request referring to version 'v1b3' of the Google Dataflow API. This contains the host and root path used as a starting point for constructing service requests.
 dataflowRequest :: RequestBuilder
 dataflowRequest
   = defaultRequest "https://dataflow.googleapis.com/"

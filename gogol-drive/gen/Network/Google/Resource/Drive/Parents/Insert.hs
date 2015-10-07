@@ -46,7 +46,7 @@ module Network.Google.Resource.Drive.Parents.Insert
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveParentsInsert@ which the
+-- | A resource alias for @DriveParentsInsert@ method which the
 -- 'ParentsInsert'' request conforms to.
 type ParentsInsertResource =
      "files" :>

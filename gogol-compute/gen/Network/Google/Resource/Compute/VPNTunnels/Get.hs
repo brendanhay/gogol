@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.VPNTunnels.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeVPNTunnelsGet@ which the
+-- | A resource alias for @ComputeVPNTunnelsGet@ method which the
 -- 'VPNTunnelsGet'' request conforms to.
 type VPNTunnelsGetResource =
      Capture "project" Text :>

@@ -51,7 +51,7 @@ module Network.Google.Resource.Calendar.CalendarList.Watch
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarListWatch@ which the
+-- | A resource alias for @CalendarCalendarListWatch@ method which the
 -- 'CalendarListWatch'' request conforms to.
 type CalendarListWatchResource =
      "users" :>

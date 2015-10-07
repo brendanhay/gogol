@@ -45,7 +45,7 @@ module Network.Google.Resource.MapsEngine.Assets.Permissions.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineAssetsPermissionsList@ which the
+-- | A resource alias for @MapsEngineAssetsPermissionsList@ method which the
 -- 'AssetsPermissionsList'' request conforms to.
 type AssetsPermissionsListResource =
      "assets" :>

@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.Instances.SetScheduling
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesSetScheduling@ which the
+-- | A resource alias for @ComputeInstancesSetScheduling@ method which the
 -- 'InstancesSetScheduling'' request conforms to.
 type InstancesSetSchedulingResource =
      Capture "project" Text :>

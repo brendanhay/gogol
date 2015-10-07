@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.Instances.DetachDisk
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesDetachDisk@ which the
+-- | A resource alias for @ComputeInstancesDetachDisk@ method which the
 -- 'InstancesDetachDisk'' request conforms to.
 type InstancesDetachDiskResource =
      Capture "project" Text :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.SQL.Instances.StopReplica
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesStopReplica@ which the
+-- | A resource alias for @SQLInstancesStopReplica@ method which the
 -- 'InstancesStopReplica'' request conforms to.
 type InstancesStopReplicaResource =
      "projects" :>

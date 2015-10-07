@@ -45,7 +45,7 @@ module Network.Google.Resource.Mirror.Locations.Get
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorLocationsGet@ which the
+-- | A resource alias for @MirrorLocationsGet@ method which the
 -- 'LocationsGet'' request conforms to.
 type LocationsGetResource =
      "locations" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.FusionTables.Style.Insert
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesStyleInsert@ which the
+-- | A resource alias for @FusiontablesStyleInsert@ method which the
 -- 'StyleInsert'' request conforms to.
 type StyleInsertResource =
      "tables" :>

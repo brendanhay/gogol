@@ -46,7 +46,7 @@ module Network.Google.Resource.Gmail.Users.Watch
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersWatch@ which the
+-- | A resource alias for @GmailUsersWatch@ method which the
 -- 'UsersWatch'' request conforms to.
 type UsersWatchResource =
      Capture "userId" Text :>

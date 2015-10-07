@@ -45,7 +45,7 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.List
 import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangesellerAccountsPreferredDealsList@ which the
+-- | A resource alias for @AdexchangesellerAccountsPreferredDealsList@ method which the
 -- 'AccountsPreferredDealsList'' request conforms to.
 type AccountsPreferredDealsListResource =
      "accounts" :>

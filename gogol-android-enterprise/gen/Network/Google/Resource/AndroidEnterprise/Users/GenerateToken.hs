@@ -48,7 +48,7 @@ module Network.Google.Resource.AndroidEnterprise.Users.GenerateToken
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseUsersGenerateToken@ which the
+-- | A resource alias for @AndroidEnterpriseUsersGenerateToken@ method which the
 -- 'UsersGenerateToken'' request conforms to.
 type UsersGenerateTokenResource =
      "enterprises" :>

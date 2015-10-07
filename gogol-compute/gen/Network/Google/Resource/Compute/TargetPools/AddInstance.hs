@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.TargetPools.AddInstance
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetPoolsAddInstance@ which the
+-- | A resource alias for @ComputeTargetPoolsAddInstance@ method which the
 -- 'TargetPoolsAddInstance'' request conforms to.
 type TargetPoolsAddInstanceResource =
      Capture "project" Text :>

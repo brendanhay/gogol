@@ -47,7 +47,7 @@ module Network.Google.Resource.YouTube.Videos.GetRating
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeVideosGetRating@ which the
+-- | A resource alias for @YouTubeVideosGetRating@ method which the
 -- 'VideosGetRating'' request conforms to.
 type VideosGetRatingResource =
      "videos" :>

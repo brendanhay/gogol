@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference>
 module Network.Google.AppEngine
     (
-    -- * API
+    -- * API Declaration
       AppEngineAPI
-    , appEngineAPI
-    , appEngineRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** AppEngineAppsGet
     , module Network.Google.Resource.AppEngine.Apps.Get
@@ -367,6 +363,7 @@ import           Network.Google.Resource.AppEngine.Apps.Operations.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google App Engine Admin API service.
 type AppEngineAPI =
      AppsModulesVersionsListResource :<|>
        AppsModulesVersionsGetResource
@@ -379,6 +376,3 @@ type AppEngineAPI =
        :<|> AppsOperationsListResource
        :<|> AppsOperationsGetResource
        :<|> AppsGetResource
-
-appEngineAPI :: Proxy AppEngineAPI
-appEngineAPI = Proxy

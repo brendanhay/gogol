@@ -48,7 +48,7 @@ module Network.Google.Resource.Directory.Users.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersGet@ which the
+-- | A resource alias for @DirectoryUsersGet@ method which the
 -- 'UsersGet'' request conforms to.
 type UsersGetResource =
      "users" :>

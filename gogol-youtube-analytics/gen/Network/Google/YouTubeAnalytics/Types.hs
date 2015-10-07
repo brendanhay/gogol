@@ -15,7 +15,7 @@
 --
 module Network.Google.YouTubeAnalytics.Types
     (
-    -- * Service URL
+    -- * Service Request
       youTubeAnalyticsRequest
 
     -- * GroupContentDetails
@@ -131,7 +131,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types.Product
 import           Network.Google.YouTubeAnalytics.Types.Sum
 
--- | Default request referring to version 'v1beta1' of the YouTube Analytics API.
+-- | Default request referring to version 'v1beta1' of the YouTube Analytics API. This contains the host and root path used as a starting point for constructing service requests.
 youTubeAnalyticsRequest :: RequestBuilder
 youTubeAnalyticsRequest
   = defaultRequest "https://www.googleapis.com/"

@@ -46,7 +46,7 @@ module Network.Google.Resource.AndroidPublisher.InAppProducts.Delete
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherInAppProductsDelete@ which the
+-- | A resource alias for @AndroidPublisherInAppProductsDelete@ method which the
 -- 'InAppProductsDelete'' request conforms to.
 type InAppProductsDeleteResource =
      Capture "packageName" Text :>

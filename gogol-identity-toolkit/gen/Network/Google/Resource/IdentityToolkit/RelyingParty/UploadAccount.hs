@@ -45,7 +45,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.UploadAccount
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyUploadAccount@ which the
+-- | A resource alias for @IdentitytoolkitRelyingPartyUploadAccount@ method which the
 -- 'RelyingPartyUploadAccount'' request conforms to.
 type RelyingPartyUploadAccountResource =
      "uploadAccount" :>

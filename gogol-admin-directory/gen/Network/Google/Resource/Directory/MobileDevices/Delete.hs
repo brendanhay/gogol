@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.MobileDevices.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryMobileDevicesDelete@ which the
+-- | A resource alias for @DirectoryMobileDevicesDelete@ method which the
 -- 'MobileDevicesDelete'' request conforms to.
 type MobileDevicesDeleteResource =
      "customer" :>

@@ -45,7 +45,7 @@ module Network.Google.Resource.QPXExpress.Trips.Search
 import           Network.Google.Prelude
 import           Network.Google.QPXExpress.Types
 
--- | A resource alias for @QpxExpressTripsSearch@ which the
+-- | A resource alias for @QpxExpressTripsSearch@ method which the
 -- 'TripsSearch'' request conforms to.
 type TripsSearchResource =
      "search" :>

@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference>
 module Network.Google.Translate
     (
-    -- * API
+    -- * API Declaration
       TranslateAPI
-    , translateAPI
-    , translateRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** LanguageDetectionsList
     , module Network.Google.Resource.Language.Detections.List
@@ -86,9 +82,7 @@ import           Network.Google.Translate.Types
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Translate API service.
 type TranslateAPI =
      DetectionsListResource :<|> LanguagesListResource
        :<|> TranslationsListResource
-
-translateAPI :: Proxy TranslateAPI
-translateAPI = Proxy

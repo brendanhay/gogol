@@ -47,7 +47,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersTagsCreate@ which the
+-- | A resource alias for @TagManagerAccountsContainersTagsCreate@ method which the
 -- 'AccountsContainersTagsCreate'' request conforms to.
 type AccountsContainersTagsCreateResource =
      "accounts" :>

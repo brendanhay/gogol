@@ -47,7 +47,7 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Get
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEntitlementsGet@ which the
+-- | A resource alias for @AndroidEnterpriseEntitlementsGet@ method which the
 -- 'EntitlementsGet'' request conforms to.
 type EntitlementsGetResource =
      "enterprises" :>

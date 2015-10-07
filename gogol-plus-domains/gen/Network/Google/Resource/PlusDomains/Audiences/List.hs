@@ -47,7 +47,7 @@ module Network.Google.Resource.PlusDomains.Audiences.List
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsAudiencesList@ which the
+-- | A resource alias for @PlusDomainsAudiencesList@ method which the
 -- 'AudiencesList'' request conforms to.
 type AudiencesListResource =
      "people" :>

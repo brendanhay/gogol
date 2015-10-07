@@ -52,7 +52,7 @@ module Network.Google.Resource.Storage.Objects.Get
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsGet@ which the
+-- | A resource alias for @StorageObjectsGet@ method which the
 -- 'ObjectsGet'' request conforms to.
 type ObjectsGetResource =
      "b" :>

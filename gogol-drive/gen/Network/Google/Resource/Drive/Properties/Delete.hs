@@ -47,7 +47,7 @@ module Network.Google.Resource.Drive.Properties.Delete
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePropertiesDelete@ which the
+-- | A resource alias for @DrivePropertiesDelete@ method which the
 -- 'PropertiesDelete'' request conforms to.
 type PropertiesDeleteResource =
      "files" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.Users.MakeAdmin
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersMakeAdmin@ which the
+-- | A resource alias for @DirectoryUsersMakeAdmin@ method which the
 -- 'UsersMakeAdmin'' request conforms to.
 type UsersMakeAdminResource =
      "users" :>

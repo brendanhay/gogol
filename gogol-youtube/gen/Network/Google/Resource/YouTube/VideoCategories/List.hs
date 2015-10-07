@@ -48,7 +48,7 @@ module Network.Google.Resource.YouTube.VideoCategories.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeVideoCategoriesList@ which the
+-- | A resource alias for @YouTubeVideoCategoriesList@ method which the
 -- 'VideoCategoriesList'' request conforms to.
 type VideoCategoriesListResource =
      "videoCategories" :>

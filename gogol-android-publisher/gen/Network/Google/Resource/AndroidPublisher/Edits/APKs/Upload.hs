@@ -47,7 +47,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsAPKsUpload@ which the
+-- | A resource alias for @AndroidPublisherEditsAPKsUpload@ method which the
 -- 'EditsAPKsUpload'' request conforms to.
 type EditsAPKsUploadResource =
      Capture "packageName" Text :>

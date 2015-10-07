@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference>
 module Network.Google.Datastore
     (
-    -- * API
+    -- * API Declaration
       DatastoreAPI
-    , datastoreAPI
-    , datastoreRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** DatastoreDatasetsAllocateIds
     , module Network.Google.Resource.Datastore.Datasets.AllocateIds
@@ -333,6 +329,7 @@ import           Network.Google.Resource.Datastore.Datasets.RunQuery
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Cloud Datastore API service.
 type DatastoreAPI =
      DatasetsBeginTransactionResource :<|>
        DatasetsAllocateIdsResource
@@ -340,6 +337,3 @@ type DatastoreAPI =
        :<|> DatasetsRollbackResource
        :<|> DatasetsLookupResource
        :<|> DatasetsCommitResource
-
-datastoreAPI :: Proxy DatastoreAPI
-datastoreAPI = Proxy

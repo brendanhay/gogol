@@ -45,7 +45,7 @@ module Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksDictionaryListOfflineMetadata@ which the
+-- | A resource alias for @BooksDictionaryListOfflineMetadata@ method which the
 -- 'DictionaryListOfflineMetadata'' request conforms to.
 type DictionaryListOfflineMetadataResource =
      "dictionary" :>

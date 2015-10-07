@@ -20,14 +20,10 @@
 -- /See:/ <https://cloud.google.com/container-engine/docs/v1beta1/ Google Container Engine API Reference>
 module Network.Google.Container
     (
-    -- * API
+    -- * API Declaration
       ContainerAPI
-    , containerAPI
-    , containerRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** ContainerProjectsClustersList
     , module Network.Google.Resource.Container.Projects.Clusters.List
@@ -163,6 +159,7 @@ import           Network.Google.Resource.Container.Projects.Zones.Operations.Lis
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Container Engine API service.
 type ContainerAPI =
      ProjectsZonesOperationsListResource :<|>
        ProjectsZonesOperationsGetResource
@@ -172,6 +169,3 @@ type ContainerAPI =
        :<|> ProjectsZonesClustersDeleteResource
        :<|> ProjectsOperationsListResource
        :<|> ProjectsClustersListResource
-
-containerAPI :: Proxy ContainerAPI
-containerAPI = Proxy

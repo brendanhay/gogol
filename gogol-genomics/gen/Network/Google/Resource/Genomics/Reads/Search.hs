@@ -55,7 +55,7 @@ module Network.Google.Resource.Genomics.Reads.Search
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReadsSearch@ which the
+-- | A resource alias for @GenomicsReadsSearch@ method which the
 -- 'ReadsSearch'' request conforms to.
 type ReadsSearchResource =
      "reads" :>

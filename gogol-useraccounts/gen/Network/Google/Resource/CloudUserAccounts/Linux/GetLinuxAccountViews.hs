@@ -52,7 +52,7 @@ module Network.Google.Resource.CloudUserAccounts.Linux.GetLinuxAccountViews
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsLinuxGetLinuxAccountViews@ which the
+-- | A resource alias for @CloudUserAccountsLinuxGetLinuxAccountViews@ method which the
 -- 'LinuxGetLinuxAccountViews'' request conforms to.
 type LinuxGetLinuxAccountViewsResource =
      Capture "project" Text :>

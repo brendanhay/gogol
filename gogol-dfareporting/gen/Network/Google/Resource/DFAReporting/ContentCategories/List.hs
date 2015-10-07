@@ -51,7 +51,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingContentCategoriesList@ which the
+-- | A resource alias for @DfareportingContentCategoriesList@ method which the
 -- 'ContentCategoriesList'' request conforms to.
 type ContentCategoriesListResource =
      "userprofiles" :>

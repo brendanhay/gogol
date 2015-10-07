@@ -48,7 +48,7 @@ module Network.Google.Resource.Books.Layers.Get
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksLayersGet@ which the
+-- | A resource alias for @BooksLayersGet@ method which the
 -- 'LayersGet'' request conforms to.
 type LayersGetResource =
      "volumes" :>

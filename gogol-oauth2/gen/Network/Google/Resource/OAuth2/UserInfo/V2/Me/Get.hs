@@ -44,7 +44,7 @@ module Network.Google.Resource.OAuth2.UserInfo.V2.Me.Get
 import           Network.Google.OAuth2.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @OAuth2UserInfoV2MeGet@ which the
+-- | A resource alias for @OAuth2UserInfoV2MeGet@ method which the
 -- 'UserInfoV2MeGet'' request conforms to.
 type UserInfoV2MeGetResource =
      "userinfo" :>

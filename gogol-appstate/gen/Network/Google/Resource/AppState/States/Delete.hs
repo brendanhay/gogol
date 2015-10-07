@@ -49,7 +49,7 @@ module Network.Google.Resource.AppState.States.Delete
 import           Network.Google.AppState.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppStateStatesDelete@ which the
+-- | A resource alias for @AppStateStatesDelete@ method which the
 -- 'StatesDelete'' request conforms to.
 type StatesDeleteResource =
      "states" :>

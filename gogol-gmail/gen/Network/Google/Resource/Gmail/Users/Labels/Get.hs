@@ -46,7 +46,7 @@ module Network.Google.Resource.Gmail.Users.Labels.Get
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersLabelsGet@ which the
+-- | A resource alias for @GmailUsersLabelsGet@ method which the
 -- 'UsersLabelsGet'' request conforms to.
 type UsersLabelsGetResource =
      Capture "userId" Text :>

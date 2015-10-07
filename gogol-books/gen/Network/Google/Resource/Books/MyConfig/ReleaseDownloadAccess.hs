@@ -48,7 +48,7 @@ module Network.Google.Resource.Books.MyConfig.ReleaseDownloadAccess
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyConfigReleaseDownloadAccess@ which the
+-- | A resource alias for @BooksMyConfigReleaseDownloadAccess@ method which the
 -- 'MyConfigReleaseDownloadAccess'' request conforms to.
 type MyConfigReleaseDownloadAccessResource =
      "myconfig" :>

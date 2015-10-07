@@ -58,7 +58,7 @@ module Network.Google.Resource.GAN.Reports.Get
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GANReportsGet@ which the
+-- | A resource alias for @GANReportsGet@ method which the
 -- 'ReportsGet'' request conforms to.
 type ReportsGetResource =
      Capture "role" ReportsGetRole :>

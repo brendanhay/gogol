@@ -62,7 +62,7 @@ module Network.Google.Resource.GAN.Events.List
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GANEventsList@ which the
+-- | A resource alias for @GANEventsList@ method which the
 -- 'EventsList'' request conforms to.
 type EventsListResource =
      Capture "role" EventsListRole :>

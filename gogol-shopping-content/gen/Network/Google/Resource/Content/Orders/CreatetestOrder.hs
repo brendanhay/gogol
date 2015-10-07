@@ -46,7 +46,7 @@ module Network.Google.Resource.Content.Orders.CreatetestOrder
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersCreatetestOrder@ which the
+-- | A resource alias for @ContentOrdersCreatetestOrder@ method which the
 -- 'OrdersCreatetestOrder'' request conforms to.
 type OrdersCreatetestOrderResource =
      Capture "merchantId" Word64 :>

@@ -50,7 +50,7 @@ module Network.Google.Resource.Plus.Moments.List
 import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusMomentsList@ which the
+-- | A resource alias for @PlusMomentsList@ method which the
 -- 'MomentsList'' request conforms to.
 type MomentsListResource =
      "people" :>

@@ -52,7 +52,7 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Control
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveBroadcastsControl@ which the
+-- | A resource alias for @YouTubeLiveBroadcastsControl@ method which the
 -- 'LiveBroadcastsControl'' request conforms to.
 type LiveBroadcastsControlResource =
      "liveBroadcasts" :>

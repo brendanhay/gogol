@@ -47,7 +47,7 @@ module Network.Google.Resource.Directory.ChromeosDevices.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryChromeosDevicesGet@ which the
+-- | A resource alias for @DirectoryChromeosDevicesGet@ method which the
 -- 'ChromeosDevicesGet'' request conforms to.
 type ChromeosDevicesGetResource =
      "customer" :>

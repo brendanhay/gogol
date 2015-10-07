@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSubAccountsGet@ which the
+-- | A resource alias for @DfareportingSubAccountsGet@ method which the
 -- 'SubAccountsGet'' request conforms to.
 type SubAccountsGetResource =
      "userprofiles" :>

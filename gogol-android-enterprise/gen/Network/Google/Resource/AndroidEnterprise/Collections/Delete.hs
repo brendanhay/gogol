@@ -46,7 +46,7 @@ module Network.Google.Resource.AndroidEnterprise.Collections.Delete
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseCollectionsDelete@ which the
+-- | A resource alias for @AndroidEnterpriseCollectionsDelete@ method which the
 -- 'CollectionsDelete'' request conforms to.
 type CollectionsDeleteResource =
      "enterprises" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.DFAReporting.OrderDocuments.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingOrderDocumentsGet@ which the
+-- | A resource alias for @DfareportingOrderDocumentsGet@ method which the
 -- 'OrderDocumentsGet'' request conforms to.
 type OrderDocumentsGetResource =
      "userprofiles" :>

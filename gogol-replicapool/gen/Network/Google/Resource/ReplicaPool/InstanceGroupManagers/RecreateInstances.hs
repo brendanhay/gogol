@@ -49,7 +49,7 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.RecreateInstanc
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
--- | A resource alias for @ReplicapoolInstanceGroupManagersRecreateInstances@ which the
+-- | A resource alias for @ReplicapoolInstanceGroupManagersRecreateInstances@ method which the
 -- 'InstanceGroupManagersRecreateInstances'' request conforms to.
 type InstanceGroupManagersRecreateInstancesResource =
      Capture "project" Text :>

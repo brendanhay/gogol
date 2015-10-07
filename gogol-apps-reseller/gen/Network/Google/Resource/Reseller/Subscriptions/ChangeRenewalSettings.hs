@@ -47,7 +47,7 @@ module Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerSubscriptionsChangeRenewalSettings@ which the
+-- | A resource alias for @ResellerSubscriptionsChangeRenewalSettings@ method which the
 -- 'SubscriptionsChangeRenewalSettings'' request conforms to.
 type SubscriptionsChangeRenewalSettingsResource =
      "customers" :>

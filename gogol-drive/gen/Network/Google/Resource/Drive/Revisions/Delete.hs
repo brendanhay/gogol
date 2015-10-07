@@ -46,7 +46,7 @@ module Network.Google.Resource.Drive.Revisions.Delete
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRevisionsDelete@ which the
+-- | A resource alias for @DriveRevisionsDelete@ method which the
 -- 'RevisionsDelete'' request conforms to.
 type RevisionsDeleteResource =
      "files" :>

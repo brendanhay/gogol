@@ -47,7 +47,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertyUserLinksInsert@ which the
+-- | A resource alias for @AnalyticsManagementWebPropertyUserLinksInsert@ method which the
 -- 'ManagementWebPropertyUserLinksInsert'' request conforms to.
 type ManagementWebPropertyUserLinksInsertResource =
      "management" :>

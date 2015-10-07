@@ -44,7 +44,7 @@ module Network.Google.Resource.Games.Metagame.GetMetagameConfig
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesMetagameGetMetagameConfig@ which the
+-- | A resource alias for @GamesMetagameGetMetagameConfig@ method which the
 -- 'MetagameGetMetagameConfig'' request conforms to.
 type MetagameGetMetagameConfigResource =
      "metagameConfig" :>

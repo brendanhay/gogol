@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.Licenses.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeLicensesGet@ which the
+-- | A resource alias for @ComputeLicensesGet@ method which the
 -- 'LicensesGet'' request conforms to.
 type LicensesGetResource =
      Capture "project" Text :>

@@ -45,7 +45,7 @@ module Network.Google.Resource.Genomics.Variants.Delete
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsVariantsDelete@ which the
+-- | A resource alias for @GenomicsVariantsDelete@ method which the
 -- 'VariantsDelete'' request conforms to.
 type VariantsDeleteResource =
      "variants" :>

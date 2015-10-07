@@ -47,7 +47,7 @@ module Network.Google.Resource.Books.MyConfig.UpdateUserSettings
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyConfigUpdateUserSettings@ which the
+-- | A resource alias for @BooksMyConfigUpdateUserSettings@ method which the
 -- 'MyConfigUpdateUserSettings'' request conforms to.
 type MyConfigUpdateUserSettingsResource =
      "myconfig" :>

@@ -57,7 +57,7 @@ module Network.Google.Resource.YouTube.Activities.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeActivitiesList@ which the
+-- | A resource alias for @YouTubeActivitiesList@ method which the
 -- 'ActivitiesList'' request conforms to.
 type ActivitiesListResource =
      "activities" :>

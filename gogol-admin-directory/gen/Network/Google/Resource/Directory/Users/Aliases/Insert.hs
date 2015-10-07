@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.Users.Aliases.Insert
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersAliasesInsert@ which the
+-- | A resource alias for @DirectoryUsersAliasesInsert@ method which the
 -- 'UsersAliasesInsert'' request conforms to.
 type UsersAliasesInsertResource =
      "users" :>

@@ -45,7 +45,7 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Dele
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationAchievementConfigurationsDelete@ which the
+-- | A resource alias for @GamesConfigurationAchievementConfigurationsDelete@ method which the
 -- 'AchievementConfigurationsDelete'' request conforms to.
 type AchievementConfigurationsDeleteResource =
      "achievements" :>

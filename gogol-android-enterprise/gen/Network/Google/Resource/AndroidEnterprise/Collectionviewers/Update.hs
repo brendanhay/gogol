@@ -50,7 +50,7 @@ module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Update
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseCollectionviewersUpdate@ which the
+-- | A resource alias for @AndroidEnterpriseCollectionviewersUpdate@ method which the
 -- 'CollectionviewersUpdate'' request conforms to.
 type CollectionviewersUpdateResource =
      "enterprises" :>

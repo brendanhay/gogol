@@ -47,7 +47,7 @@ module Network.Google.Resource.DFAReporting.Ads.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAdsPatch@ which the
+-- | A resource alias for @DfareportingAdsPatch@ method which the
 -- 'AdsPatch'' request conforms to.
 type AdsPatchResource =
      "userprofiles" :>

@@ -57,7 +57,7 @@ module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Register
 import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudDebuggerControllerDebuggeesRegister@ which the
+-- | A resource alias for @CloudDebuggerControllerDebuggeesRegister@ method which the
 -- 'ControllerDebuggeesRegister'' request conforms to.
 type ControllerDebuggeesRegisterResource =
      "v2" :>

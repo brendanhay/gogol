@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Generatetag
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFloodlightActivitiesGeneratetag@ which the
+-- | A resource alias for @DfareportingFloodlightActivitiesGeneratetag@ method which the
 -- 'FloodlightActivitiesGeneratetag'' request conforms to.
 type FloodlightActivitiesGeneratetagResource =
      "userprofiles" :>

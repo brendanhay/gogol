@@ -47,7 +47,7 @@ module Network.Google.Resource.ResourceViews.ZoneViews.Delete
 import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
--- | A resource alias for @ResourceviewsZoneViewsDelete@ which the
+-- | A resource alias for @ResourceviewsZoneViewsDelete@ method which the
 -- 'ZoneViewsDelete'' request conforms to.
 type ZoneViewsDeleteResource =
      Capture "project" Text :>

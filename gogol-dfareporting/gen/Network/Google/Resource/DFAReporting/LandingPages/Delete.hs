@@ -47,7 +47,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingLandingPagesDelete@ which the
+-- | A resource alias for @DfareportingLandingPagesDelete@ method which the
 -- 'LandingPagesDelete'' request conforms to.
 type LandingPagesDeleteResource =
      "userprofiles" :>

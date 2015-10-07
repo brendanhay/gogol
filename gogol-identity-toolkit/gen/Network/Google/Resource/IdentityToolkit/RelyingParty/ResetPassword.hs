@@ -45,7 +45,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.ResetPassword
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyResetPassword@ which the
+-- | A resource alias for @IdentitytoolkitRelyingPartyResetPassword@ method which the
 -- 'RelyingPartyResetPassword'' request conforms to.
 type RelyingPartyResetPasswordResource =
      "resetPassword" :>

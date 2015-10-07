@@ -53,7 +53,7 @@ module Network.Google.Resource.DFAReporting.UserRoles.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingUserRolesList@ which the
+-- | A resource alias for @DfareportingUserRolesList@ method which the
 -- 'UserRolesList'' request conforms to.
 type UserRolesListResource =
      "userprofiles" :>

@@ -49,7 +49,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Update
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersFoldersUpdate@ which the
+-- | A resource alias for @TagManagerAccountsContainersFoldersUpdate@ method which the
 -- 'AccountsContainersFoldersUpdate'' request conforms to.
 type AccountsContainersFoldersUpdateResource =
      "accounts" :>

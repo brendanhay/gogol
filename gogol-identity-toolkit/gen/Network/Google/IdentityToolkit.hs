@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference>
 module Network.Google.IdentityToolkit
     (
-    -- * API
+    -- * API Declaration
       IdentityToolkitAPI
-    , identityToolkitAPI
-    , identityToolkitRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** IdentitytoolkitRelyingPartyCreateAuthURI
     , module Network.Google.Resource.IdentityToolkit.RelyingParty.CreateAuthURI
@@ -333,6 +329,7 @@ import           Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyPass
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Identity Toolkit API service.
 type IdentityToolkitAPI =
      RelyingPartyCreateAuthURIResource :<|>
        RelyingPartyUploadAccountResource
@@ -346,6 +343,3 @@ type IdentityToolkitAPI =
        :<|> RelyingPartyVerifyPasswordResource
        :<|> RelyingPartyGetPublicKeysResource
        :<|> RelyingPartyGetAccountInfoResource
-
-identityToolkitAPI :: Proxy IdentityToolkitAPI
-identityToolkitAPI = Proxy

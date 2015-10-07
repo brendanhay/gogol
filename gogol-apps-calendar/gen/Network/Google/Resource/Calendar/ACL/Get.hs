@@ -46,7 +46,7 @@ module Network.Google.Resource.Calendar.ACL.Get
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarACLGet@ which the
+-- | A resource alias for @CalendarACLGet@ method which the
 -- 'ACLGet'' request conforms to.
 type ACLGetResource =
      "calendars" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.TargetVPNGateways.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetVPNGatewaysGet@ which the
+-- | A resource alias for @ComputeTargetVPNGatewaysGet@ method which the
 -- 'TargetVPNGatewaysGet'' request conforms to.
 type TargetVPNGatewaysGetResource =
      Capture "project" Text :>

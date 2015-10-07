@@ -47,7 +47,7 @@ module Network.Google.Resource.Content.Orders.Acknowledge
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersAcknowledge@ which the
+-- | A resource alias for @ContentOrdersAcknowledge@ method which the
 -- 'OrdersAcknowledge'' request conforms to.
 type OrdersAcknowledgeResource =
      Capture "merchantId" Word64 :>

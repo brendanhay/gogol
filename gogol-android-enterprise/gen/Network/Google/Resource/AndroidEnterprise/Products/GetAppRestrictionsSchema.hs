@@ -49,7 +49,7 @@ module Network.Google.Resource.AndroidEnterprise.Products.GetAppRestrictionsSche
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseProductsGetAppRestrictionsSchema@ which the
+-- | A resource alias for @AndroidEnterpriseProductsGetAppRestrictionsSchema@ method which the
 -- 'ProductsGetAppRestrictionsSchema'' request conforms to.
 type ProductsGetAppRestrictionsSchemaResource =
      "enterprises" :>

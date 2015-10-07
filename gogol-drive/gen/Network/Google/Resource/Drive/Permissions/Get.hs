@@ -46,7 +46,7 @@ module Network.Google.Resource.Drive.Permissions.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePermissionsGet@ which the
+-- | A resource alias for @DrivePermissionsGet@ method which the
 -- 'PermissionsGet'' request conforms to.
 type PermissionsGetResource =
      "files" :>

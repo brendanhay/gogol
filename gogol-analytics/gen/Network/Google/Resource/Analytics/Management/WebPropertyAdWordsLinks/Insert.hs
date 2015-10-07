@@ -47,7 +47,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Inse
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksInsert@ which the
+-- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksInsert@ method which the
 -- 'ManagementWebPropertyAdWordsLinksInsert'' request conforms to.
 type ManagementWebPropertyAdWordsLinksInsertResource
      =

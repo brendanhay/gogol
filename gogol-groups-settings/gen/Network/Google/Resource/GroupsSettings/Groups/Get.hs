@@ -45,7 +45,7 @@ module Network.Google.Resource.GroupsSettings.Groups.Get
 import           Network.Google.GroupsSettings.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GroupsSettingsGroupsGet@ which the
+-- | A resource alias for @GroupsSettingsGroupsGet@ method which the
 -- 'GroupsGet'' request conforms to.
 type GroupsGetResource =
      Capture "groupUniqueId" Text :>

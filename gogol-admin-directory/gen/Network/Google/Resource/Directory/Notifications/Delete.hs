@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.Notifications.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryNotificationsDelete@ which the
+-- | A resource alias for @DirectoryNotificationsDelete@ method which the
 -- 'NotificationsDelete'' request conforms to.
 type NotificationsDeleteResource =
      "customer" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.FusionTables.Column.Insert
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesColumnInsert@ which the
+-- | A resource alias for @FusiontablesColumnInsert@ method which the
 -- 'ColumnInsert'' request conforms to.
 type ColumnInsertResource =
      "tables" :>

@@ -15,7 +15,7 @@
 --
 module Network.Google.TagManager.Types
     (
-    -- * Service URL
+    -- * Service Request
       tagManagerRequest
 
     -- * ListVariablesResponse
@@ -327,7 +327,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types.Product
 import           Network.Google.TagManager.Types.Sum
 
--- | Default request referring to version 'v1' of the Tag Manager API.
+-- | Default request referring to version 'v1' of the Tag Manager API. This contains the host and root path used as a starting point for constructing service requests.
 tagManagerRequest :: RequestBuilder
 tagManagerRequest
   = defaultRequest "https://www.googleapis.com/"

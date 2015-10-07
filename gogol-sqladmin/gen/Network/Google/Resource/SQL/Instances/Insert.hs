@@ -46,7 +46,7 @@ module Network.Google.Resource.SQL.Instances.Insert
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesInsert@ which the
+-- | A resource alias for @SQLInstancesInsert@ method which the
 -- 'InstancesInsert'' request conforms to.
 type InstancesInsertResource =
      "projects" :>

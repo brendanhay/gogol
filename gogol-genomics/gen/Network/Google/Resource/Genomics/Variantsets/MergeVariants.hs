@@ -51,7 +51,7 @@ module Network.Google.Resource.Genomics.Variantsets.MergeVariants
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsVariantsetsMergeVariants@ which the
+-- | A resource alias for @GenomicsVariantsetsMergeVariants@ method which the
 -- 'VariantsetsMergeVariants'' request conforms to.
 type VariantsetsMergeVariantsResource =
      "variantsets" :>

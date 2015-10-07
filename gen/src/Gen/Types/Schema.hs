@@ -354,9 +354,9 @@ instance FromJSON Label where
 
 instance ToJSON Label where
     toJSON = toJSON . \case
-        Deprecated          -> "deprecated" :: Text
-        LimitedAvailability -> "limited_availability"
-        Labs                -> "labs"
+        Deprecated          -> "Deprecated" :: Text
+        LimitedAvailability -> "Limited Availability"
+        Labs                -> "Labs"
 
 data Description a = Description
     { _dKind              :: Text

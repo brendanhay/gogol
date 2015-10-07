@@ -15,7 +15,7 @@
 --
 module Network.Google.AndroidEnterprise.Types
     (
-    -- * Service URL
+    -- * Service Request
       androidEnterpriseRequest
 
     -- * GroupLicense
@@ -247,7 +247,7 @@ import           Network.Google.AndroidEnterprise.Types.Product
 import           Network.Google.AndroidEnterprise.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Google Play EMM API.
+-- | Default request referring to version 'v1' of the Google Play EMM API. This contains the host and root path used as a starting point for constructing service requests.
 androidEnterpriseRequest :: RequestBuilder
 androidEnterpriseRequest
   = defaultRequest "https://www.googleapis.com/"

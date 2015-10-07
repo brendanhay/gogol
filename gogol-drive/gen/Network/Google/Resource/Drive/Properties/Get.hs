@@ -47,7 +47,7 @@ module Network.Google.Resource.Drive.Properties.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePropertiesGet@ which the
+-- | A resource alias for @DrivePropertiesGet@ method which the
 -- 'PropertiesGet'' request conforms to.
 type PropertiesGetResource =
      "files" :>

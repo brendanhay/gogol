@@ -47,7 +47,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.List
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersVersionsList@ which the
+-- | A resource alias for @TagManagerAccountsContainersVersionsList@ method which the
 -- 'AccountsContainersVersionsList'' request conforms to.
 type AccountsContainersVersionsListResource =
      "accounts" :>

@@ -51,7 +51,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Patch
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsExpansionFilesPatch@ which the
+-- | A resource alias for @AndroidPublisherEditsExpansionFilesPatch@ method which the
 -- 'EditsExpansionFilesPatch'' request conforms to.
 type EditsExpansionFilesPatchResource =
      Capture "packageName" Text :>

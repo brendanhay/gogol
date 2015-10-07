@@ -46,7 +46,7 @@ module Network.Google.Resource.Prediction.TrainedModels.Analyze
 import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PredictionTrainedModelsAnalyze@ which the
+-- | A resource alias for @PredictionTrainedModelsAnalyze@ method which the
 -- 'TrainedModelsAnalyze'' request conforms to.
 type TrainedModelsAnalyzeResource =
      Capture "project" Text :>

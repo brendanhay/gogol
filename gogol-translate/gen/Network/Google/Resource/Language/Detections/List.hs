@@ -45,7 +45,7 @@ module Network.Google.Resource.Language.Detections.List
 import           Network.Google.Prelude
 import           Network.Google.Translate.Types
 
--- | A resource alias for @LanguageDetectionsList@ which the
+-- | A resource alias for @LanguageDetectionsList@ method which the
 -- 'DetectionsList'' request conforms to.
 type DetectionsListResource =
      "v2" :>

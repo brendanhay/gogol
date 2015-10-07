@@ -48,7 +48,7 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeGroupsPatch@ which the
+-- | A resource alias for @DfareportingCreativeGroupsPatch@ method which the
 -- 'CreativeGroupsPatch'' request conforms to.
 type CreativeGroupsPatchResource =
      "userprofiles" :>

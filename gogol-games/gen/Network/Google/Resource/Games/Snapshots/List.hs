@@ -49,7 +49,7 @@ module Network.Google.Resource.Games.Snapshots.List
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesSnapshotsList@ which the
+-- | A resource alias for @GamesSnapshotsList@ method which the
 -- 'SnapshotsList'' request conforms to.
 type SnapshotsListResource =
      "players" :>

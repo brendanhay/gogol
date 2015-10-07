@@ -48,7 +48,7 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.Patch
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostCustomChannelsPatch@ which the
+-- | A resource alias for @AdsensehostCustomChannelsPatch@ method which the
 -- 'CustomChannelsPatch'' request conforms to.
 type CustomChannelsPatchResource =
      "adclients" :>

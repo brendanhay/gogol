@@ -47,7 +47,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.Get
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsListingsGet@ which the
+-- | A resource alias for @AndroidPublisherEditsListingsGet@ method which the
 -- 'EditsListingsGet'' request conforms to.
 type EditsListingsGetResource =
      Capture "packageName" Text :>

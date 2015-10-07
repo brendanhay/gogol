@@ -47,7 +47,7 @@ module Network.Google.Resource.YouTube.Videos.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeVideosUpdate@ which the
+-- | A resource alias for @YouTubeVideosUpdate@ method which the
 -- 'VideosUpdate'' request conforms to.
 type VideosUpdateResource =
      "videos" :>

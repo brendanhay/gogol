@@ -48,7 +48,7 @@ module Network.Google.Resource.Books.Volumes.Recommended.Rate
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksVolumesRecommendedRate@ which the
+-- | A resource alias for @BooksVolumesRecommendedRate@ method which the
 -- 'VolumesRecommendedRate'' request conforms to.
 type VolumesRecommendedRateResource =
      "volumes" :>

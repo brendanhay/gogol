@@ -48,7 +48,7 @@ module Network.Google.Resource.GamesManagement.Players.Unhide
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementPlayersUnhide@ which the
+-- | A resource alias for @GamesManagementPlayersUnhide@ method which the
 -- 'PlayersUnhide'' request conforms to.
 type PlayersUnhideResource =
      "applications" :>

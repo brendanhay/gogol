@@ -48,7 +48,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Delete
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsDelete@ which the
+-- | A resource alias for @AndroidPublisherEditsDelete@ method which the
 -- 'EditsDelete'' request conforms to.
 type EditsDeleteResource =
      Capture "packageName" Text :>

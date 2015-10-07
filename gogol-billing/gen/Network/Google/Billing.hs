@@ -19,14 +19,10 @@
 -- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference>
 module Network.Google.Billing
     (
-    -- * API
+    -- * API Declaration
       BillingAPI
-    , billingAPI
-    , billingRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** CloudBillingBillingAccountsGet
     , module Network.Google.Resource.CloudBilling.BillingAccounts.Get
@@ -85,12 +81,10 @@ import           Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Cloud Billing API service.
 type BillingAPI =
      ProjectsGetBillingInfoResource :<|>
        ProjectsUpdateBillingInfoResource
        :<|> BillingAccountsProjectsListResource
        :<|> BillingAccountsListResource
        :<|> BillingAccountsGetResource
-
-billingAPI :: Proxy BillingAPI
-billingAPI = Proxy

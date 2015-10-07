@@ -47,7 +47,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Deleteall
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsAPKListingsDeleteall@ which the
+-- | A resource alias for @AndroidPublisherEditsAPKListingsDeleteall@ method which the
 -- 'EditsAPKListingsDeleteall'' request conforms to.
 type EditsAPKListingsDeleteallResource =
      Capture "packageName" Text :>

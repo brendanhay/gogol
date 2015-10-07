@@ -47,7 +47,7 @@ module Network.Google.Resource.SQL.Instances.Clone
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesClone@ which the
+-- | A resource alias for @SQLInstancesClone@ method which the
 -- 'InstancesClone'' request conforms to.
 type InstancesCloneResource =
      "projects" :>

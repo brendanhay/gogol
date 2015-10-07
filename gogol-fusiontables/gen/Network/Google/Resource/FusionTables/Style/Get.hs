@@ -46,7 +46,7 @@ module Network.Google.Resource.FusionTables.Style.Get
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesStyleGet@ which the
+-- | A resource alias for @FusiontablesStyleGet@ method which the
 -- 'StyleGet'' request conforms to.
 type StyleGetResource =
      "tables" :>

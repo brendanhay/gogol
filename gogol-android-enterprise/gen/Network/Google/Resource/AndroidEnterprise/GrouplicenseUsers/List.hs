@@ -47,7 +47,7 @@ module Network.Google.Resource.AndroidEnterprise.GrouplicenseUsers.List
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseGrouplicenseUsersList@ which the
+-- | A resource alias for @AndroidEnterpriseGrouplicenseUsersList@ method which the
 -- 'GrouplicenseUsersList'' request conforms to.
 type GrouplicenseUsersListResource =
      "enterprises" :>

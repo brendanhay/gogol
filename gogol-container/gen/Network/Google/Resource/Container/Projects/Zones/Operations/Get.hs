@@ -47,7 +47,7 @@ module Network.Google.Resource.Container.Projects.Zones.Operations.Get
 import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ContainerProjectsZonesOperationsGet@ which the
+-- | A resource alias for @ContainerProjectsZonesOperationsGet@ method which the
 -- 'ProjectsZonesOperationsGet'' request conforms to.
 type ProjectsZonesOperationsGetResource =
      Capture "projectId" Text :>

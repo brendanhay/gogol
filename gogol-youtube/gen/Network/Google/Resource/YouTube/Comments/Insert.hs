@@ -47,7 +47,7 @@ module Network.Google.Resource.YouTube.Comments.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCommentsInsert@ which the
+-- | A resource alias for @YouTubeCommentsInsert@ method which the
 -- 'CommentsInsert'' request conforms to.
 type CommentsInsertResource =
      "comments" :>

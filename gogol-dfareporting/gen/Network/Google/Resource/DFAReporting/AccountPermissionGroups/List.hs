@@ -45,7 +45,7 @@ module Network.Google.Resource.DFAReporting.AccountPermissionGroups.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAccountPermissionGroupsList@ which the
+-- | A resource alias for @DfareportingAccountPermissionGroupsList@ method which the
 -- 'AccountPermissionGroupsList'' request conforms to.
 type AccountPermissionGroupsListResource =
      "userprofiles" :>

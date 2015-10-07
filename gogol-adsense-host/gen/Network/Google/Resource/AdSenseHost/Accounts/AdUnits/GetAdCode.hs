@@ -49,7 +49,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.GetAdCode
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAccountsAdUnitsGetAdCode@ which the
+-- | A resource alias for @AdsensehostAccountsAdUnitsGetAdCode@ method which the
 -- 'AccountsAdUnitsGetAdCode'' request conforms to.
 type AccountsAdUnitsGetAdCodeResource =
      "accounts" :>

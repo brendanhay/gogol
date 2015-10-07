@@ -15,7 +15,7 @@
 --
 module Network.Google.GroupsMigration.Types
     (
-    -- * Service URL
+    -- * Service Request
       groupsMigrationRequest
 
     -- * Groups
@@ -29,7 +29,7 @@ import           Network.Google.GroupsMigration.Types.Product
 import           Network.Google.GroupsMigration.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Groups Migration API.
+-- | Default request referring to version 'v1' of the Groups Migration API. This contains the host and root path used as a starting point for constructing service requests.
 groupsMigrationRequest :: RequestBuilder
 groupsMigrationRequest
   = defaultRequest "https://www.googleapis.com/"

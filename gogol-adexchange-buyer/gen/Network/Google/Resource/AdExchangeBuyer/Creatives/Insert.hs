@@ -45,7 +45,7 @@ module Network.Google.Resource.AdExchangeBuyer.Creatives.Insert
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerCreativesInsert@ which the
+-- | A resource alias for @AdexchangebuyerCreativesInsert@ method which the
 -- 'CreativesInsert'' request conforms to.
 type CreativesInsertResource =
      "creatives" :>

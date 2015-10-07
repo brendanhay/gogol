@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.Jobs.Cancel
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsJobsCancel@ which the
+-- | A resource alias for @GenomicsJobsCancel@ method which the
 -- 'JobsCancel'' request conforms to.
 type JobsCancelResource =
      "jobs" :>

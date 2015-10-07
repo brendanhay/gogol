@@ -47,7 +47,7 @@ module Network.Google.Resource.FusionTables.Template.Update
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTemplateUpdate@ which the
+-- | A resource alias for @FusiontablesTemplateUpdate@ method which the
 -- 'TemplateUpdate'' request conforms to.
 type TemplateUpdateResource =
      "tables" :>

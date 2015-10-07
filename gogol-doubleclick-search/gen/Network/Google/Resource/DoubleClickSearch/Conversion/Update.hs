@@ -45,7 +45,7 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.Update
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClicksearchConversionUpdate@ which the
+-- | A resource alias for @DoubleClicksearchConversionUpdate@ method which the
 -- 'ConversionUpdate'' request conforms to.
 type ConversionUpdateResource =
      "conversion" :>

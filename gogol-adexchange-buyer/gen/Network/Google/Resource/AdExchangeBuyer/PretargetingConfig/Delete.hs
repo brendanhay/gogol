@@ -46,7 +46,7 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Delete
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerPretargetingConfigDelete@ which the
+-- | A resource alias for @AdexchangebuyerPretargetingConfigDelete@ method which the
 -- 'PretargetingConfigDelete'' request conforms to.
 type PretargetingConfigDeleteResource =
      "pretargetingconfigs" :>

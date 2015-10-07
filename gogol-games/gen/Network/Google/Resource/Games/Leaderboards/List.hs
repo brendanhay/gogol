@@ -47,7 +47,7 @@ module Network.Google.Resource.Games.Leaderboards.List
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesLeaderboardsList@ which the
+-- | A resource alias for @GamesLeaderboardsList@ method which the
 -- 'LeaderboardsList'' request conforms to.
 type LeaderboardsListResource =
      "leaderboards" :>

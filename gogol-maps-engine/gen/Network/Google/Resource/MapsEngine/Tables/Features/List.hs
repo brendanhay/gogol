@@ -54,7 +54,7 @@ module Network.Google.Resource.MapsEngine.Tables.Features.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesFeaturesList@ which the
+-- | A resource alias for @MapsEngineTablesFeaturesList@ method which the
 -- 'TablesFeaturesList'' request conforms to.
 type TablesFeaturesListResource =
      "tables" :>

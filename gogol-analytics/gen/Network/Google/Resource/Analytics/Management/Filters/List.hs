@@ -47,7 +47,7 @@ module Network.Google.Resource.Analytics.Management.Filters.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementFiltersList@ which the
+-- | A resource alias for @AnalyticsManagementFiltersList@ method which the
 -- 'ManagementFiltersList'' request conforms to.
 type ManagementFiltersListResource =
      "management" :>

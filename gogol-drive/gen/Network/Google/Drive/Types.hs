@@ -15,7 +15,7 @@
 --
 module Network.Google.Drive.Types
     (
-    -- * Service URL
+    -- * Service Request
       driveRequest
 
     -- * CommentContext
@@ -535,7 +535,7 @@ import           Network.Google.Drive.Types.Product
 import           Network.Google.Drive.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2' of the Drive API.
+-- | Default request referring to version 'v2' of the Drive API. This contains the host and root path used as a starting point for constructing service requests.
 driveRequest :: RequestBuilder
 driveRequest
   = defaultRequest "https://www.googleapis.com/"

@@ -15,7 +15,7 @@
 --
 module Network.Google.AppEngine.Types
     (
-    -- * Service URL
+    -- * Service Request
       appEngineRequest
 
     -- * Status
@@ -308,7 +308,7 @@ import           Network.Google.AppEngine.Types.Product
 import           Network.Google.AppEngine.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1beta4' of the Google App Engine Admin API.
+-- | Default request referring to version 'v1beta4' of the Google App Engine Admin API. This contains the host and root path used as a starting point for constructing service requests.
 appEngineRequest :: RequestBuilder
 appEngineRequest
   = defaultRequest "https://appengine.googleapis.com/"

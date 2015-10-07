@@ -47,7 +47,7 @@ module Network.Google.Resource.Content.Orders.Cancel
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersCancel@ which the
+-- | A resource alias for @ContentOrdersCancel@ method which the
 -- 'OrdersCancel'' request conforms to.
 type OrdersCancelResource =
      Capture "merchantId" Word64 :>

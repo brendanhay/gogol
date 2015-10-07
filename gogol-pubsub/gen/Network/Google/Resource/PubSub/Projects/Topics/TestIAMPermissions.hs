@@ -52,7 +52,7 @@ module Network.Google.Resource.PubSub.Projects.Topics.TestIAMPermissions
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsTopicsTestIAMPermissions@ which the
+-- | A resource alias for @PubsubProjectsTopicsTestIAMPermissions@ method which the
 -- 'ProjectsTopicsTestIAMPermissions'' request conforms to.
 type ProjectsTopicsTestIAMPermissionsResource =
      "v1beta2" :>

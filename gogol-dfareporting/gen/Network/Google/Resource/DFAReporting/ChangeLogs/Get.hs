@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.ChangeLogs.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingChangeLogsGet@ which the
+-- | A resource alias for @DfareportingChangeLogsGet@ method which the
 -- 'ChangeLogsGet'' request conforms to.
 type ChangeLogsGetResource =
      "userprofiles" :>

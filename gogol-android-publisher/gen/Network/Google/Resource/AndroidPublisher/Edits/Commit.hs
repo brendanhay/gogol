@@ -46,7 +46,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Commit
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsCommit@ which the
+-- | A resource alias for @AndroidPublisherEditsCommit@ method which the
 -- 'EditsCommit'' request conforms to.
 type EditsCommitResource =
      Capture "packageName" Text :>

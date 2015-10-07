@@ -46,7 +46,7 @@ module Network.Google.Resource.CloudUserAccounts.Groups.Delete
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsGroupsDelete@ which the
+-- | A resource alias for @CloudUserAccountsGroupsDelete@ method which the
 -- 'GroupsDelete'' request conforms to.
 type GroupsDeleteResource =
      Capture "project" Text :>

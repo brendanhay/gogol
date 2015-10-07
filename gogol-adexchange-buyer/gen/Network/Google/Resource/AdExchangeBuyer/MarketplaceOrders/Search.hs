@@ -45,7 +45,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Search
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerMarketplaceOrdersSearch@ which the
+-- | A resource alias for @AdexchangebuyerMarketplaceOrdersSearch@ method which the
 -- 'MarketplaceOrdersSearch'' request conforms to.
 type MarketplaceOrdersSearchResource =
      "marketplaceOrders" :>

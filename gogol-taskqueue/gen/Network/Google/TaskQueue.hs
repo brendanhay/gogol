@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference>
 module Network.Google.TaskQueue
     (
-    -- * API
+    -- * API Declaration
       TaskQueueAPI
-    , taskQueueAPI
-    , taskQueueRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** TaskqueueTaskqueuesGet
     , module Network.Google.Resource.TaskQueue.Taskqueues.Get
@@ -117,6 +113,7 @@ import           Network.Google.TaskQueue.Types
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the TaskQueue API service.
 type TaskQueueAPI =
      TasksInsertResource :<|> TasksListResource :<|>
        TasksPatchResource
@@ -125,6 +122,3 @@ type TaskQueueAPI =
        :<|> TasksDeleteResource
        :<|> TasksUpdateResource
        :<|> TaskqueuesGetResource
-
-taskQueueAPI :: Proxy TaskQueueAPI
-taskQueueAPI = Proxy

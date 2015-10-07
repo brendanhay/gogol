@@ -54,7 +54,7 @@ module Network.Google.Resource.CloudResourceManager.Projects.Create
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerProjectsCreate@ which the
+-- | A resource alias for @CloudResourceManagerProjectsCreate@ method which the
 -- 'ProjectsCreate'' request conforms to.
 type ProjectsCreateResource =
      "v1beta1" :>

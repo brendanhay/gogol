@@ -47,7 +47,7 @@ module Network.Google.Resource.Directory.Schemas.Update
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectorySchemasUpdate@ which the
+-- | A resource alias for @DirectorySchemasUpdate@ method which the
 -- 'SchemasUpdate'' request conforms to.
 type SchemasUpdateResource =
      "customer" :>

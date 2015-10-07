@@ -50,7 +50,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Patch
 import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
--- | A resource alias for @TaskqueueTasksPatch@ which the
+-- | A resource alias for @TaskqueueTasksPatch@ method which the
 -- 'TasksPatch'' request conforms to.
 type TasksPatchResource =
      Capture "project" Text :>

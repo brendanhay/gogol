@@ -48,7 +48,7 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Rollback
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
--- | A resource alias for @ReplicapoolupdaterRollingUpdatesRollback@ which the
+-- | A resource alias for @ReplicapoolupdaterRollingUpdatesRollback@ method which the
 -- 'RollingUpdatesRollback'' request conforms to.
 type RollingUpdatesRollbackResource =
      Capture "project" Text :>

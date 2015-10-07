@@ -55,7 +55,7 @@ module Network.Google.Resource.DFAReporting.ChangeLogs.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingChangeLogsList@ which the
+-- | A resource alias for @DfareportingChangeLogsList@ method which the
 -- 'ChangeLogsList'' request conforms to.
 type ChangeLogsListResource =
      "userprofiles" :>

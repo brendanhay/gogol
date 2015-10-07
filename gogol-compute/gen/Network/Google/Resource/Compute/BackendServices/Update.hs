@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.BackendServices.Update
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeBackendServicesUpdate@ which the
+-- | A resource alias for @ComputeBackendServicesUpdate@ method which the
 -- 'BackendServicesUpdate'' request conforms to.
 type BackendServicesUpdateResource =
      Capture "project" Text :>

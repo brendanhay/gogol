@@ -45,7 +45,7 @@ module Network.Google.Resource.SiteVerification.WebResource.Delete
 import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
--- | A resource alias for @SiteVerificationWebResourceDelete@ which the
+-- | A resource alias for @SiteVerificationWebResourceDelete@ method which the
 -- 'WebResourceDelete'' request conforms to.
 type WebResourceDeleteResource =
      "webResource" :>

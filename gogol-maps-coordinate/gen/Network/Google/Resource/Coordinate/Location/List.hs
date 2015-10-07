@@ -49,7 +49,7 @@ module Network.Google.Resource.Coordinate.Location.List
 import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CoordinateLocationList@ which the
+-- | A resource alias for @CoordinateLocationList@ method which the
 -- 'LocationList'' request conforms to.
 type LocationListResource =
      "teams" :>

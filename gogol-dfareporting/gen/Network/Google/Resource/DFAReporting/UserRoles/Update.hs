@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.UserRoles.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingUserRolesUpdate@ which the
+-- | A resource alias for @DfareportingUserRolesUpdate@ method which the
 -- 'UserRolesUpdate'' request conforms to.
 type UserRolesUpdateResource =
      "userprofiles" :>

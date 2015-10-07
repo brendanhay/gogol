@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeFieldsDelete@ which the
+-- | A resource alias for @DfareportingCreativeFieldsDelete@ method which the
 -- 'CreativeFieldsDelete'' request conforms to.
 type CreativeFieldsDeleteResource =
      "userprofiles" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.Routes.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeRoutesDelete@ which the
+-- | A resource alias for @ComputeRoutesDelete@ method which the
 -- 'RoutesDelete'' request conforms to.
 type RoutesDeleteResource =
      Capture "project" Text :>

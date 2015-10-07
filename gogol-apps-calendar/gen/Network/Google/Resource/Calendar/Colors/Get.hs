@@ -44,7 +44,7 @@ module Network.Google.Resource.Calendar.Colors.Get
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarColorsGet@ which the
+-- | A resource alias for @CalendarColorsGet@ method which the
 -- 'ColorsGet'' request conforms to.
 type ColorsGetResource =
      "colors" :>

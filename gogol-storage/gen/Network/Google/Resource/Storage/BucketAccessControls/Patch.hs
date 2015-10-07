@@ -48,7 +48,7 @@ module Network.Google.Resource.Storage.BucketAccessControls.Patch
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageBucketAccessControlsPatch@ which the
+-- | A resource alias for @StorageBucketAccessControlsPatch@ method which the
 -- 'BucketAccessControlsPatch'' request conforms to.
 type BucketAccessControlsPatchResource =
      "b" :>

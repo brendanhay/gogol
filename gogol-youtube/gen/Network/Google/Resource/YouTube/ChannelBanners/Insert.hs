@@ -55,7 +55,7 @@ module Network.Google.Resource.YouTube.ChannelBanners.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeChannelBannersInsert@ which the
+-- | A resource alias for @YouTubeChannelBannersInsert@ method which the
 -- 'ChannelBannersInsert'' request conforms to.
 type ChannelBannersInsertResource =
      "channelBanners" :>

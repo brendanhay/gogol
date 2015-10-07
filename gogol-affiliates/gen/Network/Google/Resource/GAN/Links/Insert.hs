@@ -47,7 +47,7 @@ module Network.Google.Resource.GAN.Links.Insert
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GANLinksInsert@ which the
+-- | A resource alias for @GANLinksInsert@ method which the
 -- 'LinksInsert'' request conforms to.
 type LinksInsertResource =
      Capture "role" LinksInsertRole :>

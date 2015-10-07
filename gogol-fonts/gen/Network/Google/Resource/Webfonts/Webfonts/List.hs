@@ -46,7 +46,7 @@ module Network.Google.Resource.Webfonts.Webfonts.List
 import           Network.Google.Fonts.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @WebfontsWebfontsList@ which the
+-- | A resource alias for @WebfontsWebfontsList@ method which the
 -- 'WebfontsList'' request conforms to.
 type WebfontsListResource =
      "webfonts" :>

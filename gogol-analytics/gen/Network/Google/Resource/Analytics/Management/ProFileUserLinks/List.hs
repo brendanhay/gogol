@@ -49,7 +49,7 @@ module Network.Google.Resource.Analytics.Management.ProFileUserLinks.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFileUserLinksList@ which the
+-- | A resource alias for @AnalyticsManagementProFileUserLinksList@ method which the
 -- 'ManagementProFileUserLinksList'' request conforms to.
 type ManagementProFileUserLinksListResource =
      "management" :>

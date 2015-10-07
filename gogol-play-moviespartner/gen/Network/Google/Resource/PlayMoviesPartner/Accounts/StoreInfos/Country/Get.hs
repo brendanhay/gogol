@@ -55,7 +55,7 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviesPartnerAccountsStoreInfosCountryGet@ which the
+-- | A resource alias for @PlaymoviesPartnerAccountsStoreInfosCountryGet@ method which the
 -- 'AccountsStoreInfosCountryGet'' request conforms to.
 type AccountsStoreInfosCountryGetResource =
      "v1" :>

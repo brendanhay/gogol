@@ -48,7 +48,7 @@ module Network.Google.Resource.Spectrum.Paws.NotifySpectrumUse
 import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
--- | A resource alias for @SpectrumPawsNotifySpectrumUse@ which the
+-- | A resource alias for @SpectrumPawsNotifySpectrumUse@ method which the
 -- 'PawsNotifySpectrumUse'' request conforms to.
 type PawsNotifySpectrumUseResource =
      "notifySpectrumUse" :>

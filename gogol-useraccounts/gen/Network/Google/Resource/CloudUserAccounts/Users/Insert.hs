@@ -47,7 +47,7 @@ module Network.Google.Resource.CloudUserAccounts.Users.Insert
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsUsersInsert@ which the
+-- | A resource alias for @CloudUserAccountsUsersInsert@ method which the
 -- 'UsersInsert'' request conforms to.
 type UsersInsertResource =
      Capture "project" Text :>

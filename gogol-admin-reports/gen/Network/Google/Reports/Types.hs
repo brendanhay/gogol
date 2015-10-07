@@ -15,7 +15,7 @@
 --
 module Network.Google.Reports.Types
     (
-    -- * Service URL
+    -- * Service Request
       reportsRequest
 
     -- * UsageReportParametersItem
@@ -146,7 +146,7 @@ import           Network.Google.Prelude
 import           Network.Google.Reports.Types.Product
 import           Network.Google.Reports.Types.Sum
 
--- | Default request referring to version 'reports_v1' of the Admin Reports API.
+-- | Default request referring to version 'reports_v1' of the Admin Reports API. This contains the host and root path used as a starting point for constructing service requests.
 reportsRequest :: RequestBuilder
 reportsRequest
   = defaultRequest "https://www.googleapis.com/"

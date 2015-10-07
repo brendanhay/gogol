@@ -46,7 +46,7 @@ module Network.Google.Resource.FusionTables.Column.Get
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesColumnGet@ which the
+-- | A resource alias for @FusiontablesColumnGet@ method which the
 -- 'ColumnGet'' request conforms to.
 type ColumnGetResource =
      "tables" :>

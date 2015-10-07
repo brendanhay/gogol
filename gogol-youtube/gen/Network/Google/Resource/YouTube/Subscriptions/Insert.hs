@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTube.Subscriptions.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeSubscriptionsInsert@ which the
+-- | A resource alias for @YouTubeSubscriptionsInsert@ method which the
 -- 'SubscriptionsInsert'' request conforms to.
 type SubscriptionsInsertResource =
      "subscriptions" :>

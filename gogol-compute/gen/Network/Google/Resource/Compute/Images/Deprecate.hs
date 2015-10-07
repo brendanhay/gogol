@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.Images.Deprecate
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeImagesDeprecate@ which the
+-- | A resource alias for @ComputeImagesDeprecate@ method which the
 -- 'ImagesDeprecate'' request conforms to.
 type ImagesDeprecateResource =
      Capture "project" Text :>

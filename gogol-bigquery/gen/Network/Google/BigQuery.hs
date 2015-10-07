@@ -18,76 +18,72 @@
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference>
 module Network.Google.BigQuery
     (
-    -- * API
+    -- * API Declaration
       BigQueryAPI
-    , bigQueryAPI
-    , bigQueryRequest
 
-    -- * Service Methods
+    -- * Resources
 
-    -- * REST Resources
-
-    -- ** BigqueryDatasetsDelete
+    -- ** BigQueryDatasetsDelete
     , module Network.Google.Resource.BigQuery.Datasets.Delete
 
-    -- ** BigqueryDatasetsGet
+    -- ** BigQueryDatasetsGet
     , module Network.Google.Resource.BigQuery.Datasets.Get
 
-    -- ** BigqueryDatasetsInsert
+    -- ** BigQueryDatasetsInsert
     , module Network.Google.Resource.BigQuery.Datasets.Insert
 
-    -- ** BigqueryDatasetsList
+    -- ** BigQueryDatasetsList
     , module Network.Google.Resource.BigQuery.Datasets.List
 
-    -- ** BigqueryDatasetsPatch
+    -- ** BigQueryDatasetsPatch
     , module Network.Google.Resource.BigQuery.Datasets.Patch
 
-    -- ** BigqueryDatasetsUpdate
+    -- ** BigQueryDatasetsUpdate
     , module Network.Google.Resource.BigQuery.Datasets.Update
 
-    -- ** BigqueryJobsCancel
+    -- ** BigQueryJobsCancel
     , module Network.Google.Resource.BigQuery.Jobs.Cancel
 
-    -- ** BigqueryJobsGet
+    -- ** BigQueryJobsGet
     , module Network.Google.Resource.BigQuery.Jobs.Get
 
-    -- ** BigqueryJobsGetQueryResults
+    -- ** BigQueryJobsGetQueryResults
     , module Network.Google.Resource.BigQuery.Jobs.GetQueryResults
 
-    -- ** BigqueryJobsInsert
+    -- ** BigQueryJobsInsert
     , module Network.Google.Resource.BigQuery.Jobs.Insert
 
-    -- ** BigqueryJobsList
+    -- ** BigQueryJobsList
     , module Network.Google.Resource.BigQuery.Jobs.List
 
-    -- ** BigqueryJobsQuery
+    -- ** BigQueryJobsQuery
     , module Network.Google.Resource.BigQuery.Jobs.Query
 
-    -- ** BigqueryProjectsList
+    -- ** BigQueryProjectsList
     , module Network.Google.Resource.BigQuery.Projects.List
 
-    -- ** BigqueryTabledataInsertAll
-    , module Network.Google.Resource.BigQuery.Tabledata.InsertAll
+    -- ** BigQueryTableDataInsertAll
+    , module Network.Google.Resource.BigQuery.TableData.InsertAll
 
-    -- ** BigqueryTabledataList
-    , module Network.Google.Resource.BigQuery.Tabledata.List
+    -- ** BigQueryTableDataList
+    , module Network.Google.Resource.BigQuery.TableData.List
 
-    -- ** BigqueryTablesDelete
+    -- ** BigQueryTablesDelete
     , module Network.Google.Resource.BigQuery.Tables.Delete
 
-    -- ** BigqueryTablesGet
+    -- ** BigQueryTablesGet
     , module Network.Google.Resource.BigQuery.Tables.Get
 
-    -- ** BigqueryTablesInsert
+    -- ** BigQueryTablesInsert
     , module Network.Google.Resource.BigQuery.Tables.Insert
 
-    -- ** BigqueryTablesList
+    -- ** BigQueryTablesList
     , module Network.Google.Resource.BigQuery.Tables.List
 
-    -- ** BigqueryTablesPatch
+    -- ** BigQueryTablesPatch
     , module Network.Google.Resource.BigQuery.Tables.Patch
 
-    -- ** BigqueryTablesUpdate
+    -- ** BigQueryTablesUpdate
     , module Network.Google.Resource.BigQuery.Tables.Update
 
     -- * Types
@@ -547,8 +543,8 @@ import           Network.Google.Resource.BigQuery.Jobs.Insert
 import           Network.Google.Resource.BigQuery.Jobs.List
 import           Network.Google.Resource.BigQuery.Jobs.Query
 import           Network.Google.Resource.BigQuery.Projects.List
-import           Network.Google.Resource.BigQuery.Tabledata.InsertAll
-import           Network.Google.Resource.BigQuery.Tabledata.List
+import           Network.Google.Resource.BigQuery.TableData.InsertAll
+import           Network.Google.Resource.BigQuery.TableData.List
 import           Network.Google.Resource.BigQuery.Tables.Delete
 import           Network.Google.Resource.BigQuery.Tables.Get
 import           Network.Google.Resource.BigQuery.Tables.Insert
@@ -560,6 +556,7 @@ import           Network.Google.Resource.BigQuery.Tables.Update
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the BigQuery API service.
 type BigQueryAPI =
      JobsInsertResource :<|> JobsListResource :<|>
        JobsGetResource
@@ -572,8 +569,8 @@ type BigQueryAPI =
        :<|> TablesGetResource
        :<|> TablesDeleteResource
        :<|> TablesUpdateResource
-       :<|> TabledataListResource
-       :<|> TabledataInsertAllResource
+       :<|> TableDataListResource
+       :<|> TableDataInsertAllResource
        :<|> ProjectsListResource
        :<|> DatasetsInsertResource
        :<|> DatasetsListResource
@@ -581,6 +578,3 @@ type BigQueryAPI =
        :<|> DatasetsGetResource
        :<|> DatasetsDeleteResource
        :<|> DatasetsUpdateResource
-
-bigQueryAPI :: Proxy BigQueryAPI
-bigQueryAPI = Proxy

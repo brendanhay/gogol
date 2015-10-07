@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference>
 module Network.Google.Analytics
     (
-    -- * API
+    -- * API Declaration
       AnalyticsAPI
-    , analyticsAPI
-    , analyticsRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** AnalyticsDataGaGet
     , module Network.Google.Resource.Analytics.Data.Ga.Get
@@ -1331,6 +1327,7 @@ import           Network.Google.Resource.Analytics.Provisioning.CreateAccountTic
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Analytics API service.
 type AnalyticsAPI =
      DataMcfGetResource :<|> DataGaGetResource :<|>
        DataRealtimeGetResource
@@ -1409,6 +1406,3 @@ type AnalyticsAPI =
        :<|> ManagementProFileUserLinksUpdateResource
        :<|> ProvisioningCreateAccountTicketResource
        :<|> MetadataColumnsListResource
-
-analyticsAPI :: Proxy AnalyticsAPI
-analyticsAPI = Proxy

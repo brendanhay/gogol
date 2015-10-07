@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference>
 module Network.Google.Gmail
     (
-    -- * API
+    -- * API Declaration
       GmailAPI
-    , gmailAPI
-    , gmailRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** GmailUsersDraftsCreate
     , module Network.Google.Resource.Gmail.Users.Drafts.Create
@@ -353,6 +349,7 @@ import           Network.Google.Resource.Gmail.Users.Watch
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Gmail API service.
 type GmailAPI =
      UsersHistoryListResource :<|> UsersDraftsListResource
        :<|> UsersDraftsGetResource
@@ -385,6 +382,3 @@ type GmailAPI =
        :<|> UsersGetProFileResource
        :<|> UsersStopResource
        :<|> UsersWatchResource
-
-gmailAPI :: Proxy GmailAPI
-gmailAPI = Proxy

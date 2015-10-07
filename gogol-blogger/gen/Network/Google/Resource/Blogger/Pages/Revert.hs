@@ -46,7 +46,7 @@ module Network.Google.Resource.Blogger.Pages.Revert
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPagesRevert@ which the
+-- | A resource alias for @BloggerPagesRevert@ method which the
 -- 'PagesRevert'' request conforms to.
 type PagesRevertResource =
      "blogs" :>

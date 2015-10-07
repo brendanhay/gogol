@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTube.CommentThreads.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCommentThreadsUpdate@ which the
+-- | A resource alias for @YouTubeCommentThreadsUpdate@ method which the
 -- 'CommentThreadsUpdate'' request conforms to.
 type CommentThreadsUpdateResource =
      "commentThreads" :>

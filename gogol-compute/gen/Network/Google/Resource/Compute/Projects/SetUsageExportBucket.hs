@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.Projects.SetUsageExportBucket
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeProjectsSetUsageExportBucket@ which the
+-- | A resource alias for @ComputeProjectsSetUsageExportBucket@ method which the
 -- 'ProjectsSetUsageExportBucket'' request conforms to.
 type ProjectsSetUsageExportBucketResource =
      Capture "project" Text :>

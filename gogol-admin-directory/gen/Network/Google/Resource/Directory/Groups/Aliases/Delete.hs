@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.Groups.Aliases.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryGroupsAliasesDelete@ which the
+-- | A resource alias for @DirectoryGroupsAliasesDelete@ method which the
 -- 'GroupsAliasesDelete'' request conforms to.
 type GroupsAliasesDeleteResource =
      "groups" :>

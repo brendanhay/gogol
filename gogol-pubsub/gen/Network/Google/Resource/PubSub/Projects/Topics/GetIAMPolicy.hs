@@ -52,7 +52,7 @@ module Network.Google.Resource.PubSub.Projects.Topics.GetIAMPolicy
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsTopicsGetIAMPolicy@ which the
+-- | A resource alias for @PubsubProjectsTopicsGetIAMPolicy@ method which the
 -- 'ProjectsTopicsGetIAMPolicy'' request conforms to.
 type ProjectsTopicsGetIAMPolicyResource =
      "v1beta2" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.Routes.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeRoutesInsert@ which the
+-- | A resource alias for @ComputeRoutesInsert@ method which the
 -- 'RoutesInsert'' request conforms to.
 type RoutesInsertResource =
      Capture "project" Text :>

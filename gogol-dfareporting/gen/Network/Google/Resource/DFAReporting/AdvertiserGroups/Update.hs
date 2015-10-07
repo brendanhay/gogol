@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAdvertiserGroupsUpdate@ which the
+-- | A resource alias for @DfareportingAdvertiserGroupsUpdate@ method which the
 -- 'AdvertiserGroupsUpdate'' request conforms to.
 type AdvertiserGroupsUpdateResource =
      "userprofiles" :>

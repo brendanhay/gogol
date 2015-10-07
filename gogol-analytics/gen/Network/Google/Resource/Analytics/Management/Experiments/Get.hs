@@ -48,7 +48,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementExperimentsGet@ which the
+-- | A resource alias for @AnalyticsManagementExperimentsGet@ method which the
 -- 'ManagementExperimentsGet'' request conforms to.
 type ManagementExperimentsGetResource =
      "management" :>

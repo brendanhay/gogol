@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTube.Videos.ReportAbuse
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeVideosReportAbuse@ which the
+-- | A resource alias for @YouTubeVideosReportAbuse@ method which the
 -- 'VideosReportAbuse'' request conforms to.
 type VideosReportAbuseResource =
      "videos" :>

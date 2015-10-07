@@ -52,7 +52,7 @@ module Network.Google.Resource.CloudResourceManager.Organizations.Update
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerOrganizationsUpdate@ which the
+-- | A resource alias for @CloudResourceManagerOrganizationsUpdate@ method which the
 -- 'OrganizationsUpdate'' request conforms to.
 type OrganizationsUpdateResource =
      "v1beta1" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.GamesManagement.Scores.ResetForAllPlayers
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementScoresResetForAllPlayers@ which the
+-- | A resource alias for @GamesManagementScoresResetForAllPlayers@ method which the
 -- 'ScoresResetForAllPlayers'' request conforms to.
 type ScoresResetForAllPlayersResource =
      "leaderboards" :>

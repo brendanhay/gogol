@@ -58,7 +58,7 @@ module Network.Google.Resource.Classroom.Courses.Patch
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesPatch@ which the
+-- | A resource alias for @ClassroomCoursesPatch@ method which the
 -- 'CoursesPatch'' request conforms to.
 type CoursesPatchResource =
      "v1" :>

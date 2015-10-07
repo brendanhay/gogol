@@ -53,7 +53,7 @@ module Network.Google.Resource.CloudMonitoring.MetricDescriptors.List
 import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudMonitoringMetricDescriptorsList@ which the
+-- | A resource alias for @CloudMonitoringMetricDescriptorsList@ method which the
 -- 'MetricDescriptorsList'' request conforms to.
 type MetricDescriptorsListResource =
      Capture "project" Text :>

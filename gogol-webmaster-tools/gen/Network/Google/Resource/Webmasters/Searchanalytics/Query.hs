@@ -51,7 +51,7 @@ module Network.Google.Resource.Webmasters.Searchanalytics.Query
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersSearchanalyticsQuery@ which the
+-- | A resource alias for @WebmastersSearchanalyticsQuery@ method which the
 -- 'SearchanalyticsQuery'' request conforms to.
 type SearchanalyticsQueryResource =
      "sites" :>

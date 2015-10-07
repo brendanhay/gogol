@@ -50,7 +50,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Lease
 import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
--- | A resource alias for @TaskqueueTasksLease@ which the
+-- | A resource alias for @TaskqueueTasksLease@ method which the
 -- 'TasksLease'' request conforms to.
 type TasksLeaseResource =
      Capture "project" Text :>

@@ -15,7 +15,7 @@
 --
 module Network.Google.EmailMigration.Types
     (
-    -- * Service URL
+    -- * Service Request
       emailMigrationRequest
 
     -- * MailItem
@@ -36,7 +36,7 @@ import           Network.Google.EmailMigration.Types.Product
 import           Network.Google.EmailMigration.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'email_migration_v2' of the Email Migration API v2.
+-- | Default request referring to version 'email_migration_v2' of the Email Migration API v2. This contains the host and root path used as a starting point for constructing service requests.
 emailMigrationRequest :: RequestBuilder
 emailMigrationRequest
   = defaultRequest "https://www.googleapis.com/"

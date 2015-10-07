@@ -49,7 +49,7 @@ module Network.Google.Resource.Fitness.Users.Dataset.Aggregate
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersDatasetAggregate@ which the
+-- | A resource alias for @FitnessUsersDatasetAggregate@ method which the
 -- 'UsersDatasetAggregate'' request conforms to.
 type UsersDatasetAggregateResource =
      Capture "userId" Text :>

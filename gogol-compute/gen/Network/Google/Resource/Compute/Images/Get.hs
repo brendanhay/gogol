@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.Images.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeImagesGet@ which the
+-- | A resource alias for @ComputeImagesGet@ method which the
 -- 'ImagesGet'' request conforms to.
 type ImagesGetResource =
      Capture "project" Text :>

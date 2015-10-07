@@ -52,7 +52,7 @@ module Network.Google.Resource.PagespeedOnline.PagespeedAPI.RunPagespeed
 import           Network.Google.PageSpeed.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PagespeedOnlinePagespeedAPIRunPagespeed@ which the
+-- | A resource alias for @PagespeedOnlinePagespeedAPIRunPagespeed@ method which the
 -- 'PagespeedAPIRunPagespeed'' request conforms to.
 type PagespeedAPIRunPagespeedResource =
      "runPagespeed" :>

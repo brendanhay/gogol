@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference>
 module Network.Google.AdSenseHost
     (
-    -- * API
+    -- * API Declaration
       AdSenseHostAPI
-    , adSenseHostAPI
-    , adSenseHostRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** AdsensehostAccountsAdClientsGet
     , module Network.Google.Resource.AdSenseHost.Accounts.AdClients.Get
@@ -310,6 +306,7 @@ import           Network.Google.Resource.AdSenseHost.URLChannels.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the AdSense Host API service.
 type AdSenseHostAPI =
      AssociationSessionsVerifyResource :<|>
        AssociationSessionsStartResource
@@ -337,6 +334,3 @@ type AdSenseHostAPI =
        :<|> CustomChannelsGetResource
        :<|> CustomChannelsDeleteResource
        :<|> CustomChannelsUpdateResource
-
-adSenseHostAPI :: Proxy AdSenseHostAPI
-adSenseHostAPI = Proxy

@@ -50,7 +50,7 @@ module Network.Google.Resource.Books.MyConfig.RequestAccess
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyConfigRequestAccess@ which the
+-- | A resource alias for @BooksMyConfigRequestAccess@ method which the
 -- 'MyConfigRequestAccess'' request conforms to.
 type MyConfigRequestAccessResource =
      "myconfig" :>

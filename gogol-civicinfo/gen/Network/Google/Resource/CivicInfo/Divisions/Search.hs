@@ -45,7 +45,7 @@ module Network.Google.Resource.CivicInfo.Divisions.Search
 import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CivicInfoDivisionsSearch@ which the
+-- | A resource alias for @CivicInfoDivisionsSearch@ method which the
 -- 'DivisionsSearch'' request conforms to.
 type DivisionsSearchResource =
      "divisions" :>

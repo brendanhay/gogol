@@ -48,7 +48,7 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Permissions.BatchUpd
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRasterCollectionsPermissionsBatchUpdate@ which the
+-- | A resource alias for @MapsEngineRasterCollectionsPermissionsBatchUpdate@ method which the
 -- 'RasterCollectionsPermissionsBatchUpdate'' request conforms to.
 type RasterCollectionsPermissionsBatchUpdateResource
      =

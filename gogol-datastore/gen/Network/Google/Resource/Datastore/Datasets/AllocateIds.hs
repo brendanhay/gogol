@@ -47,7 +47,7 @@ module Network.Google.Resource.Datastore.Datasets.AllocateIds
 import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DatastoreDatasetsAllocateIds@ which the
+-- | A resource alias for @DatastoreDatasetsAllocateIds@ method which the
 -- 'DatasetsAllocateIds'' request conforms to.
 type DatasetsAllocateIdsResource =
      Capture "datasetId" Text :>

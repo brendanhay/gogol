@@ -46,7 +46,7 @@ module Network.Google.Resource.URLShortener.URL.List
 import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types
 
--- | A resource alias for @URLshortenerURLList@ which the
+-- | A resource alias for @URLshortenerURLList@ method which the
 -- 'URLList'' request conforms to.
 type URLListResource =
      "url" :>

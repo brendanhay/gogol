@@ -47,7 +47,7 @@ module Network.Google.Resource.Storage.Buckets.Delete
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageBucketsDelete@ which the
+-- | A resource alias for @StorageBucketsDelete@ method which the
 -- 'BucketsDelete'' request conforms to.
 type BucketsDeleteResource =
      "b" :>

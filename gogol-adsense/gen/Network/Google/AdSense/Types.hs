@@ -15,7 +15,7 @@
 --
 module Network.Google.AdSense.Types
     (
-    -- * Service URL
+    -- * Service Request
       adSenseRequest
 
     -- * AdClients
@@ -279,7 +279,7 @@ import           Network.Google.AdSense.Types.Product
 import           Network.Google.AdSense.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1.4' of the AdSense Management API.
+-- | Default request referring to version 'v1.4' of the AdSense Management API. This contains the host and root path used as a starting point for constructing service requests.
 adSenseRequest :: RequestBuilder
 adSenseRequest
   = defaultRequest "https://www.googleapis.com/"

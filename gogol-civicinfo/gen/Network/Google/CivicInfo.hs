@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference>
 module Network.Google.CivicInfo
     (
-    -- * API
+    -- * API Declaration
       CivicInfoAPI
-    , civicInfoAPI
-    , civicInfoRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** CivicInfoDivisionsSearch
     , module Network.Google.Resource.CivicInfo.Divisions.Search
@@ -282,6 +278,7 @@ import           Network.Google.Resource.CivicInfo.Representatives.Representativ
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Civic Information API service.
 type CivicInfoAPI =
      ElectionsVoterInfoQueryResource :<|>
        ElectionsElectionQueryResource
@@ -290,6 +287,3 @@ type CivicInfoAPI =
        RepresentativesRepresentativeInfoByDivisionResource
        :<|>
        RepresentativesRepresentativeInfoByAddressResource
-
-civicInfoAPI :: Proxy CivicInfoAPI
-civicInfoAPI = Proxy

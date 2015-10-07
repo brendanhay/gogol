@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.GlobalOperations.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeGlobalOperationsDelete@ which the
+-- | A resource alias for @ComputeGlobalOperationsDelete@ method which the
 -- 'GlobalOperationsDelete'' request conforms to.
 type GlobalOperationsDeleteResource =
      Capture "project" Text :>

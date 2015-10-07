@@ -45,7 +45,7 @@ module Network.Google.Resource.Calendar.FreeBusy.Query
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarFreeBusyQuery@ which the
+-- | A resource alias for @CalendarFreeBusyQuery@ method which the
 -- 'FreeBusyQuery'' request conforms to.
 type FreeBusyQueryResource =
      "freeBusy" :>

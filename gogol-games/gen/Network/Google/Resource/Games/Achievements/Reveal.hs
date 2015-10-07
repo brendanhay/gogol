@@ -46,7 +46,7 @@ module Network.Google.Resource.Games.Achievements.Reveal
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesAchievementsReveal@ which the
+-- | A resource alias for @GamesAchievementsReveal@ method which the
 -- 'AchievementsReveal'' request conforms to.
 type AchievementsRevealResource =
      "achievements" :>

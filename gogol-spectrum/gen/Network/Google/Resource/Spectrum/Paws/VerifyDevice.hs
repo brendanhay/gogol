@@ -47,7 +47,7 @@ module Network.Google.Resource.Spectrum.Paws.VerifyDevice
 import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
--- | A resource alias for @SpectrumPawsVerifyDevice@ which the
+-- | A resource alias for @SpectrumPawsVerifyDevice@ method which the
 -- 'PawsVerifyDevice'' request conforms to.
 type PawsVerifyDeviceResource =
      "verifyDevice" :>

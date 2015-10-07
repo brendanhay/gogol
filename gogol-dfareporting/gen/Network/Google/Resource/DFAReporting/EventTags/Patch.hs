@@ -47,7 +47,7 @@ module Network.Google.Resource.DFAReporting.EventTags.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingEventTagsPatch@ which the
+-- | A resource alias for @DfareportingEventTagsPatch@ method which the
 -- 'EventTagsPatch'' request conforms to.
 type EventTagsPatchResource =
      "userprofiles" :>

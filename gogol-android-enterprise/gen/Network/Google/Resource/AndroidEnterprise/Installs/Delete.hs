@@ -50,7 +50,7 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Delete
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseInstallsDelete@ which the
+-- | A resource alias for @AndroidEnterpriseInstallsDelete@ method which the
 -- 'InstallsDelete'' request conforms to.
 type InstallsDeleteResource =
      "enterprises" :>

@@ -19,14 +19,10 @@
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference>
 module Network.Google.ReplicaPoolUpdater
     (
-    -- * API
+    -- * API Declaration
       ReplicaPoolUpdaterAPI
-    , replicaPoolUpdaterAPI
-    , replicaPoolUpdaterRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** ReplicapoolupdaterRollingUpdatesCancel
     , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Cancel
@@ -214,6 +210,7 @@ import           Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Compute Engine Instance Group Updater API service.
 type ReplicaPoolUpdaterAPI =
      RollingUpdatesInsertResource :<|>
        RollingUpdatesListResource
@@ -225,6 +222,3 @@ type ReplicaPoolUpdaterAPI =
        :<|> RollingUpdatesResumeResource
        :<|> ZoneOperationsListResource
        :<|> ZoneOperationsGetResource
-
-replicaPoolUpdaterAPI :: Proxy ReplicaPoolUpdaterAPI
-replicaPoolUpdaterAPI = Proxy

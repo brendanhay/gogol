@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/speed/docs/insights/v2/getting-started PageSpeed Insights API Reference>
 module Network.Google.PageSpeed
     (
-    -- * API
+    -- * API Declaration
       PageSpeedAPI
-    , pageSpeedAPI
-    , pageSpeedRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** PagespeedOnlinePagespeedAPIRunPagespeed
     , module Network.Google.Resource.PagespeedOnline.PagespeedAPI.RunPagespeed
@@ -145,7 +141,5 @@ import           Network.Google.Resource.PagespeedOnline.PagespeedAPI.RunPagespe
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the PageSpeed Insights API service.
 type PageSpeedAPI = PagespeedAPIRunPagespeedResource
-
-pageSpeedAPI :: Proxy PageSpeedAPI
-pageSpeedAPI = Proxy

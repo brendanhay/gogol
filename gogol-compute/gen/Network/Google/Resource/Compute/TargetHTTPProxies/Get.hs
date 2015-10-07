@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetHTTPProxiesGet@ which the
+-- | A resource alias for @ComputeTargetHTTPProxiesGet@ method which the
 -- 'TargetHTTPProxiesGet'' request conforms to.
 type TargetHTTPProxiesGetResource =
      Capture "project" Text :>

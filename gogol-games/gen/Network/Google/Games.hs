@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference>
 module Network.Google.Games
     (
-    -- * API
+    -- * API Declaration
       GamesAPI
-    , gamesAPI
-    , gamesRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** GamesAchievementDefinitionsList
     , module Network.Google.Resource.Games.AchievementDefinitions.List
@@ -1138,6 +1134,7 @@ import           Network.Google.Resource.Games.TurnBasedMatches.TakeTurn
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Play Game Services API service.
 type GamesAPI =
      RoomsListResource :<|> RoomsJoinResource :<|>
        RoomsGetResource
@@ -1190,6 +1187,3 @@ type GamesAPI =
        :<|> TurnBasedMatchesCancelResource
        :<|> ApplicationsGetResource
        :<|> ApplicationsPlayedResource
-
-gamesAPI :: Proxy GamesAPI
-gamesAPI = Proxy

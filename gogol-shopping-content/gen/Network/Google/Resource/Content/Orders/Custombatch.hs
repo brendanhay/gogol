@@ -45,7 +45,7 @@ module Network.Google.Resource.Content.Orders.Custombatch
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersCustombatch@ which the
+-- | A resource alias for @ContentOrdersCustombatch@ method which the
 -- 'OrdersCustombatch'' request conforms to.
 type OrdersCustombatchResource =
      "orders" :>

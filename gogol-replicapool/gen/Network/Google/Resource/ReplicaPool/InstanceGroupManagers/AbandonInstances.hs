@@ -50,7 +50,7 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.AbandonInstance
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
--- | A resource alias for @ReplicapoolInstanceGroupManagersAbandonInstances@ which the
+-- | A resource alias for @ReplicapoolInstanceGroupManagersAbandonInstances@ method which the
 -- 'InstanceGroupManagersAbandonInstances'' request conforms to.
 type InstanceGroupManagersAbandonInstancesResource =
      Capture "project" Text :>

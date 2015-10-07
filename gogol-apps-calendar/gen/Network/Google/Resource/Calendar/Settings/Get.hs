@@ -45,7 +45,7 @@ module Network.Google.Resource.Calendar.Settings.Get
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarSettingsGet@ which the
+-- | A resource alias for @CalendarSettingsGet@ method which the
 -- 'SettingsGet'' request conforms to.
 type SettingsGetResource =
      "users" :>

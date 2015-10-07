@@ -48,7 +48,7 @@ module Network.Google.Resource.CloudUserAccounts.Users.AddPublicKey
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsUsersAddPublicKey@ which the
+-- | A resource alias for @CloudUserAccountsUsersAddPublicKey@ method which the
 -- 'UsersAddPublicKey'' request conforms to.
 type UsersAddPublicKeyResource =
      Capture "project" Text :>

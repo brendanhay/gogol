@@ -46,7 +46,7 @@ module Network.Google.Resource.SQL.Users.List
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLUsersList@ which the
+-- | A resource alias for @SQLUsersList@ method which the
 -- 'UsersList'' request conforms to.
 type UsersListResource =
      "projects" :>

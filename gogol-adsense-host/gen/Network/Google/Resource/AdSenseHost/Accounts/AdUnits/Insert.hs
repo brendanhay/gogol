@@ -48,7 +48,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Insert
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAccountsAdUnitsInsert@ which the
+-- | A resource alias for @AdsensehostAccountsAdUnitsInsert@ method which the
 -- 'AccountsAdUnitsInsert'' request conforms to.
 type AccountsAdUnitsInsertResource =
      "accounts" :>

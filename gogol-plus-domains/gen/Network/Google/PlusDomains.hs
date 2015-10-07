@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference>
 module Network.Google.PlusDomains
     (
-    -- * API
+    -- * API Declaration
       PlusDomainsAPI
-    , plusDomainsAPI
-    , plusDomainsRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** PlusDomainsActivitiesGet
     , module Network.Google.Resource.PlusDomains.Activities.Get
@@ -625,6 +621,7 @@ import           Network.Google.Resource.PlusDomains.People.ListByCircle
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google+ Domains API service.
 type PlusDomainsAPI =
      ActivitiesInsertResource :<|> ActivitiesListResource
        :<|> ActivitiesGetResource
@@ -645,6 +642,3 @@ type PlusDomainsAPI =
        :<|> CirclesRemoveResource
        :<|> CirclesRemovePeopleResource
        :<|> CirclesUpdateResource
-
-plusDomainsAPI :: Proxy PlusDomainsAPI
-plusDomainsAPI = Proxy

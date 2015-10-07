@@ -54,7 +54,7 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Transition
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveBroadcastsTransition@ which the
+-- | A resource alias for @YouTubeLiveBroadcastsTransition@ method which the
 -- 'LiveBroadcastsTransition'' request conforms to.
 type LiveBroadcastsTransitionResource =
      "liveBroadcasts" :>

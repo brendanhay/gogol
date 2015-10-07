@@ -49,7 +49,7 @@ module Network.Google.Resource.Blogger.Pages.Update
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPagesUpdate@ which the
+-- | A resource alias for @BloggerPagesUpdate@ method which the
 -- 'PagesUpdate'' request conforms to.
 type PagesUpdateResource =
      "blogs" :>

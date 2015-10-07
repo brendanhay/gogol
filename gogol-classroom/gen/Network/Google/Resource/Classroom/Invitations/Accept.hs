@@ -57,7 +57,7 @@ module Network.Google.Resource.Classroom.Invitations.Accept
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomInvitationsAccept@ which the
+-- | A resource alias for @ClassroomInvitationsAccept@ method which the
 -- 'InvitationsAccept'' request conforms to.
 type InvitationsAcceptResource =
      "v1" :>

@@ -50,7 +50,7 @@ module Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLSSLCertsCreateEphemeral@ which the
+-- | A resource alias for @SQLSSLCertsCreateEphemeral@ method which the
 -- 'SSLCertsCreateEphemeral'' request conforms to.
 type SSLCertsCreateEphemeralResource =
      "projects" :>

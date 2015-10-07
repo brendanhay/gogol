@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTube.Watermarks.Unset
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeWatermarksUnset@ which the
+-- | A resource alias for @YouTubeWatermarksUnset@ method which the
 -- 'WatermarksUnset'' request conforms to.
 type WatermarksUnsetResource =
      "watermarks" :>

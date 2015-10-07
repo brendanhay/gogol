@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.InstanceGroups.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupsAggregatedList@ which the
+-- | A resource alias for @ComputeInstanceGroupsAggregatedList@ method which the
 -- 'InstanceGroupsAggregatedList'' request conforms to.
 type InstanceGroupsAggregatedListResource =
      Capture "project" Text :>

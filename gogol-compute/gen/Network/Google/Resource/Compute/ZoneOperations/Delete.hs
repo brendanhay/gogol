@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.ZoneOperations.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeZoneOperationsDelete@ which the
+-- | A resource alias for @ComputeZoneOperationsDelete@ method which the
 -- 'ZoneOperationsDelete'' request conforms to.
 type ZoneOperationsDeleteResource =
      Capture "project" Text :>

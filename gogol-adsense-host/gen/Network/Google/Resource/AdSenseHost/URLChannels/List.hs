@@ -47,7 +47,7 @@ module Network.Google.Resource.AdSenseHost.URLChannels.List
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostURLChannelsList@ which the
+-- | A resource alias for @AdsensehostURLChannelsList@ method which the
 -- 'URLChannelsList'' request conforms to.
 type URLChannelsListResource =
      "adclients" :>

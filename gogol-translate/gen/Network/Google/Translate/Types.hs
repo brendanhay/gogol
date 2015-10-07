@@ -15,7 +15,7 @@
 --
 module Network.Google.Translate.Types
     (
-    -- * Service URL
+    -- * Service Request
       translateRequest
 
     -- * TranslationsResource
@@ -60,7 +60,7 @@ import           Network.Google.Prelude
 import           Network.Google.Translate.Types.Product
 import           Network.Google.Translate.Types.Sum
 
--- | Default request referring to version 'v2' of the Translate API.
+-- | Default request referring to version 'v2' of the Translate API. This contains the host and root path used as a starting point for constructing service requests.
 translateRequest :: RequestBuilder
 translateRequest
   = defaultRequest "https://www.googleapis.com/"

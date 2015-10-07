@@ -45,7 +45,7 @@ module Network.Google.Resource.YouTubeAnalytics.BatchReportDefinitions.List
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
--- | A resource alias for @YouTubeAnalyticsBatchReportDefinitionsList@ which the
+-- | A resource alias for @YouTubeAnalyticsBatchReportDefinitionsList@ method which the
 -- 'BatchReportDefinitionsList'' request conforms to.
 type BatchReportDefinitionsListResource =
      "batchReportDefinitions" :>

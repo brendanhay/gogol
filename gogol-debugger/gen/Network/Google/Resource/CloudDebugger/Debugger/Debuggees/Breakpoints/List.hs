@@ -56,7 +56,7 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List
 import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudDebuggerDebuggerDebuggeesBreakpointsList@ which the
+-- | A resource alias for @CloudDebuggerDebuggerDebuggeesBreakpointsList@ method which the
 -- 'DebuggerDebuggeesBreakpointsList'' request conforms to.
 type DebuggerDebuggeesBreakpointsListResource =
      "v2" :>

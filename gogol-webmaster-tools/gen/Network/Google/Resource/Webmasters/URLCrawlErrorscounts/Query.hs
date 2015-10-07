@@ -49,7 +49,7 @@ module Network.Google.Resource.Webmasters.URLCrawlErrorscounts.Query
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersURLCrawlErrorscountsQuery@ which the
+-- | A resource alias for @WebmastersURLCrawlErrorscountsQuery@ method which the
 -- 'URLCrawlErrorscountsQuery'' request conforms to.
 type URLCrawlErrorscountsQueryResource =
      "sites" :>

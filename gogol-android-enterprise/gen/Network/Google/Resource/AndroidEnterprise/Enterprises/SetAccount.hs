@@ -47,7 +47,7 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEnterprisesSetAccount@ which the
+-- | A resource alias for @AndroidEnterpriseEnterprisesSetAccount@ method which the
 -- 'EnterprisesSetAccount'' request conforms to.
 type EnterprisesSetAccountResource =
      "enterprises" :>

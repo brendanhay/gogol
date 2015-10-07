@@ -52,7 +52,7 @@ module Network.Google.Resource.AppEngine.Apps.Get
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppEngineAppsGet@ which the
+-- | A resource alias for @AppEngineAppsGet@ method which the
 -- 'AppsGet'' request conforms to.
 type AppsGetResource =
      "v1beta4" :>

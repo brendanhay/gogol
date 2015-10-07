@@ -46,7 +46,7 @@ module Network.Google.Resource.SQL.Instances.StartReplica
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesStartReplica@ which the
+-- | A resource alias for @SQLInstancesStartReplica@ method which the
 -- 'InstancesStartReplica'' request conforms to.
 type InstancesStartReplicaResource =
      "projects" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Upda
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationLeaderboardConfigurationsUpdate@ which the
+-- | A resource alias for @GamesConfigurationLeaderboardConfigurationsUpdate@ method which the
 -- 'LeaderboardConfigurationsUpdate'' request conforms to.
 type LeaderboardConfigurationsUpdateResource =
      "leaderboards" :>

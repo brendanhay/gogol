@@ -55,7 +55,7 @@ module Network.Google.Resource.PubSub.Projects.Topics.Delete
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsTopicsDelete@ which the
+-- | A resource alias for @PubsubProjectsTopicsDelete@ method which the
 -- 'ProjectsTopicsDelete'' request conforms to.
 type ProjectsTopicsDeleteResource =
      "v1beta2" :>

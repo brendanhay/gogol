@@ -45,7 +45,7 @@ module Network.Google.Resource.AdSense.Alerts.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAlertsList@ which the
+-- | A resource alias for @AdsenseAlertsList@ method which the
 -- 'AlertsList'' request conforms to.
 type AlertsListResource =
      "alerts" :>

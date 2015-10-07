@@ -48,7 +48,7 @@ module Network.Google.Resource.ResourceViews.ZoneViews.GetService
 import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
--- | A resource alias for @ResourceviewsZoneViewsGetService@ which the
+-- | A resource alias for @ResourceviewsZoneViewsGetService@ method which the
 -- 'ZoneViewsGetService'' request conforms to.
 type ZoneViewsGetServiceResource =
      Capture "project" Text :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.Games.AchievementDefinitions.List
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesAchievementDefinitionsList@ which the
+-- | A resource alias for @GamesAchievementDefinitionsList@ method which the
 -- 'AchievementDefinitionsList'' request conforms to.
 type AchievementDefinitionsListResource =
      "achievements" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.Reseller.Subscriptions.Get
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerSubscriptionsGet@ which the
+-- | A resource alias for @ResellerSubscriptionsGet@ method which the
 -- 'SubscriptionsGet'' request conforms to.
 type SubscriptionsGetResource =
      "customers" :>

@@ -48,7 +48,7 @@ module Network.Google.Resource.Directory.ChromeosDevices.Patch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryChromeosDevicesPatch@ which the
+-- | A resource alias for @DirectoryChromeosDevicesPatch@ method which the
 -- 'ChromeosDevicesPatch'' request conforms to.
 type ChromeosDevicesPatchResource =
      "customer" :>

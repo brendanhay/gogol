@@ -47,7 +47,7 @@ module Network.Google.Resource.Reseller.Customers.Patch
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerCustomersPatch@ which the
+-- | A resource alias for @ResellerCustomersPatch@ method which the
 -- 'CustomersPatch'' request conforms to.
 type CustomersPatchResource =
      "customers" :>

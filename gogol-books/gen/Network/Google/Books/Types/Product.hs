@@ -137,76 +137,73 @@ instance ToJSON Annotations where
                   Just ("kind" .= _aKind), ("items" .=) <$> _aItems])
 
 --
--- /See:/ 'annotationsdata' smart constructor.
-data Annotationsdata = Annotationsdata
-    { _annTotalItems    :: !(Maybe Int32)
-    , _annNextPageToken :: !(Maybe Text)
-    , _annKind          :: !Text
-    , _annItems         :: !(Maybe [Annotationdata])
+-- /See:/ 'annotationsData' smart constructor.
+data AnnotationsData = AnnotationsData
+    { _adTotalItems    :: !(Maybe Int32)
+    , _adNextPageToken :: !(Maybe Text)
+    , _adKind          :: !Text
+    , _adItems         :: !(Maybe [AnnotationData])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Annotationsdata' with the minimum fields required to make a request.
+-- | Creates a value of 'AnnotationsData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'annTotalItems'
+-- * 'adTotalItems'
 --
--- * 'annNextPageToken'
+-- * 'adNextPageToken'
 --
--- * 'annKind'
+-- * 'adKind'
 --
--- * 'annItems'
-annotationsdata
-    :: Annotationsdata
-annotationsdata =
-    Annotationsdata
-    { _annTotalItems = Nothing
-    , _annNextPageToken = Nothing
-    , _annKind = "books#annotationsdata"
-    , _annItems = Nothing
+-- * 'adItems'
+annotationsData
+    :: AnnotationsData
+annotationsData =
+    AnnotationsData
+    { _adTotalItems = Nothing
+    , _adNextPageToken = Nothing
+    , _adKind = "books#annotationsdata"
+    , _adItems = Nothing
     }
 
 -- | The total number of volume annotations found.
-annTotalItems :: Lens' Annotationsdata (Maybe Int32)
-annTotalItems
-  = lens _annTotalItems
-      (\ s a -> s{_annTotalItems = a})
+adTotalItems :: Lens' AnnotationsData (Maybe Int32)
+adTotalItems
+  = lens _adTotalItems (\ s a -> s{_adTotalItems = a})
 
 -- | Token to pass in for pagination for the next page. This will not be
 -- present if this request does not have more results.
-annNextPageToken :: Lens' Annotationsdata (Maybe Text)
-annNextPageToken
-  = lens _annNextPageToken
-      (\ s a -> s{_annNextPageToken = a})
+adNextPageToken :: Lens' AnnotationsData (Maybe Text)
+adNextPageToken
+  = lens _adNextPageToken
+      (\ s a -> s{_adNextPageToken = a})
 
 -- | Resource type
-annKind :: Lens' Annotationsdata Text
-annKind = lens _annKind (\ s a -> s{_annKind = a})
+adKind :: Lens' AnnotationsData Text
+adKind = lens _adKind (\ s a -> s{_adKind = a})
 
 -- | A list of Annotation Data.
-annItems :: Lens' Annotationsdata [Annotationdata]
-annItems
-  = lens _annItems (\ s a -> s{_annItems = a}) .
-      _Default
+adItems :: Lens' AnnotationsData [AnnotationData]
+adItems
+  = lens _adItems (\ s a -> s{_adItems = a}) . _Default
       . _Coerce
 
-instance FromJSON Annotationsdata where
+instance FromJSON AnnotationsData where
         parseJSON
-          = withObject "Annotationsdata"
+          = withObject "AnnotationsData"
               (\ o ->
-                 Annotationsdata <$>
+                 AnnotationsData <$>
                    (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "books#annotationsdata")
                      <*> (o .:? "items" .!= mempty))
 
-instance ToJSON Annotationsdata where
-        toJSON Annotationsdata{..}
+instance ToJSON AnnotationsData where
+        toJSON AnnotationsData{..}
           = object
               (catMaybes
-                 [("totalItems" .=) <$> _annTotalItems,
-                  ("nextPageToken" .=) <$> _annNextPageToken,
-                  Just ("kind" .= _annKind),
-                  ("items" .=) <$> _annItems])
+                 [("totalItems" .=) <$> _adTotalItems,
+                  ("nextPageToken" .=) <$> _adNextPageToken,
+                  Just ("kind" .= _adKind), ("items" .=) <$> _adItems])
 
 --
 -- /See:/ 'volumeannotations' smart constructor.
@@ -351,105 +348,105 @@ instance ToJSON ReviewSource where
                   ("description" .=) <$> _rsDescription])
 
 --
--- /See:/ 'annotationdata' smart constructor.
-data Annotationdata = Annotationdata
-    { _aaEncodedData    :: !(Maybe Word8)
-    , _aaKind           :: !Text
-    , _aaData           :: !(Maybe JSONValue)
-    , _aaSelfLink       :: !(Maybe Text)
-    , _aaAnnotationType :: !(Maybe Text)
-    , _aaVolumeId       :: !(Maybe Text)
-    , _aaId             :: !(Maybe Text)
-    , _aaUpdated        :: !(Maybe DateTime')
-    , _aaLayerId        :: !(Maybe Text)
+-- /See:/ 'annotationData' smart constructor.
+data AnnotationData = AnnotationData
+    { _annEncodedData    :: !(Maybe Word8)
+    , _annKind           :: !Text
+    , _annData           :: !(Maybe JSONValue)
+    , _annSelfLink       :: !(Maybe Text)
+    , _annAnnotationType :: !(Maybe Text)
+    , _annVolumeId       :: !(Maybe Text)
+    , _annId             :: !(Maybe Text)
+    , _annUpdated        :: !(Maybe DateTime')
+    , _annLayerId        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Annotationdata' with the minimum fields required to make a request.
+-- | Creates a value of 'AnnotationData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aaEncodedData'
+-- * 'annEncodedData'
 --
--- * 'aaKind'
+-- * 'annKind'
 --
--- * 'aaData'
+-- * 'annData'
 --
--- * 'aaSelfLink'
+-- * 'annSelfLink'
 --
--- * 'aaAnnotationType'
+-- * 'annAnnotationType'
 --
--- * 'aaVolumeId'
+-- * 'annVolumeId'
 --
--- * 'aaId'
+-- * 'annId'
 --
--- * 'aaUpdated'
+-- * 'annUpdated'
 --
--- * 'aaLayerId'
-annotationdata
-    :: Annotationdata
-annotationdata =
-    Annotationdata
-    { _aaEncodedData = Nothing
-    , _aaKind = "books#annotationdata"
-    , _aaData = Nothing
-    , _aaSelfLink = Nothing
-    , _aaAnnotationType = Nothing
-    , _aaVolumeId = Nothing
-    , _aaId = Nothing
-    , _aaUpdated = Nothing
-    , _aaLayerId = Nothing
+-- * 'annLayerId'
+annotationData
+    :: AnnotationData
+annotationData =
+    AnnotationData
+    { _annEncodedData = Nothing
+    , _annKind = "books#annotationdata"
+    , _annData = Nothing
+    , _annSelfLink = Nothing
+    , _annAnnotationType = Nothing
+    , _annVolumeId = Nothing
+    , _annId = Nothing
+    , _annUpdated = Nothing
+    , _annLayerId = Nothing
     }
 
 -- | Base64 encoded data for this annotation data.
-aaEncodedData :: Lens' Annotationdata (Maybe Word8)
-aaEncodedData
-  = lens _aaEncodedData
-      (\ s a -> s{_aaEncodedData = a})
+annEncodedData :: Lens' AnnotationData (Maybe Word8)
+annEncodedData
+  = lens _annEncodedData
+      (\ s a -> s{_annEncodedData = a})
 
 -- | Resource Type
-aaKind :: Lens' Annotationdata Text
-aaKind = lens _aaKind (\ s a -> s{_aaKind = a})
+annKind :: Lens' AnnotationData Text
+annKind = lens _annKind (\ s a -> s{_annKind = a})
 
-aaData :: Lens' Annotationdata (Maybe JSONValue)
-aaData = lens _aaData (\ s a -> s{_aaData = a})
+annData :: Lens' AnnotationData (Maybe JSONValue)
+annData = lens _annData (\ s a -> s{_annData = a})
 
 -- | URL for this resource. *
-aaSelfLink :: Lens' Annotationdata (Maybe Text)
-aaSelfLink
-  = lens _aaSelfLink (\ s a -> s{_aaSelfLink = a})
+annSelfLink :: Lens' AnnotationData (Maybe Text)
+annSelfLink
+  = lens _annSelfLink (\ s a -> s{_annSelfLink = a})
 
 -- | The type of annotation this data is for.
-aaAnnotationType :: Lens' Annotationdata (Maybe Text)
-aaAnnotationType
-  = lens _aaAnnotationType
-      (\ s a -> s{_aaAnnotationType = a})
+annAnnotationType :: Lens' AnnotationData (Maybe Text)
+annAnnotationType
+  = lens _annAnnotationType
+      (\ s a -> s{_annAnnotationType = a})
 
 -- | The volume id for this data. *
-aaVolumeId :: Lens' Annotationdata (Maybe Text)
-aaVolumeId
-  = lens _aaVolumeId (\ s a -> s{_aaVolumeId = a})
+annVolumeId :: Lens' AnnotationData (Maybe Text)
+annVolumeId
+  = lens _annVolumeId (\ s a -> s{_annVolumeId = a})
 
 -- | Unique id for this annotation data.
-aaId :: Lens' Annotationdata (Maybe Text)
-aaId = lens _aaId (\ s a -> s{_aaId = a})
+annId :: Lens' AnnotationData (Maybe Text)
+annId = lens _annId (\ s a -> s{_annId = a})
 
 -- | Timestamp for the last time this data was updated. (RFC 3339 UTC
 -- date-time format).
-aaUpdated :: Lens' Annotationdata (Maybe UTCTime)
-aaUpdated
-  = lens _aaUpdated (\ s a -> s{_aaUpdated = a}) .
+annUpdated :: Lens' AnnotationData (Maybe UTCTime)
+annUpdated
+  = lens _annUpdated (\ s a -> s{_annUpdated = a}) .
       mapping _DateTime
 
 -- | The Layer id for this data. *
-aaLayerId :: Lens' Annotationdata (Maybe Text)
-aaLayerId
-  = lens _aaLayerId (\ s a -> s{_aaLayerId = a})
+annLayerId :: Lens' AnnotationData (Maybe Text)
+annLayerId
+  = lens _annLayerId (\ s a -> s{_annLayerId = a})
 
-instance FromJSON Annotationdata where
+instance FromJSON AnnotationData where
         parseJSON
-          = withObject "Annotationdata"
+          = withObject "AnnotationData"
               (\ o ->
-                 Annotationdata <$>
+                 AnnotationData <$>
                    (o .:? "encoded_data") <*>
                      (o .:? "kind" .!= "books#annotationdata")
                      <*> (o .:? "data")
@@ -460,17 +457,17 @@ instance FromJSON Annotationdata where
                      <*> (o .:? "updated")
                      <*> (o .:? "layerId"))
 
-instance ToJSON Annotationdata where
-        toJSON Annotationdata{..}
+instance ToJSON AnnotationData where
+        toJSON AnnotationData{..}
           = object
               (catMaybes
-                 [("encoded_data" .=) <$> _aaEncodedData,
-                  Just ("kind" .= _aaKind), ("data" .=) <$> _aaData,
-                  ("selfLink" .=) <$> _aaSelfLink,
-                  ("annotationType" .=) <$> _aaAnnotationType,
-                  ("volumeId" .=) <$> _aaVolumeId, ("id" .=) <$> _aaId,
-                  ("updated" .=) <$> _aaUpdated,
-                  ("layerId" .=) <$> _aaLayerId])
+                 [("encoded_data" .=) <$> _annEncodedData,
+                  Just ("kind" .= _annKind), ("data" .=) <$> _annData,
+                  ("selfLink" .=) <$> _annSelfLink,
+                  ("annotationType" .=) <$> _annAnnotationType,
+                  ("volumeId" .=) <$> _annVolumeId,
+                  ("id" .=) <$> _annId, ("updated" .=) <$> _annUpdated,
+                  ("layerId" .=) <$> _annLayerId])
 
 --
 -- /See:/ 'volumeannotation' smart constructor.
@@ -723,178 +720,178 @@ instance ToJSON BooksCloudLoadingResource where
 --
 -- /See:/ 'annotation' smart constructor.
 data Annotation = Annotation
-    { _annnSelectedText         :: !(Maybe Text)
-    , _annnLayerSummary         :: !(Maybe AnnotationLayerSummary)
-    , _annnHighlightStyle       :: !(Maybe Text)
-    , _annnClientVersionRanges  :: !(Maybe AnnotationClientVersionRanges)
-    , _annnPageIds              :: !(Maybe [Text])
-    , _annnKind                 :: !Text
-    , _annnData                 :: !(Maybe Text)
-    , _annnCreated              :: !(Maybe DateTime')
-    , _annnAfterSelectedText    :: !(Maybe Text)
-    , _annnSelfLink             :: !(Maybe Text)
-    , _annnCurrentVersionRanges :: !(Maybe AnnotationCurrentVersionRanges)
-    , _annnVolumeId             :: !(Maybe Text)
-    , _annnBeforeSelectedText   :: !(Maybe Text)
-    , _annnId                   :: !(Maybe Text)
-    , _annnDeleted              :: !(Maybe Bool)
-    , _annnUpdated              :: !(Maybe DateTime')
-    , _annnLayerId              :: !(Maybe Text)
+    { _aaSelectedText         :: !(Maybe Text)
+    , _aaLayerSummary         :: !(Maybe AnnotationLayerSummary)
+    , _aaHighlightStyle       :: !(Maybe Text)
+    , _aaClientVersionRanges  :: !(Maybe AnnotationClientVersionRanges)
+    , _aaPageIds              :: !(Maybe [Text])
+    , _aaKind                 :: !Text
+    , _aaData                 :: !(Maybe Text)
+    , _aaCreated              :: !(Maybe DateTime')
+    , _aaAfterSelectedText    :: !(Maybe Text)
+    , _aaSelfLink             :: !(Maybe Text)
+    , _aaCurrentVersionRanges :: !(Maybe AnnotationCurrentVersionRanges)
+    , _aaVolumeId             :: !(Maybe Text)
+    , _aaBeforeSelectedText   :: !(Maybe Text)
+    , _aaId                   :: !(Maybe Text)
+    , _aaDeleted              :: !(Maybe Bool)
+    , _aaUpdated              :: !(Maybe DateTime')
+    , _aaLayerId              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Annotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'annnSelectedText'
+-- * 'aaSelectedText'
 --
--- * 'annnLayerSummary'
+-- * 'aaLayerSummary'
 --
--- * 'annnHighlightStyle'
+-- * 'aaHighlightStyle'
 --
--- * 'annnClientVersionRanges'
+-- * 'aaClientVersionRanges'
 --
--- * 'annnPageIds'
+-- * 'aaPageIds'
 --
--- * 'annnKind'
+-- * 'aaKind'
 --
--- * 'annnData'
+-- * 'aaData'
 --
--- * 'annnCreated'
+-- * 'aaCreated'
 --
--- * 'annnAfterSelectedText'
+-- * 'aaAfterSelectedText'
 --
--- * 'annnSelfLink'
+-- * 'aaSelfLink'
 --
--- * 'annnCurrentVersionRanges'
+-- * 'aaCurrentVersionRanges'
 --
--- * 'annnVolumeId'
+-- * 'aaVolumeId'
 --
--- * 'annnBeforeSelectedText'
+-- * 'aaBeforeSelectedText'
 --
--- * 'annnId'
+-- * 'aaId'
 --
--- * 'annnDeleted'
+-- * 'aaDeleted'
 --
--- * 'annnUpdated'
+-- * 'aaUpdated'
 --
--- * 'annnLayerId'
+-- * 'aaLayerId'
 annotation
     :: Annotation
 annotation =
     Annotation
-    { _annnSelectedText = Nothing
-    , _annnLayerSummary = Nothing
-    , _annnHighlightStyle = Nothing
-    , _annnClientVersionRanges = Nothing
-    , _annnPageIds = Nothing
-    , _annnKind = "books#annotation"
-    , _annnData = Nothing
-    , _annnCreated = Nothing
-    , _annnAfterSelectedText = Nothing
-    , _annnSelfLink = Nothing
-    , _annnCurrentVersionRanges = Nothing
-    , _annnVolumeId = Nothing
-    , _annnBeforeSelectedText = Nothing
-    , _annnId = Nothing
-    , _annnDeleted = Nothing
-    , _annnUpdated = Nothing
-    , _annnLayerId = Nothing
+    { _aaSelectedText = Nothing
+    , _aaLayerSummary = Nothing
+    , _aaHighlightStyle = Nothing
+    , _aaClientVersionRanges = Nothing
+    , _aaPageIds = Nothing
+    , _aaKind = "books#annotation"
+    , _aaData = Nothing
+    , _aaCreated = Nothing
+    , _aaAfterSelectedText = Nothing
+    , _aaSelfLink = Nothing
+    , _aaCurrentVersionRanges = Nothing
+    , _aaVolumeId = Nothing
+    , _aaBeforeSelectedText = Nothing
+    , _aaId = Nothing
+    , _aaDeleted = Nothing
+    , _aaUpdated = Nothing
+    , _aaLayerId = Nothing
     }
 
 -- | Excerpt from the volume.
-annnSelectedText :: Lens' Annotation (Maybe Text)
-annnSelectedText
-  = lens _annnSelectedText
-      (\ s a -> s{_annnSelectedText = a})
+aaSelectedText :: Lens' Annotation (Maybe Text)
+aaSelectedText
+  = lens _aaSelectedText
+      (\ s a -> s{_aaSelectedText = a})
 
-annnLayerSummary :: Lens' Annotation (Maybe AnnotationLayerSummary)
-annnLayerSummary
-  = lens _annnLayerSummary
-      (\ s a -> s{_annnLayerSummary = a})
+aaLayerSummary :: Lens' Annotation (Maybe AnnotationLayerSummary)
+aaLayerSummary
+  = lens _aaLayerSummary
+      (\ s a -> s{_aaLayerSummary = a})
 
 -- | The highlight style for this annotation.
-annnHighlightStyle :: Lens' Annotation (Maybe Text)
-annnHighlightStyle
-  = lens _annnHighlightStyle
-      (\ s a -> s{_annnHighlightStyle = a})
+aaHighlightStyle :: Lens' Annotation (Maybe Text)
+aaHighlightStyle
+  = lens _aaHighlightStyle
+      (\ s a -> s{_aaHighlightStyle = a})
 
 -- | Selection ranges sent from the client.
-annnClientVersionRanges :: Lens' Annotation (Maybe AnnotationClientVersionRanges)
-annnClientVersionRanges
-  = lens _annnClientVersionRanges
-      (\ s a -> s{_annnClientVersionRanges = a})
+aaClientVersionRanges :: Lens' Annotation (Maybe AnnotationClientVersionRanges)
+aaClientVersionRanges
+  = lens _aaClientVersionRanges
+      (\ s a -> s{_aaClientVersionRanges = a})
 
 -- | Pages that this annotation spans.
-annnPageIds :: Lens' Annotation [Text]
-annnPageIds
-  = lens _annnPageIds (\ s a -> s{_annnPageIds = a}) .
+aaPageIds :: Lens' Annotation [Text]
+aaPageIds
+  = lens _aaPageIds (\ s a -> s{_aaPageIds = a}) .
       _Default
       . _Coerce
 
 -- | Resource type.
-annnKind :: Lens' Annotation Text
-annnKind = lens _annnKind (\ s a -> s{_annnKind = a})
+aaKind :: Lens' Annotation Text
+aaKind = lens _aaKind (\ s a -> s{_aaKind = a})
 
 -- | User-created data for this annotation.
-annnData :: Lens' Annotation (Maybe Text)
-annnData = lens _annnData (\ s a -> s{_annnData = a})
+aaData :: Lens' Annotation (Maybe Text)
+aaData = lens _aaData (\ s a -> s{_aaData = a})
 
 -- | Timestamp for the created time of this annotation.
-annnCreated :: Lens' Annotation (Maybe UTCTime)
-annnCreated
-  = lens _annnCreated (\ s a -> s{_annnCreated = a}) .
+aaCreated :: Lens' Annotation (Maybe UTCTime)
+aaCreated
+  = lens _aaCreated (\ s a -> s{_aaCreated = a}) .
       mapping _DateTime
 
 -- | Anchor text after excerpt. For requests, if the user bookmarked a screen
 -- that has no flowing text on it, then this field should be empty.
-annnAfterSelectedText :: Lens' Annotation (Maybe Text)
-annnAfterSelectedText
-  = lens _annnAfterSelectedText
-      (\ s a -> s{_annnAfterSelectedText = a})
+aaAfterSelectedText :: Lens' Annotation (Maybe Text)
+aaAfterSelectedText
+  = lens _aaAfterSelectedText
+      (\ s a -> s{_aaAfterSelectedText = a})
 
 -- | URL to this resource.
-annnSelfLink :: Lens' Annotation (Maybe Text)
-annnSelfLink
-  = lens _annnSelfLink (\ s a -> s{_annnSelfLink = a})
+aaSelfLink :: Lens' Annotation (Maybe Text)
+aaSelfLink
+  = lens _aaSelfLink (\ s a -> s{_aaSelfLink = a})
 
 -- | Selection ranges for the most recent content version.
-annnCurrentVersionRanges :: Lens' Annotation (Maybe AnnotationCurrentVersionRanges)
-annnCurrentVersionRanges
-  = lens _annnCurrentVersionRanges
-      (\ s a -> s{_annnCurrentVersionRanges = a})
+aaCurrentVersionRanges :: Lens' Annotation (Maybe AnnotationCurrentVersionRanges)
+aaCurrentVersionRanges
+  = lens _aaCurrentVersionRanges
+      (\ s a -> s{_aaCurrentVersionRanges = a})
 
 -- | The volume that this annotation belongs to.
-annnVolumeId :: Lens' Annotation (Maybe Text)
-annnVolumeId
-  = lens _annnVolumeId (\ s a -> s{_annnVolumeId = a})
+aaVolumeId :: Lens' Annotation (Maybe Text)
+aaVolumeId
+  = lens _aaVolumeId (\ s a -> s{_aaVolumeId = a})
 
 -- | Anchor text before excerpt. For requests, if the user bookmarked a
 -- screen that has no flowing text on it, then this field should be empty.
-annnBeforeSelectedText :: Lens' Annotation (Maybe Text)
-annnBeforeSelectedText
-  = lens _annnBeforeSelectedText
-      (\ s a -> s{_annnBeforeSelectedText = a})
+aaBeforeSelectedText :: Lens' Annotation (Maybe Text)
+aaBeforeSelectedText
+  = lens _aaBeforeSelectedText
+      (\ s a -> s{_aaBeforeSelectedText = a})
 
 -- | Id of this annotation, in the form of a GUID.
-annnId :: Lens' Annotation (Maybe Text)
-annnId = lens _annnId (\ s a -> s{_annnId = a})
+aaId :: Lens' Annotation (Maybe Text)
+aaId = lens _aaId (\ s a -> s{_aaId = a})
 
 -- | Indicates that this annotation is deleted.
-annnDeleted :: Lens' Annotation (Maybe Bool)
-annnDeleted
-  = lens _annnDeleted (\ s a -> s{_annnDeleted = a})
+aaDeleted :: Lens' Annotation (Maybe Bool)
+aaDeleted
+  = lens _aaDeleted (\ s a -> s{_aaDeleted = a})
 
 -- | Timestamp for the last time this annotation was modified.
-annnUpdated :: Lens' Annotation (Maybe UTCTime)
-annnUpdated
-  = lens _annnUpdated (\ s a -> s{_annnUpdated = a}) .
+aaUpdated :: Lens' Annotation (Maybe UTCTime)
+aaUpdated
+  = lens _aaUpdated (\ s a -> s{_aaUpdated = a}) .
       mapping _DateTime
 
 -- | The layer this annotation is for.
-annnLayerId :: Lens' Annotation (Maybe Text)
-annnLayerId
-  = lens _annnLayerId (\ s a -> s{_annnLayerId = a})
+aaLayerId :: Lens' Annotation (Maybe Text)
+aaLayerId
+  = lens _aaLayerId (\ s a -> s{_aaLayerId = a})
 
 instance FromJSON Annotation where
         parseJSON
@@ -922,26 +919,23 @@ instance ToJSON Annotation where
         toJSON Annotation{..}
           = object
               (catMaybes
-                 [("selectedText" .=) <$> _annnSelectedText,
-                  ("layerSummary" .=) <$> _annnLayerSummary,
-                  ("highlightStyle" .=) <$> _annnHighlightStyle,
+                 [("selectedText" .=) <$> _aaSelectedText,
+                  ("layerSummary" .=) <$> _aaLayerSummary,
+                  ("highlightStyle" .=) <$> _aaHighlightStyle,
                   ("clientVersionRanges" .=) <$>
-                    _annnClientVersionRanges,
-                  ("pageIds" .=) <$> _annnPageIds,
-                  Just ("kind" .= _annnKind),
-                  ("data" .=) <$> _annnData,
-                  ("created" .=) <$> _annnCreated,
-                  ("afterSelectedText" .=) <$> _annnAfterSelectedText,
-                  ("selfLink" .=) <$> _annnSelfLink,
+                    _aaClientVersionRanges,
+                  ("pageIds" .=) <$> _aaPageIds,
+                  Just ("kind" .= _aaKind), ("data" .=) <$> _aaData,
+                  ("created" .=) <$> _aaCreated,
+                  ("afterSelectedText" .=) <$> _aaAfterSelectedText,
+                  ("selfLink" .=) <$> _aaSelfLink,
                   ("currentVersionRanges" .=) <$>
-                    _annnCurrentVersionRanges,
-                  ("volumeId" .=) <$> _annnVolumeId,
-                  ("beforeSelectedText" .=) <$>
-                    _annnBeforeSelectedText,
-                  ("id" .=) <$> _annnId,
-                  ("deleted" .=) <$> _annnDeleted,
-                  ("updated" .=) <$> _annnUpdated,
-                  ("layerId" .=) <$> _annnLayerId])
+                    _aaCurrentVersionRanges,
+                  ("volumeId" .=) <$> _aaVolumeId,
+                  ("beforeSelectedText" .=) <$> _aaBeforeSelectedText,
+                  ("id" .=) <$> _aaId, ("deleted" .=) <$> _aaDeleted,
+                  ("updated" .=) <$> _aaUpdated,
+                  ("layerId" .=) <$> _aaLayerId])
 
 -- | Author of this review.
 --
@@ -981,45 +975,45 @@ instance ToJSON ReviewAuthor where
 -- | The viewport for showing this location. This is a latitude, longitude
 -- rectangle.
 --
--- /See:/ 'geolayerdataGeoViewport' smart constructor.
-data GeolayerdataGeoViewport = GeolayerdataGeoViewport
-    { _ggvHi :: !(Maybe GeolayerdataGeoViewportHi)
-    , _ggvLo :: !(Maybe GeolayerdataGeoViewportLo)
+-- /See:/ 'geolayerDataGeoViewport' smart constructor.
+data GeolayerDataGeoViewport = GeolayerDataGeoViewport
+    { _gdgvHi :: !(Maybe GeolayerDataGeoViewportHi)
+    , _gdgvLo :: !(Maybe GeolayerDataGeoViewportLo)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GeolayerdataGeoViewport' with the minimum fields required to make a request.
+-- | Creates a value of 'GeolayerDataGeoViewport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ggvHi'
+-- * 'gdgvHi'
 --
--- * 'ggvLo'
-geolayerdataGeoViewport
-    :: GeolayerdataGeoViewport
-geolayerdataGeoViewport =
-    GeolayerdataGeoViewport
-    { _ggvHi = Nothing
-    , _ggvLo = Nothing
+-- * 'gdgvLo'
+geolayerDataGeoViewport
+    :: GeolayerDataGeoViewport
+geolayerDataGeoViewport =
+    GeolayerDataGeoViewport
+    { _gdgvHi = Nothing
+    , _gdgvLo = Nothing
     }
 
-ggvHi :: Lens' GeolayerdataGeoViewport (Maybe GeolayerdataGeoViewportHi)
-ggvHi = lens _ggvHi (\ s a -> s{_ggvHi = a})
+gdgvHi :: Lens' GeolayerDataGeoViewport (Maybe GeolayerDataGeoViewportHi)
+gdgvHi = lens _gdgvHi (\ s a -> s{_gdgvHi = a})
 
-ggvLo :: Lens' GeolayerdataGeoViewport (Maybe GeolayerdataGeoViewportLo)
-ggvLo = lens _ggvLo (\ s a -> s{_ggvLo = a})
+gdgvLo :: Lens' GeolayerDataGeoViewport (Maybe GeolayerDataGeoViewportLo)
+gdgvLo = lens _gdgvLo (\ s a -> s{_gdgvLo = a})
 
-instance FromJSON GeolayerdataGeoViewport where
+instance FromJSON GeolayerDataGeoViewport where
         parseJSON
-          = withObject "GeolayerdataGeoViewport"
+          = withObject "GeolayerDataGeoViewport"
               (\ o ->
-                 GeolayerdataGeoViewport <$>
+                 GeolayerDataGeoViewport <$>
                    (o .:? "hi") <*> (o .:? "lo"))
 
-instance ToJSON GeolayerdataGeoViewport where
-        toJSON GeolayerdataGeoViewport{..}
+instance ToJSON GeolayerDataGeoViewport where
+        toJSON GeolayerDataGeoViewport{..}
           = object
               (catMaybes
-                 [("hi" .=) <$> _ggvHi, ("lo" .=) <$> _ggvLo])
+                 [("hi" .=) <$> _gdgvHi, ("lo" .=) <$> _gdgvLo])
 
 -- | User specific information related to this volume. (e.g. page this user
 -- last read or whether they purchased this book)
@@ -2152,50 +2146,51 @@ instance ToJSON
                   ("unit" .=) <$> _vsioirdUnit])
 
 --
--- /See:/ 'dictlayerdataDictWordsItemExamplesItem' smart constructor.
-data DictlayerdataDictWordsItemExamplesItem = DictlayerdataDictWordsItemExamplesItem
-    { _ddwieiText   :: !(Maybe Text)
-    , _ddwieiSource :: !(Maybe DictlayerdataDictWordsItemExamplesItemSource)
+-- /See:/ 'dictlayerDataDictWordsItemExamplesItem' smart constructor.
+data DictlayerDataDictWordsItemExamplesItem = DictlayerDataDictWordsItemExamplesItem
+    { _dddwieiText   :: !(Maybe Text)
+    , _dddwieiSource :: !(Maybe DictlayerDataDictWordsItemExamplesItemSource)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsItemExamplesItem' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataDictWordsItemExamplesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwieiText'
+-- * 'dddwieiText'
 --
--- * 'ddwieiSource'
-dictlayerdataDictWordsItemExamplesItem
-    :: DictlayerdataDictWordsItemExamplesItem
-dictlayerdataDictWordsItemExamplesItem =
-    DictlayerdataDictWordsItemExamplesItem
-    { _ddwieiText = Nothing
-    , _ddwieiSource = Nothing
+-- * 'dddwieiSource'
+dictlayerDataDictWordsItemExamplesItem
+    :: DictlayerDataDictWordsItemExamplesItem
+dictlayerDataDictWordsItemExamplesItem =
+    DictlayerDataDictWordsItemExamplesItem
+    { _dddwieiText = Nothing
+    , _dddwieiSource = Nothing
     }
 
-ddwieiText :: Lens' DictlayerdataDictWordsItemExamplesItem (Maybe Text)
-ddwieiText
-  = lens _ddwieiText (\ s a -> s{_ddwieiText = a})
+dddwieiText :: Lens' DictlayerDataDictWordsItemExamplesItem (Maybe Text)
+dddwieiText
+  = lens _dddwieiText (\ s a -> s{_dddwieiText = a})
 
-ddwieiSource :: Lens' DictlayerdataDictWordsItemExamplesItem (Maybe DictlayerdataDictWordsItemExamplesItemSource)
-ddwieiSource
-  = lens _ddwieiSource (\ s a -> s{_ddwieiSource = a})
+dddwieiSource :: Lens' DictlayerDataDictWordsItemExamplesItem (Maybe DictlayerDataDictWordsItemExamplesItemSource)
+dddwieiSource
+  = lens _dddwieiSource
+      (\ s a -> s{_dddwieiSource = a})
 
 instance FromJSON
-         DictlayerdataDictWordsItemExamplesItem where
+         DictlayerDataDictWordsItemExamplesItem where
         parseJSON
-          = withObject "DictlayerdataDictWordsItemExamplesItem"
+          = withObject "DictlayerDataDictWordsItemExamplesItem"
               (\ o ->
-                 DictlayerdataDictWordsItemExamplesItem <$>
+                 DictlayerDataDictWordsItemExamplesItem <$>
                    (o .:? "text") <*> (o .:? "source"))
 
 instance ToJSON
-         DictlayerdataDictWordsItemExamplesItem where
-        toJSON DictlayerdataDictWordsItemExamplesItem{..}
+         DictlayerDataDictWordsItemExamplesItem where
+        toJSON DictlayerDataDictWordsItemExamplesItem{..}
           = object
               (catMaybes
-                 [("text" .=) <$> _ddwieiText,
-                  ("source" .=) <$> _ddwieiSource])
+                 [("text" .=) <$> _dddwieiText,
+                  ("source" .=) <$> _dddwieiSource])
 
 --
 -- /See:/ 'offersItemsItem' smart constructor.
@@ -2604,51 +2599,51 @@ instance ToJSON Volume where
                   ("volumeInfo" .=) <$> _vvVolumeInfo])
 
 --
--- /See:/ 'geolayerdataGeoBoundaryItemItem' smart constructor.
-data GeolayerdataGeoBoundaryItemItem = GeolayerdataGeoBoundaryItemItem
-    { _ggbiiLatitude  :: !(Maybe Word32)
-    , _ggbiiLongitude :: !(Maybe Word32)
+-- /See:/ 'geolayerDataGeoBoundaryItemItem' smart constructor.
+data GeolayerDataGeoBoundaryItemItem = GeolayerDataGeoBoundaryItemItem
+    { _gdgbiiLatitude  :: !(Maybe Word32)
+    , _gdgbiiLongitude :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GeolayerdataGeoBoundaryItemItem' with the minimum fields required to make a request.
+-- | Creates a value of 'GeolayerDataGeoBoundaryItemItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ggbiiLatitude'
+-- * 'gdgbiiLatitude'
 --
--- * 'ggbiiLongitude'
-geolayerdataGeoBoundaryItemItem
-    :: GeolayerdataGeoBoundaryItemItem
-geolayerdataGeoBoundaryItemItem =
-    GeolayerdataGeoBoundaryItemItem
-    { _ggbiiLatitude = Nothing
-    , _ggbiiLongitude = Nothing
+-- * 'gdgbiiLongitude'
+geolayerDataGeoBoundaryItemItem
+    :: GeolayerDataGeoBoundaryItemItem
+geolayerDataGeoBoundaryItemItem =
+    GeolayerDataGeoBoundaryItemItem
+    { _gdgbiiLatitude = Nothing
+    , _gdgbiiLongitude = Nothing
     }
 
-ggbiiLatitude :: Lens' GeolayerdataGeoBoundaryItemItem (Maybe Word32)
-ggbiiLatitude
-  = lens _ggbiiLatitude
-      (\ s a -> s{_ggbiiLatitude = a})
+gdgbiiLatitude :: Lens' GeolayerDataGeoBoundaryItemItem (Maybe Word32)
+gdgbiiLatitude
+  = lens _gdgbiiLatitude
+      (\ s a -> s{_gdgbiiLatitude = a})
 
-ggbiiLongitude :: Lens' GeolayerdataGeoBoundaryItemItem (Maybe Word32)
-ggbiiLongitude
-  = lens _ggbiiLongitude
-      (\ s a -> s{_ggbiiLongitude = a})
+gdgbiiLongitude :: Lens' GeolayerDataGeoBoundaryItemItem (Maybe Word32)
+gdgbiiLongitude
+  = lens _gdgbiiLongitude
+      (\ s a -> s{_gdgbiiLongitude = a})
 
-instance FromJSON GeolayerdataGeoBoundaryItemItem
+instance FromJSON GeolayerDataGeoBoundaryItemItem
          where
         parseJSON
-          = withObject "GeolayerdataGeoBoundaryItemItem"
+          = withObject "GeolayerDataGeoBoundaryItemItem"
               (\ o ->
-                 GeolayerdataGeoBoundaryItemItem <$>
+                 GeolayerDataGeoBoundaryItemItem <$>
                    (o .:? "latitude") <*> (o .:? "longitude"))
 
-instance ToJSON GeolayerdataGeoBoundaryItemItem where
-        toJSON GeolayerdataGeoBoundaryItemItem{..}
+instance ToJSON GeolayerDataGeoBoundaryItemItem where
+        toJSON GeolayerDataGeoBoundaryItemItem{..}
           = object
               (catMaybes
-                 [("latitude" .=) <$> _ggbiiLatitude,
-                  ("longitude" .=) <$> _ggbiiLongitude])
+                 [("latitude" .=) <$> _gdgbiiLatitude,
+                  ("longitude" .=) <$> _gdgbiiLongitude])
 
 --
 -- /See:/ 'offersItemsItemItemsItem' smart constructor.
@@ -2740,236 +2735,237 @@ instance ToJSON OffersItemsItemItemsItem where
                   ("description" .=) <$> _oiiiiDescription])
 
 --
--- /See:/ 'dictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource' smart constructor.
-data DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource = DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
-    { _ddwisidieisURL         :: !(Maybe Text)
-    , _ddwisidieisAttribution :: !(Maybe Text)
+-- /See:/ 'dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource' smart constructor.
+data DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource = DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
+    { _dddwisidieisURL         :: !(Maybe Text)
+    , _dddwisidieisAttribution :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwisidieisURL'
+-- * 'dddwisidieisURL'
 --
--- * 'ddwisidieisAttribution'
-dictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
-    :: DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
-dictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource =
-    DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
-    { _ddwisidieisURL = Nothing
-    , _ddwisidieisAttribution = Nothing
+-- * 'dddwisidieisAttribution'
+dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
+    :: DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
+dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource =
+    DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
+    { _dddwisidieisURL = Nothing
+    , _dddwisidieisAttribution = Nothing
     }
 
-ddwisidieisURL :: Lens' DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource (Maybe Text)
-ddwisidieisURL
-  = lens _ddwisidieisURL
-      (\ s a -> s{_ddwisidieisURL = a})
+dddwisidieisURL :: Lens' DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource (Maybe Text)
+dddwisidieisURL
+  = lens _dddwisidieisURL
+      (\ s a -> s{_dddwisidieisURL = a})
 
-ddwisidieisAttribution :: Lens' DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource (Maybe Text)
-ddwisidieisAttribution
-  = lens _ddwisidieisAttribution
-      (\ s a -> s{_ddwisidieisAttribution = a})
+dddwisidieisAttribution :: Lens' DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource (Maybe Text)
+dddwisidieisAttribution
+  = lens _dddwisidieisAttribution
+      (\ s a -> s{_dddwisidieisAttribution = a})
 
 instance FromJSON
-         DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
+         DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
          where
         parseJSON
           = withObject
-              "DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource"
+              "DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource"
               (\ o ->
-                 DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
+                 DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
                    <$> (o .:? "url") <*> (o .:? "attribution"))
 
 instance ToJSON
-         DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
+         DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
          where
         toJSON
-          DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource{..}
+          DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _ddwisidieisURL,
-                  ("attribution" .=) <$> _ddwisidieisAttribution])
+                 [("url" .=) <$> _dddwisidieisURL,
+                  ("attribution" .=) <$> _dddwisidieisAttribution])
 
 --
--- /See:/ 'geolayerdataCommon' smart constructor.
-data GeolayerdataCommon = GeolayerdataCommon
-    { _gcSnippet         :: !(Maybe Text)
-    , _gcSnippetURL      :: !(Maybe Text)
-    , _gcLang            :: !(Maybe Text)
-    , _gcTitle           :: !(Maybe Text)
-    , _gcPreviewImageURL :: !(Maybe Text)
+-- /See:/ 'geolayerDataCommon' smart constructor.
+data GeolayerDataCommon = GeolayerDataCommon
+    { _gdcSnippet         :: !(Maybe Text)
+    , _gdcSnippetURL      :: !(Maybe Text)
+    , _gdcLang            :: !(Maybe Text)
+    , _gdcTitle           :: !(Maybe Text)
+    , _gdcPreviewImageURL :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GeolayerdataCommon' with the minimum fields required to make a request.
+-- | Creates a value of 'GeolayerDataCommon' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gcSnippet'
+-- * 'gdcSnippet'
 --
--- * 'gcSnippetURL'
+-- * 'gdcSnippetURL'
 --
--- * 'gcLang'
+-- * 'gdcLang'
 --
--- * 'gcTitle'
+-- * 'gdcTitle'
 --
--- * 'gcPreviewImageURL'
-geolayerdataCommon
-    :: GeolayerdataCommon
-geolayerdataCommon =
-    GeolayerdataCommon
-    { _gcSnippet = Nothing
-    , _gcSnippetURL = Nothing
-    , _gcLang = Nothing
-    , _gcTitle = Nothing
-    , _gcPreviewImageURL = Nothing
+-- * 'gdcPreviewImageURL'
+geolayerDataCommon
+    :: GeolayerDataCommon
+geolayerDataCommon =
+    GeolayerDataCommon
+    { _gdcSnippet = Nothing
+    , _gdcSnippetURL = Nothing
+    , _gdcLang = Nothing
+    , _gdcTitle = Nothing
+    , _gdcPreviewImageURL = Nothing
     }
 
 -- | The description for this location.
-gcSnippet :: Lens' GeolayerdataCommon (Maybe Text)
-gcSnippet
-  = lens _gcSnippet (\ s a -> s{_gcSnippet = a})
+gdcSnippet :: Lens' GeolayerDataCommon (Maybe Text)
+gdcSnippet
+  = lens _gdcSnippet (\ s a -> s{_gdcSnippet = a})
 
 -- | The URL for information for this location. Ex: wikipedia link.
-gcSnippetURL :: Lens' GeolayerdataCommon (Maybe Text)
-gcSnippetURL
-  = lens _gcSnippetURL (\ s a -> s{_gcSnippetURL = a})
+gdcSnippetURL :: Lens' GeolayerDataCommon (Maybe Text)
+gdcSnippetURL
+  = lens _gdcSnippetURL
+      (\ s a -> s{_gdcSnippetURL = a})
 
 -- | The language of the information url and description.
-gcLang :: Lens' GeolayerdataCommon (Maybe Text)
-gcLang = lens _gcLang (\ s a -> s{_gcLang = a})
+gdcLang :: Lens' GeolayerDataCommon (Maybe Text)
+gdcLang = lens _gdcLang (\ s a -> s{_gdcLang = a})
 
 -- | The display title and localized canonical name to use when searching for
 -- this entity on Google search.
-gcTitle :: Lens' GeolayerdataCommon (Maybe Text)
-gcTitle = lens _gcTitle (\ s a -> s{_gcTitle = a})
+gdcTitle :: Lens' GeolayerDataCommon (Maybe Text)
+gdcTitle = lens _gdcTitle (\ s a -> s{_gdcTitle = a})
 
 -- | The URL for the preview image information.
-gcPreviewImageURL :: Lens' GeolayerdataCommon (Maybe Text)
-gcPreviewImageURL
-  = lens _gcPreviewImageURL
-      (\ s a -> s{_gcPreviewImageURL = a})
+gdcPreviewImageURL :: Lens' GeolayerDataCommon (Maybe Text)
+gdcPreviewImageURL
+  = lens _gdcPreviewImageURL
+      (\ s a -> s{_gdcPreviewImageURL = a})
 
-instance FromJSON GeolayerdataCommon where
+instance FromJSON GeolayerDataCommon where
         parseJSON
-          = withObject "GeolayerdataCommon"
+          = withObject "GeolayerDataCommon"
               (\ o ->
-                 GeolayerdataCommon <$>
+                 GeolayerDataCommon <$>
                    (o .:? "snippet") <*> (o .:? "snippetUrl") <*>
                      (o .:? "lang")
                      <*> (o .:? "title")
                      <*> (o .:? "previewImageUrl"))
 
-instance ToJSON GeolayerdataCommon where
-        toJSON GeolayerdataCommon{..}
+instance ToJSON GeolayerDataCommon where
+        toJSON GeolayerDataCommon{..}
           = object
               (catMaybes
-                 [("snippet" .=) <$> _gcSnippet,
-                  ("snippetUrl" .=) <$> _gcSnippetURL,
-                  ("lang" .=) <$> _gcLang, ("title" .=) <$> _gcTitle,
-                  ("previewImageUrl" .=) <$> _gcPreviewImageURL])
+                 [("snippet" .=) <$> _gdcSnippet,
+                  ("snippetUrl" .=) <$> _gdcSnippetURL,
+                  ("lang" .=) <$> _gdcLang, ("title" .=) <$> _gdcTitle,
+                  ("previewImageUrl" .=) <$> _gdcPreviewImageURL])
 
 --
--- /See:/ 'geolayerdataGeo' smart constructor.
-data GeolayerdataGeo = GeolayerdataGeo
-    { _ggMapType     :: !(Maybe Text)
-    , _ggCachePolicy :: !(Maybe Text)
-    , _ggViewport    :: !(Maybe GeolayerdataGeoViewport)
-    , _ggBoundary    :: !(Maybe [[GeolayerdataGeoBoundaryItemItem]])
-    , _ggLatitude    :: !(Maybe Double)
-    , _ggZoom        :: !(Maybe Int32)
-    , _ggCountryCode :: !(Maybe Text)
-    , _ggLongitude   :: !(Maybe Double)
+-- /See:/ 'geolayerDataGeo' smart constructor.
+data GeolayerDataGeo = GeolayerDataGeo
+    { _gdgMapType     :: !(Maybe Text)
+    , _gdgCachePolicy :: !(Maybe Text)
+    , _gdgViewport    :: !(Maybe GeolayerDataGeoViewport)
+    , _gdgBoundary    :: !(Maybe [[GeolayerDataGeoBoundaryItemItem]])
+    , _gdgLatitude    :: !(Maybe Double)
+    , _gdgZoom        :: !(Maybe Int32)
+    , _gdgCountryCode :: !(Maybe Text)
+    , _gdgLongitude   :: !(Maybe Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GeolayerdataGeo' with the minimum fields required to make a request.
+-- | Creates a value of 'GeolayerDataGeo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ggMapType'
+-- * 'gdgMapType'
 --
--- * 'ggCachePolicy'
+-- * 'gdgCachePolicy'
 --
--- * 'ggViewport'
+-- * 'gdgViewport'
 --
--- * 'ggBoundary'
+-- * 'gdgBoundary'
 --
--- * 'ggLatitude'
+-- * 'gdgLatitude'
 --
--- * 'ggZoom'
+-- * 'gdgZoom'
 --
--- * 'ggCountryCode'
+-- * 'gdgCountryCode'
 --
--- * 'ggLongitude'
-geolayerdataGeo
-    :: GeolayerdataGeo
-geolayerdataGeo =
-    GeolayerdataGeo
-    { _ggMapType = Nothing
-    , _ggCachePolicy = Nothing
-    , _ggViewport = Nothing
-    , _ggBoundary = Nothing
-    , _ggLatitude = Nothing
-    , _ggZoom = Nothing
-    , _ggCountryCode = Nothing
-    , _ggLongitude = Nothing
+-- * 'gdgLongitude'
+geolayerDataGeo
+    :: GeolayerDataGeo
+geolayerDataGeo =
+    GeolayerDataGeo
+    { _gdgMapType = Nothing
+    , _gdgCachePolicy = Nothing
+    , _gdgViewport = Nothing
+    , _gdgBoundary = Nothing
+    , _gdgLatitude = Nothing
+    , _gdgZoom = Nothing
+    , _gdgCountryCode = Nothing
+    , _gdgLongitude = Nothing
     }
 
 -- | The type of map that should be used for this location. EX: HYBRID,
 -- ROADMAP, SATELLITE, TERRAIN
-ggMapType :: Lens' GeolayerdataGeo (Maybe Text)
-ggMapType
-  = lens _ggMapType (\ s a -> s{_ggMapType = a})
+gdgMapType :: Lens' GeolayerDataGeo (Maybe Text)
+gdgMapType
+  = lens _gdgMapType (\ s a -> s{_gdgMapType = a})
 
 -- | The cache policy active for this data. EX: UNRESTRICTED, RESTRICTED,
 -- NEVER
-ggCachePolicy :: Lens' GeolayerdataGeo (Maybe Text)
-ggCachePolicy
-  = lens _ggCachePolicy
-      (\ s a -> s{_ggCachePolicy = a})
+gdgCachePolicy :: Lens' GeolayerDataGeo (Maybe Text)
+gdgCachePolicy
+  = lens _gdgCachePolicy
+      (\ s a -> s{_gdgCachePolicy = a})
 
 -- | The viewport for showing this location. This is a latitude, longitude
 -- rectangle.
-ggViewport :: Lens' GeolayerdataGeo (Maybe GeolayerdataGeoViewport)
-ggViewport
-  = lens _ggViewport (\ s a -> s{_ggViewport = a})
+gdgViewport :: Lens' GeolayerDataGeo (Maybe GeolayerDataGeoViewport)
+gdgViewport
+  = lens _gdgViewport (\ s a -> s{_gdgViewport = a})
 
 -- | The boundary of the location as a set of loops containing pairs of
 -- latitude, longitude coordinates.
-ggBoundary :: Lens' GeolayerdataGeo [[GeolayerdataGeoBoundaryItemItem]]
-ggBoundary
-  = lens _ggBoundary (\ s a -> s{_ggBoundary = a}) .
+gdgBoundary :: Lens' GeolayerDataGeo [[GeolayerDataGeoBoundaryItemItem]]
+gdgBoundary
+  = lens _gdgBoundary (\ s a -> s{_gdgBoundary = a}) .
       _Default
       . _Coerce
 
 -- | The latitude of the location.
-ggLatitude :: Lens' GeolayerdataGeo (Maybe Double)
-ggLatitude
-  = lens _ggLatitude (\ s a -> s{_ggLatitude = a})
+gdgLatitude :: Lens' GeolayerDataGeo (Maybe Double)
+gdgLatitude
+  = lens _gdgLatitude (\ s a -> s{_gdgLatitude = a})
 
 -- | The Zoom level to use for the map. Zoom levels between 0 (the lowest
 -- zoom level, in which the entire world can be seen on one map) to 21+
 -- (down to individual buildings). See:
 -- https:\/\/developers.google.com\/maps\/documentation\/staticmaps\/#Zoomlevels
-ggZoom :: Lens' GeolayerdataGeo (Maybe Int32)
-ggZoom = lens _ggZoom (\ s a -> s{_ggZoom = a})
+gdgZoom :: Lens' GeolayerDataGeo (Maybe Int32)
+gdgZoom = lens _gdgZoom (\ s a -> s{_gdgZoom = a})
 
 -- | The country code of the location.
-ggCountryCode :: Lens' GeolayerdataGeo (Maybe Text)
-ggCountryCode
-  = lens _ggCountryCode
-      (\ s a -> s{_ggCountryCode = a})
+gdgCountryCode :: Lens' GeolayerDataGeo (Maybe Text)
+gdgCountryCode
+  = lens _gdgCountryCode
+      (\ s a -> s{_gdgCountryCode = a})
 
 -- | The longitude of the location.
-ggLongitude :: Lens' GeolayerdataGeo (Maybe Double)
-ggLongitude
-  = lens _ggLongitude (\ s a -> s{_ggLongitude = a})
+gdgLongitude :: Lens' GeolayerDataGeo (Maybe Double)
+gdgLongitude
+  = lens _gdgLongitude (\ s a -> s{_gdgLongitude = a})
 
-instance FromJSON GeolayerdataGeo where
+instance FromJSON GeolayerDataGeo where
         parseJSON
-          = withObject "GeolayerdataGeo"
+          = withObject "GeolayerDataGeo"
               (\ o ->
-                 GeolayerdataGeo <$>
+                 GeolayerDataGeo <$>
                    (o .:? "mapType") <*> (o .:? "cachePolicy") <*>
                      (o .:? "viewport")
                      <*> (o .:? "boundary" .!= mempty)
@@ -2978,91 +2974,92 @@ instance FromJSON GeolayerdataGeo where
                      <*> (o .:? "countryCode")
                      <*> (o .:? "longitude"))
 
-instance ToJSON GeolayerdataGeo where
-        toJSON GeolayerdataGeo{..}
+instance ToJSON GeolayerDataGeo where
+        toJSON GeolayerDataGeo{..}
           = object
               (catMaybes
-                 [("mapType" .=) <$> _ggMapType,
-                  ("cachePolicy" .=) <$> _ggCachePolicy,
-                  ("viewport" .=) <$> _ggViewport,
-                  ("boundary" .=) <$> _ggBoundary,
-                  ("latitude" .=) <$> _ggLatitude,
-                  ("zoom" .=) <$> _ggZoom,
-                  ("countryCode" .=) <$> _ggCountryCode,
-                  ("longitude" .=) <$> _ggLongitude])
+                 [("mapType" .=) <$> _gdgMapType,
+                  ("cachePolicy" .=) <$> _gdgCachePolicy,
+                  ("viewport" .=) <$> _gdgViewport,
+                  ("boundary" .=) <$> _gdgBoundary,
+                  ("latitude" .=) <$> _gdgLatitude,
+                  ("zoom" .=) <$> _gdgZoom,
+                  ("countryCode" .=) <$> _gdgCountryCode,
+                  ("longitude" .=) <$> _gdgLongitude])
 
 --
--- /See:/ 'dictlayerdataDictWordsItem' smart constructor.
-data DictlayerdataDictWordsItem = DictlayerdataDictWordsItem
-    { _ddwiSenses      :: !(Maybe [DictlayerdataDictWordsItemSensesItem])
-    , _ddwiSource      :: !(Maybe DictlayerdataDictWordsItemSource)
-    , _ddwiDerivatives :: !(Maybe [DictlayerdataDictWordsItemDerivativesItem])
-    , _ddwiExamples    :: !(Maybe [DictlayerdataDictWordsItemExamplesItem])
+-- /See:/ 'dictlayerDataDictWordsItem' smart constructor.
+data DictlayerDataDictWordsItem = DictlayerDataDictWordsItem
+    { _dddwiSenses      :: !(Maybe [DictlayerDataDictWordsItemSensesItem])
+    , _dddwiSource      :: !(Maybe DictlayerDataDictWordsItemSource)
+    , _dddwiDerivatives :: !(Maybe [DictlayerDataDictWordsItemDerivativesItem])
+    , _dddwiExamples    :: !(Maybe [DictlayerDataDictWordsItemExamplesItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsItem' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataDictWordsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwiSenses'
+-- * 'dddwiSenses'
 --
--- * 'ddwiSource'
+-- * 'dddwiSource'
 --
--- * 'ddwiDerivatives'
+-- * 'dddwiDerivatives'
 --
--- * 'ddwiExamples'
-dictlayerdataDictWordsItem
-    :: DictlayerdataDictWordsItem
-dictlayerdataDictWordsItem =
-    DictlayerdataDictWordsItem
-    { _ddwiSenses = Nothing
-    , _ddwiSource = Nothing
-    , _ddwiDerivatives = Nothing
-    , _ddwiExamples = Nothing
+-- * 'dddwiExamples'
+dictlayerDataDictWordsItem
+    :: DictlayerDataDictWordsItem
+dictlayerDataDictWordsItem =
+    DictlayerDataDictWordsItem
+    { _dddwiSenses = Nothing
+    , _dddwiSource = Nothing
+    , _dddwiDerivatives = Nothing
+    , _dddwiExamples = Nothing
     }
 
-ddwiSenses :: Lens' DictlayerdataDictWordsItem [DictlayerdataDictWordsItemSensesItem]
-ddwiSenses
-  = lens _ddwiSenses (\ s a -> s{_ddwiSenses = a}) .
+dddwiSenses :: Lens' DictlayerDataDictWordsItem [DictlayerDataDictWordsItemSensesItem]
+dddwiSenses
+  = lens _dddwiSenses (\ s a -> s{_dddwiSenses = a}) .
       _Default
       . _Coerce
 
 -- | The words with different meanings but not related words, e.g. \"go\"
 -- (game) and \"go\" (verb).
-ddwiSource :: Lens' DictlayerdataDictWordsItem (Maybe DictlayerdataDictWordsItemSource)
-ddwiSource
-  = lens _ddwiSource (\ s a -> s{_ddwiSource = a})
+dddwiSource :: Lens' DictlayerDataDictWordsItem (Maybe DictlayerDataDictWordsItemSource)
+dddwiSource
+  = lens _dddwiSource (\ s a -> s{_dddwiSource = a})
 
-ddwiDerivatives :: Lens' DictlayerdataDictWordsItem [DictlayerdataDictWordsItemDerivativesItem]
-ddwiDerivatives
-  = lens _ddwiDerivatives
-      (\ s a -> s{_ddwiDerivatives = a})
+dddwiDerivatives :: Lens' DictlayerDataDictWordsItem [DictlayerDataDictWordsItemDerivativesItem]
+dddwiDerivatives
+  = lens _dddwiDerivatives
+      (\ s a -> s{_dddwiDerivatives = a})
       . _Default
       . _Coerce
 
-ddwiExamples :: Lens' DictlayerdataDictWordsItem [DictlayerdataDictWordsItemExamplesItem]
-ddwiExamples
-  = lens _ddwiExamples (\ s a -> s{_ddwiExamples = a})
+dddwiExamples :: Lens' DictlayerDataDictWordsItem [DictlayerDataDictWordsItemExamplesItem]
+dddwiExamples
+  = lens _dddwiExamples
+      (\ s a -> s{_dddwiExamples = a})
       . _Default
       . _Coerce
 
-instance FromJSON DictlayerdataDictWordsItem where
+instance FromJSON DictlayerDataDictWordsItem where
         parseJSON
-          = withObject "DictlayerdataDictWordsItem"
+          = withObject "DictlayerDataDictWordsItem"
               (\ o ->
-                 DictlayerdataDictWordsItem <$>
+                 DictlayerDataDictWordsItem <$>
                    (o .:? "senses" .!= mempty) <*> (o .:? "source") <*>
                      (o .:? "derivatives" .!= mempty)
                      <*> (o .:? "examples" .!= mempty))
 
-instance ToJSON DictlayerdataDictWordsItem where
-        toJSON DictlayerdataDictWordsItem{..}
+instance ToJSON DictlayerDataDictWordsItem where
+        toJSON DictlayerDataDictWordsItem{..}
           = object
               (catMaybes
-                 [("senses" .=) <$> _ddwiSenses,
-                  ("source" .=) <$> _ddwiSource,
-                  ("derivatives" .=) <$> _ddwiDerivatives,
-                  ("examples" .=) <$> _ddwiExamples])
+                 [("senses" .=) <$> _dddwiSenses,
+                  ("source" .=) <$> _dddwiSource,
+                  ("derivatives" .=) <$> _dddwiDerivatives,
+                  ("examples" .=) <$> _dddwiExamples])
 
 --
 -- /See:/ 'categoryItemsItem' smart constructor.
@@ -3119,449 +3116,454 @@ instance ToJSON CategoryItemsItem where
                   ("badgeUrl" .=) <$> _ciiBadgeURL])
 
 --
--- /See:/ 'dictlayerdataDictWordsItemDerivativesItemSource' smart constructor.
-data DictlayerdataDictWordsItemDerivativesItemSource = DictlayerdataDictWordsItemDerivativesItemSource
-    { _ddwidisURL         :: !(Maybe Text)
-    , _ddwidisAttribution :: !(Maybe Text)
+-- /See:/ 'dictlayerDataDictWordsItemDerivativesItemSource' smart constructor.
+data DictlayerDataDictWordsItemDerivativesItemSource = DictlayerDataDictWordsItemDerivativesItemSource
+    { _dddwidisURL         :: !(Maybe Text)
+    , _dddwidisAttribution :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsItemDerivativesItemSource' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataDictWordsItemDerivativesItemSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwidisURL'
+-- * 'dddwidisURL'
 --
--- * 'ddwidisAttribution'
-dictlayerdataDictWordsItemDerivativesItemSource
-    :: DictlayerdataDictWordsItemDerivativesItemSource
-dictlayerdataDictWordsItemDerivativesItemSource =
-    DictlayerdataDictWordsItemDerivativesItemSource
-    { _ddwidisURL = Nothing
-    , _ddwidisAttribution = Nothing
+-- * 'dddwidisAttribution'
+dictlayerDataDictWordsItemDerivativesItemSource
+    :: DictlayerDataDictWordsItemDerivativesItemSource
+dictlayerDataDictWordsItemDerivativesItemSource =
+    DictlayerDataDictWordsItemDerivativesItemSource
+    { _dddwidisURL = Nothing
+    , _dddwidisAttribution = Nothing
     }
 
-ddwidisURL :: Lens' DictlayerdataDictWordsItemDerivativesItemSource (Maybe Text)
-ddwidisURL
-  = lens _ddwidisURL (\ s a -> s{_ddwidisURL = a})
+dddwidisURL :: Lens' DictlayerDataDictWordsItemDerivativesItemSource (Maybe Text)
+dddwidisURL
+  = lens _dddwidisURL (\ s a -> s{_dddwidisURL = a})
 
-ddwidisAttribution :: Lens' DictlayerdataDictWordsItemDerivativesItemSource (Maybe Text)
-ddwidisAttribution
-  = lens _ddwidisAttribution
-      (\ s a -> s{_ddwidisAttribution = a})
+dddwidisAttribution :: Lens' DictlayerDataDictWordsItemDerivativesItemSource (Maybe Text)
+dddwidisAttribution
+  = lens _dddwidisAttribution
+      (\ s a -> s{_dddwidisAttribution = a})
 
 instance FromJSON
-         DictlayerdataDictWordsItemDerivativesItemSource where
+         DictlayerDataDictWordsItemDerivativesItemSource where
         parseJSON
           = withObject
-              "DictlayerdataDictWordsItemDerivativesItemSource"
+              "DictlayerDataDictWordsItemDerivativesItemSource"
               (\ o ->
-                 DictlayerdataDictWordsItemDerivativesItemSource <$>
+                 DictlayerDataDictWordsItemDerivativesItemSource <$>
                    (o .:? "url") <*> (o .:? "attribution"))
 
 instance ToJSON
-         DictlayerdataDictWordsItemDerivativesItemSource where
+         DictlayerDataDictWordsItemDerivativesItemSource where
         toJSON
-          DictlayerdataDictWordsItemDerivativesItemSource{..}
+          DictlayerDataDictWordsItemDerivativesItemSource{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _ddwidisURL,
-                  ("attribution" .=) <$> _ddwidisAttribution])
+                 [("url" .=) <$> _dddwidisURL,
+                  ("attribution" .=) <$> _dddwidisAttribution])
 
 --
--- /See:/ 'geolayerdata' smart constructor.
-data Geolayerdata = Geolayerdata
-    { _gKind   :: !Text
-    , _gGeo    :: !(Maybe GeolayerdataGeo)
-    , _gCommon :: !(Maybe GeolayerdataCommon)
+-- /See:/ 'geolayerData' smart constructor.
+data GeolayerData = GeolayerData
+    { _gdKind   :: !Text
+    , _gdGeo    :: !(Maybe GeolayerDataGeo)
+    , _gdCommon :: !(Maybe GeolayerDataCommon)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Geolayerdata' with the minimum fields required to make a request.
+-- | Creates a value of 'GeolayerData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gKind'
+-- * 'gdKind'
 --
--- * 'gGeo'
+-- * 'gdGeo'
 --
--- * 'gCommon'
-geolayerdata
-    :: Geolayerdata
-geolayerdata =
-    Geolayerdata
-    { _gKind = "books#geolayerdata"
-    , _gGeo = Nothing
-    , _gCommon = Nothing
+-- * 'gdCommon'
+geolayerData
+    :: GeolayerData
+geolayerData =
+    GeolayerData
+    { _gdKind = "books#geolayerdata"
+    , _gdGeo = Nothing
+    , _gdCommon = Nothing
     }
 
-gKind :: Lens' Geolayerdata Text
-gKind = lens _gKind (\ s a -> s{_gKind = a})
+gdKind :: Lens' GeolayerData Text
+gdKind = lens _gdKind (\ s a -> s{_gdKind = a})
 
-gGeo :: Lens' Geolayerdata (Maybe GeolayerdataGeo)
-gGeo = lens _gGeo (\ s a -> s{_gGeo = a})
+gdGeo :: Lens' GeolayerData (Maybe GeolayerDataGeo)
+gdGeo = lens _gdGeo (\ s a -> s{_gdGeo = a})
 
-gCommon :: Lens' Geolayerdata (Maybe GeolayerdataCommon)
-gCommon = lens _gCommon (\ s a -> s{_gCommon = a})
+gdCommon :: Lens' GeolayerData (Maybe GeolayerDataCommon)
+gdCommon = lens _gdCommon (\ s a -> s{_gdCommon = a})
 
-instance FromJSON Geolayerdata where
+instance FromJSON GeolayerData where
         parseJSON
-          = withObject "Geolayerdata"
+          = withObject "GeolayerData"
               (\ o ->
-                 Geolayerdata <$>
+                 GeolayerData <$>
                    (o .:? "kind" .!= "books#geolayerdata") <*>
                      (o .:? "geo")
                      <*> (o .:? "common"))
 
-instance ToJSON Geolayerdata where
-        toJSON Geolayerdata{..}
+instance ToJSON GeolayerData where
+        toJSON GeolayerData{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _gKind), ("geo" .=) <$> _gGeo,
-                  ("common" .=) <$> _gCommon])
+                 [Just ("kind" .= _gdKind), ("geo" .=) <$> _gdGeo,
+                  ("common" .=) <$> _gdCommon])
 
 -- | The words with different meanings but not related words, e.g. \"go\"
 -- (game) and \"go\" (verb).
 --
--- /See:/ 'dictlayerdataDictWordsItemSource' smart constructor.
-data DictlayerdataDictWordsItemSource = DictlayerdataDictWordsItemSource
-    { _ddwisURL         :: !(Maybe Text)
-    , _ddwisAttribution :: !(Maybe Text)
+-- /See:/ 'dictlayerDataDictWordsItemSource' smart constructor.
+data DictlayerDataDictWordsItemSource = DictlayerDataDictWordsItemSource
+    { _dddwisURL         :: !(Maybe Text)
+    , _dddwisAttribution :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsItemSource' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataDictWordsItemSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwisURL'
+-- * 'dddwisURL'
 --
--- * 'ddwisAttribution'
-dictlayerdataDictWordsItemSource
-    :: DictlayerdataDictWordsItemSource
-dictlayerdataDictWordsItemSource =
-    DictlayerdataDictWordsItemSource
-    { _ddwisURL = Nothing
-    , _ddwisAttribution = Nothing
+-- * 'dddwisAttribution'
+dictlayerDataDictWordsItemSource
+    :: DictlayerDataDictWordsItemSource
+dictlayerDataDictWordsItemSource =
+    DictlayerDataDictWordsItemSource
+    { _dddwisURL = Nothing
+    , _dddwisAttribution = Nothing
     }
 
-ddwisURL :: Lens' DictlayerdataDictWordsItemSource (Maybe Text)
-ddwisURL = lens _ddwisURL (\ s a -> s{_ddwisURL = a})
+dddwisURL :: Lens' DictlayerDataDictWordsItemSource (Maybe Text)
+dddwisURL
+  = lens _dddwisURL (\ s a -> s{_dddwisURL = a})
 
-ddwisAttribution :: Lens' DictlayerdataDictWordsItemSource (Maybe Text)
-ddwisAttribution
-  = lens _ddwisAttribution
-      (\ s a -> s{_ddwisAttribution = a})
+dddwisAttribution :: Lens' DictlayerDataDictWordsItemSource (Maybe Text)
+dddwisAttribution
+  = lens _dddwisAttribution
+      (\ s a -> s{_dddwisAttribution = a})
 
-instance FromJSON DictlayerdataDictWordsItemSource
+instance FromJSON DictlayerDataDictWordsItemSource
          where
         parseJSON
-          = withObject "DictlayerdataDictWordsItemSource"
+          = withObject "DictlayerDataDictWordsItemSource"
               (\ o ->
-                 DictlayerdataDictWordsItemSource <$>
+                 DictlayerDataDictWordsItemSource <$>
                    (o .:? "url") <*> (o .:? "attribution"))
 
-instance ToJSON DictlayerdataDictWordsItemSource
+instance ToJSON DictlayerDataDictWordsItemSource
          where
-        toJSON DictlayerdataDictWordsItemSource{..}
+        toJSON DictlayerDataDictWordsItemSource{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _ddwisURL,
-                  ("attribution" .=) <$> _ddwisAttribution])
+                 [("url" .=) <$> _dddwisURL,
+                  ("attribution" .=) <$> _dddwisAttribution])
 
 --
--- /See:/ 'dictlayerdataDictWordsItemDerivativesItem' smart constructor.
-data DictlayerdataDictWordsItemDerivativesItem = DictlayerdataDictWordsItemDerivativesItem
-    { _ddwidiText   :: !(Maybe Text)
-    , _ddwidiSource :: !(Maybe DictlayerdataDictWordsItemDerivativesItemSource)
+-- /See:/ 'dictlayerDataDictWordsItemDerivativesItem' smart constructor.
+data DictlayerDataDictWordsItemDerivativesItem = DictlayerDataDictWordsItemDerivativesItem
+    { _dddwidiText   :: !(Maybe Text)
+    , _dddwidiSource :: !(Maybe DictlayerDataDictWordsItemDerivativesItemSource)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsItemDerivativesItem' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataDictWordsItemDerivativesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwidiText'
+-- * 'dddwidiText'
 --
--- * 'ddwidiSource'
-dictlayerdataDictWordsItemDerivativesItem
-    :: DictlayerdataDictWordsItemDerivativesItem
-dictlayerdataDictWordsItemDerivativesItem =
-    DictlayerdataDictWordsItemDerivativesItem
-    { _ddwidiText = Nothing
-    , _ddwidiSource = Nothing
+-- * 'dddwidiSource'
+dictlayerDataDictWordsItemDerivativesItem
+    :: DictlayerDataDictWordsItemDerivativesItem
+dictlayerDataDictWordsItemDerivativesItem =
+    DictlayerDataDictWordsItemDerivativesItem
+    { _dddwidiText = Nothing
+    , _dddwidiSource = Nothing
     }
 
-ddwidiText :: Lens' DictlayerdataDictWordsItemDerivativesItem (Maybe Text)
-ddwidiText
-  = lens _ddwidiText (\ s a -> s{_ddwidiText = a})
+dddwidiText :: Lens' DictlayerDataDictWordsItemDerivativesItem (Maybe Text)
+dddwidiText
+  = lens _dddwidiText (\ s a -> s{_dddwidiText = a})
 
-ddwidiSource :: Lens' DictlayerdataDictWordsItemDerivativesItem (Maybe DictlayerdataDictWordsItemDerivativesItemSource)
-ddwidiSource
-  = lens _ddwidiSource (\ s a -> s{_ddwidiSource = a})
+dddwidiSource :: Lens' DictlayerDataDictWordsItemDerivativesItem (Maybe DictlayerDataDictWordsItemDerivativesItemSource)
+dddwidiSource
+  = lens _dddwidiSource
+      (\ s a -> s{_dddwidiSource = a})
 
 instance FromJSON
-         DictlayerdataDictWordsItemDerivativesItem where
+         DictlayerDataDictWordsItemDerivativesItem where
         parseJSON
           = withObject
-              "DictlayerdataDictWordsItemDerivativesItem"
+              "DictlayerDataDictWordsItemDerivativesItem"
               (\ o ->
-                 DictlayerdataDictWordsItemDerivativesItem <$>
+                 DictlayerDataDictWordsItemDerivativesItem <$>
                    (o .:? "text") <*> (o .:? "source"))
 
 instance ToJSON
-         DictlayerdataDictWordsItemDerivativesItem where
-        toJSON DictlayerdataDictWordsItemDerivativesItem{..}
+         DictlayerDataDictWordsItemDerivativesItem where
+        toJSON DictlayerDataDictWordsItemDerivativesItem{..}
           = object
               (catMaybes
-                 [("text" .=) <$> _ddwidiText,
-                  ("source" .=) <$> _ddwidiSource])
+                 [("text" .=) <$> _dddwidiText,
+                  ("source" .=) <$> _dddwidiSource])
 
 --
--- /See:/ 'dictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem' smart constructor.
-data DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem = DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem
-    { _ddwisidieiText   :: !(Maybe Text)
-    , _ddwisidieiSource :: !(Maybe DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource)
+-- /See:/ 'dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem' smart constructor.
+data DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem = DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
+    { _dddwisidieiText   :: !(Maybe Text)
+    , _dddwisidieiSource :: !(Maybe DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwisidieiText'
+-- * 'dddwisidieiText'
 --
--- * 'ddwisidieiSource'
-dictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem
-    :: DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem
-dictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem =
-    DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem
-    { _ddwisidieiText = Nothing
-    , _ddwisidieiSource = Nothing
+-- * 'dddwisidieiSource'
+dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
+    :: DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
+dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem =
+    DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
+    { _dddwisidieiText = Nothing
+    , _dddwisidieiSource = Nothing
     }
 
-ddwisidieiText :: Lens' DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem (Maybe Text)
-ddwisidieiText
-  = lens _ddwisidieiText
-      (\ s a -> s{_ddwisidieiText = a})
+dddwisidieiText :: Lens' DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem (Maybe Text)
+dddwisidieiText
+  = lens _dddwisidieiText
+      (\ s a -> s{_dddwisidieiText = a})
 
-ddwisidieiSource :: Lens' DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem (Maybe DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource)
-ddwisidieiSource
-  = lens _ddwisidieiSource
-      (\ s a -> s{_ddwisidieiSource = a})
+dddwisidieiSource :: Lens' DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem (Maybe DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource)
+dddwisidieiSource
+  = lens _dddwisidieiSource
+      (\ s a -> s{_dddwisidieiSource = a})
 
 instance FromJSON
-         DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem
+         DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
          where
         parseJSON
           = withObject
-              "DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem"
+              "DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem"
               (\ o ->
-                 DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem
+                 DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
                    <$> (o .:? "text") <*> (o .:? "source"))
 
 instance ToJSON
-         DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem
+         DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
          where
         toJSON
-          DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem{..}
+          DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem{..}
           = object
               (catMaybes
-                 [("text" .=) <$> _ddwisidieiText,
-                  ("source" .=) <$> _ddwisidieiSource])
+                 [("text" .=) <$> _dddwisidieiText,
+                  ("source" .=) <$> _dddwisidieiSource])
 
 --
--- /See:/ 'dictlayerdata' smart constructor.
-data Dictlayerdata = Dictlayerdata
-    { _dKind   :: !Text
-    , _dDict   :: !(Maybe DictlayerdataDict)
-    , _dCommon :: !(Maybe DictlayerdataCommon)
+-- /See:/ 'dictlayerData' smart constructor.
+data DictlayerData = DictlayerData
+    { _ddKind   :: !Text
+    , _ddDict   :: !(Maybe DictlayerDataDict)
+    , _ddCommon :: !(Maybe DictlayerDataCommon)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Dictlayerdata' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dKind'
+-- * 'ddKind'
 --
--- * 'dDict'
+-- * 'ddDict'
 --
--- * 'dCommon'
-dictlayerdata
-    :: Dictlayerdata
-dictlayerdata =
-    Dictlayerdata
-    { _dKind = "books#dictlayerdata"
-    , _dDict = Nothing
-    , _dCommon = Nothing
+-- * 'ddCommon'
+dictlayerData
+    :: DictlayerData
+dictlayerData =
+    DictlayerData
+    { _ddKind = "books#dictlayerdata"
+    , _ddDict = Nothing
+    , _ddCommon = Nothing
     }
 
-dKind :: Lens' Dictlayerdata Text
-dKind = lens _dKind (\ s a -> s{_dKind = a})
+ddKind :: Lens' DictlayerData Text
+ddKind = lens _ddKind (\ s a -> s{_ddKind = a})
 
-dDict :: Lens' Dictlayerdata (Maybe DictlayerdataDict)
-dDict = lens _dDict (\ s a -> s{_dDict = a})
+ddDict :: Lens' DictlayerData (Maybe DictlayerDataDict)
+ddDict = lens _ddDict (\ s a -> s{_ddDict = a})
 
-dCommon :: Lens' Dictlayerdata (Maybe DictlayerdataCommon)
-dCommon = lens _dCommon (\ s a -> s{_dCommon = a})
+ddCommon :: Lens' DictlayerData (Maybe DictlayerDataCommon)
+ddCommon = lens _ddCommon (\ s a -> s{_ddCommon = a})
 
-instance FromJSON Dictlayerdata where
+instance FromJSON DictlayerData where
         parseJSON
-          = withObject "Dictlayerdata"
+          = withObject "DictlayerData"
               (\ o ->
-                 Dictlayerdata <$>
+                 DictlayerData <$>
                    (o .:? "kind" .!= "books#dictlayerdata") <*>
                      (o .:? "dict")
                      <*> (o .:? "common"))
 
-instance ToJSON Dictlayerdata where
-        toJSON Dictlayerdata{..}
+instance ToJSON DictlayerData where
+        toJSON DictlayerData{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _dKind), ("dict" .=) <$> _dDict,
-                  ("common" .=) <$> _dCommon])
+                 [Just ("kind" .= _ddKind), ("dict" .=) <$> _ddDict,
+                  ("common" .=) <$> _ddCommon])
 
 --
--- /See:/ 'dictlayerdataDictWordsItemSensesItemSynonymsItemSource' smart constructor.
-data DictlayerdataDictWordsItemSensesItemSynonymsItemSource = DictlayerdataDictWordsItemSensesItemSynonymsItemSource
-    { _ddwisisisURL         :: !(Maybe Text)
-    , _ddwisisisAttribution :: !(Maybe Text)
+-- /See:/ 'dictlayerDataDictWordsItemSensesItemSynonymsItemSource' smart constructor.
+data DictlayerDataDictWordsItemSensesItemSynonymsItemSource = DictlayerDataDictWordsItemSensesItemSynonymsItemSource
+    { _dddwisisisURL         :: !(Maybe Text)
+    , _dddwisisisAttribution :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsItemSensesItemSynonymsItemSource' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataDictWordsItemSensesItemSynonymsItemSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwisisisURL'
+-- * 'dddwisisisURL'
 --
--- * 'ddwisisisAttribution'
-dictlayerdataDictWordsItemSensesItemSynonymsItemSource
-    :: DictlayerdataDictWordsItemSensesItemSynonymsItemSource
-dictlayerdataDictWordsItemSensesItemSynonymsItemSource =
-    DictlayerdataDictWordsItemSensesItemSynonymsItemSource
-    { _ddwisisisURL = Nothing
-    , _ddwisisisAttribution = Nothing
+-- * 'dddwisisisAttribution'
+dictlayerDataDictWordsItemSensesItemSynonymsItemSource
+    :: DictlayerDataDictWordsItemSensesItemSynonymsItemSource
+dictlayerDataDictWordsItemSensesItemSynonymsItemSource =
+    DictlayerDataDictWordsItemSensesItemSynonymsItemSource
+    { _dddwisisisURL = Nothing
+    , _dddwisisisAttribution = Nothing
     }
 
-ddwisisisURL :: Lens' DictlayerdataDictWordsItemSensesItemSynonymsItemSource (Maybe Text)
-ddwisisisURL
-  = lens _ddwisisisURL (\ s a -> s{_ddwisisisURL = a})
+dddwisisisURL :: Lens' DictlayerDataDictWordsItemSensesItemSynonymsItemSource (Maybe Text)
+dddwisisisURL
+  = lens _dddwisisisURL
+      (\ s a -> s{_dddwisisisURL = a})
 
-ddwisisisAttribution :: Lens' DictlayerdataDictWordsItemSensesItemSynonymsItemSource (Maybe Text)
-ddwisisisAttribution
-  = lens _ddwisisisAttribution
-      (\ s a -> s{_ddwisisisAttribution = a})
+dddwisisisAttribution :: Lens' DictlayerDataDictWordsItemSensesItemSynonymsItemSource (Maybe Text)
+dddwisisisAttribution
+  = lens _dddwisisisAttribution
+      (\ s a -> s{_dddwisisisAttribution = a})
 
 instance FromJSON
-         DictlayerdataDictWordsItemSensesItemSynonymsItemSource
+         DictlayerDataDictWordsItemSensesItemSynonymsItemSource
          where
         parseJSON
           = withObject
-              "DictlayerdataDictWordsItemSensesItemSynonymsItemSource"
+              "DictlayerDataDictWordsItemSensesItemSynonymsItemSource"
               (\ o ->
-                 DictlayerdataDictWordsItemSensesItemSynonymsItemSource
+                 DictlayerDataDictWordsItemSensesItemSynonymsItemSource
                    <$> (o .:? "url") <*> (o .:? "attribution"))
 
 instance ToJSON
-         DictlayerdataDictWordsItemSensesItemSynonymsItemSource
+         DictlayerDataDictWordsItemSensesItemSynonymsItemSource
          where
         toJSON
-          DictlayerdataDictWordsItemSensesItemSynonymsItemSource{..}
+          DictlayerDataDictWordsItemSensesItemSynonymsItemSource{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _ddwisisisURL,
-                  ("attribution" .=) <$> _ddwisisisAttribution])
+                 [("url" .=) <$> _dddwisisisURL,
+                  ("attribution" .=) <$> _dddwisisisAttribution])
 
 --
--- /See:/ 'dictlayerdataDictWordsItemSensesItemSynonymsItem' smart constructor.
-data DictlayerdataDictWordsItemSensesItemSynonymsItem = DictlayerdataDictWordsItemSensesItemSynonymsItem
-    { _ddwisisiText   :: !(Maybe Text)
-    , _ddwisisiSource :: !(Maybe DictlayerdataDictWordsItemSensesItemSynonymsItemSource)
+-- /See:/ 'dictlayerDataDictWordsItemSensesItemSynonymsItem' smart constructor.
+data DictlayerDataDictWordsItemSensesItemSynonymsItem = DictlayerDataDictWordsItemSensesItemSynonymsItem
+    { _dddwisisiText   :: !(Maybe Text)
+    , _dddwisisiSource :: !(Maybe DictlayerDataDictWordsItemSensesItemSynonymsItemSource)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsItemSensesItemSynonymsItem' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataDictWordsItemSensesItemSynonymsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwisisiText'
+-- * 'dddwisisiText'
 --
--- * 'ddwisisiSource'
-dictlayerdataDictWordsItemSensesItemSynonymsItem
-    :: DictlayerdataDictWordsItemSensesItemSynonymsItem
-dictlayerdataDictWordsItemSensesItemSynonymsItem =
-    DictlayerdataDictWordsItemSensesItemSynonymsItem
-    { _ddwisisiText = Nothing
-    , _ddwisisiSource = Nothing
+-- * 'dddwisisiSource'
+dictlayerDataDictWordsItemSensesItemSynonymsItem
+    :: DictlayerDataDictWordsItemSensesItemSynonymsItem
+dictlayerDataDictWordsItemSensesItemSynonymsItem =
+    DictlayerDataDictWordsItemSensesItemSynonymsItem
+    { _dddwisisiText = Nothing
+    , _dddwisisiSource = Nothing
     }
 
-ddwisisiText :: Lens' DictlayerdataDictWordsItemSensesItemSynonymsItem (Maybe Text)
-ddwisisiText
-  = lens _ddwisisiText (\ s a -> s{_ddwisisiText = a})
+dddwisisiText :: Lens' DictlayerDataDictWordsItemSensesItemSynonymsItem (Maybe Text)
+dddwisisiText
+  = lens _dddwisisiText
+      (\ s a -> s{_dddwisisiText = a})
 
-ddwisisiSource :: Lens' DictlayerdataDictWordsItemSensesItemSynonymsItem (Maybe DictlayerdataDictWordsItemSensesItemSynonymsItemSource)
-ddwisisiSource
-  = lens _ddwisisiSource
-      (\ s a -> s{_ddwisisiSource = a})
+dddwisisiSource :: Lens' DictlayerDataDictWordsItemSensesItemSynonymsItem (Maybe DictlayerDataDictWordsItemSensesItemSynonymsItemSource)
+dddwisisiSource
+  = lens _dddwisisiSource
+      (\ s a -> s{_dddwisisiSource = a})
 
 instance FromJSON
-         DictlayerdataDictWordsItemSensesItemSynonymsItem
+         DictlayerDataDictWordsItemSensesItemSynonymsItem
          where
         parseJSON
           = withObject
-              "DictlayerdataDictWordsItemSensesItemSynonymsItem"
+              "DictlayerDataDictWordsItemSensesItemSynonymsItem"
               (\ o ->
-                 DictlayerdataDictWordsItemSensesItemSynonymsItem <$>
+                 DictlayerDataDictWordsItemSensesItemSynonymsItem <$>
                    (o .:? "text") <*> (o .:? "source"))
 
 instance ToJSON
-         DictlayerdataDictWordsItemSensesItemSynonymsItem
+         DictlayerDataDictWordsItemSensesItemSynonymsItem
          where
         toJSON
-          DictlayerdataDictWordsItemSensesItemSynonymsItem{..}
+          DictlayerDataDictWordsItemSensesItemSynonymsItem{..}
           = object
               (catMaybes
-                 [("text" .=) <$> _ddwisisiText,
-                  ("source" .=) <$> _ddwisisiSource])
+                 [("text" .=) <$> _dddwisisiText,
+                  ("source" .=) <$> _dddwisisiSource])
 
 --
--- /See:/ 'geolayerdataGeoViewportLo' smart constructor.
-data GeolayerdataGeoViewportLo = GeolayerdataGeoViewportLo
-    { _ggvlLatitude  :: !(Maybe Double)
-    , _ggvlLongitude :: !(Maybe Double)
+-- /See:/ 'geolayerDataGeoViewportLo' smart constructor.
+data GeolayerDataGeoViewportLo = GeolayerDataGeoViewportLo
+    { _gdgvlLatitude  :: !(Maybe Double)
+    , _gdgvlLongitude :: !(Maybe Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GeolayerdataGeoViewportLo' with the minimum fields required to make a request.
+-- | Creates a value of 'GeolayerDataGeoViewportLo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ggvlLatitude'
+-- * 'gdgvlLatitude'
 --
--- * 'ggvlLongitude'
-geolayerdataGeoViewportLo
-    :: GeolayerdataGeoViewportLo
-geolayerdataGeoViewportLo =
-    GeolayerdataGeoViewportLo
-    { _ggvlLatitude = Nothing
-    , _ggvlLongitude = Nothing
+-- * 'gdgvlLongitude'
+geolayerDataGeoViewportLo
+    :: GeolayerDataGeoViewportLo
+geolayerDataGeoViewportLo =
+    GeolayerDataGeoViewportLo
+    { _gdgvlLatitude = Nothing
+    , _gdgvlLongitude = Nothing
     }
 
-ggvlLatitude :: Lens' GeolayerdataGeoViewportLo (Maybe Double)
-ggvlLatitude
-  = lens _ggvlLatitude (\ s a -> s{_ggvlLatitude = a})
+gdgvlLatitude :: Lens' GeolayerDataGeoViewportLo (Maybe Double)
+gdgvlLatitude
+  = lens _gdgvlLatitude
+      (\ s a -> s{_gdgvlLatitude = a})
 
-ggvlLongitude :: Lens' GeolayerdataGeoViewportLo (Maybe Double)
-ggvlLongitude
-  = lens _ggvlLongitude
-      (\ s a -> s{_ggvlLongitude = a})
+gdgvlLongitude :: Lens' GeolayerDataGeoViewportLo (Maybe Double)
+gdgvlLongitude
+  = lens _gdgvlLongitude
+      (\ s a -> s{_gdgvlLongitude = a})
 
-instance FromJSON GeolayerdataGeoViewportLo where
+instance FromJSON GeolayerDataGeoViewportLo where
         parseJSON
-          = withObject "GeolayerdataGeoViewportLo"
+          = withObject "GeolayerDataGeoViewportLo"
               (\ o ->
-                 GeolayerdataGeoViewportLo <$>
+                 GeolayerDataGeoViewportLo <$>
                    (o .:? "latitude") <*> (o .:? "longitude"))
 
-instance ToJSON GeolayerdataGeoViewportLo where
-        toJSON GeolayerdataGeoViewportLo{..}
+instance ToJSON GeolayerDataGeoViewportLo where
+        toJSON GeolayerDataGeoViewportLo{..}
           = object
               (catMaybes
-                 [("latitude" .=) <$> _ggvlLatitude,
-                  ("longitude" .=) <$> _ggvlLongitude])
+                 [("latitude" .=) <$> _gdgvlLatitude,
+                  ("longitude" .=) <$> _gdgvlLongitude])
 
 -- | Offer list (=undiscounted) price in Micros.
 --
@@ -3780,36 +3782,36 @@ instance ToJSON DownloadAccessRestriction where
                   ("nonce" .=) <$> _darNonce])
 
 --
--- /See:/ 'dictlayerdataCommon' smart constructor.
-newtype DictlayerdataCommon = DictlayerdataCommon
-    { _dcTitle :: Maybe Text
+-- /See:/ 'dictlayerDataCommon' smart constructor.
+newtype DictlayerDataCommon = DictlayerDataCommon
+    { _ddcTitle :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataCommon' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataCommon' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dcTitle'
-dictlayerdataCommon
-    :: DictlayerdataCommon
-dictlayerdataCommon =
-    DictlayerdataCommon
-    { _dcTitle = Nothing
+-- * 'ddcTitle'
+dictlayerDataCommon
+    :: DictlayerDataCommon
+dictlayerDataCommon =
+    DictlayerDataCommon
+    { _ddcTitle = Nothing
     }
 
 -- | The display title and localized canonical name to use when searching for
 -- this entity on Google search.
-dcTitle :: Lens' DictlayerdataCommon (Maybe Text)
-dcTitle = lens _dcTitle (\ s a -> s{_dcTitle = a})
+ddcTitle :: Lens' DictlayerDataCommon (Maybe Text)
+ddcTitle = lens _ddcTitle (\ s a -> s{_ddcTitle = a})
 
-instance FromJSON DictlayerdataCommon where
+instance FromJSON DictlayerDataCommon where
         parseJSON
-          = withObject "DictlayerdataCommon"
-              (\ o -> DictlayerdataCommon <$> (o .:? "title"))
+          = withObject "DictlayerDataCommon"
+              (\ o -> DictlayerDataCommon <$> (o .:? "title"))
 
-instance ToJSON DictlayerdataCommon where
-        toJSON DictlayerdataCommon{..}
-          = object (catMaybes [("title" .=) <$> _dcTitle])
+instance ToJSON DictlayerDataCommon where
+        toJSON DictlayerDataCommon{..}
+          = object (catMaybes [("title" .=) <$> _ddcTitle])
 
 -- | The actual selling price of the book. This is the same as the suggested
 -- retail or list price unless there are offers or discounts on this
@@ -3910,55 +3912,56 @@ instance ToJSON VolumeSaleInfoListPrice where
                   ("currencyCode" .=) <$> _vsilpCurrencyCode])
 
 --
--- /See:/ 'dictlayerdataDictWordsItemSensesItemConjugationsItem' smart constructor.
-data DictlayerdataDictWordsItemSensesItemConjugationsItem = DictlayerdataDictWordsItemSensesItemConjugationsItem
-    { _ddwisiciValue :: !(Maybe Text)
-    , _ddwisiciType  :: !(Maybe Text)
+-- /See:/ 'dictlayerDataDictWordsItemSensesItemConjugationsItem' smart constructor.
+data DictlayerDataDictWordsItemSensesItemConjugationsItem = DictlayerDataDictWordsItemSensesItemConjugationsItem
+    { _dddwisiciValue :: !(Maybe Text)
+    , _dddwisiciType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsItemSensesItemConjugationsItem' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataDictWordsItemSensesItemConjugationsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwisiciValue'
+-- * 'dddwisiciValue'
 --
--- * 'ddwisiciType'
-dictlayerdataDictWordsItemSensesItemConjugationsItem
-    :: DictlayerdataDictWordsItemSensesItemConjugationsItem
-dictlayerdataDictWordsItemSensesItemConjugationsItem =
-    DictlayerdataDictWordsItemSensesItemConjugationsItem
-    { _ddwisiciValue = Nothing
-    , _ddwisiciType = Nothing
+-- * 'dddwisiciType'
+dictlayerDataDictWordsItemSensesItemConjugationsItem
+    :: DictlayerDataDictWordsItemSensesItemConjugationsItem
+dictlayerDataDictWordsItemSensesItemConjugationsItem =
+    DictlayerDataDictWordsItemSensesItemConjugationsItem
+    { _dddwisiciValue = Nothing
+    , _dddwisiciType = Nothing
     }
 
-ddwisiciValue :: Lens' DictlayerdataDictWordsItemSensesItemConjugationsItem (Maybe Text)
-ddwisiciValue
-  = lens _ddwisiciValue
-      (\ s a -> s{_ddwisiciValue = a})
+dddwisiciValue :: Lens' DictlayerDataDictWordsItemSensesItemConjugationsItem (Maybe Text)
+dddwisiciValue
+  = lens _dddwisiciValue
+      (\ s a -> s{_dddwisiciValue = a})
 
-ddwisiciType :: Lens' DictlayerdataDictWordsItemSensesItemConjugationsItem (Maybe Text)
-ddwisiciType
-  = lens _ddwisiciType (\ s a -> s{_ddwisiciType = a})
+dddwisiciType :: Lens' DictlayerDataDictWordsItemSensesItemConjugationsItem (Maybe Text)
+dddwisiciType
+  = lens _dddwisiciType
+      (\ s a -> s{_dddwisiciType = a})
 
 instance FromJSON
-         DictlayerdataDictWordsItemSensesItemConjugationsItem
+         DictlayerDataDictWordsItemSensesItemConjugationsItem
          where
         parseJSON
           = withObject
-              "DictlayerdataDictWordsItemSensesItemConjugationsItem"
+              "DictlayerDataDictWordsItemSensesItemConjugationsItem"
               (\ o ->
-                 DictlayerdataDictWordsItemSensesItemConjugationsItem
+                 DictlayerDataDictWordsItemSensesItemConjugationsItem
                    <$> (o .:? "value") <*> (o .:? "type"))
 
 instance ToJSON
-         DictlayerdataDictWordsItemSensesItemConjugationsItem
+         DictlayerDataDictWordsItemSensesItemConjugationsItem
          where
         toJSON
-          DictlayerdataDictWordsItemSensesItemConjugationsItem{..}
+          DictlayerDataDictWordsItemSensesItemConjugationsItem{..}
           = object
               (catMaybes
-                 [("value" .=) <$> _ddwisiciValue,
-                  ("type" .=) <$> _ddwisiciType])
+                 [("value" .=) <$> _dddwisiciValue,
+                  ("type" .=) <$> _dddwisiciType])
 
 --
 -- /See:/ 'volume2' smart constructor.
@@ -4609,60 +4612,60 @@ instance ToJSON AnnotationClientVersionRanges where
                   ("cfiRange" .=) <$> _acvrCfiRange])
 
 --
--- /See:/ 'dictlayerdataDictWordsItemSensesItemDefinitionsItem' smart constructor.
-data DictlayerdataDictWordsItemSensesItemDefinitionsItem = DictlayerdataDictWordsItemSensesItemDefinitionsItem
-    { _ddwisidiDefinition :: !(Maybe Text)
-    , _ddwisidiExamples   :: !(Maybe [DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem])
+-- /See:/ 'dictlayerDataDictWordsItemSensesItemDefinitionsItem' smart constructor.
+data DictlayerDataDictWordsItemSensesItemDefinitionsItem = DictlayerDataDictWordsItemSensesItemDefinitionsItem
+    { _dddwisidiDefinition :: !(Maybe Text)
+    , _dddwisidiExamples   :: !(Maybe [DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsItemSensesItemDefinitionsItem' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataDictWordsItemSensesItemDefinitionsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwisidiDefinition'
+-- * 'dddwisidiDefinition'
 --
--- * 'ddwisidiExamples'
-dictlayerdataDictWordsItemSensesItemDefinitionsItem
-    :: DictlayerdataDictWordsItemSensesItemDefinitionsItem
-dictlayerdataDictWordsItemSensesItemDefinitionsItem =
-    DictlayerdataDictWordsItemSensesItemDefinitionsItem
-    { _ddwisidiDefinition = Nothing
-    , _ddwisidiExamples = Nothing
+-- * 'dddwisidiExamples'
+dictlayerDataDictWordsItemSensesItemDefinitionsItem
+    :: DictlayerDataDictWordsItemSensesItemDefinitionsItem
+dictlayerDataDictWordsItemSensesItemDefinitionsItem =
+    DictlayerDataDictWordsItemSensesItemDefinitionsItem
+    { _dddwisidiDefinition = Nothing
+    , _dddwisidiExamples = Nothing
     }
 
-ddwisidiDefinition :: Lens' DictlayerdataDictWordsItemSensesItemDefinitionsItem (Maybe Text)
-ddwisidiDefinition
-  = lens _ddwisidiDefinition
-      (\ s a -> s{_ddwisidiDefinition = a})
+dddwisidiDefinition :: Lens' DictlayerDataDictWordsItemSensesItemDefinitionsItem (Maybe Text)
+dddwisidiDefinition
+  = lens _dddwisidiDefinition
+      (\ s a -> s{_dddwisidiDefinition = a})
 
-ddwisidiExamples :: Lens' DictlayerdataDictWordsItemSensesItemDefinitionsItem [DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem]
-ddwisidiExamples
-  = lens _ddwisidiExamples
-      (\ s a -> s{_ddwisidiExamples = a})
+dddwisidiExamples :: Lens' DictlayerDataDictWordsItemSensesItemDefinitionsItem [DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem]
+dddwisidiExamples
+  = lens _dddwisidiExamples
+      (\ s a -> s{_dddwisidiExamples = a})
       . _Default
       . _Coerce
 
 instance FromJSON
-         DictlayerdataDictWordsItemSensesItemDefinitionsItem
+         DictlayerDataDictWordsItemSensesItemDefinitionsItem
          where
         parseJSON
           = withObject
-              "DictlayerdataDictWordsItemSensesItemDefinitionsItem"
+              "DictlayerDataDictWordsItemSensesItemDefinitionsItem"
               (\ o ->
-                 DictlayerdataDictWordsItemSensesItemDefinitionsItem
+                 DictlayerDataDictWordsItemSensesItemDefinitionsItem
                    <$>
                    (o .:? "definition") <*>
                      (o .:? "examples" .!= mempty))
 
 instance ToJSON
-         DictlayerdataDictWordsItemSensesItemDefinitionsItem
+         DictlayerDataDictWordsItemSensesItemDefinitionsItem
          where
         toJSON
-          DictlayerdataDictWordsItemSensesItemDefinitionsItem{..}
+          DictlayerDataDictWordsItemSensesItemDefinitionsItem{..}
           = object
               (catMaybes
-                 [("definition" .=) <$> _ddwisidiDefinition,
-                  ("examples" .=) <$> _ddwisidiExamples])
+                 [("definition" .=) <$> _dddwisidiDefinition,
+                  ("examples" .=) <$> _dddwisidiExamples])
 
 --
 -- /See:/ 'volumeLayerInfoLayersItem' smart constructor.
@@ -4862,53 +4865,53 @@ instance ToJSON VolumeAccessInfoPdf where
                   ("downloadLink" .=) <$> _vaipDownloadLink])
 
 --
--- /See:/ 'dictlayerdataDictWordsItemExamplesItemSource' smart constructor.
-data DictlayerdataDictWordsItemExamplesItemSource = DictlayerdataDictWordsItemExamplesItemSource
-    { _ddwieisURL         :: !(Maybe Text)
-    , _ddwieisAttribution :: !(Maybe Text)
+-- /See:/ 'dictlayerDataDictWordsItemExamplesItemSource' smart constructor.
+data DictlayerDataDictWordsItemExamplesItemSource = DictlayerDataDictWordsItemExamplesItemSource
+    { _dddwieisURL         :: !(Maybe Text)
+    , _dddwieisAttribution :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsItemExamplesItemSource' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataDictWordsItemExamplesItemSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwieisURL'
+-- * 'dddwieisURL'
 --
--- * 'ddwieisAttribution'
-dictlayerdataDictWordsItemExamplesItemSource
-    :: DictlayerdataDictWordsItemExamplesItemSource
-dictlayerdataDictWordsItemExamplesItemSource =
-    DictlayerdataDictWordsItemExamplesItemSource
-    { _ddwieisURL = Nothing
-    , _ddwieisAttribution = Nothing
+-- * 'dddwieisAttribution'
+dictlayerDataDictWordsItemExamplesItemSource
+    :: DictlayerDataDictWordsItemExamplesItemSource
+dictlayerDataDictWordsItemExamplesItemSource =
+    DictlayerDataDictWordsItemExamplesItemSource
+    { _dddwieisURL = Nothing
+    , _dddwieisAttribution = Nothing
     }
 
-ddwieisURL :: Lens' DictlayerdataDictWordsItemExamplesItemSource (Maybe Text)
-ddwieisURL
-  = lens _ddwieisURL (\ s a -> s{_ddwieisURL = a})
+dddwieisURL :: Lens' DictlayerDataDictWordsItemExamplesItemSource (Maybe Text)
+dddwieisURL
+  = lens _dddwieisURL (\ s a -> s{_dddwieisURL = a})
 
-ddwieisAttribution :: Lens' DictlayerdataDictWordsItemExamplesItemSource (Maybe Text)
-ddwieisAttribution
-  = lens _ddwieisAttribution
-      (\ s a -> s{_ddwieisAttribution = a})
+dddwieisAttribution :: Lens' DictlayerDataDictWordsItemExamplesItemSource (Maybe Text)
+dddwieisAttribution
+  = lens _dddwieisAttribution
+      (\ s a -> s{_dddwieisAttribution = a})
 
 instance FromJSON
-         DictlayerdataDictWordsItemExamplesItemSource where
+         DictlayerDataDictWordsItemExamplesItemSource where
         parseJSON
           = withObject
-              "DictlayerdataDictWordsItemExamplesItemSource"
+              "DictlayerDataDictWordsItemExamplesItemSource"
               (\ o ->
-                 DictlayerdataDictWordsItemExamplesItemSource <$>
+                 DictlayerDataDictWordsItemExamplesItemSource <$>
                    (o .:? "url") <*> (o .:? "attribution"))
 
 instance ToJSON
-         DictlayerdataDictWordsItemExamplesItemSource where
+         DictlayerDataDictWordsItemExamplesItemSource where
         toJSON
-          DictlayerdataDictWordsItemExamplesItemSource{..}
+          DictlayerDataDictWordsItemExamplesItemSource{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _ddwieisURL,
-                  ("attribution" .=) <$> _ddwieisAttribution])
+                 [("url" .=) <$> _dddwieisURL,
+                  ("attribution" .=) <$> _dddwieisAttribution])
 
 -- | Information about epub content. (In LITE projection.)
 --
@@ -5153,147 +5156,150 @@ instance ToJSON VolumeSaleInfoOffersItem where
                   ("retailPrice" .=) <$> _vsioiRetailPrice])
 
 --
--- /See:/ 'dictlayerdataDict' smart constructor.
-data DictlayerdataDict = DictlayerdataDict
-    { _ddSource :: !(Maybe DictlayerdataDictSource)
-    , _ddWords  :: !(Maybe [DictlayerdataDictWordsItem])
+-- /See:/ 'dictlayerDataDict' smart constructor.
+data DictlayerDataDict = DictlayerDataDict
+    { _dddSource :: !(Maybe DictlayerDataDictSource)
+    , _dddWords  :: !(Maybe [DictlayerDataDictWordsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDict' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataDict' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddSource'
+-- * 'dddSource'
 --
--- * 'ddWords'
-dictlayerdataDict
-    :: DictlayerdataDict
-dictlayerdataDict =
-    DictlayerdataDict
-    { _ddSource = Nothing
-    , _ddWords = Nothing
+-- * 'dddWords'
+dictlayerDataDict
+    :: DictlayerDataDict
+dictlayerDataDict =
+    DictlayerDataDict
+    { _dddSource = Nothing
+    , _dddWords = Nothing
     }
 
 -- | The source, url and attribution for this dictionary data.
-ddSource :: Lens' DictlayerdataDict (Maybe DictlayerdataDictSource)
-ddSource = lens _ddSource (\ s a -> s{_ddSource = a})
+dddSource :: Lens' DictlayerDataDict (Maybe DictlayerDataDictSource)
+dddSource
+  = lens _dddSource (\ s a -> s{_dddSource = a})
 
-ddWords :: Lens' DictlayerdataDict [DictlayerdataDictWordsItem]
-ddWords
-  = lens _ddWords (\ s a -> s{_ddWords = a}) . _Default
+dddWords :: Lens' DictlayerDataDict [DictlayerDataDictWordsItem]
+dddWords
+  = lens _dddWords (\ s a -> s{_dddWords = a}) .
+      _Default
       . _Coerce
 
-instance FromJSON DictlayerdataDict where
+instance FromJSON DictlayerDataDict where
         parseJSON
-          = withObject "DictlayerdataDict"
+          = withObject "DictlayerDataDict"
               (\ o ->
-                 DictlayerdataDict <$>
+                 DictlayerDataDict <$>
                    (o .:? "source") <*> (o .:? "words" .!= mempty))
 
-instance ToJSON DictlayerdataDict where
-        toJSON DictlayerdataDict{..}
+instance ToJSON DictlayerDataDict where
+        toJSON DictlayerDataDict{..}
           = object
               (catMaybes
-                 [("source" .=) <$> _ddSource,
-                  ("words" .=) <$> _ddWords])
+                 [("source" .=) <$> _dddSource,
+                  ("words" .=) <$> _dddWords])
 
 --
--- /See:/ 'dictlayerdataDictWordsItemSensesItem' smart constructor.
-data DictlayerdataDictWordsItemSensesItem = DictlayerdataDictWordsItemSensesItem
-    { _ddwisiPronunciationURL :: !(Maybe Text)
-    , _ddwisiConjugations     :: !(Maybe [DictlayerdataDictWordsItemSensesItemConjugationsItem])
-    , _ddwisiPronunciation    :: !(Maybe Text)
-    , _ddwisiSynonyms         :: !(Maybe [DictlayerdataDictWordsItemSensesItemSynonymsItem])
-    , _ddwisiSource           :: !(Maybe DictlayerdataDictWordsItemSensesItemSource)
-    , _ddwisiPartOfSpeech     :: !(Maybe Text)
-    , _ddwisiDefinitions      :: !(Maybe [DictlayerdataDictWordsItemSensesItemDefinitionsItem])
-    , _ddwisiSyllabification  :: !(Maybe Text)
+-- /See:/ 'dictlayerDataDictWordsItemSensesItem' smart constructor.
+data DictlayerDataDictWordsItemSensesItem = DictlayerDataDictWordsItemSensesItem
+    { _dddwisiPronunciationURL :: !(Maybe Text)
+    , _dddwisiConjugations     :: !(Maybe [DictlayerDataDictWordsItemSensesItemConjugationsItem])
+    , _dddwisiPronunciation    :: !(Maybe Text)
+    , _dddwisiSynonyms         :: !(Maybe [DictlayerDataDictWordsItemSensesItemSynonymsItem])
+    , _dddwisiSource           :: !(Maybe DictlayerDataDictWordsItemSensesItemSource)
+    , _dddwisiPartOfSpeech     :: !(Maybe Text)
+    , _dddwisiDefinitions      :: !(Maybe [DictlayerDataDictWordsItemSensesItemDefinitionsItem])
+    , _dddwisiSyllabification  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsItemSensesItem' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataDictWordsItemSensesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwisiPronunciationURL'
+-- * 'dddwisiPronunciationURL'
 --
--- * 'ddwisiConjugations'
+-- * 'dddwisiConjugations'
 --
--- * 'ddwisiPronunciation'
+-- * 'dddwisiPronunciation'
 --
--- * 'ddwisiSynonyms'
+-- * 'dddwisiSynonyms'
 --
--- * 'ddwisiSource'
+-- * 'dddwisiSource'
 --
--- * 'ddwisiPartOfSpeech'
+-- * 'dddwisiPartOfSpeech'
 --
--- * 'ddwisiDefinitions'
+-- * 'dddwisiDefinitions'
 --
--- * 'ddwisiSyllabification'
-dictlayerdataDictWordsItemSensesItem
-    :: DictlayerdataDictWordsItemSensesItem
-dictlayerdataDictWordsItemSensesItem =
-    DictlayerdataDictWordsItemSensesItem
-    { _ddwisiPronunciationURL = Nothing
-    , _ddwisiConjugations = Nothing
-    , _ddwisiPronunciation = Nothing
-    , _ddwisiSynonyms = Nothing
-    , _ddwisiSource = Nothing
-    , _ddwisiPartOfSpeech = Nothing
-    , _ddwisiDefinitions = Nothing
-    , _ddwisiSyllabification = Nothing
+-- * 'dddwisiSyllabification'
+dictlayerDataDictWordsItemSensesItem
+    :: DictlayerDataDictWordsItemSensesItem
+dictlayerDataDictWordsItemSensesItem =
+    DictlayerDataDictWordsItemSensesItem
+    { _dddwisiPronunciationURL = Nothing
+    , _dddwisiConjugations = Nothing
+    , _dddwisiPronunciation = Nothing
+    , _dddwisiSynonyms = Nothing
+    , _dddwisiSource = Nothing
+    , _dddwisiPartOfSpeech = Nothing
+    , _dddwisiDefinitions = Nothing
+    , _dddwisiSyllabification = Nothing
     }
 
-ddwisiPronunciationURL :: Lens' DictlayerdataDictWordsItemSensesItem (Maybe Text)
-ddwisiPronunciationURL
-  = lens _ddwisiPronunciationURL
-      (\ s a -> s{_ddwisiPronunciationURL = a})
+dddwisiPronunciationURL :: Lens' DictlayerDataDictWordsItemSensesItem (Maybe Text)
+dddwisiPronunciationURL
+  = lens _dddwisiPronunciationURL
+      (\ s a -> s{_dddwisiPronunciationURL = a})
 
-ddwisiConjugations :: Lens' DictlayerdataDictWordsItemSensesItem [DictlayerdataDictWordsItemSensesItemConjugationsItem]
-ddwisiConjugations
-  = lens _ddwisiConjugations
-      (\ s a -> s{_ddwisiConjugations = a})
+dddwisiConjugations :: Lens' DictlayerDataDictWordsItemSensesItem [DictlayerDataDictWordsItemSensesItemConjugationsItem]
+dddwisiConjugations
+  = lens _dddwisiConjugations
+      (\ s a -> s{_dddwisiConjugations = a})
       . _Default
       . _Coerce
 
-ddwisiPronunciation :: Lens' DictlayerdataDictWordsItemSensesItem (Maybe Text)
-ddwisiPronunciation
-  = lens _ddwisiPronunciation
-      (\ s a -> s{_ddwisiPronunciation = a})
+dddwisiPronunciation :: Lens' DictlayerDataDictWordsItemSensesItem (Maybe Text)
+dddwisiPronunciation
+  = lens _dddwisiPronunciation
+      (\ s a -> s{_dddwisiPronunciation = a})
 
-ddwisiSynonyms :: Lens' DictlayerdataDictWordsItemSensesItem [DictlayerdataDictWordsItemSensesItemSynonymsItem]
-ddwisiSynonyms
-  = lens _ddwisiSynonyms
-      (\ s a -> s{_ddwisiSynonyms = a})
+dddwisiSynonyms :: Lens' DictlayerDataDictWordsItemSensesItem [DictlayerDataDictWordsItemSensesItemSynonymsItem]
+dddwisiSynonyms
+  = lens _dddwisiSynonyms
+      (\ s a -> s{_dddwisiSynonyms = a})
       . _Default
       . _Coerce
 
-ddwisiSource :: Lens' DictlayerdataDictWordsItemSensesItem (Maybe DictlayerdataDictWordsItemSensesItemSource)
-ddwisiSource
-  = lens _ddwisiSource (\ s a -> s{_ddwisiSource = a})
+dddwisiSource :: Lens' DictlayerDataDictWordsItemSensesItem (Maybe DictlayerDataDictWordsItemSensesItemSource)
+dddwisiSource
+  = lens _dddwisiSource
+      (\ s a -> s{_dddwisiSource = a})
 
-ddwisiPartOfSpeech :: Lens' DictlayerdataDictWordsItemSensesItem (Maybe Text)
-ddwisiPartOfSpeech
-  = lens _ddwisiPartOfSpeech
-      (\ s a -> s{_ddwisiPartOfSpeech = a})
+dddwisiPartOfSpeech :: Lens' DictlayerDataDictWordsItemSensesItem (Maybe Text)
+dddwisiPartOfSpeech
+  = lens _dddwisiPartOfSpeech
+      (\ s a -> s{_dddwisiPartOfSpeech = a})
 
-ddwisiDefinitions :: Lens' DictlayerdataDictWordsItemSensesItem [DictlayerdataDictWordsItemSensesItemDefinitionsItem]
-ddwisiDefinitions
-  = lens _ddwisiDefinitions
-      (\ s a -> s{_ddwisiDefinitions = a})
+dddwisiDefinitions :: Lens' DictlayerDataDictWordsItemSensesItem [DictlayerDataDictWordsItemSensesItemDefinitionsItem]
+dddwisiDefinitions
+  = lens _dddwisiDefinitions
+      (\ s a -> s{_dddwisiDefinitions = a})
       . _Default
       . _Coerce
 
-ddwisiSyllabification :: Lens' DictlayerdataDictWordsItemSensesItem (Maybe Text)
-ddwisiSyllabification
-  = lens _ddwisiSyllabification
-      (\ s a -> s{_ddwisiSyllabification = a})
+dddwisiSyllabification :: Lens' DictlayerDataDictWordsItemSensesItem (Maybe Text)
+dddwisiSyllabification
+  = lens _dddwisiSyllabification
+      (\ s a -> s{_dddwisiSyllabification = a})
 
 instance FromJSON
-         DictlayerdataDictWordsItemSensesItem where
+         DictlayerDataDictWordsItemSensesItem where
         parseJSON
-          = withObject "DictlayerdataDictWordsItemSensesItem"
+          = withObject "DictlayerDataDictWordsItemSensesItem"
               (\ o ->
-                 DictlayerdataDictWordsItemSensesItem <$>
+                 DictlayerDataDictWordsItemSensesItem <$>
                    (o .:? "pronunciationUrl") <*>
                      (o .:? "conjugations" .!= mempty)
                      <*> (o .:? "pronunciation")
@@ -5303,19 +5309,20 @@ instance FromJSON
                      <*> (o .:? "definitions" .!= mempty)
                      <*> (o .:? "syllabification"))
 
-instance ToJSON DictlayerdataDictWordsItemSensesItem
+instance ToJSON DictlayerDataDictWordsItemSensesItem
          where
-        toJSON DictlayerdataDictWordsItemSensesItem{..}
+        toJSON DictlayerDataDictWordsItemSensesItem{..}
           = object
               (catMaybes
-                 [("pronunciationUrl" .=) <$> _ddwisiPronunciationURL,
-                  ("conjugations" .=) <$> _ddwisiConjugations,
-                  ("pronunciation" .=) <$> _ddwisiPronunciation,
-                  ("synonyms" .=) <$> _ddwisiSynonyms,
-                  ("source" .=) <$> _ddwisiSource,
-                  ("partOfSpeech" .=) <$> _ddwisiPartOfSpeech,
-                  ("definitions" .=) <$> _ddwisiDefinitions,
-                  ("syllabification" .=) <$> _ddwisiSyllabification])
+                 [("pronunciationUrl" .=) <$>
+                    _dddwisiPronunciationURL,
+                  ("conjugations" .=) <$> _dddwisiConjugations,
+                  ("pronunciation" .=) <$> _dddwisiPronunciation,
+                  ("synonyms" .=) <$> _dddwisiSynonyms,
+                  ("source" .=) <$> _dddwisiSource,
+                  ("partOfSpeech" .=) <$> _dddwisiPartOfSpeech,
+                  ("definitions" .=) <$> _dddwisiDefinitions,
+                  ("syllabification" .=) <$> _dddwisiSyllabification])
 
 -- | Recommendation related information for this volume.
 --
@@ -5707,48 +5714,48 @@ instance ToJSON Bookshelves where
 
 -- | The source, url and attribution for this dictionary data.
 --
--- /See:/ 'dictlayerdataDictSource' smart constructor.
-data DictlayerdataDictSource = DictlayerdataDictSource
-    { _ddsURL         :: !(Maybe Text)
-    , _ddsAttribution :: !(Maybe Text)
+-- /See:/ 'dictlayerDataDictSource' smart constructor.
+data DictlayerDataDictSource = DictlayerDataDictSource
+    { _dddsURL         :: !(Maybe Text)
+    , _dddsAttribution :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictSource' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataDictSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddsURL'
+-- * 'dddsURL'
 --
--- * 'ddsAttribution'
-dictlayerdataDictSource
-    :: DictlayerdataDictSource
-dictlayerdataDictSource =
-    DictlayerdataDictSource
-    { _ddsURL = Nothing
-    , _ddsAttribution = Nothing
+-- * 'dddsAttribution'
+dictlayerDataDictSource
+    :: DictlayerDataDictSource
+dictlayerDataDictSource =
+    DictlayerDataDictSource
+    { _dddsURL = Nothing
+    , _dddsAttribution = Nothing
     }
 
-ddsURL :: Lens' DictlayerdataDictSource (Maybe Text)
-ddsURL = lens _ddsURL (\ s a -> s{_ddsURL = a})
+dddsURL :: Lens' DictlayerDataDictSource (Maybe Text)
+dddsURL = lens _dddsURL (\ s a -> s{_dddsURL = a})
 
-ddsAttribution :: Lens' DictlayerdataDictSource (Maybe Text)
-ddsAttribution
-  = lens _ddsAttribution
-      (\ s a -> s{_ddsAttribution = a})
+dddsAttribution :: Lens' DictlayerDataDictSource (Maybe Text)
+dddsAttribution
+  = lens _dddsAttribution
+      (\ s a -> s{_dddsAttribution = a})
 
-instance FromJSON DictlayerdataDictSource where
+instance FromJSON DictlayerDataDictSource where
         parseJSON
-          = withObject "DictlayerdataDictSource"
+          = withObject "DictlayerDataDictSource"
               (\ o ->
-                 DictlayerdataDictSource <$>
+                 DictlayerDataDictSource <$>
                    (o .:? "url") <*> (o .:? "attribution"))
 
-instance ToJSON DictlayerdataDictSource where
-        toJSON DictlayerdataDictSource{..}
+instance ToJSON DictlayerDataDictSource where
+        toJSON DictlayerDataDictSource{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _ddsURL,
-                  ("attribution" .=) <$> _ddsAttribution])
+                 [("url" .=) <$> _dddsURL,
+                  ("attribution" .=) <$> _dddsAttribution])
 
 --
 -- /See:/ 'downloadAccesses' smart constructor.
@@ -5800,49 +5807,50 @@ instance ToJSON DownloadAccesses where
                   ("downloadAccessList" .=) <$> _daDownloadAccessList])
 
 --
--- /See:/ 'geolayerdataGeoViewportHi' smart constructor.
-data GeolayerdataGeoViewportHi = GeolayerdataGeoViewportHi
-    { _ggvhLatitude  :: !(Maybe Double)
-    , _ggvhLongitude :: !(Maybe Double)
+-- /See:/ 'geolayerDataGeoViewportHi' smart constructor.
+data GeolayerDataGeoViewportHi = GeolayerDataGeoViewportHi
+    { _gdgvhLatitude  :: !(Maybe Double)
+    , _gdgvhLongitude :: !(Maybe Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GeolayerdataGeoViewportHi' with the minimum fields required to make a request.
+-- | Creates a value of 'GeolayerDataGeoViewportHi' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ggvhLatitude'
+-- * 'gdgvhLatitude'
 --
--- * 'ggvhLongitude'
-geolayerdataGeoViewportHi
-    :: GeolayerdataGeoViewportHi
-geolayerdataGeoViewportHi =
-    GeolayerdataGeoViewportHi
-    { _ggvhLatitude = Nothing
-    , _ggvhLongitude = Nothing
+-- * 'gdgvhLongitude'
+geolayerDataGeoViewportHi
+    :: GeolayerDataGeoViewportHi
+geolayerDataGeoViewportHi =
+    GeolayerDataGeoViewportHi
+    { _gdgvhLatitude = Nothing
+    , _gdgvhLongitude = Nothing
     }
 
-ggvhLatitude :: Lens' GeolayerdataGeoViewportHi (Maybe Double)
-ggvhLatitude
-  = lens _ggvhLatitude (\ s a -> s{_ggvhLatitude = a})
+gdgvhLatitude :: Lens' GeolayerDataGeoViewportHi (Maybe Double)
+gdgvhLatitude
+  = lens _gdgvhLatitude
+      (\ s a -> s{_gdgvhLatitude = a})
 
-ggvhLongitude :: Lens' GeolayerdataGeoViewportHi (Maybe Double)
-ggvhLongitude
-  = lens _ggvhLongitude
-      (\ s a -> s{_ggvhLongitude = a})
+gdgvhLongitude :: Lens' GeolayerDataGeoViewportHi (Maybe Double)
+gdgvhLongitude
+  = lens _gdgvhLongitude
+      (\ s a -> s{_gdgvhLongitude = a})
 
-instance FromJSON GeolayerdataGeoViewportHi where
+instance FromJSON GeolayerDataGeoViewportHi where
         parseJSON
-          = withObject "GeolayerdataGeoViewportHi"
+          = withObject "GeolayerDataGeoViewportHi"
               (\ o ->
-                 GeolayerdataGeoViewportHi <$>
+                 GeolayerDataGeoViewportHi <$>
                    (o .:? "latitude") <*> (o .:? "longitude"))
 
-instance ToJSON GeolayerdataGeoViewportHi where
-        toJSON GeolayerdataGeoViewportHi{..}
+instance ToJSON GeolayerDataGeoViewportHi where
+        toJSON GeolayerDataGeoViewportHi{..}
           = object
               (catMaybes
-                 [("latitude" .=) <$> _ggvhLatitude,
-                  ("longitude" .=) <$> _ggvhLongitude])
+                 [("latitude" .=) <$> _gdgvhLatitude,
+                  ("longitude" .=) <$> _gdgvhLongitude])
 
 -- | General volume information.
 --
@@ -6252,52 +6260,52 @@ instance ToJSON MetadataItemsItem where
                   ("encrypted_key" .=) <$> _miiEncryptedKey])
 
 --
--- /See:/ 'dictlayerdataDictWordsItemSensesItemSource' smart constructor.
-data DictlayerdataDictWordsItemSensesItemSource = DictlayerdataDictWordsItemSensesItemSource
-    { _ddwisisURL         :: !(Maybe Text)
-    , _ddwisisAttribution :: !(Maybe Text)
+-- /See:/ 'dictlayerDataDictWordsItemSensesItemSource' smart constructor.
+data DictlayerDataDictWordsItemSensesItemSource = DictlayerDataDictWordsItemSensesItemSource
+    { _dddwisisURL         :: !(Maybe Text)
+    , _dddwisisAttribution :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsItemSensesItemSource' with the minimum fields required to make a request.
+-- | Creates a value of 'DictlayerDataDictWordsItemSensesItemSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwisisURL'
+-- * 'dddwisisURL'
 --
--- * 'ddwisisAttribution'
-dictlayerdataDictWordsItemSensesItemSource
-    :: DictlayerdataDictWordsItemSensesItemSource
-dictlayerdataDictWordsItemSensesItemSource =
-    DictlayerdataDictWordsItemSensesItemSource
-    { _ddwisisURL = Nothing
-    , _ddwisisAttribution = Nothing
+-- * 'dddwisisAttribution'
+dictlayerDataDictWordsItemSensesItemSource
+    :: DictlayerDataDictWordsItemSensesItemSource
+dictlayerDataDictWordsItemSensesItemSource =
+    DictlayerDataDictWordsItemSensesItemSource
+    { _dddwisisURL = Nothing
+    , _dddwisisAttribution = Nothing
     }
 
-ddwisisURL :: Lens' DictlayerdataDictWordsItemSensesItemSource (Maybe Text)
-ddwisisURL
-  = lens _ddwisisURL (\ s a -> s{_ddwisisURL = a})
+dddwisisURL :: Lens' DictlayerDataDictWordsItemSensesItemSource (Maybe Text)
+dddwisisURL
+  = lens _dddwisisURL (\ s a -> s{_dddwisisURL = a})
 
-ddwisisAttribution :: Lens' DictlayerdataDictWordsItemSensesItemSource (Maybe Text)
-ddwisisAttribution
-  = lens _ddwisisAttribution
-      (\ s a -> s{_ddwisisAttribution = a})
+dddwisisAttribution :: Lens' DictlayerDataDictWordsItemSensesItemSource (Maybe Text)
+dddwisisAttribution
+  = lens _dddwisisAttribution
+      (\ s a -> s{_dddwisisAttribution = a})
 
 instance FromJSON
-         DictlayerdataDictWordsItemSensesItemSource where
+         DictlayerDataDictWordsItemSensesItemSource where
         parseJSON
           = withObject
-              "DictlayerdataDictWordsItemSensesItemSource"
+              "DictlayerDataDictWordsItemSensesItemSource"
               (\ o ->
-                 DictlayerdataDictWordsItemSensesItemSource <$>
+                 DictlayerDataDictWordsItemSensesItemSource <$>
                    (o .:? "url") <*> (o .:? "attribution"))
 
 instance ToJSON
-         DictlayerdataDictWordsItemSensesItemSource where
-        toJSON DictlayerdataDictWordsItemSensesItemSource{..}
+         DictlayerDataDictWordsItemSensesItemSource where
+        toJSON DictlayerDataDictWordsItemSensesItemSource{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _ddwisisURL,
-                  ("attribution" .=) <$> _ddwisisAttribution])
+                 [("url" .=) <$> _dddwisisURL,
+                  ("attribution" .=) <$> _dddwisisAttribution])
 
 -- | Offer retail (=discounted) price in Micros
 --

@@ -47,7 +47,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Insert
 import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
--- | A resource alias for @TaskqueueTasksInsert@ which the
+-- | A resource alias for @TaskqueueTasksInsert@ method which the
 -- 'TasksInsert'' request conforms to.
 type TasksInsertResource =
      Capture "project" Text :>

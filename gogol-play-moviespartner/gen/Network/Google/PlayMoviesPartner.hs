@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference>
 module Network.Google.PlayMoviesPartner
     (
-    -- * API
+    -- * API Declaration
       PlayMoviesPartnerAPI
-    , playMoviesPartnerAPI
-    , playMoviesPartnerRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** PlaymoviesPartnerAccountsAvailsList
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
@@ -209,6 +205,7 @@ import           Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.L
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Play Movies Partner API service.
 type PlayMoviesPartnerAPI =
      AccountsAvailsListResource :<|>
        AccountsStoreInfosCountryGetResource
@@ -217,6 +214,3 @@ type PlayMoviesPartnerAPI =
        :<|> AccountsOrdersGetResource
        :<|> AccountsExperienceLocalesListResource
        :<|> AccountsExperienceLocalesGetResource
-
-playMoviesPartnerAPI :: Proxy PlayMoviesPartnerAPI
-playMoviesPartnerAPI = Proxy

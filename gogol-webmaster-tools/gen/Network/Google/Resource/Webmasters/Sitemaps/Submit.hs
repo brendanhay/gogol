@@ -46,7 +46,7 @@ module Network.Google.Resource.Webmasters.Sitemaps.Submit
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersSitemapsSubmit@ which the
+-- | A resource alias for @WebmastersSitemapsSubmit@ method which the
 -- 'SitemapsSubmit'' request conforms to.
 type SitemapsSubmitResource =
      "sites" :>

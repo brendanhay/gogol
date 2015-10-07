@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAdvertiserGroupsDelete@ which the
+-- | A resource alias for @DfareportingAdvertiserGroupsDelete@ method which the
 -- 'AdvertiserGroupsDelete'' request conforms to.
 type AdvertiserGroupsDeleteResource =
      "userprofiles" :>

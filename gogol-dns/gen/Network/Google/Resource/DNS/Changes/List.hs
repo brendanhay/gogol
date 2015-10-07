@@ -50,7 +50,7 @@ module Network.Google.Resource.DNS.Changes.List
 import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DNSChangesList@ which the
+-- | A resource alias for @DNSChangesList@ method which the
 -- 'ChangesList'' request conforms to.
 type ChangesListResource =
      Capture "project" Text :>

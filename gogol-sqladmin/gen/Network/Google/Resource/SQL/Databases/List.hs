@@ -46,7 +46,7 @@ module Network.Google.Resource.SQL.Databases.List
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLDatabasesList@ which the
+-- | A resource alias for @SQLDatabasesList@ method which the
 -- 'DatabasesList'' request conforms to.
 type DatabasesListResource =
      "projects" :>

@@ -49,7 +49,7 @@ module Network.Google.Resource.Plus.People.List
 import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusPeopleList@ which the
+-- | A resource alias for @PlusPeopleList@ method which the
 -- 'PeopleList'' request conforms to.
 type PeopleListResource =
      "people" :>

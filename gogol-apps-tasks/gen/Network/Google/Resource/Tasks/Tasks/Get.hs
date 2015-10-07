@@ -46,7 +46,7 @@ module Network.Google.Resource.Tasks.Tasks.Get
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTasksGet@ which the
+-- | A resource alias for @TasksTasksGet@ method which the
 -- 'TasksGet'' request conforms to.
 type TasksGetResource =
      "lists" :>

@@ -55,7 +55,7 @@ module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Delete
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersDataSourcesDatasetsDelete@ which the
+-- | A resource alias for @FitnessUsersDataSourcesDatasetsDelete@ method which the
 -- 'UsersDataSourcesDatasetsDelete'' request conforms to.
 type UsersDataSourcesDatasetsDeleteResource =
      Capture "userId" Text :>

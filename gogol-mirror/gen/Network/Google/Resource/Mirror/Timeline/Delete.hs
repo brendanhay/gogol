@@ -45,7 +45,7 @@ module Network.Google.Resource.Mirror.Timeline.Delete
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorTimelineDelete@ which the
+-- | A resource alias for @MirrorTimelineDelete@ method which the
 -- 'TimelineDelete'' request conforms to.
 type TimelineDeleteResource =
      "timeline" :>

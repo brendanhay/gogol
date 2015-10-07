@@ -45,7 +45,7 @@ module Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsProvisioningCreateAccountTicket@ which the
+-- | A resource alias for @AnalyticsProvisioningCreateAccountTicket@ method which the
 -- 'ProvisioningCreateAccountTicket'' request conforms to.
 type ProvisioningCreateAccountTicketResource =
      "provisioning" :>

@@ -45,7 +45,7 @@ module Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
 import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClickBidManagerLineitemsDownloadlineitems@ which the
+-- | A resource alias for @DoubleClickBidManagerLineitemsDownloadlineitems@ method which the
 -- 'LineitemsDownloadlineitems'' request conforms to.
 type LineitemsDownloadlineitemsResource =
      "lineitems" :>

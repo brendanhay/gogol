@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.TargetPools.AddHealthCheck
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetPoolsAddHealthCheck@ which the
+-- | A resource alias for @ComputeTargetPoolsAddHealthCheck@ method which the
 -- 'TargetPoolsAddHealthCheck'' request conforms to.
 type TargetPoolsAddHealthCheckResource =
      Capture "project" Text :>

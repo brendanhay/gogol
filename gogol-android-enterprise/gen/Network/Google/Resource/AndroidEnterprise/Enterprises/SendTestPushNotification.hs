@@ -46,7 +46,7 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.SendTestPushNotific
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEnterprisesSendTestPushNotification@ which the
+-- | A resource alias for @AndroidEnterpriseEnterprisesSendTestPushNotification@ method which the
 -- 'EnterprisesSendTestPushNotification'' request conforms to.
 type EnterprisesSendTestPushNotificationResource =
      "enterprises" :>

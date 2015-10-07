@@ -61,7 +61,7 @@ module Network.Google.Resource.DFAReporting.Creatives.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativesList@ which the
+-- | A resource alias for @DfareportingCreativesList@ method which the
 -- 'CreativesList'' request conforms to.
 type CreativesListResource =
      "userprofiles" :>

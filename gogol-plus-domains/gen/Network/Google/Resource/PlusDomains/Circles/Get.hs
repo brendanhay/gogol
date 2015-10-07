@@ -45,7 +45,7 @@ module Network.Google.Resource.PlusDomains.Circles.Get
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsCirclesGet@ which the
+-- | A resource alias for @PlusDomainsCirclesGet@ method which the
 -- 'CirclesGet'' request conforms to.
 type CirclesGetResource =
      "circles" :>

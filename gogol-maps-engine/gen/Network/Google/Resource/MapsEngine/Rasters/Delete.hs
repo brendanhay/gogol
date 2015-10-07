@@ -45,7 +45,7 @@ module Network.Google.Resource.MapsEngine.Rasters.Delete
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRastersDelete@ which the
+-- | A resource alias for @MapsEngineRastersDelete@ method which the
 -- 'RastersDelete'' request conforms to.
 type RastersDeleteResource =
      "rasters" :>

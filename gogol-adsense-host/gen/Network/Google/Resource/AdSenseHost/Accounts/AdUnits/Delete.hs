@@ -48,7 +48,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Delete
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAccountsAdUnitsDelete@ which the
+-- | A resource alias for @AdsensehostAccountsAdUnitsDelete@ method which the
 -- 'AccountsAdUnitsDelete'' request conforms to.
 type AccountsAdUnitsDeleteResource =
      "accounts" :>

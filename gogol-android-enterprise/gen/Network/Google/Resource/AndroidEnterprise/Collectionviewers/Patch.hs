@@ -51,7 +51,7 @@ module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Patch
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseCollectionviewersPatch@ which the
+-- | A resource alias for @AndroidEnterpriseCollectionviewersPatch@ method which the
 -- 'CollectionviewersPatch'' request conforms to.
 type CollectionviewersPatchResource =
      "enterprises" :>

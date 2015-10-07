@@ -47,7 +47,7 @@ module Network.Google.Resource.Drive.Realtime.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRealtimeGet@ which the
+-- | A resource alias for @DriveRealtimeGet@ method which the
 -- 'RealtimeGet'' request conforms to.
 type RealtimeGetResource =
      "files" :>

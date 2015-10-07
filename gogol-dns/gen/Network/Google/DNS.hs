@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference>
 module Network.Google.DNS
     (
-    -- * API
+    -- * API Declaration
       DNSAPI
-    , dNSAPI
-    , dNSRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** DNSChangesCreate
     , module Network.Google.Resource.DNS.Changes.Create
@@ -99,7 +95,7 @@ module Network.Google.DNS
     , rrsKind
     , rrsName
     , rrsType
-    , rrsRrdatas
+    , rrsRrDatas
 
     -- ** ManagedZone
     , ManagedZone
@@ -122,7 +118,7 @@ module Network.Google.DNS
     , qResourceRecordsPerRrset
     , qRrsetAdditionsPerChange
     , qManagedZones
-    , qTotalRrdataSizePerChange
+    , qTotalRrDataSizePerChange
 
     -- ** ManagedZonesListResponse
     , ManagedZonesListResponse
@@ -148,6 +144,7 @@ import           Network.Google.Resource.DNS.ResourceRecordSets.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Cloud DNS API service.
 type DNSAPI =
      ChangesListResource :<|> ChangesGetResource :<|>
        ChangesCreateResource
@@ -157,6 +154,3 @@ type DNSAPI =
        :<|> ManagedZonesCreateResource
        :<|> ManagedZonesDeleteResource
        :<|> ProjectsGetResource
-
-dNSAPI :: Proxy DNSAPI
-dNSAPI = Proxy

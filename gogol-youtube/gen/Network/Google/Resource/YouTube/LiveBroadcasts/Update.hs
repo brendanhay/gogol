@@ -49,7 +49,7 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveBroadcastsUpdate@ which the
+-- | A resource alias for @YouTubeLiveBroadcastsUpdate@ method which the
 -- 'LiveBroadcastsUpdate'' request conforms to.
 type LiveBroadcastsUpdateResource =
      "liveBroadcasts" :>

@@ -48,7 +48,7 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.Delete
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEnterprisesDelete@ which the
+-- | A resource alias for @AndroidEnterpriseEnterprisesDelete@ method which the
 -- 'EnterprisesDelete'' request conforms to.
 type EnterprisesDeleteResource =
      "enterprises" :>

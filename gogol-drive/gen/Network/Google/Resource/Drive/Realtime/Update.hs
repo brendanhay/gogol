@@ -48,7 +48,7 @@ module Network.Google.Resource.Drive.Realtime.Update
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRealtimeUpdate@ which the
+-- | A resource alias for @DriveRealtimeUpdate@ method which the
 -- 'RealtimeUpdate'' request conforms to.
 type RealtimeUpdateResource =
      "files" :>

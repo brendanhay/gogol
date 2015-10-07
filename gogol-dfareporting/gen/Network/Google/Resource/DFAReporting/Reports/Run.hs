@@ -47,7 +47,7 @@ module Network.Google.Resource.DFAReporting.Reports.Run
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingReportsRun@ which the
+-- | A resource alias for @DfareportingReportsRun@ method which the
 -- 'ReportsRun'' request conforms to.
 type ReportsRunResource =
      "userprofiles" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.Insert
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEnterprisesInsert@ which the
+-- | A resource alias for @AndroidEnterpriseEnterprisesInsert@ method which the
 -- 'EnterprisesInsert'' request conforms to.
 type EnterprisesInsertResource =
      "enterprises" :>

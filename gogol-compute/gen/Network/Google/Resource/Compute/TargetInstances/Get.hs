@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.TargetInstances.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetInstancesGet@ which the
+-- | A resource alias for @ComputeTargetInstancesGet@ method which the
 -- 'TargetInstancesGet'' request conforms to.
 type TargetInstancesGetResource =
      Capture "project" Text :>

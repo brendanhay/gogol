@@ -49,7 +49,7 @@ module Network.Google.Resource.Drive.Files.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesGet@ which the
+-- | A resource alias for @DriveFilesGet@ method which the
 -- 'FilesGet'' request conforms to.
 type FilesGetResource =
      "files" :>

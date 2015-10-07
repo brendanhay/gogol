@@ -48,7 +48,7 @@ module Network.Google.Resource.YouTube.PlayLists.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubePlayListsInsert@ which the
+-- | A resource alias for @YouTubePlayListsInsert@ method which the
 -- 'PlayListsInsert'' request conforms to.
 type PlayListsInsertResource =
      "playlists" :>

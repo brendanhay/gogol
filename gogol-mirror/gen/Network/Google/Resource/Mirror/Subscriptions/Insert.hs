@@ -45,7 +45,7 @@ module Network.Google.Resource.Mirror.Subscriptions.Insert
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorSubscriptionsInsert@ which the
+-- | A resource alias for @MirrorSubscriptionsInsert@ method which the
 -- 'SubscriptionsInsert'' request conforms to.
 type SubscriptionsInsertResource =
      "subscriptions" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.YouTube.Thumbnails.Set
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeThumbnailsSet@ which the
+-- | A resource alias for @YouTubeThumbnailsSet@ method which the
 -- 'ThumbnailsSet'' request conforms to.
 type ThumbnailsSetResource =
      "thumbnails" :>

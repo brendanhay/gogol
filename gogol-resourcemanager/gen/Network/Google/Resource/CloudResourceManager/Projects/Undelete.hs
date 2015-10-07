@@ -59,7 +59,7 @@ module Network.Google.Resource.CloudResourceManager.Projects.Undelete
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerProjectsUndelete@ which the
+-- | A resource alias for @CloudResourceManagerProjectsUndelete@ method which the
 -- 'ProjectsUndelete'' request conforms to.
 type ProjectsUndeleteResource =
      "v1beta1" :>

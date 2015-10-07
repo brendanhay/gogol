@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.Instances.AttachDisk
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesAttachDisk@ which the
+-- | A resource alias for @ComputeInstancesAttachDisk@ method which the
 -- 'InstancesAttachDisk'' request conforms to.
 type InstancesAttachDiskResource =
      Capture "project" Text :>

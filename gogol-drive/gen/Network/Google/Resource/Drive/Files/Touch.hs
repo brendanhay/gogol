@@ -45,7 +45,7 @@ module Network.Google.Resource.Drive.Files.Touch
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesTouch@ which the
+-- | A resource alias for @DriveFilesTouch@ method which the
 -- 'FilesTouch'' request conforms to.
 type FilesTouchResource =
      "files" :>

@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference>
 module Network.Google.Fitness
     (
-    -- * API
+    -- * API Declaration
       FitnessAPI
-    , fitnessAPI
-    , fitnessRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** FitnessUsersDataSourcesCreate
     , module Network.Google.Resource.Fitness.Users.DataSources.Create
@@ -255,6 +251,7 @@ import           Network.Google.Resource.Fitness.Users.Sessions.Update
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Fitness service.
 type FitnessAPI =
      UsersDatasetAggregateResource :<|>
        UsersDataSourcesDatasetsPatchResource
@@ -269,6 +266,3 @@ type FitnessAPI =
        :<|> UsersSessionsListResource
        :<|> UsersSessionsDeleteResource
        :<|> UsersSessionsUpdateResource
-
-fitnessAPI :: Proxy FitnessAPI
-fitnessAPI = Proxy

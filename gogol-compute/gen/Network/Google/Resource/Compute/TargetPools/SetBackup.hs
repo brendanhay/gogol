@@ -49,7 +49,7 @@ module Network.Google.Resource.Compute.TargetPools.SetBackup
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetPoolsSetBackup@ which the
+-- | A resource alias for @ComputeTargetPoolsSetBackup@ method which the
 -- 'TargetPoolsSetBackup'' request conforms to.
 type TargetPoolsSetBackupResource =
      Capture "project" Text :>

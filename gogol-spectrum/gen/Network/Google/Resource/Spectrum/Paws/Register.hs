@@ -46,7 +46,7 @@ module Network.Google.Resource.Spectrum.Paws.Register
 import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
--- | A resource alias for @SpectrumPawsRegister@ which the
+-- | A resource alias for @SpectrumPawsRegister@ method which the
 -- 'PawsRegister'' request conforms to.
 type PawsRegisterResource =
      "register" :>

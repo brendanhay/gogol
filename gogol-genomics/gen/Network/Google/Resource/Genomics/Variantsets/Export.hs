@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.Variantsets.Export
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsVariantsetsExport@ which the
+-- | A resource alias for @GenomicsVariantsetsExport@ method which the
 -- 'VariantsetsExport'' request conforms to.
 type VariantsetsExportResource =
      "variantsets" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.Calendar.ACL.Insert
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarACLInsert@ which the
+-- | A resource alias for @CalendarACLInsert@ method which the
 -- 'ACLInsert'' request conforms to.
 type ACLInsertResource =
      "calendars" :>

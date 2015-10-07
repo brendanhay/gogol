@@ -49,7 +49,7 @@ module Network.Google.Resource.DFAReporting.Cities.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCitiesList@ which the
+-- | A resource alias for @DfareportingCitiesList@ method which the
 -- 'CitiesList'' request conforms to.
 type CitiesListResource =
      "userprofiles" :>

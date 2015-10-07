@@ -57,7 +57,7 @@ module Network.Google.Resource.Directory.Users.Watch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersWatch@ which the
+-- | A resource alias for @DirectoryUsersWatch@ method which the
 -- 'UsersWatch'' request conforms to.
 type UsersWatchResource =
      "users" :>

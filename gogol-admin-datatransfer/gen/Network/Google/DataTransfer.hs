@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference>
 module Network.Google.DataTransfer
     (
-    -- * API
+    -- * API Declaration
       DataTransferAPI
-    , dataTransferAPI
-    , dataTransferRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** DataTransferApplicationsGet
     , module Network.Google.Resource.DataTransfer.Applications.Get
@@ -108,11 +104,9 @@ import           Network.Google.Resource.DataTransfer.Transfers.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Admin Data Transfer API service.
 type DataTransferAPI =
      TransfersInsertResource :<|> TransfersListResource
        :<|> TransfersGetResource
        :<|> ApplicationsListResource
        :<|> ApplicationsGetResource
-
-dataTransferAPI :: Proxy DataTransferAPI
-dataTransferAPI = Proxy

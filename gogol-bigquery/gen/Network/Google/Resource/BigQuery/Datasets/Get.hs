@@ -22,7 +22,7 @@
 --
 -- | Returns the dataset specified by datasetID.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryDatasetsGet@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryDatasetsGet@.
 module Network.Google.Resource.BigQuery.Datasets.Get
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.BigQuery.Datasets.Get
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigqueryDatasetsGet@ which the
+-- | A resource alias for @BigQueryDatasetsGet@ method which the
 -- 'DatasetsGet'' request conforms to.
 type DatasetsGetResource =
      "projects" :>

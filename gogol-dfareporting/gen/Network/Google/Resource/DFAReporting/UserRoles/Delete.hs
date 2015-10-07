@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.UserRoles.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingUserRolesDelete@ which the
+-- | A resource alias for @DfareportingUserRolesDelete@ method which the
 -- 'UserRolesDelete'' request conforms to.
 type UserRolesDeleteResource =
      "userprofiles" :>

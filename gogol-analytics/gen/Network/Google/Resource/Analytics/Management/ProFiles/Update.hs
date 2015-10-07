@@ -48,7 +48,7 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Update
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFilesUpdate@ which the
+-- | A resource alias for @AnalyticsManagementProFilesUpdate@ method which the
 -- 'ManagementProFilesUpdate'' request conforms to.
 type ManagementProFilesUpdateResource =
      "management" :>

@@ -45,7 +45,7 @@ module Network.Google.Resource.Books.Onboarding.ListCategories
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksOnboardingListCategories@ which the
+-- | A resource alias for @BooksOnboardingListCategories@ method which the
 -- 'OnboardingListCategories'' request conforms to.
 type OnboardingListCategoriesResource =
      "onboarding" :>

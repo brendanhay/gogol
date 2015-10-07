@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference>
 module Network.Google.AppsReseller
     (
-    -- * API
+    -- * API Declaration
       AppsResellerAPI
-    , appsResellerAPI
-    , appsResellerRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** ResellerCustomersGet
     , module Network.Google.Resource.Reseller.Customers.Get
@@ -194,6 +190,7 @@ import           Network.Google.Resource.Reseller.Subscriptions.Suspend
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Enterprise Apps Reseller API service.
 type AppsResellerAPI =
      CustomersInsertResource :<|> CustomersPatchResource
        :<|> CustomersGetResource
@@ -208,6 +205,3 @@ type AppsResellerAPI =
        :<|> SubscriptionsChangeSeatsResource
        :<|> SubscriptionsDeleteResource
        :<|> SubscriptionsStartPaidServiceResource
-
-appsResellerAPI :: Proxy AppsResellerAPI
-appsResellerAPI = Proxy

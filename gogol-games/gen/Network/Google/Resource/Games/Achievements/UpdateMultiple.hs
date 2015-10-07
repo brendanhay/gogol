@@ -45,7 +45,7 @@ module Network.Google.Resource.Games.Achievements.UpdateMultiple
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesAchievementsUpdateMultiple@ which the
+-- | A resource alias for @GamesAchievementsUpdateMultiple@ method which the
 -- 'AchievementsUpdateMultiple'' request conforms to.
 type AchievementsUpdateMultipleResource =
      "achievements" :>

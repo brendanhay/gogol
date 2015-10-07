@@ -47,7 +47,7 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.Get
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryBookshelvesGet@ which the
+-- | A resource alias for @BooksMyLibraryBookshelvesGet@ method which the
 -- 'MyLibraryBookshelvesGet'' request conforms to.
 type MyLibraryBookshelvesGetResource =
      "mylibrary" :>

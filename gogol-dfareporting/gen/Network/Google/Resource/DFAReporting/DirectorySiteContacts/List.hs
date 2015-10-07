@@ -52,7 +52,7 @@ module Network.Google.Resource.DFAReporting.DirectorySiteContacts.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingDirectorySiteContactsList@ which the
+-- | A resource alias for @DfareportingDirectorySiteContactsList@ method which the
 -- 'DirectorySiteContactsList'' request conforms to.
 type DirectorySiteContactsListResource =
      "userprofiles" :>

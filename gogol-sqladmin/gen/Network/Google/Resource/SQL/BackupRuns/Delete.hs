@@ -47,7 +47,7 @@ module Network.Google.Resource.SQL.BackupRuns.Delete
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLBackupRunsDelete@ which the
+-- | A resource alias for @SQLBackupRunsDelete@ method which the
 -- 'BackupRunsDelete'' request conforms to.
 type BackupRunsDeleteResource =
      "projects" :>

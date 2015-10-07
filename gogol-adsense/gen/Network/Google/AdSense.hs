@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference>
 module Network.Google.AdSense
     (
-    -- * API
+    -- * API Declaration
       AdSenseAPI
-    , adSenseAPI
-    , adSenseRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** AdsenseAccountsAdClientsList
     , module Network.Google.Resource.AdSense.Accounts.AdClients.List
@@ -446,6 +442,7 @@ import           Network.Google.Resource.AdSense.URLChannels.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the AdSense Management API service.
 type AdSenseAPI =
      AdClientsListResource :<|>
        AccountsAdClientsListResource
@@ -485,6 +482,3 @@ type AdSenseAPI =
        :<|> MetadataMetricsListResource
        :<|> MetadataDimensionsListResource
        :<|> PaymentsListResource
-
-adSenseAPI :: Proxy AdSenseAPI
-adSenseAPI = Proxy

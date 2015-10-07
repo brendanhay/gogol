@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPlacementGroupsInsert@ which the
+-- | A resource alias for @DfareportingPlacementGroupsInsert@ method which the
 -- 'PlacementGroupsInsert'' request conforms to.
 type PlacementGroupsInsertResource =
      "userprofiles" :>

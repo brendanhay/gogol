@@ -47,7 +47,7 @@ module Network.Google.Resource.Datastore.Datasets.Commit
 import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DatastoreDatasetsCommit@ which the
+-- | A resource alias for @DatastoreDatasetsCommit@ method which the
 -- 'DatasetsCommit'' request conforms to.
 type DatasetsCommitResource =
      Capture "datasetId" Text :>

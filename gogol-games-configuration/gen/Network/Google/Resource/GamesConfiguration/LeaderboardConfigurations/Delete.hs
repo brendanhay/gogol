@@ -45,7 +45,7 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Dele
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationLeaderboardConfigurationsDelete@ which the
+-- | A resource alias for @GamesConfigurationLeaderboardConfigurationsDelete@ method which the
 -- 'LeaderboardConfigurationsDelete'' request conforms to.
 type LeaderboardConfigurationsDeleteResource =
      "leaderboards" :>

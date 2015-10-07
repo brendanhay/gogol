@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.VPNTunnels.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeVPNTunnelsDelete@ which the
+-- | A resource alias for @ComputeVPNTunnelsDelete@ method which the
 -- 'VPNTunnelsDelete'' request conforms to.
 type VPNTunnelsDeleteResource =
      Capture "project" Text :>

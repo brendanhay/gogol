@@ -47,7 +47,7 @@ module Network.Google.Resource.FusionTables.Template.List
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTemplateList@ which the
+-- | A resource alias for @FusiontablesTemplateList@ method which the
 -- 'TemplateList'' request conforms to.
 type TemplateListResource =
      "tables" :>

@@ -49,7 +49,7 @@ module Network.Google.Resource.MapsEngine.Tables.Upload
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesUpload@ which the
+-- | A resource alias for @MapsEngineTablesUpload@ method which the
 -- 'TablesUpload'' request conforms to.
 type TablesUploadResource =
      "tables" :>

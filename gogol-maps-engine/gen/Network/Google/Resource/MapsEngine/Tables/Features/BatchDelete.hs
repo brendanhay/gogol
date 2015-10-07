@@ -46,7 +46,7 @@ module Network.Google.Resource.MapsEngine.Tables.Features.BatchDelete
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesFeaturesBatchDelete@ which the
+-- | A resource alias for @MapsEngineTablesFeaturesBatchDelete@ method which the
 -- 'TablesFeaturesBatchDelete'' request conforms to.
 type TablesFeaturesBatchDeleteResource =
      "tables" :>

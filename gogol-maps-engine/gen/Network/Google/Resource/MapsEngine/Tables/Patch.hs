@@ -46,7 +46,7 @@ module Network.Google.Resource.MapsEngine.Tables.Patch
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesPatch@ which the
+-- | A resource alias for @MapsEngineTablesPatch@ method which the
 -- 'TablesPatch'' request conforms to.
 type TablesPatchResource =
      "tables" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.FusionTables.Column.List
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesColumnList@ which the
+-- | A resource alias for @FusiontablesColumnList@ method which the
 -- 'ColumnList'' request conforms to.
 type ColumnListResource =
      "tables" :>

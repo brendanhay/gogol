@@ -15,7 +15,7 @@
 --
 module Network.Google.Analytics.Types
     (
-    -- * Service URL
+    -- * Service Request
       analyticsRequest
 
     -- * UnSampledReports
@@ -1005,7 +1005,7 @@ import           Network.Google.Analytics.Types.Product
 import           Network.Google.Analytics.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v3' of the Google Analytics API.
+-- | Default request referring to version 'v3' of the Google Analytics API. This contains the host and root path used as a starting point for constructing service requests.
 analyticsRequest :: RequestBuilder
 analyticsRequest
   = defaultRequest "https://www.googleapis.com/"

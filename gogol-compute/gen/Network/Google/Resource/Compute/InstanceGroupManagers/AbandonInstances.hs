@@ -51,7 +51,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersAbandonInstances@ which the
+-- | A resource alias for @ComputeInstanceGroupManagersAbandonInstances@ method which the
 -- 'InstanceGroupManagersAbandonInstances'' request conforms to.
 type InstanceGroupManagersAbandonInstancesResource =
      Capture "project" Text :>

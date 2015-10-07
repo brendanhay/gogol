@@ -51,7 +51,7 @@ module Network.Google.Resource.YouTube.LiveStreams.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveStreamsList@ which the
+-- | A resource alias for @YouTubeLiveStreamsList@ method which the
 -- 'LiveStreamsList'' request conforms to.
 type LiveStreamsListResource =
      "liveStreams" :>

@@ -56,7 +56,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.Reports.Generate
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAccountsReportsGenerate@ which the
+-- | A resource alias for @AdsensehostAccountsReportsGenerate@ method which the
 -- 'AccountsReportsGenerate'' request conforms to.
 type AccountsReportsGenerateResource =
      "accounts" :>

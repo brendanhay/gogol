@@ -48,7 +48,7 @@ module Network.Google.Resource.Drive.Permissions.Patch
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePermissionsPatch@ which the
+-- | A resource alias for @DrivePermissionsPatch@ method which the
 -- 'PermissionsPatch'' request conforms to.
 type PermissionsPatchResource =
      "files" :>

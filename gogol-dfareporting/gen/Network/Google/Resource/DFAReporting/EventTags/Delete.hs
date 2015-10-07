@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.EventTags.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingEventTagsDelete@ which the
+-- | A resource alias for @DfareportingEventTagsDelete@ method which the
 -- 'EventTagsDelete'' request conforms to.
 type EventTagsDeleteResource =
      "userprofiles" :>

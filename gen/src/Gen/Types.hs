@@ -17,6 +17,8 @@
 {-# LANGUAGE TemplateHaskell            #-}
 {-# LANGUAGE ViewPatterns               #-}
 
+{-# OPTIONS_GHC -fno-warn-type-defaults #-}
+
 -- Module      : Gen.Types
 -- Copyright   : (c) 2015 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
@@ -34,10 +36,13 @@ module Gen.Types
     , module Gen.Types.Data
     ) where
 
+import           Control.Applicative
 import           Control.Lens               hiding ((.=))
 import           Control.Monad.Except
 import           Control.Monad.State.Strict
 import           Data.Aeson                 hiding (Array, Bool, String)
+import qualified Data.Attoparsec.Text       as A
+import           Data.Bifunctor
 import           Data.CaseInsensitive       (CI)
 import qualified Data.CaseInsensitive       as CI
 import           Data.Function              (on)
@@ -65,6 +70,8 @@ import           GHC.TypeLits
 import           Prelude                    hiding (Enum)
 import           Text.EDE                   (Template)
 
+default (Integer)
+
 type Set   = Set.HashSet
 type Error = LText.Text
 type Path  = Path.FilePath
@@ -90,11 +97,50 @@ data Versions = Versions
 
 makeClassy ''Versions
 
--- FIXME: need a more comprehensive 'vm_alpha' vs 'vm1.1' version check.
+data Release
+    = Sandbox
+    | Alpha   (Maybe Int) (Maybe Char)
+    | Beta    (Maybe Int) (Maybe Char)
+      deriving (Eq, Ord, Show)
+
+data ModelVersion = ModelVersion Double (Maybe Release)
+    deriving (Eq, Show)
+
+instance Ord ModelVersion where
+    compare (ModelVersion an ar) (ModelVersion bn br) =
+        compare an bn <>
+            case (ar, br) of
+                (Nothing, _)       -> GT
+                (_,       Nothing) -> LT
+                (Just x,  Just y)  -> compare x y
+
+parseVersion :: Text -> Either String ModelVersion
+parseVersion x = first (mappend (Text.unpack x) . mappend " -> ") $
+    A.parseOnly (preface *> (empty' <|> version) <* A.endOfInput) x
+  where
+    empty'  = ModelVersion 0 <$> (alpha <|> beta <|> exp')
+    version = ModelVersion
+        <$> number
+        <*> (alpha <|> beta <|> sandbox <|> pure Nothing)
+
+    preface = A.takeWhile (/= '_') *> void (A.char '_') <|> pure ()
+    number  = A.takeWhile  (/= 'v') *> A.char 'v' *> A.double
+
+    alpha = A.string "alpha"
+         *> (Alpha <$> optional A.decimal <*> optional A.letter)
+        <&> Just
+
+    beta  = A.string "beta"
+         *> (Beta <$> optional A.decimal <*> optional A.letter)
+        <&> Just
+
+    sandbox = Just Sandbox <$ A.string "sandbox"
+    exp'    = Just Sandbox <$ A.string "exp" <* A.decimal
+
 data Model = Model
     { modelName    :: Text
     , modelPrefix  :: Text
-    , modelVersion :: Text
+    , modelVersion :: ModelVersion
     , modelPath    :: Path
     }
 
@@ -116,7 +162,7 @@ modelFromPath x = Model n p v x
       $ Text.split (== '/') p
 
     p = toTextIgnore (Path.parent (Path.parent x))
-    v = toTextIgnore (Path.dirname x)
+    v = either error id $ parseVersion (toTextIgnore (Path.dirname x))
 
 data Templates = Templates
     { cabalTemplate  :: Template

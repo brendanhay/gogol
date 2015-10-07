@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference>
 module Network.Google.AppsLicensing
     (
-    -- * API
+    -- * API Declaration
       AppsLicensingAPI
-    , appsLicensingAPI
-    , appsLicensingRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** LicensingLicenseAssignmentsDelete
     , module Network.Google.Resource.Licensing.LicenseAssignments.Delete
@@ -88,6 +84,7 @@ import           Network.Google.Resource.Licensing.LicenseAssignments.Update
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Enterprise License Manager API service.
 type AppsLicensingAPI =
      LicenseAssignmentsInsertResource :<|>
        LicenseAssignmentsPatchResource
@@ -96,6 +93,3 @@ type AppsLicensingAPI =
        :<|> LicenseAssignmentsListForProductResource
        :<|> LicenseAssignmentsDeleteResource
        :<|> LicenseAssignmentsUpdateResource
-
-appsLicensingAPI :: Proxy AppsLicensingAPI
-appsLicensingAPI = Proxy

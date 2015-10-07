@@ -47,7 +47,7 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Delete
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageDefaultObjectAccessControlsDelete@ which the
+-- | A resource alias for @StorageDefaultObjectAccessControlsDelete@ method which the
 -- 'DefaultObjectAccessControlsDelete'' request conforms to.
 type DefaultObjectAccessControlsDeleteResource =
      "b" :>

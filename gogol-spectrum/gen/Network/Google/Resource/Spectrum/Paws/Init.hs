@@ -46,7 +46,7 @@ module Network.Google.Resource.Spectrum.Paws.Init
 import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
--- | A resource alias for @SpectrumPawsInit@ which the
+-- | A resource alias for @SpectrumPawsInit@ method which the
 -- 'PawsInit'' request conforms to.
 type PawsInitResource =
      "init" :>

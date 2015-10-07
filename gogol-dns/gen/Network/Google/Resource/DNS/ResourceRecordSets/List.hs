@@ -50,7 +50,7 @@ module Network.Google.Resource.DNS.ResourceRecordSets.List
 import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DNSResourceRecordSetsList@ which the
+-- | A resource alias for @DNSResourceRecordSetsList@ method which the
 -- 'ResourceRecordSetsList'' request conforms to.
 type ResourceRecordSetsListResource =
      Capture "project" Text :>

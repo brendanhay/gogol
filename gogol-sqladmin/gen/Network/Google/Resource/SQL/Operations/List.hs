@@ -49,7 +49,7 @@ module Network.Google.Resource.SQL.Operations.List
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLOperationsList@ which the
+-- | A resource alias for @SQLOperationsList@ method which the
 -- 'OperationsList'' request conforms to.
 type OperationsListResource =
      "projects" :>

@@ -49,7 +49,7 @@ module Network.Google.Resource.Compute.TargetPools.GetHealth
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetPoolsGetHealth@ which the
+-- | A resource alias for @ComputeTargetPoolsGetHealth@ method which the
 -- 'TargetPoolsGetHealth'' request conforms to.
 type TargetPoolsGetHealthResource =
      Capture "project" Text :>

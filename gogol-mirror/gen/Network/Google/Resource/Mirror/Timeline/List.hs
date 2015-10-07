@@ -51,7 +51,7 @@ module Network.Google.Resource.Mirror.Timeline.List
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorTimelineList@ which the
+-- | A resource alias for @MirrorTimelineList@ method which the
 -- 'TimelineList'' request conforms to.
 type TimelineListResource =
      "timeline" :>

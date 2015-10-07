@@ -52,7 +52,7 @@ module Network.Google.Resource.AndroidEnterprise.Devices.SetState
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseDevicesSetState@ which the
+-- | A resource alias for @AndroidEnterpriseDevicesSetState@ method which the
 -- 'DevicesSetState'' request conforms to.
 type DevicesSetStateResource =
      "enterprises" :>

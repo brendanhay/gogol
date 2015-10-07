@@ -19,14 +19,10 @@
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference>
 module Network.Google.StorageTransfer
     (
-    -- * API
+    -- * API Declaration
       StorageTransferAPI
-    , storageTransferAPI
-    , storageTransferRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** StorageTransferGetGoogleServiceAccount
     , module Network.Google.Resource.StorageTransfer.GetGoogleServiceAccount
@@ -278,6 +274,7 @@ import           Network.Google.StorageTransfer.Types
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Storage Transfer API service.
 type StorageTransferAPI =
      TransferJobsListResource :<|>
        TransferJobsPatchResource
@@ -291,6 +288,3 @@ type StorageTransferAPI =
        :<|> TransferOperationsDeleteResource
        :<|> TransferOperationsResumeResource
        :<|> GoogleServiceAccountsGetResource
-
-storageTransferAPI :: Proxy StorageTransferAPI
-storageTransferAPI = Proxy

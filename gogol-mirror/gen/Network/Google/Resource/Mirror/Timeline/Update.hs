@@ -47,7 +47,7 @@ module Network.Google.Resource.Mirror.Timeline.Update
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorTimelineUpdate@ which the
+-- | A resource alias for @MirrorTimelineUpdate@ method which the
 -- 'TimelineUpdate'' request conforms to.
 type TimelineUpdateResource =
      "timeline" :>

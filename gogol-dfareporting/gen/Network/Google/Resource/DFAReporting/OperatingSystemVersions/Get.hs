@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.OperatingSystemVersions.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingOperatingSystemVersionsGet@ which the
+-- | A resource alias for @DfareportingOperatingSystemVersionsGet@ method which the
 -- 'OperatingSystemVersionsGet'' request conforms to.
 type OperatingSystemVersionsGetResource =
      "userprofiles" :>

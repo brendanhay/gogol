@@ -52,7 +52,7 @@ module Network.Google.Resource.Reports.UserUsageReport.Get
 import           Network.Google.Prelude
 import           Network.Google.Reports.Types
 
--- | A resource alias for @ReportsUserUsageReportGet@ which the
+-- | A resource alias for @ReportsUserUsageReportGet@ method which the
 -- 'UserUsageReportGet'' request conforms to.
 type UserUsageReportGetResource =
      "usage" :>

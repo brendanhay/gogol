@@ -15,7 +15,7 @@
 --
 module Network.Google.AppsReseller.Types
     (
-    -- * Service URL
+    -- * Service Request
       appsResellerRequest
 
     -- * SubscriptionTrialSettings
@@ -124,7 +124,7 @@ import           Network.Google.AppsReseller.Types.Product
 import           Network.Google.AppsReseller.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1sandbox' of the Enterprise Apps Reseller API.
+-- | Default request referring to version 'v1sandbox' of the Enterprise Apps Reseller API. This contains the host and root path used as a starting point for constructing service requests.
 appsResellerRequest :: RequestBuilder
 appsResellerRequest
   = defaultRequest "https://www.googleapis.com/"

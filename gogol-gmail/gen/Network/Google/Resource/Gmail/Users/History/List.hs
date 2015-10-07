@@ -50,7 +50,7 @@ module Network.Google.Resource.Gmail.Users.History.List
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersHistoryList@ which the
+-- | A resource alias for @GmailUsersHistoryList@ method which the
 -- 'UsersHistoryList'' request conforms to.
 type UsersHistoryListResource =
      Capture "userId" Text :>

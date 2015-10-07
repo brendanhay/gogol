@@ -18,14 +18,10 @@
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference>
 module Network.Google.Dataflow
     (
-    -- * API
+    -- * API Declaration
       DataflowAPI
-    , dataflowAPI
-    , dataflowRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** DataflowProjectsJobsCreate
     , module Network.Google.Resource.Dataflow.Projects.Jobs.Create
@@ -724,6 +720,7 @@ import           Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Report
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Dataflow API service.
 type DataflowAPI =
      ProjectsJobsWorkItemsLeaseResource :<|>
        ProjectsJobsWorkItemsReportStatusResource
@@ -733,6 +730,3 @@ type DataflowAPI =
        :<|> ProjectsJobsCreateResource
        :<|> ProjectsJobsUpdateResource
        :<|> ProjectsJobsGetMetricsResource
-
-dataflowAPI :: Proxy DataflowAPI
-dataflowAPI = Proxy

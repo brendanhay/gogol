@@ -45,7 +45,7 @@ module Network.Google.Resource.Storage.BucketAccessControls.List
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageBucketAccessControlsList@ which the
+-- | A resource alias for @StorageBucketAccessControlsList@ method which the
 -- 'BucketAccessControlsList'' request conforms to.
 type BucketAccessControlsListResource =
      "b" :>

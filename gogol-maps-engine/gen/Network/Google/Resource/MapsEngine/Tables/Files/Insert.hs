@@ -50,7 +50,7 @@ module Network.Google.Resource.MapsEngine.Tables.Files.Insert
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesFilesInsert@ which the
+-- | A resource alias for @MapsEngineTablesFilesInsert@ method which the
 -- 'TablesFilesInsert'' request conforms to.
 type TablesFilesInsertResource =
      "tables" :>

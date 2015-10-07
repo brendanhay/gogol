@@ -48,7 +48,7 @@ module Network.Google.Resource.Blogger.Posts.GetByPath
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostsGetByPath@ which the
+-- | A resource alias for @BloggerPostsGetByPath@ method which the
 -- 'PostsGetByPath'' request conforms to.
 type PostsGetByPathResource =
      "blogs" :>

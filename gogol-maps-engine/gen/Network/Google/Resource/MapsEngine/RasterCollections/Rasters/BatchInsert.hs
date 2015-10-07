@@ -49,7 +49,7 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Rasters.BatchInsert
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRasterCollectionsRastersBatchInsert@ which the
+-- | A resource alias for @MapsEngineRasterCollectionsRastersBatchInsert@ method which the
 -- 'RasterCollectionsRastersBatchInsert'' request conforms to.
 type RasterCollectionsRastersBatchInsertResource =
      "rasterCollections" :>

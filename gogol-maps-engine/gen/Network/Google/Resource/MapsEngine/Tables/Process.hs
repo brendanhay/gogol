@@ -45,7 +45,7 @@ module Network.Google.Resource.MapsEngine.Tables.Process
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesProcess@ which the
+-- | A resource alias for @MapsEngineTablesProcess@ method which the
 -- 'TablesProcess'' request conforms to.
 type TablesProcessResource =
      "tables" :>

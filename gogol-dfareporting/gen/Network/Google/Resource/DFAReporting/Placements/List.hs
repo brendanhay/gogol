@@ -67,7 +67,7 @@ module Network.Google.Resource.DFAReporting.Placements.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPlacementsList@ which the
+-- | A resource alias for @DfareportingPlacementsList@ method which the
 -- 'PlacementsList'' request conforms to.
 type PlacementsListResource =
      "userprofiles" :>

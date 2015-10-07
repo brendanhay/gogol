@@ -45,7 +45,7 @@ module Network.Google.Resource.Games.Applications.Played
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesApplicationsPlayed@ which the
+-- | A resource alias for @GamesApplicationsPlayed@ method which the
 -- 'ApplicationsPlayed'' request conforms to.
 type ApplicationsPlayedResource =
      "applications" :>

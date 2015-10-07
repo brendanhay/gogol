@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.Users.Aliases.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersAliasesDelete@ which the
+-- | A resource alias for @DirectoryUsersAliasesDelete@ method which the
 -- 'UsersAliasesDelete'' request conforms to.
 type UsersAliasesDeleteResource =
      "users" :>

@@ -49,7 +49,7 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
 import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ContainerProjectsZonesClustersDelete@ which the
+-- | A resource alias for @ContainerProjectsZonesClustersDelete@ method which the
 -- 'ProjectsZonesClustersDelete'' request conforms to.
 type ProjectsZonesClustersDeleteResource =
      Capture "projectId" Text :>

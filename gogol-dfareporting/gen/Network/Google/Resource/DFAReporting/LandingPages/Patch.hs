@@ -49,7 +49,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingLandingPagesPatch@ which the
+-- | A resource alias for @DfareportingLandingPagesPatch@ method which the
 -- 'LandingPagesPatch'' request conforms to.
 type LandingPagesPatchResource =
      "userprofiles" :>

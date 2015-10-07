@@ -46,7 +46,7 @@ module Network.Google.Resource.Discovery.APIs.List
 import           Network.Google.Discovery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DiscoveryAPIsList@ which the
+-- | A resource alias for @DiscoveryAPIsList@ method which the
 -- 'APIsList'' request conforms to.
 type APIsListResource =
      "apis" :>

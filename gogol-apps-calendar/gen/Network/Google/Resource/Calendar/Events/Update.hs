@@ -51,7 +51,7 @@ module Network.Google.Resource.Calendar.Events.Update
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarEventsUpdate@ which the
+-- | A resource alias for @CalendarEventsUpdate@ method which the
 -- 'EventsUpdate'' request conforms to.
 type EventsUpdateResource =
      "calendars" :>

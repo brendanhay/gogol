@@ -15,7 +15,7 @@
 --
 module Network.Google.StorageTransfer.Types
     (
-    -- * Service URL
+    -- * Service Request
       storageTransferRequest
 
     -- * ErrorSummary
@@ -215,7 +215,7 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types.Product
 import           Network.Google.StorageTransfer.Types.Sum
 
--- | Default request referring to version 'v1' of the Google Storage Transfer API.
+-- | Default request referring to version 'v1' of the Google Storage Transfer API. This contains the host and root path used as a starting point for constructing service requests.
 storageTransferRequest :: RequestBuilder
 storageTransferRequest
   = defaultRequest

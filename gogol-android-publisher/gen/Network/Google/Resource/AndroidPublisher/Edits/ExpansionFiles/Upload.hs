@@ -49,7 +49,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Upload
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsExpansionFilesUpload@ which the
+-- | A resource alias for @AndroidPublisherEditsExpansionFilesUpload@ method which the
 -- 'EditsExpansionFilesUpload'' request conforms to.
 type EditsExpansionFilesUploadResource =
      Capture "packageName" Text :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.Asps.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryAspsGet@ which the
+-- | A resource alias for @DirectoryAspsGet@ method which the
 -- 'AspsGet'' request conforms to.
 type AspsGetResource =
      "users" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.MapsEngine.Layers.Create
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersCreate@ which the
+-- | A resource alias for @MapsEngineLayersCreate@ method which the
 -- 'LayersCreate'' request conforms to.
 type LayersCreateResource =
      "layers" :>

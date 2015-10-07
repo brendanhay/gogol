@@ -46,7 +46,7 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Insert
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageDefaultObjectAccessControlsInsert@ which the
+-- | A resource alias for @StorageDefaultObjectAccessControlsInsert@ method which the
 -- 'DefaultObjectAccessControlsInsert'' request conforms to.
 type DefaultObjectAccessControlsInsertResource =
      "b" :>

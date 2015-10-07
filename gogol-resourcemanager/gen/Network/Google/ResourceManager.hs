@@ -19,14 +19,10 @@
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference>
 module Network.Google.ResourceManager
     (
-    -- * API
+    -- * API Declaration
       ResourceManagerAPI
-    , resourceManagerAPI
-    , resourceManagerRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** CloudResourceManagerOrganizationsGet
     , module Network.Google.Resource.CloudResourceManager.Organizations.Get
@@ -179,6 +175,7 @@ import           Network.Google.ResourceManager.Types
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Cloud Resource Manager API service.
 type ResourceManagerAPI =
      OrganizationsListResource :<|>
        OrganizationsGetIAMPolicyResource
@@ -195,6 +192,3 @@ type ResourceManagerAPI =
        :<|> ProjectsTestIAMPermissionsResource
        :<|> ProjectsDeleteResource
        :<|> ProjectsUpdateResource
-
-resourceManagerAPI :: Proxy ResourceManagerAPI
-resourceManagerAPI = Proxy

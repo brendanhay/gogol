@@ -47,7 +47,7 @@ module Network.Google.Resource.Fitness.Users.Sessions.Delete
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersSessionsDelete@ which the
+-- | A resource alias for @FitnessUsersSessionsDelete@ method which the
 -- 'UsersSessionsDelete'' request conforms to.
 type UsersSessionsDeleteResource =
      Capture "userId" Text :>

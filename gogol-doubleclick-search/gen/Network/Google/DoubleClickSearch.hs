@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference>
 module Network.Google.DoubleClickSearch
     (
-    -- * API
+    -- * API Declaration
       DoubleClickSearchAPI
-    , doubleClickSearchAPI
-    , doubleClickSearchRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** DoubleClicksearchConversionGet
     , module Network.Google.Resource.DoubleClickSearch.Conversion.Get
@@ -252,6 +248,7 @@ import           Network.Google.Resource.DoubleClickSearch.SavedColumns.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the DoubleClick Search API service.
 type DoubleClickSearchAPI =
      ReportsGetResource :<|> ReportsGetFileResource :<|>
        ReportsGenerateResource
@@ -262,6 +259,3 @@ type DoubleClickSearchAPI =
        :<|> ConversionGetResource
        :<|> ConversionUpdateAvailabilityResource
        :<|> ConversionUpdateResource
-
-doubleClickSearchAPI :: Proxy DoubleClickSearchAPI
-doubleClickSearchAPI = Proxy

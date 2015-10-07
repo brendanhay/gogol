@@ -50,7 +50,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.SetTargetPools
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersSetTargetPools@ which the
+-- | A resource alias for @ComputeInstanceGroupManagersSetTargetPools@ method which the
 -- 'InstanceGroupManagersSetTargetPools'' request conforms to.
 type InstanceGroupManagersSetTargetPoolsResource =
      Capture "project" Text :>

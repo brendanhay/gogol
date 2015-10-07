@@ -53,7 +53,7 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviesPartnerAccountsOrdersGet@ which the
+-- | A resource alias for @PlaymoviesPartnerAccountsOrdersGet@ method which the
 -- 'AccountsOrdersGet'' request conforms to.
 type AccountsOrdersGetResource =
      "v1" :>

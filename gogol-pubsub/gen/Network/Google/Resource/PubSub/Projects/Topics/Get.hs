@@ -51,7 +51,7 @@ module Network.Google.Resource.PubSub.Projects.Topics.Get
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsTopicsGet@ which the
+-- | A resource alias for @PubsubProjectsTopicsGet@ method which the
 -- 'ProjectsTopicsGet'' request conforms to.
 type ProjectsTopicsGetResource =
      "v1beta2" :>

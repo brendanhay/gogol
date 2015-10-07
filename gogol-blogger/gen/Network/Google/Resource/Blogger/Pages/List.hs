@@ -50,7 +50,7 @@ module Network.Google.Resource.Blogger.Pages.List
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPagesList@ which the
+-- | A resource alias for @BloggerPagesList@ method which the
 -- 'PagesList'' request conforms to.
 type PagesListResource =
      "blogs" :>

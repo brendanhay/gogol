@@ -45,7 +45,7 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Create
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRasterCollectionsCreate@ which the
+-- | A resource alias for @MapsEngineRasterCollectionsCreate@ method which the
 -- 'RasterCollectionsCreate'' request conforms to.
 type RasterCollectionsCreateResource =
      "rasterCollections" :>

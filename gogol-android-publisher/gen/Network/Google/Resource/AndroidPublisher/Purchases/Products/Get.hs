@@ -47,7 +47,7 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Products.Get
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherPurchasesProductsGet@ which the
+-- | A resource alias for @AndroidPublisherPurchasesProductsGet@ method which the
 -- 'PurchasesProductsGet'' request conforms to.
 type PurchasesProductsGetResource =
      Capture "packageName" Text :>

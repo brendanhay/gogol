@@ -46,7 +46,7 @@ module Network.Google.Resource.AndroidEnterprise.Users.RevokeToken
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseUsersRevokeToken@ which the
+-- | A resource alias for @AndroidEnterpriseUsersRevokeToken@ method which the
 -- 'UsersRevokeToken'' request conforms to.
 type UsersRevokeTokenResource =
      "enterprises" :>

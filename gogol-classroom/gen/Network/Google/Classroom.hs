@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference>
 module Network.Google.Classroom
     (
-    -- * API
+    -- * API Declaration
       ClassroomAPI
-    , classroomAPI
-    , classroomRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** ClassroomCoursesAliasesCreate
     , module Network.Google.Resource.Classroom.Courses.Aliases.Create
@@ -227,6 +223,7 @@ import           Network.Google.Resource.Classroom.UserProFiles.Get
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Classroom API service.
 type ClassroomAPI =
      InvitationsListResource :<|>
        InvitationsAcceptResource
@@ -251,6 +248,3 @@ type ClassroomAPI =
        :<|> CoursesDeleteResource
        :<|> CoursesUpdateResource
        :<|> UserProFilesGetResource
-
-classroomAPI :: Proxy ClassroomAPI
-classroomAPI = Proxy

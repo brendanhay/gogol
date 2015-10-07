@@ -48,7 +48,7 @@ module Network.Google.Resource.SQL.Instances.Export
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesExport@ which the
+-- | A resource alias for @SQLInstancesExport@ method which the
 -- 'InstancesExport'' request conforms to.
 type InstancesExportResource =
      "projects" :>

@@ -54,7 +54,7 @@ module Network.Google.Resource.AppEngine.Apps.Operations.Get
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppEngineAppsOperationsGet@ which the
+-- | A resource alias for @AppEngineAppsOperationsGet@ method which the
 -- 'AppsOperationsGet'' request conforms to.
 type AppsOperationsGetResource =
      "v1beta4" :>

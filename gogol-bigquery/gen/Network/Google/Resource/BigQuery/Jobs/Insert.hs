@@ -22,7 +22,7 @@
 --
 -- | Starts a new asynchronous job. Requires the Can View project role.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryJobsInsert@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryJobsInsert@.
 module Network.Google.Resource.BigQuery.Jobs.Insert
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.BigQuery.Jobs.Insert
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigqueryJobsInsert@ which the
+-- | A resource alias for @BigQueryJobsInsert@ method which the
 -- 'JobsInsert'' request conforms to.
 type JobsInsertResource =
      "projects" :>

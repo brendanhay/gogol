@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.Projects.MoveDisk
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeProjectsMoveDisk@ which the
+-- | A resource alias for @ComputeProjectsMoveDisk@ method which the
 -- 'ProjectsMoveDisk'' request conforms to.
 type ProjectsMoveDiskResource =
      Capture "project" Text :>

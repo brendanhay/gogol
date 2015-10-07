@@ -46,7 +46,7 @@ module Network.Google.Resource.AppState.States.Get
 import           Network.Google.AppState.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppStateStatesGet@ which the
+-- | A resource alias for @AppStateStatesGet@ method which the
 -- 'StatesGet'' request conforms to.
 type StatesGetResource =
      "states" :>

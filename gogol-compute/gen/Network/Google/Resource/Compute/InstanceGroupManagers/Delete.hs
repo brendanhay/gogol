@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersDelete@ which the
+-- | A resource alias for @ComputeInstanceGroupManagersDelete@ method which the
 -- 'InstanceGroupManagersDelete'' request conforms to.
 type InstanceGroupManagersDeleteResource =
      Capture "project" Text :>

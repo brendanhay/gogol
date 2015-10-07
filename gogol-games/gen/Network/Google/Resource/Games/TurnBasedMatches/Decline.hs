@@ -46,7 +46,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.Decline
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesTurnBasedMatchesDecline@ which the
+-- | A resource alias for @GamesTurnBasedMatchesDecline@ method which the
 -- 'TurnBasedMatchesDecline'' request conforms to.
 type TurnBasedMatchesDeclineResource =
      "turnbasedmatches" :>

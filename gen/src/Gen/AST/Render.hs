@@ -112,7 +112,7 @@ renderAPI s = do
         <*> pp Print (urlDecl s url)
       where
         h = sformat ("Default request referring to version @" % stext %
-                     "@ of the " % stext % ".")
+                     "@ of the " % stext % ". This contains the host and root path used as a starting point for constructing service requests.")
                      (s ^. dVersion) (s ^. dTitle)
 
 renderMethod :: Service a -> NS -> Suffix -> Method Solved -> AST Action

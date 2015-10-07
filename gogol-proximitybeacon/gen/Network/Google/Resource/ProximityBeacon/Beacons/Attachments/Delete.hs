@@ -55,7 +55,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconBeaconsAttachmentsDelete@ which the
+-- | A resource alias for @ProximitybeaconBeaconsAttachmentsDelete@ method which the
 -- 'BeaconsAttachmentsDelete'' request conforms to.
 type BeaconsAttachmentsDeleteResource =
      "v1beta1" :>

@@ -48,7 +48,7 @@ module Network.Google.Resource.YouTube.Watermarks.Set
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeWatermarksSet@ which the
+-- | A resource alias for @YouTubeWatermarksSet@ method which the
 -- 'WatermarksSet'' request conforms to.
 type WatermarksSetResource =
      "watermarks" :>

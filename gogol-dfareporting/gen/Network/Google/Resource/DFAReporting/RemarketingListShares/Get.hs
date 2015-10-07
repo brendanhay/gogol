@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.RemarketingListShares.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingRemarketingListSharesGet@ which the
+-- | A resource alias for @DfareportingRemarketingListSharesGet@ method which the
 -- 'RemarketingListSharesGet'' request conforms to.
 type RemarketingListSharesGetResource =
      "userprofiles" :>

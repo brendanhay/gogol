@@ -46,7 +46,7 @@ module Network.Google.Resource.AdSenseHost.URLChannels.Delete
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostURLChannelsDelete@ which the
+-- | A resource alias for @AdsensehostURLChannelsDelete@ method which the
 -- 'URLChannelsDelete'' request conforms to.
 type URLChannelsDeleteResource =
      "adclients" :>

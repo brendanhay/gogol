@@ -46,7 +46,7 @@ module Network.Google.Resource.AdSense.Savedadstyles.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseSavedadstylesList@ which the
+-- | A resource alias for @AdsenseSavedadstylesList@ method which the
 -- 'SavedadstylesList'' request conforms to.
 type SavedadstylesListResource =
      "savedadstyles" :>

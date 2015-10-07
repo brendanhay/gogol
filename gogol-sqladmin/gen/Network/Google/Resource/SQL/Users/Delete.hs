@@ -48,7 +48,7 @@ module Network.Google.Resource.SQL.Users.Delete
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLUsersDelete@ which the
+-- | A resource alias for @SQLUsersDelete@ method which the
 -- 'UsersDelete'' request conforms to.
 type UsersDeleteResource =
      "projects" :>

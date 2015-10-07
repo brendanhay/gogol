@@ -53,7 +53,7 @@ module Network.Google.Resource.Blogger.Comments.List
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerCommentsList@ which the
+-- | A resource alias for @BloggerCommentsList@ method which the
 -- 'CommentsList'' request conforms to.
 type CommentsListResource =
      "blogs" :>

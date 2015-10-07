@@ -50,7 +50,7 @@ module Network.Google.Resource.Gmail.Users.Threads.List
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersThreadsList@ which the
+-- | A resource alias for @GmailUsersThreadsList@ method which the
 -- 'UsersThreadsList'' request conforms to.
 type UsersThreadsListResource =
      Capture "userId" Text :>

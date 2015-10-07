@@ -45,7 +45,7 @@ module Network.Google.Resource.Webmasters.Sites.Add
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersSitesAdd@ which the
+-- | A resource alias for @WebmastersSitesAdd@ method which the
 -- 'SitesAdd'' request conforms to.
 type SitesAddResource =
      "sites" :>

@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference>
 module Network.Google.GamesConfiguration
     (
-    -- * API
+    -- * API Declaration
       GamesConfigurationAPI
-    , gamesConfigurationAPI
-    , gamesConfigurationRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** GamesConfigurationAchievementConfigurationsDelete
     , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Delete
@@ -188,6 +184,7 @@ import           Network.Google.Resource.GamesConfiguration.LeaderboardConfigura
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Play Game Services Publishing API service.
 type GamesConfigurationAPI =
      ImageConfigurationsUploadResource :<|>
        LeaderboardConfigurationsInsertResource
@@ -202,6 +199,3 @@ type GamesConfigurationAPI =
        :<|> AchievementConfigurationsGetResource
        :<|> AchievementConfigurationsDeleteResource
        :<|> AchievementConfigurationsUpdateResource
-
-gamesConfigurationAPI :: Proxy GamesConfigurationAPI
-gamesConfigurationAPI = Proxy

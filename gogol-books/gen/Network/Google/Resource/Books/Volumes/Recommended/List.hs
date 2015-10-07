@@ -47,7 +47,7 @@ module Network.Google.Resource.Books.Volumes.Recommended.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksVolumesRecommendedList@ which the
+-- | A resource alias for @BooksVolumesRecommendedList@ method which the
 -- 'VolumesRecommendedList'' request conforms to.
 type VolumesRecommendedListResource =
      "volumes" :>

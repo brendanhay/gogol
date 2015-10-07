@@ -46,7 +46,7 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.Patch
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerAccountsPatch@ which the
+-- | A resource alias for @AdexchangebuyerAccountsPatch@ method which the
 -- 'AccountsPatch'' request conforms to.
 type AccountsPatchResource =
      "accounts" :>

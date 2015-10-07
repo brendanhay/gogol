@@ -49,7 +49,7 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetHTTPProxiesList@ which the
+-- | A resource alias for @ComputeTargetHTTPProxiesList@ method which the
 -- 'TargetHTTPProxiesList'' request conforms to.
 type TargetHTTPProxiesListResource =
      Capture "project" Text :>

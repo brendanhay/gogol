@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.Disks.CreateSnapshot
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeDisksCreateSnapshot@ which the
+-- | A resource alias for @ComputeDisksCreateSnapshot@ method which the
 -- 'DisksCreateSnapshot'' request conforms to.
 type DisksCreateSnapshotResource =
      Capture "project" Text :>

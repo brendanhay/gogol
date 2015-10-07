@@ -15,7 +15,7 @@
 --
 module Network.Google.BigQuery.Types
     (
-    -- * Service URL
+    -- * Service Request
       bigQueryRequest
 
     -- * JobReference
@@ -462,7 +462,7 @@ import           Network.Google.BigQuery.Types.Product
 import           Network.Google.BigQuery.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2' of the BigQuery API.
+-- | Default request referring to version 'v2' of the BigQuery API. This contains the host and root path used as a starting point for constructing service requests.
 bigQueryRequest :: RequestBuilder
 bigQueryRequest
   = defaultRequest "https://www.googleapis.com/"

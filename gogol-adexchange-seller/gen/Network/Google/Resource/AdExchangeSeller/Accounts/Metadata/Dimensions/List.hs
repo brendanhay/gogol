@@ -46,7 +46,7 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Dimensions.Lis
 import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangesellerAccountsMetadataDimensionsList@ which the
+-- | A resource alias for @AdexchangesellerAccountsMetadataDimensionsList@ method which the
 -- 'AccountsMetadataDimensionsList'' request conforms to.
 type AccountsMetadataDimensionsListResource =
      "accounts" :>

@@ -49,7 +49,7 @@ module Network.Google.Resource.Compute.Instances.AddAccessConfig
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesAddAccessConfig@ which the
+-- | A resource alias for @ComputeInstancesAddAccessConfig@ method which the
 -- 'InstancesAddAccessConfig'' request conforms to.
 type InstancesAddAccessConfigResource =
      Capture "project" Text :>

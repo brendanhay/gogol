@@ -44,7 +44,7 @@ module Network.Google.Method.OAuth2.GetCertForOpenIdConnect
 import           Network.Google.OAuth2.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @OAuth2GetCertForOpenIdConnect@ which the
+-- | A resource alias for @OAuth2GetCertForOpenIdConnect@ method which the
 -- 'GetCertForOpenIdConnect'' request conforms to.
 type GetCertForOpenIdConnectMethod =
      "oauth2" :>

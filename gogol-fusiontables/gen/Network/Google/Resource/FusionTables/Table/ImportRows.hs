@@ -51,7 +51,7 @@ module Network.Google.Resource.FusionTables.Table.ImportRows
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTableImportRows@ which the
+-- | A resource alias for @FusiontablesTableImportRows@ method which the
 -- 'TableImportRows'' request conforms to.
 type TableImportRowsResource =
      "tables" :>

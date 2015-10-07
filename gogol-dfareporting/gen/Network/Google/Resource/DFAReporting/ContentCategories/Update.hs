@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingContentCategoriesUpdate@ which the
+-- | A resource alias for @DfareportingContentCategoriesUpdate@ method which the
 -- 'ContentCategoriesUpdate'' request conforms to.
 type ContentCategoriesUpdateResource =
      "userprofiles" :>

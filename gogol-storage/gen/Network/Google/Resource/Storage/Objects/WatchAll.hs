@@ -52,7 +52,7 @@ module Network.Google.Resource.Storage.Objects.WatchAll
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsWatchAll@ which the
+-- | A resource alias for @StorageObjectsWatchAll@ method which the
 -- 'ObjectsWatchAll'' request conforms to.
 type ObjectsWatchAllResource =
      "b" :>

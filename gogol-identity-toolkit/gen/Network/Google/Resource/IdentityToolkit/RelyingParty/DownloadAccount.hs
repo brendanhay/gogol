@@ -45,7 +45,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyDownloadAccount@ which the
+-- | A resource alias for @IdentitytoolkitRelyingPartyDownloadAccount@ method which the
 -- 'RelyingPartyDownloadAccount'' request conforms to.
 type RelyingPartyDownloadAccountResource =
      "downloadAccount" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.SQL.Instances.Delete
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesDelete@ which the
+-- | A resource alias for @SQLInstancesDelete@ method which the
 -- 'InstancesDelete'' request conforms to.
 type InstancesDeleteResource =
      "projects" :>

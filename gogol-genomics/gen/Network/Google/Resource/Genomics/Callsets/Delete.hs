@@ -45,7 +45,7 @@ module Network.Google.Resource.Genomics.Callsets.Delete
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsCallsetsDelete@ which the
+-- | A resource alias for @GenomicsCallsetsDelete@ method which the
 -- 'CallsetsDelete'' request conforms to.
 type CallsetsDeleteResource =
      "callsets" :>

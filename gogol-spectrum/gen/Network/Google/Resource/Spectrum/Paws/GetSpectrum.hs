@@ -47,7 +47,7 @@ module Network.Google.Resource.Spectrum.Paws.GetSpectrum
 import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
--- | A resource alias for @SpectrumPawsGetSpectrum@ which the
+-- | A resource alias for @SpectrumPawsGetSpectrum@ method which the
 -- 'PawsGetSpectrum'' request conforms to.
 type PawsGetSpectrumResource =
      "getSpectrum" :>

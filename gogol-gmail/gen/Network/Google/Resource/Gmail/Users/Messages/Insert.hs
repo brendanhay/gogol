@@ -51,7 +51,7 @@ module Network.Google.Resource.Gmail.Users.Messages.Insert
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersMessagesInsert@ which the
+-- | A resource alias for @GmailUsersMessagesInsert@ method which the
 -- 'UsersMessagesInsert'' request conforms to.
 type UsersMessagesInsertResource =
      Capture "userId" Text :>

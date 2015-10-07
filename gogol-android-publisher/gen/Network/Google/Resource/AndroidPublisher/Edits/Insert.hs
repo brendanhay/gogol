@@ -46,7 +46,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Insert
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsInsert@ which the
+-- | A resource alias for @AndroidPublisherEditsInsert@ method which the
 -- 'EditsInsert'' request conforms to.
 type EditsInsertResource =
      Capture "packageName" Text :>

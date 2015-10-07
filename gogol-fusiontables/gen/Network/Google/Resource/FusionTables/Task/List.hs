@@ -48,7 +48,7 @@ module Network.Google.Resource.FusionTables.Task.List
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTaskList@ which the
+-- | A resource alias for @FusiontablesTaskList@ method which the
 -- 'TaskList'' request conforms to.
 type TaskListResource =
      "tables" :>

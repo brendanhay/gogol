@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.Reports.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingReportsDelete@ which the
+-- | A resource alias for @DfareportingReportsDelete@ method which the
 -- 'ReportsDelete'' request conforms to.
 type ReportsDeleteResource =
      "userprofiles" :>

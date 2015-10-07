@@ -5009,8 +5009,8 @@ instance ToJSON AlignReadGroupSetsRequest where
 --
 -- /See:/ 'exportVariantSetRequest' smart constructor.
 data ExportVariantSetRequest = ExportVariantSetRequest
-    { _evsrBigqueryDataset :: !(Maybe Text)
-    , _evsrBigqueryTable   :: !(Maybe Text)
+    { _evsrBigQueryDataset :: !(Maybe Text)
+    , _evsrBigQueryTable   :: !(Maybe Text)
     , _evsrFormat          :: !(Maybe ExportVariantSetRequestFormat)
     , _evsrProjectNumber   :: !(Maybe Int64)
     , _evsrCallSetIds      :: !(Maybe [Text])
@@ -5020,9 +5020,9 @@ data ExportVariantSetRequest = ExportVariantSetRequest
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'evsrBigqueryDataset'
+-- * 'evsrBigQueryDataset'
 --
--- * 'evsrBigqueryTable'
+-- * 'evsrBigQueryTable'
 --
 -- * 'evsrFormat'
 --
@@ -5033,8 +5033,8 @@ exportVariantSetRequest
     :: ExportVariantSetRequest
 exportVariantSetRequest =
     ExportVariantSetRequest
-    { _evsrBigqueryDataset = Nothing
-    , _evsrBigqueryTable = Nothing
+    { _evsrBigQueryDataset = Nothing
+    , _evsrBigQueryTable = Nothing
     , _evsrFormat = Nothing
     , _evsrProjectNumber = Nothing
     , _evsrCallSetIds = Nothing
@@ -5043,17 +5043,17 @@ exportVariantSetRequest =
 -- | Required. The BigQuery dataset to export data to. This dataset must
 -- already exist. Note that this is distinct from the Genomics concept of
 -- \"dataset\".
-evsrBigqueryDataset :: Lens' ExportVariantSetRequest (Maybe Text)
-evsrBigqueryDataset
-  = lens _evsrBigqueryDataset
-      (\ s a -> s{_evsrBigqueryDataset = a})
+evsrBigQueryDataset :: Lens' ExportVariantSetRequest (Maybe Text)
+evsrBigQueryDataset
+  = lens _evsrBigQueryDataset
+      (\ s a -> s{_evsrBigQueryDataset = a})
 
 -- | Required. The BigQuery table to export data to. If the table doesn\'t
 -- exist, it will be created. If it already exists, it will be overwritten.
-evsrBigqueryTable :: Lens' ExportVariantSetRequest (Maybe Text)
-evsrBigqueryTable
-  = lens _evsrBigqueryTable
-      (\ s a -> s{_evsrBigqueryTable = a})
+evsrBigQueryTable :: Lens' ExportVariantSetRequest (Maybe Text)
+evsrBigQueryTable
+  = lens _evsrBigQueryTable
+      (\ s a -> s{_evsrBigQueryTable = a})
 
 -- | The format for the exported data.
 evsrFormat :: Lens' ExportVariantSetRequest (Maybe ExportVariantSetRequestFormat)
@@ -5091,8 +5091,8 @@ instance ToJSON ExportVariantSetRequest where
         toJSON ExportVariantSetRequest{..}
           = object
               (catMaybes
-                 [("bigqueryDataset" .=) <$> _evsrBigqueryDataset,
-                  ("bigqueryTable" .=) <$> _evsrBigqueryTable,
+                 [("bigqueryDataset" .=) <$> _evsrBigQueryDataset,
+                  ("bigqueryTable" .=) <$> _evsrBigQueryTable,
                   ("format" .=) <$> _evsrFormat,
                   ("projectNumber" .=) <$> _evsrProjectNumber,
                   ("callSetIds" .=) <$> _evsrCallSetIds])

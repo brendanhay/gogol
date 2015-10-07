@@ -47,7 +47,7 @@ module Network.Google.Resource.Gmail.Users.Threads.Delete
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersThreadsDelete@ which the
+-- | A resource alias for @GmailUsersThreadsDelete@ method which the
 -- 'UsersThreadsDelete'' request conforms to.
 type UsersThreadsDeleteResource =
      Capture "userId" Text :>

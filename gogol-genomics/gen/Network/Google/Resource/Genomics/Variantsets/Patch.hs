@@ -47,7 +47,7 @@ module Network.Google.Resource.Genomics.Variantsets.Patch
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsVariantsetsPatch@ which the
+-- | A resource alias for @GenomicsVariantsetsPatch@ method which the
 -- 'VariantsetsPatch'' request conforms to.
 type VariantsetsPatchResource =
      "variantsets" :>

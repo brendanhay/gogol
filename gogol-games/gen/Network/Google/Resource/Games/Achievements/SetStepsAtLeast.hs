@@ -49,7 +49,7 @@ module Network.Google.Resource.Games.Achievements.SetStepsAtLeast
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesAchievementsSetStepsAtLeast@ which the
+-- | A resource alias for @GamesAchievementsSetStepsAtLeast@ method which the
 -- 'AchievementsSetStepsAtLeast'' request conforms to.
 type AchievementsSetStepsAtLeastResource =
      "achievements" :>

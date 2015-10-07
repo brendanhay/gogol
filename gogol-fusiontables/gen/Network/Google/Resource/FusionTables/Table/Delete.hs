@@ -45,7 +45,7 @@ module Network.Google.Resource.FusionTables.Table.Delete
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTableDelete@ which the
+-- | A resource alias for @FusiontablesTableDelete@ method which the
 -- 'TableDelete'' request conforms to.
 type TableDeleteResource =
      "tables" :>

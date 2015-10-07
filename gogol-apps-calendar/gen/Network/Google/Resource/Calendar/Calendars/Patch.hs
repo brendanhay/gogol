@@ -46,7 +46,7 @@ module Network.Google.Resource.Calendar.Calendars.Patch
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarsPatch@ which the
+-- | A resource alias for @CalendarCalendarsPatch@ method which the
 -- 'CalendarsPatch'' request conforms to.
 type CalendarsPatchResource =
      "calendars" :>

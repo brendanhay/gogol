@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference>
 module Network.Google.ReplicaPool
     (
-    -- * API
+    -- * API Declaration
       ReplicaPoolAPI
-    , replicaPoolAPI
-    , replicaPoolRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** ReplicapoolInstanceGroupManagersAbandonInstances
     , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.AbandonInstances
@@ -214,6 +210,7 @@ import           Network.Google.Resource.ReplicaPool.ZoneOperations.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Compute Engine Instance Group Manager API service.
 type ReplicaPoolAPI =
      ZoneOperationsListResource :<|>
        ZoneOperationsGetResource
@@ -227,6 +224,3 @@ type ReplicaPoolAPI =
        :<|> InstanceGroupManagersDeleteInstancesResource
        :<|> InstanceGroupManagersDeleteResource
        :<|> InstanceGroupManagersRecreateInstancesResource
-
-replicaPoolAPI :: Proxy ReplicaPoolAPI
-replicaPoolAPI = Proxy

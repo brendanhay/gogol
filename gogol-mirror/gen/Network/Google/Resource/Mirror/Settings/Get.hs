@@ -45,7 +45,7 @@ module Network.Google.Resource.Mirror.Settings.Get
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorSettingsGet@ which the
+-- | A resource alias for @MirrorSettingsGet@ method which the
 -- 'SettingsGet'' request conforms to.
 type SettingsGetResource =
      "settings" :>

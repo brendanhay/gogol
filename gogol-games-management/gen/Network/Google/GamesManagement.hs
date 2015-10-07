@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference>
 module Network.Google.GamesManagement
     (
-    -- * API
+    -- * API Declaration
       GamesManagementAPI
-    , gamesManagementAPI
-    , gamesManagementRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** GamesManagementAchievementsReset
     , module Network.Google.Resource.GamesManagement.Achievements.Reset
@@ -249,6 +245,7 @@ import           Network.Google.Resource.GamesManagement.TurnBasedMatches.ResetF
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Play Game Services Management API service.
 type GamesManagementAPI =
      RoomsResetForAllPlayersResource :<|>
        RoomsResetResource
@@ -277,6 +274,3 @@ type GamesManagementAPI =
        :<|> TurnBasedMatchesResetForAllPlayersResource
        :<|> TurnBasedMatchesResetResource
        :<|> ApplicationsListHiddenResource
-
-gamesManagementAPI :: Proxy GamesManagementAPI
-gamesManagementAPI = Proxy

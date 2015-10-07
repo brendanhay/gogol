@@ -15,7 +15,7 @@
 --
 module Network.Google.Compute.Types
     (
-    -- * Service URL
+    -- * Service Request
       computeRequest
 
     -- * AddressesScopedList
@@ -1748,7 +1748,7 @@ import           Network.Google.Compute.Types.Product
 import           Network.Google.Compute.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Compute Engine API.
+-- | Default request referring to version 'v1' of the Compute Engine API. This contains the host and root path used as a starting point for constructing service requests.
 computeRequest :: RequestBuilder
 computeRequest
   = defaultRequest "https://www.googleapis.com/"

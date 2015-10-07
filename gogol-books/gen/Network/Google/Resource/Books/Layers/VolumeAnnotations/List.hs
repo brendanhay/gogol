@@ -59,7 +59,7 @@ module Network.Google.Resource.Books.Layers.VolumeAnnotations.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksLayersVolumeAnnotationsList@ which the
+-- | A resource alias for @BooksLayersVolumeAnnotationsList@ method which the
 -- 'LayersVolumeAnnotationsList'' request conforms to.
 type LayersVolumeAnnotationsListResource =
      "volumes" :>

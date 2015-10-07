@@ -47,7 +47,7 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Delete
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEntitlementsDelete@ which the
+-- | A resource alias for @AndroidEnterpriseEntitlementsDelete@ method which the
 -- 'EntitlementsDelete'' request conforms to.
 type EntitlementsDeleteResource =
      "enterprises" :>

@@ -15,7 +15,7 @@
 --
 module Network.Google.ReplicaPool.Types
     (
-    -- * Service URL
+    -- * Service Request
       replicaPoolRequest
 
     -- * OperationWarningsItemDataItem
@@ -151,7 +151,7 @@ import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types.Product
 import           Network.Google.ReplicaPool.Types.Sum
 
--- | Default request referring to version 'v1beta2' of the Google Compute Engine Instance Group Manager API.
+-- | Default request referring to version 'v1beta2' of the Google Compute Engine Instance Group Manager API. This contains the host and root path used as a starting point for constructing service requests.
 replicaPoolRequest :: RequestBuilder
 replicaPoolRequest
   = defaultRequest "https://www.googleapis.com/"

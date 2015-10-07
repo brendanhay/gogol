@@ -47,7 +47,7 @@ module Network.Google.Resource.DeploymentManager.Resources.Get
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerResourcesGet@ which the
+-- | A resource alias for @DeploymentManagerResourcesGet@ method which the
 -- 'ResourcesGet'' request conforms to.
 type ResourcesGetResource =
      Capture "project" Text :>

@@ -48,7 +48,7 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementCustomMetricsList@ which the
+-- | A resource alias for @AnalyticsManagementCustomMetricsList@ method which the
 -- 'ManagementCustomMetricsList'' request conforms to.
 type ManagementCustomMetricsListResource =
      "management" :>

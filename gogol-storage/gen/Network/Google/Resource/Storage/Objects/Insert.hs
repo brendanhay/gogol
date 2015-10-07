@@ -53,7 +53,7 @@ module Network.Google.Resource.Storage.Objects.Insert
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsInsert@ which the
+-- | A resource alias for @StorageObjectsInsert@ method which the
 -- 'ObjectsInsert'' request conforms to.
 type ObjectsInsertResource =
      "b" :>

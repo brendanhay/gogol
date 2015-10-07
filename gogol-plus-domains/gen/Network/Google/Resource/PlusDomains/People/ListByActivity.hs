@@ -49,7 +49,7 @@ module Network.Google.Resource.PlusDomains.People.ListByActivity
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsPeopleListByActivity@ which the
+-- | A resource alias for @PlusDomainsPeopleListByActivity@ method which the
 -- 'PeopleListByActivity'' request conforms to.
 type PeopleListByActivityResource =
      "activities" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.ForwardingRules.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeForwardingRulesDelete@ which the
+-- | A resource alias for @ComputeForwardingRulesDelete@ method which the
 -- 'ForwardingRulesDelete'' request conforms to.
 type ForwardingRulesDeleteResource =
      Capture "project" Text :>

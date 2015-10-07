@@ -49,7 +49,7 @@ module Network.Google.Resource.Compute.URLMaps.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeURLMapsList@ which the
+-- | A resource alias for @ComputeURLMapsList@ method which the
 -- 'URLMapsList'' request conforms to.
 type URLMapsListResource =
      Capture "project" Text :>

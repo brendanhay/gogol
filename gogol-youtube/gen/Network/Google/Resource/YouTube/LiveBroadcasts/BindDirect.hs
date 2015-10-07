@@ -52,7 +52,7 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.BindDirect
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveBroadcastsBind_direct@ which the
+-- | A resource alias for @YouTubeLiveBroadcastsBind_direct@ method which the
 -- 'LiveBroadcastsBindDirect'' request conforms to.
 type LiveBroadcastsBindDirectResource =
      "liveBroadcasts" :>

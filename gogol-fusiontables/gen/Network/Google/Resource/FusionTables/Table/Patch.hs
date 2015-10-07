@@ -49,7 +49,7 @@ module Network.Google.Resource.FusionTables.Table.Patch
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTablePatch@ which the
+-- | A resource alias for @FusiontablesTablePatch@ method which the
 -- 'TablePatch'' request conforms to.
 type TablePatchResource =
      "tables" :>

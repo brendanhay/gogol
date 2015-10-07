@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference>
 module Network.Google.Blogger
     (
-    -- * API
+    -- * API Declaration
       BloggerAPI
-    , bloggerAPI
-    , bloggerRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** BloggerBlogUserInfosGet
     , module Network.Google.Resource.Blogger.BlogUserInfos.Get
@@ -520,6 +516,7 @@ import           Network.Google.Resource.Blogger.Users.Get
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Blogger API service.
 type BloggerAPI =
      PostUserInfosListResource :<|>
        PostUserInfosGetResource
@@ -554,6 +551,3 @@ type BloggerAPI =
        :<|> PostsDeleteResource
        :<|> PostsUpdateResource
        :<|> PostsPublishResource
-
-bloggerAPI :: Proxy BloggerAPI
-bloggerAPI = Proxy

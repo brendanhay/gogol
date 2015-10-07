@@ -46,7 +46,7 @@ module Network.Google.Resource.AdSenseHost.URLChannels.Insert
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostURLChannelsInsert@ which the
+-- | A resource alias for @AdsensehostURLChannelsInsert@ method which the
 -- 'URLChannelsInsert'' request conforms to.
 type URLChannelsInsertResource =
      "adclients" :>

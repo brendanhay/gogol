@@ -52,7 +52,7 @@ module Network.Google.Resource.DFAReporting.Accounts.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAccountsList@ which the
+-- | A resource alias for @DfareportingAccountsList@ method which the
 -- 'AccountsList'' request conforms to.
 type AccountsListResource =
      "userprofiles" :>

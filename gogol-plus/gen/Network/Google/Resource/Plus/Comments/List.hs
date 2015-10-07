@@ -48,7 +48,7 @@ module Network.Google.Resource.Plus.Comments.List
 import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusCommentsList@ which the
+-- | A resource alias for @PlusCommentsList@ method which the
 -- 'CommentsList'' request conforms to.
 type CommentsListResource =
      "activities" :>

@@ -54,7 +54,7 @@ module Network.Google.Resource.Classroom.UserProFiles.Get
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomUserProFilesGet@ which the
+-- | A resource alias for @ClassroomUserProFilesGet@ method which the
 -- 'UserProFilesGet'' request conforms to.
 type UserProFilesGetResource =
      "v1" :>

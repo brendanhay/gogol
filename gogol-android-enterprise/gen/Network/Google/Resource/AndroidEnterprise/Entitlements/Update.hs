@@ -49,7 +49,7 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Update
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEntitlementsUpdate@ which the
+-- | A resource alias for @AndroidEnterpriseEntitlementsUpdate@ method which the
 -- 'EntitlementsUpdate'' request conforms to.
 type EntitlementsUpdateResource =
      "enterprises" :>

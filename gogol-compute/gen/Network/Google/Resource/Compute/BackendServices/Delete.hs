@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.BackendServices.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeBackendServicesDelete@ which the
+-- | A resource alias for @ComputeBackendServicesDelete@ method which the
 -- 'BackendServicesDelete'' request conforms to.
 type BackendServicesDeleteResource =
      Capture "project" Text :>

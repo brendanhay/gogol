@@ -45,7 +45,7 @@ module Network.Google.Resource.Directory.Groups.Aliases.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryGroupsAliasesList@ which the
+-- | A resource alias for @DirectoryGroupsAliasesList@ method which the
 -- 'GroupsAliasesList'' request conforms to.
 type GroupsAliasesListResource =
      "groups" :>

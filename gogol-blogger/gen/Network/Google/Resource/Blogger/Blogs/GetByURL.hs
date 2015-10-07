@@ -46,7 +46,7 @@ module Network.Google.Resource.Blogger.Blogs.GetByURL
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerBlogsGetByURL@ which the
+-- | A resource alias for @BloggerBlogsGetByURL@ method which the
 -- 'BlogsGetByURL'' request conforms to.
 type BlogsGetByURLResource =
      "blogs" :>

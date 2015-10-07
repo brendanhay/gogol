@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/google-apps/activity/ Google Apps Activity API Reference>
 module Network.Google.AppsActivity
     (
-    -- * API
+    -- * API Declaration
       AppsActivityAPI
-    , appsActivityAPI
-    , appsActivityRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** AppsactivityActivitiesList
     , module Network.Google.Resource.AppsActivity.Activities.List
@@ -134,7 +130,5 @@ import           Network.Google.Resource.AppsActivity.Activities.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Apps Activity API service.
 type AppsActivityAPI = ActivitiesListResource
-
-appsActivityAPI :: Proxy AppsActivityAPI
-appsActivityAPI = Proxy

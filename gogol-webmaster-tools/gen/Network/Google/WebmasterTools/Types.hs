@@ -15,7 +15,7 @@
 --
 module Network.Google.WebmasterTools.Types
     (
-    -- * Service URL
+    -- * Service Request
       webmasterToolsRequest
 
     -- * WmxSitemapContent
@@ -50,14 +50,14 @@ module Network.Google.WebmasterTools.Types
     -- * URLCrawlErrorsSamplesGetPlatform
     , URLCrawlErrorsSamplesGetPlatform (..)
 
-    -- * APIdataRow
-    , APIdataRow
-    , apidataRow
-    , arImpressions
-    , arKeys
-    , arCtr
-    , arClicks
-    , arPosition
+    -- * APIDataRow
+    , APIDataRow
+    , apiDataRow
+    , adrImpressions
+    , adrKeys
+    , adrCtr
+    , adrClicks
+    , adrPosition
 
     -- * APIdimensionFilter
     , APIdimensionFilter
@@ -160,7 +160,7 @@ import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types.Product
 import           Network.Google.WebmasterTools.Types.Sum
 
--- | Default request referring to version 'v3' of the Webmaster Tools API.
+-- | Default request referring to version 'v3' of the Webmaster Tools API. This contains the host and root path used as a starting point for constructing service requests.
 webmasterToolsRequest :: RequestBuilder
 webmasterToolsRequest
   = defaultRequest "https://www.googleapis.com/"

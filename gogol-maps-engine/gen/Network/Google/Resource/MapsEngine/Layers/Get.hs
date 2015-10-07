@@ -46,7 +46,7 @@ module Network.Google.Resource.MapsEngine.Layers.Get
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersGet@ which the
+-- | A resource alias for @MapsEngineLayersGet@ method which the
 -- 'LayersGet'' request conforms to.
 type LayersGetResource =
      "layers" :>

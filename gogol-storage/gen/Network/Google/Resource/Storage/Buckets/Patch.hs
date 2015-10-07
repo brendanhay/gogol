@@ -49,7 +49,7 @@ module Network.Google.Resource.Storage.Buckets.Patch
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageBucketsPatch@ which the
+-- | A resource alias for @StorageBucketsPatch@ method which the
 -- 'BucketsPatch'' request conforms to.
 type BucketsPatchResource =
      "b" :>

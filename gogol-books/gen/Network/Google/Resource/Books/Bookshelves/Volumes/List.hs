@@ -50,7 +50,7 @@ module Network.Google.Resource.Books.Bookshelves.Volumes.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksBookshelvesVolumesList@ which the
+-- | A resource alias for @BooksBookshelvesVolumesList@ method which the
 -- 'BookshelvesVolumesList'' request conforms to.
 type BookshelvesVolumesListResource =
      "users" :>

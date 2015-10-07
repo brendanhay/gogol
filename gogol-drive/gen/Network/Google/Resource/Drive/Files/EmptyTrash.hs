@@ -44,7 +44,7 @@ module Network.Google.Resource.Drive.Files.EmptyTrash
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesEmptyTrash@ which the
+-- | A resource alias for @DriveFilesEmptyTrash@ method which the
 -- 'FilesEmptyTrash'' request conforms to.
 type FilesEmptyTrashResource =
      "files" :>

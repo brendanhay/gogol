@@ -45,7 +45,7 @@ module Network.Google.Resource.Tasks.TaskLists.Delete
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTaskListsDelete@ which the
+-- | A resource alias for @TasksTaskListsDelete@ method which the
 -- 'TaskListsDelete'' request conforms to.
 type TaskListsDeleteResource =
      "users" :>

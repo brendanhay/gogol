@@ -45,7 +45,7 @@ module Network.Google.Resource.Drive.Properties.List
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePropertiesList@ which the
+-- | A resource alias for @DrivePropertiesList@ method which the
 -- 'PropertiesList'' request conforms to.
 type PropertiesListResource =
      "files" :>

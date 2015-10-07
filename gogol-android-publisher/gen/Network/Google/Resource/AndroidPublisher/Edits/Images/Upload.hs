@@ -50,7 +50,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Images.Upload
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsImagesUpload@ which the
+-- | A resource alias for @AndroidPublisherEditsImagesUpload@ method which the
 -- 'EditsImagesUpload'' request conforms to.
 type EditsImagesUploadResource =
      Capture "packageName" Text :>

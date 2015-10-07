@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.Firewalls.Update
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeFirewallsUpdate@ which the
+-- | A resource alias for @ComputeFirewallsUpdate@ method which the
 -- 'FirewallsUpdate'' request conforms to.
 type FirewallsUpdateResource =
      Capture "project" Text :>

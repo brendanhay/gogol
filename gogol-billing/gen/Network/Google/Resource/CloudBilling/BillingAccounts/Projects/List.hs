@@ -55,7 +55,7 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.Projects.List
 import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudBillingBillingAccountsProjectsList@ which the
+-- | A resource alias for @CloudBillingBillingAccountsProjectsList@ method which the
 -- 'BillingAccountsProjectsList'' request conforms to.
 type BillingAccountsProjectsListResource =
      "v1" :>

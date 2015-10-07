@@ -46,7 +46,7 @@ module Network.Google.Resource.TaskQueue.Tasks.List
 import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
--- | A resource alias for @TaskqueueTasksList@ which the
+-- | A resource alias for @TaskqueueTasksList@ method which the
 -- 'TasksList'' request conforms to.
 type TasksListResource =
      Capture "project" Text :>

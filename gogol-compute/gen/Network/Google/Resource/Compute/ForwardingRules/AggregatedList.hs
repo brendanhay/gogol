@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.ForwardingRules.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeForwardingRulesAggregatedList@ which the
+-- | A resource alias for @ComputeForwardingRulesAggregatedList@ method which the
 -- 'ForwardingRulesAggregatedList'' request conforms to.
 type ForwardingRulesAggregatedListResource =
      Capture "project" Text :>

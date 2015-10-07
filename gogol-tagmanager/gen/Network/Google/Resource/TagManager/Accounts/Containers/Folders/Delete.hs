@@ -47,7 +47,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Delete
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersFoldersDelete@ which the
+-- | A resource alias for @TagManagerAccountsContainersFoldersDelete@ method which the
 -- 'AccountsContainersFoldersDelete'' request conforms to.
 type AccountsContainersFoldersDeleteResource =
      "accounts" :>

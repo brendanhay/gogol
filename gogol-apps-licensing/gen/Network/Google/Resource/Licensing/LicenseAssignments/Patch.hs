@@ -48,7 +48,7 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Patch
 import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @LicensingLicenseAssignmentsPatch@ which the
+-- | A resource alias for @LicensingLicenseAssignmentsPatch@ method which the
 -- 'LicenseAssignmentsPatch'' request conforms to.
 type LicenseAssignmentsPatchResource =
      Capture "productId" Text :>

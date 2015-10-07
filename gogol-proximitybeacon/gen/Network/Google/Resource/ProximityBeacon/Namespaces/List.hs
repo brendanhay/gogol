@@ -52,7 +52,7 @@ module Network.Google.Resource.ProximityBeacon.Namespaces.List
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconNamespacesList@ which the
+-- | A resource alias for @ProximitybeaconNamespacesList@ method which the
 -- 'NamespacesList'' request conforms to.
 type NamespacesListResource =
      "v1beta1" :>

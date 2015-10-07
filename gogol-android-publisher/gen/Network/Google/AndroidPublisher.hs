@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference>
 module Network.Google.AndroidPublisher
     (
-    -- * API
+    -- * API Declaration
       AndroidPublisherAPI
-    , androidPublisherAPI
-    , androidPublisherRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** AndroidPublisherEditsAPKListingsDelete
     , module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Delete
@@ -594,6 +590,7 @@ import           Network.Google.Resource.AndroidPublisher.Purchases.Subscription
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Play Developer API service.
 type AndroidPublisherAPI =
      InAppProductsBatchResource :<|>
        InAppProductsInsertResource
@@ -647,6 +644,3 @@ type AndroidPublisherAPI =
        :<|> PurchasesSubscriptionsRefundResource
        :<|> PurchasesSubscriptionsRevokeResource
        :<|> PurchasesSubscriptionsCancelResource
-
-androidPublisherAPI :: Proxy AndroidPublisherAPI
-androidPublisherAPI = Proxy

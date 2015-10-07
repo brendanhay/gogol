@@ -49,7 +49,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Update
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersVariablesUpdate@ which the
+-- | A resource alias for @TagManagerAccountsContainersVariablesUpdate@ method which the
 -- 'AccountsContainersVariablesUpdate'' request conforms to.
 type AccountsContainersVariablesUpdateResource =
      "accounts" :>

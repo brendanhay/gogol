@@ -52,7 +52,7 @@ module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingTargetableRemarketingListsList@ which the
+-- | A resource alias for @DfareportingTargetableRemarketingListsList@ method which the
 -- 'TargetableRemarketingListsList'' request conforms to.
 type TargetableRemarketingListsListResource =
      "userprofiles" :>

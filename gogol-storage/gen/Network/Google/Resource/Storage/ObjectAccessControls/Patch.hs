@@ -50,7 +50,7 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Patch
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectAccessControlsPatch@ which the
+-- | A resource alias for @StorageObjectAccessControlsPatch@ method which the
 -- 'ObjectAccessControlsPatch'' request conforms to.
 type ObjectAccessControlsPatchResource =
      "b" :>

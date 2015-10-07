@@ -45,7 +45,7 @@ module Network.Google.Resource.Games.Revisions.Check
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesRevisionsCheck@ which the
+-- | A resource alias for @GamesRevisionsCheck@ method which the
 -- 'RevisionsCheck'' request conforms to.
 type RevisionsCheckResource =
      "revisions" :>

@@ -50,7 +50,7 @@ module Network.Google.Resource.GAN.Publishers.Get
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GANPublishersGet@ which the
+-- | A resource alias for @GANPublishersGet@ method which the
 -- 'PublishersGet'' request conforms to.
 type PublishersGetResource =
      Capture "role" PublishersGetRole :>

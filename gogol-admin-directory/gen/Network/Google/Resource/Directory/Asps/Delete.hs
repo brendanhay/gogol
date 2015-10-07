@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.Asps.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryAspsDelete@ which the
+-- | A resource alias for @DirectoryAspsDelete@ method which the
 -- 'AspsDelete'' request conforms to.
 type AspsDeleteResource =
      "users" :>

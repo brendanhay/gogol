@@ -559,7 +559,7 @@ instance ToJSON ImportVariantsRequestFormat where
 
 -- | The format for the exported data.
 data ExportVariantSetRequestFormat
-    = Bigquery
+    = BigQuery
       -- ^ @BIGQUERY@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -567,12 +567,12 @@ instance Hashable ExportVariantSetRequestFormat
 
 instance FromText ExportVariantSetRequestFormat where
     fromText = \case
-        "BIGQUERY" -> Just Bigquery
+        "BIGQUERY" -> Just BigQuery
         _ -> Nothing
 
 instance ToText ExportVariantSetRequestFormat where
     toText = \case
-        Bigquery -> "BIGQUERY"
+        BigQuery -> "BIGQUERY"
 
 instance FromJSON ExportVariantSetRequestFormat where
     parseJSON = parseJSONText "ExportVariantSetRequestFormat"

@@ -45,7 +45,7 @@ module Network.Google.Resource.Gmail.Users.Stop
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersStop@ which the
+-- | A resource alias for @GmailUsersStop@ method which the
 -- 'UsersStop'' request conforms to.
 type UsersStopResource =
      Capture "userId" Text :>

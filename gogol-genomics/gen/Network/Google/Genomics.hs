@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference>
 module Network.Google.Genomics
     (
-    -- * API
+    -- * API Declaration
       GenomicsAPI
-    , genomicsAPI
-    , genomicsRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** GenomicsAnnotationSetsCreate
     , module Network.Google.Resource.Genomics.AnnotationSets.Create
@@ -767,8 +763,8 @@ module Network.Google.Genomics
     -- ** ExportVariantSetRequest
     , ExportVariantSetRequest
     , exportVariantSetRequest
-    , evsrBigqueryDataset
-    , evsrBigqueryTable
+    , evsrBigQueryDataset
+    , evsrBigQueryTable
     , evsrFormat
     , evsrProjectNumber
     , evsrCallSetIds
@@ -977,6 +973,7 @@ import           Network.Google.Resource.Genomics.Variantsets.Update
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Genomics API service.
 type GenomicsAPI =
      AnnotationsPatchResource :<|> AnnotationsGetResource
        :<|> AnnotationsCreateResource
@@ -1037,6 +1034,3 @@ type GenomicsAPI =
        :<|> DatasetsCreateResource
        :<|> DatasetsDeleteResource
        :<|> DatasetsUpdateResource
-
-genomicsAPI :: Proxy GenomicsAPI
-genomicsAPI = Proxy

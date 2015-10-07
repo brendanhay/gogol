@@ -46,7 +46,7 @@ module Network.Google.Resource.FusionTables.Table.Copy
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTableCopy@ which the
+-- | A resource alias for @FusiontablesTableCopy@ method which the
 -- 'TableCopy'' request conforms to.
 type TableCopyResource =
      "tables" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.GAN.CcOffers.List
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GANCcOffersList@ which the
+-- | A resource alias for @GANCcOffersList@ method which the
 -- 'CcOffersList'' request conforms to.
 type CcOffersListResource =
      "publishers" :>

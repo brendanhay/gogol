@@ -50,7 +50,7 @@ module Network.Google.Resource.Compute.RegionOperations.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeRegionOperationsList@ which the
+-- | A resource alias for @ComputeRegionOperationsList@ method which the
 -- 'RegionOperationsList'' request conforms to.
 type RegionOperationsListResource =
      Capture "project" Text :>

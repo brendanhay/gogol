@@ -15,7 +15,7 @@
 --
 module Network.Google.CustomSearch.Types
     (
-    -- * Service URL
+    -- * Service Request
       customSearchRequest
 
     -- * CSEListImgType
@@ -206,7 +206,7 @@ import           Network.Google.CustomSearch.Types.Product
 import           Network.Google.CustomSearch.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the CustomSearch API.
+-- | Default request referring to version 'v1' of the CustomSearch API. This contains the host and root path used as a starting point for constructing service requests.
 customSearchRequest :: RequestBuilder
 customSearchRequest
   = defaultRequest "https://www.googleapis.com/"

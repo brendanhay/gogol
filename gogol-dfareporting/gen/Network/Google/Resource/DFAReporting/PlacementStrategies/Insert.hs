@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPlacementStrategiesInsert@ which the
+-- | A resource alias for @DfareportingPlacementStrategiesInsert@ method which the
 -- 'PlacementStrategiesInsert'' request conforms to.
 type PlacementStrategiesInsertResource =
      "userprofiles" :>

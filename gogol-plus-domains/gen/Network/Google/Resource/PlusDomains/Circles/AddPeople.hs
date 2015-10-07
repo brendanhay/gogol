@@ -48,7 +48,7 @@ module Network.Google.Resource.PlusDomains.Circles.AddPeople
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsCirclesAddPeople@ which the
+-- | A resource alias for @PlusDomainsCirclesAddPeople@ method which the
 -- 'CirclesAddPeople'' request conforms to.
 type CirclesAddPeopleResource =
      "circles" :>

@@ -50,7 +50,7 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Patch
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFileFilterLinksPatch@ which the
+-- | A resource alias for @AnalyticsManagementProFileFilterLinksPatch@ method which the
 -- 'ManagementProFileFilterLinksPatch'' request conforms to.
 type ManagementProFileFilterLinksPatchResource =
      "management" :>

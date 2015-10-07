@@ -18,6 +18,17 @@ description:
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @{{ version }}@{% if revision %}, revision @{{ revision }}@{% endif %}
+    of the API.
+{% for label in labels %}
+  {% if label.first %}
+    .
+    Labels:
+  {% endif %}
+    .
+    * {{ label.value }}
+{% endfor %}
 
 source-repository head
     type:     git

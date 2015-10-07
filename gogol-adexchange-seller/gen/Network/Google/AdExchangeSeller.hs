@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference>
 module Network.Google.AdExchangeSeller
     (
-    -- * API
+    -- * API Declaration
       AdExchangeSellerAPI
-    , adExchangeSellerAPI
-    , adExchangeSellerRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** AdexchangesellerAccountsAdClientsList
     , module Network.Google.Resource.AdExchangeSeller.Accounts.AdClients.List
@@ -249,6 +245,7 @@ import           Network.Google.Resource.AdExchangeSeller.Accounts.URLChannels.L
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Ad Exchange Seller API service.
 type AdExchangeSellerAPI =
      AccountsAdClientsListResource :<|>
        AccountsReportsSavedListResource
@@ -264,6 +261,3 @@ type AdExchangeSellerAPI =
        :<|> AccountsMetadataDimensionsListResource
        :<|> AccountsListResource
        :<|> AccountsGetResource
-
-adExchangeSellerAPI :: Proxy AdExchangeSellerAPI
-adExchangeSellerAPI = Proxy

@@ -45,7 +45,7 @@ module Network.Google.Resource.YouTube.Subscriptions.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeSubscriptionsDelete@ which the
+-- | A resource alias for @YouTubeSubscriptionsDelete@ method which the
 -- 'SubscriptionsDelete'' request conforms to.
 type SubscriptionsDeleteResource =
      "subscriptions" :>

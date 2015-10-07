@@ -47,7 +47,7 @@ module Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersMessagesAttachmentsGet@ which the
+-- | A resource alias for @GmailUsersMessagesAttachmentsGet@ method which the
 -- 'UsersMessagesAttachmentsGet'' request conforms to.
 type UsersMessagesAttachmentsGetResource =
      Capture "userId" Text :>

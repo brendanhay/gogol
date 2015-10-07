@@ -46,7 +46,7 @@ module Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.Get
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsGlobalAccountsOperationsGet@ which the
+-- | A resource alias for @CloudUserAccountsGlobalAccountsOperationsGet@ method which the
 -- 'GlobalAccountsOperationsGet'' request conforms to.
 type GlobalAccountsOperationsGetResource =
      Capture "project" Text :>

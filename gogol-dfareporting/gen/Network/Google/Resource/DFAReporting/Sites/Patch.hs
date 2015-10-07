@@ -47,7 +47,7 @@ module Network.Google.Resource.DFAReporting.Sites.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSitesPatch@ which the
+-- | A resource alias for @DfareportingSitesPatch@ method which the
 -- 'SitesPatch'' request conforms to.
 type SitesPatchResource =
      "userprofiles" :>

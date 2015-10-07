@@ -47,7 +47,7 @@ module Network.Google.Resource.YouTube.ChannelSections.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeChannelSectionsUpdate@ which the
+-- | A resource alias for @YouTubeChannelSectionsUpdate@ method which the
 -- 'ChannelSectionsUpdate'' request conforms to.
 type ChannelSectionsUpdateResource =
      "channelSections" :>

@@ -26,7 +26,7 @@
 -- Requires the Can View project role, or the Is Owner project role if you
 -- set the allUsers property.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryJobsList@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryJobsList@.
 module Network.Google.Resource.BigQuery.Jobs.List
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ module Network.Google.Resource.BigQuery.Jobs.List
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigqueryJobsList@ which the
+-- | A resource alias for @BigQueryJobsList@ method which the
 -- 'JobsList'' request conforms to.
 type JobsListResource =
      "projects" :>

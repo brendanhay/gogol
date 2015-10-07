@@ -18,14 +18,10 @@
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference>
 module Network.Google.UserAccounts
     (
-    -- * API
+    -- * API Declaration
       UserAccountsAPI
-    , userAccountsAPI
-    , userAccountsRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** CloudUserAccountsGlobalAccountsOperationsDelete
     , module Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.Delete
@@ -272,6 +268,7 @@ import           Network.Google.UserAccounts.Types
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Cloud User Accounts API service.
 type UserAccountsAPI =
      GroupsInsertResource :<|> GroupsListResource :<|>
        GroupsGetResource
@@ -289,6 +286,3 @@ type UserAccountsAPI =
        :<|> GlobalAccountsOperationsDeleteResource
        :<|> LinuxGetLinuxAccountViewsResource
        :<|> LinuxGetAuthorizedKeysViewResource
-
-userAccountsAPI :: Proxy UserAccountsAPI
-userAccountsAPI = Proxy

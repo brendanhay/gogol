@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.ListManagedInstance
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersListManagedInstances@ which the
+-- | A resource alias for @ComputeInstanceGroupManagersListManagedInstances@ method which the
 -- 'InstanceGroupManagersListManagedInstances'' request conforms to.
 type InstanceGroupManagersListManagedInstancesResource
      =

@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference>
 module Network.Google.AndroidEnterprise
     (
-    -- * API
+    -- * API Declaration
       AndroidEnterpriseAPI
-    , androidEnterpriseAPI
-    , androidEnterpriseRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** AndroidEnterpriseCollectionsDelete
     , module Network.Google.Resource.AndroidEnterprise.Collections.Delete
@@ -458,6 +454,7 @@ import           Network.Google.Resource.AndroidEnterprise.Users.SetAvailablePro
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Play EMM API service.
 type AndroidEnterpriseAPI =
      CollectionviewersListResource :<|>
        CollectionviewersPatchResource
@@ -508,6 +505,3 @@ type AndroidEnterpriseAPI =
        :<|> DevicesGetResource
        :<|> DevicesGetStateResource
        :<|> GrouplicenseUsersListResource
-
-androidEnterpriseAPI :: Proxy AndroidEnterpriseAPI
-androidEnterpriseAPI = Proxy

@@ -50,7 +50,7 @@ module Network.Google.Resource.Storage.Objects.Compose
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsCompose@ which the
+-- | A resource alias for @StorageObjectsCompose@ method which the
 -- 'ObjectsCompose'' request conforms to.
 type ObjectsComposeResource =
      "b" :>

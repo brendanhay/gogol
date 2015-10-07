@@ -47,7 +47,7 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Update
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerPretargetingConfigUpdate@ which the
+-- | A resource alias for @AdexchangebuyerPretargetingConfigUpdate@ method which the
 -- 'PretargetingConfigUpdate'' request conforms to.
 type PretargetingConfigUpdateResource =
      "pretargetingconfigs" :>

@@ -49,7 +49,7 @@ module Network.Google.Resource.Blogger.Pages.Patch
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPagesPatch@ which the
+-- | A resource alias for @BloggerPagesPatch@ method which the
 -- 'PagesPatch'' request conforms to.
 type PagesPatchResource =
      "blogs" :>

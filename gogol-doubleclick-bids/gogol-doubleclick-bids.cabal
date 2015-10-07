@@ -18,6 +18,13 @@ description:
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+    .
+    Labels:
+    .
+    * Limited Availability
 
 source-repository head
     type:     git
@@ -34,11 +41,11 @@ library
         , Network.Google.DoubleClickBids.Types
         , Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
         , Network.Google.Resource.DoubleClickBidManager.Lineitems.Uploadlineitems
-        , Network.Google.Resource.DoubleClickBidManager.Queries.Createquery
-        , Network.Google.Resource.DoubleClickBidManager.Queries.Deletequery
-        , Network.Google.Resource.DoubleClickBidManager.Queries.Getquery
+        , Network.Google.Resource.DoubleClickBidManager.Queries.CreateQuery
+        , Network.Google.Resource.DoubleClickBidManager.Queries.DeleteQuery
+        , Network.Google.Resource.DoubleClickBidManager.Queries.GetQuery
         , Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
-        , Network.Google.Resource.DoubleClickBidManager.Queries.Runquery
+        , Network.Google.Resource.DoubleClickBidManager.Queries.RunQuery
         , Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
 
     other-modules:

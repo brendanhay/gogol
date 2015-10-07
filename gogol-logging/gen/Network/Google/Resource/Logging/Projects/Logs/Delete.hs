@@ -53,7 +53,7 @@ module Network.Google.Resource.Logging.Projects.Logs.Delete
 import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @LoggingProjectsLogsDelete@ which the
+-- | A resource alias for @LoggingProjectsLogsDelete@ method which the
 -- 'ProjectsLogsDelete'' request conforms to.
 type ProjectsLogsDeleteResource =
      "v1beta3" :>

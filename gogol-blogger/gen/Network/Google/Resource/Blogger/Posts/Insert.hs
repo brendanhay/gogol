@@ -49,7 +49,7 @@ module Network.Google.Resource.Blogger.Posts.Insert
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostsInsert@ which the
+-- | A resource alias for @BloggerPostsInsert@ method which the
 -- 'PostsInsert'' request conforms to.
 type PostsInsertResource =
      "blogs" :>

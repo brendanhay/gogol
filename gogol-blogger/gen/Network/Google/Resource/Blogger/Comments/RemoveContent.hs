@@ -47,7 +47,7 @@ module Network.Google.Resource.Blogger.Comments.RemoveContent
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerCommentsRemoveContent@ which the
+-- | A resource alias for @BloggerCommentsRemoveContent@ method which the
 -- 'CommentsRemoveContent'' request conforms to.
 type CommentsRemoveContentResource =
      "blogs" :>

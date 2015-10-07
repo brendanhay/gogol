@@ -47,7 +47,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Macros.Delete
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersMacrosDelete@ which the
+-- | A resource alias for @TagManagerAccountsContainersMacrosDelete@ method which the
 -- 'AccountsContainersMacrosDelete'' request conforms to.
 type AccountsContainersMacrosDeleteResource =
      "accounts" :>

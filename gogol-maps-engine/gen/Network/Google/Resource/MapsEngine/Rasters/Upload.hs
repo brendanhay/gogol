@@ -45,7 +45,7 @@ module Network.Google.Resource.MapsEngine.Rasters.Upload
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRastersUpload@ which the
+-- | A resource alias for @MapsEngineRastersUpload@ method which the
 -- 'RastersUpload'' request conforms to.
 type RastersUploadResource =
      "rasters" :>

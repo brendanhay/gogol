@@ -47,7 +47,7 @@ module Network.Google.Resource.Drive.Replies.Insert
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRepliesInsert@ which the
+-- | A resource alias for @DriveRepliesInsert@ method which the
 -- 'RepliesInsert'' request conforms to.
 type RepliesInsertResource =
      "files" :>

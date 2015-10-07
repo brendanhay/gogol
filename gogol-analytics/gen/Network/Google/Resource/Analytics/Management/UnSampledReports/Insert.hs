@@ -48,7 +48,7 @@ module Network.Google.Resource.Analytics.Management.UnSampledReports.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementUnSampledReportsInsert@ which the
+-- | A resource alias for @AnalyticsManagementUnSampledReportsInsert@ method which the
 -- 'ManagementUnSampledReportsInsert'' request conforms to.
 type ManagementUnSampledReportsInsertResource =
      "management" :>

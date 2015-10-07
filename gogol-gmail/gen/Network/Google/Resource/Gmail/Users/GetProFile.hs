@@ -45,7 +45,7 @@ module Network.Google.Resource.Gmail.Users.GetProFile
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersGetProFile@ which the
+-- | A resource alias for @GmailUsersGetProFile@ method which the
 -- 'UsersGetProFile'' request conforms to.
 type UsersGetProFileResource =
      Capture "userId" Text :>

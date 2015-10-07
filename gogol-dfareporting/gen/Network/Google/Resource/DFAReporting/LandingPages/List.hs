@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingLandingPagesList@ which the
+-- | A resource alias for @DfareportingLandingPagesList@ method which the
 -- 'LandingPagesList'' request conforms to.
 type LandingPagesListResource =
      "userprofiles" :>

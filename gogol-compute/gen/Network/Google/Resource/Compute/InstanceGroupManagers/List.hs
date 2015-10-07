@@ -50,7 +50,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersList@ which the
+-- | A resource alias for @ComputeInstanceGroupManagersList@ method which the
 -- 'InstanceGroupManagersList'' request conforms to.
 type InstanceGroupManagersListResource =
      Capture "project" Text :>

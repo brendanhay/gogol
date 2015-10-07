@@ -51,7 +51,7 @@ module Network.Google.Resource.Fitness.Users.DataSources.Update
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersDataSourcesUpdate@ which the
+-- | A resource alias for @FitnessUsersDataSourcesUpdate@ method which the
 -- 'UsersDataSourcesUpdate'' request conforms to.
 type UsersDataSourcesUpdateResource =
      Capture "userId" Text :>

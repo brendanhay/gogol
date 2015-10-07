@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
--- | A resource alias for @YouTubeAnalyticsGroupItemsDelete@ which the
+-- | A resource alias for @YouTubeAnalyticsGroupItemsDelete@ method which the
 -- 'GroupItemsDelete'' request conforms to.
 type GroupItemsDeleteResource =
      "groupItems" :>

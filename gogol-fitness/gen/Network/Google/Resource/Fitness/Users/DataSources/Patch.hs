@@ -52,7 +52,7 @@ module Network.Google.Resource.Fitness.Users.DataSources.Patch
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersDataSourcesPatch@ which the
+-- | A resource alias for @FitnessUsersDataSourcesPatch@ method which the
 -- 'UsersDataSourcesPatch'' request conforms to.
 type UsersDataSourcesPatchResource =
      Capture "userId" Text :>

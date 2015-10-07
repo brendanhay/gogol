@@ -48,7 +48,7 @@ module Network.Google.Resource.SQL.Databases.Insert
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLDatabasesInsert@ which the
+-- | A resource alias for @SQLDatabasesInsert@ method which the
 -- 'DatabasesInsert'' request conforms to.
 type DatabasesInsertResource =
      "projects" :>

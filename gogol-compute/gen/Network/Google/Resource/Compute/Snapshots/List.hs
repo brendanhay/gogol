@@ -49,7 +49,7 @@ module Network.Google.Resource.Compute.Snapshots.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeSnapshotsList@ which the
+-- | A resource alias for @ComputeSnapshotsList@ method which the
 -- 'SnapshotsList'' request conforms to.
 type SnapshotsListResource =
      Capture "project" Text :>

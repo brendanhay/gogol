@@ -15,7 +15,7 @@
 --
 module Network.Google.Mirror.Types
     (
-    -- * Service URL
+    -- * Service Request
       mirrorRequest
 
     -- * TimelineListOrderBy
@@ -207,7 +207,7 @@ import           Network.Google.Mirror.Types.Product
 import           Network.Google.Mirror.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Google Mirror API.
+-- | Default request referring to version 'v1' of the Google Mirror API. This contains the host and root path used as a starting point for constructing service requests.
 mirrorRequest :: RequestBuilder
 mirrorRequest
   = defaultRequest "https://www.googleapis.com/"

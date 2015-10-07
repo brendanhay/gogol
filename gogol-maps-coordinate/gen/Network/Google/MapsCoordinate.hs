@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference>
 module Network.Google.MapsCoordinate
     (
-    -- * API
+    -- * API Declaration
       MapsCoordinateAPI
-    , mapsCoordinateAPI
-    , mapsCoordinateRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** CoordinateCustomFieldDefList
     , module Network.Google.Resource.Coordinate.CustomFieldDef.List
@@ -229,6 +225,7 @@ import           Network.Google.Resource.Coordinate.Worker.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Maps Coordinate API service.
 type MapsCoordinateAPI =
      SchedulePatchResource :<|> ScheduleGetResource :<|>
        ScheduleUpdateResource
@@ -241,6 +238,3 @@ type MapsCoordinateAPI =
        :<|> JobsUpdateResource
        :<|> TeamListResource
        :<|> WorkerListResource
-
-mapsCoordinateAPI :: Proxy MapsCoordinateAPI
-mapsCoordinateAPI = Proxy

@@ -46,7 +46,7 @@ module Network.Google.Resource.AndroidEnterprise.Products.GetPermissions
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseProductsGetPermissions@ which the
+-- | A resource alias for @AndroidEnterpriseProductsGetPermissions@ method which the
 -- 'ProductsGetPermissions'' request conforms to.
 type ProductsGetPermissionsResource =
      "enterprises" :>

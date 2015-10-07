@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.Users.Patch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersPatch@ which the
+-- | A resource alias for @DirectoryUsersPatch@ method which the
 -- 'UsersPatch'' request conforms to.
 type UsersPatchResource =
      "users" :>

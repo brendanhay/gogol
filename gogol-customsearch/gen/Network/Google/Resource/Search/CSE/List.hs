@@ -77,7 +77,7 @@ module Network.Google.Resource.Search.CSE.List
 import           Network.Google.CustomSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @SearchCSEList@ which the
+-- | A resource alias for @SearchCSEList@ method which the
 -- 'CSEList'' request conforms to.
 type CSEListResource =
      "v1" :>

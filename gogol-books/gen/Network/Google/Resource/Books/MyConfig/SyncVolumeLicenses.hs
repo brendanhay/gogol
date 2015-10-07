@@ -52,7 +52,7 @@ module Network.Google.Resource.Books.MyConfig.SyncVolumeLicenses
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyConfigSyncVolumeLicenses@ which the
+-- | A resource alias for @BooksMyConfigSyncVolumeLicenses@ method which the
 -- 'MyConfigSyncVolumeLicenses'' request conforms to.
 type MyConfigSyncVolumeLicensesResource =
      "myconfig" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.Analytics.Management.WebProperties.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertiesList@ which the
+-- | A resource alias for @AnalyticsManagementWebPropertiesList@ method which the
 -- 'ManagementWebPropertiesList'' request conforms to.
 type ManagementWebPropertiesListResource =
      "management" :>

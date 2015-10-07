@@ -52,7 +52,7 @@ module Network.Google.Resource.Compute.Instances.Stop
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesStop@ which the
+-- | A resource alias for @ComputeInstancesStop@ method which the
 -- 'InstancesStop'' request conforms to.
 type InstancesStopResource =
      Capture "project" Text :>

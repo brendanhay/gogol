@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference>
 module Network.Google.Plus
     (
-    -- * API
+    -- * API Declaration
       PlusAPI
-    , plusAPI
-    , plusRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** PlusActivitiesGet
     , module Network.Google.Resource.Plus.Activities.Get
@@ -574,6 +570,7 @@ import           Network.Google.Resource.Plus.People.Search
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google+ API service.
 type PlusAPI =
      ActivitiesListResource :<|> ActivitiesGetResource
        :<|> ActivitiesSearchResource
@@ -585,6 +582,3 @@ type PlusAPI =
        :<|> CommentsGetResource
        :<|> MomentsInsertResource
        :<|> MomentsListResource
-
-plusAPI :: Proxy PlusAPI
-plusAPI = Proxy

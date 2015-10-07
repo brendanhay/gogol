@@ -54,7 +54,7 @@ module Network.Google.Resource.DFAReporting.InventoryItems.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingInventoryItemsList@ which the
+-- | A resource alias for @DfareportingInventoryItemsList@ method which the
 -- 'InventoryItemsList'' request conforms to.
 type InventoryItemsListResource =
      "userprofiles" :>

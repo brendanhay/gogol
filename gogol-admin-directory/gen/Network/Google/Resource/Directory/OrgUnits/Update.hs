@@ -47,7 +47,7 @@ module Network.Google.Resource.Directory.OrgUnits.Update
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryOrgUnitsUpdate@ which the
+-- | A resource alias for @DirectoryOrgUnitsUpdate@ method which the
 -- 'OrgUnitsUpdate'' request conforms to.
 type OrgUnitsUpdateResource =
      "customer" :>

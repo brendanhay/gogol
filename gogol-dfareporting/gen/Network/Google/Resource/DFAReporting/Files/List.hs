@@ -50,7 +50,7 @@ module Network.Google.Resource.DFAReporting.Files.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFilesList@ which the
+-- | A resource alias for @DfareportingFilesList@ method which the
 -- 'FilesList'' request conforms to.
 type FilesListResource =
      "userprofiles" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.Tokens.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryTokensDelete@ which the
+-- | A resource alias for @DirectoryTokensDelete@ method which the
 -- 'TokensDelete'' request conforms to.
 type TokensDeleteResource =
      "users" :>

@@ -51,7 +51,7 @@ module Network.Google.Resource.DeploymentManager.Deployments.Update
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerDeploymentsUpdate@ which the
+-- | A resource alias for @DeploymentManagerDeploymentsUpdate@ method which the
 -- 'DeploymentsUpdate'' request conforms to.
 type DeploymentsUpdateResource =
      Capture "project" Text :>

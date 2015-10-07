@@ -46,7 +46,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKs.List
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsAPKsList@ which the
+-- | A resource alias for @AndroidPublisherEditsAPKsList@ method which the
 -- 'EditsAPKsList'' request conforms to.
 type EditsAPKsListResource =
      Capture "packageName" Text :>

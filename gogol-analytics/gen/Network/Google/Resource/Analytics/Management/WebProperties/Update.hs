@@ -47,7 +47,7 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Update
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertiesUpdate@ which the
+-- | A resource alias for @AnalyticsManagementWebPropertiesUpdate@ method which the
 -- 'ManagementWebPropertiesUpdate'' request conforms to.
 type ManagementWebPropertiesUpdateResource =
      "management" :>

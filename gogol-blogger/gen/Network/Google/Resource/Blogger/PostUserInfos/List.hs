@@ -57,7 +57,7 @@ module Network.Google.Resource.Blogger.PostUserInfos.List
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostUserInfosList@ which the
+-- | A resource alias for @BloggerPostUserInfosList@ method which the
 -- 'PostUserInfosList'' request conforms to.
 type PostUserInfosListResource =
      "users" :>

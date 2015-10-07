@@ -46,7 +46,7 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Upda
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationAchievementConfigurationsUpdate@ which the
+-- | A resource alias for @GamesConfigurationAchievementConfigurationsUpdate@ method which the
 -- 'AchievementConfigurationsUpdate'' request conforms to.
 type AchievementConfigurationsUpdateResource =
      "achievements" :>

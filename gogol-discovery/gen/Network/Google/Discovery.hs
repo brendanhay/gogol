@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference>
 module Network.Google.Discovery
     (
-    -- * API
+    -- * API Declaration
       DiscoveryAPI
-    , discoveryAPI
-    , discoveryRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** DiscoveryAPIsGetRest
     , module Network.Google.Resource.Discovery.APIs.GetRest
@@ -262,8 +258,6 @@ import           Network.Google.Resource.Discovery.APIs.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the APIs Discovery Service service.
 type DiscoveryAPI =
      APIsListResource :<|> APIsGetRestResource
-
-discoveryAPI :: Proxy DiscoveryAPI
-discoveryAPI = Proxy

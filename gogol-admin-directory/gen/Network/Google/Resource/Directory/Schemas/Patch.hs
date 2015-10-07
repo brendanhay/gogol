@@ -47,7 +47,7 @@ module Network.Google.Resource.Directory.Schemas.Patch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectorySchemasPatch@ which the
+-- | A resource alias for @DirectorySchemasPatch@ method which the
 -- 'SchemasPatch'' request conforms to.
 type SchemasPatchResource =
      "customer" :>

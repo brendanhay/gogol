@@ -47,7 +47,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Get
 import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
--- | A resource alias for @TaskqueueTasksGet@ which the
+-- | A resource alias for @TaskqueueTasksGet@ method which the
 -- 'TasksGet'' request conforms to.
 type TasksGetResource =
      Capture "project" Text :>

@@ -45,7 +45,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyAssertion
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyVerifyAssertion@ which the
+-- | A resource alias for @IdentitytoolkitRelyingPartyVerifyAssertion@ method which the
 -- 'RelyingPartyVerifyAssertion'' request conforms to.
 type RelyingPartyVerifyAssertionResource =
      "verifyAssertion" :>

@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference>
 module Network.Google.Storage
     (
-    -- * API
+    -- * API Declaration
       StorageAPI
-    , storageAPI
-    , storageRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** StorageBucketAccessControlsDelete
     , module Network.Google.Resource.Storage.BucketAccessControls.Delete
@@ -417,6 +413,7 @@ import           Network.Google.Storage.Types
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Cloud Storage API service.
 type StorageAPI =
      BucketsInsertResource :<|> BucketsListResource :<|>
        BucketsPatchResource
@@ -451,6 +448,3 @@ type StorageAPI =
        :<|> ObjectAccessControlsGetResource
        :<|> ObjectAccessControlsDeleteResource
        :<|> ObjectAccessControlsUpdateResource
-
-storageAPI :: Proxy StorageAPI
-storageAPI = Proxy

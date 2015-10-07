@@ -47,7 +47,7 @@ module Network.Google.Resource.MapsEngine.Rasters.Parents.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRastersParentsList@ which the
+-- | A resource alias for @MapsEngineRastersParentsList@ method which the
 -- 'RastersParentsList'' request conforms to.
 type RastersParentsListResource =
      "rasters" :>

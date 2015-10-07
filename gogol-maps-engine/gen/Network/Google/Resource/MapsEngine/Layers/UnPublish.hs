@@ -45,7 +45,7 @@ module Network.Google.Resource.MapsEngine.Layers.UnPublish
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersUnPublish@ which the
+-- | A resource alias for @MapsEngineLayersUnPublish@ method which the
 -- 'LayersUnPublish'' request conforms to.
 type LayersUnPublishResource =
      "layers" :>

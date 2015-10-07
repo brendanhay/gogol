@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/fonts/docs/developer_api Google Fonts Developer API Reference>
 module Network.Google.Fonts
     (
-    -- * API
+    -- * API Declaration
       FontsAPI
-    , fontsAPI
-    , fontsRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** WebfontsWebfontsList
     , module Network.Google.Resource.Webfonts.Webfonts.List
@@ -66,7 +62,5 @@ import           Network.Google.Resource.Webfonts.Webfonts.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Fonts Developer API service.
 type FontsAPI = WebfontsListResource
-
-fontsAPI :: Proxy FontsAPI
-fontsAPI = Proxy

@@ -48,7 +48,7 @@ module Network.Google.Resource.GamesManagement.Applications.ListHidden
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementApplicationsListHidden@ which the
+-- | A resource alias for @GamesManagementApplicationsListHidden@ method which the
 -- 'ApplicationsListHidden'' request conforms to.
 type ApplicationsListHiddenResource =
      "applications" :>

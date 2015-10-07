@@ -55,7 +55,7 @@ module Network.Google.Resource.Coordinate.Jobs.Insert
 import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CoordinateJobsInsert@ which the
+-- | A resource alias for @CoordinateJobsInsert@ method which the
 -- 'JobsInsert'' request conforms to.
 type JobsInsertResource =
      "teams" :>

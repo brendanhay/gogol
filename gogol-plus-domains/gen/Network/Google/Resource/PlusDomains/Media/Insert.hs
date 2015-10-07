@@ -51,7 +51,7 @@ module Network.Google.Resource.PlusDomains.Media.Insert
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsMediaInsert@ which the
+-- | A resource alias for @PlusDomainsMediaInsert@ method which the
 -- 'MediaInsert'' request conforms to.
 type MediaInsertResource =
      "people" :>

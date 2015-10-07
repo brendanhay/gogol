@@ -45,7 +45,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyPassword
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyVerifyPassword@ which the
+-- | A resource alias for @IdentitytoolkitRelyingPartyVerifyPassword@ method which the
 -- 'RelyingPartyVerifyPassword'' request conforms to.
 type RelyingPartyVerifyPasswordResource =
      "verifyPassword" :>

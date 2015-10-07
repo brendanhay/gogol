@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference>
 module Network.Google.DoubleClickBids
     (
-    -- * API
+    -- * API Declaration
       DoubleClickBidsAPI
-    , doubleClickBidsAPI
-    , doubleClickBidsRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** DoubleClickBidManagerLineitemsDownloadlineitems
     , module Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
@@ -33,20 +29,20 @@ module Network.Google.DoubleClickBids
     -- ** DoubleClickBidManagerLineitemsUploadlineitems
     , module Network.Google.Resource.DoubleClickBidManager.Lineitems.Uploadlineitems
 
-    -- ** DoubleClickBidManagerQueriesCreatequery
-    , module Network.Google.Resource.DoubleClickBidManager.Queries.Createquery
+    -- ** DoubleClickBidManagerQueriesCreateQuery
+    , module Network.Google.Resource.DoubleClickBidManager.Queries.CreateQuery
 
-    -- ** DoubleClickBidManagerQueriesDeletequery
-    , module Network.Google.Resource.DoubleClickBidManager.Queries.Deletequery
+    -- ** DoubleClickBidManagerQueriesDeleteQuery
+    , module Network.Google.Resource.DoubleClickBidManager.Queries.DeleteQuery
 
-    -- ** DoubleClickBidManagerQueriesGetquery
-    , module Network.Google.Resource.DoubleClickBidManager.Queries.Getquery
+    -- ** DoubleClickBidManagerQueriesGetQuery
+    , module Network.Google.Resource.DoubleClickBidManager.Queries.GetQuery
 
     -- ** DoubleClickBidManagerQueriesListqueries
     , module Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
 
-    -- ** DoubleClickBidManagerQueriesRunquery
-    , module Network.Google.Resource.DoubleClickBidManager.Queries.Runquery
+    -- ** DoubleClickBidManagerQueriesRunQuery
+    , module Network.Google.Resource.DoubleClickBidManager.Queries.RunQuery
 
     -- ** DoubleClickBidManagerReportsListreports
     , module Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
@@ -244,25 +240,23 @@ import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 import           Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
 import           Network.Google.Resource.DoubleClickBidManager.Lineitems.Uploadlineitems
-import           Network.Google.Resource.DoubleClickBidManager.Queries.Createquery
-import           Network.Google.Resource.DoubleClickBidManager.Queries.Deletequery
-import           Network.Google.Resource.DoubleClickBidManager.Queries.Getquery
+import           Network.Google.Resource.DoubleClickBidManager.Queries.CreateQuery
+import           Network.Google.Resource.DoubleClickBidManager.Queries.DeleteQuery
+import           Network.Google.Resource.DoubleClickBidManager.Queries.GetQuery
 import           Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
-import           Network.Google.Resource.DoubleClickBidManager.Queries.Runquery
+import           Network.Google.Resource.DoubleClickBidManager.Queries.RunQuery
 import           Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
 
 {- $resources
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the DoubleClick Bid Manager API service.
 type DoubleClickBidsAPI =
-     QueriesGetqueryResource :<|> QueriesRunqueryResource
-       :<|> QueriesDeletequeryResource
-       :<|> QueriesCreatequeryResource
+     QueriesGetQueryResource :<|> QueriesRunQueryResource
+       :<|> QueriesDeleteQueryResource
+       :<|> QueriesCreateQueryResource
        :<|> QueriesListqueriesResource
        :<|> ReportsListreportsResource
        :<|> LineitemsUploadlineitemsResource
        :<|> LineitemsDownloadlineitemsResource
-
-doubleClickBidsAPI :: Proxy DoubleClickBidsAPI
-doubleClickBidsAPI = Proxy

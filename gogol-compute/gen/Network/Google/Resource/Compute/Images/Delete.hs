@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.Images.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeImagesDelete@ which the
+-- | A resource alias for @ComputeImagesDelete@ method which the
 -- 'ImagesDelete'' request conforms to.
 type ImagesDeleteResource =
      Capture "project" Text :>

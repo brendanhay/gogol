@@ -47,7 +47,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Details.Update
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsDetailsUpdate@ which the
+-- | A resource alias for @AndroidPublisherEditsDetailsUpdate@ method which the
 -- 'EditsDetailsUpdate'' request conforms to.
 type EditsDetailsUpdateResource =
      Capture "packageName" Text :>

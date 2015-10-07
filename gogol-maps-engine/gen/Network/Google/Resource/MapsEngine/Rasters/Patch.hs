@@ -46,7 +46,7 @@ module Network.Google.Resource.MapsEngine.Rasters.Patch
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRastersPatch@ which the
+-- | A resource alias for @MapsEngineRastersPatch@ method which the
 -- 'RastersPatch'' request conforms to.
 type RastersPatchResource =
      "rasters" :>

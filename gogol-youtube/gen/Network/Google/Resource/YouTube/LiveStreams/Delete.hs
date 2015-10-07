@@ -47,7 +47,7 @@ module Network.Google.Resource.YouTube.LiveStreams.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveStreamsDelete@ which the
+-- | A resource alias for @YouTubeLiveStreamsDelete@ method which the
 -- 'LiveStreamsDelete'' request conforms to.
 type LiveStreamsDeleteResource =
      "liveStreams" :>

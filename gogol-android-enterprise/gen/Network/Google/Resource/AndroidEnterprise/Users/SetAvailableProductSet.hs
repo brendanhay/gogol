@@ -47,7 +47,7 @@ module Network.Google.Resource.AndroidEnterprise.Users.SetAvailableProductSet
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseUsersSetAvailableProductSet@ which the
+-- | A resource alias for @AndroidEnterpriseUsersSetAvailableProductSet@ method which the
 -- 'UsersSetAvailableProductSet'' request conforms to.
 type UsersSetAvailableProductSetResource =
      "enterprises" :>

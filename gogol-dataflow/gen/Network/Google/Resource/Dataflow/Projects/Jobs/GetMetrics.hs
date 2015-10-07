@@ -53,7 +53,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
 import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataflowProjectsJobsGetMetrics@ which the
+-- | A resource alias for @DataflowProjectsJobsGetMetrics@ method which the
 -- 'ProjectsJobsGetMetrics'' request conforms to.
 type ProjectsJobsGetMetricsResource =
      "v1b3" :>

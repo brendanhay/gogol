@@ -48,7 +48,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingContentCategoriesPatch@ which the
+-- | A resource alias for @DfareportingContentCategoriesPatch@ method which the
 -- 'ContentCategoriesPatch'' request conforms to.
 type ContentCategoriesPatchResource =
      "userprofiles" :>

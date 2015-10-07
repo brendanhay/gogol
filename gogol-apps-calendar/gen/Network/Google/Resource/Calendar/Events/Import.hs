@@ -48,7 +48,7 @@ module Network.Google.Resource.Calendar.Events.Import
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarEventsImport@ which the
+-- | A resource alias for @CalendarEventsImport@ method which the
 -- 'EventsImport'' request conforms to.
 type EventsImportResource =
      "calendars" :>

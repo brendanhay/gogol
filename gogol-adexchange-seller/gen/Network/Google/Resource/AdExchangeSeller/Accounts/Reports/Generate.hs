@@ -56,7 +56,7 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Generate
 import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangesellerAccountsReportsGenerate@ which the
+-- | A resource alias for @AdexchangesellerAccountsReportsGenerate@ method which the
 -- 'AccountsReportsGenerate'' request conforms to.
 type AccountsReportsGenerateResource =
      "accounts" :>

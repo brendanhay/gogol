@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference>
 module Network.Google.WebmasterTools
     (
-    -- * API
+    -- * API Declaration
       WebmasterToolsAPI
-    , webmasterToolsAPI
-    , webmasterToolsRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** WebmastersSearchanalyticsQuery
     , module Network.Google.Resource.Webmasters.Searchanalytics.Query
@@ -100,14 +96,14 @@ module Network.Google.WebmasterTools
     -- ** URLCrawlErrorsSamplesGetPlatform
     , URLCrawlErrorsSamplesGetPlatform (..)
 
-    -- ** APIdataRow
-    , APIdataRow
-    , apidataRow
-    , arImpressions
-    , arKeys
-    , arCtr
-    , arClicks
-    , arPosition
+    -- ** APIDataRow
+    , APIDataRow
+    , apiDataRow
+    , adrImpressions
+    , adrKeys
+    , adrCtr
+    , adrClicks
+    , adrPosition
 
     -- ** APIdimensionFilter
     , APIdimensionFilter
@@ -226,6 +222,7 @@ import           Network.Google.WebmasterTools.Types
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Webmaster Tools API service.
 type WebmasterToolsAPI =
      URLCrawlErrorsSamplesListResource :<|>
        URLCrawlErrorsSamplesGetResource
@@ -240,6 +237,3 @@ type WebmasterToolsAPI =
        :<|> SitesAddResource
        :<|> SitesDeleteResource
        :<|> URLCrawlErrorscountsQueryResource
-
-webmasterToolsAPI :: Proxy WebmasterToolsAPI
-webmasterToolsAPI = Proxy

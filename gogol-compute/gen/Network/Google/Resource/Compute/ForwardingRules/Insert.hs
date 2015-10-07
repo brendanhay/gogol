@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.ForwardingRules.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeForwardingRulesInsert@ which the
+-- | A resource alias for @ComputeForwardingRulesInsert@ method which the
 -- 'ForwardingRulesInsert'' request conforms to.
 type ForwardingRulesInsertResource =
      Capture "project" Text :>

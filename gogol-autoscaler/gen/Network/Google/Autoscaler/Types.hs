@@ -15,7 +15,7 @@
 --
 module Network.Google.Autoscaler.Types
     (
-    -- * Service URL
+    -- * Service Request
       autoscalerRequest
 
     -- * OperationWarningsItemDataItem
@@ -169,7 +169,7 @@ import           Network.Google.Autoscaler.Types.Product
 import           Network.Google.Autoscaler.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1beta2' of the Google Compute Engine Autoscaler API.
+-- | Default request referring to version 'v1beta2' of the Google Compute Engine Autoscaler API. This contains the host and root path used as a starting point for constructing service requests.
 autoscalerRequest :: RequestBuilder
 autoscalerRequest
   = defaultRequest "https://www.googleapis.com/"

@@ -46,7 +46,7 @@ module Network.Google.Resource.DNS.ManagedZones.Get
 import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DNSManagedZonesGet@ which the
+-- | A resource alias for @DNSManagedZonesGet@ method which the
 -- 'ManagedZonesGet'' request conforms to.
 type ManagedZonesGetResource =
      Capture "project" Text :>

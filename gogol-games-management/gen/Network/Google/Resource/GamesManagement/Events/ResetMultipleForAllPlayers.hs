@@ -47,7 +47,7 @@ module Network.Google.Resource.GamesManagement.Events.ResetMultipleForAllPlayers
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementEventsResetMultipleForAllPlayers@ which the
+-- | A resource alias for @GamesManagementEventsResetMultipleForAllPlayers@ method which the
 -- 'EventsResetMultipleForAllPlayers'' request conforms to.
 type EventsResetMultipleForAllPlayersResource =
      "events" :>

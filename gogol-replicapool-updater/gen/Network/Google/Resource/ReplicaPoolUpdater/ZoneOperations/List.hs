@@ -50,7 +50,7 @@ module Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.List
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
--- | A resource alias for @ReplicapoolupdaterZoneOperationsList@ which the
+-- | A resource alias for @ReplicapoolupdaterZoneOperationsList@ method which the
 -- 'ZoneOperationsList'' request conforms to.
 type ZoneOperationsListResource =
      Capture "project" Text :>

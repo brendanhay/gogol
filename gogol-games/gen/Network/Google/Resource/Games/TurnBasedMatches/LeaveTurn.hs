@@ -49,7 +49,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.LeaveTurn
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesTurnBasedMatchesLeaveTurn@ which the
+-- | A resource alias for @GamesTurnBasedMatchesLeaveTurn@ method which the
 -- 'TurnBasedMatchesLeaveTurn'' request conforms to.
 type TurnBasedMatchesLeaveTurnResource =
      "turnbasedmatches" :>

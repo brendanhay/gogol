@@ -22,7 +22,7 @@
 --
 -- | Lists all projects to which you have been granted any project role.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryProjectsList@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryProjectsList@.
 module Network.Google.Resource.BigQuery.Projects.List
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.BigQuery.Projects.List
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigqueryProjectsList@ which the
+-- | A resource alias for @BigQueryProjectsList@ method which the
 -- 'ProjectsList'' request conforms to.
 type ProjectsListResource =
      "projects" :>

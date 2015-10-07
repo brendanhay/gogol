@@ -50,7 +50,7 @@ module Network.Google.Resource.SQL.Instances.Patch
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesPatch@ which the
+-- | A resource alias for @SQLInstancesPatch@ method which the
 -- 'InstancesPatch'' request conforms to.
 type InstancesPatchResource =
      "projects" :>

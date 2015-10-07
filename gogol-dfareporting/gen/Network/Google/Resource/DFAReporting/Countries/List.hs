@@ -45,7 +45,7 @@ module Network.Google.Resource.DFAReporting.Countries.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCountriesList@ which the
+-- | A resource alias for @DfareportingCountriesList@ method which the
 -- 'CountriesList'' request conforms to.
 type CountriesListResource =
      "userprofiles" :>

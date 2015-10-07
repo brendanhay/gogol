@@ -47,7 +47,7 @@ module Network.Google.Resource.YouTube.Captions.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCaptionsDelete@ which the
+-- | A resource alias for @YouTubeCaptionsDelete@ method which the
 -- 'CaptionsDelete'' request conforms to.
 type CaptionsDeleteResource =
      "captions" :>

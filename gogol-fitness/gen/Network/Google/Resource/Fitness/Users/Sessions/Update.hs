@@ -48,7 +48,7 @@ module Network.Google.Resource.Fitness.Users.Sessions.Update
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersSessionsUpdate@ which the
+-- | A resource alias for @FitnessUsersSessionsUpdate@ method which the
 -- 'UsersSessionsUpdate'' request conforms to.
 type UsersSessionsUpdateResource =
      Capture "userId" Text :>

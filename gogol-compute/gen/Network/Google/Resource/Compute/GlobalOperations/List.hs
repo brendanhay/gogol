@@ -49,7 +49,7 @@ module Network.Google.Resource.Compute.GlobalOperations.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeGlobalOperationsList@ which the
+-- | A resource alias for @ComputeGlobalOperationsList@ method which the
 -- 'GlobalOperationsList'' request conforms to.
 type GlobalOperationsListResource =
      Capture "project" Text :>

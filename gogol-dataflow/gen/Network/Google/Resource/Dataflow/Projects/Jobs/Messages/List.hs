@@ -57,7 +57,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
 import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataflowProjectsJobsMessagesList@ which the
+-- | A resource alias for @DataflowProjectsJobsMessagesList@ method which the
 -- 'ProjectsJobsMessagesList'' request conforms to.
 type ProjectsJobsMessagesListResource =
      "v1b3" :>

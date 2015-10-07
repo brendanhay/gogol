@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference>
 module Network.Google.DFAReporting
     (
-    -- * API
+    -- * API Declaration
       DFAReportingAPI
-    , dFAReportingAPI
-    , dFAReportingRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** DfareportingAccountActiveAdSummariesGet
     , module Network.Google.Resource.DFAReporting.AccountActiveAdSummaries.Get
@@ -3302,6 +3298,7 @@ import           Network.Google.Resource.DFAReporting.UserRoles.Update
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the DCM/DFA Reporting And Trafficking API service.
 type DFAReportingAPI =
      InventoryItemsListResource :<|>
        InventoryItemsGetResource
@@ -3496,6 +3493,3 @@ type DFAReportingAPI =
        :<|> FloodlightActivityGroupsGetResource
        :<|> FloodlightActivityGroupsDeleteResource
        :<|> FloodlightActivityGroupsUpdateResource
-
-dFAReportingAPI :: Proxy DFAReportingAPI
-dFAReportingAPI = Proxy

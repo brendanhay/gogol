@@ -51,7 +51,7 @@ module Network.Google.Resource.Partners.UserEvents.Log
 import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PartnersUserEventsLog@ which the
+-- | A resource alias for @PartnersUserEventsLog@ method which the
 -- 'UserEventsLog'' request conforms to.
 type UserEventsLogResource =
      "v2" :>

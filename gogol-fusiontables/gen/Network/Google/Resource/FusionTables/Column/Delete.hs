@@ -46,7 +46,7 @@ module Network.Google.Resource.FusionTables.Column.Delete
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesColumnDelete@ which the
+-- | A resource alias for @FusiontablesColumnDelete@ method which the
 -- 'ColumnDelete'' request conforms to.
 type ColumnDeleteResource =
      "tables" :>

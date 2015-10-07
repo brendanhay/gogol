@@ -47,7 +47,7 @@ module Network.Google.Resource.SQL.Users.Insert
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLUsersInsert@ which the
+-- | A resource alias for @SQLUsersInsert@ method which the
 -- 'UsersInsert'' request conforms to.
 type UsersInsertResource =
      "projects" :>

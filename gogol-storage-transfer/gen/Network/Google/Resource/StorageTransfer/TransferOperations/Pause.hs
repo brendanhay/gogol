@@ -52,7 +52,7 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Pause
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferTransferOperationsPause@ which the
+-- | A resource alias for @StorageTransferTransferOperationsPause@ method which the
 -- 'TransferOperationsPause'' request conforms to.
 type TransferOperationsPauseResource =
      "v1" :>

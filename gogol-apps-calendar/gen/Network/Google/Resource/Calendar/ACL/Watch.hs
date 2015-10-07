@@ -50,7 +50,7 @@ module Network.Google.Resource.Calendar.ACL.Watch
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarACLWatch@ which the
+-- | A resource alias for @CalendarACLWatch@ method which the
 -- 'ACLWatch'' request conforms to.
 type ACLWatchResource =
      "calendars" :>

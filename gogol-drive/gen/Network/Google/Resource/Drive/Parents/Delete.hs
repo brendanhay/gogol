@@ -46,7 +46,7 @@ module Network.Google.Resource.Drive.Parents.Delete
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveParentsDelete@ which the
+-- | A resource alias for @DriveParentsDelete@ method which the
 -- 'ParentsDelete'' request conforms to.
 type ParentsDeleteResource =
      "files" :>

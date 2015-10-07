@@ -46,7 +46,7 @@ module Network.Google.Resource.SQL.Tiers.List
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLTiersList@ which the
+-- | A resource alias for @SQLTiersList@ method which the
 -- 'TiersList'' request conforms to.
 type TiersListResource =
      "projects" :>

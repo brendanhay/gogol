@@ -44,7 +44,7 @@ module Network.Google.Resource.AdSense.Metadata.Metrics.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseMetadataMetricsList@ which the
+-- | A resource alias for @AdsenseMetadataMetricsList@ method which the
 -- 'MetadataMetricsList'' request conforms to.
 type MetadataMetricsListResource =
      "metadata" :>

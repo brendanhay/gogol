@@ -51,7 +51,7 @@ module Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryReadingPositionsSetPosition@ which the
+-- | A resource alias for @BooksMyLibraryReadingPositionsSetPosition@ method which the
 -- 'MyLibraryReadingPositionsSetPosition'' request conforms to.
 type MyLibraryReadingPositionsSetPositionResource =
      "mylibrary" :>

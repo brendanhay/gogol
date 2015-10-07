@@ -49,7 +49,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Update
 import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
--- | A resource alias for @TaskqueueTasksUpdate@ which the
+-- | A resource alias for @TaskqueueTasksUpdate@ method which the
 -- 'TasksUpdate'' request conforms to.
 type TasksUpdateResource =
      Capture "project" Text :>

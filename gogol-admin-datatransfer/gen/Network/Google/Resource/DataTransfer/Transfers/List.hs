@@ -51,7 +51,7 @@ module Network.Google.Resource.DataTransfer.Transfers.List
 import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataTransferTransfersList@ which the
+-- | A resource alias for @DataTransferTransfersList@ method which the
 -- 'TransfersList'' request conforms to.
 type TransfersListResource =
      "transfers" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.URLMaps.Update
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeURLMapsUpdate@ which the
+-- | A resource alias for @ComputeURLMapsUpdate@ method which the
 -- 'URLMapsUpdate'' request conforms to.
 type URLMapsUpdateResource =
      Capture "project" Text :>

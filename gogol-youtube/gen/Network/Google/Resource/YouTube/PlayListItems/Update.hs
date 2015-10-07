@@ -47,7 +47,7 @@ module Network.Google.Resource.YouTube.PlayListItems.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubePlayListItemsUpdate@ which the
+-- | A resource alias for @YouTubePlayListItemsUpdate@ method which the
 -- 'PlayListItemsUpdate'' request conforms to.
 type PlayListItemsUpdateResource =
      "playlistItems" :>

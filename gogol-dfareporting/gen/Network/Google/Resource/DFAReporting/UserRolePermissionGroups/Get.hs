@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.UserRolePermissionGroups.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingUserRolePermissionGroupsGet@ which the
+-- | A resource alias for @DfareportingUserRolePermissionGroupsGet@ method which the
 -- 'UserRolePermissionGroupsGet'' request conforms to.
 type UserRolePermissionGroupsGetResource =
      "userprofiles" :>

@@ -61,7 +61,7 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviesPartnerAccountsStoreInfosList@ which the
+-- | A resource alias for @PlaymoviesPartnerAccountsStoreInfosList@ method which the
 -- 'AccountsStoreInfosList'' request conforms to.
 type AccountsStoreInfosListResource =
      "v1" :>

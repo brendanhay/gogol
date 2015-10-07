@@ -45,7 +45,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.DeleteAccount
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyDeleteAccount@ which the
+-- | A resource alias for @IdentitytoolkitRelyingPartyDeleteAccount@ method which the
 -- 'RelyingPartyDeleteAccount'' request conforms to.
 type RelyingPartyDeleteAccountResource =
      "deleteAccount" :>

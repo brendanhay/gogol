@@ -48,7 +48,7 @@ module Network.Google.Resource.Drive.Permissions.Update
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePermissionsUpdate@ which the
+-- | A resource alias for @DrivePermissionsUpdate@ method which the
 -- 'PermissionsUpdate'' request conforms to.
 type PermissionsUpdateResource =
      "files" :>

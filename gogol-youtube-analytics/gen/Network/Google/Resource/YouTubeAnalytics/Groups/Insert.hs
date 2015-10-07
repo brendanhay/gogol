@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTubeAnalytics.Groups.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
--- | A resource alias for @YouTubeAnalyticsGroupsInsert@ which the
+-- | A resource alias for @YouTubeAnalyticsGroupsInsert@ method which the
 -- 'GroupsInsert'' request conforms to.
 type GroupsInsertResource =
      "groups" :>

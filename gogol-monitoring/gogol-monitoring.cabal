@@ -18,6 +18,9 @@ description:
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v2beta2@
+    of the API.
 
 source-repository head
     type:     git

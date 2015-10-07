@@ -49,7 +49,7 @@ module Network.Google.Resource.AdSenseHost.AssociationSessions.Start
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAssociationSessionsStart@ which the
+-- | A resource alias for @AdsensehostAssociationSessionsStart@ method which the
 -- 'AssociationSessionsStart'' request conforms to.
 type AssociationSessionsStartResource =
      "associationsessions" :>

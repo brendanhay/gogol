@@ -47,7 +47,7 @@ module Network.Google.Resource.DNS.Changes.Get
 import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DNSChangesGet@ which the
+-- | A resource alias for @DNSChangesGet@ method which the
 -- 'ChangesGet'' request conforms to.
 type ChangesGetResource =
      Capture "project" Text :>

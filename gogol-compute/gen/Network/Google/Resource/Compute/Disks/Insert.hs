@@ -49,7 +49,7 @@ module Network.Google.Resource.Compute.Disks.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeDisksInsert@ which the
+-- | A resource alias for @ComputeDisksInsert@ method which the
 -- 'DisksInsert'' request conforms to.
 type DisksInsertResource =
      Capture "project" Text :>

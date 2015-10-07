@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.TargetPools.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetPoolsDelete@ which the
+-- | A resource alias for @ComputeTargetPoolsDelete@ method which the
 -- 'TargetPoolsDelete'' request conforms to.
 type TargetPoolsDeleteResource =
      Capture "project" Text :>

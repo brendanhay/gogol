@@ -45,7 +45,7 @@ module Network.Google.Resource.Genomics.Datasets.Get
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsDatasetsGet@ which the
+-- | A resource alias for @GenomicsDatasetsGet@ method which the
 -- 'DatasetsGet'' request conforms to.
 type DatasetsGetResource =
      "datasets" :>

@@ -20,14 +20,10 @@
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference>
 module Network.Google.AdExchangeBuyer
     (
-    -- * API
+    -- * API Declaration
       AdExchangeBuyerAPI
-    , adExchangeBuyerAPI
-    , adExchangeBuyerRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** AdexchangebuyerAccountsGet
     , module Network.Google.Resource.AdExchangeBuyer.Accounts.Get
@@ -1052,6 +1048,7 @@ import           Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Upda
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Ad Exchange Buyer API service.
 type AdExchangeBuyerAPI =
      MarketplaceNotesInsertResource :<|>
        MarketplaceNotesListResource
@@ -1099,6 +1096,3 @@ type AdExchangeBuyerAPI =
        :<|> OffersInsertResource
        :<|> OffersListResource
        :<|> OffersGetResource
-
-adExchangeBuyerAPI :: Proxy AdExchangeBuyerAPI
-adExchangeBuyerAPI = Proxy

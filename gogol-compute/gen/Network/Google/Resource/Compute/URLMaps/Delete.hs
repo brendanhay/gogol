@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.URLMaps.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeURLMapsDelete@ which the
+-- | A resource alias for @ComputeURLMapsDelete@ method which the
 -- 'URLMapsDelete'' request conforms to.
 type URLMapsDeleteResource =
      Capture "project" Text :>

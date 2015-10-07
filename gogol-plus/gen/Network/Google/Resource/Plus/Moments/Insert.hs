@@ -49,7 +49,7 @@ module Network.Google.Resource.Plus.Moments.Insert
 import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusMomentsInsert@ which the
+-- | A resource alias for @PlusMomentsInsert@ method which the
 -- 'MomentsInsert'' request conforms to.
 type MomentsInsertResource =
      "people" :>

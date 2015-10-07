@@ -9,7 +9,7 @@
 --
 module {{ moduleName }}
     (
-    -- * Service URL
+    -- * Service Request
       {{ api.url.name }}
   {% for schema in schemas %}
     {% case schema.value.type %}

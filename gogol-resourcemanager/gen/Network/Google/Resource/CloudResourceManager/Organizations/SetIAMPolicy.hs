@@ -53,7 +53,7 @@ module Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerOrganizationsSetIAMPolicy@ which the
+-- | A resource alias for @CloudResourceManagerOrganizationsSetIAMPolicy@ method which the
 -- 'OrganizationsSetIAMPolicy'' request conforms to.
 type OrganizationsSetIAMPolicyResource =
      "v1beta1" :>

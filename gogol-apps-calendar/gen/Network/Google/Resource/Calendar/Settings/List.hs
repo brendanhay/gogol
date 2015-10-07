@@ -47,7 +47,7 @@ module Network.Google.Resource.Calendar.Settings.List
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarSettingsList@ which the
+-- | A resource alias for @CalendarSettingsList@ method which the
 -- 'SettingsList'' request conforms to.
 type SettingsListResource =
      "users" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.Analytics.Management.AccountSummaries.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementAccountSummariesList@ which the
+-- | A resource alias for @AnalyticsManagementAccountSummariesList@ method which the
 -- 'ManagementAccountSummariesList'' request conforms to.
 type ManagementAccountSummariesListResource =
      "management" :>

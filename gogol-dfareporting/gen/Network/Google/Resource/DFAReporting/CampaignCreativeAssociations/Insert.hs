@@ -49,7 +49,7 @@ module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCampaignCreativeAssociationsInsert@ which the
+-- | A resource alias for @DfareportingCampaignCreativeAssociationsInsert@ method which the
 -- 'CampaignCreativeAssociationsInsert'' request conforms to.
 type CampaignCreativeAssociationsInsertResource =
      "userprofiles" :>

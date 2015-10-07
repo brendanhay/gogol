@@ -49,7 +49,7 @@ module Network.Google.Resource.Compute.Instances.DeleteAccessConfig
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesDeleteAccessConfig@ which the
+-- | A resource alias for @ComputeInstancesDeleteAccessConfig@ method which the
 -- 'InstancesDeleteAccessConfig'' request conforms to.
 type InstancesDeleteAccessConfigResource =
      Capture "project" Text :>

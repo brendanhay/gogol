@@ -49,7 +49,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Patc
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksPatch@ which the
+-- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksPatch@ method which the
 -- 'ManagementWebPropertyAdWordsLinksPatch'' request conforms to.
 type ManagementWebPropertyAdWordsLinksPatchResource =
      "management" :>

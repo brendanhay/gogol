@@ -15,7 +15,7 @@
 --
 module Network.Google.FusionTables.Types
     (
-    -- * Service URL
+    -- * Service Request
       fusionTablesRequest
 
     -- * ColumnList
@@ -227,7 +227,7 @@ import           Network.Google.FusionTables.Types.Product
 import           Network.Google.FusionTables.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2' of the Fusion Tables API.
+-- | Default request referring to version 'v2' of the Fusion Tables API. This contains the host and root path used as a starting point for constructing service requests.
 fusionTablesRequest :: RequestBuilder
 fusionTablesRequest
   = defaultRequest "https://www.googleapis.com/"

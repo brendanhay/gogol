@@ -50,7 +50,7 @@ module Network.Google.Resource.Compute.Instances.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesList@ which the
+-- | A resource alias for @ComputeInstancesList@ method which the
 -- 'InstancesList'' request conforms to.
 type InstancesListResource =
      Capture "project" Text :>

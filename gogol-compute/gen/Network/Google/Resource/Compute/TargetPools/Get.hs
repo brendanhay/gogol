@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.TargetPools.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetPoolsGet@ which the
+-- | A resource alias for @ComputeTargetPoolsGet@ method which the
 -- 'TargetPoolsGet'' request conforms to.
 type TargetPoolsGetResource =
      Capture "project" Text :>

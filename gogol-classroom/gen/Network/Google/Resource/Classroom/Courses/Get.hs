@@ -55,7 +55,7 @@ module Network.Google.Resource.Classroom.Courses.Get
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesGet@ which the
+-- | A resource alias for @ClassroomCoursesGet@ method which the
 -- 'CoursesGet'' request conforms to.
 type CoursesGetResource =
      "v1" :>

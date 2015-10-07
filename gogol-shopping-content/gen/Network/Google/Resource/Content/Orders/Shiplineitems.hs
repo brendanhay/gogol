@@ -47,7 +47,7 @@ module Network.Google.Resource.Content.Orders.Shiplineitems
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersShiplineitems@ which the
+-- | A resource alias for @ContentOrdersShiplineitems@ method which the
 -- 'OrdersShiplineitems'' request conforms to.
 type OrdersShiplineitemsResource =
      Capture "merchantId" Word64 :>

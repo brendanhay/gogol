@@ -48,7 +48,7 @@ module Network.Google.Resource.MapsEngine.Tables.Features.Get
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesFeaturesGet@ which the
+-- | A resource alias for @MapsEngineTablesFeaturesGet@ method which the
 -- 'TablesFeaturesGet'' request conforms to.
 type TablesFeaturesGetResource =
      "tables" :>

@@ -44,7 +44,7 @@ module Network.Google.Resource.AdSense.Payments.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensePaymentsList@ which the
+-- | A resource alias for @AdsensePaymentsList@ method which the
 -- 'PaymentsList'' request conforms to.
 type PaymentsListResource =
      "payments" :>

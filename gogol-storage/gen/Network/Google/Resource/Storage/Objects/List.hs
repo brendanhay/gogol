@@ -51,7 +51,7 @@ module Network.Google.Resource.Storage.Objects.List
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsList@ which the
+-- | A resource alias for @StorageObjectsList@ method which the
 -- 'ObjectsList'' request conforms to.
 type ObjectsListResource =
      "b" :>

@@ -53,7 +53,7 @@ module Network.Google.Resource.Drive.Files.Copy
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesCopy@ which the
+-- | A resource alias for @DriveFilesCopy@ method which the
 -- 'FilesCopy'' request conforms to.
 type FilesCopyResource =
      "files" :>

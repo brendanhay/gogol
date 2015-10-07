@@ -47,7 +47,7 @@ module Network.Google.Resource.Drive.Revisions.Patch
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRevisionsPatch@ which the
+-- | A resource alias for @DriveRevisionsPatch@ method which the
 -- 'RevisionsPatch'' request conforms to.
 type RevisionsPatchResource =
      "files" :>

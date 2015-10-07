@@ -46,7 +46,7 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Inse
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationAchievementConfigurationsInsert@ which the
+-- | A resource alias for @GamesConfigurationAchievementConfigurationsInsert@ method which the
 -- 'AchievementConfigurationsInsert'' request conforms to.
 type AchievementConfigurationsInsertResource =
      "applications" :>

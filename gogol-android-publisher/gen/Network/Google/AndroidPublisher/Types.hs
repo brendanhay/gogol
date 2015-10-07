@@ -15,7 +15,7 @@
 --
 module Network.Google.AndroidPublisher.Types
     (
-    -- * Service URL
+    -- * Service Request
       androidPublisherRequest
 
     -- * InAppProductListings
@@ -372,7 +372,7 @@ import           Network.Google.AndroidPublisher.Types.Product
 import           Network.Google.AndroidPublisher.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2' of the Google Play Developer API.
+-- | Default request referring to version 'v2' of the Google Play Developer API. This contains the host and root path used as a starting point for constructing service requests.
 androidPublisherRequest :: RequestBuilder
 androidPublisherRequest
   = defaultRequest "https://www.googleapis.com/"

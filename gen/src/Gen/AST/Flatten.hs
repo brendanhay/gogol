@@ -46,8 +46,6 @@ flatten s = do
     -- The horror.
     ss <- use schemas
 
-    -- _  <- mapM (\k -> trace (show k) $ return 1) (Map.keys ss)
-
     reserveBranches
     reserveFields
 

@@ -46,7 +46,7 @@ module Network.Google.Resource.GamesManagement.Rooms.Reset
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementRoomsReset@ which the
+-- | A resource alias for @GamesManagementRoomsReset@ method which the
 -- 'RoomsReset'' request conforms to.
 type RoomsResetResource =
      "rooms" :>

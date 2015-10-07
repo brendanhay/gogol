@@ -49,7 +49,7 @@ module Network.Google.Resource.AndroidPublisher.InAppProducts.List
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherInAppProductsList@ which the
+-- | A resource alias for @AndroidPublisherInAppProductsList@ method which the
 -- 'InAppProductsList'' request conforms to.
 type InAppProductsListResource =
      Capture "packageName" Text :>

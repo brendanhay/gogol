@@ -54,7 +54,7 @@ module Network.Google.Resource.CloudResourceManager.Projects.SetIAMPolicy
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerProjectsSetIAMPolicy@ which the
+-- | A resource alias for @CloudResourceManagerProjectsSetIAMPolicy@ method which the
 -- 'ProjectsSetIAMPolicy'' request conforms to.
 type ProjectsSetIAMPolicyResource =
      "v1beta1" :>

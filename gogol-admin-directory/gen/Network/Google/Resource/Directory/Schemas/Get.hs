@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.Schemas.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectorySchemasGet@ which the
+-- | A resource alias for @DirectorySchemasGet@ method which the
 -- 'SchemasGet'' request conforms to.
 type SchemasGetResource =
      "customer" :>

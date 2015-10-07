@@ -45,7 +45,7 @@ module Network.Google.Resource.Calendar.Channels.Stop
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarChannelsStop@ which the
+-- | A resource alias for @CalendarChannelsStop@ method which the
 -- 'ChannelsStop'' request conforms to.
 type ChannelsStopResource =
      "channels" :>

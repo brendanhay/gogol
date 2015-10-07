@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.AnnotationSets.Create
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsAnnotationSetsCreate@ which the
+-- | A resource alias for @GenomicsAnnotationSetsCreate@ method which the
 -- 'AnnotationSetsCreate'' request conforms to.
 type AnnotationSetsCreateResource =
      "annotationSets" :>

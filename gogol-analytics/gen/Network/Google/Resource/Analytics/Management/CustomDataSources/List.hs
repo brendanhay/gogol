@@ -48,7 +48,7 @@ module Network.Google.Resource.Analytics.Management.CustomDataSources.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementCustomDataSourcesList@ which the
+-- | A resource alias for @AnalyticsManagementCustomDataSourcesList@ method which the
 -- 'ManagementCustomDataSourcesList'' request conforms to.
 type ManagementCustomDataSourcesListResource =
      "management" :>

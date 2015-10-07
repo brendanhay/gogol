@@ -46,7 +46,7 @@ module Network.Google.Resource.AdExchangeBuyer.NegotiationRounds.Insert
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerNegotiationRoundsInsert@ which the
+-- | A resource alias for @AdexchangebuyerNegotiationRoundsInsert@ method which the
 -- 'NegotiationRoundsInsert'' request conforms to.
 type NegotiationRoundsInsertResource =
      "negotiations" :>

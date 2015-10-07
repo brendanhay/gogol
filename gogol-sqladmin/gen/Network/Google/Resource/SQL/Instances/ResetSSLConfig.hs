@@ -49,7 +49,7 @@ module Network.Google.Resource.SQL.Instances.ResetSSLConfig
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesResetSSLConfig@ which the
+-- | A resource alias for @SQLInstancesResetSSLConfig@ method which the
 -- 'InstancesResetSSLConfig'' request conforms to.
 type InstancesResetSSLConfigResource =
      "projects" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.FusionTables.Style.Delete
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesStyleDelete@ which the
+-- | A resource alias for @FusiontablesStyleDelete@ method which the
 -- 'StyleDelete'' request conforms to.
 type StyleDeleteResource =
      "tables" :>

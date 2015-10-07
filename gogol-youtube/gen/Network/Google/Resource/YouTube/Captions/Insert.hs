@@ -50,7 +50,7 @@ module Network.Google.Resource.YouTube.Captions.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCaptionsInsert@ which the
+-- | A resource alias for @YouTubeCaptionsInsert@ method which the
 -- 'CaptionsInsert'' request conforms to.
 type CaptionsInsertResource =
      "captions" :>

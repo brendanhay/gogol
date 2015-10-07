@@ -78,7 +78,7 @@ module Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
 import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudBillingProjectsUpdateBillingInfo@ which the
+-- | A resource alias for @CloudBillingProjectsUpdateBillingInfo@ method which the
 -- 'ProjectsUpdateBillingInfo'' request conforms to.
 type ProjectsUpdateBillingInfoResource =
      "v1" :>

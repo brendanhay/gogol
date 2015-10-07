@@ -47,7 +47,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingLandingPagesGet@ which the
+-- | A resource alias for @DfareportingLandingPagesGet@ method which the
 -- 'LandingPagesGet'' request conforms to.
 type LandingPagesGetResource =
      "userprofiles" :>

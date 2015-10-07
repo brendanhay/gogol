@@ -47,7 +47,7 @@ module Network.Google.Resource.Genomics.Datasets.Undelete
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsDatasetsUndelete@ which the
+-- | A resource alias for @GenomicsDatasetsUndelete@ method which the
 -- 'DatasetsUndelete'' request conforms to.
 type DatasetsUndeleteResource =
      "datasets" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.Mirror.Timeline.Attachments.Get
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorTimelineAttachmentsGet@ which the
+-- | A resource alias for @MirrorTimelineAttachmentsGet@ method which the
 -- 'TimelineAttachmentsGet'' request conforms to.
 type TimelineAttachmentsGetResource =
      "timeline" :>

@@ -45,7 +45,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.SetAccountInfo
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartySetAccountInfo@ which the
+-- | A resource alias for @IdentitytoolkitRelyingPartySetAccountInfo@ method which the
 -- 'RelyingPartySetAccountInfo'' request conforms to.
 type RelyingPartySetAccountInfoResource =
      "setAccountInfo" :>

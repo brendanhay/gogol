@@ -50,7 +50,7 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Patch
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementCustomDimensionsPatch@ which the
+-- | A resource alias for @AnalyticsManagementCustomDimensionsPatch@ method which the
 -- 'ManagementCustomDimensionsPatch'' request conforms to.
 type ManagementCustomDimensionsPatchResource =
      "management" :>

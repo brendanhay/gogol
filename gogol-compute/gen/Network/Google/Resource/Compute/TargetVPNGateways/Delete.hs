@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.TargetVPNGateways.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetVPNGatewaysDelete@ which the
+-- | A resource alias for @ComputeTargetVPNGatewaysDelete@ method which the
 -- 'TargetVPNGatewaysDelete'' request conforms to.
 type TargetVPNGatewaysDeleteResource =
      Capture "project" Text :>

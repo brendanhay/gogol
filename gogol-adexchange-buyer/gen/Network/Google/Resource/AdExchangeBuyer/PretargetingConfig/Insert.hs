@@ -46,7 +46,7 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Insert
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerPretargetingConfigInsert@ which the
+-- | A resource alias for @AdexchangebuyerPretargetingConfigInsert@ method which the
 -- 'PretargetingConfigInsert'' request conforms to.
 type PretargetingConfigInsertResource =
      "pretargetingconfigs" :>

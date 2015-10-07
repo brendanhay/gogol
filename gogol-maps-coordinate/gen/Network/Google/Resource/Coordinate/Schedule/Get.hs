@@ -46,7 +46,7 @@ module Network.Google.Resource.Coordinate.Schedule.Get
 import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CoordinateScheduleGet@ which the
+-- | A resource alias for @CoordinateScheduleGet@ method which the
 -- 'ScheduleGet'' request conforms to.
 type ScheduleGetResource =
      "teams" :>

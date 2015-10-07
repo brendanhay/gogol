@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.Accounts.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAccountsGet@ which the
+-- | A resource alias for @DfareportingAccountsGet@ method which the
 -- 'AccountsGet'' request conforms to.
 type AccountsGetResource =
      "userprofiles" :>

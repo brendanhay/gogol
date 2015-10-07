@@ -49,7 +49,7 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherPurchasesSubscriptionsRevoke@ which the
+-- | A resource alias for @AndroidPublisherPurchasesSubscriptionsRevoke@ method which the
 -- 'PurchasesSubscriptionsRevoke'' request conforms to.
 type PurchasesSubscriptionsRevokeResource =
      Capture "packageName" Text :>

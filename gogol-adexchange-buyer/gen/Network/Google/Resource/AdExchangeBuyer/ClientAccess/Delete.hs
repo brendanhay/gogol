@@ -46,7 +46,7 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Delete
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerClientAccessDelete@ which the
+-- | A resource alias for @AdexchangebuyerClientAccessDelete@ method which the
 -- 'ClientAccessDelete'' request conforms to.
 type ClientAccessDeleteResource =
      "clientAccess" :>

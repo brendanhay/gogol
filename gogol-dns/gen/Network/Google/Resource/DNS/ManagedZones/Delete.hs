@@ -46,7 +46,7 @@ module Network.Google.Resource.DNS.ManagedZones.Delete
 import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DNSManagedZonesDelete@ which the
+-- | A resource alias for @DNSManagedZonesDelete@ method which the
 -- 'ManagedZonesDelete'' request conforms to.
 type ManagedZonesDeleteResource =
      Capture "project" Text :>

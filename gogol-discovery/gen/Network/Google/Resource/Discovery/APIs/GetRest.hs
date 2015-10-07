@@ -46,7 +46,7 @@ module Network.Google.Resource.Discovery.APIs.GetRest
 import           Network.Google.Discovery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DiscoveryAPIsGetRest@ which the
+-- | A resource alias for @DiscoveryAPIsGetRest@ method which the
 -- 'APIsGetRest'' request conforms to.
 type APIsGetRestResource =
      "apis" :>

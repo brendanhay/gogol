@@ -46,7 +46,7 @@ module Network.Google.Resource.Mirror.Subscriptions.Update
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorSubscriptionsUpdate@ which the
+-- | A resource alias for @MirrorSubscriptionsUpdate@ method which the
 -- 'SubscriptionsUpdate'' request conforms to.
 type SubscriptionsUpdateResource =
      "subscriptions" :>

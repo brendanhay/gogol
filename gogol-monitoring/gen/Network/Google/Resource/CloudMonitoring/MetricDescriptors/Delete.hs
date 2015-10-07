@@ -46,7 +46,7 @@ module Network.Google.Resource.CloudMonitoring.MetricDescriptors.Delete
 import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudMonitoringMetricDescriptorsDelete@ which the
+-- | A resource alias for @CloudMonitoringMetricDescriptorsDelete@ method which the
 -- 'MetricDescriptorsDelete'' request conforms to.
 type MetricDescriptorsDeleteResource =
      Capture "project" Text :>

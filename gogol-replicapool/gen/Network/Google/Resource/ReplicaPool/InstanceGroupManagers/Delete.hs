@@ -49,7 +49,7 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Delete
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
--- | A resource alias for @ReplicapoolInstanceGroupManagersDelete@ which the
+-- | A resource alias for @ReplicapoolInstanceGroupManagersDelete@ method which the
 -- 'InstanceGroupManagersDelete'' request conforms to.
 type InstanceGroupManagersDeleteResource =
      Capture "project" Text :>

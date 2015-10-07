@@ -15,7 +15,7 @@
 --
 module Network.Google.DoubleClickSearch.Types
     (
-    -- * Service URL
+    -- * Service Request
       doubleClickSearchRequest
 
     -- * ReportRow
@@ -197,7 +197,7 @@ import           Network.Google.DoubleClickSearch.Types.Product
 import           Network.Google.DoubleClickSearch.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2' of the DoubleClick Search API.
+-- | Default request referring to version 'v2' of the DoubleClick Search API. This contains the host and root path used as a starting point for constructing service requests.
 doubleClickSearchRequest :: RequestBuilder
 doubleClickSearchRequest
   = defaultRequest "https://www.googleapis.com/"

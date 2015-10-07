@@ -46,7 +46,7 @@ module Network.Google.Resource.Calendar.Calendars.Clear
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarsClear@ which the
+-- | A resource alias for @CalendarCalendarsClear@ method which the
 -- 'CalendarsClear'' request conforms to.
 type CalendarsClearResource =
      "calendars" :>

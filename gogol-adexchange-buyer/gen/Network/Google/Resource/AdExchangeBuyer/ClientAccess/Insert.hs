@@ -47,7 +47,7 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Insert
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerClientAccessInsert@ which the
+-- | A resource alias for @AdexchangebuyerClientAccessInsert@ method which the
 -- 'ClientAccessInsert'' request conforms to.
 type ClientAccessInsertResource =
      "clientAccess" :>

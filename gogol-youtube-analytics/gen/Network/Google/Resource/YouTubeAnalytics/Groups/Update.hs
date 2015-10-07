@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTubeAnalytics.Groups.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
--- | A resource alias for @YouTubeAnalyticsGroupsUpdate@ which the
+-- | A resource alias for @YouTubeAnalyticsGroupsUpdate@ method which the
 -- 'GroupsUpdate'' request conforms to.
 type GroupsUpdateResource =
      "groups" :>

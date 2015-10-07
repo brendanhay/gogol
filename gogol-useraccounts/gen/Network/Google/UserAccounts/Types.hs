@@ -15,7 +15,7 @@
 --
 module Network.Google.UserAccounts.Types
     (
-    -- * Service URL
+    -- * Service Request
       userAccountsRequest
 
     -- * OperationWarningsItemDataItem
@@ -190,7 +190,7 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types.Product
 import           Network.Google.UserAccounts.Types.Sum
 
--- | Default request referring to version 'vm_beta' of the Cloud User Accounts API.
+-- | Default request referring to version 'vm_beta' of the Cloud User Accounts API. This contains the host and root path used as a starting point for constructing service requests.
 userAccountsRequest :: RequestBuilder
 userAccountsRequest
   = defaultRequest "https://www.googleapis.com/"

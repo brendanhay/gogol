@@ -49,7 +49,7 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherPurchasesSubscriptionsDefer@ which the
+-- | A resource alias for @AndroidPublisherPurchasesSubscriptionsDefer@ method which the
 -- 'PurchasesSubscriptionsDefer'' request conforms to.
 type PurchasesSubscriptionsDeferResource =
      Capture "packageName" Text :>

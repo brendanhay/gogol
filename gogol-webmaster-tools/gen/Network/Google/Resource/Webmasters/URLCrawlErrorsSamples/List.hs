@@ -48,7 +48,7 @@ module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.List
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersURLCrawlErrorsSamplesList@ which the
+-- | A resource alias for @WebmastersURLCrawlErrorsSamplesList@ method which the
 -- 'URLCrawlErrorsSamplesList'' request conforms to.
 type URLCrawlErrorsSamplesListResource =
      "sites" :>

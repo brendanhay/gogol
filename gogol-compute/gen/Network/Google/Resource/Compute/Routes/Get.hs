@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.Routes.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeRoutesGet@ which the
+-- | A resource alias for @ComputeRoutesGet@ method which the
 -- 'RoutesGet'' request conforms to.
 type RoutesGetResource =
      Capture "project" Text :>

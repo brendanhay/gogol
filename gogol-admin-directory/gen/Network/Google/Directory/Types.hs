@@ -15,7 +15,7 @@
 --
 module Network.Google.Directory.Types
     (
-    -- * Service URL
+    -- * Service Request
       directoryRequest
 
     -- * VerificationCode
@@ -577,7 +577,7 @@ import           Network.Google.Directory.Types.Product
 import           Network.Google.Directory.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'directory_v1' of the Admin Directory API.
+-- | Default request referring to version 'directory_v1' of the Admin Directory API. This contains the host and root path used as a starting point for constructing service requests.
 directoryRequest :: RequestBuilder
 directoryRequest
   = defaultRequest "https://www.googleapis.com/"

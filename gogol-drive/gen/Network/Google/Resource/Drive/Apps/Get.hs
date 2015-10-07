@@ -45,7 +45,7 @@ module Network.Google.Resource.Drive.Apps.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveAppsGet@ which the
+-- | A resource alias for @DriveAppsGet@ method which the
 -- 'AppsGet'' request conforms to.
 type AppsGetResource =
      "apps" :>

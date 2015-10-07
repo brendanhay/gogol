@@ -49,7 +49,7 @@ module Network.Google.Resource.CloudUserAccounts.Linux.GetAuthorizedKeysView
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsLinuxGetAuthorizedKeysView@ which the
+-- | A resource alias for @CloudUserAccountsLinuxGetAuthorizedKeysView@ method which the
 -- 'LinuxGetAuthorizedKeysView'' request conforms to.
 type LinuxGetAuthorizedKeysViewResource =
      Capture "project" Text :>

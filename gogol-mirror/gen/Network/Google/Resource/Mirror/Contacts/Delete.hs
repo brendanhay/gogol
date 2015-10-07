@@ -45,7 +45,7 @@ module Network.Google.Resource.Mirror.Contacts.Delete
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorContactsDelete@ which the
+-- | A resource alias for @MirrorContactsDelete@ method which the
 -- 'ContactsDelete'' request conforms to.
 type ContactsDeleteResource =
      "contacts" :>

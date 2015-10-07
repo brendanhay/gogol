@@ -51,7 +51,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Resize
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersResize@ which the
+-- | A resource alias for @ComputeInstanceGroupManagersResize@ method which the
 -- 'InstanceGroupManagersResize'' request conforms to.
 type InstanceGroupManagersResizeResource =
      Capture "project" Text :>

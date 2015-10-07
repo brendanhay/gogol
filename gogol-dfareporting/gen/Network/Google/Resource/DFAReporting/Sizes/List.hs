@@ -49,7 +49,7 @@ module Network.Google.Resource.DFAReporting.Sizes.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSizesList@ which the
+-- | A resource alias for @DfareportingSizesList@ method which the
 -- 'SizesList'' request conforms to.
 type SizesListResource =
      "userprofiles" :>

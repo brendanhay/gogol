@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.DiskTypes.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeDiskTypesAggregatedList@ which the
+-- | A resource alias for @ComputeDiskTypesAggregatedList@ method which the
 -- 'DiskTypesAggregatedList'' request conforms to.
 type DiskTypesAggregatedListResource =
      Capture "project" Text :>

@@ -149,12 +149,8 @@ main = do
             title ("[" % int % "/" % int % "] model:" % stext)
                   (n :: Int) i modelName
 
-            say ("Using version " % stext) modelVersion
-
             let anx = _optAnnexes </> fromText modelName <.> "json"
-
             p <- isFile anx
-
             if not p
                then say ("Skipping '" % stext % "' due to mimsing annex configuration.")
                          modelName

@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference>
 module Network.Google.TagManager
     (
-    -- * API
+    -- * API Declaration
       TagManagerAPI
-    , tagManagerAPI
-    , tagManagerRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** TagManagerAccountsContainersCreate
     , module Network.Google.Resource.TagManager.Accounts.Containers.Create
@@ -553,6 +549,7 @@ import           Network.Google.TagManager.Types
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Tag Manager API service.
 type TagManagerAPI =
      AccountsContainersRulesListResource :<|>
        AccountsContainersRulesGetResource
@@ -607,6 +604,3 @@ type TagManagerAPI =
        :<|> AccountsListResource
        :<|> AccountsGetResource
        :<|> AccountsUpdateResource
-
-tagManagerAPI :: Proxy TagManagerAPI
-tagManagerAPI = Proxy

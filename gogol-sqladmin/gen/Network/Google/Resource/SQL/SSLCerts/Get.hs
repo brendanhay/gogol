@@ -49,7 +49,7 @@ module Network.Google.Resource.SQL.SSLCerts.Get
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLSSLCertsGet@ which the
+-- | A resource alias for @SQLSSLCertsGet@ method which the
 -- 'SSLCertsGet'' request conforms to.
 type SSLCertsGetResource =
      "projects" :>

@@ -52,7 +52,7 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Resume
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferTransferOperationsResume@ which the
+-- | A resource alias for @StorageTransferTransferOperationsResume@ method which the
 -- 'TransferOperationsResume'' request conforms to.
 type TransferOperationsResumeResource =
      "v1" :>

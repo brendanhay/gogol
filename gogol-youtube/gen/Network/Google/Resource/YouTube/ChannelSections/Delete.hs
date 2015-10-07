@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTube.ChannelSections.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeChannelSectionsDelete@ which the
+-- | A resource alias for @YouTubeChannelSectionsDelete@ method which the
 -- 'ChannelSectionsDelete'' request conforms to.
 type ChannelSectionsDeleteResource =
      "channelSections" :>

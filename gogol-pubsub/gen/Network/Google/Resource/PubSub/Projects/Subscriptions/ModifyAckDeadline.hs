@@ -55,7 +55,7 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsSubscriptionsModifyAckDeadline@ which the
+-- | A resource alias for @PubsubProjectsSubscriptionsModifyAckDeadline@ method which the
 -- 'ProjectsSubscriptionsModifyAckDeadline'' request conforms to.
 type ProjectsSubscriptionsModifyAckDeadlineResource =
      "v1beta2" :>

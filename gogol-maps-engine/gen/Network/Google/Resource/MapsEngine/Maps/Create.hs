@@ -45,7 +45,7 @@ module Network.Google.Resource.MapsEngine.Maps.Create
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineMapsCreate@ which the
+-- | A resource alias for @MapsEngineMapsCreate@ method which the
 -- 'MapsCreate'' request conforms to.
 type MapsCreateResource =
      "maps" :>

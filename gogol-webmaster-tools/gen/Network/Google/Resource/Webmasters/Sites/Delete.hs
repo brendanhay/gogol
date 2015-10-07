@@ -45,7 +45,7 @@ module Network.Google.Resource.Webmasters.Sites.Delete
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersSitesDelete@ which the
+-- | A resource alias for @WebmastersSitesDelete@ method which the
 -- 'SitesDelete'' request conforms to.
 type SitesDeleteResource =
      "sites" :>

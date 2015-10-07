@@ -45,7 +45,7 @@ module Network.Google.Resource.AndroidPublisher.InAppProducts.Batch
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherInAppProductsBatch@ which the
+-- | A resource alias for @AndroidPublisherInAppProductsBatch@ method which the
 -- 'InAppProductsBatch'' request conforms to.
 type InAppProductsBatchResource =
      "inappproducts" :>

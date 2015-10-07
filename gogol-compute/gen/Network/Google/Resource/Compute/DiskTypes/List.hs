@@ -50,7 +50,7 @@ module Network.Google.Resource.Compute.DiskTypes.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeDiskTypesList@ which the
+-- | A resource alias for @ComputeDiskTypesList@ method which the
 -- 'DiskTypesList'' request conforms to.
 type DiskTypesListResource =
      Capture "project" Text :>

@@ -19,14 +19,10 @@
 -- /See:/ <http://developers.google.com/qpx-express QPX Express API Reference>
 module Network.Google.QPXExpress
     (
-    -- * API
+    -- * API Declaration
       QPXExpressAPI
-    , qPXExpressAPI
-    , qPXExpressRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** QpxExpressTripsSearch
     , module Network.Google.Resource.QPXExpress.Trips.Search
@@ -273,7 +269,5 @@ import           Network.Google.Resource.QPXExpress.Trips.Search
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the QPX Express API service.
 type QPXExpressAPI = TripsSearchResource
-
-qPXExpressAPI :: Proxy QPXExpressAPI
-qPXExpressAPI = Proxy

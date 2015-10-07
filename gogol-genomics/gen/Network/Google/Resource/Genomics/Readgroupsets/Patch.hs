@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.Readgroupsets.Patch
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReadgroupsetsPatch@ which the
+-- | A resource alias for @GenomicsReadgroupsetsPatch@ method which the
 -- 'ReadgroupsetsPatch'' request conforms to.
 type ReadgroupsetsPatchResource =
      "readgroupsets" :>

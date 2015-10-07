@@ -47,7 +47,7 @@ module Network.Google.Resource.Content.Orders.Returnlineitem
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersReturnlineitem@ which the
+-- | A resource alias for @ContentOrdersReturnlineitem@ method which the
 -- 'OrdersReturnlineitem'' request conforms to.
 type OrdersReturnlineitemResource =
      Capture "merchantId" Word64 :>

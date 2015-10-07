@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference>
 module Network.Google.Books
     (
-    -- * API
+    -- * API Declaration
       BooksAPI
-    , booksAPI
-    , booksRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** BooksBookshelvesGet
     , module Network.Google.Resource.Books.Bookshelves.Get
@@ -184,13 +180,13 @@ module Network.Google.Books
     -- ** VolumesListOrderBy
     , VolumesListOrderBy (..)
 
-    -- ** Annotationsdata
-    , Annotationsdata
-    , annotationsdata
-    , annTotalItems
-    , annNextPageToken
-    , annKind
-    , annItems
+    -- ** AnnotationsData
+    , AnnotationsData
+    , annotationsData
+    , adTotalItems
+    , adNextPageToken
+    , adKind
+    , adItems
 
     -- ** Volumeannotations
     , Volumeannotations
@@ -208,18 +204,18 @@ module Network.Google.Books
     , rsURL
     , rsDescription
 
-    -- ** Annotationdata
-    , Annotationdata
-    , annotationdata
-    , aaEncodedData
-    , aaKind
-    , aaData
-    , aaSelfLink
-    , aaAnnotationType
-    , aaVolumeId
-    , aaId
-    , aaUpdated
-    , aaLayerId
+    -- ** AnnotationData
+    , AnnotationData
+    , annotationData
+    , annEncodedData
+    , annKind
+    , annData
+    , annSelfLink
+    , annAnnotationType
+    , annVolumeId
+    , annId
+    , annUpdated
+    , annLayerId
 
     -- ** Volumeannotation
     , Volumeannotation
@@ -250,34 +246,34 @@ module Network.Google.Books
     -- ** Annotation
     , Annotation
     , annotation
-    , annnSelectedText
-    , annnLayerSummary
-    , annnHighlightStyle
-    , annnClientVersionRanges
-    , annnPageIds
-    , annnKind
-    , annnData
-    , annnCreated
-    , annnAfterSelectedText
-    , annnSelfLink
-    , annnCurrentVersionRanges
-    , annnVolumeId
-    , annnBeforeSelectedText
-    , annnId
-    , annnDeleted
-    , annnUpdated
-    , annnLayerId
+    , aaSelectedText
+    , aaLayerSummary
+    , aaHighlightStyle
+    , aaClientVersionRanges
+    , aaPageIds
+    , aaKind
+    , aaData
+    , aaCreated
+    , aaAfterSelectedText
+    , aaSelfLink
+    , aaCurrentVersionRanges
+    , aaVolumeId
+    , aaBeforeSelectedText
+    , aaId
+    , aaDeleted
+    , aaUpdated
+    , aaLayerId
 
     -- ** ReviewAuthor
     , ReviewAuthor
     , reviewAuthor
     , raDisplayName
 
-    -- ** GeolayerdataGeoViewport
-    , GeolayerdataGeoViewport
-    , geolayerdataGeoViewport
-    , ggvHi
-    , ggvLo
+    -- ** GeolayerDataGeoViewport
+    , GeolayerDataGeoViewport
+    , geolayerDataGeoViewport
+    , gdgvHi
+    , gdgvLo
 
     -- ** VolumeUserInfo
     , VolumeUserInfo
@@ -406,11 +402,11 @@ module Network.Google.Books
     , vsioirdCount
     , vsioirdUnit
 
-    -- ** DictlayerdataDictWordsItemExamplesItem
-    , DictlayerdataDictWordsItemExamplesItem
-    , dictlayerdataDictWordsItemExamplesItem
-    , ddwieiText
-    , ddwieiSource
+    -- ** DictlayerDataDictWordsItemExamplesItem
+    , DictlayerDataDictWordsItemExamplesItem
+    , dictlayerDataDictWordsItemExamplesItem
+    , dddwieiText
+    , dddwieiSource
 
     -- ** OffersItemsItem
     , OffersItemsItem
@@ -465,11 +461,11 @@ module Network.Google.Books
     , vvRecommendedInfo
     , vvVolumeInfo
 
-    -- ** GeolayerdataGeoBoundaryItemItem
-    , GeolayerdataGeoBoundaryItemItem
-    , geolayerdataGeoBoundaryItemItem
-    , ggbiiLatitude
-    , ggbiiLongitude
+    -- ** GeolayerDataGeoBoundaryItemItem
+    , GeolayerDataGeoBoundaryItemItem
+    , geolayerDataGeoBoundaryItemItem
+    , gdgbiiLatitude
+    , gdgbiiLongitude
 
     -- ** OffersItemsItemItemsItem
     , OffersItemsItemItemsItem
@@ -481,40 +477,40 @@ module Network.Google.Books
     , oiiiiTitle
     , oiiiiDescription
 
-    -- ** DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
-    , DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
-    , dictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
-    , ddwisidieisURL
-    , ddwisidieisAttribution
+    -- ** DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
+    , DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
+    , dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
+    , dddwisidieisURL
+    , dddwisidieisAttribution
 
-    -- ** GeolayerdataCommon
-    , GeolayerdataCommon
-    , geolayerdataCommon
-    , gcSnippet
-    , gcSnippetURL
-    , gcLang
-    , gcTitle
-    , gcPreviewImageURL
+    -- ** GeolayerDataCommon
+    , GeolayerDataCommon
+    , geolayerDataCommon
+    , gdcSnippet
+    , gdcSnippetURL
+    , gdcLang
+    , gdcTitle
+    , gdcPreviewImageURL
 
-    -- ** GeolayerdataGeo
-    , GeolayerdataGeo
-    , geolayerdataGeo
-    , ggMapType
-    , ggCachePolicy
-    , ggViewport
-    , ggBoundary
-    , ggLatitude
-    , ggZoom
-    , ggCountryCode
-    , ggLongitude
+    -- ** GeolayerDataGeo
+    , GeolayerDataGeo
+    , geolayerDataGeo
+    , gdgMapType
+    , gdgCachePolicy
+    , gdgViewport
+    , gdgBoundary
+    , gdgLatitude
+    , gdgZoom
+    , gdgCountryCode
+    , gdgLongitude
 
-    -- ** DictlayerdataDictWordsItem
-    , DictlayerdataDictWordsItem
-    , dictlayerdataDictWordsItem
-    , ddwiSenses
-    , ddwiSource
-    , ddwiDerivatives
-    , ddwiExamples
+    -- ** DictlayerDataDictWordsItem
+    , DictlayerDataDictWordsItem
+    , dictlayerDataDictWordsItem
+    , dddwiSenses
+    , dddwiSource
+    , dddwiDerivatives
+    , dddwiExamples
 
     -- ** CategoryItemsItem
     , CategoryItemsItem
@@ -523,33 +519,33 @@ module Network.Google.Books
     , ciiCategoryId
     , ciiBadgeURL
 
-    -- ** DictlayerdataDictWordsItemDerivativesItemSource
-    , DictlayerdataDictWordsItemDerivativesItemSource
-    , dictlayerdataDictWordsItemDerivativesItemSource
-    , ddwidisURL
-    , ddwidisAttribution
+    -- ** DictlayerDataDictWordsItemDerivativesItemSource
+    , DictlayerDataDictWordsItemDerivativesItemSource
+    , dictlayerDataDictWordsItemDerivativesItemSource
+    , dddwidisURL
+    , dddwidisAttribution
 
     -- ** VolumesRecommendedRateRating
     , VolumesRecommendedRateRating (..)
 
-    -- ** Geolayerdata
-    , Geolayerdata
-    , geolayerdata
-    , gKind
-    , gGeo
-    , gCommon
+    -- ** GeolayerData
+    , GeolayerData
+    , geolayerData
+    , gdKind
+    , gdGeo
+    , gdCommon
 
-    -- ** DictlayerdataDictWordsItemSource
-    , DictlayerdataDictWordsItemSource
-    , dictlayerdataDictWordsItemSource
-    , ddwisURL
-    , ddwisAttribution
+    -- ** DictlayerDataDictWordsItemSource
+    , DictlayerDataDictWordsItemSource
+    , dictlayerDataDictWordsItemSource
+    , dddwisURL
+    , dddwisAttribution
 
-    -- ** DictlayerdataDictWordsItemDerivativesItem
-    , DictlayerdataDictWordsItemDerivativesItem
-    , dictlayerdataDictWordsItemDerivativesItem
-    , ddwidiText
-    , ddwidiSource
+    -- ** DictlayerDataDictWordsItemDerivativesItem
+    , DictlayerDataDictWordsItemDerivativesItem
+    , dictlayerDataDictWordsItemDerivativesItem
+    , dddwidiText
+    , dddwidiSource
 
     -- ** VolumesUserUploadedListProcessingState
     , VolumesUserUploadedListProcessingState (..)
@@ -557,42 +553,42 @@ module Network.Google.Books
     -- ** MyConfigSyncVolumeLicensesFeatures
     , MyConfigSyncVolumeLicensesFeatures (..)
 
-    -- ** DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem
-    , DictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem
-    , dictlayerdataDictWordsItemSensesItemDefinitionsItemExamplesItem
-    , ddwisidieiText
-    , ddwisidieiSource
+    -- ** DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
+    , DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
+    , dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
+    , dddwisidieiText
+    , dddwisidieiSource
 
-    -- ** Dictlayerdata
-    , Dictlayerdata
-    , dictlayerdata
-    , dKind
-    , dDict
-    , dCommon
+    -- ** DictlayerData
+    , DictlayerData
+    , dictlayerData
+    , ddKind
+    , ddDict
+    , ddCommon
 
     -- ** VolumesAssociatedListMaxAllowedMaturityRating
     , VolumesAssociatedListMaxAllowedMaturityRating (..)
 
-    -- ** DictlayerdataDictWordsItemSensesItemSynonymsItemSource
-    , DictlayerdataDictWordsItemSensesItemSynonymsItemSource
-    , dictlayerdataDictWordsItemSensesItemSynonymsItemSource
-    , ddwisisisURL
-    , ddwisisisAttribution
+    -- ** DictlayerDataDictWordsItemSensesItemSynonymsItemSource
+    , DictlayerDataDictWordsItemSensesItemSynonymsItemSource
+    , dictlayerDataDictWordsItemSensesItemSynonymsItemSource
+    , dddwisisisURL
+    , dddwisisisAttribution
 
     -- ** VolumesListFilter
     , VolumesListFilter (..)
 
-    -- ** DictlayerdataDictWordsItemSensesItemSynonymsItem
-    , DictlayerdataDictWordsItemSensesItemSynonymsItem
-    , dictlayerdataDictWordsItemSensesItemSynonymsItem
-    , ddwisisiText
-    , ddwisisiSource
+    -- ** DictlayerDataDictWordsItemSensesItemSynonymsItem
+    , DictlayerDataDictWordsItemSensesItemSynonymsItem
+    , dictlayerDataDictWordsItemSensesItemSynonymsItem
+    , dddwisisiText
+    , dddwisisiSource
 
-    -- ** GeolayerdataGeoViewportLo
-    , GeolayerdataGeoViewportLo
-    , geolayerdataGeoViewportLo
-    , ggvlLatitude
-    , ggvlLongitude
+    -- ** GeolayerDataGeoViewportLo
+    , GeolayerDataGeoViewportLo
+    , geolayerDataGeoViewportLo
+    , gdgvlLatitude
+    , gdgvlLongitude
 
     -- ** VolumesRecommendedListMaxAllowedMaturityRating
     , VolumesRecommendedListMaxAllowedMaturityRating (..)
@@ -619,10 +615,10 @@ module Network.Google.Books
     , darMessage
     , darNonce
 
-    -- ** DictlayerdataCommon
-    , DictlayerdataCommon
-    , dictlayerdataCommon
-    , dcTitle
+    -- ** DictlayerDataCommon
+    , DictlayerDataCommon
+    , dictlayerDataCommon
+    , ddcTitle
 
     -- ** VolumeSaleInfoRetailPrice
     , VolumeSaleInfoRetailPrice
@@ -636,11 +632,11 @@ module Network.Google.Books
     , vsilpAmount
     , vsilpCurrencyCode
 
-    -- ** DictlayerdataDictWordsItemSensesItemConjugationsItem
-    , DictlayerdataDictWordsItemSensesItemConjugationsItem
-    , dictlayerdataDictWordsItemSensesItemConjugationsItem
-    , ddwisiciValue
-    , ddwisiciType
+    -- ** DictlayerDataDictWordsItemSensesItemConjugationsItem
+    , DictlayerDataDictWordsItemSensesItemConjugationsItem
+    , dictlayerDataDictWordsItemSensesItemConjugationsItem
+    , dddwisiciValue
+    , dddwisiciType
 
     -- ** Volume2
     , Volume2
@@ -721,11 +717,11 @@ module Network.Google.Books
     -- ** VolumesMybooksListAcquireMethod
     , VolumesMybooksListAcquireMethod (..)
 
-    -- ** DictlayerdataDictWordsItemSensesItemDefinitionsItem
-    , DictlayerdataDictWordsItemSensesItemDefinitionsItem
-    , dictlayerdataDictWordsItemSensesItemDefinitionsItem
-    , ddwisidiDefinition
-    , ddwisidiExamples
+    -- ** DictlayerDataDictWordsItemSensesItemDefinitionsItem
+    , DictlayerDataDictWordsItemSensesItemDefinitionsItem
+    , dictlayerDataDictWordsItemSensesItemDefinitionsItem
+    , dddwisidiDefinition
+    , dddwisidiExamples
 
     -- ** VolumeLayerInfoLayersItem
     , VolumeLayerInfoLayersItem
@@ -752,11 +748,11 @@ module Network.Google.Books
     , vaipIsAvailable
     , vaipDownloadLink
 
-    -- ** DictlayerdataDictWordsItemExamplesItemSource
-    , DictlayerdataDictWordsItemExamplesItemSource
-    , dictlayerdataDictWordsItemExamplesItemSource
-    , ddwieisURL
-    , ddwieisAttribution
+    -- ** DictlayerDataDictWordsItemExamplesItemSource
+    , DictlayerDataDictWordsItemExamplesItemSource
+    , dictlayerDataDictWordsItemExamplesItemSource
+    , dddwieisURL
+    , dddwieisAttribution
 
     -- ** VolumeAccessInfoEpub
     , VolumeAccessInfoEpub
@@ -784,23 +780,23 @@ module Network.Google.Books
     , vsioiListPrice
     , vsioiRetailPrice
 
-    -- ** DictlayerdataDict
-    , DictlayerdataDict
-    , dictlayerdataDict
-    , ddSource
-    , ddWords
+    -- ** DictlayerDataDict
+    , DictlayerDataDict
+    , dictlayerDataDict
+    , dddSource
+    , dddWords
 
-    -- ** DictlayerdataDictWordsItemSensesItem
-    , DictlayerdataDictWordsItemSensesItem
-    , dictlayerdataDictWordsItemSensesItem
-    , ddwisiPronunciationURL
-    , ddwisiConjugations
-    , ddwisiPronunciation
-    , ddwisiSynonyms
-    , ddwisiSource
-    , ddwisiPartOfSpeech
-    , ddwisiDefinitions
-    , ddwisiSyllabification
+    -- ** DictlayerDataDictWordsItemSensesItem
+    , DictlayerDataDictWordsItemSensesItem
+    , dictlayerDataDictWordsItemSensesItem
+    , dddwisiPronunciationURL
+    , dddwisiConjugations
+    , dddwisiPronunciation
+    , dddwisiSynonyms
+    , dddwisiSource
+    , dddwisiPartOfSpeech
+    , dddwisiDefinitions
+    , dddwisiSyllabification
 
     -- ** VolumeRecommendedInfo
     , VolumeRecommendedInfo
@@ -853,11 +849,11 @@ module Network.Google.Books
     -- ** MyConfigRequestAccessLicenseTypes
     , MyConfigRequestAccessLicenseTypes (..)
 
-    -- ** DictlayerdataDictSource
-    , DictlayerdataDictSource
-    , dictlayerdataDictSource
-    , ddsURL
-    , ddsAttribution
+    -- ** DictlayerDataDictSource
+    , DictlayerDataDictSource
+    , dictlayerDataDictSource
+    , dddsURL
+    , dddsAttribution
 
     -- ** DownloadAccesses
     , DownloadAccesses
@@ -865,11 +861,11 @@ module Network.Google.Books
     , daKind
     , daDownloadAccessList
 
-    -- ** GeolayerdataGeoViewportHi
-    , GeolayerdataGeoViewportHi
-    , geolayerdataGeoViewportHi
-    , ggvhLatitude
-    , ggvhLongitude
+    -- ** GeolayerDataGeoViewportHi
+    , GeolayerDataGeoViewportHi
+    , geolayerDataGeoViewportHi
+    , gdgvhLatitude
+    , gdgvhLongitude
 
     -- ** MyLibraryReadingPositionsSetPositionAction
     , MyLibraryReadingPositionsSetPositionAction (..)
@@ -912,11 +908,11 @@ module Network.Google.Books
     , miiDownloadURL
     , miiEncryptedKey
 
-    -- ** DictlayerdataDictWordsItemSensesItemSource
-    , DictlayerdataDictWordsItemSensesItemSource
-    , dictlayerdataDictWordsItemSensesItemSource
-    , ddwisisURL
-    , ddwisisAttribution
+    -- ** DictlayerDataDictWordsItemSensesItemSource
+    , DictlayerDataDictWordsItemSensesItemSource
+    , dictlayerDataDictWordsItemSensesItemSource
+    , dddwisisURL
+    , dddwisisAttribution
 
     -- ** VolumeSaleInfoOffersItemRetailPrice
     , VolumeSaleInfoOffersItemRetailPrice
@@ -997,6 +993,7 @@ import           Network.Google.Resource.Books.Volumes.UserUploaded.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Books API service.
 type BooksAPI =
      OnboardingListCategoriesResource :<|>
        OnboardingListCategoryVolumesResource
@@ -1042,6 +1039,3 @@ type BooksAPI =
        :<|> MyConfigRequestAccessResource
        :<|> MyConfigUpdateUserSettingsResource
        :<|> MyConfigReleaseDownloadAccessResource
-
-booksAPI :: Proxy BooksAPI
-booksAPI = Proxy

@@ -44,7 +44,7 @@ module Network.Google.Resource.SQL.Flags.List
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLFlagsList@ which the
+-- | A resource alias for @SQLFlagsList@ method which the
 -- 'FlagsList'' request conforms to.
 type FlagsListResource =
      "flags" :>

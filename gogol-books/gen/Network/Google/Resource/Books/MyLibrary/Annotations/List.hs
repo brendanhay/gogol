@@ -54,7 +54,7 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryAnnotationsList@ which the
+-- | A resource alias for @BooksMyLibraryAnnotationsList@ method which the
 -- 'MyLibraryAnnotationsList'' request conforms to.
 type MyLibraryAnnotationsListResource =
      "mylibrary" :>

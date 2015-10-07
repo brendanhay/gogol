@@ -78,7 +78,7 @@ module Network.Google.Resource.YouTube.Search.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeSearchList@ which the
+-- | A resource alias for @YouTubeSearchList@ method which the
 -- 'SearchList'' request conforms to.
 type SearchListResource =
      "search" :>

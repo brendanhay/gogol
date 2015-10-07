@@ -47,7 +47,7 @@ module Network.Google.Resource.AdSense.Accounts.AdUnits.GetAdCode
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAccountsAdUnitsGetAdCode@ which the
+-- | A resource alias for @AdsenseAccountsAdUnitsGetAdCode@ method which the
 -- 'AccountsAdUnitsGetAdCode'' request conforms to.
 type AccountsAdUnitsGetAdCodeResource =
      "accounts" :>

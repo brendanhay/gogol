@@ -51,7 +51,7 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Update
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseInstallsUpdate@ which the
+-- | A resource alias for @AndroidEnterpriseInstallsUpdate@ method which the
 -- 'InstallsUpdate'' request conforms to.
 type InstallsUpdateResource =
      "enterprises" :>

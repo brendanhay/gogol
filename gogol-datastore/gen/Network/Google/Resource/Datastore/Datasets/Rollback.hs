@@ -46,7 +46,7 @@ module Network.Google.Resource.Datastore.Datasets.Rollback
 import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DatastoreDatasetsRollback@ which the
+-- | A resource alias for @DatastoreDatasetsRollback@ method which the
 -- 'DatasetsRollback'' request conforms to.
 type DatasetsRollbackResource =
      Capture "datasetId" Text :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.Reseller.Subscriptions.Delete
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerSubscriptionsDelete@ which the
+-- | A resource alias for @ResellerSubscriptionsDelete@ method which the
 -- 'SubscriptionsDelete'' request conforms to.
 type SubscriptionsDeleteResource =
      "customers" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.Calendar.ACL.Patch
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarACLPatch@ which the
+-- | A resource alias for @CalendarACLPatch@ method which the
 -- 'ACLPatch'' request conforms to.
 type ACLPatchResource =
      "calendars" :>

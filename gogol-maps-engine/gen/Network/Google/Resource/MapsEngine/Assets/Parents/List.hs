@@ -47,7 +47,7 @@ module Network.Google.Resource.MapsEngine.Assets.Parents.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineAssetsParentsList@ which the
+-- | A resource alias for @MapsEngineAssetsParentsList@ method which the
 -- 'AssetsParentsList'' request conforms to.
 type AssetsParentsListResource =
      "assets" :>

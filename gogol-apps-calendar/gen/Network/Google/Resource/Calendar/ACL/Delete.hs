@@ -46,7 +46,7 @@ module Network.Google.Resource.Calendar.ACL.Delete
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarACLDelete@ which the
+-- | A resource alias for @CalendarACLDelete@ method which the
 -- 'ACLDelete'' request conforms to.
 type ACLDeleteResource =
      "calendars" :>

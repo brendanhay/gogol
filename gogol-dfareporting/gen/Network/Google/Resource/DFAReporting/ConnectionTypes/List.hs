@@ -45,7 +45,7 @@ module Network.Google.Resource.DFAReporting.ConnectionTypes.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingConnectionTypesList@ which the
+-- | A resource alias for @DfareportingConnectionTypesList@ method which the
 -- 'ConnectionTypesList'' request conforms to.
 type ConnectionTypesListResource =
      "userprofiles" :>

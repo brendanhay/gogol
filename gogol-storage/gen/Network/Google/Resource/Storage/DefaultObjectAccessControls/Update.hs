@@ -47,7 +47,7 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Update
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageDefaultObjectAccessControlsUpdate@ which the
+-- | A resource alias for @StorageDefaultObjectAccessControlsUpdate@ method which the
 -- 'DefaultObjectAccessControlsUpdate'' request conforms to.
 type DefaultObjectAccessControlsUpdateResource =
      "b" :>

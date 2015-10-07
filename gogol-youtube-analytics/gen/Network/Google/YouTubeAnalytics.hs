@@ -18,14 +18,10 @@
 -- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference>
 module Network.Google.YouTubeAnalytics
     (
-    -- * API
+    -- * API Declaration
       YouTubeAnalyticsAPI
-    , youTubeAnalyticsAPI
-    , youTubeAnalyticsRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** YouTubeAnalyticsBatchReportDefinitionsList
     , module Network.Google.Resource.YouTubeAnalytics.BatchReportDefinitions.List
@@ -185,6 +181,7 @@ import           Network.Google.YouTubeAnalytics.Types
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the YouTube Analytics API service.
 type YouTubeAnalyticsAPI =
      GroupsInsertResource :<|> GroupsListResource :<|>
        GroupsDeleteResource
@@ -195,6 +192,3 @@ type YouTubeAnalyticsAPI =
        :<|> GroupItemsListResource
        :<|> GroupItemsDeleteResource
        :<|> BatchReportDefinitionsListResource
-
-youTubeAnalyticsAPI :: Proxy YouTubeAnalyticsAPI
-youTubeAnalyticsAPI = Proxy

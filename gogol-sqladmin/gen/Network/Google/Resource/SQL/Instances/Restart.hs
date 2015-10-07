@@ -46,7 +46,7 @@ module Network.Google.Resource.SQL.Instances.Restart
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesRestart@ which the
+-- | A resource alias for @SQLInstancesRestart@ method which the
 -- 'InstancesRestart'' request conforms to.
 type InstancesRestartResource =
      "projects" :>

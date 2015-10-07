@@ -58,7 +58,7 @@ module Network.Google.Resource.Logging.Projects.Logs.Entries.Write
 import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @LoggingProjectsLogsEntriesWrite@ which the
+-- | A resource alias for @LoggingProjectsLogsEntriesWrite@ method which the
 -- 'ProjectsLogsEntriesWrite'' request conforms to.
 type ProjectsLogsEntriesWriteResource =
      "v1beta3" :>

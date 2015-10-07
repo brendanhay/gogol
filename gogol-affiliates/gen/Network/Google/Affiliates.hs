@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference>
 module Network.Google.Affiliates
     (
-    -- * API
+    -- * API Declaration
       AffiliatesAPI
-    , affiliatesAPI
-    , affiliatesRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** GANAdvertisersGet
     , module Network.Google.Resource.GAN.Advertisers.Get
@@ -398,6 +394,7 @@ import           Network.Google.Resource.GAN.Reports.Get
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Affiliate Network API service.
 type AffiliatesAPI =
      ReportsGetResource :<|> CcOffersListResource :<|>
        AdvertisersListResource
@@ -408,6 +405,3 @@ type AffiliatesAPI =
        :<|> LinksInsertResource
        :<|> LinksListResource
        :<|> LinksGetResource
-
-affiliatesAPI :: Proxy AffiliatesAPI
-affiliatesAPI = Proxy

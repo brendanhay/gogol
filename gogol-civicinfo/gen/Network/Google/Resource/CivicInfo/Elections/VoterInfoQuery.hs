@@ -48,7 +48,7 @@ module Network.Google.Resource.CivicInfo.Elections.VoterInfoQuery
 import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CivicInfoElectionsVoterInfoQuery@ which the
+-- | A resource alias for @CivicInfoElectionsVoterInfoQuery@ method which the
 -- 'ElectionsVoterInfoQuery'' request conforms to.
 type ElectionsVoterInfoQueryResource =
      "voterinfo" :>

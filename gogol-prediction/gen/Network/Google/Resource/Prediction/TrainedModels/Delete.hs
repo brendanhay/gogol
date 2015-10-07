@@ -46,7 +46,7 @@ module Network.Google.Resource.Prediction.TrainedModels.Delete
 import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PredictionTrainedModelsDelete@ which the
+-- | A resource alias for @PredictionTrainedModelsDelete@ method which the
 -- 'TrainedModelsDelete'' request conforms to.
 type TrainedModelsDeleteResource =
      Capture "project" Text :>

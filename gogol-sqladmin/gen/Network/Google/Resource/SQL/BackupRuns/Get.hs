@@ -47,7 +47,7 @@ module Network.Google.Resource.SQL.BackupRuns.Get
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLBackupRunsGet@ which the
+-- | A resource alias for @SQLBackupRunsGet@ method which the
 -- 'BackupRunsGet'' request conforms to.
 type BackupRunsGetResource =
      "projects" :>

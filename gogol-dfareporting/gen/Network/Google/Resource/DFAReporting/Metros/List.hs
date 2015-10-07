@@ -45,7 +45,7 @@ module Network.Google.Resource.DFAReporting.Metros.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingMetrosList@ which the
+-- | A resource alias for @DfareportingMetrosList@ method which the
 -- 'MetrosList'' request conforms to.
 type MetrosListResource =
      "userprofiles" :>

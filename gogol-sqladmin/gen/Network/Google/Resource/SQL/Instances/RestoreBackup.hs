@@ -47,7 +47,7 @@ module Network.Google.Resource.SQL.Instances.RestoreBackup
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesRestoreBackup@ which the
+-- | A resource alias for @SQLInstancesRestoreBackup@ method which the
 -- 'InstancesRestoreBackup'' request conforms to.
 type InstancesRestoreBackupResource =
      "projects" :>

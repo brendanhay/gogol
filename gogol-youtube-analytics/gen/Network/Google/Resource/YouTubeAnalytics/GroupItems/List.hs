@@ -47,7 +47,7 @@ module Network.Google.Resource.YouTubeAnalytics.GroupItems.List
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
--- | A resource alias for @YouTubeAnalyticsGroupItemsList@ which the
+-- | A resource alias for @YouTubeAnalyticsGroupItemsList@ method which the
 -- 'GroupItemsList'' request conforms to.
 type GroupItemsListResource =
      "groupItems" :>

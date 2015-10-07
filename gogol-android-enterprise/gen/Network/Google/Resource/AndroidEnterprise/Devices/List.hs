@@ -46,7 +46,7 @@ module Network.Google.Resource.AndroidEnterprise.Devices.List
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseDevicesList@ which the
+-- | A resource alias for @AndroidEnterpriseDevicesList@ method which the
 -- 'DevicesList'' request conforms to.
 type DevicesListResource =
      "enterprises" :>

@@ -15,7 +15,7 @@
 --
 module Network.Google.Container.Types
     (
-    -- * Service URL
+    -- * Service Request
       containerRequest
 
     -- * ListOperationsResponse
@@ -115,7 +115,7 @@ import           Network.Google.Container.Types.Product
 import           Network.Google.Container.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1beta1' of the Google Container Engine API.
+-- | Default request referring to version 'v1beta1' of the Google Container Engine API. This contains the host and root path used as a starting point for constructing service requests.
 containerRequest :: RequestBuilder
 containerRequest
   = defaultRequest "https://www.googleapis.com/"

@@ -46,7 +46,7 @@ module Network.Google.Resource.Datastore.Datasets.RunQuery
 import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DatastoreDatasetsRunQuery@ which the
+-- | A resource alias for @DatastoreDatasetsRunQuery@ method which the
 -- 'DatasetsRunQuery'' request conforms to.
 type DatasetsRunQueryResource =
      Capture "datasetId" Text :>

@@ -45,7 +45,7 @@ module Network.Google.Resource.YouTube.Comments.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCommentsDelete@ which the
+-- | A resource alias for @YouTubeCommentsDelete@ method which the
 -- 'CommentsDelete'' request conforms to.
 type CommentsDeleteResource =
      "comments" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFilesInsert@ which the
+-- | A resource alias for @AnalyticsManagementProFilesInsert@ method which the
 -- 'ManagementProFilesInsert'' request conforms to.
 type ManagementProFilesInsertResource =
      "management" :>

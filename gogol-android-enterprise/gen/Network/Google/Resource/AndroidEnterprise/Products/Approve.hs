@@ -48,7 +48,7 @@ module Network.Google.Resource.AndroidEnterprise.Products.Approve
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseProductsApprove@ which the
+-- | A resource alias for @AndroidEnterpriseProductsApprove@ method which the
 -- 'ProductsApprove'' request conforms to.
 type ProductsApproveResource =
      "enterprises" :>

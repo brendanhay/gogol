@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.MachineTypes.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeMachineTypesGet@ which the
+-- | A resource alias for @ComputeMachineTypesGet@ method which the
 -- 'MachineTypesGet'' request conforms to.
 type MachineTypesGetResource =
      Capture "project" Text :>

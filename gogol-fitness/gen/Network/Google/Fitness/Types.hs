@@ -15,7 +15,7 @@
 --
 module Network.Google.Fitness.Types
     (
-    -- * Service URL
+    -- * Service Request
       fitnessRequest
 
     -- * AggregateBucketType
@@ -189,7 +189,7 @@ import           Network.Google.Fitness.Types.Product
 import           Network.Google.Fitness.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Fitness.
+-- | Default request referring to version 'v1' of the Fitness. This contains the host and root path used as a starting point for constructing service requests.
 fitnessRequest :: RequestBuilder
 fitnessRequest
   = defaultRequest "https://www.googleapis.com/"

@@ -47,7 +47,7 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Insert
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
--- | A resource alias for @ReplicapoolupdaterRollingUpdatesInsert@ which the
+-- | A resource alias for @ReplicapoolupdaterRollingUpdatesInsert@ method which the
 -- 'RollingUpdatesInsert'' request conforms to.
 type RollingUpdatesInsertResource =
      Capture "project" Text :>

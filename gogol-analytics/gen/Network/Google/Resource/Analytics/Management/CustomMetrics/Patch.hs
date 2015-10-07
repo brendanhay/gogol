@@ -49,7 +49,7 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Patch
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementCustomMetricsPatch@ which the
+-- | A resource alias for @AnalyticsManagementCustomMetricsPatch@ method which the
 -- 'ManagementCustomMetricsPatch'' request conforms to.
 type ManagementCustomMetricsPatchResource =
      "management" :>

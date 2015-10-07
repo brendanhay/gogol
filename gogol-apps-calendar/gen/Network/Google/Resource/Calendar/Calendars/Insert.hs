@@ -45,7 +45,7 @@ module Network.Google.Resource.Calendar.Calendars.Insert
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarsInsert@ which the
+-- | A resource alias for @CalendarCalendarsInsert@ method which the
 -- 'CalendarsInsert'' request conforms to.
 type CalendarsInsertResource =
      "calendars" :>

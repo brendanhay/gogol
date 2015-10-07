@@ -46,7 +46,7 @@ module Network.Google.Resource.MapsEngine.Maps.Publish
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineMapsPublish@ which the
+-- | A resource alias for @MapsEngineMapsPublish@ method which the
 -- 'MapsPublish'' request conforms to.
 type MapsPublishResource =
      "maps" :>

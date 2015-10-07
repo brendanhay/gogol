@@ -56,7 +56,7 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsSubscriptionsModifyPushConfig@ which the
+-- | A resource alias for @PubsubProjectsSubscriptionsModifyPushConfig@ method which the
 -- 'ProjectsSubscriptionsModifyPushConfig'' request conforms to.
 type ProjectsSubscriptionsModifyPushConfigResource =
      "v1beta2" :>

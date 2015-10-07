@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.DirectorySites.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingDirectorySitesInsert@ which the
+-- | A resource alias for @DfareportingDirectorySitesInsert@ method which the
 -- 'DirectorySitesInsert'' request conforms to.
 type DirectorySitesInsertResource =
      "userprofiles" :>

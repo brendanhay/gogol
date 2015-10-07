@@ -53,7 +53,7 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.Get
 import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudBillingBillingAccountsGet@ which the
+-- | A resource alias for @CloudBillingBillingAccountsGet@ method which the
 -- 'BillingAccountsGet'' request conforms to.
 type BillingAccountsGetResource =
      "v1" :>

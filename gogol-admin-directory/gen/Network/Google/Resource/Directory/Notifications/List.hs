@@ -48,7 +48,7 @@ module Network.Google.Resource.Directory.Notifications.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryNotificationsList@ which the
+-- | A resource alias for @DirectoryNotificationsList@ method which the
 -- 'NotificationsList'' request conforms to.
 type NotificationsListResource =
      "customer" :>

@@ -15,7 +15,7 @@
 --
 module Network.Google.DataTransfer.Types
     (
-    -- * Service URL
+    -- * Service Request
       dataTransferRequest
 
     -- * Application
@@ -73,7 +73,7 @@ import           Network.Google.DataTransfer.Types.Product
 import           Network.Google.DataTransfer.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'datatransfer_v1' of the Admin Data Transfer API.
+-- | Default request referring to version 'datatransfer_v1' of the Admin Data Transfer API. This contains the host and root path used as a starting point for constructing service requests.
 dataTransferRequest :: RequestBuilder
 dataTransferRequest
   = defaultRequest "https://www.googleapis.com/"

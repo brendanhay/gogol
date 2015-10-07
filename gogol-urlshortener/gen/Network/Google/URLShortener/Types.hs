@@ -15,7 +15,7 @@
 --
 module Network.Google.URLShortener.Types
     (
-    -- * Service URL
+    -- * Service Request
       uRLShortenerRequest
 
     -- * URL
@@ -73,7 +73,7 @@ import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types.Product
 import           Network.Google.URLShortener.Types.Sum
 
--- | Default request referring to version 'v1' of the URL Shortener API.
+-- | Default request referring to version 'v1' of the URL Shortener API. This contains the host and root path used as a starting point for constructing service requests.
 uRLShortenerRequest :: RequestBuilder
 uRLShortenerRequest
   = defaultRequest "https://www.googleapis.com/"

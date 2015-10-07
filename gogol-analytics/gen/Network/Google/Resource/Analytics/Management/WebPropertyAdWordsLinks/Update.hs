@@ -48,7 +48,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Upda
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksUpdate@ which the
+-- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksUpdate@ method which the
 -- 'ManagementWebPropertyAdWordsLinksUpdate'' request conforms to.
 type ManagementWebPropertyAdWordsLinksUpdateResource
      =

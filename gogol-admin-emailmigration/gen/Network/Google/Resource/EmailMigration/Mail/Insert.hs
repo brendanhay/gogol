@@ -47,7 +47,7 @@ module Network.Google.Resource.EmailMigration.Mail.Insert
 import           Network.Google.EmailMigration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @EmailMigrationMailInsert@ which the
+-- | A resource alias for @EmailMigrationMailInsert@ method which the
 -- 'MailInsert'' request conforms to.
 type MailInsertResource =
      Capture "userKey" Text :>

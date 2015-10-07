@@ -45,7 +45,7 @@ module Network.Google.Resource.AdExchangeBuyer.Offers.Get
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerOffersGet@ which the
+-- | A resource alias for @AdexchangebuyerOffersGet@ method which the
 -- 'OffersGet'' request conforms to.
 type OffersGetResource =
      "offers" :>

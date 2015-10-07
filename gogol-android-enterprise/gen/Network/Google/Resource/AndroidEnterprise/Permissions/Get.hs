@@ -47,7 +47,7 @@ module Network.Google.Resource.AndroidEnterprise.Permissions.Get
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterprisePermissionsGet@ which the
+-- | A resource alias for @AndroidEnterprisePermissionsGet@ method which the
 -- 'PermissionsGet'' request conforms to.
 type PermissionsGetResource =
      "permissions" :>

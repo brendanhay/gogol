@@ -47,7 +47,7 @@ module Network.Google.Resource.YouTube.I18nLanguages.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeI18nLanguagesList@ which the
+-- | A resource alias for @YouTubeI18nLanguagesList@ method which the
 -- 'I18nLanguagesList'' request conforms to.
 type I18nLanguagesListResource =
      "i18nLanguages" :>

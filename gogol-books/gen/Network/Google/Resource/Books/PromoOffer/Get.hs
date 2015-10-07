@@ -50,7 +50,7 @@ module Network.Google.Resource.Books.PromoOffer.Get
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksPromoOfferGet@ which the
+-- | A resource alias for @BooksPromoOfferGet@ method which the
 -- 'PromoOfferGet'' request conforms to.
 type PromoOfferGetResource =
      "promooffer" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.GroupsMigration.Archive.Insert
 import           Network.Google.GroupsMigration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GroupsmigrationArchiveInsert@ which the
+-- | A resource alias for @GroupsmigrationArchiveInsert@ method which the
 -- 'ArchiveInsert'' request conforms to.
 type ArchiveInsertResource =
      Capture "groupId" Text :>

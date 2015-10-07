@@ -15,7 +15,7 @@
 --
 module Network.Google.DoubleClickBids.Types
     (
-    -- * Service URL
+    -- * Service Request
       doubleClickBidsRequest
 
     -- * ListReportsResponse
@@ -209,7 +209,7 @@ import           Network.Google.DoubleClickBids.Types.Product
 import           Network.Google.DoubleClickBids.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the DoubleClick Bid Manager API.
+-- | Default request referring to version 'v1' of the DoubleClick Bid Manager API. This contains the host and root path used as a starting point for constructing service requests.
 doubleClickBidsRequest :: RequestBuilder
 doubleClickBidsRequest
   = defaultRequest "https://www.googleapis.com/"

@@ -46,7 +46,7 @@ module Network.Google.Resource.PlusDomains.Comments.Insert
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsCommentsInsert@ which the
+-- | A resource alias for @PlusDomainsCommentsInsert@ method which the
 -- 'CommentsInsert'' request conforms to.
 type CommentsInsertResource =
      "activities" :>

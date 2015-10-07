@@ -45,7 +45,7 @@ module Network.Google.Resource.GamesManagement.Quests.ResetAllForAllPlayers
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementQuestsResetAllForAllPlayers@ which the
+-- | A resource alias for @GamesManagementQuestsResetAllForAllPlayers@ method which the
 -- 'QuestsResetAllForAllPlayers'' request conforms to.
 type QuestsResetAllForAllPlayersResource =
      "quests" :>

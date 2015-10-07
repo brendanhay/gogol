@@ -53,7 +53,7 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppEngineAppsModulesVersionsCreate@ which the
+-- | A resource alias for @AppEngineAppsModulesVersionsCreate@ method which the
 -- 'AppsModulesVersionsCreate'' request conforms to.
 type AppsModulesVersionsCreateResource =
      "v1beta4" :>

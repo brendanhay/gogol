@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.Referencesets.Search
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReferencesetsSearch@ which the
+-- | A resource alias for @GenomicsReferencesetsSearch@ method which the
 -- 'ReferencesetsSearch'' request conforms to.
 type ReferencesetsSearchResource =
      "referencesets" :>

@@ -51,7 +51,7 @@ module Network.Google.Resource.DeploymentManager.Deployments.Patch
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerDeploymentsPatch@ which the
+-- | A resource alias for @DeploymentManagerDeploymentsPatch@ method which the
 -- 'DeploymentsPatch'' request conforms to.
 type DeploymentsPatchResource =
      Capture "project" Text :>

@@ -53,7 +53,7 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Get
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferTransferOperationsGet@ which the
+-- | A resource alias for @StorageTransferTransferOperationsGet@ method which the
 -- 'TransferOperationsGet'' request conforms to.
 type TransferOperationsGetResource =
      "v1" :>

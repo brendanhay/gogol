@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.Firewalls.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeFirewallsGet@ which the
+-- | A resource alias for @ComputeFirewallsGet@ method which the
 -- 'FirewallsGet'' request conforms to.
 type FirewallsGetResource =
      Capture "project" Text :>

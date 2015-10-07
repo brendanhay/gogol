@@ -48,7 +48,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.Delete
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementExperimentsDelete@ which the
+-- | A resource alias for @AnalyticsManagementExperimentsDelete@ method which the
 -- 'ManagementExperimentsDelete'' request conforms to.
 type ManagementExperimentsDeleteResource =
      "management" :>

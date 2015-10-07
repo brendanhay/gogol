@@ -46,7 +46,7 @@ module Network.Google.Resource.Datastore.Datasets.BeginTransaction
 import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DatastoreDatasetsBeginTransaction@ which the
+-- | A resource alias for @DatastoreDatasetsBeginTransaction@ method which the
 -- 'DatasetsBeginTransaction'' request conforms to.
 type DatasetsBeginTransactionResource =
      Capture "datasetId" Text :>

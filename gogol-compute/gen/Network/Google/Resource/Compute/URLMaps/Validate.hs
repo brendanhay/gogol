@@ -49,7 +49,7 @@ module Network.Google.Resource.Compute.URLMaps.Validate
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeURLMapsValidate@ which the
+-- | A resource alias for @ComputeURLMapsValidate@ method which the
 -- 'URLMapsValidate'' request conforms to.
 type URLMapsValidateResource =
      Capture "project" Text :>

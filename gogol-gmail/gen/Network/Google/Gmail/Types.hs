@@ -15,7 +15,7 @@
 --
 module Network.Google.Gmail.Types
     (
-    -- * Service URL
+    -- * Service Request
       gmailRequest
 
     -- * UsersMessagesGetFormat
@@ -211,7 +211,7 @@ import           Network.Google.Gmail.Types.Product
 import           Network.Google.Gmail.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Gmail API.
+-- | Default request referring to version 'v1' of the Gmail API. This contains the host and root path used as a starting point for constructing service requests.
 gmailRequest :: RequestBuilder
 gmailRequest
   = defaultRequest "https://www.googleapis.com/"

@@ -49,7 +49,7 @@ module Network.Google.Resource.AdSense.Accounts.AdUnits.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAccountsAdUnitsList@ which the
+-- | A resource alias for @AdsenseAccountsAdUnitsList@ method which the
 -- 'AccountsAdUnitsList'' request conforms to.
 type AccountsAdUnitsListResource =
      "accounts" :>

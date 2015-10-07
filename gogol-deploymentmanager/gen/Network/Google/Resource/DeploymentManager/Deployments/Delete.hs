@@ -46,7 +46,7 @@ module Network.Google.Resource.DeploymentManager.Deployments.Delete
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerDeploymentsDelete@ which the
+-- | A resource alias for @DeploymentManagerDeploymentsDelete@ method which the
 -- 'DeploymentsDelete'' request conforms to.
 type DeploymentsDeleteResource =
      Capture "project" Text :>

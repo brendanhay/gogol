@@ -45,7 +45,7 @@ module Network.Google.Resource.Genomics.Datasets.Create
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsDatasetsCreate@ which the
+-- | A resource alias for @GenomicsDatasetsCreate@ method which the
 -- 'DatasetsCreate'' request conforms to.
 type DatasetsCreateResource =
      "datasets" :>

@@ -45,7 +45,7 @@ module Network.Google.Resource.Coordinate.CustomFieldDef.List
 import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CoordinateCustomFieldDefList@ which the
+-- | A resource alias for @CoordinateCustomFieldDefList@ method which the
 -- 'CustomFieldDefList'' request conforms to.
 type CustomFieldDefListResource =
      "teams" :>

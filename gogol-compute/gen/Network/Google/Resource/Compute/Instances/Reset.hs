@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.Instances.Reset
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesReset@ which the
+-- | A resource alias for @ComputeInstancesReset@ method which the
 -- 'InstancesReset'' request conforms to.
 type InstancesResetResource =
      Capture "project" Text :>

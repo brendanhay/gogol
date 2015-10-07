@@ -52,7 +52,7 @@ module Network.Google.Resource.Books.PromoOffer.Accept
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksPromoOfferAccept@ which the
+-- | A resource alias for @BooksPromoOfferAccept@ method which the
 -- 'PromoOfferAccept'' request conforms to.
 type PromoOfferAcceptResource =
      "promooffer" :>

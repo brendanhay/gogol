@@ -46,7 +46,7 @@ module Network.Google.Resource.Drive.Files.GenerateIds
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesGenerateIds@ which the
+-- | A resource alias for @DriveFilesGenerateIds@ method which the
 -- 'FilesGenerateIds'' request conforms to.
 type FilesGenerateIdsResource =
      "files" :>

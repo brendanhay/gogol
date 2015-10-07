@@ -15,7 +15,7 @@
 --
 module Network.Google.DNS.Types
     (
-    -- * Service URL
+    -- * Service Request
       dNSRequest
 
     -- * ChangesListResponse
@@ -60,7 +60,7 @@ module Network.Google.DNS.Types
     , rrsKind
     , rrsName
     , rrsType
-    , rrsRrdatas
+    , rrsRrDatas
 
     -- * ManagedZone
     , ManagedZone
@@ -83,7 +83,7 @@ module Network.Google.DNS.Types
     , qResourceRecordsPerRrset
     , qRrsetAdditionsPerChange
     , qManagedZones
-    , qTotalRrdataSizePerChange
+    , qTotalRrDataSizePerChange
 
     -- * ManagedZonesListResponse
     , ManagedZonesListResponse
@@ -97,7 +97,7 @@ import           Network.Google.DNS.Types.Product
 import           Network.Google.DNS.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1beta1' of the Google Cloud DNS API.
+-- | Default request referring to version 'v1beta1' of the Google Cloud DNS API. This contains the host and root path used as a starting point for constructing service requests.
 dNSRequest :: RequestBuilder
 dNSRequest
   = defaultRequest "https://www.googleapis.com/"

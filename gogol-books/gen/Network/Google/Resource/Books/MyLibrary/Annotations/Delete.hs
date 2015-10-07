@@ -46,7 +46,7 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.Delete
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryAnnotationsDelete@ which the
+-- | A resource alias for @BooksMyLibraryAnnotationsDelete@ method which the
 -- 'MyLibraryAnnotationsDelete'' request conforms to.
 type MyLibraryAnnotationsDeleteResource =
      "mylibrary" :>

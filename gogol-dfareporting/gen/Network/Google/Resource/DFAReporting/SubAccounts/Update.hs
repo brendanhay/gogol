@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSubAccountsUpdate@ which the
+-- | A resource alias for @DfareportingSubAccountsUpdate@ method which the
 -- 'SubAccountsUpdate'' request conforms to.
 type SubAccountsUpdateResource =
      "userprofiles" :>

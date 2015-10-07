@@ -52,7 +52,7 @@ module Network.Google.Resource.YouTube.Activities.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeActivitiesInsert@ which the
+-- | A resource alias for @YouTubeActivitiesInsert@ method which the
 -- 'ActivitiesInsert'' request conforms to.
 type ActivitiesInsertResource =
      "activities" :>

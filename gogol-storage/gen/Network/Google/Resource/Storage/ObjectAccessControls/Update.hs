@@ -49,7 +49,7 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Update
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectAccessControlsUpdate@ which the
+-- | A resource alias for @StorageObjectAccessControlsUpdate@ method which the
 -- 'ObjectAccessControlsUpdate'' request conforms to.
 type ObjectAccessControlsUpdateResource =
      "b" :>

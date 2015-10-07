@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.Ads.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAdsInsert@ which the
+-- | A resource alias for @DfareportingAdsInsert@ method which the
 -- 'AdsInsert'' request conforms to.
 type AdsInsertResource =
      "userprofiles" :>

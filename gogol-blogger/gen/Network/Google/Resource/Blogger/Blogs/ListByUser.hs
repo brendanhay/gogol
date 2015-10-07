@@ -49,7 +49,7 @@ module Network.Google.Resource.Blogger.Blogs.ListByUser
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerBlogsListByUser@ which the
+-- | A resource alias for @BloggerBlogsListByUser@ method which the
 -- 'BlogsListByUser'' request conforms to.
 type BlogsListByUserResource =
      "users" :>

@@ -45,7 +45,7 @@ module Network.Google.Resource.MapsEngine.Rasters.Process
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRastersProcess@ which the
+-- | A resource alias for @MapsEngineRastersProcess@ method which the
 -- 'RastersProcess'' request conforms to.
 type RastersProcessResource =
      "rasters" :>

@@ -49,7 +49,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.RecreateInstances
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersRecreateInstances@ which the
+-- | A resource alias for @ComputeInstanceGroupManagersRecreateInstances@ method which the
 -- 'InstanceGroupManagersRecreateInstances'' request conforms to.
 type InstanceGroupManagersRecreateInstancesResource =
      Capture "project" Text :>

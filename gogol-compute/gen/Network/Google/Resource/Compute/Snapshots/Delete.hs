@@ -50,7 +50,7 @@ module Network.Google.Resource.Compute.Snapshots.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeSnapshotsDelete@ which the
+-- | A resource alias for @ComputeSnapshotsDelete@ method which the
 -- 'SnapshotsDelete'' request conforms to.
 type SnapshotsDeleteResource =
      Capture "project" Text :>

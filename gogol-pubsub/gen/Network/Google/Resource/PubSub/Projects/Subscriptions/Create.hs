@@ -56,7 +56,7 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsSubscriptionsCreate@ which the
+-- | A resource alias for @PubsubProjectsSubscriptionsCreate@ method which the
 -- 'ProjectsSubscriptionsCreate'' request conforms to.
 type ProjectsSubscriptionsCreateResource =
      "v1beta2" :>

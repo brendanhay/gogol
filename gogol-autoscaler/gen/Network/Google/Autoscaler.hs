@@ -19,14 +19,10 @@
 -- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference>
 module Network.Google.Autoscaler
     (
-    -- * API
+    -- * API Declaration
       AutoscalerAPI
-    , autoscalerAPI
-    , autoscalerRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** AutoscalerAutoscalersDelete
     , module Network.Google.Resource.Autoscaler.Autoscalers.Delete
@@ -224,6 +220,7 @@ import           Network.Google.Resource.Autoscaler.Zones.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Compute Engine Autoscaler API service.
 type AutoscalerAPI =
      ZonesListResource :<|> AutoscalersInsertResource :<|>
        AutoscalersListResource
@@ -234,6 +231,3 @@ type AutoscalerAPI =
        :<|> ZoneOperationsListResource
        :<|> ZoneOperationsGetResource
        :<|> ZoneOperationsDeleteResource
-
-autoscalerAPI :: Proxy AutoscalerAPI
-autoscalerAPI = Proxy

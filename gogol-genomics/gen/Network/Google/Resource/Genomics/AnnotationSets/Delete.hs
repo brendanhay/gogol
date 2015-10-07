@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.AnnotationSets.Delete
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsAnnotationSetsDelete@ which the
+-- | A resource alias for @GenomicsAnnotationSetsDelete@ method which the
 -- 'AnnotationSetsDelete'' request conforms to.
 type AnnotationSetsDeleteResource =
      "annotationSets" :>

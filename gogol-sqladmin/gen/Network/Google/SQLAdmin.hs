@@ -18,14 +18,10 @@
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference>
 module Network.Google.SQLAdmin
     (
-    -- * API
+    -- * API Declaration
       SQLAdminAPI
-    , sQLAdminAPI
-    , sQLAdminRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** SQLBackupRunsDelete
     , module Network.Google.Resource.SQL.BackupRuns.Delete
@@ -549,6 +545,7 @@ import           Network.Google.SQLAdmin.Types
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Cloud SQL Administration API service.
 type SQLAdminAPI =
      FlagsListResource :<|> UsersInsertResource :<|>
        UsersListResource
@@ -586,6 +583,3 @@ type SQLAdminAPI =
        :<|> DatabasesGetResource
        :<|> DatabasesDeleteResource
        :<|> DatabasesUpdateResource
-
-sQLAdminAPI :: Proxy SQLAdminAPI
-sQLAdminAPI = Proxy

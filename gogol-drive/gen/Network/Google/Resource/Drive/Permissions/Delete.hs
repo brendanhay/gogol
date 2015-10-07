@@ -46,7 +46,7 @@ module Network.Google.Resource.Drive.Permissions.Delete
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePermissionsDelete@ which the
+-- | A resource alias for @DrivePermissionsDelete@ method which the
 -- 'PermissionsDelete'' request conforms to.
 type PermissionsDeleteResource =
      "files" :>

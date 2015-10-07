@@ -48,7 +48,7 @@ module Network.Google.Resource.Storage.Buckets.Get
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageBucketsGet@ which the
+-- | A resource alias for @StorageBucketsGet@ method which the
 -- 'BucketsGet'' request conforms to.
 type BucketsGetResource =
      "b" :>

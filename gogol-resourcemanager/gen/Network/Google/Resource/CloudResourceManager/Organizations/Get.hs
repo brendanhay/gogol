@@ -51,7 +51,7 @@ module Network.Google.Resource.CloudResourceManager.Organizations.Get
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerOrganizationsGet@ which the
+-- | A resource alias for @CloudResourceManagerOrganizationsGet@ method which the
 -- 'OrganizationsGet'' request conforms to.
 type OrganizationsGetResource =
      "v1beta1" :>

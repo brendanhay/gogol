@@ -47,7 +47,7 @@ module Network.Google.Resource.MapsEngine.Projects.Icons.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineProjectsIconsList@ which the
+-- | A resource alias for @MapsEngineProjectsIconsList@ method which the
 -- 'ProjectsIconsList'' request conforms to.
 type ProjectsIconsListResource =
      "projects" :>

@@ -45,7 +45,7 @@ module Network.Google.Resource.MapsEngine.Maps.UnPublish
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineMapsUnPublish@ which the
+-- | A resource alias for @MapsEngineMapsUnPublish@ method which the
 -- 'MapsUnPublish'' request conforms to.
 type MapsUnPublishResource =
      "maps" :>

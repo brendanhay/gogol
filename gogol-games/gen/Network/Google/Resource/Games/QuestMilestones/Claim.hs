@@ -49,7 +49,7 @@ module Network.Google.Resource.Games.QuestMilestones.Claim
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesQuestMilestonesClaim@ which the
+-- | A resource alias for @GamesQuestMilestonesClaim@ method which the
 -- 'QuestMilestonesClaim'' request conforms to.
 type QuestMilestonesClaimResource =
      "quests" :>

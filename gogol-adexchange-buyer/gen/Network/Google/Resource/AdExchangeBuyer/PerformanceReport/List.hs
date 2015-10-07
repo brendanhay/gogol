@@ -49,7 +49,7 @@ module Network.Google.Resource.AdExchangeBuyer.PerformanceReport.List
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerPerformanceReportList@ which the
+-- | A resource alias for @AdexchangebuyerPerformanceReportList@ method which the
 -- 'PerformanceReportList'' request conforms to.
 type PerformanceReportListResource =
      "performancereport" :>

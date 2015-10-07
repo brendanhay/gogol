@@ -51,7 +51,7 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Patch
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseInstallsPatch@ which the
+-- | A resource alias for @AndroidEnterpriseInstallsPatch@ method which the
 -- 'InstallsPatch'' request conforms to.
 type InstallsPatchResource =
      "enterprises" :>

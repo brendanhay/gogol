@@ -49,7 +49,7 @@ module Network.Google.Resource.YouTube.LiveStreams.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveStreamsInsert@ which the
+-- | A resource alias for @YouTubeLiveStreamsInsert@ method which the
 -- 'LiveStreamsInsert'' request conforms to.
 type LiveStreamsInsertResource =
      "liveStreams" :>

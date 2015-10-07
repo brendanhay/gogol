@@ -46,7 +46,7 @@ module Network.Google.Resource.Drive.Properties.Insert
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePropertiesInsert@ which the
+-- | A resource alias for @DrivePropertiesInsert@ method which the
 -- 'PropertiesInsert'' request conforms to.
 type PropertiesInsertResource =
      "files" :>

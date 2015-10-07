@@ -46,7 +46,7 @@ module Network.Google.Resource.Analytics.Management.Filters.Delete
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementFiltersDelete@ which the
+-- | A resource alias for @AnalyticsManagementFiltersDelete@ method which the
 -- 'ManagementFiltersDelete'' request conforms to.
 type ManagementFiltersDeleteResource =
      "management" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFloodlightActivitiesDelete@ which the
+-- | A resource alias for @DfareportingFloodlightActivitiesDelete@ method which the
 -- 'FloodlightActivitiesDelete'' request conforms to.
 type FloodlightActivitiesDeleteResource =
      "userprofiles" :>

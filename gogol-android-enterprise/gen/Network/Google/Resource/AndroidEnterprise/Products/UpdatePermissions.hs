@@ -48,7 +48,7 @@ module Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseProductsUpdatePermissions@ which the
+-- | A resource alias for @AndroidEnterpriseProductsUpdatePermissions@ method which the
 -- 'ProductsUpdatePermissions'' request conforms to.
 type ProductsUpdatePermissionsResource =
      "enterprises" :>

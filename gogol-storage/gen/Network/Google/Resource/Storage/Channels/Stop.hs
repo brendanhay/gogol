@@ -45,7 +45,7 @@ module Network.Google.Resource.Storage.Channels.Stop
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageChannelsStop@ which the
+-- | A resource alias for @StorageChannelsStop@ method which the
 -- 'ChannelsStop'' request conforms to.
 type ChannelsStopResource =
      "channels" :>

@@ -53,7 +53,7 @@ module Network.Google.Resource.Gmail.Users.Messages.Import
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersMessagesImport@ which the
+-- | A resource alias for @GmailUsersMessagesImport@ method which the
 -- 'UsersMessagesImport'' request conforms to.
 type UsersMessagesImportResource =
      Capture "userId" Text :>

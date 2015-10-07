@@ -52,7 +52,7 @@ module Network.Google.Resource.Partners.Companies.Leads.Create
 import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PartnersCompaniesLeadsCreate@ which the
+-- | A resource alias for @PartnersCompaniesLeadsCreate@ method which the
 -- 'CompaniesLeadsCreate'' request conforms to.
 type CompaniesLeadsCreateResource =
      "v2" :>

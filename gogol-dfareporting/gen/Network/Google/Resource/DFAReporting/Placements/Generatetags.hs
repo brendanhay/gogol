@@ -48,7 +48,7 @@ module Network.Google.Resource.DFAReporting.Placements.Generatetags
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPlacementsGeneratetags@ which the
+-- | A resource alias for @DfareportingPlacementsGeneratetags@ method which the
 -- 'PlacementsGeneratetags'' request conforms to.
 type PlacementsGeneratetagsResource =
      "userprofiles" :>

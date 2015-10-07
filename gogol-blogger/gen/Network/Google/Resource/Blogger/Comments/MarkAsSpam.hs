@@ -47,7 +47,7 @@ module Network.Google.Resource.Blogger.Comments.MarkAsSpam
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerCommentsMarkAsSpam@ which the
+-- | A resource alias for @BloggerCommentsMarkAsSpam@ method which the
 -- 'CommentsMarkAsSpam'' request conforms to.
 type CommentsMarkAsSpamResource =
      "blogs" :>

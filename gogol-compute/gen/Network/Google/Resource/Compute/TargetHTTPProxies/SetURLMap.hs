@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.SetURLMap
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetHTTPProxiesSetURLMap@ which the
+-- | A resource alias for @ComputeTargetHTTPProxiesSetURLMap@ method which the
 -- 'TargetHTTPProxiesSetURLMap'' request conforms to.
 type TargetHTTPProxiesSetURLMapResource =
      Capture "project" Text :>

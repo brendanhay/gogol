@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.Users.Undelete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersUndelete@ which the
+-- | A resource alias for @DirectoryUsersUndelete@ method which the
 -- 'UsersUndelete'' request conforms to.
 type UsersUndeleteResource =
      "users" :>

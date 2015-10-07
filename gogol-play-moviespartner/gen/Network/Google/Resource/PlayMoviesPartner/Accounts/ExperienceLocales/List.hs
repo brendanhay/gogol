@@ -62,7 +62,7 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviesPartnerAccountsExperienceLocalesList@ which the
+-- | A resource alias for @PlaymoviesPartnerAccountsExperienceLocalesList@ method which the
 -- 'AccountsExperienceLocalesList'' request conforms to.
 type AccountsExperienceLocalesListResource =
      "v1" :>

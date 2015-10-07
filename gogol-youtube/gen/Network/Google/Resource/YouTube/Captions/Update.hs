@@ -52,7 +52,7 @@ module Network.Google.Resource.YouTube.Captions.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCaptionsUpdate@ which the
+-- | A resource alias for @YouTubeCaptionsUpdate@ method which the
 -- 'CaptionsUpdate'' request conforms to.
 type CaptionsUpdateResource =
      "captions" :>

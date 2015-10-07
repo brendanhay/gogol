@@ -48,7 +48,7 @@ module Network.Google.Resource.Blogger.Posts.Search
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostsSearch@ which the
+-- | A resource alias for @BloggerPostsSearch@ method which the
 -- 'PostsSearch'' request conforms to.
 type PostsSearchResource =
      "blogs" :>

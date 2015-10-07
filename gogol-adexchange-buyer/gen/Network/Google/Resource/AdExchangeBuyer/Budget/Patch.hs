@@ -49,7 +49,7 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Patch
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerBudgetPatch@ which the
+-- | A resource alias for @AdexchangebuyerBudgetPatch@ method which the
 -- 'BudgetPatch'' request conforms to.
 type BudgetPatchResource =
      "billinginfo" :>

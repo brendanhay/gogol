@@ -45,7 +45,7 @@ module Network.Google.Resource.DNS.Projects.Get
 import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DNSProjectsGet@ which the
+-- | A resource alias for @DNSProjectsGet@ method which the
 -- 'ProjectsGet'' request conforms to.
 type ProjectsGetResource =
      Capture "project" Text :>

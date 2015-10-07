@@ -47,7 +47,7 @@ module Network.Google.Resource.Calendar.ACL.Update
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarACLUpdate@ which the
+-- | A resource alias for @CalendarACLUpdate@ method which the
 -- 'ACLUpdate'' request conforms to.
 type ACLUpdateResource =
      "calendars" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.Blogger.Comments.Approve
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerCommentsApprove@ which the
+-- | A resource alias for @BloggerCommentsApprove@ method which the
 -- 'CommentsApprove'' request conforms to.
 type CommentsApproveResource =
      "blogs" :>

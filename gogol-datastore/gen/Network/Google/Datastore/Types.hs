@@ -15,7 +15,7 @@
 --
 module Network.Google.Datastore.Types
     (
-    -- * Service URL
+    -- * Service Request
       datastoreRequest
 
     -- * PropertyOrderDirection
@@ -295,7 +295,7 @@ import           Network.Google.Datastore.Types.Product
 import           Network.Google.Datastore.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1beta2' of the Google Cloud Datastore API.
+-- | Default request referring to version 'v1beta2' of the Google Cloud Datastore API. This contains the host and root path used as a starting point for constructing service requests.
 datastoreRequest :: RequestBuilder
 datastoreRequest
   = defaultRequest "https://www.googleapis.com/"

@@ -48,7 +48,7 @@ module Network.Google.Resource.FusionTables.Column.Patch
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesColumnPatch@ which the
+-- | A resource alias for @FusiontablesColumnPatch@ method which the
 -- 'ColumnPatch'' request conforms to.
 type ColumnPatchResource =
      "tables" :>

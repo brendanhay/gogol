@@ -47,7 +47,7 @@ module Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerSubscriptionsChangeSeats@ which the
+-- | A resource alias for @ResellerSubscriptionsChangeSeats@ method which the
 -- 'SubscriptionsChangeSeats'' request conforms to.
 type SubscriptionsChangeSeatsResource =
      "customers" :>

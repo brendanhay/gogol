@@ -50,7 +50,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Restore
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersVersionsRestore@ which the
+-- | A resource alias for @TagManagerAccountsContainersVersionsRestore@ method which the
 -- 'AccountsContainersVersionsRestore'' request conforms to.
 type AccountsContainersVersionsRestoreResource =
      "accounts" :>

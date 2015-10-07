@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference>
 module Network.Google.YouTube
     (
-    -- * API
+    -- * API Declaration
       YouTubeAPI
-    , youTubeAPI
-    , youTubeRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** YouTubeActivitiesInsert
     , module Network.Google.Resource.YouTube.Activities.Insert
@@ -2108,6 +2104,7 @@ import           Network.Google.YouTube.Types
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the YouTube Data API service.
 type YouTubeAPI =
      ChannelBannersInsertResource :<|>
        GuideCategoriesListResource
@@ -2171,6 +2168,3 @@ type YouTubeAPI =
        :<|> LiveStreamsListResource
        :<|> LiveStreamsDeleteResource
        :<|> LiveStreamsUpdateResource
-
-youTubeAPI :: Proxy YouTubeAPI
-youTubeAPI = Proxy

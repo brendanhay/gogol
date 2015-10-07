@@ -18,12 +18,10 @@
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference>
 module Network.Google.OAuth2
     (
-    -- * API
+    -- * API Declaration
       OAuth2API
-    , oAuth2API
-    , oAuth2Request
 
-    -- * Service Methods
+    -- * Methods
 
     -- ** OAuth2GetCertForOpenIdConnect
     , module Network.Google.Method.OAuth2.GetCertForOpenIdConnect
@@ -31,7 +29,7 @@ module Network.Google.OAuth2
     -- ** OAuth2TokenInfo
     , module Network.Google.Method.OAuth2.TokenInfo
 
-    -- * REST Resources
+    -- * Resources
 
     -- ** OAuth2UserInfoGet
     , module Network.Google.Resource.OAuth2.UserInfo.Get
@@ -96,10 +94,8 @@ import           Network.Google.Resource.OAuth2.UserInfo.V2.Me.Get
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google OAuth2 API service.
 type OAuth2API =
      UserInfoV2MeGetResource :<|> UserInfoGetResource :<|>
        GetCertForOpenIdConnectMethod
        :<|> TokenInfoMethod
-
-oAuth2API :: Proxy OAuth2API
-oAuth2API = Proxy

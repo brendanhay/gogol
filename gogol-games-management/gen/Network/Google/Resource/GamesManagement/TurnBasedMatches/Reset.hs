@@ -45,7 +45,7 @@ module Network.Google.Resource.GamesManagement.TurnBasedMatches.Reset
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementTurnBasedMatchesReset@ which the
+-- | A resource alias for @GamesManagementTurnBasedMatchesReset@ method which the
 -- 'TurnBasedMatchesReset'' request conforms to.
 type TurnBasedMatchesResetResource =
      "turnbasedmatches" :>

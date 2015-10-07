@@ -53,7 +53,7 @@ module Network.Google.Resource.DFAReporting.Orders.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingOrdersList@ which the
+-- | A resource alias for @DfareportingOrdersList@ method which the
 -- 'OrdersList'' request conforms to.
 type OrdersListResource =
      "userprofiles" :>

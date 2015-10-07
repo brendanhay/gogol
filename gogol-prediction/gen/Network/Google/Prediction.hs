@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference>
 module Network.Google.Prediction
     (
-    -- * API
+    -- * API Declaration
       PredictionAPI
-    , predictionAPI
-    , predictionRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** PredictionHostedModelsPredict
     , module Network.Google.Resource.Prediction.HostedModels.Predict
@@ -243,6 +239,7 @@ import           Network.Google.Resource.Prediction.TrainedModels.Update
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Prediction API service.
 type PredictionAPI =
      TrainedModelsInsertResource :<|>
        TrainedModelsListResource
@@ -252,6 +249,3 @@ type PredictionAPI =
        :<|> TrainedModelsDeleteResource
        :<|> TrainedModelsUpdateResource
        :<|> HostedModelsPredictResource
-
-predictionAPI :: Proxy PredictionAPI
-predictionAPI = Proxy

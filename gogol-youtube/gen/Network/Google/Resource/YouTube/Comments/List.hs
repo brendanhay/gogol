@@ -50,7 +50,7 @@ module Network.Google.Resource.YouTube.Comments.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCommentsList@ which the
+-- | A resource alias for @YouTubeCommentsList@ method which the
 -- 'CommentsList'' request conforms to.
 type CommentsListResource =
      "comments" :>

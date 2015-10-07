@@ -49,7 +49,7 @@ module Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesSetDiskAutoDelete@ which the
+-- | A resource alias for @ComputeInstancesSetDiskAutoDelete@ method which the
 -- 'InstancesSetDiskAutoDelete'' request conforms to.
 type InstancesSetDiskAutoDeleteResource =
      Capture "project" Text :>

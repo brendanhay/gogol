@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference>
 module Network.Google.URLShortener
     (
-    -- * API
+    -- * API Declaration
       URLShortenerAPI
-    , uRLShortenerAPI
-    , uRLShortenerRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** URLshortenerURLGet
     , module Network.Google.Resource.URLShortener.URL.Get
@@ -99,9 +95,7 @@ import           Network.Google.URLShortener.Types
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the URL Shortener API service.
 type URLShortenerAPI =
      URLInsertResource :<|> URLListResource :<|>
        URLGetResource
-
-uRLShortenerAPI :: Proxy URLShortenerAPI
-uRLShortenerAPI = Proxy

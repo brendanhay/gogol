@@ -50,7 +50,7 @@ module Network.Google.Resource.Reseller.Subscriptions.List
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerSubscriptionsList@ which the
+-- | A resource alias for @ResellerSubscriptionsList@ method which the
 -- 'SubscriptionsList'' request conforms to.
 type SubscriptionsListResource =
      "subscriptions" :>

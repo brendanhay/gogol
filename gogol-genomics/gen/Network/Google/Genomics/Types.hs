@@ -15,7 +15,7 @@
 --
 module Network.Google.Genomics.Types
     (
-    -- * Service URL
+    -- * Service Request
       genomicsRequest
 
     -- * FastqMetadata
@@ -576,8 +576,8 @@ module Network.Google.Genomics.Types
     -- * ExportVariantSetRequest
     , ExportVariantSetRequest
     , exportVariantSetRequest
-    , evsrBigqueryDataset
-    , evsrBigqueryTable
+    , evsrBigQueryDataset
+    , evsrBigQueryTable
     , evsrFormat
     , evsrProjectNumber
     , evsrCallSetIds
@@ -723,7 +723,7 @@ import           Network.Google.Genomics.Types.Product
 import           Network.Google.Genomics.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1beta2' of the Genomics API.
+-- | Default request referring to version 'v1beta2' of the Genomics API. This contains the host and root path used as a starting point for constructing service requests.
 genomicsRequest :: RequestBuilder
 genomicsRequest
   = defaultRequest "https://www.googleapis.com/"

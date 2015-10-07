@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.TargetInstances.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetInstancesAggregatedList@ which the
+-- | A resource alias for @ComputeTargetInstancesAggregatedList@ method which the
 -- 'TargetInstancesAggregatedList'' request conforms to.
 type TargetInstancesAggregatedListResource =
      Capture "project" Text :>

@@ -53,7 +53,7 @@ module Network.Google.Resource.Storage.Objects.Delete
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsDelete@ which the
+-- | A resource alias for @StorageObjectsDelete@ method which the
 -- 'ObjectsDelete'' request conforms to.
 type ObjectsDeleteResource =
      "b" :>

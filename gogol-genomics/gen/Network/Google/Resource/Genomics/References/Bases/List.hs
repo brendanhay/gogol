@@ -50,7 +50,7 @@ module Network.Google.Resource.Genomics.References.Bases.List
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReferencesBasesList@ which the
+-- | A resource alias for @GenomicsReferencesBasesList@ method which the
 -- 'ReferencesBasesList'' request conforms to.
 type ReferencesBasesListResource =
      "references" :>

@@ -55,7 +55,7 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Patch
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppEngineAppsModulesPatch@ which the
+-- | A resource alias for @AppEngineAppsModulesPatch@ method which the
 -- 'AppsModulesPatch'' request conforms to.
 type AppsModulesPatchResource =
      "v1beta4" :>

@@ -67,7 +67,7 @@ module Network.Google.Method.Freebase.Search
 import           Network.Google.FreebaseSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FreebaseSearch@ which the
+-- | A resource alias for @FreebaseSearch@ method which the
 -- 'Search'' request conforms to.
 type SearchMethod =
      "search" :>

@@ -48,7 +48,7 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryBookshelvesMoveVolume@ which the
+-- | A resource alias for @BooksMyLibraryBookshelvesMoveVolume@ method which the
 -- 'MyLibraryBookshelvesMoveVolume'' request conforms to.
 type MyLibraryBookshelvesMoveVolumeResource =
      "mylibrary" :>

@@ -18,14 +18,10 @@
 -- /See:/ < Google Cloud Network Performance Monitoring API Reference>
 module Network.Google.LatencyTest
     (
-    -- * API
+    -- * API Declaration
       LatencyTestAPI
-    , latencyTestAPI
-    , latencyTestRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** CloudlatencytestStatscollectionUpdateaggregatedstats
     , module Network.Google.Resource.Cloudlatencytest.Statscollection.Updateaggregatedstats
@@ -86,9 +82,7 @@ import           Network.Google.Resource.Cloudlatencytest.Statscollection.Update
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Cloud Network Performance Monitoring API service.
 type LatencyTestAPI =
      StatscollectionUpdatestatsResource :<|>
        StatscollectionUpdateaggregatedstatsResource
-
-latencyTestAPI :: Proxy LatencyTestAPI
-latencyTestAPI = Proxy

@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.Users.Photos.Update
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersPhotosUpdate@ which the
+-- | A resource alias for @DirectoryUsersPhotosUpdate@ method which the
 -- 'UsersPhotosUpdate'' request conforms to.
 type UsersPhotosUpdateResource =
      "users" :>

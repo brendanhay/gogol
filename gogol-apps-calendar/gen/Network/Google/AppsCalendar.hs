@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference>
 module Network.Google.AppsCalendar
     (
-    -- * API
+    -- * API Declaration
       AppsCalendarAPI
-    , appsCalendarAPI
-    , appsCalendarRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** CalendarACLDelete
     , module Network.Google.Resource.Calendar.ACL.Delete
@@ -537,6 +533,7 @@ import           Network.Google.Resource.Calendar.Settings.Watch
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Calendar API service.
 type AppsCalendarAPI =
      SettingsListResource :<|> SettingsGetResource :<|>
        SettingsWatchResource
@@ -574,6 +571,3 @@ type AppsCalendarAPI =
        :<|> ACLWatchResource
        :<|> ColorsGetResource
        :<|> FreeBusyQueryResource
-
-appsCalendarAPI :: Proxy AppsCalendarAPI
-appsCalendarAPI = Proxy

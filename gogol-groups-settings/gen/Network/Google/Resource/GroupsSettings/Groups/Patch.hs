@@ -46,7 +46,7 @@ module Network.Google.Resource.GroupsSettings.Groups.Patch
 import           Network.Google.GroupsSettings.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GroupsSettingsGroupsPatch@ which the
+-- | A resource alias for @GroupsSettingsGroupsPatch@ method which the
 -- 'GroupsPatch'' request conforms to.
 type GroupsPatchResource =
      Capture "groupUniqueId" Text :>

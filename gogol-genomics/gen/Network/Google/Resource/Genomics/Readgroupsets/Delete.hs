@@ -45,7 +45,7 @@ module Network.Google.Resource.Genomics.Readgroupsets.Delete
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReadgroupsetsDelete@ which the
+-- | A resource alias for @GenomicsReadgroupsetsDelete@ method which the
 -- 'ReadgroupsetsDelete'' request conforms to.
 type ReadgroupsetsDeleteResource =
      "readgroupsets" :>

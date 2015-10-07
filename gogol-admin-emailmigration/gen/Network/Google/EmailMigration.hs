@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/admin-sdk/email-migration/v2/ Email Migration API v2 Reference>
 module Network.Google.EmailMigration
     (
-    -- * API
+    -- * API Declaration
       EmailMigrationAPI
-    , emailMigrationAPI
-    , emailMigrationRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** EmailMigrationMailInsert
     , module Network.Google.Resource.EmailMigration.Mail.Insert
@@ -54,7 +50,5 @@ import           Network.Google.Resource.EmailMigration.Mail.Insert
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Email Migration API v2 service.
 type EmailMigrationAPI = MailInsertResource
-
-emailMigrationAPI :: Proxy EmailMigrationAPI
-emailMigrationAPI = Proxy

@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.Schemas.Insert
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectorySchemasInsert@ which the
+-- | A resource alias for @DirectorySchemasInsert@ method which the
 -- 'SchemasInsert'' request conforms to.
 type SchemasInsertResource =
      "customer" :>

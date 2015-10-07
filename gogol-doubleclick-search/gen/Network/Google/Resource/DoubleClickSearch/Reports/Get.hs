@@ -45,7 +45,7 @@ module Network.Google.Resource.DoubleClickSearch.Reports.Get
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClicksearchReportsGet@ which the
+-- | A resource alias for @DoubleClicksearchReportsGet@ method which the
 -- 'ReportsGet'' request conforms to.
 type ReportsGetResource =
      "reports" :>

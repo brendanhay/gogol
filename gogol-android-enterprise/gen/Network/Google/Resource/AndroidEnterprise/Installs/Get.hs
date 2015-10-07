@@ -48,7 +48,7 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Get
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseInstallsGet@ which the
+-- | A resource alias for @AndroidEnterpriseInstallsGet@ method which the
 -- 'InstallsGet'' request conforms to.
 type InstallsGetResource =
      "enterprises" :>

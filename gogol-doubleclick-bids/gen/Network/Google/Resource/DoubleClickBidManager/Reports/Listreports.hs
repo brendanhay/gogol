@@ -45,7 +45,7 @@ module Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
 import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClickBidManagerReportsListreports@ which the
+-- | A resource alias for @DoubleClickBidManagerReportsListreports@ method which the
 -- 'ReportsListreports'' request conforms to.
 type ReportsListreportsResource =
      "queries" :>

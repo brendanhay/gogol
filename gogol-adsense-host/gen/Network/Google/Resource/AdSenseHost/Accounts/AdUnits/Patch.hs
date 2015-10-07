@@ -49,7 +49,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Patch
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAccountsAdUnitsPatch@ which the
+-- | A resource alias for @AdsensehostAccountsAdUnitsPatch@ method which the
 -- 'AccountsAdUnitsPatch'' request conforms to.
 type AccountsAdUnitsPatchResource =
      "accounts" :>

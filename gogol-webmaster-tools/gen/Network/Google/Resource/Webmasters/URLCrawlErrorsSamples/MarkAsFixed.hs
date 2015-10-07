@@ -49,7 +49,7 @@ module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.MarkAsFixed
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersURLCrawlErrorsSamplesMarkAsFixed@ which the
+-- | A resource alias for @WebmastersURLCrawlErrorsSamplesMarkAsFixed@ method which the
 -- 'URLCrawlErrorsSamplesMarkAsFixed'' request conforms to.
 type URLCrawlErrorsSamplesMarkAsFixedResource =
      "sites" :>

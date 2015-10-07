@@ -45,7 +45,7 @@ module Network.Google.Resource.PlusDomains.People.Get
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsPeopleGet@ which the
+-- | A resource alias for @PlusDomainsPeopleGet@ method which the
 -- 'PeopleGet'' request conforms to.
 type PeopleGetResource =
      "people" :>

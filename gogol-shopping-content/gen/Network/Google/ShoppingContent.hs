@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference>
 module Network.Google.ShoppingContent
     (
-    -- * API
+    -- * API Declaration
       ShoppingContentAPI
-    , shoppingContentAPI
-    , shoppingContentRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** ContentOrdersAcknowledge
     , module Network.Google.Resource.Content.Orders.Acknowledge
@@ -574,6 +570,7 @@ import           Network.Google.ShoppingContent.Types
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Content API for Shopping service.
 type ShoppingContentAPI =
      OrdersGetbymerchantOrderidResource :<|>
        OrdersCreatetestOrderResource
@@ -590,6 +587,3 @@ type ShoppingContentAPI =
        :<|> OrdersAdvancetestOrderResource
        :<|> OrdersShiplineitemsResource
        :<|> OrdersCancelResource
-
-shoppingContentAPI :: Proxy ShoppingContentAPI
-shoppingContentAPI = Proxy

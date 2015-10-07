@@ -49,7 +49,7 @@ module Network.Google.Resource.Autoscaler.Autoscalers.Patch
 import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AutoscalerAutoscalersPatch@ which the
+-- | A resource alias for @AutoscalerAutoscalersPatch@ method which the
 -- 'AutoscalersPatch'' request conforms to.
 type AutoscalersPatchResource =
      "projects" :>

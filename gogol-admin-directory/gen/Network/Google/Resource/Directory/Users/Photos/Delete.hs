@@ -45,7 +45,7 @@ module Network.Google.Resource.Directory.Users.Photos.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersPhotosDelete@ which the
+-- | A resource alias for @DirectoryUsersPhotosDelete@ method which the
 -- 'UsersPhotosDelete'' request conforms to.
 type UsersPhotosDeleteResource =
      "users" :>

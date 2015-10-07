@@ -57,7 +57,7 @@ module Network.Google.Resource.StorageTransfer.GetGoogleServiceAccount
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferGetGoogleServiceAccount@ which the
+-- | A resource alias for @StorageTransferGetGoogleServiceAccount@ method which the
 -- 'GetGoogleServiceAccount'' request conforms to.
 type GetGoogleServiceAccountResource =
      "v1:getGoogleServiceAccount" :>

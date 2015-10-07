@@ -50,7 +50,7 @@ module Network.Google.Resource.Compute.Autoscalers.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeAutoscalersList@ which the
+-- | A resource alias for @ComputeAutoscalersList@ method which the
 -- 'AutoscalersList'' request conforms to.
 type AutoscalersListResource =
      Capture "project" Text :>

@@ -45,7 +45,7 @@ module Network.Google.Resource.DataTransfer.Transfers.Insert
 import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataTransferTransfersInsert@ which the
+-- | A resource alias for @DataTransferTransfersInsert@ method which the
 -- 'TransfersInsert'' request conforms to.
 type TransfersInsertResource =
      "transfers" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Insert
 import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @LicensingLicenseAssignmentsInsert@ which the
+-- | A resource alias for @LicensingLicenseAssignmentsInsert@ method which the
 -- 'LicenseAssignmentsInsert'' request conforms to.
 type LicenseAssignmentsInsertResource =
      Capture "productId" Text :>

@@ -49,7 +49,7 @@ module Network.Google.Resource.Drive.Replies.List
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRepliesList@ which the
+-- | A resource alias for @DriveRepliesList@ method which the
 -- 'RepliesList'' request conforms to.
 type RepliesListResource =
      "files" :>

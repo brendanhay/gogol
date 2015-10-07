@@ -53,7 +53,7 @@ module Network.Google.Resource.AppEngine.Apps.Modules.List
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppEngineAppsModulesList@ which the
+-- | A resource alias for @AppEngineAppsModulesList@ method which the
 -- 'AppsModulesList'' request conforms to.
 type AppsModulesListResource =
      "v1beta4" :>

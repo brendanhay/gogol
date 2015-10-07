@@ -57,7 +57,7 @@ module Network.Google.Resource.Partners.UserStates.List
 import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PartnersUserStatesList@ which the
+-- | A resource alias for @PartnersUserStatesList@ method which the
 -- 'UserStatesList'' request conforms to.
 type UserStatesListResource =
      "v2" :>

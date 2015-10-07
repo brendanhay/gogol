@@ -45,7 +45,7 @@ module Network.Google.Resource.DFAReporting.Browsers.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingBrowsersList@ which the
+-- | A resource alias for @DfareportingBrowsersList@ method which the
 -- 'BrowsersList'' request conforms to.
 type BrowsersListResource =
      "userprofiles" :>

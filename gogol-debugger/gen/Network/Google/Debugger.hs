@@ -19,14 +19,10 @@
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference>
 module Network.Google.Debugger
     (
-    -- * API
+    -- * API Declaration
       DebuggerAPI
-    , debuggerAPI
-    , debuggerRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** CloudDebuggerControllerDebuggeesBreakpointsList
     , module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.List
@@ -246,6 +242,7 @@ import           Network.Google.Resource.CloudDebugger.Debugger.Debuggees.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Cloud Debugger API service.
 type DebuggerAPI =
      ControllerDebuggeesBreakpointsListResource :<|>
        ControllerDebuggeesBreakpointsUpdateResource
@@ -255,6 +252,3 @@ type DebuggerAPI =
        :<|> DebuggerDebuggeesBreakpointsGetResource
        :<|> DebuggerDebuggeesBreakpointsDeleteResource
        :<|> DebuggerDebuggeesListResource
-
-debuggerAPI :: Proxy DebuggerAPI
-debuggerAPI = Proxy

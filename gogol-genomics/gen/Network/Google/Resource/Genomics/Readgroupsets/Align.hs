@@ -47,7 +47,7 @@ module Network.Google.Resource.Genomics.Readgroupsets.Align
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReadgroupsetsAlign@ which the
+-- | A resource alias for @GenomicsReadgroupsetsAlign@ method which the
 -- 'ReadgroupsetsAlign'' request conforms to.
 type ReadgroupsetsAlignResource =
      "readgroupsets" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.DoubleClickSearch.SavedColumns.List
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClicksearchSavedColumnsList@ which the
+-- | A resource alias for @DoubleClicksearchSavedColumnsList@ method which the
 -- 'SavedColumnsList'' request conforms to.
 type SavedColumnsListResource =
      "agency" :>

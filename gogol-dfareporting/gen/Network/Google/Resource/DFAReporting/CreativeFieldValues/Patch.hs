@@ -49,7 +49,7 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeFieldValuesPatch@ which the
+-- | A resource alias for @DfareportingCreativeFieldValuesPatch@ method which the
 -- 'CreativeFieldValuesPatch'' request conforms to.
 type CreativeFieldValuesPatchResource =
      "userprofiles" :>

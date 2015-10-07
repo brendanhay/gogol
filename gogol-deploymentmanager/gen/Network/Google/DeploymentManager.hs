@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference>
 module Network.Google.DeploymentManager
     (
-    -- * API
+    -- * API Declaration
       DeploymentManagerAPI
-    , deploymentManagerAPI
-    , deploymentManagerRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** DeploymentManagerDeploymentsDelete
     , module Network.Google.Resource.DeploymentManager.Deployments.Delete
@@ -266,6 +262,7 @@ import           Network.Google.Resource.DeploymentManager.Types.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Cloud Deployment Manager API service.
 type DeploymentManagerAPI =
      TypesListResource :<|> ResourcesListResource :<|>
        ResourcesGetResource
@@ -279,6 +276,3 @@ type DeploymentManagerAPI =
        :<|> DeploymentsUpdateResource
        :<|> OperationsListResource
        :<|> OperationsGetResource
-
-deploymentManagerAPI :: Proxy DeploymentManagerAPI
-deploymentManagerAPI = Proxy

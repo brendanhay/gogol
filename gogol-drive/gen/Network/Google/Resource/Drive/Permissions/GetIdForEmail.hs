@@ -45,7 +45,7 @@ module Network.Google.Resource.Drive.Permissions.GetIdForEmail
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePermissionsGetIdForEmail@ which the
+-- | A resource alias for @DrivePermissionsGetIdForEmail@ method which the
 -- 'PermissionsGetIdForEmail'' request conforms to.
 type PermissionsGetIdForEmailResource =
      "permissionIds" :>

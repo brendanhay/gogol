@@ -15,7 +15,7 @@
 --
 module Network.Google.ShoppingContent.Types
     (
-    -- * Service URL
+    -- * Service Request
       shoppingContentRequest
 
     -- * OrdersAcknowledgeRequest
@@ -499,7 +499,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types.Product
 import           Network.Google.ShoppingContent.Types.Sum
 
--- | Default request referring to version 'v2sandbox' of the Content API for Shopping.
+-- | Default request referring to version 'v2sandbox' of the Content API for Shopping. This contains the host and root path used as a starting point for constructing service requests.
 shoppingContentRequest :: RequestBuilder
 shoppingContentRequest
   = defaultRequest "https://www.googleapis.com/"

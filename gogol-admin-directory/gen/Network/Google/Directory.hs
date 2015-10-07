@@ -20,14 +20,10 @@
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference>
 module Network.Google.Directory
     (
-    -- * API
+    -- * API Declaration
       DirectoryAPI
-    , directoryAPI
-    , directoryRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** AdminChannelsStop
     , module Network.Google.Resource.Admin.Channels.Stop
@@ -861,6 +857,7 @@ import           Network.Google.Resource.Directory.VerificationCodes.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Admin Directory API service.
 type DirectoryAPI =
      GroupsAliasesInsertResource :<|>
        GroupsAliasesListResource
@@ -929,6 +926,3 @@ type DirectoryAPI =
        :<|> AspsListResource
        :<|> AspsGetResource
        :<|> AspsDeleteResource
-
-directoryAPI :: Proxy DirectoryAPI
-directoryAPI = Proxy

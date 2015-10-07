@@ -52,7 +52,7 @@ module Network.Google.Resource.FusionTables.Table.ReplaceRows
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTableReplaceRows@ which the
+-- | A resource alias for @FusiontablesTableReplaceRows@ method which the
 -- 'TableReplaceRows'' request conforms to.
 type TableReplaceRowsResource =
      "tables" :>

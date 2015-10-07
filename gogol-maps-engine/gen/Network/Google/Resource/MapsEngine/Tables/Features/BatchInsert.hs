@@ -52,7 +52,7 @@ module Network.Google.Resource.MapsEngine.Tables.Features.BatchInsert
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesFeaturesBatchInsert@ which the
+-- | A resource alias for @MapsEngineTablesFeaturesBatchInsert@ method which the
 -- 'TablesFeaturesBatchInsert'' request conforms to.
 type TablesFeaturesBatchInsertResource =
      "tables" :>

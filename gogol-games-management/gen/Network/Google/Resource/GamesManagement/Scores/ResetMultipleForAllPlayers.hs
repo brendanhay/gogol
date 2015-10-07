@@ -47,7 +47,7 @@ module Network.Google.Resource.GamesManagement.Scores.ResetMultipleForAllPlayers
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementScoresResetMultipleForAllPlayers@ which the
+-- | A resource alias for @GamesManagementScoresResetMultipleForAllPlayers@ method which the
 -- 'ScoresResetMultipleForAllPlayers'' request conforms to.
 type ScoresResetMultipleForAllPlayersResource =
      "scores" :>

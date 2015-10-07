@@ -50,7 +50,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersMove_foldersUpdate@ which the
+-- | A resource alias for @TagManagerAccountsContainersMove_foldersUpdate@ method which the
 -- 'AccountsContainersMoveFoldersUpdate'' request conforms to.
 type AccountsContainersMoveFoldersUpdateResource =
      "accounts" :>

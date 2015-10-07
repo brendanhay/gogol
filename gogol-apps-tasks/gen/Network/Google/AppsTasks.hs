@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference>
 module Network.Google.AppsTasks
     (
-    -- * API
+    -- * API Declaration
       AppsTasksAPI
-    , appsTasksAPI
-    , appsTasksRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** TasksTaskListsDelete
     , module Network.Google.Resource.Tasks.TaskLists.Delete
@@ -145,6 +141,7 @@ import           Network.Google.Resource.Tasks.Tasks.Update
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Tasks API service.
 type AppsTasksAPI =
      TasksInsertResource :<|> TasksListResource :<|>
        TasksPatchResource
@@ -159,6 +156,3 @@ type AppsTasksAPI =
        :<|> TaskListsGetResource
        :<|> TaskListsDeleteResource
        :<|> TaskListsUpdateResource
-
-appsTasksAPI :: Proxy AppsTasksAPI
-appsTasksAPI = Proxy

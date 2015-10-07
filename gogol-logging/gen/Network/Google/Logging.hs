@@ -19,14 +19,10 @@
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference>
 module Network.Google.Logging
     (
-    -- * API
+    -- * API Declaration
       LoggingAPI
-    , loggingAPI
-    , loggingRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** LoggingProjectsLogServicesIndexesList
     , module Network.Google.Resource.Logging.Projects.LogServices.Indexes.List
@@ -311,6 +307,7 @@ import           Network.Google.Resource.Logging.Projects.Sinks.Update
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Cloud Logging API service.
 type LoggingAPI =
      ProjectsSinksListResource :<|>
        ProjectsSinksGetResource
@@ -332,6 +329,3 @@ type LoggingAPI =
        :<|> ProjectsLogsEntriesWriteResource
        :<|> ProjectsLogsListResource
        :<|> ProjectsLogsDeleteResource
-
-loggingAPI :: Proxy LoggingAPI
-loggingAPI = Proxy

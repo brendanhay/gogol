@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.GlobalAddresses.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeGlobalAddressesGet@ which the
+-- | A resource alias for @ComputeGlobalAddressesGet@ method which the
 -- 'GlobalAddressesGet'' request conforms to.
 type GlobalAddressesGetResource =
      Capture "project" Text :>

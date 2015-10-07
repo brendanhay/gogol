@@ -47,7 +47,7 @@ module Network.Google.Resource.FusionTables.Style.Patch
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesStylePatch@ which the
+-- | A resource alias for @FusiontablesStylePatch@ method which the
 -- 'StylePatch'' request conforms to.
 type StylePatchResource =
      "tables" :>

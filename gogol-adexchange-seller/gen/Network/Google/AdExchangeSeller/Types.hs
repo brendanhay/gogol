@@ -15,7 +15,7 @@
 --
 module Network.Google.AdExchangeSeller.Types
     (
-    -- * Service URL
+    -- * Service Request
       adExchangeSellerRequest
 
     -- * AdClients
@@ -178,7 +178,7 @@ import           Network.Google.AdExchangeSeller.Types.Product
 import           Network.Google.AdExchangeSeller.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2.0' of the Ad Exchange Seller API.
+-- | Default request referring to version 'v2.0' of the Ad Exchange Seller API. This contains the host and root path used as a starting point for constructing service requests.
 adExchangeSellerRequest :: RequestBuilder
 adExchangeSellerRequest
   = defaultRequest "https://www.googleapis.com/"

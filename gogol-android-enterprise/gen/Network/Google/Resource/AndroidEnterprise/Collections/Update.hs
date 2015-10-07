@@ -47,7 +47,7 @@ module Network.Google.Resource.AndroidEnterprise.Collections.Update
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseCollectionsUpdate@ which the
+-- | A resource alias for @AndroidEnterpriseCollectionsUpdate@ method which the
 -- 'CollectionsUpdate'' request conforms to.
 type CollectionsUpdateResource =
      "enterprises" :>

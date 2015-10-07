@@ -47,7 +47,7 @@ module Network.Google.Resource.Tasks.Tasks.Clear
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTasksClear@ which the
+-- | A resource alias for @TasksTasksClear@ method which the
 -- 'TasksClear'' request conforms to.
 type TasksClearResource =
      "lists" :>

@@ -15,7 +15,7 @@
 --
 module Network.Google.Fonts.Types
     (
-    -- * Service URL
+    -- * Service Request
       fontsRequest
 
     -- * Webfont
@@ -48,7 +48,7 @@ import           Network.Google.Fonts.Types.Product
 import           Network.Google.Fonts.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Google Fonts Developer API.
+-- | Default request referring to version 'v1' of the Google Fonts Developer API. This contains the host and root path used as a starting point for constructing service requests.
 fontsRequest :: RequestBuilder
 fontsRequest
   = defaultRequest "https://www.googleapis.com/"

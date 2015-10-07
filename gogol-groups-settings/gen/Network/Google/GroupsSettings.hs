@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference>
 module Network.Google.GroupsSettings
     (
-    -- * API
+    -- * API Declaration
       GroupsSettingsAPI
-    , groupsSettingsAPI
-    , groupsSettingsRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** GroupsSettingsGroupsGet
     , module Network.Google.Resource.GroupsSettings.Groups.Get
@@ -81,9 +77,7 @@ import           Network.Google.Resource.GroupsSettings.Groups.Update
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Groups Settings API service.
 type GroupsSettingsAPI =
      GroupsPatchResource :<|> GroupsGetResource :<|>
        GroupsUpdateResource
-
-groupsSettingsAPI :: Proxy GroupsSettingsAPI
-groupsSettingsAPI = Proxy

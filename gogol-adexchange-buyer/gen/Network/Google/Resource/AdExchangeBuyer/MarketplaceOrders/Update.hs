@@ -48,7 +48,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Update
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerMarketplaceOrdersUpdate@ which the
+-- | A resource alias for @AdexchangebuyerMarketplaceOrdersUpdate@ method which the
 -- 'MarketplaceOrdersUpdate'' request conforms to.
 type MarketplaceOrdersUpdateResource =
      "marketplaceOrders" :>

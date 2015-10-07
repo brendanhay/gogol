@@ -47,7 +47,7 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFilesGet@ which the
+-- | A resource alias for @AnalyticsManagementProFilesGet@ method which the
 -- 'ManagementProFilesGet'' request conforms to.
 type ManagementProFilesGetResource =
      "management" :>

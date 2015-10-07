@@ -46,7 +46,7 @@ module Network.Google.Resource.Gmail.Users.Messages.Untrash
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersMessagesUntrash@ which the
+-- | A resource alias for @GmailUsersMessagesUntrash@ method which the
 -- 'UsersMessagesUntrash'' request conforms to.
 type UsersMessagesUntrashResource =
      Capture "userId" Text :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.Gmail.Users.Messages.Modify
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersMessagesModify@ which the
+-- | A resource alias for @GmailUsersMessagesModify@ method which the
 -- 'UsersMessagesModify'' request conforms to.
 type UsersMessagesModifyResource =
      Capture "userId" Text :>

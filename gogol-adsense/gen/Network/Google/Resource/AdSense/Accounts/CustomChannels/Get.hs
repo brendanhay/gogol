@@ -48,7 +48,7 @@ module Network.Google.Resource.AdSense.Accounts.CustomChannels.Get
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAccountsCustomChannelsGet@ which the
+-- | A resource alias for @AdsenseAccountsCustomChannelsGet@ method which the
 -- 'AccountsCustomChannelsGet'' request conforms to.
 type AccountsCustomChannelsGetResource =
      "accounts" :>

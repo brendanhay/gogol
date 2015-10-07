@@ -45,7 +45,7 @@ module Network.Google.Resource.Calendar.CalendarList.Delete
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarListDelete@ which the
+-- | A resource alias for @CalendarCalendarListDelete@ method which the
 -- 'CalendarListDelete'' request conforms to.
 type CalendarListDeleteResource =
      "users" :>

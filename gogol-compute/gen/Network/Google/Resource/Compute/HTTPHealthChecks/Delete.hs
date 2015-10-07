@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeHTTPHealthChecksDelete@ which the
+-- | A resource alias for @ComputeHTTPHealthChecksDelete@ method which the
 -- 'HTTPHealthChecksDelete'' request conforms to.
 type HTTPHealthChecksDeleteResource =
      Capture "project" Text :>

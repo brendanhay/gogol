@@ -60,7 +60,7 @@ module Network.Google.Resource.Drive.Files.Patch
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesPatch@ which the
+-- | A resource alias for @DriveFilesPatch@ method which the
 -- 'FilesPatch'' request conforms to.
 type FilesPatchResource =
      "files" :>

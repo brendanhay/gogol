@@ -46,7 +46,7 @@ module Network.Google.Resource.Blogger.Posts.Delete
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostsDelete@ which the
+-- | A resource alias for @BloggerPostsDelete@ method which the
 -- 'PostsDelete'' request conforms to.
 type PostsDeleteResource =
      "blogs" :>

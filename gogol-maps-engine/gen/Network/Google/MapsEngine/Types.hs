@@ -15,7 +15,7 @@
 --
 module Network.Google.MapsEngine.Types
     (
-    -- * Service URL
+    -- * Service Request
       mapsEngineRequest
 
     -- * ValueRange
@@ -757,7 +757,7 @@ import           Network.Google.MapsEngine.Types.Product
 import           Network.Google.MapsEngine.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Google Maps Engine API.
+-- | Default request referring to version 'v1' of the Google Maps Engine API. This contains the host and root path used as a starting point for constructing service requests.
 mapsEngineRequest :: RequestBuilder
 mapsEngineRequest
   = defaultRequest "https://www.googleapis.com/"

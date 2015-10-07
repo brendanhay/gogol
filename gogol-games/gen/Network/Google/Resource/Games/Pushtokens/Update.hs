@@ -45,7 +45,7 @@ module Network.Google.Resource.Games.Pushtokens.Update
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesPushtokensUpdate@ which the
+-- | A resource alias for @GamesPushtokensUpdate@ method which the
 -- 'PushtokensUpdate'' request conforms to.
 type PushtokensUpdateResource =
      "pushtokens" :>

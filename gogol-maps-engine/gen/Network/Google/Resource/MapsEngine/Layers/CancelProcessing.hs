@@ -45,7 +45,7 @@ module Network.Google.Resource.MapsEngine.Layers.CancelProcessing
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersCancelProcessing@ which the
+-- | A resource alias for @MapsEngineLayersCancelProcessing@ method which the
 -- 'LayersCancelProcessing'' request conforms to.
 type LayersCancelProcessingResource =
      "layers" :>

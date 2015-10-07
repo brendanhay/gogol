@@ -48,7 +48,7 @@ module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDiv
 import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CivicInfoRepresentativesRepresentativeInfoByDivision@ which the
+-- | A resource alias for @CivicInfoRepresentativesRepresentativeInfoByDivision@ method which the
 -- 'RepresentativesRepresentativeInfoByDivision'' request conforms to.
 type RepresentativesRepresentativeInfoByDivisionResource
      =

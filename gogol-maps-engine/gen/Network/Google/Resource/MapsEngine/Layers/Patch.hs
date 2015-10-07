@@ -46,7 +46,7 @@ module Network.Google.Resource.MapsEngine.Layers.Patch
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersPatch@ which the
+-- | A resource alias for @MapsEngineLayersPatch@ method which the
 -- 'LayersPatch'' request conforms to.
 type LayersPatchResource =
      "layers" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Delete
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementAccountUserLinksDelete@ which the
+-- | A resource alias for @AnalyticsManagementAccountUserLinksDelete@ method which the
 -- 'ManagementAccountUserLinksDelete'' request conforms to.
 type ManagementAccountUserLinksDeleteResource =
      "management" :>

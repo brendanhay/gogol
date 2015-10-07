@@ -47,7 +47,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Delete
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertyUserLinksDelete@ which the
+-- | A resource alias for @AnalyticsManagementWebPropertyUserLinksDelete@ method which the
 -- 'ManagementWebPropertyUserLinksDelete'' request conforms to.
 type ManagementWebPropertyUserLinksDeleteResource =
      "management" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.MapsEngine.Maps.Get
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineMapsGet@ which the
+-- | A resource alias for @MapsEngineMapsGet@ method which the
 -- 'MapsGet'' request conforms to.
 type MapsGetResource =
      "maps" :>

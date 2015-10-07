@@ -46,7 +46,7 @@ module Network.Google.Resource.Datastore.Datasets.Lookup
 import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DatastoreDatasetsLookup@ which the
+-- | A resource alias for @DatastoreDatasetsLookup@ method which the
 -- 'DatasetsLookup'' request conforms to.
 type DatasetsLookupResource =
      Capture "datasetId" Text :>

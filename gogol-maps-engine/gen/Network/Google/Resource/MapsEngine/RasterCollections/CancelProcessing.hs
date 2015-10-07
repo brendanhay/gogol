@@ -45,7 +45,7 @@ module Network.Google.Resource.MapsEngine.RasterCollections.CancelProcessing
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRasterCollectionsCancelProcessing@ which the
+-- | A resource alias for @MapsEngineRasterCollectionsCancelProcessing@ method which the
 -- 'RasterCollectionsCancelProcessing'' request conforms to.
 type RasterCollectionsCancelProcessingResource =
      "rasterCollections" :>

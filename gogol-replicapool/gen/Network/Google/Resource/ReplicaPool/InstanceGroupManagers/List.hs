@@ -50,7 +50,7 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.List
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
--- | A resource alias for @ReplicapoolInstanceGroupManagersList@ which the
+-- | A resource alias for @ReplicapoolInstanceGroupManagersList@ method which the
 -- 'InstanceGroupManagersList'' request conforms to.
 type InstanceGroupManagersListResource =
      Capture "project" Text :>

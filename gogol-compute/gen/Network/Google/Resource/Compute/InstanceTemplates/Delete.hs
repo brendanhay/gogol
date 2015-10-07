@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.InstanceTemplates.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceTemplatesDelete@ which the
+-- | A resource alias for @ComputeInstanceTemplatesDelete@ method which the
 -- 'InstanceTemplatesDelete'' request conforms to.
 type InstanceTemplatesDeleteResource =
      Capture "project" Text :>

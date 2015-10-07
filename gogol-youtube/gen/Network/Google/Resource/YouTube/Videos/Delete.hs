@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTube.Videos.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeVideosDelete@ which the
+-- | A resource alias for @YouTubeVideosDelete@ method which the
 -- 'VideosDelete'' request conforms to.
 type VideosDeleteResource =
      "videos" :>

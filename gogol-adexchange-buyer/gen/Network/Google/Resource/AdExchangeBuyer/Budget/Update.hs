@@ -48,7 +48,7 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Update
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerBudgetUpdate@ which the
+-- | A resource alias for @AdexchangebuyerBudgetUpdate@ method which the
 -- 'BudgetUpdate'' request conforms to.
 type BudgetUpdateResource =
      "billinginfo" :>

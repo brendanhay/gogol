@@ -45,7 +45,7 @@ module Network.Google.Resource.MapsEngine.Tables.Delete
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesDelete@ which the
+-- | A resource alias for @MapsEngineTablesDelete@ method which the
 -- 'TablesDelete'' request conforms to.
 type TablesDeleteResource =
      "tables" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Delete
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerMarketplaceDealsDelete@ which the
+-- | A resource alias for @AdexchangebuyerMarketplaceDealsDelete@ method which the
 -- 'MarketplaceDealsDelete'' request conforms to.
 type MarketplaceDealsDeleteResource =
      "marketplaceOrders" :>

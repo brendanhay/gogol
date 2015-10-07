@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/partners/ Google Partners API Reference>
 module Network.Google.Partners
     (
-    -- * API
+    -- * API Declaration
       PartnersAPI
-    , partnersAPI
-    , partnersRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** PartnersClientMessagesLog
     , module Network.Google.Resource.Partners.ClientMessages.Log
@@ -257,12 +253,10 @@ import           Network.Google.Resource.Partners.UserStates.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Partners API service.
 type PartnersAPI =
      UserStatesListResource :<|> UserEventsLogResource
        :<|> CompaniesLeadsCreateResource
        :<|> CompaniesListResource
        :<|> CompaniesGetResource
        :<|> ClientMessagesLogResource
-
-partnersAPI :: Proxy PartnersAPI
-partnersAPI = Proxy

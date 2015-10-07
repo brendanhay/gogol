@@ -47,7 +47,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Delete
 import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
--- | A resource alias for @TaskqueueTasksDelete@ which the
+-- | A resource alias for @TaskqueueTasksDelete@ method which the
 -- 'TasksDelete'' request conforms to.
 type TasksDeleteResource =
      Capture "project" Text :>

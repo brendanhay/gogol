@@ -49,7 +49,7 @@ module Network.Google.Resource.SQL.Databases.Patch
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLDatabasesPatch@ which the
+-- | A resource alias for @SQLDatabasesPatch@ method which the
 -- 'DatabasesPatch'' request conforms to.
 type DatabasesPatchResource =
      "projects" :>

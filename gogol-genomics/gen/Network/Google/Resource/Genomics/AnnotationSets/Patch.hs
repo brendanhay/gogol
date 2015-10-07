@@ -49,7 +49,7 @@ module Network.Google.Resource.Genomics.AnnotationSets.Patch
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsAnnotationSetsPatch@ which the
+-- | A resource alias for @GenomicsAnnotationSetsPatch@ method which the
 -- 'AnnotationSetsPatch'' request conforms to.
 type AnnotationSetsPatchResource =
      "annotationSets" :>

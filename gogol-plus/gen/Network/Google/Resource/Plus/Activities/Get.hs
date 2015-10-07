@@ -45,7 +45,7 @@ module Network.Google.Resource.Plus.Activities.Get
 import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusActivitiesGet@ which the
+-- | A resource alias for @PlusActivitiesGet@ method which the
 -- 'ActivitiesGet'' request conforms to.
 type ActivitiesGetResource =
      "activities" :>

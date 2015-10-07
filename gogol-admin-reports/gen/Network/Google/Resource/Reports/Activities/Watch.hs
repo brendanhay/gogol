@@ -55,7 +55,7 @@ module Network.Google.Resource.Reports.Activities.Watch
 import           Network.Google.Prelude
 import           Network.Google.Reports.Types
 
--- | A resource alias for @ReportsActivitiesWatch@ which the
+-- | A resource alias for @ReportsActivitiesWatch@ method which the
 -- 'ActivitiesWatch'' request conforms to.
 type ActivitiesWatchResource =
      "activity" :>

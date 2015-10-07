@@ -49,7 +49,7 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Patch
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFilesPatch@ which the
+-- | A resource alias for @AnalyticsManagementProFilesPatch@ method which the
 -- 'ManagementProFilesPatch'' request conforms to.
 type ManagementProFilesPatchResource =
      "management" :>

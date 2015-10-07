@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.Disks.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeDisksGet@ which the
+-- | A resource alias for @ComputeDisksGet@ method which the
 -- 'DisksGet'' request conforms to.
 type DisksGetResource =
      Capture "project" Text :>

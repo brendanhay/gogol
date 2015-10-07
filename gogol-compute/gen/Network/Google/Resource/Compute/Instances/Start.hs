@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.Instances.Start
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesStart@ which the
+-- | A resource alias for @ComputeInstancesStart@ method which the
 -- 'InstancesStart'' request conforms to.
 type InstancesStartResource =
      Capture "project" Text :>

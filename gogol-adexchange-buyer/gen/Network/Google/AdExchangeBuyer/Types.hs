@@ -15,7 +15,7 @@
 --
 module Network.Google.AdExchangeBuyer.Types
     (
-    -- * Service URL
+    -- * Service Request
       adExchangeBuyerRequest
 
     -- * BrandDTO
@@ -852,7 +852,7 @@ import           Network.Google.AdExchangeBuyer.Types.Product
 import           Network.Google.AdExchangeBuyer.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1.4' of the Ad Exchange Buyer API.
+-- | Default request referring to version 'v1.4' of the Ad Exchange Buyer API. This contains the host and root path used as a starting point for constructing service requests.
 adExchangeBuyerRequest :: RequestBuilder
 adExchangeBuyerRequest
   = defaultRequest "https://www.googleapis.com/"

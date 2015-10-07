@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.Firewalls.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeFirewallsDelete@ which the
+-- | A resource alias for @ComputeFirewallsDelete@ method which the
 -- 'FirewallsDelete'' request conforms to.
 type FirewallsDeleteResource =
      Capture "project" Text :>

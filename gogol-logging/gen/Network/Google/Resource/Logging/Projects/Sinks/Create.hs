@@ -53,7 +53,7 @@ module Network.Google.Resource.Logging.Projects.Sinks.Create
 import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @LoggingProjectsSinksCreate@ which the
+-- | A resource alias for @LoggingProjectsSinksCreate@ method which the
 -- 'ProjectsSinksCreate'' request conforms to.
 type ProjectsSinksCreateResource =
      "v1beta3" :>

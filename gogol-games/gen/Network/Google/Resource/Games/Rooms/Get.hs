@@ -46,7 +46,7 @@ module Network.Google.Resource.Games.Rooms.Get
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesRoomsGet@ which the
+-- | A resource alias for @GamesRoomsGet@ method which the
 -- 'RoomsGet'' request conforms to.
 type RoomsGetResource =
      "rooms" :>

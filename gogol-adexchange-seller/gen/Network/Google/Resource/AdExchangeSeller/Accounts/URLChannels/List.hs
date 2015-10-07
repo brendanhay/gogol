@@ -49,7 +49,7 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.URLChannels.List
 import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangesellerAccountsURLChannelsList@ which the
+-- | A resource alias for @AdexchangesellerAccountsURLChannelsList@ method which the
 -- 'AccountsURLChannelsList'' request conforms to.
 type AccountsURLChannelsListResource =
      "accounts" :>

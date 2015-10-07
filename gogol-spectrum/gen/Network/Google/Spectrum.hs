@@ -18,14 +18,10 @@
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference>
 module Network.Google.Spectrum
     (
-    -- * API
+    -- * API Declaration
       SpectrumAPI
-    , spectrumAPI
-    , spectrumRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** SpectrumPawsGetSpectrum
     , module Network.Google.Resource.Spectrum.Paws.GetSpectrum
@@ -329,12 +325,10 @@ import           Network.Google.Spectrum.Types
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Spectrum Database API service.
 type SpectrumAPI =
      PawsVerifyDeviceResource :<|> PawsInitResource :<|>
        PawsGetSpectrumResource
        :<|> PawsNotifySpectrumUseResource
        :<|> PawsRegisterResource
        :<|> PawsGetSpectrumBatchResource
-
-spectrumAPI :: Proxy SpectrumAPI
-spectrumAPI = Proxy

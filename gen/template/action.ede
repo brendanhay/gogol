@@ -38,7 +38,7 @@ module {{ action.ns }}
 import {{ import.value }}
 {% endfor %}
 
--- | A resource alias for @{{ action.id }}@ which the
+-- | A resource alias for @{{ action.id }}@ method which the
 -- '{{ action.type.name }}' request conforms to.
 {{ action.alias }}
 

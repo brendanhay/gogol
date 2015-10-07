@@ -54,7 +54,7 @@ module Network.Google.Resource.Storage.Objects.Patch
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsPatch@ which the
+-- | A resource alias for @StorageObjectsPatch@ method which the
 -- 'ObjectsPatch'' request conforms to.
 type ObjectsPatchResource =
      "b" :>

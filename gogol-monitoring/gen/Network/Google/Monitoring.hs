@@ -18,14 +18,10 @@
 -- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference>
 module Network.Google.Monitoring
     (
-    -- * API
+    -- * API Declaration
       MonitoringAPI
-    , monitoringAPI
-    , monitoringRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** CloudMonitoringMetricDescriptorsCreate
     , module Network.Google.Resource.CloudMonitoring.MetricDescriptors.Create
@@ -214,6 +210,7 @@ import           Network.Google.Resource.CloudMonitoring.TimeseriesDescriptors.L
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Cloud Monitoring API service.
 type MonitoringAPI =
      MetricDescriptorsListResource :<|>
        MetricDescriptorsCreateResource
@@ -221,6 +218,3 @@ type MonitoringAPI =
        :<|> TimeseriesDescriptorsListResource
        :<|> TimeseriesListResource
        :<|> TimeseriesWriteResource
-
-monitoringAPI :: Proxy MonitoringAPI
-monitoringAPI = Proxy

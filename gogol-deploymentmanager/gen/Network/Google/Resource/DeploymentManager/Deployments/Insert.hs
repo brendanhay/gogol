@@ -47,7 +47,7 @@ module Network.Google.Resource.DeploymentManager.Deployments.Insert
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerDeploymentsInsert@ which the
+-- | A resource alias for @DeploymentManagerDeploymentsInsert@ method which the
 -- 'DeploymentsInsert'' request conforms to.
 type DeploymentsInsertResource =
      Capture "project" Text :>

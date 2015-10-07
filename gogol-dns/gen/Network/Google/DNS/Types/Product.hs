@@ -331,7 +331,7 @@ data ResourceRecordSet = ResourceRecordSet
     , _rrsKind    :: !Text
     , _rrsName    :: !(Maybe Text)
     , _rrsType    :: !(Maybe Text)
-    , _rrsRrdatas :: !(Maybe [Text])
+    , _rrsRrDatas :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResourceRecordSet' with the minimum fields required to make a request.
@@ -346,7 +346,7 @@ data ResourceRecordSet = ResourceRecordSet
 --
 -- * 'rrsType'
 --
--- * 'rrsRrdatas'
+-- * 'rrsRrDatas'
 resourceRecordSet
     :: ResourceRecordSet
 resourceRecordSet =
@@ -355,7 +355,7 @@ resourceRecordSet =
     , _rrsKind = "dns#resourceRecordSet"
     , _rrsName = Nothing
     , _rrsType = Nothing
-    , _rrsRrdatas = Nothing
+    , _rrsRrDatas = Nothing
     }
 
 -- | Number of seconds that this ResourceRecordSet can be cached by
@@ -378,9 +378,9 @@ rrsType :: Lens' ResourceRecordSet (Maybe Text)
 rrsType = lens _rrsType (\ s a -> s{_rrsType = a})
 
 -- | As defined in RFC 1035 (section 5) and RFC 1034 (section 3.6.1).
-rrsRrdatas :: Lens' ResourceRecordSet [Text]
-rrsRrdatas
-  = lens _rrsRrdatas (\ s a -> s{_rrsRrdatas = a}) .
+rrsRrDatas :: Lens' ResourceRecordSet [Text]
+rrsRrDatas
+  = lens _rrsRrDatas (\ s a -> s{_rrsRrDatas = a}) .
       _Default
       . _Coerce
 
@@ -401,7 +401,7 @@ instance ToJSON ResourceRecordSet where
               (catMaybes
                  [("ttl" .=) <$> _rrsTtl, Just ("kind" .= _rrsKind),
                   ("name" .=) <$> _rrsName, ("type" .=) <$> _rrsType,
-                  ("rrdatas" .=) <$> _rrsRrdatas])
+                  ("rrdatas" .=) <$> _rrsRrDatas])
 
 -- | A zone is a subtree of the DNS namespace under one administrative
 -- responsibility. A ManagedZone is a resource that represents a DNS zone
@@ -541,7 +541,7 @@ data Quota = Quota
     , _qResourceRecordsPerRrset  :: !(Maybe Int32)
     , _qRrsetAdditionsPerChange  :: !(Maybe Int32)
     , _qManagedZones             :: !(Maybe Int32)
-    , _qTotalRrdataSizePerChange :: !(Maybe Int32)
+    , _qTotalRrDataSizePerChange :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Quota' with the minimum fields required to make a request.
@@ -560,7 +560,7 @@ data Quota = Quota
 --
 -- * 'qManagedZones'
 --
--- * 'qTotalRrdataSizePerChange'
+-- * 'qTotalRrDataSizePerChange'
 quota
     :: Quota
 quota =
@@ -571,7 +571,7 @@ quota =
     , _qResourceRecordsPerRrset = Nothing
     , _qRrsetAdditionsPerChange = Nothing
     , _qManagedZones = Nothing
-    , _qTotalRrdataSizePerChange = Nothing
+    , _qTotalRrDataSizePerChange = Nothing
     }
 
 -- | Maximum allowed number of ResourceRecordSets to delete per
@@ -613,10 +613,10 @@ qManagedZones
 
 -- | Maximum allowed size for total rrdata in one ChangesCreateRequest in
 -- bytes.
-qTotalRrdataSizePerChange :: Lens' Quota (Maybe Int32)
-qTotalRrdataSizePerChange
-  = lens _qTotalRrdataSizePerChange
-      (\ s a -> s{_qTotalRrdataSizePerChange = a})
+qTotalRrDataSizePerChange :: Lens' Quota (Maybe Int32)
+qTotalRrDataSizePerChange
+  = lens _qTotalRrDataSizePerChange
+      (\ s a -> s{_qTotalRrDataSizePerChange = a})
 
 instance FromJSON Quota where
         parseJSON
@@ -646,7 +646,7 @@ instance ToJSON Quota where
                     _qRrsetAdditionsPerChange,
                   ("managedZones" .=) <$> _qManagedZones,
                   ("totalRrdataSizePerChange" .=) <$>
-                    _qTotalRrdataSizePerChange])
+                    _qTotalRrDataSizePerChange])
 
 --
 -- /See:/ 'managedZonesListResponse' smart constructor.

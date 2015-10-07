@@ -47,7 +47,7 @@ module Network.Google.Method.OAuth2.TokenInfo
 import           Network.Google.OAuth2.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @OAuth2TokenInfo@ which the
+-- | A resource alias for @OAuth2TokenInfo@ method which the
 -- 'TokenInfo'' request conforms to.
 type TokenInfoMethod =
      "oauth2" :>

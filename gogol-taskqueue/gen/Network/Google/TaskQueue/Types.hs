@@ -15,7 +15,7 @@
 --
 module Network.Google.TaskQueue.Types
     (
-    -- * Service URL
+    -- * Service Request
       taskQueueRequest
 
     -- * Tasks2
@@ -71,7 +71,7 @@ import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types.Product
 import           Network.Google.TaskQueue.Types.Sum
 
--- | Default request referring to version 'v1beta2' of the TaskQueue API.
+-- | Default request referring to version 'v1beta2' of the TaskQueue API. This contains the host and root path used as a starting point for constructing service requests.
 taskQueueRequest :: RequestBuilder
 taskQueueRequest
   = defaultRequest "https://www.googleapis.com/"

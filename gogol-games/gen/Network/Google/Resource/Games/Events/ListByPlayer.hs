@@ -48,7 +48,7 @@ module Network.Google.Resource.Games.Events.ListByPlayer
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesEventsListByPlayer@ which the
+-- | A resource alias for @GamesEventsListByPlayer@ method which the
 -- 'EventsListByPlayer'' request conforms to.
 type EventsListByPlayerResource =
      "events" :>

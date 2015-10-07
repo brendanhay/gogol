@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.Tokens.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryTokensList@ which the
+-- | A resource alias for @DirectoryTokensList@ method which the
 -- 'TokensList'' request conforms to.
 type TokensListResource =
      "users" :>

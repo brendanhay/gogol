@@ -45,7 +45,7 @@ module Network.Google.Resource.DFAReporting.MobileCarriers.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingMobileCarriersList@ which the
+-- | A resource alias for @DfareportingMobileCarriersList@ method which the
 -- 'MobileCarriersList'' request conforms to.
 type MobileCarriersListResource =
      "userprofiles" :>

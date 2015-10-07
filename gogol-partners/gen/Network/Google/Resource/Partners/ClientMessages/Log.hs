@@ -53,7 +53,7 @@ module Network.Google.Resource.Partners.ClientMessages.Log
 import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PartnersClientMessagesLog@ which the
+-- | A resource alias for @PartnersClientMessagesLog@ method which the
 -- 'ClientMessagesLog'' request conforms to.
 type ClientMessagesLogResource =
      "v2" :>

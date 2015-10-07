@@ -52,7 +52,7 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferTransferOperationsCancel@ which the
+-- | A resource alias for @StorageTransferTransferOperationsCancel@ method which the
 -- 'TransferOperationsCancel'' request conforms to.
 type TransferOperationsCancelResource =
      "v1" :>

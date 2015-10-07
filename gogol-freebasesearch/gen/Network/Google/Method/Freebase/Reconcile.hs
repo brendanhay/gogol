@@ -50,7 +50,7 @@ module Network.Google.Method.Freebase.Reconcile
 import           Network.Google.FreebaseSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FreebaseReconcile@ which the
+-- | A resource alias for @FreebaseReconcile@ method which the
 -- 'Reconcile'' request conforms to.
 type ReconcileMethod =
      "reconcile" :>

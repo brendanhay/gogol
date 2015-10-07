@@ -50,7 +50,7 @@ module Network.Google.Resource.Drive.Files.Watch
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesWatch@ which the
+-- | A resource alias for @DriveFilesWatch@ method which the
 -- 'FilesWatch'' request conforms to.
 type FilesWatchResource =
      "files" :>

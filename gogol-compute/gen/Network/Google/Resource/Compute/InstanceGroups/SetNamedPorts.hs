@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.InstanceGroups.SetNamedPorts
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupsSetNamedPorts@ which the
+-- | A resource alias for @ComputeInstanceGroupsSetNamedPorts@ method which the
 -- 'InstanceGroupsSetNamedPorts'' request conforms to.
 type InstanceGroupsSetNamedPortsResource =
      Capture "project" Text :>

@@ -50,7 +50,7 @@ module Network.Google.Resource.Blogger.PostUserInfos.Get
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostUserInfosGet@ which the
+-- | A resource alias for @BloggerPostUserInfosGet@ method which the
 -- 'PostUserInfosGet'' request conforms to.
 type PostUserInfosGetResource =
      "users" :>

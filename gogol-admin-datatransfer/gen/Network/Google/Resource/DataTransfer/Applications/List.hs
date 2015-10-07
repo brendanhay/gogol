@@ -47,7 +47,7 @@ module Network.Google.Resource.DataTransfer.Applications.List
 import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataTransferApplicationsList@ which the
+-- | A resource alias for @DataTransferApplicationsList@ method which the
 -- 'ApplicationsList'' request conforms to.
 type ApplicationsListResource =
      "applications" :>

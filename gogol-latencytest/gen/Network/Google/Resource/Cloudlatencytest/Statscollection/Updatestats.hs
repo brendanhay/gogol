@@ -45,7 +45,7 @@ module Network.Google.Resource.Cloudlatencytest.Statscollection.Updatestats
 import           Network.Google.LatencyTest.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudlatencytestStatscollectionUpdatestats@ which the
+-- | A resource alias for @CloudlatencytestStatscollectionUpdatestats@ method which the
 -- 'StatscollectionUpdatestats'' request conforms to.
 type StatscollectionUpdatestatsResource =
      "updatestats" :>

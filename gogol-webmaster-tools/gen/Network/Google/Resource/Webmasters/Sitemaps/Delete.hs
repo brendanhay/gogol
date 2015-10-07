@@ -46,7 +46,7 @@ module Network.Google.Resource.Webmasters.Sitemaps.Delete
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersSitemapsDelete@ which the
+-- | A resource alias for @WebmastersSitemapsDelete@ method which the
 -- 'SitemapsDelete'' request conforms to.
 type SitemapsDeleteResource =
      "sites" :>

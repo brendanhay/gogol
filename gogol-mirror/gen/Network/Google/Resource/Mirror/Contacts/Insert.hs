@@ -45,7 +45,7 @@ module Network.Google.Resource.Mirror.Contacts.Insert
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorContactsInsert@ which the
+-- | A resource alias for @MirrorContactsInsert@ method which the
 -- 'ContactsInsert'' request conforms to.
 type ContactsInsertResource =
      "contacts" :>

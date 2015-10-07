@@ -50,7 +50,7 @@ module Network.Google.Resource.Autoscaler.ZoneOperations.List
 import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AutoscalerZoneOperationsList@ which the
+-- | A resource alias for @AutoscalerZoneOperationsList@ method which the
 -- 'ZoneOperationsList'' request conforms to.
 type ZoneOperationsListResource =
      Capture "project" Text :>

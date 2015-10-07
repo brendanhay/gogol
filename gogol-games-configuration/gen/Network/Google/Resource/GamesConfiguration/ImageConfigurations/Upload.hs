@@ -47,7 +47,7 @@ module Network.Google.Resource.GamesConfiguration.ImageConfigurations.Upload
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationImageConfigurationsUpload@ which the
+-- | A resource alias for @GamesConfigurationImageConfigurationsUpload@ method which the
 -- 'ImageConfigurationsUpload'' request conforms to.
 type ImageConfigurationsUploadResource =
      "images" :>

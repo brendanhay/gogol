@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/custom-search/v1/using_rest CustomSearch API Reference>
 module Network.Google.CustomSearch
     (
-    -- * API
+    -- * API Declaration
       CustomSearchAPI
-    , customSearchAPI
-    , customSearchRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** SearchCSEList
     , module Network.Google.Resource.Search.CSE.List
@@ -224,7 +220,5 @@ import           Network.Google.Resource.Search.CSE.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the CustomSearch API service.
 type CustomSearchAPI = CSEListResource
-
-customSearchAPI :: Proxy CustomSearchAPI
-customSearchAPI = Proxy

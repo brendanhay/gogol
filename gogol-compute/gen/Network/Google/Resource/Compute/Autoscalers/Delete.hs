@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.Autoscalers.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeAutoscalersDelete@ which the
+-- | A resource alias for @ComputeAutoscalersDelete@ method which the
 -- 'AutoscalersDelete'' request conforms to.
 type AutoscalersDeleteResource =
      Capture "project" Text :>

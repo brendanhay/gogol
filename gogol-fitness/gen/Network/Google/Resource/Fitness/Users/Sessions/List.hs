@@ -49,7 +49,7 @@ module Network.Google.Resource.Fitness.Users.Sessions.List
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersSessionsList@ which the
+-- | A resource alias for @FitnessUsersSessionsList@ method which the
 -- 'UsersSessionsList'' request conforms to.
 type UsersSessionsListResource =
      Capture "userId" Text :>

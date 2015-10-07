@@ -25,7 +25,7 @@
 -- specifying deleteContents. Immediately after deletion, you can create
 -- another dataset with the same name.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryDatasetsDelete@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryDatasetsDelete@.
 module Network.Google.Resource.BigQuery.Datasets.Delete
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.BigQuery.Datasets.Delete
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigqueryDatasetsDelete@ which the
+-- | A resource alias for @BigQueryDatasetsDelete@ method which the
 -- 'DatasetsDelete'' request conforms to.
 type DatasetsDeleteResource =
      "projects" :>

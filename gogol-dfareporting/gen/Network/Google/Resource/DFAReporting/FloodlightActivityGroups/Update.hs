@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFloodlightActivityGroupsUpdate@ which the
+-- | A resource alias for @DfareportingFloodlightActivityGroupsUpdate@ method which the
 -- 'FloodlightActivityGroupsUpdate'' request conforms to.
 type FloodlightActivityGroupsUpdateResource =
      "userprofiles" :>

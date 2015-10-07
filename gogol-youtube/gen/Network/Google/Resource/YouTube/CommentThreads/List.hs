@@ -55,7 +55,7 @@ module Network.Google.Resource.YouTube.CommentThreads.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCommentThreadsList@ which the
+-- | A resource alias for @YouTubeCommentThreadsList@ method which the
 -- 'CommentThreadsList'' request conforms to.
 type CommentThreadsListResource =
      "commentThreads" :>

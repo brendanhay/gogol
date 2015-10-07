@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.TargetVPNGateways.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetVPNGatewaysInsert@ which the
+-- | A resource alias for @ComputeTargetVPNGatewaysInsert@ method which the
 -- 'TargetVPNGatewaysInsert'' request conforms to.
 type TargetVPNGatewaysInsertResource =
      Capture "project" Text :>

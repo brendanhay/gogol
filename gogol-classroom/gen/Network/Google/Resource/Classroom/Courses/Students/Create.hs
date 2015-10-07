@@ -59,7 +59,7 @@ module Network.Google.Resource.Classroom.Courses.Students.Create
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesStudentsCreate@ which the
+-- | A resource alias for @ClassroomCoursesStudentsCreate@ method which the
 -- 'CoursesStudentsCreate'' request conforms to.
 type CoursesStudentsCreateResource =
      "v1" :>

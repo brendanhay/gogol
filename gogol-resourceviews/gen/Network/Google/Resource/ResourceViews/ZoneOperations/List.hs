@@ -50,7 +50,7 @@ module Network.Google.Resource.ResourceViews.ZoneOperations.List
 import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
--- | A resource alias for @ResourceviewsZoneOperationsList@ which the
+-- | A resource alias for @ResourceviewsZoneOperationsList@ method which the
 -- 'ZoneOperationsList'' request conforms to.
 type ZoneOperationsListResource =
      Capture "project" Text :>

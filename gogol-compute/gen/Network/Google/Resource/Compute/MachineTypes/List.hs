@@ -50,7 +50,7 @@ module Network.Google.Resource.Compute.MachineTypes.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeMachineTypesList@ which the
+-- | A resource alias for @ComputeMachineTypesList@ method which the
 -- 'MachineTypesList'' request conforms to.
 type MachineTypesListResource =
      Capture "project" Text :>

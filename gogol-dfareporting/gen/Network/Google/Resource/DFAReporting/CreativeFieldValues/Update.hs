@@ -47,7 +47,7 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeFieldValuesUpdate@ which the
+-- | A resource alias for @DfareportingCreativeFieldValuesUpdate@ method which the
 -- 'CreativeFieldValuesUpdate'' request conforms to.
 type CreativeFieldValuesUpdateResource =
      "userprofiles" :>

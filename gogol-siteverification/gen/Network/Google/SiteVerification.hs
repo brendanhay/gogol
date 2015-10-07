@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference>
 module Network.Google.SiteVerification
     (
-    -- * API
+    -- * API Declaration
       SiteVerificationAPI
-    , siteVerificationAPI
-    , siteVerificationRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** SiteVerificationWebResourceDelete
     , module Network.Google.Resource.SiteVerification.WebResource.Delete
@@ -102,6 +98,7 @@ import           Network.Google.SiteVerification.Types
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Site Verification API service.
 type SiteVerificationAPI =
      WebResourceInsertResource :<|>
        WebResourceListResource
@@ -110,6 +107,3 @@ type SiteVerificationAPI =
        :<|> WebResourceGetTokenResource
        :<|> WebResourceDeleteResource
        :<|> WebResourceUpdateResource
-
-siteVerificationAPI :: Proxy SiteVerificationAPI
-siteVerificationAPI = Proxy

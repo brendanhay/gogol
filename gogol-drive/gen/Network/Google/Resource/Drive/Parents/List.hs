@@ -45,7 +45,7 @@ module Network.Google.Resource.Drive.Parents.List
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveParentsList@ which the
+-- | A resource alias for @DriveParentsList@ method which the
 -- 'ParentsList'' request conforms to.
 type ParentsListResource =
      "files" :>

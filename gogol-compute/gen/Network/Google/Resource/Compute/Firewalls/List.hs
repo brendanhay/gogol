@@ -49,7 +49,7 @@ module Network.Google.Resource.Compute.Firewalls.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeFirewallsList@ which the
+-- | A resource alias for @ComputeFirewallsList@ method which the
 -- 'FirewallsList'' request conforms to.
 type FirewallsListResource =
      Capture "project" Text :>

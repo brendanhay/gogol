@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.InstanceTemplates.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceTemplatesGet@ which the
+-- | A resource alias for @ComputeInstanceTemplatesGet@ method which the
 -- 'InstanceTemplatesGet'' request conforms to.
 type InstanceTemplatesGetResource =
      Capture "project" Text :>

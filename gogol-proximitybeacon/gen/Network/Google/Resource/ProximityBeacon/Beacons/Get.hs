@@ -51,7 +51,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Get
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconBeaconsGet@ which the
+-- | A resource alias for @ProximitybeaconBeaconsGet@ method which the
 -- 'BeaconsGet'' request conforms to.
 type BeaconsGetResource =
      "v1beta1" :>

@@ -45,7 +45,7 @@ module Network.Google.Resource.Drive.Changes.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveChangesGet@ which the
+-- | A resource alias for @DriveChangesGet@ method which the
 -- 'ChangesGet'' request conforms to.
 type ChangesGetResource =
      "changes" :>

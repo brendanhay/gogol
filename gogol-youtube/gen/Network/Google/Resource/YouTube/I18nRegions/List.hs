@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTube.I18nRegions.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeI18nRegionsList@ which the
+-- | A resource alias for @YouTubeI18nRegionsList@ method which the
 -- 'I18nRegionsList'' request conforms to.
 type I18nRegionsListResource =
      "i18nRegions" :>

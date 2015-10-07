@@ -45,7 +45,7 @@ module Network.Google.Resource.DataTransfer.Applications.Get
 import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataTransferApplicationsGet@ which the
+-- | A resource alias for @DataTransferApplicationsGet@ method which the
 -- 'ApplicationsGet'' request conforms to.
 type ApplicationsGetResource =
      "applications" :>

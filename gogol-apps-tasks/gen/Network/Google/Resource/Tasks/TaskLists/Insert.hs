@@ -46,7 +46,7 @@ module Network.Google.Resource.Tasks.TaskLists.Insert
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTaskListsInsert@ which the
+-- | A resource alias for @TasksTaskListsInsert@ method which the
 -- 'TaskListsInsert'' request conforms to.
 type TaskListsInsertResource =
      "users" :>

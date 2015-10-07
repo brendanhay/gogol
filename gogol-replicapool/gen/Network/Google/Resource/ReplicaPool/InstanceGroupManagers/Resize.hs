@@ -51,7 +51,7 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Resize
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
--- | A resource alias for @ReplicapoolInstanceGroupManagersResize@ which the
+-- | A resource alias for @ReplicapoolInstanceGroupManagersResize@ method which the
 -- 'InstanceGroupManagersResize'' request conforms to.
 type InstanceGroupManagersResizeResource =
      Capture "project" Text :>

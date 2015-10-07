@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.URLMaps.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeURLMapsInsert@ which the
+-- | A resource alias for @ComputeURLMapsInsert@ method which the
 -- 'URLMapsInsert'' request conforms to.
 type URLMapsInsertResource =
      Capture "project" Text :>

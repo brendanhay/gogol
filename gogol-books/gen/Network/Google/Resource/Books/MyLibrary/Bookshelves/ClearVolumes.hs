@@ -46,7 +46,7 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryBookshelvesClearVolumes@ which the
+-- | A resource alias for @BooksMyLibraryBookshelvesClearVolumes@ method which the
 -- 'MyLibraryBookshelvesClearVolumes'' request conforms to.
 type MyLibraryBookshelvesClearVolumesResource =
      "mylibrary" :>

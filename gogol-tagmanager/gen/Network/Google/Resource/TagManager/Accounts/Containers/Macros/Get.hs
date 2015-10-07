@@ -47,7 +47,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Macros.Get
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersMacrosGet@ which the
+-- | A resource alias for @TagManagerAccountsContainersMacrosGet@ method which the
 -- 'AccountsContainersMacrosGet'' request conforms to.
 type AccountsContainersMacrosGetResource =
      "accounts" :>

@@ -45,7 +45,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.CreateAuthURI
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyCreateAuthURI@ which the
+-- | A resource alias for @IdentitytoolkitRelyingPartyCreateAuthURI@ method which the
 -- 'RelyingPartyCreateAuthURI'' request conforms to.
 type RelyingPartyCreateAuthURIResource =
      "createAuthUri" :>

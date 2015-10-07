@@ -53,7 +53,7 @@ module Network.Google.Resource.CloudResourceManager.Projects.Get
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerProjectsGet@ which the
+-- | A resource alias for @CloudResourceManagerProjectsGet@ method which the
 -- 'ProjectsGet'' request conforms to.
 type ProjectsGetResource =
      "v1beta1" :>

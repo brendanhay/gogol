@@ -54,7 +54,7 @@ module Network.Google.Resource.Drive.Files.Insert
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesInsert@ which the
+-- | A resource alias for @DriveFilesInsert@ method which the
 -- 'FilesInsert'' request conforms to.
 type FilesInsertResource =
      "files" :>

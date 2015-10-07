@@ -47,7 +47,7 @@ module Network.Google.Resource.Games.Quests.Accept
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesQuestsAccept@ which the
+-- | A resource alias for @GamesQuestsAccept@ method which the
 -- 'QuestsAccept'' request conforms to.
 type QuestsAcceptResource =
      "quests" :>

@@ -48,7 +48,7 @@ module Network.Google.Resource.AppState.States.Clear
 import           Network.Google.AppState.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppStateStatesClear@ which the
+-- | A resource alias for @AppStateStatesClear@ method which the
 -- 'StatesClear'' request conforms to.
 type StatesClearResource =
      "states" :>

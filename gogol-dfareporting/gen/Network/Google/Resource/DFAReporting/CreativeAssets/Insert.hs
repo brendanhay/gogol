@@ -48,7 +48,7 @@ module Network.Google.Resource.DFAReporting.CreativeAssets.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeAssetsInsert@ which the
+-- | A resource alias for @DfareportingCreativeAssetsInsert@ method which the
 -- 'CreativeAssetsInsert'' request conforms to.
 type CreativeAssetsInsertResource =
      "userprofiles" :>

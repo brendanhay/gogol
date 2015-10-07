@@ -56,7 +56,7 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsSubscriptionsAcknowledge@ which the
+-- | A resource alias for @PubsubProjectsSubscriptionsAcknowledge@ method which the
 -- 'ProjectsSubscriptionsAcknowledge'' request conforms to.
 type ProjectsSubscriptionsAcknowledgeResource =
      "v1beta2" :>

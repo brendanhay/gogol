@@ -15,7 +15,7 @@
 --
 module Network.Google.AppsActivity.Types
     (
-    -- * Service URL
+    -- * Service Request
       appsActivityRequest
 
     -- * Parent
@@ -116,7 +116,7 @@ import           Network.Google.AppsActivity.Types.Product
 import           Network.Google.AppsActivity.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Google Apps Activity API.
+-- | Default request referring to version 'v1' of the Google Apps Activity API. This contains the host and root path used as a starting point for constructing service requests.
 appsActivityRequest :: RequestBuilder
 appsActivityRequest
   = defaultRequest "https://www.googleapis.com/"

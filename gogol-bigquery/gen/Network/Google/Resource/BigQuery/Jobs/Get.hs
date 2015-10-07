@@ -24,7 +24,7 @@
 -- for a six month period after creation. Requires that you\'re the person
 -- who ran the job, or have the Is Owner project role.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryJobsGet@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryJobsGet@.
 module Network.Google.Resource.BigQuery.Jobs.Get
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.BigQuery.Jobs.Get
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigqueryJobsGet@ which the
+-- | A resource alias for @BigQueryJobsGet@ method which the
 -- 'JobsGet'' request conforms to.
 type JobsGetResource =
      "projects" :>

@@ -45,7 +45,7 @@ module Network.Google.Resource.AppState.States.List
 import           Network.Google.AppState.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppStateStatesList@ which the
+-- | A resource alias for @AppStateStatesList@ method which the
 -- 'StatesList'' request conforms to.
 type StatesListResource =
      "states" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.PlusDomains.Circles.Patch
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsCirclesPatch@ which the
+-- | A resource alias for @PlusDomainsCirclesPatch@ method which the
 -- 'CirclesPatch'' request conforms to.
 type CirclesPatchResource =
      "circles" :>

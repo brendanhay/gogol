@@ -46,7 +46,7 @@ module Network.Google.Resource.Spectrum.Paws.GetSpectrumBatch
 import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
--- | A resource alias for @SpectrumPawsGetSpectrumBatch@ which the
+-- | A resource alias for @SpectrumPawsGetSpectrumBatch@ method which the
 -- 'PawsGetSpectrumBatch'' request conforms to.
 type PawsGetSpectrumBatchResource =
      "getSpectrumBatch" :>

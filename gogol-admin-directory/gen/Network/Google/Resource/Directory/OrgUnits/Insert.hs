@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.OrgUnits.Insert
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryOrgUnitsInsert@ which the
+-- | A resource alias for @DirectoryOrgUnitsInsert@ method which the
 -- 'OrgUnitsInsert'' request conforms to.
 type OrgUnitsInsertResource =
      "customer" :>

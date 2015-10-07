@@ -56,7 +56,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconBeaconsDiagnosticsList@ which the
+-- | A resource alias for @ProximitybeaconBeaconsDiagnosticsList@ method which the
 -- 'BeaconsDiagnosticsList'' request conforms to.
 type BeaconsDiagnosticsListResource =
      "v1beta1" :>

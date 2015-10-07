@@ -53,7 +53,7 @@ module Network.Google.Resource.Fitness.Users.DataSources.Create
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersDataSourcesCreate@ which the
+-- | A resource alias for @FitnessUsersDataSourcesCreate@ method which the
 -- 'UsersDataSourcesCreate'' request conforms to.
 type UsersDataSourcesCreateResource =
      Capture "userId" Text :>

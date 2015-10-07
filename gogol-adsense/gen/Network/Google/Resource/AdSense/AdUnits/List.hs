@@ -48,7 +48,7 @@ module Network.Google.Resource.AdSense.AdUnits.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAdUnitsList@ which the
+-- | A resource alias for @AdsenseAdUnitsList@ method which the
 -- 'AdUnitsList'' request conforms to.
 type AdUnitsListResource =
      "adclients" :>

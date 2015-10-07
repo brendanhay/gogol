@@ -47,7 +47,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Update
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAccountsAdUnitsUpdate@ which the
+-- | A resource alias for @AdsensehostAccountsAdUnitsUpdate@ method which the
 -- 'AccountsAdUnitsUpdate'' request conforms to.
 type AccountsAdUnitsUpdateResource =
      "accounts" :>

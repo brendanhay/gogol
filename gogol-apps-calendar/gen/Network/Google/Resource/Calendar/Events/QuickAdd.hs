@@ -47,7 +47,7 @@ module Network.Google.Resource.Calendar.Events.QuickAdd
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarEventsQuickAdd@ which the
+-- | A resource alias for @CalendarEventsQuickAdd@ method which the
 -- 'EventsQuickAdd'' request conforms to.
 type EventsQuickAddResource =
      "calendars" :>

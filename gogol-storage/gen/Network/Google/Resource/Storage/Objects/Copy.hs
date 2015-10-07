@@ -60,7 +60,7 @@ module Network.Google.Resource.Storage.Objects.Copy
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsCopy@ which the
+-- | A resource alias for @StorageObjectsCopy@ method which the
 -- 'ObjectsCopy'' request conforms to.
 type ObjectsCopyResource =
      "b" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.SQL.Instances.Get
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesGet@ which the
+-- | A resource alias for @SQLInstancesGet@ method which the
 -- 'InstancesGet'' request conforms to.
 type InstancesGetResource =
      "projects" :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingContentCategoriesDelete@ which the
+-- | A resource alias for @DfareportingContentCategoriesDelete@ method which the
 -- 'ContentCategoriesDelete'' request conforms to.
 type ContentCategoriesDeleteResource =
      "userprofiles" :>

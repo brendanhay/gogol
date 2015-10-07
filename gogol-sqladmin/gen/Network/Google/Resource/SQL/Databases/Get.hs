@@ -48,7 +48,7 @@ module Network.Google.Resource.SQL.Databases.Get
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLDatabasesGet@ which the
+-- | A resource alias for @SQLDatabasesGet@ method which the
 -- 'DatabasesGet'' request conforms to.
 type DatabasesGetResource =
      "projects" :>

@@ -49,7 +49,7 @@ module Network.Google.Resource.Compute.Routes.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeRoutesList@ which the
+-- | A resource alias for @ComputeRoutesList@ method which the
 -- 'RoutesList'' request conforms to.
 type RoutesListResource =
      Capture "project" Text :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.Mirror.Timeline.Patch
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorTimelinePatch@ which the
+-- | A resource alias for @MirrorTimelinePatch@ method which the
 -- 'TimelinePatch'' request conforms to.
 type TimelinePatchResource =
      "timeline" :>

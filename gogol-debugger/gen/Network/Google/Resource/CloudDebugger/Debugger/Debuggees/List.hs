@@ -52,7 +52,7 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.List
 import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudDebuggerDebuggerDebuggeesList@ which the
+-- | A resource alias for @CloudDebuggerDebuggerDebuggeesList@ method which the
 -- 'DebuggerDebuggeesList'' request conforms to.
 type DebuggerDebuggeesListResource =
      "v2" :>

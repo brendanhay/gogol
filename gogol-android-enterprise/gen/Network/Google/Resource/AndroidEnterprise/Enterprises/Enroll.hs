@@ -46,7 +46,7 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEnterprisesEnroll@ which the
+-- | A resource alias for @AndroidEnterpriseEnterprisesEnroll@ method which the
 -- 'EnterprisesEnroll'' request conforms to.
 type EnterprisesEnrollResource =
      "enterprises" :>

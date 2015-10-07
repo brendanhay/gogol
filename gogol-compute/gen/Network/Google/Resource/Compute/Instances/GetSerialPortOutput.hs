@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.Instances.GetSerialPortOutput
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesGetSerialPortOutput@ which the
+-- | A resource alias for @ComputeInstancesGetSerialPortOutput@ method which the
 -- 'InstancesGetSerialPortOutput'' request conforms to.
 type InstancesGetSerialPortOutputResource =
      Capture "project" Text :>

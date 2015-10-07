@@ -47,7 +47,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Validate
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsValidate@ which the
+-- | A resource alias for @AndroidPublisherEditsValidate@ method which the
 -- 'EditsValidate'' request conforms to.
 type EditsValidateResource =
      Capture "packageName" Text :>

@@ -22,7 +22,7 @@
 --
 -- | Creates a new, empty table in the dataset.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryTablesInsert@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryTablesInsert@.
 module Network.Google.Resource.BigQuery.Tables.Insert
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.BigQuery.Tables.Insert
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigqueryTablesInsert@ which the
+-- | A resource alias for @BigQueryTablesInsert@ method which the
 -- 'TablesInsert'' request conforms to.
 type TablesInsertResource =
      "projects" :>

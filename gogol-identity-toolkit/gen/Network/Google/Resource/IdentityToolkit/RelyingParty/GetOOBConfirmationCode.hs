@@ -45,7 +45,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.GetOOBConfirmationCo
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyGetOOBConfirmationCode@ which the
+-- | A resource alias for @IdentitytoolkitRelyingPartyGetOOBConfirmationCode@ method which the
 -- 'RelyingPartyGetOOBConfirmationCode'' request conforms to.
 type RelyingPartyGetOOBConfirmationCodeResource =
      "getOobConfirmationCode" :>

@@ -51,7 +51,7 @@ module Network.Google.Resource.Drive.Changes.Watch
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveChangesWatch@ which the
+-- | A resource alias for @DriveChangesWatch@ method which the
 -- 'ChangesWatch'' request conforms to.
 type ChangesWatchResource =
      "changes" :>

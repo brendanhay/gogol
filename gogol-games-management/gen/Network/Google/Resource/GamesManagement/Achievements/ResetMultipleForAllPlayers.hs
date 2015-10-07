@@ -47,7 +47,7 @@ module Network.Google.Resource.GamesManagement.Achievements.ResetMultipleForAllP
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementAchievementsResetMultipleForAllPlayers@ which the
+-- | A resource alias for @GamesManagementAchievementsResetMultipleForAllPlayers@ method which the
 -- 'AchievementsResetMultipleForAllPlayers'' request conforms to.
 type AchievementsResetMultipleForAllPlayersResource =
      "achievements" :>

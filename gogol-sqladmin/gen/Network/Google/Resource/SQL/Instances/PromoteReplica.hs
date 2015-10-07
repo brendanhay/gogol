@@ -47,7 +47,7 @@ module Network.Google.Resource.SQL.Instances.PromoteReplica
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesPromoteReplica@ which the
+-- | A resource alias for @SQLInstancesPromoteReplica@ method which the
 -- 'InstancesPromoteReplica'' request conforms to.
 type InstancesPromoteReplicaResource =
      "projects" :>

@@ -50,7 +50,7 @@ module Network.Google.Resource.Analytics.Management.Goals.Patch
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementGoalsPatch@ which the
+-- | A resource alias for @AnalyticsManagementGoalsPatch@ method which the
 -- 'ManagementGoalsPatch'' request conforms to.
 type ManagementGoalsPatchResource =
      "management" :>

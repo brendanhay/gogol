@@ -48,7 +48,7 @@ module Network.Google.Resource.Analytics.Management.Uploads.DeleteUploadData
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementUploadsDeleteUploadData@ which the
+-- | A resource alias for @AnalyticsManagementUploadsDeleteUploadData@ method which the
 -- 'ManagementUploadsDeleteUploadData'' request conforms to.
 type ManagementUploadsDeleteUploadDataResource =
      "management" :>

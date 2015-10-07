@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference>
 module Network.Google.Compute
     (
-    -- * API
+    -- * API Declaration
       ComputeAPI
-    , computeAPI
-    , computeRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** ComputeAddressesAggregatedList
     , module Network.Google.Resource.Compute.Addresses.AggregatedList
@@ -2458,6 +2454,7 @@ import           Network.Google.Resource.Compute.Zones.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Compute Engine API service.
 type ComputeAPI =
      ImagesInsertResource :<|> ImagesListResource :<|>
        ImagesGetResource
@@ -2633,6 +2630,3 @@ type ComputeAPI =
        :<|> TargetPoolsAddInstanceResource
        :<|> TargetPoolsAddHealthCheckResource
        :<|> TargetPoolsDeleteResource
-
-computeAPI :: Proxy ComputeAPI
-computeAPI = Proxy

@@ -49,7 +49,7 @@ module Network.Google.Resource.Compute.Instances.SetMetadata
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesSetMetadata@ which the
+-- | A resource alias for @ComputeInstancesSetMetadata@ method which the
 -- 'InstancesSetMetadata'' request conforms to.
 type InstancesSetMetadataResource =
      Capture "project" Text :>

@@ -56,7 +56,7 @@ module Network.Google.Resource.Classroom.Courses.Students.Delete
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesStudentsDelete@ which the
+-- | A resource alias for @ClassroomCoursesStudentsDelete@ method which the
 -- 'CoursesStudentsDelete'' request conforms to.
 type CoursesStudentsDeleteResource =
      "v1" :>

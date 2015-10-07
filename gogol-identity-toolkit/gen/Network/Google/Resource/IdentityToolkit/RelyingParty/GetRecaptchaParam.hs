@@ -44,7 +44,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.GetRecaptchaParam
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyGetRecaptchaParam@ which the
+-- | A resource alias for @IdentitytoolkitRelyingPartyGetRecaptchaParam@ method which the
 -- 'RelyingPartyGetRecaptchaParam'' request conforms to.
 type RelyingPartyGetRecaptchaParamResource =
      "getRecaptchaParam" :>

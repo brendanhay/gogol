@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference>
 module Network.Google.AppState
     (
-    -- * API
+    -- * API Declaration
       AppStateAPI
-    , appStateAPI
-    , appStateRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** AppStateStatesClear
     , module Network.Google.Resource.AppState.States.Clear
@@ -85,11 +81,9 @@ import           Network.Google.Resource.AppState.States.Update
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google App State API service.
 type AppStateAPI =
      StatesListResource :<|> StatesGetResource :<|>
        StatesClearResource
        :<|> StatesDeleteResource
        :<|> StatesUpdateResource
-
-appStateAPI :: Proxy AppStateAPI
-appStateAPI = Proxy

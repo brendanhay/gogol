@@ -45,7 +45,7 @@ module Network.Google.Resource.Directory.VerificationCodes.Generate
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryVerificationCodesGenerate@ which the
+-- | A resource alias for @DirectoryVerificationCodesGenerate@ method which the
 -- 'VerificationCodesGenerate'' request conforms to.
 type VerificationCodesGenerateResource =
      "users" :>

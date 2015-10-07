@@ -47,7 +47,7 @@ module Network.Google.Resource.Tasks.TaskLists.Patch
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTaskListsPatch@ which the
+-- | A resource alias for @TasksTaskListsPatch@ method which the
 -- 'TaskListsPatch'' request conforms to.
 type TaskListsPatchResource =
      "users" :>

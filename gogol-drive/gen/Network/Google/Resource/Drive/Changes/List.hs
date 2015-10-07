@@ -50,7 +50,7 @@ module Network.Google.Resource.Drive.Changes.List
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveChangesList@ which the
+-- | A resource alias for @DriveChangesList@ method which the
 -- 'ChangesList'' request conforms to.
 type ChangesListResource =
      "changes" :>

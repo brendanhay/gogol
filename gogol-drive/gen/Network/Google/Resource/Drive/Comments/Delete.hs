@@ -46,7 +46,7 @@ module Network.Google.Resource.Drive.Comments.Delete
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveCommentsDelete@ which the
+-- | A resource alias for @DriveCommentsDelete@ method which the
 -- 'CommentsDelete'' request conforms to.
 type CommentsDeleteResource =
      "files" :>

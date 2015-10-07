@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.PlatformTypes.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPlatformTypesGet@ which the
+-- | A resource alias for @DfareportingPlatformTypesGet@ method which the
 -- 'PlatformTypesGet'' request conforms to.
 type PlatformTypesGetResource =
      "userprofiles" :>

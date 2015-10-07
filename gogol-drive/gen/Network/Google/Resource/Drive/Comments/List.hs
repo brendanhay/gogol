@@ -49,7 +49,7 @@ module Network.Google.Resource.Drive.Comments.List
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveCommentsList@ which the
+-- | A resource alias for @DriveCommentsList@ method which the
 -- 'CommentsList'' request conforms to.
 type CommentsListResource =
      "files" :>

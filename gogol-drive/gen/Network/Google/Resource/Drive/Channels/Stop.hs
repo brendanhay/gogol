@@ -45,7 +45,7 @@ module Network.Google.Resource.Drive.Channels.Stop
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveChannelsStop@ which the
+-- | A resource alias for @DriveChannelsStop@ method which the
 -- 'ChannelsStop'' request conforms to.
 type ChannelsStopResource =
      "channels" :>

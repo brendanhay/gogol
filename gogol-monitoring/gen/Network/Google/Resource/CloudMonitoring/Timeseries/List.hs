@@ -59,7 +59,7 @@ module Network.Google.Resource.CloudMonitoring.Timeseries.List
 import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudMonitoringTimeseriesList@ which the
+-- | A resource alias for @CloudMonitoringTimeseriesList@ method which the
 -- 'TimeseriesList'' request conforms to.
 type TimeseriesListResource =
      Capture "project" Text :>

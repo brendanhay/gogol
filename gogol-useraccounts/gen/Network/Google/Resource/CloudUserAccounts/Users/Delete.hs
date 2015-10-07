@@ -46,7 +46,7 @@ module Network.Google.Resource.CloudUserAccounts.Users.Delete
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsUsersDelete@ which the
+-- | A resource alias for @CloudUserAccountsUsersDelete@ method which the
 -- 'UsersDelete'' request conforms to.
 type UsersDeleteResource =
      Capture "project" Text :>

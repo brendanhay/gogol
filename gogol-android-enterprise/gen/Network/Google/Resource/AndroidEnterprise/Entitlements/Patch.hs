@@ -50,7 +50,7 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Patch
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEntitlementsPatch@ which the
+-- | A resource alias for @AndroidEnterpriseEntitlementsPatch@ method which the
 -- 'EntitlementsPatch'' request conforms to.
 type EntitlementsPatchResource =
      "enterprises" :>

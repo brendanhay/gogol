@@ -49,7 +49,7 @@ module Network.Google.Resource.AndroidPublisher.InAppProducts.Patch
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherInAppProductsPatch@ which the
+-- | A resource alias for @AndroidPublisherInAppProductsPatch@ method which the
 -- 'InAppProductsPatch'' request conforms to.
 type InAppProductsPatchResource =
      Capture "packageName" Text :>

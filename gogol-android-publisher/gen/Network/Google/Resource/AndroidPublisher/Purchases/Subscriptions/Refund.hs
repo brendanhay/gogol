@@ -48,7 +48,7 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Refund
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherPurchasesSubscriptionsRefund@ which the
+-- | A resource alias for @AndroidPublisherPurchasesSubscriptionsRefund@ method which the
 -- 'PurchasesSubscriptionsRefund'' request conforms to.
 type PurchasesSubscriptionsRefundResource =
      Capture "packageName" Text :>

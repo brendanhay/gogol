@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.Schemas.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectorySchemasDelete@ which the
+-- | A resource alias for @DirectorySchemasDelete@ method which the
 -- 'SchemasDelete'' request conforms to.
 type SchemasDeleteResource =
      "customer" :>

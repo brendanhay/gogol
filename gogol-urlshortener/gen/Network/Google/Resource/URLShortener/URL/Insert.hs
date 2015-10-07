@@ -45,7 +45,7 @@ module Network.Google.Resource.URLShortener.URL.Insert
 import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types
 
--- | A resource alias for @URLshortenerURLInsert@ which the
+-- | A resource alias for @URLshortenerURLInsert@ method which the
 -- 'URLInsert'' request conforms to.
 type URLInsertResource =
      "url" :>

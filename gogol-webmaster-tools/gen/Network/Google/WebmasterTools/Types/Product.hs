@@ -245,77 +245,78 @@ instance ToJSON URLCrawlErrorCountsPerType where
                   ("category" .=) <$> _ucecptCategory])
 
 --
--- /See:/ 'apidataRow' smart constructor.
-data APIdataRow = APIdataRow
-    { _arImpressions :: !(Maybe Double)
-    , _arKeys        :: !(Maybe [Text])
-    , _arCtr         :: !(Maybe Double)
-    , _arClicks      :: !(Maybe Double)
-    , _arPosition    :: !(Maybe Double)
+-- /See:/ 'apiDataRow' smart constructor.
+data APIDataRow = APIDataRow
+    { _adrImpressions :: !(Maybe Double)
+    , _adrKeys        :: !(Maybe [Text])
+    , _adrCtr         :: !(Maybe Double)
+    , _adrClicks      :: !(Maybe Double)
+    , _adrPosition    :: !(Maybe Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'APIdataRow' with the minimum fields required to make a request.
+-- | Creates a value of 'APIDataRow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'arImpressions'
+-- * 'adrImpressions'
 --
--- * 'arKeys'
+-- * 'adrKeys'
 --
--- * 'arCtr'
+-- * 'adrCtr'
 --
--- * 'arClicks'
+-- * 'adrClicks'
 --
--- * 'arPosition'
-apidataRow
-    :: APIdataRow
-apidataRow =
-    APIdataRow
-    { _arImpressions = Nothing
-    , _arKeys = Nothing
-    , _arCtr = Nothing
-    , _arClicks = Nothing
-    , _arPosition = Nothing
+-- * 'adrPosition'
+apiDataRow
+    :: APIDataRow
+apiDataRow =
+    APIDataRow
+    { _adrImpressions = Nothing
+    , _adrKeys = Nothing
+    , _adrCtr = Nothing
+    , _adrClicks = Nothing
+    , _adrPosition = Nothing
     }
 
-arImpressions :: Lens' APIdataRow (Maybe Double)
-arImpressions
-  = lens _arImpressions
-      (\ s a -> s{_arImpressions = a})
+adrImpressions :: Lens' APIDataRow (Maybe Double)
+adrImpressions
+  = lens _adrImpressions
+      (\ s a -> s{_adrImpressions = a})
 
-arKeys :: Lens' APIdataRow [Text]
-arKeys
-  = lens _arKeys (\ s a -> s{_arKeys = a}) . _Default .
-      _Coerce
+adrKeys :: Lens' APIDataRow [Text]
+adrKeys
+  = lens _adrKeys (\ s a -> s{_adrKeys = a}) . _Default
+      . _Coerce
 
-arCtr :: Lens' APIdataRow (Maybe Double)
-arCtr = lens _arCtr (\ s a -> s{_arCtr = a})
+adrCtr :: Lens' APIDataRow (Maybe Double)
+adrCtr = lens _adrCtr (\ s a -> s{_adrCtr = a})
 
-arClicks :: Lens' APIdataRow (Maybe Double)
-arClicks = lens _arClicks (\ s a -> s{_arClicks = a})
+adrClicks :: Lens' APIDataRow (Maybe Double)
+adrClicks
+  = lens _adrClicks (\ s a -> s{_adrClicks = a})
 
-arPosition :: Lens' APIdataRow (Maybe Double)
-arPosition
-  = lens _arPosition (\ s a -> s{_arPosition = a})
+adrPosition :: Lens' APIDataRow (Maybe Double)
+adrPosition
+  = lens _adrPosition (\ s a -> s{_adrPosition = a})
 
-instance FromJSON APIdataRow where
+instance FromJSON APIDataRow where
         parseJSON
-          = withObject "APIdataRow"
+          = withObject "APIDataRow"
               (\ o ->
-                 APIdataRow <$>
+                 APIDataRow <$>
                    (o .:? "impressions") <*> (o .:? "keys" .!= mempty)
                      <*> (o .:? "ctr")
                      <*> (o .:? "clicks")
                      <*> (o .:? "position"))
 
-instance ToJSON APIdataRow where
-        toJSON APIdataRow{..}
+instance ToJSON APIDataRow where
+        toJSON APIDataRow{..}
           = object
               (catMaybes
-                 [("impressions" .=) <$> _arImpressions,
-                  ("keys" .=) <$> _arKeys, ("ctr" .=) <$> _arCtr,
-                  ("clicks" .=) <$> _arClicks,
-                  ("position" .=) <$> _arPosition])
+                 [("impressions" .=) <$> _adrImpressions,
+                  ("keys" .=) <$> _adrKeys, ("ctr" .=) <$> _adrCtr,
+                  ("clicks" .=) <$> _adrClicks,
+                  ("position" .=) <$> _adrPosition])
 
 --
 -- /See:/ 'apidimensionFilter' smart constructor.
@@ -426,7 +427,7 @@ instance ToJSON URLCrawlErrorCount where
 --
 -- /See:/ 'searchAnalyticsQueryResponse' smart constructor.
 data SearchAnalyticsQueryResponse = SearchAnalyticsQueryResponse
-    { _saqrRows                    :: !(Maybe [APIdataRow])
+    { _saqrRows                    :: !(Maybe [APIDataRow])
     , _saqrResponseAggregationType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -447,7 +448,7 @@ searchAnalyticsQueryResponse =
 
 -- | A list of rows grouped by the key values in the order given in the
 -- query.
-saqrRows :: Lens' SearchAnalyticsQueryResponse [APIdataRow]
+saqrRows :: Lens' SearchAnalyticsQueryResponse [APIDataRow]
 saqrRows
   = lens _saqrRows (\ s a -> s{_saqrRows = a}) .
       _Default

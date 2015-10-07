@@ -45,7 +45,7 @@ module Network.Google.Resource.Analytics.Metadata.Columns.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsMetadataColumnsList@ which the
+-- | A resource alias for @AnalyticsMetadataColumnsList@ method which the
 -- 'MetadataColumnsList'' request conforms to.
 type MetadataColumnsListResource =
      "metadata" :>

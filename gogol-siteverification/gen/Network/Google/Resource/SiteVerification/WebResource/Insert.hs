@@ -46,7 +46,7 @@ module Network.Google.Resource.SiteVerification.WebResource.Insert
 import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
--- | A resource alias for @SiteVerificationWebResourceInsert@ which the
+-- | A resource alias for @SiteVerificationWebResourceInsert@ method which the
 -- 'WebResourceInsert'' request conforms to.
 type WebResourceInsertResource =
      "webResource" :>

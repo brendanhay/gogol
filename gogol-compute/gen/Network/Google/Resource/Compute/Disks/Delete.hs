@@ -50,7 +50,7 @@ module Network.Google.Resource.Compute.Disks.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeDisksDelete@ which the
+-- | A resource alias for @ComputeDisksDelete@ method which the
 -- 'DisksDelete'' request conforms to.
 type DisksDeleteResource =
      Capture "project" Text :>

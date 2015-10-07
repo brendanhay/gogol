@@ -46,7 +46,7 @@ module Network.Google.Resource.Content.Orders.Get
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersGet@ which the
+-- | A resource alias for @ContentOrdersGet@ method which the
 -- 'OrdersGet'' request conforms to.
 type OrdersGetResource =
      Capture "merchantId" Word64 :>

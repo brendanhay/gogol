@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.GlobalOperations.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeGlobalOperationsAggregatedList@ which the
+-- | A resource alias for @ComputeGlobalOperationsAggregatedList@ method which the
 -- 'GlobalOperationsAggregatedList'' request conforms to.
 type GlobalOperationsAggregatedListResource =
      Capture "project" Text :>

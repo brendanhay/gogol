@@ -15,7 +15,7 @@
 --
 module Network.Google.ResourceManager.Types
     (
-    -- * Service URL
+    -- * Service Request
       resourceManagerRequest
 
     -- * ResourceId
@@ -104,7 +104,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types.Product
 import           Network.Google.ResourceManager.Types.Sum
 
--- | Default request referring to version 'v1beta1' of the Google Cloud Resource Manager API.
+-- | Default request referring to version 'v1beta1' of the Google Cloud Resource Manager API. This contains the host and root path used as a starting point for constructing service requests.
 resourceManagerRequest :: RequestBuilder
 resourceManagerRequest
   = defaultRequest

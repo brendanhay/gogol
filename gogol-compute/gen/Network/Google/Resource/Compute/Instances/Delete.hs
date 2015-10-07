@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.Instances.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesDelete@ which the
+-- | A resource alias for @ComputeInstancesDelete@ method which the
 -- 'InstancesDelete'' request conforms to.
 type InstancesDeleteResource =
      Capture "project" Text :>

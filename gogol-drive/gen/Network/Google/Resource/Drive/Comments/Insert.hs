@@ -46,7 +46,7 @@ module Network.Google.Resource.Drive.Comments.Insert
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveCommentsInsert@ which the
+-- | A resource alias for @DriveCommentsInsert@ method which the
 -- 'CommentsInsert'' request conforms to.
 type CommentsInsertResource =
      "files" :>

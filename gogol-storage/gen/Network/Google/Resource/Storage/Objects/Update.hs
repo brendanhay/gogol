@@ -53,7 +53,7 @@ module Network.Google.Resource.Storage.Objects.Update
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsUpdate@ which the
+-- | A resource alias for @StorageObjectsUpdate@ method which the
 -- 'ObjectsUpdate'' request conforms to.
 type ObjectsUpdateResource =
      "b" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.FusionTables.Query.SQLGet
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesQuerySQLGet@ which the
+-- | A resource alias for @FusiontablesQuerySQLGet@ method which the
 -- 'QuerySQLGet'' request conforms to.
 type QuerySQLGetResource =
      "query" :>

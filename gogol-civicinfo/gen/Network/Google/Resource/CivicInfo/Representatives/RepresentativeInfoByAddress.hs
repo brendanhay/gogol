@@ -49,7 +49,7 @@ module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAdd
 import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CivicInfoRepresentativesRepresentativeInfoByAddress@ which the
+-- | A resource alias for @CivicInfoRepresentativesRepresentativeInfoByAddress@ method which the
 -- 'RepresentativesRepresentativeInfoByAddress'' request conforms to.
 type RepresentativesRepresentativeInfoByAddressResource
      =

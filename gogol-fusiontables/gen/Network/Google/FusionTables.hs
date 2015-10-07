@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference>
 module Network.Google.FusionTables
     (
-    -- * API
+    -- * API Declaration
       FusionTablesAPI
-    , fusionTablesAPI
-    , fusionTablesRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** FusiontablesColumnDelete
     , module Network.Google.Resource.FusionTables.Column.Delete
@@ -373,6 +369,7 @@ import           Network.Google.Resource.FusionTables.Template.Update
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Fusion Tables API service.
 type FusionTablesAPI =
      StyleInsertResource :<|> StyleListResource :<|>
        StylePatchResource
@@ -406,6 +403,3 @@ type FusionTablesAPI =
        :<|> TableImportRowsResource
        :<|> TableDeleteResource
        :<|> TableUpdateResource
-
-fusionTablesAPI :: Proxy FusionTablesAPI
-fusionTablesAPI = Proxy

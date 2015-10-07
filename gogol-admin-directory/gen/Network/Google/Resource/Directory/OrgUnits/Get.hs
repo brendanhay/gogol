@@ -46,7 +46,7 @@ module Network.Google.Resource.Directory.OrgUnits.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryOrgUnitsGet@ which the
+-- | A resource alias for @DirectoryOrgUnitsGet@ method which the
 -- 'OrgUnitsGet'' request conforms to.
 type OrgUnitsGetResource =
      "customer" :>

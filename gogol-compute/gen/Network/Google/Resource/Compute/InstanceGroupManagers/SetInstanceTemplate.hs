@@ -50,7 +50,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.SetInstanceTemplate
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersSetInstanceTemplate@ which the
+-- | A resource alias for @ComputeInstanceGroupManagersSetInstanceTemplate@ method which the
 -- 'InstanceGroupManagersSetInstanceTemplate'' request conforms to.
 type InstanceGroupManagersSetInstanceTemplateResource
      =

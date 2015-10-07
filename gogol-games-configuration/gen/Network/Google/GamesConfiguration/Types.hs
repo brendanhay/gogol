@@ -15,7 +15,7 @@
 --
 module Network.Google.GamesConfiguration.Types
     (
-    -- * Service URL
+    -- * Service Request
       gamesConfigurationRequest
 
     -- * ImageConfiguration
@@ -122,7 +122,7 @@ import           Network.Google.GamesConfiguration.Types.Product
 import           Network.Google.GamesConfiguration.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1configuration' of the Google Play Game Services Publishing API.
+-- | Default request referring to version 'v1configuration' of the Google Play Game Services Publishing API. This contains the host and root path used as a starting point for constructing service requests.
 gamesConfigurationRequest :: RequestBuilder
 gamesConfigurationRequest
   = defaultRequest "https://www.googleapis.com/"

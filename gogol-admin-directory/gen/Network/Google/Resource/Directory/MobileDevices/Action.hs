@@ -47,7 +47,7 @@ module Network.Google.Resource.Directory.MobileDevices.Action
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryMobileDevicesAction@ which the
+-- | A resource alias for @DirectoryMobileDevicesAction@ method which the
 -- 'MobileDevicesAction'' request conforms to.
 type MobileDevicesActionResource =
      "customer" :>

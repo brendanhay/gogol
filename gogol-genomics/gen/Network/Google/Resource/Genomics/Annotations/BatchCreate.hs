@@ -52,7 +52,7 @@ module Network.Google.Resource.Genomics.Annotations.BatchCreate
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsAnnotationsBatchCreate@ which the
+-- | A resource alias for @GenomicsAnnotationsBatchCreate@ method which the
 -- 'AnnotationsBatchCreate'' request conforms to.
 type AnnotationsBatchCreateResource =
      "annotations:batchCreate" :>

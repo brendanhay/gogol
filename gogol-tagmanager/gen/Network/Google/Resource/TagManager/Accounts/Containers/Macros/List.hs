@@ -46,7 +46,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Macros.List
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersMacrosList@ which the
+-- | A resource alias for @TagManagerAccountsContainersMacrosList@ method which the
 -- 'AccountsContainersMacrosList'' request conforms to.
 type AccountsContainersMacrosListResource =
      "accounts" :>

@@ -15,7 +15,7 @@
 --
 module Network.Google.DeploymentManager.Types
     (
-    -- * Service URL
+    -- * Service Request
       deploymentManagerRequest
 
     -- * OperationWarningsItemDataItem
@@ -199,7 +199,7 @@ import           Network.Google.DeploymentManager.Types.Product
 import           Network.Google.DeploymentManager.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2beta2' of the Google Cloud Deployment Manager API.
+-- | Default request referring to version 'v2beta2' of the Google Cloud Deployment Manager API. This contains the host and root path used as a starting point for constructing service requests.
 deploymentManagerRequest :: RequestBuilder
 deploymentManagerRequest
   = defaultRequest "https://www.googleapis.com/"

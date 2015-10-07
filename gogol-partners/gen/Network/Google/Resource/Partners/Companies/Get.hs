@@ -62,7 +62,7 @@ module Network.Google.Resource.Partners.Companies.Get
 import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PartnersCompaniesGet@ which the
+-- | A resource alias for @PartnersCompaniesGet@ method which the
 -- 'CompaniesGet'' request conforms to.
 type CompaniesGetResource =
      "v2" :>

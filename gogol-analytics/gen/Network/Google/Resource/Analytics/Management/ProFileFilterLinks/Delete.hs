@@ -48,7 +48,7 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Delete
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFileFilterLinksDelete@ which the
+-- | A resource alias for @AnalyticsManagementProFileFilterLinksDelete@ method which the
 -- 'ManagementProFileFilterLinksDelete'' request conforms to.
 type ManagementProFileFilterLinksDeleteResource =
      "management" :>

@@ -18,20 +18,16 @@
 -- /See:/ <https://developers.google.com/freebase/ Freebase Search Reference>
 module Network.Google.FreebaseSearch
     (
-    -- * API
+    -- * API Declaration
       FreebaseSearchAPI
-    , freebaseSearchAPI
-    , freebaseSearchRequest
 
-    -- * Service Methods
+    -- * Methods
 
     -- ** FreebaseReconcile
     , module Network.Google.Method.Freebase.Reconcile
 
     -- ** FreebaseSearch
     , module Network.Google.Method.Freebase.Search
-
-    -- * REST Resources
 
     -- * Types
 
@@ -96,8 +92,6 @@ import           Network.Google.Prelude
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Freebase Search service.
 type FreebaseSearchAPI =
      ReconcileMethod :<|> SearchMethod
-
-freebaseSearchAPI :: Proxy FreebaseSearchAPI
-freebaseSearchAPI = Proxy

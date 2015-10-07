@@ -47,7 +47,7 @@ module Network.Google.Resource.PlusDomains.Activities.Insert
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsActivitiesInsert@ which the
+-- | A resource alias for @PlusDomainsActivitiesInsert@ method which the
 -- 'ActivitiesInsert'' request conforms to.
 type ActivitiesInsertResource =
      "people" :>

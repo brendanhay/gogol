@@ -47,7 +47,7 @@ module Network.Google.Resource.Gmail.Users.Messages.Delete
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersMessagesDelete@ which the
+-- | A resource alias for @GmailUsersMessagesDelete@ method which the
 -- 'UsersMessagesDelete'' request conforms to.
 type UsersMessagesDeleteResource =
      Capture "userId" Text :>

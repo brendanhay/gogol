@@ -45,7 +45,7 @@ module Network.Google.Resource.Admin.Channels.Stop
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdminChannelsStop@ which the
+-- | A resource alias for @AdminChannelsStop@ method which the
 -- 'ChannelsStop'' request conforms to.
 type ChannelsStopResource =
      "admin" :>

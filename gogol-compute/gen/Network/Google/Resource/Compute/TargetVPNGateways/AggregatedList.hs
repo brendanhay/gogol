@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.TargetVPNGateways.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetVPNGatewaysAggregatedList@ which the
+-- | A resource alias for @ComputeTargetVPNGatewaysAggregatedList@ method which the
 -- 'TargetVPNGatewaysAggregatedList'' request conforms to.
 type TargetVPNGatewaysAggregatedListResource =
      Capture "project" Text :>

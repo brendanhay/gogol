@@ -47,7 +47,7 @@ module Network.Google.Resource.Webmasters.Sitemaps.List
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersSitemapsList@ which the
+-- | A resource alias for @WebmastersSitemapsList@ method which the
 -- 'SitemapsList'' request conforms to.
 type SitemapsListResource =
      "sites" :>

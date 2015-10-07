@@ -49,7 +49,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.Patch
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementExperimentsPatch@ which the
+-- | A resource alias for @AnalyticsManagementExperimentsPatch@ method which the
 -- 'ManagementExperimentsPatch'' request conforms to.
 type ManagementExperimentsPatchResource =
      "management" :>

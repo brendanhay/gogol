@@ -54,7 +54,7 @@ module Network.Google.Resource.AndroidEnterprise.Products.GenerateApprovalURL
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseProductsGenerateApprovalURL@ which the
+-- | A resource alias for @AndroidEnterpriseProductsGenerateApprovalURL@ method which the
 -- 'ProductsGenerateApprovalURL'' request conforms to.
 type ProductsGenerateApprovalURLResource =
      "enterprises" :>

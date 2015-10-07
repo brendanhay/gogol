@@ -54,7 +54,7 @@ module Network.Google.Resource.YouTubeAnalytics.Reports.Query
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
--- | A resource alias for @YouTubeAnalyticsReportsQuery@ which the
+-- | A resource alias for @YouTubeAnalyticsReportsQuery@ method which the
 -- 'ReportsQuery'' request conforms to.
 type ReportsQueryResource =
      "reports" :>

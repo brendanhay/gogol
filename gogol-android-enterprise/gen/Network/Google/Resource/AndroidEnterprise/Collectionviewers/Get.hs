@@ -49,7 +49,7 @@ module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Get
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseCollectionviewersGet@ which the
+-- | A resource alias for @AndroidEnterpriseCollectionviewersGet@ method which the
 -- 'CollectionviewersGet'' request conforms to.
 type CollectionviewersGetResource =
      "enterprises" :>

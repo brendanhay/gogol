@@ -49,7 +49,7 @@ module Network.Google.Resource.Analytics.Management.Goals.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementGoalsList@ which the
+-- | A resource alias for @AnalyticsManagementGoalsList@ method which the
 -- 'ManagementGoalsList'' request conforms to.
 type ManagementGoalsListResource =
      "management" :>

@@ -54,7 +54,7 @@ module Network.Google.Resource.Books.Layers.AnnotationData.Get
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksLayersAnnotationDataGet@ which the
+-- | A resource alias for @BooksLayersAnnotationDataGet@ method which the
 -- 'LayersAnnotationDataGet'' request conforms to.
 type LayersAnnotationDataGetResource =
      "volumes" :>
@@ -77,7 +77,7 @@ type LayersAnnotationDataGetResource =
                                        QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
-                                             Get '[JSON] Annotationdata
+                                             Get '[JSON] AnnotationData
 
 -- | Gets the annotation data.
 --
@@ -258,7 +258,7 @@ instance GoogleAuth LayersAnnotationDataGet' where
         _AuthToken = ladgOAuthToken . _Just
 
 instance GoogleRequest LayersAnnotationDataGet' where
-        type Rs LayersAnnotationDataGet' = Annotationdata
+        type Rs LayersAnnotationDataGet' = AnnotationData
         request = requestWith booksRequest
         requestWith rq LayersAnnotationDataGet'{..}
           = go _ladgVolumeId _ladgLayerId _ladgAnnotationDataId

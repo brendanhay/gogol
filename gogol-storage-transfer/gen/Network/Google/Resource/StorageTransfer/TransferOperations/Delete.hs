@@ -51,7 +51,7 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Delete
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferTransferOperationsDelete@ which the
+-- | A resource alias for @StorageTransferTransferOperationsDelete@ method which the
 -- 'TransferOperationsDelete'' request conforms to.
 type TransferOperationsDeleteResource =
      "v1" :>

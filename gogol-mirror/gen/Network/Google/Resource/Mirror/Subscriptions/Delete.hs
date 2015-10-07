@@ -45,7 +45,7 @@ module Network.Google.Resource.Mirror.Subscriptions.Delete
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorSubscriptionsDelete@ which the
+-- | A resource alias for @MirrorSubscriptionsDelete@ method which the
 -- 'SubscriptionsDelete'' request conforms to.
 type SubscriptionsDeleteResource =
      "subscriptions" :>

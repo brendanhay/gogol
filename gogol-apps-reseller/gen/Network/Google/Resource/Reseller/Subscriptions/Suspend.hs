@@ -46,7 +46,7 @@ module Network.Google.Resource.Reseller.Subscriptions.Suspend
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerSubscriptionsSuspend@ which the
+-- | A resource alias for @ResellerSubscriptionsSuspend@ method which the
 -- 'SubscriptionsSuspend'' request conforms to.
 type SubscriptionsSuspendResource =
      "customers" :>

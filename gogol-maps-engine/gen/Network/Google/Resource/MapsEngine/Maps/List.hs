@@ -57,7 +57,7 @@ module Network.Google.Resource.MapsEngine.Maps.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineMapsList@ which the
+-- | A resource alias for @MapsEngineMapsList@ method which the
 -- 'MapsList'' request conforms to.
 type MapsListResource =
      "maps" :>

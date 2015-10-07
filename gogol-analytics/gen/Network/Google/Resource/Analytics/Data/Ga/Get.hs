@@ -56,7 +56,7 @@ module Network.Google.Resource.Analytics.Data.Ga.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsDataGaGet@ which the
+-- | A resource alias for @AnalyticsDataGaGet@ method which the
 -- 'DataGaGet'' request conforms to.
 type DataGaGetResource =
      "data" :>

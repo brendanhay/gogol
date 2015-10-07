@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersGet@ which the
+-- | A resource alias for @ComputeInstanceGroupManagersGet@ method which the
 -- 'InstanceGroupManagersGet'' request conforms to.
 type InstanceGroupManagersGetResource =
      Capture "project" Text :>

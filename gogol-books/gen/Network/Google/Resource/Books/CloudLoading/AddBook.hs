@@ -48,7 +48,7 @@ module Network.Google.Resource.Books.CloudLoading.AddBook
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksCloudLoadingAddBook@ which the
+-- | A resource alias for @BooksCloudLoadingAddBook@ method which the
 -- 'CloudLoadingAddBook'' request conforms to.
 type CloudLoadingAddBookResource =
      "cloudloading" :>

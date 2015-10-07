@@ -47,7 +47,7 @@ module Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryReadingPositionsGet@ which the
+-- | A resource alias for @BooksMyLibraryReadingPositionsGet@ method which the
 -- 'MyLibraryReadingPositionsGet'' request conforms to.
 type MyLibraryReadingPositionsGetResource =
      "mylibrary" :>

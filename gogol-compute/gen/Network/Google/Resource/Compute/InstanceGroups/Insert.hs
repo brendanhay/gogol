@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.InstanceGroups.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupsInsert@ which the
+-- | A resource alias for @ComputeInstanceGroupsInsert@ method which the
 -- 'InstanceGroupsInsert'' request conforms to.
 type InstanceGroupsInsertResource =
      Capture "project" Text :>

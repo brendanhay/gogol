@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.VPNTunnels.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeVPNTunnelsAggregatedList@ which the
+-- | A resource alias for @ComputeVPNTunnelsAggregatedList@ method which the
 -- 'VPNTunnelsAggregatedList'' request conforms to.
 type VPNTunnelsAggregatedListResource =
      Capture "project" Text :>

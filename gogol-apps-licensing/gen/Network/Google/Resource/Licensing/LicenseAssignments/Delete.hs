@@ -47,7 +47,7 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Delete
 import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @LicensingLicenseAssignmentsDelete@ which the
+-- | A resource alias for @LicensingLicenseAssignmentsDelete@ method which the
 -- 'LicenseAssignmentsDelete'' request conforms to.
 type LicenseAssignmentsDeleteResource =
      Capture "productId" Text :>

@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.BackendServices.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeBackendServicesGet@ which the
+-- | A resource alias for @ComputeBackendServicesGet@ method which the
 -- 'BackendServicesGet'' request conforms to.
 type BackendServicesGetResource =
      Capture "project" Text :>

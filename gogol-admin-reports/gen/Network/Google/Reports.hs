@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference>
 module Network.Google.Reports
     (
-    -- * API
+    -- * API Declaration
       ReportsAPI
-    , reportsAPI
-    , reportsRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** AdminChannelsStop
     , module Network.Google.Resource.Admin.Channels.Stop
@@ -181,11 +177,9 @@ import           Network.Google.Resource.Reports.UserUsageReport.Get
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Admin Reports API service.
 type ReportsAPI =
      ChannelsStopResource :<|> ActivitiesListResource :<|>
        ActivitiesWatchResource
        :<|> CustomerUsageReportsGetResource
        :<|> UserUsageReportGetResource
-
-reportsAPI :: Proxy ReportsAPI
-reportsAPI = Proxy

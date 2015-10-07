@@ -46,7 +46,7 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementAccountUserLinksInsert@ which the
+-- | A resource alias for @AnalyticsManagementAccountUserLinksInsert@ method which the
 -- 'ManagementAccountUserLinksInsert'' request conforms to.
 type ManagementAccountUserLinksInsertResource =
      "management" :>

@@ -50,7 +50,7 @@ module Network.Google.Resource.Tasks.Tasks.Move
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTasksMove@ which the
+-- | A resource alias for @TasksTasksMove@ method which the
 -- 'TasksMove'' request conforms to.
 type TasksMoveResource =
      "lists" :>

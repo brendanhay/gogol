@@ -19,14 +19,10 @@
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference>
 module Network.Google.PubSub
     (
-    -- * API
+    -- * API Declaration
       PubSubAPI
-    , pubSubAPI
-    , pubSubRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** PubsubProjectsSubscriptionsAcknowledge
     , module Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
@@ -246,6 +242,7 @@ import           Network.Google.Resource.PubSub.Projects.Topics.TestIAMPermissio
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Cloud Pub/Sub API service.
 type PubSubAPI =
      ProjectsTopicsSubscriptionsListResource :<|>
        ProjectsTopicsListResource
@@ -267,6 +264,3 @@ type PubSubAPI =
        :<|> ProjectsSubscriptionsPullResource
        :<|> ProjectsSubscriptionsTestIAMPermissionsResource
        :<|> ProjectsSubscriptionsDeleteResource
-
-pubSubAPI :: Proxy PubSubAPI
-pubSubAPI = Proxy

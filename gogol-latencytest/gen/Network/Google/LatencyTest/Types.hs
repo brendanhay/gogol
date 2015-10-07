@@ -15,7 +15,7 @@
 --
 module Network.Google.LatencyTest.Types
     (
-    -- * Service URL
+    -- * Service Request
       latencyTestRequest
 
     -- * IntValue
@@ -64,7 +64,7 @@ import           Network.Google.LatencyTest.Types.Product
 import           Network.Google.LatencyTest.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2' of the Google Cloud Network Performance Monitoring API.
+-- | Default request referring to version 'v2' of the Google Cloud Network Performance Monitoring API. This contains the host and root path used as a starting point for constructing service requests.
 latencyTestRequest :: RequestBuilder
 latencyTestRequest
   = defaultRequest

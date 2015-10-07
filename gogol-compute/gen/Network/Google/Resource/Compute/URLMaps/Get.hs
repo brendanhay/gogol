@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.URLMaps.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeURLMapsGet@ which the
+-- | A resource alias for @ComputeURLMapsGet@ method which the
 -- 'URLMapsGet'' request conforms to.
 type URLMapsGetResource =
      Capture "project" Text :>

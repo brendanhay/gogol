@@ -45,7 +45,7 @@ module Network.Google.Resource.MapsEngine.Layers.Process
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersProcess@ which the
+-- | A resource alias for @MapsEngineLayersProcess@ method which the
 -- 'LayersProcess'' request conforms to.
 type LayersProcessResource =
      "layers" :>

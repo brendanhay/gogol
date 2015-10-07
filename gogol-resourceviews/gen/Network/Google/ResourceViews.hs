@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference>
 module Network.Google.ResourceViews
     (
-    -- * API
+    -- * API Declaration
       ResourceViewsAPI
-    , resourceViewsAPI
-    , resourceViewsRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** ResourceviewsZoneOperationsGet
     , module Network.Google.Resource.ResourceViews.ZoneOperations.Get
@@ -224,6 +220,7 @@ import           Network.Google.ResourceViews.Types
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Compute Engine Instance Groups API service.
 type ResourceViewsAPI =
      ZoneViewsSetServiceResource :<|>
        ZoneViewsInsertResource
@@ -236,6 +233,3 @@ type ResourceViewsAPI =
        :<|> ZoneViewsDeleteResource
        :<|> ZoneOperationsListResource
        :<|> ZoneOperationsGetResource
-
-resourceViewsAPI :: Proxy ResourceViewsAPI
-resourceViewsAPI = Proxy

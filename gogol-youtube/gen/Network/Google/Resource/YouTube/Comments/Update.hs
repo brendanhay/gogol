@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTube.Comments.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCommentsUpdate@ which the
+-- | A resource alias for @YouTubeCommentsUpdate@ method which the
 -- 'CommentsUpdate'' request conforms to.
 type CommentsUpdateResource =
      "comments" :>

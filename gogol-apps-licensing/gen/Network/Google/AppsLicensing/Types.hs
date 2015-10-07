@@ -15,7 +15,7 @@
 --
 module Network.Google.AppsLicensing.Types
     (
-    -- * Service URL
+    -- * Service Request
       appsLicensingRequest
 
     -- * LicenseAssignmentInsert
@@ -46,7 +46,7 @@ import           Network.Google.AppsLicensing.Types.Product
 import           Network.Google.AppsLicensing.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Enterprise License Manager API.
+-- | Default request referring to version 'v1' of the Enterprise License Manager API. This contains the host and root path used as a starting point for constructing service requests.
 appsLicensingRequest :: RequestBuilder
 appsLicensingRequest
   = defaultRequest "https://www.googleapis.com/"

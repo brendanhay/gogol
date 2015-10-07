@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.PostalCodes.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPostalCodesGet@ which the
+-- | A resource alias for @DfareportingPostalCodesGet@ method which the
 -- 'PostalCodesGet'' request conforms to.
 type PostalCodesGetResource =
      "userprofiles" :>

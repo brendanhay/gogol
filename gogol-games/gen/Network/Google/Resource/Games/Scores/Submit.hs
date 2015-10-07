@@ -48,7 +48,7 @@ module Network.Google.Resource.Games.Scores.Submit
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesScoresSubmit@ which the
+-- | A resource alias for @GamesScoresSubmit@ method which the
 -- 'ScoresSubmit'' request conforms to.
 type ScoresSubmitResource =
      "leaderboards" :>

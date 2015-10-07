@@ -48,7 +48,7 @@ module Network.Google.Resource.Directory.Members.Patch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryMembersPatch@ which the
+-- | A resource alias for @DirectoryMembersPatch@ method which the
 -- 'MembersPatch'' request conforms to.
 type MembersPatchResource =
      "groups" :>

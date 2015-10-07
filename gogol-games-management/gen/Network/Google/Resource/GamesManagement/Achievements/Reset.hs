@@ -47,7 +47,7 @@ module Network.Google.Resource.GamesManagement.Achievements.Reset
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementAchievementsReset@ which the
+-- | A resource alias for @GamesManagementAchievementsReset@ method which the
 -- 'AchievementsReset'' request conforms to.
 type AchievementsResetResource =
      "achievements" :>

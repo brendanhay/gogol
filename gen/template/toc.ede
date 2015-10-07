@@ -12,20 +12,22 @@
 -- /See:/ <{{ documentationLink }} {{ title }} Reference>
 module {{ moduleName }}
     (
-    -- * API
+    -- * API Declaration
       {{ api.aliasName }}
-    , {{ api.aliasProxy }}
-    , {{ api.url.name }}
-
-    -- * Service Methods
   {% for action in api.methods %}
+    {% if action.first %}
+
+    -- * Methods
+    {% endif %}
 
     -- ** {{ action.value.id }}
     , module {{ action.value.ns }}
   {% endfor %}
-
-    -- * REST Resources
   {% for action in api.resources %}
+    {% if action.first %}
+
+    -- * Resources
+    {% endif %}
 
     -- ** {{ action.value.id }}
     , module {{ action.value.ns }}
@@ -63,7 +65,5 @@ import {{ module.value }}
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the {{ title }} service.
 {{ api.alias }}
-
-{{ api.aliasProxy }} :: Proxy {{ api.aliasName }}
-{{ api.aliasProxy }} = Proxy

@@ -46,7 +46,7 @@ module Network.Google.Resource.AdSense.Alerts.Delete
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAlertsDelete@ which the
+-- | A resource alias for @AdsenseAlertsDelete@ method which the
 -- 'AlertsDelete'' request conforms to.
 type AlertsDeleteResource =
      "alerts" :>

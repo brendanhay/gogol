@@ -46,7 +46,7 @@ module Network.Google.Resource.AdSenseHost.AssociationSessions.Verify
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAssociationSessionsVerify@ which the
+-- | A resource alias for @AdsensehostAssociationSessionsVerify@ method which the
 -- 'AssociationSessionsVerify'' request conforms to.
 type AssociationSessionsVerifyResource =
      "associationsessions" :>

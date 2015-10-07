@@ -51,7 +51,7 @@ module Network.Google.Resource.Books.PromoOffer.Dismiss
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksPromoOfferDismiss@ which the
+-- | A resource alias for @BooksPromoOfferDismiss@ method which the
 -- 'PromoOfferDismiss'' request conforms to.
 type PromoOfferDismissResource =
      "promooffer" :>

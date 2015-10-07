@@ -47,7 +47,7 @@ module Network.Google.Resource.Drive.Comments.Update
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveCommentsUpdate@ which the
+-- | A resource alias for @DriveCommentsUpdate@ method which the
 -- 'CommentsUpdate'' request conforms to.
 type CommentsUpdateResource =
      "files" :>

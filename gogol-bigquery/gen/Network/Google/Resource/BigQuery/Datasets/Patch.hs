@@ -25,7 +25,7 @@
 -- fields that are provided in the submitted dataset resource. This method
 -- supports patch semantics.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryDatasetsPatch@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryDatasetsPatch@.
 module Network.Google.Resource.BigQuery.Datasets.Patch
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.BigQuery.Datasets.Patch
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigqueryDatasetsPatch@ which the
+-- | A resource alias for @BigQueryDatasetsPatch@ method which the
 -- 'DatasetsPatch'' request conforms to.
 type DatasetsPatchResource =
      "projects" :>

@@ -52,7 +52,7 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Delete
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppEngineAppsModulesDelete@ which the
+-- | A resource alias for @AppEngineAppsModulesDelete@ method which the
 -- 'AppsModulesDelete'' request conforms to.
 type AppsModulesDeleteResource =
      "v1beta4" :>

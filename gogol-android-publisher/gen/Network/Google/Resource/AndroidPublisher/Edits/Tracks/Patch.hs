@@ -51,7 +51,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Patch
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsTracksPatch@ which the
+-- | A resource alias for @AndroidPublisherEditsTracksPatch@ method which the
 -- 'EditsTracksPatch'' request conforms to.
 type EditsTracksPatchResource =
      Capture "packageName" Text :>

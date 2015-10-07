@@ -15,7 +15,7 @@
 --
 module Network.Google.ResourceViews.Types
     (
-    -- * Service URL
+    -- * Service Request
       resourceViewsRequest
 
     -- * OperationWarningsItemDataItem
@@ -165,7 +165,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types.Product
 import           Network.Google.ResourceViews.Types.Sum
 
--- | Default request referring to version 'v1beta2' of the Google Compute Engine Instance Groups API.
+-- | Default request referring to version 'v1beta2' of the Google Compute Engine Instance Groups API. This contains the host and root path used as a starting point for constructing service requests.
 resourceViewsRequest :: RequestBuilder
 resourceViewsRequest
   = defaultRequest "https://www.googleapis.com/"

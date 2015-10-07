@@ -58,7 +58,7 @@ module Network.Google.Resource.Genomics.Readgroupsets.Coveragebuckets.List
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReadgroupsetsCoveragebucketsList@ which the
+-- | A resource alias for @GenomicsReadgroupsetsCoveragebucketsList@ method which the
 -- 'ReadgroupsetsCoveragebucketsList'' request conforms to.
 type ReadgroupsetsCoveragebucketsListResource =
      "readgroupsets" :>

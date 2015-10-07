@@ -47,7 +47,7 @@ module Network.Google.Resource.DFAReporting.UserRoles.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingUserRolesPatch@ which the
+-- | A resource alias for @DfareportingUserRolesPatch@ method which the
 -- 'UserRolesPatch'' request conforms to.
 type UserRolesPatchResource =
      "userprofiles" :>

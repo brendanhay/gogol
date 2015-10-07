@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.Projects.SetCommonInstanceMetadata
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeProjectsSetCommonInstanceMetadata@ which the
+-- | A resource alias for @ComputeProjectsSetCommonInstanceMetadata@ method which the
 -- 'ProjectsSetCommonInstanceMetadata'' request conforms to.
 type ProjectsSetCommonInstanceMetadataResource =
      Capture "project" Text :>

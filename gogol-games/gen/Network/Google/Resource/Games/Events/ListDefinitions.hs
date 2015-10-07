@@ -47,7 +47,7 @@ module Network.Google.Resource.Games.Events.ListDefinitions
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesEventsListDefinitions@ which the
+-- | A resource alias for @GamesEventsListDefinitions@ method which the
 -- 'EventsListDefinitions'' request conforms to.
 type EventsListDefinitionsResource =
      "eventDefinitions" :>

@@ -47,7 +47,7 @@ module Network.Google.Resource.Storage.Buckets.Insert
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageBucketsInsert@ which the
+-- | A resource alias for @StorageBucketsInsert@ method which the
 -- 'BucketsInsert'' request conforms to.
 type BucketsInsertResource =
      "b" :>

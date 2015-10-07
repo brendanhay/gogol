@@ -47,7 +47,7 @@ module Network.Google.Resource.Gmail.Users.Drafts.Create
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersDraftsCreate@ which the
+-- | A resource alias for @GmailUsersDraftsCreate@ method which the
 -- 'UsersDraftsCreate'' request conforms to.
 type UsersDraftsCreateResource =
      Capture "userId" Text :>

@@ -48,7 +48,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Testers.Patch
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsTestersPatch@ which the
+-- | A resource alias for @AndroidPublisherEditsTestersPatch@ method which the
 -- 'EditsTestersPatch'' request conforms to.
 type EditsTestersPatchResource =
      Capture "packageName" Text :>

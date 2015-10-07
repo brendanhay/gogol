@@ -55,7 +55,7 @@ module Network.Google.Resource.CloudResourceManager.Projects.List
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerProjectsList@ which the
+-- | A resource alias for @CloudResourceManagerProjectsList@ method which the
 -- 'ProjectsList'' request conforms to.
 type ProjectsListResource =
      "v1beta1" :>

@@ -46,16 +46,18 @@ renameLibrary =
 
 renameTitle :: Text -> Text
 renameTitle =
-      mappend      "Google "
-    . flip mappend " API"
-    . stripPrefix  "Google "
-    . stripSuffix  " API"
+      mappend      "Google"
+    . flip mappend "API"
+    . Text.strip
+    . stripPrefix  "Google"
+    . stripSuffix  "API"
 
 renameAbbrev :: Text -> Text
 renameAbbrev = mconcat
     . Text.split dot
-    . stripPrefix "Google "
-    . stripSuffix " API"
+    . Text.strip
+    . stripPrefix "Google"
+    . stripSuffix "API"
 
 renameField :: Text -> Text
 renameField = lowerHead . lowerFirstAcronym . upperAcronym . toCamel
@@ -269,6 +271,8 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("user",        "User")
          , ("pagespeed",   "Pagespeed")
          , ("dapi",        "dAPI")
+         , ("([^a])data",  "$1Data")
+         , ("query",       "Query")
          ]
 
 acronyms :: [(String, String)]

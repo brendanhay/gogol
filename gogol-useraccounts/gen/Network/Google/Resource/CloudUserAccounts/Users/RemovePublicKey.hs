@@ -47,7 +47,7 @@ module Network.Google.Resource.CloudUserAccounts.Users.RemovePublicKey
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsUsersRemovePublicKey@ which the
+-- | A resource alias for @CloudUserAccountsUsersRemovePublicKey@ method which the
 -- 'UsersRemovePublicKey'' request conforms to.
 type UsersRemovePublicKeyResource =
      Capture "project" Text :>

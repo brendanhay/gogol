@@ -49,7 +49,7 @@ module Network.Google.Resource.YouTube.Comments.SetModerationStatus
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCommentsSetModerationStatus@ which the
+-- | A resource alias for @YouTubeCommentsSetModerationStatus@ method which the
 -- 'CommentsSetModerationStatus'' request conforms to.
 type CommentsSetModerationStatusResource =
      "comments" :>

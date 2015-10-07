@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/google-apps/groups-migration/ Groups Migration API Reference>
 module Network.Google.GroupsMigration
     (
-    -- * API
+    -- * API Declaration
       GroupsMigrationAPI
-    , groupsMigrationAPI
-    , groupsMigrationRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** GroupsmigrationArchiveInsert
     , module Network.Google.Resource.GroupsMigration.Archive.Insert
@@ -47,7 +43,5 @@ import           Network.Google.Resource.GroupsMigration.Archive.Insert
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Groups Migration API service.
 type GroupsMigrationAPI = ArchiveInsertResource
-
-groupsMigrationAPI :: Proxy GroupsMigrationAPI
-groupsMigrationAPI = Proxy

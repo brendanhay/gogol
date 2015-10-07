@@ -48,7 +48,7 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Pause
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
--- | A resource alias for @ReplicapoolupdaterRollingUpdatesPause@ which the
+-- | A resource alias for @ReplicapoolupdaterRollingUpdatesPause@ method which the
 -- 'RollingUpdatesPause'' request conforms to.
 type RollingUpdatesPauseResource =
      Capture "project" Text :>

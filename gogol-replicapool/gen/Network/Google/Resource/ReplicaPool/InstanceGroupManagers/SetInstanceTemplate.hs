@@ -49,7 +49,7 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.SetInstanceTemp
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
--- | A resource alias for @ReplicapoolInstanceGroupManagersSetInstanceTemplate@ which the
+-- | A resource alias for @ReplicapoolInstanceGroupManagersSetInstanceTemplate@ method which the
 -- 'InstanceGroupManagersSetInstanceTemplate'' request conforms to.
 type InstanceGroupManagersSetInstanceTemplateResource
      =

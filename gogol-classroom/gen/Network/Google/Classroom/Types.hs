@@ -15,7 +15,7 @@
 --
 module Network.Google.Classroom.Types
     (
-    -- * Service URL
+    -- * Service Request
       classroomRequest
 
     -- * ListCourseAliasesResponse
@@ -121,7 +121,7 @@ import           Network.Google.Classroom.Types.Product
 import           Network.Google.Classroom.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Google Classroom API.
+-- | Default request referring to version 'v1' of the Google Classroom API. This contains the host and root path used as a starting point for constructing service requests.
 classroomRequest :: RequestBuilder
 classroomRequest
   = defaultRequest "https://classroom.googleapis.com/"

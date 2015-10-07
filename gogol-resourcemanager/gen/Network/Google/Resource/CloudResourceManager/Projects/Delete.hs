@@ -74,7 +74,7 @@ module Network.Google.Resource.CloudResourceManager.Projects.Delete
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerProjectsDelete@ which the
+-- | A resource alias for @CloudResourceManagerProjectsDelete@ method which the
 -- 'ProjectsDelete'' request conforms to.
 type ProjectsDeleteResource =
      "v1beta1" :>

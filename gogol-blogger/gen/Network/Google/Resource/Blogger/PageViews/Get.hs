@@ -46,7 +46,7 @@ module Network.Google.Resource.Blogger.PageViews.Get
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPageViewsGet@ which the
+-- | A resource alias for @BloggerPageViewsGet@ method which the
 -- 'PageViewsGet'' request conforms to.
 type PageViewsGetResource =
      "blogs" :>

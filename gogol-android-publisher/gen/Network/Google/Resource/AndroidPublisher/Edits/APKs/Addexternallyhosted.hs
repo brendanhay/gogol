@@ -50,7 +50,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKs.Addexternallyhosted
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsAPKsAddexternallyhosted@ which the
+-- | A resource alias for @AndroidPublisherEditsAPKsAddexternallyhosted@ method which the
 -- 'EditsAPKsAddexternallyhosted'' request conforms to.
 type EditsAPKsAddexternallyhostedResource =
      Capture "packageName" Text :>

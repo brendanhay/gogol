@@ -45,7 +45,7 @@ module Network.Google.Resource.MapsEngine.Tables.Create
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesCreate@ which the
+-- | A resource alias for @MapsEngineTablesCreate@ method which the
 -- 'TablesCreate'' request conforms to.
 type TablesCreateResource =
      "tables" :>

@@ -15,7 +15,7 @@
 --
 module Network.Google.ProximityBeacon.Types
     (
-    -- * Service URL
+    -- * Service Request
       proximityBeaconRequest
 
     -- * LatLng
@@ -148,7 +148,7 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types.Product
 import           Network.Google.ProximityBeacon.Types.Sum
 
--- | Default request referring to version 'v1beta1' of the Google Proximity Beacon API.
+-- | Default request referring to version 'v1beta1' of the Google Proximity Beacon API. This contains the host and root path used as a starting point for constructing service requests.
 proximityBeaconRequest :: RequestBuilder
 proximityBeaconRequest
   = defaultRequest

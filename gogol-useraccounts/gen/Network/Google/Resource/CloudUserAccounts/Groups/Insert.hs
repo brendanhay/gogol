@@ -47,7 +47,7 @@ module Network.Google.Resource.CloudUserAccounts.Groups.Insert
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsGroupsInsert@ which the
+-- | A resource alias for @CloudUserAccountsGroupsInsert@ method which the
 -- 'GroupsInsert'' request conforms to.
 type GroupsInsertResource =
      Capture "project" Text :>

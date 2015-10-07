@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTube.Comments.MarkAsSpam
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCommentsMarkAsSpam@ which the
+-- | A resource alias for @YouTubeCommentsMarkAsSpam@ method which the
 -- 'CommentsMarkAsSpam'' request conforms to.
 type CommentsMarkAsSpamResource =
      "comments" :>

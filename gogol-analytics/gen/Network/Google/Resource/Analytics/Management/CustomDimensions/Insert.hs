@@ -47,7 +47,7 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementCustomDimensionsInsert@ which the
+-- | A resource alias for @AnalyticsManagementCustomDimensionsInsert@ method which the
 -- 'ManagementCustomDimensionsInsert'' request conforms to.
 type ManagementCustomDimensionsInsertResource =
      "management" :>

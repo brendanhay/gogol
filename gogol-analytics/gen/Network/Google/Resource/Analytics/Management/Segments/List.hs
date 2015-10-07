@@ -46,7 +46,7 @@ module Network.Google.Resource.Analytics.Management.Segments.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementSegmentsList@ which the
+-- | A resource alias for @AnalyticsManagementSegmentsList@ method which the
 -- 'ManagementSegmentsList'' request conforms to.
 type ManagementSegmentsListResource =
      "management" :>

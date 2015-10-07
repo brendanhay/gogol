@@ -47,7 +47,7 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Get
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
--- | A resource alias for @ReplicapoolupdaterRollingUpdatesGet@ which the
+-- | A resource alias for @ReplicapoolupdaterRollingUpdatesGet@ method which the
 -- 'RollingUpdatesGet'' request conforms to.
 type RollingUpdatesGetResource =
      Capture "project" Text :>

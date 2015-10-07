@@ -15,7 +15,7 @@
 --
 module Network.Google.PlayMoviesPartner.Types
     (
-    -- * Service URL
+    -- * Service Request
       playMoviesPartnerRequest
 
     -- * Avail
@@ -166,7 +166,7 @@ import           Network.Google.PlayMoviesPartner.Types.Product
 import           Network.Google.PlayMoviesPartner.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Google Play Movies Partner API.
+-- | Default request referring to version 'v1' of the Google Play Movies Partner API. This contains the host and root path used as a starting point for constructing service requests.
 playMoviesPartnerRequest :: RequestBuilder
 playMoviesPartnerRequest
   = defaultRequest

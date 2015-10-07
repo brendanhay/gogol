@@ -56,7 +56,7 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.Get
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClicksearchConversionGet@ which the
+-- | A resource alias for @DoubleClicksearchConversionGet@ method which the
 -- 'ConversionGet'' request conforms to.
 type ConversionGetResource =
      "agency" :>

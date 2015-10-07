@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference>
 module Network.Google.ProximityBeacon
     (
-    -- * API
+    -- * API Declaration
       ProximityBeaconAPI
-    , proximityBeaconAPI
-    , proximityBeaconRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** ProximitybeaconBeaconInfoGetforObserved
     , module Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
@@ -219,6 +215,7 @@ import           Network.Google.Resource.ProximityBeacon.Namespaces.List
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Proximity Beacon API service.
 type ProximityBeaconAPI =
      BeaconsAttachmentsListResource :<|>
        BeaconsAttachmentsCreateResource
@@ -234,6 +231,3 @@ type ProximityBeaconAPI =
        :<|> BeaconsUpdateResource
        :<|> NamespacesListResource
        :<|> BeaconInfoGetforObservedResource
-
-proximityBeaconAPI :: Proxy ProximityBeaconAPI
-proximityBeaconAPI = Proxy

@@ -48,7 +48,7 @@ module Network.Google.Resource.DFAReporting.Reports.CompatibleFields.Query
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingReportsCompatibleFieldsQuery@ which the
+-- | A resource alias for @DfareportingReportsCompatibleFieldsQuery@ method which the
 -- 'ReportsCompatibleFieldsQuery'' request conforms to.
 type ReportsCompatibleFieldsQueryResource =
      "userprofiles" :>

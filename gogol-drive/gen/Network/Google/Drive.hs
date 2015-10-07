@@ -18,14 +18,10 @@
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference>
 module Network.Google.Drive
     (
-    -- * API
+    -- * API Declaration
       DriveAPI
-    , driveAPI
-    , driveRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** DriveAboutGet
     , module Network.Google.Resource.Drive.About.Get
@@ -789,6 +785,7 @@ import           Network.Google.Resource.Drive.Revisions.Update
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Drive API service.
 type DriveAPI =
      AppsListResource :<|> AppsGetResource :<|>
        ChangesListResource
@@ -849,6 +846,3 @@ type DriveAPI =
        :<|> PropertiesGetResource
        :<|> PropertiesDeleteResource
        :<|> PropertiesUpdateResource
-
-driveAPI :: Proxy DriveAPI
-driveAPI = Proxy

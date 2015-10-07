@@ -49,7 +49,7 @@ module Network.Google.Resource.CloudUserAccounts.Users.List
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsUsersList@ which the
+-- | A resource alias for @CloudUserAccountsUsersList@ method which the
 -- 'UsersList'' request conforms to.
 type UsersListResource =
      Capture "project" Text :>

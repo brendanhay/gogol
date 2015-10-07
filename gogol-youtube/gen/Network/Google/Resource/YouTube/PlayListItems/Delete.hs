@@ -45,7 +45,7 @@ module Network.Google.Resource.YouTube.PlayListItems.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubePlayListItemsDelete@ which the
+-- | A resource alias for @YouTubePlayListItemsDelete@ method which the
 -- 'PlayListItemsDelete'' request conforms to.
 type PlayListItemsDeleteResource =
      "playlistItems" :>

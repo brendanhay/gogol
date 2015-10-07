@@ -54,7 +54,7 @@ module Network.Google.Resource.GAN.Publishers.List
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GANPublishersList@ which the
+-- | A resource alias for @GANPublishersList@ method which the
 -- 'PublishersList'' request conforms to.
 type PublishersListResource =
      Capture "role" PublishersListRole :>

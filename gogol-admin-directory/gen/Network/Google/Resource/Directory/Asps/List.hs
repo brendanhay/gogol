@@ -45,7 +45,7 @@ module Network.Google.Resource.Directory.Asps.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryAspsList@ which the
+-- | A resource alias for @DirectoryAspsList@ method which the
 -- 'AspsList'' request conforms to.
 type AspsListResource =
      "users" :>

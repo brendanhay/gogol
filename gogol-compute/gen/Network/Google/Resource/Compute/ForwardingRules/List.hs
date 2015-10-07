@@ -50,7 +50,7 @@ module Network.Google.Resource.Compute.ForwardingRules.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeForwardingRulesList@ which the
+-- | A resource alias for @ComputeForwardingRulesList@ method which the
 -- 'ForwardingRulesList'' request conforms to.
 type ForwardingRulesListResource =
      Capture "project" Text :>

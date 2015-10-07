@@ -19,14 +19,10 @@
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference>
 module Network.Google.MapsEngine
     (
-    -- * API
+    -- * API Declaration
       MapsEngineAPI
-    , mapsEngineAPI
-    , mapsEngineRequest
 
-    -- * Service Methods
-
-    -- * REST Resources
+    -- * Resources
 
     -- ** MapsEngineAssetsGet
     , module Network.Google.Resource.MapsEngine.Assets.Get
@@ -1080,6 +1076,7 @@ import           Network.Google.Resource.MapsEngine.Tables.Upload
 TODO
 -}
 
+-- | Represents the entirety of the methods and resources available for the Google Maps Engine API service.
 type MapsEngineAPI =
      MapsPermissionsListResource :<|>
        MapsPermissionsBatchUpdateResource
@@ -1158,6 +1155,3 @@ type MapsEngineAPI =
        :<|> ProjectsIconsGetResource
        :<|> ProjectsIconsCreateResource
        :<|> ProjectsListResource
-
-mapsEngineAPI :: Proxy MapsEngineAPI
-mapsEngineAPI = Proxy

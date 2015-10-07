@@ -54,7 +54,7 @@ module Network.Google.Resource.Analytics.Data.Mcf.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsDataMcfGet@ which the
+-- | A resource alias for @AnalyticsDataMcfGet@ method which the
 -- 'DataMcfGet'' request conforms to.
 type DataMcfGetResource =
      "data" :>

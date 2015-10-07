@@ -47,7 +47,7 @@ module Network.Google.Resource.Prediction.HostedModels.Predict
 import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PredictionHostedModelsPredict@ which the
+-- | A resource alias for @PredictionHostedModelsPredict@ method which the
 -- 'HostedModelsPredict'' request conforms to.
 type HostedModelsPredictResource =
      Capture "project" Text :>

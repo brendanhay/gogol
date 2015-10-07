@@ -47,7 +47,7 @@ module Network.Google.Resource.Autoscaler.Autoscalers.Delete
 import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AutoscalerAutoscalersDelete@ which the
+-- | A resource alias for @AutoscalerAutoscalersDelete@ method which the
 -- 'AutoscalersDelete'' request conforms to.
 type AutoscalersDeleteResource =
      "projects" :>

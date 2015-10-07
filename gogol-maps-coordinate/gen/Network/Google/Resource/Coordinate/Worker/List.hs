@@ -45,7 +45,7 @@ module Network.Google.Resource.Coordinate.Worker.List
 import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CoordinateWorkerList@ which the
+-- | A resource alias for @CoordinateWorkerList@ method which the
 -- 'WorkerList'' request conforms to.
 type WorkerListResource =
      "teams" :>

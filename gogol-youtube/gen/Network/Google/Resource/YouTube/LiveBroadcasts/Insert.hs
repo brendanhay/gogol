@@ -48,7 +48,7 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveBroadcastsInsert@ which the
+-- | A resource alias for @YouTubeLiveBroadcastsInsert@ method which the
 -- 'LiveBroadcastsInsert'' request conforms to.
 type LiveBroadcastsInsertResource =
      "liveBroadcasts" :>

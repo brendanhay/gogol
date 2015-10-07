@@ -52,7 +52,7 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeFieldValuesList@ which the
+-- | A resource alias for @DfareportingCreativeFieldValuesList@ method which the
 -- 'CreativeFieldValuesList'' request conforms to.
 type CreativeFieldValuesListResource =
      "userprofiles" :>

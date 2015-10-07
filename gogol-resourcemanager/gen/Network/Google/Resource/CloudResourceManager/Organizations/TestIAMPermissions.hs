@@ -52,7 +52,7 @@ module Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermiss
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerOrganizationsTestIAMPermissions@ which the
+-- | A resource alias for @CloudResourceManagerOrganizationsTestIAMPermissions@ method which the
 -- 'OrganizationsTestIAMPermissions'' request conforms to.
 type OrganizationsTestIAMPermissionsResource =
      "v1beta1" :>
