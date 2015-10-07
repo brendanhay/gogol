@@ -158,7 +158,7 @@ subscriptionsList' pSPart_ =
     , _sForChannelId = Nothing
     , _sPageToken = Nothing
     , _sOAuthToken = Nothing
-    , _sOrder = SLOSubscriptionOrderRelevance
+    , _sOrder = SLORelevance
     , _sMaxResults = 5
     , _sFields = Nothing
     }

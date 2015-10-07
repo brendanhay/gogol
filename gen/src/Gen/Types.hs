@@ -223,6 +223,7 @@ data TType
     | TLit   Lit
     | TMaybe TType
     | TList  TType
+      deriving (Eq, Show)
 
 data Derive
     = DEq
@@ -246,7 +247,7 @@ data Solved = Solved
     , _schema   :: Schema Global
     , _type     :: TType
     , _deriving :: [Derive]
-    }
+    } deriving (Show)
 
 instance HasInfo Solved where
     info = f . info
