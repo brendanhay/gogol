@@ -27,10 +27,23 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-         Network.Google
+          Network.Google
+          Network.Google.Auth
+          Network.Google.Env
 
     other-modules:
+          Network.Google.Internal.Types
 
     build-depends:
-         base       >= 4.7 && < 5
-       , gogol-core == 0.0.1.*
+          base       >= 4.7 && < 5
+        , exceptions
+        , gogol-core == 0.0.1.*
+        , http-conduit
+        , lens
+        , monad-control
+        , mtl
+        , resourcet
+        , retry
+        , time
+        , transformers
+        , transformers-base
