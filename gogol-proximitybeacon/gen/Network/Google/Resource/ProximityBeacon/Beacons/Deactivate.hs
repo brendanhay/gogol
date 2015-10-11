@@ -71,7 +71,7 @@ type BeaconsDeactivateResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
                              QueryParam "key" AuthKey :>
-                               QueryParam "oauth_token" OAuthToken :>
+                               Header "Authorization" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Deactivates a beacon. Once deactivated, the API will not return

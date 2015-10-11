@@ -1024,16 +1024,27 @@ instance ToJSON CreateAuthURIResponse where
 -- | Respone of getting public keys.
 --
 -- /See:/ 'identitytoolkitRelyingPartyGetPublicKeysResponse' smart constructor.
-data IdentitytoolkitRelyingPartyGetPublicKeysResponse =
-    IdentitytoolkitRelyingPartyGetPublicKeysResponse
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype IdentitytoolkitRelyingPartyGetPublicKeysResponse = IdentitytoolkitRelyingPartyGetPublicKeysResponse
+    { _irpgpkrProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyGetPublicKeysResponse' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'irpgpkrProperties'
 identitytoolkitRelyingPartyGetPublicKeysResponse
-    :: IdentitytoolkitRelyingPartyGetPublicKeysResponse
-identitytoolkitRelyingPartyGetPublicKeysResponse =
+    :: HashMap Text Text -- ^ 'properties'
+    -> IdentitytoolkitRelyingPartyGetPublicKeysResponse
+identitytoolkitRelyingPartyGetPublicKeysResponse pIrpgpkrProperties_ =
     IdentitytoolkitRelyingPartyGetPublicKeysResponse
+    { _irpgpkrProperties = pIrpgpkrProperties_
+    }
+
+irpgpkrProperties :: Lens' IdentitytoolkitRelyingPartyGetPublicKeysResponse (HashMap Text Text)
+irpgpkrProperties
+  = lens _irpgpkrProperties
+      (\ s a -> s{_irpgpkrProperties = a})
 
 instance FromJSON
          IdentitytoolkitRelyingPartyGetPublicKeysResponse
@@ -1042,13 +1053,13 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartyGetPublicKeysResponse"
               (\ o ->
-                 pure
-                   IdentitytoolkitRelyingPartyGetPublicKeysResponse)
+                 IdentitytoolkitRelyingPartyGetPublicKeysResponse <$>
+                   (parseJSONObject o))
 
 instance ToJSON
          IdentitytoolkitRelyingPartyGetPublicKeysResponse
          where
-        toJSON = const emptyObject
+        toJSON = toJSON . _irpgpkrProperties
 
 -- | Request of getting a code for user confirmation (reset password, change
 -- email etc.)

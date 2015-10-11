@@ -313,6 +313,7 @@ module Network.Google.BigQuery.Types
     -- * JSONObject
     , JSONObject
     , jsonObject
+    , joProperties
 
     -- * JobConfigurationQuery
     , JobConfigurationQuery
@@ -347,6 +348,7 @@ module Network.Google.BigQuery.Types
     -- * JobConfigurationQueryTableDefinitions
     , JobConfigurationQueryTableDefinitions
     , jobConfigurationQueryTableDefinitions
+    , jcqtdProperties
 
     -- * TableCell
     , TableCell

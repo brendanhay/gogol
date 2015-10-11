@@ -21,6 +21,7 @@ module Network.Google.Dataflow.Types
     -- * JobExecutionInfoStages
     , JobExecutionInfoStages
     , jobExecutionInfoStages
+    , jeisProperties
 
     -- * ComputationTopology
     , ComputationTopology
@@ -74,6 +75,7 @@ module Network.Google.Dataflow.Types
     -- * WorkerPoolMetadata
     , WorkerPoolMetadata
     , workerPoolMetadata
+    , wpmProperties
 
     -- * AutoscalingSettings
     , AutoscalingSettings
@@ -103,6 +105,7 @@ module Network.Google.Dataflow.Types
     -- * EnvironmentVersion
     , EnvironmentVersion
     , environmentVersion
+    , evProperties
 
     -- * Sink
     , Sink
@@ -126,6 +129,7 @@ module Network.Google.Dataflow.Types
     -- * EnvironmentUserAgent
     , EnvironmentUserAgent
     , environmentUserAgent
+    , euaProperties
 
     -- * Disk
     , Disk
@@ -174,6 +178,7 @@ module Network.Google.Dataflow.Types
     -- * MetricStructuredNameContext
     , MetricStructuredNameContext
     , metricStructuredNameContext
+    , msncProperties
 
     -- * StreamingStageLocation
     , StreamingStageLocation
@@ -215,10 +220,12 @@ module Network.Google.Dataflow.Types
     -- * JobTransformNameMApping
     , JobTransformNameMApping
     , jobTransformNameMApping
+    , jtnmaProperties
 
     -- * SourceSpec
     , SourceSpec
     , sourceSpec
+    , ssProperties
 
     -- * SourceMetadata
     , SourceMetadata
@@ -230,6 +237,7 @@ module Network.Google.Dataflow.Types
     -- * EnvironmentInternalExperiments
     , EnvironmentInternalExperiments
     , environmentInternalExperiments
+    , eieProperties
 
     -- * TaskRunnerSettings
     , TaskRunnerSettings
@@ -257,6 +265,7 @@ module Network.Google.Dataflow.Types
     -- * EnvironmentSdkPipelineOptions
     , EnvironmentSdkPipelineOptions
     , environmentSdkPipelineOptions
+    , espoProperties
 
     -- * LeaseWorkItemRequest
     , LeaseWorkItemRequest
@@ -276,6 +285,7 @@ module Network.Google.Dataflow.Types
     -- * TopologyConfigUserStageToComputationNameMap
     , TopologyConfigUserStageToComputationNameMap
     , topologyConfigUserStageToComputationNameMap
+    , tcustcnmProperties
 
     -- * ShellTask
     , ShellTask
@@ -286,10 +296,12 @@ module Network.Google.Dataflow.Types
     -- * StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
+    , sdiProperties
 
     -- * StepProperties
     , StepProperties
     , stepProperties
+    , spProperties
 
     -- * TopologyConfig
     , TopologyConfig
@@ -311,6 +323,7 @@ module Network.Google.Dataflow.Types
     -- * WorkItemServiceStateHarnessData
     , WorkItemServiceStateHarnessData
     , workItemServiceStateHarnessData
+    , wisshdProperties
 
     -- * DataDiskAssignment
     , DataDiskAssignment
@@ -338,6 +351,7 @@ module Network.Google.Dataflow.Types
     -- * PartialGroupByKeyInstructionInputElementCodec
     , PartialGroupByKeyInstructionInputElementCodec
     , partialGroupByKeyInstructionInputElementCodec
+    , pgbkiiecProperties
 
     -- * MapTask
     , MapTask
@@ -354,14 +368,17 @@ module Network.Google.Dataflow.Types
     -- * SinkCodec
     , SinkCodec
     , sinkCodec
+    , scProperties
 
     -- * ParDoInstructionUserFn
     , ParDoInstructionUserFn
     , parDoInstructionUserFn
+    , pdiufProperties
 
     -- * InstructionOutputCodec
     , InstructionOutputCodec
     , instructionOutputCodec
+    , iocProperties
 
     -- * StreamLocation
     , StreamLocation
@@ -374,6 +391,7 @@ module Network.Google.Dataflow.Types
     -- * WorkerPoolPoolArgs
     , WorkerPoolPoolArgs
     , workerPoolPoolArgs
+    , wppaProperties
 
     -- * StreamingSideInputLocation
     , StreamingSideInputLocation
@@ -410,10 +428,12 @@ module Network.Google.Dataflow.Types
     -- * SeqMapTaskUserFn
     , SeqMapTaskUserFn
     , seqMapTaskUserFn
+    , smtufProperties
 
     -- * PartialGroupByKeyInstructionValueCombiningFn
     , PartialGroupByKeyInstructionValueCombiningFn
     , partialGroupByKeyInstructionValueCombiningFn
+    , pgbkivcfProperties
 
     -- * Job
     , Job
@@ -442,6 +462,7 @@ module Network.Google.Dataflow.Types
     -- * SinkSpec
     , SinkSpec
     , sinkSpec
+    , ssProperties
 
     -- * WorkerPool
     , WorkerPool
@@ -562,6 +583,7 @@ module Network.Google.Dataflow.Types
     -- * SourceBaseSpecsItem
     , SourceBaseSpecsItem
     , sourceBaseSpecsItem
+    , sbsiProperties
 
     -- * ParallelInstruction
     , ParallelInstruction
@@ -578,6 +600,7 @@ module Network.Google.Dataflow.Types
     -- * SideInputInfoKind
     , SideInputInfoKind
     , sideInputInfoKind
+    , siikProperties
 
     -- * SourceSplitShard
     , SourceSplitShard
@@ -600,6 +623,7 @@ module Network.Google.Dataflow.Types
     -- * SourceCodec
     , SourceCodec
     , sourceCodec
+    , scProperties
 
     -- * StateFamilyConfig
     , StateFamilyConfig

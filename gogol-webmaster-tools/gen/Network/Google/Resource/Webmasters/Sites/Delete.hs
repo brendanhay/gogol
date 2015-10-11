@@ -55,7 +55,7 @@ type SitesDeleteResource =
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
                  QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
+                   Header "Authorization" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a site from the set of the user\'s Webmaster Tools sites.

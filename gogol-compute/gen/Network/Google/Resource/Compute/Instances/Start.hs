@@ -62,7 +62,7 @@ type InstancesStartResource =
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
                          QueryParam "key" AuthKey :>
-                           QueryParam "oauth_token" OAuthToken :>
+                           Header "Authorization" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | This method starts an instance that was stopped using the using the

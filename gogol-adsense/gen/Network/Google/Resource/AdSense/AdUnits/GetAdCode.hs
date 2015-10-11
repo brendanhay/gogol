@@ -59,7 +59,7 @@ type AdUnitsGetAdCodeResource =
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
                        QueryParam "key" AuthKey :>
-                         QueryParam "oauth_token" OAuthToken :>
+                         Header "Authorization" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] AdCode
 
 -- | Get ad code for the specified ad unit.

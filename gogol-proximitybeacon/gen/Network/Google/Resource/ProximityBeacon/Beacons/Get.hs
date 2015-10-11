@@ -67,7 +67,7 @@ type BeaconsGetResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
                              QueryParam "key" AuthKey :>
-                               QueryParam "oauth_token" OAuthToken :>
+                               Header "Authorization" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Beacon
 
 -- | Returns detailed information about the specified beacon.

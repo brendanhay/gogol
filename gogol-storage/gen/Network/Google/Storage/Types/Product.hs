@@ -213,23 +213,35 @@ instance ToJSON BucketLogging where
 -- | User-provided metadata, in key\/value pairs.
 --
 -- /See:/ 'objectMetadata' smart constructor.
-data ObjectMetadata =
-    ObjectMetadata
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype ObjectMetadata = ObjectMetadata
+    { _omProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectMetadata' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'omProperties'
 objectMetadata
-    :: ObjectMetadata
-objectMetadata = ObjectMetadata
+    :: HashMap Text Text -- ^ 'properties'
+    -> ObjectMetadata
+objectMetadata pOmProperties_ =
+    ObjectMetadata
+    { _omProperties = pOmProperties_
+    }
+
+-- | An individual metadata entry.
+omProperties :: Lens' ObjectMetadata (HashMap Text Text)
+omProperties
+  = lens _omProperties (\ s a -> s{_omProperties = a})
 
 instance FromJSON ObjectMetadata where
         parseJSON
           = withObject "ObjectMetadata"
-              (\ o -> pure ObjectMetadata)
+              (\ o -> ObjectMetadata <$> (parseJSONObject o))
 
 instance ToJSON ObjectMetadata where
-        toJSON = const emptyObject
+        toJSON = toJSON . _omProperties
 
 -- | The condition(s) under which the action will be taken.
 --
@@ -1192,23 +1204,35 @@ instance ToJSON ComposeRequestSourceObjectsItem where
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
 -- /See:/ 'channelParams' smart constructor.
-data ChannelParams =
-    ChannelParams
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype ChannelParams = ChannelParams
+    { _cpProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cpProperties'
 channelParams
-    :: ChannelParams
-channelParams = ChannelParams
+    :: HashMap Text Text -- ^ 'properties'
+    -> ChannelParams
+channelParams pCpProperties_ =
+    ChannelParams
+    { _cpProperties = pCpProperties_
+    }
+
+-- | Declares a new parameter by name.
+cpProperties :: Lens' ChannelParams (HashMap Text Text)
+cpProperties
+  = lens _cpProperties (\ s a -> s{_cpProperties = a})
 
 instance FromJSON ChannelParams where
         parseJSON
           = withObject "ChannelParams"
-              (\ o -> pure ChannelParams)
+              (\ o -> ChannelParams <$> (parseJSONObject o))
 
 instance ToJSON ChannelParams where
-        toJSON = const emptyObject
+        toJSON = toJSON . _cpProperties
 
 -- | An object.
 --

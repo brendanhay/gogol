@@ -691,23 +691,38 @@ instance ToJSON McfDataColumnHeadersItem where
 -- same as the metric order specified in the request.
 --
 -- /See:/ 'gaDataTotalsForAllResults' smart constructor.
-data GaDataTotalsForAllResults =
-    GaDataTotalsForAllResults
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype GaDataTotalsForAllResults = GaDataTotalsForAllResults
+    { _gdtfarProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GaDataTotalsForAllResults' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdtfarProperties'
 gaDataTotalsForAllResults
-    :: GaDataTotalsForAllResults
-gaDataTotalsForAllResults = GaDataTotalsForAllResults
+    :: HashMap Text Text -- ^ 'properties'
+    -> GaDataTotalsForAllResults
+gaDataTotalsForAllResults pGdtfarProperties_ =
+    GaDataTotalsForAllResults
+    { _gdtfarProperties = pGdtfarProperties_
+    }
+
+-- | Key-value pair for the total value of a metric. Key is the metric name
+-- and the value is the total value for that metric.
+gdtfarProperties :: Lens' GaDataTotalsForAllResults (HashMap Text Text)
+gdtfarProperties
+  = lens _gdtfarProperties
+      (\ s a -> s{_gdtfarProperties = a})
 
 instance FromJSON GaDataTotalsForAllResults where
         parseJSON
           = withObject "GaDataTotalsForAllResults"
-              (\ o -> pure GaDataTotalsForAllResults)
+              (\ o ->
+                 GaDataTotalsForAllResults <$> (parseJSONObject o))
 
 instance ToJSON GaDataTotalsForAllResults where
-        toJSON = const emptyObject
+        toJSON = toJSON . _gdtfarProperties
 
 -- | Parent link for this view (profile). Points to the web property to which
 -- this view (profile) belongs.
@@ -3717,24 +3732,40 @@ instance ToJSON GaData where
 -- same as the metric order specified in the request.
 --
 -- /See:/ 'realtimeDataTotalsForAllResults' smart constructor.
-data RealtimeDataTotalsForAllResults =
-    RealtimeDataTotalsForAllResults
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype RealtimeDataTotalsForAllResults = RealtimeDataTotalsForAllResults
+    { _rdtfarProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RealtimeDataTotalsForAllResults' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdtfarProperties'
 realtimeDataTotalsForAllResults
-    :: RealtimeDataTotalsForAllResults
-realtimeDataTotalsForAllResults = RealtimeDataTotalsForAllResults
+    :: HashMap Text Text -- ^ 'properties'
+    -> RealtimeDataTotalsForAllResults
+realtimeDataTotalsForAllResults pRdtfarProperties_ =
+    RealtimeDataTotalsForAllResults
+    { _rdtfarProperties = pRdtfarProperties_
+    }
+
+-- | Key-value pair for the total value of a metric. Key is the metric name
+-- and the value is the total value for that metric.
+rdtfarProperties :: Lens' RealtimeDataTotalsForAllResults (HashMap Text Text)
+rdtfarProperties
+  = lens _rdtfarProperties
+      (\ s a -> s{_rdtfarProperties = a})
 
 instance FromJSON RealtimeDataTotalsForAllResults
          where
         parseJSON
           = withObject "RealtimeDataTotalsForAllResults"
-              (\ o -> pure RealtimeDataTotalsForAllResults)
+              (\ o ->
+                 RealtimeDataTotalsForAllResults <$>
+                   (parseJSONObject o))
 
 instance ToJSON RealtimeDataTotalsForAllResults where
-        toJSON = const emptyObject
+        toJSON = toJSON . _rdtfarProperties
 
 -- | JSON template for an Analytics custom data source.
 --
@@ -9135,23 +9166,38 @@ instance ToJSON ExperimentVariationsItem where
 -- same as the metric order specified in the request.
 --
 -- /See:/ 'mcfDataTotalsForAllResults' smart constructor.
-data McfDataTotalsForAllResults =
-    McfDataTotalsForAllResults
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype McfDataTotalsForAllResults = McfDataTotalsForAllResults
+    { _mdtfarProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'McfDataTotalsForAllResults' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mdtfarProperties'
 mcfDataTotalsForAllResults
-    :: McfDataTotalsForAllResults
-mcfDataTotalsForAllResults = McfDataTotalsForAllResults
+    :: HashMap Text Text -- ^ 'properties'
+    -> McfDataTotalsForAllResults
+mcfDataTotalsForAllResults pMdtfarProperties_ =
+    McfDataTotalsForAllResults
+    { _mdtfarProperties = pMdtfarProperties_
+    }
+
+-- | Key-value pair for the total value of a metric. Key is the metric name
+-- and the value is the total value for that metric.
+mdtfarProperties :: Lens' McfDataTotalsForAllResults (HashMap Text Text)
+mdtfarProperties
+  = lens _mdtfarProperties
+      (\ s a -> s{_mdtfarProperties = a})
 
 instance FromJSON McfDataTotalsForAllResults where
         parseJSON
           = withObject "McfDataTotalsForAllResults"
-              (\ o -> pure McfDataTotalsForAllResults)
+              (\ o ->
+                 McfDataTotalsForAllResults <$> (parseJSONObject o))
 
 instance ToJSON McfDataTotalsForAllResults where
-        toJSON = const emptyObject
+        toJSON = toJSON . _mdtfarProperties
 
 -- | Download details for a file stored in Google Cloud Storage.
 --
@@ -9363,20 +9409,32 @@ instance ToJSON GoalParentLink where
 -- | Map of attribute name and value for this column.
 --
 -- /See:/ 'columnAttributes' smart constructor.
-data ColumnAttributes =
-    ColumnAttributes
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype ColumnAttributes = ColumnAttributes
+    { _caProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnAttributes' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'caProperties'
 columnAttributes
-    :: ColumnAttributes
-columnAttributes = ColumnAttributes
+    :: HashMap Text Text -- ^ 'properties'
+    -> ColumnAttributes
+columnAttributes pCaProperties_ =
+    ColumnAttributes
+    { _caProperties = pCaProperties_
+    }
+
+-- | The name of the attribute.
+caProperties :: Lens' ColumnAttributes (HashMap Text Text)
+caProperties
+  = lens _caProperties (\ s a -> s{_caProperties = a})
 
 instance FromJSON ColumnAttributes where
         parseJSON
           = withObject "ColumnAttributes"
-              (\ o -> pure ColumnAttributes)
+              (\ o -> ColumnAttributes <$> (parseJSONObject o))
 
 instance ToJSON ColumnAttributes where
-        toJSON = const emptyObject
+        toJSON = toJSON . _caProperties

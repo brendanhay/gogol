@@ -2830,22 +2830,34 @@ instance ToJSON JobCancelResponse where
 -- | Represents a single JSON object.
 --
 -- /See:/ 'jsonObject' smart constructor.
-data JSONObject =
-    JSONObject
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype JSONObject = JSONObject
+    { _joProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JSONObject' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'joProperties'
 jsonObject
-    :: JSONObject
-jsonObject = JSONObject
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> JSONObject
+jsonObject pJoProperties_ =
+    JSONObject
+    { _joProperties = pJoProperties_
+    }
+
+joProperties :: Lens' JSONObject (HashMap Text JSONValue)
+joProperties
+  = lens _joProperties (\ s a -> s{_joProperties = a})
 
 instance FromJSON JSONObject where
         parseJSON
-          = withObject "JSONObject" (\ o -> pure JSONObject)
+          = withObject "JSONObject"
+              (\ o -> JSONObject <$> (parseJSONObject o))
 
 instance ToJSON JSONObject where
-        toJSON = const emptyObject
+        toJSON = toJSON . _joProperties
 
 --
 -- /See:/ 'jobConfigurationQuery' smart constructor.
@@ -3167,25 +3179,39 @@ instance ToJSON JobList where
 -- queried as if it were a standard BigQuery table.
 --
 -- /See:/ 'jobConfigurationQueryTableDefinitions' smart constructor.
-data JobConfigurationQueryTableDefinitions =
-    JobConfigurationQueryTableDefinitions
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype JobConfigurationQueryTableDefinitions = JobConfigurationQueryTableDefinitions
+    { _jcqtdProperties :: HashMap Text ExternalDataConfiguration
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobConfigurationQueryTableDefinitions' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jcqtdProperties'
 jobConfigurationQueryTableDefinitions
-    :: JobConfigurationQueryTableDefinitions
-jobConfigurationQueryTableDefinitions = JobConfigurationQueryTableDefinitions
+    :: HashMap Text ExternalDataConfiguration -- ^ 'properties'
+    -> JobConfigurationQueryTableDefinitions
+jobConfigurationQueryTableDefinitions pJcqtdProperties_ =
+    JobConfigurationQueryTableDefinitions
+    { _jcqtdProperties = pJcqtdProperties_
+    }
+
+jcqtdProperties :: Lens' JobConfigurationQueryTableDefinitions (HashMap Text ExternalDataConfiguration)
+jcqtdProperties
+  = lens _jcqtdProperties
+      (\ s a -> s{_jcqtdProperties = a})
 
 instance FromJSON
          JobConfigurationQueryTableDefinitions where
         parseJSON
           = withObject "JobConfigurationQueryTableDefinitions"
-              (\ o -> pure JobConfigurationQueryTableDefinitions)
+              (\ o ->
+                 JobConfigurationQueryTableDefinitions <$>
+                   (parseJSONObject o))
 
 instance ToJSON JobConfigurationQueryTableDefinitions
          where
-        toJSON = const emptyObject
+        toJSON = toJSON . _jcqtdProperties
 
 --
 -- /See:/ 'tableCell' smart constructor.

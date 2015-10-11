@@ -63,7 +63,7 @@ type SSLCertsGetResource =
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
                          QueryParam "key" AuthKey :>
-                           QueryParam "oauth_token" OAuthToken :>
+                           Header "Authorization" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] SSLCert
 
 -- | Retrieves a particular SSL certificate. Does not include the private key

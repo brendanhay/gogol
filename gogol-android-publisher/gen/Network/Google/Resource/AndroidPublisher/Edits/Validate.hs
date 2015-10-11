@@ -58,7 +58,7 @@ type EditsValidateResource =
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
                    QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
+                     Header "Authorization" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] AppEdit
 
 -- | Checks that the edit can be successfully committed. The edit\'s changes

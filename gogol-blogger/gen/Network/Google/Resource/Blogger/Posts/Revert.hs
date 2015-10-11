@@ -59,7 +59,7 @@ type PostsRevertResource =
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
                        QueryParam "key" AuthKey :>
-                         QueryParam "oauth_token" OAuthToken :>
+                         Header "Authorization" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Post'
 
 -- | Revert a published or scheduled post to draft state.

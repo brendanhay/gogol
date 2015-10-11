@@ -57,7 +57,7 @@ type VerificationCodesGenerateResource =
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
                      QueryParam "key" AuthKey :>
-                       QueryParam "oauth_token" OAuthToken :>
+                       Header "Authorization" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Generate new backup verification codes for the user.

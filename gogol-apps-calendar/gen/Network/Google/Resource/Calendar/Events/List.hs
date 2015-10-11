@@ -90,7 +90,7 @@ type EventsListResource =
                                                  QueryParam "userIp" Text :>
                                                    QueryParam "fields" Text :>
                                                      QueryParam "key" AuthKey :>
-                                                       QueryParam "oauth_token"
+                                                       Header "Authorization"
                                                          OAuthToken
                                                          :>
                                                          QueryParam "alt"

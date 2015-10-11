@@ -577,23 +577,36 @@ instance ToJSON GoogleServiceAccount where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-data StatusDetailsItem =
-    StatusDetailsItem
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype StatusDetailsItem = StatusDetailsItem
+    { _sdiProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sdiProperties'
 statusDetailsItem
-    :: StatusDetailsItem
-statusDetailsItem = StatusDetailsItem
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> StatusDetailsItem
+statusDetailsItem pSdiProperties_ =
+    StatusDetailsItem
+    { _sdiProperties = pSdiProperties_
+    }
+
+-- | Properties of the object. Contains field \'ype with type URL.
+sdiProperties :: Lens' StatusDetailsItem (HashMap Text JSONValue)
+sdiProperties
+  = lens _sdiProperties
+      (\ s a -> s{_sdiProperties = a})
 
 instance FromJSON StatusDetailsItem where
         parseJSON
           = withObject "StatusDetailsItem"
-              (\ o -> pure StatusDetailsItem)
+              (\ o -> StatusDetailsItem <$> (parseJSONObject o))
 
 instance ToJSON StatusDetailsItem where
-        toJSON = const emptyObject
+        toJSON = toJSON . _sdiProperties
 
 -- | Represents a whole calendar date, e.g. date of birth. The time of day
 -- and time zone are either specified elsewhere or are not significant. The
@@ -1378,23 +1391,35 @@ instance ToJSON ErrorLogEntry where
 -- | Represents the transfer operation object.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-data OperationMetadata =
-    OperationMetadata
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype OperationMetadata = OperationMetadata
+    { _omProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'omProperties'
 operationMetadata
-    :: OperationMetadata
-operationMetadata = OperationMetadata
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> OperationMetadata
+operationMetadata pOmProperties_ =
+    OperationMetadata
+    { _omProperties = pOmProperties_
+    }
+
+-- | Properties of the object. Contains field \'ype with type URL.
+omProperties :: Lens' OperationMetadata (HashMap Text JSONValue)
+omProperties
+  = lens _omProperties (\ s a -> s{_omProperties = a})
 
 instance FromJSON OperationMetadata where
         parseJSON
           = withObject "OperationMetadata"
-              (\ o -> pure OperationMetadata)
+              (\ o -> OperationMetadata <$> (parseJSONObject o))
 
 instance ToJSON OperationMetadata where
-        toJSON = const emptyObject
+        toJSON = toJSON . _omProperties
 
 -- | TransferOptions uses three boolean parameters to define the actions to
 -- be performed on objects in a transfer.
@@ -1758,23 +1783,35 @@ instance ToJSON ListTransferJobsResponse where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-data OperationResponse =
-    OperationResponse
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype OperationResponse = OperationResponse
+    { _orProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'orProperties'
 operationResponse
-    :: OperationResponse
-operationResponse = OperationResponse
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> OperationResponse
+operationResponse pOrProperties_ =
+    OperationResponse
+    { _orProperties = pOrProperties_
+    }
+
+-- | Properties of the object. Contains field \'ype with type URL.
+orProperties :: Lens' OperationResponse (HashMap Text JSONValue)
+orProperties
+  = lens _orProperties (\ s a -> s{_orProperties = a})
 
 instance FromJSON OperationResponse where
         parseJSON
           = withObject "OperationResponse"
-              (\ o -> pure OperationResponse)
+              (\ o -> OperationResponse <$> (parseJSONObject o))
 
 instance ToJSON OperationResponse where
-        toJSON = const emptyObject
+        toJSON = toJSON . _orProperties
 
 -- | Request passed to ResumeTransferOperation.
 --

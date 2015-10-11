@@ -57,7 +57,7 @@ type ProductstatusesGetResource =
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
                    QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
+                     Header "Authorization" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] ProductStatus
 
 -- | Gets the status of a product from your Merchant Center account.

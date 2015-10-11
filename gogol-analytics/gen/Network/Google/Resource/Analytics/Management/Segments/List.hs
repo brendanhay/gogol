@@ -58,7 +58,7 @@ type ManagementSegmentsListResource =
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
                      QueryParam "key" AuthKey :>
-                       QueryParam "oauth_token" OAuthToken :>
+                       Header "Authorization" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Segments
 
 -- | Lists segments to which the user has access.

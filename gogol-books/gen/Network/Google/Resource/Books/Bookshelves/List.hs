@@ -58,7 +58,7 @@ type BookshelvesListResource =
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
                      QueryParam "key" AuthKey :>
-                       QueryParam "oauth_token" OAuthToken :>
+                       Header "Authorization" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Bookshelves
 
 -- | Retrieves a list of public bookshelves for the specified user.

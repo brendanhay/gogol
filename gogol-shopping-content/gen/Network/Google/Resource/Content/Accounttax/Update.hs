@@ -60,7 +60,7 @@ type AccounttaxUpdateResource =
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
                      QueryParam "key" AuthKey :>
-                       QueryParam "oauth_token" OAuthToken :>
+                       Header "Authorization" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] AccountTax :> Put '[JSON] AccountTax
 

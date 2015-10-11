@@ -62,7 +62,7 @@ type AdvertisersGetResource =
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
                      QueryParam "key" AuthKey :>
-                       QueryParam "oauth_token" OAuthToken :>
+                       Header "Authorization" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Advertiser
 
 -- | Retrieves data about a single advertiser if that the requesting

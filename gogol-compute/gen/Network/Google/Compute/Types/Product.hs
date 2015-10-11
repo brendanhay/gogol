@@ -159,45 +159,74 @@ instance ToJSON
 -- | [Output Only] A map of scoped machine type lists.
 --
 -- /See:/ 'machineTypeAggregatedListItems' smart constructor.
-data MachineTypeAggregatedListItems =
-    MachineTypeAggregatedListItems
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype MachineTypeAggregatedListItems = MachineTypeAggregatedListItems
+    { _mtaliProperties :: HashMap Text MachineTypesScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypeAggregatedListItems' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mtaliProperties'
 machineTypeAggregatedListItems
-    :: MachineTypeAggregatedListItems
-machineTypeAggregatedListItems = MachineTypeAggregatedListItems
+    :: HashMap Text MachineTypesScopedList -- ^ 'properties'
+    -> MachineTypeAggregatedListItems
+machineTypeAggregatedListItems pMtaliProperties_ =
+    MachineTypeAggregatedListItems
+    { _mtaliProperties = pMtaliProperties_
+    }
+
+-- | [Output Only] Name of the scope containing this set of machine types.
+mtaliProperties :: Lens' MachineTypeAggregatedListItems (HashMap Text MachineTypesScopedList)
+mtaliProperties
+  = lens _mtaliProperties
+      (\ s a -> s{_mtaliProperties = a})
 
 instance FromJSON MachineTypeAggregatedListItems
          where
         parseJSON
           = withObject "MachineTypeAggregatedListItems"
-              (\ o -> pure MachineTypeAggregatedListItems)
+              (\ o ->
+                 MachineTypeAggregatedListItems <$>
+                   (parseJSONObject o))
 
 instance ToJSON MachineTypeAggregatedListItems where
-        toJSON = const emptyObject
+        toJSON = toJSON . _mtaliProperties
 
 -- | [Output Only] A map of scoped disk type lists.
 --
 -- /See:/ 'diskTypeAggregatedListItems' smart constructor.
-data DiskTypeAggregatedListItems =
-    DiskTypeAggregatedListItems
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype DiskTypeAggregatedListItems = DiskTypeAggregatedListItems
+    { _dtaliProperties :: HashMap Text DiskTypesScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskTypeAggregatedListItems' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dtaliProperties'
 diskTypeAggregatedListItems
-    :: DiskTypeAggregatedListItems
-diskTypeAggregatedListItems = DiskTypeAggregatedListItems
+    :: HashMap Text DiskTypesScopedList -- ^ 'properties'
+    -> DiskTypeAggregatedListItems
+diskTypeAggregatedListItems pDtaliProperties_ =
+    DiskTypeAggregatedListItems
+    { _dtaliProperties = pDtaliProperties_
+    }
+
+-- | [Output Only] Name of the scope containing this set of disk types.
+dtaliProperties :: Lens' DiskTypeAggregatedListItems (HashMap Text DiskTypesScopedList)
+dtaliProperties
+  = lens _dtaliProperties
+      (\ s a -> s{_dtaliProperties = a})
 
 instance FromJSON DiskTypeAggregatedListItems where
         parseJSON
           = withObject "DiskTypeAggregatedListItems"
-              (\ o -> pure DiskTypeAggregatedListItems)
+              (\ o ->
+                 DiskTypeAggregatedListItems <$> (parseJSONObject o))
 
 instance ToJSON DiskTypeAggregatedListItems where
-        toJSON = const emptyObject
+        toJSON = toJSON . _dtaliProperties
 
 -- | Contains a list of Firewall resources.
 --
@@ -428,23 +457,38 @@ instance ToJSON InstanceGroupList where
 -- | A map of scoped autoscaler lists.
 --
 -- /See:/ 'autoscalerAggregatedListItems' smart constructor.
-data AutoscalerAggregatedListItems =
-    AutoscalerAggregatedListItems
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype AutoscalerAggregatedListItems = AutoscalerAggregatedListItems
+    { _aaliProperties :: HashMap Text AutoscalersScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalerAggregatedListItems' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aaliProperties'
 autoscalerAggregatedListItems
-    :: AutoscalerAggregatedListItems
-autoscalerAggregatedListItems = AutoscalerAggregatedListItems
+    :: HashMap Text AutoscalersScopedList -- ^ 'properties'
+    -> AutoscalerAggregatedListItems
+autoscalerAggregatedListItems pAaliProperties_ =
+    AutoscalerAggregatedListItems
+    { _aaliProperties = pAaliProperties_
+    }
+
+-- | Name of the scope containing this set of autoscalers.
+aaliProperties :: Lens' AutoscalerAggregatedListItems (HashMap Text AutoscalersScopedList)
+aaliProperties
+  = lens _aaliProperties
+      (\ s a -> s{_aaliProperties = a})
 
 instance FromJSON AutoscalerAggregatedListItems where
         parseJSON
           = withObject "AutoscalerAggregatedListItems"
-              (\ o -> pure AutoscalerAggregatedListItems)
+              (\ o ->
+                 AutoscalerAggregatedListItems <$>
+                   (parseJSONObject o))
 
 instance ToJSON AutoscalerAggregatedListItems where
-        toJSON = const emptyObject
+        toJSON = toJSON . _aaliProperties
 
 --
 -- /See:/ 'instanceGroupManagersSetInstanceTemplateRequest' smart constructor.
@@ -1723,25 +1767,40 @@ instance ToJSON URLMap where
 -- | A map of scoped instance group lists.
 --
 -- /See:/ 'instanceGroupAggregatedListItems' smart constructor.
-data InstanceGroupAggregatedListItems =
-    InstanceGroupAggregatedListItems
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype InstanceGroupAggregatedListItems = InstanceGroupAggregatedListItems
+    { _igaliProperties :: HashMap Text InstanceGroupsScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupAggregatedListItems' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igaliProperties'
 instanceGroupAggregatedListItems
-    :: InstanceGroupAggregatedListItems
-instanceGroupAggregatedListItems = InstanceGroupAggregatedListItems
+    :: HashMap Text InstanceGroupsScopedList -- ^ 'properties'
+    -> InstanceGroupAggregatedListItems
+instanceGroupAggregatedListItems pIgaliProperties_ =
+    InstanceGroupAggregatedListItems
+    { _igaliProperties = pIgaliProperties_
+    }
+
+-- | The name of the scope that contains this set of instance groups.
+igaliProperties :: Lens' InstanceGroupAggregatedListItems (HashMap Text InstanceGroupsScopedList)
+igaliProperties
+  = lens _igaliProperties
+      (\ s a -> s{_igaliProperties = a})
 
 instance FromJSON InstanceGroupAggregatedListItems
          where
         parseJSON
           = withObject "InstanceGroupAggregatedListItems"
-              (\ o -> pure InstanceGroupAggregatedListItems)
+              (\ o ->
+                 InstanceGroupAggregatedListItems <$>
+                   (parseJSONObject o))
 
 instance ToJSON InstanceGroupAggregatedListItems
          where
-        toJSON = const emptyObject
+        toJSON = toJSON . _igaliProperties
 
 -- | Contains a list of TargetPool resources.
 --
@@ -4736,23 +4795,37 @@ instance ToJSON RouteWarningsItemDataItem where
 -- | [Output Only] A map of scoped instance lists.
 --
 -- /See:/ 'instanceAggregatedListItems' smart constructor.
-data InstanceAggregatedListItems =
-    InstanceAggregatedListItems
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype InstanceAggregatedListItems = InstanceAggregatedListItems
+    { _ialiProperties :: HashMap Text InstancesScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceAggregatedListItems' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ialiProperties'
 instanceAggregatedListItems
-    :: InstanceAggregatedListItems
-instanceAggregatedListItems = InstanceAggregatedListItems
+    :: HashMap Text InstancesScopedList -- ^ 'properties'
+    -> InstanceAggregatedListItems
+instanceAggregatedListItems pIaliProperties_ =
+    InstanceAggregatedListItems
+    { _ialiProperties = pIaliProperties_
+    }
+
+-- | Name of the scope containing this set of instances.
+ialiProperties :: Lens' InstanceAggregatedListItems (HashMap Text InstancesScopedList)
+ialiProperties
+  = lens _ialiProperties
+      (\ s a -> s{_ialiProperties = a})
 
 instance FromJSON InstanceAggregatedListItems where
         parseJSON
           = withObject "InstanceAggregatedListItems"
-              (\ o -> pure InstanceAggregatedListItems)
+              (\ o ->
+                 InstanceAggregatedListItems <$> (parseJSONObject o))
 
 instance ToJSON InstanceAggregatedListItems where
-        toJSON = const emptyObject
+        toJSON = toJSON . _ialiProperties
 
 -- | Informational warning which replaces the list of autoscalers when the
 -- list is empty.
@@ -6744,25 +6817,40 @@ instance ToJSON HealthCheckReference where
 -- | A map of scoped target instance lists.
 --
 -- /See:/ 'targetInstanceAggregatedListItems' smart constructor.
-data TargetInstanceAggregatedListItems =
-    TargetInstanceAggregatedListItems
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype TargetInstanceAggregatedListItems = TargetInstanceAggregatedListItems
+    { _tialiProperties :: HashMap Text TargetInstancesScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstanceAggregatedListItems' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tialiProperties'
 targetInstanceAggregatedListItems
-    :: TargetInstanceAggregatedListItems
-targetInstanceAggregatedListItems = TargetInstanceAggregatedListItems
+    :: HashMap Text TargetInstancesScopedList -- ^ 'properties'
+    -> TargetInstanceAggregatedListItems
+targetInstanceAggregatedListItems pTialiProperties_ =
+    TargetInstanceAggregatedListItems
+    { _tialiProperties = pTialiProperties_
+    }
+
+-- | Name of the scope containing this set of target instances.
+tialiProperties :: Lens' TargetInstanceAggregatedListItems (HashMap Text TargetInstancesScopedList)
+tialiProperties
+  = lens _tialiProperties
+      (\ s a -> s{_tialiProperties = a})
 
 instance FromJSON TargetInstanceAggregatedListItems
          where
         parseJSON
           = withObject "TargetInstanceAggregatedListItems"
-              (\ o -> pure TargetInstanceAggregatedListItems)
+              (\ o ->
+                 TargetInstanceAggregatedListItems <$>
+                   (parseJSONObject o))
 
 instance ToJSON TargetInstanceAggregatedListItems
          where
-        toJSON = const emptyObject
+        toJSON = toJSON . _tialiProperties
 
 --
 -- /See:/ 'instanceGroupAggregatedList' smart constructor.
@@ -7577,23 +7665,37 @@ instance ToJSON TargetPoolsAddHealthCheckRequest
 -- | [Output Only] A map of scoped disk lists.
 --
 -- /See:/ 'diskAggregatedListItems' smart constructor.
-data DiskAggregatedListItems =
-    DiskAggregatedListItems
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype DiskAggregatedListItems = DiskAggregatedListItems
+    { _daliProperties :: HashMap Text DisksScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskAggregatedListItems' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'daliProperties'
 diskAggregatedListItems
-    :: DiskAggregatedListItems
-diskAggregatedListItems = DiskAggregatedListItems
+    :: HashMap Text DisksScopedList -- ^ 'properties'
+    -> DiskAggregatedListItems
+diskAggregatedListItems pDaliProperties_ =
+    DiskAggregatedListItems
+    { _daliProperties = pDaliProperties_
+    }
+
+-- | [Output Only] Name of the scope containing this set of disks.
+daliProperties :: Lens' DiskAggregatedListItems (HashMap Text DisksScopedList)
+daliProperties
+  = lens _daliProperties
+      (\ s a -> s{_daliProperties = a})
 
 instance FromJSON DiskAggregatedListItems where
         parseJSON
           = withObject "DiskAggregatedListItems"
-              (\ o -> pure DiskAggregatedListItems)
+              (\ o ->
+                 DiskAggregatedListItems <$> (parseJSONObject o))
 
 instance ToJSON DiskAggregatedListItems where
-        toJSON = const emptyObject
+        toJSON = toJSON . _daliProperties
 
 -- | The location in Cloud Storage and naming method of the daily usage
 -- report. Contains bucket_name and report_name prefix.
@@ -7818,27 +7920,41 @@ instance ToJSON ManagedInstance where
 -- | A map of filtered managed instance group lists.
 --
 -- /See:/ 'instanceGroupManagerAggregatedListItems' smart constructor.
-data InstanceGroupManagerAggregatedListItems =
-    InstanceGroupManagerAggregatedListItems
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype InstanceGroupManagerAggregatedListItems = InstanceGroupManagerAggregatedListItems
+    { _igmaliProperties :: HashMap Text InstanceGroupManagersScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagerAggregatedListItems' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmaliProperties'
 instanceGroupManagerAggregatedListItems
-    :: InstanceGroupManagerAggregatedListItems
-instanceGroupManagerAggregatedListItems =
+    :: HashMap Text InstanceGroupManagersScopedList -- ^ 'properties'
+    -> InstanceGroupManagerAggregatedListItems
+instanceGroupManagerAggregatedListItems pIgmaliProperties_ =
     InstanceGroupManagerAggregatedListItems
+    { _igmaliProperties = pIgmaliProperties_
+    }
+
+-- | The name of the scope that contains this set of managed instance groups.
+igmaliProperties :: Lens' InstanceGroupManagerAggregatedListItems (HashMap Text InstanceGroupManagersScopedList)
+igmaliProperties
+  = lens _igmaliProperties
+      (\ s a -> s{_igmaliProperties = a})
 
 instance FromJSON
          InstanceGroupManagerAggregatedListItems where
         parseJSON
           = withObject
               "InstanceGroupManagerAggregatedListItems"
-              (\ o -> pure InstanceGroupManagerAggregatedListItems)
+              (\ o ->
+                 InstanceGroupManagerAggregatedListItems <$>
+                   (parseJSONObject o))
 
 instance ToJSON
          InstanceGroupManagerAggregatedListItems where
-        toJSON = const emptyObject
+        toJSON = toJSON . _igmaliProperties
 
 --
 -- /See:/ 'instanceGroupManagersDeleteInstancesRequest' smart constructor.
@@ -8152,46 +8268,75 @@ instance ToJSON AddressList where
 -- | A map of scoped forwarding rule lists.
 --
 -- /See:/ 'forwardingRuleAggregatedListItems' smart constructor.
-data ForwardingRuleAggregatedListItems =
-    ForwardingRuleAggregatedListItems
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype ForwardingRuleAggregatedListItems = ForwardingRuleAggregatedListItems
+    { _fraliProperties :: HashMap Text ForwardingRulesScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRuleAggregatedListItems' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fraliProperties'
 forwardingRuleAggregatedListItems
-    :: ForwardingRuleAggregatedListItems
-forwardingRuleAggregatedListItems = ForwardingRuleAggregatedListItems
+    :: HashMap Text ForwardingRulesScopedList -- ^ 'properties'
+    -> ForwardingRuleAggregatedListItems
+forwardingRuleAggregatedListItems pFraliProperties_ =
+    ForwardingRuleAggregatedListItems
+    { _fraliProperties = pFraliProperties_
+    }
+
+-- | Name of the scope containing this set of addresses.
+fraliProperties :: Lens' ForwardingRuleAggregatedListItems (HashMap Text ForwardingRulesScopedList)
+fraliProperties
+  = lens _fraliProperties
+      (\ s a -> s{_fraliProperties = a})
 
 instance FromJSON ForwardingRuleAggregatedListItems
          where
         parseJSON
           = withObject "ForwardingRuleAggregatedListItems"
-              (\ o -> pure ForwardingRuleAggregatedListItems)
+              (\ o ->
+                 ForwardingRuleAggregatedListItems <$>
+                   (parseJSONObject o))
 
 instance ToJSON ForwardingRuleAggregatedListItems
          where
-        toJSON = const emptyObject
+        toJSON = toJSON . _fraliProperties
 
 -- | [Output Only] A map of scoped operation lists.
 --
 -- /See:/ 'operationAggregatedListItems' smart constructor.
-data OperationAggregatedListItems =
-    OperationAggregatedListItems
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype OperationAggregatedListItems = OperationAggregatedListItems
+    { _oaliProperties :: HashMap Text OperationsScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationAggregatedListItems' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oaliProperties'
 operationAggregatedListItems
-    :: OperationAggregatedListItems
-operationAggregatedListItems = OperationAggregatedListItems
+    :: HashMap Text OperationsScopedList -- ^ 'properties'
+    -> OperationAggregatedListItems
+operationAggregatedListItems pOaliProperties_ =
+    OperationAggregatedListItems
+    { _oaliProperties = pOaliProperties_
+    }
+
+-- | [Output Only] Name of the scope containing this set of operations.
+oaliProperties :: Lens' OperationAggregatedListItems (HashMap Text OperationsScopedList)
+oaliProperties
+  = lens _oaliProperties
+      (\ s a -> s{_oaliProperties = a})
 
 instance FromJSON OperationAggregatedListItems where
         parseJSON
           = withObject "OperationAggregatedListItems"
-              (\ o -> pure OperationAggregatedListItems)
+              (\ o ->
+                 OperationAggregatedListItems <$> (parseJSONObject o))
 
 instance ToJSON OperationAggregatedListItems where
-        toJSON = const emptyObject
+        toJSON = toJSON . _oaliProperties
 
 --
 -- /See:/ 'instanceGroupManagerActionsSummary' smart constructor.
@@ -8488,23 +8633,38 @@ instance ToJSON InstanceGroupsListInstancesRequest
 -- | A map of scoped target pool lists.
 --
 -- /See:/ 'targetPoolAggregatedListItems' smart constructor.
-data TargetPoolAggregatedListItems =
-    TargetPoolAggregatedListItems
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype TargetPoolAggregatedListItems = TargetPoolAggregatedListItems
+    { _tpaliProperties :: HashMap Text TargetPoolsScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolAggregatedListItems' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tpaliProperties'
 targetPoolAggregatedListItems
-    :: TargetPoolAggregatedListItems
-targetPoolAggregatedListItems = TargetPoolAggregatedListItems
+    :: HashMap Text TargetPoolsScopedList -- ^ 'properties'
+    -> TargetPoolAggregatedListItems
+targetPoolAggregatedListItems pTpaliProperties_ =
+    TargetPoolAggregatedListItems
+    { _tpaliProperties = pTpaliProperties_
+    }
+
+-- | Name of the scope containing this set of target pools.
+tpaliProperties :: Lens' TargetPoolAggregatedListItems (HashMap Text TargetPoolsScopedList)
+tpaliProperties
+  = lens _tpaliProperties
+      (\ s a -> s{_tpaliProperties = a})
 
 instance FromJSON TargetPoolAggregatedListItems where
         parseJSON
           = withObject "TargetPoolAggregatedListItems"
-              (\ o -> pure TargetPoolAggregatedListItems)
+              (\ o ->
+                 TargetPoolAggregatedListItems <$>
+                   (parseJSONObject o))
 
 instance ToJSON TargetPoolAggregatedListItems where
-        toJSON = const emptyObject
+        toJSON = toJSON . _tpaliProperties
 
 --
 -- /See:/ 'targetInstancesScopedList' smart constructor.
@@ -8560,23 +8720,37 @@ instance ToJSON TargetInstancesScopedList where
 -- | [Output Only] A map of scoped address lists.
 --
 -- /See:/ 'addressAggregatedListItems' smart constructor.
-data AddressAggregatedListItems =
-    AddressAggregatedListItems
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype AddressAggregatedListItems = AddressAggregatedListItems
+    { _aaliProperties :: HashMap Text AddressesScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressAggregatedListItems' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aaliProperties'
 addressAggregatedListItems
-    :: AddressAggregatedListItems
-addressAggregatedListItems = AddressAggregatedListItems
+    :: HashMap Text AddressesScopedList -- ^ 'properties'
+    -> AddressAggregatedListItems
+addressAggregatedListItems pAaliProperties_ =
+    AddressAggregatedListItems
+    { _aaliProperties = pAaliProperties_
+    }
+
+-- | [Output Only] Name of the scope containing this set of addresses.
+aaliProperties :: Lens' AddressAggregatedListItems (HashMap Text AddressesScopedList)
+aaliProperties
+  = lens _aaliProperties
+      (\ s a -> s{_aaliProperties = a})
 
 instance FromJSON AddressAggregatedListItems where
         parseJSON
           = withObject "AddressAggregatedListItems"
-              (\ o -> pure AddressAggregatedListItems)
+              (\ o ->
+                 AddressAggregatedListItems <$> (parseJSONObject o))
 
 instance ToJSON AddressAggregatedListItems where
-        toJSON = const emptyObject
+        toJSON = toJSON . _aaliProperties
 
 -- | Contains a list of persistent autoscaler resources.
 --
@@ -11257,25 +11431,41 @@ instance ToJSON DisksScopedListWarning where
 -- | A map of scoped target vpn gateway lists.
 --
 -- /See:/ 'targetVPNGatewayAggregatedListItems' smart constructor.
-data TargetVPNGatewayAggregatedListItems =
-    TargetVPNGatewayAggregatedListItems
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype TargetVPNGatewayAggregatedListItems = TargetVPNGatewayAggregatedListItems
+    { _tvgaliProperties :: HashMap Text TargetVPNGatewaysScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVPNGatewayAggregatedListItems' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tvgaliProperties'
 targetVPNGatewayAggregatedListItems
-    :: TargetVPNGatewayAggregatedListItems
-targetVPNGatewayAggregatedListItems = TargetVPNGatewayAggregatedListItems
+    :: HashMap Text TargetVPNGatewaysScopedList -- ^ 'properties'
+    -> TargetVPNGatewayAggregatedListItems
+targetVPNGatewayAggregatedListItems pTvgaliProperties_ =
+    TargetVPNGatewayAggregatedListItems
+    { _tvgaliProperties = pTvgaliProperties_
+    }
+
+-- | [Output Only] Name of the scope containing this set of target vpn
+-- gateways.
+tvgaliProperties :: Lens' TargetVPNGatewayAggregatedListItems (HashMap Text TargetVPNGatewaysScopedList)
+tvgaliProperties
+  = lens _tvgaliProperties
+      (\ s a -> s{_tvgaliProperties = a})
 
 instance FromJSON TargetVPNGatewayAggregatedListItems
          where
         parseJSON
           = withObject "TargetVPNGatewayAggregatedListItems"
-              (\ o -> pure TargetVPNGatewayAggregatedListItems)
+              (\ o ->
+                 TargetVPNGatewayAggregatedListItems <$>
+                   (parseJSONObject o))
 
 instance ToJSON TargetVPNGatewayAggregatedListItems
          where
-        toJSON = const emptyObject
+        toJSON = toJSON . _tvgaliProperties
 
 -- | Informational warning which replaces the list of addresses when the list
 -- is empty.
@@ -14107,23 +14297,37 @@ instance ToJSON InstanceGroupsScopedList where
 -- | [Output Only] A map of scoped vpn tunnel lists.
 --
 -- /See:/ 'vpnTunnelAggregatedListItems' smart constructor.
-data VPNTunnelAggregatedListItems =
-    VPNTunnelAggregatedListItems
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype VPNTunnelAggregatedListItems = VPNTunnelAggregatedListItems
+    { _vtaliProperties :: HashMap Text VPNTunnelsScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnelAggregatedListItems' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vtaliProperties'
 vpnTunnelAggregatedListItems
-    :: VPNTunnelAggregatedListItems
-vpnTunnelAggregatedListItems = VPNTunnelAggregatedListItems
+    :: HashMap Text VPNTunnelsScopedList -- ^ 'properties'
+    -> VPNTunnelAggregatedListItems
+vpnTunnelAggregatedListItems pVtaliProperties_ =
+    VPNTunnelAggregatedListItems
+    { _vtaliProperties = pVtaliProperties_
+    }
+
+-- | Name of the scope containing this set of vpn tunnels.
+vtaliProperties :: Lens' VPNTunnelAggregatedListItems (HashMap Text VPNTunnelsScopedList)
+vtaliProperties
+  = lens _vtaliProperties
+      (\ s a -> s{_vtaliProperties = a})
 
 instance FromJSON VPNTunnelAggregatedListItems where
         parseJSON
           = withObject "VPNTunnelAggregatedListItems"
-              (\ o -> pure VPNTunnelAggregatedListItems)
+              (\ o ->
+                 VPNTunnelAggregatedListItems <$> (parseJSONObject o))
 
 instance ToJSON VPNTunnelAggregatedListItems where
-        toJSON = const emptyObject
+        toJSON = toJSON . _vtaliProperties
 
 -- | A set of instance tags.
 --

@@ -62,7 +62,7 @@ type PublishersGetResource =
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
                      QueryParam "key" AuthKey :>
-                       QueryParam "oauth_token" OAuthToken :>
+                       Header "Authorization" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Publisher
 
 -- | Retrieves data about a single advertiser if that the requesting

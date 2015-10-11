@@ -60,7 +60,7 @@ type CcOffersListResource =
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
                        QueryParam "key" AuthKey :>
-                         QueryParam "oauth_token" OAuthToken :>
+                         Header "Authorization" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] CcOffers
 
 -- | Retrieves credit card offers for the given publisher.

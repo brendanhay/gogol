@@ -166,8 +166,8 @@ type CompaniesListResource =
                                                                                "key"
                                                                                AuthKey
                                                                                :>
-                                                                               QueryParam
-                                                                                 "oauth_token"
+                                                                               Header
+                                                                                 "Authorization"
                                                                                  OAuthToken
                                                                                  :>
                                                                                  QueryParam

@@ -63,7 +63,7 @@ type CollectionviewersGetResource =
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
                          QueryParam "key" AuthKey :>
-                           QueryParam "oauth_token" OAuthToken :>
+                           Header "Authorization" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] User
 
 -- | Retrieves the ID of the user if they have been specifically allowed to

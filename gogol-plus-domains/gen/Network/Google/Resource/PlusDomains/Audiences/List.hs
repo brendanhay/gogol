@@ -60,7 +60,7 @@ type AudiencesListResource =
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
                        QueryParam "key" AuthKey :>
-                         QueryParam "oauth_token" OAuthToken :>
+                         Header "Authorization" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] AudiencesFeed
 
 -- | List all of the audiences to which a user can share.

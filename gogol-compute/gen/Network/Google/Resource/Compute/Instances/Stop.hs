@@ -66,7 +66,7 @@ type InstancesStopResource =
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
                          QueryParam "key" AuthKey :>
-                           QueryParam "oauth_token" OAuthToken :>
+                           Header "Authorization" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | This method stops a running instance, shutting it down cleanly, and

@@ -72,7 +72,7 @@ type ProjectsJobsUpdateResource =
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
                                    QueryParam "key" AuthKey :>
-                                     QueryParam "oauth_token" OAuthToken :>
+                                     Header "Authorization" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          ReqBody '[JSON] Job :> Put '[JSON] Job
 

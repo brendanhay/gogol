@@ -59,7 +59,7 @@ type StatesDeleteResource =
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
                  QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
+                   Header "Authorization" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a key and the data associated with it. The key is removed and no

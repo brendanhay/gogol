@@ -62,7 +62,7 @@ type CommentsRemoveContentResource =
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
                            QueryParam "key" AuthKey :>
-                             QueryParam "oauth_token" OAuthToken :>
+                             Header "Authorization" OAuthToken :>
                                QueryParam "alt" AltJSON :> Post '[JSON] Comment
 
 -- | Removes the content of a comment.

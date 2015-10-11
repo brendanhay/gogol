@@ -23,23 +23,37 @@ import           Network.Google.Prelude
 -- | List of localized title and description data.
 --
 -- /See:/ 'inAppProductListings' smart constructor.
-data InAppProductListings =
-    InAppProductListings
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype InAppProductListings = InAppProductListings
+    { _iaplProperties :: HashMap Text InAppProductListing
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InAppProductListings' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iaplProperties'
 inAppProductListings
-    :: InAppProductListings
-inAppProductListings = InAppProductListings
+    :: HashMap Text InAppProductListing -- ^ 'properties'
+    -> InAppProductListings
+inAppProductListings pIaplProperties_ =
+    InAppProductListings
+    { _iaplProperties = pIaplProperties_
+    }
+
+-- | The language of the localized data, as defined by BCP 47. i.e.:
+-- \"en-US\", \"en-GB\".
+iaplProperties :: Lens' InAppProductListings (HashMap Text InAppProductListing)
+iaplProperties
+  = lens _iaplProperties
+      (\ s a -> s{_iaplProperties = a})
 
 instance FromJSON InAppProductListings where
         parseJSON
           = withObject "InAppProductListings"
-              (\ o -> pure InAppProductListings)
+              (\ o -> InAppProductListings <$> (parseJSONObject o))
 
 instance ToJSON InAppProductListings where
-        toJSON = const emptyObject
+        toJSON = toJSON . _iaplProperties
 
 --
 -- /See:/ 'inAppProductsUpdateResponse' smart constructor.
@@ -1255,23 +1269,36 @@ instance ToJSON AppDetails where
 -- products can never be free.
 --
 -- /See:/ 'inAppProductPrices' smart constructor.
-data InAppProductPrices =
-    InAppProductPrices
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype InAppProductPrices = InAppProductPrices
+    { _iAppProperties :: HashMap Text Price
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InAppProductPrices' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iAppProperties'
 inAppProductPrices
-    :: InAppProductPrices
-inAppProductPrices = InAppProductPrices
+    :: HashMap Text Price -- ^ 'properties'
+    -> InAppProductPrices
+inAppProductPrices pIAppProperties_ =
+    InAppProductPrices
+    { _iAppProperties = pIAppProperties_
+    }
+
+-- | Region code, as defined by ISO 3166-2.
+iAppProperties :: Lens' InAppProductPrices (HashMap Text Price)
+iAppProperties
+  = lens _iAppProperties
+      (\ s a -> s{_iAppProperties = a})
 
 instance FromJSON InAppProductPrices where
         parseJSON
           = withObject "InAppProductPrices"
-              (\ o -> pure InAppProductPrices)
+              (\ o -> InAppProductPrices <$> (parseJSONObject o))
 
 instance ToJSON InAppProductPrices where
-        toJSON = const emptyObject
+        toJSON = toJSON . _iAppProperties
 
 --
 -- /See:/ 'inAppProductsBatchRequest' smart constructor.

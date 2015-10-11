@@ -57,7 +57,7 @@ type TokensListResource =
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
                    QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
+                     Header "Authorization" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Tokens
 
 -- | Returns the set of tokens specified user has issued to 3rd party

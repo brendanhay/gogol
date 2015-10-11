@@ -64,7 +64,7 @@ type CommentsSetModerationStatusResource =
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
                        QueryParam "key" AuthKey :>
-                         QueryParam "oauth_token" OAuthToken :>
+                         Header "Authorization" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Sets the moderation status of one or more comments. The API request must

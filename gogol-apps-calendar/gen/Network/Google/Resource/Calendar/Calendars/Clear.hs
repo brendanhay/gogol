@@ -57,7 +57,7 @@ type CalendarsClearResource =
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
                    QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
+                     Header "Authorization" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Clears a primary calendar. This operation deletes all events associated

@@ -68,7 +68,7 @@ type UsersDataSourcesDatasetsGetResource =
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
                            QueryParam "key" AuthKey :>
-                             QueryParam "oauth_token" OAuthToken :>
+                             Header "Authorization" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Dataset
 
 -- | Returns a dataset containing all data points whose start and end times

@@ -872,22 +872,35 @@ instance ToJSON ACLRuleScope where
 -- color field. Read-only.
 --
 -- /See:/ 'colorsEvent' smart constructor.
-data ColorsEvent =
-    ColorsEvent
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype ColorsEvent = ColorsEvent
+    { _ceProperties :: HashMap Text ColorDefinition
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColorsEvent' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ceProperties'
 colorsEvent
-    :: ColorsEvent
-colorsEvent = ColorsEvent
+    :: HashMap Text ColorDefinition -- ^ 'properties'
+    -> ColorsEvent
+colorsEvent pCeProperties_ =
+    ColorsEvent
+    { _ceProperties = pCeProperties_
+    }
+
+-- | An event color definition.
+ceProperties :: Lens' ColorsEvent (HashMap Text ColorDefinition)
+ceProperties
+  = lens _ceProperties (\ s a -> s{_ceProperties = a})
 
 instance FromJSON ColorsEvent where
         parseJSON
-          = withObject "ColorsEvent" (\ o -> pure ColorsEvent)
+          = withObject "ColorsEvent"
+              (\ o -> ColorsEvent <$> (parseJSONObject o))
 
 instance ToJSON ColorsEvent where
-        toJSON = const emptyObject
+        toJSON = toJSON . _ceProperties
 
 --
 -- /See:/ 'settings' smart constructor.
@@ -1542,23 +1555,37 @@ instance ToJSON Setting where
 -- | Expansion of groups.
 --
 -- /See:/ 'freeBusyResponseGroups' smart constructor.
-data FreeBusyResponseGroups =
-    FreeBusyResponseGroups
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype FreeBusyResponseGroups = FreeBusyResponseGroups
+    { _fbrgProperties :: HashMap Text FreeBusyGroup
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FreeBusyResponseGroups' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fbrgProperties'
 freeBusyResponseGroups
-    :: FreeBusyResponseGroups
-freeBusyResponseGroups = FreeBusyResponseGroups
+    :: HashMap Text FreeBusyGroup -- ^ 'properties'
+    -> FreeBusyResponseGroups
+freeBusyResponseGroups pFbrgProperties_ =
+    FreeBusyResponseGroups
+    { _fbrgProperties = pFbrgProperties_
+    }
+
+-- | List of calendars that are members of this group.
+fbrgProperties :: Lens' FreeBusyResponseGroups (HashMap Text FreeBusyGroup)
+fbrgProperties
+  = lens _fbrgProperties
+      (\ s a -> s{_fbrgProperties = a})
 
 instance FromJSON FreeBusyResponseGroups where
         parseJSON
           = withObject "FreeBusyResponseGroups"
-              (\ o -> pure FreeBusyResponseGroups)
+              (\ o ->
+                 FreeBusyResponseGroups <$> (parseJSONObject o))
 
 instance ToJSON FreeBusyResponseGroups where
-        toJSON = const emptyObject
+        toJSON = toJSON . _fbrgProperties
 
 -- | Information about the event\'s reminders for the authenticated user.
 --
@@ -1618,23 +1645,35 @@ instance ToJSON EventReminders where
 -- IDs in its color field. Read-only.
 --
 -- /See:/ 'colorsCalendar' smart constructor.
-data ColorsCalendar =
-    ColorsCalendar
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype ColorsCalendar = ColorsCalendar
+    { _ccProperties :: HashMap Text ColorDefinition
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColorsCalendar' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ccProperties'
 colorsCalendar
-    :: ColorsCalendar
-colorsCalendar = ColorsCalendar
+    :: HashMap Text ColorDefinition -- ^ 'properties'
+    -> ColorsCalendar
+colorsCalendar pCcProperties_ =
+    ColorsCalendar
+    { _ccProperties = pCcProperties_
+    }
+
+-- | A calendar color defintion.
+ccProperties :: Lens' ColorsCalendar (HashMap Text ColorDefinition)
+ccProperties
+  = lens _ccProperties (\ s a -> s{_ccProperties = a})
 
 instance FromJSON ColorsCalendar where
         parseJSON
           = withObject "ColorsCalendar"
-              (\ o -> pure ColorsCalendar)
+              (\ o -> ColorsCalendar <$> (parseJSONObject o))
 
 instance ToJSON ColorsCalendar where
-        toJSON = const emptyObject
+        toJSON = toJSON . _ccProperties
 
 --
 -- /See:/ 'calendarNotification' smart constructor.
@@ -1694,45 +1733,72 @@ instance ToJSON CalendarNotification where
 -- this calendar.
 --
 -- /See:/ 'eventExtendedPropertiesPrivate' smart constructor.
-data EventExtendedPropertiesPrivate =
-    EventExtendedPropertiesPrivate
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype EventExtendedPropertiesPrivate = EventExtendedPropertiesPrivate
+    { _eeppProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventExtendedPropertiesPrivate' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eeppProperties'
 eventExtendedPropertiesPrivate
-    :: EventExtendedPropertiesPrivate
-eventExtendedPropertiesPrivate = EventExtendedPropertiesPrivate
+    :: HashMap Text Text -- ^ 'properties'
+    -> EventExtendedPropertiesPrivate
+eventExtendedPropertiesPrivate pEeppProperties_ =
+    EventExtendedPropertiesPrivate
+    { _eeppProperties = pEeppProperties_
+    }
+
+-- | The name of the private property and the corresponding value.
+eeppProperties :: Lens' EventExtendedPropertiesPrivate (HashMap Text Text)
+eeppProperties
+  = lens _eeppProperties
+      (\ s a -> s{_eeppProperties = a})
 
 instance FromJSON EventExtendedPropertiesPrivate
          where
         parseJSON
           = withObject "EventExtendedPropertiesPrivate"
-              (\ o -> pure EventExtendedPropertiesPrivate)
+              (\ o ->
+                 EventExtendedPropertiesPrivate <$>
+                   (parseJSONObject o))
 
 instance ToJSON EventExtendedPropertiesPrivate where
-        toJSON = const emptyObject
+        toJSON = toJSON . _eeppProperties
 
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
 -- /See:/ 'channelParams' smart constructor.
-data ChannelParams =
-    ChannelParams
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype ChannelParams = ChannelParams
+    { _cpProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cpProperties'
 channelParams
-    :: ChannelParams
-channelParams = ChannelParams
+    :: HashMap Text Text -- ^ 'properties'
+    -> ChannelParams
+channelParams pCpProperties_ =
+    ChannelParams
+    { _cpProperties = pCpProperties_
+    }
+
+-- | Declares a new parameter by name.
+cpProperties :: Lens' ChannelParams (HashMap Text Text)
+cpProperties
+  = lens _cpProperties (\ s a -> s{_cpProperties = a})
 
 instance FromJSON ChannelParams where
         parseJSON
           = withObject "ChannelParams"
-              (\ o -> pure ChannelParams)
+              (\ o -> ChannelParams <$> (parseJSONObject o))
 
 instance ToJSON ChannelParams where
-        toJSON = const emptyObject
+        toJSON = toJSON . _cpProperties
 
 --
 -- /See:/ 'events' smart constructor.
@@ -2657,23 +2723,37 @@ instance ToJSON EventGadget where
 -- | Preferences.
 --
 -- /See:/ 'eventGadgetPreferences' smart constructor.
-data EventGadgetPreferences =
-    EventGadgetPreferences
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype EventGadgetPreferences = EventGadgetPreferences
+    { _egpProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventGadgetPreferences' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'egpProperties'
 eventGadgetPreferences
-    :: EventGadgetPreferences
-eventGadgetPreferences = EventGadgetPreferences
+    :: HashMap Text Text -- ^ 'properties'
+    -> EventGadgetPreferences
+eventGadgetPreferences pEgpProperties_ =
+    EventGadgetPreferences
+    { _egpProperties = pEgpProperties_
+    }
+
+-- | The preference name and corresponding value.
+egpProperties :: Lens' EventGadgetPreferences (HashMap Text Text)
+egpProperties
+  = lens _egpProperties
+      (\ s a -> s{_egpProperties = a})
 
 instance FromJSON EventGadgetPreferences where
         parseJSON
           = withObject "EventGadgetPreferences"
-              (\ o -> pure EventGadgetPreferences)
+              (\ o ->
+                 EventGadgetPreferences <$> (parseJSONObject o))
 
 instance ToJSON EventGadgetPreferences where
-        toJSON = const emptyObject
+        toJSON = toJSON . _egpProperties
 
 --
 -- /See:/ 'freeBusyRequest' smart constructor.
@@ -2859,44 +2939,73 @@ instance ToJSON ACLRule where
 -- attendees\' calendars.
 --
 -- /See:/ 'eventExtendedPropertiesShared' smart constructor.
-data EventExtendedPropertiesShared =
-    EventExtendedPropertiesShared
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype EventExtendedPropertiesShared = EventExtendedPropertiesShared
+    { _eepsProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventExtendedPropertiesShared' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eepsProperties'
 eventExtendedPropertiesShared
-    :: EventExtendedPropertiesShared
-eventExtendedPropertiesShared = EventExtendedPropertiesShared
+    :: HashMap Text Text -- ^ 'properties'
+    -> EventExtendedPropertiesShared
+eventExtendedPropertiesShared pEepsProperties_ =
+    EventExtendedPropertiesShared
+    { _eepsProperties = pEepsProperties_
+    }
+
+-- | The name of the shared property and the corresponding value.
+eepsProperties :: Lens' EventExtendedPropertiesShared (HashMap Text Text)
+eepsProperties
+  = lens _eepsProperties
+      (\ s a -> s{_eepsProperties = a})
 
 instance FromJSON EventExtendedPropertiesShared where
         parseJSON
           = withObject "EventExtendedPropertiesShared"
-              (\ o -> pure EventExtendedPropertiesShared)
+              (\ o ->
+                 EventExtendedPropertiesShared <$>
+                   (parseJSONObject o))
 
 instance ToJSON EventExtendedPropertiesShared where
-        toJSON = const emptyObject
+        toJSON = toJSON . _eepsProperties
 
 -- | List of free\/busy information for calendars.
 --
 -- /See:/ 'freeBusyResponseCalendars' smart constructor.
-data FreeBusyResponseCalendars =
-    FreeBusyResponseCalendars
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype FreeBusyResponseCalendars = FreeBusyResponseCalendars
+    { _fbrcProperties :: HashMap Text FreeBusyCalendar
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FreeBusyResponseCalendars' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fbrcProperties'
 freeBusyResponseCalendars
-    :: FreeBusyResponseCalendars
-freeBusyResponseCalendars = FreeBusyResponseCalendars
+    :: HashMap Text FreeBusyCalendar -- ^ 'properties'
+    -> FreeBusyResponseCalendars
+freeBusyResponseCalendars pFbrcProperties_ =
+    FreeBusyResponseCalendars
+    { _fbrcProperties = pFbrcProperties_
+    }
+
+-- | Free\/busy expansions for a single calendar.
+fbrcProperties :: Lens' FreeBusyResponseCalendars (HashMap Text FreeBusyCalendar)
+fbrcProperties
+  = lens _fbrcProperties
+      (\ s a -> s{_fbrcProperties = a})
 
 instance FromJSON FreeBusyResponseCalendars where
         parseJSON
           = withObject "FreeBusyResponseCalendars"
-              (\ o -> pure FreeBusyResponseCalendars)
+              (\ o ->
+                 FreeBusyResponseCalendars <$> (parseJSONObject o))
 
 instance ToJSON FreeBusyResponseCalendars where
-        toJSON = const emptyObject
+        toJSON = toJSON . _fbrcProperties
 
 --
 -- /See:/ 'acl' smart constructor.

@@ -55,7 +55,7 @@ type UsersStopResource =
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
                  QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
+                   Header "Authorization" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Stop receiving push notifications for the given user mailbox.

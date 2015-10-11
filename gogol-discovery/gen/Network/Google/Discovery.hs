@@ -40,6 +40,7 @@ module Network.Google.Discovery
     -- ** RestDescriptionParameters
     , RestDescriptionParameters
     , restDescriptionParameters
+    , rdpProperties
 
     -- ** RestMethod
     , RestMethod
@@ -69,10 +70,12 @@ module Network.Google.Discovery
     -- ** RestDescriptionAuthOAuth2Scopes
     , RestDescriptionAuthOAuth2Scopes
     , restDescriptionAuthOAuth2Scopes
+    , rdaoasProperties
 
     -- ** RestDescriptionMethods
     , RestDescriptionMethods
     , restDescriptionMethods
+    , rdmProperties
 
     -- ** DirectoryListItemsItem
     , DirectoryListItemsItem
@@ -99,6 +102,7 @@ module Network.Google.Discovery
     -- ** RestResourceResources
     , RestResourceResources
     , restResourceResources
+    , rrrProperties
 
     -- ** RestDescriptionAuthOAuth2
     , RestDescriptionAuthOAuth2
@@ -126,6 +130,7 @@ module Network.Google.Discovery
     -- ** RestResourceMethods
     , RestResourceMethods
     , restResourceMethods
+    , rrmProperties
 
     -- ** RestDescriptionAuth
     , RestDescriptionAuth
@@ -192,6 +197,7 @@ module Network.Google.Discovery
     -- ** RestDescriptionSchemas
     , RestDescriptionSchemas
     , restDescriptionSchemas
+    , rdsProperties
 
     -- ** JSONSchemaVariantMapItem
     , JSONSchemaVariantMapItem
@@ -202,6 +208,7 @@ module Network.Google.Discovery
     -- ** RestDescriptionResources
     , RestDescriptionResources
     , restDescriptionResources
+    , rdrProperties
 
     -- ** RestMethodMediaUploadProtocols
     , RestMethodMediaUploadProtocols
@@ -217,6 +224,7 @@ module Network.Google.Discovery
     -- ** RestMethodParameters
     , RestMethodParameters
     , restMethodParameters
+    , rmpProperties
 
     -- ** RestMethodMediaUpload
     , RestMethodMediaUpload
@@ -228,6 +236,12 @@ module Network.Google.Discovery
     -- ** JSONSchemaProperties
     , JSONSchemaProperties
     , jsonSchemaProperties
+    , jspProperties
+
+    -- ** RestDescriptionAuthOAuth2ScopesProperties
+    , RestDescriptionAuthOAuth2ScopesProperties
+    , restDescriptionAuthOAuth2ScopesProperties
+    , rdaoaspDescription
 
     -- ** RestMethodMediaUploadProtocolsResumable
     , RestMethodMediaUploadProtocolsResumable

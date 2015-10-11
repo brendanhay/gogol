@@ -55,7 +55,7 @@ type ScoresResetAllForAllPlayersResource =
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
                  QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
+                   Header "Authorization" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets scores for all draft leaderboards for all players. This method is

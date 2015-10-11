@@ -71,6 +71,7 @@ module Network.Google.Reports
     -- ** UsageReportParametersItemMsgValueItem
     , UsageReportParametersItemMsgValueItem
     , usageReportParametersItemMsgValueItem
+    , urpimviProperties
 
     -- ** Activities
     , Activities
@@ -126,6 +127,7 @@ module Network.Google.Reports
     -- ** ChannelParams
     , ChannelParams
     , channelParams
+    , cpProperties
 
     -- ** Activity
     , Activity

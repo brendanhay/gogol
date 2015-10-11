@@ -88,6 +88,7 @@ module Network.Google.PubSub.Types
     -- * PubsubMessageAttributes
     , PubsubMessageAttributes
     , pubsubMessageAttributes
+    , pmaProperties
 
     -- * TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
@@ -119,6 +120,7 @@ module Network.Google.PubSub.Types
     -- * PushConfigAttributes
     , PushConfigAttributes
     , pushConfigAttributes
+    , pcaProperties
 
     -- * Subscription
     , Subscription

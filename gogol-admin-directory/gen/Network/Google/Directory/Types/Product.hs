@@ -1501,23 +1501,35 @@ instance ToJSON Tokens where
 -- | Custom fields of the user.
 --
 -- /See:/ 'userCustomSchemas' smart constructor.
-data UserCustomSchemas =
-    UserCustomSchemas
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype UserCustomSchemas = UserCustomSchemas
+    { _ucsProperties :: HashMap Text UserCustomProperties
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserCustomSchemas' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ucsProperties'
 userCustomSchemas
-    :: UserCustomSchemas
-userCustomSchemas = UserCustomSchemas
+    :: HashMap Text UserCustomProperties -- ^ 'properties'
+    -> UserCustomSchemas
+userCustomSchemas pUcsProperties_ =
+    UserCustomSchemas
+    { _ucsProperties = pUcsProperties_
+    }
+
+ucsProperties :: Lens' UserCustomSchemas (HashMap Text UserCustomProperties)
+ucsProperties
+  = lens _ucsProperties
+      (\ s a -> s{_ucsProperties = a})
 
 instance FromJSON UserCustomSchemas where
         parseJSON
           = withObject "UserCustomSchemas"
-              (\ o -> pure UserCustomSchemas)
+              (\ o -> UserCustomSchemas <$> (parseJSONObject o))
 
 instance ToJSON UserCustomSchemas where
-        toJSON = const emptyObject
+        toJSON = toJSON . _ucsProperties
 
 -- | JSON response template to list aliases in Directory API.
 --
@@ -2948,23 +2960,35 @@ instance ToJSON UserRelation where
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
 -- /See:/ 'channelParams' smart constructor.
-data ChannelParams =
-    ChannelParams
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype ChannelParams = ChannelParams
+    { _cpProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cpProperties'
 channelParams
-    :: ChannelParams
-channelParams = ChannelParams
+    :: HashMap Text Text -- ^ 'properties'
+    -> ChannelParams
+channelParams pCpProperties_ =
+    ChannelParams
+    { _cpProperties = pCpProperties_
+    }
+
+-- | Declares a new parameter by name.
+cpProperties :: Lens' ChannelParams (HashMap Text Text)
+cpProperties
+  = lens _cpProperties (\ s a -> s{_cpProperties = a})
 
 instance FromJSON ChannelParams where
         parseJSON
           = withObject "ChannelParams"
-              (\ o -> pure ChannelParams)
+              (\ o -> ChannelParams <$> (parseJSONObject o))
 
 instance ToJSON ChannelParams where
-        toJSON = const emptyObject
+        toJSON = toJSON . _cpProperties
 
 -- | JSON template for an organization entry.
 --
@@ -3960,23 +3984,35 @@ instance ToJSON Member where
 -- particular schema)
 --
 -- /See:/ 'userCustomProperties' smart constructor.
-data UserCustomProperties =
-    UserCustomProperties
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype UserCustomProperties = UserCustomProperties
+    { _ucpProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserCustomProperties' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ucpProperties'
 userCustomProperties
-    :: UserCustomProperties
-userCustomProperties = UserCustomProperties
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> UserCustomProperties
+userCustomProperties pUcpProperties_ =
+    UserCustomProperties
+    { _ucpProperties = pUcpProperties_
+    }
+
+ucpProperties :: Lens' UserCustomProperties (HashMap Text JSONValue)
+ucpProperties
+  = lens _ucpProperties
+      (\ s a -> s{_ucpProperties = a})
 
 instance FromJSON UserCustomProperties where
         parseJSON
           = withObject "UserCustomProperties"
-              (\ o -> pure UserCustomProperties)
+              (\ o -> UserCustomProperties <$> (parseJSONObject o))
 
 instance ToJSON UserCustomProperties where
-        toJSON = const emptyObject
+        toJSON = toJSON . _ucpProperties
 
 -- | Template for notifications list response.
 --

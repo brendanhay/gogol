@@ -28,6 +28,7 @@ module Network.Google.AppEngine.Types
     -- * OperationSchema
     , OperationSchema
     , operationSchema
+    , osProperties
 
     -- * TrafficSplit
     , TrafficSplit
@@ -88,6 +89,7 @@ module Network.Google.AppEngine.Types
     -- * VersionEnvVariables
     , VersionEnvVariables
     , versionEnvVariables
+    , vevProperties
 
     -- * Application
     , Application
@@ -101,6 +103,7 @@ module Network.Google.AppEngine.Types
     -- * VersionBetaSettings
     , VersionBetaSettings
     , versionBetaSettings
+    , vbsProperties
 
     -- * Operation
     , Operation
@@ -121,6 +124,7 @@ module Network.Google.AppEngine.Types
     -- * StaticDirectoryHandlerHTTPHeaders
     , StaticDirectoryHandlerHTTPHeaders
     , staticDirectoryHandlerHTTPHeaders
+    , sdhhttphProperties
 
     -- * ListVersionsResponse
     , ListVersionsResponse
@@ -162,6 +166,7 @@ module Network.Google.AppEngine.Types
     -- * StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
+    , sdiProperties
 
     -- * Network
     , Network
@@ -173,6 +178,7 @@ module Network.Google.AppEngine.Types
     -- * StaticFilesHandlerHTTPHeaders
     , StaticFilesHandlerHTTPHeaders
     , staticFilesHandlerHTTPHeaders
+    , sfhhttphProperties
 
     -- * Resources
     , Resources
@@ -184,6 +190,7 @@ module Network.Google.AppEngine.Types
     -- * DeploymentFiles
     , DeploymentFiles
     , deploymentFiles
+    , dfProperties
 
     -- * CPUUtilization
     , CPUUtilization
@@ -194,6 +201,7 @@ module Network.Google.AppEngine.Types
     -- * TrafficSplitAllocations
     , TrafficSplitAllocations
     , trafficSplitAllocations
+    , tsaProperties
 
     -- * ManualScaling
     , ManualScaling
@@ -280,6 +288,7 @@ module Network.Google.AppEngine.Types
     -- * OperationResponse
     , OperationResponse
     , operationResponse
+    , orProperties
 
     -- * ContainerInfo
     , ContainerInfo

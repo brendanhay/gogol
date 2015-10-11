@@ -60,6 +60,7 @@ module Network.Google.Datastore.Types
     -- * EntityProperties
     , EntityProperties
     , entityProperties
+    , epProperties
 
     -- * BeginTransactionRequest
     , BeginTransactionRequest

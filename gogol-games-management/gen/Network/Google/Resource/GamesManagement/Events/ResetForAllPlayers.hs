@@ -58,7 +58,7 @@ type EventsResetForAllPlayersResource =
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
                    QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
+                     Header "Authorization" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets the event with the given ID for all players. This method is only

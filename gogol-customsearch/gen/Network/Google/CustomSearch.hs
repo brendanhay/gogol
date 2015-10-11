@@ -50,6 +50,7 @@ module Network.Google.CustomSearch
     -- ** SearchQueries
     , SearchQueries
     , searchQueries
+    , sqProperties
 
     -- ** SearchURL
     , SearchURL
@@ -83,6 +84,7 @@ module Network.Google.CustomSearch
     -- ** ResultPagemap
     , ResultPagemap
     , resultPagemap
+    , rpProperties
 
     -- ** CSEListImgColorType
     , CSEListImgColorType (..)
@@ -164,6 +166,11 @@ module Network.Google.CustomSearch
     , qSafe
     , qHq
     , qHighRange
+
+    -- ** ResultPagemapPropertiesItem
+    , ResultPagemapPropertiesItem
+    , resultPagemapPropertiesItem
+    , rppiProperties
 
     -- ** PromotionBodyLinesItem
     , PromotionBodyLinesItem

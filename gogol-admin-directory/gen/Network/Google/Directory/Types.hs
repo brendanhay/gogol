@@ -207,6 +207,7 @@ module Network.Google.Directory.Types
     -- * UserCustomSchemas
     , UserCustomSchemas
     , userCustomSchemas
+    , ucsProperties
 
     -- * Aliases
     , Aliases
@@ -386,6 +387,7 @@ module Network.Google.Directory.Types
     -- * ChannelParams
     , ChannelParams
     , channelParams
+    , cpProperties
 
     -- * UserOrganization
     , UserOrganization
@@ -501,6 +503,7 @@ module Network.Google.Directory.Types
     -- * UserCustomProperties
     , UserCustomProperties
     , userCustomProperties
+    , ucpProperties
 
     -- * ChromeosDevicesListOrderBy
     , ChromeosDevicesListOrderBy (..)

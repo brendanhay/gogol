@@ -61,7 +61,7 @@ type EventsQuickAddResource =
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
                          QueryParam "key" AuthKey :>
-                           QueryParam "oauth_token" OAuthToken :>
+                           Header "Authorization" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Event
 
 -- | Creates an event based on a simple text string.

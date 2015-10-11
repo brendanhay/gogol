@@ -75,7 +75,7 @@ type ObjectsInsertResource =
                                QueryParam "userIp" Text :>
                                  QueryParam "fields" Text :>
                                    QueryParam "key" AuthKey :>
-                                     QueryParam "oauth_token" OAuthToken :>
+                                     Header "Authorization" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          MultipartRelated '[JSON] Object Stream
                                            :> Post '[JSON] Object
@@ -97,7 +97,7 @@ type ObjectsInsertResource =
                                  QueryParam "userIp" Text :>
                                    QueryParam "fields" Text :>
                                      QueryParam "key" AuthKey :>
-                                       QueryParam "oauth_token" OAuthToken :>
+                                       Header "Authorization" OAuthToken :>
                                          QueryParam "alt" AltMedia :>
                                            MultipartRelated '[JSON] Object
                                              Stream

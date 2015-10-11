@@ -55,7 +55,7 @@ type StatesListResource =
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
                  QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
+                   Header "Authorization" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] ListResponse
 
 -- | Lists all the states keys, and optionally the state data.

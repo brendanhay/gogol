@@ -592,23 +592,36 @@ instance ToJSON PullRequest where
 -- | Optional attributes for this message.
 --
 -- /See:/ 'pubsubMessageAttributes' smart constructor.
-data PubsubMessageAttributes =
-    PubsubMessageAttributes
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype PubsubMessageAttributes = PubsubMessageAttributes
+    { _pmaProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PubsubMessageAttributes' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pmaProperties'
 pubsubMessageAttributes
-    :: PubsubMessageAttributes
-pubsubMessageAttributes = PubsubMessageAttributes
+    :: HashMap Text Text -- ^ 'properties'
+    -> PubsubMessageAttributes
+pubsubMessageAttributes pPmaProperties_ =
+    PubsubMessageAttributes
+    { _pmaProperties = pPmaProperties_
+    }
+
+pmaProperties :: Lens' PubsubMessageAttributes (HashMap Text Text)
+pmaProperties
+  = lens _pmaProperties
+      (\ s a -> s{_pmaProperties = a})
 
 instance FromJSON PubsubMessageAttributes where
         parseJSON
           = withObject "PubsubMessageAttributes"
-              (\ o -> pure PubsubMessageAttributes)
+              (\ o ->
+                 PubsubMessageAttributes <$> (parseJSONObject o))
 
 instance ToJSON PubsubMessageAttributes where
-        toJSON = const emptyObject
+        toJSON = toJSON . _pmaProperties
 
 -- | Request message for \`TestIamPermissions\` method.
 --
@@ -859,23 +872,35 @@ instance ToJSON Policy where
 -- defined in the v1 Pub\/Sub API.
 --
 -- /See:/ 'pushConfigAttributes' smart constructor.
-data PushConfigAttributes =
-    PushConfigAttributes
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype PushConfigAttributes = PushConfigAttributes
+    { _pcaProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PushConfigAttributes' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pcaProperties'
 pushConfigAttributes
-    :: PushConfigAttributes
-pushConfigAttributes = PushConfigAttributes
+    :: HashMap Text Text -- ^ 'properties'
+    -> PushConfigAttributes
+pushConfigAttributes pPcaProperties_ =
+    PushConfigAttributes
+    { _pcaProperties = pPcaProperties_
+    }
+
+pcaProperties :: Lens' PushConfigAttributes (HashMap Text Text)
+pcaProperties
+  = lens _pcaProperties
+      (\ s a -> s{_pcaProperties = a})
 
 instance FromJSON PushConfigAttributes where
         parseJSON
           = withObject "PushConfigAttributes"
-              (\ o -> pure PushConfigAttributes)
+              (\ o -> PushConfigAttributes <$> (parseJSONObject o))
 
 instance ToJSON PushConfigAttributes where
-        toJSON = const emptyObject
+        toJSON = toJSON . _pcaProperties
 
 -- | A subscription resource.
 --

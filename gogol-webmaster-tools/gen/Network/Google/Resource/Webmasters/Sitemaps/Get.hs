@@ -58,7 +58,7 @@ type SitemapsGetResource =
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
                      QueryParam "key" AuthKey :>
-                       QueryParam "oauth_token" OAuthToken :>
+                       Header "Authorization" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] WmxSitemap
 
 -- | Retrieves information about a specific sitemap.

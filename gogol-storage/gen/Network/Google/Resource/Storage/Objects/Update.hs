@@ -74,7 +74,7 @@ type ObjectsUpdateResource =
                                QueryParam "userIp" Text :>
                                  QueryParam "fields" Text :>
                                    QueryParam "key" AuthKey :>
-                                     QueryParam "oauth_token" OAuthToken :>
+                                     Header "Authorization" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          ReqBody '[JSON] Object :>
                                            Put '[JSON] Object
@@ -96,7 +96,7 @@ type ObjectsUpdateResource =
                                  QueryParam "userIp" Text :>
                                    QueryParam "fields" Text :>
                                      QueryParam "key" AuthKey :>
-                                       QueryParam "oauth_token" OAuthToken :>
+                                       Header "Authorization" OAuthToken :>
                                          QueryParam "alt" AltMedia :>
                                            ReqBody '[JSON] Object :>
                                              Put '[OctetStream] Stream

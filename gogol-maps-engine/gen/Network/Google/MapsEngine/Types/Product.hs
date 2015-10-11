@@ -67,23 +67,38 @@ instance ToJSON ValueRange where
 -- | The properties associated with a feature.
 --
 -- /See:/ 'geoJSONProperties' smart constructor.
-data GeoJSONProperties =
-    GeoJSONProperties
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype GeoJSONProperties = GeoJSONProperties
+    { _gjpProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJSONProperties' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gjpProperties'
 geoJSONProperties
-    :: GeoJSONProperties
-geoJSONProperties = GeoJSONProperties
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> GeoJSONProperties
+geoJSONProperties pGjpProperties_ =
+    GeoJSONProperties
+    { _gjpProperties = pGjpProperties_
+    }
+
+-- | An arbitrary key-value pair. The key must be the name of a column in the
+-- table\'s schema, and the type of the value must correspond to the type
+-- specified in the schema.
+gjpProperties :: Lens' GeoJSONProperties (HashMap Text JSONValue)
+gjpProperties
+  = lens _gjpProperties
+      (\ s a -> s{_gjpProperties = a})
 
 instance FromJSON GeoJSONProperties where
         parseJSON
           = withObject "GeoJSONProperties"
-              (\ o -> pure GeoJSONProperties)
+              (\ o -> GeoJSONProperties <$> (parseJSONObject o))
 
 instance ToJSON GeoJSONProperties where
-        toJSON = const emptyObject
+        toJSON = toJSON . _gjpProperties
 
 -- | A feature within a table.
 --

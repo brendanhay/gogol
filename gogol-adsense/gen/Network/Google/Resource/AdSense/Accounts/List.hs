@@ -57,7 +57,7 @@ type AccountsListResource =
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
                    QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
+                     Header "Authorization" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Accounts
 
 -- | List all accounts available to this AdSense account.

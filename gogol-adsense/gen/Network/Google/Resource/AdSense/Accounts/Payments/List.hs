@@ -56,7 +56,7 @@ type AccountsPaymentsListResource =
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
                    QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
+                     Header "Authorization" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Payments
 
 -- | List the payments for the specified AdSense account.

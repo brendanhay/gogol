@@ -55,7 +55,7 @@ type RastersGetResource =
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
                  QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
+                   Header "Authorization" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Raster
 
 -- | Return metadata for a single raster.

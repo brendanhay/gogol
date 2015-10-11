@@ -23,23 +23,36 @@ import           Network.Google.Prelude
 -- | A mapping from each stage to the information about that stage.
 --
 -- /See:/ 'jobExecutionInfoStages' smart constructor.
-data JobExecutionInfoStages =
-    JobExecutionInfoStages
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype JobExecutionInfoStages = JobExecutionInfoStages
+    { _jeisProperties :: HashMap Text JobExecutionStageInfo
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobExecutionInfoStages' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jeisProperties'
 jobExecutionInfoStages
-    :: JobExecutionInfoStages
-jobExecutionInfoStages = JobExecutionInfoStages
+    :: HashMap Text JobExecutionStageInfo -- ^ 'properties'
+    -> JobExecutionInfoStages
+jobExecutionInfoStages pJeisProperties_ =
+    JobExecutionInfoStages
+    { _jeisProperties = pJeisProperties_
+    }
+
+jeisProperties :: Lens' JobExecutionInfoStages (HashMap Text JobExecutionStageInfo)
+jeisProperties
+  = lens _jeisProperties
+      (\ s a -> s{_jeisProperties = a})
 
 instance FromJSON JobExecutionInfoStages where
         parseJSON
           = withObject "JobExecutionInfoStages"
-              (\ o -> pure JobExecutionInfoStages)
+              (\ o ->
+                 JobExecutionInfoStages <$> (parseJSONObject o))
 
 instance ToJSON JobExecutionInfoStages where
-        toJSON = const emptyObject
+        toJSON = toJSON . _jeisProperties
 
 -- | All configuration data for a particular Computation.
 --
@@ -569,23 +582,35 @@ instance ToJSON SourceSplitOptions where
 -- | Metadata to set on the Google Compute Engine VMs.
 --
 -- /See:/ 'workerPoolMetadata' smart constructor.
-data WorkerPoolMetadata =
-    WorkerPoolMetadata
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype WorkerPoolMetadata = WorkerPoolMetadata
+    { _wpmProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WorkerPoolMetadata' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wpmProperties'
 workerPoolMetadata
-    :: WorkerPoolMetadata
-workerPoolMetadata = WorkerPoolMetadata
+    :: HashMap Text Text -- ^ 'properties'
+    -> WorkerPoolMetadata
+workerPoolMetadata pWpmProperties_ =
+    WorkerPoolMetadata
+    { _wpmProperties = pWpmProperties_
+    }
+
+wpmProperties :: Lens' WorkerPoolMetadata (HashMap Text Text)
+wpmProperties
+  = lens _wpmProperties
+      (\ s a -> s{_wpmProperties = a})
 
 instance FromJSON WorkerPoolMetadata where
         parseJSON
           = withObject "WorkerPoolMetadata"
-              (\ o -> pure WorkerPoolMetadata)
+              (\ o -> WorkerPoolMetadata <$> (parseJSONObject o))
 
 instance ToJSON WorkerPoolMetadata where
-        toJSON = const emptyObject
+        toJSON = toJSON . _wpmProperties
 
 -- | Settings for WorkerPool autoscaling.
 --
@@ -806,23 +831,35 @@ instance ToJSON ReportWorkItemStatusRequest where
 -- service are required in order to run the job.
 --
 -- /See:/ 'environmentVersion' smart constructor.
-data EnvironmentVersion =
-    EnvironmentVersion
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype EnvironmentVersion = EnvironmentVersion
+    { _evProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnvironmentVersion' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'evProperties'
 environmentVersion
-    :: EnvironmentVersion
-environmentVersion = EnvironmentVersion
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> EnvironmentVersion
+environmentVersion pEvProperties_ =
+    EnvironmentVersion
+    { _evProperties = pEvProperties_
+    }
+
+-- | Properties of the object.
+evProperties :: Lens' EnvironmentVersion (HashMap Text JSONValue)
+evProperties
+  = lens _evProperties (\ s a -> s{_evProperties = a})
 
 instance FromJSON EnvironmentVersion where
         parseJSON
           = withObject "EnvironmentVersion"
-              (\ o -> pure EnvironmentVersion)
+              (\ o -> EnvironmentVersion <$> (parseJSONObject o))
 
 instance ToJSON EnvironmentVersion where
-        toJSON = const emptyObject
+        toJSON = toJSON . _evProperties
 
 -- | A sink that records can be encoded and written to.
 --
@@ -977,23 +1014,36 @@ instance ToJSON WriteInstruction where
 -- | A description of the process that generated the request.
 --
 -- /See:/ 'environmentUserAgent' smart constructor.
-data EnvironmentUserAgent =
-    EnvironmentUserAgent
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype EnvironmentUserAgent = EnvironmentUserAgent
+    { _euaProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnvironmentUserAgent' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'euaProperties'
 environmentUserAgent
-    :: EnvironmentUserAgent
-environmentUserAgent = EnvironmentUserAgent
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> EnvironmentUserAgent
+environmentUserAgent pEuaProperties_ =
+    EnvironmentUserAgent
+    { _euaProperties = pEuaProperties_
+    }
+
+-- | Properties of the object.
+euaProperties :: Lens' EnvironmentUserAgent (HashMap Text JSONValue)
+euaProperties
+  = lens _euaProperties
+      (\ s a -> s{_euaProperties = a})
 
 instance FromJSON EnvironmentUserAgent where
         parseJSON
           = withObject "EnvironmentUserAgent"
-              (\ o -> pure EnvironmentUserAgent)
+              (\ o -> EnvironmentUserAgent <$> (parseJSONObject o))
 
 instance ToJSON EnvironmentUserAgent where
-        toJSON = const emptyObject
+        toJSON = toJSON . _euaProperties
 
 -- | Describes the data disk used by a workflow job.
 --
@@ -1444,23 +1494,36 @@ instance ToJSON ConcatPosition where
 -- will have context[\'pcollection\'] = .
 --
 -- /See:/ 'metricStructuredNameContext' smart constructor.
-data MetricStructuredNameContext =
-    MetricStructuredNameContext
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype MetricStructuredNameContext = MetricStructuredNameContext
+    { _msncProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetricStructuredNameContext' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'msncProperties'
 metricStructuredNameContext
-    :: MetricStructuredNameContext
-metricStructuredNameContext = MetricStructuredNameContext
+    :: HashMap Text Text -- ^ 'properties'
+    -> MetricStructuredNameContext
+metricStructuredNameContext pMsncProperties_ =
+    MetricStructuredNameContext
+    { _msncProperties = pMsncProperties_
+    }
+
+msncProperties :: Lens' MetricStructuredNameContext (HashMap Text Text)
+msncProperties
+  = lens _msncProperties
+      (\ s a -> s{_msncProperties = a})
 
 instance FromJSON MetricStructuredNameContext where
         parseJSON
           = withObject "MetricStructuredNameContext"
-              (\ o -> pure MetricStructuredNameContext)
+              (\ o ->
+                 MetricStructuredNameContext <$> (parseJSONObject o))
 
 instance ToJSON MetricStructuredNameContext where
-        toJSON = const emptyObject
+        toJSON = toJSON . _msncProperties
 
 -- | Identifies the location of a streaming computation stage, for
 -- stage-to-stage communication.
@@ -1839,43 +1902,69 @@ instance ToJSON FlattenInstruction where
 -- corresponding name prefixes of the new job.
 --
 -- /See:/ 'jobTransformNameMApping' smart constructor.
-data JobTransformNameMApping =
-    JobTransformNameMApping
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype JobTransformNameMApping = JobTransformNameMApping
+    { _jtnmaProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobTransformNameMApping' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jtnmaProperties'
 jobTransformNameMApping
-    :: JobTransformNameMApping
-jobTransformNameMApping = JobTransformNameMApping
+    :: HashMap Text Text -- ^ 'properties'
+    -> JobTransformNameMApping
+jobTransformNameMApping pJtnmaProperties_ =
+    JobTransformNameMApping
+    { _jtnmaProperties = pJtnmaProperties_
+    }
+
+jtnmaProperties :: Lens' JobTransformNameMApping (HashMap Text Text)
+jtnmaProperties
+  = lens _jtnmaProperties
+      (\ s a -> s{_jtnmaProperties = a})
 
 instance FromJSON JobTransformNameMApping where
         parseJSON
           = withObject "JobTransformNameMApping"
-              (\ o -> pure JobTransformNameMApping)
+              (\ o ->
+                 JobTransformNameMApping <$> (parseJSONObject o))
 
 instance ToJSON JobTransformNameMApping where
-        toJSON = const emptyObject
+        toJSON = toJSON . _jtnmaProperties
 
 -- | The source to read from, plus its parameters.
 --
 -- /See:/ 'sourceSpec' smart constructor.
-data SourceSpec =
-    SourceSpec
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype SourceSpec = SourceSpec
+    { _ssProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceSpec' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ssProperties'
 sourceSpec
-    :: SourceSpec
-sourceSpec = SourceSpec
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> SourceSpec
+sourceSpec pSsProperties_ =
+    SourceSpec
+    { _ssProperties = pSsProperties_
+    }
+
+-- | Properties of the object.
+ssProperties :: Lens' SourceSpec (HashMap Text JSONValue)
+ssProperties
+  = lens _ssProperties (\ s a -> s{_ssProperties = a})
 
 instance FromJSON SourceSpec where
         parseJSON
-          = withObject "SourceSpec" (\ o -> pure SourceSpec)
+          = withObject "SourceSpec"
+              (\ o -> SourceSpec <$> (parseJSONObject o))
 
 instance ToJSON SourceSpec where
-        toJSON = const emptyObject
+        toJSON = toJSON . _ssProperties
 
 -- | Metadata about a Source useful for automatically optimizing and tuning
 -- the pipeline, etc.
@@ -1946,24 +2035,39 @@ instance ToJSON SourceMetadata where
 -- | Experimental settings.
 --
 -- /See:/ 'environmentInternalExperiments' smart constructor.
-data EnvironmentInternalExperiments =
-    EnvironmentInternalExperiments
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype EnvironmentInternalExperiments = EnvironmentInternalExperiments
+    { _eieProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnvironmentInternalExperiments' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eieProperties'
 environmentInternalExperiments
-    :: EnvironmentInternalExperiments
-environmentInternalExperiments = EnvironmentInternalExperiments
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> EnvironmentInternalExperiments
+environmentInternalExperiments pEieProperties_ =
+    EnvironmentInternalExperiments
+    { _eieProperties = pEieProperties_
+    }
+
+-- | Properties of the object. Contains field \'ype with type URL.
+eieProperties :: Lens' EnvironmentInternalExperiments (HashMap Text JSONValue)
+eieProperties
+  = lens _eieProperties
+      (\ s a -> s{_eieProperties = a})
 
 instance FromJSON EnvironmentInternalExperiments
          where
         parseJSON
           = withObject "EnvironmentInternalExperiments"
-              (\ o -> pure EnvironmentInternalExperiments)
+              (\ o ->
+                 EnvironmentInternalExperiments <$>
+                   (parseJSONObject o))
 
 instance ToJSON EnvironmentInternalExperiments where
-        toJSON = const emptyObject
+        toJSON = toJSON . _eieProperties
 
 -- | Taskrunner configuration settings.
 --
@@ -2239,23 +2343,38 @@ instance ToJSON TaskRunnerSettings where
 -- way.
 --
 -- /See:/ 'environmentSdkPipelineOptions' smart constructor.
-data EnvironmentSdkPipelineOptions =
-    EnvironmentSdkPipelineOptions
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype EnvironmentSdkPipelineOptions = EnvironmentSdkPipelineOptions
+    { _espoProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnvironmentSdkPipelineOptions' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'espoProperties'
 environmentSdkPipelineOptions
-    :: EnvironmentSdkPipelineOptions
-environmentSdkPipelineOptions = EnvironmentSdkPipelineOptions
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> EnvironmentSdkPipelineOptions
+environmentSdkPipelineOptions pEspoProperties_ =
+    EnvironmentSdkPipelineOptions
+    { _espoProperties = pEspoProperties_
+    }
+
+-- | Properties of the object.
+espoProperties :: Lens' EnvironmentSdkPipelineOptions (HashMap Text JSONValue)
+espoProperties
+  = lens _espoProperties
+      (\ s a -> s{_espoProperties = a})
 
 instance FromJSON EnvironmentSdkPipelineOptions where
         parseJSON
           = withObject "EnvironmentSdkPipelineOptions"
-              (\ o -> pure EnvironmentSdkPipelineOptions)
+              (\ o ->
+                 EnvironmentSdkPipelineOptions <$>
+                   (parseJSONObject o))
 
 instance ToJSON EnvironmentSdkPipelineOptions where
-        toJSON = const emptyObject
+        toJSON = toJSON . _espoProperties
 
 -- | Request to lease WorkItems.
 --
@@ -2402,16 +2521,27 @@ instance ToJSON SourceOperationResponse where
 -- | Maps user stage names to stable computation names.
 --
 -- /See:/ 'topologyConfigUserStageToComputationNameMap' smart constructor.
-data TopologyConfigUserStageToComputationNameMap =
-    TopologyConfigUserStageToComputationNameMap
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype TopologyConfigUserStageToComputationNameMap = TopologyConfigUserStageToComputationNameMap
+    { _tcustcnmProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TopologyConfigUserStageToComputationNameMap' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tcustcnmProperties'
 topologyConfigUserStageToComputationNameMap
-    :: TopologyConfigUserStageToComputationNameMap
-topologyConfigUserStageToComputationNameMap =
+    :: HashMap Text Text -- ^ 'properties'
+    -> TopologyConfigUserStageToComputationNameMap
+topologyConfigUserStageToComputationNameMap pTcustcnmProperties_ =
     TopologyConfigUserStageToComputationNameMap
+    { _tcustcnmProperties = pTcustcnmProperties_
+    }
+
+tcustcnmProperties :: Lens' TopologyConfigUserStageToComputationNameMap (HashMap Text Text)
+tcustcnmProperties
+  = lens _tcustcnmProperties
+      (\ s a -> s{_tcustcnmProperties = a})
 
 instance FromJSON
          TopologyConfigUserStageToComputationNameMap where
@@ -2419,11 +2549,12 @@ instance FromJSON
           = withObject
               "TopologyConfigUserStageToComputationNameMap"
               (\ o ->
-                 pure TopologyConfigUserStageToComputationNameMap)
+                 TopologyConfigUserStageToComputationNameMap <$>
+                   (parseJSONObject o))
 
 instance ToJSON
          TopologyConfigUserStageToComputationNameMap where
-        toJSON = const emptyObject
+        toJSON = toJSON . _tcustcnmProperties
 
 -- | A task which consists of a shell command for the worker to execute.
 --
@@ -2474,45 +2605,70 @@ instance ToJSON ShellTask where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-data StatusDetailsItem =
-    StatusDetailsItem
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype StatusDetailsItem = StatusDetailsItem
+    { _sdiProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sdiProperties'
 statusDetailsItem
-    :: StatusDetailsItem
-statusDetailsItem = StatusDetailsItem
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> StatusDetailsItem
+statusDetailsItem pSdiProperties_ =
+    StatusDetailsItem
+    { _sdiProperties = pSdiProperties_
+    }
+
+-- | Properties of the object. Contains field \'ype with type URL.
+sdiProperties :: Lens' StatusDetailsItem (HashMap Text JSONValue)
+sdiProperties
+  = lens _sdiProperties
+      (\ s a -> s{_sdiProperties = a})
 
 instance FromJSON StatusDetailsItem where
         parseJSON
           = withObject "StatusDetailsItem"
-              (\ o -> pure StatusDetailsItem)
+              (\ o -> StatusDetailsItem <$> (parseJSONObject o))
 
 instance ToJSON StatusDetailsItem where
-        toJSON = const emptyObject
+        toJSON = toJSON . _sdiProperties
 
 -- | Named properties associated with the step. Each kind of predefined step
 -- has its own required set of properties.
 --
 -- /See:/ 'stepProperties' smart constructor.
-data StepProperties =
-    StepProperties
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype StepProperties = StepProperties
+    { _spProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StepProperties' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'spProperties'
 stepProperties
-    :: StepProperties
-stepProperties = StepProperties
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> StepProperties
+stepProperties pSpProperties_ =
+    StepProperties
+    { _spProperties = pSpProperties_
+    }
+
+-- | Properties of the object.
+spProperties :: Lens' StepProperties (HashMap Text JSONValue)
+spProperties
+  = lens _spProperties (\ s a -> s{_spProperties = a})
 
 instance FromJSON StepProperties where
         parseJSON
           = withObject "StepProperties"
-              (\ o -> pure StepProperties)
+              (\ o -> StepProperties <$> (parseJSONObject o))
 
 instance ToJSON StepProperties where
-        toJSON = const emptyObject
+        toJSON = toJSON . _spProperties
 
 -- | Global topology of the streaming Dataflow job, including all
 -- computations and their sharded locations.
@@ -2692,24 +2848,39 @@ instance ToJSON WorkerSettings where
 -- harness.
 --
 -- /See:/ 'workItemServiceStateHarnessData' smart constructor.
-data WorkItemServiceStateHarnessData =
-    WorkItemServiceStateHarnessData
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype WorkItemServiceStateHarnessData = WorkItemServiceStateHarnessData
+    { _wisshdProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WorkItemServiceStateHarnessData' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wisshdProperties'
 workItemServiceStateHarnessData
-    :: WorkItemServiceStateHarnessData
-workItemServiceStateHarnessData = WorkItemServiceStateHarnessData
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> WorkItemServiceStateHarnessData
+workItemServiceStateHarnessData pWisshdProperties_ =
+    WorkItemServiceStateHarnessData
+    { _wisshdProperties = pWisshdProperties_
+    }
+
+-- | Properties of the object.
+wisshdProperties :: Lens' WorkItemServiceStateHarnessData (HashMap Text JSONValue)
+wisshdProperties
+  = lens _wisshdProperties
+      (\ s a -> s{_wisshdProperties = a})
 
 instance FromJSON WorkItemServiceStateHarnessData
          where
         parseJSON
           = withObject "WorkItemServiceStateHarnessData"
-              (\ o -> pure WorkItemServiceStateHarnessData)
+              (\ o ->
+                 WorkItemServiceStateHarnessData <$>
+                   (parseJSONObject o))
 
 instance ToJSON WorkItemServiceStateHarnessData where
-        toJSON = const emptyObject
+        toJSON = toJSON . _wisshdProperties
 
 -- | Data disk assignment for a given VM instance.
 --
@@ -2940,16 +3111,28 @@ instance ToJSON StreamingSetupTask where
 -- | The codec to use for interpreting an element in the input PTable.
 --
 -- /See:/ 'partialGroupByKeyInstructionInputElementCodec' smart constructor.
-data PartialGroupByKeyInstructionInputElementCodec =
-    PartialGroupByKeyInstructionInputElementCodec
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype PartialGroupByKeyInstructionInputElementCodec = PartialGroupByKeyInstructionInputElementCodec
+    { _pgbkiiecProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PartialGroupByKeyInstructionInputElementCodec' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pgbkiiecProperties'
 partialGroupByKeyInstructionInputElementCodec
-    :: PartialGroupByKeyInstructionInputElementCodec
-partialGroupByKeyInstructionInputElementCodec =
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> PartialGroupByKeyInstructionInputElementCodec
+partialGroupByKeyInstructionInputElementCodec pPgbkiiecProperties_ =
     PartialGroupByKeyInstructionInputElementCodec
+    { _pgbkiiecProperties = pPgbkiiecProperties_
+    }
+
+-- | Properties of the object.
+pgbkiiecProperties :: Lens' PartialGroupByKeyInstructionInputElementCodec (HashMap Text JSONValue)
+pgbkiiecProperties
+  = lens _pgbkiiecProperties
+      (\ s a -> s{_pgbkiiecProperties = a})
 
 instance FromJSON
          PartialGroupByKeyInstructionInputElementCodec where
@@ -2957,11 +3140,12 @@ instance FromJSON
           = withObject
               "PartialGroupByKeyInstructionInputElementCodec"
               (\ o ->
-                 pure PartialGroupByKeyInstructionInputElementCodec)
+                 PartialGroupByKeyInstructionInputElementCodec <$>
+                   (parseJSONObject o))
 
 instance ToJSON
          PartialGroupByKeyInstructionInputElementCodec where
-        toJSON = const emptyObject
+        toJSON = toJSON . _pgbkiiecProperties
 
 -- | MapTask consists of an ordered set of instructions, each of which
 -- describes one particular low-level operation for the worker to perform
@@ -3068,64 +3252,105 @@ instance ToJSON MountedDataDisk where
 -- | The codec to use to encode data written to the sink.
 --
 -- /See:/ 'sinkCodec' smart constructor.
-data SinkCodec =
-    SinkCodec
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype SinkCodec = SinkCodec
+    { _scProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SinkCodec' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scProperties'
 sinkCodec
-    :: SinkCodec
-sinkCodec = SinkCodec
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> SinkCodec
+sinkCodec pScProperties_ =
+    SinkCodec
+    { _scProperties = pScProperties_
+    }
+
+-- | Properties of the object.
+scProperties :: Lens' SinkCodec (HashMap Text JSONValue)
+scProperties
+  = lens _scProperties (\ s a -> s{_scProperties = a})
 
 instance FromJSON SinkCodec where
         parseJSON
-          = withObject "SinkCodec" (\ o -> pure SinkCodec)
+          = withObject "SinkCodec"
+              (\ o -> SinkCodec <$> (parseJSONObject o))
 
 instance ToJSON SinkCodec where
-        toJSON = const emptyObject
+        toJSON = toJSON . _scProperties
 
 -- | The user function to invoke.
 --
 -- /See:/ 'parDoInstructionUserFn' smart constructor.
-data ParDoInstructionUserFn =
-    ParDoInstructionUserFn
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype ParDoInstructionUserFn = ParDoInstructionUserFn
+    { _pdiufProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ParDoInstructionUserFn' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pdiufProperties'
 parDoInstructionUserFn
-    :: ParDoInstructionUserFn
-parDoInstructionUserFn = ParDoInstructionUserFn
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> ParDoInstructionUserFn
+parDoInstructionUserFn pPdiufProperties_ =
+    ParDoInstructionUserFn
+    { _pdiufProperties = pPdiufProperties_
+    }
+
+-- | Properties of the object.
+pdiufProperties :: Lens' ParDoInstructionUserFn (HashMap Text JSONValue)
+pdiufProperties
+  = lens _pdiufProperties
+      (\ s a -> s{_pdiufProperties = a})
 
 instance FromJSON ParDoInstructionUserFn where
         parseJSON
           = withObject "ParDoInstructionUserFn"
-              (\ o -> pure ParDoInstructionUserFn)
+              (\ o ->
+                 ParDoInstructionUserFn <$> (parseJSONObject o))
 
 instance ToJSON ParDoInstructionUserFn where
-        toJSON = const emptyObject
+        toJSON = toJSON . _pdiufProperties
 
 -- | The codec to use to encode data being written via this output.
 --
 -- /See:/ 'instructionOutputCodec' smart constructor.
-data InstructionOutputCodec =
-    InstructionOutputCodec
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype InstructionOutputCodec = InstructionOutputCodec
+    { _iocProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstructionOutputCodec' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iocProperties'
 instructionOutputCodec
-    :: InstructionOutputCodec
-instructionOutputCodec = InstructionOutputCodec
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> InstructionOutputCodec
+instructionOutputCodec pIocProperties_ =
+    InstructionOutputCodec
+    { _iocProperties = pIocProperties_
+    }
+
+-- | Properties of the object.
+iocProperties :: Lens' InstructionOutputCodec (HashMap Text JSONValue)
+iocProperties
+  = lens _iocProperties
+      (\ s a -> s{_iocProperties = a})
 
 instance FromJSON InstructionOutputCodec where
         parseJSON
           = withObject "InstructionOutputCodec"
-              (\ o -> pure InstructionOutputCodec)
+              (\ o ->
+                 InstructionOutputCodec <$> (parseJSONObject o))
 
 instance ToJSON InstructionOutputCodec where
-        toJSON = const emptyObject
+        toJSON = toJSON . _iocProperties
 
 -- | Describes a stream of data, either as input to be processed or as output
 -- of a streaming Dataflow job.
@@ -3208,23 +3433,36 @@ instance ToJSON StreamLocation where
 -- | Extra arguments for this worker pool.
 --
 -- /See:/ 'workerPoolPoolArgs' smart constructor.
-data WorkerPoolPoolArgs =
-    WorkerPoolPoolArgs
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype WorkerPoolPoolArgs = WorkerPoolPoolArgs
+    { _wppaProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WorkerPoolPoolArgs' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wppaProperties'
 workerPoolPoolArgs
-    :: WorkerPoolPoolArgs
-workerPoolPoolArgs = WorkerPoolPoolArgs
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> WorkerPoolPoolArgs
+workerPoolPoolArgs pWppaProperties_ =
+    WorkerPoolPoolArgs
+    { _wppaProperties = pWppaProperties_
+    }
+
+-- | Properties of the object. Contains field \'ype with type URL.
+wppaProperties :: Lens' WorkerPoolPoolArgs (HashMap Text JSONValue)
+wppaProperties
+  = lens _wppaProperties
+      (\ s a -> s{_wppaProperties = a})
 
 instance FromJSON WorkerPoolPoolArgs where
         parseJSON
           = withObject "WorkerPoolPoolArgs"
-              (\ o -> pure WorkerPoolPoolArgs)
+              (\ o -> WorkerPoolPoolArgs <$> (parseJSONObject o))
 
 instance ToJSON WorkerPoolPoolArgs where
-        toJSON = const emptyObject
+        toJSON = toJSON . _wppaProperties
 
 -- | Identifies the location of a streaming side input.
 --
@@ -3490,37 +3728,62 @@ instance ToJSON SourceGetMetadataRequest where
 -- | The user function to invoke.
 --
 -- /See:/ 'seqMapTaskUserFn' smart constructor.
-data SeqMapTaskUserFn =
-    SeqMapTaskUserFn
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype SeqMapTaskUserFn = SeqMapTaskUserFn
+    { _smtufProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SeqMapTaskUserFn' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'smtufProperties'
 seqMapTaskUserFn
-    :: SeqMapTaskUserFn
-seqMapTaskUserFn = SeqMapTaskUserFn
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> SeqMapTaskUserFn
+seqMapTaskUserFn pSmtufProperties_ =
+    SeqMapTaskUserFn
+    { _smtufProperties = pSmtufProperties_
+    }
+
+-- | Properties of the object.
+smtufProperties :: Lens' SeqMapTaskUserFn (HashMap Text JSONValue)
+smtufProperties
+  = lens _smtufProperties
+      (\ s a -> s{_smtufProperties = a})
 
 instance FromJSON SeqMapTaskUserFn where
         parseJSON
           = withObject "SeqMapTaskUserFn"
-              (\ o -> pure SeqMapTaskUserFn)
+              (\ o -> SeqMapTaskUserFn <$> (parseJSONObject o))
 
 instance ToJSON SeqMapTaskUserFn where
-        toJSON = const emptyObject
+        toJSON = toJSON . _smtufProperties
 
 -- | The value combining function to invoke.
 --
 -- /See:/ 'partialGroupByKeyInstructionValueCombiningFn' smart constructor.
-data PartialGroupByKeyInstructionValueCombiningFn =
-    PartialGroupByKeyInstructionValueCombiningFn
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype PartialGroupByKeyInstructionValueCombiningFn = PartialGroupByKeyInstructionValueCombiningFn
+    { _pgbkivcfProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PartialGroupByKeyInstructionValueCombiningFn' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pgbkivcfProperties'
 partialGroupByKeyInstructionValueCombiningFn
-    :: PartialGroupByKeyInstructionValueCombiningFn
-partialGroupByKeyInstructionValueCombiningFn =
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> PartialGroupByKeyInstructionValueCombiningFn
+partialGroupByKeyInstructionValueCombiningFn pPgbkivcfProperties_ =
     PartialGroupByKeyInstructionValueCombiningFn
+    { _pgbkivcfProperties = pPgbkivcfProperties_
+    }
+
+-- | Properties of the object.
+pgbkivcfProperties :: Lens' PartialGroupByKeyInstructionValueCombiningFn (HashMap Text JSONValue)
+pgbkivcfProperties
+  = lens _pgbkivcfProperties
+      (\ s a -> s{_pgbkivcfProperties = a})
 
 instance FromJSON
          PartialGroupByKeyInstructionValueCombiningFn where
@@ -3528,11 +3791,12 @@ instance FromJSON
           = withObject
               "PartialGroupByKeyInstructionValueCombiningFn"
               (\ o ->
-                 pure PartialGroupByKeyInstructionValueCombiningFn)
+                 PartialGroupByKeyInstructionValueCombiningFn <$>
+                   (parseJSONObject o))
 
 instance ToJSON
          PartialGroupByKeyInstructionValueCombiningFn where
-        toJSON = const emptyObject
+        toJSON = toJSON . _pgbkivcfProperties
 
 -- | Defines a job to be run by the Dataflow service.
 --
@@ -3790,22 +4054,35 @@ instance ToJSON ReadInstruction where
 -- | The sink to write to, plus its parameters.
 --
 -- /See:/ 'sinkSpec' smart constructor.
-data SinkSpec =
-    SinkSpec
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype SinkSpec = SinkSpec
+    { _ssProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SinkSpec' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ssProperties'
 sinkSpec
-    :: SinkSpec
-sinkSpec = SinkSpec
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> SinkSpec
+sinkSpec pSsProperties_ =
+    SinkSpec
+    { _ssProperties = pSsProperties_
+    }
+
+-- | Properties of the object.
+ssProperties :: Lens' SinkSpec (HashMap Text JSONValue)
+ssProperties
+  = lens _ssProperties (\ s a -> s{_ssProperties = a})
 
 instance FromJSON SinkSpec where
         parseJSON
-          = withObject "SinkSpec" (\ o -> pure SinkSpec)
+          = withObject "SinkSpec"
+              (\ o -> SinkSpec <$> (parseJSONObject o))
 
 instance ToJSON SinkSpec where
-        toJSON = const emptyObject
+        toJSON = toJSON . _ssProperties
 
 -- | Describes one particular pool of Dataflow workers to be instantiated by
 -- the Dataflow service in order to perform the computations required by a
@@ -4918,23 +5195,36 @@ instance ToJSON CustomSourceLocation where
 
 --
 -- /See:/ 'sourceBaseSpecsItem' smart constructor.
-data SourceBaseSpecsItem =
-    SourceBaseSpecsItem
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype SourceBaseSpecsItem = SourceBaseSpecsItem
+    { _sbsiProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceBaseSpecsItem' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sbsiProperties'
 sourceBaseSpecsItem
-    :: SourceBaseSpecsItem
-sourceBaseSpecsItem = SourceBaseSpecsItem
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> SourceBaseSpecsItem
+sourceBaseSpecsItem pSbsiProperties_ =
+    SourceBaseSpecsItem
+    { _sbsiProperties = pSbsiProperties_
+    }
+
+-- | Properties of the object.
+sbsiProperties :: Lens' SourceBaseSpecsItem (HashMap Text JSONValue)
+sbsiProperties
+  = lens _sbsiProperties
+      (\ s a -> s{_sbsiProperties = a})
 
 instance FromJSON SourceBaseSpecsItem where
         parseJSON
           = withObject "SourceBaseSpecsItem"
-              (\ o -> pure SourceBaseSpecsItem)
+              (\ o -> SourceBaseSpecsItem <$> (parseJSONObject o))
 
 instance ToJSON SourceBaseSpecsItem where
-        toJSON = const emptyObject
+        toJSON = toJSON . _sbsiProperties
 
 -- | Describes a particular operation comprising a MapTask.
 --
@@ -5050,23 +5340,36 @@ instance ToJSON ParallelInstruction where
 -- | How to interpret the source element(s) as a side input value.
 --
 -- /See:/ 'sideInputInfoKind' smart constructor.
-data SideInputInfoKind =
-    SideInputInfoKind
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype SideInputInfoKind = SideInputInfoKind
+    { _siikProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SideInputInfoKind' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'siikProperties'
 sideInputInfoKind
-    :: SideInputInfoKind
-sideInputInfoKind = SideInputInfoKind
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> SideInputInfoKind
+sideInputInfoKind pSiikProperties_ =
+    SideInputInfoKind
+    { _siikProperties = pSiikProperties_
+    }
+
+-- | Properties of the object.
+siikProperties :: Lens' SideInputInfoKind (HashMap Text JSONValue)
+siikProperties
+  = lens _siikProperties
+      (\ s a -> s{_siikProperties = a})
 
 instance FromJSON SideInputInfoKind where
         parseJSON
           = withObject "SideInputInfoKind"
-              (\ o -> pure SideInputInfoKind)
+              (\ o -> SideInputInfoKind <$> (parseJSONObject o))
 
 instance ToJSON SideInputInfoKind where
-        toJSON = const emptyObject
+        toJSON = toJSON . _siikProperties
 
 -- | DEPRECATED in favor of DerivedSource.
 --
@@ -5214,22 +5517,35 @@ instance ToJSON JobExecutionInfo where
 -- | The codec to use to decode data read from the source.
 --
 -- /See:/ 'sourceCodec' smart constructor.
-data SourceCodec =
-    SourceCodec
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype SourceCodec = SourceCodec
+    { _scProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceCodec' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scProperties'
 sourceCodec
-    :: SourceCodec
-sourceCodec = SourceCodec
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> SourceCodec
+sourceCodec pScProperties_ =
+    SourceCodec
+    { _scProperties = pScProperties_
+    }
+
+-- | Properties of the object.
+scProperties :: Lens' SourceCodec (HashMap Text JSONValue)
+scProperties
+  = lens _scProperties (\ s a -> s{_scProperties = a})
 
 instance FromJSON SourceCodec where
         parseJSON
-          = withObject "SourceCodec" (\ o -> pure SourceCodec)
+          = withObject "SourceCodec"
+              (\ o -> SourceCodec <$> (parseJSONObject o))
 
 instance ToJSON SourceCodec where
-        toJSON = const emptyObject
+        toJSON = toJSON . _scProperties
 
 -- | State family configuration.
 --

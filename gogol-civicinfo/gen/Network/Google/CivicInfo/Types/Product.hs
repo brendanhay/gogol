@@ -23,25 +23,40 @@ import           Network.Google.Prelude
 -- | Political geographic divisions that contain the requested address.
 --
 -- /See:/ 'representativeInfoResponseDivisions' smart constructor.
-data RepresentativeInfoResponseDivisions =
-    RepresentativeInfoResponseDivisions
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype RepresentativeInfoResponseDivisions = RepresentativeInfoResponseDivisions
+    { _rirdProperties :: HashMap Text GeographicDivision
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepresentativeInfoResponseDivisions' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rirdProperties'
 representativeInfoResponseDivisions
-    :: RepresentativeInfoResponseDivisions
-representativeInfoResponseDivisions = RepresentativeInfoResponseDivisions
+    :: HashMap Text GeographicDivision -- ^ 'properties'
+    -> RepresentativeInfoResponseDivisions
+representativeInfoResponseDivisions pRirdProperties_ =
+    RepresentativeInfoResponseDivisions
+    { _rirdProperties = pRirdProperties_
+    }
+
+-- | The unique Open Civic Data identifier for this division.
+rirdProperties :: Lens' RepresentativeInfoResponseDivisions (HashMap Text GeographicDivision)
+rirdProperties
+  = lens _rirdProperties
+      (\ s a -> s{_rirdProperties = a})
 
 instance FromJSON RepresentativeInfoResponseDivisions
          where
         parseJSON
           = withObject "RepresentativeInfoResponseDivisions"
-              (\ o -> pure RepresentativeInfoResponseDivisions)
+              (\ o ->
+                 RepresentativeInfoResponseDivisions <$>
+                   (parseJSONObject o))
 
 instance ToJSON RepresentativeInfoResponseDivisions
          where
-        toJSON = const emptyObject
+        toJSON = toJSON . _rirdProperties
 
 -- | The result of a voter info lookup query.
 --
@@ -1504,24 +1519,39 @@ instance ToJSON DivisionSearchResponse where
 -- | Political geographic divisions that contain the requested address.
 --
 -- /See:/ 'representativeInfoDataDivisions' smart constructor.
-data RepresentativeInfoDataDivisions =
-    RepresentativeInfoDataDivisions
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype RepresentativeInfoDataDivisions = RepresentativeInfoDataDivisions
+    { _riddProperties :: HashMap Text GeographicDivision
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepresentativeInfoDataDivisions' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riddProperties'
 representativeInfoDataDivisions
-    :: RepresentativeInfoDataDivisions
-representativeInfoDataDivisions = RepresentativeInfoDataDivisions
+    :: HashMap Text GeographicDivision -- ^ 'properties'
+    -> RepresentativeInfoDataDivisions
+representativeInfoDataDivisions pRiddProperties_ =
+    RepresentativeInfoDataDivisions
+    { _riddProperties = pRiddProperties_
+    }
+
+-- | The unique Open Civic Data identifier for this division.
+riddProperties :: Lens' RepresentativeInfoDataDivisions (HashMap Text GeographicDivision)
+riddProperties
+  = lens _riddProperties
+      (\ s a -> s{_riddProperties = a})
 
 instance FromJSON RepresentativeInfoDataDivisions
          where
         parseJSON
           = withObject "RepresentativeInfoDataDivisions"
-              (\ o -> pure RepresentativeInfoDataDivisions)
+              (\ o ->
+                 RepresentativeInfoDataDivisions <$>
+                   (parseJSONObject o))
 
 instance ToJSON RepresentativeInfoDataDivisions where
-        toJSON = const emptyObject
+        toJSON = toJSON . _riddProperties
 
 -- | Information about individual election officials.
 --

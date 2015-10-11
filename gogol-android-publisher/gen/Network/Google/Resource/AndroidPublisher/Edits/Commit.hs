@@ -57,7 +57,7 @@ type EditsCommitResource =
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
                    QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
+                     Header "Authorization" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] AppEdit
 
 -- | Commits\/applies the changes made in this edit back to the app.

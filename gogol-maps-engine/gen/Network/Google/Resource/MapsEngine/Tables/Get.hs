@@ -57,7 +57,7 @@ type TablesGetResource =
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
                    QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
+                     Header "Authorization" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Table
 
 -- | Return metadata for a particular table, including the schema.

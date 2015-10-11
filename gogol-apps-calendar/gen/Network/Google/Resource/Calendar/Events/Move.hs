@@ -63,7 +63,7 @@ type EventsMoveResource =
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
                            QueryParam "key" AuthKey :>
-                             QueryParam "oauth_token" OAuthToken :>
+                             Header "Authorization" OAuthToken :>
                                QueryParam "alt" AltJSON :> Post '[JSON] Event
 
 -- | Moves an event to another calendar, i.e. changes an event\'s organizer.

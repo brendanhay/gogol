@@ -58,7 +58,7 @@ type UsersMessagesTrashResource =
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
                      QueryParam "key" AuthKey :>
-                       QueryParam "oauth_token" OAuthToken :>
+                       Header "Authorization" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] Message
 
 -- | Moves the specified message to the trash.

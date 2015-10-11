@@ -61,7 +61,7 @@ type EditsTracksGetResource =
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
                        QueryParam "key" AuthKey :>
-                         QueryParam "oauth_token" OAuthToken :>
+                         Header "Authorization" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Track
 
 -- | Fetches the track configuration for the specified track type. Includes

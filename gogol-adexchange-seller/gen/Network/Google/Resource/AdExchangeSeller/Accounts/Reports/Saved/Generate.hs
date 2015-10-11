@@ -65,7 +65,7 @@ type AccountsReportsSavedGenerateResource =
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
                            QueryParam "key" AuthKey :>
-                             QueryParam "oauth_token" OAuthToken :>
+                             Header "Authorization" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Report
 
 -- | Generate an Ad Exchange report based on the saved report ID sent in the

@@ -709,23 +709,35 @@ instance ToJSON AppList where
 -- used.
 --
 -- /See:/ 'fileOpenWithLinks' smart constructor.
-data FileOpenWithLinks =
-    FileOpenWithLinks
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype FileOpenWithLinks = FileOpenWithLinks
+    { _fowlProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FileOpenWithLinks' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fowlProperties'
 fileOpenWithLinks
-    :: FileOpenWithLinks
-fileOpenWithLinks = FileOpenWithLinks
+    :: HashMap Text Text -- ^ 'properties'
+    -> FileOpenWithLinks
+fileOpenWithLinks pFowlProperties_ =
+    FileOpenWithLinks
+    { _fowlProperties = pFowlProperties_
+    }
+
+fowlProperties :: Lens' FileOpenWithLinks (HashMap Text Text)
+fowlProperties
+  = lens _fowlProperties
+      (\ s a -> s{_fowlProperties = a})
 
 instance FromJSON FileOpenWithLinks where
         parseJSON
           = withObject "FileOpenWithLinks"
-              (\ o -> pure FileOpenWithLinks)
+              (\ o -> FileOpenWithLinks <$> (parseJSONObject o))
 
 instance ToJSON FileOpenWithLinks where
-        toJSON = const emptyObject
+        toJSON = toJSON . _fowlProperties
 
 --
 -- /See:/ 'aboutAdditionalRoleInfoItemRoleSetsItem' smart constructor.
@@ -2024,23 +2036,36 @@ instance ToJSON ChangeList where
 -- | Links for exporting Google Docs to specific formats.
 --
 -- /See:/ 'revisionExportLinks' smart constructor.
-data RevisionExportLinks =
-    RevisionExportLinks
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype RevisionExportLinks = RevisionExportLinks
+    { _relProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RevisionExportLinks' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'relProperties'
 revisionExportLinks
-    :: RevisionExportLinks
-revisionExportLinks = RevisionExportLinks
+    :: HashMap Text Text -- ^ 'properties'
+    -> RevisionExportLinks
+revisionExportLinks pRelProperties_ =
+    RevisionExportLinks
+    { _relProperties = pRelProperties_
+    }
+
+-- | A mapping from export format to URL
+relProperties :: Lens' RevisionExportLinks (HashMap Text Text)
+relProperties
+  = lens _relProperties
+      (\ s a -> s{_relProperties = a})
 
 instance FromJSON RevisionExportLinks where
         parseJSON
           = withObject "RevisionExportLinks"
-              (\ o -> pure RevisionExportLinks)
+              (\ o -> RevisionExportLinks <$> (parseJSONObject o))
 
 instance ToJSON RevisionExportLinks where
-        toJSON = const emptyObject
+        toJSON = toJSON . _relProperties
 
 -- | Indexable text attributes for the file (can only be written)
 --
@@ -2125,23 +2150,35 @@ instance ToJSON AboutFeaturesItem where
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
 -- /See:/ 'channelParams' smart constructor.
-data ChannelParams =
-    ChannelParams
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype ChannelParams = ChannelParams
+    { _cpProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cpProperties'
 channelParams
-    :: ChannelParams
-channelParams = ChannelParams
+    :: HashMap Text Text -- ^ 'properties'
+    -> ChannelParams
+channelParams pCpProperties_ =
+    ChannelParams
+    { _cpProperties = pCpProperties_
+    }
+
+-- | Declares a new parameter by name.
+cpProperties :: Lens' ChannelParams (HashMap Text Text)
+cpProperties
+  = lens _cpProperties (\ s a -> s{_cpProperties = a})
 
 instance FromJSON ChannelParams where
         parseJSON
           = withObject "ChannelParams"
-              (\ o -> pure ChannelParams)
+              (\ o -> ChannelParams <$> (parseJSONObject o))
 
 instance ToJSON ChannelParams where
-        toJSON = const emptyObject
+        toJSON = toJSON . _cpProperties
 
 -- | An item with user information and settings.
 --
@@ -4504,23 +4541,36 @@ instance ToJSON GeneratedIds where
 -- | Links for exporting Google Docs to specific formats.
 --
 -- /See:/ 'fileExportLinks' smart constructor.
-data FileExportLinks =
-    FileExportLinks
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype FileExportLinks = FileExportLinks
+    { _felProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FileExportLinks' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'felProperties'
 fileExportLinks
-    :: FileExportLinks
-fileExportLinks = FileExportLinks
+    :: HashMap Text Text -- ^ 'properties'
+    -> FileExportLinks
+fileExportLinks pFelProperties_ =
+    FileExportLinks
+    { _felProperties = pFelProperties_
+    }
+
+-- | A mapping from export format to URL
+felProperties :: Lens' FileExportLinks (HashMap Text Text)
+felProperties
+  = lens _felProperties
+      (\ s a -> s{_felProperties = a})
 
 instance FromJSON FileExportLinks where
         parseJSON
           = withObject "FileExportLinks"
-              (\ o -> pure FileExportLinks)
+              (\ o -> FileExportLinks <$> (parseJSONObject o))
 
 instance ToJSON FileExportLinks where
-        toJSON = const emptyObject
+        toJSON = toJSON . _felProperties
 
 -- | A JSON representation of a list of comments on a file in Google Drive.
 --

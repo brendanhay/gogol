@@ -667,6 +667,7 @@ module Network.Google.YouTube.Types
     -- * ChannelLocalizations
     , ChannelLocalizations
     , channelLocalizations
+    , clProperties
 
     -- * PlayListSnippet
     , PlayListSnippet
@@ -726,6 +727,7 @@ module Network.Google.YouTube.Types
     -- * PlayListLocalizations
     , PlayListLocalizations
     , playListLocalizations
+    , pllProperties
 
     -- * ContentRatingCzfilmRating
     , ContentRatingCzfilmRating (..)
@@ -839,6 +841,7 @@ module Network.Google.YouTube.Types
     -- * VideoLocalizations
     , VideoLocalizations
     , videoLocalizations
+    , vlProperties
 
     -- * ChannelSectionContentDetails
     , ChannelSectionContentDetails
@@ -1144,6 +1147,7 @@ module Network.Google.YouTube.Types
     -- * ChannelSectionLocalizations
     , ChannelSectionLocalizations
     , channelSectionLocalizations
+    , cslProperties
 
     -- * ContentRatingIlfilmRating
     , ContentRatingIlfilmRating (..)

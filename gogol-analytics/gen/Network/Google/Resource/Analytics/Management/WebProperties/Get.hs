@@ -59,7 +59,7 @@ type ManagementWebPropertiesGetResource =
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
                        QueryParam "key" AuthKey :>
-                         QueryParam "oauth_token" OAuthToken :>
+                         Header "Authorization" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] WebProperty
 
 -- | Gets a web property to which the user has access.

@@ -57,7 +57,7 @@ type UsersDataSourcesGetResource =
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
                    QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
+                     Header "Authorization" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] DataSource
 
 -- | Returns a data source identified by a data stream ID.

@@ -58,7 +58,7 @@ type AccountsSavedadstylesGetResource =
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
                      QueryParam "key" AuthKey :>
-                       QueryParam "oauth_token" OAuthToken :>
+                       Header "Authorization" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyle
 
 -- | List a specific saved ad style for the specified account.

@@ -1121,23 +1121,36 @@ instance ToJSON LocalizedCompanyInfo where
 -- etc.
 --
 -- /See:/ 'logMessageRequestClientInfo' smart constructor.
-data LogMessageRequestClientInfo =
-    LogMessageRequestClientInfo
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype LogMessageRequestClientInfo = LogMessageRequestClientInfo
+    { _lmrciProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogMessageRequestClientInfo' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lmrciProperties'
 logMessageRequestClientInfo
-    :: LogMessageRequestClientInfo
-logMessageRequestClientInfo = LogMessageRequestClientInfo
+    :: HashMap Text Text -- ^ 'properties'
+    -> LogMessageRequestClientInfo
+logMessageRequestClientInfo pLmrciProperties_ =
+    LogMessageRequestClientInfo
+    { _lmrciProperties = pLmrciProperties_
+    }
+
+lmrciProperties :: Lens' LogMessageRequestClientInfo (HashMap Text Text)
+lmrciProperties
+  = lens _lmrciProperties
+      (\ s a -> s{_lmrciProperties = a})
 
 instance FromJSON LogMessageRequestClientInfo where
         parseJSON
           = withObject "LogMessageRequestClientInfo"
-              (\ o -> pure LogMessageRequestClientInfo)
+              (\ o ->
+                 LogMessageRequestClientInfo <$> (parseJSONObject o))
 
 instance ToJSON LogMessageRequestClientInfo where
-        toJSON = const emptyObject
+        toJSON = toJSON . _lmrciProperties
 
 -- | A lead resource that represents an advertiser contact for a \`Company\`.
 -- These are usually generated via Google Partner Search (the advertiser

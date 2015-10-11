@@ -57,7 +57,7 @@ type APIsListResource =
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
                    QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
+                     Header "Authorization" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] DirectoryList
 
 -- | Retrieve the list of APIs supported at this endpoint.

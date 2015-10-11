@@ -44,8 +44,22 @@ module Network.Google.PageSpeed.Types
     , pafsvairiWidth
     , pafsvairiTop
 
+    -- * ResultRuleGroupsProperties
+    , ResultRuleGroupsProperties
+    , resultRuleGroupsProperties
+    , rrgpScore
+
     -- * PagespeedAPIRunPagespeedStrategy
     , PagespeedAPIRunPagespeedStrategy (..)
+
+    -- * ResultFormattedResultsRuleResultsProperties
+    , ResultFormattedResultsRuleResultsProperties
+    , resultFormattedResultsRuleResultsProperties
+    , rfrrrpSummary
+    , rfrrrpRuleImpact
+    , rfrrrpGroups
+    , rfrrrpLocalizedRuleName
+    , rfrrrpURLBlocks
 
     -- * ResultVersion
     , ResultVersion
@@ -78,6 +92,12 @@ module Network.Google.PageSpeed.Types
     , paivpWidth
     , paivpTop
 
+    -- * ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem
+    , ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem
+    , resultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem
+    , rfrrrpubiuiResult
+    , rfrrrpubiuiDetails
+
     -- * Result
     , Result
     , result
@@ -101,6 +121,12 @@ module Network.Google.PageSpeed.Types
     , pafsvaiType
     , pafsvaiSecondaryRects
 
+    -- * ResultFormattedResultsRuleResultsPropertiesURLBlocksItem
+    , ResultFormattedResultsRuleResultsPropertiesURLBlocksItem
+    , resultFormattedResultsRuleResultsPropertiesURLBlocksItem
+    , rfrrrpubiURLs
+    , rfrrrpubiHeader
+
     -- * ResultFormattedResults
     , ResultFormattedResults
     , resultFormattedResults
@@ -110,6 +136,7 @@ module Network.Google.PageSpeed.Types
     -- * ResultRuleGroups
     , ResultRuleGroups
     , resultRuleGroups
+    , rrgProperties
 
     -- * PagespeedAPIFormatStringV2
     , PagespeedAPIFormatStringV2
@@ -120,6 +147,7 @@ module Network.Google.PageSpeed.Types
     -- * ResultFormattedResultsRuleResults
     , ResultFormattedResultsRuleResults
     , resultFormattedResultsRuleResults
+    , rfrrrProperties
     ) where
 
 import           Network.Google.PageSpeed.Types.Product

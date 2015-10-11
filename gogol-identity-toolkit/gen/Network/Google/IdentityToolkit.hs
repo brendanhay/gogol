@@ -169,6 +169,7 @@ module Network.Google.IdentityToolkit
     -- ** IdentitytoolkitRelyingPartyGetPublicKeysResponse
     , IdentitytoolkitRelyingPartyGetPublicKeysResponse
     , identitytoolkitRelyingPartyGetPublicKeysResponse
+    , irpgpkrProperties
 
     -- ** RelyingParty
     , RelyingParty

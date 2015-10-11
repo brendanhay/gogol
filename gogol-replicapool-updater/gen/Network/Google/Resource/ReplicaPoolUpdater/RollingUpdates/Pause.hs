@@ -62,7 +62,7 @@ type RollingUpdatesPauseResource =
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
                          QueryParam "key" AuthKey :>
-                           QueryParam "oauth_token" OAuthToken :>
+                           Header "Authorization" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Pauses the update in state from ROLLING_FORWARD or ROLLING_BACK. Has no

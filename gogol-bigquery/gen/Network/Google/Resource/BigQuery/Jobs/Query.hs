@@ -58,7 +58,7 @@ type JobsQueryResource =
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
                    QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
+                     Header "Authorization" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] QueryRequest :>
                            Post '[JSON] QueryResponse

@@ -59,6 +59,7 @@ module Network.Google.DoubleClickSearch
     -- ** ReportRow
     , ReportRow
     , reportRow
+    , rrProperties
 
     -- ** ReportRequest
     , ReportRequest

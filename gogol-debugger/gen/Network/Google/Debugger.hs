@@ -194,6 +194,7 @@ module Network.Google.Debugger
     -- ** DebuggeeLabels
     , DebuggeeLabels
     , debuggeeLabels
+    , dlProperties
 
     -- ** Debuggee
     , Debuggee

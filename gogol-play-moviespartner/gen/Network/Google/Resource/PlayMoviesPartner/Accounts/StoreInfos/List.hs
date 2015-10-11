@@ -87,7 +87,7 @@ type AccountsStoreInfosListResource =
                                              QueryParam "prettyPrint" Bool :>
                                                QueryParam "fields" Text :>
                                                  QueryParam "key" AuthKey :>
-                                                   QueryParam "oauth_token"
+                                                   Header "Authorization"
                                                      OAuthToken
                                                      :>
                                                      QueryParam "alt" AltJSON :>

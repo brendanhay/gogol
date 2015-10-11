@@ -55,7 +55,7 @@ type SitesAddResource =
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
                  QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
+                   Header "Authorization" OAuthToken :>
                      QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Adds a site to the set of the user\'s sites in Webmaster Tools.

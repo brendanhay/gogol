@@ -99,7 +99,7 @@ type ObjectsCopyResource =
                                                  QueryParam "userIp" Text :>
                                                    QueryParam "fields" Text :>
                                                      QueryParam "key" AuthKey :>
-                                                       QueryParam "oauth_token"
+                                                       Header "Authorization"
                                                          OAuthToken
                                                          :>
                                                          QueryParam "alt"
@@ -150,8 +150,7 @@ type ObjectsCopyResource =
                                                      QueryParam "fields" Text :>
                                                        QueryParam "key" AuthKey
                                                          :>
-                                                         QueryParam
-                                                           "oauth_token"
+                                                         Header "Authorization"
                                                            OAuthToken
                                                            :>
                                                            QueryParam "alt"

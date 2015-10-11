@@ -162,6 +162,7 @@ module Network.Google.Debugger.Types
     -- * DebuggeeLabels
     , DebuggeeLabels
     , debuggeeLabels
+    , dlProperties
 
     -- * Debuggee
     , Debuggee

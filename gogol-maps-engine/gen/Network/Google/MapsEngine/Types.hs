@@ -27,6 +27,7 @@ module Network.Google.MapsEngine.Types
     -- * GeoJSONProperties
     , GeoJSONProperties
     , geoJSONProperties
+    , gjpProperties
 
     -- * Feature
     , Feature

@@ -69,7 +69,7 @@ type PagespeedAPIRunPagespeedResource =
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
                            QueryParam "key" AuthKey :>
-                             QueryParam "oauth_token" OAuthToken :>
+                             Header "Authorization" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Result
 
 -- | Runs PageSpeed analysis on the page at the specified URL, and returns

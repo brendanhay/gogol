@@ -55,23 +55,37 @@ instance ToJSON RestMethodResponse where
 -- | Common parameters that apply across all apis.
 --
 -- /See:/ 'restDescriptionParameters' smart constructor.
-data RestDescriptionParameters =
-    RestDescriptionParameters
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype RestDescriptionParameters = RestDescriptionParameters
+    { _rdpProperties :: HashMap Text JSONSchema
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RestDescriptionParameters' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdpProperties'
 restDescriptionParameters
-    :: RestDescriptionParameters
-restDescriptionParameters = RestDescriptionParameters
+    :: HashMap Text JSONSchema -- ^ 'properties'
+    -> RestDescriptionParameters
+restDescriptionParameters pRdpProperties_ =
+    RestDescriptionParameters
+    { _rdpProperties = pRdpProperties_
+    }
+
+-- | Description of a single parameter.
+rdpProperties :: Lens' RestDescriptionParameters (HashMap Text JSONSchema)
+rdpProperties
+  = lens _rdpProperties
+      (\ s a -> s{_rdpProperties = a})
 
 instance FromJSON RestDescriptionParameters where
         parseJSON
           = withObject "RestDescriptionParameters"
-              (\ o -> pure RestDescriptionParameters)
+              (\ o ->
+                 RestDescriptionParameters <$> (parseJSONObject o))
 
 instance ToJSON RestDescriptionParameters where
-        toJSON = const emptyObject
+        toJSON = toJSON . _rdpProperties
 
 --
 -- /See:/ 'restMethod' smart constructor.
@@ -333,45 +347,74 @@ instance ToJSON RestResource where
 -- | Available OAuth 2.0 scopes.
 --
 -- /See:/ 'restDescriptionAuthOAuth2Scopes' smart constructor.
-data RestDescriptionAuthOAuth2Scopes =
-    RestDescriptionAuthOAuth2Scopes
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype RestDescriptionAuthOAuth2Scopes = RestDescriptionAuthOAuth2Scopes
+    { _rdaoasProperties :: HashMap Text RestDescriptionAuthOAuth2ScopesProperties
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RestDescriptionAuthOAuth2Scopes' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdaoasProperties'
 restDescriptionAuthOAuth2Scopes
-    :: RestDescriptionAuthOAuth2Scopes
-restDescriptionAuthOAuth2Scopes = RestDescriptionAuthOAuth2Scopes
+    :: HashMap Text RestDescriptionAuthOAuth2ScopesProperties -- ^ 'properties'
+    -> RestDescriptionAuthOAuth2Scopes
+restDescriptionAuthOAuth2Scopes pRdaoasProperties_ =
+    RestDescriptionAuthOAuth2Scopes
+    { _rdaoasProperties = pRdaoasProperties_
+    }
+
+-- | The scope value.
+rdaoasProperties :: Lens' RestDescriptionAuthOAuth2Scopes (HashMap Text RestDescriptionAuthOAuth2ScopesProperties)
+rdaoasProperties
+  = lens _rdaoasProperties
+      (\ s a -> s{_rdaoasProperties = a})
 
 instance FromJSON RestDescriptionAuthOAuth2Scopes
          where
         parseJSON
           = withObject "RestDescriptionAuthOAuth2Scopes"
-              (\ o -> pure RestDescriptionAuthOAuth2Scopes)
+              (\ o ->
+                 RestDescriptionAuthOAuth2Scopes <$>
+                   (parseJSONObject o))
 
 instance ToJSON RestDescriptionAuthOAuth2Scopes where
-        toJSON = const emptyObject
+        toJSON = toJSON . _rdaoasProperties
 
 -- | API-level methods for this API.
 --
 -- /See:/ 'restDescriptionMethods' smart constructor.
-data RestDescriptionMethods =
-    RestDescriptionMethods
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype RestDescriptionMethods = RestDescriptionMethods
+    { _rdmProperties :: HashMap Text RestMethod
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RestDescriptionMethods' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdmProperties'
 restDescriptionMethods
-    :: RestDescriptionMethods
-restDescriptionMethods = RestDescriptionMethods
+    :: HashMap Text RestMethod -- ^ 'properties'
+    -> RestDescriptionMethods
+restDescriptionMethods pRdmProperties_ =
+    RestDescriptionMethods
+    { _rdmProperties = pRdmProperties_
+    }
+
+-- | An individual method description.
+rdmProperties :: Lens' RestDescriptionMethods (HashMap Text RestMethod)
+rdmProperties
+  = lens _rdmProperties
+      (\ s a -> s{_rdmProperties = a})
 
 instance FromJSON RestDescriptionMethods where
         parseJSON
           = withObject "RestDescriptionMethods"
-              (\ o -> pure RestDescriptionMethods)
+              (\ o ->
+                 RestDescriptionMethods <$> (parseJSONObject o))
 
 instance ToJSON RestDescriptionMethods where
-        toJSON = const emptyObject
+        toJSON = toJSON . _rdmProperties
 
 --
 -- /See:/ 'directoryListItemsItem' smart constructor.
@@ -579,23 +622,37 @@ instance ToJSON DirectoryListItemsItemIcons where
 -- | Sub-resources on this resource.
 --
 -- /See:/ 'restResourceResources' smart constructor.
-data RestResourceResources =
-    RestResourceResources
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype RestResourceResources = RestResourceResources
+    { _rrrProperties :: HashMap Text RestResource
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RestResourceResources' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrrProperties'
 restResourceResources
-    :: RestResourceResources
-restResourceResources = RestResourceResources
+    :: HashMap Text RestResource -- ^ 'properties'
+    -> RestResourceResources
+restResourceResources pRrrProperties_ =
+    RestResourceResources
+    { _rrrProperties = pRrrProperties_
+    }
+
+-- | Description for any sub-resources on this resource.
+rrrProperties :: Lens' RestResourceResources (HashMap Text RestResource)
+rrrProperties
+  = lens _rrrProperties
+      (\ s a -> s{_rrrProperties = a})
 
 instance FromJSON RestResourceResources where
         parseJSON
           = withObject "RestResourceResources"
-              (\ o -> pure RestResourceResources)
+              (\ o ->
+                 RestResourceResources <$> (parseJSONObject o))
 
 instance ToJSON RestResourceResources where
-        toJSON = const emptyObject
+        toJSON = toJSON . _rrrProperties
 
 -- | OAuth 2.0 authentication information.
 --
@@ -780,23 +837,36 @@ instance ToJSON JSONSchemaVariant where
 -- | Methods on this resource.
 --
 -- /See:/ 'restResourceMethods' smart constructor.
-data RestResourceMethods =
-    RestResourceMethods
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype RestResourceMethods = RestResourceMethods
+    { _rrmProperties :: HashMap Text RestMethod
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RestResourceMethods' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrmProperties'
 restResourceMethods
-    :: RestResourceMethods
-restResourceMethods = RestResourceMethods
+    :: HashMap Text RestMethod -- ^ 'properties'
+    -> RestResourceMethods
+restResourceMethods pRrmProperties_ =
+    RestResourceMethods
+    { _rrmProperties = pRrmProperties_
+    }
+
+-- | Description for any methods on this resource.
+rrmProperties :: Lens' RestResourceMethods (HashMap Text RestMethod)
+rrmProperties
+  = lens _rrmProperties
+      (\ s a -> s{_rrmProperties = a})
 
 instance FromJSON RestResourceMethods where
         parseJSON
           = withObject "RestResourceMethods"
-              (\ o -> pure RestResourceMethods)
+              (\ o -> RestResourceMethods <$> (parseJSONObject o))
 
 instance ToJSON RestResourceMethods where
-        toJSON = const emptyObject
+        toJSON = toJSON . _rrmProperties
 
 -- | Authentication information.
 --
@@ -1444,23 +1514,37 @@ instance ToJSON JSONSchema where
 -- | The schemas for this API.
 --
 -- /See:/ 'restDescriptionSchemas' smart constructor.
-data RestDescriptionSchemas =
-    RestDescriptionSchemas
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype RestDescriptionSchemas = RestDescriptionSchemas
+    { _rdsProperties :: HashMap Text JSONSchema
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RestDescriptionSchemas' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdsProperties'
 restDescriptionSchemas
-    :: RestDescriptionSchemas
-restDescriptionSchemas = RestDescriptionSchemas
+    :: HashMap Text JSONSchema -- ^ 'properties'
+    -> RestDescriptionSchemas
+restDescriptionSchemas pRdsProperties_ =
+    RestDescriptionSchemas
+    { _rdsProperties = pRdsProperties_
+    }
+
+-- | An individual schema description.
+rdsProperties :: Lens' RestDescriptionSchemas (HashMap Text JSONSchema)
+rdsProperties
+  = lens _rdsProperties
+      (\ s a -> s{_rdsProperties = a})
 
 instance FromJSON RestDescriptionSchemas where
         parseJSON
           = withObject "RestDescriptionSchemas"
-              (\ o -> pure RestDescriptionSchemas)
+              (\ o ->
+                 RestDescriptionSchemas <$> (parseJSONObject o))
 
 instance ToJSON RestDescriptionSchemas where
-        toJSON = const emptyObject
+        toJSON = toJSON . _rdsProperties
 
 --
 -- /See:/ 'jsonSchemaVariantMapItem' smart constructor.
@@ -1509,23 +1593,38 @@ instance ToJSON JSONSchemaVariantMapItem where
 -- | The resources in this API.
 --
 -- /See:/ 'restDescriptionResources' smart constructor.
-data RestDescriptionResources =
-    RestDescriptionResources
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype RestDescriptionResources = RestDescriptionResources
+    { _rdrProperties :: HashMap Text RestResource
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RestDescriptionResources' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdrProperties'
 restDescriptionResources
-    :: RestDescriptionResources
-restDescriptionResources = RestDescriptionResources
+    :: HashMap Text RestResource -- ^ 'properties'
+    -> RestDescriptionResources
+restDescriptionResources pRdrProperties_ =
+    RestDescriptionResources
+    { _rdrProperties = pRdrProperties_
+    }
+
+-- | An individual resource description. Contains methods and sub-resources
+-- related to this resource.
+rdrProperties :: Lens' RestDescriptionResources (HashMap Text RestResource)
+rdrProperties
+  = lens _rdrProperties
+      (\ s a -> s{_rdrProperties = a})
 
 instance FromJSON RestDescriptionResources where
         parseJSON
           = withObject "RestDescriptionResources"
-              (\ o -> pure RestDescriptionResources)
+              (\ o ->
+                 RestDescriptionResources <$> (parseJSONObject o))
 
 instance ToJSON RestDescriptionResources where
-        toJSON = const emptyObject
+        toJSON = toJSON . _rdrProperties
 
 -- | Supported upload protocols.
 --
@@ -1617,23 +1716,36 @@ instance ToJSON JSONSchemaAnnotations where
 -- | Details for all parameters in this method.
 --
 -- /See:/ 'restMethodParameters' smart constructor.
-data RestMethodParameters =
-    RestMethodParameters
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype RestMethodParameters = RestMethodParameters
+    { _rmpProperties :: HashMap Text JSONSchema
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RestMethodParameters' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rmpProperties'
 restMethodParameters
-    :: RestMethodParameters
-restMethodParameters = RestMethodParameters
+    :: HashMap Text JSONSchema -- ^ 'properties'
+    -> RestMethodParameters
+restMethodParameters pRmpProperties_ =
+    RestMethodParameters
+    { _rmpProperties = pRmpProperties_
+    }
+
+-- | Details for a single parameter in this method.
+rmpProperties :: Lens' RestMethodParameters (HashMap Text JSONSchema)
+rmpProperties
+  = lens _rmpProperties
+      (\ s a -> s{_rmpProperties = a})
 
 instance FromJSON RestMethodParameters where
         parseJSON
           = withObject "RestMethodParameters"
-              (\ o -> pure RestMethodParameters)
+              (\ o -> RestMethodParameters <$> (parseJSONObject o))
 
 instance ToJSON RestMethodParameters where
-        toJSON = const emptyObject
+        toJSON = toJSON . _rmpProperties
 
 -- | Media upload parameters.
 --
@@ -1700,23 +1812,78 @@ instance ToJSON RestMethodMediaUpload where
 -- this object.
 --
 -- /See:/ 'jsonSchemaProperties' smart constructor.
-data JSONSchemaProperties =
-    JSONSchemaProperties
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype JSONSchemaProperties = JSONSchemaProperties
+    { _jspProperties :: HashMap Text JSONSchema
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JSONSchemaProperties' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jspProperties'
 jsonSchemaProperties
-    :: JSONSchemaProperties
-jsonSchemaProperties = JSONSchemaProperties
+    :: HashMap Text JSONSchema -- ^ 'properties'
+    -> JSONSchemaProperties
+jsonSchemaProperties pJspProperties_ =
+    JSONSchemaProperties
+    { _jspProperties = pJspProperties_
+    }
+
+-- | A single property of this object. The value is itself a JSON Schema
+-- object describing this property.
+jspProperties :: Lens' JSONSchemaProperties (HashMap Text JSONSchema)
+jspProperties
+  = lens _jspProperties
+      (\ s a -> s{_jspProperties = a})
 
 instance FromJSON JSONSchemaProperties where
         parseJSON
           = withObject "JSONSchemaProperties"
-              (\ o -> pure JSONSchemaProperties)
+              (\ o -> JSONSchemaProperties <$> (parseJSONObject o))
 
 instance ToJSON JSONSchemaProperties where
-        toJSON = const emptyObject
+        toJSON = toJSON . _jspProperties
+
+-- | The scope value.
+--
+-- /See:/ 'restDescriptionAuthOAuth2ScopesProperties' smart constructor.
+newtype RestDescriptionAuthOAuth2ScopesProperties = RestDescriptionAuthOAuth2ScopesProperties
+    { _rdaoaspDescription :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RestDescriptionAuthOAuth2ScopesProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdaoaspDescription'
+restDescriptionAuthOAuth2ScopesProperties
+    :: RestDescriptionAuthOAuth2ScopesProperties
+restDescriptionAuthOAuth2ScopesProperties =
+    RestDescriptionAuthOAuth2ScopesProperties
+    { _rdaoaspDescription = Nothing
+    }
+
+-- | Description of scope.
+rdaoaspDescription :: Lens' RestDescriptionAuthOAuth2ScopesProperties (Maybe Text)
+rdaoaspDescription
+  = lens _rdaoaspDescription
+      (\ s a -> s{_rdaoaspDescription = a})
+
+instance FromJSON
+         RestDescriptionAuthOAuth2ScopesProperties where
+        parseJSON
+          = withObject
+              "RestDescriptionAuthOAuth2ScopesProperties"
+              (\ o ->
+                 RestDescriptionAuthOAuth2ScopesProperties <$>
+                   (o .:? "description"))
+
+instance ToJSON
+         RestDescriptionAuthOAuth2ScopesProperties where
+        toJSON RestDescriptionAuthOAuth2ScopesProperties{..}
+          = object
+              (catMaybes
+                 [("description" .=) <$> _rdaoaspDescription])
 
 -- | Supports the Resumable Media Upload protocol.
 --

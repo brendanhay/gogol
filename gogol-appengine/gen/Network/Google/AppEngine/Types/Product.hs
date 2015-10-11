@@ -124,23 +124,35 @@ instance ToJSON Status where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationSchema' smart constructor.
-data OperationSchema =
-    OperationSchema
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype OperationSchema = OperationSchema
+    { _osProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'osProperties'
 operationSchema
-    :: OperationSchema
-operationSchema = OperationSchema
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> OperationSchema
+operationSchema pOsProperties_ =
+    OperationSchema
+    { _osProperties = pOsProperties_
+    }
+
+-- | Properties of the object. Contains field \'ype with type URL.
+osProperties :: Lens' OperationSchema (HashMap Text JSONValue)
+osProperties
+  = lens _osProperties (\ s a -> s{_osProperties = a})
 
 instance FromJSON OperationSchema where
         parseJSON
           = withObject "OperationSchema"
-              (\ o -> pure OperationSchema)
+              (\ o -> OperationSchema <$> (parseJSONObject o))
 
 instance ToJSON OperationSchema where
-        toJSON = const emptyObject
+        toJSON = toJSON . _osProperties
 
 -- | Configuration for traffic splitting for versions within a single module.
 -- Traffic splitting allows traffic directed to the module to be assigned
@@ -670,23 +682,35 @@ instance ToJSON APIConfigHandler where
 -- requests; once created, is immutable.
 --
 -- /See:/ 'versionEnvVariables' smart constructor.
-data VersionEnvVariables =
-    VersionEnvVariables
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype VersionEnvVariables = VersionEnvVariables
+    { _vevProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VersionEnvVariables' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vevProperties'
 versionEnvVariables
-    :: VersionEnvVariables
-versionEnvVariables = VersionEnvVariables
+    :: HashMap Text Text -- ^ 'properties'
+    -> VersionEnvVariables
+versionEnvVariables pVevProperties_ =
+    VersionEnvVariables
+    { _vevProperties = pVevProperties_
+    }
+
+vevProperties :: Lens' VersionEnvVariables (HashMap Text Text)
+vevProperties
+  = lens _vevProperties
+      (\ s a -> s{_vevProperties = a})
 
 instance FromJSON VersionEnvVariables where
         parseJSON
           = withObject "VersionEnvVariables"
-              (\ o -> pure VersionEnvVariables)
+              (\ o -> VersionEnvVariables <$> (parseJSONObject o))
 
 instance ToJSON VersionEnvVariables where
-        toJSON = const emptyObject
+        toJSON = toJSON . _vevProperties
 
 -- | An Application contains the top-level configuration of an App Engine
 -- application.
@@ -783,23 +807,35 @@ instance ToJSON Application where
 -- | Beta settings supplied to the application via metadata.
 --
 -- /See:/ 'versionBetaSettings' smart constructor.
-data VersionBetaSettings =
-    VersionBetaSettings
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype VersionBetaSettings = VersionBetaSettings
+    { _vbsProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VersionBetaSettings' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vbsProperties'
 versionBetaSettings
-    :: VersionBetaSettings
-versionBetaSettings = VersionBetaSettings
+    :: HashMap Text Text -- ^ 'properties'
+    -> VersionBetaSettings
+versionBetaSettings pVbsProperties_ =
+    VersionBetaSettings
+    { _vbsProperties = pVbsProperties_
+    }
+
+vbsProperties :: Lens' VersionBetaSettings (HashMap Text Text)
+vbsProperties
+  = lens _vbsProperties
+      (\ s a -> s{_vbsProperties = a})
 
 instance FromJSON VersionBetaSettings where
         parseJSON
           = withObject "VersionBetaSettings"
-              (\ o -> pure VersionBetaSettings)
+              (\ o -> VersionBetaSettings <$> (parseJSONObject o))
 
 instance ToJSON VersionBetaSettings where
-        toJSON = const emptyObject
+        toJSON = toJSON . _vbsProperties
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
@@ -958,25 +994,39 @@ instance ToJSON URLDispatchRule where
 -- | HTTP headers to use for all responses from these URLs.
 --
 -- /See:/ 'staticDirectoryHandlerHTTPHeaders' smart constructor.
-data StaticDirectoryHandlerHTTPHeaders =
-    StaticDirectoryHandlerHTTPHeaders
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype StaticDirectoryHandlerHTTPHeaders = StaticDirectoryHandlerHTTPHeaders
+    { _sdhhttphProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StaticDirectoryHandlerHTTPHeaders' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sdhhttphProperties'
 staticDirectoryHandlerHTTPHeaders
-    :: StaticDirectoryHandlerHTTPHeaders
-staticDirectoryHandlerHTTPHeaders = StaticDirectoryHandlerHTTPHeaders
+    :: HashMap Text Text -- ^ 'properties'
+    -> StaticDirectoryHandlerHTTPHeaders
+staticDirectoryHandlerHTTPHeaders pSdhhttphProperties_ =
+    StaticDirectoryHandlerHTTPHeaders
+    { _sdhhttphProperties = pSdhhttphProperties_
+    }
+
+sdhhttphProperties :: Lens' StaticDirectoryHandlerHTTPHeaders (HashMap Text Text)
+sdhhttphProperties
+  = lens _sdhhttphProperties
+      (\ s a -> s{_sdhhttphProperties = a})
 
 instance FromJSON StaticDirectoryHandlerHTTPHeaders
          where
         parseJSON
           = withObject "StaticDirectoryHandlerHTTPHeaders"
-              (\ o -> pure StaticDirectoryHandlerHTTPHeaders)
+              (\ o ->
+                 StaticDirectoryHandlerHTTPHeaders <$>
+                   (parseJSONObject o))
 
 instance ToJSON StaticDirectoryHandlerHTTPHeaders
          where
-        toJSON = const emptyObject
+        toJSON = toJSON . _sdhhttphProperties
 
 -- | Response message for \`Versions.ListVersions\`.
 --
@@ -1324,23 +1374,36 @@ instance ToJSON APIEndpointHandler where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-data StatusDetailsItem =
-    StatusDetailsItem
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype StatusDetailsItem = StatusDetailsItem
+    { _sdiProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sdiProperties'
 statusDetailsItem
-    :: StatusDetailsItem
-statusDetailsItem = StatusDetailsItem
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> StatusDetailsItem
+statusDetailsItem pSdiProperties_ =
+    StatusDetailsItem
+    { _sdiProperties = pSdiProperties_
+    }
+
+-- | Properties of the object. Contains field \'ype with type URL.
+sdiProperties :: Lens' StatusDetailsItem (HashMap Text JSONValue)
+sdiProperties
+  = lens _sdiProperties
+      (\ s a -> s{_sdiProperties = a})
 
 instance FromJSON StatusDetailsItem where
         parseJSON
           = withObject "StatusDetailsItem"
-              (\ o -> pure StatusDetailsItem)
+              (\ o -> StatusDetailsItem <$> (parseJSONObject o))
 
 instance ToJSON StatusDetailsItem where
-        toJSON = const emptyObject
+        toJSON = toJSON . _sdiProperties
 
 -- | Used to specify extra network settings (for VM runtimes only).
 --
@@ -1409,23 +1472,37 @@ instance ToJSON Network where
 -- | HTTP headers to use for all responses from these URLs.
 --
 -- /See:/ 'staticFilesHandlerHTTPHeaders' smart constructor.
-data StaticFilesHandlerHTTPHeaders =
-    StaticFilesHandlerHTTPHeaders
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype StaticFilesHandlerHTTPHeaders = StaticFilesHandlerHTTPHeaders
+    { _sfhhttphProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StaticFilesHandlerHTTPHeaders' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sfhhttphProperties'
 staticFilesHandlerHTTPHeaders
-    :: StaticFilesHandlerHTTPHeaders
-staticFilesHandlerHTTPHeaders = StaticFilesHandlerHTTPHeaders
+    :: HashMap Text Text -- ^ 'properties'
+    -> StaticFilesHandlerHTTPHeaders
+staticFilesHandlerHTTPHeaders pSfhhttphProperties_ =
+    StaticFilesHandlerHTTPHeaders
+    { _sfhhttphProperties = pSfhhttphProperties_
+    }
+
+sfhhttphProperties :: Lens' StaticFilesHandlerHTTPHeaders (HashMap Text Text)
+sfhhttphProperties
+  = lens _sfhhttphProperties
+      (\ s a -> s{_sfhhttphProperties = a})
 
 instance FromJSON StaticFilesHandlerHTTPHeaders where
         parseJSON
           = withObject "StaticFilesHandlerHTTPHeaders"
-              (\ o -> pure StaticFilesHandlerHTTPHeaders)
+              (\ o ->
+                 StaticFilesHandlerHTTPHeaders <$>
+                   (parseJSONObject o))
 
 instance ToJSON StaticFilesHandlerHTTPHeaders where
-        toJSON = const emptyObject
+        toJSON = toJSON . _sfhhttphProperties
 
 -- | Used to specify how many machine resources an app version needs.
 --
@@ -1487,23 +1564,34 @@ instance ToJSON Resources where
 -- the credentials supplied with this call.
 --
 -- /See:/ 'deploymentFiles' smart constructor.
-data DeploymentFiles =
-    DeploymentFiles
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype DeploymentFiles = DeploymentFiles
+    { _dfProperties :: HashMap Text FileInfo
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentFiles' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dfProperties'
 deploymentFiles
-    :: DeploymentFiles
-deploymentFiles = DeploymentFiles
+    :: HashMap Text FileInfo -- ^ 'properties'
+    -> DeploymentFiles
+deploymentFiles pDfProperties_ =
+    DeploymentFiles
+    { _dfProperties = pDfProperties_
+    }
+
+dfProperties :: Lens' DeploymentFiles (HashMap Text FileInfo)
+dfProperties
+  = lens _dfProperties (\ s a -> s{_dfProperties = a})
 
 instance FromJSON DeploymentFiles where
         parseJSON
           = withObject "DeploymentFiles"
-              (\ o -> pure DeploymentFiles)
+              (\ o -> DeploymentFiles <$> (parseJSONObject o))
 
 instance ToJSON DeploymentFiles where
-        toJSON = const emptyObject
+        toJSON = toJSON . _dfProperties
 
 -- | Target scaling by CPU usage.
 --
@@ -1566,23 +1654,36 @@ instance ToJSON CPUUtilization where
 -- cookie-based splits.
 --
 -- /See:/ 'trafficSplitAllocations' smart constructor.
-data TrafficSplitAllocations =
-    TrafficSplitAllocations
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype TrafficSplitAllocations = TrafficSplitAllocations
+    { _tsaProperties :: HashMap Text Double
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrafficSplitAllocations' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tsaProperties'
 trafficSplitAllocations
-    :: TrafficSplitAllocations
-trafficSplitAllocations = TrafficSplitAllocations
+    :: HashMap Text Double -- ^ 'properties'
+    -> TrafficSplitAllocations
+trafficSplitAllocations pTsaProperties_ =
+    TrafficSplitAllocations
+    { _tsaProperties = pTsaProperties_
+    }
+
+tsaProperties :: Lens' TrafficSplitAllocations (HashMap Text Double)
+tsaProperties
+  = lens _tsaProperties
+      (\ s a -> s{_tsaProperties = a})
 
 instance FromJSON TrafficSplitAllocations where
         parseJSON
           = withObject "TrafficSplitAllocations"
-              (\ o -> pure TrafficSplitAllocations)
+              (\ o ->
+                 TrafficSplitAllocations <$> (parseJSONObject o))
 
 instance ToJSON TrafficSplitAllocations where
-        toJSON = const emptyObject
+        toJSON = toJSON . _tsaProperties
 
 -- | A module with manual scaling runs continuously, allowing you to perform
 -- complex initialization and rely on the state of its memory over time.
@@ -2436,23 +2537,35 @@ instance ToJSON SourceReference where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-data OperationResponse =
-    OperationResponse
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype OperationResponse = OperationResponse
+    { _orProperties :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'orProperties'
 operationResponse
-    :: OperationResponse
-operationResponse = OperationResponse
+    :: HashMap Text JSONValue -- ^ 'properties'
+    -> OperationResponse
+operationResponse pOrProperties_ =
+    OperationResponse
+    { _orProperties = pOrProperties_
+    }
+
+-- | Properties of the object. Contains field \'ype with type URL.
+orProperties :: Lens' OperationResponse (HashMap Text JSONValue)
+orProperties
+  = lens _orProperties (\ s a -> s{_orProperties = a})
 
 instance FromJSON OperationResponse where
         parseJSON
           = withObject "OperationResponse"
-              (\ o -> pure OperationResponse)
+              (\ o -> OperationResponse <$> (parseJSONObject o))
 
 instance ToJSON OperationResponse where
-        toJSON = const emptyObject
+        toJSON = toJSON . _orProperties
 
 -- | A Docker (container) image which should be used to start the
 -- application.

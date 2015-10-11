@@ -151,6 +151,7 @@ module Network.Google.ResourceViews
     -- ** ListResourceResponseItemEndpoints
     , ListResourceResponseItemEndpoints
     , listResourceResponseItemEndpoints
+    , lrrieProperties
 
     -- ** ZoneViewsAddResourcesRequest
     , ZoneViewsAddResourcesRequest

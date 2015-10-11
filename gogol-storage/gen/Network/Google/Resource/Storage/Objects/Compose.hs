@@ -69,7 +69,7 @@ type ObjectsComposeResource =
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
                              QueryParam "key" AuthKey :>
-                               QueryParam "oauth_token" OAuthToken :>
+                               Header "Authorization" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] ComposeRequest :>
                                      Post '[JSON] Object
@@ -89,7 +89,7 @@ type ObjectsComposeResource =
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
                                QueryParam "key" AuthKey :>
-                                 QueryParam "oauth_token" OAuthToken :>
+                                 Header "Authorization" OAuthToken :>
                                    QueryParam "alt" AltMedia :>
                                      ReqBody '[JSON] ComposeRequest :>
                                        Post '[OctetStream] Stream

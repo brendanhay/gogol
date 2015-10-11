@@ -51,6 +51,7 @@ module Network.Google.Monitoring.Types
     -- * WriteTimeseriesRequestCommonLabels
     , WriteTimeseriesRequestCommonLabels
     , writeTimeseriesRequestCommonLabels
+    , wtrclProperties
 
     -- * MetricDescriptorLabelDescriptor
     , MetricDescriptorLabelDescriptor
@@ -82,6 +83,7 @@ module Network.Google.Monitoring.Types
     -- * TimeseriesDescriptorLabels
     , TimeseriesDescriptorLabels
     , timeseriesDescriptorLabels
+    , tdlProperties
 
     -- * PointDistributionBucket
     , PointDistributionBucket

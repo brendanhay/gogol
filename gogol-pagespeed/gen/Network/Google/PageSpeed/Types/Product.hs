@@ -262,6 +262,147 @@ instance ToJSON
                   ("width" .=) <$> _pafsvairiWidth,
                   ("top" .=) <$> _pafsvairiTop])
 
+-- | The name of this rule group: one of \"SPEED\" or \"USABILITY\".
+--
+-- /See:/ 'resultRuleGroupsProperties' smart constructor.
+newtype ResultRuleGroupsProperties = ResultRuleGroupsProperties
+    { _rrgpScore :: Maybe Int32
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResultRuleGroupsProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrgpScore'
+resultRuleGroupsProperties
+    :: ResultRuleGroupsProperties
+resultRuleGroupsProperties =
+    ResultRuleGroupsProperties
+    { _rrgpScore = Nothing
+    }
+
+-- | The score (0-100) for this rule group, which indicates how much better a
+-- page could be in that category (e.g. how much faster, or how much more
+-- usable). A high score indicates little room for improvement, while a
+-- lower score indicates more room for improvement.
+rrgpScore :: Lens' ResultRuleGroupsProperties (Maybe Int32)
+rrgpScore
+  = lens _rrgpScore (\ s a -> s{_rrgpScore = a})
+
+instance FromJSON ResultRuleGroupsProperties where
+        parseJSON
+          = withObject "ResultRuleGroupsProperties"
+              (\ o ->
+                 ResultRuleGroupsProperties <$> (o .:? "score"))
+
+instance ToJSON ResultRuleGroupsProperties where
+        toJSON ResultRuleGroupsProperties{..}
+          = object (catMaybes [("score" .=) <$> _rrgpScore])
+
+-- | The enum-like identifier for this rule. For instance \"EnableKeepAlive\"
+-- or \"AvoidCssImport\". Not localized.
+--
+-- /See:/ 'resultFormattedResultsRuleResultsProperties' smart constructor.
+data ResultFormattedResultsRuleResultsProperties = ResultFormattedResultsRuleResultsProperties
+    { _rfrrrpSummary           :: !(Maybe PagespeedAPIFormatStringV2)
+    , _rfrrrpRuleImpact        :: !(Maybe Double)
+    , _rfrrrpGroups            :: !(Maybe [Text])
+    , _rfrrrpLocalizedRuleName :: !(Maybe Text)
+    , _rfrrrpURLBlocks         :: !(Maybe [ResultFormattedResultsRuleResultsPropertiesURLBlocksItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResultFormattedResultsRuleResultsProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rfrrrpSummary'
+--
+-- * 'rfrrrpRuleImpact'
+--
+-- * 'rfrrrpGroups'
+--
+-- * 'rfrrrpLocalizedRuleName'
+--
+-- * 'rfrrrpURLBlocks'
+resultFormattedResultsRuleResultsProperties
+    :: ResultFormattedResultsRuleResultsProperties
+resultFormattedResultsRuleResultsProperties =
+    ResultFormattedResultsRuleResultsProperties
+    { _rfrrrpSummary = Nothing
+    , _rfrrrpRuleImpact = Nothing
+    , _rfrrrpGroups = Nothing
+    , _rfrrrpLocalizedRuleName = Nothing
+    , _rfrrrpURLBlocks = Nothing
+    }
+
+-- | A brief summary description for the rule, indicating at a high level
+-- what should be done to follow the rule and what benefit can be gained by
+-- doing so.
+rfrrrpSummary :: Lens' ResultFormattedResultsRuleResultsProperties (Maybe PagespeedAPIFormatStringV2)
+rfrrrpSummary
+  = lens _rfrrrpSummary
+      (\ s a -> s{_rfrrrpSummary = a})
+
+-- | The impact (unbounded floating point value) that implementing the
+-- suggestions for this rule would have on making the page faster. Impact
+-- is comparable between rules to determine which rule\'s suggestions would
+-- have a higher or lower impact on making a page faster. For instance, if
+-- enabling compression would save 1MB, while optimizing images would save
+-- 500kB, the enable compression rule would have 2x the impact of the image
+-- optimization rule, all other things being equal.
+rfrrrpRuleImpact :: Lens' ResultFormattedResultsRuleResultsProperties (Maybe Double)
+rfrrrpRuleImpact
+  = lens _rfrrrpRuleImpact
+      (\ s a -> s{_rfrrrpRuleImpact = a})
+
+-- | List of rule groups that this rule belongs to. Each entry in the list is
+-- one of \"SPEED\" or \"USABILITY\".
+rfrrrpGroups :: Lens' ResultFormattedResultsRuleResultsProperties [Text]
+rfrrrpGroups
+  = lens _rfrrrpGroups (\ s a -> s{_rfrrrpGroups = a})
+      . _Default
+      . _Coerce
+
+-- | Localized name of the rule, intended for presentation to a user.
+rfrrrpLocalizedRuleName :: Lens' ResultFormattedResultsRuleResultsProperties (Maybe Text)
+rfrrrpLocalizedRuleName
+  = lens _rfrrrpLocalizedRuleName
+      (\ s a -> s{_rfrrrpLocalizedRuleName = a})
+
+-- | List of blocks of URLs. Each block may contain a heading and a list of
+-- URLs. Each URL may optionally include additional details.
+rfrrrpURLBlocks :: Lens' ResultFormattedResultsRuleResultsProperties [ResultFormattedResultsRuleResultsPropertiesURLBlocksItem]
+rfrrrpURLBlocks
+  = lens _rfrrrpURLBlocks
+      (\ s a -> s{_rfrrrpURLBlocks = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         ResultFormattedResultsRuleResultsProperties where
+        parseJSON
+          = withObject
+              "ResultFormattedResultsRuleResultsProperties"
+              (\ o ->
+                 ResultFormattedResultsRuleResultsProperties <$>
+                   (o .:? "summary") <*> (o .:? "ruleImpact") <*>
+                     (o .:? "groups" .!= mempty)
+                     <*> (o .:? "localizedRuleName")
+                     <*> (o .:? "urlBlocks" .!= mempty))
+
+instance ToJSON
+         ResultFormattedResultsRuleResultsProperties where
+        toJSON
+          ResultFormattedResultsRuleResultsProperties{..}
+          = object
+              (catMaybes
+                 [("summary" .=) <$> _rfrrrpSummary,
+                  ("ruleImpact" .=) <$> _rfrrrpRuleImpact,
+                  ("groups" .=) <$> _rfrrrpGroups,
+                  ("localizedRuleName" .=) <$>
+                    _rfrrrpLocalizedRuleName,
+                  ("urlBlocks" .=) <$> _rfrrrpURLBlocks])
+
 -- | The version of PageSpeed used to generate these results.
 --
 -- /See:/ 'resultVersion' smart constructor.
@@ -565,6 +706,65 @@ instance ToJSON PagespeedAPIImageV2Page_rect where
                   ("top" .=) <$> _paivpTop])
 
 --
+-- /See:/ 'resultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem' smart constructor.
+data ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem = ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem
+    { _rfrrrpubiuiResult  :: !(Maybe PagespeedAPIFormatStringV2)
+    , _rfrrrpubiuiDetails :: !(Maybe [PagespeedAPIFormatStringV2])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rfrrrpubiuiResult'
+--
+-- * 'rfrrrpubiuiDetails'
+resultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem
+    :: ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem
+resultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem =
+    ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem
+    { _rfrrrpubiuiResult = Nothing
+    , _rfrrrpubiuiDetails = Nothing
+    }
+
+-- | A format string that gives information about the URL, and a list of
+-- arguments for that format string.
+rfrrrpubiuiResult :: Lens' ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem (Maybe PagespeedAPIFormatStringV2)
+rfrrrpubiuiResult
+  = lens _rfrrrpubiuiResult
+      (\ s a -> s{_rfrrrpubiuiResult = a})
+
+-- | List of entries that provide additional details about a single URL.
+-- Optional.
+rfrrrpubiuiDetails :: Lens' ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem [PagespeedAPIFormatStringV2]
+rfrrrpubiuiDetails
+  = lens _rfrrrpubiuiDetails
+      (\ s a -> s{_rfrrrpubiuiDetails = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem
+         where
+        parseJSON
+          = withObject
+              "ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem"
+              (\ o ->
+                 ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem
+                   <$>
+                   (o .:? "result") <*> (o .:? "details" .!= mempty))
+
+instance ToJSON
+         ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem
+         where
+        toJSON
+          ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem{..}
+          = object
+              (catMaybes
+                 [("result" .=) <$> _rfrrrpubiuiResult,
+                  ("details" .=) <$> _rfrrrpubiuiDetails])
+
+--
 -- /See:/ 'result' smart constructor.
 data Result = Result
     { _rScreenshot       :: !(Maybe PagespeedAPIImageV2)
@@ -795,6 +995,63 @@ instance ToJSON PagespeedAPIFormatStringV2ArgsItem
                   ("type" .=) <$> _pafsvaiType,
                   ("secondary_rects" .=) <$> _pafsvaiSecondaryRects])
 
+--
+-- /See:/ 'resultFormattedResultsRuleResultsPropertiesURLBlocksItem' smart constructor.
+data ResultFormattedResultsRuleResultsPropertiesURLBlocksItem = ResultFormattedResultsRuleResultsPropertiesURLBlocksItem
+    { _rfrrrpubiURLs   :: !(Maybe [ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem])
+    , _rfrrrpubiHeader :: !(Maybe PagespeedAPIFormatStringV2)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResultFormattedResultsRuleResultsPropertiesURLBlocksItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rfrrrpubiURLs'
+--
+-- * 'rfrrrpubiHeader'
+resultFormattedResultsRuleResultsPropertiesURLBlocksItem
+    :: ResultFormattedResultsRuleResultsPropertiesURLBlocksItem
+resultFormattedResultsRuleResultsPropertiesURLBlocksItem =
+    ResultFormattedResultsRuleResultsPropertiesURLBlocksItem
+    { _rfrrrpubiURLs = Nothing
+    , _rfrrrpubiHeader = Nothing
+    }
+
+-- | List of entries that provide information about URLs in the url block.
+-- Optional.
+rfrrrpubiURLs :: Lens' ResultFormattedResultsRuleResultsPropertiesURLBlocksItem [ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem]
+rfrrrpubiURLs
+  = lens _rfrrrpubiURLs
+      (\ s a -> s{_rfrrrpubiURLs = a})
+      . _Default
+      . _Coerce
+
+-- | Heading to be displayed with the list of URLs.
+rfrrrpubiHeader :: Lens' ResultFormattedResultsRuleResultsPropertiesURLBlocksItem (Maybe PagespeedAPIFormatStringV2)
+rfrrrpubiHeader
+  = lens _rfrrrpubiHeader
+      (\ s a -> s{_rfrrrpubiHeader = a})
+
+instance FromJSON
+         ResultFormattedResultsRuleResultsPropertiesURLBlocksItem
+         where
+        parseJSON
+          = withObject
+              "ResultFormattedResultsRuleResultsPropertiesURLBlocksItem"
+              (\ o ->
+                 ResultFormattedResultsRuleResultsPropertiesURLBlocksItem
+                   <$> (o .:? "urls" .!= mempty) <*> (o .:? "header"))
+
+instance ToJSON
+         ResultFormattedResultsRuleResultsPropertiesURLBlocksItem
+         where
+        toJSON
+          ResultFormattedResultsRuleResultsPropertiesURLBlocksItem{..}
+          = object
+              (catMaybes
+                 [("urls" .=) <$> _rfrrrpubiURLs,
+                  ("header" .=) <$> _rfrrrpubiHeader])
+
 -- | Localized PageSpeed results. Contains a ruleResults entry for each
 -- PageSpeed rule instantiated and run by the server.
 --
@@ -848,23 +1105,36 @@ instance ToJSON ResultFormattedResults where
 -- | A map with one entry for each rule group in these results.
 --
 -- /See:/ 'resultRuleGroups' smart constructor.
-data ResultRuleGroups =
-    ResultRuleGroups
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype ResultRuleGroups = ResultRuleGroups
+    { _rrgProperties :: HashMap Text ResultRuleGroupsProperties
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResultRuleGroups' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrgProperties'
 resultRuleGroups
-    :: ResultRuleGroups
-resultRuleGroups = ResultRuleGroups
+    :: HashMap Text ResultRuleGroupsProperties -- ^ 'properties'
+    -> ResultRuleGroups
+resultRuleGroups pRrgProperties_ =
+    ResultRuleGroups
+    { _rrgProperties = pRrgProperties_
+    }
+
+-- | The name of this rule group: one of \"SPEED\" or \"USABILITY\".
+rrgProperties :: Lens' ResultRuleGroups (HashMap Text ResultRuleGroupsProperties)
+rrgProperties
+  = lens _rrgProperties
+      (\ s a -> s{_rrgProperties = a})
 
 instance FromJSON ResultRuleGroups where
         parseJSON
           = withObject "ResultRuleGroups"
-              (\ o -> pure ResultRuleGroups)
+              (\ o -> ResultRuleGroups <$> (parseJSONObject o))
 
 instance ToJSON ResultRuleGroups where
-        toJSON = const emptyObject
+        toJSON = toJSON . _rrgProperties
 
 --
 -- /See:/ 'pagespeedAPIFormatStringV2' smart constructor.
@@ -921,22 +1191,38 @@ instance ToJSON PagespeedAPIFormatStringV2 where
 -- rule instantiated and run by the server.
 --
 -- /See:/ 'resultFormattedResultsRuleResults' smart constructor.
-data ResultFormattedResultsRuleResults =
-    ResultFormattedResultsRuleResults
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype ResultFormattedResultsRuleResults = ResultFormattedResultsRuleResults
+    { _rfrrrProperties :: HashMap Text ResultFormattedResultsRuleResultsProperties
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResultFormattedResultsRuleResults' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rfrrrProperties'
 resultFormattedResultsRuleResults
-    :: ResultFormattedResultsRuleResults
-resultFormattedResultsRuleResults = ResultFormattedResultsRuleResults
+    :: HashMap Text ResultFormattedResultsRuleResultsProperties -- ^ 'properties'
+    -> ResultFormattedResultsRuleResults
+resultFormattedResultsRuleResults pRfrrrProperties_ =
+    ResultFormattedResultsRuleResults
+    { _rfrrrProperties = pRfrrrProperties_
+    }
+
+-- | The enum-like identifier for this rule. For instance \"EnableKeepAlive\"
+-- or \"AvoidCssImport\". Not localized.
+rfrrrProperties :: Lens' ResultFormattedResultsRuleResults (HashMap Text ResultFormattedResultsRuleResultsProperties)
+rfrrrProperties
+  = lens _rfrrrProperties
+      (\ s a -> s{_rfrrrProperties = a})
 
 instance FromJSON ResultFormattedResultsRuleResults
          where
         parseJSON
           = withObject "ResultFormattedResultsRuleResults"
-              (\ o -> pure ResultFormattedResultsRuleResults)
+              (\ o ->
+                 ResultFormattedResultsRuleResults <$>
+                   (parseJSONObject o))
 
 instance ToJSON ResultFormattedResultsRuleResults
          where
-        toJSON = const emptyObject
+        toJSON = toJSON . _rfrrrProperties

@@ -62,7 +62,7 @@ type PurchasesSubscriptionsCancelResource =
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
                          QueryParam "key" AuthKey :>
-                           QueryParam "oauth_token" OAuthToken :>
+                           Header "Authorization" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Cancels a user\'s subscription purchase. The subscription remains valid

@@ -812,25 +812,40 @@ instance ToJSON ZoneViewsRemoveResourcesRequest where
 -- | The list of service end points on the resource.
 --
 -- /See:/ 'listResourceResponseItemEndpoints' smart constructor.
-data ListResourceResponseItemEndpoints =
-    ListResourceResponseItemEndpoints
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype ListResourceResponseItemEndpoints = ListResourceResponseItemEndpoints
+    { _lrrieProperties :: HashMap Text [Int32]
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListResourceResponseItemEndpoints' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lrrieProperties'
 listResourceResponseItemEndpoints
-    :: ListResourceResponseItemEndpoints
-listResourceResponseItemEndpoints = ListResourceResponseItemEndpoints
+    :: HashMap Text [Int32] -- ^ 'properties'
+    -> ListResourceResponseItemEndpoints
+listResourceResponseItemEndpoints pLrrieProperties_ =
+    ListResourceResponseItemEndpoints
+    { _lrrieProperties = pLrrieProperties_
+    }
+
+-- | The name of the service end point.
+lrrieProperties :: Lens' ListResourceResponseItemEndpoints (HashMap Text [Int32])
+lrrieProperties
+  = lens _lrrieProperties
+      (\ s a -> s{_lrrieProperties = a})
 
 instance FromJSON ListResourceResponseItemEndpoints
          where
         parseJSON
           = withObject "ListResourceResponseItemEndpoints"
-              (\ o -> pure ListResourceResponseItemEndpoints)
+              (\ o ->
+                 ListResourceResponseItemEndpoints <$>
+                   (parseJSONObject o))
 
 instance ToJSON ListResourceResponseItemEndpoints
          where
-        toJSON = const emptyObject
+        toJSON = toJSON . _lrrieProperties
 
 -- | The request to add resources to the resource view.
 --

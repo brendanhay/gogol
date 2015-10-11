@@ -68,7 +68,7 @@ type TransferOperationsCancelResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
                              QueryParam "key" AuthKey :>
-                               QueryParam "oauth_token" OAuthToken :>
+                               Header "Authorization" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Cancels a transfer. Use the get method to check whether the cancellation

@@ -65,7 +65,7 @@ type FilesWatchResource =
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
                            QueryParam "key" AuthKey :>
-                             QueryParam "oauth_token" OAuthToken :>
+                             Header "Authorization" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Channel :> Post '[JSON] Channel
        :<|>
@@ -81,7 +81,7 @@ type FilesWatchResource =
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
                              QueryParam "key" AuthKey :>
-                               QueryParam "oauth_token" OAuthToken :>
+                               Header "Authorization" OAuthToken :>
                                  QueryParam "alt" AltMedia :>
                                    ReqBody '[JSON] Channel :>
                                      Post '[OctetStream] Stream

@@ -370,23 +370,38 @@ instance ToJSON QueryResultBatch where
 -- | The entity\'s properties.
 --
 -- /See:/ 'entityProperties' smart constructor.
-data EntityProperties =
-    EntityProperties
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype EntityProperties = EntityProperties
+    { _epProperties :: HashMap Text Property
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntityProperties' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'epProperties'
 entityProperties
-    :: EntityProperties
-entityProperties = EntityProperties
+    :: HashMap Text Property -- ^ 'properties'
+    -> EntityProperties
+entityProperties pEpProperties_ =
+    EntityProperties
+    { _epProperties = pEpProperties_
+    }
+
+-- | The name of the property. A property name matching regex \"__.*__\" is
+-- reserved. A reserved property name is forbidden in certain documented
+-- contexts. The name must not contain more than 500 characters. Cannot be
+-- \"\".
+epProperties :: Lens' EntityProperties (HashMap Text Property)
+epProperties
+  = lens _epProperties (\ s a -> s{_epProperties = a})
 
 instance FromJSON EntityProperties where
         parseJSON
           = withObject "EntityProperties"
-              (\ o -> pure EntityProperties)
+              (\ o -> EntityProperties <$> (parseJSONObject o))
 
 instance ToJSON EntityProperties where
-        toJSON = const emptyObject
+        toJSON = toJSON . _epProperties
 
 --
 -- /See:/ 'beginTransactionRequest' smart constructor.

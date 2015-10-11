@@ -54,7 +54,7 @@ type GroupsInsertResource =
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
                QueryParam "key" AuthKey :>
-                 QueryParam "oauth_token" OAuthToken :>
+                 Header "Authorization" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Group :> Post '[JSON] Group
 

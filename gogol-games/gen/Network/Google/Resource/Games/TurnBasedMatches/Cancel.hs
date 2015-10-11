@@ -56,7 +56,7 @@ type TurnBasedMatchesCancelResource =
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
                    QueryParam "key" AuthKey :>
-                     QueryParam "oauth_token" OAuthToken :>
+                     Header "Authorization" OAuthToken :>
                        QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Cancel a turn-based match.

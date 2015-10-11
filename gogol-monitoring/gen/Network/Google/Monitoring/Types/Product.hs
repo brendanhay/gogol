@@ -306,25 +306,40 @@ instance ToJSON WriteTimeseriesRequest where
 -- | The label\'s name.
 --
 -- /See:/ 'writeTimeseriesRequestCommonLabels' smart constructor.
-data WriteTimeseriesRequestCommonLabels =
-    WriteTimeseriesRequestCommonLabels
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype WriteTimeseriesRequestCommonLabels = WriteTimeseriesRequestCommonLabels
+    { _wtrclProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WriteTimeseriesRequestCommonLabels' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wtrclProperties'
 writeTimeseriesRequestCommonLabels
-    :: WriteTimeseriesRequestCommonLabels
-writeTimeseriesRequestCommonLabels = WriteTimeseriesRequestCommonLabels
+    :: HashMap Text Text -- ^ 'properties'
+    -> WriteTimeseriesRequestCommonLabels
+writeTimeseriesRequestCommonLabels pWtrclProperties_ =
+    WriteTimeseriesRequestCommonLabels
+    { _wtrclProperties = pWtrclProperties_
+    }
+
+-- | The label\'s name.
+wtrclProperties :: Lens' WriteTimeseriesRequestCommonLabels (HashMap Text Text)
+wtrclProperties
+  = lens _wtrclProperties
+      (\ s a -> s{_wtrclProperties = a})
 
 instance FromJSON WriteTimeseriesRequestCommonLabels
          where
         parseJSON
           = withObject "WriteTimeseriesRequestCommonLabels"
-              (\ o -> pure WriteTimeseriesRequestCommonLabels)
+              (\ o ->
+                 WriteTimeseriesRequestCommonLabels <$>
+                   (parseJSONObject o))
 
 instance ToJSON WriteTimeseriesRequestCommonLabels
          where
-        toJSON = const emptyObject
+        toJSON = toJSON . _wtrclProperties
 
 -- | A label in a metric is a description of this metric, including the key
 -- of this description (what the description is), and the value for this
@@ -536,23 +551,37 @@ instance ToJSON ListTimeseriesDescriptorsRequest
 -- | The label\'s name.
 --
 -- /See:/ 'timeseriesDescriptorLabels' smart constructor.
-data TimeseriesDescriptorLabels =
-    TimeseriesDescriptorLabels
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype TimeseriesDescriptorLabels = TimeseriesDescriptorLabels
+    { _tdlProperties :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeseriesDescriptorLabels' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tdlProperties'
 timeseriesDescriptorLabels
-    :: TimeseriesDescriptorLabels
-timeseriesDescriptorLabels = TimeseriesDescriptorLabels
+    :: HashMap Text Text -- ^ 'properties'
+    -> TimeseriesDescriptorLabels
+timeseriesDescriptorLabels pTdlProperties_ =
+    TimeseriesDescriptorLabels
+    { _tdlProperties = pTdlProperties_
+    }
+
+-- | The label\'s name.
+tdlProperties :: Lens' TimeseriesDescriptorLabels (HashMap Text Text)
+tdlProperties
+  = lens _tdlProperties
+      (\ s a -> s{_tdlProperties = a})
 
 instance FromJSON TimeseriesDescriptorLabels where
         parseJSON
           = withObject "TimeseriesDescriptorLabels"
-              (\ o -> pure TimeseriesDescriptorLabels)
+              (\ o ->
+                 TimeseriesDescriptorLabels <$> (parseJSONObject o))
 
 instance ToJSON TimeseriesDescriptorLabels where
-        toJSON = const emptyObject
+        toJSON = toJSON . _tdlProperties
 
 -- | The histogram\'s bucket. Buckets that form the histogram of a
 -- distribution value. If the upper bound of a bucket, say U1, does not

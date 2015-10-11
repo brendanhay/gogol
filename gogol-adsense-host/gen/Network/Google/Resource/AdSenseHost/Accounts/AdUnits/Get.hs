@@ -61,7 +61,7 @@ type AccountsAdUnitsGetResource =
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
                          QueryParam "key" AuthKey :>
-                           QueryParam "oauth_token" OAuthToken :>
+                           Header "Authorization" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] AdUnit
 
 -- | Get the specified host ad unit in this AdSense account.

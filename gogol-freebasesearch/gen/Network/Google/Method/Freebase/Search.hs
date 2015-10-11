@@ -112,8 +112,8 @@ type SearchMethod =
                                                              QueryParam "key"
                                                                AuthKey
                                                                :>
-                                                               QueryParam
-                                                                 "oauth_token"
+                                                               Header
+                                                                 "Authorization"
                                                                  OAuthToken
                                                                  :>
                                                                  QueryParam
@@ -168,8 +168,8 @@ type SearchMethod =
                                                                QueryParam "key"
                                                                  AuthKey
                                                                  :>
-                                                                 QueryParam
-                                                                   "oauth_token"
+                                                                 Header
+                                                                   "Authorization"
                                                                    OAuthToken
                                                                    :>
                                                                    QueryParam

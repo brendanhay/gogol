@@ -66,7 +66,7 @@ type InstallsDeleteResource =
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
                              QueryParam "key" AuthKey :>
-                               QueryParam "oauth_token" OAuthToken :>
+                               Header "Authorization" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Requests to remove an app from a device. A call to get or list will

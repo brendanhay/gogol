@@ -55,7 +55,7 @@ type UsersGetProFileResource =
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
                  QueryParam "key" AuthKey :>
-                   QueryParam "oauth_token" OAuthToken :>
+                   Header "Authorization" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] ProFile
 
 -- | Gets the current user\'s Gmail profile.
