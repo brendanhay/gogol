@@ -42,7 +42,7 @@ module Network.Google.Fonts.Types
     -- * WebfontFiles
     , WebfontFiles
     , webfontFiles
-    , wfProperties
+    , wfAddtional
     ) where
 
 import           Network.Google.Fonts.Types.Product

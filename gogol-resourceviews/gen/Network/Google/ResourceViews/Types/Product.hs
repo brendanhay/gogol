@@ -813,27 +813,27 @@ instance ToJSON ZoneViewsRemoveResourcesRequest where
 --
 -- /See:/ 'listResourceResponseItemEndpoints' smart constructor.
 newtype ListResourceResponseItemEndpoints = ListResourceResponseItemEndpoints
-    { _lrrieProperties :: HashMap Text [Int32]
+    { _lrrieAddtional :: HashMap Text [Int32]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListResourceResponseItemEndpoints' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lrrieProperties'
+-- * 'lrrieAddtional'
 listResourceResponseItemEndpoints
-    :: HashMap Text [Int32] -- ^ 'properties'
+    :: HashMap Text [Int32] -- ^ 'addtional'
     -> ListResourceResponseItemEndpoints
-listResourceResponseItemEndpoints pLrrieProperties_ =
+listResourceResponseItemEndpoints pLrrieAddtional_ =
     ListResourceResponseItemEndpoints
-    { _lrrieProperties = pLrrieProperties_
+    { _lrrieAddtional = pLrrieAddtional_
     }
 
 -- | The name of the service end point.
-lrrieProperties :: Lens' ListResourceResponseItemEndpoints (HashMap Text [Int32])
-lrrieProperties
-  = lens _lrrieProperties
-      (\ s a -> s{_lrrieProperties = a})
+lrrieAddtional :: Lens' ListResourceResponseItemEndpoints (HashMap Text [Int32])
+lrrieAddtional
+  = lens _lrrieAddtional
+      (\ s a -> s{_lrrieAddtional = a})
 
 instance FromJSON ListResourceResponseItemEndpoints
          where
@@ -845,7 +845,7 @@ instance FromJSON ListResourceResponseItemEndpoints
 
 instance ToJSON ListResourceResponseItemEndpoints
          where
-        toJSON = toJSON . _lrrieProperties
+        toJSON = toJSON . _lrrieAddtional
 
 -- | The request to add resources to the resource view.
 --

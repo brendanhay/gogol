@@ -307,27 +307,27 @@ instance ToJSON WriteTimeseriesRequest where
 --
 -- /See:/ 'writeTimeseriesRequestCommonLabels' smart constructor.
 newtype WriteTimeseriesRequestCommonLabels = WriteTimeseriesRequestCommonLabels
-    { _wtrclProperties :: HashMap Text Text
+    { _wtrclAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WriteTimeseriesRequestCommonLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'wtrclProperties'
+-- * 'wtrclAddtional'
 writeTimeseriesRequestCommonLabels
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> WriteTimeseriesRequestCommonLabels
-writeTimeseriesRequestCommonLabels pWtrclProperties_ =
+writeTimeseriesRequestCommonLabels pWtrclAddtional_ =
     WriteTimeseriesRequestCommonLabels
-    { _wtrclProperties = pWtrclProperties_
+    { _wtrclAddtional = pWtrclAddtional_
     }
 
 -- | The label\'s name.
-wtrclProperties :: Lens' WriteTimeseriesRequestCommonLabels (HashMap Text Text)
-wtrclProperties
-  = lens _wtrclProperties
-      (\ s a -> s{_wtrclProperties = a})
+wtrclAddtional :: Lens' WriteTimeseriesRequestCommonLabels (HashMap Text Text)
+wtrclAddtional
+  = lens _wtrclAddtional
+      (\ s a -> s{_wtrclAddtional = a})
 
 instance FromJSON WriteTimeseriesRequestCommonLabels
          where
@@ -339,7 +339,7 @@ instance FromJSON WriteTimeseriesRequestCommonLabels
 
 instance ToJSON WriteTimeseriesRequestCommonLabels
          where
-        toJSON = toJSON . _wtrclProperties
+        toJSON = toJSON . _wtrclAddtional
 
 -- | A label in a metric is a description of this metric, including the key
 -- of this description (what the description is), and the value for this
@@ -552,27 +552,26 @@ instance ToJSON ListTimeseriesDescriptorsRequest
 --
 -- /See:/ 'timeseriesDescriptorLabels' smart constructor.
 newtype TimeseriesDescriptorLabels = TimeseriesDescriptorLabels
-    { _tdlProperties :: HashMap Text Text
+    { _tdlAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeseriesDescriptorLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tdlProperties'
+-- * 'tdlAddtional'
 timeseriesDescriptorLabels
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> TimeseriesDescriptorLabels
-timeseriesDescriptorLabels pTdlProperties_ =
+timeseriesDescriptorLabels pTdlAddtional_ =
     TimeseriesDescriptorLabels
-    { _tdlProperties = pTdlProperties_
+    { _tdlAddtional = pTdlAddtional_
     }
 
 -- | The label\'s name.
-tdlProperties :: Lens' TimeseriesDescriptorLabels (HashMap Text Text)
-tdlProperties
-  = lens _tdlProperties
-      (\ s a -> s{_tdlProperties = a})
+tdlAddtional :: Lens' TimeseriesDescriptorLabels (HashMap Text Text)
+tdlAddtional
+  = lens _tdlAddtional (\ s a -> s{_tdlAddtional = a})
 
 instance FromJSON TimeseriesDescriptorLabels where
         parseJSON
@@ -581,7 +580,7 @@ instance FromJSON TimeseriesDescriptorLabels where
                  TimeseriesDescriptorLabels <$> (parseJSONObject o))
 
 instance ToJSON TimeseriesDescriptorLabels where
-        toJSON = toJSON . _tdlProperties
+        toJSON = toJSON . _tdlAddtional
 
 -- | The histogram\'s bucket. Buckets that form the histogram of a
 -- distribution value. If the upper bound of a bucket, say U1, does not

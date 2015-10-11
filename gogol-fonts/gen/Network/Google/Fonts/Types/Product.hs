@@ -189,26 +189,26 @@ instance ToJSON WebfontList where
 --
 -- /See:/ 'webfontFiles' smart constructor.
 newtype WebfontFiles = WebfontFiles
-    { _wfProperties :: HashMap Text Text
+    { _wfAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebfontFiles' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'wfProperties'
+-- * 'wfAddtional'
 webfontFiles
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> WebfontFiles
-webfontFiles pWfProperties_ =
+webfontFiles pWfAddtional_ =
     WebfontFiles
-    { _wfProperties = pWfProperties_
+    { _wfAddtional = pWfAddtional_
     }
 
 -- | The font file URL (value) for an specific variant (key).
-wfProperties :: Lens' WebfontFiles (HashMap Text Text)
-wfProperties
-  = lens _wfProperties (\ s a -> s{_wfProperties = a})
+wfAddtional :: Lens' WebfontFiles (HashMap Text Text)
+wfAddtional
+  = lens _wfAddtional (\ s a -> s{_wfAddtional = a})
 
 instance FromJSON WebfontFiles where
         parseJSON
@@ -216,4 +216,4 @@ instance FromJSON WebfontFiles where
               (\ o -> WebfontFiles <$> (parseJSONObject o))
 
 instance ToJSON WebfontFiles where
-        toJSON = toJSON . _wfProperties
+        toJSON = toJSON . _wfAddtional

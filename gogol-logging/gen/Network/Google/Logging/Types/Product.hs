@@ -304,26 +304,26 @@ instance ToJSON WriteLogEntriesRequest where
 --
 -- /See:/ 'writeLogEntriesRequestCommonLabels' smart constructor.
 newtype WriteLogEntriesRequestCommonLabels = WriteLogEntriesRequestCommonLabels
-    { _wlerclProperties :: HashMap Text Text
+    { _wlerclAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WriteLogEntriesRequestCommonLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'wlerclProperties'
+-- * 'wlerclAddtional'
 writeLogEntriesRequestCommonLabels
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> WriteLogEntriesRequestCommonLabels
-writeLogEntriesRequestCommonLabels pWlerclProperties_ =
+writeLogEntriesRequestCommonLabels pWlerclAddtional_ =
     WriteLogEntriesRequestCommonLabels
-    { _wlerclProperties = pWlerclProperties_
+    { _wlerclAddtional = pWlerclAddtional_
     }
 
-wlerclProperties :: Lens' WriteLogEntriesRequestCommonLabels (HashMap Text Text)
-wlerclProperties
-  = lens _wlerclProperties
-      (\ s a -> s{_wlerclProperties = a})
+wlerclAddtional :: Lens' WriteLogEntriesRequestCommonLabels (HashMap Text Text)
+wlerclAddtional
+  = lens _wlerclAddtional
+      (\ s a -> s{_wlerclAddtional = a})
 
 instance FromJSON WriteLogEntriesRequestCommonLabels
          where
@@ -335,7 +335,7 @@ instance FromJSON WriteLogEntriesRequestCommonLabels
 
 instance ToJSON WriteLogEntriesRequestCommonLabels
          where
-        toJSON = toJSON . _wlerclProperties
+        toJSON = toJSON . _wlerclAddtional
 
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
@@ -927,27 +927,27 @@ instance ToJSON LogEntryMetadata where
 --
 -- /See:/ 'logEntryProtoPayload' smart constructor.
 newtype LogEntryProtoPayload = LogEntryProtoPayload
-    { _leppProperties :: HashMap Text JSONValue
+    { _leppAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogEntryProtoPayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'leppProperties'
+-- * 'leppAddtional'
 logEntryProtoPayload
-    :: HashMap Text JSONValue -- ^ 'properties'
+    :: HashMap Text JSONValue -- ^ 'addtional'
     -> LogEntryProtoPayload
-logEntryProtoPayload pLeppProperties_ =
+logEntryProtoPayload pLeppAddtional_ =
     LogEntryProtoPayload
-    { _leppProperties = pLeppProperties_
+    { _leppAddtional = pLeppAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
-leppProperties :: Lens' LogEntryProtoPayload (HashMap Text JSONValue)
-leppProperties
-  = lens _leppProperties
-      (\ s a -> s{_leppProperties = a})
+leppAddtional :: Lens' LogEntryProtoPayload (HashMap Text JSONValue)
+leppAddtional
+  = lens _leppAddtional
+      (\ s a -> s{_leppAddtional = a})
 
 instance FromJSON LogEntryProtoPayload where
         parseJSON
@@ -955,7 +955,7 @@ instance FromJSON LogEntryProtoPayload where
               (\ o -> LogEntryProtoPayload <$> (parseJSONObject o))
 
 instance ToJSON LogEntryProtoPayload where
-        toJSON = toJSON . _leppProperties
+        toJSON = toJSON . _leppAddtional
 
 -- | Result returned from ListLogServiceIndexesRequest.
 --
@@ -1173,27 +1173,26 @@ instance ToJSON ListLogServicesResponse where
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
 newtype StatusDetailsItem = StatusDetailsItem
-    { _sdiProperties :: HashMap Text JSONValue
+    { _sdiAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sdiProperties'
+-- * 'sdiAddtional'
 statusDetailsItem
-    :: HashMap Text JSONValue -- ^ 'properties'
+    :: HashMap Text JSONValue -- ^ 'addtional'
     -> StatusDetailsItem
-statusDetailsItem pSdiProperties_ =
+statusDetailsItem pSdiAddtional_ =
     StatusDetailsItem
-    { _sdiProperties = pSdiProperties_
+    { _sdiAddtional = pSdiAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
-sdiProperties :: Lens' StatusDetailsItem (HashMap Text JSONValue)
-sdiProperties
-  = lens _sdiProperties
-      (\ s a -> s{_sdiProperties = a})
+sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
+sdiAddtional
+  = lens _sdiAddtional (\ s a -> s{_sdiAddtional = a})
 
 instance FromJSON StatusDetailsItem where
         parseJSON
@@ -1201,7 +1200,7 @@ instance FromJSON StatusDetailsItem where
               (\ o -> StatusDetailsItem <$> (parseJSONObject o))
 
 instance ToJSON StatusDetailsItem where
-        toJSON = toJSON . _sdiProperties
+        toJSON = toJSON . _sdiAddtional
 
 -- | Result returned from ListLogs.
 --
@@ -1710,26 +1709,26 @@ instance ToJSON LogEntry where
 --
 -- /See:/ 'logEntryMetadataLabels' smart constructor.
 newtype LogEntryMetadataLabels = LogEntryMetadataLabels
-    { _lemlProperties :: HashMap Text Text
+    { _lemlAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogEntryMetadataLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lemlProperties'
+-- * 'lemlAddtional'
 logEntryMetadataLabels
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> LogEntryMetadataLabels
-logEntryMetadataLabels pLemlProperties_ =
+logEntryMetadataLabels pLemlAddtional_ =
     LogEntryMetadataLabels
-    { _lemlProperties = pLemlProperties_
+    { _lemlAddtional = pLemlAddtional_
     }
 
-lemlProperties :: Lens' LogEntryMetadataLabels (HashMap Text Text)
-lemlProperties
-  = lens _lemlProperties
-      (\ s a -> s{_lemlProperties = a})
+lemlAddtional :: Lens' LogEntryMetadataLabels (HashMap Text Text)
+lemlAddtional
+  = lens _lemlAddtional
+      (\ s a -> s{_lemlAddtional = a})
 
 instance FromJSON LogEntryMetadataLabels where
         parseJSON
@@ -1738,7 +1737,7 @@ instance FromJSON LogEntryMetadataLabels where
                  LogEntryMetadataLabels <$> (parseJSONObject o))
 
 instance ToJSON LogEntryMetadataLabels where
-        toJSON = toJSON . _lemlProperties
+        toJSON = toJSON . _lemlAddtional
 
 -- | Specifies a location in a source file.
 --
@@ -1857,27 +1856,27 @@ instance ToJSON SourceReference where
 --
 -- /See:/ 'logEntryStructPayload' smart constructor.
 newtype LogEntryStructPayload = LogEntryStructPayload
-    { _lespProperties :: HashMap Text JSONValue
+    { _lespAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogEntryStructPayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lespProperties'
+-- * 'lespAddtional'
 logEntryStructPayload
-    :: HashMap Text JSONValue -- ^ 'properties'
+    :: HashMap Text JSONValue -- ^ 'addtional'
     -> LogEntryStructPayload
-logEntryStructPayload pLespProperties_ =
+logEntryStructPayload pLespAddtional_ =
     LogEntryStructPayload
-    { _lespProperties = pLespProperties_
+    { _lespAddtional = pLespAddtional_
     }
 
 -- | Properties of the object.
-lespProperties :: Lens' LogEntryStructPayload (HashMap Text JSONValue)
-lespProperties
-  = lens _lespProperties
-      (\ s a -> s{_lespProperties = a})
+lespAddtional :: Lens' LogEntryStructPayload (HashMap Text JSONValue)
+lespAddtional
+  = lens _lespAddtional
+      (\ s a -> s{_lespAddtional = a})
 
 instance FromJSON LogEntryStructPayload where
         parseJSON
@@ -1886,4 +1885,4 @@ instance FromJSON LogEntryStructPayload where
                  LogEntryStructPayload <$> (parseJSONObject o))
 
 instance ToJSON LogEntryStructPayload where
-        toJSON = toJSON . _lespProperties
+        toJSON = toJSON . _lespAddtional

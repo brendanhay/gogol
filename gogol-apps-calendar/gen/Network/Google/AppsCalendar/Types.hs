@@ -95,7 +95,7 @@ module Network.Google.AppsCalendar.Types
     -- * ColorsEvent
     , ColorsEvent
     , colorsEvent
-    , ceProperties
+    , ceAddtional
 
     -- * Settings
     , Settings
@@ -180,7 +180,7 @@ module Network.Google.AppsCalendar.Types
     -- * FreeBusyResponseGroups
     , FreeBusyResponseGroups
     , freeBusyResponseGroups
-    , fbrgProperties
+    , fbrgAddtional
 
     -- * EventReminders
     , EventReminders
@@ -191,7 +191,7 @@ module Network.Google.AppsCalendar.Types
     -- * ColorsCalendar
     , ColorsCalendar
     , colorsCalendar
-    , ccProperties
+    , ccAddtional
 
     -- * CalendarNotification
     , CalendarNotification
@@ -202,12 +202,12 @@ module Network.Google.AppsCalendar.Types
     -- * EventExtendedPropertiesPrivate
     , EventExtendedPropertiesPrivate
     , eventExtendedPropertiesPrivate
-    , eeppProperties
+    , eeppAddtional
 
     -- * ChannelParams
     , ChannelParams
     , channelParams
-    , cpProperties
+    , cpAddtional
 
     -- * Events
     , Events
@@ -312,7 +312,7 @@ module Network.Google.AppsCalendar.Types
     -- * EventGadgetPreferences
     , EventGadgetPreferences
     , eventGadgetPreferences
-    , egpProperties
+    , egpAddtional
 
     -- * FreeBusyRequest
     , FreeBusyRequest
@@ -339,7 +339,7 @@ module Network.Google.AppsCalendar.Types
     -- * EventExtendedPropertiesShared
     , EventExtendedPropertiesShared
     , eventExtendedPropertiesShared
-    , eepsProperties
+    , eepsAddtional
 
     -- * CalendarListWatchMinAccessRole
     , CalendarListWatchMinAccessRole (..)
@@ -347,7 +347,7 @@ module Network.Google.AppsCalendar.Types
     -- * FreeBusyResponseCalendars
     , FreeBusyResponseCalendars
     , freeBusyResponseCalendars
-    , fbrcProperties
+    , fbrcAddtional
 
     -- * ACL
     , ACL

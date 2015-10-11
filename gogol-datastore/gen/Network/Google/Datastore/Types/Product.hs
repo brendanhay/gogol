@@ -371,29 +371,29 @@ instance ToJSON QueryResultBatch where
 --
 -- /See:/ 'entityProperties' smart constructor.
 newtype EntityProperties = EntityProperties
-    { _epProperties :: HashMap Text Property
+    { _epAddtional :: HashMap Text Property
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntityProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'epProperties'
+-- * 'epAddtional'
 entityProperties
-    :: HashMap Text Property -- ^ 'properties'
+    :: HashMap Text Property -- ^ 'addtional'
     -> EntityProperties
-entityProperties pEpProperties_ =
+entityProperties pEpAddtional_ =
     EntityProperties
-    { _epProperties = pEpProperties_
+    { _epAddtional = pEpAddtional_
     }
 
 -- | The name of the property. A property name matching regex \"__.*__\" is
 -- reserved. A reserved property name is forbidden in certain documented
 -- contexts. The name must not contain more than 500 characters. Cannot be
 -- \"\".
-epProperties :: Lens' EntityProperties (HashMap Text Property)
-epProperties
-  = lens _epProperties (\ s a -> s{_epProperties = a})
+epAddtional :: Lens' EntityProperties (HashMap Text Property)
+epAddtional
+  = lens _epAddtional (\ s a -> s{_epAddtional = a})
 
 instance FromJSON EntityProperties where
         parseJSON
@@ -401,7 +401,7 @@ instance FromJSON EntityProperties where
               (\ o -> EntityProperties <$> (parseJSONObject o))
 
 instance ToJSON EntityProperties where
-        toJSON = toJSON . _epProperties
+        toJSON = toJSON . _epAddtional
 
 --
 -- /See:/ 'beginTransactionRequest' smart constructor.

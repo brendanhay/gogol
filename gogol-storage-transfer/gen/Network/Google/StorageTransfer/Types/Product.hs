@@ -578,27 +578,26 @@ instance ToJSON GoogleServiceAccount where
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
 newtype StatusDetailsItem = StatusDetailsItem
-    { _sdiProperties :: HashMap Text JSONValue
+    { _sdiAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sdiProperties'
+-- * 'sdiAddtional'
 statusDetailsItem
-    :: HashMap Text JSONValue -- ^ 'properties'
+    :: HashMap Text JSONValue -- ^ 'addtional'
     -> StatusDetailsItem
-statusDetailsItem pSdiProperties_ =
+statusDetailsItem pSdiAddtional_ =
     StatusDetailsItem
-    { _sdiProperties = pSdiProperties_
+    { _sdiAddtional = pSdiAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
-sdiProperties :: Lens' StatusDetailsItem (HashMap Text JSONValue)
-sdiProperties
-  = lens _sdiProperties
-      (\ s a -> s{_sdiProperties = a})
+sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
+sdiAddtional
+  = lens _sdiAddtional (\ s a -> s{_sdiAddtional = a})
 
 instance FromJSON StatusDetailsItem where
         parseJSON
@@ -606,7 +605,7 @@ instance FromJSON StatusDetailsItem where
               (\ o -> StatusDetailsItem <$> (parseJSONObject o))
 
 instance ToJSON StatusDetailsItem where
-        toJSON = toJSON . _sdiProperties
+        toJSON = toJSON . _sdiAddtional
 
 -- | Represents a whole calendar date, e.g. date of birth. The time of day
 -- and time zone are either specified elsewhere or are not significant. The
@@ -1392,26 +1391,26 @@ instance ToJSON ErrorLogEntry where
 --
 -- /See:/ 'operationMetadata' smart constructor.
 newtype OperationMetadata = OperationMetadata
-    { _omProperties :: HashMap Text JSONValue
+    { _omAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'omProperties'
+-- * 'omAddtional'
 operationMetadata
-    :: HashMap Text JSONValue -- ^ 'properties'
+    :: HashMap Text JSONValue -- ^ 'addtional'
     -> OperationMetadata
-operationMetadata pOmProperties_ =
+operationMetadata pOmAddtional_ =
     OperationMetadata
-    { _omProperties = pOmProperties_
+    { _omAddtional = pOmAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
-omProperties :: Lens' OperationMetadata (HashMap Text JSONValue)
-omProperties
-  = lens _omProperties (\ s a -> s{_omProperties = a})
+omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
+omAddtional
+  = lens _omAddtional (\ s a -> s{_omAddtional = a})
 
 instance FromJSON OperationMetadata where
         parseJSON
@@ -1419,7 +1418,7 @@ instance FromJSON OperationMetadata where
               (\ o -> OperationMetadata <$> (parseJSONObject o))
 
 instance ToJSON OperationMetadata where
-        toJSON = toJSON . _omProperties
+        toJSON = toJSON . _omAddtional
 
 -- | TransferOptions uses three boolean parameters to define the actions to
 -- be performed on objects in a transfer.
@@ -1784,26 +1783,26 @@ instance ToJSON ListTransferJobsResponse where
 --
 -- /See:/ 'operationResponse' smart constructor.
 newtype OperationResponse = OperationResponse
-    { _orProperties :: HashMap Text JSONValue
+    { _orAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'orProperties'
+-- * 'orAddtional'
 operationResponse
-    :: HashMap Text JSONValue -- ^ 'properties'
+    :: HashMap Text JSONValue -- ^ 'addtional'
     -> OperationResponse
-operationResponse pOrProperties_ =
+operationResponse pOrAddtional_ =
     OperationResponse
-    { _orProperties = pOrProperties_
+    { _orAddtional = pOrAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
-orProperties :: Lens' OperationResponse (HashMap Text JSONValue)
-orProperties
-  = lens _orProperties (\ s a -> s{_orProperties = a})
+orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
+orAddtional
+  = lens _orAddtional (\ s a -> s{_orAddtional = a})
 
 instance FromJSON OperationResponse where
         parseJSON
@@ -1811,7 +1810,7 @@ instance FromJSON OperationResponse where
               (\ o -> OperationResponse <$> (parseJSONObject o))
 
 instance ToJSON OperationResponse where
-        toJSON = toJSON . _orProperties
+        toJSON = toJSON . _orAddtional
 
 -- | Request passed to ResumeTransferOperation.
 --

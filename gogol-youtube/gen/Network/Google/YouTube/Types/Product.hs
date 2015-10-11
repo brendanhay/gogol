@@ -4808,26 +4808,26 @@ instance ToJSON LiveStreamListResponse where
 --
 -- /See:/ 'channelLocalizations' smart constructor.
 newtype ChannelLocalizations = ChannelLocalizations
-    { _clProperties :: HashMap Text ChannelLocalization
+    { _clAddtional :: HashMap Text ChannelLocalization
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelLocalizations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'clProperties'
+-- * 'clAddtional'
 channelLocalizations
-    :: HashMap Text ChannelLocalization -- ^ 'properties'
+    :: HashMap Text ChannelLocalization -- ^ 'addtional'
     -> ChannelLocalizations
-channelLocalizations pClProperties_ =
+channelLocalizations pClAddtional_ =
     ChannelLocalizations
-    { _clProperties = pClProperties_
+    { _clAddtional = pClAddtional_
     }
 
 -- | The language tag, using string since map_key require simple types.
-clProperties :: Lens' ChannelLocalizations (HashMap Text ChannelLocalization)
-clProperties
-  = lens _clProperties (\ s a -> s{_clProperties = a})
+clAddtional :: Lens' ChannelLocalizations (HashMap Text ChannelLocalization)
+clAddtional
+  = lens _clAddtional (\ s a -> s{_clAddtional = a})
 
 instance FromJSON ChannelLocalizations where
         parseJSON
@@ -4835,7 +4835,7 @@ instance FromJSON ChannelLocalizations where
               (\ o -> ChannelLocalizations <$> (parseJSONObject o))
 
 instance ToJSON ChannelLocalizations where
-        toJSON = toJSON . _clProperties
+        toJSON = toJSON . _clAddtional
 
 -- | Basic details about a playlist, including title, description and
 -- thumbnails.
@@ -5303,27 +5303,26 @@ instance ToJSON InvideoTiming where
 --
 -- /See:/ 'playListLocalizations' smart constructor.
 newtype PlayListLocalizations = PlayListLocalizations
-    { _pllProperties :: HashMap Text PlayListLocalization
+    { _pllAddtional :: HashMap Text PlayListLocalization
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListLocalizations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pllProperties'
+-- * 'pllAddtional'
 playListLocalizations
-    :: HashMap Text PlayListLocalization -- ^ 'properties'
+    :: HashMap Text PlayListLocalization -- ^ 'addtional'
     -> PlayListLocalizations
-playListLocalizations pPllProperties_ =
+playListLocalizations pPllAddtional_ =
     PlayListLocalizations
-    { _pllProperties = pPllProperties_
+    { _pllAddtional = pPllAddtional_
     }
 
 -- | The language tag, using string since map_key require simple types.
-pllProperties :: Lens' PlayListLocalizations (HashMap Text PlayListLocalization)
-pllProperties
-  = lens _pllProperties
-      (\ s a -> s{_pllProperties = a})
+pllAddtional :: Lens' PlayListLocalizations (HashMap Text PlayListLocalization)
+pllAddtional
+  = lens _pllAddtional (\ s a -> s{_pllAddtional = a})
 
 instance FromJSON PlayListLocalizations where
         parseJSON
@@ -5332,7 +5331,7 @@ instance FromJSON PlayListLocalizations where
                  PlayListLocalizations <$> (parseJSONObject o))
 
 instance ToJSON PlayListLocalizations where
-        toJSON = toJSON . _pllProperties
+        toJSON = toJSON . _pllAddtional
 
 -- | Video processing progress and completion time estimate.
 --
@@ -6086,26 +6085,26 @@ instance ToJSON VideoCategory where
 --
 -- /See:/ 'videoLocalizations' smart constructor.
 newtype VideoLocalizations = VideoLocalizations
-    { _vlProperties :: HashMap Text VideoLocalization
+    { _vlAddtional :: HashMap Text VideoLocalization
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoLocalizations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vlProperties'
+-- * 'vlAddtional'
 videoLocalizations
-    :: HashMap Text VideoLocalization -- ^ 'properties'
+    :: HashMap Text VideoLocalization -- ^ 'addtional'
     -> VideoLocalizations
-videoLocalizations pVlProperties_ =
+videoLocalizations pVlAddtional_ =
     VideoLocalizations
-    { _vlProperties = pVlProperties_
+    { _vlAddtional = pVlAddtional_
     }
 
 -- | The language tag, using string since map_key require simple types.
-vlProperties :: Lens' VideoLocalizations (HashMap Text VideoLocalization)
-vlProperties
-  = lens _vlProperties (\ s a -> s{_vlProperties = a})
+vlAddtional :: Lens' VideoLocalizations (HashMap Text VideoLocalization)
+vlAddtional
+  = lens _vlAddtional (\ s a -> s{_vlAddtional = a})
 
 instance FromJSON VideoLocalizations where
         parseJSON
@@ -6113,7 +6112,7 @@ instance FromJSON VideoLocalizations where
               (\ o -> VideoLocalizations <$> (parseJSONObject o))
 
 instance ToJSON VideoLocalizations where
-        toJSON = toJSON . _vlProperties
+        toJSON = toJSON . _vlAddtional
 
 -- | Details about a channelsection, including playlists and channels.
 --
@@ -8260,27 +8259,26 @@ instance ToJSON LiveStreamHealthStatus where
 --
 -- /See:/ 'channelSectionLocalizations' smart constructor.
 newtype ChannelSectionLocalizations = ChannelSectionLocalizations
-    { _cslProperties :: HashMap Text ChannelSectionLocalization
+    { _cslAddtional :: HashMap Text ChannelSectionLocalization
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelSectionLocalizations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cslProperties'
+-- * 'cslAddtional'
 channelSectionLocalizations
-    :: HashMap Text ChannelSectionLocalization -- ^ 'properties'
+    :: HashMap Text ChannelSectionLocalization -- ^ 'addtional'
     -> ChannelSectionLocalizations
-channelSectionLocalizations pCslProperties_ =
+channelSectionLocalizations pCslAddtional_ =
     ChannelSectionLocalizations
-    { _cslProperties = pCslProperties_
+    { _cslAddtional = pCslAddtional_
     }
 
 -- | The language tag, using string since map_key require simple types.
-cslProperties :: Lens' ChannelSectionLocalizations (HashMap Text ChannelSectionLocalization)
-cslProperties
-  = lens _cslProperties
-      (\ s a -> s{_cslProperties = a})
+cslAddtional :: Lens' ChannelSectionLocalizations (HashMap Text ChannelSectionLocalization)
+cslAddtional
+  = lens _cslAddtional (\ s a -> s{_cslAddtional = a})
 
 instance FromJSON ChannelSectionLocalizations where
         parseJSON
@@ -8289,7 +8287,7 @@ instance FromJSON ChannelSectionLocalizations where
                  ChannelSectionLocalizations <$> (parseJSONObject o))
 
 instance ToJSON ChannelSectionLocalizations where
-        toJSON = toJSON . _cslProperties
+        toJSON = toJSON . _cslAddtional
 
 --
 -- /See:/ 'subscriptionListResponse' smart constructor.

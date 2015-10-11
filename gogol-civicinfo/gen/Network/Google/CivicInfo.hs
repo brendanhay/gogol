@@ -43,7 +43,7 @@ module Network.Google.CivicInfo
     -- ** RepresentativeInfoResponseDivisions
     , RepresentativeInfoResponseDivisions
     , representativeInfoResponseDivisions
-    , rirdProperties
+    , rirdAddtional
 
     -- ** VoterInfoResponse
     , VoterInfoResponse
@@ -195,7 +195,7 @@ module Network.Google.CivicInfo
     -- ** RepresentativeInfoDataDivisions
     , RepresentativeInfoDataDivisions
     , representativeInfoDataDivisions
-    , riddProperties
+    , riddAddtional
 
     -- ** RepresentativesRepresentativeInfoByAddressRoles
     , RepresentativesRepresentativeInfoByAddressRoles (..)

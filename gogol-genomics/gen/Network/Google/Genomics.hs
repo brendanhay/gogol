@@ -158,7 +158,7 @@ module Network.Google.Genomics
     -- ** ReadInfo
     , ReadInfo
     , readInfo
-    , riProperties
+    , riAddtional
 
     -- ** Status
     , Status
@@ -170,7 +170,7 @@ module Network.Google.Genomics
     -- ** OperationSchema
     , OperationSchema
     , operationSchema
-    , osProperties
+    , osAddtional
 
     -- ** Variant
     , Variant
@@ -340,17 +340,17 @@ module Network.Google.Genomics
     -- ** VariantCallInfo
     , VariantCallInfo
     , variantCallInfo
-    , vciProperties
+    , vciAddtional
 
     -- ** ReadGroupInfo
     , ReadGroupInfo
     , readGroupInfo
-    , rgiProperties
+    , rgiAddtional
 
     -- ** StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
-    , sdiProperties
+    , sdiAddtional
 
     -- ** SearchCallSetsResponse
     , SearchCallSetsResponse
@@ -377,12 +377,12 @@ module Network.Google.Genomics
     -- ** OperationMetadataRequest
     , OperationMetadataRequest
     , operationMetadataRequest
-    , omrProperties
+    , omrAddtional
 
     -- ** VariantInfo
     , VariantInfo
     , variantInfo
-    , viProperties
+    , viAddtional
 
     -- ** Experiment
     , Experiment
@@ -585,17 +585,17 @@ module Network.Google.Genomics
     -- ** CallSetInfo
     , CallSetInfo
     , callSetInfo
-    , csiProperties
+    , csiAddtional
 
     -- ** VariantSetMetadataInfo
     , VariantSetMetadataInfo
     , variantSetMetadataInfo
-    , vsmiProperties
+    , vsmiAddtional
 
     -- ** OperationResponse
     , OperationResponse
     , operationResponse
-    , orProperties
+    , orAddtional
 
     -- ** OperationEvent
     , OperationEvent
@@ -634,7 +634,7 @@ module Network.Google.Genomics
     -- ** ReadGroupSetInfo
     , ReadGroupSetInfo
     , readGroupSetInfo
-    , rgsiProperties
+    , rgsiAddtional
 
     -- ** ReferenceSet
     , ReferenceSet

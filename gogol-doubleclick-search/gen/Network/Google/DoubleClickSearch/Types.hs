@@ -21,7 +21,7 @@ module Network.Google.DoubleClickSearch.Types
     -- * ReportRow
     , ReportRow
     , reportRow
-    , rrProperties
+    , rrAddtional
 
     -- * ReportRequest
     , ReportRequest

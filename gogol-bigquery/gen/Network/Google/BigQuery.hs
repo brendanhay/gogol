@@ -383,7 +383,7 @@ module Network.Google.BigQuery
     -- ** JSONObject
     , JSONObject
     , jsonObject
-    , joProperties
+    , joAddtional
 
     -- ** JobConfigurationQuery
     , JobConfigurationQuery
@@ -418,7 +418,7 @@ module Network.Google.BigQuery
     -- ** JobConfigurationQueryTableDefinitions
     , JobConfigurationQueryTableDefinitions
     , jobConfigurationQueryTableDefinitions
-    , jcqtdProperties
+    , jcqtdAddtional
 
     -- ** TableCell
     , TableCell

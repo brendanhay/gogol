@@ -69,7 +69,7 @@ module Network.Google.AppEngine
     -- ** OperationSchema
     , OperationSchema
     , operationSchema
-    , osProperties
+    , osAddtional
 
     -- ** TrafficSplit
     , TrafficSplit
@@ -130,7 +130,7 @@ module Network.Google.AppEngine
     -- ** VersionEnvVariables
     , VersionEnvVariables
     , versionEnvVariables
-    , vevProperties
+    , vevAddtional
 
     -- ** Application
     , Application
@@ -144,7 +144,7 @@ module Network.Google.AppEngine
     -- ** VersionBetaSettings
     , VersionBetaSettings
     , versionBetaSettings
-    , vbsProperties
+    , vbsAddtional
 
     -- ** Operation
     , Operation
@@ -165,7 +165,7 @@ module Network.Google.AppEngine
     -- ** StaticDirectoryHandlerHTTPHeaders
     , StaticDirectoryHandlerHTTPHeaders
     , staticDirectoryHandlerHTTPHeaders
-    , sdhhttphProperties
+    , sdhhttphAddtional
 
     -- ** ListVersionsResponse
     , ListVersionsResponse
@@ -207,7 +207,7 @@ module Network.Google.AppEngine
     -- ** StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
-    , sdiProperties
+    , sdiAddtional
 
     -- ** Network
     , Network
@@ -219,7 +219,7 @@ module Network.Google.AppEngine
     -- ** StaticFilesHandlerHTTPHeaders
     , StaticFilesHandlerHTTPHeaders
     , staticFilesHandlerHTTPHeaders
-    , sfhhttphProperties
+    , sfhhttphAddtional
 
     -- ** Resources
     , Resources
@@ -231,7 +231,7 @@ module Network.Google.AppEngine
     -- ** DeploymentFiles
     , DeploymentFiles
     , deploymentFiles
-    , dfProperties
+    , dfAddtional
 
     -- ** CPUUtilization
     , CPUUtilization
@@ -242,7 +242,7 @@ module Network.Google.AppEngine
     -- ** TrafficSplitAllocations
     , TrafficSplitAllocations
     , trafficSplitAllocations
-    , tsaProperties
+    , tsaAddtional
 
     -- ** ManualScaling
     , ManualScaling
@@ -329,7 +329,7 @@ module Network.Google.AppEngine
     -- ** OperationResponse
     , OperationResponse
     , operationResponse
-    , orProperties
+    , orAddtional
 
     -- ** ContainerInfo
     , ContainerInfo

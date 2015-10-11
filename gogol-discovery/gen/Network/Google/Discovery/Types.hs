@@ -26,7 +26,7 @@ module Network.Google.Discovery.Types
     -- * RestDescriptionParameters
     , RestDescriptionParameters
     , restDescriptionParameters
-    , rdpProperties
+    , rdpAddtional
 
     -- * RestMethod
     , RestMethod
@@ -56,12 +56,12 @@ module Network.Google.Discovery.Types
     -- * RestDescriptionAuthOAuth2Scopes
     , RestDescriptionAuthOAuth2Scopes
     , restDescriptionAuthOAuth2Scopes
-    , rdaoasProperties
+    , rdaoasAddtional
 
     -- * RestDescriptionMethods
     , RestDescriptionMethods
     , restDescriptionMethods
-    , rdmProperties
+    , rdmAddtional
 
     -- * DirectoryListItemsItem
     , DirectoryListItemsItem
@@ -88,12 +88,17 @@ module Network.Google.Discovery.Types
     -- * RestResourceResources
     , RestResourceResources
     , restResourceResources
-    , rrrProperties
+    , rrrAddtional
 
     -- * RestDescriptionAuthOAuth2
     , RestDescriptionAuthOAuth2
     , restDescriptionAuthOAuth2
     , rdaoaScopes
+
+    -- * RestDescriptionAuthOAuth2ScopesAdditional
+    , RestDescriptionAuthOAuth2ScopesAdditional
+    , restDescriptionAuthOAuth2ScopesAdditional
+    , rdaoasaDescription
 
     -- * RestMethodMediaUploadProtocolsSimple
     , RestMethodMediaUploadProtocolsSimple
@@ -116,7 +121,7 @@ module Network.Google.Discovery.Types
     -- * RestResourceMethods
     , RestResourceMethods
     , restResourceMethods
-    , rrmProperties
+    , rrmAddtional
 
     -- * RestDescriptionAuth
     , RestDescriptionAuth
@@ -183,7 +188,7 @@ module Network.Google.Discovery.Types
     -- * RestDescriptionSchemas
     , RestDescriptionSchemas
     , restDescriptionSchemas
-    , rdsProperties
+    , rdsAddtional
 
     -- * JSONSchemaVariantMapItem
     , JSONSchemaVariantMapItem
@@ -194,7 +199,7 @@ module Network.Google.Discovery.Types
     -- * RestDescriptionResources
     , RestDescriptionResources
     , restDescriptionResources
-    , rdrProperties
+    , rdrAddtional
 
     -- * RestMethodMediaUploadProtocols
     , RestMethodMediaUploadProtocols
@@ -210,7 +215,7 @@ module Network.Google.Discovery.Types
     -- * RestMethodParameters
     , RestMethodParameters
     , restMethodParameters
-    , rmpProperties
+    , rmpAddtional
 
     -- * RestMethodMediaUpload
     , RestMethodMediaUpload
@@ -222,12 +227,7 @@ module Network.Google.Discovery.Types
     -- * JSONSchemaProperties
     , JSONSchemaProperties
     , jsonSchemaProperties
-    , jspProperties
-
-    -- * RestDescriptionAuthOAuth2ScopesProperties
-    , RestDescriptionAuthOAuth2ScopesProperties
-    , restDescriptionAuthOAuth2ScopesProperties
-    , rdaoaspDescription
+    , jspAddtional
 
     -- * RestMethodMediaUploadProtocolsResumable
     , RestMethodMediaUploadProtocolsResumable

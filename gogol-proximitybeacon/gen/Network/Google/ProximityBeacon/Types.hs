@@ -33,7 +33,7 @@ module Network.Google.ProximityBeacon.Types
     -- * BeaconProperties
     , BeaconProperties
     , beaconProperties
-    , bpProperties
+    , bpAddtional
 
     -- * Empty
     , Empty

@@ -25,25 +25,25 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'readInfo' smart constructor.
 newtype ReadInfo = ReadInfo
-    { _riProperties :: HashMap Text [JSONValue]
+    { _riAddtional :: HashMap Text [JSONValue]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'riProperties'
+-- * 'riAddtional'
 readInfo
-    :: HashMap Text [JSONValue] -- ^ 'properties'
+    :: HashMap Text [JSONValue] -- ^ 'addtional'
     -> ReadInfo
-readInfo pRiProperties_ =
+readInfo pRiAddtional_ =
     ReadInfo
-    { _riProperties = pRiProperties_
+    { _riAddtional = pRiAddtional_
     }
 
-riProperties :: Lens' ReadInfo (HashMap Text [JSONValue])
-riProperties
-  = lens _riProperties (\ s a -> s{_riProperties = a})
+riAddtional :: Lens' ReadInfo (HashMap Text [JSONValue])
+riAddtional
+  = lens _riAddtional (\ s a -> s{_riAddtional = a})
 
 instance FromJSON ReadInfo where
         parseJSON
@@ -51,7 +51,7 @@ instance FromJSON ReadInfo where
               (\ o -> ReadInfo <$> (parseJSONObject o))
 
 instance ToJSON ReadInfo where
-        toJSON = toJSON . _riProperties
+        toJSON = toJSON . _riAddtional
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
@@ -153,26 +153,26 @@ instance ToJSON Status where
 --
 -- /See:/ 'operationSchema' smart constructor.
 newtype OperationSchema = OperationSchema
-    { _osProperties :: HashMap Text JSONValue
+    { _osAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'osProperties'
+-- * 'osAddtional'
 operationSchema
-    :: HashMap Text JSONValue -- ^ 'properties'
+    :: HashMap Text JSONValue -- ^ 'addtional'
     -> OperationSchema
-operationSchema pOsProperties_ =
+operationSchema pOsAddtional_ =
     OperationSchema
-    { _osProperties = pOsProperties_
+    { _osAddtional = pOsAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
-osProperties :: Lens' OperationSchema (HashMap Text JSONValue)
-osProperties
-  = lens _osProperties (\ s a -> s{_osProperties = a})
+osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
+osAddtional
+  = lens _osAddtional (\ s a -> s{_osAddtional = a})
 
 instance FromJSON OperationSchema where
         parseJSON
@@ -180,7 +180,7 @@ instance FromJSON OperationSchema where
               (\ o -> OperationSchema <$> (parseJSONObject o))
 
 instance ToJSON OperationSchema where
-        toJSON = toJSON . _osProperties
+        toJSON = toJSON . _osAddtional
 
 -- | A variant represents a change in DNA sequence relative to a reference
 -- sequence. For example, a variant could represent a SNP or an insertion.
@@ -1844,26 +1844,25 @@ instance ToJSON Reference where
 --
 -- /See:/ 'variantCallInfo' smart constructor.
 newtype VariantCallInfo = VariantCallInfo
-    { _vciProperties :: HashMap Text [JSONValue]
+    { _vciAddtional :: HashMap Text [JSONValue]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantCallInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vciProperties'
+-- * 'vciAddtional'
 variantCallInfo
-    :: HashMap Text [JSONValue] -- ^ 'properties'
+    :: HashMap Text [JSONValue] -- ^ 'addtional'
     -> VariantCallInfo
-variantCallInfo pVciProperties_ =
+variantCallInfo pVciAddtional_ =
     VariantCallInfo
-    { _vciProperties = pVciProperties_
+    { _vciAddtional = pVciAddtional_
     }
 
-vciProperties :: Lens' VariantCallInfo (HashMap Text [JSONValue])
-vciProperties
-  = lens _vciProperties
-      (\ s a -> s{_vciProperties = a})
+vciAddtional :: Lens' VariantCallInfo (HashMap Text [JSONValue])
+vciAddtional
+  = lens _vciAddtional (\ s a -> s{_vciAddtional = a})
 
 instance FromJSON VariantCallInfo where
         parseJSON
@@ -1871,33 +1870,32 @@ instance FromJSON VariantCallInfo where
               (\ o -> VariantCallInfo <$> (parseJSONObject o))
 
 instance ToJSON VariantCallInfo where
-        toJSON = toJSON . _vciProperties
+        toJSON = toJSON . _vciAddtional
 
 -- | A map of additional read group information. This must be of the form map
 -- (string key mapping to a list of string values).
 --
 -- /See:/ 'readGroupInfo' smart constructor.
 newtype ReadGroupInfo = ReadGroupInfo
-    { _rgiProperties :: HashMap Text [JSONValue]
+    { _rgiAddtional :: HashMap Text [JSONValue]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadGroupInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rgiProperties'
+-- * 'rgiAddtional'
 readGroupInfo
-    :: HashMap Text [JSONValue] -- ^ 'properties'
+    :: HashMap Text [JSONValue] -- ^ 'addtional'
     -> ReadGroupInfo
-readGroupInfo pRgiProperties_ =
+readGroupInfo pRgiAddtional_ =
     ReadGroupInfo
-    { _rgiProperties = pRgiProperties_
+    { _rgiAddtional = pRgiAddtional_
     }
 
-rgiProperties :: Lens' ReadGroupInfo (HashMap Text [JSONValue])
-rgiProperties
-  = lens _rgiProperties
-      (\ s a -> s{_rgiProperties = a})
+rgiAddtional :: Lens' ReadGroupInfo (HashMap Text [JSONValue])
+rgiAddtional
+  = lens _rgiAddtional (\ s a -> s{_rgiAddtional = a})
 
 instance FromJSON ReadGroupInfo where
         parseJSON
@@ -1905,32 +1903,31 @@ instance FromJSON ReadGroupInfo where
               (\ o -> ReadGroupInfo <$> (parseJSONObject o))
 
 instance ToJSON ReadGroupInfo where
-        toJSON = toJSON . _rgiProperties
+        toJSON = toJSON . _rgiAddtional
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
 newtype StatusDetailsItem = StatusDetailsItem
-    { _sdiProperties :: HashMap Text JSONValue
+    { _sdiAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sdiProperties'
+-- * 'sdiAddtional'
 statusDetailsItem
-    :: HashMap Text JSONValue -- ^ 'properties'
+    :: HashMap Text JSONValue -- ^ 'addtional'
     -> StatusDetailsItem
-statusDetailsItem pSdiProperties_ =
+statusDetailsItem pSdiAddtional_ =
     StatusDetailsItem
-    { _sdiProperties = pSdiProperties_
+    { _sdiAddtional = pSdiAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
-sdiProperties :: Lens' StatusDetailsItem (HashMap Text JSONValue)
-sdiProperties
-  = lens _sdiProperties
-      (\ s a -> s{_sdiProperties = a})
+sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
+sdiAddtional
+  = lens _sdiAddtional (\ s a -> s{_sdiAddtional = a})
 
 instance FromJSON StatusDetailsItem where
         parseJSON
@@ -1938,7 +1935,7 @@ instance FromJSON StatusDetailsItem where
               (\ o -> StatusDetailsItem <$> (parseJSONObject o))
 
 instance ToJSON StatusDetailsItem where
-        toJSON = toJSON . _sdiProperties
+        toJSON = toJSON . _sdiAddtional
 
 -- | The call set search response.
 --
@@ -2155,27 +2152,26 @@ instance ToJSON SearchReadsRequest where
 --
 -- /See:/ 'operationMetadataRequest' smart constructor.
 newtype OperationMetadataRequest = OperationMetadataRequest
-    { _omrProperties :: HashMap Text JSONValue
+    { _omrAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationMetadataRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'omrProperties'
+-- * 'omrAddtional'
 operationMetadataRequest
-    :: HashMap Text JSONValue -- ^ 'properties'
+    :: HashMap Text JSONValue -- ^ 'addtional'
     -> OperationMetadataRequest
-operationMetadataRequest pOmrProperties_ =
+operationMetadataRequest pOmrAddtional_ =
     OperationMetadataRequest
-    { _omrProperties = pOmrProperties_
+    { _omrAddtional = pOmrAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
-omrProperties :: Lens' OperationMetadataRequest (HashMap Text JSONValue)
-omrProperties
-  = lens _omrProperties
-      (\ s a -> s{_omrProperties = a})
+omrAddtional :: Lens' OperationMetadataRequest (HashMap Text JSONValue)
+omrAddtional
+  = lens _omrAddtional (\ s a -> s{_omrAddtional = a})
 
 instance FromJSON OperationMetadataRequest where
         parseJSON
@@ -2184,32 +2180,32 @@ instance FromJSON OperationMetadataRequest where
                  OperationMetadataRequest <$> (parseJSONObject o))
 
 instance ToJSON OperationMetadataRequest where
-        toJSON = toJSON . _omrProperties
+        toJSON = toJSON . _omrAddtional
 
 -- | A map of additional variant information. This must be of the form map
 -- (string key mapping to a list of string values).
 --
 -- /See:/ 'variantInfo' smart constructor.
 newtype VariantInfo = VariantInfo
-    { _viProperties :: HashMap Text [JSONValue]
+    { _viAddtional :: HashMap Text [JSONValue]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'viProperties'
+-- * 'viAddtional'
 variantInfo
-    :: HashMap Text [JSONValue] -- ^ 'properties'
+    :: HashMap Text [JSONValue] -- ^ 'addtional'
     -> VariantInfo
-variantInfo pViProperties_ =
+variantInfo pViAddtional_ =
     VariantInfo
-    { _viProperties = pViProperties_
+    { _viAddtional = pViAddtional_
     }
 
-viProperties :: Lens' VariantInfo (HashMap Text [JSONValue])
-viProperties
-  = lens _viProperties (\ s a -> s{_viProperties = a})
+viAddtional :: Lens' VariantInfo (HashMap Text [JSONValue])
+viAddtional
+  = lens _viAddtional (\ s a -> s{_viAddtional = a})
 
 instance FromJSON VariantInfo where
         parseJSON
@@ -2217,7 +2213,7 @@ instance FromJSON VariantInfo where
               (\ o -> VariantInfo <$> (parseJSONObject o))
 
 instance ToJSON VariantInfo where
-        toJSON = toJSON . _viProperties
+        toJSON = toJSON . _viAddtional
 
 --
 -- /See:/ 'experiment' smart constructor.
@@ -4112,26 +4108,25 @@ instance ToJSON SearchVariantsRequest where
 --
 -- /See:/ 'callSetInfo' smart constructor.
 newtype CallSetInfo = CallSetInfo
-    { _csiProperties :: HashMap Text [JSONValue]
+    { _csiAddtional :: HashMap Text [JSONValue]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallSetInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'csiProperties'
+-- * 'csiAddtional'
 callSetInfo
-    :: HashMap Text [JSONValue] -- ^ 'properties'
+    :: HashMap Text [JSONValue] -- ^ 'addtional'
     -> CallSetInfo
-callSetInfo pCsiProperties_ =
+callSetInfo pCsiAddtional_ =
     CallSetInfo
-    { _csiProperties = pCsiProperties_
+    { _csiAddtional = pCsiAddtional_
     }
 
-csiProperties :: Lens' CallSetInfo (HashMap Text [JSONValue])
-csiProperties
-  = lens _csiProperties
-      (\ s a -> s{_csiProperties = a})
+csiAddtional :: Lens' CallSetInfo (HashMap Text [JSONValue])
+csiAddtional
+  = lens _csiAddtional (\ s a -> s{_csiAddtional = a})
 
 instance FromJSON CallSetInfo where
         parseJSON
@@ -4139,33 +4134,33 @@ instance FromJSON CallSetInfo where
               (\ o -> CallSetInfo <$> (parseJSONObject o))
 
 instance ToJSON CallSetInfo where
-        toJSON = toJSON . _csiProperties
+        toJSON = toJSON . _csiAddtional
 
 -- | Remaining structured metadata key-value pairs. This must be of the form
 -- map (string key mapping to a list of string values).
 --
 -- /See:/ 'variantSetMetadataInfo' smart constructor.
 newtype VariantSetMetadataInfo = VariantSetMetadataInfo
-    { _vsmiProperties :: HashMap Text [JSONValue]
+    { _vsmiAddtional :: HashMap Text [JSONValue]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantSetMetadataInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vsmiProperties'
+-- * 'vsmiAddtional'
 variantSetMetadataInfo
-    :: HashMap Text [JSONValue] -- ^ 'properties'
+    :: HashMap Text [JSONValue] -- ^ 'addtional'
     -> VariantSetMetadataInfo
-variantSetMetadataInfo pVsmiProperties_ =
+variantSetMetadataInfo pVsmiAddtional_ =
     VariantSetMetadataInfo
-    { _vsmiProperties = pVsmiProperties_
+    { _vsmiAddtional = pVsmiAddtional_
     }
 
-vsmiProperties :: Lens' VariantSetMetadataInfo (HashMap Text [JSONValue])
-vsmiProperties
-  = lens _vsmiProperties
-      (\ s a -> s{_vsmiProperties = a})
+vsmiAddtional :: Lens' VariantSetMetadataInfo (HashMap Text [JSONValue])
+vsmiAddtional
+  = lens _vsmiAddtional
+      (\ s a -> s{_vsmiAddtional = a})
 
 instance FromJSON VariantSetMetadataInfo where
         parseJSON
@@ -4174,7 +4169,7 @@ instance FromJSON VariantSetMetadataInfo where
                  VariantSetMetadataInfo <$> (parseJSONObject o))
 
 instance ToJSON VariantSetMetadataInfo where
-        toJSON = toJSON . _vsmiProperties
+        toJSON = toJSON . _vsmiAddtional
 
 -- | If importing ReadGroupSets, an ImportReadGroupSetsResponse is returned.
 -- If importing Variants, an ImportVariantsResponse is returned. For
@@ -4182,26 +4177,26 @@ instance ToJSON VariantSetMetadataInfo where
 --
 -- /See:/ 'operationResponse' smart constructor.
 newtype OperationResponse = OperationResponse
-    { _orProperties :: HashMap Text JSONValue
+    { _orAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'orProperties'
+-- * 'orAddtional'
 operationResponse
-    :: HashMap Text JSONValue -- ^ 'properties'
+    :: HashMap Text JSONValue -- ^ 'addtional'
     -> OperationResponse
-operationResponse pOrProperties_ =
+operationResponse pOrAddtional_ =
     OperationResponse
-    { _orProperties = pOrProperties_
+    { _orAddtional = pOrAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
-orProperties :: Lens' OperationResponse (HashMap Text JSONValue)
-orProperties
-  = lens _orProperties (\ s a -> s{_orProperties = a})
+orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
+orAddtional
+  = lens _orAddtional (\ s a -> s{_orAddtional = a})
 
 instance FromJSON OperationResponse where
         parseJSON
@@ -4209,7 +4204,7 @@ instance FromJSON OperationResponse where
               (\ o -> OperationResponse <$> (parseJSONObject o))
 
 instance ToJSON OperationResponse where
-        toJSON = toJSON . _orProperties
+        toJSON = toJSON . _orAddtional
 
 -- | An event that occurred during an Operation.
 --
@@ -4502,26 +4497,26 @@ instance ToJSON SearchReadGroupSetsResponse where
 --
 -- /See:/ 'readGroupSetInfo' smart constructor.
 newtype ReadGroupSetInfo = ReadGroupSetInfo
-    { _rgsiProperties :: HashMap Text [JSONValue]
+    { _rgsiAddtional :: HashMap Text [JSONValue]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadGroupSetInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rgsiProperties'
+-- * 'rgsiAddtional'
 readGroupSetInfo
-    :: HashMap Text [JSONValue] -- ^ 'properties'
+    :: HashMap Text [JSONValue] -- ^ 'addtional'
     -> ReadGroupSetInfo
-readGroupSetInfo pRgsiProperties_ =
+readGroupSetInfo pRgsiAddtional_ =
     ReadGroupSetInfo
-    { _rgsiProperties = pRgsiProperties_
+    { _rgsiAddtional = pRgsiAddtional_
     }
 
-rgsiProperties :: Lens' ReadGroupSetInfo (HashMap Text [JSONValue])
-rgsiProperties
-  = lens _rgsiProperties
-      (\ s a -> s{_rgsiProperties = a})
+rgsiAddtional :: Lens' ReadGroupSetInfo (HashMap Text [JSONValue])
+rgsiAddtional
+  = lens _rgsiAddtional
+      (\ s a -> s{_rgsiAddtional = a})
 
 instance FromJSON ReadGroupSetInfo where
         parseJSON
@@ -4529,7 +4524,7 @@ instance FromJSON ReadGroupSetInfo where
               (\ o -> ReadGroupSetInfo <$> (parseJSONObject o))
 
 instance ToJSON ReadGroupSetInfo where
-        toJSON = toJSON . _rgsiProperties
+        toJSON = toJSON . _rgsiAddtional
 
 -- | A reference set is a set of references which typically comprise a
 -- reference assembly for a species, such as \`GRCh38\` which is

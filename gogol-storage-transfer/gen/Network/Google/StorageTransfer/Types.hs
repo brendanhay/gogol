@@ -78,7 +78,7 @@ module Network.Google.StorageTransfer.Types
     -- * StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
-    , sdiProperties
+    , sdiAddtional
 
     -- * Date
     , Date
@@ -160,7 +160,7 @@ module Network.Google.StorageTransfer.Types
     -- * OperationMetadata
     , OperationMetadata
     , operationMetadata
-    , omProperties
+    , omAddtional
 
     -- * TransferOptions
     , TransferOptions
@@ -201,7 +201,7 @@ module Network.Google.StorageTransfer.Types
     -- * OperationResponse
     , OperationResponse
     , operationResponse
-    , orProperties
+    , orAddtional
 
     -- * ResumeTransferOperationRequest
     , ResumeTransferOperationRequest

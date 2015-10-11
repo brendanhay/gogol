@@ -125,26 +125,26 @@ instance ToJSON Status where
 --
 -- /See:/ 'operationSchema' smart constructor.
 newtype OperationSchema = OperationSchema
-    { _osProperties :: HashMap Text JSONValue
+    { _osAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'osProperties'
+-- * 'osAddtional'
 operationSchema
-    :: HashMap Text JSONValue -- ^ 'properties'
+    :: HashMap Text JSONValue -- ^ 'addtional'
     -> OperationSchema
-operationSchema pOsProperties_ =
+operationSchema pOsAddtional_ =
     OperationSchema
-    { _osProperties = pOsProperties_
+    { _osAddtional = pOsAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
-osProperties :: Lens' OperationSchema (HashMap Text JSONValue)
-osProperties
-  = lens _osProperties (\ s a -> s{_osProperties = a})
+osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
+osAddtional
+  = lens _osAddtional (\ s a -> s{_osAddtional = a})
 
 instance FromJSON OperationSchema where
         parseJSON
@@ -152,7 +152,7 @@ instance FromJSON OperationSchema where
               (\ o -> OperationSchema <$> (parseJSONObject o))
 
 instance ToJSON OperationSchema where
-        toJSON = toJSON . _osProperties
+        toJSON = toJSON . _osAddtional
 
 -- | Configuration for traffic splitting for versions within a single module.
 -- Traffic splitting allows traffic directed to the module to be assigned
@@ -683,26 +683,25 @@ instance ToJSON APIConfigHandler where
 --
 -- /See:/ 'versionEnvVariables' smart constructor.
 newtype VersionEnvVariables = VersionEnvVariables
-    { _vevProperties :: HashMap Text Text
+    { _vevAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VersionEnvVariables' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vevProperties'
+-- * 'vevAddtional'
 versionEnvVariables
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> VersionEnvVariables
-versionEnvVariables pVevProperties_ =
+versionEnvVariables pVevAddtional_ =
     VersionEnvVariables
-    { _vevProperties = pVevProperties_
+    { _vevAddtional = pVevAddtional_
     }
 
-vevProperties :: Lens' VersionEnvVariables (HashMap Text Text)
-vevProperties
-  = lens _vevProperties
-      (\ s a -> s{_vevProperties = a})
+vevAddtional :: Lens' VersionEnvVariables (HashMap Text Text)
+vevAddtional
+  = lens _vevAddtional (\ s a -> s{_vevAddtional = a})
 
 instance FromJSON VersionEnvVariables where
         parseJSON
@@ -710,7 +709,7 @@ instance FromJSON VersionEnvVariables where
               (\ o -> VersionEnvVariables <$> (parseJSONObject o))
 
 instance ToJSON VersionEnvVariables where
-        toJSON = toJSON . _vevProperties
+        toJSON = toJSON . _vevAddtional
 
 -- | An Application contains the top-level configuration of an App Engine
 -- application.
@@ -808,26 +807,25 @@ instance ToJSON Application where
 --
 -- /See:/ 'versionBetaSettings' smart constructor.
 newtype VersionBetaSettings = VersionBetaSettings
-    { _vbsProperties :: HashMap Text Text
+    { _vbsAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VersionBetaSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vbsProperties'
+-- * 'vbsAddtional'
 versionBetaSettings
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> VersionBetaSettings
-versionBetaSettings pVbsProperties_ =
+versionBetaSettings pVbsAddtional_ =
     VersionBetaSettings
-    { _vbsProperties = pVbsProperties_
+    { _vbsAddtional = pVbsAddtional_
     }
 
-vbsProperties :: Lens' VersionBetaSettings (HashMap Text Text)
-vbsProperties
-  = lens _vbsProperties
-      (\ s a -> s{_vbsProperties = a})
+vbsAddtional :: Lens' VersionBetaSettings (HashMap Text Text)
+vbsAddtional
+  = lens _vbsAddtional (\ s a -> s{_vbsAddtional = a})
 
 instance FromJSON VersionBetaSettings where
         parseJSON
@@ -835,7 +833,7 @@ instance FromJSON VersionBetaSettings where
               (\ o -> VersionBetaSettings <$> (parseJSONObject o))
 
 instance ToJSON VersionBetaSettings where
-        toJSON = toJSON . _vbsProperties
+        toJSON = toJSON . _vbsAddtional
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
@@ -995,26 +993,26 @@ instance ToJSON URLDispatchRule where
 --
 -- /See:/ 'staticDirectoryHandlerHTTPHeaders' smart constructor.
 newtype StaticDirectoryHandlerHTTPHeaders = StaticDirectoryHandlerHTTPHeaders
-    { _sdhhttphProperties :: HashMap Text Text
+    { _sdhhttphAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StaticDirectoryHandlerHTTPHeaders' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sdhhttphProperties'
+-- * 'sdhhttphAddtional'
 staticDirectoryHandlerHTTPHeaders
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> StaticDirectoryHandlerHTTPHeaders
-staticDirectoryHandlerHTTPHeaders pSdhhttphProperties_ =
+staticDirectoryHandlerHTTPHeaders pSdhhttphAddtional_ =
     StaticDirectoryHandlerHTTPHeaders
-    { _sdhhttphProperties = pSdhhttphProperties_
+    { _sdhhttphAddtional = pSdhhttphAddtional_
     }
 
-sdhhttphProperties :: Lens' StaticDirectoryHandlerHTTPHeaders (HashMap Text Text)
-sdhhttphProperties
-  = lens _sdhhttphProperties
-      (\ s a -> s{_sdhhttphProperties = a})
+sdhhttphAddtional :: Lens' StaticDirectoryHandlerHTTPHeaders (HashMap Text Text)
+sdhhttphAddtional
+  = lens _sdhhttphAddtional
+      (\ s a -> s{_sdhhttphAddtional = a})
 
 instance FromJSON StaticDirectoryHandlerHTTPHeaders
          where
@@ -1026,7 +1024,7 @@ instance FromJSON StaticDirectoryHandlerHTTPHeaders
 
 instance ToJSON StaticDirectoryHandlerHTTPHeaders
          where
-        toJSON = toJSON . _sdhhttphProperties
+        toJSON = toJSON . _sdhhttphAddtional
 
 -- | Response message for \`Versions.ListVersions\`.
 --
@@ -1375,27 +1373,26 @@ instance ToJSON APIEndpointHandler where
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
 newtype StatusDetailsItem = StatusDetailsItem
-    { _sdiProperties :: HashMap Text JSONValue
+    { _sdiAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sdiProperties'
+-- * 'sdiAddtional'
 statusDetailsItem
-    :: HashMap Text JSONValue -- ^ 'properties'
+    :: HashMap Text JSONValue -- ^ 'addtional'
     -> StatusDetailsItem
-statusDetailsItem pSdiProperties_ =
+statusDetailsItem pSdiAddtional_ =
     StatusDetailsItem
-    { _sdiProperties = pSdiProperties_
+    { _sdiAddtional = pSdiAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
-sdiProperties :: Lens' StatusDetailsItem (HashMap Text JSONValue)
-sdiProperties
-  = lens _sdiProperties
-      (\ s a -> s{_sdiProperties = a})
+sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
+sdiAddtional
+  = lens _sdiAddtional (\ s a -> s{_sdiAddtional = a})
 
 instance FromJSON StatusDetailsItem where
         parseJSON
@@ -1403,7 +1400,7 @@ instance FromJSON StatusDetailsItem where
               (\ o -> StatusDetailsItem <$> (parseJSONObject o))
 
 instance ToJSON StatusDetailsItem where
-        toJSON = toJSON . _sdiProperties
+        toJSON = toJSON . _sdiAddtional
 
 -- | Used to specify extra network settings (for VM runtimes only).
 --
@@ -1473,26 +1470,26 @@ instance ToJSON Network where
 --
 -- /See:/ 'staticFilesHandlerHTTPHeaders' smart constructor.
 newtype StaticFilesHandlerHTTPHeaders = StaticFilesHandlerHTTPHeaders
-    { _sfhhttphProperties :: HashMap Text Text
+    { _sfhhttphAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StaticFilesHandlerHTTPHeaders' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sfhhttphProperties'
+-- * 'sfhhttphAddtional'
 staticFilesHandlerHTTPHeaders
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> StaticFilesHandlerHTTPHeaders
-staticFilesHandlerHTTPHeaders pSfhhttphProperties_ =
+staticFilesHandlerHTTPHeaders pSfhhttphAddtional_ =
     StaticFilesHandlerHTTPHeaders
-    { _sfhhttphProperties = pSfhhttphProperties_
+    { _sfhhttphAddtional = pSfhhttphAddtional_
     }
 
-sfhhttphProperties :: Lens' StaticFilesHandlerHTTPHeaders (HashMap Text Text)
-sfhhttphProperties
-  = lens _sfhhttphProperties
-      (\ s a -> s{_sfhhttphProperties = a})
+sfhhttphAddtional :: Lens' StaticFilesHandlerHTTPHeaders (HashMap Text Text)
+sfhhttphAddtional
+  = lens _sfhhttphAddtional
+      (\ s a -> s{_sfhhttphAddtional = a})
 
 instance FromJSON StaticFilesHandlerHTTPHeaders where
         parseJSON
@@ -1502,7 +1499,7 @@ instance FromJSON StaticFilesHandlerHTTPHeaders where
                    (parseJSONObject o))
 
 instance ToJSON StaticFilesHandlerHTTPHeaders where
-        toJSON = toJSON . _sfhhttphProperties
+        toJSON = toJSON . _sfhhttphAddtional
 
 -- | Used to specify how many machine resources an app version needs.
 --
@@ -1565,25 +1562,25 @@ instance ToJSON Resources where
 --
 -- /See:/ 'deploymentFiles' smart constructor.
 newtype DeploymentFiles = DeploymentFiles
-    { _dfProperties :: HashMap Text FileInfo
+    { _dfAddtional :: HashMap Text FileInfo
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentFiles' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dfProperties'
+-- * 'dfAddtional'
 deploymentFiles
-    :: HashMap Text FileInfo -- ^ 'properties'
+    :: HashMap Text FileInfo -- ^ 'addtional'
     -> DeploymentFiles
-deploymentFiles pDfProperties_ =
+deploymentFiles pDfAddtional_ =
     DeploymentFiles
-    { _dfProperties = pDfProperties_
+    { _dfAddtional = pDfAddtional_
     }
 
-dfProperties :: Lens' DeploymentFiles (HashMap Text FileInfo)
-dfProperties
-  = lens _dfProperties (\ s a -> s{_dfProperties = a})
+dfAddtional :: Lens' DeploymentFiles (HashMap Text FileInfo)
+dfAddtional
+  = lens _dfAddtional (\ s a -> s{_dfAddtional = a})
 
 instance FromJSON DeploymentFiles where
         parseJSON
@@ -1591,7 +1588,7 @@ instance FromJSON DeploymentFiles where
               (\ o -> DeploymentFiles <$> (parseJSONObject o))
 
 instance ToJSON DeploymentFiles where
-        toJSON = toJSON . _dfProperties
+        toJSON = toJSON . _dfAddtional
 
 -- | Target scaling by CPU usage.
 --
@@ -1655,26 +1652,25 @@ instance ToJSON CPUUtilization where
 --
 -- /See:/ 'trafficSplitAllocations' smart constructor.
 newtype TrafficSplitAllocations = TrafficSplitAllocations
-    { _tsaProperties :: HashMap Text Double
+    { _tsaAddtional :: HashMap Text Double
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrafficSplitAllocations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tsaProperties'
+-- * 'tsaAddtional'
 trafficSplitAllocations
-    :: HashMap Text Double -- ^ 'properties'
+    :: HashMap Text Double -- ^ 'addtional'
     -> TrafficSplitAllocations
-trafficSplitAllocations pTsaProperties_ =
+trafficSplitAllocations pTsaAddtional_ =
     TrafficSplitAllocations
-    { _tsaProperties = pTsaProperties_
+    { _tsaAddtional = pTsaAddtional_
     }
 
-tsaProperties :: Lens' TrafficSplitAllocations (HashMap Text Double)
-tsaProperties
-  = lens _tsaProperties
-      (\ s a -> s{_tsaProperties = a})
+tsaAddtional :: Lens' TrafficSplitAllocations (HashMap Text Double)
+tsaAddtional
+  = lens _tsaAddtional (\ s a -> s{_tsaAddtional = a})
 
 instance FromJSON TrafficSplitAllocations where
         parseJSON
@@ -1683,7 +1679,7 @@ instance FromJSON TrafficSplitAllocations where
                  TrafficSplitAllocations <$> (parseJSONObject o))
 
 instance ToJSON TrafficSplitAllocations where
-        toJSON = toJSON . _tsaProperties
+        toJSON = toJSON . _tsaAddtional
 
 -- | A module with manual scaling runs continuously, allowing you to perform
 -- complex initialization and rely on the state of its memory over time.
@@ -2538,26 +2534,26 @@ instance ToJSON SourceReference where
 --
 -- /See:/ 'operationResponse' smart constructor.
 newtype OperationResponse = OperationResponse
-    { _orProperties :: HashMap Text JSONValue
+    { _orAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'orProperties'
+-- * 'orAddtional'
 operationResponse
-    :: HashMap Text JSONValue -- ^ 'properties'
+    :: HashMap Text JSONValue -- ^ 'addtional'
     -> OperationResponse
-operationResponse pOrProperties_ =
+operationResponse pOrAddtional_ =
     OperationResponse
-    { _orProperties = pOrProperties_
+    { _orAddtional = pOrAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
-orProperties :: Lens' OperationResponse (HashMap Text JSONValue)
-orProperties
-  = lens _orProperties (\ s a -> s{_orProperties = a})
+orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
+orAddtional
+  = lens _orAddtional (\ s a -> s{_orAddtional = a})
 
 instance FromJSON OperationResponse where
         parseJSON
@@ -2565,7 +2561,7 @@ instance FromJSON OperationResponse where
               (\ o -> OperationResponse <$> (parseJSONObject o))
 
 instance ToJSON OperationResponse where
-        toJSON = toJSON . _orProperties
+        toJSON = toJSON . _orAddtional
 
 -- | A Docker (container) image which should be used to start the
 -- application.

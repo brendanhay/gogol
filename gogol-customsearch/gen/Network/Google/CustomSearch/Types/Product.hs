@@ -118,25 +118,25 @@ instance ToJSON Context where
 --
 -- /See:/ 'searchQueries' smart constructor.
 newtype SearchQueries = SearchQueries
-    { _sqProperties :: HashMap Text [Query]
+    { _sqAddtional :: HashMap Text [Query]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchQueries' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sqProperties'
+-- * 'sqAddtional'
 searchQueries
-    :: HashMap Text [Query] -- ^ 'properties'
+    :: HashMap Text [Query] -- ^ 'addtional'
     -> SearchQueries
-searchQueries pSqProperties_ =
+searchQueries pSqAddtional_ =
     SearchQueries
-    { _sqProperties = pSqProperties_
+    { _sqAddtional = pSqAddtional_
     }
 
-sqProperties :: Lens' SearchQueries (HashMap Text [Query])
-sqProperties
-  = lens _sqProperties (\ s a -> s{_sqProperties = a})
+sqAddtional :: Lens' SearchQueries (HashMap Text [Query])
+sqAddtional
+  = lens _sqAddtional (\ s a -> s{_sqAddtional = a})
 
 instance FromJSON SearchQueries where
         parseJSON
@@ -144,7 +144,40 @@ instance FromJSON SearchQueries where
               (\ o -> SearchQueries <$> (parseJSONObject o))
 
 instance ToJSON SearchQueries where
-        toJSON = toJSON . _sqProperties
+        toJSON = toJSON . _sqAddtional
+
+--
+-- /See:/ 'resultPagemapAdditionalItem' smart constructor.
+newtype ResultPagemapAdditionalItem = ResultPagemapAdditionalItem
+    { _rpaiAddtional :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResultPagemapAdditionalItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rpaiAddtional'
+resultPagemapAdditionalItem
+    :: HashMap Text JSONValue -- ^ 'addtional'
+    -> ResultPagemapAdditionalItem
+resultPagemapAdditionalItem pRpaiAddtional_ =
+    ResultPagemapAdditionalItem
+    { _rpaiAddtional = pRpaiAddtional_
+    }
+
+rpaiAddtional :: Lens' ResultPagemapAdditionalItem (HashMap Text JSONValue)
+rpaiAddtional
+  = lens _rpaiAddtional
+      (\ s a -> s{_rpaiAddtional = a})
+
+instance FromJSON ResultPagemapAdditionalItem where
+        parseJSON
+          = withObject "ResultPagemapAdditionalItem"
+              (\ o ->
+                 ResultPagemapAdditionalItem <$> (parseJSONObject o))
+
+instance ToJSON ResultPagemapAdditionalItem where
+        toJSON = toJSON . _rpaiAddtional
 
 --
 -- /See:/ 'searchURL' smart constructor.
@@ -337,25 +370,25 @@ instance ToJSON ResultImage where
 --
 -- /See:/ 'resultPagemap' smart constructor.
 newtype ResultPagemap = ResultPagemap
-    { _rpProperties :: HashMap Text [ResultPagemapPropertiesItem]
+    { _rpAddtional :: HashMap Text [ResultPagemapAdditionalItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResultPagemap' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rpProperties'
+-- * 'rpAddtional'
 resultPagemap
-    :: HashMap Text [ResultPagemapPropertiesItem] -- ^ 'properties'
+    :: HashMap Text [ResultPagemapAdditionalItem] -- ^ 'addtional'
     -> ResultPagemap
-resultPagemap pRpProperties_ =
+resultPagemap pRpAddtional_ =
     ResultPagemap
-    { _rpProperties = pRpProperties_
+    { _rpAddtional = pRpAddtional_
     }
 
-rpProperties :: Lens' ResultPagemap (HashMap Text [ResultPagemapPropertiesItem])
-rpProperties
-  = lens _rpProperties (\ s a -> s{_rpProperties = a})
+rpAddtional :: Lens' ResultPagemap (HashMap Text [ResultPagemapAdditionalItem])
+rpAddtional
+  = lens _rpAddtional (\ s a -> s{_rpAddtional = a})
 
 instance FromJSON ResultPagemap where
         parseJSON
@@ -363,7 +396,7 @@ instance FromJSON ResultPagemap where
               (\ o -> ResultPagemap <$> (parseJSONObject o))
 
 instance ToJSON ResultPagemap where
-        toJSON = toJSON . _rpProperties
+        toJSON = toJSON . _rpAddtional
 
 --
 -- /See:/ 'result' smart constructor.
@@ -1043,39 +1076,6 @@ instance ToJSON Query where
                   ("cr" .=) <$> _qCr, ("safe" .=) <$> _qSafe,
                   ("hq" .=) <$> _qHq,
                   ("highRange" .=) <$> _qHighRange])
-
---
--- /See:/ 'resultPagemapPropertiesItem' smart constructor.
-newtype ResultPagemapPropertiesItem = ResultPagemapPropertiesItem
-    { _rppiProperties :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResultPagemapPropertiesItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rppiProperties'
-resultPagemapPropertiesItem
-    :: HashMap Text JSONValue -- ^ 'properties'
-    -> ResultPagemapPropertiesItem
-resultPagemapPropertiesItem pRppiProperties_ =
-    ResultPagemapPropertiesItem
-    { _rppiProperties = pRppiProperties_
-    }
-
-rppiProperties :: Lens' ResultPagemapPropertiesItem (HashMap Text JSONValue)
-rppiProperties
-  = lens _rppiProperties
-      (\ s a -> s{_rppiProperties = a})
-
-instance FromJSON ResultPagemapPropertiesItem where
-        parseJSON
-          = withObject "ResultPagemapPropertiesItem"
-              (\ o ->
-                 ResultPagemapPropertiesItem <$> (parseJSONObject o))
-
-instance ToJSON ResultPagemapPropertiesItem where
-        toJSON = toJSON . _rppiProperties
 
 --
 -- /See:/ 'promotionBodyLinesItem' smart constructor.

@@ -18,6 +18,12 @@ module Network.Google.PageSpeed.Types
     -- * Service Request
       pageSpeedRequest
 
+    -- * ResultFormattedResultsRuleResultsAdditionalURLBlocksItem
+    , ResultFormattedResultsRuleResultsAdditionalURLBlocksItem
+    , resultFormattedResultsRuleResultsAdditionalURLBlocksItem
+    , rfrrraubiURLs
+    , rfrrraubiHeader
+
     -- * PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
     , PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
     , pagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
@@ -44,22 +50,8 @@ module Network.Google.PageSpeed.Types
     , pafsvairiWidth
     , pafsvairiTop
 
-    -- * ResultRuleGroupsProperties
-    , ResultRuleGroupsProperties
-    , resultRuleGroupsProperties
-    , rrgpScore
-
     -- * PagespeedAPIRunPagespeedStrategy
     , PagespeedAPIRunPagespeedStrategy (..)
-
-    -- * ResultFormattedResultsRuleResultsProperties
-    , ResultFormattedResultsRuleResultsProperties
-    , resultFormattedResultsRuleResultsProperties
-    , rfrrrpSummary
-    , rfrrrpRuleImpact
-    , rfrrrpGroups
-    , rfrrrpLocalizedRuleName
-    , rfrrrpURLBlocks
 
     -- * ResultVersion
     , ResultVersion
@@ -92,12 +84,6 @@ module Network.Google.PageSpeed.Types
     , paivpWidth
     , paivpTop
 
-    -- * ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem
-    , ResultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem
-    , resultFormattedResultsRuleResultsPropertiesURLBlocksItemURLsItem
-    , rfrrrpubiuiResult
-    , rfrrrpubiuiDetails
-
     -- * Result
     , Result
     , result
@@ -121,11 +107,10 @@ module Network.Google.PageSpeed.Types
     , pafsvaiType
     , pafsvaiSecondaryRects
 
-    -- * ResultFormattedResultsRuleResultsPropertiesURLBlocksItem
-    , ResultFormattedResultsRuleResultsPropertiesURLBlocksItem
-    , resultFormattedResultsRuleResultsPropertiesURLBlocksItem
-    , rfrrrpubiURLs
-    , rfrrrpubiHeader
+    -- * ResultRuleGroupsAdditional
+    , ResultRuleGroupsAdditional
+    , resultRuleGroupsAdditional
+    , rrgaScore
 
     -- * ResultFormattedResults
     , ResultFormattedResults
@@ -133,10 +118,19 @@ module Network.Google.PageSpeed.Types
     , rfrLocale
     , rfrRuleResults
 
+    -- * ResultFormattedResultsRuleResultsAdditional
+    , ResultFormattedResultsRuleResultsAdditional
+    , resultFormattedResultsRuleResultsAdditional
+    , rfrrraSummary
+    , rfrrraRuleImpact
+    , rfrrraGroups
+    , rfrrraLocalizedRuleName
+    , rfrrraURLBlocks
+
     -- * ResultRuleGroups
     , ResultRuleGroups
     , resultRuleGroups
-    , rrgProperties
+    , rrgAddtional
 
     -- * PagespeedAPIFormatStringV2
     , PagespeedAPIFormatStringV2
@@ -147,7 +141,13 @@ module Network.Google.PageSpeed.Types
     -- * ResultFormattedResultsRuleResults
     , ResultFormattedResultsRuleResults
     , resultFormattedResultsRuleResults
-    , rfrrrProperties
+    , rfrrrAddtional
+
+    -- * ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem
+    , ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem
+    , resultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem
+    , rfrrraubiuiResult
+    , rfrrraubiuiDetails
     ) where
 
 import           Network.Google.PageSpeed.Types.Product

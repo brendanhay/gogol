@@ -130,26 +130,26 @@ instance ToJSON Insert2ModelInfo where
 --
 -- /See:/ 'analyzeModelDescriptionConfusionMatrixRowTotals' smart constructor.
 newtype AnalyzeModelDescriptionConfusionMatrixRowTotals = AnalyzeModelDescriptionConfusionMatrixRowTotals
-    { _amdcmrtProperties :: HashMap Text Text
+    { _amdcmrtAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeModelDescriptionConfusionMatrixRowTotals' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'amdcmrtProperties'
+-- * 'amdcmrtAddtional'
 analyzeModelDescriptionConfusionMatrixRowTotals
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> AnalyzeModelDescriptionConfusionMatrixRowTotals
-analyzeModelDescriptionConfusionMatrixRowTotals pAmdcmrtProperties_ =
+analyzeModelDescriptionConfusionMatrixRowTotals pAmdcmrtAddtional_ =
     AnalyzeModelDescriptionConfusionMatrixRowTotals
-    { _amdcmrtProperties = pAmdcmrtProperties_
+    { _amdcmrtAddtional = pAmdcmrtAddtional_
     }
 
-amdcmrtProperties :: Lens' AnalyzeModelDescriptionConfusionMatrixRowTotals (HashMap Text Text)
-amdcmrtProperties
-  = lens _amdcmrtProperties
-      (\ s a -> s{_amdcmrtProperties = a})
+amdcmrtAddtional :: Lens' AnalyzeModelDescriptionConfusionMatrixRowTotals (HashMap Text Text)
+amdcmrtAddtional
+  = lens _amdcmrtAddtional
+      (\ s a -> s{_amdcmrtAddtional = a})
 
 instance FromJSON
          AnalyzeModelDescriptionConfusionMatrixRowTotals where
@@ -162,7 +162,7 @@ instance FromJSON
 
 instance ToJSON
          AnalyzeModelDescriptionConfusionMatrixRowTotals where
-        toJSON = toJSON . _amdcmrtProperties
+        toJSON = toJSON . _amdcmrtAddtional
 
 --
 -- /See:/ 'insert' smart constructor.
@@ -360,26 +360,25 @@ instance ToJSON List where
 --
 -- /See:/ 'insertUtilityItem' smart constructor.
 newtype InsertUtilityItem = InsertUtilityItem
-    { _iuiProperties :: HashMap Text Double
+    { _iuiAddtional :: HashMap Text Double
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InsertUtilityItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iuiProperties'
+-- * 'iuiAddtional'
 insertUtilityItem
-    :: HashMap Text Double -- ^ 'properties'
+    :: HashMap Text Double -- ^ 'addtional'
     -> InsertUtilityItem
-insertUtilityItem pIuiProperties_ =
+insertUtilityItem pIuiAddtional_ =
     InsertUtilityItem
-    { _iuiProperties = pIuiProperties_
+    { _iuiAddtional = pIuiAddtional_
     }
 
-iuiProperties :: Lens' InsertUtilityItem (HashMap Text Double)
-iuiProperties
-  = lens _iuiProperties
-      (\ s a -> s{_iuiProperties = a})
+iuiAddtional :: Lens' InsertUtilityItem (HashMap Text Double)
+iuiAddtional
+  = lens _iuiAddtional (\ s a -> s{_iuiAddtional = a})
 
 instance FromJSON InsertUtilityItem where
         parseJSON
@@ -387,7 +386,7 @@ instance FromJSON InsertUtilityItem where
               (\ o -> InsertUtilityItem <$> (parseJSONObject o))
 
 instance ToJSON InsertUtilityItem where
-        toJSON = toJSON . _iuiProperties
+        toJSON = toJSON . _iuiAddtional
 
 --
 -- /See:/ 'insert2' smart constructor.
@@ -542,49 +541,6 @@ instance ToJSON Insert2 where
                   ("storagePMMLLocation" .=) <$>
                     _insStoragePMMLLocation,
                   ("modelInfo" .=) <$> _insModelInfo])
-
--- | Confusion matrix information for the true class label.
---
--- /See:/ 'analyzeModelDescriptionConfusionMatrixProperties' smart constructor.
-newtype AnalyzeModelDescriptionConfusionMatrixProperties = AnalyzeModelDescriptionConfusionMatrixProperties
-    { _amdcmpProperties :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AnalyzeModelDescriptionConfusionMatrixProperties' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'amdcmpProperties'
-analyzeModelDescriptionConfusionMatrixProperties
-    :: HashMap Text Text -- ^ 'properties'
-    -> AnalyzeModelDescriptionConfusionMatrixProperties
-analyzeModelDescriptionConfusionMatrixProperties pAmdcmpProperties_ =
-    AnalyzeModelDescriptionConfusionMatrixProperties
-    { _amdcmpProperties = pAmdcmpProperties_
-    }
-
--- | Average number of times an instance with correct class label
--- modelDescription.confusionMatrix.(key) was wrongfully classified as this
--- label.
-amdcmpProperties :: Lens' AnalyzeModelDescriptionConfusionMatrixProperties (HashMap Text Text)
-amdcmpProperties
-  = lens _amdcmpProperties
-      (\ s a -> s{_amdcmpProperties = a})
-
-instance FromJSON
-         AnalyzeModelDescriptionConfusionMatrixProperties
-         where
-        parseJSON
-          = withObject
-              "AnalyzeModelDescriptionConfusionMatrixProperties"
-              (\ o ->
-                 AnalyzeModelDescriptionConfusionMatrixProperties <$>
-                   (parseJSONObject o))
-
-instance ToJSON
-         AnalyzeModelDescriptionConfusionMatrixProperties
-         where
-        toJSON = toJSON . _amdcmpProperties
 
 --
 -- /See:/ 'insertTrainingInstancesItem' smart constructor.
@@ -1070,27 +1026,27 @@ instance ToJSON Analyze where
 --
 -- /See:/ 'analyzeModelDescriptionConfusionMatrix' smart constructor.
 newtype AnalyzeModelDescriptionConfusionMatrix = AnalyzeModelDescriptionConfusionMatrix
-    { _amdcmProperties :: HashMap Text AnalyzeModelDescriptionConfusionMatrixProperties
+    { _amdcmAddtional :: HashMap Text AnalyzeModelDescriptionConfusionMatrixAdditional
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeModelDescriptionConfusionMatrix' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'amdcmProperties'
+-- * 'amdcmAddtional'
 analyzeModelDescriptionConfusionMatrix
-    :: HashMap Text AnalyzeModelDescriptionConfusionMatrixProperties -- ^ 'properties'
+    :: HashMap Text AnalyzeModelDescriptionConfusionMatrixAdditional -- ^ 'addtional'
     -> AnalyzeModelDescriptionConfusionMatrix
-analyzeModelDescriptionConfusionMatrix pAmdcmProperties_ =
+analyzeModelDescriptionConfusionMatrix pAmdcmAddtional_ =
     AnalyzeModelDescriptionConfusionMatrix
-    { _amdcmProperties = pAmdcmProperties_
+    { _amdcmAddtional = pAmdcmAddtional_
     }
 
 -- | Confusion matrix information for the true class label.
-amdcmProperties :: Lens' AnalyzeModelDescriptionConfusionMatrix (HashMap Text AnalyzeModelDescriptionConfusionMatrixProperties)
-amdcmProperties
-  = lens _amdcmProperties
-      (\ s a -> s{_amdcmProperties = a})
+amdcmAddtional :: Lens' AnalyzeModelDescriptionConfusionMatrix (HashMap Text AnalyzeModelDescriptionConfusionMatrixAdditional)
+amdcmAddtional
+  = lens _amdcmAddtional
+      (\ s a -> s{_amdcmAddtional = a})
 
 instance FromJSON
          AnalyzeModelDescriptionConfusionMatrix where
@@ -1102,7 +1058,7 @@ instance FromJSON
 
 instance ToJSON
          AnalyzeModelDescriptionConfusionMatrix where
-        toJSON = toJSON . _amdcmProperties
+        toJSON = toJSON . _amdcmAddtional
 
 --
 -- /See:/ 'output' smart constructor.
@@ -1260,27 +1216,26 @@ instance ToJSON
 --
 -- /See:/ 'analyzeErrorsItem' smart constructor.
 newtype AnalyzeErrorsItem = AnalyzeErrorsItem
-    { _aeiProperties :: HashMap Text Text
+    { _aeiAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeErrorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aeiProperties'
+-- * 'aeiAddtional'
 analyzeErrorsItem
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> AnalyzeErrorsItem
-analyzeErrorsItem pAeiProperties_ =
+analyzeErrorsItem pAeiAddtional_ =
     AnalyzeErrorsItem
-    { _aeiProperties = pAeiProperties_
+    { _aeiAddtional = pAeiAddtional_
     }
 
 -- | Error level followed by a detailed error message.
-aeiProperties :: Lens' AnalyzeErrorsItem (HashMap Text Text)
-aeiProperties
-  = lens _aeiProperties
-      (\ s a -> s{_aeiProperties = a})
+aeiAddtional :: Lens' AnalyzeErrorsItem (HashMap Text Text)
+aeiAddtional
+  = lens _aeiAddtional (\ s a -> s{_aeiAddtional = a})
 
 instance FromJSON AnalyzeErrorsItem where
         parseJSON
@@ -1288,7 +1243,7 @@ instance FromJSON AnalyzeErrorsItem where
               (\ o -> AnalyzeErrorsItem <$> (parseJSONObject o))
 
 instance ToJSON AnalyzeErrorsItem where
-        toJSON = toJSON . _aeiProperties
+        toJSON = toJSON . _aeiAddtional
 
 -- | Description of the data the model was trained on.
 --
@@ -1444,6 +1399,49 @@ instance ToJSON
          AnalyzeDataDescriptionFeaturesItemText where
         toJSON AnalyzeDataDescriptionFeaturesItemText{..}
           = object (catMaybes [("count" .=) <$> _addfitCount])
+
+-- | Confusion matrix information for the true class label.
+--
+-- /See:/ 'analyzeModelDescriptionConfusionMatrixAdditional' smart constructor.
+newtype AnalyzeModelDescriptionConfusionMatrixAdditional = AnalyzeModelDescriptionConfusionMatrixAdditional
+    { _amdcmaAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnalyzeModelDescriptionConfusionMatrixAdditional' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'amdcmaAddtional'
+analyzeModelDescriptionConfusionMatrixAdditional
+    :: HashMap Text Text -- ^ 'addtional'
+    -> AnalyzeModelDescriptionConfusionMatrixAdditional
+analyzeModelDescriptionConfusionMatrixAdditional pAmdcmaAddtional_ =
+    AnalyzeModelDescriptionConfusionMatrixAdditional
+    { _amdcmaAddtional = pAmdcmaAddtional_
+    }
+
+-- | Average number of times an instance with correct class label
+-- modelDescription.confusionMatrix.(key) was wrongfully classified as this
+-- label.
+amdcmaAddtional :: Lens' AnalyzeModelDescriptionConfusionMatrixAdditional (HashMap Text Text)
+amdcmaAddtional
+  = lens _amdcmaAddtional
+      (\ s a -> s{_amdcmaAddtional = a})
+
+instance FromJSON
+         AnalyzeModelDescriptionConfusionMatrixAdditional
+         where
+        parseJSON
+          = withObject
+              "AnalyzeModelDescriptionConfusionMatrixAdditional"
+              (\ o ->
+                 AnalyzeModelDescriptionConfusionMatrixAdditional <$>
+                   (parseJSONObject o))
+
+instance ToJSON
+         AnalyzeModelDescriptionConfusionMatrixAdditional
+         where
+        toJSON = toJSON . _amdcmaAddtional
 
 --
 -- /See:/ 'analyzeDataDescriptionFeaturesItem' smart constructor.

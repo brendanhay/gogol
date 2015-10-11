@@ -148,7 +148,7 @@ module Network.Google.Partners.Types
     -- * LogMessageRequestClientInfo
     , LogMessageRequestClientInfo
     , logMessageRequestClientInfo
-    , lmrciProperties
+    , lmrciAddtional
 
     -- * Lead
     , Lead

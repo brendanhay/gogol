@@ -24,27 +24,27 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'representativeInfoResponseDivisions' smart constructor.
 newtype RepresentativeInfoResponseDivisions = RepresentativeInfoResponseDivisions
-    { _rirdProperties :: HashMap Text GeographicDivision
+    { _rirdAddtional :: HashMap Text GeographicDivision
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepresentativeInfoResponseDivisions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rirdProperties'
+-- * 'rirdAddtional'
 representativeInfoResponseDivisions
-    :: HashMap Text GeographicDivision -- ^ 'properties'
+    :: HashMap Text GeographicDivision -- ^ 'addtional'
     -> RepresentativeInfoResponseDivisions
-representativeInfoResponseDivisions pRirdProperties_ =
+representativeInfoResponseDivisions pRirdAddtional_ =
     RepresentativeInfoResponseDivisions
-    { _rirdProperties = pRirdProperties_
+    { _rirdAddtional = pRirdAddtional_
     }
 
 -- | The unique Open Civic Data identifier for this division.
-rirdProperties :: Lens' RepresentativeInfoResponseDivisions (HashMap Text GeographicDivision)
-rirdProperties
-  = lens _rirdProperties
-      (\ s a -> s{_rirdProperties = a})
+rirdAddtional :: Lens' RepresentativeInfoResponseDivisions (HashMap Text GeographicDivision)
+rirdAddtional
+  = lens _rirdAddtional
+      (\ s a -> s{_rirdAddtional = a})
 
 instance FromJSON RepresentativeInfoResponseDivisions
          where
@@ -56,7 +56,7 @@ instance FromJSON RepresentativeInfoResponseDivisions
 
 instance ToJSON RepresentativeInfoResponseDivisions
          where
-        toJSON = toJSON . _rirdProperties
+        toJSON = toJSON . _rirdAddtional
 
 -- | The result of a voter info lookup query.
 --
@@ -1520,27 +1520,27 @@ instance ToJSON DivisionSearchResponse where
 --
 -- /See:/ 'representativeInfoDataDivisions' smart constructor.
 newtype RepresentativeInfoDataDivisions = RepresentativeInfoDataDivisions
-    { _riddProperties :: HashMap Text GeographicDivision
+    { _riddAddtional :: HashMap Text GeographicDivision
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepresentativeInfoDataDivisions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'riddProperties'
+-- * 'riddAddtional'
 representativeInfoDataDivisions
-    :: HashMap Text GeographicDivision -- ^ 'properties'
+    :: HashMap Text GeographicDivision -- ^ 'addtional'
     -> RepresentativeInfoDataDivisions
-representativeInfoDataDivisions pRiddProperties_ =
+representativeInfoDataDivisions pRiddAddtional_ =
     RepresentativeInfoDataDivisions
-    { _riddProperties = pRiddProperties_
+    { _riddAddtional = pRiddAddtional_
     }
 
 -- | The unique Open Civic Data identifier for this division.
-riddProperties :: Lens' RepresentativeInfoDataDivisions (HashMap Text GeographicDivision)
-riddProperties
-  = lens _riddProperties
-      (\ s a -> s{_riddProperties = a})
+riddAddtional :: Lens' RepresentativeInfoDataDivisions (HashMap Text GeographicDivision)
+riddAddtional
+  = lens _riddAddtional
+      (\ s a -> s{_riddAddtional = a})
 
 instance FromJSON RepresentativeInfoDataDivisions
          where
@@ -1551,7 +1551,7 @@ instance FromJSON RepresentativeInfoDataDivisions
                    (parseJSONObject o))
 
 instance ToJSON RepresentativeInfoDataDivisions where
-        toJSON = toJSON . _riddProperties
+        toJSON = toJSON . _riddAddtional
 
 -- | Information about individual election officials.
 --

@@ -28,7 +28,7 @@ module Network.Google.AppEngine.Types
     -- * OperationSchema
     , OperationSchema
     , operationSchema
-    , osProperties
+    , osAddtional
 
     -- * TrafficSplit
     , TrafficSplit
@@ -89,7 +89,7 @@ module Network.Google.AppEngine.Types
     -- * VersionEnvVariables
     , VersionEnvVariables
     , versionEnvVariables
-    , vevProperties
+    , vevAddtional
 
     -- * Application
     , Application
@@ -103,7 +103,7 @@ module Network.Google.AppEngine.Types
     -- * VersionBetaSettings
     , VersionBetaSettings
     , versionBetaSettings
-    , vbsProperties
+    , vbsAddtional
 
     -- * Operation
     , Operation
@@ -124,7 +124,7 @@ module Network.Google.AppEngine.Types
     -- * StaticDirectoryHandlerHTTPHeaders
     , StaticDirectoryHandlerHTTPHeaders
     , staticDirectoryHandlerHTTPHeaders
-    , sdhhttphProperties
+    , sdhhttphAddtional
 
     -- * ListVersionsResponse
     , ListVersionsResponse
@@ -166,7 +166,7 @@ module Network.Google.AppEngine.Types
     -- * StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
-    , sdiProperties
+    , sdiAddtional
 
     -- * Network
     , Network
@@ -178,7 +178,7 @@ module Network.Google.AppEngine.Types
     -- * StaticFilesHandlerHTTPHeaders
     , StaticFilesHandlerHTTPHeaders
     , staticFilesHandlerHTTPHeaders
-    , sfhhttphProperties
+    , sfhhttphAddtional
 
     -- * Resources
     , Resources
@@ -190,7 +190,7 @@ module Network.Google.AppEngine.Types
     -- * DeploymentFiles
     , DeploymentFiles
     , deploymentFiles
-    , dfProperties
+    , dfAddtional
 
     -- * CPUUtilization
     , CPUUtilization
@@ -201,7 +201,7 @@ module Network.Google.AppEngine.Types
     -- * TrafficSplitAllocations
     , TrafficSplitAllocations
     , trafficSplitAllocations
-    , tsaProperties
+    , tsaAddtional
 
     -- * ManualScaling
     , ManualScaling
@@ -288,7 +288,7 @@ module Network.Google.AppEngine.Types
     -- * OperationResponse
     , OperationResponse
     , operationResponse
-    , orProperties
+    , orAddtional
 
     -- * ContainerInfo
     , ContainerInfo

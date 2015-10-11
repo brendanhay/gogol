@@ -83,7 +83,7 @@ module Network.Google.ProximityBeacon
     -- ** BeaconProperties
     , BeaconProperties
     , beaconProperties
-    , bpProperties
+    , bpAddtional
 
     -- ** Empty
     , Empty

@@ -593,26 +593,25 @@ instance ToJSON PullRequest where
 --
 -- /See:/ 'pubsubMessageAttributes' smart constructor.
 newtype PubsubMessageAttributes = PubsubMessageAttributes
-    { _pmaProperties :: HashMap Text Text
+    { _pmaAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PubsubMessageAttributes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pmaProperties'
+-- * 'pmaAddtional'
 pubsubMessageAttributes
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> PubsubMessageAttributes
-pubsubMessageAttributes pPmaProperties_ =
+pubsubMessageAttributes pPmaAddtional_ =
     PubsubMessageAttributes
-    { _pmaProperties = pPmaProperties_
+    { _pmaAddtional = pPmaAddtional_
     }
 
-pmaProperties :: Lens' PubsubMessageAttributes (HashMap Text Text)
-pmaProperties
-  = lens _pmaProperties
-      (\ s a -> s{_pmaProperties = a})
+pmaAddtional :: Lens' PubsubMessageAttributes (HashMap Text Text)
+pmaAddtional
+  = lens _pmaAddtional (\ s a -> s{_pmaAddtional = a})
 
 instance FromJSON PubsubMessageAttributes where
         parseJSON
@@ -621,7 +620,7 @@ instance FromJSON PubsubMessageAttributes where
                  PubsubMessageAttributes <$> (parseJSONObject o))
 
 instance ToJSON PubsubMessageAttributes where
-        toJSON = toJSON . _pmaProperties
+        toJSON = toJSON . _pmaAddtional
 
 -- | Request message for \`TestIamPermissions\` method.
 --
@@ -873,26 +872,25 @@ instance ToJSON Policy where
 --
 -- /See:/ 'pushConfigAttributes' smart constructor.
 newtype PushConfigAttributes = PushConfigAttributes
-    { _pcaProperties :: HashMap Text Text
+    { _pcaAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PushConfigAttributes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pcaProperties'
+-- * 'pcaAddtional'
 pushConfigAttributes
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> PushConfigAttributes
-pushConfigAttributes pPcaProperties_ =
+pushConfigAttributes pPcaAddtional_ =
     PushConfigAttributes
-    { _pcaProperties = pPcaProperties_
+    { _pcaAddtional = pPcaAddtional_
     }
 
-pcaProperties :: Lens' PushConfigAttributes (HashMap Text Text)
-pcaProperties
-  = lens _pcaProperties
-      (\ s a -> s{_pcaProperties = a})
+pcaAddtional :: Lens' PushConfigAttributes (HashMap Text Text)
+pcaAddtional
+  = lens _pcaAddtional (\ s a -> s{_pcaAddtional = a})
 
 instance FromJSON PushConfigAttributes where
         parseJSON
@@ -900,7 +898,7 @@ instance FromJSON PushConfigAttributes where
               (\ o -> PushConfigAttributes <$> (parseJSONObject o))
 
 instance ToJSON PushConfigAttributes where
-        toJSON = toJSON . _pcaProperties
+        toJSON = toJSON . _pcaAddtional
 
 -- | A subscription resource.
 --

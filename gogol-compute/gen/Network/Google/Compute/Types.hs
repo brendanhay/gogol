@@ -44,12 +44,12 @@ module Network.Google.Compute.Types
     -- * MachineTypeAggregatedListItems
     , MachineTypeAggregatedListItems
     , machineTypeAggregatedListItems
-    , mtaliProperties
+    , mtaliAddtional
 
     -- * DiskTypeAggregatedListItems
     , DiskTypeAggregatedListItems
     , diskTypeAggregatedListItems
-    , dtaliProperties
+    , dtaliAddtional
 
     -- * FirewallList
     , FirewallList
@@ -79,7 +79,7 @@ module Network.Google.Compute.Types
     -- * AutoscalerAggregatedListItems
     , AutoscalerAggregatedListItems
     , autoscalerAggregatedListItems
-    , aaliProperties
+    , aaliAddtional
 
     -- * InstanceGroupManagersSetInstanceTemplateRequest
     , InstanceGroupManagersSetInstanceTemplateRequest
@@ -223,7 +223,7 @@ module Network.Google.Compute.Types
     -- * InstanceGroupAggregatedListItems
     , InstanceGroupAggregatedListItems
     , instanceGroupAggregatedListItems
-    , igaliProperties
+    , igaliAddtional
 
     -- * TargetPoolList
     , TargetPoolList
@@ -569,7 +569,7 @@ module Network.Google.Compute.Types
     -- * InstanceAggregatedListItems
     , InstanceAggregatedListItems
     , instanceAggregatedListItems
-    , ialiProperties
+    , ialiAddtional
 
     -- * AutoscalersScopedListWarning
     , AutoscalersScopedListWarning
@@ -814,7 +814,7 @@ module Network.Google.Compute.Types
     -- * TargetInstanceAggregatedListItems
     , TargetInstanceAggregatedListItems
     , targetInstanceAggregatedListItems
-    , tialiProperties
+    , tialiAddtional
 
     -- * InstanceGroupAggregatedList
     , InstanceGroupAggregatedList
@@ -918,7 +918,7 @@ module Network.Google.Compute.Types
     -- * DiskAggregatedListItems
     , DiskAggregatedListItems
     , diskAggregatedListItems
-    , daliProperties
+    , daliAddtional
 
     -- * UsageExportLocation
     , UsageExportLocation
@@ -950,7 +950,7 @@ module Network.Google.Compute.Types
     -- * InstanceGroupManagerAggregatedListItems
     , InstanceGroupManagerAggregatedListItems
     , instanceGroupManagerAggregatedListItems
-    , igmaliProperties
+    , igmaliAddtional
 
     -- * InstanceGroupManagersDeleteInstancesRequest
     , InstanceGroupManagersDeleteInstancesRequest
@@ -987,12 +987,12 @@ module Network.Google.Compute.Types
     -- * ForwardingRuleAggregatedListItems
     , ForwardingRuleAggregatedListItems
     , forwardingRuleAggregatedListItems
-    , fraliProperties
+    , fraliAddtional
 
     -- * OperationAggregatedListItems
     , OperationAggregatedListItems
     , operationAggregatedListItems
-    , oaliProperties
+    , oaliAddtional
 
     -- * InstanceGroupManagerActionsSummary
     , InstanceGroupManagerActionsSummary
@@ -1034,7 +1034,7 @@ module Network.Google.Compute.Types
     -- * TargetPoolAggregatedListItems
     , TargetPoolAggregatedListItems
     , targetPoolAggregatedListItems
-    , tpaliProperties
+    , tpaliAddtional
 
     -- * TargetInstancesScopedList
     , TargetInstancesScopedList
@@ -1045,7 +1045,7 @@ module Network.Google.Compute.Types
     -- * AddressAggregatedListItems
     , AddressAggregatedListItems
     , addressAggregatedListItems
-    , aaliProperties
+    , aAddtional
 
     -- * AutoscalerList
     , AutoscalerList
@@ -1365,7 +1365,7 @@ module Network.Google.Compute.Types
     -- * TargetVPNGatewayAggregatedListItems
     , TargetVPNGatewayAggregatedListItems
     , targetVPNGatewayAggregatedListItems
-    , tvgaliProperties
+    , tvgaliAddtional
 
     -- * TargetPoolsScopedListWarning
     , TargetPoolsScopedListWarning
@@ -1695,7 +1695,7 @@ module Network.Google.Compute.Types
     -- * VPNTunnelAggregatedListItems
     , VPNTunnelAggregatedListItems
     , vpnTunnelAggregatedListItems
-    , vtaliProperties
+    , vtaliAddtional
 
     -- * Tags
     , Tags

@@ -48,7 +48,7 @@ module Network.Google.Logging.Types
     -- * WriteLogEntriesRequestCommonLabels
     , WriteLogEntriesRequestCommonLabels
     , writeLogEntriesRequestCommonLabels
-    , wlerclProperties
+    , wlerclAddtional
 
     -- * Empty
     , Empty
@@ -109,7 +109,7 @@ module Network.Google.Logging.Types
     -- * LogEntryProtoPayload
     , LogEntryProtoPayload
     , logEntryProtoPayload
-    , leppProperties
+    , leppAddtional
 
     -- * ListLogServiceIndexesResponse
     , ListLogServiceIndexesResponse
@@ -138,7 +138,7 @@ module Network.Google.Logging.Types
     -- * StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
-    , sdiProperties
+    , sdiAddtional
 
     -- * ListLogsResponse
     , ListLogsResponse
@@ -196,7 +196,7 @@ module Network.Google.Logging.Types
     -- * LogEntryMetadataLabels
     , LogEntryMetadataLabels
     , logEntryMetadataLabels
-    , lemlProperties
+    , lemlAddtional
 
     -- * SourceLocation
     , SourceLocation
@@ -214,7 +214,7 @@ module Network.Google.Logging.Types
     -- * LogEntryStructPayload
     , LogEntryStructPayload
     , logEntryStructPayload
-    , lespProperties
+    , lespAddtional
     ) where
 
 import           Network.Google.Logging.Types.Product

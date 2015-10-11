@@ -132,7 +132,7 @@ module Network.Google.ResourceManager
     -- ** ProjectLabels
     , ProjectLabels
     , projectLabels
-    , plProperties
+    , plAddtional
 
     -- ** Organization
     , Organization

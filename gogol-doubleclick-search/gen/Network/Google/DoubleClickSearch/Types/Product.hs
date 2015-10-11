@@ -24,27 +24,27 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'reportRow' smart constructor.
 newtype ReportRow = ReportRow
-    { _rrProperties :: HashMap Text JSONValue
+    { _rrAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportRow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rrProperties'
+-- * 'rrAddtional'
 reportRow
-    :: HashMap Text JSONValue -- ^ 'properties'
+    :: HashMap Text JSONValue -- ^ 'addtional'
     -> ReportRow
-reportRow pRrProperties_ =
+reportRow pRrAddtional_ =
     ReportRow
-    { _rrProperties = pRrProperties_
+    { _rrAddtional = pRrAddtional_
     }
 
 -- | Indicates the columns that are represented in this row. That is, each
 -- key corresponds to a column with a non-empty cell in this row.
-rrProperties :: Lens' ReportRow (HashMap Text JSONValue)
-rrProperties
-  = lens _rrProperties (\ s a -> s{_rrProperties = a})
+rrAddtional :: Lens' ReportRow (HashMap Text JSONValue)
+rrAddtional
+  = lens _rrAddtional (\ s a -> s{_rrAddtional = a})
 
 instance FromJSON ReportRow where
         parseJSON
@@ -52,7 +52,7 @@ instance FromJSON ReportRow where
               (\ o -> ReportRow <$> (parseJSONObject o))
 
 instance ToJSON ReportRow where
-        toJSON = toJSON . _rrProperties
+        toJSON = toJSON . _rrAddtional
 
 -- | A request object used to create a DoubleClick Search report.
 --

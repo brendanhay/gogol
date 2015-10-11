@@ -300,7 +300,7 @@ module Network.Google.Drive
     -- ** FileOpenWithLinks
     , FileOpenWithLinks
     , fileOpenWithLinks
-    , fowlProperties
+    , fowlAddtional
 
     -- ** AboutAdditionalRoleInfoItemRoleSetsItem
     , AboutAdditionalRoleInfoItemRoleSetsItem
@@ -443,7 +443,7 @@ module Network.Google.Drive
     -- ** RevisionExportLinks
     , RevisionExportLinks
     , revisionExportLinks
-    , relProperties
+    , relAddtional
 
     -- ** FileIndexableText
     , FileIndexableText
@@ -459,7 +459,7 @@ module Network.Google.Drive
     -- ** ChannelParams
     , ChannelParams
     , channelParams
-    , cpProperties
+    , cpAddtional
 
     -- ** FilesPatchModifiedDateBehavior
     , FilesPatchModifiedDateBehavior (..)
@@ -694,7 +694,7 @@ module Network.Google.Drive
     -- ** FileExportLinks
     , FileExportLinks
     , fileExportLinks
-    , felProperties
+    , felAddtional
 
     -- ** CommentList
     , CommentList

@@ -21,7 +21,7 @@ module Network.Google.AndroidPublisher.Types
     -- * InAppProductListings
     , InAppProductListings
     , inAppProductListings
-    , iaplProperties
+    , iaplAddtional
 
     -- * InAppProductsUpdateResponse
     , InAppProductsUpdateResponse
@@ -186,7 +186,7 @@ module Network.Google.AndroidPublisher.Types
     -- * InAppProductPrices
     , InAppProductPrices
     , inAppProductPrices
-    , iAppProperties
+    , iAppAddtional
 
     -- * InAppProductsBatchRequest
     , InAppProductsBatchRequest

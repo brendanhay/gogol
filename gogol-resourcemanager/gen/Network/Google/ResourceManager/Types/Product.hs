@@ -536,25 +536,25 @@ instance ToJSON Policy where
 --
 -- /See:/ 'projectLabels' smart constructor.
 newtype ProjectLabels = ProjectLabels
-    { _plProperties :: HashMap Text Text
+    { _plAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'plProperties'
+-- * 'plAddtional'
 projectLabels
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> ProjectLabels
-projectLabels pPlProperties_ =
+projectLabels pPlAddtional_ =
     ProjectLabels
-    { _plProperties = pPlProperties_
+    { _plAddtional = pPlAddtional_
     }
 
-plProperties :: Lens' ProjectLabels (HashMap Text Text)
-plProperties
-  = lens _plProperties (\ s a -> s{_plProperties = a})
+plAddtional :: Lens' ProjectLabels (HashMap Text Text)
+plAddtional
+  = lens _plAddtional (\ s a -> s{_plAddtional = a})
 
 instance FromJSON ProjectLabels where
         parseJSON
@@ -562,7 +562,7 @@ instance FromJSON ProjectLabels where
               (\ o -> ProjectLabels <$> (parseJSONObject o))
 
 instance ToJSON ProjectLabels where
-        toJSON = toJSON . _plProperties
+        toJSON = toJSON . _plAddtional
 
 -- | The root node in the resource hierarchy to which a particular entity\'s
 -- (e.g., company) resources belong.

@@ -31,7 +31,7 @@ module Network.Google.Prediction.Types
     -- * AnalyzeModelDescriptionConfusionMatrixRowTotals
     , AnalyzeModelDescriptionConfusionMatrixRowTotals
     , analyzeModelDescriptionConfusionMatrixRowTotals
-    , amdcmrtProperties
+    , amdcmrtAddtional
 
     -- * Insert
     , Insert
@@ -56,7 +56,7 @@ module Network.Google.Prediction.Types
     -- * InsertUtilityItem
     , InsertUtilityItem
     , insertUtilityItem
-    , iuiProperties
+    , iuiAddtional
 
     -- * Insert2
     , Insert2
@@ -72,11 +72,6 @@ module Network.Google.Prediction.Types
     , insId
     , insStoragePMMLLocation
     , insModelInfo
-
-    -- * AnalyzeModelDescriptionConfusionMatrixProperties
-    , AnalyzeModelDescriptionConfusionMatrixProperties
-    , analyzeModelDescriptionConfusionMatrixProperties
-    , amdcmpProperties
 
     -- * InsertTrainingInstancesItem
     , InsertTrainingInstancesItem
@@ -138,7 +133,7 @@ module Network.Google.Prediction.Types
     -- * AnalyzeModelDescriptionConfusionMatrix
     , AnalyzeModelDescriptionConfusionMatrix
     , analyzeModelDescriptionConfusionMatrix
-    , amdcmProperties
+    , amdcmAddtional
 
     -- * Output
     , Output
@@ -160,7 +155,7 @@ module Network.Google.Prediction.Types
     -- * AnalyzeErrorsItem
     , AnalyzeErrorsItem
     , analyzeErrorsItem
-    , aeiProperties
+    , aeiAddtional
 
     -- * AnalyzeDataDescription
     , AnalyzeDataDescription
@@ -179,6 +174,11 @@ module Network.Google.Prediction.Types
     , AnalyzeDataDescriptionFeaturesItemText
     , analyzeDataDescriptionFeaturesItemText
     , addfitCount
+
+    -- * AnalyzeModelDescriptionConfusionMatrixAdditional
+    , AnalyzeModelDescriptionConfusionMatrixAdditional
+    , analyzeModelDescriptionConfusionMatrixAdditional
+    , amdcmaAddtional
 
     -- * AnalyzeDataDescriptionFeaturesItem
     , AnalyzeDataDescriptionFeaturesItem

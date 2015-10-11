@@ -110,7 +110,7 @@ module Network.Google.ResourceViews.Types
     -- * ListResourceResponseItemEndpoints
     , ListResourceResponseItemEndpoints
     , listResourceResponseItemEndpoints
-    , lrrieProperties
+    , lrrieAddtional
 
     -- * ZoneViewsAddResourcesRequest
     , ZoneViewsAddResourcesRequest

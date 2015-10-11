@@ -48,7 +48,7 @@ module Network.Google.Reports.Types
     -- * UsageReportParametersItemMsgValueItem
     , UsageReportParametersItemMsgValueItem
     , usageReportParametersItemMsgValueItem
-    , urpimviProperties
+    , urpimviAddtional
 
     -- * Activities
     , Activities
@@ -104,7 +104,7 @@ module Network.Google.Reports.Types
     -- * ChannelParams
     , ChannelParams
     , channelParams
-    , cpProperties
+    , cpAddtional
 
     -- * Activity
     , Activity

@@ -1301,25 +1301,25 @@ instance ToJSON CloudRepoSourceContext where
 --
 -- /See:/ 'debuggeeLabels' smart constructor.
 newtype DebuggeeLabels = DebuggeeLabels
-    { _dlProperties :: HashMap Text Text
+    { _dlAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DebuggeeLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dlProperties'
+-- * 'dlAddtional'
 debuggeeLabels
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> DebuggeeLabels
-debuggeeLabels pDlProperties_ =
+debuggeeLabels pDlAddtional_ =
     DebuggeeLabels
-    { _dlProperties = pDlProperties_
+    { _dlAddtional = pDlAddtional_
     }
 
-dlProperties :: Lens' DebuggeeLabels (HashMap Text Text)
-dlProperties
-  = lens _dlProperties (\ s a -> s{_dlProperties = a})
+dlAddtional :: Lens' DebuggeeLabels (HashMap Text Text)
+dlAddtional
+  = lens _dlAddtional (\ s a -> s{_dlAddtional = a})
 
 instance FromJSON DebuggeeLabels where
         parseJSON
@@ -1327,7 +1327,7 @@ instance FromJSON DebuggeeLabels where
               (\ o -> DebuggeeLabels <$> (parseJSONObject o))
 
 instance ToJSON DebuggeeLabels where
-        toJSON = toJSON . _dlProperties
+        toJSON = toJSON . _dlAddtional
 
 -- | Represents the application to debug. The application may include one or
 -- more replicated processes executing the same code. Each of these

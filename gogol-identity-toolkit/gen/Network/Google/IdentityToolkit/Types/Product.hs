@@ -1025,26 +1025,26 @@ instance ToJSON CreateAuthURIResponse where
 --
 -- /See:/ 'identitytoolkitRelyingPartyGetPublicKeysResponse' smart constructor.
 newtype IdentitytoolkitRelyingPartyGetPublicKeysResponse = IdentitytoolkitRelyingPartyGetPublicKeysResponse
-    { _irpgpkrProperties :: HashMap Text Text
+    { _irpgpkrAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyGetPublicKeysResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'irpgpkrProperties'
+-- * 'irpgpkrAddtional'
 identitytoolkitRelyingPartyGetPublicKeysResponse
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> IdentitytoolkitRelyingPartyGetPublicKeysResponse
-identitytoolkitRelyingPartyGetPublicKeysResponse pIrpgpkrProperties_ =
+identitytoolkitRelyingPartyGetPublicKeysResponse pIrpgpkrAddtional_ =
     IdentitytoolkitRelyingPartyGetPublicKeysResponse
-    { _irpgpkrProperties = pIrpgpkrProperties_
+    { _irpgpkrAddtional = pIrpgpkrAddtional_
     }
 
-irpgpkrProperties :: Lens' IdentitytoolkitRelyingPartyGetPublicKeysResponse (HashMap Text Text)
-irpgpkrProperties
-  = lens _irpgpkrProperties
-      (\ s a -> s{_irpgpkrProperties = a})
+irpgpkrAddtional :: Lens' IdentitytoolkitRelyingPartyGetPublicKeysResponse (HashMap Text Text)
+irpgpkrAddtional
+  = lens _irpgpkrAddtional
+      (\ s a -> s{_irpgpkrAddtional = a})
 
 instance FromJSON
          IdentitytoolkitRelyingPartyGetPublicKeysResponse
@@ -1059,7 +1059,7 @@ instance FromJSON
 instance ToJSON
          IdentitytoolkitRelyingPartyGetPublicKeysResponse
          where
-        toJSON = toJSON . _irpgpkrProperties
+        toJSON = toJSON . _irpgpkrAddtional
 
 -- | Request of getting a code for user confirmation (reset password, change
 -- email etc.)

@@ -90,7 +90,7 @@ module Network.Google.Analytics.Types
     -- * GaDataTotalsForAllResults
     , GaDataTotalsForAllResults
     , gaDataTotalsForAllResults
-    , gdtfarProperties
+    , gdtfarAddtional
 
     -- * ProFileParentLink
     , ProFileParentLink
@@ -404,7 +404,7 @@ module Network.Google.Analytics.Types
     -- * RealtimeDataTotalsForAllResults
     , RealtimeDataTotalsForAllResults
     , realtimeDataTotalsForAllResults
-    , rdtfarProperties
+    , rdtfarAddtional
 
     -- * CustomDataSource
     , CustomDataSource
@@ -972,7 +972,7 @@ module Network.Google.Analytics.Types
     -- * McfDataTotalsForAllResults
     , McfDataTotalsForAllResults
     , mcfDataTotalsForAllResults
-    , mdtfarProperties
+    , mdtfarAddtional
 
     -- * UnSampledReportCloudStorageDownloadDetails
     , UnSampledReportCloudStorageDownloadDetails
@@ -1002,7 +1002,7 @@ module Network.Google.Analytics.Types
     -- * ColumnAttributes
     , ColumnAttributes
     , columnAttributes
-    , caProperties
+    , caAddtional
     ) where
 
 import           Network.Google.Analytics.Types.Product

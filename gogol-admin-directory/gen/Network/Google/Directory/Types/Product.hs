@@ -1502,26 +1502,25 @@ instance ToJSON Tokens where
 --
 -- /See:/ 'userCustomSchemas' smart constructor.
 newtype UserCustomSchemas = UserCustomSchemas
-    { _ucsProperties :: HashMap Text UserCustomProperties
+    { _ucsAddtional :: HashMap Text UserCustomProperties
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserCustomSchemas' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ucsProperties'
+-- * 'ucsAddtional'
 userCustomSchemas
-    :: HashMap Text UserCustomProperties -- ^ 'properties'
+    :: HashMap Text UserCustomProperties -- ^ 'addtional'
     -> UserCustomSchemas
-userCustomSchemas pUcsProperties_ =
+userCustomSchemas pUcsAddtional_ =
     UserCustomSchemas
-    { _ucsProperties = pUcsProperties_
+    { _ucsAddtional = pUcsAddtional_
     }
 
-ucsProperties :: Lens' UserCustomSchemas (HashMap Text UserCustomProperties)
-ucsProperties
-  = lens _ucsProperties
-      (\ s a -> s{_ucsProperties = a})
+ucsAddtional :: Lens' UserCustomSchemas (HashMap Text UserCustomProperties)
+ucsAddtional
+  = lens _ucsAddtional (\ s a -> s{_ucsAddtional = a})
 
 instance FromJSON UserCustomSchemas where
         parseJSON
@@ -1529,7 +1528,7 @@ instance FromJSON UserCustomSchemas where
               (\ o -> UserCustomSchemas <$> (parseJSONObject o))
 
 instance ToJSON UserCustomSchemas where
-        toJSON = toJSON . _ucsProperties
+        toJSON = toJSON . _ucsAddtional
 
 -- | JSON response template to list aliases in Directory API.
 --
@@ -2961,26 +2960,26 @@ instance ToJSON UserRelation where
 --
 -- /See:/ 'channelParams' smart constructor.
 newtype ChannelParams = ChannelParams
-    { _cpProperties :: HashMap Text Text
+    { _cpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cpProperties'
+-- * 'cpAddtional'
 channelParams
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> ChannelParams
-channelParams pCpProperties_ =
+channelParams pCpAddtional_ =
     ChannelParams
-    { _cpProperties = pCpProperties_
+    { _cpAddtional = pCpAddtional_
     }
 
 -- | Declares a new parameter by name.
-cpProperties :: Lens' ChannelParams (HashMap Text Text)
-cpProperties
-  = lens _cpProperties (\ s a -> s{_cpProperties = a})
+cpAddtional :: Lens' ChannelParams (HashMap Text Text)
+cpAddtional
+  = lens _cpAddtional (\ s a -> s{_cpAddtional = a})
 
 instance FromJSON ChannelParams where
         parseJSON
@@ -2988,7 +2987,7 @@ instance FromJSON ChannelParams where
               (\ o -> ChannelParams <$> (parseJSONObject o))
 
 instance ToJSON ChannelParams where
-        toJSON = toJSON . _cpProperties
+        toJSON = toJSON . _cpAddtional
 
 -- | JSON template for an organization entry.
 --
@@ -3985,26 +3984,25 @@ instance ToJSON Member where
 --
 -- /See:/ 'userCustomProperties' smart constructor.
 newtype UserCustomProperties = UserCustomProperties
-    { _ucpProperties :: HashMap Text JSONValue
+    { _ucpAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserCustomProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ucpProperties'
+-- * 'ucpAddtional'
 userCustomProperties
-    :: HashMap Text JSONValue -- ^ 'properties'
+    :: HashMap Text JSONValue -- ^ 'addtional'
     -> UserCustomProperties
-userCustomProperties pUcpProperties_ =
+userCustomProperties pUcpAddtional_ =
     UserCustomProperties
-    { _ucpProperties = pUcpProperties_
+    { _ucpAddtional = pUcpAddtional_
     }
 
-ucpProperties :: Lens' UserCustomProperties (HashMap Text JSONValue)
-ucpProperties
-  = lens _ucpProperties
-      (\ s a -> s{_ucpProperties = a})
+ucpAddtional :: Lens' UserCustomProperties (HashMap Text JSONValue)
+ucpAddtional
+  = lens _ucpAddtional (\ s a -> s{_ucpAddtional = a})
 
 instance FromJSON UserCustomProperties where
         parseJSON
@@ -4012,7 +4010,7 @@ instance FromJSON UserCustomProperties where
               (\ o -> UserCustomProperties <$> (parseJSONObject o))
 
 instance ToJSON UserCustomProperties where
-        toJSON = toJSON . _ucpProperties
+        toJSON = toJSON . _ucpAddtional
 
 -- | Template for notifications list response.
 --

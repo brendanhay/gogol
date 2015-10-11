@@ -274,26 +274,26 @@ instance ToJSON UsageReports where
 --
 -- /See:/ 'usageReportParametersItemMsgValueItem' smart constructor.
 newtype UsageReportParametersItemMsgValueItem = UsageReportParametersItemMsgValueItem
-    { _urpimviProperties :: HashMap Text JSONValue
+    { _urpimviAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsageReportParametersItemMsgValueItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'urpimviProperties'
+-- * 'urpimviAddtional'
 usageReportParametersItemMsgValueItem
-    :: HashMap Text JSONValue -- ^ 'properties'
+    :: HashMap Text JSONValue -- ^ 'addtional'
     -> UsageReportParametersItemMsgValueItem
-usageReportParametersItemMsgValueItem pUrpimviProperties_ =
+usageReportParametersItemMsgValueItem pUrpimviAddtional_ =
     UsageReportParametersItemMsgValueItem
-    { _urpimviProperties = pUrpimviProperties_
+    { _urpimviAddtional = pUrpimviAddtional_
     }
 
-urpimviProperties :: Lens' UsageReportParametersItemMsgValueItem (HashMap Text JSONValue)
-urpimviProperties
-  = lens _urpimviProperties
-      (\ s a -> s{_urpimviProperties = a})
+urpimviAddtional :: Lens' UsageReportParametersItemMsgValueItem (HashMap Text JSONValue)
+urpimviAddtional
+  = lens _urpimviAddtional
+      (\ s a -> s{_urpimviAddtional = a})
 
 instance FromJSON
          UsageReportParametersItemMsgValueItem where
@@ -305,7 +305,7 @@ instance FromJSON
 
 instance ToJSON UsageReportParametersItemMsgValueItem
          where
-        toJSON = toJSON . _urpimviProperties
+        toJSON = toJSON . _urpimviAddtional
 
 -- | JSON template for a collection of activites.
 --
@@ -754,26 +754,26 @@ instance ToJSON ActivityEventsItem where
 --
 -- /See:/ 'channelParams' smart constructor.
 newtype ChannelParams = ChannelParams
-    { _cpProperties :: HashMap Text Text
+    { _cpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cpProperties'
+-- * 'cpAddtional'
 channelParams
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> ChannelParams
-channelParams pCpProperties_ =
+channelParams pCpAddtional_ =
     ChannelParams
-    { _cpProperties = pCpProperties_
+    { _cpAddtional = pCpAddtional_
     }
 
 -- | Declares a new parameter by name.
-cpProperties :: Lens' ChannelParams (HashMap Text Text)
-cpProperties
-  = lens _cpProperties (\ s a -> s{_cpProperties = a})
+cpAddtional :: Lens' ChannelParams (HashMap Text Text)
+cpAddtional
+  = lens _cpAddtional (\ s a -> s{_cpAddtional = a})
 
 instance FromJSON ChannelParams where
         parseJSON
@@ -781,7 +781,7 @@ instance FromJSON ChannelParams where
               (\ o -> ChannelParams <$> (parseJSONObject o))
 
 instance ToJSON ChannelParams where
-        toJSON = toJSON . _cpProperties
+        toJSON = toJSON . _cpAddtional
 
 -- | JSON template for the activity resource.
 --

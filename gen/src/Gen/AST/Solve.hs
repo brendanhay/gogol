@@ -151,16 +151,16 @@ getPrefix :: Global -> AST Prefix
 getPrefix g = loc "getPrefix" g $ memo prefixed g go
   where
     go = \case
-        SObj _ (Obj _ ps) -> field ps
-        SEnm _ (Enm vs)   -> branch (map fst vs)
-        _                 -> pure mempty
+        SObj _ (Obj aps ps) -> field (isJust aps) ps
+        SEnm _ (Enm vs)     -> branch (map fst vs)
+        _                   -> pure mempty
 
-    field rs = do
+    field aps rs = do
         p <- uniq fields (acronymPrefixes g) ks
         pure (Prefix p)
       where
         ls = Map.keys rs
-        ks = Set.fromList (map (CI.mk . local) ls)
+        ks = Set.fromList (map (CI.mk . local) (ls ++ ["additional" | aps]))
 
     branch vs = do
         p <- uniq branches ps (Set.fromList (map CI.mk vs))

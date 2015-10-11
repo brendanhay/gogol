@@ -169,7 +169,7 @@ module Network.Google.Storage
     -- ** ObjectMetadata
     , ObjectMetadata
     , objectMetadata
-    , omProperties
+    , omAddtional
 
     -- ** ObjectsPatchPredefinedACL
     , ObjectsPatchPredefinedACL (..)
@@ -316,7 +316,7 @@ module Network.Google.Storage
     -- ** ChannelParams
     , ChannelParams
     , channelParams
-    , cpProperties
+    , cpAddtional
 
     -- ** BucketsListProjection
     , BucketsListProjection (..)

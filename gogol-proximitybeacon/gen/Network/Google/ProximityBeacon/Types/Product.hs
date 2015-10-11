@@ -145,25 +145,25 @@ instance ToJSON AttachmentInfo where
 --
 -- /See:/ 'beaconProperties' smart constructor.
 newtype BeaconProperties = BeaconProperties
-    { _bpProperties :: HashMap Text Text
+    { _bpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bpProperties'
+-- * 'bpAddtional'
 beaconProperties
-    :: HashMap Text Text -- ^ 'properties'
+    :: HashMap Text Text -- ^ 'addtional'
     -> BeaconProperties
-beaconProperties pBpProperties_ =
+beaconProperties pBpAddtional_ =
     BeaconProperties
-    { _bpProperties = pBpProperties_
+    { _bpAddtional = pBpAddtional_
     }
 
-bpProperties :: Lens' BeaconProperties (HashMap Text Text)
-bpProperties
-  = lens _bpProperties (\ s a -> s{_bpProperties = a})
+bpAddtional :: Lens' BeaconProperties (HashMap Text Text)
+bpAddtional
+  = lens _bpAddtional (\ s a -> s{_bpAddtional = a})
 
 instance FromJSON BeaconProperties where
         parseJSON
@@ -171,7 +171,7 @@ instance FromJSON BeaconProperties where
               (\ o -> BeaconProperties <$> (parseJSONObject o))
 
 instance ToJSON BeaconProperties where
-        toJSON = toJSON . _bpProperties
+        toJSON = toJSON . _bpAddtional
 
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the

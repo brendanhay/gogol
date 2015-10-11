@@ -90,7 +90,7 @@ schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
         Arr <$> schema p (Just "item") (setRequired e)
 
     object p (Obj aps ps) = Obj
-       <$> traverse (localSchema p "properties") aps
+       <$> traverse (localSchema p "additional") aps
        <*> Map.traverseWithKey (localSchema p) ps
 
     name i p xs

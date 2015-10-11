@@ -74,7 +74,7 @@ renderSchema s = go (_schema s)
         a <- traverse getSolved aps
         p <- traverse getSolved ps
         let ap = setAdditional <$> a
-            ts = maybe p (flip (Map.insert "properties") p) ap
+            ts = maybe p (flip (Map.insert "addtional") p) ap
         prod ts
       where
         prod ts = Prod (dname k) (i ^. iDescription)
