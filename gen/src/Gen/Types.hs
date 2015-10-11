@@ -332,7 +332,8 @@ initial s = Memo s mempty mempty res core mempty mempty mempty
 
     -- Types available in Network.Google.Prelude.
     core = Map.fromList
-        [ ("Body", SLit requiredInfo Body)
+        [ ("Body",      SLit requiredInfo Body)
+        , ("JSONValue", SLit requiredInfo JSONValue)
         ]
 
 makeLenses ''Memo

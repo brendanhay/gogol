@@ -201,6 +201,7 @@ data Lit
     | DateTime
     -- Core types.
     | Body
+    | JSONValue
     | Alt Text
     | Key
     | OAuthToken

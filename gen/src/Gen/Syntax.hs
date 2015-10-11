@@ -461,6 +461,7 @@ externalLit = \case
     Key        -> TyCon "AuthKey"
     OAuthToken -> TyCon "OAuthToken"
     Body       -> TyCon "Stream"
+    JSONValue  -> TyCon "JSONValue"
 
 internalLit :: Lit -> Type
 internalLit = \case
@@ -482,6 +483,7 @@ internalLit = \case
     Key        -> TyCon "AuthKey"
     OAuthToken -> TyCon "OAuthToken"
     Body       -> TyCon "Stream"
+    JSONValue  -> TyCon "JSONValue"
 
 mapping :: TType -> Exp -> Exp
 mapping t e = infixE e "." (go t)
