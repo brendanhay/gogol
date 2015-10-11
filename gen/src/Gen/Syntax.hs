@@ -263,7 +263,7 @@ jsonDecls g p (Map.toList -> rs) = [from, to]
         ]
 
     decode (l, s)
-        | _additional s   = app (var "parseJSON") (app (var "Object") (var "o"))
+        | _additional s   = app (var "parseJSONObject") (var "o")
         | Just x <- def s = defJS l x
         | required s      = reqJS l
         | monoid s        = defJS l (var "mempty")

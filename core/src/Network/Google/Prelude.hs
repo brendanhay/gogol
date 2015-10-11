@@ -15,6 +15,7 @@ import           Control.Lens                as Export (Lens', lens, mapping,
                                                         (^.), _Just)
 import           Data.Data                   as Export (Data, Typeable)
 import           Data.Hashable               as Export
+import           Data.HashMap.Strict         as Export (HashMap)
 import           Data.Int                    as Export (Int32, Int64)
 import           Data.Maybe                  as Export
 import           Data.Monoid                 as Export (mempty, (<>))

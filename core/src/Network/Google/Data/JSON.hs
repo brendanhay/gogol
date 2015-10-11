@@ -12,6 +12,7 @@
 --
 module Network.Google.Data.JSON
     ( JSONValue
+    , parseJSONObject
     , parseJSONText
     , toJSONText
 
@@ -31,9 +32,14 @@ module Network.Google.Data.JSON
 
 import           Data.Aeson
 import           Data.Aeson.Types
+import           Data.HashMap.Strict (HashMap)
+import           Data.Text           (Text)
 import           Servant.API
 
 type JSONValue = Value
+
+parseJSONObject :: FromJSON a => HashMap Text Value -> Parser a
+parseJSONObject = parseJSON . Object
 
 parseJSONText :: FromText a => String -> Value -> Parser a
 parseJSONText n = withText n (maybe (fail n) pure . fromText)

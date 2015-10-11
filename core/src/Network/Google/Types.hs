@@ -49,8 +49,9 @@ import           GHC.TypeLits
 import           Network.HTTP.Client          (HttpException, RequestBody (..))
 import qualified Network.HTTP.Client          as Client
 import           Network.HTTP.Media           hiding (Accept)
-import           Network.HTTP.Types
-import           Servant.API                  hiding (Header)
+import           Network.HTTP.Types           hiding (Header)
+import qualified Network.HTTP.Types           as HTTP
+import           Servant.API
 import           Servant.Utils.Links
 
 data AltJSON = AltJSON
@@ -66,10 +67,13 @@ instance ToText AltMedia where
    toText = const "media"
 
 newtype AuthKey = AuthKey Text
-    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToText, FromText)
+    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToText)
 
 newtype OAuthToken = OAuthToken Text
-    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToText, FromText)
+    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable)
+
+instance ToText OAuthToken where
+    toText (OAuthToken t) = "Bearer " <> t
 
 class GoogleAuth a where
     _AuthKey   :: Traversal' a AuthKey
@@ -118,7 +122,7 @@ data SerializeError = SerializeError'
     -- , _serializeMessage :: String
     } deriving (Eq, Show, Typeable)
 
-data ServiceError = ServiceError' !Status !MediaType [Header] LBS.ByteString
+data ServiceError = ServiceError' !Status !MediaType [HTTP.Header] LBS.ByteString
      -- _serviceAbbrev    :: !Abbrev
     -- , _serviceStatus    :: !Status
     -- , _serviceHeaders   :: [Header]
@@ -166,6 +170,7 @@ data RequestBuilder = RequestBuilder
     , _rqBasePath :: ByteString
     , _rqPath     :: Builder
     , _rqQuery    :: DList (Text, Maybe Text)
+    , _rqHeaders  :: DList (Text, Text)
     , _rqBody     :: Maybe (MediaType, Stream)
     }
 
@@ -179,6 +184,7 @@ defaultRequest h p = RequestBuilder
     , _rqBasePath = p
     , _rqPath     = mempty
     , _rqQuery    = mempty
+    , _rqHeaders  = mempty
     , _rqBody     = Nothing
     }
 
@@ -190,6 +196,10 @@ appendPaths rq = appendPath rq . foldMap (mappend "/" . buildText)
 
 appendQuery :: RequestBuilder -> Text -> Maybe Text -> RequestBuilder
 appendQuery rq k v = rq { _rqQuery = DList.snoc (_rqQuery rq) (k, v) }
+
+appendHeader :: RequestBuilder -> Text -> Maybe Text -> RequestBuilder
+appendHeader rq _ Nothing  = rq
+appendHeader rq k (Just v) = rq { _rqHeaders = DList.snoc (_rqHeaders rq) (k, v) }
 
 setStream :: RequestBuilder -> MediaType -> Stream -> RequestBuilder
 setStream rq c x = rq { _rqBody = Just (c, x) }
@@ -395,6 +405,20 @@ instance ( KnownSymbol  s
         go r = appendQuery r k . Just . toText
 
         k = textSymbol (Proxy :: Proxy s)
+
+instance ( KnownSymbol  s
+         , ToText       a
+         , GoogleClient fn
+         ) => GoogleClient (Header s a :> fn) where
+    type Fn (Header s a :> fn) = Maybe a -> Fn fn
+
+    clientBuild Proxy rq mx = clientBuild (Proxy :: Proxy fn) $
+        case mx of
+            Nothing -> rq
+            Just x  -> appendHeader rq k v
+              where
+                k = textSymbol (Proxy :: Proxy s)
+                v = Just (toText x)
 
 instance ( ToStream c a
          , GoogleClient fn

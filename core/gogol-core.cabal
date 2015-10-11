@@ -59,6 +59,7 @@ library
         , scientific         >= 0.3
         , servant            >= 0.4.4
         , text               >= 1.1
+        , unordered-containers
 
     if !impl(ghc>=7.9)
         build-depends:
