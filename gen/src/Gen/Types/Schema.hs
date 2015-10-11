@@ -54,6 +54,7 @@ newtype Fix f = Fix (f (Fix f))
 data Location
     = Query
     | Path
+    | Header
       deriving (Eq, Show)
 
 deriveJSON options ''Location

@@ -128,15 +128,16 @@ getDerive g = loc "getDerive" g $ memo derived g go
         SObj _ (Obj _ ps) -> foldM props base (Map.elems ps)
 
     literal = \case
-        Text  -> base <> [DRead, DOrd, DIsString]
-        Bool  -> enum
-        Time  -> DRead : base
-        Date  -> DRead : base
-        Body  -> []
-        Alt _ -> DRead : base
-        Key   -> DRead : base
+        Text       -> base <> [DRead, DOrd, DIsString]
+        Bool       -> enum
+        Time       -> DRead : base
+        Date       -> DRead : base
+        Body       -> []
+        Alt _      -> DRead : base
+        Key        -> DRead : base
+        OAuthToken -> DRead : base
         -- FIXME: Add numeric cases
-        _     -> [DRead, DNum, DIntegral, DReal] <> enum
+        _          -> [DRead, DNum, DIntegral, DReal] <> enum
 
     props ds x = intersect ds <$> getDerive x
 

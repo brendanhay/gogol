@@ -97,10 +97,12 @@ verbAlias n m
            let t = terminalType (_type (_pParam x))
                n = sing (local k)
             in case _pLocation x of
+                Header | local k == "oauth_token"
+                       -> Just $ TyApp (TyApp (TyCon "Header") (sing "Authorization")) t
                 Query | x ^. iRepeated
-                      -> Just $ TyApp (TyApp (TyCon "QueryParams") n) t
-                Query -> Just $ TyApp (TyApp (TyCon "QueryParam")  n) t
-                Path  -> Nothing
+                       -> Just $ TyApp (TyApp (TyCon "QueryParams") n) t
+                Query  -> Just $ TyApp (TyApp (TyCon "QueryParam")  n) t
+                Path   -> Nothing
 
     media :: [Type]
     media | Just b <- _mRequest m

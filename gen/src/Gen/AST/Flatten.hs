@@ -110,11 +110,11 @@ schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
                            g ml p
 
 globalParam :: Local -> Param (Fix Schema) -> AST (Param Global)
-globalParam l p = ($ p) $ case l of
-    "alt"         -> overrideParam l (Alt alt)
-    "key"         -> overrideParam l Key
-    "oauth_token" -> overrideParam l OAuthToken
-    _             -> localParam "" l
+globalParam l p = case l of
+    "alt"         -> overrideParam l (Alt alt) p
+    "key"         -> overrideParam l Key p
+    "oauth_token" -> overrideParam l OAuthToken (p & pLocation .~ Header)
+    _             -> localParam "" l p
   where
     alt = alternate $ fromMaybe "JSON" (p ^. iDefault)
 
