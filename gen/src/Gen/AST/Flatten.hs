@@ -89,8 +89,9 @@ schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
     array p (Arr e) =
         Arr <$> schema p (Just "item") (setRequired e)
 
-    object p (Obj aps ps) =
-        Obj Nothing <$> Map.traverseWithKey (localSchema p) ps
+    object p (Obj aps ps) = Obj
+       <$> traverse (localSchema p "properties") aps
+       <*> Map.traverseWithKey (localSchema p) ps
 
     name i p xs
         | Just x <- i ^. iId = pure x

@@ -263,14 +263,23 @@ jsonDecls g p (Map.toList -> rs) = [from, to]
         ]
 
     decode (l, s)
+        | _additional s   = app (var "parseJSON") (app (var "Object") (var "o"))
         | Just x <- def s = defJS l x
         | required s      = reqJS l
         | monoid s        = defJS l (var "mempty")
         | otherwise       = optJS l
 
-    to = InstDecl noLoc Nothing [] [] (unqual "ToJSON") [tycon g]
-        [ wildcardD "toJSON" g omit none (map encode rs)
-        ]
+    to = case rs of
+        [(k, v)] | _additional v ->
+            InstDecl noLoc Nothing [] [] (unqual "ToJSON") [tycon g]
+                [ funD "toJSON" $
+                    infixApp (var "toJSON") "." (var (fname p k))
+                ]
+
+        _                   ->
+            InstDecl noLoc Nothing [] [] (unqual "ToJSON") [tycon g]
+                [ wildcardD "toJSON" g omit none (map encode rs)
+                ]
 
     omit = app (var "object")
          . app (var "catMaybes")
@@ -420,13 +429,17 @@ externalType = \case
     TMaybe  t          -> TyApp (TyCon "Maybe") (externalType t)
     TList   t          -> TyList (externalType t)
     TLit    l          -> externalLit l
+    TMap  k v          ->
+        TyApp (TyApp (TyCon "HashMap") (externalType k)) (externalType (require v))
 
 internalType :: TType -> Type
 internalType = \case
-    TType   r   -> tycon r
-    TMaybe  t   -> TyApp (TyCon "Maybe") (internalType t)
-    TList   t   -> TyList (internalType t)
-    TLit    l   -> internalLit l
+    TType   r -> tycon r
+    TMaybe  t -> TyApp (TyCon "Maybe") (internalType t)
+    TList   t -> TyList (internalType t)
+    TLit    l -> internalLit l
+    TMap  k v ->
+        TyApp (TyApp (TyCon "HashMap") (internalType k)) (internalType (require v))
 
 externalLit :: Lit -> Type
 externalLit = \case
@@ -489,6 +502,10 @@ iso = \case
     TLit Date     -> Just (var "_Date")
     TLit DateTime -> Just (var "_DateTime")
     _             -> Nothing
+
+require :: TType -> TType
+require (TMaybe t) = t
+require t          = t
 
 strict :: Type -> Type
 strict = TyBang BangedTy . \case

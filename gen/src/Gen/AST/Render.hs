@@ -70,7 +70,12 @@ renderSchema s = go (_schema s)
     enum i (Enm vs) = Sum (dname k) (i ^. iDescription) $
         map (\(v, h) -> Branch (bname p v) v h) vs
 
-    object i (Obj aps ps) = traverse getSolved ps >>= prod
+    object i (Obj aps ps) = do
+        a <- traverse getSolved aps
+        p <- traverse getSolved ps
+        let ap = setAdditional <$> a
+            ts = maybe p (flip (Map.insert "properties") p) ap
+        prod ts
       where
         prod ts = Prod (dname k) (i ^. iDescription)
             <$> pp Indent (objDecl k p ds ts)

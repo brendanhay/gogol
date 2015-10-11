@@ -269,6 +269,7 @@ data TType
     | TLit   Lit
     | TMaybe TType
     | TList  TType
+    | TMap   TType TType
       deriving (Eq, Show)
 
 data Derive
@@ -288,11 +289,12 @@ data Derive
       deriving (Eq, Show)
 
 data Solved = Solved
-    { _unique   :: Global
-    , _prefix   :: Prefix
-    , _schema   :: Schema Global
-    , _type     :: TType
-    , _deriving :: [Derive]
+    { _additional :: Bool
+    , _unique     :: Global
+    , _prefix     :: Prefix
+    , _schema     :: Schema Global
+    , _type       :: TType
+    , _deriving   :: [Derive]
     } deriving (Show)
 
 instance HasInfo Solved where
@@ -302,6 +304,12 @@ instance HasInfo Solved where
 
 monoid :: Solved -> Bool
 monoid = elem DMonoid . _deriving
+
+setAdditional :: Solved -> Solved
+setAdditional s = setRequired $ s
+    { _additional = True
+    , _type       = TMap (TLit Text) (_type s)
+    }
 
 type Seen = Map (CI Text) {- Prefix -} (Set (CI Text)) {- Inhabitants -}
 

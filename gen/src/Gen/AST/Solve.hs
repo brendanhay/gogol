@@ -72,10 +72,11 @@ method = traverse getSolved
 
 getSolved :: Global -> AST Solved
 getSolved g = loc "getSolved" g $
-    Solved g <$> getPrefix g
-             <*> getSchema g
-             <*> getType   g
-             <*> getDerive g
+    Solved False g
+        <$> getPrefix g
+        <*> getSchema g
+        <*> getType   g
+        <*> getDerive g
 
 getSchema :: Global -> AST (Schema Global)
 getSchema g = do
