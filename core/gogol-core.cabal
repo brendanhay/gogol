@@ -47,8 +47,8 @@ library
         , base               >= 4.7   && < 5
         , bytestring         >= 0.9
         , conduit            >= 1.1
-        , data-default-class >= 0.0.1
         , dlist              >= 0.7
+        , case-insensitive 
         , exceptions         >= 0.6
         , hashable           >= 1.2
         , http-client        >= 0.4.4

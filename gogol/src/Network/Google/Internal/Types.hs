@@ -14,28 +14,3 @@ module Network.Google.Internal.Types where
 
 import           Data.Data
 import           GHC.Generics
-
--- | An integral value representing seconds.
-newtype Seconds = Seconds Int
-    deriving
-        ( Eq
-        , Ord
-        , Read
-        , Show
-        , Enum
-        , Num
-        , Bounded
-        , Integral
-        , Real
-        , Data
-        , Typeable
-        , Generic
-        )
-
-seconds :: Seconds -> Int
-seconds (Seconds n)
-    | n < 0     = 0
-    | otherwise = n
-
-microseconds :: Seconds -> Int
-microseconds =  (1000000 *) . seconds

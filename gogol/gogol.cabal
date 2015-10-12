@@ -32,7 +32,8 @@ library
           Network.Google.Env
 
     other-modules:
-          Network.Google.Internal.Types
+          Network.Google.Internal.HTTP
+        , Network.Google.Internal.Types
 
     build-depends:
           base       >= 4.7 && < 5
@@ -46,4 +47,11 @@ library
         , retry
         , time
         , transformers
+        , data-default-class >= 0.0.1
         , transformers-base
+        , http-types
+        , http-media
+        , text
+        , mmorph
+        , conduit
+        , bifunctors

@@ -100,5 +100,5 @@ runGoogle e m = liftResourceT $ runReaderT (unGoogle m) e -- (e ^. environment)
 send :: GoogleRequest a => a -> m (Rs a)
 send = undefined
 
-download :: GoogleRequest (MediaDownload a) => a -> m (Rs (MediaDownload a))
-download = send . MediaDownload
+-- download :: GoogleRequest (MediaDownload a) => a -> m (Rs (MediaDownload a))
+-- download = send . MediaDownload

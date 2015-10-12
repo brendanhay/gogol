@@ -115,7 +115,7 @@ verbAlias n m
               [TyApp (TyApp (TyCon "ReqBody") json) (tycon (ref b))]
 
           | _mSupportsMediaUpload m =
-              [TyApp (TyApp (TyCon "ReqBody") octet) (TyCon "Stream")]
+              [TyApp (TyApp (TyCon "ReqBody") octet) (TyCon "RequestBody")]
 
           | otherwise = []
 

@@ -27,12 +27,13 @@ import           Control.Monad.Catch
 import           Control.Monad.Trans.Resource
 import           Data.Aeson
 import           Data.ByteString              (ByteString)
+import qualified Data.ByteString.Char8        as BS8
 import qualified Data.ByteString.Lazy         as LBS
+import qualified Data.CaseInsensitive         as CI
 import           Data.Coerce
 import           Data.Conduit
 import qualified Data.Conduit.List            as CL
 import           Data.Data
-import           Data.Default.Class           (def)
 import           Data.DList                   (DList)
 import qualified Data.DList                   as DList
 import           Data.Foldable                (foldMap, foldl')
@@ -42,12 +43,12 @@ import           Data.Monoid
 import           Data.Proxy
 import           Data.Text                    (Text)
 import qualified Data.Text                    as Text
+import qualified Data.Text.Encoding           as Text
 import           Data.Text.Lazy.Builder       (Builder)
 import qualified Data.Text.Lazy.Builder       as Build
 import           GHC.Generics
 import           GHC.TypeLits
 import           Network.HTTP.Client          (HttpException, RequestBody (..))
-import qualified Network.HTTP.Client          as Client
 import           Network.HTTP.Media           hiding (Accept)
 import           Network.HTTP.Types           hiding (Header)
 import qualified Network.HTTP.Types           as HTTP
@@ -99,13 +100,10 @@ _Default = iso f Just
     f (Just x) = x
     f Nothing  = mempty
 
--- | A convenience alias to avoid type ambiguity.
-type ClientRequest = Client.Request
-
--- | A convenience alias encapsulating the common 'Response'.
-type ClientResponse = Client.Response Stream
-
 type Stream = ResumableSource (ResourceT IO) ByteString
+
+newtype ServiceId = ServiceId Text
+    deriving (Eq, Show, Data, Typeable)
 
 data Error
     = TransportError HttpException
@@ -116,20 +114,20 @@ data Error
 instance Exception Error
 
 data SerializeError = SerializeError'
-    -- , _serializeHeaders :: [Header]
-    { -- _serializeAbbrev  :: !Abbrev
-    -- , _serializeStatus  :: !Status
-    -- , _serializeMessage :: String
+    { _serializeId      :: !ServiceId
+    , _serializeHeaders :: [HTTP.Header]
+    , _serializeStatus  :: !Status
+    , _serializeMedia   :: !MediaType
+    , _serializeMessage :: String
     } deriving (Eq, Show, Typeable)
 
-data ServiceError = ServiceError' !Status !MediaType [HTTP.Header] LBS.ByteString
-     -- _serviceAbbrev    :: !Abbrev
-    -- , _serviceStatus    :: !Status
-    -- , _serviceHeaders   :: [Header]
-    -- , _serviceCode      :: !ErrorCode
-    -- , _serviceMessage   :: Maybe ErrorMessage
-    -- , _serviceRequestId :: Maybe RequestId
-     deriving (Eq, Show, Typeable)
+data ServiceError = ServiceError'
+    { _serviceId      :: !ServiceId
+    , _serviceStatus  :: !Status
+    , _serviceHeaders :: [HTTP.Header]
+    , _serviceMedia   :: !MediaType
+    , _serviceBody    :: LBS.ByteString
+    } deriving (Eq, Show, Typeable)
 
 class AsError a where
     -- | A general Amazonka error.
@@ -164,91 +162,103 @@ instance AsError Error where
         ServiceError e -> Right e
         x              -> Left  x
 
+data Service = Service
+    { _svcId      :: !ServiceId
+    , _svcHost    :: !ByteString
+    , _svcPath    :: !Builder
+    , _svcPort    :: !Int
+    , _svcSecure  :: !Bool
+    , _svcTimeout :: !(Maybe Seconds)
+    , _svcCheck   :: !(Status       -> Bool)
+    , _svcRetry   :: !(ServiceError -> Bool)
+    }
+
 -- | An intermediary request builder.
-data RequestBuilder = RequestBuilder
-    { _rqHost     :: ByteString
-    , _rqBasePath :: ByteString
-    , _rqPath     :: Builder
-    , _rqQuery    :: DList (Text, Maybe Text)
-    , _rqHeaders  :: DList (Text, Text)
-    , _rqBody     :: Maybe (MediaType, Stream)
+data Request = Request
+    { _rqPath    :: Builder
+    , _rqQuery   :: DList (ByteString, Maybe ByteString)
+    , _rqHeaders :: DList (HeaderName, ByteString)
+    , _rqBody    :: Maybe (MediaType, RequestBody)
     }
 
--- | Construct a default request builder. Since the Google service descriptions
--- have http/https in the host (rootUrl), the scheme is assumed.
-defaultRequest :: ByteString -- ^ Host. (rootUrl)
-               -> ByteString -- ^ Path. (servicePath)
-               -> RequestBuilder
-defaultRequest h p = RequestBuilder
-    { _rqHost     = h
-    , _rqBasePath = p
-    , _rqPath     = mempty
-    , _rqQuery    = mempty
-    , _rqHeaders  = mempty
-    , _rqBody     = Nothing
-    }
-
-appendPath :: RequestBuilder -> Builder -> RequestBuilder
+appendPath :: Request -> Builder -> Request
 appendPath rq x = rq { _rqPath = _rqPath rq <> "/" <> x }
 
-appendPaths :: ToText a => RequestBuilder -> [a] -> RequestBuilder
+appendPaths :: ToText a => Request -> [a] -> Request
 appendPaths rq = appendPath rq . foldMap (mappend "/" . buildText)
 
-appendQuery :: RequestBuilder -> Text -> Maybe Text -> RequestBuilder
-appendQuery rq k v = rq { _rqQuery = DList.snoc (_rqQuery rq) (k, v) }
+appendQuery :: Request -> ByteString -> Maybe Text -> Request
+appendQuery rq k v = rq
+    { _rqQuery = DList.snoc (_rqQuery rq) (k, Text.encodeUtf8 <$> v)
+    }
 
-appendHeader :: RequestBuilder -> Text -> Maybe Text -> RequestBuilder
+appendHeader :: Request -> ByteString -> Maybe Text -> Request
 appendHeader rq _ Nothing  = rq
-appendHeader rq k (Just v) = rq { _rqHeaders = DList.snoc (_rqHeaders rq) (k, v) }
+appendHeader rq k (Just v) = rq
+    { _rqHeaders = DList.snoc (_rqHeaders rq) (CI.mk k, Text.encodeUtf8 v)
+    }
 
-setStream :: RequestBuilder -> MediaType -> Stream -> RequestBuilder
-setStream rq c x = rq { _rqBody = Just (c, x) }
+setBody :: Request -> MediaType -> RequestBody -> Request
+setBody rq c x = rq { _rqBody = Just (c, x) }
 
 -- | A materialised 'http-client' request and associated response parser.
 data Client a = Client
-    { _clientAccept   :: Maybe MediaType
-    , _clientCheck    :: Int -> Bool
-    , _clientResponse :: Stream -> ResourceT IO (Either SerializeError a)
-    , _clientRequest  :: ClientRequest
+    { _cliAccept   :: Maybe MediaType
+    , _cliMethod   :: Method
+    , _cliCheck    :: Int -> Bool
+    , _cliService  :: Service
+    , _cliRequest  :: Request
+    , _cliResponse :: Stream -> ResourceT IO (Either SerializeError a)
     }
 
-clientRequest :: (Stream -> ResourceT IO (Either SerializeError a))
-              -> Maybe MediaType
-              -> Method
-              -> [Int]
-              -> RequestBuilder
-              -> Client a
-clientRequest f cs m ns rq = Client
-    { _clientAccept   = cs
-    , _clientCheck    = (`elem` ns)
-    , _clientResponse = f
-    , _clientRequest  = def
-        { Client.method      = m
-        , Client.checkStatus = \_ _ _ -> Nothing
-        }
+mime :: FromStream c a
+     => Proxy c
+     -> Method
+     -> [Int]
+     -> Request
+     -> Service
+     -> Client a
+mime p = client (fromStream p) (Just (contentType p))
+
+discard :: Method
+        -> [Int]
+        -> Request
+        -> Service
+        -> Client ()
+discard = client (\b -> closeResumableSource b >> pure (Right ())) Nothing
+
+client :: (Stream -> ResourceT IO (Either SerializeError a))
+       -> Maybe MediaType
+       -> Method
+       -> [Int]
+       -> Request
+       -> Service
+       -> Client a
+client f cs m ns rq s = Client
+    { _cliAccept   = cs
+    , _cliMethod   = m
+    , _cliCheck    = (`elem` ns)
+    , _cliService  = s
+    , _cliRequest  = rq
+    , _cliResponse = f
     }
 
-clientMime :: FromStream c a
-           => Proxy c
-           -> Method
-           -> [Int]
-           -> RequestBuilder
-           -> Client a
-clientMime p = clientRequest (fromStream p) (Just (contentType p))
+class Accept c => ToBody c a where
+    toBody :: Proxy c -> a -> RequestBody
 
-clientEmpty :: Method -> [Int] -> RequestBuilder -> Client ()
-clientEmpty = clientRequest go Nothing
-  where
-    go b = closeResumableSource b >> pure (Right ())
+instance ToBody OctetStream RequestBody where
+    toBody Proxy = id
 
-class Accept c => ToStream c a where
-    toStream :: Proxy c -> a -> Stream
+instance ToBody OctetStream ByteString     where toBody Proxy = RequestBodyBS
+instance ToBody OctetStream LBS.ByteString where toBody Proxy = RequestBodyLBS
+instance ToBody PlainText   ByteString     where toBody Proxy = RequestBodyBS
+instance ToBody PlainText   LBS.ByteString where toBody Proxy = RequestBodyLBS
 
-instance ToStream OctetStream Stream where
-    toStream Proxy = id
+instance ToJSON a => ToBody JSON a where
+    toBody Proxy = RequestBodyLBS . encode
 
-instance ToJSON a => ToStream JSON a where
-    toStream Proxy = newResumableSource . CL.sourceList . LBS.toChunks . encode
+instance ToBody JSON Value where
+    toBody Proxy = RequestBodyLBS . encode
 
 class Accept c => FromStream c a where
     fromStream :: Proxy c
@@ -268,13 +278,12 @@ instance FromJSON a => FromStream JSON a where
 class GoogleRequest a where
     type Rs a :: *
 
-    request     ::                   a -> Client (Rs a)
-    requestWith :: RequestBuilder -> a -> Client (Rs a)
+    requestClient :: a -> Client (Rs a)
 
 class GoogleClient fn where
     type Fn fn :: *
 
-    clientBuild :: Proxy fn -> RequestBuilder -> Fn fn
+    buildClient :: Proxy fn -> Request -> Fn fn
 
 -- | Multiple path captures, with @[xs]@ forming @/<x1>/<x2>/<x2>/...@.
 data Captures (s :: Symbol) a
@@ -340,15 +349,15 @@ instance ( MimeRender   c m
 instance (KnownSymbol s, GoogleClient fn) => GoogleClient (s :> fn) where
     type Fn (s :> fn) = Fn fn
 
-    clientBuild Proxy rq = clientBuild (Proxy :: Proxy fn) $
+    buildClient Proxy rq = buildClient (Proxy :: Proxy fn) $
         appendPath rq (buildSymbol (Proxy :: Proxy s))
 
 instance (GoogleClient a, GoogleClient b) => GoogleClient (a :<|> b) where
     type Fn (a :<|> b) = Fn a :<|> Fn b
 
-    clientBuild Proxy rq =
-             clientBuild (Proxy :: Proxy a) rq
-        :<|> clientBuild (Proxy :: Proxy b) rq
+    buildClient Proxy rq =
+             buildClient (Proxy :: Proxy a) rq
+        :<|> buildClient (Proxy :: Proxy b) rq
 
 instance ( KnownSymbol  s
          , ToText       a
@@ -356,7 +365,7 @@ instance ( KnownSymbol  s
          ) => GoogleClient (Capture s a :> fn) where
     type Fn (Capture s a :> fn) = a -> Fn fn
 
-    clientBuild Proxy rq = clientBuild (Proxy :: Proxy fn)
+    buildClient Proxy rq = buildClient (Proxy :: Proxy fn)
         . appendPath rq
         . buildText
 
@@ -366,7 +375,7 @@ instance ( KnownSymbol  s
          ) => GoogleClient (Captures s a :> fn) where
     type Fn (Captures s a :> fn) = [a] -> Fn fn
 
-    clientBuild Proxy rq = clientBuild (Proxy :: Proxy fn)
+    buildClient Proxy rq = buildClient (Proxy :: Proxy fn)
         . appendPaths rq
 
 instance ( KnownSymbol  s
@@ -376,7 +385,7 @@ instance ( KnownSymbol  s
          ) => GoogleClient (CaptureMode s m a :> fn) where
     type Fn (CaptureMode s m a :> fn) = a -> Fn fn
 
-    clientBuild Proxy rq x = clientBuild (Proxy :: Proxy fn)
+    buildClient Proxy rq x = buildClient (Proxy :: Proxy fn)
         . appendPath rq
         $ buildText x <> buildSymbol (Proxy :: Proxy m)
 
@@ -386,12 +395,12 @@ instance ( KnownSymbol  s
          ) => GoogleClient (QueryParam s a :> fn) where
     type Fn (QueryParam s a :> fn) = Maybe a -> Fn fn
 
-    clientBuild Proxy rq mx = clientBuild (Proxy :: Proxy fn) $
+    buildClient Proxy rq mx = buildClient (Proxy :: Proxy fn) $
         case mx of
             Nothing -> rq
             Just x  -> appendQuery rq k v
               where
-                k = textSymbol (Proxy :: Proxy s)
+                k = byteSymbol (Proxy :: Proxy s)
                 v = Just (toText x)
 
 instance ( KnownSymbol  s
@@ -400,11 +409,11 @@ instance ( KnownSymbol  s
          ) => GoogleClient (QueryParams s a :> fn) where
     type Fn (QueryParams s a :> fn) = [a] -> Fn fn
 
-    clientBuild Proxy rq = clientBuild (Proxy :: Proxy fn) . foldl' go rq
+    buildClient Proxy rq = buildClient (Proxy :: Proxy fn) . foldl' go rq
       where
         go r = appendQuery r k . Just . toText
 
-        k = textSymbol (Proxy :: Proxy s)
+        k = byteSymbol (Proxy :: Proxy s)
 
 instance ( KnownSymbol  s
          , ToText       a
@@ -412,94 +421,94 @@ instance ( KnownSymbol  s
          ) => GoogleClient (Header s a :> fn) where
     type Fn (Header s a :> fn) = Maybe a -> Fn fn
 
-    clientBuild Proxy rq mx = clientBuild (Proxy :: Proxy fn) $
+    buildClient Proxy rq mx = buildClient (Proxy :: Proxy fn) $
         case mx of
             Nothing -> rq
             Just x  -> appendHeader rq k v
               where
-                k = textSymbol (Proxy :: Proxy s)
+                k = byteSymbol (Proxy :: Proxy s)
                 v = Just (toText x)
 
-instance ( ToStream c a
+instance ( ToBody c a
          , GoogleClient fn
          ) => GoogleClient (ReqBody (c ': cs) a :> fn) where
     type Fn (ReqBody (c ': cs) a :> fn) = a -> Fn fn
 
-    clientBuild Proxy rq = clientBuild (Proxy :: Proxy fn)
-        . setStream rq (contentType p)
-        . toStream p
+    buildClient Proxy rq = buildClient (Proxy :: Proxy fn)
+        . setBody rq (contentType p)
+        . toBody p
       where
         p = Proxy :: Proxy c
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Get (c ': cs) a) where
-    type Fn (Get (c ': cs) a) = Client a
+    type Fn (Get (c ': cs) a) = Service -> Client a
 
-    clientBuild Proxy = clientMime (Proxy :: Proxy c) methodGet [200, 203]
+    buildClient Proxy = mime (Proxy :: Proxy c) methodGet [200, 203]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Get (c ': cs) ()) where
-    type Fn (Get (c ': cs) ()) = Client ()
+    type Fn (Get (c ': cs) ()) = Service -> Client ()
 
-    clientBuild Proxy = clientEmpty methodGet [204]
+    buildClient Proxy = discard methodGet [204]
 
 instance {-# OVERLAPPABLE #-}
   (FromStream c a, cs' ~ (c ': cs)) => GoogleClient (Post cs' a) where
-    type Fn (Post cs' a) = Client a
+    type Fn (Post cs' a) = Service -> Client a
 
-    clientBuild Proxy = clientMime (Proxy :: Proxy c) methodPost [200, 201]
+    buildClient Proxy = mime (Proxy :: Proxy c) methodPost [200, 201]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Post cs ()) where
-    type Fn (Post cs ()) = Client ()
+    type Fn (Post cs ()) = Service -> Client ()
 
-    clientBuild Proxy = clientEmpty methodPost [204]
+    buildClient Proxy = discard methodPost [204]
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Put (c ': cs) a) where
-    type Fn (Put (c ': cs) a) = Client a
+    type Fn (Put (c ': cs) a) = Service -> Client a
 
-    clientBuild Proxy = clientMime (Proxy :: Proxy c) methodPut [200, 201]
+    buildClient Proxy = mime (Proxy :: Proxy c) methodPut [200, 201]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Put (c ': cs) ()) where
-    type Fn (Put (c ': cs) ()) = Client ()
+    type Fn (Put (c ': cs) ()) = Service -> Client ()
 
-    clientBuild Proxy = clientEmpty methodPut [204]
+    buildClient Proxy = discard methodPut [204]
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Patch (c ': cs) a) where
-    type Fn (Patch (c ': cs) a) = Client a
+    type Fn (Patch (c ': cs) a) = Service -> Client a
 
-    clientBuild Proxy = clientMime (Proxy :: Proxy c) methodPatch [200, 201]
+    buildClient Proxy = mime (Proxy :: Proxy c) methodPatch [200, 201]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Patch (c ': cs) ()) where
-    type Fn (Patch (c ': cs) ()) = Client ()
+    type Fn (Patch (c ': cs) ()) = Service -> Client ()
 
-    clientBuild Proxy = clientEmpty methodPatch [204]
+    buildClient Proxy = discard methodPatch [204]
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Delete (c ': cs) a) where
-    type Fn (Delete (c ': cs) a) = Client a
+    type Fn (Delete (c ': cs) a) = Service -> Client a
 
-    clientBuild Proxy = clientMime (Proxy :: Proxy c) methodDelete [200, 202]
+    buildClient Proxy = mime (Proxy :: Proxy c) methodDelete [200, 202]
 
 instance {-# OVERLAPPING #-}
    GoogleClient (Delete (c ': cs) ()) where
-    type Fn (Delete (c ': cs) ()) = Client ()
+    type Fn (Delete (c ': cs) ()) = Service -> Client ()
 
-    clientBuild Proxy = clientEmpty methodDelete [204]
+    buildClient Proxy = discard methodDelete [204]
 
 -- perform :: Accept
 --         -> (Stream -> Client (Either SerializeError a))
 --         -> Method
 --         -> [Int]
---         -> RequestBuilder
+--         -> Request
 --         -> Client a
 -- perform a meth ns f rq = undefined -- do
   --   m <- ask
-  --   x <- lift . try $ Client.http m (clientRequest meth a rq)
+  --   x <- lift . try $ Client.http m (client meth a rq)
   --   either (failure . TransportError) success x
   -- where
   --   failure = pure . Left
@@ -542,5 +551,30 @@ buildText = Build.fromText . toText
 buildSymbol :: forall n proxy. KnownSymbol n => proxy n -> Builder
 buildSymbol = Build.fromString . symbolVal
 
-textSymbol :: forall n proxy. KnownSymbol n => proxy n -> Text
-textSymbol = Text.pack . symbolVal
+byteSymbol :: forall n proxy. KnownSymbol n => proxy n -> ByteString
+byteSymbol = BS8.pack . symbolVal
+
+-- | An integral value representing seconds.
+newtype Seconds = Seconds Int
+    deriving
+        ( Eq
+        , Ord
+        , Read
+        , Show
+        , Enum
+        , Num
+        , Bounded
+        , Integral
+        , Real
+        , Data
+        , Typeable
+        , Generic
+        )
+
+seconds :: Seconds -> Int
+seconds (Seconds n)
+    | n < 0     = 0
+    | otherwise = n
+
+microseconds :: Seconds -> Int
+microseconds =  (1000000 *) . seconds
