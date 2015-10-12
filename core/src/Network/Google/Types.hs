@@ -23,6 +23,7 @@
 module Network.Google.Types where
 
 import           Control.Lens                 hiding (coerce)
+import           Control.Monad
 import           Control.Monad.Catch
 import           Control.Monad.Trans.Resource
 import           Data.Aeson
@@ -200,26 +201,16 @@ data Client a = Client
     , _cliCheck    :: Status -> Bool
     , _cliService  :: Service
     , _cliRequest  :: Request
-    , _cliResponse :: Stream -> ResourceT IO (Either SerializeError a)
+    , _cliResponse :: Stream -> ResourceT IO (Either String a)
     }
 
-mime :: FromStream c a
-     => Proxy c
-     -> Method
-     -> [Int]
-     -> Request
-     -> Service
-     -> Client a
+mime :: FromStream c a => Proxy c -> Method -> [Int] -> Request -> Service -> Client a
 mime p = client (fromStream p) (Just (contentType p))
 
-discard :: Method
-        -> [Int]
-        -> Request
-        -> Service
-        -> Client ()
+discard :: Method -> [Int] -> Request -> Service -> Client ()
 discard = client (\b -> closeResumableSource b >> pure (Right ())) Nothing
 
-client :: (Stream -> ResourceT IO (Either SerializeError a))
+client :: (Stream -> ResourceT IO (Either String a))
        -> Maybe MediaType
        -> Method
        -> [Int]
@@ -253,19 +244,13 @@ instance ToBody JSON Value where
     toBody Proxy = RequestBodyLBS . encode
 
 class Accept c => FromStream c a where
-    fromStream :: Proxy c
-               -> Stream
-               -> ResourceT IO (Either SerializeError a)
+    fromStream :: Proxy c -> Stream -> ResourceT IO (Either String a)
 
 instance FromStream OctetStream Stream where
     fromStream Proxy = pure . Right
 
 instance FromJSON a => FromStream JSON a where
-    fromStream Proxy b = do
-        lbs <- sinkLBS b
-        case eitherDecode lbs of
-            Left  e -> undefined
-            Right x -> pure (Right x)
+    fromStream Proxy = sinkLBS >=> pure . eitherDecode
 
 class GoogleAuth a where
     _AuthKey   :: Traversal' a AuthKey
@@ -495,48 +480,6 @@ instance {-# OVERLAPPING #-}
     type Fn (Delete (c ': cs) ()) = Service -> Client ()
 
     buildClient Proxy = discard methodDelete [204]
-
--- perform :: Accept
---         -> (Stream -> Client (Either SerializeError a))
---         -> Method
---         -> [Int]
---         -> Request
---         -> Client a
--- perform a meth ns f rq = undefined -- do
-  --   m <- ask
-  --   x <- lift . try $ Client.http m (client meth a rq)
-  --   either (failure . TransportError) success x
-  -- where
-  --   failure = pure . Left
-
-  --   success rs = do
-  --       let s  = Client.responseStatus  rs
-  --           b  = Client.responseBody    rs
-  --           hs = Client.responseHeaders rs
-  --       case content hs of
-  --       unless (matches respCT (acceptCT)) $
-  --           left $ UnsupportedContentType respCT respBody
-
-  --           Nothing -> failure (SerializeError' (SerializeError hs))
-
-  --           Just _ | statusInvalid s -> do
-  --               lbs <- sinkLBS b
-  --               failure (ServiceError' (ServiceError s c hs lbs))
-
-  --           Just c | contentInvalid c -> do
-  --               lbs <- sinkLBS b
-  --               failure (SerializeError' (SerializeError s c hs lbs))
-
-
-  --           Just c -> first SerializeError' <$> f b
-
-  --   content :: [Header] -> Maybe c
-  --   content = parseAccept
-  --       . fromMaybe "application/octet-stream"
-  --       . lookup hContentType
-
-  --   statusCheck s = fromEnum s `elem` ns
-  --   contentCheck  = matches a
 
 sinkLBS :: Stream -> ResourceT IO LBS.ByteString
 sinkLBS = fmap LBS.fromChunks . ($$+- CL.consume)

@@ -47,7 +47,15 @@ perform Env{..} x = catches go handlers
   where
     go = liftResourceT $ do
         rs <- http rq _envManager
-        first SerializeError <$> _cliResponse (responseBody rs)
+        r  <- _cliResponse (responseBody rs)
+        pure $! case r of
+            Right y -> Right y
+            Left  e -> Left . SerializeError $ SerializeError'
+                { _serializeId      = _svcId
+                , _serializeHeaders = responseHeaders rs
+                , _serializeStatus  = responseStatus rs
+                , _serializeMessage = e
+                }
 
     rq = def
         { Client.host            = _svcHost
@@ -98,3 +106,32 @@ perform Env{..} x = catches go handlers
         ]
       where
         err e = return (Left e) -- logError _envLogger e >>
+
+  --   success rs = do
+  --       let s  = Client.responseStatus  rs
+  --           b  = Client.responseBody    rs
+  --           hs = Client.responseHeaders rs
+  --       case content hs of
+  --       unless (matches respCT (acceptCT)) $
+  --           left $ UnsupportedContentType respCT respBody
+
+  --           Nothing -> failure (SerializeError' (SerializeError hs))
+
+  --           Just _ | statusInvalid s -> do
+  --               lbs <- sinkLBS b
+  --               failure (ServiceError' (ServiceError s c hs lbs))
+
+  --           Just c | contentInvalid c -> do
+  --               lbs <- sinkLBS b
+  --               failure (SerializeError' (SerializeError s c hs lbs))
+
+
+  --           Just c -> first SerializeError' <$> f b
+
+  --   content :: [Header] -> Maybe c
+  --   content = parseAccept
+  --       . fromMaybe "application/octet-stream"
+  --       . lookup hContentType
+
+  --   statusCheck s = fromEnum s `elem` ns
+  --   contentCheck  = matches a
