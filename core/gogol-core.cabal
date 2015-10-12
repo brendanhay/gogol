@@ -48,12 +48,12 @@ library
         , bytestring         >= 0.9
         , conduit            >= 1.1
         , dlist              >= 0.7
-        , case-insensitive 
+        , case-insensitive   >= 1.2
         , exceptions         >= 0.6
         , hashable           >= 1.2
         , http-client        >= 0.4.4
-        , http-media         >= 0.4
-        , http-types         >= 0.8
+        , http-media         >= 0.6
+        , http-types         >= 0.8.6
         , lens               >= 4.4
         , resourcet          >= 1.1
         , scientific         >= 0.3

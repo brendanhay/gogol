@@ -15,8 +15,7 @@ module Network.Google.Auth where
 import           Control.Concurrent     (ThreadId)
 import           Control.Monad.IO.Class
 import           Data.IORef
-import           Data.Time
-import           Network.Google.Types
+import           Network.Google.Prelude
 
 data Credentials
     = FromKey   AuthKey

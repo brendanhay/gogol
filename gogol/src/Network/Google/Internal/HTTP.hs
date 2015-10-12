@@ -12,29 +12,18 @@
 module Network.Google.Internal.HTTP where
 
 import           Control.Applicative
-import           Control.Lens
-import           Control.Monad
 import           Control.Monad.Catch
-import           Control.Monad.IO.Class
-import           Control.Monad.Morph
-import           Data.Bifunctor
--- import           Control.Monad.State.Lazy
 import           Control.Monad.Trans.Resource
-import           Control.Retry
-import           Data.Conduit
 import           Data.Default.Class
 import           Data.Monoid
-import qualified Data.Text                     as Text
-import qualified Data.Text.Encoding            as Text
-import qualified Data.Text.Lazy                as LText
-import qualified Data.Text.Lazy.Builder        as Build
-import           GHC.Exts                      (toList)
-import           Network.Google.Auth
-import           Network.Google.Env            (Env (..))
-import           Network.Google.Internal.Types
+import qualified Data.Text.Encoding           as Text
+import qualified Data.Text.Lazy               as LText
+import qualified Data.Text.Lazy.Builder       as Build
+import           GHC.Exts                     (toList)
+import           Network.Google.Env           (Env (..))
 import           Network.Google.Types
 import           Network.HTTP.Conduit
-import qualified Network.HTTP.Conduit          as Client
+import qualified Network.HTTP.Conduit         as Client
 import           Network.HTTP.Media
 import           Network.HTTP.Types
 

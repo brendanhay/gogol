@@ -22,6 +22,7 @@
 --
 module Network.Google.Types where
 
+import           Control.Exception.Lens       (exception)
 import           Control.Lens                 hiding (coerce)
 import           Control.Monad
 import           Control.Monad.Catch
@@ -141,6 +142,9 @@ class AsError a where
     _TransportError = _Error . _TransportError
     _SerializeError = _Error . _SerializeError
     _ServiceError   = _Error . _ServiceError
+
+instance AsError SomeException where
+    _Error = exception
 
 instance AsError Error where
     _Error = id

@@ -17,16 +17,15 @@
 module Network.Google where
 
 import           Control.Applicative
+import           Control.Exception.Lens       (throwingM)
 import           Control.Monad
 import           Control.Monad.Base
 import           Control.Monad.Catch
-import           Control.Monad.IO.Class       (MonadIO)
 import           Control.Monad.Reader
 import qualified Control.Monad.RWS.Lazy       as LRW
 import qualified Control.Monad.RWS.Strict     as RW
 import qualified Control.Monad.State.Lazy     as LS
 import qualified Control.Monad.State.Strict   as S
-import           Control.Monad.Trans.Class    (lift)
 import           Control.Monad.Trans.Control
 import           Control.Monad.Trans.Except   (ExceptT)
 import           Control.Monad.Trans.Identity (IdentityT)
@@ -35,8 +34,8 @@ import           Control.Monad.Trans.Maybe    (MaybeT)
 import           Control.Monad.Trans.Resource
 import qualified Control.Monad.Writer.Lazy    as LW
 import qualified Control.Monad.Writer.Strict  as W
-import           Network.Google.Auth
 import           Network.Google.Env
+import           Network.Google.Internal.HTTP
 import           Network.Google.Prelude
 
 newtype Google a = Google { unGoogle :: ReaderT Env (ResourceT IO) a }
@@ -94,11 +93,19 @@ instance (Monoid w, MonadGoogle m) => MonadGoogle (RW.RWST r w s m) where
 instance (Monoid w, MonadGoogle m) => MonadGoogle (LRW.RWST r w s m) where
     liftGoogle = lift . liftGoogle
 
-runGoogle :: MonadResource m => Env -> Google a -> m a
-runGoogle e m = liftResourceT $ runReaderT (unGoogle m) e -- (e ^. environment)
+runGoogle :: (MonadResource m, HasEnv r) => r -> Google a -> m a
+runGoogle e m = liftResourceT $ runReaderT (unGoogle m) (e ^. environment)
 
-send :: GoogleRequest a => a -> m (Rs a)
-send = undefined
+send :: (MonadGoogle m, GoogleRequest a) => a -> m (Rs a)
+send x = liftGoogle $ do
+    e <- ask
+    r <- perform e x
+    hoistError r
 
--- download :: GoogleRequest (MediaDownload a) => a -> m (Rs (MediaDownload a))
--- download = send . MediaDownload
+media :: (MonadGoogle m, GoogleRequest (MediaDownload a))
+      => a
+      -> m (Rs (MediaDownload a))
+media = send . MediaDownload
+
+hoistError :: MonadThrow m => Either Error a -> m a
+hoistError = either (throwingM _Error) return

@@ -9,22 +9,16 @@
 -- Environment and Google specific configuration for the 'Network.Google' monad.
 module Network.Google.Env where
 
-import           Control.Applicative
 import           Control.Lens
-import           Control.Monad
 import           Control.Monad.Catch
 import           Control.Monad.IO.Class
 import           Control.Monad.Reader
-import           Data.Monoid
 import           Network.Google.Auth
-import           Network.Google.Internal.Types
 import           Network.Google.Types
 import           Network.HTTP.Conduit
 
 -- | The environment containing the parameters required to make Google requests.
 data Env = Env
-    -- { _envRetryCheck  :: !(Int -> HttpException -> Bool)
-    -- , _envRetryPolicy :: !RetryPolicy
     { _envTimeout :: !(Maybe Seconds)
     , _envManager :: !Manager
     , _envAuth    :: !Auth
@@ -73,7 +67,7 @@ timeout s = local (envTimeout ?~ s)
 --
 -- /See:/ 'newEnvWith'.
 newEnv :: (MonadIO m, MonadCatch m) => Credentials -> m Env
-newEnv c = liftIO (newManager conduitManagerSettings) >>= newEnvWith c
+newEnv c = liftIO (newManager tlsManagerSettings) >>= newEnvWith c
 
 -- | /See:/ 'newEnv'
 newEnvWith :: (MonadIO m, MonadCatch m) => Credentials -> Manager -> m Env
