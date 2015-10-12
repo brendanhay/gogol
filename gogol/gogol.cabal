@@ -36,22 +36,21 @@ library
         , Network.Google.Internal.Types
 
     build-depends:
-          base       >= 4.7 && < 5
+          base               >= 4.7 && < 5
+        , bifunctors
+        , conduit
+        , data-default-class >= 0.0.1
         , exceptions
-        , gogol-core == 0.0.1.*
+        , gogol-core         == 0.0.1.*
         , http-conduit
+        , http-media
+        , http-types
         , lens
+        , mmorph
         , monad-control
         , mtl
         , resourcet
-        , retry
+        , text
         , time
         , transformers
-        , data-default-class >= 0.0.1
         , transformers-base
-        , http-types
-        , http-media
-        , text
-        , mmorph
-        , conduit
-        , bifunctors

@@ -38,7 +38,6 @@ import qualified Network.HTTP.Conduit          as Client
 import           Network.HTTP.Media
 import           Network.HTTP.Types
 
--- | The 'Service' is configured + unwrapped at this point.
 perform :: (MonadCatch m, MonadResource m, GoogleRequest a)
         => Env
         -> a
@@ -105,33 +104,4 @@ perform Env{..} x = catches go handlers
         , Handler $ err . TransportError
         ]
       where
-        err e = return (Left e) -- logError _envLogger e >>
-
-  --   success rs = do
-  --       let s  = Client.responseStatus  rs
-  --           b  = Client.responseBody    rs
-  --           hs = Client.responseHeaders rs
-  --       case content hs of
-  --       unless (matches respCT (acceptCT)) $
-  --           left $ UnsupportedContentType respCT respBody
-
-  --           Nothing -> failure (SerializeError' (SerializeError hs))
-
-  --           Just _ | statusInvalid s -> do
-  --               lbs <- sinkLBS b
-  --               failure (ServiceError' (ServiceError s c hs lbs))
-
-  --           Just c | contentInvalid c -> do
-  --               lbs <- sinkLBS b
-  --               failure (SerializeError' (SerializeError s c hs lbs))
-
-
-  --           Just c -> first SerializeError' <$> f b
-
-  --   content :: [Header] -> Maybe c
-  --   content = parseAccept
-  --       . fromMaybe "application/octet-stream"
-  --       . lookup hContentType
-
-  --   statusCheck s = fromEnum s `elem` ns
-  --   contentCheck  = matches a
+        err e = return (Left e)
