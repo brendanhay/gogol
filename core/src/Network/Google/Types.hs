@@ -76,10 +76,6 @@ newtype OAuthToken = OAuthToken Text
 instance ToText OAuthToken where
     toText (OAuthToken t) = "Bearer " <> t
 
-class GoogleAuth a where
-    _AuthKey   :: Traversal' a AuthKey
-    _AuthToken :: Traversal' a OAuthToken
-
 newtype MediaDownload a = MediaDownload a
 
 _MediaDownload :: Iso' (MediaDownload a) a
@@ -117,7 +113,6 @@ data SerializeError = SerializeError'
     { _serializeId      :: !ServiceId
     , _serializeHeaders :: [HTTP.Header]
     , _serializeStatus  :: !Status
-    , _serializeMedia   :: !MediaType
     , _serializeMessage :: String
     } deriving (Eq, Show, Typeable)
 
@@ -125,8 +120,7 @@ data ServiceError = ServiceError'
     { _serviceId      :: !ServiceId
     , _serviceStatus  :: !Status
     , _serviceHeaders :: [HTTP.Header]
-    , _serviceMedia   :: !MediaType
-    , _serviceBody    :: LBS.ByteString
+    , _serviceBody    :: Maybe LBS.ByteString
     } deriving (Eq, Show, Typeable)
 
 class AsError a where
@@ -169,8 +163,6 @@ data Service = Service
     , _svcPort    :: !Int
     , _svcSecure  :: !Bool
     , _svcTimeout :: !(Maybe Seconds)
-    , _svcCheck   :: !(Status       -> Bool)
-    , _svcRetry   :: !(ServiceError -> Bool)
     }
 
 -- | An intermediary request builder.
@@ -205,7 +197,7 @@ setBody rq c x = rq { _rqBody = Just (c, x) }
 data Client a = Client
     { _cliAccept   :: Maybe MediaType
     , _cliMethod   :: Method
-    , _cliCheck    :: Int -> Bool
+    , _cliCheck    :: Status -> Bool
     , _cliService  :: Service
     , _cliRequest  :: Request
     , _cliResponse :: Stream -> ResourceT IO (Either SerializeError a)
@@ -237,7 +229,7 @@ client :: (Stream -> ResourceT IO (Either SerializeError a))
 client f cs m ns rq s = Client
     { _cliAccept   = cs
     , _cliMethod   = m
-    , _cliCheck    = (`elem` ns)
+    , _cliCheck    = (`elem` ns) . fromEnum
     , _cliService  = s
     , _cliRequest  = rq
     , _cliResponse = f
@@ -275,7 +267,11 @@ instance FromJSON a => FromStream JSON a where
             Left  e -> undefined
             Right x -> pure (Right x)
 
-class GoogleRequest a where
+class GoogleAuth a where
+    _AuthKey   :: Traversal' a AuthKey
+    _AuthToken :: Traversal' a OAuthToken
+
+class GoogleAuth a => GoogleRequest a where
     type Rs a :: *
 
     requestClient :: a -> Client (Rs a)

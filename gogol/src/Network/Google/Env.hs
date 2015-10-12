@@ -24,11 +24,11 @@ import           Network.HTTP.Conduit
 
 -- | The environment containing the parameters required to make Google requests.
 data Env = Env
-    { _envRetryCheck  :: !(Int -> HttpException -> Bool)
-    , _envRetryPolicy :: !RetryPolicy
-    , _envTimeout     :: !(Maybe Seconds)
-    , _envManager     :: !Manager
-    , _envAuth        :: !Auth
+    -- { _envRetryCheck  :: !(Int -> HttpException -> Bool)
+    -- , _envRetryPolicy :: !RetryPolicy
+    { _envTimeout :: !(Maybe Seconds)
+    , _envManager :: !Manager
+    , _envAuth    :: !Auth
     }
 
 -- Note: The strictness annotations aobe are applied to ensure
@@ -38,11 +38,11 @@ class HasEnv a where
     environment    :: Lens' a Env
     {-# MINIMAL environment #-}
 
-    -- | The function used to determine if an 'HttpException' should be retried.
-    envRetryCheck  :: Lens' a (Int -> HttpException -> Bool)
+    -- -- | The function used to determine if an 'HttpException' should be retried.
+    -- envRetryCheck  :: Lens' a (Int -> HttpException -> Bool)
 
-    -- | TODO
-    envRetryPolicy :: Lens' a RetryPolicy
+    -- -- | TODO
+    -- envRetryPolicy :: Lens' a RetryPolicy
 
     -- | TODO
     envTimeout     :: Lens' a (Maybe Seconds)
@@ -53,8 +53,8 @@ class HasEnv a where
     -- | The credentials used to sign requests for authentication with Google.
     envAuth        :: Lens' a Auth
 
-    envRetryCheck  = environment . lens _envRetryCheck  (\s a -> s { _envRetryCheck  = a })
-    envRetryPolicy = environment . lens _envRetryPolicy (\s a -> s { _envRetryPolicy = a })
+    -- envRetryCheck  = environment . lens _envRetryCheck  (\s a -> s { _envRetryCheck  = a })
+    -- envRetryPolicy = environment . lens _envRetryPolicy (\s a -> s { _envRetryPolicy = a })
     envTimeout     = environment . lens _envTimeout     (\s a -> s { _envTimeout     = a })
     envManager     = environment . lens _envManager     (\s a -> s { _envManager     = a })
     envAuth        = environment . lens _envAuth        (\s a -> s { _envAuth        = a })
@@ -62,14 +62,14 @@ class HasEnv a where
 instance HasEnv Env where
     environment = id
 
--- | Scope an action such that any retry logic for the 'Env' is
--- ignored and any requests will at most be sent once.
-once :: (MonadReader r m, HasEnv r) => m a -> m a
-once = policy (limitRetries 0)
+-- -- | Scope an action such that any retry logic for the 'Env' is
+-- -- ignored and any requests will at most be sent once.
+-- once :: (MonadReader r m, HasEnv r) => m a -> m a
+-- once = policy (limitRetries 0)
 
--- | TODO
-policy :: (MonadReader r m, HasEnv r) => RetryPolicy -> m a -> m a
-policy r = local (envRetryPolicy <>~ r)
+-- -- | TODO
+-- policy :: (MonadReader r m, HasEnv r) => RetryPolicy -> m a -> m a
+-- policy r = local (envRetryPolicy <>~ r)
 
 -- | Scope an action such that any HTTP response will use this timeout value.
 --
@@ -93,6 +93,6 @@ newEnv c = liftIO (newManager conduitManagerSettings) >>= newEnvWith c
 
 -- | /See:/ 'newEnv'
 newEnvWith :: (MonadIO m, MonadCatch m) => Credentials -> Manager -> m Env
-newEnvWith c m = Env check mempty Nothing m <$> getAuth c
-  where
-    check _ _ = True
+newEnvWith c m = Env Nothing m <$> getAuth c
+  -- where
+  --   check _ _ = True

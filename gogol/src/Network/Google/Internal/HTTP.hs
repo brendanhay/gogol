@@ -30,7 +30,7 @@ import qualified Data.Text.Lazy                as LText
 import qualified Data.Text.Lazy.Builder        as Build
 import           GHC.Exts                      (toList)
 import           Network.Google.Auth
-import           Network.Google.Env
+import           Network.Google.Env            (Env (..))
 import           Network.Google.Internal.Types
 import           Network.Google.Types
 import           Network.HTTP.Conduit
@@ -39,7 +39,7 @@ import           Network.HTTP.Media
 import           Network.HTTP.Types
 
 -- | The 'Service' is configured + unwrapped at this point.
-perform :: (MonadCatch m, MonadBaseControl IO m, MonadResource m, GoogleRequest a)
+perform :: (MonadCatch m, MonadResource m, GoogleRequest a)
         => Env
         -> a
         -> m (Either Error (Rs a))
@@ -53,9 +53,8 @@ perform Env{..} x = catches go handlers
         { Client.host            = _svcHost
         , Client.port            = _svcPort
         , Client.secure          = _svcSecure
-        , Client.checkStatus     = \_ _ _ -> Nothing
-          -- mix with Env timeout
---        , Client.responseTimeout = microseconds <$> _svcTimeout
+        , Client.checkStatus     = status
+        , Client.responseTimeout = timeout
         , Client.method          = _cliMethod
         , Client.path            = path
         , Client.queryString     = renderQuery True (toList _rqQuery)
@@ -78,6 +77,16 @@ perform Env{..} x = catches go handlers
          . LText.toStrict
          $ Build.toLazyText (_svcPath <> _rqPath)
 
+    status s hs _
+         | _cliCheck s = Nothing
+         | otherwise   = Just . toException . ServiceError $ ServiceError'
+             { _serviceId      = _svcId
+             , _serviceStatus  = s
+             , _serviceHeaders = hs
+             , _serviceBody    = Nothing
+             }
+
+    timeout = microseconds <$> (_envTimeout <|> _svcTimeout)
 
     Request {..} = _cliRequest
     Service {..} = _cliService
