@@ -113,7 +113,7 @@ renderAPI s = do
   where
     alias = aname (_sCanonicalName s)
 
-    url = name (Text.unpack (urlName s))
+    url = name (serviceName s)
 
     svc = Fun' url (Just (rawHelpText h))
         <$> pp None  (urlSig url)
@@ -127,12 +127,7 @@ renderAPI s = do
         <$> pp None (scopeSig  n)
         <*> pp None (scopeDecl n k)
       where
-        n = name
-          . Text.unpack
-          . (<> "Scope")
-          . toCamel
-          . last
-          $ Text.split (== '/') k
+        n = name (scopeName s k)
 
 renderMethod :: Service a -> NS -> Suffix -> Method Solved -> AST Action
 renderMethod s root suf m@Method {..} = do
@@ -150,7 +145,7 @@ renderMethod s root suf m@Method {..} = do
   where
     (alias, typ, ns) = mname (_sCanonicalName s) suf _mId
 
-    url = name (Text.unpack (urlName s))
+    url = name (serviceName s)
 
     insts is = \case
         Prod n h r c ls _ -> Prod n h r c ls is
