@@ -36,7 +36,6 @@ library
 
     build-depends:
           base               >= 4.7 && < 5
-        , conduit            >= 1.1
         , data-default-class >= 0.0.1
         , exceptions         >= 0.6
         , gogol-core         == 0.0.1.*

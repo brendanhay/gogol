@@ -22,8 +22,8 @@ import qualified Data.Text.Lazy.Builder       as Build
 import           GHC.Exts                     (toList)
 import           Network.Google.Env           (Env (..))
 import           Network.Google.Types
+import qualified Network.HTTP.Client.Conduit  as Client
 import           Network.HTTP.Conduit
-import qualified Network.HTTP.Conduit         as Client
 import           Network.HTTP.Media
 import           Network.HTTP.Types
 
@@ -66,7 +66,7 @@ perform Env{..} x = catches go handlers
          | Just (t, _) <- _rqBody = ((hContentType, renderHeader t) :)
          | otherwise              = id
 
-    body | Just (_, b) <- _rqBody = b
+    body | Just (_, b) <- _rqBody = Client.requestBodySourceChunked b
          | otherwise              = mempty
 
     path = Text.encodeUtf8
