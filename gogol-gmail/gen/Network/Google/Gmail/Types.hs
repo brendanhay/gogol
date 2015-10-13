@@ -19,7 +19,7 @@ module Network.Google.Gmail.Types
       gmailService
 
     -- * OAuth Scopes
-    , Scope
+    , gmailAllScope
     , gmailModifyScope
     , gmailLabelsScope
     , gmailSendScope
@@ -216,9 +216,9 @@ module Network.Google.Gmail.Types
     , hmaMessage
     ) where
 
-import Network.Google.Gmail.Types.Product
-import Network.Google.Gmail.Types.Sum
-import Network.Google.Prelude
+import           Network.Google.Gmail.Types.Product
+import           Network.Google.Gmail.Types.Sum
+import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Gmail API. This contains the host and root path used as a starting point for constructing service requests.
 gmailService :: Service
@@ -228,8 +228,8 @@ gmailService
       "gmail/v1/users/"
 
 -- | View and manage your mail
-Scope :: OAuthScope
-Scope = OAuthScope "https://mail.google.com/";
+gmailAllScope :: OAuthScope
+gmailAllScope = OAuthScope "https://mail.google.com/";
 
 -- | View and modify but not delete your email
 gmailModifyScope :: OAuthScope
