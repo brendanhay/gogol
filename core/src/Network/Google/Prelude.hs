@@ -29,6 +29,7 @@ import           Network.Google.Data.JSON    as Export
 import           Network.Google.Data.Numeric as Export
 import           Network.Google.Data.Time    as Export
 import           Network.Google.Types        as Export
+import           Network.HTTP.Client         as Export (RequestBody)
 import           Numeric.Natural             as Export (Natural)
 import           Prelude                     as Export hiding (product)
 import           Servant.API                 as Export hiding (getResponse)
