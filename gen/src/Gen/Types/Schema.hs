@@ -446,4 +446,3 @@ scopeName s k =
             xs -> case last xs of
                 "" -> y
                 x  -> x <> "Scope"
-
