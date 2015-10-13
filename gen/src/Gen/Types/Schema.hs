@@ -439,8 +439,8 @@ serviceName = Text.unpack . (<> "Service") . toCamel . _sCanonicalName
 
 scopeName :: Service a -> Text -> String
 scopeName s k =
-  let y = _sCanonicalName s <> "AllScope"
-   in Text.unpack . toCamel $
+    let y = _sCanonicalName s <> "AllScope"
+     in Text.unpack . toCamel $
         case Text.split (== '/') k of
             [] -> y
             xs -> case last xs of
