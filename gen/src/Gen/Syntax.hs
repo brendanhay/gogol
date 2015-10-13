@@ -116,13 +116,13 @@ verbAlias n m
           , _mSupportsMediaUpload m =
               [TyApp (TyApp (TyApp (TyCon "MultipartRelated") json)
                             (tycon (ref b)))
-                     (TyCon "Stream")]
+                     (TyCon "Body")]
 
           | Just b <- _mRequest m =
               [TyApp (TyApp (TyCon "ReqBody") json) (tycon (ref b))]
 
           | _mSupportsMediaUpload m =
-              [TyApp (TyApp (TyCon "ReqBody") octet) (TyCon "RequestBody")]
+              [TyApp (TyApp (TyCon "ReqBody") octet) (TyCon "Body")]
 
           | otherwise = []
 
@@ -156,7 +156,9 @@ downloadDecl n p api url fs m =
     pat | _mSupportsMediaDownload m = PInfixApp PWildCard (UnQual (sym ":<|>")) (pvar "go")
         | otherwise                 = pvar "go"
 
-    prec = PApp (UnQual "MediaDownload") [PRec (UnQual (dname n)) [PFieldWildcard]]
+    prec = PApp (UnQual "MediaDownload")
+        [ PRec (UnQual (dname n)) [PFieldWildcard | not (null fs)]
+        ]
 
 requestDecl :: Global
             -> Prefix
@@ -177,7 +179,7 @@ requestDecl n p api url fs m =
     pat | _mSupportsMediaDownload m = PInfixApp (pvar "go") (UnQual (sym ":<|>")) PWildCard
         | otherwise                 = pvar "go"
 
-    prec = PRec (UnQual (dname n)) [PFieldWildcard]
+    prec = PRec (UnQual (dname n)) [PFieldWildcard | not (null fs)]
 
 googleRequestDecl :: Global
                   -> Type
@@ -451,7 +453,8 @@ externalLit = \case
     Int64    -> TyCon "Int64"
 
     Alt t      -> TyCon (unqual (Text.unpack t))
-    Body       -> TyCon "Stream"
+    RqBody     -> TyCon "Body"
+    RsBody     -> TyCon "Stream"
     JSONValue  -> TyCon "JSONValue"
 
 internalLit :: Lit -> Type
@@ -471,7 +474,8 @@ internalLit = \case
     Int64    -> TyCon "Int64"
 
     Alt t      -> TyCon (unqual (Text.unpack t))
-    Body       -> TyCon "Stream"
+    RqBody     -> TyCon "Body"
+    RsBody     -> TyCon "Stream"
     JSONValue  -> TyCon "JSONValue"
 
 mapping :: TType -> Exp -> Exp

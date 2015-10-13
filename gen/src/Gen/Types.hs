@@ -333,7 +333,8 @@ initial s = Memo s mempty mempty res core mempty mempty mempty
 
     -- Types available in Network.Google.Prelude.
     core = Map.fromList
-        [ ("Body",      SLit requiredInfo Body)
+        [ ("Body",      SLit requiredInfo RqBody)
+        , ("Stream",    SLit requiredInfo RsBody)
         , ("JSONValue", SLit requiredInfo JSONValue)
         ]
 

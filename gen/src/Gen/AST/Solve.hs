@@ -133,7 +133,8 @@ getDerive g = loc "getDerive" g $ memo derived g go
         Bool       -> enum
         Time       -> DRead : base
         Date       -> DRead : base
-        Body       -> []
+        RqBody     -> [DIsString, DMonoid]
+        RsBody     -> []
         Alt _      -> DRead : base
         JSONValue  -> DRead : base
         -- FIXME: Add numeric cases

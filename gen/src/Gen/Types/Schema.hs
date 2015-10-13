@@ -199,7 +199,8 @@ data Lit
     | Date
     | DateTime
     -- Core types.
-    | Body
+    | RqBody
+    | RsBody
     | JSONValue
     | Alt Text
       deriving (Eq, Show)
