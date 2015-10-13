@@ -34,8 +34,6 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.List
 
     -- * Request Lenses
     , ddlXgafv
-    , ddlQuotaUser
-    , ddlPrettyPrint
     , ddlIncludeInactive
     , ddlUploadProtocol
     , ddlProject
@@ -43,9 +41,6 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.List
     , ddlAccessToken
     , ddlUploadType
     , ddlBearerToken
-    , ddlKey
-    , ddlOAuthToken
-    , ddlFields
     , ddlCallback
     ) where
 
@@ -67,21 +62,14 @@ type DebuggerDebuggeesListResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] ListDebuggeesResponse
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListDebuggeesResponse
 
 -- | Lists all the debuggees that the user can set breakpoints to.
 --
 -- /See:/ 'debuggerDebuggeesList'' smart constructor.
 data DebuggerDebuggeesList' = DebuggerDebuggeesList'
     { _ddlXgafv           :: !(Maybe Text)
-    , _ddlQuotaUser       :: !(Maybe Text)
-    , _ddlPrettyPrint     :: !Bool
     , _ddlIncludeInactive :: !(Maybe Bool)
     , _ddlUploadProtocol  :: !(Maybe Text)
     , _ddlProject         :: !(Maybe Text)
@@ -89,9 +77,6 @@ data DebuggerDebuggeesList' = DebuggerDebuggeesList'
     , _ddlAccessToken     :: !(Maybe Text)
     , _ddlUploadType      :: !(Maybe Text)
     , _ddlBearerToken     :: !(Maybe Text)
-    , _ddlKey             :: !(Maybe AuthKey)
-    , _ddlOAuthToken      :: !(Maybe OAuthToken)
-    , _ddlFields          :: !(Maybe Text)
     , _ddlCallback        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -100,10 +85,6 @@ data DebuggerDebuggeesList' = DebuggerDebuggeesList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ddlXgafv'
---
--- * 'ddlQuotaUser'
---
--- * 'ddlPrettyPrint'
 --
 -- * 'ddlIncludeInactive'
 --
@@ -119,20 +100,12 @@ data DebuggerDebuggeesList' = DebuggerDebuggeesList'
 --
 -- * 'ddlBearerToken'
 --
--- * 'ddlKey'
---
--- * 'ddlOAuthToken'
---
--- * 'ddlFields'
---
 -- * 'ddlCallback'
 debuggerDebuggeesList'
     :: DebuggerDebuggeesList'
 debuggerDebuggeesList' =
     DebuggerDebuggeesList'
     { _ddlXgafv = Nothing
-    , _ddlQuotaUser = Nothing
-    , _ddlPrettyPrint = True
     , _ddlIncludeInactive = Nothing
     , _ddlUploadProtocol = Nothing
     , _ddlProject = Nothing
@@ -140,28 +113,12 @@ debuggerDebuggeesList' =
     , _ddlAccessToken = Nothing
     , _ddlUploadType = Nothing
     , _ddlBearerToken = Nothing
-    , _ddlKey = Nothing
-    , _ddlOAuthToken = Nothing
-    , _ddlFields = Nothing
     , _ddlCallback = Nothing
     }
 
 -- | V1 error format.
 ddlXgafv :: Lens' DebuggerDebuggeesList' (Maybe Text)
 ddlXgafv = lens _ddlXgafv (\ s a -> s{_ddlXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ddlQuotaUser :: Lens' DebuggerDebuggeesList' (Maybe Text)
-ddlQuotaUser
-  = lens _ddlQuotaUser (\ s a -> s{_ddlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ddlPrettyPrint :: Lens' DebuggerDebuggeesList' Bool
-ddlPrettyPrint
-  = lens _ddlPrettyPrint
-      (\ s a -> s{_ddlPrettyPrint = a})
 
 -- | When set to true the result includes all debuggees, otherwise only
 -- debugees that are active.
@@ -204,37 +161,15 @@ ddlBearerToken
   = lens _ddlBearerToken
       (\ s a -> s{_ddlBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ddlKey :: Lens' DebuggerDebuggeesList' (Maybe AuthKey)
-ddlKey = lens _ddlKey (\ s a -> s{_ddlKey = a})
-
--- | OAuth 2.0 token for the current user.
-ddlOAuthToken :: Lens' DebuggerDebuggeesList' (Maybe OAuthToken)
-ddlOAuthToken
-  = lens _ddlOAuthToken
-      (\ s a -> s{_ddlOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ddlFields :: Lens' DebuggerDebuggeesList' (Maybe Text)
-ddlFields
-  = lens _ddlFields (\ s a -> s{_ddlFields = a})
-
 -- | JSONP
 ddlCallback :: Lens' DebuggerDebuggeesList' (Maybe Text)
 ddlCallback
   = lens _ddlCallback (\ s a -> s{_ddlCallback = a})
 
-instance GoogleAuth DebuggerDebuggeesList' where
-        _AuthKey = ddlKey . _Just
-        _AuthToken = ddlOAuthToken . _Just
-
 instance GoogleRequest DebuggerDebuggeesList' where
         type Rs DebuggerDebuggeesList' =
              ListDebuggeesResponse
-        request = requestWith debuggerRequest
-        requestWith rq DebuggerDebuggeesList'{..}
+        requestClient DebuggerDebuggeesList'{..}
           = go _ddlXgafv _ddlIncludeInactive _ddlUploadProtocol
               _ddlProject
               (Just _ddlPp)
@@ -242,13 +177,9 @@ instance GoogleRequest DebuggerDebuggeesList' where
               _ddlUploadType
               _ddlBearerToken
               _ddlCallback
-              _ddlQuotaUser
-              (Just _ddlPrettyPrint)
-              _ddlFields
-              _ddlKey
-              _ddlOAuthToken
               (Just AltJSON)
+              debuggerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy DebuggerDebuggeesListResource)
-                      rq
+                      mempty

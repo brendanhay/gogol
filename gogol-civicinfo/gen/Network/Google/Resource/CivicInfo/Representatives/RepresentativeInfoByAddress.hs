@@ -34,16 +34,10 @@ module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAdd
     , RepresentativesRepresentativeInfoByAddress'
 
     -- * Request Lenses
-    , rribaQuotaUser
     , rribaRoles
-    , rribaPrettyPrint
-    , rribaUserIP
     , rribaAddress
-    , rribaKey
     , rribaIncludeOffices
     , rribaLevels
-    , rribaOAuthToken
-    , rribaFields
     ) where
 
 import           Network.Google.CivicInfo.Types
@@ -62,78 +56,40 @@ type RepresentativesRepresentativeInfoByAddressResource
              QueryParams "levels"
                RepresentativesRepresentativeInfoByAddressLevels
                :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] RepresentativeInfoResponse
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] RepresentativeInfoResponse
 
 -- | Looks up political geography and representative information for a single
 -- address.
 --
 -- /See:/ 'representativesRepresentativeInfoByAddress'' smart constructor.
 data RepresentativesRepresentativeInfoByAddress' = RepresentativesRepresentativeInfoByAddress'
-    { _rribaQuotaUser      :: !(Maybe Text)
-    , _rribaRoles          :: !(Maybe [RepresentativesRepresentativeInfoByAddressRoles])
-    , _rribaPrettyPrint    :: !Bool
-    , _rribaUserIP         :: !(Maybe Text)
+    { _rribaRoles          :: !(Maybe [RepresentativesRepresentativeInfoByAddressRoles])
     , _rribaAddress        :: !(Maybe Text)
-    , _rribaKey            :: !(Maybe AuthKey)
     , _rribaIncludeOffices :: !Bool
     , _rribaLevels         :: !(Maybe [RepresentativesRepresentativeInfoByAddressLevels])
-    , _rribaOAuthToken     :: !(Maybe OAuthToken)
-    , _rribaFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepresentativesRepresentativeInfoByAddress'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rribaQuotaUser'
---
 -- * 'rribaRoles'
 --
--- * 'rribaPrettyPrint'
---
--- * 'rribaUserIP'
---
 -- * 'rribaAddress'
---
--- * 'rribaKey'
 --
 -- * 'rribaIncludeOffices'
 --
 -- * 'rribaLevels'
---
--- * 'rribaOAuthToken'
---
--- * 'rribaFields'
 representativesRepresentativeInfoByAddress'
     :: RepresentativesRepresentativeInfoByAddress'
 representativesRepresentativeInfoByAddress' =
     RepresentativesRepresentativeInfoByAddress'
-    { _rribaQuotaUser = Nothing
-    , _rribaRoles = Nothing
-    , _rribaPrettyPrint = True
-    , _rribaUserIP = Nothing
+    { _rribaRoles = Nothing
     , _rribaAddress = Nothing
-    , _rribaKey = Nothing
     , _rribaIncludeOffices = True
     , _rribaLevels = Nothing
-    , _rribaOAuthToken = Nothing
-    , _rribaFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-rribaQuotaUser :: Lens' RepresentativesRepresentativeInfoByAddress' (Maybe Text)
-rribaQuotaUser
-  = lens _rribaQuotaUser
-      (\ s a -> s{_rribaQuotaUser = a})
 
 -- | A list of office roles to filter by. Only offices fulfilling one of
 -- these roles will be returned. Divisions that don\'t contain a matching
@@ -144,29 +100,11 @@ rribaRoles
       _Default
       . _Coerce
 
--- | Returns response with indentations and line breaks.
-rribaPrettyPrint :: Lens' RepresentativesRepresentativeInfoByAddress' Bool
-rribaPrettyPrint
-  = lens _rribaPrettyPrint
-      (\ s a -> s{_rribaPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rribaUserIP :: Lens' RepresentativesRepresentativeInfoByAddress' (Maybe Text)
-rribaUserIP
-  = lens _rribaUserIP (\ s a -> s{_rribaUserIP = a})
-
 -- | The address to look up. May only be specified if the field ocdId is not
 -- given in the URL.
 rribaAddress :: Lens' RepresentativesRepresentativeInfoByAddress' (Maybe Text)
 rribaAddress
   = lens _rribaAddress (\ s a -> s{_rribaAddress = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rribaKey :: Lens' RepresentativesRepresentativeInfoByAddress' (Maybe AuthKey)
-rribaKey = lens _rribaKey (\ s a -> s{_rribaKey = a})
 
 -- | Whether to return information about offices and officials. If false,
 -- only the top-level district information will be returned.
@@ -184,42 +122,20 @@ rribaLevels
       _Default
       . _Coerce
 
--- | OAuth 2.0 token for the current user.
-rribaOAuthToken :: Lens' RepresentativesRepresentativeInfoByAddress' (Maybe OAuthToken)
-rribaOAuthToken
-  = lens _rribaOAuthToken
-      (\ s a -> s{_rribaOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-rribaFields :: Lens' RepresentativesRepresentativeInfoByAddress' (Maybe Text)
-rribaFields
-  = lens _rribaFields (\ s a -> s{_rribaFields = a})
-
-instance GoogleAuth
-         RepresentativesRepresentativeInfoByAddress' where
-        _AuthKey = rribaKey . _Just
-        _AuthToken = rribaOAuthToken . _Just
-
 instance GoogleRequest
          RepresentativesRepresentativeInfoByAddress' where
         type Rs RepresentativesRepresentativeInfoByAddress' =
              RepresentativeInfoResponse
-        request = requestWith civicInfoRequest
-        requestWith rq
+        requestClient
           RepresentativesRepresentativeInfoByAddress'{..}
           = go (_rribaRoles ^. _Default) _rribaAddress
               (Just _rribaIncludeOffices)
               (_rribaLevels ^. _Default)
-              _rribaQuotaUser
-              (Just _rribaPrettyPrint)
-              _rribaUserIP
-              _rribaFields
-              _rribaKey
-              _rribaOAuthToken
               (Just AltJSON)
+              civicInfoService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy
                            RepresentativesRepresentativeInfoByAddressResource)
-                      rq
+                      mempty

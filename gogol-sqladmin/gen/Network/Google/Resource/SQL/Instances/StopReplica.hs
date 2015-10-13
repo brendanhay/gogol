@@ -33,13 +33,7 @@ module Network.Google.Resource.SQL.Instances.StopReplica
     , InstancesStopReplica'
 
     -- * Request Lenses
-    , isrQuotaUser
-    , isrPrettyPrint
     , isrProject
-    , isrUserIP
-    , isrKey
-    , isrOAuthToken
-    , isrFields
     , isrInstance
     ) where
 
@@ -54,45 +48,21 @@ type InstancesStopReplicaResource =
          "instances" :>
            Capture "instance" Text :>
              "stopReplica" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :> Post '[JSON] Operation
+               QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Stops the replication in the read replica instance.
 --
 -- /See:/ 'instancesStopReplica'' smart constructor.
 data InstancesStopReplica' = InstancesStopReplica'
-    { _isrQuotaUser   :: !(Maybe Text)
-    , _isrPrettyPrint :: !Bool
-    , _isrProject     :: !Text
-    , _isrUserIP      :: !(Maybe Text)
-    , _isrKey         :: !(Maybe AuthKey)
-    , _isrOAuthToken  :: !(Maybe OAuthToken)
-    , _isrFields      :: !(Maybe Text)
-    , _isrInstance    :: !Text
+    { _isrProject  :: !Text
+    , _isrInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesStopReplica'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'isrQuotaUser'
---
--- * 'isrPrettyPrint'
---
 -- * 'isrProject'
---
--- * 'isrUserIP'
---
--- * 'isrKey'
---
--- * 'isrOAuthToken'
---
--- * 'isrFields'
 --
 -- * 'isrInstance'
 instancesStopReplica'
@@ -101,78 +71,26 @@ instancesStopReplica'
     -> InstancesStopReplica'
 instancesStopReplica' pIsrProject_ pIsrInstance_ =
     InstancesStopReplica'
-    { _isrQuotaUser = Nothing
-    , _isrPrettyPrint = True
-    , _isrProject = pIsrProject_
-    , _isrUserIP = Nothing
-    , _isrKey = Nothing
-    , _isrOAuthToken = Nothing
-    , _isrFields = Nothing
+    { _isrProject = pIsrProject_
     , _isrInstance = pIsrInstance_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-isrQuotaUser :: Lens' InstancesStopReplica' (Maybe Text)
-isrQuotaUser
-  = lens _isrQuotaUser (\ s a -> s{_isrQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-isrPrettyPrint :: Lens' InstancesStopReplica' Bool
-isrPrettyPrint
-  = lens _isrPrettyPrint
-      (\ s a -> s{_isrPrettyPrint = a})
 
 -- | ID of the project that contains the read replica.
 isrProject :: Lens' InstancesStopReplica' Text
 isrProject
   = lens _isrProject (\ s a -> s{_isrProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-isrUserIP :: Lens' InstancesStopReplica' (Maybe Text)
-isrUserIP
-  = lens _isrUserIP (\ s a -> s{_isrUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-isrKey :: Lens' InstancesStopReplica' (Maybe AuthKey)
-isrKey = lens _isrKey (\ s a -> s{_isrKey = a})
-
--- | OAuth 2.0 token for the current user.
-isrOAuthToken :: Lens' InstancesStopReplica' (Maybe OAuthToken)
-isrOAuthToken
-  = lens _isrOAuthToken
-      (\ s a -> s{_isrOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-isrFields :: Lens' InstancesStopReplica' (Maybe Text)
-isrFields
-  = lens _isrFields (\ s a -> s{_isrFields = a})
-
 -- | Cloud SQL read replica instance name.
 isrInstance :: Lens' InstancesStopReplica' Text
 isrInstance
   = lens _isrInstance (\ s a -> s{_isrInstance = a})
 
-instance GoogleAuth InstancesStopReplica' where
-        _AuthKey = isrKey . _Just
-        _AuthToken = isrOAuthToken . _Just
-
 instance GoogleRequest InstancesStopReplica' where
         type Rs InstancesStopReplica' = Operation
-        request = requestWith sQLAdminRequest
-        requestWith rq InstancesStopReplica'{..}
-          = go _isrProject _isrInstance _isrQuotaUser
-              (Just _isrPrettyPrint)
-              _isrUserIP
-              _isrFields
-              _isrKey
-              _isrOAuthToken
-              (Just AltJSON)
+        requestClient InstancesStopReplica'{..}
+          = go _isrProject _isrInstance (Just AltJSON)
+              sQLAdminService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy InstancesStopReplicaResource)
-                      rq
+                      mempty

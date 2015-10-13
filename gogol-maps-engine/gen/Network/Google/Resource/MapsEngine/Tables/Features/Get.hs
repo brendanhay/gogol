@@ -33,16 +33,10 @@ module Network.Google.Resource.MapsEngine.Tables.Features.Get
     , TablesFeaturesGet'
 
     -- * Request Lenses
-    , tfgQuotaUser
-    , tfgPrettyPrint
-    , tfgUserIP
-    , tfgKey
     , tfgVersion
     , tfgId
     , tfgSelect
-    , tfgOAuthToken
     , tfgTableId
-    , tfgFields
     ) where
 
 import           Network.Google.MapsEngine.Types
@@ -57,41 +51,21 @@ type TablesFeaturesGetResource =
            Capture "id" Text :>
              QueryParam "version" TablesFeaturesGetVersion :>
                QueryParam "select" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Feature
+                 QueryParam "alt" AltJSON :> Get '[JSON] Feature
 
 -- | Return a single feature, given its ID.
 --
 -- /See:/ 'tablesFeaturesGet'' smart constructor.
 data TablesFeaturesGet' = TablesFeaturesGet'
-    { _tfgQuotaUser   :: !(Maybe Text)
-    , _tfgPrettyPrint :: !Bool
-    , _tfgUserIP      :: !(Maybe Text)
-    , _tfgKey         :: !(Maybe AuthKey)
-    , _tfgVersion     :: !(Maybe TablesFeaturesGetVersion)
-    , _tfgId          :: !Text
-    , _tfgSelect      :: !(Maybe Text)
-    , _tfgOAuthToken  :: !(Maybe OAuthToken)
-    , _tfgTableId     :: !Text
-    , _tfgFields      :: !(Maybe Text)
+    { _tfgVersion :: !(Maybe TablesFeaturesGetVersion)
+    , _tfgId      :: !Text
+    , _tfgSelect  :: !(Maybe Text)
+    , _tfgTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesFeaturesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'tfgQuotaUser'
---
--- * 'tfgPrettyPrint'
---
--- * 'tfgUserIP'
---
--- * 'tfgKey'
 --
 -- * 'tfgVersion'
 --
@@ -99,53 +73,18 @@ data TablesFeaturesGet' = TablesFeaturesGet'
 --
 -- * 'tfgSelect'
 --
--- * 'tfgOAuthToken'
---
 -- * 'tfgTableId'
---
--- * 'tfgFields'
 tablesFeaturesGet'
     :: Text -- ^ 'id'
     -> Text -- ^ 'tableId'
     -> TablesFeaturesGet'
 tablesFeaturesGet' pTfgId_ pTfgTableId_ =
     TablesFeaturesGet'
-    { _tfgQuotaUser = Nothing
-    , _tfgPrettyPrint = True
-    , _tfgUserIP = Nothing
-    , _tfgKey = Nothing
-    , _tfgVersion = Nothing
+    { _tfgVersion = Nothing
     , _tfgId = pTfgId_
     , _tfgSelect = Nothing
-    , _tfgOAuthToken = Nothing
     , _tfgTableId = pTfgTableId_
-    , _tfgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tfgQuotaUser :: Lens' TablesFeaturesGet' (Maybe Text)
-tfgQuotaUser
-  = lens _tfgQuotaUser (\ s a -> s{_tfgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tfgPrettyPrint :: Lens' TablesFeaturesGet' Bool
-tfgPrettyPrint
-  = lens _tfgPrettyPrint
-      (\ s a -> s{_tfgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tfgUserIP :: Lens' TablesFeaturesGet' (Maybe Text)
-tfgUserIP
-  = lens _tfgUserIP (\ s a -> s{_tfgUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tfgKey :: Lens' TablesFeaturesGet' (Maybe AuthKey)
-tfgKey = lens _tfgKey (\ s a -> s{_tfgKey = a})
 
 -- | The table version to access. See Accessing Public Data for information.
 tfgVersion :: Lens' TablesFeaturesGet' (Maybe TablesFeaturesGetVersion)
@@ -162,39 +101,18 @@ tfgSelect :: Lens' TablesFeaturesGet' (Maybe Text)
 tfgSelect
   = lens _tfgSelect (\ s a -> s{_tfgSelect = a})
 
--- | OAuth 2.0 token for the current user.
-tfgOAuthToken :: Lens' TablesFeaturesGet' (Maybe OAuthToken)
-tfgOAuthToken
-  = lens _tfgOAuthToken
-      (\ s a -> s{_tfgOAuthToken = a})
-
 -- | The ID of the table.
 tfgTableId :: Lens' TablesFeaturesGet' Text
 tfgTableId
   = lens _tfgTableId (\ s a -> s{_tfgTableId = a})
 
--- | Selector specifying which fields to include in a partial response.
-tfgFields :: Lens' TablesFeaturesGet' (Maybe Text)
-tfgFields
-  = lens _tfgFields (\ s a -> s{_tfgFields = a})
-
-instance GoogleAuth TablesFeaturesGet' where
-        _AuthKey = tfgKey . _Just
-        _AuthToken = tfgOAuthToken . _Just
-
 instance GoogleRequest TablesFeaturesGet' where
         type Rs TablesFeaturesGet' = Feature
-        request = requestWith mapsEngineRequest
-        requestWith rq TablesFeaturesGet'{..}
+        requestClient TablesFeaturesGet'{..}
           = go _tfgTableId _tfgId _tfgVersion _tfgSelect
-              _tfgQuotaUser
-              (Just _tfgPrettyPrint)
-              _tfgUserIP
-              _tfgFields
-              _tfgKey
-              _tfgOAuthToken
               (Just AltJSON)
+              mapsEngineService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy TablesFeaturesGetResource)
-                      rq
+                      mempty

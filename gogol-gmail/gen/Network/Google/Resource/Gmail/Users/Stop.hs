@@ -33,13 +33,7 @@ module Network.Google.Resource.Gmail.Users.Stop
     , UsersStop'
 
     -- * Request Lenses
-    , usQuotaUser
-    , usPrettyPrint
-    , usUserIP
     , usUserId
-    , usKey
-    , usOAuthToken
-    , usFields
     ) where
 
 import           Network.Google.Gmail.Types
@@ -49,110 +43,37 @@ import           Network.Google.Prelude
 -- 'UsersStop'' request conforms to.
 type UsersStopResource =
      Capture "userId" Text :>
-       "stop" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Post '[JSON] ()
+       "stop" :> QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Stop receiving push notifications for the given user mailbox.
 --
 -- /See:/ 'usersStop'' smart constructor.
-data UsersStop' = UsersStop'
-    { _usQuotaUser   :: !(Maybe Text)
-    , _usPrettyPrint :: !Bool
-    , _usUserIP      :: !(Maybe Text)
-    , _usUserId      :: !Text
-    , _usKey         :: !(Maybe AuthKey)
-    , _usOAuthToken  :: !(Maybe OAuthToken)
-    , _usFields      :: !(Maybe Text)
+newtype UsersStop' = UsersStop'
+    { _usUserId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersStop'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'usQuotaUser'
---
--- * 'usPrettyPrint'
---
--- * 'usUserIP'
---
 -- * 'usUserId'
---
--- * 'usKey'
---
--- * 'usOAuthToken'
---
--- * 'usFields'
 usersStop'
     :: Text
     -> UsersStop'
 usersStop' pUsUserId_ =
     UsersStop'
-    { _usQuotaUser = Nothing
-    , _usPrettyPrint = True
-    , _usUserIP = Nothing
-    , _usUserId = pUsUserId_
-    , _usKey = Nothing
-    , _usOAuthToken = Nothing
-    , _usFields = Nothing
+    { _usUserId = pUsUserId_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-usQuotaUser :: Lens' UsersStop' (Maybe Text)
-usQuotaUser
-  = lens _usQuotaUser (\ s a -> s{_usQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-usPrettyPrint :: Lens' UsersStop' Bool
-usPrettyPrint
-  = lens _usPrettyPrint
-      (\ s a -> s{_usPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-usUserIP :: Lens' UsersStop' (Maybe Text)
-usUserIP = lens _usUserIP (\ s a -> s{_usUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
 usUserId :: Lens' UsersStop' Text
 usUserId = lens _usUserId (\ s a -> s{_usUserId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-usKey :: Lens' UsersStop' (Maybe AuthKey)
-usKey = lens _usKey (\ s a -> s{_usKey = a})
-
--- | OAuth 2.0 token for the current user.
-usOAuthToken :: Lens' UsersStop' (Maybe OAuthToken)
-usOAuthToken
-  = lens _usOAuthToken (\ s a -> s{_usOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-usFields :: Lens' UsersStop' (Maybe Text)
-usFields = lens _usFields (\ s a -> s{_usFields = a})
-
-instance GoogleAuth UsersStop' where
-        _AuthKey = usKey . _Just
-        _AuthToken = usOAuthToken . _Just
-
 instance GoogleRequest UsersStop' where
         type Rs UsersStop' = ()
-        request = requestWith gmailRequest
-        requestWith rq UsersStop'{..}
-          = go _usUserId _usQuotaUser (Just _usPrettyPrint)
-              _usUserIP
-              _usFields
-              _usKey
-              _usOAuthToken
-              (Just AltJSON)
+        requestClient UsersStop'{..}
+          = go _usUserId (Just AltJSON) gmailService
           where go
-                  = clientBuild (Proxy :: Proxy UsersStopResource) rq
+                  = buildClient (Proxy :: Proxy UsersStopResource)
+                      mempty

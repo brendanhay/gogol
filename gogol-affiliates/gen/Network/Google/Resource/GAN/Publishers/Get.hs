@@ -36,15 +36,9 @@ module Network.Google.Resource.GAN.Publishers.Get
     , PublishersGet'
 
     -- * Request Lenses
-    , pgQuotaUser
-    , pgPrettyPrint
-    , pgUserIP
     , pgRoleId
     , pgRole
-    , pgKey
-    , pgOAuthToken
     , pgPublisherId
-    , pgFields
     ) where
 
 import           Network.Google.Affiliates.Types
@@ -57,13 +51,7 @@ type PublishersGetResource =
        Capture "roleId" Text :>
          "publisher" :>
            QueryParam "publisherId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Publisher
+             QueryParam "alt" AltJSON :> Get '[JSON] Publisher
 
 -- | Retrieves data about a single advertiser if that the requesting
 -- advertiser\/publisher has access to it. Only advertisers can look up
@@ -72,72 +60,30 @@ type PublishersGetResource =
 --
 -- /See:/ 'publishersGet'' smart constructor.
 data PublishersGet' = PublishersGet'
-    { _pgQuotaUser   :: !(Maybe Text)
-    , _pgPrettyPrint :: !Bool
-    , _pgUserIP      :: !(Maybe Text)
-    , _pgRoleId      :: !Text
+    { _pgRoleId      :: !Text
     , _pgRole        :: !PublishersGetRole
-    , _pgKey         :: !(Maybe AuthKey)
-    , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgPublisherId :: !(Maybe Text)
-    , _pgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishersGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pgQuotaUser'
---
--- * 'pgPrettyPrint'
---
--- * 'pgUserIP'
---
 -- * 'pgRoleId'
 --
 -- * 'pgRole'
 --
--- * 'pgKey'
---
--- * 'pgOAuthToken'
---
 -- * 'pgPublisherId'
---
--- * 'pgFields'
 publishersGet'
     :: Text -- ^ 'roleId'
     -> PublishersGetRole -- ^ 'role'
     -> PublishersGet'
 publishersGet' pPgRoleId_ pPgRole_ =
     PublishersGet'
-    { _pgQuotaUser = Nothing
-    , _pgPrettyPrint = True
-    , _pgUserIP = Nothing
-    , _pgRoleId = pPgRoleId_
+    { _pgRoleId = pPgRoleId_
     , _pgRole = pPgRole_
-    , _pgKey = Nothing
-    , _pgOAuthToken = Nothing
     , _pgPublisherId = Nothing
-    , _pgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-pgQuotaUser :: Lens' PublishersGet' (Maybe Text)
-pgQuotaUser
-  = lens _pgQuotaUser (\ s a -> s{_pgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pgPrettyPrint :: Lens' PublishersGet' Bool
-pgPrettyPrint
-  = lens _pgPrettyPrint
-      (\ s a -> s{_pgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-pgUserIP :: Lens' PublishersGet' (Maybe Text)
-pgUserIP = lens _pgUserIP (\ s a -> s{_pgUserIP = a})
 
 -- | The ID of the requesting advertiser or publisher.
 pgRoleId :: Lens' PublishersGet' Text
@@ -148,42 +94,17 @@ pgRoleId = lens _pgRoleId (\ s a -> s{_pgRoleId = a})
 pgRole :: Lens' PublishersGet' PublishersGetRole
 pgRole = lens _pgRole (\ s a -> s{_pgRole = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pgKey :: Lens' PublishersGet' (Maybe AuthKey)
-pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
-
--- | OAuth 2.0 token for the current user.
-pgOAuthToken :: Lens' PublishersGet' (Maybe OAuthToken)
-pgOAuthToken
-  = lens _pgOAuthToken (\ s a -> s{_pgOAuthToken = a})
-
 -- | The ID of the publisher to look up. Optional.
 pgPublisherId :: Lens' PublishersGet' (Maybe Text)
 pgPublisherId
   = lens _pgPublisherId
       (\ s a -> s{_pgPublisherId = a})
 
--- | Selector specifying which fields to include in a partial response.
-pgFields :: Lens' PublishersGet' (Maybe Text)
-pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
-
-instance GoogleAuth PublishersGet' where
-        _AuthKey = pgKey . _Just
-        _AuthToken = pgOAuthToken . _Just
-
 instance GoogleRequest PublishersGet' where
         type Rs PublishersGet' = Publisher
-        request = requestWith affiliatesRequest
-        requestWith rq PublishersGet'{..}
-          = go _pgRole _pgRoleId _pgPublisherId _pgQuotaUser
-              (Just _pgPrettyPrint)
-              _pgUserIP
-              _pgFields
-              _pgKey
-              _pgOAuthToken
-              (Just AltJSON)
+        requestClient PublishersGet'{..}
+          = go _pgRole _pgRoleId _pgPublisherId (Just AltJSON)
+              affiliatesService
           where go
-                  = clientBuild (Proxy :: Proxy PublishersGetResource)
-                      rq
+                  = buildClient (Proxy :: Proxy PublishersGetResource)
+                      mempty

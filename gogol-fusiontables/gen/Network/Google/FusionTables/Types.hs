@@ -15,8 +15,12 @@
 --
 module Network.Google.FusionTables.Types
     (
-    -- * Service Request
-      fusionTablesRequest
+    -- * Service Configuration
+      fusionTablesService
+
+    -- * OAuth Scopes
+    , fusiontablesReadonlyScope
+    , fusiontablesScope
 
     -- * ColumnList
     , ColumnList
@@ -148,12 +152,12 @@ module Network.Google.FusionTables.Types
     -- * Template
     , Template
     , template
-    , temeAutomaticColumnNames
-    , temeTemplateId
-    , temeKind
-    , temeBody
-    , temeName
-    , temeTableId
+    , ttAutomaticColumnNames
+    , ttTemplateId
+    , ttKind
+    , ttBody
+    , ttName
+    , ttTableId
 
     -- * PointStyle
     , PointStyle
@@ -199,19 +203,19 @@ module Network.Google.FusionTables.Types
     -- * Table
     , Table
     , table
-    , tabIsExportable
-    , tabKind
-    , tabColumnPropertiesJSONSchema
-    , tabTablePropertiesJSONSchema
-    , tabName
-    , tabTablePropertiesJSON
-    , tabColumns
-    , tabBaseTableIds
-    , tabTableId
-    , tabSQL
-    , tabDescription
-    , tabAttribution
-    , tabAttributionLink
+    , tabaIsExportable
+    , tabaKind
+    , tabaColumnPropertiesJSONSchema
+    , tabaTablePropertiesJSONSchema
+    , tabaName
+    , tabaTablePropertiesJSON
+    , tabaColumns
+    , tabaBaseTableIds
+    , tabaTableId
+    , tabaSQL
+    , tabaDescription
+    , tabaAttribution
+    , tabaAttributionLink
 
     -- * LineStyle
     , LineStyle
@@ -228,7 +232,16 @@ import           Network.Google.FusionTables.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Fusion Tables API. This contains the host and root path used as a starting point for constructing service requests.
-fusionTablesRequest :: RequestBuilder
-fusionTablesRequest
-  = defaultRequest "https://www.googleapis.com/"
+fusionTablesService :: Service
+fusionTablesService
+  = defaultService (ServiceId "fusiontables:v2")
+      "www.googleapis.com"
       "fusiontables/v2/"
+
+-- | View your Fusion Tables
+fusiontablesReadonlyScope :: OAuthScope
+fusiontablesReadonlyScope = OAuthScope "https://www.googleapis.com/auth/fusiontables.readonly";
+
+-- | Manage your Fusion Tables
+fusiontablesScope :: OAuthScope
+fusiontablesScope = OAuthScope "https://www.googleapis.com/auth/fusiontables";

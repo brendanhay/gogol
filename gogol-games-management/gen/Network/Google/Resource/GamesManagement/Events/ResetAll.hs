@@ -34,13 +34,6 @@ module Network.Google.Resource.GamesManagement.Events.ResetAll
     , eventsResetAll'
     , EventsResetAll'
 
-    -- * Request Lenses
-    , eraQuotaUser
-    , eraPrettyPrint
-    , eraUserIP
-    , eraKey
-    , eraOAuthToken
-    , eraFields
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -51,104 +44,27 @@ import           Network.Google.Prelude
 type EventsResetAllResource =
      "events" :>
        "reset" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Post '[JSON] ()
+         QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all player progress on all events for the currently authenticated
 -- player. This method is only accessible to whitelisted tester accounts
 -- for your application. All quests for this player will also be reset.
 --
 -- /See:/ 'eventsResetAll'' smart constructor.
-data EventsResetAll' = EventsResetAll'
-    { _eraQuotaUser   :: !(Maybe Text)
-    , _eraPrettyPrint :: !Bool
-    , _eraUserIP      :: !(Maybe Text)
-    , _eraKey         :: !(Maybe AuthKey)
-    , _eraOAuthToken  :: !(Maybe OAuthToken)
-    , _eraFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data EventsResetAll' =
+    EventsResetAll'
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsResetAll'' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'eraQuotaUser'
---
--- * 'eraPrettyPrint'
---
--- * 'eraUserIP'
---
--- * 'eraKey'
---
--- * 'eraOAuthToken'
---
--- * 'eraFields'
 eventsResetAll'
     :: EventsResetAll'
-eventsResetAll' =
-    EventsResetAll'
-    { _eraQuotaUser = Nothing
-    , _eraPrettyPrint = True
-    , _eraUserIP = Nothing
-    , _eraKey = Nothing
-    , _eraOAuthToken = Nothing
-    , _eraFields = Nothing
-    }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-eraQuotaUser :: Lens' EventsResetAll' (Maybe Text)
-eraQuotaUser
-  = lens _eraQuotaUser (\ s a -> s{_eraQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-eraPrettyPrint :: Lens' EventsResetAll' Bool
-eraPrettyPrint
-  = lens _eraPrettyPrint
-      (\ s a -> s{_eraPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-eraUserIP :: Lens' EventsResetAll' (Maybe Text)
-eraUserIP
-  = lens _eraUserIP (\ s a -> s{_eraUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-eraKey :: Lens' EventsResetAll' (Maybe AuthKey)
-eraKey = lens _eraKey (\ s a -> s{_eraKey = a})
-
--- | OAuth 2.0 token for the current user.
-eraOAuthToken :: Lens' EventsResetAll' (Maybe OAuthToken)
-eraOAuthToken
-  = lens _eraOAuthToken
-      (\ s a -> s{_eraOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-eraFields :: Lens' EventsResetAll' (Maybe Text)
-eraFields
-  = lens _eraFields (\ s a -> s{_eraFields = a})
-
-instance GoogleAuth EventsResetAll' where
-        _AuthKey = eraKey . _Just
-        _AuthToken = eraOAuthToken . _Just
+eventsResetAll' = EventsResetAll'
 
 instance GoogleRequest EventsResetAll' where
         type Rs EventsResetAll' = ()
-        request = requestWith gamesManagementRequest
-        requestWith rq EventsResetAll'{..}
-          = go _eraQuotaUser (Just _eraPrettyPrint) _eraUserIP
-              _eraFields
-              _eraKey
-              _eraOAuthToken
-              (Just AltJSON)
+        requestClient EventsResetAll'{..}
+          = go (Just AltJSON) gamesManagementService
           where go
-                  = clientBuild (Proxy :: Proxy EventsResetAllResource)
-                      rq
+                  = buildClient (Proxy :: Proxy EventsResetAllResource)
+                      mempty

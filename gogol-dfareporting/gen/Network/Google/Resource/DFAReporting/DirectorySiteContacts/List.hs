@@ -33,20 +33,14 @@ module Network.Google.Resource.DFAReporting.DirectorySiteContacts.List
     , DirectorySiteContactsList'
 
     -- * Request Lenses
-    , dsclQuotaUser
-    , dsclPrettyPrint
-    , dsclUserIP
     , dsclSearchString
     , dsclIds
     , dsclProFileId
     , dsclDirectorySiteIds
     , dsclSortOrder
-    , dsclKey
     , dsclPageToken
     , dsclSortField
-    , dsclOAuthToken
     , dsclMaxResults
-    , dsclFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -69,45 +63,26 @@ type DirectorySiteContactsListResource =
                        DirectorySiteContactsListSortField
                        :>
                        QueryParam "maxResults" Int32 :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON]
-                                         DirectorySiteContactsListResponse
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] DirectorySiteContactsListResponse
 
 -- | Retrieves a list of directory site contacts, possibly filtered.
 --
 -- /See:/ 'directorySiteContactsList'' smart constructor.
 data DirectorySiteContactsList' = DirectorySiteContactsList'
-    { _dsclQuotaUser        :: !(Maybe Text)
-    , _dsclPrettyPrint      :: !Bool
-    , _dsclUserIP           :: !(Maybe Text)
-    , _dsclSearchString     :: !(Maybe Text)
+    { _dsclSearchString     :: !(Maybe Text)
     , _dsclIds              :: !(Maybe [Int64])
     , _dsclProFileId        :: !Int64
     , _dsclDirectorySiteIds :: !(Maybe [Int64])
     , _dsclSortOrder        :: !(Maybe DirectorySiteContactsListSortOrder)
-    , _dsclKey              :: !(Maybe AuthKey)
     , _dsclPageToken        :: !(Maybe Text)
     , _dsclSortField        :: !(Maybe DirectorySiteContactsListSortField)
-    , _dsclOAuthToken       :: !(Maybe OAuthToken)
     , _dsclMaxResults       :: !(Maybe Int32)
-    , _dsclFields           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySiteContactsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'dsclQuotaUser'
---
--- * 'dsclPrettyPrint'
---
--- * 'dsclUserIP'
 --
 -- * 'dsclSearchString'
 --
@@ -119,57 +94,25 @@ data DirectorySiteContactsList' = DirectorySiteContactsList'
 --
 -- * 'dsclSortOrder'
 --
--- * 'dsclKey'
---
 -- * 'dsclPageToken'
 --
 -- * 'dsclSortField'
 --
--- * 'dsclOAuthToken'
---
 -- * 'dsclMaxResults'
---
--- * 'dsclFields'
 directorySiteContactsList'
     :: Int64 -- ^ 'profileId'
     -> DirectorySiteContactsList'
 directorySiteContactsList' pDsclProFileId_ =
     DirectorySiteContactsList'
-    { _dsclQuotaUser = Nothing
-    , _dsclPrettyPrint = True
-    , _dsclUserIP = Nothing
-    , _dsclSearchString = Nothing
+    { _dsclSearchString = Nothing
     , _dsclIds = Nothing
     , _dsclProFileId = pDsclProFileId_
     , _dsclDirectorySiteIds = Nothing
     , _dsclSortOrder = Nothing
-    , _dsclKey = Nothing
     , _dsclPageToken = Nothing
     , _dsclSortField = Nothing
-    , _dsclOAuthToken = Nothing
     , _dsclMaxResults = Nothing
-    , _dsclFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-dsclQuotaUser :: Lens' DirectorySiteContactsList' (Maybe Text)
-dsclQuotaUser
-  = lens _dsclQuotaUser
-      (\ s a -> s{_dsclQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-dsclPrettyPrint :: Lens' DirectorySiteContactsList' Bool
-dsclPrettyPrint
-  = lens _dsclPrettyPrint
-      (\ s a -> s{_dsclPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-dsclUserIP :: Lens' DirectorySiteContactsList' (Maybe Text)
-dsclUserIP
-  = lens _dsclUserIP (\ s a -> s{_dsclUserIP = a})
 
 -- | Allows searching for objects by name, ID or email. Wildcards (*) are
 -- allowed. For example, \"directory site contact*2015\" will return
@@ -212,12 +155,6 @@ dsclSortOrder
   = lens _dsclSortOrder
       (\ s a -> s{_dsclSortOrder = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-dsclKey :: Lens' DirectorySiteContactsList' (Maybe AuthKey)
-dsclKey = lens _dsclKey (\ s a -> s{_dsclKey = a})
-
 -- | Value of the nextPageToken from the previous result page.
 dsclPageToken :: Lens' DirectorySiteContactsList' (Maybe Text)
 dsclPageToken
@@ -230,33 +167,17 @@ dsclSortField
   = lens _dsclSortField
       (\ s a -> s{_dsclSortField = a})
 
--- | OAuth 2.0 token for the current user.
-dsclOAuthToken :: Lens' DirectorySiteContactsList' (Maybe OAuthToken)
-dsclOAuthToken
-  = lens _dsclOAuthToken
-      (\ s a -> s{_dsclOAuthToken = a})
-
 -- | Maximum number of results to return.
 dsclMaxResults :: Lens' DirectorySiteContactsList' (Maybe Int32)
 dsclMaxResults
   = lens _dsclMaxResults
       (\ s a -> s{_dsclMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-dsclFields :: Lens' DirectorySiteContactsList' (Maybe Text)
-dsclFields
-  = lens _dsclFields (\ s a -> s{_dsclFields = a})
-
-instance GoogleAuth DirectorySiteContactsList' where
-        _AuthKey = dsclKey . _Just
-        _AuthToken = dsclOAuthToken . _Just
-
 instance GoogleRequest DirectorySiteContactsList'
          where
         type Rs DirectorySiteContactsList' =
              DirectorySiteContactsListResponse
-        request = requestWith dFAReportingRequest
-        requestWith rq DirectorySiteContactsList'{..}
+        requestClient DirectorySiteContactsList'{..}
           = go _dsclProFileId _dsclSearchString
               (_dsclIds ^. _Default)
               (_dsclDirectorySiteIds ^. _Default)
@@ -264,14 +185,9 @@ instance GoogleRequest DirectorySiteContactsList'
               _dsclPageToken
               _dsclSortField
               _dsclMaxResults
-              _dsclQuotaUser
-              (Just _dsclPrettyPrint)
-              _dsclUserIP
-              _dsclFields
-              _dsclKey
-              _dsclOAuthToken
               (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy DirectorySiteContactsListResource)
-                      rq
+                      mempty

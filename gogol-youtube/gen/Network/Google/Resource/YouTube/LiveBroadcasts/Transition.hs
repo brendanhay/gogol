@@ -38,17 +38,11 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Transition
     , LiveBroadcastsTransition'
 
     -- * Request Lenses
-    , lbtQuotaUser
     , lbtPart
-    , lbtPrettyPrint
-    , lbtUserIP
     , lbtBroadcastStatus
     , lbtOnBehalfOfContentOwner
-    , lbtKey
     , lbtOnBehalfOfContentOwnerChannel
     , lbtId
-    , lbtOAuthToken
-    , lbtFields
     ) where
 
 import           Network.Google.Prelude
@@ -66,14 +60,8 @@ type LiveBroadcastsTransitionResource =
              QueryParam "part" Text :>
                QueryParam "onBehalfOfContentOwner" Text :>
                  QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 Post '[JSON] LiveBroadcast
+                   QueryParam "alt" AltJSON :>
+                     Post '[JSON] LiveBroadcast
 
 -- | Changes the status of a YouTube live broadcast and initiates any
 -- processes associated with the new status. For example, when you
@@ -84,44 +72,26 @@ type LiveBroadcastsTransitionResource =
 --
 -- /See:/ 'liveBroadcastsTransition'' smart constructor.
 data LiveBroadcastsTransition' = LiveBroadcastsTransition'
-    { _lbtQuotaUser                     :: !(Maybe Text)
-    , _lbtPart                          :: !Text
-    , _lbtPrettyPrint                   :: !Bool
-    , _lbtUserIP                        :: !(Maybe Text)
+    { _lbtPart                          :: !Text
     , _lbtBroadcastStatus               :: !LiveBroadcastsTransitionBroadcastStatus
     , _lbtOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lbtKey                           :: !(Maybe AuthKey)
     , _lbtOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbtId                            :: !Text
-    , _lbtOAuthToken                    :: !(Maybe OAuthToken)
-    , _lbtFields                        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsTransition'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lbtQuotaUser'
---
 -- * 'lbtPart'
---
--- * 'lbtPrettyPrint'
---
--- * 'lbtUserIP'
 --
 -- * 'lbtBroadcastStatus'
 --
 -- * 'lbtOnBehalfOfContentOwner'
 --
--- * 'lbtKey'
---
 -- * 'lbtOnBehalfOfContentOwnerChannel'
 --
 -- * 'lbtId'
---
--- * 'lbtOAuthToken'
---
--- * 'lbtFields'
 liveBroadcastsTransition'
     :: Text -- ^ 'part'
     -> LiveBroadcastsTransitionBroadcastStatus -- ^ 'broadcastStatus'
@@ -129,25 +99,12 @@ liveBroadcastsTransition'
     -> LiveBroadcastsTransition'
 liveBroadcastsTransition' pLbtPart_ pLbtBroadcastStatus_ pLbtId_ =
     LiveBroadcastsTransition'
-    { _lbtQuotaUser = Nothing
-    , _lbtPart = pLbtPart_
-    , _lbtPrettyPrint = True
-    , _lbtUserIP = Nothing
+    { _lbtPart = pLbtPart_
     , _lbtBroadcastStatus = pLbtBroadcastStatus_
     , _lbtOnBehalfOfContentOwner = Nothing
-    , _lbtKey = Nothing
     , _lbtOnBehalfOfContentOwnerChannel = Nothing
     , _lbtId = pLbtId_
-    , _lbtOAuthToken = Nothing
-    , _lbtFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-lbtQuotaUser :: Lens' LiveBroadcastsTransition' (Maybe Text)
-lbtQuotaUser
-  = lens _lbtQuotaUser (\ s a -> s{_lbtQuotaUser = a})
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- liveBroadcast resource properties that the API response will include.
@@ -155,18 +112,6 @@ lbtQuotaUser
 -- snippet, contentDetails, and status.
 lbtPart :: Lens' LiveBroadcastsTransition' Text
 lbtPart = lens _lbtPart (\ s a -> s{_lbtPart = a})
-
--- | Returns response with indentations and line breaks.
-lbtPrettyPrint :: Lens' LiveBroadcastsTransition' Bool
-lbtPrettyPrint
-  = lens _lbtPrettyPrint
-      (\ s a -> s{_lbtPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-lbtUserIP :: Lens' LiveBroadcastsTransition' (Maybe Text)
-lbtUserIP
-  = lens _lbtUserIP (\ s a -> s{_lbtUserIP = a})
 
 -- | The broadcastStatus parameter identifies the state to which the
 -- broadcast is changing. Note that to transition a broadcast to either the
@@ -191,12 +136,6 @@ lbtOnBehalfOfContentOwner :: Lens' LiveBroadcastsTransition' (Maybe Text)
 lbtOnBehalfOfContentOwner
   = lens _lbtOnBehalfOfContentOwner
       (\ s a -> s{_lbtOnBehalfOfContentOwner = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-lbtKey :: Lens' LiveBroadcastsTransition' (Maybe AuthKey)
-lbtKey = lens _lbtKey (\ s a -> s{_lbtKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
 -- This parameter is intended exclusively for YouTube content partners. The
@@ -224,38 +163,17 @@ lbtOnBehalfOfContentOwnerChannel
 lbtId :: Lens' LiveBroadcastsTransition' Text
 lbtId = lens _lbtId (\ s a -> s{_lbtId = a})
 
--- | OAuth 2.0 token for the current user.
-lbtOAuthToken :: Lens' LiveBroadcastsTransition' (Maybe OAuthToken)
-lbtOAuthToken
-  = lens _lbtOAuthToken
-      (\ s a -> s{_lbtOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-lbtFields :: Lens' LiveBroadcastsTransition' (Maybe Text)
-lbtFields
-  = lens _lbtFields (\ s a -> s{_lbtFields = a})
-
-instance GoogleAuth LiveBroadcastsTransition' where
-        _AuthKey = lbtKey . _Just
-        _AuthToken = lbtOAuthToken . _Just
-
 instance GoogleRequest LiveBroadcastsTransition'
          where
         type Rs LiveBroadcastsTransition' = LiveBroadcast
-        request = requestWith youTubeRequest
-        requestWith rq LiveBroadcastsTransition'{..}
+        requestClient LiveBroadcastsTransition'{..}
           = go (Just _lbtBroadcastStatus) (Just _lbtId)
               (Just _lbtPart)
               _lbtOnBehalfOfContentOwner
               _lbtOnBehalfOfContentOwnerChannel
-              _lbtQuotaUser
-              (Just _lbtPrettyPrint)
-              _lbtUserIP
-              _lbtFields
-              _lbtKey
-              _lbtOAuthToken
               (Just AltJSON)
+              youTubeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy LiveBroadcastsTransitionResource)
-                      rq
+                      mempty

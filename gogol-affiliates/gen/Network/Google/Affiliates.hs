@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference>
 module Network.Google.Affiliates
     (
+    -- * Service Configuration
+      affiliatesService
+
     -- * API Declaration
-      AffiliatesAPI
+    , AffiliatesAPI
 
     -- * Resources
 

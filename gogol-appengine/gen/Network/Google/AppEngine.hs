@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference>
 module Network.Google.AppEngine
     (
+    -- * Service Configuration
+      appEngineService
+
     -- * API Declaration
-      AppEngineAPI
+    , AppEngineAPI
 
     -- * Resources
 

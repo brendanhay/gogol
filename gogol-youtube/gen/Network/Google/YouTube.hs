@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference>
 module Network.Google.YouTube
     (
+    -- * Service Configuration
+      youTubeService
+
     -- * API Declaration
-      YouTubeAPI
+    , YouTubeAPI
 
     -- * Resources
 

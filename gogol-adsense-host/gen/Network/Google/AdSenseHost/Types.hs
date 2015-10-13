@@ -15,8 +15,11 @@
 --
 module Network.Google.AdSenseHost.Types
     (
-    -- * Service Request
-      adSenseHostRequest
+    -- * Service Configuration
+      adSenseHostService
+
+    -- * OAuth Scopes
+    , adsensehostScope
 
     -- * AdClients
     , AdClients
@@ -192,7 +195,12 @@ import           Network.Google.AdSenseHost.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v4.1' of the AdSense Host API. This contains the host and root path used as a starting point for constructing service requests.
-adSenseHostRequest :: RequestBuilder
-adSenseHostRequest
-  = defaultRequest "https://www.googleapis.com/"
+adSenseHostService :: Service
+adSenseHostService
+  = defaultService (ServiceId "adsensehost:v4.1")
+      "www.googleapis.com"
       "adsensehost/v4.1/"
+
+-- | View and manage your AdSense host data and associated accounts
+adsensehostScope :: OAuthScope
+adsensehostScope = OAuthScope "https://www.googleapis.com/auth/adsensehost";

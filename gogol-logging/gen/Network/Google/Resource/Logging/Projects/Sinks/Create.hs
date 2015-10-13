@@ -35,18 +35,13 @@ module Network.Google.Resource.Logging.Projects.Sinks.Create
 
     -- * Request Lenses
     , pscXgafv
-    , pscQuotaUser
-    , pscPrettyPrint
     , pscUploadProtocol
     , pscPp
     , pscAccessToken
     , pscUploadType
     , pscPayload
     , pscBearerToken
-    , pscKey
-    , pscOAuthToken
     , pscProjectsId
-    , pscFields
     , pscCallback
     ) where
 
@@ -67,14 +62,8 @@ type ProjectsSinksCreateResource =
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
                          QueryParam "callback" Text :>
-                           QueryParam "quotaUser" Text :>
-                             QueryParam "prettyPrint" Bool :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] LogSink :>
-                                         Post '[JSON] LogSink
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] LogSink :> Post '[JSON] LogSink
 
 -- | Creates a project sink. A logs filter determines which log entries are
 -- written to the destination.
@@ -82,18 +71,13 @@ type ProjectsSinksCreateResource =
 -- /See:/ 'projectsSinksCreate'' smart constructor.
 data ProjectsSinksCreate' = ProjectsSinksCreate'
     { _pscXgafv          :: !(Maybe Text)
-    , _pscQuotaUser      :: !(Maybe Text)
-    , _pscPrettyPrint    :: !Bool
     , _pscUploadProtocol :: !(Maybe Text)
     , _pscPp             :: !Bool
     , _pscAccessToken    :: !(Maybe Text)
     , _pscUploadType     :: !(Maybe Text)
     , _pscPayload        :: !LogSink
     , _pscBearerToken    :: !(Maybe Text)
-    , _pscKey            :: !(Maybe AuthKey)
-    , _pscOAuthToken     :: !(Maybe OAuthToken)
     , _pscProjectsId     :: !Text
-    , _pscFields         :: !(Maybe Text)
     , _pscCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +86,6 @@ data ProjectsSinksCreate' = ProjectsSinksCreate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pscXgafv'
---
--- * 'pscQuotaUser'
---
--- * 'pscPrettyPrint'
 --
 -- * 'pscUploadProtocol'
 --
@@ -119,13 +99,7 @@ data ProjectsSinksCreate' = ProjectsSinksCreate'
 --
 -- * 'pscBearerToken'
 --
--- * 'pscKey'
---
--- * 'pscOAuthToken'
---
 -- * 'pscProjectsId'
---
--- * 'pscFields'
 --
 -- * 'pscCallback'
 projectsSinksCreate'
@@ -135,37 +109,19 @@ projectsSinksCreate'
 projectsSinksCreate' pPscPayload_ pPscProjectsId_ =
     ProjectsSinksCreate'
     { _pscXgafv = Nothing
-    , _pscQuotaUser = Nothing
-    , _pscPrettyPrint = True
     , _pscUploadProtocol = Nothing
     , _pscPp = True
     , _pscAccessToken = Nothing
     , _pscUploadType = Nothing
     , _pscPayload = pPscPayload_
     , _pscBearerToken = Nothing
-    , _pscKey = Nothing
-    , _pscOAuthToken = Nothing
     , _pscProjectsId = pPscProjectsId_
-    , _pscFields = Nothing
     , _pscCallback = Nothing
     }
 
 -- | V1 error format.
 pscXgafv :: Lens' ProjectsSinksCreate' (Maybe Text)
 pscXgafv = lens _pscXgafv (\ s a -> s{_pscXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pscQuotaUser :: Lens' ProjectsSinksCreate' (Maybe Text)
-pscQuotaUser
-  = lens _pscQuotaUser (\ s a -> s{_pscQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pscPrettyPrint :: Lens' ProjectsSinksCreate' Bool
-pscPrettyPrint
-  = lens _pscPrettyPrint
-      (\ s a -> s{_pscPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 pscUploadProtocol :: Lens' ProjectsSinksCreate' (Maybe Text)
@@ -200,18 +156,6 @@ pscBearerToken
   = lens _pscBearerToken
       (\ s a -> s{_pscBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pscKey :: Lens' ProjectsSinksCreate' (Maybe AuthKey)
-pscKey = lens _pscKey (\ s a -> s{_pscKey = a})
-
--- | OAuth 2.0 token for the current user.
-pscOAuthToken :: Lens' ProjectsSinksCreate' (Maybe OAuthToken)
-pscOAuthToken
-  = lens _pscOAuthToken
-      (\ s a -> s{_pscOAuthToken = a})
-
 -- | Part of \`projectName\`. The resource name of the project to which the
 -- sink is bound.
 pscProjectsId :: Lens' ProjectsSinksCreate' Text
@@ -219,38 +163,24 @@ pscProjectsId
   = lens _pscProjectsId
       (\ s a -> s{_pscProjectsId = a})
 
--- | Selector specifying which fields to include in a partial response.
-pscFields :: Lens' ProjectsSinksCreate' (Maybe Text)
-pscFields
-  = lens _pscFields (\ s a -> s{_pscFields = a})
-
 -- | JSONP
 pscCallback :: Lens' ProjectsSinksCreate' (Maybe Text)
 pscCallback
   = lens _pscCallback (\ s a -> s{_pscCallback = a})
 
-instance GoogleAuth ProjectsSinksCreate' where
-        _AuthKey = pscKey . _Just
-        _AuthToken = pscOAuthToken . _Just
-
 instance GoogleRequest ProjectsSinksCreate' where
         type Rs ProjectsSinksCreate' = LogSink
-        request = requestWith loggingRequest
-        requestWith rq ProjectsSinksCreate'{..}
+        requestClient ProjectsSinksCreate'{..}
           = go _pscProjectsId _pscXgafv _pscUploadProtocol
               (Just _pscPp)
               _pscAccessToken
               _pscUploadType
               _pscBearerToken
               _pscCallback
-              _pscQuotaUser
-              (Just _pscPrettyPrint)
-              _pscFields
-              _pscKey
-              _pscOAuthToken
               (Just AltJSON)
               _pscPayload
+              loggingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsSinksCreateResource)
-                      rq
+                      mempty

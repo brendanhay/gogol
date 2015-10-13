@@ -15,8 +15,12 @@
 --
 module Network.Google.Monitoring.Types
     (
-    -- * Service Request
-      monitoringRequest
+    -- * Service Configuration
+      monitoringService
+
+    -- * OAuth Scopes
+    , cloudPlatformScope
+    , monitoringScope
 
     -- * MetricDescriptorTypeDescriptor
     , MetricDescriptorTypeDescriptor
@@ -179,7 +183,18 @@ import           Network.Google.Monitoring.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2beta2' of the Cloud Monitoring API. This contains the host and root path used as a starting point for constructing service requests.
-monitoringRequest :: RequestBuilder
-monitoringRequest
-  = defaultRequest "https://www.googleapis.com/"
+monitoringService :: Service
+monitoringService
+  = defaultService
+      (ServiceId "cloudmonitoring:v2beta2")
+      "www.googleapis.com"
       "cloudmonitoring/v2beta2/projects/"
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: OAuthScope
+cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";
+
+-- | View and write monitoring data for all of your Google and third-party
+-- Cloud and API projects
+monitoringScope :: OAuthScope
+monitoringScope = OAuthScope "https://www.googleapis.com/auth/monitoring";

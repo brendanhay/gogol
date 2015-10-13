@@ -36,8 +36,6 @@ module Network.Google.Resource.Genomics.References.Bases.List
 
     -- * Request Lenses
     , rblXgafv
-    , rblQuotaUser
-    , rblPrettyPrint
     , rblUploadProtocol
     , rblPp
     , rblAccessToken
@@ -45,12 +43,9 @@ module Network.Google.Resource.Genomics.References.Bases.List
     , rblUploadType
     , rblReferenceId
     , rblBearerToken
-    , rblKey
     , rblEnd
     , rblPageToken
-    , rblOAuthToken
     , rblPageSize
-    , rblFields
     , rblCallback
     ) where
 
@@ -75,13 +70,8 @@ type ReferencesBasesListResource =
                              QueryParam "pageToken" Text :>
                                QueryParam "pageSize" Int32 :>
                                  QueryParam "callback" Text :>
-                                   QueryParam "quotaUser" Text :>
-                                     QueryParam "prettyPrint" Bool :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "key" AuthKey :>
-                                           Header "Authorization" OAuthToken :>
-                                             QueryParam "alt" AltJSON :>
-                                               Get '[JSON] ListBasesResponse
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] ListBasesResponse
 
 -- | Lists the bases in a reference, optionally restricted to a range.
 -- Implements
@@ -90,8 +80,6 @@ type ReferencesBasesListResource =
 -- /See:/ 'referencesBasesList'' smart constructor.
 data ReferencesBasesList' = ReferencesBasesList'
     { _rblXgafv          :: !(Maybe Text)
-    , _rblQuotaUser      :: !(Maybe Text)
-    , _rblPrettyPrint    :: !Bool
     , _rblUploadProtocol :: !(Maybe Text)
     , _rblPp             :: !Bool
     , _rblAccessToken    :: !(Maybe Text)
@@ -99,12 +87,9 @@ data ReferencesBasesList' = ReferencesBasesList'
     , _rblUploadType     :: !(Maybe Text)
     , _rblReferenceId    :: !Text
     , _rblBearerToken    :: !(Maybe Text)
-    , _rblKey            :: !(Maybe AuthKey)
     , _rblEnd            :: !(Maybe Int64)
     , _rblPageToken      :: !(Maybe Text)
-    , _rblOAuthToken     :: !(Maybe OAuthToken)
     , _rblPageSize       :: !(Maybe Int32)
-    , _rblFields         :: !(Maybe Text)
     , _rblCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -113,10 +98,6 @@ data ReferencesBasesList' = ReferencesBasesList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rblXgafv'
---
--- * 'rblQuotaUser'
---
--- * 'rblPrettyPrint'
 --
 -- * 'rblUploadProtocol'
 --
@@ -132,17 +113,11 @@ data ReferencesBasesList' = ReferencesBasesList'
 --
 -- * 'rblBearerToken'
 --
--- * 'rblKey'
---
 -- * 'rblEnd'
 --
 -- * 'rblPageToken'
 --
--- * 'rblOAuthToken'
---
 -- * 'rblPageSize'
---
--- * 'rblFields'
 --
 -- * 'rblCallback'
 referencesBasesList'
@@ -151,8 +126,6 @@ referencesBasesList'
 referencesBasesList' pRblReferenceId_ =
     ReferencesBasesList'
     { _rblXgafv = Nothing
-    , _rblQuotaUser = Nothing
-    , _rblPrettyPrint = True
     , _rblUploadProtocol = Nothing
     , _rblPp = True
     , _rblAccessToken = Nothing
@@ -160,31 +133,15 @@ referencesBasesList' pRblReferenceId_ =
     , _rblUploadType = Nothing
     , _rblReferenceId = pRblReferenceId_
     , _rblBearerToken = Nothing
-    , _rblKey = Nothing
     , _rblEnd = Nothing
     , _rblPageToken = Nothing
-    , _rblOAuthToken = Nothing
     , _rblPageSize = Nothing
-    , _rblFields = Nothing
     , _rblCallback = Nothing
     }
 
 -- | V1 error format.
 rblXgafv :: Lens' ReferencesBasesList' (Maybe Text)
 rblXgafv = lens _rblXgafv (\ s a -> s{_rblXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-rblQuotaUser :: Lens' ReferencesBasesList' (Maybe Text)
-rblQuotaUser
-  = lens _rblQuotaUser (\ s a -> s{_rblQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rblPrettyPrint :: Lens' ReferencesBasesList' Bool
-rblPrettyPrint
-  = lens _rblPrettyPrint
-      (\ s a -> s{_rblPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 rblUploadProtocol :: Lens' ReferencesBasesList' (Maybe Text)
@@ -224,12 +181,6 @@ rblBearerToken
   = lens _rblBearerToken
       (\ s a -> s{_rblBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rblKey :: Lens' ReferencesBasesList' (Maybe AuthKey)
-rblKey = lens _rblKey (\ s a -> s{_rblKey = a})
-
 -- | The end position (0-based, exclusive) of this query. Defaults to the
 -- length of this reference.
 rblEnd :: Lens' ReferencesBasesList' (Maybe Int64)
@@ -242,35 +193,19 @@ rblPageToken :: Lens' ReferencesBasesList' (Maybe Text)
 rblPageToken
   = lens _rblPageToken (\ s a -> s{_rblPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-rblOAuthToken :: Lens' ReferencesBasesList' (Maybe OAuthToken)
-rblOAuthToken
-  = lens _rblOAuthToken
-      (\ s a -> s{_rblOAuthToken = a})
-
 -- | Specifies the maximum number of bases to return in a single page.
 rblPageSize :: Lens' ReferencesBasesList' (Maybe Int32)
 rblPageSize
   = lens _rblPageSize (\ s a -> s{_rblPageSize = a})
-
--- | Selector specifying which fields to include in a partial response.
-rblFields :: Lens' ReferencesBasesList' (Maybe Text)
-rblFields
-  = lens _rblFields (\ s a -> s{_rblFields = a})
 
 -- | JSONP
 rblCallback :: Lens' ReferencesBasesList' (Maybe Text)
 rblCallback
   = lens _rblCallback (\ s a -> s{_rblCallback = a})
 
-instance GoogleAuth ReferencesBasesList' where
-        _AuthKey = rblKey . _Just
-        _AuthToken = rblOAuthToken . _Just
-
 instance GoogleRequest ReferencesBasesList' where
         type Rs ReferencesBasesList' = ListBasesResponse
-        request = requestWith genomicsRequest
-        requestWith rq ReferencesBasesList'{..}
+        requestClient ReferencesBasesList'{..}
           = go _rblReferenceId _rblXgafv _rblUploadProtocol
               (Just _rblPp)
               _rblAccessToken
@@ -281,13 +216,9 @@ instance GoogleRequest ReferencesBasesList' where
               _rblPageToken
               _rblPageSize
               _rblCallback
-              _rblQuotaUser
-              (Just _rblPrettyPrint)
-              _rblFields
-              _rblKey
-              _rblOAuthToken
               (Just AltJSON)
+              genomicsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ReferencesBasesListResource)
-                      rq
+                      mempty

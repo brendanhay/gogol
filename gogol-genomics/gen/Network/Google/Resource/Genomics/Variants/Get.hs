@@ -34,17 +34,12 @@ module Network.Google.Resource.Genomics.Variants.Get
 
     -- * Request Lenses
     , vggXgafv
-    , vggQuotaUser
-    , vggPrettyPrint
     , vggUploadProtocol
     , vggPp
     , vggAccessToken
     , vggUploadType
     , vggBearerToken
-    , vggKey
     , vggVariantId
-    , vggOAuthToken
-    , vggFields
     , vggCallback
     ) where
 
@@ -64,30 +59,19 @@ type VariantsGetResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] Variant
+                         QueryParam "alt" AltJSON :> Get '[JSON] Variant
 
 -- | Gets a variant by ID.
 --
 -- /See:/ 'variantsGet'' smart constructor.
 data VariantsGet' = VariantsGet'
     { _vggXgafv          :: !(Maybe Text)
-    , _vggQuotaUser      :: !(Maybe Text)
-    , _vggPrettyPrint    :: !Bool
     , _vggUploadProtocol :: !(Maybe Text)
     , _vggPp             :: !Bool
     , _vggAccessToken    :: !(Maybe Text)
     , _vggUploadType     :: !(Maybe Text)
     , _vggBearerToken    :: !(Maybe Text)
-    , _vggKey            :: !(Maybe AuthKey)
     , _vggVariantId      :: !Text
-    , _vggOAuthToken     :: !(Maybe OAuthToken)
-    , _vggFields         :: !(Maybe Text)
     , _vggCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -96,10 +80,6 @@ data VariantsGet' = VariantsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'vggXgafv'
---
--- * 'vggQuotaUser'
---
--- * 'vggPrettyPrint'
 --
 -- * 'vggUploadProtocol'
 --
@@ -111,13 +91,7 @@ data VariantsGet' = VariantsGet'
 --
 -- * 'vggBearerToken'
 --
--- * 'vggKey'
---
 -- * 'vggVariantId'
---
--- * 'vggOAuthToken'
---
--- * 'vggFields'
 --
 -- * 'vggCallback'
 variantsGet'
@@ -126,36 +100,18 @@ variantsGet'
 variantsGet' pVggVariantId_ =
     VariantsGet'
     { _vggXgafv = Nothing
-    , _vggQuotaUser = Nothing
-    , _vggPrettyPrint = True
     , _vggUploadProtocol = Nothing
     , _vggPp = True
     , _vggAccessToken = Nothing
     , _vggUploadType = Nothing
     , _vggBearerToken = Nothing
-    , _vggKey = Nothing
     , _vggVariantId = pVggVariantId_
-    , _vggOAuthToken = Nothing
-    , _vggFields = Nothing
     , _vggCallback = Nothing
     }
 
 -- | V1 error format.
 vggXgafv :: Lens' VariantsGet' (Maybe Text)
 vggXgafv = lens _vggXgafv (\ s a -> s{_vggXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-vggQuotaUser :: Lens' VariantsGet' (Maybe Text)
-vggQuotaUser
-  = lens _vggQuotaUser (\ s a -> s{_vggQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-vggPrettyPrint :: Lens' VariantsGet' Bool
-vggPrettyPrint
-  = lens _vggPrettyPrint
-      (\ s a -> s{_vggPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 vggUploadProtocol :: Lens' VariantsGet' (Maybe Text)
@@ -185,52 +141,27 @@ vggBearerToken
   = lens _vggBearerToken
       (\ s a -> s{_vggBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-vggKey :: Lens' VariantsGet' (Maybe AuthKey)
-vggKey = lens _vggKey (\ s a -> s{_vggKey = a})
-
 -- | The ID of the variant.
 vggVariantId :: Lens' VariantsGet' Text
 vggVariantId
   = lens _vggVariantId (\ s a -> s{_vggVariantId = a})
-
--- | OAuth 2.0 token for the current user.
-vggOAuthToken :: Lens' VariantsGet' (Maybe OAuthToken)
-vggOAuthToken
-  = lens _vggOAuthToken
-      (\ s a -> s{_vggOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-vggFields :: Lens' VariantsGet' (Maybe Text)
-vggFields
-  = lens _vggFields (\ s a -> s{_vggFields = a})
 
 -- | JSONP
 vggCallback :: Lens' VariantsGet' (Maybe Text)
 vggCallback
   = lens _vggCallback (\ s a -> s{_vggCallback = a})
 
-instance GoogleAuth VariantsGet' where
-        _AuthKey = vggKey . _Just
-        _AuthToken = vggOAuthToken . _Just
-
 instance GoogleRequest VariantsGet' where
         type Rs VariantsGet' = Variant
-        request = requestWith genomicsRequest
-        requestWith rq VariantsGet'{..}
+        requestClient VariantsGet'{..}
           = go _vggVariantId _vggXgafv _vggUploadProtocol
               (Just _vggPp)
               _vggAccessToken
               _vggUploadType
               _vggBearerToken
               _vggCallback
-              _vggQuotaUser
-              (Just _vggPrettyPrint)
-              _vggFields
-              _vggKey
-              _vggOAuthToken
               (Just AltJSON)
+              genomicsService
           where go
-                  = clientBuild (Proxy :: Proxy VariantsGetResource) rq
+                  = buildClient (Proxy :: Proxy VariantsGetResource)
+                      mempty

@@ -33,22 +33,16 @@ module Network.Google.Resource.DFAReporting.AccountUserProFiles.List
     , AccountUserProFilesList'
 
     -- * Request Lenses
-    , aupflQuotaUser
-    , aupflPrettyPrint
     , aupflUserRoleId
-    , aupflUserIP
     , aupflSearchString
     , aupflIds
     , aupflProFileId
     , aupflSortOrder
     , aupflActive
-    , aupflKey
     , aupflPageToken
     , aupflSortField
     , aupflSubAccountId
-    , aupflOAuthToken
     , aupflMaxResults
-    , aupflFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -73,49 +67,30 @@ type AccountUserProFilesListResource =
                          :>
                          QueryParam "subaccountId" Int64 :>
                            QueryParam "maxResults" Int32 :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "userIp" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON]
-                                             AccountUserProFilesListResponse
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] AccountUserProFilesListResponse
 
 -- | Retrieves a list of account user profiles, possibly filtered.
 --
 -- /See:/ 'accountUserProFilesList'' smart constructor.
 data AccountUserProFilesList' = AccountUserProFilesList'
-    { _aupflQuotaUser    :: !(Maybe Text)
-    , _aupflPrettyPrint  :: !Bool
-    , _aupflUserRoleId   :: !(Maybe Int64)
-    , _aupflUserIP       :: !(Maybe Text)
+    { _aupflUserRoleId   :: !(Maybe Int64)
     , _aupflSearchString :: !(Maybe Text)
     , _aupflIds          :: !(Maybe [Int64])
     , _aupflProFileId    :: !Int64
     , _aupflSortOrder    :: !(Maybe AccountUserProFilesListSortOrder)
     , _aupflActive       :: !(Maybe Bool)
-    , _aupflKey          :: !(Maybe AuthKey)
     , _aupflPageToken    :: !(Maybe Text)
     , _aupflSortField    :: !(Maybe AccountUserProFilesListSortField)
     , _aupflSubAccountId :: !(Maybe Int64)
-    , _aupflOAuthToken   :: !(Maybe OAuthToken)
     , _aupflMaxResults   :: !(Maybe Int32)
-    , _aupflFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProFilesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aupflQuotaUser'
---
--- * 'aupflPrettyPrint'
---
 -- * 'aupflUserRoleId'
---
--- * 'aupflUserIP'
 --
 -- * 'aupflSearchString'
 --
@@ -127,67 +102,35 @@ data AccountUserProFilesList' = AccountUserProFilesList'
 --
 -- * 'aupflActive'
 --
--- * 'aupflKey'
---
 -- * 'aupflPageToken'
 --
 -- * 'aupflSortField'
 --
 -- * 'aupflSubAccountId'
 --
--- * 'aupflOAuthToken'
---
 -- * 'aupflMaxResults'
---
--- * 'aupflFields'
 accountUserProFilesList'
     :: Int64 -- ^ 'profileId'
     -> AccountUserProFilesList'
 accountUserProFilesList' pAupflProFileId_ =
     AccountUserProFilesList'
-    { _aupflQuotaUser = Nothing
-    , _aupflPrettyPrint = True
-    , _aupflUserRoleId = Nothing
-    , _aupflUserIP = Nothing
+    { _aupflUserRoleId = Nothing
     , _aupflSearchString = Nothing
     , _aupflIds = Nothing
     , _aupflProFileId = pAupflProFileId_
     , _aupflSortOrder = Nothing
     , _aupflActive = Nothing
-    , _aupflKey = Nothing
     , _aupflPageToken = Nothing
     , _aupflSortField = Nothing
     , _aupflSubAccountId = Nothing
-    , _aupflOAuthToken = Nothing
     , _aupflMaxResults = Nothing
-    , _aupflFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-aupflQuotaUser :: Lens' AccountUserProFilesList' (Maybe Text)
-aupflQuotaUser
-  = lens _aupflQuotaUser
-      (\ s a -> s{_aupflQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aupflPrettyPrint :: Lens' AccountUserProFilesList' Bool
-aupflPrettyPrint
-  = lens _aupflPrettyPrint
-      (\ s a -> s{_aupflPrettyPrint = a})
 
 -- | Select only user profiles with the specified user role ID.
 aupflUserRoleId :: Lens' AccountUserProFilesList' (Maybe Int64)
 aupflUserRoleId
   = lens _aupflUserRoleId
       (\ s a -> s{_aupflUserRoleId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-aupflUserIP :: Lens' AccountUserProFilesList' (Maybe Text)
-aupflUserIP
-  = lens _aupflUserIP (\ s a -> s{_aupflUserIP = a})
 
 -- | Allows searching for objects by name, ID or email. Wildcards (*) are
 -- allowed. For example, \"user profile*2015\" will return objects with
@@ -225,12 +168,6 @@ aupflActive :: Lens' AccountUserProFilesList' (Maybe Bool)
 aupflActive
   = lens _aupflActive (\ s a -> s{_aupflActive = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aupflKey :: Lens' AccountUserProFilesList' (Maybe AuthKey)
-aupflKey = lens _aupflKey (\ s a -> s{_aupflKey = a})
-
 -- | Value of the nextPageToken from the previous result page.
 aupflPageToken :: Lens' AccountUserProFilesList' (Maybe Text)
 aupflPageToken
@@ -249,32 +186,16 @@ aupflSubAccountId
   = lens _aupflSubAccountId
       (\ s a -> s{_aupflSubAccountId = a})
 
--- | OAuth 2.0 token for the current user.
-aupflOAuthToken :: Lens' AccountUserProFilesList' (Maybe OAuthToken)
-aupflOAuthToken
-  = lens _aupflOAuthToken
-      (\ s a -> s{_aupflOAuthToken = a})
-
 -- | Maximum number of results to return.
 aupflMaxResults :: Lens' AccountUserProFilesList' (Maybe Int32)
 aupflMaxResults
   = lens _aupflMaxResults
       (\ s a -> s{_aupflMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-aupflFields :: Lens' AccountUserProFilesList' (Maybe Text)
-aupflFields
-  = lens _aupflFields (\ s a -> s{_aupflFields = a})
-
-instance GoogleAuth AccountUserProFilesList' where
-        _AuthKey = aupflKey . _Just
-        _AuthToken = aupflOAuthToken . _Just
-
 instance GoogleRequest AccountUserProFilesList' where
         type Rs AccountUserProFilesList' =
              AccountUserProFilesListResponse
-        request = requestWith dFAReportingRequest
-        requestWith rq AccountUserProFilesList'{..}
+        requestClient AccountUserProFilesList'{..}
           = go _aupflProFileId _aupflUserRoleId
               _aupflSearchString
               (_aupflIds ^. _Default)
@@ -284,14 +205,9 @@ instance GoogleRequest AccountUserProFilesList' where
               _aupflSortField
               _aupflSubAccountId
               _aupflMaxResults
-              _aupflQuotaUser
-              (Just _aupflPrettyPrint)
-              _aupflUserIP
-              _aupflFields
-              _aupflKey
-              _aupflOAuthToken
               (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountUserProFilesListResource)
-                      rq
+                      mempty

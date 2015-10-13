@@ -15,8 +15,15 @@
 --
 module Network.Google.AppsActivity.Types
     (
-    -- * Service Request
-      appsActivityRequest
+    -- * Service Configuration
+      appsActivityService
+
+    -- * OAuth Scopes
+    , driveMetadataReadonlyScope
+    , activityScope
+    , driveReadonlyScope
+    , driveScope
+    , driveMetadataScope
 
     -- * Parent
     , Parent
@@ -117,7 +124,28 @@ import           Network.Google.AppsActivity.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Apps Activity API. This contains the host and root path used as a starting point for constructing service requests.
-appsActivityRequest :: RequestBuilder
-appsActivityRequest
-  = defaultRequest "https://www.googleapis.com/"
+appsActivityService :: Service
+appsActivityService
+  = defaultService (ServiceId "appsactivity:v1")
+      "www.googleapis.com"
       "appsactivity/v1/"
+
+-- | View metadata for files in your Google Drive
+driveMetadataReadonlyScope :: OAuthScope
+driveMetadataReadonlyScope = OAuthScope "https://www.googleapis.com/auth/drive.metadata.readonly";
+
+-- | View the activity history of your Google Apps
+activityScope :: OAuthScope
+activityScope = OAuthScope "https://www.googleapis.com/auth/activity";
+
+-- | View the files in your Google Drive
+driveReadonlyScope :: OAuthScope
+driveReadonlyScope = OAuthScope "https://www.googleapis.com/auth/drive.readonly";
+
+-- | View and manage the files in your Google Drive
+driveScope :: OAuthScope
+driveScope = OAuthScope "https://www.googleapis.com/auth/drive";
+
+-- | View and manage metadata of files in your Google Drive
+driveMetadataScope :: OAuthScope
+driveMetadataScope = OAuthScope "https://www.googleapis.com/auth/drive.metadata";

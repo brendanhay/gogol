@@ -36,8 +36,6 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
 
     -- * Request Lenses
     , asicgXgafv
-    , asicgQuotaUser
-    , asicgPrettyPrint
     , asicgUploadProtocol
     , asicgCountry
     , asicgPp
@@ -46,9 +44,6 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
     , asicgVideoId
     , asicgAccountId
     , asicgBearerToken
-    , asicgKey
-    , asicgOAuthToken
-    , asicgFields
     , asicgCallback
     ) where
 
@@ -72,13 +67,8 @@ type AccountsStoreInfosCountryGetResource =
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "quotaUser" Text :>
-                                   QueryParam "prettyPrint" Bool :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "key" AuthKey :>
-                                         Header "Authorization" OAuthToken :>
-                                           QueryParam "alt" AltJSON :>
-                                             Get '[JSON] StoreInfo
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] StoreInfo
 
 -- | Get a StoreInfo given its video id and country. See _Authentication and
 -- Authorization rules_ and _Get methods rules_ for more information about
@@ -87,8 +77,6 @@ type AccountsStoreInfosCountryGetResource =
 -- /See:/ 'accountsStoreInfosCountryGet'' smart constructor.
 data AccountsStoreInfosCountryGet' = AccountsStoreInfosCountryGet'
     { _asicgXgafv          :: !(Maybe Text)
-    , _asicgQuotaUser      :: !(Maybe Text)
-    , _asicgPrettyPrint    :: !Bool
     , _asicgUploadProtocol :: !(Maybe Text)
     , _asicgCountry        :: !Text
     , _asicgPp             :: !Bool
@@ -97,9 +85,6 @@ data AccountsStoreInfosCountryGet' = AccountsStoreInfosCountryGet'
     , _asicgVideoId        :: !Text
     , _asicgAccountId      :: !Text
     , _asicgBearerToken    :: !(Maybe Text)
-    , _asicgKey            :: !(Maybe AuthKey)
-    , _asicgOAuthToken     :: !(Maybe OAuthToken)
-    , _asicgFields         :: !(Maybe Text)
     , _asicgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -108,10 +93,6 @@ data AccountsStoreInfosCountryGet' = AccountsStoreInfosCountryGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'asicgXgafv'
---
--- * 'asicgQuotaUser'
---
--- * 'asicgPrettyPrint'
 --
 -- * 'asicgUploadProtocol'
 --
@@ -129,12 +110,6 @@ data AccountsStoreInfosCountryGet' = AccountsStoreInfosCountryGet'
 --
 -- * 'asicgBearerToken'
 --
--- * 'asicgKey'
---
--- * 'asicgOAuthToken'
---
--- * 'asicgFields'
---
 -- * 'asicgCallback'
 accountsStoreInfosCountryGet'
     :: Text -- ^ 'country'
@@ -144,8 +119,6 @@ accountsStoreInfosCountryGet'
 accountsStoreInfosCountryGet' pAsicgCountry_ pAsicgVideoId_ pAsicgAccountId_ =
     AccountsStoreInfosCountryGet'
     { _asicgXgafv = Nothing
-    , _asicgQuotaUser = Nothing
-    , _asicgPrettyPrint = True
     , _asicgUploadProtocol = Nothing
     , _asicgCountry = pAsicgCountry_
     , _asicgPp = True
@@ -154,9 +127,6 @@ accountsStoreInfosCountryGet' pAsicgCountry_ pAsicgVideoId_ pAsicgAccountId_ =
     , _asicgVideoId = pAsicgVideoId_
     , _asicgAccountId = pAsicgAccountId_
     , _asicgBearerToken = Nothing
-    , _asicgKey = Nothing
-    , _asicgOAuthToken = Nothing
-    , _asicgFields = Nothing
     , _asicgCallback = Nothing
     }
 
@@ -164,20 +134,6 @@ accountsStoreInfosCountryGet' pAsicgCountry_ pAsicgVideoId_ pAsicgAccountId_ =
 asicgXgafv :: Lens' AccountsStoreInfosCountryGet' (Maybe Text)
 asicgXgafv
   = lens _asicgXgafv (\ s a -> s{_asicgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-asicgQuotaUser :: Lens' AccountsStoreInfosCountryGet' (Maybe Text)
-asicgQuotaUser
-  = lens _asicgQuotaUser
-      (\ s a -> s{_asicgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-asicgPrettyPrint :: Lens' AccountsStoreInfosCountryGet' Bool
-asicgPrettyPrint
-  = lens _asicgPrettyPrint
-      (\ s a -> s{_asicgPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 asicgUploadProtocol :: Lens' AccountsStoreInfosCountryGet' (Maybe Text)
@@ -223,39 +179,16 @@ asicgBearerToken
   = lens _asicgBearerToken
       (\ s a -> s{_asicgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-asicgKey :: Lens' AccountsStoreInfosCountryGet' (Maybe AuthKey)
-asicgKey = lens _asicgKey (\ s a -> s{_asicgKey = a})
-
--- | OAuth 2.0 token for the current user.
-asicgOAuthToken :: Lens' AccountsStoreInfosCountryGet' (Maybe OAuthToken)
-asicgOAuthToken
-  = lens _asicgOAuthToken
-      (\ s a -> s{_asicgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-asicgFields :: Lens' AccountsStoreInfosCountryGet' (Maybe Text)
-asicgFields
-  = lens _asicgFields (\ s a -> s{_asicgFields = a})
-
 -- | JSONP
 asicgCallback :: Lens' AccountsStoreInfosCountryGet' (Maybe Text)
 asicgCallback
   = lens _asicgCallback
       (\ s a -> s{_asicgCallback = a})
 
-instance GoogleAuth AccountsStoreInfosCountryGet'
-         where
-        _AuthKey = asicgKey . _Just
-        _AuthToken = asicgOAuthToken . _Just
-
 instance GoogleRequest AccountsStoreInfosCountryGet'
          where
         type Rs AccountsStoreInfosCountryGet' = StoreInfo
-        request = requestWith playMoviesPartnerRequest
-        requestWith rq AccountsStoreInfosCountryGet'{..}
+        requestClient AccountsStoreInfosCountryGet'{..}
           = go _asicgAccountId _asicgVideoId _asicgCountry
               _asicgXgafv
               _asicgUploadProtocol
@@ -264,13 +197,9 @@ instance GoogleRequest AccountsStoreInfosCountryGet'
               _asicgUploadType
               _asicgBearerToken
               _asicgCallback
-              _asicgQuotaUser
-              (Just _asicgPrettyPrint)
-              _asicgFields
-              _asicgKey
-              _asicgOAuthToken
               (Just AltJSON)
+              playMoviesPartnerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsStoreInfosCountryGetResource)
-                      rq
+                      mempty

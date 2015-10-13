@@ -34,25 +34,19 @@ module Network.Google.Resource.DFAReporting.Campaigns.List
 
     -- * Request Lenses
     , ccExcludedIds
-    , ccQuotaUser
-    , ccPrettyPrint
-    , ccUserIP
     , ccSearchString
     , ccIds
     , ccProFileId
     , ccSortOrder
     , ccAdvertiserGroupIds
-    , ccKey
     , ccAtLeastOneOptimizationActivity
     , ccOverriddenEventTagId
     , ccPageToken
     , ccSortField
     , ccSubAccountId
-    , ccOAuthToken
     , ccAdvertiserIds
     , ccArchived
     , ccMaxResults
-    , ccFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -77,41 +71,27 @@ type CampaignsListResource =
                                QueryParams "advertiserIds" Int64 :>
                                  QueryParam "archived" Bool :>
                                    QueryParam "maxResults" Int32 :>
-                                     QueryParam "quotaUser" Text :>
-                                       QueryParam "prettyPrint" Bool :>
-                                         QueryParam "userIp" Text :>
-                                           QueryParam "fields" Text :>
-                                             QueryParam "key" AuthKey :>
-                                               Header "Authorization" OAuthToken
-                                                 :>
-                                                 QueryParam "alt" AltJSON :>
-                                                   Get '[JSON]
-                                                     CampaignsListResponse
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] CampaignsListResponse
 
 -- | Retrieves a list of campaigns, possibly filtered.
 --
 -- /See:/ 'campaignsList'' smart constructor.
 data CampaignsList' = CampaignsList'
     { _ccExcludedIds                    :: !(Maybe [Int64])
-    , _ccQuotaUser                      :: !(Maybe Text)
-    , _ccPrettyPrint                    :: !Bool
-    , _ccUserIP                         :: !(Maybe Text)
     , _ccSearchString                   :: !(Maybe Text)
     , _ccIds                            :: !(Maybe [Int64])
     , _ccProFileId                      :: !Int64
     , _ccSortOrder                      :: !(Maybe CampaignsListSortOrder)
     , _ccAdvertiserGroupIds             :: !(Maybe [Int64])
-    , _ccKey                            :: !(Maybe AuthKey)
     , _ccAtLeastOneOptimizationActivity :: !(Maybe Bool)
     , _ccOverriddenEventTagId           :: !(Maybe Int64)
     , _ccPageToken                      :: !(Maybe Text)
     , _ccSortField                      :: !(Maybe CampaignsListSortField)
     , _ccSubAccountId                   :: !(Maybe Int64)
-    , _ccOAuthToken                     :: !(Maybe OAuthToken)
     , _ccAdvertiserIds                  :: !(Maybe [Int64])
     , _ccArchived                       :: !(Maybe Bool)
     , _ccMaxResults                     :: !(Maybe Int32)
-    , _ccFields                         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsList'' with the minimum fields required to make a request.
@@ -119,12 +99,6 @@ data CampaignsList' = CampaignsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ccExcludedIds'
---
--- * 'ccQuotaUser'
---
--- * 'ccPrettyPrint'
---
--- * 'ccUserIP'
 --
 -- * 'ccSearchString'
 --
@@ -136,8 +110,6 @@ data CampaignsList' = CampaignsList'
 --
 -- * 'ccAdvertiserGroupIds'
 --
--- * 'ccKey'
---
 -- * 'ccAtLeastOneOptimizationActivity'
 --
 -- * 'ccOverriddenEventTagId'
@@ -148,40 +120,30 @@ data CampaignsList' = CampaignsList'
 --
 -- * 'ccSubAccountId'
 --
--- * 'ccOAuthToken'
---
 -- * 'ccAdvertiserIds'
 --
 -- * 'ccArchived'
 --
 -- * 'ccMaxResults'
---
--- * 'ccFields'
 campaignsList'
     :: Int64 -- ^ 'profileId'
     -> CampaignsList'
 campaignsList' pCcProFileId_ =
     CampaignsList'
     { _ccExcludedIds = Nothing
-    , _ccQuotaUser = Nothing
-    , _ccPrettyPrint = True
-    , _ccUserIP = Nothing
     , _ccSearchString = Nothing
     , _ccIds = Nothing
     , _ccProFileId = pCcProFileId_
     , _ccSortOrder = Nothing
     , _ccAdvertiserGroupIds = Nothing
-    , _ccKey = Nothing
     , _ccAtLeastOneOptimizationActivity = Nothing
     , _ccOverriddenEventTagId = Nothing
     , _ccPageToken = Nothing
     , _ccSortField = Nothing
     , _ccSubAccountId = Nothing
-    , _ccOAuthToken = Nothing
     , _ccAdvertiserIds = Nothing
     , _ccArchived = Nothing
     , _ccMaxResults = Nothing
-    , _ccFields = Nothing
     }
 
 -- | Exclude campaigns with these IDs.
@@ -191,24 +153,6 @@ ccExcludedIds
       (\ s a -> s{_ccExcludedIds = a})
       . _Default
       . _Coerce
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ccQuotaUser :: Lens' CampaignsList' (Maybe Text)
-ccQuotaUser
-  = lens _ccQuotaUser (\ s a -> s{_ccQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ccPrettyPrint :: Lens' CampaignsList' Bool
-ccPrettyPrint
-  = lens _ccPrettyPrint
-      (\ s a -> s{_ccPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ccUserIP :: Lens' CampaignsList' (Maybe Text)
-ccUserIP = lens _ccUserIP (\ s a -> s{_ccUserIP = a})
 
 -- | Allows searching for campaigns by name or ID. Wildcards (*) are allowed.
 -- For example, \"campaign*2015\" will return campaigns with names like
@@ -247,12 +191,6 @@ ccAdvertiserGroupIds
       . _Default
       . _Coerce
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ccKey :: Lens' CampaignsList' (Maybe AuthKey)
-ccKey = lens _ccKey (\ s a -> s{_ccKey = a})
-
 -- | Select only campaigns that have at least one optimization activity.
 ccAtLeastOneOptimizationActivity :: Lens' CampaignsList' (Maybe Bool)
 ccAtLeastOneOptimizationActivity
@@ -281,11 +219,6 @@ ccSubAccountId
   = lens _ccSubAccountId
       (\ s a -> s{_ccSubAccountId = a})
 
--- | OAuth 2.0 token for the current user.
-ccOAuthToken :: Lens' CampaignsList' (Maybe OAuthToken)
-ccOAuthToken
-  = lens _ccOAuthToken (\ s a -> s{_ccOAuthToken = a})
-
 -- | Select only campaigns that belong to these advertisers.
 ccAdvertiserIds :: Lens' CampaignsList' [Int64]
 ccAdvertiserIds
@@ -305,18 +238,9 @@ ccMaxResults :: Lens' CampaignsList' (Maybe Int32)
 ccMaxResults
   = lens _ccMaxResults (\ s a -> s{_ccMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-ccFields :: Lens' CampaignsList' (Maybe Text)
-ccFields = lens _ccFields (\ s a -> s{_ccFields = a})
-
-instance GoogleAuth CampaignsList' where
-        _AuthKey = ccKey . _Just
-        _AuthToken = ccOAuthToken . _Just
-
 instance GoogleRequest CampaignsList' where
         type Rs CampaignsList' = CampaignsListResponse
-        request = requestWith dFAReportingRequest
-        requestWith rq CampaignsList'{..}
+        requestClient CampaignsList'{..}
           = go _ccProFileId (_ccExcludedIds ^. _Default)
               _ccSearchString
               (_ccIds ^. _Default)
@@ -330,13 +254,8 @@ instance GoogleRequest CampaignsList' where
               (_ccAdvertiserIds ^. _Default)
               _ccArchived
               _ccMaxResults
-              _ccQuotaUser
-              (Just _ccPrettyPrint)
-              _ccUserIP
-              _ccFields
-              _ccKey
-              _ccOAuthToken
               (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild (Proxy :: Proxy CampaignsListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy CampaignsListResource)
+                      mempty

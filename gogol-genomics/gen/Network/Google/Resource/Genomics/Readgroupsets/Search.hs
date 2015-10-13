@@ -35,17 +35,12 @@ module Network.Google.Resource.Genomics.Readgroupsets.Search
 
     -- * Request Lenses
     , reaXgafv
-    , reaQuotaUser
-    , reaPrettyPrint
     , reaUploadProtocol
     , reaPp
     , reaAccessToken
     , reaUploadType
     , reaPayload
     , reaBearerToken
-    , reaKey
-    , reaOAuthToken
-    , reaFields
     , reaCallback
     ) where
 
@@ -65,15 +60,9 @@ type ReadgroupsetsSearchResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] SearchReadGroupSetsRequest
-                                       :>
-                                       Post '[JSON] SearchReadGroupSetsResponse
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] SearchReadGroupSetsRequest :>
+                             Post '[JSON] SearchReadGroupSetsResponse
 
 -- | Searches for read group sets matching the criteria. Implements
 -- [GlobalAllianceApi.searchReadGroupSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/readmethods.avdl#L135).
@@ -81,17 +70,12 @@ type ReadgroupsetsSearchResource =
 -- /See:/ 'readgroupsetsSearch'' smart constructor.
 data ReadgroupsetsSearch' = ReadgroupsetsSearch'
     { _reaXgafv          :: !(Maybe Text)
-    , _reaQuotaUser      :: !(Maybe Text)
-    , _reaPrettyPrint    :: !Bool
     , _reaUploadProtocol :: !(Maybe Text)
     , _reaPp             :: !Bool
     , _reaAccessToken    :: !(Maybe Text)
     , _reaUploadType     :: !(Maybe Text)
     , _reaPayload        :: !SearchReadGroupSetsRequest
     , _reaBearerToken    :: !(Maybe Text)
-    , _reaKey            :: !(Maybe AuthKey)
-    , _reaOAuthToken     :: !(Maybe OAuthToken)
-    , _reaFields         :: !(Maybe Text)
     , _reaCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -100,10 +84,6 @@ data ReadgroupsetsSearch' = ReadgroupsetsSearch'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'reaXgafv'
---
--- * 'reaQuotaUser'
---
--- * 'reaPrettyPrint'
 --
 -- * 'reaUploadProtocol'
 --
@@ -117,12 +97,6 @@ data ReadgroupsetsSearch' = ReadgroupsetsSearch'
 --
 -- * 'reaBearerToken'
 --
--- * 'reaKey'
---
--- * 'reaOAuthToken'
---
--- * 'reaFields'
---
 -- * 'reaCallback'
 readgroupsetsSearch'
     :: SearchReadGroupSetsRequest -- ^ 'payload'
@@ -130,36 +104,18 @@ readgroupsetsSearch'
 readgroupsetsSearch' pReaPayload_ =
     ReadgroupsetsSearch'
     { _reaXgafv = Nothing
-    , _reaQuotaUser = Nothing
-    , _reaPrettyPrint = True
     , _reaUploadProtocol = Nothing
     , _reaPp = True
     , _reaAccessToken = Nothing
     , _reaUploadType = Nothing
     , _reaPayload = pReaPayload_
     , _reaBearerToken = Nothing
-    , _reaKey = Nothing
-    , _reaOAuthToken = Nothing
-    , _reaFields = Nothing
     , _reaCallback = Nothing
     }
 
 -- | V1 error format.
 reaXgafv :: Lens' ReadgroupsetsSearch' (Maybe Text)
 reaXgafv = lens _reaXgafv (\ s a -> s{_reaXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-reaQuotaUser :: Lens' ReadgroupsetsSearch' (Maybe Text)
-reaQuotaUser
-  = lens _reaQuotaUser (\ s a -> s{_reaQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-reaPrettyPrint :: Lens' ReadgroupsetsSearch' Bool
-reaPrettyPrint
-  = lens _reaPrettyPrint
-      (\ s a -> s{_reaPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 reaUploadProtocol :: Lens' ReadgroupsetsSearch' (Maybe Text)
@@ -194,50 +150,24 @@ reaBearerToken
   = lens _reaBearerToken
       (\ s a -> s{_reaBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-reaKey :: Lens' ReadgroupsetsSearch' (Maybe AuthKey)
-reaKey = lens _reaKey (\ s a -> s{_reaKey = a})
-
--- | OAuth 2.0 token for the current user.
-reaOAuthToken :: Lens' ReadgroupsetsSearch' (Maybe OAuthToken)
-reaOAuthToken
-  = lens _reaOAuthToken
-      (\ s a -> s{_reaOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-reaFields :: Lens' ReadgroupsetsSearch' (Maybe Text)
-reaFields
-  = lens _reaFields (\ s a -> s{_reaFields = a})
-
 -- | JSONP
 reaCallback :: Lens' ReadgroupsetsSearch' (Maybe Text)
 reaCallback
   = lens _reaCallback (\ s a -> s{_reaCallback = a})
 
-instance GoogleAuth ReadgroupsetsSearch' where
-        _AuthKey = reaKey . _Just
-        _AuthToken = reaOAuthToken . _Just
-
 instance GoogleRequest ReadgroupsetsSearch' where
         type Rs ReadgroupsetsSearch' =
              SearchReadGroupSetsResponse
-        request = requestWith genomicsRequest
-        requestWith rq ReadgroupsetsSearch'{..}
+        requestClient ReadgroupsetsSearch'{..}
           = go _reaXgafv _reaUploadProtocol (Just _reaPp)
               _reaAccessToken
               _reaUploadType
               _reaBearerToken
               _reaCallback
-              _reaQuotaUser
-              (Just _reaPrettyPrint)
-              _reaFields
-              _reaKey
-              _reaOAuthToken
               (Just AltJSON)
               _reaPayload
+              genomicsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ReadgroupsetsSearchResource)
-                      rq
+                      mempty

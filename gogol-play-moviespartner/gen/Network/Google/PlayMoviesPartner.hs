@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference>
 module Network.Google.PlayMoviesPartner
     (
+    -- * Service Configuration
+      playMoviesPartnerService
+
     -- * API Declaration
-      PlayMoviesPartnerAPI
+    , PlayMoviesPartnerAPI
 
     -- * Resources
 

@@ -38,8 +38,6 @@ module Network.Google.Resource.Classroom.Courses.Teachers.Get
 
     -- * Request Lenses
     , ctgXgafv
-    , ctgQuotaUser
-    , ctgPrettyPrint
     , ctgUploadProtocol
     , ctgPp
     , ctgCourseId
@@ -47,9 +45,6 @@ module Network.Google.Resource.Classroom.Courses.Teachers.Get
     , ctgUploadType
     , ctgUserId
     , ctgBearerToken
-    , ctgKey
-    , ctgOAuthToken
-    , ctgFields
     , ctgCallback
     ) where
 
@@ -71,13 +66,7 @@ type CoursesTeachersGetResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] Teacher
+                             QueryParam "alt" AltJSON :> Get '[JSON] Teacher
 
 -- | Returns a teacher of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -88,8 +77,6 @@ type CoursesTeachersGetResource =
 -- /See:/ 'coursesTeachersGet'' smart constructor.
 data CoursesTeachersGet' = CoursesTeachersGet'
     { _ctgXgafv          :: !(Maybe Text)
-    , _ctgQuotaUser      :: !(Maybe Text)
-    , _ctgPrettyPrint    :: !Bool
     , _ctgUploadProtocol :: !(Maybe Text)
     , _ctgPp             :: !Bool
     , _ctgCourseId       :: !Text
@@ -97,9 +84,6 @@ data CoursesTeachersGet' = CoursesTeachersGet'
     , _ctgUploadType     :: !(Maybe Text)
     , _ctgUserId         :: !Text
     , _ctgBearerToken    :: !(Maybe Text)
-    , _ctgKey            :: !(Maybe AuthKey)
-    , _ctgOAuthToken     :: !(Maybe OAuthToken)
-    , _ctgFields         :: !(Maybe Text)
     , _ctgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -108,10 +92,6 @@ data CoursesTeachersGet' = CoursesTeachersGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ctgXgafv'
---
--- * 'ctgQuotaUser'
---
--- * 'ctgPrettyPrint'
 --
 -- * 'ctgUploadProtocol'
 --
@@ -127,12 +107,6 @@ data CoursesTeachersGet' = CoursesTeachersGet'
 --
 -- * 'ctgBearerToken'
 --
--- * 'ctgKey'
---
--- * 'ctgOAuthToken'
---
--- * 'ctgFields'
---
 -- * 'ctgCallback'
 coursesTeachersGet'
     :: Text -- ^ 'courseId'
@@ -141,8 +115,6 @@ coursesTeachersGet'
 coursesTeachersGet' pCtgCourseId_ pCtgUserId_ =
     CoursesTeachersGet'
     { _ctgXgafv = Nothing
-    , _ctgQuotaUser = Nothing
-    , _ctgPrettyPrint = True
     , _ctgUploadProtocol = Nothing
     , _ctgPp = True
     , _ctgCourseId = pCtgCourseId_
@@ -150,28 +122,12 @@ coursesTeachersGet' pCtgCourseId_ pCtgUserId_ =
     , _ctgUploadType = Nothing
     , _ctgUserId = pCtgUserId_
     , _ctgBearerToken = Nothing
-    , _ctgKey = Nothing
-    , _ctgOAuthToken = Nothing
-    , _ctgFields = Nothing
     , _ctgCallback = Nothing
     }
 
 -- | V1 error format.
 ctgXgafv :: Lens' CoursesTeachersGet' (Maybe Text)
 ctgXgafv = lens _ctgXgafv (\ s a -> s{_ctgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ctgQuotaUser :: Lens' CoursesTeachersGet' (Maybe Text)
-ctgQuotaUser
-  = lens _ctgQuotaUser (\ s a -> s{_ctgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ctgPrettyPrint :: Lens' CoursesTeachersGet' Bool
-ctgPrettyPrint
-  = lens _ctgPrettyPrint
-      (\ s a -> s{_ctgPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 ctgUploadProtocol :: Lens' CoursesTeachersGet' (Maybe Text)
@@ -215,36 +171,14 @@ ctgBearerToken
   = lens _ctgBearerToken
       (\ s a -> s{_ctgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ctgKey :: Lens' CoursesTeachersGet' (Maybe AuthKey)
-ctgKey = lens _ctgKey (\ s a -> s{_ctgKey = a})
-
--- | OAuth 2.0 token for the current user.
-ctgOAuthToken :: Lens' CoursesTeachersGet' (Maybe OAuthToken)
-ctgOAuthToken
-  = lens _ctgOAuthToken
-      (\ s a -> s{_ctgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ctgFields :: Lens' CoursesTeachersGet' (Maybe Text)
-ctgFields
-  = lens _ctgFields (\ s a -> s{_ctgFields = a})
-
 -- | JSONP
 ctgCallback :: Lens' CoursesTeachersGet' (Maybe Text)
 ctgCallback
   = lens _ctgCallback (\ s a -> s{_ctgCallback = a})
 
-instance GoogleAuth CoursesTeachersGet' where
-        _AuthKey = ctgKey . _Just
-        _AuthToken = ctgOAuthToken . _Just
-
 instance GoogleRequest CoursesTeachersGet' where
         type Rs CoursesTeachersGet' = Teacher
-        request = requestWith classroomRequest
-        requestWith rq CoursesTeachersGet'{..}
+        requestClient CoursesTeachersGet'{..}
           = go _ctgCourseId _ctgUserId _ctgXgafv
               _ctgUploadProtocol
               (Just _ctgPp)
@@ -252,13 +186,9 @@ instance GoogleRequest CoursesTeachersGet' where
               _ctgUploadType
               _ctgBearerToken
               _ctgCallback
-              _ctgQuotaUser
-              (Just _ctgPrettyPrint)
-              _ctgFields
-              _ctgKey
-              _ctgOAuthToken
               (Just AltJSON)
+              classroomService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CoursesTeachersGetResource)
-                      rq
+                      mempty

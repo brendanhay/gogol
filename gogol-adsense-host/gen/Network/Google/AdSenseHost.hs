@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference>
 module Network.Google.AdSenseHost
     (
+    -- * Service Configuration
+      adSenseHostService
+
     -- * API Declaration
-      AdSenseHostAPI
+    , AdSenseHostAPI
 
     -- * Resources
 

@@ -33,20 +33,14 @@ module Network.Google.Resource.DFAReporting.Accounts.List
     , AccountsList'
 
     -- * Request Lenses
-    , alQuotaUser
-    , alPrettyPrint
-    , alUserIP
     , alSearchString
     , alIds
     , alProFileId
     , alSortOrder
     , alActive
-    , alKey
     , alPageToken
     , alSortField
-    , alOAuthToken
     , alMaxResults
-    , alFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -65,44 +59,26 @@ type AccountsListResource =
                    QueryParam "pageToken" Text :>
                      QueryParam "sortField" AccountsListSortField :>
                        QueryParam "maxResults" Int32 :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] AccountsListResponse
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] AccountsListResponse
 
 -- | Retrieves the list of accounts, possibly filtered.
 --
 -- /See:/ 'accountsList'' smart constructor.
 data AccountsList' = AccountsList'
-    { _alQuotaUser    :: !(Maybe Text)
-    , _alPrettyPrint  :: !Bool
-    , _alUserIP       :: !(Maybe Text)
-    , _alSearchString :: !(Maybe Text)
+    { _alSearchString :: !(Maybe Text)
     , _alIds          :: !(Maybe [Int64])
     , _alProFileId    :: !Int64
     , _alSortOrder    :: !(Maybe AccountsListSortOrder)
     , _alActive       :: !(Maybe Bool)
-    , _alKey          :: !(Maybe AuthKey)
     , _alPageToken    :: !(Maybe Text)
     , _alSortField    :: !(Maybe AccountsListSortField)
-    , _alOAuthToken   :: !(Maybe OAuthToken)
     , _alMaxResults   :: !(Maybe Int32)
-    , _alFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'alQuotaUser'
---
--- * 'alPrettyPrint'
---
--- * 'alUserIP'
 --
 -- * 'alSearchString'
 --
@@ -114,55 +90,25 @@ data AccountsList' = AccountsList'
 --
 -- * 'alActive'
 --
--- * 'alKey'
---
 -- * 'alPageToken'
 --
 -- * 'alSortField'
 --
--- * 'alOAuthToken'
---
 -- * 'alMaxResults'
---
--- * 'alFields'
 accountsList'
     :: Int64 -- ^ 'profileId'
     -> AccountsList'
 accountsList' pAlProFileId_ =
     AccountsList'
-    { _alQuotaUser = Nothing
-    , _alPrettyPrint = True
-    , _alUserIP = Nothing
-    , _alSearchString = Nothing
+    { _alSearchString = Nothing
     , _alIds = Nothing
     , _alProFileId = pAlProFileId_
     , _alSortOrder = Nothing
     , _alActive = Nothing
-    , _alKey = Nothing
     , _alPageToken = Nothing
     , _alSortField = Nothing
-    , _alOAuthToken = Nothing
     , _alMaxResults = Nothing
-    , _alFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-alQuotaUser :: Lens' AccountsList' (Maybe Text)
-alQuotaUser
-  = lens _alQuotaUser (\ s a -> s{_alQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-alPrettyPrint :: Lens' AccountsList' Bool
-alPrettyPrint
-  = lens _alPrettyPrint
-      (\ s a -> s{_alPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-alUserIP :: Lens' AccountsList' (Maybe Text)
-alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"account*2015\" will return objects with names like
@@ -197,12 +143,6 @@ alSortOrder
 alActive :: Lens' AccountsList' (Maybe Bool)
 alActive = lens _alActive (\ s a -> s{_alActive = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-alKey :: Lens' AccountsList' (Maybe AuthKey)
-alKey = lens _alKey (\ s a -> s{_alKey = a})
-
 -- | Value of the nextPageToken from the previous result page.
 alPageToken :: Lens' AccountsList' (Maybe Text)
 alPageToken
@@ -213,28 +153,14 @@ alSortField :: Lens' AccountsList' (Maybe AccountsListSortField)
 alSortField
   = lens _alSortField (\ s a -> s{_alSortField = a})
 
--- | OAuth 2.0 token for the current user.
-alOAuthToken :: Lens' AccountsList' (Maybe OAuthToken)
-alOAuthToken
-  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
-
 -- | Maximum number of results to return.
 alMaxResults :: Lens' AccountsList' (Maybe Int32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-alFields :: Lens' AccountsList' (Maybe Text)
-alFields = lens _alFields (\ s a -> s{_alFields = a})
-
-instance GoogleAuth AccountsList' where
-        _AuthKey = alKey . _Just
-        _AuthToken = alOAuthToken . _Just
-
 instance GoogleRequest AccountsList' where
         type Rs AccountsList' = AccountsListResponse
-        request = requestWith dFAReportingRequest
-        requestWith rq AccountsList'{..}
+        requestClient AccountsList'{..}
           = go _alProFileId _alSearchString
               (_alIds ^. _Default)
               _alSortOrder
@@ -242,13 +168,8 @@ instance GoogleRequest AccountsList' where
               _alPageToken
               _alSortField
               _alMaxResults
-              _alQuotaUser
-              (Just _alPrettyPrint)
-              _alUserIP
-              _alFields
-              _alKey
-              _alOAuthToken
               (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild (Proxy :: Proxy AccountsListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy AccountsListResource)
+                      mempty

@@ -33,18 +33,12 @@ module Network.Google.Resource.YouTube.Comments.List
     , CommentsList'
 
     -- * Request Lenses
-    , comQuotaUser
     , comPart
-    , comPrettyPrint
-    , comUserIP
-    , comKey
     , comId
     , comPageToken
-    , comOAuthToken
     , comTextFormat
     , comMaxResults
     , comParentId
-    , comFields
     ) where
 
 import           Network.Google.Prelude
@@ -60,108 +54,53 @@ type CommentsListResource =
              QueryParam "textFormat" CommentsListTextFormat :>
                QueryParam "maxResults" Word32 :>
                  QueryParam "parentId" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] CommentListResponse
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] CommentListResponse
 
 -- | Returns a list of comments that match the API request parameters.
 --
 -- /See:/ 'commentsList'' smart constructor.
 data CommentsList' = CommentsList'
-    { _comQuotaUser   :: !(Maybe Text)
-    , _comPart        :: !Text
-    , _comPrettyPrint :: !Bool
-    , _comUserIP      :: !(Maybe Text)
-    , _comKey         :: !(Maybe AuthKey)
-    , _comId          :: !(Maybe Text)
-    , _comPageToken   :: !(Maybe Text)
-    , _comOAuthToken  :: !(Maybe OAuthToken)
-    , _comTextFormat  :: !CommentsListTextFormat
-    , _comMaxResults  :: !Word32
-    , _comParentId    :: !(Maybe Text)
-    , _comFields      :: !(Maybe Text)
+    { _comPart       :: !Text
+    , _comId         :: !(Maybe Text)
+    , _comPageToken  :: !(Maybe Text)
+    , _comTextFormat :: !CommentsListTextFormat
+    , _comMaxResults :: !Word32
+    , _comParentId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'comQuotaUser'
---
 -- * 'comPart'
---
--- * 'comPrettyPrint'
---
--- * 'comUserIP'
---
--- * 'comKey'
 --
 -- * 'comId'
 --
 -- * 'comPageToken'
---
--- * 'comOAuthToken'
 --
 -- * 'comTextFormat'
 --
 -- * 'comMaxResults'
 --
 -- * 'comParentId'
---
--- * 'comFields'
 commentsList'
     :: Text -- ^ 'part'
     -> CommentsList'
 commentsList' pComPart_ =
     CommentsList'
-    { _comQuotaUser = Nothing
-    , _comPart = pComPart_
-    , _comPrettyPrint = True
-    , _comUserIP = Nothing
-    , _comKey = Nothing
+    { _comPart = pComPart_
     , _comId = Nothing
     , _comPageToken = Nothing
-    , _comOAuthToken = Nothing
     , _comTextFormat = HTML
     , _comMaxResults = 20
     , _comParentId = Nothing
-    , _comFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-comQuotaUser :: Lens' CommentsList' (Maybe Text)
-comQuotaUser
-  = lens _comQuotaUser (\ s a -> s{_comQuotaUser = a})
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- comment resource properties that the API response will include.
 comPart :: Lens' CommentsList' Text
 comPart = lens _comPart (\ s a -> s{_comPart = a})
-
--- | Returns response with indentations and line breaks.
-comPrettyPrint :: Lens' CommentsList' Bool
-comPrettyPrint
-  = lens _comPrettyPrint
-      (\ s a -> s{_comPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-comUserIP :: Lens' CommentsList' (Maybe Text)
-comUserIP
-  = lens _comUserIP (\ s a -> s{_comUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-comKey :: Lens' CommentsList' (Maybe AuthKey)
-comKey = lens _comKey (\ s a -> s{_comKey = a})
 
 -- | The id parameter specifies a comma-separated list of comment IDs for the
 -- resources that are being retrieved. In a comment resource, the id
@@ -176,12 +115,6 @@ comId = lens _comId (\ s a -> s{_comId = a})
 comPageToken :: Lens' CommentsList' (Maybe Text)
 comPageToken
   = lens _comPageToken (\ s a -> s{_comPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-comOAuthToken :: Lens' CommentsList' (Maybe OAuthToken)
-comOAuthToken
-  = lens _comOAuthToken
-      (\ s a -> s{_comOAuthToken = a})
 
 -- | This parameter indicates whether the API should return comments
 -- formatted as HTML or as plain text.
@@ -206,30 +139,15 @@ comParentId :: Lens' CommentsList' (Maybe Text)
 comParentId
   = lens _comParentId (\ s a -> s{_comParentId = a})
 
--- | Selector specifying which fields to include in a partial response.
-comFields :: Lens' CommentsList' (Maybe Text)
-comFields
-  = lens _comFields (\ s a -> s{_comFields = a})
-
-instance GoogleAuth CommentsList' where
-        _AuthKey = comKey . _Just
-        _AuthToken = comOAuthToken . _Just
-
 instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentListResponse
-        request = requestWith youTubeRequest
-        requestWith rq CommentsList'{..}
+        requestClient CommentsList'{..}
           = go (Just _comPart) _comId _comPageToken
               (Just _comTextFormat)
               (Just _comMaxResults)
               _comParentId
-              _comQuotaUser
-              (Just _comPrettyPrint)
-              _comUserIP
-              _comFields
-              _comKey
-              _comOAuthToken
               (Just AltJSON)
+              youTubeService
           where go
-                  = clientBuild (Proxy :: Proxy CommentsListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy CommentsListResource)
+                      mempty

@@ -40,8 +40,6 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
     , aellPphNames
     , aellXgafv
     , aellStudioNames
-    , aellQuotaUser
-    , aellPrettyPrint
     , aellUploadProtocol
     , aellPp
     , aellAccessToken
@@ -50,12 +48,9 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
     , aellCustomId
     , aellAccountId
     , aellBearerToken
-    , aellKey
     , aellEditLevelEidr
     , aellPageToken
-    , aellOAuthToken
     , aellPageSize
-    , aellFields
     , aellCallback
     ) where
 
@@ -85,17 +80,9 @@ type AccountsExperienceLocalesListResource =
                                        QueryParam "pageToken" Text :>
                                          QueryParam "pageSize" Int32 :>
                                            QueryParam "callback" Text :>
-                                             QueryParam "quotaUser" Text :>
-                                               QueryParam "prettyPrint" Bool :>
-                                                 QueryParam "fields" Text :>
-                                                   QueryParam "key" AuthKey :>
-                                                     Header "Authorization"
-                                                       OAuthToken
-                                                       :>
-                                                       QueryParam "alt" AltJSON
-                                                         :>
-                                                         Get '[JSON]
-                                                           ListExperienceLocalesResponse
+                                             QueryParam "alt" AltJSON :>
+                                               Get '[JSON]
+                                                 ListExperienceLocalesResponse
 
 -- | List ExperienceLocales owned or managed by the partner. See
 -- _Authentication and Authorization rules_ and _List methods rules_ for
@@ -108,8 +95,6 @@ data AccountsExperienceLocalesList' = AccountsExperienceLocalesList'
     , _aellPphNames       :: !(Maybe [Text])
     , _aellXgafv          :: !(Maybe Text)
     , _aellStudioNames    :: !(Maybe [Text])
-    , _aellQuotaUser      :: !(Maybe Text)
-    , _aellPrettyPrint    :: !Bool
     , _aellUploadProtocol :: !(Maybe Text)
     , _aellPp             :: !Bool
     , _aellAccessToken    :: !(Maybe Text)
@@ -118,12 +103,9 @@ data AccountsExperienceLocalesList' = AccountsExperienceLocalesList'
     , _aellCustomId       :: !(Maybe Text)
     , _aellAccountId      :: !Text
     , _aellBearerToken    :: !(Maybe Text)
-    , _aellKey            :: !(Maybe AuthKey)
     , _aellEditLevelEidr  :: !(Maybe Text)
     , _aellPageToken      :: !(Maybe Text)
-    , _aellOAuthToken     :: !(Maybe OAuthToken)
     , _aellPageSize       :: !(Maybe Int32)
-    , _aellFields         :: !(Maybe Text)
     , _aellCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -141,10 +123,6 @@ data AccountsExperienceLocalesList' = AccountsExperienceLocalesList'
 --
 -- * 'aellStudioNames'
 --
--- * 'aellQuotaUser'
---
--- * 'aellPrettyPrint'
---
 -- * 'aellUploadProtocol'
 --
 -- * 'aellPp'
@@ -161,17 +139,11 @@ data AccountsExperienceLocalesList' = AccountsExperienceLocalesList'
 --
 -- * 'aellBearerToken'
 --
--- * 'aellKey'
---
 -- * 'aellEditLevelEidr'
 --
 -- * 'aellPageToken'
 --
--- * 'aellOAuthToken'
---
 -- * 'aellPageSize'
---
--- * 'aellFields'
 --
 -- * 'aellCallback'
 accountsExperienceLocalesList'
@@ -184,8 +156,6 @@ accountsExperienceLocalesList' pAellAccountId_ =
     , _aellPphNames = Nothing
     , _aellXgafv = Nothing
     , _aellStudioNames = Nothing
-    , _aellQuotaUser = Nothing
-    , _aellPrettyPrint = True
     , _aellUploadProtocol = Nothing
     , _aellPp = True
     , _aellAccessToken = Nothing
@@ -194,12 +164,9 @@ accountsExperienceLocalesList' pAellAccountId_ =
     , _aellCustomId = Nothing
     , _aellAccountId = pAellAccountId_
     , _aellBearerToken = Nothing
-    , _aellKey = Nothing
     , _aellEditLevelEidr = Nothing
     , _aellPageToken = Nothing
-    , _aellOAuthToken = Nothing
     , _aellPageSize = Nothing
-    , _aellFields = Nothing
     , _aellCallback = Nothing
     }
 
@@ -235,20 +202,6 @@ aellStudioNames
       (\ s a -> s{_aellStudioNames = a})
       . _Default
       . _Coerce
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-aellQuotaUser :: Lens' AccountsExperienceLocalesList' (Maybe Text)
-aellQuotaUser
-  = lens _aellQuotaUser
-      (\ s a -> s{_aellQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aellPrettyPrint :: Lens' AccountsExperienceLocalesList' Bool
-aellPrettyPrint
-  = lens _aellPrettyPrint
-      (\ s a -> s{_aellPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 aellUploadProtocol :: Lens' AccountsExperienceLocalesList' (Maybe Text)
@@ -296,12 +249,6 @@ aellBearerToken
   = lens _aellBearerToken
       (\ s a -> s{_aellBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aellKey :: Lens' AccountsExperienceLocalesList' (Maybe AuthKey)
-aellKey = lens _aellKey (\ s a -> s{_aellKey = a})
-
 -- | Filter ExperienceLocales that match a given edit-level EIDR.
 aellEditLevelEidr :: Lens' AccountsExperienceLocalesList' (Maybe Text)
 aellEditLevelEidr
@@ -314,38 +261,21 @@ aellPageToken
   = lens _aellPageToken
       (\ s a -> s{_aellPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-aellOAuthToken :: Lens' AccountsExperienceLocalesList' (Maybe OAuthToken)
-aellOAuthToken
-  = lens _aellOAuthToken
-      (\ s a -> s{_aellOAuthToken = a})
-
 -- | See _List methods rules_ for info about this field.
 aellPageSize :: Lens' AccountsExperienceLocalesList' (Maybe Int32)
 aellPageSize
   = lens _aellPageSize (\ s a -> s{_aellPageSize = a})
-
--- | Selector specifying which fields to include in a partial response.
-aellFields :: Lens' AccountsExperienceLocalesList' (Maybe Text)
-aellFields
-  = lens _aellFields (\ s a -> s{_aellFields = a})
 
 -- | JSONP
 aellCallback :: Lens' AccountsExperienceLocalesList' (Maybe Text)
 aellCallback
   = lens _aellCallback (\ s a -> s{_aellCallback = a})
 
-instance GoogleAuth AccountsExperienceLocalesList'
-         where
-        _AuthKey = aellKey . _Just
-        _AuthToken = aellOAuthToken . _Just
-
 instance GoogleRequest AccountsExperienceLocalesList'
          where
         type Rs AccountsExperienceLocalesList' =
              ListExperienceLocalesResponse
-        request = requestWith playMoviesPartnerRequest
-        requestWith rq AccountsExperienceLocalesList'{..}
+        requestClient AccountsExperienceLocalesList'{..}
           = go _aellAccountId _aellTitleLevelEidr
               (_aellStatus ^. _Default)
               (_aellPphNames ^. _Default)
@@ -362,14 +292,10 @@ instance GoogleRequest AccountsExperienceLocalesList'
               _aellPageToken
               _aellPageSize
               _aellCallback
-              _aellQuotaUser
-              (Just _aellPrettyPrint)
-              _aellFields
-              _aellKey
-              _aellOAuthToken
               (Just AltJSON)
+              playMoviesPartnerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy AccountsExperienceLocalesListResource)
-                      rq
+                      mempty

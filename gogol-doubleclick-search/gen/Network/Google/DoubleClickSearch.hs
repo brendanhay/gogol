@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference>
 module Network.Google.DoubleClickSearch
     (
+    -- * Service Configuration
+      doubleClickSearchService
+
     -- * API Declaration
-      DoubleClickSearchAPI
+    , DoubleClickSearchAPI
 
     -- * Resources
 

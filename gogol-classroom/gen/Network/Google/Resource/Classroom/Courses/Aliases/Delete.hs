@@ -37,8 +37,6 @@ module Network.Google.Resource.Classroom.Courses.Aliases.Delete
 
     -- * Request Lenses
     , cadXgafv
-    , cadQuotaUser
-    , cadPrettyPrint
     , cadUploadProtocol
     , cadPp
     , cadCourseId
@@ -46,9 +44,6 @@ module Network.Google.Resource.Classroom.Courses.Aliases.Delete
     , cadUploadType
     , cadAlias
     , cadBearerToken
-    , cadKey
-    , cadOAuthToken
-    , cadFields
     , cadCallback
     ) where
 
@@ -70,13 +65,7 @@ type CoursesAliasesDeleteResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Delete '[JSON] Empty
+                             QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes an alias of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -86,8 +75,6 @@ type CoursesAliasesDeleteResource =
 -- /See:/ 'coursesAliasesDelete'' smart constructor.
 data CoursesAliasesDelete' = CoursesAliasesDelete'
     { _cadXgafv          :: !(Maybe Text)
-    , _cadQuotaUser      :: !(Maybe Text)
-    , _cadPrettyPrint    :: !Bool
     , _cadUploadProtocol :: !(Maybe Text)
     , _cadPp             :: !Bool
     , _cadCourseId       :: !Text
@@ -95,9 +82,6 @@ data CoursesAliasesDelete' = CoursesAliasesDelete'
     , _cadUploadType     :: !(Maybe Text)
     , _cadAlias          :: !Text
     , _cadBearerToken    :: !(Maybe Text)
-    , _cadKey            :: !(Maybe AuthKey)
-    , _cadOAuthToken     :: !(Maybe OAuthToken)
-    , _cadFields         :: !(Maybe Text)
     , _cadCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -106,10 +90,6 @@ data CoursesAliasesDelete' = CoursesAliasesDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cadXgafv'
---
--- * 'cadQuotaUser'
---
--- * 'cadPrettyPrint'
 --
 -- * 'cadUploadProtocol'
 --
@@ -125,12 +105,6 @@ data CoursesAliasesDelete' = CoursesAliasesDelete'
 --
 -- * 'cadBearerToken'
 --
--- * 'cadKey'
---
--- * 'cadOAuthToken'
---
--- * 'cadFields'
---
 -- * 'cadCallback'
 coursesAliasesDelete'
     :: Text -- ^ 'courseId'
@@ -139,8 +113,6 @@ coursesAliasesDelete'
 coursesAliasesDelete' pCadCourseId_ pCadAlias_ =
     CoursesAliasesDelete'
     { _cadXgafv = Nothing
-    , _cadQuotaUser = Nothing
-    , _cadPrettyPrint = True
     , _cadUploadProtocol = Nothing
     , _cadPp = True
     , _cadCourseId = pCadCourseId_
@@ -148,28 +120,12 @@ coursesAliasesDelete' pCadCourseId_ pCadAlias_ =
     , _cadUploadType = Nothing
     , _cadAlias = pCadAlias_
     , _cadBearerToken = Nothing
-    , _cadKey = Nothing
-    , _cadOAuthToken = Nothing
-    , _cadFields = Nothing
     , _cadCallback = Nothing
     }
 
 -- | V1 error format.
 cadXgafv :: Lens' CoursesAliasesDelete' (Maybe Text)
 cadXgafv = lens _cadXgafv (\ s a -> s{_cadXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-cadQuotaUser :: Lens' CoursesAliasesDelete' (Maybe Text)
-cadQuotaUser
-  = lens _cadQuotaUser (\ s a -> s{_cadQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cadPrettyPrint :: Lens' CoursesAliasesDelete' Bool
-cadPrettyPrint
-  = lens _cadPrettyPrint
-      (\ s a -> s{_cadPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 cadUploadProtocol :: Lens' CoursesAliasesDelete' (Maybe Text)
@@ -210,36 +166,14 @@ cadBearerToken
   = lens _cadBearerToken
       (\ s a -> s{_cadBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cadKey :: Lens' CoursesAliasesDelete' (Maybe AuthKey)
-cadKey = lens _cadKey (\ s a -> s{_cadKey = a})
-
--- | OAuth 2.0 token for the current user.
-cadOAuthToken :: Lens' CoursesAliasesDelete' (Maybe OAuthToken)
-cadOAuthToken
-  = lens _cadOAuthToken
-      (\ s a -> s{_cadOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cadFields :: Lens' CoursesAliasesDelete' (Maybe Text)
-cadFields
-  = lens _cadFields (\ s a -> s{_cadFields = a})
-
 -- | JSONP
 cadCallback :: Lens' CoursesAliasesDelete' (Maybe Text)
 cadCallback
   = lens _cadCallback (\ s a -> s{_cadCallback = a})
 
-instance GoogleAuth CoursesAliasesDelete' where
-        _AuthKey = cadKey . _Just
-        _AuthToken = cadOAuthToken . _Just
-
 instance GoogleRequest CoursesAliasesDelete' where
         type Rs CoursesAliasesDelete' = Empty
-        request = requestWith classroomRequest
-        requestWith rq CoursesAliasesDelete'{..}
+        requestClient CoursesAliasesDelete'{..}
           = go _cadCourseId _cadAlias _cadXgafv
               _cadUploadProtocol
               (Just _cadPp)
@@ -247,13 +181,9 @@ instance GoogleRequest CoursesAliasesDelete' where
               _cadUploadType
               _cadBearerToken
               _cadCallback
-              _cadQuotaUser
-              (Just _cadPrettyPrint)
-              _cadFields
-              _cadKey
-              _cadOAuthToken
               (Just AltJSON)
+              classroomService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CoursesAliasesDeleteResource)
-                      rq
+                      mempty

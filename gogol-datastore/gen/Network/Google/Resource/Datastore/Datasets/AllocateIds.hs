@@ -34,14 +34,8 @@ module Network.Google.Resource.Datastore.Datasets.AllocateIds
     , DatasetsAllocateIds'
 
     -- * Request Lenses
-    , daiQuotaUser
-    , daiPrettyPrint
-    , daiUserIP
     , daiPayload
-    , daiKey
     , daiDatasetId
-    , daiOAuthToken
-    , daiFields
     ) where
 
 import           Network.Google.Datastore.Types
@@ -52,129 +46,52 @@ import           Network.Google.Prelude
 type DatasetsAllocateIdsResource =
      Capture "datasetId" Text :>
        "allocateIds" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] AllocateIdsRequest :>
-                         Post '[JSON] AllocateIdsResponse
+         QueryParam "alt" AltJSON :>
+           ReqBody '[JSON] AllocateIdsRequest :>
+             Post '[JSON] AllocateIdsResponse
 
 -- | Allocate IDs for incomplete keys (useful for referencing an entity
 -- before it is inserted).
 --
 -- /See:/ 'datasetsAllocateIds'' smart constructor.
 data DatasetsAllocateIds' = DatasetsAllocateIds'
-    { _daiQuotaUser   :: !(Maybe Text)
-    , _daiPrettyPrint :: !Bool
-    , _daiUserIP      :: !(Maybe Text)
-    , _daiPayload     :: !AllocateIdsRequest
-    , _daiKey         :: !(Maybe AuthKey)
-    , _daiDatasetId   :: !Text
-    , _daiOAuthToken  :: !(Maybe OAuthToken)
-    , _daiFields      :: !(Maybe Text)
+    { _daiPayload   :: !AllocateIdsRequest
+    , _daiDatasetId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsAllocateIds'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'daiQuotaUser'
---
--- * 'daiPrettyPrint'
---
--- * 'daiUserIP'
---
 -- * 'daiPayload'
 --
--- * 'daiKey'
---
 -- * 'daiDatasetId'
---
--- * 'daiOAuthToken'
---
--- * 'daiFields'
 datasetsAllocateIds'
     :: AllocateIdsRequest -- ^ 'payload'
     -> Text -- ^ 'datasetId'
     -> DatasetsAllocateIds'
 datasetsAllocateIds' pDaiPayload_ pDaiDatasetId_ =
     DatasetsAllocateIds'
-    { _daiQuotaUser = Nothing
-    , _daiPrettyPrint = True
-    , _daiUserIP = Nothing
-    , _daiPayload = pDaiPayload_
-    , _daiKey = Nothing
+    { _daiPayload = pDaiPayload_
     , _daiDatasetId = pDaiDatasetId_
-    , _daiOAuthToken = Nothing
-    , _daiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-daiQuotaUser :: Lens' DatasetsAllocateIds' (Maybe Text)
-daiQuotaUser
-  = lens _daiQuotaUser (\ s a -> s{_daiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-daiPrettyPrint :: Lens' DatasetsAllocateIds' Bool
-daiPrettyPrint
-  = lens _daiPrettyPrint
-      (\ s a -> s{_daiPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-daiUserIP :: Lens' DatasetsAllocateIds' (Maybe Text)
-daiUserIP
-  = lens _daiUserIP (\ s a -> s{_daiUserIP = a})
 
 -- | Multipart request metadata.
 daiPayload :: Lens' DatasetsAllocateIds' AllocateIdsRequest
 daiPayload
   = lens _daiPayload (\ s a -> s{_daiPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-daiKey :: Lens' DatasetsAllocateIds' (Maybe AuthKey)
-daiKey = lens _daiKey (\ s a -> s{_daiKey = a})
-
 -- | Identifies the dataset.
 daiDatasetId :: Lens' DatasetsAllocateIds' Text
 daiDatasetId
   = lens _daiDatasetId (\ s a -> s{_daiDatasetId = a})
 
--- | OAuth 2.0 token for the current user.
-daiOAuthToken :: Lens' DatasetsAllocateIds' (Maybe OAuthToken)
-daiOAuthToken
-  = lens _daiOAuthToken
-      (\ s a -> s{_daiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-daiFields :: Lens' DatasetsAllocateIds' (Maybe Text)
-daiFields
-  = lens _daiFields (\ s a -> s{_daiFields = a})
-
-instance GoogleAuth DatasetsAllocateIds' where
-        _AuthKey = daiKey . _Just
-        _AuthToken = daiOAuthToken . _Just
-
 instance GoogleRequest DatasetsAllocateIds' where
         type Rs DatasetsAllocateIds' = AllocateIdsResponse
-        request = requestWith datastoreRequest
-        requestWith rq DatasetsAllocateIds'{..}
-          = go _daiDatasetId _daiQuotaUser
-              (Just _daiPrettyPrint)
-              _daiUserIP
-              _daiFields
-              _daiKey
-              _daiOAuthToken
-              (Just AltJSON)
-              _daiPayload
+        requestClient DatasetsAllocateIds'{..}
+          = go _daiDatasetId (Just AltJSON) _daiPayload
+              datastoreService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy DatasetsAllocateIdsResource)
-                      rq
+                      mempty

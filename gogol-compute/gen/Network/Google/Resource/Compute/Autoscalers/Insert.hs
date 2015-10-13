@@ -34,15 +34,9 @@ module Network.Google.Resource.Compute.Autoscalers.Insert
     , AutoscalersInsert'
 
     -- * Request Lenses
-    , aiiQuotaUser
-    , aiiPrettyPrint
-    , aiiProject
-    , aiiUserIP
-    , aiiZone
-    , aiiPayload
-    , aiiKey
-    , aiiOAuthToken
-    , aiiFields
+    , autProject
+    , autZone
+    , autPayload
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,137 +49,60 @@ type AutoscalersInsertResource =
        "zones" :>
          Capture "zone" Text :>
            "autoscalers" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Autoscaler :> Post '[JSON] Operation
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Autoscaler :> Post '[JSON] Operation
 
 -- | Creates an autoscaler resource in the specified project using the data
 -- included in the request.
 --
 -- /See:/ 'autoscalersInsert'' smart constructor.
 data AutoscalersInsert' = AutoscalersInsert'
-    { _aiiQuotaUser   :: !(Maybe Text)
-    , _aiiPrettyPrint :: !Bool
-    , _aiiProject     :: !Text
-    , _aiiUserIP      :: !(Maybe Text)
-    , _aiiZone        :: !Text
-    , _aiiPayload     :: !Autoscaler
-    , _aiiKey         :: !(Maybe AuthKey)
-    , _aiiOAuthToken  :: !(Maybe OAuthToken)
-    , _aiiFields      :: !(Maybe Text)
+    { _autProject :: !Text
+    , _autZone    :: !Text
+    , _autPayload :: !Autoscaler
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aiiQuotaUser'
+-- * 'autProject'
 --
--- * 'aiiPrettyPrint'
+-- * 'autZone'
 --
--- * 'aiiProject'
---
--- * 'aiiUserIP'
---
--- * 'aiiZone'
---
--- * 'aiiPayload'
---
--- * 'aiiKey'
---
--- * 'aiiOAuthToken'
---
--- * 'aiiFields'
+-- * 'autPayload'
 autoscalersInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Autoscaler -- ^ 'payload'
     -> AutoscalersInsert'
-autoscalersInsert' pAiiProject_ pAiiZone_ pAiiPayload_ =
+autoscalersInsert' pAutProject_ pAutZone_ pAutPayload_ =
     AutoscalersInsert'
-    { _aiiQuotaUser = Nothing
-    , _aiiPrettyPrint = True
-    , _aiiProject = pAiiProject_
-    , _aiiUserIP = Nothing
-    , _aiiZone = pAiiZone_
-    , _aiiPayload = pAiiPayload_
-    , _aiiKey = Nothing
-    , _aiiOAuthToken = Nothing
-    , _aiiFields = Nothing
+    { _autProject = pAutProject_
+    , _autZone = pAutZone_
+    , _autPayload = pAutPayload_
     }
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-aiiQuotaUser :: Lens' AutoscalersInsert' (Maybe Text)
-aiiQuotaUser
-  = lens _aiiQuotaUser (\ s a -> s{_aiiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aiiPrettyPrint :: Lens' AutoscalersInsert' Bool
-aiiPrettyPrint
-  = lens _aiiPrettyPrint
-      (\ s a -> s{_aiiPrettyPrint = a})
-
 -- | Name of the project scoping this request.
-aiiProject :: Lens' AutoscalersInsert' Text
-aiiProject
-  = lens _aiiProject (\ s a -> s{_aiiProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-aiiUserIP :: Lens' AutoscalersInsert' (Maybe Text)
-aiiUserIP
-  = lens _aiiUserIP (\ s a -> s{_aiiUserIP = a})
+autProject :: Lens' AutoscalersInsert' Text
+autProject
+  = lens _autProject (\ s a -> s{_autProject = a})
 
 -- | Name of the zone scoping this request.
-aiiZone :: Lens' AutoscalersInsert' Text
-aiiZone = lens _aiiZone (\ s a -> s{_aiiZone = a})
+autZone :: Lens' AutoscalersInsert' Text
+autZone = lens _autZone (\ s a -> s{_autZone = a})
 
 -- | Multipart request metadata.
-aiiPayload :: Lens' AutoscalersInsert' Autoscaler
-aiiPayload
-  = lens _aiiPayload (\ s a -> s{_aiiPayload = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aiiKey :: Lens' AutoscalersInsert' (Maybe AuthKey)
-aiiKey = lens _aiiKey (\ s a -> s{_aiiKey = a})
-
--- | OAuth 2.0 token for the current user.
-aiiOAuthToken :: Lens' AutoscalersInsert' (Maybe OAuthToken)
-aiiOAuthToken
-  = lens _aiiOAuthToken
-      (\ s a -> s{_aiiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-aiiFields :: Lens' AutoscalersInsert' (Maybe Text)
-aiiFields
-  = lens _aiiFields (\ s a -> s{_aiiFields = a})
-
-instance GoogleAuth AutoscalersInsert' where
-        _AuthKey = aiiKey . _Just
-        _AuthToken = aiiOAuthToken . _Just
+autPayload :: Lens' AutoscalersInsert' Autoscaler
+autPayload
+  = lens _autPayload (\ s a -> s{_autPayload = a})
 
 instance GoogleRequest AutoscalersInsert' where
         type Rs AutoscalersInsert' = Operation
-        request = requestWith computeRequest
-        requestWith rq AutoscalersInsert'{..}
-          = go _aiiProject _aiiZone _aiiQuotaUser
-              (Just _aiiPrettyPrint)
-              _aiiUserIP
-              _aiiFields
-              _aiiKey
-              _aiiOAuthToken
-              (Just AltJSON)
-              _aiiPayload
+        requestClient AutoscalersInsert'{..}
+          = go _autProject _autZone (Just AltJSON) _autPayload
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AutoscalersInsertResource)
-                      rq
+                      mempty

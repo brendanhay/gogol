@@ -33,23 +33,17 @@ module Network.Google.Resource.YouTube.CommentThreads.List
     , CommentThreadsList'
 
     -- * Request Lenses
-    , ctlQuotaUser
     , ctlPart
-    , ctlPrettyPrint
     , ctlModerationStatus
-    , ctlUserIP
     , ctlSearchTerms
     , ctlChannelId
     , ctlAllThreadsRelatedToChannelId
     , ctlVideoId
-    , ctlKey
     , ctlId
     , ctlPageToken
-    , ctlOAuthToken
     , ctlOrder
     , ctlTextFormat
     , ctlMaxResults
-    , ctlFields
     ) where
 
 import           Network.Google.Prelude
@@ -73,51 +67,33 @@ type CommentThreadsListResource =
                          QueryParam "textFormat" CommentThreadsListTextFormat
                            :>
                            QueryParam "maxResults" Word32 :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "userIp" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] CommentThreadListResponse
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] CommentThreadListResponse
 
 -- | Returns a list of comment threads that match the API request parameters.
 --
 -- /See:/ 'commentThreadsList'' smart constructor.
 data CommentThreadsList' = CommentThreadsList'
-    { _ctlQuotaUser                    :: !(Maybe Text)
-    , _ctlPart                         :: !Text
-    , _ctlPrettyPrint                  :: !Bool
+    { _ctlPart                         :: !Text
     , _ctlModerationStatus             :: !CommentThreadsListModerationStatus
-    , _ctlUserIP                       :: !(Maybe Text)
     , _ctlSearchTerms                  :: !(Maybe Text)
     , _ctlChannelId                    :: !(Maybe Text)
     , _ctlAllThreadsRelatedToChannelId :: !(Maybe Text)
     , _ctlVideoId                      :: !(Maybe Text)
-    , _ctlKey                          :: !(Maybe AuthKey)
     , _ctlId                           :: !(Maybe Text)
     , _ctlPageToken                    :: !(Maybe Text)
-    , _ctlOAuthToken                   :: !(Maybe OAuthToken)
     , _ctlOrder                        :: !CommentThreadsListOrder
     , _ctlTextFormat                   :: !CommentThreadsListTextFormat
     , _ctlMaxResults                   :: !Word32
-    , _ctlFields                       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentThreadsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ctlQuotaUser'
---
 -- * 'ctlPart'
 --
--- * 'ctlPrettyPrint'
---
 -- * 'ctlModerationStatus'
---
--- * 'ctlUserIP'
 --
 -- * 'ctlSearchTerms'
 --
@@ -127,62 +103,37 @@ data CommentThreadsList' = CommentThreadsList'
 --
 -- * 'ctlVideoId'
 --
--- * 'ctlKey'
---
 -- * 'ctlId'
 --
 -- * 'ctlPageToken'
---
--- * 'ctlOAuthToken'
 --
 -- * 'ctlOrder'
 --
 -- * 'ctlTextFormat'
 --
 -- * 'ctlMaxResults'
---
--- * 'ctlFields'
 commentThreadsList'
     :: Text -- ^ 'part'
     -> CommentThreadsList'
 commentThreadsList' pCtlPart_ =
     CommentThreadsList'
-    { _ctlQuotaUser = Nothing
-    , _ctlPart = pCtlPart_
-    , _ctlPrettyPrint = True
+    { _ctlPart = pCtlPart_
     , _ctlModerationStatus = Published
-    , _ctlUserIP = Nothing
     , _ctlSearchTerms = Nothing
     , _ctlChannelId = Nothing
     , _ctlAllThreadsRelatedToChannelId = Nothing
     , _ctlVideoId = Nothing
-    , _ctlKey = Nothing
     , _ctlId = Nothing
     , _ctlPageToken = Nothing
-    , _ctlOAuthToken = Nothing
     , _ctlOrder = CTLOTime
     , _ctlTextFormat = CTLTFHTML
     , _ctlMaxResults = 20
-    , _ctlFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ctlQuotaUser :: Lens' CommentThreadsList' (Maybe Text)
-ctlQuotaUser
-  = lens _ctlQuotaUser (\ s a -> s{_ctlQuotaUser = a})
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- commentThread resource properties that the API response will include.
 ctlPart :: Lens' CommentThreadsList' Text
 ctlPart = lens _ctlPart (\ s a -> s{_ctlPart = a})
-
--- | Returns response with indentations and line breaks.
-ctlPrettyPrint :: Lens' CommentThreadsList' Bool
-ctlPrettyPrint
-  = lens _ctlPrettyPrint
-      (\ s a -> s{_ctlPrettyPrint = a})
 
 -- | Set this parameter to limit the returned comment threads to a particular
 -- moderation state. Note: This parameter is not supported for use in
@@ -191,12 +142,6 @@ ctlModerationStatus :: Lens' CommentThreadsList' CommentThreadsListModerationSta
 ctlModerationStatus
   = lens _ctlModerationStatus
       (\ s a -> s{_ctlModerationStatus = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ctlUserIP :: Lens' CommentThreadsList' (Maybe Text)
-ctlUserIP
-  = lens _ctlUserIP (\ s a -> s{_ctlUserIP = a})
 
 -- | The searchTerms parameter instructs the API to limit the API response to
 -- only contain comments that contain the specified search terms. Note:
@@ -228,12 +173,6 @@ ctlVideoId :: Lens' CommentThreadsList' (Maybe Text)
 ctlVideoId
   = lens _ctlVideoId (\ s a -> s{_ctlVideoId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ctlKey :: Lens' CommentThreadsList' (Maybe AuthKey)
-ctlKey = lens _ctlKey (\ s a -> s{_ctlKey = a})
-
 -- | The id parameter specifies a comma-separated list of comment thread IDs
 -- for the resources that should be retrieved.
 ctlId :: Lens' CommentThreadsList' (Maybe Text)
@@ -246,12 +185,6 @@ ctlId = lens _ctlId (\ s a -> s{_ctlId = a})
 ctlPageToken :: Lens' CommentThreadsList' (Maybe Text)
 ctlPageToken
   = lens _ctlPageToken (\ s a -> s{_ctlPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-ctlOAuthToken :: Lens' CommentThreadsList' (Maybe OAuthToken)
-ctlOAuthToken
-  = lens _ctlOAuthToken
-      (\ s a -> s{_ctlOAuthToken = a})
 
 -- | The order parameter specifies the order in which the API response should
 -- list comment threads. Valid values are: - time - Comment threads are
@@ -276,20 +209,10 @@ ctlMaxResults
   = lens _ctlMaxResults
       (\ s a -> s{_ctlMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-ctlFields :: Lens' CommentThreadsList' (Maybe Text)
-ctlFields
-  = lens _ctlFields (\ s a -> s{_ctlFields = a})
-
-instance GoogleAuth CommentThreadsList' where
-        _AuthKey = ctlKey . _Just
-        _AuthToken = ctlOAuthToken . _Just
-
 instance GoogleRequest CommentThreadsList' where
         type Rs CommentThreadsList' =
              CommentThreadListResponse
-        request = requestWith youTubeRequest
-        requestWith rq CommentThreadsList'{..}
+        requestClient CommentThreadsList'{..}
           = go (Just _ctlPart) (Just _ctlModerationStatus)
               _ctlSearchTerms
               _ctlChannelId
@@ -300,14 +223,9 @@ instance GoogleRequest CommentThreadsList' where
               (Just _ctlOrder)
               (Just _ctlTextFormat)
               (Just _ctlMaxResults)
-              _ctlQuotaUser
-              (Just _ctlPrettyPrint)
-              _ctlUserIP
-              _ctlFields
-              _ctlKey
-              _ctlOAuthToken
               (Just AltJSON)
+              youTubeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CommentThreadsListResource)
-                      rq
+                      mempty

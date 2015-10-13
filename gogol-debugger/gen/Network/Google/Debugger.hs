@@ -19,8 +19,11 @@
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference>
 module Network.Google.Debugger
     (
+    -- * Service Configuration
+      debuggerService
+
     -- * API Declaration
-      DebuggerAPI
+    , DebuggerAPI
 
     -- * Resources
 

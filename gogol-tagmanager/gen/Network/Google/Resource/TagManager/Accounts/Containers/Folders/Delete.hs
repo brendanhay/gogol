@@ -33,15 +33,9 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Delete
     , AccountsContainersFoldersDelete'
 
     -- * Request Lenses
-    , acfdQuotaUser
-    , acfdPrettyPrint
     , acfdContainerId
-    , acfdUserIP
     , acfdFolderId
     , acfdAccountId
-    , acfdKey
-    , acfdOAuthToken
-    , acfdFields
     ) where
 
 import           Network.Google.Prelude
@@ -56,50 +50,26 @@ type AccountsContainersFoldersDeleteResource =
            Capture "containerId" Text :>
              "folders" :>
                Capture "folderId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a GTM Folder.
 --
 -- /See:/ 'accountsContainersFoldersDelete'' smart constructor.
 data AccountsContainersFoldersDelete' = AccountsContainersFoldersDelete'
-    { _acfdQuotaUser   :: !(Maybe Text)
-    , _acfdPrettyPrint :: !Bool
-    , _acfdContainerId :: !Text
-    , _acfdUserIP      :: !(Maybe Text)
+    { _acfdContainerId :: !Text
     , _acfdFolderId    :: !Text
     , _acfdAccountId   :: !Text
-    , _acfdKey         :: !(Maybe AuthKey)
-    , _acfdOAuthToken  :: !(Maybe OAuthToken)
-    , _acfdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersFoldersDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acfdQuotaUser'
---
--- * 'acfdPrettyPrint'
---
 -- * 'acfdContainerId'
---
--- * 'acfdUserIP'
 --
 -- * 'acfdFolderId'
 --
 -- * 'acfdAccountId'
---
--- * 'acfdKey'
---
--- * 'acfdOAuthToken'
---
--- * 'acfdFields'
 accountsContainersFoldersDelete'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'folderId'
@@ -107,42 +77,16 @@ accountsContainersFoldersDelete'
     -> AccountsContainersFoldersDelete'
 accountsContainersFoldersDelete' pAcfdContainerId_ pAcfdFolderId_ pAcfdAccountId_ =
     AccountsContainersFoldersDelete'
-    { _acfdQuotaUser = Nothing
-    , _acfdPrettyPrint = True
-    , _acfdContainerId = pAcfdContainerId_
-    , _acfdUserIP = Nothing
+    { _acfdContainerId = pAcfdContainerId_
     , _acfdFolderId = pAcfdFolderId_
     , _acfdAccountId = pAcfdAccountId_
-    , _acfdKey = Nothing
-    , _acfdOAuthToken = Nothing
-    , _acfdFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-acfdQuotaUser :: Lens' AccountsContainersFoldersDelete' (Maybe Text)
-acfdQuotaUser
-  = lens _acfdQuotaUser
-      (\ s a -> s{_acfdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-acfdPrettyPrint :: Lens' AccountsContainersFoldersDelete' Bool
-acfdPrettyPrint
-  = lens _acfdPrettyPrint
-      (\ s a -> s{_acfdPrettyPrint = a})
 
 -- | The GTM Container ID.
 acfdContainerId :: Lens' AccountsContainersFoldersDelete' Text
 acfdContainerId
   = lens _acfdContainerId
       (\ s a -> s{_acfdContainerId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-acfdUserIP :: Lens' AccountsContainersFoldersDelete' (Maybe Text)
-acfdUserIP
-  = lens _acfdUserIP (\ s a -> s{_acfdUserIP = a})
 
 -- | The GTM Folder ID.
 acfdFolderId :: Lens' AccountsContainersFoldersDelete' Text
@@ -155,43 +99,15 @@ acfdAccountId
   = lens _acfdAccountId
       (\ s a -> s{_acfdAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-acfdKey :: Lens' AccountsContainersFoldersDelete' (Maybe AuthKey)
-acfdKey = lens _acfdKey (\ s a -> s{_acfdKey = a})
-
--- | OAuth 2.0 token for the current user.
-acfdOAuthToken :: Lens' AccountsContainersFoldersDelete' (Maybe OAuthToken)
-acfdOAuthToken
-  = lens _acfdOAuthToken
-      (\ s a -> s{_acfdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-acfdFields :: Lens' AccountsContainersFoldersDelete' (Maybe Text)
-acfdFields
-  = lens _acfdFields (\ s a -> s{_acfdFields = a})
-
-instance GoogleAuth AccountsContainersFoldersDelete'
-         where
-        _AuthKey = acfdKey . _Just
-        _AuthToken = acfdOAuthToken . _Just
-
 instance GoogleRequest
          AccountsContainersFoldersDelete' where
         type Rs AccountsContainersFoldersDelete' = ()
-        request = requestWith tagManagerRequest
-        requestWith rq AccountsContainersFoldersDelete'{..}
+        requestClient AccountsContainersFoldersDelete'{..}
           = go _acfdAccountId _acfdContainerId _acfdFolderId
-              _acfdQuotaUser
-              (Just _acfdPrettyPrint)
-              _acfdUserIP
-              _acfdFields
-              _acfdKey
-              _acfdOAuthToken
               (Just AltJSON)
+              tagManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy AccountsContainersFoldersDeleteResource)
-                      rq
+                      mempty

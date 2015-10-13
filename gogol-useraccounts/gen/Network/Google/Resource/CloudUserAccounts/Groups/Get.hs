@@ -33,14 +33,8 @@ module Network.Google.Resource.CloudUserAccounts.Groups.Get
     , GroupsGet'
 
     -- * Request Lenses
-    , ggQuotaUser
-    , ggPrettyPrint
     , ggProject
-    , ggUserIP
-    , ggKey
     , ggGroupName
-    , ggOAuthToken
-    , ggFields
     ) where
 
 import           Network.Google.Prelude
@@ -53,120 +47,48 @@ type GroupsGetResource =
        "global" :>
          "groups" :>
            Capture "groupName" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Group
+             QueryParam "alt" AltJSON :> Get '[JSON] Group
 
 -- | Returns the specified Group resource.
 --
 -- /See:/ 'groupsGet'' smart constructor.
 data GroupsGet' = GroupsGet'
-    { _ggQuotaUser   :: !(Maybe Text)
-    , _ggPrettyPrint :: !Bool
-    , _ggProject     :: !Text
-    , _ggUserIP      :: !(Maybe Text)
-    , _ggKey         :: !(Maybe AuthKey)
-    , _ggGroupName   :: !Text
-    , _ggOAuthToken  :: !(Maybe OAuthToken)
-    , _ggFields      :: !(Maybe Text)
+    { _ggProject   :: !Text
+    , _ggGroupName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ggQuotaUser'
---
--- * 'ggPrettyPrint'
---
 -- * 'ggProject'
 --
--- * 'ggUserIP'
---
--- * 'ggKey'
---
 -- * 'ggGroupName'
---
--- * 'ggOAuthToken'
---
--- * 'ggFields'
 groupsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'groupName'
     -> GroupsGet'
 groupsGet' pGgProject_ pGgGroupName_ =
     GroupsGet'
-    { _ggQuotaUser = Nothing
-    , _ggPrettyPrint = True
-    , _ggProject = pGgProject_
-    , _ggUserIP = Nothing
-    , _ggKey = Nothing
+    { _ggProject = pGgProject_
     , _ggGroupName = pGgGroupName_
-    , _ggOAuthToken = Nothing
-    , _ggFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ggQuotaUser :: Lens' GroupsGet' (Maybe Text)
-ggQuotaUser
-  = lens _ggQuotaUser (\ s a -> s{_ggQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ggPrettyPrint :: Lens' GroupsGet' Bool
-ggPrettyPrint
-  = lens _ggPrettyPrint
-      (\ s a -> s{_ggPrettyPrint = a})
 
 -- | Project ID for this request.
 ggProject :: Lens' GroupsGet' Text
 ggProject
   = lens _ggProject (\ s a -> s{_ggProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ggUserIP :: Lens' GroupsGet' (Maybe Text)
-ggUserIP = lens _ggUserIP (\ s a -> s{_ggUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ggKey :: Lens' GroupsGet' (Maybe AuthKey)
-ggKey = lens _ggKey (\ s a -> s{_ggKey = a})
-
 -- | Name of the Group resource to return.
 ggGroupName :: Lens' GroupsGet' Text
 ggGroupName
   = lens _ggGroupName (\ s a -> s{_ggGroupName = a})
 
--- | OAuth 2.0 token for the current user.
-ggOAuthToken :: Lens' GroupsGet' (Maybe OAuthToken)
-ggOAuthToken
-  = lens _ggOAuthToken (\ s a -> s{_ggOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ggFields :: Lens' GroupsGet' (Maybe Text)
-ggFields = lens _ggFields (\ s a -> s{_ggFields = a})
-
-instance GoogleAuth GroupsGet' where
-        _AuthKey = ggKey . _Just
-        _AuthToken = ggOAuthToken . _Just
-
 instance GoogleRequest GroupsGet' where
         type Rs GroupsGet' = Group
-        request = requestWith userAccountsRequest
-        requestWith rq GroupsGet'{..}
-          = go _ggProject _ggGroupName _ggQuotaUser
-              (Just _ggPrettyPrint)
-              _ggUserIP
-              _ggFields
-              _ggKey
-              _ggOAuthToken
-              (Just AltJSON)
+        requestClient GroupsGet'{..}
+          = go _ggProject _ggGroupName (Just AltJSON)
+              userAccountsService
           where go
-                  = clientBuild (Proxy :: Proxy GroupsGetResource) rq
+                  = buildClient (Proxy :: Proxy GroupsGetResource)
+                      mempty

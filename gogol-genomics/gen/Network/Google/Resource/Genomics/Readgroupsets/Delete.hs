@@ -34,17 +34,12 @@ module Network.Google.Resource.Genomics.Readgroupsets.Delete
 
     -- * Request Lenses
     , rdXgafv
-    , rdQuotaUser
-    , rdPrettyPrint
     , rdReadGroupSetId
     , rdUploadProtocol
     , rdPp
     , rdAccessToken
     , rdUploadType
     , rdBearerToken
-    , rdKey
-    , rdOAuthToken
-    , rdFields
     , rdCallback
     ) where
 
@@ -64,30 +59,19 @@ type ReadgroupsetsDeleteResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Delete '[JSON] Empty
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a read group set.
 --
 -- /See:/ 'readgroupsetsDelete'' smart constructor.
 data ReadgroupsetsDelete' = ReadgroupsetsDelete'
     { _rdXgafv          :: !(Maybe Text)
-    , _rdQuotaUser      :: !(Maybe Text)
-    , _rdPrettyPrint    :: !Bool
     , _rdReadGroupSetId :: !Text
     , _rdUploadProtocol :: !(Maybe Text)
     , _rdPp             :: !Bool
     , _rdAccessToken    :: !(Maybe Text)
     , _rdUploadType     :: !(Maybe Text)
     , _rdBearerToken    :: !(Maybe Text)
-    , _rdKey            :: !(Maybe AuthKey)
-    , _rdOAuthToken     :: !(Maybe OAuthToken)
-    , _rdFields         :: !(Maybe Text)
     , _rdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -96,10 +80,6 @@ data ReadgroupsetsDelete' = ReadgroupsetsDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rdXgafv'
---
--- * 'rdQuotaUser'
---
--- * 'rdPrettyPrint'
 --
 -- * 'rdReadGroupSetId'
 --
@@ -113,12 +93,6 @@ data ReadgroupsetsDelete' = ReadgroupsetsDelete'
 --
 -- * 'rdBearerToken'
 --
--- * 'rdKey'
---
--- * 'rdOAuthToken'
---
--- * 'rdFields'
---
 -- * 'rdCallback'
 readgroupsetsDelete'
     :: Text -- ^ 'readGroupSetId'
@@ -126,36 +100,18 @@ readgroupsetsDelete'
 readgroupsetsDelete' pRdReadGroupSetId_ =
     ReadgroupsetsDelete'
     { _rdXgafv = Nothing
-    , _rdQuotaUser = Nothing
-    , _rdPrettyPrint = True
     , _rdReadGroupSetId = pRdReadGroupSetId_
     , _rdUploadProtocol = Nothing
     , _rdPp = True
     , _rdAccessToken = Nothing
     , _rdUploadType = Nothing
     , _rdBearerToken = Nothing
-    , _rdKey = Nothing
-    , _rdOAuthToken = Nothing
-    , _rdFields = Nothing
     , _rdCallback = Nothing
     }
 
 -- | V1 error format.
 rdXgafv :: Lens' ReadgroupsetsDelete' (Maybe Text)
 rdXgafv = lens _rdXgafv (\ s a -> s{_rdXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-rdQuotaUser :: Lens' ReadgroupsetsDelete' (Maybe Text)
-rdQuotaUser
-  = lens _rdQuotaUser (\ s a -> s{_rdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rdPrettyPrint :: Lens' ReadgroupsetsDelete' Bool
-rdPrettyPrint
-  = lens _rdPrettyPrint
-      (\ s a -> s{_rdPrettyPrint = a})
 
 -- | The ID of the read group set to be deleted. The caller must have WRITE
 -- permissions to the dataset associated with this read group set.
@@ -191,47 +147,23 @@ rdBearerToken
   = lens _rdBearerToken
       (\ s a -> s{_rdBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rdKey :: Lens' ReadgroupsetsDelete' (Maybe AuthKey)
-rdKey = lens _rdKey (\ s a -> s{_rdKey = a})
-
--- | OAuth 2.0 token for the current user.
-rdOAuthToken :: Lens' ReadgroupsetsDelete' (Maybe OAuthToken)
-rdOAuthToken
-  = lens _rdOAuthToken (\ s a -> s{_rdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-rdFields :: Lens' ReadgroupsetsDelete' (Maybe Text)
-rdFields = lens _rdFields (\ s a -> s{_rdFields = a})
-
 -- | JSONP
 rdCallback :: Lens' ReadgroupsetsDelete' (Maybe Text)
 rdCallback
   = lens _rdCallback (\ s a -> s{_rdCallback = a})
 
-instance GoogleAuth ReadgroupsetsDelete' where
-        _AuthKey = rdKey . _Just
-        _AuthToken = rdOAuthToken . _Just
-
 instance GoogleRequest ReadgroupsetsDelete' where
         type Rs ReadgroupsetsDelete' = Empty
-        request = requestWith genomicsRequest
-        requestWith rq ReadgroupsetsDelete'{..}
+        requestClient ReadgroupsetsDelete'{..}
           = go _rdReadGroupSetId _rdXgafv _rdUploadProtocol
               (Just _rdPp)
               _rdAccessToken
               _rdUploadType
               _rdBearerToken
               _rdCallback
-              _rdQuotaUser
-              (Just _rdPrettyPrint)
-              _rdFields
-              _rdKey
-              _rdOAuthToken
               (Just AltJSON)
+              genomicsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ReadgroupsetsDeleteResource)
-                      rq
+                      mempty

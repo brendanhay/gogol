@@ -33,15 +33,9 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Delete
     , AccountsContainersVersionsDelete'
 
     -- * Request Lenses
-    , acvdcQuotaUser
-    , acvdcPrettyPrint
     , acvdcContainerId
-    , acvdcUserIP
     , acvdcContainerVersionId
     , acvdcAccountId
-    , acvdcKey
-    , acvdcOAuthToken
-    , acvdcFields
     ) where
 
 import           Network.Google.Prelude
@@ -56,50 +50,26 @@ type AccountsContainersVersionsDeleteResource =
            Capture "containerId" Text :>
              "versions" :>
                Capture "containerVersionId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsDelete'' smart constructor.
 data AccountsContainersVersionsDelete' = AccountsContainersVersionsDelete'
-    { _acvdcQuotaUser          :: !(Maybe Text)
-    , _acvdcPrettyPrint        :: !Bool
-    , _acvdcContainerId        :: !Text
-    , _acvdcUserIP             :: !(Maybe Text)
+    { _acvdcContainerId        :: !Text
     , _acvdcContainerVersionId :: !Text
     , _acvdcAccountId          :: !Text
-    , _acvdcKey                :: !(Maybe AuthKey)
-    , _acvdcOAuthToken         :: !(Maybe OAuthToken)
-    , _acvdcFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acvdcQuotaUser'
---
--- * 'acvdcPrettyPrint'
---
 -- * 'acvdcContainerId'
---
--- * 'acvdcUserIP'
 --
 -- * 'acvdcContainerVersionId'
 --
 -- * 'acvdcAccountId'
---
--- * 'acvdcKey'
---
--- * 'acvdcOAuthToken'
---
--- * 'acvdcFields'
 accountsContainersVersionsDelete'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'containerVersionId'
@@ -107,42 +77,16 @@ accountsContainersVersionsDelete'
     -> AccountsContainersVersionsDelete'
 accountsContainersVersionsDelete' pAcvdcContainerId_ pAcvdcContainerVersionId_ pAcvdcAccountId_ =
     AccountsContainersVersionsDelete'
-    { _acvdcQuotaUser = Nothing
-    , _acvdcPrettyPrint = True
-    , _acvdcContainerId = pAcvdcContainerId_
-    , _acvdcUserIP = Nothing
+    { _acvdcContainerId = pAcvdcContainerId_
     , _acvdcContainerVersionId = pAcvdcContainerVersionId_
     , _acvdcAccountId = pAcvdcAccountId_
-    , _acvdcKey = Nothing
-    , _acvdcOAuthToken = Nothing
-    , _acvdcFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-acvdcQuotaUser :: Lens' AccountsContainersVersionsDelete' (Maybe Text)
-acvdcQuotaUser
-  = lens _acvdcQuotaUser
-      (\ s a -> s{_acvdcQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-acvdcPrettyPrint :: Lens' AccountsContainersVersionsDelete' Bool
-acvdcPrettyPrint
-  = lens _acvdcPrettyPrint
-      (\ s a -> s{_acvdcPrettyPrint = a})
 
 -- | The GTM Container ID.
 acvdcContainerId :: Lens' AccountsContainersVersionsDelete' Text
 acvdcContainerId
   = lens _acvdcContainerId
       (\ s a -> s{_acvdcContainerId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-acvdcUserIP :: Lens' AccountsContainersVersionsDelete' (Maybe Text)
-acvdcUserIP
-  = lens _acvdcUserIP (\ s a -> s{_acvdcUserIP = a})
 
 -- | The GTM Container Version ID.
 acvdcContainerVersionId :: Lens' AccountsContainersVersionsDelete' Text
@@ -156,44 +100,16 @@ acvdcAccountId
   = lens _acvdcAccountId
       (\ s a -> s{_acvdcAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-acvdcKey :: Lens' AccountsContainersVersionsDelete' (Maybe AuthKey)
-acvdcKey = lens _acvdcKey (\ s a -> s{_acvdcKey = a})
-
--- | OAuth 2.0 token for the current user.
-acvdcOAuthToken :: Lens' AccountsContainersVersionsDelete' (Maybe OAuthToken)
-acvdcOAuthToken
-  = lens _acvdcOAuthToken
-      (\ s a -> s{_acvdcOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-acvdcFields :: Lens' AccountsContainersVersionsDelete' (Maybe Text)
-acvdcFields
-  = lens _acvdcFields (\ s a -> s{_acvdcFields = a})
-
-instance GoogleAuth AccountsContainersVersionsDelete'
-         where
-        _AuthKey = acvdcKey . _Just
-        _AuthToken = acvdcOAuthToken . _Just
-
 instance GoogleRequest
          AccountsContainersVersionsDelete' where
         type Rs AccountsContainersVersionsDelete' = ()
-        request = requestWith tagManagerRequest
-        requestWith rq AccountsContainersVersionsDelete'{..}
+        requestClient AccountsContainersVersionsDelete'{..}
           = go _acvdcAccountId _acvdcContainerId
               _acvdcContainerVersionId
-              _acvdcQuotaUser
-              (Just _acvdcPrettyPrint)
-              _acvdcUserIP
-              _acvdcFields
-              _acvdcKey
-              _acvdcOAuthToken
               (Just AltJSON)
+              tagManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy AccountsContainersVersionsDeleteResource)
-                      rq
+                      mempty

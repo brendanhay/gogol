@@ -33,14 +33,8 @@ module Network.Google.Resource.YouTube.Watermarks.Unset
     , WatermarksUnset'
 
     -- * Request Lenses
-    , wuQuotaUser
-    , wuPrettyPrint
-    , wuUserIP
     , wuChannelId
     , wuOnBehalfOfContentOwner
-    , wuKey
-    , wuOAuthToken
-    , wuFields
     ) where
 
 import           Network.Google.Prelude
@@ -53,79 +47,31 @@ type WatermarksUnsetResource =
        "unset" :>
          QueryParam "channelId" Text :>
            QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Post '[JSON] ()
+             QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Deletes a channel\'s watermark image.
 --
 -- /See:/ 'watermarksUnset'' smart constructor.
 data WatermarksUnset' = WatermarksUnset'
-    { _wuQuotaUser              :: !(Maybe Text)
-    , _wuPrettyPrint            :: !Bool
-    , _wuUserIP                 :: !(Maybe Text)
-    , _wuChannelId              :: !Text
+    { _wuChannelId              :: !Text
     , _wuOnBehalfOfContentOwner :: !(Maybe Text)
-    , _wuKey                    :: !(Maybe AuthKey)
-    , _wuOAuthToken             :: !(Maybe OAuthToken)
-    , _wuFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WatermarksUnset'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'wuQuotaUser'
---
--- * 'wuPrettyPrint'
---
--- * 'wuUserIP'
---
 -- * 'wuChannelId'
 --
 -- * 'wuOnBehalfOfContentOwner'
---
--- * 'wuKey'
---
--- * 'wuOAuthToken'
---
--- * 'wuFields'
 watermarksUnset'
     :: Text -- ^ 'channelId'
     -> WatermarksUnset'
 watermarksUnset' pWuChannelId_ =
     WatermarksUnset'
-    { _wuQuotaUser = Nothing
-    , _wuPrettyPrint = True
-    , _wuUserIP = Nothing
-    , _wuChannelId = pWuChannelId_
+    { _wuChannelId = pWuChannelId_
     , _wuOnBehalfOfContentOwner = Nothing
-    , _wuKey = Nothing
-    , _wuOAuthToken = Nothing
-    , _wuFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-wuQuotaUser :: Lens' WatermarksUnset' (Maybe Text)
-wuQuotaUser
-  = lens _wuQuotaUser (\ s a -> s{_wuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-wuPrettyPrint :: Lens' WatermarksUnset' Bool
-wuPrettyPrint
-  = lens _wuPrettyPrint
-      (\ s a -> s{_wuPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-wuUserIP :: Lens' WatermarksUnset' (Maybe Text)
-wuUserIP = lens _wuUserIP (\ s a -> s{_wuUserIP = a})
 
 -- | The channelId parameter specifies the YouTube channel ID for which the
 -- watermark is being unset.
@@ -148,38 +94,13 @@ wuOnBehalfOfContentOwner
   = lens _wuOnBehalfOfContentOwner
       (\ s a -> s{_wuOnBehalfOfContentOwner = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-wuKey :: Lens' WatermarksUnset' (Maybe AuthKey)
-wuKey = lens _wuKey (\ s a -> s{_wuKey = a})
-
--- | OAuth 2.0 token for the current user.
-wuOAuthToken :: Lens' WatermarksUnset' (Maybe OAuthToken)
-wuOAuthToken
-  = lens _wuOAuthToken (\ s a -> s{_wuOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-wuFields :: Lens' WatermarksUnset' (Maybe Text)
-wuFields = lens _wuFields (\ s a -> s{_wuFields = a})
-
-instance GoogleAuth WatermarksUnset' where
-        _AuthKey = wuKey . _Just
-        _AuthToken = wuOAuthToken . _Just
-
 instance GoogleRequest WatermarksUnset' where
         type Rs WatermarksUnset' = ()
-        request = requestWith youTubeRequest
-        requestWith rq WatermarksUnset'{..}
+        requestClient WatermarksUnset'{..}
           = go (Just _wuChannelId) _wuOnBehalfOfContentOwner
-              _wuQuotaUser
-              (Just _wuPrettyPrint)
-              _wuUserIP
-              _wuFields
-              _wuKey
-              _wuOAuthToken
               (Just AltJSON)
+              youTubeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy WatermarksUnsetResource)
-                      rq
+                      mempty

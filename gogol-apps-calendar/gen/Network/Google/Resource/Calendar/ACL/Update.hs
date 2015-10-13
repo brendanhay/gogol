@@ -33,15 +33,9 @@ module Network.Google.Resource.Calendar.ACL.Update
     , ACLUpdate'
 
     -- * Request Lenses
-    , auQuotaUser
     , auCalendarId
-    , auPrettyPrint
-    , auUserIP
     , auRuleId
     , auPayload
-    , auKey
-    , auOAuthToken
-    , auFields
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -54,51 +48,27 @@ type ACLUpdateResource =
        Capture "calendarId" Text :>
          "acl" :>
            Capture "ruleId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] ACLRule :> Put '[JSON] ACLRule
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] ACLRule :> Put '[JSON] ACLRule
 
 -- | Updates an access control rule.
 --
 -- /See:/ 'aclUpdate'' smart constructor.
 data ACLUpdate' = ACLUpdate'
-    { _auQuotaUser   :: !(Maybe Text)
-    , _auCalendarId  :: !Text
-    , _auPrettyPrint :: !Bool
-    , _auUserIP      :: !(Maybe Text)
-    , _auRuleId      :: !Text
-    , _auPayload     :: !ACLRule
-    , _auKey         :: !(Maybe AuthKey)
-    , _auOAuthToken  :: !(Maybe OAuthToken)
-    , _auFields      :: !(Maybe Text)
+    { _auCalendarId :: !Text
+    , _auRuleId     :: !Text
+    , _auPayload    :: !ACLRule
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'auQuotaUser'
---
 -- * 'auCalendarId'
---
--- * 'auPrettyPrint'
---
--- * 'auUserIP'
 --
 -- * 'auRuleId'
 --
 -- * 'auPayload'
---
--- * 'auKey'
---
--- * 'auOAuthToken'
---
--- * 'auFields'
 aclUpdate'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'ruleId'
@@ -106,23 +76,10 @@ aclUpdate'
     -> ACLUpdate'
 aclUpdate' pAuCalendarId_ pAuRuleId_ pAuPayload_ =
     ACLUpdate'
-    { _auQuotaUser = Nothing
-    , _auCalendarId = pAuCalendarId_
-    , _auPrettyPrint = True
-    , _auUserIP = Nothing
+    { _auCalendarId = pAuCalendarId_
     , _auRuleId = pAuRuleId_
     , _auPayload = pAuPayload_
-    , _auKey = Nothing
-    , _auOAuthToken = Nothing
-    , _auFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-auQuotaUser :: Lens' ACLUpdate' (Maybe Text)
-auQuotaUser
-  = lens _auQuotaUser (\ s a -> s{_auQuotaUser = a})
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
@@ -130,17 +87,6 @@ auQuotaUser
 auCalendarId :: Lens' ACLUpdate' Text
 auCalendarId
   = lens _auCalendarId (\ s a -> s{_auCalendarId = a})
-
--- | Returns response with indentations and line breaks.
-auPrettyPrint :: Lens' ACLUpdate' Bool
-auPrettyPrint
-  = lens _auPrettyPrint
-      (\ s a -> s{_auPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-auUserIP :: Lens' ACLUpdate' (Maybe Text)
-auUserIP = lens _auUserIP (\ s a -> s{_auUserIP = a})
 
 -- | ACL rule identifier.
 auRuleId :: Lens' ACLUpdate' Text
@@ -151,36 +97,12 @@ auPayload :: Lens' ACLUpdate' ACLRule
 auPayload
   = lens _auPayload (\ s a -> s{_auPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-auKey :: Lens' ACLUpdate' (Maybe AuthKey)
-auKey = lens _auKey (\ s a -> s{_auKey = a})
-
--- | OAuth 2.0 token for the current user.
-auOAuthToken :: Lens' ACLUpdate' (Maybe OAuthToken)
-auOAuthToken
-  = lens _auOAuthToken (\ s a -> s{_auOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-auFields :: Lens' ACLUpdate' (Maybe Text)
-auFields = lens _auFields (\ s a -> s{_auFields = a})
-
-instance GoogleAuth ACLUpdate' where
-        _AuthKey = auKey . _Just
-        _AuthToken = auOAuthToken . _Just
-
 instance GoogleRequest ACLUpdate' where
         type Rs ACLUpdate' = ACLRule
-        request = requestWith appsCalendarRequest
-        requestWith rq ACLUpdate'{..}
-          = go _auCalendarId _auRuleId _auQuotaUser
-              (Just _auPrettyPrint)
-              _auUserIP
-              _auFields
-              _auKey
-              _auOAuthToken
-              (Just AltJSON)
+        requestClient ACLUpdate'{..}
+          = go _auCalendarId _auRuleId (Just AltJSON)
               _auPayload
+              appsCalendarService
           where go
-                  = clientBuild (Proxy :: Proxy ACLUpdateResource) rq
+                  = buildClient (Proxy :: Proxy ACLUpdateResource)
+                      mempty

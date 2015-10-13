@@ -33,13 +33,7 @@ module Network.Google.Resource.SQL.Instances.Restart
     , InstancesRestart'
 
     -- * Request Lenses
-    , irQuotaUser
-    , irPrettyPrint
     , irProject
-    , irUserIP
-    , irKey
-    , irOAuthToken
-    , irFields
     , irInstance
     ) where
 
@@ -54,45 +48,21 @@ type InstancesRestartResource =
          "instances" :>
            Capture "instance" Text :>
              "restart" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :> Post '[JSON] Operation
+               QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Restarts a Cloud SQL instance.
 --
 -- /See:/ 'instancesRestart'' smart constructor.
 data InstancesRestart' = InstancesRestart'
-    { _irQuotaUser   :: !(Maybe Text)
-    , _irPrettyPrint :: !Bool
-    , _irProject     :: !Text
-    , _irUserIP      :: !(Maybe Text)
-    , _irKey         :: !(Maybe AuthKey)
-    , _irOAuthToken  :: !(Maybe OAuthToken)
-    , _irFields      :: !(Maybe Text)
-    , _irInstance    :: !Text
+    { _irProject  :: !Text
+    , _irInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesRestart'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'irQuotaUser'
---
--- * 'irPrettyPrint'
---
 -- * 'irProject'
---
--- * 'irUserIP'
---
--- * 'irKey'
---
--- * 'irOAuthToken'
---
--- * 'irFields'
 --
 -- * 'irInstance'
 instancesRestart'
@@ -101,75 +71,26 @@ instancesRestart'
     -> InstancesRestart'
 instancesRestart' pIrProject_ pIrInstance_ =
     InstancesRestart'
-    { _irQuotaUser = Nothing
-    , _irPrettyPrint = True
-    , _irProject = pIrProject_
-    , _irUserIP = Nothing
-    , _irKey = Nothing
-    , _irOAuthToken = Nothing
-    , _irFields = Nothing
+    { _irProject = pIrProject_
     , _irInstance = pIrInstance_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-irQuotaUser :: Lens' InstancesRestart' (Maybe Text)
-irQuotaUser
-  = lens _irQuotaUser (\ s a -> s{_irQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-irPrettyPrint :: Lens' InstancesRestart' Bool
-irPrettyPrint
-  = lens _irPrettyPrint
-      (\ s a -> s{_irPrettyPrint = a})
 
 -- | Project ID of the project that contains the instance to be restarted.
 irProject :: Lens' InstancesRestart' Text
 irProject
   = lens _irProject (\ s a -> s{_irProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-irUserIP :: Lens' InstancesRestart' (Maybe Text)
-irUserIP = lens _irUserIP (\ s a -> s{_irUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-irKey :: Lens' InstancesRestart' (Maybe AuthKey)
-irKey = lens _irKey (\ s a -> s{_irKey = a})
-
--- | OAuth 2.0 token for the current user.
-irOAuthToken :: Lens' InstancesRestart' (Maybe OAuthToken)
-irOAuthToken
-  = lens _irOAuthToken (\ s a -> s{_irOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-irFields :: Lens' InstancesRestart' (Maybe Text)
-irFields = lens _irFields (\ s a -> s{_irFields = a})
-
 -- | Cloud SQL instance ID. This does not include the project ID.
 irInstance :: Lens' InstancesRestart' Text
 irInstance
   = lens _irInstance (\ s a -> s{_irInstance = a})
 
-instance GoogleAuth InstancesRestart' where
-        _AuthKey = irKey . _Just
-        _AuthToken = irOAuthToken . _Just
-
 instance GoogleRequest InstancesRestart' where
         type Rs InstancesRestart' = Operation
-        request = requestWith sQLAdminRequest
-        requestWith rq InstancesRestart'{..}
-          = go _irProject _irInstance _irQuotaUser
-              (Just _irPrettyPrint)
-              _irUserIP
-              _irFields
-              _irKey
-              _irOAuthToken
-              (Just AltJSON)
+        requestClient InstancesRestart'{..}
+          = go _irProject _irInstance (Just AltJSON)
+              sQLAdminService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy InstancesRestartResource)
-                      rq
+                      mempty

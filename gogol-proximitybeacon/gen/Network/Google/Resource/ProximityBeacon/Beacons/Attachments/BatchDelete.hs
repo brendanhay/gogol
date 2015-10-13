@@ -39,8 +39,6 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
 
     -- * Request Lenses
     , babdXgafv
-    , babdQuotaUser
-    , babdPrettyPrint
     , babdUploadProtocol
     , babdPp
     , babdAccessToken
@@ -48,9 +46,6 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
     , babdUploadType
     , babdBearerToken
     , babdNamespacedType
-    , babdKey
-    , babdOAuthToken
-    , babdFields
     , babdCallback
     ) where
 
@@ -71,13 +66,8 @@ type BeaconsAttachmentsBatchDeleteResource =
                      QueryParam "bearer_token" Text :>
                        QueryParam "namespacedType" Text :>
                          QueryParam "callback" Text :>
-                           QueryParam "quotaUser" Text :>
-                             QueryParam "prettyPrint" Bool :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       Post '[JSON] DeleteAttachmentsResponse
+                           QueryParam "alt" AltJSON :>
+                             Post '[JSON] DeleteAttachmentsResponse
 
 -- | Deletes multiple attachments on a given beacon. This operation is
 -- permanent and cannot be undone. You can optionally specify
@@ -89,8 +79,6 @@ type BeaconsAttachmentsBatchDeleteResource =
 -- /See:/ 'beaconsAttachmentsBatchDelete'' smart constructor.
 data BeaconsAttachmentsBatchDelete' = BeaconsAttachmentsBatchDelete'
     { _babdXgafv          :: !(Maybe Text)
-    , _babdQuotaUser      :: !(Maybe Text)
-    , _babdPrettyPrint    :: !Bool
     , _babdUploadProtocol :: !(Maybe Text)
     , _babdPp             :: !Bool
     , _babdAccessToken    :: !(Maybe Text)
@@ -98,9 +86,6 @@ data BeaconsAttachmentsBatchDelete' = BeaconsAttachmentsBatchDelete'
     , _babdUploadType     :: !(Maybe Text)
     , _babdBearerToken    :: !(Maybe Text)
     , _babdNamespacedType :: !(Maybe Text)
-    , _babdKey            :: !(Maybe AuthKey)
-    , _babdOAuthToken     :: !(Maybe OAuthToken)
-    , _babdFields         :: !(Maybe Text)
     , _babdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -109,10 +94,6 @@ data BeaconsAttachmentsBatchDelete' = BeaconsAttachmentsBatchDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'babdXgafv'
---
--- * 'babdQuotaUser'
---
--- * 'babdPrettyPrint'
 --
 -- * 'babdUploadProtocol'
 --
@@ -128,12 +109,6 @@ data BeaconsAttachmentsBatchDelete' = BeaconsAttachmentsBatchDelete'
 --
 -- * 'babdNamespacedType'
 --
--- * 'babdKey'
---
--- * 'babdOAuthToken'
---
--- * 'babdFields'
---
 -- * 'babdCallback'
 beaconsAttachmentsBatchDelete'
     :: Text -- ^ 'beaconName'
@@ -141,8 +116,6 @@ beaconsAttachmentsBatchDelete'
 beaconsAttachmentsBatchDelete' pBabdBeaconName_ =
     BeaconsAttachmentsBatchDelete'
     { _babdXgafv = Nothing
-    , _babdQuotaUser = Nothing
-    , _babdPrettyPrint = True
     , _babdUploadProtocol = Nothing
     , _babdPp = True
     , _babdAccessToken = Nothing
@@ -150,9 +123,6 @@ beaconsAttachmentsBatchDelete' pBabdBeaconName_ =
     , _babdUploadType = Nothing
     , _babdBearerToken = Nothing
     , _babdNamespacedType = Nothing
-    , _babdKey = Nothing
-    , _babdOAuthToken = Nothing
-    , _babdFields = Nothing
     , _babdCallback = Nothing
     }
 
@@ -160,20 +130,6 @@ beaconsAttachmentsBatchDelete' pBabdBeaconName_ =
 babdXgafv :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Text)
 babdXgafv
   = lens _babdXgafv (\ s a -> s{_babdXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-babdQuotaUser :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Text)
-babdQuotaUser
-  = lens _babdQuotaUser
-      (\ s a -> s{_babdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-babdPrettyPrint :: Lens' BeaconsAttachmentsBatchDelete' Bool
-babdPrettyPrint
-  = lens _babdPrettyPrint
-      (\ s a -> s{_babdPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 babdUploadProtocol :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Text)
@@ -217,39 +173,16 @@ babdNamespacedType
   = lens _babdNamespacedType
       (\ s a -> s{_babdNamespacedType = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-babdKey :: Lens' BeaconsAttachmentsBatchDelete' (Maybe AuthKey)
-babdKey = lens _babdKey (\ s a -> s{_babdKey = a})
-
--- | OAuth 2.0 token for the current user.
-babdOAuthToken :: Lens' BeaconsAttachmentsBatchDelete' (Maybe OAuthToken)
-babdOAuthToken
-  = lens _babdOAuthToken
-      (\ s a -> s{_babdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-babdFields :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Text)
-babdFields
-  = lens _babdFields (\ s a -> s{_babdFields = a})
-
 -- | JSONP
 babdCallback :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Text)
 babdCallback
   = lens _babdCallback (\ s a -> s{_babdCallback = a})
 
-instance GoogleAuth BeaconsAttachmentsBatchDelete'
-         where
-        _AuthKey = babdKey . _Just
-        _AuthToken = babdOAuthToken . _Just
-
 instance GoogleRequest BeaconsAttachmentsBatchDelete'
          where
         type Rs BeaconsAttachmentsBatchDelete' =
              DeleteAttachmentsResponse
-        request = requestWith proximityBeaconRequest
-        requestWith rq BeaconsAttachmentsBatchDelete'{..}
+        requestClient BeaconsAttachmentsBatchDelete'{..}
           = go _babdBeaconName _babdXgafv _babdUploadProtocol
               (Just _babdPp)
               _babdAccessToken
@@ -257,14 +190,10 @@ instance GoogleRequest BeaconsAttachmentsBatchDelete'
               _babdBearerToken
               _babdNamespacedType
               _babdCallback
-              _babdQuotaUser
-              (Just _babdPrettyPrint)
-              _babdFields
-              _babdKey
-              _babdOAuthToken
               (Just AltJSON)
+              proximityBeaconService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy BeaconsAttachmentsBatchDeleteResource)
-                      rq
+                      mempty

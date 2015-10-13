@@ -34,17 +34,11 @@ module Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
 
     -- * Request Lenses
     , mlrpspDeviceCookie
-    , mlrpspQuotaUser
-    , mlrpspPrettyPrint
-    , mlrpspUserIP
     , mlrpspContentVersion
     , mlrpspAction
-    , mlrpspKey
     , mlrpspVolumeId
     , mlrpspSource
-    , mlrpspOAuthToken
     , mlrpspTimestamp
-    , mlrpspFields
     , mlrpspPosition
     ) where
 
@@ -66,30 +60,18 @@ type MyLibraryReadingPositionsSetPositionResource =
                        MyLibraryReadingPositionsSetPositionAction
                        :>
                        QueryParam "source" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :> Post '[JSON] ()
+                         QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Sets my reading position information for a volume.
 --
 -- /See:/ 'myLibraryReadingPositionsSetPosition'' smart constructor.
 data MyLibraryReadingPositionsSetPosition' = MyLibraryReadingPositionsSetPosition'
     { _mlrpspDeviceCookie   :: !(Maybe Text)
-    , _mlrpspQuotaUser      :: !(Maybe Text)
-    , _mlrpspPrettyPrint    :: !Bool
-    , _mlrpspUserIP         :: !(Maybe Text)
     , _mlrpspContentVersion :: !(Maybe Text)
     , _mlrpspAction         :: !(Maybe MyLibraryReadingPositionsSetPositionAction)
-    , _mlrpspKey            :: !(Maybe AuthKey)
     , _mlrpspVolumeId       :: !Text
     , _mlrpspSource         :: !(Maybe Text)
-    , _mlrpspOAuthToken     :: !(Maybe OAuthToken)
     , _mlrpspTimestamp      :: !Text
-    , _mlrpspFields         :: !(Maybe Text)
     , _mlrpspPosition       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -99,27 +81,15 @@ data MyLibraryReadingPositionsSetPosition' = MyLibraryReadingPositionsSetPositio
 --
 -- * 'mlrpspDeviceCookie'
 --
--- * 'mlrpspQuotaUser'
---
--- * 'mlrpspPrettyPrint'
---
--- * 'mlrpspUserIP'
---
 -- * 'mlrpspContentVersion'
 --
 -- * 'mlrpspAction'
---
--- * 'mlrpspKey'
 --
 -- * 'mlrpspVolumeId'
 --
 -- * 'mlrpspSource'
 --
--- * 'mlrpspOAuthToken'
---
 -- * 'mlrpspTimestamp'
---
--- * 'mlrpspFields'
 --
 -- * 'mlrpspPosition'
 myLibraryReadingPositionsSetPosition'
@@ -130,17 +100,11 @@ myLibraryReadingPositionsSetPosition'
 myLibraryReadingPositionsSetPosition' pMlrpspVolumeId_ pMlrpspTimestamp_ pMlrpspPosition_ =
     MyLibraryReadingPositionsSetPosition'
     { _mlrpspDeviceCookie = Nothing
-    , _mlrpspQuotaUser = Nothing
-    , _mlrpspPrettyPrint = True
-    , _mlrpspUserIP = Nothing
     , _mlrpspContentVersion = Nothing
     , _mlrpspAction = Nothing
-    , _mlrpspKey = Nothing
     , _mlrpspVolumeId = pMlrpspVolumeId_
     , _mlrpspSource = Nothing
-    , _mlrpspOAuthToken = Nothing
     , _mlrpspTimestamp = pMlrpspTimestamp_
-    , _mlrpspFields = Nothing
     , _mlrpspPosition = pMlrpspPosition_
     }
 
@@ -149,26 +113,6 @@ mlrpspDeviceCookie :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe Text)
 mlrpspDeviceCookie
   = lens _mlrpspDeviceCookie
       (\ s a -> s{_mlrpspDeviceCookie = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mlrpspQuotaUser :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe Text)
-mlrpspQuotaUser
-  = lens _mlrpspQuotaUser
-      (\ s a -> s{_mlrpspQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mlrpspPrettyPrint :: Lens' MyLibraryReadingPositionsSetPosition' Bool
-mlrpspPrettyPrint
-  = lens _mlrpspPrettyPrint
-      (\ s a -> s{_mlrpspPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mlrpspUserIP :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe Text)
-mlrpspUserIP
-  = lens _mlrpspUserIP (\ s a -> s{_mlrpspUserIP = a})
 
 -- | Volume content version for which this reading position applies.
 mlrpspContentVersion :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe Text)
@@ -181,13 +125,6 @@ mlrpspAction :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe MyLibraryRead
 mlrpspAction
   = lens _mlrpspAction (\ s a -> s{_mlrpspAction = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mlrpspKey :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe AuthKey)
-mlrpspKey
-  = lens _mlrpspKey (\ s a -> s{_mlrpspKey = a})
-
 -- | ID of volume for which to update the reading position.
 mlrpspVolumeId :: Lens' MyLibraryReadingPositionsSetPosition' Text
 mlrpspVolumeId
@@ -199,22 +136,11 @@ mlrpspSource :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe Text)
 mlrpspSource
   = lens _mlrpspSource (\ s a -> s{_mlrpspSource = a})
 
--- | OAuth 2.0 token for the current user.
-mlrpspOAuthToken :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe OAuthToken)
-mlrpspOAuthToken
-  = lens _mlrpspOAuthToken
-      (\ s a -> s{_mlrpspOAuthToken = a})
-
 -- | RFC 3339 UTC format timestamp associated with this reading position.
 mlrpspTimestamp :: Lens' MyLibraryReadingPositionsSetPosition' Text
 mlrpspTimestamp
   = lens _mlrpspTimestamp
       (\ s a -> s{_mlrpspTimestamp = a})
-
--- | Selector specifying which fields to include in a partial response.
-mlrpspFields :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe Text)
-mlrpspFields
-  = lens _mlrpspFields (\ s a -> s{_mlrpspFields = a})
 
 -- | Position string for the new volume reading position.
 mlrpspPosition :: Lens' MyLibraryReadingPositionsSetPosition' Text
@@ -222,16 +148,10 @@ mlrpspPosition
   = lens _mlrpspPosition
       (\ s a -> s{_mlrpspPosition = a})
 
-instance GoogleAuth
-         MyLibraryReadingPositionsSetPosition' where
-        _AuthKey = mlrpspKey . _Just
-        _AuthToken = mlrpspOAuthToken . _Just
-
 instance GoogleRequest
          MyLibraryReadingPositionsSetPosition' where
         type Rs MyLibraryReadingPositionsSetPosition' = ()
-        request = requestWith booksRequest
-        requestWith rq
+        requestClient
           MyLibraryReadingPositionsSetPosition'{..}
           = go _mlrpspVolumeId (Just _mlrpspTimestamp)
               (Just _mlrpspPosition)
@@ -239,15 +159,10 @@ instance GoogleRequest
               _mlrpspContentVersion
               _mlrpspAction
               _mlrpspSource
-              _mlrpspQuotaUser
-              (Just _mlrpspPrettyPrint)
-              _mlrpspUserIP
-              _mlrpspFields
-              _mlrpspKey
-              _mlrpspOAuthToken
               (Just AltJSON)
+              booksService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy MyLibraryReadingPositionsSetPositionResource)
-                      rq
+                      mempty

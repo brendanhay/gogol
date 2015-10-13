@@ -19,8 +19,11 @@
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference>
 module Network.Google.ResourceManager
     (
+    -- * Service Configuration
+      resourceManagerService
+
     -- * API Declaration
-      ResourceManagerAPI
+    , ResourceManagerAPI
 
     -- * Resources
 

@@ -33,14 +33,8 @@ module Network.Google.Resource.FusionTables.Table.Copy
     , TableCopy'
 
     -- * Request Lenses
-    , tcQuotaUser
-    , tcPrettyPrint
-    , tcUserIP
-    , tcKey
-    , tcOAuthToken
     , tcTableId
     , tcCopyPresentation
-    , tcFields
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -53,90 +47,31 @@ type TableCopyResource =
        Capture "tableId" Text :>
          "copy" :>
            QueryParam "copyPresentation" Bool :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Post '[JSON] Table
+             QueryParam "alt" AltJSON :> Post '[JSON] Table
 
 -- | Copies a table.
 --
 -- /See:/ 'tableCopy'' smart constructor.
 data TableCopy' = TableCopy'
-    { _tcQuotaUser        :: !(Maybe Text)
-    , _tcPrettyPrint      :: !Bool
-    , _tcUserIP           :: !(Maybe Text)
-    , _tcKey              :: !(Maybe AuthKey)
-    , _tcOAuthToken       :: !(Maybe OAuthToken)
-    , _tcTableId          :: !Text
+    { _tcTableId          :: !Text
     , _tcCopyPresentation :: !(Maybe Bool)
-    , _tcFields           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableCopy'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tcQuotaUser'
---
--- * 'tcPrettyPrint'
---
--- * 'tcUserIP'
---
--- * 'tcKey'
---
--- * 'tcOAuthToken'
---
 -- * 'tcTableId'
 --
 -- * 'tcCopyPresentation'
---
--- * 'tcFields'
 tableCopy'
     :: Text -- ^ 'tableId'
     -> TableCopy'
 tableCopy' pTcTableId_ =
     TableCopy'
-    { _tcQuotaUser = Nothing
-    , _tcPrettyPrint = True
-    , _tcUserIP = Nothing
-    , _tcKey = Nothing
-    , _tcOAuthToken = Nothing
-    , _tcTableId = pTcTableId_
+    { _tcTableId = pTcTableId_
     , _tcCopyPresentation = Nothing
-    , _tcFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tcQuotaUser :: Lens' TableCopy' (Maybe Text)
-tcQuotaUser
-  = lens _tcQuotaUser (\ s a -> s{_tcQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tcPrettyPrint :: Lens' TableCopy' Bool
-tcPrettyPrint
-  = lens _tcPrettyPrint
-      (\ s a -> s{_tcPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tcUserIP :: Lens' TableCopy' (Maybe Text)
-tcUserIP = lens _tcUserIP (\ s a -> s{_tcUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tcKey :: Lens' TableCopy' (Maybe AuthKey)
-tcKey = lens _tcKey (\ s a -> s{_tcKey = a})
-
--- | OAuth 2.0 token for the current user.
-tcOAuthToken :: Lens' TableCopy' (Maybe OAuthToken)
-tcOAuthToken
-  = lens _tcOAuthToken (\ s a -> s{_tcOAuthToken = a})
 
 -- | ID of the table that is being copied.
 tcTableId :: Lens' TableCopy' Text
@@ -149,24 +84,11 @@ tcCopyPresentation
   = lens _tcCopyPresentation
       (\ s a -> s{_tcCopyPresentation = a})
 
--- | Selector specifying which fields to include in a partial response.
-tcFields :: Lens' TableCopy' (Maybe Text)
-tcFields = lens _tcFields (\ s a -> s{_tcFields = a})
-
-instance GoogleAuth TableCopy' where
-        _AuthKey = tcKey . _Just
-        _AuthToken = tcOAuthToken . _Just
-
 instance GoogleRequest TableCopy' where
         type Rs TableCopy' = Table
-        request = requestWith fusionTablesRequest
-        requestWith rq TableCopy'{..}
-          = go _tcTableId _tcCopyPresentation _tcQuotaUser
-              (Just _tcPrettyPrint)
-              _tcUserIP
-              _tcFields
-              _tcKey
-              _tcOAuthToken
-              (Just AltJSON)
+        requestClient TableCopy'{..}
+          = go _tcTableId _tcCopyPresentation (Just AltJSON)
+              fusionTablesService
           where go
-                  = clientBuild (Proxy :: Proxy TableCopyResource) rq
+                  = buildClient (Proxy :: Proxy TableCopyResource)
+                      mempty

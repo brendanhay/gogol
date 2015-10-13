@@ -18,8 +18,11 @@
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference>
 module Network.Google.Dataflow
     (
+    -- * Service Configuration
+      dataflowService
+
     -- * API Declaration
-      DataflowAPI
+    , DataflowAPI
 
     -- * Resources
 

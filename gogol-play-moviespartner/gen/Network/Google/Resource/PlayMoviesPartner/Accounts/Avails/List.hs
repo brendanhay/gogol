@@ -39,9 +39,7 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
     , aalPphNames
     , aalXgafv
     , aalStudioNames
-    , aalQuotaUser
     , aalVideoIds
-    , aalPrettyPrint
     , aalUploadProtocol
     , aalPp
     , aalAccessToken
@@ -49,12 +47,9 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
     , aalTerritories
     , aalAccountId
     , aalBearerToken
-    , aalKey
     , aalPageToken
     , aalTitle
-    , aalOAuthToken
     , aalPageSize
-    , aalFields
     , aalCallback
     ) where
 
@@ -83,16 +78,8 @@ type AccountsAvailsListResource =
                                      QueryParam "title" Text :>
                                        QueryParam "pageSize" Int32 :>
                                          QueryParam "callback" Text :>
-                                           QueryParam "quotaUser" Text :>
-                                             QueryParam "prettyPrint" Bool :>
-                                               QueryParam "fields" Text :>
-                                                 QueryParam "key" AuthKey :>
-                                                   Header "Authorization"
-                                                     OAuthToken
-                                                     :>
-                                                     QueryParam "alt" AltJSON :>
-                                                       Get '[JSON]
-                                                         ListAvailsResponse
+                                           QueryParam "alt" AltJSON :>
+                                             Get '[JSON] ListAvailsResponse
 
 -- | List Avails owned or managed by the partner. See _Authentication and
 -- Authorization rules_ and _List methods rules_ for more information about
@@ -104,9 +91,7 @@ data AccountsAvailsList' = AccountsAvailsList'
     , _aalPphNames       :: !(Maybe [Text])
     , _aalXgafv          :: !(Maybe Text)
     , _aalStudioNames    :: !(Maybe [Text])
-    , _aalQuotaUser      :: !(Maybe Text)
     , _aalVideoIds       :: !(Maybe [Text])
-    , _aalPrettyPrint    :: !Bool
     , _aalUploadProtocol :: !(Maybe Text)
     , _aalPp             :: !Bool
     , _aalAccessToken    :: !(Maybe Text)
@@ -114,12 +99,9 @@ data AccountsAvailsList' = AccountsAvailsList'
     , _aalTerritories    :: !(Maybe [Text])
     , _aalAccountId      :: !Text
     , _aalBearerToken    :: !(Maybe Text)
-    , _aalKey            :: !(Maybe AuthKey)
     , _aalPageToken      :: !(Maybe Text)
     , _aalTitle          :: !(Maybe Text)
-    , _aalOAuthToken     :: !(Maybe OAuthToken)
     , _aalPageSize       :: !(Maybe Int32)
-    , _aalFields         :: !(Maybe Text)
     , _aalCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -135,11 +117,7 @@ data AccountsAvailsList' = AccountsAvailsList'
 --
 -- * 'aalStudioNames'
 --
--- * 'aalQuotaUser'
---
 -- * 'aalVideoIds'
---
--- * 'aalPrettyPrint'
 --
 -- * 'aalUploadProtocol'
 --
@@ -155,17 +133,11 @@ data AccountsAvailsList' = AccountsAvailsList'
 --
 -- * 'aalBearerToken'
 --
--- * 'aalKey'
---
 -- * 'aalPageToken'
 --
 -- * 'aalTitle'
 --
--- * 'aalOAuthToken'
---
 -- * 'aalPageSize'
---
--- * 'aalFields'
 --
 -- * 'aalCallback'
 accountsAvailsList'
@@ -177,9 +149,7 @@ accountsAvailsList' pAalAccountId_ =
     , _aalPphNames = Nothing
     , _aalXgafv = Nothing
     , _aalStudioNames = Nothing
-    , _aalQuotaUser = Nothing
     , _aalVideoIds = Nothing
-    , _aalPrettyPrint = True
     , _aalUploadProtocol = Nothing
     , _aalPp = True
     , _aalAccessToken = Nothing
@@ -187,12 +157,9 @@ accountsAvailsList' pAalAccountId_ =
     , _aalTerritories = Nothing
     , _aalAccountId = pAalAccountId_
     , _aalBearerToken = Nothing
-    , _aalKey = Nothing
     , _aalPageToken = Nothing
     , _aalTitle = Nothing
-    , _aalOAuthToken = Nothing
     , _aalPageSize = Nothing
-    , _aalFields = Nothing
     , _aalCallback = Nothing
     }
 
@@ -219,25 +186,12 @@ aalStudioNames
       . _Default
       . _Coerce
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-aalQuotaUser :: Lens' AccountsAvailsList' (Maybe Text)
-aalQuotaUser
-  = lens _aalQuotaUser (\ s a -> s{_aalQuotaUser = a})
-
 -- | Filter Avails that match any of the given \`video_id\`s.
 aalVideoIds :: Lens' AccountsAvailsList' [Text]
 aalVideoIds
   = lens _aalVideoIds (\ s a -> s{_aalVideoIds = a}) .
       _Default
       . _Coerce
-
--- | Returns response with indentations and line breaks.
-aalPrettyPrint :: Lens' AccountsAvailsList' Bool
-aalPrettyPrint
-  = lens _aalPrettyPrint
-      (\ s a -> s{_aalPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 aalUploadProtocol :: Lens' AccountsAvailsList' (Maybe Text)
@@ -282,12 +236,6 @@ aalBearerToken
   = lens _aalBearerToken
       (\ s a -> s{_aalBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aalKey :: Lens' AccountsAvailsList' (Maybe AuthKey)
-aalKey = lens _aalKey (\ s a -> s{_aalKey = a})
-
 -- | See _List methods rules_ for info about this field.
 aalPageToken :: Lens' AccountsAvailsList' (Maybe Text)
 aalPageToken
@@ -298,35 +246,19 @@ aalPageToken
 aalTitle :: Lens' AccountsAvailsList' (Maybe Text)
 aalTitle = lens _aalTitle (\ s a -> s{_aalTitle = a})
 
--- | OAuth 2.0 token for the current user.
-aalOAuthToken :: Lens' AccountsAvailsList' (Maybe OAuthToken)
-aalOAuthToken
-  = lens _aalOAuthToken
-      (\ s a -> s{_aalOAuthToken = a})
-
 -- | See _List methods rules_ for info about this field.
 aalPageSize :: Lens' AccountsAvailsList' (Maybe Int32)
 aalPageSize
   = lens _aalPageSize (\ s a -> s{_aalPageSize = a})
-
--- | Selector specifying which fields to include in a partial response.
-aalFields :: Lens' AccountsAvailsList' (Maybe Text)
-aalFields
-  = lens _aalFields (\ s a -> s{_aalFields = a})
 
 -- | JSONP
 aalCallback :: Lens' AccountsAvailsList' (Maybe Text)
 aalCallback
   = lens _aalCallback (\ s a -> s{_aalCallback = a})
 
-instance GoogleAuth AccountsAvailsList' where
-        _AuthKey = aalKey . _Just
-        _AuthToken = aalOAuthToken . _Just
-
 instance GoogleRequest AccountsAvailsList' where
         type Rs AccountsAvailsList' = ListAvailsResponse
-        request = requestWith playMoviesPartnerRequest
-        requestWith rq AccountsAvailsList'{..}
+        requestClient AccountsAvailsList'{..}
           = go _aalAccountId _aalAltId
               (_aalPphNames ^. _Default)
               _aalXgafv
@@ -342,13 +274,9 @@ instance GoogleRequest AccountsAvailsList' where
               _aalTitle
               _aalPageSize
               _aalCallback
-              _aalQuotaUser
-              (Just _aalPrettyPrint)
-              _aalFields
-              _aalKey
-              _aalOAuthToken
               (Just AltJSON)
+              playMoviesPartnerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsAvailsListResource)
-                      rq
+                      mempty

@@ -33,22 +33,16 @@ module Network.Google.Resource.Storage.Objects.Patch
     , ObjectsPatch'
 
     -- * Request Lenses
-    , opQuotaUser
     , opIfMetagenerationMatch
     , opIfGenerationNotMatch
-    , opPrettyPrint
     , opIfGenerationMatch
-    , opUserIP
     , opPredefinedACL
     , opBucket
     , opPayload
-    , opKey
     , opIfMetagenerationNotMatch
     , opObject
     , opProjection
-    , opOAuthToken
     , opGeneration
-    , opFields
     ) where
 
 import           Network.Google.Prelude
@@ -69,53 +63,34 @@ type ObjectsPatchResource =
                      QueryParam "ifMetagenerationNotMatch" Int64 :>
                        QueryParam "projection" ObjectsPatchProjection :>
                          QueryParam "generation" Int64 :>
-                           QueryParam "quotaUser" Text :>
-                             QueryParam "prettyPrint" Bool :>
-                               QueryParam "userIp" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         ReqBody '[JSON] Object :>
-                                           Patch '[JSON] Object
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Object :> Patch '[JSON] Object
 
 -- | Updates an object\'s metadata. This method supports patch semantics.
 --
 -- /See:/ 'objectsPatch'' smart constructor.
 data ObjectsPatch' = ObjectsPatch'
-    { _opQuotaUser                :: !(Maybe Text)
-    , _opIfMetagenerationMatch    :: !(Maybe Int64)
+    { _opIfMetagenerationMatch    :: !(Maybe Int64)
     , _opIfGenerationNotMatch     :: !(Maybe Int64)
-    , _opPrettyPrint              :: !Bool
     , _opIfGenerationMatch        :: !(Maybe Int64)
-    , _opUserIP                   :: !(Maybe Text)
     , _opPredefinedACL            :: !(Maybe ObjectsPatchPredefinedACL)
     , _opBucket                   :: !Text
     , _opPayload                  :: !Object
-    , _opKey                      :: !(Maybe AuthKey)
     , _opIfMetagenerationNotMatch :: !(Maybe Int64)
     , _opObject                   :: !Text
     , _opProjection               :: !(Maybe ObjectsPatchProjection)
-    , _opOAuthToken               :: !(Maybe OAuthToken)
     , _opGeneration               :: !(Maybe Int64)
-    , _opFields                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'opQuotaUser'
---
 -- * 'opIfMetagenerationMatch'
 --
 -- * 'opIfGenerationNotMatch'
 --
--- * 'opPrettyPrint'
---
 -- * 'opIfGenerationMatch'
---
--- * 'opUserIP'
 --
 -- * 'opPredefinedACL'
 --
@@ -123,19 +98,13 @@ data ObjectsPatch' = ObjectsPatch'
 --
 -- * 'opPayload'
 --
--- * 'opKey'
---
 -- * 'opIfMetagenerationNotMatch'
 --
 -- * 'opObject'
 --
 -- * 'opProjection'
 --
--- * 'opOAuthToken'
---
 -- * 'opGeneration'
---
--- * 'opFields'
 objectsPatch'
     :: Text -- ^ 'bucket'
     -> Object -- ^ 'payload'
@@ -143,30 +112,17 @@ objectsPatch'
     -> ObjectsPatch'
 objectsPatch' pOpBucket_ pOpPayload_ pOpObject_ =
     ObjectsPatch'
-    { _opQuotaUser = Nothing
-    , _opIfMetagenerationMatch = Nothing
+    { _opIfMetagenerationMatch = Nothing
     , _opIfGenerationNotMatch = Nothing
-    , _opPrettyPrint = True
     , _opIfGenerationMatch = Nothing
-    , _opUserIP = Nothing
     , _opPredefinedACL = Nothing
     , _opBucket = pOpBucket_
     , _opPayload = pOpPayload_
-    , _opKey = Nothing
     , _opIfMetagenerationNotMatch = Nothing
     , _opObject = pOpObject_
     , _opProjection = Nothing
-    , _opOAuthToken = Nothing
     , _opGeneration = Nothing
-    , _opFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-opQuotaUser :: Lens' ObjectsPatch' (Maybe Text)
-opQuotaUser
-  = lens _opQuotaUser (\ s a -> s{_opQuotaUser = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.
@@ -182,23 +138,12 @@ opIfGenerationNotMatch
   = lens _opIfGenerationNotMatch
       (\ s a -> s{_opIfGenerationNotMatch = a})
 
--- | Returns response with indentations and line breaks.
-opPrettyPrint :: Lens' ObjectsPatch' Bool
-opPrettyPrint
-  = lens _opPrettyPrint
-      (\ s a -> s{_opPrettyPrint = a})
-
 -- | Makes the operation conditional on whether the object\'s current
 -- generation matches the given value.
 opIfGenerationMatch :: Lens' ObjectsPatch' (Maybe Int64)
 opIfGenerationMatch
   = lens _opIfGenerationMatch
       (\ s a -> s{_opIfGenerationMatch = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-opUserIP :: Lens' ObjectsPatch' (Maybe Text)
-opUserIP = lens _opUserIP (\ s a -> s{_opUserIP = a})
 
 -- | Apply a predefined set of access controls to this object.
 opPredefinedACL :: Lens' ObjectsPatch' (Maybe ObjectsPatchPredefinedACL)
@@ -214,12 +159,6 @@ opBucket = lens _opBucket (\ s a -> s{_opBucket = a})
 opPayload :: Lens' ObjectsPatch' Object
 opPayload
   = lens _opPayload (\ s a -> s{_opPayload = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-opKey :: Lens' ObjectsPatch' (Maybe AuthKey)
-opKey = lens _opKey (\ s a -> s{_opKey = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration does not match the given value.
@@ -238,29 +177,15 @@ opProjection :: Lens' ObjectsPatch' (Maybe ObjectsPatchProjection)
 opProjection
   = lens _opProjection (\ s a -> s{_opProjection = a})
 
--- | OAuth 2.0 token for the current user.
-opOAuthToken :: Lens' ObjectsPatch' (Maybe OAuthToken)
-opOAuthToken
-  = lens _opOAuthToken (\ s a -> s{_opOAuthToken = a})
-
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
 opGeneration :: Lens' ObjectsPatch' (Maybe Int64)
 opGeneration
   = lens _opGeneration (\ s a -> s{_opGeneration = a})
 
--- | Selector specifying which fields to include in a partial response.
-opFields :: Lens' ObjectsPatch' (Maybe Text)
-opFields = lens _opFields (\ s a -> s{_opFields = a})
-
-instance GoogleAuth ObjectsPatch' where
-        _AuthKey = opKey . _Just
-        _AuthToken = opOAuthToken . _Just
-
 instance GoogleRequest ObjectsPatch' where
         type Rs ObjectsPatch' = Object
-        request = requestWith storageRequest
-        requestWith rq ObjectsPatch'{..}
+        requestClient ObjectsPatch'{..}
           = go _opBucket _opObject _opIfMetagenerationMatch
               _opIfGenerationNotMatch
               _opIfGenerationMatch
@@ -268,14 +193,9 @@ instance GoogleRequest ObjectsPatch' where
               _opIfMetagenerationNotMatch
               _opProjection
               _opGeneration
-              _opQuotaUser
-              (Just _opPrettyPrint)
-              _opUserIP
-              _opFields
-              _opKey
-              _opOAuthToken
               (Just AltJSON)
               _opPayload
+              storageService
           where go
-                  = clientBuild (Proxy :: Proxy ObjectsPatchResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ObjectsPatchResource)
+                      mempty

@@ -34,19 +34,14 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Get
 
     -- * Request Lenses
     , pzcgXgafv
-    , pzcgQuotaUser
-    , pzcgPrettyPrint
     , pzcgUploadProtocol
     , pzcgPp
     , pzcgAccessToken
     , pzcgUploadType
     , pzcgZone
     , pzcgBearerToken
-    , pzcgKey
     , pzcgClusterId
     , pzcgProjectId
-    , pzcgOAuthToken
-    , pzcgFields
     , pzcgCallback
     ) where
 
@@ -70,32 +65,21 @@ type ProjectsZonesClustersGetResource =
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "quotaUser" Text :>
-                                   QueryParam "prettyPrint" Bool :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "key" AuthKey :>
-                                         Header "Authorization" OAuthToken :>
-                                           QueryParam "alt" AltJSON :>
-                                             Get '[JSON] Cluster
+                                 QueryParam "alt" AltJSON :> Get '[JSON] Cluster
 
 -- | Gets a specific cluster.
 --
 -- /See:/ 'projectsZonesClustersGet'' smart constructor.
 data ProjectsZonesClustersGet' = ProjectsZonesClustersGet'
     { _pzcgXgafv          :: !(Maybe Text)
-    , _pzcgQuotaUser      :: !(Maybe Text)
-    , _pzcgPrettyPrint    :: !Bool
     , _pzcgUploadProtocol :: !(Maybe Text)
     , _pzcgPp             :: !Bool
     , _pzcgAccessToken    :: !(Maybe Text)
     , _pzcgUploadType     :: !(Maybe Text)
     , _pzcgZone           :: !Text
     , _pzcgBearerToken    :: !(Maybe Text)
-    , _pzcgKey            :: !(Maybe AuthKey)
     , _pzcgClusterId      :: !Text
     , _pzcgProjectId      :: !Text
-    , _pzcgOAuthToken     :: !(Maybe OAuthToken)
-    , _pzcgFields         :: !(Maybe Text)
     , _pzcgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -104,10 +88,6 @@ data ProjectsZonesClustersGet' = ProjectsZonesClustersGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pzcgXgafv'
---
--- * 'pzcgQuotaUser'
---
--- * 'pzcgPrettyPrint'
 --
 -- * 'pzcgUploadProtocol'
 --
@@ -121,15 +101,9 @@ data ProjectsZonesClustersGet' = ProjectsZonesClustersGet'
 --
 -- * 'pzcgBearerToken'
 --
--- * 'pzcgKey'
---
 -- * 'pzcgClusterId'
 --
 -- * 'pzcgProjectId'
---
--- * 'pzcgOAuthToken'
---
--- * 'pzcgFields'
 --
 -- * 'pzcgCallback'
 projectsZonesClustersGet'
@@ -140,19 +114,14 @@ projectsZonesClustersGet'
 projectsZonesClustersGet' pPzcgZone_ pPzcgClusterId_ pPzcgProjectId_ =
     ProjectsZonesClustersGet'
     { _pzcgXgafv = Nothing
-    , _pzcgQuotaUser = Nothing
-    , _pzcgPrettyPrint = True
     , _pzcgUploadProtocol = Nothing
     , _pzcgPp = True
     , _pzcgAccessToken = Nothing
     , _pzcgUploadType = Nothing
     , _pzcgZone = pPzcgZone_
     , _pzcgBearerToken = Nothing
-    , _pzcgKey = Nothing
     , _pzcgClusterId = pPzcgClusterId_
     , _pzcgProjectId = pPzcgProjectId_
-    , _pzcgOAuthToken = Nothing
-    , _pzcgFields = Nothing
     , _pzcgCallback = Nothing
     }
 
@@ -160,20 +129,6 @@ projectsZonesClustersGet' pPzcgZone_ pPzcgClusterId_ pPzcgProjectId_ =
 pzcgXgafv :: Lens' ProjectsZonesClustersGet' (Maybe Text)
 pzcgXgafv
   = lens _pzcgXgafv (\ s a -> s{_pzcgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pzcgQuotaUser :: Lens' ProjectsZonesClustersGet' (Maybe Text)
-pzcgQuotaUser
-  = lens _pzcgQuotaUser
-      (\ s a -> s{_pzcgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pzcgPrettyPrint :: Lens' ProjectsZonesClustersGet' Bool
-pzcgPrettyPrint
-  = lens _pzcgPrettyPrint
-      (\ s a -> s{_pzcgPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 pzcgUploadProtocol :: Lens' ProjectsZonesClustersGet' (Maybe Text)
@@ -208,12 +163,6 @@ pzcgBearerToken
   = lens _pzcgBearerToken
       (\ s a -> s{_pzcgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pzcgKey :: Lens' ProjectsZonesClustersGet' (Maybe AuthKey)
-pzcgKey = lens _pzcgKey (\ s a -> s{_pzcgKey = a})
-
 -- | The name of the cluster to retrieve.
 pzcgClusterId :: Lens' ProjectsZonesClustersGet' Text
 pzcgClusterId
@@ -227,31 +176,15 @@ pzcgProjectId
   = lens _pzcgProjectId
       (\ s a -> s{_pzcgProjectId = a})
 
--- | OAuth 2.0 token for the current user.
-pzcgOAuthToken :: Lens' ProjectsZonesClustersGet' (Maybe OAuthToken)
-pzcgOAuthToken
-  = lens _pzcgOAuthToken
-      (\ s a -> s{_pzcgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pzcgFields :: Lens' ProjectsZonesClustersGet' (Maybe Text)
-pzcgFields
-  = lens _pzcgFields (\ s a -> s{_pzcgFields = a})
-
 -- | JSONP
 pzcgCallback :: Lens' ProjectsZonesClustersGet' (Maybe Text)
 pzcgCallback
   = lens _pzcgCallback (\ s a -> s{_pzcgCallback = a})
 
-instance GoogleAuth ProjectsZonesClustersGet' where
-        _AuthKey = pzcgKey . _Just
-        _AuthToken = pzcgOAuthToken . _Just
-
 instance GoogleRequest ProjectsZonesClustersGet'
          where
         type Rs ProjectsZonesClustersGet' = Cluster
-        request = requestWith containerRequest
-        requestWith rq ProjectsZonesClustersGet'{..}
+        requestClient ProjectsZonesClustersGet'{..}
           = go _pzcgProjectId _pzcgZone _pzcgClusterId
               _pzcgXgafv
               _pzcgUploadProtocol
@@ -260,13 +193,9 @@ instance GoogleRequest ProjectsZonesClustersGet'
               _pzcgUploadType
               _pzcgBearerToken
               _pzcgCallback
-              _pzcgQuotaUser
-              (Just _pzcgPrettyPrint)
-              _pzcgFields
-              _pzcgKey
-              _pzcgOAuthToken
               (Just AltJSON)
+              containerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsZonesClustersGetResource)
-                      rq
+                      mempty

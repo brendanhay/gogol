@@ -33,14 +33,8 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Update
     , RemarketingListsUpdate'
 
     -- * Request Lenses
-    , rluQuotaUser
-    , rluPrettyPrint
-    , rluUserIP
     , rluProFileId
     , rluPayload
-    , rluKey
-    , rluOAuthToken
-    , rluFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,83 +46,34 @@ type RemarketingListsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "remarketingLists" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] RemarketingList :>
-                           Put '[JSON] RemarketingList
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] RemarketingList :>
+               Put '[JSON] RemarketingList
 
 -- | Updates an existing remarketing list.
 --
 -- /See:/ 'remarketingListsUpdate'' smart constructor.
 data RemarketingListsUpdate' = RemarketingListsUpdate'
-    { _rluQuotaUser   :: !(Maybe Text)
-    , _rluPrettyPrint :: !Bool
-    , _rluUserIP      :: !(Maybe Text)
-    , _rluProFileId   :: !Int64
-    , _rluPayload     :: !RemarketingList
-    , _rluKey         :: !(Maybe AuthKey)
-    , _rluOAuthToken  :: !(Maybe OAuthToken)
-    , _rluFields      :: !(Maybe Text)
+    { _rluProFileId :: !Int64
+    , _rluPayload   :: !RemarketingList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rluQuotaUser'
---
--- * 'rluPrettyPrint'
---
--- * 'rluUserIP'
---
 -- * 'rluProFileId'
 --
 -- * 'rluPayload'
---
--- * 'rluKey'
---
--- * 'rluOAuthToken'
---
--- * 'rluFields'
 remarketingListsUpdate'
     :: Int64 -- ^ 'profileId'
     -> RemarketingList -- ^ 'payload'
     -> RemarketingListsUpdate'
 remarketingListsUpdate' pRluProFileId_ pRluPayload_ =
     RemarketingListsUpdate'
-    { _rluQuotaUser = Nothing
-    , _rluPrettyPrint = True
-    , _rluUserIP = Nothing
-    , _rluProFileId = pRluProFileId_
+    { _rluProFileId = pRluProFileId_
     , _rluPayload = pRluPayload_
-    , _rluKey = Nothing
-    , _rluOAuthToken = Nothing
-    , _rluFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-rluQuotaUser :: Lens' RemarketingListsUpdate' (Maybe Text)
-rluQuotaUser
-  = lens _rluQuotaUser (\ s a -> s{_rluQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rluPrettyPrint :: Lens' RemarketingListsUpdate' Bool
-rluPrettyPrint
-  = lens _rluPrettyPrint
-      (\ s a -> s{_rluPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rluUserIP :: Lens' RemarketingListsUpdate' (Maybe Text)
-rluUserIP
-  = lens _rluUserIP (\ s a -> s{_rluUserIP = a})
 
 -- | User profile ID associated with this request.
 rluProFileId :: Lens' RemarketingListsUpdate' Int64
@@ -140,40 +85,12 @@ rluPayload :: Lens' RemarketingListsUpdate' RemarketingList
 rluPayload
   = lens _rluPayload (\ s a -> s{_rluPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rluKey :: Lens' RemarketingListsUpdate' (Maybe AuthKey)
-rluKey = lens _rluKey (\ s a -> s{_rluKey = a})
-
--- | OAuth 2.0 token for the current user.
-rluOAuthToken :: Lens' RemarketingListsUpdate' (Maybe OAuthToken)
-rluOAuthToken
-  = lens _rluOAuthToken
-      (\ s a -> s{_rluOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-rluFields :: Lens' RemarketingListsUpdate' (Maybe Text)
-rluFields
-  = lens _rluFields (\ s a -> s{_rluFields = a})
-
-instance GoogleAuth RemarketingListsUpdate' where
-        _AuthKey = rluKey . _Just
-        _AuthToken = rluOAuthToken . _Just
-
 instance GoogleRequest RemarketingListsUpdate' where
         type Rs RemarketingListsUpdate' = RemarketingList
-        request = requestWith dFAReportingRequest
-        requestWith rq RemarketingListsUpdate'{..}
-          = go _rluProFileId _rluQuotaUser
-              (Just _rluPrettyPrint)
-              _rluUserIP
-              _rluFields
-              _rluKey
-              _rluOAuthToken
-              (Just AltJSON)
-              _rluPayload
+        requestClient RemarketingListsUpdate'{..}
+          = go _rluProFileId (Just AltJSON) _rluPayload
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy RemarketingListsUpdateResource)
-                      rq
+                      mempty

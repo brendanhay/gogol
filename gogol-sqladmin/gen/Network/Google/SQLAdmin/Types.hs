@@ -15,8 +15,12 @@
 --
 module Network.Google.SQLAdmin.Types
     (
-    -- * Service Request
-      sQLAdminRequest
+    -- * Service Configuration
+      sQLAdminService
+
+    -- * OAuth Scopes
+    , sqlserviceAdminScope
+    , cloudPlatformScope
 
     -- * SSLCert
     , SSLCert
@@ -388,7 +392,16 @@ import           Network.Google.SQLAdmin.Types.Product
 import           Network.Google.SQLAdmin.Types.Sum
 
 -- | Default request referring to version 'v1beta4' of the Cloud SQL Administration API. This contains the host and root path used as a starting point for constructing service requests.
-sQLAdminRequest :: RequestBuilder
-sQLAdminRequest
-  = defaultRequest "https://www.googleapis.com/"
+sQLAdminService :: Service
+sQLAdminService
+  = defaultService (ServiceId "sqladmin:v1beta4")
+      "www.googleapis.com"
       "sql/v1beta4/"
+
+-- | Manage your Google SQL Service instances
+sqlserviceAdminScope :: OAuthScope
+sqlserviceAdminScope = OAuthScope "https://www.googleapis.com/auth/sqlservice.admin";
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: OAuthScope
+cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";

@@ -33,13 +33,7 @@ module Network.Google.Resource.Language.Languages.List
     , LanguagesList'
 
     -- * Request Lenses
-    , llQuotaUser
-    , llPrettyPrint
-    , llUserIP
-    , llKey
-    , llOAuthToken
     , llTarget
-    , llFields
     ) where
 
 import           Network.Google.Prelude
@@ -51,110 +45,37 @@ type LanguagesListResource =
      "v2" :>
        "languages" :>
          QueryParam "target" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] LanguagesListResponse
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] LanguagesListResponse
 
 -- | List the source\/target languages supported by the API
 --
 -- /See:/ 'languagesList'' smart constructor.
-data LanguagesList' = LanguagesList'
-    { _llQuotaUser   :: !(Maybe Text)
-    , _llPrettyPrint :: !Bool
-    , _llUserIP      :: !(Maybe Text)
-    , _llKey         :: !(Maybe AuthKey)
-    , _llOAuthToken  :: !(Maybe OAuthToken)
-    , _llTarget      :: !(Maybe Text)
-    , _llFields      :: !(Maybe Text)
+newtype LanguagesList' = LanguagesList'
+    { _llTarget :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LanguagesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'llQuotaUser'
---
--- * 'llPrettyPrint'
---
--- * 'llUserIP'
---
--- * 'llKey'
---
--- * 'llOAuthToken'
---
 -- * 'llTarget'
---
--- * 'llFields'
 languagesList'
     :: LanguagesList'
 languagesList' =
     LanguagesList'
-    { _llQuotaUser = Nothing
-    , _llPrettyPrint = True
-    , _llUserIP = Nothing
-    , _llKey = Nothing
-    , _llOAuthToken = Nothing
-    , _llTarget = Nothing
-    , _llFields = Nothing
+    { _llTarget = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-llQuotaUser :: Lens' LanguagesList' (Maybe Text)
-llQuotaUser
-  = lens _llQuotaUser (\ s a -> s{_llQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-llPrettyPrint :: Lens' LanguagesList' Bool
-llPrettyPrint
-  = lens _llPrettyPrint
-      (\ s a -> s{_llPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-llUserIP :: Lens' LanguagesList' (Maybe Text)
-llUserIP = lens _llUserIP (\ s a -> s{_llUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-llKey :: Lens' LanguagesList' (Maybe AuthKey)
-llKey = lens _llKey (\ s a -> s{_llKey = a})
-
--- | OAuth 2.0 token for the current user.
-llOAuthToken :: Lens' LanguagesList' (Maybe OAuthToken)
-llOAuthToken
-  = lens _llOAuthToken (\ s a -> s{_llOAuthToken = a})
 
 -- | the language and collation in which the localized results should be
 -- returned
 llTarget :: Lens' LanguagesList' (Maybe Text)
 llTarget = lens _llTarget (\ s a -> s{_llTarget = a})
 
--- | Selector specifying which fields to include in a partial response.
-llFields :: Lens' LanguagesList' (Maybe Text)
-llFields = lens _llFields (\ s a -> s{_llFields = a})
-
-instance GoogleAuth LanguagesList' where
-        _AuthKey = llKey . _Just
-        _AuthToken = llOAuthToken . _Just
-
 instance GoogleRequest LanguagesList' where
         type Rs LanguagesList' = LanguagesListResponse
-        request = requestWith translateRequest
-        requestWith rq LanguagesList'{..}
-          = go _llTarget _llQuotaUser (Just _llPrettyPrint)
-              _llUserIP
-              _llFields
-              _llKey
-              _llOAuthToken
-              (Just AltJSON)
+        requestClient LanguagesList'{..}
+          = go _llTarget (Just AltJSON) translateService
           where go
-                  = clientBuild (Proxy :: Proxy LanguagesListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy LanguagesListResource)
+                      mempty

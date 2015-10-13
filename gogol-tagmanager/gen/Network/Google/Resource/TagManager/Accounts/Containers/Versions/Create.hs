@@ -33,15 +33,9 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Create
     , AccountsContainersVersionsCreate'
 
     -- * Request Lenses
-    , acvcQuotaUser
-    , acvcPrettyPrint
     , acvcContainerId
-    , acvcUserIP
     , acvcPayload
     , acvcAccountId
-    , acvcKey
-    , acvcOAuthToken
-    , acvcFields
     ) where
 
 import           Network.Google.Prelude
@@ -55,53 +49,29 @@ type AccountsContainersVersionsCreateResource =
          "containers" :>
            Capture "containerId" Text :>
              "versions" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON]
-                               CreateContainerVersionRequestVersionOptions
-                               :> Post '[JSON] CreateContainerVersionResponse
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON]
+                   CreateContainerVersionRequestVersionOptions
+                   :> Post '[JSON] CreateContainerVersionResponse
 
 -- | Creates a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsCreate'' smart constructor.
 data AccountsContainersVersionsCreate' = AccountsContainersVersionsCreate'
-    { _acvcQuotaUser   :: !(Maybe Text)
-    , _acvcPrettyPrint :: !Bool
-    , _acvcContainerId :: !Text
-    , _acvcUserIP      :: !(Maybe Text)
+    { _acvcContainerId :: !Text
     , _acvcPayload     :: !CreateContainerVersionRequestVersionOptions
     , _acvcAccountId   :: !Text
-    , _acvcKey         :: !(Maybe AuthKey)
-    , _acvcOAuthToken  :: !(Maybe OAuthToken)
-    , _acvcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsCreate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acvcQuotaUser'
---
--- * 'acvcPrettyPrint'
---
 -- * 'acvcContainerId'
---
--- * 'acvcUserIP'
 --
 -- * 'acvcPayload'
 --
 -- * 'acvcAccountId'
---
--- * 'acvcKey'
---
--- * 'acvcOAuthToken'
---
--- * 'acvcFields'
 accountsContainersVersionsCreate'
     :: Text -- ^ 'containerId'
     -> CreateContainerVersionRequestVersionOptions -- ^ 'payload'
@@ -109,42 +79,16 @@ accountsContainersVersionsCreate'
     -> AccountsContainersVersionsCreate'
 accountsContainersVersionsCreate' pAcvcContainerId_ pAcvcPayload_ pAcvcAccountId_ =
     AccountsContainersVersionsCreate'
-    { _acvcQuotaUser = Nothing
-    , _acvcPrettyPrint = True
-    , _acvcContainerId = pAcvcContainerId_
-    , _acvcUserIP = Nothing
+    { _acvcContainerId = pAcvcContainerId_
     , _acvcPayload = pAcvcPayload_
     , _acvcAccountId = pAcvcAccountId_
-    , _acvcKey = Nothing
-    , _acvcOAuthToken = Nothing
-    , _acvcFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-acvcQuotaUser :: Lens' AccountsContainersVersionsCreate' (Maybe Text)
-acvcQuotaUser
-  = lens _acvcQuotaUser
-      (\ s a -> s{_acvcQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-acvcPrettyPrint :: Lens' AccountsContainersVersionsCreate' Bool
-acvcPrettyPrint
-  = lens _acvcPrettyPrint
-      (\ s a -> s{_acvcPrettyPrint = a})
 
 -- | The GTM Container ID.
 acvcContainerId :: Lens' AccountsContainersVersionsCreate' Text
 acvcContainerId
   = lens _acvcContainerId
       (\ s a -> s{_acvcContainerId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-acvcUserIP :: Lens' AccountsContainersVersionsCreate' (Maybe Text)
-acvcUserIP
-  = lens _acvcUserIP (\ s a -> s{_acvcUserIP = a})
 
 -- | Multipart request metadata.
 acvcPayload :: Lens' AccountsContainersVersionsCreate' CreateContainerVersionRequestVersionOptions
@@ -157,44 +101,16 @@ acvcAccountId
   = lens _acvcAccountId
       (\ s a -> s{_acvcAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-acvcKey :: Lens' AccountsContainersVersionsCreate' (Maybe AuthKey)
-acvcKey = lens _acvcKey (\ s a -> s{_acvcKey = a})
-
--- | OAuth 2.0 token for the current user.
-acvcOAuthToken :: Lens' AccountsContainersVersionsCreate' (Maybe OAuthToken)
-acvcOAuthToken
-  = lens _acvcOAuthToken
-      (\ s a -> s{_acvcOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-acvcFields :: Lens' AccountsContainersVersionsCreate' (Maybe Text)
-acvcFields
-  = lens _acvcFields (\ s a -> s{_acvcFields = a})
-
-instance GoogleAuth AccountsContainersVersionsCreate'
-         where
-        _AuthKey = acvcKey . _Just
-        _AuthToken = acvcOAuthToken . _Just
-
 instance GoogleRequest
          AccountsContainersVersionsCreate' where
         type Rs AccountsContainersVersionsCreate' =
              CreateContainerVersionResponse
-        request = requestWith tagManagerRequest
-        requestWith rq AccountsContainersVersionsCreate'{..}
-          = go _acvcAccountId _acvcContainerId _acvcQuotaUser
-              (Just _acvcPrettyPrint)
-              _acvcUserIP
-              _acvcFields
-              _acvcKey
-              _acvcOAuthToken
-              (Just AltJSON)
+        requestClient AccountsContainersVersionsCreate'{..}
+          = go _acvcAccountId _acvcContainerId (Just AltJSON)
               _acvcPayload
+              tagManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy AccountsContainersVersionsCreateResource)
-                      rq
+                      mempty

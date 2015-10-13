@@ -33,16 +33,10 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Patch
     , MarketplaceOrdersPatch'
 
     -- * Request Lenses
-    , mopQuotaUser
     , mopUpdateAction
-    , mopPrettyPrint
-    , mopUserIP
     , mopRevisionNumber
     , mopPayload
-    , mopKey
-    , mopOAuthToken
     , mopOrderId
-    , mopFields
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -57,55 +51,31 @@ type MarketplaceOrdersPatchResource =
            Capture "updateAction"
              MarketplaceOrdersPatchUpdateAction
              :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] MarketplaceOrder :>
-                             Patch '[JSON] MarketplaceOrder
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] MarketplaceOrder :>
+                 Patch '[JSON] MarketplaceOrder
 
 -- | Update the given order. This method supports patch semantics.
 --
 -- /See:/ 'marketplaceOrdersPatch'' smart constructor.
 data MarketplaceOrdersPatch' = MarketplaceOrdersPatch'
-    { _mopQuotaUser      :: !(Maybe Text)
-    , _mopUpdateAction   :: !MarketplaceOrdersPatchUpdateAction
-    , _mopPrettyPrint    :: !Bool
-    , _mopUserIP         :: !(Maybe Text)
+    { _mopUpdateAction   :: !MarketplaceOrdersPatchUpdateAction
     , _mopRevisionNumber :: !Int64
     , _mopPayload        :: !MarketplaceOrder
-    , _mopKey            :: !(Maybe AuthKey)
-    , _mopOAuthToken     :: !(Maybe OAuthToken)
     , _mopOrderId        :: !Text
-    , _mopFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceOrdersPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mopQuotaUser'
---
 -- * 'mopUpdateAction'
---
--- * 'mopPrettyPrint'
---
--- * 'mopUserIP'
 --
 -- * 'mopRevisionNumber'
 --
 -- * 'mopPayload'
 --
--- * 'mopKey'
---
--- * 'mopOAuthToken'
---
 -- * 'mopOrderId'
---
--- * 'mopFields'
 marketplaceOrdersPatch'
     :: MarketplaceOrdersPatchUpdateAction -- ^ 'updateAction'
     -> Int64 -- ^ 'revisionNumber'
@@ -114,42 +84,17 @@ marketplaceOrdersPatch'
     -> MarketplaceOrdersPatch'
 marketplaceOrdersPatch' pMopUpdateAction_ pMopRevisionNumber_ pMopPayload_ pMopOrderId_ =
     MarketplaceOrdersPatch'
-    { _mopQuotaUser = Nothing
-    , _mopUpdateAction = pMopUpdateAction_
-    , _mopPrettyPrint = True
-    , _mopUserIP = Nothing
+    { _mopUpdateAction = pMopUpdateAction_
     , _mopRevisionNumber = pMopRevisionNumber_
     , _mopPayload = pMopPayload_
-    , _mopKey = Nothing
-    , _mopOAuthToken = Nothing
     , _mopOrderId = pMopOrderId_
-    , _mopFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mopQuotaUser :: Lens' MarketplaceOrdersPatch' (Maybe Text)
-mopQuotaUser
-  = lens _mopQuotaUser (\ s a -> s{_mopQuotaUser = a})
 
 -- | The proposed action to take on the order.
 mopUpdateAction :: Lens' MarketplaceOrdersPatch' MarketplaceOrdersPatchUpdateAction
 mopUpdateAction
   = lens _mopUpdateAction
       (\ s a -> s{_mopUpdateAction = a})
-
--- | Returns response with indentations and line breaks.
-mopPrettyPrint :: Lens' MarketplaceOrdersPatch' Bool
-mopPrettyPrint
-  = lens _mopPrettyPrint
-      (\ s a -> s{_mopPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mopUserIP :: Lens' MarketplaceOrdersPatch' (Maybe Text)
-mopUserIP
-  = lens _mopUserIP (\ s a -> s{_mopUserIP = a})
 
 -- | The last known revision number to update. If the head revision in the
 -- marketplace database has since changed, an error will be thrown. The
@@ -165,46 +110,19 @@ mopPayload :: Lens' MarketplaceOrdersPatch' MarketplaceOrder
 mopPayload
   = lens _mopPayload (\ s a -> s{_mopPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mopKey :: Lens' MarketplaceOrdersPatch' (Maybe AuthKey)
-mopKey = lens _mopKey (\ s a -> s{_mopKey = a})
-
--- | OAuth 2.0 token for the current user.
-mopOAuthToken :: Lens' MarketplaceOrdersPatch' (Maybe OAuthToken)
-mopOAuthToken
-  = lens _mopOAuthToken
-      (\ s a -> s{_mopOAuthToken = a})
-
 -- | The order id to update.
 mopOrderId :: Lens' MarketplaceOrdersPatch' Text
 mopOrderId
   = lens _mopOrderId (\ s a -> s{_mopOrderId = a})
 
--- | Selector specifying which fields to include in a partial response.
-mopFields :: Lens' MarketplaceOrdersPatch' (Maybe Text)
-mopFields
-  = lens _mopFields (\ s a -> s{_mopFields = a})
-
-instance GoogleAuth MarketplaceOrdersPatch' where
-        _AuthKey = mopKey . _Just
-        _AuthToken = mopOAuthToken . _Just
-
 instance GoogleRequest MarketplaceOrdersPatch' where
         type Rs MarketplaceOrdersPatch' = MarketplaceOrder
-        request = requestWith adExchangeBuyerRequest
-        requestWith rq MarketplaceOrdersPatch'{..}
+        requestClient MarketplaceOrdersPatch'{..}
           = go _mopOrderId _mopRevisionNumber _mopUpdateAction
-              _mopQuotaUser
-              (Just _mopPrettyPrint)
-              _mopUserIP
-              _mopFields
-              _mopKey
-              _mopOAuthToken
               (Just AltJSON)
               _mopPayload
+              adExchangeBuyerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy MarketplaceOrdersPatchResource)
-                      rq
+                      mempty

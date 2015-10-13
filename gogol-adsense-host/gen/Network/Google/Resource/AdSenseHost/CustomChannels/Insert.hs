@@ -33,14 +33,8 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.Insert
     , CustomChannelsInsert'
 
     -- * Request Lenses
-    , cciQuotaUser
-    , cciPrettyPrint
-    , cciUserIP
     , cciPayload
     , cciAdClientId
-    , cciKey
-    , cciOAuthToken
-    , cciFields
     ) where
 
 import           Network.Google.AdSenseHost.Types
@@ -52,83 +46,34 @@ type CustomChannelsInsertResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "customchannels" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] CustomChannel :>
-                           Post '[JSON] CustomChannel
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] CustomChannel :>
+               Post '[JSON] CustomChannel
 
 -- | Add a new custom channel to the host AdSense account.
 --
 -- /See:/ 'customChannelsInsert'' smart constructor.
 data CustomChannelsInsert' = CustomChannelsInsert'
-    { _cciQuotaUser   :: !(Maybe Text)
-    , _cciPrettyPrint :: !Bool
-    , _cciUserIP      :: !(Maybe Text)
-    , _cciPayload     :: !CustomChannel
-    , _cciAdClientId  :: !Text
-    , _cciKey         :: !(Maybe AuthKey)
-    , _cciOAuthToken  :: !(Maybe OAuthToken)
-    , _cciFields      :: !(Maybe Text)
+    { _cciPayload    :: !CustomChannel
+    , _cciAdClientId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomChannelsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cciQuotaUser'
---
--- * 'cciPrettyPrint'
---
--- * 'cciUserIP'
---
 -- * 'cciPayload'
 --
 -- * 'cciAdClientId'
---
--- * 'cciKey'
---
--- * 'cciOAuthToken'
---
--- * 'cciFields'
 customChannelsInsert'
     :: CustomChannel -- ^ 'payload'
     -> Text -- ^ 'adClientId'
     -> CustomChannelsInsert'
 customChannelsInsert' pCciPayload_ pCciAdClientId_ =
     CustomChannelsInsert'
-    { _cciQuotaUser = Nothing
-    , _cciPrettyPrint = True
-    , _cciUserIP = Nothing
-    , _cciPayload = pCciPayload_
+    { _cciPayload = pCciPayload_
     , _cciAdClientId = pCciAdClientId_
-    , _cciKey = Nothing
-    , _cciOAuthToken = Nothing
-    , _cciFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-cciQuotaUser :: Lens' CustomChannelsInsert' (Maybe Text)
-cciQuotaUser
-  = lens _cciQuotaUser (\ s a -> s{_cciQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cciPrettyPrint :: Lens' CustomChannelsInsert' Bool
-cciPrettyPrint
-  = lens _cciPrettyPrint
-      (\ s a -> s{_cciPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-cciUserIP :: Lens' CustomChannelsInsert' (Maybe Text)
-cciUserIP
-  = lens _cciUserIP (\ s a -> s{_cciUserIP = a})
 
 -- | Multipart request metadata.
 cciPayload :: Lens' CustomChannelsInsert' CustomChannel
@@ -141,40 +86,12 @@ cciAdClientId
   = lens _cciAdClientId
       (\ s a -> s{_cciAdClientId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cciKey :: Lens' CustomChannelsInsert' (Maybe AuthKey)
-cciKey = lens _cciKey (\ s a -> s{_cciKey = a})
-
--- | OAuth 2.0 token for the current user.
-cciOAuthToken :: Lens' CustomChannelsInsert' (Maybe OAuthToken)
-cciOAuthToken
-  = lens _cciOAuthToken
-      (\ s a -> s{_cciOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cciFields :: Lens' CustomChannelsInsert' (Maybe Text)
-cciFields
-  = lens _cciFields (\ s a -> s{_cciFields = a})
-
-instance GoogleAuth CustomChannelsInsert' where
-        _AuthKey = cciKey . _Just
-        _AuthToken = cciOAuthToken . _Just
-
 instance GoogleRequest CustomChannelsInsert' where
         type Rs CustomChannelsInsert' = CustomChannel
-        request = requestWith adSenseHostRequest
-        requestWith rq CustomChannelsInsert'{..}
-          = go _cciAdClientId _cciQuotaUser
-              (Just _cciPrettyPrint)
-              _cciUserIP
-              _cciFields
-              _cciKey
-              _cciOAuthToken
-              (Just AltJSON)
-              _cciPayload
+        requestClient CustomChannelsInsert'{..}
+          = go _cciAdClientId (Just AltJSON) _cciPayload
+              adSenseHostService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CustomChannelsInsertResource)
-                      rq
+                      mempty

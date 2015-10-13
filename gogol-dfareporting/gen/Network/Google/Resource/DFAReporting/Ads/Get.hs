@@ -33,14 +33,8 @@ module Network.Google.Resource.DFAReporting.Ads.Get
     , AdsGet'
 
     -- * Request Lenses
-    , adsdQuotaUser
-    , adsdPrettyPrint
-    , adsdUserIP
     , adsdProFileId
-    , adsdKey
     , adsdId
-    , adsdOAuthToken
-    , adsdFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -53,82 +47,32 @@ type AdsGetResource =
        Capture "profileId" Int64 :>
          "ads" :>
            Capture "id" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Ad
+             QueryParam "alt" AltJSON :> Get '[JSON] Ad
 
 -- | Gets one ad by ID.
 --
 -- /See:/ 'adsGet'' smart constructor.
 data AdsGet' = AdsGet'
-    { _adsdQuotaUser   :: !(Maybe Text)
-    , _adsdPrettyPrint :: !Bool
-    , _adsdUserIP      :: !(Maybe Text)
-    , _adsdProFileId   :: !Int64
-    , _adsdKey         :: !(Maybe AuthKey)
-    , _adsdId          :: !Int64
-    , _adsdOAuthToken  :: !(Maybe OAuthToken)
-    , _adsdFields      :: !(Maybe Text)
+    { _adsdProFileId :: !Int64
+    , _adsdId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'adsdQuotaUser'
---
--- * 'adsdPrettyPrint'
---
--- * 'adsdUserIP'
---
 -- * 'adsdProFileId'
 --
--- * 'adsdKey'
---
 -- * 'adsdId'
---
--- * 'adsdOAuthToken'
---
--- * 'adsdFields'
 adsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> AdsGet'
 adsGet' pAdsdProFileId_ pAdsdId_ =
     AdsGet'
-    { _adsdQuotaUser = Nothing
-    , _adsdPrettyPrint = True
-    , _adsdUserIP = Nothing
-    , _adsdProFileId = pAdsdProFileId_
-    , _adsdKey = Nothing
+    { _adsdProFileId = pAdsdProFileId_
     , _adsdId = pAdsdId_
-    , _adsdOAuthToken = Nothing
-    , _adsdFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-adsdQuotaUser :: Lens' AdsGet' (Maybe Text)
-adsdQuotaUser
-  = lens _adsdQuotaUser
-      (\ s a -> s{_adsdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-adsdPrettyPrint :: Lens' AdsGet' Bool
-adsdPrettyPrint
-  = lens _adsdPrettyPrint
-      (\ s a -> s{_adsdPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-adsdUserIP :: Lens' AdsGet' (Maybe Text)
-adsdUserIP
-  = lens _adsdUserIP (\ s a -> s{_adsdUserIP = a})
 
 -- | User profile ID associated with this request.
 adsdProFileId :: Lens' AdsGet' Int64
@@ -136,41 +80,14 @@ adsdProFileId
   = lens _adsdProFileId
       (\ s a -> s{_adsdProFileId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-adsdKey :: Lens' AdsGet' (Maybe AuthKey)
-adsdKey = lens _adsdKey (\ s a -> s{_adsdKey = a})
-
 -- | Ad ID.
 adsdId :: Lens' AdsGet' Int64
 adsdId = lens _adsdId (\ s a -> s{_adsdId = a})
 
--- | OAuth 2.0 token for the current user.
-adsdOAuthToken :: Lens' AdsGet' (Maybe OAuthToken)
-adsdOAuthToken
-  = lens _adsdOAuthToken
-      (\ s a -> s{_adsdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-adsdFields :: Lens' AdsGet' (Maybe Text)
-adsdFields
-  = lens _adsdFields (\ s a -> s{_adsdFields = a})
-
-instance GoogleAuth AdsGet' where
-        _AuthKey = adsdKey . _Just
-        _AuthToken = adsdOAuthToken . _Just
-
 instance GoogleRequest AdsGet' where
         type Rs AdsGet' = Ad
-        request = requestWith dFAReportingRequest
-        requestWith rq AdsGet'{..}
-          = go _adsdProFileId _adsdId _adsdQuotaUser
-              (Just _adsdPrettyPrint)
-              _adsdUserIP
-              _adsdFields
-              _adsdKey
-              _adsdOAuthToken
-              (Just AltJSON)
+        requestClient AdsGet'{..}
+          = go _adsdProFileId _adsdId (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild (Proxy :: Proxy AdsGetResource) rq
+                  = buildClient (Proxy :: Proxy AdsGetResource) mempty

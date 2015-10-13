@@ -35,16 +35,10 @@ module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Update
     , CollectionviewersUpdate'
 
     -- * Request Lenses
-    , cuuQuotaUser
-    , cuuPrettyPrint
     , cuuEnterpriseId
-    , cuuUserIP
     , cuuCollectionId
     , cuuPayload
     , cuuUserId
-    , cuuKey
-    , cuuOAuthToken
-    , cuuFields
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
@@ -59,14 +53,8 @@ type CollectionviewersUpdateResource =
            Capture "collectionId" Text :>
              "users" :>
                Capture "userId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] User :> Put '[JSON] User
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] User :> Put '[JSON] User
 
 -- | Adds the user to the list of those specifically allowed to see the
 -- collection. If the collection\'s visibility is set to viewersOnly then
@@ -74,41 +62,23 @@ type CollectionviewersUpdateResource =
 --
 -- /See:/ 'collectionviewersUpdate'' smart constructor.
 data CollectionviewersUpdate' = CollectionviewersUpdate'
-    { _cuuQuotaUser    :: !(Maybe Text)
-    , _cuuPrettyPrint  :: !Bool
-    , _cuuEnterpriseId :: !Text
-    , _cuuUserIP       :: !(Maybe Text)
+    { _cuuEnterpriseId :: !Text
     , _cuuCollectionId :: !Text
     , _cuuPayload      :: !User
     , _cuuUserId       :: !Text
-    , _cuuKey          :: !(Maybe AuthKey)
-    , _cuuOAuthToken   :: !(Maybe OAuthToken)
-    , _cuuFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionviewersUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cuuQuotaUser'
---
--- * 'cuuPrettyPrint'
---
 -- * 'cuuEnterpriseId'
---
--- * 'cuuUserIP'
 --
 -- * 'cuuCollectionId'
 --
 -- * 'cuuPayload'
 --
 -- * 'cuuUserId'
---
--- * 'cuuKey'
---
--- * 'cuuOAuthToken'
---
--- * 'cuuFields'
 collectionviewersUpdate'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'collectionId'
@@ -117,42 +87,17 @@ collectionviewersUpdate'
     -> CollectionviewersUpdate'
 collectionviewersUpdate' pCuuEnterpriseId_ pCuuCollectionId_ pCuuPayload_ pCuuUserId_ =
     CollectionviewersUpdate'
-    { _cuuQuotaUser = Nothing
-    , _cuuPrettyPrint = True
-    , _cuuEnterpriseId = pCuuEnterpriseId_
-    , _cuuUserIP = Nothing
+    { _cuuEnterpriseId = pCuuEnterpriseId_
     , _cuuCollectionId = pCuuCollectionId_
     , _cuuPayload = pCuuPayload_
     , _cuuUserId = pCuuUserId_
-    , _cuuKey = Nothing
-    , _cuuOAuthToken = Nothing
-    , _cuuFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-cuuQuotaUser :: Lens' CollectionviewersUpdate' (Maybe Text)
-cuuQuotaUser
-  = lens _cuuQuotaUser (\ s a -> s{_cuuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cuuPrettyPrint :: Lens' CollectionviewersUpdate' Bool
-cuuPrettyPrint
-  = lens _cuuPrettyPrint
-      (\ s a -> s{_cuuPrettyPrint = a})
 
 -- | The ID of the enterprise.
 cuuEnterpriseId :: Lens' CollectionviewersUpdate' Text
 cuuEnterpriseId
   = lens _cuuEnterpriseId
       (\ s a -> s{_cuuEnterpriseId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-cuuUserIP :: Lens' CollectionviewersUpdate' (Maybe Text)
-cuuUserIP
-  = lens _cuuUserIP (\ s a -> s{_cuuUserIP = a})
 
 -- | The ID of the collection.
 cuuCollectionId :: Lens' CollectionviewersUpdate' Text
@@ -170,41 +115,14 @@ cuuUserId :: Lens' CollectionviewersUpdate' Text
 cuuUserId
   = lens _cuuUserId (\ s a -> s{_cuuUserId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cuuKey :: Lens' CollectionviewersUpdate' (Maybe AuthKey)
-cuuKey = lens _cuuKey (\ s a -> s{_cuuKey = a})
-
--- | OAuth 2.0 token for the current user.
-cuuOAuthToken :: Lens' CollectionviewersUpdate' (Maybe OAuthToken)
-cuuOAuthToken
-  = lens _cuuOAuthToken
-      (\ s a -> s{_cuuOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cuuFields :: Lens' CollectionviewersUpdate' (Maybe Text)
-cuuFields
-  = lens _cuuFields (\ s a -> s{_cuuFields = a})
-
-instance GoogleAuth CollectionviewersUpdate' where
-        _AuthKey = cuuKey . _Just
-        _AuthToken = cuuOAuthToken . _Just
-
 instance GoogleRequest CollectionviewersUpdate' where
         type Rs CollectionviewersUpdate' = User
-        request = requestWith androidEnterpriseRequest
-        requestWith rq CollectionviewersUpdate'{..}
+        requestClient CollectionviewersUpdate'{..}
           = go _cuuEnterpriseId _cuuCollectionId _cuuUserId
-              _cuuQuotaUser
-              (Just _cuuPrettyPrint)
-              _cuuUserIP
-              _cuuFields
-              _cuuKey
-              _cuuOAuthToken
               (Just AltJSON)
               _cuuPayload
+              androidEnterpriseService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CollectionviewersUpdateResource)
-                      rq
+                      mempty

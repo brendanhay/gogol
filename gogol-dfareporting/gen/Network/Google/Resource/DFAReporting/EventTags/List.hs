@@ -33,23 +33,17 @@ module Network.Google.Resource.DFAReporting.EventTags.List
     , EventTagsList'
 
     -- * Request Lenses
-    , etlQuotaUser
-    , etlPrettyPrint
     , etlDefinitionsOnly
     , etlEventTagTypes
     , etlEnabled
-    , etlUserIP
     , etlAdvertiserId
     , etlSearchString
     , etlCampaignId
     , etlIds
     , etlProFileId
     , etlSortOrder
-    , etlKey
     , etlAdId
     , etlSortField
-    , etlOAuthToken
-    , etlFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -73,53 +67,35 @@ type EventTagsListResource =
                          QueryParam "sortOrder" EventTagsListSortOrder :>
                            QueryParam "adId" Int64 :>
                              QueryParam "sortField" EventTagsListSortField :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "userIp" Text :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "key" AuthKey :>
-                                         Header "Authorization" OAuthToken :>
-                                           QueryParam "alt" AltJSON :>
-                                             Get '[JSON] EventTagsListResponse
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] EventTagsListResponse
 
 -- | Retrieves a list of event tags, possibly filtered.
 --
 -- /See:/ 'eventTagsList'' smart constructor.
 data EventTagsList' = EventTagsList'
-    { _etlQuotaUser       :: !(Maybe Text)
-    , _etlPrettyPrint     :: !Bool
-    , _etlDefinitionsOnly :: !(Maybe Bool)
+    { _etlDefinitionsOnly :: !(Maybe Bool)
     , _etlEventTagTypes   :: !(Maybe [EventTagsListEventTagTypes])
     , _etlEnabled         :: !(Maybe Bool)
-    , _etlUserIP          :: !(Maybe Text)
     , _etlAdvertiserId    :: !(Maybe Int64)
     , _etlSearchString    :: !(Maybe Text)
     , _etlCampaignId      :: !(Maybe Int64)
     , _etlIds             :: !(Maybe [Int64])
     , _etlProFileId       :: !Int64
     , _etlSortOrder       :: !(Maybe EventTagsListSortOrder)
-    , _etlKey             :: !(Maybe AuthKey)
     , _etlAdId            :: !(Maybe Int64)
     , _etlSortField       :: !(Maybe EventTagsListSortField)
-    , _etlOAuthToken      :: !(Maybe OAuthToken)
-    , _etlFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'etlQuotaUser'
---
--- * 'etlPrettyPrint'
---
 -- * 'etlDefinitionsOnly'
 --
 -- * 'etlEventTagTypes'
 --
 -- * 'etlEnabled'
---
--- * 'etlUserIP'
 --
 -- * 'etlAdvertiserId'
 --
@@ -133,51 +109,26 @@ data EventTagsList' = EventTagsList'
 --
 -- * 'etlSortOrder'
 --
--- * 'etlKey'
---
 -- * 'etlAdId'
 --
 -- * 'etlSortField'
---
--- * 'etlOAuthToken'
---
--- * 'etlFields'
 eventTagsList'
     :: Int64 -- ^ 'profileId'
     -> EventTagsList'
 eventTagsList' pEtlProFileId_ =
     EventTagsList'
-    { _etlQuotaUser = Nothing
-    , _etlPrettyPrint = True
-    , _etlDefinitionsOnly = Nothing
+    { _etlDefinitionsOnly = Nothing
     , _etlEventTagTypes = Nothing
     , _etlEnabled = Nothing
-    , _etlUserIP = Nothing
     , _etlAdvertiserId = Nothing
     , _etlSearchString = Nothing
     , _etlCampaignId = Nothing
     , _etlIds = Nothing
     , _etlProFileId = pEtlProFileId_
     , _etlSortOrder = Nothing
-    , _etlKey = Nothing
     , _etlAdId = Nothing
     , _etlSortField = Nothing
-    , _etlOAuthToken = Nothing
-    , _etlFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-etlQuotaUser :: Lens' EventTagsList' (Maybe Text)
-etlQuotaUser
-  = lens _etlQuotaUser (\ s a -> s{_etlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-etlPrettyPrint :: Lens' EventTagsList' Bool
-etlPrettyPrint
-  = lens _etlPrettyPrint
-      (\ s a -> s{_etlPrettyPrint = a})
 
 -- | Examine only the specified campaign or advertiser\'s event tags for
 -- matching selector criteria. When set to false, the parent advertiser and
@@ -211,12 +162,6 @@ etlEventTagTypes
 etlEnabled :: Lens' EventTagsList' (Maybe Bool)
 etlEnabled
   = lens _etlEnabled (\ s a -> s{_etlEnabled = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-etlUserIP :: Lens' EventTagsList' (Maybe Text)
-etlUserIP
-  = lens _etlUserIP (\ s a -> s{_etlUserIP = a})
 
 -- | Select only event tags that belong to this advertiser.
 etlAdvertiserId :: Lens' EventTagsList' (Maybe Int64)
@@ -258,12 +203,6 @@ etlSortOrder :: Lens' EventTagsList' (Maybe EventTagsListSortOrder)
 etlSortOrder
   = lens _etlSortOrder (\ s a -> s{_etlSortOrder = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-etlKey :: Lens' EventTagsList' (Maybe AuthKey)
-etlKey = lens _etlKey (\ s a -> s{_etlKey = a})
-
 -- | Select only event tags that belong to this ad.
 etlAdId :: Lens' EventTagsList' (Maybe Int64)
 etlAdId = lens _etlAdId (\ s a -> s{_etlAdId = a})
@@ -273,25 +212,9 @@ etlSortField :: Lens' EventTagsList' (Maybe EventTagsListSortField)
 etlSortField
   = lens _etlSortField (\ s a -> s{_etlSortField = a})
 
--- | OAuth 2.0 token for the current user.
-etlOAuthToken :: Lens' EventTagsList' (Maybe OAuthToken)
-etlOAuthToken
-  = lens _etlOAuthToken
-      (\ s a -> s{_etlOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-etlFields :: Lens' EventTagsList' (Maybe Text)
-etlFields
-  = lens _etlFields (\ s a -> s{_etlFields = a})
-
-instance GoogleAuth EventTagsList' where
-        _AuthKey = etlKey . _Just
-        _AuthToken = etlOAuthToken . _Just
-
 instance GoogleRequest EventTagsList' where
         type Rs EventTagsList' = EventTagsListResponse
-        request = requestWith dFAReportingRequest
-        requestWith rq EventTagsList'{..}
+        requestClient EventTagsList'{..}
           = go _etlProFileId _etlDefinitionsOnly
               (_etlEventTagTypes ^. _Default)
               _etlEnabled
@@ -302,13 +225,8 @@ instance GoogleRequest EventTagsList' where
               _etlSortOrder
               _etlAdId
               _etlSortField
-              _etlQuotaUser
-              (Just _etlPrettyPrint)
-              _etlUserIP
-              _etlFields
-              _etlKey
-              _etlOAuthToken
               (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild (Proxy :: Proxy EventTagsListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy EventTagsListResource)
+                      mempty

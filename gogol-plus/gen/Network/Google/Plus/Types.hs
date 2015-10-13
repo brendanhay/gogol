@@ -15,8 +15,14 @@
 --
 module Network.Google.Plus.Types
     (
-    -- * Service Request
-      plusRequest
+    -- * Service Configuration
+      plusService
+
+    -- * OAuth Scopes
+    , userinfoProfileScope
+    , plusLoginScope
+    , userinfoEmailScope
+    , plusMeScope
 
     -- * ActivityProvider
     , ActivityProvider
@@ -516,7 +522,24 @@ import           Network.Google.Plus.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google+ API. This contains the host and root path used as a starting point for constructing service requests.
-plusRequest :: RequestBuilder
-plusRequest
-  = defaultRequest "https://www.googleapis.com/"
+plusService :: Service
+plusService
+  = defaultService (ServiceId "plus:v1")
+      "www.googleapis.com"
       "plus/v1/"
+
+-- | View your basic profile info
+userinfoProfileScope :: OAuthScope
+userinfoProfileScope = OAuthScope "https://www.googleapis.com/auth/userinfo.profile";
+
+-- | Know your basic profile info and list of people in your circles.
+plusLoginScope :: OAuthScope
+plusLoginScope = OAuthScope "https://www.googleapis.com/auth/plus.login";
+
+-- | View your email address
+userinfoEmailScope :: OAuthScope
+userinfoEmailScope = OAuthScope "https://www.googleapis.com/auth/userinfo.email";
+
+-- | Know who you are on Google
+plusMeScope :: OAuthScope
+plusMeScope = OAuthScope "https://www.googleapis.com/auth/plus.me";

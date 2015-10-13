@@ -35,22 +35,17 @@ module Network.Google.Resource.Logging.Projects.LogServices.Indexes.List
     -- * Request Lenses
     , plsilLog
     , plsilXgafv
-    , plsilQuotaUser
-    , plsilPrettyPrint
     , plsilUploadProtocol
     , plsilPp
     , plsilAccessToken
     , plsilUploadType
     , plsilBearerToken
-    , plsilKey
     , plsilLogServicesId
     , plsilDepth
     , plsilPageToken
-    , plsilOAuthToken
     , plsilProjectsId
     , plsilPageSize
     , plsilIndexPrefix
-    , plsilFields
     , plsilCallback
     ) where
 
@@ -78,16 +73,9 @@ type ProjectsLogServicesIndexesListResource =
                                    QueryParam "pageSize" Int32 :>
                                      QueryParam "indexPrefix" Text :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "quotaUser" Text :>
-                                           QueryParam "prettyPrint" Bool :>
-                                             QueryParam "fields" Text :>
-                                               QueryParam "key" AuthKey :>
-                                                 Header "Authorization"
-                                                   OAuthToken
-                                                   :>
-                                                   QueryParam "alt" AltJSON :>
-                                                     Get '[JSON]
-                                                       ListLogServiceIndexesResponse
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON]
+                                             ListLogServiceIndexesResponse
 
 -- | Lists the current index values for a log service.
 --
@@ -95,22 +83,17 @@ type ProjectsLogServicesIndexesListResource =
 data ProjectsLogServicesIndexesList' = ProjectsLogServicesIndexesList'
     { _plsilLog            :: !(Maybe Text)
     , _plsilXgafv          :: !(Maybe Text)
-    , _plsilQuotaUser      :: !(Maybe Text)
-    , _plsilPrettyPrint    :: !Bool
     , _plsilUploadProtocol :: !(Maybe Text)
     , _plsilPp             :: !Bool
     , _plsilAccessToken    :: !(Maybe Text)
     , _plsilUploadType     :: !(Maybe Text)
     , _plsilBearerToken    :: !(Maybe Text)
-    , _plsilKey            :: !(Maybe AuthKey)
     , _plsilLogServicesId  :: !Text
     , _plsilDepth          :: !(Maybe Int32)
     , _plsilPageToken      :: !(Maybe Text)
-    , _plsilOAuthToken     :: !(Maybe OAuthToken)
     , _plsilProjectsId     :: !Text
     , _plsilPageSize       :: !(Maybe Int32)
     , _plsilIndexPrefix    :: !(Maybe Text)
-    , _plsilFields         :: !(Maybe Text)
     , _plsilCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -122,10 +105,6 @@ data ProjectsLogServicesIndexesList' = ProjectsLogServicesIndexesList'
 --
 -- * 'plsilXgafv'
 --
--- * 'plsilQuotaUser'
---
--- * 'plsilPrettyPrint'
---
 -- * 'plsilUploadProtocol'
 --
 -- * 'plsilPp'
@@ -136,23 +115,17 @@ data ProjectsLogServicesIndexesList' = ProjectsLogServicesIndexesList'
 --
 -- * 'plsilBearerToken'
 --
--- * 'plsilKey'
---
 -- * 'plsilLogServicesId'
 --
 -- * 'plsilDepth'
 --
 -- * 'plsilPageToken'
 --
--- * 'plsilOAuthToken'
---
 -- * 'plsilProjectsId'
 --
 -- * 'plsilPageSize'
 --
 -- * 'plsilIndexPrefix'
---
--- * 'plsilFields'
 --
 -- * 'plsilCallback'
 projectsLogServicesIndexesList'
@@ -163,22 +136,17 @@ projectsLogServicesIndexesList' pPlsilLogServicesId_ pPlsilProjectsId_ =
     ProjectsLogServicesIndexesList'
     { _plsilLog = Nothing
     , _plsilXgafv = Nothing
-    , _plsilQuotaUser = Nothing
-    , _plsilPrettyPrint = True
     , _plsilUploadProtocol = Nothing
     , _plsilPp = True
     , _plsilAccessToken = Nothing
     , _plsilUploadType = Nothing
     , _plsilBearerToken = Nothing
-    , _plsilKey = Nothing
     , _plsilLogServicesId = pPlsilLogServicesId_
     , _plsilDepth = Nothing
     , _plsilPageToken = Nothing
-    , _plsilOAuthToken = Nothing
     , _plsilProjectsId = pPlsilProjectsId_
     , _plsilPageSize = Nothing
     , _plsilIndexPrefix = Nothing
-    , _plsilFields = Nothing
     , _plsilCallback = Nothing
     }
 
@@ -192,20 +160,6 @@ plsilLog = lens _plsilLog (\ s a -> s{_plsilLog = a})
 plsilXgafv :: Lens' ProjectsLogServicesIndexesList' (Maybe Text)
 plsilXgafv
   = lens _plsilXgafv (\ s a -> s{_plsilXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-plsilQuotaUser :: Lens' ProjectsLogServicesIndexesList' (Maybe Text)
-plsilQuotaUser
-  = lens _plsilQuotaUser
-      (\ s a -> s{_plsilQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-plsilPrettyPrint :: Lens' ProjectsLogServicesIndexesList' Bool
-plsilPrettyPrint
-  = lens _plsilPrettyPrint
-      (\ s a -> s{_plsilPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 plsilUploadProtocol :: Lens' ProjectsLogServicesIndexesList' (Maybe Text)
@@ -235,12 +189,6 @@ plsilBearerToken
   = lens _plsilBearerToken
       (\ s a -> s{_plsilBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-plsilKey :: Lens' ProjectsLogServicesIndexesList' (Maybe AuthKey)
-plsilKey = lens _plsilKey (\ s a -> s{_plsilKey = a})
-
 -- | Part of \`serviceName\`. See documentation of \`projectsId\`.
 plsilLogServicesId :: Lens' ProjectsLogServicesIndexesList' Text
 plsilLogServicesId
@@ -268,12 +216,6 @@ plsilPageToken :: Lens' ProjectsLogServicesIndexesList' (Maybe Text)
 plsilPageToken
   = lens _plsilPageToken
       (\ s a -> s{_plsilPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-plsilOAuthToken :: Lens' ProjectsLogServicesIndexesList' (Maybe OAuthToken)
-plsilOAuthToken
-  = lens _plsilOAuthToken
-      (\ s a -> s{_plsilOAuthToken = a})
 
 -- | Part of \`serviceName\`. The resource name of a log service whose
 -- service indexes are requested. Example:
@@ -308,28 +250,17 @@ plsilIndexPrefix
   = lens _plsilIndexPrefix
       (\ s a -> s{_plsilIndexPrefix = a})
 
--- | Selector specifying which fields to include in a partial response.
-plsilFields :: Lens' ProjectsLogServicesIndexesList' (Maybe Text)
-plsilFields
-  = lens _plsilFields (\ s a -> s{_plsilFields = a})
-
 -- | JSONP
 plsilCallback :: Lens' ProjectsLogServicesIndexesList' (Maybe Text)
 plsilCallback
   = lens _plsilCallback
       (\ s a -> s{_plsilCallback = a})
 
-instance GoogleAuth ProjectsLogServicesIndexesList'
-         where
-        _AuthKey = plsilKey . _Just
-        _AuthToken = plsilOAuthToken . _Just
-
 instance GoogleRequest
          ProjectsLogServicesIndexesList' where
         type Rs ProjectsLogServicesIndexesList' =
              ListLogServiceIndexesResponse
-        request = requestWith loggingRequest
-        requestWith rq ProjectsLogServicesIndexesList'{..}
+        requestClient ProjectsLogServicesIndexesList'{..}
           = go _plsilProjectsId _plsilLogServicesId _plsilLog
               _plsilXgafv
               _plsilUploadProtocol
@@ -342,14 +273,10 @@ instance GoogleRequest
               _plsilPageSize
               _plsilIndexPrefix
               _plsilCallback
-              _plsilQuotaUser
-              (Just _plsilPrettyPrint)
-              _plsilFields
-              _plsilKey
-              _plsilOAuthToken
               (Just AltJSON)
+              loggingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy ProjectsLogServicesIndexesListResource)
-                      rq
+                      mempty

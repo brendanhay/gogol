@@ -35,19 +35,14 @@ module Network.Google.Resource.Logging.Projects.Logs.Sinks.Delete
 
     -- * Request Lenses
     , plsdXgafv
-    , plsdQuotaUser
-    , plsdPrettyPrint
     , plsdUploadProtocol
     , plsdLogsId
     , plsdPp
     , plsdAccessToken
     , plsdUploadType
     , plsdBearerToken
-    , plsdKey
-    , plsdOAuthToken
     , plsdProjectsId
     , plsdSinksId
-    , plsdFields
     , plsdCallback
     ) where
 
@@ -71,13 +66,8 @@ type ProjectsLogsSinksDeleteResource =
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "quotaUser" Text :>
-                                   QueryParam "prettyPrint" Bool :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "key" AuthKey :>
-                                         Header "Authorization" OAuthToken :>
-                                           QueryParam "alt" AltJSON :>
-                                             Delete '[JSON] Empty
+                                 QueryParam "alt" AltJSON :>
+                                   Delete '[JSON] Empty
 
 -- | Deletes a log sink. After deletion, no new log entries are written to
 -- the destination.
@@ -85,19 +75,14 @@ type ProjectsLogsSinksDeleteResource =
 -- /See:/ 'projectsLogsSinksDelete'' smart constructor.
 data ProjectsLogsSinksDelete' = ProjectsLogsSinksDelete'
     { _plsdXgafv          :: !(Maybe Text)
-    , _plsdQuotaUser      :: !(Maybe Text)
-    , _plsdPrettyPrint    :: !Bool
     , _plsdUploadProtocol :: !(Maybe Text)
     , _plsdLogsId         :: !Text
     , _plsdPp             :: !Bool
     , _plsdAccessToken    :: !(Maybe Text)
     , _plsdUploadType     :: !(Maybe Text)
     , _plsdBearerToken    :: !(Maybe Text)
-    , _plsdKey            :: !(Maybe AuthKey)
-    , _plsdOAuthToken     :: !(Maybe OAuthToken)
     , _plsdProjectsId     :: !Text
     , _plsdSinksId        :: !Text
-    , _plsdFields         :: !(Maybe Text)
     , _plsdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -106,10 +91,6 @@ data ProjectsLogsSinksDelete' = ProjectsLogsSinksDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'plsdXgafv'
---
--- * 'plsdQuotaUser'
---
--- * 'plsdPrettyPrint'
 --
 -- * 'plsdUploadProtocol'
 --
@@ -123,15 +104,9 @@ data ProjectsLogsSinksDelete' = ProjectsLogsSinksDelete'
 --
 -- * 'plsdBearerToken'
 --
--- * 'plsdKey'
---
--- * 'plsdOAuthToken'
---
 -- * 'plsdProjectsId'
 --
 -- * 'plsdSinksId'
---
--- * 'plsdFields'
 --
 -- * 'plsdCallback'
 projectsLogsSinksDelete'
@@ -142,19 +117,14 @@ projectsLogsSinksDelete'
 projectsLogsSinksDelete' pPlsdLogsId_ pPlsdProjectsId_ pPlsdSinksId_ =
     ProjectsLogsSinksDelete'
     { _plsdXgafv = Nothing
-    , _plsdQuotaUser = Nothing
-    , _plsdPrettyPrint = True
     , _plsdUploadProtocol = Nothing
     , _plsdLogsId = pPlsdLogsId_
     , _plsdPp = True
     , _plsdAccessToken = Nothing
     , _plsdUploadType = Nothing
     , _plsdBearerToken = Nothing
-    , _plsdKey = Nothing
-    , _plsdOAuthToken = Nothing
     , _plsdProjectsId = pPlsdProjectsId_
     , _plsdSinksId = pPlsdSinksId_
-    , _plsdFields = Nothing
     , _plsdCallback = Nothing
     }
 
@@ -162,20 +132,6 @@ projectsLogsSinksDelete' pPlsdLogsId_ pPlsdProjectsId_ pPlsdSinksId_ =
 plsdXgafv :: Lens' ProjectsLogsSinksDelete' (Maybe Text)
 plsdXgafv
   = lens _plsdXgafv (\ s a -> s{_plsdXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-plsdQuotaUser :: Lens' ProjectsLogsSinksDelete' (Maybe Text)
-plsdQuotaUser
-  = lens _plsdQuotaUser
-      (\ s a -> s{_plsdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-plsdPrettyPrint :: Lens' ProjectsLogsSinksDelete' Bool
-plsdPrettyPrint
-  = lens _plsdPrettyPrint
-      (\ s a -> s{_plsdPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 plsdUploadProtocol :: Lens' ProjectsLogsSinksDelete' (Maybe Text)
@@ -210,18 +166,6 @@ plsdBearerToken
   = lens _plsdBearerToken
       (\ s a -> s{_plsdBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-plsdKey :: Lens' ProjectsLogsSinksDelete' (Maybe AuthKey)
-plsdKey = lens _plsdKey (\ s a -> s{_plsdKey = a})
-
--- | OAuth 2.0 token for the current user.
-plsdOAuthToken :: Lens' ProjectsLogsSinksDelete' (Maybe OAuthToken)
-plsdOAuthToken
-  = lens _plsdOAuthToken
-      (\ s a -> s{_plsdOAuthToken = a})
-
 -- | Part of \`sinkName\`. The resource name of the log sink to delete.
 plsdProjectsId :: Lens' ProjectsLogsSinksDelete' Text
 plsdProjectsId
@@ -233,24 +177,14 @@ plsdSinksId :: Lens' ProjectsLogsSinksDelete' Text
 plsdSinksId
   = lens _plsdSinksId (\ s a -> s{_plsdSinksId = a})
 
--- | Selector specifying which fields to include in a partial response.
-plsdFields :: Lens' ProjectsLogsSinksDelete' (Maybe Text)
-plsdFields
-  = lens _plsdFields (\ s a -> s{_plsdFields = a})
-
 -- | JSONP
 plsdCallback :: Lens' ProjectsLogsSinksDelete' (Maybe Text)
 plsdCallback
   = lens _plsdCallback (\ s a -> s{_plsdCallback = a})
 
-instance GoogleAuth ProjectsLogsSinksDelete' where
-        _AuthKey = plsdKey . _Just
-        _AuthToken = plsdOAuthToken . _Just
-
 instance GoogleRequest ProjectsLogsSinksDelete' where
         type Rs ProjectsLogsSinksDelete' = Empty
-        request = requestWith loggingRequest
-        requestWith rq ProjectsLogsSinksDelete'{..}
+        requestClient ProjectsLogsSinksDelete'{..}
           = go _plsdProjectsId _plsdLogsId _plsdSinksId
               _plsdXgafv
               _plsdUploadProtocol
@@ -259,13 +193,9 @@ instance GoogleRequest ProjectsLogsSinksDelete' where
               _plsdUploadType
               _plsdBearerToken
               _plsdCallback
-              _plsdQuotaUser
-              (Just _plsdPrettyPrint)
-              _plsdFields
-              _plsdKey
-              _plsdOAuthToken
               (Just AltJSON)
+              loggingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsLogsSinksDeleteResource)
-                      rq
+                      mempty

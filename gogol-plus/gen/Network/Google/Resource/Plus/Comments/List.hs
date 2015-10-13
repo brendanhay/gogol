@@ -33,16 +33,10 @@ module Network.Google.Resource.Plus.Comments.List
     , CommentsList'
 
     -- * Request Lenses
-    , clQuotaUser
-    , clPrettyPrint
-    , clUserIP
     , clActivityId
     , clSortOrder
-    , clKey
     , clPageToken
-    , clOAuthToken
     , clMaxResults
-    , clFields
     ) where
 
 import           Network.Google.Plus.Types
@@ -57,87 +51,39 @@ type CommentsListResource =
            QueryParam "sortOrder" CommentsListSortOrder :>
              QueryParam "pageToken" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] CommentFeed
+                 QueryParam "alt" AltJSON :> Get '[JSON] CommentFeed
 
 -- | List all of the comments for an activity.
 --
 -- /See:/ 'commentsList'' smart constructor.
 data CommentsList' = CommentsList'
-    { _clQuotaUser   :: !(Maybe Text)
-    , _clPrettyPrint :: !Bool
-    , _clUserIP      :: !(Maybe Text)
-    , _clActivityId  :: !Text
-    , _clSortOrder   :: !CommentsListSortOrder
-    , _clKey         :: !(Maybe AuthKey)
-    , _clPageToken   :: !(Maybe Text)
-    , _clOAuthToken  :: !(Maybe OAuthToken)
-    , _clMaxResults  :: !Word32
-    , _clFields      :: !(Maybe Text)
+    { _clActivityId :: !Text
+    , _clSortOrder  :: !CommentsListSortOrder
+    , _clPageToken  :: !(Maybe Text)
+    , _clMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'clQuotaUser'
---
--- * 'clPrettyPrint'
---
--- * 'clUserIP'
---
 -- * 'clActivityId'
 --
 -- * 'clSortOrder'
 --
--- * 'clKey'
---
 -- * 'clPageToken'
 --
--- * 'clOAuthToken'
---
 -- * 'clMaxResults'
---
--- * 'clFields'
 commentsList'
     :: Text -- ^ 'activityId'
     -> CommentsList'
 commentsList' pClActivityId_ =
     CommentsList'
-    { _clQuotaUser = Nothing
-    , _clPrettyPrint = True
-    , _clUserIP = Nothing
-    , _clActivityId = pClActivityId_
+    { _clActivityId = pClActivityId_
     , _clSortOrder = Ascending
-    , _clKey = Nothing
     , _clPageToken = Nothing
-    , _clOAuthToken = Nothing
     , _clMaxResults = 20
-    , _clFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-clQuotaUser :: Lens' CommentsList' (Maybe Text)
-clQuotaUser
-  = lens _clQuotaUser (\ s a -> s{_clQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-clPrettyPrint :: Lens' CommentsList' Bool
-clPrettyPrint
-  = lens _clPrettyPrint
-      (\ s a -> s{_clPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-clUserIP :: Lens' CommentsList' (Maybe Text)
-clUserIP = lens _clUserIP (\ s a -> s{_clUserIP = a})
 
 -- | The ID of the activity to get comments for.
 clActivityId :: Lens' CommentsList' Text
@@ -149,23 +95,12 @@ clSortOrder :: Lens' CommentsList' CommentsListSortOrder
 clSortOrder
   = lens _clSortOrder (\ s a -> s{_clSortOrder = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-clKey :: Lens' CommentsList' (Maybe AuthKey)
-clKey = lens _clKey (\ s a -> s{_clKey = a})
-
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
 -- \"nextPageToken\" from the previous response.
 clPageToken :: Lens' CommentsList' (Maybe Text)
 clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-clOAuthToken :: Lens' CommentsList' (Maybe OAuthToken)
-clOAuthToken
-  = lens _clOAuthToken (\ s a -> s{_clOAuthToken = a})
 
 -- | The maximum number of comments to include in the response, which is used
 -- for paging. For any response, the actual number returned might be less
@@ -174,27 +109,13 @@ clMaxResults :: Lens' CommentsList' Word32
 clMaxResults
   = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-clFields :: Lens' CommentsList' (Maybe Text)
-clFields = lens _clFields (\ s a -> s{_clFields = a})
-
-instance GoogleAuth CommentsList' where
-        _AuthKey = clKey . _Just
-        _AuthToken = clOAuthToken . _Just
-
 instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentFeed
-        request = requestWith plusRequest
-        requestWith rq CommentsList'{..}
+        requestClient CommentsList'{..}
           = go _clActivityId (Just _clSortOrder) _clPageToken
               (Just _clMaxResults)
-              _clQuotaUser
-              (Just _clPrettyPrint)
-              _clUserIP
-              _clFields
-              _clKey
-              _clOAuthToken
               (Just AltJSON)
+              plusService
           where go
-                  = clientBuild (Proxy :: Proxy CommentsListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy CommentsListResource)
+                      mempty

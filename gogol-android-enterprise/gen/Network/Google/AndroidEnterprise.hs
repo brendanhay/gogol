@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference>
 module Network.Google.AndroidEnterprise
     (
+    -- * Service Configuration
+      androidEnterpriseService
+
     -- * API Declaration
-      AndroidEnterpriseAPI
+    , AndroidEnterpriseAPI
 
     -- * Resources
 

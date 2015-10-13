@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference>
 module Network.Google.SiteVerification
     (
+    -- * Service Configuration
+      siteVerificationService
+
     -- * API Declaration
-      SiteVerificationAPI
+    , SiteVerificationAPI
 
     -- * Resources
 

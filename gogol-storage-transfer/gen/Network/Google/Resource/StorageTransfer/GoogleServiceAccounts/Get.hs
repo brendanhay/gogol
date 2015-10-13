@@ -40,17 +40,12 @@ module Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
 
     -- * Request Lenses
     , gsagXgafv
-    , gsagQuotaUser
-    , gsagPrettyPrint
     , gsagUploadProtocol
     , gsagPp
     , gsagAccessToken
     , gsagUploadType
     , gsagBearerToken
-    , gsagKey
     , gsagProjectId
-    , gsagOAuthToken
-    , gsagFields
     , gsagCallback
     ) where
 
@@ -70,13 +65,8 @@ type GoogleServiceAccountsGetResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] GoogleServiceAccount
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] GoogleServiceAccount
 
 -- | Returns the Google service account that is used by Storage Transfer
 -- Service to access buckets in the project where transfers run or in other
@@ -89,17 +79,12 @@ type GoogleServiceAccountsGetResource =
 -- /See:/ 'googleServiceAccountsGet'' smart constructor.
 data GoogleServiceAccountsGet' = GoogleServiceAccountsGet'
     { _gsagXgafv          :: !(Maybe Text)
-    , _gsagQuotaUser      :: !(Maybe Text)
-    , _gsagPrettyPrint    :: !Bool
     , _gsagUploadProtocol :: !(Maybe Text)
     , _gsagPp             :: !Bool
     , _gsagAccessToken    :: !(Maybe Text)
     , _gsagUploadType     :: !(Maybe Text)
     , _gsagBearerToken    :: !(Maybe Text)
-    , _gsagKey            :: !(Maybe AuthKey)
     , _gsagProjectId      :: !Text
-    , _gsagOAuthToken     :: !(Maybe OAuthToken)
-    , _gsagFields         :: !(Maybe Text)
     , _gsagCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -108,10 +93,6 @@ data GoogleServiceAccountsGet' = GoogleServiceAccountsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gsagXgafv'
---
--- * 'gsagQuotaUser'
---
--- * 'gsagPrettyPrint'
 --
 -- * 'gsagUploadProtocol'
 --
@@ -123,13 +104,7 @@ data GoogleServiceAccountsGet' = GoogleServiceAccountsGet'
 --
 -- * 'gsagBearerToken'
 --
--- * 'gsagKey'
---
 -- * 'gsagProjectId'
---
--- * 'gsagOAuthToken'
---
--- * 'gsagFields'
 --
 -- * 'gsagCallback'
 googleServiceAccountsGet'
@@ -138,17 +113,12 @@ googleServiceAccountsGet'
 googleServiceAccountsGet' pGsagProjectId_ =
     GoogleServiceAccountsGet'
     { _gsagXgafv = Nothing
-    , _gsagQuotaUser = Nothing
-    , _gsagPrettyPrint = True
     , _gsagUploadProtocol = Nothing
     , _gsagPp = True
     , _gsagAccessToken = Nothing
     , _gsagUploadType = Nothing
     , _gsagBearerToken = Nothing
-    , _gsagKey = Nothing
     , _gsagProjectId = pGsagProjectId_
-    , _gsagOAuthToken = Nothing
-    , _gsagFields = Nothing
     , _gsagCallback = Nothing
     }
 
@@ -156,20 +126,6 @@ googleServiceAccountsGet' pGsagProjectId_ =
 gsagXgafv :: Lens' GoogleServiceAccountsGet' (Maybe Text)
 gsagXgafv
   = lens _gsagXgafv (\ s a -> s{_gsagXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-gsagQuotaUser :: Lens' GoogleServiceAccountsGet' (Maybe Text)
-gsagQuotaUser
-  = lens _gsagQuotaUser
-      (\ s a -> s{_gsagQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-gsagPrettyPrint :: Lens' GoogleServiceAccountsGet' Bool
-gsagPrettyPrint
-  = lens _gsagPrettyPrint
-      (\ s a -> s{_gsagPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 gsagUploadProtocol :: Lens' GoogleServiceAccountsGet' (Maybe Text)
@@ -199,12 +155,6 @@ gsagBearerToken
   = lens _gsagBearerToken
       (\ s a -> s{_gsagBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-gsagKey :: Lens' GoogleServiceAccountsGet' (Maybe AuthKey)
-gsagKey = lens _gsagKey (\ s a -> s{_gsagKey = a})
-
 -- | The ID of the Google Developers Console project that the Google service
 -- account is associated with. Required.
 gsagProjectId :: Lens' GoogleServiceAccountsGet' Text
@@ -212,45 +162,25 @@ gsagProjectId
   = lens _gsagProjectId
       (\ s a -> s{_gsagProjectId = a})
 
--- | OAuth 2.0 token for the current user.
-gsagOAuthToken :: Lens' GoogleServiceAccountsGet' (Maybe OAuthToken)
-gsagOAuthToken
-  = lens _gsagOAuthToken
-      (\ s a -> s{_gsagOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-gsagFields :: Lens' GoogleServiceAccountsGet' (Maybe Text)
-gsagFields
-  = lens _gsagFields (\ s a -> s{_gsagFields = a})
-
 -- | JSONP
 gsagCallback :: Lens' GoogleServiceAccountsGet' (Maybe Text)
 gsagCallback
   = lens _gsagCallback (\ s a -> s{_gsagCallback = a})
 
-instance GoogleAuth GoogleServiceAccountsGet' where
-        _AuthKey = gsagKey . _Just
-        _AuthToken = gsagOAuthToken . _Just
-
 instance GoogleRequest GoogleServiceAccountsGet'
          where
         type Rs GoogleServiceAccountsGet' =
              GoogleServiceAccount
-        request = requestWith storageTransferRequest
-        requestWith rq GoogleServiceAccountsGet'{..}
+        requestClient GoogleServiceAccountsGet'{..}
           = go _gsagProjectId _gsagXgafv _gsagUploadProtocol
               (Just _gsagPp)
               _gsagAccessToken
               _gsagUploadType
               _gsagBearerToken
               _gsagCallback
-              _gsagQuotaUser
-              (Just _gsagPrettyPrint)
-              _gsagFields
-              _gsagKey
-              _gsagOAuthToken
               (Just AltJSON)
+              storageTransferService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy GoogleServiceAccountsGetResource)
-                      rq
+                      mempty

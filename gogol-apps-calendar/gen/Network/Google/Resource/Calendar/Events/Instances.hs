@@ -33,23 +33,17 @@ module Network.Google.Resource.Calendar.Events.Instances
     , EventsInstances'
 
     -- * Request Lenses
-    , eiQuotaUser
     , eiCalendarId
-    , eiPrettyPrint
     , eiTimeMin
-    , eiUserIP
     , eiShowDeleted
     , eiOriginalStart
     , eiMaxAttendees
-    , eiKey
     , eiPageToken
     , eiTimeZone
-    , eiOAuthToken
     , eiMaxResults
     , eiAlwaysIncludeEmail
     , eiTimeMax
     , eiEventId
-    , eiFields
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -72,51 +66,32 @@ type EventsInstancesResource =
                            QueryParam "maxResults" Int32 :>
                              QueryParam "alwaysIncludeEmail" Bool :>
                                QueryParam "timeMax" DateTime' :>
-                                 QueryParam "quotaUser" Text :>
-                                   QueryParam "prettyPrint" Bool :>
-                                     QueryParam "userIp" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "key" AuthKey :>
-                                           Header "Authorization" OAuthToken :>
-                                             QueryParam "alt" AltJSON :>
-                                               Get '[JSON] Events
+                                 QueryParam "alt" AltJSON :> Get '[JSON] Events
 
 -- | Returns instances of the specified recurring event.
 --
 -- /See:/ 'eventsInstances'' smart constructor.
 data EventsInstances' = EventsInstances'
-    { _eiQuotaUser          :: !(Maybe Text)
-    , _eiCalendarId         :: !Text
-    , _eiPrettyPrint        :: !Bool
+    { _eiCalendarId         :: !Text
     , _eiTimeMin            :: !(Maybe DateTime')
-    , _eiUserIP             :: !(Maybe Text)
     , _eiShowDeleted        :: !(Maybe Bool)
     , _eiOriginalStart      :: !(Maybe Text)
     , _eiMaxAttendees       :: !(Maybe Int32)
-    , _eiKey                :: !(Maybe AuthKey)
     , _eiPageToken          :: !(Maybe Text)
     , _eiTimeZone           :: !(Maybe Text)
-    , _eiOAuthToken         :: !(Maybe OAuthToken)
     , _eiMaxResults         :: !(Maybe Int32)
     , _eiAlwaysIncludeEmail :: !(Maybe Bool)
     , _eiTimeMax            :: !(Maybe DateTime')
     , _eiEventId            :: !Text
-    , _eiFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsInstances'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eiQuotaUser'
---
 -- * 'eiCalendarId'
 --
--- * 'eiPrettyPrint'
---
 -- * 'eiTimeMin'
---
--- * 'eiUserIP'
 --
 -- * 'eiShowDeleted'
 --
@@ -124,13 +99,9 @@ data EventsInstances' = EventsInstances'
 --
 -- * 'eiMaxAttendees'
 --
--- * 'eiKey'
---
 -- * 'eiPageToken'
 --
 -- * 'eiTimeZone'
---
--- * 'eiOAuthToken'
 --
 -- * 'eiMaxResults'
 --
@@ -139,39 +110,24 @@ data EventsInstances' = EventsInstances'
 -- * 'eiTimeMax'
 --
 -- * 'eiEventId'
---
--- * 'eiFields'
 eventsInstances'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'eventId'
     -> EventsInstances'
 eventsInstances' pEiCalendarId_ pEiEventId_ =
     EventsInstances'
-    { _eiQuotaUser = Nothing
-    , _eiCalendarId = pEiCalendarId_
-    , _eiPrettyPrint = True
+    { _eiCalendarId = pEiCalendarId_
     , _eiTimeMin = Nothing
-    , _eiUserIP = Nothing
     , _eiShowDeleted = Nothing
     , _eiOriginalStart = Nothing
     , _eiMaxAttendees = Nothing
-    , _eiKey = Nothing
     , _eiPageToken = Nothing
     , _eiTimeZone = Nothing
-    , _eiOAuthToken = Nothing
     , _eiMaxResults = Nothing
     , _eiAlwaysIncludeEmail = Nothing
     , _eiTimeMax = Nothing
     , _eiEventId = pEiEventId_
-    , _eiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-eiQuotaUser :: Lens' EventsInstances' (Maybe Text)
-eiQuotaUser
-  = lens _eiQuotaUser (\ s a -> s{_eiQuotaUser = a})
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
@@ -180,12 +136,6 @@ eiCalendarId :: Lens' EventsInstances' Text
 eiCalendarId
   = lens _eiCalendarId (\ s a -> s{_eiCalendarId = a})
 
--- | Returns response with indentations and line breaks.
-eiPrettyPrint :: Lens' EventsInstances' Bool
-eiPrettyPrint
-  = lens _eiPrettyPrint
-      (\ s a -> s{_eiPrettyPrint = a})
-
 -- | Lower bound (inclusive) for an event\'s end time to filter by. Optional.
 -- The default is not to filter by end time. Must be an RFC3339 timestamp
 -- with mandatory time zone offset.
@@ -193,11 +143,6 @@ eiTimeMin :: Lens' EventsInstances' (Maybe UTCTime)
 eiTimeMin
   = lens _eiTimeMin (\ s a -> s{_eiTimeMin = a}) .
       mapping _DateTime
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-eiUserIP :: Lens' EventsInstances' (Maybe Text)
-eiUserIP = lens _eiUserIP (\ s a -> s{_eiUserIP = a})
 
 -- | Whether to include deleted events (with status equals \"cancelled\") in
 -- the result. Cancelled instances of recurring events will still be
@@ -221,12 +166,6 @@ eiMaxAttendees
   = lens _eiMaxAttendees
       (\ s a -> s{_eiMaxAttendees = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-eiKey :: Lens' EventsInstances' (Maybe AuthKey)
-eiKey = lens _eiKey (\ s a -> s{_eiKey = a})
-
 -- | Token specifying which result page to return. Optional.
 eiPageToken :: Lens' EventsInstances' (Maybe Text)
 eiPageToken
@@ -237,11 +176,6 @@ eiPageToken
 eiTimeZone :: Lens' EventsInstances' (Maybe Text)
 eiTimeZone
   = lens _eiTimeZone (\ s a -> s{_eiTimeZone = a})
-
--- | OAuth 2.0 token for the current user.
-eiOAuthToken :: Lens' EventsInstances' (Maybe OAuthToken)
-eiOAuthToken
-  = lens _eiOAuthToken (\ s a -> s{_eiOAuthToken = a})
 
 -- | Maximum number of events returned on one result page. By default the
 -- value is 250 events. The page size can never be larger than 2500 events.
@@ -274,18 +208,9 @@ eiEventId :: Lens' EventsInstances' Text
 eiEventId
   = lens _eiEventId (\ s a -> s{_eiEventId = a})
 
--- | Selector specifying which fields to include in a partial response.
-eiFields :: Lens' EventsInstances' (Maybe Text)
-eiFields = lens _eiFields (\ s a -> s{_eiFields = a})
-
-instance GoogleAuth EventsInstances' where
-        _AuthKey = eiKey . _Just
-        _AuthToken = eiOAuthToken . _Just
-
 instance GoogleRequest EventsInstances' where
         type Rs EventsInstances' = Events
-        request = requestWith appsCalendarRequest
-        requestWith rq EventsInstances'{..}
+        requestClient EventsInstances'{..}
           = go _eiCalendarId _eiEventId _eiTimeMin
               _eiShowDeleted
               _eiOriginalStart
@@ -295,14 +220,9 @@ instance GoogleRequest EventsInstances' where
               _eiMaxResults
               _eiAlwaysIncludeEmail
               _eiTimeMax
-              _eiQuotaUser
-              (Just _eiPrettyPrint)
-              _eiUserIP
-              _eiFields
-              _eiKey
-              _eiOAuthToken
               (Just AltJSON)
+              appsCalendarService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy EventsInstancesResource)
-                      rq
+                      mempty

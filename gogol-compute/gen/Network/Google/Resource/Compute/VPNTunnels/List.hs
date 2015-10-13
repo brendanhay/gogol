@@ -34,17 +34,11 @@ module Network.Google.Resource.Compute.VPNTunnels.List
     , VPNTunnelsList'
 
     -- * Request Lenses
-    , vtlQuotaUser
-    , vtlPrettyPrint
     , vtlProject
-    , vtlUserIP
-    , vtlKey
     , vtlFilter
     , vtlRegion
     , vtlPageToken
-    , vtlOAuthToken
     , vtlMaxResults
-    , vtlFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -60,46 +54,25 @@ type VPNTunnelsListResource =
              QueryParam "filter" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "maxResults" Word32 :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] VPNTunnelList
+                   QueryParam "alt" AltJSON :> Get '[JSON] VPNTunnelList
 
 -- | Retrieves the list of VpnTunnel resources contained in the specified
 -- project and region.
 --
 -- /See:/ 'vpnTunnelsList'' smart constructor.
 data VPNTunnelsList' = VPNTunnelsList'
-    { _vtlQuotaUser   :: !(Maybe Text)
-    , _vtlPrettyPrint :: !Bool
-    , _vtlProject     :: !Text
-    , _vtlUserIP      :: !(Maybe Text)
-    , _vtlKey         :: !(Maybe AuthKey)
-    , _vtlFilter      :: !(Maybe Text)
-    , _vtlRegion      :: !Text
-    , _vtlPageToken   :: !(Maybe Text)
-    , _vtlOAuthToken  :: !(Maybe OAuthToken)
-    , _vtlMaxResults  :: !Word32
-    , _vtlFields      :: !(Maybe Text)
+    { _vtlProject    :: !Text
+    , _vtlFilter     :: !(Maybe Text)
+    , _vtlRegion     :: !Text
+    , _vtlPageToken  :: !(Maybe Text)
+    , _vtlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnelsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vtlQuotaUser'
---
--- * 'vtlPrettyPrint'
---
 -- * 'vtlProject'
---
--- * 'vtlUserIP'
---
--- * 'vtlKey'
 --
 -- * 'vtlFilter'
 --
@@ -107,59 +80,24 @@ data VPNTunnelsList' = VPNTunnelsList'
 --
 -- * 'vtlPageToken'
 --
--- * 'vtlOAuthToken'
---
 -- * 'vtlMaxResults'
---
--- * 'vtlFields'
 vpnTunnelsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
     -> VPNTunnelsList'
 vpnTunnelsList' pVtlProject_ pVtlRegion_ =
     VPNTunnelsList'
-    { _vtlQuotaUser = Nothing
-    , _vtlPrettyPrint = True
-    , _vtlProject = pVtlProject_
-    , _vtlUserIP = Nothing
-    , _vtlKey = Nothing
+    { _vtlProject = pVtlProject_
     , _vtlFilter = Nothing
     , _vtlRegion = pVtlRegion_
     , _vtlPageToken = Nothing
-    , _vtlOAuthToken = Nothing
     , _vtlMaxResults = 500
-    , _vtlFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-vtlQuotaUser :: Lens' VPNTunnelsList' (Maybe Text)
-vtlQuotaUser
-  = lens _vtlQuotaUser (\ s a -> s{_vtlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-vtlPrettyPrint :: Lens' VPNTunnelsList' Bool
-vtlPrettyPrint
-  = lens _vtlPrettyPrint
-      (\ s a -> s{_vtlPrettyPrint = a})
 
 -- | Project ID for this request.
 vtlProject :: Lens' VPNTunnelsList' Text
 vtlProject
   = lens _vtlProject (\ s a -> s{_vtlProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-vtlUserIP :: Lens' VPNTunnelsList' (Maybe Text)
-vtlUserIP
-  = lens _vtlUserIP (\ s a -> s{_vtlUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-vtlKey :: Lens' VPNTunnelsList' (Maybe AuthKey)
-vtlKey = lens _vtlKey (\ s a -> s{_vtlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -188,40 +126,19 @@ vtlPageToken :: Lens' VPNTunnelsList' (Maybe Text)
 vtlPageToken
   = lens _vtlPageToken (\ s a -> s{_vtlPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-vtlOAuthToken :: Lens' VPNTunnelsList' (Maybe OAuthToken)
-vtlOAuthToken
-  = lens _vtlOAuthToken
-      (\ s a -> s{_vtlOAuthToken = a})
-
 -- | Maximum count of results to be returned.
 vtlMaxResults :: Lens' VPNTunnelsList' Word32
 vtlMaxResults
   = lens _vtlMaxResults
       (\ s a -> s{_vtlMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-vtlFields :: Lens' VPNTunnelsList' (Maybe Text)
-vtlFields
-  = lens _vtlFields (\ s a -> s{_vtlFields = a})
-
-instance GoogleAuth VPNTunnelsList' where
-        _AuthKey = vtlKey . _Just
-        _AuthToken = vtlOAuthToken . _Just
-
 instance GoogleRequest VPNTunnelsList' where
         type Rs VPNTunnelsList' = VPNTunnelList
-        request = requestWith computeRequest
-        requestWith rq VPNTunnelsList'{..}
+        requestClient VPNTunnelsList'{..}
           = go _vtlProject _vtlRegion _vtlFilter _vtlPageToken
               (Just _vtlMaxResults)
-              _vtlQuotaUser
-              (Just _vtlPrettyPrint)
-              _vtlUserIP
-              _vtlFields
-              _vtlKey
-              _vtlOAuthToken
               (Just AltJSON)
+              computeService
           where go
-                  = clientBuild (Proxy :: Proxy VPNTunnelsListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy VPNTunnelsListResource)
+                      mempty

@@ -33,10 +33,7 @@ module Network.Google.Resource.DFAReporting.Sites.List
     , SitesList'
 
     -- * Request Lenses
-    , sitQuotaUser
-    , sitPrettyPrint
     , sitUnmAppedSite
-    , sitUserIP
     , sitCampaignIds
     , sitSearchString
     , sitAcceptsInterstitialPlacements
@@ -45,16 +42,13 @@ module Network.Google.Resource.DFAReporting.Sites.List
     , sitProFileId
     , sitDirectorySiteIds
     , sitSortOrder
-    , sitKey
     , sitPageToken
     , sitSortField
     , sitSubAccountId
     , sitAcceptsInStreamVideoPlacements
-    , sitOAuthToken
     , sitApproved
     , sitAdWordsSite
     , sitMaxResults
-    , sitFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -83,26 +77,14 @@ type SitesListResource =
                                    QueryParam "approved" Bool :>
                                      QueryParam "adWordsSite" Bool :>
                                        QueryParam "maxResults" Int32 :>
-                                         QueryParam "quotaUser" Text :>
-                                           QueryParam "prettyPrint" Bool :>
-                                             QueryParam "userIp" Text :>
-                                               QueryParam "fields" Text :>
-                                                 QueryParam "key" AuthKey :>
-                                                   Header "Authorization"
-                                                     OAuthToken
-                                                     :>
-                                                     QueryParam "alt" AltJSON :>
-                                                       Get '[JSON]
-                                                         SitesListResponse
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON] SitesListResponse
 
 -- | Retrieves a list of sites, possibly filtered.
 --
 -- /See:/ 'sitesList'' smart constructor.
 data SitesList' = SitesList'
-    { _sitQuotaUser                      :: !(Maybe Text)
-    , _sitPrettyPrint                    :: !Bool
-    , _sitUnmAppedSite                   :: !(Maybe Bool)
-    , _sitUserIP                         :: !(Maybe Text)
+    { _sitUnmAppedSite                   :: !(Maybe Bool)
     , _sitCampaignIds                    :: !(Maybe [Int64])
     , _sitSearchString                   :: !(Maybe Text)
     , _sitAcceptsInterstitialPlacements  :: !(Maybe Bool)
@@ -111,29 +93,20 @@ data SitesList' = SitesList'
     , _sitProFileId                      :: !Int64
     , _sitDirectorySiteIds               :: !(Maybe [Int64])
     , _sitSortOrder                      :: !(Maybe SitesListSortOrder)
-    , _sitKey                            :: !(Maybe AuthKey)
     , _sitPageToken                      :: !(Maybe Text)
     , _sitSortField                      :: !(Maybe SitesListSortField)
     , _sitSubAccountId                   :: !(Maybe Int64)
     , _sitAcceptsInStreamVideoPlacements :: !(Maybe Bool)
-    , _sitOAuthToken                     :: !(Maybe OAuthToken)
     , _sitApproved                       :: !(Maybe Bool)
     , _sitAdWordsSite                    :: !(Maybe Bool)
     , _sitMaxResults                     :: !(Maybe Int32)
-    , _sitFields                         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sitQuotaUser'
---
--- * 'sitPrettyPrint'
---
 -- * 'sitUnmAppedSite'
---
--- * 'sitUserIP'
 --
 -- * 'sitCampaignIds'
 --
@@ -151,8 +124,6 @@ data SitesList' = SitesList'
 --
 -- * 'sitSortOrder'
 --
--- * 'sitKey'
---
 -- * 'sitPageToken'
 --
 -- * 'sitSortField'
@@ -161,24 +132,17 @@ data SitesList' = SitesList'
 --
 -- * 'sitAcceptsInStreamVideoPlacements'
 --
--- * 'sitOAuthToken'
---
 -- * 'sitApproved'
 --
 -- * 'sitAdWordsSite'
 --
 -- * 'sitMaxResults'
---
--- * 'sitFields'
 sitesList'
     :: Int64 -- ^ 'profileId'
     -> SitesList'
 sitesList' pSitProFileId_ =
     SitesList'
-    { _sitQuotaUser = Nothing
-    , _sitPrettyPrint = True
-    , _sitUnmAppedSite = Nothing
-    , _sitUserIP = Nothing
+    { _sitUnmAppedSite = Nothing
     , _sitCampaignIds = Nothing
     , _sitSearchString = Nothing
     , _sitAcceptsInterstitialPlacements = Nothing
@@ -187,42 +151,20 @@ sitesList' pSitProFileId_ =
     , _sitProFileId = pSitProFileId_
     , _sitDirectorySiteIds = Nothing
     , _sitSortOrder = Nothing
-    , _sitKey = Nothing
     , _sitPageToken = Nothing
     , _sitSortField = Nothing
     , _sitSubAccountId = Nothing
     , _sitAcceptsInStreamVideoPlacements = Nothing
-    , _sitOAuthToken = Nothing
     , _sitApproved = Nothing
     , _sitAdWordsSite = Nothing
     , _sitMaxResults = Nothing
-    , _sitFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-sitQuotaUser :: Lens' SitesList' (Maybe Text)
-sitQuotaUser
-  = lens _sitQuotaUser (\ s a -> s{_sitQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-sitPrettyPrint :: Lens' SitesList' Bool
-sitPrettyPrint
-  = lens _sitPrettyPrint
-      (\ s a -> s{_sitPrettyPrint = a})
 
 -- | Select only sites that have not been mapped to a directory site.
 sitUnmAppedSite :: Lens' SitesList' (Maybe Bool)
 sitUnmAppedSite
   = lens _sitUnmAppedSite
       (\ s a -> s{_sitUnmAppedSite = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-sitUserIP :: Lens' SitesList' (Maybe Text)
-sitUserIP
-  = lens _sitUserIP (\ s a -> s{_sitUserIP = a})
 
 -- | Select only sites with these campaign IDs.
 sitCampaignIds :: Lens' SitesList' [Int64]
@@ -280,12 +222,6 @@ sitSortOrder :: Lens' SitesList' (Maybe SitesListSortOrder)
 sitSortOrder
   = lens _sitSortOrder (\ s a -> s{_sitSortOrder = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-sitKey :: Lens' SitesList' (Maybe AuthKey)
-sitKey = lens _sitKey (\ s a -> s{_sitKey = a})
-
 -- | Value of the nextPageToken from the previous result page.
 sitPageToken :: Lens' SitesList' (Maybe Text)
 sitPageToken
@@ -309,12 +245,6 @@ sitAcceptsInStreamVideoPlacements
   = lens _sitAcceptsInStreamVideoPlacements
       (\ s a -> s{_sitAcceptsInStreamVideoPlacements = a})
 
--- | OAuth 2.0 token for the current user.
-sitOAuthToken :: Lens' SitesList' (Maybe OAuthToken)
-sitOAuthToken
-  = lens _sitOAuthToken
-      (\ s a -> s{_sitOAuthToken = a})
-
 -- | Select only approved sites.
 sitApproved :: Lens' SitesList' (Maybe Bool)
 sitApproved
@@ -332,19 +262,9 @@ sitMaxResults
   = lens _sitMaxResults
       (\ s a -> s{_sitMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-sitFields :: Lens' SitesList' (Maybe Text)
-sitFields
-  = lens _sitFields (\ s a -> s{_sitFields = a})
-
-instance GoogleAuth SitesList' where
-        _AuthKey = sitKey . _Just
-        _AuthToken = sitOAuthToken . _Just
-
 instance GoogleRequest SitesList' where
         type Rs SitesList' = SitesListResponse
-        request = requestWith dFAReportingRequest
-        requestWith rq SitesList'{..}
+        requestClient SitesList'{..}
           = go _sitProFileId _sitUnmAppedSite
               (_sitCampaignIds ^. _Default)
               _sitSearchString
@@ -360,12 +280,8 @@ instance GoogleRequest SitesList' where
               _sitApproved
               _sitAdWordsSite
               _sitMaxResults
-              _sitQuotaUser
-              (Just _sitPrettyPrint)
-              _sitUserIP
-              _sitFields
-              _sitKey
-              _sitOAuthToken
               (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild (Proxy :: Proxy SitesListResource) rq
+                  = buildClient (Proxy :: Proxy SitesListResource)
+                      mempty

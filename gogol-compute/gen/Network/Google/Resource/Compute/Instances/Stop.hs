@@ -38,14 +38,8 @@ module Network.Google.Resource.Compute.Instances.Stop
     , InstancesStop'
 
     -- * Request Lenses
-    , isQuotaUser
-    , isPrettyPrint
     , isProject
-    , isUserIP
     , isZone
-    , isKey
-    , isOAuthToken
-    , isFields
     , isInstance
     ) where
 
@@ -61,13 +55,7 @@ type InstancesStopResource =
            "instances" :>
              Capture "instance" Text :>
                "stop" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :> Post '[JSON] Operation
+                 QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | This method stops a running instance, shutting it down cleanly, and
 -- allows you to restart the instance at a later time. Stopped instances do
@@ -78,36 +66,18 @@ type InstancesStopResource =
 --
 -- /See:/ 'instancesStop'' smart constructor.
 data InstancesStop' = InstancesStop'
-    { _isQuotaUser   :: !(Maybe Text)
-    , _isPrettyPrint :: !Bool
-    , _isProject     :: !Text
-    , _isUserIP      :: !(Maybe Text)
-    , _isZone        :: !Text
-    , _isKey         :: !(Maybe AuthKey)
-    , _isOAuthToken  :: !(Maybe OAuthToken)
-    , _isFields      :: !(Maybe Text)
-    , _isInstance    :: !Text
+    { _isProject  :: !Text
+    , _isZone     :: !Text
+    , _isInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesStop'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'isQuotaUser'
---
--- * 'isPrettyPrint'
---
 -- * 'isProject'
 --
--- * 'isUserIP'
---
 -- * 'isZone'
---
--- * 'isKey'
---
--- * 'isOAuthToken'
---
--- * 'isFields'
 --
 -- * 'isInstance'
 instancesStop'
@@ -117,79 +87,30 @@ instancesStop'
     -> InstancesStop'
 instancesStop' pIsProject_ pIsZone_ pIsInstance_ =
     InstancesStop'
-    { _isQuotaUser = Nothing
-    , _isPrettyPrint = True
-    , _isProject = pIsProject_
-    , _isUserIP = Nothing
+    { _isProject = pIsProject_
     , _isZone = pIsZone_
-    , _isKey = Nothing
-    , _isOAuthToken = Nothing
-    , _isFields = Nothing
     , _isInstance = pIsInstance_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-isQuotaUser :: Lens' InstancesStop' (Maybe Text)
-isQuotaUser
-  = lens _isQuotaUser (\ s a -> s{_isQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-isPrettyPrint :: Lens' InstancesStop' Bool
-isPrettyPrint
-  = lens _isPrettyPrint
-      (\ s a -> s{_isPrettyPrint = a})
 
 -- | Project ID for this request.
 isProject :: Lens' InstancesStop' Text
 isProject
   = lens _isProject (\ s a -> s{_isProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-isUserIP :: Lens' InstancesStop' (Maybe Text)
-isUserIP = lens _isUserIP (\ s a -> s{_isUserIP = a})
-
 -- | The name of the zone for this request.
 isZone :: Lens' InstancesStop' Text
 isZone = lens _isZone (\ s a -> s{_isZone = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-isKey :: Lens' InstancesStop' (Maybe AuthKey)
-isKey = lens _isKey (\ s a -> s{_isKey = a})
-
--- | OAuth 2.0 token for the current user.
-isOAuthToken :: Lens' InstancesStop' (Maybe OAuthToken)
-isOAuthToken
-  = lens _isOAuthToken (\ s a -> s{_isOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-isFields :: Lens' InstancesStop' (Maybe Text)
-isFields = lens _isFields (\ s a -> s{_isFields = a})
 
 -- | Name of the instance resource to stop.
 isInstance :: Lens' InstancesStop' Text
 isInstance
   = lens _isInstance (\ s a -> s{_isInstance = a})
 
-instance GoogleAuth InstancesStop' where
-        _AuthKey = isKey . _Just
-        _AuthToken = isOAuthToken . _Just
-
 instance GoogleRequest InstancesStop' where
         type Rs InstancesStop' = Operation
-        request = requestWith computeRequest
-        requestWith rq InstancesStop'{..}
-          = go _isProject _isZone _isInstance _isQuotaUser
-              (Just _isPrettyPrint)
-              _isUserIP
-              _isFields
-              _isKey
-              _isOAuthToken
-              (Just AltJSON)
+        requestClient InstancesStop'{..}
+          = go _isProject _isZone _isInstance (Just AltJSON)
+              computeService
           where go
-                  = clientBuild (Proxy :: Proxy InstancesStopResource)
-                      rq
+                  = buildClient (Proxy :: Proxy InstancesStopResource)
+                      mempty

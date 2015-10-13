@@ -38,18 +38,13 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
 
     -- * Request Lenses
     , psaXgafv
-    , psaQuotaUser
-    , psaPrettyPrint
     , psaUploadProtocol
     , psaPp
     , psaAccessToken
     , psaUploadType
     , psaPayload
     , psaBearerToken
-    , psaKey
-    , psaOAuthToken
     , psaSubscription
-    , psaFields
     , psaCallback
     ) where
 
@@ -68,14 +63,9 @@ type ProjectsSubscriptionsAcknowledgeResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] AcknowledgeRequest :>
-                                     Post '[JSON] Empty
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] AcknowledgeRequest :>
+                           Post '[JSON] Empty
 
 -- | Acknowledges the messages associated with the ack tokens in the
 -- AcknowledgeRequest. The Pub\/Sub system can remove the relevant messages
@@ -86,18 +76,13 @@ type ProjectsSubscriptionsAcknowledgeResource =
 -- /See:/ 'projectsSubscriptionsAcknowledge'' smart constructor.
 data ProjectsSubscriptionsAcknowledge' = ProjectsSubscriptionsAcknowledge'
     { _psaXgafv          :: !(Maybe Text)
-    , _psaQuotaUser      :: !(Maybe Text)
-    , _psaPrettyPrint    :: !Bool
     , _psaUploadProtocol :: !(Maybe Text)
     , _psaPp             :: !Bool
     , _psaAccessToken    :: !(Maybe Text)
     , _psaUploadType     :: !(Maybe Text)
     , _psaPayload        :: !AcknowledgeRequest
     , _psaBearerToken    :: !(Maybe Text)
-    , _psaKey            :: !(Maybe AuthKey)
-    , _psaOAuthToken     :: !(Maybe OAuthToken)
     , _psaSubscription   :: !Text
-    , _psaFields         :: !(Maybe Text)
     , _psaCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -106,10 +91,6 @@ data ProjectsSubscriptionsAcknowledge' = ProjectsSubscriptionsAcknowledge'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'psaXgafv'
---
--- * 'psaQuotaUser'
---
--- * 'psaPrettyPrint'
 --
 -- * 'psaUploadProtocol'
 --
@@ -123,13 +104,7 @@ data ProjectsSubscriptionsAcknowledge' = ProjectsSubscriptionsAcknowledge'
 --
 -- * 'psaBearerToken'
 --
--- * 'psaKey'
---
--- * 'psaOAuthToken'
---
 -- * 'psaSubscription'
---
--- * 'psaFields'
 --
 -- * 'psaCallback'
 projectsSubscriptionsAcknowledge'
@@ -139,37 +114,19 @@ projectsSubscriptionsAcknowledge'
 projectsSubscriptionsAcknowledge' pPsaPayload_ pPsaSubscription_ =
     ProjectsSubscriptionsAcknowledge'
     { _psaXgafv = Nothing
-    , _psaQuotaUser = Nothing
-    , _psaPrettyPrint = True
     , _psaUploadProtocol = Nothing
     , _psaPp = True
     , _psaAccessToken = Nothing
     , _psaUploadType = Nothing
     , _psaPayload = pPsaPayload_
     , _psaBearerToken = Nothing
-    , _psaKey = Nothing
-    , _psaOAuthToken = Nothing
     , _psaSubscription = pPsaSubscription_
-    , _psaFields = Nothing
     , _psaCallback = Nothing
     }
 
 -- | V1 error format.
 psaXgafv :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Text)
 psaXgafv = lens _psaXgafv (\ s a -> s{_psaXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-psaQuotaUser :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Text)
-psaQuotaUser
-  = lens _psaQuotaUser (\ s a -> s{_psaQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-psaPrettyPrint :: Lens' ProjectsSubscriptionsAcknowledge' Bool
-psaPrettyPrint
-  = lens _psaPrettyPrint
-      (\ s a -> s{_psaPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 psaUploadProtocol :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Text)
@@ -204,59 +161,32 @@ psaBearerToken
   = lens _psaBearerToken
       (\ s a -> s{_psaBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-psaKey :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe AuthKey)
-psaKey = lens _psaKey (\ s a -> s{_psaKey = a})
-
--- | OAuth 2.0 token for the current user.
-psaOAuthToken :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe OAuthToken)
-psaOAuthToken
-  = lens _psaOAuthToken
-      (\ s a -> s{_psaOAuthToken = a})
-
 -- | The subscription whose message is being acknowledged.
 psaSubscription :: Lens' ProjectsSubscriptionsAcknowledge' Text
 psaSubscription
   = lens _psaSubscription
       (\ s a -> s{_psaSubscription = a})
 
--- | Selector specifying which fields to include in a partial response.
-psaFields :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Text)
-psaFields
-  = lens _psaFields (\ s a -> s{_psaFields = a})
-
 -- | JSONP
 psaCallback :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Text)
 psaCallback
   = lens _psaCallback (\ s a -> s{_psaCallback = a})
 
-instance GoogleAuth ProjectsSubscriptionsAcknowledge'
-         where
-        _AuthKey = psaKey . _Just
-        _AuthToken = psaOAuthToken . _Just
-
 instance GoogleRequest
          ProjectsSubscriptionsAcknowledge' where
         type Rs ProjectsSubscriptionsAcknowledge' = Empty
-        request = requestWith pubSubRequest
-        requestWith rq ProjectsSubscriptionsAcknowledge'{..}
+        requestClient ProjectsSubscriptionsAcknowledge'{..}
           = go _psaSubscription _psaXgafv _psaUploadProtocol
               (Just _psaPp)
               _psaAccessToken
               _psaUploadType
               _psaBearerToken
               _psaCallback
-              _psaQuotaUser
-              (Just _psaPrettyPrint)
-              _psaFields
-              _psaKey
-              _psaOAuthToken
               (Just AltJSON)
               _psaPayload
+              pubSubService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy ProjectsSubscriptionsAcknowledgeResource)
-                      rq
+                      mempty

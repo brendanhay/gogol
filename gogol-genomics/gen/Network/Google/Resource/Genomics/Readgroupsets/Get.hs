@@ -34,17 +34,12 @@ module Network.Google.Resource.Genomics.Readgroupsets.Get
 
     -- * Request Lenses
     , rgXgafv
-    , rgQuotaUser
-    , rgPrettyPrint
     , rgReadGroupSetId
     , rgUploadProtocol
     , rgPp
     , rgAccessToken
     , rgUploadType
     , rgBearerToken
-    , rgKey
-    , rgOAuthToken
-    , rgFields
     , rgCallback
     ) where
 
@@ -64,30 +59,19 @@ type ReadgroupsetsGetResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] ReadGroupSet
+                         QueryParam "alt" AltJSON :> Get '[JSON] ReadGroupSet
 
 -- | Gets a read group set by ID.
 --
 -- /See:/ 'readgroupsetsGet'' smart constructor.
 data ReadgroupsetsGet' = ReadgroupsetsGet'
     { _rgXgafv          :: !(Maybe Text)
-    , _rgQuotaUser      :: !(Maybe Text)
-    , _rgPrettyPrint    :: !Bool
     , _rgReadGroupSetId :: !Text
     , _rgUploadProtocol :: !(Maybe Text)
     , _rgPp             :: !Bool
     , _rgAccessToken    :: !(Maybe Text)
     , _rgUploadType     :: !(Maybe Text)
     , _rgBearerToken    :: !(Maybe Text)
-    , _rgKey            :: !(Maybe AuthKey)
-    , _rgOAuthToken     :: !(Maybe OAuthToken)
-    , _rgFields         :: !(Maybe Text)
     , _rgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -96,10 +80,6 @@ data ReadgroupsetsGet' = ReadgroupsetsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rgXgafv'
---
--- * 'rgQuotaUser'
---
--- * 'rgPrettyPrint'
 --
 -- * 'rgReadGroupSetId'
 --
@@ -113,12 +93,6 @@ data ReadgroupsetsGet' = ReadgroupsetsGet'
 --
 -- * 'rgBearerToken'
 --
--- * 'rgKey'
---
--- * 'rgOAuthToken'
---
--- * 'rgFields'
---
 -- * 'rgCallback'
 readgroupsetsGet'
     :: Text -- ^ 'readGroupSetId'
@@ -126,36 +100,18 @@ readgroupsetsGet'
 readgroupsetsGet' pRgReadGroupSetId_ =
     ReadgroupsetsGet'
     { _rgXgafv = Nothing
-    , _rgQuotaUser = Nothing
-    , _rgPrettyPrint = True
     , _rgReadGroupSetId = pRgReadGroupSetId_
     , _rgUploadProtocol = Nothing
     , _rgPp = True
     , _rgAccessToken = Nothing
     , _rgUploadType = Nothing
     , _rgBearerToken = Nothing
-    , _rgKey = Nothing
-    , _rgOAuthToken = Nothing
-    , _rgFields = Nothing
     , _rgCallback = Nothing
     }
 
 -- | V1 error format.
 rgXgafv :: Lens' ReadgroupsetsGet' (Maybe Text)
 rgXgafv = lens _rgXgafv (\ s a -> s{_rgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-rgQuotaUser :: Lens' ReadgroupsetsGet' (Maybe Text)
-rgQuotaUser
-  = lens _rgQuotaUser (\ s a -> s{_rgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rgPrettyPrint :: Lens' ReadgroupsetsGet' Bool
-rgPrettyPrint
-  = lens _rgPrettyPrint
-      (\ s a -> s{_rgPrettyPrint = a})
 
 -- | The ID of the read group set.
 rgReadGroupSetId :: Lens' ReadgroupsetsGet' Text
@@ -190,47 +146,23 @@ rgBearerToken
   = lens _rgBearerToken
       (\ s a -> s{_rgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rgKey :: Lens' ReadgroupsetsGet' (Maybe AuthKey)
-rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
-
--- | OAuth 2.0 token for the current user.
-rgOAuthToken :: Lens' ReadgroupsetsGet' (Maybe OAuthToken)
-rgOAuthToken
-  = lens _rgOAuthToken (\ s a -> s{_rgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-rgFields :: Lens' ReadgroupsetsGet' (Maybe Text)
-rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
-
 -- | JSONP
 rgCallback :: Lens' ReadgroupsetsGet' (Maybe Text)
 rgCallback
   = lens _rgCallback (\ s a -> s{_rgCallback = a})
 
-instance GoogleAuth ReadgroupsetsGet' where
-        _AuthKey = rgKey . _Just
-        _AuthToken = rgOAuthToken . _Just
-
 instance GoogleRequest ReadgroupsetsGet' where
         type Rs ReadgroupsetsGet' = ReadGroupSet
-        request = requestWith genomicsRequest
-        requestWith rq ReadgroupsetsGet'{..}
+        requestClient ReadgroupsetsGet'{..}
           = go _rgReadGroupSetId _rgXgafv _rgUploadProtocol
               (Just _rgPp)
               _rgAccessToken
               _rgUploadType
               _rgBearerToken
               _rgCallback
-              _rgQuotaUser
-              (Just _rgPrettyPrint)
-              _rgFields
-              _rgKey
-              _rgOAuthToken
               (Just AltJSON)
+              genomicsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ReadgroupsetsGetResource)
-                      rq
+                      mempty

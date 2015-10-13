@@ -36,18 +36,13 @@ module Network.Google.Resource.AppEngine.Apps.Operations.Get
 
     -- * Request Lenses
     , aogXgafv
-    , aogQuotaUser
-    , aogPrettyPrint
     , aogUploadProtocol
     , aogPp
     , aogAccessToken
     , aogUploadType
     , aogBearerToken
-    , aogKey
     , aogAppsId
-    , aogOAuthToken
     , aogOperationsId
-    , aogFields
     , aogCallback
     ) where
 
@@ -69,13 +64,7 @@ type AppsOperationsGetResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] Operation
+                             QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Gets the latest state of a long-running operation. Clients can use this
 -- method to poll the operation result at intervals as recommended by the
@@ -84,18 +73,13 @@ type AppsOperationsGetResource =
 -- /See:/ 'appsOperationsGet'' smart constructor.
 data AppsOperationsGet' = AppsOperationsGet'
     { _aogXgafv          :: !(Maybe Text)
-    , _aogQuotaUser      :: !(Maybe Text)
-    , _aogPrettyPrint    :: !Bool
     , _aogUploadProtocol :: !(Maybe Text)
     , _aogPp             :: !Bool
     , _aogAccessToken    :: !(Maybe Text)
     , _aogUploadType     :: !(Maybe Text)
     , _aogBearerToken    :: !(Maybe Text)
-    , _aogKey            :: !(Maybe AuthKey)
     , _aogAppsId         :: !Text
-    , _aogOAuthToken     :: !(Maybe OAuthToken)
     , _aogOperationsId   :: !Text
-    , _aogFields         :: !(Maybe Text)
     , _aogCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -104,10 +88,6 @@ data AppsOperationsGet' = AppsOperationsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aogXgafv'
---
--- * 'aogQuotaUser'
---
--- * 'aogPrettyPrint'
 --
 -- * 'aogUploadProtocol'
 --
@@ -119,15 +99,9 @@ data AppsOperationsGet' = AppsOperationsGet'
 --
 -- * 'aogBearerToken'
 --
--- * 'aogKey'
---
 -- * 'aogAppsId'
 --
--- * 'aogOAuthToken'
---
 -- * 'aogOperationsId'
---
--- * 'aogFields'
 --
 -- * 'aogCallback'
 appsOperationsGet'
@@ -137,37 +111,19 @@ appsOperationsGet'
 appsOperationsGet' pAogAppsId_ pAogOperationsId_ =
     AppsOperationsGet'
     { _aogXgafv = Nothing
-    , _aogQuotaUser = Nothing
-    , _aogPrettyPrint = True
     , _aogUploadProtocol = Nothing
     , _aogPp = True
     , _aogAccessToken = Nothing
     , _aogUploadType = Nothing
     , _aogBearerToken = Nothing
-    , _aogKey = Nothing
     , _aogAppsId = pAogAppsId_
-    , _aogOAuthToken = Nothing
     , _aogOperationsId = pAogOperationsId_
-    , _aogFields = Nothing
     , _aogCallback = Nothing
     }
 
 -- | V1 error format.
 aogXgafv :: Lens' AppsOperationsGet' (Maybe Text)
 aogXgafv = lens _aogXgafv (\ s a -> s{_aogXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-aogQuotaUser :: Lens' AppsOperationsGet' (Maybe Text)
-aogQuotaUser
-  = lens _aogQuotaUser (\ s a -> s{_aogQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aogPrettyPrint :: Lens' AppsOperationsGet' Bool
-aogPrettyPrint
-  = lens _aogPrettyPrint
-      (\ s a -> s{_aogPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 aogUploadProtocol :: Lens' AppsOperationsGet' (Maybe Text)
@@ -197,22 +153,10 @@ aogBearerToken
   = lens _aogBearerToken
       (\ s a -> s{_aogBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aogKey :: Lens' AppsOperationsGet' (Maybe AuthKey)
-aogKey = lens _aogKey (\ s a -> s{_aogKey = a})
-
 -- | Part of \`name\`. The name of the operation resource.
 aogAppsId :: Lens' AppsOperationsGet' Text
 aogAppsId
   = lens _aogAppsId (\ s a -> s{_aogAppsId = a})
-
--- | OAuth 2.0 token for the current user.
-aogOAuthToken :: Lens' AppsOperationsGet' (Maybe OAuthToken)
-aogOAuthToken
-  = lens _aogOAuthToken
-      (\ s a -> s{_aogOAuthToken = a})
 
 -- | Part of \`name\`. See documentation of \`appsId\`.
 aogOperationsId :: Lens' AppsOperationsGet' Text
@@ -220,24 +164,14 @@ aogOperationsId
   = lens _aogOperationsId
       (\ s a -> s{_aogOperationsId = a})
 
--- | Selector specifying which fields to include in a partial response.
-aogFields :: Lens' AppsOperationsGet' (Maybe Text)
-aogFields
-  = lens _aogFields (\ s a -> s{_aogFields = a})
-
 -- | JSONP
 aogCallback :: Lens' AppsOperationsGet' (Maybe Text)
 aogCallback
   = lens _aogCallback (\ s a -> s{_aogCallback = a})
 
-instance GoogleAuth AppsOperationsGet' where
-        _AuthKey = aogKey . _Just
-        _AuthToken = aogOAuthToken . _Just
-
 instance GoogleRequest AppsOperationsGet' where
         type Rs AppsOperationsGet' = Operation
-        request = requestWith appEngineRequest
-        requestWith rq AppsOperationsGet'{..}
+        requestClient AppsOperationsGet'{..}
           = go _aogAppsId _aogOperationsId _aogXgafv
               _aogUploadProtocol
               (Just _aogPp)
@@ -245,13 +179,9 @@ instance GoogleRequest AppsOperationsGet' where
               _aogUploadType
               _aogBearerToken
               _aogCallback
-              _aogQuotaUser
-              (Just _aogPrettyPrint)
-              _aogFields
-              _aogKey
-              _aogOAuthToken
               (Just AltJSON)
+              appEngineService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AppsOperationsGetResource)
-                      rq
+                      mempty

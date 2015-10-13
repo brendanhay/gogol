@@ -32,13 +32,6 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.GetRecaptchaParam
     , relyingPartyGetRecaptchaParam'
     , RelyingPartyGetRecaptchaParam'
 
-    -- * Request Lenses
-    , rpgrpQuotaUser
-    , rpgrpPrettyPrint
-    , rpgrpUserIP
-    , rpgrpKey
-    , rpgrpOAuthToken
-    , rpgrpFields
     ) where
 
 import           Network.Google.IdentityToolkit.Types
@@ -48,110 +41,30 @@ import           Network.Google.Prelude
 -- 'RelyingPartyGetRecaptchaParam'' request conforms to.
 type RelyingPartyGetRecaptchaParamResource =
      "getRecaptchaParam" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "fields" Text :>
-               QueryParam "key" AuthKey :>
-                 Header "Authorization" OAuthToken :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] GetRecaptchaParamResponse
+       QueryParam "alt" AltJSON :>
+         Get '[JSON] GetRecaptchaParamResponse
 
 -- | Get recaptcha secure param.
 --
 -- /See:/ 'relyingPartyGetRecaptchaParam'' smart constructor.
-data RelyingPartyGetRecaptchaParam' = RelyingPartyGetRecaptchaParam'
-    { _rpgrpQuotaUser   :: !(Maybe Text)
-    , _rpgrpPrettyPrint :: !Bool
-    , _rpgrpUserIP      :: !(Maybe Text)
-    , _rpgrpKey         :: !(Maybe AuthKey)
-    , _rpgrpOAuthToken  :: !(Maybe OAuthToken)
-    , _rpgrpFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data RelyingPartyGetRecaptchaParam' =
+    RelyingPartyGetRecaptchaParam'
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingPartyGetRecaptchaParam'' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rpgrpQuotaUser'
---
--- * 'rpgrpPrettyPrint'
---
--- * 'rpgrpUserIP'
---
--- * 'rpgrpKey'
---
--- * 'rpgrpOAuthToken'
---
--- * 'rpgrpFields'
 relyingPartyGetRecaptchaParam'
     :: RelyingPartyGetRecaptchaParam'
-relyingPartyGetRecaptchaParam' =
-    RelyingPartyGetRecaptchaParam'
-    { _rpgrpQuotaUser = Nothing
-    , _rpgrpPrettyPrint = True
-    , _rpgrpUserIP = Nothing
-    , _rpgrpKey = Nothing
-    , _rpgrpOAuthToken = Nothing
-    , _rpgrpFields = Nothing
-    }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-rpgrpQuotaUser :: Lens' RelyingPartyGetRecaptchaParam' (Maybe Text)
-rpgrpQuotaUser
-  = lens _rpgrpQuotaUser
-      (\ s a -> s{_rpgrpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rpgrpPrettyPrint :: Lens' RelyingPartyGetRecaptchaParam' Bool
-rpgrpPrettyPrint
-  = lens _rpgrpPrettyPrint
-      (\ s a -> s{_rpgrpPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rpgrpUserIP :: Lens' RelyingPartyGetRecaptchaParam' (Maybe Text)
-rpgrpUserIP
-  = lens _rpgrpUserIP (\ s a -> s{_rpgrpUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rpgrpKey :: Lens' RelyingPartyGetRecaptchaParam' (Maybe AuthKey)
-rpgrpKey = lens _rpgrpKey (\ s a -> s{_rpgrpKey = a})
-
--- | OAuth 2.0 token for the current user.
-rpgrpOAuthToken :: Lens' RelyingPartyGetRecaptchaParam' (Maybe OAuthToken)
-rpgrpOAuthToken
-  = lens _rpgrpOAuthToken
-      (\ s a -> s{_rpgrpOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-rpgrpFields :: Lens' RelyingPartyGetRecaptchaParam' (Maybe Text)
-rpgrpFields
-  = lens _rpgrpFields (\ s a -> s{_rpgrpFields = a})
-
-instance GoogleAuth RelyingPartyGetRecaptchaParam'
-         where
-        _AuthKey = rpgrpKey . _Just
-        _AuthToken = rpgrpOAuthToken . _Just
+relyingPartyGetRecaptchaParam' = RelyingPartyGetRecaptchaParam'
 
 instance GoogleRequest RelyingPartyGetRecaptchaParam'
          where
         type Rs RelyingPartyGetRecaptchaParam' =
              GetRecaptchaParamResponse
-        request = requestWith identityToolkitRequest
-        requestWith rq RelyingPartyGetRecaptchaParam'{..}
-          = go _rpgrpQuotaUser (Just _rpgrpPrettyPrint)
-              _rpgrpUserIP
-              _rpgrpFields
-              _rpgrpKey
-              _rpgrpOAuthToken
-              (Just AltJSON)
+        requestClient RelyingPartyGetRecaptchaParam'{..}
+          = go (Just AltJSON) identityToolkitService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy RelyingPartyGetRecaptchaParamResource)
-                      rq
+                      mempty

@@ -36,15 +36,9 @@ module Network.Google.Resource.GAN.Links.Get
     , LinksGet'
 
     -- * Request Lenses
-    , lgQuotaUser
-    , lgPrettyPrint
-    , lgUserIP
     , lgRoleId
     , lgRole
-    , lgKey
     , lgLinkId
-    , lgOAuthToken
-    , lgFields
     ) where
 
 import           Network.Google.Affiliates.Types
@@ -57,13 +51,7 @@ type LinksGetResource =
        Capture "roleId" Text :>
          "link" :>
            Capture "linkId" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Link
+             QueryParam "alt" AltJSON :> Get '[JSON] Link
 
 -- | Retrieves data about a single link if the requesting
 -- advertiser\/publisher has access to it. Advertisers can look up their
@@ -72,38 +60,20 @@ type LinksGetResource =
 --
 -- /See:/ 'linksGet'' smart constructor.
 data LinksGet' = LinksGet'
-    { _lgQuotaUser   :: !(Maybe Text)
-    , _lgPrettyPrint :: !Bool
-    , _lgUserIP      :: !(Maybe Text)
-    , _lgRoleId      :: !Text
-    , _lgRole        :: !LinksGetRole
-    , _lgKey         :: !(Maybe AuthKey)
-    , _lgLinkId      :: !Int64
-    , _lgOAuthToken  :: !(Maybe OAuthToken)
-    , _lgFields      :: !(Maybe Text)
+    { _lgRoleId :: !Text
+    , _lgRole   :: !LinksGetRole
+    , _lgLinkId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinksGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lgQuotaUser'
---
--- * 'lgPrettyPrint'
---
--- * 'lgUserIP'
---
 -- * 'lgRoleId'
 --
 -- * 'lgRole'
 --
--- * 'lgKey'
---
 -- * 'lgLinkId'
---
--- * 'lgOAuthToken'
---
--- * 'lgFields'
 linksGet'
     :: Text -- ^ 'roleId'
     -> LinksGetRole -- ^ 'role'
@@ -111,34 +81,10 @@ linksGet'
     -> LinksGet'
 linksGet' pLgRoleId_ pLgRole_ pLgLinkId_ =
     LinksGet'
-    { _lgQuotaUser = Nothing
-    , _lgPrettyPrint = True
-    , _lgUserIP = Nothing
-    , _lgRoleId = pLgRoleId_
+    { _lgRoleId = pLgRoleId_
     , _lgRole = pLgRole_
-    , _lgKey = Nothing
     , _lgLinkId = pLgLinkId_
-    , _lgOAuthToken = Nothing
-    , _lgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-lgQuotaUser :: Lens' LinksGet' (Maybe Text)
-lgQuotaUser
-  = lens _lgQuotaUser (\ s a -> s{_lgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-lgPrettyPrint :: Lens' LinksGet' Bool
-lgPrettyPrint
-  = lens _lgPrettyPrint
-      (\ s a -> s{_lgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-lgUserIP :: Lens' LinksGet' (Maybe Text)
-lgUserIP = lens _lgUserIP (\ s a -> s{_lgUserIP = a})
 
 -- | The ID of the requesting advertiser or publisher.
 lgRoleId :: Lens' LinksGet' Text
@@ -149,39 +95,15 @@ lgRoleId = lens _lgRoleId (\ s a -> s{_lgRoleId = a})
 lgRole :: Lens' LinksGet' LinksGetRole
 lgRole = lens _lgRole (\ s a -> s{_lgRole = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-lgKey :: Lens' LinksGet' (Maybe AuthKey)
-lgKey = lens _lgKey (\ s a -> s{_lgKey = a})
-
 -- | The ID of the link to look up.
 lgLinkId :: Lens' LinksGet' Int64
 lgLinkId = lens _lgLinkId (\ s a -> s{_lgLinkId = a})
 
--- | OAuth 2.0 token for the current user.
-lgOAuthToken :: Lens' LinksGet' (Maybe OAuthToken)
-lgOAuthToken
-  = lens _lgOAuthToken (\ s a -> s{_lgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-lgFields :: Lens' LinksGet' (Maybe Text)
-lgFields = lens _lgFields (\ s a -> s{_lgFields = a})
-
-instance GoogleAuth LinksGet' where
-        _AuthKey = lgKey . _Just
-        _AuthToken = lgOAuthToken . _Just
-
 instance GoogleRequest LinksGet' where
         type Rs LinksGet' = Link
-        request = requestWith affiliatesRequest
-        requestWith rq LinksGet'{..}
-          = go _lgRole _lgRoleId _lgLinkId _lgQuotaUser
-              (Just _lgPrettyPrint)
-              _lgUserIP
-              _lgFields
-              _lgKey
-              _lgOAuthToken
-              (Just AltJSON)
+        requestClient LinksGet'{..}
+          = go _lgRole _lgRoleId _lgLinkId (Just AltJSON)
+              affiliatesService
           where go
-                  = clientBuild (Proxy :: Proxy LinksGetResource) rq
+                  = buildClient (Proxy :: Proxy LinksGetResource)
+                      mempty

@@ -33,14 +33,8 @@ module Network.Google.Resource.DFAReporting.AccountUserProFiles.Insert
     , AccountUserProFilesInsert'
 
     -- * Request Lenses
-    , aupfiQuotaUser
-    , aupfiPrettyPrint
-    , aupfiUserIP
     , aupfiProFileId
     , aupfiPayload
-    , aupfiKey
-    , aupfiOAuthToken
-    , aupfiFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,84 +46,34 @@ type AccountUserProFilesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "accountUserProfiles" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] AccountUserProFile :>
-                           Post '[JSON] AccountUserProFile
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] AccountUserProFile :>
+               Post '[JSON] AccountUserProFile
 
 -- | Inserts a new account user profile.
 --
 -- /See:/ 'accountUserProFilesInsert'' smart constructor.
 data AccountUserProFilesInsert' = AccountUserProFilesInsert'
-    { _aupfiQuotaUser   :: !(Maybe Text)
-    , _aupfiPrettyPrint :: !Bool
-    , _aupfiUserIP      :: !(Maybe Text)
-    , _aupfiProFileId   :: !Int64
-    , _aupfiPayload     :: !AccountUserProFile
-    , _aupfiKey         :: !(Maybe AuthKey)
-    , _aupfiOAuthToken  :: !(Maybe OAuthToken)
-    , _aupfiFields      :: !(Maybe Text)
+    { _aupfiProFileId :: !Int64
+    , _aupfiPayload   :: !AccountUserProFile
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProFilesInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aupfiQuotaUser'
---
--- * 'aupfiPrettyPrint'
---
--- * 'aupfiUserIP'
---
 -- * 'aupfiProFileId'
 --
 -- * 'aupfiPayload'
---
--- * 'aupfiKey'
---
--- * 'aupfiOAuthToken'
---
--- * 'aupfiFields'
 accountUserProFilesInsert'
     :: Int64 -- ^ 'profileId'
     -> AccountUserProFile -- ^ 'payload'
     -> AccountUserProFilesInsert'
 accountUserProFilesInsert' pAupfiProFileId_ pAupfiPayload_ =
     AccountUserProFilesInsert'
-    { _aupfiQuotaUser = Nothing
-    , _aupfiPrettyPrint = True
-    , _aupfiUserIP = Nothing
-    , _aupfiProFileId = pAupfiProFileId_
+    { _aupfiProFileId = pAupfiProFileId_
     , _aupfiPayload = pAupfiPayload_
-    , _aupfiKey = Nothing
-    , _aupfiOAuthToken = Nothing
-    , _aupfiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-aupfiQuotaUser :: Lens' AccountUserProFilesInsert' (Maybe Text)
-aupfiQuotaUser
-  = lens _aupfiQuotaUser
-      (\ s a -> s{_aupfiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aupfiPrettyPrint :: Lens' AccountUserProFilesInsert' Bool
-aupfiPrettyPrint
-  = lens _aupfiPrettyPrint
-      (\ s a -> s{_aupfiPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-aupfiUserIP :: Lens' AccountUserProFilesInsert' (Maybe Text)
-aupfiUserIP
-  = lens _aupfiUserIP (\ s a -> s{_aupfiUserIP = a})
 
 -- | User profile ID associated with this request.
 aupfiProFileId :: Lens' AccountUserProFilesInsert' Int64
@@ -142,42 +86,14 @@ aupfiPayload :: Lens' AccountUserProFilesInsert' AccountUserProFile
 aupfiPayload
   = lens _aupfiPayload (\ s a -> s{_aupfiPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aupfiKey :: Lens' AccountUserProFilesInsert' (Maybe AuthKey)
-aupfiKey = lens _aupfiKey (\ s a -> s{_aupfiKey = a})
-
--- | OAuth 2.0 token for the current user.
-aupfiOAuthToken :: Lens' AccountUserProFilesInsert' (Maybe OAuthToken)
-aupfiOAuthToken
-  = lens _aupfiOAuthToken
-      (\ s a -> s{_aupfiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-aupfiFields :: Lens' AccountUserProFilesInsert' (Maybe Text)
-aupfiFields
-  = lens _aupfiFields (\ s a -> s{_aupfiFields = a})
-
-instance GoogleAuth AccountUserProFilesInsert' where
-        _AuthKey = aupfiKey . _Just
-        _AuthToken = aupfiOAuthToken . _Just
-
 instance GoogleRequest AccountUserProFilesInsert'
          where
         type Rs AccountUserProFilesInsert' =
              AccountUserProFile
-        request = requestWith dFAReportingRequest
-        requestWith rq AccountUserProFilesInsert'{..}
-          = go _aupfiProFileId _aupfiQuotaUser
-              (Just _aupfiPrettyPrint)
-              _aupfiUserIP
-              _aupfiFields
-              _aupfiKey
-              _aupfiOAuthToken
-              (Just AltJSON)
-              _aupfiPayload
+        requestClient AccountUserProFilesInsert'{..}
+          = go _aupfiProFileId (Just AltJSON) _aupfiPayload
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountUserProFilesInsertResource)
-                      rq
+                      mempty

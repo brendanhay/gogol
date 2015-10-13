@@ -34,8 +34,6 @@ module Network.Google.Resource.Genomics.Datasets.Patch
 
     -- * Request Lenses
     , dpXgafv
-    , dpQuotaUser
-    , dpPrettyPrint
     , dpUploadProtocol
     , dpUpdateMask
     , dpPp
@@ -43,10 +41,7 @@ module Network.Google.Resource.Genomics.Datasets.Patch
     , dpUploadType
     , dpPayload
     , dpBearerToken
-    , dpKey
     , dpDatasetId
-    , dpOAuthToken
-    , dpFields
     , dpCallback
     ) where
 
@@ -67,22 +62,14 @@ type DatasetsPatchResource =
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
                          QueryParam "callback" Text :>
-                           QueryParam "quotaUser" Text :>
-                             QueryParam "prettyPrint" Bool :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] Dataset :>
-                                         Patch '[JSON] Dataset
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Dataset :> Patch '[JSON] Dataset
 
 -- | Updates a dataset. This method supports patch semantics.
 --
 -- /See:/ 'datasetsPatch'' smart constructor.
 data DatasetsPatch' = DatasetsPatch'
     { _dpXgafv          :: !(Maybe Text)
-    , _dpQuotaUser      :: !(Maybe Text)
-    , _dpPrettyPrint    :: !Bool
     , _dpUploadProtocol :: !(Maybe Text)
     , _dpUpdateMask     :: !(Maybe Text)
     , _dpPp             :: !Bool
@@ -90,10 +77,7 @@ data DatasetsPatch' = DatasetsPatch'
     , _dpUploadType     :: !(Maybe Text)
     , _dpPayload        :: !Dataset
     , _dpBearerToken    :: !(Maybe Text)
-    , _dpKey            :: !(Maybe AuthKey)
     , _dpDatasetId      :: !Text
-    , _dpOAuthToken     :: !(Maybe OAuthToken)
-    , _dpFields         :: !(Maybe Text)
     , _dpCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +86,6 @@ data DatasetsPatch' = DatasetsPatch'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dpXgafv'
---
--- * 'dpQuotaUser'
---
--- * 'dpPrettyPrint'
 --
 -- * 'dpUploadProtocol'
 --
@@ -121,13 +101,7 @@ data DatasetsPatch' = DatasetsPatch'
 --
 -- * 'dpBearerToken'
 --
--- * 'dpKey'
---
 -- * 'dpDatasetId'
---
--- * 'dpOAuthToken'
---
--- * 'dpFields'
 --
 -- * 'dpCallback'
 datasetsPatch'
@@ -137,8 +111,6 @@ datasetsPatch'
 datasetsPatch' pDpPayload_ pDpDatasetId_ =
     DatasetsPatch'
     { _dpXgafv = Nothing
-    , _dpQuotaUser = Nothing
-    , _dpPrettyPrint = True
     , _dpUploadProtocol = Nothing
     , _dpUpdateMask = Nothing
     , _dpPp = True
@@ -146,29 +118,13 @@ datasetsPatch' pDpPayload_ pDpDatasetId_ =
     , _dpUploadType = Nothing
     , _dpPayload = pDpPayload_
     , _dpBearerToken = Nothing
-    , _dpKey = Nothing
     , _dpDatasetId = pDpDatasetId_
-    , _dpOAuthToken = Nothing
-    , _dpFields = Nothing
     , _dpCallback = Nothing
     }
 
 -- | V1 error format.
 dpXgafv :: Lens' DatasetsPatch' (Maybe Text)
 dpXgafv = lens _dpXgafv (\ s a -> s{_dpXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-dpQuotaUser :: Lens' DatasetsPatch' (Maybe Text)
-dpQuotaUser
-  = lens _dpQuotaUser (\ s a -> s{_dpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-dpPrettyPrint :: Lens' DatasetsPatch' Bool
-dpPrettyPrint
-  = lens _dpPrettyPrint
-      (\ s a -> s{_dpPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 dpUploadProtocol :: Lens' DatasetsPatch' (Maybe Text)
@@ -209,39 +165,19 @@ dpBearerToken
   = lens _dpBearerToken
       (\ s a -> s{_dpBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-dpKey :: Lens' DatasetsPatch' (Maybe AuthKey)
-dpKey = lens _dpKey (\ s a -> s{_dpKey = a})
-
 -- | The ID of the dataset to be updated.
 dpDatasetId :: Lens' DatasetsPatch' Text
 dpDatasetId
   = lens _dpDatasetId (\ s a -> s{_dpDatasetId = a})
-
--- | OAuth 2.0 token for the current user.
-dpOAuthToken :: Lens' DatasetsPatch' (Maybe OAuthToken)
-dpOAuthToken
-  = lens _dpOAuthToken (\ s a -> s{_dpOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-dpFields :: Lens' DatasetsPatch' (Maybe Text)
-dpFields = lens _dpFields (\ s a -> s{_dpFields = a})
 
 -- | JSONP
 dpCallback :: Lens' DatasetsPatch' (Maybe Text)
 dpCallback
   = lens _dpCallback (\ s a -> s{_dpCallback = a})
 
-instance GoogleAuth DatasetsPatch' where
-        _AuthKey = dpKey . _Just
-        _AuthToken = dpOAuthToken . _Just
-
 instance GoogleRequest DatasetsPatch' where
         type Rs DatasetsPatch' = Dataset
-        request = requestWith genomicsRequest
-        requestWith rq DatasetsPatch'{..}
+        requestClient DatasetsPatch'{..}
           = go _dpDatasetId _dpXgafv _dpUploadProtocol
               _dpUpdateMask
               (Just _dpPp)
@@ -249,13 +185,9 @@ instance GoogleRequest DatasetsPatch' where
               _dpUploadType
               _dpBearerToken
               _dpCallback
-              _dpQuotaUser
-              (Just _dpPrettyPrint)
-              _dpFields
-              _dpKey
-              _dpOAuthToken
               (Just AltJSON)
               _dpPayload
+              genomicsService
           where go
-                  = clientBuild (Proxy :: Proxy DatasetsPatchResource)
-                      rq
+                  = buildClient (Proxy :: Proxy DatasetsPatchResource)
+                      mempty

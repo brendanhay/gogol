@@ -38,19 +38,13 @@ module Network.Google.Resource.AppsActivity.Activities.List
     , ActivitiesList'
 
     -- * Request Lenses
-    , alQuotaUser
-    , alPrettyPrint
-    , alUserIP
     , alDriveFileId
     , alDriveAncestorId
     , alGroupingStrategy
     , alUserId
-    , alKey
     , alSource
     , alPageToken
-    , alOAuthToken
     , alPageSize
-    , alFields
     ) where
 
 import           Network.Google.AppsActivity.Types
@@ -69,14 +63,8 @@ type ActivitiesListResource =
                QueryParam "source" Text :>
                  QueryParam "pageToken" Text :>
                    QueryParam "pageSize" Int32 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] ListActivitiesResponse
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] ListActivitiesResponse
 
 -- | Returns a list of activities visible to the current logged in user.
 -- Visible activities are determined by the visiblity settings of the
@@ -87,30 +75,18 @@ type ActivitiesListResource =
 --
 -- /See:/ 'activitiesList'' smart constructor.
 data ActivitiesList' = ActivitiesList'
-    { _alQuotaUser        :: !(Maybe Text)
-    , _alPrettyPrint      :: !Bool
-    , _alUserIP           :: !(Maybe Text)
-    , _alDriveFileId      :: !(Maybe Text)
+    { _alDriveFileId      :: !(Maybe Text)
     , _alDriveAncestorId  :: !(Maybe Text)
     , _alGroupingStrategy :: !ActivitiesListGroupingStrategy
     , _alUserId           :: !Text
-    , _alKey              :: !(Maybe AuthKey)
     , _alSource           :: !(Maybe Text)
     , _alPageToken        :: !(Maybe Text)
-    , _alOAuthToken       :: !(Maybe OAuthToken)
     , _alPageSize         :: !Int32
-    , _alFields           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'alQuotaUser'
---
--- * 'alPrettyPrint'
---
--- * 'alUserIP'
 --
 -- * 'alDriveFileId'
 --
@@ -120,53 +96,23 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'alUserId'
 --
--- * 'alKey'
---
 -- * 'alSource'
 --
 -- * 'alPageToken'
 --
--- * 'alOAuthToken'
---
 -- * 'alPageSize'
---
--- * 'alFields'
 activitiesList'
     :: ActivitiesList'
 activitiesList' =
     ActivitiesList'
-    { _alQuotaUser = Nothing
-    , _alPrettyPrint = True
-    , _alUserIP = Nothing
-    , _alDriveFileId = Nothing
+    { _alDriveFileId = Nothing
     , _alDriveAncestorId = Nothing
     , _alGroupingStrategy = DriveUi
     , _alUserId = "me"
-    , _alKey = Nothing
     , _alSource = Nothing
     , _alPageToken = Nothing
-    , _alOAuthToken = Nothing
     , _alPageSize = 50
-    , _alFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-alQuotaUser :: Lens' ActivitiesList' (Maybe Text)
-alQuotaUser
-  = lens _alQuotaUser (\ s a -> s{_alQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-alPrettyPrint :: Lens' ActivitiesList' Bool
-alPrettyPrint
-  = lens _alPrettyPrint
-      (\ s a -> s{_alPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-alUserIP :: Lens' ActivitiesList' (Maybe Text)
-alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | Identifies the Drive item to return activities for.
 alDriveFileId :: Lens' ActivitiesList' (Maybe Text)
@@ -193,12 +139,6 @@ alGroupingStrategy
 alUserId :: Lens' ActivitiesList' Text
 alUserId = lens _alUserId (\ s a -> s{_alUserId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-alKey :: Lens' ActivitiesList' (Maybe AuthKey)
-alKey = lens _alKey (\ s a -> s{_alKey = a})
-
 -- | The Google service from which to return activities. Possible values of
 -- source are: - drive.google.com
 alSource :: Lens' ActivitiesList' (Maybe Text)
@@ -209,42 +149,23 @@ alPageToken :: Lens' ActivitiesList' (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-alOAuthToken :: Lens' ActivitiesList' (Maybe OAuthToken)
-alOAuthToken
-  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
-
 -- | The maximum number of events to return on a page. The response includes
 -- a continuation token if there are more events.
 alPageSize :: Lens' ActivitiesList' Int32
 alPageSize
   = lens _alPageSize (\ s a -> s{_alPageSize = a})
 
--- | Selector specifying which fields to include in a partial response.
-alFields :: Lens' ActivitiesList' (Maybe Text)
-alFields = lens _alFields (\ s a -> s{_alFields = a})
-
-instance GoogleAuth ActivitiesList' where
-        _AuthKey = alKey . _Just
-        _AuthToken = alOAuthToken . _Just
-
 instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ListActivitiesResponse
-        request = requestWith appsActivityRequest
-        requestWith rq ActivitiesList'{..}
+        requestClient ActivitiesList'{..}
           = go _alDriveFileId _alDriveAncestorId
               (Just _alGroupingStrategy)
               (Just _alUserId)
               _alSource
               _alPageToken
               (Just _alPageSize)
-              _alQuotaUser
-              (Just _alPrettyPrint)
-              _alUserIP
-              _alFields
-              _alKey
-              _alOAuthToken
               (Just AltJSON)
+              appsActivityService
           where go
-                  = clientBuild (Proxy :: Proxy ActivitiesListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ActivitiesListResource)
+                      mempty

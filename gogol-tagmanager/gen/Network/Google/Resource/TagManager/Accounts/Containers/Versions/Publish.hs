@@ -33,16 +33,10 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
     , AccountsContainersVersionsPublish'
 
     -- * Request Lenses
-    , acvpQuotaUser
-    , acvpPrettyPrint
     , acvpContainerId
-    , acvpUserIP
     , acvpFingerprint
     , acvpContainerVersionId
     , acvpAccountId
-    , acvpKey
-    , acvpOAuthToken
-    , acvpFields
     ) where
 
 import           Network.Google.Prelude
@@ -59,54 +53,30 @@ type AccountsContainersVersionsPublishResource =
                Capture "containerVersionId" Text :>
                  "publish" :>
                    QueryParam "fingerprint" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   Post '[JSON] PublishContainerVersionResponse
+                     QueryParam "alt" AltJSON :>
+                       Post '[JSON] PublishContainerVersionResponse
 
 -- | Publishes a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsPublish'' smart constructor.
 data AccountsContainersVersionsPublish' = AccountsContainersVersionsPublish'
-    { _acvpQuotaUser          :: !(Maybe Text)
-    , _acvpPrettyPrint        :: !Bool
-    , _acvpContainerId        :: !Text
-    , _acvpUserIP             :: !(Maybe Text)
+    { _acvpContainerId        :: !Text
     , _acvpFingerprint        :: !(Maybe Text)
     , _acvpContainerVersionId :: !Text
     , _acvpAccountId          :: !Text
-    , _acvpKey                :: !(Maybe AuthKey)
-    , _acvpOAuthToken         :: !(Maybe OAuthToken)
-    , _acvpFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsPublish'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acvpQuotaUser'
---
--- * 'acvpPrettyPrint'
---
 -- * 'acvpContainerId'
---
--- * 'acvpUserIP'
 --
 -- * 'acvpFingerprint'
 --
 -- * 'acvpContainerVersionId'
 --
 -- * 'acvpAccountId'
---
--- * 'acvpKey'
---
--- * 'acvpOAuthToken'
---
--- * 'acvpFields'
 accountsContainersVersionsPublish'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'containerVersionId'
@@ -114,43 +84,17 @@ accountsContainersVersionsPublish'
     -> AccountsContainersVersionsPublish'
 accountsContainersVersionsPublish' pAcvpContainerId_ pAcvpContainerVersionId_ pAcvpAccountId_ =
     AccountsContainersVersionsPublish'
-    { _acvpQuotaUser = Nothing
-    , _acvpPrettyPrint = True
-    , _acvpContainerId = pAcvpContainerId_
-    , _acvpUserIP = Nothing
+    { _acvpContainerId = pAcvpContainerId_
     , _acvpFingerprint = Nothing
     , _acvpContainerVersionId = pAcvpContainerVersionId_
     , _acvpAccountId = pAcvpAccountId_
-    , _acvpKey = Nothing
-    , _acvpOAuthToken = Nothing
-    , _acvpFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-acvpQuotaUser :: Lens' AccountsContainersVersionsPublish' (Maybe Text)
-acvpQuotaUser
-  = lens _acvpQuotaUser
-      (\ s a -> s{_acvpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-acvpPrettyPrint :: Lens' AccountsContainersVersionsPublish' Bool
-acvpPrettyPrint
-  = lens _acvpPrettyPrint
-      (\ s a -> s{_acvpPrettyPrint = a})
 
 -- | The GTM Container ID.
 acvpContainerId :: Lens' AccountsContainersVersionsPublish' Text
 acvpContainerId
   = lens _acvpContainerId
       (\ s a -> s{_acvpContainerId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-acvpUserIP :: Lens' AccountsContainersVersionsPublish' (Maybe Text)
-acvpUserIP
-  = lens _acvpUserIP (\ s a -> s{_acvpUserIP = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- container version in storage.
@@ -171,46 +115,18 @@ acvpAccountId
   = lens _acvpAccountId
       (\ s a -> s{_acvpAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-acvpKey :: Lens' AccountsContainersVersionsPublish' (Maybe AuthKey)
-acvpKey = lens _acvpKey (\ s a -> s{_acvpKey = a})
-
--- | OAuth 2.0 token for the current user.
-acvpOAuthToken :: Lens' AccountsContainersVersionsPublish' (Maybe OAuthToken)
-acvpOAuthToken
-  = lens _acvpOAuthToken
-      (\ s a -> s{_acvpOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-acvpFields :: Lens' AccountsContainersVersionsPublish' (Maybe Text)
-acvpFields
-  = lens _acvpFields (\ s a -> s{_acvpFields = a})
-
-instance GoogleAuth
-         AccountsContainersVersionsPublish' where
-        _AuthKey = acvpKey . _Just
-        _AuthToken = acvpOAuthToken . _Just
-
 instance GoogleRequest
          AccountsContainersVersionsPublish' where
         type Rs AccountsContainersVersionsPublish' =
              PublishContainerVersionResponse
-        request = requestWith tagManagerRequest
-        requestWith rq AccountsContainersVersionsPublish'{..}
+        requestClient AccountsContainersVersionsPublish'{..}
           = go _acvpAccountId _acvpContainerId
               _acvpContainerVersionId
               _acvpFingerprint
-              _acvpQuotaUser
-              (Just _acvpPrettyPrint)
-              _acvpUserIP
-              _acvpFields
-              _acvpKey
-              _acvpOAuthToken
               (Just AltJSON)
+              tagManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy AccountsContainersVersionsPublishResource)
-                      rq
+                      mempty

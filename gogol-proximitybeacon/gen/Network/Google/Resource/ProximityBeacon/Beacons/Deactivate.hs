@@ -38,17 +38,12 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
 
     -- * Request Lenses
     , beaXgafv
-    , beaQuotaUser
-    , beaPrettyPrint
     , beaUploadProtocol
     , beaPp
     , beaAccessToken
     , beaBeaconName
     , beaUploadType
     , beaBearerToken
-    , beaKey
-    , beaOAuthToken
-    , beaFields
     , beaCallback
     ) where
 
@@ -67,12 +62,7 @@ type BeaconsDeactivateResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :> Post '[JSON] Empty
+                       QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Deactivates a beacon. Once deactivated, the API will not return
 -- information nor attachment data for the beacon when queried via
@@ -83,17 +73,12 @@ type BeaconsDeactivateResource =
 -- /See:/ 'beaconsDeactivate'' smart constructor.
 data BeaconsDeactivate' = BeaconsDeactivate'
     { _beaXgafv          :: !(Maybe Text)
-    , _beaQuotaUser      :: !(Maybe Text)
-    , _beaPrettyPrint    :: !Bool
     , _beaUploadProtocol :: !(Maybe Text)
     , _beaPp             :: !Bool
     , _beaAccessToken    :: !(Maybe Text)
     , _beaBeaconName     :: !Text
     , _beaUploadType     :: !(Maybe Text)
     , _beaBearerToken    :: !(Maybe Text)
-    , _beaKey            :: !(Maybe AuthKey)
-    , _beaOAuthToken     :: !(Maybe OAuthToken)
-    , _beaFields         :: !(Maybe Text)
     , _beaCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +87,6 @@ data BeaconsDeactivate' = BeaconsDeactivate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'beaXgafv'
---
--- * 'beaQuotaUser'
---
--- * 'beaPrettyPrint'
 --
 -- * 'beaUploadProtocol'
 --
@@ -119,12 +100,6 @@ data BeaconsDeactivate' = BeaconsDeactivate'
 --
 -- * 'beaBearerToken'
 --
--- * 'beaKey'
---
--- * 'beaOAuthToken'
---
--- * 'beaFields'
---
 -- * 'beaCallback'
 beaconsDeactivate'
     :: Text -- ^ 'beaconName'
@@ -132,36 +107,18 @@ beaconsDeactivate'
 beaconsDeactivate' pBeaBeaconName_ =
     BeaconsDeactivate'
     { _beaXgafv = Nothing
-    , _beaQuotaUser = Nothing
-    , _beaPrettyPrint = True
     , _beaUploadProtocol = Nothing
     , _beaPp = True
     , _beaAccessToken = Nothing
     , _beaBeaconName = pBeaBeaconName_
     , _beaUploadType = Nothing
     , _beaBearerToken = Nothing
-    , _beaKey = Nothing
-    , _beaOAuthToken = Nothing
-    , _beaFields = Nothing
     , _beaCallback = Nothing
     }
 
 -- | V1 error format.
 beaXgafv :: Lens' BeaconsDeactivate' (Maybe Text)
 beaXgafv = lens _beaXgafv (\ s a -> s{_beaXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-beaQuotaUser :: Lens' BeaconsDeactivate' (Maybe Text)
-beaQuotaUser
-  = lens _beaQuotaUser (\ s a -> s{_beaQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-beaPrettyPrint :: Lens' BeaconsDeactivate' Bool
-beaPrettyPrint
-  = lens _beaPrettyPrint
-      (\ s a -> s{_beaPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 beaUploadProtocol :: Lens' BeaconsDeactivate' (Maybe Text)
@@ -197,49 +154,23 @@ beaBearerToken
   = lens _beaBearerToken
       (\ s a -> s{_beaBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-beaKey :: Lens' BeaconsDeactivate' (Maybe AuthKey)
-beaKey = lens _beaKey (\ s a -> s{_beaKey = a})
-
--- | OAuth 2.0 token for the current user.
-beaOAuthToken :: Lens' BeaconsDeactivate' (Maybe OAuthToken)
-beaOAuthToken
-  = lens _beaOAuthToken
-      (\ s a -> s{_beaOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-beaFields :: Lens' BeaconsDeactivate' (Maybe Text)
-beaFields
-  = lens _beaFields (\ s a -> s{_beaFields = a})
-
 -- | JSONP
 beaCallback :: Lens' BeaconsDeactivate' (Maybe Text)
 beaCallback
   = lens _beaCallback (\ s a -> s{_beaCallback = a})
 
-instance GoogleAuth BeaconsDeactivate' where
-        _AuthKey = beaKey . _Just
-        _AuthToken = beaOAuthToken . _Just
-
 instance GoogleRequest BeaconsDeactivate' where
         type Rs BeaconsDeactivate' = Empty
-        request = requestWith proximityBeaconRequest
-        requestWith rq BeaconsDeactivate'{..}
+        requestClient BeaconsDeactivate'{..}
           = go _beaBeaconName _beaXgafv _beaUploadProtocol
               (Just _beaPp)
               _beaAccessToken
               _beaUploadType
               _beaBearerToken
               _beaCallback
-              _beaQuotaUser
-              (Just _beaPrettyPrint)
-              _beaFields
-              _beaKey
-              _beaOAuthToken
               (Just AltJSON)
+              proximityBeaconService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy BeaconsDeactivateResource)
-                      rq
+                      mempty

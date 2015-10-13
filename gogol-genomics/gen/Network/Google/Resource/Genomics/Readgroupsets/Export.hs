@@ -38,8 +38,6 @@ module Network.Google.Resource.Genomics.Readgroupsets.Export
 
     -- * Request Lenses
     , reXgafv
-    , reQuotaUser
-    , rePrettyPrint
     , reReadGroupSetId
     , reUploadProtocol
     , rePp
@@ -47,9 +45,6 @@ module Network.Google.Resource.Genomics.Readgroupsets.Export
     , reUploadType
     , rePayload
     , reBearerToken
-    , reKey
-    , reOAuthToken
-    , reFields
     , reCallback
     ) where
 
@@ -69,14 +64,9 @@ type ReadgroupsetsExportResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] ExportReadGroupSetRequest
-                                       :> Post '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] ExportReadGroupSetRequest :>
+                             Post '[JSON] Operation
 
 -- | Exports a read group set to a BAM file in Google Cloud Storage. Note
 -- that currently there may be some differences between exported BAM files
@@ -87,8 +77,6 @@ type ReadgroupsetsExportResource =
 -- /See:/ 'readgroupsetsExport'' smart constructor.
 data ReadgroupsetsExport' = ReadgroupsetsExport'
     { _reXgafv          :: !(Maybe Text)
-    , _reQuotaUser      :: !(Maybe Text)
-    , _rePrettyPrint    :: !Bool
     , _reReadGroupSetId :: !Text
     , _reUploadProtocol :: !(Maybe Text)
     , _rePp             :: !Bool
@@ -96,9 +84,6 @@ data ReadgroupsetsExport' = ReadgroupsetsExport'
     , _reUploadType     :: !(Maybe Text)
     , _rePayload        :: !ExportReadGroupSetRequest
     , _reBearerToken    :: !(Maybe Text)
-    , _reKey            :: !(Maybe AuthKey)
-    , _reOAuthToken     :: !(Maybe OAuthToken)
-    , _reFields         :: !(Maybe Text)
     , _reCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -107,10 +92,6 @@ data ReadgroupsetsExport' = ReadgroupsetsExport'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'reXgafv'
---
--- * 'reQuotaUser'
---
--- * 'rePrettyPrint'
 --
 -- * 'reReadGroupSetId'
 --
@@ -126,12 +107,6 @@ data ReadgroupsetsExport' = ReadgroupsetsExport'
 --
 -- * 'reBearerToken'
 --
--- * 'reKey'
---
--- * 'reOAuthToken'
---
--- * 'reFields'
---
 -- * 'reCallback'
 readgroupsetsExport'
     :: Text -- ^ 'readGroupSetId'
@@ -140,8 +115,6 @@ readgroupsetsExport'
 readgroupsetsExport' pReReadGroupSetId_ pRePayload_ =
     ReadgroupsetsExport'
     { _reXgafv = Nothing
-    , _reQuotaUser = Nothing
-    , _rePrettyPrint = True
     , _reReadGroupSetId = pReReadGroupSetId_
     , _reUploadProtocol = Nothing
     , _rePp = True
@@ -149,28 +122,12 @@ readgroupsetsExport' pReReadGroupSetId_ pRePayload_ =
     , _reUploadType = Nothing
     , _rePayload = pRePayload_
     , _reBearerToken = Nothing
-    , _reKey = Nothing
-    , _reOAuthToken = Nothing
-    , _reFields = Nothing
     , _reCallback = Nothing
     }
 
 -- | V1 error format.
 reXgafv :: Lens' ReadgroupsetsExport' (Maybe Text)
 reXgafv = lens _reXgafv (\ s a -> s{_reXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-reQuotaUser :: Lens' ReadgroupsetsExport' (Maybe Text)
-reQuotaUser
-  = lens _reQuotaUser (\ s a -> s{_reQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rePrettyPrint :: Lens' ReadgroupsetsExport' Bool
-rePrettyPrint
-  = lens _rePrettyPrint
-      (\ s a -> s{_rePrettyPrint = a})
 
 -- | Required. The ID of the read group set to export.
 reReadGroupSetId :: Lens' ReadgroupsetsExport' Text
@@ -210,48 +167,24 @@ reBearerToken
   = lens _reBearerToken
       (\ s a -> s{_reBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-reKey :: Lens' ReadgroupsetsExport' (Maybe AuthKey)
-reKey = lens _reKey (\ s a -> s{_reKey = a})
-
--- | OAuth 2.0 token for the current user.
-reOAuthToken :: Lens' ReadgroupsetsExport' (Maybe OAuthToken)
-reOAuthToken
-  = lens _reOAuthToken (\ s a -> s{_reOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-reFields :: Lens' ReadgroupsetsExport' (Maybe Text)
-reFields = lens _reFields (\ s a -> s{_reFields = a})
-
 -- | JSONP
 reCallback :: Lens' ReadgroupsetsExport' (Maybe Text)
 reCallback
   = lens _reCallback (\ s a -> s{_reCallback = a})
 
-instance GoogleAuth ReadgroupsetsExport' where
-        _AuthKey = reKey . _Just
-        _AuthToken = reOAuthToken . _Just
-
 instance GoogleRequest ReadgroupsetsExport' where
         type Rs ReadgroupsetsExport' = Operation
-        request = requestWith genomicsRequest
-        requestWith rq ReadgroupsetsExport'{..}
+        requestClient ReadgroupsetsExport'{..}
           = go _reReadGroupSetId _reXgafv _reUploadProtocol
               (Just _rePp)
               _reAccessToken
               _reUploadType
               _reBearerToken
               _reCallback
-              _reQuotaUser
-              (Just _rePrettyPrint)
-              _reFields
-              _reKey
-              _reOAuthToken
               (Just AltJSON)
               _rePayload
+              genomicsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ReadgroupsetsExportResource)
-                      rq
+                      mempty

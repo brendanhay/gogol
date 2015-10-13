@@ -33,13 +33,7 @@ module Network.Google.Resource.AndroidEnterprise.Collections.List
     , CollectionsList'
 
     -- * Request Lenses
-    , cQuotaUser
-    , cPrettyPrint
     , cEnterpriseId
-    , cUserIP
-    , cKey
-    , cOAuthToken
-    , cFields
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
@@ -51,70 +45,28 @@ type CollectionsListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "collections" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] CollectionsListResponse
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] CollectionsListResponse
 
 -- | Retrieves the IDs of all the collections for an enterprise.
 --
 -- /See:/ 'collectionsList'' smart constructor.
-data CollectionsList' = CollectionsList'
-    { _cQuotaUser    :: !(Maybe Text)
-    , _cPrettyPrint  :: !Bool
-    , _cEnterpriseId :: !Text
-    , _cUserIP       :: !(Maybe Text)
-    , _cKey          :: !(Maybe AuthKey)
-    , _cOAuthToken   :: !(Maybe OAuthToken)
-    , _cFields       :: !(Maybe Text)
+newtype CollectionsList' = CollectionsList'
+    { _cEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cQuotaUser'
---
--- * 'cPrettyPrint'
---
 -- * 'cEnterpriseId'
---
--- * 'cUserIP'
---
--- * 'cKey'
---
--- * 'cOAuthToken'
---
--- * 'cFields'
 collectionsList'
     :: Text -- ^ 'enterpriseId'
     -> CollectionsList'
 collectionsList' pCEnterpriseId_ =
     CollectionsList'
-    { _cQuotaUser = Nothing
-    , _cPrettyPrint = True
-    , _cEnterpriseId = pCEnterpriseId_
-    , _cUserIP = Nothing
-    , _cKey = Nothing
-    , _cOAuthToken = Nothing
-    , _cFields = Nothing
+    { _cEnterpriseId = pCEnterpriseId_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-cQuotaUser :: Lens' CollectionsList' (Maybe Text)
-cQuotaUser
-  = lens _cQuotaUser (\ s a -> s{_cQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cPrettyPrint :: Lens' CollectionsList' Bool
-cPrettyPrint
-  = lens _cPrettyPrint (\ s a -> s{_cPrettyPrint = a})
 
 -- | The ID of the enterprise.
 cEnterpriseId :: Lens' CollectionsList' Text
@@ -122,41 +74,12 @@ cEnterpriseId
   = lens _cEnterpriseId
       (\ s a -> s{_cEnterpriseId = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-cUserIP :: Lens' CollectionsList' (Maybe Text)
-cUserIP = lens _cUserIP (\ s a -> s{_cUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cKey :: Lens' CollectionsList' (Maybe AuthKey)
-cKey = lens _cKey (\ s a -> s{_cKey = a})
-
--- | OAuth 2.0 token for the current user.
-cOAuthToken :: Lens' CollectionsList' (Maybe OAuthToken)
-cOAuthToken
-  = lens _cOAuthToken (\ s a -> s{_cOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cFields :: Lens' CollectionsList' (Maybe Text)
-cFields = lens _cFields (\ s a -> s{_cFields = a})
-
-instance GoogleAuth CollectionsList' where
-        _AuthKey = cKey . _Just
-        _AuthToken = cOAuthToken . _Just
-
 instance GoogleRequest CollectionsList' where
         type Rs CollectionsList' = CollectionsListResponse
-        request = requestWith androidEnterpriseRequest
-        requestWith rq CollectionsList'{..}
-          = go _cEnterpriseId _cQuotaUser (Just _cPrettyPrint)
-              _cUserIP
-              _cFields
-              _cKey
-              _cOAuthToken
-              (Just AltJSON)
+        requestClient CollectionsList'{..}
+          = go _cEnterpriseId (Just AltJSON)
+              androidEnterpriseService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CollectionsListResource)
-                      rq
+                      mempty

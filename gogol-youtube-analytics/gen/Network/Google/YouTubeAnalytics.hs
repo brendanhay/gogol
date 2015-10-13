@@ -18,8 +18,11 @@
 -- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference>
 module Network.Google.YouTubeAnalytics
     (
+    -- * Service Configuration
+      youTubeAnalyticsService
+
     -- * API Declaration
-      YouTubeAnalyticsAPI
+    , YouTubeAnalyticsAPI
 
     -- * Resources
 

@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference>
 module Network.Google.Books
     (
+    -- * Service Configuration
+      booksService
+
     -- * API Declaration
-      BooksAPI
+    , BooksAPI
 
     -- * Resources
 

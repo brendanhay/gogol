@@ -36,8 +36,6 @@ module Network.Google.Resource.Partners.Companies.List
     , clLanguageCodes
     , clXgafv
     , clMaxMonthlyBudgetUnits
-    , clQuotaUser
-    , clPrettyPrint
     , clUploadProtocol
     , clOrderBy
     , clPp
@@ -49,7 +47,6 @@ module Network.Google.Resource.Partners.Companies.List
     , clIndustries
     , clRequestMetadataPartnersSessionId
     , clBearerToken
-    , clKey
     , clMaxMonthlyBudgetNanos
     , clRequestMetadataLocale
     , clView
@@ -59,7 +56,6 @@ module Network.Google.Resource.Partners.Companies.List
     , clWebsiteURL
     , clPageToken
     , clRequestMetadataTrafficSourceTrafficSubId
-    , clOAuthToken
     , clGpsMotivations
     , clPageSize
     , clMinMonthlyBudgetCurrencyCode
@@ -67,7 +63,6 @@ module Network.Google.Resource.Partners.Companies.List
     , clRequestMetadataUserOverridesUserId
     , clMinMonthlyBudgetUnits
     , clRequestMetadataTrafficSourceTrafficSourceId
-    , clFields
     , clCallback
     ) where
 
@@ -151,32 +146,12 @@ type CompaniesListResource =
                                                                        Text
                                                                        :>
                                                                        QueryParam
-                                                                         "quotaUser"
-                                                                         Text
+                                                                         "alt"
+                                                                         AltJSON
                                                                          :>
-                                                                         QueryParam
-                                                                           "prettyPrint"
-                                                                           Bool
-                                                                           :>
-                                                                           QueryParam
-                                                                             "fields"
-                                                                             Text
-                                                                             :>
-                                                                             QueryParam
-                                                                               "key"
-                                                                               AuthKey
-                                                                               :>
-                                                                               Header
-                                                                                 "Authorization"
-                                                                                 OAuthToken
-                                                                                 :>
-                                                                                 QueryParam
-                                                                                   "alt"
-                                                                                   AltJSON
-                                                                                   :>
-                                                                                   Get
-                                                                                     '[JSON]
-                                                                                     ListCompaniesResponse
+                                                                         Get
+                                                                           '[JSON]
+                                                                           ListCompaniesResponse
 
 -- | Lists companies.
 --
@@ -185,8 +160,6 @@ data CompaniesList' = CompaniesList'
     { _clLanguageCodes                               :: !(Maybe [Text])
     , _clXgafv                                       :: !(Maybe Text)
     , _clMaxMonthlyBudgetUnits                       :: !(Maybe Int64)
-    , _clQuotaUser                                   :: !(Maybe Text)
-    , _clPrettyPrint                                 :: !Bool
     , _clUploadProtocol                              :: !(Maybe Text)
     , _clOrderBy                                     :: !(Maybe Text)
     , _clPp                                          :: !Bool
@@ -198,7 +171,6 @@ data CompaniesList' = CompaniesList'
     , _clIndustries                                  :: !(Maybe [Text])
     , _clRequestMetadataPartnersSessionId            :: !(Maybe Text)
     , _clBearerToken                                 :: !(Maybe Text)
-    , _clKey                                         :: !(Maybe AuthKey)
     , _clMaxMonthlyBudgetNanos                       :: !(Maybe Int32)
     , _clRequestMetadataLocale                       :: !(Maybe Text)
     , _clView                                        :: !(Maybe Text)
@@ -208,7 +180,6 @@ data CompaniesList' = CompaniesList'
     , _clWebsiteURL                                  :: !(Maybe Text)
     , _clPageToken                                   :: !(Maybe Text)
     , _clRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _clOAuthToken                                  :: !(Maybe OAuthToken)
     , _clGpsMotivations                              :: !(Maybe [Text])
     , _clPageSize                                    :: !(Maybe Int32)
     , _clMinMonthlyBudgetCurrencyCode                :: !(Maybe Text)
@@ -216,7 +187,6 @@ data CompaniesList' = CompaniesList'
     , _clRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _clMinMonthlyBudgetUnits                       :: !(Maybe Int64)
     , _clRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _clFields                                      :: !(Maybe Text)
     , _clCallback                                    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -229,10 +199,6 @@ data CompaniesList' = CompaniesList'
 -- * 'clXgafv'
 --
 -- * 'clMaxMonthlyBudgetUnits'
---
--- * 'clQuotaUser'
---
--- * 'clPrettyPrint'
 --
 -- * 'clUploadProtocol'
 --
@@ -256,8 +222,6 @@ data CompaniesList' = CompaniesList'
 --
 -- * 'clBearerToken'
 --
--- * 'clKey'
---
 -- * 'clMaxMonthlyBudgetNanos'
 --
 -- * 'clRequestMetadataLocale'
@@ -276,8 +240,6 @@ data CompaniesList' = CompaniesList'
 --
 -- * 'clRequestMetadataTrafficSourceTrafficSubId'
 --
--- * 'clOAuthToken'
---
 -- * 'clGpsMotivations'
 --
 -- * 'clPageSize'
@@ -292,8 +254,6 @@ data CompaniesList' = CompaniesList'
 --
 -- * 'clRequestMetadataTrafficSourceTrafficSourceId'
 --
--- * 'clFields'
---
 -- * 'clCallback'
 companiesList'
     :: CompaniesList'
@@ -302,8 +262,6 @@ companiesList' =
     { _clLanguageCodes = Nothing
     , _clXgafv = Nothing
     , _clMaxMonthlyBudgetUnits = Nothing
-    , _clQuotaUser = Nothing
-    , _clPrettyPrint = True
     , _clUploadProtocol = Nothing
     , _clOrderBy = Nothing
     , _clPp = True
@@ -315,7 +273,6 @@ companiesList' =
     , _clIndustries = Nothing
     , _clRequestMetadataPartnersSessionId = Nothing
     , _clBearerToken = Nothing
-    , _clKey = Nothing
     , _clMaxMonthlyBudgetNanos = Nothing
     , _clRequestMetadataLocale = Nothing
     , _clView = Nothing
@@ -325,7 +282,6 @@ companiesList' =
     , _clWebsiteURL = Nothing
     , _clPageToken = Nothing
     , _clRequestMetadataTrafficSourceTrafficSubId = Nothing
-    , _clOAuthToken = Nothing
     , _clGpsMotivations = Nothing
     , _clPageSize = Nothing
     , _clMinMonthlyBudgetCurrencyCode = Nothing
@@ -333,7 +289,6 @@ companiesList' =
     , _clRequestMetadataUserOverridesUserId = Nothing
     , _clMinMonthlyBudgetUnits = Nothing
     , _clRequestMetadataTrafficSourceTrafficSourceId = Nothing
-    , _clFields = Nothing
     , _clCallback = Nothing
     }
 
@@ -357,19 +312,6 @@ clMaxMonthlyBudgetUnits :: Lens' CompaniesList' (Maybe Int64)
 clMaxMonthlyBudgetUnits
   = lens _clMaxMonthlyBudgetUnits
       (\ s a -> s{_clMaxMonthlyBudgetUnits = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-clQuotaUser :: Lens' CompaniesList' (Maybe Text)
-clQuotaUser
-  = lens _clQuotaUser (\ s a -> s{_clQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-clPrettyPrint :: Lens' CompaniesList' Bool
-clPrettyPrint
-  = lens _clPrettyPrint
-      (\ s a -> s{_clPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 clUploadProtocol :: Lens' CompaniesList' (Maybe Text)
@@ -442,12 +384,6 @@ clBearerToken
   = lens _clBearerToken
       (\ s a -> s{_clBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-clKey :: Lens' CompaniesList' (Maybe AuthKey)
-clKey = lens _clKey (\ s a -> s{_clKey = a})
-
 -- | Number of nano (10^-9) units of the amount. The value must be between
 -- -999,999,999 and +999,999,999 inclusive. If \`units\` is positive,
 -- \`nanos\` must be positive or zero. If \`units\` is zero, \`nanos\` can
@@ -513,11 +449,6 @@ clRequestMetadataTrafficSourceTrafficSubId
       (\ s a ->
          s{_clRequestMetadataTrafficSourceTrafficSubId = a})
 
--- | OAuth 2.0 token for the current user.
-clOAuthToken :: Lens' CompaniesList' (Maybe OAuthToken)
-clOAuthToken
-  = lens _clOAuthToken (\ s a -> s{_clOAuthToken = a})
-
 -- | List of reasons for using Google Partner Search to get companies.
 clGpsMotivations :: Lens' CompaniesList' [Text]
 clGpsMotivations
@@ -568,23 +499,14 @@ clRequestMetadataTrafficSourceTrafficSourceId
          s{_clRequestMetadataTrafficSourceTrafficSourceId =
              a})
 
--- | Selector specifying which fields to include in a partial response.
-clFields :: Lens' CompaniesList' (Maybe Text)
-clFields = lens _clFields (\ s a -> s{_clFields = a})
-
 -- | JSONP
 clCallback :: Lens' CompaniesList' (Maybe Text)
 clCallback
   = lens _clCallback (\ s a -> s{_clCallback = a})
 
-instance GoogleAuth CompaniesList' where
-        _AuthKey = clKey . _Just
-        _AuthToken = clOAuthToken . _Just
-
 instance GoogleRequest CompaniesList' where
         type Rs CompaniesList' = ListCompaniesResponse
-        request = requestWith partnersRequest
-        requestWith rq CompaniesList'{..}
+        requestClient CompaniesList'{..}
           = go (_clLanguageCodes ^. _Default) _clXgafv
               _clMaxMonthlyBudgetUnits
               _clUploadProtocol
@@ -615,12 +537,8 @@ instance GoogleRequest CompaniesList' where
               _clMinMonthlyBudgetUnits
               _clRequestMetadataTrafficSourceTrafficSourceId
               _clCallback
-              _clQuotaUser
-              (Just _clPrettyPrint)
-              _clFields
-              _clKey
-              _clOAuthToken
               (Just AltJSON)
+              partnersService
           where go
-                  = clientBuild (Proxy :: Proxy CompaniesListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy CompaniesListResource)
+                      mempty

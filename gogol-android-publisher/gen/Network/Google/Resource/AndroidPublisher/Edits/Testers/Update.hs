@@ -33,16 +33,10 @@ module Network.Google.Resource.AndroidPublisher.Edits.Testers.Update
     , EditsTestersUpdate'
 
     -- * Request Lenses
-    , etutQuotaUser
     , etutTrack
-    , etutPrettyPrint
     , etutPackageName
-    , etutUserIP
     , etutPayload
-    , etutKey
-    , etutOAuthToken
     , etutEditId
-    , etutFields
     ) where
 
 import           Network.Google.AndroidPublisher.Types
@@ -56,53 +50,29 @@ type EditsTestersUpdateResource =
          Capture "editId" Text :>
            "testers" :>
              Capture "track" EditsTestersUpdateTrack :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Testers :> Put '[JSON] Testers
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Testers :> Put '[JSON] Testers
 
 --
 -- /See:/ 'editsTestersUpdate'' smart constructor.
 data EditsTestersUpdate' = EditsTestersUpdate'
-    { _etutQuotaUser   :: !(Maybe Text)
-    , _etutTrack       :: !EditsTestersUpdateTrack
-    , _etutPrettyPrint :: !Bool
+    { _etutTrack       :: !EditsTestersUpdateTrack
     , _etutPackageName :: !Text
-    , _etutUserIP      :: !(Maybe Text)
     , _etutPayload     :: !Testers
-    , _etutKey         :: !(Maybe AuthKey)
-    , _etutOAuthToken  :: !(Maybe OAuthToken)
     , _etutEditId      :: !Text
-    , _etutFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsTestersUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'etutQuotaUser'
---
 -- * 'etutTrack'
---
--- * 'etutPrettyPrint'
 --
 -- * 'etutPackageName'
 --
--- * 'etutUserIP'
---
 -- * 'etutPayload'
 --
--- * 'etutKey'
---
--- * 'etutOAuthToken'
---
 -- * 'etutEditId'
---
--- * 'etutFields'
 editsTestersUpdate'
     :: EditsTestersUpdateTrack -- ^ 'track'
     -> Text -- ^ 'packageName'
@@ -111,35 +81,15 @@ editsTestersUpdate'
     -> EditsTestersUpdate'
 editsTestersUpdate' pEtutTrack_ pEtutPackageName_ pEtutPayload_ pEtutEditId_ =
     EditsTestersUpdate'
-    { _etutQuotaUser = Nothing
-    , _etutTrack = pEtutTrack_
-    , _etutPrettyPrint = True
+    { _etutTrack = pEtutTrack_
     , _etutPackageName = pEtutPackageName_
-    , _etutUserIP = Nothing
     , _etutPayload = pEtutPayload_
-    , _etutKey = Nothing
-    , _etutOAuthToken = Nothing
     , _etutEditId = pEtutEditId_
-    , _etutFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-etutQuotaUser :: Lens' EditsTestersUpdate' (Maybe Text)
-etutQuotaUser
-  = lens _etutQuotaUser
-      (\ s a -> s{_etutQuotaUser = a})
 
 etutTrack :: Lens' EditsTestersUpdate' EditsTestersUpdateTrack
 etutTrack
   = lens _etutTrack (\ s a -> s{_etutTrack = a})
-
--- | Returns response with indentations and line breaks.
-etutPrettyPrint :: Lens' EditsTestersUpdate' Bool
-etutPrettyPrint
-  = lens _etutPrettyPrint
-      (\ s a -> s{_etutPrettyPrint = a})
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
@@ -148,57 +98,24 @@ etutPackageName
   = lens _etutPackageName
       (\ s a -> s{_etutPackageName = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-etutUserIP :: Lens' EditsTestersUpdate' (Maybe Text)
-etutUserIP
-  = lens _etutUserIP (\ s a -> s{_etutUserIP = a})
-
 -- | Multipart request metadata.
 etutPayload :: Lens' EditsTestersUpdate' Testers
 etutPayload
   = lens _etutPayload (\ s a -> s{_etutPayload = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-etutKey :: Lens' EditsTestersUpdate' (Maybe AuthKey)
-etutKey = lens _etutKey (\ s a -> s{_etutKey = a})
-
--- | OAuth 2.0 token for the current user.
-etutOAuthToken :: Lens' EditsTestersUpdate' (Maybe OAuthToken)
-etutOAuthToken
-  = lens _etutOAuthToken
-      (\ s a -> s{_etutOAuthToken = a})
 
 -- | Unique identifier for this edit.
 etutEditId :: Lens' EditsTestersUpdate' Text
 etutEditId
   = lens _etutEditId (\ s a -> s{_etutEditId = a})
 
--- | Selector specifying which fields to include in a partial response.
-etutFields :: Lens' EditsTestersUpdate' (Maybe Text)
-etutFields
-  = lens _etutFields (\ s a -> s{_etutFields = a})
-
-instance GoogleAuth EditsTestersUpdate' where
-        _AuthKey = etutKey . _Just
-        _AuthToken = etutOAuthToken . _Just
-
 instance GoogleRequest EditsTestersUpdate' where
         type Rs EditsTestersUpdate' = Testers
-        request = requestWith androidPublisherRequest
-        requestWith rq EditsTestersUpdate'{..}
+        requestClient EditsTestersUpdate'{..}
           = go _etutPackageName _etutEditId _etutTrack
-              _etutQuotaUser
-              (Just _etutPrettyPrint)
-              _etutUserIP
-              _etutFields
-              _etutKey
-              _etutOAuthToken
               (Just AltJSON)
               _etutPayload
+              androidPublisherService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy EditsTestersUpdateResource)
-                      rq
+                      mempty

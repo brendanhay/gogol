@@ -33,14 +33,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.List
     , EditsListingsList'
 
     -- * Request Lenses
-    , ellQuotaUser
-    , ellPrettyPrint
     , ellPackageName
-    , ellUserIP
-    , ellKey
-    , ellOAuthToken
     , ellEditId
-    , ellFields
     ) where
 
 import           Network.Google.AndroidPublisher.Types
@@ -53,76 +47,33 @@ type EditsListingsListResource =
        "edits" :>
          Capture "editId" Text :>
            "listings" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ListingsListResponse
+             QueryParam "alt" AltJSON :>
+               Get '[JSON] ListingsListResponse
 
 -- | Returns all of the localized store listings attached to this edit.
 --
 -- /See:/ 'editsListingsList'' smart constructor.
 data EditsListingsList' = EditsListingsList'
-    { _ellQuotaUser   :: !(Maybe Text)
-    , _ellPrettyPrint :: !Bool
-    , _ellPackageName :: !Text
-    , _ellUserIP      :: !(Maybe Text)
-    , _ellKey         :: !(Maybe AuthKey)
-    , _ellOAuthToken  :: !(Maybe OAuthToken)
+    { _ellPackageName :: !Text
     , _ellEditId      :: !Text
-    , _ellFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsListingsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ellQuotaUser'
---
--- * 'ellPrettyPrint'
---
 -- * 'ellPackageName'
 --
--- * 'ellUserIP'
---
--- * 'ellKey'
---
--- * 'ellOAuthToken'
---
 -- * 'ellEditId'
---
--- * 'ellFields'
 editsListingsList'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
     -> EditsListingsList'
 editsListingsList' pEllPackageName_ pEllEditId_ =
     EditsListingsList'
-    { _ellQuotaUser = Nothing
-    , _ellPrettyPrint = True
-    , _ellPackageName = pEllPackageName_
-    , _ellUserIP = Nothing
-    , _ellKey = Nothing
-    , _ellOAuthToken = Nothing
+    { _ellPackageName = pEllPackageName_
     , _ellEditId = pEllEditId_
-    , _ellFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ellQuotaUser :: Lens' EditsListingsList' (Maybe Text)
-ellQuotaUser
-  = lens _ellQuotaUser (\ s a -> s{_ellQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ellPrettyPrint :: Lens' EditsListingsList' Bool
-ellPrettyPrint
-  = lens _ellPrettyPrint
-      (\ s a -> s{_ellPrettyPrint = a})
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
@@ -131,50 +82,17 @@ ellPackageName
   = lens _ellPackageName
       (\ s a -> s{_ellPackageName = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ellUserIP :: Lens' EditsListingsList' (Maybe Text)
-ellUserIP
-  = lens _ellUserIP (\ s a -> s{_ellUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ellKey :: Lens' EditsListingsList' (Maybe AuthKey)
-ellKey = lens _ellKey (\ s a -> s{_ellKey = a})
-
--- | OAuth 2.0 token for the current user.
-ellOAuthToken :: Lens' EditsListingsList' (Maybe OAuthToken)
-ellOAuthToken
-  = lens _ellOAuthToken
-      (\ s a -> s{_ellOAuthToken = a})
-
 -- | Unique identifier for this edit.
 ellEditId :: Lens' EditsListingsList' Text
 ellEditId
   = lens _ellEditId (\ s a -> s{_ellEditId = a})
 
--- | Selector specifying which fields to include in a partial response.
-ellFields :: Lens' EditsListingsList' (Maybe Text)
-ellFields
-  = lens _ellFields (\ s a -> s{_ellFields = a})
-
-instance GoogleAuth EditsListingsList' where
-        _AuthKey = ellKey . _Just
-        _AuthToken = ellOAuthToken . _Just
-
 instance GoogleRequest EditsListingsList' where
         type Rs EditsListingsList' = ListingsListResponse
-        request = requestWith androidPublisherRequest
-        requestWith rq EditsListingsList'{..}
-          = go _ellPackageName _ellEditId _ellQuotaUser
-              (Just _ellPrettyPrint)
-              _ellUserIP
-              _ellFields
-              _ellKey
-              _ellOAuthToken
-              (Just AltJSON)
+        requestClient EditsListingsList'{..}
+          = go _ellPackageName _ellEditId (Just AltJSON)
+              androidPublisherService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy EditsListingsListResource)
-                      rq
+                      mempty

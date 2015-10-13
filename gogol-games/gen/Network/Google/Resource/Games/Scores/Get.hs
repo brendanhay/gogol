@@ -37,19 +37,13 @@ module Network.Google.Resource.Games.Scores.Get
     , ScoresGet'
 
     -- * Request Lenses
-    , sgQuotaUser
-    , sgPrettyPrint
-    , sgUserIP
     , sgTimeSpan
     , sgLeaderboardId
-    , sgKey
     , sgIncludeRankType
     , sgLanguage
     , sgPageToken
-    , sgOAuthToken
     , sgPlayerId
     , sgMaxResults
-    , sgFields
     ) where
 
 import           Network.Google.Games.Types
@@ -69,15 +63,8 @@ type ScoresGetResource =
                    QueryParam "language" Text :>
                      QueryParam "pageToken" Text :>
                        QueryParam "maxResults" Int32 :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON]
-                                         PlayerLeaderboardScoreListResponse
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] PlayerLeaderboardScoreListResponse
 
 -- | Get high scores, and optionally ranks, in leaderboards for the currently
 -- authenticated player. For a specific time span, leaderboardId can be set
@@ -87,36 +74,22 @@ type ScoresGetResource =
 --
 -- /See:/ 'scoresGet'' smart constructor.
 data ScoresGet' = ScoresGet'
-    { _sgQuotaUser       :: !(Maybe Text)
-    , _sgPrettyPrint     :: !Bool
-    , _sgUserIP          :: !(Maybe Text)
-    , _sgTimeSpan        :: !ScoresGetTimeSpan
+    { _sgTimeSpan        :: !ScoresGetTimeSpan
     , _sgLeaderboardId   :: !Text
-    , _sgKey             :: !(Maybe AuthKey)
     , _sgIncludeRankType :: !(Maybe ScoresGetIncludeRankType)
     , _sgLanguage        :: !(Maybe Text)
     , _sgPageToken       :: !(Maybe Text)
-    , _sgOAuthToken      :: !(Maybe OAuthToken)
     , _sgPlayerId        :: !Text
     , _sgMaxResults      :: !(Maybe Int32)
-    , _sgFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sgQuotaUser'
---
--- * 'sgPrettyPrint'
---
--- * 'sgUserIP'
---
 -- * 'sgTimeSpan'
 --
 -- * 'sgLeaderboardId'
---
--- * 'sgKey'
 --
 -- * 'sgIncludeRankType'
 --
@@ -124,13 +97,9 @@ data ScoresGet' = ScoresGet'
 --
 -- * 'sgPageToken'
 --
--- * 'sgOAuthToken'
---
 -- * 'sgPlayerId'
 --
 -- * 'sgMaxResults'
---
--- * 'sgFields'
 scoresGet'
     :: ScoresGetTimeSpan -- ^ 'timeSpan'
     -> Text -- ^ 'leaderboardId'
@@ -138,38 +107,14 @@ scoresGet'
     -> ScoresGet'
 scoresGet' pSgTimeSpan_ pSgLeaderboardId_ pSgPlayerId_ =
     ScoresGet'
-    { _sgQuotaUser = Nothing
-    , _sgPrettyPrint = True
-    , _sgUserIP = Nothing
-    , _sgTimeSpan = pSgTimeSpan_
+    { _sgTimeSpan = pSgTimeSpan_
     , _sgLeaderboardId = pSgLeaderboardId_
-    , _sgKey = Nothing
     , _sgIncludeRankType = Nothing
     , _sgLanguage = Nothing
     , _sgPageToken = Nothing
-    , _sgOAuthToken = Nothing
     , _sgPlayerId = pSgPlayerId_
     , _sgMaxResults = Nothing
-    , _sgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-sgQuotaUser :: Lens' ScoresGet' (Maybe Text)
-sgQuotaUser
-  = lens _sgQuotaUser (\ s a -> s{_sgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-sgPrettyPrint :: Lens' ScoresGet' Bool
-sgPrettyPrint
-  = lens _sgPrettyPrint
-      (\ s a -> s{_sgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-sgUserIP :: Lens' ScoresGet' (Maybe Text)
-sgUserIP = lens _sgUserIP (\ s a -> s{_sgUserIP = a})
 
 -- | The time span for the scores and ranks you\'re requesting.
 sgTimeSpan :: Lens' ScoresGet' ScoresGetTimeSpan
@@ -182,12 +127,6 @@ sgLeaderboardId :: Lens' ScoresGet' Text
 sgLeaderboardId
   = lens _sgLeaderboardId
       (\ s a -> s{_sgLeaderboardId = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-sgKey :: Lens' ScoresGet' (Maybe AuthKey)
-sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
 
 -- | The types of ranks to return. If the parameter is omitted, no ranks will
 -- be returned.
@@ -206,11 +145,6 @@ sgPageToken :: Lens' ScoresGet' (Maybe Text)
 sgPageToken
   = lens _sgPageToken (\ s a -> s{_sgPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-sgOAuthToken :: Lens' ScoresGet' (Maybe OAuthToken)
-sgOAuthToken
-  = lens _sgOAuthToken (\ s a -> s{_sgOAuthToken = a})
-
 -- | A player ID. A value of me may be used in place of the authenticated
 -- player\'s ID.
 sgPlayerId :: Lens' ScoresGet' Text
@@ -224,30 +158,17 @@ sgMaxResults :: Lens' ScoresGet' (Maybe Int32)
 sgMaxResults
   = lens _sgMaxResults (\ s a -> s{_sgMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-sgFields :: Lens' ScoresGet' (Maybe Text)
-sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
-
-instance GoogleAuth ScoresGet' where
-        _AuthKey = sgKey . _Just
-        _AuthToken = sgOAuthToken . _Just
-
 instance GoogleRequest ScoresGet' where
         type Rs ScoresGet' =
              PlayerLeaderboardScoreListResponse
-        request = requestWith gamesRequest
-        requestWith rq ScoresGet'{..}
+        requestClient ScoresGet'{..}
           = go _sgPlayerId _sgLeaderboardId _sgTimeSpan
               _sgIncludeRankType
               _sgLanguage
               _sgPageToken
               _sgMaxResults
-              _sgQuotaUser
-              (Just _sgPrettyPrint)
-              _sgUserIP
-              _sgFields
-              _sgKey
-              _sgOAuthToken
               (Just AltJSON)
+              gamesService
           where go
-                  = clientBuild (Proxy :: Proxy ScoresGetResource) rq
+                  = buildClient (Proxy :: Proxy ScoresGetResource)
+                      mempty

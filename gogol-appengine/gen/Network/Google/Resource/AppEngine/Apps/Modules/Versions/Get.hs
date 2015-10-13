@@ -34,8 +34,6 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Get
 
     -- * Request Lenses
     , amvgXgafv
-    , amvgQuotaUser
-    , amvgPrettyPrint
     , amvgUploadProtocol
     , amvgPp
     , amvgAccessToken
@@ -43,11 +41,8 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Get
     , amvgVersionsId
     , amvgModulesId
     , amvgBearerToken
-    , amvgKey
     , amvgAppsId
     , amvgView
-    , amvgOAuthToken
-    , amvgFields
     , amvgCallback
     ) where
 
@@ -72,21 +67,14 @@ type AppsModulesVersionsGetResource =
                              QueryParam "bearer_token" Text :>
                                QueryParam "view" Text :>
                                  QueryParam "callback" Text :>
-                                   QueryParam "quotaUser" Text :>
-                                     QueryParam "prettyPrint" Bool :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "key" AuthKey :>
-                                           Header "Authorization" OAuthToken :>
-                                             QueryParam "alt" AltJSON :>
-                                               Get '[JSON] Version
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] Version
 
 -- | Gets application deployment information.
 --
 -- /See:/ 'appsModulesVersionsGet'' smart constructor.
 data AppsModulesVersionsGet' = AppsModulesVersionsGet'
     { _amvgXgafv          :: !(Maybe Text)
-    , _amvgQuotaUser      :: !(Maybe Text)
-    , _amvgPrettyPrint    :: !Bool
     , _amvgUploadProtocol :: !(Maybe Text)
     , _amvgPp             :: !Bool
     , _amvgAccessToken    :: !(Maybe Text)
@@ -94,11 +82,8 @@ data AppsModulesVersionsGet' = AppsModulesVersionsGet'
     , _amvgVersionsId     :: !Text
     , _amvgModulesId      :: !Text
     , _amvgBearerToken    :: !(Maybe Text)
-    , _amvgKey            :: !(Maybe AuthKey)
     , _amvgAppsId         :: !Text
     , _amvgView           :: !(Maybe Text)
-    , _amvgOAuthToken     :: !(Maybe OAuthToken)
-    , _amvgFields         :: !(Maybe Text)
     , _amvgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -107,10 +92,6 @@ data AppsModulesVersionsGet' = AppsModulesVersionsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'amvgXgafv'
---
--- * 'amvgQuotaUser'
---
--- * 'amvgPrettyPrint'
 --
 -- * 'amvgUploadProtocol'
 --
@@ -126,15 +107,9 @@ data AppsModulesVersionsGet' = AppsModulesVersionsGet'
 --
 -- * 'amvgBearerToken'
 --
--- * 'amvgKey'
---
 -- * 'amvgAppsId'
 --
 -- * 'amvgView'
---
--- * 'amvgOAuthToken'
---
--- * 'amvgFields'
 --
 -- * 'amvgCallback'
 appsModulesVersionsGet'
@@ -145,8 +120,6 @@ appsModulesVersionsGet'
 appsModulesVersionsGet' pAmvgVersionsId_ pAmvgModulesId_ pAmvgAppsId_ =
     AppsModulesVersionsGet'
     { _amvgXgafv = Nothing
-    , _amvgQuotaUser = Nothing
-    , _amvgPrettyPrint = True
     , _amvgUploadProtocol = Nothing
     , _amvgPp = True
     , _amvgAccessToken = Nothing
@@ -154,11 +127,8 @@ appsModulesVersionsGet' pAmvgVersionsId_ pAmvgModulesId_ pAmvgAppsId_ =
     , _amvgVersionsId = pAmvgVersionsId_
     , _amvgModulesId = pAmvgModulesId_
     , _amvgBearerToken = Nothing
-    , _amvgKey = Nothing
     , _amvgAppsId = pAmvgAppsId_
     , _amvgView = Nothing
-    , _amvgOAuthToken = Nothing
-    , _amvgFields = Nothing
     , _amvgCallback = Nothing
     }
 
@@ -166,20 +136,6 @@ appsModulesVersionsGet' pAmvgVersionsId_ pAmvgModulesId_ pAmvgAppsId_ =
 amvgXgafv :: Lens' AppsModulesVersionsGet' (Maybe Text)
 amvgXgafv
   = lens _amvgXgafv (\ s a -> s{_amvgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-amvgQuotaUser :: Lens' AppsModulesVersionsGet' (Maybe Text)
-amvgQuotaUser
-  = lens _amvgQuotaUser
-      (\ s a -> s{_amvgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-amvgPrettyPrint :: Lens' AppsModulesVersionsGet' Bool
-amvgPrettyPrint
-  = lens _amvgPrettyPrint
-      (\ s a -> s{_amvgPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 amvgUploadProtocol :: Lens' AppsModulesVersionsGet' (Maybe Text)
@@ -221,12 +177,6 @@ amvgBearerToken
   = lens _amvgBearerToken
       (\ s a -> s{_amvgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-amvgKey :: Lens' AppsModulesVersionsGet' (Maybe AuthKey)
-amvgKey = lens _amvgKey (\ s a -> s{_amvgKey = a})
-
 -- | Part of \`name\`. Name of the resource requested. For example:
 -- \"apps\/myapp\/modules\/default\/versions\/v1\".
 amvgAppsId :: Lens' AppsModulesVersionsGet' Text
@@ -237,30 +187,14 @@ amvgAppsId
 amvgView :: Lens' AppsModulesVersionsGet' (Maybe Text)
 amvgView = lens _amvgView (\ s a -> s{_amvgView = a})
 
--- | OAuth 2.0 token for the current user.
-amvgOAuthToken :: Lens' AppsModulesVersionsGet' (Maybe OAuthToken)
-amvgOAuthToken
-  = lens _amvgOAuthToken
-      (\ s a -> s{_amvgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-amvgFields :: Lens' AppsModulesVersionsGet' (Maybe Text)
-amvgFields
-  = lens _amvgFields (\ s a -> s{_amvgFields = a})
-
 -- | JSONP
 amvgCallback :: Lens' AppsModulesVersionsGet' (Maybe Text)
 amvgCallback
   = lens _amvgCallback (\ s a -> s{_amvgCallback = a})
 
-instance GoogleAuth AppsModulesVersionsGet' where
-        _AuthKey = amvgKey . _Just
-        _AuthToken = amvgOAuthToken . _Just
-
 instance GoogleRequest AppsModulesVersionsGet' where
         type Rs AppsModulesVersionsGet' = Version
-        request = requestWith appEngineRequest
-        requestWith rq AppsModulesVersionsGet'{..}
+        requestClient AppsModulesVersionsGet'{..}
           = go _amvgAppsId _amvgModulesId _amvgVersionsId
               _amvgXgafv
               _amvgUploadProtocol
@@ -270,13 +204,9 @@ instance GoogleRequest AppsModulesVersionsGet' where
               _amvgBearerToken
               _amvgView
               _amvgCallback
-              _amvgQuotaUser
-              (Just _amvgPrettyPrint)
-              _amvgFields
-              _amvgKey
-              _amvgOAuthToken
               (Just AltJSON)
+              appEngineService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AppsModulesVersionsGetResource)
-                      rq
+                      mempty

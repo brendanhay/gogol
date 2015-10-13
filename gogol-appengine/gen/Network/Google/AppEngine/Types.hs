@@ -15,8 +15,11 @@
 --
 module Network.Google.AppEngine.Types
     (
-    -- * Service Request
-      appEngineRequest
+    -- * Service Configuration
+      appEngineService
+
+    -- * OAuth Scopes
+    , cloudPlatformScope
 
     -- * Status
     , Status
@@ -318,7 +321,12 @@ import           Network.Google.AppEngine.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1beta4' of the Google App Engine Admin API. This contains the host and root path used as a starting point for constructing service requests.
-appEngineRequest :: RequestBuilder
-appEngineRequest
-  = defaultRequest "https://appengine.googleapis.com/"
+appEngineService :: Service
+appEngineService
+  = defaultService (ServiceId "appengine:v1beta4")
+      "appengine.googleapis.com"
       ""
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: OAuthScope
+cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";

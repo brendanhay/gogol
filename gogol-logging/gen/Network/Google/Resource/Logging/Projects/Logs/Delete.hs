@@ -35,18 +35,13 @@ module Network.Google.Resource.Logging.Projects.Logs.Delete
 
     -- * Request Lenses
     , pldXgafv
-    , pldQuotaUser
-    , pldPrettyPrint
     , pldUploadProtocol
     , pldLogsId
     , pldPp
     , pldAccessToken
     , pldUploadType
     , pldBearerToken
-    , pldKey
-    , pldOAuthToken
     , pldProjectsId
-    , pldFields
     , pldCallback
     ) where
 
@@ -68,13 +63,7 @@ type ProjectsLogsDeleteResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Delete '[JSON] Empty
+                             QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a log and all its log entries. The log will reappear if it
 -- receives new entries.
@@ -82,18 +71,13 @@ type ProjectsLogsDeleteResource =
 -- /See:/ 'projectsLogsDelete'' smart constructor.
 data ProjectsLogsDelete' = ProjectsLogsDelete'
     { _pldXgafv          :: !(Maybe Text)
-    , _pldQuotaUser      :: !(Maybe Text)
-    , _pldPrettyPrint    :: !Bool
     , _pldUploadProtocol :: !(Maybe Text)
     , _pldLogsId         :: !Text
     , _pldPp             :: !Bool
     , _pldAccessToken    :: !(Maybe Text)
     , _pldUploadType     :: !(Maybe Text)
     , _pldBearerToken    :: !(Maybe Text)
-    , _pldKey            :: !(Maybe AuthKey)
-    , _pldOAuthToken     :: !(Maybe OAuthToken)
     , _pldProjectsId     :: !Text
-    , _pldFields         :: !(Maybe Text)
     , _pldCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +86,6 @@ data ProjectsLogsDelete' = ProjectsLogsDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pldXgafv'
---
--- * 'pldQuotaUser'
---
--- * 'pldPrettyPrint'
 --
 -- * 'pldUploadProtocol'
 --
@@ -119,13 +99,7 @@ data ProjectsLogsDelete' = ProjectsLogsDelete'
 --
 -- * 'pldBearerToken'
 --
--- * 'pldKey'
---
--- * 'pldOAuthToken'
---
 -- * 'pldProjectsId'
---
--- * 'pldFields'
 --
 -- * 'pldCallback'
 projectsLogsDelete'
@@ -135,37 +109,19 @@ projectsLogsDelete'
 projectsLogsDelete' pPldLogsId_ pPldProjectsId_ =
     ProjectsLogsDelete'
     { _pldXgafv = Nothing
-    , _pldQuotaUser = Nothing
-    , _pldPrettyPrint = True
     , _pldUploadProtocol = Nothing
     , _pldLogsId = pPldLogsId_
     , _pldPp = True
     , _pldAccessToken = Nothing
     , _pldUploadType = Nothing
     , _pldBearerToken = Nothing
-    , _pldKey = Nothing
-    , _pldOAuthToken = Nothing
     , _pldProjectsId = pPldProjectsId_
-    , _pldFields = Nothing
     , _pldCallback = Nothing
     }
 
 -- | V1 error format.
 pldXgafv :: Lens' ProjectsLogsDelete' (Maybe Text)
 pldXgafv = lens _pldXgafv (\ s a -> s{_pldXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pldQuotaUser :: Lens' ProjectsLogsDelete' (Maybe Text)
-pldQuotaUser
-  = lens _pldQuotaUser (\ s a -> s{_pldQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pldPrettyPrint :: Lens' ProjectsLogsDelete' Bool
-pldPrettyPrint
-  = lens _pldPrettyPrint
-      (\ s a -> s{_pldPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 pldUploadProtocol :: Lens' ProjectsLogsDelete' (Maybe Text)
@@ -200,42 +156,20 @@ pldBearerToken
   = lens _pldBearerToken
       (\ s a -> s{_pldBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pldKey :: Lens' ProjectsLogsDelete' (Maybe AuthKey)
-pldKey = lens _pldKey (\ s a -> s{_pldKey = a})
-
--- | OAuth 2.0 token for the current user.
-pldOAuthToken :: Lens' ProjectsLogsDelete' (Maybe OAuthToken)
-pldOAuthToken
-  = lens _pldOAuthToken
-      (\ s a -> s{_pldOAuthToken = a})
-
 -- | Part of \`logName\`. The resource name of the log to be deleted.
 pldProjectsId :: Lens' ProjectsLogsDelete' Text
 pldProjectsId
   = lens _pldProjectsId
       (\ s a -> s{_pldProjectsId = a})
 
--- | Selector specifying which fields to include in a partial response.
-pldFields :: Lens' ProjectsLogsDelete' (Maybe Text)
-pldFields
-  = lens _pldFields (\ s a -> s{_pldFields = a})
-
 -- | JSONP
 pldCallback :: Lens' ProjectsLogsDelete' (Maybe Text)
 pldCallback
   = lens _pldCallback (\ s a -> s{_pldCallback = a})
 
-instance GoogleAuth ProjectsLogsDelete' where
-        _AuthKey = pldKey . _Just
-        _AuthToken = pldOAuthToken . _Just
-
 instance GoogleRequest ProjectsLogsDelete' where
         type Rs ProjectsLogsDelete' = Empty
-        request = requestWith loggingRequest
-        requestWith rq ProjectsLogsDelete'{..}
+        requestClient ProjectsLogsDelete'{..}
           = go _pldProjectsId _pldLogsId _pldXgafv
               _pldUploadProtocol
               (Just _pldPp)
@@ -243,13 +177,9 @@ instance GoogleRequest ProjectsLogsDelete' where
               _pldUploadType
               _pldBearerToken
               _pldCallback
-              _pldQuotaUser
-              (Just _pldPrettyPrint)
-              _pldFields
-              _pldKey
-              _pldOAuthToken
               (Just AltJSON)
+              loggingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsLogsDeleteResource)
-                      rq
+                      mempty

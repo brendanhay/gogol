@@ -34,23 +34,17 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.Get
     , ConversionGet'
 
     -- * Request Lenses
-    , cgQuotaUser
     , cgAdGroupId
-    , cgPrettyPrint
     , cgEngineAccountId
     , cgAgencyId
-    , cgUserIP
     , cgAdvertiserId
     , cgEndDate
     , cgCampaignId
     , cgCriterionId
     , cgStartDate
-    , cgKey
     , cgStartRow
     , cgAdId
-    , cgOAuthToken
     , cgRowCount
-    , cgFields
     ) where
 
 import           Network.Google.DoubleClickSearch.Types
@@ -74,55 +68,36 @@ type ConversionGetResource =
                              QueryParam "campaignId" Int64 :>
                                QueryParam "criterionId" Int64 :>
                                  QueryParam "adId" Int64 :>
-                                   QueryParam "quotaUser" Text :>
-                                     QueryParam "prettyPrint" Bool :>
-                                       QueryParam "userIp" Text :>
-                                         QueryParam "fields" Text :>
-                                           QueryParam "key" AuthKey :>
-                                             Header "Authorization" OAuthToken
-                                               :>
-                                               QueryParam "alt" AltJSON :>
-                                                 Get '[JSON] ConversionList
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] ConversionList
 
 -- | Retrieves a list of conversions from a DoubleClick Search engine
 -- account.
 --
 -- /See:/ 'conversionGet'' smart constructor.
 data ConversionGet' = ConversionGet'
-    { _cgQuotaUser       :: !(Maybe Text)
-    , _cgAdGroupId       :: !(Maybe Int64)
-    , _cgPrettyPrint     :: !Bool
+    { _cgAdGroupId       :: !(Maybe Int64)
     , _cgEngineAccountId :: !Int64
     , _cgAgencyId        :: !Int64
-    , _cgUserIP          :: !(Maybe Text)
     , _cgAdvertiserId    :: !Int64
     , _cgEndDate         :: !Int32
     , _cgCampaignId      :: !(Maybe Int64)
     , _cgCriterionId     :: !(Maybe Int64)
     , _cgStartDate       :: !Int32
-    , _cgKey             :: !(Maybe AuthKey)
     , _cgStartRow        :: !Word32
     , _cgAdId            :: !(Maybe Int64)
-    , _cgOAuthToken      :: !(Maybe OAuthToken)
     , _cgRowCount        :: !Int32
-    , _cgFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cgQuotaUser'
---
 -- * 'cgAdGroupId'
---
--- * 'cgPrettyPrint'
 --
 -- * 'cgEngineAccountId'
 --
 -- * 'cgAgencyId'
---
--- * 'cgUserIP'
 --
 -- * 'cgAdvertiserId'
 --
@@ -134,17 +109,11 @@ data ConversionGet' = ConversionGet'
 --
 -- * 'cgStartDate'
 --
--- * 'cgKey'
---
 -- * 'cgStartRow'
 --
 -- * 'cgAdId'
 --
--- * 'cgOAuthToken'
---
 -- * 'cgRowCount'
---
--- * 'cgFields'
 conversionGet'
     :: Int64 -- ^ 'engineAccountId'
     -> Int64 -- ^ 'agencyId'
@@ -156,42 +125,23 @@ conversionGet'
     -> ConversionGet'
 conversionGet' pCgEngineAccountId_ pCgAgencyId_ pCgAdvertiserId_ pCgEndDate_ pCgStartDate_ pCgStartRow_ pCgRowCount_ =
     ConversionGet'
-    { _cgQuotaUser = Nothing
-    , _cgAdGroupId = Nothing
-    , _cgPrettyPrint = True
+    { _cgAdGroupId = Nothing
     , _cgEngineAccountId = pCgEngineAccountId_
     , _cgAgencyId = pCgAgencyId_
-    , _cgUserIP = Nothing
     , _cgAdvertiserId = pCgAdvertiserId_
     , _cgEndDate = pCgEndDate_
     , _cgCampaignId = Nothing
     , _cgCriterionId = Nothing
     , _cgStartDate = pCgStartDate_
-    , _cgKey = Nothing
     , _cgStartRow = pCgStartRow_
     , _cgAdId = Nothing
-    , _cgOAuthToken = Nothing
     , _cgRowCount = pCgRowCount_
-    , _cgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-cgQuotaUser :: Lens' ConversionGet' (Maybe Text)
-cgQuotaUser
-  = lens _cgQuotaUser (\ s a -> s{_cgQuotaUser = a})
 
 -- | Numeric ID of the ad group.
 cgAdGroupId :: Lens' ConversionGet' (Maybe Int64)
 cgAdGroupId
   = lens _cgAdGroupId (\ s a -> s{_cgAdGroupId = a})
-
--- | Returns response with indentations and line breaks.
-cgPrettyPrint :: Lens' ConversionGet' Bool
-cgPrettyPrint
-  = lens _cgPrettyPrint
-      (\ s a -> s{_cgPrettyPrint = a})
 
 -- | Numeric ID of the engine account.
 cgEngineAccountId :: Lens' ConversionGet' Int64
@@ -203,11 +153,6 @@ cgEngineAccountId
 cgAgencyId :: Lens' ConversionGet' Int64
 cgAgencyId
   = lens _cgAgencyId (\ s a -> s{_cgAgencyId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-cgUserIP :: Lens' ConversionGet' (Maybe Text)
-cgUserIP = lens _cgUserIP (\ s a -> s{_cgUserIP = a})
 
 -- | Numeric ID of the advertiser.
 cgAdvertiserId :: Lens' ConversionGet' Int64
@@ -238,12 +183,6 @@ cgStartDate :: Lens' ConversionGet' Int32
 cgStartDate
   = lens _cgStartDate (\ s a -> s{_cgStartDate = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cgKey :: Lens' ConversionGet' (Maybe AuthKey)
-cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
-
 -- | The 0-based starting index for retrieving conversions results.
 cgStartRow :: Lens' ConversionGet' Word32
 cgStartRow
@@ -253,28 +192,14 @@ cgStartRow
 cgAdId :: Lens' ConversionGet' (Maybe Int64)
 cgAdId = lens _cgAdId (\ s a -> s{_cgAdId = a})
 
--- | OAuth 2.0 token for the current user.
-cgOAuthToken :: Lens' ConversionGet' (Maybe OAuthToken)
-cgOAuthToken
-  = lens _cgOAuthToken (\ s a -> s{_cgOAuthToken = a})
-
 -- | The number of conversions to return per call.
 cgRowCount :: Lens' ConversionGet' Int32
 cgRowCount
   = lens _cgRowCount (\ s a -> s{_cgRowCount = a})
 
--- | Selector specifying which fields to include in a partial response.
-cgFields :: Lens' ConversionGet' (Maybe Text)
-cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
-
-instance GoogleAuth ConversionGet' where
-        _AuthKey = cgKey . _Just
-        _AuthToken = cgOAuthToken . _Just
-
 instance GoogleRequest ConversionGet' where
         type Rs ConversionGet' = ConversionList
-        request = requestWith doubleClickSearchRequest
-        requestWith rq ConversionGet'{..}
+        requestClient ConversionGet'{..}
           = go _cgAgencyId _cgAdvertiserId _cgEngineAccountId
               (Just _cgEndDate)
               (Just _cgRowCount)
@@ -284,13 +209,8 @@ instance GoogleRequest ConversionGet' where
               _cgCampaignId
               _cgCriterionId
               _cgAdId
-              _cgQuotaUser
-              (Just _cgPrettyPrint)
-              _cgUserIP
-              _cgFields
-              _cgKey
-              _cgOAuthToken
               (Just AltJSON)
+              doubleClickSearchService
           where go
-                  = clientBuild (Proxy :: Proxy ConversionGetResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ConversionGetResource)
+                      mempty

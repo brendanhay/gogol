@@ -33,17 +33,11 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Update
     , AccountsContainersVariablesUpdate'
 
     -- * Request Lenses
-    , aQuotaUser
-    , aPrettyPrint
     , aContainerId
-    , aUserIP
     , aFingerprint
     , aVariableId
     , aPayload
     , aAccountId
-    , aKey
-    , aOAuthToken
-    , aFields
     ) where
 
 import           Network.Google.Prelude
@@ -59,44 +53,25 @@ type AccountsContainersVariablesUpdateResource =
              "variables" :>
                Capture "variableId" Text :>
                  QueryParam "fingerprint" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Variable :>
-                                   Put '[JSON] Variable
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Variable :> Put '[JSON] Variable
 
 -- | Updates a GTM Variable.
 --
 -- /See:/ 'accountsContainersVariablesUpdate'' smart constructor.
 data AccountsContainersVariablesUpdate' = AccountsContainersVariablesUpdate'
-    { _aQuotaUser   :: !(Maybe Text)
-    , _aPrettyPrint :: !Bool
-    , _aContainerId :: !Text
-    , _aUserIP      :: !(Maybe Text)
+    { _aContainerId :: !Text
     , _aFingerprint :: !(Maybe Text)
     , _aVariableId  :: !Text
     , _aPayload     :: !Variable
     , _aAccountId   :: !Text
-    , _aKey         :: !(Maybe AuthKey)
-    , _aOAuthToken  :: !(Maybe OAuthToken)
-    , _aFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVariablesUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aQuotaUser'
---
--- * 'aPrettyPrint'
---
 -- * 'aContainerId'
---
--- * 'aUserIP'
 --
 -- * 'aFingerprint'
 --
@@ -105,12 +80,6 @@ data AccountsContainersVariablesUpdate' = AccountsContainersVariablesUpdate'
 -- * 'aPayload'
 --
 -- * 'aAccountId'
---
--- * 'aKey'
---
--- * 'aOAuthToken'
---
--- * 'aFields'
 accountsContainersVariablesUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'variableId'
@@ -119,40 +88,17 @@ accountsContainersVariablesUpdate'
     -> AccountsContainersVariablesUpdate'
 accountsContainersVariablesUpdate' pAContainerId_ pAVariableId_ pAPayload_ pAAccountId_ =
     AccountsContainersVariablesUpdate'
-    { _aQuotaUser = Nothing
-    , _aPrettyPrint = True
-    , _aContainerId = pAContainerId_
-    , _aUserIP = Nothing
+    { _aContainerId = pAContainerId_
     , _aFingerprint = Nothing
     , _aVariableId = pAVariableId_
     , _aPayload = pAPayload_
     , _aAccountId = pAAccountId_
-    , _aKey = Nothing
-    , _aOAuthToken = Nothing
-    , _aFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-aQuotaUser :: Lens' AccountsContainersVariablesUpdate' (Maybe Text)
-aQuotaUser
-  = lens _aQuotaUser (\ s a -> s{_aQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aPrettyPrint :: Lens' AccountsContainersVariablesUpdate' Bool
-aPrettyPrint
-  = lens _aPrettyPrint (\ s a -> s{_aPrettyPrint = a})
 
 -- | The GTM Container ID.
 aContainerId :: Lens' AccountsContainersVariablesUpdate' Text
 aContainerId
   = lens _aContainerId (\ s a -> s{_aContainerId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-aUserIP :: Lens' AccountsContainersVariablesUpdate' (Maybe Text)
-aUserIP = lens _aUserIP (\ s a -> s{_aUserIP = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- variable in storage.
@@ -174,43 +120,17 @@ aAccountId :: Lens' AccountsContainersVariablesUpdate' Text
 aAccountId
   = lens _aAccountId (\ s a -> s{_aAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aKey :: Lens' AccountsContainersVariablesUpdate' (Maybe AuthKey)
-aKey = lens _aKey (\ s a -> s{_aKey = a})
-
--- | OAuth 2.0 token for the current user.
-aOAuthToken :: Lens' AccountsContainersVariablesUpdate' (Maybe OAuthToken)
-aOAuthToken
-  = lens _aOAuthToken (\ s a -> s{_aOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-aFields :: Lens' AccountsContainersVariablesUpdate' (Maybe Text)
-aFields = lens _aFields (\ s a -> s{_aFields = a})
-
-instance GoogleAuth
-         AccountsContainersVariablesUpdate' where
-        _AuthKey = aKey . _Just
-        _AuthToken = aOAuthToken . _Just
-
 instance GoogleRequest
          AccountsContainersVariablesUpdate' where
         type Rs AccountsContainersVariablesUpdate' = Variable
-        request = requestWith tagManagerRequest
-        requestWith rq AccountsContainersVariablesUpdate'{..}
+        requestClient AccountsContainersVariablesUpdate'{..}
           = go _aAccountId _aContainerId _aVariableId
               _aFingerprint
-              _aQuotaUser
-              (Just _aPrettyPrint)
-              _aUserIP
-              _aFields
-              _aKey
-              _aOAuthToken
               (Just AltJSON)
               _aPayload
+              tagManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy AccountsContainersVariablesUpdateResource)
-                      rq
+                      mempty

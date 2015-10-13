@@ -33,16 +33,10 @@ module Network.Google.Resource.Compute.DiskTypes.AggregatedList
     , DiskTypesAggregatedList'
 
     -- * Request Lenses
-    , dtalQuotaUser
-    , dtalPrettyPrint
     , dtalProject
-    , dtalUserIP
-    , dtalKey
     , dtalFilter
     , dtalPageToken
-    , dtalOAuthToken
     , dtalMaxResults
-    , dtalFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -57,101 +51,45 @@ type DiskTypesAggregatedListResource =
            QueryParam "filter" Text :>
              QueryParam "pageToken" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] DiskTypeAggregatedList
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] DiskTypeAggregatedList
 
 -- | Retrieves the list of disk type resources grouped by scope.
 --
 -- /See:/ 'diskTypesAggregatedList'' smart constructor.
 data DiskTypesAggregatedList' = DiskTypesAggregatedList'
-    { _dtalQuotaUser   :: !(Maybe Text)
-    , _dtalPrettyPrint :: !Bool
-    , _dtalProject     :: !Text
-    , _dtalUserIP      :: !(Maybe Text)
-    , _dtalKey         :: !(Maybe AuthKey)
-    , _dtalFilter      :: !(Maybe Text)
-    , _dtalPageToken   :: !(Maybe Text)
-    , _dtalOAuthToken  :: !(Maybe OAuthToken)
-    , _dtalMaxResults  :: !Word32
-    , _dtalFields      :: !(Maybe Text)
+    { _dtalProject    :: !Text
+    , _dtalFilter     :: !(Maybe Text)
+    , _dtalPageToken  :: !(Maybe Text)
+    , _dtalMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskTypesAggregatedList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dtalQuotaUser'
---
--- * 'dtalPrettyPrint'
---
 -- * 'dtalProject'
---
--- * 'dtalUserIP'
---
--- * 'dtalKey'
 --
 -- * 'dtalFilter'
 --
 -- * 'dtalPageToken'
 --
--- * 'dtalOAuthToken'
---
 -- * 'dtalMaxResults'
---
--- * 'dtalFields'
 diskTypesAggregatedList'
     :: Text -- ^ 'project'
     -> DiskTypesAggregatedList'
 diskTypesAggregatedList' pDtalProject_ =
     DiskTypesAggregatedList'
-    { _dtalQuotaUser = Nothing
-    , _dtalPrettyPrint = True
-    , _dtalProject = pDtalProject_
-    , _dtalUserIP = Nothing
-    , _dtalKey = Nothing
+    { _dtalProject = pDtalProject_
     , _dtalFilter = Nothing
     , _dtalPageToken = Nothing
-    , _dtalOAuthToken = Nothing
     , _dtalMaxResults = 500
-    , _dtalFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-dtalQuotaUser :: Lens' DiskTypesAggregatedList' (Maybe Text)
-dtalQuotaUser
-  = lens _dtalQuotaUser
-      (\ s a -> s{_dtalQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-dtalPrettyPrint :: Lens' DiskTypesAggregatedList' Bool
-dtalPrettyPrint
-  = lens _dtalPrettyPrint
-      (\ s a -> s{_dtalPrettyPrint = a})
 
 -- | Project ID for this request.
 dtalProject :: Lens' DiskTypesAggregatedList' Text
 dtalProject
   = lens _dtalProject (\ s a -> s{_dtalProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-dtalUserIP :: Lens' DiskTypesAggregatedList' (Maybe Text)
-dtalUserIP
-  = lens _dtalUserIP (\ s a -> s{_dtalUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-dtalKey :: Lens' DiskTypesAggregatedList' (Maybe AuthKey)
-dtalKey = lens _dtalKey (\ s a -> s{_dtalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -176,42 +114,21 @@ dtalPageToken
   = lens _dtalPageToken
       (\ s a -> s{_dtalPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-dtalOAuthToken :: Lens' DiskTypesAggregatedList' (Maybe OAuthToken)
-dtalOAuthToken
-  = lens _dtalOAuthToken
-      (\ s a -> s{_dtalOAuthToken = a})
-
 -- | Maximum count of results to be returned.
 dtalMaxResults :: Lens' DiskTypesAggregatedList' Word32
 dtalMaxResults
   = lens _dtalMaxResults
       (\ s a -> s{_dtalMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-dtalFields :: Lens' DiskTypesAggregatedList' (Maybe Text)
-dtalFields
-  = lens _dtalFields (\ s a -> s{_dtalFields = a})
-
-instance GoogleAuth DiskTypesAggregatedList' where
-        _AuthKey = dtalKey . _Just
-        _AuthToken = dtalOAuthToken . _Just
-
 instance GoogleRequest DiskTypesAggregatedList' where
         type Rs DiskTypesAggregatedList' =
              DiskTypeAggregatedList
-        request = requestWith computeRequest
-        requestWith rq DiskTypesAggregatedList'{..}
+        requestClient DiskTypesAggregatedList'{..}
           = go _dtalProject _dtalFilter _dtalPageToken
               (Just _dtalMaxResults)
-              _dtalQuotaUser
-              (Just _dtalPrettyPrint)
-              _dtalUserIP
-              _dtalFields
-              _dtalKey
-              _dtalOAuthToken
               (Just AltJSON)
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy DiskTypesAggregatedListResource)
-                      rq
+                      mempty

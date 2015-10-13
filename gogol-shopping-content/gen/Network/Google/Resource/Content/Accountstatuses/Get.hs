@@ -33,14 +33,8 @@ module Network.Google.Resource.Content.Accountstatuses.Get
     , AccountstatusesGet'
 
     -- * Request Lenses
-    , aggQuotaUser
-    , aggMerchantId
-    , aggPrettyPrint
-    , aggUserIP
-    , aggAccountId
-    , aggKey
-    , aggOAuthToken
-    , aggFields
+    , accMerchantId
+    , accAccountId
     ) where
 
 import           Network.Google.Prelude
@@ -52,126 +46,50 @@ type AccountstatusesGetResource =
      Capture "merchantId" Word64 :>
        "accountstatuses" :>
          Capture "accountId" Word64 :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] AccountStatus
+           QueryParam "alt" AltJSON :> Get '[JSON] AccountStatus
 
 -- | Retrieves the status of a Merchant Center account.
 --
 -- /See:/ 'accountstatusesGet'' smart constructor.
 data AccountstatusesGet' = AccountstatusesGet'
-    { _aggQuotaUser   :: !(Maybe Text)
-    , _aggMerchantId  :: !Word64
-    , _aggPrettyPrint :: !Bool
-    , _aggUserIP      :: !(Maybe Text)
-    , _aggAccountId   :: !Word64
-    , _aggKey         :: !(Maybe AuthKey)
-    , _aggOAuthToken  :: !(Maybe OAuthToken)
-    , _aggFields      :: !(Maybe Text)
+    { _accMerchantId :: !Word64
+    , _accAccountId  :: !Word64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aggQuotaUser'
+-- * 'accMerchantId'
 --
--- * 'aggMerchantId'
---
--- * 'aggPrettyPrint'
---
--- * 'aggUserIP'
---
--- * 'aggAccountId'
---
--- * 'aggKey'
---
--- * 'aggOAuthToken'
---
--- * 'aggFields'
+-- * 'accAccountId'
 accountstatusesGet'
     :: Word64 -- ^ 'merchantId'
     -> Word64 -- ^ 'accountId'
     -> AccountstatusesGet'
-accountstatusesGet' pAggMerchantId_ pAggAccountId_ =
+accountstatusesGet' pAccMerchantId_ pAccAccountId_ =
     AccountstatusesGet'
-    { _aggQuotaUser = Nothing
-    , _aggMerchantId = pAggMerchantId_
-    , _aggPrettyPrint = True
-    , _aggUserIP = Nothing
-    , _aggAccountId = pAggAccountId_
-    , _aggKey = Nothing
-    , _aggOAuthToken = Nothing
-    , _aggFields = Nothing
+    { _accMerchantId = pAccMerchantId_
+    , _accAccountId = pAccAccountId_
     }
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-aggQuotaUser :: Lens' AccountstatusesGet' (Maybe Text)
-aggQuotaUser
-  = lens _aggQuotaUser (\ s a -> s{_aggQuotaUser = a})
-
 -- | The ID of the managing account.
-aggMerchantId :: Lens' AccountstatusesGet' Word64
-aggMerchantId
-  = lens _aggMerchantId
-      (\ s a -> s{_aggMerchantId = a})
-
--- | Returns response with indentations and line breaks.
-aggPrettyPrint :: Lens' AccountstatusesGet' Bool
-aggPrettyPrint
-  = lens _aggPrettyPrint
-      (\ s a -> s{_aggPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-aggUserIP :: Lens' AccountstatusesGet' (Maybe Text)
-aggUserIP
-  = lens _aggUserIP (\ s a -> s{_aggUserIP = a})
+accMerchantId :: Lens' AccountstatusesGet' Word64
+accMerchantId
+  = lens _accMerchantId
+      (\ s a -> s{_accMerchantId = a})
 
 -- | The ID of the account.
-aggAccountId :: Lens' AccountstatusesGet' Word64
-aggAccountId
-  = lens _aggAccountId (\ s a -> s{_aggAccountId = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aggKey :: Lens' AccountstatusesGet' (Maybe AuthKey)
-aggKey = lens _aggKey (\ s a -> s{_aggKey = a})
-
--- | OAuth 2.0 token for the current user.
-aggOAuthToken :: Lens' AccountstatusesGet' (Maybe OAuthToken)
-aggOAuthToken
-  = lens _aggOAuthToken
-      (\ s a -> s{_aggOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-aggFields :: Lens' AccountstatusesGet' (Maybe Text)
-aggFields
-  = lens _aggFields (\ s a -> s{_aggFields = a})
-
-instance GoogleAuth AccountstatusesGet' where
-        _AuthKey = aggKey . _Just
-        _AuthToken = aggOAuthToken . _Just
+accAccountId :: Lens' AccountstatusesGet' Word64
+accAccountId
+  = lens _accAccountId (\ s a -> s{_accAccountId = a})
 
 instance GoogleRequest AccountstatusesGet' where
         type Rs AccountstatusesGet' = AccountStatus
-        request = requestWith shoppingContentRequest
-        requestWith rq AccountstatusesGet'{..}
-          = go _aggMerchantId _aggAccountId _aggQuotaUser
-              (Just _aggPrettyPrint)
-              _aggUserIP
-              _aggFields
-              _aggKey
-              _aggOAuthToken
-              (Just AltJSON)
+        requestClient AccountstatusesGet'{..}
+          = go _accMerchantId _accAccountId (Just AltJSON)
+              shoppingContentService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountstatusesGetResource)
-                      rq
+                      mempty

@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference>
 module Network.Google.Datastore
     (
+    -- * Service Configuration
+      datastoreService
+
     -- * API Declaration
-      DatastoreAPI
+    , DatastoreAPI
 
     -- * Resources
 

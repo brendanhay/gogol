@@ -43,18 +43,13 @@ module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Li
 
     -- * Request Lenses
     , cdblXgafv
-    , cdblQuotaUser
-    , cdblPrettyPrint
     , cdblUploadProtocol
     , cdblPp
     , cdblAccessToken
     , cdblUploadType
     , cdblBearerToken
-    , cdblKey
     , cdblWaitToken
     , cdblDebuggeeId
-    , cdblOAuthToken
-    , cdblFields
     , cdblCallback
     ) where
 
@@ -77,14 +72,8 @@ type ControllerDebuggeesBreakpointsListResource =
                          QueryParam "bearer_token" Text :>
                            QueryParam "waitToken" Text :>
                              QueryParam "callback" Text :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON]
-                                             ListActiveBreakpointsResponse
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListActiveBreakpointsResponse
 
 -- | Returns the list of all active breakpoints for the specified debuggee.
 -- The breakpoint specification (location, condition, and expression
@@ -100,18 +89,13 @@ type ControllerDebuggeesBreakpointsListResource =
 -- /See:/ 'controllerDebuggeesBreakpointsList'' smart constructor.
 data ControllerDebuggeesBreakpointsList' = ControllerDebuggeesBreakpointsList'
     { _cdblXgafv          :: !(Maybe Text)
-    , _cdblQuotaUser      :: !(Maybe Text)
-    , _cdblPrettyPrint    :: !Bool
     , _cdblUploadProtocol :: !(Maybe Text)
     , _cdblPp             :: !Bool
     , _cdblAccessToken    :: !(Maybe Text)
     , _cdblUploadType     :: !(Maybe Text)
     , _cdblBearerToken    :: !(Maybe Text)
-    , _cdblKey            :: !(Maybe AuthKey)
     , _cdblWaitToken      :: !(Maybe Text)
     , _cdblDebuggeeId     :: !Text
-    , _cdblOAuthToken     :: !(Maybe OAuthToken)
-    , _cdblFields         :: !(Maybe Text)
     , _cdblCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -120,10 +104,6 @@ data ControllerDebuggeesBreakpointsList' = ControllerDebuggeesBreakpointsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cdblXgafv'
---
--- * 'cdblQuotaUser'
---
--- * 'cdblPrettyPrint'
 --
 -- * 'cdblUploadProtocol'
 --
@@ -135,15 +115,9 @@ data ControllerDebuggeesBreakpointsList' = ControllerDebuggeesBreakpointsList'
 --
 -- * 'cdblBearerToken'
 --
--- * 'cdblKey'
---
 -- * 'cdblWaitToken'
 --
 -- * 'cdblDebuggeeId'
---
--- * 'cdblOAuthToken'
---
--- * 'cdblFields'
 --
 -- * 'cdblCallback'
 controllerDebuggeesBreakpointsList'
@@ -152,18 +126,13 @@ controllerDebuggeesBreakpointsList'
 controllerDebuggeesBreakpointsList' pCdblDebuggeeId_ =
     ControllerDebuggeesBreakpointsList'
     { _cdblXgafv = Nothing
-    , _cdblQuotaUser = Nothing
-    , _cdblPrettyPrint = True
     , _cdblUploadProtocol = Nothing
     , _cdblPp = True
     , _cdblAccessToken = Nothing
     , _cdblUploadType = Nothing
     , _cdblBearerToken = Nothing
-    , _cdblKey = Nothing
     , _cdblWaitToken = Nothing
     , _cdblDebuggeeId = pCdblDebuggeeId_
-    , _cdblOAuthToken = Nothing
-    , _cdblFields = Nothing
     , _cdblCallback = Nothing
     }
 
@@ -171,20 +140,6 @@ controllerDebuggeesBreakpointsList' pCdblDebuggeeId_ =
 cdblXgafv :: Lens' ControllerDebuggeesBreakpointsList' (Maybe Text)
 cdblXgafv
   = lens _cdblXgafv (\ s a -> s{_cdblXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-cdblQuotaUser :: Lens' ControllerDebuggeesBreakpointsList' (Maybe Text)
-cdblQuotaUser
-  = lens _cdblQuotaUser
-      (\ s a -> s{_cdblQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cdblPrettyPrint :: Lens' ControllerDebuggeesBreakpointsList' Bool
-cdblPrettyPrint
-  = lens _cdblPrettyPrint
-      (\ s a -> s{_cdblPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 cdblUploadProtocol :: Lens' ControllerDebuggeesBreakpointsList' (Maybe Text)
@@ -214,12 +169,6 @@ cdblBearerToken
   = lens _cdblBearerToken
       (\ s a -> s{_cdblBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cdblKey :: Lens' ControllerDebuggeesBreakpointsList' (Maybe AuthKey)
-cdblKey = lens _cdblKey (\ s a -> s{_cdblKey = a})
-
 -- | A wait token that, if specified, blocks the method call until the list
 -- of active breakpoints has changed, or a server selected timeout has
 -- expired. The value should be set from the last returned response. The
@@ -236,34 +185,16 @@ cdblDebuggeeId
   = lens _cdblDebuggeeId
       (\ s a -> s{_cdblDebuggeeId = a})
 
--- | OAuth 2.0 token for the current user.
-cdblOAuthToken :: Lens' ControllerDebuggeesBreakpointsList' (Maybe OAuthToken)
-cdblOAuthToken
-  = lens _cdblOAuthToken
-      (\ s a -> s{_cdblOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cdblFields :: Lens' ControllerDebuggeesBreakpointsList' (Maybe Text)
-cdblFields
-  = lens _cdblFields (\ s a -> s{_cdblFields = a})
-
 -- | JSONP
 cdblCallback :: Lens' ControllerDebuggeesBreakpointsList' (Maybe Text)
 cdblCallback
   = lens _cdblCallback (\ s a -> s{_cdblCallback = a})
 
-instance GoogleAuth
-         ControllerDebuggeesBreakpointsList' where
-        _AuthKey = cdblKey . _Just
-        _AuthToken = cdblOAuthToken . _Just
-
 instance GoogleRequest
          ControllerDebuggeesBreakpointsList' where
         type Rs ControllerDebuggeesBreakpointsList' =
              ListActiveBreakpointsResponse
-        request = requestWith debuggerRequest
-        requestWith rq
-          ControllerDebuggeesBreakpointsList'{..}
+        requestClient ControllerDebuggeesBreakpointsList'{..}
           = go _cdblDebuggeeId _cdblXgafv _cdblUploadProtocol
               (Just _cdblPp)
               _cdblAccessToken
@@ -271,14 +202,10 @@ instance GoogleRequest
               _cdblBearerToken
               _cdblWaitToken
               _cdblCallback
-              _cdblQuotaUser
-              (Just _cdblPrettyPrint)
-              _cdblFields
-              _cdblKey
-              _cdblOAuthToken
               (Just AltJSON)
+              debuggerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy ControllerDebuggeesBreakpointsListResource)
-                      rq
+                      mempty

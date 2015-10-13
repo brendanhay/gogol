@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference>
 module Network.Google.DoubleClickBids
     (
+    -- * Service Configuration
+      doubleClickBidsService
+
     -- * API Declaration
-      DoubleClickBidsAPI
+    , DoubleClickBidsAPI
 
     -- * Resources
 

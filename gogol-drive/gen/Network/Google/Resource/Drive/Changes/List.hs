@@ -33,18 +33,12 @@ module Network.Google.Resource.Drive.Changes.List
     , ChangesList'
 
     -- * Request Lenses
-    , chaQuotaUser
-    , chaPrettyPrint
-    , chaUserIP
     , chaIncludeSubscribed
     , chaStartChangeId
-    , chaKey
     , chaSpaces
     , chaPageToken
-    , chaOAuthToken
     , chaMaxResults
     , chaIncludeDeleted
-    , chaFields
     ) where
 
 import           Network.Google.Drive.Types
@@ -60,96 +54,46 @@ type ChangesListResource =
              QueryParam "pageToken" Text :>
                QueryParam "maxResults" Int32 :>
                  QueryParam "includeDeleted" Bool :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ChangeList
+                   QueryParam "alt" AltJSON :> Get '[JSON] ChangeList
 
 -- | Lists the changes for a user.
 --
 -- /See:/ 'changesList'' smart constructor.
 data ChangesList' = ChangesList'
-    { _chaQuotaUser         :: !(Maybe Text)
-    , _chaPrettyPrint       :: !Bool
-    , _chaUserIP            :: !(Maybe Text)
-    , _chaIncludeSubscribed :: !Bool
+    { _chaIncludeSubscribed :: !Bool
     , _chaStartChangeId     :: !(Maybe Int64)
-    , _chaKey               :: !(Maybe AuthKey)
     , _chaSpaces            :: !(Maybe Text)
     , _chaPageToken         :: !(Maybe Text)
-    , _chaOAuthToken        :: !(Maybe OAuthToken)
     , _chaMaxResults        :: !Int32
     , _chaIncludeDeleted    :: !Bool
-    , _chaFields            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'chaQuotaUser'
---
--- * 'chaPrettyPrint'
---
--- * 'chaUserIP'
---
 -- * 'chaIncludeSubscribed'
 --
 -- * 'chaStartChangeId'
---
--- * 'chaKey'
 --
 -- * 'chaSpaces'
 --
 -- * 'chaPageToken'
 --
--- * 'chaOAuthToken'
---
 -- * 'chaMaxResults'
 --
 -- * 'chaIncludeDeleted'
---
--- * 'chaFields'
 changesList'
     :: ChangesList'
 changesList' =
     ChangesList'
-    { _chaQuotaUser = Nothing
-    , _chaPrettyPrint = True
-    , _chaUserIP = Nothing
-    , _chaIncludeSubscribed = True
+    { _chaIncludeSubscribed = True
     , _chaStartChangeId = Nothing
-    , _chaKey = Nothing
     , _chaSpaces = Nothing
     , _chaPageToken = Nothing
-    , _chaOAuthToken = Nothing
     , _chaMaxResults = 100
     , _chaIncludeDeleted = True
-    , _chaFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-chaQuotaUser :: Lens' ChangesList' (Maybe Text)
-chaQuotaUser
-  = lens _chaQuotaUser (\ s a -> s{_chaQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-chaPrettyPrint :: Lens' ChangesList' Bool
-chaPrettyPrint
-  = lens _chaPrettyPrint
-      (\ s a -> s{_chaPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-chaUserIP :: Lens' ChangesList' (Maybe Text)
-chaUserIP
-  = lens _chaUserIP (\ s a -> s{_chaUserIP = a})
 
 -- | Whether to include public files the user has opened and shared files.
 -- When set to false, the list only includes owned files plus any shared or
@@ -165,12 +109,6 @@ chaStartChangeId
   = lens _chaStartChangeId
       (\ s a -> s{_chaStartChangeId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-chaKey :: Lens' ChangesList' (Maybe AuthKey)
-chaKey = lens _chaKey (\ s a -> s{_chaKey = a})
-
 -- | A comma-separated list of spaces to query. Supported values are
 -- \'drive\', \'appDataFolder\' and \'photos\'.
 chaSpaces :: Lens' ChangesList' (Maybe Text)
@@ -181,12 +119,6 @@ chaSpaces
 chaPageToken :: Lens' ChangesList' (Maybe Text)
 chaPageToken
   = lens _chaPageToken (\ s a -> s{_chaPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-chaOAuthToken :: Lens' ChangesList' (Maybe OAuthToken)
-chaOAuthToken
-  = lens _chaOAuthToken
-      (\ s a -> s{_chaOAuthToken = a})
 
 -- | Maximum number of changes to return.
 chaMaxResults :: Lens' ChangesList' Int32
@@ -200,30 +132,16 @@ chaIncludeDeleted
   = lens _chaIncludeDeleted
       (\ s a -> s{_chaIncludeDeleted = a})
 
--- | Selector specifying which fields to include in a partial response.
-chaFields :: Lens' ChangesList' (Maybe Text)
-chaFields
-  = lens _chaFields (\ s a -> s{_chaFields = a})
-
-instance GoogleAuth ChangesList' where
-        _AuthKey = chaKey . _Just
-        _AuthToken = chaOAuthToken . _Just
-
 instance GoogleRequest ChangesList' where
         type Rs ChangesList' = ChangeList
-        request = requestWith driveRequest
-        requestWith rq ChangesList'{..}
+        requestClient ChangesList'{..}
           = go (Just _chaIncludeSubscribed) _chaStartChangeId
               _chaSpaces
               _chaPageToken
               (Just _chaMaxResults)
               (Just _chaIncludeDeleted)
-              _chaQuotaUser
-              (Just _chaPrettyPrint)
-              _chaUserIP
-              _chaFields
-              _chaKey
-              _chaOAuthToken
               (Just AltJSON)
+              driveService
           where go
-                  = clientBuild (Proxy :: Proxy ChangesListResource) rq
+                  = buildClient (Proxy :: Proxy ChangesListResource)
+                      mempty

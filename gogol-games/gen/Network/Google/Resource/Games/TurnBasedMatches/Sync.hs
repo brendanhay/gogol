@@ -37,16 +37,10 @@ module Network.Google.Resource.Games.TurnBasedMatches.Sync
 
     -- * Request Lenses
     , tbmsMaxCompletedMatches
-    , tbmsQuotaUser
-    , tbmsPrettyPrint
-    , tbmsUserIP
-    , tbmsKey
     , tbmsIncludeMatchData
     , tbmsLanguage
     , tbmsPageToken
-    , tbmsOAuthToken
     , tbmsMaxResults
-    , tbmsFields
     ) where
 
 import           Network.Google.Games.Types
@@ -62,14 +56,8 @@ type TurnBasedMatchesSyncResource =
              QueryParam "language" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "maxResults" Int32 :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] TurnBasedMatchSync
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] TurnBasedMatchSync
 
 -- | Returns turn-based matches the player is or was involved in that changed
 -- since the last sync call, with the least recent changes coming first.
@@ -79,16 +67,10 @@ type TurnBasedMatchesSyncResource =
 -- /See:/ 'turnBasedMatchesSync'' smart constructor.
 data TurnBasedMatchesSync' = TurnBasedMatchesSync'
     { _tbmsMaxCompletedMatches :: !(Maybe Int32)
-    , _tbmsQuotaUser           :: !(Maybe Text)
-    , _tbmsPrettyPrint         :: !Bool
-    , _tbmsUserIP              :: !(Maybe Text)
-    , _tbmsKey                 :: !(Maybe AuthKey)
     , _tbmsIncludeMatchData    :: !(Maybe Bool)
     , _tbmsLanguage            :: !(Maybe Text)
     , _tbmsPageToken           :: !(Maybe Text)
-    , _tbmsOAuthToken          :: !(Maybe OAuthToken)
     , _tbmsMaxResults          :: !(Maybe Int32)
-    , _tbmsFields              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesSync'' with the minimum fields required to make a request.
@@ -97,40 +79,22 @@ data TurnBasedMatchesSync' = TurnBasedMatchesSync'
 --
 -- * 'tbmsMaxCompletedMatches'
 --
--- * 'tbmsQuotaUser'
---
--- * 'tbmsPrettyPrint'
---
--- * 'tbmsUserIP'
---
--- * 'tbmsKey'
---
 -- * 'tbmsIncludeMatchData'
 --
 -- * 'tbmsLanguage'
 --
 -- * 'tbmsPageToken'
 --
--- * 'tbmsOAuthToken'
---
 -- * 'tbmsMaxResults'
---
--- * 'tbmsFields'
 turnBasedMatchesSync'
     :: TurnBasedMatchesSync'
 turnBasedMatchesSync' =
     TurnBasedMatchesSync'
     { _tbmsMaxCompletedMatches = Nothing
-    , _tbmsQuotaUser = Nothing
-    , _tbmsPrettyPrint = True
-    , _tbmsUserIP = Nothing
-    , _tbmsKey = Nothing
     , _tbmsIncludeMatchData = Nothing
     , _tbmsLanguage = Nothing
     , _tbmsPageToken = Nothing
-    , _tbmsOAuthToken = Nothing
     , _tbmsMaxResults = Nothing
-    , _tbmsFields = Nothing
     }
 
 -- | The maximum number of completed or canceled matches to return in the
@@ -140,32 +104,6 @@ tbmsMaxCompletedMatches :: Lens' TurnBasedMatchesSync' (Maybe Int32)
 tbmsMaxCompletedMatches
   = lens _tbmsMaxCompletedMatches
       (\ s a -> s{_tbmsMaxCompletedMatches = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tbmsQuotaUser :: Lens' TurnBasedMatchesSync' (Maybe Text)
-tbmsQuotaUser
-  = lens _tbmsQuotaUser
-      (\ s a -> s{_tbmsQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tbmsPrettyPrint :: Lens' TurnBasedMatchesSync' Bool
-tbmsPrettyPrint
-  = lens _tbmsPrettyPrint
-      (\ s a -> s{_tbmsPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tbmsUserIP :: Lens' TurnBasedMatchesSync' (Maybe Text)
-tbmsUserIP
-  = lens _tbmsUserIP (\ s a -> s{_tbmsUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tbmsKey :: Lens' TurnBasedMatchesSync' (Maybe AuthKey)
-tbmsKey = lens _tbmsKey (\ s a -> s{_tbmsKey = a})
 
 -- | True if match data should be returned in the response. Note that not all
 -- data will necessarily be returned if include_match_data is true; the
@@ -188,12 +126,6 @@ tbmsPageToken
   = lens _tbmsPageToken
       (\ s a -> s{_tbmsPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-tbmsOAuthToken :: Lens' TurnBasedMatchesSync' (Maybe OAuthToken)
-tbmsOAuthToken
-  = lens _tbmsOAuthToken
-      (\ s a -> s{_tbmsOAuthToken = a})
-
 -- | The maximum number of matches to return in the response, used for
 -- paging. For any response, the actual number of matches to return may be
 -- less than the specified maxResults.
@@ -202,31 +134,16 @@ tbmsMaxResults
   = lens _tbmsMaxResults
       (\ s a -> s{_tbmsMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-tbmsFields :: Lens' TurnBasedMatchesSync' (Maybe Text)
-tbmsFields
-  = lens _tbmsFields (\ s a -> s{_tbmsFields = a})
-
-instance GoogleAuth TurnBasedMatchesSync' where
-        _AuthKey = tbmsKey . _Just
-        _AuthToken = tbmsOAuthToken . _Just
-
 instance GoogleRequest TurnBasedMatchesSync' where
         type Rs TurnBasedMatchesSync' = TurnBasedMatchSync
-        request = requestWith gamesRequest
-        requestWith rq TurnBasedMatchesSync'{..}
+        requestClient TurnBasedMatchesSync'{..}
           = go _tbmsMaxCompletedMatches _tbmsIncludeMatchData
               _tbmsLanguage
               _tbmsPageToken
               _tbmsMaxResults
-              _tbmsQuotaUser
-              (Just _tbmsPrettyPrint)
-              _tbmsUserIP
-              _tbmsFields
-              _tbmsKey
-              _tbmsOAuthToken
               (Just AltJSON)
+              gamesService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy TurnBasedMatchesSyncResource)
-                      rq
+                      mempty

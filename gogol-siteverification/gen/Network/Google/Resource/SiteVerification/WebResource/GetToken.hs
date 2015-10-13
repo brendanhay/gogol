@@ -33,13 +33,7 @@ module Network.Google.Resource.SiteVerification.WebResource.GetToken
     , WebResourceGetToken'
 
     -- * Request Lenses
-    , wrgtQuotaUser
-    , wrgtPrettyPrint
-    , wrgtUserIP
     , wrgtPayload
-    , wrgtKey
-    , wrgtOAuthToken
-    , wrgtFields
     ) where
 
 import           Network.Google.Prelude
@@ -49,122 +43,45 @@ import           Network.Google.SiteVerification.Types
 -- 'WebResourceGetToken'' request conforms to.
 type WebResourceGetTokenResource =
      "token" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "fields" Text :>
-               QueryParam "key" AuthKey :>
-                 Header "Authorization" OAuthToken :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON]
-                       SiteVerificationWebResourceGettokenRequest
-                       :>
-                       Post '[JSON]
-                         SiteVerificationWebResourceGettokenResponse
+       QueryParam "alt" AltJSON :>
+         ReqBody '[JSON]
+           SiteVerificationWebResourceGettokenRequest
+           :>
+           Post '[JSON]
+             SiteVerificationWebResourceGettokenResponse
 
 -- | Get a verification token for placing on a website or domain.
 --
 -- /See:/ 'webResourceGetToken'' smart constructor.
-data WebResourceGetToken' = WebResourceGetToken'
-    { _wrgtQuotaUser   :: !(Maybe Text)
-    , _wrgtPrettyPrint :: !Bool
-    , _wrgtUserIP      :: !(Maybe Text)
-    , _wrgtPayload     :: !SiteVerificationWebResourceGettokenRequest
-    , _wrgtKey         :: !(Maybe AuthKey)
-    , _wrgtOAuthToken  :: !(Maybe OAuthToken)
-    , _wrgtFields      :: !(Maybe Text)
+newtype WebResourceGetToken' = WebResourceGetToken'
+    { _wrgtPayload :: SiteVerificationWebResourceGettokenRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourceGetToken'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'wrgtQuotaUser'
---
--- * 'wrgtPrettyPrint'
---
--- * 'wrgtUserIP'
---
 -- * 'wrgtPayload'
---
--- * 'wrgtKey'
---
--- * 'wrgtOAuthToken'
---
--- * 'wrgtFields'
 webResourceGetToken'
     :: SiteVerificationWebResourceGettokenRequest -- ^ 'payload'
     -> WebResourceGetToken'
 webResourceGetToken' pWrgtPayload_ =
     WebResourceGetToken'
-    { _wrgtQuotaUser = Nothing
-    , _wrgtPrettyPrint = False
-    , _wrgtUserIP = Nothing
-    , _wrgtPayload = pWrgtPayload_
-    , _wrgtKey = Nothing
-    , _wrgtOAuthToken = Nothing
-    , _wrgtFields = Nothing
+    { _wrgtPayload = pWrgtPayload_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-wrgtQuotaUser :: Lens' WebResourceGetToken' (Maybe Text)
-wrgtQuotaUser
-  = lens _wrgtQuotaUser
-      (\ s a -> s{_wrgtQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-wrgtPrettyPrint :: Lens' WebResourceGetToken' Bool
-wrgtPrettyPrint
-  = lens _wrgtPrettyPrint
-      (\ s a -> s{_wrgtPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-wrgtUserIP :: Lens' WebResourceGetToken' (Maybe Text)
-wrgtUserIP
-  = lens _wrgtUserIP (\ s a -> s{_wrgtUserIP = a})
 
 -- | Multipart request metadata.
 wrgtPayload :: Lens' WebResourceGetToken' SiteVerificationWebResourceGettokenRequest
 wrgtPayload
   = lens _wrgtPayload (\ s a -> s{_wrgtPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-wrgtKey :: Lens' WebResourceGetToken' (Maybe AuthKey)
-wrgtKey = lens _wrgtKey (\ s a -> s{_wrgtKey = a})
-
--- | OAuth 2.0 token for the current user.
-wrgtOAuthToken :: Lens' WebResourceGetToken' (Maybe OAuthToken)
-wrgtOAuthToken
-  = lens _wrgtOAuthToken
-      (\ s a -> s{_wrgtOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-wrgtFields :: Lens' WebResourceGetToken' (Maybe Text)
-wrgtFields
-  = lens _wrgtFields (\ s a -> s{_wrgtFields = a})
-
-instance GoogleAuth WebResourceGetToken' where
-        _AuthKey = wrgtKey . _Just
-        _AuthToken = wrgtOAuthToken . _Just
-
 instance GoogleRequest WebResourceGetToken' where
         type Rs WebResourceGetToken' =
              SiteVerificationWebResourceGettokenResponse
-        request = requestWith siteVerificationRequest
-        requestWith rq WebResourceGetToken'{..}
-          = go _wrgtQuotaUser (Just _wrgtPrettyPrint)
-              _wrgtUserIP
-              _wrgtFields
-              _wrgtKey
-              _wrgtOAuthToken
-              (Just AltJSON)
-              _wrgtPayload
+        requestClient WebResourceGetToken'{..}
+          = go (Just AltJSON) _wrgtPayload
+              siteVerificationService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy WebResourceGetTokenResource)
-                      rq
+                      mempty

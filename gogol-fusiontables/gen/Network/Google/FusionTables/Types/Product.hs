@@ -1139,77 +1139,76 @@ instance ToJSON Task where
 --
 -- /See:/ 'template' smart constructor.
 data Template = Template
-    { _temeAutomaticColumnNames :: !(Maybe [Text])
-    , _temeTemplateId           :: !(Maybe Int32)
-    , _temeKind                 :: !Text
-    , _temeBody                 :: !(Maybe Text)
-    , _temeName                 :: !(Maybe Text)
-    , _temeTableId              :: !(Maybe Text)
+    { _ttAutomaticColumnNames :: !(Maybe [Text])
+    , _ttTemplateId           :: !(Maybe Int32)
+    , _ttKind                 :: !Text
+    , _ttBody                 :: !(Maybe Text)
+    , _ttName                 :: !(Maybe Text)
+    , _ttTableId              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Template' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'temeAutomaticColumnNames'
+-- * 'ttAutomaticColumnNames'
 --
--- * 'temeTemplateId'
+-- * 'ttTemplateId'
 --
--- * 'temeKind'
+-- * 'ttKind'
 --
--- * 'temeBody'
+-- * 'ttBody'
 --
--- * 'temeName'
+-- * 'ttName'
 --
--- * 'temeTableId'
+-- * 'ttTableId'
 template
     :: Template
 template =
     Template
-    { _temeAutomaticColumnNames = Nothing
-    , _temeTemplateId = Nothing
-    , _temeKind = "fusiontables#template"
-    , _temeBody = Nothing
-    , _temeName = Nothing
-    , _temeTableId = Nothing
+    { _ttAutomaticColumnNames = Nothing
+    , _ttTemplateId = Nothing
+    , _ttKind = "fusiontables#template"
+    , _ttBody = Nothing
+    , _ttName = Nothing
+    , _ttTableId = Nothing
     }
 
 -- | List of columns from which the template is to be automatically
 -- constructed. Only one of body or automaticColumns can be specified.
-temeAutomaticColumnNames :: Lens' Template [Text]
-temeAutomaticColumnNames
-  = lens _temeAutomaticColumnNames
-      (\ s a -> s{_temeAutomaticColumnNames = a})
+ttAutomaticColumnNames :: Lens' Template [Text]
+ttAutomaticColumnNames
+  = lens _ttAutomaticColumnNames
+      (\ s a -> s{_ttAutomaticColumnNames = a})
       . _Default
       . _Coerce
 
 -- | Identifier for the template, unique within the context of a particular
 -- table.
-temeTemplateId :: Lens' Template (Maybe Int32)
-temeTemplateId
-  = lens _temeTemplateId
-      (\ s a -> s{_temeTemplateId = a})
+ttTemplateId :: Lens' Template (Maybe Int32)
+ttTemplateId
+  = lens _ttTemplateId (\ s a -> s{_ttTemplateId = a})
 
 -- | The kind of item this is. For a template, this is always
 -- fusiontables#template.
-temeKind :: Lens' Template Text
-temeKind = lens _temeKind (\ s a -> s{_temeKind = a})
+ttKind :: Lens' Template Text
+ttKind = lens _ttKind (\ s a -> s{_ttKind = a})
 
 -- | Body of the template. It contains HTML with {column_name} to insert
 -- values from a particular column. The body is sanitized to remove certain
 -- tags, e.g., script. Only one of body or automaticColumns can be
 -- specified.
-temeBody :: Lens' Template (Maybe Text)
-temeBody = lens _temeBody (\ s a -> s{_temeBody = a})
+ttBody :: Lens' Template (Maybe Text)
+ttBody = lens _ttBody (\ s a -> s{_ttBody = a})
 
 -- | Optional name assigned to a template.
-temeName :: Lens' Template (Maybe Text)
-temeName = lens _temeName (\ s a -> s{_temeName = a})
+ttName :: Lens' Template (Maybe Text)
+ttName = lens _ttName (\ s a -> s{_ttName = a})
 
 -- | Identifier for the table for which the template is defined.
-temeTableId :: Lens' Template (Maybe Text)
-temeTableId
-  = lens _temeTableId (\ s a -> s{_temeTableId = a})
+ttTableId :: Lens' Template (Maybe Text)
+ttTableId
+  = lens _ttTableId (\ s a -> s{_ttTableId = a})
 
 instance FromJSON Template where
         parseJSON
@@ -1228,11 +1227,11 @@ instance ToJSON Template where
           = object
               (catMaybes
                  [("automaticColumnNames" .=) <$>
-                    _temeAutomaticColumnNames,
-                  ("templateId" .=) <$> _temeTemplateId,
-                  Just ("kind" .= _temeKind),
-                  ("body" .=) <$> _temeBody, ("name" .=) <$> _temeName,
-                  ("tableId" .=) <$> _temeTableId])
+                    _ttAutomaticColumnNames,
+                  ("templateId" .=) <$> _ttTemplateId,
+                  Just ("kind" .= _ttKind), ("body" .=) <$> _ttBody,
+                  ("name" .=) <$> _ttName,
+                  ("tableId" .=) <$> _ttTableId])
 
 -- | Represents a PointStyle within a StyleSetting
 --
@@ -1660,143 +1659,143 @@ instance ToJSON Column where
 --
 -- /See:/ 'table' smart constructor.
 data Table = Table
-    { _tabIsExportable               :: !(Maybe Bool)
-    , _tabKind                       :: !Text
-    , _tabColumnPropertiesJSONSchema :: !(Maybe Text)
-    , _tabTablePropertiesJSONSchema  :: !(Maybe Text)
-    , _tabName                       :: !(Maybe Text)
-    , _tabTablePropertiesJSON        :: !(Maybe Text)
-    , _tabColumns                    :: !(Maybe [Column])
-    , _tabBaseTableIds               :: !(Maybe [Text])
-    , _tabTableId                    :: !(Maybe Text)
-    , _tabSQL                        :: !(Maybe Text)
-    , _tabDescription                :: !(Maybe Text)
-    , _tabAttribution                :: !(Maybe Text)
-    , _tabAttributionLink            :: !(Maybe Text)
+    { _tabaIsExportable               :: !(Maybe Bool)
+    , _tabaKind                       :: !Text
+    , _tabaColumnPropertiesJSONSchema :: !(Maybe Text)
+    , _tabaTablePropertiesJSONSchema  :: !(Maybe Text)
+    , _tabaName                       :: !(Maybe Text)
+    , _tabaTablePropertiesJSON        :: !(Maybe Text)
+    , _tabaColumns                    :: !(Maybe [Column])
+    , _tabaBaseTableIds               :: !(Maybe [Text])
+    , _tabaTableId                    :: !(Maybe Text)
+    , _tabaSQL                        :: !(Maybe Text)
+    , _tabaDescription                :: !(Maybe Text)
+    , _tabaAttribution                :: !(Maybe Text)
+    , _tabaAttributionLink            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Table' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tabIsExportable'
+-- * 'tabaIsExportable'
 --
--- * 'tabKind'
+-- * 'tabaKind'
 --
--- * 'tabColumnPropertiesJSONSchema'
+-- * 'tabaColumnPropertiesJSONSchema'
 --
--- * 'tabTablePropertiesJSONSchema'
+-- * 'tabaTablePropertiesJSONSchema'
 --
--- * 'tabName'
+-- * 'tabaName'
 --
--- * 'tabTablePropertiesJSON'
+-- * 'tabaTablePropertiesJSON'
 --
--- * 'tabColumns'
+-- * 'tabaColumns'
 --
--- * 'tabBaseTableIds'
+-- * 'tabaBaseTableIds'
 --
--- * 'tabTableId'
+-- * 'tabaTableId'
 --
--- * 'tabSQL'
+-- * 'tabaSQL'
 --
--- * 'tabDescription'
+-- * 'tabaDescription'
 --
--- * 'tabAttribution'
+-- * 'tabaAttribution'
 --
--- * 'tabAttributionLink'
+-- * 'tabaAttributionLink'
 table
     :: Table
 table =
     Table
-    { _tabIsExportable = Nothing
-    , _tabKind = "fusiontables#table"
-    , _tabColumnPropertiesJSONSchema = Nothing
-    , _tabTablePropertiesJSONSchema = Nothing
-    , _tabName = Nothing
-    , _tabTablePropertiesJSON = Nothing
-    , _tabColumns = Nothing
-    , _tabBaseTableIds = Nothing
-    , _tabTableId = Nothing
-    , _tabSQL = Nothing
-    , _tabDescription = Nothing
-    , _tabAttribution = Nothing
-    , _tabAttributionLink = Nothing
+    { _tabaIsExportable = Nothing
+    , _tabaKind = "fusiontables#table"
+    , _tabaColumnPropertiesJSONSchema = Nothing
+    , _tabaTablePropertiesJSONSchema = Nothing
+    , _tabaName = Nothing
+    , _tabaTablePropertiesJSON = Nothing
+    , _tabaColumns = Nothing
+    , _tabaBaseTableIds = Nothing
+    , _tabaTableId = Nothing
+    , _tabaSQL = Nothing
+    , _tabaDescription = Nothing
+    , _tabaAttribution = Nothing
+    , _tabaAttributionLink = Nothing
     }
 
 -- | Variable for whether table is exportable.
-tabIsExportable :: Lens' Table (Maybe Bool)
-tabIsExportable
-  = lens _tabIsExportable
-      (\ s a -> s{_tabIsExportable = a})
+tabaIsExportable :: Lens' Table (Maybe Bool)
+tabaIsExportable
+  = lens _tabaIsExportable
+      (\ s a -> s{_tabaIsExportable = a})
 
 -- | The kind of item this is. For a table, this is always
 -- fusiontables#table.
-tabKind :: Lens' Table Text
-tabKind = lens _tabKind (\ s a -> s{_tabKind = a})
+tabaKind :: Lens' Table Text
+tabaKind = lens _tabaKind (\ s a -> s{_tabaKind = a})
 
 -- | Default JSON schema for validating all JSON column properties.
-tabColumnPropertiesJSONSchema :: Lens' Table (Maybe Text)
-tabColumnPropertiesJSONSchema
-  = lens _tabColumnPropertiesJSONSchema
-      (\ s a -> s{_tabColumnPropertiesJSONSchema = a})
+tabaColumnPropertiesJSONSchema :: Lens' Table (Maybe Text)
+tabaColumnPropertiesJSONSchema
+  = lens _tabaColumnPropertiesJSONSchema
+      (\ s a -> s{_tabaColumnPropertiesJSONSchema = a})
 
 -- | JSON schema for validating the JSON table properties.
-tabTablePropertiesJSONSchema :: Lens' Table (Maybe Text)
-tabTablePropertiesJSONSchema
-  = lens _tabTablePropertiesJSONSchema
-      (\ s a -> s{_tabTablePropertiesJSONSchema = a})
+tabaTablePropertiesJSONSchema :: Lens' Table (Maybe Text)
+tabaTablePropertiesJSONSchema
+  = lens _tabaTablePropertiesJSONSchema
+      (\ s a -> s{_tabaTablePropertiesJSONSchema = a})
 
 -- | Name assigned to a table.
-tabName :: Lens' Table (Maybe Text)
-tabName = lens _tabName (\ s a -> s{_tabName = a})
+tabaName :: Lens' Table (Maybe Text)
+tabaName = lens _tabaName (\ s a -> s{_tabaName = a})
 
 -- | JSON object containing custom table properties.
-tabTablePropertiesJSON :: Lens' Table (Maybe Text)
-tabTablePropertiesJSON
-  = lens _tabTablePropertiesJSON
-      (\ s a -> s{_tabTablePropertiesJSON = a})
+tabaTablePropertiesJSON :: Lens' Table (Maybe Text)
+tabaTablePropertiesJSON
+  = lens _tabaTablePropertiesJSON
+      (\ s a -> s{_tabaTablePropertiesJSON = a})
 
 -- | Columns in the table.
-tabColumns :: Lens' Table [Column]
-tabColumns
-  = lens _tabColumns (\ s a -> s{_tabColumns = a}) .
+tabaColumns :: Lens' Table [Column]
+tabaColumns
+  = lens _tabaColumns (\ s a -> s{_tabaColumns = a}) .
       _Default
       . _Coerce
 
 -- | Base table identifier if this table is a view or merged table.
-tabBaseTableIds :: Lens' Table [Text]
-tabBaseTableIds
-  = lens _tabBaseTableIds
-      (\ s a -> s{_tabBaseTableIds = a})
+tabaBaseTableIds :: Lens' Table [Text]
+tabaBaseTableIds
+  = lens _tabaBaseTableIds
+      (\ s a -> s{_tabaBaseTableIds = a})
       . _Default
       . _Coerce
 
 -- | Encrypted unique alphanumeric identifier for the table.
-tabTableId :: Lens' Table (Maybe Text)
-tabTableId
-  = lens _tabTableId (\ s a -> s{_tabTableId = a})
+tabaTableId :: Lens' Table (Maybe Text)
+tabaTableId
+  = lens _tabaTableId (\ s a -> s{_tabaTableId = a})
 
 -- | SQL that encodes the table definition for derived tables.
-tabSQL :: Lens' Table (Maybe Text)
-tabSQL = lens _tabSQL (\ s a -> s{_tabSQL = a})
+tabaSQL :: Lens' Table (Maybe Text)
+tabaSQL = lens _tabaSQL (\ s a -> s{_tabaSQL = a})
 
 -- | Description assigned to the table.
-tabDescription :: Lens' Table (Maybe Text)
-tabDescription
-  = lens _tabDescription
-      (\ s a -> s{_tabDescription = a})
+tabaDescription :: Lens' Table (Maybe Text)
+tabaDescription
+  = lens _tabaDescription
+      (\ s a -> s{_tabaDescription = a})
 
 -- | Attribution assigned to the table.
-tabAttribution :: Lens' Table (Maybe Text)
-tabAttribution
-  = lens _tabAttribution
-      (\ s a -> s{_tabAttribution = a})
+tabaAttribution :: Lens' Table (Maybe Text)
+tabaAttribution
+  = lens _tabaAttribution
+      (\ s a -> s{_tabaAttribution = a})
 
 -- | Optional link for attribution.
-tabAttributionLink :: Lens' Table (Maybe Text)
-tabAttributionLink
-  = lens _tabAttributionLink
-      (\ s a -> s{_tabAttributionLink = a})
+tabaAttributionLink :: Lens' Table (Maybe Text)
+tabaAttributionLink
+  = lens _tabaAttributionLink
+      (\ s a -> s{_tabaAttributionLink = a})
 
 instance FromJSON Table where
         parseJSON
@@ -1821,22 +1820,22 @@ instance ToJSON Table where
         toJSON Table{..}
           = object
               (catMaybes
-                 [("isExportable" .=) <$> _tabIsExportable,
-                  Just ("kind" .= _tabKind),
+                 [("isExportable" .=) <$> _tabaIsExportable,
+                  Just ("kind" .= _tabaKind),
                   ("columnPropertiesJsonSchema" .=) <$>
-                    _tabColumnPropertiesJSONSchema,
+                    _tabaColumnPropertiesJSONSchema,
                   ("tablePropertiesJsonSchema" .=) <$>
-                    _tabTablePropertiesJSONSchema,
-                  ("name" .=) <$> _tabName,
+                    _tabaTablePropertiesJSONSchema,
+                  ("name" .=) <$> _tabaName,
                   ("tablePropertiesJson" .=) <$>
-                    _tabTablePropertiesJSON,
-                  ("columns" .=) <$> _tabColumns,
-                  ("baseTableIds" .=) <$> _tabBaseTableIds,
-                  ("tableId" .=) <$> _tabTableId,
-                  ("sql" .=) <$> _tabSQL,
-                  ("description" .=) <$> _tabDescription,
-                  ("attribution" .=) <$> _tabAttribution,
-                  ("attributionLink" .=) <$> _tabAttributionLink])
+                    _tabaTablePropertiesJSON,
+                  ("columns" .=) <$> _tabaColumns,
+                  ("baseTableIds" .=) <$> _tabaBaseTableIds,
+                  ("tableId" .=) <$> _tabaTableId,
+                  ("sql" .=) <$> _tabaSQL,
+                  ("description" .=) <$> _tabaDescription,
+                  ("attribution" .=) <$> _tabaAttribution,
+                  ("attributionLink" .=) <$> _tabaAttributionLink])
 
 -- | Represents a LineStyle within a StyleSetting
 --

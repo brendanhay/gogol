@@ -34,15 +34,9 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Patch
     , DefaultObjectAccessControlsPatch'
 
     -- * Request Lenses
-    , doacpQuotaUser
-    , doacpPrettyPrint
-    , doacpUserIP
     , doacpBucket
     , doacpPayload
-    , doacpKey
-    , doacpOAuthToken
     , doacpEntity
-    , doacpFields
     ) where
 
 import           Network.Google.Prelude
@@ -55,53 +49,29 @@ type DefaultObjectAccessControlsPatchResource =
        Capture "bucket" Text :>
          "defaultObjectAcl" :>
            Capture "entity" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] ObjectAccessControl :>
-                             Patch '[JSON] ObjectAccessControl
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] ObjectAccessControl :>
+                 Patch '[JSON] ObjectAccessControl
 
 -- | Updates a default object ACL entry on the specified bucket. This method
 -- supports patch semantics.
 --
 -- /See:/ 'defaultObjectAccessControlsPatch'' smart constructor.
 data DefaultObjectAccessControlsPatch' = DefaultObjectAccessControlsPatch'
-    { _doacpQuotaUser   :: !(Maybe Text)
-    , _doacpPrettyPrint :: !Bool
-    , _doacpUserIP      :: !(Maybe Text)
-    , _doacpBucket      :: !Text
-    , _doacpPayload     :: !ObjectAccessControl
-    , _doacpKey         :: !(Maybe AuthKey)
-    , _doacpOAuthToken  :: !(Maybe OAuthToken)
-    , _doacpEntity      :: !Text
-    , _doacpFields      :: !(Maybe Text)
+    { _doacpBucket  :: !Text
+    , _doacpPayload :: !ObjectAccessControl
+    , _doacpEntity  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'doacpQuotaUser'
---
--- * 'doacpPrettyPrint'
---
--- * 'doacpUserIP'
---
 -- * 'doacpBucket'
 --
 -- * 'doacpPayload'
 --
--- * 'doacpKey'
---
--- * 'doacpOAuthToken'
---
 -- * 'doacpEntity'
---
--- * 'doacpFields'
 defaultObjectAccessControlsPatch'
     :: Text -- ^ 'bucket'
     -> ObjectAccessControl -- ^ 'payload'
@@ -109,36 +79,10 @@ defaultObjectAccessControlsPatch'
     -> DefaultObjectAccessControlsPatch'
 defaultObjectAccessControlsPatch' pDoacpBucket_ pDoacpPayload_ pDoacpEntity_ =
     DefaultObjectAccessControlsPatch'
-    { _doacpQuotaUser = Nothing
-    , _doacpPrettyPrint = True
-    , _doacpUserIP = Nothing
-    , _doacpBucket = pDoacpBucket_
+    { _doacpBucket = pDoacpBucket_
     , _doacpPayload = pDoacpPayload_
-    , _doacpKey = Nothing
-    , _doacpOAuthToken = Nothing
     , _doacpEntity = pDoacpEntity_
-    , _doacpFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-doacpQuotaUser :: Lens' DefaultObjectAccessControlsPatch' (Maybe Text)
-doacpQuotaUser
-  = lens _doacpQuotaUser
-      (\ s a -> s{_doacpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-doacpPrettyPrint :: Lens' DefaultObjectAccessControlsPatch' Bool
-doacpPrettyPrint
-  = lens _doacpPrettyPrint
-      (\ s a -> s{_doacpPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-doacpUserIP :: Lens' DefaultObjectAccessControlsPatch' (Maybe Text)
-doacpUserIP
-  = lens _doacpUserIP (\ s a -> s{_doacpUserIP = a})
 
 -- | Name of a bucket.
 doacpBucket :: Lens' DefaultObjectAccessControlsPatch' Text
@@ -150,18 +94,6 @@ doacpPayload :: Lens' DefaultObjectAccessControlsPatch' ObjectAccessControl
 doacpPayload
   = lens _doacpPayload (\ s a -> s{_doacpPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-doacpKey :: Lens' DefaultObjectAccessControlsPatch' (Maybe AuthKey)
-doacpKey = lens _doacpKey (\ s a -> s{_doacpKey = a})
-
--- | OAuth 2.0 token for the current user.
-doacpOAuthToken :: Lens' DefaultObjectAccessControlsPatch' (Maybe OAuthToken)
-doacpOAuthToken
-  = lens _doacpOAuthToken
-      (\ s a -> s{_doacpOAuthToken = a})
-
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
 -- allAuthenticatedUsers.
@@ -169,32 +101,16 @@ doacpEntity :: Lens' DefaultObjectAccessControlsPatch' Text
 doacpEntity
   = lens _doacpEntity (\ s a -> s{_doacpEntity = a})
 
--- | Selector specifying which fields to include in a partial response.
-doacpFields :: Lens' DefaultObjectAccessControlsPatch' (Maybe Text)
-doacpFields
-  = lens _doacpFields (\ s a -> s{_doacpFields = a})
-
-instance GoogleAuth DefaultObjectAccessControlsPatch'
-         where
-        _AuthKey = doacpKey . _Just
-        _AuthToken = doacpOAuthToken . _Just
-
 instance GoogleRequest
          DefaultObjectAccessControlsPatch' where
         type Rs DefaultObjectAccessControlsPatch' =
              ObjectAccessControl
-        request = requestWith storageRequest
-        requestWith rq DefaultObjectAccessControlsPatch'{..}
-          = go _doacpBucket _doacpEntity _doacpQuotaUser
-              (Just _doacpPrettyPrint)
-              _doacpUserIP
-              _doacpFields
-              _doacpKey
-              _doacpOAuthToken
-              (Just AltJSON)
+        requestClient DefaultObjectAccessControlsPatch'{..}
+          = go _doacpBucket _doacpEntity (Just AltJSON)
               _doacpPayload
+              storageService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy DefaultObjectAccessControlsPatchResource)
-                      rq
+                      mempty

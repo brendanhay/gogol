@@ -33,13 +33,7 @@ module Network.Google.Resource.DataTransfer.Transfers.Get
     , TransfersGet'
 
     -- * Request Lenses
-    , tgQuotaUser
-    , tgPrettyPrint
-    , tgUserIP
-    , tgKey
-    , tgOAuthToken
     , tgDataTransferId
-    , tgFields
     ) where
 
 import           Network.Google.DataTransfer.Types
@@ -50,86 +44,27 @@ import           Network.Google.Prelude
 type TransfersGetResource =
      "transfers" :>
        Capture "dataTransferId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] DataTransfer
+         QueryParam "alt" AltJSON :> Get '[JSON] DataTransfer
 
 -- | Retrieves a data transfer request by its resource ID.
 --
 -- /See:/ 'transfersGet'' smart constructor.
-data TransfersGet' = TransfersGet'
-    { _tgQuotaUser      :: !(Maybe Text)
-    , _tgPrettyPrint    :: !Bool
-    , _tgUserIP         :: !(Maybe Text)
-    , _tgKey            :: !(Maybe AuthKey)
-    , _tgOAuthToken     :: !(Maybe OAuthToken)
-    , _tgDataTransferId :: !Text
-    , _tgFields         :: !(Maybe Text)
+newtype TransfersGet' = TransfersGet'
+    { _tgDataTransferId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransfersGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tgQuotaUser'
---
--- * 'tgPrettyPrint'
---
--- * 'tgUserIP'
---
--- * 'tgKey'
---
--- * 'tgOAuthToken'
---
 -- * 'tgDataTransferId'
---
--- * 'tgFields'
 transfersGet'
     :: Text -- ^ 'dataTransferId'
     -> TransfersGet'
 transfersGet' pTgDataTransferId_ =
     TransfersGet'
-    { _tgQuotaUser = Nothing
-    , _tgPrettyPrint = True
-    , _tgUserIP = Nothing
-    , _tgKey = Nothing
-    , _tgOAuthToken = Nothing
-    , _tgDataTransferId = pTgDataTransferId_
-    , _tgFields = Nothing
+    { _tgDataTransferId = pTgDataTransferId_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tgQuotaUser :: Lens' TransfersGet' (Maybe Text)
-tgQuotaUser
-  = lens _tgQuotaUser (\ s a -> s{_tgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tgPrettyPrint :: Lens' TransfersGet' Bool
-tgPrettyPrint
-  = lens _tgPrettyPrint
-      (\ s a -> s{_tgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tgUserIP :: Lens' TransfersGet' (Maybe Text)
-tgUserIP = lens _tgUserIP (\ s a -> s{_tgUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tgKey :: Lens' TransfersGet' (Maybe AuthKey)
-tgKey = lens _tgKey (\ s a -> s{_tgKey = a})
-
--- | OAuth 2.0 token for the current user.
-tgOAuthToken :: Lens' TransfersGet' (Maybe OAuthToken)
-tgOAuthToken
-  = lens _tgOAuthToken (\ s a -> s{_tgOAuthToken = a})
 
 -- | ID of the resource to be retrieved. This is returned in the response
 -- from the insert method.
@@ -138,25 +73,11 @@ tgDataTransferId
   = lens _tgDataTransferId
       (\ s a -> s{_tgDataTransferId = a})
 
--- | Selector specifying which fields to include in a partial response.
-tgFields :: Lens' TransfersGet' (Maybe Text)
-tgFields = lens _tgFields (\ s a -> s{_tgFields = a})
-
-instance GoogleAuth TransfersGet' where
-        _AuthKey = tgKey . _Just
-        _AuthToken = tgOAuthToken . _Just
-
 instance GoogleRequest TransfersGet' where
         type Rs TransfersGet' = DataTransfer
-        request = requestWith dataTransferRequest
-        requestWith rq TransfersGet'{..}
-          = go _tgDataTransferId _tgQuotaUser
-              (Just _tgPrettyPrint)
-              _tgUserIP
-              _tgFields
-              _tgKey
-              _tgOAuthToken
-              (Just AltJSON)
+        requestClient TransfersGet'{..}
+          = go _tgDataTransferId (Just AltJSON)
+              dataTransferService
           where go
-                  = clientBuild (Proxy :: Proxy TransfersGetResource)
-                      rq
+                  = buildClient (Proxy :: Proxy TransfersGetResource)
+                      mempty

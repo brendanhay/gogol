@@ -34,19 +34,13 @@ module Network.Google.Resource.Content.Orders.List
 
     -- * Request Lenses
     , olPlacedDateEnd
-    , olQuotaUser
     , olMerchantId
-    , olPrettyPrint
     , olOrderBy
-    , olUserIP
     , olAcknowledged
-    , olKey
     , olStatuses
     , olPageToken
-    , olOAuthToken
     , olPlacedDateStart
     , olMaxResults
-    , olFields
     ) where
 
 import           Network.Google.Prelude
@@ -64,33 +58,21 @@ type OrdersListResource =
                  QueryParam "pageToken" Text :>
                    QueryParam "placedDateStart" Text :>
                      QueryParam "maxResults" Word32 :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] OrdersListResponse
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] OrdersListResponse
 
 -- | Lists the orders in your Merchant Center account.
 --
 -- /See:/ 'ordersList'' smart constructor.
 data OrdersList' = OrdersList'
     { _olPlacedDateEnd   :: !(Maybe Text)
-    , _olQuotaUser       :: !(Maybe Text)
     , _olMerchantId      :: !Word64
-    , _olPrettyPrint     :: !Bool
     , _olOrderBy         :: !(Maybe OrdersListOrderBy)
-    , _olUserIP          :: !(Maybe Text)
     , _olAcknowledged    :: !(Maybe Bool)
-    , _olKey             :: !(Maybe AuthKey)
     , _olStatuses        :: !(Maybe [OrdersListStatuses])
     , _olPageToken       :: !(Maybe Text)
-    , _olOAuthToken      :: !(Maybe OAuthToken)
     , _olPlacedDateStart :: !(Maybe Text)
     , _olMaxResults      :: !(Maybe Word32)
-    , _olFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersList'' with the minimum fields required to make a request.
@@ -99,50 +81,32 @@ data OrdersList' = OrdersList'
 --
 -- * 'olPlacedDateEnd'
 --
--- * 'olQuotaUser'
---
 -- * 'olMerchantId'
---
--- * 'olPrettyPrint'
 --
 -- * 'olOrderBy'
 --
--- * 'olUserIP'
---
 -- * 'olAcknowledged'
---
--- * 'olKey'
 --
 -- * 'olStatuses'
 --
 -- * 'olPageToken'
 --
--- * 'olOAuthToken'
---
 -- * 'olPlacedDateStart'
 --
 -- * 'olMaxResults'
---
--- * 'olFields'
 ordersList'
     :: Word64 -- ^ 'merchantId'
     -> OrdersList'
 ordersList' pOlMerchantId_ =
     OrdersList'
     { _olPlacedDateEnd = Nothing
-    , _olQuotaUser = Nothing
     , _olMerchantId = pOlMerchantId_
-    , _olPrettyPrint = True
     , _olOrderBy = Nothing
-    , _olUserIP = Nothing
     , _olAcknowledged = Nothing
-    , _olKey = Nothing
     , _olStatuses = Nothing
     , _olPageToken = Nothing
-    , _olOAuthToken = Nothing
     , _olPlacedDateStart = Nothing
     , _olMaxResults = Nothing
-    , _olFields = Nothing
     }
 
 -- | Obtains orders placed before this date (exclusively), in ISO 8601
@@ -152,23 +116,10 @@ olPlacedDateEnd
   = lens _olPlacedDateEnd
       (\ s a -> s{_olPlacedDateEnd = a})
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-olQuotaUser :: Lens' OrdersList' (Maybe Text)
-olQuotaUser
-  = lens _olQuotaUser (\ s a -> s{_olQuotaUser = a})
-
 -- | The ID of the managing account.
 olMerchantId :: Lens' OrdersList' Word64
 olMerchantId
   = lens _olMerchantId (\ s a -> s{_olMerchantId = a})
-
--- | Returns response with indentations and line breaks.
-olPrettyPrint :: Lens' OrdersList' Bool
-olPrettyPrint
-  = lens _olPrettyPrint
-      (\ s a -> s{_olPrettyPrint = a})
 
 -- | The ordering of the returned list. The only supported value are
 -- placedDate desc and placedDate asc for now, which returns orders sorted
@@ -180,11 +131,6 @@ olOrderBy :: Lens' OrdersList' (Maybe OrdersListOrderBy)
 olOrderBy
   = lens _olOrderBy (\ s a -> s{_olOrderBy = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-olUserIP :: Lens' OrdersList' (Maybe Text)
-olUserIP = lens _olUserIP (\ s a -> s{_olUserIP = a})
-
 -- | Obtains orders that match the acknowledgement status. When set to true,
 -- obtains orders that have been acknowledged. When false, obtains orders
 -- that have not been acknowledged. We recommend using this filter set to
@@ -194,12 +140,6 @@ olAcknowledged :: Lens' OrdersList' (Maybe Bool)
 olAcknowledged
   = lens _olAcknowledged
       (\ s a -> s{_olAcknowledged = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-olKey :: Lens' OrdersList' (Maybe AuthKey)
-olKey = lens _olKey (\ s a -> s{_olKey = a})
 
 -- | Obtains orders that match any of the specified statuses. Multiple values
 -- can be specified with comma separation. Additionally, please note that
@@ -217,11 +157,6 @@ olPageToken :: Lens' OrdersList' (Maybe Text)
 olPageToken
   = lens _olPageToken (\ s a -> s{_olPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-olOAuthToken :: Lens' OrdersList' (Maybe OAuthToken)
-olOAuthToken
-  = lens _olOAuthToken (\ s a -> s{_olOAuthToken = a})
-
 -- | Obtains orders placed after this date (inclusively), in ISO 8601 format.
 olPlacedDateStart :: Lens' OrdersList' (Maybe Text)
 olPlacedDateStart
@@ -236,30 +171,17 @@ olMaxResults :: Lens' OrdersList' (Maybe Word32)
 olMaxResults
   = lens _olMaxResults (\ s a -> s{_olMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-olFields :: Lens' OrdersList' (Maybe Text)
-olFields = lens _olFields (\ s a -> s{_olFields = a})
-
-instance GoogleAuth OrdersList' where
-        _AuthKey = olKey . _Just
-        _AuthToken = olOAuthToken . _Just
-
 instance GoogleRequest OrdersList' where
         type Rs OrdersList' = OrdersListResponse
-        request = requestWith shoppingContentRequest
-        requestWith rq OrdersList'{..}
+        requestClient OrdersList'{..}
           = go _olMerchantId _olPlacedDateEnd _olOrderBy
               _olAcknowledged
               (_olStatuses ^. _Default)
               _olPageToken
               _olPlacedDateStart
               _olMaxResults
-              _olQuotaUser
-              (Just _olPrettyPrint)
-              _olUserIP
-              _olFields
-              _olKey
-              _olOAuthToken
               (Just AltJSON)
+              shoppingContentService
           where go
-                  = clientBuild (Proxy :: Proxy OrdersListResource) rq
+                  = buildClient (Proxy :: Proxy OrdersListResource)
+                      mempty

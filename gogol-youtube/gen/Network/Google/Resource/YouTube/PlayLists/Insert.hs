@@ -33,16 +33,10 @@ module Network.Google.Resource.YouTube.PlayLists.Insert
     , PlayListsInsert'
 
     -- * Request Lenses
-    , pliQuotaUser
     , pliPart
-    , pliPrettyPrint
-    , pliUserIP
     , pliPayload
     , pliOnBehalfOfContentOwner
-    , pliKey
     , pliOnBehalfOfContentOwnerChannel
-    , pliOAuthToken
-    , pliFields
     ) where
 
 import           Network.Google.Prelude
@@ -55,96 +49,47 @@ type PlayListsInsertResource =
        QueryParam "part" Text :>
          QueryParam "onBehalfOfContentOwner" Text :>
            QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] PlayList :> Post '[JSON] PlayList
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] PlayList :> Post '[JSON] PlayList
 
 -- | Creates a playlist.
 --
 -- /See:/ 'playListsInsert'' smart constructor.
 data PlayListsInsert' = PlayListsInsert'
-    { _pliQuotaUser                     :: !(Maybe Text)
-    , _pliPart                          :: !Text
-    , _pliPrettyPrint                   :: !Bool
-    , _pliUserIP                        :: !(Maybe Text)
+    { _pliPart                          :: !Text
     , _pliPayload                       :: !PlayList
     , _pliOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _pliKey                           :: !(Maybe AuthKey)
     , _pliOnBehalfOfContentOwnerChannel :: !(Maybe Text)
-    , _pliOAuthToken                    :: !(Maybe OAuthToken)
-    , _pliFields                        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pliQuotaUser'
---
 -- * 'pliPart'
---
--- * 'pliPrettyPrint'
---
--- * 'pliUserIP'
 --
 -- * 'pliPayload'
 --
 -- * 'pliOnBehalfOfContentOwner'
 --
--- * 'pliKey'
---
 -- * 'pliOnBehalfOfContentOwnerChannel'
---
--- * 'pliOAuthToken'
---
--- * 'pliFields'
 playListsInsert'
     :: Text -- ^ 'part'
     -> PlayList -- ^ 'payload'
     -> PlayListsInsert'
 playListsInsert' pPliPart_ pPliPayload_ =
     PlayListsInsert'
-    { _pliQuotaUser = Nothing
-    , _pliPart = pPliPart_
-    , _pliPrettyPrint = True
-    , _pliUserIP = Nothing
+    { _pliPart = pPliPart_
     , _pliPayload = pPliPayload_
     , _pliOnBehalfOfContentOwner = Nothing
-    , _pliKey = Nothing
     , _pliOnBehalfOfContentOwnerChannel = Nothing
-    , _pliOAuthToken = Nothing
-    , _pliFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-pliQuotaUser :: Lens' PlayListsInsert' (Maybe Text)
-pliQuotaUser
-  = lens _pliQuotaUser (\ s a -> s{_pliQuotaUser = a})
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the
 -- properties that the API response will include.
 pliPart :: Lens' PlayListsInsert' Text
 pliPart = lens _pliPart (\ s a -> s{_pliPart = a})
-
--- | Returns response with indentations and line breaks.
-pliPrettyPrint :: Lens' PlayListsInsert' Bool
-pliPrettyPrint
-  = lens _pliPrettyPrint
-      (\ s a -> s{_pliPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-pliUserIP :: Lens' PlayListsInsert' (Maybe Text)
-pliUserIP
-  = lens _pliUserIP (\ s a -> s{_pliUserIP = a})
 
 -- | Multipart request metadata.
 pliPayload :: Lens' PlayListsInsert' PlayList
@@ -165,12 +110,6 @@ pliOnBehalfOfContentOwner :: Lens' PlayListsInsert' (Maybe Text)
 pliOnBehalfOfContentOwner
   = lens _pliOnBehalfOfContentOwner
       (\ s a -> s{_pliOnBehalfOfContentOwner = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pliKey :: Lens' PlayListsInsert' (Maybe AuthKey)
-pliKey = lens _pliKey (\ s a -> s{_pliKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
 -- This parameter is intended exclusively for YouTube content partners. The
@@ -193,36 +132,15 @@ pliOnBehalfOfContentOwnerChannel
   = lens _pliOnBehalfOfContentOwnerChannel
       (\ s a -> s{_pliOnBehalfOfContentOwnerChannel = a})
 
--- | OAuth 2.0 token for the current user.
-pliOAuthToken :: Lens' PlayListsInsert' (Maybe OAuthToken)
-pliOAuthToken
-  = lens _pliOAuthToken
-      (\ s a -> s{_pliOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pliFields :: Lens' PlayListsInsert' (Maybe Text)
-pliFields
-  = lens _pliFields (\ s a -> s{_pliFields = a})
-
-instance GoogleAuth PlayListsInsert' where
-        _AuthKey = pliKey . _Just
-        _AuthToken = pliOAuthToken . _Just
-
 instance GoogleRequest PlayListsInsert' where
         type Rs PlayListsInsert' = PlayList
-        request = requestWith youTubeRequest
-        requestWith rq PlayListsInsert'{..}
+        requestClient PlayListsInsert'{..}
           = go (Just _pliPart) _pliOnBehalfOfContentOwner
               _pliOnBehalfOfContentOwnerChannel
-              _pliQuotaUser
-              (Just _pliPrettyPrint)
-              _pliUserIP
-              _pliFields
-              _pliKey
-              _pliOAuthToken
               (Just AltJSON)
               _pliPayload
+              youTubeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy PlayListsInsertResource)
-                      rq
+                      mempty

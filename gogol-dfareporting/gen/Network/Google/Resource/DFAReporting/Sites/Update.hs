@@ -33,14 +33,8 @@ module Network.Google.Resource.DFAReporting.Sites.Update
     , SitesUpdate'
 
     -- * Request Lenses
-    , suQuotaUser
-    , suPrettyPrint
-    , suUserIP
     , suProFileId
     , suPayload
-    , suKey
-    , suOAuthToken
-    , suFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,81 +46,33 @@ type SitesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "sites" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Site :> Put '[JSON] Site
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] Site :> Put '[JSON] Site
 
 -- | Updates an existing site.
 --
 -- /See:/ 'sitesUpdate'' smart constructor.
 data SitesUpdate' = SitesUpdate'
-    { _suQuotaUser   :: !(Maybe Text)
-    , _suPrettyPrint :: !Bool
-    , _suUserIP      :: !(Maybe Text)
-    , _suProFileId   :: !Int64
-    , _suPayload     :: !Site
-    , _suKey         :: !(Maybe AuthKey)
-    , _suOAuthToken  :: !(Maybe OAuthToken)
-    , _suFields      :: !(Maybe Text)
+    { _suProFileId :: !Int64
+    , _suPayload   :: !Site
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'suQuotaUser'
---
--- * 'suPrettyPrint'
---
--- * 'suUserIP'
---
 -- * 'suProFileId'
 --
 -- * 'suPayload'
---
--- * 'suKey'
---
--- * 'suOAuthToken'
---
--- * 'suFields'
 sitesUpdate'
     :: Int64 -- ^ 'profileId'
     -> Site -- ^ 'payload'
     -> SitesUpdate'
 sitesUpdate' pSuProFileId_ pSuPayload_ =
     SitesUpdate'
-    { _suQuotaUser = Nothing
-    , _suPrettyPrint = True
-    , _suUserIP = Nothing
-    , _suProFileId = pSuProFileId_
+    { _suProFileId = pSuProFileId_
     , _suPayload = pSuPayload_
-    , _suKey = Nothing
-    , _suOAuthToken = Nothing
-    , _suFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-suQuotaUser :: Lens' SitesUpdate' (Maybe Text)
-suQuotaUser
-  = lens _suQuotaUser (\ s a -> s{_suQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-suPrettyPrint :: Lens' SitesUpdate' Bool
-suPrettyPrint
-  = lens _suPrettyPrint
-      (\ s a -> s{_suPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-suUserIP :: Lens' SitesUpdate' (Maybe Text)
-suUserIP = lens _suUserIP (\ s a -> s{_suUserIP = a})
 
 -- | User profile ID associated with this request.
 suProFileId :: Lens' SitesUpdate' Int64
@@ -138,35 +84,11 @@ suPayload :: Lens' SitesUpdate' Site
 suPayload
   = lens _suPayload (\ s a -> s{_suPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-suKey :: Lens' SitesUpdate' (Maybe AuthKey)
-suKey = lens _suKey (\ s a -> s{_suKey = a})
-
--- | OAuth 2.0 token for the current user.
-suOAuthToken :: Lens' SitesUpdate' (Maybe OAuthToken)
-suOAuthToken
-  = lens _suOAuthToken (\ s a -> s{_suOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-suFields :: Lens' SitesUpdate' (Maybe Text)
-suFields = lens _suFields (\ s a -> s{_suFields = a})
-
-instance GoogleAuth SitesUpdate' where
-        _AuthKey = suKey . _Just
-        _AuthToken = suOAuthToken . _Just
-
 instance GoogleRequest SitesUpdate' where
         type Rs SitesUpdate' = Site
-        request = requestWith dFAReportingRequest
-        requestWith rq SitesUpdate'{..}
-          = go _suProFileId _suQuotaUser (Just _suPrettyPrint)
-              _suUserIP
-              _suFields
-              _suKey
-              _suOAuthToken
-              (Just AltJSON)
-              _suPayload
+        requestClient SitesUpdate'{..}
+          = go _suProFileId (Just AltJSON) _suPayload
+              dFAReportingService
           where go
-                  = clientBuild (Proxy :: Proxy SitesUpdateResource) rq
+                  = buildClient (Proxy :: Proxy SitesUpdateResource)
+                      mempty

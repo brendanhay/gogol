@@ -36,17 +36,12 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Get
 
     -- * Request Lenses
     , togXgafv
-    , togQuotaUser
-    , togPrettyPrint
     , togUploadProtocol
     , togPp
     , togAccessToken
     , togUploadType
     , togBearerToken
-    , togKey
     , togName
-    , togOAuthToken
-    , togFields
     , togCallback
     ) where
 
@@ -65,13 +60,7 @@ type TransferOperationsGetResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] Operation
+                       QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Gets the latest state of a long-running operation. Clients can use this
 -- method to poll the operation result at intervals as recommended by the
@@ -80,17 +69,12 @@ type TransferOperationsGetResource =
 -- /See:/ 'transferOperationsGet'' smart constructor.
 data TransferOperationsGet' = TransferOperationsGet'
     { _togXgafv          :: !(Maybe Text)
-    , _togQuotaUser      :: !(Maybe Text)
-    , _togPrettyPrint    :: !Bool
     , _togUploadProtocol :: !(Maybe Text)
     , _togPp             :: !Bool
     , _togAccessToken    :: !(Maybe Text)
     , _togUploadType     :: !(Maybe Text)
     , _togBearerToken    :: !(Maybe Text)
-    , _togKey            :: !(Maybe AuthKey)
     , _togName           :: !Text
-    , _togOAuthToken     :: !(Maybe OAuthToken)
-    , _togFields         :: !(Maybe Text)
     , _togCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -99,10 +83,6 @@ data TransferOperationsGet' = TransferOperationsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'togXgafv'
---
--- * 'togQuotaUser'
---
--- * 'togPrettyPrint'
 --
 -- * 'togUploadProtocol'
 --
@@ -114,13 +94,7 @@ data TransferOperationsGet' = TransferOperationsGet'
 --
 -- * 'togBearerToken'
 --
--- * 'togKey'
---
 -- * 'togName'
---
--- * 'togOAuthToken'
---
--- * 'togFields'
 --
 -- * 'togCallback'
 transferOperationsGet'
@@ -129,36 +103,18 @@ transferOperationsGet'
 transferOperationsGet' pTogName_ =
     TransferOperationsGet'
     { _togXgafv = Nothing
-    , _togQuotaUser = Nothing
-    , _togPrettyPrint = True
     , _togUploadProtocol = Nothing
     , _togPp = True
     , _togAccessToken = Nothing
     , _togUploadType = Nothing
     , _togBearerToken = Nothing
-    , _togKey = Nothing
     , _togName = pTogName_
-    , _togOAuthToken = Nothing
-    , _togFields = Nothing
     , _togCallback = Nothing
     }
 
 -- | V1 error format.
 togXgafv :: Lens' TransferOperationsGet' (Maybe Text)
 togXgafv = lens _togXgafv (\ s a -> s{_togXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-togQuotaUser :: Lens' TransferOperationsGet' (Maybe Text)
-togQuotaUser
-  = lens _togQuotaUser (\ s a -> s{_togQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-togPrettyPrint :: Lens' TransferOperationsGet' Bool
-togPrettyPrint
-  = lens _togPrettyPrint
-      (\ s a -> s{_togPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 togUploadProtocol :: Lens' TransferOperationsGet' (Maybe Text)
@@ -188,53 +144,27 @@ togBearerToken
   = lens _togBearerToken
       (\ s a -> s{_togBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-togKey :: Lens' TransferOperationsGet' (Maybe AuthKey)
-togKey = lens _togKey (\ s a -> s{_togKey = a})
-
 -- | The name of the operation resource.
 togName :: Lens' TransferOperationsGet' Text
 togName = lens _togName (\ s a -> s{_togName = a})
-
--- | OAuth 2.0 token for the current user.
-togOAuthToken :: Lens' TransferOperationsGet' (Maybe OAuthToken)
-togOAuthToken
-  = lens _togOAuthToken
-      (\ s a -> s{_togOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-togFields :: Lens' TransferOperationsGet' (Maybe Text)
-togFields
-  = lens _togFields (\ s a -> s{_togFields = a})
 
 -- | JSONP
 togCallback :: Lens' TransferOperationsGet' (Maybe Text)
 togCallback
   = lens _togCallback (\ s a -> s{_togCallback = a})
 
-instance GoogleAuth TransferOperationsGet' where
-        _AuthKey = togKey . _Just
-        _AuthToken = togOAuthToken . _Just
-
 instance GoogleRequest TransferOperationsGet' where
         type Rs TransferOperationsGet' = Operation
-        request = requestWith storageTransferRequest
-        requestWith rq TransferOperationsGet'{..}
+        requestClient TransferOperationsGet'{..}
           = go _togName _togXgafv _togUploadProtocol
               (Just _togPp)
               _togAccessToken
               _togUploadType
               _togBearerToken
               _togCallback
-              _togQuotaUser
-              (Just _togPrettyPrint)
-              _togFields
-              _togKey
-              _togOAuthToken
               (Just AltJSON)
+              storageTransferService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy TransferOperationsGetResource)
-                      rq
+                      mempty

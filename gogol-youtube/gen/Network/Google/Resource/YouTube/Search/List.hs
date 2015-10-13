@@ -38,17 +38,14 @@ module Network.Google.Resource.YouTube.Search.List
     -- * Request Lenses
     , slPublishedAfter
     , slVideoDefinition
-    , slQuotaUser
     , slPart
     , slVideoDuration
-    , slPrettyPrint
     , slVideoCaption
     , slVideoLicense
     , slRegionCode
     , slForDeveloper
     , slLocation
     , slLocationRadius
-    , slUserIP
     , slForContentOwner
     , slChannelId
     , slQ
@@ -58,13 +55,11 @@ module Network.Google.Resource.YouTube.Search.List
     , slOnBehalfOfContentOwner
     , slVideoCategoryId
     , slTopicId
-    , slKey
     , slSafeSearch
     , slVideoSyndicated
     , slRelatedToVideoId
     , slPageToken
     , slType
-    , slOAuthToken
     , slChannelType
     , slRelevanceLanguage
     , slOrder
@@ -72,7 +67,6 @@ module Network.Google.Resource.YouTube.Search.List
     , slPublishedBefore
     , slVideoType
     , slVideoDimension
-    , slFields
     ) where
 
 import           Network.Google.Prelude
@@ -146,36 +140,12 @@ type SearchListResource =
                                                                      SearchListVideoDimension
                                                                      :>
                                                                      QueryParam
-                                                                       "quotaUser"
-                                                                       Text
+                                                                       "alt"
+                                                                       AltJSON
                                                                        :>
-                                                                       QueryParam
-                                                                         "prettyPrint"
-                                                                         Bool
-                                                                         :>
-                                                                         QueryParam
-                                                                           "userIp"
-                                                                           Text
-                                                                           :>
-                                                                           QueryParam
-                                                                             "fields"
-                                                                             Text
-                                                                             :>
-                                                                             QueryParam
-                                                                               "key"
-                                                                               AuthKey
-                                                                               :>
-                                                                               Header
-                                                                                 "Authorization"
-                                                                                 OAuthToken
-                                                                                 :>
-                                                                                 QueryParam
-                                                                                   "alt"
-                                                                                   AltJSON
-                                                                                   :>
-                                                                                   Get
-                                                                                     '[JSON]
-                                                                                     SearchListResponse
+                                                                       Get
+                                                                         '[JSON]
+                                                                         SearchListResponse
 
 -- | Returns a collection of search results that match the query parameters
 -- specified in the API request. By default, a search result set identifies
@@ -186,17 +156,14 @@ type SearchListResource =
 data SearchList' = SearchList'
     { _slPublishedAfter         :: !(Maybe DateTime')
     , _slVideoDefinition        :: !(Maybe SearchListVideoDefinition)
-    , _slQuotaUser              :: !(Maybe Text)
     , _slPart                   :: !Text
     , _slVideoDuration          :: !(Maybe SearchListVideoDuration)
-    , _slPrettyPrint            :: !Bool
     , _slVideoCaption           :: !(Maybe SearchListVideoCaption)
     , _slVideoLicense           :: !(Maybe SearchListVideoLicense)
     , _slRegionCode             :: !(Maybe Text)
     , _slForDeveloper           :: !(Maybe Bool)
     , _slLocation               :: !(Maybe Text)
     , _slLocationRadius         :: !(Maybe Text)
-    , _slUserIP                 :: !(Maybe Text)
     , _slForContentOwner        :: !(Maybe Bool)
     , _slChannelId              :: !(Maybe Text)
     , _slQ                      :: !(Maybe Text)
@@ -206,13 +173,11 @@ data SearchList' = SearchList'
     , _slOnBehalfOfContentOwner :: !(Maybe Text)
     , _slVideoCategoryId        :: !(Maybe Text)
     , _slTopicId                :: !(Maybe Text)
-    , _slKey                    :: !(Maybe AuthKey)
     , _slSafeSearch             :: !(Maybe SearchListSafeSearch)
     , _slVideoSyndicated        :: !(Maybe SearchListVideoSyndicated)
     , _slRelatedToVideoId       :: !(Maybe Text)
     , _slPageToken              :: !(Maybe Text)
     , _slType                   :: !Text
-    , _slOAuthToken             :: !(Maybe OAuthToken)
     , _slChannelType            :: !(Maybe SearchListChannelType)
     , _slRelevanceLanguage      :: !(Maybe Text)
     , _slOrder                  :: !SearchListOrder
@@ -220,7 +185,6 @@ data SearchList' = SearchList'
     , _slPublishedBefore        :: !(Maybe DateTime')
     , _slVideoType              :: !(Maybe SearchListVideoType)
     , _slVideoDimension         :: !(Maybe SearchListVideoDimension)
-    , _slFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchList'' with the minimum fields required to make a request.
@@ -231,13 +195,9 @@ data SearchList' = SearchList'
 --
 -- * 'slVideoDefinition'
 --
--- * 'slQuotaUser'
---
 -- * 'slPart'
 --
 -- * 'slVideoDuration'
---
--- * 'slPrettyPrint'
 --
 -- * 'slVideoCaption'
 --
@@ -250,8 +210,6 @@ data SearchList' = SearchList'
 -- * 'slLocation'
 --
 -- * 'slLocationRadius'
---
--- * 'slUserIP'
 --
 -- * 'slForContentOwner'
 --
@@ -271,8 +229,6 @@ data SearchList' = SearchList'
 --
 -- * 'slTopicId'
 --
--- * 'slKey'
---
 -- * 'slSafeSearch'
 --
 -- * 'slVideoSyndicated'
@@ -282,8 +238,6 @@ data SearchList' = SearchList'
 -- * 'slPageToken'
 --
 -- * 'slType'
---
--- * 'slOAuthToken'
 --
 -- * 'slChannelType'
 --
@@ -298,8 +252,6 @@ data SearchList' = SearchList'
 -- * 'slVideoType'
 --
 -- * 'slVideoDimension'
---
--- * 'slFields'
 searchList'
     :: Text -- ^ 'part'
     -> SearchList'
@@ -307,17 +259,14 @@ searchList' pSlPart_ =
     SearchList'
     { _slPublishedAfter = Nothing
     , _slVideoDefinition = Nothing
-    , _slQuotaUser = Nothing
     , _slPart = pSlPart_
     , _slVideoDuration = Nothing
-    , _slPrettyPrint = True
     , _slVideoCaption = Nothing
     , _slVideoLicense = Nothing
     , _slRegionCode = Nothing
     , _slForDeveloper = Nothing
     , _slLocation = Nothing
     , _slLocationRadius = Nothing
-    , _slUserIP = Nothing
     , _slForContentOwner = Nothing
     , _slChannelId = Nothing
     , _slQ = Nothing
@@ -327,13 +276,11 @@ searchList' pSlPart_ =
     , _slOnBehalfOfContentOwner = Nothing
     , _slVideoCategoryId = Nothing
     , _slTopicId = Nothing
-    , _slKey = Nothing
     , _slSafeSearch = Nothing
     , _slVideoSyndicated = Nothing
     , _slRelatedToVideoId = Nothing
     , _slPageToken = Nothing
     , _slType = "video,channel,playlist"
-    , _slOAuthToken = Nothing
     , _slChannelType = Nothing
     , _slRelevanceLanguage = Nothing
     , _slOrder = Relevance
@@ -341,7 +288,6 @@ searchList' pSlPart_ =
     , _slPublishedBefore = Nothing
     , _slVideoType = Nothing
     , _slVideoDimension = Nothing
-    , _slFields = Nothing
     }
 
 -- | The publishedAfter parameter indicates that the API response should only
@@ -364,13 +310,6 @@ slVideoDefinition
   = lens _slVideoDefinition
       (\ s a -> s{_slVideoDefinition = a})
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-slQuotaUser :: Lens' SearchList' (Maybe Text)
-slQuotaUser
-  = lens _slQuotaUser (\ s a -> s{_slQuotaUser = a})
-
 -- | The part parameter specifies a comma-separated list of one or more
 -- search resource properties that the API response will include. Set the
 -- parameter value to snippet.
@@ -384,12 +323,6 @@ slVideoDuration :: Lens' SearchList' (Maybe SearchListVideoDuration)
 slVideoDuration
   = lens _slVideoDuration
       (\ s a -> s{_slVideoDuration = a})
-
--- | Returns response with indentations and line breaks.
-slPrettyPrint :: Lens' SearchList' Bool
-slPrettyPrint
-  = lens _slPrettyPrint
-      (\ s a -> s{_slPrettyPrint = a})
 
 -- | The videoCaption parameter indicates whether the API should filter video
 -- search results based on whether they have captions. If you specify a
@@ -454,11 +387,6 @@ slLocationRadius :: Lens' SearchList' (Maybe Text)
 slLocationRadius
   = lens _slLocationRadius
       (\ s a -> s{_slLocationRadius = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-slUserIP :: Lens' SearchList' (Maybe Text)
-slUserIP = lens _slUserIP (\ s a -> s{_slUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The forContentOwner parameter restricts the search to only
@@ -541,12 +469,6 @@ slTopicId :: Lens' SearchList' (Maybe Text)
 slTopicId
   = lens _slTopicId (\ s a -> s{_slTopicId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-slKey :: Lens' SearchList' (Maybe AuthKey)
-slKey = lens _slKey (\ s a -> s{_slKey = a})
-
 -- | The safeSearch parameter indicates whether the search results should
 -- include restricted content as well as standard content.
 slSafeSearch :: Lens' SearchList' (Maybe SearchListSafeSearch)
@@ -583,11 +505,6 @@ slPageToken
 -- resource types.
 slType :: Lens' SearchList' Text
 slType = lens _slType (\ s a -> s{_slType = a})
-
--- | OAuth 2.0 token for the current user.
-slOAuthToken :: Lens' SearchList' (Maybe OAuthToken)
-slOAuthToken
-  = lens _slOAuthToken (\ s a -> s{_slOAuthToken = a})
 
 -- | The channelType parameter lets you restrict a search to a particular
 -- type of channel.
@@ -642,18 +559,9 @@ slVideoDimension
   = lens _slVideoDimension
       (\ s a -> s{_slVideoDimension = a})
 
--- | Selector specifying which fields to include in a partial response.
-slFields :: Lens' SearchList' (Maybe Text)
-slFields = lens _slFields (\ s a -> s{_slFields = a})
-
-instance GoogleAuth SearchList' where
-        _AuthKey = slKey . _Just
-        _AuthToken = slOAuthToken . _Just
-
 instance GoogleRequest SearchList' where
         type Rs SearchList' = SearchListResponse
-        request = requestWith youTubeRequest
-        requestWith rq SearchList'{..}
+        requestClient SearchList'{..}
           = go (Just _slPart) _slPublishedAfter
               _slVideoDefinition
               _slVideoDuration
@@ -684,12 +592,8 @@ instance GoogleRequest SearchList' where
               _slPublishedBefore
               _slVideoType
               _slVideoDimension
-              _slQuotaUser
-              (Just _slPrettyPrint)
-              _slUserIP
-              _slFields
-              _slKey
-              _slOAuthToken
               (Just AltJSON)
+              youTubeService
           where go
-                  = clientBuild (Proxy :: Proxy SearchListResource) rq
+                  = buildClient (Proxy :: Proxy SearchListResource)
+                      mempty

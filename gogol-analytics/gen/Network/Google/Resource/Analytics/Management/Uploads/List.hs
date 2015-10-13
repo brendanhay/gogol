@@ -33,17 +33,11 @@ module Network.Google.Resource.Analytics.Management.Uploads.List
     , ManagementUploadsList'
 
     -- * Request Lenses
-    , mulQuotaUser
-    , mulPrettyPrint
     , mulWebPropertyId
-    , mulUserIP
     , mulCustomDataSourceId
     , mulAccountId
-    , mulKey
-    , mulOAuthToken
     , mulStartIndex
     , mulMaxResults
-    , mulFields
     ) where
 
 import           Network.Google.Analytics.Types
@@ -62,57 +56,32 @@ type ManagementUploadsListResource =
                    "uploads" :>
                      QueryParam "start-index" Int32 :>
                        QueryParam "max-results" Int32 :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] Uploads
+                         QueryParam "alt" AltJSON :> Get '[JSON] Uploads
 
 -- | List uploads to which the user has access.
 --
 -- /See:/ 'managementUploadsList'' smart constructor.
 data ManagementUploadsList' = ManagementUploadsList'
-    { _mulQuotaUser          :: !(Maybe Text)
-    , _mulPrettyPrint        :: !Bool
-    , _mulWebPropertyId      :: !Text
-    , _mulUserIP             :: !(Maybe Text)
+    { _mulWebPropertyId      :: !Text
     , _mulCustomDataSourceId :: !Text
     , _mulAccountId          :: !Text
-    , _mulKey                :: !(Maybe AuthKey)
-    , _mulOAuthToken         :: !(Maybe OAuthToken)
     , _mulStartIndex         :: !(Maybe Int32)
     , _mulMaxResults         :: !(Maybe Int32)
-    , _mulFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mulQuotaUser'
---
--- * 'mulPrettyPrint'
---
 -- * 'mulWebPropertyId'
---
--- * 'mulUserIP'
 --
 -- * 'mulCustomDataSourceId'
 --
 -- * 'mulAccountId'
 --
--- * 'mulKey'
---
--- * 'mulOAuthToken'
---
 -- * 'mulStartIndex'
 --
 -- * 'mulMaxResults'
---
--- * 'mulFields'
 managementUploadsList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'customDataSourceId'
@@ -120,43 +89,18 @@ managementUploadsList'
     -> ManagementUploadsList'
 managementUploadsList' pMulWebPropertyId_ pMulCustomDataSourceId_ pMulAccountId_ =
     ManagementUploadsList'
-    { _mulQuotaUser = Nothing
-    , _mulPrettyPrint = False
-    , _mulWebPropertyId = pMulWebPropertyId_
-    , _mulUserIP = Nothing
+    { _mulWebPropertyId = pMulWebPropertyId_
     , _mulCustomDataSourceId = pMulCustomDataSourceId_
     , _mulAccountId = pMulAccountId_
-    , _mulKey = Nothing
-    , _mulOAuthToken = Nothing
     , _mulStartIndex = Nothing
     , _mulMaxResults = Nothing
-    , _mulFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mulQuotaUser :: Lens' ManagementUploadsList' (Maybe Text)
-mulQuotaUser
-  = lens _mulQuotaUser (\ s a -> s{_mulQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mulPrettyPrint :: Lens' ManagementUploadsList' Bool
-mulPrettyPrint
-  = lens _mulPrettyPrint
-      (\ s a -> s{_mulPrettyPrint = a})
 
 -- | Web property Id for the uploads to retrieve.
 mulWebPropertyId :: Lens' ManagementUploadsList' Text
 mulWebPropertyId
   = lens _mulWebPropertyId
       (\ s a -> s{_mulWebPropertyId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mulUserIP :: Lens' ManagementUploadsList' (Maybe Text)
-mulUserIP
-  = lens _mulUserIP (\ s a -> s{_mulUserIP = a})
 
 -- | Custom data source Id for uploads to retrieve.
 mulCustomDataSourceId :: Lens' ManagementUploadsList' Text
@@ -168,18 +112,6 @@ mulCustomDataSourceId
 mulAccountId :: Lens' ManagementUploadsList' Text
 mulAccountId
   = lens _mulAccountId (\ s a -> s{_mulAccountId = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mulKey :: Lens' ManagementUploadsList' (Maybe AuthKey)
-mulKey = lens _mulKey (\ s a -> s{_mulKey = a})
-
--- | OAuth 2.0 token for the current user.
-mulOAuthToken :: Lens' ManagementUploadsList' (Maybe OAuthToken)
-mulOAuthToken
-  = lens _mulOAuthToken
-      (\ s a -> s{_mulOAuthToken = a})
 
 -- | A 1-based index of the first upload to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
@@ -194,31 +126,16 @@ mulMaxResults
   = lens _mulMaxResults
       (\ s a -> s{_mulMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-mulFields :: Lens' ManagementUploadsList' (Maybe Text)
-mulFields
-  = lens _mulFields (\ s a -> s{_mulFields = a})
-
-instance GoogleAuth ManagementUploadsList' where
-        _AuthKey = mulKey . _Just
-        _AuthToken = mulOAuthToken . _Just
-
 instance GoogleRequest ManagementUploadsList' where
         type Rs ManagementUploadsList' = Uploads
-        request = requestWith analyticsRequest
-        requestWith rq ManagementUploadsList'{..}
+        requestClient ManagementUploadsList'{..}
           = go _mulAccountId _mulWebPropertyId
               _mulCustomDataSourceId
               _mulStartIndex
               _mulMaxResults
-              _mulQuotaUser
-              (Just _mulPrettyPrint)
-              _mulUserIP
-              _mulFields
-              _mulKey
-              _mulOAuthToken
               (Just AltJSON)
+              analyticsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ManagementUploadsListResource)
-                      rq
+                      mempty

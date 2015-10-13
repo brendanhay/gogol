@@ -33,18 +33,12 @@ module Network.Google.Resource.BigQuery.Jobs.GetQueryResults
     , JobsGetQueryResults'
 
     -- * Request Lenses
-    , jgqrQuotaUser
-    , jgqrPrettyPrint
     , jgqrJobId
-    , jgqrUserIP
-    , jgqrKey
     , jgqrTimeoutMs
     , jgqrPageToken
     , jgqrProjectId
-    , jgqrOAuthToken
     , jgqrStartIndex
     , jgqrMaxResults
-    , jgqrFields
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -61,46 +55,26 @@ type JobsGetQueryResultsResource =
                QueryParam "pageToken" Text :>
                  QueryParam "startIndex" Word64 :>
                    QueryParam "maxResults" Word32 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] GetQueryResultsResponse
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] GetQueryResultsResponse
 
 -- | Retrieves the results of a query job.
 --
 -- /See:/ 'jobsGetQueryResults'' smart constructor.
 data JobsGetQueryResults' = JobsGetQueryResults'
-    { _jgqrQuotaUser   :: !(Maybe Text)
-    , _jgqrPrettyPrint :: !Bool
-    , _jgqrJobId       :: !Text
-    , _jgqrUserIP      :: !(Maybe Text)
-    , _jgqrKey         :: !(Maybe AuthKey)
-    , _jgqrTimeoutMs   :: !(Maybe Word32)
-    , _jgqrPageToken   :: !(Maybe Text)
-    , _jgqrProjectId   :: !Text
-    , _jgqrOAuthToken  :: !(Maybe OAuthToken)
-    , _jgqrStartIndex  :: !(Maybe Word64)
-    , _jgqrMaxResults  :: !(Maybe Word32)
-    , _jgqrFields      :: !(Maybe Text)
+    { _jgqrJobId      :: !Text
+    , _jgqrTimeoutMs  :: !(Maybe Word32)
+    , _jgqrPageToken  :: !(Maybe Text)
+    , _jgqrProjectId  :: !Text
+    , _jgqrStartIndex :: !(Maybe Word64)
+    , _jgqrMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsGetQueryResults'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'jgqrQuotaUser'
---
--- * 'jgqrPrettyPrint'
---
 -- * 'jgqrJobId'
---
--- * 'jgqrUserIP'
---
--- * 'jgqrKey'
 --
 -- * 'jgqrTimeoutMs'
 --
@@ -108,63 +82,27 @@ data JobsGetQueryResults' = JobsGetQueryResults'
 --
 -- * 'jgqrProjectId'
 --
--- * 'jgqrOAuthToken'
---
 -- * 'jgqrStartIndex'
 --
 -- * 'jgqrMaxResults'
---
--- * 'jgqrFields'
 jobsGetQueryResults'
     :: Text -- ^ 'jobId'
     -> Text -- ^ 'projectId'
     -> JobsGetQueryResults'
 jobsGetQueryResults' pJgqrJobId_ pJgqrProjectId_ =
     JobsGetQueryResults'
-    { _jgqrQuotaUser = Nothing
-    , _jgqrPrettyPrint = True
-    , _jgqrJobId = pJgqrJobId_
-    , _jgqrUserIP = Nothing
-    , _jgqrKey = Nothing
+    { _jgqrJobId = pJgqrJobId_
     , _jgqrTimeoutMs = Nothing
     , _jgqrPageToken = Nothing
     , _jgqrProjectId = pJgqrProjectId_
-    , _jgqrOAuthToken = Nothing
     , _jgqrStartIndex = Nothing
     , _jgqrMaxResults = Nothing
-    , _jgqrFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-jgqrQuotaUser :: Lens' JobsGetQueryResults' (Maybe Text)
-jgqrQuotaUser
-  = lens _jgqrQuotaUser
-      (\ s a -> s{_jgqrQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-jgqrPrettyPrint :: Lens' JobsGetQueryResults' Bool
-jgqrPrettyPrint
-  = lens _jgqrPrettyPrint
-      (\ s a -> s{_jgqrPrettyPrint = a})
 
 -- | Job ID of the query job
 jgqrJobId :: Lens' JobsGetQueryResults' Text
 jgqrJobId
   = lens _jgqrJobId (\ s a -> s{_jgqrJobId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-jgqrUserIP :: Lens' JobsGetQueryResults' (Maybe Text)
-jgqrUserIP
-  = lens _jgqrUserIP (\ s a -> s{_jgqrUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-jgqrKey :: Lens' JobsGetQueryResults' (Maybe AuthKey)
-jgqrKey = lens _jgqrKey (\ s a -> s{_jgqrKey = a})
 
 -- | How long to wait for the query to complete, in milliseconds, before
 -- returning. Default is 10 seconds. If the timeout passes before the job
@@ -187,12 +125,6 @@ jgqrProjectId
   = lens _jgqrProjectId
       (\ s a -> s{_jgqrProjectId = a})
 
--- | OAuth 2.0 token for the current user.
-jgqrOAuthToken :: Lens' JobsGetQueryResults' (Maybe OAuthToken)
-jgqrOAuthToken
-  = lens _jgqrOAuthToken
-      (\ s a -> s{_jgqrOAuthToken = a})
-
 -- | Zero-based index of the starting row
 jgqrStartIndex :: Lens' JobsGetQueryResults' (Maybe Word64)
 jgqrStartIndex
@@ -205,32 +137,17 @@ jgqrMaxResults
   = lens _jgqrMaxResults
       (\ s a -> s{_jgqrMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-jgqrFields :: Lens' JobsGetQueryResults' (Maybe Text)
-jgqrFields
-  = lens _jgqrFields (\ s a -> s{_jgqrFields = a})
-
-instance GoogleAuth JobsGetQueryResults' where
-        _AuthKey = jgqrKey . _Just
-        _AuthToken = jgqrOAuthToken . _Just
-
 instance GoogleRequest JobsGetQueryResults' where
         type Rs JobsGetQueryResults' =
              GetQueryResultsResponse
-        request = requestWith bigQueryRequest
-        requestWith rq JobsGetQueryResults'{..}
+        requestClient JobsGetQueryResults'{..}
           = go _jgqrProjectId _jgqrJobId _jgqrTimeoutMs
               _jgqrPageToken
               _jgqrStartIndex
               _jgqrMaxResults
-              _jgqrQuotaUser
-              (Just _jgqrPrettyPrint)
-              _jgqrUserIP
-              _jgqrFields
-              _jgqrKey
-              _jgqrOAuthToken
               (Just AltJSON)
+              bigQueryService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy JobsGetQueryResultsResource)
-                      rq
+                      mempty

@@ -37,17 +37,12 @@ module Network.Google.Resource.Classroom.UserProFiles.Get
 
     -- * Request Lenses
     , upfgXgafv
-    , upfgQuotaUser
-    , upfgPrettyPrint
     , upfgUploadProtocol
     , upfgPp
     , upfgAccessToken
     , upfgUploadType
     , upfgUserId
     , upfgBearerToken
-    , upfgKey
-    , upfgOAuthToken
-    , upfgFields
     , upfgCallback
     ) where
 
@@ -67,13 +62,7 @@ type UserProFilesGetResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] UserProFile
+                         QueryParam "alt" AltJSON :> Get '[JSON] UserProFile
 
 -- | Returns a user profile. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to access
@@ -83,17 +72,12 @@ type UserProFilesGetResource =
 -- /See:/ 'userProFilesGet'' smart constructor.
 data UserProFilesGet' = UserProFilesGet'
     { _upfgXgafv          :: !(Maybe Text)
-    , _upfgQuotaUser      :: !(Maybe Text)
-    , _upfgPrettyPrint    :: !Bool
     , _upfgUploadProtocol :: !(Maybe Text)
     , _upfgPp             :: !Bool
     , _upfgAccessToken    :: !(Maybe Text)
     , _upfgUploadType     :: !(Maybe Text)
     , _upfgUserId         :: !Text
     , _upfgBearerToken    :: !(Maybe Text)
-    , _upfgKey            :: !(Maybe AuthKey)
-    , _upfgOAuthToken     :: !(Maybe OAuthToken)
-    , _upfgFields         :: !(Maybe Text)
     , _upfgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +86,6 @@ data UserProFilesGet' = UserProFilesGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'upfgXgafv'
---
--- * 'upfgQuotaUser'
---
--- * 'upfgPrettyPrint'
 --
 -- * 'upfgUploadProtocol'
 --
@@ -119,12 +99,6 @@ data UserProFilesGet' = UserProFilesGet'
 --
 -- * 'upfgBearerToken'
 --
--- * 'upfgKey'
---
--- * 'upfgOAuthToken'
---
--- * 'upfgFields'
---
 -- * 'upfgCallback'
 userProFilesGet'
     :: Text -- ^ 'userId'
@@ -132,17 +106,12 @@ userProFilesGet'
 userProFilesGet' pUpfgUserId_ =
     UserProFilesGet'
     { _upfgXgafv = Nothing
-    , _upfgQuotaUser = Nothing
-    , _upfgPrettyPrint = True
     , _upfgUploadProtocol = Nothing
     , _upfgPp = True
     , _upfgAccessToken = Nothing
     , _upfgUploadType = Nothing
     , _upfgUserId = pUpfgUserId_
     , _upfgBearerToken = Nothing
-    , _upfgKey = Nothing
-    , _upfgOAuthToken = Nothing
-    , _upfgFields = Nothing
     , _upfgCallback = Nothing
     }
 
@@ -150,20 +119,6 @@ userProFilesGet' pUpfgUserId_ =
 upfgXgafv :: Lens' UserProFilesGet' (Maybe Text)
 upfgXgafv
   = lens _upfgXgafv (\ s a -> s{_upfgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-upfgQuotaUser :: Lens' UserProFilesGet' (Maybe Text)
-upfgQuotaUser
-  = lens _upfgQuotaUser
-      (\ s a -> s{_upfgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-upfgPrettyPrint :: Lens' UserProFilesGet' Bool
-upfgPrettyPrint
-  = lens _upfgPrettyPrint
-      (\ s a -> s{_upfgPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 upfgUploadProtocol :: Lens' UserProFilesGet' (Maybe Text)
@@ -200,49 +155,23 @@ upfgBearerToken
   = lens _upfgBearerToken
       (\ s a -> s{_upfgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-upfgKey :: Lens' UserProFilesGet' (Maybe AuthKey)
-upfgKey = lens _upfgKey (\ s a -> s{_upfgKey = a})
-
--- | OAuth 2.0 token for the current user.
-upfgOAuthToken :: Lens' UserProFilesGet' (Maybe OAuthToken)
-upfgOAuthToken
-  = lens _upfgOAuthToken
-      (\ s a -> s{_upfgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-upfgFields :: Lens' UserProFilesGet' (Maybe Text)
-upfgFields
-  = lens _upfgFields (\ s a -> s{_upfgFields = a})
-
 -- | JSONP
 upfgCallback :: Lens' UserProFilesGet' (Maybe Text)
 upfgCallback
   = lens _upfgCallback (\ s a -> s{_upfgCallback = a})
 
-instance GoogleAuth UserProFilesGet' where
-        _AuthKey = upfgKey . _Just
-        _AuthToken = upfgOAuthToken . _Just
-
 instance GoogleRequest UserProFilesGet' where
         type Rs UserProFilesGet' = UserProFile
-        request = requestWith classroomRequest
-        requestWith rq UserProFilesGet'{..}
+        requestClient UserProFilesGet'{..}
           = go _upfgUserId _upfgXgafv _upfgUploadProtocol
               (Just _upfgPp)
               _upfgAccessToken
               _upfgUploadType
               _upfgBearerToken
               _upfgCallback
-              _upfgQuotaUser
-              (Just _upfgPrettyPrint)
-              _upfgFields
-              _upfgKey
-              _upfgOAuthToken
               (Just AltJSON)
+              classroomService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy UserProFilesGetResource)
-                      rq
+                      mempty

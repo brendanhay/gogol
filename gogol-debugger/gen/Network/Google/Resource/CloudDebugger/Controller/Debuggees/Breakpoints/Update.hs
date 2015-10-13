@@ -40,19 +40,14 @@ module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Up
 
     -- * Request Lenses
     , cdbuXgafv
-    , cdbuQuotaUser
-    , cdbuPrettyPrint
     , cdbuUploadProtocol
     , cdbuPp
     , cdbuAccessToken
     , cdbuUploadType
     , cdbuPayload
     , cdbuBearerToken
-    , cdbuKey
     , cdbuId
     , cdbuDebuggeeId
-    , cdbuOAuthToken
-    , cdbuFields
     , cdbuCallback
     ) where
 
@@ -75,17 +70,9 @@ type ControllerDebuggeesBreakpointsUpdateResource =
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
                              QueryParam "callback" Text :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           ReqBody '[JSON]
-                                             UpdateActiveBreakpointRequest
-                                             :>
-                                             Put '[JSON]
-                                               UpdateActiveBreakpointResponse
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] UpdateActiveBreakpointRequest
+                                   :> Put '[JSON] UpdateActiveBreakpointResponse
 
 -- | Updates the breakpoint state or mutable fields. The entire Breakpoint
 -- protobuf must be sent back to the controller. Updates to active
@@ -98,19 +85,14 @@ type ControllerDebuggeesBreakpointsUpdateResource =
 -- /See:/ 'controllerDebuggeesBreakpointsUpdate'' smart constructor.
 data ControllerDebuggeesBreakpointsUpdate' = ControllerDebuggeesBreakpointsUpdate'
     { _cdbuXgafv          :: !(Maybe Text)
-    , _cdbuQuotaUser      :: !(Maybe Text)
-    , _cdbuPrettyPrint    :: !Bool
     , _cdbuUploadProtocol :: !(Maybe Text)
     , _cdbuPp             :: !Bool
     , _cdbuAccessToken    :: !(Maybe Text)
     , _cdbuUploadType     :: !(Maybe Text)
     , _cdbuPayload        :: !UpdateActiveBreakpointRequest
     , _cdbuBearerToken    :: !(Maybe Text)
-    , _cdbuKey            :: !(Maybe AuthKey)
     , _cdbuId             :: !Text
     , _cdbuDebuggeeId     :: !Text
-    , _cdbuOAuthToken     :: !(Maybe OAuthToken)
-    , _cdbuFields         :: !(Maybe Text)
     , _cdbuCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -119,10 +101,6 @@ data ControllerDebuggeesBreakpointsUpdate' = ControllerDebuggeesBreakpointsUpdat
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cdbuXgafv'
---
--- * 'cdbuQuotaUser'
---
--- * 'cdbuPrettyPrint'
 --
 -- * 'cdbuUploadProtocol'
 --
@@ -136,15 +114,9 @@ data ControllerDebuggeesBreakpointsUpdate' = ControllerDebuggeesBreakpointsUpdat
 --
 -- * 'cdbuBearerToken'
 --
--- * 'cdbuKey'
---
 -- * 'cdbuId'
 --
 -- * 'cdbuDebuggeeId'
---
--- * 'cdbuOAuthToken'
---
--- * 'cdbuFields'
 --
 -- * 'cdbuCallback'
 controllerDebuggeesBreakpointsUpdate'
@@ -155,19 +127,14 @@ controllerDebuggeesBreakpointsUpdate'
 controllerDebuggeesBreakpointsUpdate' pCdbuPayload_ pCdbuId_ pCdbuDebuggeeId_ =
     ControllerDebuggeesBreakpointsUpdate'
     { _cdbuXgafv = Nothing
-    , _cdbuQuotaUser = Nothing
-    , _cdbuPrettyPrint = True
     , _cdbuUploadProtocol = Nothing
     , _cdbuPp = True
     , _cdbuAccessToken = Nothing
     , _cdbuUploadType = Nothing
     , _cdbuPayload = pCdbuPayload_
     , _cdbuBearerToken = Nothing
-    , _cdbuKey = Nothing
     , _cdbuId = pCdbuId_
     , _cdbuDebuggeeId = pCdbuDebuggeeId_
-    , _cdbuOAuthToken = Nothing
-    , _cdbuFields = Nothing
     , _cdbuCallback = Nothing
     }
 
@@ -175,20 +142,6 @@ controllerDebuggeesBreakpointsUpdate' pCdbuPayload_ pCdbuId_ pCdbuDebuggeeId_ =
 cdbuXgafv :: Lens' ControllerDebuggeesBreakpointsUpdate' (Maybe Text)
 cdbuXgafv
   = lens _cdbuXgafv (\ s a -> s{_cdbuXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-cdbuQuotaUser :: Lens' ControllerDebuggeesBreakpointsUpdate' (Maybe Text)
-cdbuQuotaUser
-  = lens _cdbuQuotaUser
-      (\ s a -> s{_cdbuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cdbuPrettyPrint :: Lens' ControllerDebuggeesBreakpointsUpdate' Bool
-cdbuPrettyPrint
-  = lens _cdbuPrettyPrint
-      (\ s a -> s{_cdbuPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 cdbuUploadProtocol :: Lens' ControllerDebuggeesBreakpointsUpdate' (Maybe Text)
@@ -223,12 +176,6 @@ cdbuBearerToken
   = lens _cdbuBearerToken
       (\ s a -> s{_cdbuBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cdbuKey :: Lens' ControllerDebuggeesBreakpointsUpdate' (Maybe AuthKey)
-cdbuKey = lens _cdbuKey (\ s a -> s{_cdbuKey = a})
-
 -- | Breakpoint identifier, unique in the scope of the debuggee.
 cdbuId :: Lens' ControllerDebuggeesBreakpointsUpdate' Text
 cdbuId = lens _cdbuId (\ s a -> s{_cdbuId = a})
@@ -239,33 +186,16 @@ cdbuDebuggeeId
   = lens _cdbuDebuggeeId
       (\ s a -> s{_cdbuDebuggeeId = a})
 
--- | OAuth 2.0 token for the current user.
-cdbuOAuthToken :: Lens' ControllerDebuggeesBreakpointsUpdate' (Maybe OAuthToken)
-cdbuOAuthToken
-  = lens _cdbuOAuthToken
-      (\ s a -> s{_cdbuOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cdbuFields :: Lens' ControllerDebuggeesBreakpointsUpdate' (Maybe Text)
-cdbuFields
-  = lens _cdbuFields (\ s a -> s{_cdbuFields = a})
-
 -- | JSONP
 cdbuCallback :: Lens' ControllerDebuggeesBreakpointsUpdate' (Maybe Text)
 cdbuCallback
   = lens _cdbuCallback (\ s a -> s{_cdbuCallback = a})
 
-instance GoogleAuth
-         ControllerDebuggeesBreakpointsUpdate' where
-        _AuthKey = cdbuKey . _Just
-        _AuthToken = cdbuOAuthToken . _Just
-
 instance GoogleRequest
          ControllerDebuggeesBreakpointsUpdate' where
         type Rs ControllerDebuggeesBreakpointsUpdate' =
              UpdateActiveBreakpointResponse
-        request = requestWith debuggerRequest
-        requestWith rq
+        requestClient
           ControllerDebuggeesBreakpointsUpdate'{..}
           = go _cdbuDebuggeeId _cdbuId _cdbuXgafv
               _cdbuUploadProtocol
@@ -274,15 +204,11 @@ instance GoogleRequest
               _cdbuUploadType
               _cdbuBearerToken
               _cdbuCallback
-              _cdbuQuotaUser
-              (Just _cdbuPrettyPrint)
-              _cdbuFields
-              _cdbuKey
-              _cdbuOAuthToken
               (Just AltJSON)
               _cdbuPayload
+              debuggerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy ControllerDebuggeesBreakpointsUpdateResource)
-                      rq
+                      mempty

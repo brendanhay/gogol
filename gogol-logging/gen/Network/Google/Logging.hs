@@ -19,8 +19,11 @@
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference>
 module Network.Google.Logging
     (
+    -- * Service Configuration
+      loggingService
+
     -- * API Declaration
-      LoggingAPI
+    , LoggingAPI
 
     -- * Resources
 

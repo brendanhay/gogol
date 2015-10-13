@@ -34,8 +34,6 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create
 
     -- * Request Lenses
     , amvcXgafv
-    , amvcQuotaUser
-    , amvcPrettyPrint
     , amvcUploadProtocol
     , amvcPp
     , amvcAccessToken
@@ -43,10 +41,7 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create
     , amvcPayload
     , amvcModulesId
     , amvcBearerToken
-    , amvcKey
     , amvcAppsId
-    , amvcOAuthToken
-    , amvcFields
     , amvcCallback
     ) where
 
@@ -69,22 +64,15 @@ type AppsModulesVersionsCreateResource =
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
                              QueryParam "callback" Text :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           ReqBody '[JSON] Version :>
-                                             Post '[JSON] Operation
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Version :>
+                                   Post '[JSON] Operation
 
 -- | Deploys new code and resource files to a version.
 --
 -- /See:/ 'appsModulesVersionsCreate'' smart constructor.
 data AppsModulesVersionsCreate' = AppsModulesVersionsCreate'
     { _amvcXgafv          :: !(Maybe Text)
-    , _amvcQuotaUser      :: !(Maybe Text)
-    , _amvcPrettyPrint    :: !Bool
     , _amvcUploadProtocol :: !(Maybe Text)
     , _amvcPp             :: !Bool
     , _amvcAccessToken    :: !(Maybe Text)
@@ -92,10 +80,7 @@ data AppsModulesVersionsCreate' = AppsModulesVersionsCreate'
     , _amvcPayload        :: !Version
     , _amvcModulesId      :: !Text
     , _amvcBearerToken    :: !(Maybe Text)
-    , _amvcKey            :: !(Maybe AuthKey)
     , _amvcAppsId         :: !Text
-    , _amvcOAuthToken     :: !(Maybe OAuthToken)
-    , _amvcFields         :: !(Maybe Text)
     , _amvcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -104,10 +89,6 @@ data AppsModulesVersionsCreate' = AppsModulesVersionsCreate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'amvcXgafv'
---
--- * 'amvcQuotaUser'
---
--- * 'amvcPrettyPrint'
 --
 -- * 'amvcUploadProtocol'
 --
@@ -123,13 +104,7 @@ data AppsModulesVersionsCreate' = AppsModulesVersionsCreate'
 --
 -- * 'amvcBearerToken'
 --
--- * 'amvcKey'
---
 -- * 'amvcAppsId'
---
--- * 'amvcOAuthToken'
---
--- * 'amvcFields'
 --
 -- * 'amvcCallback'
 appsModulesVersionsCreate'
@@ -140,8 +115,6 @@ appsModulesVersionsCreate'
 appsModulesVersionsCreate' pAmvcPayload_ pAmvcModulesId_ pAmvcAppsId_ =
     AppsModulesVersionsCreate'
     { _amvcXgafv = Nothing
-    , _amvcQuotaUser = Nothing
-    , _amvcPrettyPrint = True
     , _amvcUploadProtocol = Nothing
     , _amvcPp = True
     , _amvcAccessToken = Nothing
@@ -149,10 +122,7 @@ appsModulesVersionsCreate' pAmvcPayload_ pAmvcModulesId_ pAmvcAppsId_ =
     , _amvcPayload = pAmvcPayload_
     , _amvcModulesId = pAmvcModulesId_
     , _amvcBearerToken = Nothing
-    , _amvcKey = Nothing
     , _amvcAppsId = pAmvcAppsId_
-    , _amvcOAuthToken = Nothing
-    , _amvcFields = Nothing
     , _amvcCallback = Nothing
     }
 
@@ -160,20 +130,6 @@ appsModulesVersionsCreate' pAmvcPayload_ pAmvcModulesId_ pAmvcAppsId_ =
 amvcXgafv :: Lens' AppsModulesVersionsCreate' (Maybe Text)
 amvcXgafv
   = lens _amvcXgafv (\ s a -> s{_amvcXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-amvcQuotaUser :: Lens' AppsModulesVersionsCreate' (Maybe Text)
-amvcQuotaUser
-  = lens _amvcQuotaUser
-      (\ s a -> s{_amvcQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-amvcPrettyPrint :: Lens' AppsModulesVersionsCreate' Bool
-amvcPrettyPrint
-  = lens _amvcPrettyPrint
-      (\ s a -> s{_amvcPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 amvcUploadProtocol :: Lens' AppsModulesVersionsCreate' (Maybe Text)
@@ -214,43 +170,21 @@ amvcBearerToken
   = lens _amvcBearerToken
       (\ s a -> s{_amvcBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-amvcKey :: Lens' AppsModulesVersionsCreate' (Maybe AuthKey)
-amvcKey = lens _amvcKey (\ s a -> s{_amvcKey = a})
-
 -- | Part of \`name\`. Name of the resource to update. For example:
 -- \"apps\/myapp\/modules\/default\".
 amvcAppsId :: Lens' AppsModulesVersionsCreate' Text
 amvcAppsId
   = lens _amvcAppsId (\ s a -> s{_amvcAppsId = a})
 
--- | OAuth 2.0 token for the current user.
-amvcOAuthToken :: Lens' AppsModulesVersionsCreate' (Maybe OAuthToken)
-amvcOAuthToken
-  = lens _amvcOAuthToken
-      (\ s a -> s{_amvcOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-amvcFields :: Lens' AppsModulesVersionsCreate' (Maybe Text)
-amvcFields
-  = lens _amvcFields (\ s a -> s{_amvcFields = a})
-
 -- | JSONP
 amvcCallback :: Lens' AppsModulesVersionsCreate' (Maybe Text)
 amvcCallback
   = lens _amvcCallback (\ s a -> s{_amvcCallback = a})
 
-instance GoogleAuth AppsModulesVersionsCreate' where
-        _AuthKey = amvcKey . _Just
-        _AuthToken = amvcOAuthToken . _Just
-
 instance GoogleRequest AppsModulesVersionsCreate'
          where
         type Rs AppsModulesVersionsCreate' = Operation
-        request = requestWith appEngineRequest
-        requestWith rq AppsModulesVersionsCreate'{..}
+        requestClient AppsModulesVersionsCreate'{..}
           = go _amvcAppsId _amvcModulesId _amvcXgafv
               _amvcUploadProtocol
               (Just _amvcPp)
@@ -258,14 +192,10 @@ instance GoogleRequest AppsModulesVersionsCreate'
               _amvcUploadType
               _amvcBearerToken
               _amvcCallback
-              _amvcQuotaUser
-              (Just _amvcPrettyPrint)
-              _amvcFields
-              _amvcKey
-              _amvcOAuthToken
               (Just AltJSON)
               _amvcPayload
+              appEngineService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AppsModulesVersionsCreateResource)
-                      rq
+                      mempty

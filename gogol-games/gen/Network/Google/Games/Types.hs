@@ -15,8 +15,13 @@
 --
 module Network.Google.Games.Types
     (
-    -- * Service Request
-      gamesRequest
+    -- * Service Configuration
+      gamesService
+
+    -- * OAuth Scopes
+    , plusLoginScope
+    , gamesScope
+    , driveAppdataScope
 
     -- * PlayersListCollection
     , PlayersListCollection (..)
@@ -917,7 +922,21 @@ import           Network.Google.Games.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Play Game Services API. This contains the host and root path used as a starting point for constructing service requests.
-gamesRequest :: RequestBuilder
-gamesRequest
-  = defaultRequest "https://www.googleapis.com/"
+gamesService :: Service
+gamesService
+  = defaultService (ServiceId "games:v1")
+      "www.googleapis.com"
       "games/v1/"
+
+-- | Know your basic profile info and list of people in your circles.
+plusLoginScope :: OAuthScope
+plusLoginScope = OAuthScope "https://www.googleapis.com/auth/plus.login";
+
+-- | Share your Google+ profile information and view and manage your game
+-- activity
+gamesScope :: OAuthScope
+gamesScope = OAuthScope "https://www.googleapis.com/auth/games";
+
+-- | View and manage its own configuration data in your Google Drive
+driveAppdataScope :: OAuthScope
+driveAppdataScope = OAuthScope "https://www.googleapis.com/auth/drive.appdata";

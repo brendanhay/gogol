@@ -33,15 +33,9 @@ module Network.Google.Resource.ResourceViews.ZoneViews.Insert
     , ZoneViewsInsert'
 
     -- * Request Lenses
-    , zviQuotaUser
-    , zviPrettyPrint
     , zviProject
-    , zviUserIP
     , zviZone
     , zviPayload
-    , zviKey
-    , zviOAuthToken
-    , zviFields
     ) where
 
 import           Network.Google.Prelude
@@ -54,52 +48,28 @@ type ZoneViewsInsertResource =
        "zones" :>
          Capture "zone" Text :>
            "resourceViews" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] ResourceView :>
-                             Post '[JSON] Operation
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] ResourceView :>
+                 Post '[JSON] Operation
 
 -- | Create a resource view.
 --
 -- /See:/ 'zoneViewsInsert'' smart constructor.
 data ZoneViewsInsert' = ZoneViewsInsert'
-    { _zviQuotaUser   :: !(Maybe Text)
-    , _zviPrettyPrint :: !Bool
-    , _zviProject     :: !Text
-    , _zviUserIP      :: !(Maybe Text)
-    , _zviZone        :: !Text
-    , _zviPayload     :: !ResourceView
-    , _zviKey         :: !(Maybe AuthKey)
-    , _zviOAuthToken  :: !(Maybe OAuthToken)
-    , _zviFields      :: !(Maybe Text)
+    { _zviProject :: !Text
+    , _zviZone    :: !Text
+    , _zviPayload :: !ResourceView
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'zviQuotaUser'
---
--- * 'zviPrettyPrint'
---
 -- * 'zviProject'
---
--- * 'zviUserIP'
 --
 -- * 'zviZone'
 --
 -- * 'zviPayload'
---
--- * 'zviKey'
---
--- * 'zviOAuthToken'
---
--- * 'zviFields'
 zoneViewsInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
@@ -107,40 +77,15 @@ zoneViewsInsert'
     -> ZoneViewsInsert'
 zoneViewsInsert' pZviProject_ pZviZone_ pZviPayload_ =
     ZoneViewsInsert'
-    { _zviQuotaUser = Nothing
-    , _zviPrettyPrint = True
-    , _zviProject = pZviProject_
-    , _zviUserIP = Nothing
+    { _zviProject = pZviProject_
     , _zviZone = pZviZone_
     , _zviPayload = pZviPayload_
-    , _zviKey = Nothing
-    , _zviOAuthToken = Nothing
-    , _zviFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-zviQuotaUser :: Lens' ZoneViewsInsert' (Maybe Text)
-zviQuotaUser
-  = lens _zviQuotaUser (\ s a -> s{_zviQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-zviPrettyPrint :: Lens' ZoneViewsInsert' Bool
-zviPrettyPrint
-  = lens _zviPrettyPrint
-      (\ s a -> s{_zviPrettyPrint = a})
 
 -- | The project name of the resource view.
 zviProject :: Lens' ZoneViewsInsert' Text
 zviProject
   = lens _zviProject (\ s a -> s{_zviProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-zviUserIP :: Lens' ZoneViewsInsert' (Maybe Text)
-zviUserIP
-  = lens _zviUserIP (\ s a -> s{_zviUserIP = a})
 
 -- | The zone name of the resource view.
 zviZone :: Lens' ZoneViewsInsert' Text
@@ -151,40 +96,12 @@ zviPayload :: Lens' ZoneViewsInsert' ResourceView
 zviPayload
   = lens _zviPayload (\ s a -> s{_zviPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-zviKey :: Lens' ZoneViewsInsert' (Maybe AuthKey)
-zviKey = lens _zviKey (\ s a -> s{_zviKey = a})
-
--- | OAuth 2.0 token for the current user.
-zviOAuthToken :: Lens' ZoneViewsInsert' (Maybe OAuthToken)
-zviOAuthToken
-  = lens _zviOAuthToken
-      (\ s a -> s{_zviOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-zviFields :: Lens' ZoneViewsInsert' (Maybe Text)
-zviFields
-  = lens _zviFields (\ s a -> s{_zviFields = a})
-
-instance GoogleAuth ZoneViewsInsert' where
-        _AuthKey = zviKey . _Just
-        _AuthToken = zviOAuthToken . _Just
-
 instance GoogleRequest ZoneViewsInsert' where
         type Rs ZoneViewsInsert' = Operation
-        request = requestWith resourceViewsRequest
-        requestWith rq ZoneViewsInsert'{..}
-          = go _zviProject _zviZone _zviQuotaUser
-              (Just _zviPrettyPrint)
-              _zviUserIP
-              _zviFields
-              _zviKey
-              _zviOAuthToken
-              (Just AltJSON)
-              _zviPayload
+        requestClient ZoneViewsInsert'{..}
+          = go _zviProject _zviZone (Just AltJSON) _zviPayload
+              resourceViewsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ZoneViewsInsertResource)
-                      rq
+                      mempty

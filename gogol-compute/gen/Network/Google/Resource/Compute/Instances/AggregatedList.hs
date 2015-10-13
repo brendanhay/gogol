@@ -33,16 +33,10 @@ module Network.Google.Resource.Compute.Instances.AggregatedList
     , InstancesAggregatedList'
 
     -- * Request Lenses
-    , ialQuotaUser
-    , ialPrettyPrint
     , ialProject
-    , ialUserIP
-    , ialKey
     , ialFilter
     , ialPageToken
-    , ialOAuthToken
     , ialMaxResults
-    , ialFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -57,99 +51,44 @@ type InstancesAggregatedListResource =
            QueryParam "filter" Text :>
              QueryParam "pageToken" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] InstanceAggregatedList
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] InstanceAggregatedList
 
 --
 -- /See:/ 'instancesAggregatedList'' smart constructor.
 data InstancesAggregatedList' = InstancesAggregatedList'
-    { _ialQuotaUser   :: !(Maybe Text)
-    , _ialPrettyPrint :: !Bool
-    , _ialProject     :: !Text
-    , _ialUserIP      :: !(Maybe Text)
-    , _ialKey         :: !(Maybe AuthKey)
-    , _ialFilter      :: !(Maybe Text)
-    , _ialPageToken   :: !(Maybe Text)
-    , _ialOAuthToken  :: !(Maybe OAuthToken)
-    , _ialMaxResults  :: !Word32
-    , _ialFields      :: !(Maybe Text)
+    { _ialProject    :: !Text
+    , _ialFilter     :: !(Maybe Text)
+    , _ialPageToken  :: !(Maybe Text)
+    , _ialMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesAggregatedList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ialQuotaUser'
---
--- * 'ialPrettyPrint'
---
 -- * 'ialProject'
---
--- * 'ialUserIP'
---
--- * 'ialKey'
 --
 -- * 'ialFilter'
 --
 -- * 'ialPageToken'
 --
--- * 'ialOAuthToken'
---
 -- * 'ialMaxResults'
---
--- * 'ialFields'
 instancesAggregatedList'
     :: Text -- ^ 'project'
     -> InstancesAggregatedList'
 instancesAggregatedList' pIalProject_ =
     InstancesAggregatedList'
-    { _ialQuotaUser = Nothing
-    , _ialPrettyPrint = True
-    , _ialProject = pIalProject_
-    , _ialUserIP = Nothing
-    , _ialKey = Nothing
+    { _ialProject = pIalProject_
     , _ialFilter = Nothing
     , _ialPageToken = Nothing
-    , _ialOAuthToken = Nothing
     , _ialMaxResults = 500
-    , _ialFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ialQuotaUser :: Lens' InstancesAggregatedList' (Maybe Text)
-ialQuotaUser
-  = lens _ialQuotaUser (\ s a -> s{_ialQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ialPrettyPrint :: Lens' InstancesAggregatedList' Bool
-ialPrettyPrint
-  = lens _ialPrettyPrint
-      (\ s a -> s{_ialPrettyPrint = a})
 
 -- | Project ID for this request.
 ialProject :: Lens' InstancesAggregatedList' Text
 ialProject
   = lens _ialProject (\ s a -> s{_ialProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ialUserIP :: Lens' InstancesAggregatedList' (Maybe Text)
-ialUserIP
-  = lens _ialUserIP (\ s a -> s{_ialUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ialKey :: Lens' InstancesAggregatedList' (Maybe AuthKey)
-ialKey = lens _ialKey (\ s a -> s{_ialKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -173,42 +112,21 @@ ialPageToken :: Lens' InstancesAggregatedList' (Maybe Text)
 ialPageToken
   = lens _ialPageToken (\ s a -> s{_ialPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-ialOAuthToken :: Lens' InstancesAggregatedList' (Maybe OAuthToken)
-ialOAuthToken
-  = lens _ialOAuthToken
-      (\ s a -> s{_ialOAuthToken = a})
-
 -- | Maximum count of results to be returned.
 ialMaxResults :: Lens' InstancesAggregatedList' Word32
 ialMaxResults
   = lens _ialMaxResults
       (\ s a -> s{_ialMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-ialFields :: Lens' InstancesAggregatedList' (Maybe Text)
-ialFields
-  = lens _ialFields (\ s a -> s{_ialFields = a})
-
-instance GoogleAuth InstancesAggregatedList' where
-        _AuthKey = ialKey . _Just
-        _AuthToken = ialOAuthToken . _Just
-
 instance GoogleRequest InstancesAggregatedList' where
         type Rs InstancesAggregatedList' =
              InstanceAggregatedList
-        request = requestWith computeRequest
-        requestWith rq InstancesAggregatedList'{..}
+        requestClient InstancesAggregatedList'{..}
           = go _ialProject _ialFilter _ialPageToken
               (Just _ialMaxResults)
-              _ialQuotaUser
-              (Just _ialPrettyPrint)
-              _ialUserIP
-              _ialFields
-              _ialKey
-              _ialOAuthToken
               (Just AltJSON)
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy InstancesAggregatedListResource)
-                      rq
+                      mempty

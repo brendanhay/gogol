@@ -34,18 +34,13 @@ module Network.Google.Resource.Logging.Projects.Logs.Sinks.List
 
     -- * Request Lenses
     , pXgafv
-    , pQuotaUser
-    , pPrettyPrint
     , pUploadProtocol
     , pLogsId
     , pPp
     , pAccessToken
     , pUploadType
     , pBearerToken
-    , pKey
-    , pOAuthToken
     , pProjectsId
-    , pFields
     , pCallback
     ) where
 
@@ -68,31 +63,21 @@ type ProjectsLogsSinksListResource =
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
                              QueryParam "callback" Text :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] ListLogSinksResponse
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListLogSinksResponse
 
 -- | Lists log sinks associated with a log.
 --
 -- /See:/ 'projectsLogsSinksList'' smart constructor.
 data ProjectsLogsSinksList' = ProjectsLogsSinksList'
     { _pXgafv          :: !(Maybe Text)
-    , _pQuotaUser      :: !(Maybe Text)
-    , _pPrettyPrint    :: !Bool
     , _pUploadProtocol :: !(Maybe Text)
     , _pLogsId         :: !Text
     , _pPp             :: !Bool
     , _pAccessToken    :: !(Maybe Text)
     , _pUploadType     :: !(Maybe Text)
     , _pBearerToken    :: !(Maybe Text)
-    , _pKey            :: !(Maybe AuthKey)
-    , _pOAuthToken     :: !(Maybe OAuthToken)
     , _pProjectsId     :: !Text
-    , _pFields         :: !(Maybe Text)
     , _pCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -101,10 +86,6 @@ data ProjectsLogsSinksList' = ProjectsLogsSinksList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pXgafv'
---
--- * 'pQuotaUser'
---
--- * 'pPrettyPrint'
 --
 -- * 'pUploadProtocol'
 --
@@ -118,13 +99,7 @@ data ProjectsLogsSinksList' = ProjectsLogsSinksList'
 --
 -- * 'pBearerToken'
 --
--- * 'pKey'
---
--- * 'pOAuthToken'
---
 -- * 'pProjectsId'
---
--- * 'pFields'
 --
 -- * 'pCallback'
 projectsLogsSinksList'
@@ -134,36 +109,19 @@ projectsLogsSinksList'
 projectsLogsSinksList' pPLogsId_ pPProjectsId_ =
     ProjectsLogsSinksList'
     { _pXgafv = Nothing
-    , _pQuotaUser = Nothing
-    , _pPrettyPrint = True
     , _pUploadProtocol = Nothing
     , _pLogsId = pPLogsId_
     , _pPp = True
     , _pAccessToken = Nothing
     , _pUploadType = Nothing
     , _pBearerToken = Nothing
-    , _pKey = Nothing
-    , _pOAuthToken = Nothing
     , _pProjectsId = pPProjectsId_
-    , _pFields = Nothing
     , _pCallback = Nothing
     }
 
 -- | V1 error format.
 pXgafv :: Lens' ProjectsLogsSinksList' (Maybe Text)
 pXgafv = lens _pXgafv (\ s a -> s{_pXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pQuotaUser :: Lens' ProjectsLogsSinksList' (Maybe Text)
-pQuotaUser
-  = lens _pQuotaUser (\ s a -> s{_pQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pPrettyPrint :: Lens' ProjectsLogsSinksList' Bool
-pPrettyPrint
-  = lens _pPrettyPrint (\ s a -> s{_pPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 pUploadProtocol :: Lens' ProjectsLogsSinksList' (Maybe Text)
@@ -194,53 +152,29 @@ pBearerToken :: Lens' ProjectsLogsSinksList' (Maybe Text)
 pBearerToken
   = lens _pBearerToken (\ s a -> s{_pBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pKey :: Lens' ProjectsLogsSinksList' (Maybe AuthKey)
-pKey = lens _pKey (\ s a -> s{_pKey = a})
-
--- | OAuth 2.0 token for the current user.
-pOAuthToken :: Lens' ProjectsLogsSinksList' (Maybe OAuthToken)
-pOAuthToken
-  = lens _pOAuthToken (\ s a -> s{_pOAuthToken = a})
-
 -- | Part of \`logName\`. The log whose sinks are wanted. For example,
 -- \`\"compute.google.com\/syslog\"\`.
 pProjectsId :: Lens' ProjectsLogsSinksList' Text
 pProjectsId
   = lens _pProjectsId (\ s a -> s{_pProjectsId = a})
 
--- | Selector specifying which fields to include in a partial response.
-pFields :: Lens' ProjectsLogsSinksList' (Maybe Text)
-pFields = lens _pFields (\ s a -> s{_pFields = a})
-
 -- | JSONP
 pCallback :: Lens' ProjectsLogsSinksList' (Maybe Text)
 pCallback
   = lens _pCallback (\ s a -> s{_pCallback = a})
 
-instance GoogleAuth ProjectsLogsSinksList' where
-        _AuthKey = pKey . _Just
-        _AuthToken = pOAuthToken . _Just
-
 instance GoogleRequest ProjectsLogsSinksList' where
         type Rs ProjectsLogsSinksList' = ListLogSinksResponse
-        request = requestWith loggingRequest
-        requestWith rq ProjectsLogsSinksList'{..}
+        requestClient ProjectsLogsSinksList'{..}
           = go _pProjectsId _pLogsId _pXgafv _pUploadProtocol
               (Just _pPp)
               _pAccessToken
               _pUploadType
               _pBearerToken
               _pCallback
-              _pQuotaUser
-              (Just _pPrettyPrint)
-              _pFields
-              _pKey
-              _pOAuthToken
               (Just AltJSON)
+              loggingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsLogsSinksListResource)
-                      rq
+                      mempty

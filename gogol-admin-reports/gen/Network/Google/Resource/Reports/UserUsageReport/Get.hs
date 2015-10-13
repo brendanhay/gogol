@@ -34,19 +34,13 @@ module Network.Google.Resource.Reports.UserUsageReport.Get
     , UserUsageReportGet'
 
     -- * Request Lenses
-    , uurgQuotaUser
-    , uurgPrettyPrint
-    , uurgUserIP
     , uurgFilters
     , uurgCustomerId
     , uurgDate
-    , uurgKey
     , uurgParameters
     , uurgPageToken
-    , uurgOAuthToken
     , uurgUserKey
     , uurgMaxResults
-    , uurgFields
     ) where
 
 import           Network.Google.Prelude
@@ -65,44 +59,25 @@ type UserUsageReportGetResource =
                    QueryParam "parameters" Text :>
                      QueryParam "pageToken" Text :>
                        QueryParam "maxResults" Word32 :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] UsageReports
+                         QueryParam "alt" AltJSON :> Get '[JSON] UsageReports
 
 -- | Retrieves a report which is a collection of properties \/ statistics for
 -- a set of users.
 --
 -- /See:/ 'userUsageReportGet'' smart constructor.
 data UserUsageReportGet' = UserUsageReportGet'
-    { _uurgQuotaUser   :: !(Maybe Text)
-    , _uurgPrettyPrint :: !Bool
-    , _uurgUserIP      :: !(Maybe Text)
-    , _uurgFilters     :: !(Maybe Text)
-    , _uurgCustomerId  :: !(Maybe Text)
-    , _uurgDate        :: !Text
-    , _uurgKey         :: !(Maybe AuthKey)
-    , _uurgParameters  :: !(Maybe Text)
-    , _uurgPageToken   :: !(Maybe Text)
-    , _uurgOAuthToken  :: !(Maybe OAuthToken)
-    , _uurgUserKey     :: !Text
-    , _uurgMaxResults  :: !(Maybe Word32)
-    , _uurgFields      :: !(Maybe Text)
+    { _uurgFilters    :: !(Maybe Text)
+    , _uurgCustomerId :: !(Maybe Text)
+    , _uurgDate       :: !Text
+    , _uurgParameters :: !(Maybe Text)
+    , _uurgPageToken  :: !(Maybe Text)
+    , _uurgUserKey    :: !Text
+    , _uurgMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserUsageReportGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'uurgQuotaUser'
---
--- * 'uurgPrettyPrint'
---
--- * 'uurgUserIP'
 --
 -- * 'uurgFilters'
 --
@@ -110,59 +85,27 @@ data UserUsageReportGet' = UserUsageReportGet'
 --
 -- * 'uurgDate'
 --
--- * 'uurgKey'
---
 -- * 'uurgParameters'
 --
 -- * 'uurgPageToken'
 --
--- * 'uurgOAuthToken'
---
 -- * 'uurgUserKey'
 --
 -- * 'uurgMaxResults'
---
--- * 'uurgFields'
 userUsageReportGet'
     :: Text -- ^ 'date'
     -> Text -- ^ 'userKey'
     -> UserUsageReportGet'
 userUsageReportGet' pUurgDate_ pUurgUserKey_ =
     UserUsageReportGet'
-    { _uurgQuotaUser = Nothing
-    , _uurgPrettyPrint = True
-    , _uurgUserIP = Nothing
-    , _uurgFilters = Nothing
+    { _uurgFilters = Nothing
     , _uurgCustomerId = Nothing
     , _uurgDate = pUurgDate_
-    , _uurgKey = Nothing
     , _uurgParameters = Nothing
     , _uurgPageToken = Nothing
-    , _uurgOAuthToken = Nothing
     , _uurgUserKey = pUurgUserKey_
     , _uurgMaxResults = Nothing
-    , _uurgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-uurgQuotaUser :: Lens' UserUsageReportGet' (Maybe Text)
-uurgQuotaUser
-  = lens _uurgQuotaUser
-      (\ s a -> s{_uurgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-uurgPrettyPrint :: Lens' UserUsageReportGet' Bool
-uurgPrettyPrint
-  = lens _uurgPrettyPrint
-      (\ s a -> s{_uurgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-uurgUserIP :: Lens' UserUsageReportGet' (Maybe Text)
-uurgUserIP
-  = lens _uurgUserIP (\ s a -> s{_uurgUserIP = a})
 
 -- | Represents the set of filters including parameter operator value.
 uurgFilters :: Lens' UserUsageReportGet' (Maybe Text)
@@ -180,12 +123,6 @@ uurgCustomerId
 uurgDate :: Lens' UserUsageReportGet' Text
 uurgDate = lens _uurgDate (\ s a -> s{_uurgDate = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-uurgKey :: Lens' UserUsageReportGet' (Maybe AuthKey)
-uurgKey = lens _uurgKey (\ s a -> s{_uurgKey = a})
-
 -- | Represents the application name, parameter name pairs to fetch in csv as
 -- app_name1:param_name1, app_name2:param_name2.
 uurgParameters :: Lens' UserUsageReportGet' (Maybe Text)
@@ -199,12 +136,6 @@ uurgPageToken
   = lens _uurgPageToken
       (\ s a -> s{_uurgPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-uurgOAuthToken :: Lens' UserUsageReportGet' (Maybe OAuthToken)
-uurgOAuthToken
-  = lens _uurgOAuthToken
-      (\ s a -> s{_uurgOAuthToken = a})
-
 -- | Represents the profile id or the user email for which the data should be
 -- filtered.
 uurgUserKey :: Lens' UserUsageReportGet' Text
@@ -217,32 +148,17 @@ uurgMaxResults
   = lens _uurgMaxResults
       (\ s a -> s{_uurgMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-uurgFields :: Lens' UserUsageReportGet' (Maybe Text)
-uurgFields
-  = lens _uurgFields (\ s a -> s{_uurgFields = a})
-
-instance GoogleAuth UserUsageReportGet' where
-        _AuthKey = uurgKey . _Just
-        _AuthToken = uurgOAuthToken . _Just
-
 instance GoogleRequest UserUsageReportGet' where
         type Rs UserUsageReportGet' = UsageReports
-        request = requestWith reportsRequest
-        requestWith rq UserUsageReportGet'{..}
+        requestClient UserUsageReportGet'{..}
           = go _uurgUserKey _uurgDate _uurgFilters
               _uurgCustomerId
               _uurgParameters
               _uurgPageToken
               _uurgMaxResults
-              _uurgQuotaUser
-              (Just _uurgPrettyPrint)
-              _uurgUserIP
-              _uurgFields
-              _uurgKey
-              _uurgOAuthToken
               (Just AltJSON)
+              reportsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy UserUsageReportGetResource)
-                      rq
+                      mempty

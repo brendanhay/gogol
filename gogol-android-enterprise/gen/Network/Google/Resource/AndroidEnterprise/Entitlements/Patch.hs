@@ -35,16 +35,10 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Patch
 
     -- * Request Lenses
     , epEntitlementId
-    , epQuotaUser
-    , epPrettyPrint
     , epEnterpriseId
-    , epUserIP
     , epPayload
     , epInstall
     , epUserId
-    , epKey
-    , epOAuthToken
-    , epFields
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
@@ -60,15 +54,9 @@ type EntitlementsPatchResource =
              "entitlements" :>
                Capture "entitlementId" Text :>
                  QueryParam "install" Bool :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Entitlement :>
-                                   Patch '[JSON] Entitlement
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Entitlement :>
+                       Patch '[JSON] Entitlement
 
 -- | Adds or updates an entitlement to an app for a user. This method
 -- supports patch semantics.
@@ -76,16 +64,10 @@ type EntitlementsPatchResource =
 -- /See:/ 'entitlementsPatch'' smart constructor.
 data EntitlementsPatch' = EntitlementsPatch'
     { _epEntitlementId :: !Text
-    , _epQuotaUser     :: !(Maybe Text)
-    , _epPrettyPrint   :: !Bool
     , _epEnterpriseId  :: !Text
-    , _epUserIP        :: !(Maybe Text)
     , _epPayload       :: !Entitlement
     , _epInstall       :: !(Maybe Bool)
     , _epUserId        :: !Text
-    , _epKey           :: !(Maybe AuthKey)
-    , _epOAuthToken    :: !(Maybe OAuthToken)
-    , _epFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntitlementsPatch'' with the minimum fields required to make a request.
@@ -94,25 +76,13 @@ data EntitlementsPatch' = EntitlementsPatch'
 --
 -- * 'epEntitlementId'
 --
--- * 'epQuotaUser'
---
--- * 'epPrettyPrint'
---
 -- * 'epEnterpriseId'
---
--- * 'epUserIP'
 --
 -- * 'epPayload'
 --
 -- * 'epInstall'
 --
 -- * 'epUserId'
---
--- * 'epKey'
---
--- * 'epOAuthToken'
---
--- * 'epFields'
 entitlementsPatch'
     :: Text -- ^ 'entitlementId'
     -> Text -- ^ 'enterpriseId'
@@ -122,16 +92,10 @@ entitlementsPatch'
 entitlementsPatch' pEpEntitlementId_ pEpEnterpriseId_ pEpPayload_ pEpUserId_ =
     EntitlementsPatch'
     { _epEntitlementId = pEpEntitlementId_
-    , _epQuotaUser = Nothing
-    , _epPrettyPrint = True
     , _epEnterpriseId = pEpEnterpriseId_
-    , _epUserIP = Nothing
     , _epPayload = pEpPayload_
     , _epInstall = Nothing
     , _epUserId = pEpUserId_
-    , _epKey = Nothing
-    , _epOAuthToken = Nothing
-    , _epFields = Nothing
     }
 
 -- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
@@ -140,29 +104,11 @@ epEntitlementId
   = lens _epEntitlementId
       (\ s a -> s{_epEntitlementId = a})
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-epQuotaUser :: Lens' EntitlementsPatch' (Maybe Text)
-epQuotaUser
-  = lens _epQuotaUser (\ s a -> s{_epQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-epPrettyPrint :: Lens' EntitlementsPatch' Bool
-epPrettyPrint
-  = lens _epPrettyPrint
-      (\ s a -> s{_epPrettyPrint = a})
-
 -- | The ID of the enterprise.
 epEnterpriseId :: Lens' EntitlementsPatch' Text
 epEnterpriseId
   = lens _epEnterpriseId
       (\ s a -> s{_epEnterpriseId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-epUserIP :: Lens' EntitlementsPatch' (Maybe Text)
-epUserIP = lens _epUserIP (\ s a -> s{_epUserIP = a})
 
 -- | Multipart request metadata.
 epPayload :: Lens' EntitlementsPatch' Entitlement
@@ -181,40 +127,15 @@ epInstall
 epUserId :: Lens' EntitlementsPatch' Text
 epUserId = lens _epUserId (\ s a -> s{_epUserId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-epKey :: Lens' EntitlementsPatch' (Maybe AuthKey)
-epKey = lens _epKey (\ s a -> s{_epKey = a})
-
--- | OAuth 2.0 token for the current user.
-epOAuthToken :: Lens' EntitlementsPatch' (Maybe OAuthToken)
-epOAuthToken
-  = lens _epOAuthToken (\ s a -> s{_epOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-epFields :: Lens' EntitlementsPatch' (Maybe Text)
-epFields = lens _epFields (\ s a -> s{_epFields = a})
-
-instance GoogleAuth EntitlementsPatch' where
-        _AuthKey = epKey . _Just
-        _AuthToken = epOAuthToken . _Just
-
 instance GoogleRequest EntitlementsPatch' where
         type Rs EntitlementsPatch' = Entitlement
-        request = requestWith androidEnterpriseRequest
-        requestWith rq EntitlementsPatch'{..}
+        requestClient EntitlementsPatch'{..}
           = go _epEnterpriseId _epUserId _epEntitlementId
               _epInstall
-              _epQuotaUser
-              (Just _epPrettyPrint)
-              _epUserIP
-              _epFields
-              _epKey
-              _epOAuthToken
               (Just AltJSON)
               _epPayload
+              androidEnterpriseService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy EntitlementsPatchResource)
-                      rq
+                      mempty

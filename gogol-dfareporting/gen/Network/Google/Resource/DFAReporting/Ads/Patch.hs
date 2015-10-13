@@ -33,15 +33,9 @@ module Network.Google.Resource.DFAReporting.Ads.Patch
     , AdsPatch'
 
     -- * Request Lenses
-    , appQuotaUser
-    , appPrettyPrint
-    , appUserIP
     , appProFileId
     , appPayload
-    , appKey
     , appId
-    , appOAuthToken
-    , appFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,51 +48,27 @@ type AdsPatchResource =
        Capture "profileId" Int64 :>
          "ads" :>
            QueryParam "id" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Ad :> Patch '[JSON] Ad
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Ad :> Patch '[JSON] Ad
 
 -- | Updates an existing ad. This method supports patch semantics.
 --
 -- /See:/ 'adsPatch'' smart constructor.
 data AdsPatch' = AdsPatch'
-    { _appQuotaUser   :: !(Maybe Text)
-    , _appPrettyPrint :: !Bool
-    , _appUserIP      :: !(Maybe Text)
-    , _appProFileId   :: !Int64
-    , _appPayload     :: !Ad
-    , _appKey         :: !(Maybe AuthKey)
-    , _appId          :: !Int64
-    , _appOAuthToken  :: !(Maybe OAuthToken)
-    , _appFields      :: !(Maybe Text)
+    { _appProFileId :: !Int64
+    , _appPayload   :: !Ad
+    , _appId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdsPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'appQuotaUser'
---
--- * 'appPrettyPrint'
---
--- * 'appUserIP'
---
 -- * 'appProFileId'
 --
 -- * 'appPayload'
 --
--- * 'appKey'
---
 -- * 'appId'
---
--- * 'appOAuthToken'
---
--- * 'appFields'
 adsPatch'
     :: Int64 -- ^ 'profileId'
     -> Ad -- ^ 'payload'
@@ -106,35 +76,10 @@ adsPatch'
     -> AdsPatch'
 adsPatch' pAppProFileId_ pAppPayload_ pAppId_ =
     AdsPatch'
-    { _appQuotaUser = Nothing
-    , _appPrettyPrint = True
-    , _appUserIP = Nothing
-    , _appProFileId = pAppProFileId_
+    { _appProFileId = pAppProFileId_
     , _appPayload = pAppPayload_
-    , _appKey = Nothing
     , _appId = pAppId_
-    , _appOAuthToken = Nothing
-    , _appFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-appQuotaUser :: Lens' AdsPatch' (Maybe Text)
-appQuotaUser
-  = lens _appQuotaUser (\ s a -> s{_appQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-appPrettyPrint :: Lens' AdsPatch' Bool
-appPrettyPrint
-  = lens _appPrettyPrint
-      (\ s a -> s{_appPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-appUserIP :: Lens' AdsPatch' (Maybe Text)
-appUserIP
-  = lens _appUserIP (\ s a -> s{_appUserIP = a})
 
 -- | User profile ID associated with this request.
 appProFileId :: Lens' AdsPatch' Int64
@@ -146,42 +91,16 @@ appPayload :: Lens' AdsPatch' Ad
 appPayload
   = lens _appPayload (\ s a -> s{_appPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-appKey :: Lens' AdsPatch' (Maybe AuthKey)
-appKey = lens _appKey (\ s a -> s{_appKey = a})
-
 -- | Ad ID.
 appId :: Lens' AdsPatch' Int64
 appId = lens _appId (\ s a -> s{_appId = a})
 
--- | OAuth 2.0 token for the current user.
-appOAuthToken :: Lens' AdsPatch' (Maybe OAuthToken)
-appOAuthToken
-  = lens _appOAuthToken
-      (\ s a -> s{_appOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-appFields :: Lens' AdsPatch' (Maybe Text)
-appFields
-  = lens _appFields (\ s a -> s{_appFields = a})
-
-instance GoogleAuth AdsPatch' where
-        _AuthKey = appKey . _Just
-        _AuthToken = appOAuthToken . _Just
-
 instance GoogleRequest AdsPatch' where
         type Rs AdsPatch' = Ad
-        request = requestWith dFAReportingRequest
-        requestWith rq AdsPatch'{..}
-          = go _appProFileId (Just _appId) _appQuotaUser
-              (Just _appPrettyPrint)
-              _appUserIP
-              _appFields
-              _appKey
-              _appOAuthToken
-              (Just AltJSON)
+        requestClient AdsPatch'{..}
+          = go _appProFileId (Just _appId) (Just AltJSON)
               _appPayload
+              dFAReportingService
           where go
-                  = clientBuild (Proxy :: Proxy AdsPatchResource) rq
+                  = buildClient (Proxy :: Proxy AdsPatchResource)
+                      mempty

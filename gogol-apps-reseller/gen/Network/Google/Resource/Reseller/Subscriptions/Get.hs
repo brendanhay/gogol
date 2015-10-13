@@ -33,14 +33,8 @@ module Network.Google.Resource.Reseller.Subscriptions.Get
     , SubscriptionsGet'
 
     -- * Request Lenses
-    , sgQuotaUser
-    , sgPrettyPrint
-    , sgUserIP
     , sgCustomerId
-    , sgKey
-    , sgOAuthToken
     , sgSubscriptionId
-    , sgFields
     ) where
 
 import           Network.Google.AppsReseller.Types
@@ -53,96 +47,37 @@ type SubscriptionsGetResource =
        Capture "customerId" Text :>
          "subscriptions" :>
            Capture "subscriptionId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Subscription
+             QueryParam "alt" AltJSON :> Get '[JSON] Subscription
 
 -- | Gets a subscription of the customer.
 --
 -- /See:/ 'subscriptionsGet'' smart constructor.
 data SubscriptionsGet' = SubscriptionsGet'
-    { _sgQuotaUser      :: !(Maybe Text)
-    , _sgPrettyPrint    :: !Bool
-    , _sgUserIP         :: !(Maybe Text)
-    , _sgCustomerId     :: !Text
-    , _sgKey            :: !(Maybe AuthKey)
-    , _sgOAuthToken     :: !(Maybe OAuthToken)
+    { _sgCustomerId     :: !Text
     , _sgSubscriptionId :: !Text
-    , _sgFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sgQuotaUser'
---
--- * 'sgPrettyPrint'
---
--- * 'sgUserIP'
---
 -- * 'sgCustomerId'
 --
--- * 'sgKey'
---
--- * 'sgOAuthToken'
---
 -- * 'sgSubscriptionId'
---
--- * 'sgFields'
 subscriptionsGet'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'subscriptionId'
     -> SubscriptionsGet'
 subscriptionsGet' pSgCustomerId_ pSgSubscriptionId_ =
     SubscriptionsGet'
-    { _sgQuotaUser = Nothing
-    , _sgPrettyPrint = True
-    , _sgUserIP = Nothing
-    , _sgCustomerId = pSgCustomerId_
-    , _sgKey = Nothing
-    , _sgOAuthToken = Nothing
+    { _sgCustomerId = pSgCustomerId_
     , _sgSubscriptionId = pSgSubscriptionId_
-    , _sgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-sgQuotaUser :: Lens' SubscriptionsGet' (Maybe Text)
-sgQuotaUser
-  = lens _sgQuotaUser (\ s a -> s{_sgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-sgPrettyPrint :: Lens' SubscriptionsGet' Bool
-sgPrettyPrint
-  = lens _sgPrettyPrint
-      (\ s a -> s{_sgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-sgUserIP :: Lens' SubscriptionsGet' (Maybe Text)
-sgUserIP = lens _sgUserIP (\ s a -> s{_sgUserIP = a})
 
 -- | Id of the Customer
 sgCustomerId :: Lens' SubscriptionsGet' Text
 sgCustomerId
   = lens _sgCustomerId (\ s a -> s{_sgCustomerId = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-sgKey :: Lens' SubscriptionsGet' (Maybe AuthKey)
-sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
-
--- | OAuth 2.0 token for the current user.
-sgOAuthToken :: Lens' SubscriptionsGet' (Maybe OAuthToken)
-sgOAuthToken
-  = lens _sgOAuthToken (\ s a -> s{_sgOAuthToken = a})
 
 -- | Id of the subscription, which is unique for a customer
 sgSubscriptionId :: Lens' SubscriptionsGet' Text
@@ -150,26 +85,12 @@ sgSubscriptionId
   = lens _sgSubscriptionId
       (\ s a -> s{_sgSubscriptionId = a})
 
--- | Selector specifying which fields to include in a partial response.
-sgFields :: Lens' SubscriptionsGet' (Maybe Text)
-sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
-
-instance GoogleAuth SubscriptionsGet' where
-        _AuthKey = sgKey . _Just
-        _AuthToken = sgOAuthToken . _Just
-
 instance GoogleRequest SubscriptionsGet' where
         type Rs SubscriptionsGet' = Subscription
-        request = requestWith appsResellerRequest
-        requestWith rq SubscriptionsGet'{..}
-          = go _sgCustomerId _sgSubscriptionId _sgQuotaUser
-              (Just _sgPrettyPrint)
-              _sgUserIP
-              _sgFields
-              _sgKey
-              _sgOAuthToken
-              (Just AltJSON)
+        requestClient SubscriptionsGet'{..}
+          = go _sgCustomerId _sgSubscriptionId (Just AltJSON)
+              appsResellerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy SubscriptionsGetResource)
-                      rq
+                      mempty

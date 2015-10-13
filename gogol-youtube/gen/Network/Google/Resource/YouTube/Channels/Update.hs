@@ -35,15 +35,9 @@ module Network.Google.Resource.YouTube.Channels.Update
     , ChannelsUpdate'
 
     -- * Request Lenses
-    , chaQuotaUser
     , chaPart
-    , chaPrettyPrint
-    , chaUserIP
     , chaPayload
     , chaOnBehalfOfContentOwner
-    , chaKey
-    , chaOAuthToken
-    , chaFields
     ) where
 
 import           Network.Google.Prelude
@@ -55,14 +49,8 @@ type ChannelsUpdateResource =
      "channels" :>
        QueryParam "part" Text :>
          QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Channel :> Put '[JSON] Channel
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] Channel :> Put '[JSON] Channel
 
 -- | Updates a channel\'s metadata. Note that this method currently only
 -- supports updates to the channel resource\'s brandingSettings and
@@ -70,61 +58,30 @@ type ChannelsUpdateResource =
 --
 -- /See:/ 'channelsUpdate'' smart constructor.
 data ChannelsUpdate' = ChannelsUpdate'
-    { _chaQuotaUser              :: !(Maybe Text)
-    , _chaPart                   :: !Text
-    , _chaPrettyPrint            :: !Bool
-    , _chaUserIP                 :: !(Maybe Text)
+    { _chaPart                   :: !Text
     , _chaPayload                :: !Channel
     , _chaOnBehalfOfContentOwner :: !(Maybe Text)
-    , _chaKey                    :: !(Maybe AuthKey)
-    , _chaOAuthToken             :: !(Maybe OAuthToken)
-    , _chaFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'chaQuotaUser'
---
 -- * 'chaPart'
---
--- * 'chaPrettyPrint'
---
--- * 'chaUserIP'
 --
 -- * 'chaPayload'
 --
 -- * 'chaOnBehalfOfContentOwner'
---
--- * 'chaKey'
---
--- * 'chaOAuthToken'
---
--- * 'chaFields'
 channelsUpdate'
     :: Text -- ^ 'part'
     -> Channel -- ^ 'payload'
     -> ChannelsUpdate'
 channelsUpdate' pChaPart_ pChaPayload_ =
     ChannelsUpdate'
-    { _chaQuotaUser = Nothing
-    , _chaPart = pChaPart_
-    , _chaPrettyPrint = True
-    , _chaUserIP = Nothing
+    { _chaPart = pChaPart_
     , _chaPayload = pChaPayload_
     , _chaOnBehalfOfContentOwner = Nothing
-    , _chaKey = Nothing
-    , _chaOAuthToken = Nothing
-    , _chaFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-chaQuotaUser :: Lens' ChannelsUpdate' (Maybe Text)
-chaQuotaUser
-  = lens _chaQuotaUser (\ s a -> s{_chaQuotaUser = a})
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the
@@ -136,18 +93,6 @@ chaQuotaUser
 -- parameter value specifies.
 chaPart :: Lens' ChannelsUpdate' Text
 chaPart = lens _chaPart (\ s a -> s{_chaPart = a})
-
--- | Returns response with indentations and line breaks.
-chaPrettyPrint :: Lens' ChannelsUpdate' Bool
-chaPrettyPrint
-  = lens _chaPrettyPrint
-      (\ s a -> s{_chaPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-chaUserIP :: Lens' ChannelsUpdate' (Maybe Text)
-chaUserIP
-  = lens _chaUserIP (\ s a -> s{_chaUserIP = a})
 
 -- | Multipart request metadata.
 chaPayload :: Lens' ChannelsUpdate' Channel
@@ -167,40 +112,13 @@ chaOnBehalfOfContentOwner
   = lens _chaOnBehalfOfContentOwner
       (\ s a -> s{_chaOnBehalfOfContentOwner = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-chaKey :: Lens' ChannelsUpdate' (Maybe AuthKey)
-chaKey = lens _chaKey (\ s a -> s{_chaKey = a})
-
--- | OAuth 2.0 token for the current user.
-chaOAuthToken :: Lens' ChannelsUpdate' (Maybe OAuthToken)
-chaOAuthToken
-  = lens _chaOAuthToken
-      (\ s a -> s{_chaOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-chaFields :: Lens' ChannelsUpdate' (Maybe Text)
-chaFields
-  = lens _chaFields (\ s a -> s{_chaFields = a})
-
-instance GoogleAuth ChannelsUpdate' where
-        _AuthKey = chaKey . _Just
-        _AuthToken = chaOAuthToken . _Just
-
 instance GoogleRequest ChannelsUpdate' where
         type Rs ChannelsUpdate' = Channel
-        request = requestWith youTubeRequest
-        requestWith rq ChannelsUpdate'{..}
+        requestClient ChannelsUpdate'{..}
           = go (Just _chaPart) _chaOnBehalfOfContentOwner
-              _chaQuotaUser
-              (Just _chaPrettyPrint)
-              _chaUserIP
-              _chaFields
-              _chaKey
-              _chaOAuthToken
               (Just AltJSON)
               _chaPayload
+              youTubeService
           where go
-                  = clientBuild (Proxy :: Proxy ChannelsUpdateResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ChannelsUpdateResource)
+                      mempty

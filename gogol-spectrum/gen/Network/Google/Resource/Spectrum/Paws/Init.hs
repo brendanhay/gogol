@@ -34,13 +34,7 @@ module Network.Google.Resource.Spectrum.Paws.Init
     , PawsInit'
 
     -- * Request Lenses
-    , piQuotaUser
-    , piPrettyPrint
-    , piUserIP
     , piPayload
-    , piKey
-    , piOAuthToken
-    , piFields
     ) where
 
 import           Network.Google.Prelude
@@ -50,112 +44,40 @@ import           Network.Google.Spectrum.Types
 -- 'PawsInit'' request conforms to.
 type PawsInitResource =
      "init" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "fields" Text :>
-               QueryParam "key" AuthKey :>
-                 Header "Authorization" OAuthToken :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] PawsInitRequest :>
-                       Post '[JSON] PawsInitResponse
+       QueryParam "alt" AltJSON :>
+         ReqBody '[JSON] PawsInitRequest :>
+           Post '[JSON] PawsInitResponse
 
 -- | Initializes the connection between a white space device and the
 -- database.
 --
 -- /See:/ 'pawsInit'' smart constructor.
-data PawsInit' = PawsInit'
-    { _piQuotaUser   :: !(Maybe Text)
-    , _piPrettyPrint :: !Bool
-    , _piUserIP      :: !(Maybe Text)
-    , _piPayload     :: !PawsInitRequest
-    , _piKey         :: !(Maybe AuthKey)
-    , _piOAuthToken  :: !(Maybe OAuthToken)
-    , _piFields      :: !(Maybe Text)
+newtype PawsInit' = PawsInit'
+    { _piPayload :: PawsInitRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsInit'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'piQuotaUser'
---
--- * 'piPrettyPrint'
---
--- * 'piUserIP'
---
 -- * 'piPayload'
---
--- * 'piKey'
---
--- * 'piOAuthToken'
---
--- * 'piFields'
 pawsInit'
     :: PawsInitRequest -- ^ 'payload'
     -> PawsInit'
 pawsInit' pPiPayload_ =
     PawsInit'
-    { _piQuotaUser = Nothing
-    , _piPrettyPrint = True
-    , _piUserIP = Nothing
-    , _piPayload = pPiPayload_
-    , _piKey = Nothing
-    , _piOAuthToken = Nothing
-    , _piFields = Nothing
+    { _piPayload = pPiPayload_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-piQuotaUser :: Lens' PawsInit' (Maybe Text)
-piQuotaUser
-  = lens _piQuotaUser (\ s a -> s{_piQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-piPrettyPrint :: Lens' PawsInit' Bool
-piPrettyPrint
-  = lens _piPrettyPrint
-      (\ s a -> s{_piPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-piUserIP :: Lens' PawsInit' (Maybe Text)
-piUserIP = lens _piUserIP (\ s a -> s{_piUserIP = a})
 
 -- | Multipart request metadata.
 piPayload :: Lens' PawsInit' PawsInitRequest
 piPayload
   = lens _piPayload (\ s a -> s{_piPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-piKey :: Lens' PawsInit' (Maybe AuthKey)
-piKey = lens _piKey (\ s a -> s{_piKey = a})
-
--- | OAuth 2.0 token for the current user.
-piOAuthToken :: Lens' PawsInit' (Maybe OAuthToken)
-piOAuthToken
-  = lens _piOAuthToken (\ s a -> s{_piOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-piFields :: Lens' PawsInit' (Maybe Text)
-piFields = lens _piFields (\ s a -> s{_piFields = a})
-
-instance GoogleAuth PawsInit' where
-        _AuthKey = piKey . _Just
-        _AuthToken = piOAuthToken . _Just
-
 instance GoogleRequest PawsInit' where
         type Rs PawsInit' = PawsInitResponse
-        request = requestWith spectrumRequest
-        requestWith rq PawsInit'{..}
-          = go _piQuotaUser (Just _piPrettyPrint) _piUserIP
-              _piFields
-              _piKey
-              _piOAuthToken
-              (Just AltJSON)
-              _piPayload
+        requestClient PawsInit'{..}
+          = go (Just AltJSON) _piPayload spectrumService
           where go
-                  = clientBuild (Proxy :: Proxy PawsInitResource) rq
+                  = buildClient (Proxy :: Proxy PawsInitResource)
+                      mempty

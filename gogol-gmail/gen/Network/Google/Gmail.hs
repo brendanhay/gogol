@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference>
 module Network.Google.Gmail
     (
+    -- * Service Configuration
+      gmailService
+
     -- * API Declaration
-      GmailAPI
+    , GmailAPI
 
     -- * Resources
 

@@ -33,16 +33,10 @@ module Network.Google.Resource.Compute.Autoscalers.AggregatedList
     , AutoscalersAggregatedList'
 
     -- * Request Lenses
-    , aalaQuotaUser
-    , aalaPrettyPrint
     , aalaProject
-    , aalaUserIP
-    , aalaKey
     , aalaFilter
     , aalaPageToken
-    , aalaOAuthToken
     , aalaMaxResults
-    , aalaFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -57,101 +51,45 @@ type AutoscalersAggregatedListResource =
            QueryParam "filter" Text :>
              QueryParam "pageToken" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] AutoscalerAggregatedList
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] AutoscalerAggregatedList
 
 -- | Retrieves the list of autoscalers grouped by scope.
 --
 -- /See:/ 'autoscalersAggregatedList'' smart constructor.
 data AutoscalersAggregatedList' = AutoscalersAggregatedList'
-    { _aalaQuotaUser   :: !(Maybe Text)
-    , _aalaPrettyPrint :: !Bool
-    , _aalaProject     :: !Text
-    , _aalaUserIP      :: !(Maybe Text)
-    , _aalaKey         :: !(Maybe AuthKey)
-    , _aalaFilter      :: !(Maybe Text)
-    , _aalaPageToken   :: !(Maybe Text)
-    , _aalaOAuthToken  :: !(Maybe OAuthToken)
-    , _aalaMaxResults  :: !Word32
-    , _aalaFields      :: !(Maybe Text)
+    { _aalaProject    :: !Text
+    , _aalaFilter     :: !(Maybe Text)
+    , _aalaPageToken  :: !(Maybe Text)
+    , _aalaMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersAggregatedList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aalaQuotaUser'
---
--- * 'aalaPrettyPrint'
---
 -- * 'aalaProject'
---
--- * 'aalaUserIP'
---
--- * 'aalaKey'
 --
 -- * 'aalaFilter'
 --
 -- * 'aalaPageToken'
 --
--- * 'aalaOAuthToken'
---
 -- * 'aalaMaxResults'
---
--- * 'aalaFields'
 autoscalersAggregatedList'
     :: Text -- ^ 'project'
     -> AutoscalersAggregatedList'
 autoscalersAggregatedList' pAalaProject_ =
     AutoscalersAggregatedList'
-    { _aalaQuotaUser = Nothing
-    , _aalaPrettyPrint = True
-    , _aalaProject = pAalaProject_
-    , _aalaUserIP = Nothing
-    , _aalaKey = Nothing
+    { _aalaProject = pAalaProject_
     , _aalaFilter = Nothing
     , _aalaPageToken = Nothing
-    , _aalaOAuthToken = Nothing
     , _aalaMaxResults = 500
-    , _aalaFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-aalaQuotaUser :: Lens' AutoscalersAggregatedList' (Maybe Text)
-aalaQuotaUser
-  = lens _aalaQuotaUser
-      (\ s a -> s{_aalaQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aalaPrettyPrint :: Lens' AutoscalersAggregatedList' Bool
-aalaPrettyPrint
-  = lens _aalaPrettyPrint
-      (\ s a -> s{_aalaPrettyPrint = a})
 
 -- | Name of the project scoping this request.
 aalaProject :: Lens' AutoscalersAggregatedList' Text
 aalaProject
   = lens _aalaProject (\ s a -> s{_aalaProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-aalaUserIP :: Lens' AutoscalersAggregatedList' (Maybe Text)
-aalaUserIP
-  = lens _aalaUserIP (\ s a -> s{_aalaUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aalaKey :: Lens' AutoscalersAggregatedList' (Maybe AuthKey)
-aalaKey = lens _aalaKey (\ s a -> s{_aalaKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -176,43 +114,22 @@ aalaPageToken
   = lens _aalaPageToken
       (\ s a -> s{_aalaPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-aalaOAuthToken :: Lens' AutoscalersAggregatedList' (Maybe OAuthToken)
-aalaOAuthToken
-  = lens _aalaOAuthToken
-      (\ s a -> s{_aalaOAuthToken = a})
-
 -- | Maximum count of results to be returned.
 aalaMaxResults :: Lens' AutoscalersAggregatedList' Word32
 aalaMaxResults
   = lens _aalaMaxResults
       (\ s a -> s{_aalaMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-aalaFields :: Lens' AutoscalersAggregatedList' (Maybe Text)
-aalaFields
-  = lens _aalaFields (\ s a -> s{_aalaFields = a})
-
-instance GoogleAuth AutoscalersAggregatedList' where
-        _AuthKey = aalaKey . _Just
-        _AuthToken = aalaOAuthToken . _Just
-
 instance GoogleRequest AutoscalersAggregatedList'
          where
         type Rs AutoscalersAggregatedList' =
              AutoscalerAggregatedList
-        request = requestWith computeRequest
-        requestWith rq AutoscalersAggregatedList'{..}
+        requestClient AutoscalersAggregatedList'{..}
           = go _aalaProject _aalaFilter _aalaPageToken
               (Just _aalaMaxResults)
-              _aalaQuotaUser
-              (Just _aalaPrettyPrint)
-              _aalaUserIP
-              _aalaFields
-              _aalaKey
-              _aalaOAuthToken
               (Just AltJSON)
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AutoscalersAggregatedListResource)
-                      rq
+                      mempty

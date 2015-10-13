@@ -34,18 +34,13 @@ module Network.Google.Resource.Logging.Projects.Sinks.Get
 
     -- * Request Lenses
     , psgXgafv
-    , psgQuotaUser
-    , psgPrettyPrint
     , psgUploadProtocol
     , psgPp
     , psgAccessToken
     , psgUploadType
     , psgBearerToken
-    , psgKey
-    , psgOAuthToken
     , psgProjectsId
     , psgSinksId
-    , psgFields
     , psgCallback
     ) where
 
@@ -67,31 +62,20 @@ type ProjectsSinksGetResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] LogSink
+                             QueryParam "alt" AltJSON :> Get '[JSON] LogSink
 
 -- | Gets a project sink.
 --
 -- /See:/ 'projectsSinksGet'' smart constructor.
 data ProjectsSinksGet' = ProjectsSinksGet'
     { _psgXgafv          :: !(Maybe Text)
-    , _psgQuotaUser      :: !(Maybe Text)
-    , _psgPrettyPrint    :: !Bool
     , _psgUploadProtocol :: !(Maybe Text)
     , _psgPp             :: !Bool
     , _psgAccessToken    :: !(Maybe Text)
     , _psgUploadType     :: !(Maybe Text)
     , _psgBearerToken    :: !(Maybe Text)
-    , _psgKey            :: !(Maybe AuthKey)
-    , _psgOAuthToken     :: !(Maybe OAuthToken)
     , _psgProjectsId     :: !Text
     , _psgSinksId        :: !Text
-    , _psgFields         :: !(Maybe Text)
     , _psgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -100,10 +84,6 @@ data ProjectsSinksGet' = ProjectsSinksGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'psgXgafv'
---
--- * 'psgQuotaUser'
---
--- * 'psgPrettyPrint'
 --
 -- * 'psgUploadProtocol'
 --
@@ -115,15 +95,9 @@ data ProjectsSinksGet' = ProjectsSinksGet'
 --
 -- * 'psgBearerToken'
 --
--- * 'psgKey'
---
--- * 'psgOAuthToken'
---
 -- * 'psgProjectsId'
 --
 -- * 'psgSinksId'
---
--- * 'psgFields'
 --
 -- * 'psgCallback'
 projectsSinksGet'
@@ -133,37 +107,19 @@ projectsSinksGet'
 projectsSinksGet' pPsgProjectsId_ pPsgSinksId_ =
     ProjectsSinksGet'
     { _psgXgafv = Nothing
-    , _psgQuotaUser = Nothing
-    , _psgPrettyPrint = True
     , _psgUploadProtocol = Nothing
     , _psgPp = True
     , _psgAccessToken = Nothing
     , _psgUploadType = Nothing
     , _psgBearerToken = Nothing
-    , _psgKey = Nothing
-    , _psgOAuthToken = Nothing
     , _psgProjectsId = pPsgProjectsId_
     , _psgSinksId = pPsgSinksId_
-    , _psgFields = Nothing
     , _psgCallback = Nothing
     }
 
 -- | V1 error format.
 psgXgafv :: Lens' ProjectsSinksGet' (Maybe Text)
 psgXgafv = lens _psgXgafv (\ s a -> s{_psgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-psgQuotaUser :: Lens' ProjectsSinksGet' (Maybe Text)
-psgQuotaUser
-  = lens _psgQuotaUser (\ s a -> s{_psgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-psgPrettyPrint :: Lens' ProjectsSinksGet' Bool
-psgPrettyPrint
-  = lens _psgPrettyPrint
-      (\ s a -> s{_psgPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 psgUploadProtocol :: Lens' ProjectsSinksGet' (Maybe Text)
@@ -193,18 +149,6 @@ psgBearerToken
   = lens _psgBearerToken
       (\ s a -> s{_psgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-psgKey :: Lens' ProjectsSinksGet' (Maybe AuthKey)
-psgKey = lens _psgKey (\ s a -> s{_psgKey = a})
-
--- | OAuth 2.0 token for the current user.
-psgOAuthToken :: Lens' ProjectsSinksGet' (Maybe OAuthToken)
-psgOAuthToken
-  = lens _psgOAuthToken
-      (\ s a -> s{_psgOAuthToken = a})
-
 -- | Part of \`sinkName\`. The resource name of the project sink to return.
 psgProjectsId :: Lens' ProjectsSinksGet' Text
 psgProjectsId
@@ -216,24 +160,14 @@ psgSinksId :: Lens' ProjectsSinksGet' Text
 psgSinksId
   = lens _psgSinksId (\ s a -> s{_psgSinksId = a})
 
--- | Selector specifying which fields to include in a partial response.
-psgFields :: Lens' ProjectsSinksGet' (Maybe Text)
-psgFields
-  = lens _psgFields (\ s a -> s{_psgFields = a})
-
 -- | JSONP
 psgCallback :: Lens' ProjectsSinksGet' (Maybe Text)
 psgCallback
   = lens _psgCallback (\ s a -> s{_psgCallback = a})
 
-instance GoogleAuth ProjectsSinksGet' where
-        _AuthKey = psgKey . _Just
-        _AuthToken = psgOAuthToken . _Just
-
 instance GoogleRequest ProjectsSinksGet' where
         type Rs ProjectsSinksGet' = LogSink
-        request = requestWith loggingRequest
-        requestWith rq ProjectsSinksGet'{..}
+        requestClient ProjectsSinksGet'{..}
           = go _psgProjectsId _psgSinksId _psgXgafv
               _psgUploadProtocol
               (Just _psgPp)
@@ -241,13 +175,9 @@ instance GoogleRequest ProjectsSinksGet' where
               _psgUploadType
               _psgBearerToken
               _psgCallback
-              _psgQuotaUser
-              (Just _psgPrettyPrint)
-              _psgFields
-              _psgKey
-              _psgOAuthToken
               (Just AltJSON)
+              loggingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsSinksGetResource)
-                      rq
+                      mempty

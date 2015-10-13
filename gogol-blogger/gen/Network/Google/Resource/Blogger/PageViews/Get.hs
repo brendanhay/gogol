@@ -33,14 +33,8 @@ module Network.Google.Resource.Blogger.PageViews.Get
     , PageViewsGet'
 
     -- * Request Lenses
-    , pvgQuotaUser
-    , pvgPrettyPrint
-    , pvgUserIP
     , pvgBlogId
-    , pvgKey
     , pvgRange
-    , pvgOAuthToken
-    , pvgFields
     ) where
 
 import           Network.Google.Blogger.Types
@@ -53,91 +47,36 @@ type PageViewsGetResource =
        Capture "blogId" Text :>
          "pageviews" :>
            QueryParams "range" PageViewsGetRange :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Pageviews
+             QueryParam "alt" AltJSON :> Get '[JSON] Pageviews
 
 -- | Retrieve pageview stats for a Blog.
 --
 -- /See:/ 'pageViewsGet'' smart constructor.
 data PageViewsGet' = PageViewsGet'
-    { _pvgQuotaUser   :: !(Maybe Text)
-    , _pvgPrettyPrint :: !Bool
-    , _pvgUserIP      :: !(Maybe Text)
-    , _pvgBlogId      :: !Text
-    , _pvgKey         :: !(Maybe AuthKey)
-    , _pvgRange       :: !(Maybe [PageViewsGetRange])
-    , _pvgOAuthToken  :: !(Maybe OAuthToken)
-    , _pvgFields      :: !(Maybe Text)
+    { _pvgBlogId :: !Text
+    , _pvgRange  :: !(Maybe [PageViewsGetRange])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PageViewsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pvgQuotaUser'
---
--- * 'pvgPrettyPrint'
---
--- * 'pvgUserIP'
---
 -- * 'pvgBlogId'
 --
--- * 'pvgKey'
---
 -- * 'pvgRange'
---
--- * 'pvgOAuthToken'
---
--- * 'pvgFields'
 pageViewsGet'
     :: Text -- ^ 'blogId'
     -> PageViewsGet'
 pageViewsGet' pPvgBlogId_ =
     PageViewsGet'
-    { _pvgQuotaUser = Nothing
-    , _pvgPrettyPrint = True
-    , _pvgUserIP = Nothing
-    , _pvgBlogId = pPvgBlogId_
-    , _pvgKey = Nothing
+    { _pvgBlogId = pPvgBlogId_
     , _pvgRange = Nothing
-    , _pvgOAuthToken = Nothing
-    , _pvgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-pvgQuotaUser :: Lens' PageViewsGet' (Maybe Text)
-pvgQuotaUser
-  = lens _pvgQuotaUser (\ s a -> s{_pvgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pvgPrettyPrint :: Lens' PageViewsGet' Bool
-pvgPrettyPrint
-  = lens _pvgPrettyPrint
-      (\ s a -> s{_pvgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-pvgUserIP :: Lens' PageViewsGet' (Maybe Text)
-pvgUserIP
-  = lens _pvgUserIP (\ s a -> s{_pvgUserIP = a})
 
 -- | The ID of the blog to get.
 pvgBlogId :: Lens' PageViewsGet' Text
 pvgBlogId
   = lens _pvgBlogId (\ s a -> s{_pvgBlogId = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pvgKey :: Lens' PageViewsGet' (Maybe AuthKey)
-pvgKey = lens _pvgKey (\ s a -> s{_pvgKey = a})
 
 pvgRange :: Lens' PageViewsGet' [PageViewsGetRange]
 pvgRange
@@ -145,32 +84,12 @@ pvgRange
       _Default
       . _Coerce
 
--- | OAuth 2.0 token for the current user.
-pvgOAuthToken :: Lens' PageViewsGet' (Maybe OAuthToken)
-pvgOAuthToken
-  = lens _pvgOAuthToken
-      (\ s a -> s{_pvgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pvgFields :: Lens' PageViewsGet' (Maybe Text)
-pvgFields
-  = lens _pvgFields (\ s a -> s{_pvgFields = a})
-
-instance GoogleAuth PageViewsGet' where
-        _AuthKey = pvgKey . _Just
-        _AuthToken = pvgOAuthToken . _Just
-
 instance GoogleRequest PageViewsGet' where
         type Rs PageViewsGet' = Pageviews
-        request = requestWith bloggerRequest
-        requestWith rq PageViewsGet'{..}
-          = go _pvgBlogId (_pvgRange ^. _Default) _pvgQuotaUser
-              (Just _pvgPrettyPrint)
-              _pvgUserIP
-              _pvgFields
-              _pvgKey
-              _pvgOAuthToken
+        requestClient PageViewsGet'{..}
+          = go _pvgBlogId (_pvgRange ^. _Default)
               (Just AltJSON)
+              bloggerService
           where go
-                  = clientBuild (Proxy :: Proxy PageViewsGetResource)
-                      rq
+                  = buildClient (Proxy :: Proxy PageViewsGetResource)
+                      mempty

@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference>
 module Network.Google.Games
     (
+    -- * Service Configuration
+      gamesService
+
     -- * API Declaration
-      GamesAPI
+    , GamesAPI
 
     -- * Resources
 

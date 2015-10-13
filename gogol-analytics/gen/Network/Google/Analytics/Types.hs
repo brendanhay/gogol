@@ -15,8 +15,16 @@
 --
 module Network.Google.Analytics.Types
     (
-    -- * Service Request
-      analyticsRequest
+    -- * Service Configuration
+      analyticsService
+
+    -- * OAuth Scopes
+    , analyticsManageUsersScope
+    , analyticsProvisionScope
+    , analyticsManageUsersReadonlyScope
+    , analyticsScope
+    , analyticsReadonlyScope
+    , analyticsEditScope
 
     -- * UnSampledReports
     , UnSampledReports
@@ -1010,7 +1018,33 @@ import           Network.Google.Analytics.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Google Analytics API. This contains the host and root path used as a starting point for constructing service requests.
-analyticsRequest :: RequestBuilder
-analyticsRequest
-  = defaultRequest "https://www.googleapis.com/"
+analyticsService :: Service
+analyticsService
+  = defaultService (ServiceId "analytics:v3")
+      "www.googleapis.com"
       "analytics/v3/"
+
+-- | Manage Google Analytics Account users by email address
+analyticsManageUsersScope :: OAuthScope
+analyticsManageUsersScope = OAuthScope "https://www.googleapis.com/auth/analytics.manage.users";
+
+-- | Create a new Google Analytics account along with its default property
+-- and view
+analyticsProvisionScope :: OAuthScope
+analyticsProvisionScope = OAuthScope "https://www.googleapis.com/auth/analytics.provision";
+
+-- | View Google Analytics user permissions
+analyticsManageUsersReadonlyScope :: OAuthScope
+analyticsManageUsersReadonlyScope = OAuthScope "https://www.googleapis.com/auth/analytics.manage.users.readonly";
+
+-- | View and manage your Google Analytics data
+analyticsScope :: OAuthScope
+analyticsScope = OAuthScope "https://www.googleapis.com/auth/analytics";
+
+-- | View your Google Analytics data
+analyticsReadonlyScope :: OAuthScope
+analyticsReadonlyScope = OAuthScope "https://www.googleapis.com/auth/analytics.readonly";
+
+-- | Edit Google Analytics management entities
+analyticsEditScope :: OAuthScope
+analyticsEditScope = OAuthScope "https://www.googleapis.com/auth/analytics.edit";

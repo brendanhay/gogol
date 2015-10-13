@@ -33,13 +33,7 @@ module Network.Google.Resource.Analytics.Metadata.Columns.List
     , MetadataColumnsList'
 
     -- * Request Lenses
-    , mclQuotaUser
-    , mclPrettyPrint
-    , mclUserIP
-    , mclKey
-    , mclOAuthToken
     , mclReportType
-    , mclFields
     ) where
 
 import           Network.Google.Analytics.Types
@@ -51,88 +45,27 @@ type MetadataColumnsListResource =
      "metadata" :>
        Capture "reportType" Text :>
          "columns" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Columns
+           QueryParam "alt" AltJSON :> Get '[JSON] Columns
 
 -- | Lists all columns for a report type
 --
 -- /See:/ 'metadataColumnsList'' smart constructor.
-data MetadataColumnsList' = MetadataColumnsList'
-    { _mclQuotaUser   :: !(Maybe Text)
-    , _mclPrettyPrint :: !Bool
-    , _mclUserIP      :: !(Maybe Text)
-    , _mclKey         :: !(Maybe AuthKey)
-    , _mclOAuthToken  :: !(Maybe OAuthToken)
-    , _mclReportType  :: !Text
-    , _mclFields      :: !(Maybe Text)
+newtype MetadataColumnsList' = MetadataColumnsList'
+    { _mclReportType :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetadataColumnsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mclQuotaUser'
---
--- * 'mclPrettyPrint'
---
--- * 'mclUserIP'
---
--- * 'mclKey'
---
--- * 'mclOAuthToken'
---
 -- * 'mclReportType'
---
--- * 'mclFields'
 metadataColumnsList'
     :: Text -- ^ 'reportType'
     -> MetadataColumnsList'
 metadataColumnsList' pMclReportType_ =
     MetadataColumnsList'
-    { _mclQuotaUser = Nothing
-    , _mclPrettyPrint = False
-    , _mclUserIP = Nothing
-    , _mclKey = Nothing
-    , _mclOAuthToken = Nothing
-    , _mclReportType = pMclReportType_
-    , _mclFields = Nothing
+    { _mclReportType = pMclReportType_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mclQuotaUser :: Lens' MetadataColumnsList' (Maybe Text)
-mclQuotaUser
-  = lens _mclQuotaUser (\ s a -> s{_mclQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mclPrettyPrint :: Lens' MetadataColumnsList' Bool
-mclPrettyPrint
-  = lens _mclPrettyPrint
-      (\ s a -> s{_mclPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mclUserIP :: Lens' MetadataColumnsList' (Maybe Text)
-mclUserIP
-  = lens _mclUserIP (\ s a -> s{_mclUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mclKey :: Lens' MetadataColumnsList' (Maybe AuthKey)
-mclKey = lens _mclKey (\ s a -> s{_mclKey = a})
-
--- | OAuth 2.0 token for the current user.
-mclOAuthToken :: Lens' MetadataColumnsList' (Maybe OAuthToken)
-mclOAuthToken
-  = lens _mclOAuthToken
-      (\ s a -> s{_mclOAuthToken = a})
 
 -- | Report type. Allowed Values: \'ga\'. Where \'ga\' corresponds to the
 -- Core Reporting API
@@ -141,27 +74,11 @@ mclReportType
   = lens _mclReportType
       (\ s a -> s{_mclReportType = a})
 
--- | Selector specifying which fields to include in a partial response.
-mclFields :: Lens' MetadataColumnsList' (Maybe Text)
-mclFields
-  = lens _mclFields (\ s a -> s{_mclFields = a})
-
-instance GoogleAuth MetadataColumnsList' where
-        _AuthKey = mclKey . _Just
-        _AuthToken = mclOAuthToken . _Just
-
 instance GoogleRequest MetadataColumnsList' where
         type Rs MetadataColumnsList' = Columns
-        request = requestWith analyticsRequest
-        requestWith rq MetadataColumnsList'{..}
-          = go _mclReportType _mclQuotaUser
-              (Just _mclPrettyPrint)
-              _mclUserIP
-              _mclFields
-              _mclKey
-              _mclOAuthToken
-              (Just AltJSON)
+        requestClient MetadataColumnsList'{..}
+          = go _mclReportType (Just AltJSON) analyticsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy MetadataColumnsListResource)
-                      rq
+                      mempty

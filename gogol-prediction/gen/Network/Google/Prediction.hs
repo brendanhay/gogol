@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference>
 module Network.Google.Prediction
     (
+    -- * Service Configuration
+      predictionService
+
     -- * API Declaration
-      PredictionAPI
+    , PredictionAPI
 
     -- * Resources
 

@@ -15,8 +15,11 @@
 --
 module Network.Google.LatencyTest.Types
     (
-    -- * Service Request
-      latencyTestRequest
+    -- * Service Configuration
+      latencyTestService
+
+    -- * OAuth Scopes
+    , monitoringReadonlyScope
 
     -- * IntValue
     , IntValue
@@ -65,8 +68,12 @@ import           Network.Google.LatencyTest.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google Cloud Network Performance Monitoring API. This contains the host and root path used as a starting point for constructing service requests.
-latencyTestRequest :: RequestBuilder
-latencyTestRequest
-  = defaultRequest
-      "https://cloudlatencytest-pa.googleapis.com/"
+latencyTestService :: Service
+latencyTestService
+  = defaultService (ServiceId "cloudlatencytest:v2")
+      "cloudlatencytest-pa.googleapis.com"
       "v2/statscollection/"
+
+-- | View monitoring data for all of your Google Cloud and API projects
+monitoringReadonlyScope :: OAuthScope
+monitoringReadonlyScope = OAuthScope "https://www.googleapis.com/auth/monitoring.readonly";

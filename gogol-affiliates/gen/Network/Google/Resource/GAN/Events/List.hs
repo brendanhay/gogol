@@ -34,29 +34,23 @@ module Network.Google.Resource.GAN.Events.List
 
     -- * Request Lenses
     , elStatus
-    , elQuotaUser
-    , elPrettyPrint
     , elEventDateMin
     , elChargeType
     , elMemberId
-    , elUserIP
     , elModifyDateMax
     , elAdvertiserId
     , elModifyDateMin
     , elRoleId
     , elRole
     , elEventDateMax
-    , elKey
     , elSKU
     , elLinkId
     , elPageToken
     , elType
-    , elOAuthToken
     , elOrderId
     , elPublisherId
     , elProductCategory
     , elMaxResults
-    , elFields
     ) where
 
 import           Network.Google.Affiliates.Types
@@ -84,45 +78,31 @@ type EventsListResource =
                                      QueryParam "publisherId" Text :>
                                        QueryParam "productCategory" Text :>
                                          QueryParam "maxResults" Word32 :>
-                                           QueryParam "quotaUser" Text :>
-                                             QueryParam "prettyPrint" Bool :>
-                                               QueryParam "userIp" Text :>
-                                                 QueryParam "fields" Text :>
-                                                   QueryParam "key" AuthKey :>
-                                                     Header "Authorization"
-                                                       OAuthToken
-                                                       :>
-                                                       QueryParam "alt" AltJSON
-                                                         :> Get '[JSON] Events
+                                           QueryParam "alt" AltJSON :>
+                                             Get '[JSON] Events
 
 -- | Retrieves event data for a given advertiser\/publisher.
 --
 -- /See:/ 'eventsList'' smart constructor.
 data EventsList' = EventsList'
     { _elStatus          :: !(Maybe EventsListStatus)
-    , _elQuotaUser       :: !(Maybe Text)
-    , _elPrettyPrint     :: !Bool
     , _elEventDateMin    :: !(Maybe Text)
     , _elChargeType      :: !(Maybe EventsListChargeType)
     , _elMemberId        :: !(Maybe Text)
-    , _elUserIP          :: !(Maybe Text)
     , _elModifyDateMax   :: !(Maybe Text)
     , _elAdvertiserId    :: !(Maybe Text)
     , _elModifyDateMin   :: !(Maybe Text)
     , _elRoleId          :: !Text
     , _elRole            :: !EventsListRole
     , _elEventDateMax    :: !(Maybe Text)
-    , _elKey             :: !(Maybe AuthKey)
     , _elSKU             :: !(Maybe Text)
     , _elLinkId          :: !(Maybe Text)
     , _elPageToken       :: !(Maybe Text)
     , _elType            :: !(Maybe EventsListType)
-    , _elOAuthToken      :: !(Maybe OAuthToken)
     , _elOrderId         :: !(Maybe Text)
     , _elPublisherId     :: !(Maybe Text)
     , _elProductCategory :: !(Maybe Text)
     , _elMaxResults      :: !(Maybe Word32)
-    , _elFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsList'' with the minimum fields required to make a request.
@@ -131,17 +111,11 @@ data EventsList' = EventsList'
 --
 -- * 'elStatus'
 --
--- * 'elQuotaUser'
---
--- * 'elPrettyPrint'
---
 -- * 'elEventDateMin'
 --
 -- * 'elChargeType'
 --
 -- * 'elMemberId'
---
--- * 'elUserIP'
 --
 -- * 'elModifyDateMax'
 --
@@ -155,8 +129,6 @@ data EventsList' = EventsList'
 --
 -- * 'elEventDateMax'
 --
--- * 'elKey'
---
 -- * 'elSKU'
 --
 -- * 'elLinkId'
@@ -165,8 +137,6 @@ data EventsList' = EventsList'
 --
 -- * 'elType'
 --
--- * 'elOAuthToken'
---
 -- * 'elOrderId'
 --
 -- * 'elPublisherId'
@@ -174,8 +144,6 @@ data EventsList' = EventsList'
 -- * 'elProductCategory'
 --
 -- * 'elMaxResults'
---
--- * 'elFields'
 eventsList'
     :: Text -- ^ 'roleId'
     -> EventsListRole -- ^ 'role'
@@ -183,48 +151,29 @@ eventsList'
 eventsList' pElRoleId_ pElRole_ =
     EventsList'
     { _elStatus = Nothing
-    , _elQuotaUser = Nothing
-    , _elPrettyPrint = True
     , _elEventDateMin = Nothing
     , _elChargeType = Nothing
     , _elMemberId = Nothing
-    , _elUserIP = Nothing
     , _elModifyDateMax = Nothing
     , _elAdvertiserId = Nothing
     , _elModifyDateMin = Nothing
     , _elRoleId = pElRoleId_
     , _elRole = pElRole_
     , _elEventDateMax = Nothing
-    , _elKey = Nothing
     , _elSKU = Nothing
     , _elLinkId = Nothing
     , _elPageToken = Nothing
     , _elType = Nothing
-    , _elOAuthToken = Nothing
     , _elOrderId = Nothing
     , _elPublisherId = Nothing
     , _elProductCategory = Nothing
     , _elMaxResults = Nothing
-    , _elFields = Nothing
     }
 
 -- | Filters out all events that do not have the given status. Valid values:
 -- \'active\', \'canceled\'. Optional.
 elStatus :: Lens' EventsList' (Maybe EventsListStatus)
 elStatus = lens _elStatus (\ s a -> s{_elStatus = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-elQuotaUser :: Lens' EventsList' (Maybe Text)
-elQuotaUser
-  = lens _elQuotaUser (\ s a -> s{_elQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-elPrettyPrint :: Lens' EventsList' Bool
-elPrettyPrint
-  = lens _elPrettyPrint
-      (\ s a -> s{_elPrettyPrint = a})
 
 -- | Filters out all events earlier than given date. Optional. Defaults to 24
 -- hours from current date\/time.
@@ -245,11 +194,6 @@ elChargeType
 elMemberId :: Lens' EventsList' (Maybe Text)
 elMemberId
   = lens _elMemberId (\ s a -> s{_elMemberId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-elUserIP :: Lens' EventsList' (Maybe Text)
-elUserIP = lens _elUserIP (\ s a -> s{_elUserIP = a})
 
 -- | Filters out all events modified later than given date. Optional.
 -- Defaults to 24 hours after modifyDateMin, if modifyDateMin is explicitly
@@ -291,12 +235,6 @@ elEventDateMax
   = lens _elEventDateMax
       (\ s a -> s{_elEventDateMax = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-elKey :: Lens' EventsList' (Maybe AuthKey)
-elKey = lens _elKey (\ s a -> s{_elKey = a})
-
 -- | Caret(^) delimited list of SKUs. Filters out all events that do not
 -- reference one of the given SKU. Optional.
 elSKU :: Lens' EventsList' (Maybe Text)
@@ -316,11 +254,6 @@ elPageToken
 -- \'action\', \'transaction\', \'charge\'. Optional.
 elType :: Lens' EventsList' (Maybe EventsListType)
 elType = lens _elType (\ s a -> s{_elType = a})
-
--- | OAuth 2.0 token for the current user.
-elOAuthToken :: Lens' EventsList' (Maybe OAuthToken)
-elOAuthToken
-  = lens _elOAuthToken (\ s a -> s{_elOAuthToken = a})
 
 -- | Caret(^) delimited list of order IDs. Filters out all events that do not
 -- reference one of the given order IDs. Optional.
@@ -349,18 +282,9 @@ elMaxResults :: Lens' EventsList' (Maybe Word32)
 elMaxResults
   = lens _elMaxResults (\ s a -> s{_elMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-elFields :: Lens' EventsList' (Maybe Text)
-elFields = lens _elFields (\ s a -> s{_elFields = a})
-
-instance GoogleAuth EventsList' where
-        _AuthKey = elKey . _Just
-        _AuthToken = elOAuthToken . _Just
-
 instance GoogleRequest EventsList' where
         type Rs EventsList' = Events
-        request = requestWith affiliatesRequest
-        requestWith rq EventsList'{..}
+        requestClient EventsList'{..}
           = go _elRole _elRoleId _elStatus _elEventDateMin
               _elChargeType
               _elMemberId
@@ -376,12 +300,8 @@ instance GoogleRequest EventsList' where
               _elPublisherId
               _elProductCategory
               _elMaxResults
-              _elQuotaUser
-              (Just _elPrettyPrint)
-              _elUserIP
-              _elFields
-              _elKey
-              _elOAuthToken
               (Just AltJSON)
+              affiliatesService
           where go
-                  = clientBuild (Proxy :: Proxy EventsListResource) rq
+                  = buildClient (Proxy :: Proxy EventsListResource)
+                      mempty

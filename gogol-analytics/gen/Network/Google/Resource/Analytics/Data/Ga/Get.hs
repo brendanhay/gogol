@@ -33,24 +33,18 @@ module Network.Google.Resource.Analytics.Data.Ga.Get
     , DataGaGet'
 
     -- * Request Lenses
-    , dggQuotaUser
     , dggMetrics
-    , dggPrettyPrint
     , dggSamplingLevel
-    , dggUserIP
     , dggFilters
     , dggIds
     , dggEndDate
-    , dggKey
     , dggOutput
     , dggSort
     , dggDimensions
-    , dggOAuthToken
     , dggStartIndex
     , dggMaxResults
     , dggSegment
     , dggStartDate
-    , dggFields
     ) where
 
 import           Network.Google.Analytics.Types
@@ -73,52 +67,33 @@ type DataGaGetResource =
                            QueryParam "start-index" Int32 :>
                              QueryParam "max-results" Int32 :>
                                QueryParam "segment" Text :>
-                                 QueryParam "quotaUser" Text :>
-                                   QueryParam "prettyPrint" Bool :>
-                                     QueryParam "userIp" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "key" AuthKey :>
-                                           Header "Authorization" OAuthToken :>
-                                             QueryParam "alt" AltJSON :>
-                                               Get '[JSON] GaData
+                                 QueryParam "alt" AltJSON :> Get '[JSON] GaData
 
 -- | Returns Analytics data for a view (profile).
 --
 -- /See:/ 'dataGaGet'' smart constructor.
 data DataGaGet' = DataGaGet'
-    { _dggQuotaUser     :: !(Maybe Text)
-    , _dggMetrics       :: !Text
-    , _dggPrettyPrint   :: !Bool
+    { _dggMetrics       :: !Text
     , _dggSamplingLevel :: !(Maybe DataGaGetSamplingLevel)
-    , _dggUserIP        :: !(Maybe Text)
     , _dggFilters       :: !(Maybe Text)
     , _dggIds           :: !Text
     , _dggEndDate       :: !Text
-    , _dggKey           :: !(Maybe AuthKey)
     , _dggOutput        :: !(Maybe DataGaGetOutput)
     , _dggSort          :: !(Maybe Text)
     , _dggDimensions    :: !(Maybe Text)
-    , _dggOAuthToken    :: !(Maybe OAuthToken)
     , _dggStartIndex    :: !(Maybe Int32)
     , _dggMaxResults    :: !(Maybe Int32)
     , _dggSegment       :: !(Maybe Text)
     , _dggStartDate     :: !Text
-    , _dggFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataGaGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dggQuotaUser'
---
 -- * 'dggMetrics'
 --
--- * 'dggPrettyPrint'
---
 -- * 'dggSamplingLevel'
---
--- * 'dggUserIP'
 --
 -- * 'dggFilters'
 --
@@ -126,15 +101,11 @@ data DataGaGet' = DataGaGet'
 --
 -- * 'dggEndDate'
 --
--- * 'dggKey'
---
 -- * 'dggOutput'
 --
 -- * 'dggSort'
 --
 -- * 'dggDimensions'
---
--- * 'dggOAuthToken'
 --
 -- * 'dggStartIndex'
 --
@@ -143,8 +114,6 @@ data DataGaGet' = DataGaGet'
 -- * 'dggSegment'
 --
 -- * 'dggStartDate'
---
--- * 'dggFields'
 dataGaGet'
     :: Text -- ^ 'metrics'
     -> Text -- ^ 'ids'
@@ -153,32 +122,19 @@ dataGaGet'
     -> DataGaGet'
 dataGaGet' pDggMetrics_ pDggIds_ pDggEndDate_ pDggStartDate_ =
     DataGaGet'
-    { _dggQuotaUser = Nothing
-    , _dggMetrics = pDggMetrics_
-    , _dggPrettyPrint = False
+    { _dggMetrics = pDggMetrics_
     , _dggSamplingLevel = Nothing
-    , _dggUserIP = Nothing
     , _dggFilters = Nothing
     , _dggIds = pDggIds_
     , _dggEndDate = pDggEndDate_
-    , _dggKey = Nothing
     , _dggOutput = Nothing
     , _dggSort = Nothing
     , _dggDimensions = Nothing
-    , _dggOAuthToken = Nothing
     , _dggStartIndex = Nothing
     , _dggMaxResults = Nothing
     , _dggSegment = Nothing
     , _dggStartDate = pDggStartDate_
-    , _dggFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-dggQuotaUser :: Lens' DataGaGet' (Maybe Text)
-dggQuotaUser
-  = lens _dggQuotaUser (\ s a -> s{_dggQuotaUser = a})
 
 -- | A comma-separated list of Analytics metrics. E.g.,
 -- \'ga:sessions,ga:pageviews\'. At least one metric must be specified.
@@ -186,23 +142,11 @@ dggMetrics :: Lens' DataGaGet' Text
 dggMetrics
   = lens _dggMetrics (\ s a -> s{_dggMetrics = a})
 
--- | Returns response with indentations and line breaks.
-dggPrettyPrint :: Lens' DataGaGet' Bool
-dggPrettyPrint
-  = lens _dggPrettyPrint
-      (\ s a -> s{_dggPrettyPrint = a})
-
 -- | The desired sampling level.
 dggSamplingLevel :: Lens' DataGaGet' (Maybe DataGaGetSamplingLevel)
 dggSamplingLevel
   = lens _dggSamplingLevel
       (\ s a -> s{_dggSamplingLevel = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-dggUserIP :: Lens' DataGaGet' (Maybe Text)
-dggUserIP
-  = lens _dggUserIP (\ s a -> s{_dggUserIP = a})
 
 -- | A comma-separated list of dimension or metric filters to be applied to
 -- Analytics data.
@@ -222,12 +166,6 @@ dggEndDate :: Lens' DataGaGet' Text
 dggEndDate
   = lens _dggEndDate (\ s a -> s{_dggEndDate = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-dggKey :: Lens' DataGaGet' (Maybe AuthKey)
-dggKey = lens _dggKey (\ s a -> s{_dggKey = a})
-
 -- | The selected format for the response. Default format is JSON.
 dggOutput :: Lens' DataGaGet' (Maybe DataGaGetOutput)
 dggOutput
@@ -244,12 +182,6 @@ dggDimensions :: Lens' DataGaGet' (Maybe Text)
 dggDimensions
   = lens _dggDimensions
       (\ s a -> s{_dggDimensions = a})
-
--- | OAuth 2.0 token for the current user.
-dggOAuthToken :: Lens' DataGaGet' (Maybe OAuthToken)
-dggOAuthToken
-  = lens _dggOAuthToken
-      (\ s a -> s{_dggOAuthToken = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
@@ -276,19 +208,9 @@ dggStartDate :: Lens' DataGaGet' Text
 dggStartDate
   = lens _dggStartDate (\ s a -> s{_dggStartDate = a})
 
--- | Selector specifying which fields to include in a partial response.
-dggFields :: Lens' DataGaGet' (Maybe Text)
-dggFields
-  = lens _dggFields (\ s a -> s{_dggFields = a})
-
-instance GoogleAuth DataGaGet' where
-        _AuthKey = dggKey . _Just
-        _AuthToken = dggOAuthToken . _Just
-
 instance GoogleRequest DataGaGet' where
         type Rs DataGaGet' = GaData
-        request = requestWith analyticsRequest
-        requestWith rq DataGaGet'{..}
+        requestClient DataGaGet'{..}
           = go (Just _dggIds) (Just _dggStartDate)
               (Just _dggEndDate)
               (Just _dggMetrics)
@@ -300,12 +222,8 @@ instance GoogleRequest DataGaGet' where
               _dggStartIndex
               _dggMaxResults
               _dggSegment
-              _dggQuotaUser
-              (Just _dggPrettyPrint)
-              _dggUserIP
-              _dggFields
-              _dggKey
-              _dggOAuthToken
               (Just AltJSON)
+              analyticsService
           where go
-                  = clientBuild (Proxy :: Proxy DataGaGetResource) rq
+                  = buildClient (Proxy :: Proxy DataGaGetResource)
+                      mempty

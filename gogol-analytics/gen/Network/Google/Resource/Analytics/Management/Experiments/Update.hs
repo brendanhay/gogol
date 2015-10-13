@@ -33,17 +33,11 @@ module Network.Google.Resource.Analytics.Management.Experiments.Update
     , ManagementExperimentsUpdate'
 
     -- * Request Lenses
-    , meuQuotaUser
-    , meuPrettyPrint
     , meuWebPropertyId
-    , meuUserIP
     , meuProFileId
     , meuPayload
     , meuAccountId
     , meuExperimentId
-    , meuKey
-    , meuOAuthToken
-    , meuFields
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,44 +55,25 @@ type ManagementExperimentsUpdateResource =
                  Capture "profileId" Text :>
                    "experiments" :>
                      Capture "experimentId" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] Experiment :>
-                                       Put '[JSON] Experiment
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Experiment :> Put '[JSON] Experiment
 
 -- | Update an existing experiment.
 --
 -- /See:/ 'managementExperimentsUpdate'' smart constructor.
 data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
-    { _meuQuotaUser     :: !(Maybe Text)
-    , _meuPrettyPrint   :: !Bool
-    , _meuWebPropertyId :: !Text
-    , _meuUserIP        :: !(Maybe Text)
+    { _meuWebPropertyId :: !Text
     , _meuProFileId     :: !Text
     , _meuPayload       :: !Experiment
     , _meuAccountId     :: !Text
     , _meuExperimentId  :: !Text
-    , _meuKey           :: !(Maybe AuthKey)
-    , _meuOAuthToken    :: !(Maybe OAuthToken)
-    , _meuFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'meuQuotaUser'
---
--- * 'meuPrettyPrint'
---
 -- * 'meuWebPropertyId'
---
--- * 'meuUserIP'
 --
 -- * 'meuProFileId'
 --
@@ -107,12 +82,6 @@ data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
 -- * 'meuAccountId'
 --
 -- * 'meuExperimentId'
---
--- * 'meuKey'
---
--- * 'meuOAuthToken'
---
--- * 'meuFields'
 managementExperimentsUpdate'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
@@ -122,43 +91,18 @@ managementExperimentsUpdate'
     -> ManagementExperimentsUpdate'
 managementExperimentsUpdate' pMeuWebPropertyId_ pMeuProFileId_ pMeuPayload_ pMeuAccountId_ pMeuExperimentId_ =
     ManagementExperimentsUpdate'
-    { _meuQuotaUser = Nothing
-    , _meuPrettyPrint = False
-    , _meuWebPropertyId = pMeuWebPropertyId_
-    , _meuUserIP = Nothing
+    { _meuWebPropertyId = pMeuWebPropertyId_
     , _meuProFileId = pMeuProFileId_
     , _meuPayload = pMeuPayload_
     , _meuAccountId = pMeuAccountId_
     , _meuExperimentId = pMeuExperimentId_
-    , _meuKey = Nothing
-    , _meuOAuthToken = Nothing
-    , _meuFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-meuQuotaUser :: Lens' ManagementExperimentsUpdate' (Maybe Text)
-meuQuotaUser
-  = lens _meuQuotaUser (\ s a -> s{_meuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-meuPrettyPrint :: Lens' ManagementExperimentsUpdate' Bool
-meuPrettyPrint
-  = lens _meuPrettyPrint
-      (\ s a -> s{_meuPrettyPrint = a})
 
 -- | Web property ID of the experiment to update.
 meuWebPropertyId :: Lens' ManagementExperimentsUpdate' Text
 meuWebPropertyId
   = lens _meuWebPropertyId
       (\ s a -> s{_meuWebPropertyId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-meuUserIP :: Lens' ManagementExperimentsUpdate' (Maybe Text)
-meuUserIP
-  = lens _meuUserIP (\ s a -> s{_meuUserIP = a})
 
 -- | View (Profile) ID of the experiment to update.
 meuProFileId :: Lens' ManagementExperimentsUpdate' Text
@@ -181,44 +125,16 @@ meuExperimentId
   = lens _meuExperimentId
       (\ s a -> s{_meuExperimentId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-meuKey :: Lens' ManagementExperimentsUpdate' (Maybe AuthKey)
-meuKey = lens _meuKey (\ s a -> s{_meuKey = a})
-
--- | OAuth 2.0 token for the current user.
-meuOAuthToken :: Lens' ManagementExperimentsUpdate' (Maybe OAuthToken)
-meuOAuthToken
-  = lens _meuOAuthToken
-      (\ s a -> s{_meuOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-meuFields :: Lens' ManagementExperimentsUpdate' (Maybe Text)
-meuFields
-  = lens _meuFields (\ s a -> s{_meuFields = a})
-
-instance GoogleAuth ManagementExperimentsUpdate'
-         where
-        _AuthKey = meuKey . _Just
-        _AuthToken = meuOAuthToken . _Just
-
 instance GoogleRequest ManagementExperimentsUpdate'
          where
         type Rs ManagementExperimentsUpdate' = Experiment
-        request = requestWith analyticsRequest
-        requestWith rq ManagementExperimentsUpdate'{..}
+        requestClient ManagementExperimentsUpdate'{..}
           = go _meuAccountId _meuWebPropertyId _meuProFileId
               _meuExperimentId
-              _meuQuotaUser
-              (Just _meuPrettyPrint)
-              _meuUserIP
-              _meuFields
-              _meuKey
-              _meuOAuthToken
               (Just AltJSON)
               _meuPayload
+              analyticsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ManagementExperimentsUpdateResource)
-                      rq
+                      mempty

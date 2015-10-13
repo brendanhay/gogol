@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference>
 module Network.Google.MapsEngine
     (
+    -- * Service Configuration
+      mapsEngineService
+
     -- * API Declaration
-      MapsEngineAPI
+    , MapsEngineAPI
 
     -- * Resources
 

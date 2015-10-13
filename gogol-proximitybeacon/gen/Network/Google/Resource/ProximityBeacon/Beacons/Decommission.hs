@@ -37,17 +37,12 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Decommission
 
     -- * Request Lenses
     , bdXgafv
-    , bdQuotaUser
-    , bdPrettyPrint
     , bdUploadProtocol
     , bdPp
     , bdAccessToken
     , bdBeaconName
     , bdUploadType
     , bdBearerToken
-    , bdKey
-    , bdOAuthToken
-    , bdFields
     , bdCallback
     ) where
 
@@ -66,12 +61,7 @@ type BeaconsDecommissionResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :> Post '[JSON] Empty
+                       QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Decommissions the specified beacon in the service. This beacon will no
 -- longer be returned from \`beaconinfo.getforobserved\`. This operation is
@@ -81,17 +71,12 @@ type BeaconsDecommissionResource =
 -- /See:/ 'beaconsDecommission'' smart constructor.
 data BeaconsDecommission' = BeaconsDecommission'
     { _bdXgafv          :: !(Maybe Text)
-    , _bdQuotaUser      :: !(Maybe Text)
-    , _bdPrettyPrint    :: !Bool
     , _bdUploadProtocol :: !(Maybe Text)
     , _bdPp             :: !Bool
     , _bdAccessToken    :: !(Maybe Text)
     , _bdBeaconName     :: !Text
     , _bdUploadType     :: !(Maybe Text)
     , _bdBearerToken    :: !(Maybe Text)
-    , _bdKey            :: !(Maybe AuthKey)
-    , _bdOAuthToken     :: !(Maybe OAuthToken)
-    , _bdFields         :: !(Maybe Text)
     , _bdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -100,10 +85,6 @@ data BeaconsDecommission' = BeaconsDecommission'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'bdXgafv'
---
--- * 'bdQuotaUser'
---
--- * 'bdPrettyPrint'
 --
 -- * 'bdUploadProtocol'
 --
@@ -117,12 +98,6 @@ data BeaconsDecommission' = BeaconsDecommission'
 --
 -- * 'bdBearerToken'
 --
--- * 'bdKey'
---
--- * 'bdOAuthToken'
---
--- * 'bdFields'
---
 -- * 'bdCallback'
 beaconsDecommission'
     :: Text -- ^ 'beaconName'
@@ -130,36 +105,18 @@ beaconsDecommission'
 beaconsDecommission' pBdBeaconName_ =
     BeaconsDecommission'
     { _bdXgafv = Nothing
-    , _bdQuotaUser = Nothing
-    , _bdPrettyPrint = True
     , _bdUploadProtocol = Nothing
     , _bdPp = True
     , _bdAccessToken = Nothing
     , _bdBeaconName = pBdBeaconName_
     , _bdUploadType = Nothing
     , _bdBearerToken = Nothing
-    , _bdKey = Nothing
-    , _bdOAuthToken = Nothing
-    , _bdFields = Nothing
     , _bdCallback = Nothing
     }
 
 -- | V1 error format.
 bdXgafv :: Lens' BeaconsDecommission' (Maybe Text)
 bdXgafv = lens _bdXgafv (\ s a -> s{_bdXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-bdQuotaUser :: Lens' BeaconsDecommission' (Maybe Text)
-bdQuotaUser
-  = lens _bdQuotaUser (\ s a -> s{_bdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-bdPrettyPrint :: Lens' BeaconsDecommission' Bool
-bdPrettyPrint
-  = lens _bdPrettyPrint
-      (\ s a -> s{_bdPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 bdUploadProtocol :: Lens' BeaconsDecommission' (Maybe Text)
@@ -193,47 +150,23 @@ bdBearerToken
   = lens _bdBearerToken
       (\ s a -> s{_bdBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-bdKey :: Lens' BeaconsDecommission' (Maybe AuthKey)
-bdKey = lens _bdKey (\ s a -> s{_bdKey = a})
-
--- | OAuth 2.0 token for the current user.
-bdOAuthToken :: Lens' BeaconsDecommission' (Maybe OAuthToken)
-bdOAuthToken
-  = lens _bdOAuthToken (\ s a -> s{_bdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-bdFields :: Lens' BeaconsDecommission' (Maybe Text)
-bdFields = lens _bdFields (\ s a -> s{_bdFields = a})
-
 -- | JSONP
 bdCallback :: Lens' BeaconsDecommission' (Maybe Text)
 bdCallback
   = lens _bdCallback (\ s a -> s{_bdCallback = a})
 
-instance GoogleAuth BeaconsDecommission' where
-        _AuthKey = bdKey . _Just
-        _AuthToken = bdOAuthToken . _Just
-
 instance GoogleRequest BeaconsDecommission' where
         type Rs BeaconsDecommission' = Empty
-        request = requestWith proximityBeaconRequest
-        requestWith rq BeaconsDecommission'{..}
+        requestClient BeaconsDecommission'{..}
           = go _bdBeaconName _bdXgafv _bdUploadProtocol
               (Just _bdPp)
               _bdAccessToken
               _bdUploadType
               _bdBearerToken
               _bdCallback
-              _bdQuotaUser
-              (Just _bdPrettyPrint)
-              _bdFields
-              _bdKey
-              _bdOAuthToken
               (Just AltJSON)
+              proximityBeaconService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy BeaconsDecommissionResource)
-                      rq
+                      mempty

@@ -33,13 +33,7 @@ module Network.Google.Resource.Games.Achievements.UpdateMultiple
     , AchievementsUpdateMultiple'
 
     -- * Request Lenses
-    , aumQuotaUser
-    , aumPrettyPrint
-    , aumUserIP
     , aumPayload
-    , aumKey
-    , aumOAuthToken
-    , aumFields
     ) where
 
 import           Network.Google.Games.Types
@@ -50,118 +44,42 @@ import           Network.Google.Prelude
 type AchievementsUpdateMultipleResource =
      "achievements" :>
        "updateMultiple" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] AchievementUpdateMultipleRequest :>
-                         Post '[JSON] AchievementUpdateMultipleResponse
+         QueryParam "alt" AltJSON :>
+           ReqBody '[JSON] AchievementUpdateMultipleRequest :>
+             Post '[JSON] AchievementUpdateMultipleResponse
 
 -- | Updates multiple achievements for the currently authenticated player.
 --
 -- /See:/ 'achievementsUpdateMultiple'' smart constructor.
-data AchievementsUpdateMultiple' = AchievementsUpdateMultiple'
-    { _aumQuotaUser   :: !(Maybe Text)
-    , _aumPrettyPrint :: !Bool
-    , _aumUserIP      :: !(Maybe Text)
-    , _aumPayload     :: !AchievementUpdateMultipleRequest
-    , _aumKey         :: !(Maybe AuthKey)
-    , _aumOAuthToken  :: !(Maybe OAuthToken)
-    , _aumFields      :: !(Maybe Text)
+newtype AchievementsUpdateMultiple' = AchievementsUpdateMultiple'
+    { _aumPayload :: AchievementUpdateMultipleRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsUpdateMultiple'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aumQuotaUser'
---
--- * 'aumPrettyPrint'
---
--- * 'aumUserIP'
---
 -- * 'aumPayload'
---
--- * 'aumKey'
---
--- * 'aumOAuthToken'
---
--- * 'aumFields'
 achievementsUpdateMultiple'
     :: AchievementUpdateMultipleRequest -- ^ 'payload'
     -> AchievementsUpdateMultiple'
 achievementsUpdateMultiple' pAumPayload_ =
     AchievementsUpdateMultiple'
-    { _aumQuotaUser = Nothing
-    , _aumPrettyPrint = True
-    , _aumUserIP = Nothing
-    , _aumPayload = pAumPayload_
-    , _aumKey = Nothing
-    , _aumOAuthToken = Nothing
-    , _aumFields = Nothing
+    { _aumPayload = pAumPayload_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-aumQuotaUser :: Lens' AchievementsUpdateMultiple' (Maybe Text)
-aumQuotaUser
-  = lens _aumQuotaUser (\ s a -> s{_aumQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aumPrettyPrint :: Lens' AchievementsUpdateMultiple' Bool
-aumPrettyPrint
-  = lens _aumPrettyPrint
-      (\ s a -> s{_aumPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-aumUserIP :: Lens' AchievementsUpdateMultiple' (Maybe Text)
-aumUserIP
-  = lens _aumUserIP (\ s a -> s{_aumUserIP = a})
 
 -- | Multipart request metadata.
 aumPayload :: Lens' AchievementsUpdateMultiple' AchievementUpdateMultipleRequest
 aumPayload
   = lens _aumPayload (\ s a -> s{_aumPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aumKey :: Lens' AchievementsUpdateMultiple' (Maybe AuthKey)
-aumKey = lens _aumKey (\ s a -> s{_aumKey = a})
-
--- | OAuth 2.0 token for the current user.
-aumOAuthToken :: Lens' AchievementsUpdateMultiple' (Maybe OAuthToken)
-aumOAuthToken
-  = lens _aumOAuthToken
-      (\ s a -> s{_aumOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-aumFields :: Lens' AchievementsUpdateMultiple' (Maybe Text)
-aumFields
-  = lens _aumFields (\ s a -> s{_aumFields = a})
-
-instance GoogleAuth AchievementsUpdateMultiple' where
-        _AuthKey = aumKey . _Just
-        _AuthToken = aumOAuthToken . _Just
-
 instance GoogleRequest AchievementsUpdateMultiple'
          where
         type Rs AchievementsUpdateMultiple' =
              AchievementUpdateMultipleResponse
-        request = requestWith gamesRequest
-        requestWith rq AchievementsUpdateMultiple'{..}
-          = go _aumQuotaUser (Just _aumPrettyPrint) _aumUserIP
-              _aumFields
-              _aumKey
-              _aumOAuthToken
-              (Just AltJSON)
-              _aumPayload
+        requestClient AchievementsUpdateMultiple'{..}
+          = go (Just AltJSON) _aumPayload gamesService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AchievementsUpdateMultipleResource)
-                      rq
+                      mempty

@@ -34,9 +34,6 @@ module Network.Google.Resource.DFAReporting.Creatives.List
 
     -- * Request Lenses
     , clRenderingIds
-    , clQuotaUser
-    , clPrettyPrint
-    , clUserIP
     , clAdvertiserId
     , clSearchString
     , clSizeIds
@@ -47,15 +44,12 @@ module Network.Google.Resource.DFAReporting.Creatives.List
     , clProFileId
     , clSortOrder
     , clActive
-    , clKey
     , clCreativeFieldIds
     , clPageToken
     , clSortField
-    , clOAuthToken
     , clStudioCreativeId
     , clArchived
     , clMaxResults
-    , clFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -84,27 +78,14 @@ type CreativesListResource =
                                      QueryParam "studioCreativeId" Int64 :>
                                        QueryParam "archived" Bool :>
                                          QueryParam "maxResults" Int32 :>
-                                           QueryParam "quotaUser" Text :>
-                                             QueryParam "prettyPrint" Bool :>
-                                               QueryParam "userIp" Text :>
-                                                 QueryParam "fields" Text :>
-                                                   QueryParam "key" AuthKey :>
-                                                     Header "Authorization"
-                                                       OAuthToken
-                                                       :>
-                                                       QueryParam "alt" AltJSON
-                                                         :>
-                                                         Get '[JSON]
-                                                           CreativesListResponse
+                                           QueryParam "alt" AltJSON :>
+                                             Get '[JSON] CreativesListResponse
 
 -- | Retrieves a list of creatives, possibly filtered.
 --
 -- /See:/ 'creativesList'' smart constructor.
 data CreativesList' = CreativesList'
     { _clRenderingIds         :: !(Maybe [Int64])
-    , _clQuotaUser            :: !(Maybe Text)
-    , _clPrettyPrint          :: !Bool
-    , _clUserIP               :: !(Maybe Text)
     , _clAdvertiserId         :: !(Maybe Int64)
     , _clSearchString         :: !(Maybe Text)
     , _clSizeIds              :: !(Maybe [Int64])
@@ -115,15 +96,12 @@ data CreativesList' = CreativesList'
     , _clProFileId            :: !Int64
     , _clSortOrder            :: !(Maybe CreativesListSortOrder)
     , _clActive               :: !(Maybe Bool)
-    , _clKey                  :: !(Maybe AuthKey)
     , _clCreativeFieldIds     :: !(Maybe [Int64])
     , _clPageToken            :: !(Maybe Text)
     , _clSortField            :: !(Maybe CreativesListSortField)
-    , _clOAuthToken           :: !(Maybe OAuthToken)
     , _clStudioCreativeId     :: !(Maybe Int64)
     , _clArchived             :: !(Maybe Bool)
     , _clMaxResults           :: !(Maybe Int32)
-    , _clFields               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesList'' with the minimum fields required to make a request.
@@ -131,12 +109,6 @@ data CreativesList' = CreativesList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'clRenderingIds'
---
--- * 'clQuotaUser'
---
--- * 'clPrettyPrint'
---
--- * 'clUserIP'
 --
 -- * 'clAdvertiserId'
 --
@@ -158,32 +130,23 @@ data CreativesList' = CreativesList'
 --
 -- * 'clActive'
 --
--- * 'clKey'
---
 -- * 'clCreativeFieldIds'
 --
 -- * 'clPageToken'
 --
 -- * 'clSortField'
 --
--- * 'clOAuthToken'
---
 -- * 'clStudioCreativeId'
 --
 -- * 'clArchived'
 --
 -- * 'clMaxResults'
---
--- * 'clFields'
 creativesList'
     :: Int64 -- ^ 'profileId'
     -> CreativesList'
 creativesList' pClProFileId_ =
     CreativesList'
     { _clRenderingIds = Nothing
-    , _clQuotaUser = Nothing
-    , _clPrettyPrint = True
-    , _clUserIP = Nothing
     , _clAdvertiserId = Nothing
     , _clSearchString = Nothing
     , _clSizeIds = Nothing
@@ -194,15 +157,12 @@ creativesList' pClProFileId_ =
     , _clProFileId = pClProFileId_
     , _clSortOrder = Nothing
     , _clActive = Nothing
-    , _clKey = Nothing
     , _clCreativeFieldIds = Nothing
     , _clPageToken = Nothing
     , _clSortField = Nothing
-    , _clOAuthToken = Nothing
     , _clStudioCreativeId = Nothing
     , _clArchived = Nothing
     , _clMaxResults = Nothing
-    , _clFields = Nothing
     }
 
 -- | Select only creatives with these rendering IDs.
@@ -212,24 +172,6 @@ clRenderingIds
       (\ s a -> s{_clRenderingIds = a})
       . _Default
       . _Coerce
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-clQuotaUser :: Lens' CreativesList' (Maybe Text)
-clQuotaUser
-  = lens _clQuotaUser (\ s a -> s{_clQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-clPrettyPrint :: Lens' CreativesList' Bool
-clPrettyPrint
-  = lens _clPrettyPrint
-      (\ s a -> s{_clPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-clUserIP :: Lens' CreativesList' (Maybe Text)
-clUserIP = lens _clUserIP (\ s a -> s{_clUserIP = a})
 
 -- | Select only creatives with this advertiser ID.
 clAdvertiserId :: Lens' CreativesList' (Maybe Int64)
@@ -296,12 +238,6 @@ clSortOrder
 clActive :: Lens' CreativesList' (Maybe Bool)
 clActive = lens _clActive (\ s a -> s{_clActive = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-clKey :: Lens' CreativesList' (Maybe AuthKey)
-clKey = lens _clKey (\ s a -> s{_clKey = a})
-
 -- | Select only creatives with these creative field IDs.
 clCreativeFieldIds :: Lens' CreativesList' [Int64]
 clCreativeFieldIds
@@ -320,11 +256,6 @@ clSortField :: Lens' CreativesList' (Maybe CreativesListSortField)
 clSortField
   = lens _clSortField (\ s a -> s{_clSortField = a})
 
--- | OAuth 2.0 token for the current user.
-clOAuthToken :: Lens' CreativesList' (Maybe OAuthToken)
-clOAuthToken
-  = lens _clOAuthToken (\ s a -> s{_clOAuthToken = a})
-
 -- | Select only creatives corresponding to this Studio creative ID.
 clStudioCreativeId :: Lens' CreativesList' (Maybe Int64)
 clStudioCreativeId
@@ -342,18 +273,9 @@ clMaxResults :: Lens' CreativesList' (Maybe Int32)
 clMaxResults
   = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-clFields :: Lens' CreativesList' (Maybe Text)
-clFields = lens _clFields (\ s a -> s{_clFields = a})
-
-instance GoogleAuth CreativesList' where
-        _AuthKey = clKey . _Just
-        _AuthToken = clOAuthToken . _Just
-
 instance GoogleRequest CreativesList' where
         type Rs CreativesList' = CreativesListResponse
-        request = requestWith dFAReportingRequest
-        requestWith rq CreativesList'{..}
+        requestClient CreativesList'{..}
           = go _clProFileId (_clRenderingIds ^. _Default)
               _clAdvertiserId
               _clSearchString
@@ -370,13 +292,8 @@ instance GoogleRequest CreativesList' where
               _clStudioCreativeId
               _clArchived
               _clMaxResults
-              _clQuotaUser
-              (Just _clPrettyPrint)
-              _clUserIP
-              _clFields
-              _clKey
-              _clOAuthToken
               (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild (Proxy :: Proxy CreativesListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy CreativesListResource)
+                      mempty

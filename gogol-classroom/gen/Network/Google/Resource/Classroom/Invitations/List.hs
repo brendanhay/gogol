@@ -39,8 +39,6 @@ module Network.Google.Resource.Classroom.Invitations.List
 
     -- * Request Lenses
     , ilXgafv
-    , ilQuotaUser
-    , ilPrettyPrint
     , ilUploadProtocol
     , ilPp
     , ilCourseId
@@ -48,11 +46,8 @@ module Network.Google.Resource.Classroom.Invitations.List
     , ilUploadType
     , ilUserId
     , ilBearerToken
-    , ilKey
     , ilPageToken
-    , ilOAuthToken
     , ilPageSize
-    , ilFields
     , ilCallback
     ) where
 
@@ -75,13 +70,8 @@ type InvitationsListResource =
                          QueryParam "pageToken" Text :>
                            QueryParam "pageSize" Int32 :>
                              QueryParam "callback" Text :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] ListInvitationsResponse
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListInvitationsResponse
 
 -- | Returns a list of invitations that the requesting user is permitted to
 -- view, restricted to those that match the list request. *Note:* At least
@@ -93,8 +83,6 @@ type InvitationsListResource =
 -- /See:/ 'invitationsList'' smart constructor.
 data InvitationsList' = InvitationsList'
     { _ilXgafv          :: !(Maybe Text)
-    , _ilQuotaUser      :: !(Maybe Text)
-    , _ilPrettyPrint    :: !Bool
     , _ilUploadProtocol :: !(Maybe Text)
     , _ilPp             :: !Bool
     , _ilCourseId       :: !(Maybe Text)
@@ -102,11 +90,8 @@ data InvitationsList' = InvitationsList'
     , _ilUploadType     :: !(Maybe Text)
     , _ilUserId         :: !(Maybe Text)
     , _ilBearerToken    :: !(Maybe Text)
-    , _ilKey            :: !(Maybe AuthKey)
     , _ilPageToken      :: !(Maybe Text)
-    , _ilOAuthToken     :: !(Maybe OAuthToken)
     , _ilPageSize       :: !(Maybe Int32)
-    , _ilFields         :: !(Maybe Text)
     , _ilCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -115,10 +100,6 @@ data InvitationsList' = InvitationsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ilXgafv'
---
--- * 'ilQuotaUser'
---
--- * 'ilPrettyPrint'
 --
 -- * 'ilUploadProtocol'
 --
@@ -134,15 +115,9 @@ data InvitationsList' = InvitationsList'
 --
 -- * 'ilBearerToken'
 --
--- * 'ilKey'
---
 -- * 'ilPageToken'
 --
--- * 'ilOAuthToken'
---
 -- * 'ilPageSize'
---
--- * 'ilFields'
 --
 -- * 'ilCallback'
 invitationsList'
@@ -150,8 +125,6 @@ invitationsList'
 invitationsList' =
     InvitationsList'
     { _ilXgafv = Nothing
-    , _ilQuotaUser = Nothing
-    , _ilPrettyPrint = True
     , _ilUploadProtocol = Nothing
     , _ilPp = True
     , _ilCourseId = Nothing
@@ -159,30 +132,14 @@ invitationsList' =
     , _ilUploadType = Nothing
     , _ilUserId = Nothing
     , _ilBearerToken = Nothing
-    , _ilKey = Nothing
     , _ilPageToken = Nothing
-    , _ilOAuthToken = Nothing
     , _ilPageSize = Nothing
-    , _ilFields = Nothing
     , _ilCallback = Nothing
     }
 
 -- | V1 error format.
 ilXgafv :: Lens' InvitationsList' (Maybe Text)
 ilXgafv = lens _ilXgafv (\ s a -> s{_ilXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ilQuotaUser :: Lens' InvitationsList' (Maybe Text)
-ilQuotaUser
-  = lens _ilQuotaUser (\ s a -> s{_ilQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ilPrettyPrint :: Lens' InvitationsList' Bool
-ilPrettyPrint
-  = lens _ilPrettyPrint
-      (\ s a -> s{_ilPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 ilUploadProtocol :: Lens' InvitationsList' (Maybe Text)
@@ -224,12 +181,6 @@ ilBearerToken
   = lens _ilBearerToken
       (\ s a -> s{_ilBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ilKey :: Lens' InvitationsList' (Maybe AuthKey)
-ilKey = lens _ilKey (\ s a -> s{_ilKey = a})
-
 -- | [nextPageToken][google.classroom.v1.ListInvitationsResponse.next_page_token]
 -- value returned from a previous
 -- [list][google.classroom.v1.Invitations.ListInvitations] call, indicating
@@ -240,34 +191,20 @@ ilPageToken :: Lens' InvitationsList' (Maybe Text)
 ilPageToken
   = lens _ilPageToken (\ s a -> s{_ilPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-ilOAuthToken :: Lens' InvitationsList' (Maybe OAuthToken)
-ilOAuthToken
-  = lens _ilOAuthToken (\ s a -> s{_ilOAuthToken = a})
-
 -- | Maximum number of items to return. Zero means no maximum. The server may
 -- return fewer than the specified number of results.
 ilPageSize :: Lens' InvitationsList' (Maybe Int32)
 ilPageSize
   = lens _ilPageSize (\ s a -> s{_ilPageSize = a})
 
--- | Selector specifying which fields to include in a partial response.
-ilFields :: Lens' InvitationsList' (Maybe Text)
-ilFields = lens _ilFields (\ s a -> s{_ilFields = a})
-
 -- | JSONP
 ilCallback :: Lens' InvitationsList' (Maybe Text)
 ilCallback
   = lens _ilCallback (\ s a -> s{_ilCallback = a})
 
-instance GoogleAuth InvitationsList' where
-        _AuthKey = ilKey . _Just
-        _AuthToken = ilOAuthToken . _Just
-
 instance GoogleRequest InvitationsList' where
         type Rs InvitationsList' = ListInvitationsResponse
-        request = requestWith classroomRequest
-        requestWith rq InvitationsList'{..}
+        requestClient InvitationsList'{..}
           = go _ilXgafv _ilUploadProtocol (Just _ilPp)
               _ilCourseId
               _ilAccessToken
@@ -277,13 +214,9 @@ instance GoogleRequest InvitationsList' where
               _ilPageToken
               _ilPageSize
               _ilCallback
-              _ilQuotaUser
-              (Just _ilPrettyPrint)
-              _ilFields
-              _ilKey
-              _ilOAuthToken
               (Just AltJSON)
+              classroomService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy InvitationsListResource)
-                      rq
+                      mempty

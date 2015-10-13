@@ -38,17 +38,12 @@ module Network.Google.Resource.PubSub.Projects.Topics.Delete
 
     -- * Request Lenses
     , ptdXgafv
-    , ptdQuotaUser
-    , ptdPrettyPrint
     , ptdUploadProtocol
     , ptdPp
     , ptdAccessToken
     , ptdUploadType
     , ptdTopic
     , ptdBearerToken
-    , ptdKey
-    , ptdOAuthToken
-    , ptdFields
     , ptdCallback
     ) where
 
@@ -67,13 +62,7 @@ type ProjectsTopicsDeleteResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   Delete '[JSON] Empty
+                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes the topic with the given name. Returns NOT_FOUND if the topic
 -- does not exist. After a topic is deleted, a new topic may be created
@@ -84,17 +73,12 @@ type ProjectsTopicsDeleteResource =
 -- /See:/ 'projectsTopicsDelete'' smart constructor.
 data ProjectsTopicsDelete' = ProjectsTopicsDelete'
     { _ptdXgafv          :: !(Maybe Text)
-    , _ptdQuotaUser      :: !(Maybe Text)
-    , _ptdPrettyPrint    :: !Bool
     , _ptdUploadProtocol :: !(Maybe Text)
     , _ptdPp             :: !Bool
     , _ptdAccessToken    :: !(Maybe Text)
     , _ptdUploadType     :: !(Maybe Text)
     , _ptdTopic          :: !Text
     , _ptdBearerToken    :: !(Maybe Text)
-    , _ptdKey            :: !(Maybe AuthKey)
-    , _ptdOAuthToken     :: !(Maybe OAuthToken)
-    , _ptdFields         :: !(Maybe Text)
     , _ptdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -103,10 +87,6 @@ data ProjectsTopicsDelete' = ProjectsTopicsDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ptdXgafv'
---
--- * 'ptdQuotaUser'
---
--- * 'ptdPrettyPrint'
 --
 -- * 'ptdUploadProtocol'
 --
@@ -120,12 +100,6 @@ data ProjectsTopicsDelete' = ProjectsTopicsDelete'
 --
 -- * 'ptdBearerToken'
 --
--- * 'ptdKey'
---
--- * 'ptdOAuthToken'
---
--- * 'ptdFields'
---
 -- * 'ptdCallback'
 projectsTopicsDelete'
     :: Text -- ^ 'topic'
@@ -133,36 +107,18 @@ projectsTopicsDelete'
 projectsTopicsDelete' pPtdTopic_ =
     ProjectsTopicsDelete'
     { _ptdXgafv = Nothing
-    , _ptdQuotaUser = Nothing
-    , _ptdPrettyPrint = True
     , _ptdUploadProtocol = Nothing
     , _ptdPp = True
     , _ptdAccessToken = Nothing
     , _ptdUploadType = Nothing
     , _ptdTopic = pPtdTopic_
     , _ptdBearerToken = Nothing
-    , _ptdKey = Nothing
-    , _ptdOAuthToken = Nothing
-    , _ptdFields = Nothing
     , _ptdCallback = Nothing
     }
 
 -- | V1 error format.
 ptdXgafv :: Lens' ProjectsTopicsDelete' (Maybe Text)
 ptdXgafv = lens _ptdXgafv (\ s a -> s{_ptdXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ptdQuotaUser :: Lens' ProjectsTopicsDelete' (Maybe Text)
-ptdQuotaUser
-  = lens _ptdQuotaUser (\ s a -> s{_ptdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ptdPrettyPrint :: Lens' ProjectsTopicsDelete' Bool
-ptdPrettyPrint
-  = lens _ptdPrettyPrint
-      (\ s a -> s{_ptdPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 ptdUploadProtocol :: Lens' ProjectsTopicsDelete' (Maybe Text)
@@ -196,49 +152,23 @@ ptdBearerToken
   = lens _ptdBearerToken
       (\ s a -> s{_ptdBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ptdKey :: Lens' ProjectsTopicsDelete' (Maybe AuthKey)
-ptdKey = lens _ptdKey (\ s a -> s{_ptdKey = a})
-
--- | OAuth 2.0 token for the current user.
-ptdOAuthToken :: Lens' ProjectsTopicsDelete' (Maybe OAuthToken)
-ptdOAuthToken
-  = lens _ptdOAuthToken
-      (\ s a -> s{_ptdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ptdFields :: Lens' ProjectsTopicsDelete' (Maybe Text)
-ptdFields
-  = lens _ptdFields (\ s a -> s{_ptdFields = a})
-
 -- | JSONP
 ptdCallback :: Lens' ProjectsTopicsDelete' (Maybe Text)
 ptdCallback
   = lens _ptdCallback (\ s a -> s{_ptdCallback = a})
 
-instance GoogleAuth ProjectsTopicsDelete' where
-        _AuthKey = ptdKey . _Just
-        _AuthToken = ptdOAuthToken . _Just
-
 instance GoogleRequest ProjectsTopicsDelete' where
         type Rs ProjectsTopicsDelete' = Empty
-        request = requestWith pubSubRequest
-        requestWith rq ProjectsTopicsDelete'{..}
+        requestClient ProjectsTopicsDelete'{..}
           = go _ptdTopic _ptdXgafv _ptdUploadProtocol
               (Just _ptdPp)
               _ptdAccessToken
               _ptdUploadType
               _ptdBearerToken
               _ptdCallback
-              _ptdQuotaUser
-              (Just _ptdPrettyPrint)
-              _ptdFields
-              _ptdKey
-              _ptdOAuthToken
               (Just AltJSON)
+              pubSubService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsTopicsDeleteResource)
-                      rq
+                      mempty

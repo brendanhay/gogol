@@ -34,15 +34,9 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Patch
     , FloodlightActivityGroupsPatch'
 
     -- * Request Lenses
-    , fagpQuotaUser
-    , fagpPrettyPrint
-    , fagpUserIP
     , fagpProFileId
     , fagpPayload
-    , fagpKey
     , fagpId
-    , fagpOAuthToken
-    , fagpFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -55,53 +49,29 @@ type FloodlightActivityGroupsPatchResource =
        Capture "profileId" Int64 :>
          "floodlightActivityGroups" :>
            QueryParam "id" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] FloodlightActivityGroup :>
-                             Patch '[JSON] FloodlightActivityGroup
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] FloodlightActivityGroup :>
+                 Patch '[JSON] FloodlightActivityGroup
 
 -- | Updates an existing floodlight activity group. This method supports
 -- patch semantics.
 --
 -- /See:/ 'floodlightActivityGroupsPatch'' smart constructor.
 data FloodlightActivityGroupsPatch' = FloodlightActivityGroupsPatch'
-    { _fagpQuotaUser   :: !(Maybe Text)
-    , _fagpPrettyPrint :: !Bool
-    , _fagpUserIP      :: !(Maybe Text)
-    , _fagpProFileId   :: !Int64
-    , _fagpPayload     :: !FloodlightActivityGroup
-    , _fagpKey         :: !(Maybe AuthKey)
-    , _fagpId          :: !Int64
-    , _fagpOAuthToken  :: !(Maybe OAuthToken)
-    , _fagpFields      :: !(Maybe Text)
+    { _fagpProFileId :: !Int64
+    , _fagpPayload   :: !FloodlightActivityGroup
+    , _fagpId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'fagpQuotaUser'
---
--- * 'fagpPrettyPrint'
---
--- * 'fagpUserIP'
---
 -- * 'fagpProFileId'
 --
 -- * 'fagpPayload'
 --
--- * 'fagpKey'
---
 -- * 'fagpId'
---
--- * 'fagpOAuthToken'
---
--- * 'fagpFields'
 floodlightActivityGroupsPatch'
     :: Int64 -- ^ 'profileId'
     -> FloodlightActivityGroup -- ^ 'payload'
@@ -109,36 +79,10 @@ floodlightActivityGroupsPatch'
     -> FloodlightActivityGroupsPatch'
 floodlightActivityGroupsPatch' pFagpProFileId_ pFagpPayload_ pFagpId_ =
     FloodlightActivityGroupsPatch'
-    { _fagpQuotaUser = Nothing
-    , _fagpPrettyPrint = True
-    , _fagpUserIP = Nothing
-    , _fagpProFileId = pFagpProFileId_
+    { _fagpProFileId = pFagpProFileId_
     , _fagpPayload = pFagpPayload_
-    , _fagpKey = Nothing
     , _fagpId = pFagpId_
-    , _fagpOAuthToken = Nothing
-    , _fagpFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-fagpQuotaUser :: Lens' FloodlightActivityGroupsPatch' (Maybe Text)
-fagpQuotaUser
-  = lens _fagpQuotaUser
-      (\ s a -> s{_fagpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-fagpPrettyPrint :: Lens' FloodlightActivityGroupsPatch' Bool
-fagpPrettyPrint
-  = lens _fagpPrettyPrint
-      (\ s a -> s{_fagpPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-fagpUserIP :: Lens' FloodlightActivityGroupsPatch' (Maybe Text)
-fagpUserIP
-  = lens _fagpUserIP (\ s a -> s{_fagpUserIP = a})
 
 -- | User profile ID associated with this request.
 fagpProFileId :: Lens' FloodlightActivityGroupsPatch' Int64
@@ -151,48 +95,20 @@ fagpPayload :: Lens' FloodlightActivityGroupsPatch' FloodlightActivityGroup
 fagpPayload
   = lens _fagpPayload (\ s a -> s{_fagpPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-fagpKey :: Lens' FloodlightActivityGroupsPatch' (Maybe AuthKey)
-fagpKey = lens _fagpKey (\ s a -> s{_fagpKey = a})
-
 -- | Floodlight activity Group ID.
 fagpId :: Lens' FloodlightActivityGroupsPatch' Int64
 fagpId = lens _fagpId (\ s a -> s{_fagpId = a})
-
--- | OAuth 2.0 token for the current user.
-fagpOAuthToken :: Lens' FloodlightActivityGroupsPatch' (Maybe OAuthToken)
-fagpOAuthToken
-  = lens _fagpOAuthToken
-      (\ s a -> s{_fagpOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-fagpFields :: Lens' FloodlightActivityGroupsPatch' (Maybe Text)
-fagpFields
-  = lens _fagpFields (\ s a -> s{_fagpFields = a})
-
-instance GoogleAuth FloodlightActivityGroupsPatch'
-         where
-        _AuthKey = fagpKey . _Just
-        _AuthToken = fagpOAuthToken . _Just
 
 instance GoogleRequest FloodlightActivityGroupsPatch'
          where
         type Rs FloodlightActivityGroupsPatch' =
              FloodlightActivityGroup
-        request = requestWith dFAReportingRequest
-        requestWith rq FloodlightActivityGroupsPatch'{..}
-          = go _fagpProFileId (Just _fagpId) _fagpQuotaUser
-              (Just _fagpPrettyPrint)
-              _fagpUserIP
-              _fagpFields
-              _fagpKey
-              _fagpOAuthToken
-              (Just AltJSON)
+        requestClient FloodlightActivityGroupsPatch'{..}
+          = go _fagpProFileId (Just _fagpId) (Just AltJSON)
               _fagpPayload
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy FloodlightActivityGroupsPatchResource)
-                      rq
+                      mempty

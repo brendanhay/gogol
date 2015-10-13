@@ -33,14 +33,8 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Insert
     , PlacementStrategiesInsert'
 
     -- * Request Lenses
-    , psiQuotaUser
-    , psiPrettyPrint
-    , psiUserIP
     , psiProFileId
     , psiPayload
-    , psiKey
-    , psiOAuthToken
-    , psiFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,83 +46,34 @@ type PlacementStrategiesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "placementStrategies" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] PlacementStrategy :>
-                           Post '[JSON] PlacementStrategy
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] PlacementStrategy :>
+               Post '[JSON] PlacementStrategy
 
 -- | Inserts a new placement strategy.
 --
 -- /See:/ 'placementStrategiesInsert'' smart constructor.
 data PlacementStrategiesInsert' = PlacementStrategiesInsert'
-    { _psiQuotaUser   :: !(Maybe Text)
-    , _psiPrettyPrint :: !Bool
-    , _psiUserIP      :: !(Maybe Text)
-    , _psiProFileId   :: !Int64
-    , _psiPayload     :: !PlacementStrategy
-    , _psiKey         :: !(Maybe AuthKey)
-    , _psiOAuthToken  :: !(Maybe OAuthToken)
-    , _psiFields      :: !(Maybe Text)
+    { _psiProFileId :: !Int64
+    , _psiPayload   :: !PlacementStrategy
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'psiQuotaUser'
---
--- * 'psiPrettyPrint'
---
--- * 'psiUserIP'
---
 -- * 'psiProFileId'
 --
 -- * 'psiPayload'
---
--- * 'psiKey'
---
--- * 'psiOAuthToken'
---
--- * 'psiFields'
 placementStrategiesInsert'
     :: Int64 -- ^ 'profileId'
     -> PlacementStrategy -- ^ 'payload'
     -> PlacementStrategiesInsert'
 placementStrategiesInsert' pPsiProFileId_ pPsiPayload_ =
     PlacementStrategiesInsert'
-    { _psiQuotaUser = Nothing
-    , _psiPrettyPrint = True
-    , _psiUserIP = Nothing
-    , _psiProFileId = pPsiProFileId_
+    { _psiProFileId = pPsiProFileId_
     , _psiPayload = pPsiPayload_
-    , _psiKey = Nothing
-    , _psiOAuthToken = Nothing
-    , _psiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-psiQuotaUser :: Lens' PlacementStrategiesInsert' (Maybe Text)
-psiQuotaUser
-  = lens _psiQuotaUser (\ s a -> s{_psiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-psiPrettyPrint :: Lens' PlacementStrategiesInsert' Bool
-psiPrettyPrint
-  = lens _psiPrettyPrint
-      (\ s a -> s{_psiPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-psiUserIP :: Lens' PlacementStrategiesInsert' (Maybe Text)
-psiUserIP
-  = lens _psiUserIP (\ s a -> s{_psiUserIP = a})
 
 -- | User profile ID associated with this request.
 psiProFileId :: Lens' PlacementStrategiesInsert' Int64
@@ -140,42 +85,14 @@ psiPayload :: Lens' PlacementStrategiesInsert' PlacementStrategy
 psiPayload
   = lens _psiPayload (\ s a -> s{_psiPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-psiKey :: Lens' PlacementStrategiesInsert' (Maybe AuthKey)
-psiKey = lens _psiKey (\ s a -> s{_psiKey = a})
-
--- | OAuth 2.0 token for the current user.
-psiOAuthToken :: Lens' PlacementStrategiesInsert' (Maybe OAuthToken)
-psiOAuthToken
-  = lens _psiOAuthToken
-      (\ s a -> s{_psiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-psiFields :: Lens' PlacementStrategiesInsert' (Maybe Text)
-psiFields
-  = lens _psiFields (\ s a -> s{_psiFields = a})
-
-instance GoogleAuth PlacementStrategiesInsert' where
-        _AuthKey = psiKey . _Just
-        _AuthToken = psiOAuthToken . _Just
-
 instance GoogleRequest PlacementStrategiesInsert'
          where
         type Rs PlacementStrategiesInsert' =
              PlacementStrategy
-        request = requestWith dFAReportingRequest
-        requestWith rq PlacementStrategiesInsert'{..}
-          = go _psiProFileId _psiQuotaUser
-              (Just _psiPrettyPrint)
-              _psiUserIP
-              _psiFields
-              _psiKey
-              _psiOAuthToken
-              (Just AltJSON)
-              _psiPayload
+        requestClient PlacementStrategiesInsert'{..}
+          = go _psiProFileId (Just AltJSON) _psiPayload
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy PlacementStrategiesInsertResource)
-                      rq
+                      mempty

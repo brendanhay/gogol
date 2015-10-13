@@ -33,14 +33,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Create
     , AccountsContainersCreate'
 
     -- * Request Lenses
-    , accQuotaUser
-    , accPrettyPrint
-    , accUserIP
     , accPayload
     , accAccountId
-    , accKey
-    , accOAuthToken
-    , accFields
     ) where
 
 import           Network.Google.Prelude
@@ -52,82 +46,33 @@ type AccountsContainersCreateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Container :> Post '[JSON] Container
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] Container :> Post '[JSON] Container
 
 -- | Creates a Container.
 --
 -- /See:/ 'accountsContainersCreate'' smart constructor.
 data AccountsContainersCreate' = AccountsContainersCreate'
-    { _accQuotaUser   :: !(Maybe Text)
-    , _accPrettyPrint :: !Bool
-    , _accUserIP      :: !(Maybe Text)
-    , _accPayload     :: !Container
-    , _accAccountId   :: !Text
-    , _accKey         :: !(Maybe AuthKey)
-    , _accOAuthToken  :: !(Maybe OAuthToken)
-    , _accFields      :: !(Maybe Text)
+    { _accPayload   :: !Container
+    , _accAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersCreate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'accQuotaUser'
---
--- * 'accPrettyPrint'
---
--- * 'accUserIP'
---
 -- * 'accPayload'
 --
 -- * 'accAccountId'
---
--- * 'accKey'
---
--- * 'accOAuthToken'
---
--- * 'accFields'
 accountsContainersCreate'
     :: Container -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> AccountsContainersCreate'
 accountsContainersCreate' pAccPayload_ pAccAccountId_ =
     AccountsContainersCreate'
-    { _accQuotaUser = Nothing
-    , _accPrettyPrint = True
-    , _accUserIP = Nothing
-    , _accPayload = pAccPayload_
+    { _accPayload = pAccPayload_
     , _accAccountId = pAccAccountId_
-    , _accKey = Nothing
-    , _accOAuthToken = Nothing
-    , _accFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-accQuotaUser :: Lens' AccountsContainersCreate' (Maybe Text)
-accQuotaUser
-  = lens _accQuotaUser (\ s a -> s{_accQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-accPrettyPrint :: Lens' AccountsContainersCreate' Bool
-accPrettyPrint
-  = lens _accPrettyPrint
-      (\ s a -> s{_accPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-accUserIP :: Lens' AccountsContainersCreate' (Maybe Text)
-accUserIP
-  = lens _accUserIP (\ s a -> s{_accUserIP = a})
 
 -- | Multipart request metadata.
 accPayload :: Lens' AccountsContainersCreate' Container
@@ -139,41 +84,13 @@ accAccountId :: Lens' AccountsContainersCreate' Text
 accAccountId
   = lens _accAccountId (\ s a -> s{_accAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-accKey :: Lens' AccountsContainersCreate' (Maybe AuthKey)
-accKey = lens _accKey (\ s a -> s{_accKey = a})
-
--- | OAuth 2.0 token for the current user.
-accOAuthToken :: Lens' AccountsContainersCreate' (Maybe OAuthToken)
-accOAuthToken
-  = lens _accOAuthToken
-      (\ s a -> s{_accOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-accFields :: Lens' AccountsContainersCreate' (Maybe Text)
-accFields
-  = lens _accFields (\ s a -> s{_accFields = a})
-
-instance GoogleAuth AccountsContainersCreate' where
-        _AuthKey = accKey . _Just
-        _AuthToken = accOAuthToken . _Just
-
 instance GoogleRequest AccountsContainersCreate'
          where
         type Rs AccountsContainersCreate' = Container
-        request = requestWith tagManagerRequest
-        requestWith rq AccountsContainersCreate'{..}
-          = go _accAccountId _accQuotaUser
-              (Just _accPrettyPrint)
-              _accUserIP
-              _accFields
-              _accKey
-              _accOAuthToken
-              (Just AltJSON)
-              _accPayload
+        requestClient AccountsContainersCreate'{..}
+          = go _accAccountId (Just AltJSON) _accPayload
+              tagManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsContainersCreateResource)
-                      rq
+                      mempty

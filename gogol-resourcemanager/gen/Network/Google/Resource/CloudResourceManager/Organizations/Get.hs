@@ -34,17 +34,12 @@ module Network.Google.Resource.CloudResourceManager.Organizations.Get
 
     -- * Request Lenses
     , ogXgafv
-    , ogQuotaUser
-    , ogPrettyPrint
     , ogUploadProtocol
     , ogPp
     , ogAccessToken
     , ogUploadType
     , ogBearerToken
-    , ogKey
-    , ogOAuthToken
     , ogOrganizationId
-    , ogFields
     , ogCallback
     ) where
 
@@ -64,30 +59,19 @@ type OrganizationsGetResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] Organization
+                         QueryParam "alt" AltJSON :> Get '[JSON] Organization
 
 -- | Fetches an Organization resource by id.
 --
 -- /See:/ 'organizationsGet'' smart constructor.
 data OrganizationsGet' = OrganizationsGet'
     { _ogXgafv          :: !(Maybe Text)
-    , _ogQuotaUser      :: !(Maybe Text)
-    , _ogPrettyPrint    :: !Bool
     , _ogUploadProtocol :: !(Maybe Text)
     , _ogPp             :: !Bool
     , _ogAccessToken    :: !(Maybe Text)
     , _ogUploadType     :: !(Maybe Text)
     , _ogBearerToken    :: !(Maybe Text)
-    , _ogKey            :: !(Maybe AuthKey)
-    , _ogOAuthToken     :: !(Maybe OAuthToken)
     , _ogOrganizationId :: !Text
-    , _ogFields         :: !(Maybe Text)
     , _ogCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -96,10 +80,6 @@ data OrganizationsGet' = OrganizationsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ogXgafv'
---
--- * 'ogQuotaUser'
---
--- * 'ogPrettyPrint'
 --
 -- * 'ogUploadProtocol'
 --
@@ -111,13 +91,7 @@ data OrganizationsGet' = OrganizationsGet'
 --
 -- * 'ogBearerToken'
 --
--- * 'ogKey'
---
--- * 'ogOAuthToken'
---
 -- * 'ogOrganizationId'
---
--- * 'ogFields'
 --
 -- * 'ogCallback'
 organizationsGet'
@@ -126,36 +100,18 @@ organizationsGet'
 organizationsGet' pOgOrganizationId_ =
     OrganizationsGet'
     { _ogXgafv = Nothing
-    , _ogQuotaUser = Nothing
-    , _ogPrettyPrint = True
     , _ogUploadProtocol = Nothing
     , _ogPp = True
     , _ogAccessToken = Nothing
     , _ogUploadType = Nothing
     , _ogBearerToken = Nothing
-    , _ogKey = Nothing
-    , _ogOAuthToken = Nothing
     , _ogOrganizationId = pOgOrganizationId_
-    , _ogFields = Nothing
     , _ogCallback = Nothing
     }
 
 -- | V1 error format.
 ogXgafv :: Lens' OrganizationsGet' (Maybe Text)
 ogXgafv = lens _ogXgafv (\ s a -> s{_ogXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ogQuotaUser :: Lens' OrganizationsGet' (Maybe Text)
-ogQuotaUser
-  = lens _ogQuotaUser (\ s a -> s{_ogQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ogPrettyPrint :: Lens' OrganizationsGet' Bool
-ogPrettyPrint
-  = lens _ogPrettyPrint
-      (\ s a -> s{_ogPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 ogUploadProtocol :: Lens' OrganizationsGet' (Maybe Text)
@@ -184,53 +140,29 @@ ogBearerToken
   = lens _ogBearerToken
       (\ s a -> s{_ogBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ogKey :: Lens' OrganizationsGet' (Maybe AuthKey)
-ogKey = lens _ogKey (\ s a -> s{_ogKey = a})
-
--- | OAuth 2.0 token for the current user.
-ogOAuthToken :: Lens' OrganizationsGet' (Maybe OAuthToken)
-ogOAuthToken
-  = lens _ogOAuthToken (\ s a -> s{_ogOAuthToken = a})
-
 -- | The id of the Organization resource to fetch.
 ogOrganizationId :: Lens' OrganizationsGet' Text
 ogOrganizationId
   = lens _ogOrganizationId
       (\ s a -> s{_ogOrganizationId = a})
 
--- | Selector specifying which fields to include in a partial response.
-ogFields :: Lens' OrganizationsGet' (Maybe Text)
-ogFields = lens _ogFields (\ s a -> s{_ogFields = a})
-
 -- | JSONP
 ogCallback :: Lens' OrganizationsGet' (Maybe Text)
 ogCallback
   = lens _ogCallback (\ s a -> s{_ogCallback = a})
 
-instance GoogleAuth OrganizationsGet' where
-        _AuthKey = ogKey . _Just
-        _AuthToken = ogOAuthToken . _Just
-
 instance GoogleRequest OrganizationsGet' where
         type Rs OrganizationsGet' = Organization
-        request = requestWith resourceManagerRequest
-        requestWith rq OrganizationsGet'{..}
+        requestClient OrganizationsGet'{..}
           = go _ogOrganizationId _ogXgafv _ogUploadProtocol
               (Just _ogPp)
               _ogAccessToken
               _ogUploadType
               _ogBearerToken
               _ogCallback
-              _ogQuotaUser
-              (Just _ogPrettyPrint)
-              _ogFields
-              _ogKey
-              _ogOAuthToken
               (Just AltJSON)
+              resourceManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy OrganizationsGetResource)
-                      rq
+                      mempty

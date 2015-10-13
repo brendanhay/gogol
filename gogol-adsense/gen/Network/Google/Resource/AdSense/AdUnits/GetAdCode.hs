@@ -33,14 +33,8 @@ module Network.Google.Resource.AdSense.AdUnits.GetAdCode
     , AdUnitsGetAdCode'
 
     -- * Request Lenses
-    , augacQuotaUser
-    , augacPrettyPrint
-    , augacUserIP
     , augacAdUnitId
     , augacAdClientId
-    , augacKey
-    , augacOAuthToken
-    , augacFields
     ) where
 
 import           Network.Google.AdSense.Types
@@ -54,82 +48,32 @@ type AdUnitsGetAdCodeResource =
          "adunits" :>
            Capture "adUnitId" Text :>
              "adcode" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :> Get '[JSON] AdCode
+               QueryParam "alt" AltJSON :> Get '[JSON] AdCode
 
 -- | Get ad code for the specified ad unit.
 --
 -- /See:/ 'adUnitsGetAdCode'' smart constructor.
 data AdUnitsGetAdCode' = AdUnitsGetAdCode'
-    { _augacQuotaUser   :: !(Maybe Text)
-    , _augacPrettyPrint :: !Bool
-    , _augacUserIP      :: !(Maybe Text)
-    , _augacAdUnitId    :: !Text
-    , _augacAdClientId  :: !Text
-    , _augacKey         :: !(Maybe AuthKey)
-    , _augacOAuthToken  :: !(Maybe OAuthToken)
-    , _augacFields      :: !(Maybe Text)
+    { _augacAdUnitId   :: !Text
+    , _augacAdClientId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdUnitsGetAdCode'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'augacQuotaUser'
---
--- * 'augacPrettyPrint'
---
--- * 'augacUserIP'
---
 -- * 'augacAdUnitId'
 --
 -- * 'augacAdClientId'
---
--- * 'augacKey'
---
--- * 'augacOAuthToken'
---
--- * 'augacFields'
 adUnitsGetAdCode'
     :: Text -- ^ 'adUnitId'
     -> Text -- ^ 'adClientId'
     -> AdUnitsGetAdCode'
 adUnitsGetAdCode' pAugacAdUnitId_ pAugacAdClientId_ =
     AdUnitsGetAdCode'
-    { _augacQuotaUser = Nothing
-    , _augacPrettyPrint = True
-    , _augacUserIP = Nothing
-    , _augacAdUnitId = pAugacAdUnitId_
+    { _augacAdUnitId = pAugacAdUnitId_
     , _augacAdClientId = pAugacAdClientId_
-    , _augacKey = Nothing
-    , _augacOAuthToken = Nothing
-    , _augacFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-augacQuotaUser :: Lens' AdUnitsGetAdCode' (Maybe Text)
-augacQuotaUser
-  = lens _augacQuotaUser
-      (\ s a -> s{_augacQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-augacPrettyPrint :: Lens' AdUnitsGetAdCode' Bool
-augacPrettyPrint
-  = lens _augacPrettyPrint
-      (\ s a -> s{_augacPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-augacUserIP :: Lens' AdUnitsGetAdCode' (Maybe Text)
-augacUserIP
-  = lens _augacUserIP (\ s a -> s{_augacUserIP = a})
 
 -- | Ad unit to get the code for.
 augacAdUnitId :: Lens' AdUnitsGetAdCode' Text
@@ -143,39 +87,12 @@ augacAdClientId
   = lens _augacAdClientId
       (\ s a -> s{_augacAdClientId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-augacKey :: Lens' AdUnitsGetAdCode' (Maybe AuthKey)
-augacKey = lens _augacKey (\ s a -> s{_augacKey = a})
-
--- | OAuth 2.0 token for the current user.
-augacOAuthToken :: Lens' AdUnitsGetAdCode' (Maybe OAuthToken)
-augacOAuthToken
-  = lens _augacOAuthToken
-      (\ s a -> s{_augacOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-augacFields :: Lens' AdUnitsGetAdCode' (Maybe Text)
-augacFields
-  = lens _augacFields (\ s a -> s{_augacFields = a})
-
-instance GoogleAuth AdUnitsGetAdCode' where
-        _AuthKey = augacKey . _Just
-        _AuthToken = augacOAuthToken . _Just
-
 instance GoogleRequest AdUnitsGetAdCode' where
         type Rs AdUnitsGetAdCode' = AdCode
-        request = requestWith adSenseRequest
-        requestWith rq AdUnitsGetAdCode'{..}
-          = go _augacAdClientId _augacAdUnitId _augacQuotaUser
-              (Just _augacPrettyPrint)
-              _augacUserIP
-              _augacFields
-              _augacKey
-              _augacOAuthToken
-              (Just AltJSON)
+        requestClient AdUnitsGetAdCode'{..}
+          = go _augacAdClientId _augacAdUnitId (Just AltJSON)
+              adSenseService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AdUnitsGetAdCodeResource)
-                      rq
+                      mempty

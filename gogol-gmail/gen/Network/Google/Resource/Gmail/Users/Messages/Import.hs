@@ -35,19 +35,13 @@ module Network.Google.Resource.Gmail.Users.Messages.Import
     , UsersMessagesImport'
 
     -- * Request Lenses
-    , uQuotaUser
-    , uPrettyPrint
-    , uUserIP
     , uPayload
     , uUserId
     , uMedia
-    , uKey
     , uProcessForCalendar
     , uDeleted
     , uNeverMarkSpam
-    , uOAuthToken
     , uInternalDateSource
-    , uFields
     ) where
 
 import           Network.Google.Gmail.Types
@@ -65,15 +59,9 @@ type UsersMessagesImportResource =
                  QueryParam "internalDateSource"
                    UsersMessagesImportInternalDateSource
                    :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 MultipartRelated '[JSON] Message Stream :>
-                                   Post '[JSON] Message
+                   QueryParam "alt" AltJSON :>
+                     MultipartRelated '[JSON] Message Stream :>
+                       Post '[JSON] Message
 
 -- | Imports a message into only this user\'s mailbox, with standard email
 -- delivery scanning and classification similar to receiving via SMTP. Does
@@ -81,30 +69,18 @@ type UsersMessagesImportResource =
 --
 -- /See:/ 'usersMessagesImport'' smart constructor.
 data UsersMessagesImport' = UsersMessagesImport'
-    { _uQuotaUser          :: !(Maybe Text)
-    , _uPrettyPrint        :: !Bool
-    , _uUserIP             :: !(Maybe Text)
-    , _uPayload            :: !Message
+    { _uPayload            :: !Message
     , _uUserId             :: !Text
     , _uMedia              :: !Stream
-    , _uKey                :: !(Maybe AuthKey)
     , _uProcessForCalendar :: !Bool
     , _uDeleted            :: !Bool
     , _uNeverMarkSpam      :: !Bool
-    , _uOAuthToken         :: !(Maybe OAuthToken)
     , _uInternalDateSource :: !UsersMessagesImportInternalDateSource
-    , _uFields             :: !(Maybe Text)
     }
 
 -- | Creates a value of 'UsersMessagesImport'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'uQuotaUser'
---
--- * 'uPrettyPrint'
---
--- * 'uUserIP'
 --
 -- * 'uPayload'
 --
@@ -112,19 +88,13 @@ data UsersMessagesImport' = UsersMessagesImport'
 --
 -- * 'uMedia'
 --
--- * 'uKey'
---
 -- * 'uProcessForCalendar'
 --
 -- * 'uDeleted'
 --
 -- * 'uNeverMarkSpam'
 --
--- * 'uOAuthToken'
---
 -- * 'uInternalDateSource'
---
--- * 'uFields'
 usersMessagesImport'
     :: Message -- ^ 'payload'
     -> Text -- ^ 'media'
@@ -132,37 +102,14 @@ usersMessagesImport'
     -> UsersMessagesImport'
 usersMessagesImport' pUPayload_ pUUserId_ pUMedia_ =
     UsersMessagesImport'
-    { _uQuotaUser = Nothing
-    , _uPrettyPrint = True
-    , _uUserIP = Nothing
-    , _uPayload = pUPayload_
+    { _uPayload = pUPayload_
     , _uUserId = pUUserId_
     , _uMedia = pUMedia_
-    , _uKey = Nothing
     , _uProcessForCalendar = False
     , _uDeleted = False
     , _uNeverMarkSpam = False
-    , _uOAuthToken = Nothing
     , _uInternalDateSource = DateHeader
-    , _uFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-uQuotaUser :: Lens' UsersMessagesImport' (Maybe Text)
-uQuotaUser
-  = lens _uQuotaUser (\ s a -> s{_uQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-uPrettyPrint :: Lens' UsersMessagesImport' Bool
-uPrettyPrint
-  = lens _uPrettyPrint (\ s a -> s{_uPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-uUserIP :: Lens' UsersMessagesImport' (Maybe Text)
-uUserIP = lens _uUserIP (\ s a -> s{_uUserIP = a})
 
 -- | Multipart request metadata.
 uPayload :: Lens' UsersMessagesImport' Message
@@ -175,12 +122,6 @@ uUserId = lens _uUserId (\ s a -> s{_uUserId = a})
 
 uMedia :: Lens' UsersMessagesImport' Stream
 uMedia = lens _uMedia (\ s a -> s{_uMedia = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-uKey :: Lens' UsersMessagesImport' (Maybe AuthKey)
-uKey = lens _uKey (\ s a -> s{_uKey = a})
 
 -- | Process calendar invites in the email and add any extracted meetings to
 -- the Google Calendar for this user.
@@ -202,43 +143,24 @@ uNeverMarkSpam
   = lens _uNeverMarkSpam
       (\ s a -> s{_uNeverMarkSpam = a})
 
--- | OAuth 2.0 token for the current user.
-uOAuthToken :: Lens' UsersMessagesImport' (Maybe OAuthToken)
-uOAuthToken
-  = lens _uOAuthToken (\ s a -> s{_uOAuthToken = a})
-
 -- | Source for Gmail\'s internal date of the message.
 uInternalDateSource :: Lens' UsersMessagesImport' UsersMessagesImportInternalDateSource
 uInternalDateSource
   = lens _uInternalDateSource
       (\ s a -> s{_uInternalDateSource = a})
 
--- | Selector specifying which fields to include in a partial response.
-uFields :: Lens' UsersMessagesImport' (Maybe Text)
-uFields = lens _uFields (\ s a -> s{_uFields = a})
-
-instance GoogleAuth UsersMessagesImport' where
-        _AuthKey = uKey . _Just
-        _AuthToken = uOAuthToken . _Just
-
 instance GoogleRequest UsersMessagesImport' where
         type Rs UsersMessagesImport' = Message
-        request = requestWith gmailRequest
-        requestWith rq UsersMessagesImport'{..}
+        requestClient UsersMessagesImport'{..}
           = go _uUserId (Just _uProcessForCalendar)
               (Just _uDeleted)
               (Just _uNeverMarkSpam)
               (Just _uInternalDateSource)
-              _uQuotaUser
-              (Just _uPrettyPrint)
-              _uUserIP
-              _uFields
-              _uKey
-              _uOAuthToken
               (Just AltJSON)
               _uPayload
               _uMedia
+              gmailService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy UsersMessagesImportResource)
-                      rq
+                      mempty

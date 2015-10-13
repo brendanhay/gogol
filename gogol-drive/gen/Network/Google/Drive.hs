@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference>
 module Network.Google.Drive
     (
+    -- * Service Configuration
+      driveService
+
     -- * API Declaration
-      DriveAPI
+    , DriveAPI
 
     -- * Resources
 

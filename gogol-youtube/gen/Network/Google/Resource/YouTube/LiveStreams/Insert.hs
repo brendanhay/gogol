@@ -34,16 +34,10 @@ module Network.Google.Resource.YouTube.LiveStreams.Insert
     , LiveStreamsInsert'
 
     -- * Request Lenses
-    , lsiQuotaUser
     , lsiPart
-    , lsiPrettyPrint
-    , lsiUserIP
     , lsiPayload
     , lsiOnBehalfOfContentOwner
-    , lsiKey
     , lsiOnBehalfOfContentOwnerChannel
-    , lsiOAuthToken
-    , lsiFields
     ) where
 
 import           Network.Google.Prelude
@@ -56,79 +50,42 @@ type LiveStreamsInsertResource =
        QueryParam "part" Text :>
          QueryParam "onBehalfOfContentOwner" Text :>
            QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] LiveStream :> Post '[JSON] LiveStream
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] LiveStream :> Post '[JSON] LiveStream
 
 -- | Creates a video stream. The stream enables you to send your video to
 -- YouTube, which can then broadcast the video to your audience.
 --
 -- /See:/ 'liveStreamsInsert'' smart constructor.
 data LiveStreamsInsert' = LiveStreamsInsert'
-    { _lsiQuotaUser                     :: !(Maybe Text)
-    , _lsiPart                          :: !Text
-    , _lsiPrettyPrint                   :: !Bool
-    , _lsiUserIP                        :: !(Maybe Text)
+    { _lsiPart                          :: !Text
     , _lsiPayload                       :: !LiveStream
     , _lsiOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lsiKey                           :: !(Maybe AuthKey)
     , _lsiOnBehalfOfContentOwnerChannel :: !(Maybe Text)
-    , _lsiOAuthToken                    :: !(Maybe OAuthToken)
-    , _lsiFields                        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveStreamsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lsiQuotaUser'
---
 -- * 'lsiPart'
---
--- * 'lsiPrettyPrint'
---
--- * 'lsiUserIP'
 --
 -- * 'lsiPayload'
 --
 -- * 'lsiOnBehalfOfContentOwner'
 --
--- * 'lsiKey'
---
 -- * 'lsiOnBehalfOfContentOwnerChannel'
---
--- * 'lsiOAuthToken'
---
--- * 'lsiFields'
 liveStreamsInsert'
     :: Text -- ^ 'part'
     -> LiveStream -- ^ 'payload'
     -> LiveStreamsInsert'
 liveStreamsInsert' pLsiPart_ pLsiPayload_ =
     LiveStreamsInsert'
-    { _lsiQuotaUser = Nothing
-    , _lsiPart = pLsiPart_
-    , _lsiPrettyPrint = True
-    , _lsiUserIP = Nothing
+    { _lsiPart = pLsiPart_
     , _lsiPayload = pLsiPayload_
     , _lsiOnBehalfOfContentOwner = Nothing
-    , _lsiKey = Nothing
     , _lsiOnBehalfOfContentOwnerChannel = Nothing
-    , _lsiOAuthToken = Nothing
-    , _lsiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-lsiQuotaUser :: Lens' LiveStreamsInsert' (Maybe Text)
-lsiQuotaUser
-  = lens _lsiQuotaUser (\ s a -> s{_lsiQuotaUser = a})
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the
@@ -136,18 +93,6 @@ lsiQuotaUser
 -- you can include in the parameter value are id, snippet, cdn, and status.
 lsiPart :: Lens' LiveStreamsInsert' Text
 lsiPart = lens _lsiPart (\ s a -> s{_lsiPart = a})
-
--- | Returns response with indentations and line breaks.
-lsiPrettyPrint :: Lens' LiveStreamsInsert' Bool
-lsiPrettyPrint
-  = lens _lsiPrettyPrint
-      (\ s a -> s{_lsiPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-lsiUserIP :: Lens' LiveStreamsInsert' (Maybe Text)
-lsiUserIP
-  = lens _lsiUserIP (\ s a -> s{_lsiUserIP = a})
 
 -- | Multipart request metadata.
 lsiPayload :: Lens' LiveStreamsInsert' LiveStream
@@ -168,12 +113,6 @@ lsiOnBehalfOfContentOwner :: Lens' LiveStreamsInsert' (Maybe Text)
 lsiOnBehalfOfContentOwner
   = lens _lsiOnBehalfOfContentOwner
       (\ s a -> s{_lsiOnBehalfOfContentOwner = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-lsiKey :: Lens' LiveStreamsInsert' (Maybe AuthKey)
-lsiKey = lens _lsiKey (\ s a -> s{_lsiKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
 -- This parameter is intended exclusively for YouTube content partners. The
@@ -196,36 +135,15 @@ lsiOnBehalfOfContentOwnerChannel
   = lens _lsiOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lsiOnBehalfOfContentOwnerChannel = a})
 
--- | OAuth 2.0 token for the current user.
-lsiOAuthToken :: Lens' LiveStreamsInsert' (Maybe OAuthToken)
-lsiOAuthToken
-  = lens _lsiOAuthToken
-      (\ s a -> s{_lsiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-lsiFields :: Lens' LiveStreamsInsert' (Maybe Text)
-lsiFields
-  = lens _lsiFields (\ s a -> s{_lsiFields = a})
-
-instance GoogleAuth LiveStreamsInsert' where
-        _AuthKey = lsiKey . _Just
-        _AuthToken = lsiOAuthToken . _Just
-
 instance GoogleRequest LiveStreamsInsert' where
         type Rs LiveStreamsInsert' = LiveStream
-        request = requestWith youTubeRequest
-        requestWith rq LiveStreamsInsert'{..}
+        requestClient LiveStreamsInsert'{..}
           = go (Just _lsiPart) _lsiOnBehalfOfContentOwner
               _lsiOnBehalfOfContentOwnerChannel
-              _lsiQuotaUser
-              (Just _lsiPrettyPrint)
-              _lsiUserIP
-              _lsiFields
-              _lsiKey
-              _lsiOAuthToken
               (Just AltJSON)
               _lsiPayload
+              youTubeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy LiveStreamsInsertResource)
-                      rq
+                      mempty

@@ -19,8 +19,11 @@
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference>
 module Network.Google.StorageTransfer
     (
+    -- * Service Configuration
+      storageTransferService
+
     -- * API Declaration
-      StorageTransferAPI
+    , StorageTransferAPI
 
     -- * Resources
 

@@ -35,15 +35,9 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Patch
     , BudgetPatch'
 
     -- * Request Lenses
-    , bpQuotaUser
-    , bpPrettyPrint
-    , bpUserIP
     , bpPayload
     , bpAccountId
-    , bpKey
-    , bpOAuthToken
     , bpBillingId
-    , bpFields
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -55,14 +49,8 @@ type BudgetPatchResource =
      "billinginfo" :>
        Capture "accountId" Int64 :>
          Capture "billingId" Int64 :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Budget :> Patch '[JSON] Budget
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] Budget :> Patch '[JSON] Budget
 
 -- | Updates the budget amount for the budget of the adgroup specified by the
 -- accountId and billingId, with the budget amount in the request. This
@@ -70,38 +58,20 @@ type BudgetPatchResource =
 --
 -- /See:/ 'budgetPatch'' smart constructor.
 data BudgetPatch' = BudgetPatch'
-    { _bpQuotaUser   :: !(Maybe Text)
-    , _bpPrettyPrint :: !Bool
-    , _bpUserIP      :: !(Maybe Text)
-    , _bpPayload     :: !Budget
-    , _bpAccountId   :: !Int64
-    , _bpKey         :: !(Maybe AuthKey)
-    , _bpOAuthToken  :: !(Maybe OAuthToken)
-    , _bpBillingId   :: !Int64
-    , _bpFields      :: !(Maybe Text)
+    { _bpPayload   :: !Budget
+    , _bpAccountId :: !Int64
+    , _bpBillingId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BudgetPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bpQuotaUser'
---
--- * 'bpPrettyPrint'
---
--- * 'bpUserIP'
---
 -- * 'bpPayload'
 --
 -- * 'bpAccountId'
 --
--- * 'bpKey'
---
--- * 'bpOAuthToken'
---
 -- * 'bpBillingId'
---
--- * 'bpFields'
 budgetPatch'
     :: Budget -- ^ 'payload'
     -> Int64 -- ^ 'accountId'
@@ -109,34 +79,10 @@ budgetPatch'
     -> BudgetPatch'
 budgetPatch' pBpPayload_ pBpAccountId_ pBpBillingId_ =
     BudgetPatch'
-    { _bpQuotaUser = Nothing
-    , _bpPrettyPrint = True
-    , _bpUserIP = Nothing
-    , _bpPayload = pBpPayload_
+    { _bpPayload = pBpPayload_
     , _bpAccountId = pBpAccountId_
-    , _bpKey = Nothing
-    , _bpOAuthToken = Nothing
     , _bpBillingId = pBpBillingId_
-    , _bpFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-bpQuotaUser :: Lens' BudgetPatch' (Maybe Text)
-bpQuotaUser
-  = lens _bpQuotaUser (\ s a -> s{_bpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-bpPrettyPrint :: Lens' BudgetPatch' Bool
-bpPrettyPrint
-  = lens _bpPrettyPrint
-      (\ s a -> s{_bpPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-bpUserIP :: Lens' BudgetPatch' (Maybe Text)
-bpUserIP = lens _bpUserIP (\ s a -> s{_bpUserIP = a})
 
 -- | Multipart request metadata.
 bpPayload :: Lens' BudgetPatch' Budget
@@ -148,41 +94,17 @@ bpAccountId :: Lens' BudgetPatch' Int64
 bpAccountId
   = lens _bpAccountId (\ s a -> s{_bpAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-bpKey :: Lens' BudgetPatch' (Maybe AuthKey)
-bpKey = lens _bpKey (\ s a -> s{_bpKey = a})
-
--- | OAuth 2.0 token for the current user.
-bpOAuthToken :: Lens' BudgetPatch' (Maybe OAuthToken)
-bpOAuthToken
-  = lens _bpOAuthToken (\ s a -> s{_bpOAuthToken = a})
-
 -- | The billing id associated with the budget being updated.
 bpBillingId :: Lens' BudgetPatch' Int64
 bpBillingId
   = lens _bpBillingId (\ s a -> s{_bpBillingId = a})
 
--- | Selector specifying which fields to include in a partial response.
-bpFields :: Lens' BudgetPatch' (Maybe Text)
-bpFields = lens _bpFields (\ s a -> s{_bpFields = a})
-
-instance GoogleAuth BudgetPatch' where
-        _AuthKey = bpKey . _Just
-        _AuthToken = bpOAuthToken . _Just
-
 instance GoogleRequest BudgetPatch' where
         type Rs BudgetPatch' = Budget
-        request = requestWith adExchangeBuyerRequest
-        requestWith rq BudgetPatch'{..}
-          = go _bpAccountId _bpBillingId _bpQuotaUser
-              (Just _bpPrettyPrint)
-              _bpUserIP
-              _bpFields
-              _bpKey
-              _bpOAuthToken
-              (Just AltJSON)
+        requestClient BudgetPatch'{..}
+          = go _bpAccountId _bpBillingId (Just AltJSON)
               _bpPayload
+              adExchangeBuyerService
           where go
-                  = clientBuild (Proxy :: Proxy BudgetPatchResource) rq
+                  = buildClient (Proxy :: Proxy BudgetPatchResource)
+                      mempty

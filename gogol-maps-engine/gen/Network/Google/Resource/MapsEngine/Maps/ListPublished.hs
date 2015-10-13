@@ -33,15 +33,9 @@ module Network.Google.Resource.MapsEngine.Maps.ListPublished
     , MapsListPublished'
 
     -- * Request Lenses
-    , mlpQuotaUser
-    , mlpPrettyPrint
-    , mlpUserIP
-    , mlpKey
     , mlpPageToken
     , mlpProjectId
-    , mlpOAuthToken
     , mlpMaxResults
-    , mlpFields
     ) where
 
 import           Network.Google.MapsEngine.Types
@@ -55,90 +49,35 @@ type MapsListPublishedResource =
          QueryParam "pageToken" Text :>
            QueryParam "projectId" Text :>
              QueryParam "maxResults" Word32 :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] PublishedMapsListResponse
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] PublishedMapsListResponse
 
 -- | Return all published maps readable by the current user.
 --
 -- /See:/ 'mapsListPublished'' smart constructor.
 data MapsListPublished' = MapsListPublished'
-    { _mlpQuotaUser   :: !(Maybe Text)
-    , _mlpPrettyPrint :: !Bool
-    , _mlpUserIP      :: !(Maybe Text)
-    , _mlpKey         :: !(Maybe AuthKey)
-    , _mlpPageToken   :: !(Maybe Text)
-    , _mlpProjectId   :: !(Maybe Text)
-    , _mlpOAuthToken  :: !(Maybe OAuthToken)
-    , _mlpMaxResults  :: !(Maybe Word32)
-    , _mlpFields      :: !(Maybe Text)
+    { _mlpPageToken  :: !(Maybe Text)
+    , _mlpProjectId  :: !(Maybe Text)
+    , _mlpMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsListPublished'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mlpQuotaUser'
---
--- * 'mlpPrettyPrint'
---
--- * 'mlpUserIP'
---
--- * 'mlpKey'
---
 -- * 'mlpPageToken'
 --
 -- * 'mlpProjectId'
 --
--- * 'mlpOAuthToken'
---
 -- * 'mlpMaxResults'
---
--- * 'mlpFields'
 mapsListPublished'
     :: MapsListPublished'
 mapsListPublished' =
     MapsListPublished'
-    { _mlpQuotaUser = Nothing
-    , _mlpPrettyPrint = True
-    , _mlpUserIP = Nothing
-    , _mlpKey = Nothing
-    , _mlpPageToken = Nothing
+    { _mlpPageToken = Nothing
     , _mlpProjectId = Nothing
-    , _mlpOAuthToken = Nothing
     , _mlpMaxResults = Nothing
-    , _mlpFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mlpQuotaUser :: Lens' MapsListPublished' (Maybe Text)
-mlpQuotaUser
-  = lens _mlpQuotaUser (\ s a -> s{_mlpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mlpPrettyPrint :: Lens' MapsListPublished' Bool
-mlpPrettyPrint
-  = lens _mlpPrettyPrint
-      (\ s a -> s{_mlpPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mlpUserIP :: Lens' MapsListPublished' (Maybe Text)
-mlpUserIP
-  = lens _mlpUserIP (\ s a -> s{_mlpUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mlpKey :: Lens' MapsListPublished' (Maybe AuthKey)
-mlpKey = lens _mlpKey (\ s a -> s{_mlpKey = a})
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
@@ -155,12 +94,6 @@ mlpProjectId :: Lens' MapsListPublished' (Maybe Text)
 mlpProjectId
   = lens _mlpProjectId (\ s a -> s{_mlpProjectId = a})
 
--- | OAuth 2.0 token for the current user.
-mlpOAuthToken :: Lens' MapsListPublished' (Maybe OAuthToken)
-mlpOAuthToken
-  = lens _mlpOAuthToken
-      (\ s a -> s{_mlpOAuthToken = a})
-
 -- | The maximum number of items to include in a single response page. The
 -- maximum supported value is 100.
 mlpMaxResults :: Lens' MapsListPublished' (Maybe Word32)
@@ -168,29 +101,14 @@ mlpMaxResults
   = lens _mlpMaxResults
       (\ s a -> s{_mlpMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-mlpFields :: Lens' MapsListPublished' (Maybe Text)
-mlpFields
-  = lens _mlpFields (\ s a -> s{_mlpFields = a})
-
-instance GoogleAuth MapsListPublished' where
-        _AuthKey = mlpKey . _Just
-        _AuthToken = mlpOAuthToken . _Just
-
 instance GoogleRequest MapsListPublished' where
         type Rs MapsListPublished' =
              PublishedMapsListResponse
-        request = requestWith mapsEngineRequest
-        requestWith rq MapsListPublished'{..}
+        requestClient MapsListPublished'{..}
           = go _mlpPageToken _mlpProjectId _mlpMaxResults
-              _mlpQuotaUser
-              (Just _mlpPrettyPrint)
-              _mlpUserIP
-              _mlpFields
-              _mlpKey
-              _mlpOAuthToken
               (Just AltJSON)
+              mapsEngineService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy MapsListPublishedResource)
-                      rq
+                      mempty

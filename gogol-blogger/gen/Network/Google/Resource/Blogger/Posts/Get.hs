@@ -34,17 +34,11 @@ module Network.Google.Resource.Blogger.Posts.Get
 
     -- * Request Lenses
     , pgFetchBody
-    , pgQuotaUser
-    , pgPrettyPrint
-    , pgUserIP
     , pgFetchImages
     , pgBlogId
     , pgMaxComments
-    , pgKey
     , pgView
     , pgPostId
-    , pgOAuthToken
-    , pgFields
     ) where
 
 import           Network.Google.Blogger.Types
@@ -61,30 +55,18 @@ type PostsGetResource =
                QueryParam "fetchImages" Bool :>
                  QueryParam "maxComments" Word32 :>
                    QueryParam "view" PostsGetView :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :> Get '[JSON] Post'
+                     QueryParam "alt" AltJSON :> Get '[JSON] Post'
 
 -- | Get a post by ID.
 --
 -- /See:/ 'postsGet'' smart constructor.
 data PostsGet' = PostsGet'
     { _pgFetchBody   :: !Bool
-    , _pgQuotaUser   :: !(Maybe Text)
-    , _pgPrettyPrint :: !Bool
-    , _pgUserIP      :: !(Maybe Text)
     , _pgFetchImages :: !(Maybe Bool)
     , _pgBlogId      :: !Text
     , _pgMaxComments :: !(Maybe Word32)
-    , _pgKey         :: !(Maybe AuthKey)
     , _pgView        :: !(Maybe PostsGetView)
     , _pgPostId      :: !Text
-    , _pgOAuthToken  :: !(Maybe OAuthToken)
-    , _pgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsGet'' with the minimum fields required to make a request.
@@ -93,27 +75,15 @@ data PostsGet' = PostsGet'
 --
 -- * 'pgFetchBody'
 --
--- * 'pgQuotaUser'
---
--- * 'pgPrettyPrint'
---
--- * 'pgUserIP'
---
 -- * 'pgFetchImages'
 --
 -- * 'pgBlogId'
 --
 -- * 'pgMaxComments'
 --
--- * 'pgKey'
---
 -- * 'pgView'
 --
 -- * 'pgPostId'
---
--- * 'pgOAuthToken'
---
--- * 'pgFields'
 postsGet'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
@@ -121,17 +91,11 @@ postsGet'
 postsGet' pPgBlogId_ pPgPostId_ =
     PostsGet'
     { _pgFetchBody = True
-    , _pgQuotaUser = Nothing
-    , _pgPrettyPrint = True
-    , _pgUserIP = Nothing
     , _pgFetchImages = Nothing
     , _pgBlogId = pPgBlogId_
     , _pgMaxComments = Nothing
-    , _pgKey = Nothing
     , _pgView = Nothing
     , _pgPostId = pPgPostId_
-    , _pgOAuthToken = Nothing
-    , _pgFields = Nothing
     }
 
 -- | Whether the body content of the post is included (default: true). This
@@ -140,24 +104,6 @@ postsGet' pPgBlogId_ pPgPostId_ =
 pgFetchBody :: Lens' PostsGet' Bool
 pgFetchBody
   = lens _pgFetchBody (\ s a -> s{_pgFetchBody = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-pgQuotaUser :: Lens' PostsGet' (Maybe Text)
-pgQuotaUser
-  = lens _pgQuotaUser (\ s a -> s{_pgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pgPrettyPrint :: Lens' PostsGet' Bool
-pgPrettyPrint
-  = lens _pgPrettyPrint
-      (\ s a -> s{_pgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-pgUserIP :: Lens' PostsGet' (Maybe Text)
-pgUserIP = lens _pgUserIP (\ s a -> s{_pgUserIP = a})
 
 -- | Whether image URL metadata for each post is included (default: false).
 pgFetchImages :: Lens' PostsGet' (Maybe Bool)
@@ -175,12 +121,6 @@ pgMaxComments
   = lens _pgMaxComments
       (\ s a -> s{_pgMaxComments = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pgKey :: Lens' PostsGet' (Maybe AuthKey)
-pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
-
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
 pgView :: Lens' PostsGet' (Maybe PostsGetView)
@@ -190,33 +130,15 @@ pgView = lens _pgView (\ s a -> s{_pgView = a})
 pgPostId :: Lens' PostsGet' Text
 pgPostId = lens _pgPostId (\ s a -> s{_pgPostId = a})
 
--- | OAuth 2.0 token for the current user.
-pgOAuthToken :: Lens' PostsGet' (Maybe OAuthToken)
-pgOAuthToken
-  = lens _pgOAuthToken (\ s a -> s{_pgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pgFields :: Lens' PostsGet' (Maybe Text)
-pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
-
-instance GoogleAuth PostsGet' where
-        _AuthKey = pgKey . _Just
-        _AuthToken = pgOAuthToken . _Just
-
 instance GoogleRequest PostsGet' where
         type Rs PostsGet' = Post'
-        request = requestWith bloggerRequest
-        requestWith rq PostsGet'{..}
+        requestClient PostsGet'{..}
           = go _pgBlogId _pgPostId (Just _pgFetchBody)
               _pgFetchImages
               _pgMaxComments
               _pgView
-              _pgQuotaUser
-              (Just _pgPrettyPrint)
-              _pgUserIP
-              _pgFields
-              _pgKey
-              _pgOAuthToken
               (Just AltJSON)
+              bloggerService
           where go
-                  = clientBuild (Proxy :: Proxy PostsGetResource) rq
+                  = buildClient (Proxy :: Proxy PostsGetResource)
+                      mempty

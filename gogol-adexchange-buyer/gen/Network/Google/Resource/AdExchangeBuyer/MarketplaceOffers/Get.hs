@@ -33,13 +33,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOffers.Get
     , MarketplaceOffersGet'
 
     -- * Request Lenses
-    , mogQuotaUser
-    , mogPrettyPrint
-    , mogUserIP
-    , mogKey
     , mogOfferId
-    , mogOAuthToken
-    , mogFields
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -50,115 +44,40 @@ import           Network.Google.Prelude
 type MarketplaceOffersGetResource =
      "marketplaceOffers" :>
        Capture "offerId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] MarketplaceOffer
+         QueryParam "alt" AltJSON :>
+           Get '[JSON] MarketplaceOffer
 
 -- | Gets the requested negotiation.
 --
 -- /See:/ 'marketplaceOffersGet'' smart constructor.
-data MarketplaceOffersGet' = MarketplaceOffersGet'
-    { _mogQuotaUser   :: !(Maybe Text)
-    , _mogPrettyPrint :: !Bool
-    , _mogUserIP      :: !(Maybe Text)
-    , _mogKey         :: !(Maybe AuthKey)
-    , _mogOfferId     :: !Text
-    , _mogOAuthToken  :: !(Maybe OAuthToken)
-    , _mogFields      :: !(Maybe Text)
+newtype MarketplaceOffersGet' = MarketplaceOffersGet'
+    { _mogOfferId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceOffersGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mogQuotaUser'
---
--- * 'mogPrettyPrint'
---
--- * 'mogUserIP'
---
--- * 'mogKey'
---
 -- * 'mogOfferId'
---
--- * 'mogOAuthToken'
---
--- * 'mogFields'
 marketplaceOffersGet'
     :: Text -- ^ 'offerId'
     -> MarketplaceOffersGet'
 marketplaceOffersGet' pMogOfferId_ =
     MarketplaceOffersGet'
-    { _mogQuotaUser = Nothing
-    , _mogPrettyPrint = True
-    , _mogUserIP = Nothing
-    , _mogKey = Nothing
-    , _mogOfferId = pMogOfferId_
-    , _mogOAuthToken = Nothing
-    , _mogFields = Nothing
+    { _mogOfferId = pMogOfferId_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mogQuotaUser :: Lens' MarketplaceOffersGet' (Maybe Text)
-mogQuotaUser
-  = lens _mogQuotaUser (\ s a -> s{_mogQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mogPrettyPrint :: Lens' MarketplaceOffersGet' Bool
-mogPrettyPrint
-  = lens _mogPrettyPrint
-      (\ s a -> s{_mogPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mogUserIP :: Lens' MarketplaceOffersGet' (Maybe Text)
-mogUserIP
-  = lens _mogUserIP (\ s a -> s{_mogUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mogKey :: Lens' MarketplaceOffersGet' (Maybe AuthKey)
-mogKey = lens _mogKey (\ s a -> s{_mogKey = a})
 
 -- | The offerId for the offer to get the head revision for.
 mogOfferId :: Lens' MarketplaceOffersGet' Text
 mogOfferId
   = lens _mogOfferId (\ s a -> s{_mogOfferId = a})
 
--- | OAuth 2.0 token for the current user.
-mogOAuthToken :: Lens' MarketplaceOffersGet' (Maybe OAuthToken)
-mogOAuthToken
-  = lens _mogOAuthToken
-      (\ s a -> s{_mogOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-mogFields :: Lens' MarketplaceOffersGet' (Maybe Text)
-mogFields
-  = lens _mogFields (\ s a -> s{_mogFields = a})
-
-instance GoogleAuth MarketplaceOffersGet' where
-        _AuthKey = mogKey . _Just
-        _AuthToken = mogOAuthToken . _Just
-
 instance GoogleRequest MarketplaceOffersGet' where
         type Rs MarketplaceOffersGet' = MarketplaceOffer
-        request = requestWith adExchangeBuyerRequest
-        requestWith rq MarketplaceOffersGet'{..}
-          = go _mogOfferId _mogQuotaUser (Just _mogPrettyPrint)
-              _mogUserIP
-              _mogFields
-              _mogKey
-              _mogOAuthToken
-              (Just AltJSON)
+        requestClient MarketplaceOffersGet'{..}
+          = go _mogOfferId (Just AltJSON)
+              adExchangeBuyerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy MarketplaceOffersGetResource)
-                      rq
+                      mempty

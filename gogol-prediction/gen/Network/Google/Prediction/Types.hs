@@ -15,8 +15,14 @@
 --
 module Network.Google.Prediction.Types
     (
-    -- * Service Request
-      predictionRequest
+    -- * Service Configuration
+      predictionService
+
+    -- * OAuth Scopes
+    , devstorageReadOnlyScope
+    , devstorageReadWriteScope
+    , predictionScope
+    , devstorageFullControlScope
 
     -- * Insert2ModelInfo
     , Insert2ModelInfo
@@ -206,7 +212,24 @@ import           Network.Google.Prediction.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1.6' of the Prediction API. This contains the host and root path used as a starting point for constructing service requests.
-predictionRequest :: RequestBuilder
-predictionRequest
-  = defaultRequest "https://www.googleapis.com/"
+predictionService :: Service
+predictionService
+  = defaultService (ServiceId "prediction:v1.6")
+      "www.googleapis.com"
       "prediction/v1.6/projects/"
+
+-- | View your data in Google Cloud Storage
+devstorageReadOnlyScope :: OAuthScope
+devstorageReadOnlyScope = OAuthScope "https://www.googleapis.com/auth/devstorage.read_only";
+
+-- | Manage your data in Google Cloud Storage
+devstorageReadWriteScope :: OAuthScope
+devstorageReadWriteScope = OAuthScope "https://www.googleapis.com/auth/devstorage.read_write";
+
+-- | Manage your data in the Google Prediction API
+predictionScope :: OAuthScope
+predictionScope = OAuthScope "https://www.googleapis.com/auth/prediction";
+
+-- | Manage your data and permissions in Google Cloud Storage
+devstorageFullControlScope :: OAuthScope
+devstorageFullControlScope = OAuthScope "https://www.googleapis.com/auth/devstorage.full_control";

@@ -20,8 +20,11 @@
 -- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference>
 module Network.Google.Container
     (
+    -- * Service Configuration
+      containerService
+
     -- * API Declaration
-      ContainerAPI
+    , ContainerAPI
 
     -- * Resources
 

@@ -15,8 +15,17 @@
 --
 module Network.Google.TagManager.Types
     (
-    -- * Service Request
-      tagManagerRequest
+    -- * Service Configuration
+      tagManagerService
+
+    -- * OAuth Scopes
+    , tagmanagerReadonlyScope
+    , tagmanagerEditContainersScope
+    , tagmanagerManageAccountsScope
+    , tagmanagerDeleteContainersScope
+    , tagmanagerManageUsersScope
+    , tagmanagerPublishScope
+    , tagmanagerEditContainerversionsScope
 
     -- * ListVariablesResponse
     , ListVariablesResponse
@@ -328,7 +337,36 @@ import           Network.Google.TagManager.Types.Product
 import           Network.Google.TagManager.Types.Sum
 
 -- | Default request referring to version 'v1' of the Tag Manager API. This contains the host and root path used as a starting point for constructing service requests.
-tagManagerRequest :: RequestBuilder
-tagManagerRequest
-  = defaultRequest "https://www.googleapis.com/"
+tagManagerService :: Service
+tagManagerService
+  = defaultService (ServiceId "tagmanager:v1")
+      "www.googleapis.com"
       "tagmanager/v1/"
+
+-- | View your Google Tag Manager containers
+tagmanagerReadonlyScope :: OAuthScope
+tagmanagerReadonlyScope = OAuthScope "https://www.googleapis.com/auth/tagmanager.readonly";
+
+-- | Manage your Google Tag Manager containers
+tagmanagerEditContainersScope :: OAuthScope
+tagmanagerEditContainersScope = OAuthScope "https://www.googleapis.com/auth/tagmanager.edit.containers";
+
+-- | Manage your Google Tag Manager accounts
+tagmanagerManageAccountsScope :: OAuthScope
+tagmanagerManageAccountsScope = OAuthScope "https://www.googleapis.com/auth/tagmanager.manage.accounts";
+
+-- | Delete your Google Tag Manager containers
+tagmanagerDeleteContainersScope :: OAuthScope
+tagmanagerDeleteContainersScope = OAuthScope "https://www.googleapis.com/auth/tagmanager.delete.containers";
+
+-- | Manage user permissions of your Google Tag Manager data
+tagmanagerManageUsersScope :: OAuthScope
+tagmanagerManageUsersScope = OAuthScope "https://www.googleapis.com/auth/tagmanager.manage.users";
+
+-- | Publish your Google Tag Manager containers
+tagmanagerPublishScope :: OAuthScope
+tagmanagerPublishScope = OAuthScope "https://www.googleapis.com/auth/tagmanager.publish";
+
+-- | Manage your Google Tag Manager container versions
+tagmanagerEditContainerversionsScope :: OAuthScope
+tagmanagerEditContainerversionsScope = OAuthScope "https://www.googleapis.com/auth/tagmanager.edit.containerversions";

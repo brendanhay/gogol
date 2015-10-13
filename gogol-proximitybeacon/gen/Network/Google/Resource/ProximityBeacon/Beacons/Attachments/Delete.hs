@@ -38,17 +38,12 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
 
     -- * Request Lenses
     , badXgafv
-    , badQuotaUser
-    , badPrettyPrint
     , badUploadProtocol
     , badPp
     , badAccessToken
     , badUploadType
     , badAttachmentName
     , badBearerToken
-    , badKey
-    , badOAuthToken
-    , badFields
     , badCallback
     ) where
 
@@ -67,13 +62,7 @@ type BeaconsAttachmentsDeleteResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   Delete '[JSON] Empty
+                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes the specified attachment for the given beacon. Each attachment
 -- has a unique attachment name (\`attachmentName\`) which is returned when
@@ -84,17 +73,12 @@ type BeaconsAttachmentsDeleteResource =
 -- /See:/ 'beaconsAttachmentsDelete'' smart constructor.
 data BeaconsAttachmentsDelete' = BeaconsAttachmentsDelete'
     { _badXgafv          :: !(Maybe Text)
-    , _badQuotaUser      :: !(Maybe Text)
-    , _badPrettyPrint    :: !Bool
     , _badUploadProtocol :: !(Maybe Text)
     , _badPp             :: !Bool
     , _badAccessToken    :: !(Maybe Text)
     , _badUploadType     :: !(Maybe Text)
     , _badAttachmentName :: !Text
     , _badBearerToken    :: !(Maybe Text)
-    , _badKey            :: !(Maybe AuthKey)
-    , _badOAuthToken     :: !(Maybe OAuthToken)
-    , _badFields         :: !(Maybe Text)
     , _badCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -103,10 +87,6 @@ data BeaconsAttachmentsDelete' = BeaconsAttachmentsDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'badXgafv'
---
--- * 'badQuotaUser'
---
--- * 'badPrettyPrint'
 --
 -- * 'badUploadProtocol'
 --
@@ -120,12 +100,6 @@ data BeaconsAttachmentsDelete' = BeaconsAttachmentsDelete'
 --
 -- * 'badBearerToken'
 --
--- * 'badKey'
---
--- * 'badOAuthToken'
---
--- * 'badFields'
---
 -- * 'badCallback'
 beaconsAttachmentsDelete'
     :: Text -- ^ 'attachmentName'
@@ -133,36 +107,18 @@ beaconsAttachmentsDelete'
 beaconsAttachmentsDelete' pBadAttachmentName_ =
     BeaconsAttachmentsDelete'
     { _badXgafv = Nothing
-    , _badQuotaUser = Nothing
-    , _badPrettyPrint = True
     , _badUploadProtocol = Nothing
     , _badPp = True
     , _badAccessToken = Nothing
     , _badUploadType = Nothing
     , _badAttachmentName = pBadAttachmentName_
     , _badBearerToken = Nothing
-    , _badKey = Nothing
-    , _badOAuthToken = Nothing
-    , _badFields = Nothing
     , _badCallback = Nothing
     }
 
 -- | V1 error format.
 badXgafv :: Lens' BeaconsAttachmentsDelete' (Maybe Text)
 badXgafv = lens _badXgafv (\ s a -> s{_badXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-badQuotaUser :: Lens' BeaconsAttachmentsDelete' (Maybe Text)
-badQuotaUser
-  = lens _badQuotaUser (\ s a -> s{_badQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-badPrettyPrint :: Lens' BeaconsAttachmentsDelete' Bool
-badPrettyPrint
-  = lens _badPrettyPrint
-      (\ s a -> s{_badPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 badUploadProtocol :: Lens' BeaconsAttachmentsDelete' (Maybe Text)
@@ -201,50 +157,24 @@ badBearerToken
   = lens _badBearerToken
       (\ s a -> s{_badBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-badKey :: Lens' BeaconsAttachmentsDelete' (Maybe AuthKey)
-badKey = lens _badKey (\ s a -> s{_badKey = a})
-
--- | OAuth 2.0 token for the current user.
-badOAuthToken :: Lens' BeaconsAttachmentsDelete' (Maybe OAuthToken)
-badOAuthToken
-  = lens _badOAuthToken
-      (\ s a -> s{_badOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-badFields :: Lens' BeaconsAttachmentsDelete' (Maybe Text)
-badFields
-  = lens _badFields (\ s a -> s{_badFields = a})
-
 -- | JSONP
 badCallback :: Lens' BeaconsAttachmentsDelete' (Maybe Text)
 badCallback
   = lens _badCallback (\ s a -> s{_badCallback = a})
 
-instance GoogleAuth BeaconsAttachmentsDelete' where
-        _AuthKey = badKey . _Just
-        _AuthToken = badOAuthToken . _Just
-
 instance GoogleRequest BeaconsAttachmentsDelete'
          where
         type Rs BeaconsAttachmentsDelete' = Empty
-        request = requestWith proximityBeaconRequest
-        requestWith rq BeaconsAttachmentsDelete'{..}
+        requestClient BeaconsAttachmentsDelete'{..}
           = go _badAttachmentName _badXgafv _badUploadProtocol
               (Just _badPp)
               _badAccessToken
               _badUploadType
               _badBearerToken
               _badCallback
-              _badQuotaUser
-              (Just _badPrettyPrint)
-              _badFields
-              _badKey
-              _badOAuthToken
               (Just AltJSON)
+              proximityBeaconService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy BeaconsAttachmentsDeleteResource)
-                      rq
+                      mempty

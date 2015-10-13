@@ -15,8 +15,12 @@
 --
 module Network.Google.DFAReporting.Types
     (
-    -- * Service Request
-      dFAReportingRequest
+    -- * Service Configuration
+      dFAReportingService
+
+    -- * OAuth Scopes
+    , dfareportingScope
+    , dfatraffickingScope
 
     -- * PlacementsListSortOrder
     , PlacementsListSortOrder (..)
@@ -2517,7 +2521,17 @@ import           Network.Google.DFAReporting.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2.2' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
-dFAReportingRequest :: RequestBuilder
-dFAReportingRequest
-  = defaultRequest "https://www.googleapis.com/"
+dFAReportingService :: Service
+dFAReportingService
+  = defaultService (ServiceId "dfareporting:v2.2")
+      "www.googleapis.com"
       "dfareporting/v2.2/"
+
+-- | View and manage DoubleClick for Advertisers reports
+dfareportingScope :: OAuthScope
+dfareportingScope = OAuthScope "https://www.googleapis.com/auth/dfareporting";
+
+-- | View and manage your DoubleClick Campaign Manager\'s (DCM) display ad
+-- campaigns
+dfatraffickingScope :: OAuthScope
+dfatraffickingScope = OAuthScope "https://www.googleapis.com/auth/dfatrafficking";

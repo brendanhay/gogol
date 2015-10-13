@@ -15,8 +15,11 @@
 --
 module Network.Google.AndroidPublisher.Types
     (
-    -- * Service Request
-      androidPublisherRequest
+    -- * Service Configuration
+      androidPublisherService
+
+    -- * OAuth Scopes
+    , androidpublisherScope
 
     -- * InAppProductListings
     , InAppProductListings
@@ -375,7 +378,12 @@ import           Network.Google.AndroidPublisher.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google Play Developer API. This contains the host and root path used as a starting point for constructing service requests.
-androidPublisherRequest :: RequestBuilder
-androidPublisherRequest
-  = defaultRequest "https://www.googleapis.com/"
+androidPublisherService :: Service
+androidPublisherService
+  = defaultService (ServiceId "androidpublisher:v2")
+      "www.googleapis.com"
       "androidpublisher/v2/applications/"
+
+-- | View and manage your Google Play Developer account
+androidpublisherScope :: OAuthScope
+androidpublisherScope = OAuthScope "https://www.googleapis.com/auth/androidpublisher";

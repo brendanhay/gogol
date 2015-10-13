@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference>
 module Network.Google.Analytics
     (
+    -- * Service Configuration
+      analyticsService
+
     -- * API Declaration
-      AnalyticsAPI
+    , AnalyticsAPI
 
     -- * Resources
 

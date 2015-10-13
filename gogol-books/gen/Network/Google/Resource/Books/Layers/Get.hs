@@ -33,15 +33,9 @@ module Network.Google.Resource.Books.Layers.Get
     , LayersGet'
 
     -- * Request Lenses
-    , lgQuotaUser
-    , lgPrettyPrint
-    , lgUserIP
     , lgContentVersion
-    , lgKey
     , lgVolumeId
     , lgSource
-    , lgOAuthToken
-    , lgFields
     , lgSummaryId
     ) where
 
@@ -57,28 +51,15 @@ type LayersGetResource =
            Capture "summaryId" Text :>
              QueryParam "contentVersion" Text :>
                QueryParam "source" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] Layersummary
+                 QueryParam "alt" AltJSON :> Get '[JSON] Layersummary
 
 -- | Gets the layer summary for a volume.
 --
 -- /See:/ 'layersGet'' smart constructor.
 data LayersGet' = LayersGet'
-    { _lgQuotaUser      :: !(Maybe Text)
-    , _lgPrettyPrint    :: !Bool
-    , _lgUserIP         :: !(Maybe Text)
-    , _lgContentVersion :: !(Maybe Text)
-    , _lgKey            :: !(Maybe AuthKey)
+    { _lgContentVersion :: !(Maybe Text)
     , _lgVolumeId       :: !Text
     , _lgSource         :: !(Maybe Text)
-    , _lgOAuthToken     :: !(Maybe OAuthToken)
-    , _lgFields         :: !(Maybe Text)
     , _lgSummaryId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -86,23 +67,11 @@ data LayersGet' = LayersGet'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lgQuotaUser'
---
--- * 'lgPrettyPrint'
---
--- * 'lgUserIP'
---
 -- * 'lgContentVersion'
---
--- * 'lgKey'
 --
 -- * 'lgVolumeId'
 --
 -- * 'lgSource'
---
--- * 'lgOAuthToken'
---
--- * 'lgFields'
 --
 -- * 'lgSummaryId'
 layersGet'
@@ -111,47 +80,17 @@ layersGet'
     -> LayersGet'
 layersGet' pLgVolumeId_ pLgSummaryId_ =
     LayersGet'
-    { _lgQuotaUser = Nothing
-    , _lgPrettyPrint = True
-    , _lgUserIP = Nothing
-    , _lgContentVersion = Nothing
-    , _lgKey = Nothing
+    { _lgContentVersion = Nothing
     , _lgVolumeId = pLgVolumeId_
     , _lgSource = Nothing
-    , _lgOAuthToken = Nothing
-    , _lgFields = Nothing
     , _lgSummaryId = pLgSummaryId_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-lgQuotaUser :: Lens' LayersGet' (Maybe Text)
-lgQuotaUser
-  = lens _lgQuotaUser (\ s a -> s{_lgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-lgPrettyPrint :: Lens' LayersGet' Bool
-lgPrettyPrint
-  = lens _lgPrettyPrint
-      (\ s a -> s{_lgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-lgUserIP :: Lens' LayersGet' (Maybe Text)
-lgUserIP = lens _lgUserIP (\ s a -> s{_lgUserIP = a})
 
 -- | The content version for the requested volume.
 lgContentVersion :: Lens' LayersGet' (Maybe Text)
 lgContentVersion
   = lens _lgContentVersion
       (\ s a -> s{_lgContentVersion = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-lgKey :: Lens' LayersGet' (Maybe AuthKey)
-lgKey = lens _lgKey (\ s a -> s{_lgKey = a})
 
 -- | The volume to retrieve layers for.
 lgVolumeId :: Lens' LayersGet' Text
@@ -162,36 +101,18 @@ lgVolumeId
 lgSource :: Lens' LayersGet' (Maybe Text)
 lgSource = lens _lgSource (\ s a -> s{_lgSource = a})
 
--- | OAuth 2.0 token for the current user.
-lgOAuthToken :: Lens' LayersGet' (Maybe OAuthToken)
-lgOAuthToken
-  = lens _lgOAuthToken (\ s a -> s{_lgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-lgFields :: Lens' LayersGet' (Maybe Text)
-lgFields = lens _lgFields (\ s a -> s{_lgFields = a})
-
 -- | The ID for the layer to get the summary for.
 lgSummaryId :: Lens' LayersGet' Text
 lgSummaryId
   = lens _lgSummaryId (\ s a -> s{_lgSummaryId = a})
 
-instance GoogleAuth LayersGet' where
-        _AuthKey = lgKey . _Just
-        _AuthToken = lgOAuthToken . _Just
-
 instance GoogleRequest LayersGet' where
         type Rs LayersGet' = Layersummary
-        request = requestWith booksRequest
-        requestWith rq LayersGet'{..}
+        requestClient LayersGet'{..}
           = go _lgVolumeId _lgSummaryId _lgContentVersion
               _lgSource
-              _lgQuotaUser
-              (Just _lgPrettyPrint)
-              _lgUserIP
-              _lgFields
-              _lgKey
-              _lgOAuthToken
               (Just AltJSON)
+              booksService
           where go
-                  = clientBuild (Proxy :: Proxy LayersGetResource) rq
+                  = buildClient (Proxy :: Proxy LayersGetResource)
+                      mempty

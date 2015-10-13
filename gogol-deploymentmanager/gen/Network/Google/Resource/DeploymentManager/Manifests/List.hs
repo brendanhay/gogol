@@ -33,16 +33,10 @@ module Network.Google.Resource.DeploymentManager.Manifests.List
     , ManifestsList'
 
     -- * Request Lenses
-    , mlQuotaUser
-    , mlPrettyPrint
     , mlProject
-    , mlUserIP
-    , mlKey
     , mlFilter
     , mlPageToken
-    , mlOAuthToken
     , mlMaxResults
-    , mlFields
     , mlDeployment
     ) where
 
@@ -60,55 +54,31 @@ type ManifestsListResource =
                QueryParam "filter" Text :>
                  QueryParam "pageToken" Text :>
                    QueryParam "maxResults" Word32 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] ManifestsListResponse
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] ManifestsListResponse
 
 -- | Lists all manifests for a given deployment.
 --
 -- /See:/ 'manifestsList'' smart constructor.
 data ManifestsList' = ManifestsList'
-    { _mlQuotaUser   :: !(Maybe Text)
-    , _mlPrettyPrint :: !Bool
-    , _mlProject     :: !Text
-    , _mlUserIP      :: !(Maybe Text)
-    , _mlKey         :: !(Maybe AuthKey)
-    , _mlFilter      :: !(Maybe Text)
-    , _mlPageToken   :: !(Maybe Text)
-    , _mlOAuthToken  :: !(Maybe OAuthToken)
-    , _mlMaxResults  :: !Word32
-    , _mlFields      :: !(Maybe Text)
-    , _mlDeployment  :: !Text
+    { _mlProject    :: !Text
+    , _mlFilter     :: !(Maybe Text)
+    , _mlPageToken  :: !(Maybe Text)
+    , _mlMaxResults :: !Word32
+    , _mlDeployment :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManifestsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mlQuotaUser'
---
--- * 'mlPrettyPrint'
---
 -- * 'mlProject'
---
--- * 'mlUserIP'
---
--- * 'mlKey'
 --
 -- * 'mlFilter'
 --
 -- * 'mlPageToken'
 --
--- * 'mlOAuthToken'
---
 -- * 'mlMaxResults'
---
--- * 'mlFields'
 --
 -- * 'mlDeployment'
 manifestsList'
@@ -117,47 +87,17 @@ manifestsList'
     -> ManifestsList'
 manifestsList' pMlProject_ pMlDeployment_ =
     ManifestsList'
-    { _mlQuotaUser = Nothing
-    , _mlPrettyPrint = True
-    , _mlProject = pMlProject_
-    , _mlUserIP = Nothing
-    , _mlKey = Nothing
+    { _mlProject = pMlProject_
     , _mlFilter = Nothing
     , _mlPageToken = Nothing
-    , _mlOAuthToken = Nothing
     , _mlMaxResults = 500
-    , _mlFields = Nothing
     , _mlDeployment = pMlDeployment_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mlQuotaUser :: Lens' ManifestsList' (Maybe Text)
-mlQuotaUser
-  = lens _mlQuotaUser (\ s a -> s{_mlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mlPrettyPrint :: Lens' ManifestsList' Bool
-mlPrettyPrint
-  = lens _mlPrettyPrint
-      (\ s a -> s{_mlPrettyPrint = a})
 
 -- | The project ID for this request.
 mlProject :: Lens' ManifestsList' Text
 mlProject
   = lens _mlProject (\ s a -> s{_mlProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mlUserIP :: Lens' ManifestsList' (Maybe Text)
-mlUserIP = lens _mlUserIP (\ s a -> s{_mlUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mlKey :: Lens' ManifestsList' (Maybe AuthKey)
-mlKey = lens _mlKey (\ s a -> s{_mlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -180,42 +120,23 @@ mlPageToken :: Lens' ManifestsList' (Maybe Text)
 mlPageToken
   = lens _mlPageToken (\ s a -> s{_mlPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-mlOAuthToken :: Lens' ManifestsList' (Maybe OAuthToken)
-mlOAuthToken
-  = lens _mlOAuthToken (\ s a -> s{_mlOAuthToken = a})
-
 -- | Maximum count of results to be returned.
 mlMaxResults :: Lens' ManifestsList' Word32
 mlMaxResults
   = lens _mlMaxResults (\ s a -> s{_mlMaxResults = a})
-
--- | Selector specifying which fields to include in a partial response.
-mlFields :: Lens' ManifestsList' (Maybe Text)
-mlFields = lens _mlFields (\ s a -> s{_mlFields = a})
 
 -- | The name of the deployment for this request.
 mlDeployment :: Lens' ManifestsList' Text
 mlDeployment
   = lens _mlDeployment (\ s a -> s{_mlDeployment = a})
 
-instance GoogleAuth ManifestsList' where
-        _AuthKey = mlKey . _Just
-        _AuthToken = mlOAuthToken . _Just
-
 instance GoogleRequest ManifestsList' where
         type Rs ManifestsList' = ManifestsListResponse
-        request = requestWith deploymentManagerRequest
-        requestWith rq ManifestsList'{..}
+        requestClient ManifestsList'{..}
           = go _mlProject _mlDeployment _mlFilter _mlPageToken
               (Just _mlMaxResults)
-              _mlQuotaUser
-              (Just _mlPrettyPrint)
-              _mlUserIP
-              _mlFields
-              _mlKey
-              _mlOAuthToken
               (Just AltJSON)
+              deploymentManagerService
           where go
-                  = clientBuild (Proxy :: Proxy ManifestsListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ManifestsListResource)
+                      mempty

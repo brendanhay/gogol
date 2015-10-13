@@ -40,19 +40,14 @@ module Network.Google.Resource.Classroom.Courses.List
     -- * Request Lenses
     , clStudentId
     , clXgafv
-    , clQuotaUser
-    , clPrettyPrint
     , clUploadProtocol
     , clPp
     , clAccessToken
     , clUploadType
     , clTeacherId
     , clBearerToken
-    , clKey
     , clPageToken
-    , clOAuthToken
     , clPageSize
-    , clFields
     , clCallback
     ) where
 
@@ -75,13 +70,8 @@ type CoursesListResource =
                          QueryParam "pageToken" Text :>
                            QueryParam "pageSize" Int32 :>
                              QueryParam "callback" Text :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] ListCoursesResponse
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListCoursesResponse
 
 -- | Returns a list of courses that the requesting user is permitted to view,
 -- restricted to those that match the request. This method returns the
@@ -94,19 +84,14 @@ type CoursesListResource =
 data CoursesList' = CoursesList'
     { _clStudentId      :: !(Maybe Text)
     , _clXgafv          :: !(Maybe Text)
-    , _clQuotaUser      :: !(Maybe Text)
-    , _clPrettyPrint    :: !Bool
     , _clUploadProtocol :: !(Maybe Text)
     , _clPp             :: !Bool
     , _clAccessToken    :: !(Maybe Text)
     , _clUploadType     :: !(Maybe Text)
     , _clTeacherId      :: !(Maybe Text)
     , _clBearerToken    :: !(Maybe Text)
-    , _clKey            :: !(Maybe AuthKey)
     , _clPageToken      :: !(Maybe Text)
-    , _clOAuthToken     :: !(Maybe OAuthToken)
     , _clPageSize       :: !(Maybe Int32)
-    , _clFields         :: !(Maybe Text)
     , _clCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -117,10 +102,6 @@ data CoursesList' = CoursesList'
 -- * 'clStudentId'
 --
 -- * 'clXgafv'
---
--- * 'clQuotaUser'
---
--- * 'clPrettyPrint'
 --
 -- * 'clUploadProtocol'
 --
@@ -134,15 +115,9 @@ data CoursesList' = CoursesList'
 --
 -- * 'clBearerToken'
 --
--- * 'clKey'
---
 -- * 'clPageToken'
 --
--- * 'clOAuthToken'
---
 -- * 'clPageSize'
---
--- * 'clFields'
 --
 -- * 'clCallback'
 coursesList'
@@ -151,19 +126,14 @@ coursesList' =
     CoursesList'
     { _clStudentId = Nothing
     , _clXgafv = Nothing
-    , _clQuotaUser = Nothing
-    , _clPrettyPrint = True
     , _clUploadProtocol = Nothing
     , _clPp = True
     , _clAccessToken = Nothing
     , _clUploadType = Nothing
     , _clTeacherId = Nothing
     , _clBearerToken = Nothing
-    , _clKey = Nothing
     , _clPageToken = Nothing
-    , _clOAuthToken = Nothing
     , _clPageSize = Nothing
-    , _clFields = Nothing
     , _clCallback = Nothing
     }
 
@@ -178,19 +148,6 @@ clStudentId
 -- | V1 error format.
 clXgafv :: Lens' CoursesList' (Maybe Text)
 clXgafv = lens _clXgafv (\ s a -> s{_clXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-clQuotaUser :: Lens' CoursesList' (Maybe Text)
-clQuotaUser
-  = lens _clQuotaUser (\ s a -> s{_clQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-clPrettyPrint :: Lens' CoursesList' Bool
-clPrettyPrint
-  = lens _clPrettyPrint
-      (\ s a -> s{_clPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 clUploadProtocol :: Lens' CoursesList' (Maybe Text)
@@ -227,12 +184,6 @@ clBearerToken
   = lens _clBearerToken
       (\ s a -> s{_clBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-clKey :: Lens' CoursesList' (Maybe AuthKey)
-clKey = lens _clKey (\ s a -> s{_clKey = a})
-
 -- | [nextPageToken][google.classroom.v1.ListCoursesResponse.next_page_token]
 -- value returned from a previous
 -- [list][google.classroom.v1.Courses.ListCourses] call, indicating that
@@ -243,11 +194,6 @@ clPageToken :: Lens' CoursesList' (Maybe Text)
 clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-clOAuthToken :: Lens' CoursesList' (Maybe OAuthToken)
-clOAuthToken
-  = lens _clOAuthToken (\ s a -> s{_clOAuthToken = a})
-
 -- | Maximum number of items to return. Zero or unspecified indicates that
 -- the server may assign a maximum. The server may return fewer than the
 -- specified number of results.
@@ -255,23 +201,14 @@ clPageSize :: Lens' CoursesList' (Maybe Int32)
 clPageSize
   = lens _clPageSize (\ s a -> s{_clPageSize = a})
 
--- | Selector specifying which fields to include in a partial response.
-clFields :: Lens' CoursesList' (Maybe Text)
-clFields = lens _clFields (\ s a -> s{_clFields = a})
-
 -- | JSONP
 clCallback :: Lens' CoursesList' (Maybe Text)
 clCallback
   = lens _clCallback (\ s a -> s{_clCallback = a})
 
-instance GoogleAuth CoursesList' where
-        _AuthKey = clKey . _Just
-        _AuthToken = clOAuthToken . _Just
-
 instance GoogleRequest CoursesList' where
         type Rs CoursesList' = ListCoursesResponse
-        request = requestWith classroomRequest
-        requestWith rq CoursesList'{..}
+        requestClient CoursesList'{..}
           = go _clStudentId _clXgafv _clUploadProtocol
               (Just _clPp)
               _clAccessToken
@@ -281,11 +218,8 @@ instance GoogleRequest CoursesList' where
               _clPageToken
               _clPageSize
               _clCallback
-              _clQuotaUser
-              (Just _clPrettyPrint)
-              _clFields
-              _clKey
-              _clOAuthToken
               (Just AltJSON)
+              classroomService
           where go
-                  = clientBuild (Proxy :: Proxy CoursesListResource) rq
+                  = buildClient (Proxy :: Proxy CoursesListResource)
+                      mempty

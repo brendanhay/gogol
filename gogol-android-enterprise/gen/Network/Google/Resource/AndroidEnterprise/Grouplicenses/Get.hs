@@ -33,14 +33,8 @@ module Network.Google.Resource.AndroidEnterprise.Grouplicenses.Get
     , GrouplicensesGet'
 
     -- * Request Lenses
-    , ggQuotaUser
-    , ggPrettyPrint
     , ggEnterpriseId
-    , ggUserIP
-    , ggKey
-    , ggOAuthToken
     , ggGroupLicenseId
-    , ggFields
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
@@ -53,97 +47,38 @@ type GrouplicensesGetResource =
        Capture "enterpriseId" Text :>
          "groupLicenses" :>
            Capture "groupLicenseId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] GroupLicense
+             QueryParam "alt" AltJSON :> Get '[JSON] GroupLicense
 
 -- | Retrieves details of an enterprise\'s group license for a product.
 --
 -- /See:/ 'grouplicensesGet'' smart constructor.
 data GrouplicensesGet' = GrouplicensesGet'
-    { _ggQuotaUser      :: !(Maybe Text)
-    , _ggPrettyPrint    :: !Bool
-    , _ggEnterpriseId   :: !Text
-    , _ggUserIP         :: !(Maybe Text)
-    , _ggKey            :: !(Maybe AuthKey)
-    , _ggOAuthToken     :: !(Maybe OAuthToken)
+    { _ggEnterpriseId   :: !Text
     , _ggGroupLicenseId :: !Text
-    , _ggFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GrouplicensesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ggQuotaUser'
---
--- * 'ggPrettyPrint'
---
 -- * 'ggEnterpriseId'
 --
--- * 'ggUserIP'
---
--- * 'ggKey'
---
--- * 'ggOAuthToken'
---
 -- * 'ggGroupLicenseId'
---
--- * 'ggFields'
 grouplicensesGet'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'groupLicenseId'
     -> GrouplicensesGet'
 grouplicensesGet' pGgEnterpriseId_ pGgGroupLicenseId_ =
     GrouplicensesGet'
-    { _ggQuotaUser = Nothing
-    , _ggPrettyPrint = True
-    , _ggEnterpriseId = pGgEnterpriseId_
-    , _ggUserIP = Nothing
-    , _ggKey = Nothing
-    , _ggOAuthToken = Nothing
+    { _ggEnterpriseId = pGgEnterpriseId_
     , _ggGroupLicenseId = pGgGroupLicenseId_
-    , _ggFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ggQuotaUser :: Lens' GrouplicensesGet' (Maybe Text)
-ggQuotaUser
-  = lens _ggQuotaUser (\ s a -> s{_ggQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ggPrettyPrint :: Lens' GrouplicensesGet' Bool
-ggPrettyPrint
-  = lens _ggPrettyPrint
-      (\ s a -> s{_ggPrettyPrint = a})
 
 -- | The ID of the enterprise.
 ggEnterpriseId :: Lens' GrouplicensesGet' Text
 ggEnterpriseId
   = lens _ggEnterpriseId
       (\ s a -> s{_ggEnterpriseId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ggUserIP :: Lens' GrouplicensesGet' (Maybe Text)
-ggUserIP = lens _ggUserIP (\ s a -> s{_ggUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ggKey :: Lens' GrouplicensesGet' (Maybe AuthKey)
-ggKey = lens _ggKey (\ s a -> s{_ggKey = a})
-
--- | OAuth 2.0 token for the current user.
-ggOAuthToken :: Lens' GrouplicensesGet' (Maybe OAuthToken)
-ggOAuthToken
-  = lens _ggOAuthToken (\ s a -> s{_ggOAuthToken = a})
 
 -- | The ID of the product the group license is for, e.g.
 -- \"app:com.google.android.gm\".
@@ -152,26 +87,12 @@ ggGroupLicenseId
   = lens _ggGroupLicenseId
       (\ s a -> s{_ggGroupLicenseId = a})
 
--- | Selector specifying which fields to include in a partial response.
-ggFields :: Lens' GrouplicensesGet' (Maybe Text)
-ggFields = lens _ggFields (\ s a -> s{_ggFields = a})
-
-instance GoogleAuth GrouplicensesGet' where
-        _AuthKey = ggKey . _Just
-        _AuthToken = ggOAuthToken . _Just
-
 instance GoogleRequest GrouplicensesGet' where
         type Rs GrouplicensesGet' = GroupLicense
-        request = requestWith androidEnterpriseRequest
-        requestWith rq GrouplicensesGet'{..}
-          = go _ggEnterpriseId _ggGroupLicenseId _ggQuotaUser
-              (Just _ggPrettyPrint)
-              _ggUserIP
-              _ggFields
-              _ggKey
-              _ggOAuthToken
-              (Just AltJSON)
+        requestClient GrouplicensesGet'{..}
+          = go _ggEnterpriseId _ggGroupLicenseId (Just AltJSON)
+              androidEnterpriseService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy GrouplicensesGetResource)
-                      rq
+                      mempty

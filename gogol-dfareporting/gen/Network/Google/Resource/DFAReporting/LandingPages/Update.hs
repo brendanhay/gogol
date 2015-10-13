@@ -33,15 +33,9 @@ module Network.Google.Resource.DFAReporting.LandingPages.Update
     , LandingPagesUpdate'
 
     -- * Request Lenses
-    , lpuQuotaUser
-    , lpuPrettyPrint
-    , lpuUserIP
     , lpuCampaignId
     , lpuProFileId
     , lpuPayload
-    , lpuKey
-    , lpuOAuthToken
-    , lpuFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -55,52 +49,28 @@ type LandingPagesUpdateResource =
          "campaigns" :>
            Capture "campaignId" Int64 :>
              "landingPages" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] LandingPage :>
-                               Put '[JSON] LandingPage
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] LandingPage :>
+                   Put '[JSON] LandingPage
 
 -- | Updates an existing campaign landing page.
 --
 -- /See:/ 'landingPagesUpdate'' smart constructor.
 data LandingPagesUpdate' = LandingPagesUpdate'
-    { _lpuQuotaUser   :: !(Maybe Text)
-    , _lpuPrettyPrint :: !Bool
-    , _lpuUserIP      :: !(Maybe Text)
-    , _lpuCampaignId  :: !Int64
-    , _lpuProFileId   :: !Int64
-    , _lpuPayload     :: !LandingPage
-    , _lpuKey         :: !(Maybe AuthKey)
-    , _lpuOAuthToken  :: !(Maybe OAuthToken)
-    , _lpuFields      :: !(Maybe Text)
+    { _lpuCampaignId :: !Int64
+    , _lpuProFileId  :: !Int64
+    , _lpuPayload    :: !LandingPage
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lpuQuotaUser'
---
--- * 'lpuPrettyPrint'
---
--- * 'lpuUserIP'
---
 -- * 'lpuCampaignId'
 --
 -- * 'lpuProFileId'
 --
 -- * 'lpuPayload'
---
--- * 'lpuKey'
---
--- * 'lpuOAuthToken'
---
--- * 'lpuFields'
 landingPagesUpdate'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
@@ -108,35 +78,10 @@ landingPagesUpdate'
     -> LandingPagesUpdate'
 landingPagesUpdate' pLpuCampaignId_ pLpuProFileId_ pLpuPayload_ =
     LandingPagesUpdate'
-    { _lpuQuotaUser = Nothing
-    , _lpuPrettyPrint = True
-    , _lpuUserIP = Nothing
-    , _lpuCampaignId = pLpuCampaignId_
+    { _lpuCampaignId = pLpuCampaignId_
     , _lpuProFileId = pLpuProFileId_
     , _lpuPayload = pLpuPayload_
-    , _lpuKey = Nothing
-    , _lpuOAuthToken = Nothing
-    , _lpuFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-lpuQuotaUser :: Lens' LandingPagesUpdate' (Maybe Text)
-lpuQuotaUser
-  = lens _lpuQuotaUser (\ s a -> s{_lpuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-lpuPrettyPrint :: Lens' LandingPagesUpdate' Bool
-lpuPrettyPrint
-  = lens _lpuPrettyPrint
-      (\ s a -> s{_lpuPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-lpuUserIP :: Lens' LandingPagesUpdate' (Maybe Text)
-lpuUserIP
-  = lens _lpuUserIP (\ s a -> s{_lpuUserIP = a})
 
 -- | Landing page campaign ID.
 lpuCampaignId :: Lens' LandingPagesUpdate' Int64
@@ -154,40 +99,13 @@ lpuPayload :: Lens' LandingPagesUpdate' LandingPage
 lpuPayload
   = lens _lpuPayload (\ s a -> s{_lpuPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-lpuKey :: Lens' LandingPagesUpdate' (Maybe AuthKey)
-lpuKey = lens _lpuKey (\ s a -> s{_lpuKey = a})
-
--- | OAuth 2.0 token for the current user.
-lpuOAuthToken :: Lens' LandingPagesUpdate' (Maybe OAuthToken)
-lpuOAuthToken
-  = lens _lpuOAuthToken
-      (\ s a -> s{_lpuOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-lpuFields :: Lens' LandingPagesUpdate' (Maybe Text)
-lpuFields
-  = lens _lpuFields (\ s a -> s{_lpuFields = a})
-
-instance GoogleAuth LandingPagesUpdate' where
-        _AuthKey = lpuKey . _Just
-        _AuthToken = lpuOAuthToken . _Just
-
 instance GoogleRequest LandingPagesUpdate' where
         type Rs LandingPagesUpdate' = LandingPage
-        request = requestWith dFAReportingRequest
-        requestWith rq LandingPagesUpdate'{..}
-          = go _lpuProFileId _lpuCampaignId _lpuQuotaUser
-              (Just _lpuPrettyPrint)
-              _lpuUserIP
-              _lpuFields
-              _lpuKey
-              _lpuOAuthToken
-              (Just AltJSON)
+        requestClient LandingPagesUpdate'{..}
+          = go _lpuProFileId _lpuCampaignId (Just AltJSON)
               _lpuPayload
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy LandingPagesUpdateResource)
-                      rq
+                      mempty

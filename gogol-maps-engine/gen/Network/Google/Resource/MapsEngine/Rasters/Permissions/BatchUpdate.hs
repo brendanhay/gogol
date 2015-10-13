@@ -35,14 +35,8 @@ module Network.Google.Resource.MapsEngine.Rasters.Permissions.BatchUpdate
     , RastersPermissionsBatchUpdate'
 
     -- * Request Lenses
-    , rpbuQuotaUser
-    , rpbuPrettyPrint
-    , rpbuUserIP
     , rpbuPayload
-    , rpbuKey
     , rpbuId
-    , rpbuOAuthToken
-    , rpbuFields
     ) where
 
 import           Network.Google.MapsEngine.Types
@@ -55,15 +49,9 @@ type RastersPermissionsBatchUpdateResource =
        Capture "id" Text :>
          "permissions" :>
            "batchUpdate" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] PermissionsBatchUpdateRequest :>
-                             Post '[JSON] PermissionsBatchUpdateResponse
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] PermissionsBatchUpdateRequest :>
+                 Post '[JSON] PermissionsBatchUpdateResponse
 
 -- | Add or update permission entries to an already existing asset. An asset
 -- can hold up to 20 different permission entries. Each batchInsert request
@@ -71,117 +59,45 @@ type RastersPermissionsBatchUpdateResource =
 --
 -- /See:/ 'rastersPermissionsBatchUpdate'' smart constructor.
 data RastersPermissionsBatchUpdate' = RastersPermissionsBatchUpdate'
-    { _rpbuQuotaUser   :: !(Maybe Text)
-    , _rpbuPrettyPrint :: !Bool
-    , _rpbuUserIP      :: !(Maybe Text)
-    , _rpbuPayload     :: !PermissionsBatchUpdateRequest
-    , _rpbuKey         :: !(Maybe AuthKey)
-    , _rpbuId          :: !Text
-    , _rpbuOAuthToken  :: !(Maybe OAuthToken)
-    , _rpbuFields      :: !(Maybe Text)
+    { _rpbuPayload :: !PermissionsBatchUpdateRequest
+    , _rpbuId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersPermissionsBatchUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rpbuQuotaUser'
---
--- * 'rpbuPrettyPrint'
---
--- * 'rpbuUserIP'
---
 -- * 'rpbuPayload'
 --
--- * 'rpbuKey'
---
 -- * 'rpbuId'
---
--- * 'rpbuOAuthToken'
---
--- * 'rpbuFields'
 rastersPermissionsBatchUpdate'
     :: PermissionsBatchUpdateRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> RastersPermissionsBatchUpdate'
 rastersPermissionsBatchUpdate' pRpbuPayload_ pRpbuId_ =
     RastersPermissionsBatchUpdate'
-    { _rpbuQuotaUser = Nothing
-    , _rpbuPrettyPrint = True
-    , _rpbuUserIP = Nothing
-    , _rpbuPayload = pRpbuPayload_
-    , _rpbuKey = Nothing
+    { _rpbuPayload = pRpbuPayload_
     , _rpbuId = pRpbuId_
-    , _rpbuOAuthToken = Nothing
-    , _rpbuFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-rpbuQuotaUser :: Lens' RastersPermissionsBatchUpdate' (Maybe Text)
-rpbuQuotaUser
-  = lens _rpbuQuotaUser
-      (\ s a -> s{_rpbuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rpbuPrettyPrint :: Lens' RastersPermissionsBatchUpdate' Bool
-rpbuPrettyPrint
-  = lens _rpbuPrettyPrint
-      (\ s a -> s{_rpbuPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rpbuUserIP :: Lens' RastersPermissionsBatchUpdate' (Maybe Text)
-rpbuUserIP
-  = lens _rpbuUserIP (\ s a -> s{_rpbuUserIP = a})
 
 -- | Multipart request metadata.
 rpbuPayload :: Lens' RastersPermissionsBatchUpdate' PermissionsBatchUpdateRequest
 rpbuPayload
   = lens _rpbuPayload (\ s a -> s{_rpbuPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rpbuKey :: Lens' RastersPermissionsBatchUpdate' (Maybe AuthKey)
-rpbuKey = lens _rpbuKey (\ s a -> s{_rpbuKey = a})
-
 -- | The ID of the asset to which permissions will be added.
 rpbuId :: Lens' RastersPermissionsBatchUpdate' Text
 rpbuId = lens _rpbuId (\ s a -> s{_rpbuId = a})
-
--- | OAuth 2.0 token for the current user.
-rpbuOAuthToken :: Lens' RastersPermissionsBatchUpdate' (Maybe OAuthToken)
-rpbuOAuthToken
-  = lens _rpbuOAuthToken
-      (\ s a -> s{_rpbuOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-rpbuFields :: Lens' RastersPermissionsBatchUpdate' (Maybe Text)
-rpbuFields
-  = lens _rpbuFields (\ s a -> s{_rpbuFields = a})
-
-instance GoogleAuth RastersPermissionsBatchUpdate'
-         where
-        _AuthKey = rpbuKey . _Just
-        _AuthToken = rpbuOAuthToken . _Just
 
 instance GoogleRequest RastersPermissionsBatchUpdate'
          where
         type Rs RastersPermissionsBatchUpdate' =
              PermissionsBatchUpdateResponse
-        request = requestWith mapsEngineRequest
-        requestWith rq RastersPermissionsBatchUpdate'{..}
-          = go _rpbuId _rpbuQuotaUser (Just _rpbuPrettyPrint)
-              _rpbuUserIP
-              _rpbuFields
-              _rpbuKey
-              _rpbuOAuthToken
-              (Just AltJSON)
-              _rpbuPayload
+        requestClient RastersPermissionsBatchUpdate'{..}
+          = go _rpbuId (Just AltJSON) _rpbuPayload
+              mapsEngineService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy RastersPermissionsBatchUpdateResource)
-                      rq
+                      mempty

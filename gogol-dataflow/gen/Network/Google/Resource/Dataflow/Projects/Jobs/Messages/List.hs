@@ -34,8 +34,6 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
 
     -- * Request Lenses
     , pjmlXgafv
-    , pjmlQuotaUser
-    , pjmlPrettyPrint
     , pjmlJobId
     , pjmlUploadProtocol
     , pjmlStartTime
@@ -43,14 +41,11 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
     , pjmlAccessToken
     , pjmlUploadType
     , pjmlBearerToken
-    , pjmlKey
     , pjmlEndTime
     , pjmlMinimumImportance
     , pjmlPageToken
     , pjmlProjectId
-    , pjmlOAuthToken
     , pjmlPageSize
-    , pjmlFields
     , pjmlCallback
     ) where
 
@@ -78,24 +73,14 @@ type ProjectsJobsMessagesListResource =
                                    QueryParam "pageToken" Text :>
                                      QueryParam "pageSize" Int32 :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "quotaUser" Text :>
-                                           QueryParam "prettyPrint" Bool :>
-                                             QueryParam "fields" Text :>
-                                               QueryParam "key" AuthKey :>
-                                                 Header "Authorization"
-                                                   OAuthToken
-                                                   :>
-                                                   QueryParam "alt" AltJSON :>
-                                                     Get '[JSON]
-                                                       ListJobMessagesResponse
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON] ListJobMessagesResponse
 
 -- | Request the job status.
 --
 -- /See:/ 'projectsJobsMessagesList'' smart constructor.
 data ProjectsJobsMessagesList' = ProjectsJobsMessagesList'
     { _pjmlXgafv             :: !(Maybe Text)
-    , _pjmlQuotaUser         :: !(Maybe Text)
-    , _pjmlPrettyPrint       :: !Bool
     , _pjmlJobId             :: !Text
     , _pjmlUploadProtocol    :: !(Maybe Text)
     , _pjmlStartTime         :: !(Maybe Text)
@@ -103,14 +88,11 @@ data ProjectsJobsMessagesList' = ProjectsJobsMessagesList'
     , _pjmlAccessToken       :: !(Maybe Text)
     , _pjmlUploadType        :: !(Maybe Text)
     , _pjmlBearerToken       :: !(Maybe Text)
-    , _pjmlKey               :: !(Maybe AuthKey)
     , _pjmlEndTime           :: !(Maybe Text)
     , _pjmlMinimumImportance :: !(Maybe Text)
     , _pjmlPageToken         :: !(Maybe Text)
     , _pjmlProjectId         :: !Text
-    , _pjmlOAuthToken        :: !(Maybe OAuthToken)
     , _pjmlPageSize          :: !(Maybe Int32)
-    , _pjmlFields            :: !(Maybe Text)
     , _pjmlCallback          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -119,10 +101,6 @@ data ProjectsJobsMessagesList' = ProjectsJobsMessagesList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pjmlXgafv'
---
--- * 'pjmlQuotaUser'
---
--- * 'pjmlPrettyPrint'
 --
 -- * 'pjmlJobId'
 --
@@ -138,8 +116,6 @@ data ProjectsJobsMessagesList' = ProjectsJobsMessagesList'
 --
 -- * 'pjmlBearerToken'
 --
--- * 'pjmlKey'
---
 -- * 'pjmlEndTime'
 --
 -- * 'pjmlMinimumImportance'
@@ -148,11 +124,7 @@ data ProjectsJobsMessagesList' = ProjectsJobsMessagesList'
 --
 -- * 'pjmlProjectId'
 --
--- * 'pjmlOAuthToken'
---
 -- * 'pjmlPageSize'
---
--- * 'pjmlFields'
 --
 -- * 'pjmlCallback'
 projectsJobsMessagesList'
@@ -162,8 +134,6 @@ projectsJobsMessagesList'
 projectsJobsMessagesList' pPjmlJobId_ pPjmlProjectId_ =
     ProjectsJobsMessagesList'
     { _pjmlXgafv = Nothing
-    , _pjmlQuotaUser = Nothing
-    , _pjmlPrettyPrint = True
     , _pjmlJobId = pPjmlJobId_
     , _pjmlUploadProtocol = Nothing
     , _pjmlStartTime = Nothing
@@ -171,14 +141,11 @@ projectsJobsMessagesList' pPjmlJobId_ pPjmlProjectId_ =
     , _pjmlAccessToken = Nothing
     , _pjmlUploadType = Nothing
     , _pjmlBearerToken = Nothing
-    , _pjmlKey = Nothing
     , _pjmlEndTime = Nothing
     , _pjmlMinimumImportance = Nothing
     , _pjmlPageToken = Nothing
     , _pjmlProjectId = pPjmlProjectId_
-    , _pjmlOAuthToken = Nothing
     , _pjmlPageSize = Nothing
-    , _pjmlFields = Nothing
     , _pjmlCallback = Nothing
     }
 
@@ -186,20 +153,6 @@ projectsJobsMessagesList' pPjmlJobId_ pPjmlProjectId_ =
 pjmlXgafv :: Lens' ProjectsJobsMessagesList' (Maybe Text)
 pjmlXgafv
   = lens _pjmlXgafv (\ s a -> s{_pjmlXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pjmlQuotaUser :: Lens' ProjectsJobsMessagesList' (Maybe Text)
-pjmlQuotaUser
-  = lens _pjmlQuotaUser
-      (\ s a -> s{_pjmlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pjmlPrettyPrint :: Lens' ProjectsJobsMessagesList' Bool
-pjmlPrettyPrint
-  = lens _pjmlPrettyPrint
-      (\ s a -> s{_pjmlPrettyPrint = a})
 
 -- | The job to get messages about.
 pjmlJobId :: Lens' ProjectsJobsMessagesList' Text
@@ -241,12 +194,6 @@ pjmlBearerToken
   = lens _pjmlBearerToken
       (\ s a -> s{_pjmlBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pjmlKey :: Lens' ProjectsJobsMessagesList' (Maybe AuthKey)
-pjmlKey = lens _pjmlKey (\ s a -> s{_pjmlKey = a})
-
 -- | Return only messages with timestamps \< end_time. The default is now
 -- (i.e. return up to the latest messages available).
 pjmlEndTime :: Lens' ProjectsJobsMessagesList' (Maybe Text)
@@ -272,12 +219,6 @@ pjmlProjectId
   = lens _pjmlProjectId
       (\ s a -> s{_pjmlProjectId = a})
 
--- | OAuth 2.0 token for the current user.
-pjmlOAuthToken :: Lens' ProjectsJobsMessagesList' (Maybe OAuthToken)
-pjmlOAuthToken
-  = lens _pjmlOAuthToken
-      (\ s a -> s{_pjmlOAuthToken = a})
-
 -- | If specified, determines the maximum number of messages to return. If
 -- unspecified, the service may choose an appropriate default, or may
 -- return an arbitrarily large number of results.
@@ -285,26 +226,16 @@ pjmlPageSize :: Lens' ProjectsJobsMessagesList' (Maybe Int32)
 pjmlPageSize
   = lens _pjmlPageSize (\ s a -> s{_pjmlPageSize = a})
 
--- | Selector specifying which fields to include in a partial response.
-pjmlFields :: Lens' ProjectsJobsMessagesList' (Maybe Text)
-pjmlFields
-  = lens _pjmlFields (\ s a -> s{_pjmlFields = a})
-
 -- | JSONP
 pjmlCallback :: Lens' ProjectsJobsMessagesList' (Maybe Text)
 pjmlCallback
   = lens _pjmlCallback (\ s a -> s{_pjmlCallback = a})
 
-instance GoogleAuth ProjectsJobsMessagesList' where
-        _AuthKey = pjmlKey . _Just
-        _AuthToken = pjmlOAuthToken . _Just
-
 instance GoogleRequest ProjectsJobsMessagesList'
          where
         type Rs ProjectsJobsMessagesList' =
              ListJobMessagesResponse
-        request = requestWith dataflowRequest
-        requestWith rq ProjectsJobsMessagesList'{..}
+        requestClient ProjectsJobsMessagesList'{..}
           = go _pjmlProjectId _pjmlJobId _pjmlXgafv
               _pjmlUploadProtocol
               _pjmlStartTime
@@ -317,13 +248,9 @@ instance GoogleRequest ProjectsJobsMessagesList'
               _pjmlPageToken
               _pjmlPageSize
               _pjmlCallback
-              _pjmlQuotaUser
-              (Just _pjmlPrettyPrint)
-              _pjmlFields
-              _pjmlKey
-              _pjmlOAuthToken
               (Just AltJSON)
+              dataflowService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsJobsMessagesListResource)
-                      rq
+                      mempty

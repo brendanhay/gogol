@@ -35,27 +35,21 @@ module Network.Google.Resource.Storage.Objects.Rewrite
 
     -- * Request Lenses
     , orDestinationPredefinedACL
-    , orQuotaUser
     , orIfSourceGenerationMatch
     , orIfMetagenerationMatch
     , orIfGenerationNotMatch
-    , orPrettyPrint
     , orIfSourceMetagenerationNotMatch
     , orIfSourceMetagenerationMatch
     , orIfGenerationMatch
-    , orUserIP
     , orSourceObject
     , orMaxBytesRewrittenPerCall
     , orSourceBucket
     , orPayload
-    , orKey
     , orDestinationBucket
     , orIfMetagenerationNotMatch
     , orIfSourceGenerationNotMatch
     , orProjection
-    , orOAuthToken
     , orSourceGeneration
-    , orFields
     , orRewriteToken
     , orDestinationObject
     ) where
@@ -100,27 +94,10 @@ type ObjectsRewriteResource =
                                              QueryParam "sourceGeneration" Int64
                                                :>
                                                QueryParam "rewriteToken" Text :>
-                                                 QueryParam "quotaUser" Text :>
-                                                   QueryParam "prettyPrint" Bool
-                                                     :>
-                                                     QueryParam "userIp" Text :>
-                                                       QueryParam "fields" Text
-                                                         :>
-                                                         QueryParam "key"
-                                                           AuthKey
-                                                           :>
-                                                           Header
-                                                             "Authorization"
-                                                             OAuthToken
-                                                             :>
-                                                             QueryParam "alt"
-                                                               AltJSON
-                                                               :>
-                                                               ReqBody '[JSON]
-                                                                 Object
-                                                                 :>
-                                                                 Post '[JSON]
-                                                                   RewriteResponse
+                                                 QueryParam "alt" AltJSON :>
+                                                   ReqBody '[JSON] Object :>
+                                                     Post '[JSON]
+                                                       RewriteResponse
 
 -- | Rewrites a source object to a destination object. Optionally overrides
 -- metadata.
@@ -128,27 +105,21 @@ type ObjectsRewriteResource =
 -- /See:/ 'objectsRewrite'' smart constructor.
 data ObjectsRewrite' = ObjectsRewrite'
     { _orDestinationPredefinedACL       :: !(Maybe ObjectsRewriteDestinationPredefinedACL)
-    , _orQuotaUser                      :: !(Maybe Text)
     , _orIfSourceGenerationMatch        :: !(Maybe Int64)
     , _orIfMetagenerationMatch          :: !(Maybe Int64)
     , _orIfGenerationNotMatch           :: !(Maybe Int64)
-    , _orPrettyPrint                    :: !Bool
     , _orIfSourceMetagenerationNotMatch :: !(Maybe Int64)
     , _orIfSourceMetagenerationMatch    :: !(Maybe Int64)
     , _orIfGenerationMatch              :: !(Maybe Int64)
-    , _orUserIP                         :: !(Maybe Text)
     , _orSourceObject                   :: !Text
     , _orMaxBytesRewrittenPerCall       :: !(Maybe Int64)
     , _orSourceBucket                   :: !Text
     , _orPayload                        :: !Object
-    , _orKey                            :: !(Maybe AuthKey)
     , _orDestinationBucket              :: !Text
     , _orIfMetagenerationNotMatch       :: !(Maybe Int64)
     , _orIfSourceGenerationNotMatch     :: !(Maybe Int64)
     , _orProjection                     :: !(Maybe ObjectsRewriteProjection)
-    , _orOAuthToken                     :: !(Maybe OAuthToken)
     , _orSourceGeneration               :: !(Maybe Int64)
-    , _orFields                         :: !(Maybe Text)
     , _orRewriteToken                   :: !(Maybe Text)
     , _orDestinationObject              :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -159,23 +130,17 @@ data ObjectsRewrite' = ObjectsRewrite'
 --
 -- * 'orDestinationPredefinedACL'
 --
--- * 'orQuotaUser'
---
 -- * 'orIfSourceGenerationMatch'
 --
 -- * 'orIfMetagenerationMatch'
 --
 -- * 'orIfGenerationNotMatch'
 --
--- * 'orPrettyPrint'
---
 -- * 'orIfSourceMetagenerationNotMatch'
 --
 -- * 'orIfSourceMetagenerationMatch'
 --
 -- * 'orIfGenerationMatch'
---
--- * 'orUserIP'
 --
 -- * 'orSourceObject'
 --
@@ -185,8 +150,6 @@ data ObjectsRewrite' = ObjectsRewrite'
 --
 -- * 'orPayload'
 --
--- * 'orKey'
---
 -- * 'orDestinationBucket'
 --
 -- * 'orIfMetagenerationNotMatch'
@@ -195,11 +158,7 @@ data ObjectsRewrite' = ObjectsRewrite'
 --
 -- * 'orProjection'
 --
--- * 'orOAuthToken'
---
 -- * 'orSourceGeneration'
---
--- * 'orFields'
 --
 -- * 'orRewriteToken'
 --
@@ -214,27 +173,21 @@ objectsRewrite'
 objectsRewrite' pOrSourceObject_ pOrSourceBucket_ pOrPayload_ pOrDestinationBucket_ pOrDestinationObject_ =
     ObjectsRewrite'
     { _orDestinationPredefinedACL = Nothing
-    , _orQuotaUser = Nothing
     , _orIfSourceGenerationMatch = Nothing
     , _orIfMetagenerationMatch = Nothing
     , _orIfGenerationNotMatch = Nothing
-    , _orPrettyPrint = True
     , _orIfSourceMetagenerationNotMatch = Nothing
     , _orIfSourceMetagenerationMatch = Nothing
     , _orIfGenerationMatch = Nothing
-    , _orUserIP = Nothing
     , _orSourceObject = pOrSourceObject_
     , _orMaxBytesRewrittenPerCall = Nothing
     , _orSourceBucket = pOrSourceBucket_
     , _orPayload = pOrPayload_
-    , _orKey = Nothing
     , _orDestinationBucket = pOrDestinationBucket_
     , _orIfMetagenerationNotMatch = Nothing
     , _orIfSourceGenerationNotMatch = Nothing
     , _orProjection = Nothing
-    , _orOAuthToken = Nothing
     , _orSourceGeneration = Nothing
-    , _orFields = Nothing
     , _orRewriteToken = Nothing
     , _orDestinationObject = pOrDestinationObject_
     }
@@ -244,13 +197,6 @@ orDestinationPredefinedACL :: Lens' ObjectsRewrite' (Maybe ObjectsRewriteDestina
 orDestinationPredefinedACL
   = lens _orDestinationPredefinedACL
       (\ s a -> s{_orDestinationPredefinedACL = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-orQuotaUser :: Lens' ObjectsRewrite' (Maybe Text)
-orQuotaUser
-  = lens _orQuotaUser (\ s a -> s{_orQuotaUser = a})
 
 -- | Makes the operation conditional on whether the source object\'s
 -- generation matches the given value.
@@ -273,12 +219,6 @@ orIfGenerationNotMatch
   = lens _orIfGenerationNotMatch
       (\ s a -> s{_orIfGenerationNotMatch = a})
 
--- | Returns response with indentations and line breaks.
-orPrettyPrint :: Lens' ObjectsRewrite' Bool
-orPrettyPrint
-  = lens _orPrettyPrint
-      (\ s a -> s{_orPrettyPrint = a})
-
 -- | Makes the operation conditional on whether the source object\'s current
 -- metageneration does not match the given value.
 orIfSourceMetagenerationNotMatch :: Lens' ObjectsRewrite' (Maybe Int64)
@@ -299,11 +239,6 @@ orIfGenerationMatch :: Lens' ObjectsRewrite' (Maybe Int64)
 orIfGenerationMatch
   = lens _orIfGenerationMatch
       (\ s a -> s{_orIfGenerationMatch = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-orUserIP :: Lens' ObjectsRewrite' (Maybe Text)
-orUserIP = lens _orUserIP (\ s a -> s{_orUserIP = a})
 
 -- | Name of the source object. For information about how to URL encode
 -- object names to be path safe, see Encoding URI Path Parts.
@@ -335,12 +270,6 @@ orPayload :: Lens' ObjectsRewrite' Object
 orPayload
   = lens _orPayload (\ s a -> s{_orPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-orKey :: Lens' ObjectsRewrite' (Maybe AuthKey)
-orKey = lens _orKey (\ s a -> s{_orKey = a})
-
 -- | Name of the bucket in which to store the new object. Overrides the
 -- provided object metadata\'s bucket value, if any.
 orDestinationBucket :: Lens' ObjectsRewrite' Text
@@ -368,21 +297,12 @@ orProjection :: Lens' ObjectsRewrite' (Maybe ObjectsRewriteProjection)
 orProjection
   = lens _orProjection (\ s a -> s{_orProjection = a})
 
--- | OAuth 2.0 token for the current user.
-orOAuthToken :: Lens' ObjectsRewrite' (Maybe OAuthToken)
-orOAuthToken
-  = lens _orOAuthToken (\ s a -> s{_orOAuthToken = a})
-
 -- | If present, selects a specific revision of the source object (as opposed
 -- to the latest version, the default).
 orSourceGeneration :: Lens' ObjectsRewrite' (Maybe Int64)
 orSourceGeneration
   = lens _orSourceGeneration
       (\ s a -> s{_orSourceGeneration = a})
-
--- | Selector specifying which fields to include in a partial response.
-orFields :: Lens' ObjectsRewrite' (Maybe Text)
-orFields = lens _orFields (\ s a -> s{_orFields = a})
 
 -- | Include this field (from the previous rewrite response) on each rewrite
 -- request after the first one, until the rewrite response \'done\' flag is
@@ -403,14 +323,9 @@ orDestinationObject
   = lens _orDestinationObject
       (\ s a -> s{_orDestinationObject = a})
 
-instance GoogleAuth ObjectsRewrite' where
-        _AuthKey = orKey . _Just
-        _AuthToken = orOAuthToken . _Just
-
 instance GoogleRequest ObjectsRewrite' where
         type Rs ObjectsRewrite' = RewriteResponse
-        request = requestWith storageRequest
-        requestWith rq ObjectsRewrite'{..}
+        requestClient ObjectsRewrite'{..}
           = go _orSourceBucket _orSourceObject
               _orDestinationBucket
               _orDestinationObject
@@ -427,14 +342,9 @@ instance GoogleRequest ObjectsRewrite' where
               _orProjection
               _orSourceGeneration
               _orRewriteToken
-              _orQuotaUser
-              (Just _orPrettyPrint)
-              _orUserIP
-              _orFields
-              _orKey
-              _orOAuthToken
               (Just AltJSON)
               _orPayload
+              storageService
           where go
-                  = clientBuild (Proxy :: Proxy ObjectsRewriteResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ObjectsRewriteResource)
+                      mempty

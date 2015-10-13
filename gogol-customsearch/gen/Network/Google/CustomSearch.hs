@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/custom-search/v1/using_rest CustomSearch API Reference>
 module Network.Google.CustomSearch
     (
+    -- * Service Configuration
+      customSearchService
+
     -- * API Declaration
-      CustomSearchAPI
+    , CustomSearchAPI
 
     -- * Resources
 

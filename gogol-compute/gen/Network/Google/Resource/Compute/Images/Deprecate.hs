@@ -34,15 +34,9 @@ module Network.Google.Resource.Compute.Images.Deprecate
     , ImagesDeprecate'
 
     -- * Request Lenses
-    , imamQuotaUser
     , imamImage
-    , imamPrettyPrint
     , imamProject
-    , imamUserIP
     , imamPayload
-    , imamKey
-    , imamOAuthToken
-    , imamFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,53 +50,29 @@ type ImagesDeprecateResource =
          "images" :>
            Capture "image" Text :>
              "deprecate" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] DeprecationStatus :>
-                               Post '[JSON] Operation
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] DeprecationStatus :>
+                   Post '[JSON] Operation
 
 -- | Sets the deprecation status of an image. If an empty request body is
 -- given, clears the deprecation status instead.
 --
 -- /See:/ 'imagesDeprecate'' smart constructor.
 data ImagesDeprecate' = ImagesDeprecate'
-    { _imamQuotaUser   :: !(Maybe Text)
-    , _imamImage       :: !Text
-    , _imamPrettyPrint :: !Bool
-    , _imamProject     :: !Text
-    , _imamUserIP      :: !(Maybe Text)
-    , _imamPayload     :: !DeprecationStatus
-    , _imamKey         :: !(Maybe AuthKey)
-    , _imamOAuthToken  :: !(Maybe OAuthToken)
-    , _imamFields      :: !(Maybe Text)
+    { _imamImage   :: !Text
+    , _imamProject :: !Text
+    , _imamPayload :: !DeprecationStatus
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImagesDeprecate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'imamQuotaUser'
---
 -- * 'imamImage'
---
--- * 'imamPrettyPrint'
 --
 -- * 'imamProject'
 --
--- * 'imamUserIP'
---
 -- * 'imamPayload'
---
--- * 'imamKey'
---
--- * 'imamOAuthToken'
---
--- * 'imamFields'
 imagesDeprecate'
     :: Text -- ^ 'image'
     -> Text -- ^ 'project'
@@ -110,86 +80,33 @@ imagesDeprecate'
     -> ImagesDeprecate'
 imagesDeprecate' pImamImage_ pImamProject_ pImamPayload_ =
     ImagesDeprecate'
-    { _imamQuotaUser = Nothing
-    , _imamImage = pImamImage_
-    , _imamPrettyPrint = True
+    { _imamImage = pImamImage_
     , _imamProject = pImamProject_
-    , _imamUserIP = Nothing
     , _imamPayload = pImamPayload_
-    , _imamKey = Nothing
-    , _imamOAuthToken = Nothing
-    , _imamFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-imamQuotaUser :: Lens' ImagesDeprecate' (Maybe Text)
-imamQuotaUser
-  = lens _imamQuotaUser
-      (\ s a -> s{_imamQuotaUser = a})
 
 -- | Image name.
 imamImage :: Lens' ImagesDeprecate' Text
 imamImage
   = lens _imamImage (\ s a -> s{_imamImage = a})
 
--- | Returns response with indentations and line breaks.
-imamPrettyPrint :: Lens' ImagesDeprecate' Bool
-imamPrettyPrint
-  = lens _imamPrettyPrint
-      (\ s a -> s{_imamPrettyPrint = a})
-
 -- | Project ID for this request.
 imamProject :: Lens' ImagesDeprecate' Text
 imamProject
   = lens _imamProject (\ s a -> s{_imamProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-imamUserIP :: Lens' ImagesDeprecate' (Maybe Text)
-imamUserIP
-  = lens _imamUserIP (\ s a -> s{_imamUserIP = a})
 
 -- | Multipart request metadata.
 imamPayload :: Lens' ImagesDeprecate' DeprecationStatus
 imamPayload
   = lens _imamPayload (\ s a -> s{_imamPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-imamKey :: Lens' ImagesDeprecate' (Maybe AuthKey)
-imamKey = lens _imamKey (\ s a -> s{_imamKey = a})
-
--- | OAuth 2.0 token for the current user.
-imamOAuthToken :: Lens' ImagesDeprecate' (Maybe OAuthToken)
-imamOAuthToken
-  = lens _imamOAuthToken
-      (\ s a -> s{_imamOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-imamFields :: Lens' ImagesDeprecate' (Maybe Text)
-imamFields
-  = lens _imamFields (\ s a -> s{_imamFields = a})
-
-instance GoogleAuth ImagesDeprecate' where
-        _AuthKey = imamKey . _Just
-        _AuthToken = imamOAuthToken . _Just
-
 instance GoogleRequest ImagesDeprecate' where
         type Rs ImagesDeprecate' = Operation
-        request = requestWith computeRequest
-        requestWith rq ImagesDeprecate'{..}
-          = go _imamProject _imamImage _imamQuotaUser
-              (Just _imamPrettyPrint)
-              _imamUserIP
-              _imamFields
-              _imamKey
-              _imamOAuthToken
-              (Just AltJSON)
+        requestClient ImagesDeprecate'{..}
+          = go _imamProject _imamImage (Just AltJSON)
               _imamPayload
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ImagesDeprecateResource)
-                      rq
+                      mempty

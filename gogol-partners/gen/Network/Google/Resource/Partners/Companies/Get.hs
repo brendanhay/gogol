@@ -34,8 +34,6 @@ module Network.Google.Resource.Partners.Companies.Get
 
     -- * Request Lenses
     , cgXgafv
-    , cgQuotaUser
-    , cgPrettyPrint
     , cgCurrencyCode
     , cgUploadProtocol
     , cgCompanyId
@@ -46,16 +44,13 @@ module Network.Google.Resource.Partners.Companies.Get
     , cgAddress
     , cgRequestMetadataPartnersSessionId
     , cgBearerToken
-    , cgKey
     , cgRequestMetadataLocale
     , cgView
     , cgRequestMetadataExperimentIds
     , cgRequestMetadataUserOverridesIPAddress
     , cgRequestMetadataTrafficSourceTrafficSubId
-    , cgOAuthToken
     , cgRequestMetadataUserOverridesUserId
     , cgRequestMetadataTrafficSourceTrafficSourceId
-    , cgFields
     , cgCallback
     ) where
 
@@ -101,27 +96,14 @@ type CompaniesGetResource =
                                              Text
                                              :>
                                              QueryParam "callback" Text :>
-                                               QueryParam "quotaUser" Text :>
-                                                 QueryParam "prettyPrint" Bool
-                                                   :>
-                                                   QueryParam "fields" Text :>
-                                                     QueryParam "key" AuthKey :>
-                                                       Header "Authorization"
-                                                         OAuthToken
-                                                         :>
-                                                         QueryParam "alt"
-                                                           AltJSON
-                                                           :>
-                                                           Get '[JSON]
-                                                             GetCompanyResponse
+                                               QueryParam "alt" AltJSON :>
+                                                 Get '[JSON] GetCompanyResponse
 
 -- | Gets a company.
 --
 -- /See:/ 'companiesGet'' smart constructor.
 data CompaniesGet' = CompaniesGet'
     { _cgXgafv                                       :: !(Maybe Text)
-    , _cgQuotaUser                                   :: !(Maybe Text)
-    , _cgPrettyPrint                                 :: !Bool
     , _cgCurrencyCode                                :: !(Maybe Text)
     , _cgUploadProtocol                              :: !(Maybe Text)
     , _cgCompanyId                                   :: !Text
@@ -132,16 +114,13 @@ data CompaniesGet' = CompaniesGet'
     , _cgAddress                                     :: !(Maybe Text)
     , _cgRequestMetadataPartnersSessionId            :: !(Maybe Text)
     , _cgBearerToken                                 :: !(Maybe Text)
-    , _cgKey                                         :: !(Maybe AuthKey)
     , _cgRequestMetadataLocale                       :: !(Maybe Text)
     , _cgView                                        :: !(Maybe Text)
     , _cgRequestMetadataExperimentIds                :: !(Maybe [Text])
     , _cgRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
     , _cgRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _cgOAuthToken                                  :: !(Maybe OAuthToken)
     , _cgRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _cgRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _cgFields                                      :: !(Maybe Text)
     , _cgCallback                                    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -150,10 +129,6 @@ data CompaniesGet' = CompaniesGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cgXgafv'
---
--- * 'cgQuotaUser'
---
--- * 'cgPrettyPrint'
 --
 -- * 'cgCurrencyCode'
 --
@@ -175,8 +150,6 @@ data CompaniesGet' = CompaniesGet'
 --
 -- * 'cgBearerToken'
 --
--- * 'cgKey'
---
 -- * 'cgRequestMetadataLocale'
 --
 -- * 'cgView'
@@ -187,13 +160,9 @@ data CompaniesGet' = CompaniesGet'
 --
 -- * 'cgRequestMetadataTrafficSourceTrafficSubId'
 --
--- * 'cgOAuthToken'
---
 -- * 'cgRequestMetadataUserOverridesUserId'
 --
 -- * 'cgRequestMetadataTrafficSourceTrafficSourceId'
---
--- * 'cgFields'
 --
 -- * 'cgCallback'
 companiesGet'
@@ -202,8 +171,6 @@ companiesGet'
 companiesGet' pCgCompanyId_ =
     CompaniesGet'
     { _cgXgafv = Nothing
-    , _cgQuotaUser = Nothing
-    , _cgPrettyPrint = True
     , _cgCurrencyCode = Nothing
     , _cgUploadProtocol = Nothing
     , _cgCompanyId = pCgCompanyId_
@@ -214,35 +181,19 @@ companiesGet' pCgCompanyId_ =
     , _cgAddress = Nothing
     , _cgRequestMetadataPartnersSessionId = Nothing
     , _cgBearerToken = Nothing
-    , _cgKey = Nothing
     , _cgRequestMetadataLocale = Nothing
     , _cgView = Nothing
     , _cgRequestMetadataExperimentIds = Nothing
     , _cgRequestMetadataUserOverridesIPAddress = Nothing
     , _cgRequestMetadataTrafficSourceTrafficSubId = Nothing
-    , _cgOAuthToken = Nothing
     , _cgRequestMetadataUserOverridesUserId = Nothing
     , _cgRequestMetadataTrafficSourceTrafficSourceId = Nothing
-    , _cgFields = Nothing
     , _cgCallback = Nothing
     }
 
 -- | V1 error format.
 cgXgafv :: Lens' CompaniesGet' (Maybe Text)
 cgXgafv = lens _cgXgafv (\ s a -> s{_cgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-cgQuotaUser :: Lens' CompaniesGet' (Maybe Text)
-cgQuotaUser
-  = lens _cgQuotaUser (\ s a -> s{_cgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cgPrettyPrint :: Lens' CompaniesGet' Bool
-cgPrettyPrint
-  = lens _cgPrettyPrint
-      (\ s a -> s{_cgPrettyPrint = a})
 
 -- | If the company\'s budget is in a different currency code than this one,
 -- then the converted budget is converted to this currency code.
@@ -304,12 +255,6 @@ cgBearerToken
   = lens _cgBearerToken
       (\ s a -> s{_cgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cgKey :: Lens' CompaniesGet' (Maybe AuthKey)
-cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
-
 -- | Locale to use for the current request.
 cgRequestMetadataLocale :: Lens' CompaniesGet' (Maybe Text)
 cgRequestMetadataLocale
@@ -345,11 +290,6 @@ cgRequestMetadataTrafficSourceTrafficSubId
       (\ s a ->
          s{_cgRequestMetadataTrafficSourceTrafficSubId = a})
 
--- | OAuth 2.0 token for the current user.
-cgOAuthToken :: Lens' CompaniesGet' (Maybe OAuthToken)
-cgOAuthToken
-  = lens _cgOAuthToken (\ s a -> s{_cgOAuthToken = a})
-
 -- | Logged-in user ID to impersonate instead of the user\'s ID.
 cgRequestMetadataUserOverridesUserId :: Lens' CompaniesGet' (Maybe Text)
 cgRequestMetadataUserOverridesUserId
@@ -366,23 +306,14 @@ cgRequestMetadataTrafficSourceTrafficSourceId
          s{_cgRequestMetadataTrafficSourceTrafficSourceId =
              a})
 
--- | Selector specifying which fields to include in a partial response.
-cgFields :: Lens' CompaniesGet' (Maybe Text)
-cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
-
 -- | JSONP
 cgCallback :: Lens' CompaniesGet' (Maybe Text)
 cgCallback
   = lens _cgCallback (\ s a -> s{_cgCallback = a})
 
-instance GoogleAuth CompaniesGet' where
-        _AuthKey = cgKey . _Just
-        _AuthToken = cgOAuthToken . _Just
-
 instance GoogleRequest CompaniesGet' where
         type Rs CompaniesGet' = GetCompanyResponse
-        request = requestWith partnersRequest
-        requestWith rq CompaniesGet'{..}
+        requestClient CompaniesGet'{..}
           = go _cgCompanyId _cgXgafv _cgCurrencyCode
               _cgUploadProtocol
               _cgOrderBy
@@ -400,12 +331,8 @@ instance GoogleRequest CompaniesGet' where
               _cgRequestMetadataUserOverridesUserId
               _cgRequestMetadataTrafficSourceTrafficSourceId
               _cgCallback
-              _cgQuotaUser
-              (Just _cgPrettyPrint)
-              _cgFields
-              _cgKey
-              _cgOAuthToken
               (Just AltJSON)
+              partnersService
           where go
-                  = clientBuild (Proxy :: Proxy CompaniesGetResource)
-                      rq
+                  = buildClient (Proxy :: Proxy CompaniesGetResource)
+                      mempty

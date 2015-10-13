@@ -19,8 +19,11 @@
 -- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference>
 module Network.Google.DeploymentManager
     (
+    -- * Service Configuration
+      deploymentManagerService
+
     -- * API Declaration
-      DeploymentManagerAPI
+    , DeploymentManagerAPI
 
     -- * Resources
 

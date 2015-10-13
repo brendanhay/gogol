@@ -33,14 +33,8 @@ module Network.Google.Resource.Prediction.HostedModels.Predict
     , HostedModelsPredict'
 
     -- * Request Lenses
-    , hmpQuotaUser
-    , hmpPrettyPrint
     , hmpProject
-    , hmpUserIP
     , hmpPayload
-    , hmpKey
-    , hmpOAuthToken
-    , hmpFields
     , hmpHostedModelName
     ) where
 
@@ -54,27 +48,15 @@ type HostedModelsPredictResource =
        "hostedmodels" :>
          Capture "hostedModelName" Text :>
            "predict" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Input :> Post '[JSON] Output
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Input :> Post '[JSON] Output
 
 -- | Submit input and request an output against a hosted model.
 --
 -- /See:/ 'hostedModelsPredict'' smart constructor.
 data HostedModelsPredict' = HostedModelsPredict'
-    { _hmpQuotaUser       :: !(Maybe Text)
-    , _hmpPrettyPrint     :: !Bool
-    , _hmpProject         :: !Text
-    , _hmpUserIP          :: !(Maybe Text)
+    { _hmpProject         :: !Text
     , _hmpPayload         :: !Input
-    , _hmpKey             :: !(Maybe AuthKey)
-    , _hmpOAuthToken      :: !(Maybe OAuthToken)
-    , _hmpFields          :: !(Maybe Text)
     , _hmpHostedModelName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -82,21 +64,9 @@ data HostedModelsPredict' = HostedModelsPredict'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'hmpQuotaUser'
---
--- * 'hmpPrettyPrint'
---
 -- * 'hmpProject'
 --
--- * 'hmpUserIP'
---
 -- * 'hmpPayload'
---
--- * 'hmpKey'
---
--- * 'hmpOAuthToken'
---
--- * 'hmpFields'
 --
 -- * 'hmpHostedModelName'
 hostedModelsPredict'
@@ -106,62 +76,20 @@ hostedModelsPredict'
     -> HostedModelsPredict'
 hostedModelsPredict' pHmpProject_ pHmpPayload_ pHmpHostedModelName_ =
     HostedModelsPredict'
-    { _hmpQuotaUser = Nothing
-    , _hmpPrettyPrint = True
-    , _hmpProject = pHmpProject_
-    , _hmpUserIP = Nothing
+    { _hmpProject = pHmpProject_
     , _hmpPayload = pHmpPayload_
-    , _hmpKey = Nothing
-    , _hmpOAuthToken = Nothing
-    , _hmpFields = Nothing
     , _hmpHostedModelName = pHmpHostedModelName_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-hmpQuotaUser :: Lens' HostedModelsPredict' (Maybe Text)
-hmpQuotaUser
-  = lens _hmpQuotaUser (\ s a -> s{_hmpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-hmpPrettyPrint :: Lens' HostedModelsPredict' Bool
-hmpPrettyPrint
-  = lens _hmpPrettyPrint
-      (\ s a -> s{_hmpPrettyPrint = a})
 
 -- | The project associated with the model.
 hmpProject :: Lens' HostedModelsPredict' Text
 hmpProject
   = lens _hmpProject (\ s a -> s{_hmpProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-hmpUserIP :: Lens' HostedModelsPredict' (Maybe Text)
-hmpUserIP
-  = lens _hmpUserIP (\ s a -> s{_hmpUserIP = a})
-
 -- | Multipart request metadata.
 hmpPayload :: Lens' HostedModelsPredict' Input
 hmpPayload
   = lens _hmpPayload (\ s a -> s{_hmpPayload = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-hmpKey :: Lens' HostedModelsPredict' (Maybe AuthKey)
-hmpKey = lens _hmpKey (\ s a -> s{_hmpKey = a})
-
--- | OAuth 2.0 token for the current user.
-hmpOAuthToken :: Lens' HostedModelsPredict' (Maybe OAuthToken)
-hmpOAuthToken
-  = lens _hmpOAuthToken
-      (\ s a -> s{_hmpOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-hmpFields :: Lens' HostedModelsPredict' (Maybe Text)
-hmpFields
-  = lens _hmpFields (\ s a -> s{_hmpFields = a})
 
 -- | The name of a hosted model.
 hmpHostedModelName :: Lens' HostedModelsPredict' Text
@@ -169,23 +97,13 @@ hmpHostedModelName
   = lens _hmpHostedModelName
       (\ s a -> s{_hmpHostedModelName = a})
 
-instance GoogleAuth HostedModelsPredict' where
-        _AuthKey = hmpKey . _Just
-        _AuthToken = hmpOAuthToken . _Just
-
 instance GoogleRequest HostedModelsPredict' where
         type Rs HostedModelsPredict' = Output
-        request = requestWith predictionRequest
-        requestWith rq HostedModelsPredict'{..}
-          = go _hmpProject _hmpHostedModelName _hmpQuotaUser
-              (Just _hmpPrettyPrint)
-              _hmpUserIP
-              _hmpFields
-              _hmpKey
-              _hmpOAuthToken
-              (Just AltJSON)
+        requestClient HostedModelsPredict'{..}
+          = go _hmpProject _hmpHostedModelName (Just AltJSON)
               _hmpPayload
+              predictionService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy HostedModelsPredictResource)
-                      rq
+                      mempty

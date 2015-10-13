@@ -33,22 +33,16 @@ module Network.Google.Resource.YouTubeAnalytics.Reports.Query
     , ReportsQuery'
 
     -- * Request Lenses
-    , rqQuotaUser
     , rqMetrics
-    , rqPrettyPrint
-    , rqUserIP
     , rqFilters
     , rqIds
     , rqEndDate
-    , rqKey
     , rqCurrency
     , rqSort
     , rqDimensions
-    , rqOAuthToken
     , rqStartIndex
     , rqMaxResults
     , rqStartDate
-    , rqFields
     ) where
 
 import           Network.Google.Prelude
@@ -68,48 +62,29 @@ type ReportsQueryResource =
                      QueryParam "dimensions" Text :>
                        QueryParam "start-index" Int32 :>
                          QueryParam "max-results" Int32 :>
-                           QueryParam "quotaUser" Text :>
-                             QueryParam "prettyPrint" Bool :>
-                               QueryParam "userIp" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] ResultTable
+                           QueryParam "alt" AltJSON :> Get '[JSON] ResultTable
 
 -- | Retrieve your YouTube Analytics reports.
 --
 -- /See:/ 'reportsQuery'' smart constructor.
 data ReportsQuery' = ReportsQuery'
-    { _rqQuotaUser   :: !(Maybe Text)
-    , _rqMetrics     :: !Text
-    , _rqPrettyPrint :: !Bool
-    , _rqUserIP      :: !(Maybe Text)
-    , _rqFilters     :: !(Maybe Text)
-    , _rqIds         :: !Text
-    , _rqEndDate     :: !Text
-    , _rqKey         :: !(Maybe AuthKey)
-    , _rqCurrency    :: !(Maybe Text)
-    , _rqSort        :: !(Maybe Text)
-    , _rqDimensions  :: !(Maybe Text)
-    , _rqOAuthToken  :: !(Maybe OAuthToken)
-    , _rqStartIndex  :: !(Maybe Int32)
-    , _rqMaxResults  :: !(Maybe Int32)
-    , _rqStartDate   :: !Text
-    , _rqFields      :: !(Maybe Text)
+    { _rqMetrics    :: !Text
+    , _rqFilters    :: !(Maybe Text)
+    , _rqIds        :: !Text
+    , _rqEndDate    :: !Text
+    , _rqCurrency   :: !(Maybe Text)
+    , _rqSort       :: !(Maybe Text)
+    , _rqDimensions :: !(Maybe Text)
+    , _rqStartIndex :: !(Maybe Int32)
+    , _rqMaxResults :: !(Maybe Int32)
+    , _rqStartDate  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsQuery'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rqQuotaUser'
---
 -- * 'rqMetrics'
---
--- * 'rqPrettyPrint'
---
--- * 'rqUserIP'
 --
 -- * 'rqFilters'
 --
@@ -117,23 +92,17 @@ data ReportsQuery' = ReportsQuery'
 --
 -- * 'rqEndDate'
 --
--- * 'rqKey'
---
 -- * 'rqCurrency'
 --
 -- * 'rqSort'
 --
 -- * 'rqDimensions'
 --
--- * 'rqOAuthToken'
---
 -- * 'rqStartIndex'
 --
 -- * 'rqMaxResults'
 --
 -- * 'rqStartDate'
---
--- * 'rqFields'
 reportsQuery'
     :: Text -- ^ 'metrics'
     -> Text -- ^ 'ids'
@@ -142,30 +111,17 @@ reportsQuery'
     -> ReportsQuery'
 reportsQuery' pRqMetrics_ pRqIds_ pRqEndDate_ pRqStartDate_ =
     ReportsQuery'
-    { _rqQuotaUser = Nothing
-    , _rqMetrics = pRqMetrics_
-    , _rqPrettyPrint = True
-    , _rqUserIP = Nothing
+    { _rqMetrics = pRqMetrics_
     , _rqFilters = Nothing
     , _rqIds = pRqIds_
     , _rqEndDate = pRqEndDate_
-    , _rqKey = Nothing
     , _rqCurrency = Nothing
     , _rqSort = Nothing
     , _rqDimensions = Nothing
-    , _rqOAuthToken = Nothing
     , _rqStartIndex = Nothing
     , _rqMaxResults = Nothing
     , _rqStartDate = pRqStartDate_
-    , _rqFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-rqQuotaUser :: Lens' ReportsQuery' (Maybe Text)
-rqQuotaUser
-  = lens _rqQuotaUser (\ s a -> s{_rqQuotaUser = a})
 
 -- | A comma-separated list of YouTube Analytics metrics, such as views or
 -- likes,dislikes. See the Available Reports document for a list of the
@@ -174,17 +130,6 @@ rqQuotaUser
 rqMetrics :: Lens' ReportsQuery' Text
 rqMetrics
   = lens _rqMetrics (\ s a -> s{_rqMetrics = a})
-
--- | Returns response with indentations and line breaks.
-rqPrettyPrint :: Lens' ReportsQuery' Bool
-rqPrettyPrint
-  = lens _rqPrettyPrint
-      (\ s a -> s{_rqPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rqUserIP :: Lens' ReportsQuery' (Maybe Text)
-rqUserIP = lens _rqUserIP (\ s a -> s{_rqUserIP = a})
 
 -- | A list of filters that should be applied when retrieving YouTube
 -- Analytics data. The Available Reports document identifies the dimensions
@@ -214,12 +159,6 @@ rqEndDate :: Lens' ReportsQuery' Text
 rqEndDate
   = lens _rqEndDate (\ s a -> s{_rqEndDate = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rqKey :: Lens' ReportsQuery' (Maybe AuthKey)
-rqKey = lens _rqKey (\ s a -> s{_rqKey = a})
-
 -- | The currency to which financial metrics should be converted. The default
 -- is US Dollar (USD). If the result contains no financial metrics, this
 -- flag will be ignored. Responds with an error if the specified currency
@@ -242,11 +181,6 @@ rqDimensions :: Lens' ReportsQuery' (Maybe Text)
 rqDimensions
   = lens _rqDimensions (\ s a -> s{_rqDimensions = a})
 
--- | OAuth 2.0 token for the current user.
-rqOAuthToken :: Lens' ReportsQuery' (Maybe OAuthToken)
-rqOAuthToken
-  = lens _rqOAuthToken (\ s a -> s{_rqOAuthToken = a})
-
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter (one-based,
 -- inclusive).
@@ -265,18 +199,9 @@ rqStartDate :: Lens' ReportsQuery' Text
 rqStartDate
   = lens _rqStartDate (\ s a -> s{_rqStartDate = a})
 
--- | Selector specifying which fields to include in a partial response.
-rqFields :: Lens' ReportsQuery' (Maybe Text)
-rqFields = lens _rqFields (\ s a -> s{_rqFields = a})
-
-instance GoogleAuth ReportsQuery' where
-        _AuthKey = rqKey . _Just
-        _AuthToken = rqOAuthToken . _Just
-
 instance GoogleRequest ReportsQuery' where
         type Rs ReportsQuery' = ResultTable
-        request = requestWith youTubeAnalyticsRequest
-        requestWith rq ReportsQuery'{..}
+        requestClient ReportsQuery'{..}
           = go (Just _rqIds) (Just _rqStartDate)
               (Just _rqEndDate)
               (Just _rqMetrics)
@@ -286,13 +211,8 @@ instance GoogleRequest ReportsQuery' where
               _rqDimensions
               _rqStartIndex
               _rqMaxResults
-              _rqQuotaUser
-              (Just _rqPrettyPrint)
-              _rqUserIP
-              _rqFields
-              _rqKey
-              _rqOAuthToken
               (Just AltJSON)
+              youTubeAnalyticsService
           where go
-                  = clientBuild (Proxy :: Proxy ReportsQueryResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ReportsQueryResource)
+                      mempty

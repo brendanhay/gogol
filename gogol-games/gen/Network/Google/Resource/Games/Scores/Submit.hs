@@ -33,16 +33,10 @@ module Network.Google.Resource.Games.Scores.Submit
     , ScoresSubmit'
 
     -- * Request Lenses
-    , ssQuotaUser
-    , ssPrettyPrint
     , ssScoreTag
     , ssScore
-    , ssUserIP
     , ssLeaderboardId
-    , ssKey
     , ssLanguage
-    , ssOAuthToken
-    , ssFields
     ) where
 
 import           Network.Google.Games.Types
@@ -57,84 +51,41 @@ type ScoresSubmitResource =
            QueryParam "score" Int64 :>
              QueryParam "scoreTag" Text :>
                QueryParam "language" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :>
-                               Post '[JSON] PlayerScoreResponse
+                 QueryParam "alt" AltJSON :>
+                   Post '[JSON] PlayerScoreResponse
 
 -- | Submits a score to the specified leaderboard.
 --
 -- /See:/ 'scoresSubmit'' smart constructor.
 data ScoresSubmit' = ScoresSubmit'
-    { _ssQuotaUser     :: !(Maybe Text)
-    , _ssPrettyPrint   :: !Bool
-    , _ssScoreTag      :: !(Maybe Text)
+    { _ssScoreTag      :: !(Maybe Text)
     , _ssScore         :: !Int64
-    , _ssUserIP        :: !(Maybe Text)
     , _ssLeaderboardId :: !Text
-    , _ssKey           :: !(Maybe AuthKey)
     , _ssLanguage      :: !(Maybe Text)
-    , _ssOAuthToken    :: !(Maybe OAuthToken)
-    , _ssFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresSubmit'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ssQuotaUser'
---
--- * 'ssPrettyPrint'
---
 -- * 'ssScoreTag'
 --
 -- * 'ssScore'
 --
--- * 'ssUserIP'
---
 -- * 'ssLeaderboardId'
 --
--- * 'ssKey'
---
 -- * 'ssLanguage'
---
--- * 'ssOAuthToken'
---
--- * 'ssFields'
 scoresSubmit'
     :: Int64 -- ^ 'score'
     -> Text -- ^ 'leaderboardId'
     -> ScoresSubmit'
 scoresSubmit' pSsScore_ pSsLeaderboardId_ =
     ScoresSubmit'
-    { _ssQuotaUser = Nothing
-    , _ssPrettyPrint = True
-    , _ssScoreTag = Nothing
+    { _ssScoreTag = Nothing
     , _ssScore = pSsScore_
-    , _ssUserIP = Nothing
     , _ssLeaderboardId = pSsLeaderboardId_
-    , _ssKey = Nothing
     , _ssLanguage = Nothing
-    , _ssOAuthToken = Nothing
-    , _ssFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ssQuotaUser :: Lens' ScoresSubmit' (Maybe Text)
-ssQuotaUser
-  = lens _ssQuotaUser (\ s a -> s{_ssQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ssPrettyPrint :: Lens' ScoresSubmit' Bool
-ssPrettyPrint
-  = lens _ssPrettyPrint
-      (\ s a -> s{_ssPrettyPrint = a})
 
 -- | Additional information about the score you\'re submitting. Values must
 -- contain no more than 64 URI-safe characters as defined by section 2.3 of
@@ -152,54 +103,24 @@ ssScoreTag
 ssScore :: Lens' ScoresSubmit' Int64
 ssScore = lens _ssScore (\ s a -> s{_ssScore = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ssUserIP :: Lens' ScoresSubmit' (Maybe Text)
-ssUserIP = lens _ssUserIP (\ s a -> s{_ssUserIP = a})
-
 -- | The ID of the leaderboard.
 ssLeaderboardId :: Lens' ScoresSubmit' Text
 ssLeaderboardId
   = lens _ssLeaderboardId
       (\ s a -> s{_ssLeaderboardId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ssKey :: Lens' ScoresSubmit' (Maybe AuthKey)
-ssKey = lens _ssKey (\ s a -> s{_ssKey = a})
-
 -- | The preferred language to use for strings returned by this method.
 ssLanguage :: Lens' ScoresSubmit' (Maybe Text)
 ssLanguage
   = lens _ssLanguage (\ s a -> s{_ssLanguage = a})
 
--- | OAuth 2.0 token for the current user.
-ssOAuthToken :: Lens' ScoresSubmit' (Maybe OAuthToken)
-ssOAuthToken
-  = lens _ssOAuthToken (\ s a -> s{_ssOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ssFields :: Lens' ScoresSubmit' (Maybe Text)
-ssFields = lens _ssFields (\ s a -> s{_ssFields = a})
-
-instance GoogleAuth ScoresSubmit' where
-        _AuthKey = ssKey . _Just
-        _AuthToken = ssOAuthToken . _Just
-
 instance GoogleRequest ScoresSubmit' where
         type Rs ScoresSubmit' = PlayerScoreResponse
-        request = requestWith gamesRequest
-        requestWith rq ScoresSubmit'{..}
+        requestClient ScoresSubmit'{..}
           = go _ssLeaderboardId (Just _ssScore) _ssScoreTag
               _ssLanguage
-              _ssQuotaUser
-              (Just _ssPrettyPrint)
-              _ssUserIP
-              _ssFields
-              _ssKey
-              _ssOAuthToken
               (Just AltJSON)
+              gamesService
           where go
-                  = clientBuild (Proxy :: Proxy ScoresSubmitResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ScoresSubmitResource)
+                      mempty

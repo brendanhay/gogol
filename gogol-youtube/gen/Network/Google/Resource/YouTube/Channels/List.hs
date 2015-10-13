@@ -34,23 +34,17 @@ module Network.Google.Resource.YouTube.Channels.List
     , ChannelsList'
 
     -- * Request Lenses
-    , clQuotaUser
     , clPart
-    , clPrettyPrint
     , clMine
     , clForUsername
-    , clUserIP
     , clHl
     , clOnBehalfOfContentOwner
-    , clKey
     , clCategoryId
     , clId
     , clMySubscribers
     , clPageToken
-    , clOAuthToken
     , clManagedByMe
     , clMaxResults
-    , clFields
     ) where
 
 import           Network.Google.Prelude
@@ -71,60 +65,40 @@ type ChannelsListResource =
                        QueryParam "pageToken" Text :>
                          QueryParam "managedByMe" Bool :>
                            QueryParam "maxResults" Word32 :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "userIp" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] ChannelListResponse
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ChannelListResponse
 
 -- | Returns a collection of zero or more channel resources that match the
 -- request criteria.
 --
 -- /See:/ 'channelsList'' smart constructor.
 data ChannelsList' = ChannelsList'
-    { _clQuotaUser              :: !(Maybe Text)
-    , _clPart                   :: !Text
-    , _clPrettyPrint            :: !Bool
+    { _clPart                   :: !Text
     , _clMine                   :: !(Maybe Bool)
     , _clForUsername            :: !(Maybe Text)
-    , _clUserIP                 :: !(Maybe Text)
     , _clHl                     :: !(Maybe Text)
     , _clOnBehalfOfContentOwner :: !(Maybe Text)
-    , _clKey                    :: !(Maybe AuthKey)
     , _clCategoryId             :: !(Maybe Text)
     , _clId                     :: !(Maybe Text)
     , _clMySubscribers          :: !(Maybe Bool)
     , _clPageToken              :: !(Maybe Text)
-    , _clOAuthToken             :: !(Maybe OAuthToken)
     , _clManagedByMe            :: !(Maybe Bool)
     , _clMaxResults             :: !Word32
-    , _clFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'clQuotaUser'
---
 -- * 'clPart'
---
--- * 'clPrettyPrint'
 --
 -- * 'clMine'
 --
 -- * 'clForUsername'
 --
--- * 'clUserIP'
---
 -- * 'clHl'
 --
 -- * 'clOnBehalfOfContentOwner'
---
--- * 'clKey'
 --
 -- * 'clCategoryId'
 --
@@ -134,43 +108,26 @@ data ChannelsList' = ChannelsList'
 --
 -- * 'clPageToken'
 --
--- * 'clOAuthToken'
---
 -- * 'clManagedByMe'
 --
 -- * 'clMaxResults'
---
--- * 'clFields'
 channelsList'
     :: Text -- ^ 'part'
     -> ChannelsList'
 channelsList' pClPart_ =
     ChannelsList'
-    { _clQuotaUser = Nothing
-    , _clPart = pClPart_
-    , _clPrettyPrint = True
+    { _clPart = pClPart_
     , _clMine = Nothing
     , _clForUsername = Nothing
-    , _clUserIP = Nothing
     , _clHl = Nothing
     , _clOnBehalfOfContentOwner = Nothing
-    , _clKey = Nothing
     , _clCategoryId = Nothing
     , _clId = Nothing
     , _clMySubscribers = Nothing
     , _clPageToken = Nothing
-    , _clOAuthToken = Nothing
     , _clManagedByMe = Nothing
     , _clMaxResults = 5
-    , _clFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-clQuotaUser :: Lens' ChannelsList' (Maybe Text)
-clQuotaUser
-  = lens _clQuotaUser (\ s a -> s{_clQuotaUser = a})
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- channel resource properties that the API response will include. If the
@@ -181,12 +138,6 @@ clQuotaUser
 -- the API response will also contain all of those nested properties.
 clPart :: Lens' ChannelsList' Text
 clPart = lens _clPart (\ s a -> s{_clPart = a})
-
--- | Returns response with indentations and line breaks.
-clPrettyPrint :: Lens' ChannelsList' Bool
-clPrettyPrint
-  = lens _clPrettyPrint
-      (\ s a -> s{_clPrettyPrint = a})
 
 -- | Set this parameter\'s value to true to instruct the API to only return
 -- channels owned by the authenticated user.
@@ -199,11 +150,6 @@ clForUsername :: Lens' ChannelsList' (Maybe Text)
 clForUsername
   = lens _clForUsername
       (\ s a -> s{_clForUsername = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-clUserIP :: Lens' ChannelsList' (Maybe Text)
-clUserIP = lens _clUserIP (\ s a -> s{_clUserIP = a})
 
 -- | The hl parameter should be used for filter out the properties that are
 -- not in the given language. Used for the brandingSettings part.
@@ -224,12 +170,6 @@ clOnBehalfOfContentOwner :: Lens' ChannelsList' (Maybe Text)
 clOnBehalfOfContentOwner
   = lens _clOnBehalfOfContentOwner
       (\ s a -> s{_clOnBehalfOfContentOwner = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-clKey :: Lens' ChannelsList' (Maybe AuthKey)
-clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | The categoryId parameter specifies a YouTube guide category, thereby
 -- requesting YouTube channels associated with that category.
@@ -257,11 +197,6 @@ clPageToken :: Lens' ChannelsList' (Maybe Text)
 clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-clOAuthToken :: Lens' ChannelsList' (Maybe OAuthToken)
-clOAuthToken
-  = lens _clOAuthToken (\ s a -> s{_clOAuthToken = a})
-
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. Set this parameter\'s value to true to instruct the API to
 -- only return channels managed by the content owner that the
@@ -279,18 +214,9 @@ clMaxResults :: Lens' ChannelsList' Word32
 clMaxResults
   = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-clFields :: Lens' ChannelsList' (Maybe Text)
-clFields = lens _clFields (\ s a -> s{_clFields = a})
-
-instance GoogleAuth ChannelsList' where
-        _AuthKey = clKey . _Just
-        _AuthToken = clOAuthToken . _Just
-
 instance GoogleRequest ChannelsList' where
         type Rs ChannelsList' = ChannelListResponse
-        request = requestWith youTubeRequest
-        requestWith rq ChannelsList'{..}
+        requestClient ChannelsList'{..}
           = go (Just _clPart) _clMine _clForUsername _clHl
               _clOnBehalfOfContentOwner
               _clCategoryId
@@ -299,13 +225,8 @@ instance GoogleRequest ChannelsList' where
               _clPageToken
               _clManagedByMe
               (Just _clMaxResults)
-              _clQuotaUser
-              (Just _clPrettyPrint)
-              _clUserIP
-              _clFields
-              _clKey
-              _clOAuthToken
               (Just AltJSON)
+              youTubeService
           where go
-                  = clientBuild (Proxy :: Proxy ChannelsListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ChannelsListResource)
+                      mempty

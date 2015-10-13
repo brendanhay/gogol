@@ -35,14 +35,8 @@ module Network.Google.Resource.FusionTables.Query.SQL
 
     -- * Request Lenses
     , qsqlTyped
-    , qsqlQuotaUser
-    , qsqlPrettyPrint
     , qsqlHdrs
-    , qsqlUserIP
-    , qsqlKey
-    , qsqlOAuthToken
     , qsqlSQL
-    , qsqlFields
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -55,41 +49,23 @@ type QuerySQLResource =
        QueryParam "sql" Text :>
          QueryParam "typed" Bool :>
            QueryParam "hdrs" Bool :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Post '[JSON] SQLresponse
+             QueryParam "alt" AltJSON :> Post '[JSON] SQLresponse
        :<|>
        "query" :>
          QueryParam "sql" Text :>
            QueryParam "typed" Bool :>
              QueryParam "hdrs" Bool :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltMedia :>
-                             Post '[OctetStream] Stream
+               QueryParam "alt" AltMedia :>
+                 Post '[OctetStream] Stream
 
 -- | Executes a Fusion Tables SQL statement, which can be any of - SELECT -
 -- INSERT - UPDATE - DELETE - SHOW - DESCRIBE - CREATE statement.
 --
 -- /See:/ 'querySQL'' smart constructor.
 data QuerySQL' = QuerySQL'
-    { _qsqlTyped       :: !(Maybe Bool)
-    , _qsqlQuotaUser   :: !(Maybe Text)
-    , _qsqlPrettyPrint :: !Bool
-    , _qsqlHdrs        :: !(Maybe Bool)
-    , _qsqlUserIP      :: !(Maybe Text)
-    , _qsqlKey         :: !(Maybe AuthKey)
-    , _qsqlOAuthToken  :: !(Maybe OAuthToken)
-    , _qsqlSQL         :: !Text
-    , _qsqlFields      :: !(Maybe Text)
+    { _qsqlTyped :: !(Maybe Bool)
+    , _qsqlHdrs  :: !(Maybe Bool)
+    , _qsqlSQL   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuerySQL'' with the minimum fields required to make a request.
@@ -98,35 +74,17 @@ data QuerySQL' = QuerySQL'
 --
 -- * 'qsqlTyped'
 --
--- * 'qsqlQuotaUser'
---
--- * 'qsqlPrettyPrint'
---
 -- * 'qsqlHdrs'
 --
--- * 'qsqlUserIP'
---
--- * 'qsqlKey'
---
--- * 'qsqlOAuthToken'
---
 -- * 'qsqlSQL'
---
--- * 'qsqlFields'
 querySQL'
     :: Text -- ^ 'sql'
     -> QuerySQL'
 querySQL' pQsqlSQL_ =
     QuerySQL'
     { _qsqlTyped = Nothing
-    , _qsqlQuotaUser = Nothing
-    , _qsqlPrettyPrint = True
     , _qsqlHdrs = Nothing
-    , _qsqlUserIP = Nothing
-    , _qsqlKey = Nothing
-    , _qsqlOAuthToken = Nothing
     , _qsqlSQL = pQsqlSQL_
-    , _qsqlFields = Nothing
     }
 
 -- | Whether typed values are returned in the (JSON) response: numbers for
@@ -135,83 +93,32 @@ qsqlTyped :: Lens' QuerySQL' (Maybe Bool)
 qsqlTyped
   = lens _qsqlTyped (\ s a -> s{_qsqlTyped = a})
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-qsqlQuotaUser :: Lens' QuerySQL' (Maybe Text)
-qsqlQuotaUser
-  = lens _qsqlQuotaUser
-      (\ s a -> s{_qsqlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-qsqlPrettyPrint :: Lens' QuerySQL' Bool
-qsqlPrettyPrint
-  = lens _qsqlPrettyPrint
-      (\ s a -> s{_qsqlPrettyPrint = a})
-
 -- | Whether column names are included in the first row. Default is true.
 qsqlHdrs :: Lens' QuerySQL' (Maybe Bool)
 qsqlHdrs = lens _qsqlHdrs (\ s a -> s{_qsqlHdrs = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-qsqlUserIP :: Lens' QuerySQL' (Maybe Text)
-qsqlUserIP
-  = lens _qsqlUserIP (\ s a -> s{_qsqlUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-qsqlKey :: Lens' QuerySQL' (Maybe AuthKey)
-qsqlKey = lens _qsqlKey (\ s a -> s{_qsqlKey = a})
-
--- | OAuth 2.0 token for the current user.
-qsqlOAuthToken :: Lens' QuerySQL' (Maybe OAuthToken)
-qsqlOAuthToken
-  = lens _qsqlOAuthToken
-      (\ s a -> s{_qsqlOAuthToken = a})
 
 -- | A Fusion Tables SQL statement, which can be any of - SELECT - INSERT -
 -- UPDATE - DELETE - SHOW - DESCRIBE - CREATE
 qsqlSQL :: Lens' QuerySQL' Text
 qsqlSQL = lens _qsqlSQL (\ s a -> s{_qsqlSQL = a})
 
--- | Selector specifying which fields to include in a partial response.
-qsqlFields :: Lens' QuerySQL' (Maybe Text)
-qsqlFields
-  = lens _qsqlFields (\ s a -> s{_qsqlFields = a})
-
-instance GoogleAuth QuerySQL' where
-        _AuthKey = qsqlKey . _Just
-        _AuthToken = qsqlOAuthToken . _Just
-
 instance GoogleRequest QuerySQL' where
         type Rs QuerySQL' = SQLresponse
-        request = requestWith fusionTablesRequest
-        requestWith rq QuerySQL'{..}
+        requestClient QuerySQL'{..}
           = go (Just _qsqlSQL) _qsqlTyped _qsqlHdrs
-              _qsqlQuotaUser
-              (Just _qsqlPrettyPrint)
-              _qsqlUserIP
-              _qsqlFields
-              _qsqlKey
-              _qsqlOAuthToken
               (Just AltJSON)
+              fusionTablesService
           where go :<|> _
-                  = clientBuild (Proxy :: Proxy QuerySQLResource) rq
+                  = buildClient (Proxy :: Proxy QuerySQLResource)
+                      mempty
 
 instance GoogleRequest (MediaDownload QuerySQL')
          where
         type Rs (MediaDownload QuerySQL') = Stream
-        request = requestWith fusionTablesRequest
-        requestWith rq (MediaDownload QuerySQL'{..})
+        requestClient (MediaDownload QuerySQL'{..})
           = go (Just _qsqlSQL) _qsqlTyped _qsqlHdrs
-              _qsqlQuotaUser
-              (Just _qsqlPrettyPrint)
-              _qsqlUserIP
-              _qsqlFields
-              _qsqlKey
-              _qsqlOAuthToken
               (Just AltMedia)
+              fusionTablesService
           where _ :<|> go
-                  = clientBuild (Proxy :: Proxy QuerySQLResource) rq
+                  = buildClient (Proxy :: Proxy QuerySQLResource)
+                      mempty

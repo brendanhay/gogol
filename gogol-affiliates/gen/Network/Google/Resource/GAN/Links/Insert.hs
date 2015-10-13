@@ -33,15 +33,9 @@ module Network.Google.Resource.GAN.Links.Insert
     , LinksInsert'
 
     -- * Request Lenses
-    , liQuotaUser
-    , liPrettyPrint
-    , liUserIP
     , liPayload
     , liRoleId
     , liRole
-    , liKey
-    , liOAuthToken
-    , liFields
     ) where
 
 import           Network.Google.Affiliates.Types
@@ -53,51 +47,27 @@ type LinksInsertResource =
      Capture "role" LinksInsertRole :>
        Capture "roleId" Text :>
          "link" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Link :> Post '[JSON] Link
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] Link :> Post '[JSON] Link
 
 -- | Inserts a new link.
 --
 -- /See:/ 'linksInsert'' smart constructor.
 data LinksInsert' = LinksInsert'
-    { _liQuotaUser   :: !(Maybe Text)
-    , _liPrettyPrint :: !Bool
-    , _liUserIP      :: !(Maybe Text)
-    , _liPayload     :: !Link
-    , _liRoleId      :: !Text
-    , _liRole        :: !LinksInsertRole
-    , _liKey         :: !(Maybe AuthKey)
-    , _liOAuthToken  :: !(Maybe OAuthToken)
-    , _liFields      :: !(Maybe Text)
+    { _liPayload :: !Link
+    , _liRoleId  :: !Text
+    , _liRole    :: !LinksInsertRole
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinksInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'liQuotaUser'
---
--- * 'liPrettyPrint'
---
--- * 'liUserIP'
---
 -- * 'liPayload'
 --
 -- * 'liRoleId'
 --
 -- * 'liRole'
---
--- * 'liKey'
---
--- * 'liOAuthToken'
---
--- * 'liFields'
 linksInsert'
     :: Link -- ^ 'payload'
     -> Text -- ^ 'roleId'
@@ -105,34 +75,10 @@ linksInsert'
     -> LinksInsert'
 linksInsert' pLiPayload_ pLiRoleId_ pLiRole_ =
     LinksInsert'
-    { _liQuotaUser = Nothing
-    , _liPrettyPrint = True
-    , _liUserIP = Nothing
-    , _liPayload = pLiPayload_
+    { _liPayload = pLiPayload_
     , _liRoleId = pLiRoleId_
     , _liRole = pLiRole_
-    , _liKey = Nothing
-    , _liOAuthToken = Nothing
-    , _liFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-liQuotaUser :: Lens' LinksInsert' (Maybe Text)
-liQuotaUser
-  = lens _liQuotaUser (\ s a -> s{_liQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-liPrettyPrint :: Lens' LinksInsert' Bool
-liPrettyPrint
-  = lens _liPrettyPrint
-      (\ s a -> s{_liPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-liUserIP :: Lens' LinksInsert' (Maybe Text)
-liUserIP = lens _liUserIP (\ s a -> s{_liUserIP = a})
 
 -- | Multipart request metadata.
 liPayload :: Lens' LinksInsert' Link
@@ -148,36 +94,11 @@ liRoleId = lens _liRoleId (\ s a -> s{_liRoleId = a})
 liRole :: Lens' LinksInsert' LinksInsertRole
 liRole = lens _liRole (\ s a -> s{_liRole = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-liKey :: Lens' LinksInsert' (Maybe AuthKey)
-liKey = lens _liKey (\ s a -> s{_liKey = a})
-
--- | OAuth 2.0 token for the current user.
-liOAuthToken :: Lens' LinksInsert' (Maybe OAuthToken)
-liOAuthToken
-  = lens _liOAuthToken (\ s a -> s{_liOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-liFields :: Lens' LinksInsert' (Maybe Text)
-liFields = lens _liFields (\ s a -> s{_liFields = a})
-
-instance GoogleAuth LinksInsert' where
-        _AuthKey = liKey . _Just
-        _AuthToken = liOAuthToken . _Just
-
 instance GoogleRequest LinksInsert' where
         type Rs LinksInsert' = Link
-        request = requestWith affiliatesRequest
-        requestWith rq LinksInsert'{..}
-          = go _liRole _liRoleId _liQuotaUser
-              (Just _liPrettyPrint)
-              _liUserIP
-              _liFields
-              _liKey
-              _liOAuthToken
-              (Just AltJSON)
-              _liPayload
+        requestClient LinksInsert'{..}
+          = go _liRole _liRoleId (Just AltJSON) _liPayload
+              affiliatesService
           where go
-                  = clientBuild (Proxy :: Proxy LinksInsertResource) rq
+                  = buildClient (Proxy :: Proxy LinksInsertResource)
+                      mempty

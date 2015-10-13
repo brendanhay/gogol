@@ -33,17 +33,11 @@ module Network.Google.Resource.CloudUserAccounts.Groups.List
     , GroupsList'
 
     -- * Request Lenses
-    , glQuotaUser
-    , glPrettyPrint
     , glOrderBy
     , glProject
-    , glUserIP
-    , glKey
     , glFilter
     , glPageToken
-    , glOAuthToken
     , glMaxResults
-    , glFields
     ) where
 
 import           Network.Google.Prelude
@@ -59,86 +53,43 @@ type GroupsListResource =
              QueryParam "filter" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "maxResults" Word32 :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :> Get '[JSON] GroupList
+                   QueryParam "alt" AltJSON :> Get '[JSON] GroupList
 
 -- | Retrieves the list of groups contained within the specified project.
 --
 -- /See:/ 'groupsList'' smart constructor.
 data GroupsList' = GroupsList'
-    { _glQuotaUser   :: !(Maybe Text)
-    , _glPrettyPrint :: !Bool
-    , _glOrderBy     :: !(Maybe Text)
-    , _glProject     :: !Text
-    , _glUserIP      :: !(Maybe Text)
-    , _glKey         :: !(Maybe AuthKey)
-    , _glFilter      :: !(Maybe Text)
-    , _glPageToken   :: !(Maybe Text)
-    , _glOAuthToken  :: !(Maybe OAuthToken)
-    , _glMaxResults  :: !Word32
-    , _glFields      :: !(Maybe Text)
+    { _glOrderBy    :: !(Maybe Text)
+    , _glProject    :: !Text
+    , _glFilter     :: !(Maybe Text)
+    , _glPageToken  :: !(Maybe Text)
+    , _glMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'glQuotaUser'
---
--- * 'glPrettyPrint'
---
 -- * 'glOrderBy'
 --
 -- * 'glProject'
---
--- * 'glUserIP'
---
--- * 'glKey'
 --
 -- * 'glFilter'
 --
 -- * 'glPageToken'
 --
--- * 'glOAuthToken'
---
 -- * 'glMaxResults'
---
--- * 'glFields'
 groupsList'
     :: Text -- ^ 'project'
     -> GroupsList'
 groupsList' pGlProject_ =
     GroupsList'
-    { _glQuotaUser = Nothing
-    , _glPrettyPrint = True
-    , _glOrderBy = Nothing
+    { _glOrderBy = Nothing
     , _glProject = pGlProject_
-    , _glUserIP = Nothing
-    , _glKey = Nothing
     , _glFilter = Nothing
     , _glPageToken = Nothing
-    , _glOAuthToken = Nothing
     , _glMaxResults = 500
-    , _glFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-glQuotaUser :: Lens' GroupsList' (Maybe Text)
-glQuotaUser
-  = lens _glQuotaUser (\ s a -> s{_glQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-glPrettyPrint :: Lens' GroupsList' Bool
-glPrettyPrint
-  = lens _glPrettyPrint
-      (\ s a -> s{_glPrettyPrint = a})
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
@@ -156,17 +107,6 @@ glOrderBy
 glProject :: Lens' GroupsList' Text
 glProject
   = lens _glProject (\ s a -> s{_glProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-glUserIP :: Lens' GroupsList' (Maybe Text)
-glUserIP = lens _glUserIP (\ s a -> s{_glUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-glKey :: Lens' GroupsList' (Maybe AuthKey)
-glKey = lens _glKey (\ s a -> s{_glKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -189,36 +129,18 @@ glPageToken :: Lens' GroupsList' (Maybe Text)
 glPageToken
   = lens _glPageToken (\ s a -> s{_glPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-glOAuthToken :: Lens' GroupsList' (Maybe OAuthToken)
-glOAuthToken
-  = lens _glOAuthToken (\ s a -> s{_glOAuthToken = a})
-
 -- | Maximum count of results to be returned.
 glMaxResults :: Lens' GroupsList' Word32
 glMaxResults
   = lens _glMaxResults (\ s a -> s{_glMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-glFields :: Lens' GroupsList' (Maybe Text)
-glFields = lens _glFields (\ s a -> s{_glFields = a})
-
-instance GoogleAuth GroupsList' where
-        _AuthKey = glKey . _Just
-        _AuthToken = glOAuthToken . _Just
-
 instance GoogleRequest GroupsList' where
         type Rs GroupsList' = GroupList
-        request = requestWith userAccountsRequest
-        requestWith rq GroupsList'{..}
+        requestClient GroupsList'{..}
           = go _glProject _glOrderBy _glFilter _glPageToken
               (Just _glMaxResults)
-              _glQuotaUser
-              (Just _glPrettyPrint)
-              _glUserIP
-              _glFields
-              _glKey
-              _glOAuthToken
               (Just AltJSON)
+              userAccountsService
           where go
-                  = clientBuild (Proxy :: Proxy GroupsListResource) rq
+                  = buildClient (Proxy :: Proxy GroupsListResource)
+                      mempty

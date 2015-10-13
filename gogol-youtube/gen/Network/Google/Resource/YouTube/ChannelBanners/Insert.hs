@@ -41,15 +41,9 @@ module Network.Google.Resource.YouTube.ChannelBanners.Insert
     , ChannelBannersInsert'
 
     -- * Request Lenses
-    , cbiQuotaUser
-    , cbiPrettyPrint
-    , cbiUserIP
     , cbiPayload
     , cbiMedia
     , cbiOnBehalfOfContentOwner
-    , cbiKey
-    , cbiOAuthToken
-    , cbiFields
     ) where
 
 import           Network.Google.Prelude
@@ -61,15 +55,9 @@ type ChannelBannersInsertResource =
      "channelBanners" :>
        "insert" :>
          QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         MultipartRelated '[JSON] ChannelBannerResource Stream
-                           :> Post '[JSON] ChannelBannerResource
+           QueryParam "alt" AltJSON :>
+             MultipartRelated '[JSON] ChannelBannerResource Stream
+               :> Post '[JSON] ChannelBannerResource
 
 -- | Uploads a channel banner image to YouTube. This method represents the
 -- first two steps in a three-step process to update the banner image for a
@@ -83,73 +71,30 @@ type ChannelBannersInsertResource =
 --
 -- /See:/ 'channelBannersInsert'' smart constructor.
 data ChannelBannersInsert' = ChannelBannersInsert'
-    { _cbiQuotaUser              :: !(Maybe Text)
-    , _cbiPrettyPrint            :: !Bool
-    , _cbiUserIP                 :: !(Maybe Text)
-    , _cbiPayload                :: !ChannelBannerResource
+    { _cbiPayload                :: !ChannelBannerResource
     , _cbiMedia                  :: !Stream
     , _cbiOnBehalfOfContentOwner :: !(Maybe Text)
-    , _cbiKey                    :: !(Maybe AuthKey)
-    , _cbiOAuthToken             :: !(Maybe OAuthToken)
-    , _cbiFields                 :: !(Maybe Text)
     }
 
 -- | Creates a value of 'ChannelBannersInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cbiQuotaUser'
---
--- * 'cbiPrettyPrint'
---
--- * 'cbiUserIP'
---
 -- * 'cbiPayload'
 --
 -- * 'cbiMedia'
 --
 -- * 'cbiOnBehalfOfContentOwner'
---
--- * 'cbiKey'
---
--- * 'cbiOAuthToken'
---
--- * 'cbiFields'
 channelBannersInsert'
     :: ChannelBannerResource -- ^ 'payload'
     -> Stream -- ^ 'media'
     -> ChannelBannersInsert'
 channelBannersInsert' pCbiPayload_ pCbiMedia_ =
     ChannelBannersInsert'
-    { _cbiQuotaUser = Nothing
-    , _cbiPrettyPrint = True
-    , _cbiUserIP = Nothing
-    , _cbiPayload = pCbiPayload_
+    { _cbiPayload = pCbiPayload_
     , _cbiMedia = pCbiMedia_
     , _cbiOnBehalfOfContentOwner = Nothing
-    , _cbiKey = Nothing
-    , _cbiOAuthToken = Nothing
-    , _cbiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-cbiQuotaUser :: Lens' ChannelBannersInsert' (Maybe Text)
-cbiQuotaUser
-  = lens _cbiQuotaUser (\ s a -> s{_cbiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cbiPrettyPrint :: Lens' ChannelBannersInsert' Bool
-cbiPrettyPrint
-  = lens _cbiPrettyPrint
-      (\ s a -> s{_cbiPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-cbiUserIP :: Lens' ChannelBannersInsert' (Maybe Text)
-cbiUserIP
-  = lens _cbiUserIP (\ s a -> s{_cbiUserIP = a})
 
 -- | Multipart request metadata.
 cbiPayload :: Lens' ChannelBannersInsert' ChannelBannerResource
@@ -174,41 +119,14 @@ cbiOnBehalfOfContentOwner
   = lens _cbiOnBehalfOfContentOwner
       (\ s a -> s{_cbiOnBehalfOfContentOwner = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cbiKey :: Lens' ChannelBannersInsert' (Maybe AuthKey)
-cbiKey = lens _cbiKey (\ s a -> s{_cbiKey = a})
-
--- | OAuth 2.0 token for the current user.
-cbiOAuthToken :: Lens' ChannelBannersInsert' (Maybe OAuthToken)
-cbiOAuthToken
-  = lens _cbiOAuthToken
-      (\ s a -> s{_cbiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cbiFields :: Lens' ChannelBannersInsert' (Maybe Text)
-cbiFields
-  = lens _cbiFields (\ s a -> s{_cbiFields = a})
-
-instance GoogleAuth ChannelBannersInsert' where
-        _AuthKey = cbiKey . _Just
-        _AuthToken = cbiOAuthToken . _Just
-
 instance GoogleRequest ChannelBannersInsert' where
         type Rs ChannelBannersInsert' = ChannelBannerResource
-        request = requestWith youTubeRequest
-        requestWith rq ChannelBannersInsert'{..}
-          = go _cbiOnBehalfOfContentOwner _cbiQuotaUser
-              (Just _cbiPrettyPrint)
-              _cbiUserIP
-              _cbiFields
-              _cbiKey
-              _cbiOAuthToken
-              (Just AltJSON)
+        requestClient ChannelBannersInsert'{..}
+          = go _cbiOnBehalfOfContentOwner (Just AltJSON)
               _cbiPayload
               _cbiMedia
+              youTubeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ChannelBannersInsertResource)
-                      rq
+                      mempty

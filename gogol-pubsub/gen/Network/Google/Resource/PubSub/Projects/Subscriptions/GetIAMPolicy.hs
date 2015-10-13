@@ -35,17 +35,12 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPolicy
 
     -- * Request Lenses
     , psgipXgafv
-    , psgipQuotaUser
-    , psgipPrettyPrint
     , psgipUploadProtocol
     , psgipPp
     , psgipAccessToken
     , psgipUploadType
     , psgipBearerToken
-    , psgipKey
     , psgipResource
-    , psgipOAuthToken
-    , psgipFields
     , psgipCallback
     ) where
 
@@ -64,12 +59,7 @@ type ProjectsSubscriptionsGetIAMPolicyResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :> Get '[JSON] Policy
+                       QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. Is empty if the policy or
 -- the resource does not exist.
@@ -77,17 +67,12 @@ type ProjectsSubscriptionsGetIAMPolicyResource =
 -- /See:/ 'projectsSubscriptionsGetIAMPolicy'' smart constructor.
 data ProjectsSubscriptionsGetIAMPolicy' = ProjectsSubscriptionsGetIAMPolicy'
     { _psgipXgafv          :: !(Maybe Text)
-    , _psgipQuotaUser      :: !(Maybe Text)
-    , _psgipPrettyPrint    :: !Bool
     , _psgipUploadProtocol :: !(Maybe Text)
     , _psgipPp             :: !Bool
     , _psgipAccessToken    :: !(Maybe Text)
     , _psgipUploadType     :: !(Maybe Text)
     , _psgipBearerToken    :: !(Maybe Text)
-    , _psgipKey            :: !(Maybe AuthKey)
     , _psgipResource       :: !Text
-    , _psgipOAuthToken     :: !(Maybe OAuthToken)
-    , _psgipFields         :: !(Maybe Text)
     , _psgipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -96,10 +81,6 @@ data ProjectsSubscriptionsGetIAMPolicy' = ProjectsSubscriptionsGetIAMPolicy'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'psgipXgafv'
---
--- * 'psgipQuotaUser'
---
--- * 'psgipPrettyPrint'
 --
 -- * 'psgipUploadProtocol'
 --
@@ -111,13 +92,7 @@ data ProjectsSubscriptionsGetIAMPolicy' = ProjectsSubscriptionsGetIAMPolicy'
 --
 -- * 'psgipBearerToken'
 --
--- * 'psgipKey'
---
 -- * 'psgipResource'
---
--- * 'psgipOAuthToken'
---
--- * 'psgipFields'
 --
 -- * 'psgipCallback'
 projectsSubscriptionsGetIAMPolicy'
@@ -126,17 +101,12 @@ projectsSubscriptionsGetIAMPolicy'
 projectsSubscriptionsGetIAMPolicy' pPsgipResource_ =
     ProjectsSubscriptionsGetIAMPolicy'
     { _psgipXgafv = Nothing
-    , _psgipQuotaUser = Nothing
-    , _psgipPrettyPrint = True
     , _psgipUploadProtocol = Nothing
     , _psgipPp = True
     , _psgipAccessToken = Nothing
     , _psgipUploadType = Nothing
     , _psgipBearerToken = Nothing
-    , _psgipKey = Nothing
     , _psgipResource = pPsgipResource_
-    , _psgipOAuthToken = Nothing
-    , _psgipFields = Nothing
     , _psgipCallback = Nothing
     }
 
@@ -144,20 +114,6 @@ projectsSubscriptionsGetIAMPolicy' pPsgipResource_ =
 psgipXgafv :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe Text)
 psgipXgafv
   = lens _psgipXgafv (\ s a -> s{_psgipXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-psgipQuotaUser :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe Text)
-psgipQuotaUser
-  = lens _psgipQuotaUser
-      (\ s a -> s{_psgipQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-psgipPrettyPrint :: Lens' ProjectsSubscriptionsGetIAMPolicy' Bool
-psgipPrettyPrint
-  = lens _psgipPrettyPrint
-      (\ s a -> s{_psgipPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 psgipUploadProtocol :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe Text)
@@ -187,12 +143,6 @@ psgipBearerToken
   = lens _psgipBearerToken
       (\ s a -> s{_psgipBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-psgipKey :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe AuthKey)
-psgipKey = lens _psgipKey (\ s a -> s{_psgipKey = a})
-
 -- | REQUIRED: The resource for which policy is being requested. Resource is
 -- usually specified as a path, such as, projects\/{project}.
 psgipResource :: Lens' ProjectsSubscriptionsGetIAMPolicy' Text
@@ -200,47 +150,26 @@ psgipResource
   = lens _psgipResource
       (\ s a -> s{_psgipResource = a})
 
--- | OAuth 2.0 token for the current user.
-psgipOAuthToken :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe OAuthToken)
-psgipOAuthToken
-  = lens _psgipOAuthToken
-      (\ s a -> s{_psgipOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-psgipFields :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe Text)
-psgipFields
-  = lens _psgipFields (\ s a -> s{_psgipFields = a})
-
 -- | JSONP
 psgipCallback :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe Text)
 psgipCallback
   = lens _psgipCallback
       (\ s a -> s{_psgipCallback = a})
 
-instance GoogleAuth
-         ProjectsSubscriptionsGetIAMPolicy' where
-        _AuthKey = psgipKey . _Just
-        _AuthToken = psgipOAuthToken . _Just
-
 instance GoogleRequest
          ProjectsSubscriptionsGetIAMPolicy' where
         type Rs ProjectsSubscriptionsGetIAMPolicy' = Policy
-        request = requestWith pubSubRequest
-        requestWith rq ProjectsSubscriptionsGetIAMPolicy'{..}
+        requestClient ProjectsSubscriptionsGetIAMPolicy'{..}
           = go _psgipResource _psgipXgafv _psgipUploadProtocol
               (Just _psgipPp)
               _psgipAccessToken
               _psgipUploadType
               _psgipBearerToken
               _psgipCallback
-              _psgipQuotaUser
-              (Just _psgipPrettyPrint)
-              _psgipFields
-              _psgipKey
-              _psgipOAuthToken
               (Just AltJSON)
+              pubSubService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy ProjectsSubscriptionsGetIAMPolicyResource)
-                      rq
+                      mempty

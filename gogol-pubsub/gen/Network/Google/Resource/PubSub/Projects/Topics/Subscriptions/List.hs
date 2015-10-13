@@ -34,19 +34,14 @@ module Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
 
     -- * Request Lenses
     , ptslXgafv
-    , ptslQuotaUser
-    , ptslPrettyPrint
     , ptslUploadProtocol
     , ptslPp
     , ptslAccessToken
     , ptslUploadType
     , ptslTopic
     , ptslBearerToken
-    , ptslKey
     , ptslPageToken
-    , ptslOAuthToken
     , ptslPageSize
-    , ptslFields
     , ptslCallback
     ) where
 
@@ -68,33 +63,22 @@ type ProjectsTopicsSubscriptionsListResource =
                        QueryParam "pageToken" Text :>
                          QueryParam "pageSize" Int32 :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON]
-                                           ListTopicSubscriptionsResponse
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListTopicSubscriptionsResponse
 
 -- | Lists the name of the subscriptions for this topic.
 --
 -- /See:/ 'projectsTopicsSubscriptionsList'' smart constructor.
 data ProjectsTopicsSubscriptionsList' = ProjectsTopicsSubscriptionsList'
     { _ptslXgafv          :: !(Maybe Text)
-    , _ptslQuotaUser      :: !(Maybe Text)
-    , _ptslPrettyPrint    :: !Bool
     , _ptslUploadProtocol :: !(Maybe Text)
     , _ptslPp             :: !Bool
     , _ptslAccessToken    :: !(Maybe Text)
     , _ptslUploadType     :: !(Maybe Text)
     , _ptslTopic          :: !Text
     , _ptslBearerToken    :: !(Maybe Text)
-    , _ptslKey            :: !(Maybe AuthKey)
     , _ptslPageToken      :: !(Maybe Text)
-    , _ptslOAuthToken     :: !(Maybe OAuthToken)
     , _ptslPageSize       :: !(Maybe Int32)
-    , _ptslFields         :: !(Maybe Text)
     , _ptslCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -103,10 +87,6 @@ data ProjectsTopicsSubscriptionsList' = ProjectsTopicsSubscriptionsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ptslXgafv'
---
--- * 'ptslQuotaUser'
---
--- * 'ptslPrettyPrint'
 --
 -- * 'ptslUploadProtocol'
 --
@@ -120,15 +100,9 @@ data ProjectsTopicsSubscriptionsList' = ProjectsTopicsSubscriptionsList'
 --
 -- * 'ptslBearerToken'
 --
--- * 'ptslKey'
---
 -- * 'ptslPageToken'
 --
--- * 'ptslOAuthToken'
---
 -- * 'ptslPageSize'
---
--- * 'ptslFields'
 --
 -- * 'ptslCallback'
 projectsTopicsSubscriptionsList'
@@ -137,19 +111,14 @@ projectsTopicsSubscriptionsList'
 projectsTopicsSubscriptionsList' pPtslTopic_ =
     ProjectsTopicsSubscriptionsList'
     { _ptslXgafv = Nothing
-    , _ptslQuotaUser = Nothing
-    , _ptslPrettyPrint = True
     , _ptslUploadProtocol = Nothing
     , _ptslPp = True
     , _ptslAccessToken = Nothing
     , _ptslUploadType = Nothing
     , _ptslTopic = pPtslTopic_
     , _ptslBearerToken = Nothing
-    , _ptslKey = Nothing
     , _ptslPageToken = Nothing
-    , _ptslOAuthToken = Nothing
     , _ptslPageSize = Nothing
-    , _ptslFields = Nothing
     , _ptslCallback = Nothing
     }
 
@@ -157,20 +126,6 @@ projectsTopicsSubscriptionsList' pPtslTopic_ =
 ptslXgafv :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Text)
 ptslXgafv
   = lens _ptslXgafv (\ s a -> s{_ptslXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ptslQuotaUser :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Text)
-ptslQuotaUser
-  = lens _ptslQuotaUser
-      (\ s a -> s{_ptslQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ptslPrettyPrint :: Lens' ProjectsTopicsSubscriptionsList' Bool
-ptslPrettyPrint
-  = lens _ptslPrettyPrint
-      (\ s a -> s{_ptslPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 ptslUploadProtocol :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Text)
@@ -205,12 +160,6 @@ ptslBearerToken
   = lens _ptslBearerToken
       (\ s a -> s{_ptslBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ptslKey :: Lens' ProjectsTopicsSubscriptionsList' (Maybe AuthKey)
-ptslKey = lens _ptslKey (\ s a -> s{_ptslKey = a})
-
 -- | The value returned by the last ListTopicSubscriptionsResponse; indicates
 -- that this is a continuation of a prior ListTopicSubscriptions call, and
 -- that the system should return the next page of data.
@@ -219,38 +168,21 @@ ptslPageToken
   = lens _ptslPageToken
       (\ s a -> s{_ptslPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-ptslOAuthToken :: Lens' ProjectsTopicsSubscriptionsList' (Maybe OAuthToken)
-ptslOAuthToken
-  = lens _ptslOAuthToken
-      (\ s a -> s{_ptslOAuthToken = a})
-
 -- | Maximum number of subscription names to return.
 ptslPageSize :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Int32)
 ptslPageSize
   = lens _ptslPageSize (\ s a -> s{_ptslPageSize = a})
-
--- | Selector specifying which fields to include in a partial response.
-ptslFields :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Text)
-ptslFields
-  = lens _ptslFields (\ s a -> s{_ptslFields = a})
 
 -- | JSONP
 ptslCallback :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Text)
 ptslCallback
   = lens _ptslCallback (\ s a -> s{_ptslCallback = a})
 
-instance GoogleAuth ProjectsTopicsSubscriptionsList'
-         where
-        _AuthKey = ptslKey . _Just
-        _AuthToken = ptslOAuthToken . _Just
-
 instance GoogleRequest
          ProjectsTopicsSubscriptionsList' where
         type Rs ProjectsTopicsSubscriptionsList' =
              ListTopicSubscriptionsResponse
-        request = requestWith pubSubRequest
-        requestWith rq ProjectsTopicsSubscriptionsList'{..}
+        requestClient ProjectsTopicsSubscriptionsList'{..}
           = go _ptslTopic _ptslXgafv _ptslUploadProtocol
               (Just _ptslPp)
               _ptslAccessToken
@@ -259,14 +191,10 @@ instance GoogleRequest
               _ptslPageToken
               _ptslPageSize
               _ptslCallback
-              _ptslQuotaUser
-              (Just _ptslPrettyPrint)
-              _ptslFields
-              _ptslKey
-              _ptslOAuthToken
               (Just AltJSON)
+              pubSubService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy ProjectsTopicsSubscriptionsListResource)
-                      rq
+                      mempty

@@ -34,18 +34,13 @@ module Network.Google.Resource.Container.Projects.Zones.Operations.List
 
     -- * Request Lenses
     , pzolXgafv
-    , pzolQuotaUser
-    , pzolPrettyPrint
     , pzolUploadProtocol
     , pzolPp
     , pzolAccessToken
     , pzolUploadType
     , pzolZone
     , pzolBearerToken
-    , pzolKey
     , pzolProjectId
-    , pzolOAuthToken
-    , pzolFields
     , pzolCallback
     ) where
 
@@ -68,31 +63,21 @@ type ProjectsZonesOperationsListResource =
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
                              QueryParam "callback" Text :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] ListOperationsResponse
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListOperationsResponse
 
 -- | Lists all operations in a project in a specific zone or all zones.
 --
 -- /See:/ 'projectsZonesOperationsList'' smart constructor.
 data ProjectsZonesOperationsList' = ProjectsZonesOperationsList'
     { _pzolXgafv          :: !(Maybe Text)
-    , _pzolQuotaUser      :: !(Maybe Text)
-    , _pzolPrettyPrint    :: !Bool
     , _pzolUploadProtocol :: !(Maybe Text)
     , _pzolPp             :: !Bool
     , _pzolAccessToken    :: !(Maybe Text)
     , _pzolUploadType     :: !(Maybe Text)
     , _pzolZone           :: !Text
     , _pzolBearerToken    :: !(Maybe Text)
-    , _pzolKey            :: !(Maybe AuthKey)
     , _pzolProjectId      :: !Text
-    , _pzolOAuthToken     :: !(Maybe OAuthToken)
-    , _pzolFields         :: !(Maybe Text)
     , _pzolCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -101,10 +86,6 @@ data ProjectsZonesOperationsList' = ProjectsZonesOperationsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pzolXgafv'
---
--- * 'pzolQuotaUser'
---
--- * 'pzolPrettyPrint'
 --
 -- * 'pzolUploadProtocol'
 --
@@ -118,13 +99,7 @@ data ProjectsZonesOperationsList' = ProjectsZonesOperationsList'
 --
 -- * 'pzolBearerToken'
 --
--- * 'pzolKey'
---
 -- * 'pzolProjectId'
---
--- * 'pzolOAuthToken'
---
--- * 'pzolFields'
 --
 -- * 'pzolCallback'
 projectsZonesOperationsList'
@@ -134,18 +109,13 @@ projectsZonesOperationsList'
 projectsZonesOperationsList' pPzolZone_ pPzolProjectId_ =
     ProjectsZonesOperationsList'
     { _pzolXgafv = Nothing
-    , _pzolQuotaUser = Nothing
-    , _pzolPrettyPrint = True
     , _pzolUploadProtocol = Nothing
     , _pzolPp = True
     , _pzolAccessToken = Nothing
     , _pzolUploadType = Nothing
     , _pzolZone = pPzolZone_
     , _pzolBearerToken = Nothing
-    , _pzolKey = Nothing
     , _pzolProjectId = pPzolProjectId_
-    , _pzolOAuthToken = Nothing
-    , _pzolFields = Nothing
     , _pzolCallback = Nothing
     }
 
@@ -153,20 +123,6 @@ projectsZonesOperationsList' pPzolZone_ pPzolProjectId_ =
 pzolXgafv :: Lens' ProjectsZonesOperationsList' (Maybe Text)
 pzolXgafv
   = lens _pzolXgafv (\ s a -> s{_pzolXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pzolQuotaUser :: Lens' ProjectsZonesOperationsList' (Maybe Text)
-pzolQuotaUser
-  = lens _pzolQuotaUser
-      (\ s a -> s{_pzolQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pzolPrettyPrint :: Lens' ProjectsZonesOperationsList' Bool
-pzolPrettyPrint
-  = lens _pzolPrettyPrint
-      (\ s a -> s{_pzolPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 pzolUploadProtocol :: Lens' ProjectsZonesOperationsList' (Maybe Text)
@@ -202,12 +158,6 @@ pzolBearerToken
   = lens _pzolBearerToken
       (\ s a -> s{_pzolBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pzolKey :: Lens' ProjectsZonesOperationsList' (Maybe AuthKey)
-pzolKey = lens _pzolKey (\ s a -> s{_pzolKey = a})
-
 -- | The Google Developers Console [project ID or project
 -- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
 pzolProjectId :: Lens' ProjectsZonesOperationsList' Text
@@ -215,33 +165,16 @@ pzolProjectId
   = lens _pzolProjectId
       (\ s a -> s{_pzolProjectId = a})
 
--- | OAuth 2.0 token for the current user.
-pzolOAuthToken :: Lens' ProjectsZonesOperationsList' (Maybe OAuthToken)
-pzolOAuthToken
-  = lens _pzolOAuthToken
-      (\ s a -> s{_pzolOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pzolFields :: Lens' ProjectsZonesOperationsList' (Maybe Text)
-pzolFields
-  = lens _pzolFields (\ s a -> s{_pzolFields = a})
-
 -- | JSONP
 pzolCallback :: Lens' ProjectsZonesOperationsList' (Maybe Text)
 pzolCallback
   = lens _pzolCallback (\ s a -> s{_pzolCallback = a})
 
-instance GoogleAuth ProjectsZonesOperationsList'
-         where
-        _AuthKey = pzolKey . _Just
-        _AuthToken = pzolOAuthToken . _Just
-
 instance GoogleRequest ProjectsZonesOperationsList'
          where
         type Rs ProjectsZonesOperationsList' =
              ListOperationsResponse
-        request = requestWith containerRequest
-        requestWith rq ProjectsZonesOperationsList'{..}
+        requestClient ProjectsZonesOperationsList'{..}
           = go _pzolProjectId _pzolZone _pzolXgafv
               _pzolUploadProtocol
               (Just _pzolPp)
@@ -249,13 +182,9 @@ instance GoogleRequest ProjectsZonesOperationsList'
               _pzolUploadType
               _pzolBearerToken
               _pzolCallback
-              _pzolQuotaUser
-              (Just _pzolPrettyPrint)
-              _pzolFields
-              _pzolKey
-              _pzolOAuthToken
               (Just AltJSON)
+              containerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsZonesOperationsListResource)
-                      rq
+                      mempty

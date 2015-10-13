@@ -36,8 +36,6 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
 
     -- * Request Lenses
     , tjpXgafv
-    , tjpQuotaUser
-    , tjpPrettyPrint
     , tjpUploadProtocol
     , tjpPp
     , tjpAccessToken
@@ -45,9 +43,6 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
     , tjpUploadType
     , tjpPayload
     , tjpBearerToken
-    , tjpKey
-    , tjpOAuthToken
-    , tjpFields
     , tjpCallback
     ) where
 
@@ -66,14 +61,9 @@ type TransferJobsPatchResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] UpdateTransferJobRequest :>
-                                     Patch '[JSON] TransferJob
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] UpdateTransferJobRequest :>
+                           Patch '[JSON] TransferJob
 
 -- | Updates a transfer job. Updating a job\'s transfer spec does not affect
 -- transfer operations that are running already. Updating the scheduling of
@@ -82,8 +72,6 @@ type TransferJobsPatchResource =
 -- /See:/ 'transferJobsPatch'' smart constructor.
 data TransferJobsPatch' = TransferJobsPatch'
     { _tjpXgafv          :: !(Maybe Text)
-    , _tjpQuotaUser      :: !(Maybe Text)
-    , _tjpPrettyPrint    :: !Bool
     , _tjpUploadProtocol :: !(Maybe Text)
     , _tjpPp             :: !Bool
     , _tjpAccessToken    :: !(Maybe Text)
@@ -91,9 +79,6 @@ data TransferJobsPatch' = TransferJobsPatch'
     , _tjpUploadType     :: !(Maybe Text)
     , _tjpPayload        :: !UpdateTransferJobRequest
     , _tjpBearerToken    :: !(Maybe Text)
-    , _tjpKey            :: !(Maybe AuthKey)
-    , _tjpOAuthToken     :: !(Maybe OAuthToken)
-    , _tjpFields         :: !(Maybe Text)
     , _tjpCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +87,6 @@ data TransferJobsPatch' = TransferJobsPatch'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tjpXgafv'
---
--- * 'tjpQuotaUser'
---
--- * 'tjpPrettyPrint'
 --
 -- * 'tjpUploadProtocol'
 --
@@ -121,12 +102,6 @@ data TransferJobsPatch' = TransferJobsPatch'
 --
 -- * 'tjpBearerToken'
 --
--- * 'tjpKey'
---
--- * 'tjpOAuthToken'
---
--- * 'tjpFields'
---
 -- * 'tjpCallback'
 transferJobsPatch'
     :: Text -- ^ 'jobName'
@@ -135,8 +110,6 @@ transferJobsPatch'
 transferJobsPatch' pTjpJobName_ pTjpPayload_ =
     TransferJobsPatch'
     { _tjpXgafv = Nothing
-    , _tjpQuotaUser = Nothing
-    , _tjpPrettyPrint = True
     , _tjpUploadProtocol = Nothing
     , _tjpPp = True
     , _tjpAccessToken = Nothing
@@ -144,28 +117,12 @@ transferJobsPatch' pTjpJobName_ pTjpPayload_ =
     , _tjpUploadType = Nothing
     , _tjpPayload = pTjpPayload_
     , _tjpBearerToken = Nothing
-    , _tjpKey = Nothing
-    , _tjpOAuthToken = Nothing
-    , _tjpFields = Nothing
     , _tjpCallback = Nothing
     }
 
 -- | V1 error format.
 tjpXgafv :: Lens' TransferJobsPatch' (Maybe Text)
 tjpXgafv = lens _tjpXgafv (\ s a -> s{_tjpXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-tjpQuotaUser :: Lens' TransferJobsPatch' (Maybe Text)
-tjpQuotaUser
-  = lens _tjpQuotaUser (\ s a -> s{_tjpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tjpPrettyPrint :: Lens' TransferJobsPatch' Bool
-tjpPrettyPrint
-  = lens _tjpPrettyPrint
-      (\ s a -> s{_tjpPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 tjpUploadProtocol :: Lens' TransferJobsPatch' (Maybe Text)
@@ -205,50 +162,24 @@ tjpBearerToken
   = lens _tjpBearerToken
       (\ s a -> s{_tjpBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tjpKey :: Lens' TransferJobsPatch' (Maybe AuthKey)
-tjpKey = lens _tjpKey (\ s a -> s{_tjpKey = a})
-
--- | OAuth 2.0 token for the current user.
-tjpOAuthToken :: Lens' TransferJobsPatch' (Maybe OAuthToken)
-tjpOAuthToken
-  = lens _tjpOAuthToken
-      (\ s a -> s{_tjpOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-tjpFields :: Lens' TransferJobsPatch' (Maybe Text)
-tjpFields
-  = lens _tjpFields (\ s a -> s{_tjpFields = a})
-
 -- | JSONP
 tjpCallback :: Lens' TransferJobsPatch' (Maybe Text)
 tjpCallback
   = lens _tjpCallback (\ s a -> s{_tjpCallback = a})
 
-instance GoogleAuth TransferJobsPatch' where
-        _AuthKey = tjpKey . _Just
-        _AuthToken = tjpOAuthToken . _Just
-
 instance GoogleRequest TransferJobsPatch' where
         type Rs TransferJobsPatch' = TransferJob
-        request = requestWith storageTransferRequest
-        requestWith rq TransferJobsPatch'{..}
+        requestClient TransferJobsPatch'{..}
           = go _tjpJobName _tjpXgafv _tjpUploadProtocol
               (Just _tjpPp)
               _tjpAccessToken
               _tjpUploadType
               _tjpBearerToken
               _tjpCallback
-              _tjpQuotaUser
-              (Just _tjpPrettyPrint)
-              _tjpFields
-              _tjpKey
-              _tjpOAuthToken
               (Just AltJSON)
               _tjpPayload
+              storageTransferService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy TransferJobsPatchResource)
-                      rq
+                      mempty

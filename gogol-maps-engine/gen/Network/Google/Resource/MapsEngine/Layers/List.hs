@@ -34,23 +34,17 @@ module Network.Google.Resource.MapsEngine.Layers.List
 
     -- * Request Lenses
     , llCreatedAfter
-    , llQuotaUser
-    , llPrettyPrint
-    , llUserIP
     , llCreatorEmail
     , llRole
-    , llKey
     , llBbox
     , llProcessingStatus
     , llModifiedAfter
     , llModifiedBefore
     , llPageToken
     , llProjectId
-    , llOAuthToken
     , llSearch
     , llMaxResults
     , llTags
-    , llFields
     , llCreatedBefore
     ) where
 
@@ -76,37 +70,25 @@ type LayersListResource =
                            QueryParam "maxResults" Word32 :>
                              QueryParam "tags" Text :>
                                QueryParam "createdBefore" DateTime' :>
-                                 QueryParam "quotaUser" Text :>
-                                   QueryParam "prettyPrint" Bool :>
-                                     QueryParam "userIp" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "key" AuthKey :>
-                                           Header "Authorization" OAuthToken :>
-                                             QueryParam "alt" AltJSON :>
-                                               Get '[JSON] LayersListResponse
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] LayersListResponse
 
 -- | Return all layers readable by the current user.
 --
 -- /See:/ 'layersList'' smart constructor.
 data LayersList' = LayersList'
     { _llCreatedAfter     :: !(Maybe DateTime')
-    , _llQuotaUser        :: !(Maybe Text)
-    , _llPrettyPrint      :: !Bool
-    , _llUserIP           :: !(Maybe Text)
     , _llCreatorEmail     :: !(Maybe Text)
     , _llRole             :: !(Maybe LayersListRole)
-    , _llKey              :: !(Maybe AuthKey)
     , _llBbox             :: !(Maybe Text)
     , _llProcessingStatus :: !(Maybe LayersListProcessingStatus)
     , _llModifiedAfter    :: !(Maybe DateTime')
     , _llModifiedBefore   :: !(Maybe DateTime')
     , _llPageToken        :: !(Maybe Text)
     , _llProjectId        :: !(Maybe Text)
-    , _llOAuthToken       :: !(Maybe OAuthToken)
     , _llSearch           :: !(Maybe Text)
     , _llMaxResults       :: !(Maybe Word32)
     , _llTags             :: !(Maybe Text)
-    , _llFields           :: !(Maybe Text)
     , _llCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -116,17 +98,9 @@ data LayersList' = LayersList'
 --
 -- * 'llCreatedAfter'
 --
--- * 'llQuotaUser'
---
--- * 'llPrettyPrint'
---
--- * 'llUserIP'
---
 -- * 'llCreatorEmail'
 --
 -- * 'llRole'
---
--- * 'llKey'
 --
 -- * 'llBbox'
 --
@@ -140,15 +114,11 @@ data LayersList' = LayersList'
 --
 -- * 'llProjectId'
 --
--- * 'llOAuthToken'
---
 -- * 'llSearch'
 --
 -- * 'llMaxResults'
 --
 -- * 'llTags'
---
--- * 'llFields'
 --
 -- * 'llCreatedBefore'
 layersList'
@@ -156,23 +126,17 @@ layersList'
 layersList' =
     LayersList'
     { _llCreatedAfter = Nothing
-    , _llQuotaUser = Nothing
-    , _llPrettyPrint = True
-    , _llUserIP = Nothing
     , _llCreatorEmail = Nothing
     , _llRole = Nothing
-    , _llKey = Nothing
     , _llBbox = Nothing
     , _llProcessingStatus = Nothing
     , _llModifiedAfter = Nothing
     , _llModifiedBefore = Nothing
     , _llPageToken = Nothing
     , _llProjectId = Nothing
-    , _llOAuthToken = Nothing
     , _llSearch = Nothing
     , _llMaxResults = Nothing
     , _llTags = Nothing
-    , _llFields = Nothing
     , _llCreatedBefore = Nothing
     }
 
@@ -183,24 +147,6 @@ llCreatedAfter
   = lens _llCreatedAfter
       (\ s a -> s{_llCreatedAfter = a})
       . mapping _DateTime
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-llQuotaUser :: Lens' LayersList' (Maybe Text)
-llQuotaUser
-  = lens _llQuotaUser (\ s a -> s{_llQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-llPrettyPrint :: Lens' LayersList' Bool
-llPrettyPrint
-  = lens _llPrettyPrint
-      (\ s a -> s{_llPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-llUserIP :: Lens' LayersList' (Maybe Text)
-llUserIP = lens _llUserIP (\ s a -> s{_llUserIP = a})
 
 -- | An email address representing a user. Returned assets that have been
 -- created by the user associated with the provided email address.
@@ -213,12 +159,6 @@ llCreatorEmail
 -- assets where the current user has the specified level of access.
 llRole :: Lens' LayersList' (Maybe LayersListRole)
 llRole = lens _llRole (\ s a -> s{_llRole = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-llKey :: Lens' LayersList' (Maybe AuthKey)
-llKey = lens _llKey (\ s a -> s{_llKey = a})
 
 -- | A bounding box, expressed as \"west,south,east,north\". If set, only
 -- assets which intersect this bounding box will be returned.
@@ -261,11 +201,6 @@ llProjectId :: Lens' LayersList' (Maybe Text)
 llProjectId
   = lens _llProjectId (\ s a -> s{_llProjectId = a})
 
--- | OAuth 2.0 token for the current user.
-llOAuthToken :: Lens' LayersList' (Maybe OAuthToken)
-llOAuthToken
-  = lens _llOAuthToken (\ s a -> s{_llOAuthToken = a})
-
 -- | An unstructured search string used to filter the set of results based on
 -- asset metadata.
 llSearch :: Lens' LayersList' (Maybe Text)
@@ -282,10 +217,6 @@ llMaxResults
 llTags :: Lens' LayersList' (Maybe Text)
 llTags = lens _llTags (\ s a -> s{_llTags = a})
 
--- | Selector specifying which fields to include in a partial response.
-llFields :: Lens' LayersList' (Maybe Text)
-llFields = lens _llFields (\ s a -> s{_llFields = a})
-
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been created at or before this time.
 llCreatedBefore :: Lens' LayersList' (Maybe UTCTime)
@@ -294,14 +225,9 @@ llCreatedBefore
       (\ s a -> s{_llCreatedBefore = a})
       . mapping _DateTime
 
-instance GoogleAuth LayersList' where
-        _AuthKey = llKey . _Just
-        _AuthToken = llOAuthToken . _Just
-
 instance GoogleRequest LayersList' where
         type Rs LayersList' = LayersListResponse
-        request = requestWith mapsEngineRequest
-        requestWith rq LayersList'{..}
+        requestClient LayersList'{..}
           = go _llCreatedAfter _llCreatorEmail _llRole _llBbox
               _llProcessingStatus
               _llModifiedAfter
@@ -312,12 +238,8 @@ instance GoogleRequest LayersList' where
               _llMaxResults
               _llTags
               _llCreatedBefore
-              _llQuotaUser
-              (Just _llPrettyPrint)
-              _llUserIP
-              _llFields
-              _llKey
-              _llOAuthToken
               (Just AltJSON)
+              mapsEngineService
           where go
-                  = clientBuild (Proxy :: Proxy LayersListResource) rq
+                  = buildClient (Proxy :: Proxy LayersListResource)
+                      mempty

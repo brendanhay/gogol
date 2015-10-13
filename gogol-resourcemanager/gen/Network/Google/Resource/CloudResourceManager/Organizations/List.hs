@@ -34,19 +34,14 @@ module Network.Google.Resource.CloudResourceManager.Organizations.List
 
     -- * Request Lenses
     , olXgafv
-    , olQuotaUser
-    , olPrettyPrint
     , olUploadProtocol
     , olPp
     , olAccessToken
     , olUploadType
     , olBearerToken
-    , olKey
     , olFilter
     , olPageToken
-    , olOAuthToken
     , olPageSize
-    , olFields
     , olCallback
     ) where
 
@@ -68,32 +63,22 @@ type OrganizationsListResource =
                        QueryParam "pageToken" Text :>
                          QueryParam "pageSize" Int32 :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] ListOrganizationsResponse
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListOrganizationsResponse
 
 -- | Query Organization resources.
 --
 -- /See:/ 'organizationsList'' smart constructor.
 data OrganizationsList' = OrganizationsList'
     { _olXgafv          :: !(Maybe Text)
-    , _olQuotaUser      :: !(Maybe Text)
-    , _olPrettyPrint    :: !Bool
     , _olUploadProtocol :: !(Maybe Text)
     , _olPp             :: !Bool
     , _olAccessToken    :: !(Maybe Text)
     , _olUploadType     :: !(Maybe Text)
     , _olBearerToken    :: !(Maybe Text)
-    , _olKey            :: !(Maybe AuthKey)
     , _olFilter         :: !(Maybe Text)
     , _olPageToken      :: !(Maybe Text)
-    , _olOAuthToken     :: !(Maybe OAuthToken)
     , _olPageSize       :: !(Maybe Int32)
-    , _olFields         :: !(Maybe Text)
     , _olCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +87,6 @@ data OrganizationsList' = OrganizationsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'olXgafv'
---
--- * 'olQuotaUser'
---
--- * 'olPrettyPrint'
 --
 -- * 'olUploadProtocol'
 --
@@ -117,17 +98,11 @@ data OrganizationsList' = OrganizationsList'
 --
 -- * 'olBearerToken'
 --
--- * 'olKey'
---
 -- * 'olFilter'
 --
 -- * 'olPageToken'
 --
--- * 'olOAuthToken'
---
 -- * 'olPageSize'
---
--- * 'olFields'
 --
 -- * 'olCallback'
 organizationsList'
@@ -135,38 +110,20 @@ organizationsList'
 organizationsList' =
     OrganizationsList'
     { _olXgafv = Nothing
-    , _olQuotaUser = Nothing
-    , _olPrettyPrint = True
     , _olUploadProtocol = Nothing
     , _olPp = True
     , _olAccessToken = Nothing
     , _olUploadType = Nothing
     , _olBearerToken = Nothing
-    , _olKey = Nothing
     , _olFilter = Nothing
     , _olPageToken = Nothing
-    , _olOAuthToken = Nothing
     , _olPageSize = Nothing
-    , _olFields = Nothing
     , _olCallback = Nothing
     }
 
 -- | V1 error format.
 olXgafv :: Lens' OrganizationsList' (Maybe Text)
 olXgafv = lens _olXgafv (\ s a -> s{_olXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-olQuotaUser :: Lens' OrganizationsList' (Maybe Text)
-olQuotaUser
-  = lens _olQuotaUser (\ s a -> s{_olQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-olPrettyPrint :: Lens' OrganizationsList' Bool
-olPrettyPrint
-  = lens _olPrettyPrint
-      (\ s a -> s{_olPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 olUploadProtocol :: Lens' OrganizationsList' (Maybe Text)
@@ -195,12 +152,6 @@ olBearerToken
   = lens _olBearerToken
       (\ s a -> s{_olBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-olKey :: Lens' OrganizationsList' (Maybe AuthKey)
-olKey = lens _olKey (\ s a -> s{_olKey = a})
-
 -- | An optional query string used to filter the Organizations to be return
 -- in the response. Filter rules are case-insensitive. Organizations may be
 -- filtered by \`owner.directoryCustomerId\` or by \`domain\`, where the
@@ -219,35 +170,21 @@ olPageToken :: Lens' OrganizationsList' (Maybe Text)
 olPageToken
   = lens _olPageToken (\ s a -> s{_olPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-olOAuthToken :: Lens' OrganizationsList' (Maybe OAuthToken)
-olOAuthToken
-  = lens _olOAuthToken (\ s a -> s{_olOAuthToken = a})
-
 -- | The maximum number of Organizations to return in the response. This
 -- field is optional.
 olPageSize :: Lens' OrganizationsList' (Maybe Int32)
 olPageSize
   = lens _olPageSize (\ s a -> s{_olPageSize = a})
 
--- | Selector specifying which fields to include in a partial response.
-olFields :: Lens' OrganizationsList' (Maybe Text)
-olFields = lens _olFields (\ s a -> s{_olFields = a})
-
 -- | JSONP
 olCallback :: Lens' OrganizationsList' (Maybe Text)
 olCallback
   = lens _olCallback (\ s a -> s{_olCallback = a})
 
-instance GoogleAuth OrganizationsList' where
-        _AuthKey = olKey . _Just
-        _AuthToken = olOAuthToken . _Just
-
 instance GoogleRequest OrganizationsList' where
         type Rs OrganizationsList' =
              ListOrganizationsResponse
-        request = requestWith resourceManagerRequest
-        requestWith rq OrganizationsList'{..}
+        requestClient OrganizationsList'{..}
           = go _olXgafv _olUploadProtocol (Just _olPp)
               _olAccessToken
               _olUploadType
@@ -256,13 +193,9 @@ instance GoogleRequest OrganizationsList' where
               _olPageToken
               _olPageSize
               _olCallback
-              _olQuotaUser
-              (Just _olPrettyPrint)
-              _olFields
-              _olKey
-              _olOAuthToken
               (Just AltJSON)
+              resourceManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy OrganizationsListResource)
-                      rq
+                      mempty

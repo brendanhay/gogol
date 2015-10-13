@@ -33,14 +33,8 @@ module Network.Google.Resource.MapsEngine.Maps.Get
     , MapsGet'
 
     -- * Request Lenses
-    , mgQuotaUser
-    , mgPrettyPrint
-    , mgUserIP
-    , mgKey
     , mgVersion
     , mgId
-    , mgOAuthToken
-    , mgFields
     ) where
 
 import           Network.Google.MapsEngine.Types
@@ -52,85 +46,31 @@ type MapsGetResource =
      "maps" :>
        Capture "id" Text :>
          QueryParam "version" MapsGetVersion :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Map
+           QueryParam "alt" AltJSON :> Get '[JSON] Map
 
 -- | Return metadata for a particular map.
 --
 -- /See:/ 'mapsGet'' smart constructor.
 data MapsGet' = MapsGet'
-    { _mgQuotaUser   :: !(Maybe Text)
-    , _mgPrettyPrint :: !Bool
-    , _mgUserIP      :: !(Maybe Text)
-    , _mgKey         :: !(Maybe AuthKey)
-    , _mgVersion     :: !(Maybe MapsGetVersion)
-    , _mgId          :: !Text
-    , _mgOAuthToken  :: !(Maybe OAuthToken)
-    , _mgFields      :: !(Maybe Text)
+    { _mgVersion :: !(Maybe MapsGetVersion)
+    , _mgId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mgQuotaUser'
---
--- * 'mgPrettyPrint'
---
--- * 'mgUserIP'
---
--- * 'mgKey'
---
 -- * 'mgVersion'
 --
 -- * 'mgId'
---
--- * 'mgOAuthToken'
---
--- * 'mgFields'
 mapsGet'
     :: Text -- ^ 'id'
     -> MapsGet'
 mapsGet' pMgId_ =
     MapsGet'
-    { _mgQuotaUser = Nothing
-    , _mgPrettyPrint = True
-    , _mgUserIP = Nothing
-    , _mgKey = Nothing
-    , _mgVersion = Nothing
+    { _mgVersion = Nothing
     , _mgId = pMgId_
-    , _mgOAuthToken = Nothing
-    , _mgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mgQuotaUser :: Lens' MapsGet' (Maybe Text)
-mgQuotaUser
-  = lens _mgQuotaUser (\ s a -> s{_mgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mgPrettyPrint :: Lens' MapsGet' Bool
-mgPrettyPrint
-  = lens _mgPrettyPrint
-      (\ s a -> s{_mgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mgUserIP :: Lens' MapsGet' (Maybe Text)
-mgUserIP = lens _mgUserIP (\ s a -> s{_mgUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mgKey :: Lens' MapsGet' (Maybe AuthKey)
-mgKey = lens _mgKey (\ s a -> s{_mgKey = a})
 
 -- | Deprecated: The version parameter indicates which version of the map
 -- should be returned. When version is set to published, the published
@@ -144,29 +84,10 @@ mgVersion
 mgId :: Lens' MapsGet' Text
 mgId = lens _mgId (\ s a -> s{_mgId = a})
 
--- | OAuth 2.0 token for the current user.
-mgOAuthToken :: Lens' MapsGet' (Maybe OAuthToken)
-mgOAuthToken
-  = lens _mgOAuthToken (\ s a -> s{_mgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-mgFields :: Lens' MapsGet' (Maybe Text)
-mgFields = lens _mgFields (\ s a -> s{_mgFields = a})
-
-instance GoogleAuth MapsGet' where
-        _AuthKey = mgKey . _Just
-        _AuthToken = mgOAuthToken . _Just
-
 instance GoogleRequest MapsGet' where
         type Rs MapsGet' = Map
-        request = requestWith mapsEngineRequest
-        requestWith rq MapsGet'{..}
-          = go _mgId _mgVersion _mgQuotaUser
-              (Just _mgPrettyPrint)
-              _mgUserIP
-              _mgFields
-              _mgKey
-              _mgOAuthToken
-              (Just AltJSON)
+        requestClient MapsGet'{..}
+          = go _mgId _mgVersion (Just AltJSON)
+              mapsEngineService
           where go
-                  = clientBuild (Proxy :: Proxy MapsGetResource) rq
+                  = buildClient (Proxy :: Proxy MapsGetResource) mempty

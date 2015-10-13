@@ -36,17 +36,11 @@ module Network.Google.Resource.YouTube.Captions.Update
 
     -- * Request Lenses
     , capOnBehalfOf
-    , capQuotaUser
     , capPart
-    , capPrettyPrint
-    , capUserIP
     , capPayload
     , capMedia
     , capOnBehalfOfContentOwner
-    , capKey
     , capSync
-    , capOAuthToken
-    , capFields
     ) where
 
 import           Network.Google.Prelude
@@ -60,15 +54,9 @@ type CaptionsUpdateResource =
          QueryParam "onBehalfOf" Text :>
            QueryParam "onBehalfOfContentOwner" Text :>
              QueryParam "sync" Bool :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             MultipartRelated '[JSON] Caption Stream :>
-                               Put '[JSON] Caption
+               QueryParam "alt" AltJSON :>
+                 MultipartRelated '[JSON] Caption Stream :>
+                   Put '[JSON] Caption
 
 -- | Updates a caption track. When updating a caption track, you can change
 -- the track\'s draft status, upload a new caption file for the track, or
@@ -77,17 +65,11 @@ type CaptionsUpdateResource =
 -- /See:/ 'captionsUpdate'' smart constructor.
 data CaptionsUpdate' = CaptionsUpdate'
     { _capOnBehalfOf             :: !(Maybe Text)
-    , _capQuotaUser              :: !(Maybe Text)
     , _capPart                   :: !Text
-    , _capPrettyPrint            :: !Bool
-    , _capUserIP                 :: !(Maybe Text)
     , _capPayload                :: !Caption
     , _capMedia                  :: !Stream
     , _capOnBehalfOfContentOwner :: !(Maybe Text)
-    , _capKey                    :: !(Maybe AuthKey)
     , _capSync                   :: !(Maybe Bool)
-    , _capOAuthToken             :: !(Maybe OAuthToken)
-    , _capFields                 :: !(Maybe Text)
     }
 
 -- | Creates a value of 'CaptionsUpdate'' with the minimum fields required to make a request.
@@ -96,13 +78,7 @@ data CaptionsUpdate' = CaptionsUpdate'
 --
 -- * 'capOnBehalfOf'
 --
--- * 'capQuotaUser'
---
 -- * 'capPart'
---
--- * 'capPrettyPrint'
---
--- * 'capUserIP'
 --
 -- * 'capPayload'
 --
@@ -110,13 +86,7 @@ data CaptionsUpdate' = CaptionsUpdate'
 --
 -- * 'capOnBehalfOfContentOwner'
 --
--- * 'capKey'
---
 -- * 'capSync'
---
--- * 'capOAuthToken'
---
--- * 'capFields'
 captionsUpdate'
     :: Text -- ^ 'part'
     -> Caption -- ^ 'payload'
@@ -125,17 +95,11 @@ captionsUpdate'
 captionsUpdate' pCapPart_ pCapPayload_ pCapMedia_ =
     CaptionsUpdate'
     { _capOnBehalfOf = Nothing
-    , _capQuotaUser = Nothing
     , _capPart = pCapPart_
-    , _capPrettyPrint = True
-    , _capUserIP = Nothing
     , _capPayload = pCapPayload_
     , _capMedia = pCapMedia_
     , _capOnBehalfOfContentOwner = Nothing
-    , _capKey = Nothing
     , _capSync = Nothing
-    , _capOAuthToken = Nothing
-    , _capFields = Nothing
     }
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
@@ -145,13 +109,6 @@ capOnBehalfOf
   = lens _capOnBehalfOf
       (\ s a -> s{_capOnBehalfOf = a})
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-capQuotaUser :: Lens' CaptionsUpdate' (Maybe Text)
-capQuotaUser
-  = lens _capQuotaUser (\ s a -> s{_capQuotaUser = a})
-
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the
 -- properties that the API response will include. Set the property value to
@@ -159,18 +116,6 @@ capQuotaUser
 -- the property value to id.
 capPart :: Lens' CaptionsUpdate' Text
 capPart = lens _capPart (\ s a -> s{_capPart = a})
-
--- | Returns response with indentations and line breaks.
-capPrettyPrint :: Lens' CaptionsUpdate' Bool
-capPrettyPrint
-  = lens _capPrettyPrint
-      (\ s a -> s{_capPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-capUserIP :: Lens' CaptionsUpdate' (Maybe Text)
-capUserIP
-  = lens _capUserIP (\ s a -> s{_capUserIP = a})
 
 -- | Multipart request metadata.
 capPayload :: Lens' CaptionsUpdate' Caption
@@ -195,12 +140,6 @@ capOnBehalfOfContentOwner
   = lens _capOnBehalfOfContentOwner
       (\ s a -> s{_capOnBehalfOfContentOwner = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-capKey :: Lens' CaptionsUpdate' (Maybe AuthKey)
-capKey = lens _capKey (\ s a -> s{_capKey = a})
-
 -- | Note: The API server only processes the parameter value if the request
 -- contains an updated caption file. The sync parameter indicates whether
 -- YouTube should automatically synchronize the caption file with the audio
@@ -209,37 +148,16 @@ capKey = lens _capKey (\ s a -> s{_capKey = a})
 capSync :: Lens' CaptionsUpdate' (Maybe Bool)
 capSync = lens _capSync (\ s a -> s{_capSync = a})
 
--- | OAuth 2.0 token for the current user.
-capOAuthToken :: Lens' CaptionsUpdate' (Maybe OAuthToken)
-capOAuthToken
-  = lens _capOAuthToken
-      (\ s a -> s{_capOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-capFields :: Lens' CaptionsUpdate' (Maybe Text)
-capFields
-  = lens _capFields (\ s a -> s{_capFields = a})
-
-instance GoogleAuth CaptionsUpdate' where
-        _AuthKey = capKey . _Just
-        _AuthToken = capOAuthToken . _Just
-
 instance GoogleRequest CaptionsUpdate' where
         type Rs CaptionsUpdate' = Caption
-        request = requestWith youTubeRequest
-        requestWith rq CaptionsUpdate'{..}
+        requestClient CaptionsUpdate'{..}
           = go (Just _capPart) _capOnBehalfOf
               _capOnBehalfOfContentOwner
               _capSync
-              _capQuotaUser
-              (Just _capPrettyPrint)
-              _capUserIP
-              _capFields
-              _capKey
-              _capOAuthToken
               (Just AltJSON)
               _capPayload
               _capMedia
+              youTubeService
           where go
-                  = clientBuild (Proxy :: Proxy CaptionsUpdateResource)
-                      rq
+                  = buildClient (Proxy :: Proxy CaptionsUpdateResource)
+                      mempty

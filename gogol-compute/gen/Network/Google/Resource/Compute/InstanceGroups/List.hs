@@ -34,17 +34,11 @@ module Network.Google.Resource.Compute.InstanceGroups.List
     , InstanceGroupsList'
 
     -- * Request Lenses
-    , iglQuotaUser
-    , iglPrettyPrint
     , iglProject
-    , iglUserIP
     , iglZone
-    , iglKey
     , iglFilter
     , iglPageToken
-    , iglOAuthToken
     , iglMaxResults
-    , iglFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -60,110 +54,55 @@ type InstanceGroupsListResource =
              QueryParam "filter" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "maxResults" Word32 :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] InstanceGroupList
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] InstanceGroupList
 
 -- | Retrieves the list of instance groups that are located in the specified
 -- project and zone.
 --
 -- /See:/ 'instanceGroupsList'' smart constructor.
 data InstanceGroupsList' = InstanceGroupsList'
-    { _iglQuotaUser   :: !(Maybe Text)
-    , _iglPrettyPrint :: !Bool
-    , _iglProject     :: !Text
-    , _iglUserIP      :: !(Maybe Text)
-    , _iglZone        :: !Text
-    , _iglKey         :: !(Maybe AuthKey)
-    , _iglFilter      :: !(Maybe Text)
-    , _iglPageToken   :: !(Maybe Text)
-    , _iglOAuthToken  :: !(Maybe OAuthToken)
-    , _iglMaxResults  :: !Word32
-    , _iglFields      :: !(Maybe Text)
+    { _iglProject    :: !Text
+    , _iglZone       :: !Text
+    , _iglFilter     :: !(Maybe Text)
+    , _iglPageToken  :: !(Maybe Text)
+    , _iglMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iglQuotaUser'
---
--- * 'iglPrettyPrint'
---
 -- * 'iglProject'
 --
--- * 'iglUserIP'
---
 -- * 'iglZone'
---
--- * 'iglKey'
 --
 -- * 'iglFilter'
 --
 -- * 'iglPageToken'
 --
--- * 'iglOAuthToken'
---
 -- * 'iglMaxResults'
---
--- * 'iglFields'
 instanceGroupsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> InstanceGroupsList'
 instanceGroupsList' pIglProject_ pIglZone_ =
     InstanceGroupsList'
-    { _iglQuotaUser = Nothing
-    , _iglPrettyPrint = True
-    , _iglProject = pIglProject_
-    , _iglUserIP = Nothing
+    { _iglProject = pIglProject_
     , _iglZone = pIglZone_
-    , _iglKey = Nothing
     , _iglFilter = Nothing
     , _iglPageToken = Nothing
-    , _iglOAuthToken = Nothing
     , _iglMaxResults = 500
-    , _iglFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-iglQuotaUser :: Lens' InstanceGroupsList' (Maybe Text)
-iglQuotaUser
-  = lens _iglQuotaUser (\ s a -> s{_iglQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-iglPrettyPrint :: Lens' InstanceGroupsList' Bool
-iglPrettyPrint
-  = lens _iglPrettyPrint
-      (\ s a -> s{_iglPrettyPrint = a})
 
 -- | The project ID for this request.
 iglProject :: Lens' InstanceGroupsList' Text
 iglProject
   = lens _iglProject (\ s a -> s{_iglProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-iglUserIP :: Lens' InstanceGroupsList' (Maybe Text)
-iglUserIP
-  = lens _iglUserIP (\ s a -> s{_iglUserIP = a})
-
 -- | The URL of the zone where the instance group is located.
 iglZone :: Lens' InstanceGroupsList' Text
 iglZone = lens _iglZone (\ s a -> s{_iglZone = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-iglKey :: Lens' InstanceGroupsList' (Maybe AuthKey)
-iglKey = lens _iglKey (\ s a -> s{_iglKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -187,41 +126,20 @@ iglPageToken :: Lens' InstanceGroupsList' (Maybe Text)
 iglPageToken
   = lens _iglPageToken (\ s a -> s{_iglPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-iglOAuthToken :: Lens' InstanceGroupsList' (Maybe OAuthToken)
-iglOAuthToken
-  = lens _iglOAuthToken
-      (\ s a -> s{_iglOAuthToken = a})
-
 -- | Maximum count of results to be returned.
 iglMaxResults :: Lens' InstanceGroupsList' Word32
 iglMaxResults
   = lens _iglMaxResults
       (\ s a -> s{_iglMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-iglFields :: Lens' InstanceGroupsList' (Maybe Text)
-iglFields
-  = lens _iglFields (\ s a -> s{_iglFields = a})
-
-instance GoogleAuth InstanceGroupsList' where
-        _AuthKey = iglKey . _Just
-        _AuthToken = iglOAuthToken . _Just
-
 instance GoogleRequest InstanceGroupsList' where
         type Rs InstanceGroupsList' = InstanceGroupList
-        request = requestWith computeRequest
-        requestWith rq InstanceGroupsList'{..}
+        requestClient InstanceGroupsList'{..}
           = go _iglProject _iglZone _iglFilter _iglPageToken
               (Just _iglMaxResults)
-              _iglQuotaUser
-              (Just _iglPrettyPrint)
-              _iglUserIP
-              _iglFields
-              _iglKey
-              _iglOAuthToken
               (Just AltJSON)
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy InstanceGroupsListResource)
-                      rq
+                      mempty

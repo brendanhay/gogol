@@ -36,8 +36,6 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
 
     -- * Request Lenses
     , aelgXgafv
-    , aelgQuotaUser
-    , aelgPrettyPrint
     , aelgUploadProtocol
     , aelgPp
     , aelgAccessToken
@@ -45,9 +43,6 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
     , aelgElId
     , aelgAccountId
     , aelgBearerToken
-    , aelgKey
-    , aelgOAuthToken
-    , aelgFields
     , aelgCallback
     ) where
 
@@ -69,13 +64,8 @@ type AccountsExperienceLocalesGetResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] ExperienceLocale
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ExperienceLocale
 
 -- | Get an ExperienceLocale given its id. See _Authentication and
 -- Authorization rules_ and _Get methods rules_ for more information about
@@ -84,8 +74,6 @@ type AccountsExperienceLocalesGetResource =
 -- /See:/ 'accountsExperienceLocalesGet'' smart constructor.
 data AccountsExperienceLocalesGet' = AccountsExperienceLocalesGet'
     { _aelgXgafv          :: !(Maybe Text)
-    , _aelgQuotaUser      :: !(Maybe Text)
-    , _aelgPrettyPrint    :: !Bool
     , _aelgUploadProtocol :: !(Maybe Text)
     , _aelgPp             :: !Bool
     , _aelgAccessToken    :: !(Maybe Text)
@@ -93,9 +81,6 @@ data AccountsExperienceLocalesGet' = AccountsExperienceLocalesGet'
     , _aelgElId           :: !Text
     , _aelgAccountId      :: !Text
     , _aelgBearerToken    :: !(Maybe Text)
-    , _aelgKey            :: !(Maybe AuthKey)
-    , _aelgOAuthToken     :: !(Maybe OAuthToken)
-    , _aelgFields         :: !(Maybe Text)
     , _aelgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -104,10 +89,6 @@ data AccountsExperienceLocalesGet' = AccountsExperienceLocalesGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aelgXgafv'
---
--- * 'aelgQuotaUser'
---
--- * 'aelgPrettyPrint'
 --
 -- * 'aelgUploadProtocol'
 --
@@ -123,12 +104,6 @@ data AccountsExperienceLocalesGet' = AccountsExperienceLocalesGet'
 --
 -- * 'aelgBearerToken'
 --
--- * 'aelgKey'
---
--- * 'aelgOAuthToken'
---
--- * 'aelgFields'
---
 -- * 'aelgCallback'
 accountsExperienceLocalesGet'
     :: Text -- ^ 'elId'
@@ -137,8 +112,6 @@ accountsExperienceLocalesGet'
 accountsExperienceLocalesGet' pAelgElId_ pAelgAccountId_ =
     AccountsExperienceLocalesGet'
     { _aelgXgafv = Nothing
-    , _aelgQuotaUser = Nothing
-    , _aelgPrettyPrint = True
     , _aelgUploadProtocol = Nothing
     , _aelgPp = True
     , _aelgAccessToken = Nothing
@@ -146,9 +119,6 @@ accountsExperienceLocalesGet' pAelgElId_ pAelgAccountId_ =
     , _aelgElId = pAelgElId_
     , _aelgAccountId = pAelgAccountId_
     , _aelgBearerToken = Nothing
-    , _aelgKey = Nothing
-    , _aelgOAuthToken = Nothing
-    , _aelgFields = Nothing
     , _aelgCallback = Nothing
     }
 
@@ -156,20 +126,6 @@ accountsExperienceLocalesGet' pAelgElId_ pAelgAccountId_ =
 aelgXgafv :: Lens' AccountsExperienceLocalesGet' (Maybe Text)
 aelgXgafv
   = lens _aelgXgafv (\ s a -> s{_aelgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-aelgQuotaUser :: Lens' AccountsExperienceLocalesGet' (Maybe Text)
-aelgQuotaUser
-  = lens _aelgQuotaUser
-      (\ s a -> s{_aelgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aelgPrettyPrint :: Lens' AccountsExperienceLocalesGet' Bool
-aelgPrettyPrint
-  = lens _aelgPrettyPrint
-      (\ s a -> s{_aelgPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 aelgUploadProtocol :: Lens' AccountsExperienceLocalesGet' (Maybe Text)
@@ -209,39 +165,16 @@ aelgBearerToken
   = lens _aelgBearerToken
       (\ s a -> s{_aelgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aelgKey :: Lens' AccountsExperienceLocalesGet' (Maybe AuthKey)
-aelgKey = lens _aelgKey (\ s a -> s{_aelgKey = a})
-
--- | OAuth 2.0 token for the current user.
-aelgOAuthToken :: Lens' AccountsExperienceLocalesGet' (Maybe OAuthToken)
-aelgOAuthToken
-  = lens _aelgOAuthToken
-      (\ s a -> s{_aelgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-aelgFields :: Lens' AccountsExperienceLocalesGet' (Maybe Text)
-aelgFields
-  = lens _aelgFields (\ s a -> s{_aelgFields = a})
-
 -- | JSONP
 aelgCallback :: Lens' AccountsExperienceLocalesGet' (Maybe Text)
 aelgCallback
   = lens _aelgCallback (\ s a -> s{_aelgCallback = a})
 
-instance GoogleAuth AccountsExperienceLocalesGet'
-         where
-        _AuthKey = aelgKey . _Just
-        _AuthToken = aelgOAuthToken . _Just
-
 instance GoogleRequest AccountsExperienceLocalesGet'
          where
         type Rs AccountsExperienceLocalesGet' =
              ExperienceLocale
-        request = requestWith playMoviesPartnerRequest
-        requestWith rq AccountsExperienceLocalesGet'{..}
+        requestClient AccountsExperienceLocalesGet'{..}
           = go _aelgAccountId _aelgElId _aelgXgafv
               _aelgUploadProtocol
               (Just _aelgPp)
@@ -249,13 +182,9 @@ instance GoogleRequest AccountsExperienceLocalesGet'
               _aelgUploadType
               _aelgBearerToken
               _aelgCallback
-              _aelgQuotaUser
-              (Just _aelgPrettyPrint)
-              _aelgFields
-              _aelgKey
-              _aelgOAuthToken
               (Just AltJSON)
+              playMoviesPartnerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsExperienceLocalesGetResource)
-                      rq
+                      mempty

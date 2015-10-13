@@ -34,17 +34,12 @@ module Network.Google.Resource.Logging.Projects.Sinks.List
 
     -- * Request Lenses
     , pslXgafv
-    , pslQuotaUser
-    , pslPrettyPrint
     , pslUploadProtocol
     , pslPp
     , pslAccessToken
     , pslUploadType
     , pslBearerToken
-    , pslKey
-    , pslOAuthToken
     , pslProjectsId
-    , pslFields
     , pslCallback
     ) where
 
@@ -65,30 +60,20 @@ type ProjectsSinksListResource =
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
                          QueryParam "callback" Text :>
-                           QueryParam "quotaUser" Text :>
-                             QueryParam "prettyPrint" Bool :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] ListSinksResponse
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListSinksResponse
 
 -- | Lists project sinks associated with a project.
 --
 -- /See:/ 'projectsSinksList'' smart constructor.
 data ProjectsSinksList' = ProjectsSinksList'
     { _pslXgafv          :: !(Maybe Text)
-    , _pslQuotaUser      :: !(Maybe Text)
-    , _pslPrettyPrint    :: !Bool
     , _pslUploadProtocol :: !(Maybe Text)
     , _pslPp             :: !Bool
     , _pslAccessToken    :: !(Maybe Text)
     , _pslUploadType     :: !(Maybe Text)
     , _pslBearerToken    :: !(Maybe Text)
-    , _pslKey            :: !(Maybe AuthKey)
-    , _pslOAuthToken     :: !(Maybe OAuthToken)
     , _pslProjectsId     :: !Text
-    , _pslFields         :: !(Maybe Text)
     , _pslCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -97,10 +82,6 @@ data ProjectsSinksList' = ProjectsSinksList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pslXgafv'
---
--- * 'pslQuotaUser'
---
--- * 'pslPrettyPrint'
 --
 -- * 'pslUploadProtocol'
 --
@@ -112,13 +93,7 @@ data ProjectsSinksList' = ProjectsSinksList'
 --
 -- * 'pslBearerToken'
 --
--- * 'pslKey'
---
--- * 'pslOAuthToken'
---
 -- * 'pslProjectsId'
---
--- * 'pslFields'
 --
 -- * 'pslCallback'
 projectsSinksList'
@@ -127,36 +102,18 @@ projectsSinksList'
 projectsSinksList' pPslProjectsId_ =
     ProjectsSinksList'
     { _pslXgafv = Nothing
-    , _pslQuotaUser = Nothing
-    , _pslPrettyPrint = True
     , _pslUploadProtocol = Nothing
     , _pslPp = True
     , _pslAccessToken = Nothing
     , _pslUploadType = Nothing
     , _pslBearerToken = Nothing
-    , _pslKey = Nothing
-    , _pslOAuthToken = Nothing
     , _pslProjectsId = pPslProjectsId_
-    , _pslFields = Nothing
     , _pslCallback = Nothing
     }
 
 -- | V1 error format.
 pslXgafv :: Lens' ProjectsSinksList' (Maybe Text)
 pslXgafv = lens _pslXgafv (\ s a -> s{_pslXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pslQuotaUser :: Lens' ProjectsSinksList' (Maybe Text)
-pslQuotaUser
-  = lens _pslQuotaUser (\ s a -> s{_pslQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pslPrettyPrint :: Lens' ProjectsSinksList' Bool
-pslPrettyPrint
-  = lens _pslPrettyPrint
-      (\ s a -> s{_pslPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 pslUploadProtocol :: Lens' ProjectsSinksList' (Maybe Text)
@@ -186,55 +143,29 @@ pslBearerToken
   = lens _pslBearerToken
       (\ s a -> s{_pslBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pslKey :: Lens' ProjectsSinksList' (Maybe AuthKey)
-pslKey = lens _pslKey (\ s a -> s{_pslKey = a})
-
--- | OAuth 2.0 token for the current user.
-pslOAuthToken :: Lens' ProjectsSinksList' (Maybe OAuthToken)
-pslOAuthToken
-  = lens _pslOAuthToken
-      (\ s a -> s{_pslOAuthToken = a})
-
 -- | Part of \`projectName\`. The project whose sinks are wanted.
 pslProjectsId :: Lens' ProjectsSinksList' Text
 pslProjectsId
   = lens _pslProjectsId
       (\ s a -> s{_pslProjectsId = a})
 
--- | Selector specifying which fields to include in a partial response.
-pslFields :: Lens' ProjectsSinksList' (Maybe Text)
-pslFields
-  = lens _pslFields (\ s a -> s{_pslFields = a})
-
 -- | JSONP
 pslCallback :: Lens' ProjectsSinksList' (Maybe Text)
 pslCallback
   = lens _pslCallback (\ s a -> s{_pslCallback = a})
 
-instance GoogleAuth ProjectsSinksList' where
-        _AuthKey = pslKey . _Just
-        _AuthToken = pslOAuthToken . _Just
-
 instance GoogleRequest ProjectsSinksList' where
         type Rs ProjectsSinksList' = ListSinksResponse
-        request = requestWith loggingRequest
-        requestWith rq ProjectsSinksList'{..}
+        requestClient ProjectsSinksList'{..}
           = go _pslProjectsId _pslXgafv _pslUploadProtocol
               (Just _pslPp)
               _pslAccessToken
               _pslUploadType
               _pslBearerToken
               _pslCallback
-              _pslQuotaUser
-              (Just _pslPrettyPrint)
-              _pslFields
-              _pslKey
-              _pslOAuthToken
               (Just AltJSON)
+              loggingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsSinksListResource)
-                      rq
+                      mempty

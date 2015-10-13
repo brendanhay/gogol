@@ -34,14 +34,8 @@ module Network.Google.Resource.Games.Players.Get
     , PlayersGet'
 
     -- * Request Lenses
-    , pgQuotaUser
-    , pgPrettyPrint
-    , pgUserIP
-    , pgKey
     , pgLanguage
-    , pgOAuthToken
     , pgPlayerId
-    , pgFields
     ) where
 
 import           Network.Google.Games.Types
@@ -53,96 +47,37 @@ type PlayersGetResource =
      "players" :>
        Capture "playerId" Text :>
          QueryParam "language" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Player
+           QueryParam "alt" AltJSON :> Get '[JSON] Player
 
 -- | Retrieves the Player resource with the given ID. To retrieve the player
 -- for the currently authenticated user, set playerId to me.
 --
 -- /See:/ 'playersGet'' smart constructor.
 data PlayersGet' = PlayersGet'
-    { _pgQuotaUser   :: !(Maybe Text)
-    , _pgPrettyPrint :: !Bool
-    , _pgUserIP      :: !(Maybe Text)
-    , _pgKey         :: !(Maybe AuthKey)
-    , _pgLanguage    :: !(Maybe Text)
-    , _pgOAuthToken  :: !(Maybe OAuthToken)
-    , _pgPlayerId    :: !Text
-    , _pgFields      :: !(Maybe Text)
+    { _pgLanguage :: !(Maybe Text)
+    , _pgPlayerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayersGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pgQuotaUser'
---
--- * 'pgPrettyPrint'
---
--- * 'pgUserIP'
---
--- * 'pgKey'
---
 -- * 'pgLanguage'
 --
--- * 'pgOAuthToken'
---
 -- * 'pgPlayerId'
---
--- * 'pgFields'
 playersGet'
     :: Text -- ^ 'playerId'
     -> PlayersGet'
 playersGet' pPgPlayerId_ =
     PlayersGet'
-    { _pgQuotaUser = Nothing
-    , _pgPrettyPrint = True
-    , _pgUserIP = Nothing
-    , _pgKey = Nothing
-    , _pgLanguage = Nothing
-    , _pgOAuthToken = Nothing
+    { _pgLanguage = Nothing
     , _pgPlayerId = pPgPlayerId_
-    , _pgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-pgQuotaUser :: Lens' PlayersGet' (Maybe Text)
-pgQuotaUser
-  = lens _pgQuotaUser (\ s a -> s{_pgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pgPrettyPrint :: Lens' PlayersGet' Bool
-pgPrettyPrint
-  = lens _pgPrettyPrint
-      (\ s a -> s{_pgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-pgUserIP :: Lens' PlayersGet' (Maybe Text)
-pgUserIP = lens _pgUserIP (\ s a -> s{_pgUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pgKey :: Lens' PlayersGet' (Maybe AuthKey)
-pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
 
 -- | The preferred language to use for strings returned by this method.
 pgLanguage :: Lens' PlayersGet' (Maybe Text)
 pgLanguage
   = lens _pgLanguage (\ s a -> s{_pgLanguage = a})
-
--- | OAuth 2.0 token for the current user.
-pgOAuthToken :: Lens' PlayersGet' (Maybe OAuthToken)
-pgOAuthToken
-  = lens _pgOAuthToken (\ s a -> s{_pgOAuthToken = a})
 
 -- | A player ID. A value of me may be used in place of the authenticated
 -- player\'s ID.
@@ -150,24 +85,11 @@ pgPlayerId :: Lens' PlayersGet' Text
 pgPlayerId
   = lens _pgPlayerId (\ s a -> s{_pgPlayerId = a})
 
--- | Selector specifying which fields to include in a partial response.
-pgFields :: Lens' PlayersGet' (Maybe Text)
-pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
-
-instance GoogleAuth PlayersGet' where
-        _AuthKey = pgKey . _Just
-        _AuthToken = pgOAuthToken . _Just
-
 instance GoogleRequest PlayersGet' where
         type Rs PlayersGet' = Player
-        request = requestWith gamesRequest
-        requestWith rq PlayersGet'{..}
-          = go _pgPlayerId _pgLanguage _pgQuotaUser
-              (Just _pgPrettyPrint)
-              _pgUserIP
-              _pgFields
-              _pgKey
-              _pgOAuthToken
-              (Just AltJSON)
+        requestClient PlayersGet'{..}
+          = go _pgPlayerId _pgLanguage (Just AltJSON)
+              gamesService
           where go
-                  = clientBuild (Proxy :: Proxy PlayersGetResource) rq
+                  = buildClient (Proxy :: Proxy PlayersGetResource)
+                      mempty

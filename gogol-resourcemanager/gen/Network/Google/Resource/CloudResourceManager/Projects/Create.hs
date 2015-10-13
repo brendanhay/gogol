@@ -37,17 +37,12 @@ module Network.Google.Resource.CloudResourceManager.Projects.Create
 
     -- * Request Lenses
     , pcXgafv
-    , pcQuotaUser
-    , pcPrettyPrint
     , pcUploadProtocol
     , pcPp
     , pcAccessToken
     , pcUploadType
     , pcPayload
     , pcBearerToken
-    , pcKey
-    , pcOAuthToken
-    , pcFields
     , pcCallback
     ) where
 
@@ -66,14 +61,8 @@ type ProjectsCreateResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Project :>
-                                     Post '[JSON] Project
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Project :> Post '[JSON] Project
 
 -- | Creates a project resource. Initially, the project resource is owned by
 -- its creator exclusively. The creator can later grant permission to
@@ -83,17 +72,12 @@ type ProjectsCreateResource =
 -- /See:/ 'projectsCreate'' smart constructor.
 data ProjectsCreate' = ProjectsCreate'
     { _pcXgafv          :: !(Maybe Text)
-    , _pcQuotaUser      :: !(Maybe Text)
-    , _pcPrettyPrint    :: !Bool
     , _pcUploadProtocol :: !(Maybe Text)
     , _pcPp             :: !Bool
     , _pcAccessToken    :: !(Maybe Text)
     , _pcUploadType     :: !(Maybe Text)
     , _pcPayload        :: !Project
     , _pcBearerToken    :: !(Maybe Text)
-    , _pcKey            :: !(Maybe AuthKey)
-    , _pcOAuthToken     :: !(Maybe OAuthToken)
-    , _pcFields         :: !(Maybe Text)
     , _pcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +86,6 @@ data ProjectsCreate' = ProjectsCreate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pcXgafv'
---
--- * 'pcQuotaUser'
---
--- * 'pcPrettyPrint'
 --
 -- * 'pcUploadProtocol'
 --
@@ -119,12 +99,6 @@ data ProjectsCreate' = ProjectsCreate'
 --
 -- * 'pcBearerToken'
 --
--- * 'pcKey'
---
--- * 'pcOAuthToken'
---
--- * 'pcFields'
---
 -- * 'pcCallback'
 projectsCreate'
     :: Project -- ^ 'payload'
@@ -132,36 +106,18 @@ projectsCreate'
 projectsCreate' pPcPayload_ =
     ProjectsCreate'
     { _pcXgafv = Nothing
-    , _pcQuotaUser = Nothing
-    , _pcPrettyPrint = True
     , _pcUploadProtocol = Nothing
     , _pcPp = True
     , _pcAccessToken = Nothing
     , _pcUploadType = Nothing
     , _pcPayload = pPcPayload_
     , _pcBearerToken = Nothing
-    , _pcKey = Nothing
-    , _pcOAuthToken = Nothing
-    , _pcFields = Nothing
     , _pcCallback = Nothing
     }
 
 -- | V1 error format.
 pcXgafv :: Lens' ProjectsCreate' (Maybe Text)
 pcXgafv = lens _pcXgafv (\ s a -> s{_pcXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pcQuotaUser :: Lens' ProjectsCreate' (Maybe Text)
-pcQuotaUser
-  = lens _pcQuotaUser (\ s a -> s{_pcQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pcPrettyPrint :: Lens' ProjectsCreate' Bool
-pcPrettyPrint
-  = lens _pcPrettyPrint
-      (\ s a -> s{_pcPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 pcUploadProtocol :: Lens' ProjectsCreate' (Maybe Text)
@@ -195,46 +151,22 @@ pcBearerToken
   = lens _pcBearerToken
       (\ s a -> s{_pcBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pcKey :: Lens' ProjectsCreate' (Maybe AuthKey)
-pcKey = lens _pcKey (\ s a -> s{_pcKey = a})
-
--- | OAuth 2.0 token for the current user.
-pcOAuthToken :: Lens' ProjectsCreate' (Maybe OAuthToken)
-pcOAuthToken
-  = lens _pcOAuthToken (\ s a -> s{_pcOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pcFields :: Lens' ProjectsCreate' (Maybe Text)
-pcFields = lens _pcFields (\ s a -> s{_pcFields = a})
-
 -- | JSONP
 pcCallback :: Lens' ProjectsCreate' (Maybe Text)
 pcCallback
   = lens _pcCallback (\ s a -> s{_pcCallback = a})
 
-instance GoogleAuth ProjectsCreate' where
-        _AuthKey = pcKey . _Just
-        _AuthToken = pcOAuthToken . _Just
-
 instance GoogleRequest ProjectsCreate' where
         type Rs ProjectsCreate' = Project
-        request = requestWith resourceManagerRequest
-        requestWith rq ProjectsCreate'{..}
+        requestClient ProjectsCreate'{..}
           = go _pcXgafv _pcUploadProtocol (Just _pcPp)
               _pcAccessToken
               _pcUploadType
               _pcBearerToken
               _pcCallback
-              _pcQuotaUser
-              (Just _pcPrettyPrint)
-              _pcFields
-              _pcKey
-              _pcOAuthToken
               (Just AltJSON)
               _pcPayload
+              resourceManagerService
           where go
-                  = clientBuild (Proxy :: Proxy ProjectsCreateResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ProjectsCreateResource)
+                      mempty

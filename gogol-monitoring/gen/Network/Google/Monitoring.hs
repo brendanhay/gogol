@@ -18,8 +18,11 @@
 -- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference>
 module Network.Google.Monitoring
     (
+    -- * Service Configuration
+      monitoringService
+
     -- * API Declaration
-      MonitoringAPI
+    , MonitoringAPI
 
     -- * Resources
 

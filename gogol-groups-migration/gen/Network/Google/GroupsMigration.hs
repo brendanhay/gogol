@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/google-apps/groups-migration/ Groups Migration API Reference>
 module Network.Google.GroupsMigration
     (
+    -- * Service Configuration
+      groupsMigrationService
+
     -- * API Declaration
-      GroupsMigrationAPI
+    , GroupsMigrationAPI
 
     -- * Resources
 

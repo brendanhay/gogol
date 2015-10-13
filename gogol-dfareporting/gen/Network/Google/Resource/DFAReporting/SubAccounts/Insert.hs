@@ -33,14 +33,8 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Insert
     , SubAccountsInsert'
 
     -- * Request Lenses
-    , saiQuotaUser
-    , saiPrettyPrint
-    , saiUserIP
     , saiProFileId
     , saiPayload
-    , saiKey
-    , saiOAuthToken
-    , saiFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,82 +46,33 @@ type SubAccountsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "subaccounts" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] SubAccount :> Post '[JSON] SubAccount
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] SubAccount :> Post '[JSON] SubAccount
 
 -- | Inserts a new subaccount.
 --
 -- /See:/ 'subAccountsInsert'' smart constructor.
 data SubAccountsInsert' = SubAccountsInsert'
-    { _saiQuotaUser   :: !(Maybe Text)
-    , _saiPrettyPrint :: !Bool
-    , _saiUserIP      :: !(Maybe Text)
-    , _saiProFileId   :: !Int64
-    , _saiPayload     :: !SubAccount
-    , _saiKey         :: !(Maybe AuthKey)
-    , _saiOAuthToken  :: !(Maybe OAuthToken)
-    , _saiFields      :: !(Maybe Text)
+    { _saiProFileId :: !Int64
+    , _saiPayload   :: !SubAccount
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubAccountsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'saiQuotaUser'
---
--- * 'saiPrettyPrint'
---
--- * 'saiUserIP'
---
 -- * 'saiProFileId'
 --
 -- * 'saiPayload'
---
--- * 'saiKey'
---
--- * 'saiOAuthToken'
---
--- * 'saiFields'
 subAccountsInsert'
     :: Int64 -- ^ 'profileId'
     -> SubAccount -- ^ 'payload'
     -> SubAccountsInsert'
 subAccountsInsert' pSaiProFileId_ pSaiPayload_ =
     SubAccountsInsert'
-    { _saiQuotaUser = Nothing
-    , _saiPrettyPrint = True
-    , _saiUserIP = Nothing
-    , _saiProFileId = pSaiProFileId_
+    { _saiProFileId = pSaiProFileId_
     , _saiPayload = pSaiPayload_
-    , _saiKey = Nothing
-    , _saiOAuthToken = Nothing
-    , _saiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-saiQuotaUser :: Lens' SubAccountsInsert' (Maybe Text)
-saiQuotaUser
-  = lens _saiQuotaUser (\ s a -> s{_saiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-saiPrettyPrint :: Lens' SubAccountsInsert' Bool
-saiPrettyPrint
-  = lens _saiPrettyPrint
-      (\ s a -> s{_saiPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-saiUserIP :: Lens' SubAccountsInsert' (Maybe Text)
-saiUserIP
-  = lens _saiUserIP (\ s a -> s{_saiUserIP = a})
 
 -- | User profile ID associated with this request.
 saiProFileId :: Lens' SubAccountsInsert' Int64
@@ -139,40 +84,12 @@ saiPayload :: Lens' SubAccountsInsert' SubAccount
 saiPayload
   = lens _saiPayload (\ s a -> s{_saiPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-saiKey :: Lens' SubAccountsInsert' (Maybe AuthKey)
-saiKey = lens _saiKey (\ s a -> s{_saiKey = a})
-
--- | OAuth 2.0 token for the current user.
-saiOAuthToken :: Lens' SubAccountsInsert' (Maybe OAuthToken)
-saiOAuthToken
-  = lens _saiOAuthToken
-      (\ s a -> s{_saiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-saiFields :: Lens' SubAccountsInsert' (Maybe Text)
-saiFields
-  = lens _saiFields (\ s a -> s{_saiFields = a})
-
-instance GoogleAuth SubAccountsInsert' where
-        _AuthKey = saiKey . _Just
-        _AuthToken = saiOAuthToken . _Just
-
 instance GoogleRequest SubAccountsInsert' where
         type Rs SubAccountsInsert' = SubAccount
-        request = requestWith dFAReportingRequest
-        requestWith rq SubAccountsInsert'{..}
-          = go _saiProFileId _saiQuotaUser
-              (Just _saiPrettyPrint)
-              _saiUserIP
-              _saiFields
-              _saiKey
-              _saiOAuthToken
-              (Just AltJSON)
-              _saiPayload
+        requestClient SubAccountsInsert'{..}
+          = go _saiProFileId (Just AltJSON) _saiPayload
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy SubAccountsInsertResource)
-                      rq
+                      mempty

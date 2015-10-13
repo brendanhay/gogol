@@ -34,17 +34,11 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Patch
     , ManagementCustomDimensionsPatch'
 
     -- * Request Lenses
-    , mcdpQuotaUser
-    , mcdpPrettyPrint
     , mcdpWebPropertyId
     , mcdpIgnoreCustomDataSourceLinks
-    , mcdpUserIP
     , mcdpPayload
     , mcdpAccountId
-    , mcdpKey
-    , mcdpOAuthToken
     , mcdpCustomDimensionId
-    , mcdpFields
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,59 +55,35 @@ type ManagementCustomDimensionsPatchResource =
                "customDimensions" :>
                  Capture "customDimensionId" Text :>
                    QueryParam "ignoreCustomDataSourceLinks" Bool :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] CustomDimension :>
-                                     Patch '[JSON] CustomDimension
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] CustomDimension :>
+                         Patch '[JSON] CustomDimension
 
 -- | Updates an existing custom dimension. This method supports patch
 -- semantics.
 --
 -- /See:/ 'managementCustomDimensionsPatch'' smart constructor.
 data ManagementCustomDimensionsPatch' = ManagementCustomDimensionsPatch'
-    { _mcdpQuotaUser                   :: !(Maybe Text)
-    , _mcdpPrettyPrint                 :: !Bool
-    , _mcdpWebPropertyId               :: !Text
+    { _mcdpWebPropertyId               :: !Text
     , _mcdpIgnoreCustomDataSourceLinks :: !Bool
-    , _mcdpUserIP                      :: !(Maybe Text)
     , _mcdpPayload                     :: !CustomDimension
     , _mcdpAccountId                   :: !Text
-    , _mcdpKey                         :: !(Maybe AuthKey)
-    , _mcdpOAuthToken                  :: !(Maybe OAuthToken)
     , _mcdpCustomDimensionId           :: !Text
-    , _mcdpFields                      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mcdpQuotaUser'
---
--- * 'mcdpPrettyPrint'
---
 -- * 'mcdpWebPropertyId'
 --
 -- * 'mcdpIgnoreCustomDataSourceLinks'
---
--- * 'mcdpUserIP'
 --
 -- * 'mcdpPayload'
 --
 -- * 'mcdpAccountId'
 --
--- * 'mcdpKey'
---
--- * 'mcdpOAuthToken'
---
 -- * 'mcdpCustomDimensionId'
---
--- * 'mcdpFields'
 managementCustomDimensionsPatch'
     :: Text -- ^ 'webPropertyId'
     -> CustomDimension -- ^ 'payload'
@@ -122,32 +92,12 @@ managementCustomDimensionsPatch'
     -> ManagementCustomDimensionsPatch'
 managementCustomDimensionsPatch' pMcdpWebPropertyId_ pMcdpPayload_ pMcdpAccountId_ pMcdpCustomDimensionId_ =
     ManagementCustomDimensionsPatch'
-    { _mcdpQuotaUser = Nothing
-    , _mcdpPrettyPrint = False
-    , _mcdpWebPropertyId = pMcdpWebPropertyId_
+    { _mcdpWebPropertyId = pMcdpWebPropertyId_
     , _mcdpIgnoreCustomDataSourceLinks = False
-    , _mcdpUserIP = Nothing
     , _mcdpPayload = pMcdpPayload_
     , _mcdpAccountId = pMcdpAccountId_
-    , _mcdpKey = Nothing
-    , _mcdpOAuthToken = Nothing
     , _mcdpCustomDimensionId = pMcdpCustomDimensionId_
-    , _mcdpFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mcdpQuotaUser :: Lens' ManagementCustomDimensionsPatch' (Maybe Text)
-mcdpQuotaUser
-  = lens _mcdpQuotaUser
-      (\ s a -> s{_mcdpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mcdpPrettyPrint :: Lens' ManagementCustomDimensionsPatch' Bool
-mcdpPrettyPrint
-  = lens _mcdpPrettyPrint
-      (\ s a -> s{_mcdpPrettyPrint = a})
 
 -- | Web property ID for the custom dimension to update.
 mcdpWebPropertyId :: Lens' ManagementCustomDimensionsPatch' Text
@@ -162,12 +112,6 @@ mcdpIgnoreCustomDataSourceLinks
   = lens _mcdpIgnoreCustomDataSourceLinks
       (\ s a -> s{_mcdpIgnoreCustomDataSourceLinks = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mcdpUserIP :: Lens' ManagementCustomDimensionsPatch' (Maybe Text)
-mcdpUserIP
-  = lens _mcdpUserIP (\ s a -> s{_mcdpUserIP = a})
-
 -- | Multipart request metadata.
 mcdpPayload :: Lens' ManagementCustomDimensionsPatch' CustomDimension
 mcdpPayload
@@ -179,53 +123,25 @@ mcdpAccountId
   = lens _mcdpAccountId
       (\ s a -> s{_mcdpAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mcdpKey :: Lens' ManagementCustomDimensionsPatch' (Maybe AuthKey)
-mcdpKey = lens _mcdpKey (\ s a -> s{_mcdpKey = a})
-
--- | OAuth 2.0 token for the current user.
-mcdpOAuthToken :: Lens' ManagementCustomDimensionsPatch' (Maybe OAuthToken)
-mcdpOAuthToken
-  = lens _mcdpOAuthToken
-      (\ s a -> s{_mcdpOAuthToken = a})
-
 -- | Custom dimension ID for the custom dimension to update.
 mcdpCustomDimensionId :: Lens' ManagementCustomDimensionsPatch' Text
 mcdpCustomDimensionId
   = lens _mcdpCustomDimensionId
       (\ s a -> s{_mcdpCustomDimensionId = a})
 
--- | Selector specifying which fields to include in a partial response.
-mcdpFields :: Lens' ManagementCustomDimensionsPatch' (Maybe Text)
-mcdpFields
-  = lens _mcdpFields (\ s a -> s{_mcdpFields = a})
-
-instance GoogleAuth ManagementCustomDimensionsPatch'
-         where
-        _AuthKey = mcdpKey . _Just
-        _AuthToken = mcdpOAuthToken . _Just
-
 instance GoogleRequest
          ManagementCustomDimensionsPatch' where
         type Rs ManagementCustomDimensionsPatch' =
              CustomDimension
-        request = requestWith analyticsRequest
-        requestWith rq ManagementCustomDimensionsPatch'{..}
+        requestClient ManagementCustomDimensionsPatch'{..}
           = go _mcdpAccountId _mcdpWebPropertyId
               _mcdpCustomDimensionId
               (Just _mcdpIgnoreCustomDataSourceLinks)
-              _mcdpQuotaUser
-              (Just _mcdpPrettyPrint)
-              _mcdpUserIP
-              _mcdpFields
-              _mcdpKey
-              _mcdpOAuthToken
               (Just AltJSON)
               _mcdpPayload
+              analyticsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy ManagementCustomDimensionsPatchResource)
-                      rq
+                      mempty

@@ -40,8 +40,6 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Create
 
     -- * Request Lenses
     , bacXgafv
-    , bacQuotaUser
-    , bacPrettyPrint
     , bacUploadProtocol
     , bacPp
     , bacAccessToken
@@ -49,9 +47,6 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Create
     , bacUploadType
     , bacPayload
     , bacBearerToken
-    , bacKey
-    , bacOAuthToken
-    , bacFields
     , bacCallback
     ) where
 
@@ -71,14 +66,9 @@ type BeaconsAttachmentsCreateResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] BeaconAttachment :>
-                                       Post '[JSON] BeaconAttachment
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] BeaconAttachment :>
+                             Post '[JSON] BeaconAttachment
 
 -- | Associates the given data with the specified beacon. Attachment data
 -- must contain two parts: - A namespaced type. - The actual attachment
@@ -91,8 +81,6 @@ type BeaconsAttachmentsCreateResource =
 -- /See:/ 'beaconsAttachmentsCreate'' smart constructor.
 data BeaconsAttachmentsCreate' = BeaconsAttachmentsCreate'
     { _bacXgafv          :: !(Maybe Text)
-    , _bacQuotaUser      :: !(Maybe Text)
-    , _bacPrettyPrint    :: !Bool
     , _bacUploadProtocol :: !(Maybe Text)
     , _bacPp             :: !Bool
     , _bacAccessToken    :: !(Maybe Text)
@@ -100,9 +88,6 @@ data BeaconsAttachmentsCreate' = BeaconsAttachmentsCreate'
     , _bacUploadType     :: !(Maybe Text)
     , _bacPayload        :: !BeaconAttachment
     , _bacBearerToken    :: !(Maybe Text)
-    , _bacKey            :: !(Maybe AuthKey)
-    , _bacOAuthToken     :: !(Maybe OAuthToken)
-    , _bacFields         :: !(Maybe Text)
     , _bacCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -111,10 +96,6 @@ data BeaconsAttachmentsCreate' = BeaconsAttachmentsCreate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'bacXgafv'
---
--- * 'bacQuotaUser'
---
--- * 'bacPrettyPrint'
 --
 -- * 'bacUploadProtocol'
 --
@@ -130,12 +111,6 @@ data BeaconsAttachmentsCreate' = BeaconsAttachmentsCreate'
 --
 -- * 'bacBearerToken'
 --
--- * 'bacKey'
---
--- * 'bacOAuthToken'
---
--- * 'bacFields'
---
 -- * 'bacCallback'
 beaconsAttachmentsCreate'
     :: Text -- ^ 'beaconName'
@@ -144,8 +119,6 @@ beaconsAttachmentsCreate'
 beaconsAttachmentsCreate' pBacBeaconName_ pBacPayload_ =
     BeaconsAttachmentsCreate'
     { _bacXgafv = Nothing
-    , _bacQuotaUser = Nothing
-    , _bacPrettyPrint = True
     , _bacUploadProtocol = Nothing
     , _bacPp = True
     , _bacAccessToken = Nothing
@@ -153,28 +126,12 @@ beaconsAttachmentsCreate' pBacBeaconName_ pBacPayload_ =
     , _bacUploadType = Nothing
     , _bacPayload = pBacPayload_
     , _bacBearerToken = Nothing
-    , _bacKey = Nothing
-    , _bacOAuthToken = Nothing
-    , _bacFields = Nothing
     , _bacCallback = Nothing
     }
 
 -- | V1 error format.
 bacXgafv :: Lens' BeaconsAttachmentsCreate' (Maybe Text)
 bacXgafv = lens _bacXgafv (\ s a -> s{_bacXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-bacQuotaUser :: Lens' BeaconsAttachmentsCreate' (Maybe Text)
-bacQuotaUser
-  = lens _bacQuotaUser (\ s a -> s{_bacQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-bacPrettyPrint :: Lens' BeaconsAttachmentsCreate' Bool
-bacPrettyPrint
-  = lens _bacPrettyPrint
-      (\ s a -> s{_bacPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 bacUploadProtocol :: Lens' BeaconsAttachmentsCreate' (Maybe Text)
@@ -215,51 +172,25 @@ bacBearerToken
   = lens _bacBearerToken
       (\ s a -> s{_bacBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-bacKey :: Lens' BeaconsAttachmentsCreate' (Maybe AuthKey)
-bacKey = lens _bacKey (\ s a -> s{_bacKey = a})
-
--- | OAuth 2.0 token for the current user.
-bacOAuthToken :: Lens' BeaconsAttachmentsCreate' (Maybe OAuthToken)
-bacOAuthToken
-  = lens _bacOAuthToken
-      (\ s a -> s{_bacOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-bacFields :: Lens' BeaconsAttachmentsCreate' (Maybe Text)
-bacFields
-  = lens _bacFields (\ s a -> s{_bacFields = a})
-
 -- | JSONP
 bacCallback :: Lens' BeaconsAttachmentsCreate' (Maybe Text)
 bacCallback
   = lens _bacCallback (\ s a -> s{_bacCallback = a})
 
-instance GoogleAuth BeaconsAttachmentsCreate' where
-        _AuthKey = bacKey . _Just
-        _AuthToken = bacOAuthToken . _Just
-
 instance GoogleRequest BeaconsAttachmentsCreate'
          where
         type Rs BeaconsAttachmentsCreate' = BeaconAttachment
-        request = requestWith proximityBeaconRequest
-        requestWith rq BeaconsAttachmentsCreate'{..}
+        requestClient BeaconsAttachmentsCreate'{..}
           = go _bacBeaconName _bacXgafv _bacUploadProtocol
               (Just _bacPp)
               _bacAccessToken
               _bacUploadType
               _bacBearerToken
               _bacCallback
-              _bacQuotaUser
-              (Just _bacPrettyPrint)
-              _bacFields
-              _bacKey
-              _bacOAuthToken
               (Just AltJSON)
               _bacPayload
+              proximityBeaconService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy BeaconsAttachmentsCreateResource)
-                      rq
+                      mempty

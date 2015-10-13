@@ -18,8 +18,11 @@
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference>
 module Network.Google.BigQuery
     (
+    -- * Service Configuration
+      bigQueryService
+
     -- * API Declaration
-      BigQueryAPI
+    , BigQueryAPI
 
     -- * Resources
 

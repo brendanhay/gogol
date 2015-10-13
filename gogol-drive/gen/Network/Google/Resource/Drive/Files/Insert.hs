@@ -33,9 +33,6 @@ module Network.Google.Resource.Drive.Files.Insert
     , FilesInsert'
 
     -- * Request Lenses
-    , fiQuotaUser
-    , fiPrettyPrint
-    , fiUserIP
     , fiPinned
     , fiVisibility
     , fiTimedTextLanguage
@@ -44,11 +41,8 @@ module Network.Google.Resource.Drive.Files.Insert
     , fiMedia
     , fiTimedTextTrackName
     , fiOCRLanguage
-    , fiKey
     , fiConvert
-    , fiOAuthToken
     , fiOCR
-    , fiFields
     ) where
 
 import           Network.Google.Drive.Types
@@ -66,24 +60,15 @@ type FilesInsertResource =
                  QueryParam "ocrLanguage" Text :>
                    QueryParam "convert" Bool :>
                      QueryParam "ocr" Bool :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     MultipartRelated '[JSON] File Stream :>
-                                       Post '[JSON] File
+                       QueryParam "alt" AltJSON :>
+                         MultipartRelated '[JSON] File Stream :>
+                           Post '[JSON] File
 
 -- | Insert a new file.
 --
 -- /See:/ 'filesInsert'' smart constructor.
 data FilesInsert' = FilesInsert'
-    { _fiQuotaUser                 :: !(Maybe Text)
-    , _fiPrettyPrint               :: !Bool
-    , _fiUserIP                    :: !(Maybe Text)
-    , _fiPinned                    :: !Bool
+    { _fiPinned                    :: !Bool
     , _fiVisibility                :: !FilesInsertVisibility
     , _fiTimedTextLanguage         :: !(Maybe Text)
     , _fiPayload                   :: !File
@@ -91,22 +76,13 @@ data FilesInsert' = FilesInsert'
     , _fiMedia                     :: !Stream
     , _fiTimedTextTrackName        :: !(Maybe Text)
     , _fiOCRLanguage               :: !(Maybe Text)
-    , _fiKey                       :: !(Maybe AuthKey)
     , _fiConvert                   :: !Bool
-    , _fiOAuthToken                :: !(Maybe OAuthToken)
     , _fiOCR                       :: !Bool
-    , _fiFields                    :: !(Maybe Text)
     }
 
 -- | Creates a value of 'FilesInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'fiQuotaUser'
---
--- * 'fiPrettyPrint'
---
--- * 'fiUserIP'
 --
 -- * 'fiPinned'
 --
@@ -124,25 +100,16 @@ data FilesInsert' = FilesInsert'
 --
 -- * 'fiOCRLanguage'
 --
--- * 'fiKey'
---
 -- * 'fiConvert'
 --
--- * 'fiOAuthToken'
---
 -- * 'fiOCR'
---
--- * 'fiFields'
 filesInsert'
     :: File -- ^ 'payload'
     -> Stream -- ^ 'media'
     -> FilesInsert'
 filesInsert' pFiPayload_ pFiMedia_ =
     FilesInsert'
-    { _fiQuotaUser = Nothing
-    , _fiPrettyPrint = True
-    , _fiUserIP = Nothing
-    , _fiPinned = False
+    { _fiPinned = False
     , _fiVisibility = Default
     , _fiTimedTextLanguage = Nothing
     , _fiPayload = pFiPayload_
@@ -150,30 +117,9 @@ filesInsert' pFiPayload_ pFiMedia_ =
     , _fiMedia = pFiMedia_
     , _fiTimedTextTrackName = Nothing
     , _fiOCRLanguage = Nothing
-    , _fiKey = Nothing
     , _fiConvert = False
-    , _fiOAuthToken = Nothing
     , _fiOCR = False
-    , _fiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-fiQuotaUser :: Lens' FilesInsert' (Maybe Text)
-fiQuotaUser
-  = lens _fiQuotaUser (\ s a -> s{_fiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-fiPrettyPrint :: Lens' FilesInsert' Bool
-fiPrettyPrint
-  = lens _fiPrettyPrint
-      (\ s a -> s{_fiPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-fiUserIP :: Lens' FilesInsert' (Maybe Text)
-fiUserIP = lens _fiUserIP (\ s a -> s{_fiUserIP = a})
 
 -- | Whether to pin the head revision of the uploaded file. A file can have a
 -- maximum of 200 pinned revisions.
@@ -219,38 +165,18 @@ fiOCRLanguage
   = lens _fiOCRLanguage
       (\ s a -> s{_fiOCRLanguage = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-fiKey :: Lens' FilesInsert' (Maybe AuthKey)
-fiKey = lens _fiKey (\ s a -> s{_fiKey = a})
-
 -- | Whether to convert this file to the corresponding Google Docs format.
 fiConvert :: Lens' FilesInsert' Bool
 fiConvert
   = lens _fiConvert (\ s a -> s{_fiConvert = a})
 
--- | OAuth 2.0 token for the current user.
-fiOAuthToken :: Lens' FilesInsert' (Maybe OAuthToken)
-fiOAuthToken
-  = lens _fiOAuthToken (\ s a -> s{_fiOAuthToken = a})
-
 -- | Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.
 fiOCR :: Lens' FilesInsert' Bool
 fiOCR = lens _fiOCR (\ s a -> s{_fiOCR = a})
 
--- | Selector specifying which fields to include in a partial response.
-fiFields :: Lens' FilesInsert' (Maybe Text)
-fiFields = lens _fiFields (\ s a -> s{_fiFields = a})
-
-instance GoogleAuth FilesInsert' where
-        _AuthKey = fiKey . _Just
-        _AuthToken = fiOAuthToken . _Just
-
 instance GoogleRequest FilesInsert' where
         type Rs FilesInsert' = File
-        request = requestWith driveRequest
-        requestWith rq FilesInsert'{..}
+        requestClient FilesInsert'{..}
           = go (Just _fiPinned) (Just _fiVisibility)
               _fiTimedTextLanguage
               (Just _fiUseContentAsIndexableText)
@@ -258,14 +184,10 @@ instance GoogleRequest FilesInsert' where
               _fiOCRLanguage
               (Just _fiConvert)
               (Just _fiOCR)
-              _fiQuotaUser
-              (Just _fiPrettyPrint)
-              _fiUserIP
-              _fiFields
-              _fiKey
-              _fiOAuthToken
               (Just AltJSON)
               _fiPayload
               _fiMedia
+              driveService
           where go
-                  = clientBuild (Proxy :: Proxy FilesInsertResource) rq
+                  = buildClient (Proxy :: Proxy FilesInsertResource)
+                      mempty

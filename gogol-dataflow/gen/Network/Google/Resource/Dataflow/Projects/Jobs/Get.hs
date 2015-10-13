@@ -34,19 +34,14 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Get
 
     -- * Request Lenses
     , pjgXgafv
-    , pjgQuotaUser
-    , pjgPrettyPrint
     , pjgJobId
     , pjgUploadProtocol
     , pjgPp
     , pjgAccessToken
     , pjgUploadType
     , pjgBearerToken
-    , pjgKey
     , pjgView
     , pjgProjectId
-    , pjgOAuthToken
-    , pjgFields
     , pjgCallback
     ) where
 
@@ -69,32 +64,21 @@ type ProjectsJobsGetResource =
                          QueryParam "bearer_token" Text :>
                            QueryParam "view" Text :>
                              QueryParam "callback" Text :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] Job
+                               QueryParam "alt" AltJSON :> Get '[JSON] Job
 
 -- | Gets the state of the specified dataflow job.
 --
 -- /See:/ 'projectsJobsGet'' smart constructor.
 data ProjectsJobsGet' = ProjectsJobsGet'
     { _pjgXgafv          :: !(Maybe Text)
-    , _pjgQuotaUser      :: !(Maybe Text)
-    , _pjgPrettyPrint    :: !Bool
     , _pjgJobId          :: !Text
     , _pjgUploadProtocol :: !(Maybe Text)
     , _pjgPp             :: !Bool
     , _pjgAccessToken    :: !(Maybe Text)
     , _pjgUploadType     :: !(Maybe Text)
     , _pjgBearerToken    :: !(Maybe Text)
-    , _pjgKey            :: !(Maybe AuthKey)
     , _pjgView           :: !(Maybe Text)
     , _pjgProjectId      :: !Text
-    , _pjgOAuthToken     :: !(Maybe OAuthToken)
-    , _pjgFields         :: !(Maybe Text)
     , _pjgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -103,10 +87,6 @@ data ProjectsJobsGet' = ProjectsJobsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pjgXgafv'
---
--- * 'pjgQuotaUser'
---
--- * 'pjgPrettyPrint'
 --
 -- * 'pjgJobId'
 --
@@ -120,15 +100,9 @@ data ProjectsJobsGet' = ProjectsJobsGet'
 --
 -- * 'pjgBearerToken'
 --
--- * 'pjgKey'
---
 -- * 'pjgView'
 --
 -- * 'pjgProjectId'
---
--- * 'pjgOAuthToken'
---
--- * 'pjgFields'
 --
 -- * 'pjgCallback'
 projectsJobsGet'
@@ -138,38 +112,20 @@ projectsJobsGet'
 projectsJobsGet' pPjgJobId_ pPjgProjectId_ =
     ProjectsJobsGet'
     { _pjgXgafv = Nothing
-    , _pjgQuotaUser = Nothing
-    , _pjgPrettyPrint = True
     , _pjgJobId = pPjgJobId_
     , _pjgUploadProtocol = Nothing
     , _pjgPp = True
     , _pjgAccessToken = Nothing
     , _pjgUploadType = Nothing
     , _pjgBearerToken = Nothing
-    , _pjgKey = Nothing
     , _pjgView = Nothing
     , _pjgProjectId = pPjgProjectId_
-    , _pjgOAuthToken = Nothing
-    , _pjgFields = Nothing
     , _pjgCallback = Nothing
     }
 
 -- | V1 error format.
 pjgXgafv :: Lens' ProjectsJobsGet' (Maybe Text)
 pjgXgafv = lens _pjgXgafv (\ s a -> s{_pjgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pjgQuotaUser :: Lens' ProjectsJobsGet' (Maybe Text)
-pjgQuotaUser
-  = lens _pjgQuotaUser (\ s a -> s{_pjgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pjgPrettyPrint :: Lens' ProjectsJobsGet' Bool
-pjgPrettyPrint
-  = lens _pjgPrettyPrint
-      (\ s a -> s{_pjgPrettyPrint = a})
 
 -- | Identifies a single job.
 pjgJobId :: Lens' ProjectsJobsGet' Text
@@ -203,12 +159,6 @@ pjgBearerToken
   = lens _pjgBearerToken
       (\ s a -> s{_pjgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pjgKey :: Lens' ProjectsJobsGet' (Maybe AuthKey)
-pjgKey = lens _pjgKey (\ s a -> s{_pjgKey = a})
-
 -- | Level of information requested in response.
 pjgView :: Lens' ProjectsJobsGet' (Maybe Text)
 pjgView = lens _pjgView (\ s a -> s{_pjgView = a})
@@ -218,30 +168,14 @@ pjgProjectId :: Lens' ProjectsJobsGet' Text
 pjgProjectId
   = lens _pjgProjectId (\ s a -> s{_pjgProjectId = a})
 
--- | OAuth 2.0 token for the current user.
-pjgOAuthToken :: Lens' ProjectsJobsGet' (Maybe OAuthToken)
-pjgOAuthToken
-  = lens _pjgOAuthToken
-      (\ s a -> s{_pjgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pjgFields :: Lens' ProjectsJobsGet' (Maybe Text)
-pjgFields
-  = lens _pjgFields (\ s a -> s{_pjgFields = a})
-
 -- | JSONP
 pjgCallback :: Lens' ProjectsJobsGet' (Maybe Text)
 pjgCallback
   = lens _pjgCallback (\ s a -> s{_pjgCallback = a})
 
-instance GoogleAuth ProjectsJobsGet' where
-        _AuthKey = pjgKey . _Just
-        _AuthToken = pjgOAuthToken . _Just
-
 instance GoogleRequest ProjectsJobsGet' where
         type Rs ProjectsJobsGet' = Job
-        request = requestWith dataflowRequest
-        requestWith rq ProjectsJobsGet'{..}
+        requestClient ProjectsJobsGet'{..}
           = go _pjgProjectId _pjgJobId _pjgXgafv
               _pjgUploadProtocol
               (Just _pjgPp)
@@ -250,13 +184,9 @@ instance GoogleRequest ProjectsJobsGet' where
               _pjgBearerToken
               _pjgView
               _pjgCallback
-              _pjgQuotaUser
-              (Just _pjgPrettyPrint)
-              _pjgFields
-              _pjgKey
-              _pjgOAuthToken
               (Just AltJSON)
+              dataflowService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsJobsGetResource)
-                      rq
+                      mempty

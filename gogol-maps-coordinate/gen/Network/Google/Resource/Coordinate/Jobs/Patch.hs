@@ -34,12 +34,9 @@ module Network.Google.Resource.Coordinate.Jobs.Patch
     , JobsPatch'
 
     -- * Request Lenses
-    , jpQuotaUser
-    , jpPrettyPrint
     , jpJobId
     , jpProgress
     , jpNote
-    , jpUserIP
     , jpTeamId
     , jpCustomerPhoneNumber
     , jpCustomerName
@@ -47,11 +44,8 @@ module Network.Google.Resource.Coordinate.Jobs.Patch
     , jpPayload
     , jpAssignee
     , jpLat
-    , jpKey
     , jpLng
     , jpTitle
-    , jpOAuthToken
-    , jpFields
     , jpCustomField
     ) where
 
@@ -75,27 +69,17 @@ type JobsPatchResource =
                            QueryParam "lng" Double :>
                              QueryParam "title" Text :>
                                QueryParams "customField" Text :>
-                                 QueryParam "quotaUser" Text :>
-                                   QueryParam "prettyPrint" Bool :>
-                                     QueryParam "userIp" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "key" AuthKey :>
-                                           Header "Authorization" OAuthToken :>
-                                             QueryParam "alt" AltJSON :>
-                                               ReqBody '[JSON] Job :>
-                                                 Patch '[JSON] Job
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Job :> Patch '[JSON] Job
 
 -- | Updates a job. Fields that are set in the job state will be updated.
 -- This method supports patch semantics.
 --
 -- /See:/ 'jobsPatch'' smart constructor.
 data JobsPatch' = JobsPatch'
-    { _jpQuotaUser           :: !(Maybe Text)
-    , _jpPrettyPrint         :: !Bool
-    , _jpJobId               :: !Word64
+    { _jpJobId               :: !Word64
     , _jpProgress            :: !(Maybe JobsPatchProgress)
     , _jpNote                :: !(Maybe Text)
-    , _jpUserIP              :: !(Maybe Text)
     , _jpTeamId              :: !Text
     , _jpCustomerPhoneNumber :: !(Maybe Text)
     , _jpCustomerName        :: !(Maybe Text)
@@ -103,11 +87,8 @@ data JobsPatch' = JobsPatch'
     , _jpPayload             :: !Job
     , _jpAssignee            :: !(Maybe Text)
     , _jpLat                 :: !(Maybe Double)
-    , _jpKey                 :: !(Maybe AuthKey)
     , _jpLng                 :: !(Maybe Double)
     , _jpTitle               :: !(Maybe Text)
-    , _jpOAuthToken          :: !(Maybe OAuthToken)
-    , _jpFields              :: !(Maybe Text)
     , _jpCustomField         :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -115,17 +96,11 @@ data JobsPatch' = JobsPatch'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'jpQuotaUser'
---
--- * 'jpPrettyPrint'
---
 -- * 'jpJobId'
 --
 -- * 'jpProgress'
 --
 -- * 'jpNote'
---
--- * 'jpUserIP'
 --
 -- * 'jpTeamId'
 --
@@ -141,15 +116,9 @@ data JobsPatch' = JobsPatch'
 --
 -- * 'jpLat'
 --
--- * 'jpKey'
---
 -- * 'jpLng'
 --
 -- * 'jpTitle'
---
--- * 'jpOAuthToken'
---
--- * 'jpFields'
 --
 -- * 'jpCustomField'
 jobsPatch'
@@ -159,12 +128,9 @@ jobsPatch'
     -> JobsPatch'
 jobsPatch' pJpJobId_ pJpTeamId_ pJpPayload_ =
     JobsPatch'
-    { _jpQuotaUser = Nothing
-    , _jpPrettyPrint = True
-    , _jpJobId = pJpJobId_
+    { _jpJobId = pJpJobId_
     , _jpProgress = Nothing
     , _jpNote = Nothing
-    , _jpUserIP = Nothing
     , _jpTeamId = pJpTeamId_
     , _jpCustomerPhoneNumber = Nothing
     , _jpCustomerName = Nothing
@@ -172,26 +138,10 @@ jobsPatch' pJpJobId_ pJpTeamId_ pJpPayload_ =
     , _jpPayload = pJpPayload_
     , _jpAssignee = Nothing
     , _jpLat = Nothing
-    , _jpKey = Nothing
     , _jpLng = Nothing
     , _jpTitle = Nothing
-    , _jpOAuthToken = Nothing
-    , _jpFields = Nothing
     , _jpCustomField = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-jpQuotaUser :: Lens' JobsPatch' (Maybe Text)
-jpQuotaUser
-  = lens _jpQuotaUser (\ s a -> s{_jpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-jpPrettyPrint :: Lens' JobsPatch' Bool
-jpPrettyPrint
-  = lens _jpPrettyPrint
-      (\ s a -> s{_jpPrettyPrint = a})
 
 -- | Job number
 jpJobId :: Lens' JobsPatch' Word64
@@ -205,11 +155,6 @@ jpProgress
 -- | Job note as newline (Unix) separated string
 jpNote :: Lens' JobsPatch' (Maybe Text)
 jpNote = lens _jpNote (\ s a -> s{_jpNote = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-jpUserIP :: Lens' JobsPatch' (Maybe Text)
-jpUserIP = lens _jpUserIP (\ s a -> s{_jpUserIP = a})
 
 -- | Team ID
 jpTeamId :: Lens' JobsPatch' Text
@@ -246,12 +191,6 @@ jpAssignee
 jpLat :: Lens' JobsPatch' (Maybe Double)
 jpLat = lens _jpLat (\ s a -> s{_jpLat = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-jpKey :: Lens' JobsPatch' (Maybe AuthKey)
-jpKey = lens _jpKey (\ s a -> s{_jpKey = a})
-
 -- | The longitude coordinate of this job\'s location.
 jpLng :: Lens' JobsPatch' (Maybe Double)
 jpLng = lens _jpLng (\ s a -> s{_jpLng = a})
@@ -259,15 +198,6 @@ jpLng = lens _jpLng (\ s a -> s{_jpLng = a})
 -- | Job title
 jpTitle :: Lens' JobsPatch' (Maybe Text)
 jpTitle = lens _jpTitle (\ s a -> s{_jpTitle = a})
-
--- | OAuth 2.0 token for the current user.
-jpOAuthToken :: Lens' JobsPatch' (Maybe OAuthToken)
-jpOAuthToken
-  = lens _jpOAuthToken (\ s a -> s{_jpOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-jpFields :: Lens' JobsPatch' (Maybe Text)
-jpFields = lens _jpFields (\ s a -> s{_jpFields = a})
 
 -- | Sets the value of custom fields. To set a custom field, pass the field
 -- id (from \/team\/teamId\/custom_fields), a URL escaped \'=\' character,
@@ -282,14 +212,9 @@ jpCustomField
       . _Default
       . _Coerce
 
-instance GoogleAuth JobsPatch' where
-        _AuthKey = jpKey . _Just
-        _AuthToken = jpOAuthToken . _Just
-
 instance GoogleRequest JobsPatch' where
         type Rs JobsPatch' = Job
-        request = requestWith mapsCoordinateRequest
-        requestWith rq JobsPatch'{..}
+        requestClient JobsPatch'{..}
           = go _jpTeamId _jpJobId _jpProgress _jpNote
               _jpCustomerPhoneNumber
               _jpCustomerName
@@ -299,13 +224,9 @@ instance GoogleRequest JobsPatch' where
               _jpLng
               _jpTitle
               (_jpCustomField ^. _Default)
-              _jpQuotaUser
-              (Just _jpPrettyPrint)
-              _jpUserIP
-              _jpFields
-              _jpKey
-              _jpOAuthToken
               (Just AltJSON)
               _jpPayload
+              mapsCoordinateService
           where go
-                  = clientBuild (Proxy :: Proxy JobsPatchResource) rq
+                  = buildClient (Proxy :: Proxy JobsPatchResource)
+                      mempty

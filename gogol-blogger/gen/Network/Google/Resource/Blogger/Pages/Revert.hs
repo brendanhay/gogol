@@ -33,14 +33,8 @@ module Network.Google.Resource.Blogger.Pages.Revert
     , PagesRevert'
 
     -- * Request Lenses
-    , pagQuotaUser
-    , pagPrettyPrint
-    , pagUserIP
     , pagBlogId
     , pagPageId
-    , pagKey
-    , pagOAuthToken
-    , pagFields
     ) where
 
 import           Network.Google.Blogger.Types
@@ -54,81 +48,32 @@ type PagesRevertResource =
          "pages" :>
            Capture "pageId" Text :>
              "revert" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :> Post '[JSON] Page
+               QueryParam "alt" AltJSON :> Post '[JSON] Page
 
 -- | Revert a published or scheduled page to draft state.
 --
 -- /See:/ 'pagesRevert'' smart constructor.
 data PagesRevert' = PagesRevert'
-    { _pagQuotaUser   :: !(Maybe Text)
-    , _pagPrettyPrint :: !Bool
-    , _pagUserIP      :: !(Maybe Text)
-    , _pagBlogId      :: !Text
-    , _pagPageId      :: !Text
-    , _pagKey         :: !(Maybe AuthKey)
-    , _pagOAuthToken  :: !(Maybe OAuthToken)
-    , _pagFields      :: !(Maybe Text)
+    { _pagBlogId :: !Text
+    , _pagPageId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesRevert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pagQuotaUser'
---
--- * 'pagPrettyPrint'
---
--- * 'pagUserIP'
---
 -- * 'pagBlogId'
 --
 -- * 'pagPageId'
---
--- * 'pagKey'
---
--- * 'pagOAuthToken'
---
--- * 'pagFields'
 pagesRevert'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'pageId'
     -> PagesRevert'
 pagesRevert' pPagBlogId_ pPagPageId_ =
     PagesRevert'
-    { _pagQuotaUser = Nothing
-    , _pagPrettyPrint = True
-    , _pagUserIP = Nothing
-    , _pagBlogId = pPagBlogId_
+    { _pagBlogId = pPagBlogId_
     , _pagPageId = pPagPageId_
-    , _pagKey = Nothing
-    , _pagOAuthToken = Nothing
-    , _pagFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-pagQuotaUser :: Lens' PagesRevert' (Maybe Text)
-pagQuotaUser
-  = lens _pagQuotaUser (\ s a -> s{_pagQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pagPrettyPrint :: Lens' PagesRevert' Bool
-pagPrettyPrint
-  = lens _pagPrettyPrint
-      (\ s a -> s{_pagPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-pagUserIP :: Lens' PagesRevert' (Maybe Text)
-pagUserIP
-  = lens _pagUserIP (\ s a -> s{_pagUserIP = a})
 
 -- | The ID of the blog.
 pagBlogId :: Lens' PagesRevert' Text
@@ -140,37 +85,11 @@ pagPageId :: Lens' PagesRevert' Text
 pagPageId
   = lens _pagPageId (\ s a -> s{_pagPageId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pagKey :: Lens' PagesRevert' (Maybe AuthKey)
-pagKey = lens _pagKey (\ s a -> s{_pagKey = a})
-
--- | OAuth 2.0 token for the current user.
-pagOAuthToken :: Lens' PagesRevert' (Maybe OAuthToken)
-pagOAuthToken
-  = lens _pagOAuthToken
-      (\ s a -> s{_pagOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pagFields :: Lens' PagesRevert' (Maybe Text)
-pagFields
-  = lens _pagFields (\ s a -> s{_pagFields = a})
-
-instance GoogleAuth PagesRevert' where
-        _AuthKey = pagKey . _Just
-        _AuthToken = pagOAuthToken . _Just
-
 instance GoogleRequest PagesRevert' where
         type Rs PagesRevert' = Page
-        request = requestWith bloggerRequest
-        requestWith rq PagesRevert'{..}
-          = go _pagBlogId _pagPageId _pagQuotaUser
-              (Just _pagPrettyPrint)
-              _pagUserIP
-              _pagFields
-              _pagKey
-              _pagOAuthToken
-              (Just AltJSON)
+        requestClient PagesRevert'{..}
+          = go _pagBlogId _pagPageId (Just AltJSON)
+              bloggerService
           where go
-                  = clientBuild (Proxy :: Proxy PagesRevertResource) rq
+                  = buildClient (Proxy :: Proxy PagesRevertResource)
+                      mempty

@@ -35,14 +35,8 @@ module Network.Google.Resource.BigQuery.Jobs.Get
     , JobsGet'
 
     -- * Request Lenses
-    , jgQuotaUser
-    , jgPrettyPrint
     , jgJobId
-    , jgUserIP
-    , jgKey
     , jgProjectId
-    , jgOAuthToken
-    , jgFields
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -55,13 +49,7 @@ type JobsGetResource =
        Capture "projectId" Text :>
          "jobs" :>
            Capture "jobId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Job
+             QueryParam "alt" AltJSON :> Get '[JSON] Job
 
 -- | Returns information about a specific job. Job information is available
 -- for a six month period after creation. Requires that you\'re the person
@@ -69,107 +57,40 @@ type JobsGetResource =
 --
 -- /See:/ 'jobsGet'' smart constructor.
 data JobsGet' = JobsGet'
-    { _jgQuotaUser   :: !(Maybe Text)
-    , _jgPrettyPrint :: !Bool
-    , _jgJobId       :: !Text
-    , _jgUserIP      :: !(Maybe Text)
-    , _jgKey         :: !(Maybe AuthKey)
-    , _jgProjectId   :: !Text
-    , _jgOAuthToken  :: !(Maybe OAuthToken)
-    , _jgFields      :: !(Maybe Text)
+    { _jgJobId     :: !Text
+    , _jgProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'jgQuotaUser'
---
--- * 'jgPrettyPrint'
---
 -- * 'jgJobId'
 --
--- * 'jgUserIP'
---
--- * 'jgKey'
---
 -- * 'jgProjectId'
---
--- * 'jgOAuthToken'
---
--- * 'jgFields'
 jobsGet'
     :: Text -- ^ 'jobId'
     -> Text -- ^ 'projectId'
     -> JobsGet'
 jobsGet' pJgJobId_ pJgProjectId_ =
     JobsGet'
-    { _jgQuotaUser = Nothing
-    , _jgPrettyPrint = True
-    , _jgJobId = pJgJobId_
-    , _jgUserIP = Nothing
-    , _jgKey = Nothing
+    { _jgJobId = pJgJobId_
     , _jgProjectId = pJgProjectId_
-    , _jgOAuthToken = Nothing
-    , _jgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-jgQuotaUser :: Lens' JobsGet' (Maybe Text)
-jgQuotaUser
-  = lens _jgQuotaUser (\ s a -> s{_jgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-jgPrettyPrint :: Lens' JobsGet' Bool
-jgPrettyPrint
-  = lens _jgPrettyPrint
-      (\ s a -> s{_jgPrettyPrint = a})
 
 -- | Job ID of the requested job
 jgJobId :: Lens' JobsGet' Text
 jgJobId = lens _jgJobId (\ s a -> s{_jgJobId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-jgUserIP :: Lens' JobsGet' (Maybe Text)
-jgUserIP = lens _jgUserIP (\ s a -> s{_jgUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-jgKey :: Lens' JobsGet' (Maybe AuthKey)
-jgKey = lens _jgKey (\ s a -> s{_jgKey = a})
 
 -- | Project ID of the requested job
 jgProjectId :: Lens' JobsGet' Text
 jgProjectId
   = lens _jgProjectId (\ s a -> s{_jgProjectId = a})
 
--- | OAuth 2.0 token for the current user.
-jgOAuthToken :: Lens' JobsGet' (Maybe OAuthToken)
-jgOAuthToken
-  = lens _jgOAuthToken (\ s a -> s{_jgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-jgFields :: Lens' JobsGet' (Maybe Text)
-jgFields = lens _jgFields (\ s a -> s{_jgFields = a})
-
-instance GoogleAuth JobsGet' where
-        _AuthKey = jgKey . _Just
-        _AuthToken = jgOAuthToken . _Just
-
 instance GoogleRequest JobsGet' where
         type Rs JobsGet' = Job
-        request = requestWith bigQueryRequest
-        requestWith rq JobsGet'{..}
-          = go _jgProjectId _jgJobId _jgQuotaUser
-              (Just _jgPrettyPrint)
-              _jgUserIP
-              _jgFields
-              _jgKey
-              _jgOAuthToken
-              (Just AltJSON)
+        requestClient JobsGet'{..}
+          = go _jgProjectId _jgJobId (Just AltJSON)
+              bigQueryService
           where go
-                  = clientBuild (Proxy :: Proxy JobsGetResource) rq
+                  = buildClient (Proxy :: Proxy JobsGetResource) mempty

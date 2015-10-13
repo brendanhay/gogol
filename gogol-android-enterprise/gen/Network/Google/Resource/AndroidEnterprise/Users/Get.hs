@@ -33,14 +33,8 @@ module Network.Google.Resource.AndroidEnterprise.Users.Get
     , UsersGet'
 
     -- * Request Lenses
-    , ugQuotaUser
-    , ugPrettyPrint
     , ugEnterpriseId
-    , ugUserIP
     , ugUserId
-    , ugKey
-    , ugOAuthToken
-    , ugFields
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
@@ -53,75 +47,32 @@ type UsersGetResource =
        Capture "enterpriseId" Text :>
          "users" :>
            Capture "userId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] User
+             QueryParam "alt" AltJSON :> Get '[JSON] User
 
 -- | Retrieves a user\'s details.
 --
 -- /See:/ 'usersGet'' smart constructor.
 data UsersGet' = UsersGet'
-    { _ugQuotaUser    :: !(Maybe Text)
-    , _ugPrettyPrint  :: !Bool
-    , _ugEnterpriseId :: !Text
-    , _ugUserIP       :: !(Maybe Text)
+    { _ugEnterpriseId :: !Text
     , _ugUserId       :: !Text
-    , _ugKey          :: !(Maybe AuthKey)
-    , _ugOAuthToken   :: !(Maybe OAuthToken)
-    , _ugFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ugQuotaUser'
---
--- * 'ugPrettyPrint'
---
 -- * 'ugEnterpriseId'
 --
--- * 'ugUserIP'
---
 -- * 'ugUserId'
---
--- * 'ugKey'
---
--- * 'ugOAuthToken'
---
--- * 'ugFields'
 usersGet'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'userId'
     -> UsersGet'
 usersGet' pUgEnterpriseId_ pUgUserId_ =
     UsersGet'
-    { _ugQuotaUser = Nothing
-    , _ugPrettyPrint = True
-    , _ugEnterpriseId = pUgEnterpriseId_
-    , _ugUserIP = Nothing
+    { _ugEnterpriseId = pUgEnterpriseId_
     , _ugUserId = pUgUserId_
-    , _ugKey = Nothing
-    , _ugOAuthToken = Nothing
-    , _ugFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ugQuotaUser :: Lens' UsersGet' (Maybe Text)
-ugQuotaUser
-  = lens _ugQuotaUser (\ s a -> s{_ugQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ugPrettyPrint :: Lens' UsersGet' Bool
-ugPrettyPrint
-  = lens _ugPrettyPrint
-      (\ s a -> s{_ugPrettyPrint = a})
 
 -- | The ID of the enterprise.
 ugEnterpriseId :: Lens' UsersGet' Text
@@ -129,44 +80,15 @@ ugEnterpriseId
   = lens _ugEnterpriseId
       (\ s a -> s{_ugEnterpriseId = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ugUserIP :: Lens' UsersGet' (Maybe Text)
-ugUserIP = lens _ugUserIP (\ s a -> s{_ugUserIP = a})
-
 -- | The ID of the user.
 ugUserId :: Lens' UsersGet' Text
 ugUserId = lens _ugUserId (\ s a -> s{_ugUserId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ugKey :: Lens' UsersGet' (Maybe AuthKey)
-ugKey = lens _ugKey (\ s a -> s{_ugKey = a})
-
--- | OAuth 2.0 token for the current user.
-ugOAuthToken :: Lens' UsersGet' (Maybe OAuthToken)
-ugOAuthToken
-  = lens _ugOAuthToken (\ s a -> s{_ugOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ugFields :: Lens' UsersGet' (Maybe Text)
-ugFields = lens _ugFields (\ s a -> s{_ugFields = a})
-
-instance GoogleAuth UsersGet' where
-        _AuthKey = ugKey . _Just
-        _AuthToken = ugOAuthToken . _Just
-
 instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
-        request = requestWith androidEnterpriseRequest
-        requestWith rq UsersGet'{..}
-          = go _ugEnterpriseId _ugUserId _ugQuotaUser
-              (Just _ugPrettyPrint)
-              _ugUserIP
-              _ugFields
-              _ugKey
-              _ugOAuthToken
-              (Just AltJSON)
+        requestClient UsersGet'{..}
+          = go _ugEnterpriseId _ugUserId (Just AltJSON)
+              androidEnterpriseService
           where go
-                  = clientBuild (Proxy :: Proxy UsersGetResource) rq
+                  = buildClient (Proxy :: Proxy UsersGetResource)
+                      mempty

@@ -33,13 +33,7 @@ module Network.Google.Resource.AdExchangeBuyer.Negotiations.List
     , NegotiationsList'
 
     -- * Request Lenses
-    , nlQuotaUser
-    , nlPrettyPrint
-    , nlUserIP
     , nlPayload
-    , nlKey
-    , nlOAuthToken
-    , nlFields
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -49,113 +43,40 @@ import           Network.Google.Prelude
 -- 'NegotiationsList'' request conforms to.
 type NegotiationsListResource =
      "negotiations" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "fields" Text :>
-               QueryParam "key" AuthKey :>
-                 Header "Authorization" OAuthToken :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] GetNegotiationsRequest :>
-                       Get '[JSON] GetNegotiationsResponse
+       QueryParam "alt" AltJSON :>
+         ReqBody '[JSON] GetNegotiationsRequest :>
+           Get '[JSON] GetNegotiationsResponse
 
 -- | Lists all negotiations the authenticated user has access to.
 --
 -- /See:/ 'negotiationsList'' smart constructor.
-data NegotiationsList' = NegotiationsList'
-    { _nlQuotaUser   :: !(Maybe Text)
-    , _nlPrettyPrint :: !Bool
-    , _nlUserIP      :: !(Maybe Text)
-    , _nlPayload     :: !GetNegotiationsRequest
-    , _nlKey         :: !(Maybe AuthKey)
-    , _nlOAuthToken  :: !(Maybe OAuthToken)
-    , _nlFields      :: !(Maybe Text)
+newtype NegotiationsList' = NegotiationsList'
+    { _nlPayload :: GetNegotiationsRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'nlQuotaUser'
---
--- * 'nlPrettyPrint'
---
--- * 'nlUserIP'
---
 -- * 'nlPayload'
---
--- * 'nlKey'
---
--- * 'nlOAuthToken'
---
--- * 'nlFields'
 negotiationsList'
     :: GetNegotiationsRequest -- ^ 'payload'
     -> NegotiationsList'
 negotiationsList' pNlPayload_ =
     NegotiationsList'
-    { _nlQuotaUser = Nothing
-    , _nlPrettyPrint = True
-    , _nlUserIP = Nothing
-    , _nlPayload = pNlPayload_
-    , _nlKey = Nothing
-    , _nlOAuthToken = Nothing
-    , _nlFields = Nothing
+    { _nlPayload = pNlPayload_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-nlQuotaUser :: Lens' NegotiationsList' (Maybe Text)
-nlQuotaUser
-  = lens _nlQuotaUser (\ s a -> s{_nlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-nlPrettyPrint :: Lens' NegotiationsList' Bool
-nlPrettyPrint
-  = lens _nlPrettyPrint
-      (\ s a -> s{_nlPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-nlUserIP :: Lens' NegotiationsList' (Maybe Text)
-nlUserIP = lens _nlUserIP (\ s a -> s{_nlUserIP = a})
 
 -- | Multipart request metadata.
 nlPayload :: Lens' NegotiationsList' GetNegotiationsRequest
 nlPayload
   = lens _nlPayload (\ s a -> s{_nlPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-nlKey :: Lens' NegotiationsList' (Maybe AuthKey)
-nlKey = lens _nlKey (\ s a -> s{_nlKey = a})
-
--- | OAuth 2.0 token for the current user.
-nlOAuthToken :: Lens' NegotiationsList' (Maybe OAuthToken)
-nlOAuthToken
-  = lens _nlOAuthToken (\ s a -> s{_nlOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-nlFields :: Lens' NegotiationsList' (Maybe Text)
-nlFields = lens _nlFields (\ s a -> s{_nlFields = a})
-
-instance GoogleAuth NegotiationsList' where
-        _AuthKey = nlKey . _Just
-        _AuthToken = nlOAuthToken . _Just
-
 instance GoogleRequest NegotiationsList' where
         type Rs NegotiationsList' = GetNegotiationsResponse
-        request = requestWith adExchangeBuyerRequest
-        requestWith rq NegotiationsList'{..}
-          = go _nlQuotaUser (Just _nlPrettyPrint) _nlUserIP
-              _nlFields
-              _nlKey
-              _nlOAuthToken
-              (Just AltJSON)
-              _nlPayload
+        requestClient NegotiationsList'{..}
+          = go (Just AltJSON) _nlPayload adExchangeBuyerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy NegotiationsListResource)
-                      rq
+                      mempty

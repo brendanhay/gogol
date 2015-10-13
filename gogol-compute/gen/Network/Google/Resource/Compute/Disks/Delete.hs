@@ -36,15 +36,9 @@ module Network.Google.Resource.Compute.Disks.Delete
     , DisksDelete'
 
     -- * Request Lenses
-    , ddQuotaUser
-    , ddPrettyPrint
     , ddProject
     , ddDisk
-    , ddUserIP
     , ddZone
-    , ddKey
-    , ddOAuthToken
-    , ddFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,13 +52,7 @@ type DisksDeleteResource =
          Capture "zone" Text :>
            "disks" :>
              Capture "disk" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+               QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified persistent disk. Deleting a disk removes its data
 -- permanently and is irreversible. However, deleting a disk does not
@@ -73,38 +61,20 @@ type DisksDeleteResource =
 --
 -- /See:/ 'disksDelete'' smart constructor.
 data DisksDelete' = DisksDelete'
-    { _ddQuotaUser   :: !(Maybe Text)
-    , _ddPrettyPrint :: !Bool
-    , _ddProject     :: !Text
-    , _ddDisk        :: !Text
-    , _ddUserIP      :: !(Maybe Text)
-    , _ddZone        :: !Text
-    , _ddKey         :: !(Maybe AuthKey)
-    , _ddOAuthToken  :: !(Maybe OAuthToken)
-    , _ddFields      :: !(Maybe Text)
+    { _ddProject :: !Text
+    , _ddDisk    :: !Text
+    , _ddZone    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddQuotaUser'
---
--- * 'ddPrettyPrint'
---
 -- * 'ddProject'
 --
 -- * 'ddDisk'
 --
--- * 'ddUserIP'
---
 -- * 'ddZone'
---
--- * 'ddKey'
---
--- * 'ddOAuthToken'
---
--- * 'ddFields'
 disksDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'disk'
@@ -112,29 +82,10 @@ disksDelete'
     -> DisksDelete'
 disksDelete' pDdProject_ pDdDisk_ pDdZone_ =
     DisksDelete'
-    { _ddQuotaUser = Nothing
-    , _ddPrettyPrint = True
-    , _ddProject = pDdProject_
+    { _ddProject = pDdProject_
     , _ddDisk = pDdDisk_
-    , _ddUserIP = Nothing
     , _ddZone = pDdZone_
-    , _ddKey = Nothing
-    , _ddOAuthToken = Nothing
-    , _ddFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ddQuotaUser :: Lens' DisksDelete' (Maybe Text)
-ddQuotaUser
-  = lens _ddQuotaUser (\ s a -> s{_ddQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ddPrettyPrint :: Lens' DisksDelete' Bool
-ddPrettyPrint
-  = lens _ddPrettyPrint
-      (\ s a -> s{_ddPrettyPrint = a})
 
 -- | Project ID for this request.
 ddProject :: Lens' DisksDelete' Text
@@ -145,44 +96,15 @@ ddProject
 ddDisk :: Lens' DisksDelete' Text
 ddDisk = lens _ddDisk (\ s a -> s{_ddDisk = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ddUserIP :: Lens' DisksDelete' (Maybe Text)
-ddUserIP = lens _ddUserIP (\ s a -> s{_ddUserIP = a})
-
 -- | The name of the zone for this request.
 ddZone :: Lens' DisksDelete' Text
 ddZone = lens _ddZone (\ s a -> s{_ddZone = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ddKey :: Lens' DisksDelete' (Maybe AuthKey)
-ddKey = lens _ddKey (\ s a -> s{_ddKey = a})
-
--- | OAuth 2.0 token for the current user.
-ddOAuthToken :: Lens' DisksDelete' (Maybe OAuthToken)
-ddOAuthToken
-  = lens _ddOAuthToken (\ s a -> s{_ddOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ddFields :: Lens' DisksDelete' (Maybe Text)
-ddFields = lens _ddFields (\ s a -> s{_ddFields = a})
-
-instance GoogleAuth DisksDelete' where
-        _AuthKey = ddKey . _Just
-        _AuthToken = ddOAuthToken . _Just
-
 instance GoogleRequest DisksDelete' where
         type Rs DisksDelete' = Operation
-        request = requestWith computeRequest
-        requestWith rq DisksDelete'{..}
-          = go _ddProject _ddZone _ddDisk _ddQuotaUser
-              (Just _ddPrettyPrint)
-              _ddUserIP
-              _ddFields
-              _ddKey
-              _ddOAuthToken
-              (Just AltJSON)
+        requestClient DisksDelete'{..}
+          = go _ddProject _ddZone _ddDisk (Just AltJSON)
+              computeService
           where go
-                  = clientBuild (Proxy :: Proxy DisksDeleteResource) rq
+                  = buildClient (Proxy :: Proxy DisksDeleteResource)
+                      mempty

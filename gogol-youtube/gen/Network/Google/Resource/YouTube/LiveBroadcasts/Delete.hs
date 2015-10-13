@@ -33,15 +33,9 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Delete
     , LiveBroadcastsDelete'
 
     -- * Request Lenses
-    , lbdQuotaUser
-    , lbdPrettyPrint
-    , lbdUserIP
     , lbdOnBehalfOfContentOwner
-    , lbdKey
     , lbdOnBehalfOfContentOwnerChannel
     , lbdId
-    , lbdOAuthToken
-    , lbdFields
     ) where
 
 import           Network.Google.Prelude
@@ -54,84 +48,35 @@ type LiveBroadcastsDeleteResource =
        QueryParam "id" Text :>
          QueryParam "onBehalfOfContentOwner" Text :>
            QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a broadcast.
 --
 -- /See:/ 'liveBroadcastsDelete'' smart constructor.
 data LiveBroadcastsDelete' = LiveBroadcastsDelete'
-    { _lbdQuotaUser                     :: !(Maybe Text)
-    , _lbdPrettyPrint                   :: !Bool
-    , _lbdUserIP                        :: !(Maybe Text)
-    , _lbdOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lbdKey                           :: !(Maybe AuthKey)
+    { _lbdOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbdOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbdId                            :: !Text
-    , _lbdOAuthToken                    :: !(Maybe OAuthToken)
-    , _lbdFields                        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lbdQuotaUser'
---
--- * 'lbdPrettyPrint'
---
--- * 'lbdUserIP'
---
 -- * 'lbdOnBehalfOfContentOwner'
---
--- * 'lbdKey'
 --
 -- * 'lbdOnBehalfOfContentOwnerChannel'
 --
 -- * 'lbdId'
---
--- * 'lbdOAuthToken'
---
--- * 'lbdFields'
 liveBroadcastsDelete'
     :: Text -- ^ 'id'
     -> LiveBroadcastsDelete'
 liveBroadcastsDelete' pLbdId_ =
     LiveBroadcastsDelete'
-    { _lbdQuotaUser = Nothing
-    , _lbdPrettyPrint = True
-    , _lbdUserIP = Nothing
-    , _lbdOnBehalfOfContentOwner = Nothing
-    , _lbdKey = Nothing
+    { _lbdOnBehalfOfContentOwner = Nothing
     , _lbdOnBehalfOfContentOwnerChannel = Nothing
     , _lbdId = pLbdId_
-    , _lbdOAuthToken = Nothing
-    , _lbdFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-lbdQuotaUser :: Lens' LiveBroadcastsDelete' (Maybe Text)
-lbdQuotaUser
-  = lens _lbdQuotaUser (\ s a -> s{_lbdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-lbdPrettyPrint :: Lens' LiveBroadcastsDelete' Bool
-lbdPrettyPrint
-  = lens _lbdPrettyPrint
-      (\ s a -> s{_lbdPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-lbdUserIP :: Lens' LiveBroadcastsDelete' (Maybe Text)
-lbdUserIP
-  = lens _lbdUserIP (\ s a -> s{_lbdUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -147,12 +92,6 @@ lbdOnBehalfOfContentOwner :: Lens' LiveBroadcastsDelete' (Maybe Text)
 lbdOnBehalfOfContentOwner
   = lens _lbdOnBehalfOfContentOwner
       (\ s a -> s{_lbdOnBehalfOfContentOwner = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-lbdKey :: Lens' LiveBroadcastsDelete' (Maybe AuthKey)
-lbdKey = lens _lbdKey (\ s a -> s{_lbdKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
 -- This parameter is intended exclusively for YouTube content partners. The
@@ -180,35 +119,14 @@ lbdOnBehalfOfContentOwnerChannel
 lbdId :: Lens' LiveBroadcastsDelete' Text
 lbdId = lens _lbdId (\ s a -> s{_lbdId = a})
 
--- | OAuth 2.0 token for the current user.
-lbdOAuthToken :: Lens' LiveBroadcastsDelete' (Maybe OAuthToken)
-lbdOAuthToken
-  = lens _lbdOAuthToken
-      (\ s a -> s{_lbdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-lbdFields :: Lens' LiveBroadcastsDelete' (Maybe Text)
-lbdFields
-  = lens _lbdFields (\ s a -> s{_lbdFields = a})
-
-instance GoogleAuth LiveBroadcastsDelete' where
-        _AuthKey = lbdKey . _Just
-        _AuthToken = lbdOAuthToken . _Just
-
 instance GoogleRequest LiveBroadcastsDelete' where
         type Rs LiveBroadcastsDelete' = ()
-        request = requestWith youTubeRequest
-        requestWith rq LiveBroadcastsDelete'{..}
+        requestClient LiveBroadcastsDelete'{..}
           = go (Just _lbdId) _lbdOnBehalfOfContentOwner
               _lbdOnBehalfOfContentOwnerChannel
-              _lbdQuotaUser
-              (Just _lbdPrettyPrint)
-              _lbdUserIP
-              _lbdFields
-              _lbdKey
-              _lbdOAuthToken
               (Just AltJSON)
+              youTubeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy LiveBroadcastsDeleteResource)
-                      rq
+                      mempty

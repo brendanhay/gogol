@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/fonts/docs/developer_api Google Fonts Developer API Reference>
 module Network.Google.Fonts
     (
+    -- * Service Configuration
+      fontsService
+
     -- * API Declaration
-      FontsAPI
+    , FontsAPI
 
     -- * Resources
 

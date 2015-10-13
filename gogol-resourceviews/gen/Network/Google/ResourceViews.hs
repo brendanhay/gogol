@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference>
 module Network.Google.ResourceViews
     (
+    -- * Service Configuration
+      resourceViewsService
+
     -- * API Declaration
-      ResourceViewsAPI
+    , ResourceViewsAPI
 
     -- * Resources
 

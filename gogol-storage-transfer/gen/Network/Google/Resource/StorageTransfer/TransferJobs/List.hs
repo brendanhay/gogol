@@ -34,19 +34,14 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.List
 
     -- * Request Lenses
     , tjlXgafv
-    , tjlQuotaUser
-    , tjlPrettyPrint
     , tjlUploadProtocol
     , tjlPp
     , tjlAccessToken
     , tjlUploadType
     , tjlBearerToken
-    , tjlKey
     , tjlFilter
     , tjlPageToken
-    , tjlOAuthToken
     , tjlPageSize
-    , tjlFields
     , tjlCallback
     ) where
 
@@ -68,32 +63,22 @@ type TransferJobsListResource =
                        QueryParam "pageToken" Text :>
                          QueryParam "pageSize" Int32 :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] ListTransferJobsResponse
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListTransferJobsResponse
 
 -- | Lists transfer jobs.
 --
 -- /See:/ 'transferJobsList'' smart constructor.
 data TransferJobsList' = TransferJobsList'
     { _tjlXgafv          :: !(Maybe Text)
-    , _tjlQuotaUser      :: !(Maybe Text)
-    , _tjlPrettyPrint    :: !Bool
     , _tjlUploadProtocol :: !(Maybe Text)
     , _tjlPp             :: !Bool
     , _tjlAccessToken    :: !(Maybe Text)
     , _tjlUploadType     :: !(Maybe Text)
     , _tjlBearerToken    :: !(Maybe Text)
-    , _tjlKey            :: !(Maybe AuthKey)
     , _tjlFilter         :: !(Maybe Text)
     , _tjlPageToken      :: !(Maybe Text)
-    , _tjlOAuthToken     :: !(Maybe OAuthToken)
     , _tjlPageSize       :: !(Maybe Int32)
-    , _tjlFields         :: !(Maybe Text)
     , _tjlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +87,6 @@ data TransferJobsList' = TransferJobsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tjlXgafv'
---
--- * 'tjlQuotaUser'
---
--- * 'tjlPrettyPrint'
 --
 -- * 'tjlUploadProtocol'
 --
@@ -117,17 +98,11 @@ data TransferJobsList' = TransferJobsList'
 --
 -- * 'tjlBearerToken'
 --
--- * 'tjlKey'
---
 -- * 'tjlFilter'
 --
 -- * 'tjlPageToken'
 --
--- * 'tjlOAuthToken'
---
 -- * 'tjlPageSize'
---
--- * 'tjlFields'
 --
 -- * 'tjlCallback'
 transferJobsList'
@@ -135,38 +110,20 @@ transferJobsList'
 transferJobsList' =
     TransferJobsList'
     { _tjlXgafv = Nothing
-    , _tjlQuotaUser = Nothing
-    , _tjlPrettyPrint = True
     , _tjlUploadProtocol = Nothing
     , _tjlPp = True
     , _tjlAccessToken = Nothing
     , _tjlUploadType = Nothing
     , _tjlBearerToken = Nothing
-    , _tjlKey = Nothing
     , _tjlFilter = Nothing
     , _tjlPageToken = Nothing
-    , _tjlOAuthToken = Nothing
     , _tjlPageSize = Nothing
-    , _tjlFields = Nothing
     , _tjlCallback = Nothing
     }
 
 -- | V1 error format.
 tjlXgafv :: Lens' TransferJobsList' (Maybe Text)
 tjlXgafv = lens _tjlXgafv (\ s a -> s{_tjlXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-tjlQuotaUser :: Lens' TransferJobsList' (Maybe Text)
-tjlQuotaUser
-  = lens _tjlQuotaUser (\ s a -> s{_tjlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tjlPrettyPrint :: Lens' TransferJobsList' Bool
-tjlPrettyPrint
-  = lens _tjlPrettyPrint
-      (\ s a -> s{_tjlPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 tjlUploadProtocol :: Lens' TransferJobsList' (Maybe Text)
@@ -196,12 +153,6 @@ tjlBearerToken
   = lens _tjlBearerToken
       (\ s a -> s{_tjlBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tjlKey :: Lens' TransferJobsList' (Maybe AuthKey)
-tjlKey = lens _tjlKey (\ s a -> s{_tjlKey = a})
-
 -- | A list of query parameters specified as JSON text in the form of
 -- {\"\`project_id\`\":\"my_project_id\",
 -- \"\`job_names\`\":[\"jobid1\",\"jobid2\",...],
@@ -219,35 +170,19 @@ tjlPageToken :: Lens' TransferJobsList' (Maybe Text)
 tjlPageToken
   = lens _tjlPageToken (\ s a -> s{_tjlPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-tjlOAuthToken :: Lens' TransferJobsList' (Maybe OAuthToken)
-tjlOAuthToken
-  = lens _tjlOAuthToken
-      (\ s a -> s{_tjlOAuthToken = a})
-
 -- | The list page size. The max allowed value is 256.
 tjlPageSize :: Lens' TransferJobsList' (Maybe Int32)
 tjlPageSize
   = lens _tjlPageSize (\ s a -> s{_tjlPageSize = a})
-
--- | Selector specifying which fields to include in a partial response.
-tjlFields :: Lens' TransferJobsList' (Maybe Text)
-tjlFields
-  = lens _tjlFields (\ s a -> s{_tjlFields = a})
 
 -- | JSONP
 tjlCallback :: Lens' TransferJobsList' (Maybe Text)
 tjlCallback
   = lens _tjlCallback (\ s a -> s{_tjlCallback = a})
 
-instance GoogleAuth TransferJobsList' where
-        _AuthKey = tjlKey . _Just
-        _AuthToken = tjlOAuthToken . _Just
-
 instance GoogleRequest TransferJobsList' where
         type Rs TransferJobsList' = ListTransferJobsResponse
-        request = requestWith storageTransferRequest
-        requestWith rq TransferJobsList'{..}
+        requestClient TransferJobsList'{..}
           = go _tjlXgafv _tjlUploadProtocol (Just _tjlPp)
               _tjlAccessToken
               _tjlUploadType
@@ -256,13 +191,9 @@ instance GoogleRequest TransferJobsList' where
               _tjlPageToken
               _tjlPageSize
               _tjlCallback
-              _tjlQuotaUser
-              (Just _tjlPrettyPrint)
-              _tjlFields
-              _tjlKey
-              _tjlOAuthToken
               (Just AltJSON)
+              storageTransferService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy TransferJobsListResource)
-                      rq
+                      mempty

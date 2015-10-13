@@ -38,17 +38,12 @@ module Network.Google.Resource.Classroom.Invitations.Delete
 
     -- * Request Lenses
     , idXgafv
-    , idQuotaUser
-    , idPrettyPrint
     , idUploadProtocol
     , idPp
     , idAccessToken
     , idUploadType
     , idBearerToken
-    , idKey
     , idId
-    , idOAuthToken
-    , idFields
     , idCallback
     ) where
 
@@ -68,13 +63,7 @@ type InvitationsDeleteResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Delete '[JSON] Empty
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes an invitation. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to delete
@@ -85,17 +74,12 @@ type InvitationsDeleteResource =
 -- /See:/ 'invitationsDelete'' smart constructor.
 data InvitationsDelete' = InvitationsDelete'
     { _idXgafv          :: !(Maybe Text)
-    , _idQuotaUser      :: !(Maybe Text)
-    , _idPrettyPrint    :: !Bool
     , _idUploadProtocol :: !(Maybe Text)
     , _idPp             :: !Bool
     , _idAccessToken    :: !(Maybe Text)
     , _idUploadType     :: !(Maybe Text)
     , _idBearerToken    :: !(Maybe Text)
-    , _idKey            :: !(Maybe AuthKey)
     , _idId             :: !Text
-    , _idOAuthToken     :: !(Maybe OAuthToken)
-    , _idFields         :: !(Maybe Text)
     , _idCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -104,10 +88,6 @@ data InvitationsDelete' = InvitationsDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'idXgafv'
---
--- * 'idQuotaUser'
---
--- * 'idPrettyPrint'
 --
 -- * 'idUploadProtocol'
 --
@@ -119,13 +99,7 @@ data InvitationsDelete' = InvitationsDelete'
 --
 -- * 'idBearerToken'
 --
--- * 'idKey'
---
 -- * 'idId'
---
--- * 'idOAuthToken'
---
--- * 'idFields'
 --
 -- * 'idCallback'
 invitationsDelete'
@@ -134,36 +108,18 @@ invitationsDelete'
 invitationsDelete' pIdId_ =
     InvitationsDelete'
     { _idXgafv = Nothing
-    , _idQuotaUser = Nothing
-    , _idPrettyPrint = True
     , _idUploadProtocol = Nothing
     , _idPp = True
     , _idAccessToken = Nothing
     , _idUploadType = Nothing
     , _idBearerToken = Nothing
-    , _idKey = Nothing
     , _idId = pIdId_
-    , _idOAuthToken = Nothing
-    , _idFields = Nothing
     , _idCallback = Nothing
     }
 
 -- | V1 error format.
 idXgafv :: Lens' InvitationsDelete' (Maybe Text)
 idXgafv = lens _idXgafv (\ s a -> s{_idXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-idQuotaUser :: Lens' InvitationsDelete' (Maybe Text)
-idQuotaUser
-  = lens _idQuotaUser (\ s a -> s{_idQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-idPrettyPrint :: Lens' InvitationsDelete' Bool
-idPrettyPrint
-  = lens _idPrettyPrint
-      (\ s a -> s{_idPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 idUploadProtocol :: Lens' InvitationsDelete' (Maybe Text)
@@ -192,50 +148,26 @@ idBearerToken
   = lens _idBearerToken
       (\ s a -> s{_idBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-idKey :: Lens' InvitationsDelete' (Maybe AuthKey)
-idKey = lens _idKey (\ s a -> s{_idKey = a})
-
 -- | Identifier of the invitation to delete.
 idId :: Lens' InvitationsDelete' Text
 idId = lens _idId (\ s a -> s{_idId = a})
-
--- | OAuth 2.0 token for the current user.
-idOAuthToken :: Lens' InvitationsDelete' (Maybe OAuthToken)
-idOAuthToken
-  = lens _idOAuthToken (\ s a -> s{_idOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-idFields :: Lens' InvitationsDelete' (Maybe Text)
-idFields = lens _idFields (\ s a -> s{_idFields = a})
 
 -- | JSONP
 idCallback :: Lens' InvitationsDelete' (Maybe Text)
 idCallback
   = lens _idCallback (\ s a -> s{_idCallback = a})
 
-instance GoogleAuth InvitationsDelete' where
-        _AuthKey = idKey . _Just
-        _AuthToken = idOAuthToken . _Just
-
 instance GoogleRequest InvitationsDelete' where
         type Rs InvitationsDelete' = Empty
-        request = requestWith classroomRequest
-        requestWith rq InvitationsDelete'{..}
+        requestClient InvitationsDelete'{..}
           = go _idId _idXgafv _idUploadProtocol (Just _idPp)
               _idAccessToken
               _idUploadType
               _idBearerToken
               _idCallback
-              _idQuotaUser
-              (Just _idPrettyPrint)
-              _idFields
-              _idKey
-              _idOAuthToken
               (Just AltJSON)
+              classroomService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy InvitationsDeleteResource)
-                      rq
+                      mempty

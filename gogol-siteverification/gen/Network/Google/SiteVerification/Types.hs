@@ -15,8 +15,12 @@
 --
 module Network.Google.SiteVerification.Types
     (
-    -- * Service Request
-      siteVerificationRequest
+    -- * Service Configuration
+      siteVerificationService
+
+    -- * OAuth Scopes
+    , siteverificationVerifyOnlyScope
+    , siteverificationScope
 
     -- * SiteVerificationWebResourceGettokenRequestSite
     , SiteVerificationWebResourceGettokenRequestSite
@@ -60,7 +64,16 @@ import           Network.Google.SiteVerification.Types.Product
 import           Network.Google.SiteVerification.Types.Sum
 
 -- | Default request referring to version 'v1' of the Google Site Verification API. This contains the host and root path used as a starting point for constructing service requests.
-siteVerificationRequest :: RequestBuilder
-siteVerificationRequest
-  = defaultRequest "https://www.googleapis.com/"
+siteVerificationService :: Service
+siteVerificationService
+  = defaultService (ServiceId "siteVerification:v1")
+      "www.googleapis.com"
       "siteVerification/v1/"
+
+-- | Manage your new site verifications with Google
+siteverificationVerifyOnlyScope :: OAuthScope
+siteverificationVerifyOnlyScope = OAuthScope "https://www.googleapis.com/auth/siteverification.verify_only";
+
+-- | Manage the list of sites and domains you control
+siteverificationScope :: OAuthScope
+siteverificationScope = OAuthScope "https://www.googleapis.com/auth/siteverification";

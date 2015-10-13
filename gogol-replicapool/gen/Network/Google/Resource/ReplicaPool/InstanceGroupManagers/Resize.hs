@@ -36,16 +36,10 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Resize
     , InstanceGroupManagersResize'
 
     -- * Request Lenses
-    , igmrQuotaUser
-    , igmrPrettyPrint
     , igmrProject
     , igmrSize
     , igmrInstanceGroupManager
-    , igmrUserIP
     , igmrZone
-    , igmrKey
-    , igmrOAuthToken
-    , igmrFields
     ) where
 
 import           Network.Google.Prelude
@@ -61,14 +55,7 @@ type InstanceGroupManagersResizeResource =
              Capture "instanceGroupManager" Text :>
                "resize" :>
                  QueryParam "size" Int32 :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 Post '[JSON] Operation
+                   QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Resizes the managed instance group up or down. If resized up, new
 -- instances are created using the current instance template. If resized
@@ -77,25 +64,15 @@ type InstanceGroupManagersResizeResource =
 --
 -- /See:/ 'instanceGroupManagersResize'' smart constructor.
 data InstanceGroupManagersResize' = InstanceGroupManagersResize'
-    { _igmrQuotaUser            :: !(Maybe Text)
-    , _igmrPrettyPrint          :: !Bool
-    , _igmrProject              :: !Text
+    { _igmrProject              :: !Text
     , _igmrSize                 :: !Int32
     , _igmrInstanceGroupManager :: !Text
-    , _igmrUserIP               :: !(Maybe Text)
     , _igmrZone                 :: !Text
-    , _igmrKey                  :: !(Maybe AuthKey)
-    , _igmrOAuthToken           :: !(Maybe OAuthToken)
-    , _igmrFields               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersResize'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'igmrQuotaUser'
---
--- * 'igmrPrettyPrint'
 --
 -- * 'igmrProject'
 --
@@ -103,15 +80,7 @@ data InstanceGroupManagersResize' = InstanceGroupManagersResize'
 --
 -- * 'igmrInstanceGroupManager'
 --
--- * 'igmrUserIP'
---
 -- * 'igmrZone'
---
--- * 'igmrKey'
---
--- * 'igmrOAuthToken'
---
--- * 'igmrFields'
 instanceGroupManagersResize'
     :: Text -- ^ 'project'
     -> Int32 -- ^ 'size'
@@ -120,31 +89,11 @@ instanceGroupManagersResize'
     -> InstanceGroupManagersResize'
 instanceGroupManagersResize' pIgmrProject_ pIgmrSize_ pIgmrInstanceGroupManager_ pIgmrZone_ =
     InstanceGroupManagersResize'
-    { _igmrQuotaUser = Nothing
-    , _igmrPrettyPrint = True
-    , _igmrProject = pIgmrProject_
+    { _igmrProject = pIgmrProject_
     , _igmrSize = pIgmrSize_
     , _igmrInstanceGroupManager = pIgmrInstanceGroupManager_
-    , _igmrUserIP = Nothing
     , _igmrZone = pIgmrZone_
-    , _igmrKey = Nothing
-    , _igmrOAuthToken = Nothing
-    , _igmrFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-igmrQuotaUser :: Lens' InstanceGroupManagersResize' (Maybe Text)
-igmrQuotaUser
-  = lens _igmrQuotaUser
-      (\ s a -> s{_igmrQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-igmrPrettyPrint :: Lens' InstanceGroupManagersResize' Bool
-igmrPrettyPrint
-  = lens _igmrPrettyPrint
-      (\ s a -> s{_igmrPrettyPrint = a})
 
 -- | The Google Developers Console project name.
 igmrProject :: Lens' InstanceGroupManagersResize' Text
@@ -161,53 +110,19 @@ igmrInstanceGroupManager
   = lens _igmrInstanceGroupManager
       (\ s a -> s{_igmrInstanceGroupManager = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-igmrUserIP :: Lens' InstanceGroupManagersResize' (Maybe Text)
-igmrUserIP
-  = lens _igmrUserIP (\ s a -> s{_igmrUserIP = a})
-
 -- | The name of the zone in which the instance group manager resides.
 igmrZone :: Lens' InstanceGroupManagersResize' Text
 igmrZone = lens _igmrZone (\ s a -> s{_igmrZone = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-igmrKey :: Lens' InstanceGroupManagersResize' (Maybe AuthKey)
-igmrKey = lens _igmrKey (\ s a -> s{_igmrKey = a})
-
--- | OAuth 2.0 token for the current user.
-igmrOAuthToken :: Lens' InstanceGroupManagersResize' (Maybe OAuthToken)
-igmrOAuthToken
-  = lens _igmrOAuthToken
-      (\ s a -> s{_igmrOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-igmrFields :: Lens' InstanceGroupManagersResize' (Maybe Text)
-igmrFields
-  = lens _igmrFields (\ s a -> s{_igmrFields = a})
-
-instance GoogleAuth InstanceGroupManagersResize'
-         where
-        _AuthKey = igmrKey . _Just
-        _AuthToken = igmrOAuthToken . _Just
-
 instance GoogleRequest InstanceGroupManagersResize'
          where
         type Rs InstanceGroupManagersResize' = Operation
-        request = requestWith replicaPoolRequest
-        requestWith rq InstanceGroupManagersResize'{..}
+        requestClient InstanceGroupManagersResize'{..}
           = go _igmrProject _igmrZone _igmrInstanceGroupManager
               (Just _igmrSize)
-              _igmrQuotaUser
-              (Just _igmrPrettyPrint)
-              _igmrUserIP
-              _igmrFields
-              _igmrKey
-              _igmrOAuthToken
               (Just AltJSON)
+              replicaPoolService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy InstanceGroupManagersResizeResource)
-                      rq
+                      mempty

@@ -33,14 +33,8 @@ module Network.Google.Resource.Directory.Users.Undelete
     , UsersUndelete'
 
     -- * Request Lenses
-    , uQuotaUser
-    , uPrettyPrint
-    , uUserIP
     , uPayload
-    , uKey
-    , uOAuthToken
     , uUserKey
-    , uFields
     ) where
 
 import           Network.Google.Directory.Types
@@ -52,119 +46,47 @@ type UsersUndeleteResource =
      "users" :>
        Capture "userKey" Text :>
          "undelete" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] UserUndelete :> Post '[JSON] ()
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] UserUndelete :> Post '[JSON] ()
 
 -- | Undelete a deleted user
 --
 -- /See:/ 'usersUndelete'' smart constructor.
 data UsersUndelete' = UsersUndelete'
-    { _uQuotaUser   :: !(Maybe Text)
-    , _uPrettyPrint :: !Bool
-    , _uUserIP      :: !(Maybe Text)
-    , _uPayload     :: !UserUndelete
-    , _uKey         :: !(Maybe AuthKey)
-    , _uOAuthToken  :: !(Maybe OAuthToken)
-    , _uUserKey     :: !Text
-    , _uFields      :: !(Maybe Text)
+    { _uPayload :: !UserUndelete
+    , _uUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersUndelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uQuotaUser'
---
--- * 'uPrettyPrint'
---
--- * 'uUserIP'
---
 -- * 'uPayload'
 --
--- * 'uKey'
---
--- * 'uOAuthToken'
---
 -- * 'uUserKey'
---
--- * 'uFields'
 usersUndelete'
     :: UserUndelete -- ^ 'payload'
     -> Text -- ^ 'userKey'
     -> UsersUndelete'
 usersUndelete' pUPayload_ pUUserKey_ =
     UsersUndelete'
-    { _uQuotaUser = Nothing
-    , _uPrettyPrint = True
-    , _uUserIP = Nothing
-    , _uPayload = pUPayload_
-    , _uKey = Nothing
-    , _uOAuthToken = Nothing
+    { _uPayload = pUPayload_
     , _uUserKey = pUUserKey_
-    , _uFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-uQuotaUser :: Lens' UsersUndelete' (Maybe Text)
-uQuotaUser
-  = lens _uQuotaUser (\ s a -> s{_uQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-uPrettyPrint :: Lens' UsersUndelete' Bool
-uPrettyPrint
-  = lens _uPrettyPrint (\ s a -> s{_uPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-uUserIP :: Lens' UsersUndelete' (Maybe Text)
-uUserIP = lens _uUserIP (\ s a -> s{_uUserIP = a})
 
 -- | Multipart request metadata.
 uPayload :: Lens' UsersUndelete' UserUndelete
 uPayload = lens _uPayload (\ s a -> s{_uPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-uKey :: Lens' UsersUndelete' (Maybe AuthKey)
-uKey = lens _uKey (\ s a -> s{_uKey = a})
-
--- | OAuth 2.0 token for the current user.
-uOAuthToken :: Lens' UsersUndelete' (Maybe OAuthToken)
-uOAuthToken
-  = lens _uOAuthToken (\ s a -> s{_uOAuthToken = a})
-
 -- | The immutable id of the user
 uUserKey :: Lens' UsersUndelete' Text
 uUserKey = lens _uUserKey (\ s a -> s{_uUserKey = a})
 
--- | Selector specifying which fields to include in a partial response.
-uFields :: Lens' UsersUndelete' (Maybe Text)
-uFields = lens _uFields (\ s a -> s{_uFields = a})
-
-instance GoogleAuth UsersUndelete' where
-        _AuthKey = uKey . _Just
-        _AuthToken = uOAuthToken . _Just
-
 instance GoogleRequest UsersUndelete' where
         type Rs UsersUndelete' = ()
-        request = requestWith directoryRequest
-        requestWith rq UsersUndelete'{..}
-          = go _uUserKey _uQuotaUser (Just _uPrettyPrint)
-              _uUserIP
-              _uFields
-              _uKey
-              _uOAuthToken
-              (Just AltJSON)
-              _uPayload
+        requestClient UsersUndelete'{..}
+          = go _uUserKey (Just AltJSON) _uPayload
+              directoryService
           where go
-                  = clientBuild (Proxy :: Proxy UsersUndeleteResource)
-                      rq
+                  = buildClient (Proxy :: Proxy UsersUndeleteResource)
+                      mempty

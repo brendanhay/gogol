@@ -33,13 +33,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.UploadAccount
     , RelyingPartyUploadAccount'
 
     -- * Request Lenses
-    , rpuaQuotaUser
-    , rpuaPrettyPrint
-    , rpuaUserIP
     , rpuaPayload
-    , rpuaKey
-    , rpuaOAuthToken
-    , rpuaFields
     ) where
 
 import           Network.Google.IdentityToolkit.Types
@@ -49,121 +43,44 @@ import           Network.Google.Prelude
 -- 'RelyingPartyUploadAccount'' request conforms to.
 type RelyingPartyUploadAccountResource =
      "uploadAccount" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "fields" Text :>
-               QueryParam "key" AuthKey :>
-                 Header "Authorization" OAuthToken :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON]
-                       IdentitytoolkitRelyingPartyUploadAccountRequest
-                       :> Post '[JSON] UploadAccountResponse
+       QueryParam "alt" AltJSON :>
+         ReqBody '[JSON]
+           IdentitytoolkitRelyingPartyUploadAccountRequest
+           :> Post '[JSON] UploadAccountResponse
 
 -- | Batch upload existing user accounts.
 --
 -- /See:/ 'relyingPartyUploadAccount'' smart constructor.
-data RelyingPartyUploadAccount' = RelyingPartyUploadAccount'
-    { _rpuaQuotaUser   :: !(Maybe Text)
-    , _rpuaPrettyPrint :: !Bool
-    , _rpuaUserIP      :: !(Maybe Text)
-    , _rpuaPayload     :: !IdentitytoolkitRelyingPartyUploadAccountRequest
-    , _rpuaKey         :: !(Maybe AuthKey)
-    , _rpuaOAuthToken  :: !(Maybe OAuthToken)
-    , _rpuaFields      :: !(Maybe Text)
+newtype RelyingPartyUploadAccount' = RelyingPartyUploadAccount'
+    { _rpuaPayload :: IdentitytoolkitRelyingPartyUploadAccountRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingPartyUploadAccount'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rpuaQuotaUser'
---
--- * 'rpuaPrettyPrint'
---
--- * 'rpuaUserIP'
---
 -- * 'rpuaPayload'
---
--- * 'rpuaKey'
---
--- * 'rpuaOAuthToken'
---
--- * 'rpuaFields'
 relyingPartyUploadAccount'
     :: IdentitytoolkitRelyingPartyUploadAccountRequest -- ^ 'payload'
     -> RelyingPartyUploadAccount'
 relyingPartyUploadAccount' pRpuaPayload_ =
     RelyingPartyUploadAccount'
-    { _rpuaQuotaUser = Nothing
-    , _rpuaPrettyPrint = True
-    , _rpuaUserIP = Nothing
-    , _rpuaPayload = pRpuaPayload_
-    , _rpuaKey = Nothing
-    , _rpuaOAuthToken = Nothing
-    , _rpuaFields = Nothing
+    { _rpuaPayload = pRpuaPayload_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-rpuaQuotaUser :: Lens' RelyingPartyUploadAccount' (Maybe Text)
-rpuaQuotaUser
-  = lens _rpuaQuotaUser
-      (\ s a -> s{_rpuaQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rpuaPrettyPrint :: Lens' RelyingPartyUploadAccount' Bool
-rpuaPrettyPrint
-  = lens _rpuaPrettyPrint
-      (\ s a -> s{_rpuaPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rpuaUserIP :: Lens' RelyingPartyUploadAccount' (Maybe Text)
-rpuaUserIP
-  = lens _rpuaUserIP (\ s a -> s{_rpuaUserIP = a})
 
 -- | Multipart request metadata.
 rpuaPayload :: Lens' RelyingPartyUploadAccount' IdentitytoolkitRelyingPartyUploadAccountRequest
 rpuaPayload
   = lens _rpuaPayload (\ s a -> s{_rpuaPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rpuaKey :: Lens' RelyingPartyUploadAccount' (Maybe AuthKey)
-rpuaKey = lens _rpuaKey (\ s a -> s{_rpuaKey = a})
-
--- | OAuth 2.0 token for the current user.
-rpuaOAuthToken :: Lens' RelyingPartyUploadAccount' (Maybe OAuthToken)
-rpuaOAuthToken
-  = lens _rpuaOAuthToken
-      (\ s a -> s{_rpuaOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-rpuaFields :: Lens' RelyingPartyUploadAccount' (Maybe Text)
-rpuaFields
-  = lens _rpuaFields (\ s a -> s{_rpuaFields = a})
-
-instance GoogleAuth RelyingPartyUploadAccount' where
-        _AuthKey = rpuaKey . _Just
-        _AuthToken = rpuaOAuthToken . _Just
-
 instance GoogleRequest RelyingPartyUploadAccount'
          where
         type Rs RelyingPartyUploadAccount' =
              UploadAccountResponse
-        request = requestWith identityToolkitRequest
-        requestWith rq RelyingPartyUploadAccount'{..}
-          = go _rpuaQuotaUser (Just _rpuaPrettyPrint)
-              _rpuaUserIP
-              _rpuaFields
-              _rpuaKey
-              _rpuaOAuthToken
-              (Just AltJSON)
-              _rpuaPayload
+        requestClient RelyingPartyUploadAccount'{..}
+          = go (Just AltJSON) _rpuaPayload
+              identityToolkitService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy RelyingPartyUploadAccountResource)
-                      rq
+                      mempty

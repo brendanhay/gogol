@@ -33,17 +33,11 @@ module Network.Google.Resource.Directory.Groups.List
     , GroupsList'
 
     -- * Request Lenses
-    , glQuotaUser
-    , glPrettyPrint
-    , glUserIP
     , glDomain
     , glCustomer
-    , glKey
     , glPageToken
-    , glOAuthToken
     , glUserKey
     , glMaxResults
-    , glFields
     ) where
 
 import           Network.Google.Directory.Types
@@ -58,90 +52,42 @@ type GroupsListResource =
            QueryParam "pageToken" Text :>
              QueryParam "userKey" Text :>
                QueryParam "maxResults" Int32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Groups
+                 QueryParam "alt" AltJSON :> Get '[JSON] Groups
 
 -- | Retrieve all groups in a domain (paginated)
 --
 -- /See:/ 'groupsList'' smart constructor.
 data GroupsList' = GroupsList'
-    { _glQuotaUser   :: !(Maybe Text)
-    , _glPrettyPrint :: !Bool
-    , _glUserIP      :: !(Maybe Text)
-    , _glDomain      :: !(Maybe Text)
-    , _glCustomer    :: !(Maybe Text)
-    , _glKey         :: !(Maybe AuthKey)
-    , _glPageToken   :: !(Maybe Text)
-    , _glOAuthToken  :: !(Maybe OAuthToken)
-    , _glUserKey     :: !(Maybe Text)
-    , _glMaxResults  :: !(Maybe Int32)
-    , _glFields      :: !(Maybe Text)
+    { _glDomain     :: !(Maybe Text)
+    , _glCustomer   :: !(Maybe Text)
+    , _glPageToken  :: !(Maybe Text)
+    , _glUserKey    :: !(Maybe Text)
+    , _glMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'glQuotaUser'
---
--- * 'glPrettyPrint'
---
--- * 'glUserIP'
---
 -- * 'glDomain'
 --
 -- * 'glCustomer'
 --
--- * 'glKey'
---
 -- * 'glPageToken'
---
--- * 'glOAuthToken'
 --
 -- * 'glUserKey'
 --
 -- * 'glMaxResults'
---
--- * 'glFields'
 groupsList'
     :: GroupsList'
 groupsList' =
     GroupsList'
-    { _glQuotaUser = Nothing
-    , _glPrettyPrint = True
-    , _glUserIP = Nothing
-    , _glDomain = Nothing
+    { _glDomain = Nothing
     , _glCustomer = Nothing
-    , _glKey = Nothing
     , _glPageToken = Nothing
-    , _glOAuthToken = Nothing
     , _glUserKey = Nothing
     , _glMaxResults = Nothing
-    , _glFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-glQuotaUser :: Lens' GroupsList' (Maybe Text)
-glQuotaUser
-  = lens _glQuotaUser (\ s a -> s{_glQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-glPrettyPrint :: Lens' GroupsList' Bool
-glPrettyPrint
-  = lens _glPrettyPrint
-      (\ s a -> s{_glPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-glUserIP :: Lens' GroupsList' (Maybe Text)
-glUserIP = lens _glUserIP (\ s a -> s{_glUserIP = a})
 
 -- | Name of the domain. Fill this field to get groups from only this domain.
 -- To return all groups in a multi-domain fill customer field instead.
@@ -154,21 +100,10 @@ glCustomer :: Lens' GroupsList' (Maybe Text)
 glCustomer
   = lens _glCustomer (\ s a -> s{_glCustomer = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-glKey :: Lens' GroupsList' (Maybe AuthKey)
-glKey = lens _glKey (\ s a -> s{_glKey = a})
-
 -- | Token to specify next page in the list
 glPageToken :: Lens' GroupsList' (Maybe Text)
 glPageToken
   = lens _glPageToken (\ s a -> s{_glPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-glOAuthToken :: Lens' GroupsList' (Maybe OAuthToken)
-glOAuthToken
-  = lens _glOAuthToken (\ s a -> s{_glOAuthToken = a})
 
 -- | Email or immutable Id of the user if only those groups are to be listed,
 -- the given user is a member of. If Id, it should match with id of user
@@ -182,26 +117,13 @@ glMaxResults :: Lens' GroupsList' (Maybe Int32)
 glMaxResults
   = lens _glMaxResults (\ s a -> s{_glMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-glFields :: Lens' GroupsList' (Maybe Text)
-glFields = lens _glFields (\ s a -> s{_glFields = a})
-
-instance GoogleAuth GroupsList' where
-        _AuthKey = glKey . _Just
-        _AuthToken = glOAuthToken . _Just
-
 instance GoogleRequest GroupsList' where
         type Rs GroupsList' = Groups
-        request = requestWith directoryRequest
-        requestWith rq GroupsList'{..}
+        requestClient GroupsList'{..}
           = go _glDomain _glCustomer _glPageToken _glUserKey
               _glMaxResults
-              _glQuotaUser
-              (Just _glPrettyPrint)
-              _glUserIP
-              _glFields
-              _glKey
-              _glOAuthToken
               (Just AltJSON)
+              directoryService
           where go
-                  = clientBuild (Proxy :: Proxy GroupsListResource) rq
+                  = buildClient (Proxy :: Proxy GroupsListResource)
+                      mempty

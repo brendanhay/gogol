@@ -34,21 +34,15 @@ module Network.Google.Resource.GAN.Advertisers.List
     , AdvertisersList'
 
     -- * Request Lenses
-    , alQuotaUser
-    , alPrettyPrint
-    , alUserIP
     , alRelationshipStatus
     , alMinSevenDayEpc
     , alRoleId
     , alMinNinetyDayEpc
     , alRole
-    , alKey
     , alMinPayoutRank
     , alAdvertiserCategory
     , alPageToken
-    , alOAuthToken
     , alMaxResults
-    , alFields
     ) where
 
 import           Network.Google.Affiliates.Types
@@ -69,46 +63,27 @@ type AdvertisersListResource =
                    QueryParam "advertiserCategory" Text :>
                      QueryParam "pageToken" Text :>
                        QueryParam "maxResults" Word32 :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] Advertisers
+                         QueryParam "alt" AltJSON :> Get '[JSON] Advertisers
 
 -- | Retrieves data about all advertisers that the requesting
 -- advertiser\/publisher has access to.
 --
 -- /See:/ 'advertisersList'' smart constructor.
 data AdvertisersList' = AdvertisersList'
-    { _alQuotaUser          :: !(Maybe Text)
-    , _alPrettyPrint        :: !Bool
-    , _alUserIP             :: !(Maybe Text)
-    , _alRelationshipStatus :: !(Maybe AdvertisersListRelationshipStatus)
+    { _alRelationshipStatus :: !(Maybe AdvertisersListRelationshipStatus)
     , _alMinSevenDayEpc     :: !(Maybe Double)
     , _alRoleId             :: !Text
     , _alMinNinetyDayEpc    :: !(Maybe Double)
     , _alRole               :: !AdvertisersListRole
-    , _alKey                :: !(Maybe AuthKey)
     , _alMinPayoutRank      :: !(Maybe Int32)
     , _alAdvertiserCategory :: !(Maybe Text)
     , _alPageToken          :: !(Maybe Text)
-    , _alOAuthToken         :: !(Maybe OAuthToken)
     , _alMaxResults         :: !(Maybe Word32)
-    , _alFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'alQuotaUser'
---
--- * 'alPrettyPrint'
---
--- * 'alUserIP'
 --
 -- * 'alRelationshipStatus'
 --
@@ -120,59 +95,29 @@ data AdvertisersList' = AdvertisersList'
 --
 -- * 'alRole'
 --
--- * 'alKey'
---
 -- * 'alMinPayoutRank'
 --
 -- * 'alAdvertiserCategory'
 --
 -- * 'alPageToken'
 --
--- * 'alOAuthToken'
---
 -- * 'alMaxResults'
---
--- * 'alFields'
 advertisersList'
     :: Text -- ^ 'roleId'
     -> AdvertisersListRole -- ^ 'role'
     -> AdvertisersList'
 advertisersList' pAlRoleId_ pAlRole_ =
     AdvertisersList'
-    { _alQuotaUser = Nothing
-    , _alPrettyPrint = True
-    , _alUserIP = Nothing
-    , _alRelationshipStatus = Nothing
+    { _alRelationshipStatus = Nothing
     , _alMinSevenDayEpc = Nothing
     , _alRoleId = pAlRoleId_
     , _alMinNinetyDayEpc = Nothing
     , _alRole = pAlRole_
-    , _alKey = Nothing
     , _alMinPayoutRank = Nothing
     , _alAdvertiserCategory = Nothing
     , _alPageToken = Nothing
-    , _alOAuthToken = Nothing
     , _alMaxResults = Nothing
-    , _alFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-alQuotaUser :: Lens' AdvertisersList' (Maybe Text)
-alQuotaUser
-  = lens _alQuotaUser (\ s a -> s{_alQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-alPrettyPrint :: Lens' AdvertisersList' Bool
-alPrettyPrint
-  = lens _alPrettyPrint
-      (\ s a -> s{_alPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-alUserIP :: Lens' AdvertisersList' (Maybe Text)
-alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | Filters out all advertisers for which do not have the given relationship
 -- status with the requesting publisher.
@@ -204,12 +149,6 @@ alMinNinetyDayEpc
 alRole :: Lens' AdvertisersList' AdvertisersListRole
 alRole = lens _alRole (\ s a -> s{_alRole = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-alKey :: Lens' AdvertisersList' (Maybe AuthKey)
-alKey = lens _alKey (\ s a -> s{_alKey = a})
-
 -- | A value between 1 and 4, where 1 represents the quartile of advertisers
 -- with the lowest ranks and 4 represents the quartile of advertisers with
 -- the highest ranks. Filters out all advertisers with a lower rank than
@@ -235,28 +174,14 @@ alPageToken :: Lens' AdvertisersList' (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-alOAuthToken :: Lens' AdvertisersList' (Maybe OAuthToken)
-alOAuthToken
-  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
-
 -- | Max number of items to return in this page. Optional. Defaults to 20.
 alMaxResults :: Lens' AdvertisersList' (Maybe Word32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-alFields :: Lens' AdvertisersList' (Maybe Text)
-alFields = lens _alFields (\ s a -> s{_alFields = a})
-
-instance GoogleAuth AdvertisersList' where
-        _AuthKey = alKey . _Just
-        _AuthToken = alOAuthToken . _Just
-
 instance GoogleRequest AdvertisersList' where
         type Rs AdvertisersList' = Advertisers
-        request = requestWith affiliatesRequest
-        requestWith rq AdvertisersList'{..}
+        requestClient AdvertisersList'{..}
           = go _alRole _alRoleId _alRelationshipStatus
               _alMinSevenDayEpc
               _alMinNinetyDayEpc
@@ -264,14 +189,9 @@ instance GoogleRequest AdvertisersList' where
               _alAdvertiserCategory
               _alPageToken
               _alMaxResults
-              _alQuotaUser
-              (Just _alPrettyPrint)
-              _alUserIP
-              _alFields
-              _alKey
-              _alOAuthToken
               (Just AltJSON)
+              affiliatesService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AdvertisersListResource)
-                      rq
+                      mempty

@@ -34,8 +34,6 @@ module Network.Google.Resource.Genomics.Variantsets.Patch
 
     -- * Request Lenses
     , vpXgafv
-    , vpQuotaUser
-    , vpPrettyPrint
     , vpUploadProtocol
     , vpUpdateMask
     , vpPp
@@ -44,9 +42,6 @@ module Network.Google.Resource.Genomics.Variantsets.Patch
     , vpUploadType
     , vpPayload
     , vpBearerToken
-    , vpKey
-    , vpOAuthToken
-    , vpFields
     , vpCallback
     ) where
 
@@ -67,22 +62,15 @@ type VariantsetsPatchResource =
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
                          QueryParam "callback" Text :>
-                           QueryParam "quotaUser" Text :>
-                             QueryParam "prettyPrint" Bool :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] VariantSet :>
-                                         Patch '[JSON] VariantSet
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] VariantSet :>
+                               Patch '[JSON] VariantSet
 
 -- | Updates a variant set. This method supports patch semantics.
 --
 -- /See:/ 'variantsetsPatch'' smart constructor.
 data VariantsetsPatch' = VariantsetsPatch'
     { _vpXgafv          :: !(Maybe Text)
-    , _vpQuotaUser      :: !(Maybe Text)
-    , _vpPrettyPrint    :: !Bool
     , _vpUploadProtocol :: !(Maybe Text)
     , _vpUpdateMask     :: !(Maybe Text)
     , _vpPp             :: !Bool
@@ -91,9 +79,6 @@ data VariantsetsPatch' = VariantsetsPatch'
     , _vpUploadType     :: !(Maybe Text)
     , _vpPayload        :: !VariantSet
     , _vpBearerToken    :: !(Maybe Text)
-    , _vpKey            :: !(Maybe AuthKey)
-    , _vpOAuthToken     :: !(Maybe OAuthToken)
-    , _vpFields         :: !(Maybe Text)
     , _vpCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +87,6 @@ data VariantsetsPatch' = VariantsetsPatch'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'vpXgafv'
---
--- * 'vpQuotaUser'
---
--- * 'vpPrettyPrint'
 --
 -- * 'vpUploadProtocol'
 --
@@ -123,12 +104,6 @@ data VariantsetsPatch' = VariantsetsPatch'
 --
 -- * 'vpBearerToken'
 --
--- * 'vpKey'
---
--- * 'vpOAuthToken'
---
--- * 'vpFields'
---
 -- * 'vpCallback'
 variantsetsPatch'
     :: Text -- ^ 'variantSetId'
@@ -137,8 +112,6 @@ variantsetsPatch'
 variantsetsPatch' pVpVariantSetId_ pVpPayload_ =
     VariantsetsPatch'
     { _vpXgafv = Nothing
-    , _vpQuotaUser = Nothing
-    , _vpPrettyPrint = True
     , _vpUploadProtocol = Nothing
     , _vpUpdateMask = Nothing
     , _vpPp = True
@@ -147,28 +120,12 @@ variantsetsPatch' pVpVariantSetId_ pVpPayload_ =
     , _vpUploadType = Nothing
     , _vpPayload = pVpPayload_
     , _vpBearerToken = Nothing
-    , _vpKey = Nothing
-    , _vpOAuthToken = Nothing
-    , _vpFields = Nothing
     , _vpCallback = Nothing
     }
 
 -- | V1 error format.
 vpXgafv :: Lens' VariantsetsPatch' (Maybe Text)
 vpXgafv = lens _vpXgafv (\ s a -> s{_vpXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-vpQuotaUser :: Lens' VariantsetsPatch' (Maybe Text)
-vpQuotaUser
-  = lens _vpQuotaUser (\ s a -> s{_vpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-vpPrettyPrint :: Lens' VariantsetsPatch' Bool
-vpPrettyPrint
-  = lens _vpPrettyPrint
-      (\ s a -> s{_vpPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 vpUploadProtocol :: Lens' VariantsetsPatch' (Maybe Text)
@@ -215,34 +172,14 @@ vpBearerToken
   = lens _vpBearerToken
       (\ s a -> s{_vpBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-vpKey :: Lens' VariantsetsPatch' (Maybe AuthKey)
-vpKey = lens _vpKey (\ s a -> s{_vpKey = a})
-
--- | OAuth 2.0 token for the current user.
-vpOAuthToken :: Lens' VariantsetsPatch' (Maybe OAuthToken)
-vpOAuthToken
-  = lens _vpOAuthToken (\ s a -> s{_vpOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-vpFields :: Lens' VariantsetsPatch' (Maybe Text)
-vpFields = lens _vpFields (\ s a -> s{_vpFields = a})
-
 -- | JSONP
 vpCallback :: Lens' VariantsetsPatch' (Maybe Text)
 vpCallback
   = lens _vpCallback (\ s a -> s{_vpCallback = a})
 
-instance GoogleAuth VariantsetsPatch' where
-        _AuthKey = vpKey . _Just
-        _AuthToken = vpOAuthToken . _Just
-
 instance GoogleRequest VariantsetsPatch' where
         type Rs VariantsetsPatch' = VariantSet
-        request = requestWith genomicsRequest
-        requestWith rq VariantsetsPatch'{..}
+        requestClient VariantsetsPatch'{..}
           = go _vpVariantSetId _vpXgafv _vpUploadProtocol
               _vpUpdateMask
               (Just _vpPp)
@@ -250,14 +187,10 @@ instance GoogleRequest VariantsetsPatch' where
               _vpUploadType
               _vpBearerToken
               _vpCallback
-              _vpQuotaUser
-              (Just _vpPrettyPrint)
-              _vpFields
-              _vpKey
-              _vpOAuthToken
               (Just AltJSON)
               _vpPayload
+              genomicsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy VariantsetsPatchResource)
-                      rq
+                      mempty

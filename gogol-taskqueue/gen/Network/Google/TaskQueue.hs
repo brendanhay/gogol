@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference>
 module Network.Google.TaskQueue
     (
+    -- * Service Configuration
+      taskQueueService
+
     -- * API Declaration
-      TaskQueueAPI
+    , TaskQueueAPI
 
     -- * Resources
 

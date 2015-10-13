@@ -34,20 +34,14 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.List
     , LiveBroadcastsList'
 
     -- * Request Lenses
-    , lblQuotaUser
     , lblPart
-    , lblPrettyPrint
     , lblMine
-    , lblUserIP
     , lblBroadcastStatus
     , lblOnBehalfOfContentOwner
-    , lblKey
     , lblOnBehalfOfContentOwnerChannel
     , lblId
     , lblPageToken
-    , lblOAuthToken
     , lblMaxResults
-    , lblFields
     ) where
 
 import           Network.Google.Prelude
@@ -67,55 +61,35 @@ type LiveBroadcastsListResource =
                  QueryParam "id" Text :>
                    QueryParam "pageToken" Text :>
                      QueryParam "maxResults" Word32 :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] LiveBroadcastListResponse
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] LiveBroadcastListResponse
 
 -- | Returns a list of YouTube broadcasts that match the API request
 -- parameters.
 --
 -- /See:/ 'liveBroadcastsList'' smart constructor.
 data LiveBroadcastsList' = LiveBroadcastsList'
-    { _lblQuotaUser                     :: !(Maybe Text)
-    , _lblPart                          :: !Text
-    , _lblPrettyPrint                   :: !Bool
+    { _lblPart                          :: !Text
     , _lblMine                          :: !(Maybe Bool)
-    , _lblUserIP                        :: !(Maybe Text)
     , _lblBroadcastStatus               :: !(Maybe LiveBroadcastsListBroadcastStatus)
     , _lblOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lblKey                           :: !(Maybe AuthKey)
     , _lblOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lblId                            :: !(Maybe Text)
     , _lblPageToken                     :: !(Maybe Text)
-    , _lblOAuthToken                    :: !(Maybe OAuthToken)
     , _lblMaxResults                    :: !Word32
-    , _lblFields                        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lblQuotaUser'
---
 -- * 'lblPart'
 --
--- * 'lblPrettyPrint'
---
 -- * 'lblMine'
---
--- * 'lblUserIP'
 --
 -- * 'lblBroadcastStatus'
 --
 -- * 'lblOnBehalfOfContentOwner'
---
--- * 'lblKey'
 --
 -- * 'lblOnBehalfOfContentOwnerChannel'
 --
@@ -123,38 +97,21 @@ data LiveBroadcastsList' = LiveBroadcastsList'
 --
 -- * 'lblPageToken'
 --
--- * 'lblOAuthToken'
---
 -- * 'lblMaxResults'
---
--- * 'lblFields'
 liveBroadcastsList'
     :: Text -- ^ 'part'
     -> LiveBroadcastsList'
 liveBroadcastsList' pLblPart_ =
     LiveBroadcastsList'
-    { _lblQuotaUser = Nothing
-    , _lblPart = pLblPart_
-    , _lblPrettyPrint = True
+    { _lblPart = pLblPart_
     , _lblMine = Nothing
-    , _lblUserIP = Nothing
     , _lblBroadcastStatus = Nothing
     , _lblOnBehalfOfContentOwner = Nothing
-    , _lblKey = Nothing
     , _lblOnBehalfOfContentOwnerChannel = Nothing
     , _lblId = Nothing
     , _lblPageToken = Nothing
-    , _lblOAuthToken = Nothing
     , _lblMaxResults = 5
-    , _lblFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-lblQuotaUser :: Lens' LiveBroadcastsList' (Maybe Text)
-lblQuotaUser
-  = lens _lblQuotaUser (\ s a -> s{_lblQuotaUser = a})
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- liveBroadcast resource properties that the API response will include.
@@ -163,23 +120,11 @@ lblQuotaUser
 lblPart :: Lens' LiveBroadcastsList' Text
 lblPart = lens _lblPart (\ s a -> s{_lblPart = a})
 
--- | Returns response with indentations and line breaks.
-lblPrettyPrint :: Lens' LiveBroadcastsList' Bool
-lblPrettyPrint
-  = lens _lblPrettyPrint
-      (\ s a -> s{_lblPrettyPrint = a})
-
 -- | The mine parameter can be used to instruct the API to only return
 -- broadcasts owned by the authenticated user. Set the parameter value to
 -- true to only retrieve your own broadcasts.
 lblMine :: Lens' LiveBroadcastsList' (Maybe Bool)
 lblMine = lens _lblMine (\ s a -> s{_lblMine = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-lblUserIP :: Lens' LiveBroadcastsList' (Maybe Text)
-lblUserIP
-  = lens _lblUserIP (\ s a -> s{_lblUserIP = a})
 
 -- | The broadcastStatus parameter filters the API response to only include
 -- broadcasts with the specified status.
@@ -202,12 +147,6 @@ lblOnBehalfOfContentOwner :: Lens' LiveBroadcastsList' (Maybe Text)
 lblOnBehalfOfContentOwner
   = lens _lblOnBehalfOfContentOwner
       (\ s a -> s{_lblOnBehalfOfContentOwner = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-lblKey :: Lens' LiveBroadcastsList' (Maybe AuthKey)
-lblKey = lens _lblKey (\ s a -> s{_lblKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
 -- This parameter is intended exclusively for YouTube content partners. The
@@ -243,12 +182,6 @@ lblPageToken :: Lens' LiveBroadcastsList' (Maybe Text)
 lblPageToken
   = lens _lblPageToken (\ s a -> s{_lblPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-lblOAuthToken :: Lens' LiveBroadcastsList' (Maybe OAuthToken)
-lblOAuthToken
-  = lens _lblOAuthToken
-      (\ s a -> s{_lblOAuthToken = a})
-
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set.
 lblMaxResults :: Lens' LiveBroadcastsList' Word32
@@ -256,34 +189,19 @@ lblMaxResults
   = lens _lblMaxResults
       (\ s a -> s{_lblMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-lblFields :: Lens' LiveBroadcastsList' (Maybe Text)
-lblFields
-  = lens _lblFields (\ s a -> s{_lblFields = a})
-
-instance GoogleAuth LiveBroadcastsList' where
-        _AuthKey = lblKey . _Just
-        _AuthToken = lblOAuthToken . _Just
-
 instance GoogleRequest LiveBroadcastsList' where
         type Rs LiveBroadcastsList' =
              LiveBroadcastListResponse
-        request = requestWith youTubeRequest
-        requestWith rq LiveBroadcastsList'{..}
+        requestClient LiveBroadcastsList'{..}
           = go (Just _lblPart) _lblMine _lblBroadcastStatus
               _lblOnBehalfOfContentOwner
               _lblOnBehalfOfContentOwnerChannel
               _lblId
               _lblPageToken
               (Just _lblMaxResults)
-              _lblQuotaUser
-              (Just _lblPrettyPrint)
-              _lblUserIP
-              _lblFields
-              _lblKey
-              _lblOAuthToken
               (Just AltJSON)
+              youTubeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy LiveBroadcastsListResource)
-                      rq
+                      mempty

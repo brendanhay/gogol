@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference>
 module Network.Google.AppsTasks
     (
+    -- * Service Configuration
+      appsTasksService
+
     -- * API Declaration
-      AppsTasksAPI
+    , AppsTasksAPI
 
     -- * Resources
 

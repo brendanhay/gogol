@@ -34,16 +34,10 @@ module Network.Google.Resource.Calendar.ACL.List
 
     -- * Request Lenses
     , alSyncToken
-    , alQuotaUser
     , alCalendarId
-    , alPrettyPrint
-    , alUserIP
     , alShowDeleted
-    , alKey
     , alPageToken
-    , alOAuthToken
     , alMaxResults
-    , alFields
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -59,29 +53,17 @@ type ACLListResource =
              QueryParam "showDeleted" Bool :>
                QueryParam "pageToken" Text :>
                  QueryParam "maxResults" Int32 :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :> Get '[JSON] ACL
+                   QueryParam "alt" AltJSON :> Get '[JSON] ACL
 
 -- | Returns the rules in the access control list for the calendar.
 --
 -- /See:/ 'aclList'' smart constructor.
 data ACLList' = ACLList'
     { _alSyncToken   :: !(Maybe Text)
-    , _alQuotaUser   :: !(Maybe Text)
     , _alCalendarId  :: !Text
-    , _alPrettyPrint :: !Bool
-    , _alUserIP      :: !(Maybe Text)
     , _alShowDeleted :: !(Maybe Bool)
-    , _alKey         :: !(Maybe AuthKey)
     , _alPageToken   :: !(Maybe Text)
-    , _alOAuthToken  :: !(Maybe OAuthToken)
     , _alMaxResults  :: !(Maybe Int32)
-    , _alFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLList'' with the minimum fields required to make a request.
@@ -90,41 +72,23 @@ data ACLList' = ACLList'
 --
 -- * 'alSyncToken'
 --
--- * 'alQuotaUser'
---
 -- * 'alCalendarId'
---
--- * 'alPrettyPrint'
---
--- * 'alUserIP'
 --
 -- * 'alShowDeleted'
 --
--- * 'alKey'
---
 -- * 'alPageToken'
 --
--- * 'alOAuthToken'
---
 -- * 'alMaxResults'
---
--- * 'alFields'
 aclList'
     :: Text -- ^ 'calendarId'
     -> ACLList'
 aclList' pAlCalendarId_ =
     ACLList'
     { _alSyncToken = Nothing
-    , _alQuotaUser = Nothing
     , _alCalendarId = pAlCalendarId_
-    , _alPrettyPrint = True
-    , _alUserIP = Nothing
     , _alShowDeleted = Nothing
-    , _alKey = Nothing
     , _alPageToken = Nothing
-    , _alOAuthToken = Nothing
     , _alMaxResults = Nothing
-    , _alFields = Nothing
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -140,30 +104,12 @@ alSyncToken :: Lens' ACLList' (Maybe Text)
 alSyncToken
   = lens _alSyncToken (\ s a -> s{_alSyncToken = a})
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-alQuotaUser :: Lens' ACLList' (Maybe Text)
-alQuotaUser
-  = lens _alQuotaUser (\ s a -> s{_alQuotaUser = a})
-
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
 alCalendarId :: Lens' ACLList' Text
 alCalendarId
   = lens _alCalendarId (\ s a -> s{_alCalendarId = a})
-
--- | Returns response with indentations and line breaks.
-alPrettyPrint :: Lens' ACLList' Bool
-alPrettyPrint
-  = lens _alPrettyPrint
-      (\ s a -> s{_alPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-alUserIP :: Lens' ACLList' (Maybe Text)
-alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | Whether to include deleted ACLs in the result. Deleted ACLs are
 -- represented by role equal to \"none\". Deleted ACLs will always be
@@ -173,21 +119,10 @@ alShowDeleted
   = lens _alShowDeleted
       (\ s a -> s{_alShowDeleted = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-alKey :: Lens' ACLList' (Maybe AuthKey)
-alKey = lens _alKey (\ s a -> s{_alKey = a})
-
 -- | Token specifying which result page to return. Optional.
 alPageToken :: Lens' ACLList' (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-alOAuthToken :: Lens' ACLList' (Maybe OAuthToken)
-alOAuthToken
-  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
 
 -- | Maximum number of entries returned on one result page. By default the
 -- value is 100 entries. The page size can never be larger than 250
@@ -196,27 +131,13 @@ alMaxResults :: Lens' ACLList' (Maybe Int32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-alFields :: Lens' ACLList' (Maybe Text)
-alFields = lens _alFields (\ s a -> s{_alFields = a})
-
-instance GoogleAuth ACLList' where
-        _AuthKey = alKey . _Just
-        _AuthToken = alOAuthToken . _Just
-
 instance GoogleRequest ACLList' where
         type Rs ACLList' = ACL
-        request = requestWith appsCalendarRequest
-        requestWith rq ACLList'{..}
+        requestClient ACLList'{..}
           = go _alCalendarId _alSyncToken _alShowDeleted
               _alPageToken
               _alMaxResults
-              _alQuotaUser
-              (Just _alPrettyPrint)
-              _alUserIP
-              _alFields
-              _alKey
-              _alOAuthToken
               (Just AltJSON)
+              appsCalendarService
           where go
-                  = clientBuild (Proxy :: Proxy ACLListResource) rq
+                  = buildClient (Proxy :: Proxy ACLListResource) mempty

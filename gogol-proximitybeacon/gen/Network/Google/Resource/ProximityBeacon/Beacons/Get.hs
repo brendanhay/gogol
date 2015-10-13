@@ -34,17 +34,12 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Get
 
     -- * Request Lenses
     , bgXgafv
-    , bgQuotaUser
-    , bgPrettyPrint
     , bgUploadProtocol
     , bgPp
     , bgAccessToken
     , bgBeaconName
     , bgUploadType
     , bgBearerToken
-    , bgKey
-    , bgOAuthToken
-    , bgFields
     , bgCallback
     ) where
 
@@ -63,29 +58,19 @@ type BeaconsGetResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :> Get '[JSON] Beacon
+                       QueryParam "alt" AltJSON :> Get '[JSON] Beacon
 
 -- | Returns detailed information about the specified beacon.
 --
 -- /See:/ 'beaconsGet'' smart constructor.
 data BeaconsGet' = BeaconsGet'
     { _bgXgafv          :: !(Maybe Text)
-    , _bgQuotaUser      :: !(Maybe Text)
-    , _bgPrettyPrint    :: !Bool
     , _bgUploadProtocol :: !(Maybe Text)
     , _bgPp             :: !Bool
     , _bgAccessToken    :: !(Maybe Text)
     , _bgBeaconName     :: !Text
     , _bgUploadType     :: !(Maybe Text)
     , _bgBearerToken    :: !(Maybe Text)
-    , _bgKey            :: !(Maybe AuthKey)
-    , _bgOAuthToken     :: !(Maybe OAuthToken)
-    , _bgFields         :: !(Maybe Text)
     , _bgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -94,10 +79,6 @@ data BeaconsGet' = BeaconsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'bgXgafv'
---
--- * 'bgQuotaUser'
---
--- * 'bgPrettyPrint'
 --
 -- * 'bgUploadProtocol'
 --
@@ -111,12 +92,6 @@ data BeaconsGet' = BeaconsGet'
 --
 -- * 'bgBearerToken'
 --
--- * 'bgKey'
---
--- * 'bgOAuthToken'
---
--- * 'bgFields'
---
 -- * 'bgCallback'
 beaconsGet'
     :: Text -- ^ 'beaconName'
@@ -124,36 +99,18 @@ beaconsGet'
 beaconsGet' pBgBeaconName_ =
     BeaconsGet'
     { _bgXgafv = Nothing
-    , _bgQuotaUser = Nothing
-    , _bgPrettyPrint = True
     , _bgUploadProtocol = Nothing
     , _bgPp = True
     , _bgAccessToken = Nothing
     , _bgBeaconName = pBgBeaconName_
     , _bgUploadType = Nothing
     , _bgBearerToken = Nothing
-    , _bgKey = Nothing
-    , _bgOAuthToken = Nothing
-    , _bgFields = Nothing
     , _bgCallback = Nothing
     }
 
 -- | V1 error format.
 bgXgafv :: Lens' BeaconsGet' (Maybe Text)
 bgXgafv = lens _bgXgafv (\ s a -> s{_bgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-bgQuotaUser :: Lens' BeaconsGet' (Maybe Text)
-bgQuotaUser
-  = lens _bgQuotaUser (\ s a -> s{_bgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-bgPrettyPrint :: Lens' BeaconsGet' Bool
-bgPrettyPrint
-  = lens _bgPrettyPrint
-      (\ s a -> s{_bgPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 bgUploadProtocol :: Lens' BeaconsGet' (Maybe Text)
@@ -187,45 +144,22 @@ bgBearerToken
   = lens _bgBearerToken
       (\ s a -> s{_bgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-bgKey :: Lens' BeaconsGet' (Maybe AuthKey)
-bgKey = lens _bgKey (\ s a -> s{_bgKey = a})
-
--- | OAuth 2.0 token for the current user.
-bgOAuthToken :: Lens' BeaconsGet' (Maybe OAuthToken)
-bgOAuthToken
-  = lens _bgOAuthToken (\ s a -> s{_bgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-bgFields :: Lens' BeaconsGet' (Maybe Text)
-bgFields = lens _bgFields (\ s a -> s{_bgFields = a})
-
 -- | JSONP
 bgCallback :: Lens' BeaconsGet' (Maybe Text)
 bgCallback
   = lens _bgCallback (\ s a -> s{_bgCallback = a})
 
-instance GoogleAuth BeaconsGet' where
-        _AuthKey = bgKey . _Just
-        _AuthToken = bgOAuthToken . _Just
-
 instance GoogleRequest BeaconsGet' where
         type Rs BeaconsGet' = Beacon
-        request = requestWith proximityBeaconRequest
-        requestWith rq BeaconsGet'{..}
+        requestClient BeaconsGet'{..}
           = go _bgBeaconName _bgXgafv _bgUploadProtocol
               (Just _bgPp)
               _bgAccessToken
               _bgUploadType
               _bgBearerToken
               _bgCallback
-              _bgQuotaUser
-              (Just _bgPrettyPrint)
-              _bgFields
-              _bgKey
-              _bgOAuthToken
               (Just AltJSON)
+              proximityBeaconService
           where go
-                  = clientBuild (Proxy :: Proxy BeaconsGetResource) rq
+                  = buildClient (Proxy :: Proxy BeaconsGetResource)
+                      mempty

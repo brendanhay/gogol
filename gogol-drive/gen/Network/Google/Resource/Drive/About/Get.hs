@@ -34,15 +34,9 @@ module Network.Google.Resource.Drive.About.Get
     , AboutGet'
 
     -- * Request Lenses
-    , agQuotaUser
-    , agPrettyPrint
-    , agUserIP
     , agIncludeSubscribed
     , agStartChangeId
     , agMaxChangeIdCount
-    , agKey
-    , agOAuthToken
-    , agFields
     ) where
 
 import           Network.Google.Drive.Types
@@ -55,83 +49,35 @@ type AboutGetResource =
        QueryParam "includeSubscribed" Bool :>
          QueryParam "startChangeId" Int64 :>
            QueryParam "maxChangeIdCount" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] About
+             QueryParam "alt" AltJSON :> Get '[JSON] About
 
 -- | Gets the information about the current user along with Drive API
 -- settings
 --
 -- /See:/ 'aboutGet'' smart constructor.
 data AboutGet' = AboutGet'
-    { _agQuotaUser         :: !(Maybe Text)
-    , _agPrettyPrint       :: !Bool
-    , _agUserIP            :: !(Maybe Text)
-    , _agIncludeSubscribed :: !Bool
+    { _agIncludeSubscribed :: !Bool
     , _agStartChangeId     :: !(Maybe Int64)
     , _agMaxChangeIdCount  :: !Int64
-    , _agKey               :: !(Maybe AuthKey)
-    , _agOAuthToken        :: !(Maybe OAuthToken)
-    , _agFields            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AboutGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'agQuotaUser'
---
--- * 'agPrettyPrint'
---
--- * 'agUserIP'
---
 -- * 'agIncludeSubscribed'
 --
 -- * 'agStartChangeId'
 --
 -- * 'agMaxChangeIdCount'
---
--- * 'agKey'
---
--- * 'agOAuthToken'
---
--- * 'agFields'
 aboutGet'
     :: AboutGet'
 aboutGet' =
     AboutGet'
-    { _agQuotaUser = Nothing
-    , _agPrettyPrint = True
-    , _agUserIP = Nothing
-    , _agIncludeSubscribed = True
+    { _agIncludeSubscribed = True
     , _agStartChangeId = Nothing
     , _agMaxChangeIdCount = 1
-    , _agKey = Nothing
-    , _agOAuthToken = Nothing
-    , _agFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-agQuotaUser :: Lens' AboutGet' (Maybe Text)
-agQuotaUser
-  = lens _agQuotaUser (\ s a -> s{_agQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-agPrettyPrint :: Lens' AboutGet' Bool
-agPrettyPrint
-  = lens _agPrettyPrint
-      (\ s a -> s{_agPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-agUserIP :: Lens' AboutGet' (Maybe Text)
-agUserIP = lens _agUserIP (\ s a -> s{_agUserIP = a})
 
 -- | When calculating the number of remaining change IDs, whether to include
 -- public files the user has opened and shared files. When set to false,
@@ -155,37 +101,13 @@ agMaxChangeIdCount
   = lens _agMaxChangeIdCount
       (\ s a -> s{_agMaxChangeIdCount = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-agKey :: Lens' AboutGet' (Maybe AuthKey)
-agKey = lens _agKey (\ s a -> s{_agKey = a})
-
--- | OAuth 2.0 token for the current user.
-agOAuthToken :: Lens' AboutGet' (Maybe OAuthToken)
-agOAuthToken
-  = lens _agOAuthToken (\ s a -> s{_agOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-agFields :: Lens' AboutGet' (Maybe Text)
-agFields = lens _agFields (\ s a -> s{_agFields = a})
-
-instance GoogleAuth AboutGet' where
-        _AuthKey = agKey . _Just
-        _AuthToken = agOAuthToken . _Just
-
 instance GoogleRequest AboutGet' where
         type Rs AboutGet' = About
-        request = requestWith driveRequest
-        requestWith rq AboutGet'{..}
+        requestClient AboutGet'{..}
           = go (Just _agIncludeSubscribed) _agStartChangeId
               (Just _agMaxChangeIdCount)
-              _agQuotaUser
-              (Just _agPrettyPrint)
-              _agUserIP
-              _agFields
-              _agKey
-              _agOAuthToken
               (Just AltJSON)
+              driveService
           where go
-                  = clientBuild (Proxy :: Proxy AboutGetResource) rq
+                  = buildClient (Proxy :: Proxy AboutGetResource)
+                      mempty

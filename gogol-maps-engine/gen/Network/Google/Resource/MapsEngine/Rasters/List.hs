@@ -34,23 +34,17 @@ module Network.Google.Resource.MapsEngine.Rasters.List
 
     -- * Request Lenses
     , rlCreatedAfter
-    , rlQuotaUser
-    , rlPrettyPrint
-    , rlUserIP
     , rlCreatorEmail
     , rlRole
-    , rlKey
     , rlBbox
     , rlProcessingStatus
     , rlModifiedAfter
     , rlModifiedBefore
     , rlPageToken
     , rlProjectId
-    , rlOAuthToken
     , rlSearch
     , rlMaxResults
     , rlTags
-    , rlFields
     , rlCreatedBefore
     ) where
 
@@ -76,37 +70,25 @@ type RastersListResource =
                            QueryParam "maxResults" Word32 :>
                              QueryParam "tags" Text :>
                                QueryParam "createdBefore" DateTime' :>
-                                 QueryParam "quotaUser" Text :>
-                                   QueryParam "prettyPrint" Bool :>
-                                     QueryParam "userIp" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "key" AuthKey :>
-                                           Header "Authorization" OAuthToken :>
-                                             QueryParam "alt" AltJSON :>
-                                               Get '[JSON] RastersListResponse
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] RastersListResponse
 
 -- | Return all rasters readable by the current user.
 --
 -- /See:/ 'rastersList'' smart constructor.
 data RastersList' = RastersList'
     { _rlCreatedAfter     :: !(Maybe DateTime')
-    , _rlQuotaUser        :: !(Maybe Text)
-    , _rlPrettyPrint      :: !Bool
-    , _rlUserIP           :: !(Maybe Text)
     , _rlCreatorEmail     :: !(Maybe Text)
     , _rlRole             :: !(Maybe RastersListRole)
-    , _rlKey              :: !(Maybe AuthKey)
     , _rlBbox             :: !(Maybe Text)
     , _rlProcessingStatus :: !(Maybe RastersListProcessingStatus)
     , _rlModifiedAfter    :: !(Maybe DateTime')
     , _rlModifiedBefore   :: !(Maybe DateTime')
     , _rlPageToken        :: !(Maybe Text)
     , _rlProjectId        :: !Text
-    , _rlOAuthToken       :: !(Maybe OAuthToken)
     , _rlSearch           :: !(Maybe Text)
     , _rlMaxResults       :: !(Maybe Word32)
     , _rlTags             :: !(Maybe Text)
-    , _rlFields           :: !(Maybe Text)
     , _rlCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -116,17 +98,9 @@ data RastersList' = RastersList'
 --
 -- * 'rlCreatedAfter'
 --
--- * 'rlQuotaUser'
---
--- * 'rlPrettyPrint'
---
--- * 'rlUserIP'
---
 -- * 'rlCreatorEmail'
 --
 -- * 'rlRole'
---
--- * 'rlKey'
 --
 -- * 'rlBbox'
 --
@@ -140,15 +114,11 @@ data RastersList' = RastersList'
 --
 -- * 'rlProjectId'
 --
--- * 'rlOAuthToken'
---
 -- * 'rlSearch'
 --
 -- * 'rlMaxResults'
 --
 -- * 'rlTags'
---
--- * 'rlFields'
 --
 -- * 'rlCreatedBefore'
 rastersList'
@@ -157,23 +127,17 @@ rastersList'
 rastersList' pRlProjectId_ =
     RastersList'
     { _rlCreatedAfter = Nothing
-    , _rlQuotaUser = Nothing
-    , _rlPrettyPrint = True
-    , _rlUserIP = Nothing
     , _rlCreatorEmail = Nothing
     , _rlRole = Nothing
-    , _rlKey = Nothing
     , _rlBbox = Nothing
     , _rlProcessingStatus = Nothing
     , _rlModifiedAfter = Nothing
     , _rlModifiedBefore = Nothing
     , _rlPageToken = Nothing
     , _rlProjectId = pRlProjectId_
-    , _rlOAuthToken = Nothing
     , _rlSearch = Nothing
     , _rlMaxResults = Nothing
     , _rlTags = Nothing
-    , _rlFields = Nothing
     , _rlCreatedBefore = Nothing
     }
 
@@ -184,24 +148,6 @@ rlCreatedAfter
   = lens _rlCreatedAfter
       (\ s a -> s{_rlCreatedAfter = a})
       . mapping _DateTime
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-rlQuotaUser :: Lens' RastersList' (Maybe Text)
-rlQuotaUser
-  = lens _rlQuotaUser (\ s a -> s{_rlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rlPrettyPrint :: Lens' RastersList' Bool
-rlPrettyPrint
-  = lens _rlPrettyPrint
-      (\ s a -> s{_rlPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rlUserIP :: Lens' RastersList' (Maybe Text)
-rlUserIP = lens _rlUserIP (\ s a -> s{_rlUserIP = a})
 
 -- | An email address representing a user. Returned assets that have been
 -- created by the user associated with the provided email address.
@@ -214,12 +160,6 @@ rlCreatorEmail
 -- assets where the current user has the specified level of access.
 rlRole :: Lens' RastersList' (Maybe RastersListRole)
 rlRole = lens _rlRole (\ s a -> s{_rlRole = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rlKey :: Lens' RastersList' (Maybe AuthKey)
-rlKey = lens _rlKey (\ s a -> s{_rlKey = a})
 
 -- | A bounding box, expressed as \"west,south,east,north\". If set, only
 -- assets which intersect this bounding box will be returned.
@@ -262,11 +202,6 @@ rlProjectId :: Lens' RastersList' Text
 rlProjectId
   = lens _rlProjectId (\ s a -> s{_rlProjectId = a})
 
--- | OAuth 2.0 token for the current user.
-rlOAuthToken :: Lens' RastersList' (Maybe OAuthToken)
-rlOAuthToken
-  = lens _rlOAuthToken (\ s a -> s{_rlOAuthToken = a})
-
 -- | An unstructured search string used to filter the set of results based on
 -- asset metadata.
 rlSearch :: Lens' RastersList' (Maybe Text)
@@ -283,10 +218,6 @@ rlMaxResults
 rlTags :: Lens' RastersList' (Maybe Text)
 rlTags = lens _rlTags (\ s a -> s{_rlTags = a})
 
--- | Selector specifying which fields to include in a partial response.
-rlFields :: Lens' RastersList' (Maybe Text)
-rlFields = lens _rlFields (\ s a -> s{_rlFields = a})
-
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been created at or before this time.
 rlCreatedBefore :: Lens' RastersList' (Maybe UTCTime)
@@ -295,14 +226,9 @@ rlCreatedBefore
       (\ s a -> s{_rlCreatedBefore = a})
       . mapping _DateTime
 
-instance GoogleAuth RastersList' where
-        _AuthKey = rlKey . _Just
-        _AuthToken = rlOAuthToken . _Just
-
 instance GoogleRequest RastersList' where
         type Rs RastersList' = RastersListResponse
-        request = requestWith mapsEngineRequest
-        requestWith rq RastersList'{..}
+        requestClient RastersList'{..}
           = go (Just _rlProjectId) _rlCreatedAfter
               _rlCreatorEmail
               _rlRole
@@ -315,12 +241,8 @@ instance GoogleRequest RastersList' where
               _rlMaxResults
               _rlTags
               _rlCreatedBefore
-              _rlQuotaUser
-              (Just _rlPrettyPrint)
-              _rlUserIP
-              _rlFields
-              _rlKey
-              _rlOAuthToken
               (Just AltJSON)
+              mapsEngineService
           where go
-                  = clientBuild (Proxy :: Proxy RastersListResource) rq
+                  = buildClient (Proxy :: Proxy RastersListResource)
+                      mempty

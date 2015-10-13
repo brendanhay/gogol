@@ -34,15 +34,9 @@ module Network.Google.Resource.YouTube.PlayLists.Update
     , PlayListsUpdate'
 
     -- * Request Lenses
-    , pluQuotaUser
     , pluPart
-    , pluPrettyPrint
-    , pluUserIP
     , pluPayload
     , pluOnBehalfOfContentOwner
-    , pluKey
-    , pluOAuthToken
-    , pluFields
     ) where
 
 import           Network.Google.Prelude
@@ -54,75 +48,38 @@ type PlayListsUpdateResource =
      "playlists" :>
        QueryParam "part" Text :>
          QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] PlayList :> Put '[JSON] PlayList
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] PlayList :> Put '[JSON] PlayList
 
 -- | Modifies a playlist. For example, you could change a playlist\'s title,
 -- description, or privacy status.
 --
 -- /See:/ 'playListsUpdate'' smart constructor.
 data PlayListsUpdate' = PlayListsUpdate'
-    { _pluQuotaUser              :: !(Maybe Text)
-    , _pluPart                   :: !Text
-    , _pluPrettyPrint            :: !Bool
-    , _pluUserIP                 :: !(Maybe Text)
+    { _pluPart                   :: !Text
     , _pluPayload                :: !PlayList
     , _pluOnBehalfOfContentOwner :: !(Maybe Text)
-    , _pluKey                    :: !(Maybe AuthKey)
-    , _pluOAuthToken             :: !(Maybe OAuthToken)
-    , _pluFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pluQuotaUser'
---
 -- * 'pluPart'
---
--- * 'pluPrettyPrint'
---
--- * 'pluUserIP'
 --
 -- * 'pluPayload'
 --
 -- * 'pluOnBehalfOfContentOwner'
---
--- * 'pluKey'
---
--- * 'pluOAuthToken'
---
--- * 'pluFields'
 playListsUpdate'
     :: Text -- ^ 'part'
     -> PlayList -- ^ 'payload'
     -> PlayListsUpdate'
 playListsUpdate' pPluPart_ pPluPayload_ =
     PlayListsUpdate'
-    { _pluQuotaUser = Nothing
-    , _pluPart = pPluPart_
-    , _pluPrettyPrint = True
-    , _pluUserIP = Nothing
+    { _pluPart = pPluPart_
     , _pluPayload = pPluPayload_
     , _pluOnBehalfOfContentOwner = Nothing
-    , _pluKey = Nothing
-    , _pluOAuthToken = Nothing
-    , _pluFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-pluQuotaUser :: Lens' PlayListsUpdate' (Maybe Text)
-pluQuotaUser
-  = lens _pluQuotaUser (\ s a -> s{_pluQuotaUser = a})
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the
@@ -135,18 +92,6 @@ pluQuotaUser
 -- description will be deleted.
 pluPart :: Lens' PlayListsUpdate' Text
 pluPart = lens _pluPart (\ s a -> s{_pluPart = a})
-
--- | Returns response with indentations and line breaks.
-pluPrettyPrint :: Lens' PlayListsUpdate' Bool
-pluPrettyPrint
-  = lens _pluPrettyPrint
-      (\ s a -> s{_pluPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-pluUserIP :: Lens' PlayListsUpdate' (Maybe Text)
-pluUserIP
-  = lens _pluUserIP (\ s a -> s{_pluUserIP = a})
 
 -- | Multipart request metadata.
 pluPayload :: Lens' PlayListsUpdate' PlayList
@@ -168,41 +113,14 @@ pluOnBehalfOfContentOwner
   = lens _pluOnBehalfOfContentOwner
       (\ s a -> s{_pluOnBehalfOfContentOwner = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pluKey :: Lens' PlayListsUpdate' (Maybe AuthKey)
-pluKey = lens _pluKey (\ s a -> s{_pluKey = a})
-
--- | OAuth 2.0 token for the current user.
-pluOAuthToken :: Lens' PlayListsUpdate' (Maybe OAuthToken)
-pluOAuthToken
-  = lens _pluOAuthToken
-      (\ s a -> s{_pluOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pluFields :: Lens' PlayListsUpdate' (Maybe Text)
-pluFields
-  = lens _pluFields (\ s a -> s{_pluFields = a})
-
-instance GoogleAuth PlayListsUpdate' where
-        _AuthKey = pluKey . _Just
-        _AuthToken = pluOAuthToken . _Just
-
 instance GoogleRequest PlayListsUpdate' where
         type Rs PlayListsUpdate' = PlayList
-        request = requestWith youTubeRequest
-        requestWith rq PlayListsUpdate'{..}
+        requestClient PlayListsUpdate'{..}
           = go (Just _pluPart) _pluOnBehalfOfContentOwner
-              _pluQuotaUser
-              (Just _pluPrettyPrint)
-              _pluUserIP
-              _pluFields
-              _pluKey
-              _pluOAuthToken
               (Just AltJSON)
               _pluPayload
+              youTubeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy PlayListsUpdateResource)
-                      rq
+                      mempty

@@ -34,20 +34,15 @@ module Network.Google.Resource.Genomics.Operations.List
 
     -- * Request Lenses
     , olXgafv
-    , olQuotaUser
-    , olPrettyPrint
     , olUploadProtocol
     , olPp
     , olAccessToken
     , olUploadType
     , olBearerToken
-    , olKey
     , olName
     , olFilter
     , olPageToken
-    , olOAuthToken
     , olPageSize
-    , olFields
     , olCallback
     ) where
 
@@ -69,33 +64,23 @@ type OperationsListResource =
                        QueryParam "pageToken" Text :>
                          QueryParam "pageSize" Int32 :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] ListOperationsResponse
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListOperationsResponse
 
 -- | Lists operations that match the specified filter in the request.
 --
 -- /See:/ 'operationsList'' smart constructor.
 data OperationsList' = OperationsList'
     { _olXgafv          :: !(Maybe Text)
-    , _olQuotaUser      :: !(Maybe Text)
-    , _olPrettyPrint    :: !Bool
     , _olUploadProtocol :: !(Maybe Text)
     , _olPp             :: !Bool
     , _olAccessToken    :: !(Maybe Text)
     , _olUploadType     :: !(Maybe Text)
     , _olBearerToken    :: !(Maybe Text)
-    , _olKey            :: !(Maybe AuthKey)
     , _olName           :: !Text
     , _olFilter         :: !(Maybe Text)
     , _olPageToken      :: !(Maybe Text)
-    , _olOAuthToken     :: !(Maybe OAuthToken)
     , _olPageSize       :: !(Maybe Int32)
-    , _olFields         :: !(Maybe Text)
     , _olCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -104,10 +89,6 @@ data OperationsList' = OperationsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'olXgafv'
---
--- * 'olQuotaUser'
---
--- * 'olPrettyPrint'
 --
 -- * 'olUploadProtocol'
 --
@@ -119,19 +100,13 @@ data OperationsList' = OperationsList'
 --
 -- * 'olBearerToken'
 --
--- * 'olKey'
---
 -- * 'olName'
 --
 -- * 'olFilter'
 --
 -- * 'olPageToken'
 --
--- * 'olOAuthToken'
---
 -- * 'olPageSize'
---
--- * 'olFields'
 --
 -- * 'olCallback'
 operationsList'
@@ -140,39 +115,21 @@ operationsList'
 operationsList' pOlName_ =
     OperationsList'
     { _olXgafv = Nothing
-    , _olQuotaUser = Nothing
-    , _olPrettyPrint = True
     , _olUploadProtocol = Nothing
     , _olPp = True
     , _olAccessToken = Nothing
     , _olUploadType = Nothing
     , _olBearerToken = Nothing
-    , _olKey = Nothing
     , _olName = pOlName_
     , _olFilter = Nothing
     , _olPageToken = Nothing
-    , _olOAuthToken = Nothing
     , _olPageSize = Nothing
-    , _olFields = Nothing
     , _olCallback = Nothing
     }
 
 -- | V1 error format.
 olXgafv :: Lens' OperationsList' (Maybe Text)
 olXgafv = lens _olXgafv (\ s a -> s{_olXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-olQuotaUser :: Lens' OperationsList' (Maybe Text)
-olQuotaUser
-  = lens _olQuotaUser (\ s a -> s{_olQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-olPrettyPrint :: Lens' OperationsList' Bool
-olPrettyPrint
-  = lens _olPrettyPrint
-      (\ s a -> s{_olPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 olUploadProtocol :: Lens' OperationsList' (Maybe Text)
@@ -201,12 +158,6 @@ olBearerToken
   = lens _olBearerToken
       (\ s a -> s{_olBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-olKey :: Lens' OperationsList' (Maybe AuthKey)
-olKey = lens _olKey (\ s a -> s{_olKey = a})
-
 -- | The name of the operation collection.
 olName :: Lens' OperationsList' Text
 olName = lens _olName (\ s a -> s{_olName = a})
@@ -226,34 +177,20 @@ olPageToken :: Lens' OperationsList' (Maybe Text)
 olPageToken
   = lens _olPageToken (\ s a -> s{_olPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-olOAuthToken :: Lens' OperationsList' (Maybe OAuthToken)
-olOAuthToken
-  = lens _olOAuthToken (\ s a -> s{_olOAuthToken = a})
-
 -- | The maximum number of results to return. If unspecified, defaults to
 -- 256. The maximum value is 2048.
 olPageSize :: Lens' OperationsList' (Maybe Int32)
 olPageSize
   = lens _olPageSize (\ s a -> s{_olPageSize = a})
 
--- | Selector specifying which fields to include in a partial response.
-olFields :: Lens' OperationsList' (Maybe Text)
-olFields = lens _olFields (\ s a -> s{_olFields = a})
-
 -- | JSONP
 olCallback :: Lens' OperationsList' (Maybe Text)
 olCallback
   = lens _olCallback (\ s a -> s{_olCallback = a})
 
-instance GoogleAuth OperationsList' where
-        _AuthKey = olKey . _Just
-        _AuthToken = olOAuthToken . _Just
-
 instance GoogleRequest OperationsList' where
         type Rs OperationsList' = ListOperationsResponse
-        request = requestWith genomicsRequest
-        requestWith rq OperationsList'{..}
+        requestClient OperationsList'{..}
           = go _olName _olXgafv _olUploadProtocol (Just _olPp)
               _olAccessToken
               _olUploadType
@@ -262,12 +199,8 @@ instance GoogleRequest OperationsList' where
               _olPageToken
               _olPageSize
               _olCallback
-              _olQuotaUser
-              (Just _olPrettyPrint)
-              _olFields
-              _olKey
-              _olOAuthToken
               (Just AltJSON)
+              genomicsService
           where go
-                  = clientBuild (Proxy :: Proxy OperationsListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy OperationsListResource)
+                      mempty

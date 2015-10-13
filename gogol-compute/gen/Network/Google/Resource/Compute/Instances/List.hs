@@ -34,17 +34,11 @@ module Network.Google.Resource.Compute.Instances.List
     , InstancesList'
 
     -- * Request Lenses
-    , illQuotaUser
-    , illPrettyPrint
     , illProject
-    , illUserIP
     , illZone
-    , illKey
     , illFilter
     , illPageToken
-    , illOAuthToken
     , illMaxResults
-    , illFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -60,110 +54,54 @@ type InstancesListResource =
              QueryParam "filter" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "maxResults" Word32 :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] InstanceList
+                   QueryParam "alt" AltJSON :> Get '[JSON] InstanceList
 
 -- | Retrieves the list of instance resources contained within the specified
 -- zone.
 --
 -- /See:/ 'instancesList'' smart constructor.
 data InstancesList' = InstancesList'
-    { _illQuotaUser   :: !(Maybe Text)
-    , _illPrettyPrint :: !Bool
-    , _illProject     :: !Text
-    , _illUserIP      :: !(Maybe Text)
-    , _illZone        :: !Text
-    , _illKey         :: !(Maybe AuthKey)
-    , _illFilter      :: !(Maybe Text)
-    , _illPageToken   :: !(Maybe Text)
-    , _illOAuthToken  :: !(Maybe OAuthToken)
-    , _illMaxResults  :: !Word32
-    , _illFields      :: !(Maybe Text)
+    { _illProject    :: !Text
+    , _illZone       :: !Text
+    , _illFilter     :: !(Maybe Text)
+    , _illPageToken  :: !(Maybe Text)
+    , _illMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'illQuotaUser'
---
--- * 'illPrettyPrint'
---
 -- * 'illProject'
 --
--- * 'illUserIP'
---
 -- * 'illZone'
---
--- * 'illKey'
 --
 -- * 'illFilter'
 --
 -- * 'illPageToken'
 --
--- * 'illOAuthToken'
---
 -- * 'illMaxResults'
---
--- * 'illFields'
 instancesList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> InstancesList'
 instancesList' pIllProject_ pIllZone_ =
     InstancesList'
-    { _illQuotaUser = Nothing
-    , _illPrettyPrint = True
-    , _illProject = pIllProject_
-    , _illUserIP = Nothing
+    { _illProject = pIllProject_
     , _illZone = pIllZone_
-    , _illKey = Nothing
     , _illFilter = Nothing
     , _illPageToken = Nothing
-    , _illOAuthToken = Nothing
     , _illMaxResults = 500
-    , _illFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-illQuotaUser :: Lens' InstancesList' (Maybe Text)
-illQuotaUser
-  = lens _illQuotaUser (\ s a -> s{_illQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-illPrettyPrint :: Lens' InstancesList' Bool
-illPrettyPrint
-  = lens _illPrettyPrint
-      (\ s a -> s{_illPrettyPrint = a})
 
 -- | Project ID for this request.
 illProject :: Lens' InstancesList' Text
 illProject
   = lens _illProject (\ s a -> s{_illProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-illUserIP :: Lens' InstancesList' (Maybe Text)
-illUserIP
-  = lens _illUserIP (\ s a -> s{_illUserIP = a})
-
 -- | The name of the zone for this request.
 illZone :: Lens' InstancesList' Text
 illZone = lens _illZone (\ s a -> s{_illZone = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-illKey :: Lens' InstancesList' (Maybe AuthKey)
-illKey = lens _illKey (\ s a -> s{_illKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -187,40 +125,19 @@ illPageToken :: Lens' InstancesList' (Maybe Text)
 illPageToken
   = lens _illPageToken (\ s a -> s{_illPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-illOAuthToken :: Lens' InstancesList' (Maybe OAuthToken)
-illOAuthToken
-  = lens _illOAuthToken
-      (\ s a -> s{_illOAuthToken = a})
-
 -- | Maximum count of results to be returned.
 illMaxResults :: Lens' InstancesList' Word32
 illMaxResults
   = lens _illMaxResults
       (\ s a -> s{_illMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-illFields :: Lens' InstancesList' (Maybe Text)
-illFields
-  = lens _illFields (\ s a -> s{_illFields = a})
-
-instance GoogleAuth InstancesList' where
-        _AuthKey = illKey . _Just
-        _AuthToken = illOAuthToken . _Just
-
 instance GoogleRequest InstancesList' where
         type Rs InstancesList' = InstanceList
-        request = requestWith computeRequest
-        requestWith rq InstancesList'{..}
+        requestClient InstancesList'{..}
           = go _illProject _illZone _illFilter _illPageToken
               (Just _illMaxResults)
-              _illQuotaUser
-              (Just _illPrettyPrint)
-              _illUserIP
-              _illFields
-              _illKey
-              _illOAuthToken
               (Just AltJSON)
+              computeService
           where go
-                  = clientBuild (Proxy :: Proxy InstancesListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy InstancesListResource)
+                      mempty

@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference>
 module Network.Google.GroupsSettings
     (
+    -- * Service Configuration
+      groupsSettingsService
+
     -- * API Declaration
-      GroupsSettingsAPI
+    , GroupsSettingsAPI
 
     -- * Resources
 

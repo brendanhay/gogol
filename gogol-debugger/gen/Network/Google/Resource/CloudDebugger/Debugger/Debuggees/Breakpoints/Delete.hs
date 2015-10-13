@@ -34,18 +34,13 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Dele
 
     -- * Request Lenses
     , ddbdXgafv
-    , ddbdQuotaUser
-    , ddbdPrettyPrint
     , ddbdUploadProtocol
     , ddbdPp
     , ddbdAccessToken
     , ddbdUploadType
     , ddbdBreakpointId
     , ddbdBearerToken
-    , ddbdKey
     , ddbdDebuggeeId
-    , ddbdOAuthToken
-    , ddbdFields
     , ddbdCallback
     ) where
 
@@ -68,31 +63,20 @@ type DebuggerDebuggeesBreakpointsDeleteResource =
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
                              QueryParam "callback" Text :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Delete '[JSON] Empty
+                               QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes the breakpoint from the debuggee.
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsDelete'' smart constructor.
 data DebuggerDebuggeesBreakpointsDelete' = DebuggerDebuggeesBreakpointsDelete'
     { _ddbdXgafv          :: !(Maybe Text)
-    , _ddbdQuotaUser      :: !(Maybe Text)
-    , _ddbdPrettyPrint    :: !Bool
     , _ddbdUploadProtocol :: !(Maybe Text)
     , _ddbdPp             :: !Bool
     , _ddbdAccessToken    :: !(Maybe Text)
     , _ddbdUploadType     :: !(Maybe Text)
     , _ddbdBreakpointId   :: !Text
     , _ddbdBearerToken    :: !(Maybe Text)
-    , _ddbdKey            :: !(Maybe AuthKey)
     , _ddbdDebuggeeId     :: !Text
-    , _ddbdOAuthToken     :: !(Maybe OAuthToken)
-    , _ddbdFields         :: !(Maybe Text)
     , _ddbdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -101,10 +85,6 @@ data DebuggerDebuggeesBreakpointsDelete' = DebuggerDebuggeesBreakpointsDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ddbdXgafv'
---
--- * 'ddbdQuotaUser'
---
--- * 'ddbdPrettyPrint'
 --
 -- * 'ddbdUploadProtocol'
 --
@@ -118,13 +98,7 @@ data DebuggerDebuggeesBreakpointsDelete' = DebuggerDebuggeesBreakpointsDelete'
 --
 -- * 'ddbdBearerToken'
 --
--- * 'ddbdKey'
---
 -- * 'ddbdDebuggeeId'
---
--- * 'ddbdOAuthToken'
---
--- * 'ddbdFields'
 --
 -- * 'ddbdCallback'
 debuggerDebuggeesBreakpointsDelete'
@@ -134,18 +108,13 @@ debuggerDebuggeesBreakpointsDelete'
 debuggerDebuggeesBreakpointsDelete' pDdbdBreakpointId_ pDdbdDebuggeeId_ =
     DebuggerDebuggeesBreakpointsDelete'
     { _ddbdXgafv = Nothing
-    , _ddbdQuotaUser = Nothing
-    , _ddbdPrettyPrint = True
     , _ddbdUploadProtocol = Nothing
     , _ddbdPp = True
     , _ddbdAccessToken = Nothing
     , _ddbdUploadType = Nothing
     , _ddbdBreakpointId = pDdbdBreakpointId_
     , _ddbdBearerToken = Nothing
-    , _ddbdKey = Nothing
     , _ddbdDebuggeeId = pDdbdDebuggeeId_
-    , _ddbdOAuthToken = Nothing
-    , _ddbdFields = Nothing
     , _ddbdCallback = Nothing
     }
 
@@ -153,20 +122,6 @@ debuggerDebuggeesBreakpointsDelete' pDdbdBreakpointId_ pDdbdDebuggeeId_ =
 ddbdXgafv :: Lens' DebuggerDebuggeesBreakpointsDelete' (Maybe Text)
 ddbdXgafv
   = lens _ddbdXgafv (\ s a -> s{_ddbdXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ddbdQuotaUser :: Lens' DebuggerDebuggeesBreakpointsDelete' (Maybe Text)
-ddbdQuotaUser
-  = lens _ddbdQuotaUser
-      (\ s a -> s{_ddbdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ddbdPrettyPrint :: Lens' DebuggerDebuggeesBreakpointsDelete' Bool
-ddbdPrettyPrint
-  = lens _ddbdPrettyPrint
-      (\ s a -> s{_ddbdPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 ddbdUploadProtocol :: Lens' DebuggerDebuggeesBreakpointsDelete' (Maybe Text)
@@ -202,45 +157,21 @@ ddbdBearerToken
   = lens _ddbdBearerToken
       (\ s a -> s{_ddbdBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ddbdKey :: Lens' DebuggerDebuggeesBreakpointsDelete' (Maybe AuthKey)
-ddbdKey = lens _ddbdKey (\ s a -> s{_ddbdKey = a})
-
 -- | The debuggee id to delete the breakpoint from.
 ddbdDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsDelete' Text
 ddbdDebuggeeId
   = lens _ddbdDebuggeeId
       (\ s a -> s{_ddbdDebuggeeId = a})
 
--- | OAuth 2.0 token for the current user.
-ddbdOAuthToken :: Lens' DebuggerDebuggeesBreakpointsDelete' (Maybe OAuthToken)
-ddbdOAuthToken
-  = lens _ddbdOAuthToken
-      (\ s a -> s{_ddbdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ddbdFields :: Lens' DebuggerDebuggeesBreakpointsDelete' (Maybe Text)
-ddbdFields
-  = lens _ddbdFields (\ s a -> s{_ddbdFields = a})
-
 -- | JSONP
 ddbdCallback :: Lens' DebuggerDebuggeesBreakpointsDelete' (Maybe Text)
 ddbdCallback
   = lens _ddbdCallback (\ s a -> s{_ddbdCallback = a})
 
-instance GoogleAuth
-         DebuggerDebuggeesBreakpointsDelete' where
-        _AuthKey = ddbdKey . _Just
-        _AuthToken = ddbdOAuthToken . _Just
-
 instance GoogleRequest
          DebuggerDebuggeesBreakpointsDelete' where
         type Rs DebuggerDebuggeesBreakpointsDelete' = Empty
-        request = requestWith debuggerRequest
-        requestWith rq
-          DebuggerDebuggeesBreakpointsDelete'{..}
+        requestClient DebuggerDebuggeesBreakpointsDelete'{..}
           = go _ddbdDebuggeeId _ddbdBreakpointId _ddbdXgafv
               _ddbdUploadProtocol
               (Just _ddbdPp)
@@ -248,14 +179,10 @@ instance GoogleRequest
               _ddbdUploadType
               _ddbdBearerToken
               _ddbdCallback
-              _ddbdQuotaUser
-              (Just _ddbdPrettyPrint)
-              _ddbdFields
-              _ddbdKey
-              _ddbdOAuthToken
               (Just AltJSON)
+              debuggerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy DebuggerDebuggeesBreakpointsDeleteResource)
-                      rq
+                      mempty

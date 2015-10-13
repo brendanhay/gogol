@@ -35,15 +35,9 @@ module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.Insert
     , CampaignCreativeAssociationsInsert'
 
     -- * Request Lenses
-    , ccaiQuotaUser
-    , ccaiPrettyPrint
-    , ccaiUserIP
     , ccaiCampaignId
     , ccaiProFileId
     , ccaiPayload
-    , ccaiKey
-    , ccaiOAuthToken
-    , ccaiFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -57,15 +51,9 @@ type CampaignCreativeAssociationsInsertResource =
          "campaigns" :>
            Capture "campaignId" Int64 :>
              "campaignCreativeAssociations" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] CampaignCreativeAssociation :>
-                               Post '[JSON] CampaignCreativeAssociation
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] CampaignCreativeAssociation :>
+                   Post '[JSON] CampaignCreativeAssociation
 
 -- | Associates a creative with the specified campaign. This method creates a
 -- default ad with dimensions matching the creative in the campaign if such
@@ -73,38 +61,20 @@ type CampaignCreativeAssociationsInsertResource =
 --
 -- /See:/ 'campaignCreativeAssociationsInsert'' smart constructor.
 data CampaignCreativeAssociationsInsert' = CampaignCreativeAssociationsInsert'
-    { _ccaiQuotaUser   :: !(Maybe Text)
-    , _ccaiPrettyPrint :: !Bool
-    , _ccaiUserIP      :: !(Maybe Text)
-    , _ccaiCampaignId  :: !Int64
-    , _ccaiProFileId   :: !Int64
-    , _ccaiPayload     :: !CampaignCreativeAssociation
-    , _ccaiKey         :: !(Maybe AuthKey)
-    , _ccaiOAuthToken  :: !(Maybe OAuthToken)
-    , _ccaiFields      :: !(Maybe Text)
+    { _ccaiCampaignId :: !Int64
+    , _ccaiProFileId  :: !Int64
+    , _ccaiPayload    :: !CampaignCreativeAssociation
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignCreativeAssociationsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ccaiQuotaUser'
---
--- * 'ccaiPrettyPrint'
---
--- * 'ccaiUserIP'
---
 -- * 'ccaiCampaignId'
 --
 -- * 'ccaiProFileId'
 --
 -- * 'ccaiPayload'
---
--- * 'ccaiKey'
---
--- * 'ccaiOAuthToken'
---
--- * 'ccaiFields'
 campaignCreativeAssociationsInsert'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
@@ -112,36 +82,10 @@ campaignCreativeAssociationsInsert'
     -> CampaignCreativeAssociationsInsert'
 campaignCreativeAssociationsInsert' pCcaiCampaignId_ pCcaiProFileId_ pCcaiPayload_ =
     CampaignCreativeAssociationsInsert'
-    { _ccaiQuotaUser = Nothing
-    , _ccaiPrettyPrint = True
-    , _ccaiUserIP = Nothing
-    , _ccaiCampaignId = pCcaiCampaignId_
+    { _ccaiCampaignId = pCcaiCampaignId_
     , _ccaiProFileId = pCcaiProFileId_
     , _ccaiPayload = pCcaiPayload_
-    , _ccaiKey = Nothing
-    , _ccaiOAuthToken = Nothing
-    , _ccaiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ccaiQuotaUser :: Lens' CampaignCreativeAssociationsInsert' (Maybe Text)
-ccaiQuotaUser
-  = lens _ccaiQuotaUser
-      (\ s a -> s{_ccaiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ccaiPrettyPrint :: Lens' CampaignCreativeAssociationsInsert' Bool
-ccaiPrettyPrint
-  = lens _ccaiPrettyPrint
-      (\ s a -> s{_ccaiPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ccaiUserIP :: Lens' CampaignCreativeAssociationsInsert' (Maybe Text)
-ccaiUserIP
-  = lens _ccaiUserIP (\ s a -> s{_ccaiUserIP = a})
 
 -- | Campaign ID in this association.
 ccaiCampaignId :: Lens' CampaignCreativeAssociationsInsert' Int64
@@ -160,45 +104,16 @@ ccaiPayload :: Lens' CampaignCreativeAssociationsInsert' CampaignCreativeAssocia
 ccaiPayload
   = lens _ccaiPayload (\ s a -> s{_ccaiPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ccaiKey :: Lens' CampaignCreativeAssociationsInsert' (Maybe AuthKey)
-ccaiKey = lens _ccaiKey (\ s a -> s{_ccaiKey = a})
-
--- | OAuth 2.0 token for the current user.
-ccaiOAuthToken :: Lens' CampaignCreativeAssociationsInsert' (Maybe OAuthToken)
-ccaiOAuthToken
-  = lens _ccaiOAuthToken
-      (\ s a -> s{_ccaiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ccaiFields :: Lens' CampaignCreativeAssociationsInsert' (Maybe Text)
-ccaiFields
-  = lens _ccaiFields (\ s a -> s{_ccaiFields = a})
-
-instance GoogleAuth
-         CampaignCreativeAssociationsInsert' where
-        _AuthKey = ccaiKey . _Just
-        _AuthToken = ccaiOAuthToken . _Just
-
 instance GoogleRequest
          CampaignCreativeAssociationsInsert' where
         type Rs CampaignCreativeAssociationsInsert' =
              CampaignCreativeAssociation
-        request = requestWith dFAReportingRequest
-        requestWith rq
-          CampaignCreativeAssociationsInsert'{..}
-          = go _ccaiProFileId _ccaiCampaignId _ccaiQuotaUser
-              (Just _ccaiPrettyPrint)
-              _ccaiUserIP
-              _ccaiFields
-              _ccaiKey
-              _ccaiOAuthToken
-              (Just AltJSON)
+        requestClient CampaignCreativeAssociationsInsert'{..}
+          = go _ccaiProFileId _ccaiCampaignId (Just AltJSON)
               _ccaiPayload
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy CampaignCreativeAssociationsInsertResource)
-                      rq
+                      mempty

@@ -33,14 +33,8 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.Create
     , AccountsPermissionsCreate'
 
     -- * Request Lenses
-    , apcQuotaUser
-    , apcPrettyPrint
-    , apcUserIP
     , apcPayload
     , apcAccountId
-    , apcKey
-    , apcOAuthToken
-    , apcFields
     ) where
 
 import           Network.Google.Prelude
@@ -52,82 +46,33 @@ type AccountsPermissionsCreateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "permissions" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] UserAccess :> Post '[JSON] UserAccess
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] UserAccess :> Post '[JSON] UserAccess
 
 -- | Creates a user\'s Account & Container Permissions.
 --
 -- /See:/ 'accountsPermissionsCreate'' smart constructor.
 data AccountsPermissionsCreate' = AccountsPermissionsCreate'
-    { _apcQuotaUser   :: !(Maybe Text)
-    , _apcPrettyPrint :: !Bool
-    , _apcUserIP      :: !(Maybe Text)
-    , _apcPayload     :: !UserAccess
-    , _apcAccountId   :: !Text
-    , _apcKey         :: !(Maybe AuthKey)
-    , _apcOAuthToken  :: !(Maybe OAuthToken)
-    , _apcFields      :: !(Maybe Text)
+    { _apcPayload   :: !UserAccess
+    , _apcAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPermissionsCreate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'apcQuotaUser'
---
--- * 'apcPrettyPrint'
---
--- * 'apcUserIP'
---
 -- * 'apcPayload'
 --
 -- * 'apcAccountId'
---
--- * 'apcKey'
---
--- * 'apcOAuthToken'
---
--- * 'apcFields'
 accountsPermissionsCreate'
     :: UserAccess -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> AccountsPermissionsCreate'
 accountsPermissionsCreate' pApcPayload_ pApcAccountId_ =
     AccountsPermissionsCreate'
-    { _apcQuotaUser = Nothing
-    , _apcPrettyPrint = True
-    , _apcUserIP = Nothing
-    , _apcPayload = pApcPayload_
+    { _apcPayload = pApcPayload_
     , _apcAccountId = pApcAccountId_
-    , _apcKey = Nothing
-    , _apcOAuthToken = Nothing
-    , _apcFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-apcQuotaUser :: Lens' AccountsPermissionsCreate' (Maybe Text)
-apcQuotaUser
-  = lens _apcQuotaUser (\ s a -> s{_apcQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-apcPrettyPrint :: Lens' AccountsPermissionsCreate' Bool
-apcPrettyPrint
-  = lens _apcPrettyPrint
-      (\ s a -> s{_apcPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-apcUserIP :: Lens' AccountsPermissionsCreate' (Maybe Text)
-apcUserIP
-  = lens _apcUserIP (\ s a -> s{_apcUserIP = a})
 
 -- | Multipart request metadata.
 apcPayload :: Lens' AccountsPermissionsCreate' UserAccess
@@ -139,41 +84,13 @@ apcAccountId :: Lens' AccountsPermissionsCreate' Text
 apcAccountId
   = lens _apcAccountId (\ s a -> s{_apcAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-apcKey :: Lens' AccountsPermissionsCreate' (Maybe AuthKey)
-apcKey = lens _apcKey (\ s a -> s{_apcKey = a})
-
--- | OAuth 2.0 token for the current user.
-apcOAuthToken :: Lens' AccountsPermissionsCreate' (Maybe OAuthToken)
-apcOAuthToken
-  = lens _apcOAuthToken
-      (\ s a -> s{_apcOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-apcFields :: Lens' AccountsPermissionsCreate' (Maybe Text)
-apcFields
-  = lens _apcFields (\ s a -> s{_apcFields = a})
-
-instance GoogleAuth AccountsPermissionsCreate' where
-        _AuthKey = apcKey . _Just
-        _AuthToken = apcOAuthToken . _Just
-
 instance GoogleRequest AccountsPermissionsCreate'
          where
         type Rs AccountsPermissionsCreate' = UserAccess
-        request = requestWith tagManagerRequest
-        requestWith rq AccountsPermissionsCreate'{..}
-          = go _apcAccountId _apcQuotaUser
-              (Just _apcPrettyPrint)
-              _apcUserIP
-              _apcFields
-              _apcKey
-              _apcOAuthToken
-              (Just AltJSON)
-              _apcPayload
+        requestClient AccountsPermissionsCreate'{..}
+          = go _apcAccountId (Just AltJSON) _apcPayload
+              tagManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsPermissionsCreateResource)
-                      rq
+                      mempty

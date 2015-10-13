@@ -34,15 +34,9 @@ module Network.Google.Resource.Content.Accounttax.List
     , AccounttaxList'
 
     -- * Request Lenses
-    , allQuotaUser
     , allMerchantId
-    , allPrettyPrint
-    , allUserIP
-    , allKey
     , allPageToken
-    , allOAuthToken
     , allMaxResults
-    , allFields
     ) where
 
 import           Network.Google.Prelude
@@ -55,74 +49,37 @@ type AccounttaxListResource =
        "accounttax" :>
          QueryParam "pageToken" Text :>
            QueryParam "maxResults" Word32 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] AccounttaxListResponse
+             QueryParam "alt" AltJSON :>
+               Get '[JSON] AccounttaxListResponse
 
 -- | Lists the tax settings of the sub-accounts in your Merchant Center
 -- account.
 --
 -- /See:/ 'accounttaxList'' smart constructor.
 data AccounttaxList' = AccounttaxList'
-    { _allQuotaUser   :: !(Maybe Text)
-    , _allMerchantId  :: !Word64
-    , _allPrettyPrint :: !Bool
-    , _allUserIP      :: !(Maybe Text)
-    , _allKey         :: !(Maybe AuthKey)
-    , _allPageToken   :: !(Maybe Text)
-    , _allOAuthToken  :: !(Maybe OAuthToken)
-    , _allMaxResults  :: !(Maybe Word32)
-    , _allFields      :: !(Maybe Text)
+    { _allMerchantId :: !Word64
+    , _allPageToken  :: !(Maybe Text)
+    , _allMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccounttaxList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'allQuotaUser'
---
 -- * 'allMerchantId'
---
--- * 'allPrettyPrint'
---
--- * 'allUserIP'
---
--- * 'allKey'
 --
 -- * 'allPageToken'
 --
--- * 'allOAuthToken'
---
 -- * 'allMaxResults'
---
--- * 'allFields'
 accounttaxList'
     :: Word64 -- ^ 'merchantId'
     -> AccounttaxList'
 accounttaxList' pAllMerchantId_ =
     AccounttaxList'
-    { _allQuotaUser = Nothing
-    , _allMerchantId = pAllMerchantId_
-    , _allPrettyPrint = True
-    , _allUserIP = Nothing
-    , _allKey = Nothing
+    { _allMerchantId = pAllMerchantId_
     , _allPageToken = Nothing
-    , _allOAuthToken = Nothing
     , _allMaxResults = Nothing
-    , _allFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-allQuotaUser :: Lens' AccounttaxList' (Maybe Text)
-allQuotaUser
-  = lens _allQuotaUser (\ s a -> s{_allQuotaUser = a})
 
 -- | The ID of the managing account.
 allMerchantId :: Lens' AccounttaxList' Word64
@@ -130,34 +87,10 @@ allMerchantId
   = lens _allMerchantId
       (\ s a -> s{_allMerchantId = a})
 
--- | Returns response with indentations and line breaks.
-allPrettyPrint :: Lens' AccounttaxList' Bool
-allPrettyPrint
-  = lens _allPrettyPrint
-      (\ s a -> s{_allPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-allUserIP :: Lens' AccounttaxList' (Maybe Text)
-allUserIP
-  = lens _allUserIP (\ s a -> s{_allUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-allKey :: Lens' AccounttaxList' (Maybe AuthKey)
-allKey = lens _allKey (\ s a -> s{_allKey = a})
-
 -- | The token returned by the previous request.
 allPageToken :: Lens' AccounttaxList' (Maybe Text)
 allPageToken
   = lens _allPageToken (\ s a -> s{_allPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-allOAuthToken :: Lens' AccounttaxList' (Maybe OAuthToken)
-allOAuthToken
-  = lens _allOAuthToken
-      (\ s a -> s{_allOAuthToken = a})
 
 -- | The maximum number of tax settings to return in the response, used for
 -- paging.
@@ -166,27 +99,12 @@ allMaxResults
   = lens _allMaxResults
       (\ s a -> s{_allMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-allFields :: Lens' AccounttaxList' (Maybe Text)
-allFields
-  = lens _allFields (\ s a -> s{_allFields = a})
-
-instance GoogleAuth AccounttaxList' where
-        _AuthKey = allKey . _Just
-        _AuthToken = allOAuthToken . _Just
-
 instance GoogleRequest AccounttaxList' where
         type Rs AccounttaxList' = AccounttaxListResponse
-        request = requestWith shoppingContentRequest
-        requestWith rq AccounttaxList'{..}
+        requestClient AccounttaxList'{..}
           = go _allMerchantId _allPageToken _allMaxResults
-              _allQuotaUser
-              (Just _allPrettyPrint)
-              _allUserIP
-              _allFields
-              _allKey
-              _allOAuthToken
               (Just AltJSON)
+              shoppingContentService
           where go
-                  = clientBuild (Proxy :: Proxy AccounttaxListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy AccounttaxListResource)
+                      mempty

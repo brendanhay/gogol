@@ -33,22 +33,16 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.List
     , MyLibraryAnnotationsList'
 
     -- * Request Lenses
-    , mlalQuotaUser
-    , mlalPrettyPrint
-    , mlalUserIP
     , mlalContentVersion
     , mlalShowDeleted
     , mlalUpdatedMax
-    , mlalKey
     , mlalUpdatedMin
     , mlalLayerIds
     , mlalVolumeId
     , mlalSource
     , mlalPageToken
-    , mlalOAuthToken
     , mlalLayerId
     , mlalMaxResults
-    , mlalFields
     ) where
 
 import           Network.Google.Books.Types
@@ -69,54 +63,33 @@ type MyLibraryAnnotationsListResource =
                        QueryParam "pageToken" Text :>
                          QueryParam "layerId" Text :>
                            QueryParam "maxResults" Word32 :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "userIp" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] Annotations
+                             QueryParam "alt" AltJSON :> Get '[JSON] Annotations
 
 -- | Retrieves a list of annotations, possibly filtered.
 --
 -- /See:/ 'myLibraryAnnotationsList'' smart constructor.
 data MyLibraryAnnotationsList' = MyLibraryAnnotationsList'
-    { _mlalQuotaUser      :: !(Maybe Text)
-    , _mlalPrettyPrint    :: !Bool
-    , _mlalUserIP         :: !(Maybe Text)
-    , _mlalContentVersion :: !(Maybe Text)
+    { _mlalContentVersion :: !(Maybe Text)
     , _mlalShowDeleted    :: !(Maybe Bool)
     , _mlalUpdatedMax     :: !(Maybe Text)
-    , _mlalKey            :: !(Maybe AuthKey)
     , _mlalUpdatedMin     :: !(Maybe Text)
     , _mlalLayerIds       :: !(Maybe [Text])
     , _mlalVolumeId       :: !(Maybe Text)
     , _mlalSource         :: !(Maybe Text)
     , _mlalPageToken      :: !(Maybe Text)
-    , _mlalOAuthToken     :: !(Maybe OAuthToken)
     , _mlalLayerId        :: !(Maybe Text)
     , _mlalMaxResults     :: !(Maybe Word32)
-    , _mlalFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyLibraryAnnotationsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mlalQuotaUser'
---
--- * 'mlalPrettyPrint'
---
--- * 'mlalUserIP'
---
 -- * 'mlalContentVersion'
 --
 -- * 'mlalShowDeleted'
 --
 -- * 'mlalUpdatedMax'
---
--- * 'mlalKey'
 --
 -- * 'mlalUpdatedMin'
 --
@@ -128,54 +101,24 @@ data MyLibraryAnnotationsList' = MyLibraryAnnotationsList'
 --
 -- * 'mlalPageToken'
 --
--- * 'mlalOAuthToken'
---
 -- * 'mlalLayerId'
 --
 -- * 'mlalMaxResults'
---
--- * 'mlalFields'
 myLibraryAnnotationsList'
     :: MyLibraryAnnotationsList'
 myLibraryAnnotationsList' =
     MyLibraryAnnotationsList'
-    { _mlalQuotaUser = Nothing
-    , _mlalPrettyPrint = True
-    , _mlalUserIP = Nothing
-    , _mlalContentVersion = Nothing
+    { _mlalContentVersion = Nothing
     , _mlalShowDeleted = Nothing
     , _mlalUpdatedMax = Nothing
-    , _mlalKey = Nothing
     , _mlalUpdatedMin = Nothing
     , _mlalLayerIds = Nothing
     , _mlalVolumeId = Nothing
     , _mlalSource = Nothing
     , _mlalPageToken = Nothing
-    , _mlalOAuthToken = Nothing
     , _mlalLayerId = Nothing
     , _mlalMaxResults = Nothing
-    , _mlalFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mlalQuotaUser :: Lens' MyLibraryAnnotationsList' (Maybe Text)
-mlalQuotaUser
-  = lens _mlalQuotaUser
-      (\ s a -> s{_mlalQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mlalPrettyPrint :: Lens' MyLibraryAnnotationsList' Bool
-mlalPrettyPrint
-  = lens _mlalPrettyPrint
-      (\ s a -> s{_mlalPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mlalUserIP :: Lens' MyLibraryAnnotationsList' (Maybe Text)
-mlalUserIP
-  = lens _mlalUserIP (\ s a -> s{_mlalUserIP = a})
 
 -- | The content version for the requested volume.
 mlalContentVersion :: Lens' MyLibraryAnnotationsList' (Maybe Text)
@@ -196,12 +139,6 @@ mlalUpdatedMax :: Lens' MyLibraryAnnotationsList' (Maybe Text)
 mlalUpdatedMax
   = lens _mlalUpdatedMax
       (\ s a -> s{_mlalUpdatedMax = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mlalKey :: Lens' MyLibraryAnnotationsList' (Maybe AuthKey)
-mlalKey = lens _mlalKey (\ s a -> s{_mlalKey = a})
 
 -- | RFC 3339 timestamp to restrict to items updated since this timestamp
 -- (inclusive).
@@ -233,12 +170,6 @@ mlalPageToken
   = lens _mlalPageToken
       (\ s a -> s{_mlalPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-mlalOAuthToken :: Lens' MyLibraryAnnotationsList' (Maybe OAuthToken)
-mlalOAuthToken
-  = lens _mlalOAuthToken
-      (\ s a -> s{_mlalOAuthToken = a})
-
 -- | The layer ID to limit annotation by.
 mlalLayerId :: Lens' MyLibraryAnnotationsList' (Maybe Text)
 mlalLayerId
@@ -250,20 +181,10 @@ mlalMaxResults
   = lens _mlalMaxResults
       (\ s a -> s{_mlalMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-mlalFields :: Lens' MyLibraryAnnotationsList' (Maybe Text)
-mlalFields
-  = lens _mlalFields (\ s a -> s{_mlalFields = a})
-
-instance GoogleAuth MyLibraryAnnotationsList' where
-        _AuthKey = mlalKey . _Just
-        _AuthToken = mlalOAuthToken . _Just
-
 instance GoogleRequest MyLibraryAnnotationsList'
          where
         type Rs MyLibraryAnnotationsList' = Annotations
-        request = requestWith booksRequest
-        requestWith rq MyLibraryAnnotationsList'{..}
+        requestClient MyLibraryAnnotationsList'{..}
           = go _mlalContentVersion _mlalShowDeleted
               _mlalUpdatedMax
               _mlalUpdatedMin
@@ -273,14 +194,9 @@ instance GoogleRequest MyLibraryAnnotationsList'
               _mlalPageToken
               _mlalLayerId
               _mlalMaxResults
-              _mlalQuotaUser
-              (Just _mlalPrettyPrint)
-              _mlalUserIP
-              _mlalFields
-              _mlalKey
-              _mlalOAuthToken
               (Just AltJSON)
+              booksService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy MyLibraryAnnotationsListResource)
-                      rq
+                      mempty

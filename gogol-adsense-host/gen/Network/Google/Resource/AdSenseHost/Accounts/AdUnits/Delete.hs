@@ -34,15 +34,9 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Delete
     , AccountsAdUnitsDelete'
 
     -- * Request Lenses
-    , aaudQuotaUser
-    , aaudPrettyPrint
-    , aaudUserIP
     , aaudAdUnitId
     , aaudAdClientId
     , aaudAccountId
-    , aaudKey
-    , aaudOAuthToken
-    , aaudFields
     ) where
 
 import           Network.Google.AdSenseHost.Types
@@ -57,51 +51,27 @@ type AccountsAdUnitsDeleteResource =
            Capture "adClientId" Text :>
              "adunits" :>
                Capture "adUnitId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :> Delete '[JSON] AdUnit
+                 QueryParam "alt" AltJSON :> Delete '[JSON] AdUnit
 
 -- | Delete the specified ad unit from the specified publisher AdSense
 -- account.
 --
 -- /See:/ 'accountsAdUnitsDelete'' smart constructor.
 data AccountsAdUnitsDelete' = AccountsAdUnitsDelete'
-    { _aaudQuotaUser   :: !(Maybe Text)
-    , _aaudPrettyPrint :: !Bool
-    , _aaudUserIP      :: !(Maybe Text)
-    , _aaudAdUnitId    :: !Text
-    , _aaudAdClientId  :: !Text
-    , _aaudAccountId   :: !Text
-    , _aaudKey         :: !(Maybe AuthKey)
-    , _aaudOAuthToken  :: !(Maybe OAuthToken)
-    , _aaudFields      :: !(Maybe Text)
+    { _aaudAdUnitId   :: !Text
+    , _aaudAdClientId :: !Text
+    , _aaudAccountId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdUnitsDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aaudQuotaUser'
---
--- * 'aaudPrettyPrint'
---
--- * 'aaudUserIP'
---
 -- * 'aaudAdUnitId'
 --
 -- * 'aaudAdClientId'
 --
 -- * 'aaudAccountId'
---
--- * 'aaudKey'
---
--- * 'aaudOAuthToken'
---
--- * 'aaudFields'
 accountsAdUnitsDelete'
     :: Text -- ^ 'adUnitId'
     -> Text -- ^ 'adClientId'
@@ -109,36 +79,10 @@ accountsAdUnitsDelete'
     -> AccountsAdUnitsDelete'
 accountsAdUnitsDelete' pAaudAdUnitId_ pAaudAdClientId_ pAaudAccountId_ =
     AccountsAdUnitsDelete'
-    { _aaudQuotaUser = Nothing
-    , _aaudPrettyPrint = True
-    , _aaudUserIP = Nothing
-    , _aaudAdUnitId = pAaudAdUnitId_
+    { _aaudAdUnitId = pAaudAdUnitId_
     , _aaudAdClientId = pAaudAdClientId_
     , _aaudAccountId = pAaudAccountId_
-    , _aaudKey = Nothing
-    , _aaudOAuthToken = Nothing
-    , _aaudFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-aaudQuotaUser :: Lens' AccountsAdUnitsDelete' (Maybe Text)
-aaudQuotaUser
-  = lens _aaudQuotaUser
-      (\ s a -> s{_aaudQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aaudPrettyPrint :: Lens' AccountsAdUnitsDelete' Bool
-aaudPrettyPrint
-  = lens _aaudPrettyPrint
-      (\ s a -> s{_aaudPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-aaudUserIP :: Lens' AccountsAdUnitsDelete' (Maybe Text)
-aaudUserIP
-  = lens _aaudUserIP (\ s a -> s{_aaudUserIP = a})
 
 -- | Ad unit to delete.
 aaudAdUnitId :: Lens' AccountsAdUnitsDelete' Text
@@ -157,40 +101,13 @@ aaudAccountId
   = lens _aaudAccountId
       (\ s a -> s{_aaudAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aaudKey :: Lens' AccountsAdUnitsDelete' (Maybe AuthKey)
-aaudKey = lens _aaudKey (\ s a -> s{_aaudKey = a})
-
--- | OAuth 2.0 token for the current user.
-aaudOAuthToken :: Lens' AccountsAdUnitsDelete' (Maybe OAuthToken)
-aaudOAuthToken
-  = lens _aaudOAuthToken
-      (\ s a -> s{_aaudOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-aaudFields :: Lens' AccountsAdUnitsDelete' (Maybe Text)
-aaudFields
-  = lens _aaudFields (\ s a -> s{_aaudFields = a})
-
-instance GoogleAuth AccountsAdUnitsDelete' where
-        _AuthKey = aaudKey . _Just
-        _AuthToken = aaudOAuthToken . _Just
-
 instance GoogleRequest AccountsAdUnitsDelete' where
         type Rs AccountsAdUnitsDelete' = AdUnit
-        request = requestWith adSenseHostRequest
-        requestWith rq AccountsAdUnitsDelete'{..}
+        requestClient AccountsAdUnitsDelete'{..}
           = go _aaudAccountId _aaudAdClientId _aaudAdUnitId
-              _aaudQuotaUser
-              (Just _aaudPrettyPrint)
-              _aaudUserIP
-              _aaudFields
-              _aaudKey
-              _aaudOAuthToken
               (Just AltJSON)
+              adSenseHostService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsAdUnitsDeleteResource)
-                      rq
+                      mempty

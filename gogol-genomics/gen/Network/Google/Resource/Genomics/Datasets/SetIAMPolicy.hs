@@ -35,18 +35,13 @@ module Network.Google.Resource.Genomics.Datasets.SetIAMPolicy
 
     -- * Request Lenses
     , dsipXgafv
-    , dsipQuotaUser
-    , dsipPrettyPrint
     , dsipUploadProtocol
     , dsipPp
     , dsipAccessToken
     , dsipUploadType
     , dsipPayload
     , dsipBearerToken
-    , dsipKey
     , dsipResource
-    , dsipOAuthToken
-    , dsipFields
     , dsipCallback
     ) where
 
@@ -65,14 +60,9 @@ type DatasetsSetIAMPolicyResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] SetIAMPolicyRequest :>
-                                     Post '[JSON] Policy
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] SetIAMPolicyRequest :>
+                           Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified dataset. Replaces any
 -- existing policy. See Setting a Policy for more information.
@@ -80,18 +70,13 @@ type DatasetsSetIAMPolicyResource =
 -- /See:/ 'datasetsSetIAMPolicy'' smart constructor.
 data DatasetsSetIAMPolicy' = DatasetsSetIAMPolicy'
     { _dsipXgafv          :: !(Maybe Text)
-    , _dsipQuotaUser      :: !(Maybe Text)
-    , _dsipPrettyPrint    :: !Bool
     , _dsipUploadProtocol :: !(Maybe Text)
     , _dsipPp             :: !Bool
     , _dsipAccessToken    :: !(Maybe Text)
     , _dsipUploadType     :: !(Maybe Text)
     , _dsipPayload        :: !SetIAMPolicyRequest
     , _dsipBearerToken    :: !(Maybe Text)
-    , _dsipKey            :: !(Maybe AuthKey)
     , _dsipResource       :: !Text
-    , _dsipOAuthToken     :: !(Maybe OAuthToken)
-    , _dsipFields         :: !(Maybe Text)
     , _dsipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -100,10 +85,6 @@ data DatasetsSetIAMPolicy' = DatasetsSetIAMPolicy'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dsipXgafv'
---
--- * 'dsipQuotaUser'
---
--- * 'dsipPrettyPrint'
 --
 -- * 'dsipUploadProtocol'
 --
@@ -117,13 +98,7 @@ data DatasetsSetIAMPolicy' = DatasetsSetIAMPolicy'
 --
 -- * 'dsipBearerToken'
 --
--- * 'dsipKey'
---
 -- * 'dsipResource'
---
--- * 'dsipOAuthToken'
---
--- * 'dsipFields'
 --
 -- * 'dsipCallback'
 datasetsSetIAMPolicy'
@@ -133,18 +108,13 @@ datasetsSetIAMPolicy'
 datasetsSetIAMPolicy' pDsipPayload_ pDsipResource_ =
     DatasetsSetIAMPolicy'
     { _dsipXgafv = Nothing
-    , _dsipQuotaUser = Nothing
-    , _dsipPrettyPrint = True
     , _dsipUploadProtocol = Nothing
     , _dsipPp = True
     , _dsipAccessToken = Nothing
     , _dsipUploadType = Nothing
     , _dsipPayload = pDsipPayload_
     , _dsipBearerToken = Nothing
-    , _dsipKey = Nothing
     , _dsipResource = pDsipResource_
-    , _dsipOAuthToken = Nothing
-    , _dsipFields = Nothing
     , _dsipCallback = Nothing
     }
 
@@ -152,20 +122,6 @@ datasetsSetIAMPolicy' pDsipPayload_ pDsipResource_ =
 dsipXgafv :: Lens' DatasetsSetIAMPolicy' (Maybe Text)
 dsipXgafv
   = lens _dsipXgafv (\ s a -> s{_dsipXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-dsipQuotaUser :: Lens' DatasetsSetIAMPolicy' (Maybe Text)
-dsipQuotaUser
-  = lens _dsipQuotaUser
-      (\ s a -> s{_dsipQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-dsipPrettyPrint :: Lens' DatasetsSetIAMPolicy' Bool
-dsipPrettyPrint
-  = lens _dsipPrettyPrint
-      (\ s a -> s{_dsipPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 dsipUploadProtocol :: Lens' DatasetsSetIAMPolicy' (Maybe Text)
@@ -200,56 +156,30 @@ dsipBearerToken
   = lens _dsipBearerToken
       (\ s a -> s{_dsipBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-dsipKey :: Lens' DatasetsSetIAMPolicy' (Maybe AuthKey)
-dsipKey = lens _dsipKey (\ s a -> s{_dsipKey = a})
-
 -- | REQUIRED: The resource for which policy is being specified. Format is
 -- \`datasets\/\`.
 dsipResource :: Lens' DatasetsSetIAMPolicy' Text
 dsipResource
   = lens _dsipResource (\ s a -> s{_dsipResource = a})
 
--- | OAuth 2.0 token for the current user.
-dsipOAuthToken :: Lens' DatasetsSetIAMPolicy' (Maybe OAuthToken)
-dsipOAuthToken
-  = lens _dsipOAuthToken
-      (\ s a -> s{_dsipOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-dsipFields :: Lens' DatasetsSetIAMPolicy' (Maybe Text)
-dsipFields
-  = lens _dsipFields (\ s a -> s{_dsipFields = a})
-
 -- | JSONP
 dsipCallback :: Lens' DatasetsSetIAMPolicy' (Maybe Text)
 dsipCallback
   = lens _dsipCallback (\ s a -> s{_dsipCallback = a})
 
-instance GoogleAuth DatasetsSetIAMPolicy' where
-        _AuthKey = dsipKey . _Just
-        _AuthToken = dsipOAuthToken . _Just
-
 instance GoogleRequest DatasetsSetIAMPolicy' where
         type Rs DatasetsSetIAMPolicy' = Policy
-        request = requestWith genomicsRequest
-        requestWith rq DatasetsSetIAMPolicy'{..}
+        requestClient DatasetsSetIAMPolicy'{..}
           = go _dsipResource _dsipXgafv _dsipUploadProtocol
               (Just _dsipPp)
               _dsipAccessToken
               _dsipUploadType
               _dsipBearerToken
               _dsipCallback
-              _dsipQuotaUser
-              (Just _dsipPrettyPrint)
-              _dsipFields
-              _dsipKey
-              _dsipOAuthToken
               (Just AltJSON)
               _dsipPayload
+              genomicsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy DatasetsSetIAMPolicyResource)
-                      rq
+                      mempty

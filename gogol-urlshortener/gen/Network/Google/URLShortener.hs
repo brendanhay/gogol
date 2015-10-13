@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference>
 module Network.Google.URLShortener
     (
+    -- * Service Configuration
+      uRLShortenerService
+
     -- * API Declaration
-      URLShortenerAPI
+    , URLShortenerAPI
 
     -- * Resources
 

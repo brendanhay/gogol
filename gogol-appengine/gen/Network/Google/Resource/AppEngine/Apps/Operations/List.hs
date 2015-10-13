@@ -38,20 +38,15 @@ module Network.Google.Resource.AppEngine.Apps.Operations.List
 
     -- * Request Lenses
     , aolXgafv
-    , aolQuotaUser
-    , aolPrettyPrint
     , aolUploadProtocol
     , aolPp
     , aolAccessToken
     , aolUploadType
     , aolBearerToken
-    , aolKey
     , aolAppsId
     , aolFilter
     , aolPageToken
-    , aolOAuthToken
     , aolPageSize
-    , aolFields
     , aolCallback
     ) where
 
@@ -75,13 +70,8 @@ type AppsOperationsListResource =
                            QueryParam "pageToken" Text :>
                              QueryParam "pageSize" Int32 :>
                                QueryParam "callback" Text :>
-                                 QueryParam "quotaUser" Text :>
-                                   QueryParam "prettyPrint" Bool :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "key" AuthKey :>
-                                         Header "Authorization" OAuthToken :>
-                                           QueryParam "alt" AltJSON :>
-                                             Get '[JSON] ListOperationsResponse
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] ListOperationsResponse
 
 -- | Lists operations that match the specified filter in the request. If the
 -- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
@@ -92,20 +82,15 @@ type AppsOperationsListResource =
 -- /See:/ 'appsOperationsList'' smart constructor.
 data AppsOperationsList' = AppsOperationsList'
     { _aolXgafv          :: !(Maybe Text)
-    , _aolQuotaUser      :: !(Maybe Text)
-    , _aolPrettyPrint    :: !Bool
     , _aolUploadProtocol :: !(Maybe Text)
     , _aolPp             :: !Bool
     , _aolAccessToken    :: !(Maybe Text)
     , _aolUploadType     :: !(Maybe Text)
     , _aolBearerToken    :: !(Maybe Text)
-    , _aolKey            :: !(Maybe AuthKey)
     , _aolAppsId         :: !Text
     , _aolFilter         :: !(Maybe Text)
     , _aolPageToken      :: !(Maybe Text)
-    , _aolOAuthToken     :: !(Maybe OAuthToken)
     , _aolPageSize       :: !(Maybe Int32)
-    , _aolFields         :: !(Maybe Text)
     , _aolCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -114,10 +99,6 @@ data AppsOperationsList' = AppsOperationsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aolXgafv'
---
--- * 'aolQuotaUser'
---
--- * 'aolPrettyPrint'
 --
 -- * 'aolUploadProtocol'
 --
@@ -129,19 +110,13 @@ data AppsOperationsList' = AppsOperationsList'
 --
 -- * 'aolBearerToken'
 --
--- * 'aolKey'
---
 -- * 'aolAppsId'
 --
 -- * 'aolFilter'
 --
 -- * 'aolPageToken'
 --
--- * 'aolOAuthToken'
---
 -- * 'aolPageSize'
---
--- * 'aolFields'
 --
 -- * 'aolCallback'
 appsOperationsList'
@@ -150,39 +125,21 @@ appsOperationsList'
 appsOperationsList' pAolAppsId_ =
     AppsOperationsList'
     { _aolXgafv = Nothing
-    , _aolQuotaUser = Nothing
-    , _aolPrettyPrint = True
     , _aolUploadProtocol = Nothing
     , _aolPp = True
     , _aolAccessToken = Nothing
     , _aolUploadType = Nothing
     , _aolBearerToken = Nothing
-    , _aolKey = Nothing
     , _aolAppsId = pAolAppsId_
     , _aolFilter = Nothing
     , _aolPageToken = Nothing
-    , _aolOAuthToken = Nothing
     , _aolPageSize = Nothing
-    , _aolFields = Nothing
     , _aolCallback = Nothing
     }
 
 -- | V1 error format.
 aolXgafv :: Lens' AppsOperationsList' (Maybe Text)
 aolXgafv = lens _aolXgafv (\ s a -> s{_aolXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-aolQuotaUser :: Lens' AppsOperationsList' (Maybe Text)
-aolQuotaUser
-  = lens _aolQuotaUser (\ s a -> s{_aolQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aolPrettyPrint :: Lens' AppsOperationsList' Bool
-aolPrettyPrint
-  = lens _aolPrettyPrint
-      (\ s a -> s{_aolPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 aolUploadProtocol :: Lens' AppsOperationsList' (Maybe Text)
@@ -212,12 +169,6 @@ aolBearerToken
   = lens _aolBearerToken
       (\ s a -> s{_aolBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aolKey :: Lens' AppsOperationsList' (Maybe AuthKey)
-aolKey = lens _aolKey (\ s a -> s{_aolKey = a})
-
 -- | Part of \`name\`. The name of the operation collection.
 aolAppsId :: Lens' AppsOperationsList' Text
 aolAppsId
@@ -233,35 +184,19 @@ aolPageToken :: Lens' AppsOperationsList' (Maybe Text)
 aolPageToken
   = lens _aolPageToken (\ s a -> s{_aolPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-aolOAuthToken :: Lens' AppsOperationsList' (Maybe OAuthToken)
-aolOAuthToken
-  = lens _aolOAuthToken
-      (\ s a -> s{_aolOAuthToken = a})
-
 -- | The standard list page size.
 aolPageSize :: Lens' AppsOperationsList' (Maybe Int32)
 aolPageSize
   = lens _aolPageSize (\ s a -> s{_aolPageSize = a})
-
--- | Selector specifying which fields to include in a partial response.
-aolFields :: Lens' AppsOperationsList' (Maybe Text)
-aolFields
-  = lens _aolFields (\ s a -> s{_aolFields = a})
 
 -- | JSONP
 aolCallback :: Lens' AppsOperationsList' (Maybe Text)
 aolCallback
   = lens _aolCallback (\ s a -> s{_aolCallback = a})
 
-instance GoogleAuth AppsOperationsList' where
-        _AuthKey = aolKey . _Just
-        _AuthToken = aolOAuthToken . _Just
-
 instance GoogleRequest AppsOperationsList' where
         type Rs AppsOperationsList' = ListOperationsResponse
-        request = requestWith appEngineRequest
-        requestWith rq AppsOperationsList'{..}
+        requestClient AppsOperationsList'{..}
           = go _aolAppsId _aolXgafv _aolUploadProtocol
               (Just _aolPp)
               _aolAccessToken
@@ -271,13 +206,9 @@ instance GoogleRequest AppsOperationsList' where
               _aolPageToken
               _aolPageSize
               _aolCallback
-              _aolQuotaUser
-              (Just _aolPrettyPrint)
-              _aolFields
-              _aolKey
-              _aolOAuthToken
               (Just AltJSON)
+              appEngineService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AppsOperationsListResource)
-                      rq
+                      mempty

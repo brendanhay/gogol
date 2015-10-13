@@ -15,8 +15,13 @@
 --
 module Network.Google.Datastore.Types
     (
-    -- * Service Request
-      datastoreRequest
+    -- * Service Configuration
+      datastoreService
+
+    -- * OAuth Scopes
+    , userinfoEmailScope
+    , cloudPlatformScope
+    , datastoreScope
 
     -- * PropertyOrderDirection
     , PropertyOrderDirection (..)
@@ -297,7 +302,20 @@ import           Network.Google.Datastore.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1beta2' of the Google Cloud Datastore API. This contains the host and root path used as a starting point for constructing service requests.
-datastoreRequest :: RequestBuilder
-datastoreRequest
-  = defaultRequest "https://www.googleapis.com/"
+datastoreService :: Service
+datastoreService
+  = defaultService (ServiceId "datastore:v1beta2")
+      "www.googleapis.com"
       "datastore/v1beta2/datasets/"
+
+-- | View your email address
+userinfoEmailScope :: OAuthScope
+userinfoEmailScope = OAuthScope "https://www.googleapis.com/auth/userinfo.email";
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: OAuthScope
+cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";
+
+-- | View and manage your Google Cloud Datastore data
+datastoreScope :: OAuthScope
+datastoreScope = OAuthScope "https://www.googleapis.com/auth/datastore";

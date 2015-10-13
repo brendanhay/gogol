@@ -39,8 +39,6 @@ module Network.Google.Resource.Logging.Projects.Logs.Entries.Write
 
     -- * Request Lenses
     , plewXgafv
-    , plewQuotaUser
-    , plewPrettyPrint
     , plewUploadProtocol
     , plewLogsId
     , plewPp
@@ -48,10 +46,7 @@ module Network.Google.Resource.Logging.Projects.Logs.Entries.Write
     , plewUploadType
     , plewPayload
     , plewBearerToken
-    , plewKey
-    , plewOAuthToken
     , plewProjectsId
-    , plewFields
     , plewCallback
     ) where
 
@@ -74,17 +69,9 @@ type ProjectsLogsEntriesWriteResource =
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
                              QueryParam "callback" Text :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           ReqBody '[JSON]
-                                             WriteLogEntriesRequest
-                                             :>
-                                             Post '[JSON]
-                                               WriteLogEntriesResponse
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] WriteLogEntriesRequest :>
+                                   Post '[JSON] WriteLogEntriesResponse
 
 -- | Writes log entries to Cloud Logging. Each entry consists of a
 -- \`LogEntry\` object. You must fill in all the fields of the object,
@@ -96,8 +83,6 @@ type ProjectsLogsEntriesWriteResource =
 -- /See:/ 'projectsLogsEntriesWrite'' smart constructor.
 data ProjectsLogsEntriesWrite' = ProjectsLogsEntriesWrite'
     { _plewXgafv          :: !(Maybe Text)
-    , _plewQuotaUser      :: !(Maybe Text)
-    , _plewPrettyPrint    :: !Bool
     , _plewUploadProtocol :: !(Maybe Text)
     , _plewLogsId         :: !Text
     , _plewPp             :: !Bool
@@ -105,10 +90,7 @@ data ProjectsLogsEntriesWrite' = ProjectsLogsEntriesWrite'
     , _plewUploadType     :: !(Maybe Text)
     , _plewPayload        :: !WriteLogEntriesRequest
     , _plewBearerToken    :: !(Maybe Text)
-    , _plewKey            :: !(Maybe AuthKey)
-    , _plewOAuthToken     :: !(Maybe OAuthToken)
     , _plewProjectsId     :: !Text
-    , _plewFields         :: !(Maybe Text)
     , _plewCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -117,10 +99,6 @@ data ProjectsLogsEntriesWrite' = ProjectsLogsEntriesWrite'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'plewXgafv'
---
--- * 'plewQuotaUser'
---
--- * 'plewPrettyPrint'
 --
 -- * 'plewUploadProtocol'
 --
@@ -136,13 +114,7 @@ data ProjectsLogsEntriesWrite' = ProjectsLogsEntriesWrite'
 --
 -- * 'plewBearerToken'
 --
--- * 'plewKey'
---
--- * 'plewOAuthToken'
---
 -- * 'plewProjectsId'
---
--- * 'plewFields'
 --
 -- * 'plewCallback'
 projectsLogsEntriesWrite'
@@ -153,8 +125,6 @@ projectsLogsEntriesWrite'
 projectsLogsEntriesWrite' pPlewLogsId_ pPlewPayload_ pPlewProjectsId_ =
     ProjectsLogsEntriesWrite'
     { _plewXgafv = Nothing
-    , _plewQuotaUser = Nothing
-    , _plewPrettyPrint = True
     , _plewUploadProtocol = Nothing
     , _plewLogsId = pPlewLogsId_
     , _plewPp = True
@@ -162,10 +132,7 @@ projectsLogsEntriesWrite' pPlewLogsId_ pPlewPayload_ pPlewProjectsId_ =
     , _plewUploadType = Nothing
     , _plewPayload = pPlewPayload_
     , _plewBearerToken = Nothing
-    , _plewKey = Nothing
-    , _plewOAuthToken = Nothing
     , _plewProjectsId = pPlewProjectsId_
-    , _plewFields = Nothing
     , _plewCallback = Nothing
     }
 
@@ -173,20 +140,6 @@ projectsLogsEntriesWrite' pPlewLogsId_ pPlewPayload_ pPlewProjectsId_ =
 plewXgafv :: Lens' ProjectsLogsEntriesWrite' (Maybe Text)
 plewXgafv
   = lens _plewXgafv (\ s a -> s{_plewXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-plewQuotaUser :: Lens' ProjectsLogsEntriesWrite' (Maybe Text)
-plewQuotaUser
-  = lens _plewQuotaUser
-      (\ s a -> s{_plewQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-plewPrettyPrint :: Lens' ProjectsLogsEntriesWrite' Bool
-plewPrettyPrint
-  = lens _plewPrettyPrint
-      (\ s a -> s{_plewPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 plewUploadProtocol :: Lens' ProjectsLogsEntriesWrite' (Maybe Text)
@@ -226,18 +179,6 @@ plewBearerToken
   = lens _plewBearerToken
       (\ s a -> s{_plewBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-plewKey :: Lens' ProjectsLogsEntriesWrite' (Maybe AuthKey)
-plewKey = lens _plewKey (\ s a -> s{_plewKey = a})
-
--- | OAuth 2.0 token for the current user.
-plewOAuthToken :: Lens' ProjectsLogsEntriesWrite' (Maybe OAuthToken)
-plewOAuthToken
-  = lens _plewOAuthToken
-      (\ s a -> s{_plewOAuthToken = a})
-
 -- | Part of \`logName\`. The resource name of the log that will receive the
 -- log entries.
 plewProjectsId :: Lens' ProjectsLogsEntriesWrite' Text
@@ -245,26 +186,16 @@ plewProjectsId
   = lens _plewProjectsId
       (\ s a -> s{_plewProjectsId = a})
 
--- | Selector specifying which fields to include in a partial response.
-plewFields :: Lens' ProjectsLogsEntriesWrite' (Maybe Text)
-plewFields
-  = lens _plewFields (\ s a -> s{_plewFields = a})
-
 -- | JSONP
 plewCallback :: Lens' ProjectsLogsEntriesWrite' (Maybe Text)
 plewCallback
   = lens _plewCallback (\ s a -> s{_plewCallback = a})
 
-instance GoogleAuth ProjectsLogsEntriesWrite' where
-        _AuthKey = plewKey . _Just
-        _AuthToken = plewOAuthToken . _Just
-
 instance GoogleRequest ProjectsLogsEntriesWrite'
          where
         type Rs ProjectsLogsEntriesWrite' =
              WriteLogEntriesResponse
-        request = requestWith loggingRequest
-        requestWith rq ProjectsLogsEntriesWrite'{..}
+        requestClient ProjectsLogsEntriesWrite'{..}
           = go _plewProjectsId _plewLogsId _plewXgafv
               _plewUploadProtocol
               (Just _plewPp)
@@ -272,14 +203,10 @@ instance GoogleRequest ProjectsLogsEntriesWrite'
               _plewUploadType
               _plewBearerToken
               _plewCallback
-              _plewQuotaUser
-              (Just _plewPrettyPrint)
-              _plewFields
-              _plewKey
-              _plewOAuthToken
               (Just AltJSON)
               _plewPayload
+              loggingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsLogsEntriesWriteResource)
-                      rq
+                      mempty

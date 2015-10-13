@@ -33,15 +33,9 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Entities.L
     , AccountsContainersFoldersEntitiesList'
 
     -- * Request Lenses
-    , acfelQuotaUser
-    , acfelPrettyPrint
     , acfelContainerId
-    , acfelUserIP
     , acfelFolderId
     , acfelAccountId
-    , acfelKey
-    , acfelOAuthToken
-    , acfelFields
     ) where
 
 import           Network.Google.Prelude
@@ -57,51 +51,27 @@ type AccountsContainersFoldersEntitiesListResource =
              "folders" :>
                Capture "folderId" Text :>
                  "entities" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] FolderEntities
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] FolderEntities
 
 -- | List all entities in a GTM Folder.
 --
 -- /See:/ 'accountsContainersFoldersEntitiesList'' smart constructor.
 data AccountsContainersFoldersEntitiesList' = AccountsContainersFoldersEntitiesList'
-    { _acfelQuotaUser   :: !(Maybe Text)
-    , _acfelPrettyPrint :: !Bool
-    , _acfelContainerId :: !Text
-    , _acfelUserIP      :: !(Maybe Text)
+    { _acfelContainerId :: !Text
     , _acfelFolderId    :: !Text
     , _acfelAccountId   :: !Text
-    , _acfelKey         :: !(Maybe AuthKey)
-    , _acfelOAuthToken  :: !(Maybe OAuthToken)
-    , _acfelFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersFoldersEntitiesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acfelQuotaUser'
---
--- * 'acfelPrettyPrint'
---
 -- * 'acfelContainerId'
---
--- * 'acfelUserIP'
 --
 -- * 'acfelFolderId'
 --
 -- * 'acfelAccountId'
---
--- * 'acfelKey'
---
--- * 'acfelOAuthToken'
---
--- * 'acfelFields'
 accountsContainersFoldersEntitiesList'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'folderId'
@@ -109,42 +79,16 @@ accountsContainersFoldersEntitiesList'
     -> AccountsContainersFoldersEntitiesList'
 accountsContainersFoldersEntitiesList' pAcfelContainerId_ pAcfelFolderId_ pAcfelAccountId_ =
     AccountsContainersFoldersEntitiesList'
-    { _acfelQuotaUser = Nothing
-    , _acfelPrettyPrint = True
-    , _acfelContainerId = pAcfelContainerId_
-    , _acfelUserIP = Nothing
+    { _acfelContainerId = pAcfelContainerId_
     , _acfelFolderId = pAcfelFolderId_
     , _acfelAccountId = pAcfelAccountId_
-    , _acfelKey = Nothing
-    , _acfelOAuthToken = Nothing
-    , _acfelFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-acfelQuotaUser :: Lens' AccountsContainersFoldersEntitiesList' (Maybe Text)
-acfelQuotaUser
-  = lens _acfelQuotaUser
-      (\ s a -> s{_acfelQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-acfelPrettyPrint :: Lens' AccountsContainersFoldersEntitiesList' Bool
-acfelPrettyPrint
-  = lens _acfelPrettyPrint
-      (\ s a -> s{_acfelPrettyPrint = a})
 
 -- | The GTM Container ID.
 acfelContainerId :: Lens' AccountsContainersFoldersEntitiesList' Text
 acfelContainerId
   = lens _acfelContainerId
       (\ s a -> s{_acfelContainerId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-acfelUserIP :: Lens' AccountsContainersFoldersEntitiesList' (Maybe Text)
-acfelUserIP
-  = lens _acfelUserIP (\ s a -> s{_acfelUserIP = a})
 
 -- | The GTM Folder ID.
 acfelFolderId :: Lens' AccountsContainersFoldersEntitiesList' Text
@@ -158,45 +102,17 @@ acfelAccountId
   = lens _acfelAccountId
       (\ s a -> s{_acfelAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-acfelKey :: Lens' AccountsContainersFoldersEntitiesList' (Maybe AuthKey)
-acfelKey = lens _acfelKey (\ s a -> s{_acfelKey = a})
-
--- | OAuth 2.0 token for the current user.
-acfelOAuthToken :: Lens' AccountsContainersFoldersEntitiesList' (Maybe OAuthToken)
-acfelOAuthToken
-  = lens _acfelOAuthToken
-      (\ s a -> s{_acfelOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-acfelFields :: Lens' AccountsContainersFoldersEntitiesList' (Maybe Text)
-acfelFields
-  = lens _acfelFields (\ s a -> s{_acfelFields = a})
-
-instance GoogleAuth
-         AccountsContainersFoldersEntitiesList' where
-        _AuthKey = acfelKey . _Just
-        _AuthToken = acfelOAuthToken . _Just
-
 instance GoogleRequest
          AccountsContainersFoldersEntitiesList' where
         type Rs AccountsContainersFoldersEntitiesList' =
              FolderEntities
-        request = requestWith tagManagerRequest
-        requestWith rq
+        requestClient
           AccountsContainersFoldersEntitiesList'{..}
           = go _acfelAccountId _acfelContainerId _acfelFolderId
-              _acfelQuotaUser
-              (Just _acfelPrettyPrint)
-              _acfelUserIP
-              _acfelFields
-              _acfelKey
-              _acfelOAuthToken
               (Just AltJSON)
+              tagManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy AccountsContainersFoldersEntitiesListResource)
-                      rq
+                      mempty

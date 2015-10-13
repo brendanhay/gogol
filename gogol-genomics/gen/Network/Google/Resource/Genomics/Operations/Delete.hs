@@ -35,17 +35,12 @@ module Network.Google.Resource.Genomics.Operations.Delete
 
     -- * Request Lenses
     , odXgafv
-    , odQuotaUser
-    , odPrettyPrint
     , odUploadProtocol
     , odPp
     , odAccessToken
     , odUploadType
     , odBearerToken
-    , odKey
     , odName
-    , odOAuthToken
-    , odFields
     , odCallback
     ) where
 
@@ -64,13 +59,7 @@ type OperationsDeleteResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   Delete '[JSON] Empty
+                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | This method is not implemented. To cancel an operation, please use
 -- Operations.CancelOperation.
@@ -78,17 +67,12 @@ type OperationsDeleteResource =
 -- /See:/ 'operationsDelete'' smart constructor.
 data OperationsDelete' = OperationsDelete'
     { _odXgafv          :: !(Maybe Text)
-    , _odQuotaUser      :: !(Maybe Text)
-    , _odPrettyPrint    :: !Bool
     , _odUploadProtocol :: !(Maybe Text)
     , _odPp             :: !Bool
     , _odAccessToken    :: !(Maybe Text)
     , _odUploadType     :: !(Maybe Text)
     , _odBearerToken    :: !(Maybe Text)
-    , _odKey            :: !(Maybe AuthKey)
     , _odName           :: !Text
-    , _odOAuthToken     :: !(Maybe OAuthToken)
-    , _odFields         :: !(Maybe Text)
     , _odCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -97,10 +81,6 @@ data OperationsDelete' = OperationsDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'odXgafv'
---
--- * 'odQuotaUser'
---
--- * 'odPrettyPrint'
 --
 -- * 'odUploadProtocol'
 --
@@ -112,13 +92,7 @@ data OperationsDelete' = OperationsDelete'
 --
 -- * 'odBearerToken'
 --
--- * 'odKey'
---
 -- * 'odName'
---
--- * 'odOAuthToken'
---
--- * 'odFields'
 --
 -- * 'odCallback'
 operationsDelete'
@@ -127,36 +101,18 @@ operationsDelete'
 operationsDelete' pOdName_ =
     OperationsDelete'
     { _odXgafv = Nothing
-    , _odQuotaUser = Nothing
-    , _odPrettyPrint = True
     , _odUploadProtocol = Nothing
     , _odPp = True
     , _odAccessToken = Nothing
     , _odUploadType = Nothing
     , _odBearerToken = Nothing
-    , _odKey = Nothing
     , _odName = pOdName_
-    , _odOAuthToken = Nothing
-    , _odFields = Nothing
     , _odCallback = Nothing
     }
 
 -- | V1 error format.
 odXgafv :: Lens' OperationsDelete' (Maybe Text)
 odXgafv = lens _odXgafv (\ s a -> s{_odXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-odQuotaUser :: Lens' OperationsDelete' (Maybe Text)
-odQuotaUser
-  = lens _odQuotaUser (\ s a -> s{_odQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-odPrettyPrint :: Lens' OperationsDelete' Bool
-odPrettyPrint
-  = lens _odPrettyPrint
-      (\ s a -> s{_odPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 odUploadProtocol :: Lens' OperationsDelete' (Maybe Text)
@@ -185,50 +141,26 @@ odBearerToken
   = lens _odBearerToken
       (\ s a -> s{_odBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-odKey :: Lens' OperationsDelete' (Maybe AuthKey)
-odKey = lens _odKey (\ s a -> s{_odKey = a})
-
 -- | The name of the operation resource to be deleted.
 odName :: Lens' OperationsDelete' Text
 odName = lens _odName (\ s a -> s{_odName = a})
-
--- | OAuth 2.0 token for the current user.
-odOAuthToken :: Lens' OperationsDelete' (Maybe OAuthToken)
-odOAuthToken
-  = lens _odOAuthToken (\ s a -> s{_odOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-odFields :: Lens' OperationsDelete' (Maybe Text)
-odFields = lens _odFields (\ s a -> s{_odFields = a})
 
 -- | JSONP
 odCallback :: Lens' OperationsDelete' (Maybe Text)
 odCallback
   = lens _odCallback (\ s a -> s{_odCallback = a})
 
-instance GoogleAuth OperationsDelete' where
-        _AuthKey = odKey . _Just
-        _AuthToken = odOAuthToken . _Just
-
 instance GoogleRequest OperationsDelete' where
         type Rs OperationsDelete' = Empty
-        request = requestWith genomicsRequest
-        requestWith rq OperationsDelete'{..}
+        requestClient OperationsDelete'{..}
           = go _odName _odXgafv _odUploadProtocol (Just _odPp)
               _odAccessToken
               _odUploadType
               _odBearerToken
               _odCallback
-              _odQuotaUser
-              (Just _odPrettyPrint)
-              _odFields
-              _odKey
-              _odOAuthToken
               (Just AltJSON)
+              genomicsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy OperationsDeleteResource)
-                      rq
+                      mempty

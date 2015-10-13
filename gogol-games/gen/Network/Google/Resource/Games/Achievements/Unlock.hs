@@ -33,13 +33,7 @@ module Network.Google.Resource.Games.Achievements.Unlock
     , AchievementsUnlock'
 
     -- * Request Lenses
-    , auQuotaUser
-    , auPrettyPrint
     , auAchievementId
-    , auUserIP
-    , auKey
-    , auOAuthToken
-    , auFields
     ) where
 
 import           Network.Google.Games.Types
@@ -51,71 +45,28 @@ type AchievementsUnlockResource =
      "achievements" :>
        Capture "achievementId" Text :>
          "unlock" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         Post '[JSON] AchievementUnlockResponse
+           QueryParam "alt" AltJSON :>
+             Post '[JSON] AchievementUnlockResponse
 
 -- | Unlocks this achievement for the currently authenticated player.
 --
 -- /See:/ 'achievementsUnlock'' smart constructor.
-data AchievementsUnlock' = AchievementsUnlock'
-    { _auQuotaUser     :: !(Maybe Text)
-    , _auPrettyPrint   :: !Bool
-    , _auAchievementId :: !Text
-    , _auUserIP        :: !(Maybe Text)
-    , _auKey           :: !(Maybe AuthKey)
-    , _auOAuthToken    :: !(Maybe OAuthToken)
-    , _auFields        :: !(Maybe Text)
+newtype AchievementsUnlock' = AchievementsUnlock'
+    { _auAchievementId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsUnlock'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'auQuotaUser'
---
--- * 'auPrettyPrint'
---
 -- * 'auAchievementId'
---
--- * 'auUserIP'
---
--- * 'auKey'
---
--- * 'auOAuthToken'
---
--- * 'auFields'
 achievementsUnlock'
     :: Text -- ^ 'achievementId'
     -> AchievementsUnlock'
 achievementsUnlock' pAuAchievementId_ =
     AchievementsUnlock'
-    { _auQuotaUser = Nothing
-    , _auPrettyPrint = True
-    , _auAchievementId = pAuAchievementId_
-    , _auUserIP = Nothing
-    , _auKey = Nothing
-    , _auOAuthToken = Nothing
-    , _auFields = Nothing
+    { _auAchievementId = pAuAchievementId_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-auQuotaUser :: Lens' AchievementsUnlock' (Maybe Text)
-auQuotaUser
-  = lens _auQuotaUser (\ s a -> s{_auQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-auPrettyPrint :: Lens' AchievementsUnlock' Bool
-auPrettyPrint
-  = lens _auPrettyPrint
-      (\ s a -> s{_auPrettyPrint = a})
 
 -- | The ID of the achievement used by this method.
 auAchievementId :: Lens' AchievementsUnlock' Text
@@ -123,43 +74,12 @@ auAchievementId
   = lens _auAchievementId
       (\ s a -> s{_auAchievementId = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-auUserIP :: Lens' AchievementsUnlock' (Maybe Text)
-auUserIP = lens _auUserIP (\ s a -> s{_auUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-auKey :: Lens' AchievementsUnlock' (Maybe AuthKey)
-auKey = lens _auKey (\ s a -> s{_auKey = a})
-
--- | OAuth 2.0 token for the current user.
-auOAuthToken :: Lens' AchievementsUnlock' (Maybe OAuthToken)
-auOAuthToken
-  = lens _auOAuthToken (\ s a -> s{_auOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-auFields :: Lens' AchievementsUnlock' (Maybe Text)
-auFields = lens _auFields (\ s a -> s{_auFields = a})
-
-instance GoogleAuth AchievementsUnlock' where
-        _AuthKey = auKey . _Just
-        _AuthToken = auOAuthToken . _Just
-
 instance GoogleRequest AchievementsUnlock' where
         type Rs AchievementsUnlock' =
              AchievementUnlockResponse
-        request = requestWith gamesRequest
-        requestWith rq AchievementsUnlock'{..}
-          = go _auAchievementId _auQuotaUser
-              (Just _auPrettyPrint)
-              _auUserIP
-              _auFields
-              _auKey
-              _auOAuthToken
-              (Just AltJSON)
+        requestClient AchievementsUnlock'{..}
+          = go _auAchievementId (Just AltJSON) gamesService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AchievementsUnlockResource)
-                      rq
+                      mempty

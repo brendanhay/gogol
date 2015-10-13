@@ -34,14 +34,8 @@ module Network.Google.Resource.BigQuery.Jobs.Query
     , JobsQuery'
 
     -- * Request Lenses
-    , jqQuotaUser
-    , jqPrettyPrint
-    , jqUserIP
     , jqPayload
-    , jqKey
     , jqProjectId
-    , jqOAuthToken
-    , jqFields
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -53,123 +47,51 @@ type JobsQueryResource =
      "projects" :>
        Capture "projectId" Text :>
          "queries" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] QueryRequest :>
-                           Post '[JSON] QueryResponse
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] QueryRequest :>
+               Post '[JSON] QueryResponse
 
 -- | Runs a BigQuery SQL query synchronously and returns query results if the
 -- query completes within a specified timeout.
 --
 -- /See:/ 'jobsQuery'' smart constructor.
 data JobsQuery' = JobsQuery'
-    { _jqQuotaUser   :: !(Maybe Text)
-    , _jqPrettyPrint :: !Bool
-    , _jqUserIP      :: !(Maybe Text)
-    , _jqPayload     :: !QueryRequest
-    , _jqKey         :: !(Maybe AuthKey)
-    , _jqProjectId   :: !Text
-    , _jqOAuthToken  :: !(Maybe OAuthToken)
-    , _jqFields      :: !(Maybe Text)
+    { _jqPayload   :: !QueryRequest
+    , _jqProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsQuery'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'jqQuotaUser'
---
--- * 'jqPrettyPrint'
---
--- * 'jqUserIP'
---
 -- * 'jqPayload'
 --
--- * 'jqKey'
---
 -- * 'jqProjectId'
---
--- * 'jqOAuthToken'
---
--- * 'jqFields'
 jobsQuery'
     :: QueryRequest -- ^ 'payload'
     -> Text -- ^ 'projectId'
     -> JobsQuery'
 jobsQuery' pJqPayload_ pJqProjectId_ =
     JobsQuery'
-    { _jqQuotaUser = Nothing
-    , _jqPrettyPrint = True
-    , _jqUserIP = Nothing
-    , _jqPayload = pJqPayload_
-    , _jqKey = Nothing
+    { _jqPayload = pJqPayload_
     , _jqProjectId = pJqProjectId_
-    , _jqOAuthToken = Nothing
-    , _jqFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-jqQuotaUser :: Lens' JobsQuery' (Maybe Text)
-jqQuotaUser
-  = lens _jqQuotaUser (\ s a -> s{_jqQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-jqPrettyPrint :: Lens' JobsQuery' Bool
-jqPrettyPrint
-  = lens _jqPrettyPrint
-      (\ s a -> s{_jqPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-jqUserIP :: Lens' JobsQuery' (Maybe Text)
-jqUserIP = lens _jqUserIP (\ s a -> s{_jqUserIP = a})
 
 -- | Multipart request metadata.
 jqPayload :: Lens' JobsQuery' QueryRequest
 jqPayload
   = lens _jqPayload (\ s a -> s{_jqPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-jqKey :: Lens' JobsQuery' (Maybe AuthKey)
-jqKey = lens _jqKey (\ s a -> s{_jqKey = a})
-
 -- | Project ID of the project billed for the query
 jqProjectId :: Lens' JobsQuery' Text
 jqProjectId
   = lens _jqProjectId (\ s a -> s{_jqProjectId = a})
 
--- | OAuth 2.0 token for the current user.
-jqOAuthToken :: Lens' JobsQuery' (Maybe OAuthToken)
-jqOAuthToken
-  = lens _jqOAuthToken (\ s a -> s{_jqOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-jqFields :: Lens' JobsQuery' (Maybe Text)
-jqFields = lens _jqFields (\ s a -> s{_jqFields = a})
-
-instance GoogleAuth JobsQuery' where
-        _AuthKey = jqKey . _Just
-        _AuthToken = jqOAuthToken . _Just
-
 instance GoogleRequest JobsQuery' where
         type Rs JobsQuery' = QueryResponse
-        request = requestWith bigQueryRequest
-        requestWith rq JobsQuery'{..}
-          = go _jqProjectId _jqQuotaUser (Just _jqPrettyPrint)
-              _jqUserIP
-              _jqFields
-              _jqKey
-              _jqOAuthToken
-              (Just AltJSON)
-              _jqPayload
+        requestClient JobsQuery'{..}
+          = go _jqProjectId (Just AltJSON) _jqPayload
+              bigQueryService
           where go
-                  = clientBuild (Proxy :: Proxy JobsQueryResource) rq
+                  = buildClient (Proxy :: Proxy JobsQueryResource)
+                      mempty

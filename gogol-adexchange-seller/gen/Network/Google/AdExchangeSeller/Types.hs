@@ -15,8 +15,12 @@
 --
 module Network.Google.AdExchangeSeller.Types
     (
-    -- * Service Request
-      adExchangeSellerRequest
+    -- * Service Configuration
+      adExchangeSellerService
+
+    -- * OAuth Scopes
+    , adexchangeSellerReadonlyScope
+    , adexchangeSellerScope
 
     -- * AdClients
     , AdClients
@@ -179,7 +183,16 @@ import           Network.Google.AdExchangeSeller.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2.0' of the Ad Exchange Seller API. This contains the host and root path used as a starting point for constructing service requests.
-adExchangeSellerRequest :: RequestBuilder
-adExchangeSellerRequest
-  = defaultRequest "https://www.googleapis.com/"
+adExchangeSellerService :: Service
+adExchangeSellerService
+  = defaultService (ServiceId "adexchangeseller:v2.0")
+      "www.googleapis.com"
       "adexchangeseller/v2.0/"
+
+-- | View your Ad Exchange data
+adexchangeSellerReadonlyScope :: OAuthScope
+adexchangeSellerReadonlyScope = OAuthScope "https://www.googleapis.com/auth/adexchange.seller.readonly";
+
+-- | View and manage your Ad Exchange data
+adexchangeSellerScope :: OAuthScope
+adexchangeSellerScope = OAuthScope "https://www.googleapis.com/auth/adexchange.seller";

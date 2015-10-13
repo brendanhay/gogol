@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference>
 module Network.Google.MapsCoordinate
     (
+    -- * Service Configuration
+      mapsCoordinateService
+
     -- * API Declaration
-      MapsCoordinateAPI
+    , MapsCoordinateAPI
 
     -- * Resources
 

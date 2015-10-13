@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/admin-sdk/email-migration/v2/ Email Migration API v2 Reference>
 module Network.Google.EmailMigration
     (
+    -- * Service Configuration
+      emailMigrationService
+
     -- * API Declaration
-      EmailMigrationAPI
+    , EmailMigrationAPI
 
     -- * Resources
 

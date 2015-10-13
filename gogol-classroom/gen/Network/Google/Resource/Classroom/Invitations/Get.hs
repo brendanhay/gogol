@@ -38,17 +38,12 @@ module Network.Google.Resource.Classroom.Invitations.Get
 
     -- * Request Lenses
     , igXgafv
-    , igQuotaUser
-    , igPrettyPrint
     , igUploadProtocol
     , igPp
     , igAccessToken
     , igUploadType
     , igBearerToken
-    , igKey
     , igId
-    , igOAuthToken
-    , igFields
     , igCallback
     ) where
 
@@ -68,13 +63,7 @@ type InvitationsGetResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] Invitation
+                         QueryParam "alt" AltJSON :> Get '[JSON] Invitation
 
 -- | Returns an invitation. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to view
@@ -85,17 +74,12 @@ type InvitationsGetResource =
 -- /See:/ 'invitationsGet'' smart constructor.
 data InvitationsGet' = InvitationsGet'
     { _igXgafv          :: !(Maybe Text)
-    , _igQuotaUser      :: !(Maybe Text)
-    , _igPrettyPrint    :: !Bool
     , _igUploadProtocol :: !(Maybe Text)
     , _igPp             :: !Bool
     , _igAccessToken    :: !(Maybe Text)
     , _igUploadType     :: !(Maybe Text)
     , _igBearerToken    :: !(Maybe Text)
-    , _igKey            :: !(Maybe AuthKey)
     , _igId             :: !Text
-    , _igOAuthToken     :: !(Maybe OAuthToken)
-    , _igFields         :: !(Maybe Text)
     , _igCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -104,10 +88,6 @@ data InvitationsGet' = InvitationsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'igXgafv'
---
--- * 'igQuotaUser'
---
--- * 'igPrettyPrint'
 --
 -- * 'igUploadProtocol'
 --
@@ -119,13 +99,7 @@ data InvitationsGet' = InvitationsGet'
 --
 -- * 'igBearerToken'
 --
--- * 'igKey'
---
 -- * 'igId'
---
--- * 'igOAuthToken'
---
--- * 'igFields'
 --
 -- * 'igCallback'
 invitationsGet'
@@ -134,36 +108,18 @@ invitationsGet'
 invitationsGet' pIgId_ =
     InvitationsGet'
     { _igXgafv = Nothing
-    , _igQuotaUser = Nothing
-    , _igPrettyPrint = True
     , _igUploadProtocol = Nothing
     , _igPp = True
     , _igAccessToken = Nothing
     , _igUploadType = Nothing
     , _igBearerToken = Nothing
-    , _igKey = Nothing
     , _igId = pIgId_
-    , _igOAuthToken = Nothing
-    , _igFields = Nothing
     , _igCallback = Nothing
     }
 
 -- | V1 error format.
 igXgafv :: Lens' InvitationsGet' (Maybe Text)
 igXgafv = lens _igXgafv (\ s a -> s{_igXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-igQuotaUser :: Lens' InvitationsGet' (Maybe Text)
-igQuotaUser
-  = lens _igQuotaUser (\ s a -> s{_igQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-igPrettyPrint :: Lens' InvitationsGet' Bool
-igPrettyPrint
-  = lens _igPrettyPrint
-      (\ s a -> s{_igPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 igUploadProtocol :: Lens' InvitationsGet' (Maybe Text)
@@ -192,49 +148,25 @@ igBearerToken
   = lens _igBearerToken
       (\ s a -> s{_igBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-igKey :: Lens' InvitationsGet' (Maybe AuthKey)
-igKey = lens _igKey (\ s a -> s{_igKey = a})
-
 -- | Identifier of the invitation to return.
 igId :: Lens' InvitationsGet' Text
 igId = lens _igId (\ s a -> s{_igId = a})
-
--- | OAuth 2.0 token for the current user.
-igOAuthToken :: Lens' InvitationsGet' (Maybe OAuthToken)
-igOAuthToken
-  = lens _igOAuthToken (\ s a -> s{_igOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-igFields :: Lens' InvitationsGet' (Maybe Text)
-igFields = lens _igFields (\ s a -> s{_igFields = a})
 
 -- | JSONP
 igCallback :: Lens' InvitationsGet' (Maybe Text)
 igCallback
   = lens _igCallback (\ s a -> s{_igCallback = a})
 
-instance GoogleAuth InvitationsGet' where
-        _AuthKey = igKey . _Just
-        _AuthToken = igOAuthToken . _Just
-
 instance GoogleRequest InvitationsGet' where
         type Rs InvitationsGet' = Invitation
-        request = requestWith classroomRequest
-        requestWith rq InvitationsGet'{..}
+        requestClient InvitationsGet'{..}
           = go _igId _igXgafv _igUploadProtocol (Just _igPp)
               _igAccessToken
               _igUploadType
               _igBearerToken
               _igCallback
-              _igQuotaUser
-              (Just _igPrettyPrint)
-              _igFields
-              _igKey
-              _igOAuthToken
               (Just AltJSON)
+              classroomService
           where go
-                  = clientBuild (Proxy :: Proxy InvitationsGetResource)
-                      rq
+                  = buildClient (Proxy :: Proxy InvitationsGetResource)
+                      mempty

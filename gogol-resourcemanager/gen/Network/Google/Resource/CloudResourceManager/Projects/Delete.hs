@@ -57,17 +57,12 @@ module Network.Google.Resource.CloudResourceManager.Projects.Delete
 
     -- * Request Lenses
     , pdXgafv
-    , pdQuotaUser
-    , pdPrettyPrint
     , pdUploadProtocol
     , pdPp
     , pdAccessToken
     , pdUploadType
     , pdBearerToken
-    , pdKey
     , pdProjectId
-    , pdOAuthToken
-    , pdFields
     , pdCallback
     ) where
 
@@ -87,13 +82,7 @@ type ProjectsDeleteResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Delete '[JSON] Empty
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Marks the project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`) for deletion. This method will only affect
@@ -123,17 +112,12 @@ type ProjectsDeleteResource =
 -- /See:/ 'projectsDelete'' smart constructor.
 data ProjectsDelete' = ProjectsDelete'
     { _pdXgafv          :: !(Maybe Text)
-    , _pdQuotaUser      :: !(Maybe Text)
-    , _pdPrettyPrint    :: !Bool
     , _pdUploadProtocol :: !(Maybe Text)
     , _pdPp             :: !Bool
     , _pdAccessToken    :: !(Maybe Text)
     , _pdUploadType     :: !(Maybe Text)
     , _pdBearerToken    :: !(Maybe Text)
-    , _pdKey            :: !(Maybe AuthKey)
     , _pdProjectId      :: !Text
-    , _pdOAuthToken     :: !(Maybe OAuthToken)
-    , _pdFields         :: !(Maybe Text)
     , _pdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -142,10 +126,6 @@ data ProjectsDelete' = ProjectsDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pdXgafv'
---
--- * 'pdQuotaUser'
---
--- * 'pdPrettyPrint'
 --
 -- * 'pdUploadProtocol'
 --
@@ -157,13 +137,7 @@ data ProjectsDelete' = ProjectsDelete'
 --
 -- * 'pdBearerToken'
 --
--- * 'pdKey'
---
 -- * 'pdProjectId'
---
--- * 'pdOAuthToken'
---
--- * 'pdFields'
 --
 -- * 'pdCallback'
 projectsDelete'
@@ -172,36 +146,18 @@ projectsDelete'
 projectsDelete' pPdProjectId_ =
     ProjectsDelete'
     { _pdXgafv = Nothing
-    , _pdQuotaUser = Nothing
-    , _pdPrettyPrint = True
     , _pdUploadProtocol = Nothing
     , _pdPp = True
     , _pdAccessToken = Nothing
     , _pdUploadType = Nothing
     , _pdBearerToken = Nothing
-    , _pdKey = Nothing
     , _pdProjectId = pPdProjectId_
-    , _pdOAuthToken = Nothing
-    , _pdFields = Nothing
     , _pdCallback = Nothing
     }
 
 -- | V1 error format.
 pdXgafv :: Lens' ProjectsDelete' (Maybe Text)
 pdXgafv = lens _pdXgafv (\ s a -> s{_pdXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pdQuotaUser :: Lens' ProjectsDelete' (Maybe Text)
-pdQuotaUser
-  = lens _pdQuotaUser (\ s a -> s{_pdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pdPrettyPrint :: Lens' ProjectsDelete' Bool
-pdPrettyPrint
-  = lens _pdPrettyPrint
-      (\ s a -> s{_pdPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 pdUploadProtocol :: Lens' ProjectsDelete' (Maybe Text)
@@ -230,51 +186,27 @@ pdBearerToken
   = lens _pdBearerToken
       (\ s a -> s{_pdBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pdKey :: Lens' ProjectsDelete' (Maybe AuthKey)
-pdKey = lens _pdKey (\ s a -> s{_pdKey = a})
-
 -- | The project ID (for example, \`foo-bar-123\`). Required.
 pdProjectId :: Lens' ProjectsDelete' Text
 pdProjectId
   = lens _pdProjectId (\ s a -> s{_pdProjectId = a})
-
--- | OAuth 2.0 token for the current user.
-pdOAuthToken :: Lens' ProjectsDelete' (Maybe OAuthToken)
-pdOAuthToken
-  = lens _pdOAuthToken (\ s a -> s{_pdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pdFields :: Lens' ProjectsDelete' (Maybe Text)
-pdFields = lens _pdFields (\ s a -> s{_pdFields = a})
 
 -- | JSONP
 pdCallback :: Lens' ProjectsDelete' (Maybe Text)
 pdCallback
   = lens _pdCallback (\ s a -> s{_pdCallback = a})
 
-instance GoogleAuth ProjectsDelete' where
-        _AuthKey = pdKey . _Just
-        _AuthToken = pdOAuthToken . _Just
-
 instance GoogleRequest ProjectsDelete' where
         type Rs ProjectsDelete' = Empty
-        request = requestWith resourceManagerRequest
-        requestWith rq ProjectsDelete'{..}
+        requestClient ProjectsDelete'{..}
           = go _pdProjectId _pdXgafv _pdUploadProtocol
               (Just _pdPp)
               _pdAccessToken
               _pdUploadType
               _pdBearerToken
               _pdCallback
-              _pdQuotaUser
-              (Just _pdPrettyPrint)
-              _pdFields
-              _pdKey
-              _pdOAuthToken
               (Just AltJSON)
+              resourceManagerService
           where go
-                  = clientBuild (Proxy :: Proxy ProjectsDeleteResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ProjectsDeleteResource)
+                      mempty

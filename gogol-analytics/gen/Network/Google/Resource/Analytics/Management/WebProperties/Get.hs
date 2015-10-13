@@ -33,14 +33,8 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Get
     , ManagementWebPropertiesGet'
 
     -- * Request Lenses
-    , mwpgQuotaUser
-    , mwpgPrettyPrint
     , mwpgWebPropertyId
-    , mwpgUserIP
     , mwpgAccountId
-    , mwpgKey
-    , mwpgOAuthToken
-    , mwpgFields
     ) where
 
 import           Network.Google.Analytics.Types
@@ -54,76 +48,32 @@ type ManagementWebPropertiesGetResource =
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :> Get '[JSON] WebProperty
+               QueryParam "alt" AltJSON :> Get '[JSON] WebProperty
 
 -- | Gets a web property to which the user has access.
 --
 -- /See:/ 'managementWebPropertiesGet'' smart constructor.
 data ManagementWebPropertiesGet' = ManagementWebPropertiesGet'
-    { _mwpgQuotaUser     :: !(Maybe Text)
-    , _mwpgPrettyPrint   :: !Bool
-    , _mwpgWebPropertyId :: !Text
-    , _mwpgUserIP        :: !(Maybe Text)
+    { _mwpgWebPropertyId :: !Text
     , _mwpgAccountId     :: !Text
-    , _mwpgKey           :: !(Maybe AuthKey)
-    , _mwpgOAuthToken    :: !(Maybe OAuthToken)
-    , _mwpgFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertiesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mwpgQuotaUser'
---
--- * 'mwpgPrettyPrint'
---
 -- * 'mwpgWebPropertyId'
 --
--- * 'mwpgUserIP'
---
 -- * 'mwpgAccountId'
---
--- * 'mwpgKey'
---
--- * 'mwpgOAuthToken'
---
--- * 'mwpgFields'
 managementWebPropertiesGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
     -> ManagementWebPropertiesGet'
 managementWebPropertiesGet' pMwpgWebPropertyId_ pMwpgAccountId_ =
     ManagementWebPropertiesGet'
-    { _mwpgQuotaUser = Nothing
-    , _mwpgPrettyPrint = False
-    , _mwpgWebPropertyId = pMwpgWebPropertyId_
-    , _mwpgUserIP = Nothing
+    { _mwpgWebPropertyId = pMwpgWebPropertyId_
     , _mwpgAccountId = pMwpgAccountId_
-    , _mwpgKey = Nothing
-    , _mwpgOAuthToken = Nothing
-    , _mwpgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mwpgQuotaUser :: Lens' ManagementWebPropertiesGet' (Maybe Text)
-mwpgQuotaUser
-  = lens _mwpgQuotaUser
-      (\ s a -> s{_mwpgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mwpgPrettyPrint :: Lens' ManagementWebPropertiesGet' Bool
-mwpgPrettyPrint
-  = lens _mwpgPrettyPrint
-      (\ s a -> s{_mwpgPrettyPrint = a})
 
 -- | ID to retrieve the web property for.
 mwpgWebPropertyId :: Lens' ManagementWebPropertiesGet' Text
@@ -131,52 +81,19 @@ mwpgWebPropertyId
   = lens _mwpgWebPropertyId
       (\ s a -> s{_mwpgWebPropertyId = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mwpgUserIP :: Lens' ManagementWebPropertiesGet' (Maybe Text)
-mwpgUserIP
-  = lens _mwpgUserIP (\ s a -> s{_mwpgUserIP = a})
-
 -- | Account ID to retrieve the web property for.
 mwpgAccountId :: Lens' ManagementWebPropertiesGet' Text
 mwpgAccountId
   = lens _mwpgAccountId
       (\ s a -> s{_mwpgAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mwpgKey :: Lens' ManagementWebPropertiesGet' (Maybe AuthKey)
-mwpgKey = lens _mwpgKey (\ s a -> s{_mwpgKey = a})
-
--- | OAuth 2.0 token for the current user.
-mwpgOAuthToken :: Lens' ManagementWebPropertiesGet' (Maybe OAuthToken)
-mwpgOAuthToken
-  = lens _mwpgOAuthToken
-      (\ s a -> s{_mwpgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-mwpgFields :: Lens' ManagementWebPropertiesGet' (Maybe Text)
-mwpgFields
-  = lens _mwpgFields (\ s a -> s{_mwpgFields = a})
-
-instance GoogleAuth ManagementWebPropertiesGet' where
-        _AuthKey = mwpgKey . _Just
-        _AuthToken = mwpgOAuthToken . _Just
-
 instance GoogleRequest ManagementWebPropertiesGet'
          where
         type Rs ManagementWebPropertiesGet' = WebProperty
-        request = requestWith analyticsRequest
-        requestWith rq ManagementWebPropertiesGet'{..}
-          = go _mwpgAccountId _mwpgWebPropertyId _mwpgQuotaUser
-              (Just _mwpgPrettyPrint)
-              _mwpgUserIP
-              _mwpgFields
-              _mwpgKey
-              _mwpgOAuthToken
-              (Just AltJSON)
+        requestClient ManagementWebPropertiesGet'{..}
+          = go _mwpgAccountId _mwpgWebPropertyId (Just AltJSON)
+              analyticsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ManagementWebPropertiesGetResource)
-                      rq
+                      mempty

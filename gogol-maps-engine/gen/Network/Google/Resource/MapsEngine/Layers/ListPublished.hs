@@ -33,15 +33,9 @@ module Network.Google.Resource.MapsEngine.Layers.ListPublished
     , LayersListPublished'
 
     -- * Request Lenses
-    , llpQuotaUser
-    , llpPrettyPrint
-    , llpUserIP
-    , llpKey
     , llpPageToken
     , llpProjectId
-    , llpOAuthToken
     , llpMaxResults
-    , llpFields
     ) where
 
 import           Network.Google.MapsEngine.Types
@@ -55,90 +49,35 @@ type LayersListPublishedResource =
          QueryParam "pageToken" Text :>
            QueryParam "projectId" Text :>
              QueryParam "maxResults" Word32 :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] PublishedLayersListResponse
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] PublishedLayersListResponse
 
 -- | Return all published layers readable by the current user.
 --
 -- /See:/ 'layersListPublished'' smart constructor.
 data LayersListPublished' = LayersListPublished'
-    { _llpQuotaUser   :: !(Maybe Text)
-    , _llpPrettyPrint :: !Bool
-    , _llpUserIP      :: !(Maybe Text)
-    , _llpKey         :: !(Maybe AuthKey)
-    , _llpPageToken   :: !(Maybe Text)
-    , _llpProjectId   :: !(Maybe Text)
-    , _llpOAuthToken  :: !(Maybe OAuthToken)
-    , _llpMaxResults  :: !(Maybe Word32)
-    , _llpFields      :: !(Maybe Text)
+    { _llpPageToken  :: !(Maybe Text)
+    , _llpProjectId  :: !(Maybe Text)
+    , _llpMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersListPublished'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'llpQuotaUser'
---
--- * 'llpPrettyPrint'
---
--- * 'llpUserIP'
---
--- * 'llpKey'
---
 -- * 'llpPageToken'
 --
 -- * 'llpProjectId'
 --
--- * 'llpOAuthToken'
---
 -- * 'llpMaxResults'
---
--- * 'llpFields'
 layersListPublished'
     :: LayersListPublished'
 layersListPublished' =
     LayersListPublished'
-    { _llpQuotaUser = Nothing
-    , _llpPrettyPrint = True
-    , _llpUserIP = Nothing
-    , _llpKey = Nothing
-    , _llpPageToken = Nothing
+    { _llpPageToken = Nothing
     , _llpProjectId = Nothing
-    , _llpOAuthToken = Nothing
     , _llpMaxResults = Nothing
-    , _llpFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-llpQuotaUser :: Lens' LayersListPublished' (Maybe Text)
-llpQuotaUser
-  = lens _llpQuotaUser (\ s a -> s{_llpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-llpPrettyPrint :: Lens' LayersListPublished' Bool
-llpPrettyPrint
-  = lens _llpPrettyPrint
-      (\ s a -> s{_llpPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-llpUserIP :: Lens' LayersListPublished' (Maybe Text)
-llpUserIP
-  = lens _llpUserIP (\ s a -> s{_llpUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-llpKey :: Lens' LayersListPublished' (Maybe AuthKey)
-llpKey = lens _llpKey (\ s a -> s{_llpKey = a})
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
@@ -155,12 +94,6 @@ llpProjectId :: Lens' LayersListPublished' (Maybe Text)
 llpProjectId
   = lens _llpProjectId (\ s a -> s{_llpProjectId = a})
 
--- | OAuth 2.0 token for the current user.
-llpOAuthToken :: Lens' LayersListPublished' (Maybe OAuthToken)
-llpOAuthToken
-  = lens _llpOAuthToken
-      (\ s a -> s{_llpOAuthToken = a})
-
 -- | The maximum number of items to include in a single response page. The
 -- maximum supported value is 100.
 llpMaxResults :: Lens' LayersListPublished' (Maybe Word32)
@@ -168,29 +101,14 @@ llpMaxResults
   = lens _llpMaxResults
       (\ s a -> s{_llpMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-llpFields :: Lens' LayersListPublished' (Maybe Text)
-llpFields
-  = lens _llpFields (\ s a -> s{_llpFields = a})
-
-instance GoogleAuth LayersListPublished' where
-        _AuthKey = llpKey . _Just
-        _AuthToken = llpOAuthToken . _Just
-
 instance GoogleRequest LayersListPublished' where
         type Rs LayersListPublished' =
              PublishedLayersListResponse
-        request = requestWith mapsEngineRequest
-        requestWith rq LayersListPublished'{..}
+        requestClient LayersListPublished'{..}
           = go _llpPageToken _llpProjectId _llpMaxResults
-              _llpQuotaUser
-              (Just _llpPrettyPrint)
-              _llpUserIP
-              _llpFields
-              _llpKey
-              _llpOAuthToken
               (Just AltJSON)
+              mapsEngineService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy LayersListPublishedResource)
-                      rq
+                      mempty

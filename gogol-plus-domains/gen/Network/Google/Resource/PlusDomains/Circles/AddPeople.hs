@@ -35,14 +35,8 @@ module Network.Google.Resource.PlusDomains.Circles.AddPeople
 
     -- * Request Lenses
     , capEmail
-    , capQuotaUser
-    , capPrettyPrint
-    , capUserIP
     , capUserId
-    , capKey
     , capCircleId
-    , capOAuthToken
-    , capFields
     ) where
 
 import           Network.Google.PlusDomains.Types
@@ -56,28 +50,16 @@ type CirclesAddPeopleResource =
          "people" :>
            QueryParams "email" Text :>
              QueryParams "userId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :> Put '[JSON] Circle
+               QueryParam "alt" AltJSON :> Put '[JSON] Circle
 
 -- | Add a person to a circle. Google+ limits certain circle operations,
 -- including the number of circle adds. Learn More.
 --
 -- /See:/ 'circlesAddPeople'' smart constructor.
 data CirclesAddPeople' = CirclesAddPeople'
-    { _capEmail       :: !(Maybe [Text])
-    , _capQuotaUser   :: !(Maybe Text)
-    , _capPrettyPrint :: !Bool
-    , _capUserIP      :: !(Maybe Text)
-    , _capUserId      :: !(Maybe [Text])
-    , _capKey         :: !(Maybe AuthKey)
-    , _capCircleId    :: !Text
-    , _capOAuthToken  :: !(Maybe OAuthToken)
-    , _capFields      :: !(Maybe Text)
+    { _capEmail    :: !(Maybe [Text])
+    , _capUserId   :: !(Maybe [Text])
+    , _capCircleId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesAddPeople'' with the minimum fields required to make a request.
@@ -86,35 +68,17 @@ data CirclesAddPeople' = CirclesAddPeople'
 --
 -- * 'capEmail'
 --
--- * 'capQuotaUser'
---
--- * 'capPrettyPrint'
---
--- * 'capUserIP'
---
 -- * 'capUserId'
 --
--- * 'capKey'
---
 -- * 'capCircleId'
---
--- * 'capOAuthToken'
---
--- * 'capFields'
 circlesAddPeople'
     :: Text -- ^ 'circleId'
     -> CirclesAddPeople'
 circlesAddPeople' pCapCircleId_ =
     CirclesAddPeople'
     { _capEmail = Nothing
-    , _capQuotaUser = Nothing
-    , _capPrettyPrint = True
-    , _capUserIP = Nothing
     , _capUserId = Nothing
-    , _capKey = Nothing
     , _capCircleId = pCapCircleId_
-    , _capOAuthToken = Nothing
-    , _capFields = Nothing
     }
 
 -- | Email of the people to add to the circle. Optional, can be repeated.
@@ -124,25 +88,6 @@ capEmail
       _Default
       . _Coerce
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-capQuotaUser :: Lens' CirclesAddPeople' (Maybe Text)
-capQuotaUser
-  = lens _capQuotaUser (\ s a -> s{_capQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-capPrettyPrint :: Lens' CirclesAddPeople' Bool
-capPrettyPrint
-  = lens _capPrettyPrint
-      (\ s a -> s{_capPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-capUserIP :: Lens' CirclesAddPeople' (Maybe Text)
-capUserIP
-  = lens _capUserIP (\ s a -> s{_capUserIP = a})
-
 -- | IDs of the people to add to the circle. Optional, can be repeated.
 capUserId :: Lens' CirclesAddPeople' [Text]
 capUserId
@@ -150,46 +95,19 @@ capUserId
       _Default
       . _Coerce
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-capKey :: Lens' CirclesAddPeople' (Maybe AuthKey)
-capKey = lens _capKey (\ s a -> s{_capKey = a})
-
 -- | The ID of the circle to add the person to.
 capCircleId :: Lens' CirclesAddPeople' Text
 capCircleId
   = lens _capCircleId (\ s a -> s{_capCircleId = a})
 
--- | OAuth 2.0 token for the current user.
-capOAuthToken :: Lens' CirclesAddPeople' (Maybe OAuthToken)
-capOAuthToken
-  = lens _capOAuthToken
-      (\ s a -> s{_capOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-capFields :: Lens' CirclesAddPeople' (Maybe Text)
-capFields
-  = lens _capFields (\ s a -> s{_capFields = a})
-
-instance GoogleAuth CirclesAddPeople' where
-        _AuthKey = capKey . _Just
-        _AuthToken = capOAuthToken . _Just
-
 instance GoogleRequest CirclesAddPeople' where
         type Rs CirclesAddPeople' = Circle
-        request = requestWith plusDomainsRequest
-        requestWith rq CirclesAddPeople'{..}
+        requestClient CirclesAddPeople'{..}
           = go _capCircleId (_capEmail ^. _Default)
               (_capUserId ^. _Default)
-              _capQuotaUser
-              (Just _capPrettyPrint)
-              _capUserIP
-              _capFields
-              _capKey
-              _capOAuthToken
               (Just AltJSON)
+              plusDomainsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CirclesAddPeopleResource)
-                      rq
+                      mempty

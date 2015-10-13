@@ -33,15 +33,9 @@ module Network.Google.Resource.Compute.ForwardingRules.Get
     , ForwardingRulesGet'
 
     -- * Request Lenses
-    , frgQuotaUser
-    , frgPrettyPrint
     , frgProject
     , frgForwardingRule
-    , frgUserIP
-    , frgKey
     , frgRegion
-    , frgOAuthToken
-    , frgFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,51 +49,27 @@ type ForwardingRulesGetResource =
          Capture "region" Text :>
            "forwardingRules" :>
              Capture "forwardingRule" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ForwardingRule
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] ForwardingRule
 
 -- | Returns the specified ForwardingRule resource.
 --
 -- /See:/ 'forwardingRulesGet'' smart constructor.
 data ForwardingRulesGet' = ForwardingRulesGet'
-    { _frgQuotaUser      :: !(Maybe Text)
-    , _frgPrettyPrint    :: !Bool
-    , _frgProject        :: !Text
+    { _frgProject        :: !Text
     , _frgForwardingRule :: !Text
-    , _frgUserIP         :: !(Maybe Text)
-    , _frgKey            :: !(Maybe AuthKey)
     , _frgRegion         :: !Text
-    , _frgOAuthToken     :: !(Maybe OAuthToken)
-    , _frgFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'frgQuotaUser'
---
--- * 'frgPrettyPrint'
---
 -- * 'frgProject'
 --
 -- * 'frgForwardingRule'
 --
--- * 'frgUserIP'
---
--- * 'frgKey'
---
 -- * 'frgRegion'
---
--- * 'frgOAuthToken'
---
--- * 'frgFields'
 forwardingRulesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'forwardingRule'
@@ -107,29 +77,10 @@ forwardingRulesGet'
     -> ForwardingRulesGet'
 forwardingRulesGet' pFrgProject_ pFrgForwardingRule_ pFrgRegion_ =
     ForwardingRulesGet'
-    { _frgQuotaUser = Nothing
-    , _frgPrettyPrint = True
-    , _frgProject = pFrgProject_
+    { _frgProject = pFrgProject_
     , _frgForwardingRule = pFrgForwardingRule_
-    , _frgUserIP = Nothing
-    , _frgKey = Nothing
     , _frgRegion = pFrgRegion_
-    , _frgOAuthToken = Nothing
-    , _frgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-frgQuotaUser :: Lens' ForwardingRulesGet' (Maybe Text)
-frgQuotaUser
-  = lens _frgQuotaUser (\ s a -> s{_frgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-frgPrettyPrint :: Lens' ForwardingRulesGet' Bool
-frgPrettyPrint
-  = lens _frgPrettyPrint
-      (\ s a -> s{_frgPrettyPrint = a})
 
 -- | Name of the project scoping this request.
 frgProject :: Lens' ForwardingRulesGet' Text
@@ -142,51 +93,18 @@ frgForwardingRule
   = lens _frgForwardingRule
       (\ s a -> s{_frgForwardingRule = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-frgUserIP :: Lens' ForwardingRulesGet' (Maybe Text)
-frgUserIP
-  = lens _frgUserIP (\ s a -> s{_frgUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-frgKey :: Lens' ForwardingRulesGet' (Maybe AuthKey)
-frgKey = lens _frgKey (\ s a -> s{_frgKey = a})
-
 -- | Name of the region scoping this request.
 frgRegion :: Lens' ForwardingRulesGet' Text
 frgRegion
   = lens _frgRegion (\ s a -> s{_frgRegion = a})
 
--- | OAuth 2.0 token for the current user.
-frgOAuthToken :: Lens' ForwardingRulesGet' (Maybe OAuthToken)
-frgOAuthToken
-  = lens _frgOAuthToken
-      (\ s a -> s{_frgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-frgFields :: Lens' ForwardingRulesGet' (Maybe Text)
-frgFields
-  = lens _frgFields (\ s a -> s{_frgFields = a})
-
-instance GoogleAuth ForwardingRulesGet' where
-        _AuthKey = frgKey . _Just
-        _AuthToken = frgOAuthToken . _Just
-
 instance GoogleRequest ForwardingRulesGet' where
         type Rs ForwardingRulesGet' = ForwardingRule
-        request = requestWith computeRequest
-        requestWith rq ForwardingRulesGet'{..}
+        requestClient ForwardingRulesGet'{..}
           = go _frgProject _frgRegion _frgForwardingRule
-              _frgQuotaUser
-              (Just _frgPrettyPrint)
-              _frgUserIP
-              _frgFields
-              _frgKey
-              _frgOAuthToken
               (Just AltJSON)
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ForwardingRulesGetResource)
-                      rq
+                      mempty

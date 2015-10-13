@@ -33,13 +33,7 @@ module Network.Google.Resource.Tasks.TaskLists.Get
     , TaskListsGet'
 
     -- * Request Lenses
-    , tlgQuotaUser
-    , tlgPrettyPrint
-    , tlgUserIP
-    , tlgKey
     , tlgTaskList
-    , tlgOAuthToken
-    , tlgFields
     ) where
 
 import           Network.Google.AppsTasks.Types
@@ -52,114 +46,37 @@ type TaskListsGetResource =
        "@me" :>
          "lists" :>
            Capture "tasklist" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] TaskList
+             QueryParam "alt" AltJSON :> Get '[JSON] TaskList
 
 -- | Returns the authenticated user\'s specified task list.
 --
 -- /See:/ 'taskListsGet'' smart constructor.
-data TaskListsGet' = TaskListsGet'
-    { _tlgQuotaUser   :: !(Maybe Text)
-    , _tlgPrettyPrint :: !Bool
-    , _tlgUserIP      :: !(Maybe Text)
-    , _tlgKey         :: !(Maybe AuthKey)
-    , _tlgTaskList    :: !Text
-    , _tlgOAuthToken  :: !(Maybe OAuthToken)
-    , _tlgFields      :: !(Maybe Text)
+newtype TaskListsGet' = TaskListsGet'
+    { _tlgTaskList :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskListsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tlgQuotaUser'
---
--- * 'tlgPrettyPrint'
---
--- * 'tlgUserIP'
---
--- * 'tlgKey'
---
 -- * 'tlgTaskList'
---
--- * 'tlgOAuthToken'
---
--- * 'tlgFields'
 taskListsGet'
     :: Text -- ^ 'tasklist'
     -> TaskListsGet'
 taskListsGet' pTlgTaskList_ =
     TaskListsGet'
-    { _tlgQuotaUser = Nothing
-    , _tlgPrettyPrint = True
-    , _tlgUserIP = Nothing
-    , _tlgKey = Nothing
-    , _tlgTaskList = pTlgTaskList_
-    , _tlgOAuthToken = Nothing
-    , _tlgFields = Nothing
+    { _tlgTaskList = pTlgTaskList_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tlgQuotaUser :: Lens' TaskListsGet' (Maybe Text)
-tlgQuotaUser
-  = lens _tlgQuotaUser (\ s a -> s{_tlgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tlgPrettyPrint :: Lens' TaskListsGet' Bool
-tlgPrettyPrint
-  = lens _tlgPrettyPrint
-      (\ s a -> s{_tlgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tlgUserIP :: Lens' TaskListsGet' (Maybe Text)
-tlgUserIP
-  = lens _tlgUserIP (\ s a -> s{_tlgUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tlgKey :: Lens' TaskListsGet' (Maybe AuthKey)
-tlgKey = lens _tlgKey (\ s a -> s{_tlgKey = a})
 
 -- | Task list identifier.
 tlgTaskList :: Lens' TaskListsGet' Text
 tlgTaskList
   = lens _tlgTaskList (\ s a -> s{_tlgTaskList = a})
 
--- | OAuth 2.0 token for the current user.
-tlgOAuthToken :: Lens' TaskListsGet' (Maybe OAuthToken)
-tlgOAuthToken
-  = lens _tlgOAuthToken
-      (\ s a -> s{_tlgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-tlgFields :: Lens' TaskListsGet' (Maybe Text)
-tlgFields
-  = lens _tlgFields (\ s a -> s{_tlgFields = a})
-
-instance GoogleAuth TaskListsGet' where
-        _AuthKey = tlgKey . _Just
-        _AuthToken = tlgOAuthToken . _Just
-
 instance GoogleRequest TaskListsGet' where
         type Rs TaskListsGet' = TaskList
-        request = requestWith appsTasksRequest
-        requestWith rq TaskListsGet'{..}
-          = go _tlgTaskList _tlgQuotaUser
-              (Just _tlgPrettyPrint)
-              _tlgUserIP
-              _tlgFields
-              _tlgKey
-              _tlgOAuthToken
-              (Just AltJSON)
+        requestClient TaskListsGet'{..}
+          = go _tlgTaskList (Just AltJSON) appsTasksService
           where go
-                  = clientBuild (Proxy :: Proxy TaskListsGetResource)
-                      rq
+                  = buildClient (Proxy :: Proxy TaskListsGetResource)
+                      mempty

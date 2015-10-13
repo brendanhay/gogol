@@ -35,12 +35,9 @@ module Network.Google.Resource.Search.CSE.List
 
     -- * Request Lenses
     , cselImgDominantColor
-    , cselQuotaUser
-    , cselPrettyPrint
     , cselSiteSearchFilter
     , cselC2coff
     , cselOrTerms
-    , cselUserIP
     , cselStart
     , cselRights
     , cselExcludeTerms
@@ -52,14 +49,12 @@ module Network.Google.Resource.Search.CSE.List
     , cselGooglehost
     , cselRelatedSite
     , cselHl
-    , cselKey
     , cselCref
     , cselSort
     , cselSiteSearch
     , cselFilter
     , cselDateRestrict
     , cselLinkSite
-    , cselOAuthToken
     , cselLowRange
     , cselImgType
     , cselGl
@@ -70,7 +65,6 @@ module Network.Google.Resource.Search.CSE.List
     , cselCr
     , cselSafe
     , cselHq
-    , cselFields
     , cselHighRange
     ) where
 
@@ -137,36 +131,12 @@ type CSEListResource =
                                                                        Text
                                                                        :>
                                                                        QueryParam
-                                                                         "quotaUser"
-                                                                         Text
+                                                                         "alt"
+                                                                         AltJSON
                                                                          :>
-                                                                         QueryParam
-                                                                           "prettyPrint"
-                                                                           Bool
-                                                                           :>
-                                                                           QueryParam
-                                                                             "userIp"
-                                                                             Text
-                                                                             :>
-                                                                             QueryParam
-                                                                               "fields"
-                                                                               Text
-                                                                               :>
-                                                                               QueryParam
-                                                                                 "key"
-                                                                                 AuthKey
-                                                                                 :>
-                                                                                 Header
-                                                                                   "Authorization"
-                                                                                   OAuthToken
-                                                                                   :>
-                                                                                   QueryParam
-                                                                                     "alt"
-                                                                                     AltJSON
-                                                                                     :>
-                                                                                     Get
-                                                                                       '[JSON]
-                                                                                       Search
+                                                                         Get
+                                                                           '[JSON]
+                                                                           Search
 
 -- | Returns metadata about the search performed, metadata about the custom
 -- search engine used for the search, and the search results.
@@ -174,12 +144,9 @@ type CSEListResource =
 -- /See:/ 'cSEList'' smart constructor.
 data CSEList' = CSEList'
     { _cselImgDominantColor :: !(Maybe CSEListImgDominantColor)
-    , _cselQuotaUser        :: !(Maybe Text)
-    , _cselPrettyPrint      :: !Bool
     , _cselSiteSearchFilter :: !(Maybe CSEListSiteSearchFilter)
     , _cselC2coff           :: !(Maybe Text)
     , _cselOrTerms          :: !(Maybe Text)
-    , _cselUserIP           :: !(Maybe Text)
     , _cselStart            :: !(Maybe Word32)
     , _cselRights           :: !(Maybe Text)
     , _cselExcludeTerms     :: !(Maybe Text)
@@ -191,14 +158,12 @@ data CSEList' = CSEList'
     , _cselGooglehost       :: !(Maybe Text)
     , _cselRelatedSite      :: !(Maybe Text)
     , _cselHl               :: !(Maybe Text)
-    , _cselKey              :: !(Maybe AuthKey)
     , _cselCref             :: !(Maybe Text)
     , _cselSort             :: !(Maybe Text)
     , _cselSiteSearch       :: !(Maybe Text)
     , _cselFilter           :: !(Maybe CSEListFilter)
     , _cselDateRestrict     :: !(Maybe Text)
     , _cselLinkSite         :: !(Maybe Text)
-    , _cselOAuthToken       :: !(Maybe OAuthToken)
     , _cselLowRange         :: !(Maybe Text)
     , _cselImgType          :: !(Maybe CSEListImgType)
     , _cselGl               :: !(Maybe Text)
@@ -209,7 +174,6 @@ data CSEList' = CSEList'
     , _cselCr               :: !(Maybe Text)
     , _cselSafe             :: !CSEListSafe
     , _cselHq               :: !(Maybe Text)
-    , _cselFields           :: !(Maybe Text)
     , _cselHighRange        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -219,17 +183,11 @@ data CSEList' = CSEList'
 --
 -- * 'cselImgDominantColor'
 --
--- * 'cselQuotaUser'
---
--- * 'cselPrettyPrint'
---
 -- * 'cselSiteSearchFilter'
 --
 -- * 'cselC2coff'
 --
 -- * 'cselOrTerms'
---
--- * 'cselUserIP'
 --
 -- * 'cselStart'
 --
@@ -253,8 +211,6 @@ data CSEList' = CSEList'
 --
 -- * 'cselHl'
 --
--- * 'cselKey'
---
 -- * 'cselCref'
 --
 -- * 'cselSort'
@@ -266,8 +222,6 @@ data CSEList' = CSEList'
 -- * 'cselDateRestrict'
 --
 -- * 'cselLinkSite'
---
--- * 'cselOAuthToken'
 --
 -- * 'cselLowRange'
 --
@@ -289,8 +243,6 @@ data CSEList' = CSEList'
 --
 -- * 'cselHq'
 --
--- * 'cselFields'
---
 -- * 'cselHighRange'
 cSEList'
     :: Text -- ^ 'q'
@@ -298,12 +250,9 @@ cSEList'
 cSEList' pCselQ_ =
     CSEList'
     { _cselImgDominantColor = Nothing
-    , _cselQuotaUser = Nothing
-    , _cselPrettyPrint = True
     , _cselSiteSearchFilter = Nothing
     , _cselC2coff = Nothing
     , _cselOrTerms = Nothing
-    , _cselUserIP = Nothing
     , _cselStart = Nothing
     , _cselRights = Nothing
     , _cselExcludeTerms = Nothing
@@ -315,14 +264,12 @@ cSEList' pCselQ_ =
     , _cselGooglehost = Nothing
     , _cselRelatedSite = Nothing
     , _cselHl = Nothing
-    , _cselKey = Nothing
     , _cselCref = Nothing
     , _cselSort = Nothing
     , _cselSiteSearch = Nothing
     , _cselFilter = Nothing
     , _cselDateRestrict = Nothing
     , _cselLinkSite = Nothing
-    , _cselOAuthToken = Nothing
     , _cselLowRange = Nothing
     , _cselImgType = Nothing
     , _cselGl = Nothing
@@ -333,7 +280,6 @@ cSEList' pCselQ_ =
     , _cselCr = Nothing
     , _cselSafe = Off
     , _cselHq = Nothing
-    , _cselFields = Nothing
     , _cselHighRange = Nothing
     }
 
@@ -343,20 +289,6 @@ cselImgDominantColor :: Lens' CSEList' (Maybe CSEListImgDominantColor)
 cselImgDominantColor
   = lens _cselImgDominantColor
       (\ s a -> s{_cselImgDominantColor = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-cselQuotaUser :: Lens' CSEList' (Maybe Text)
-cselQuotaUser
-  = lens _cselQuotaUser
-      (\ s a -> s{_cselQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cselPrettyPrint :: Lens' CSEList' Bool
-cselPrettyPrint
-  = lens _cselPrettyPrint
-      (\ s a -> s{_cselPrettyPrint = a})
 
 -- | Controls whether to include or exclude results from the site named in
 -- the as_sitesearch parameter
@@ -376,12 +308,6 @@ cselC2coff
 cselOrTerms :: Lens' CSEList' (Maybe Text)
 cselOrTerms
   = lens _cselOrTerms (\ s a -> s{_cselOrTerms = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-cselUserIP :: Lens' CSEList' (Maybe Text)
-cselUserIP
-  = lens _cselUserIP (\ s a -> s{_cselUserIP = a})
 
 -- | The index of the first result to return
 cselStart :: Lens' CSEList' (Maybe Word32)
@@ -443,12 +369,6 @@ cselRelatedSite
 cselHl :: Lens' CSEList' (Maybe Text)
 cselHl = lens _cselHl (\ s a -> s{_cselHl = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cselKey :: Lens' CSEList' (Maybe AuthKey)
-cselKey = lens _cselKey (\ s a -> s{_cselKey = a})
-
 -- | The URL of a linked custom search engine
 cselCref :: Lens' CSEList' (Maybe Text)
 cselCref = lens _cselCref (\ s a -> s{_cselCref = a})
@@ -479,12 +399,6 @@ cselDateRestrict
 cselLinkSite :: Lens' CSEList' (Maybe Text)
 cselLinkSite
   = lens _cselLinkSite (\ s a -> s{_cselLinkSite = a})
-
--- | OAuth 2.0 token for the current user.
-cselOAuthToken :: Lens' CSEList' (Maybe OAuthToken)
-cselOAuthToken
-  = lens _cselOAuthToken
-      (\ s a -> s{_cselOAuthToken = a})
 
 -- | Creates a range in form as_nlo value..as_nhi value and attempts to
 -- append it to query
@@ -538,11 +452,6 @@ cselSafe = lens _cselSafe (\ s a -> s{_cselSafe = a})
 cselHq :: Lens' CSEList' (Maybe Text)
 cselHq = lens _cselHq (\ s a -> s{_cselHq = a})
 
--- | Selector specifying which fields to include in a partial response.
-cselFields :: Lens' CSEList' (Maybe Text)
-cselFields
-  = lens _cselFields (\ s a -> s{_cselFields = a})
-
 -- | Creates a range in form as_nlo value..as_nhi value and attempts to
 -- append it to query
 cselHighRange :: Lens' CSEList' (Maybe Text)
@@ -550,14 +459,9 @@ cselHighRange
   = lens _cselHighRange
       (\ s a -> s{_cselHighRange = a})
 
-instance GoogleAuth CSEList' where
-        _AuthKey = cselKey . _Just
-        _AuthToken = cselOAuthToken . _Just
-
 instance GoogleRequest CSEList' where
         type Rs CSEList' = Search
-        request = requestWith customSearchRequest
-        requestWith rq CSEList'{..}
+        requestClient CSEList'{..}
           = go (Just _cselQ) _cselImgDominantColor
               _cselSiteSearchFilter
               _cselC2coff
@@ -589,12 +493,7 @@ instance GoogleRequest CSEList' where
               (Just _cselSafe)
               _cselHq
               _cselHighRange
-              _cselQuotaUser
-              (Just _cselPrettyPrint)
-              _cselUserIP
-              _cselFields
-              _cselKey
-              _cselOAuthToken
               (Just AltJSON)
+              customSearchService
           where go
-                  = clientBuild (Proxy :: Proxy CSEListResource) rq
+                  = buildClient (Proxy :: Proxy CSEListResource) mempty

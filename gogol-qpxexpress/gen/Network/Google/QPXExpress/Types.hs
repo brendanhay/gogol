@@ -15,8 +15,8 @@
 --
 module Network.Google.QPXExpress.Types
     (
-    -- * Service Request
-      qPXExpressRequest
+    -- * Service Configuration
+      qPXExpressService
 
     -- * TripOptionsResponse
     , TripOptionsResponse
@@ -255,7 +255,8 @@ import           Network.Google.QPXExpress.Types.Product
 import           Network.Google.QPXExpress.Types.Sum
 
 -- | Default request referring to version 'v1' of the QPX Express API. This contains the host and root path used as a starting point for constructing service requests.
-qPXExpressRequest :: RequestBuilder
-qPXExpressRequest
-  = defaultRequest "https://www.googleapis.com/"
+qPXExpressService :: Service
+qPXExpressService
+  = defaultService (ServiceId "qpxExpress:v1")
+      "www.googleapis.com"
       "qpxExpress/v1/trips/"

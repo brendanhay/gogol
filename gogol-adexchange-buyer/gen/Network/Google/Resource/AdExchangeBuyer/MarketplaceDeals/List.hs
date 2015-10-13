@@ -33,13 +33,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
     , MarketplaceDealsList'
 
     -- * Request Lenses
-    , mdlQuotaUser
-    , mdlPrettyPrint
-    , mdlUserIP
-    , mdlKey
-    , mdlOAuthToken
     , mdlOrderId
-    , mdlFields
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -51,115 +45,40 @@ type MarketplaceDealsListResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
          "deals" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] GetOrderDealsResponse
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] GetOrderDealsResponse
 
 -- | List all the deals for a given order
 --
 -- /See:/ 'marketplaceDealsList'' smart constructor.
-data MarketplaceDealsList' = MarketplaceDealsList'
-    { _mdlQuotaUser   :: !(Maybe Text)
-    , _mdlPrettyPrint :: !Bool
-    , _mdlUserIP      :: !(Maybe Text)
-    , _mdlKey         :: !(Maybe AuthKey)
-    , _mdlOAuthToken  :: !(Maybe OAuthToken)
-    , _mdlOrderId     :: !Text
-    , _mdlFields      :: !(Maybe Text)
+newtype MarketplaceDealsList' = MarketplaceDealsList'
+    { _mdlOrderId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceDealsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mdlQuotaUser'
---
--- * 'mdlPrettyPrint'
---
--- * 'mdlUserIP'
---
--- * 'mdlKey'
---
--- * 'mdlOAuthToken'
---
 -- * 'mdlOrderId'
---
--- * 'mdlFields'
 marketplaceDealsList'
     :: Text -- ^ 'orderId'
     -> MarketplaceDealsList'
 marketplaceDealsList' pMdlOrderId_ =
     MarketplaceDealsList'
-    { _mdlQuotaUser = Nothing
-    , _mdlPrettyPrint = True
-    , _mdlUserIP = Nothing
-    , _mdlKey = Nothing
-    , _mdlOAuthToken = Nothing
-    , _mdlOrderId = pMdlOrderId_
-    , _mdlFields = Nothing
+    { _mdlOrderId = pMdlOrderId_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mdlQuotaUser :: Lens' MarketplaceDealsList' (Maybe Text)
-mdlQuotaUser
-  = lens _mdlQuotaUser (\ s a -> s{_mdlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mdlPrettyPrint :: Lens' MarketplaceDealsList' Bool
-mdlPrettyPrint
-  = lens _mdlPrettyPrint
-      (\ s a -> s{_mdlPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mdlUserIP :: Lens' MarketplaceDealsList' (Maybe Text)
-mdlUserIP
-  = lens _mdlUserIP (\ s a -> s{_mdlUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mdlKey :: Lens' MarketplaceDealsList' (Maybe AuthKey)
-mdlKey = lens _mdlKey (\ s a -> s{_mdlKey = a})
-
--- | OAuth 2.0 token for the current user.
-mdlOAuthToken :: Lens' MarketplaceDealsList' (Maybe OAuthToken)
-mdlOAuthToken
-  = lens _mdlOAuthToken
-      (\ s a -> s{_mdlOAuthToken = a})
 
 -- | The orderId to get deals for.
 mdlOrderId :: Lens' MarketplaceDealsList' Text
 mdlOrderId
   = lens _mdlOrderId (\ s a -> s{_mdlOrderId = a})
 
--- | Selector specifying which fields to include in a partial response.
-mdlFields :: Lens' MarketplaceDealsList' (Maybe Text)
-mdlFields
-  = lens _mdlFields (\ s a -> s{_mdlFields = a})
-
-instance GoogleAuth MarketplaceDealsList' where
-        _AuthKey = mdlKey . _Just
-        _AuthToken = mdlOAuthToken . _Just
-
 instance GoogleRequest MarketplaceDealsList' where
         type Rs MarketplaceDealsList' = GetOrderDealsResponse
-        request = requestWith adExchangeBuyerRequest
-        requestWith rq MarketplaceDealsList'{..}
-          = go _mdlOrderId _mdlQuotaUser (Just _mdlPrettyPrint)
-              _mdlUserIP
-              _mdlFields
-              _mdlKey
-              _mdlOAuthToken
-              (Just AltJSON)
+        requestClient MarketplaceDealsList'{..}
+          = go _mdlOrderId (Just AltJSON)
+              adExchangeBuyerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy MarketplaceDealsListResource)
-                      rq
+                      mempty

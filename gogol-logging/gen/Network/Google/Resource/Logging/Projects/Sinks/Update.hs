@@ -35,19 +35,14 @@ module Network.Google.Resource.Logging.Projects.Sinks.Update
 
     -- * Request Lenses
     , psuXgafv
-    , psuQuotaUser
-    , psuPrettyPrint
     , psuUploadProtocol
     , psuPp
     , psuAccessToken
     , psuUploadType
     , psuPayload
     , psuBearerToken
-    , psuKey
-    , psuOAuthToken
     , psuProjectsId
     , psuSinksId
-    , psuFields
     , psuCallback
     ) where
 
@@ -69,14 +64,8 @@ type ProjectsSinksUpdateResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         ReqBody '[JSON] LogSink :>
-                                           Put '[JSON] LogSink
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] LogSink :> Put '[JSON] LogSink
 
 -- | Updates a project sink. If the sink does not exist, it is created. The
 -- destination, filter, or both may be updated.
@@ -84,19 +73,14 @@ type ProjectsSinksUpdateResource =
 -- /See:/ 'projectsSinksUpdate'' smart constructor.
 data ProjectsSinksUpdate' = ProjectsSinksUpdate'
     { _psuXgafv          :: !(Maybe Text)
-    , _psuQuotaUser      :: !(Maybe Text)
-    , _psuPrettyPrint    :: !Bool
     , _psuUploadProtocol :: !(Maybe Text)
     , _psuPp             :: !Bool
     , _psuAccessToken    :: !(Maybe Text)
     , _psuUploadType     :: !(Maybe Text)
     , _psuPayload        :: !LogSink
     , _psuBearerToken    :: !(Maybe Text)
-    , _psuKey            :: !(Maybe AuthKey)
-    , _psuOAuthToken     :: !(Maybe OAuthToken)
     , _psuProjectsId     :: !Text
     , _psuSinksId        :: !Text
-    , _psuFields         :: !(Maybe Text)
     , _psuCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -105,10 +89,6 @@ data ProjectsSinksUpdate' = ProjectsSinksUpdate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'psuXgafv'
---
--- * 'psuQuotaUser'
---
--- * 'psuPrettyPrint'
 --
 -- * 'psuUploadProtocol'
 --
@@ -122,15 +102,9 @@ data ProjectsSinksUpdate' = ProjectsSinksUpdate'
 --
 -- * 'psuBearerToken'
 --
--- * 'psuKey'
---
--- * 'psuOAuthToken'
---
 -- * 'psuProjectsId'
 --
 -- * 'psuSinksId'
---
--- * 'psuFields'
 --
 -- * 'psuCallback'
 projectsSinksUpdate'
@@ -141,38 +115,20 @@ projectsSinksUpdate'
 projectsSinksUpdate' pPsuPayload_ pPsuProjectsId_ pPsuSinksId_ =
     ProjectsSinksUpdate'
     { _psuXgafv = Nothing
-    , _psuQuotaUser = Nothing
-    , _psuPrettyPrint = True
     , _psuUploadProtocol = Nothing
     , _psuPp = True
     , _psuAccessToken = Nothing
     , _psuUploadType = Nothing
     , _psuPayload = pPsuPayload_
     , _psuBearerToken = Nothing
-    , _psuKey = Nothing
-    , _psuOAuthToken = Nothing
     , _psuProjectsId = pPsuProjectsId_
     , _psuSinksId = pPsuSinksId_
-    , _psuFields = Nothing
     , _psuCallback = Nothing
     }
 
 -- | V1 error format.
 psuXgafv :: Lens' ProjectsSinksUpdate' (Maybe Text)
 psuXgafv = lens _psuXgafv (\ s a -> s{_psuXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-psuQuotaUser :: Lens' ProjectsSinksUpdate' (Maybe Text)
-psuQuotaUser
-  = lens _psuQuotaUser (\ s a -> s{_psuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-psuPrettyPrint :: Lens' ProjectsSinksUpdate' Bool
-psuPrettyPrint
-  = lens _psuPrettyPrint
-      (\ s a -> s{_psuPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 psuUploadProtocol :: Lens' ProjectsSinksUpdate' (Maybe Text)
@@ -207,18 +163,6 @@ psuBearerToken
   = lens _psuBearerToken
       (\ s a -> s{_psuBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-psuKey :: Lens' ProjectsSinksUpdate' (Maybe AuthKey)
-psuKey = lens _psuKey (\ s a -> s{_psuKey = a})
-
--- | OAuth 2.0 token for the current user.
-psuOAuthToken :: Lens' ProjectsSinksUpdate' (Maybe OAuthToken)
-psuOAuthToken
-  = lens _psuOAuthToken
-      (\ s a -> s{_psuOAuthToken = a})
-
 -- | Part of \`sinkName\`. The resource name of the project sink to update.
 psuProjectsId :: Lens' ProjectsSinksUpdate' Text
 psuProjectsId
@@ -230,24 +174,14 @@ psuSinksId :: Lens' ProjectsSinksUpdate' Text
 psuSinksId
   = lens _psuSinksId (\ s a -> s{_psuSinksId = a})
 
--- | Selector specifying which fields to include in a partial response.
-psuFields :: Lens' ProjectsSinksUpdate' (Maybe Text)
-psuFields
-  = lens _psuFields (\ s a -> s{_psuFields = a})
-
 -- | JSONP
 psuCallback :: Lens' ProjectsSinksUpdate' (Maybe Text)
 psuCallback
   = lens _psuCallback (\ s a -> s{_psuCallback = a})
 
-instance GoogleAuth ProjectsSinksUpdate' where
-        _AuthKey = psuKey . _Just
-        _AuthToken = psuOAuthToken . _Just
-
 instance GoogleRequest ProjectsSinksUpdate' where
         type Rs ProjectsSinksUpdate' = LogSink
-        request = requestWith loggingRequest
-        requestWith rq ProjectsSinksUpdate'{..}
+        requestClient ProjectsSinksUpdate'{..}
           = go _psuProjectsId _psuSinksId _psuXgafv
               _psuUploadProtocol
               (Just _psuPp)
@@ -255,14 +189,10 @@ instance GoogleRequest ProjectsSinksUpdate' where
               _psuUploadType
               _psuBearerToken
               _psuCallback
-              _psuQuotaUser
-              (Just _psuPrettyPrint)
-              _psuFields
-              _psuKey
-              _psuOAuthToken
               (Just AltJSON)
               _psuPayload
+              loggingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsSinksUpdateResource)
-                      rq
+                      mempty

@@ -33,16 +33,10 @@ module Network.Google.Resource.Directory.Members.List
     , MembersList'
 
     -- * Request Lenses
-    , mlQuotaUser
     , mlRoles
-    , mlPrettyPrint
-    , mlUserIP
     , mlGroupKey
-    , mlKey
     , mlPageToken
-    , mlOAuthToken
     , mlMaxResults
-    , mlFields
     ) where
 
 import           Network.Google.Directory.Types
@@ -57,137 +51,65 @@ type MembersListResource =
            QueryParam "roles" Text :>
              QueryParam "pageToken" Text :>
                QueryParam "maxResults" Int32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Members
+                 QueryParam "alt" AltJSON :> Get '[JSON] Members
 
 -- | Retrieve all members in a group (paginated)
 --
 -- /See:/ 'membersList'' smart constructor.
 data MembersList' = MembersList'
-    { _mlQuotaUser   :: !(Maybe Text)
-    , _mlRoles       :: !(Maybe Text)
-    , _mlPrettyPrint :: !Bool
-    , _mlUserIP      :: !(Maybe Text)
-    , _mlGroupKey    :: !Text
-    , _mlKey         :: !(Maybe AuthKey)
-    , _mlPageToken   :: !(Maybe Text)
-    , _mlOAuthToken  :: !(Maybe OAuthToken)
-    , _mlMaxResults  :: !(Maybe Int32)
-    , _mlFields      :: !(Maybe Text)
+    { _mlRoles      :: !(Maybe Text)
+    , _mlGroupKey   :: !Text
+    , _mlPageToken  :: !(Maybe Text)
+    , _mlMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mlQuotaUser'
---
 -- * 'mlRoles'
---
--- * 'mlPrettyPrint'
---
--- * 'mlUserIP'
 --
 -- * 'mlGroupKey'
 --
--- * 'mlKey'
---
 -- * 'mlPageToken'
 --
--- * 'mlOAuthToken'
---
 -- * 'mlMaxResults'
---
--- * 'mlFields'
 membersList'
     :: Text -- ^ 'groupKey'
     -> MembersList'
 membersList' pMlGroupKey_ =
     MembersList'
-    { _mlQuotaUser = Nothing
-    , _mlRoles = Nothing
-    , _mlPrettyPrint = True
-    , _mlUserIP = Nothing
+    { _mlRoles = Nothing
     , _mlGroupKey = pMlGroupKey_
-    , _mlKey = Nothing
     , _mlPageToken = Nothing
-    , _mlOAuthToken = Nothing
     , _mlMaxResults = Nothing
-    , _mlFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mlQuotaUser :: Lens' MembersList' (Maybe Text)
-mlQuotaUser
-  = lens _mlQuotaUser (\ s a -> s{_mlQuotaUser = a})
 
 -- | Comma separated role values to filter list results on.
 mlRoles :: Lens' MembersList' (Maybe Text)
 mlRoles = lens _mlRoles (\ s a -> s{_mlRoles = a})
-
--- | Returns response with indentations and line breaks.
-mlPrettyPrint :: Lens' MembersList' Bool
-mlPrettyPrint
-  = lens _mlPrettyPrint
-      (\ s a -> s{_mlPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mlUserIP :: Lens' MembersList' (Maybe Text)
-mlUserIP = lens _mlUserIP (\ s a -> s{_mlUserIP = a})
 
 -- | Email or immutable Id of the group
 mlGroupKey :: Lens' MembersList' Text
 mlGroupKey
   = lens _mlGroupKey (\ s a -> s{_mlGroupKey = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mlKey :: Lens' MembersList' (Maybe AuthKey)
-mlKey = lens _mlKey (\ s a -> s{_mlKey = a})
-
 -- | Token to specify next page in the list
 mlPageToken :: Lens' MembersList' (Maybe Text)
 mlPageToken
   = lens _mlPageToken (\ s a -> s{_mlPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-mlOAuthToken :: Lens' MembersList' (Maybe OAuthToken)
-mlOAuthToken
-  = lens _mlOAuthToken (\ s a -> s{_mlOAuthToken = a})
 
 -- | Maximum number of results to return. Default is 200
 mlMaxResults :: Lens' MembersList' (Maybe Int32)
 mlMaxResults
   = lens _mlMaxResults (\ s a -> s{_mlMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-mlFields :: Lens' MembersList' (Maybe Text)
-mlFields = lens _mlFields (\ s a -> s{_mlFields = a})
-
-instance GoogleAuth MembersList' where
-        _AuthKey = mlKey . _Just
-        _AuthToken = mlOAuthToken . _Just
-
 instance GoogleRequest MembersList' where
         type Rs MembersList' = Members
-        request = requestWith directoryRequest
-        requestWith rq MembersList'{..}
+        requestClient MembersList'{..}
           = go _mlGroupKey _mlRoles _mlPageToken _mlMaxResults
-              _mlQuotaUser
-              (Just _mlPrettyPrint)
-              _mlUserIP
-              _mlFields
-              _mlKey
-              _mlOAuthToken
               (Just AltJSON)
+              directoryService
           where go
-                  = clientBuild (Proxy :: Proxy MembersListResource) rq
+                  = buildClient (Proxy :: Proxy MembersListResource)
+                      mempty

@@ -32,13 +32,6 @@ module Network.Google.Resource.Content.Accounts.AuthInfo
     , accountsAuthInfo'
     , AccountsAuthInfo'
 
-    -- * Request Lenses
-    , aaiQuotaUser
-    , aaiPrettyPrint
-    , aaiUserIP
-    , aaiKey
-    , aaiOAuthToken
-    , aaiFields
     ) where
 
 import           Network.Google.Prelude
@@ -49,104 +42,27 @@ import           Network.Google.ShoppingContent.Types
 type AccountsAuthInfoResource =
      "accounts" :>
        "authinfo" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] AccountsAuthInfoResponse
+         QueryParam "alt" AltJSON :>
+           Get '[JSON] AccountsAuthInfoResponse
 
 -- | Returns information about the authenticated user.
 --
 -- /See:/ 'accountsAuthInfo'' smart constructor.
-data AccountsAuthInfo' = AccountsAuthInfo'
-    { _aaiQuotaUser   :: !(Maybe Text)
-    , _aaiPrettyPrint :: !Bool
-    , _aaiUserIP      :: !(Maybe Text)
-    , _aaiKey         :: !(Maybe AuthKey)
-    , _aaiOAuthToken  :: !(Maybe OAuthToken)
-    , _aaiFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data AccountsAuthInfo' =
+    AccountsAuthInfo'
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAuthInfo'' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aaiQuotaUser'
---
--- * 'aaiPrettyPrint'
---
--- * 'aaiUserIP'
---
--- * 'aaiKey'
---
--- * 'aaiOAuthToken'
---
--- * 'aaiFields'
 accountsAuthInfo'
     :: AccountsAuthInfo'
-accountsAuthInfo' =
-    AccountsAuthInfo'
-    { _aaiQuotaUser = Nothing
-    , _aaiPrettyPrint = True
-    , _aaiUserIP = Nothing
-    , _aaiKey = Nothing
-    , _aaiOAuthToken = Nothing
-    , _aaiFields = Nothing
-    }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-aaiQuotaUser :: Lens' AccountsAuthInfo' (Maybe Text)
-aaiQuotaUser
-  = lens _aaiQuotaUser (\ s a -> s{_aaiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aaiPrettyPrint :: Lens' AccountsAuthInfo' Bool
-aaiPrettyPrint
-  = lens _aaiPrettyPrint
-      (\ s a -> s{_aaiPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-aaiUserIP :: Lens' AccountsAuthInfo' (Maybe Text)
-aaiUserIP
-  = lens _aaiUserIP (\ s a -> s{_aaiUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aaiKey :: Lens' AccountsAuthInfo' (Maybe AuthKey)
-aaiKey = lens _aaiKey (\ s a -> s{_aaiKey = a})
-
--- | OAuth 2.0 token for the current user.
-aaiOAuthToken :: Lens' AccountsAuthInfo' (Maybe OAuthToken)
-aaiOAuthToken
-  = lens _aaiOAuthToken
-      (\ s a -> s{_aaiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-aaiFields :: Lens' AccountsAuthInfo' (Maybe Text)
-aaiFields
-  = lens _aaiFields (\ s a -> s{_aaiFields = a})
-
-instance GoogleAuth AccountsAuthInfo' where
-        _AuthKey = aaiKey . _Just
-        _AuthToken = aaiOAuthToken . _Just
+accountsAuthInfo' = AccountsAuthInfo'
 
 instance GoogleRequest AccountsAuthInfo' where
         type Rs AccountsAuthInfo' = AccountsAuthInfoResponse
-        request = requestWith shoppingContentRequest
-        requestWith rq AccountsAuthInfo'{..}
-          = go _aaiQuotaUser (Just _aaiPrettyPrint) _aaiUserIP
-              _aaiFields
-              _aaiKey
-              _aaiOAuthToken
-              (Just AltJSON)
+        requestClient AccountsAuthInfo'{..}
+          = go (Just AltJSON) shoppingContentService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsAuthInfoResource)
-                      rq
+                      mempty

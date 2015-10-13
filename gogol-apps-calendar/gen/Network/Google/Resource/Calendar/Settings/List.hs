@@ -34,14 +34,8 @@ module Network.Google.Resource.Calendar.Settings.List
 
     -- * Request Lenses
     , slSyncToken
-    , slQuotaUser
-    , slPrettyPrint
-    , slUserIP
-    , slKey
     , slPageToken
-    , slOAuthToken
     , slMaxResults
-    , slFields
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -56,27 +50,15 @@ type SettingsListResource =
            QueryParam "syncToken" Text :>
              QueryParam "pageToken" Text :>
                QueryParam "maxResults" Int32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Settings
+                 QueryParam "alt" AltJSON :> Get '[JSON] Settings
 
 -- | Returns all user settings for the authenticated user.
 --
 -- /See:/ 'settingsList'' smart constructor.
 data SettingsList' = SettingsList'
-    { _slSyncToken   :: !(Maybe Text)
-    , _slQuotaUser   :: !(Maybe Text)
-    , _slPrettyPrint :: !Bool
-    , _slUserIP      :: !(Maybe Text)
-    , _slKey         :: !(Maybe AuthKey)
-    , _slPageToken   :: !(Maybe Text)
-    , _slOAuthToken  :: !(Maybe OAuthToken)
-    , _slMaxResults  :: !(Maybe Int32)
-    , _slFields      :: !(Maybe Text)
+    { _slSyncToken  :: !(Maybe Text)
+    , _slPageToken  :: !(Maybe Text)
+    , _slMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SettingsList'' with the minimum fields required to make a request.
@@ -85,34 +67,16 @@ data SettingsList' = SettingsList'
 --
 -- * 'slSyncToken'
 --
--- * 'slQuotaUser'
---
--- * 'slPrettyPrint'
---
--- * 'slUserIP'
---
--- * 'slKey'
---
 -- * 'slPageToken'
 --
--- * 'slOAuthToken'
---
 -- * 'slMaxResults'
---
--- * 'slFields'
 settingsList'
     :: SettingsList'
 settingsList' =
     SettingsList'
     { _slSyncToken = Nothing
-    , _slQuotaUser = Nothing
-    , _slPrettyPrint = True
-    , _slUserIP = Nothing
-    , _slKey = Nothing
     , _slPageToken = Nothing
-    , _slOAuthToken = Nothing
     , _slMaxResults = Nothing
-    , _slFields = Nothing
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -126,39 +90,10 @@ slSyncToken :: Lens' SettingsList' (Maybe Text)
 slSyncToken
   = lens _slSyncToken (\ s a -> s{_slSyncToken = a})
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-slQuotaUser :: Lens' SettingsList' (Maybe Text)
-slQuotaUser
-  = lens _slQuotaUser (\ s a -> s{_slQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-slPrettyPrint :: Lens' SettingsList' Bool
-slPrettyPrint
-  = lens _slPrettyPrint
-      (\ s a -> s{_slPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-slUserIP :: Lens' SettingsList' (Maybe Text)
-slUserIP = lens _slUserIP (\ s a -> s{_slUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-slKey :: Lens' SettingsList' (Maybe AuthKey)
-slKey = lens _slKey (\ s a -> s{_slKey = a})
-
 -- | Token specifying which result page to return. Optional.
 slPageToken :: Lens' SettingsList' (Maybe Text)
 slPageToken
   = lens _slPageToken (\ s a -> s{_slPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-slOAuthToken :: Lens' SettingsList' (Maybe OAuthToken)
-slOAuthToken
-  = lens _slOAuthToken (\ s a -> s{_slOAuthToken = a})
 
 -- | Maximum number of entries returned on one result page. By default the
 -- value is 100 entries. The page size can never be larger than 250
@@ -167,26 +102,12 @@ slMaxResults :: Lens' SettingsList' (Maybe Int32)
 slMaxResults
   = lens _slMaxResults (\ s a -> s{_slMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-slFields :: Lens' SettingsList' (Maybe Text)
-slFields = lens _slFields (\ s a -> s{_slFields = a})
-
-instance GoogleAuth SettingsList' where
-        _AuthKey = slKey . _Just
-        _AuthToken = slOAuthToken . _Just
-
 instance GoogleRequest SettingsList' where
         type Rs SettingsList' = Settings
-        request = requestWith appsCalendarRequest
-        requestWith rq SettingsList'{..}
+        requestClient SettingsList'{..}
           = go _slSyncToken _slPageToken _slMaxResults
-              _slQuotaUser
-              (Just _slPrettyPrint)
-              _slUserIP
-              _slFields
-              _slKey
-              _slOAuthToken
               (Just AltJSON)
+              appsCalendarService
           where go
-                  = clientBuild (Proxy :: Proxy SettingsListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy SettingsListResource)
+                      mempty

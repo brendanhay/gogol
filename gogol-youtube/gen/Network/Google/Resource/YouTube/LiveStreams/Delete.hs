@@ -33,15 +33,9 @@ module Network.Google.Resource.YouTube.LiveStreams.Delete
     , LiveStreamsDelete'
 
     -- * Request Lenses
-    , lsdQuotaUser
-    , lsdPrettyPrint
-    , lsdUserIP
     , lsdOnBehalfOfContentOwner
-    , lsdKey
     , lsdOnBehalfOfContentOwnerChannel
     , lsdId
-    , lsdOAuthToken
-    , lsdFields
     ) where
 
 import           Network.Google.Prelude
@@ -54,84 +48,35 @@ type LiveStreamsDeleteResource =
        QueryParam "id" Text :>
          QueryParam "onBehalfOfContentOwner" Text :>
            QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a video stream.
 --
 -- /See:/ 'liveStreamsDelete'' smart constructor.
 data LiveStreamsDelete' = LiveStreamsDelete'
-    { _lsdQuotaUser                     :: !(Maybe Text)
-    , _lsdPrettyPrint                   :: !Bool
-    , _lsdUserIP                        :: !(Maybe Text)
-    , _lsdOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lsdKey                           :: !(Maybe AuthKey)
+    { _lsdOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lsdOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lsdId                            :: !Text
-    , _lsdOAuthToken                    :: !(Maybe OAuthToken)
-    , _lsdFields                        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveStreamsDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lsdQuotaUser'
---
--- * 'lsdPrettyPrint'
---
--- * 'lsdUserIP'
---
 -- * 'lsdOnBehalfOfContentOwner'
---
--- * 'lsdKey'
 --
 -- * 'lsdOnBehalfOfContentOwnerChannel'
 --
 -- * 'lsdId'
---
--- * 'lsdOAuthToken'
---
--- * 'lsdFields'
 liveStreamsDelete'
     :: Text -- ^ 'id'
     -> LiveStreamsDelete'
 liveStreamsDelete' pLsdId_ =
     LiveStreamsDelete'
-    { _lsdQuotaUser = Nothing
-    , _lsdPrettyPrint = True
-    , _lsdUserIP = Nothing
-    , _lsdOnBehalfOfContentOwner = Nothing
-    , _lsdKey = Nothing
+    { _lsdOnBehalfOfContentOwner = Nothing
     , _lsdOnBehalfOfContentOwnerChannel = Nothing
     , _lsdId = pLsdId_
-    , _lsdOAuthToken = Nothing
-    , _lsdFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-lsdQuotaUser :: Lens' LiveStreamsDelete' (Maybe Text)
-lsdQuotaUser
-  = lens _lsdQuotaUser (\ s a -> s{_lsdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-lsdPrettyPrint :: Lens' LiveStreamsDelete' Bool
-lsdPrettyPrint
-  = lens _lsdPrettyPrint
-      (\ s a -> s{_lsdPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-lsdUserIP :: Lens' LiveStreamsDelete' (Maybe Text)
-lsdUserIP
-  = lens _lsdUserIP (\ s a -> s{_lsdUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -147,12 +92,6 @@ lsdOnBehalfOfContentOwner :: Lens' LiveStreamsDelete' (Maybe Text)
 lsdOnBehalfOfContentOwner
   = lens _lsdOnBehalfOfContentOwner
       (\ s a -> s{_lsdOnBehalfOfContentOwner = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-lsdKey :: Lens' LiveStreamsDelete' (Maybe AuthKey)
-lsdKey = lens _lsdKey (\ s a -> s{_lsdKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
 -- This parameter is intended exclusively for YouTube content partners. The
@@ -180,35 +119,14 @@ lsdOnBehalfOfContentOwnerChannel
 lsdId :: Lens' LiveStreamsDelete' Text
 lsdId = lens _lsdId (\ s a -> s{_lsdId = a})
 
--- | OAuth 2.0 token for the current user.
-lsdOAuthToken :: Lens' LiveStreamsDelete' (Maybe OAuthToken)
-lsdOAuthToken
-  = lens _lsdOAuthToken
-      (\ s a -> s{_lsdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-lsdFields :: Lens' LiveStreamsDelete' (Maybe Text)
-lsdFields
-  = lens _lsdFields (\ s a -> s{_lsdFields = a})
-
-instance GoogleAuth LiveStreamsDelete' where
-        _AuthKey = lsdKey . _Just
-        _AuthToken = lsdOAuthToken . _Just
-
 instance GoogleRequest LiveStreamsDelete' where
         type Rs LiveStreamsDelete' = ()
-        request = requestWith youTubeRequest
-        requestWith rq LiveStreamsDelete'{..}
+        requestClient LiveStreamsDelete'{..}
           = go (Just _lsdId) _lsdOnBehalfOfContentOwner
               _lsdOnBehalfOfContentOwnerChannel
-              _lsdQuotaUser
-              (Just _lsdPrettyPrint)
-              _lsdUserIP
-              _lsdFields
-              _lsdKey
-              _lsdOAuthToken
               (Just AltJSON)
+              youTubeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy LiveStreamsDeleteResource)
-                      rq
+                      mempty

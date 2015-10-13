@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference>
 module Network.Google.ShoppingContent
     (
+    -- * Service Configuration
+      shoppingContentService
+
     -- * API Declaration
-      ShoppingContentAPI
+    , ShoppingContentAPI
 
     -- * Resources
 
@@ -495,11 +498,11 @@ module Network.Google.ShoppingContent
     -- ** AccountsCustomBatchRequestEntry
     , AccountsCustomBatchRequestEntry
     , accountsCustomBatchRequestEntry
-    , accMerchantId
-    , accAccount
-    , accAccountId
-    , accMethod
-    , accBatchId
+    , acbrecMerchantId
+    , acbrecAccount
+    , acbrecAccountId
+    , acbrecMethod
+    , acbrecBatchId
 
     -- ** Weight
     , Weight
@@ -695,10 +698,10 @@ module Network.Google.ShoppingContent
     -- ** AccountstatusesCustomBatchRequestEntry
     , AccountstatusesCustomBatchRequestEntry
     , accountstatusesCustomBatchRequestEntry
-    , acbrecMerchantId
-    , acbrecAccountId
-    , acbrecMethod
-    , acbrecBatchId
+    , aaMerchantId
+    , aaAccountId
+    , aaMethod
+    , aaBatchId
 
     -- ** ProductstatusesCustomBatchResponseEntry
     , ProductstatusesCustomBatchResponseEntry
@@ -735,11 +738,11 @@ module Network.Google.ShoppingContent
     -- ** AccountshippingCustomBatchRequestEntry
     , AccountshippingCustomBatchRequestEntry
     , accountshippingCustomBatchRequestEntry
-    , aaMerchantId
-    , aaAccountId
-    , aaMethod
-    , aaAccountShipping
-    , aaBatchId
+    , acccMerchantId
+    , acccAccountId
+    , acccMethod
+    , acccAccountShipping
+    , acccBatchId
 
     -- ** AccountsCustomBatchRequest
     , AccountsCustomBatchRequest
@@ -1166,9 +1169,9 @@ module Network.Google.ShoppingContent
     -- ** AccountstatusesCustomBatchResponseEntry
     , AccountstatusesCustomBatchResponseEntry
     , accountstatusesCustomBatchResponseEntry
-    , acccAccountStatus
-    , acccErrors
-    , acccBatchId
+    , accAccountStatus
+    , accErrors
+    , accBatchId
 
     -- ** InventorySetResponse
     , InventorySetResponse
@@ -1245,24 +1248,24 @@ module Network.Google.ShoppingContent
     -- ** Order
     , Order
     , order
-    , ordStatus
-    , ordMerchantId
-    , ordRefunds
-    , ordKind
-    , ordLineItems
-    , ordShipments
-    , ordNetAmount
-    , ordPlacedDate
-    , ordDeliveryDetails
-    , ordShippingOption
-    , ordMerchantOrderId
-    , ordAcknowledged
-    , ordShippingCostTax
-    , ordCustomer
-    , ordId
-    , ordPaymentMethod
-    , ordPaymentStatus
-    , ordShippingCost
+    , ooStatus
+    , ooMerchantId
+    , ooRefunds
+    , ooKind
+    , ooLineItems
+    , ooShipments
+    , ooNetAmount
+    , ooPlacedDate
+    , ooDeliveryDetails
+    , ooShippingOption
+    , ooMerchantOrderId
+    , ooAcknowledged
+    , ooShippingCostTax
+    , ooCustomer
+    , ooId
+    , ooPaymentMethod
+    , ooPaymentStatus
+    , ooShippingCost
 
     -- ** InventoryCustomBatchResponse
     , InventoryCustomBatchResponse
@@ -1417,8 +1420,8 @@ module Network.Google.ShoppingContent
     -- ** OrdersCustomBatchResponse
     , OrdersCustomBatchResponse
     , ordersCustomBatchResponse
-    , ocbrcEntries
-    , ocbrcKind
+    , ordEntries
+    , ordKind
     ) where
 
 import           Network.Google.Prelude

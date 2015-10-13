@@ -41,8 +41,6 @@ module Network.Google.Resource.Genomics.Readgroupsets.Coveragebuckets.List
 
     -- * Request Lenses
     , rclXgafv
-    , rclQuotaUser
-    , rclPrettyPrint
     , rclReadGroupSetId
     , rclUploadProtocol
     , rclPp
@@ -52,12 +50,9 @@ module Network.Google.Resource.Genomics.Readgroupsets.Coveragebuckets.List
     , rclTargetBucketWidth
     , rclReferenceName
     , rclBearerToken
-    , rclKey
     , rclEnd
     , rclPageToken
-    , rclOAuthToken
     , rclPageSize
-    , rclFields
     , rclCallback
     ) where
 
@@ -84,15 +79,8 @@ type ReadgroupsetsCoveragebucketsListResource =
                                  QueryParam "pageToken" Text :>
                                    QueryParam "pageSize" Int32 :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "quotaUser" Text :>
-                                         QueryParam "prettyPrint" Bool :>
-                                           QueryParam "fields" Text :>
-                                             QueryParam "key" AuthKey :>
-                                               Header "Authorization" OAuthToken
-                                                 :>
-                                                 QueryParam "alt" AltJSON :>
-                                                   Get '[JSON]
-                                                     ListCoverageBucketsResponse
+                                       QueryParam "alt" AltJSON :>
+                                         Get '[JSON] ListCoverageBucketsResponse
 
 -- | Lists fixed width coverage buckets for a read group set, each of which
 -- correspond to a range of a reference sequence. Each bucket summarizes
@@ -106,8 +94,6 @@ type ReadgroupsetsCoveragebucketsListResource =
 -- /See:/ 'readgroupsetsCoveragebucketsList'' smart constructor.
 data ReadgroupsetsCoveragebucketsList' = ReadgroupsetsCoveragebucketsList'
     { _rclXgafv             :: !(Maybe Text)
-    , _rclQuotaUser         :: !(Maybe Text)
-    , _rclPrettyPrint       :: !Bool
     , _rclReadGroupSetId    :: !Text
     , _rclUploadProtocol    :: !(Maybe Text)
     , _rclPp                :: !Bool
@@ -117,12 +103,9 @@ data ReadgroupsetsCoveragebucketsList' = ReadgroupsetsCoveragebucketsList'
     , _rclTargetBucketWidth :: !(Maybe Int64)
     , _rclReferenceName     :: !(Maybe Text)
     , _rclBearerToken       :: !(Maybe Text)
-    , _rclKey               :: !(Maybe AuthKey)
     , _rclEnd               :: !(Maybe Int64)
     , _rclPageToken         :: !(Maybe Text)
-    , _rclOAuthToken        :: !(Maybe OAuthToken)
     , _rclPageSize          :: !(Maybe Int32)
-    , _rclFields            :: !(Maybe Text)
     , _rclCallback          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -131,10 +114,6 @@ data ReadgroupsetsCoveragebucketsList' = ReadgroupsetsCoveragebucketsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rclXgafv'
---
--- * 'rclQuotaUser'
---
--- * 'rclPrettyPrint'
 --
 -- * 'rclReadGroupSetId'
 --
@@ -154,17 +133,11 @@ data ReadgroupsetsCoveragebucketsList' = ReadgroupsetsCoveragebucketsList'
 --
 -- * 'rclBearerToken'
 --
--- * 'rclKey'
---
 -- * 'rclEnd'
 --
 -- * 'rclPageToken'
 --
--- * 'rclOAuthToken'
---
 -- * 'rclPageSize'
---
--- * 'rclFields'
 --
 -- * 'rclCallback'
 readgroupsetsCoveragebucketsList'
@@ -173,8 +146,6 @@ readgroupsetsCoveragebucketsList'
 readgroupsetsCoveragebucketsList' pRclReadGroupSetId_ =
     ReadgroupsetsCoveragebucketsList'
     { _rclXgafv = Nothing
-    , _rclQuotaUser = Nothing
-    , _rclPrettyPrint = True
     , _rclReadGroupSetId = pRclReadGroupSetId_
     , _rclUploadProtocol = Nothing
     , _rclPp = True
@@ -184,31 +155,15 @@ readgroupsetsCoveragebucketsList' pRclReadGroupSetId_ =
     , _rclTargetBucketWidth = Nothing
     , _rclReferenceName = Nothing
     , _rclBearerToken = Nothing
-    , _rclKey = Nothing
     , _rclEnd = Nothing
     , _rclPageToken = Nothing
-    , _rclOAuthToken = Nothing
     , _rclPageSize = Nothing
-    , _rclFields = Nothing
     , _rclCallback = Nothing
     }
 
 -- | V1 error format.
 rclXgafv :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
 rclXgafv = lens _rclXgafv (\ s a -> s{_rclXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-rclQuotaUser :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
-rclQuotaUser
-  = lens _rclQuotaUser (\ s a -> s{_rclQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rclPrettyPrint :: Lens' ReadgroupsetsCoveragebucketsList' Bool
-rclPrettyPrint
-  = lens _rclPrettyPrint
-      (\ s a -> s{_rclPrettyPrint = a})
 
 -- | Required. The ID of the read group set over which coverage is requested.
 rclReadGroupSetId :: Lens' ReadgroupsetsCoveragebucketsList' Text
@@ -267,12 +222,6 @@ rclBearerToken
   = lens _rclBearerToken
       (\ s a -> s{_rclBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rclKey :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe AuthKey)
-rclKey = lens _rclKey (\ s a -> s{_rclKey = a})
-
 -- | The end position of the range on the reference, 0-based exclusive. If
 -- specified, \`referenceName\` must also be specified. If unset or 0,
 -- defaults to the length of the reference.
@@ -286,39 +235,22 @@ rclPageToken :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
 rclPageToken
   = lens _rclPageToken (\ s a -> s{_rclPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-rclOAuthToken :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe OAuthToken)
-rclOAuthToken
-  = lens _rclOAuthToken
-      (\ s a -> s{_rclOAuthToken = a})
-
 -- | The maximum number of results to return in a single page. If
 -- unspecified, defaults to 1024. The maximum value is 2048.
 rclPageSize :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Int32)
 rclPageSize
   = lens _rclPageSize (\ s a -> s{_rclPageSize = a})
 
--- | Selector specifying which fields to include in a partial response.
-rclFields :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
-rclFields
-  = lens _rclFields (\ s a -> s{_rclFields = a})
-
 -- | JSONP
 rclCallback :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
 rclCallback
   = lens _rclCallback (\ s a -> s{_rclCallback = a})
 
-instance GoogleAuth ReadgroupsetsCoveragebucketsList'
-         where
-        _AuthKey = rclKey . _Just
-        _AuthToken = rclOAuthToken . _Just
-
 instance GoogleRequest
          ReadgroupsetsCoveragebucketsList' where
         type Rs ReadgroupsetsCoveragebucketsList' =
              ListCoverageBucketsResponse
-        request = requestWith genomicsRequest
-        requestWith rq ReadgroupsetsCoveragebucketsList'{..}
+        requestClient ReadgroupsetsCoveragebucketsList'{..}
           = go _rclReadGroupSetId _rclXgafv _rclUploadProtocol
               (Just _rclPp)
               _rclAccessToken
@@ -331,14 +263,10 @@ instance GoogleRequest
               _rclPageToken
               _rclPageSize
               _rclCallback
-              _rclQuotaUser
-              (Just _rclPrettyPrint)
-              _rclFields
-              _rclKey
-              _rclOAuthToken
               (Just AltJSON)
+              genomicsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy ReadgroupsetsCoveragebucketsListResource)
-                      rq
+                      mempty

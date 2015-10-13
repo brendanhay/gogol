@@ -35,21 +35,15 @@ module Network.Google.Resource.YouTube.PlayLists.List
     , PlayListsList'
 
     -- * Request Lenses
-    , pllQuotaUser
     , pllPart
-    , pllPrettyPrint
     , pllMine
-    , pllUserIP
     , pllChannelId
     , pllHl
     , pllOnBehalfOfContentOwner
-    , pllKey
     , pllOnBehalfOfContentOwnerChannel
     , pllId
     , pllPageToken
-    , pllOAuthToken
     , pllMaxResults
-    , pllFields
     ) where
 
 import           Network.Google.Prelude
@@ -68,14 +62,8 @@ type PlayListsListResource =
                    QueryParam "id" Text :>
                      QueryParam "pageToken" Text :>
                        QueryParam "maxResults" Word32 :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] PlayListListResponse
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] PlayListListResponse
 
 -- | Returns a collection of playlists that match the API request parameters.
 -- For example, you can retrieve all playlists that the authenticated user
@@ -83,36 +71,24 @@ type PlayListsListResource =
 --
 -- /See:/ 'playListsList'' smart constructor.
 data PlayListsList' = PlayListsList'
-    { _pllQuotaUser                     :: !(Maybe Text)
-    , _pllPart                          :: !Text
-    , _pllPrettyPrint                   :: !Bool
+    { _pllPart                          :: !Text
     , _pllMine                          :: !(Maybe Bool)
-    , _pllUserIP                        :: !(Maybe Text)
     , _pllChannelId                     :: !(Maybe Text)
     , _pllHl                            :: !(Maybe Text)
     , _pllOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _pllKey                           :: !(Maybe AuthKey)
     , _pllOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _pllId                            :: !(Maybe Text)
     , _pllPageToken                     :: !(Maybe Text)
-    , _pllOAuthToken                    :: !(Maybe OAuthToken)
     , _pllMaxResults                    :: !Word32
-    , _pllFields                        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pllQuotaUser'
---
 -- * 'pllPart'
 --
--- * 'pllPrettyPrint'
---
 -- * 'pllMine'
---
--- * 'pllUserIP'
 --
 -- * 'pllChannelId'
 --
@@ -120,47 +96,28 @@ data PlayListsList' = PlayListsList'
 --
 -- * 'pllOnBehalfOfContentOwner'
 --
--- * 'pllKey'
---
 -- * 'pllOnBehalfOfContentOwnerChannel'
 --
 -- * 'pllId'
 --
 -- * 'pllPageToken'
 --
--- * 'pllOAuthToken'
---
 -- * 'pllMaxResults'
---
--- * 'pllFields'
 playListsList'
     :: Text -- ^ 'part'
     -> PlayListsList'
 playListsList' pPllPart_ =
     PlayListsList'
-    { _pllQuotaUser = Nothing
-    , _pllPart = pPllPart_
-    , _pllPrettyPrint = True
+    { _pllPart = pPllPart_
     , _pllMine = Nothing
-    , _pllUserIP = Nothing
     , _pllChannelId = Nothing
     , _pllHl = Nothing
     , _pllOnBehalfOfContentOwner = Nothing
-    , _pllKey = Nothing
     , _pllOnBehalfOfContentOwnerChannel = Nothing
     , _pllId = Nothing
     , _pllPageToken = Nothing
-    , _pllOAuthToken = Nothing
     , _pllMaxResults = 5
-    , _pllFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-pllQuotaUser :: Lens' PlayListsList' (Maybe Text)
-pllQuotaUser
-  = lens _pllQuotaUser (\ s a -> s{_pllQuotaUser = a})
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- playlist resource properties that the API response will include. If the
@@ -172,22 +129,10 @@ pllQuotaUser
 pllPart :: Lens' PlayListsList' Text
 pllPart = lens _pllPart (\ s a -> s{_pllPart = a})
 
--- | Returns response with indentations and line breaks.
-pllPrettyPrint :: Lens' PlayListsList' Bool
-pllPrettyPrint
-  = lens _pllPrettyPrint
-      (\ s a -> s{_pllPrettyPrint = a})
-
 -- | Set this parameter\'s value to true to instruct the API to only return
 -- playlists owned by the authenticated user.
 pllMine :: Lens' PlayListsList' (Maybe Bool)
 pllMine = lens _pllMine (\ s a -> s{_pllMine = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-pllUserIP :: Lens' PlayListsList' (Maybe Text)
-pllUserIP
-  = lens _pllUserIP (\ s a -> s{_pllUserIP = a})
 
 -- | This value indicates that the API should only return the specified
 -- channel\'s playlists.
@@ -214,12 +159,6 @@ pllOnBehalfOfContentOwner :: Lens' PlayListsList' (Maybe Text)
 pllOnBehalfOfContentOwner
   = lens _pllOnBehalfOfContentOwner
       (\ s a -> s{_pllOnBehalfOfContentOwner = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pllKey :: Lens' PlayListsList' (Maybe AuthKey)
-pllKey = lens _pllKey (\ s a -> s{_pllKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
 -- This parameter is intended exclusively for YouTube content partners. The
@@ -256,12 +195,6 @@ pllPageToken :: Lens' PlayListsList' (Maybe Text)
 pllPageToken
   = lens _pllPageToken (\ s a -> s{_pllPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-pllOAuthToken :: Lens' PlayListsList' (Maybe OAuthToken)
-pllOAuthToken
-  = lens _pllOAuthToken
-      (\ s a -> s{_pllOAuthToken = a})
-
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set.
 pllMaxResults :: Lens' PlayListsList' Word32
@@ -269,32 +202,17 @@ pllMaxResults
   = lens _pllMaxResults
       (\ s a -> s{_pllMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-pllFields :: Lens' PlayListsList' (Maybe Text)
-pllFields
-  = lens _pllFields (\ s a -> s{_pllFields = a})
-
-instance GoogleAuth PlayListsList' where
-        _AuthKey = pllKey . _Just
-        _AuthToken = pllOAuthToken . _Just
-
 instance GoogleRequest PlayListsList' where
         type Rs PlayListsList' = PlayListListResponse
-        request = requestWith youTubeRequest
-        requestWith rq PlayListsList'{..}
+        requestClient PlayListsList'{..}
           = go (Just _pllPart) _pllMine _pllChannelId _pllHl
               _pllOnBehalfOfContentOwner
               _pllOnBehalfOfContentOwnerChannel
               _pllId
               _pllPageToken
               (Just _pllMaxResults)
-              _pllQuotaUser
-              (Just _pllPrettyPrint)
-              _pllUserIP
-              _pllFields
-              _pllKey
-              _pllOAuthToken
               (Just AltJSON)
+              youTubeService
           where go
-                  = clientBuild (Proxy :: Proxy PlayListsListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy PlayListsListResource)
+                      mempty

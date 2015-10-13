@@ -38,9 +38,7 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
     , asilPphNames
     , asilXgafv
     , asilStudioNames
-    , asilQuotaUser
     , asilVideoIds
-    , asilPrettyPrint
     , asilUploadProtocol
     , asilPp
     , asilAccessToken
@@ -49,12 +47,9 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
     , asilVideoId
     , asilAccountId
     , asilBearerToken
-    , asilKey
     , asilName
     , asilPageToken
-    , asilOAuthToken
     , asilPageSize
-    , asilFields
     , asilCallback
     ) where
 
@@ -83,16 +78,8 @@ type AccountsStoreInfosListResource =
                                      QueryParam "pageToken" Text :>
                                        QueryParam "pageSize" Int32 :>
                                          QueryParam "callback" Text :>
-                                           QueryParam "quotaUser" Text :>
-                                             QueryParam "prettyPrint" Bool :>
-                                               QueryParam "fields" Text :>
-                                                 QueryParam "key" AuthKey :>
-                                                   Header "Authorization"
-                                                     OAuthToken
-                                                     :>
-                                                     QueryParam "alt" AltJSON :>
-                                                       Get '[JSON]
-                                                         ListStoreInfosResponse
+                                           QueryParam "alt" AltJSON :>
+                                             Get '[JSON] ListStoreInfosResponse
 
 -- | List StoreInfos owned or managed by the partner. See _Authentication and
 -- Authorization rules_ and _List methods rules_ for more information about
@@ -103,9 +90,7 @@ data AccountsStoreInfosList' = AccountsStoreInfosList'
     { _asilPphNames       :: !(Maybe [Text])
     , _asilXgafv          :: !(Maybe Text)
     , _asilStudioNames    :: !(Maybe [Text])
-    , _asilQuotaUser      :: !(Maybe Text)
     , _asilVideoIds       :: !(Maybe [Text])
-    , _asilPrettyPrint    :: !Bool
     , _asilUploadProtocol :: !(Maybe Text)
     , _asilPp             :: !Bool
     , _asilAccessToken    :: !(Maybe Text)
@@ -114,12 +99,9 @@ data AccountsStoreInfosList' = AccountsStoreInfosList'
     , _asilVideoId        :: !(Maybe Text)
     , _asilAccountId      :: !Text
     , _asilBearerToken    :: !(Maybe Text)
-    , _asilKey            :: !(Maybe AuthKey)
     , _asilName           :: !(Maybe Text)
     , _asilPageToken      :: !(Maybe Text)
-    , _asilOAuthToken     :: !(Maybe OAuthToken)
     , _asilPageSize       :: !(Maybe Int32)
-    , _asilFields         :: !(Maybe Text)
     , _asilCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -133,11 +115,7 @@ data AccountsStoreInfosList' = AccountsStoreInfosList'
 --
 -- * 'asilStudioNames'
 --
--- * 'asilQuotaUser'
---
 -- * 'asilVideoIds'
---
--- * 'asilPrettyPrint'
 --
 -- * 'asilUploadProtocol'
 --
@@ -155,17 +133,11 @@ data AccountsStoreInfosList' = AccountsStoreInfosList'
 --
 -- * 'asilBearerToken'
 --
--- * 'asilKey'
---
 -- * 'asilName'
 --
 -- * 'asilPageToken'
 --
--- * 'asilOAuthToken'
---
 -- * 'asilPageSize'
---
--- * 'asilFields'
 --
 -- * 'asilCallback'
 accountsStoreInfosList'
@@ -176,9 +148,7 @@ accountsStoreInfosList' pAsilAccountId_ =
     { _asilPphNames = Nothing
     , _asilXgafv = Nothing
     , _asilStudioNames = Nothing
-    , _asilQuotaUser = Nothing
     , _asilVideoIds = Nothing
-    , _asilPrettyPrint = True
     , _asilUploadProtocol = Nothing
     , _asilPp = True
     , _asilAccessToken = Nothing
@@ -187,12 +157,9 @@ accountsStoreInfosList' pAsilAccountId_ =
     , _asilVideoId = Nothing
     , _asilAccountId = pAsilAccountId_
     , _asilBearerToken = Nothing
-    , _asilKey = Nothing
     , _asilName = Nothing
     , _asilPageToken = Nothing
-    , _asilOAuthToken = Nothing
     , _asilPageSize = Nothing
-    , _asilFields = Nothing
     , _asilCallback = Nothing
     }
 
@@ -216,26 +183,12 @@ asilStudioNames
       . _Default
       . _Coerce
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-asilQuotaUser :: Lens' AccountsStoreInfosList' (Maybe Text)
-asilQuotaUser
-  = lens _asilQuotaUser
-      (\ s a -> s{_asilQuotaUser = a})
-
 -- | Filter StoreInfos that match any of the given \`video_id\`s.
 asilVideoIds :: Lens' AccountsStoreInfosList' [Text]
 asilVideoIds
   = lens _asilVideoIds (\ s a -> s{_asilVideoIds = a})
       . _Default
       . _Coerce
-
--- | Returns response with indentations and line breaks.
-asilPrettyPrint :: Lens' AccountsStoreInfosList' Bool
-asilPrettyPrint
-  = lens _asilPrettyPrint
-      (\ s a -> s{_asilPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 asilUploadProtocol :: Lens' AccountsStoreInfosList' (Maybe Text)
@@ -288,12 +241,6 @@ asilBearerToken
   = lens _asilBearerToken
       (\ s a -> s{_asilBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-asilKey :: Lens' AccountsStoreInfosList' (Maybe AuthKey)
-asilKey = lens _asilKey (\ s a -> s{_asilKey = a})
-
 -- | Filter StoreInfos that match a case-insensitive substring of the default
 -- name.
 asilName :: Lens' AccountsStoreInfosList' (Maybe Text)
@@ -305,36 +252,20 @@ asilPageToken
   = lens _asilPageToken
       (\ s a -> s{_asilPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-asilOAuthToken :: Lens' AccountsStoreInfosList' (Maybe OAuthToken)
-asilOAuthToken
-  = lens _asilOAuthToken
-      (\ s a -> s{_asilOAuthToken = a})
-
 -- | See _List methods rules_ for info about this field.
 asilPageSize :: Lens' AccountsStoreInfosList' (Maybe Int32)
 asilPageSize
   = lens _asilPageSize (\ s a -> s{_asilPageSize = a})
-
--- | Selector specifying which fields to include in a partial response.
-asilFields :: Lens' AccountsStoreInfosList' (Maybe Text)
-asilFields
-  = lens _asilFields (\ s a -> s{_asilFields = a})
 
 -- | JSONP
 asilCallback :: Lens' AccountsStoreInfosList' (Maybe Text)
 asilCallback
   = lens _asilCallback (\ s a -> s{_asilCallback = a})
 
-instance GoogleAuth AccountsStoreInfosList' where
-        _AuthKey = asilKey . _Just
-        _AuthToken = asilOAuthToken . _Just
-
 instance GoogleRequest AccountsStoreInfosList' where
         type Rs AccountsStoreInfosList' =
              ListStoreInfosResponse
-        request = requestWith playMoviesPartnerRequest
-        requestWith rq AccountsStoreInfosList'{..}
+        requestClient AccountsStoreInfosList'{..}
           = go _asilAccountId (_asilPphNames ^. _Default)
               _asilXgafv
               (_asilStudioNames ^. _Default)
@@ -350,13 +281,9 @@ instance GoogleRequest AccountsStoreInfosList' where
               _asilPageToken
               _asilPageSize
               _asilCallback
-              _asilQuotaUser
-              (Just _asilPrettyPrint)
-              _asilFields
-              _asilKey
-              _asilOAuthToken
               (Just AltJSON)
+              playMoviesPartnerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsStoreInfosListResource)
-                      rq
+                      mempty

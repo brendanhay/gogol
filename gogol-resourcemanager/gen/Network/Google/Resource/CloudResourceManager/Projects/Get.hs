@@ -36,17 +36,12 @@ module Network.Google.Resource.CloudResourceManager.Projects.Get
 
     -- * Request Lenses
     , pgXgafv
-    , pgQuotaUser
-    , pgPrettyPrint
     , pgUploadProtocol
     , pgPp
     , pgAccessToken
     , pgUploadType
     , pgBearerToken
-    , pgKey
     , pgProjectId
-    , pgOAuthToken
-    , pgFields
     , pgCallback
     ) where
 
@@ -66,13 +61,7 @@ type ProjectsGetResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] Project
+                         QueryParam "alt" AltJSON :> Get '[JSON] Project
 
 -- | Retrieves the project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`). The caller must have read permissions for
@@ -81,17 +70,12 @@ type ProjectsGetResource =
 -- /See:/ 'projectsGet'' smart constructor.
 data ProjectsGet' = ProjectsGet'
     { _pgXgafv          :: !(Maybe Text)
-    , _pgQuotaUser      :: !(Maybe Text)
-    , _pgPrettyPrint    :: !Bool
     , _pgUploadProtocol :: !(Maybe Text)
     , _pgPp             :: !Bool
     , _pgAccessToken    :: !(Maybe Text)
     , _pgUploadType     :: !(Maybe Text)
     , _pgBearerToken    :: !(Maybe Text)
-    , _pgKey            :: !(Maybe AuthKey)
     , _pgProjectId      :: !Text
-    , _pgOAuthToken     :: !(Maybe OAuthToken)
-    , _pgFields         :: !(Maybe Text)
     , _pgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -100,10 +84,6 @@ data ProjectsGet' = ProjectsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pgXgafv'
---
--- * 'pgQuotaUser'
---
--- * 'pgPrettyPrint'
 --
 -- * 'pgUploadProtocol'
 --
@@ -115,13 +95,7 @@ data ProjectsGet' = ProjectsGet'
 --
 -- * 'pgBearerToken'
 --
--- * 'pgKey'
---
 -- * 'pgProjectId'
---
--- * 'pgOAuthToken'
---
--- * 'pgFields'
 --
 -- * 'pgCallback'
 projectsGet'
@@ -130,36 +104,18 @@ projectsGet'
 projectsGet' pPgProjectId_ =
     ProjectsGet'
     { _pgXgafv = Nothing
-    , _pgQuotaUser = Nothing
-    , _pgPrettyPrint = True
     , _pgUploadProtocol = Nothing
     , _pgPp = True
     , _pgAccessToken = Nothing
     , _pgUploadType = Nothing
     , _pgBearerToken = Nothing
-    , _pgKey = Nothing
     , _pgProjectId = pPgProjectId_
-    , _pgOAuthToken = Nothing
-    , _pgFields = Nothing
     , _pgCallback = Nothing
     }
 
 -- | V1 error format.
 pgXgafv :: Lens' ProjectsGet' (Maybe Text)
 pgXgafv = lens _pgXgafv (\ s a -> s{_pgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pgQuotaUser :: Lens' ProjectsGet' (Maybe Text)
-pgQuotaUser
-  = lens _pgQuotaUser (\ s a -> s{_pgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pgPrettyPrint :: Lens' ProjectsGet' Bool
-pgPrettyPrint
-  = lens _pgPrettyPrint
-      (\ s a -> s{_pgPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 pgUploadProtocol :: Lens' ProjectsGet' (Maybe Text)
@@ -188,50 +144,27 @@ pgBearerToken
   = lens _pgBearerToken
       (\ s a -> s{_pgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pgKey :: Lens' ProjectsGet' (Maybe AuthKey)
-pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
-
 -- | The project ID (for example, \`my-project-123\`). Required.
 pgProjectId :: Lens' ProjectsGet' Text
 pgProjectId
   = lens _pgProjectId (\ s a -> s{_pgProjectId = a})
-
--- | OAuth 2.0 token for the current user.
-pgOAuthToken :: Lens' ProjectsGet' (Maybe OAuthToken)
-pgOAuthToken
-  = lens _pgOAuthToken (\ s a -> s{_pgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pgFields :: Lens' ProjectsGet' (Maybe Text)
-pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
 
 -- | JSONP
 pgCallback :: Lens' ProjectsGet' (Maybe Text)
 pgCallback
   = lens _pgCallback (\ s a -> s{_pgCallback = a})
 
-instance GoogleAuth ProjectsGet' where
-        _AuthKey = pgKey . _Just
-        _AuthToken = pgOAuthToken . _Just
-
 instance GoogleRequest ProjectsGet' where
         type Rs ProjectsGet' = Project
-        request = requestWith resourceManagerRequest
-        requestWith rq ProjectsGet'{..}
+        requestClient ProjectsGet'{..}
           = go _pgProjectId _pgXgafv _pgUploadProtocol
               (Just _pgPp)
               _pgAccessToken
               _pgUploadType
               _pgBearerToken
               _pgCallback
-              _pgQuotaUser
-              (Just _pgPrettyPrint)
-              _pgFields
-              _pgKey
-              _pgOAuthToken
               (Just AltJSON)
+              resourceManagerService
           where go
-                  = clientBuild (Proxy :: Proxy ProjectsGetResource) rq
+                  = buildClient (Proxy :: Proxy ProjectsGetResource)
+                      mempty

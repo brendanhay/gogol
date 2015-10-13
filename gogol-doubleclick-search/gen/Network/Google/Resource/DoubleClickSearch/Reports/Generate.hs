@@ -33,13 +33,7 @@ module Network.Google.Resource.DoubleClickSearch.Reports.Generate
     , ReportsGenerate'
 
     -- * Request Lenses
-    , rQuotaUser
-    , rPrettyPrint
-    , rUserIP
-    , rPayload
-    , rKey
-    , rOAuthToken
-    , rFields
+    , rgPayload
     ) where
 
 import           Network.Google.DoubleClickSearch.Types
@@ -50,110 +44,40 @@ import           Network.Google.Prelude
 type ReportsGenerateResource =
      "reports" :>
        "generate" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] ReportRequest :> Post '[JSON] Report
+         QueryParam "alt" AltJSON :>
+           ReqBody '[JSON] ReportRequest :> Post '[JSON] Report
 
 -- | Generates and returns a report immediately.
 --
 -- /See:/ 'reportsGenerate'' smart constructor.
-data ReportsGenerate' = ReportsGenerate'
-    { _rQuotaUser   :: !(Maybe Text)
-    , _rPrettyPrint :: !Bool
-    , _rUserIP      :: !(Maybe Text)
-    , _rPayload     :: !ReportRequest
-    , _rKey         :: !(Maybe AuthKey)
-    , _rOAuthToken  :: !(Maybe OAuthToken)
-    , _rFields      :: !(Maybe Text)
+newtype ReportsGenerate' = ReportsGenerate'
+    { _rgPayload :: ReportRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGenerate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rQuotaUser'
---
--- * 'rPrettyPrint'
---
--- * 'rUserIP'
---
--- * 'rPayload'
---
--- * 'rKey'
---
--- * 'rOAuthToken'
---
--- * 'rFields'
+-- * 'rgPayload'
 reportsGenerate'
     :: ReportRequest -- ^ 'payload'
     -> ReportsGenerate'
-reportsGenerate' pRPayload_ =
+reportsGenerate' pRgPayload_ =
     ReportsGenerate'
-    { _rQuotaUser = Nothing
-    , _rPrettyPrint = True
-    , _rUserIP = Nothing
-    , _rPayload = pRPayload_
-    , _rKey = Nothing
-    , _rOAuthToken = Nothing
-    , _rFields = Nothing
+    { _rgPayload = pRgPayload_
     }
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-rQuotaUser :: Lens' ReportsGenerate' (Maybe Text)
-rQuotaUser
-  = lens _rQuotaUser (\ s a -> s{_rQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rPrettyPrint :: Lens' ReportsGenerate' Bool
-rPrettyPrint
-  = lens _rPrettyPrint (\ s a -> s{_rPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rUserIP :: Lens' ReportsGenerate' (Maybe Text)
-rUserIP = lens _rUserIP (\ s a -> s{_rUserIP = a})
-
 -- | Multipart request metadata.
-rPayload :: Lens' ReportsGenerate' ReportRequest
-rPayload = lens _rPayload (\ s a -> s{_rPayload = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rKey :: Lens' ReportsGenerate' (Maybe AuthKey)
-rKey = lens _rKey (\ s a -> s{_rKey = a})
-
--- | OAuth 2.0 token for the current user.
-rOAuthToken :: Lens' ReportsGenerate' (Maybe OAuthToken)
-rOAuthToken
-  = lens _rOAuthToken (\ s a -> s{_rOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-rFields :: Lens' ReportsGenerate' (Maybe Text)
-rFields = lens _rFields (\ s a -> s{_rFields = a})
-
-instance GoogleAuth ReportsGenerate' where
-        _AuthKey = rKey . _Just
-        _AuthToken = rOAuthToken . _Just
+rgPayload :: Lens' ReportsGenerate' ReportRequest
+rgPayload
+  = lens _rgPayload (\ s a -> s{_rgPayload = a})
 
 instance GoogleRequest ReportsGenerate' where
         type Rs ReportsGenerate' = Report
-        request = requestWith doubleClickSearchRequest
-        requestWith rq ReportsGenerate'{..}
-          = go _rQuotaUser (Just _rPrettyPrint) _rUserIP
-              _rFields
-              _rKey
-              _rOAuthToken
-              (Just AltJSON)
-              _rPayload
+        requestClient ReportsGenerate'{..}
+          = go (Just AltJSON) _rgPayload
+              doubleClickSearchService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ReportsGenerateResource)
-                      rq
+                      mempty

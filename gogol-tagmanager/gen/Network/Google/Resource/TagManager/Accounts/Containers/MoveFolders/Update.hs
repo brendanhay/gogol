@@ -33,18 +33,12 @@ module Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
     , AccountsContainersMoveFoldersUpdate'
 
     -- * Request Lenses
-    , acmfuQuotaUser
-    , acmfuPrettyPrint
     , acmfuContainerId
     , acmfuTriggerId
-    , acmfuUserIP
     , acmfuVariableId
     , acmfuFolderId
     , acmfuAccountId
     , acmfuTagId
-    , acmfuKey
-    , acmfuOAuthToken
-    , acmfuFields
     ) where
 
 import           Network.Google.Prelude
@@ -62,45 +56,27 @@ type AccountsContainersMoveFoldersUpdateResource =
                  QueryParams "triggerId" Text :>
                    QueryParams "variableId" Text :>
                      QueryParams "tagId" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :> Put '[JSON] ()
+                       QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Moves entities to a GTM Folder.
 --
 -- /See:/ 'accountsContainersMoveFoldersUpdate'' smart constructor.
 data AccountsContainersMoveFoldersUpdate' = AccountsContainersMoveFoldersUpdate'
-    { _acmfuQuotaUser   :: !(Maybe Text)
-    , _acmfuPrettyPrint :: !Bool
-    , _acmfuContainerId :: !Text
+    { _acmfuContainerId :: !Text
     , _acmfuTriggerId   :: !(Maybe [Text])
-    , _acmfuUserIP      :: !(Maybe Text)
     , _acmfuVariableId  :: !(Maybe [Text])
     , _acmfuFolderId    :: !Text
     , _acmfuAccountId   :: !Text
     , _acmfuTagId       :: !(Maybe [Text])
-    , _acmfuKey         :: !(Maybe AuthKey)
-    , _acmfuOAuthToken  :: !(Maybe OAuthToken)
-    , _acmfuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersMoveFoldersUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acmfuQuotaUser'
---
--- * 'acmfuPrettyPrint'
---
 -- * 'acmfuContainerId'
 --
 -- * 'acmfuTriggerId'
---
--- * 'acmfuUserIP'
 --
 -- * 'acmfuVariableId'
 --
@@ -109,12 +85,6 @@ data AccountsContainersMoveFoldersUpdate' = AccountsContainersMoveFoldersUpdate'
 -- * 'acmfuAccountId'
 --
 -- * 'acmfuTagId'
---
--- * 'acmfuKey'
---
--- * 'acmfuOAuthToken'
---
--- * 'acmfuFields'
 accountsContainersMoveFoldersUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'folderId'
@@ -122,33 +92,13 @@ accountsContainersMoveFoldersUpdate'
     -> AccountsContainersMoveFoldersUpdate'
 accountsContainersMoveFoldersUpdate' pAcmfuContainerId_ pAcmfuFolderId_ pAcmfuAccountId_ =
     AccountsContainersMoveFoldersUpdate'
-    { _acmfuQuotaUser = Nothing
-    , _acmfuPrettyPrint = True
-    , _acmfuContainerId = pAcmfuContainerId_
+    { _acmfuContainerId = pAcmfuContainerId_
     , _acmfuTriggerId = Nothing
-    , _acmfuUserIP = Nothing
     , _acmfuVariableId = Nothing
     , _acmfuFolderId = pAcmfuFolderId_
     , _acmfuAccountId = pAcmfuAccountId_
     , _acmfuTagId = Nothing
-    , _acmfuKey = Nothing
-    , _acmfuOAuthToken = Nothing
-    , _acmfuFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-acmfuQuotaUser :: Lens' AccountsContainersMoveFoldersUpdate' (Maybe Text)
-acmfuQuotaUser
-  = lens _acmfuQuotaUser
-      (\ s a -> s{_acmfuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-acmfuPrettyPrint :: Lens' AccountsContainersMoveFoldersUpdate' Bool
-acmfuPrettyPrint
-  = lens _acmfuPrettyPrint
-      (\ s a -> s{_acmfuPrettyPrint = a})
 
 -- | The GTM Container ID.
 acmfuContainerId :: Lens' AccountsContainersMoveFoldersUpdate' Text
@@ -163,12 +113,6 @@ acmfuTriggerId
       (\ s a -> s{_acmfuTriggerId = a})
       . _Default
       . _Coerce
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-acmfuUserIP :: Lens' AccountsContainersMoveFoldersUpdate' (Maybe Text)
-acmfuUserIP
-  = lens _acmfuUserIP (\ s a -> s{_acmfuUserIP = a})
 
 -- | The variables to be moved to the folder.
 acmfuVariableId :: Lens' AccountsContainersMoveFoldersUpdate' [Text]
@@ -197,47 +141,19 @@ acmfuTagId
       _Default
       . _Coerce
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-acmfuKey :: Lens' AccountsContainersMoveFoldersUpdate' (Maybe AuthKey)
-acmfuKey = lens _acmfuKey (\ s a -> s{_acmfuKey = a})
-
--- | OAuth 2.0 token for the current user.
-acmfuOAuthToken :: Lens' AccountsContainersMoveFoldersUpdate' (Maybe OAuthToken)
-acmfuOAuthToken
-  = lens _acmfuOAuthToken
-      (\ s a -> s{_acmfuOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-acmfuFields :: Lens' AccountsContainersMoveFoldersUpdate' (Maybe Text)
-acmfuFields
-  = lens _acmfuFields (\ s a -> s{_acmfuFields = a})
-
-instance GoogleAuth
-         AccountsContainersMoveFoldersUpdate' where
-        _AuthKey = acmfuKey . _Just
-        _AuthToken = acmfuOAuthToken . _Just
-
 instance GoogleRequest
          AccountsContainersMoveFoldersUpdate' where
         type Rs AccountsContainersMoveFoldersUpdate' = ()
-        request = requestWith tagManagerRequest
-        requestWith rq
+        requestClient
           AccountsContainersMoveFoldersUpdate'{..}
           = go _acmfuAccountId _acmfuContainerId _acmfuFolderId
               (_acmfuTriggerId ^. _Default)
               (_acmfuVariableId ^. _Default)
               (_acmfuTagId ^. _Default)
-              _acmfuQuotaUser
-              (Just _acmfuPrettyPrint)
-              _acmfuUserIP
-              _acmfuFields
-              _acmfuKey
-              _acmfuOAuthToken
               (Just AltJSON)
+              tagManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy AccountsContainersMoveFoldersUpdateResource)
-                      rq
+                      mempty

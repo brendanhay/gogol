@@ -36,17 +36,12 @@ module Network.Google.Resource.Genomics.Variantsets.Create
 
     -- * Request Lenses
     , vcXgafv
-    , vcQuotaUser
-    , vcPrettyPrint
     , vcUploadProtocol
     , vcPp
     , vcAccessToken
     , vcUploadType
     , vcPayload
     , vcBearerToken
-    , vcKey
-    , vcOAuthToken
-    , vcFields
     , vcCallback
     ) where
 
@@ -65,14 +60,8 @@ type VariantsetsCreateResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] VariantSet :>
-                                     Post '[JSON] VariantSet
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] VariantSet :> Post '[JSON] VariantSet
 
 -- | Creates a new variant set. The provided variant set must have a valid
 -- \`datasetId\` set - all other fields are optional. Note that the \`id\`
@@ -81,17 +70,12 @@ type VariantsetsCreateResource =
 -- /See:/ 'variantsetsCreate'' smart constructor.
 data VariantsetsCreate' = VariantsetsCreate'
     { _vcXgafv          :: !(Maybe Text)
-    , _vcQuotaUser      :: !(Maybe Text)
-    , _vcPrettyPrint    :: !Bool
     , _vcUploadProtocol :: !(Maybe Text)
     , _vcPp             :: !Bool
     , _vcAccessToken    :: !(Maybe Text)
     , _vcUploadType     :: !(Maybe Text)
     , _vcPayload        :: !VariantSet
     , _vcBearerToken    :: !(Maybe Text)
-    , _vcKey            :: !(Maybe AuthKey)
-    , _vcOAuthToken     :: !(Maybe OAuthToken)
-    , _vcFields         :: !(Maybe Text)
     , _vcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -100,10 +84,6 @@ data VariantsetsCreate' = VariantsetsCreate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'vcXgafv'
---
--- * 'vcQuotaUser'
---
--- * 'vcPrettyPrint'
 --
 -- * 'vcUploadProtocol'
 --
@@ -117,12 +97,6 @@ data VariantsetsCreate' = VariantsetsCreate'
 --
 -- * 'vcBearerToken'
 --
--- * 'vcKey'
---
--- * 'vcOAuthToken'
---
--- * 'vcFields'
---
 -- * 'vcCallback'
 variantsetsCreate'
     :: VariantSet -- ^ 'payload'
@@ -130,36 +104,18 @@ variantsetsCreate'
 variantsetsCreate' pVcPayload_ =
     VariantsetsCreate'
     { _vcXgafv = Nothing
-    , _vcQuotaUser = Nothing
-    , _vcPrettyPrint = True
     , _vcUploadProtocol = Nothing
     , _vcPp = True
     , _vcAccessToken = Nothing
     , _vcUploadType = Nothing
     , _vcPayload = pVcPayload_
     , _vcBearerToken = Nothing
-    , _vcKey = Nothing
-    , _vcOAuthToken = Nothing
-    , _vcFields = Nothing
     , _vcCallback = Nothing
     }
 
 -- | V1 error format.
 vcXgafv :: Lens' VariantsetsCreate' (Maybe Text)
 vcXgafv = lens _vcXgafv (\ s a -> s{_vcXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-vcQuotaUser :: Lens' VariantsetsCreate' (Maybe Text)
-vcQuotaUser
-  = lens _vcQuotaUser (\ s a -> s{_vcQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-vcPrettyPrint :: Lens' VariantsetsCreate' Bool
-vcPrettyPrint
-  = lens _vcPrettyPrint
-      (\ s a -> s{_vcPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 vcUploadProtocol :: Lens' VariantsetsCreate' (Maybe Text)
@@ -193,47 +149,23 @@ vcBearerToken
   = lens _vcBearerToken
       (\ s a -> s{_vcBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-vcKey :: Lens' VariantsetsCreate' (Maybe AuthKey)
-vcKey = lens _vcKey (\ s a -> s{_vcKey = a})
-
--- | OAuth 2.0 token for the current user.
-vcOAuthToken :: Lens' VariantsetsCreate' (Maybe OAuthToken)
-vcOAuthToken
-  = lens _vcOAuthToken (\ s a -> s{_vcOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-vcFields :: Lens' VariantsetsCreate' (Maybe Text)
-vcFields = lens _vcFields (\ s a -> s{_vcFields = a})
-
 -- | JSONP
 vcCallback :: Lens' VariantsetsCreate' (Maybe Text)
 vcCallback
   = lens _vcCallback (\ s a -> s{_vcCallback = a})
 
-instance GoogleAuth VariantsetsCreate' where
-        _AuthKey = vcKey . _Just
-        _AuthToken = vcOAuthToken . _Just
-
 instance GoogleRequest VariantsetsCreate' where
         type Rs VariantsetsCreate' = VariantSet
-        request = requestWith genomicsRequest
-        requestWith rq VariantsetsCreate'{..}
+        requestClient VariantsetsCreate'{..}
           = go _vcXgafv _vcUploadProtocol (Just _vcPp)
               _vcAccessToken
               _vcUploadType
               _vcBearerToken
               _vcCallback
-              _vcQuotaUser
-              (Just _vcPrettyPrint)
-              _vcFields
-              _vcKey
-              _vcOAuthToken
               (Just AltJSON)
               _vcPayload
+              genomicsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy VariantsetsCreateResource)
-                      rq
+                      mempty

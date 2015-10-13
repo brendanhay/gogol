@@ -33,17 +33,11 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Update
     , AccountsContainersTagsUpdate'
 
     -- * Request Lenses
-    , actucQuotaUser
-    , actucPrettyPrint
     , actucContainerId
-    , actucUserIP
     , actucFingerprint
     , actucPayload
     , actucAccountId
     , actucTagId
-    , actucKey
-    , actucOAuthToken
-    , actucFields
     ) where
 
 import           Network.Google.Prelude
@@ -59,43 +53,25 @@ type AccountsContainersTagsUpdateResource =
              "tags" :>
                Capture "tagId" Text :>
                  QueryParam "fingerprint" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Tag :> Put '[JSON] Tag
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Tag :> Put '[JSON] Tag
 
 -- | Updates a GTM Tag.
 --
 -- /See:/ 'accountsContainersTagsUpdate'' smart constructor.
 data AccountsContainersTagsUpdate' = AccountsContainersTagsUpdate'
-    { _actucQuotaUser   :: !(Maybe Text)
-    , _actucPrettyPrint :: !Bool
-    , _actucContainerId :: !Text
-    , _actucUserIP      :: !(Maybe Text)
+    { _actucContainerId :: !Text
     , _actucFingerprint :: !(Maybe Text)
     , _actucPayload     :: !Tag
     , _actucAccountId   :: !Text
     , _actucTagId       :: !Text
-    , _actucKey         :: !(Maybe AuthKey)
-    , _actucOAuthToken  :: !(Maybe OAuthToken)
-    , _actucFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTagsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'actucQuotaUser'
---
--- * 'actucPrettyPrint'
---
 -- * 'actucContainerId'
---
--- * 'actucUserIP'
 --
 -- * 'actucFingerprint'
 --
@@ -104,12 +80,6 @@ data AccountsContainersTagsUpdate' = AccountsContainersTagsUpdate'
 -- * 'actucAccountId'
 --
 -- * 'actucTagId'
---
--- * 'actucKey'
---
--- * 'actucOAuthToken'
---
--- * 'actucFields'
 accountsContainersTagsUpdate'
     :: Text -- ^ 'containerId'
     -> Tag -- ^ 'payload'
@@ -118,44 +88,18 @@ accountsContainersTagsUpdate'
     -> AccountsContainersTagsUpdate'
 accountsContainersTagsUpdate' pActucContainerId_ pActucPayload_ pActucAccountId_ pActucTagId_ =
     AccountsContainersTagsUpdate'
-    { _actucQuotaUser = Nothing
-    , _actucPrettyPrint = True
-    , _actucContainerId = pActucContainerId_
-    , _actucUserIP = Nothing
+    { _actucContainerId = pActucContainerId_
     , _actucFingerprint = Nothing
     , _actucPayload = pActucPayload_
     , _actucAccountId = pActucAccountId_
     , _actucTagId = pActucTagId_
-    , _actucKey = Nothing
-    , _actucOAuthToken = Nothing
-    , _actucFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-actucQuotaUser :: Lens' AccountsContainersTagsUpdate' (Maybe Text)
-actucQuotaUser
-  = lens _actucQuotaUser
-      (\ s a -> s{_actucQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-actucPrettyPrint :: Lens' AccountsContainersTagsUpdate' Bool
-actucPrettyPrint
-  = lens _actucPrettyPrint
-      (\ s a -> s{_actucPrettyPrint = a})
 
 -- | The GTM Container ID.
 actucContainerId :: Lens' AccountsContainersTagsUpdate' Text
 actucContainerId
   = lens _actucContainerId
       (\ s a -> s{_actucContainerId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-actucUserIP :: Lens' AccountsContainersTagsUpdate' (Maybe Text)
-actucUserIP
-  = lens _actucUserIP (\ s a -> s{_actucUserIP = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the tag in
 -- storage.
@@ -180,44 +124,16 @@ actucTagId :: Lens' AccountsContainersTagsUpdate' Text
 actucTagId
   = lens _actucTagId (\ s a -> s{_actucTagId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-actucKey :: Lens' AccountsContainersTagsUpdate' (Maybe AuthKey)
-actucKey = lens _actucKey (\ s a -> s{_actucKey = a})
-
--- | OAuth 2.0 token for the current user.
-actucOAuthToken :: Lens' AccountsContainersTagsUpdate' (Maybe OAuthToken)
-actucOAuthToken
-  = lens _actucOAuthToken
-      (\ s a -> s{_actucOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-actucFields :: Lens' AccountsContainersTagsUpdate' (Maybe Text)
-actucFields
-  = lens _actucFields (\ s a -> s{_actucFields = a})
-
-instance GoogleAuth AccountsContainersTagsUpdate'
-         where
-        _AuthKey = actucKey . _Just
-        _AuthToken = actucOAuthToken . _Just
-
 instance GoogleRequest AccountsContainersTagsUpdate'
          where
         type Rs AccountsContainersTagsUpdate' = Tag
-        request = requestWith tagManagerRequest
-        requestWith rq AccountsContainersTagsUpdate'{..}
+        requestClient AccountsContainersTagsUpdate'{..}
           = go _actucAccountId _actucContainerId _actucTagId
               _actucFingerprint
-              _actucQuotaUser
-              (Just _actucPrettyPrint)
-              _actucUserIP
-              _actucFields
-              _actucKey
-              _actucOAuthToken
               (Just AltJSON)
               _actucPayload
+              tagManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsContainersTagsUpdateResource)
-                      rq
+                      mempty

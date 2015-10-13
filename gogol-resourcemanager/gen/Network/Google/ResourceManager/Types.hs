@@ -15,8 +15,11 @@
 --
 module Network.Google.ResourceManager.Types
     (
-    -- * Service Request
-      resourceManagerRequest
+    -- * Service Configuration
+      resourceManagerService
+
+    -- * OAuth Scopes
+    , cloudPlatformScope
 
     -- * ResourceId
     , ResourceId
@@ -106,8 +109,13 @@ import           Network.Google.ResourceManager.Types.Product
 import           Network.Google.ResourceManager.Types.Sum
 
 -- | Default request referring to version 'v1beta1' of the Google Cloud Resource Manager API. This contains the host and root path used as a starting point for constructing service requests.
-resourceManagerRequest :: RequestBuilder
-resourceManagerRequest
-  = defaultRequest
-      "https://cloudresourcemanager.googleapis.com/"
+resourceManagerService :: Service
+resourceManagerService
+  = defaultService
+      (ServiceId "cloudresourcemanager:v1beta1")
+      "cloudresourcemanager.googleapis.com"
       ""
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: OAuthScope
+cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";

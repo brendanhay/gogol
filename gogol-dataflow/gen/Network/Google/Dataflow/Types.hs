@@ -15,8 +15,12 @@
 --
 module Network.Google.Dataflow.Types
     (
-    -- * Service Request
-      dataflowRequest
+    -- * Service Configuration
+      dataflowService
+
+    -- * OAuth Scopes
+    , userinfoEmailScope
+    , cloudPlatformScope
 
     -- * JobExecutionInfoStages
     , JobExecutionInfoStages
@@ -703,7 +707,16 @@ import           Network.Google.Dataflow.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1b3' of the Google Dataflow API. This contains the host and root path used as a starting point for constructing service requests.
-dataflowRequest :: RequestBuilder
-dataflowRequest
-  = defaultRequest "https://dataflow.googleapis.com/"
+dataflowService :: Service
+dataflowService
+  = defaultService (ServiceId "dataflow:v1b3")
+      "dataflow.googleapis.com"
       ""
+
+-- | View your email address
+userinfoEmailScope :: OAuthScope
+userinfoEmailScope = OAuthScope "https://www.googleapis.com/auth/userinfo.email";
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: OAuthScope
+cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";

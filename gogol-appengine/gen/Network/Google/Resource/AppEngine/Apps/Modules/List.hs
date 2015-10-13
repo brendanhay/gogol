@@ -34,19 +34,14 @@ module Network.Google.Resource.AppEngine.Apps.Modules.List
 
     -- * Request Lenses
     , amlXgafv
-    , amlQuotaUser
-    , amlPrettyPrint
     , amlUploadProtocol
     , amlPp
     , amlAccessToken
     , amlUploadType
     , amlBearerToken
-    , amlKey
     , amlAppsId
     , amlPageToken
-    , amlOAuthToken
     , amlPageSize
-    , amlFields
     , amlCallback
     ) where
 
@@ -69,32 +64,22 @@ type AppsModulesListResource =
                          QueryParam "pageToken" Text :>
                            QueryParam "pageSize" Int32 :>
                              QueryParam "callback" Text :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] ListModulesResponse
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListModulesResponse
 
 -- | Lists all the modules in the application.
 --
 -- /See:/ 'appsModulesList'' smart constructor.
 data AppsModulesList' = AppsModulesList'
     { _amlXgafv          :: !(Maybe Text)
-    , _amlQuotaUser      :: !(Maybe Text)
-    , _amlPrettyPrint    :: !Bool
     , _amlUploadProtocol :: !(Maybe Text)
     , _amlPp             :: !Bool
     , _amlAccessToken    :: !(Maybe Text)
     , _amlUploadType     :: !(Maybe Text)
     , _amlBearerToken    :: !(Maybe Text)
-    , _amlKey            :: !(Maybe AuthKey)
     , _amlAppsId         :: !Text
     , _amlPageToken      :: !(Maybe Text)
-    , _amlOAuthToken     :: !(Maybe OAuthToken)
     , _amlPageSize       :: !(Maybe Int32)
-    , _amlFields         :: !(Maybe Text)
     , _amlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -103,10 +88,6 @@ data AppsModulesList' = AppsModulesList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'amlXgafv'
---
--- * 'amlQuotaUser'
---
--- * 'amlPrettyPrint'
 --
 -- * 'amlUploadProtocol'
 --
@@ -118,17 +99,11 @@ data AppsModulesList' = AppsModulesList'
 --
 -- * 'amlBearerToken'
 --
--- * 'amlKey'
---
 -- * 'amlAppsId'
 --
 -- * 'amlPageToken'
 --
--- * 'amlOAuthToken'
---
 -- * 'amlPageSize'
---
--- * 'amlFields'
 --
 -- * 'amlCallback'
 appsModulesList'
@@ -137,38 +112,20 @@ appsModulesList'
 appsModulesList' pAmlAppsId_ =
     AppsModulesList'
     { _amlXgafv = Nothing
-    , _amlQuotaUser = Nothing
-    , _amlPrettyPrint = True
     , _amlUploadProtocol = Nothing
     , _amlPp = True
     , _amlAccessToken = Nothing
     , _amlUploadType = Nothing
     , _amlBearerToken = Nothing
-    , _amlKey = Nothing
     , _amlAppsId = pAmlAppsId_
     , _amlPageToken = Nothing
-    , _amlOAuthToken = Nothing
     , _amlPageSize = Nothing
-    , _amlFields = Nothing
     , _amlCallback = Nothing
     }
 
 -- | V1 error format.
 amlXgafv :: Lens' AppsModulesList' (Maybe Text)
 amlXgafv = lens _amlXgafv (\ s a -> s{_amlXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-amlQuotaUser :: Lens' AppsModulesList' (Maybe Text)
-amlQuotaUser
-  = lens _amlQuotaUser (\ s a -> s{_amlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-amlPrettyPrint :: Lens' AppsModulesList' Bool
-amlPrettyPrint
-  = lens _amlPrettyPrint
-      (\ s a -> s{_amlPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 amlUploadProtocol :: Lens' AppsModulesList' (Maybe Text)
@@ -198,12 +155,6 @@ amlBearerToken
   = lens _amlBearerToken
       (\ s a -> s{_amlBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-amlKey :: Lens' AppsModulesList' (Maybe AuthKey)
-amlKey = lens _amlKey (\ s a -> s{_amlKey = a})
-
 -- | Part of \`name\`. Name of the resource requested. For example:
 -- \"apps\/myapp\".
 amlAppsId :: Lens' AppsModulesList' Text
@@ -215,35 +166,19 @@ amlPageToken :: Lens' AppsModulesList' (Maybe Text)
 amlPageToken
   = lens _amlPageToken (\ s a -> s{_amlPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-amlOAuthToken :: Lens' AppsModulesList' (Maybe OAuthToken)
-amlOAuthToken
-  = lens _amlOAuthToken
-      (\ s a -> s{_amlOAuthToken = a})
-
 -- | Maximum results to return per page.
 amlPageSize :: Lens' AppsModulesList' (Maybe Int32)
 amlPageSize
   = lens _amlPageSize (\ s a -> s{_amlPageSize = a})
-
--- | Selector specifying which fields to include in a partial response.
-amlFields :: Lens' AppsModulesList' (Maybe Text)
-amlFields
-  = lens _amlFields (\ s a -> s{_amlFields = a})
 
 -- | JSONP
 amlCallback :: Lens' AppsModulesList' (Maybe Text)
 amlCallback
   = lens _amlCallback (\ s a -> s{_amlCallback = a})
 
-instance GoogleAuth AppsModulesList' where
-        _AuthKey = amlKey . _Just
-        _AuthToken = amlOAuthToken . _Just
-
 instance GoogleRequest AppsModulesList' where
         type Rs AppsModulesList' = ListModulesResponse
-        request = requestWith appEngineRequest
-        requestWith rq AppsModulesList'{..}
+        requestClient AppsModulesList'{..}
           = go _amlAppsId _amlXgafv _amlUploadProtocol
               (Just _amlPp)
               _amlAccessToken
@@ -252,13 +187,9 @@ instance GoogleRequest AppsModulesList' where
               _amlPageToken
               _amlPageSize
               _amlCallback
-              _amlQuotaUser
-              (Just _amlPrettyPrint)
-              _amlFields
-              _amlKey
-              _amlOAuthToken
               (Just AltJSON)
+              appEngineService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AppsModulesListResource)
-                      rq
+                      mempty

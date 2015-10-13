@@ -34,16 +34,10 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Insert
     , InstanceGroupManagersInsert'
 
     -- * Request Lenses
-    , igmiQuotaUser
-    , igmiPrettyPrint
     , igmiProject
     , igmiSize
-    , igmiUserIP
     , igmiZone
     , igmiPayload
-    , igmiKey
-    , igmiOAuthToken
-    , igmiFields
     ) where
 
 import           Network.Google.Prelude
@@ -57,56 +51,32 @@ type InstanceGroupManagersInsertResource =
          Capture "zone" Text :>
            "instanceGroupManagers" :>
              QueryParam "size" Int32 :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] InstanceGroupManager :>
-                               Post '[JSON] Operation
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] InstanceGroupManager :>
+                   Post '[JSON] Operation
 
 -- | Creates an instance group manager, as well as the instance group and the
 -- specified number of instances.
 --
 -- /See:/ 'instanceGroupManagersInsert'' smart constructor.
 data InstanceGroupManagersInsert' = InstanceGroupManagersInsert'
-    { _igmiQuotaUser   :: !(Maybe Text)
-    , _igmiPrettyPrint :: !Bool
-    , _igmiProject     :: !Text
-    , _igmiSize        :: !Int32
-    , _igmiUserIP      :: !(Maybe Text)
-    , _igmiZone        :: !Text
-    , _igmiPayload     :: !InstanceGroupManager
-    , _igmiKey         :: !(Maybe AuthKey)
-    , _igmiOAuthToken  :: !(Maybe OAuthToken)
-    , _igmiFields      :: !(Maybe Text)
+    { _igmiProject :: !Text
+    , _igmiSize    :: !Int32
+    , _igmiZone    :: !Text
+    , _igmiPayload :: !InstanceGroupManager
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'igmiQuotaUser'
---
--- * 'igmiPrettyPrint'
---
 -- * 'igmiProject'
 --
 -- * 'igmiSize'
 --
--- * 'igmiUserIP'
---
 -- * 'igmiZone'
 --
 -- * 'igmiPayload'
---
--- * 'igmiKey'
---
--- * 'igmiOAuthToken'
---
--- * 'igmiFields'
 instanceGroupManagersInsert'
     :: Text -- ^ 'project'
     -> Int32 -- ^ 'size'
@@ -115,31 +85,11 @@ instanceGroupManagersInsert'
     -> InstanceGroupManagersInsert'
 instanceGroupManagersInsert' pIgmiProject_ pIgmiSize_ pIgmiZone_ pIgmiPayload_ =
     InstanceGroupManagersInsert'
-    { _igmiQuotaUser = Nothing
-    , _igmiPrettyPrint = True
-    , _igmiProject = pIgmiProject_
+    { _igmiProject = pIgmiProject_
     , _igmiSize = pIgmiSize_
-    , _igmiUserIP = Nothing
     , _igmiZone = pIgmiZone_
     , _igmiPayload = pIgmiPayload_
-    , _igmiKey = Nothing
-    , _igmiOAuthToken = Nothing
-    , _igmiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-igmiQuotaUser :: Lens' InstanceGroupManagersInsert' (Maybe Text)
-igmiQuotaUser
-  = lens _igmiQuotaUser
-      (\ s a -> s{_igmiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-igmiPrettyPrint :: Lens' InstanceGroupManagersInsert' Bool
-igmiPrettyPrint
-  = lens _igmiPrettyPrint
-      (\ s a -> s{_igmiPrettyPrint = a})
 
 -- | The Google Developers Console project name.
 igmiProject :: Lens' InstanceGroupManagersInsert' Text
@@ -150,12 +100,6 @@ igmiProject
 igmiSize :: Lens' InstanceGroupManagersInsert' Int32
 igmiSize = lens _igmiSize (\ s a -> s{_igmiSize = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-igmiUserIP :: Lens' InstanceGroupManagersInsert' (Maybe Text)
-igmiUserIP
-  = lens _igmiUserIP (\ s a -> s{_igmiUserIP = a})
-
 -- | The name of the zone in which the instance group manager resides.
 igmiZone :: Lens' InstanceGroupManagersInsert' Text
 igmiZone = lens _igmiZone (\ s a -> s{_igmiZone = a})
@@ -165,43 +109,15 @@ igmiPayload :: Lens' InstanceGroupManagersInsert' InstanceGroupManager
 igmiPayload
   = lens _igmiPayload (\ s a -> s{_igmiPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-igmiKey :: Lens' InstanceGroupManagersInsert' (Maybe AuthKey)
-igmiKey = lens _igmiKey (\ s a -> s{_igmiKey = a})
-
--- | OAuth 2.0 token for the current user.
-igmiOAuthToken :: Lens' InstanceGroupManagersInsert' (Maybe OAuthToken)
-igmiOAuthToken
-  = lens _igmiOAuthToken
-      (\ s a -> s{_igmiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-igmiFields :: Lens' InstanceGroupManagersInsert' (Maybe Text)
-igmiFields
-  = lens _igmiFields (\ s a -> s{_igmiFields = a})
-
-instance GoogleAuth InstanceGroupManagersInsert'
-         where
-        _AuthKey = igmiKey . _Just
-        _AuthToken = igmiOAuthToken . _Just
-
 instance GoogleRequest InstanceGroupManagersInsert'
          where
         type Rs InstanceGroupManagersInsert' = Operation
-        request = requestWith replicaPoolRequest
-        requestWith rq InstanceGroupManagersInsert'{..}
+        requestClient InstanceGroupManagersInsert'{..}
           = go _igmiProject _igmiZone (Just _igmiSize)
-              _igmiQuotaUser
-              (Just _igmiPrettyPrint)
-              _igmiUserIP
-              _igmiFields
-              _igmiKey
-              _igmiOAuthToken
               (Just AltJSON)
               _igmiPayload
+              replicaPoolService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy InstanceGroupManagersInsertResource)
-                      rq
+                      mempty

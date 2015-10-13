@@ -33,15 +33,9 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Update
     , AccountsAdUnitsUpdate'
 
     -- * Request Lenses
-    , aauuQuotaUser
-    , aauuPrettyPrint
-    , aauuUserIP
     , aauuPayload
     , aauuAdClientId
     , aauuAccountId
-    , aauuKey
-    , aauuOAuthToken
-    , aauuFields
     ) where
 
 import           Network.Google.AdSenseHost.Types
@@ -55,51 +49,27 @@ type AccountsAdUnitsUpdateResource =
          "adclients" :>
            Capture "adClientId" Text :>
              "adunits" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] AdUnit :> Put '[JSON] AdUnit
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] AdUnit :> Put '[JSON] AdUnit
 
 -- | Update the supplied ad unit in the specified publisher AdSense account.
 --
 -- /See:/ 'accountsAdUnitsUpdate'' smart constructor.
 data AccountsAdUnitsUpdate' = AccountsAdUnitsUpdate'
-    { _aauuQuotaUser   :: !(Maybe Text)
-    , _aauuPrettyPrint :: !Bool
-    , _aauuUserIP      :: !(Maybe Text)
-    , _aauuPayload     :: !AdUnit
-    , _aauuAdClientId  :: !Text
-    , _aauuAccountId   :: !Text
-    , _aauuKey         :: !(Maybe AuthKey)
-    , _aauuOAuthToken  :: !(Maybe OAuthToken)
-    , _aauuFields      :: !(Maybe Text)
+    { _aauuPayload    :: !AdUnit
+    , _aauuAdClientId :: !Text
+    , _aauuAccountId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdUnitsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aauuQuotaUser'
---
--- * 'aauuPrettyPrint'
---
--- * 'aauuUserIP'
---
 -- * 'aauuPayload'
 --
 -- * 'aauuAdClientId'
 --
 -- * 'aauuAccountId'
---
--- * 'aauuKey'
---
--- * 'aauuOAuthToken'
---
--- * 'aauuFields'
 accountsAdUnitsUpdate'
     :: AdUnit -- ^ 'payload'
     -> Text -- ^ 'adClientId'
@@ -107,36 +77,10 @@ accountsAdUnitsUpdate'
     -> AccountsAdUnitsUpdate'
 accountsAdUnitsUpdate' pAauuPayload_ pAauuAdClientId_ pAauuAccountId_ =
     AccountsAdUnitsUpdate'
-    { _aauuQuotaUser = Nothing
-    , _aauuPrettyPrint = True
-    , _aauuUserIP = Nothing
-    , _aauuPayload = pAauuPayload_
+    { _aauuPayload = pAauuPayload_
     , _aauuAdClientId = pAauuAdClientId_
     , _aauuAccountId = pAauuAccountId_
-    , _aauuKey = Nothing
-    , _aauuOAuthToken = Nothing
-    , _aauuFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-aauuQuotaUser :: Lens' AccountsAdUnitsUpdate' (Maybe Text)
-aauuQuotaUser
-  = lens _aauuQuotaUser
-      (\ s a -> s{_aauuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aauuPrettyPrint :: Lens' AccountsAdUnitsUpdate' Bool
-aauuPrettyPrint
-  = lens _aauuPrettyPrint
-      (\ s a -> s{_aauuPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-aauuUserIP :: Lens' AccountsAdUnitsUpdate' (Maybe Text)
-aauuUserIP
-  = lens _aauuUserIP (\ s a -> s{_aauuUserIP = a})
 
 -- | Multipart request metadata.
 aauuPayload :: Lens' AccountsAdUnitsUpdate' AdUnit
@@ -155,40 +99,13 @@ aauuAccountId
   = lens _aauuAccountId
       (\ s a -> s{_aauuAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aauuKey :: Lens' AccountsAdUnitsUpdate' (Maybe AuthKey)
-aauuKey = lens _aauuKey (\ s a -> s{_aauuKey = a})
-
--- | OAuth 2.0 token for the current user.
-aauuOAuthToken :: Lens' AccountsAdUnitsUpdate' (Maybe OAuthToken)
-aauuOAuthToken
-  = lens _aauuOAuthToken
-      (\ s a -> s{_aauuOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-aauuFields :: Lens' AccountsAdUnitsUpdate' (Maybe Text)
-aauuFields
-  = lens _aauuFields (\ s a -> s{_aauuFields = a})
-
-instance GoogleAuth AccountsAdUnitsUpdate' where
-        _AuthKey = aauuKey . _Just
-        _AuthToken = aauuOAuthToken . _Just
-
 instance GoogleRequest AccountsAdUnitsUpdate' where
         type Rs AccountsAdUnitsUpdate' = AdUnit
-        request = requestWith adSenseHostRequest
-        requestWith rq AccountsAdUnitsUpdate'{..}
-          = go _aauuAccountId _aauuAdClientId _aauuQuotaUser
-              (Just _aauuPrettyPrint)
-              _aauuUserIP
-              _aauuFields
-              _aauuKey
-              _aauuOAuthToken
-              (Just AltJSON)
+        requestClient AccountsAdUnitsUpdate'{..}
+          = go _aauuAccountId _aauuAdClientId (Just AltJSON)
               _aauuPayload
+              adSenseHostService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsAdUnitsUpdateResource)
-                      rq
+                      mempty

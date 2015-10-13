@@ -20,8 +20,11 @@
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference>
 module Network.Google.AdExchangeBuyer
     (
+    -- * Service Configuration
+      adExchangeBuyerService
+
     -- * API Declaration
-      AdExchangeBuyerAPI
+    , AdExchangeBuyerAPI
 
     -- * Resources
 
@@ -959,26 +962,26 @@ module Network.Google.AdExchangeBuyer
     -- ** MarketplaceOrder
     , MarketplaceOrder
     , marketplaceOrder
-    , marBuyerPrivateData
-    , marIsSetupComplete
-    , marBuyerContacts
-    , marKind
-    , marOriginatorRole
-    , marRevisionNumber
-    , marBilledBuyer
-    , marIsRenegotiating
-    , marHasSellerSignedOff
-    , marSeller
-    , marOrderState
-    , marName
-    , marSellerContacts
-    , marLastUpdaterRole
-    , marLabels
-    , marRevisionTimeMs
-    , marOrderId
-    , marLastUpdaterOrCommentorRole
-    , marHasBuyerSignedOff
-    , marBuyer
+    , mBuyerPrivateData
+    , mIsSetupComplete
+    , mBuyerContacts
+    , mKind
+    , mOriginatorRole
+    , mRevisionNumber
+    , mBilledBuyer
+    , mIsRenegotiating
+    , mHasSellerSignedOff
+    , mSeller
+    , mOrderState
+    , mName
+    , mSellerContacts
+    , mLastUpdaterRole
+    , mLabels
+    , mRevisionTimeMs
+    , mOrderId
+    , mLastUpdaterOrCommentorRole
+    , mHasBuyerSignedOff
+    , mBuyer
 
     -- ** AddOrderDealsRequest
     , AddOrderDealsRequest

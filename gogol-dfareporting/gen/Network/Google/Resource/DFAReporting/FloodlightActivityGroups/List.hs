@@ -33,22 +33,16 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List
     , FloodlightActivityGroupsList'
 
     -- * Request Lenses
-    , faglQuotaUser
-    , faglPrettyPrint
     , faglFloodlightConfigurationId
-    , faglUserIP
     , faglAdvertiserId
     , faglSearchString
     , faglIds
     , faglProFileId
     , faglSortOrder
-    , faglKey
     , faglPageToken
     , faglSortField
     , faglType
-    , faglOAuthToken
     , faglMaxResults
-    , faglFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -73,49 +67,30 @@ type FloodlightActivityGroupsListResource =
                          :>
                          QueryParam "type" FloodlightActivityGroupsListType :>
                            QueryParam "maxResults" Int32 :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "userIp" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON]
-                                             FloodlightActivityGroupsListResponse
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] FloodlightActivityGroupsListResponse
 
 -- | Retrieves a list of floodlight activity groups, possibly filtered.
 --
 -- /See:/ 'floodlightActivityGroupsList'' smart constructor.
 data FloodlightActivityGroupsList' = FloodlightActivityGroupsList'
-    { _faglQuotaUser                 :: !(Maybe Text)
-    , _faglPrettyPrint               :: !Bool
-    , _faglFloodlightConfigurationId :: !(Maybe Int64)
-    , _faglUserIP                    :: !(Maybe Text)
+    { _faglFloodlightConfigurationId :: !(Maybe Int64)
     , _faglAdvertiserId              :: !(Maybe Int64)
     , _faglSearchString              :: !(Maybe Text)
     , _faglIds                       :: !(Maybe [Int64])
     , _faglProFileId                 :: !Int64
     , _faglSortOrder                 :: !(Maybe FloodlightActivityGroupsListSortOrder)
-    , _faglKey                       :: !(Maybe AuthKey)
     , _faglPageToken                 :: !(Maybe Text)
     , _faglSortField                 :: !(Maybe FloodlightActivityGroupsListSortField)
     , _faglType                      :: !(Maybe FloodlightActivityGroupsListType)
-    , _faglOAuthToken                :: !(Maybe OAuthToken)
     , _faglMaxResults                :: !(Maybe Int32)
-    , _faglFields                    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'faglQuotaUser'
---
--- * 'faglPrettyPrint'
---
 -- * 'faglFloodlightConfigurationId'
---
--- * 'faglUserIP'
 --
 -- * 'faglAdvertiserId'
 --
@@ -127,55 +102,29 @@ data FloodlightActivityGroupsList' = FloodlightActivityGroupsList'
 --
 -- * 'faglSortOrder'
 --
--- * 'faglKey'
---
 -- * 'faglPageToken'
 --
 -- * 'faglSortField'
 --
 -- * 'faglType'
 --
--- * 'faglOAuthToken'
---
 -- * 'faglMaxResults'
---
--- * 'faglFields'
 floodlightActivityGroupsList'
     :: Int64 -- ^ 'profileId'
     -> FloodlightActivityGroupsList'
 floodlightActivityGroupsList' pFaglProFileId_ =
     FloodlightActivityGroupsList'
-    { _faglQuotaUser = Nothing
-    , _faglPrettyPrint = True
-    , _faglFloodlightConfigurationId = Nothing
-    , _faglUserIP = Nothing
+    { _faglFloodlightConfigurationId = Nothing
     , _faglAdvertiserId = Nothing
     , _faglSearchString = Nothing
     , _faglIds = Nothing
     , _faglProFileId = pFaglProFileId_
     , _faglSortOrder = Nothing
-    , _faglKey = Nothing
     , _faglPageToken = Nothing
     , _faglSortField = Nothing
     , _faglType = Nothing
-    , _faglOAuthToken = Nothing
     , _faglMaxResults = Nothing
-    , _faglFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-faglQuotaUser :: Lens' FloodlightActivityGroupsList' (Maybe Text)
-faglQuotaUser
-  = lens _faglQuotaUser
-      (\ s a -> s{_faglQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-faglPrettyPrint :: Lens' FloodlightActivityGroupsList' Bool
-faglPrettyPrint
-  = lens _faglPrettyPrint
-      (\ s a -> s{_faglPrettyPrint = a})
 
 -- | Select only floodlight activity groups with the specified floodlight
 -- configuration ID. Must specify either advertiserId, or
@@ -184,12 +133,6 @@ faglFloodlightConfigurationId :: Lens' FloodlightActivityGroupsList' (Maybe Int6
 faglFloodlightConfigurationId
   = lens _faglFloodlightConfigurationId
       (\ s a -> s{_faglFloodlightConfigurationId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-faglUserIP :: Lens' FloodlightActivityGroupsList' (Maybe Text)
-faglUserIP
-  = lens _faglUserIP (\ s a -> s{_faglUserIP = a})
 
 -- | Select only floodlight activity groups with the specified advertiser ID.
 -- Must specify either advertiserId or floodlightConfigurationId for a
@@ -233,12 +176,6 @@ faglSortOrder
   = lens _faglSortOrder
       (\ s a -> s{_faglSortOrder = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-faglKey :: Lens' FloodlightActivityGroupsList' (Maybe AuthKey)
-faglKey = lens _faglKey (\ s a -> s{_faglKey = a})
-
 -- | Value of the nextPageToken from the previous result page.
 faglPageToken :: Lens' FloodlightActivityGroupsList' (Maybe Text)
 faglPageToken
@@ -256,34 +193,17 @@ faglSortField
 faglType :: Lens' FloodlightActivityGroupsList' (Maybe FloodlightActivityGroupsListType)
 faglType = lens _faglType (\ s a -> s{_faglType = a})
 
--- | OAuth 2.0 token for the current user.
-faglOAuthToken :: Lens' FloodlightActivityGroupsList' (Maybe OAuthToken)
-faglOAuthToken
-  = lens _faglOAuthToken
-      (\ s a -> s{_faglOAuthToken = a})
-
 -- | Maximum number of results to return.
 faglMaxResults :: Lens' FloodlightActivityGroupsList' (Maybe Int32)
 faglMaxResults
   = lens _faglMaxResults
       (\ s a -> s{_faglMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-faglFields :: Lens' FloodlightActivityGroupsList' (Maybe Text)
-faglFields
-  = lens _faglFields (\ s a -> s{_faglFields = a})
-
-instance GoogleAuth FloodlightActivityGroupsList'
-         where
-        _AuthKey = faglKey . _Just
-        _AuthToken = faglOAuthToken . _Just
-
 instance GoogleRequest FloodlightActivityGroupsList'
          where
         type Rs FloodlightActivityGroupsList' =
              FloodlightActivityGroupsListResponse
-        request = requestWith dFAReportingRequest
-        requestWith rq FloodlightActivityGroupsList'{..}
+        requestClient FloodlightActivityGroupsList'{..}
           = go _faglProFileId _faglFloodlightConfigurationId
               _faglAdvertiserId
               _faglSearchString
@@ -293,14 +213,9 @@ instance GoogleRequest FloodlightActivityGroupsList'
               _faglSortField
               _faglType
               _faglMaxResults
-              _faglQuotaUser
-              (Just _faglPrettyPrint)
-              _faglUserIP
-              _faglFields
-              _faglKey
-              _faglOAuthToken
               (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy FloodlightActivityGroupsListResource)
-                      rq
+                      mempty

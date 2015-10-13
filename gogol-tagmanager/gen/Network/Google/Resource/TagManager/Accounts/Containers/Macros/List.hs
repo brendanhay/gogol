@@ -33,14 +33,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Macros.List
     , AccountsContainersMacrosList'
 
     -- * Request Lenses
-    , acmlQuotaUser
-    , acmlPrettyPrint
     , acmlContainerId
-    , acmlUserIP
     , acmlAccountId
-    , acmlKey
-    , acmlOAuthToken
-    , acmlFields
     ) where
 
 import           Network.Google.Prelude
@@ -54,77 +48,33 @@ type AccountsContainersMacrosListResource =
          "containers" :>
            Capture "containerId" Text :>
              "macros" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ListMacrosResponse
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] ListMacrosResponse
 
 -- | Lists all GTM Macros of a Container.
 --
 -- /See:/ 'accountsContainersMacrosList'' smart constructor.
 data AccountsContainersMacrosList' = AccountsContainersMacrosList'
-    { _acmlQuotaUser   :: !(Maybe Text)
-    , _acmlPrettyPrint :: !Bool
-    , _acmlContainerId :: !Text
-    , _acmlUserIP      :: !(Maybe Text)
+    { _acmlContainerId :: !Text
     , _acmlAccountId   :: !Text
-    , _acmlKey         :: !(Maybe AuthKey)
-    , _acmlOAuthToken  :: !(Maybe OAuthToken)
-    , _acmlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersMacrosList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acmlQuotaUser'
---
--- * 'acmlPrettyPrint'
---
 -- * 'acmlContainerId'
 --
--- * 'acmlUserIP'
---
 -- * 'acmlAccountId'
---
--- * 'acmlKey'
---
--- * 'acmlOAuthToken'
---
--- * 'acmlFields'
 accountsContainersMacrosList'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
     -> AccountsContainersMacrosList'
 accountsContainersMacrosList' pAcmlContainerId_ pAcmlAccountId_ =
     AccountsContainersMacrosList'
-    { _acmlQuotaUser = Nothing
-    , _acmlPrettyPrint = True
-    , _acmlContainerId = pAcmlContainerId_
-    , _acmlUserIP = Nothing
+    { _acmlContainerId = pAcmlContainerId_
     , _acmlAccountId = pAcmlAccountId_
-    , _acmlKey = Nothing
-    , _acmlOAuthToken = Nothing
-    , _acmlFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-acmlQuotaUser :: Lens' AccountsContainersMacrosList' (Maybe Text)
-acmlQuotaUser
-  = lens _acmlQuotaUser
-      (\ s a -> s{_acmlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-acmlPrettyPrint :: Lens' AccountsContainersMacrosList' Bool
-acmlPrettyPrint
-  = lens _acmlPrettyPrint
-      (\ s a -> s{_acmlPrettyPrint = a})
 
 -- | The GTM Container ID.
 acmlContainerId :: Lens' AccountsContainersMacrosList' Text
@@ -132,54 +82,20 @@ acmlContainerId
   = lens _acmlContainerId
       (\ s a -> s{_acmlContainerId = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-acmlUserIP :: Lens' AccountsContainersMacrosList' (Maybe Text)
-acmlUserIP
-  = lens _acmlUserIP (\ s a -> s{_acmlUserIP = a})
-
 -- | The GTM Account ID.
 acmlAccountId :: Lens' AccountsContainersMacrosList' Text
 acmlAccountId
   = lens _acmlAccountId
       (\ s a -> s{_acmlAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-acmlKey :: Lens' AccountsContainersMacrosList' (Maybe AuthKey)
-acmlKey = lens _acmlKey (\ s a -> s{_acmlKey = a})
-
--- | OAuth 2.0 token for the current user.
-acmlOAuthToken :: Lens' AccountsContainersMacrosList' (Maybe OAuthToken)
-acmlOAuthToken
-  = lens _acmlOAuthToken
-      (\ s a -> s{_acmlOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-acmlFields :: Lens' AccountsContainersMacrosList' (Maybe Text)
-acmlFields
-  = lens _acmlFields (\ s a -> s{_acmlFields = a})
-
-instance GoogleAuth AccountsContainersMacrosList'
-         where
-        _AuthKey = acmlKey . _Just
-        _AuthToken = acmlOAuthToken . _Just
-
 instance GoogleRequest AccountsContainersMacrosList'
          where
         type Rs AccountsContainersMacrosList' =
              ListMacrosResponse
-        request = requestWith tagManagerRequest
-        requestWith rq AccountsContainersMacrosList'{..}
-          = go _acmlAccountId _acmlContainerId _acmlQuotaUser
-              (Just _acmlPrettyPrint)
-              _acmlUserIP
-              _acmlFields
-              _acmlKey
-              _acmlOAuthToken
-              (Just AltJSON)
+        requestClient AccountsContainersMacrosList'{..}
+          = go _acmlAccountId _acmlContainerId (Just AltJSON)
+              tagManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsContainersMacrosListResource)
-                      rq
+                      mempty

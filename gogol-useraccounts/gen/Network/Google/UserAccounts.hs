@@ -18,8 +18,11 @@
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference>
 module Network.Google.UserAccounts
     (
+    -- * Service Configuration
+      userAccountsService
+
     -- * API Declaration
-      UserAccountsAPI
+    , UserAccountsAPI
 
     -- * Resources
 

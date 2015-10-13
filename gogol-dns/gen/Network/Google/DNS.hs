@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference>
 module Network.Google.DNS
     (
+    -- * Service Configuration
+      dNSService
+
     -- * API Declaration
-      DNSAPI
+    , DNSAPI
 
     -- * Resources
 

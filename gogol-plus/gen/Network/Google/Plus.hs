@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference>
 module Network.Google.Plus
     (
+    -- * Service Configuration
+      plusService
+
     -- * API Declaration
-      PlusAPI
+    , PlusAPI
 
     -- * Resources
 

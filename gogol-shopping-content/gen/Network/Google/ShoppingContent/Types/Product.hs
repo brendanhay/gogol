@@ -2619,63 +2619,66 @@ instance ToJSON OrdersGetTestOrderTemplateResponse
 --
 -- /See:/ 'accountsCustomBatchRequestEntry' smart constructor.
 data AccountsCustomBatchRequestEntry = AccountsCustomBatchRequestEntry
-    { _accMerchantId :: !(Maybe Word64)
-    , _accAccount    :: !(Maybe Account)
-    , _accAccountId  :: !(Maybe Word64)
-    , _accMethod     :: !(Maybe Text)
-    , _accBatchId    :: !(Maybe Word32)
+    { _acbrecMerchantId :: !(Maybe Word64)
+    , _acbrecAccount    :: !(Maybe Account)
+    , _acbrecAccountId  :: !(Maybe Word64)
+    , _acbrecMethod     :: !(Maybe Text)
+    , _acbrecBatchId    :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'accMerchantId'
+-- * 'acbrecMerchantId'
 --
--- * 'accAccount'
+-- * 'acbrecAccount'
 --
--- * 'accAccountId'
+-- * 'acbrecAccountId'
 --
--- * 'accMethod'
+-- * 'acbrecMethod'
 --
--- * 'accBatchId'
+-- * 'acbrecBatchId'
 accountsCustomBatchRequestEntry
     :: AccountsCustomBatchRequestEntry
 accountsCustomBatchRequestEntry =
     AccountsCustomBatchRequestEntry
-    { _accMerchantId = Nothing
-    , _accAccount = Nothing
-    , _accAccountId = Nothing
-    , _accMethod = Nothing
-    , _accBatchId = Nothing
+    { _acbrecMerchantId = Nothing
+    , _acbrecAccount = Nothing
+    , _acbrecAccountId = Nothing
+    , _acbrecMethod = Nothing
+    , _acbrecBatchId = Nothing
     }
 
 -- | The ID of the managing account.
-accMerchantId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word64)
-accMerchantId
-  = lens _accMerchantId
-      (\ s a -> s{_accMerchantId = a})
+acbrecMerchantId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word64)
+acbrecMerchantId
+  = lens _acbrecMerchantId
+      (\ s a -> s{_acbrecMerchantId = a})
 
 -- | The account to create or update. Only defined if the method is insert or
 -- update.
-accAccount :: Lens' AccountsCustomBatchRequestEntry (Maybe Account)
-accAccount
-  = lens _accAccount (\ s a -> s{_accAccount = a})
+acbrecAccount :: Lens' AccountsCustomBatchRequestEntry (Maybe Account)
+acbrecAccount
+  = lens _acbrecAccount
+      (\ s a -> s{_acbrecAccount = a})
 
 -- | The ID of the account to get or delete. Only defined if the method is
 -- get or delete.
-accAccountId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word64)
-accAccountId
-  = lens _accAccountId (\ s a -> s{_accAccountId = a})
+acbrecAccountId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word64)
+acbrecAccountId
+  = lens _acbrecAccountId
+      (\ s a -> s{_acbrecAccountId = a})
 
-accMethod :: Lens' AccountsCustomBatchRequestEntry (Maybe Text)
-accMethod
-  = lens _accMethod (\ s a -> s{_accMethod = a})
+acbrecMethod :: Lens' AccountsCustomBatchRequestEntry (Maybe Text)
+acbrecMethod
+  = lens _acbrecMethod (\ s a -> s{_acbrecMethod = a})
 
 -- | An entry ID, unique within the batch request.
-accBatchId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word32)
-accBatchId
-  = lens _accBatchId (\ s a -> s{_accBatchId = a})
+acbrecBatchId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word32)
+acbrecBatchId
+  = lens _acbrecBatchId
+      (\ s a -> s{_acbrecBatchId = a})
 
 instance FromJSON AccountsCustomBatchRequestEntry
          where
@@ -2692,11 +2695,11 @@ instance ToJSON AccountsCustomBatchRequestEntry where
         toJSON AccountsCustomBatchRequestEntry{..}
           = object
               (catMaybes
-                 [("merchantId" .=) <$> _accMerchantId,
-                  ("account" .=) <$> _accAccount,
-                  ("accountId" .=) <$> _accAccountId,
-                  ("method" .=) <$> _accMethod,
-                  ("batchId" .=) <$> _accBatchId])
+                 [("merchantId" .=) <$> _acbrecMerchantId,
+                  ("account" .=) <$> _acbrecAccount,
+                  ("accountId" .=) <$> _acbrecAccountId,
+                  ("method" .=) <$> _acbrecMethod,
+                  ("batchId" .=) <$> _acbrecBatchId])
 
 --
 -- /See:/ 'weight' smart constructor.
@@ -4417,55 +4420,51 @@ instance ToJSON ProductShippingWeight where
 --
 -- /See:/ 'accountstatusesCustomBatchRequestEntry' smart constructor.
 data AccountstatusesCustomBatchRequestEntry = AccountstatusesCustomBatchRequestEntry
-    { _acbrecMerchantId :: !(Maybe Word64)
-    , _acbrecAccountId  :: !(Maybe Word64)
-    , _acbrecMethod     :: !(Maybe Text)
-    , _acbrecBatchId    :: !(Maybe Word32)
+    { _aaMerchantId :: !(Maybe Word64)
+    , _aaAccountId  :: !(Maybe Word64)
+    , _aaMethod     :: !(Maybe Text)
+    , _aaBatchId    :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acbrecMerchantId'
+-- * 'aaMerchantId'
 --
--- * 'acbrecAccountId'
+-- * 'aaAccountId'
 --
--- * 'acbrecMethod'
+-- * 'aaMethod'
 --
--- * 'acbrecBatchId'
+-- * 'aaBatchId'
 accountstatusesCustomBatchRequestEntry
     :: AccountstatusesCustomBatchRequestEntry
 accountstatusesCustomBatchRequestEntry =
     AccountstatusesCustomBatchRequestEntry
-    { _acbrecMerchantId = Nothing
-    , _acbrecAccountId = Nothing
-    , _acbrecMethod = Nothing
-    , _acbrecBatchId = Nothing
+    { _aaMerchantId = Nothing
+    , _aaAccountId = Nothing
+    , _aaMethod = Nothing
+    , _aaBatchId = Nothing
     }
 
 -- | The ID of the managing account.
-acbrecMerchantId :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Word64)
-acbrecMerchantId
-  = lens _acbrecMerchantId
-      (\ s a -> s{_acbrecMerchantId = a})
+aaMerchantId :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Word64)
+aaMerchantId
+  = lens _aaMerchantId (\ s a -> s{_aaMerchantId = a})
 
 -- | The ID of the (sub-)account whose status to get.
-acbrecAccountId :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Word64)
-acbrecAccountId
-  = lens _acbrecAccountId
-      (\ s a -> s{_acbrecAccountId = a})
+aaAccountId :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Word64)
+aaAccountId
+  = lens _aaAccountId (\ s a -> s{_aaAccountId = a})
 
 -- | The method (get).
-acbrecMethod :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Text)
-acbrecMethod
-  = lens _acbrecMethod (\ s a -> s{_acbrecMethod = a})
+aaMethod :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Text)
+aaMethod = lens _aaMethod (\ s a -> s{_aaMethod = a})
 
 -- | An entry ID, unique within the batch request.
-acbrecBatchId :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Word32)
-acbrecBatchId
-  = lens _acbrecBatchId
-      (\ s a -> s{_acbrecBatchId = a})
+aaBatchId :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Word32)
+aaBatchId
+  = lens _aaBatchId (\ s a -> s{_aaBatchId = a})
 
 instance FromJSON
          AccountstatusesCustomBatchRequestEntry where
@@ -4482,10 +4481,10 @@ instance ToJSON
         toJSON AccountstatusesCustomBatchRequestEntry{..}
           = object
               (catMaybes
-                 [("merchantId" .=) <$> _acbrecMerchantId,
-                  ("accountId" .=) <$> _acbrecAccountId,
-                  ("method" .=) <$> _acbrecMethod,
-                  ("batchId" .=) <$> _acbrecBatchId])
+                 [("merchantId" .=) <$> _aaMerchantId,
+                  ("accountId" .=) <$> _aaAccountId,
+                  ("method" .=) <$> _aaMethod,
+                  ("batchId" .=) <$> _aaBatchId])
 
 -- | A batch entry encoding a single non-batch productstatuses response.
 --
@@ -4785,62 +4784,65 @@ instance ToJSON ProductShipping where
 --
 -- /See:/ 'accountshippingCustomBatchRequestEntry' smart constructor.
 data AccountshippingCustomBatchRequestEntry = AccountshippingCustomBatchRequestEntry
-    { _aaMerchantId      :: !(Maybe Word64)
-    , _aaAccountId       :: !(Maybe Word64)
-    , _aaMethod          :: !(Maybe Text)
-    , _aaAccountShipping :: !(Maybe AccountShipping)
-    , _aaBatchId         :: !(Maybe Word32)
+    { _acccMerchantId      :: !(Maybe Word64)
+    , _acccAccountId       :: !(Maybe Word64)
+    , _acccMethod          :: !(Maybe Text)
+    , _acccAccountShipping :: !(Maybe AccountShipping)
+    , _acccBatchId         :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountshippingCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aaMerchantId'
+-- * 'acccMerchantId'
 --
--- * 'aaAccountId'
+-- * 'acccAccountId'
 --
--- * 'aaMethod'
+-- * 'acccMethod'
 --
--- * 'aaAccountShipping'
+-- * 'acccAccountShipping'
 --
--- * 'aaBatchId'
+-- * 'acccBatchId'
 accountshippingCustomBatchRequestEntry
     :: AccountshippingCustomBatchRequestEntry
 accountshippingCustomBatchRequestEntry =
     AccountshippingCustomBatchRequestEntry
-    { _aaMerchantId = Nothing
-    , _aaAccountId = Nothing
-    , _aaMethod = Nothing
-    , _aaAccountShipping = Nothing
-    , _aaBatchId = Nothing
+    { _acccMerchantId = Nothing
+    , _acccAccountId = Nothing
+    , _acccMethod = Nothing
+    , _acccAccountShipping = Nothing
+    , _acccBatchId = Nothing
     }
 
 -- | The ID of the managing account.
-aaMerchantId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word64)
-aaMerchantId
-  = lens _aaMerchantId (\ s a -> s{_aaMerchantId = a})
+acccMerchantId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word64)
+acccMerchantId
+  = lens _acccMerchantId
+      (\ s a -> s{_acccMerchantId = a})
 
 -- | The ID of the account for which to get\/update account shipping
 -- settings.
-aaAccountId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word64)
-aaAccountId
-  = lens _aaAccountId (\ s a -> s{_aaAccountId = a})
+acccAccountId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word64)
+acccAccountId
+  = lens _acccAccountId
+      (\ s a -> s{_acccAccountId = a})
 
-aaMethod :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Text)
-aaMethod = lens _aaMethod (\ s a -> s{_aaMethod = a})
+acccMethod :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Text)
+acccMethod
+  = lens _acccMethod (\ s a -> s{_acccMethod = a})
 
 -- | The account shipping settings to update. Only defined if the method is
 -- update.
-aaAccountShipping :: Lens' AccountshippingCustomBatchRequestEntry (Maybe AccountShipping)
-aaAccountShipping
-  = lens _aaAccountShipping
-      (\ s a -> s{_aaAccountShipping = a})
+acccAccountShipping :: Lens' AccountshippingCustomBatchRequestEntry (Maybe AccountShipping)
+acccAccountShipping
+  = lens _acccAccountShipping
+      (\ s a -> s{_acccAccountShipping = a})
 
 -- | An entry ID, unique within the batch request.
-aaBatchId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word32)
-aaBatchId
-  = lens _aaBatchId (\ s a -> s{_aaBatchId = a})
+acccBatchId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word32)
+acccBatchId
+  = lens _acccBatchId (\ s a -> s{_acccBatchId = a})
 
 instance FromJSON
          AccountshippingCustomBatchRequestEntry where
@@ -4858,11 +4860,11 @@ instance ToJSON
         toJSON AccountshippingCustomBatchRequestEntry{..}
           = object
               (catMaybes
-                 [("merchantId" .=) <$> _aaMerchantId,
-                  ("accountId" .=) <$> _aaAccountId,
-                  ("method" .=) <$> _aaMethod,
-                  ("accountShipping" .=) <$> _aaAccountShipping,
-                  ("batchId" .=) <$> _aaBatchId])
+                 [("merchantId" .=) <$> _acccMerchantId,
+                  ("accountId" .=) <$> _acccAccountId,
+                  ("method" .=) <$> _acccMethod,
+                  ("accountShipping" .=) <$> _acccAccountShipping,
+                  ("batchId" .=) <$> _acccBatchId])
 
 --
 -- /See:/ 'accountsCustomBatchRequest' smart constructor.
@@ -8852,45 +8854,45 @@ instance ToJSON Errors where
 --
 -- /See:/ 'accountstatusesCustomBatchResponseEntry' smart constructor.
 data AccountstatusesCustomBatchResponseEntry = AccountstatusesCustomBatchResponseEntry
-    { _acccAccountStatus :: !(Maybe AccountStatus)
-    , _acccErrors        :: !(Maybe Errors)
-    , _acccBatchId       :: !(Maybe Word32)
+    { _accAccountStatus :: !(Maybe AccountStatus)
+    , _accErrors        :: !(Maybe Errors)
+    , _accBatchId       :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acccAccountStatus'
+-- * 'accAccountStatus'
 --
--- * 'acccErrors'
+-- * 'accErrors'
 --
--- * 'acccBatchId'
+-- * 'accBatchId'
 accountstatusesCustomBatchResponseEntry
     :: AccountstatusesCustomBatchResponseEntry
 accountstatusesCustomBatchResponseEntry =
     AccountstatusesCustomBatchResponseEntry
-    { _acccAccountStatus = Nothing
-    , _acccErrors = Nothing
-    , _acccBatchId = Nothing
+    { _accAccountStatus = Nothing
+    , _accErrors = Nothing
+    , _accBatchId = Nothing
     }
 
 -- | The requested account status. Defined if and only if the request was
 -- successful.
-acccAccountStatus :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe AccountStatus)
-acccAccountStatus
-  = lens _acccAccountStatus
-      (\ s a -> s{_acccAccountStatus = a})
+accAccountStatus :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe AccountStatus)
+accAccountStatus
+  = lens _accAccountStatus
+      (\ s a -> s{_accAccountStatus = a})
 
 -- | A list of errors defined if and only if the request failed.
-acccErrors :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe Errors)
-acccErrors
-  = lens _acccErrors (\ s a -> s{_acccErrors = a})
+accErrors :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe Errors)
+accErrors
+  = lens _accErrors (\ s a -> s{_accErrors = a})
 
 -- | The ID of the request entry this entry responds to.
-acccBatchId :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe Word32)
-acccBatchId
-  = lens _acccBatchId (\ s a -> s{_acccBatchId = a})
+accBatchId :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe Word32)
+accBatchId
+  = lens _accBatchId (\ s a -> s{_accBatchId = a})
 
 instance FromJSON
          AccountstatusesCustomBatchResponseEntry where
@@ -8907,9 +8909,9 @@ instance ToJSON
         toJSON AccountstatusesCustomBatchResponseEntry{..}
           = object
               (catMaybes
-                 [("accountStatus" .=) <$> _acccAccountStatus,
-                  ("errors" .=) <$> _acccErrors,
-                  ("batchId" .=) <$> _acccBatchId])
+                 [("accountStatus" .=) <$> _accAccountStatus,
+                  ("errors" .=) <$> _accErrors,
+                  ("batchId" .=) <$> _accBatchId])
 
 --
 -- /See:/ 'inventorySetResponse' smart constructor.
@@ -9550,194 +9552,191 @@ instance ToJSON OrdersAcknowledgeResponse where
 --
 -- /See:/ 'order' smart constructor.
 data Order = Order
-    { _ordStatus          :: !(Maybe Text)
-    , _ordMerchantId      :: !(Maybe Word64)
-    , _ordRefunds         :: !(Maybe [OrderRefund])
-    , _ordKind            :: !Text
-    , _ordLineItems       :: !(Maybe [OrderLineItem])
-    , _ordShipments       :: !(Maybe [OrderShipment])
-    , _ordNetAmount       :: !(Maybe Price)
-    , _ordPlacedDate      :: !(Maybe Text)
-    , _ordDeliveryDetails :: !(Maybe OrderDeliveryDetails)
-    , _ordShippingOption  :: !(Maybe Text)
-    , _ordMerchantOrderId :: !(Maybe Text)
-    , _ordAcknowledged    :: !(Maybe Bool)
-    , _ordShippingCostTax :: !(Maybe Price)
-    , _ordCustomer        :: !(Maybe OrderCustomer)
-    , _ordId              :: !(Maybe Text)
-    , _ordPaymentMethod   :: !(Maybe OrderPaymentMethod)
-    , _ordPaymentStatus   :: !(Maybe Text)
-    , _ordShippingCost    :: !(Maybe Price)
+    { _ooStatus          :: !(Maybe Text)
+    , _ooMerchantId      :: !(Maybe Word64)
+    , _ooRefunds         :: !(Maybe [OrderRefund])
+    , _ooKind            :: !Text
+    , _ooLineItems       :: !(Maybe [OrderLineItem])
+    , _ooShipments       :: !(Maybe [OrderShipment])
+    , _ooNetAmount       :: !(Maybe Price)
+    , _ooPlacedDate      :: !(Maybe Text)
+    , _ooDeliveryDetails :: !(Maybe OrderDeliveryDetails)
+    , _ooShippingOption  :: !(Maybe Text)
+    , _ooMerchantOrderId :: !(Maybe Text)
+    , _ooAcknowledged    :: !(Maybe Bool)
+    , _ooShippingCostTax :: !(Maybe Price)
+    , _ooCustomer        :: !(Maybe OrderCustomer)
+    , _ooId              :: !(Maybe Text)
+    , _ooPaymentMethod   :: !(Maybe OrderPaymentMethod)
+    , _ooPaymentStatus   :: !(Maybe Text)
+    , _ooShippingCost    :: !(Maybe Price)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Order' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ordStatus'
+-- * 'ooStatus'
 --
--- * 'ordMerchantId'
+-- * 'ooMerchantId'
 --
--- * 'ordRefunds'
+-- * 'ooRefunds'
 --
--- * 'ordKind'
+-- * 'ooKind'
 --
--- * 'ordLineItems'
+-- * 'ooLineItems'
 --
--- * 'ordShipments'
+-- * 'ooShipments'
 --
--- * 'ordNetAmount'
+-- * 'ooNetAmount'
 --
--- * 'ordPlacedDate'
+-- * 'ooPlacedDate'
 --
--- * 'ordDeliveryDetails'
+-- * 'ooDeliveryDetails'
 --
--- * 'ordShippingOption'
+-- * 'ooShippingOption'
 --
--- * 'ordMerchantOrderId'
+-- * 'ooMerchantOrderId'
 --
--- * 'ordAcknowledged'
+-- * 'ooAcknowledged'
 --
--- * 'ordShippingCostTax'
+-- * 'ooShippingCostTax'
 --
--- * 'ordCustomer'
+-- * 'ooCustomer'
 --
--- * 'ordId'
+-- * 'ooId'
 --
--- * 'ordPaymentMethod'
+-- * 'ooPaymentMethod'
 --
--- * 'ordPaymentStatus'
+-- * 'ooPaymentStatus'
 --
--- * 'ordShippingCost'
+-- * 'ooShippingCost'
 order
     :: Order
 order =
     Order
-    { _ordStatus = Nothing
-    , _ordMerchantId = Nothing
-    , _ordRefunds = Nothing
-    , _ordKind = "content#order"
-    , _ordLineItems = Nothing
-    , _ordShipments = Nothing
-    , _ordNetAmount = Nothing
-    , _ordPlacedDate = Nothing
-    , _ordDeliveryDetails = Nothing
-    , _ordShippingOption = Nothing
-    , _ordMerchantOrderId = Nothing
-    , _ordAcknowledged = Nothing
-    , _ordShippingCostTax = Nothing
-    , _ordCustomer = Nothing
-    , _ordId = Nothing
-    , _ordPaymentMethod = Nothing
-    , _ordPaymentStatus = Nothing
-    , _ordShippingCost = Nothing
+    { _ooStatus = Nothing
+    , _ooMerchantId = Nothing
+    , _ooRefunds = Nothing
+    , _ooKind = "content#order"
+    , _ooLineItems = Nothing
+    , _ooShipments = Nothing
+    , _ooNetAmount = Nothing
+    , _ooPlacedDate = Nothing
+    , _ooDeliveryDetails = Nothing
+    , _ooShippingOption = Nothing
+    , _ooMerchantOrderId = Nothing
+    , _ooAcknowledged = Nothing
+    , _ooShippingCostTax = Nothing
+    , _ooCustomer = Nothing
+    , _ooId = Nothing
+    , _ooPaymentMethod = Nothing
+    , _ooPaymentStatus = Nothing
+    , _ooShippingCost = Nothing
     }
 
 -- | The status of the order.
-ordStatus :: Lens' Order (Maybe Text)
-ordStatus
-  = lens _ordStatus (\ s a -> s{_ordStatus = a})
+ooStatus :: Lens' Order (Maybe Text)
+ooStatus = lens _ooStatus (\ s a -> s{_ooStatus = a})
 
-ordMerchantId :: Lens' Order (Maybe Word64)
-ordMerchantId
-  = lens _ordMerchantId
-      (\ s a -> s{_ordMerchantId = a})
+ooMerchantId :: Lens' Order (Maybe Word64)
+ooMerchantId
+  = lens _ooMerchantId (\ s a -> s{_ooMerchantId = a})
 
 -- | Refunds for the order.
-ordRefunds :: Lens' Order [OrderRefund]
-ordRefunds
-  = lens _ordRefunds (\ s a -> s{_ordRefunds = a}) .
+ooRefunds :: Lens' Order [OrderRefund]
+ooRefunds
+  = lens _ooRefunds (\ s a -> s{_ooRefunds = a}) .
       _Default
       . _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#order\".
-ordKind :: Lens' Order Text
-ordKind = lens _ordKind (\ s a -> s{_ordKind = a})
+ooKind :: Lens' Order Text
+ooKind = lens _ooKind (\ s a -> s{_ooKind = a})
 
 -- | Line items that are ordered.
-ordLineItems :: Lens' Order [OrderLineItem]
-ordLineItems
-  = lens _ordLineItems (\ s a -> s{_ordLineItems = a})
-      . _Default
+ooLineItems :: Lens' Order [OrderLineItem]
+ooLineItems
+  = lens _ooLineItems (\ s a -> s{_ooLineItems = a}) .
+      _Default
       . _Coerce
 
 -- | Shipments of the order.
-ordShipments :: Lens' Order [OrderShipment]
-ordShipments
-  = lens _ordShipments (\ s a -> s{_ordShipments = a})
-      . _Default
+ooShipments :: Lens' Order [OrderShipment]
+ooShipments
+  = lens _ooShipments (\ s a -> s{_ooShipments = a}) .
+      _Default
       . _Coerce
 
 -- | The net amount for the order. For example, if an order was originally
 -- for a grand total of $100 and a refund was issued for $20, the net
 -- amount will be $80.
-ordNetAmount :: Lens' Order (Maybe Price)
-ordNetAmount
-  = lens _ordNetAmount (\ s a -> s{_ordNetAmount = a})
+ooNetAmount :: Lens' Order (Maybe Price)
+ooNetAmount
+  = lens _ooNetAmount (\ s a -> s{_ooNetAmount = a})
 
 -- | The date when the order was placed, in ISO 8601 format.
-ordPlacedDate :: Lens' Order (Maybe Text)
-ordPlacedDate
-  = lens _ordPlacedDate
-      (\ s a -> s{_ordPlacedDate = a})
+ooPlacedDate :: Lens' Order (Maybe Text)
+ooPlacedDate
+  = lens _ooPlacedDate (\ s a -> s{_ooPlacedDate = a})
 
 -- | The details for the delivery.
-ordDeliveryDetails :: Lens' Order (Maybe OrderDeliveryDetails)
-ordDeliveryDetails
-  = lens _ordDeliveryDetails
-      (\ s a -> s{_ordDeliveryDetails = a})
+ooDeliveryDetails :: Lens' Order (Maybe OrderDeliveryDetails)
+ooDeliveryDetails
+  = lens _ooDeliveryDetails
+      (\ s a -> s{_ooDeliveryDetails = a})
 
 -- | The requested shipping option.
-ordShippingOption :: Lens' Order (Maybe Text)
-ordShippingOption
-  = lens _ordShippingOption
-      (\ s a -> s{_ordShippingOption = a})
+ooShippingOption :: Lens' Order (Maybe Text)
+ooShippingOption
+  = lens _ooShippingOption
+      (\ s a -> s{_ooShippingOption = a})
 
 -- | Merchant-provided id of the order.
-ordMerchantOrderId :: Lens' Order (Maybe Text)
-ordMerchantOrderId
-  = lens _ordMerchantOrderId
-      (\ s a -> s{_ordMerchantOrderId = a})
+ooMerchantOrderId :: Lens' Order (Maybe Text)
+ooMerchantOrderId
+  = lens _ooMerchantOrderId
+      (\ s a -> s{_ooMerchantOrderId = a})
 
 -- | Whether the order was acknowledged.
-ordAcknowledged :: Lens' Order (Maybe Bool)
-ordAcknowledged
-  = lens _ordAcknowledged
-      (\ s a -> s{_ordAcknowledged = a})
+ooAcknowledged :: Lens' Order (Maybe Bool)
+ooAcknowledged
+  = lens _ooAcknowledged
+      (\ s a -> s{_ooAcknowledged = a})
 
 -- | The tax for the total shipping cost.
-ordShippingCostTax :: Lens' Order (Maybe Price)
-ordShippingCostTax
-  = lens _ordShippingCostTax
-      (\ s a -> s{_ordShippingCostTax = a})
+ooShippingCostTax :: Lens' Order (Maybe Price)
+ooShippingCostTax
+  = lens _ooShippingCostTax
+      (\ s a -> s{_ooShippingCostTax = a})
 
 -- | The details of the customer who placed the order.
-ordCustomer :: Lens' Order (Maybe OrderCustomer)
-ordCustomer
-  = lens _ordCustomer (\ s a -> s{_ordCustomer = a})
+ooCustomer :: Lens' Order (Maybe OrderCustomer)
+ooCustomer
+  = lens _ooCustomer (\ s a -> s{_ooCustomer = a})
 
 -- | The REST id of the order. Globally unique.
-ordId :: Lens' Order (Maybe Text)
-ordId = lens _ordId (\ s a -> s{_ordId = a})
+ooId :: Lens' Order (Maybe Text)
+ooId = lens _ooId (\ s a -> s{_ooId = a})
 
 -- | The details of the payment method.
-ordPaymentMethod :: Lens' Order (Maybe OrderPaymentMethod)
-ordPaymentMethod
-  = lens _ordPaymentMethod
-      (\ s a -> s{_ordPaymentMethod = a})
+ooPaymentMethod :: Lens' Order (Maybe OrderPaymentMethod)
+ooPaymentMethod
+  = lens _ooPaymentMethod
+      (\ s a -> s{_ooPaymentMethod = a})
 
 -- | The status of the payment.
-ordPaymentStatus :: Lens' Order (Maybe Text)
-ordPaymentStatus
-  = lens _ordPaymentStatus
-      (\ s a -> s{_ordPaymentStatus = a})
+ooPaymentStatus :: Lens' Order (Maybe Text)
+ooPaymentStatus
+  = lens _ooPaymentStatus
+      (\ s a -> s{_ooPaymentStatus = a})
 
 -- | The total cost of shipping for all items.
-ordShippingCost :: Lens' Order (Maybe Price)
-ordShippingCost
-  = lens _ordShippingCost
-      (\ s a -> s{_ordShippingCost = a})
+ooShippingCost :: Lens' Order (Maybe Price)
+ooShippingCost
+  = lens _ooShippingCost
+      (\ s a -> s{_ooShippingCost = a})
 
 instance FromJSON Order where
         parseJSON
@@ -9766,24 +9765,23 @@ instance ToJSON Order where
         toJSON Order{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _ordStatus,
-                  ("merchantId" .=) <$> _ordMerchantId,
-                  ("refunds" .=) <$> _ordRefunds,
-                  Just ("kind" .= _ordKind),
-                  ("lineItems" .=) <$> _ordLineItems,
-                  ("shipments" .=) <$> _ordShipments,
-                  ("netAmount" .=) <$> _ordNetAmount,
-                  ("placedDate" .=) <$> _ordPlacedDate,
-                  ("deliveryDetails" .=) <$> _ordDeliveryDetails,
-                  ("shippingOption" .=) <$> _ordShippingOption,
-                  ("merchantOrderId" .=) <$> _ordMerchantOrderId,
-                  ("acknowledged" .=) <$> _ordAcknowledged,
-                  ("shippingCostTax" .=) <$> _ordShippingCostTax,
-                  ("customer" .=) <$> _ordCustomer,
-                  ("id" .=) <$> _ordId,
-                  ("paymentMethod" .=) <$> _ordPaymentMethod,
-                  ("paymentStatus" .=) <$> _ordPaymentStatus,
-                  ("shippingCost" .=) <$> _ordShippingCost])
+                 [("status" .=) <$> _ooStatus,
+                  ("merchantId" .=) <$> _ooMerchantId,
+                  ("refunds" .=) <$> _ooRefunds,
+                  Just ("kind" .= _ooKind),
+                  ("lineItems" .=) <$> _ooLineItems,
+                  ("shipments" .=) <$> _ooShipments,
+                  ("netAmount" .=) <$> _ooNetAmount,
+                  ("placedDate" .=) <$> _ooPlacedDate,
+                  ("deliveryDetails" .=) <$> _ooDeliveryDetails,
+                  ("shippingOption" .=) <$> _ooShippingOption,
+                  ("merchantOrderId" .=) <$> _ooMerchantOrderId,
+                  ("acknowledged" .=) <$> _ooAcknowledged,
+                  ("shippingCostTax" .=) <$> _ooShippingCostTax,
+                  ("customer" .=) <$> _ooCustomer, ("id" .=) <$> _ooId,
+                  ("paymentMethod" .=) <$> _ooPaymentMethod,
+                  ("paymentStatus" .=) <$> _ooPaymentStatus,
+                  ("shippingCost" .=) <$> _ooShippingCost])
 
 --
 -- /See:/ 'inventoryCustomBatchResponse' smart constructor.
@@ -11169,37 +11167,36 @@ instance ToJSON OrderCancellation where
 --
 -- /See:/ 'ordersCustomBatchResponse' smart constructor.
 data OrdersCustomBatchResponse = OrdersCustomBatchResponse
-    { _ocbrcEntries :: !(Maybe [OrdersCustomBatchResponseEntry])
-    , _ocbrcKind    :: !Text
+    { _ordEntries :: !(Maybe [OrdersCustomBatchResponseEntry])
+    , _ordKind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ocbrcEntries'
+-- * 'ordEntries'
 --
--- * 'ocbrcKind'
+-- * 'ordKind'
 ordersCustomBatchResponse
     :: OrdersCustomBatchResponse
 ordersCustomBatchResponse =
     OrdersCustomBatchResponse
-    { _ocbrcEntries = Nothing
-    , _ocbrcKind = "content#ordersCustomBatchResponse"
+    { _ordEntries = Nothing
+    , _ordKind = "content#ordersCustomBatchResponse"
     }
 
 -- | The result of the execution of the batch requests.
-ocbrcEntries :: Lens' OrdersCustomBatchResponse [OrdersCustomBatchResponseEntry]
-ocbrcEntries
-  = lens _ocbrcEntries (\ s a -> s{_ocbrcEntries = a})
-      . _Default
+ordEntries :: Lens' OrdersCustomBatchResponse [OrdersCustomBatchResponseEntry]
+ordEntries
+  = lens _ordEntries (\ s a -> s{_ordEntries = a}) .
+      _Default
       . _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersCustomBatchResponse\".
-ocbrcKind :: Lens' OrdersCustomBatchResponse Text
-ocbrcKind
-  = lens _ocbrcKind (\ s a -> s{_ocbrcKind = a})
+ordKind :: Lens' OrdersCustomBatchResponse Text
+ordKind = lens _ordKind (\ s a -> s{_ordKind = a})
 
 instance FromJSON OrdersCustomBatchResponse where
         parseJSON
@@ -11214,5 +11211,5 @@ instance ToJSON OrdersCustomBatchResponse where
         toJSON OrdersCustomBatchResponse{..}
           = object
               (catMaybes
-                 [("entries" .=) <$> _ocbrcEntries,
-                  Just ("kind" .= _ocbrcKind)])
+                 [("entries" .=) <$> _ordEntries,
+                  Just ("kind" .= _ordKind)])

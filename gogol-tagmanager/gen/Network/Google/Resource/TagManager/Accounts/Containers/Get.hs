@@ -33,14 +33,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Get
     , AccountsContainersGet'
 
     -- * Request Lenses
-    , acgQuotaUser
-    , acgPrettyPrint
     , acgContainerId
-    , acgUserIP
     , acgAccountId
-    , acgKey
-    , acgOAuthToken
-    , acgFields
     ) where
 
 import           Network.Google.Prelude
@@ -53,75 +47,32 @@ type AccountsContainersGetResource =
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Container
+             QueryParam "alt" AltJSON :> Get '[JSON] Container
 
 -- | Gets a Container.
 --
 -- /See:/ 'accountsContainersGet'' smart constructor.
 data AccountsContainersGet' = AccountsContainersGet'
-    { _acgQuotaUser   :: !(Maybe Text)
-    , _acgPrettyPrint :: !Bool
-    , _acgContainerId :: !Text
-    , _acgUserIP      :: !(Maybe Text)
+    { _acgContainerId :: !Text
     , _acgAccountId   :: !Text
-    , _acgKey         :: !(Maybe AuthKey)
-    , _acgOAuthToken  :: !(Maybe OAuthToken)
-    , _acgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acgQuotaUser'
---
--- * 'acgPrettyPrint'
---
 -- * 'acgContainerId'
 --
--- * 'acgUserIP'
---
 -- * 'acgAccountId'
---
--- * 'acgKey'
---
--- * 'acgOAuthToken'
---
--- * 'acgFields'
 accountsContainersGet'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
     -> AccountsContainersGet'
 accountsContainersGet' pAcgContainerId_ pAcgAccountId_ =
     AccountsContainersGet'
-    { _acgQuotaUser = Nothing
-    , _acgPrettyPrint = True
-    , _acgContainerId = pAcgContainerId_
-    , _acgUserIP = Nothing
+    { _acgContainerId = pAcgContainerId_
     , _acgAccountId = pAcgAccountId_
-    , _acgKey = Nothing
-    , _acgOAuthToken = Nothing
-    , _acgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-acgQuotaUser :: Lens' AccountsContainersGet' (Maybe Text)
-acgQuotaUser
-  = lens _acgQuotaUser (\ s a -> s{_acgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-acgPrettyPrint :: Lens' AccountsContainersGet' Bool
-acgPrettyPrint
-  = lens _acgPrettyPrint
-      (\ s a -> s{_acgPrettyPrint = a})
 
 -- | The GTM Container ID.
 acgContainerId :: Lens' AccountsContainersGet' Text
@@ -129,50 +80,17 @@ acgContainerId
   = lens _acgContainerId
       (\ s a -> s{_acgContainerId = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-acgUserIP :: Lens' AccountsContainersGet' (Maybe Text)
-acgUserIP
-  = lens _acgUserIP (\ s a -> s{_acgUserIP = a})
-
 -- | The GTM Account ID.
 acgAccountId :: Lens' AccountsContainersGet' Text
 acgAccountId
   = lens _acgAccountId (\ s a -> s{_acgAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-acgKey :: Lens' AccountsContainersGet' (Maybe AuthKey)
-acgKey = lens _acgKey (\ s a -> s{_acgKey = a})
-
--- | OAuth 2.0 token for the current user.
-acgOAuthToken :: Lens' AccountsContainersGet' (Maybe OAuthToken)
-acgOAuthToken
-  = lens _acgOAuthToken
-      (\ s a -> s{_acgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-acgFields :: Lens' AccountsContainersGet' (Maybe Text)
-acgFields
-  = lens _acgFields (\ s a -> s{_acgFields = a})
-
-instance GoogleAuth AccountsContainersGet' where
-        _AuthKey = acgKey . _Just
-        _AuthToken = acgOAuthToken . _Just
-
 instance GoogleRequest AccountsContainersGet' where
         type Rs AccountsContainersGet' = Container
-        request = requestWith tagManagerRequest
-        requestWith rq AccountsContainersGet'{..}
-          = go _acgAccountId _acgContainerId _acgQuotaUser
-              (Just _acgPrettyPrint)
-              _acgUserIP
-              _acgFields
-              _acgKey
-              _acgOAuthToken
-              (Just AltJSON)
+        requestClient AccountsContainersGet'{..}
+          = go _acgAccountId _acgContainerId (Just AltJSON)
+              tagManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsContainersGetResource)
-                      rq
+                      mempty

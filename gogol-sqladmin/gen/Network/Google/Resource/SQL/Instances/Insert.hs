@@ -33,14 +33,8 @@ module Network.Google.Resource.SQL.Instances.Insert
     , InstancesInsert'
 
     -- * Request Lenses
-    , iiQuotaUser
-    , iiPrettyPrint
     , iiProject
-    , iiUserIP
     , iiPayload
-    , iiKey
-    , iiOAuthToken
-    , iiFields
     ) where
 
 import           Network.Google.Prelude
@@ -52,77 +46,34 @@ type InstancesInsertResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] DatabaseInstance :>
-                           Post '[JSON] Operation
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] DatabaseInstance :>
+               Post '[JSON] Operation
 
 -- | Creates a new Cloud SQL instance.
 --
 -- /See:/ 'instancesInsert'' smart constructor.
 data InstancesInsert' = InstancesInsert'
-    { _iiQuotaUser   :: !(Maybe Text)
-    , _iiPrettyPrint :: !Bool
-    , _iiProject     :: !Text
-    , _iiUserIP      :: !(Maybe Text)
-    , _iiPayload     :: !DatabaseInstance
-    , _iiKey         :: !(Maybe AuthKey)
-    , _iiOAuthToken  :: !(Maybe OAuthToken)
-    , _iiFields      :: !(Maybe Text)
+    { _iiProject :: !Text
+    , _iiPayload :: !DatabaseInstance
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iiQuotaUser'
---
--- * 'iiPrettyPrint'
---
 -- * 'iiProject'
 --
--- * 'iiUserIP'
---
 -- * 'iiPayload'
---
--- * 'iiKey'
---
--- * 'iiOAuthToken'
---
--- * 'iiFields'
 instancesInsert'
     :: Text -- ^ 'project'
     -> DatabaseInstance -- ^ 'payload'
     -> InstancesInsert'
 instancesInsert' pIiProject_ pIiPayload_ =
     InstancesInsert'
-    { _iiQuotaUser = Nothing
-    , _iiPrettyPrint = True
-    , _iiProject = pIiProject_
-    , _iiUserIP = Nothing
+    { _iiProject = pIiProject_
     , _iiPayload = pIiPayload_
-    , _iiKey = Nothing
-    , _iiOAuthToken = Nothing
-    , _iiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-iiQuotaUser :: Lens' InstancesInsert' (Maybe Text)
-iiQuotaUser
-  = lens _iiQuotaUser (\ s a -> s{_iiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-iiPrettyPrint :: Lens' InstancesInsert' Bool
-iiPrettyPrint
-  = lens _iiPrettyPrint
-      (\ s a -> s{_iiPrettyPrint = a})
 
 -- | Project ID of the project to which the newly created Cloud SQL instances
 -- should belong.
@@ -130,47 +81,17 @@ iiProject :: Lens' InstancesInsert' Text
 iiProject
   = lens _iiProject (\ s a -> s{_iiProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-iiUserIP :: Lens' InstancesInsert' (Maybe Text)
-iiUserIP = lens _iiUserIP (\ s a -> s{_iiUserIP = a})
-
 -- | Multipart request metadata.
 iiPayload :: Lens' InstancesInsert' DatabaseInstance
 iiPayload
   = lens _iiPayload (\ s a -> s{_iiPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-iiKey :: Lens' InstancesInsert' (Maybe AuthKey)
-iiKey = lens _iiKey (\ s a -> s{_iiKey = a})
-
--- | OAuth 2.0 token for the current user.
-iiOAuthToken :: Lens' InstancesInsert' (Maybe OAuthToken)
-iiOAuthToken
-  = lens _iiOAuthToken (\ s a -> s{_iiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-iiFields :: Lens' InstancesInsert' (Maybe Text)
-iiFields = lens _iiFields (\ s a -> s{_iiFields = a})
-
-instance GoogleAuth InstancesInsert' where
-        _AuthKey = iiKey . _Just
-        _AuthToken = iiOAuthToken . _Just
-
 instance GoogleRequest InstancesInsert' where
         type Rs InstancesInsert' = Operation
-        request = requestWith sQLAdminRequest
-        requestWith rq InstancesInsert'{..}
-          = go _iiProject _iiQuotaUser (Just _iiPrettyPrint)
-              _iiUserIP
-              _iiFields
-              _iiKey
-              _iiOAuthToken
-              (Just AltJSON)
-              _iiPayload
+        requestClient InstancesInsert'{..}
+          = go _iiProject (Just AltJSON) _iiPayload
+              sQLAdminService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy InstancesInsertResource)
-                      rq
+                      mempty

@@ -33,25 +33,19 @@ module Network.Google.Resource.Books.Volumes.List
     , VolumesList'
 
     -- * Request Lenses
-    , vlQuotaUser
-    , vlPrettyPrint
     , vlOrderBy
-    , vlUserIP
     , vlLibraryRestrict
     , vlPartner
     , vlQ
     , vlDownload
-    , vlKey
     , vlSource
     , vlProjection
     , vlFilter
     , vlLangRestrict
-    , vlOAuthToken
     , vlStartIndex
     , vlMaxResults
     , vlShowPreOrders
     , vlPrintType
-    , vlFields
     ) where
 
 import           Network.Google.Books.Types
@@ -76,51 +70,32 @@ type VolumesListResource =
                            QueryParam "maxResults" Word32 :>
                              QueryParam "showPreorders" Bool :>
                                QueryParam "printType" VolumesListPrintType :>
-                                 QueryParam "quotaUser" Text :>
-                                   QueryParam "prettyPrint" Bool :>
-                                     QueryParam "userIp" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "key" AuthKey :>
-                                           Header "Authorization" OAuthToken :>
-                                             QueryParam "alt" AltJSON :>
-                                               Get '[JSON] Volumes
+                                 QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
 -- | Performs a book search.
 --
 -- /See:/ 'volumesList'' smart constructor.
 data VolumesList' = VolumesList'
-    { _vlQuotaUser       :: !(Maybe Text)
-    , _vlPrettyPrint     :: !Bool
-    , _vlOrderBy         :: !(Maybe VolumesListOrderBy)
-    , _vlUserIP          :: !(Maybe Text)
+    { _vlOrderBy         :: !(Maybe VolumesListOrderBy)
     , _vlLibraryRestrict :: !(Maybe VolumesListLibraryRestrict)
     , _vlPartner         :: !(Maybe Text)
     , _vlQ               :: !Text
     , _vlDownload        :: !(Maybe VolumesListDownload)
-    , _vlKey             :: !(Maybe AuthKey)
     , _vlSource          :: !(Maybe Text)
     , _vlProjection      :: !(Maybe VolumesListProjection)
     , _vlFilter          :: !(Maybe VolumesListFilter)
     , _vlLangRestrict    :: !(Maybe Text)
-    , _vlOAuthToken      :: !(Maybe OAuthToken)
     , _vlStartIndex      :: !(Maybe Word32)
     , _vlMaxResults      :: !(Maybe Word32)
     , _vlShowPreOrders   :: !(Maybe Bool)
     , _vlPrintType       :: !(Maybe VolumesListPrintType)
-    , _vlFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vlQuotaUser'
---
--- * 'vlPrettyPrint'
---
 -- * 'vlOrderBy'
---
--- * 'vlUserIP'
 --
 -- * 'vlLibraryRestrict'
 --
@@ -130,8 +105,6 @@ data VolumesList' = VolumesList'
 --
 -- * 'vlDownload'
 --
--- * 'vlKey'
---
 -- * 'vlSource'
 --
 -- * 'vlProjection'
@@ -140,8 +113,6 @@ data VolumesList' = VolumesList'
 --
 -- * 'vlLangRestrict'
 --
--- * 'vlOAuthToken'
---
 -- * 'vlStartIndex'
 --
 -- * 'vlMaxResults'
@@ -149,56 +120,30 @@ data VolumesList' = VolumesList'
 -- * 'vlShowPreOrders'
 --
 -- * 'vlPrintType'
---
--- * 'vlFields'
 volumesList'
     :: Text -- ^ 'q'
     -> VolumesList'
 volumesList' pVlQ_ =
     VolumesList'
-    { _vlQuotaUser = Nothing
-    , _vlPrettyPrint = True
-    , _vlOrderBy = Nothing
-    , _vlUserIP = Nothing
+    { _vlOrderBy = Nothing
     , _vlLibraryRestrict = Nothing
     , _vlPartner = Nothing
     , _vlQ = pVlQ_
     , _vlDownload = Nothing
-    , _vlKey = Nothing
     , _vlSource = Nothing
     , _vlProjection = Nothing
     , _vlFilter = Nothing
     , _vlLangRestrict = Nothing
-    , _vlOAuthToken = Nothing
     , _vlStartIndex = Nothing
     , _vlMaxResults = Nothing
     , _vlShowPreOrders = Nothing
     , _vlPrintType = Nothing
-    , _vlFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-vlQuotaUser :: Lens' VolumesList' (Maybe Text)
-vlQuotaUser
-  = lens _vlQuotaUser (\ s a -> s{_vlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-vlPrettyPrint :: Lens' VolumesList' Bool
-vlPrettyPrint
-  = lens _vlPrettyPrint
-      (\ s a -> s{_vlPrettyPrint = a})
 
 -- | Sort search results.
 vlOrderBy :: Lens' VolumesList' (Maybe VolumesListOrderBy)
 vlOrderBy
   = lens _vlOrderBy (\ s a -> s{_vlOrderBy = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-vlUserIP :: Lens' VolumesList' (Maybe Text)
-vlUserIP = lens _vlUserIP (\ s a -> s{_vlUserIP = a})
 
 -- | Restrict search to this user\'s library.
 vlLibraryRestrict :: Lens' VolumesList' (Maybe VolumesListLibraryRestrict)
@@ -220,12 +165,6 @@ vlDownload :: Lens' VolumesList' (Maybe VolumesListDownload)
 vlDownload
   = lens _vlDownload (\ s a -> s{_vlDownload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-vlKey :: Lens' VolumesList' (Maybe AuthKey)
-vlKey = lens _vlKey (\ s a -> s{_vlKey = a})
-
 -- | String to identify the originator of this request.
 vlSource :: Lens' VolumesList' (Maybe Text)
 vlSource = lens _vlSource (\ s a -> s{_vlSource = a})
@@ -244,11 +183,6 @@ vlLangRestrict :: Lens' VolumesList' (Maybe Text)
 vlLangRestrict
   = lens _vlLangRestrict
       (\ s a -> s{_vlLangRestrict = a})
-
--- | OAuth 2.0 token for the current user.
-vlOAuthToken :: Lens' VolumesList' (Maybe OAuthToken)
-vlOAuthToken
-  = lens _vlOAuthToken (\ s a -> s{_vlOAuthToken = a})
 
 -- | Index of the first result to return (starts at 0)
 vlStartIndex :: Lens' VolumesList' (Maybe Word32)
@@ -271,18 +205,9 @@ vlPrintType :: Lens' VolumesList' (Maybe VolumesListPrintType)
 vlPrintType
   = lens _vlPrintType (\ s a -> s{_vlPrintType = a})
 
--- | Selector specifying which fields to include in a partial response.
-vlFields :: Lens' VolumesList' (Maybe Text)
-vlFields = lens _vlFields (\ s a -> s{_vlFields = a})
-
-instance GoogleAuth VolumesList' where
-        _AuthKey = vlKey . _Just
-        _AuthToken = vlOAuthToken . _Just
-
 instance GoogleRequest VolumesList' where
         type Rs VolumesList' = Volumes
-        request = requestWith booksRequest
-        requestWith rq VolumesList'{..}
+        requestClient VolumesList'{..}
           = go (Just _vlQ) _vlOrderBy _vlLibraryRestrict
               _vlPartner
               _vlDownload
@@ -294,12 +219,8 @@ instance GoogleRequest VolumesList' where
               _vlMaxResults
               _vlShowPreOrders
               _vlPrintType
-              _vlQuotaUser
-              (Just _vlPrettyPrint)
-              _vlUserIP
-              _vlFields
-              _vlKey
-              _vlOAuthToken
               (Just AltJSON)
+              booksService
           where go
-                  = clientBuild (Proxy :: Proxy VolumesListResource) rq
+                  = buildClient (Proxy :: Proxy VolumesListResource)
+                      mempty

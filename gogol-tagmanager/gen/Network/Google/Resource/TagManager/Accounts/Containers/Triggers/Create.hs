@@ -33,15 +33,9 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Create
     , AccountsContainersTriggersCreate'
 
     -- * Request Lenses
-    , actccQuotaUser
-    , actccPrettyPrint
     , actccContainerId
-    , actccUserIP
     , actccPayload
     , actccAccountId
-    , actccKey
-    , actccOAuthToken
-    , actccFields
     ) where
 
 import           Network.Google.Prelude
@@ -55,51 +49,27 @@ type AccountsContainersTriggersCreateResource =
          "containers" :>
            Capture "containerId" Text :>
              "triggers" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Trigger :> Post '[JSON] Trigger
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Trigger :> Post '[JSON] Trigger
 
 -- | Creates a GTM Trigger.
 --
 -- /See:/ 'accountsContainersTriggersCreate'' smart constructor.
 data AccountsContainersTriggersCreate' = AccountsContainersTriggersCreate'
-    { _actccQuotaUser   :: !(Maybe Text)
-    , _actccPrettyPrint :: !Bool
-    , _actccContainerId :: !Text
-    , _actccUserIP      :: !(Maybe Text)
+    { _actccContainerId :: !Text
     , _actccPayload     :: !Trigger
     , _actccAccountId   :: !Text
-    , _actccKey         :: !(Maybe AuthKey)
-    , _actccOAuthToken  :: !(Maybe OAuthToken)
-    , _actccFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTriggersCreate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'actccQuotaUser'
---
--- * 'actccPrettyPrint'
---
 -- * 'actccContainerId'
---
--- * 'actccUserIP'
 --
 -- * 'actccPayload'
 --
 -- * 'actccAccountId'
---
--- * 'actccKey'
---
--- * 'actccOAuthToken'
---
--- * 'actccFields'
 accountsContainersTriggersCreate'
     :: Text -- ^ 'containerId'
     -> Trigger -- ^ 'payload'
@@ -107,42 +77,16 @@ accountsContainersTriggersCreate'
     -> AccountsContainersTriggersCreate'
 accountsContainersTriggersCreate' pActccContainerId_ pActccPayload_ pActccAccountId_ =
     AccountsContainersTriggersCreate'
-    { _actccQuotaUser = Nothing
-    , _actccPrettyPrint = True
-    , _actccContainerId = pActccContainerId_
-    , _actccUserIP = Nothing
+    { _actccContainerId = pActccContainerId_
     , _actccPayload = pActccPayload_
     , _actccAccountId = pActccAccountId_
-    , _actccKey = Nothing
-    , _actccOAuthToken = Nothing
-    , _actccFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-actccQuotaUser :: Lens' AccountsContainersTriggersCreate' (Maybe Text)
-actccQuotaUser
-  = lens _actccQuotaUser
-      (\ s a -> s{_actccQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-actccPrettyPrint :: Lens' AccountsContainersTriggersCreate' Bool
-actccPrettyPrint
-  = lens _actccPrettyPrint
-      (\ s a -> s{_actccPrettyPrint = a})
 
 -- | The GTM Container ID.
 actccContainerId :: Lens' AccountsContainersTriggersCreate' Text
 actccContainerId
   = lens _actccContainerId
       (\ s a -> s{_actccContainerId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-actccUserIP :: Lens' AccountsContainersTriggersCreate' (Maybe Text)
-actccUserIP
-  = lens _actccUserIP (\ s a -> s{_actccUserIP = a})
 
 -- | Multipart request metadata.
 actccPayload :: Lens' AccountsContainersTriggersCreate' Trigger
@@ -155,44 +99,15 @@ actccAccountId
   = lens _actccAccountId
       (\ s a -> s{_actccAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-actccKey :: Lens' AccountsContainersTriggersCreate' (Maybe AuthKey)
-actccKey = lens _actccKey (\ s a -> s{_actccKey = a})
-
--- | OAuth 2.0 token for the current user.
-actccOAuthToken :: Lens' AccountsContainersTriggersCreate' (Maybe OAuthToken)
-actccOAuthToken
-  = lens _actccOAuthToken
-      (\ s a -> s{_actccOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-actccFields :: Lens' AccountsContainersTriggersCreate' (Maybe Text)
-actccFields
-  = lens _actccFields (\ s a -> s{_actccFields = a})
-
-instance GoogleAuth AccountsContainersTriggersCreate'
-         where
-        _AuthKey = actccKey . _Just
-        _AuthToken = actccOAuthToken . _Just
-
 instance GoogleRequest
          AccountsContainersTriggersCreate' where
         type Rs AccountsContainersTriggersCreate' = Trigger
-        request = requestWith tagManagerRequest
-        requestWith rq AccountsContainersTriggersCreate'{..}
-          = go _actccAccountId _actccContainerId
-              _actccQuotaUser
-              (Just _actccPrettyPrint)
-              _actccUserIP
-              _actccFields
-              _actccKey
-              _actccOAuthToken
-              (Just AltJSON)
+        requestClient AccountsContainersTriggersCreate'{..}
+          = go _actccAccountId _actccContainerId (Just AltJSON)
               _actccPayload
+              tagManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy AccountsContainersTriggersCreateResource)
-                      rq
+                      mempty

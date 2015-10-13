@@ -34,13 +34,7 @@ module Network.Google.Resource.Directory.Users.Aliases.List
 
     -- * Request Lenses
     , ualEvent
-    , ualQuotaUser
-    , ualPrettyPrint
-    , ualUserIP
-    , ualKey
-    , ualOAuthToken
     , ualUserKey
-    , ualFields
     ) where
 
 import           Network.Google.Directory.Types
@@ -53,26 +47,14 @@ type UsersAliasesListResource =
        Capture "userKey" Text :>
          "aliases" :>
            QueryParam "event" UsersAliasesListEvent :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Aliases
+             QueryParam "alt" AltJSON :> Get '[JSON] Aliases
 
 -- | List all aliases for a user
 --
 -- /See:/ 'usersAliasesList'' smart constructor.
 data UsersAliasesList' = UsersAliasesList'
-    { _ualEvent       :: !(Maybe UsersAliasesListEvent)
-    , _ualQuotaUser   :: !(Maybe Text)
-    , _ualPrettyPrint :: !Bool
-    , _ualUserIP      :: !(Maybe Text)
-    , _ualKey         :: !(Maybe AuthKey)
-    , _ualOAuthToken  :: !(Maybe OAuthToken)
-    , _ualUserKey     :: !Text
-    , _ualFields      :: !(Maybe Text)
+    { _ualEvent   :: !(Maybe UsersAliasesListEvent)
+    , _ualUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersAliasesList'' with the minimum fields required to make a request.
@@ -81,95 +63,31 @@ data UsersAliasesList' = UsersAliasesList'
 --
 -- * 'ualEvent'
 --
--- * 'ualQuotaUser'
---
--- * 'ualPrettyPrint'
---
--- * 'ualUserIP'
---
--- * 'ualKey'
---
--- * 'ualOAuthToken'
---
 -- * 'ualUserKey'
---
--- * 'ualFields'
 usersAliasesList'
     :: Text -- ^ 'userKey'
     -> UsersAliasesList'
 usersAliasesList' pUalUserKey_ =
     UsersAliasesList'
     { _ualEvent = Nothing
-    , _ualQuotaUser = Nothing
-    , _ualPrettyPrint = True
-    , _ualUserIP = Nothing
-    , _ualKey = Nothing
-    , _ualOAuthToken = Nothing
     , _ualUserKey = pUalUserKey_
-    , _ualFields = Nothing
     }
 
 -- | Event on which subscription is intended (if subscribing)
 ualEvent :: Lens' UsersAliasesList' (Maybe UsersAliasesListEvent)
 ualEvent = lens _ualEvent (\ s a -> s{_ualEvent = a})
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ualQuotaUser :: Lens' UsersAliasesList' (Maybe Text)
-ualQuotaUser
-  = lens _ualQuotaUser (\ s a -> s{_ualQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ualPrettyPrint :: Lens' UsersAliasesList' Bool
-ualPrettyPrint
-  = lens _ualPrettyPrint
-      (\ s a -> s{_ualPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ualUserIP :: Lens' UsersAliasesList' (Maybe Text)
-ualUserIP
-  = lens _ualUserIP (\ s a -> s{_ualUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ualKey :: Lens' UsersAliasesList' (Maybe AuthKey)
-ualKey = lens _ualKey (\ s a -> s{_ualKey = a})
-
--- | OAuth 2.0 token for the current user.
-ualOAuthToken :: Lens' UsersAliasesList' (Maybe OAuthToken)
-ualOAuthToken
-  = lens _ualOAuthToken
-      (\ s a -> s{_ualOAuthToken = a})
-
 -- | Email or immutable Id of the user
 ualUserKey :: Lens' UsersAliasesList' Text
 ualUserKey
   = lens _ualUserKey (\ s a -> s{_ualUserKey = a})
 
--- | Selector specifying which fields to include in a partial response.
-ualFields :: Lens' UsersAliasesList' (Maybe Text)
-ualFields
-  = lens _ualFields (\ s a -> s{_ualFields = a})
-
-instance GoogleAuth UsersAliasesList' where
-        _AuthKey = ualKey . _Just
-        _AuthToken = ualOAuthToken . _Just
-
 instance GoogleRequest UsersAliasesList' where
         type Rs UsersAliasesList' = Aliases
-        request = requestWith directoryRequest
-        requestWith rq UsersAliasesList'{..}
-          = go _ualUserKey _ualEvent _ualQuotaUser
-              (Just _ualPrettyPrint)
-              _ualUserIP
-              _ualFields
-              _ualKey
-              _ualOAuthToken
-              (Just AltJSON)
+        requestClient UsersAliasesList'{..}
+          = go _ualUserKey _ualEvent (Just AltJSON)
+              directoryService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy UsersAliasesListResource)
-                      rq
+                      mempty

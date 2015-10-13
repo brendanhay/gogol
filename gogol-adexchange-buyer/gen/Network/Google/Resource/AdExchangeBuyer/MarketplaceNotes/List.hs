@@ -33,13 +33,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
     , MarketplaceNotesList'
 
     -- * Request Lenses
-    , mnlQuotaUser
-    , mnlPrettyPrint
-    , mnlUserIP
-    , mnlKey
-    , mnlOAuthToken
     , mnlOrderId
-    , mnlFields
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -51,115 +45,40 @@ type MarketplaceNotesListResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
          "notes" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] GetOrderNotesResponse
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] GetOrderNotesResponse
 
 -- | Get all the notes associated with an order
 --
 -- /See:/ 'marketplaceNotesList'' smart constructor.
-data MarketplaceNotesList' = MarketplaceNotesList'
-    { _mnlQuotaUser   :: !(Maybe Text)
-    , _mnlPrettyPrint :: !Bool
-    , _mnlUserIP      :: !(Maybe Text)
-    , _mnlKey         :: !(Maybe AuthKey)
-    , _mnlOAuthToken  :: !(Maybe OAuthToken)
-    , _mnlOrderId     :: !Text
-    , _mnlFields      :: !(Maybe Text)
+newtype MarketplaceNotesList' = MarketplaceNotesList'
+    { _mnlOrderId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceNotesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mnlQuotaUser'
---
--- * 'mnlPrettyPrint'
---
--- * 'mnlUserIP'
---
--- * 'mnlKey'
---
--- * 'mnlOAuthToken'
---
 -- * 'mnlOrderId'
---
--- * 'mnlFields'
 marketplaceNotesList'
     :: Text -- ^ 'orderId'
     -> MarketplaceNotesList'
 marketplaceNotesList' pMnlOrderId_ =
     MarketplaceNotesList'
-    { _mnlQuotaUser = Nothing
-    , _mnlPrettyPrint = True
-    , _mnlUserIP = Nothing
-    , _mnlKey = Nothing
-    , _mnlOAuthToken = Nothing
-    , _mnlOrderId = pMnlOrderId_
-    , _mnlFields = Nothing
+    { _mnlOrderId = pMnlOrderId_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mnlQuotaUser :: Lens' MarketplaceNotesList' (Maybe Text)
-mnlQuotaUser
-  = lens _mnlQuotaUser (\ s a -> s{_mnlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mnlPrettyPrint :: Lens' MarketplaceNotesList' Bool
-mnlPrettyPrint
-  = lens _mnlPrettyPrint
-      (\ s a -> s{_mnlPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mnlUserIP :: Lens' MarketplaceNotesList' (Maybe Text)
-mnlUserIP
-  = lens _mnlUserIP (\ s a -> s{_mnlUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mnlKey :: Lens' MarketplaceNotesList' (Maybe AuthKey)
-mnlKey = lens _mnlKey (\ s a -> s{_mnlKey = a})
-
--- | OAuth 2.0 token for the current user.
-mnlOAuthToken :: Lens' MarketplaceNotesList' (Maybe OAuthToken)
-mnlOAuthToken
-  = lens _mnlOAuthToken
-      (\ s a -> s{_mnlOAuthToken = a})
 
 -- | The orderId to get notes for.
 mnlOrderId :: Lens' MarketplaceNotesList' Text
 mnlOrderId
   = lens _mnlOrderId (\ s a -> s{_mnlOrderId = a})
 
--- | Selector specifying which fields to include in a partial response.
-mnlFields :: Lens' MarketplaceNotesList' (Maybe Text)
-mnlFields
-  = lens _mnlFields (\ s a -> s{_mnlFields = a})
-
-instance GoogleAuth MarketplaceNotesList' where
-        _AuthKey = mnlKey . _Just
-        _AuthToken = mnlOAuthToken . _Just
-
 instance GoogleRequest MarketplaceNotesList' where
         type Rs MarketplaceNotesList' = GetOrderNotesResponse
-        request = requestWith adExchangeBuyerRequest
-        requestWith rq MarketplaceNotesList'{..}
-          = go _mnlOrderId _mnlQuotaUser (Just _mnlPrettyPrint)
-              _mnlUserIP
-              _mnlFields
-              _mnlKey
-              _mnlOAuthToken
-              (Just AltJSON)
+        requestClient MarketplaceNotesList'{..}
+          = go _mnlOrderId (Just AltJSON)
+              adExchangeBuyerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy MarketplaceNotesListResource)
-                      rq
+                      mempty

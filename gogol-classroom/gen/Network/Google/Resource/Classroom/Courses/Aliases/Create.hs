@@ -38,8 +38,6 @@ module Network.Google.Resource.Classroom.Courses.Aliases.Create
 
     -- * Request Lenses
     , cacXgafv
-    , cacQuotaUser
-    , cacPrettyPrint
     , cacUploadProtocol
     , cacPp
     , cacCourseId
@@ -47,9 +45,6 @@ module Network.Google.Resource.Classroom.Courses.Aliases.Create
     , cacUploadType
     , cacPayload
     , cacBearerToken
-    , cacKey
-    , cacOAuthToken
-    , cacFields
     , cacCallback
     ) where
 
@@ -70,14 +65,9 @@ type CoursesAliasesCreateResource =
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
                          QueryParam "callback" Text :>
-                           QueryParam "quotaUser" Text :>
-                             QueryParam "prettyPrint" Bool :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] CourseAlias :>
-                                         Post '[JSON] CourseAlias
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] CourseAlias :>
+                               Post '[JSON] CourseAlias
 
 -- | Creates an alias for a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -88,8 +78,6 @@ type CoursesAliasesCreateResource =
 -- /See:/ 'coursesAliasesCreate'' smart constructor.
 data CoursesAliasesCreate' = CoursesAliasesCreate'
     { _cacXgafv          :: !(Maybe Text)
-    , _cacQuotaUser      :: !(Maybe Text)
-    , _cacPrettyPrint    :: !Bool
     , _cacUploadProtocol :: !(Maybe Text)
     , _cacPp             :: !Bool
     , _cacCourseId       :: !Text
@@ -97,9 +85,6 @@ data CoursesAliasesCreate' = CoursesAliasesCreate'
     , _cacUploadType     :: !(Maybe Text)
     , _cacPayload        :: !CourseAlias
     , _cacBearerToken    :: !(Maybe Text)
-    , _cacKey            :: !(Maybe AuthKey)
-    , _cacOAuthToken     :: !(Maybe OAuthToken)
-    , _cacFields         :: !(Maybe Text)
     , _cacCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -108,10 +93,6 @@ data CoursesAliasesCreate' = CoursesAliasesCreate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cacXgafv'
---
--- * 'cacQuotaUser'
---
--- * 'cacPrettyPrint'
 --
 -- * 'cacUploadProtocol'
 --
@@ -127,12 +108,6 @@ data CoursesAliasesCreate' = CoursesAliasesCreate'
 --
 -- * 'cacBearerToken'
 --
--- * 'cacKey'
---
--- * 'cacOAuthToken'
---
--- * 'cacFields'
---
 -- * 'cacCallback'
 coursesAliasesCreate'
     :: Text -- ^ 'courseId'
@@ -141,8 +116,6 @@ coursesAliasesCreate'
 coursesAliasesCreate' pCacCourseId_ pCacPayload_ =
     CoursesAliasesCreate'
     { _cacXgafv = Nothing
-    , _cacQuotaUser = Nothing
-    , _cacPrettyPrint = True
     , _cacUploadProtocol = Nothing
     , _cacPp = True
     , _cacCourseId = pCacCourseId_
@@ -150,28 +123,12 @@ coursesAliasesCreate' pCacCourseId_ pCacPayload_ =
     , _cacUploadType = Nothing
     , _cacPayload = pCacPayload_
     , _cacBearerToken = Nothing
-    , _cacKey = Nothing
-    , _cacOAuthToken = Nothing
-    , _cacFields = Nothing
     , _cacCallback = Nothing
     }
 
 -- | V1 error format.
 cacXgafv :: Lens' CoursesAliasesCreate' (Maybe Text)
 cacXgafv = lens _cacXgafv (\ s a -> s{_cacXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-cacQuotaUser :: Lens' CoursesAliasesCreate' (Maybe Text)
-cacQuotaUser
-  = lens _cacQuotaUser (\ s a -> s{_cacQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cacPrettyPrint :: Lens' CoursesAliasesCreate' Bool
-cacPrettyPrint
-  = lens _cacPrettyPrint
-      (\ s a -> s{_cacPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 cacUploadProtocol :: Lens' CoursesAliasesCreate' (Maybe Text)
@@ -213,50 +170,24 @@ cacBearerToken
   = lens _cacBearerToken
       (\ s a -> s{_cacBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cacKey :: Lens' CoursesAliasesCreate' (Maybe AuthKey)
-cacKey = lens _cacKey (\ s a -> s{_cacKey = a})
-
--- | OAuth 2.0 token for the current user.
-cacOAuthToken :: Lens' CoursesAliasesCreate' (Maybe OAuthToken)
-cacOAuthToken
-  = lens _cacOAuthToken
-      (\ s a -> s{_cacOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cacFields :: Lens' CoursesAliasesCreate' (Maybe Text)
-cacFields
-  = lens _cacFields (\ s a -> s{_cacFields = a})
-
 -- | JSONP
 cacCallback :: Lens' CoursesAliasesCreate' (Maybe Text)
 cacCallback
   = lens _cacCallback (\ s a -> s{_cacCallback = a})
 
-instance GoogleAuth CoursesAliasesCreate' where
-        _AuthKey = cacKey . _Just
-        _AuthToken = cacOAuthToken . _Just
-
 instance GoogleRequest CoursesAliasesCreate' where
         type Rs CoursesAliasesCreate' = CourseAlias
-        request = requestWith classroomRequest
-        requestWith rq CoursesAliasesCreate'{..}
+        requestClient CoursesAliasesCreate'{..}
           = go _cacCourseId _cacXgafv _cacUploadProtocol
               (Just _cacPp)
               _cacAccessToken
               _cacUploadType
               _cacBearerToken
               _cacCallback
-              _cacQuotaUser
-              (Just _cacPrettyPrint)
-              _cacFields
-              _cacKey
-              _cacOAuthToken
               (Just AltJSON)
               _cacPayload
+              classroomService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CoursesAliasesCreateResource)
-                      rq
+                      mempty

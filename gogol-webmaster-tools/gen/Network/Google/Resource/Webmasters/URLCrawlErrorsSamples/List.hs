@@ -34,15 +34,9 @@ module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.List
     , URLCrawlErrorsSamplesList'
 
     -- * Request Lenses
-    , uceslQuotaUser
-    , uceslPrettyPrint
     , uceslPlatform
-    , uceslUserIP
     , uceslCategory
     , uceslSiteURL
-    , uceslKey
-    , uceslOAuthToken
-    , uceslFields
     ) where
 
 import           Network.Google.Prelude
@@ -60,52 +54,28 @@ type URLCrawlErrorsSamplesListResource =
              QueryParam "platform"
                URLCrawlErrorsSamplesListPlatform
                :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] URLCrawlErrorsSamplesListResponse
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] URLCrawlErrorsSamplesListResponse
 
 -- | Lists a site\'s sample URLs for the specified crawl error category and
 -- platform.
 --
 -- /See:/ 'urlCrawlErrorsSamplesList'' smart constructor.
 data URLCrawlErrorsSamplesList' = URLCrawlErrorsSamplesList'
-    { _uceslQuotaUser   :: !(Maybe Text)
-    , _uceslPrettyPrint :: !Bool
-    , _uceslPlatform    :: !URLCrawlErrorsSamplesListPlatform
-    , _uceslUserIP      :: !(Maybe Text)
-    , _uceslCategory    :: !URLCrawlErrorsSamplesListCategory
-    , _uceslSiteURL     :: !Text
-    , _uceslKey         :: !(Maybe AuthKey)
-    , _uceslOAuthToken  :: !(Maybe OAuthToken)
-    , _uceslFields      :: !(Maybe Text)
+    { _uceslPlatform :: !URLCrawlErrorsSamplesListPlatform
+    , _uceslCategory :: !URLCrawlErrorsSamplesListCategory
+    , _uceslSiteURL  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLCrawlErrorsSamplesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uceslQuotaUser'
---
--- * 'uceslPrettyPrint'
---
 -- * 'uceslPlatform'
---
--- * 'uceslUserIP'
 --
 -- * 'uceslCategory'
 --
 -- * 'uceslSiteURL'
---
--- * 'uceslKey'
---
--- * 'uceslOAuthToken'
---
--- * 'uceslFields'
 urlCrawlErrorsSamplesList'
     :: URLCrawlErrorsSamplesListPlatform -- ^ 'platform'
     -> URLCrawlErrorsSamplesListCategory -- ^ 'category'
@@ -113,42 +83,16 @@ urlCrawlErrorsSamplesList'
     -> URLCrawlErrorsSamplesList'
 urlCrawlErrorsSamplesList' pUceslPlatform_ pUceslCategory_ pUceslSiteURL_ =
     URLCrawlErrorsSamplesList'
-    { _uceslQuotaUser = Nothing
-    , _uceslPrettyPrint = True
-    , _uceslPlatform = pUceslPlatform_
-    , _uceslUserIP = Nothing
+    { _uceslPlatform = pUceslPlatform_
     , _uceslCategory = pUceslCategory_
     , _uceslSiteURL = pUceslSiteURL_
-    , _uceslKey = Nothing
-    , _uceslOAuthToken = Nothing
-    , _uceslFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-uceslQuotaUser :: Lens' URLCrawlErrorsSamplesList' (Maybe Text)
-uceslQuotaUser
-  = lens _uceslQuotaUser
-      (\ s a -> s{_uceslQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-uceslPrettyPrint :: Lens' URLCrawlErrorsSamplesList' Bool
-uceslPrettyPrint
-  = lens _uceslPrettyPrint
-      (\ s a -> s{_uceslPrettyPrint = a})
 
 -- | The user agent type (platform) that made the request. For example: web
 uceslPlatform :: Lens' URLCrawlErrorsSamplesList' URLCrawlErrorsSamplesListPlatform
 uceslPlatform
   = lens _uceslPlatform
       (\ s a -> s{_uceslPlatform = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-uceslUserIP :: Lens' URLCrawlErrorsSamplesList' (Maybe Text)
-uceslUserIP
-  = lens _uceslUserIP (\ s a -> s{_uceslUserIP = a})
 
 -- | The crawl error category. For example: authPermissions
 uceslCategory :: Lens' URLCrawlErrorsSamplesList' URLCrawlErrorsSamplesListCategory
@@ -162,43 +106,16 @@ uceslSiteURL :: Lens' URLCrawlErrorsSamplesList' Text
 uceslSiteURL
   = lens _uceslSiteURL (\ s a -> s{_uceslSiteURL = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-uceslKey :: Lens' URLCrawlErrorsSamplesList' (Maybe AuthKey)
-uceslKey = lens _uceslKey (\ s a -> s{_uceslKey = a})
-
--- | OAuth 2.0 token for the current user.
-uceslOAuthToken :: Lens' URLCrawlErrorsSamplesList' (Maybe OAuthToken)
-uceslOAuthToken
-  = lens _uceslOAuthToken
-      (\ s a -> s{_uceslOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-uceslFields :: Lens' URLCrawlErrorsSamplesList' (Maybe Text)
-uceslFields
-  = lens _uceslFields (\ s a -> s{_uceslFields = a})
-
-instance GoogleAuth URLCrawlErrorsSamplesList' where
-        _AuthKey = uceslKey . _Just
-        _AuthToken = uceslOAuthToken . _Just
-
 instance GoogleRequest URLCrawlErrorsSamplesList'
          where
         type Rs URLCrawlErrorsSamplesList' =
              URLCrawlErrorsSamplesListResponse
-        request = requestWith webmasterToolsRequest
-        requestWith rq URLCrawlErrorsSamplesList'{..}
+        requestClient URLCrawlErrorsSamplesList'{..}
           = go _uceslSiteURL (Just _uceslCategory)
               (Just _uceslPlatform)
-              _uceslQuotaUser
-              (Just _uceslPrettyPrint)
-              _uceslUserIP
-              _uceslFields
-              _uceslKey
-              _uceslOAuthToken
               (Just AltJSON)
+              webmasterToolsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy URLCrawlErrorsSamplesListResource)
-                      rq
+                      mempty

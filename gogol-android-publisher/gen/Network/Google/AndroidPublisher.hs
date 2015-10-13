@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference>
 module Network.Google.AndroidPublisher
     (
+    -- * Service Configuration
+      androidPublisherService
+
     -- * API Declaration
-      AndroidPublisherAPI
+    , AndroidPublisherAPI
 
     -- * Resources
 

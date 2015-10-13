@@ -15,8 +15,11 @@
 --
 module Network.Google.StorageTransfer.Types
     (
-    -- * Service Request
-      storageTransferRequest
+    -- * Service Configuration
+      storageTransferService
+
+    -- * OAuth Scopes
+    , cloudPlatformScope
 
     -- * ErrorSummary
     , ErrorSummary
@@ -219,8 +222,12 @@ import           Network.Google.StorageTransfer.Types.Product
 import           Network.Google.StorageTransfer.Types.Sum
 
 -- | Default request referring to version 'v1' of the Google Storage Transfer API. This contains the host and root path used as a starting point for constructing service requests.
-storageTransferRequest :: RequestBuilder
-storageTransferRequest
-  = defaultRequest
-      "https://storagetransfer.googleapis.com/"
+storageTransferService :: Service
+storageTransferService
+  = defaultService (ServiceId "storagetransfer:v1")
+      "storagetransfer.googleapis.com"
       ""
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: OAuthScope
+cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";

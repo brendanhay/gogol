@@ -60,18 +60,13 @@ module Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
 
     -- * Request Lenses
     , pubiXgafv
-    , pubiQuotaUser
-    , pubiPrettyPrint
     , pubiUploadProtocol
     , pubiPp
     , pubiAccessToken
     , pubiUploadType
     , pubiPayload
     , pubiBearerToken
-    , pubiKey
     , pubiName
-    , pubiOAuthToken
-    , pubiFields
     , pubiCallback
     ) where
 
@@ -91,14 +86,9 @@ type ProjectsUpdateBillingInfoResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] ProjectBillingInfo :>
-                                       Put '[JSON] ProjectBillingInfo
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] ProjectBillingInfo :>
+                             Put '[JSON] ProjectBillingInfo
 
 -- | Sets or updates the billing account associated with a project. You
 -- specify the new billing account by setting the \`billing_account_name\`
@@ -131,18 +121,13 @@ type ProjectsUpdateBillingInfoResource =
 -- /See:/ 'projectsUpdateBillingInfo'' smart constructor.
 data ProjectsUpdateBillingInfo' = ProjectsUpdateBillingInfo'
     { _pubiXgafv          :: !(Maybe Text)
-    , _pubiQuotaUser      :: !(Maybe Text)
-    , _pubiPrettyPrint    :: !Bool
     , _pubiUploadProtocol :: !(Maybe Text)
     , _pubiPp             :: !Bool
     , _pubiAccessToken    :: !(Maybe Text)
     , _pubiUploadType     :: !(Maybe Text)
     , _pubiPayload        :: !ProjectBillingInfo
     , _pubiBearerToken    :: !(Maybe Text)
-    , _pubiKey            :: !(Maybe AuthKey)
     , _pubiName           :: !Text
-    , _pubiOAuthToken     :: !(Maybe OAuthToken)
-    , _pubiFields         :: !(Maybe Text)
     , _pubiCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -151,10 +136,6 @@ data ProjectsUpdateBillingInfo' = ProjectsUpdateBillingInfo'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pubiXgafv'
---
--- * 'pubiQuotaUser'
---
--- * 'pubiPrettyPrint'
 --
 -- * 'pubiUploadProtocol'
 --
@@ -168,13 +149,7 @@ data ProjectsUpdateBillingInfo' = ProjectsUpdateBillingInfo'
 --
 -- * 'pubiBearerToken'
 --
--- * 'pubiKey'
---
 -- * 'pubiName'
---
--- * 'pubiOAuthToken'
---
--- * 'pubiFields'
 --
 -- * 'pubiCallback'
 projectsUpdateBillingInfo'
@@ -184,18 +159,13 @@ projectsUpdateBillingInfo'
 projectsUpdateBillingInfo' pPubiPayload_ pPubiName_ =
     ProjectsUpdateBillingInfo'
     { _pubiXgafv = Nothing
-    , _pubiQuotaUser = Nothing
-    , _pubiPrettyPrint = True
     , _pubiUploadProtocol = Nothing
     , _pubiPp = True
     , _pubiAccessToken = Nothing
     , _pubiUploadType = Nothing
     , _pubiPayload = pPubiPayload_
     , _pubiBearerToken = Nothing
-    , _pubiKey = Nothing
     , _pubiName = pPubiName_
-    , _pubiOAuthToken = Nothing
-    , _pubiFields = Nothing
     , _pubiCallback = Nothing
     }
 
@@ -203,20 +173,6 @@ projectsUpdateBillingInfo' pPubiPayload_ pPubiName_ =
 pubiXgafv :: Lens' ProjectsUpdateBillingInfo' (Maybe Text)
 pubiXgafv
   = lens _pubiXgafv (\ s a -> s{_pubiXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pubiQuotaUser :: Lens' ProjectsUpdateBillingInfo' (Maybe Text)
-pubiQuotaUser
-  = lens _pubiQuotaUser
-      (\ s a -> s{_pubiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pubiPrettyPrint :: Lens' ProjectsUpdateBillingInfo' Bool
-pubiPrettyPrint
-  = lens _pubiPrettyPrint
-      (\ s a -> s{_pubiPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 pubiUploadProtocol :: Lens' ProjectsUpdateBillingInfo' (Maybe Text)
@@ -251,57 +207,31 @@ pubiBearerToken
   = lens _pubiBearerToken
       (\ s a -> s{_pubiBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pubiKey :: Lens' ProjectsUpdateBillingInfo' (Maybe AuthKey)
-pubiKey = lens _pubiKey (\ s a -> s{_pubiKey = a})
-
 -- | The resource name of the project associated with the billing information
 -- that you want to update. For example, \`projects\/tokyo-rain-123\`.
 pubiName :: Lens' ProjectsUpdateBillingInfo' Text
 pubiName = lens _pubiName (\ s a -> s{_pubiName = a})
-
--- | OAuth 2.0 token for the current user.
-pubiOAuthToken :: Lens' ProjectsUpdateBillingInfo' (Maybe OAuthToken)
-pubiOAuthToken
-  = lens _pubiOAuthToken
-      (\ s a -> s{_pubiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pubiFields :: Lens' ProjectsUpdateBillingInfo' (Maybe Text)
-pubiFields
-  = lens _pubiFields (\ s a -> s{_pubiFields = a})
 
 -- | JSONP
 pubiCallback :: Lens' ProjectsUpdateBillingInfo' (Maybe Text)
 pubiCallback
   = lens _pubiCallback (\ s a -> s{_pubiCallback = a})
 
-instance GoogleAuth ProjectsUpdateBillingInfo' where
-        _AuthKey = pubiKey . _Just
-        _AuthToken = pubiOAuthToken . _Just
-
 instance GoogleRequest ProjectsUpdateBillingInfo'
          where
         type Rs ProjectsUpdateBillingInfo' =
              ProjectBillingInfo
-        request = requestWith billingRequest
-        requestWith rq ProjectsUpdateBillingInfo'{..}
+        requestClient ProjectsUpdateBillingInfo'{..}
           = go _pubiName _pubiXgafv _pubiUploadProtocol
               (Just _pubiPp)
               _pubiAccessToken
               _pubiUploadType
               _pubiBearerToken
               _pubiCallback
-              _pubiQuotaUser
-              (Just _pubiPrettyPrint)
-              _pubiFields
-              _pubiKey
-              _pubiOAuthToken
               (Just AltJSON)
               _pubiPayload
+              billingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsUpdateBillingInfoResource)
-                      rq
+                      mempty

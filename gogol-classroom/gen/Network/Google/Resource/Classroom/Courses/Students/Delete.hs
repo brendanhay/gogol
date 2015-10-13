@@ -38,8 +38,6 @@ module Network.Google.Resource.Classroom.Courses.Students.Delete
 
     -- * Request Lenses
     , csdXgafv
-    , csdQuotaUser
-    , csdPrettyPrint
     , csdUploadProtocol
     , csdPp
     , csdCourseId
@@ -47,9 +45,6 @@ module Network.Google.Resource.Classroom.Courses.Students.Delete
     , csdUploadType
     , csdUserId
     , csdBearerToken
-    , csdKey
-    , csdOAuthToken
-    , csdFields
     , csdCallback
     ) where
 
@@ -71,13 +66,7 @@ type CoursesStudentsDeleteResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Delete '[JSON] Empty
+                             QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a student of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -88,8 +77,6 @@ type CoursesStudentsDeleteResource =
 -- /See:/ 'coursesStudentsDelete'' smart constructor.
 data CoursesStudentsDelete' = CoursesStudentsDelete'
     { _csdXgafv          :: !(Maybe Text)
-    , _csdQuotaUser      :: !(Maybe Text)
-    , _csdPrettyPrint    :: !Bool
     , _csdUploadProtocol :: !(Maybe Text)
     , _csdPp             :: !Bool
     , _csdCourseId       :: !Text
@@ -97,9 +84,6 @@ data CoursesStudentsDelete' = CoursesStudentsDelete'
     , _csdUploadType     :: !(Maybe Text)
     , _csdUserId         :: !Text
     , _csdBearerToken    :: !(Maybe Text)
-    , _csdKey            :: !(Maybe AuthKey)
-    , _csdOAuthToken     :: !(Maybe OAuthToken)
-    , _csdFields         :: !(Maybe Text)
     , _csdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -108,10 +92,6 @@ data CoursesStudentsDelete' = CoursesStudentsDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'csdXgafv'
---
--- * 'csdQuotaUser'
---
--- * 'csdPrettyPrint'
 --
 -- * 'csdUploadProtocol'
 --
@@ -127,12 +107,6 @@ data CoursesStudentsDelete' = CoursesStudentsDelete'
 --
 -- * 'csdBearerToken'
 --
--- * 'csdKey'
---
--- * 'csdOAuthToken'
---
--- * 'csdFields'
---
 -- * 'csdCallback'
 coursesStudentsDelete'
     :: Text -- ^ 'courseId'
@@ -141,8 +115,6 @@ coursesStudentsDelete'
 coursesStudentsDelete' pCsdCourseId_ pCsdUserId_ =
     CoursesStudentsDelete'
     { _csdXgafv = Nothing
-    , _csdQuotaUser = Nothing
-    , _csdPrettyPrint = True
     , _csdUploadProtocol = Nothing
     , _csdPp = True
     , _csdCourseId = pCsdCourseId_
@@ -150,28 +122,12 @@ coursesStudentsDelete' pCsdCourseId_ pCsdUserId_ =
     , _csdUploadType = Nothing
     , _csdUserId = pCsdUserId_
     , _csdBearerToken = Nothing
-    , _csdKey = Nothing
-    , _csdOAuthToken = Nothing
-    , _csdFields = Nothing
     , _csdCallback = Nothing
     }
 
 -- | V1 error format.
 csdXgafv :: Lens' CoursesStudentsDelete' (Maybe Text)
 csdXgafv = lens _csdXgafv (\ s a -> s{_csdXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-csdQuotaUser :: Lens' CoursesStudentsDelete' (Maybe Text)
-csdQuotaUser
-  = lens _csdQuotaUser (\ s a -> s{_csdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-csdPrettyPrint :: Lens' CoursesStudentsDelete' Bool
-csdPrettyPrint
-  = lens _csdPrettyPrint
-      (\ s a -> s{_csdPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 csdUploadProtocol :: Lens' CoursesStudentsDelete' (Maybe Text)
@@ -215,36 +171,14 @@ csdBearerToken
   = lens _csdBearerToken
       (\ s a -> s{_csdBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-csdKey :: Lens' CoursesStudentsDelete' (Maybe AuthKey)
-csdKey = lens _csdKey (\ s a -> s{_csdKey = a})
-
--- | OAuth 2.0 token for the current user.
-csdOAuthToken :: Lens' CoursesStudentsDelete' (Maybe OAuthToken)
-csdOAuthToken
-  = lens _csdOAuthToken
-      (\ s a -> s{_csdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-csdFields :: Lens' CoursesStudentsDelete' (Maybe Text)
-csdFields
-  = lens _csdFields (\ s a -> s{_csdFields = a})
-
 -- | JSONP
 csdCallback :: Lens' CoursesStudentsDelete' (Maybe Text)
 csdCallback
   = lens _csdCallback (\ s a -> s{_csdCallback = a})
 
-instance GoogleAuth CoursesStudentsDelete' where
-        _AuthKey = csdKey . _Just
-        _AuthToken = csdOAuthToken . _Just
-
 instance GoogleRequest CoursesStudentsDelete' where
         type Rs CoursesStudentsDelete' = Empty
-        request = requestWith classroomRequest
-        requestWith rq CoursesStudentsDelete'{..}
+        requestClient CoursesStudentsDelete'{..}
           = go _csdCourseId _csdUserId _csdXgafv
               _csdUploadProtocol
               (Just _csdPp)
@@ -252,13 +186,9 @@ instance GoogleRequest CoursesStudentsDelete' where
               _csdUploadType
               _csdBearerToken
               _csdCallback
-              _csdQuotaUser
-              (Just _csdPrettyPrint)
-              _csdFields
-              _csdKey
-              _csdOAuthToken
               (Just AltJSON)
+              classroomService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CoursesStudentsDeleteResource)
-                      rq
+                      mempty

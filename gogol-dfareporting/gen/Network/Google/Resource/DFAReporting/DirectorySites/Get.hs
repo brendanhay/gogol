@@ -33,14 +33,8 @@ module Network.Google.Resource.DFAReporting.DirectorySites.Get
     , DirectorySitesGet'
 
     -- * Request Lenses
-    , dsgQuotaUser
-    , dsgPrettyPrint
-    , dsgUserIP
     , dsgProFileId
-    , dsgKey
     , dsgId
-    , dsgOAuthToken
-    , dsgFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -53,124 +47,48 @@ type DirectorySitesGetResource =
        Capture "profileId" Int64 :>
          "directorySites" :>
            Capture "id" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] DirectorySite
+             QueryParam "alt" AltJSON :> Get '[JSON] DirectorySite
 
 -- | Gets one directory site by ID.
 --
 -- /See:/ 'directorySitesGet'' smart constructor.
 data DirectorySitesGet' = DirectorySitesGet'
-    { _dsgQuotaUser   :: !(Maybe Text)
-    , _dsgPrettyPrint :: !Bool
-    , _dsgUserIP      :: !(Maybe Text)
-    , _dsgProFileId   :: !Int64
-    , _dsgKey         :: !(Maybe AuthKey)
-    , _dsgId          :: !Int64
-    , _dsgOAuthToken  :: !(Maybe OAuthToken)
-    , _dsgFields      :: !(Maybe Text)
+    { _dsgProFileId :: !Int64
+    , _dsgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySitesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dsgQuotaUser'
---
--- * 'dsgPrettyPrint'
---
--- * 'dsgUserIP'
---
 -- * 'dsgProFileId'
 --
--- * 'dsgKey'
---
 -- * 'dsgId'
---
--- * 'dsgOAuthToken'
---
--- * 'dsgFields'
 directorySitesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> DirectorySitesGet'
 directorySitesGet' pDsgProFileId_ pDsgId_ =
     DirectorySitesGet'
-    { _dsgQuotaUser = Nothing
-    , _dsgPrettyPrint = True
-    , _dsgUserIP = Nothing
-    , _dsgProFileId = pDsgProFileId_
-    , _dsgKey = Nothing
+    { _dsgProFileId = pDsgProFileId_
     , _dsgId = pDsgId_
-    , _dsgOAuthToken = Nothing
-    , _dsgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-dsgQuotaUser :: Lens' DirectorySitesGet' (Maybe Text)
-dsgQuotaUser
-  = lens _dsgQuotaUser (\ s a -> s{_dsgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-dsgPrettyPrint :: Lens' DirectorySitesGet' Bool
-dsgPrettyPrint
-  = lens _dsgPrettyPrint
-      (\ s a -> s{_dsgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-dsgUserIP :: Lens' DirectorySitesGet' (Maybe Text)
-dsgUserIP
-  = lens _dsgUserIP (\ s a -> s{_dsgUserIP = a})
 
 -- | User profile ID associated with this request.
 dsgProFileId :: Lens' DirectorySitesGet' Int64
 dsgProFileId
   = lens _dsgProFileId (\ s a -> s{_dsgProFileId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-dsgKey :: Lens' DirectorySitesGet' (Maybe AuthKey)
-dsgKey = lens _dsgKey (\ s a -> s{_dsgKey = a})
-
 -- | Directory site ID.
 dsgId :: Lens' DirectorySitesGet' Int64
 dsgId = lens _dsgId (\ s a -> s{_dsgId = a})
 
--- | OAuth 2.0 token for the current user.
-dsgOAuthToken :: Lens' DirectorySitesGet' (Maybe OAuthToken)
-dsgOAuthToken
-  = lens _dsgOAuthToken
-      (\ s a -> s{_dsgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-dsgFields :: Lens' DirectorySitesGet' (Maybe Text)
-dsgFields
-  = lens _dsgFields (\ s a -> s{_dsgFields = a})
-
-instance GoogleAuth DirectorySitesGet' where
-        _AuthKey = dsgKey . _Just
-        _AuthToken = dsgOAuthToken . _Just
-
 instance GoogleRequest DirectorySitesGet' where
         type Rs DirectorySitesGet' = DirectorySite
-        request = requestWith dFAReportingRequest
-        requestWith rq DirectorySitesGet'{..}
-          = go _dsgProFileId _dsgId _dsgQuotaUser
-              (Just _dsgPrettyPrint)
-              _dsgUserIP
-              _dsgFields
-              _dsgKey
-              _dsgOAuthToken
-              (Just AltJSON)
+        requestClient DirectorySitesGet'{..}
+          = go _dsgProFileId _dsgId (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy DirectorySitesGetResource)
-                      rq
+                      mempty

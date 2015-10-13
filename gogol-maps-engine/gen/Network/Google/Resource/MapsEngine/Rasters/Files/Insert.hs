@@ -33,15 +33,9 @@ module Network.Google.Resource.MapsEngine.Rasters.Files.Insert
     , RastersFilesInsert'
 
     -- * Request Lenses
-    , rfiQuotaUser
-    , rfiPrettyPrint
-    , rfiUserIP
     , rfiMedia
-    , rfiKey
     , rfiId
-    , rfiOAuthToken
     , rfiFilename
-    , rfiFields
     ) where
 
 import           Network.Google.MapsEngine.Types
@@ -54,51 +48,27 @@ type RastersFilesInsertResource =
        Capture "id" Text :>
          "files" :>
            QueryParam "filename" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Stream :> Post '[JSON] ()
+             QueryParam "alt" AltJSON :>
+               ReqBody '[OctetStream] RequestBody :> Post '[JSON] ()
 
 -- | Upload a file to a raster asset.
 --
 -- /See:/ 'rastersFilesInsert'' smart constructor.
 data RastersFilesInsert' = RastersFilesInsert'
-    { _rfiQuotaUser   :: !(Maybe Text)
-    , _rfiPrettyPrint :: !Bool
-    , _rfiUserIP      :: !(Maybe Text)
-    , _rfiMedia       :: !Stream
-    , _rfiKey         :: !(Maybe AuthKey)
-    , _rfiId          :: !Text
-    , _rfiOAuthToken  :: !(Maybe OAuthToken)
-    , _rfiFilename    :: !Text
-    , _rfiFields      :: !(Maybe Text)
+    { _rfiMedia    :: !Stream
+    , _rfiId       :: !Text
+    , _rfiFilename :: !Text
     }
 
 -- | Creates a value of 'RastersFilesInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rfiQuotaUser'
---
--- * 'rfiPrettyPrint'
---
--- * 'rfiUserIP'
---
 -- * 'rfiMedia'
---
--- * 'rfiKey'
 --
 -- * 'rfiId'
 --
--- * 'rfiOAuthToken'
---
 -- * 'rfiFilename'
---
--- * 'rfiFields'
 rastersFilesInsert'
     :: Stream -- ^ 'media'
     -> Text -- ^ 'id'
@@ -106,82 +76,30 @@ rastersFilesInsert'
     -> RastersFilesInsert'
 rastersFilesInsert' pRfiMedia_ pRfiId_ pRfiFilename_ =
     RastersFilesInsert'
-    { _rfiQuotaUser = Nothing
-    , _rfiPrettyPrint = True
-    , _rfiUserIP = Nothing
-    , _rfiMedia = pRfiMedia_
-    , _rfiKey = Nothing
+    { _rfiMedia = pRfiMedia_
     , _rfiId = pRfiId_
-    , _rfiOAuthToken = Nothing
     , _rfiFilename = pRfiFilename_
-    , _rfiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-rfiQuotaUser :: Lens' RastersFilesInsert' (Maybe Text)
-rfiQuotaUser
-  = lens _rfiQuotaUser (\ s a -> s{_rfiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rfiPrettyPrint :: Lens' RastersFilesInsert' Bool
-rfiPrettyPrint
-  = lens _rfiPrettyPrint
-      (\ s a -> s{_rfiPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rfiUserIP :: Lens' RastersFilesInsert' (Maybe Text)
-rfiUserIP
-  = lens _rfiUserIP (\ s a -> s{_rfiUserIP = a})
 
 rfiMedia :: Lens' RastersFilesInsert' Stream
 rfiMedia = lens _rfiMedia (\ s a -> s{_rfiMedia = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rfiKey :: Lens' RastersFilesInsert' (Maybe AuthKey)
-rfiKey = lens _rfiKey (\ s a -> s{_rfiKey = a})
-
 -- | The ID of the raster asset.
 rfiId :: Lens' RastersFilesInsert' Text
 rfiId = lens _rfiId (\ s a -> s{_rfiId = a})
-
--- | OAuth 2.0 token for the current user.
-rfiOAuthToken :: Lens' RastersFilesInsert' (Maybe OAuthToken)
-rfiOAuthToken
-  = lens _rfiOAuthToken
-      (\ s a -> s{_rfiOAuthToken = a})
 
 -- | The file name of this uploaded file.
 rfiFilename :: Lens' RastersFilesInsert' Text
 rfiFilename
   = lens _rfiFilename (\ s a -> s{_rfiFilename = a})
 
--- | Selector specifying which fields to include in a partial response.
-rfiFields :: Lens' RastersFilesInsert' (Maybe Text)
-rfiFields
-  = lens _rfiFields (\ s a -> s{_rfiFields = a})
-
-instance GoogleAuth RastersFilesInsert' where
-        _AuthKey = rfiKey . _Just
-        _AuthToken = rfiOAuthToken . _Just
-
 instance GoogleRequest RastersFilesInsert' where
         type Rs RastersFilesInsert' = ()
-        request = requestWith mapsEngineRequest
-        requestWith rq RastersFilesInsert'{..}
-          = go _rfiId (Just _rfiFilename) _rfiQuotaUser
-              (Just _rfiPrettyPrint)
-              _rfiUserIP
-              _rfiFields
-              _rfiKey
-              _rfiOAuthToken
-              (Just AltJSON)
+        requestClient RastersFilesInsert'{..}
+          = go _rfiId (Just _rfiFilename) (Just AltJSON)
               _rfiMedia
+              mapsEngineService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy RastersFilesInsertResource)
-                      rq
+                      mempty

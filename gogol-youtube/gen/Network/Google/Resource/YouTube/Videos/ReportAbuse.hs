@@ -33,14 +33,8 @@ module Network.Google.Resource.YouTube.Videos.ReportAbuse
     , VideosReportAbuse'
 
     -- * Request Lenses
-    , vraQuotaUser
-    , vraPrettyPrint
-    , vraUserIP
     , vraPayload
     , vraOnBehalfOfContentOwner
-    , vraKey
-    , vraOAuthToken
-    , vraFields
     ) where
 
 import           Network.Google.Prelude
@@ -52,81 +46,32 @@ type VideosReportAbuseResource =
      "videos" :>
        "reportAbuse" :>
          QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] VideoAbuseReport :> Post '[JSON] ()
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] VideoAbuseReport :> Post '[JSON] ()
 
 -- | Report abuse for a video.
 --
 -- /See:/ 'videosReportAbuse'' smart constructor.
 data VideosReportAbuse' = VideosReportAbuse'
-    { _vraQuotaUser              :: !(Maybe Text)
-    , _vraPrettyPrint            :: !Bool
-    , _vraUserIP                 :: !(Maybe Text)
-    , _vraPayload                :: !VideoAbuseReport
+    { _vraPayload                :: !VideoAbuseReport
     , _vraOnBehalfOfContentOwner :: !(Maybe Text)
-    , _vraKey                    :: !(Maybe AuthKey)
-    , _vraOAuthToken             :: !(Maybe OAuthToken)
-    , _vraFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosReportAbuse'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vraQuotaUser'
---
--- * 'vraPrettyPrint'
---
--- * 'vraUserIP'
---
 -- * 'vraPayload'
 --
 -- * 'vraOnBehalfOfContentOwner'
---
--- * 'vraKey'
---
--- * 'vraOAuthToken'
---
--- * 'vraFields'
 videosReportAbuse'
     :: VideoAbuseReport -- ^ 'payload'
     -> VideosReportAbuse'
 videosReportAbuse' pVraPayload_ =
     VideosReportAbuse'
-    { _vraQuotaUser = Nothing
-    , _vraPrettyPrint = True
-    , _vraUserIP = Nothing
-    , _vraPayload = pVraPayload_
+    { _vraPayload = pVraPayload_
     , _vraOnBehalfOfContentOwner = Nothing
-    , _vraKey = Nothing
-    , _vraOAuthToken = Nothing
-    , _vraFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-vraQuotaUser :: Lens' VideosReportAbuse' (Maybe Text)
-vraQuotaUser
-  = lens _vraQuotaUser (\ s a -> s{_vraQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-vraPrettyPrint :: Lens' VideosReportAbuse' Bool
-vraPrettyPrint
-  = lens _vraPrettyPrint
-      (\ s a -> s{_vraPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-vraUserIP :: Lens' VideosReportAbuse' (Maybe Text)
-vraUserIP
-  = lens _vraUserIP (\ s a -> s{_vraUserIP = a})
 
 -- | Multipart request metadata.
 vraPayload :: Lens' VideosReportAbuse' VideoAbuseReport
@@ -148,40 +93,13 @@ vraOnBehalfOfContentOwner
   = lens _vraOnBehalfOfContentOwner
       (\ s a -> s{_vraOnBehalfOfContentOwner = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-vraKey :: Lens' VideosReportAbuse' (Maybe AuthKey)
-vraKey = lens _vraKey (\ s a -> s{_vraKey = a})
-
--- | OAuth 2.0 token for the current user.
-vraOAuthToken :: Lens' VideosReportAbuse' (Maybe OAuthToken)
-vraOAuthToken
-  = lens _vraOAuthToken
-      (\ s a -> s{_vraOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-vraFields :: Lens' VideosReportAbuse' (Maybe Text)
-vraFields
-  = lens _vraFields (\ s a -> s{_vraFields = a})
-
-instance GoogleAuth VideosReportAbuse' where
-        _AuthKey = vraKey . _Just
-        _AuthToken = vraOAuthToken . _Just
-
 instance GoogleRequest VideosReportAbuse' where
         type Rs VideosReportAbuse' = ()
-        request = requestWith youTubeRequest
-        requestWith rq VideosReportAbuse'{..}
-          = go _vraOnBehalfOfContentOwner _vraQuotaUser
-              (Just _vraPrettyPrint)
-              _vraUserIP
-              _vraFields
-              _vraKey
-              _vraOAuthToken
-              (Just AltJSON)
+        requestClient VideosReportAbuse'{..}
+          = go _vraOnBehalfOfContentOwner (Just AltJSON)
               _vraPayload
+              youTubeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy VideosReportAbuseResource)
-                      rq
+                      mempty

@@ -34,14 +34,8 @@ module Network.Google.Resource.SQL.Databases.Insert
     , DatabasesInsert'
 
     -- * Request Lenses
-    , diQuotaUser
-    , diPrettyPrint
     , diProject
-    , diUserIP
     , diPayload
-    , diKey
-    , diOAuthToken
-    , diFields
     , diInstance
     ) where
 
@@ -56,50 +50,26 @@ type DatabasesInsertResource =
          "instances" :>
            Capture "instance" Text :>
              "databases" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Database :> Post '[JSON] Operation
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Database :> Post '[JSON] Operation
 
 -- | Inserts a resource containing information about a database inside a
 -- Cloud SQL instance.
 --
 -- /See:/ 'databasesInsert'' smart constructor.
 data DatabasesInsert' = DatabasesInsert'
-    { _diQuotaUser   :: !(Maybe Text)
-    , _diPrettyPrint :: !Bool
-    , _diProject     :: !Text
-    , _diUserIP      :: !(Maybe Text)
-    , _diPayload     :: !Database
-    , _diKey         :: !(Maybe AuthKey)
-    , _diOAuthToken  :: !(Maybe OAuthToken)
-    , _diFields      :: !(Maybe Text)
-    , _diInstance    :: !Text
+    { _diProject  :: !Text
+    , _diPayload  :: !Database
+    , _diInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatabasesInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'diQuotaUser'
---
--- * 'diPrettyPrint'
---
 -- * 'diProject'
 --
--- * 'diUserIP'
---
 -- * 'diPayload'
---
--- * 'diKey'
---
--- * 'diOAuthToken'
---
--- * 'diFields'
 --
 -- * 'diInstance'
 databasesInsert'
@@ -109,82 +79,32 @@ databasesInsert'
     -> DatabasesInsert'
 databasesInsert' pDiProject_ pDiPayload_ pDiInstance_ =
     DatabasesInsert'
-    { _diQuotaUser = Nothing
-    , _diPrettyPrint = True
-    , _diProject = pDiProject_
-    , _diUserIP = Nothing
+    { _diProject = pDiProject_
     , _diPayload = pDiPayload_
-    , _diKey = Nothing
-    , _diOAuthToken = Nothing
-    , _diFields = Nothing
     , _diInstance = pDiInstance_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-diQuotaUser :: Lens' DatabasesInsert' (Maybe Text)
-diQuotaUser
-  = lens _diQuotaUser (\ s a -> s{_diQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-diPrettyPrint :: Lens' DatabasesInsert' Bool
-diPrettyPrint
-  = lens _diPrettyPrint
-      (\ s a -> s{_diPrettyPrint = a})
 
 -- | Project ID of the project that contains the instance.
 diProject :: Lens' DatabasesInsert' Text
 diProject
   = lens _diProject (\ s a -> s{_diProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-diUserIP :: Lens' DatabasesInsert' (Maybe Text)
-diUserIP = lens _diUserIP (\ s a -> s{_diUserIP = a})
-
 -- | Multipart request metadata.
 diPayload :: Lens' DatabasesInsert' Database
 diPayload
   = lens _diPayload (\ s a -> s{_diPayload = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-diKey :: Lens' DatabasesInsert' (Maybe AuthKey)
-diKey = lens _diKey (\ s a -> s{_diKey = a})
-
--- | OAuth 2.0 token for the current user.
-diOAuthToken :: Lens' DatabasesInsert' (Maybe OAuthToken)
-diOAuthToken
-  = lens _diOAuthToken (\ s a -> s{_diOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-diFields :: Lens' DatabasesInsert' (Maybe Text)
-diFields = lens _diFields (\ s a -> s{_diFields = a})
 
 -- | Database instance ID. This does not include the project ID.
 diInstance :: Lens' DatabasesInsert' Text
 diInstance
   = lens _diInstance (\ s a -> s{_diInstance = a})
 
-instance GoogleAuth DatabasesInsert' where
-        _AuthKey = diKey . _Just
-        _AuthToken = diOAuthToken . _Just
-
 instance GoogleRequest DatabasesInsert' where
         type Rs DatabasesInsert' = Operation
-        request = requestWith sQLAdminRequest
-        requestWith rq DatabasesInsert'{..}
-          = go _diProject _diInstance _diQuotaUser
-              (Just _diPrettyPrint)
-              _diUserIP
-              _diFields
-              _diKey
-              _diOAuthToken
-              (Just AltJSON)
-              _diPayload
+        requestClient DatabasesInsert'{..}
+          = go _diProject _diInstance (Just AltJSON) _diPayload
+              sQLAdminService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy DatabasesInsertResource)
-                      rq
+                      mempty

@@ -18,8 +18,11 @@
 -- /See:/ < Google Cloud Network Performance Monitoring API Reference>
 module Network.Google.LatencyTest
     (
+    -- * Service Configuration
+      latencyTestService
+
     -- * API Declaration
-      LatencyTestAPI
+    , LatencyTestAPI
 
     -- * Resources
 

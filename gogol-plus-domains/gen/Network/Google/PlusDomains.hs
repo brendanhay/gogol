@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference>
 module Network.Google.PlusDomains
     (
+    -- * Service Configuration
+      plusDomainsService
+
     -- * API Declaration
-      PlusDomainsAPI
+    , PlusDomainsAPI
 
     -- * Resources
 

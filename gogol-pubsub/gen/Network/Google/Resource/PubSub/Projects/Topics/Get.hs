@@ -34,17 +34,12 @@ module Network.Google.Resource.PubSub.Projects.Topics.Get
 
     -- * Request Lenses
     , ptgXgafv
-    , ptgQuotaUser
-    , ptgPrettyPrint
     , ptgUploadProtocol
     , ptgPp
     , ptgAccessToken
     , ptgUploadType
     , ptgTopic
     , ptgBearerToken
-    , ptgKey
-    , ptgOAuthToken
-    , ptgFields
     , ptgCallback
     ) where
 
@@ -63,29 +58,19 @@ type ProjectsTopicsGetResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :> Get '[JSON] Topic
+                       QueryParam "alt" AltJSON :> Get '[JSON] Topic
 
 -- | Gets the configuration of a topic.
 --
 -- /See:/ 'projectsTopicsGet'' smart constructor.
 data ProjectsTopicsGet' = ProjectsTopicsGet'
     { _ptgXgafv          :: !(Maybe Text)
-    , _ptgQuotaUser      :: !(Maybe Text)
-    , _ptgPrettyPrint    :: !Bool
     , _ptgUploadProtocol :: !(Maybe Text)
     , _ptgPp             :: !Bool
     , _ptgAccessToken    :: !(Maybe Text)
     , _ptgUploadType     :: !(Maybe Text)
     , _ptgTopic          :: !Text
     , _ptgBearerToken    :: !(Maybe Text)
-    , _ptgKey            :: !(Maybe AuthKey)
-    , _ptgOAuthToken     :: !(Maybe OAuthToken)
-    , _ptgFields         :: !(Maybe Text)
     , _ptgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -94,10 +79,6 @@ data ProjectsTopicsGet' = ProjectsTopicsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ptgXgafv'
---
--- * 'ptgQuotaUser'
---
--- * 'ptgPrettyPrint'
 --
 -- * 'ptgUploadProtocol'
 --
@@ -111,12 +92,6 @@ data ProjectsTopicsGet' = ProjectsTopicsGet'
 --
 -- * 'ptgBearerToken'
 --
--- * 'ptgKey'
---
--- * 'ptgOAuthToken'
---
--- * 'ptgFields'
---
 -- * 'ptgCallback'
 projectsTopicsGet'
     :: Text -- ^ 'topic'
@@ -124,36 +99,18 @@ projectsTopicsGet'
 projectsTopicsGet' pPtgTopic_ =
     ProjectsTopicsGet'
     { _ptgXgafv = Nothing
-    , _ptgQuotaUser = Nothing
-    , _ptgPrettyPrint = True
     , _ptgUploadProtocol = Nothing
     , _ptgPp = True
     , _ptgAccessToken = Nothing
     , _ptgUploadType = Nothing
     , _ptgTopic = pPtgTopic_
     , _ptgBearerToken = Nothing
-    , _ptgKey = Nothing
-    , _ptgOAuthToken = Nothing
-    , _ptgFields = Nothing
     , _ptgCallback = Nothing
     }
 
 -- | V1 error format.
 ptgXgafv :: Lens' ProjectsTopicsGet' (Maybe Text)
 ptgXgafv = lens _ptgXgafv (\ s a -> s{_ptgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ptgQuotaUser :: Lens' ProjectsTopicsGet' (Maybe Text)
-ptgQuotaUser
-  = lens _ptgQuotaUser (\ s a -> s{_ptgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ptgPrettyPrint :: Lens' ProjectsTopicsGet' Bool
-ptgPrettyPrint
-  = lens _ptgPrettyPrint
-      (\ s a -> s{_ptgPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 ptgUploadProtocol :: Lens' ProjectsTopicsGet' (Maybe Text)
@@ -187,49 +144,23 @@ ptgBearerToken
   = lens _ptgBearerToken
       (\ s a -> s{_ptgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ptgKey :: Lens' ProjectsTopicsGet' (Maybe AuthKey)
-ptgKey = lens _ptgKey (\ s a -> s{_ptgKey = a})
-
--- | OAuth 2.0 token for the current user.
-ptgOAuthToken :: Lens' ProjectsTopicsGet' (Maybe OAuthToken)
-ptgOAuthToken
-  = lens _ptgOAuthToken
-      (\ s a -> s{_ptgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ptgFields :: Lens' ProjectsTopicsGet' (Maybe Text)
-ptgFields
-  = lens _ptgFields (\ s a -> s{_ptgFields = a})
-
 -- | JSONP
 ptgCallback :: Lens' ProjectsTopicsGet' (Maybe Text)
 ptgCallback
   = lens _ptgCallback (\ s a -> s{_ptgCallback = a})
 
-instance GoogleAuth ProjectsTopicsGet' where
-        _AuthKey = ptgKey . _Just
-        _AuthToken = ptgOAuthToken . _Just
-
 instance GoogleRequest ProjectsTopicsGet' where
         type Rs ProjectsTopicsGet' = Topic
-        request = requestWith pubSubRequest
-        requestWith rq ProjectsTopicsGet'{..}
+        requestClient ProjectsTopicsGet'{..}
           = go _ptgTopic _ptgXgafv _ptgUploadProtocol
               (Just _ptgPp)
               _ptgAccessToken
               _ptgUploadType
               _ptgBearerToken
               _ptgCallback
-              _ptgQuotaUser
-              (Just _ptgPrettyPrint)
-              _ptgFields
-              _ptgKey
-              _ptgOAuthToken
               (Just AltJSON)
+              pubSubService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsTopicsGetResource)
-                      rq
+                      mempty

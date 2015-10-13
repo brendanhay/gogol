@@ -33,18 +33,12 @@ module Network.Google.Resource.Games.Scores.List
     , ScoresList'
 
     -- * Request Lenses
-    , sllQuotaUser
-    , sllPrettyPrint
-    , sllUserIP
     , sllCollection
     , sllTimeSpan
     , sllLeaderboardId
-    , sllKey
     , sllLanguage
     , sllPageToken
-    , sllOAuthToken
     , sllMaxResults
-    , sllFields
     ) where
 
 import           Network.Google.Games.Types
@@ -61,42 +55,24 @@ type ScoresListResource =
                QueryParam "language" Text :>
                  QueryParam "pageToken" Text :>
                    QueryParam "maxResults" Int32 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] LeaderboardScores
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] LeaderboardScores
 
 -- | Lists the scores in a leaderboard, starting from the top.
 --
 -- /See:/ 'scoresList'' smart constructor.
 data ScoresList' = ScoresList'
-    { _sllQuotaUser     :: !(Maybe Text)
-    , _sllPrettyPrint   :: !Bool
-    , _sllUserIP        :: !(Maybe Text)
-    , _sllCollection    :: !ScoresListCollection
+    { _sllCollection    :: !ScoresListCollection
     , _sllTimeSpan      :: !ScoresListTimeSpan
     , _sllLeaderboardId :: !Text
-    , _sllKey           :: !(Maybe AuthKey)
     , _sllLanguage      :: !(Maybe Text)
     , _sllPageToken     :: !(Maybe Text)
-    , _sllOAuthToken    :: !(Maybe OAuthToken)
     , _sllMaxResults    :: !(Maybe Int32)
-    , _sllFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'sllQuotaUser'
---
--- * 'sllPrettyPrint'
---
--- * 'sllUserIP'
 --
 -- * 'sllCollection'
 --
@@ -104,17 +80,11 @@ data ScoresList' = ScoresList'
 --
 -- * 'sllLeaderboardId'
 --
--- * 'sllKey'
---
 -- * 'sllLanguage'
 --
 -- * 'sllPageToken'
 --
--- * 'sllOAuthToken'
---
 -- * 'sllMaxResults'
---
--- * 'sllFields'
 scoresList'
     :: ScoresListCollection -- ^ 'collection'
     -> ScoresListTimeSpan -- ^ 'timeSpan'
@@ -122,38 +92,13 @@ scoresList'
     -> ScoresList'
 scoresList' pSllCollection_ pSllTimeSpan_ pSllLeaderboardId_ =
     ScoresList'
-    { _sllQuotaUser = Nothing
-    , _sllPrettyPrint = True
-    , _sllUserIP = Nothing
-    , _sllCollection = pSllCollection_
+    { _sllCollection = pSllCollection_
     , _sllTimeSpan = pSllTimeSpan_
     , _sllLeaderboardId = pSllLeaderboardId_
-    , _sllKey = Nothing
     , _sllLanguage = Nothing
     , _sllPageToken = Nothing
-    , _sllOAuthToken = Nothing
     , _sllMaxResults = Nothing
-    , _sllFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-sllQuotaUser :: Lens' ScoresList' (Maybe Text)
-sllQuotaUser
-  = lens _sllQuotaUser (\ s a -> s{_sllQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-sllPrettyPrint :: Lens' ScoresList' Bool
-sllPrettyPrint
-  = lens _sllPrettyPrint
-      (\ s a -> s{_sllPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-sllUserIP :: Lens' ScoresList' (Maybe Text)
-sllUserIP
-  = lens _sllUserIP (\ s a -> s{_sllUserIP = a})
 
 -- | The collection of scores you\'re requesting.
 sllCollection :: Lens' ScoresList' ScoresListCollection
@@ -172,12 +117,6 @@ sllLeaderboardId
   = lens _sllLeaderboardId
       (\ s a -> s{_sllLeaderboardId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-sllKey :: Lens' ScoresList' (Maybe AuthKey)
-sllKey = lens _sllKey (\ s a -> s{_sllKey = a})
-
 -- | The preferred language to use for strings returned by this method.
 sllLanguage :: Lens' ScoresList' (Maybe Text)
 sllLanguage
@@ -188,12 +127,6 @@ sllPageToken :: Lens' ScoresList' (Maybe Text)
 sllPageToken
   = lens _sllPageToken (\ s a -> s{_sllPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-sllOAuthToken :: Lens' ScoresList' (Maybe OAuthToken)
-sllOAuthToken
-  = lens _sllOAuthToken
-      (\ s a -> s{_sllOAuthToken = a})
-
 -- | The maximum number of leaderboard scores to return in the response. For
 -- any response, the actual number of leaderboard scores returned may be
 -- less than the specified maxResults.
@@ -202,30 +135,16 @@ sllMaxResults
   = lens _sllMaxResults
       (\ s a -> s{_sllMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-sllFields :: Lens' ScoresList' (Maybe Text)
-sllFields
-  = lens _sllFields (\ s a -> s{_sllFields = a})
-
-instance GoogleAuth ScoresList' where
-        _AuthKey = sllKey . _Just
-        _AuthToken = sllOAuthToken . _Just
-
 instance GoogleRequest ScoresList' where
         type Rs ScoresList' = LeaderboardScores
-        request = requestWith gamesRequest
-        requestWith rq ScoresList'{..}
+        requestClient ScoresList'{..}
           = go _sllLeaderboardId _sllCollection
               (Just _sllTimeSpan)
               _sllLanguage
               _sllPageToken
               _sllMaxResults
-              _sllQuotaUser
-              (Just _sllPrettyPrint)
-              _sllUserIP
-              _sllFields
-              _sllKey
-              _sllOAuthToken
               (Just AltJSON)
+              gamesService
           where go
-                  = clientBuild (Proxy :: Proxy ScoresListResource) rq
+                  = buildClient (Proxy :: Proxy ScoresListResource)
+                      mempty

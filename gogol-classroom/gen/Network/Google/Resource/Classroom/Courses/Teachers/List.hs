@@ -37,19 +37,14 @@ module Network.Google.Resource.Classroom.Courses.Teachers.List
 
     -- * Request Lenses
     , ctlXgafv
-    , ctlQuotaUser
-    , ctlPrettyPrint
     , ctlUploadProtocol
     , ctlPp
     , ctlCourseId
     , ctlAccessToken
     , ctlUploadType
     , ctlBearerToken
-    , ctlKey
     , ctlPageToken
-    , ctlOAuthToken
     , ctlPageSize
-    , ctlFields
     , ctlCallback
     ) where
 
@@ -72,13 +67,8 @@ type CoursesTeachersListResource =
                          QueryParam "pageToken" Text :>
                            QueryParam "pageSize" Int32 :>
                              QueryParam "callback" Text :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] ListTeachersResponse
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListTeachersResponse
 
 -- | Returns a list of teachers of this course that the requester is
 -- permitted to view. This method returns the following error codes: *
@@ -88,19 +78,14 @@ type CoursesTeachersListResource =
 -- /See:/ 'coursesTeachersList'' smart constructor.
 data CoursesTeachersList' = CoursesTeachersList'
     { _ctlXgafv          :: !(Maybe Text)
-    , _ctlQuotaUser      :: !(Maybe Text)
-    , _ctlPrettyPrint    :: !Bool
     , _ctlUploadProtocol :: !(Maybe Text)
     , _ctlPp             :: !Bool
     , _ctlCourseId       :: !Text
     , _ctlAccessToken    :: !(Maybe Text)
     , _ctlUploadType     :: !(Maybe Text)
     , _ctlBearerToken    :: !(Maybe Text)
-    , _ctlKey            :: !(Maybe AuthKey)
     , _ctlPageToken      :: !(Maybe Text)
-    , _ctlOAuthToken     :: !(Maybe OAuthToken)
     , _ctlPageSize       :: !(Maybe Int32)
-    , _ctlFields         :: !(Maybe Text)
     , _ctlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -109,10 +94,6 @@ data CoursesTeachersList' = CoursesTeachersList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ctlXgafv'
---
--- * 'ctlQuotaUser'
---
--- * 'ctlPrettyPrint'
 --
 -- * 'ctlUploadProtocol'
 --
@@ -126,15 +107,9 @@ data CoursesTeachersList' = CoursesTeachersList'
 --
 -- * 'ctlBearerToken'
 --
--- * 'ctlKey'
---
 -- * 'ctlPageToken'
 --
--- * 'ctlOAuthToken'
---
 -- * 'ctlPageSize'
---
--- * 'ctlFields'
 --
 -- * 'ctlCallback'
 coursesTeachersList'
@@ -143,38 +118,20 @@ coursesTeachersList'
 coursesTeachersList' pCtlCourseId_ =
     CoursesTeachersList'
     { _ctlXgafv = Nothing
-    , _ctlQuotaUser = Nothing
-    , _ctlPrettyPrint = True
     , _ctlUploadProtocol = Nothing
     , _ctlPp = True
     , _ctlCourseId = pCtlCourseId_
     , _ctlAccessToken = Nothing
     , _ctlUploadType = Nothing
     , _ctlBearerToken = Nothing
-    , _ctlKey = Nothing
     , _ctlPageToken = Nothing
-    , _ctlOAuthToken = Nothing
     , _ctlPageSize = Nothing
-    , _ctlFields = Nothing
     , _ctlCallback = Nothing
     }
 
 -- | V1 error format.
 ctlXgafv :: Lens' CoursesTeachersList' (Maybe Text)
 ctlXgafv = lens _ctlXgafv (\ s a -> s{_ctlXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ctlQuotaUser :: Lens' CoursesTeachersList' (Maybe Text)
-ctlQuotaUser
-  = lens _ctlQuotaUser (\ s a -> s{_ctlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ctlPrettyPrint :: Lens' CoursesTeachersList' Bool
-ctlPrettyPrint
-  = lens _ctlPrettyPrint
-      (\ s a -> s{_ctlPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 ctlUploadProtocol :: Lens' CoursesTeachersList' (Maybe Text)
@@ -211,12 +168,6 @@ ctlBearerToken
   = lens _ctlBearerToken
       (\ s a -> s{_ctlBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ctlKey :: Lens' CoursesTeachersList' (Maybe AuthKey)
-ctlKey = lens _ctlKey (\ s a -> s{_ctlKey = a})
-
 -- | [nextPageToken][google.classroom.v1.ListTeachersResponse.next_page_token]
 -- value returned from a previous
 -- [list][google.classroom.v1.Users.ListTeachers] call, indicating that the
@@ -227,36 +178,20 @@ ctlPageToken :: Lens' CoursesTeachersList' (Maybe Text)
 ctlPageToken
   = lens _ctlPageToken (\ s a -> s{_ctlPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-ctlOAuthToken :: Lens' CoursesTeachersList' (Maybe OAuthToken)
-ctlOAuthToken
-  = lens _ctlOAuthToken
-      (\ s a -> s{_ctlOAuthToken = a})
-
 -- | Maximum number of items to return. Zero means no maximum. The server may
 -- return fewer than the specified number of results.
 ctlPageSize :: Lens' CoursesTeachersList' (Maybe Int32)
 ctlPageSize
   = lens _ctlPageSize (\ s a -> s{_ctlPageSize = a})
 
--- | Selector specifying which fields to include in a partial response.
-ctlFields :: Lens' CoursesTeachersList' (Maybe Text)
-ctlFields
-  = lens _ctlFields (\ s a -> s{_ctlFields = a})
-
 -- | JSONP
 ctlCallback :: Lens' CoursesTeachersList' (Maybe Text)
 ctlCallback
   = lens _ctlCallback (\ s a -> s{_ctlCallback = a})
 
-instance GoogleAuth CoursesTeachersList' where
-        _AuthKey = ctlKey . _Just
-        _AuthToken = ctlOAuthToken . _Just
-
 instance GoogleRequest CoursesTeachersList' where
         type Rs CoursesTeachersList' = ListTeachersResponse
-        request = requestWith classroomRequest
-        requestWith rq CoursesTeachersList'{..}
+        requestClient CoursesTeachersList'{..}
           = go _ctlCourseId _ctlXgafv _ctlUploadProtocol
               (Just _ctlPp)
               _ctlAccessToken
@@ -265,13 +200,9 @@ instance GoogleRequest CoursesTeachersList' where
               _ctlPageToken
               _ctlPageSize
               _ctlCallback
-              _ctlQuotaUser
-              (Just _ctlPrettyPrint)
-              _ctlFields
-              _ctlKey
-              _ctlOAuthToken
               (Just AltJSON)
+              classroomService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CoursesTeachersListResource)
-                      rq
+                      mempty

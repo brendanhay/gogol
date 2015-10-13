@@ -33,15 +33,9 @@ module Network.Google.Resource.DataTransfer.Applications.List
     , ApplicationsList'
 
     -- * Request Lenses
-    , alQuotaUser
-    , alPrettyPrint
-    , alUserIP
     , alCustomerId
-    , alKey
     , alPageToken
-    , alOAuthToken
     , alMaxResults
-    , alFields
     ) where
 
 import           Network.Google.DataTransfer.Types
@@ -54,131 +48,58 @@ type ApplicationsListResource =
        QueryParam "customerId" Text :>
          QueryParam "pageToken" Text :>
            QueryParam "maxResults" Word32 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ApplicationsListResponse
+             QueryParam "alt" AltJSON :>
+               Get '[JSON] ApplicationsListResponse
 
 -- | Lists the applications available for data transfer for a customer.
 --
 -- /See:/ 'applicationsList'' smart constructor.
 data ApplicationsList' = ApplicationsList'
-    { _alQuotaUser   :: !(Maybe Text)
-    , _alPrettyPrint :: !Bool
-    , _alUserIP      :: !(Maybe Text)
-    , _alCustomerId  :: !(Maybe Text)
-    , _alKey         :: !(Maybe AuthKey)
-    , _alPageToken   :: !(Maybe Text)
-    , _alOAuthToken  :: !(Maybe OAuthToken)
-    , _alMaxResults  :: !(Maybe Word32)
-    , _alFields      :: !(Maybe Text)
+    { _alCustomerId :: !(Maybe Text)
+    , _alPageToken  :: !(Maybe Text)
+    , _alMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'alQuotaUser'
---
--- * 'alPrettyPrint'
---
--- * 'alUserIP'
---
 -- * 'alCustomerId'
---
--- * 'alKey'
 --
 -- * 'alPageToken'
 --
--- * 'alOAuthToken'
---
 -- * 'alMaxResults'
---
--- * 'alFields'
 applicationsList'
     :: ApplicationsList'
 applicationsList' =
     ApplicationsList'
-    { _alQuotaUser = Nothing
-    , _alPrettyPrint = True
-    , _alUserIP = Nothing
-    , _alCustomerId = Nothing
-    , _alKey = Nothing
+    { _alCustomerId = Nothing
     , _alPageToken = Nothing
-    , _alOAuthToken = Nothing
     , _alMaxResults = Nothing
-    , _alFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-alQuotaUser :: Lens' ApplicationsList' (Maybe Text)
-alQuotaUser
-  = lens _alQuotaUser (\ s a -> s{_alQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-alPrettyPrint :: Lens' ApplicationsList' Bool
-alPrettyPrint
-  = lens _alPrettyPrint
-      (\ s a -> s{_alPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-alUserIP :: Lens' ApplicationsList' (Maybe Text)
-alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | Immutable ID of the Google Apps account.
 alCustomerId :: Lens' ApplicationsList' (Maybe Text)
 alCustomerId
   = lens _alCustomerId (\ s a -> s{_alCustomerId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-alKey :: Lens' ApplicationsList' (Maybe AuthKey)
-alKey = lens _alKey (\ s a -> s{_alKey = a})
-
 -- | Token to specify next page in the list.
 alPageToken :: Lens' ApplicationsList' (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-alOAuthToken :: Lens' ApplicationsList' (Maybe OAuthToken)
-alOAuthToken
-  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
 
 -- | Maximum number of results to return. Default is 100.
 alMaxResults :: Lens' ApplicationsList' (Maybe Word32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-alFields :: Lens' ApplicationsList' (Maybe Text)
-alFields = lens _alFields (\ s a -> s{_alFields = a})
-
-instance GoogleAuth ApplicationsList' where
-        _AuthKey = alKey . _Just
-        _AuthToken = alOAuthToken . _Just
-
 instance GoogleRequest ApplicationsList' where
         type Rs ApplicationsList' = ApplicationsListResponse
-        request = requestWith dataTransferRequest
-        requestWith rq ApplicationsList'{..}
+        requestClient ApplicationsList'{..}
           = go _alCustomerId _alPageToken _alMaxResults
-              _alQuotaUser
-              (Just _alPrettyPrint)
-              _alUserIP
-              _alFields
-              _alKey
-              _alOAuthToken
               (Just AltJSON)
+              dataTransferService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ApplicationsListResource)
-                      rq
+                      mempty

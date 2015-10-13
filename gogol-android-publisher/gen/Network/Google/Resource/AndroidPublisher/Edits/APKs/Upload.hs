@@ -33,15 +33,9 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
     , EditsAPKsUpload'
 
     -- * Request Lenses
-    , eapkuQuotaUser
-    , eapkuPrettyPrint
     , eapkuPackageName
-    , eapkuUserIP
     , eapkuMedia
-    , eapkuKey
-    , eapkuOAuthToken
     , eapkuEditId
-    , eapkuFields
     ) where
 
 import           Network.Google.AndroidPublisher.Types
@@ -54,50 +48,27 @@ type EditsAPKsUploadResource =
        "edits" :>
          Capture "editId" Text :>
            "apks" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Stream :> Post '[JSON] APK
+             QueryParam "alt" AltJSON :>
+               ReqBody '[OctetStream] RequestBody :>
+                 Post '[JSON] APK
 
 --
 -- /See:/ 'editsAPKsUpload'' smart constructor.
 data EditsAPKsUpload' = EditsAPKsUpload'
-    { _eapkuQuotaUser   :: !(Maybe Text)
-    , _eapkuPrettyPrint :: !Bool
-    , _eapkuPackageName :: !Text
-    , _eapkuUserIP      :: !(Maybe Text)
+    { _eapkuPackageName :: !Text
     , _eapkuMedia       :: !Stream
-    , _eapkuKey         :: !(Maybe AuthKey)
-    , _eapkuOAuthToken  :: !(Maybe OAuthToken)
     , _eapkuEditId      :: !Text
-    , _eapkuFields      :: !(Maybe Text)
     }
 
 -- | Creates a value of 'EditsAPKsUpload'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eapkuQuotaUser'
---
--- * 'eapkuPrettyPrint'
---
 -- * 'eapkuPackageName'
---
--- * 'eapkuUserIP'
 --
 -- * 'eapkuMedia'
 --
--- * 'eapkuKey'
---
--- * 'eapkuOAuthToken'
---
 -- * 'eapkuEditId'
---
--- * 'eapkuFields'
 editsAPKsUpload'
     :: Text -- ^ 'packageName'
     -> Stream -- ^ 'media'
@@ -105,30 +76,10 @@ editsAPKsUpload'
     -> EditsAPKsUpload'
 editsAPKsUpload' pEapkuPackageName_ pEapkuMedia_ pEapkuEditId_ =
     EditsAPKsUpload'
-    { _eapkuQuotaUser = Nothing
-    , _eapkuPrettyPrint = True
-    , _eapkuPackageName = pEapkuPackageName_
-    , _eapkuUserIP = Nothing
+    { _eapkuPackageName = pEapkuPackageName_
     , _eapkuMedia = pEapkuMedia_
-    , _eapkuKey = Nothing
-    , _eapkuOAuthToken = Nothing
     , _eapkuEditId = pEapkuEditId_
-    , _eapkuFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-eapkuQuotaUser :: Lens' EditsAPKsUpload' (Maybe Text)
-eapkuQuotaUser
-  = lens _eapkuQuotaUser
-      (\ s a -> s{_eapkuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-eapkuPrettyPrint :: Lens' EditsAPKsUpload' Bool
-eapkuPrettyPrint
-  = lens _eapkuPrettyPrint
-      (\ s a -> s{_eapkuPrettyPrint = a})
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
@@ -137,55 +88,22 @@ eapkuPackageName
   = lens _eapkuPackageName
       (\ s a -> s{_eapkuPackageName = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-eapkuUserIP :: Lens' EditsAPKsUpload' (Maybe Text)
-eapkuUserIP
-  = lens _eapkuUserIP (\ s a -> s{_eapkuUserIP = a})
-
 eapkuMedia :: Lens' EditsAPKsUpload' Stream
 eapkuMedia
   = lens _eapkuMedia (\ s a -> s{_eapkuMedia = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-eapkuKey :: Lens' EditsAPKsUpload' (Maybe AuthKey)
-eapkuKey = lens _eapkuKey (\ s a -> s{_eapkuKey = a})
-
--- | OAuth 2.0 token for the current user.
-eapkuOAuthToken :: Lens' EditsAPKsUpload' (Maybe OAuthToken)
-eapkuOAuthToken
-  = lens _eapkuOAuthToken
-      (\ s a -> s{_eapkuOAuthToken = a})
 
 -- | Unique identifier for this edit.
 eapkuEditId :: Lens' EditsAPKsUpload' Text
 eapkuEditId
   = lens _eapkuEditId (\ s a -> s{_eapkuEditId = a})
 
--- | Selector specifying which fields to include in a partial response.
-eapkuFields :: Lens' EditsAPKsUpload' (Maybe Text)
-eapkuFields
-  = lens _eapkuFields (\ s a -> s{_eapkuFields = a})
-
-instance GoogleAuth EditsAPKsUpload' where
-        _AuthKey = eapkuKey . _Just
-        _AuthToken = eapkuOAuthToken . _Just
-
 instance GoogleRequest EditsAPKsUpload' where
         type Rs EditsAPKsUpload' = APK
-        request = requestWith androidPublisherRequest
-        requestWith rq EditsAPKsUpload'{..}
-          = go _eapkuPackageName _eapkuEditId _eapkuQuotaUser
-              (Just _eapkuPrettyPrint)
-              _eapkuUserIP
-              _eapkuFields
-              _eapkuKey
-              _eapkuOAuthToken
-              (Just AltJSON)
+        requestClient EditsAPKsUpload'{..}
+          = go _eapkuPackageName _eapkuEditId (Just AltJSON)
               _eapkuMedia
+              androidPublisherService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy EditsAPKsUploadResource)
-                      rq
+                      mempty

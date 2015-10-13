@@ -15,8 +15,15 @@
 --
 module Network.Google.Logging.Types
     (
-    -- * Service Request
-      loggingRequest
+    -- * Service Configuration
+      loggingService
+
+    -- * OAuth Scopes
+    , loggingAdminScope
+    , loggingReadScope
+    , loggingWriteScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
 
     -- * Log
     , Log
@@ -222,6 +229,28 @@ import           Network.Google.Logging.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1beta3' of the Google Cloud Logging API. This contains the host and root path used as a starting point for constructing service requests.
-loggingRequest :: RequestBuilder
-loggingRequest
-  = defaultRequest "https://logging.googleapis.com/" ""
+loggingService :: Service
+loggingService
+  = defaultService (ServiceId "logging:v1beta3")
+      "logging.googleapis.com"
+      ""
+
+-- | Administrate log data for your projects
+loggingAdminScope :: OAuthScope
+loggingAdminScope = OAuthScope "https://www.googleapis.com/auth/logging.admin";
+
+-- | View log data for your projects
+loggingReadScope :: OAuthScope
+loggingReadScope = OAuthScope "https://www.googleapis.com/auth/logging.read";
+
+-- | Submit log data for your projects
+loggingWriteScope :: OAuthScope
+loggingWriteScope = OAuthScope "https://www.googleapis.com/auth/logging.write";
+
+-- | View your data across Google Cloud Platform services
+cloudPlatformReadOnlyScope :: OAuthScope
+cloudPlatformReadOnlyScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform.read-only";
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: OAuthScope
+cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";

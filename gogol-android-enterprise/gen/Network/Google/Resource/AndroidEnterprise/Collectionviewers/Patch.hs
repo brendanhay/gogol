@@ -36,16 +36,10 @@ module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Patch
     , CollectionviewersPatch'
 
     -- * Request Lenses
-    , cpQuotaUser
-    , cpPrettyPrint
     , cpEnterpriseId
-    , cpUserIP
     , cpCollectionId
     , cpPayload
     , cpUserId
-    , cpKey
-    , cpOAuthToken
-    , cpFields
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
@@ -60,14 +54,8 @@ type CollectionviewersPatchResource =
            Capture "collectionId" Text :>
              "users" :>
                Capture "userId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] User :> Patch '[JSON] User
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] User :> Patch '[JSON] User
 
 -- | Adds the user to the list of those specifically allowed to see the
 -- collection. If the collection\'s visibility is set to viewersOnly then
@@ -76,41 +64,23 @@ type CollectionviewersPatchResource =
 --
 -- /See:/ 'collectionviewersPatch'' smart constructor.
 data CollectionviewersPatch' = CollectionviewersPatch'
-    { _cpQuotaUser    :: !(Maybe Text)
-    , _cpPrettyPrint  :: !Bool
-    , _cpEnterpriseId :: !Text
-    , _cpUserIP       :: !(Maybe Text)
+    { _cpEnterpriseId :: !Text
     , _cpCollectionId :: !Text
     , _cpPayload      :: !User
     , _cpUserId       :: !Text
-    , _cpKey          :: !(Maybe AuthKey)
-    , _cpOAuthToken   :: !(Maybe OAuthToken)
-    , _cpFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionviewersPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cpQuotaUser'
---
--- * 'cpPrettyPrint'
---
 -- * 'cpEnterpriseId'
---
--- * 'cpUserIP'
 --
 -- * 'cpCollectionId'
 --
 -- * 'cpPayload'
 --
 -- * 'cpUserId'
---
--- * 'cpKey'
---
--- * 'cpOAuthToken'
---
--- * 'cpFields'
 collectionviewersPatch'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'collectionId'
@@ -119,41 +89,17 @@ collectionviewersPatch'
     -> CollectionviewersPatch'
 collectionviewersPatch' pCpEnterpriseId_ pCpCollectionId_ pCpPayload_ pCpUserId_ =
     CollectionviewersPatch'
-    { _cpQuotaUser = Nothing
-    , _cpPrettyPrint = True
-    , _cpEnterpriseId = pCpEnterpriseId_
-    , _cpUserIP = Nothing
+    { _cpEnterpriseId = pCpEnterpriseId_
     , _cpCollectionId = pCpCollectionId_
     , _cpPayload = pCpPayload_
     , _cpUserId = pCpUserId_
-    , _cpKey = Nothing
-    , _cpOAuthToken = Nothing
-    , _cpFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-cpQuotaUser :: Lens' CollectionviewersPatch' (Maybe Text)
-cpQuotaUser
-  = lens _cpQuotaUser (\ s a -> s{_cpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cpPrettyPrint :: Lens' CollectionviewersPatch' Bool
-cpPrettyPrint
-  = lens _cpPrettyPrint
-      (\ s a -> s{_cpPrettyPrint = a})
 
 -- | The ID of the enterprise.
 cpEnterpriseId :: Lens' CollectionviewersPatch' Text
 cpEnterpriseId
   = lens _cpEnterpriseId
       (\ s a -> s{_cpEnterpriseId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-cpUserIP :: Lens' CollectionviewersPatch' (Maybe Text)
-cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
 
 -- | The ID of the collection.
 cpCollectionId :: Lens' CollectionviewersPatch' Text
@@ -170,39 +116,14 @@ cpPayload
 cpUserId :: Lens' CollectionviewersPatch' Text
 cpUserId = lens _cpUserId (\ s a -> s{_cpUserId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cpKey :: Lens' CollectionviewersPatch' (Maybe AuthKey)
-cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
-
--- | OAuth 2.0 token for the current user.
-cpOAuthToken :: Lens' CollectionviewersPatch' (Maybe OAuthToken)
-cpOAuthToken
-  = lens _cpOAuthToken (\ s a -> s{_cpOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cpFields :: Lens' CollectionviewersPatch' (Maybe Text)
-cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
-
-instance GoogleAuth CollectionviewersPatch' where
-        _AuthKey = cpKey . _Just
-        _AuthToken = cpOAuthToken . _Just
-
 instance GoogleRequest CollectionviewersPatch' where
         type Rs CollectionviewersPatch' = User
-        request = requestWith androidEnterpriseRequest
-        requestWith rq CollectionviewersPatch'{..}
+        requestClient CollectionviewersPatch'{..}
           = go _cpEnterpriseId _cpCollectionId _cpUserId
-              _cpQuotaUser
-              (Just _cpPrettyPrint)
-              _cpUserIP
-              _cpFields
-              _cpKey
-              _cpOAuthToken
               (Just AltJSON)
               _cpPayload
+              androidEnterpriseService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CollectionviewersPatchResource)
-                      rq
+                      mempty

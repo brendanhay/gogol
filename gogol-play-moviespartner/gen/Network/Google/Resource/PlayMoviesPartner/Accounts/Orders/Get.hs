@@ -35,18 +35,13 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
 
     -- * Request Lenses
     , aogXgafv
-    , aogQuotaUser
-    , aogPrettyPrint
     , aogUploadProtocol
     , aogPp
     , aogAccessToken
     , aogUploadType
     , aogAccountId
     , aogBearerToken
-    , aogKey
-    , aogOAuthToken
     , aogOrderId
-    , aogFields
     , aogCallback
     ) where
 
@@ -68,13 +63,7 @@ type AccountsOrdersGetResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] Order
+                             QueryParam "alt" AltJSON :> Get '[JSON] Order
 
 -- | Get an Order given its id. See _Authentication and Authorization rules_
 -- and _Get methods rules_ for more information about this method.
@@ -82,18 +71,13 @@ type AccountsOrdersGetResource =
 -- /See:/ 'accountsOrdersGet'' smart constructor.
 data AccountsOrdersGet' = AccountsOrdersGet'
     { _aogXgafv          :: !(Maybe Text)
-    , _aogQuotaUser      :: !(Maybe Text)
-    , _aogPrettyPrint    :: !Bool
     , _aogUploadProtocol :: !(Maybe Text)
     , _aogPp             :: !Bool
     , _aogAccessToken    :: !(Maybe Text)
     , _aogUploadType     :: !(Maybe Text)
     , _aogAccountId      :: !Text
     , _aogBearerToken    :: !(Maybe Text)
-    , _aogKey            :: !(Maybe AuthKey)
-    , _aogOAuthToken     :: !(Maybe OAuthToken)
     , _aogOrderId        :: !Text
-    , _aogFields         :: !(Maybe Text)
     , _aogCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +86,6 @@ data AccountsOrdersGet' = AccountsOrdersGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aogXgafv'
---
--- * 'aogQuotaUser'
---
--- * 'aogPrettyPrint'
 --
 -- * 'aogUploadProtocol'
 --
@@ -119,13 +99,7 @@ data AccountsOrdersGet' = AccountsOrdersGet'
 --
 -- * 'aogBearerToken'
 --
--- * 'aogKey'
---
--- * 'aogOAuthToken'
---
 -- * 'aogOrderId'
---
--- * 'aogFields'
 --
 -- * 'aogCallback'
 accountsOrdersGet'
@@ -135,37 +109,19 @@ accountsOrdersGet'
 accountsOrdersGet' pAogAccountId_ pAogOrderId_ =
     AccountsOrdersGet'
     { _aogXgafv = Nothing
-    , _aogQuotaUser = Nothing
-    , _aogPrettyPrint = True
     , _aogUploadProtocol = Nothing
     , _aogPp = True
     , _aogAccessToken = Nothing
     , _aogUploadType = Nothing
     , _aogAccountId = pAogAccountId_
     , _aogBearerToken = Nothing
-    , _aogKey = Nothing
-    , _aogOAuthToken = Nothing
     , _aogOrderId = pAogOrderId_
-    , _aogFields = Nothing
     , _aogCallback = Nothing
     }
 
 -- | V1 error format.
 aogXgafv :: Lens' AccountsOrdersGet' (Maybe Text)
 aogXgafv = lens _aogXgafv (\ s a -> s{_aogXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-aogQuotaUser :: Lens' AccountsOrdersGet' (Maybe Text)
-aogQuotaUser
-  = lens _aogQuotaUser (\ s a -> s{_aogQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aogPrettyPrint :: Lens' AccountsOrdersGet' Bool
-aogPrettyPrint
-  = lens _aogPrettyPrint
-      (\ s a -> s{_aogPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 aogUploadProtocol :: Lens' AccountsOrdersGet' (Maybe Text)
@@ -200,41 +156,19 @@ aogBearerToken
   = lens _aogBearerToken
       (\ s a -> s{_aogBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aogKey :: Lens' AccountsOrdersGet' (Maybe AuthKey)
-aogKey = lens _aogKey (\ s a -> s{_aogKey = a})
-
--- | OAuth 2.0 token for the current user.
-aogOAuthToken :: Lens' AccountsOrdersGet' (Maybe OAuthToken)
-aogOAuthToken
-  = lens _aogOAuthToken
-      (\ s a -> s{_aogOAuthToken = a})
-
 -- | REQUIRED. Order ID.
 aogOrderId :: Lens' AccountsOrdersGet' Text
 aogOrderId
   = lens _aogOrderId (\ s a -> s{_aogOrderId = a})
-
--- | Selector specifying which fields to include in a partial response.
-aogFields :: Lens' AccountsOrdersGet' (Maybe Text)
-aogFields
-  = lens _aogFields (\ s a -> s{_aogFields = a})
 
 -- | JSONP
 aogCallback :: Lens' AccountsOrdersGet' (Maybe Text)
 aogCallback
   = lens _aogCallback (\ s a -> s{_aogCallback = a})
 
-instance GoogleAuth AccountsOrdersGet' where
-        _AuthKey = aogKey . _Just
-        _AuthToken = aogOAuthToken . _Just
-
 instance GoogleRequest AccountsOrdersGet' where
         type Rs AccountsOrdersGet' = Order
-        request = requestWith playMoviesPartnerRequest
-        requestWith rq AccountsOrdersGet'{..}
+        requestClient AccountsOrdersGet'{..}
           = go _aogAccountId _aogOrderId _aogXgafv
               _aogUploadProtocol
               (Just _aogPp)
@@ -242,13 +176,9 @@ instance GoogleRequest AccountsOrdersGet' where
               _aogUploadType
               _aogBearerToken
               _aogCallback
-              _aogQuotaUser
-              (Just _aogPrettyPrint)
-              _aogFields
-              _aogKey
-              _aogOAuthToken
               (Just AltJSON)
+              playMoviesPartnerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsOrdersGetResource)
-                      rq
+                      mempty

@@ -33,16 +33,10 @@ module Network.Google.Resource.DeploymentManager.Types.List
     , TypesList'
 
     -- * Request Lenses
-    , tlQuotaUser
-    , tlPrettyPrint
     , tlProject
-    , tlUserIP
-    , tlKey
     , tlFilter
     , tlPageToken
-    , tlOAuthToken
     , tlMaxResults
-    , tlFields
     ) where
 
 import           Network.Google.DeploymentManager.Types
@@ -57,99 +51,45 @@ type TypesListResource =
            QueryParam "filter" Text :>
              QueryParam "pageToken" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] TypesListResponse
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] TypesListResponse
 
 -- | Lists all resource types for Deployment Manager.
 --
 -- /See:/ 'typesList'' smart constructor.
 data TypesList' = TypesList'
-    { _tlQuotaUser   :: !(Maybe Text)
-    , _tlPrettyPrint :: !Bool
-    , _tlProject     :: !Text
-    , _tlUserIP      :: !(Maybe Text)
-    , _tlKey         :: !(Maybe AuthKey)
-    , _tlFilter      :: !(Maybe Text)
-    , _tlPageToken   :: !(Maybe Text)
-    , _tlOAuthToken  :: !(Maybe OAuthToken)
-    , _tlMaxResults  :: !Word32
-    , _tlFields      :: !(Maybe Text)
+    { _tlProject    :: !Text
+    , _tlFilter     :: !(Maybe Text)
+    , _tlPageToken  :: !(Maybe Text)
+    , _tlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TypesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tlQuotaUser'
---
--- * 'tlPrettyPrint'
---
 -- * 'tlProject'
---
--- * 'tlUserIP'
---
--- * 'tlKey'
 --
 -- * 'tlFilter'
 --
 -- * 'tlPageToken'
 --
--- * 'tlOAuthToken'
---
 -- * 'tlMaxResults'
---
--- * 'tlFields'
 typesList'
     :: Text -- ^ 'project'
     -> TypesList'
 typesList' pTlProject_ =
     TypesList'
-    { _tlQuotaUser = Nothing
-    , _tlPrettyPrint = True
-    , _tlProject = pTlProject_
-    , _tlUserIP = Nothing
-    , _tlKey = Nothing
+    { _tlProject = pTlProject_
     , _tlFilter = Nothing
     , _tlPageToken = Nothing
-    , _tlOAuthToken = Nothing
     , _tlMaxResults = 500
-    , _tlFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tlQuotaUser :: Lens' TypesList' (Maybe Text)
-tlQuotaUser
-  = lens _tlQuotaUser (\ s a -> s{_tlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tlPrettyPrint :: Lens' TypesList' Bool
-tlPrettyPrint
-  = lens _tlPrettyPrint
-      (\ s a -> s{_tlPrettyPrint = a})
 
 -- | The project ID for this request.
 tlProject :: Lens' TypesList' Text
 tlProject
   = lens _tlProject (\ s a -> s{_tlProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tlUserIP :: Lens' TypesList' (Maybe Text)
-tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tlKey :: Lens' TypesList' (Maybe AuthKey)
-tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -172,36 +112,18 @@ tlPageToken :: Lens' TypesList' (Maybe Text)
 tlPageToken
   = lens _tlPageToken (\ s a -> s{_tlPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-tlOAuthToken :: Lens' TypesList' (Maybe OAuthToken)
-tlOAuthToken
-  = lens _tlOAuthToken (\ s a -> s{_tlOAuthToken = a})
-
 -- | Maximum count of results to be returned.
 tlMaxResults :: Lens' TypesList' Word32
 tlMaxResults
   = lens _tlMaxResults (\ s a -> s{_tlMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-tlFields :: Lens' TypesList' (Maybe Text)
-tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
-
-instance GoogleAuth TypesList' where
-        _AuthKey = tlKey . _Just
-        _AuthToken = tlOAuthToken . _Just
-
 instance GoogleRequest TypesList' where
         type Rs TypesList' = TypesListResponse
-        request = requestWith deploymentManagerRequest
-        requestWith rq TypesList'{..}
+        requestClient TypesList'{..}
           = go _tlProject _tlFilter _tlPageToken
               (Just _tlMaxResults)
-              _tlQuotaUser
-              (Just _tlPrettyPrint)
-              _tlUserIP
-              _tlFields
-              _tlKey
-              _tlOAuthToken
               (Just AltJSON)
+              deploymentManagerService
           where go
-                  = clientBuild (Proxy :: Proxy TypesListResource) rq
+                  = buildClient (Proxy :: Proxy TypesListResource)
+                      mempty

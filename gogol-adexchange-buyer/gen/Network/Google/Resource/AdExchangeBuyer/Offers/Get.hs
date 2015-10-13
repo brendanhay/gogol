@@ -33,13 +33,7 @@ module Network.Google.Resource.AdExchangeBuyer.Offers.Get
     , OffersGet'
 
     -- * Request Lenses
-    , ogQuotaUser
-    , ogPrettyPrint
-    , ogUserIP
-    , ogKey
     , ogOfferId
-    , ogOAuthToken
-    , ogFields
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -50,108 +44,36 @@ import           Network.Google.Prelude
 type OffersGetResource =
      "offers" :>
        Capture "offerId" Int64 :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] OfferDTO
+         QueryParam "alt" AltJSON :> Get '[JSON] OfferDTO
 
 -- | Gets the requested offer.
 --
 -- /See:/ 'offersGet'' smart constructor.
-data OffersGet' = OffersGet'
-    { _ogQuotaUser   :: !(Maybe Text)
-    , _ogPrettyPrint :: !Bool
-    , _ogUserIP      :: !(Maybe Text)
-    , _ogKey         :: !(Maybe AuthKey)
-    , _ogOfferId     :: !Int64
-    , _ogOAuthToken  :: !(Maybe OAuthToken)
-    , _ogFields      :: !(Maybe Text)
+newtype OffersGet' = OffersGet'
+    { _ogOfferId :: Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OffersGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ogQuotaUser'
---
--- * 'ogPrettyPrint'
---
--- * 'ogUserIP'
---
--- * 'ogKey'
---
 -- * 'ogOfferId'
---
--- * 'ogOAuthToken'
---
--- * 'ogFields'
 offersGet'
     :: Int64 -- ^ 'offerId'
     -> OffersGet'
 offersGet' pOgOfferId_ =
     OffersGet'
-    { _ogQuotaUser = Nothing
-    , _ogPrettyPrint = True
-    , _ogUserIP = Nothing
-    , _ogKey = Nothing
-    , _ogOfferId = pOgOfferId_
-    , _ogOAuthToken = Nothing
-    , _ogFields = Nothing
+    { _ogOfferId = pOgOfferId_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ogQuotaUser :: Lens' OffersGet' (Maybe Text)
-ogQuotaUser
-  = lens _ogQuotaUser (\ s a -> s{_ogQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ogPrettyPrint :: Lens' OffersGet' Bool
-ogPrettyPrint
-  = lens _ogPrettyPrint
-      (\ s a -> s{_ogPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ogUserIP :: Lens' OffersGet' (Maybe Text)
-ogUserIP = lens _ogUserIP (\ s a -> s{_ogUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ogKey :: Lens' OffersGet' (Maybe AuthKey)
-ogKey = lens _ogKey (\ s a -> s{_ogKey = a})
 
 ogOfferId :: Lens' OffersGet' Int64
 ogOfferId
   = lens _ogOfferId (\ s a -> s{_ogOfferId = a})
 
--- | OAuth 2.0 token for the current user.
-ogOAuthToken :: Lens' OffersGet' (Maybe OAuthToken)
-ogOAuthToken
-  = lens _ogOAuthToken (\ s a -> s{_ogOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ogFields :: Lens' OffersGet' (Maybe Text)
-ogFields = lens _ogFields (\ s a -> s{_ogFields = a})
-
-instance GoogleAuth OffersGet' where
-        _AuthKey = ogKey . _Just
-        _AuthToken = ogOAuthToken . _Just
-
 instance GoogleRequest OffersGet' where
         type Rs OffersGet' = OfferDTO
-        request = requestWith adExchangeBuyerRequest
-        requestWith rq OffersGet'{..}
-          = go _ogOfferId _ogQuotaUser (Just _ogPrettyPrint)
-              _ogUserIP
-              _ogFields
-              _ogKey
-              _ogOAuthToken
-              (Just AltJSON)
+        requestClient OffersGet'{..}
+          = go _ogOfferId (Just AltJSON) adExchangeBuyerService
           where go
-                  = clientBuild (Proxy :: Proxy OffersGetResource) rq
+                  = buildClient (Proxy :: Proxy OffersGetResource)
+                      mempty

@@ -33,13 +33,7 @@ module Network.Google.Resource.AdSense.Accounts.Payments.List
     , AccountsPaymentsList'
 
     -- * Request Lenses
-    , aplQuotaUser
-    , aplPrettyPrint
-    , aplUserIP
     , aplAccountId
-    , aplKey
-    , aplOAuthToken
-    , aplFields
     ) where
 
 import           Network.Google.AdSense.Types
@@ -51,115 +45,38 @@ type AccountsPaymentsListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "payments" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Payments
+           QueryParam "alt" AltJSON :> Get '[JSON] Payments
 
 -- | List the payments for the specified AdSense account.
 --
 -- /See:/ 'accountsPaymentsList'' smart constructor.
-data AccountsPaymentsList' = AccountsPaymentsList'
-    { _aplQuotaUser   :: !(Maybe Text)
-    , _aplPrettyPrint :: !Bool
-    , _aplUserIP      :: !(Maybe Text)
-    , _aplAccountId   :: !Text
-    , _aplKey         :: !(Maybe AuthKey)
-    , _aplOAuthToken  :: !(Maybe OAuthToken)
-    , _aplFields      :: !(Maybe Text)
+newtype AccountsPaymentsList' = AccountsPaymentsList'
+    { _aplAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPaymentsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aplQuotaUser'
---
--- * 'aplPrettyPrint'
---
--- * 'aplUserIP'
---
 -- * 'aplAccountId'
---
--- * 'aplKey'
---
--- * 'aplOAuthToken'
---
--- * 'aplFields'
 accountsPaymentsList'
     :: Text -- ^ 'accountId'
     -> AccountsPaymentsList'
 accountsPaymentsList' pAplAccountId_ =
     AccountsPaymentsList'
-    { _aplQuotaUser = Nothing
-    , _aplPrettyPrint = True
-    , _aplUserIP = Nothing
-    , _aplAccountId = pAplAccountId_
-    , _aplKey = Nothing
-    , _aplOAuthToken = Nothing
-    , _aplFields = Nothing
+    { _aplAccountId = pAplAccountId_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-aplQuotaUser :: Lens' AccountsPaymentsList' (Maybe Text)
-aplQuotaUser
-  = lens _aplQuotaUser (\ s a -> s{_aplQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aplPrettyPrint :: Lens' AccountsPaymentsList' Bool
-aplPrettyPrint
-  = lens _aplPrettyPrint
-      (\ s a -> s{_aplPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-aplUserIP :: Lens' AccountsPaymentsList' (Maybe Text)
-aplUserIP
-  = lens _aplUserIP (\ s a -> s{_aplUserIP = a})
 
 -- | Account for which to retrieve the payments.
 aplAccountId :: Lens' AccountsPaymentsList' Text
 aplAccountId
   = lens _aplAccountId (\ s a -> s{_aplAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aplKey :: Lens' AccountsPaymentsList' (Maybe AuthKey)
-aplKey = lens _aplKey (\ s a -> s{_aplKey = a})
-
--- | OAuth 2.0 token for the current user.
-aplOAuthToken :: Lens' AccountsPaymentsList' (Maybe OAuthToken)
-aplOAuthToken
-  = lens _aplOAuthToken
-      (\ s a -> s{_aplOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-aplFields :: Lens' AccountsPaymentsList' (Maybe Text)
-aplFields
-  = lens _aplFields (\ s a -> s{_aplFields = a})
-
-instance GoogleAuth AccountsPaymentsList' where
-        _AuthKey = aplKey . _Just
-        _AuthToken = aplOAuthToken . _Just
-
 instance GoogleRequest AccountsPaymentsList' where
         type Rs AccountsPaymentsList' = Payments
-        request = requestWith adSenseRequest
-        requestWith rq AccountsPaymentsList'{..}
-          = go _aplAccountId _aplQuotaUser
-              (Just _aplPrettyPrint)
-              _aplUserIP
-              _aplFields
-              _aplKey
-              _aplOAuthToken
-              (Just AltJSON)
+        requestClient AccountsPaymentsList'{..}
+          = go _aplAccountId (Just AltJSON) adSenseService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsPaymentsListResource)
-                      rq
+                      mempty

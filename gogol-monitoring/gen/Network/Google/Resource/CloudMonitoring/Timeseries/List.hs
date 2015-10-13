@@ -38,22 +38,16 @@ module Network.Google.Resource.CloudMonitoring.Timeseries.List
 
     -- * Request Lenses
     , tlWindow
-    , tlQuotaUser
-    , tlPrettyPrint
     , tlProject
-    , tlUserIP
     , tlCount
     , tlPayload
     , tlAggregator
     , tlTimespan
     , tlMetric
-    , tlKey
     , tlOldest
     , tlLabels
     , tlPageToken
     , tlYoungest
-    , tlOAuthToken
-    , tlFields
     ) where
 
 import           Network.Google.Monitoring.Types
@@ -73,15 +67,9 @@ type TimeseriesListResource =
                      QueryParam "oldest" Text :>
                        QueryParams "labels" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "quotaUser" Text :>
-                             QueryParam "prettyPrint" Bool :>
-                               QueryParam "userIp" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         ReqBody '[JSON] ListTimeseriesRequest
-                                           :> Get '[JSON] ListTimeseriesResponse
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] ListTimeseriesRequest :>
+                               Get '[JSON] ListTimeseriesResponse
 
 -- | List the data points of the time series that match the metric and labels
 -- values and that have data points in the interval. Large responses are
@@ -91,23 +79,17 @@ type TimeseriesListResource =
 --
 -- /See:/ 'timeseriesList'' smart constructor.
 data TimeseriesList' = TimeseriesList'
-    { _tlWindow      :: !(Maybe Text)
-    , _tlQuotaUser   :: !(Maybe Text)
-    , _tlPrettyPrint :: !Bool
-    , _tlProject     :: !Text
-    , _tlUserIP      :: !(Maybe Text)
-    , _tlCount       :: !Int32
-    , _tlPayload     :: !ListTimeseriesRequest
-    , _tlAggregator  :: !(Maybe TimeseriesListAggregator)
-    , _tlTimespan    :: !(Maybe Text)
-    , _tlMetric      :: !Text
-    , _tlKey         :: !(Maybe AuthKey)
-    , _tlOldest      :: !(Maybe Text)
-    , _tlLabels      :: !(Maybe [Text])
-    , _tlPageToken   :: !(Maybe Text)
-    , _tlYoungest    :: !Text
-    , _tlOAuthToken  :: !(Maybe OAuthToken)
-    , _tlFields      :: !(Maybe Text)
+    { _tlWindow     :: !(Maybe Text)
+    , _tlProject    :: !Text
+    , _tlCount      :: !Int32
+    , _tlPayload    :: !ListTimeseriesRequest
+    , _tlAggregator :: !(Maybe TimeseriesListAggregator)
+    , _tlTimespan   :: !(Maybe Text)
+    , _tlMetric     :: !Text
+    , _tlOldest     :: !(Maybe Text)
+    , _tlLabels     :: !(Maybe [Text])
+    , _tlPageToken  :: !(Maybe Text)
+    , _tlYoungest   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeseriesList'' with the minimum fields required to make a request.
@@ -116,13 +98,7 @@ data TimeseriesList' = TimeseriesList'
 --
 -- * 'tlWindow'
 --
--- * 'tlQuotaUser'
---
--- * 'tlPrettyPrint'
---
 -- * 'tlProject'
---
--- * 'tlUserIP'
 --
 -- * 'tlCount'
 --
@@ -134,8 +110,6 @@ data TimeseriesList' = TimeseriesList'
 --
 -- * 'tlMetric'
 --
--- * 'tlKey'
---
 -- * 'tlOldest'
 --
 -- * 'tlLabels'
@@ -143,10 +117,6 @@ data TimeseriesList' = TimeseriesList'
 -- * 'tlPageToken'
 --
 -- * 'tlYoungest'
---
--- * 'tlOAuthToken'
---
--- * 'tlFields'
 timeseriesList'
     :: Text -- ^ 'project'
     -> ListTimeseriesRequest -- ^ 'payload'
@@ -156,22 +126,16 @@ timeseriesList'
 timeseriesList' pTlProject_ pTlPayload_ pTlMetric_ pTlYoungest_ =
     TimeseriesList'
     { _tlWindow = Nothing
-    , _tlQuotaUser = Nothing
-    , _tlPrettyPrint = True
     , _tlProject = pTlProject_
-    , _tlUserIP = Nothing
     , _tlCount = 6000
     , _tlPayload = pTlPayload_
     , _tlAggregator = Nothing
     , _tlTimespan = Nothing
     , _tlMetric = pTlMetric_
-    , _tlKey = Nothing
     , _tlOldest = Nothing
     , _tlLabels = Nothing
     , _tlPageToken = Nothing
     , _tlYoungest = pTlYoungest_
-    , _tlOAuthToken = Nothing
-    , _tlFields = Nothing
     }
 
 -- | The sampling window. At most one data point will be returned for each
@@ -182,29 +146,11 @@ timeseriesList' pTlProject_ pTlPayload_ pTlMetric_ pTlYoungest_ =
 tlWindow :: Lens' TimeseriesList' (Maybe Text)
 tlWindow = lens _tlWindow (\ s a -> s{_tlWindow = a})
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tlQuotaUser :: Lens' TimeseriesList' (Maybe Text)
-tlQuotaUser
-  = lens _tlQuotaUser (\ s a -> s{_tlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tlPrettyPrint :: Lens' TimeseriesList' Bool
-tlPrettyPrint
-  = lens _tlPrettyPrint
-      (\ s a -> s{_tlPrettyPrint = a})
-
 -- | The project ID to which this time series belongs. The value can be the
 -- numeric project ID or string-based project name.
 tlProject :: Lens' TimeseriesList' Text
 tlProject
   = lens _tlProject (\ s a -> s{_tlProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tlUserIP :: Lens' TimeseriesList' (Maybe Text)
-tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 
 -- | Maximum number of data points per page, which is used for pagination of
 -- results.
@@ -240,12 +186,6 @@ tlTimespan
 tlMetric :: Lens' TimeseriesList' Text
 tlMetric = lens _tlMetric (\ s a -> s{_tlMetric = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tlKey :: Lens' TimeseriesList' (Maybe AuthKey)
-tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
-
 -- | Start of the time interval (exclusive), which is expressed as an RFC
 -- 3339 timestamp. If neither oldest nor timespan is specified, the default
 -- time interval will be (youngest - 4 hours, youngest]
@@ -277,23 +217,9 @@ tlYoungest :: Lens' TimeseriesList' Text
 tlYoungest
   = lens _tlYoungest (\ s a -> s{_tlYoungest = a})
 
--- | OAuth 2.0 token for the current user.
-tlOAuthToken :: Lens' TimeseriesList' (Maybe OAuthToken)
-tlOAuthToken
-  = lens _tlOAuthToken (\ s a -> s{_tlOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-tlFields :: Lens' TimeseriesList' (Maybe Text)
-tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
-
-instance GoogleAuth TimeseriesList' where
-        _AuthKey = tlKey . _Just
-        _AuthToken = tlOAuthToken . _Just
-
 instance GoogleRequest TimeseriesList' where
         type Rs TimeseriesList' = ListTimeseriesResponse
-        request = requestWith monitoringRequest
-        requestWith rq TimeseriesList'{..}
+        requestClient TimeseriesList'{..}
           = go _tlProject _tlMetric (Just _tlYoungest)
               _tlWindow
               (Just _tlCount)
@@ -302,14 +228,9 @@ instance GoogleRequest TimeseriesList' where
               _tlOldest
               (_tlLabels ^. _Default)
               _tlPageToken
-              _tlQuotaUser
-              (Just _tlPrettyPrint)
-              _tlUserIP
-              _tlFields
-              _tlKey
-              _tlOAuthToken
               (Just AltJSON)
               _tlPayload
+              monitoringService
           where go
-                  = clientBuild (Proxy :: Proxy TimeseriesListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy TimeseriesListResource)
+                      mempty

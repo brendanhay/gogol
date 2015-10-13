@@ -34,16 +34,10 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer
     , PurchasesSubscriptionsDefer'
 
     -- * Request Lenses
-    , psdQuotaUser
-    , psdPrettyPrint
     , psdPackageName
-    , psdUserIP
     , psdToken
     , psdPayload
-    , psdKey
-    , psdOAuthToken
     , psdSubscriptionId
-    , psdFields
     ) where
 
 import           Network.Google.AndroidPublisher.Types
@@ -58,57 +52,32 @@ type PurchasesSubscriptionsDeferResource =
            Capture "subscriptionId" Text :>
              "tokens" :>
                CaptureMode "token" "defer" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] SubscriptionPurchasesDeferRequest
-                                 :>
-                                 Post '[JSON] SubscriptionPurchasesDeferResponse
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] SubscriptionPurchasesDeferRequest :>
+                     Post '[JSON] SubscriptionPurchasesDeferResponse
 
 -- | Defers a user\'s subscription purchase until a specified future
 -- expiration time.
 --
 -- /See:/ 'purchasesSubscriptionsDefer'' smart constructor.
 data PurchasesSubscriptionsDefer' = PurchasesSubscriptionsDefer'
-    { _psdQuotaUser      :: !(Maybe Text)
-    , _psdPrettyPrint    :: !Bool
-    , _psdPackageName    :: !Text
-    , _psdUserIP         :: !(Maybe Text)
+    { _psdPackageName    :: !Text
     , _psdToken          :: !Text
     , _psdPayload        :: !SubscriptionPurchasesDeferRequest
-    , _psdKey            :: !(Maybe AuthKey)
-    , _psdOAuthToken     :: !(Maybe OAuthToken)
     , _psdSubscriptionId :: !Text
-    , _psdFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PurchasesSubscriptionsDefer'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'psdQuotaUser'
---
--- * 'psdPrettyPrint'
---
 -- * 'psdPackageName'
---
--- * 'psdUserIP'
 --
 -- * 'psdToken'
 --
 -- * 'psdPayload'
 --
--- * 'psdKey'
---
--- * 'psdOAuthToken'
---
 -- * 'psdSubscriptionId'
---
--- * 'psdFields'
 purchasesSubscriptionsDefer'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'token'
@@ -117,30 +86,11 @@ purchasesSubscriptionsDefer'
     -> PurchasesSubscriptionsDefer'
 purchasesSubscriptionsDefer' pPsdPackageName_ pPsdToken_ pPsdPayload_ pPsdSubscriptionId_ =
     PurchasesSubscriptionsDefer'
-    { _psdQuotaUser = Nothing
-    , _psdPrettyPrint = True
-    , _psdPackageName = pPsdPackageName_
-    , _psdUserIP = Nothing
+    { _psdPackageName = pPsdPackageName_
     , _psdToken = pPsdToken_
     , _psdPayload = pPsdPayload_
-    , _psdKey = Nothing
-    , _psdOAuthToken = Nothing
     , _psdSubscriptionId = pPsdSubscriptionId_
-    , _psdFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-psdQuotaUser :: Lens' PurchasesSubscriptionsDefer' (Maybe Text)
-psdQuotaUser
-  = lens _psdQuotaUser (\ s a -> s{_psdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-psdPrettyPrint :: Lens' PurchasesSubscriptionsDefer' Bool
-psdPrettyPrint
-  = lens _psdPrettyPrint
-      (\ s a -> s{_psdPrettyPrint = a})
 
 -- | The package name of the application for which this subscription was
 -- purchased (for example, \'com.some.thing\').
@@ -148,12 +98,6 @@ psdPackageName :: Lens' PurchasesSubscriptionsDefer' Text
 psdPackageName
   = lens _psdPackageName
       (\ s a -> s{_psdPackageName = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-psdUserIP :: Lens' PurchasesSubscriptionsDefer' (Maybe Text)
-psdUserIP
-  = lens _psdUserIP (\ s a -> s{_psdUserIP = a})
 
 -- | The token provided to the user\'s device when the subscription was
 -- purchased.
@@ -165,50 +109,22 @@ psdPayload :: Lens' PurchasesSubscriptionsDefer' SubscriptionPurchasesDeferReque
 psdPayload
   = lens _psdPayload (\ s a -> s{_psdPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-psdKey :: Lens' PurchasesSubscriptionsDefer' (Maybe AuthKey)
-psdKey = lens _psdKey (\ s a -> s{_psdKey = a})
-
--- | OAuth 2.0 token for the current user.
-psdOAuthToken :: Lens' PurchasesSubscriptionsDefer' (Maybe OAuthToken)
-psdOAuthToken
-  = lens _psdOAuthToken
-      (\ s a -> s{_psdOAuthToken = a})
-
 -- | The purchased subscription ID (for example, \'monthly001\').
 psdSubscriptionId :: Lens' PurchasesSubscriptionsDefer' Text
 psdSubscriptionId
   = lens _psdSubscriptionId
       (\ s a -> s{_psdSubscriptionId = a})
 
--- | Selector specifying which fields to include in a partial response.
-psdFields :: Lens' PurchasesSubscriptionsDefer' (Maybe Text)
-psdFields
-  = lens _psdFields (\ s a -> s{_psdFields = a})
-
-instance GoogleAuth PurchasesSubscriptionsDefer'
-         where
-        _AuthKey = psdKey . _Just
-        _AuthToken = psdOAuthToken . _Just
-
 instance GoogleRequest PurchasesSubscriptionsDefer'
          where
         type Rs PurchasesSubscriptionsDefer' =
              SubscriptionPurchasesDeferResponse
-        request = requestWith androidPublisherRequest
-        requestWith rq PurchasesSubscriptionsDefer'{..}
+        requestClient PurchasesSubscriptionsDefer'{..}
           = go _psdPackageName _psdSubscriptionId _psdToken
-              _psdQuotaUser
-              (Just _psdPrettyPrint)
-              _psdUserIP
-              _psdFields
-              _psdKey
-              _psdOAuthToken
               (Just AltJSON)
               _psdPayload
+              androidPublisherService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy PurchasesSubscriptionsDeferResource)
-                      rq
+                      mempty

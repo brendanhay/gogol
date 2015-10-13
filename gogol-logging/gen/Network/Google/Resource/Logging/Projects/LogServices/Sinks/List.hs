@@ -34,18 +34,13 @@ module Network.Google.Resource.Logging.Projects.LogServices.Sinks.List
 
     -- * Request Lenses
     , plsslXgafv
-    , plsslQuotaUser
-    , plsslPrettyPrint
     , plsslUploadProtocol
     , plsslPp
     , plsslAccessToken
     , plsslUploadType
     , plsslBearerToken
-    , plsslKey
     , plsslLogServicesId
-    , plsslOAuthToken
     , plsslProjectsId
-    , plsslFields
     , plsslCallback
     ) where
 
@@ -68,32 +63,21 @@ type ProjectsLogServicesSinksListResource =
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
                              QueryParam "callback" Text :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON]
-                                             ListLogServiceSinksResponse
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListLogServiceSinksResponse
 
 -- | Lists log service sinks associated with a log service.
 --
 -- /See:/ 'projectsLogServicesSinksList'' smart constructor.
 data ProjectsLogServicesSinksList' = ProjectsLogServicesSinksList'
     { _plsslXgafv          :: !(Maybe Text)
-    , _plsslQuotaUser      :: !(Maybe Text)
-    , _plsslPrettyPrint    :: !Bool
     , _plsslUploadProtocol :: !(Maybe Text)
     , _plsslPp             :: !Bool
     , _plsslAccessToken    :: !(Maybe Text)
     , _plsslUploadType     :: !(Maybe Text)
     , _plsslBearerToken    :: !(Maybe Text)
-    , _plsslKey            :: !(Maybe AuthKey)
     , _plsslLogServicesId  :: !Text
-    , _plsslOAuthToken     :: !(Maybe OAuthToken)
     , _plsslProjectsId     :: !Text
-    , _plsslFields         :: !(Maybe Text)
     , _plsslCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +86,6 @@ data ProjectsLogServicesSinksList' = ProjectsLogServicesSinksList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'plsslXgafv'
---
--- * 'plsslQuotaUser'
---
--- * 'plsslPrettyPrint'
 --
 -- * 'plsslUploadProtocol'
 --
@@ -117,15 +97,9 @@ data ProjectsLogServicesSinksList' = ProjectsLogServicesSinksList'
 --
 -- * 'plsslBearerToken'
 --
--- * 'plsslKey'
---
 -- * 'plsslLogServicesId'
 --
--- * 'plsslOAuthToken'
---
 -- * 'plsslProjectsId'
---
--- * 'plsslFields'
 --
 -- * 'plsslCallback'
 projectsLogServicesSinksList'
@@ -135,18 +109,13 @@ projectsLogServicesSinksList'
 projectsLogServicesSinksList' pPlsslLogServicesId_ pPlsslProjectsId_ =
     ProjectsLogServicesSinksList'
     { _plsslXgafv = Nothing
-    , _plsslQuotaUser = Nothing
-    , _plsslPrettyPrint = True
     , _plsslUploadProtocol = Nothing
     , _plsslPp = True
     , _plsslAccessToken = Nothing
     , _plsslUploadType = Nothing
     , _plsslBearerToken = Nothing
-    , _plsslKey = Nothing
     , _plsslLogServicesId = pPlsslLogServicesId_
-    , _plsslOAuthToken = Nothing
     , _plsslProjectsId = pPlsslProjectsId_
-    , _plsslFields = Nothing
     , _plsslCallback = Nothing
     }
 
@@ -154,20 +123,6 @@ projectsLogServicesSinksList' pPlsslLogServicesId_ pPlsslProjectsId_ =
 plsslXgafv :: Lens' ProjectsLogServicesSinksList' (Maybe Text)
 plsslXgafv
   = lens _plsslXgafv (\ s a -> s{_plsslXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-plsslQuotaUser :: Lens' ProjectsLogServicesSinksList' (Maybe Text)
-plsslQuotaUser
-  = lens _plsslQuotaUser
-      (\ s a -> s{_plsslQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-plsslPrettyPrint :: Lens' ProjectsLogServicesSinksList' Bool
-plsslPrettyPrint
-  = lens _plsslPrettyPrint
-      (\ s a -> s{_plsslPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 plsslUploadProtocol :: Lens' ProjectsLogServicesSinksList' (Maybe Text)
@@ -197,23 +152,11 @@ plsslBearerToken
   = lens _plsslBearerToken
       (\ s a -> s{_plsslBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-plsslKey :: Lens' ProjectsLogServicesSinksList' (Maybe AuthKey)
-plsslKey = lens _plsslKey (\ s a -> s{_plsslKey = a})
-
 -- | Part of \`serviceName\`. See documentation of \`projectsId\`.
 plsslLogServicesId :: Lens' ProjectsLogServicesSinksList' Text
 plsslLogServicesId
   = lens _plsslLogServicesId
       (\ s a -> s{_plsslLogServicesId = a})
-
--- | OAuth 2.0 token for the current user.
-plsslOAuthToken :: Lens' ProjectsLogServicesSinksList' (Maybe OAuthToken)
-plsslOAuthToken
-  = lens _plsslOAuthToken
-      (\ s a -> s{_plsslOAuthToken = a})
 
 -- | Part of \`serviceName\`. The log service whose sinks are wanted.
 plsslProjectsId :: Lens' ProjectsLogServicesSinksList' Text
@@ -221,28 +164,17 @@ plsslProjectsId
   = lens _plsslProjectsId
       (\ s a -> s{_plsslProjectsId = a})
 
--- | Selector specifying which fields to include in a partial response.
-plsslFields :: Lens' ProjectsLogServicesSinksList' (Maybe Text)
-plsslFields
-  = lens _plsslFields (\ s a -> s{_plsslFields = a})
-
 -- | JSONP
 plsslCallback :: Lens' ProjectsLogServicesSinksList' (Maybe Text)
 plsslCallback
   = lens _plsslCallback
       (\ s a -> s{_plsslCallback = a})
 
-instance GoogleAuth ProjectsLogServicesSinksList'
-         where
-        _AuthKey = plsslKey . _Just
-        _AuthToken = plsslOAuthToken . _Just
-
 instance GoogleRequest ProjectsLogServicesSinksList'
          where
         type Rs ProjectsLogServicesSinksList' =
              ListLogServiceSinksResponse
-        request = requestWith loggingRequest
-        requestWith rq ProjectsLogServicesSinksList'{..}
+        requestClient ProjectsLogServicesSinksList'{..}
           = go _plsslProjectsId _plsslLogServicesId _plsslXgafv
               _plsslUploadProtocol
               (Just _plsslPp)
@@ -250,13 +182,9 @@ instance GoogleRequest ProjectsLogServicesSinksList'
               _plsslUploadType
               _plsslBearerToken
               _plsslCallback
-              _plsslQuotaUser
-              (Just _plsslPrettyPrint)
-              _plsslFields
-              _plsslKey
-              _plsslOAuthToken
               (Just AltJSON)
+              loggingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsLogServicesSinksListResource)
-                      rq
+                      mempty

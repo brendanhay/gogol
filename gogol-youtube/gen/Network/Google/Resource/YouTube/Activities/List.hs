@@ -38,20 +38,14 @@ module Network.Google.Resource.YouTube.Activities.List
 
     -- * Request Lenses
     , alPublishedAfter
-    , alQuotaUser
     , alPart
-    , alPrettyPrint
     , alHome
     , alMine
     , alRegionCode
-    , alUserIP
     , alChannelId
-    , alKey
     , alPageToken
-    , alOAuthToken
     , alMaxResults
     , alPublishedBefore
-    , alFields
     ) where
 
 import           Network.Google.Prelude
@@ -70,14 +64,8 @@ type ActivitiesListResource =
                    QueryParam "pageToken" Text :>
                      QueryParam "maxResults" Word32 :>
                        QueryParam "publishedBefore" DateTime' :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] ActivityListResponse
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ActivityListResponse
 
 -- | Returns a list of channel activity events that match the request
 -- criteria. For example, you can retrieve events associated with a
@@ -88,20 +76,14 @@ type ActivitiesListResource =
 -- /See:/ 'activitiesList'' smart constructor.
 data ActivitiesList' = ActivitiesList'
     { _alPublishedAfter  :: !(Maybe DateTime')
-    , _alQuotaUser       :: !(Maybe Text)
     , _alPart            :: !Text
-    , _alPrettyPrint     :: !Bool
     , _alHome            :: !(Maybe Bool)
     , _alMine            :: !(Maybe Bool)
     , _alRegionCode      :: !(Maybe Text)
-    , _alUserIP          :: !(Maybe Text)
     , _alChannelId       :: !(Maybe Text)
-    , _alKey             :: !(Maybe AuthKey)
     , _alPageToken       :: !(Maybe Text)
-    , _alOAuthToken      :: !(Maybe OAuthToken)
     , _alMaxResults      :: !Word32
     , _alPublishedBefore :: !(Maybe DateTime')
-    , _alFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
@@ -110,11 +92,7 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'alPublishedAfter'
 --
--- * 'alQuotaUser'
---
 -- * 'alPart'
---
--- * 'alPrettyPrint'
 --
 -- * 'alHome'
 --
@@ -122,41 +100,27 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'alRegionCode'
 --
--- * 'alUserIP'
---
 -- * 'alChannelId'
 --
--- * 'alKey'
---
 -- * 'alPageToken'
---
--- * 'alOAuthToken'
 --
 -- * 'alMaxResults'
 --
 -- * 'alPublishedBefore'
---
--- * 'alFields'
 activitiesList'
     :: Text -- ^ 'part'
     -> ActivitiesList'
 activitiesList' pAlPart_ =
     ActivitiesList'
     { _alPublishedAfter = Nothing
-    , _alQuotaUser = Nothing
     , _alPart = pAlPart_
-    , _alPrettyPrint = True
     , _alHome = Nothing
     , _alMine = Nothing
     , _alRegionCode = Nothing
-    , _alUserIP = Nothing
     , _alChannelId = Nothing
-    , _alKey = Nothing
     , _alPageToken = Nothing
-    , _alOAuthToken = Nothing
     , _alMaxResults = 5
     , _alPublishedBefore = Nothing
-    , _alFields = Nothing
     }
 
 -- | The publishedAfter parameter specifies the earliest date and time that
@@ -171,13 +135,6 @@ alPublishedAfter
       (\ s a -> s{_alPublishedAfter = a})
       . mapping _DateTime
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-alQuotaUser :: Lens' ActivitiesList' (Maybe Text)
-alQuotaUser
-  = lens _alQuotaUser (\ s a -> s{_alQuotaUser = a})
-
 -- | The part parameter specifies a comma-separated list of one or more
 -- activity resource properties that the API response will include. If the
 -- parameter identifies a property that contains child properties, the
@@ -188,12 +145,6 @@ alQuotaUser
 -- of those nested properties.
 alPart :: Lens' ActivitiesList' Text
 alPart = lens _alPart (\ s a -> s{_alPart = a})
-
--- | Returns response with indentations and line breaks.
-alPrettyPrint :: Lens' ActivitiesList' Bool
-alPrettyPrint
-  = lens _alPrettyPrint
-      (\ s a -> s{_alPrettyPrint = a})
 
 -- | Set this parameter\'s value to true to retrieve the activity feed that
 -- displays on the YouTube home page for the currently authenticated user.
@@ -214,22 +165,11 @@ alRegionCode :: Lens' ActivitiesList' (Maybe Text)
 alRegionCode
   = lens _alRegionCode (\ s a -> s{_alRegionCode = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-alUserIP :: Lens' ActivitiesList' (Maybe Text)
-alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
-
 -- | The channelId parameter specifies a unique YouTube channel ID. The API
 -- will then return a list of that channel\'s activities.
 alChannelId :: Lens' ActivitiesList' (Maybe Text)
 alChannelId
   = lens _alChannelId (\ s a -> s{_alChannelId = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-alKey :: Lens' ActivitiesList' (Maybe AuthKey)
-alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | The pageToken parameter identifies a specific page in the result set
 -- that should be returned. In an API response, the nextPageToken and
@@ -237,11 +177,6 @@ alKey = lens _alKey (\ s a -> s{_alKey = a})
 alPageToken :: Lens' ActivitiesList' (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-alOAuthToken :: Lens' ActivitiesList' (Maybe OAuthToken)
-alOAuthToken
-  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
 
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set.
@@ -261,31 +196,17 @@ alPublishedBefore
       (\ s a -> s{_alPublishedBefore = a})
       . mapping _DateTime
 
--- | Selector specifying which fields to include in a partial response.
-alFields :: Lens' ActivitiesList' (Maybe Text)
-alFields = lens _alFields (\ s a -> s{_alFields = a})
-
-instance GoogleAuth ActivitiesList' where
-        _AuthKey = alKey . _Just
-        _AuthToken = alOAuthToken . _Just
-
 instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ActivityListResponse
-        request = requestWith youTubeRequest
-        requestWith rq ActivitiesList'{..}
+        requestClient ActivitiesList'{..}
           = go (Just _alPart) _alPublishedAfter _alHome _alMine
               _alRegionCode
               _alChannelId
               _alPageToken
               (Just _alMaxResults)
               _alPublishedBefore
-              _alQuotaUser
-              (Just _alPrettyPrint)
-              _alUserIP
-              _alFields
-              _alKey
-              _alOAuthToken
               (Just AltJSON)
+              youTubeService
           where go
-                  = clientBuild (Proxy :: Proxy ActivitiesListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ActivitiesListResource)
+                      mempty

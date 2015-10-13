@@ -33,15 +33,9 @@ module Network.Google.Resource.DFAReporting.Reports.Update
     , ReportsUpdate'
 
     -- * Request Lenses
-    , ruQuotaUser
-    , ruPrettyPrint
-    , ruUserIP
     , ruReportId
     , ruProFileId
     , ruPayload
-    , ruKey
-    , ruOAuthToken
-    , ruFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,51 +48,27 @@ type ReportsUpdateResource =
        Capture "profileId" Int64 :>
          "reports" :>
            Capture "reportId" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Report :> Put '[JSON] Report
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Report :> Put '[JSON] Report
 
 -- | Updates a report.
 --
 -- /See:/ 'reportsUpdate'' smart constructor.
 data ReportsUpdate' = ReportsUpdate'
-    { _ruQuotaUser   :: !(Maybe Text)
-    , _ruPrettyPrint :: !Bool
-    , _ruUserIP      :: !(Maybe Text)
-    , _ruReportId    :: !Int64
-    , _ruProFileId   :: !Int64
-    , _ruPayload     :: !Report
-    , _ruKey         :: !(Maybe AuthKey)
-    , _ruOAuthToken  :: !(Maybe OAuthToken)
-    , _ruFields      :: !(Maybe Text)
+    { _ruReportId  :: !Int64
+    , _ruProFileId :: !Int64
+    , _ruPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ruQuotaUser'
---
--- * 'ruPrettyPrint'
---
--- * 'ruUserIP'
---
 -- * 'ruReportId'
 --
 -- * 'ruProFileId'
 --
 -- * 'ruPayload'
---
--- * 'ruKey'
---
--- * 'ruOAuthToken'
---
--- * 'ruFields'
 reportsUpdate'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
@@ -106,34 +76,10 @@ reportsUpdate'
     -> ReportsUpdate'
 reportsUpdate' pRuReportId_ pRuProFileId_ pRuPayload_ =
     ReportsUpdate'
-    { _ruQuotaUser = Nothing
-    , _ruPrettyPrint = True
-    , _ruUserIP = Nothing
-    , _ruReportId = pRuReportId_
+    { _ruReportId = pRuReportId_
     , _ruProFileId = pRuProFileId_
     , _ruPayload = pRuPayload_
-    , _ruKey = Nothing
-    , _ruOAuthToken = Nothing
-    , _ruFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ruQuotaUser :: Lens' ReportsUpdate' (Maybe Text)
-ruQuotaUser
-  = lens _ruQuotaUser (\ s a -> s{_ruQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ruPrettyPrint :: Lens' ReportsUpdate' Bool
-ruPrettyPrint
-  = lens _ruPrettyPrint
-      (\ s a -> s{_ruPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ruUserIP :: Lens' ReportsUpdate' (Maybe Text)
-ruUserIP = lens _ruUserIP (\ s a -> s{_ruUserIP = a})
 
 -- | The ID of the report.
 ruReportId :: Lens' ReportsUpdate' Int64
@@ -150,37 +96,12 @@ ruPayload :: Lens' ReportsUpdate' Report
 ruPayload
   = lens _ruPayload (\ s a -> s{_ruPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ruKey :: Lens' ReportsUpdate' (Maybe AuthKey)
-ruKey = lens _ruKey (\ s a -> s{_ruKey = a})
-
--- | OAuth 2.0 token for the current user.
-ruOAuthToken :: Lens' ReportsUpdate' (Maybe OAuthToken)
-ruOAuthToken
-  = lens _ruOAuthToken (\ s a -> s{_ruOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ruFields :: Lens' ReportsUpdate' (Maybe Text)
-ruFields = lens _ruFields (\ s a -> s{_ruFields = a})
-
-instance GoogleAuth ReportsUpdate' where
-        _AuthKey = ruKey . _Just
-        _AuthToken = ruOAuthToken . _Just
-
 instance GoogleRequest ReportsUpdate' where
         type Rs ReportsUpdate' = Report
-        request = requestWith dFAReportingRequest
-        requestWith rq ReportsUpdate'{..}
-          = go _ruProFileId _ruReportId _ruQuotaUser
-              (Just _ruPrettyPrint)
-              _ruUserIP
-              _ruFields
-              _ruKey
-              _ruOAuthToken
-              (Just AltJSON)
+        requestClient ReportsUpdate'{..}
+          = go _ruProFileId _ruReportId (Just AltJSON)
               _ruPayload
+              dFAReportingService
           where go
-                  = clientBuild (Proxy :: Proxy ReportsUpdateResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ReportsUpdateResource)
+                      mempty

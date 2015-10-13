@@ -33,18 +33,12 @@ module Network.Google.Resource.DFAReporting.Reports.List
     , ReportsList'
 
     -- * Request Lenses
-    , rQuotaUser
-    , rPrettyPrint
-    , rUserIP
     , rProFileId
     , rSortOrder
-    , rKey
     , rScope
     , rPageToken
     , rSortField
-    , rOAuthToken
     , rMaxResults
-    , rFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -61,48 +55,27 @@ type ReportsListResource =
                QueryParam "pageToken" Text :>
                  QueryParam "sortField" ReportsListSortField :>
                    QueryParam "maxResults" Int32 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] ReportList
+                     QueryParam "alt" AltJSON :> Get '[JSON] ReportList
 
 -- | Retrieves list of reports.
 --
 -- /See:/ 'reportsList'' smart constructor.
 data ReportsList' = ReportsList'
-    { _rQuotaUser   :: !(Maybe Text)
-    , _rPrettyPrint :: !Bool
-    , _rUserIP      :: !(Maybe Text)
-    , _rProFileId   :: !Int64
-    , _rSortOrder   :: !ReportsListSortOrder
-    , _rKey         :: !(Maybe AuthKey)
-    , _rScope       :: !ReportsListScope
-    , _rPageToken   :: !(Maybe Text)
-    , _rSortField   :: !ReportsListSortField
-    , _rOAuthToken  :: !(Maybe OAuthToken)
-    , _rMaxResults  :: !(Maybe Int32)
-    , _rFields      :: !(Maybe Text)
+    { _rProFileId  :: !Int64
+    , _rSortOrder  :: !ReportsListSortOrder
+    , _rScope      :: !ReportsListScope
+    , _rPageToken  :: !(Maybe Text)
+    , _rSortField  :: !ReportsListSortField
+    , _rMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rQuotaUser'
---
--- * 'rPrettyPrint'
---
--- * 'rUserIP'
---
 -- * 'rProFileId'
 --
 -- * 'rSortOrder'
---
--- * 'rKey'
 --
 -- * 'rScope'
 --
@@ -110,46 +83,19 @@ data ReportsList' = ReportsList'
 --
 -- * 'rSortField'
 --
--- * 'rOAuthToken'
---
 -- * 'rMaxResults'
---
--- * 'rFields'
 reportsList'
     :: Int64 -- ^ 'profileId'
     -> ReportsList'
 reportsList' pRProFileId_ =
     ReportsList'
-    { _rQuotaUser = Nothing
-    , _rPrettyPrint = True
-    , _rUserIP = Nothing
-    , _rProFileId = pRProFileId_
+    { _rProFileId = pRProFileId_
     , _rSortOrder = RLSODescending
-    , _rKey = Nothing
     , _rScope = Mine
     , _rPageToken = Nothing
     , _rSortField = RLSFLastModifiedTime
-    , _rOAuthToken = Nothing
     , _rMaxResults = Nothing
-    , _rFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-rQuotaUser :: Lens' ReportsList' (Maybe Text)
-rQuotaUser
-  = lens _rQuotaUser (\ s a -> s{_rQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rPrettyPrint :: Lens' ReportsList' Bool
-rPrettyPrint
-  = lens _rPrettyPrint (\ s a -> s{_rPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rUserIP :: Lens' ReportsList' (Maybe Text)
-rUserIP = lens _rUserIP (\ s a -> s{_rUserIP = a})
 
 -- | The DFA user profile ID.
 rProFileId :: Lens' ReportsList' Int64
@@ -160,12 +106,6 @@ rProFileId
 rSortOrder :: Lens' ReportsList' ReportsListSortOrder
 rSortOrder
   = lens _rSortOrder (\ s a -> s{_rSortOrder = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rKey :: Lens' ReportsList' (Maybe AuthKey)
-rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | The scope that defines which results are returned, default is \'MINE\'.
 rScope :: Lens' ReportsList' ReportsListScope
@@ -181,38 +121,20 @@ rSortField :: Lens' ReportsList' ReportsListSortField
 rSortField
   = lens _rSortField (\ s a -> s{_rSortField = a})
 
--- | OAuth 2.0 token for the current user.
-rOAuthToken :: Lens' ReportsList' (Maybe OAuthToken)
-rOAuthToken
-  = lens _rOAuthToken (\ s a -> s{_rOAuthToken = a})
-
 -- | Maximum number of results to return.
 rMaxResults :: Lens' ReportsList' (Maybe Int32)
 rMaxResults
   = lens _rMaxResults (\ s a -> s{_rMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-rFields :: Lens' ReportsList' (Maybe Text)
-rFields = lens _rFields (\ s a -> s{_rFields = a})
-
-instance GoogleAuth ReportsList' where
-        _AuthKey = rKey . _Just
-        _AuthToken = rOAuthToken . _Just
-
 instance GoogleRequest ReportsList' where
         type Rs ReportsList' = ReportList
-        request = requestWith dFAReportingRequest
-        requestWith rq ReportsList'{..}
+        requestClient ReportsList'{..}
           = go _rProFileId (Just _rSortOrder) (Just _rScope)
               _rPageToken
               (Just _rSortField)
               _rMaxResults
-              _rQuotaUser
-              (Just _rPrettyPrint)
-              _rUserIP
-              _rFields
-              _rKey
-              _rOAuthToken
               (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild (Proxy :: Proxy ReportsListResource) rq
+                  = buildClient (Proxy :: Proxy ReportsListResource)
+                      mempty

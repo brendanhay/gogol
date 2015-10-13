@@ -33,15 +33,9 @@ module Network.Google.Resource.ResourceViews.ZoneViews.Get
     , ZoneViewsGet'
 
     -- * Request Lenses
-    , zvgQuotaUser
-    , zvgPrettyPrint
     , zvgResourceView
     , zvgProject
-    , zvgUserIP
     , zvgZone
-    , zvgKey
-    , zvgOAuthToken
-    , zvgFields
     ) where
 
 import           Network.Google.Prelude
@@ -55,50 +49,26 @@ type ZoneViewsGetResource =
          Capture "zone" Text :>
            "resourceViews" :>
              Capture "resourceView" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :> Get '[JSON] ResourceView
+               QueryParam "alt" AltJSON :> Get '[JSON] ResourceView
 
 -- | Get the information of a zonal resource view.
 --
 -- /See:/ 'zoneViewsGet'' smart constructor.
 data ZoneViewsGet' = ZoneViewsGet'
-    { _zvgQuotaUser    :: !(Maybe Text)
-    , _zvgPrettyPrint  :: !Bool
-    , _zvgResourceView :: !Text
+    { _zvgResourceView :: !Text
     , _zvgProject      :: !Text
-    , _zvgUserIP       :: !(Maybe Text)
     , _zvgZone         :: !Text
-    , _zvgKey          :: !(Maybe AuthKey)
-    , _zvgOAuthToken   :: !(Maybe OAuthToken)
-    , _zvgFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'zvgQuotaUser'
---
--- * 'zvgPrettyPrint'
---
 -- * 'zvgResourceView'
 --
 -- * 'zvgProject'
 --
--- * 'zvgUserIP'
---
 -- * 'zvgZone'
---
--- * 'zvgKey'
---
--- * 'zvgOAuthToken'
---
--- * 'zvgFields'
 zoneViewsGet'
     :: Text -- ^ 'resourceView'
     -> Text -- ^ 'project'
@@ -106,29 +76,10 @@ zoneViewsGet'
     -> ZoneViewsGet'
 zoneViewsGet' pZvgResourceView_ pZvgProject_ pZvgZone_ =
     ZoneViewsGet'
-    { _zvgQuotaUser = Nothing
-    , _zvgPrettyPrint = True
-    , _zvgResourceView = pZvgResourceView_
+    { _zvgResourceView = pZvgResourceView_
     , _zvgProject = pZvgProject_
-    , _zvgUserIP = Nothing
     , _zvgZone = pZvgZone_
-    , _zvgKey = Nothing
-    , _zvgOAuthToken = Nothing
-    , _zvgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-zvgQuotaUser :: Lens' ZoneViewsGet' (Maybe Text)
-zvgQuotaUser
-  = lens _zvgQuotaUser (\ s a -> s{_zvgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-zvgPrettyPrint :: Lens' ZoneViewsGet' Bool
-zvgPrettyPrint
-  = lens _zvgPrettyPrint
-      (\ s a -> s{_zvgPrettyPrint = a})
 
 -- | The name of the resource view.
 zvgResourceView :: Lens' ZoneViewsGet' Text
@@ -141,49 +92,16 @@ zvgProject :: Lens' ZoneViewsGet' Text
 zvgProject
   = lens _zvgProject (\ s a -> s{_zvgProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-zvgUserIP :: Lens' ZoneViewsGet' (Maybe Text)
-zvgUserIP
-  = lens _zvgUserIP (\ s a -> s{_zvgUserIP = a})
-
 -- | The zone name of the resource view.
 zvgZone :: Lens' ZoneViewsGet' Text
 zvgZone = lens _zvgZone (\ s a -> s{_zvgZone = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-zvgKey :: Lens' ZoneViewsGet' (Maybe AuthKey)
-zvgKey = lens _zvgKey (\ s a -> s{_zvgKey = a})
-
--- | OAuth 2.0 token for the current user.
-zvgOAuthToken :: Lens' ZoneViewsGet' (Maybe OAuthToken)
-zvgOAuthToken
-  = lens _zvgOAuthToken
-      (\ s a -> s{_zvgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-zvgFields :: Lens' ZoneViewsGet' (Maybe Text)
-zvgFields
-  = lens _zvgFields (\ s a -> s{_zvgFields = a})
-
-instance GoogleAuth ZoneViewsGet' where
-        _AuthKey = zvgKey . _Just
-        _AuthToken = zvgOAuthToken . _Just
-
 instance GoogleRequest ZoneViewsGet' where
         type Rs ZoneViewsGet' = ResourceView
-        request = requestWith resourceViewsRequest
-        requestWith rq ZoneViewsGet'{..}
+        requestClient ZoneViewsGet'{..}
           = go _zvgProject _zvgZone _zvgResourceView
-              _zvgQuotaUser
-              (Just _zvgPrettyPrint)
-              _zvgUserIP
-              _zvgFields
-              _zvgKey
-              _zvgOAuthToken
               (Just AltJSON)
+              resourceViewsService
           where go
-                  = clientBuild (Proxy :: Proxy ZoneViewsGetResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ZoneViewsGetResource)
+                      mempty

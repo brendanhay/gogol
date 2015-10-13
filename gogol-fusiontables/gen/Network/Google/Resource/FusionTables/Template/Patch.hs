@@ -33,15 +33,9 @@ module Network.Google.Resource.FusionTables.Template.Patch
     , TemplatePatch'
 
     -- * Request Lenses
-    , tpQuotaUser
-    , tpPrettyPrint
     , tpTemplateId
-    , tpUserIP
     , tpPayload
-    , tpKey
-    , tpOAuthToken
     , tpTableId
-    , tpFields
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -54,51 +48,27 @@ type TemplatePatchResource =
        Capture "tableId" Text :>
          "templates" :>
            Capture "templateId" Int32 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Template :> Patch '[JSON] Template
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Template :> Patch '[JSON] Template
 
 -- | Updates an existing template. This method supports patch semantics.
 --
 -- /See:/ 'templatePatch'' smart constructor.
 data TemplatePatch' = TemplatePatch'
-    { _tpQuotaUser   :: !(Maybe Text)
-    , _tpPrettyPrint :: !Bool
-    , _tpTemplateId  :: !Int32
-    , _tpUserIP      :: !(Maybe Text)
-    , _tpPayload     :: !Template
-    , _tpKey         :: !(Maybe AuthKey)
-    , _tpOAuthToken  :: !(Maybe OAuthToken)
-    , _tpTableId     :: !Text
-    , _tpFields      :: !(Maybe Text)
+    { _tpTemplateId :: !Int32
+    , _tpPayload    :: !Template
+    , _tpTableId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplatePatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tpQuotaUser'
---
--- * 'tpPrettyPrint'
---
 -- * 'tpTemplateId'
---
--- * 'tpUserIP'
 --
 -- * 'tpPayload'
 --
--- * 'tpKey'
---
--- * 'tpOAuthToken'
---
 -- * 'tpTableId'
---
--- * 'tpFields'
 templatePatch'
     :: Int32 -- ^ 'templateId'
     -> Template -- ^ 'payload'
@@ -106,81 +76,32 @@ templatePatch'
     -> TemplatePatch'
 templatePatch' pTpTemplateId_ pTpPayload_ pTpTableId_ =
     TemplatePatch'
-    { _tpQuotaUser = Nothing
-    , _tpPrettyPrint = True
-    , _tpTemplateId = pTpTemplateId_
-    , _tpUserIP = Nothing
+    { _tpTemplateId = pTpTemplateId_
     , _tpPayload = pTpPayload_
-    , _tpKey = Nothing
-    , _tpOAuthToken = Nothing
     , _tpTableId = pTpTableId_
-    , _tpFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tpQuotaUser :: Lens' TemplatePatch' (Maybe Text)
-tpQuotaUser
-  = lens _tpQuotaUser (\ s a -> s{_tpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tpPrettyPrint :: Lens' TemplatePatch' Bool
-tpPrettyPrint
-  = lens _tpPrettyPrint
-      (\ s a -> s{_tpPrettyPrint = a})
 
 -- | Identifier for the template that is being updated
 tpTemplateId :: Lens' TemplatePatch' Int32
 tpTemplateId
   = lens _tpTemplateId (\ s a -> s{_tpTemplateId = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tpUserIP :: Lens' TemplatePatch' (Maybe Text)
-tpUserIP = lens _tpUserIP (\ s a -> s{_tpUserIP = a})
-
 -- | Multipart request metadata.
 tpPayload :: Lens' TemplatePatch' Template
 tpPayload
   = lens _tpPayload (\ s a -> s{_tpPayload = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tpKey :: Lens' TemplatePatch' (Maybe AuthKey)
-tpKey = lens _tpKey (\ s a -> s{_tpKey = a})
-
--- | OAuth 2.0 token for the current user.
-tpOAuthToken :: Lens' TemplatePatch' (Maybe OAuthToken)
-tpOAuthToken
-  = lens _tpOAuthToken (\ s a -> s{_tpOAuthToken = a})
 
 -- | Table to which the updated template belongs
 tpTableId :: Lens' TemplatePatch' Text
 tpTableId
   = lens _tpTableId (\ s a -> s{_tpTableId = a})
 
--- | Selector specifying which fields to include in a partial response.
-tpFields :: Lens' TemplatePatch' (Maybe Text)
-tpFields = lens _tpFields (\ s a -> s{_tpFields = a})
-
-instance GoogleAuth TemplatePatch' where
-        _AuthKey = tpKey . _Just
-        _AuthToken = tpOAuthToken . _Just
-
 instance GoogleRequest TemplatePatch' where
         type Rs TemplatePatch' = Template
-        request = requestWith fusionTablesRequest
-        requestWith rq TemplatePatch'{..}
-          = go _tpTableId _tpTemplateId _tpQuotaUser
-              (Just _tpPrettyPrint)
-              _tpUserIP
-              _tpFields
-              _tpKey
-              _tpOAuthToken
-              (Just AltJSON)
+        requestClient TemplatePatch'{..}
+          = go _tpTableId _tpTemplateId (Just AltJSON)
               _tpPayload
+              fusionTablesService
           where go
-                  = clientBuild (Proxy :: Proxy TemplatePatchResource)
-                      rq
+                  = buildClient (Proxy :: Proxy TemplatePatchResource)
+                      mempty

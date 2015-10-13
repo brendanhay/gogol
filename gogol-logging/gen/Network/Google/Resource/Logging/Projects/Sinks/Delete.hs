@@ -35,18 +35,13 @@ module Network.Google.Resource.Logging.Projects.Sinks.Delete
 
     -- * Request Lenses
     , psdXgafv
-    , psdQuotaUser
-    , psdPrettyPrint
     , psdUploadProtocol
     , psdPp
     , psdAccessToken
     , psdUploadType
     , psdBearerToken
-    , psdKey
-    , psdOAuthToken
     , psdProjectsId
     , psdSinksId
-    , psdFields
     , psdCallback
     ) where
 
@@ -68,13 +63,7 @@ type ProjectsSinksDeleteResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Delete '[JSON] Empty
+                             QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a project sink. After deletion, no new log entries are written
 -- to the destination.
@@ -82,18 +71,13 @@ type ProjectsSinksDeleteResource =
 -- /See:/ 'projectsSinksDelete'' smart constructor.
 data ProjectsSinksDelete' = ProjectsSinksDelete'
     { _psdXgafv          :: !(Maybe Text)
-    , _psdQuotaUser      :: !(Maybe Text)
-    , _psdPrettyPrint    :: !Bool
     , _psdUploadProtocol :: !(Maybe Text)
     , _psdPp             :: !Bool
     , _psdAccessToken    :: !(Maybe Text)
     , _psdUploadType     :: !(Maybe Text)
     , _psdBearerToken    :: !(Maybe Text)
-    , _psdKey            :: !(Maybe AuthKey)
-    , _psdOAuthToken     :: !(Maybe OAuthToken)
     , _psdProjectsId     :: !Text
     , _psdSinksId        :: !Text
-    , _psdFields         :: !(Maybe Text)
     , _psdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +86,6 @@ data ProjectsSinksDelete' = ProjectsSinksDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'psdXgafv'
---
--- * 'psdQuotaUser'
---
--- * 'psdPrettyPrint'
 --
 -- * 'psdUploadProtocol'
 --
@@ -117,15 +97,9 @@ data ProjectsSinksDelete' = ProjectsSinksDelete'
 --
 -- * 'psdBearerToken'
 --
--- * 'psdKey'
---
--- * 'psdOAuthToken'
---
 -- * 'psdProjectsId'
 --
 -- * 'psdSinksId'
---
--- * 'psdFields'
 --
 -- * 'psdCallback'
 projectsSinksDelete'
@@ -135,37 +109,19 @@ projectsSinksDelete'
 projectsSinksDelete' pPsdProjectsId_ pPsdSinksId_ =
     ProjectsSinksDelete'
     { _psdXgafv = Nothing
-    , _psdQuotaUser = Nothing
-    , _psdPrettyPrint = True
     , _psdUploadProtocol = Nothing
     , _psdPp = True
     , _psdAccessToken = Nothing
     , _psdUploadType = Nothing
     , _psdBearerToken = Nothing
-    , _psdKey = Nothing
-    , _psdOAuthToken = Nothing
     , _psdProjectsId = pPsdProjectsId_
     , _psdSinksId = pPsdSinksId_
-    , _psdFields = Nothing
     , _psdCallback = Nothing
     }
 
 -- | V1 error format.
 psdXgafv :: Lens' ProjectsSinksDelete' (Maybe Text)
 psdXgafv = lens _psdXgafv (\ s a -> s{_psdXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-psdQuotaUser :: Lens' ProjectsSinksDelete' (Maybe Text)
-psdQuotaUser
-  = lens _psdQuotaUser (\ s a -> s{_psdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-psdPrettyPrint :: Lens' ProjectsSinksDelete' Bool
-psdPrettyPrint
-  = lens _psdPrettyPrint
-      (\ s a -> s{_psdPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 psdUploadProtocol :: Lens' ProjectsSinksDelete' (Maybe Text)
@@ -195,18 +151,6 @@ psdBearerToken
   = lens _psdBearerToken
       (\ s a -> s{_psdBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-psdKey :: Lens' ProjectsSinksDelete' (Maybe AuthKey)
-psdKey = lens _psdKey (\ s a -> s{_psdKey = a})
-
--- | OAuth 2.0 token for the current user.
-psdOAuthToken :: Lens' ProjectsSinksDelete' (Maybe OAuthToken)
-psdOAuthToken
-  = lens _psdOAuthToken
-      (\ s a -> s{_psdOAuthToken = a})
-
 -- | Part of \`sinkName\`. The resource name of the project sink to delete.
 psdProjectsId :: Lens' ProjectsSinksDelete' Text
 psdProjectsId
@@ -218,24 +162,14 @@ psdSinksId :: Lens' ProjectsSinksDelete' Text
 psdSinksId
   = lens _psdSinksId (\ s a -> s{_psdSinksId = a})
 
--- | Selector specifying which fields to include in a partial response.
-psdFields :: Lens' ProjectsSinksDelete' (Maybe Text)
-psdFields
-  = lens _psdFields (\ s a -> s{_psdFields = a})
-
 -- | JSONP
 psdCallback :: Lens' ProjectsSinksDelete' (Maybe Text)
 psdCallback
   = lens _psdCallback (\ s a -> s{_psdCallback = a})
 
-instance GoogleAuth ProjectsSinksDelete' where
-        _AuthKey = psdKey . _Just
-        _AuthToken = psdOAuthToken . _Just
-
 instance GoogleRequest ProjectsSinksDelete' where
         type Rs ProjectsSinksDelete' = Empty
-        request = requestWith loggingRequest
-        requestWith rq ProjectsSinksDelete'{..}
+        requestClient ProjectsSinksDelete'{..}
           = go _psdProjectsId _psdSinksId _psdXgafv
               _psdUploadProtocol
               (Just _psdPp)
@@ -243,13 +177,9 @@ instance GoogleRequest ProjectsSinksDelete' where
               _psdUploadType
               _psdBearerToken
               _psdCallback
-              _psdQuotaUser
-              (Just _psdPrettyPrint)
-              _psdFields
-              _psdKey
-              _psdOAuthToken
               (Just AltJSON)
+              loggingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsSinksDeleteResource)
-                      rq
+                      mempty

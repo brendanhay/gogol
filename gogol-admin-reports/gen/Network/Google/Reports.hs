@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference>
 module Network.Google.Reports
     (
+    -- * Service Configuration
+      reportsService
+
     -- * API Declaration
-      ReportsAPI
+    , ReportsAPI
 
     -- * Resources
 

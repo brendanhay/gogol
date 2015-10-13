@@ -35,25 +35,19 @@ module Network.Google.Resource.GAN.Links.List
     -- * Request Lenses
     , llCreateDateMax
     , llAuthorship
-    , llQuotaUser
-    , llPrettyPrint
     , llAssetSize
-    , llUserIP
     , llRelationshipStatus
     , llAdvertiserId
     , llSearchText
     , llPromotionType
     , llRoleId
     , llRole
-    , llKey
     , llCreateDateMin
     , llLinkType
     , llPageToken
     , llStartDateMax
-    , llOAuthToken
     , llStartDateMin
     , llMaxResults
-    , llFields
     ) where
 
 import           Network.Google.Affiliates.Types
@@ -80,15 +74,8 @@ type LinksListResource =
                                QueryParam "startDateMax" Text :>
                                  QueryParam "startDateMin" Text :>
                                    QueryParam "maxResults" Word32 :>
-                                     QueryParam "quotaUser" Text :>
-                                       QueryParam "prettyPrint" Bool :>
-                                         QueryParam "userIp" Text :>
-                                           QueryParam "fields" Text :>
-                                             QueryParam "key" AuthKey :>
-                                               Header "Authorization" OAuthToken
-                                                 :>
-                                                 QueryParam "alt" AltJSON :>
-                                                   Get '[JSON] Links
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] Links
 
 -- | Retrieves all links that match the query parameters.
 --
@@ -96,25 +83,19 @@ type LinksListResource =
 data LinksList' = LinksList'
     { _llCreateDateMax      :: !(Maybe Text)
     , _llAuthorship         :: !(Maybe LinksListAuthorship)
-    , _llQuotaUser          :: !(Maybe Text)
-    , _llPrettyPrint        :: !Bool
     , _llAssetSize          :: !(Maybe [Text])
-    , _llUserIP             :: !(Maybe Text)
     , _llRelationshipStatus :: !(Maybe LinksListRelationshipStatus)
     , _llAdvertiserId       :: !(Maybe [Int64])
     , _llSearchText         :: !(Maybe Text)
     , _llPromotionType      :: !(Maybe [LinksListPromotionType])
     , _llRoleId             :: !Text
     , _llRole               :: !LinksListRole
-    , _llKey                :: !(Maybe AuthKey)
     , _llCreateDateMin      :: !(Maybe Text)
     , _llLinkType           :: !(Maybe LinksListLinkType)
     , _llPageToken          :: !(Maybe Text)
     , _llStartDateMax       :: !(Maybe Text)
-    , _llOAuthToken         :: !(Maybe OAuthToken)
     , _llStartDateMin       :: !(Maybe Text)
     , _llMaxResults         :: !(Maybe Word32)
-    , _llFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinksList'' with the minimum fields required to make a request.
@@ -125,13 +106,7 @@ data LinksList' = LinksList'
 --
 -- * 'llAuthorship'
 --
--- * 'llQuotaUser'
---
--- * 'llPrettyPrint'
---
 -- * 'llAssetSize'
---
--- * 'llUserIP'
 --
 -- * 'llRelationshipStatus'
 --
@@ -145,8 +120,6 @@ data LinksList' = LinksList'
 --
 -- * 'llRole'
 --
--- * 'llKey'
---
 -- * 'llCreateDateMin'
 --
 -- * 'llLinkType'
@@ -155,13 +128,9 @@ data LinksList' = LinksList'
 --
 -- * 'llStartDateMax'
 --
--- * 'llOAuthToken'
---
 -- * 'llStartDateMin'
 --
 -- * 'llMaxResults'
---
--- * 'llFields'
 linksList'
     :: Text -- ^ 'roleId'
     -> LinksListRole -- ^ 'role'
@@ -170,25 +139,19 @@ linksList' pLlRoleId_ pLlRole_ =
     LinksList'
     { _llCreateDateMax = Nothing
     , _llAuthorship = Nothing
-    , _llQuotaUser = Nothing
-    , _llPrettyPrint = True
     , _llAssetSize = Nothing
-    , _llUserIP = Nothing
     , _llRelationshipStatus = Nothing
     , _llAdvertiserId = Nothing
     , _llSearchText = Nothing
     , _llPromotionType = Nothing
     , _llRoleId = pLlRoleId_
     , _llRole = pLlRole_
-    , _llKey = Nothing
     , _llCreateDateMin = Nothing
     , _llLinkType = Nothing
     , _llPageToken = Nothing
     , _llStartDateMax = Nothing
-    , _llOAuthToken = Nothing
     , _llStartDateMin = Nothing
     , _llMaxResults = Nothing
-    , _llFields = Nothing
     }
 
 -- | The end of the create date range.
@@ -202,30 +165,12 @@ llAuthorship :: Lens' LinksList' (Maybe LinksListAuthorship)
 llAuthorship
   = lens _llAuthorship (\ s a -> s{_llAuthorship = a})
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-llQuotaUser :: Lens' LinksList' (Maybe Text)
-llQuotaUser
-  = lens _llQuotaUser (\ s a -> s{_llQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-llPrettyPrint :: Lens' LinksList' Bool
-llPrettyPrint
-  = lens _llPrettyPrint
-      (\ s a -> s{_llPrettyPrint = a})
-
 -- | The size of the given asset.
 llAssetSize :: Lens' LinksList' [Text]
 llAssetSize
   = lens _llAssetSize (\ s a -> s{_llAssetSize = a}) .
       _Default
       . _Coerce
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-llUserIP :: Lens' LinksList' (Maybe Text)
-llUserIP = lens _llUserIP (\ s a -> s{_llUserIP = a})
 
 -- | The status of the relationship.
 llRelationshipStatus :: Lens' LinksList' (Maybe LinksListRelationshipStatus)
@@ -265,12 +210,6 @@ llRoleId = lens _llRoleId (\ s a -> s{_llRoleId = a})
 llRole :: Lens' LinksList' LinksListRole
 llRole = lens _llRole (\ s a -> s{_llRole = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-llKey :: Lens' LinksList' (Maybe AuthKey)
-llKey = lens _llKey (\ s a -> s{_llKey = a})
-
 -- | The beginning of the create date range.
 llCreateDateMin :: Lens' LinksList' (Maybe Text)
 llCreateDateMin
@@ -293,11 +232,6 @@ llStartDateMax
   = lens _llStartDateMax
       (\ s a -> s{_llStartDateMax = a})
 
--- | OAuth 2.0 token for the current user.
-llOAuthToken :: Lens' LinksList' (Maybe OAuthToken)
-llOAuthToken
-  = lens _llOAuthToken (\ s a -> s{_llOAuthToken = a})
-
 -- | The beginning of the start date range.
 llStartDateMin :: Lens' LinksList' (Maybe Text)
 llStartDateMin
@@ -309,18 +243,9 @@ llMaxResults :: Lens' LinksList' (Maybe Word32)
 llMaxResults
   = lens _llMaxResults (\ s a -> s{_llMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-llFields :: Lens' LinksList' (Maybe Text)
-llFields = lens _llFields (\ s a -> s{_llFields = a})
-
-instance GoogleAuth LinksList' where
-        _AuthKey = llKey . _Just
-        _AuthToken = llOAuthToken . _Just
-
 instance GoogleRequest LinksList' where
         type Rs LinksList' = Links
-        request = requestWith affiliatesRequest
-        requestWith rq LinksList'{..}
+        requestClient LinksList'{..}
           = go _llRole _llRoleId _llCreateDateMax _llAuthorship
               (_llAssetSize ^. _Default)
               _llRelationshipStatus
@@ -333,12 +258,8 @@ instance GoogleRequest LinksList' where
               _llStartDateMax
               _llStartDateMin
               _llMaxResults
-              _llQuotaUser
-              (Just _llPrettyPrint)
-              _llUserIP
-              _llFields
-              _llKey
-              _llOAuthToken
               (Just AltJSON)
+              affiliatesService
           where go
-                  = clientBuild (Proxy :: Proxy LinksListResource) rq
+                  = buildClient (Proxy :: Proxy LinksListResource)
+                      mempty

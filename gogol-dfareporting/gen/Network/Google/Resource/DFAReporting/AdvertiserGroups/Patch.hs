@@ -34,15 +34,9 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Patch
     , AdvertiserGroupsPatch'
 
     -- * Request Lenses
-    , agpQuotaUser
-    , agpPrettyPrint
-    , agpUserIP
     , agpProFileId
     , agpPayload
-    , agpKey
     , agpId
-    , agpOAuthToken
-    , agpFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -55,53 +49,29 @@ type AdvertiserGroupsPatchResource =
        Capture "profileId" Int64 :>
          "advertiserGroups" :>
            QueryParam "id" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] AdvertiserGroup :>
-                             Patch '[JSON] AdvertiserGroup
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] AdvertiserGroup :>
+                 Patch '[JSON] AdvertiserGroup
 
 -- | Updates an existing advertiser group. This method supports patch
 -- semantics.
 --
 -- /See:/ 'advertiserGroupsPatch'' smart constructor.
 data AdvertiserGroupsPatch' = AdvertiserGroupsPatch'
-    { _agpQuotaUser   :: !(Maybe Text)
-    , _agpPrettyPrint :: !Bool
-    , _agpUserIP      :: !(Maybe Text)
-    , _agpProFileId   :: !Int64
-    , _agpPayload     :: !AdvertiserGroup
-    , _agpKey         :: !(Maybe AuthKey)
-    , _agpId          :: !Int64
-    , _agpOAuthToken  :: !(Maybe OAuthToken)
-    , _agpFields      :: !(Maybe Text)
+    { _agpProFileId :: !Int64
+    , _agpPayload   :: !AdvertiserGroup
+    , _agpId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'agpQuotaUser'
---
--- * 'agpPrettyPrint'
---
--- * 'agpUserIP'
---
 -- * 'agpProFileId'
 --
 -- * 'agpPayload'
 --
--- * 'agpKey'
---
 -- * 'agpId'
---
--- * 'agpOAuthToken'
---
--- * 'agpFields'
 advertiserGroupsPatch'
     :: Int64 -- ^ 'profileId'
     -> AdvertiserGroup -- ^ 'payload'
@@ -109,35 +79,10 @@ advertiserGroupsPatch'
     -> AdvertiserGroupsPatch'
 advertiserGroupsPatch' pAgpProFileId_ pAgpPayload_ pAgpId_ =
     AdvertiserGroupsPatch'
-    { _agpQuotaUser = Nothing
-    , _agpPrettyPrint = True
-    , _agpUserIP = Nothing
-    , _agpProFileId = pAgpProFileId_
+    { _agpProFileId = pAgpProFileId_
     , _agpPayload = pAgpPayload_
-    , _agpKey = Nothing
     , _agpId = pAgpId_
-    , _agpOAuthToken = Nothing
-    , _agpFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-agpQuotaUser :: Lens' AdvertiserGroupsPatch' (Maybe Text)
-agpQuotaUser
-  = lens _agpQuotaUser (\ s a -> s{_agpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-agpPrettyPrint :: Lens' AdvertiserGroupsPatch' Bool
-agpPrettyPrint
-  = lens _agpPrettyPrint
-      (\ s a -> s{_agpPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-agpUserIP :: Lens' AdvertiserGroupsPatch' (Maybe Text)
-agpUserIP
-  = lens _agpUserIP (\ s a -> s{_agpUserIP = a})
 
 -- | User profile ID associated with this request.
 agpProFileId :: Lens' AdvertiserGroupsPatch' Int64
@@ -149,44 +94,17 @@ agpPayload :: Lens' AdvertiserGroupsPatch' AdvertiserGroup
 agpPayload
   = lens _agpPayload (\ s a -> s{_agpPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-agpKey :: Lens' AdvertiserGroupsPatch' (Maybe AuthKey)
-agpKey = lens _agpKey (\ s a -> s{_agpKey = a})
-
 -- | Advertiser group ID.
 agpId :: Lens' AdvertiserGroupsPatch' Int64
 agpId = lens _agpId (\ s a -> s{_agpId = a})
 
--- | OAuth 2.0 token for the current user.
-agpOAuthToken :: Lens' AdvertiserGroupsPatch' (Maybe OAuthToken)
-agpOAuthToken
-  = lens _agpOAuthToken
-      (\ s a -> s{_agpOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-agpFields :: Lens' AdvertiserGroupsPatch' (Maybe Text)
-agpFields
-  = lens _agpFields (\ s a -> s{_agpFields = a})
-
-instance GoogleAuth AdvertiserGroupsPatch' where
-        _AuthKey = agpKey . _Just
-        _AuthToken = agpOAuthToken . _Just
-
 instance GoogleRequest AdvertiserGroupsPatch' where
         type Rs AdvertiserGroupsPatch' = AdvertiserGroup
-        request = requestWith dFAReportingRequest
-        requestWith rq AdvertiserGroupsPatch'{..}
-          = go _agpProFileId (Just _agpId) _agpQuotaUser
-              (Just _agpPrettyPrint)
-              _agpUserIP
-              _agpFields
-              _agpKey
-              _agpOAuthToken
-              (Just AltJSON)
+        requestClient AdvertiserGroupsPatch'{..}
+          = go _agpProFileId (Just _agpId) (Just AltJSON)
               _agpPayload
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AdvertiserGroupsPatchResource)
-                      rq
+                      mempty

@@ -33,13 +33,7 @@ module Network.Google.Resource.AdSense.Savedadstyles.Get
     , SavedadstylesGet'
 
     -- * Request Lenses
-    , sgQuotaUser
-    , sgPrettyPrint
     , sgSavedAdStyleId
-    , sgUserIP
-    , sgKey
-    , sgOAuthToken
-    , sgFields
     ) where
 
 import           Network.Google.AdSense.Types
@@ -50,70 +44,27 @@ import           Network.Google.Prelude
 type SavedadstylesGetResource =
      "savedadstyles" :>
        Capture "savedAdStyleId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyle
+         QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyle
 
 -- | Get a specific saved ad style from the user\'s account.
 --
 -- /See:/ 'savedadstylesGet'' smart constructor.
-data SavedadstylesGet' = SavedadstylesGet'
-    { _sgQuotaUser      :: !(Maybe Text)
-    , _sgPrettyPrint    :: !Bool
-    , _sgSavedAdStyleId :: !Text
-    , _sgUserIP         :: !(Maybe Text)
-    , _sgKey            :: !(Maybe AuthKey)
-    , _sgOAuthToken     :: !(Maybe OAuthToken)
-    , _sgFields         :: !(Maybe Text)
+newtype SavedadstylesGet' = SavedadstylesGet'
+    { _sgSavedAdStyleId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedadstylesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sgQuotaUser'
---
--- * 'sgPrettyPrint'
---
 -- * 'sgSavedAdStyleId'
---
--- * 'sgUserIP'
---
--- * 'sgKey'
---
--- * 'sgOAuthToken'
---
--- * 'sgFields'
 savedadstylesGet'
     :: Text -- ^ 'savedAdStyleId'
     -> SavedadstylesGet'
 savedadstylesGet' pSgSavedAdStyleId_ =
     SavedadstylesGet'
-    { _sgQuotaUser = Nothing
-    , _sgPrettyPrint = True
-    , _sgSavedAdStyleId = pSgSavedAdStyleId_
-    , _sgUserIP = Nothing
-    , _sgKey = Nothing
-    , _sgOAuthToken = Nothing
-    , _sgFields = Nothing
+    { _sgSavedAdStyleId = pSgSavedAdStyleId_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-sgQuotaUser :: Lens' SavedadstylesGet' (Maybe Text)
-sgQuotaUser
-  = lens _sgQuotaUser (\ s a -> s{_sgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-sgPrettyPrint :: Lens' SavedadstylesGet' Bool
-sgPrettyPrint
-  = lens _sgPrettyPrint
-      (\ s a -> s{_sgPrettyPrint = a})
 
 -- | Saved ad style to retrieve.
 sgSavedAdStyleId :: Lens' SavedadstylesGet' Text
@@ -121,42 +72,11 @@ sgSavedAdStyleId
   = lens _sgSavedAdStyleId
       (\ s a -> s{_sgSavedAdStyleId = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-sgUserIP :: Lens' SavedadstylesGet' (Maybe Text)
-sgUserIP = lens _sgUserIP (\ s a -> s{_sgUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-sgKey :: Lens' SavedadstylesGet' (Maybe AuthKey)
-sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
-
--- | OAuth 2.0 token for the current user.
-sgOAuthToken :: Lens' SavedadstylesGet' (Maybe OAuthToken)
-sgOAuthToken
-  = lens _sgOAuthToken (\ s a -> s{_sgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-sgFields :: Lens' SavedadstylesGet' (Maybe Text)
-sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
-
-instance GoogleAuth SavedadstylesGet' where
-        _AuthKey = sgKey . _Just
-        _AuthToken = sgOAuthToken . _Just
-
 instance GoogleRequest SavedadstylesGet' where
         type Rs SavedadstylesGet' = SavedAdStyle
-        request = requestWith adSenseRequest
-        requestWith rq SavedadstylesGet'{..}
-          = go _sgSavedAdStyleId _sgQuotaUser
-              (Just _sgPrettyPrint)
-              _sgUserIP
-              _sgFields
-              _sgKey
-              _sgOAuthToken
-              (Just AltJSON)
+        requestClient SavedadstylesGet'{..}
+          = go _sgSavedAdStyleId (Just AltJSON) adSenseService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy SavedadstylesGetResource)
-                      rq
+                      mempty

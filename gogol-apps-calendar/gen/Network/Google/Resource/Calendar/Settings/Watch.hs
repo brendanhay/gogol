@@ -34,15 +34,9 @@ module Network.Google.Resource.Calendar.Settings.Watch
 
     -- * Request Lenses
     , swSyncToken
-    , swQuotaUser
-    , swPrettyPrint
-    , swUserIP
     , swPayload
-    , swKey
     , swPageToken
-    , swOAuthToken
     , swMaxResults
-    , swFields
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -58,29 +52,17 @@ type SettingsWatchResource =
              QueryParam "syncToken" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "maxResults" Int32 :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Channel :> Post '[JSON] Channel
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
 -- | Watch for changes to Settings resources.
 --
 -- /See:/ 'settingsWatch'' smart constructor.
 data SettingsWatch' = SettingsWatch'
-    { _swSyncToken   :: !(Maybe Text)
-    , _swQuotaUser   :: !(Maybe Text)
-    , _swPrettyPrint :: !Bool
-    , _swUserIP      :: !(Maybe Text)
-    , _swPayload     :: !Channel
-    , _swKey         :: !(Maybe AuthKey)
-    , _swPageToken   :: !(Maybe Text)
-    , _swOAuthToken  :: !(Maybe OAuthToken)
-    , _swMaxResults  :: !(Maybe Int32)
-    , _swFields      :: !(Maybe Text)
+    { _swSyncToken  :: !(Maybe Text)
+    , _swPayload    :: !Channel
+    , _swPageToken  :: !(Maybe Text)
+    , _swMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SettingsWatch'' with the minimum fields required to make a request.
@@ -89,38 +71,20 @@ data SettingsWatch' = SettingsWatch'
 --
 -- * 'swSyncToken'
 --
--- * 'swQuotaUser'
---
--- * 'swPrettyPrint'
---
--- * 'swUserIP'
---
 -- * 'swPayload'
---
--- * 'swKey'
 --
 -- * 'swPageToken'
 --
--- * 'swOAuthToken'
---
 -- * 'swMaxResults'
---
--- * 'swFields'
 settingsWatch'
     :: Channel -- ^ 'payload'
     -> SettingsWatch'
 settingsWatch' pSwPayload_ =
     SettingsWatch'
     { _swSyncToken = Nothing
-    , _swQuotaUser = Nothing
-    , _swPrettyPrint = True
-    , _swUserIP = Nothing
     , _swPayload = pSwPayload_
-    , _swKey = Nothing
     , _swPageToken = Nothing
-    , _swOAuthToken = Nothing
     , _swMaxResults = Nothing
-    , _swFields = Nothing
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -134,44 +98,15 @@ swSyncToken :: Lens' SettingsWatch' (Maybe Text)
 swSyncToken
   = lens _swSyncToken (\ s a -> s{_swSyncToken = a})
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-swQuotaUser :: Lens' SettingsWatch' (Maybe Text)
-swQuotaUser
-  = lens _swQuotaUser (\ s a -> s{_swQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-swPrettyPrint :: Lens' SettingsWatch' Bool
-swPrettyPrint
-  = lens _swPrettyPrint
-      (\ s a -> s{_swPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-swUserIP :: Lens' SettingsWatch' (Maybe Text)
-swUserIP = lens _swUserIP (\ s a -> s{_swUserIP = a})
-
 -- | Multipart request metadata.
 swPayload :: Lens' SettingsWatch' Channel
 swPayload
   = lens _swPayload (\ s a -> s{_swPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-swKey :: Lens' SettingsWatch' (Maybe AuthKey)
-swKey = lens _swKey (\ s a -> s{_swKey = a})
-
 -- | Token specifying which result page to return. Optional.
 swPageToken :: Lens' SettingsWatch' (Maybe Text)
 swPageToken
   = lens _swPageToken (\ s a -> s{_swPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-swOAuthToken :: Lens' SettingsWatch' (Maybe OAuthToken)
-swOAuthToken
-  = lens _swOAuthToken (\ s a -> s{_swOAuthToken = a})
 
 -- | Maximum number of entries returned on one result page. By default the
 -- value is 100 entries. The page size can never be larger than 250
@@ -180,27 +115,13 @@ swMaxResults :: Lens' SettingsWatch' (Maybe Int32)
 swMaxResults
   = lens _swMaxResults (\ s a -> s{_swMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-swFields :: Lens' SettingsWatch' (Maybe Text)
-swFields = lens _swFields (\ s a -> s{_swFields = a})
-
-instance GoogleAuth SettingsWatch' where
-        _AuthKey = swKey . _Just
-        _AuthToken = swOAuthToken . _Just
-
 instance GoogleRequest SettingsWatch' where
         type Rs SettingsWatch' = Channel
-        request = requestWith appsCalendarRequest
-        requestWith rq SettingsWatch'{..}
+        requestClient SettingsWatch'{..}
           = go _swSyncToken _swPageToken _swMaxResults
-              _swQuotaUser
-              (Just _swPrettyPrint)
-              _swUserIP
-              _swFields
-              _swKey
-              _swOAuthToken
               (Just AltJSON)
               _swPayload
+              appsCalendarService
           where go
-                  = clientBuild (Proxy :: Proxy SettingsWatchResource)
-                      rq
+                  = buildClient (Proxy :: Proxy SettingsWatchResource)
+                      mempty

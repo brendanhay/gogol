@@ -35,18 +35,13 @@ module Network.Google.Resource.Genomics.Datasets.TestIAMPermissions
 
     -- * Request Lenses
     , dtipXgafv
-    , dtipQuotaUser
-    , dtipPrettyPrint
     , dtipUploadProtocol
     , dtipPp
     , dtipAccessToken
     , dtipUploadType
     , dtipPayload
     , dtipBearerToken
-    , dtipKey
     , dtipResource
-    , dtipOAuthToken
-    , dtipFields
     , dtipCallback
     ) where
 
@@ -65,14 +60,9 @@ type DatasetsTestIAMPermissionsResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] TestIAMPermissionsRequest :>
-                                     Post '[JSON] TestIAMPermissionsResponse
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] TestIAMPermissionsRequest :>
+                           Post '[JSON] TestIAMPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource. See
 -- Testing Permissions for more information.
@@ -80,18 +70,13 @@ type DatasetsTestIAMPermissionsResource =
 -- /See:/ 'datasetsTestIAMPermissions'' smart constructor.
 data DatasetsTestIAMPermissions' = DatasetsTestIAMPermissions'
     { _dtipXgafv          :: !(Maybe Text)
-    , _dtipQuotaUser      :: !(Maybe Text)
-    , _dtipPrettyPrint    :: !Bool
     , _dtipUploadProtocol :: !(Maybe Text)
     , _dtipPp             :: !Bool
     , _dtipAccessToken    :: !(Maybe Text)
     , _dtipUploadType     :: !(Maybe Text)
     , _dtipPayload        :: !TestIAMPermissionsRequest
     , _dtipBearerToken    :: !(Maybe Text)
-    , _dtipKey            :: !(Maybe AuthKey)
     , _dtipResource       :: !Text
-    , _dtipOAuthToken     :: !(Maybe OAuthToken)
-    , _dtipFields         :: !(Maybe Text)
     , _dtipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -100,10 +85,6 @@ data DatasetsTestIAMPermissions' = DatasetsTestIAMPermissions'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dtipXgafv'
---
--- * 'dtipQuotaUser'
---
--- * 'dtipPrettyPrint'
 --
 -- * 'dtipUploadProtocol'
 --
@@ -117,13 +98,7 @@ data DatasetsTestIAMPermissions' = DatasetsTestIAMPermissions'
 --
 -- * 'dtipBearerToken'
 --
--- * 'dtipKey'
---
 -- * 'dtipResource'
---
--- * 'dtipOAuthToken'
---
--- * 'dtipFields'
 --
 -- * 'dtipCallback'
 datasetsTestIAMPermissions'
@@ -133,18 +108,13 @@ datasetsTestIAMPermissions'
 datasetsTestIAMPermissions' pDtipPayload_ pDtipResource_ =
     DatasetsTestIAMPermissions'
     { _dtipXgafv = Nothing
-    , _dtipQuotaUser = Nothing
-    , _dtipPrettyPrint = True
     , _dtipUploadProtocol = Nothing
     , _dtipPp = True
     , _dtipAccessToken = Nothing
     , _dtipUploadType = Nothing
     , _dtipPayload = pDtipPayload_
     , _dtipBearerToken = Nothing
-    , _dtipKey = Nothing
     , _dtipResource = pDtipResource_
-    , _dtipOAuthToken = Nothing
-    , _dtipFields = Nothing
     , _dtipCallback = Nothing
     }
 
@@ -152,20 +122,6 @@ datasetsTestIAMPermissions' pDtipPayload_ pDtipResource_ =
 dtipXgafv :: Lens' DatasetsTestIAMPermissions' (Maybe Text)
 dtipXgafv
   = lens _dtipXgafv (\ s a -> s{_dtipXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-dtipQuotaUser :: Lens' DatasetsTestIAMPermissions' (Maybe Text)
-dtipQuotaUser
-  = lens _dtipQuotaUser
-      (\ s a -> s{_dtipQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-dtipPrettyPrint :: Lens' DatasetsTestIAMPermissions' Bool
-dtipPrettyPrint
-  = lens _dtipPrettyPrint
-      (\ s a -> s{_dtipPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 dtipUploadProtocol :: Lens' DatasetsTestIAMPermissions' (Maybe Text)
@@ -200,58 +156,32 @@ dtipBearerToken
   = lens _dtipBearerToken
       (\ s a -> s{_dtipBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-dtipKey :: Lens' DatasetsTestIAMPermissions' (Maybe AuthKey)
-dtipKey = lens _dtipKey (\ s a -> s{_dtipKey = a})
-
 -- | REQUIRED: The resource for which policy is being specified. Format is
 -- \`datasets\/\`.
 dtipResource :: Lens' DatasetsTestIAMPermissions' Text
 dtipResource
   = lens _dtipResource (\ s a -> s{_dtipResource = a})
 
--- | OAuth 2.0 token for the current user.
-dtipOAuthToken :: Lens' DatasetsTestIAMPermissions' (Maybe OAuthToken)
-dtipOAuthToken
-  = lens _dtipOAuthToken
-      (\ s a -> s{_dtipOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-dtipFields :: Lens' DatasetsTestIAMPermissions' (Maybe Text)
-dtipFields
-  = lens _dtipFields (\ s a -> s{_dtipFields = a})
-
 -- | JSONP
 dtipCallback :: Lens' DatasetsTestIAMPermissions' (Maybe Text)
 dtipCallback
   = lens _dtipCallback (\ s a -> s{_dtipCallback = a})
 
-instance GoogleAuth DatasetsTestIAMPermissions' where
-        _AuthKey = dtipKey . _Just
-        _AuthToken = dtipOAuthToken . _Just
-
 instance GoogleRequest DatasetsTestIAMPermissions'
          where
         type Rs DatasetsTestIAMPermissions' =
              TestIAMPermissionsResponse
-        request = requestWith genomicsRequest
-        requestWith rq DatasetsTestIAMPermissions'{..}
+        requestClient DatasetsTestIAMPermissions'{..}
           = go _dtipResource _dtipXgafv _dtipUploadProtocol
               (Just _dtipPp)
               _dtipAccessToken
               _dtipUploadType
               _dtipBearerToken
               _dtipCallback
-              _dtipQuotaUser
-              (Just _dtipPrettyPrint)
-              _dtipFields
-              _dtipKey
-              _dtipOAuthToken
               (Just AltJSON)
               _dtipPayload
+              genomicsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy DatasetsTestIAMPermissionsResource)
-                      rq
+                      mempty

@@ -33,15 +33,9 @@ module Network.Google.Resource.Gmail.Users.Labels.Update
     , UsersLabelsUpdate'
 
     -- * Request Lenses
-    , uluQuotaUser
-    , uluPrettyPrint
-    , uluUserIP
     , uluPayload
     , uluUserId
-    , uluKey
     , uluId
-    , uluOAuthToken
-    , uluFields
     ) where
 
 import           Network.Google.Gmail.Types
@@ -53,51 +47,27 @@ type UsersLabelsUpdateResource =
      Capture "userId" Text :>
        "labels" :>
          Capture "id" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Label :> Put '[JSON] Label
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] Label :> Put '[JSON] Label
 
 -- | Updates the specified label.
 --
 -- /See:/ 'usersLabelsUpdate'' smart constructor.
 data UsersLabelsUpdate' = UsersLabelsUpdate'
-    { _uluQuotaUser   :: !(Maybe Text)
-    , _uluPrettyPrint :: !Bool
-    , _uluUserIP      :: !(Maybe Text)
-    , _uluPayload     :: !Label
-    , _uluUserId      :: !Text
-    , _uluKey         :: !(Maybe AuthKey)
-    , _uluId          :: !Text
-    , _uluOAuthToken  :: !(Maybe OAuthToken)
-    , _uluFields      :: !(Maybe Text)
+    { _uluPayload :: !Label
+    , _uluUserId  :: !Text
+    , _uluId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersLabelsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uluQuotaUser'
---
--- * 'uluPrettyPrint'
---
--- * 'uluUserIP'
---
 -- * 'uluPayload'
 --
 -- * 'uluUserId'
 --
--- * 'uluKey'
---
 -- * 'uluId'
---
--- * 'uluOAuthToken'
---
--- * 'uluFields'
 usersLabelsUpdate'
     :: Label -- ^ 'payload'
     -> Text -- ^ 'id'
@@ -105,35 +75,10 @@ usersLabelsUpdate'
     -> UsersLabelsUpdate'
 usersLabelsUpdate' pUluPayload_ pUluUserId_ pUluId_ =
     UsersLabelsUpdate'
-    { _uluQuotaUser = Nothing
-    , _uluPrettyPrint = True
-    , _uluUserIP = Nothing
-    , _uluPayload = pUluPayload_
+    { _uluPayload = pUluPayload_
     , _uluUserId = pUluUserId_
-    , _uluKey = Nothing
     , _uluId = pUluId_
-    , _uluOAuthToken = Nothing
-    , _uluFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-uluQuotaUser :: Lens' UsersLabelsUpdate' (Maybe Text)
-uluQuotaUser
-  = lens _uluQuotaUser (\ s a -> s{_uluQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-uluPrettyPrint :: Lens' UsersLabelsUpdate' Bool
-uluPrettyPrint
-  = lens _uluPrettyPrint
-      (\ s a -> s{_uluPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-uluUserIP :: Lens' UsersLabelsUpdate' (Maybe Text)
-uluUserIP
-  = lens _uluUserIP (\ s a -> s{_uluUserIP = a})
 
 -- | Multipart request metadata.
 uluPayload :: Lens' UsersLabelsUpdate' Label
@@ -146,44 +91,16 @@ uluUserId :: Lens' UsersLabelsUpdate' Text
 uluUserId
   = lens _uluUserId (\ s a -> s{_uluUserId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-uluKey :: Lens' UsersLabelsUpdate' (Maybe AuthKey)
-uluKey = lens _uluKey (\ s a -> s{_uluKey = a})
-
 -- | The ID of the label to update.
 uluId :: Lens' UsersLabelsUpdate' Text
 uluId = lens _uluId (\ s a -> s{_uluId = a})
 
--- | OAuth 2.0 token for the current user.
-uluOAuthToken :: Lens' UsersLabelsUpdate' (Maybe OAuthToken)
-uluOAuthToken
-  = lens _uluOAuthToken
-      (\ s a -> s{_uluOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-uluFields :: Lens' UsersLabelsUpdate' (Maybe Text)
-uluFields
-  = lens _uluFields (\ s a -> s{_uluFields = a})
-
-instance GoogleAuth UsersLabelsUpdate' where
-        _AuthKey = uluKey . _Just
-        _AuthToken = uluOAuthToken . _Just
-
 instance GoogleRequest UsersLabelsUpdate' where
         type Rs UsersLabelsUpdate' = Label
-        request = requestWith gmailRequest
-        requestWith rq UsersLabelsUpdate'{..}
-          = go _uluUserId _uluId _uluQuotaUser
-              (Just _uluPrettyPrint)
-              _uluUserIP
-              _uluFields
-              _uluKey
-              _uluOAuthToken
-              (Just AltJSON)
-              _uluPayload
+        requestClient UsersLabelsUpdate'{..}
+          = go _uluUserId _uluId (Just AltJSON) _uluPayload
+              gmailService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy UsersLabelsUpdateResource)
-                      rq
+                      mempty

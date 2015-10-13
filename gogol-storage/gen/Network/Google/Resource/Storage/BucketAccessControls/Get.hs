@@ -33,14 +33,8 @@ module Network.Google.Resource.Storage.BucketAccessControls.Get
     , BucketAccessControlsGet'
 
     -- * Request Lenses
-    , bacgQuotaUser
-    , bacgPrettyPrint
-    , bacgUserIP
     , bacgBucket
-    , bacgKey
-    , bacgOAuthToken
     , bacgEntity
-    , bacgFields
     ) where
 
 import           Network.Google.Prelude
@@ -53,100 +47,38 @@ type BucketAccessControlsGetResource =
        Capture "bucket" Text :>
          "acl" :>
            Capture "entity" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] BucketAccessControl
+             QueryParam "alt" AltJSON :>
+               Get '[JSON] BucketAccessControl
 
 -- | Returns the ACL entry for the specified entity on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsGet'' smart constructor.
 data BucketAccessControlsGet' = BucketAccessControlsGet'
-    { _bacgQuotaUser   :: !(Maybe Text)
-    , _bacgPrettyPrint :: !Bool
-    , _bacgUserIP      :: !(Maybe Text)
-    , _bacgBucket      :: !Text
-    , _bacgKey         :: !(Maybe AuthKey)
-    , _bacgOAuthToken  :: !(Maybe OAuthToken)
-    , _bacgEntity      :: !Text
-    , _bacgFields      :: !(Maybe Text)
+    { _bacgBucket :: !Text
+    , _bacgEntity :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bacgQuotaUser'
---
--- * 'bacgPrettyPrint'
---
--- * 'bacgUserIP'
---
 -- * 'bacgBucket'
 --
--- * 'bacgKey'
---
--- * 'bacgOAuthToken'
---
 -- * 'bacgEntity'
---
--- * 'bacgFields'
 bucketAccessControlsGet'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'entity'
     -> BucketAccessControlsGet'
 bucketAccessControlsGet' pBacgBucket_ pBacgEntity_ =
     BucketAccessControlsGet'
-    { _bacgQuotaUser = Nothing
-    , _bacgPrettyPrint = True
-    , _bacgUserIP = Nothing
-    , _bacgBucket = pBacgBucket_
-    , _bacgKey = Nothing
-    , _bacgOAuthToken = Nothing
+    { _bacgBucket = pBacgBucket_
     , _bacgEntity = pBacgEntity_
-    , _bacgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-bacgQuotaUser :: Lens' BucketAccessControlsGet' (Maybe Text)
-bacgQuotaUser
-  = lens _bacgQuotaUser
-      (\ s a -> s{_bacgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-bacgPrettyPrint :: Lens' BucketAccessControlsGet' Bool
-bacgPrettyPrint
-  = lens _bacgPrettyPrint
-      (\ s a -> s{_bacgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-bacgUserIP :: Lens' BucketAccessControlsGet' (Maybe Text)
-bacgUserIP
-  = lens _bacgUserIP (\ s a -> s{_bacgUserIP = a})
 
 -- | Name of a bucket.
 bacgBucket :: Lens' BucketAccessControlsGet' Text
 bacgBucket
   = lens _bacgBucket (\ s a -> s{_bacgBucket = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-bacgKey :: Lens' BucketAccessControlsGet' (Maybe AuthKey)
-bacgKey = lens _bacgKey (\ s a -> s{_bacgKey = a})
-
--- | OAuth 2.0 token for the current user.
-bacgOAuthToken :: Lens' BucketAccessControlsGet' (Maybe OAuthToken)
-bacgOAuthToken
-  = lens _bacgOAuthToken
-      (\ s a -> s{_bacgOAuthToken = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
@@ -155,28 +87,13 @@ bacgEntity :: Lens' BucketAccessControlsGet' Text
 bacgEntity
   = lens _bacgEntity (\ s a -> s{_bacgEntity = a})
 
--- | Selector specifying which fields to include in a partial response.
-bacgFields :: Lens' BucketAccessControlsGet' (Maybe Text)
-bacgFields
-  = lens _bacgFields (\ s a -> s{_bacgFields = a})
-
-instance GoogleAuth BucketAccessControlsGet' where
-        _AuthKey = bacgKey . _Just
-        _AuthToken = bacgOAuthToken . _Just
-
 instance GoogleRequest BucketAccessControlsGet' where
         type Rs BucketAccessControlsGet' =
              BucketAccessControl
-        request = requestWith storageRequest
-        requestWith rq BucketAccessControlsGet'{..}
-          = go _bacgBucket _bacgEntity _bacgQuotaUser
-              (Just _bacgPrettyPrint)
-              _bacgUserIP
-              _bacgFields
-              _bacgKey
-              _bacgOAuthToken
-              (Just AltJSON)
+        requestClient BucketAccessControlsGet'{..}
+          = go _bacgBucket _bacgEntity (Just AltJSON)
+              storageService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy BucketAccessControlsGetResource)
-                      rq
+                      mempty

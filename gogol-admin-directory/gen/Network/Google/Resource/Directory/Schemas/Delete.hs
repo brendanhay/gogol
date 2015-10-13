@@ -33,14 +33,8 @@ module Network.Google.Resource.Directory.Schemas.Delete
     , SchemasDelete'
 
     -- * Request Lenses
-    , sdQuotaUser
-    , sdPrettyPrint
-    , sdUserIP
     , sdCustomerId
-    , sdKey
-    , sdOAuthToken
     , sdSchemaKey
-    , sdFields
     ) where
 
 import           Network.Google.Directory.Types
@@ -53,121 +47,48 @@ type SchemasDeleteResource =
        Capture "customerId" Text :>
          "schemas" :>
            Capture "schemaKey" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete schema
 --
 -- /See:/ 'schemasDelete'' smart constructor.
 data SchemasDelete' = SchemasDelete'
-    { _sdQuotaUser   :: !(Maybe Text)
-    , _sdPrettyPrint :: !Bool
-    , _sdUserIP      :: !(Maybe Text)
-    , _sdCustomerId  :: !Text
-    , _sdKey         :: !(Maybe AuthKey)
-    , _sdOAuthToken  :: !(Maybe OAuthToken)
-    , _sdSchemaKey   :: !Text
-    , _sdFields      :: !(Maybe Text)
+    { _sdCustomerId :: !Text
+    , _sdSchemaKey  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemasDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sdQuotaUser'
---
--- * 'sdPrettyPrint'
---
--- * 'sdUserIP'
---
 -- * 'sdCustomerId'
 --
--- * 'sdKey'
---
--- * 'sdOAuthToken'
---
 -- * 'sdSchemaKey'
---
--- * 'sdFields'
 schemasDelete'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'schemaKey'
     -> SchemasDelete'
 schemasDelete' pSdCustomerId_ pSdSchemaKey_ =
     SchemasDelete'
-    { _sdQuotaUser = Nothing
-    , _sdPrettyPrint = True
-    , _sdUserIP = Nothing
-    , _sdCustomerId = pSdCustomerId_
-    , _sdKey = Nothing
-    , _sdOAuthToken = Nothing
+    { _sdCustomerId = pSdCustomerId_
     , _sdSchemaKey = pSdSchemaKey_
-    , _sdFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-sdQuotaUser :: Lens' SchemasDelete' (Maybe Text)
-sdQuotaUser
-  = lens _sdQuotaUser (\ s a -> s{_sdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-sdPrettyPrint :: Lens' SchemasDelete' Bool
-sdPrettyPrint
-  = lens _sdPrettyPrint
-      (\ s a -> s{_sdPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-sdUserIP :: Lens' SchemasDelete' (Maybe Text)
-sdUserIP = lens _sdUserIP (\ s a -> s{_sdUserIP = a})
 
 -- | Immutable id of the Google Apps account
 sdCustomerId :: Lens' SchemasDelete' Text
 sdCustomerId
   = lens _sdCustomerId (\ s a -> s{_sdCustomerId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-sdKey :: Lens' SchemasDelete' (Maybe AuthKey)
-sdKey = lens _sdKey (\ s a -> s{_sdKey = a})
-
--- | OAuth 2.0 token for the current user.
-sdOAuthToken :: Lens' SchemasDelete' (Maybe OAuthToken)
-sdOAuthToken
-  = lens _sdOAuthToken (\ s a -> s{_sdOAuthToken = a})
-
 -- | Name or immutable Id of the schema
 sdSchemaKey :: Lens' SchemasDelete' Text
 sdSchemaKey
   = lens _sdSchemaKey (\ s a -> s{_sdSchemaKey = a})
 
--- | Selector specifying which fields to include in a partial response.
-sdFields :: Lens' SchemasDelete' (Maybe Text)
-sdFields = lens _sdFields (\ s a -> s{_sdFields = a})
-
-instance GoogleAuth SchemasDelete' where
-        _AuthKey = sdKey . _Just
-        _AuthToken = sdOAuthToken . _Just
-
 instance GoogleRequest SchemasDelete' where
         type Rs SchemasDelete' = ()
-        request = requestWith directoryRequest
-        requestWith rq SchemasDelete'{..}
-          = go _sdCustomerId _sdSchemaKey _sdQuotaUser
-              (Just _sdPrettyPrint)
-              _sdUserIP
-              _sdFields
-              _sdKey
-              _sdOAuthToken
-              (Just AltJSON)
+        requestClient SchemasDelete'{..}
+          = go _sdCustomerId _sdSchemaKey (Just AltJSON)
+              directoryService
           where go
-                  = clientBuild (Proxy :: Proxy SchemasDeleteResource)
-                      rq
+                  = buildClient (Proxy :: Proxy SchemasDeleteResource)
+                      mempty

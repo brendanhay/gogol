@@ -40,17 +40,12 @@ module Network.Google.Resource.Classroom.Invitations.Accept
 
     -- * Request Lenses
     , iaXgafv
-    , iaQuotaUser
-    , iaPrettyPrint
     , iaUploadProtocol
     , iaPp
     , iaAccessToken
     , iaUploadType
     , iaBearerToken
-    , iaKey
     , iaId
-    , iaOAuthToken
-    , iaFields
     , iaCallback
     ) where
 
@@ -70,13 +65,7 @@ type InvitationsAcceptResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Post '[JSON] Empty
+                         QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Accepts an invitation, removing it and adding the invited user to the
 -- teachers or students (as appropriate) of the specified course. Only the
@@ -89,17 +78,12 @@ type InvitationsAcceptResource =
 -- /See:/ 'invitationsAccept'' smart constructor.
 data InvitationsAccept' = InvitationsAccept'
     { _iaXgafv          :: !(Maybe Text)
-    , _iaQuotaUser      :: !(Maybe Text)
-    , _iaPrettyPrint    :: !Bool
     , _iaUploadProtocol :: !(Maybe Text)
     , _iaPp             :: !Bool
     , _iaAccessToken    :: !(Maybe Text)
     , _iaUploadType     :: !(Maybe Text)
     , _iaBearerToken    :: !(Maybe Text)
-    , _iaKey            :: !(Maybe AuthKey)
     , _iaId             :: !Text
-    , _iaOAuthToken     :: !(Maybe OAuthToken)
-    , _iaFields         :: !(Maybe Text)
     , _iaCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -108,10 +92,6 @@ data InvitationsAccept' = InvitationsAccept'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'iaXgafv'
---
--- * 'iaQuotaUser'
---
--- * 'iaPrettyPrint'
 --
 -- * 'iaUploadProtocol'
 --
@@ -123,13 +103,7 @@ data InvitationsAccept' = InvitationsAccept'
 --
 -- * 'iaBearerToken'
 --
--- * 'iaKey'
---
 -- * 'iaId'
---
--- * 'iaOAuthToken'
---
--- * 'iaFields'
 --
 -- * 'iaCallback'
 invitationsAccept'
@@ -138,36 +112,18 @@ invitationsAccept'
 invitationsAccept' pIaId_ =
     InvitationsAccept'
     { _iaXgafv = Nothing
-    , _iaQuotaUser = Nothing
-    , _iaPrettyPrint = True
     , _iaUploadProtocol = Nothing
     , _iaPp = True
     , _iaAccessToken = Nothing
     , _iaUploadType = Nothing
     , _iaBearerToken = Nothing
-    , _iaKey = Nothing
     , _iaId = pIaId_
-    , _iaOAuthToken = Nothing
-    , _iaFields = Nothing
     , _iaCallback = Nothing
     }
 
 -- | V1 error format.
 iaXgafv :: Lens' InvitationsAccept' (Maybe Text)
 iaXgafv = lens _iaXgafv (\ s a -> s{_iaXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-iaQuotaUser :: Lens' InvitationsAccept' (Maybe Text)
-iaQuotaUser
-  = lens _iaQuotaUser (\ s a -> s{_iaQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-iaPrettyPrint :: Lens' InvitationsAccept' Bool
-iaPrettyPrint
-  = lens _iaPrettyPrint
-      (\ s a -> s{_iaPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 iaUploadProtocol :: Lens' InvitationsAccept' (Maybe Text)
@@ -196,50 +152,26 @@ iaBearerToken
   = lens _iaBearerToken
       (\ s a -> s{_iaBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-iaKey :: Lens' InvitationsAccept' (Maybe AuthKey)
-iaKey = lens _iaKey (\ s a -> s{_iaKey = a})
-
 -- | Identifier of the invitation to accept.
 iaId :: Lens' InvitationsAccept' Text
 iaId = lens _iaId (\ s a -> s{_iaId = a})
-
--- | OAuth 2.0 token for the current user.
-iaOAuthToken :: Lens' InvitationsAccept' (Maybe OAuthToken)
-iaOAuthToken
-  = lens _iaOAuthToken (\ s a -> s{_iaOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-iaFields :: Lens' InvitationsAccept' (Maybe Text)
-iaFields = lens _iaFields (\ s a -> s{_iaFields = a})
 
 -- | JSONP
 iaCallback :: Lens' InvitationsAccept' (Maybe Text)
 iaCallback
   = lens _iaCallback (\ s a -> s{_iaCallback = a})
 
-instance GoogleAuth InvitationsAccept' where
-        _AuthKey = iaKey . _Just
-        _AuthToken = iaOAuthToken . _Just
-
 instance GoogleRequest InvitationsAccept' where
         type Rs InvitationsAccept' = Empty
-        request = requestWith classroomRequest
-        requestWith rq InvitationsAccept'{..}
+        requestClient InvitationsAccept'{..}
           = go _iaId _iaXgafv _iaUploadProtocol (Just _iaPp)
               _iaAccessToken
               _iaUploadType
               _iaBearerToken
               _iaCallback
-              _iaQuotaUser
-              (Just _iaPrettyPrint)
-              _iaFields
-              _iaKey
-              _iaOAuthToken
               (Just AltJSON)
+              classroomService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy InvitationsAcceptResource)
-                      rq
+                      mempty

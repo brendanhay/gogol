@@ -33,15 +33,9 @@ module Network.Google.Resource.Compute.ZoneOperations.Get
     , ZoneOperationsGet'
 
     -- * Request Lenses
-    , zogQuotaUser
-    , zogPrettyPrint
     , zogProject
     , zogOperation
-    , zogUserIP
     , zogZone
-    , zogKey
-    , zogOAuthToken
-    , zogFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,50 +49,26 @@ type ZoneOperationsGetResource =
          Capture "zone" Text :>
            "operations" :>
              Capture "operation" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :> Get '[JSON] Operation
+               QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Retrieves the specified zone-specific Operations resource.
 --
 -- /See:/ 'zoneOperationsGet'' smart constructor.
 data ZoneOperationsGet' = ZoneOperationsGet'
-    { _zogQuotaUser   :: !(Maybe Text)
-    , _zogPrettyPrint :: !Bool
-    , _zogProject     :: !Text
-    , _zogOperation   :: !Text
-    , _zogUserIP      :: !(Maybe Text)
-    , _zogZone        :: !Text
-    , _zogKey         :: !(Maybe AuthKey)
-    , _zogOAuthToken  :: !(Maybe OAuthToken)
-    , _zogFields      :: !(Maybe Text)
+    { _zogProject   :: !Text
+    , _zogOperation :: !Text
+    , _zogZone      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneOperationsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'zogQuotaUser'
---
--- * 'zogPrettyPrint'
---
 -- * 'zogProject'
 --
 -- * 'zogOperation'
 --
--- * 'zogUserIP'
---
 -- * 'zogZone'
---
--- * 'zogKey'
---
--- * 'zogOAuthToken'
---
--- * 'zogFields'
 zoneOperationsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'operation'
@@ -106,29 +76,10 @@ zoneOperationsGet'
     -> ZoneOperationsGet'
 zoneOperationsGet' pZogProject_ pZogOperation_ pZogZone_ =
     ZoneOperationsGet'
-    { _zogQuotaUser = Nothing
-    , _zogPrettyPrint = True
-    , _zogProject = pZogProject_
+    { _zogProject = pZogProject_
     , _zogOperation = pZogOperation_
-    , _zogUserIP = Nothing
     , _zogZone = pZogZone_
-    , _zogKey = Nothing
-    , _zogOAuthToken = Nothing
-    , _zogFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-zogQuotaUser :: Lens' ZoneOperationsGet' (Maybe Text)
-zogQuotaUser
-  = lens _zogQuotaUser (\ s a -> s{_zogQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-zogPrettyPrint :: Lens' ZoneOperationsGet' Bool
-zogPrettyPrint
-  = lens _zogPrettyPrint
-      (\ s a -> s{_zogPrettyPrint = a})
 
 -- | Project ID for this request.
 zogProject :: Lens' ZoneOperationsGet' Text
@@ -140,49 +91,17 @@ zogOperation :: Lens' ZoneOperationsGet' Text
 zogOperation
   = lens _zogOperation (\ s a -> s{_zogOperation = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-zogUserIP :: Lens' ZoneOperationsGet' (Maybe Text)
-zogUserIP
-  = lens _zogUserIP (\ s a -> s{_zogUserIP = a})
-
 -- | Name of the zone scoping this request.
 zogZone :: Lens' ZoneOperationsGet' Text
 zogZone = lens _zogZone (\ s a -> s{_zogZone = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-zogKey :: Lens' ZoneOperationsGet' (Maybe AuthKey)
-zogKey = lens _zogKey (\ s a -> s{_zogKey = a})
-
--- | OAuth 2.0 token for the current user.
-zogOAuthToken :: Lens' ZoneOperationsGet' (Maybe OAuthToken)
-zogOAuthToken
-  = lens _zogOAuthToken
-      (\ s a -> s{_zogOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-zogFields :: Lens' ZoneOperationsGet' (Maybe Text)
-zogFields
-  = lens _zogFields (\ s a -> s{_zogFields = a})
-
-instance GoogleAuth ZoneOperationsGet' where
-        _AuthKey = zogKey . _Just
-        _AuthToken = zogOAuthToken . _Just
-
 instance GoogleRequest ZoneOperationsGet' where
         type Rs ZoneOperationsGet' = Operation
-        request = requestWith computeRequest
-        requestWith rq ZoneOperationsGet'{..}
-          = go _zogProject _zogZone _zogOperation _zogQuotaUser
-              (Just _zogPrettyPrint)
-              _zogUserIP
-              _zogFields
-              _zogKey
-              _zogOAuthToken
+        requestClient ZoneOperationsGet'{..}
+          = go _zogProject _zogZone _zogOperation
               (Just AltJSON)
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ZoneOperationsGetResource)
-                      rq
+                      mempty

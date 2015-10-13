@@ -33,16 +33,10 @@ module Network.Google.Resource.Analytics.Management.UnSampledReports.Insert
     , ManagementUnSampledReportsInsert'
 
     -- * Request Lenses
-    , musriQuotaUser
-    , musriPrettyPrint
     , musriWebPropertyId
-    , musriUserIP
     , musriProFileId
     , musriPayload
     , musriAccountId
-    , musriKey
-    , musriOAuthToken
-    , musriFields
     ) where
 
 import           Network.Google.Analytics.Types
@@ -59,55 +53,31 @@ type ManagementUnSampledReportsInsertResource =
                "profiles" :>
                  Capture "profileId" Text :>
                    "unsampledReports" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] UnSampledReport :>
-                                     Post '[JSON] UnSampledReport
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] UnSampledReport :>
+                         Post '[JSON] UnSampledReport
 
 -- | Create a new unsampled report.
 --
 -- /See:/ 'managementUnSampledReportsInsert'' smart constructor.
 data ManagementUnSampledReportsInsert' = ManagementUnSampledReportsInsert'
-    { _musriQuotaUser     :: !(Maybe Text)
-    , _musriPrettyPrint   :: !Bool
-    , _musriWebPropertyId :: !Text
-    , _musriUserIP        :: !(Maybe Text)
+    { _musriWebPropertyId :: !Text
     , _musriProFileId     :: !Text
     , _musriPayload       :: !UnSampledReport
     , _musriAccountId     :: !Text
-    , _musriKey           :: !(Maybe AuthKey)
-    , _musriOAuthToken    :: !(Maybe OAuthToken)
-    , _musriFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUnSampledReportsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'musriQuotaUser'
---
--- * 'musriPrettyPrint'
---
 -- * 'musriWebPropertyId'
---
--- * 'musriUserIP'
 --
 -- * 'musriProFileId'
 --
 -- * 'musriPayload'
 --
 -- * 'musriAccountId'
---
--- * 'musriKey'
---
--- * 'musriOAuthToken'
---
--- * 'musriFields'
 managementUnSampledReportsInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
@@ -116,43 +86,17 @@ managementUnSampledReportsInsert'
     -> ManagementUnSampledReportsInsert'
 managementUnSampledReportsInsert' pMusriWebPropertyId_ pMusriProFileId_ pMusriPayload_ pMusriAccountId_ =
     ManagementUnSampledReportsInsert'
-    { _musriQuotaUser = Nothing
-    , _musriPrettyPrint = False
-    , _musriWebPropertyId = pMusriWebPropertyId_
-    , _musriUserIP = Nothing
+    { _musriWebPropertyId = pMusriWebPropertyId_
     , _musriProFileId = pMusriProFileId_
     , _musriPayload = pMusriPayload_
     , _musriAccountId = pMusriAccountId_
-    , _musriKey = Nothing
-    , _musriOAuthToken = Nothing
-    , _musriFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-musriQuotaUser :: Lens' ManagementUnSampledReportsInsert' (Maybe Text)
-musriQuotaUser
-  = lens _musriQuotaUser
-      (\ s a -> s{_musriQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-musriPrettyPrint :: Lens' ManagementUnSampledReportsInsert' Bool
-musriPrettyPrint
-  = lens _musriPrettyPrint
-      (\ s a -> s{_musriPrettyPrint = a})
 
 -- | Web property ID to create the unsampled report for.
 musriWebPropertyId :: Lens' ManagementUnSampledReportsInsert' Text
 musriWebPropertyId
   = lens _musriWebPropertyId
       (\ s a -> s{_musriWebPropertyId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-musriUserIP :: Lens' ManagementUnSampledReportsInsert' (Maybe Text)
-musriUserIP
-  = lens _musriUserIP (\ s a -> s{_musriUserIP = a})
 
 -- | View (Profile) ID to create the unsampled report for.
 musriProFileId :: Lens' ManagementUnSampledReportsInsert' Text
@@ -171,46 +115,18 @@ musriAccountId
   = lens _musriAccountId
       (\ s a -> s{_musriAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-musriKey :: Lens' ManagementUnSampledReportsInsert' (Maybe AuthKey)
-musriKey = lens _musriKey (\ s a -> s{_musriKey = a})
-
--- | OAuth 2.0 token for the current user.
-musriOAuthToken :: Lens' ManagementUnSampledReportsInsert' (Maybe OAuthToken)
-musriOAuthToken
-  = lens _musriOAuthToken
-      (\ s a -> s{_musriOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-musriFields :: Lens' ManagementUnSampledReportsInsert' (Maybe Text)
-musriFields
-  = lens _musriFields (\ s a -> s{_musriFields = a})
-
-instance GoogleAuth ManagementUnSampledReportsInsert'
-         where
-        _AuthKey = musriKey . _Just
-        _AuthToken = musriOAuthToken . _Just
-
 instance GoogleRequest
          ManagementUnSampledReportsInsert' where
         type Rs ManagementUnSampledReportsInsert' =
              UnSampledReport
-        request = requestWith analyticsRequest
-        requestWith rq ManagementUnSampledReportsInsert'{..}
+        requestClient ManagementUnSampledReportsInsert'{..}
           = go _musriAccountId _musriWebPropertyId
               _musriProFileId
-              _musriQuotaUser
-              (Just _musriPrettyPrint)
-              _musriUserIP
-              _musriFields
-              _musriKey
-              _musriOAuthToken
               (Just AltJSON)
               _musriPayload
+              analyticsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy ManagementUnSampledReportsInsertResource)
-                      rq
+                      mempty

@@ -43,17 +43,12 @@ module Network.Google.Resource.Genomics.Readgroupsets.Import
 
     -- * Request Lenses
     , riXgafv
-    , riQuotaUser
-    , riPrettyPrint
     , riUploadProtocol
     , riPp
     , riAccessToken
     , riUploadType
     , riPayload
     , riBearerToken
-    , riKey
-    , riOAuthToken
-    , riFields
     , riCallback
     ) where
 
@@ -72,14 +67,9 @@ type ReadgroupsetsImportResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] ImportReadGroupSetsRequest :>
-                                     Post '[JSON] Operation
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ImportReadGroupSetsRequest :>
+                           Post '[JSON] Operation
 
 -- | Creates read group sets by asynchronously importing the provided
 -- information. The caller must have WRITE permissions to the dataset. ##
@@ -95,17 +85,12 @@ type ReadgroupsetsImportResource =
 -- /See:/ 'readgroupsetsImport'' smart constructor.
 data ReadgroupsetsImport' = ReadgroupsetsImport'
     { _riXgafv          :: !(Maybe Text)
-    , _riQuotaUser      :: !(Maybe Text)
-    , _riPrettyPrint    :: !Bool
     , _riUploadProtocol :: !(Maybe Text)
     , _riPp             :: !Bool
     , _riAccessToken    :: !(Maybe Text)
     , _riUploadType     :: !(Maybe Text)
     , _riPayload        :: !ImportReadGroupSetsRequest
     , _riBearerToken    :: !(Maybe Text)
-    , _riKey            :: !(Maybe AuthKey)
-    , _riOAuthToken     :: !(Maybe OAuthToken)
-    , _riFields         :: !(Maybe Text)
     , _riCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -114,10 +99,6 @@ data ReadgroupsetsImport' = ReadgroupsetsImport'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'riXgafv'
---
--- * 'riQuotaUser'
---
--- * 'riPrettyPrint'
 --
 -- * 'riUploadProtocol'
 --
@@ -131,12 +112,6 @@ data ReadgroupsetsImport' = ReadgroupsetsImport'
 --
 -- * 'riBearerToken'
 --
--- * 'riKey'
---
--- * 'riOAuthToken'
---
--- * 'riFields'
---
 -- * 'riCallback'
 readgroupsetsImport'
     :: ImportReadGroupSetsRequest -- ^ 'payload'
@@ -144,36 +119,18 @@ readgroupsetsImport'
 readgroupsetsImport' pRiPayload_ =
     ReadgroupsetsImport'
     { _riXgafv = Nothing
-    , _riQuotaUser = Nothing
-    , _riPrettyPrint = True
     , _riUploadProtocol = Nothing
     , _riPp = True
     , _riAccessToken = Nothing
     , _riUploadType = Nothing
     , _riPayload = pRiPayload_
     , _riBearerToken = Nothing
-    , _riKey = Nothing
-    , _riOAuthToken = Nothing
-    , _riFields = Nothing
     , _riCallback = Nothing
     }
 
 -- | V1 error format.
 riXgafv :: Lens' ReadgroupsetsImport' (Maybe Text)
 riXgafv = lens _riXgafv (\ s a -> s{_riXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-riQuotaUser :: Lens' ReadgroupsetsImport' (Maybe Text)
-riQuotaUser
-  = lens _riQuotaUser (\ s a -> s{_riQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-riPrettyPrint :: Lens' ReadgroupsetsImport' Bool
-riPrettyPrint
-  = lens _riPrettyPrint
-      (\ s a -> s{_riPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 riUploadProtocol :: Lens' ReadgroupsetsImport' (Maybe Text)
@@ -207,47 +164,23 @@ riBearerToken
   = lens _riBearerToken
       (\ s a -> s{_riBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-riKey :: Lens' ReadgroupsetsImport' (Maybe AuthKey)
-riKey = lens _riKey (\ s a -> s{_riKey = a})
-
--- | OAuth 2.0 token for the current user.
-riOAuthToken :: Lens' ReadgroupsetsImport' (Maybe OAuthToken)
-riOAuthToken
-  = lens _riOAuthToken (\ s a -> s{_riOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-riFields :: Lens' ReadgroupsetsImport' (Maybe Text)
-riFields = lens _riFields (\ s a -> s{_riFields = a})
-
 -- | JSONP
 riCallback :: Lens' ReadgroupsetsImport' (Maybe Text)
 riCallback
   = lens _riCallback (\ s a -> s{_riCallback = a})
 
-instance GoogleAuth ReadgroupsetsImport' where
-        _AuthKey = riKey . _Just
-        _AuthToken = riOAuthToken . _Just
-
 instance GoogleRequest ReadgroupsetsImport' where
         type Rs ReadgroupsetsImport' = Operation
-        request = requestWith genomicsRequest
-        requestWith rq ReadgroupsetsImport'{..}
+        requestClient ReadgroupsetsImport'{..}
           = go _riXgafv _riUploadProtocol (Just _riPp)
               _riAccessToken
               _riUploadType
               _riBearerToken
               _riCallback
-              _riQuotaUser
-              (Just _riPrettyPrint)
-              _riFields
-              _riKey
-              _riOAuthToken
               (Just AltJSON)
               _riPayload
+              genomicsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ReadgroupsetsImportResource)
-                      rq
+                      mempty

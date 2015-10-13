@@ -33,13 +33,7 @@ module Network.Google.Resource.Directory.Users.Insert
     , UsersInsert'
 
     -- * Request Lenses
-    , uiQuotaUser
-    , uiPrettyPrint
-    , uiUserIP
     , uiPayload
-    , uiKey
-    , uiOAuthToken
-    , uiFields
     ) where
 
 import           Network.Google.Directory.Types
@@ -49,110 +43,38 @@ import           Network.Google.Prelude
 -- 'UsersInsert'' request conforms to.
 type UsersInsertResource =
      "users" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "fields" Text :>
-               QueryParam "key" AuthKey :>
-                 Header "Authorization" OAuthToken :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] User :> Post '[JSON] User
+       QueryParam "alt" AltJSON :>
+         ReqBody '[JSON] User :> Post '[JSON] User
 
 -- | create user.
 --
 -- /See:/ 'usersInsert'' smart constructor.
-data UsersInsert' = UsersInsert'
-    { _uiQuotaUser   :: !(Maybe Text)
-    , _uiPrettyPrint :: !Bool
-    , _uiUserIP      :: !(Maybe Text)
-    , _uiPayload     :: !User
-    , _uiKey         :: !(Maybe AuthKey)
-    , _uiOAuthToken  :: !(Maybe OAuthToken)
-    , _uiFields      :: !(Maybe Text)
+newtype UsersInsert' = UsersInsert'
+    { _uiPayload :: User
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uiQuotaUser'
---
--- * 'uiPrettyPrint'
---
--- * 'uiUserIP'
---
 -- * 'uiPayload'
---
--- * 'uiKey'
---
--- * 'uiOAuthToken'
---
--- * 'uiFields'
 usersInsert'
     :: User -- ^ 'payload'
     -> UsersInsert'
 usersInsert' pUiPayload_ =
     UsersInsert'
-    { _uiQuotaUser = Nothing
-    , _uiPrettyPrint = True
-    , _uiUserIP = Nothing
-    , _uiPayload = pUiPayload_
-    , _uiKey = Nothing
-    , _uiOAuthToken = Nothing
-    , _uiFields = Nothing
+    { _uiPayload = pUiPayload_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-uiQuotaUser :: Lens' UsersInsert' (Maybe Text)
-uiQuotaUser
-  = lens _uiQuotaUser (\ s a -> s{_uiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-uiPrettyPrint :: Lens' UsersInsert' Bool
-uiPrettyPrint
-  = lens _uiPrettyPrint
-      (\ s a -> s{_uiPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-uiUserIP :: Lens' UsersInsert' (Maybe Text)
-uiUserIP = lens _uiUserIP (\ s a -> s{_uiUserIP = a})
 
 -- | Multipart request metadata.
 uiPayload :: Lens' UsersInsert' User
 uiPayload
   = lens _uiPayload (\ s a -> s{_uiPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-uiKey :: Lens' UsersInsert' (Maybe AuthKey)
-uiKey = lens _uiKey (\ s a -> s{_uiKey = a})
-
--- | OAuth 2.0 token for the current user.
-uiOAuthToken :: Lens' UsersInsert' (Maybe OAuthToken)
-uiOAuthToken
-  = lens _uiOAuthToken (\ s a -> s{_uiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-uiFields :: Lens' UsersInsert' (Maybe Text)
-uiFields = lens _uiFields (\ s a -> s{_uiFields = a})
-
-instance GoogleAuth UsersInsert' where
-        _AuthKey = uiKey . _Just
-        _AuthToken = uiOAuthToken . _Just
-
 instance GoogleRequest UsersInsert' where
         type Rs UsersInsert' = User
-        request = requestWith directoryRequest
-        requestWith rq UsersInsert'{..}
-          = go _uiQuotaUser (Just _uiPrettyPrint) _uiUserIP
-              _uiFields
-              _uiKey
-              _uiOAuthToken
-              (Just AltJSON)
-              _uiPayload
+        requestClient UsersInsert'{..}
+          = go (Just AltJSON) _uiPayload directoryService
           where go
-                  = clientBuild (Proxy :: Proxy UsersInsertResource) rq
+                  = buildClient (Proxy :: Proxy UsersInsertResource)
+                      mempty

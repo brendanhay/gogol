@@ -34,18 +34,13 @@ module Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
 
     -- * Request Lenses
     , pgipXgafv
-    , pgipQuotaUser
-    , pgipPrettyPrint
     , pgipUploadProtocol
     , pgipPp
     , pgipAccessToken
     , pgipUploadType
     , pgipPayload
     , pgipBearerToken
-    , pgipKey
     , pgipResource
-    , pgipOAuthToken
-    , pgipFields
     , pgipCallback
     ) where
 
@@ -65,32 +60,22 @@ type ProjectsGetIAMPolicyResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] GetIAMPolicyRequest :>
-                                       Post '[JSON] Policy
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] GetIAMPolicyRequest :>
+                             Post '[JSON] Policy
 
 -- | Returns the IAM access control policy for specified project.
 --
 -- /See:/ 'projectsGetIAMPolicy'' smart constructor.
 data ProjectsGetIAMPolicy' = ProjectsGetIAMPolicy'
     { _pgipXgafv          :: !(Maybe Text)
-    , _pgipQuotaUser      :: !(Maybe Text)
-    , _pgipPrettyPrint    :: !Bool
     , _pgipUploadProtocol :: !(Maybe Text)
     , _pgipPp             :: !Bool
     , _pgipAccessToken    :: !(Maybe Text)
     , _pgipUploadType     :: !(Maybe Text)
     , _pgipPayload        :: !GetIAMPolicyRequest
     , _pgipBearerToken    :: !(Maybe Text)
-    , _pgipKey            :: !(Maybe AuthKey)
     , _pgipResource       :: !Text
-    , _pgipOAuthToken     :: !(Maybe OAuthToken)
-    , _pgipFields         :: !(Maybe Text)
     , _pgipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -99,10 +84,6 @@ data ProjectsGetIAMPolicy' = ProjectsGetIAMPolicy'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pgipXgafv'
---
--- * 'pgipQuotaUser'
---
--- * 'pgipPrettyPrint'
 --
 -- * 'pgipUploadProtocol'
 --
@@ -116,13 +97,7 @@ data ProjectsGetIAMPolicy' = ProjectsGetIAMPolicy'
 --
 -- * 'pgipBearerToken'
 --
--- * 'pgipKey'
---
 -- * 'pgipResource'
---
--- * 'pgipOAuthToken'
---
--- * 'pgipFields'
 --
 -- * 'pgipCallback'
 projectsGetIAMPolicy'
@@ -132,18 +107,13 @@ projectsGetIAMPolicy'
 projectsGetIAMPolicy' pPgipPayload_ pPgipResource_ =
     ProjectsGetIAMPolicy'
     { _pgipXgafv = Nothing
-    , _pgipQuotaUser = Nothing
-    , _pgipPrettyPrint = True
     , _pgipUploadProtocol = Nothing
     , _pgipPp = True
     , _pgipAccessToken = Nothing
     , _pgipUploadType = Nothing
     , _pgipPayload = pPgipPayload_
     , _pgipBearerToken = Nothing
-    , _pgipKey = Nothing
     , _pgipResource = pPgipResource_
-    , _pgipOAuthToken = Nothing
-    , _pgipFields = Nothing
     , _pgipCallback = Nothing
     }
 
@@ -151,20 +121,6 @@ projectsGetIAMPolicy' pPgipPayload_ pPgipResource_ =
 pgipXgafv :: Lens' ProjectsGetIAMPolicy' (Maybe Text)
 pgipXgafv
   = lens _pgipXgafv (\ s a -> s{_pgipXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pgipQuotaUser :: Lens' ProjectsGetIAMPolicy' (Maybe Text)
-pgipQuotaUser
-  = lens _pgipQuotaUser
-      (\ s a -> s{_pgipQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pgipPrettyPrint :: Lens' ProjectsGetIAMPolicy' Bool
-pgipPrettyPrint
-  = lens _pgipPrettyPrint
-      (\ s a -> s{_pgipPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 pgipUploadProtocol :: Lens' ProjectsGetIAMPolicy' (Maybe Text)
@@ -199,56 +155,30 @@ pgipBearerToken
   = lens _pgipBearerToken
       (\ s a -> s{_pgipBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pgipKey :: Lens' ProjectsGetIAMPolicy' (Maybe AuthKey)
-pgipKey = lens _pgipKey (\ s a -> s{_pgipKey = a})
-
 -- | REQUIRED: The resource for which policy is being requested. Resource is
 -- usually specified as a path, such as, \`projects\/{project}\`.
 pgipResource :: Lens' ProjectsGetIAMPolicy' Text
 pgipResource
   = lens _pgipResource (\ s a -> s{_pgipResource = a})
 
--- | OAuth 2.0 token for the current user.
-pgipOAuthToken :: Lens' ProjectsGetIAMPolicy' (Maybe OAuthToken)
-pgipOAuthToken
-  = lens _pgipOAuthToken
-      (\ s a -> s{_pgipOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pgipFields :: Lens' ProjectsGetIAMPolicy' (Maybe Text)
-pgipFields
-  = lens _pgipFields (\ s a -> s{_pgipFields = a})
-
 -- | JSONP
 pgipCallback :: Lens' ProjectsGetIAMPolicy' (Maybe Text)
 pgipCallback
   = lens _pgipCallback (\ s a -> s{_pgipCallback = a})
 
-instance GoogleAuth ProjectsGetIAMPolicy' where
-        _AuthKey = pgipKey . _Just
-        _AuthToken = pgipOAuthToken . _Just
-
 instance GoogleRequest ProjectsGetIAMPolicy' where
         type Rs ProjectsGetIAMPolicy' = Policy
-        request = requestWith resourceManagerRequest
-        requestWith rq ProjectsGetIAMPolicy'{..}
+        requestClient ProjectsGetIAMPolicy'{..}
           = go _pgipResource _pgipXgafv _pgipUploadProtocol
               (Just _pgipPp)
               _pgipAccessToken
               _pgipUploadType
               _pgipBearerToken
               _pgipCallback
-              _pgipQuotaUser
-              (Just _pgipPrettyPrint)
-              _pgipFields
-              _pgipKey
-              _pgipOAuthToken
               (Just AltJSON)
               _pgipPayload
+              resourceManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsGetIAMPolicyResource)
-                      rq
+                      mempty

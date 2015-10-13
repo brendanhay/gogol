@@ -34,12 +34,6 @@ module Network.Google.Resource.Drive.Permissions.GetIdForEmail
 
     -- * Request Lenses
     , pgifeEmail
-    , pgifeQuotaUser
-    , pgifePrettyPrint
-    , pgifeUserIP
-    , pgifeKey
-    , pgifeOAuthToken
-    , pgifeFields
     ) where
 
 import           Network.Google.Drive.Types
@@ -50,25 +44,13 @@ import           Network.Google.Prelude
 type PermissionsGetIdForEmailResource =
      "permissionIds" :>
        Capture "email" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] PermissionId
+         QueryParam "alt" AltJSON :> Get '[JSON] PermissionId
 
 -- | Returns the permission ID for an email address.
 --
 -- /See:/ 'permissionsGetIdForEmail'' smart constructor.
-data PermissionsGetIdForEmail' = PermissionsGetIdForEmail'
-    { _pgifeEmail       :: !Text
-    , _pgifeQuotaUser   :: !(Maybe Text)
-    , _pgifePrettyPrint :: !Bool
-    , _pgifeUserIP      :: !(Maybe Text)
-    , _pgifeKey         :: !(Maybe AuthKey)
-    , _pgifeOAuthToken  :: !(Maybe OAuthToken)
-    , _pgifeFields      :: !(Maybe Text)
+newtype PermissionsGetIdForEmail' = PermissionsGetIdForEmail'
+    { _pgifeEmail :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsGetIdForEmail'' with the minimum fields required to make a request.
@@ -76,30 +58,12 @@ data PermissionsGetIdForEmail' = PermissionsGetIdForEmail'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pgifeEmail'
---
--- * 'pgifeQuotaUser'
---
--- * 'pgifePrettyPrint'
---
--- * 'pgifeUserIP'
---
--- * 'pgifeKey'
---
--- * 'pgifeOAuthToken'
---
--- * 'pgifeFields'
 permissionsGetIdForEmail'
     :: Text -- ^ 'email'
     -> PermissionsGetIdForEmail'
 permissionsGetIdForEmail' pPgifeEmail_ =
     PermissionsGetIdForEmail'
     { _pgifeEmail = pPgifeEmail_
-    , _pgifeQuotaUser = Nothing
-    , _pgifePrettyPrint = True
-    , _pgifeUserIP = Nothing
-    , _pgifeKey = Nothing
-    , _pgifeOAuthToken = Nothing
-    , _pgifeFields = Nothing
     }
 
 -- | The email address for which to return a permission ID
@@ -107,60 +71,12 @@ pgifeEmail :: Lens' PermissionsGetIdForEmail' Text
 pgifeEmail
   = lens _pgifeEmail (\ s a -> s{_pgifeEmail = a})
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-pgifeQuotaUser :: Lens' PermissionsGetIdForEmail' (Maybe Text)
-pgifeQuotaUser
-  = lens _pgifeQuotaUser
-      (\ s a -> s{_pgifeQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pgifePrettyPrint :: Lens' PermissionsGetIdForEmail' Bool
-pgifePrettyPrint
-  = lens _pgifePrettyPrint
-      (\ s a -> s{_pgifePrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-pgifeUserIP :: Lens' PermissionsGetIdForEmail' (Maybe Text)
-pgifeUserIP
-  = lens _pgifeUserIP (\ s a -> s{_pgifeUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pgifeKey :: Lens' PermissionsGetIdForEmail' (Maybe AuthKey)
-pgifeKey = lens _pgifeKey (\ s a -> s{_pgifeKey = a})
-
--- | OAuth 2.0 token for the current user.
-pgifeOAuthToken :: Lens' PermissionsGetIdForEmail' (Maybe OAuthToken)
-pgifeOAuthToken
-  = lens _pgifeOAuthToken
-      (\ s a -> s{_pgifeOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pgifeFields :: Lens' PermissionsGetIdForEmail' (Maybe Text)
-pgifeFields
-  = lens _pgifeFields (\ s a -> s{_pgifeFields = a})
-
-instance GoogleAuth PermissionsGetIdForEmail' where
-        _AuthKey = pgifeKey . _Just
-        _AuthToken = pgifeOAuthToken . _Just
-
 instance GoogleRequest PermissionsGetIdForEmail'
          where
         type Rs PermissionsGetIdForEmail' = PermissionId
-        request = requestWith driveRequest
-        requestWith rq PermissionsGetIdForEmail'{..}
-          = go _pgifeEmail _pgifeQuotaUser
-              (Just _pgifePrettyPrint)
-              _pgifeUserIP
-              _pgifeFields
-              _pgifeKey
-              _pgifeOAuthToken
-              (Just AltJSON)
+        requestClient PermissionsGetIdForEmail'{..}
+          = go _pgifeEmail (Just AltJSON) driveService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy PermissionsGetIdForEmailResource)
-                      rq
+                      mempty

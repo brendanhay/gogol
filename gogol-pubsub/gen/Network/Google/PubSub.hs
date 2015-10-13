@@ -19,8 +19,11 @@
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference>
 module Network.Google.PubSub
     (
+    -- * Service Configuration
+      pubSubService
+
     -- * API Declaration
-      PubSubAPI
+    , PubSubAPI
 
     -- * Resources
 

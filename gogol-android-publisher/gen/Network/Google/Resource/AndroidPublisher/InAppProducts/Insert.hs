@@ -33,15 +33,9 @@ module Network.Google.Resource.AndroidPublisher.InAppProducts.Insert
     , InAppProductsInsert'
 
     -- * Request Lenses
-    , iapiQuotaUser
-    , iapiPrettyPrint
     , iapiAutoConvertMissingPrices
     , iapiPackageName
-    , iapiUserIP
     , iapiPayload
-    , iapiKey
-    , iapiOAuthToken
-    , iapiFields
     ) where
 
 import           Network.Google.AndroidPublisher.Types
@@ -53,82 +47,38 @@ type InAppProductsInsertResource =
      Capture "packageName" Text :>
        "inappproducts" :>
          QueryParam "autoConvertMissingPrices" Bool :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] InAppProduct :>
-                           Post '[JSON] InAppProduct
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] InAppProduct :>
+               Post '[JSON] InAppProduct
 
 -- | Creates a new in-app product for an app.
 --
 -- /See:/ 'inAppProductsInsert'' smart constructor.
 data InAppProductsInsert' = InAppProductsInsert'
-    { _iapiQuotaUser                :: !(Maybe Text)
-    , _iapiPrettyPrint              :: !Bool
-    , _iapiAutoConvertMissingPrices :: !(Maybe Bool)
+    { _iapiAutoConvertMissingPrices :: !(Maybe Bool)
     , _iapiPackageName              :: !Text
-    , _iapiUserIP                   :: !(Maybe Text)
     , _iapiPayload                  :: !InAppProduct
-    , _iapiKey                      :: !(Maybe AuthKey)
-    , _iapiOAuthToken               :: !(Maybe OAuthToken)
-    , _iapiFields                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InAppProductsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iapiQuotaUser'
---
--- * 'iapiPrettyPrint'
---
 -- * 'iapiAutoConvertMissingPrices'
 --
 -- * 'iapiPackageName'
 --
--- * 'iapiUserIP'
---
 -- * 'iapiPayload'
---
--- * 'iapiKey'
---
--- * 'iapiOAuthToken'
---
--- * 'iapiFields'
 inAppProductsInsert'
     :: Text -- ^ 'packageName'
     -> InAppProduct -- ^ 'payload'
     -> InAppProductsInsert'
 inAppProductsInsert' pIapiPackageName_ pIapiPayload_ =
     InAppProductsInsert'
-    { _iapiQuotaUser = Nothing
-    , _iapiPrettyPrint = True
-    , _iapiAutoConvertMissingPrices = Nothing
+    { _iapiAutoConvertMissingPrices = Nothing
     , _iapiPackageName = pIapiPackageName_
-    , _iapiUserIP = Nothing
     , _iapiPayload = pIapiPayload_
-    , _iapiKey = Nothing
-    , _iapiOAuthToken = Nothing
-    , _iapiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-iapiQuotaUser :: Lens' InAppProductsInsert' (Maybe Text)
-iapiQuotaUser
-  = lens _iapiQuotaUser
-      (\ s a -> s{_iapiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-iapiPrettyPrint :: Lens' InAppProductsInsert' Bool
-iapiPrettyPrint
-  = lens _iapiPrettyPrint
-      (\ s a -> s{_iapiPrettyPrint = a})
 
 -- | If true the prices for all regions targeted by the parent app that
 -- don\'t have a price specified for this in-app product will be auto
@@ -145,52 +95,19 @@ iapiPackageName
   = lens _iapiPackageName
       (\ s a -> s{_iapiPackageName = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-iapiUserIP :: Lens' InAppProductsInsert' (Maybe Text)
-iapiUserIP
-  = lens _iapiUserIP (\ s a -> s{_iapiUserIP = a})
-
 -- | Multipart request metadata.
 iapiPayload :: Lens' InAppProductsInsert' InAppProduct
 iapiPayload
   = lens _iapiPayload (\ s a -> s{_iapiPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-iapiKey :: Lens' InAppProductsInsert' (Maybe AuthKey)
-iapiKey = lens _iapiKey (\ s a -> s{_iapiKey = a})
-
--- | OAuth 2.0 token for the current user.
-iapiOAuthToken :: Lens' InAppProductsInsert' (Maybe OAuthToken)
-iapiOAuthToken
-  = lens _iapiOAuthToken
-      (\ s a -> s{_iapiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-iapiFields :: Lens' InAppProductsInsert' (Maybe Text)
-iapiFields
-  = lens _iapiFields (\ s a -> s{_iapiFields = a})
-
-instance GoogleAuth InAppProductsInsert' where
-        _AuthKey = iapiKey . _Just
-        _AuthToken = iapiOAuthToken . _Just
-
 instance GoogleRequest InAppProductsInsert' where
         type Rs InAppProductsInsert' = InAppProduct
-        request = requestWith androidPublisherRequest
-        requestWith rq InAppProductsInsert'{..}
+        requestClient InAppProductsInsert'{..}
           = go _iapiPackageName _iapiAutoConvertMissingPrices
-              _iapiQuotaUser
-              (Just _iapiPrettyPrint)
-              _iapiUserIP
-              _iapiFields
-              _iapiKey
-              _iapiOAuthToken
               (Just AltJSON)
               _iapiPayload
+              androidPublisherService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy InAppProductsInsertResource)
-                      rq
+                      mempty

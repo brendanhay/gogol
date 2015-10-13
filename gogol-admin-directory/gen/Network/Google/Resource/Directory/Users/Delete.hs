@@ -33,13 +33,7 @@ module Network.Google.Resource.Directory.Users.Delete
     , UsersDelete'
 
     -- * Request Lenses
-    , udQuotaUser
-    , udPrettyPrint
-    , udUserIP
-    , udKey
-    , udOAuthToken
     , udUserKey
-    , udFields
     ) where
 
 import           Network.Google.Directory.Types
@@ -50,109 +44,37 @@ import           Network.Google.Prelude
 type UsersDeleteResource =
      "users" :>
        Capture "userKey" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
+         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete user
 --
 -- /See:/ 'usersDelete'' smart constructor.
-data UsersDelete' = UsersDelete'
-    { _udQuotaUser   :: !(Maybe Text)
-    , _udPrettyPrint :: !Bool
-    , _udUserIP      :: !(Maybe Text)
-    , _udKey         :: !(Maybe AuthKey)
-    , _udOAuthToken  :: !(Maybe OAuthToken)
-    , _udUserKey     :: !Text
-    , _udFields      :: !(Maybe Text)
+newtype UsersDelete' = UsersDelete'
+    { _udUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'udQuotaUser'
---
--- * 'udPrettyPrint'
---
--- * 'udUserIP'
---
--- * 'udKey'
---
--- * 'udOAuthToken'
---
 -- * 'udUserKey'
---
--- * 'udFields'
 usersDelete'
     :: Text -- ^ 'userKey'
     -> UsersDelete'
 usersDelete' pUdUserKey_ =
     UsersDelete'
-    { _udQuotaUser = Nothing
-    , _udPrettyPrint = True
-    , _udUserIP = Nothing
-    , _udKey = Nothing
-    , _udOAuthToken = Nothing
-    , _udUserKey = pUdUserKey_
-    , _udFields = Nothing
+    { _udUserKey = pUdUserKey_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-udQuotaUser :: Lens' UsersDelete' (Maybe Text)
-udQuotaUser
-  = lens _udQuotaUser (\ s a -> s{_udQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-udPrettyPrint :: Lens' UsersDelete' Bool
-udPrettyPrint
-  = lens _udPrettyPrint
-      (\ s a -> s{_udPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-udUserIP :: Lens' UsersDelete' (Maybe Text)
-udUserIP = lens _udUserIP (\ s a -> s{_udUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-udKey :: Lens' UsersDelete' (Maybe AuthKey)
-udKey = lens _udKey (\ s a -> s{_udKey = a})
-
--- | OAuth 2.0 token for the current user.
-udOAuthToken :: Lens' UsersDelete' (Maybe OAuthToken)
-udOAuthToken
-  = lens _udOAuthToken (\ s a -> s{_udOAuthToken = a})
 
 -- | Email or immutable Id of the user
 udUserKey :: Lens' UsersDelete' Text
 udUserKey
   = lens _udUserKey (\ s a -> s{_udUserKey = a})
 
--- | Selector specifying which fields to include in a partial response.
-udFields :: Lens' UsersDelete' (Maybe Text)
-udFields = lens _udFields (\ s a -> s{_udFields = a})
-
-instance GoogleAuth UsersDelete' where
-        _AuthKey = udKey . _Just
-        _AuthToken = udOAuthToken . _Just
-
 instance GoogleRequest UsersDelete' where
         type Rs UsersDelete' = ()
-        request = requestWith directoryRequest
-        requestWith rq UsersDelete'{..}
-          = go _udUserKey _udQuotaUser (Just _udPrettyPrint)
-              _udUserIP
-              _udFields
-              _udKey
-              _udOAuthToken
-              (Just AltJSON)
+        requestClient UsersDelete'{..}
+          = go _udUserKey (Just AltJSON) directoryService
           where go
-                  = clientBuild (Proxy :: Proxy UsersDeleteResource) rq
+                  = buildClient (Proxy :: Proxy UsersDeleteResource)
+                      mempty

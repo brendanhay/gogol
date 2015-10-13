@@ -38,20 +38,15 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.List
 
     -- * Request Lenses
     , tolXgafv
-    , tolQuotaUser
-    , tolPrettyPrint
     , tolUploadProtocol
     , tolPp
     , tolAccessToken
     , tolUploadType
     , tolBearerToken
-    , tolKey
     , tolName
     , tolFilter
     , tolPageToken
-    , tolOAuthToken
     , tolPageSize
-    , tolFields
     , tolCallback
     ) where
 
@@ -73,13 +68,8 @@ type TransferOperationsListResource =
                        QueryParam "pageToken" Text :>
                          QueryParam "pageSize" Int32 :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] ListOperationsResponse
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListOperationsResponse
 
 -- | Lists operations that match the specified filter in the request. If the
 -- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
@@ -90,20 +80,15 @@ type TransferOperationsListResource =
 -- /See:/ 'transferOperationsList'' smart constructor.
 data TransferOperationsList' = TransferOperationsList'
     { _tolXgafv          :: !(Maybe Text)
-    , _tolQuotaUser      :: !(Maybe Text)
-    , _tolPrettyPrint    :: !Bool
     , _tolUploadProtocol :: !(Maybe Text)
     , _tolPp             :: !Bool
     , _tolAccessToken    :: !(Maybe Text)
     , _tolUploadType     :: !(Maybe Text)
     , _tolBearerToken    :: !(Maybe Text)
-    , _tolKey            :: !(Maybe AuthKey)
     , _tolName           :: !Text
     , _tolFilter         :: !(Maybe Text)
     , _tolPageToken      :: !(Maybe Text)
-    , _tolOAuthToken     :: !(Maybe OAuthToken)
     , _tolPageSize       :: !(Maybe Int32)
-    , _tolFields         :: !(Maybe Text)
     , _tolCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -112,10 +97,6 @@ data TransferOperationsList' = TransferOperationsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tolXgafv'
---
--- * 'tolQuotaUser'
---
--- * 'tolPrettyPrint'
 --
 -- * 'tolUploadProtocol'
 --
@@ -127,19 +108,13 @@ data TransferOperationsList' = TransferOperationsList'
 --
 -- * 'tolBearerToken'
 --
--- * 'tolKey'
---
 -- * 'tolName'
 --
 -- * 'tolFilter'
 --
 -- * 'tolPageToken'
 --
--- * 'tolOAuthToken'
---
 -- * 'tolPageSize'
---
--- * 'tolFields'
 --
 -- * 'tolCallback'
 transferOperationsList'
@@ -148,39 +123,21 @@ transferOperationsList'
 transferOperationsList' pTolName_ =
     TransferOperationsList'
     { _tolXgafv = Nothing
-    , _tolQuotaUser = Nothing
-    , _tolPrettyPrint = True
     , _tolUploadProtocol = Nothing
     , _tolPp = True
     , _tolAccessToken = Nothing
     , _tolUploadType = Nothing
     , _tolBearerToken = Nothing
-    , _tolKey = Nothing
     , _tolName = pTolName_
     , _tolFilter = Nothing
     , _tolPageToken = Nothing
-    , _tolOAuthToken = Nothing
     , _tolPageSize = Nothing
-    , _tolFields = Nothing
     , _tolCallback = Nothing
     }
 
 -- | V1 error format.
 tolXgafv :: Lens' TransferOperationsList' (Maybe Text)
 tolXgafv = lens _tolXgafv (\ s a -> s{_tolXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-tolQuotaUser :: Lens' TransferOperationsList' (Maybe Text)
-tolQuotaUser
-  = lens _tolQuotaUser (\ s a -> s{_tolQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tolPrettyPrint :: Lens' TransferOperationsList' Bool
-tolPrettyPrint
-  = lens _tolPrettyPrint
-      (\ s a -> s{_tolPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 tolUploadProtocol :: Lens' TransferOperationsList' (Maybe Text)
@@ -210,12 +167,6 @@ tolBearerToken
   = lens _tolBearerToken
       (\ s a -> s{_tolBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tolKey :: Lens' TransferOperationsList' (Maybe AuthKey)
-tolKey = lens _tolKey (\ s a -> s{_tolKey = a})
-
 -- | The value \`transferOperations\`.
 tolName :: Lens' TransferOperationsList' Text
 tolName = lens _tolName (\ s a -> s{_tolName = a})
@@ -230,36 +181,20 @@ tolPageToken :: Lens' TransferOperationsList' (Maybe Text)
 tolPageToken
   = lens _tolPageToken (\ s a -> s{_tolPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-tolOAuthToken :: Lens' TransferOperationsList' (Maybe OAuthToken)
-tolOAuthToken
-  = lens _tolOAuthToken
-      (\ s a -> s{_tolOAuthToken = a})
-
 -- | The standard list page size.
 tolPageSize :: Lens' TransferOperationsList' (Maybe Int32)
 tolPageSize
   = lens _tolPageSize (\ s a -> s{_tolPageSize = a})
-
--- | Selector specifying which fields to include in a partial response.
-tolFields :: Lens' TransferOperationsList' (Maybe Text)
-tolFields
-  = lens _tolFields (\ s a -> s{_tolFields = a})
 
 -- | JSONP
 tolCallback :: Lens' TransferOperationsList' (Maybe Text)
 tolCallback
   = lens _tolCallback (\ s a -> s{_tolCallback = a})
 
-instance GoogleAuth TransferOperationsList' where
-        _AuthKey = tolKey . _Just
-        _AuthToken = tolOAuthToken . _Just
-
 instance GoogleRequest TransferOperationsList' where
         type Rs TransferOperationsList' =
              ListOperationsResponse
-        request = requestWith storageTransferRequest
-        requestWith rq TransferOperationsList'{..}
+        requestClient TransferOperationsList'{..}
           = go _tolName _tolXgafv _tolUploadProtocol
               (Just _tolPp)
               _tolAccessToken
@@ -269,13 +204,9 @@ instance GoogleRequest TransferOperationsList' where
               _tolPageToken
               _tolPageSize
               _tolCallback
-              _tolQuotaUser
-              (Just _tolPrettyPrint)
-              _tolFields
-              _tolKey
-              _tolOAuthToken
               (Just AltJSON)
+              storageTransferService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy TransferOperationsListResource)
-                      rq
+                      mempty

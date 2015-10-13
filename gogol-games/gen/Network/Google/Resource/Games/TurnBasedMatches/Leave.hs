@@ -34,14 +34,8 @@ module Network.Google.Resource.Games.TurnBasedMatches.Leave
     , TurnBasedMatchesLeave'
 
     -- * Request Lenses
-    , tbmlbQuotaUser
-    , tbmlbPrettyPrint
-    , tbmlbUserIP
-    , tbmlbKey
-    , tbmlbLanguage
-    , tbmlbOAuthToken
-    , tbmlbMatchId
-    , tbmlbFields
+    , turLanguage
+    , turMatchId
     ) where
 
 import           Network.Google.Games.Types
@@ -54,128 +48,50 @@ type TurnBasedMatchesLeaveResource =
        Capture "matchId" Text :>
          "leave" :>
            QueryParam "language" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           Put '[JSON] TurnBasedMatch
+             QueryParam "alt" AltJSON :>
+               Put '[JSON] TurnBasedMatch
 
 -- | Leave a turn-based match when it is not the current player\'s turn,
 -- without canceling the match.
 --
 -- /See:/ 'turnBasedMatchesLeave'' smart constructor.
 data TurnBasedMatchesLeave' = TurnBasedMatchesLeave'
-    { _tbmlbQuotaUser   :: !(Maybe Text)
-    , _tbmlbPrettyPrint :: !Bool
-    , _tbmlbUserIP      :: !(Maybe Text)
-    , _tbmlbKey         :: !(Maybe AuthKey)
-    , _tbmlbLanguage    :: !(Maybe Text)
-    , _tbmlbOAuthToken  :: !(Maybe OAuthToken)
-    , _tbmlbMatchId     :: !Text
-    , _tbmlbFields      :: !(Maybe Text)
+    { _turLanguage :: !(Maybe Text)
+    , _turMatchId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesLeave'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tbmlbQuotaUser'
+-- * 'turLanguage'
 --
--- * 'tbmlbPrettyPrint'
---
--- * 'tbmlbUserIP'
---
--- * 'tbmlbKey'
---
--- * 'tbmlbLanguage'
---
--- * 'tbmlbOAuthToken'
---
--- * 'tbmlbMatchId'
---
--- * 'tbmlbFields'
+-- * 'turMatchId'
 turnBasedMatchesLeave'
     :: Text -- ^ 'matchId'
     -> TurnBasedMatchesLeave'
-turnBasedMatchesLeave' pTbmlbMatchId_ =
+turnBasedMatchesLeave' pTurMatchId_ =
     TurnBasedMatchesLeave'
-    { _tbmlbQuotaUser = Nothing
-    , _tbmlbPrettyPrint = True
-    , _tbmlbUserIP = Nothing
-    , _tbmlbKey = Nothing
-    , _tbmlbLanguage = Nothing
-    , _tbmlbOAuthToken = Nothing
-    , _tbmlbMatchId = pTbmlbMatchId_
-    , _tbmlbFields = Nothing
+    { _turLanguage = Nothing
+    , _turMatchId = pTurMatchId_
     }
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tbmlbQuotaUser :: Lens' TurnBasedMatchesLeave' (Maybe Text)
-tbmlbQuotaUser
-  = lens _tbmlbQuotaUser
-      (\ s a -> s{_tbmlbQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tbmlbPrettyPrint :: Lens' TurnBasedMatchesLeave' Bool
-tbmlbPrettyPrint
-  = lens _tbmlbPrettyPrint
-      (\ s a -> s{_tbmlbPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tbmlbUserIP :: Lens' TurnBasedMatchesLeave' (Maybe Text)
-tbmlbUserIP
-  = lens _tbmlbUserIP (\ s a -> s{_tbmlbUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tbmlbKey :: Lens' TurnBasedMatchesLeave' (Maybe AuthKey)
-tbmlbKey = lens _tbmlbKey (\ s a -> s{_tbmlbKey = a})
-
 -- | The preferred language to use for strings returned by this method.
-tbmlbLanguage :: Lens' TurnBasedMatchesLeave' (Maybe Text)
-tbmlbLanguage
-  = lens _tbmlbLanguage
-      (\ s a -> s{_tbmlbLanguage = a})
-
--- | OAuth 2.0 token for the current user.
-tbmlbOAuthToken :: Lens' TurnBasedMatchesLeave' (Maybe OAuthToken)
-tbmlbOAuthToken
-  = lens _tbmlbOAuthToken
-      (\ s a -> s{_tbmlbOAuthToken = a})
+turLanguage :: Lens' TurnBasedMatchesLeave' (Maybe Text)
+turLanguage
+  = lens _turLanguage (\ s a -> s{_turLanguage = a})
 
 -- | The ID of the match.
-tbmlbMatchId :: Lens' TurnBasedMatchesLeave' Text
-tbmlbMatchId
-  = lens _tbmlbMatchId (\ s a -> s{_tbmlbMatchId = a})
-
--- | Selector specifying which fields to include in a partial response.
-tbmlbFields :: Lens' TurnBasedMatchesLeave' (Maybe Text)
-tbmlbFields
-  = lens _tbmlbFields (\ s a -> s{_tbmlbFields = a})
-
-instance GoogleAuth TurnBasedMatchesLeave' where
-        _AuthKey = tbmlbKey . _Just
-        _AuthToken = tbmlbOAuthToken . _Just
+turMatchId :: Lens' TurnBasedMatchesLeave' Text
+turMatchId
+  = lens _turMatchId (\ s a -> s{_turMatchId = a})
 
 instance GoogleRequest TurnBasedMatchesLeave' where
         type Rs TurnBasedMatchesLeave' = TurnBasedMatch
-        request = requestWith gamesRequest
-        requestWith rq TurnBasedMatchesLeave'{..}
-          = go _tbmlbMatchId _tbmlbLanguage _tbmlbQuotaUser
-              (Just _tbmlbPrettyPrint)
-              _tbmlbUserIP
-              _tbmlbFields
-              _tbmlbKey
-              _tbmlbOAuthToken
-              (Just AltJSON)
+        requestClient TurnBasedMatchesLeave'{..}
+          = go _turMatchId _turLanguage (Just AltJSON)
+              gamesService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy TurnBasedMatchesLeaveResource)
-                      rq
+                      mempty

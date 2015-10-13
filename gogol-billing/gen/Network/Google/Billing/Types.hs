@@ -15,8 +15,11 @@
 --
 module Network.Google.Billing.Types
     (
-    -- * Service Request
-      billingRequest
+    -- * Service Configuration
+      billingService
+
+    -- * OAuth Scopes
+    , cloudPlatformScope
 
     -- * BillingAccount
     , BillingAccount
@@ -51,8 +54,12 @@ import           Network.Google.Billing.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Cloud Billing API. This contains the host and root path used as a starting point for constructing service requests.
-billingRequest :: RequestBuilder
-billingRequest
-  = defaultRequest
-      "https://cloudbilling.googleapis.com/"
+billingService :: Service
+billingService
+  = defaultService (ServiceId "cloudbilling:v1")
+      "cloudbilling.googleapis.com"
       ""
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: OAuthScope
+cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";

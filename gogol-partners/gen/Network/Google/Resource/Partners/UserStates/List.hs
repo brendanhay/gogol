@@ -34,23 +34,18 @@ module Network.Google.Resource.Partners.UserStates.List
 
     -- * Request Lenses
     , uslXgafv
-    , uslQuotaUser
-    , uslPrettyPrint
     , uslUploadProtocol
     , uslPp
     , uslAccessToken
     , uslUploadType
     , uslRequestMetadataPartnersSessionId
     , uslBearerToken
-    , uslKey
     , uslRequestMetadataLocale
     , uslRequestMetadataExperimentIds
     , uslRequestMetadataUserOverridesIPAddress
     , uslRequestMetadataTrafficSourceTrafficSubId
-    , uslOAuthToken
     , uslRequestMetadataUserOverridesUserId
     , uslRequestMetadataTrafficSourceTrafficSourceId
-    , uslFields
     , uslCallback
     ) where
 
@@ -87,38 +82,26 @@ type UserStatesListResource =
                                    Text
                                    :>
                                    QueryParam "callback" Text :>
-                                     QueryParam "quotaUser" Text :>
-                                       QueryParam "prettyPrint" Bool :>
-                                         QueryParam "fields" Text :>
-                                           QueryParam "key" AuthKey :>
-                                             Header "Authorization" OAuthToken
-                                               :>
-                                               QueryParam "alt" AltJSON :>
-                                                 Get '[JSON]
-                                                   ListUserStatesResponse
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] ListUserStatesResponse
 
 -- | Lists states for current user.
 --
 -- /See:/ 'userStatesList'' smart constructor.
 data UserStatesList' = UserStatesList'
     { _uslXgafv                                       :: !(Maybe Text)
-    , _uslQuotaUser                                   :: !(Maybe Text)
-    , _uslPrettyPrint                                 :: !Bool
     , _uslUploadProtocol                              :: !(Maybe Text)
     , _uslPp                                          :: !Bool
     , _uslAccessToken                                 :: !(Maybe Text)
     , _uslUploadType                                  :: !(Maybe Text)
     , _uslRequestMetadataPartnersSessionId            :: !(Maybe Text)
     , _uslBearerToken                                 :: !(Maybe Text)
-    , _uslKey                                         :: !(Maybe AuthKey)
     , _uslRequestMetadataLocale                       :: !(Maybe Text)
     , _uslRequestMetadataExperimentIds                :: !(Maybe [Text])
     , _uslRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
     , _uslRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _uslOAuthToken                                  :: !(Maybe OAuthToken)
     , _uslRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _uslRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _uslFields                                      :: !(Maybe Text)
     , _uslCallback                                    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -127,10 +110,6 @@ data UserStatesList' = UserStatesList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'uslXgafv'
---
--- * 'uslQuotaUser'
---
--- * 'uslPrettyPrint'
 --
 -- * 'uslUploadProtocol'
 --
@@ -144,8 +123,6 @@ data UserStatesList' = UserStatesList'
 --
 -- * 'uslBearerToken'
 --
--- * 'uslKey'
---
 -- * 'uslRequestMetadataLocale'
 --
 -- * 'uslRequestMetadataExperimentIds'
@@ -154,13 +131,9 @@ data UserStatesList' = UserStatesList'
 --
 -- * 'uslRequestMetadataTrafficSourceTrafficSubId'
 --
--- * 'uslOAuthToken'
---
 -- * 'uslRequestMetadataUserOverridesUserId'
 --
 -- * 'uslRequestMetadataTrafficSourceTrafficSourceId'
---
--- * 'uslFields'
 --
 -- * 'uslCallback'
 userStatesList'
@@ -168,42 +141,24 @@ userStatesList'
 userStatesList' =
     UserStatesList'
     { _uslXgafv = Nothing
-    , _uslQuotaUser = Nothing
-    , _uslPrettyPrint = True
     , _uslUploadProtocol = Nothing
     , _uslPp = True
     , _uslAccessToken = Nothing
     , _uslUploadType = Nothing
     , _uslRequestMetadataPartnersSessionId = Nothing
     , _uslBearerToken = Nothing
-    , _uslKey = Nothing
     , _uslRequestMetadataLocale = Nothing
     , _uslRequestMetadataExperimentIds = Nothing
     , _uslRequestMetadataUserOverridesIPAddress = Nothing
     , _uslRequestMetadataTrafficSourceTrafficSubId = Nothing
-    , _uslOAuthToken = Nothing
     , _uslRequestMetadataUserOverridesUserId = Nothing
     , _uslRequestMetadataTrafficSourceTrafficSourceId = Nothing
-    , _uslFields = Nothing
     , _uslCallback = Nothing
     }
 
 -- | V1 error format.
 uslXgafv :: Lens' UserStatesList' (Maybe Text)
 uslXgafv = lens _uslXgafv (\ s a -> s{_uslXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-uslQuotaUser :: Lens' UserStatesList' (Maybe Text)
-uslQuotaUser
-  = lens _uslQuotaUser (\ s a -> s{_uslQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-uslPrettyPrint :: Lens' UserStatesList' Bool
-uslPrettyPrint
-  = lens _uslPrettyPrint
-      (\ s a -> s{_uslPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 uslUploadProtocol :: Lens' UserStatesList' (Maybe Text)
@@ -240,12 +195,6 @@ uslBearerToken
   = lens _uslBearerToken
       (\ s a -> s{_uslBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-uslKey :: Lens' UserStatesList' (Maybe AuthKey)
-uslKey = lens _uslKey (\ s a -> s{_uslKey = a})
-
 -- | Locale to use for the current request.
 uslRequestMetadataLocale :: Lens' UserStatesList' (Maybe Text)
 uslRequestMetadataLocale
@@ -276,12 +225,6 @@ uslRequestMetadataTrafficSourceTrafficSubId
       (\ s a ->
          s{_uslRequestMetadataTrafficSourceTrafficSubId = a})
 
--- | OAuth 2.0 token for the current user.
-uslOAuthToken :: Lens' UserStatesList' (Maybe OAuthToken)
-uslOAuthToken
-  = lens _uslOAuthToken
-      (\ s a -> s{_uslOAuthToken = a})
-
 -- | Logged-in user ID to impersonate instead of the user\'s ID.
 uslRequestMetadataUserOverridesUserId :: Lens' UserStatesList' (Maybe Text)
 uslRequestMetadataUserOverridesUserId
@@ -299,24 +242,14 @@ uslRequestMetadataTrafficSourceTrafficSourceId
          s{_uslRequestMetadataTrafficSourceTrafficSourceId =
              a})
 
--- | Selector specifying which fields to include in a partial response.
-uslFields :: Lens' UserStatesList' (Maybe Text)
-uslFields
-  = lens _uslFields (\ s a -> s{_uslFields = a})
-
 -- | JSONP
 uslCallback :: Lens' UserStatesList' (Maybe Text)
 uslCallback
   = lens _uslCallback (\ s a -> s{_uslCallback = a})
 
-instance GoogleAuth UserStatesList' where
-        _AuthKey = uslKey . _Just
-        _AuthToken = uslOAuthToken . _Just
-
 instance GoogleRequest UserStatesList' where
         type Rs UserStatesList' = ListUserStatesResponse
-        request = requestWith partnersRequest
-        requestWith rq UserStatesList'{..}
+        requestClient UserStatesList'{..}
           = go _uslXgafv _uslUploadProtocol (Just _uslPp)
               _uslAccessToken
               _uslUploadType
@@ -329,12 +262,8 @@ instance GoogleRequest UserStatesList' where
               _uslRequestMetadataUserOverridesUserId
               _uslRequestMetadataTrafficSourceTrafficSourceId
               _uslCallback
-              _uslQuotaUser
-              (Just _uslPrettyPrint)
-              _uslFields
-              _uslKey
-              _uslOAuthToken
               (Just AltJSON)
+              partnersService
           where go
-                  = clientBuild (Proxy :: Proxy UserStatesListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy UserStatesListResource)
+                      mempty

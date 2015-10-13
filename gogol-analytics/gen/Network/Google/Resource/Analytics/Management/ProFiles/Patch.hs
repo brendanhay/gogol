@@ -34,16 +34,10 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Patch
     , ManagementProFilesPatch'
 
     -- * Request Lenses
-    , mpfpQuotaUser
-    , mpfpPrettyPrint
     , mpfpWebPropertyId
-    , mpfpUserIP
     , mpfpProFileId
     , mpfpPayload
     , mpfpAccountId
-    , mpfpKey
-    , mpfpOAuthToken
-    , mpfpFields
     ) where
 
 import           Network.Google.Analytics.Types
@@ -59,56 +53,31 @@ type ManagementProFilesPatchResource =
              Capture "webPropertyId" Text :>
                "profiles" :>
                  Capture "profileId" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] ProFile :>
-                                   Patch '[JSON] ProFile
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ProFile :> Patch '[JSON] ProFile
 
 -- | Updates an existing view (profile). This method supports patch
 -- semantics.
 --
 -- /See:/ 'managementProFilesPatch'' smart constructor.
 data ManagementProFilesPatch' = ManagementProFilesPatch'
-    { _mpfpQuotaUser     :: !(Maybe Text)
-    , _mpfpPrettyPrint   :: !Bool
-    , _mpfpWebPropertyId :: !Text
-    , _mpfpUserIP        :: !(Maybe Text)
+    { _mpfpWebPropertyId :: !Text
     , _mpfpProFileId     :: !Text
     , _mpfpPayload       :: !ProFile
     , _mpfpAccountId     :: !Text
-    , _mpfpKey           :: !(Maybe AuthKey)
-    , _mpfpOAuthToken    :: !(Maybe OAuthToken)
-    , _mpfpFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFilesPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mpfpQuotaUser'
---
--- * 'mpfpPrettyPrint'
---
 -- * 'mpfpWebPropertyId'
---
--- * 'mpfpUserIP'
 --
 -- * 'mpfpProFileId'
 --
 -- * 'mpfpPayload'
 --
 -- * 'mpfpAccountId'
---
--- * 'mpfpKey'
---
--- * 'mpfpOAuthToken'
---
--- * 'mpfpFields'
 managementProFilesPatch'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
@@ -117,43 +86,17 @@ managementProFilesPatch'
     -> ManagementProFilesPatch'
 managementProFilesPatch' pMpfpWebPropertyId_ pMpfpProFileId_ pMpfpPayload_ pMpfpAccountId_ =
     ManagementProFilesPatch'
-    { _mpfpQuotaUser = Nothing
-    , _mpfpPrettyPrint = False
-    , _mpfpWebPropertyId = pMpfpWebPropertyId_
-    , _mpfpUserIP = Nothing
+    { _mpfpWebPropertyId = pMpfpWebPropertyId_
     , _mpfpProFileId = pMpfpProFileId_
     , _mpfpPayload = pMpfpPayload_
     , _mpfpAccountId = pMpfpAccountId_
-    , _mpfpKey = Nothing
-    , _mpfpOAuthToken = Nothing
-    , _mpfpFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mpfpQuotaUser :: Lens' ManagementProFilesPatch' (Maybe Text)
-mpfpQuotaUser
-  = lens _mpfpQuotaUser
-      (\ s a -> s{_mpfpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mpfpPrettyPrint :: Lens' ManagementProFilesPatch' Bool
-mpfpPrettyPrint
-  = lens _mpfpPrettyPrint
-      (\ s a -> s{_mpfpPrettyPrint = a})
 
 -- | Web property ID to which the view (profile) belongs
 mpfpWebPropertyId :: Lens' ManagementProFilesPatch' Text
 mpfpWebPropertyId
   = lens _mpfpWebPropertyId
       (\ s a -> s{_mpfpWebPropertyId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mpfpUserIP :: Lens' ManagementProFilesPatch' (Maybe Text)
-mpfpUserIP
-  = lens _mpfpUserIP (\ s a -> s{_mpfpUserIP = a})
 
 -- | ID of the view (profile) to be updated.
 mpfpProFileId :: Lens' ManagementProFilesPatch' Text
@@ -172,41 +115,14 @@ mpfpAccountId
   = lens _mpfpAccountId
       (\ s a -> s{_mpfpAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mpfpKey :: Lens' ManagementProFilesPatch' (Maybe AuthKey)
-mpfpKey = lens _mpfpKey (\ s a -> s{_mpfpKey = a})
-
--- | OAuth 2.0 token for the current user.
-mpfpOAuthToken :: Lens' ManagementProFilesPatch' (Maybe OAuthToken)
-mpfpOAuthToken
-  = lens _mpfpOAuthToken
-      (\ s a -> s{_mpfpOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-mpfpFields :: Lens' ManagementProFilesPatch' (Maybe Text)
-mpfpFields
-  = lens _mpfpFields (\ s a -> s{_mpfpFields = a})
-
-instance GoogleAuth ManagementProFilesPatch' where
-        _AuthKey = mpfpKey . _Just
-        _AuthToken = mpfpOAuthToken . _Just
-
 instance GoogleRequest ManagementProFilesPatch' where
         type Rs ManagementProFilesPatch' = ProFile
-        request = requestWith analyticsRequest
-        requestWith rq ManagementProFilesPatch'{..}
+        requestClient ManagementProFilesPatch'{..}
           = go _mpfpAccountId _mpfpWebPropertyId _mpfpProFileId
-              _mpfpQuotaUser
-              (Just _mpfpPrettyPrint)
-              _mpfpUserIP
-              _mpfpFields
-              _mpfpKey
-              _mpfpOAuthToken
               (Just AltJSON)
               _mpfpPayload
+              analyticsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ManagementProFilesPatchResource)
-                      rq
+                      mempty

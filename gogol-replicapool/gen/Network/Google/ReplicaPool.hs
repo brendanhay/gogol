@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference>
 module Network.Google.ReplicaPool
     (
+    -- * Service Configuration
+      replicaPoolService
+
     -- * API Declaration
-      ReplicaPoolAPI
+    , ReplicaPoolAPI
 
     -- * Resources
 

@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference>
 module Network.Google.AppState
     (
+    -- * Service Configuration
+      appStateService
+
     -- * API Declaration
-      AppStateAPI
+    , AppStateAPI
 
     -- * Resources
 

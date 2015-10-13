@@ -34,14 +34,8 @@ module Network.Google.Resource.Reseller.Customers.Update
     , CustomersUpdate'
 
     -- * Request Lenses
-    , cuQuotaUser
-    , cuPrettyPrint
-    , cuUserIP
     , cuPayload
     , cuCustomerId
-    , cuKey
-    , cuOAuthToken
-    , cuFields
     ) where
 
 import           Network.Google.AppsReseller.Types
@@ -52,82 +46,34 @@ import           Network.Google.Prelude
 type CustomersUpdateResource =
      "customers" :>
        Capture "customerId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Customer :> Put '[JSON] Customer
+         QueryParam "alt" AltJSON :>
+           ReqBody '[JSON] Customer :> Put '[JSON] Customer
 
 -- | Update a customer resource if one it exists and is owned by the
 -- reseller.
 --
 -- /See:/ 'customersUpdate'' smart constructor.
 data CustomersUpdate' = CustomersUpdate'
-    { _cuQuotaUser   :: !(Maybe Text)
-    , _cuPrettyPrint :: !Bool
-    , _cuUserIP      :: !(Maybe Text)
-    , _cuPayload     :: !Customer
-    , _cuCustomerId  :: !Text
-    , _cuKey         :: !(Maybe AuthKey)
-    , _cuOAuthToken  :: !(Maybe OAuthToken)
-    , _cuFields      :: !(Maybe Text)
+    { _cuPayload    :: !Customer
+    , _cuCustomerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomersUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cuQuotaUser'
---
--- * 'cuPrettyPrint'
---
--- * 'cuUserIP'
---
 -- * 'cuPayload'
 --
 -- * 'cuCustomerId'
---
--- * 'cuKey'
---
--- * 'cuOAuthToken'
---
--- * 'cuFields'
 customersUpdate'
     :: Customer -- ^ 'payload'
     -> Text -- ^ 'customerId'
     -> CustomersUpdate'
 customersUpdate' pCuPayload_ pCuCustomerId_ =
     CustomersUpdate'
-    { _cuQuotaUser = Nothing
-    , _cuPrettyPrint = True
-    , _cuUserIP = Nothing
-    , _cuPayload = pCuPayload_
+    { _cuPayload = pCuPayload_
     , _cuCustomerId = pCuCustomerId_
-    , _cuKey = Nothing
-    , _cuOAuthToken = Nothing
-    , _cuFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-cuQuotaUser :: Lens' CustomersUpdate' (Maybe Text)
-cuQuotaUser
-  = lens _cuQuotaUser (\ s a -> s{_cuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cuPrettyPrint :: Lens' CustomersUpdate' Bool
-cuPrettyPrint
-  = lens _cuPrettyPrint
-      (\ s a -> s{_cuPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-cuUserIP :: Lens' CustomersUpdate' (Maybe Text)
-cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
 
 -- | Multipart request metadata.
 cuPayload :: Lens' CustomersUpdate' Customer
@@ -139,37 +85,12 @@ cuCustomerId :: Lens' CustomersUpdate' Text
 cuCustomerId
   = lens _cuCustomerId (\ s a -> s{_cuCustomerId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cuKey :: Lens' CustomersUpdate' (Maybe AuthKey)
-cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
-
--- | OAuth 2.0 token for the current user.
-cuOAuthToken :: Lens' CustomersUpdate' (Maybe OAuthToken)
-cuOAuthToken
-  = lens _cuOAuthToken (\ s a -> s{_cuOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cuFields :: Lens' CustomersUpdate' (Maybe Text)
-cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
-
-instance GoogleAuth CustomersUpdate' where
-        _AuthKey = cuKey . _Just
-        _AuthToken = cuOAuthToken . _Just
-
 instance GoogleRequest CustomersUpdate' where
         type Rs CustomersUpdate' = Customer
-        request = requestWith appsResellerRequest
-        requestWith rq CustomersUpdate'{..}
-          = go _cuCustomerId _cuQuotaUser (Just _cuPrettyPrint)
-              _cuUserIP
-              _cuFields
-              _cuKey
-              _cuOAuthToken
-              (Just AltJSON)
-              _cuPayload
+        requestClient CustomersUpdate'{..}
+          = go _cuCustomerId (Just AltJSON) _cuPayload
+              appsResellerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CustomersUpdateResource)
-                      rq
+                      mempty

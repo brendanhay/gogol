@@ -33,13 +33,7 @@ module Network.Google.Resource.DoubleClickBidManager.Lineitems.Uploadlineitems
     , LineitemsUploadlineitems'
 
     -- * Request Lenses
-    , luQuotaUser
-    , luPrettyPrint
-    , luUserIP
     , luPayload
-    , luKey
-    , luOAuthToken
-    , luFields
     ) where
 
 import           Network.Google.DoubleClickBids.Types
@@ -50,115 +44,42 @@ import           Network.Google.Prelude
 type LineitemsUploadlineitemsResource =
      "lineitems" :>
        "uploadlineitems" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] UploadLineItemsRequest :>
-                         Post '[JSON] UploadLineItemsResponse
+         QueryParam "alt" AltJSON :>
+           ReqBody '[JSON] UploadLineItemsRequest :>
+             Post '[JSON] UploadLineItemsResponse
 
 -- | Uploads line items in CSV format.
 --
 -- /See:/ 'lineitemsUploadlineitems'' smart constructor.
-data LineitemsUploadlineitems' = LineitemsUploadlineitems'
-    { _luQuotaUser   :: !(Maybe Text)
-    , _luPrettyPrint :: !Bool
-    , _luUserIP      :: !(Maybe Text)
-    , _luPayload     :: !UploadLineItemsRequest
-    , _luKey         :: !(Maybe AuthKey)
-    , _luOAuthToken  :: !(Maybe OAuthToken)
-    , _luFields      :: !(Maybe Text)
+newtype LineitemsUploadlineitems' = LineitemsUploadlineitems'
+    { _luPayload :: UploadLineItemsRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LineitemsUploadlineitems'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'luQuotaUser'
---
--- * 'luPrettyPrint'
---
--- * 'luUserIP'
---
 -- * 'luPayload'
---
--- * 'luKey'
---
--- * 'luOAuthToken'
---
--- * 'luFields'
 lineitemsUploadlineitems'
     :: UploadLineItemsRequest -- ^ 'payload'
     -> LineitemsUploadlineitems'
 lineitemsUploadlineitems' pLuPayload_ =
     LineitemsUploadlineitems'
-    { _luQuotaUser = Nothing
-    , _luPrettyPrint = True
-    , _luUserIP = Nothing
-    , _luPayload = pLuPayload_
-    , _luKey = Nothing
-    , _luOAuthToken = Nothing
-    , _luFields = Nothing
+    { _luPayload = pLuPayload_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-luQuotaUser :: Lens' LineitemsUploadlineitems' (Maybe Text)
-luQuotaUser
-  = lens _luQuotaUser (\ s a -> s{_luQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-luPrettyPrint :: Lens' LineitemsUploadlineitems' Bool
-luPrettyPrint
-  = lens _luPrettyPrint
-      (\ s a -> s{_luPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-luUserIP :: Lens' LineitemsUploadlineitems' (Maybe Text)
-luUserIP = lens _luUserIP (\ s a -> s{_luUserIP = a})
 
 -- | Multipart request metadata.
 luPayload :: Lens' LineitemsUploadlineitems' UploadLineItemsRequest
 luPayload
   = lens _luPayload (\ s a -> s{_luPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-luKey :: Lens' LineitemsUploadlineitems' (Maybe AuthKey)
-luKey = lens _luKey (\ s a -> s{_luKey = a})
-
--- | OAuth 2.0 token for the current user.
-luOAuthToken :: Lens' LineitemsUploadlineitems' (Maybe OAuthToken)
-luOAuthToken
-  = lens _luOAuthToken (\ s a -> s{_luOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-luFields :: Lens' LineitemsUploadlineitems' (Maybe Text)
-luFields = lens _luFields (\ s a -> s{_luFields = a})
-
-instance GoogleAuth LineitemsUploadlineitems' where
-        _AuthKey = luKey . _Just
-        _AuthToken = luOAuthToken . _Just
-
 instance GoogleRequest LineitemsUploadlineitems'
          where
         type Rs LineitemsUploadlineitems' =
              UploadLineItemsResponse
-        request = requestWith doubleClickBidsRequest
-        requestWith rq LineitemsUploadlineitems'{..}
-          = go _luQuotaUser (Just _luPrettyPrint) _luUserIP
-              _luFields
-              _luKey
-              _luOAuthToken
-              (Just AltJSON)
-              _luPayload
+        requestClient LineitemsUploadlineitems'{..}
+          = go (Just AltJSON) _luPayload doubleClickBidsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy LineitemsUploadlineitemsResource)
-                      rq
+                      mempty

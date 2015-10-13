@@ -34,20 +34,15 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.List
 
     -- * Request Lenses
     , pjlXgafv
-    , pjlQuotaUser
-    , pjlPrettyPrint
     , pjlUploadProtocol
     , pjlPp
     , pjlAccessToken
     , pjlUploadType
     , pjlBearerToken
-    , pjlKey
     , pjlView
     , pjlPageToken
     , pjlProjectId
-    , pjlOAuthToken
     , pjlPageSize
-    , pjlFields
     , pjlCallback
     ) where
 
@@ -71,33 +66,23 @@ type ProjectsJobsListResource =
                            QueryParam "pageToken" Text :>
                              QueryParam "pageSize" Int32 :>
                                QueryParam "callback" Text :>
-                                 QueryParam "quotaUser" Text :>
-                                   QueryParam "prettyPrint" Bool :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "key" AuthKey :>
-                                         Header "Authorization" OAuthToken :>
-                                           QueryParam "alt" AltJSON :>
-                                             Get '[JSON] ListJobsResponse
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] ListJobsResponse
 
 -- | List the jobs of a project
 --
 -- /See:/ 'projectsJobsList'' smart constructor.
 data ProjectsJobsList' = ProjectsJobsList'
     { _pjlXgafv          :: !(Maybe Text)
-    , _pjlQuotaUser      :: !(Maybe Text)
-    , _pjlPrettyPrint    :: !Bool
     , _pjlUploadProtocol :: !(Maybe Text)
     , _pjlPp             :: !Bool
     , _pjlAccessToken    :: !(Maybe Text)
     , _pjlUploadType     :: !(Maybe Text)
     , _pjlBearerToken    :: !(Maybe Text)
-    , _pjlKey            :: !(Maybe AuthKey)
     , _pjlView           :: !(Maybe Text)
     , _pjlPageToken      :: !(Maybe Text)
     , _pjlProjectId      :: !Text
-    , _pjlOAuthToken     :: !(Maybe OAuthToken)
     , _pjlPageSize       :: !(Maybe Int32)
-    , _pjlFields         :: !(Maybe Text)
     , _pjlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -106,10 +91,6 @@ data ProjectsJobsList' = ProjectsJobsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pjlXgafv'
---
--- * 'pjlQuotaUser'
---
--- * 'pjlPrettyPrint'
 --
 -- * 'pjlUploadProtocol'
 --
@@ -121,19 +102,13 @@ data ProjectsJobsList' = ProjectsJobsList'
 --
 -- * 'pjlBearerToken'
 --
--- * 'pjlKey'
---
 -- * 'pjlView'
 --
 -- * 'pjlPageToken'
 --
 -- * 'pjlProjectId'
 --
--- * 'pjlOAuthToken'
---
 -- * 'pjlPageSize'
---
--- * 'pjlFields'
 --
 -- * 'pjlCallback'
 projectsJobsList'
@@ -142,39 +117,21 @@ projectsJobsList'
 projectsJobsList' pPjlProjectId_ =
     ProjectsJobsList'
     { _pjlXgafv = Nothing
-    , _pjlQuotaUser = Nothing
-    , _pjlPrettyPrint = True
     , _pjlUploadProtocol = Nothing
     , _pjlPp = True
     , _pjlAccessToken = Nothing
     , _pjlUploadType = Nothing
     , _pjlBearerToken = Nothing
-    , _pjlKey = Nothing
     , _pjlView = Nothing
     , _pjlPageToken = Nothing
     , _pjlProjectId = pPjlProjectId_
-    , _pjlOAuthToken = Nothing
     , _pjlPageSize = Nothing
-    , _pjlFields = Nothing
     , _pjlCallback = Nothing
     }
 
 -- | V1 error format.
 pjlXgafv :: Lens' ProjectsJobsList' (Maybe Text)
 pjlXgafv = lens _pjlXgafv (\ s a -> s{_pjlXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pjlQuotaUser :: Lens' ProjectsJobsList' (Maybe Text)
-pjlQuotaUser
-  = lens _pjlQuotaUser (\ s a -> s{_pjlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pjlPrettyPrint :: Lens' ProjectsJobsList' Bool
-pjlPrettyPrint
-  = lens _pjlPrettyPrint
-      (\ s a -> s{_pjlPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 pjlUploadProtocol :: Lens' ProjectsJobsList' (Maybe Text)
@@ -204,12 +161,6 @@ pjlBearerToken
   = lens _pjlBearerToken
       (\ s a -> s{_pjlBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pjlKey :: Lens' ProjectsJobsList' (Maybe AuthKey)
-pjlKey = lens _pjlKey (\ s a -> s{_pjlKey = a})
-
 -- | Level of information requested in response. Default is SUMMARY.
 pjlView :: Lens' ProjectsJobsList' (Maybe Text)
 pjlView = lens _pjlView (\ s a -> s{_pjlView = a})
@@ -225,12 +176,6 @@ pjlProjectId :: Lens' ProjectsJobsList' Text
 pjlProjectId
   = lens _pjlProjectId (\ s a -> s{_pjlProjectId = a})
 
--- | OAuth 2.0 token for the current user.
-pjlOAuthToken :: Lens' ProjectsJobsList' (Maybe OAuthToken)
-pjlOAuthToken
-  = lens _pjlOAuthToken
-      (\ s a -> s{_pjlOAuthToken = a})
-
 -- | If there are many jobs, limit response to at most this many. The actual
 -- number of jobs returned will be the lesser of max_responses and an
 -- unspecified server-defined limit.
@@ -238,24 +183,14 @@ pjlPageSize :: Lens' ProjectsJobsList' (Maybe Int32)
 pjlPageSize
   = lens _pjlPageSize (\ s a -> s{_pjlPageSize = a})
 
--- | Selector specifying which fields to include in a partial response.
-pjlFields :: Lens' ProjectsJobsList' (Maybe Text)
-pjlFields
-  = lens _pjlFields (\ s a -> s{_pjlFields = a})
-
 -- | JSONP
 pjlCallback :: Lens' ProjectsJobsList' (Maybe Text)
 pjlCallback
   = lens _pjlCallback (\ s a -> s{_pjlCallback = a})
 
-instance GoogleAuth ProjectsJobsList' where
-        _AuthKey = pjlKey . _Just
-        _AuthToken = pjlOAuthToken . _Just
-
 instance GoogleRequest ProjectsJobsList' where
         type Rs ProjectsJobsList' = ListJobsResponse
-        request = requestWith dataflowRequest
-        requestWith rq ProjectsJobsList'{..}
+        requestClient ProjectsJobsList'{..}
           = go _pjlProjectId _pjlXgafv _pjlUploadProtocol
               (Just _pjlPp)
               _pjlAccessToken
@@ -265,13 +200,9 @@ instance GoogleRequest ProjectsJobsList' where
               _pjlPageToken
               _pjlPageSize
               _pjlCallback
-              _pjlQuotaUser
-              (Just _pjlPrettyPrint)
-              _pjlFields
-              _pjlKey
-              _pjlOAuthToken
               (Just AltJSON)
+              dataflowService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsJobsListResource)
-                      rq
+                      mempty

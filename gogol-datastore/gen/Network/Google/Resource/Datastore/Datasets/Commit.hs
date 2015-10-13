@@ -34,14 +34,8 @@ module Network.Google.Resource.Datastore.Datasets.Commit
     , DatasetsCommit'
 
     -- * Request Lenses
-    , dcQuotaUser
-    , dcPrettyPrint
-    , dcUserIP
     , dcPayload
-    , dcKey
     , dcDatasetId
-    , dcOAuthToken
-    , dcFields
     ) where
 
 import           Network.Google.Datastore.Types
@@ -52,124 +46,51 @@ import           Network.Google.Prelude
 type DatasetsCommitResource =
      Capture "datasetId" Text :>
        "commit" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] CommitRequest :>
-                         Post '[JSON] CommitResponse
+         QueryParam "alt" AltJSON :>
+           ReqBody '[JSON] CommitRequest :>
+             Post '[JSON] CommitResponse
 
 -- | Commit a transaction, optionally creating, deleting or modifying some
 -- entities.
 --
 -- /See:/ 'datasetsCommit'' smart constructor.
 data DatasetsCommit' = DatasetsCommit'
-    { _dcQuotaUser   :: !(Maybe Text)
-    , _dcPrettyPrint :: !Bool
-    , _dcUserIP      :: !(Maybe Text)
-    , _dcPayload     :: !CommitRequest
-    , _dcKey         :: !(Maybe AuthKey)
-    , _dcDatasetId   :: !Text
-    , _dcOAuthToken  :: !(Maybe OAuthToken)
-    , _dcFields      :: !(Maybe Text)
+    { _dcPayload   :: !CommitRequest
+    , _dcDatasetId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsCommit'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dcQuotaUser'
---
--- * 'dcPrettyPrint'
---
--- * 'dcUserIP'
---
 -- * 'dcPayload'
 --
--- * 'dcKey'
---
 -- * 'dcDatasetId'
---
--- * 'dcOAuthToken'
---
--- * 'dcFields'
 datasetsCommit'
     :: CommitRequest -- ^ 'payload'
     -> Text -- ^ 'datasetId'
     -> DatasetsCommit'
 datasetsCommit' pDcPayload_ pDcDatasetId_ =
     DatasetsCommit'
-    { _dcQuotaUser = Nothing
-    , _dcPrettyPrint = True
-    , _dcUserIP = Nothing
-    , _dcPayload = pDcPayload_
-    , _dcKey = Nothing
+    { _dcPayload = pDcPayload_
     , _dcDatasetId = pDcDatasetId_
-    , _dcOAuthToken = Nothing
-    , _dcFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-dcQuotaUser :: Lens' DatasetsCommit' (Maybe Text)
-dcQuotaUser
-  = lens _dcQuotaUser (\ s a -> s{_dcQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-dcPrettyPrint :: Lens' DatasetsCommit' Bool
-dcPrettyPrint
-  = lens _dcPrettyPrint
-      (\ s a -> s{_dcPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-dcUserIP :: Lens' DatasetsCommit' (Maybe Text)
-dcUserIP = lens _dcUserIP (\ s a -> s{_dcUserIP = a})
 
 -- | Multipart request metadata.
 dcPayload :: Lens' DatasetsCommit' CommitRequest
 dcPayload
   = lens _dcPayload (\ s a -> s{_dcPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-dcKey :: Lens' DatasetsCommit' (Maybe AuthKey)
-dcKey = lens _dcKey (\ s a -> s{_dcKey = a})
-
 -- | Identifies the dataset.
 dcDatasetId :: Lens' DatasetsCommit' Text
 dcDatasetId
   = lens _dcDatasetId (\ s a -> s{_dcDatasetId = a})
 
--- | OAuth 2.0 token for the current user.
-dcOAuthToken :: Lens' DatasetsCommit' (Maybe OAuthToken)
-dcOAuthToken
-  = lens _dcOAuthToken (\ s a -> s{_dcOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-dcFields :: Lens' DatasetsCommit' (Maybe Text)
-dcFields = lens _dcFields (\ s a -> s{_dcFields = a})
-
-instance GoogleAuth DatasetsCommit' where
-        _AuthKey = dcKey . _Just
-        _AuthToken = dcOAuthToken . _Just
-
 instance GoogleRequest DatasetsCommit' where
         type Rs DatasetsCommit' = CommitResponse
-        request = requestWith datastoreRequest
-        requestWith rq DatasetsCommit'{..}
-          = go _dcDatasetId _dcQuotaUser (Just _dcPrettyPrint)
-              _dcUserIP
-              _dcFields
-              _dcKey
-              _dcOAuthToken
-              (Just AltJSON)
-              _dcPayload
+        requestClient DatasetsCommit'{..}
+          = go _dcDatasetId (Just AltJSON) _dcPayload
+              datastoreService
           where go
-                  = clientBuild (Proxy :: Proxy DatasetsCommitResource)
-                      rq
+                  = buildClient (Proxy :: Proxy DatasetsCommitResource)
+                      mempty

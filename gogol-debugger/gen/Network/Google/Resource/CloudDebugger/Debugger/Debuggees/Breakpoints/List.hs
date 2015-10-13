@@ -34,8 +34,6 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List
 
     -- * Request Lenses
     , ddblXgafv
-    , ddblQuotaUser
-    , ddblPrettyPrint
     , ddblIncludeInactive
     , ddblUploadProtocol
     , ddblPp
@@ -44,12 +42,9 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List
     , ddblUploadType
     , ddblStripResults
     , ddblBearerToken
-    , ddblKey
     , ddblIncludeAllUsers
     , ddblWaitToken
     , ddblDebuggeeId
-    , ddblOAuthToken
-    , ddblFields
     , ddblCallback
     ) where
 
@@ -76,23 +71,14 @@ type DebuggerDebuggeesBreakpointsListResource =
                                  QueryParam "includeAllUsers" Bool :>
                                    QueryParam "waitToken" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "quotaUser" Text :>
-                                         QueryParam "prettyPrint" Bool :>
-                                           QueryParam "fields" Text :>
-                                             QueryParam "key" AuthKey :>
-                                               Header "Authorization" OAuthToken
-                                                 :>
-                                                 QueryParam "alt" AltJSON :>
-                                                   Get '[JSON]
-                                                     ListBreakpointsResponse
+                                       QueryParam "alt" AltJSON :>
+                                         Get '[JSON] ListBreakpointsResponse
 
 -- | Lists all breakpoints of the debuggee that the user has access to.
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsList'' smart constructor.
 data DebuggerDebuggeesBreakpointsList' = DebuggerDebuggeesBreakpointsList'
     { _ddblXgafv           :: !(Maybe Text)
-    , _ddblQuotaUser       :: !(Maybe Text)
-    , _ddblPrettyPrint     :: !Bool
     , _ddblIncludeInactive :: !(Maybe Bool)
     , _ddblUploadProtocol  :: !(Maybe Text)
     , _ddblPp              :: !Bool
@@ -101,12 +87,9 @@ data DebuggerDebuggeesBreakpointsList' = DebuggerDebuggeesBreakpointsList'
     , _ddblUploadType      :: !(Maybe Text)
     , _ddblStripResults    :: !(Maybe Bool)
     , _ddblBearerToken     :: !(Maybe Text)
-    , _ddblKey             :: !(Maybe AuthKey)
     , _ddblIncludeAllUsers :: !(Maybe Bool)
     , _ddblWaitToken       :: !(Maybe Text)
     , _ddblDebuggeeId      :: !Text
-    , _ddblOAuthToken      :: !(Maybe OAuthToken)
-    , _ddblFields          :: !(Maybe Text)
     , _ddblCallback        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -115,10 +98,6 @@ data DebuggerDebuggeesBreakpointsList' = DebuggerDebuggeesBreakpointsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ddblXgafv'
---
--- * 'ddblQuotaUser'
---
--- * 'ddblPrettyPrint'
 --
 -- * 'ddblIncludeInactive'
 --
@@ -136,17 +115,11 @@ data DebuggerDebuggeesBreakpointsList' = DebuggerDebuggeesBreakpointsList'
 --
 -- * 'ddblBearerToken'
 --
--- * 'ddblKey'
---
 -- * 'ddblIncludeAllUsers'
 --
 -- * 'ddblWaitToken'
 --
 -- * 'ddblDebuggeeId'
---
--- * 'ddblOAuthToken'
---
--- * 'ddblFields'
 --
 -- * 'ddblCallback'
 debuggerDebuggeesBreakpointsList'
@@ -155,8 +128,6 @@ debuggerDebuggeesBreakpointsList'
 debuggerDebuggeesBreakpointsList' pDdblDebuggeeId_ =
     DebuggerDebuggeesBreakpointsList'
     { _ddblXgafv = Nothing
-    , _ddblQuotaUser = Nothing
-    , _ddblPrettyPrint = True
     , _ddblIncludeInactive = Nothing
     , _ddblUploadProtocol = Nothing
     , _ddblPp = True
@@ -165,12 +136,9 @@ debuggerDebuggeesBreakpointsList' pDdblDebuggeeId_ =
     , _ddblUploadType = Nothing
     , _ddblStripResults = Nothing
     , _ddblBearerToken = Nothing
-    , _ddblKey = Nothing
     , _ddblIncludeAllUsers = Nothing
     , _ddblWaitToken = Nothing
     , _ddblDebuggeeId = pDdblDebuggeeId_
-    , _ddblOAuthToken = Nothing
-    , _ddblFields = Nothing
     , _ddblCallback = Nothing
     }
 
@@ -178,20 +146,6 @@ debuggerDebuggeesBreakpointsList' pDdblDebuggeeId_ =
 ddblXgafv :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Text)
 ddblXgafv
   = lens _ddblXgafv (\ s a -> s{_ddblXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ddblQuotaUser :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Text)
-ddblQuotaUser
-  = lens _ddblQuotaUser
-      (\ s a -> s{_ddblQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ddblPrettyPrint :: Lens' DebuggerDebuggeesBreakpointsList' Bool
-ddblPrettyPrint
-  = lens _ddblPrettyPrint
-      (\ s a -> s{_ddblPrettyPrint = a})
 
 -- | When set to true the response includes active and inactive breakpoints,
 -- otherwise only active breakpoints are returned.
@@ -241,12 +195,6 @@ ddblBearerToken
   = lens _ddblBearerToken
       (\ s a -> s{_ddblBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ddblKey :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe AuthKey)
-ddblKey = lens _ddblKey (\ s a -> s{_ddblKey = a})
-
 -- | When set to true the response includes the list of breakpoints set by
 -- any user, otherwise only breakpoints set by the caller.
 ddblIncludeAllUsers :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Bool)
@@ -270,33 +218,16 @@ ddblDebuggeeId
   = lens _ddblDebuggeeId
       (\ s a -> s{_ddblDebuggeeId = a})
 
--- | OAuth 2.0 token for the current user.
-ddblOAuthToken :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe OAuthToken)
-ddblOAuthToken
-  = lens _ddblOAuthToken
-      (\ s a -> s{_ddblOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ddblFields :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Text)
-ddblFields
-  = lens _ddblFields (\ s a -> s{_ddblFields = a})
-
 -- | JSONP
 ddblCallback :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Text)
 ddblCallback
   = lens _ddblCallback (\ s a -> s{_ddblCallback = a})
 
-instance GoogleAuth DebuggerDebuggeesBreakpointsList'
-         where
-        _AuthKey = ddblKey . _Just
-        _AuthToken = ddblOAuthToken . _Just
-
 instance GoogleRequest
          DebuggerDebuggeesBreakpointsList' where
         type Rs DebuggerDebuggeesBreakpointsList' =
              ListBreakpointsResponse
-        request = requestWith debuggerRequest
-        requestWith rq DebuggerDebuggeesBreakpointsList'{..}
+        requestClient DebuggerDebuggeesBreakpointsList'{..}
           = go _ddblDebuggeeId _ddblXgafv _ddblIncludeInactive
               _ddblUploadProtocol
               (Just _ddblPp)
@@ -308,14 +239,10 @@ instance GoogleRequest
               _ddblIncludeAllUsers
               _ddblWaitToken
               _ddblCallback
-              _ddblQuotaUser
-              (Just _ddblPrettyPrint)
-              _ddblFields
-              _ddblKey
-              _ddblOAuthToken
               (Just AltJSON)
+              debuggerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy DebuggerDebuggeesBreakpointsListResource)
-                      rq
+                      mempty

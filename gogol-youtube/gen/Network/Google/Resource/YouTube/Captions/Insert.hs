@@ -34,17 +34,11 @@ module Network.Google.Resource.YouTube.Captions.Insert
 
     -- * Request Lenses
     , ciOnBehalfOf
-    , ciQuotaUser
     , ciPart
-    , ciPrettyPrint
-    , ciUserIP
     , ciPayload
     , ciMedia
     , ciOnBehalfOfContentOwner
-    , ciKey
     , ciSync
-    , ciOAuthToken
-    , ciFields
     ) where
 
 import           Network.Google.Prelude
@@ -58,32 +52,20 @@ type CaptionsInsertResource =
          QueryParam "onBehalfOf" Text :>
            QueryParam "onBehalfOfContentOwner" Text :>
              QueryParam "sync" Bool :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             MultipartRelated '[JSON] Caption Stream :>
-                               Post '[JSON] Caption
+               QueryParam "alt" AltJSON :>
+                 MultipartRelated '[JSON] Caption Stream :>
+                   Post '[JSON] Caption
 
 -- | Uploads a caption track.
 --
 -- /See:/ 'captionsInsert'' smart constructor.
 data CaptionsInsert' = CaptionsInsert'
     { _ciOnBehalfOf             :: !(Maybe Text)
-    , _ciQuotaUser              :: !(Maybe Text)
     , _ciPart                   :: !Text
-    , _ciPrettyPrint            :: !Bool
-    , _ciUserIP                 :: !(Maybe Text)
     , _ciPayload                :: !Caption
     , _ciMedia                  :: !Stream
     , _ciOnBehalfOfContentOwner :: !(Maybe Text)
-    , _ciKey                    :: !(Maybe AuthKey)
     , _ciSync                   :: !(Maybe Bool)
-    , _ciOAuthToken             :: !(Maybe OAuthToken)
-    , _ciFields                 :: !(Maybe Text)
     }
 
 -- | Creates a value of 'CaptionsInsert'' with the minimum fields required to make a request.
@@ -92,13 +74,7 @@ data CaptionsInsert' = CaptionsInsert'
 --
 -- * 'ciOnBehalfOf'
 --
--- * 'ciQuotaUser'
---
 -- * 'ciPart'
---
--- * 'ciPrettyPrint'
---
--- * 'ciUserIP'
 --
 -- * 'ciPayload'
 --
@@ -106,13 +82,7 @@ data CaptionsInsert' = CaptionsInsert'
 --
 -- * 'ciOnBehalfOfContentOwner'
 --
--- * 'ciKey'
---
 -- * 'ciSync'
---
--- * 'ciOAuthToken'
---
--- * 'ciFields'
 captionsInsert'
     :: Text -- ^ 'part'
     -> Caption -- ^ 'payload'
@@ -121,17 +91,11 @@ captionsInsert'
 captionsInsert' pCiPart_ pCiPayload_ pCiMedia_ =
     CaptionsInsert'
     { _ciOnBehalfOf = Nothing
-    , _ciQuotaUser = Nothing
     , _ciPart = pCiPart_
-    , _ciPrettyPrint = True
-    , _ciUserIP = Nothing
     , _ciPayload = pCiPayload_
     , _ciMedia = pCiMedia_
     , _ciOnBehalfOfContentOwner = Nothing
-    , _ciKey = Nothing
     , _ciSync = Nothing
-    , _ciOAuthToken = Nothing
-    , _ciFields = Nothing
     }
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
@@ -140,28 +104,10 @@ ciOnBehalfOf :: Lens' CaptionsInsert' (Maybe Text)
 ciOnBehalfOf
   = lens _ciOnBehalfOf (\ s a -> s{_ciOnBehalfOf = a})
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ciQuotaUser :: Lens' CaptionsInsert' (Maybe Text)
-ciQuotaUser
-  = lens _ciQuotaUser (\ s a -> s{_ciQuotaUser = a})
-
 -- | The part parameter specifies the caption resource parts that the API
 -- response will include. Set the parameter value to snippet.
 ciPart :: Lens' CaptionsInsert' Text
 ciPart = lens _ciPart (\ s a -> s{_ciPart = a})
-
--- | Returns response with indentations and line breaks.
-ciPrettyPrint :: Lens' CaptionsInsert' Bool
-ciPrettyPrint
-  = lens _ciPrettyPrint
-      (\ s a -> s{_ciPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ciUserIP :: Lens' CaptionsInsert' (Maybe Text)
-ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
 
 -- | Multipart request metadata.
 ciPayload :: Lens' CaptionsInsert' Caption
@@ -186,12 +132,6 @@ ciOnBehalfOfContentOwner
   = lens _ciOnBehalfOfContentOwner
       (\ s a -> s{_ciOnBehalfOfContentOwner = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ciKey :: Lens' CaptionsInsert' (Maybe AuthKey)
-ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
-
 -- | The sync parameter indicates whether YouTube should automatically
 -- synchronize the caption file with the audio track of the video. If you
 -- set the value to true, YouTube will disregard any time codes that are in
@@ -202,35 +142,16 @@ ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
 ciSync :: Lens' CaptionsInsert' (Maybe Bool)
 ciSync = lens _ciSync (\ s a -> s{_ciSync = a})
 
--- | OAuth 2.0 token for the current user.
-ciOAuthToken :: Lens' CaptionsInsert' (Maybe OAuthToken)
-ciOAuthToken
-  = lens _ciOAuthToken (\ s a -> s{_ciOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ciFields :: Lens' CaptionsInsert' (Maybe Text)
-ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
-
-instance GoogleAuth CaptionsInsert' where
-        _AuthKey = ciKey . _Just
-        _AuthToken = ciOAuthToken . _Just
-
 instance GoogleRequest CaptionsInsert' where
         type Rs CaptionsInsert' = Caption
-        request = requestWith youTubeRequest
-        requestWith rq CaptionsInsert'{..}
+        requestClient CaptionsInsert'{..}
           = go (Just _ciPart) _ciOnBehalfOf
               _ciOnBehalfOfContentOwner
               _ciSync
-              _ciQuotaUser
-              (Just _ciPrettyPrint)
-              _ciUserIP
-              _ciFields
-              _ciKey
-              _ciOAuthToken
               (Just AltJSON)
               _ciPayload
               _ciMedia
+              youTubeService
           where go
-                  = clientBuild (Proxy :: Proxy CaptionsInsertResource)
-                      rq
+                  = buildClient (Proxy :: Proxy CaptionsInsertResource)
+                      mempty

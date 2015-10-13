@@ -33,14 +33,8 @@ module Network.Google.Method.OAuth2.TokenInfo
     , TokenInfo'
 
     -- * Request Lenses
-    , tQuotaUser
-    , tPrettyPrint
-    , tUserIP
     , tAccessToken
-    , tKey
-    , tOAuthToken
     , tTokenHandle
-    , tFields
     , tIdToken
     ) where
 
@@ -56,25 +50,13 @@ type TokenInfoMethod =
            QueryParam "access_token" Text :>
              QueryParam "token_handle" Text :>
                QueryParam "id_token" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :> Post '[JSON] TokenInfo
+                 QueryParam "alt" AltJSON :> Post '[JSON] TokenInfo
 
 --
 -- /See:/ 'tokenInfo'' smart constructor.
 data TokenInfo' = TokenInfo'
-    { _tQuotaUser   :: !(Maybe Text)
-    , _tPrettyPrint :: !Bool
-    , _tUserIP      :: !(Maybe Text)
-    , _tAccessToken :: !(Maybe Text)
-    , _tKey         :: !(Maybe AuthKey)
-    , _tOAuthToken  :: !(Maybe OAuthToken)
+    { _tAccessToken :: !(Maybe Text)
     , _tTokenHandle :: !(Maybe Text)
-    , _tFields      :: !(Maybe Text)
     , _tIdToken     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -82,96 +64,36 @@ data TokenInfo' = TokenInfo'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tQuotaUser'
---
--- * 'tPrettyPrint'
---
--- * 'tUserIP'
---
 -- * 'tAccessToken'
 --
--- * 'tKey'
---
--- * 'tOAuthToken'
---
 -- * 'tTokenHandle'
---
--- * 'tFields'
 --
 -- * 'tIdToken'
 tokenInfo'
     :: TokenInfo'
 tokenInfo' =
     TokenInfo'
-    { _tQuotaUser = Nothing
-    , _tPrettyPrint = True
-    , _tUserIP = Nothing
-    , _tAccessToken = Nothing
-    , _tKey = Nothing
-    , _tOAuthToken = Nothing
+    { _tAccessToken = Nothing
     , _tTokenHandle = Nothing
-    , _tFields = Nothing
     , _tIdToken = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tQuotaUser :: Lens' TokenInfo' (Maybe Text)
-tQuotaUser
-  = lens _tQuotaUser (\ s a -> s{_tQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tPrettyPrint :: Lens' TokenInfo' Bool
-tPrettyPrint
-  = lens _tPrettyPrint (\ s a -> s{_tPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tUserIP :: Lens' TokenInfo' (Maybe Text)
-tUserIP = lens _tUserIP (\ s a -> s{_tUserIP = a})
 
 tAccessToken :: Lens' TokenInfo' (Maybe Text)
 tAccessToken
   = lens _tAccessToken (\ s a -> s{_tAccessToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tKey :: Lens' TokenInfo' (Maybe AuthKey)
-tKey = lens _tKey (\ s a -> s{_tKey = a})
-
--- | OAuth 2.0 token for the current user.
-tOAuthToken :: Lens' TokenInfo' (Maybe OAuthToken)
-tOAuthToken
-  = lens _tOAuthToken (\ s a -> s{_tOAuthToken = a})
-
 tTokenHandle :: Lens' TokenInfo' (Maybe Text)
 tTokenHandle
   = lens _tTokenHandle (\ s a -> s{_tTokenHandle = a})
 
--- | Selector specifying which fields to include in a partial response.
-tFields :: Lens' TokenInfo' (Maybe Text)
-tFields = lens _tFields (\ s a -> s{_tFields = a})
-
 tIdToken :: Lens' TokenInfo' (Maybe Text)
 tIdToken = lens _tIdToken (\ s a -> s{_tIdToken = a})
 
-instance GoogleAuth TokenInfo' where
-        _AuthKey = tKey . _Just
-        _AuthToken = tOAuthToken . _Just
-
 instance GoogleRequest TokenInfo' where
         type Rs TokenInfo' = TokenInfo
-        request = requestWith oAuth2Request
-        requestWith rq TokenInfo'{..}
+        requestClient TokenInfo'{..}
           = go _tAccessToken _tTokenHandle _tIdToken
-              _tQuotaUser
-              (Just _tPrettyPrint)
-              _tUserIP
-              _tFields
-              _tKey
-              _tOAuthToken
               (Just AltJSON)
+              oAuth2Service
           where go
-                  = clientBuild (Proxy :: Proxy TokenInfoMethod) rq
+                  = buildClient (Proxy :: Proxy TokenInfoMethod) mempty

@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference>
 module Network.Google.WebmasterTools
     (
+    -- * Service Configuration
+      webmasterToolsService
+
     -- * API Declaration
-      WebmasterToolsAPI
+    , WebmasterToolsAPI
 
     -- * Resources
 

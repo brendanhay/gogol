@@ -33,16 +33,10 @@ module Network.Google.Resource.Compute.InstanceGroups.RemoveInstances
     , InstanceGroupsRemoveInstances'
 
     -- * Request Lenses
-    , igriQuotaUser
-    , igriPrettyPrint
     , igriProject
-    , igriUserIP
     , igriZone
     , igriPayload
-    , igriKey
-    , igriOAuthToken
     , igriInstanceGroup
-    , igriFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -57,56 +51,31 @@ type InstanceGroupsRemoveInstancesResource =
            "instanceGroups" :>
              Capture "instanceGroup" Text :>
                "removeInstances" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON]
-                                 InstanceGroupsRemoveInstancesRequest
-                                 :> Post '[JSON] Operation
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] InstanceGroupsRemoveInstancesRequest
+                     :> Post '[JSON] Operation
 
 -- | Removes a list of instances from an instance group.
 --
 -- /See:/ 'instanceGroupsRemoveInstances'' smart constructor.
 data InstanceGroupsRemoveInstances' = InstanceGroupsRemoveInstances'
-    { _igriQuotaUser     :: !(Maybe Text)
-    , _igriPrettyPrint   :: !Bool
-    , _igriProject       :: !Text
-    , _igriUserIP        :: !(Maybe Text)
+    { _igriProject       :: !Text
     , _igriZone          :: !Text
     , _igriPayload       :: !InstanceGroupsRemoveInstancesRequest
-    , _igriKey           :: !(Maybe AuthKey)
-    , _igriOAuthToken    :: !(Maybe OAuthToken)
     , _igriInstanceGroup :: !Text
-    , _igriFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsRemoveInstances'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'igriQuotaUser'
---
--- * 'igriPrettyPrint'
---
 -- * 'igriProject'
---
--- * 'igriUserIP'
 --
 -- * 'igriZone'
 --
 -- * 'igriPayload'
 --
--- * 'igriKey'
---
--- * 'igriOAuthToken'
---
 -- * 'igriInstanceGroup'
---
--- * 'igriFields'
 instanceGroupsRemoveInstances'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
@@ -115,42 +84,16 @@ instanceGroupsRemoveInstances'
     -> InstanceGroupsRemoveInstances'
 instanceGroupsRemoveInstances' pIgriProject_ pIgriZone_ pIgriPayload_ pIgriInstanceGroup_ =
     InstanceGroupsRemoveInstances'
-    { _igriQuotaUser = Nothing
-    , _igriPrettyPrint = True
-    , _igriProject = pIgriProject_
-    , _igriUserIP = Nothing
+    { _igriProject = pIgriProject_
     , _igriZone = pIgriZone_
     , _igriPayload = pIgriPayload_
-    , _igriKey = Nothing
-    , _igriOAuthToken = Nothing
     , _igriInstanceGroup = pIgriInstanceGroup_
-    , _igriFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-igriQuotaUser :: Lens' InstanceGroupsRemoveInstances' (Maybe Text)
-igriQuotaUser
-  = lens _igriQuotaUser
-      (\ s a -> s{_igriQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-igriPrettyPrint :: Lens' InstanceGroupsRemoveInstances' Bool
-igriPrettyPrint
-  = lens _igriPrettyPrint
-      (\ s a -> s{_igriPrettyPrint = a})
 
 -- | The project ID for this request.
 igriProject :: Lens' InstanceGroupsRemoveInstances' Text
 igriProject
   = lens _igriProject (\ s a -> s{_igriProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-igriUserIP :: Lens' InstanceGroupsRemoveInstances' (Maybe Text)
-igriUserIP
-  = lens _igriUserIP (\ s a -> s{_igriUserIP = a})
 
 -- | The URL of the zone where the instance group is located.
 igriZone :: Lens' InstanceGroupsRemoveInstances' Text
@@ -161,18 +104,6 @@ igriPayload :: Lens' InstanceGroupsRemoveInstances' InstanceGroupsRemoveInstance
 igriPayload
   = lens _igriPayload (\ s a -> s{_igriPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-igriKey :: Lens' InstanceGroupsRemoveInstances' (Maybe AuthKey)
-igriKey = lens _igriKey (\ s a -> s{_igriKey = a})
-
--- | OAuth 2.0 token for the current user.
-igriOAuthToken :: Lens' InstanceGroupsRemoveInstances' (Maybe OAuthToken)
-igriOAuthToken
-  = lens _igriOAuthToken
-      (\ s a -> s{_igriOAuthToken = a})
-
 -- | The name of the instance group where the specified instances will be
 -- removed.
 igriInstanceGroup :: Lens' InstanceGroupsRemoveInstances' Text
@@ -180,32 +111,16 @@ igriInstanceGroup
   = lens _igriInstanceGroup
       (\ s a -> s{_igriInstanceGroup = a})
 
--- | Selector specifying which fields to include in a partial response.
-igriFields :: Lens' InstanceGroupsRemoveInstances' (Maybe Text)
-igriFields
-  = lens _igriFields (\ s a -> s{_igriFields = a})
-
-instance GoogleAuth InstanceGroupsRemoveInstances'
-         where
-        _AuthKey = igriKey . _Just
-        _AuthToken = igriOAuthToken . _Just
-
 instance GoogleRequest InstanceGroupsRemoveInstances'
          where
         type Rs InstanceGroupsRemoveInstances' = Operation
-        request = requestWith computeRequest
-        requestWith rq InstanceGroupsRemoveInstances'{..}
+        requestClient InstanceGroupsRemoveInstances'{..}
           = go _igriProject _igriZone _igriInstanceGroup
-              _igriQuotaUser
-              (Just _igriPrettyPrint)
-              _igriUserIP
-              _igriFields
-              _igriKey
-              _igriOAuthToken
               (Just AltJSON)
               _igriPayload
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy InstanceGroupsRemoveInstancesResource)
-                      rq
+                      mempty

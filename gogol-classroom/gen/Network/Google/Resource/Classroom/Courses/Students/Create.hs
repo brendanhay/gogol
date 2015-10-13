@@ -40,8 +40,6 @@ module Network.Google.Resource.Classroom.Courses.Students.Create
 
     -- * Request Lenses
     , cscXgafv
-    , cscQuotaUser
-    , cscPrettyPrint
     , cscUploadProtocol
     , cscPp
     , cscCourseId
@@ -50,9 +48,6 @@ module Network.Google.Resource.Classroom.Courses.Students.Create
     , cscPayload
     , cscEnrollmentCode
     , cscBearerToken
-    , cscKey
-    , cscOAuthToken
-    , cscFields
     , cscCallback
     ) where
 
@@ -74,14 +69,8 @@ type CoursesStudentsCreateResource =
                        QueryParam "enrollmentCode" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         ReqBody '[JSON] Student :>
-                                           Post '[JSON] Student
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Student :> Post '[JSON] Student
 
 -- | Adds a user as a student of a course. This method returns the following
 -- error codes: * \`PERMISSION_DENIED\` if the requesting user is not
@@ -94,8 +83,6 @@ type CoursesStudentsCreateResource =
 -- /See:/ 'coursesStudentsCreate'' smart constructor.
 data CoursesStudentsCreate' = CoursesStudentsCreate'
     { _cscXgafv          :: !(Maybe Text)
-    , _cscQuotaUser      :: !(Maybe Text)
-    , _cscPrettyPrint    :: !Bool
     , _cscUploadProtocol :: !(Maybe Text)
     , _cscPp             :: !Bool
     , _cscCourseId       :: !Text
@@ -104,9 +91,6 @@ data CoursesStudentsCreate' = CoursesStudentsCreate'
     , _cscPayload        :: !Student
     , _cscEnrollmentCode :: !(Maybe Text)
     , _cscBearerToken    :: !(Maybe Text)
-    , _cscKey            :: !(Maybe AuthKey)
-    , _cscOAuthToken     :: !(Maybe OAuthToken)
-    , _cscFields         :: !(Maybe Text)
     , _cscCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -115,10 +99,6 @@ data CoursesStudentsCreate' = CoursesStudentsCreate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cscXgafv'
---
--- * 'cscQuotaUser'
---
--- * 'cscPrettyPrint'
 --
 -- * 'cscUploadProtocol'
 --
@@ -136,12 +116,6 @@ data CoursesStudentsCreate' = CoursesStudentsCreate'
 --
 -- * 'cscBearerToken'
 --
--- * 'cscKey'
---
--- * 'cscOAuthToken'
---
--- * 'cscFields'
---
 -- * 'cscCallback'
 coursesStudentsCreate'
     :: Text -- ^ 'courseId'
@@ -150,8 +124,6 @@ coursesStudentsCreate'
 coursesStudentsCreate' pCscCourseId_ pCscPayload_ =
     CoursesStudentsCreate'
     { _cscXgafv = Nothing
-    , _cscQuotaUser = Nothing
-    , _cscPrettyPrint = True
     , _cscUploadProtocol = Nothing
     , _cscPp = True
     , _cscCourseId = pCscCourseId_
@@ -160,28 +132,12 @@ coursesStudentsCreate' pCscCourseId_ pCscPayload_ =
     , _cscPayload = pCscPayload_
     , _cscEnrollmentCode = Nothing
     , _cscBearerToken = Nothing
-    , _cscKey = Nothing
-    , _cscOAuthToken = Nothing
-    , _cscFields = Nothing
     , _cscCallback = Nothing
     }
 
 -- | V1 error format.
 cscXgafv :: Lens' CoursesStudentsCreate' (Maybe Text)
 cscXgafv = lens _cscXgafv (\ s a -> s{_cscXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-cscQuotaUser :: Lens' CoursesStudentsCreate' (Maybe Text)
-cscQuotaUser
-  = lens _cscQuotaUser (\ s a -> s{_cscQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cscPrettyPrint :: Lens' CoursesStudentsCreate' Bool
-cscPrettyPrint
-  = lens _cscPrettyPrint
-      (\ s a -> s{_cscPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 cscUploadProtocol :: Lens' CoursesStudentsCreate' (Maybe Text)
@@ -232,36 +188,14 @@ cscBearerToken
   = lens _cscBearerToken
       (\ s a -> s{_cscBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cscKey :: Lens' CoursesStudentsCreate' (Maybe AuthKey)
-cscKey = lens _cscKey (\ s a -> s{_cscKey = a})
-
--- | OAuth 2.0 token for the current user.
-cscOAuthToken :: Lens' CoursesStudentsCreate' (Maybe OAuthToken)
-cscOAuthToken
-  = lens _cscOAuthToken
-      (\ s a -> s{_cscOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cscFields :: Lens' CoursesStudentsCreate' (Maybe Text)
-cscFields
-  = lens _cscFields (\ s a -> s{_cscFields = a})
-
 -- | JSONP
 cscCallback :: Lens' CoursesStudentsCreate' (Maybe Text)
 cscCallback
   = lens _cscCallback (\ s a -> s{_cscCallback = a})
 
-instance GoogleAuth CoursesStudentsCreate' where
-        _AuthKey = cscKey . _Just
-        _AuthToken = cscOAuthToken . _Just
-
 instance GoogleRequest CoursesStudentsCreate' where
         type Rs CoursesStudentsCreate' = Student
-        request = requestWith classroomRequest
-        requestWith rq CoursesStudentsCreate'{..}
+        requestClient CoursesStudentsCreate'{..}
           = go _cscCourseId _cscXgafv _cscUploadProtocol
               (Just _cscPp)
               _cscAccessToken
@@ -269,14 +203,10 @@ instance GoogleRequest CoursesStudentsCreate' where
               _cscEnrollmentCode
               _cscBearerToken
               _cscCallback
-              _cscQuotaUser
-              (Just _cscPrettyPrint)
-              _cscFields
-              _cscKey
-              _cscOAuthToken
               (Just AltJSON)
               _cscPayload
+              classroomService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CoursesStudentsCreateResource)
-                      rq
+                      mempty

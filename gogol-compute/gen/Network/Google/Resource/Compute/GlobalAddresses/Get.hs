@@ -33,14 +33,8 @@ module Network.Google.Resource.Compute.GlobalAddresses.Get
     , GlobalAddressesGet'
 
     -- * Request Lenses
-    , gagQuotaUser
-    , gagPrettyPrint
     , gagProject
-    , gagUserIP
     , gagAddress
-    , gagKey
-    , gagOAuthToken
-    , gagFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -53,125 +47,49 @@ type GlobalAddressesGetResource =
        "global" :>
          "addresses" :>
            Capture "address" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Address
+             QueryParam "alt" AltJSON :> Get '[JSON] Address
 
 -- | Returns the specified address resource.
 --
 -- /See:/ 'globalAddressesGet'' smart constructor.
 data GlobalAddressesGet' = GlobalAddressesGet'
-    { _gagQuotaUser   :: !(Maybe Text)
-    , _gagPrettyPrint :: !Bool
-    , _gagProject     :: !Text
-    , _gagUserIP      :: !(Maybe Text)
-    , _gagAddress     :: !Text
-    , _gagKey         :: !(Maybe AuthKey)
-    , _gagOAuthToken  :: !(Maybe OAuthToken)
-    , _gagFields      :: !(Maybe Text)
+    { _gagProject :: !Text
+    , _gagAddress :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalAddressesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gagQuotaUser'
---
--- * 'gagPrettyPrint'
---
 -- * 'gagProject'
 --
--- * 'gagUserIP'
---
 -- * 'gagAddress'
---
--- * 'gagKey'
---
--- * 'gagOAuthToken'
---
--- * 'gagFields'
 globalAddressesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'address'
     -> GlobalAddressesGet'
 globalAddressesGet' pGagProject_ pGagAddress_ =
     GlobalAddressesGet'
-    { _gagQuotaUser = Nothing
-    , _gagPrettyPrint = True
-    , _gagProject = pGagProject_
-    , _gagUserIP = Nothing
+    { _gagProject = pGagProject_
     , _gagAddress = pGagAddress_
-    , _gagKey = Nothing
-    , _gagOAuthToken = Nothing
-    , _gagFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-gagQuotaUser :: Lens' GlobalAddressesGet' (Maybe Text)
-gagQuotaUser
-  = lens _gagQuotaUser (\ s a -> s{_gagQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-gagPrettyPrint :: Lens' GlobalAddressesGet' Bool
-gagPrettyPrint
-  = lens _gagPrettyPrint
-      (\ s a -> s{_gagPrettyPrint = a})
 
 -- | Project ID for this request.
 gagProject :: Lens' GlobalAddressesGet' Text
 gagProject
   = lens _gagProject (\ s a -> s{_gagProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-gagUserIP :: Lens' GlobalAddressesGet' (Maybe Text)
-gagUserIP
-  = lens _gagUserIP (\ s a -> s{_gagUserIP = a})
-
 -- | Name of the address resource to return.
 gagAddress :: Lens' GlobalAddressesGet' Text
 gagAddress
   = lens _gagAddress (\ s a -> s{_gagAddress = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-gagKey :: Lens' GlobalAddressesGet' (Maybe AuthKey)
-gagKey = lens _gagKey (\ s a -> s{_gagKey = a})
-
--- | OAuth 2.0 token for the current user.
-gagOAuthToken :: Lens' GlobalAddressesGet' (Maybe OAuthToken)
-gagOAuthToken
-  = lens _gagOAuthToken
-      (\ s a -> s{_gagOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-gagFields :: Lens' GlobalAddressesGet' (Maybe Text)
-gagFields
-  = lens _gagFields (\ s a -> s{_gagFields = a})
-
-instance GoogleAuth GlobalAddressesGet' where
-        _AuthKey = gagKey . _Just
-        _AuthToken = gagOAuthToken . _Just
-
 instance GoogleRequest GlobalAddressesGet' where
         type Rs GlobalAddressesGet' = Address
-        request = requestWith computeRequest
-        requestWith rq GlobalAddressesGet'{..}
-          = go _gagProject _gagAddress _gagQuotaUser
-              (Just _gagPrettyPrint)
-              _gagUserIP
-              _gagFields
-              _gagKey
-              _gagOAuthToken
-              (Just AltJSON)
+        requestClient GlobalAddressesGet'{..}
+          = go _gagProject _gagAddress (Just AltJSON)
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy GlobalAddressesGetResource)
-                      rq
+                      mempty

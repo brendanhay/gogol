@@ -41,17 +41,12 @@ module Network.Google.Resource.Classroom.Courses.Create
 
     -- * Request Lenses
     , ccXgafv
-    , ccQuotaUser
-    , ccPrettyPrint
     , ccUploadProtocol
     , ccPp
     , ccAccessToken
     , ccUploadType
     , ccPayload
     , ccBearerToken
-    , ccKey
-    , ccOAuthToken
-    , ccFields
     , ccCallback
     ) where
 
@@ -70,13 +65,8 @@ type CoursesCreateResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Course :> Post '[JSON] Course
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Course :> Post '[JSON] Course
 
 -- | Creates a course. The user specified in \`ownerId\` is the owner of the
 -- created course and added as a teacher. This method returns the following
@@ -90,17 +80,12 @@ type CoursesCreateResource =
 -- /See:/ 'coursesCreate'' smart constructor.
 data CoursesCreate' = CoursesCreate'
     { _ccXgafv          :: !(Maybe Text)
-    , _ccQuotaUser      :: !(Maybe Text)
-    , _ccPrettyPrint    :: !Bool
     , _ccUploadProtocol :: !(Maybe Text)
     , _ccPp             :: !Bool
     , _ccAccessToken    :: !(Maybe Text)
     , _ccUploadType     :: !(Maybe Text)
     , _ccPayload        :: !Course
     , _ccBearerToken    :: !(Maybe Text)
-    , _ccKey            :: !(Maybe AuthKey)
-    , _ccOAuthToken     :: !(Maybe OAuthToken)
-    , _ccFields         :: !(Maybe Text)
     , _ccCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -109,10 +94,6 @@ data CoursesCreate' = CoursesCreate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ccXgafv'
---
--- * 'ccQuotaUser'
---
--- * 'ccPrettyPrint'
 --
 -- * 'ccUploadProtocol'
 --
@@ -126,12 +107,6 @@ data CoursesCreate' = CoursesCreate'
 --
 -- * 'ccBearerToken'
 --
--- * 'ccKey'
---
--- * 'ccOAuthToken'
---
--- * 'ccFields'
---
 -- * 'ccCallback'
 coursesCreate'
     :: Course -- ^ 'payload'
@@ -139,36 +114,18 @@ coursesCreate'
 coursesCreate' pCcPayload_ =
     CoursesCreate'
     { _ccXgafv = Nothing
-    , _ccQuotaUser = Nothing
-    , _ccPrettyPrint = True
     , _ccUploadProtocol = Nothing
     , _ccPp = True
     , _ccAccessToken = Nothing
     , _ccUploadType = Nothing
     , _ccPayload = pCcPayload_
     , _ccBearerToken = Nothing
-    , _ccKey = Nothing
-    , _ccOAuthToken = Nothing
-    , _ccFields = Nothing
     , _ccCallback = Nothing
     }
 
 -- | V1 error format.
 ccXgafv :: Lens' CoursesCreate' (Maybe Text)
 ccXgafv = lens _ccXgafv (\ s a -> s{_ccXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ccQuotaUser :: Lens' CoursesCreate' (Maybe Text)
-ccQuotaUser
-  = lens _ccQuotaUser (\ s a -> s{_ccQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ccPrettyPrint :: Lens' CoursesCreate' Bool
-ccPrettyPrint
-  = lens _ccPrettyPrint
-      (\ s a -> s{_ccPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 ccUploadProtocol :: Lens' CoursesCreate' (Maybe Text)
@@ -202,46 +159,22 @@ ccBearerToken
   = lens _ccBearerToken
       (\ s a -> s{_ccBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ccKey :: Lens' CoursesCreate' (Maybe AuthKey)
-ccKey = lens _ccKey (\ s a -> s{_ccKey = a})
-
--- | OAuth 2.0 token for the current user.
-ccOAuthToken :: Lens' CoursesCreate' (Maybe OAuthToken)
-ccOAuthToken
-  = lens _ccOAuthToken (\ s a -> s{_ccOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ccFields :: Lens' CoursesCreate' (Maybe Text)
-ccFields = lens _ccFields (\ s a -> s{_ccFields = a})
-
 -- | JSONP
 ccCallback :: Lens' CoursesCreate' (Maybe Text)
 ccCallback
   = lens _ccCallback (\ s a -> s{_ccCallback = a})
 
-instance GoogleAuth CoursesCreate' where
-        _AuthKey = ccKey . _Just
-        _AuthToken = ccOAuthToken . _Just
-
 instance GoogleRequest CoursesCreate' where
         type Rs CoursesCreate' = Course
-        request = requestWith classroomRequest
-        requestWith rq CoursesCreate'{..}
+        requestClient CoursesCreate'{..}
           = go _ccXgafv _ccUploadProtocol (Just _ccPp)
               _ccAccessToken
               _ccUploadType
               _ccBearerToken
               _ccCallback
-              _ccQuotaUser
-              (Just _ccPrettyPrint)
-              _ccFields
-              _ccKey
-              _ccOAuthToken
               (Just AltJSON)
               _ccPayload
+              classroomService
           where go
-                  = clientBuild (Proxy :: Proxy CoursesCreateResource)
-                      rq
+                  = buildClient (Proxy :: Proxy CoursesCreateResource)
+                      mempty

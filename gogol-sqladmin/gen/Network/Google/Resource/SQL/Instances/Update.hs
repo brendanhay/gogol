@@ -35,14 +35,8 @@ module Network.Google.Resource.SQL.Instances.Update
     , InstancesUpdate'
 
     -- * Request Lenses
-    , iuQuotaUser
-    , iuPrettyPrint
     , iuProject
-    , iuUserIP
     , iuPayload
-    , iuKey
-    , iuOAuthToken
-    , iuFields
     , iuInstance
     ) where
 
@@ -56,15 +50,9 @@ type InstancesUpdateResource =
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] DatabaseInstance :>
-                             Put '[JSON] Operation
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] DatabaseInstance :>
+                 Put '[JSON] Operation
 
 -- | Updates settings of a Cloud SQL instance. Caution: This is not a partial
 -- update, so you must include values for all the settings that you want to
@@ -72,36 +60,18 @@ type InstancesUpdateResource =
 --
 -- /See:/ 'instancesUpdate'' smart constructor.
 data InstancesUpdate' = InstancesUpdate'
-    { _iuQuotaUser   :: !(Maybe Text)
-    , _iuPrettyPrint :: !Bool
-    , _iuProject     :: !Text
-    , _iuUserIP      :: !(Maybe Text)
-    , _iuPayload     :: !DatabaseInstance
-    , _iuKey         :: !(Maybe AuthKey)
-    , _iuOAuthToken  :: !(Maybe OAuthToken)
-    , _iuFields      :: !(Maybe Text)
-    , _iuInstance    :: !Text
+    { _iuProject  :: !Text
+    , _iuPayload  :: !DatabaseInstance
+    , _iuInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iuQuotaUser'
---
--- * 'iuPrettyPrint'
---
 -- * 'iuProject'
 --
--- * 'iuUserIP'
---
 -- * 'iuPayload'
---
--- * 'iuKey'
---
--- * 'iuOAuthToken'
---
--- * 'iuFields'
 --
 -- * 'iuInstance'
 instancesUpdate'
@@ -111,82 +81,32 @@ instancesUpdate'
     -> InstancesUpdate'
 instancesUpdate' pIuProject_ pIuPayload_ pIuInstance_ =
     InstancesUpdate'
-    { _iuQuotaUser = Nothing
-    , _iuPrettyPrint = True
-    , _iuProject = pIuProject_
-    , _iuUserIP = Nothing
+    { _iuProject = pIuProject_
     , _iuPayload = pIuPayload_
-    , _iuKey = Nothing
-    , _iuOAuthToken = Nothing
-    , _iuFields = Nothing
     , _iuInstance = pIuInstance_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-iuQuotaUser :: Lens' InstancesUpdate' (Maybe Text)
-iuQuotaUser
-  = lens _iuQuotaUser (\ s a -> s{_iuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-iuPrettyPrint :: Lens' InstancesUpdate' Bool
-iuPrettyPrint
-  = lens _iuPrettyPrint
-      (\ s a -> s{_iuPrettyPrint = a})
 
 -- | Project ID of the project that contains the instance.
 iuProject :: Lens' InstancesUpdate' Text
 iuProject
   = lens _iuProject (\ s a -> s{_iuProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-iuUserIP :: Lens' InstancesUpdate' (Maybe Text)
-iuUserIP = lens _iuUserIP (\ s a -> s{_iuUserIP = a})
-
 -- | Multipart request metadata.
 iuPayload :: Lens' InstancesUpdate' DatabaseInstance
 iuPayload
   = lens _iuPayload (\ s a -> s{_iuPayload = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-iuKey :: Lens' InstancesUpdate' (Maybe AuthKey)
-iuKey = lens _iuKey (\ s a -> s{_iuKey = a})
-
--- | OAuth 2.0 token for the current user.
-iuOAuthToken :: Lens' InstancesUpdate' (Maybe OAuthToken)
-iuOAuthToken
-  = lens _iuOAuthToken (\ s a -> s{_iuOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-iuFields :: Lens' InstancesUpdate' (Maybe Text)
-iuFields = lens _iuFields (\ s a -> s{_iuFields = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
 iuInstance :: Lens' InstancesUpdate' Text
 iuInstance
   = lens _iuInstance (\ s a -> s{_iuInstance = a})
 
-instance GoogleAuth InstancesUpdate' where
-        _AuthKey = iuKey . _Just
-        _AuthToken = iuOAuthToken . _Just
-
 instance GoogleRequest InstancesUpdate' where
         type Rs InstancesUpdate' = Operation
-        request = requestWith sQLAdminRequest
-        requestWith rq InstancesUpdate'{..}
-          = go _iuProject _iuInstance _iuQuotaUser
-              (Just _iuPrettyPrint)
-              _iuUserIP
-              _iuFields
-              _iuKey
-              _iuOAuthToken
-              (Just AltJSON)
-              _iuPayload
+        requestClient InstancesUpdate'{..}
+          = go _iuProject _iuInstance (Just AltJSON) _iuPayload
+              sQLAdminService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy InstancesUpdateResource)
-                      rq
+                      mempty

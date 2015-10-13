@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference>
 module Network.Google.AppsLicensing
     (
+    -- * Service Configuration
+      appsLicensingService
+
     -- * API Declaration
-      AppsLicensingAPI
+    , AppsLicensingAPI
 
     -- * Resources
 

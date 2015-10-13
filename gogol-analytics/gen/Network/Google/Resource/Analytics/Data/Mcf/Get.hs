@@ -33,22 +33,16 @@ module Network.Google.Resource.Analytics.Data.Mcf.Get
     , DataMcfGet'
 
     -- * Request Lenses
-    , dmgQuotaUser
     , dmgMetrics
-    , dmgPrettyPrint
     , dmgSamplingLevel
-    , dmgUserIP
     , dmgFilters
     , dmgIds
     , dmgEndDate
-    , dmgKey
     , dmgSort
     , dmgDimensions
-    , dmgOAuthToken
     , dmgStartIndex
     , dmgMaxResults
     , dmgStartDate
-    , dmgFields
     ) where
 
 import           Network.Google.Analytics.Types
@@ -69,50 +63,31 @@ type DataMcfGetResource =
                        QueryParam "dimensions" Text :>
                          QueryParam "start-index" Int32 :>
                            QueryParam "max-results" Int32 :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "userIp" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] McfData
+                             QueryParam "alt" AltJSON :> Get '[JSON] McfData
 
 -- | Returns Analytics Multi-Channel Funnels data for a view (profile).
 --
 -- /See:/ 'dataMcfGet'' smart constructor.
 data DataMcfGet' = DataMcfGet'
-    { _dmgQuotaUser     :: !(Maybe Text)
-    , _dmgMetrics       :: !Text
-    , _dmgPrettyPrint   :: !Bool
+    { _dmgMetrics       :: !Text
     , _dmgSamplingLevel :: !(Maybe DataMcfGetSamplingLevel)
-    , _dmgUserIP        :: !(Maybe Text)
     , _dmgFilters       :: !(Maybe Text)
     , _dmgIds           :: !Text
     , _dmgEndDate       :: !Text
-    , _dmgKey           :: !(Maybe AuthKey)
     , _dmgSort          :: !(Maybe Text)
     , _dmgDimensions    :: !(Maybe Text)
-    , _dmgOAuthToken    :: !(Maybe OAuthToken)
     , _dmgStartIndex    :: !(Maybe Int32)
     , _dmgMaxResults    :: !(Maybe Int32)
     , _dmgStartDate     :: !Text
-    , _dmgFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataMcfGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dmgQuotaUser'
---
 -- * 'dmgMetrics'
 --
--- * 'dmgPrettyPrint'
---
 -- * 'dmgSamplingLevel'
---
--- * 'dmgUserIP'
 --
 -- * 'dmgFilters'
 --
@@ -120,21 +95,15 @@ data DataMcfGet' = DataMcfGet'
 --
 -- * 'dmgEndDate'
 --
--- * 'dmgKey'
---
 -- * 'dmgSort'
 --
 -- * 'dmgDimensions'
---
--- * 'dmgOAuthToken'
 --
 -- * 'dmgStartIndex'
 --
 -- * 'dmgMaxResults'
 --
 -- * 'dmgStartDate'
---
--- * 'dmgFields'
 dataMcfGet'
     :: Text -- ^ 'metrics'
     -> Text -- ^ 'ids'
@@ -143,30 +112,17 @@ dataMcfGet'
     -> DataMcfGet'
 dataMcfGet' pDmgMetrics_ pDmgIds_ pDmgEndDate_ pDmgStartDate_ =
     DataMcfGet'
-    { _dmgQuotaUser = Nothing
-    , _dmgMetrics = pDmgMetrics_
-    , _dmgPrettyPrint = False
+    { _dmgMetrics = pDmgMetrics_
     , _dmgSamplingLevel = Nothing
-    , _dmgUserIP = Nothing
     , _dmgFilters = Nothing
     , _dmgIds = pDmgIds_
     , _dmgEndDate = pDmgEndDate_
-    , _dmgKey = Nothing
     , _dmgSort = Nothing
     , _dmgDimensions = Nothing
-    , _dmgOAuthToken = Nothing
     , _dmgStartIndex = Nothing
     , _dmgMaxResults = Nothing
     , _dmgStartDate = pDmgStartDate_
-    , _dmgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-dmgQuotaUser :: Lens' DataMcfGet' (Maybe Text)
-dmgQuotaUser
-  = lens _dmgQuotaUser (\ s a -> s{_dmgQuotaUser = a})
 
 -- | A comma-separated list of Multi-Channel Funnels metrics. E.g.,
 -- \'mcf:totalConversions,mcf:totalConversionValue\'. At least one metric
@@ -175,23 +131,11 @@ dmgMetrics :: Lens' DataMcfGet' Text
 dmgMetrics
   = lens _dmgMetrics (\ s a -> s{_dmgMetrics = a})
 
--- | Returns response with indentations and line breaks.
-dmgPrettyPrint :: Lens' DataMcfGet' Bool
-dmgPrettyPrint
-  = lens _dmgPrettyPrint
-      (\ s a -> s{_dmgPrettyPrint = a})
-
 -- | The desired sampling level.
 dmgSamplingLevel :: Lens' DataMcfGet' (Maybe DataMcfGetSamplingLevel)
 dmgSamplingLevel
   = lens _dmgSamplingLevel
       (\ s a -> s{_dmgSamplingLevel = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-dmgUserIP :: Lens' DataMcfGet' (Maybe Text)
-dmgUserIP
-  = lens _dmgUserIP (\ s a -> s{_dmgUserIP = a})
 
 -- | A comma-separated list of dimension or metric filters to be applied to
 -- the Analytics data.
@@ -211,12 +155,6 @@ dmgEndDate :: Lens' DataMcfGet' Text
 dmgEndDate
   = lens _dmgEndDate (\ s a -> s{_dmgEndDate = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-dmgKey :: Lens' DataMcfGet' (Maybe AuthKey)
-dmgKey = lens _dmgKey (\ s a -> s{_dmgKey = a})
-
 -- | A comma-separated list of dimensions or metrics that determine the sort
 -- order for the Analytics data.
 dmgSort :: Lens' DataMcfGet' (Maybe Text)
@@ -228,12 +166,6 @@ dmgDimensions :: Lens' DataMcfGet' (Maybe Text)
 dmgDimensions
   = lens _dmgDimensions
       (\ s a -> s{_dmgDimensions = a})
-
--- | OAuth 2.0 token for the current user.
-dmgOAuthToken :: Lens' DataMcfGet' (Maybe OAuthToken)
-dmgOAuthToken
-  = lens _dmgOAuthToken
-      (\ s a -> s{_dmgOAuthToken = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
@@ -255,19 +187,9 @@ dmgStartDate :: Lens' DataMcfGet' Text
 dmgStartDate
   = lens _dmgStartDate (\ s a -> s{_dmgStartDate = a})
 
--- | Selector specifying which fields to include in a partial response.
-dmgFields :: Lens' DataMcfGet' (Maybe Text)
-dmgFields
-  = lens _dmgFields (\ s a -> s{_dmgFields = a})
-
-instance GoogleAuth DataMcfGet' where
-        _AuthKey = dmgKey . _Just
-        _AuthToken = dmgOAuthToken . _Just
-
 instance GoogleRequest DataMcfGet' where
         type Rs DataMcfGet' = McfData
-        request = requestWith analyticsRequest
-        requestWith rq DataMcfGet'{..}
+        requestClient DataMcfGet'{..}
           = go (Just _dmgIds) (Just _dmgStartDate)
               (Just _dmgEndDate)
               (Just _dmgMetrics)
@@ -277,12 +199,8 @@ instance GoogleRequest DataMcfGet' where
               _dmgDimensions
               _dmgStartIndex
               _dmgMaxResults
-              _dmgQuotaUser
-              (Just _dmgPrettyPrint)
-              _dmgUserIP
-              _dmgFields
-              _dmgKey
-              _dmgOAuthToken
               (Just AltJSON)
+              analyticsService
           where go
-                  = clientBuild (Proxy :: Proxy DataMcfGetResource) rq
+                  = buildClient (Proxy :: Proxy DataMcfGetResource)
+                      mempty

@@ -34,17 +34,11 @@ module Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.List
     , GlobalAccountsOperationsList'
 
     -- * Request Lenses
-    , gaolQuotaUser
-    , gaolPrettyPrint
     , gaolOrderBy
     , gaolProject
-    , gaolUserIP
-    , gaolKey
     , gaolFilter
     , gaolPageToken
-    , gaolOAuthToken
     , gaolMaxResults
-    , gaolFields
     ) where
 
 import           Network.Google.Prelude
@@ -60,89 +54,44 @@ type GlobalAccountsOperationsListResource =
              QueryParam "filter" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "maxResults" Word32 :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] OperationList
+                   QueryParam "alt" AltJSON :> Get '[JSON] OperationList
 
 -- | Retrieves the list of operation resources contained within the specified
 -- project.
 --
 -- /See:/ 'globalAccountsOperationsList'' smart constructor.
 data GlobalAccountsOperationsList' = GlobalAccountsOperationsList'
-    { _gaolQuotaUser   :: !(Maybe Text)
-    , _gaolPrettyPrint :: !Bool
-    , _gaolOrderBy     :: !(Maybe Text)
-    , _gaolProject     :: !Text
-    , _gaolUserIP      :: !(Maybe Text)
-    , _gaolKey         :: !(Maybe AuthKey)
-    , _gaolFilter      :: !(Maybe Text)
-    , _gaolPageToken   :: !(Maybe Text)
-    , _gaolOAuthToken  :: !(Maybe OAuthToken)
-    , _gaolMaxResults  :: !Word32
-    , _gaolFields      :: !(Maybe Text)
+    { _gaolOrderBy    :: !(Maybe Text)
+    , _gaolProject    :: !Text
+    , _gaolFilter     :: !(Maybe Text)
+    , _gaolPageToken  :: !(Maybe Text)
+    , _gaolMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalAccountsOperationsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gaolQuotaUser'
---
--- * 'gaolPrettyPrint'
---
 -- * 'gaolOrderBy'
 --
 -- * 'gaolProject'
---
--- * 'gaolUserIP'
---
--- * 'gaolKey'
 --
 -- * 'gaolFilter'
 --
 -- * 'gaolPageToken'
 --
--- * 'gaolOAuthToken'
---
 -- * 'gaolMaxResults'
---
--- * 'gaolFields'
 globalAccountsOperationsList'
     :: Text -- ^ 'project'
     -> GlobalAccountsOperationsList'
 globalAccountsOperationsList' pGaolProject_ =
     GlobalAccountsOperationsList'
-    { _gaolQuotaUser = Nothing
-    , _gaolPrettyPrint = True
-    , _gaolOrderBy = Nothing
+    { _gaolOrderBy = Nothing
     , _gaolProject = pGaolProject_
-    , _gaolUserIP = Nothing
-    , _gaolKey = Nothing
     , _gaolFilter = Nothing
     , _gaolPageToken = Nothing
-    , _gaolOAuthToken = Nothing
     , _gaolMaxResults = 500
-    , _gaolFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-gaolQuotaUser :: Lens' GlobalAccountsOperationsList' (Maybe Text)
-gaolQuotaUser
-  = lens _gaolQuotaUser
-      (\ s a -> s{_gaolQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-gaolPrettyPrint :: Lens' GlobalAccountsOperationsList' Bool
-gaolPrettyPrint
-  = lens _gaolPrettyPrint
-      (\ s a -> s{_gaolPrettyPrint = a})
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
@@ -160,18 +109,6 @@ gaolOrderBy
 gaolProject :: Lens' GlobalAccountsOperationsList' Text
 gaolProject
   = lens _gaolProject (\ s a -> s{_gaolProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-gaolUserIP :: Lens' GlobalAccountsOperationsList' (Maybe Text)
-gaolUserIP
-  = lens _gaolUserIP (\ s a -> s{_gaolUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-gaolKey :: Lens' GlobalAccountsOperationsList' (Maybe AuthKey)
-gaolKey = lens _gaolKey (\ s a -> s{_gaolKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -196,44 +133,22 @@ gaolPageToken
   = lens _gaolPageToken
       (\ s a -> s{_gaolPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-gaolOAuthToken :: Lens' GlobalAccountsOperationsList' (Maybe OAuthToken)
-gaolOAuthToken
-  = lens _gaolOAuthToken
-      (\ s a -> s{_gaolOAuthToken = a})
-
 -- | Maximum count of results to be returned.
 gaolMaxResults :: Lens' GlobalAccountsOperationsList' Word32
 gaolMaxResults
   = lens _gaolMaxResults
       (\ s a -> s{_gaolMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-gaolFields :: Lens' GlobalAccountsOperationsList' (Maybe Text)
-gaolFields
-  = lens _gaolFields (\ s a -> s{_gaolFields = a})
-
-instance GoogleAuth GlobalAccountsOperationsList'
-         where
-        _AuthKey = gaolKey . _Just
-        _AuthToken = gaolOAuthToken . _Just
-
 instance GoogleRequest GlobalAccountsOperationsList'
          where
         type Rs GlobalAccountsOperationsList' = OperationList
-        request = requestWith userAccountsRequest
-        requestWith rq GlobalAccountsOperationsList'{..}
+        requestClient GlobalAccountsOperationsList'{..}
           = go _gaolProject _gaolOrderBy _gaolFilter
               _gaolPageToken
               (Just _gaolMaxResults)
-              _gaolQuotaUser
-              (Just _gaolPrettyPrint)
-              _gaolUserIP
-              _gaolFields
-              _gaolKey
-              _gaolOAuthToken
               (Just AltJSON)
+              userAccountsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy GlobalAccountsOperationsListResource)
-                      rq
+                      mempty

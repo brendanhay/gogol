@@ -33,21 +33,15 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.List
     , RemarketingListsList'
 
     -- * Request Lenses
-    , rllQuotaUser
-    , rllPrettyPrint
-    , rllUserIP
     , rllFloodlightActivityId
     , rllAdvertiserId
     , rllProFileId
     , rllSortOrder
     , rllActive
-    , rllKey
     , rllName
     , rllPageToken
     , rllSortField
-    , rllOAuthToken
     , rllMaxResults
-    , rllFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -69,46 +63,27 @@ type RemarketingListsListResource =
                        QueryParam "sortField" RemarketingListsListSortField
                          :>
                          QueryParam "maxResults" Int32 :>
-                           QueryParam "quotaUser" Text :>
-                             QueryParam "prettyPrint" Bool :>
-                               QueryParam "userIp" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON]
-                                           RemarketingListsListResponse
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] RemarketingListsListResponse
 
 -- | Retrieves a list of remarketing lists, possibly filtered.
 --
 -- /See:/ 'remarketingListsList'' smart constructor.
 data RemarketingListsList' = RemarketingListsList'
-    { _rllQuotaUser            :: !(Maybe Text)
-    , _rllPrettyPrint          :: !Bool
-    , _rllUserIP               :: !(Maybe Text)
-    , _rllFloodlightActivityId :: !(Maybe Int64)
+    { _rllFloodlightActivityId :: !(Maybe Int64)
     , _rllAdvertiserId         :: !Int64
     , _rllProFileId            :: !Int64
     , _rllSortOrder            :: !(Maybe RemarketingListsListSortOrder)
     , _rllActive               :: !(Maybe Bool)
-    , _rllKey                  :: !(Maybe AuthKey)
     , _rllName                 :: !(Maybe Text)
     , _rllPageToken            :: !(Maybe Text)
     , _rllSortField            :: !(Maybe RemarketingListsListSortField)
-    , _rllOAuthToken           :: !(Maybe OAuthToken)
     , _rllMaxResults           :: !(Maybe Int32)
-    , _rllFields               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'rllQuotaUser'
---
--- * 'rllPrettyPrint'
---
--- * 'rllUserIP'
 --
 -- * 'rllFloodlightActivityId'
 --
@@ -120,60 +95,29 @@ data RemarketingListsList' = RemarketingListsList'
 --
 -- * 'rllActive'
 --
--- * 'rllKey'
---
 -- * 'rllName'
 --
 -- * 'rllPageToken'
 --
 -- * 'rllSortField'
 --
--- * 'rllOAuthToken'
---
 -- * 'rllMaxResults'
---
--- * 'rllFields'
 remarketingListsList'
     :: Int64 -- ^ 'advertiserId'
     -> Int64 -- ^ 'profileId'
     -> RemarketingListsList'
 remarketingListsList' pRllAdvertiserId_ pRllProFileId_ =
     RemarketingListsList'
-    { _rllQuotaUser = Nothing
-    , _rllPrettyPrint = True
-    , _rllUserIP = Nothing
-    , _rllFloodlightActivityId = Nothing
+    { _rllFloodlightActivityId = Nothing
     , _rllAdvertiserId = pRllAdvertiserId_
     , _rllProFileId = pRllProFileId_
     , _rllSortOrder = Nothing
     , _rllActive = Nothing
-    , _rllKey = Nothing
     , _rllName = Nothing
     , _rllPageToken = Nothing
     , _rllSortField = Nothing
-    , _rllOAuthToken = Nothing
     , _rllMaxResults = Nothing
-    , _rllFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-rllQuotaUser :: Lens' RemarketingListsList' (Maybe Text)
-rllQuotaUser
-  = lens _rllQuotaUser (\ s a -> s{_rllQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rllPrettyPrint :: Lens' RemarketingListsList' Bool
-rllPrettyPrint
-  = lens _rllPrettyPrint
-      (\ s a -> s{_rllPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rllUserIP :: Lens' RemarketingListsList' (Maybe Text)
-rllUserIP
-  = lens _rllUserIP (\ s a -> s{_rllUserIP = a})
 
 -- | Select only remarketing lists that have this floodlight activity ID.
 rllFloodlightActivityId :: Lens' RemarketingListsList' (Maybe Int64)
@@ -202,12 +146,6 @@ rllActive :: Lens' RemarketingListsList' (Maybe Bool)
 rllActive
   = lens _rllActive (\ s a -> s{_rllActive = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rllKey :: Lens' RemarketingListsList' (Maybe AuthKey)
-rllKey = lens _rllKey (\ s a -> s{_rllKey = a})
-
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"remarketing list*2015\" will return objects with names
 -- like \"remarketing list June 2015\", \"remarketing list April 2015\", or
@@ -229,32 +167,16 @@ rllSortField :: Lens' RemarketingListsList' (Maybe RemarketingListsListSortField
 rllSortField
   = lens _rllSortField (\ s a -> s{_rllSortField = a})
 
--- | OAuth 2.0 token for the current user.
-rllOAuthToken :: Lens' RemarketingListsList' (Maybe OAuthToken)
-rllOAuthToken
-  = lens _rllOAuthToken
-      (\ s a -> s{_rllOAuthToken = a})
-
 -- | Maximum number of results to return.
 rllMaxResults :: Lens' RemarketingListsList' (Maybe Int32)
 rllMaxResults
   = lens _rllMaxResults
       (\ s a -> s{_rllMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-rllFields :: Lens' RemarketingListsList' (Maybe Text)
-rllFields
-  = lens _rllFields (\ s a -> s{_rllFields = a})
-
-instance GoogleAuth RemarketingListsList' where
-        _AuthKey = rllKey . _Just
-        _AuthToken = rllOAuthToken . _Just
-
 instance GoogleRequest RemarketingListsList' where
         type Rs RemarketingListsList' =
              RemarketingListsListResponse
-        request = requestWith dFAReportingRequest
-        requestWith rq RemarketingListsList'{..}
+        requestClient RemarketingListsList'{..}
           = go _rllProFileId (Just _rllAdvertiserId)
               _rllFloodlightActivityId
               _rllSortOrder
@@ -263,14 +185,9 @@ instance GoogleRequest RemarketingListsList' where
               _rllPageToken
               _rllSortField
               _rllMaxResults
-              _rllQuotaUser
-              (Just _rllPrettyPrint)
-              _rllUserIP
-              _rllFields
-              _rllKey
-              _rllOAuthToken
               (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy RemarketingListsListResource)
-                      rq
+                      mempty

@@ -33,13 +33,7 @@ module Network.Google.Resource.Drive.Changes.Get
     , ChangesGet'
 
     -- * Request Lenses
-    , cQuotaUser
-    , cPrettyPrint
-    , cUserIP
-    , cChangeId
-    , cKey
-    , cOAuthToken
-    , cFields
+    , cgChangeId
     ) where
 
 import           Network.Google.Drive.Types
@@ -50,108 +44,37 @@ import           Network.Google.Prelude
 type ChangesGetResource =
      "changes" :>
        Capture "changeId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Change
+         QueryParam "alt" AltJSON :> Get '[JSON] Change
 
 -- | Gets a specific change.
 --
 -- /See:/ 'changesGet'' smart constructor.
-data ChangesGet' = ChangesGet'
-    { _cQuotaUser   :: !(Maybe Text)
-    , _cPrettyPrint :: !Bool
-    , _cUserIP      :: !(Maybe Text)
-    , _cChangeId    :: !Text
-    , _cKey         :: !(Maybe AuthKey)
-    , _cOAuthToken  :: !(Maybe OAuthToken)
-    , _cFields      :: !(Maybe Text)
+newtype ChangesGet' = ChangesGet'
+    { _cgChangeId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cQuotaUser'
---
--- * 'cPrettyPrint'
---
--- * 'cUserIP'
---
--- * 'cChangeId'
---
--- * 'cKey'
---
--- * 'cOAuthToken'
---
--- * 'cFields'
+-- * 'cgChangeId'
 changesGet'
     :: Text -- ^ 'changeId'
     -> ChangesGet'
-changesGet' pCChangeId_ =
+changesGet' pCgChangeId_ =
     ChangesGet'
-    { _cQuotaUser = Nothing
-    , _cPrettyPrint = True
-    , _cUserIP = Nothing
-    , _cChangeId = pCChangeId_
-    , _cKey = Nothing
-    , _cOAuthToken = Nothing
-    , _cFields = Nothing
+    { _cgChangeId = pCgChangeId_
     }
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-cQuotaUser :: Lens' ChangesGet' (Maybe Text)
-cQuotaUser
-  = lens _cQuotaUser (\ s a -> s{_cQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cPrettyPrint :: Lens' ChangesGet' Bool
-cPrettyPrint
-  = lens _cPrettyPrint (\ s a -> s{_cPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-cUserIP :: Lens' ChangesGet' (Maybe Text)
-cUserIP = lens _cUserIP (\ s a -> s{_cUserIP = a})
-
 -- | The ID of the change.
-cChangeId :: Lens' ChangesGet' Text
-cChangeId
-  = lens _cChangeId (\ s a -> s{_cChangeId = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cKey :: Lens' ChangesGet' (Maybe AuthKey)
-cKey = lens _cKey (\ s a -> s{_cKey = a})
-
--- | OAuth 2.0 token for the current user.
-cOAuthToken :: Lens' ChangesGet' (Maybe OAuthToken)
-cOAuthToken
-  = lens _cOAuthToken (\ s a -> s{_cOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cFields :: Lens' ChangesGet' (Maybe Text)
-cFields = lens _cFields (\ s a -> s{_cFields = a})
-
-instance GoogleAuth ChangesGet' where
-        _AuthKey = cKey . _Just
-        _AuthToken = cOAuthToken . _Just
+cgChangeId :: Lens' ChangesGet' Text
+cgChangeId
+  = lens _cgChangeId (\ s a -> s{_cgChangeId = a})
 
 instance GoogleRequest ChangesGet' where
         type Rs ChangesGet' = Change
-        request = requestWith driveRequest
-        requestWith rq ChangesGet'{..}
-          = go _cChangeId _cQuotaUser (Just _cPrettyPrint)
-              _cUserIP
-              _cFields
-              _cKey
-              _cOAuthToken
-              (Just AltJSON)
+        requestClient ChangesGet'{..}
+          = go _cgChangeId (Just AltJSON) driveService
           where go
-                  = clientBuild (Proxy :: Proxy ChangesGetResource) rq
+                  = buildClient (Proxy :: Proxy ChangesGetResource)
+                      mempty

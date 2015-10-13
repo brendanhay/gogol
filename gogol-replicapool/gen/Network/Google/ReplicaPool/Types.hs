@@ -15,8 +15,14 @@
 --
 module Network.Google.ReplicaPool.Types
     (
-    -- * Service Request
-      replicaPoolRequest
+    -- * Service Configuration
+      replicaPoolService
+
+    -- * OAuth Scopes
+    , computeScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , computeReadonlyScope
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -152,7 +158,24 @@ import           Network.Google.ReplicaPool.Types.Product
 import           Network.Google.ReplicaPool.Types.Sum
 
 -- | Default request referring to version 'v1beta2' of the Google Compute Engine Instance Group Manager API. This contains the host and root path used as a starting point for constructing service requests.
-replicaPoolRequest :: RequestBuilder
-replicaPoolRequest
-  = defaultRequest "https://www.googleapis.com/"
+replicaPoolService :: Service
+replicaPoolService
+  = defaultService (ServiceId "replicapool:v1beta2")
+      "www.googleapis.com"
       "replicapool/v1beta2/projects/"
+
+-- | View and manage your Google Compute Engine resources
+computeScope :: OAuthScope
+computeScope = OAuthScope "https://www.googleapis.com/auth/compute";
+
+-- | View your data across Google Cloud Platform services
+cloudPlatformReadOnlyScope :: OAuthScope
+cloudPlatformReadOnlyScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform.read-only";
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: OAuthScope
+cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";
+
+-- | View your Google Compute Engine resources
+computeReadonlyScope :: OAuthScope
+computeReadonlyScope = OAuthScope "https://www.googleapis.com/auth/compute.readonly";

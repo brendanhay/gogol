@@ -34,18 +34,13 @@ module Network.Google.Resource.AppEngine.Apps.Get
 
     -- * Request Lenses
     , agXgafv
-    , agQuotaUser
-    , agPrettyPrint
     , agUploadProtocol
     , agPp
     , agAccessToken
     , agUploadType
     , agBearerToken
-    , agKey
     , agAppsId
     , agEnsureResourcesExist
-    , agOAuthToken
-    , agFields
     , agCallback
     ) where
 
@@ -66,31 +61,20 @@ type AppsGetResource =
                      QueryParam "bearer_token" Text :>
                        QueryParam "ensureResourcesExist" Bool :>
                          QueryParam "callback" Text :>
-                           QueryParam "quotaUser" Text :>
-                             QueryParam "prettyPrint" Bool :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] Application
+                           QueryParam "alt" AltJSON :> Get '[JSON] Application
 
 -- | Gets information about an application.
 --
 -- /See:/ 'appsGet'' smart constructor.
 data AppsGet' = AppsGet'
     { _agXgafv                :: !(Maybe Text)
-    , _agQuotaUser            :: !(Maybe Text)
-    , _agPrettyPrint          :: !Bool
     , _agUploadProtocol       :: !(Maybe Text)
     , _agPp                   :: !Bool
     , _agAccessToken          :: !(Maybe Text)
     , _agUploadType           :: !(Maybe Text)
     , _agBearerToken          :: !(Maybe Text)
-    , _agKey                  :: !(Maybe AuthKey)
     , _agAppsId               :: !Text
     , _agEnsureResourcesExist :: !(Maybe Bool)
-    , _agOAuthToken           :: !(Maybe OAuthToken)
-    , _agFields               :: !(Maybe Text)
     , _agCallback             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -99,10 +83,6 @@ data AppsGet' = AppsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'agXgafv'
---
--- * 'agQuotaUser'
---
--- * 'agPrettyPrint'
 --
 -- * 'agUploadProtocol'
 --
@@ -114,15 +94,9 @@ data AppsGet' = AppsGet'
 --
 -- * 'agBearerToken'
 --
--- * 'agKey'
---
 -- * 'agAppsId'
 --
 -- * 'agEnsureResourcesExist'
---
--- * 'agOAuthToken'
---
--- * 'agFields'
 --
 -- * 'agCallback'
 appsGet'
@@ -131,37 +105,19 @@ appsGet'
 appsGet' pAgAppsId_ =
     AppsGet'
     { _agXgafv = Nothing
-    , _agQuotaUser = Nothing
-    , _agPrettyPrint = True
     , _agUploadProtocol = Nothing
     , _agPp = True
     , _agAccessToken = Nothing
     , _agUploadType = Nothing
     , _agBearerToken = Nothing
-    , _agKey = Nothing
     , _agAppsId = pAgAppsId_
     , _agEnsureResourcesExist = Nothing
-    , _agOAuthToken = Nothing
-    , _agFields = Nothing
     , _agCallback = Nothing
     }
 
 -- | V1 error format.
 agXgafv :: Lens' AppsGet' (Maybe Text)
 agXgafv = lens _agXgafv (\ s a -> s{_agXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-agQuotaUser :: Lens' AppsGet' (Maybe Text)
-agQuotaUser
-  = lens _agQuotaUser (\ s a -> s{_agQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-agPrettyPrint :: Lens' AppsGet' Bool
-agPrettyPrint
-  = lens _agPrettyPrint
-      (\ s a -> s{_agPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 agUploadProtocol :: Lens' AppsGet' (Maybe Text)
@@ -190,12 +146,6 @@ agBearerToken
   = lens _agBearerToken
       (\ s a -> s{_agBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-agKey :: Lens' AppsGet' (Maybe AuthKey)
-agKey = lens _agKey (\ s a -> s{_agKey = a})
-
 -- | Part of \`name\`. Name of the application to get. For example:
 -- \"apps\/myapp\".
 agAppsId :: Lens' AppsGet' Text
@@ -210,28 +160,14 @@ agEnsureResourcesExist
   = lens _agEnsureResourcesExist
       (\ s a -> s{_agEnsureResourcesExist = a})
 
--- | OAuth 2.0 token for the current user.
-agOAuthToken :: Lens' AppsGet' (Maybe OAuthToken)
-agOAuthToken
-  = lens _agOAuthToken (\ s a -> s{_agOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-agFields :: Lens' AppsGet' (Maybe Text)
-agFields = lens _agFields (\ s a -> s{_agFields = a})
-
 -- | JSONP
 agCallback :: Lens' AppsGet' (Maybe Text)
 agCallback
   = lens _agCallback (\ s a -> s{_agCallback = a})
 
-instance GoogleAuth AppsGet' where
-        _AuthKey = agKey . _Just
-        _AuthToken = agOAuthToken . _Just
-
 instance GoogleRequest AppsGet' where
         type Rs AppsGet' = Application
-        request = requestWith appEngineRequest
-        requestWith rq AppsGet'{..}
+        requestClient AppsGet'{..}
           = go _agAppsId _agXgafv _agUploadProtocol
               (Just _agPp)
               _agAccessToken
@@ -239,11 +175,7 @@ instance GoogleRequest AppsGet' where
               _agBearerToken
               _agEnsureResourcesExist
               _agCallback
-              _agQuotaUser
-              (Just _agPrettyPrint)
-              _agFields
-              _agKey
-              _agOAuthToken
               (Just AltJSON)
+              appEngineService
           where go
-                  = clientBuild (Proxy :: Proxy AppsGetResource) rq
+                  = buildClient (Proxy :: Proxy AppsGetResource) mempty

@@ -33,15 +33,9 @@ module Network.Google.Resource.DFAReporting.LandingPages.Insert
     , LandingPagesInsert'
 
     -- * Request Lenses
-    , lpiQuotaUser
-    , lpiPrettyPrint
-    , lpiUserIP
     , lpiCampaignId
     , lpiProFileId
     , lpiPayload
-    , lpiKey
-    , lpiOAuthToken
-    , lpiFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -55,52 +49,28 @@ type LandingPagesInsertResource =
          "campaigns" :>
            Capture "campaignId" Int64 :>
              "landingPages" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] LandingPage :>
-                               Post '[JSON] LandingPage
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] LandingPage :>
+                   Post '[JSON] LandingPage
 
 -- | Inserts a new landing page for the specified campaign.
 --
 -- /See:/ 'landingPagesInsert'' smart constructor.
 data LandingPagesInsert' = LandingPagesInsert'
-    { _lpiQuotaUser   :: !(Maybe Text)
-    , _lpiPrettyPrint :: !Bool
-    , _lpiUserIP      :: !(Maybe Text)
-    , _lpiCampaignId  :: !Int64
-    , _lpiProFileId   :: !Int64
-    , _lpiPayload     :: !LandingPage
-    , _lpiKey         :: !(Maybe AuthKey)
-    , _lpiOAuthToken  :: !(Maybe OAuthToken)
-    , _lpiFields      :: !(Maybe Text)
+    { _lpiCampaignId :: !Int64
+    , _lpiProFileId  :: !Int64
+    , _lpiPayload    :: !LandingPage
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lpiQuotaUser'
---
--- * 'lpiPrettyPrint'
---
--- * 'lpiUserIP'
---
 -- * 'lpiCampaignId'
 --
 -- * 'lpiProFileId'
 --
 -- * 'lpiPayload'
---
--- * 'lpiKey'
---
--- * 'lpiOAuthToken'
---
--- * 'lpiFields'
 landingPagesInsert'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
@@ -108,35 +78,10 @@ landingPagesInsert'
     -> LandingPagesInsert'
 landingPagesInsert' pLpiCampaignId_ pLpiProFileId_ pLpiPayload_ =
     LandingPagesInsert'
-    { _lpiQuotaUser = Nothing
-    , _lpiPrettyPrint = True
-    , _lpiUserIP = Nothing
-    , _lpiCampaignId = pLpiCampaignId_
+    { _lpiCampaignId = pLpiCampaignId_
     , _lpiProFileId = pLpiProFileId_
     , _lpiPayload = pLpiPayload_
-    , _lpiKey = Nothing
-    , _lpiOAuthToken = Nothing
-    , _lpiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-lpiQuotaUser :: Lens' LandingPagesInsert' (Maybe Text)
-lpiQuotaUser
-  = lens _lpiQuotaUser (\ s a -> s{_lpiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-lpiPrettyPrint :: Lens' LandingPagesInsert' Bool
-lpiPrettyPrint
-  = lens _lpiPrettyPrint
-      (\ s a -> s{_lpiPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-lpiUserIP :: Lens' LandingPagesInsert' (Maybe Text)
-lpiUserIP
-  = lens _lpiUserIP (\ s a -> s{_lpiUserIP = a})
 
 -- | Landing page campaign ID.
 lpiCampaignId :: Lens' LandingPagesInsert' Int64
@@ -154,40 +99,13 @@ lpiPayload :: Lens' LandingPagesInsert' LandingPage
 lpiPayload
   = lens _lpiPayload (\ s a -> s{_lpiPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-lpiKey :: Lens' LandingPagesInsert' (Maybe AuthKey)
-lpiKey = lens _lpiKey (\ s a -> s{_lpiKey = a})
-
--- | OAuth 2.0 token for the current user.
-lpiOAuthToken :: Lens' LandingPagesInsert' (Maybe OAuthToken)
-lpiOAuthToken
-  = lens _lpiOAuthToken
-      (\ s a -> s{_lpiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-lpiFields :: Lens' LandingPagesInsert' (Maybe Text)
-lpiFields
-  = lens _lpiFields (\ s a -> s{_lpiFields = a})
-
-instance GoogleAuth LandingPagesInsert' where
-        _AuthKey = lpiKey . _Just
-        _AuthToken = lpiOAuthToken . _Just
-
 instance GoogleRequest LandingPagesInsert' where
         type Rs LandingPagesInsert' = LandingPage
-        request = requestWith dFAReportingRequest
-        requestWith rq LandingPagesInsert'{..}
-          = go _lpiProFileId _lpiCampaignId _lpiQuotaUser
-              (Just _lpiPrettyPrint)
-              _lpiUserIP
-              _lpiFields
-              _lpiKey
-              _lpiOAuthToken
-              (Just AltJSON)
+        requestClient LandingPagesInsert'{..}
+          = go _lpiProFileId _lpiCampaignId (Just AltJSON)
               _lpiPayload
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy LandingPagesInsertResource)
-                      rq
+                      mempty

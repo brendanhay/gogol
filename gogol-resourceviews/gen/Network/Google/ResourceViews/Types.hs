@@ -15,8 +15,16 @@
 --
 module Network.Google.ResourceViews.Types
     (
-    -- * Service Request
-      resourceViewsRequest
+    -- * Service Configuration
+      resourceViewsService
+
+    -- * OAuth Scopes
+    , computeScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , ndevCloudmanScope
+    , ndevCloudmanReadonlyScope
+    , computeReadonlyScope
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -167,7 +175,34 @@ import           Network.Google.ResourceViews.Types.Product
 import           Network.Google.ResourceViews.Types.Sum
 
 -- | Default request referring to version 'v1beta2' of the Google Compute Engine Instance Groups API. This contains the host and root path used as a starting point for constructing service requests.
-resourceViewsRequest :: RequestBuilder
-resourceViewsRequest
-  = defaultRequest "https://www.googleapis.com/"
+resourceViewsService :: Service
+resourceViewsService
+  = defaultService (ServiceId "resourceviews:v1beta2")
+      "www.googleapis.com"
       "resourceviews/v1beta2/projects/"
+
+-- | View and manage your Google Compute Engine resources
+computeScope :: OAuthScope
+computeScope = OAuthScope "https://www.googleapis.com/auth/compute";
+
+-- | View your data across Google Cloud Platform services
+cloudPlatformReadOnlyScope :: OAuthScope
+cloudPlatformReadOnlyScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform.read-only";
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: OAuthScope
+cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";
+
+-- | View and manage your Google Cloud Platform management resources and
+-- deployment status information
+ndevCloudmanScope :: OAuthScope
+ndevCloudmanScope = OAuthScope "https://www.googleapis.com/auth/ndev.cloudman";
+
+-- | View your Google Cloud Platform management resources and deployment
+-- status information
+ndevCloudmanReadonlyScope :: OAuthScope
+ndevCloudmanReadonlyScope = OAuthScope "https://www.googleapis.com/auth/ndev.cloudman.readonly";
+
+-- | View your Google Compute Engine resources
+computeReadonlyScope :: OAuthScope
+computeReadonlyScope = OAuthScope "https://www.googleapis.com/auth/compute.readonly";

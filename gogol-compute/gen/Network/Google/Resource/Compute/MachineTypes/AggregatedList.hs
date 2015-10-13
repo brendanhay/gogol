@@ -33,16 +33,10 @@ module Network.Google.Resource.Compute.MachineTypes.AggregatedList
     , MachineTypesAggregatedList'
 
     -- * Request Lenses
-    , mtalQuotaUser
-    , mtalPrettyPrint
     , mtalProject
-    , mtalUserIP
-    , mtalKey
     , mtalFilter
     , mtalPageToken
-    , mtalOAuthToken
     , mtalMaxResults
-    , mtalFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -57,101 +51,45 @@ type MachineTypesAggregatedListResource =
            QueryParam "filter" Text :>
              QueryParam "pageToken" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] MachineTypeAggregatedList
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] MachineTypeAggregatedList
 
 -- | Retrieves the list of machine type resources grouped by scope.
 --
 -- /See:/ 'machineTypesAggregatedList'' smart constructor.
 data MachineTypesAggregatedList' = MachineTypesAggregatedList'
-    { _mtalQuotaUser   :: !(Maybe Text)
-    , _mtalPrettyPrint :: !Bool
-    , _mtalProject     :: !Text
-    , _mtalUserIP      :: !(Maybe Text)
-    , _mtalKey         :: !(Maybe AuthKey)
-    , _mtalFilter      :: !(Maybe Text)
-    , _mtalPageToken   :: !(Maybe Text)
-    , _mtalOAuthToken  :: !(Maybe OAuthToken)
-    , _mtalMaxResults  :: !Word32
-    , _mtalFields      :: !(Maybe Text)
+    { _mtalProject    :: !Text
+    , _mtalFilter     :: !(Maybe Text)
+    , _mtalPageToken  :: !(Maybe Text)
+    , _mtalMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypesAggregatedList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mtalQuotaUser'
---
--- * 'mtalPrettyPrint'
---
 -- * 'mtalProject'
---
--- * 'mtalUserIP'
---
--- * 'mtalKey'
 --
 -- * 'mtalFilter'
 --
 -- * 'mtalPageToken'
 --
--- * 'mtalOAuthToken'
---
 -- * 'mtalMaxResults'
---
--- * 'mtalFields'
 machineTypesAggregatedList'
     :: Text -- ^ 'project'
     -> MachineTypesAggregatedList'
 machineTypesAggregatedList' pMtalProject_ =
     MachineTypesAggregatedList'
-    { _mtalQuotaUser = Nothing
-    , _mtalPrettyPrint = True
-    , _mtalProject = pMtalProject_
-    , _mtalUserIP = Nothing
-    , _mtalKey = Nothing
+    { _mtalProject = pMtalProject_
     , _mtalFilter = Nothing
     , _mtalPageToken = Nothing
-    , _mtalOAuthToken = Nothing
     , _mtalMaxResults = 500
-    , _mtalFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mtalQuotaUser :: Lens' MachineTypesAggregatedList' (Maybe Text)
-mtalQuotaUser
-  = lens _mtalQuotaUser
-      (\ s a -> s{_mtalQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mtalPrettyPrint :: Lens' MachineTypesAggregatedList' Bool
-mtalPrettyPrint
-  = lens _mtalPrettyPrint
-      (\ s a -> s{_mtalPrettyPrint = a})
 
 -- | Project ID for this request.
 mtalProject :: Lens' MachineTypesAggregatedList' Text
 mtalProject
   = lens _mtalProject (\ s a -> s{_mtalProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mtalUserIP :: Lens' MachineTypesAggregatedList' (Maybe Text)
-mtalUserIP
-  = lens _mtalUserIP (\ s a -> s{_mtalUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mtalKey :: Lens' MachineTypesAggregatedList' (Maybe AuthKey)
-mtalKey = lens _mtalKey (\ s a -> s{_mtalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -176,43 +114,22 @@ mtalPageToken
   = lens _mtalPageToken
       (\ s a -> s{_mtalPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-mtalOAuthToken :: Lens' MachineTypesAggregatedList' (Maybe OAuthToken)
-mtalOAuthToken
-  = lens _mtalOAuthToken
-      (\ s a -> s{_mtalOAuthToken = a})
-
 -- | Maximum count of results to be returned.
 mtalMaxResults :: Lens' MachineTypesAggregatedList' Word32
 mtalMaxResults
   = lens _mtalMaxResults
       (\ s a -> s{_mtalMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-mtalFields :: Lens' MachineTypesAggregatedList' (Maybe Text)
-mtalFields
-  = lens _mtalFields (\ s a -> s{_mtalFields = a})
-
-instance GoogleAuth MachineTypesAggregatedList' where
-        _AuthKey = mtalKey . _Just
-        _AuthToken = mtalOAuthToken . _Just
-
 instance GoogleRequest MachineTypesAggregatedList'
          where
         type Rs MachineTypesAggregatedList' =
              MachineTypeAggregatedList
-        request = requestWith computeRequest
-        requestWith rq MachineTypesAggregatedList'{..}
+        requestClient MachineTypesAggregatedList'{..}
           = go _mtalProject _mtalFilter _mtalPageToken
               (Just _mtalMaxResults)
-              _mtalQuotaUser
-              (Just _mtalPrettyPrint)
-              _mtalUserIP
-              _mtalFields
-              _mtalKey
-              _mtalOAuthToken
               (Just AltJSON)
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy MachineTypesAggregatedListResource)
-                      rq
+                      mempty

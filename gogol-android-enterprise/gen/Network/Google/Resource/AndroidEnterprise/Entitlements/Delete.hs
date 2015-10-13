@@ -34,14 +34,8 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Delete
 
     -- * Request Lenses
     , edEntitlementId
-    , edQuotaUser
-    , edPrettyPrint
     , edEnterpriseId
-    , edUserIP
     , edUserId
-    , edKey
-    , edOAuthToken
-    , edFields
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
@@ -56,27 +50,15 @@ type EntitlementsDeleteResource =
            Capture "userId" Text :>
              "entitlements" :>
                Capture "entitlementId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes an entitlement to an app for a user and uninstalls it.
 --
 -- /See:/ 'entitlementsDelete'' smart constructor.
 data EntitlementsDelete' = EntitlementsDelete'
     { _edEntitlementId :: !Text
-    , _edQuotaUser     :: !(Maybe Text)
-    , _edPrettyPrint   :: !Bool
     , _edEnterpriseId  :: !Text
-    , _edUserIP        :: !(Maybe Text)
     , _edUserId        :: !Text
-    , _edKey           :: !(Maybe AuthKey)
-    , _edOAuthToken    :: !(Maybe OAuthToken)
-    , _edFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntitlementsDelete'' with the minimum fields required to make a request.
@@ -85,21 +67,9 @@ data EntitlementsDelete' = EntitlementsDelete'
 --
 -- * 'edEntitlementId'
 --
--- * 'edQuotaUser'
---
--- * 'edPrettyPrint'
---
 -- * 'edEnterpriseId'
 --
--- * 'edUserIP'
---
 -- * 'edUserId'
---
--- * 'edKey'
---
--- * 'edOAuthToken'
---
--- * 'edFields'
 entitlementsDelete'
     :: Text -- ^ 'entitlementId'
     -> Text -- ^ 'enterpriseId'
@@ -108,14 +78,8 @@ entitlementsDelete'
 entitlementsDelete' pEdEntitlementId_ pEdEnterpriseId_ pEdUserId_ =
     EntitlementsDelete'
     { _edEntitlementId = pEdEntitlementId_
-    , _edQuotaUser = Nothing
-    , _edPrettyPrint = True
     , _edEnterpriseId = pEdEnterpriseId_
-    , _edUserIP = Nothing
     , _edUserId = pEdUserId_
-    , _edKey = Nothing
-    , _edOAuthToken = Nothing
-    , _edFields = Nothing
     }
 
 -- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
@@ -124,66 +88,23 @@ edEntitlementId
   = lens _edEntitlementId
       (\ s a -> s{_edEntitlementId = a})
 
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-edQuotaUser :: Lens' EntitlementsDelete' (Maybe Text)
-edQuotaUser
-  = lens _edQuotaUser (\ s a -> s{_edQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-edPrettyPrint :: Lens' EntitlementsDelete' Bool
-edPrettyPrint
-  = lens _edPrettyPrint
-      (\ s a -> s{_edPrettyPrint = a})
-
 -- | The ID of the enterprise.
 edEnterpriseId :: Lens' EntitlementsDelete' Text
 edEnterpriseId
   = lens _edEnterpriseId
       (\ s a -> s{_edEnterpriseId = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-edUserIP :: Lens' EntitlementsDelete' (Maybe Text)
-edUserIP = lens _edUserIP (\ s a -> s{_edUserIP = a})
-
 -- | The ID of the user.
 edUserId :: Lens' EntitlementsDelete' Text
 edUserId = lens _edUserId (\ s a -> s{_edUserId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-edKey :: Lens' EntitlementsDelete' (Maybe AuthKey)
-edKey = lens _edKey (\ s a -> s{_edKey = a})
-
--- | OAuth 2.0 token for the current user.
-edOAuthToken :: Lens' EntitlementsDelete' (Maybe OAuthToken)
-edOAuthToken
-  = lens _edOAuthToken (\ s a -> s{_edOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-edFields :: Lens' EntitlementsDelete' (Maybe Text)
-edFields = lens _edFields (\ s a -> s{_edFields = a})
-
-instance GoogleAuth EntitlementsDelete' where
-        _AuthKey = edKey . _Just
-        _AuthToken = edOAuthToken . _Just
-
 instance GoogleRequest EntitlementsDelete' where
         type Rs EntitlementsDelete' = ()
-        request = requestWith androidEnterpriseRequest
-        requestWith rq EntitlementsDelete'{..}
+        requestClient EntitlementsDelete'{..}
           = go _edEnterpriseId _edUserId _edEntitlementId
-              _edQuotaUser
-              (Just _edPrettyPrint)
-              _edUserIP
-              _edFields
-              _edKey
-              _edOAuthToken
               (Just AltJSON)
+              androidEnterpriseService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy EntitlementsDeleteResource)
-                      rq
+                      mempty

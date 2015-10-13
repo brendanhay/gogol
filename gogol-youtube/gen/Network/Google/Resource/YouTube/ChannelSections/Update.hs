@@ -33,15 +33,9 @@ module Network.Google.Resource.YouTube.ChannelSections.Update
     , ChannelSectionsUpdate'
 
     -- * Request Lenses
-    , csuQuotaUser
     , csuPart
-    , csuPrettyPrint
-    , csuUserIP
     , csuPayload
     , csuOnBehalfOfContentOwner
-    , csuKey
-    , csuOAuthToken
-    , csuFields
     ) where
 
 import           Network.Google.Prelude
@@ -53,75 +47,38 @@ type ChannelSectionsUpdateResource =
      "channelSections" :>
        QueryParam "part" Text :>
          QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ChannelSection :>
-                           Put '[JSON] ChannelSection
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] ChannelSection :>
+               Put '[JSON] ChannelSection
 
 -- | Update a channelSection.
 --
 -- /See:/ 'channelSectionsUpdate'' smart constructor.
 data ChannelSectionsUpdate' = ChannelSectionsUpdate'
-    { _csuQuotaUser              :: !(Maybe Text)
-    , _csuPart                   :: !Text
-    , _csuPrettyPrint            :: !Bool
-    , _csuUserIP                 :: !(Maybe Text)
+    { _csuPart                   :: !Text
     , _csuPayload                :: !ChannelSection
     , _csuOnBehalfOfContentOwner :: !(Maybe Text)
-    , _csuKey                    :: !(Maybe AuthKey)
-    , _csuOAuthToken             :: !(Maybe OAuthToken)
-    , _csuFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelSectionsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'csuQuotaUser'
---
 -- * 'csuPart'
---
--- * 'csuPrettyPrint'
---
--- * 'csuUserIP'
 --
 -- * 'csuPayload'
 --
 -- * 'csuOnBehalfOfContentOwner'
---
--- * 'csuKey'
---
--- * 'csuOAuthToken'
---
--- * 'csuFields'
 channelSectionsUpdate'
     :: Text -- ^ 'part'
     -> ChannelSection -- ^ 'payload'
     -> ChannelSectionsUpdate'
 channelSectionsUpdate' pCsuPart_ pCsuPayload_ =
     ChannelSectionsUpdate'
-    { _csuQuotaUser = Nothing
-    , _csuPart = pCsuPart_
-    , _csuPrettyPrint = True
-    , _csuUserIP = Nothing
+    { _csuPart = pCsuPart_
     , _csuPayload = pCsuPayload_
     , _csuOnBehalfOfContentOwner = Nothing
-    , _csuKey = Nothing
-    , _csuOAuthToken = Nothing
-    , _csuFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-csuQuotaUser :: Lens' ChannelSectionsUpdate' (Maybe Text)
-csuQuotaUser
-  = lens _csuQuotaUser (\ s a -> s{_csuQuotaUser = a})
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the
@@ -129,18 +86,6 @@ csuQuotaUser
 -- can include in the parameter value are snippet and contentDetails.
 csuPart :: Lens' ChannelSectionsUpdate' Text
 csuPart = lens _csuPart (\ s a -> s{_csuPart = a})
-
--- | Returns response with indentations and line breaks.
-csuPrettyPrint :: Lens' ChannelSectionsUpdate' Bool
-csuPrettyPrint
-  = lens _csuPrettyPrint
-      (\ s a -> s{_csuPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-csuUserIP :: Lens' ChannelSectionsUpdate' (Maybe Text)
-csuUserIP
-  = lens _csuUserIP (\ s a -> s{_csuUserIP = a})
 
 -- | Multipart request metadata.
 csuPayload :: Lens' ChannelSectionsUpdate' ChannelSection
@@ -162,41 +107,14 @@ csuOnBehalfOfContentOwner
   = lens _csuOnBehalfOfContentOwner
       (\ s a -> s{_csuOnBehalfOfContentOwner = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-csuKey :: Lens' ChannelSectionsUpdate' (Maybe AuthKey)
-csuKey = lens _csuKey (\ s a -> s{_csuKey = a})
-
--- | OAuth 2.0 token for the current user.
-csuOAuthToken :: Lens' ChannelSectionsUpdate' (Maybe OAuthToken)
-csuOAuthToken
-  = lens _csuOAuthToken
-      (\ s a -> s{_csuOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-csuFields :: Lens' ChannelSectionsUpdate' (Maybe Text)
-csuFields
-  = lens _csuFields (\ s a -> s{_csuFields = a})
-
-instance GoogleAuth ChannelSectionsUpdate' where
-        _AuthKey = csuKey . _Just
-        _AuthToken = csuOAuthToken . _Just
-
 instance GoogleRequest ChannelSectionsUpdate' where
         type Rs ChannelSectionsUpdate' = ChannelSection
-        request = requestWith youTubeRequest
-        requestWith rq ChannelSectionsUpdate'{..}
+        requestClient ChannelSectionsUpdate'{..}
           = go (Just _csuPart) _csuOnBehalfOfContentOwner
-              _csuQuotaUser
-              (Just _csuPrettyPrint)
-              _csuUserIP
-              _csuFields
-              _csuKey
-              _csuOAuthToken
               (Just AltJSON)
               _csuPayload
+              youTubeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ChannelSectionsUpdateResource)
-                      rq
+                      mempty

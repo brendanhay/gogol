@@ -34,16 +34,10 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.AggregatedList
     , InstanceGroupManagersAggregatedList'
 
     -- * Request Lenses
-    , igmalQuotaUser
-    , igmalPrettyPrint
     , igmalProject
-    , igmalUserIP
-    , igmalKey
     , igmalFilter
     , igmalPageToken
-    , igmalOAuthToken
     , igmalMaxResults
-    , igmalFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,102 +52,46 @@ type InstanceGroupManagersAggregatedListResource =
            QueryParam "filter" Text :>
              QueryParam "pageToken" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] InstanceGroupManagerAggregatedList
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] InstanceGroupManagerAggregatedList
 
 -- | Retrieves the list of managed instance groups, and groups them by
 -- project and zone.
 --
 -- /See:/ 'instanceGroupManagersAggregatedList'' smart constructor.
 data InstanceGroupManagersAggregatedList' = InstanceGroupManagersAggregatedList'
-    { _igmalQuotaUser   :: !(Maybe Text)
-    , _igmalPrettyPrint :: !Bool
-    , _igmalProject     :: !Text
-    , _igmalUserIP      :: !(Maybe Text)
-    , _igmalKey         :: !(Maybe AuthKey)
-    , _igmalFilter      :: !(Maybe Text)
-    , _igmalPageToken   :: !(Maybe Text)
-    , _igmalOAuthToken  :: !(Maybe OAuthToken)
-    , _igmalMaxResults  :: !Word32
-    , _igmalFields      :: !(Maybe Text)
+    { _igmalProject    :: !Text
+    , _igmalFilter     :: !(Maybe Text)
+    , _igmalPageToken  :: !(Maybe Text)
+    , _igmalMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersAggregatedList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'igmalQuotaUser'
---
--- * 'igmalPrettyPrint'
---
 -- * 'igmalProject'
---
--- * 'igmalUserIP'
---
--- * 'igmalKey'
 --
 -- * 'igmalFilter'
 --
 -- * 'igmalPageToken'
 --
--- * 'igmalOAuthToken'
---
 -- * 'igmalMaxResults'
---
--- * 'igmalFields'
 instanceGroupManagersAggregatedList'
     :: Text -- ^ 'project'
     -> InstanceGroupManagersAggregatedList'
 instanceGroupManagersAggregatedList' pIgmalProject_ =
     InstanceGroupManagersAggregatedList'
-    { _igmalQuotaUser = Nothing
-    , _igmalPrettyPrint = True
-    , _igmalProject = pIgmalProject_
-    , _igmalUserIP = Nothing
-    , _igmalKey = Nothing
+    { _igmalProject = pIgmalProject_
     , _igmalFilter = Nothing
     , _igmalPageToken = Nothing
-    , _igmalOAuthToken = Nothing
     , _igmalMaxResults = 500
-    , _igmalFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-igmalQuotaUser :: Lens' InstanceGroupManagersAggregatedList' (Maybe Text)
-igmalQuotaUser
-  = lens _igmalQuotaUser
-      (\ s a -> s{_igmalQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-igmalPrettyPrint :: Lens' InstanceGroupManagersAggregatedList' Bool
-igmalPrettyPrint
-  = lens _igmalPrettyPrint
-      (\ s a -> s{_igmalPrettyPrint = a})
 
 -- | The project ID for this request.
 igmalProject :: Lens' InstanceGroupManagersAggregatedList' Text
 igmalProject
   = lens _igmalProject (\ s a -> s{_igmalProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-igmalUserIP :: Lens' InstanceGroupManagersAggregatedList' (Maybe Text)
-igmalUserIP
-  = lens _igmalUserIP (\ s a -> s{_igmalUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-igmalKey :: Lens' InstanceGroupManagersAggregatedList' (Maybe AuthKey)
-igmalKey = lens _igmalKey (\ s a -> s{_igmalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -178,46 +116,24 @@ igmalPageToken
   = lens _igmalPageToken
       (\ s a -> s{_igmalPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-igmalOAuthToken :: Lens' InstanceGroupManagersAggregatedList' (Maybe OAuthToken)
-igmalOAuthToken
-  = lens _igmalOAuthToken
-      (\ s a -> s{_igmalOAuthToken = a})
-
 -- | Maximum count of results to be returned.
 igmalMaxResults :: Lens' InstanceGroupManagersAggregatedList' Word32
 igmalMaxResults
   = lens _igmalMaxResults
       (\ s a -> s{_igmalMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-igmalFields :: Lens' InstanceGroupManagersAggregatedList' (Maybe Text)
-igmalFields
-  = lens _igmalFields (\ s a -> s{_igmalFields = a})
-
-instance GoogleAuth
-         InstanceGroupManagersAggregatedList' where
-        _AuthKey = igmalKey . _Just
-        _AuthToken = igmalOAuthToken . _Just
-
 instance GoogleRequest
          InstanceGroupManagersAggregatedList' where
         type Rs InstanceGroupManagersAggregatedList' =
              InstanceGroupManagerAggregatedList
-        request = requestWith computeRequest
-        requestWith rq
+        requestClient
           InstanceGroupManagersAggregatedList'{..}
           = go _igmalProject _igmalFilter _igmalPageToken
               (Just _igmalMaxResults)
-              _igmalQuotaUser
-              (Just _igmalPrettyPrint)
-              _igmalUserIP
-              _igmalFields
-              _igmalKey
-              _igmalOAuthToken
               (Just AltJSON)
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy InstanceGroupManagersAggregatedListResource)
-                      rq
+                      mempty

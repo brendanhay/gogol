@@ -33,17 +33,11 @@ module Network.Google.Resource.Analytics.Management.Goals.Update
     , ManagementGoalsUpdate'
 
     -- * Request Lenses
-    , mguQuotaUser
-    , mguPrettyPrint
     , mguWebPropertyId
     , mguGoalId
-    , mguUserIP
     , mguProFileId
     , mguPayload
     , mguAccountId
-    , mguKey
-    , mguOAuthToken
-    , mguFields
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,57 +55,33 @@ type ManagementGoalsUpdateResource =
                  Capture "profileId" Text :>
                    "goals" :>
                      Capture "goalId" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] Goal :> Put '[JSON] Goal
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Goal :> Put '[JSON] Goal
 
 -- | Updates an existing view (profile).
 --
 -- /See:/ 'managementGoalsUpdate'' smart constructor.
 data ManagementGoalsUpdate' = ManagementGoalsUpdate'
-    { _mguQuotaUser     :: !(Maybe Text)
-    , _mguPrettyPrint   :: !Bool
-    , _mguWebPropertyId :: !Text
+    { _mguWebPropertyId :: !Text
     , _mguGoalId        :: !Text
-    , _mguUserIP        :: !(Maybe Text)
     , _mguProFileId     :: !Text
     , _mguPayload       :: !Goal
     , _mguAccountId     :: !Text
-    , _mguKey           :: !(Maybe AuthKey)
-    , _mguOAuthToken    :: !(Maybe OAuthToken)
-    , _mguFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mguQuotaUser'
---
--- * 'mguPrettyPrint'
---
 -- * 'mguWebPropertyId'
 --
 -- * 'mguGoalId'
---
--- * 'mguUserIP'
 --
 -- * 'mguProFileId'
 --
 -- * 'mguPayload'
 --
 -- * 'mguAccountId'
---
--- * 'mguKey'
---
--- * 'mguOAuthToken'
---
--- * 'mguFields'
 managementGoalsUpdate'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'goalId'
@@ -121,31 +91,12 @@ managementGoalsUpdate'
     -> ManagementGoalsUpdate'
 managementGoalsUpdate' pMguWebPropertyId_ pMguGoalId_ pMguProFileId_ pMguPayload_ pMguAccountId_ =
     ManagementGoalsUpdate'
-    { _mguQuotaUser = Nothing
-    , _mguPrettyPrint = False
-    , _mguWebPropertyId = pMguWebPropertyId_
+    { _mguWebPropertyId = pMguWebPropertyId_
     , _mguGoalId = pMguGoalId_
-    , _mguUserIP = Nothing
     , _mguProFileId = pMguProFileId_
     , _mguPayload = pMguPayload_
     , _mguAccountId = pMguAccountId_
-    , _mguKey = Nothing
-    , _mguOAuthToken = Nothing
-    , _mguFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mguQuotaUser :: Lens' ManagementGoalsUpdate' (Maybe Text)
-mguQuotaUser
-  = lens _mguQuotaUser (\ s a -> s{_mguQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mguPrettyPrint :: Lens' ManagementGoalsUpdate' Bool
-mguPrettyPrint
-  = lens _mguPrettyPrint
-      (\ s a -> s{_mguPrettyPrint = a})
 
 -- | Web property ID to update the goal.
 mguWebPropertyId :: Lens' ManagementGoalsUpdate' Text
@@ -157,12 +108,6 @@ mguWebPropertyId
 mguGoalId :: Lens' ManagementGoalsUpdate' Text
 mguGoalId
   = lens _mguGoalId (\ s a -> s{_mguGoalId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mguUserIP :: Lens' ManagementGoalsUpdate' (Maybe Text)
-mguUserIP
-  = lens _mguUserIP (\ s a -> s{_mguUserIP = a})
 
 -- | View (Profile) ID to update the goal.
 mguProFileId :: Lens' ManagementGoalsUpdate' Text
@@ -179,42 +124,15 @@ mguAccountId :: Lens' ManagementGoalsUpdate' Text
 mguAccountId
   = lens _mguAccountId (\ s a -> s{_mguAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mguKey :: Lens' ManagementGoalsUpdate' (Maybe AuthKey)
-mguKey = lens _mguKey (\ s a -> s{_mguKey = a})
-
--- | OAuth 2.0 token for the current user.
-mguOAuthToken :: Lens' ManagementGoalsUpdate' (Maybe OAuthToken)
-mguOAuthToken
-  = lens _mguOAuthToken
-      (\ s a -> s{_mguOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-mguFields :: Lens' ManagementGoalsUpdate' (Maybe Text)
-mguFields
-  = lens _mguFields (\ s a -> s{_mguFields = a})
-
-instance GoogleAuth ManagementGoalsUpdate' where
-        _AuthKey = mguKey . _Just
-        _AuthToken = mguOAuthToken . _Just
-
 instance GoogleRequest ManagementGoalsUpdate' where
         type Rs ManagementGoalsUpdate' = Goal
-        request = requestWith analyticsRequest
-        requestWith rq ManagementGoalsUpdate'{..}
+        requestClient ManagementGoalsUpdate'{..}
           = go _mguAccountId _mguWebPropertyId _mguProFileId
               _mguGoalId
-              _mguQuotaUser
-              (Just _mguPrettyPrint)
-              _mguUserIP
-              _mguFields
-              _mguKey
-              _mguOAuthToken
               (Just AltJSON)
               _mguPayload
+              analyticsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ManagementGoalsUpdateResource)
-                      rq
+                      mempty

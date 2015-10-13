@@ -33,15 +33,9 @@ module Network.Google.Resource.Compute.TargetVPNGateways.Get
     , TargetVPNGatewaysGet'
 
     -- * Request Lenses
-    , tvggQuotaUser
-    , tvggPrettyPrint
     , tvggProject
-    , tvggUserIP
     , tvggTargetVPNGateway
-    , tvggKey
     , tvggRegion
-    , tvggOAuthToken
-    , tvggFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,51 +49,27 @@ type TargetVPNGatewaysGetResource =
          Capture "region" Text :>
            "targetVpnGateways" :>
              Capture "targetVpnGateway" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] TargetVPNGateway
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] TargetVPNGateway
 
 -- | Returns the specified TargetVpnGateway resource.
 --
 -- /See:/ 'targetVPNGatewaysGet'' smart constructor.
 data TargetVPNGatewaysGet' = TargetVPNGatewaysGet'
-    { _tvggQuotaUser        :: !(Maybe Text)
-    , _tvggPrettyPrint      :: !Bool
-    , _tvggProject          :: !Text
-    , _tvggUserIP           :: !(Maybe Text)
+    { _tvggProject          :: !Text
     , _tvggTargetVPNGateway :: !Text
-    , _tvggKey              :: !(Maybe AuthKey)
     , _tvggRegion           :: !Text
-    , _tvggOAuthToken       :: !(Maybe OAuthToken)
-    , _tvggFields           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tvggQuotaUser'
---
--- * 'tvggPrettyPrint'
---
 -- * 'tvggProject'
---
--- * 'tvggUserIP'
 --
 -- * 'tvggTargetVPNGateway'
 --
--- * 'tvggKey'
---
 -- * 'tvggRegion'
---
--- * 'tvggOAuthToken'
---
--- * 'tvggFields'
 targetVPNGatewaysGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetVpnGateway'
@@ -107,41 +77,15 @@ targetVPNGatewaysGet'
     -> TargetVPNGatewaysGet'
 targetVPNGatewaysGet' pTvggProject_ pTvggTargetVPNGateway_ pTvggRegion_ =
     TargetVPNGatewaysGet'
-    { _tvggQuotaUser = Nothing
-    , _tvggPrettyPrint = True
-    , _tvggProject = pTvggProject_
-    , _tvggUserIP = Nothing
+    { _tvggProject = pTvggProject_
     , _tvggTargetVPNGateway = pTvggTargetVPNGateway_
-    , _tvggKey = Nothing
     , _tvggRegion = pTvggRegion_
-    , _tvggOAuthToken = Nothing
-    , _tvggFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tvggQuotaUser :: Lens' TargetVPNGatewaysGet' (Maybe Text)
-tvggQuotaUser
-  = lens _tvggQuotaUser
-      (\ s a -> s{_tvggQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tvggPrettyPrint :: Lens' TargetVPNGatewaysGet' Bool
-tvggPrettyPrint
-  = lens _tvggPrettyPrint
-      (\ s a -> s{_tvggPrettyPrint = a})
 
 -- | Project ID for this request.
 tvggProject :: Lens' TargetVPNGatewaysGet' Text
 tvggProject
   = lens _tvggProject (\ s a -> s{_tvggProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tvggUserIP :: Lens' TargetVPNGatewaysGet' (Maybe Text)
-tvggUserIP
-  = lens _tvggUserIP (\ s a -> s{_tvggUserIP = a})
 
 -- | Name of the TargetVpnGateway resource to return.
 tvggTargetVPNGateway :: Lens' TargetVPNGatewaysGet' Text
@@ -149,45 +93,18 @@ tvggTargetVPNGateway
   = lens _tvggTargetVPNGateway
       (\ s a -> s{_tvggTargetVPNGateway = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tvggKey :: Lens' TargetVPNGatewaysGet' (Maybe AuthKey)
-tvggKey = lens _tvggKey (\ s a -> s{_tvggKey = a})
-
 -- | The name of the region for this request.
 tvggRegion :: Lens' TargetVPNGatewaysGet' Text
 tvggRegion
   = lens _tvggRegion (\ s a -> s{_tvggRegion = a})
 
--- | OAuth 2.0 token for the current user.
-tvggOAuthToken :: Lens' TargetVPNGatewaysGet' (Maybe OAuthToken)
-tvggOAuthToken
-  = lens _tvggOAuthToken
-      (\ s a -> s{_tvggOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-tvggFields :: Lens' TargetVPNGatewaysGet' (Maybe Text)
-tvggFields
-  = lens _tvggFields (\ s a -> s{_tvggFields = a})
-
-instance GoogleAuth TargetVPNGatewaysGet' where
-        _AuthKey = tvggKey . _Just
-        _AuthToken = tvggOAuthToken . _Just
-
 instance GoogleRequest TargetVPNGatewaysGet' where
         type Rs TargetVPNGatewaysGet' = TargetVPNGateway
-        request = requestWith computeRequest
-        requestWith rq TargetVPNGatewaysGet'{..}
+        requestClient TargetVPNGatewaysGet'{..}
           = go _tvggProject _tvggRegion _tvggTargetVPNGateway
-              _tvggQuotaUser
-              (Just _tvggPrettyPrint)
-              _tvggUserIP
-              _tvggFields
-              _tvggKey
-              _tvggOAuthToken
               (Just AltJSON)
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy TargetVPNGatewaysGetResource)
-                      rq
+                      mempty

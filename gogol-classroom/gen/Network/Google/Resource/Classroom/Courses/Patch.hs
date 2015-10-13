@@ -39,8 +39,6 @@ module Network.Google.Resource.Classroom.Courses.Patch
 
     -- * Request Lenses
     , cpXgafv
-    , cpQuotaUser
-    , cpPrettyPrint
     , cpUploadProtocol
     , cpUpdateMask
     , cpPp
@@ -48,10 +46,7 @@ module Network.Google.Resource.Classroom.Courses.Patch
     , cpUploadType
     , cpPayload
     , cpBearerToken
-    , cpKey
     , cpId
-    , cpOAuthToken
-    , cpFields
     , cpCallback
     ) where
 
@@ -72,14 +67,8 @@ type CoursesPatchResource =
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
                          QueryParam "callback" Text :>
-                           QueryParam "quotaUser" Text :>
-                             QueryParam "prettyPrint" Bool :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] Course :>
-                                         Patch '[JSON] Course
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Course :> Patch '[JSON] Course
 
 -- | Updates one or more fields in a course. This method returns the
 -- following error codes: * \`PERMISSION_DENIED\` if the requesting user is
@@ -91,8 +80,6 @@ type CoursesPatchResource =
 -- /See:/ 'coursesPatch'' smart constructor.
 data CoursesPatch' = CoursesPatch'
     { _cpXgafv          :: !(Maybe Text)
-    , _cpQuotaUser      :: !(Maybe Text)
-    , _cpPrettyPrint    :: !Bool
     , _cpUploadProtocol :: !(Maybe Text)
     , _cpUpdateMask     :: !(Maybe Text)
     , _cpPp             :: !Bool
@@ -100,10 +87,7 @@ data CoursesPatch' = CoursesPatch'
     , _cpUploadType     :: !(Maybe Text)
     , _cpPayload        :: !Course
     , _cpBearerToken    :: !(Maybe Text)
-    , _cpKey            :: !(Maybe AuthKey)
     , _cpId             :: !Text
-    , _cpOAuthToken     :: !(Maybe OAuthToken)
-    , _cpFields         :: !(Maybe Text)
     , _cpCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -112,10 +96,6 @@ data CoursesPatch' = CoursesPatch'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cpXgafv'
---
--- * 'cpQuotaUser'
---
--- * 'cpPrettyPrint'
 --
 -- * 'cpUploadProtocol'
 --
@@ -131,13 +111,7 @@ data CoursesPatch' = CoursesPatch'
 --
 -- * 'cpBearerToken'
 --
--- * 'cpKey'
---
 -- * 'cpId'
---
--- * 'cpOAuthToken'
---
--- * 'cpFields'
 --
 -- * 'cpCallback'
 coursesPatch'
@@ -147,8 +121,6 @@ coursesPatch'
 coursesPatch' pCpPayload_ pCpId_ =
     CoursesPatch'
     { _cpXgafv = Nothing
-    , _cpQuotaUser = Nothing
-    , _cpPrettyPrint = True
     , _cpUploadProtocol = Nothing
     , _cpUpdateMask = Nothing
     , _cpPp = True
@@ -156,29 +128,13 @@ coursesPatch' pCpPayload_ pCpId_ =
     , _cpUploadType = Nothing
     , _cpPayload = pCpPayload_
     , _cpBearerToken = Nothing
-    , _cpKey = Nothing
     , _cpId = pCpId_
-    , _cpOAuthToken = Nothing
-    , _cpFields = Nothing
     , _cpCallback = Nothing
     }
 
 -- | V1 error format.
 cpXgafv :: Lens' CoursesPatch' (Maybe Text)
 cpXgafv = lens _cpXgafv (\ s a -> s{_cpXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-cpQuotaUser :: Lens' CoursesPatch' (Maybe Text)
-cpQuotaUser
-  = lens _cpQuotaUser (\ s a -> s{_cpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cpPrettyPrint :: Lens' CoursesPatch' Bool
-cpPrettyPrint
-  = lens _cpPrettyPrint
-      (\ s a -> s{_cpPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 cpUploadProtocol :: Lens' CoursesPatch' (Maybe Text)
@@ -222,53 +178,29 @@ cpBearerToken
   = lens _cpBearerToken
       (\ s a -> s{_cpBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cpKey :: Lens' CoursesPatch' (Maybe AuthKey)
-cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
-
 -- | Identifier of the course to update. This identifier can be either the
 -- Classroom-assigned identifier or an
 -- [alias][google.classroom.v1.CourseAlias].
 cpId :: Lens' CoursesPatch' Text
 cpId = lens _cpId (\ s a -> s{_cpId = a})
 
--- | OAuth 2.0 token for the current user.
-cpOAuthToken :: Lens' CoursesPatch' (Maybe OAuthToken)
-cpOAuthToken
-  = lens _cpOAuthToken (\ s a -> s{_cpOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cpFields :: Lens' CoursesPatch' (Maybe Text)
-cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
-
 -- | JSONP
 cpCallback :: Lens' CoursesPatch' (Maybe Text)
 cpCallback
   = lens _cpCallback (\ s a -> s{_cpCallback = a})
 
-instance GoogleAuth CoursesPatch' where
-        _AuthKey = cpKey . _Just
-        _AuthToken = cpOAuthToken . _Just
-
 instance GoogleRequest CoursesPatch' where
         type Rs CoursesPatch' = Course
-        request = requestWith classroomRequest
-        requestWith rq CoursesPatch'{..}
+        requestClient CoursesPatch'{..}
           = go _cpId _cpXgafv _cpUploadProtocol _cpUpdateMask
               (Just _cpPp)
               _cpAccessToken
               _cpUploadType
               _cpBearerToken
               _cpCallback
-              _cpQuotaUser
-              (Just _cpPrettyPrint)
-              _cpFields
-              _cpKey
-              _cpOAuthToken
               (Just AltJSON)
               _cpPayload
+              classroomService
           where go
-                  = clientBuild (Proxy :: Proxy CoursesPatchResource)
-                      rq
+                  = buildClient (Proxy :: Proxy CoursesPatchResource)
+                      mempty

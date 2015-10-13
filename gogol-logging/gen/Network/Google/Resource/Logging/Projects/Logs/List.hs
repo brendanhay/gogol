@@ -34,21 +34,16 @@ module Network.Google.Resource.Logging.Projects.Logs.List
 
     -- * Request Lenses
     , pllXgafv
-    , pllQuotaUser
-    , pllPrettyPrint
     , pllUploadProtocol
     , pllPp
     , pllAccessToken
     , pllUploadType
     , pllBearerToken
-    , pllKey
     , pllServiceName
     , pllPageToken
-    , pllOAuthToken
     , pllServiceIndexPrefix
     , pllProjectsId
     , pllPageSize
-    , pllFields
     , pllCallback
     ) where
 
@@ -73,34 +68,24 @@ type ProjectsLogsListResource =
                              QueryParam "serviceIndexPrefix" Text :>
                                QueryParam "pageSize" Int32 :>
                                  QueryParam "callback" Text :>
-                                   QueryParam "quotaUser" Text :>
-                                     QueryParam "prettyPrint" Bool :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "key" AuthKey :>
-                                           Header "Authorization" OAuthToken :>
-                                             QueryParam "alt" AltJSON :>
-                                               Get '[JSON] ListLogsResponse
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] ListLogsResponse
 
 -- | Lists the logs in the project. Only logs that have entries are listed.
 --
 -- /See:/ 'projectsLogsList'' smart constructor.
 data ProjectsLogsList' = ProjectsLogsList'
     { _pllXgafv              :: !(Maybe Text)
-    , _pllQuotaUser          :: !(Maybe Text)
-    , _pllPrettyPrint        :: !Bool
     , _pllUploadProtocol     :: !(Maybe Text)
     , _pllPp                 :: !Bool
     , _pllAccessToken        :: !(Maybe Text)
     , _pllUploadType         :: !(Maybe Text)
     , _pllBearerToken        :: !(Maybe Text)
-    , _pllKey                :: !(Maybe AuthKey)
     , _pllServiceName        :: !(Maybe Text)
     , _pllPageToken          :: !(Maybe Text)
-    , _pllOAuthToken         :: !(Maybe OAuthToken)
     , _pllServiceIndexPrefix :: !(Maybe Text)
     , _pllProjectsId         :: !Text
     , _pllPageSize           :: !(Maybe Int32)
-    , _pllFields             :: !(Maybe Text)
     , _pllCallback           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -109,10 +94,6 @@ data ProjectsLogsList' = ProjectsLogsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pllXgafv'
---
--- * 'pllQuotaUser'
---
--- * 'pllPrettyPrint'
 --
 -- * 'pllUploadProtocol'
 --
@@ -124,21 +105,15 @@ data ProjectsLogsList' = ProjectsLogsList'
 --
 -- * 'pllBearerToken'
 --
--- * 'pllKey'
---
 -- * 'pllServiceName'
 --
 -- * 'pllPageToken'
---
--- * 'pllOAuthToken'
 --
 -- * 'pllServiceIndexPrefix'
 --
 -- * 'pllProjectsId'
 --
 -- * 'pllPageSize'
---
--- * 'pllFields'
 --
 -- * 'pllCallback'
 projectsLogsList'
@@ -147,40 +122,22 @@ projectsLogsList'
 projectsLogsList' pPllProjectsId_ =
     ProjectsLogsList'
     { _pllXgafv = Nothing
-    , _pllQuotaUser = Nothing
-    , _pllPrettyPrint = True
     , _pllUploadProtocol = Nothing
     , _pllPp = True
     , _pllAccessToken = Nothing
     , _pllUploadType = Nothing
     , _pllBearerToken = Nothing
-    , _pllKey = Nothing
     , _pllServiceName = Nothing
     , _pllPageToken = Nothing
-    , _pllOAuthToken = Nothing
     , _pllServiceIndexPrefix = Nothing
     , _pllProjectsId = pPllProjectsId_
     , _pllPageSize = Nothing
-    , _pllFields = Nothing
     , _pllCallback = Nothing
     }
 
 -- | V1 error format.
 pllXgafv :: Lens' ProjectsLogsList' (Maybe Text)
 pllXgafv = lens _pllXgafv (\ s a -> s{_pllXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pllQuotaUser :: Lens' ProjectsLogsList' (Maybe Text)
-pllQuotaUser
-  = lens _pllQuotaUser (\ s a -> s{_pllQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pllPrettyPrint :: Lens' ProjectsLogsList' Bool
-pllPrettyPrint
-  = lens _pllPrettyPrint
-      (\ s a -> s{_pllPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 pllUploadProtocol :: Lens' ProjectsLogsList' (Maybe Text)
@@ -210,12 +167,6 @@ pllBearerToken
   = lens _pllBearerToken
       (\ s a -> s{_pllBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pllKey :: Lens' ProjectsLogsList' (Maybe AuthKey)
-pllKey = lens _pllKey (\ s a -> s{_pllKey = a})
-
 -- | If not empty, this field must be a log service name such as
 -- \`\"compute.googleapis.com\"\`. Only logs associated with that that log
 -- service are listed.
@@ -231,12 +182,6 @@ pllServiceName
 pllPageToken :: Lens' ProjectsLogsList' (Maybe Text)
 pllPageToken
   = lens _pllPageToken (\ s a -> s{_pllPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-pllOAuthToken :: Lens' ProjectsLogsList' (Maybe OAuthToken)
-pllOAuthToken
-  = lens _pllOAuthToken
-      (\ s a -> s{_pllOAuthToken = a})
 
 -- | The purpose of this field is to restrict the listed logs to those with
 -- entries of a certain kind. If \`serviceName\` is the name of a log
@@ -264,24 +209,14 @@ pllPageSize :: Lens' ProjectsLogsList' (Maybe Int32)
 pllPageSize
   = lens _pllPageSize (\ s a -> s{_pllPageSize = a})
 
--- | Selector specifying which fields to include in a partial response.
-pllFields :: Lens' ProjectsLogsList' (Maybe Text)
-pllFields
-  = lens _pllFields (\ s a -> s{_pllFields = a})
-
 -- | JSONP
 pllCallback :: Lens' ProjectsLogsList' (Maybe Text)
 pllCallback
   = lens _pllCallback (\ s a -> s{_pllCallback = a})
 
-instance GoogleAuth ProjectsLogsList' where
-        _AuthKey = pllKey . _Just
-        _AuthToken = pllOAuthToken . _Just
-
 instance GoogleRequest ProjectsLogsList' where
         type Rs ProjectsLogsList' = ListLogsResponse
-        request = requestWith loggingRequest
-        requestWith rq ProjectsLogsList'{..}
+        requestClient ProjectsLogsList'{..}
           = go _pllProjectsId _pllXgafv _pllUploadProtocol
               (Just _pllPp)
               _pllAccessToken
@@ -292,13 +227,9 @@ instance GoogleRequest ProjectsLogsList' where
               _pllServiceIndexPrefix
               _pllPageSize
               _pllCallback
-              _pllQuotaUser
-              (Just _pllPrettyPrint)
-              _pllFields
-              _pllKey
-              _pllOAuthToken
               (Just AltJSON)
+              loggingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsLogsListResource)
-                      rq
+                      mempty

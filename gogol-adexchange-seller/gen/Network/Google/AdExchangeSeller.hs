@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference>
 module Network.Google.AdExchangeSeller
     (
+    -- * Service Configuration
+      adExchangeSellerService
+
     -- * API Declaration
-      AdExchangeSellerAPI
+    , AdExchangeSellerAPI
 
     -- * Resources
 

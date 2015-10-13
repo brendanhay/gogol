@@ -33,19 +33,13 @@ module Network.Google.Resource.Calendar.Events.Update
     , EventsUpdate'
 
     -- * Request Lenses
-    , euQuotaUser
     , euCalendarId
-    , euPrettyPrint
-    , euUserIP
     , euPayload
     , euMaxAttendees
-    , euKey
     , euSendNotifications
-    , euOAuthToken
     , euSupportsAttachments
     , euAlwaysIncludeEmail
     , euEventId
-    , euFields
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -62,63 +56,39 @@ type EventsUpdateResource =
                QueryParam "sendNotifications" Bool :>
                  QueryParam "supportsAttachments" Bool :>
                    QueryParam "alwaysIncludeEmail" Bool :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Event :> Put '[JSON] Event
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Event :> Put '[JSON] Event
 
 -- | Updates an event.
 --
 -- /See:/ 'eventsUpdate'' smart constructor.
 data EventsUpdate' = EventsUpdate'
-    { _euQuotaUser           :: !(Maybe Text)
-    , _euCalendarId          :: !Text
-    , _euPrettyPrint         :: !Bool
-    , _euUserIP              :: !(Maybe Text)
+    { _euCalendarId          :: !Text
     , _euPayload             :: !Event
     , _euMaxAttendees        :: !(Maybe Int32)
-    , _euKey                 :: !(Maybe AuthKey)
     , _euSendNotifications   :: !(Maybe Bool)
-    , _euOAuthToken          :: !(Maybe OAuthToken)
     , _euSupportsAttachments :: !(Maybe Bool)
     , _euAlwaysIncludeEmail  :: !(Maybe Bool)
     , _euEventId             :: !Text
-    , _euFields              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'euQuotaUser'
---
 -- * 'euCalendarId'
---
--- * 'euPrettyPrint'
---
--- * 'euUserIP'
 --
 -- * 'euPayload'
 --
 -- * 'euMaxAttendees'
 --
--- * 'euKey'
---
 -- * 'euSendNotifications'
---
--- * 'euOAuthToken'
 --
 -- * 'euSupportsAttachments'
 --
 -- * 'euAlwaysIncludeEmail'
 --
 -- * 'euEventId'
---
--- * 'euFields'
 eventsUpdate'
     :: Text -- ^ 'calendarId'
     -> Event -- ^ 'payload'
@@ -126,27 +96,14 @@ eventsUpdate'
     -> EventsUpdate'
 eventsUpdate' pEuCalendarId_ pEuPayload_ pEuEventId_ =
     EventsUpdate'
-    { _euQuotaUser = Nothing
-    , _euCalendarId = pEuCalendarId_
-    , _euPrettyPrint = True
-    , _euUserIP = Nothing
+    { _euCalendarId = pEuCalendarId_
     , _euPayload = pEuPayload_
     , _euMaxAttendees = Nothing
-    , _euKey = Nothing
     , _euSendNotifications = Nothing
-    , _euOAuthToken = Nothing
     , _euSupportsAttachments = Nothing
     , _euAlwaysIncludeEmail = Nothing
     , _euEventId = pEuEventId_
-    , _euFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-euQuotaUser :: Lens' EventsUpdate' (Maybe Text)
-euQuotaUser
-  = lens _euQuotaUser (\ s a -> s{_euQuotaUser = a})
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
@@ -154,17 +111,6 @@ euQuotaUser
 euCalendarId :: Lens' EventsUpdate' Text
 euCalendarId
   = lens _euCalendarId (\ s a -> s{_euCalendarId = a})
-
--- | Returns response with indentations and line breaks.
-euPrettyPrint :: Lens' EventsUpdate' Bool
-euPrettyPrint
-  = lens _euPrettyPrint
-      (\ s a -> s{_euPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-euUserIP :: Lens' EventsUpdate' (Maybe Text)
-euUserIP = lens _euUserIP (\ s a -> s{_euUserIP = a})
 
 -- | Multipart request metadata.
 euPayload :: Lens' EventsUpdate' Event
@@ -179,23 +125,12 @@ euMaxAttendees
   = lens _euMaxAttendees
       (\ s a -> s{_euMaxAttendees = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-euKey :: Lens' EventsUpdate' (Maybe AuthKey)
-euKey = lens _euKey (\ s a -> s{_euKey = a})
-
 -- | Whether to send notifications about the event update (e.g. attendee\'s
 -- responses, title changes, etc.). Optional. The default is False.
 euSendNotifications :: Lens' EventsUpdate' (Maybe Bool)
 euSendNotifications
   = lens _euSendNotifications
       (\ s a -> s{_euSendNotifications = a})
-
--- | OAuth 2.0 token for the current user.
-euOAuthToken :: Lens' EventsUpdate' (Maybe OAuthToken)
-euOAuthToken
-  = lens _euOAuthToken (\ s a -> s{_euOAuthToken = a})
 
 -- | Whether API client performing operation supports event attachments.
 -- Optional. The default is False.
@@ -220,30 +155,16 @@ euEventId :: Lens' EventsUpdate' Text
 euEventId
   = lens _euEventId (\ s a -> s{_euEventId = a})
 
--- | Selector specifying which fields to include in a partial response.
-euFields :: Lens' EventsUpdate' (Maybe Text)
-euFields = lens _euFields (\ s a -> s{_euFields = a})
-
-instance GoogleAuth EventsUpdate' where
-        _AuthKey = euKey . _Just
-        _AuthToken = euOAuthToken . _Just
-
 instance GoogleRequest EventsUpdate' where
         type Rs EventsUpdate' = Event
-        request = requestWith appsCalendarRequest
-        requestWith rq EventsUpdate'{..}
+        requestClient EventsUpdate'{..}
           = go _euCalendarId _euEventId _euMaxAttendees
               _euSendNotifications
               _euSupportsAttachments
               _euAlwaysIncludeEmail
-              _euQuotaUser
-              (Just _euPrettyPrint)
-              _euUserIP
-              _euFields
-              _euKey
-              _euOAuthToken
               (Just AltJSON)
               _euPayload
+              appsCalendarService
           where go
-                  = clientBuild (Proxy :: Proxy EventsUpdateResource)
-                      rq
+                  = buildClient (Proxy :: Proxy EventsUpdateResource)
+                      mempty

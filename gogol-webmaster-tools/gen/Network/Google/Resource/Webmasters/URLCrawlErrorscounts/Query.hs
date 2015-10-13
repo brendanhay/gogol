@@ -34,16 +34,10 @@ module Network.Google.Resource.Webmasters.URLCrawlErrorscounts.Query
     , URLCrawlErrorscountsQuery'
 
     -- * Request Lenses
-    , uceqQuotaUser
-    , uceqPrettyPrint
     , uceqPlatform
-    , uceqUserIP
     , uceqCategory
     , uceqSiteURL
-    , uceqKey
     , uceqLatestCountsOnly
-    , uceqOAuthToken
-    , uceqFields
     ) where
 
 import           Network.Google.Prelude
@@ -63,97 +57,47 @@ type URLCrawlErrorscountsQueryResource =
                  URLCrawlErrorscountsQueryCategory
                  :>
                  QueryParam "latestCountsOnly" Bool :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] URLCrawlErrorsCountsQueryResponse
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] URLCrawlErrorsCountsQueryResponse
 
 -- | Retrieves a time series of the number of URL crawl errors per error
 -- category and platform.
 --
 -- /See:/ 'urlCrawlErrorscountsQuery'' smart constructor.
 data URLCrawlErrorscountsQuery' = URLCrawlErrorscountsQuery'
-    { _uceqQuotaUser        :: !(Maybe Text)
-    , _uceqPrettyPrint      :: !Bool
-    , _uceqPlatform         :: !(Maybe URLCrawlErrorscountsQueryPlatform)
-    , _uceqUserIP           :: !(Maybe Text)
+    { _uceqPlatform         :: !(Maybe URLCrawlErrorscountsQueryPlatform)
     , _uceqCategory         :: !(Maybe URLCrawlErrorscountsQueryCategory)
     , _uceqSiteURL          :: !Text
-    , _uceqKey              :: !(Maybe AuthKey)
     , _uceqLatestCountsOnly :: !Bool
-    , _uceqOAuthToken       :: !(Maybe OAuthToken)
-    , _uceqFields           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLCrawlErrorscountsQuery'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uceqQuotaUser'
---
--- * 'uceqPrettyPrint'
---
 -- * 'uceqPlatform'
---
--- * 'uceqUserIP'
 --
 -- * 'uceqCategory'
 --
 -- * 'uceqSiteURL'
 --
--- * 'uceqKey'
---
 -- * 'uceqLatestCountsOnly'
---
--- * 'uceqOAuthToken'
---
--- * 'uceqFields'
 urlCrawlErrorscountsQuery'
     :: Text -- ^ 'siteUrl'
     -> URLCrawlErrorscountsQuery'
 urlCrawlErrorscountsQuery' pUceqSiteURL_ =
     URLCrawlErrorscountsQuery'
-    { _uceqQuotaUser = Nothing
-    , _uceqPrettyPrint = True
-    , _uceqPlatform = Nothing
-    , _uceqUserIP = Nothing
+    { _uceqPlatform = Nothing
     , _uceqCategory = Nothing
     , _uceqSiteURL = pUceqSiteURL_
-    , _uceqKey = Nothing
     , _uceqLatestCountsOnly = True
-    , _uceqOAuthToken = Nothing
-    , _uceqFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-uceqQuotaUser :: Lens' URLCrawlErrorscountsQuery' (Maybe Text)
-uceqQuotaUser
-  = lens _uceqQuotaUser
-      (\ s a -> s{_uceqQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-uceqPrettyPrint :: Lens' URLCrawlErrorscountsQuery' Bool
-uceqPrettyPrint
-  = lens _uceqPrettyPrint
-      (\ s a -> s{_uceqPrettyPrint = a})
 
 -- | The user agent type (platform) that made the request. For example: web.
 -- If not specified, returns results for all platforms.
 uceqPlatform :: Lens' URLCrawlErrorscountsQuery' (Maybe URLCrawlErrorscountsQueryPlatform)
 uceqPlatform
   = lens _uceqPlatform (\ s a -> s{_uceqPlatform = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-uceqUserIP :: Lens' URLCrawlErrorscountsQuery' (Maybe Text)
-uceqUserIP
-  = lens _uceqUserIP (\ s a -> s{_uceqUserIP = a})
 
 -- | The crawl error category. For example: serverError. If not specified,
 -- returns results for all categories.
@@ -167,49 +111,22 @@ uceqSiteURL :: Lens' URLCrawlErrorscountsQuery' Text
 uceqSiteURL
   = lens _uceqSiteURL (\ s a -> s{_uceqSiteURL = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-uceqKey :: Lens' URLCrawlErrorscountsQuery' (Maybe AuthKey)
-uceqKey = lens _uceqKey (\ s a -> s{_uceqKey = a})
-
 -- | If true, returns only the latest crawl error counts.
 uceqLatestCountsOnly :: Lens' URLCrawlErrorscountsQuery' Bool
 uceqLatestCountsOnly
   = lens _uceqLatestCountsOnly
       (\ s a -> s{_uceqLatestCountsOnly = a})
 
--- | OAuth 2.0 token for the current user.
-uceqOAuthToken :: Lens' URLCrawlErrorscountsQuery' (Maybe OAuthToken)
-uceqOAuthToken
-  = lens _uceqOAuthToken
-      (\ s a -> s{_uceqOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-uceqFields :: Lens' URLCrawlErrorscountsQuery' (Maybe Text)
-uceqFields
-  = lens _uceqFields (\ s a -> s{_uceqFields = a})
-
-instance GoogleAuth URLCrawlErrorscountsQuery' where
-        _AuthKey = uceqKey . _Just
-        _AuthToken = uceqOAuthToken . _Just
-
 instance GoogleRequest URLCrawlErrorscountsQuery'
          where
         type Rs URLCrawlErrorscountsQuery' =
              URLCrawlErrorsCountsQueryResponse
-        request = requestWith webmasterToolsRequest
-        requestWith rq URLCrawlErrorscountsQuery'{..}
+        requestClient URLCrawlErrorscountsQuery'{..}
           = go _uceqSiteURL _uceqPlatform _uceqCategory
               (Just _uceqLatestCountsOnly)
-              _uceqQuotaUser
-              (Just _uceqPrettyPrint)
-              _uceqUserIP
-              _uceqFields
-              _uceqKey
-              _uceqOAuthToken
               (Just AltJSON)
+              webmasterToolsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy URLCrawlErrorscountsQueryResource)
-                      rq
+                      mempty

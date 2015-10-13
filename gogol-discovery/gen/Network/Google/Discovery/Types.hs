@@ -15,8 +15,8 @@
 --
 module Network.Google.Discovery.Types
     (
-    -- * Service Request
-      discoveryRequest
+    -- * Service Configuration
+      discoveryService
 
     -- * RestMethodResponse
     , RestMethodResponse
@@ -254,7 +254,8 @@ import           Network.Google.Discovery.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the APIs Discovery Service. This contains the host and root path used as a starting point for constructing service requests.
-discoveryRequest :: RequestBuilder
-discoveryRequest
-  = defaultRequest "https://www.googleapis.com/"
+discoveryService :: Service
+discoveryService
+  = defaultService (ServiceId "discovery:v1")
+      "www.googleapis.com"
       "discovery/v1/"

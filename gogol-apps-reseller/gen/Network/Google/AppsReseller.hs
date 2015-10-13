@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference>
 module Network.Google.AppsReseller
     (
+    -- * Service Configuration
+      appsResellerService
+
     -- * API Declaration
-      AppsResellerAPI
+    , AppsResellerAPI
 
     -- * Resources
 

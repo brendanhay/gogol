@@ -33,14 +33,8 @@ module Network.Google.Resource.MapsEngine.Tables.Permissions.BatchDelete
     , TablesPermissionsBatchDelete'
 
     -- * Request Lenses
-    , tpbdQuotaUser
-    , tpbdPrettyPrint
-    , tpbdUserIP
     , tpbdPayload
-    , tpbdKey
     , tpbdId
-    , tpbdOAuthToken
-    , tpbdFields
     ) where
 
 import           Network.Google.MapsEngine.Types
@@ -53,130 +47,52 @@ type TablesPermissionsBatchDeleteResource =
        Capture "id" Text :>
          "permissions" :>
            "batchDelete" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] PermissionsBatchDeleteRequest :>
-                             Post '[JSON] PermissionsBatchDeleteResponse
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] PermissionsBatchDeleteRequest :>
+                 Post '[JSON] PermissionsBatchDeleteResponse
 
 -- | Remove permission entries from an already existing asset.
 --
 -- /See:/ 'tablesPermissionsBatchDelete'' smart constructor.
 data TablesPermissionsBatchDelete' = TablesPermissionsBatchDelete'
-    { _tpbdQuotaUser   :: !(Maybe Text)
-    , _tpbdPrettyPrint :: !Bool
-    , _tpbdUserIP      :: !(Maybe Text)
-    , _tpbdPayload     :: !PermissionsBatchDeleteRequest
-    , _tpbdKey         :: !(Maybe AuthKey)
-    , _tpbdId          :: !Text
-    , _tpbdOAuthToken  :: !(Maybe OAuthToken)
-    , _tpbdFields      :: !(Maybe Text)
+    { _tpbdPayload :: !PermissionsBatchDeleteRequest
+    , _tpbdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesPermissionsBatchDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tpbdQuotaUser'
---
--- * 'tpbdPrettyPrint'
---
--- * 'tpbdUserIP'
---
 -- * 'tpbdPayload'
 --
--- * 'tpbdKey'
---
 -- * 'tpbdId'
---
--- * 'tpbdOAuthToken'
---
--- * 'tpbdFields'
 tablesPermissionsBatchDelete'
     :: PermissionsBatchDeleteRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> TablesPermissionsBatchDelete'
 tablesPermissionsBatchDelete' pTpbdPayload_ pTpbdId_ =
     TablesPermissionsBatchDelete'
-    { _tpbdQuotaUser = Nothing
-    , _tpbdPrettyPrint = True
-    , _tpbdUserIP = Nothing
-    , _tpbdPayload = pTpbdPayload_
-    , _tpbdKey = Nothing
+    { _tpbdPayload = pTpbdPayload_
     , _tpbdId = pTpbdId_
-    , _tpbdOAuthToken = Nothing
-    , _tpbdFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tpbdQuotaUser :: Lens' TablesPermissionsBatchDelete' (Maybe Text)
-tpbdQuotaUser
-  = lens _tpbdQuotaUser
-      (\ s a -> s{_tpbdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tpbdPrettyPrint :: Lens' TablesPermissionsBatchDelete' Bool
-tpbdPrettyPrint
-  = lens _tpbdPrettyPrint
-      (\ s a -> s{_tpbdPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tpbdUserIP :: Lens' TablesPermissionsBatchDelete' (Maybe Text)
-tpbdUserIP
-  = lens _tpbdUserIP (\ s a -> s{_tpbdUserIP = a})
 
 -- | Multipart request metadata.
 tpbdPayload :: Lens' TablesPermissionsBatchDelete' PermissionsBatchDeleteRequest
 tpbdPayload
   = lens _tpbdPayload (\ s a -> s{_tpbdPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tpbdKey :: Lens' TablesPermissionsBatchDelete' (Maybe AuthKey)
-tpbdKey = lens _tpbdKey (\ s a -> s{_tpbdKey = a})
-
 -- | The ID of the asset from which permissions will be removed.
 tpbdId :: Lens' TablesPermissionsBatchDelete' Text
 tpbdId = lens _tpbdId (\ s a -> s{_tpbdId = a})
-
--- | OAuth 2.0 token for the current user.
-tpbdOAuthToken :: Lens' TablesPermissionsBatchDelete' (Maybe OAuthToken)
-tpbdOAuthToken
-  = lens _tpbdOAuthToken
-      (\ s a -> s{_tpbdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-tpbdFields :: Lens' TablesPermissionsBatchDelete' (Maybe Text)
-tpbdFields
-  = lens _tpbdFields (\ s a -> s{_tpbdFields = a})
-
-instance GoogleAuth TablesPermissionsBatchDelete'
-         where
-        _AuthKey = tpbdKey . _Just
-        _AuthToken = tpbdOAuthToken . _Just
 
 instance GoogleRequest TablesPermissionsBatchDelete'
          where
         type Rs TablesPermissionsBatchDelete' =
              PermissionsBatchDeleteResponse
-        request = requestWith mapsEngineRequest
-        requestWith rq TablesPermissionsBatchDelete'{..}
-          = go _tpbdId _tpbdQuotaUser (Just _tpbdPrettyPrint)
-              _tpbdUserIP
-              _tpbdFields
-              _tpbdKey
-              _tpbdOAuthToken
-              (Just AltJSON)
-              _tpbdPayload
+        requestClient TablesPermissionsBatchDelete'{..}
+          = go _tpbdId (Just AltJSON) _tpbdPayload
+              mapsEngineService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy TablesPermissionsBatchDeleteResource)
-                      rq
+                      mempty

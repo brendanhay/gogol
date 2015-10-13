@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/freebase/ Freebase Search Reference>
 module Network.Google.FreebaseSearch
     (
+    -- * Service Configuration
+      freebaseSearchService
+
     -- * API Declaration
-      FreebaseSearchAPI
+    , FreebaseSearchAPI
 
     -- * Methods
 

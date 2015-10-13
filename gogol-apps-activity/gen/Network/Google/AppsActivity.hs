@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/google-apps/activity/ Google Apps Activity API Reference>
 module Network.Google.AppsActivity
     (
+    -- * Service Configuration
+      appsActivityService
+
     -- * API Declaration
-      AppsActivityAPI
+    , AppsActivityAPI
 
     -- * Resources
 

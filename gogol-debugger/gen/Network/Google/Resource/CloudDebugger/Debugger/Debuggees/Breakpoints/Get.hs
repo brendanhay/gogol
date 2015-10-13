@@ -34,18 +34,13 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Get
 
     -- * Request Lenses
     , ddbgXgafv
-    , ddbgQuotaUser
-    , ddbgPrettyPrint
     , ddbgUploadProtocol
     , ddbgPp
     , ddbgAccessToken
     , ddbgUploadType
     , ddbgBreakpointId
     , ddbgBearerToken
-    , ddbgKey
     , ddbgDebuggeeId
-    , ddbgOAuthToken
-    , ddbgFields
     , ddbgCallback
     ) where
 
@@ -68,31 +63,21 @@ type DebuggerDebuggeesBreakpointsGetResource =
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
                              QueryParam "callback" Text :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] GetBreakpointResponse
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] GetBreakpointResponse
 
 -- | Gets breakpoint information.
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsGet'' smart constructor.
 data DebuggerDebuggeesBreakpointsGet' = DebuggerDebuggeesBreakpointsGet'
     { _ddbgXgafv          :: !(Maybe Text)
-    , _ddbgQuotaUser      :: !(Maybe Text)
-    , _ddbgPrettyPrint    :: !Bool
     , _ddbgUploadProtocol :: !(Maybe Text)
     , _ddbgPp             :: !Bool
     , _ddbgAccessToken    :: !(Maybe Text)
     , _ddbgUploadType     :: !(Maybe Text)
     , _ddbgBreakpointId   :: !Text
     , _ddbgBearerToken    :: !(Maybe Text)
-    , _ddbgKey            :: !(Maybe AuthKey)
     , _ddbgDebuggeeId     :: !Text
-    , _ddbgOAuthToken     :: !(Maybe OAuthToken)
-    , _ddbgFields         :: !(Maybe Text)
     , _ddbgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -101,10 +86,6 @@ data DebuggerDebuggeesBreakpointsGet' = DebuggerDebuggeesBreakpointsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ddbgXgafv'
---
--- * 'ddbgQuotaUser'
---
--- * 'ddbgPrettyPrint'
 --
 -- * 'ddbgUploadProtocol'
 --
@@ -118,13 +99,7 @@ data DebuggerDebuggeesBreakpointsGet' = DebuggerDebuggeesBreakpointsGet'
 --
 -- * 'ddbgBearerToken'
 --
--- * 'ddbgKey'
---
 -- * 'ddbgDebuggeeId'
---
--- * 'ddbgOAuthToken'
---
--- * 'ddbgFields'
 --
 -- * 'ddbgCallback'
 debuggerDebuggeesBreakpointsGet'
@@ -134,18 +109,13 @@ debuggerDebuggeesBreakpointsGet'
 debuggerDebuggeesBreakpointsGet' pDdbgBreakpointId_ pDdbgDebuggeeId_ =
     DebuggerDebuggeesBreakpointsGet'
     { _ddbgXgafv = Nothing
-    , _ddbgQuotaUser = Nothing
-    , _ddbgPrettyPrint = True
     , _ddbgUploadProtocol = Nothing
     , _ddbgPp = True
     , _ddbgAccessToken = Nothing
     , _ddbgUploadType = Nothing
     , _ddbgBreakpointId = pDdbgBreakpointId_
     , _ddbgBearerToken = Nothing
-    , _ddbgKey = Nothing
     , _ddbgDebuggeeId = pDdbgDebuggeeId_
-    , _ddbgOAuthToken = Nothing
-    , _ddbgFields = Nothing
     , _ddbgCallback = Nothing
     }
 
@@ -153,20 +123,6 @@ debuggerDebuggeesBreakpointsGet' pDdbgBreakpointId_ pDdbgDebuggeeId_ =
 ddbgXgafv :: Lens' DebuggerDebuggeesBreakpointsGet' (Maybe Text)
 ddbgXgafv
   = lens _ddbgXgafv (\ s a -> s{_ddbgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ddbgQuotaUser :: Lens' DebuggerDebuggeesBreakpointsGet' (Maybe Text)
-ddbgQuotaUser
-  = lens _ddbgQuotaUser
-      (\ s a -> s{_ddbgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ddbgPrettyPrint :: Lens' DebuggerDebuggeesBreakpointsGet' Bool
-ddbgPrettyPrint
-  = lens _ddbgPrettyPrint
-      (\ s a -> s{_ddbgPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 ddbgUploadProtocol :: Lens' DebuggerDebuggeesBreakpointsGet' (Maybe Text)
@@ -202,45 +158,22 @@ ddbgBearerToken
   = lens _ddbgBearerToken
       (\ s a -> s{_ddbgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ddbgKey :: Lens' DebuggerDebuggeesBreakpointsGet' (Maybe AuthKey)
-ddbgKey = lens _ddbgKey (\ s a -> s{_ddbgKey = a})
-
 -- | The debuggee id to get the breakpoint from.
 ddbgDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsGet' Text
 ddbgDebuggeeId
   = lens _ddbgDebuggeeId
       (\ s a -> s{_ddbgDebuggeeId = a})
 
--- | OAuth 2.0 token for the current user.
-ddbgOAuthToken :: Lens' DebuggerDebuggeesBreakpointsGet' (Maybe OAuthToken)
-ddbgOAuthToken
-  = lens _ddbgOAuthToken
-      (\ s a -> s{_ddbgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ddbgFields :: Lens' DebuggerDebuggeesBreakpointsGet' (Maybe Text)
-ddbgFields
-  = lens _ddbgFields (\ s a -> s{_ddbgFields = a})
-
 -- | JSONP
 ddbgCallback :: Lens' DebuggerDebuggeesBreakpointsGet' (Maybe Text)
 ddbgCallback
   = lens _ddbgCallback (\ s a -> s{_ddbgCallback = a})
 
-instance GoogleAuth DebuggerDebuggeesBreakpointsGet'
-         where
-        _AuthKey = ddbgKey . _Just
-        _AuthToken = ddbgOAuthToken . _Just
-
 instance GoogleRequest
          DebuggerDebuggeesBreakpointsGet' where
         type Rs DebuggerDebuggeesBreakpointsGet' =
              GetBreakpointResponse
-        request = requestWith debuggerRequest
-        requestWith rq DebuggerDebuggeesBreakpointsGet'{..}
+        requestClient DebuggerDebuggeesBreakpointsGet'{..}
           = go _ddbgDebuggeeId _ddbgBreakpointId _ddbgXgafv
               _ddbgUploadProtocol
               (Just _ddbgPp)
@@ -248,14 +181,10 @@ instance GoogleRequest
               _ddbgUploadType
               _ddbgBearerToken
               _ddbgCallback
-              _ddbgQuotaUser
-              (Just _ddbgPrettyPrint)
-              _ddbgFields
-              _ddbgKey
-              _ddbgOAuthToken
               (Just AltJSON)
+              debuggerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy DebuggerDebuggeesBreakpointsGetResource)
-                      rq
+                      mempty

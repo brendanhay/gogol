@@ -33,15 +33,9 @@ module Network.Google.Resource.ResourceViews.ZoneViews.Delete
     , ZoneViewsDelete'
 
     -- * Request Lenses
-    , zvdQuotaUser
-    , zvdPrettyPrint
     , zvdResourceView
     , zvdProject
-    , zvdUserIP
     , zvdZone
-    , zvdKey
-    , zvdOAuthToken
-    , zvdFields
     ) where
 
 import           Network.Google.Prelude
@@ -55,50 +49,26 @@ type ZoneViewsDeleteResource =
          Capture "zone" Text :>
            "resourceViews" :>
              Capture "resourceView" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+               QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Delete a resource view.
 --
 -- /See:/ 'zoneViewsDelete'' smart constructor.
 data ZoneViewsDelete' = ZoneViewsDelete'
-    { _zvdQuotaUser    :: !(Maybe Text)
-    , _zvdPrettyPrint  :: !Bool
-    , _zvdResourceView :: !Text
+    { _zvdResourceView :: !Text
     , _zvdProject      :: !Text
-    , _zvdUserIP       :: !(Maybe Text)
     , _zvdZone         :: !Text
-    , _zvdKey          :: !(Maybe AuthKey)
-    , _zvdOAuthToken   :: !(Maybe OAuthToken)
-    , _zvdFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'zvdQuotaUser'
---
--- * 'zvdPrettyPrint'
---
 -- * 'zvdResourceView'
 --
 -- * 'zvdProject'
 --
--- * 'zvdUserIP'
---
 -- * 'zvdZone'
---
--- * 'zvdKey'
---
--- * 'zvdOAuthToken'
---
--- * 'zvdFields'
 zoneViewsDelete'
     :: Text -- ^ 'resourceView'
     -> Text -- ^ 'project'
@@ -106,29 +76,10 @@ zoneViewsDelete'
     -> ZoneViewsDelete'
 zoneViewsDelete' pZvdResourceView_ pZvdProject_ pZvdZone_ =
     ZoneViewsDelete'
-    { _zvdQuotaUser = Nothing
-    , _zvdPrettyPrint = True
-    , _zvdResourceView = pZvdResourceView_
+    { _zvdResourceView = pZvdResourceView_
     , _zvdProject = pZvdProject_
-    , _zvdUserIP = Nothing
     , _zvdZone = pZvdZone_
-    , _zvdKey = Nothing
-    , _zvdOAuthToken = Nothing
-    , _zvdFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-zvdQuotaUser :: Lens' ZoneViewsDelete' (Maybe Text)
-zvdQuotaUser
-  = lens _zvdQuotaUser (\ s a -> s{_zvdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-zvdPrettyPrint :: Lens' ZoneViewsDelete' Bool
-zvdPrettyPrint
-  = lens _zvdPrettyPrint
-      (\ s a -> s{_zvdPrettyPrint = a})
 
 -- | The name of the resource view.
 zvdResourceView :: Lens' ZoneViewsDelete' Text
@@ -141,50 +92,17 @@ zvdProject :: Lens' ZoneViewsDelete' Text
 zvdProject
   = lens _zvdProject (\ s a -> s{_zvdProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-zvdUserIP :: Lens' ZoneViewsDelete' (Maybe Text)
-zvdUserIP
-  = lens _zvdUserIP (\ s a -> s{_zvdUserIP = a})
-
 -- | The zone name of the resource view.
 zvdZone :: Lens' ZoneViewsDelete' Text
 zvdZone = lens _zvdZone (\ s a -> s{_zvdZone = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-zvdKey :: Lens' ZoneViewsDelete' (Maybe AuthKey)
-zvdKey = lens _zvdKey (\ s a -> s{_zvdKey = a})
-
--- | OAuth 2.0 token for the current user.
-zvdOAuthToken :: Lens' ZoneViewsDelete' (Maybe OAuthToken)
-zvdOAuthToken
-  = lens _zvdOAuthToken
-      (\ s a -> s{_zvdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-zvdFields :: Lens' ZoneViewsDelete' (Maybe Text)
-zvdFields
-  = lens _zvdFields (\ s a -> s{_zvdFields = a})
-
-instance GoogleAuth ZoneViewsDelete' where
-        _AuthKey = zvdKey . _Just
-        _AuthToken = zvdOAuthToken . _Just
-
 instance GoogleRequest ZoneViewsDelete' where
         type Rs ZoneViewsDelete' = Operation
-        request = requestWith resourceViewsRequest
-        requestWith rq ZoneViewsDelete'{..}
+        requestClient ZoneViewsDelete'{..}
           = go _zvdProject _zvdZone _zvdResourceView
-              _zvdQuotaUser
-              (Just _zvdPrettyPrint)
-              _zvdUserIP
-              _zvdFields
-              _zvdKey
-              _zvdOAuthToken
               (Just AltJSON)
+              resourceViewsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ZoneViewsDeleteResource)
-                      rq
+                      mempty

@@ -15,8 +15,16 @@
 --
 module Network.Google.YouTube.Types
     (
-    -- * Service Request
-      youTubeRequest
+    -- * Service Configuration
+      youTubeService
+
+    -- * OAuth Scopes
+    , youtubeUploadScope
+    , youtubeScope
+    , youtubepartnerScope
+    , youtubeForceSslScope
+    , youtubeReadonlyScope
+    , youtubepartnerChannelAuditScope
 
     -- * ContentRatingCceRating
     , ContentRatingCceRating (..)
@@ -1851,7 +1859,33 @@ import           Network.Google.YouTube.Types.Product
 import           Network.Google.YouTube.Types.Sum
 
 -- | Default request referring to version 'v3' of the YouTube Data API. This contains the host and root path used as a starting point for constructing service requests.
-youTubeRequest :: RequestBuilder
-youTubeRequest
-  = defaultRequest "https://www.googleapis.com/"
+youTubeService :: Service
+youTubeService
+  = defaultService (ServiceId "youtube:v3")
+      "www.googleapis.com"
       "youtube/v3/"
+
+-- | Manage your YouTube videos
+youtubeUploadScope :: OAuthScope
+youtubeUploadScope = OAuthScope "https://www.googleapis.com/auth/youtube.upload";
+
+-- | Manage your YouTube account
+youtubeScope :: OAuthScope
+youtubeScope = OAuthScope "https://www.googleapis.com/auth/youtube";
+
+-- | View and manage your assets and associated content on YouTube
+youtubepartnerScope :: OAuthScope
+youtubepartnerScope = OAuthScope "https://www.googleapis.com/auth/youtubepartner";
+
+-- | Manage your YouTube account
+youtubeForceSslScope :: OAuthScope
+youtubeForceSslScope = OAuthScope "https://www.googleapis.com/auth/youtube.force-ssl";
+
+-- | View your YouTube account
+youtubeReadonlyScope :: OAuthScope
+youtubeReadonlyScope = OAuthScope "https://www.googleapis.com/auth/youtube.readonly";
+
+-- | View private information of your YouTube channel relevant during the
+-- audit process with a YouTube partner
+youtubepartnerChannelAuditScope :: OAuthScope
+youtubepartnerChannelAuditScope = OAuthScope "https://www.googleapis.com/auth/youtubepartner-channel-audit";

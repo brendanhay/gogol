@@ -33,15 +33,9 @@ module Network.Google.Resource.Calendar.CalendarList.Update
     , CalendarListUpdate'
 
     -- * Request Lenses
-    , cluQuotaUser
     , cluCalendarId
-    , cluPrettyPrint
-    , cluUserIP
     , cluPayload
     , cluColorRgbFormat
-    , cluKey
-    , cluOAuthToken
-    , cluFields
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -55,75 +49,38 @@ type CalendarListUpdateResource =
          "calendarList" :>
            Capture "calendarId" Text :>
              QueryParam "colorRgbFormat" Bool :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] CalendarListEntry :>
-                               Put '[JSON] CalendarListEntry
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] CalendarListEntry :>
+                   Put '[JSON] CalendarListEntry
 
 -- | Updates an entry on the user\'s calendar list.
 --
 -- /See:/ 'calendarListUpdate'' smart constructor.
 data CalendarListUpdate' = CalendarListUpdate'
-    { _cluQuotaUser      :: !(Maybe Text)
-    , _cluCalendarId     :: !Text
-    , _cluPrettyPrint    :: !Bool
-    , _cluUserIP         :: !(Maybe Text)
+    { _cluCalendarId     :: !Text
     , _cluPayload        :: !CalendarListEntry
     , _cluColorRgbFormat :: !(Maybe Bool)
-    , _cluKey            :: !(Maybe AuthKey)
-    , _cluOAuthToken     :: !(Maybe OAuthToken)
-    , _cluFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cluQuotaUser'
---
 -- * 'cluCalendarId'
---
--- * 'cluPrettyPrint'
---
--- * 'cluUserIP'
 --
 -- * 'cluPayload'
 --
 -- * 'cluColorRgbFormat'
---
--- * 'cluKey'
---
--- * 'cluOAuthToken'
---
--- * 'cluFields'
 calendarListUpdate'
     :: Text -- ^ 'calendarId'
     -> CalendarListEntry -- ^ 'payload'
     -> CalendarListUpdate'
 calendarListUpdate' pCluCalendarId_ pCluPayload_ =
     CalendarListUpdate'
-    { _cluQuotaUser = Nothing
-    , _cluCalendarId = pCluCalendarId_
-    , _cluPrettyPrint = True
-    , _cluUserIP = Nothing
+    { _cluCalendarId = pCluCalendarId_
     , _cluPayload = pCluPayload_
     , _cluColorRgbFormat = Nothing
-    , _cluKey = Nothing
-    , _cluOAuthToken = Nothing
-    , _cluFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-cluQuotaUser :: Lens' CalendarListUpdate' (Maybe Text)
-cluQuotaUser
-  = lens _cluQuotaUser (\ s a -> s{_cluQuotaUser = a})
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
@@ -132,18 +89,6 @@ cluCalendarId :: Lens' CalendarListUpdate' Text
 cluCalendarId
   = lens _cluCalendarId
       (\ s a -> s{_cluCalendarId = a})
-
--- | Returns response with indentations and line breaks.
-cluPrettyPrint :: Lens' CalendarListUpdate' Bool
-cluPrettyPrint
-  = lens _cluPrettyPrint
-      (\ s a -> s{_cluPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-cluUserIP :: Lens' CalendarListUpdate' (Maybe Text)
-cluUserIP
-  = lens _cluUserIP (\ s a -> s{_cluUserIP = a})
 
 -- | Multipart request metadata.
 cluPayload :: Lens' CalendarListUpdate' CalendarListEntry
@@ -159,40 +104,13 @@ cluColorRgbFormat
   = lens _cluColorRgbFormat
       (\ s a -> s{_cluColorRgbFormat = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cluKey :: Lens' CalendarListUpdate' (Maybe AuthKey)
-cluKey = lens _cluKey (\ s a -> s{_cluKey = a})
-
--- | OAuth 2.0 token for the current user.
-cluOAuthToken :: Lens' CalendarListUpdate' (Maybe OAuthToken)
-cluOAuthToken
-  = lens _cluOAuthToken
-      (\ s a -> s{_cluOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cluFields :: Lens' CalendarListUpdate' (Maybe Text)
-cluFields
-  = lens _cluFields (\ s a -> s{_cluFields = a})
-
-instance GoogleAuth CalendarListUpdate' where
-        _AuthKey = cluKey . _Just
-        _AuthToken = cluOAuthToken . _Just
-
 instance GoogleRequest CalendarListUpdate' where
         type Rs CalendarListUpdate' = CalendarListEntry
-        request = requestWith appsCalendarRequest
-        requestWith rq CalendarListUpdate'{..}
-          = go _cluCalendarId _cluColorRgbFormat _cluQuotaUser
-              (Just _cluPrettyPrint)
-              _cluUserIP
-              _cluFields
-              _cluKey
-              _cluOAuthToken
-              (Just AltJSON)
+        requestClient CalendarListUpdate'{..}
+          = go _cluCalendarId _cluColorRgbFormat (Just AltJSON)
               _cluPayload
+              appsCalendarService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CalendarListUpdateResource)
-                      rq
+                      mempty

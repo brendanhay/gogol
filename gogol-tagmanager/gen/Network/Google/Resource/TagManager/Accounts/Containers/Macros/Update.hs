@@ -33,17 +33,11 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Macros.Update
     , AccountsContainersMacrosUpdate'
 
     -- * Request Lenses
-    , acmuQuotaUser
-    , acmuPrettyPrint
     , acmuContainerId
-    , acmuUserIP
     , acmuFingerprint
     , acmuPayload
     , acmuAccountId
-    , acmuKey
     , acmuMacroId
-    , acmuOAuthToken
-    , acmuFields
     ) where
 
 import           Network.Google.Prelude
@@ -59,43 +53,25 @@ type AccountsContainersMacrosUpdateResource =
              "macros" :>
                Capture "macroId" Text :>
                  QueryParam "fingerprint" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Macro :> Put '[JSON] Macro
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Macro :> Put '[JSON] Macro
 
 -- | Updates a GTM Macro.
 --
 -- /See:/ 'accountsContainersMacrosUpdate'' smart constructor.
 data AccountsContainersMacrosUpdate' = AccountsContainersMacrosUpdate'
-    { _acmuQuotaUser   :: !(Maybe Text)
-    , _acmuPrettyPrint :: !Bool
-    , _acmuContainerId :: !Text
-    , _acmuUserIP      :: !(Maybe Text)
+    { _acmuContainerId :: !Text
     , _acmuFingerprint :: !(Maybe Text)
     , _acmuPayload     :: !Macro
     , _acmuAccountId   :: !Text
-    , _acmuKey         :: !(Maybe AuthKey)
     , _acmuMacroId     :: !Text
-    , _acmuOAuthToken  :: !(Maybe OAuthToken)
-    , _acmuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersMacrosUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acmuQuotaUser'
---
--- * 'acmuPrettyPrint'
---
 -- * 'acmuContainerId'
---
--- * 'acmuUserIP'
 --
 -- * 'acmuFingerprint'
 --
@@ -103,13 +79,7 @@ data AccountsContainersMacrosUpdate' = AccountsContainersMacrosUpdate'
 --
 -- * 'acmuAccountId'
 --
--- * 'acmuKey'
---
 -- * 'acmuMacroId'
---
--- * 'acmuOAuthToken'
---
--- * 'acmuFields'
 accountsContainersMacrosUpdate'
     :: Text -- ^ 'containerId'
     -> Macro -- ^ 'payload'
@@ -118,44 +88,18 @@ accountsContainersMacrosUpdate'
     -> AccountsContainersMacrosUpdate'
 accountsContainersMacrosUpdate' pAcmuContainerId_ pAcmuPayload_ pAcmuAccountId_ pAcmuMacroId_ =
     AccountsContainersMacrosUpdate'
-    { _acmuQuotaUser = Nothing
-    , _acmuPrettyPrint = True
-    , _acmuContainerId = pAcmuContainerId_
-    , _acmuUserIP = Nothing
+    { _acmuContainerId = pAcmuContainerId_
     , _acmuFingerprint = Nothing
     , _acmuPayload = pAcmuPayload_
     , _acmuAccountId = pAcmuAccountId_
-    , _acmuKey = Nothing
     , _acmuMacroId = pAcmuMacroId_
-    , _acmuOAuthToken = Nothing
-    , _acmuFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-acmuQuotaUser :: Lens' AccountsContainersMacrosUpdate' (Maybe Text)
-acmuQuotaUser
-  = lens _acmuQuotaUser
-      (\ s a -> s{_acmuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-acmuPrettyPrint :: Lens' AccountsContainersMacrosUpdate' Bool
-acmuPrettyPrint
-  = lens _acmuPrettyPrint
-      (\ s a -> s{_acmuPrettyPrint = a})
 
 -- | The GTM Container ID.
 acmuContainerId :: Lens' AccountsContainersMacrosUpdate' Text
 acmuContainerId
   = lens _acmuContainerId
       (\ s a -> s{_acmuContainerId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-acmuUserIP :: Lens' AccountsContainersMacrosUpdate' (Maybe Text)
-acmuUserIP
-  = lens _acmuUserIP (\ s a -> s{_acmuUserIP = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the macro
 -- in storage.
@@ -175,50 +119,22 @@ acmuAccountId
   = lens _acmuAccountId
       (\ s a -> s{_acmuAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-acmuKey :: Lens' AccountsContainersMacrosUpdate' (Maybe AuthKey)
-acmuKey = lens _acmuKey (\ s a -> s{_acmuKey = a})
-
 -- | The GTM Macro ID.
 acmuMacroId :: Lens' AccountsContainersMacrosUpdate' Text
 acmuMacroId
   = lens _acmuMacroId (\ s a -> s{_acmuMacroId = a})
 
--- | OAuth 2.0 token for the current user.
-acmuOAuthToken :: Lens' AccountsContainersMacrosUpdate' (Maybe OAuthToken)
-acmuOAuthToken
-  = lens _acmuOAuthToken
-      (\ s a -> s{_acmuOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-acmuFields :: Lens' AccountsContainersMacrosUpdate' (Maybe Text)
-acmuFields
-  = lens _acmuFields (\ s a -> s{_acmuFields = a})
-
-instance GoogleAuth AccountsContainersMacrosUpdate'
-         where
-        _AuthKey = acmuKey . _Just
-        _AuthToken = acmuOAuthToken . _Just
-
 instance GoogleRequest
          AccountsContainersMacrosUpdate' where
         type Rs AccountsContainersMacrosUpdate' = Macro
-        request = requestWith tagManagerRequest
-        requestWith rq AccountsContainersMacrosUpdate'{..}
+        requestClient AccountsContainersMacrosUpdate'{..}
           = go _acmuAccountId _acmuContainerId _acmuMacroId
               _acmuFingerprint
-              _acmuQuotaUser
-              (Just _acmuPrettyPrint)
-              _acmuUserIP
-              _acmuFields
-              _acmuKey
-              _acmuOAuthToken
               (Just AltJSON)
               _acmuPayload
+              tagManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy AccountsContainersMacrosUpdateResource)
-                      rq
+                      mempty

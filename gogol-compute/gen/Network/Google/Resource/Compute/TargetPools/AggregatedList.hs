@@ -33,16 +33,10 @@ module Network.Google.Resource.Compute.TargetPools.AggregatedList
     , TargetPoolsAggregatedList'
 
     -- * Request Lenses
-    , tpalQuotaUser
-    , tpalPrettyPrint
     , tpalProject
-    , tpalUserIP
-    , tpalKey
     , tpalFilter
     , tpalPageToken
-    , tpalOAuthToken
     , tpalMaxResults
-    , tpalFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -57,101 +51,45 @@ type TargetPoolsAggregatedListResource =
            QueryParam "filter" Text :>
              QueryParam "pageToken" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] TargetPoolAggregatedList
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] TargetPoolAggregatedList
 
 -- | Retrieves the list of target pools grouped by scope.
 --
 -- /See:/ 'targetPoolsAggregatedList'' smart constructor.
 data TargetPoolsAggregatedList' = TargetPoolsAggregatedList'
-    { _tpalQuotaUser   :: !(Maybe Text)
-    , _tpalPrettyPrint :: !Bool
-    , _tpalProject     :: !Text
-    , _tpalUserIP      :: !(Maybe Text)
-    , _tpalKey         :: !(Maybe AuthKey)
-    , _tpalFilter      :: !(Maybe Text)
-    , _tpalPageToken   :: !(Maybe Text)
-    , _tpalOAuthToken  :: !(Maybe OAuthToken)
-    , _tpalMaxResults  :: !Word32
-    , _tpalFields      :: !(Maybe Text)
+    { _tpalProject    :: !Text
+    , _tpalFilter     :: !(Maybe Text)
+    , _tpalPageToken  :: !(Maybe Text)
+    , _tpalMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsAggregatedList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tpalQuotaUser'
---
--- * 'tpalPrettyPrint'
---
 -- * 'tpalProject'
---
--- * 'tpalUserIP'
---
--- * 'tpalKey'
 --
 -- * 'tpalFilter'
 --
 -- * 'tpalPageToken'
 --
--- * 'tpalOAuthToken'
---
 -- * 'tpalMaxResults'
---
--- * 'tpalFields'
 targetPoolsAggregatedList'
     :: Text -- ^ 'project'
     -> TargetPoolsAggregatedList'
 targetPoolsAggregatedList' pTpalProject_ =
     TargetPoolsAggregatedList'
-    { _tpalQuotaUser = Nothing
-    , _tpalPrettyPrint = True
-    , _tpalProject = pTpalProject_
-    , _tpalUserIP = Nothing
-    , _tpalKey = Nothing
+    { _tpalProject = pTpalProject_
     , _tpalFilter = Nothing
     , _tpalPageToken = Nothing
-    , _tpalOAuthToken = Nothing
     , _tpalMaxResults = 500
-    , _tpalFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tpalQuotaUser :: Lens' TargetPoolsAggregatedList' (Maybe Text)
-tpalQuotaUser
-  = lens _tpalQuotaUser
-      (\ s a -> s{_tpalQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tpalPrettyPrint :: Lens' TargetPoolsAggregatedList' Bool
-tpalPrettyPrint
-  = lens _tpalPrettyPrint
-      (\ s a -> s{_tpalPrettyPrint = a})
 
 -- | Name of the project scoping this request.
 tpalProject :: Lens' TargetPoolsAggregatedList' Text
 tpalProject
   = lens _tpalProject (\ s a -> s{_tpalProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tpalUserIP :: Lens' TargetPoolsAggregatedList' (Maybe Text)
-tpalUserIP
-  = lens _tpalUserIP (\ s a -> s{_tpalUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tpalKey :: Lens' TargetPoolsAggregatedList' (Maybe AuthKey)
-tpalKey = lens _tpalKey (\ s a -> s{_tpalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -176,43 +114,22 @@ tpalPageToken
   = lens _tpalPageToken
       (\ s a -> s{_tpalPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-tpalOAuthToken :: Lens' TargetPoolsAggregatedList' (Maybe OAuthToken)
-tpalOAuthToken
-  = lens _tpalOAuthToken
-      (\ s a -> s{_tpalOAuthToken = a})
-
 -- | Maximum count of results to be returned.
 tpalMaxResults :: Lens' TargetPoolsAggregatedList' Word32
 tpalMaxResults
   = lens _tpalMaxResults
       (\ s a -> s{_tpalMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-tpalFields :: Lens' TargetPoolsAggregatedList' (Maybe Text)
-tpalFields
-  = lens _tpalFields (\ s a -> s{_tpalFields = a})
-
-instance GoogleAuth TargetPoolsAggregatedList' where
-        _AuthKey = tpalKey . _Just
-        _AuthToken = tpalOAuthToken . _Just
-
 instance GoogleRequest TargetPoolsAggregatedList'
          where
         type Rs TargetPoolsAggregatedList' =
              TargetPoolAggregatedList
-        request = requestWith computeRequest
-        requestWith rq TargetPoolsAggregatedList'{..}
+        requestClient TargetPoolsAggregatedList'{..}
           = go _tpalProject _tpalFilter _tpalPageToken
               (Just _tpalMaxResults)
-              _tpalQuotaUser
-              (Just _tpalPrettyPrint)
-              _tpalUserIP
-              _tpalFields
-              _tpalKey
-              _tpalOAuthToken
               (Just AltJSON)
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy TargetPoolsAggregatedListResource)
-                      rq
+                      mempty

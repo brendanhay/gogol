@@ -36,17 +36,12 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.Get
 
     -- * Request Lenses
     , bagXgafv
-    , bagQuotaUser
-    , bagPrettyPrint
     , bagUploadProtocol
     , bagPp
     , bagAccessToken
     , bagUploadType
     , bagBearerToken
-    , bagKey
     , bagName
-    , bagOAuthToken
-    , bagFields
     , bagCallback
     ) where
 
@@ -65,13 +60,8 @@ type BillingAccountsGetResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] BillingAccount
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] BillingAccount
 
 -- | Gets information about a billing account. The current authenticated user
 -- must be an [owner of the billing
@@ -80,17 +70,12 @@ type BillingAccountsGetResource =
 -- /See:/ 'billingAccountsGet'' smart constructor.
 data BillingAccountsGet' = BillingAccountsGet'
     { _bagXgafv          :: !(Maybe Text)
-    , _bagQuotaUser      :: !(Maybe Text)
-    , _bagPrettyPrint    :: !Bool
     , _bagUploadProtocol :: !(Maybe Text)
     , _bagPp             :: !Bool
     , _bagAccessToken    :: !(Maybe Text)
     , _bagUploadType     :: !(Maybe Text)
     , _bagBearerToken    :: !(Maybe Text)
-    , _bagKey            :: !(Maybe AuthKey)
     , _bagName           :: !Text
-    , _bagOAuthToken     :: !(Maybe OAuthToken)
-    , _bagFields         :: !(Maybe Text)
     , _bagCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -99,10 +84,6 @@ data BillingAccountsGet' = BillingAccountsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'bagXgafv'
---
--- * 'bagQuotaUser'
---
--- * 'bagPrettyPrint'
 --
 -- * 'bagUploadProtocol'
 --
@@ -114,13 +95,7 @@ data BillingAccountsGet' = BillingAccountsGet'
 --
 -- * 'bagBearerToken'
 --
--- * 'bagKey'
---
 -- * 'bagName'
---
--- * 'bagOAuthToken'
---
--- * 'bagFields'
 --
 -- * 'bagCallback'
 billingAccountsGet'
@@ -129,36 +104,18 @@ billingAccountsGet'
 billingAccountsGet' pBagName_ =
     BillingAccountsGet'
     { _bagXgafv = Nothing
-    , _bagQuotaUser = Nothing
-    , _bagPrettyPrint = True
     , _bagUploadProtocol = Nothing
     , _bagPp = True
     , _bagAccessToken = Nothing
     , _bagUploadType = Nothing
     , _bagBearerToken = Nothing
-    , _bagKey = Nothing
     , _bagName = pBagName_
-    , _bagOAuthToken = Nothing
-    , _bagFields = Nothing
     , _bagCallback = Nothing
     }
 
 -- | V1 error format.
 bagXgafv :: Lens' BillingAccountsGet' (Maybe Text)
 bagXgafv = lens _bagXgafv (\ s a -> s{_bagXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-bagQuotaUser :: Lens' BillingAccountsGet' (Maybe Text)
-bagQuotaUser
-  = lens _bagQuotaUser (\ s a -> s{_bagQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-bagPrettyPrint :: Lens' BillingAccountsGet' Bool
-bagPrettyPrint
-  = lens _bagPrettyPrint
-      (\ s a -> s{_bagPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 bagUploadProtocol :: Lens' BillingAccountsGet' (Maybe Text)
@@ -188,54 +145,28 @@ bagBearerToken
   = lens _bagBearerToken
       (\ s a -> s{_bagBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-bagKey :: Lens' BillingAccountsGet' (Maybe AuthKey)
-bagKey = lens _bagKey (\ s a -> s{_bagKey = a})
-
 -- | The resource name of the billing account to retrieve. For example,
 -- \`billingAccounts\/012345-567890-ABCDEF\`.
 bagName :: Lens' BillingAccountsGet' Text
 bagName = lens _bagName (\ s a -> s{_bagName = a})
-
--- | OAuth 2.0 token for the current user.
-bagOAuthToken :: Lens' BillingAccountsGet' (Maybe OAuthToken)
-bagOAuthToken
-  = lens _bagOAuthToken
-      (\ s a -> s{_bagOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-bagFields :: Lens' BillingAccountsGet' (Maybe Text)
-bagFields
-  = lens _bagFields (\ s a -> s{_bagFields = a})
 
 -- | JSONP
 bagCallback :: Lens' BillingAccountsGet' (Maybe Text)
 bagCallback
   = lens _bagCallback (\ s a -> s{_bagCallback = a})
 
-instance GoogleAuth BillingAccountsGet' where
-        _AuthKey = bagKey . _Just
-        _AuthToken = bagOAuthToken . _Just
-
 instance GoogleRequest BillingAccountsGet' where
         type Rs BillingAccountsGet' = BillingAccount
-        request = requestWith billingRequest
-        requestWith rq BillingAccountsGet'{..}
+        requestClient BillingAccountsGet'{..}
           = go _bagName _bagXgafv _bagUploadProtocol
               (Just _bagPp)
               _bagAccessToken
               _bagUploadType
               _bagBearerToken
               _bagCallback
-              _bagQuotaUser
-              (Just _bagPrettyPrint)
-              _bagFields
-              _bagKey
-              _bagOAuthToken
               (Just AltJSON)
+              billingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy BillingAccountsGetResource)
-                      rq
+                      mempty

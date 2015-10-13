@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference>
 module Network.Google.TagManager
     (
+    -- * Service Configuration
+      tagManagerService
+
     -- * API Declaration
-      TagManagerAPI
+    , TagManagerAPI
 
     -- * Resources
 

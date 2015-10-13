@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference>
 module Network.Google.Classroom
     (
+    -- * Service Configuration
+      classroomService
+
     -- * API Declaration
-      ClassroomAPI
+    , ClassroomAPI
 
     -- * Resources
 

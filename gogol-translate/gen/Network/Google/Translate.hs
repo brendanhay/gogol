@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference>
 module Network.Google.Translate
     (
+    -- * Service Configuration
+      translateService
+
     -- * API Declaration
-      TranslateAPI
+    , TranslateAPI
 
     -- * Resources
 

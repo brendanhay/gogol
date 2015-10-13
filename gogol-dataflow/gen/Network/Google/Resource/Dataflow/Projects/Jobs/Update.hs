@@ -34,8 +34,6 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Update
 
     -- * Request Lenses
     , pjuXgafv
-    , pjuQuotaUser
-    , pjuPrettyPrint
     , pjuJobId
     , pjuUploadProtocol
     , pjuPp
@@ -43,10 +41,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Update
     , pjuUploadType
     , pjuPayload
     , pjuBearerToken
-    , pjuKey
     , pjuProjectId
-    , pjuOAuthToken
-    , pjuFields
     , pjuCallback
     ) where
 
@@ -68,21 +63,14 @@ type ProjectsJobsUpdateResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         ReqBody '[JSON] Job :> Put '[JSON] Job
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Job :> Put '[JSON] Job
 
 -- | Updates the state of an existing dataflow job.
 --
 -- /See:/ 'projectsJobsUpdate'' smart constructor.
 data ProjectsJobsUpdate' = ProjectsJobsUpdate'
     { _pjuXgafv          :: !(Maybe Text)
-    , _pjuQuotaUser      :: !(Maybe Text)
-    , _pjuPrettyPrint    :: !Bool
     , _pjuJobId          :: !Text
     , _pjuUploadProtocol :: !(Maybe Text)
     , _pjuPp             :: !Bool
@@ -90,10 +78,7 @@ data ProjectsJobsUpdate' = ProjectsJobsUpdate'
     , _pjuUploadType     :: !(Maybe Text)
     , _pjuPayload        :: !Job
     , _pjuBearerToken    :: !(Maybe Text)
-    , _pjuKey            :: !(Maybe AuthKey)
     , _pjuProjectId      :: !Text
-    , _pjuOAuthToken     :: !(Maybe OAuthToken)
-    , _pjuFields         :: !(Maybe Text)
     , _pjuCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +87,6 @@ data ProjectsJobsUpdate' = ProjectsJobsUpdate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pjuXgafv'
---
--- * 'pjuQuotaUser'
---
--- * 'pjuPrettyPrint'
 --
 -- * 'pjuJobId'
 --
@@ -121,13 +102,7 @@ data ProjectsJobsUpdate' = ProjectsJobsUpdate'
 --
 -- * 'pjuBearerToken'
 --
--- * 'pjuKey'
---
 -- * 'pjuProjectId'
---
--- * 'pjuOAuthToken'
---
--- * 'pjuFields'
 --
 -- * 'pjuCallback'
 projectsJobsUpdate'
@@ -138,8 +113,6 @@ projectsJobsUpdate'
 projectsJobsUpdate' pPjuJobId_ pPjuPayload_ pPjuProjectId_ =
     ProjectsJobsUpdate'
     { _pjuXgafv = Nothing
-    , _pjuQuotaUser = Nothing
-    , _pjuPrettyPrint = True
     , _pjuJobId = pPjuJobId_
     , _pjuUploadProtocol = Nothing
     , _pjuPp = True
@@ -147,29 +120,13 @@ projectsJobsUpdate' pPjuJobId_ pPjuPayload_ pPjuProjectId_ =
     , _pjuUploadType = Nothing
     , _pjuPayload = pPjuPayload_
     , _pjuBearerToken = Nothing
-    , _pjuKey = Nothing
     , _pjuProjectId = pPjuProjectId_
-    , _pjuOAuthToken = Nothing
-    , _pjuFields = Nothing
     , _pjuCallback = Nothing
     }
 
 -- | V1 error format.
 pjuXgafv :: Lens' ProjectsJobsUpdate' (Maybe Text)
 pjuXgafv = lens _pjuXgafv (\ s a -> s{_pjuXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pjuQuotaUser :: Lens' ProjectsJobsUpdate' (Maybe Text)
-pjuQuotaUser
-  = lens _pjuQuotaUser (\ s a -> s{_pjuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pjuPrettyPrint :: Lens' ProjectsJobsUpdate' Bool
-pjuPrettyPrint
-  = lens _pjuPrettyPrint
-      (\ s a -> s{_pjuPrettyPrint = a})
 
 -- | Identifies a single job.
 pjuJobId :: Lens' ProjectsJobsUpdate' Text
@@ -208,41 +165,19 @@ pjuBearerToken
   = lens _pjuBearerToken
       (\ s a -> s{_pjuBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pjuKey :: Lens' ProjectsJobsUpdate' (Maybe AuthKey)
-pjuKey = lens _pjuKey (\ s a -> s{_pjuKey = a})
-
 -- | The project which owns the job.
 pjuProjectId :: Lens' ProjectsJobsUpdate' Text
 pjuProjectId
   = lens _pjuProjectId (\ s a -> s{_pjuProjectId = a})
-
--- | OAuth 2.0 token for the current user.
-pjuOAuthToken :: Lens' ProjectsJobsUpdate' (Maybe OAuthToken)
-pjuOAuthToken
-  = lens _pjuOAuthToken
-      (\ s a -> s{_pjuOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pjuFields :: Lens' ProjectsJobsUpdate' (Maybe Text)
-pjuFields
-  = lens _pjuFields (\ s a -> s{_pjuFields = a})
 
 -- | JSONP
 pjuCallback :: Lens' ProjectsJobsUpdate' (Maybe Text)
 pjuCallback
   = lens _pjuCallback (\ s a -> s{_pjuCallback = a})
 
-instance GoogleAuth ProjectsJobsUpdate' where
-        _AuthKey = pjuKey . _Just
-        _AuthToken = pjuOAuthToken . _Just
-
 instance GoogleRequest ProjectsJobsUpdate' where
         type Rs ProjectsJobsUpdate' = Job
-        request = requestWith dataflowRequest
-        requestWith rq ProjectsJobsUpdate'{..}
+        requestClient ProjectsJobsUpdate'{..}
           = go _pjuProjectId _pjuJobId _pjuXgafv
               _pjuUploadProtocol
               (Just _pjuPp)
@@ -250,14 +185,10 @@ instance GoogleRequest ProjectsJobsUpdate' where
               _pjuUploadType
               _pjuBearerToken
               _pjuCallback
-              _pjuQuotaUser
-              (Just _pjuPrettyPrint)
-              _pjuFields
-              _pjuKey
-              _pjuOAuthToken
               (Just AltJSON)
               _pjuPayload
+              dataflowService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsJobsUpdateResource)
-                      rq
+                      mempty

@@ -36,15 +36,9 @@ module Network.Google.Resource.MapsEngine.Tables.Files.Insert
     , TablesFilesInsert'
 
     -- * Request Lenses
-    , tfiQuotaUser
-    , tfiPrettyPrint
-    , tfiUserIP
     , tfiMedia
-    , tfiKey
     , tfiId
-    , tfiOAuthToken
     , tfiFilename
-    , tfiFields
     ) where
 
 import           Network.Google.MapsEngine.Types
@@ -57,14 +51,8 @@ type TablesFilesInsertResource =
        Capture "id" Text :>
          "files" :>
            QueryParam "filename" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Stream :> Post '[JSON] ()
+             QueryParam "alt" AltJSON :>
+               ReqBody '[OctetStream] RequestBody :> Post '[JSON] ()
 
 -- | Upload a file to a placeholder table asset. See Table Upload in the
 -- Developer\'s Guide for more information. Supported file types are listed
@@ -73,38 +61,20 @@ type TablesFilesInsertResource =
 --
 -- /See:/ 'tablesFilesInsert'' smart constructor.
 data TablesFilesInsert' = TablesFilesInsert'
-    { _tfiQuotaUser   :: !(Maybe Text)
-    , _tfiPrettyPrint :: !Bool
-    , _tfiUserIP      :: !(Maybe Text)
-    , _tfiMedia       :: !Stream
-    , _tfiKey         :: !(Maybe AuthKey)
-    , _tfiId          :: !Text
-    , _tfiOAuthToken  :: !(Maybe OAuthToken)
-    , _tfiFilename    :: !Text
-    , _tfiFields      :: !(Maybe Text)
+    { _tfiMedia    :: !Stream
+    , _tfiId       :: !Text
+    , _tfiFilename :: !Text
     }
 
 -- | Creates a value of 'TablesFilesInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tfiQuotaUser'
---
--- * 'tfiPrettyPrint'
---
--- * 'tfiUserIP'
---
 -- * 'tfiMedia'
---
--- * 'tfiKey'
 --
 -- * 'tfiId'
 --
--- * 'tfiOAuthToken'
---
 -- * 'tfiFilename'
---
--- * 'tfiFields'
 tablesFilesInsert'
     :: Stream -- ^ 'media'
     -> Text -- ^ 'id'
@@ -112,82 +82,30 @@ tablesFilesInsert'
     -> TablesFilesInsert'
 tablesFilesInsert' pTfiMedia_ pTfiId_ pTfiFilename_ =
     TablesFilesInsert'
-    { _tfiQuotaUser = Nothing
-    , _tfiPrettyPrint = True
-    , _tfiUserIP = Nothing
-    , _tfiMedia = pTfiMedia_
-    , _tfiKey = Nothing
+    { _tfiMedia = pTfiMedia_
     , _tfiId = pTfiId_
-    , _tfiOAuthToken = Nothing
     , _tfiFilename = pTfiFilename_
-    , _tfiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tfiQuotaUser :: Lens' TablesFilesInsert' (Maybe Text)
-tfiQuotaUser
-  = lens _tfiQuotaUser (\ s a -> s{_tfiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tfiPrettyPrint :: Lens' TablesFilesInsert' Bool
-tfiPrettyPrint
-  = lens _tfiPrettyPrint
-      (\ s a -> s{_tfiPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tfiUserIP :: Lens' TablesFilesInsert' (Maybe Text)
-tfiUserIP
-  = lens _tfiUserIP (\ s a -> s{_tfiUserIP = a})
 
 tfiMedia :: Lens' TablesFilesInsert' Stream
 tfiMedia = lens _tfiMedia (\ s a -> s{_tfiMedia = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tfiKey :: Lens' TablesFilesInsert' (Maybe AuthKey)
-tfiKey = lens _tfiKey (\ s a -> s{_tfiKey = a})
-
 -- | The ID of the table asset.
 tfiId :: Lens' TablesFilesInsert' Text
 tfiId = lens _tfiId (\ s a -> s{_tfiId = a})
-
--- | OAuth 2.0 token for the current user.
-tfiOAuthToken :: Lens' TablesFilesInsert' (Maybe OAuthToken)
-tfiOAuthToken
-  = lens _tfiOAuthToken
-      (\ s a -> s{_tfiOAuthToken = a})
 
 -- | The file name of this uploaded file.
 tfiFilename :: Lens' TablesFilesInsert' Text
 tfiFilename
   = lens _tfiFilename (\ s a -> s{_tfiFilename = a})
 
--- | Selector specifying which fields to include in a partial response.
-tfiFields :: Lens' TablesFilesInsert' (Maybe Text)
-tfiFields
-  = lens _tfiFields (\ s a -> s{_tfiFields = a})
-
-instance GoogleAuth TablesFilesInsert' where
-        _AuthKey = tfiKey . _Just
-        _AuthToken = tfiOAuthToken . _Just
-
 instance GoogleRequest TablesFilesInsert' where
         type Rs TablesFilesInsert' = ()
-        request = requestWith mapsEngineRequest
-        requestWith rq TablesFilesInsert'{..}
-          = go _tfiId (Just _tfiFilename) _tfiQuotaUser
-              (Just _tfiPrettyPrint)
-              _tfiUserIP
-              _tfiFields
-              _tfiKey
-              _tfiOAuthToken
-              (Just AltJSON)
+        requestClient TablesFilesInsert'{..}
+          = go _tfiId (Just _tfiFilename) (Just AltJSON)
               _tfiMedia
+              mapsEngineService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy TablesFilesInsertResource)
-                      rq
+                      mempty

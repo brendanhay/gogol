@@ -34,19 +34,14 @@ module Network.Google.Resource.Genomics.Datasets.List
 
     -- * Request Lenses
     , dlXgafv
-    , dlQuotaUser
-    , dlPrettyPrint
     , dlUploadProtocol
     , dlPp
     , dlAccessToken
     , dlUploadType
     , dlBearerToken
-    , dlKey
     , dlPageToken
     , dlProjectId
-    , dlOAuthToken
     , dlPageSize
-    , dlFields
     , dlCallback
     ) where
 
@@ -68,32 +63,22 @@ type DatasetsListResource =
                        QueryParam "projectId" Text :>
                          QueryParam "pageSize" Int32 :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] ListDatasetsResponse
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListDatasetsResponse
 
 -- | Lists datasets within a project.
 --
 -- /See:/ 'datasetsList'' smart constructor.
 data DatasetsList' = DatasetsList'
     { _dlXgafv          :: !(Maybe Text)
-    , _dlQuotaUser      :: !(Maybe Text)
-    , _dlPrettyPrint    :: !Bool
     , _dlUploadProtocol :: !(Maybe Text)
     , _dlPp             :: !Bool
     , _dlAccessToken    :: !(Maybe Text)
     , _dlUploadType     :: !(Maybe Text)
     , _dlBearerToken    :: !(Maybe Text)
-    , _dlKey            :: !(Maybe AuthKey)
     , _dlPageToken      :: !(Maybe Text)
     , _dlProjectId      :: !(Maybe Text)
-    , _dlOAuthToken     :: !(Maybe OAuthToken)
     , _dlPageSize       :: !(Maybe Int32)
-    , _dlFields         :: !(Maybe Text)
     , _dlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +87,6 @@ data DatasetsList' = DatasetsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dlXgafv'
---
--- * 'dlQuotaUser'
---
--- * 'dlPrettyPrint'
 --
 -- * 'dlUploadProtocol'
 --
@@ -117,17 +98,11 @@ data DatasetsList' = DatasetsList'
 --
 -- * 'dlBearerToken'
 --
--- * 'dlKey'
---
 -- * 'dlPageToken'
 --
 -- * 'dlProjectId'
 --
--- * 'dlOAuthToken'
---
 -- * 'dlPageSize'
---
--- * 'dlFields'
 --
 -- * 'dlCallback'
 datasetsList'
@@ -135,38 +110,20 @@ datasetsList'
 datasetsList' =
     DatasetsList'
     { _dlXgafv = Nothing
-    , _dlQuotaUser = Nothing
-    , _dlPrettyPrint = True
     , _dlUploadProtocol = Nothing
     , _dlPp = True
     , _dlAccessToken = Nothing
     , _dlUploadType = Nothing
     , _dlBearerToken = Nothing
-    , _dlKey = Nothing
     , _dlPageToken = Nothing
     , _dlProjectId = Nothing
-    , _dlOAuthToken = Nothing
     , _dlPageSize = Nothing
-    , _dlFields = Nothing
     , _dlCallback = Nothing
     }
 
 -- | V1 error format.
 dlXgafv :: Lens' DatasetsList' (Maybe Text)
 dlXgafv = lens _dlXgafv (\ s a -> s{_dlXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-dlQuotaUser :: Lens' DatasetsList' (Maybe Text)
-dlQuotaUser
-  = lens _dlQuotaUser (\ s a -> s{_dlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-dlPrettyPrint :: Lens' DatasetsList' Bool
-dlPrettyPrint
-  = lens _dlPrettyPrint
-      (\ s a -> s{_dlPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 dlUploadProtocol :: Lens' DatasetsList' (Maybe Text)
@@ -195,12 +152,6 @@ dlBearerToken
   = lens _dlBearerToken
       (\ s a -> s{_dlBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-dlKey :: Lens' DatasetsList' (Maybe AuthKey)
-dlKey = lens _dlKey (\ s a -> s{_dlKey = a})
-
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
 -- \`nextPageToken\` from the previous response.
@@ -213,34 +164,20 @@ dlProjectId :: Lens' DatasetsList' (Maybe Text)
 dlProjectId
   = lens _dlProjectId (\ s a -> s{_dlProjectId = a})
 
--- | OAuth 2.0 token for the current user.
-dlOAuthToken :: Lens' DatasetsList' (Maybe OAuthToken)
-dlOAuthToken
-  = lens _dlOAuthToken (\ s a -> s{_dlOAuthToken = a})
-
 -- | The maximum number of results returned by this request. If unspecified,
 -- defaults to 50. The maximum value is 1024.
 dlPageSize :: Lens' DatasetsList' (Maybe Int32)
 dlPageSize
   = lens _dlPageSize (\ s a -> s{_dlPageSize = a})
 
--- | Selector specifying which fields to include in a partial response.
-dlFields :: Lens' DatasetsList' (Maybe Text)
-dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
-
 -- | JSONP
 dlCallback :: Lens' DatasetsList' (Maybe Text)
 dlCallback
   = lens _dlCallback (\ s a -> s{_dlCallback = a})
 
-instance GoogleAuth DatasetsList' where
-        _AuthKey = dlKey . _Just
-        _AuthToken = dlOAuthToken . _Just
-
 instance GoogleRequest DatasetsList' where
         type Rs DatasetsList' = ListDatasetsResponse
-        request = requestWith genomicsRequest
-        requestWith rq DatasetsList'{..}
+        requestClient DatasetsList'{..}
           = go _dlXgafv _dlUploadProtocol (Just _dlPp)
               _dlAccessToken
               _dlUploadType
@@ -249,12 +186,8 @@ instance GoogleRequest DatasetsList' where
               _dlProjectId
               _dlPageSize
               _dlCallback
-              _dlQuotaUser
-              (Just _dlPrettyPrint)
-              _dlFields
-              _dlKey
-              _dlOAuthToken
               (Just AltJSON)
+              genomicsService
           where go
-                  = clientBuild (Proxy :: Proxy DatasetsListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy DatasetsListResource)
+                      mempty

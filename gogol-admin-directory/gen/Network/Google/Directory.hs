@@ -20,8 +20,11 @@
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference>
 module Network.Google.Directory
     (
+    -- * Service Configuration
+      directoryService
+
     -- * API Declaration
-      DirectoryAPI
+    , DirectoryAPI
 
     -- * Resources
 

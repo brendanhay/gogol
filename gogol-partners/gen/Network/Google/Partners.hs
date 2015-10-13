@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/partners/ Google Partners API Reference>
 module Network.Google.Partners
     (
+    -- * Service Configuration
+      partnersService
+
     -- * API Declaration
-      PartnersAPI
+    , PartnersAPI
 
     -- * Resources
 

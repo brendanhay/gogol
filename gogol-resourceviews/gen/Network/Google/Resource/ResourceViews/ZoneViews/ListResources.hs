@@ -33,20 +33,14 @@ module Network.Google.Resource.ResourceViews.ZoneViews.ListResources
     , ZoneViewsListResources'
 
     -- * Request Lenses
-    , zvlrQuotaUser
-    , zvlrPrettyPrint
     , zvlrResourceView
     , zvlrListState
     , zvlrProject
-    , zvlrUserIP
     , zvlrFormat
     , zvlrZone
-    , zvlrKey
     , zvlrServiceName
     , zvlrPageToken
-    , zvlrOAuthToken
     , zvlrMaxResults
-    , zvlrFields
     ) where
 
 import           Network.Google.Prelude
@@ -68,43 +62,26 @@ type ZoneViewsListResourcesResource =
                      QueryParam "serviceName" Text :>
                        QueryParam "pageToken" Text :>
                          QueryParam "maxResults" Int32 :>
-                           QueryParam "quotaUser" Text :>
-                             QueryParam "prettyPrint" Bool :>
-                               QueryParam "userIp" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON]
-                                           ZoneViewsListResourcesResponse
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ZoneViewsListResourcesResponse
 
 -- | List the resources of the resource view.
 --
 -- /See:/ 'zoneViewsListResources'' smart constructor.
 data ZoneViewsListResources' = ZoneViewsListResources'
-    { _zvlrQuotaUser    :: !(Maybe Text)
-    , _zvlrPrettyPrint  :: !Bool
-    , _zvlrResourceView :: !Text
+    { _zvlrResourceView :: !Text
     , _zvlrListState    :: !ZoneViewsListResourcesListState
     , _zvlrProject      :: !Text
-    , _zvlrUserIP       :: !(Maybe Text)
     , _zvlrFormat       :: !(Maybe ZoneViewsListResourcesFormat)
     , _zvlrZone         :: !Text
-    , _zvlrKey          :: !(Maybe AuthKey)
     , _zvlrServiceName  :: !(Maybe Text)
     , _zvlrPageToken    :: !(Maybe Text)
-    , _zvlrOAuthToken   :: !(Maybe OAuthToken)
     , _zvlrMaxResults   :: !Int32
-    , _zvlrFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsListResources'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'zvlrQuotaUser'
---
--- * 'zvlrPrettyPrint'
 --
 -- * 'zvlrResourceView'
 --
@@ -112,23 +89,15 @@ data ZoneViewsListResources' = ZoneViewsListResources'
 --
 -- * 'zvlrProject'
 --
--- * 'zvlrUserIP'
---
 -- * 'zvlrFormat'
 --
 -- * 'zvlrZone'
---
--- * 'zvlrKey'
 --
 -- * 'zvlrServiceName'
 --
 -- * 'zvlrPageToken'
 --
--- * 'zvlrOAuthToken'
---
 -- * 'zvlrMaxResults'
---
--- * 'zvlrFields'
 zoneViewsListResources'
     :: Text -- ^ 'resourceView'
     -> Text -- ^ 'project'
@@ -136,35 +105,15 @@ zoneViewsListResources'
     -> ZoneViewsListResources'
 zoneViewsListResources' pZvlrResourceView_ pZvlrProject_ pZvlrZone_ =
     ZoneViewsListResources'
-    { _zvlrQuotaUser = Nothing
-    , _zvlrPrettyPrint = True
-    , _zvlrResourceView = pZvlrResourceView_
+    { _zvlrResourceView = pZvlrResourceView_
     , _zvlrListState = All
     , _zvlrProject = pZvlrProject_
-    , _zvlrUserIP = Nothing
     , _zvlrFormat = Nothing
     , _zvlrZone = pZvlrZone_
-    , _zvlrKey = Nothing
     , _zvlrServiceName = Nothing
     , _zvlrPageToken = Nothing
-    , _zvlrOAuthToken = Nothing
     , _zvlrMaxResults = 5000
-    , _zvlrFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-zvlrQuotaUser :: Lens' ZoneViewsListResources' (Maybe Text)
-zvlrQuotaUser
-  = lens _zvlrQuotaUser
-      (\ s a -> s{_zvlrQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-zvlrPrettyPrint :: Lens' ZoneViewsListResources' Bool
-zvlrPrettyPrint
-  = lens _zvlrPrettyPrint
-      (\ s a -> s{_zvlrPrettyPrint = a})
 
 -- | The name of the resource view.
 zvlrResourceView :: Lens' ZoneViewsListResources' Text
@@ -183,12 +132,6 @@ zvlrProject :: Lens' ZoneViewsListResources' Text
 zvlrProject
   = lens _zvlrProject (\ s a -> s{_zvlrProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-zvlrUserIP :: Lens' ZoneViewsListResources' (Maybe Text)
-zvlrUserIP
-  = lens _zvlrUserIP (\ s a -> s{_zvlrUserIP = a})
-
 -- | The requested format of the return value. It can be URL or URL_PORT. A
 -- JSON object will be included in the response based on the format. The
 -- default format is NONE, which results in no JSON in the response.
@@ -199,12 +142,6 @@ zvlrFormat
 -- | The zone name of the resource view.
 zvlrZone :: Lens' ZoneViewsListResources' Text
 zvlrZone = lens _zvlrZone (\ s a -> s{_zvlrZone = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-zvlrKey :: Lens' ZoneViewsListResources' (Maybe AuthKey)
-zvlrKey = lens _zvlrKey (\ s a -> s{_zvlrKey = a})
 
 -- | The service name to return in the response. It is optional and if it is
 -- not set, all the service end points will be returned.
@@ -221,12 +158,6 @@ zvlrPageToken
   = lens _zvlrPageToken
       (\ s a -> s{_zvlrPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-zvlrOAuthToken :: Lens' ZoneViewsListResources' (Maybe OAuthToken)
-zvlrOAuthToken
-  = lens _zvlrOAuthToken
-      (\ s a -> s{_zvlrOAuthToken = a})
-
 -- | Maximum count of results to be returned. Acceptable values are 0 to
 -- 5000, inclusive. (Default: 5000)
 zvlrMaxResults :: Lens' ZoneViewsListResources' Int32
@@ -234,34 +165,19 @@ zvlrMaxResults
   = lens _zvlrMaxResults
       (\ s a -> s{_zvlrMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-zvlrFields :: Lens' ZoneViewsListResources' (Maybe Text)
-zvlrFields
-  = lens _zvlrFields (\ s a -> s{_zvlrFields = a})
-
-instance GoogleAuth ZoneViewsListResources' where
-        _AuthKey = zvlrKey . _Just
-        _AuthToken = zvlrOAuthToken . _Just
-
 instance GoogleRequest ZoneViewsListResources' where
         type Rs ZoneViewsListResources' =
              ZoneViewsListResourcesResponse
-        request = requestWith resourceViewsRequest
-        requestWith rq ZoneViewsListResources'{..}
+        requestClient ZoneViewsListResources'{..}
           = go _zvlrProject _zvlrZone _zvlrResourceView
               (Just _zvlrListState)
               _zvlrFormat
               _zvlrServiceName
               _zvlrPageToken
               (Just _zvlrMaxResults)
-              _zvlrQuotaUser
-              (Just _zvlrPrettyPrint)
-              _zvlrUserIP
-              _zvlrFields
-              _zvlrKey
-              _zvlrOAuthToken
               (Just AltJSON)
+              resourceViewsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ZoneViewsListResourcesResource)
-                      rq
+                      mempty

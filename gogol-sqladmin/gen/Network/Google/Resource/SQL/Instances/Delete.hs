@@ -33,13 +33,7 @@ module Network.Google.Resource.SQL.Instances.Delete
     , InstancesDelete'
 
     -- * Request Lenses
-    , idQuotaUser
-    , idPrettyPrint
     , idProject
-    , idUserIP
-    , idKey
-    , idOAuthToken
-    , idFields
     , idInstance
     ) where
 
@@ -53,45 +47,21 @@ type InstancesDeleteResource =
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+             QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes a Cloud SQL instance.
 --
 -- /See:/ 'instancesDelete'' smart constructor.
 data InstancesDelete' = InstancesDelete'
-    { _idQuotaUser   :: !(Maybe Text)
-    , _idPrettyPrint :: !Bool
-    , _idProject     :: !Text
-    , _idUserIP      :: !(Maybe Text)
-    , _idKey         :: !(Maybe AuthKey)
-    , _idOAuthToken  :: !(Maybe OAuthToken)
-    , _idFields      :: !(Maybe Text)
-    , _idInstance    :: !Text
+    { _idProject  :: !Text
+    , _idInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'idQuotaUser'
---
--- * 'idPrettyPrint'
---
 -- * 'idProject'
---
--- * 'idUserIP'
---
--- * 'idKey'
---
--- * 'idOAuthToken'
---
--- * 'idFields'
 --
 -- * 'idInstance'
 instancesDelete'
@@ -100,75 +70,26 @@ instancesDelete'
     -> InstancesDelete'
 instancesDelete' pIdProject_ pIdInstance_ =
     InstancesDelete'
-    { _idQuotaUser = Nothing
-    , _idPrettyPrint = True
-    , _idProject = pIdProject_
-    , _idUserIP = Nothing
-    , _idKey = Nothing
-    , _idOAuthToken = Nothing
-    , _idFields = Nothing
+    { _idProject = pIdProject_
     , _idInstance = pIdInstance_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-idQuotaUser :: Lens' InstancesDelete' (Maybe Text)
-idQuotaUser
-  = lens _idQuotaUser (\ s a -> s{_idQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-idPrettyPrint :: Lens' InstancesDelete' Bool
-idPrettyPrint
-  = lens _idPrettyPrint
-      (\ s a -> s{_idPrettyPrint = a})
 
 -- | Project ID of the project that contains the instance to be deleted.
 idProject :: Lens' InstancesDelete' Text
 idProject
   = lens _idProject (\ s a -> s{_idProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-idUserIP :: Lens' InstancesDelete' (Maybe Text)
-idUserIP = lens _idUserIP (\ s a -> s{_idUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-idKey :: Lens' InstancesDelete' (Maybe AuthKey)
-idKey = lens _idKey (\ s a -> s{_idKey = a})
-
--- | OAuth 2.0 token for the current user.
-idOAuthToken :: Lens' InstancesDelete' (Maybe OAuthToken)
-idOAuthToken
-  = lens _idOAuthToken (\ s a -> s{_idOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-idFields :: Lens' InstancesDelete' (Maybe Text)
-idFields = lens _idFields (\ s a -> s{_idFields = a})
-
 -- | Cloud SQL instance ID. This does not include the project ID.
 idInstance :: Lens' InstancesDelete' Text
 idInstance
   = lens _idInstance (\ s a -> s{_idInstance = a})
 
-instance GoogleAuth InstancesDelete' where
-        _AuthKey = idKey . _Just
-        _AuthToken = idOAuthToken . _Just
-
 instance GoogleRequest InstancesDelete' where
         type Rs InstancesDelete' = Operation
-        request = requestWith sQLAdminRequest
-        requestWith rq InstancesDelete'{..}
-          = go _idProject _idInstance _idQuotaUser
-              (Just _idPrettyPrint)
-              _idUserIP
-              _idFields
-              _idKey
-              _idOAuthToken
-              (Just AltJSON)
+        requestClient InstancesDelete'{..}
+          = go _idProject _idInstance (Just AltJSON)
+              sQLAdminService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy InstancesDeleteResource)
-                      rq
+                      mempty

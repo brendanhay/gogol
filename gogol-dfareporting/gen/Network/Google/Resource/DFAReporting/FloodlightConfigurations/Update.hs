@@ -33,14 +33,8 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Update
     , FloodlightConfigurationsUpdate'
 
     -- * Request Lenses
-    , fcuQuotaUser
-    , fcuPrettyPrint
-    , fcuUserIP
     , fcuProFileId
     , fcuPayload
-    , fcuKey
-    , fcuOAuthToken
-    , fcuFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,83 +46,34 @@ type FloodlightConfigurationsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightConfigurations" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] FloodlightConfiguration :>
-                           Put '[JSON] FloodlightConfiguration
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] FloodlightConfiguration :>
+               Put '[JSON] FloodlightConfiguration
 
 -- | Updates an existing floodlight configuration.
 --
 -- /See:/ 'floodlightConfigurationsUpdate'' smart constructor.
 data FloodlightConfigurationsUpdate' = FloodlightConfigurationsUpdate'
-    { _fcuQuotaUser   :: !(Maybe Text)
-    , _fcuPrettyPrint :: !Bool
-    , _fcuUserIP      :: !(Maybe Text)
-    , _fcuProFileId   :: !Int64
-    , _fcuPayload     :: !FloodlightConfiguration
-    , _fcuKey         :: !(Maybe AuthKey)
-    , _fcuOAuthToken  :: !(Maybe OAuthToken)
-    , _fcuFields      :: !(Maybe Text)
+    { _fcuProFileId :: !Int64
+    , _fcuPayload   :: !FloodlightConfiguration
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'fcuQuotaUser'
---
--- * 'fcuPrettyPrint'
---
--- * 'fcuUserIP'
---
 -- * 'fcuProFileId'
 --
 -- * 'fcuPayload'
---
--- * 'fcuKey'
---
--- * 'fcuOAuthToken'
---
--- * 'fcuFields'
 floodlightConfigurationsUpdate'
     :: Int64 -- ^ 'profileId'
     -> FloodlightConfiguration -- ^ 'payload'
     -> FloodlightConfigurationsUpdate'
 floodlightConfigurationsUpdate' pFcuProFileId_ pFcuPayload_ =
     FloodlightConfigurationsUpdate'
-    { _fcuQuotaUser = Nothing
-    , _fcuPrettyPrint = True
-    , _fcuUserIP = Nothing
-    , _fcuProFileId = pFcuProFileId_
+    { _fcuProFileId = pFcuProFileId_
     , _fcuPayload = pFcuPayload_
-    , _fcuKey = Nothing
-    , _fcuOAuthToken = Nothing
-    , _fcuFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-fcuQuotaUser :: Lens' FloodlightConfigurationsUpdate' (Maybe Text)
-fcuQuotaUser
-  = lens _fcuQuotaUser (\ s a -> s{_fcuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-fcuPrettyPrint :: Lens' FloodlightConfigurationsUpdate' Bool
-fcuPrettyPrint
-  = lens _fcuPrettyPrint
-      (\ s a -> s{_fcuPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-fcuUserIP :: Lens' FloodlightConfigurationsUpdate' (Maybe Text)
-fcuUserIP
-  = lens _fcuUserIP (\ s a -> s{_fcuUserIP = a})
 
 -- | User profile ID associated with this request.
 fcuProFileId :: Lens' FloodlightConfigurationsUpdate' Int64
@@ -140,44 +85,15 @@ fcuPayload :: Lens' FloodlightConfigurationsUpdate' FloodlightConfiguration
 fcuPayload
   = lens _fcuPayload (\ s a -> s{_fcuPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-fcuKey :: Lens' FloodlightConfigurationsUpdate' (Maybe AuthKey)
-fcuKey = lens _fcuKey (\ s a -> s{_fcuKey = a})
-
--- | OAuth 2.0 token for the current user.
-fcuOAuthToken :: Lens' FloodlightConfigurationsUpdate' (Maybe OAuthToken)
-fcuOAuthToken
-  = lens _fcuOAuthToken
-      (\ s a -> s{_fcuOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-fcuFields :: Lens' FloodlightConfigurationsUpdate' (Maybe Text)
-fcuFields
-  = lens _fcuFields (\ s a -> s{_fcuFields = a})
-
-instance GoogleAuth FloodlightConfigurationsUpdate'
-         where
-        _AuthKey = fcuKey . _Just
-        _AuthToken = fcuOAuthToken . _Just
-
 instance GoogleRequest
          FloodlightConfigurationsUpdate' where
         type Rs FloodlightConfigurationsUpdate' =
              FloodlightConfiguration
-        request = requestWith dFAReportingRequest
-        requestWith rq FloodlightConfigurationsUpdate'{..}
-          = go _fcuProFileId _fcuQuotaUser
-              (Just _fcuPrettyPrint)
-              _fcuUserIP
-              _fcuFields
-              _fcuKey
-              _fcuOAuthToken
-              (Just AltJSON)
-              _fcuPayload
+        requestClient FloodlightConfigurationsUpdate'{..}
+          = go _fcuProFileId (Just AltJSON) _fcuPayload
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy FloodlightConfigurationsUpdateResource)
-                      rq
+                      mempty

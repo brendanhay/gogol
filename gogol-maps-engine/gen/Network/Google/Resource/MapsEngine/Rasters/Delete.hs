@@ -33,13 +33,7 @@ module Network.Google.Resource.MapsEngine.Rasters.Delete
     , RastersDelete'
 
     -- * Request Lenses
-    , rdQuotaUser
-    , rdPrettyPrint
-    , rdUserIP
-    , rdKey
     , rdId
-    , rdOAuthToken
-    , rdFields
     ) where
 
 import           Network.Google.MapsEngine.Types
@@ -50,81 +44,27 @@ import           Network.Google.Prelude
 type RastersDeleteResource =
      "rasters" :>
        Capture "id" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
+         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a raster.
 --
 -- /See:/ 'rastersDelete'' smart constructor.
-data RastersDelete' = RastersDelete'
-    { _rdQuotaUser   :: !(Maybe Text)
-    , _rdPrettyPrint :: !Bool
-    , _rdUserIP      :: !(Maybe Text)
-    , _rdKey         :: !(Maybe AuthKey)
-    , _rdId          :: !Text
-    , _rdOAuthToken  :: !(Maybe OAuthToken)
-    , _rdFields      :: !(Maybe Text)
+newtype RastersDelete' = RastersDelete'
+    { _rdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rdQuotaUser'
---
--- * 'rdPrettyPrint'
---
--- * 'rdUserIP'
---
--- * 'rdKey'
---
 -- * 'rdId'
---
--- * 'rdOAuthToken'
---
--- * 'rdFields'
 rastersDelete'
     :: Text -- ^ 'id'
     -> RastersDelete'
 rastersDelete' pRdId_ =
     RastersDelete'
-    { _rdQuotaUser = Nothing
-    , _rdPrettyPrint = True
-    , _rdUserIP = Nothing
-    , _rdKey = Nothing
-    , _rdId = pRdId_
-    , _rdOAuthToken = Nothing
-    , _rdFields = Nothing
+    { _rdId = pRdId_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-rdQuotaUser :: Lens' RastersDelete' (Maybe Text)
-rdQuotaUser
-  = lens _rdQuotaUser (\ s a -> s{_rdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rdPrettyPrint :: Lens' RastersDelete' Bool
-rdPrettyPrint
-  = lens _rdPrettyPrint
-      (\ s a -> s{_rdPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rdUserIP :: Lens' RastersDelete' (Maybe Text)
-rdUserIP = lens _rdUserIP (\ s a -> s{_rdUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rdKey :: Lens' RastersDelete' (Maybe AuthKey)
-rdKey = lens _rdKey (\ s a -> s{_rdKey = a})
 
 -- | The ID of the raster. Only the raster creator or project owner are
 -- permitted to delete. If the raster is included in a layer or mosaic, the
@@ -132,29 +72,10 @@ rdKey = lens _rdKey (\ s a -> s{_rdKey = a})
 rdId :: Lens' RastersDelete' Text
 rdId = lens _rdId (\ s a -> s{_rdId = a})
 
--- | OAuth 2.0 token for the current user.
-rdOAuthToken :: Lens' RastersDelete' (Maybe OAuthToken)
-rdOAuthToken
-  = lens _rdOAuthToken (\ s a -> s{_rdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-rdFields :: Lens' RastersDelete' (Maybe Text)
-rdFields = lens _rdFields (\ s a -> s{_rdFields = a})
-
-instance GoogleAuth RastersDelete' where
-        _AuthKey = rdKey . _Just
-        _AuthToken = rdOAuthToken . _Just
-
 instance GoogleRequest RastersDelete' where
         type Rs RastersDelete' = ()
-        request = requestWith mapsEngineRequest
-        requestWith rq RastersDelete'{..}
-          = go _rdId _rdQuotaUser (Just _rdPrettyPrint)
-              _rdUserIP
-              _rdFields
-              _rdKey
-              _rdOAuthToken
-              (Just AltJSON)
+        requestClient RastersDelete'{..}
+          = go _rdId (Just AltJSON) mapsEngineService
           where go
-                  = clientBuild (Proxy :: Proxy RastersDeleteResource)
-                      rq
+                  = buildClient (Proxy :: Proxy RastersDeleteResource)
+                      mempty

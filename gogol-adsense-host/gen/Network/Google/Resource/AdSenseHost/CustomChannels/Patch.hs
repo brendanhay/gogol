@@ -34,15 +34,9 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.Patch
     , CustomChannelsPatch'
 
     -- * Request Lenses
-    , ccpQuotaUser
-    , ccpPrettyPrint
     , ccpCustomChannelId
-    , ccpUserIP
     , ccpPayload
     , ccpAdClientId
-    , ccpKey
-    , ccpOAuthToken
-    , ccpFields
     ) where
 
 import           Network.Google.AdSenseHost.Types
@@ -55,53 +49,29 @@ type CustomChannelsPatchResource =
        Capture "adClientId" Text :>
          "customchannels" :>
            QueryParam "customChannelId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] CustomChannel :>
-                             Patch '[JSON] CustomChannel
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] CustomChannel :>
+                 Patch '[JSON] CustomChannel
 
 -- | Update a custom channel in the host AdSense account. This method
 -- supports patch semantics.
 --
 -- /See:/ 'customChannelsPatch'' smart constructor.
 data CustomChannelsPatch' = CustomChannelsPatch'
-    { _ccpQuotaUser       :: !(Maybe Text)
-    , _ccpPrettyPrint     :: !Bool
-    , _ccpCustomChannelId :: !Text
-    , _ccpUserIP          :: !(Maybe Text)
+    { _ccpCustomChannelId :: !Text
     , _ccpPayload         :: !CustomChannel
     , _ccpAdClientId      :: !Text
-    , _ccpKey             :: !(Maybe AuthKey)
-    , _ccpOAuthToken      :: !(Maybe OAuthToken)
-    , _ccpFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomChannelsPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ccpQuotaUser'
---
--- * 'ccpPrettyPrint'
---
 -- * 'ccpCustomChannelId'
---
--- * 'ccpUserIP'
 --
 -- * 'ccpPayload'
 --
 -- * 'ccpAdClientId'
---
--- * 'ccpKey'
---
--- * 'ccpOAuthToken'
---
--- * 'ccpFields'
 customChannelsPatch'
     :: Text -- ^ 'customChannelId'
     -> CustomChannel -- ^ 'payload'
@@ -109,41 +79,16 @@ customChannelsPatch'
     -> CustomChannelsPatch'
 customChannelsPatch' pCcpCustomChannelId_ pCcpPayload_ pCcpAdClientId_ =
     CustomChannelsPatch'
-    { _ccpQuotaUser = Nothing
-    , _ccpPrettyPrint = True
-    , _ccpCustomChannelId = pCcpCustomChannelId_
-    , _ccpUserIP = Nothing
+    { _ccpCustomChannelId = pCcpCustomChannelId_
     , _ccpPayload = pCcpPayload_
     , _ccpAdClientId = pCcpAdClientId_
-    , _ccpKey = Nothing
-    , _ccpOAuthToken = Nothing
-    , _ccpFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ccpQuotaUser :: Lens' CustomChannelsPatch' (Maybe Text)
-ccpQuotaUser
-  = lens _ccpQuotaUser (\ s a -> s{_ccpQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ccpPrettyPrint :: Lens' CustomChannelsPatch' Bool
-ccpPrettyPrint
-  = lens _ccpPrettyPrint
-      (\ s a -> s{_ccpPrettyPrint = a})
 
 -- | Custom channel to get.
 ccpCustomChannelId :: Lens' CustomChannelsPatch' Text
 ccpCustomChannelId
   = lens _ccpCustomChannelId
       (\ s a -> s{_ccpCustomChannelId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ccpUserIP :: Lens' CustomChannelsPatch' (Maybe Text)
-ccpUserIP
-  = lens _ccpUserIP (\ s a -> s{_ccpUserIP = a})
 
 -- | Multipart request metadata.
 ccpPayload :: Lens' CustomChannelsPatch' CustomChannel
@@ -156,41 +101,14 @@ ccpAdClientId
   = lens _ccpAdClientId
       (\ s a -> s{_ccpAdClientId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ccpKey :: Lens' CustomChannelsPatch' (Maybe AuthKey)
-ccpKey = lens _ccpKey (\ s a -> s{_ccpKey = a})
-
--- | OAuth 2.0 token for the current user.
-ccpOAuthToken :: Lens' CustomChannelsPatch' (Maybe OAuthToken)
-ccpOAuthToken
-  = lens _ccpOAuthToken
-      (\ s a -> s{_ccpOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ccpFields :: Lens' CustomChannelsPatch' (Maybe Text)
-ccpFields
-  = lens _ccpFields (\ s a -> s{_ccpFields = a})
-
-instance GoogleAuth CustomChannelsPatch' where
-        _AuthKey = ccpKey . _Just
-        _AuthToken = ccpOAuthToken . _Just
-
 instance GoogleRequest CustomChannelsPatch' where
         type Rs CustomChannelsPatch' = CustomChannel
-        request = requestWith adSenseHostRequest
-        requestWith rq CustomChannelsPatch'{..}
+        requestClient CustomChannelsPatch'{..}
           = go _ccpAdClientId (Just _ccpCustomChannelId)
-              _ccpQuotaUser
-              (Just _ccpPrettyPrint)
-              _ccpUserIP
-              _ccpFields
-              _ccpKey
-              _ccpOAuthToken
               (Just AltJSON)
               _ccpPayload
+              adSenseHostService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CustomChannelsPatchResource)
-                      rq
+                      mempty

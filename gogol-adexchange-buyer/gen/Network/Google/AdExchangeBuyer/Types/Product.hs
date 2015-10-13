@@ -7444,219 +7444,214 @@ instance ToJSON Buyer where
 --
 -- /See:/ 'marketplaceOrder' smart constructor.
 data MarketplaceOrder = MarketplaceOrder
-    { _marBuyerPrivateData           :: !(Maybe PrivateData)
-    , _marIsSetupComplete            :: !(Maybe Bool)
-    , _marBuyerContacts              :: !(Maybe [ContactInformation])
-    , _marKind                       :: !Text
-    , _marOriginatorRole             :: !(Maybe Text)
-    , _marRevisionNumber             :: !(Maybe Int64)
-    , _marBilledBuyer                :: !(Maybe Buyer)
-    , _marIsRenegotiating            :: !(Maybe Bool)
-    , _marHasSellerSignedOff         :: !(Maybe Bool)
-    , _marSeller                     :: !(Maybe Seller)
-    , _marOrderState                 :: !(Maybe Text)
-    , _marName                       :: !(Maybe Text)
-    , _marSellerContacts             :: !(Maybe [ContactInformation])
-    , _marLastUpdaterRole            :: !(Maybe Text)
-    , _marLabels                     :: !(Maybe [MarketplaceLabel])
-    , _marRevisionTimeMs             :: !(Maybe Int64)
-    , _marOrderId                    :: !(Maybe Text)
-    , _marLastUpdaterOrCommentorRole :: !(Maybe Text)
-    , _marHasBuyerSignedOff          :: !(Maybe Bool)
-    , _marBuyer                      :: !(Maybe Buyer)
+    { _mBuyerPrivateData           :: !(Maybe PrivateData)
+    , _mIsSetupComplete            :: !(Maybe Bool)
+    , _mBuyerContacts              :: !(Maybe [ContactInformation])
+    , _mKind                       :: !Text
+    , _mOriginatorRole             :: !(Maybe Text)
+    , _mRevisionNumber             :: !(Maybe Int64)
+    , _mBilledBuyer                :: !(Maybe Buyer)
+    , _mIsRenegotiating            :: !(Maybe Bool)
+    , _mHasSellerSignedOff         :: !(Maybe Bool)
+    , _mSeller                     :: !(Maybe Seller)
+    , _mOrderState                 :: !(Maybe Text)
+    , _mName                       :: !(Maybe Text)
+    , _mSellerContacts             :: !(Maybe [ContactInformation])
+    , _mLastUpdaterRole            :: !(Maybe Text)
+    , _mLabels                     :: !(Maybe [MarketplaceLabel])
+    , _mRevisionTimeMs             :: !(Maybe Int64)
+    , _mOrderId                    :: !(Maybe Text)
+    , _mLastUpdaterOrCommentorRole :: !(Maybe Text)
+    , _mHasBuyerSignedOff          :: !(Maybe Bool)
+    , _mBuyer                      :: !(Maybe Buyer)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceOrder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'marBuyerPrivateData'
+-- * 'mBuyerPrivateData'
 --
--- * 'marIsSetupComplete'
+-- * 'mIsSetupComplete'
 --
--- * 'marBuyerContacts'
+-- * 'mBuyerContacts'
 --
--- * 'marKind'
+-- * 'mKind'
 --
--- * 'marOriginatorRole'
+-- * 'mOriginatorRole'
 --
--- * 'marRevisionNumber'
+-- * 'mRevisionNumber'
 --
--- * 'marBilledBuyer'
+-- * 'mBilledBuyer'
 --
--- * 'marIsRenegotiating'
+-- * 'mIsRenegotiating'
 --
--- * 'marHasSellerSignedOff'
+-- * 'mHasSellerSignedOff'
 --
--- * 'marSeller'
+-- * 'mSeller'
 --
--- * 'marOrderState'
+-- * 'mOrderState'
 --
--- * 'marName'
+-- * 'mName'
 --
--- * 'marSellerContacts'
+-- * 'mSellerContacts'
 --
--- * 'marLastUpdaterRole'
+-- * 'mLastUpdaterRole'
 --
--- * 'marLabels'
+-- * 'mLabels'
 --
--- * 'marRevisionTimeMs'
+-- * 'mRevisionTimeMs'
 --
--- * 'marOrderId'
+-- * 'mOrderId'
 --
--- * 'marLastUpdaterOrCommentorRole'
+-- * 'mLastUpdaterOrCommentorRole'
 --
--- * 'marHasBuyerSignedOff'
+-- * 'mHasBuyerSignedOff'
 --
--- * 'marBuyer'
+-- * 'mBuyer'
 marketplaceOrder
     :: MarketplaceOrder
 marketplaceOrder =
     MarketplaceOrder
-    { _marBuyerPrivateData = Nothing
-    , _marIsSetupComplete = Nothing
-    , _marBuyerContacts = Nothing
-    , _marKind = "adexchangebuyer#marketplaceOrder"
-    , _marOriginatorRole = Nothing
-    , _marRevisionNumber = Nothing
-    , _marBilledBuyer = Nothing
-    , _marIsRenegotiating = Nothing
-    , _marHasSellerSignedOff = Nothing
-    , _marSeller = Nothing
-    , _marOrderState = Nothing
-    , _marName = Nothing
-    , _marSellerContacts = Nothing
-    , _marLastUpdaterRole = Nothing
-    , _marLabels = Nothing
-    , _marRevisionTimeMs = Nothing
-    , _marOrderId = Nothing
-    , _marLastUpdaterOrCommentorRole = Nothing
-    , _marHasBuyerSignedOff = Nothing
-    , _marBuyer = Nothing
+    { _mBuyerPrivateData = Nothing
+    , _mIsSetupComplete = Nothing
+    , _mBuyerContacts = Nothing
+    , _mKind = "adexchangebuyer#marketplaceOrder"
+    , _mOriginatorRole = Nothing
+    , _mRevisionNumber = Nothing
+    , _mBilledBuyer = Nothing
+    , _mIsRenegotiating = Nothing
+    , _mHasSellerSignedOff = Nothing
+    , _mSeller = Nothing
+    , _mOrderState = Nothing
+    , _mName = Nothing
+    , _mSellerContacts = Nothing
+    , _mLastUpdaterRole = Nothing
+    , _mLabels = Nothing
+    , _mRevisionTimeMs = Nothing
+    , _mOrderId = Nothing
+    , _mLastUpdaterOrCommentorRole = Nothing
+    , _mHasBuyerSignedOff = Nothing
+    , _mBuyer = Nothing
     }
 
 -- | Private data for buyer. (hidden from seller).
-marBuyerPrivateData :: Lens' MarketplaceOrder (Maybe PrivateData)
-marBuyerPrivateData
-  = lens _marBuyerPrivateData
-      (\ s a -> s{_marBuyerPrivateData = a})
+mBuyerPrivateData :: Lens' MarketplaceOrder (Maybe PrivateData)
+mBuyerPrivateData
+  = lens _mBuyerPrivateData
+      (\ s a -> s{_mBuyerPrivateData = a})
 
 -- | True, if the buyside inventory setup is complete for this order.
 -- (readonly)
-marIsSetupComplete :: Lens' MarketplaceOrder (Maybe Bool)
-marIsSetupComplete
-  = lens _marIsSetupComplete
-      (\ s a -> s{_marIsSetupComplete = a})
+mIsSetupComplete :: Lens' MarketplaceOrder (Maybe Bool)
+mIsSetupComplete
+  = lens _mIsSetupComplete
+      (\ s a -> s{_mIsSetupComplete = a})
 
 -- | Optional contact information fort the buyer. (seller-readonly)
-marBuyerContacts :: Lens' MarketplaceOrder [ContactInformation]
-marBuyerContacts
-  = lens _marBuyerContacts
-      (\ s a -> s{_marBuyerContacts = a})
+mBuyerContacts :: Lens' MarketplaceOrder [ContactInformation]
+mBuyerContacts
+  = lens _mBuyerContacts
+      (\ s a -> s{_mBuyerContacts = a})
       . _Default
       . _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"adexchangebuyer#marketplaceOrder\".
-marKind :: Lens' MarketplaceOrder Text
-marKind = lens _marKind (\ s a -> s{_marKind = a})
+mKind :: Lens' MarketplaceOrder Text
+mKind = lens _mKind (\ s a -> s{_mKind = a})
 
 -- | Indicates whether the buyer\/seller created the offer.(readonly)
-marOriginatorRole :: Lens' MarketplaceOrder (Maybe Text)
-marOriginatorRole
-  = lens _marOriginatorRole
-      (\ s a -> s{_marOriginatorRole = a})
+mOriginatorRole :: Lens' MarketplaceOrder (Maybe Text)
+mOriginatorRole
+  = lens _mOriginatorRole
+      (\ s a -> s{_mOriginatorRole = a})
 
 -- | The revision number for the order (readonly).
-marRevisionNumber :: Lens' MarketplaceOrder (Maybe Int64)
-marRevisionNumber
-  = lens _marRevisionNumber
-      (\ s a -> s{_marRevisionNumber = a})
+mRevisionNumber :: Lens' MarketplaceOrder (Maybe Int64)
+mRevisionNumber
+  = lens _mRevisionNumber
+      (\ s a -> s{_mRevisionNumber = a})
 
 -- | Reference to the buyer that will get billed for this order. (readonly)
-marBilledBuyer :: Lens' MarketplaceOrder (Maybe Buyer)
-marBilledBuyer
-  = lens _marBilledBuyer
-      (\ s a -> s{_marBilledBuyer = a})
+mBilledBuyer :: Lens' MarketplaceOrder (Maybe Buyer)
+mBilledBuyer
+  = lens _mBilledBuyer (\ s a -> s{_mBilledBuyer = a})
 
 -- | True if the order is being renegotiated (readonly).
-marIsRenegotiating :: Lens' MarketplaceOrder (Maybe Bool)
-marIsRenegotiating
-  = lens _marIsRenegotiating
-      (\ s a -> s{_marIsRenegotiating = a})
+mIsRenegotiating :: Lens' MarketplaceOrder (Maybe Bool)
+mIsRenegotiating
+  = lens _mIsRenegotiating
+      (\ s a -> s{_mIsRenegotiating = a})
 
 -- | When an order is in an accepted state, indicates whether the buyer has
 -- signed off Once both sides have signed off on a deal, the order can be
 -- finalized by the seller. (buyer-readonly)
-marHasSellerSignedOff :: Lens' MarketplaceOrder (Maybe Bool)
-marHasSellerSignedOff
-  = lens _marHasSellerSignedOff
-      (\ s a -> s{_marHasSellerSignedOff = a})
+mHasSellerSignedOff :: Lens' MarketplaceOrder (Maybe Bool)
+mHasSellerSignedOff
+  = lens _mHasSellerSignedOff
+      (\ s a -> s{_mHasSellerSignedOff = a})
 
 -- | Reference to the seller on the order. (readonly, except on create)
-marSeller :: Lens' MarketplaceOrder (Maybe Seller)
-marSeller
-  = lens _marSeller (\ s a -> s{_marSeller = a})
+mSeller :: Lens' MarketplaceOrder (Maybe Seller)
+mSeller = lens _mSeller (\ s a -> s{_mSeller = a})
 
 -- | The current state of the order. (readonly)
-marOrderState :: Lens' MarketplaceOrder (Maybe Text)
-marOrderState
-  = lens _marOrderState
-      (\ s a -> s{_marOrderState = a})
+mOrderState :: Lens' MarketplaceOrder (Maybe Text)
+mOrderState
+  = lens _mOrderState (\ s a -> s{_mOrderState = a})
 
 -- | The name for the order (updatable)
-marName :: Lens' MarketplaceOrder (Maybe Text)
-marName = lens _marName (\ s a -> s{_marName = a})
+mName :: Lens' MarketplaceOrder (Maybe Text)
+mName = lens _mName (\ s a -> s{_mName = a})
 
 -- | Optional contact information for the seller (buyer-readonly).
-marSellerContacts :: Lens' MarketplaceOrder [ContactInformation]
-marSellerContacts
-  = lens _marSellerContacts
-      (\ s a -> s{_marSellerContacts = a})
+mSellerContacts :: Lens' MarketplaceOrder [ContactInformation]
+mSellerContacts
+  = lens _mSellerContacts
+      (\ s a -> s{_mSellerContacts = a})
       . _Default
       . _Coerce
 
-marLastUpdaterRole :: Lens' MarketplaceOrder (Maybe Text)
-marLastUpdaterRole
-  = lens _marLastUpdaterRole
-      (\ s a -> s{_marLastUpdaterRole = a})
+mLastUpdaterRole :: Lens' MarketplaceOrder (Maybe Text)
+mLastUpdaterRole
+  = lens _mLastUpdaterRole
+      (\ s a -> s{_mLastUpdaterRole = a})
 
 -- | List of labels associated with the order. (readonly)
-marLabels :: Lens' MarketplaceOrder [MarketplaceLabel]
-marLabels
-  = lens _marLabels (\ s a -> s{_marLabels = a}) .
-      _Default
+mLabels :: Lens' MarketplaceOrder [MarketplaceLabel]
+mLabels
+  = lens _mLabels (\ s a -> s{_mLabels = a}) . _Default
       . _Coerce
 
 -- | The time (ms since epoch) when the order was last revised (readonly).
-marRevisionTimeMs :: Lens' MarketplaceOrder (Maybe Int64)
-marRevisionTimeMs
-  = lens _marRevisionTimeMs
-      (\ s a -> s{_marRevisionTimeMs = a})
+mRevisionTimeMs :: Lens' MarketplaceOrder (Maybe Int64)
+mRevisionTimeMs
+  = lens _mRevisionTimeMs
+      (\ s a -> s{_mRevisionTimeMs = a})
 
 -- | The unique id of the order. (readonly).
-marOrderId :: Lens' MarketplaceOrder (Maybe Text)
-marOrderId
-  = lens _marOrderId (\ s a -> s{_marOrderId = a})
+mOrderId :: Lens' MarketplaceOrder (Maybe Text)
+mOrderId = lens _mOrderId (\ s a -> s{_mOrderId = a})
 
 -- | The role of the last user that either updated the order or left a
 -- comment. (readonly)
-marLastUpdaterOrCommentorRole :: Lens' MarketplaceOrder (Maybe Text)
-marLastUpdaterOrCommentorRole
-  = lens _marLastUpdaterOrCommentorRole
-      (\ s a -> s{_marLastUpdaterOrCommentorRole = a})
+mLastUpdaterOrCommentorRole :: Lens' MarketplaceOrder (Maybe Text)
+mLastUpdaterOrCommentorRole
+  = lens _mLastUpdaterOrCommentorRole
+      (\ s a -> s{_mLastUpdaterOrCommentorRole = a})
 
 -- | When an order is in an accepted state, indicates whether the buyer has
 -- signed off Once both sides have signed off on a deal, the order can be
 -- finalized by the seller. (seller-readonly)
-marHasBuyerSignedOff :: Lens' MarketplaceOrder (Maybe Bool)
-marHasBuyerSignedOff
-  = lens _marHasBuyerSignedOff
-      (\ s a -> s{_marHasBuyerSignedOff = a})
+mHasBuyerSignedOff :: Lens' MarketplaceOrder (Maybe Bool)
+mHasBuyerSignedOff
+  = lens _mHasBuyerSignedOff
+      (\ s a -> s{_mHasBuyerSignedOff = a})
 
 -- | Reference to the buyer on the order. (readonly, except on create)
-marBuyer :: Lens' MarketplaceOrder (Maybe Buyer)
-marBuyer = lens _marBuyer (\ s a -> s{_marBuyer = a})
+mBuyer :: Lens' MarketplaceOrder (Maybe Buyer)
+mBuyer = lens _mBuyer (\ s a -> s{_mBuyer = a})
 
 instance FromJSON MarketplaceOrder where
         parseJSON
@@ -7689,27 +7684,27 @@ instance ToJSON MarketplaceOrder where
         toJSON MarketplaceOrder{..}
           = object
               (catMaybes
-                 [("buyerPrivateData" .=) <$> _marBuyerPrivateData,
-                  ("isSetupComplete" .=) <$> _marIsSetupComplete,
-                  ("buyerContacts" .=) <$> _marBuyerContacts,
-                  Just ("kind" .= _marKind),
-                  ("originatorRole" .=) <$> _marOriginatorRole,
-                  ("revisionNumber" .=) <$> _marRevisionNumber,
-                  ("billedBuyer" .=) <$> _marBilledBuyer,
-                  ("isRenegotiating" .=) <$> _marIsRenegotiating,
-                  ("hasSellerSignedOff" .=) <$> _marHasSellerSignedOff,
-                  ("seller" .=) <$> _marSeller,
-                  ("orderState" .=) <$> _marOrderState,
-                  ("name" .=) <$> _marName,
-                  ("sellerContacts" .=) <$> _marSellerContacts,
-                  ("lastUpdaterRole" .=) <$> _marLastUpdaterRole,
-                  ("labels" .=) <$> _marLabels,
-                  ("revisionTimeMs" .=) <$> _marRevisionTimeMs,
-                  ("orderId" .=) <$> _marOrderId,
+                 [("buyerPrivateData" .=) <$> _mBuyerPrivateData,
+                  ("isSetupComplete" .=) <$> _mIsSetupComplete,
+                  ("buyerContacts" .=) <$> _mBuyerContacts,
+                  Just ("kind" .= _mKind),
+                  ("originatorRole" .=) <$> _mOriginatorRole,
+                  ("revisionNumber" .=) <$> _mRevisionNumber,
+                  ("billedBuyer" .=) <$> _mBilledBuyer,
+                  ("isRenegotiating" .=) <$> _mIsRenegotiating,
+                  ("hasSellerSignedOff" .=) <$> _mHasSellerSignedOff,
+                  ("seller" .=) <$> _mSeller,
+                  ("orderState" .=) <$> _mOrderState,
+                  ("name" .=) <$> _mName,
+                  ("sellerContacts" .=) <$> _mSellerContacts,
+                  ("lastUpdaterRole" .=) <$> _mLastUpdaterRole,
+                  ("labels" .=) <$> _mLabels,
+                  ("revisionTimeMs" .=) <$> _mRevisionTimeMs,
+                  ("orderId" .=) <$> _mOrderId,
                   ("lastUpdaterOrCommentorRole" .=) <$>
-                    _marLastUpdaterOrCommentorRole,
-                  ("hasBuyerSignedOff" .=) <$> _marHasBuyerSignedOff,
-                  ("buyer" .=) <$> _marBuyer])
+                    _mLastUpdaterOrCommentorRole,
+                  ("hasBuyerSignedOff" .=) <$> _mHasBuyerSignedOff,
+                  ("buyer" .=) <$> _mBuyer])
 
 --
 -- /See:/ 'addOrderDealsRequest' smart constructor.

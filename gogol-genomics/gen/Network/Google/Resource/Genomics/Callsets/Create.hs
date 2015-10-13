@@ -34,17 +34,12 @@ module Network.Google.Resource.Genomics.Callsets.Create
 
     -- * Request Lenses
     , ccXgafv
-    , ccQuotaUser
-    , ccPrettyPrint
     , ccUploadProtocol
     , ccPp
     , ccAccessToken
     , ccUploadType
     , ccPayload
     , ccBearerToken
-    , ccKey
-    , ccOAuthToken
-    , ccFields
     , ccCallback
     ) where
 
@@ -63,31 +58,20 @@ type CallsetsCreateResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] CallSet :>
-                                     Post '[JSON] CallSet
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] CallSet :> Post '[JSON] CallSet
 
 -- | Creates a new call set.
 --
 -- /See:/ 'callsetsCreate'' smart constructor.
 data CallsetsCreate' = CallsetsCreate'
     { _ccXgafv          :: !(Maybe Text)
-    , _ccQuotaUser      :: !(Maybe Text)
-    , _ccPrettyPrint    :: !Bool
     , _ccUploadProtocol :: !(Maybe Text)
     , _ccPp             :: !Bool
     , _ccAccessToken    :: !(Maybe Text)
     , _ccUploadType     :: !(Maybe Text)
     , _ccPayload        :: !CallSet
     , _ccBearerToken    :: !(Maybe Text)
-    , _ccKey            :: !(Maybe AuthKey)
-    , _ccOAuthToken     :: !(Maybe OAuthToken)
-    , _ccFields         :: !(Maybe Text)
     , _ccCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -96,10 +80,6 @@ data CallsetsCreate' = CallsetsCreate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ccXgafv'
---
--- * 'ccQuotaUser'
---
--- * 'ccPrettyPrint'
 --
 -- * 'ccUploadProtocol'
 --
@@ -113,12 +93,6 @@ data CallsetsCreate' = CallsetsCreate'
 --
 -- * 'ccBearerToken'
 --
--- * 'ccKey'
---
--- * 'ccOAuthToken'
---
--- * 'ccFields'
---
 -- * 'ccCallback'
 callsetsCreate'
     :: CallSet -- ^ 'payload'
@@ -126,36 +100,18 @@ callsetsCreate'
 callsetsCreate' pCcPayload_ =
     CallsetsCreate'
     { _ccXgafv = Nothing
-    , _ccQuotaUser = Nothing
-    , _ccPrettyPrint = True
     , _ccUploadProtocol = Nothing
     , _ccPp = True
     , _ccAccessToken = Nothing
     , _ccUploadType = Nothing
     , _ccPayload = pCcPayload_
     , _ccBearerToken = Nothing
-    , _ccKey = Nothing
-    , _ccOAuthToken = Nothing
-    , _ccFields = Nothing
     , _ccCallback = Nothing
     }
 
 -- | V1 error format.
 ccXgafv :: Lens' CallsetsCreate' (Maybe Text)
 ccXgafv = lens _ccXgafv (\ s a -> s{_ccXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ccQuotaUser :: Lens' CallsetsCreate' (Maybe Text)
-ccQuotaUser
-  = lens _ccQuotaUser (\ s a -> s{_ccQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ccPrettyPrint :: Lens' CallsetsCreate' Bool
-ccPrettyPrint
-  = lens _ccPrettyPrint
-      (\ s a -> s{_ccPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 ccUploadProtocol :: Lens' CallsetsCreate' (Maybe Text)
@@ -189,46 +145,22 @@ ccBearerToken
   = lens _ccBearerToken
       (\ s a -> s{_ccBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ccKey :: Lens' CallsetsCreate' (Maybe AuthKey)
-ccKey = lens _ccKey (\ s a -> s{_ccKey = a})
-
--- | OAuth 2.0 token for the current user.
-ccOAuthToken :: Lens' CallsetsCreate' (Maybe OAuthToken)
-ccOAuthToken
-  = lens _ccOAuthToken (\ s a -> s{_ccOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ccFields :: Lens' CallsetsCreate' (Maybe Text)
-ccFields = lens _ccFields (\ s a -> s{_ccFields = a})
-
 -- | JSONP
 ccCallback :: Lens' CallsetsCreate' (Maybe Text)
 ccCallback
   = lens _ccCallback (\ s a -> s{_ccCallback = a})
 
-instance GoogleAuth CallsetsCreate' where
-        _AuthKey = ccKey . _Just
-        _AuthToken = ccOAuthToken . _Just
-
 instance GoogleRequest CallsetsCreate' where
         type Rs CallsetsCreate' = CallSet
-        request = requestWith genomicsRequest
-        requestWith rq CallsetsCreate'{..}
+        requestClient CallsetsCreate'{..}
           = go _ccXgafv _ccUploadProtocol (Just _ccPp)
               _ccAccessToken
               _ccUploadType
               _ccBearerToken
               _ccCallback
-              _ccQuotaUser
-              (Just _ccPrettyPrint)
-              _ccFields
-              _ccKey
-              _ccOAuthToken
               (Just AltJSON)
               _ccPayload
+              genomicsService
           where go
-                  = clientBuild (Proxy :: Proxy CallsetsCreateResource)
-                      rq
+                  = buildClient (Proxy :: Proxy CallsetsCreateResource)
+                      mempty

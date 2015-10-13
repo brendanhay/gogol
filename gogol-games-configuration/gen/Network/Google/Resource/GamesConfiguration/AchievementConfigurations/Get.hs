@@ -34,13 +34,7 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Get
     , AchievementConfigurationsGet'
 
     -- * Request Lenses
-    , acgQuotaUser
-    , acgPrettyPrint
     , acgAchievementId
-    , acgUserIP
-    , acgKey
-    , acgOAuthToken
-    , acgFields
     ) where
 
 import           Network.Google.GamesConfiguration.Types
@@ -51,72 +45,29 @@ import           Network.Google.Prelude
 type AchievementConfigurationsGetResource =
      "achievements" :>
        Capture "achievementId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] AchievementConfiguration
+         QueryParam "alt" AltJSON :>
+           Get '[JSON] AchievementConfiguration
 
 -- | Retrieves the metadata of the achievement configuration with the given
 -- ID.
 --
 -- /See:/ 'achievementConfigurationsGet'' smart constructor.
-data AchievementConfigurationsGet' = AchievementConfigurationsGet'
-    { _acgQuotaUser     :: !(Maybe Text)
-    , _acgPrettyPrint   :: !Bool
-    , _acgAchievementId :: !Text
-    , _acgUserIP        :: !(Maybe Text)
-    , _acgKey           :: !(Maybe AuthKey)
-    , _acgOAuthToken    :: !(Maybe OAuthToken)
-    , _acgFields        :: !(Maybe Text)
+newtype AchievementConfigurationsGet' = AchievementConfigurationsGet'
+    { _acgAchievementId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acgQuotaUser'
---
--- * 'acgPrettyPrint'
---
 -- * 'acgAchievementId'
---
--- * 'acgUserIP'
---
--- * 'acgKey'
---
--- * 'acgOAuthToken'
---
--- * 'acgFields'
 achievementConfigurationsGet'
     :: Text -- ^ 'achievementId'
     -> AchievementConfigurationsGet'
 achievementConfigurationsGet' pAcgAchievementId_ =
     AchievementConfigurationsGet'
-    { _acgQuotaUser = Nothing
-    , _acgPrettyPrint = True
-    , _acgAchievementId = pAcgAchievementId_
-    , _acgUserIP = Nothing
-    , _acgKey = Nothing
-    , _acgOAuthToken = Nothing
-    , _acgFields = Nothing
+    { _acgAchievementId = pAcgAchievementId_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-acgQuotaUser :: Lens' AchievementConfigurationsGet' (Maybe Text)
-acgQuotaUser
-  = lens _acgQuotaUser (\ s a -> s{_acgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-acgPrettyPrint :: Lens' AchievementConfigurationsGet' Bool
-acgPrettyPrint
-  = lens _acgPrettyPrint
-      (\ s a -> s{_acgPrettyPrint = a})
 
 -- | The ID of the achievement used by this method.
 acgAchievementId :: Lens' AchievementConfigurationsGet' Text
@@ -124,48 +75,14 @@ acgAchievementId
   = lens _acgAchievementId
       (\ s a -> s{_acgAchievementId = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-acgUserIP :: Lens' AchievementConfigurationsGet' (Maybe Text)
-acgUserIP
-  = lens _acgUserIP (\ s a -> s{_acgUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-acgKey :: Lens' AchievementConfigurationsGet' (Maybe AuthKey)
-acgKey = lens _acgKey (\ s a -> s{_acgKey = a})
-
--- | OAuth 2.0 token for the current user.
-acgOAuthToken :: Lens' AchievementConfigurationsGet' (Maybe OAuthToken)
-acgOAuthToken
-  = lens _acgOAuthToken
-      (\ s a -> s{_acgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-acgFields :: Lens' AchievementConfigurationsGet' (Maybe Text)
-acgFields
-  = lens _acgFields (\ s a -> s{_acgFields = a})
-
-instance GoogleAuth AchievementConfigurationsGet'
-         where
-        _AuthKey = acgKey . _Just
-        _AuthToken = acgOAuthToken . _Just
-
 instance GoogleRequest AchievementConfigurationsGet'
          where
         type Rs AchievementConfigurationsGet' =
              AchievementConfiguration
-        request = requestWith gamesConfigurationRequest
-        requestWith rq AchievementConfigurationsGet'{..}
-          = go _acgAchievementId _acgQuotaUser
-              (Just _acgPrettyPrint)
-              _acgUserIP
-              _acgFields
-              _acgKey
-              _acgOAuthToken
-              (Just AltJSON)
+        requestClient AchievementConfigurationsGet'{..}
+          = go _acgAchievementId (Just AltJSON)
+              gamesConfigurationService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AchievementConfigurationsGetResource)
-                      rq
+                      mempty

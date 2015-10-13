@@ -35,22 +35,16 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Generate
     , AccountsReportsGenerate'
 
     -- * Request Lenses
-    , argQuotaUser
-    , argPrettyPrint
-    , argUserIP
     , argDimension
     , argLocale
     , argEndDate
     , argStartDate
     , argAccountId
     , argMetric
-    , argKey
     , argSort
     , argFilter
-    , argOAuthToken
     , argStartIndex
     , argMaxResults
-    , argFields
     ) where
 
 import           Network.Google.AdExchangeSeller.Types
@@ -71,14 +65,7 @@ type AccountsReportsGenerateResource =
                        QueryParams "filter" Text :>
                          QueryParam "startIndex" Word32 :>
                            QueryParam "maxResults" Word32 :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "userIp" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] Report
+                             QueryParam "alt" AltJSON :> Get '[JSON] Report
        :<|>
        "accounts" :>
          Capture "accountId" Text :>
@@ -92,14 +79,8 @@ type AccountsReportsGenerateResource =
                          QueryParams "filter" Text :>
                            QueryParam "startIndex" Word32 :>
                              QueryParam "maxResults" Word32 :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "userIp" Text :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "key" AuthKey :>
-                                         Header "Authorization" OAuthToken :>
-                                           QueryParam "alt" AltMedia :>
-                                             Get '[OctetStream] Stream
+                               QueryParam "alt" AltMedia :>
+                                 Get '[OctetStream] Stream
 
 -- | Generate an Ad Exchange report based on the report request sent in the
 -- query parameters. Returns the result as JSON; to retrieve output in CSV
@@ -107,33 +88,21 @@ type AccountsReportsGenerateResource =
 --
 -- /See:/ 'accountsReportsGenerate'' smart constructor.
 data AccountsReportsGenerate' = AccountsReportsGenerate'
-    { _argQuotaUser   :: !(Maybe Text)
-    , _argPrettyPrint :: !Bool
-    , _argUserIP      :: !(Maybe Text)
-    , _argDimension   :: !(Maybe [Text])
-    , _argLocale      :: !(Maybe Text)
-    , _argEndDate     :: !Text
-    , _argStartDate   :: !Text
-    , _argAccountId   :: !Text
-    , _argMetric      :: !(Maybe [Text])
-    , _argKey         :: !(Maybe AuthKey)
-    , _argSort        :: !(Maybe [Text])
-    , _argFilter      :: !(Maybe [Text])
-    , _argOAuthToken  :: !(Maybe OAuthToken)
-    , _argStartIndex  :: !(Maybe Word32)
-    , _argMaxResults  :: !(Maybe Word32)
-    , _argFields      :: !(Maybe Text)
+    { _argDimension  :: !(Maybe [Text])
+    , _argLocale     :: !(Maybe Text)
+    , _argEndDate    :: !Text
+    , _argStartDate  :: !Text
+    , _argAccountId  :: !Text
+    , _argMetric     :: !(Maybe [Text])
+    , _argSort       :: !(Maybe [Text])
+    , _argFilter     :: !(Maybe [Text])
+    , _argStartIndex :: !(Maybe Word32)
+    , _argMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsReportsGenerate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'argQuotaUser'
---
--- * 'argPrettyPrint'
---
--- * 'argUserIP'
 --
 -- * 'argDimension'
 --
@@ -147,19 +116,13 @@ data AccountsReportsGenerate' = AccountsReportsGenerate'
 --
 -- * 'argMetric'
 --
--- * 'argKey'
---
 -- * 'argSort'
 --
 -- * 'argFilter'
 --
--- * 'argOAuthToken'
---
 -- * 'argStartIndex'
 --
 -- * 'argMaxResults'
---
--- * 'argFields'
 accountsReportsGenerate'
     :: Text -- ^ 'endDate'
     -> Text -- ^ 'startDate'
@@ -167,42 +130,17 @@ accountsReportsGenerate'
     -> AccountsReportsGenerate'
 accountsReportsGenerate' pArgEndDate_ pArgStartDate_ pArgAccountId_ =
     AccountsReportsGenerate'
-    { _argQuotaUser = Nothing
-    , _argPrettyPrint = True
-    , _argUserIP = Nothing
-    , _argDimension = Nothing
+    { _argDimension = Nothing
     , _argLocale = Nothing
     , _argEndDate = pArgEndDate_
     , _argStartDate = pArgStartDate_
     , _argAccountId = pArgAccountId_
     , _argMetric = Nothing
-    , _argKey = Nothing
     , _argSort = Nothing
     , _argFilter = Nothing
-    , _argOAuthToken = Nothing
     , _argStartIndex = Nothing
     , _argMaxResults = Nothing
-    , _argFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-argQuotaUser :: Lens' AccountsReportsGenerate' (Maybe Text)
-argQuotaUser
-  = lens _argQuotaUser (\ s a -> s{_argQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-argPrettyPrint :: Lens' AccountsReportsGenerate' Bool
-argPrettyPrint
-  = lens _argPrettyPrint
-      (\ s a -> s{_argPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-argUserIP :: Lens' AccountsReportsGenerate' (Maybe Text)
-argUserIP
-  = lens _argUserIP (\ s a -> s{_argUserIP = a})
 
 -- | Dimensions to base the report on.
 argDimension :: Lens' AccountsReportsGenerate' [Text]
@@ -240,12 +178,6 @@ argMetric
       _Default
       . _Coerce
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-argKey :: Lens' AccountsReportsGenerate' (Maybe AuthKey)
-argKey = lens _argKey (\ s a -> s{_argKey = a})
-
 -- | The name of a dimension or metric to sort the resulting report on,
 -- optionally prefixed with \"+\" to sort ascending or \"-\" to sort
 -- descending. If no prefix is specified, the column is sorted ascending.
@@ -261,12 +193,6 @@ argFilter
       _Default
       . _Coerce
 
--- | OAuth 2.0 token for the current user.
-argOAuthToken :: Lens' AccountsReportsGenerate' (Maybe OAuthToken)
-argOAuthToken
-  = lens _argOAuthToken
-      (\ s a -> s{_argOAuthToken = a})
-
 -- | Index of the first row of report data to return.
 argStartIndex :: Lens' AccountsReportsGenerate' (Maybe Word32)
 argStartIndex
@@ -279,19 +205,9 @@ argMaxResults
   = lens _argMaxResults
       (\ s a -> s{_argMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-argFields :: Lens' AccountsReportsGenerate' (Maybe Text)
-argFields
-  = lens _argFields (\ s a -> s{_argFields = a})
-
-instance GoogleAuth AccountsReportsGenerate' where
-        _AuthKey = argKey . _Just
-        _AuthToken = argOAuthToken . _Just
-
 instance GoogleRequest AccountsReportsGenerate' where
         type Rs AccountsReportsGenerate' = Report
-        request = requestWith adExchangeSellerRequest
-        requestWith rq AccountsReportsGenerate'{..}
+        requestClient AccountsReportsGenerate'{..}
           = go _argAccountId (Just _argStartDate)
               (Just _argEndDate)
               (_argDimension ^. _Default)
@@ -301,24 +217,18 @@ instance GoogleRequest AccountsReportsGenerate' where
               (_argFilter ^. _Default)
               _argStartIndex
               _argMaxResults
-              _argQuotaUser
-              (Just _argPrettyPrint)
-              _argUserIP
-              _argFields
-              _argKey
-              _argOAuthToken
               (Just AltJSON)
+              adExchangeSellerService
           where go :<|> _
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsReportsGenerateResource)
-                      rq
+                      mempty
 
 instance GoogleRequest
          (MediaDownload AccountsReportsGenerate') where
         type Rs (MediaDownload AccountsReportsGenerate') =
              Stream
-        request = requestWith adExchangeSellerRequest
-        requestWith rq
+        requestClient
           (MediaDownload AccountsReportsGenerate'{..})
           = go _argAccountId (Just _argStartDate)
               (Just _argEndDate)
@@ -329,14 +239,9 @@ instance GoogleRequest
               (_argFilter ^. _Default)
               _argStartIndex
               _argMaxResults
-              _argQuotaUser
-              (Just _argPrettyPrint)
-              _argUserIP
-              _argFields
-              _argKey
-              _argOAuthToken
               (Just AltMedia)
+              adExchangeSellerService
           where _ :<|> go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsReportsGenerateResource)
-                      rq
+                      mempty

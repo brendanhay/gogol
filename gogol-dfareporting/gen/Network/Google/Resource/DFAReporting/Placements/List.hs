@@ -34,11 +34,8 @@ module Network.Google.Resource.DFAReporting.Placements.List
 
     -- * Request Lenses
     , plaPlacementStrategyIds
-    , plaQuotaUser
-    , plaPrettyPrint
     , plaContentCategoryIds
     , plaMaxEndDate
-    , plaUserIP
     , plaCampaignIds
     , plaPricingTypes
     , plaSearchString
@@ -49,19 +46,16 @@ module Network.Google.Resource.DFAReporting.Placements.List
     , plaDirectorySiteIds
     , plaSortOrder
     , plaPaymentSource
-    , plaKey
     , plaSiteIds
     , plaPageToken
     , plaSortField
     , plaCompatibilities
     , plaMaxStartDate
-    , plaOAuthToken
     , plaAdvertiserIds
     , plaMinStartDate
     , plaArchived
     , plaMaxResults
     , plaMinEndDate
-    , plaFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -106,43 +100,18 @@ type PlacementsListResource =
                                                      QueryParam "minEndDate"
                                                        Text
                                                        :>
-                                                       QueryParam "quotaUser"
-                                                         Text
+                                                       QueryParam "alt" AltJSON
                                                          :>
-                                                         QueryParam
-                                                           "prettyPrint"
-                                                           Bool
-                                                           :>
-                                                           QueryParam "userIp"
-                                                             Text
-                                                             :>
-                                                             QueryParam "fields"
-                                                               Text
-                                                               :>
-                                                               QueryParam "key"
-                                                                 AuthKey
-                                                                 :>
-                                                                 Header
-                                                                   "Authorization"
-                                                                   OAuthToken
-                                                                   :>
-                                                                   QueryParam
-                                                                     "alt"
-                                                                     AltJSON
-                                                                     :>
-                                                                     Get '[JSON]
-                                                                       PlacementsListResponse
+                                                         Get '[JSON]
+                                                           PlacementsListResponse
 
 -- | Retrieves a list of placements, possibly filtered.
 --
 -- /See:/ 'placementsList'' smart constructor.
 data PlacementsList' = PlacementsList'
     { _plaPlacementStrategyIds :: !(Maybe [Int64])
-    , _plaQuotaUser            :: !(Maybe Text)
-    , _plaPrettyPrint          :: !Bool
     , _plaContentCategoryIds   :: !(Maybe [Int64])
     , _plaMaxEndDate           :: !(Maybe Text)
-    , _plaUserIP               :: !(Maybe Text)
     , _plaCampaignIds          :: !(Maybe [Int64])
     , _plaPricingTypes         :: !(Maybe [PlacementsListPricingTypes])
     , _plaSearchString         :: !(Maybe Text)
@@ -153,19 +122,16 @@ data PlacementsList' = PlacementsList'
     , _plaDirectorySiteIds     :: !(Maybe [Int64])
     , _plaSortOrder            :: !(Maybe PlacementsListSortOrder)
     , _plaPaymentSource        :: !(Maybe PlacementsListPaymentSource)
-    , _plaKey                  :: !(Maybe AuthKey)
     , _plaSiteIds              :: !(Maybe [Int64])
     , _plaPageToken            :: !(Maybe Text)
     , _plaSortField            :: !(Maybe PlacementsListSortField)
     , _plaCompatibilities      :: !(Maybe [PlacementsListCompatibilities])
     , _plaMaxStartDate         :: !(Maybe Text)
-    , _plaOAuthToken           :: !(Maybe OAuthToken)
     , _plaAdvertiserIds        :: !(Maybe [Int64])
     , _plaMinStartDate         :: !(Maybe Text)
     , _plaArchived             :: !(Maybe Bool)
     , _plaMaxResults           :: !(Maybe Int32)
     , _plaMinEndDate           :: !(Maybe Text)
-    , _plaFields               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsList'' with the minimum fields required to make a request.
@@ -174,15 +140,9 @@ data PlacementsList' = PlacementsList'
 --
 -- * 'plaPlacementStrategyIds'
 --
--- * 'plaQuotaUser'
---
--- * 'plaPrettyPrint'
---
 -- * 'plaContentCategoryIds'
 --
 -- * 'plaMaxEndDate'
---
--- * 'plaUserIP'
 --
 -- * 'plaCampaignIds'
 --
@@ -204,8 +164,6 @@ data PlacementsList' = PlacementsList'
 --
 -- * 'plaPaymentSource'
 --
--- * 'plaKey'
---
 -- * 'plaSiteIds'
 --
 -- * 'plaPageToken'
@@ -216,8 +174,6 @@ data PlacementsList' = PlacementsList'
 --
 -- * 'plaMaxStartDate'
 --
--- * 'plaOAuthToken'
---
 -- * 'plaAdvertiserIds'
 --
 -- * 'plaMinStartDate'
@@ -227,19 +183,14 @@ data PlacementsList' = PlacementsList'
 -- * 'plaMaxResults'
 --
 -- * 'plaMinEndDate'
---
--- * 'plaFields'
 placementsList'
     :: Int64 -- ^ 'profileId'
     -> PlacementsList'
 placementsList' pPlaProFileId_ =
     PlacementsList'
     { _plaPlacementStrategyIds = Nothing
-    , _plaQuotaUser = Nothing
-    , _plaPrettyPrint = True
     , _plaContentCategoryIds = Nothing
     , _plaMaxEndDate = Nothing
-    , _plaUserIP = Nothing
     , _plaCampaignIds = Nothing
     , _plaPricingTypes = Nothing
     , _plaSearchString = Nothing
@@ -250,19 +201,16 @@ placementsList' pPlaProFileId_ =
     , _plaDirectorySiteIds = Nothing
     , _plaSortOrder = Nothing
     , _plaPaymentSource = Nothing
-    , _plaKey = Nothing
     , _plaSiteIds = Nothing
     , _plaPageToken = Nothing
     , _plaSortField = Nothing
     , _plaCompatibilities = Nothing
     , _plaMaxStartDate = Nothing
-    , _plaOAuthToken = Nothing
     , _plaAdvertiserIds = Nothing
     , _plaMinStartDate = Nothing
     , _plaArchived = Nothing
     , _plaMaxResults = Nothing
     , _plaMinEndDate = Nothing
-    , _plaFields = Nothing
     }
 
 -- | Select only placements that are associated with these placement
@@ -273,19 +221,6 @@ plaPlacementStrategyIds
       (\ s a -> s{_plaPlacementStrategyIds = a})
       . _Default
       . _Coerce
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-plaQuotaUser :: Lens' PlacementsList' (Maybe Text)
-plaQuotaUser
-  = lens _plaQuotaUser (\ s a -> s{_plaQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-plaPrettyPrint :: Lens' PlacementsList' Bool
-plaPrettyPrint
-  = lens _plaPrettyPrint
-      (\ s a -> s{_plaPrettyPrint = a})
 
 -- | Select only placements that are associated with these content
 -- categories.
@@ -303,12 +238,6 @@ plaMaxEndDate :: Lens' PlacementsList' (Maybe Text)
 plaMaxEndDate
   = lens _plaMaxEndDate
       (\ s a -> s{_plaMaxEndDate = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-plaUserIP :: Lens' PlacementsList' (Maybe Text)
-plaUserIP
-  = lens _plaUserIP (\ s a -> s{_plaUserIP = a})
 
 -- | Select only placements that belong to these campaigns.
 plaCampaignIds :: Lens' PlacementsList' [Int64]
@@ -382,12 +311,6 @@ plaPaymentSource
   = lens _plaPaymentSource
       (\ s a -> s{_plaPaymentSource = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-plaKey :: Lens' PlacementsList' (Maybe AuthKey)
-plaKey = lens _plaKey (\ s a -> s{_plaKey = a})
-
 -- | Select only placements that are associated with these sites.
 plaSiteIds :: Lens' PlacementsList' [Int64]
 plaSiteIds
@@ -425,12 +348,6 @@ plaMaxStartDate
   = lens _plaMaxStartDate
       (\ s a -> s{_plaMaxStartDate = a})
 
--- | OAuth 2.0 token for the current user.
-plaOAuthToken :: Lens' PlacementsList' (Maybe OAuthToken)
-plaOAuthToken
-  = lens _plaOAuthToken
-      (\ s a -> s{_plaOAuthToken = a})
-
 -- | Select only placements that belong to these advertisers.
 plaAdvertiserIds :: Lens' PlacementsList' [Int64]
 plaAdvertiserIds
@@ -467,19 +384,9 @@ plaMinEndDate
   = lens _plaMinEndDate
       (\ s a -> s{_plaMinEndDate = a})
 
--- | Selector specifying which fields to include in a partial response.
-plaFields :: Lens' PlacementsList' (Maybe Text)
-plaFields
-  = lens _plaFields (\ s a -> s{_plaFields = a})
-
-instance GoogleAuth PlacementsList' where
-        _AuthKey = plaKey . _Just
-        _AuthToken = plaOAuthToken . _Just
-
 instance GoogleRequest PlacementsList' where
         type Rs PlacementsList' = PlacementsListResponse
-        request = requestWith dFAReportingRequest
-        requestWith rq PlacementsList'{..}
+        requestClient PlacementsList'{..}
           = go _plaProFileId
               (_plaPlacementStrategyIds ^. _Default)
               (_plaContentCategoryIds ^. _Default)
@@ -503,13 +410,8 @@ instance GoogleRequest PlacementsList' where
               _plaArchived
               _plaMaxResults
               _plaMinEndDate
-              _plaQuotaUser
-              (Just _plaPrettyPrint)
-              _plaUserIP
-              _plaFields
-              _plaKey
-              _plaOAuthToken
               (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild (Proxy :: Proxy PlacementsListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy PlacementsListResource)
+                      mempty

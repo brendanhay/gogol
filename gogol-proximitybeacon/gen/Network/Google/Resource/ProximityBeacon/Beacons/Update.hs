@@ -39,8 +39,6 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Update
 
     -- * Request Lenses
     , buXgafv
-    , buQuotaUser
-    , buPrettyPrint
     , buUploadProtocol
     , buPp
     , buAccessToken
@@ -48,9 +46,6 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Update
     , buUploadType
     , buPayload
     , buBearerToken
-    , buKey
-    , buOAuthToken
-    , buFields
     , buCallback
     ) where
 
@@ -69,13 +64,8 @@ type BeaconsUpdateResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Beacon :> Put '[JSON] Beacon
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Beacon :> Put '[JSON] Beacon
 
 -- | Updates the information about the specified beacon. **Any field that you
 -- do not populate in the submitted beacon will be permanently erased**, so
@@ -87,8 +77,6 @@ type BeaconsUpdateResource =
 -- /See:/ 'beaconsUpdate'' smart constructor.
 data BeaconsUpdate' = BeaconsUpdate'
     { _buXgafv          :: !(Maybe Text)
-    , _buQuotaUser      :: !(Maybe Text)
-    , _buPrettyPrint    :: !Bool
     , _buUploadProtocol :: !(Maybe Text)
     , _buPp             :: !Bool
     , _buAccessToken    :: !(Maybe Text)
@@ -96,9 +84,6 @@ data BeaconsUpdate' = BeaconsUpdate'
     , _buUploadType     :: !(Maybe Text)
     , _buPayload        :: !Beacon
     , _buBearerToken    :: !(Maybe Text)
-    , _buKey            :: !(Maybe AuthKey)
-    , _buOAuthToken     :: !(Maybe OAuthToken)
-    , _buFields         :: !(Maybe Text)
     , _buCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -107,10 +92,6 @@ data BeaconsUpdate' = BeaconsUpdate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'buXgafv'
---
--- * 'buQuotaUser'
---
--- * 'buPrettyPrint'
 --
 -- * 'buUploadProtocol'
 --
@@ -126,12 +107,6 @@ data BeaconsUpdate' = BeaconsUpdate'
 --
 -- * 'buBearerToken'
 --
--- * 'buKey'
---
--- * 'buOAuthToken'
---
--- * 'buFields'
---
 -- * 'buCallback'
 beaconsUpdate'
     :: Text -- ^ 'beaconName'
@@ -140,8 +115,6 @@ beaconsUpdate'
 beaconsUpdate' pBuBeaconName_ pBuPayload_ =
     BeaconsUpdate'
     { _buXgafv = Nothing
-    , _buQuotaUser = Nothing
-    , _buPrettyPrint = True
     , _buUploadProtocol = Nothing
     , _buPp = True
     , _buAccessToken = Nothing
@@ -149,28 +122,12 @@ beaconsUpdate' pBuBeaconName_ pBuPayload_ =
     , _buUploadType = Nothing
     , _buPayload = pBuPayload_
     , _buBearerToken = Nothing
-    , _buKey = Nothing
-    , _buOAuthToken = Nothing
-    , _buFields = Nothing
     , _buCallback = Nothing
     }
 
 -- | V1 error format.
 buXgafv :: Lens' BeaconsUpdate' (Maybe Text)
 buXgafv = lens _buXgafv (\ s a -> s{_buXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-buQuotaUser :: Lens' BeaconsUpdate' (Maybe Text)
-buQuotaUser
-  = lens _buQuotaUser (\ s a -> s{_buQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-buPrettyPrint :: Lens' BeaconsUpdate' Bool
-buPrettyPrint
-  = lens _buPrettyPrint
-      (\ s a -> s{_buPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 buUploadProtocol :: Lens' BeaconsUpdate' (Maybe Text)
@@ -214,47 +171,23 @@ buBearerToken
   = lens _buBearerToken
       (\ s a -> s{_buBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-buKey :: Lens' BeaconsUpdate' (Maybe AuthKey)
-buKey = lens _buKey (\ s a -> s{_buKey = a})
-
--- | OAuth 2.0 token for the current user.
-buOAuthToken :: Lens' BeaconsUpdate' (Maybe OAuthToken)
-buOAuthToken
-  = lens _buOAuthToken (\ s a -> s{_buOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-buFields :: Lens' BeaconsUpdate' (Maybe Text)
-buFields = lens _buFields (\ s a -> s{_buFields = a})
-
 -- | JSONP
 buCallback :: Lens' BeaconsUpdate' (Maybe Text)
 buCallback
   = lens _buCallback (\ s a -> s{_buCallback = a})
 
-instance GoogleAuth BeaconsUpdate' where
-        _AuthKey = buKey . _Just
-        _AuthToken = buOAuthToken . _Just
-
 instance GoogleRequest BeaconsUpdate' where
         type Rs BeaconsUpdate' = Beacon
-        request = requestWith proximityBeaconRequest
-        requestWith rq BeaconsUpdate'{..}
+        requestClient BeaconsUpdate'{..}
           = go _buBeaconName _buXgafv _buUploadProtocol
               (Just _buPp)
               _buAccessToken
               _buUploadType
               _buBearerToken
               _buCallback
-              _buQuotaUser
-              (Just _buPrettyPrint)
-              _buFields
-              _buKey
-              _buOAuthToken
               (Just AltJSON)
               _buPayload
+              proximityBeaconService
           where go
-                  = clientBuild (Proxy :: Proxy BeaconsUpdateResource)
-                      rq
+                  = buildClient (Proxy :: Proxy BeaconsUpdateResource)
+                      mempty

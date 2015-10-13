@@ -33,15 +33,9 @@ module Network.Google.Resource.Blogger.Blogs.Get
     , BlogsGet'
 
     -- * Request Lenses
-    , bgQuotaUser
-    , bgPrettyPrint
-    , bgUserIP
     , bgBlogId
-    , bgKey
     , bgMaxPosts
     , bgView
-    , bgOAuthToken
-    , bgFields
     ) where
 
 import           Network.Google.Blogger.Types
@@ -54,93 +48,39 @@ type BlogsGetResource =
        Capture "blogId" Text :>
          QueryParam "maxPosts" Word32 :>
            QueryParam "view" BlogsGetView :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Blog
+             QueryParam "alt" AltJSON :> Get '[JSON] Blog
 
 -- | Gets one blog by ID.
 --
 -- /See:/ 'blogsGet'' smart constructor.
 data BlogsGet' = BlogsGet'
-    { _bgQuotaUser   :: !(Maybe Text)
-    , _bgPrettyPrint :: !Bool
-    , _bgUserIP      :: !(Maybe Text)
-    , _bgBlogId      :: !Text
-    , _bgKey         :: !(Maybe AuthKey)
-    , _bgMaxPosts    :: !(Maybe Word32)
-    , _bgView        :: !(Maybe BlogsGetView)
-    , _bgOAuthToken  :: !(Maybe OAuthToken)
-    , _bgFields      :: !(Maybe Text)
+    { _bgBlogId   :: !Text
+    , _bgMaxPosts :: !(Maybe Word32)
+    , _bgView     :: !(Maybe BlogsGetView)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BlogsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bgQuotaUser'
---
--- * 'bgPrettyPrint'
---
--- * 'bgUserIP'
---
 -- * 'bgBlogId'
---
--- * 'bgKey'
 --
 -- * 'bgMaxPosts'
 --
 -- * 'bgView'
---
--- * 'bgOAuthToken'
---
--- * 'bgFields'
 blogsGet'
     :: Text -- ^ 'blogId'
     -> BlogsGet'
 blogsGet' pBgBlogId_ =
     BlogsGet'
-    { _bgQuotaUser = Nothing
-    , _bgPrettyPrint = True
-    , _bgUserIP = Nothing
-    , _bgBlogId = pBgBlogId_
-    , _bgKey = Nothing
+    { _bgBlogId = pBgBlogId_
     , _bgMaxPosts = Nothing
     , _bgView = Nothing
-    , _bgOAuthToken = Nothing
-    , _bgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-bgQuotaUser :: Lens' BlogsGet' (Maybe Text)
-bgQuotaUser
-  = lens _bgQuotaUser (\ s a -> s{_bgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-bgPrettyPrint :: Lens' BlogsGet' Bool
-bgPrettyPrint
-  = lens _bgPrettyPrint
-      (\ s a -> s{_bgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-bgUserIP :: Lens' BlogsGet' (Maybe Text)
-bgUserIP = lens _bgUserIP (\ s a -> s{_bgUserIP = a})
 
 -- | The ID of the blog to get.
 bgBlogId :: Lens' BlogsGet' Text
 bgBlogId = lens _bgBlogId (\ s a -> s{_bgBlogId = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-bgKey :: Lens' BlogsGet' (Maybe AuthKey)
-bgKey = lens _bgKey (\ s a -> s{_bgKey = a})
 
 -- | Maximum number of posts to pull back with the blog.
 bgMaxPosts :: Lens' BlogsGet' (Maybe Word32)
@@ -152,29 +92,11 @@ bgMaxPosts
 bgView :: Lens' BlogsGet' (Maybe BlogsGetView)
 bgView = lens _bgView (\ s a -> s{_bgView = a})
 
--- | OAuth 2.0 token for the current user.
-bgOAuthToken :: Lens' BlogsGet' (Maybe OAuthToken)
-bgOAuthToken
-  = lens _bgOAuthToken (\ s a -> s{_bgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-bgFields :: Lens' BlogsGet' (Maybe Text)
-bgFields = lens _bgFields (\ s a -> s{_bgFields = a})
-
-instance GoogleAuth BlogsGet' where
-        _AuthKey = bgKey . _Just
-        _AuthToken = bgOAuthToken . _Just
-
 instance GoogleRequest BlogsGet' where
         type Rs BlogsGet' = Blog
-        request = requestWith bloggerRequest
-        requestWith rq BlogsGet'{..}
-          = go _bgBlogId _bgMaxPosts _bgView _bgQuotaUser
-              (Just _bgPrettyPrint)
-              _bgUserIP
-              _bgFields
-              _bgKey
-              _bgOAuthToken
-              (Just AltJSON)
+        requestClient BlogsGet'{..}
+          = go _bgBlogId _bgMaxPosts _bgView (Just AltJSON)
+              bloggerService
           where go
-                  = clientBuild (Proxy :: Proxy BlogsGetResource) rq
+                  = buildClient (Proxy :: Proxy BlogsGetResource)
+                      mempty

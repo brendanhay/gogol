@@ -33,14 +33,8 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Insert
     , AdvertiserGroupsInsert'
 
     -- * Request Lenses
-    , agiQuotaUser
-    , agiPrettyPrint
-    , agiUserIP
     , agiProFileId
     , agiPayload
-    , agiKey
-    , agiOAuthToken
-    , agiFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,83 +46,34 @@ type AdvertiserGroupsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "advertiserGroups" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] AdvertiserGroup :>
-                           Post '[JSON] AdvertiserGroup
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] AdvertiserGroup :>
+               Post '[JSON] AdvertiserGroup
 
 -- | Inserts a new advertiser group.
 --
 -- /See:/ 'advertiserGroupsInsert'' smart constructor.
 data AdvertiserGroupsInsert' = AdvertiserGroupsInsert'
-    { _agiQuotaUser   :: !(Maybe Text)
-    , _agiPrettyPrint :: !Bool
-    , _agiUserIP      :: !(Maybe Text)
-    , _agiProFileId   :: !Int64
-    , _agiPayload     :: !AdvertiserGroup
-    , _agiKey         :: !(Maybe AuthKey)
-    , _agiOAuthToken  :: !(Maybe OAuthToken)
-    , _agiFields      :: !(Maybe Text)
+    { _agiProFileId :: !Int64
+    , _agiPayload   :: !AdvertiserGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'agiQuotaUser'
---
--- * 'agiPrettyPrint'
---
--- * 'agiUserIP'
---
 -- * 'agiProFileId'
 --
 -- * 'agiPayload'
---
--- * 'agiKey'
---
--- * 'agiOAuthToken'
---
--- * 'agiFields'
 advertiserGroupsInsert'
     :: Int64 -- ^ 'profileId'
     -> AdvertiserGroup -- ^ 'payload'
     -> AdvertiserGroupsInsert'
 advertiserGroupsInsert' pAgiProFileId_ pAgiPayload_ =
     AdvertiserGroupsInsert'
-    { _agiQuotaUser = Nothing
-    , _agiPrettyPrint = True
-    , _agiUserIP = Nothing
-    , _agiProFileId = pAgiProFileId_
+    { _agiProFileId = pAgiProFileId_
     , _agiPayload = pAgiPayload_
-    , _agiKey = Nothing
-    , _agiOAuthToken = Nothing
-    , _agiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-agiQuotaUser :: Lens' AdvertiserGroupsInsert' (Maybe Text)
-agiQuotaUser
-  = lens _agiQuotaUser (\ s a -> s{_agiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-agiPrettyPrint :: Lens' AdvertiserGroupsInsert' Bool
-agiPrettyPrint
-  = lens _agiPrettyPrint
-      (\ s a -> s{_agiPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-agiUserIP :: Lens' AdvertiserGroupsInsert' (Maybe Text)
-agiUserIP
-  = lens _agiUserIP (\ s a -> s{_agiUserIP = a})
 
 -- | User profile ID associated with this request.
 agiProFileId :: Lens' AdvertiserGroupsInsert' Int64
@@ -140,40 +85,12 @@ agiPayload :: Lens' AdvertiserGroupsInsert' AdvertiserGroup
 agiPayload
   = lens _agiPayload (\ s a -> s{_agiPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-agiKey :: Lens' AdvertiserGroupsInsert' (Maybe AuthKey)
-agiKey = lens _agiKey (\ s a -> s{_agiKey = a})
-
--- | OAuth 2.0 token for the current user.
-agiOAuthToken :: Lens' AdvertiserGroupsInsert' (Maybe OAuthToken)
-agiOAuthToken
-  = lens _agiOAuthToken
-      (\ s a -> s{_agiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-agiFields :: Lens' AdvertiserGroupsInsert' (Maybe Text)
-agiFields
-  = lens _agiFields (\ s a -> s{_agiFields = a})
-
-instance GoogleAuth AdvertiserGroupsInsert' where
-        _AuthKey = agiKey . _Just
-        _AuthToken = agiOAuthToken . _Just
-
 instance GoogleRequest AdvertiserGroupsInsert' where
         type Rs AdvertiserGroupsInsert' = AdvertiserGroup
-        request = requestWith dFAReportingRequest
-        requestWith rq AdvertiserGroupsInsert'{..}
-          = go _agiProFileId _agiQuotaUser
-              (Just _agiPrettyPrint)
-              _agiUserIP
-              _agiFields
-              _agiKey
-              _agiOAuthToken
-              (Just AltJSON)
-              _agiPayload
+        requestClient AdvertiserGroupsInsert'{..}
+          = go _agiProFileId (Just AltJSON) _agiPayload
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AdvertiserGroupsInsertResource)
-                      rq
+                      mempty

@@ -34,15 +34,9 @@ module Network.Google.Resource.DeploymentManager.Deployments.Insert
     , DeploymentsInsert'
 
     -- * Request Lenses
-    , diQuotaUser
-    , diPrettyPrint
     , diProject
-    , diUserIP
     , diPayload
-    , diKey
     , diPreview
-    , diOAuthToken
-    , diFields
     ) where
 
 import           Network.Google.DeploymentManager.Types
@@ -55,102 +49,48 @@ type DeploymentsInsertResource =
        "global" :>
          "deployments" :>
            QueryParam "preview" Bool :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Deployment :> Post '[JSON] Operation
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Deployment :> Post '[JSON] Operation
 
 -- | Creates a deployment and all of the resources described by the
 -- deployment manifest.
 --
 -- /See:/ 'deploymentsInsert'' smart constructor.
 data DeploymentsInsert' = DeploymentsInsert'
-    { _diQuotaUser   :: !(Maybe Text)
-    , _diPrettyPrint :: !Bool
-    , _diProject     :: !Text
-    , _diUserIP      :: !(Maybe Text)
-    , _diPayload     :: !Deployment
-    , _diKey         :: !(Maybe AuthKey)
-    , _diPreview     :: !(Maybe Bool)
-    , _diOAuthToken  :: !(Maybe OAuthToken)
-    , _diFields      :: !(Maybe Text)
+    { _diProject :: !Text
+    , _diPayload :: !Deployment
+    , _diPreview :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'diQuotaUser'
---
--- * 'diPrettyPrint'
---
 -- * 'diProject'
---
--- * 'diUserIP'
 --
 -- * 'diPayload'
 --
--- * 'diKey'
---
 -- * 'diPreview'
---
--- * 'diOAuthToken'
---
--- * 'diFields'
 deploymentsInsert'
     :: Text -- ^ 'project'
     -> Deployment -- ^ 'payload'
     -> DeploymentsInsert'
 deploymentsInsert' pDiProject_ pDiPayload_ =
     DeploymentsInsert'
-    { _diQuotaUser = Nothing
-    , _diPrettyPrint = True
-    , _diProject = pDiProject_
-    , _diUserIP = Nothing
+    { _diProject = pDiProject_
     , _diPayload = pDiPayload_
-    , _diKey = Nothing
     , _diPreview = Nothing
-    , _diOAuthToken = Nothing
-    , _diFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-diQuotaUser :: Lens' DeploymentsInsert' (Maybe Text)
-diQuotaUser
-  = lens _diQuotaUser (\ s a -> s{_diQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-diPrettyPrint :: Lens' DeploymentsInsert' Bool
-diPrettyPrint
-  = lens _diPrettyPrint
-      (\ s a -> s{_diPrettyPrint = a})
 
 -- | The project ID for this request.
 diProject :: Lens' DeploymentsInsert' Text
 diProject
   = lens _diProject (\ s a -> s{_diProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-diUserIP :: Lens' DeploymentsInsert' (Maybe Text)
-diUserIP = lens _diUserIP (\ s a -> s{_diUserIP = a})
-
 -- | Multipart request metadata.
 diPayload :: Lens' DeploymentsInsert' Deployment
 diPayload
   = lens _diPayload (\ s a -> s{_diPayload = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-diKey :: Lens' DeploymentsInsert' (Maybe AuthKey)
-diKey = lens _diKey (\ s a -> s{_diKey = a})
 
 -- | If set to true, creates a deployment and creates \"shell\" resources but
 -- does not actually instantiate these resources. This allows you to
@@ -164,32 +104,12 @@ diPreview :: Lens' DeploymentsInsert' (Maybe Bool)
 diPreview
   = lens _diPreview (\ s a -> s{_diPreview = a})
 
--- | OAuth 2.0 token for the current user.
-diOAuthToken :: Lens' DeploymentsInsert' (Maybe OAuthToken)
-diOAuthToken
-  = lens _diOAuthToken (\ s a -> s{_diOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-diFields :: Lens' DeploymentsInsert' (Maybe Text)
-diFields = lens _diFields (\ s a -> s{_diFields = a})
-
-instance GoogleAuth DeploymentsInsert' where
-        _AuthKey = diKey . _Just
-        _AuthToken = diOAuthToken . _Just
-
 instance GoogleRequest DeploymentsInsert' where
         type Rs DeploymentsInsert' = Operation
-        request = requestWith deploymentManagerRequest
-        requestWith rq DeploymentsInsert'{..}
-          = go _diProject _diPreview _diQuotaUser
-              (Just _diPrettyPrint)
-              _diUserIP
-              _diFields
-              _diKey
-              _diOAuthToken
-              (Just AltJSON)
-              _diPayload
+        requestClient DeploymentsInsert'{..}
+          = go _diProject _diPreview (Just AltJSON) _diPayload
+              deploymentManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy DeploymentsInsertResource)
-                      rq
+                      mempty

@@ -33,13 +33,7 @@ module Network.Google.Resource.Compute.BackendServices.Get
     , BackendServicesGet'
 
     -- * Request Lenses
-    , bsgQuotaUser
-    , bsgPrettyPrint
     , bsgProject
-    , bsgUserIP
-    , bsgKey
-    , bsgOAuthToken
-    , bsgFields
     , bsgBackendService
     ) where
 
@@ -53,26 +47,14 @@ type BackendServicesGetResource =
        "global" :>
          "backendServices" :>
            Capture "backendService" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] BackendService
+             QueryParam "alt" AltJSON :>
+               Get '[JSON] BackendService
 
 -- | Returns the specified BackendService resource.
 --
 -- /See:/ 'backendServicesGet'' smart constructor.
 data BackendServicesGet' = BackendServicesGet'
-    { _bsgQuotaUser      :: !(Maybe Text)
-    , _bsgPrettyPrint    :: !Bool
-    , _bsgProject        :: !Text
-    , _bsgUserIP         :: !(Maybe Text)
-    , _bsgKey            :: !(Maybe AuthKey)
-    , _bsgOAuthToken     :: !(Maybe OAuthToken)
-    , _bsgFields         :: !(Maybe Text)
+    { _bsgProject        :: !Text
     , _bsgBackendService :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -80,19 +62,7 @@ data BackendServicesGet' = BackendServicesGet'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bsgQuotaUser'
---
--- * 'bsgPrettyPrint'
---
 -- * 'bsgProject'
---
--- * 'bsgUserIP'
---
--- * 'bsgKey'
---
--- * 'bsgOAuthToken'
---
--- * 'bsgFields'
 --
 -- * 'bsgBackendService'
 backendServicesGet'
@@ -101,56 +71,14 @@ backendServicesGet'
     -> BackendServicesGet'
 backendServicesGet' pBsgProject_ pBsgBackendService_ =
     BackendServicesGet'
-    { _bsgQuotaUser = Nothing
-    , _bsgPrettyPrint = True
-    , _bsgProject = pBsgProject_
-    , _bsgUserIP = Nothing
-    , _bsgKey = Nothing
-    , _bsgOAuthToken = Nothing
-    , _bsgFields = Nothing
+    { _bsgProject = pBsgProject_
     , _bsgBackendService = pBsgBackendService_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-bsgQuotaUser :: Lens' BackendServicesGet' (Maybe Text)
-bsgQuotaUser
-  = lens _bsgQuotaUser (\ s a -> s{_bsgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-bsgPrettyPrint :: Lens' BackendServicesGet' Bool
-bsgPrettyPrint
-  = lens _bsgPrettyPrint
-      (\ s a -> s{_bsgPrettyPrint = a})
 
 -- | Name of the project scoping this request.
 bsgProject :: Lens' BackendServicesGet' Text
 bsgProject
   = lens _bsgProject (\ s a -> s{_bsgProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-bsgUserIP :: Lens' BackendServicesGet' (Maybe Text)
-bsgUserIP
-  = lens _bsgUserIP (\ s a -> s{_bsgUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-bsgKey :: Lens' BackendServicesGet' (Maybe AuthKey)
-bsgKey = lens _bsgKey (\ s a -> s{_bsgKey = a})
-
--- | OAuth 2.0 token for the current user.
-bsgOAuthToken :: Lens' BackendServicesGet' (Maybe OAuthToken)
-bsgOAuthToken
-  = lens _bsgOAuthToken
-      (\ s a -> s{_bsgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-bsgFields :: Lens' BackendServicesGet' (Maybe Text)
-bsgFields
-  = lens _bsgFields (\ s a -> s{_bsgFields = a})
 
 -- | Name of the BackendService resource to return.
 bsgBackendService :: Lens' BackendServicesGet' Text
@@ -158,22 +86,12 @@ bsgBackendService
   = lens _bsgBackendService
       (\ s a -> s{_bsgBackendService = a})
 
-instance GoogleAuth BackendServicesGet' where
-        _AuthKey = bsgKey . _Just
-        _AuthToken = bsgOAuthToken . _Just
-
 instance GoogleRequest BackendServicesGet' where
         type Rs BackendServicesGet' = BackendService
-        request = requestWith computeRequest
-        requestWith rq BackendServicesGet'{..}
-          = go _bsgProject _bsgBackendService _bsgQuotaUser
-              (Just _bsgPrettyPrint)
-              _bsgUserIP
-              _bsgFields
-              _bsgKey
-              _bsgOAuthToken
-              (Just AltJSON)
+        requestClient BackendServicesGet'{..}
+          = go _bsgProject _bsgBackendService (Just AltJSON)
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy BackendServicesGetResource)
-                      rq
+                      mempty

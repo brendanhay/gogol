@@ -33,13 +33,6 @@ module Network.Google.Resource.GamesManagement.TurnBasedMatches.Reset
     , turnBasedMatchesReset'
     , TurnBasedMatchesReset'
 
-    -- * Request Lenses
-    , tbmrQuotaUser
-    , tbmrPrettyPrint
-    , tbmrUserIP
-    , tbmrKey
-    , tbmrOAuthToken
-    , tbmrFields
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -50,106 +43,27 @@ import           Network.Google.Prelude
 type TurnBasedMatchesResetResource =
      "turnbasedmatches" :>
        "reset" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Post '[JSON] ()
+         QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Reset all turn-based match data for a user. This method is only
 -- accessible to whitelisted tester accounts for your application.
 --
 -- /See:/ 'turnBasedMatchesReset'' smart constructor.
-data TurnBasedMatchesReset' = TurnBasedMatchesReset'
-    { _tbmrQuotaUser   :: !(Maybe Text)
-    , _tbmrPrettyPrint :: !Bool
-    , _tbmrUserIP      :: !(Maybe Text)
-    , _tbmrKey         :: !(Maybe AuthKey)
-    , _tbmrOAuthToken  :: !(Maybe OAuthToken)
-    , _tbmrFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data TurnBasedMatchesReset' =
+    TurnBasedMatchesReset'
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesReset'' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tbmrQuotaUser'
---
--- * 'tbmrPrettyPrint'
---
--- * 'tbmrUserIP'
---
--- * 'tbmrKey'
---
--- * 'tbmrOAuthToken'
---
--- * 'tbmrFields'
 turnBasedMatchesReset'
     :: TurnBasedMatchesReset'
-turnBasedMatchesReset' =
-    TurnBasedMatchesReset'
-    { _tbmrQuotaUser = Nothing
-    , _tbmrPrettyPrint = True
-    , _tbmrUserIP = Nothing
-    , _tbmrKey = Nothing
-    , _tbmrOAuthToken = Nothing
-    , _tbmrFields = Nothing
-    }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tbmrQuotaUser :: Lens' TurnBasedMatchesReset' (Maybe Text)
-tbmrQuotaUser
-  = lens _tbmrQuotaUser
-      (\ s a -> s{_tbmrQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tbmrPrettyPrint :: Lens' TurnBasedMatchesReset' Bool
-tbmrPrettyPrint
-  = lens _tbmrPrettyPrint
-      (\ s a -> s{_tbmrPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tbmrUserIP :: Lens' TurnBasedMatchesReset' (Maybe Text)
-tbmrUserIP
-  = lens _tbmrUserIP (\ s a -> s{_tbmrUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tbmrKey :: Lens' TurnBasedMatchesReset' (Maybe AuthKey)
-tbmrKey = lens _tbmrKey (\ s a -> s{_tbmrKey = a})
-
--- | OAuth 2.0 token for the current user.
-tbmrOAuthToken :: Lens' TurnBasedMatchesReset' (Maybe OAuthToken)
-tbmrOAuthToken
-  = lens _tbmrOAuthToken
-      (\ s a -> s{_tbmrOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-tbmrFields :: Lens' TurnBasedMatchesReset' (Maybe Text)
-tbmrFields
-  = lens _tbmrFields (\ s a -> s{_tbmrFields = a})
-
-instance GoogleAuth TurnBasedMatchesReset' where
-        _AuthKey = tbmrKey . _Just
-        _AuthToken = tbmrOAuthToken . _Just
+turnBasedMatchesReset' = TurnBasedMatchesReset'
 
 instance GoogleRequest TurnBasedMatchesReset' where
         type Rs TurnBasedMatchesReset' = ()
-        request = requestWith gamesManagementRequest
-        requestWith rq TurnBasedMatchesReset'{..}
-          = go _tbmrQuotaUser (Just _tbmrPrettyPrint)
-              _tbmrUserIP
-              _tbmrFields
-              _tbmrKey
-              _tbmrOAuthToken
-              (Just AltJSON)
+        requestClient TurnBasedMatchesReset'{..}
+          = go (Just AltJSON) gamesManagementService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy TurnBasedMatchesResetResource)
-                      rq
+                      mempty

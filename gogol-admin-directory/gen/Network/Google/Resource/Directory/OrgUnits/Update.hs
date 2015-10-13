@@ -33,15 +33,9 @@ module Network.Google.Resource.Directory.OrgUnits.Update
     , OrgUnitsUpdate'
 
     -- * Request Lenses
-    , ouuQuotaUser
-    , ouuPrettyPrint
-    , ouuUserIP
     , ouuPayload
     , ouuOrgUnitPath
     , ouuCustomerId
-    , ouuKey
-    , ouuOAuthToken
-    , ouuFields
     ) where
 
 import           Network.Google.Directory.Types
@@ -54,51 +48,27 @@ type OrgUnitsUpdateResource =
        Capture "customerId" Text :>
          "orgunits" :>
            Captures "orgUnitPath" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] OrgUnit :> Put '[JSON] OrgUnit
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] OrgUnit :> Put '[JSON] OrgUnit
 
 -- | Update Organization Unit
 --
 -- /See:/ 'orgUnitsUpdate'' smart constructor.
 data OrgUnitsUpdate' = OrgUnitsUpdate'
-    { _ouuQuotaUser   :: !(Maybe Text)
-    , _ouuPrettyPrint :: !Bool
-    , _ouuUserIP      :: !(Maybe Text)
-    , _ouuPayload     :: !OrgUnit
+    { _ouuPayload     :: !OrgUnit
     , _ouuOrgUnitPath :: ![Text]
     , _ouuCustomerId  :: !Text
-    , _ouuKey         :: !(Maybe AuthKey)
-    , _ouuOAuthToken  :: !(Maybe OAuthToken)
-    , _ouuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrgUnitsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ouuQuotaUser'
---
--- * 'ouuPrettyPrint'
---
--- * 'ouuUserIP'
---
 -- * 'ouuPayload'
 --
 -- * 'ouuOrgUnitPath'
 --
 -- * 'ouuCustomerId'
---
--- * 'ouuKey'
---
--- * 'ouuOAuthToken'
---
--- * 'ouuFields'
 orgUnitsUpdate'
     :: OrgUnit -- ^ 'payload'
     -> [Text] -- ^ 'orgUnitPath'
@@ -106,35 +76,10 @@ orgUnitsUpdate'
     -> OrgUnitsUpdate'
 orgUnitsUpdate' pOuuPayload_ pOuuOrgUnitPath_ pOuuCustomerId_ =
     OrgUnitsUpdate'
-    { _ouuQuotaUser = Nothing
-    , _ouuPrettyPrint = True
-    , _ouuUserIP = Nothing
-    , _ouuPayload = pOuuPayload_
+    { _ouuPayload = pOuuPayload_
     , _ouuOrgUnitPath = pOuuOrgUnitPath_
     , _ouuCustomerId = pOuuCustomerId_
-    , _ouuKey = Nothing
-    , _ouuOAuthToken = Nothing
-    , _ouuFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ouuQuotaUser :: Lens' OrgUnitsUpdate' (Maybe Text)
-ouuQuotaUser
-  = lens _ouuQuotaUser (\ s a -> s{_ouuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ouuPrettyPrint :: Lens' OrgUnitsUpdate' Bool
-ouuPrettyPrint
-  = lens _ouuPrettyPrint
-      (\ s a -> s{_ouuPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ouuUserIP :: Lens' OrgUnitsUpdate' (Maybe Text)
-ouuUserIP
-  = lens _ouuUserIP (\ s a -> s{_ouuUserIP = a})
 
 -- | Multipart request metadata.
 ouuPayload :: Lens' OrgUnitsUpdate' OrgUnit
@@ -154,39 +99,12 @@ ouuCustomerId
   = lens _ouuCustomerId
       (\ s a -> s{_ouuCustomerId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ouuKey :: Lens' OrgUnitsUpdate' (Maybe AuthKey)
-ouuKey = lens _ouuKey (\ s a -> s{_ouuKey = a})
-
--- | OAuth 2.0 token for the current user.
-ouuOAuthToken :: Lens' OrgUnitsUpdate' (Maybe OAuthToken)
-ouuOAuthToken
-  = lens _ouuOAuthToken
-      (\ s a -> s{_ouuOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ouuFields :: Lens' OrgUnitsUpdate' (Maybe Text)
-ouuFields
-  = lens _ouuFields (\ s a -> s{_ouuFields = a})
-
-instance GoogleAuth OrgUnitsUpdate' where
-        _AuthKey = ouuKey . _Just
-        _AuthToken = ouuOAuthToken . _Just
-
 instance GoogleRequest OrgUnitsUpdate' where
         type Rs OrgUnitsUpdate' = OrgUnit
-        request = requestWith directoryRequest
-        requestWith rq OrgUnitsUpdate'{..}
-          = go _ouuCustomerId _ouuOrgUnitPath _ouuQuotaUser
-              (Just _ouuPrettyPrint)
-              _ouuUserIP
-              _ouuFields
-              _ouuKey
-              _ouuOAuthToken
-              (Just AltJSON)
+        requestClient OrgUnitsUpdate'{..}
+          = go _ouuCustomerId _ouuOrgUnitPath (Just AltJSON)
               _ouuPayload
+              directoryService
           where go
-                  = clientBuild (Proxy :: Proxy OrgUnitsUpdateResource)
-                      rq
+                  = buildClient (Proxy :: Proxy OrgUnitsUpdateResource)
+                      mempty

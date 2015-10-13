@@ -18,8 +18,11 @@
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference>
 module Network.Google.Spectrum
     (
+    -- * Service Configuration
+      spectrumService
+
     -- * API Declaration
-      SpectrumAPI
+    , SpectrumAPI
 
     -- * Resources
 

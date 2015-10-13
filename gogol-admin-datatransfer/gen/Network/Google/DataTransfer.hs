@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference>
 module Network.Google.DataTransfer
     (
+    -- * Service Configuration
+      dataTransferService
+
     -- * API Declaration
-      DataTransferAPI
+    , DataTransferAPI
 
     -- * Resources
 

@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference>
 module Network.Google.CivicInfo
     (
+    -- * Service Configuration
+      civicInfoService
+
     -- * API Declaration
-      CivicInfoAPI
+    , CivicInfoAPI
 
     -- * Resources
 

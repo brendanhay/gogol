@@ -33,15 +33,9 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Parents.List
     , RasterCollectionsParentsList'
 
     -- * Request Lenses
-    , rcplQuotaUser
-    , rcplPrettyPrint
-    , rcplUserIP
-    , rcplKey
     , rcplId
     , rcplPageToken
-    , rcplOAuthToken
     , rcplMaxResults
-    , rcplFields
     ) where
 
 import           Network.Google.MapsEngine.Types
@@ -55,92 +49,36 @@ type RasterCollectionsParentsListResource =
          "parents" :>
            QueryParam "pageToken" Text :>
              QueryParam "maxResults" Word32 :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ParentsListResponse
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] ParentsListResponse
 
 -- | Return all parent ids of the specified raster collection.
 --
 -- /See:/ 'rasterCollectionsParentsList'' smart constructor.
 data RasterCollectionsParentsList' = RasterCollectionsParentsList'
-    { _rcplQuotaUser   :: !(Maybe Text)
-    , _rcplPrettyPrint :: !Bool
-    , _rcplUserIP      :: !(Maybe Text)
-    , _rcplKey         :: !(Maybe AuthKey)
-    , _rcplId          :: !Text
-    , _rcplPageToken   :: !(Maybe Text)
-    , _rcplOAuthToken  :: !(Maybe OAuthToken)
-    , _rcplMaxResults  :: !(Maybe Word32)
-    , _rcplFields      :: !(Maybe Text)
+    { _rcplId         :: !Text
+    , _rcplPageToken  :: !(Maybe Text)
+    , _rcplMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsParentsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcplQuotaUser'
---
--- * 'rcplPrettyPrint'
---
--- * 'rcplUserIP'
---
--- * 'rcplKey'
---
 -- * 'rcplId'
 --
 -- * 'rcplPageToken'
 --
--- * 'rcplOAuthToken'
---
 -- * 'rcplMaxResults'
---
--- * 'rcplFields'
 rasterCollectionsParentsList'
     :: Text -- ^ 'id'
     -> RasterCollectionsParentsList'
 rasterCollectionsParentsList' pRcplId_ =
     RasterCollectionsParentsList'
-    { _rcplQuotaUser = Nothing
-    , _rcplPrettyPrint = True
-    , _rcplUserIP = Nothing
-    , _rcplKey = Nothing
-    , _rcplId = pRcplId_
+    { _rcplId = pRcplId_
     , _rcplPageToken = Nothing
-    , _rcplOAuthToken = Nothing
     , _rcplMaxResults = Nothing
-    , _rcplFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-rcplQuotaUser :: Lens' RasterCollectionsParentsList' (Maybe Text)
-rcplQuotaUser
-  = lens _rcplQuotaUser
-      (\ s a -> s{_rcplQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rcplPrettyPrint :: Lens' RasterCollectionsParentsList' Bool
-rcplPrettyPrint
-  = lens _rcplPrettyPrint
-      (\ s a -> s{_rcplPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rcplUserIP :: Lens' RasterCollectionsParentsList' (Maybe Text)
-rcplUserIP
-  = lens _rcplUserIP (\ s a -> s{_rcplUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rcplKey :: Lens' RasterCollectionsParentsList' (Maybe AuthKey)
-rcplKey = lens _rcplKey (\ s a -> s{_rcplKey = a})
 
 -- | The ID of the raster collection whose parents will be listed.
 rcplId :: Lens' RasterCollectionsParentsList' Text
@@ -154,12 +92,6 @@ rcplPageToken
   = lens _rcplPageToken
       (\ s a -> s{_rcplPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-rcplOAuthToken :: Lens' RasterCollectionsParentsList' (Maybe OAuthToken)
-rcplOAuthToken
-  = lens _rcplOAuthToken
-      (\ s a -> s{_rcplOAuthToken = a})
-
 -- | The maximum number of items to include in a single response page. The
 -- maximum supported value is 50.
 rcplMaxResults :: Lens' RasterCollectionsParentsList' (Maybe Word32)
@@ -167,31 +99,15 @@ rcplMaxResults
   = lens _rcplMaxResults
       (\ s a -> s{_rcplMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-rcplFields :: Lens' RasterCollectionsParentsList' (Maybe Text)
-rcplFields
-  = lens _rcplFields (\ s a -> s{_rcplFields = a})
-
-instance GoogleAuth RasterCollectionsParentsList'
-         where
-        _AuthKey = rcplKey . _Just
-        _AuthToken = rcplOAuthToken . _Just
-
 instance GoogleRequest RasterCollectionsParentsList'
          where
         type Rs RasterCollectionsParentsList' =
              ParentsListResponse
-        request = requestWith mapsEngineRequest
-        requestWith rq RasterCollectionsParentsList'{..}
+        requestClient RasterCollectionsParentsList'{..}
           = go _rcplId _rcplPageToken _rcplMaxResults
-              _rcplQuotaUser
-              (Just _rcplPrettyPrint)
-              _rcplUserIP
-              _rcplFields
-              _rcplKey
-              _rcplOAuthToken
               (Just AltJSON)
+              mapsEngineService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy RasterCollectionsParentsListResource)
-                      rq
+                      mempty

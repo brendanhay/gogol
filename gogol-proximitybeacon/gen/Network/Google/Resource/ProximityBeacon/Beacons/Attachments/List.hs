@@ -39,8 +39,6 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
 
     -- * Request Lenses
     , balXgafv
-    , balQuotaUser
-    , balPrettyPrint
     , balUploadProtocol
     , balPp
     , balAccessToken
@@ -48,9 +46,6 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
     , balUploadType
     , balBearerToken
     , balNamespacedType
-    , balKey
-    , balOAuthToken
-    , balFields
     , balCallback
     ) where
 
@@ -71,13 +66,8 @@ type BeaconsAttachmentsListResource =
                      QueryParam "bearer_token" Text :>
                        QueryParam "namespacedType" Text :>
                          QueryParam "callback" Text :>
-                           QueryParam "quotaUser" Text :>
-                             QueryParam "prettyPrint" Bool :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] ListBeaconAttachmentsResponse
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListBeaconAttachmentsResponse
 
 -- | Returns the attachments for the specified beacon that match the
 -- specified namespaced-type pattern. To control which namespaced types are
@@ -89,8 +79,6 @@ type BeaconsAttachmentsListResource =
 -- /See:/ 'beaconsAttachmentsList'' smart constructor.
 data BeaconsAttachmentsList' = BeaconsAttachmentsList'
     { _balXgafv          :: !(Maybe Text)
-    , _balQuotaUser      :: !(Maybe Text)
-    , _balPrettyPrint    :: !Bool
     , _balUploadProtocol :: !(Maybe Text)
     , _balPp             :: !Bool
     , _balAccessToken    :: !(Maybe Text)
@@ -98,9 +86,6 @@ data BeaconsAttachmentsList' = BeaconsAttachmentsList'
     , _balUploadType     :: !(Maybe Text)
     , _balBearerToken    :: !(Maybe Text)
     , _balNamespacedType :: !(Maybe Text)
-    , _balKey            :: !(Maybe AuthKey)
-    , _balOAuthToken     :: !(Maybe OAuthToken)
-    , _balFields         :: !(Maybe Text)
     , _balCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -109,10 +94,6 @@ data BeaconsAttachmentsList' = BeaconsAttachmentsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'balXgafv'
---
--- * 'balQuotaUser'
---
--- * 'balPrettyPrint'
 --
 -- * 'balUploadProtocol'
 --
@@ -128,12 +109,6 @@ data BeaconsAttachmentsList' = BeaconsAttachmentsList'
 --
 -- * 'balNamespacedType'
 --
--- * 'balKey'
---
--- * 'balOAuthToken'
---
--- * 'balFields'
---
 -- * 'balCallback'
 beaconsAttachmentsList'
     :: Text -- ^ 'beaconName'
@@ -141,8 +116,6 @@ beaconsAttachmentsList'
 beaconsAttachmentsList' pBalBeaconName_ =
     BeaconsAttachmentsList'
     { _balXgafv = Nothing
-    , _balQuotaUser = Nothing
-    , _balPrettyPrint = True
     , _balUploadProtocol = Nothing
     , _balPp = True
     , _balAccessToken = Nothing
@@ -150,28 +123,12 @@ beaconsAttachmentsList' pBalBeaconName_ =
     , _balUploadType = Nothing
     , _balBearerToken = Nothing
     , _balNamespacedType = Nothing
-    , _balKey = Nothing
-    , _balOAuthToken = Nothing
-    , _balFields = Nothing
     , _balCallback = Nothing
     }
 
 -- | V1 error format.
 balXgafv :: Lens' BeaconsAttachmentsList' (Maybe Text)
 balXgafv = lens _balXgafv (\ s a -> s{_balXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-balQuotaUser :: Lens' BeaconsAttachmentsList' (Maybe Text)
-balQuotaUser
-  = lens _balQuotaUser (\ s a -> s{_balQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-balPrettyPrint :: Lens' BeaconsAttachmentsList' Bool
-balPrettyPrint
-  = lens _balPrettyPrint
-      (\ s a -> s{_balPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 balUploadProtocol :: Lens' BeaconsAttachmentsList' (Maybe Text)
@@ -215,37 +172,15 @@ balNamespacedType
   = lens _balNamespacedType
       (\ s a -> s{_balNamespacedType = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-balKey :: Lens' BeaconsAttachmentsList' (Maybe AuthKey)
-balKey = lens _balKey (\ s a -> s{_balKey = a})
-
--- | OAuth 2.0 token for the current user.
-balOAuthToken :: Lens' BeaconsAttachmentsList' (Maybe OAuthToken)
-balOAuthToken
-  = lens _balOAuthToken
-      (\ s a -> s{_balOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-balFields :: Lens' BeaconsAttachmentsList' (Maybe Text)
-balFields
-  = lens _balFields (\ s a -> s{_balFields = a})
-
 -- | JSONP
 balCallback :: Lens' BeaconsAttachmentsList' (Maybe Text)
 balCallback
   = lens _balCallback (\ s a -> s{_balCallback = a})
 
-instance GoogleAuth BeaconsAttachmentsList' where
-        _AuthKey = balKey . _Just
-        _AuthToken = balOAuthToken . _Just
-
 instance GoogleRequest BeaconsAttachmentsList' where
         type Rs BeaconsAttachmentsList' =
              ListBeaconAttachmentsResponse
-        request = requestWith proximityBeaconRequest
-        requestWith rq BeaconsAttachmentsList'{..}
+        requestClient BeaconsAttachmentsList'{..}
           = go _balBeaconName _balXgafv _balUploadProtocol
               (Just _balPp)
               _balAccessToken
@@ -253,13 +188,9 @@ instance GoogleRequest BeaconsAttachmentsList' where
               _balBearerToken
               _balNamespacedType
               _balCallback
-              _balQuotaUser
-              (Just _balPrettyPrint)
-              _balFields
-              _balKey
-              _balOAuthToken
               (Just AltJSON)
+              proximityBeaconService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy BeaconsAttachmentsListResource)
-                      rq
+                      mempty

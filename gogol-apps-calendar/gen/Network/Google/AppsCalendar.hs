@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference>
 module Network.Google.AppsCalendar
     (
+    -- * Service Configuration
+      appsCalendarService
+
     -- * API Declaration
-      AppsCalendarAPI
+    , AppsCalendarAPI
 
     -- * Resources
 

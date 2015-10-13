@@ -33,15 +33,9 @@ module Network.Google.Resource.Compute.ForwardingRules.Delete
     , ForwardingRulesDelete'
 
     -- * Request Lenses
-    , frdQuotaUser
-    , frdPrettyPrint
     , frdProject
     , frdForwardingRule
-    , frdUserIP
-    , frdKey
     , frdRegion
-    , frdOAuthToken
-    , frdFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,50 +49,26 @@ type ForwardingRulesDeleteResource =
          Capture "region" Text :>
            "forwardingRules" :>
              Capture "forwardingRule" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+               QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified ForwardingRule resource.
 --
 -- /See:/ 'forwardingRulesDelete'' smart constructor.
 data ForwardingRulesDelete' = ForwardingRulesDelete'
-    { _frdQuotaUser      :: !(Maybe Text)
-    , _frdPrettyPrint    :: !Bool
-    , _frdProject        :: !Text
+    { _frdProject        :: !Text
     , _frdForwardingRule :: !Text
-    , _frdUserIP         :: !(Maybe Text)
-    , _frdKey            :: !(Maybe AuthKey)
     , _frdRegion         :: !Text
-    , _frdOAuthToken     :: !(Maybe OAuthToken)
-    , _frdFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'frdQuotaUser'
---
--- * 'frdPrettyPrint'
---
 -- * 'frdProject'
 --
 -- * 'frdForwardingRule'
 --
--- * 'frdUserIP'
---
--- * 'frdKey'
---
 -- * 'frdRegion'
---
--- * 'frdOAuthToken'
---
--- * 'frdFields'
 forwardingRulesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'forwardingRule'
@@ -106,29 +76,10 @@ forwardingRulesDelete'
     -> ForwardingRulesDelete'
 forwardingRulesDelete' pFrdProject_ pFrdForwardingRule_ pFrdRegion_ =
     ForwardingRulesDelete'
-    { _frdQuotaUser = Nothing
-    , _frdPrettyPrint = True
-    , _frdProject = pFrdProject_
+    { _frdProject = pFrdProject_
     , _frdForwardingRule = pFrdForwardingRule_
-    , _frdUserIP = Nothing
-    , _frdKey = Nothing
     , _frdRegion = pFrdRegion_
-    , _frdOAuthToken = Nothing
-    , _frdFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-frdQuotaUser :: Lens' ForwardingRulesDelete' (Maybe Text)
-frdQuotaUser
-  = lens _frdQuotaUser (\ s a -> s{_frdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-frdPrettyPrint :: Lens' ForwardingRulesDelete' Bool
-frdPrettyPrint
-  = lens _frdPrettyPrint
-      (\ s a -> s{_frdPrettyPrint = a})
 
 -- | Name of the project scoping this request.
 frdProject :: Lens' ForwardingRulesDelete' Text
@@ -141,51 +92,18 @@ frdForwardingRule
   = lens _frdForwardingRule
       (\ s a -> s{_frdForwardingRule = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-frdUserIP :: Lens' ForwardingRulesDelete' (Maybe Text)
-frdUserIP
-  = lens _frdUserIP (\ s a -> s{_frdUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-frdKey :: Lens' ForwardingRulesDelete' (Maybe AuthKey)
-frdKey = lens _frdKey (\ s a -> s{_frdKey = a})
-
 -- | Name of the region scoping this request.
 frdRegion :: Lens' ForwardingRulesDelete' Text
 frdRegion
   = lens _frdRegion (\ s a -> s{_frdRegion = a})
 
--- | OAuth 2.0 token for the current user.
-frdOAuthToken :: Lens' ForwardingRulesDelete' (Maybe OAuthToken)
-frdOAuthToken
-  = lens _frdOAuthToken
-      (\ s a -> s{_frdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-frdFields :: Lens' ForwardingRulesDelete' (Maybe Text)
-frdFields
-  = lens _frdFields (\ s a -> s{_frdFields = a})
-
-instance GoogleAuth ForwardingRulesDelete' where
-        _AuthKey = frdKey . _Just
-        _AuthToken = frdOAuthToken . _Just
-
 instance GoogleRequest ForwardingRulesDelete' where
         type Rs ForwardingRulesDelete' = Operation
-        request = requestWith computeRequest
-        requestWith rq ForwardingRulesDelete'{..}
+        requestClient ForwardingRulesDelete'{..}
           = go _frdProject _frdRegion _frdForwardingRule
-              _frdQuotaUser
-              (Just _frdPrettyPrint)
-              _frdUserIP
-              _frdFields
-              _frdKey
-              _frdOAuthToken
               (Just AltJSON)
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ForwardingRulesDeleteResource)
-                      rq
+                      mempty

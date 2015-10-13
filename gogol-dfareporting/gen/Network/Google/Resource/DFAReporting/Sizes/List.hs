@@ -33,17 +33,11 @@ module Network.Google.Resource.DFAReporting.Sizes.List
     , SizesList'
 
     -- * Request Lenses
-    , slQuotaUser
     , slHeight
-    , slPrettyPrint
-    , slUserIP
     , slIds
     , slWidth
     , slProFileId
-    , slKey
-    , slOAuthToken
     , slIabStandard
-    , slFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -59,43 +53,25 @@ type SizesListResource =
              QueryParams "ids" Int64 :>
                QueryParam "width" Int32 :>
                  QueryParam "iabStandard" Bool :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] SizesListResponse
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] SizesListResponse
 
 -- | Retrieves a list of sizes, possibly filtered.
 --
 -- /See:/ 'sizesList'' smart constructor.
 data SizesList' = SizesList'
-    { _slQuotaUser   :: !(Maybe Text)
-    , _slHeight      :: !(Maybe Int32)
-    , _slPrettyPrint :: !Bool
-    , _slUserIP      :: !(Maybe Text)
+    { _slHeight      :: !(Maybe Int32)
     , _slIds         :: !(Maybe [Int64])
     , _slWidth       :: !(Maybe Int32)
     , _slProFileId   :: !Int64
-    , _slKey         :: !(Maybe AuthKey)
-    , _slOAuthToken  :: !(Maybe OAuthToken)
     , _slIabStandard :: !(Maybe Bool)
-    , _slFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SizesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'slQuotaUser'
---
 -- * 'slHeight'
---
--- * 'slPrettyPrint'
---
--- * 'slUserIP'
 --
 -- * 'slIds'
 --
@@ -103,52 +79,22 @@ data SizesList' = SizesList'
 --
 -- * 'slProFileId'
 --
--- * 'slKey'
---
--- * 'slOAuthToken'
---
 -- * 'slIabStandard'
---
--- * 'slFields'
 sizesList'
     :: Int64 -- ^ 'profileId'
     -> SizesList'
 sizesList' pSlProFileId_ =
     SizesList'
-    { _slQuotaUser = Nothing
-    , _slHeight = Nothing
-    , _slPrettyPrint = True
-    , _slUserIP = Nothing
+    { _slHeight = Nothing
     , _slIds = Nothing
     , _slWidth = Nothing
     , _slProFileId = pSlProFileId_
-    , _slKey = Nothing
-    , _slOAuthToken = Nothing
     , _slIabStandard = Nothing
-    , _slFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-slQuotaUser :: Lens' SizesList' (Maybe Text)
-slQuotaUser
-  = lens _slQuotaUser (\ s a -> s{_slQuotaUser = a})
 
 -- | Select only sizes with this height.
 slHeight :: Lens' SizesList' (Maybe Int32)
 slHeight = lens _slHeight (\ s a -> s{_slHeight = a})
-
--- | Returns response with indentations and line breaks.
-slPrettyPrint :: Lens' SizesList' Bool
-slPrettyPrint
-  = lens _slPrettyPrint
-      (\ s a -> s{_slPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-slUserIP :: Lens' SizesList' (Maybe Text)
-slUserIP = lens _slUserIP (\ s a -> s{_slUserIP = a})
 
 -- | Select only sizes with these IDs.
 slIds :: Lens' SizesList' [Int64]
@@ -165,44 +111,20 @@ slProFileId :: Lens' SizesList' Int64
 slProFileId
   = lens _slProFileId (\ s a -> s{_slProFileId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-slKey :: Lens' SizesList' (Maybe AuthKey)
-slKey = lens _slKey (\ s a -> s{_slKey = a})
-
--- | OAuth 2.0 token for the current user.
-slOAuthToken :: Lens' SizesList' (Maybe OAuthToken)
-slOAuthToken
-  = lens _slOAuthToken (\ s a -> s{_slOAuthToken = a})
-
 -- | Select only IAB standard sizes.
 slIabStandard :: Lens' SizesList' (Maybe Bool)
 slIabStandard
   = lens _slIabStandard
       (\ s a -> s{_slIabStandard = a})
 
--- | Selector specifying which fields to include in a partial response.
-slFields :: Lens' SizesList' (Maybe Text)
-slFields = lens _slFields (\ s a -> s{_slFields = a})
-
-instance GoogleAuth SizesList' where
-        _AuthKey = slKey . _Just
-        _AuthToken = slOAuthToken . _Just
-
 instance GoogleRequest SizesList' where
         type Rs SizesList' = SizesListResponse
-        request = requestWith dFAReportingRequest
-        requestWith rq SizesList'{..}
+        requestClient SizesList'{..}
           = go _slProFileId _slHeight (_slIds ^. _Default)
               _slWidth
               _slIabStandard
-              _slQuotaUser
-              (Just _slPrettyPrint)
-              _slUserIP
-              _slFields
-              _slKey
-              _slOAuthToken
               (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild (Proxy :: Proxy SizesListResource) rq
+                  = buildClient (Proxy :: Proxy SizesListResource)
+                      mempty

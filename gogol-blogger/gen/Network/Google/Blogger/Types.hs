@@ -15,8 +15,12 @@
 --
 module Network.Google.Blogger.Types
     (
-    -- * Service Request
-      bloggerRequest
+    -- * Service Configuration
+      bloggerService
+
+    -- * OAuth Scopes
+    , bloggerScope
+    , bloggerReadonlyScope
 
     -- * PostsListOrderBy
     , PostsListOrderBy (..)
@@ -375,7 +379,16 @@ import           Network.Google.Blogger.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Blogger API. This contains the host and root path used as a starting point for constructing service requests.
-bloggerRequest :: RequestBuilder
-bloggerRequest
-  = defaultRequest "https://www.googleapis.com/"
+bloggerService :: Service
+bloggerService
+  = defaultService (ServiceId "blogger:v3")
+      "www.googleapis.com"
       "blogger/v3/"
+
+-- | Manage your Blogger account
+bloggerScope :: OAuthScope
+bloggerScope = OAuthScope "https://www.googleapis.com/auth/blogger";
+
+-- | View your Blogger account
+bloggerReadonlyScope :: OAuthScope
+bloggerReadonlyScope = OAuthScope "https://www.googleapis.com/auth/blogger.readonly";

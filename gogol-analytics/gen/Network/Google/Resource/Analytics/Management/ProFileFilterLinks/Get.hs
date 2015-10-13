@@ -33,16 +33,10 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Get
     , ManagementProFileFilterLinksGet'
 
     -- * Request Lenses
-    , mpfflgQuotaUser
-    , mpfflgPrettyPrint
     , mpfflgWebPropertyId
-    , mpfflgUserIP
     , mpfflgProFileId
     , mpfflgAccountId
-    , mpfflgKey
     , mpfflgLinkId
-    , mpfflgOAuthToken
-    , mpfflgFields
     ) where
 
 import           Network.Google.Analytics.Types
@@ -60,54 +54,30 @@ type ManagementProFileFilterLinksGetResource =
                  Capture "profileId" Text :>
                    "profileFilterLinks" :>
                      Capture "linkId" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] ProFileFilterLink
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ProFileFilterLink
 
 -- | Returns a single profile filter link.
 --
 -- /See:/ 'managementProFileFilterLinksGet'' smart constructor.
 data ManagementProFileFilterLinksGet' = ManagementProFileFilterLinksGet'
-    { _mpfflgQuotaUser     :: !(Maybe Text)
-    , _mpfflgPrettyPrint   :: !Bool
-    , _mpfflgWebPropertyId :: !Text
-    , _mpfflgUserIP        :: !(Maybe Text)
+    { _mpfflgWebPropertyId :: !Text
     , _mpfflgProFileId     :: !Text
     , _mpfflgAccountId     :: !Text
-    , _mpfflgKey           :: !(Maybe AuthKey)
     , _mpfflgLinkId        :: !Text
-    , _mpfflgOAuthToken    :: !(Maybe OAuthToken)
-    , _mpfflgFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFileFilterLinksGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mpfflgQuotaUser'
---
--- * 'mpfflgPrettyPrint'
---
 -- * 'mpfflgWebPropertyId'
---
--- * 'mpfflgUserIP'
 --
 -- * 'mpfflgProFileId'
 --
 -- * 'mpfflgAccountId'
 --
--- * 'mpfflgKey'
---
 -- * 'mpfflgLinkId'
---
--- * 'mpfflgOAuthToken'
---
--- * 'mpfflgFields'
 managementProFileFilterLinksGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
@@ -116,43 +86,17 @@ managementProFileFilterLinksGet'
     -> ManagementProFileFilterLinksGet'
 managementProFileFilterLinksGet' pMpfflgWebPropertyId_ pMpfflgProFileId_ pMpfflgAccountId_ pMpfflgLinkId_ =
     ManagementProFileFilterLinksGet'
-    { _mpfflgQuotaUser = Nothing
-    , _mpfflgPrettyPrint = False
-    , _mpfflgWebPropertyId = pMpfflgWebPropertyId_
-    , _mpfflgUserIP = Nothing
+    { _mpfflgWebPropertyId = pMpfflgWebPropertyId_
     , _mpfflgProFileId = pMpfflgProFileId_
     , _mpfflgAccountId = pMpfflgAccountId_
-    , _mpfflgKey = Nothing
     , _mpfflgLinkId = pMpfflgLinkId_
-    , _mpfflgOAuthToken = Nothing
-    , _mpfflgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mpfflgQuotaUser :: Lens' ManagementProFileFilterLinksGet' (Maybe Text)
-mpfflgQuotaUser
-  = lens _mpfflgQuotaUser
-      (\ s a -> s{_mpfflgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mpfflgPrettyPrint :: Lens' ManagementProFileFilterLinksGet' Bool
-mpfflgPrettyPrint
-  = lens _mpfflgPrettyPrint
-      (\ s a -> s{_mpfflgPrettyPrint = a})
 
 -- | Web property Id to retrieve profile filter link for.
 mpfflgWebPropertyId :: Lens' ManagementProFileFilterLinksGet' Text
 mpfflgWebPropertyId
   = lens _mpfflgWebPropertyId
       (\ s a -> s{_mpfflgWebPropertyId = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mpfflgUserIP :: Lens' ManagementProFileFilterLinksGet' (Maybe Text)
-mpfflgUserIP
-  = lens _mpfflgUserIP (\ s a -> s{_mpfflgUserIP = a})
 
 -- | Profile ID to retrieve filter link for.
 mpfflgProFileId :: Lens' ManagementProFileFilterLinksGet' Text
@@ -166,52 +110,23 @@ mpfflgAccountId
   = lens _mpfflgAccountId
       (\ s a -> s{_mpfflgAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mpfflgKey :: Lens' ManagementProFileFilterLinksGet' (Maybe AuthKey)
-mpfflgKey
-  = lens _mpfflgKey (\ s a -> s{_mpfflgKey = a})
-
 -- | ID of the profile filter link.
 mpfflgLinkId :: Lens' ManagementProFileFilterLinksGet' Text
 mpfflgLinkId
   = lens _mpfflgLinkId (\ s a -> s{_mpfflgLinkId = a})
 
--- | OAuth 2.0 token for the current user.
-mpfflgOAuthToken :: Lens' ManagementProFileFilterLinksGet' (Maybe OAuthToken)
-mpfflgOAuthToken
-  = lens _mpfflgOAuthToken
-      (\ s a -> s{_mpfflgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-mpfflgFields :: Lens' ManagementProFileFilterLinksGet' (Maybe Text)
-mpfflgFields
-  = lens _mpfflgFields (\ s a -> s{_mpfflgFields = a})
-
-instance GoogleAuth ManagementProFileFilterLinksGet'
-         where
-        _AuthKey = mpfflgKey . _Just
-        _AuthToken = mpfflgOAuthToken . _Just
-
 instance GoogleRequest
          ManagementProFileFilterLinksGet' where
         type Rs ManagementProFileFilterLinksGet' =
              ProFileFilterLink
-        request = requestWith analyticsRequest
-        requestWith rq ManagementProFileFilterLinksGet'{..}
+        requestClient ManagementProFileFilterLinksGet'{..}
           = go _mpfflgAccountId _mpfflgWebPropertyId
               _mpfflgProFileId
               _mpfflgLinkId
-              _mpfflgQuotaUser
-              (Just _mpfflgPrettyPrint)
-              _mpfflgUserIP
-              _mpfflgFields
-              _mpfflgKey
-              _mpfflgOAuthToken
               (Just AltJSON)
+              analyticsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy ManagementProFileFilterLinksGetResource)
-                      rq
+                      mempty

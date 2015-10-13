@@ -33,16 +33,10 @@ module Network.Google.Resource.DeploymentManager.Deployments.List
     , DeploymentsList'
 
     -- * Request Lenses
-    , dlQuotaUser
-    , dlPrettyPrint
     , dlProject
-    , dlUserIP
-    , dlKey
     , dlFilter
     , dlPageToken
-    , dlOAuthToken
     , dlMaxResults
-    , dlFields
     ) where
 
 import           Network.Google.DeploymentManager.Types
@@ -57,99 +51,45 @@ type DeploymentsListResource =
            QueryParam "filter" Text :>
              QueryParam "pageToken" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] DeploymentsListResponse
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] DeploymentsListResponse
 
 -- | Lists all deployments for a given project.
 --
 -- /See:/ 'deploymentsList'' smart constructor.
 data DeploymentsList' = DeploymentsList'
-    { _dlQuotaUser   :: !(Maybe Text)
-    , _dlPrettyPrint :: !Bool
-    , _dlProject     :: !Text
-    , _dlUserIP      :: !(Maybe Text)
-    , _dlKey         :: !(Maybe AuthKey)
-    , _dlFilter      :: !(Maybe Text)
-    , _dlPageToken   :: !(Maybe Text)
-    , _dlOAuthToken  :: !(Maybe OAuthToken)
-    , _dlMaxResults  :: !Word32
-    , _dlFields      :: !(Maybe Text)
+    { _dlProject    :: !Text
+    , _dlFilter     :: !(Maybe Text)
+    , _dlPageToken  :: !(Maybe Text)
+    , _dlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dlQuotaUser'
---
--- * 'dlPrettyPrint'
---
 -- * 'dlProject'
---
--- * 'dlUserIP'
---
--- * 'dlKey'
 --
 -- * 'dlFilter'
 --
 -- * 'dlPageToken'
 --
--- * 'dlOAuthToken'
---
 -- * 'dlMaxResults'
---
--- * 'dlFields'
 deploymentsList'
     :: Text -- ^ 'project'
     -> DeploymentsList'
 deploymentsList' pDlProject_ =
     DeploymentsList'
-    { _dlQuotaUser = Nothing
-    , _dlPrettyPrint = True
-    , _dlProject = pDlProject_
-    , _dlUserIP = Nothing
-    , _dlKey = Nothing
+    { _dlProject = pDlProject_
     , _dlFilter = Nothing
     , _dlPageToken = Nothing
-    , _dlOAuthToken = Nothing
     , _dlMaxResults = 500
-    , _dlFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-dlQuotaUser :: Lens' DeploymentsList' (Maybe Text)
-dlQuotaUser
-  = lens _dlQuotaUser (\ s a -> s{_dlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-dlPrettyPrint :: Lens' DeploymentsList' Bool
-dlPrettyPrint
-  = lens _dlPrettyPrint
-      (\ s a -> s{_dlPrettyPrint = a})
 
 -- | The project ID for this request.
 dlProject :: Lens' DeploymentsList' Text
 dlProject
   = lens _dlProject (\ s a -> s{_dlProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-dlUserIP :: Lens' DeploymentsList' (Maybe Text)
-dlUserIP = lens _dlUserIP (\ s a -> s{_dlUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-dlKey :: Lens' DeploymentsList' (Maybe AuthKey)
-dlKey = lens _dlKey (\ s a -> s{_dlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -172,38 +112,19 @@ dlPageToken :: Lens' DeploymentsList' (Maybe Text)
 dlPageToken
   = lens _dlPageToken (\ s a -> s{_dlPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-dlOAuthToken :: Lens' DeploymentsList' (Maybe OAuthToken)
-dlOAuthToken
-  = lens _dlOAuthToken (\ s a -> s{_dlOAuthToken = a})
-
 -- | Maximum count of results to be returned.
 dlMaxResults :: Lens' DeploymentsList' Word32
 dlMaxResults
   = lens _dlMaxResults (\ s a -> s{_dlMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-dlFields :: Lens' DeploymentsList' (Maybe Text)
-dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
-
-instance GoogleAuth DeploymentsList' where
-        _AuthKey = dlKey . _Just
-        _AuthToken = dlOAuthToken . _Just
-
 instance GoogleRequest DeploymentsList' where
         type Rs DeploymentsList' = DeploymentsListResponse
-        request = requestWith deploymentManagerRequest
-        requestWith rq DeploymentsList'{..}
+        requestClient DeploymentsList'{..}
           = go _dlProject _dlFilter _dlPageToken
               (Just _dlMaxResults)
-              _dlQuotaUser
-              (Just _dlPrettyPrint)
-              _dlUserIP
-              _dlFields
-              _dlKey
-              _dlOAuthToken
               (Just AltJSON)
+              deploymentManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy DeploymentsListResource)
-                      rq
+                      mempty

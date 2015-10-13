@@ -34,19 +34,14 @@ module Network.Google.Resource.Logging.Projects.Logs.Sinks.Get
 
     -- * Request Lenses
     , plsgXgafv
-    , plsgQuotaUser
-    , plsgPrettyPrint
     , plsgUploadProtocol
     , plsgLogsId
     , plsgPp
     , plsgAccessToken
     , plsgUploadType
     , plsgBearerToken
-    , plsgKey
-    , plsgOAuthToken
     , plsgProjectsId
     , plsgSinksId
-    , plsgFields
     , plsgCallback
     ) where
 
@@ -70,32 +65,21 @@ type ProjectsLogsSinksGetResource =
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "quotaUser" Text :>
-                                   QueryParam "prettyPrint" Bool :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "key" AuthKey :>
-                                         Header "Authorization" OAuthToken :>
-                                           QueryParam "alt" AltJSON :>
-                                             Get '[JSON] LogSink
+                                 QueryParam "alt" AltJSON :> Get '[JSON] LogSink
 
 -- | Gets a log sink.
 --
 -- /See:/ 'projectsLogsSinksGet'' smart constructor.
 data ProjectsLogsSinksGet' = ProjectsLogsSinksGet'
     { _plsgXgafv          :: !(Maybe Text)
-    , _plsgQuotaUser      :: !(Maybe Text)
-    , _plsgPrettyPrint    :: !Bool
     , _plsgUploadProtocol :: !(Maybe Text)
     , _plsgLogsId         :: !Text
     , _plsgPp             :: !Bool
     , _plsgAccessToken    :: !(Maybe Text)
     , _plsgUploadType     :: !(Maybe Text)
     , _plsgBearerToken    :: !(Maybe Text)
-    , _plsgKey            :: !(Maybe AuthKey)
-    , _plsgOAuthToken     :: !(Maybe OAuthToken)
     , _plsgProjectsId     :: !Text
     , _plsgSinksId        :: !Text
-    , _plsgFields         :: !(Maybe Text)
     , _plsgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -104,10 +88,6 @@ data ProjectsLogsSinksGet' = ProjectsLogsSinksGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'plsgXgafv'
---
--- * 'plsgQuotaUser'
---
--- * 'plsgPrettyPrint'
 --
 -- * 'plsgUploadProtocol'
 --
@@ -121,15 +101,9 @@ data ProjectsLogsSinksGet' = ProjectsLogsSinksGet'
 --
 -- * 'plsgBearerToken'
 --
--- * 'plsgKey'
---
--- * 'plsgOAuthToken'
---
 -- * 'plsgProjectsId'
 --
 -- * 'plsgSinksId'
---
--- * 'plsgFields'
 --
 -- * 'plsgCallback'
 projectsLogsSinksGet'
@@ -140,19 +114,14 @@ projectsLogsSinksGet'
 projectsLogsSinksGet' pPlsgLogsId_ pPlsgProjectsId_ pPlsgSinksId_ =
     ProjectsLogsSinksGet'
     { _plsgXgafv = Nothing
-    , _plsgQuotaUser = Nothing
-    , _plsgPrettyPrint = True
     , _plsgUploadProtocol = Nothing
     , _plsgLogsId = pPlsgLogsId_
     , _plsgPp = True
     , _plsgAccessToken = Nothing
     , _plsgUploadType = Nothing
     , _plsgBearerToken = Nothing
-    , _plsgKey = Nothing
-    , _plsgOAuthToken = Nothing
     , _plsgProjectsId = pPlsgProjectsId_
     , _plsgSinksId = pPlsgSinksId_
-    , _plsgFields = Nothing
     , _plsgCallback = Nothing
     }
 
@@ -160,20 +129,6 @@ projectsLogsSinksGet' pPlsgLogsId_ pPlsgProjectsId_ pPlsgSinksId_ =
 plsgXgafv :: Lens' ProjectsLogsSinksGet' (Maybe Text)
 plsgXgafv
   = lens _plsgXgafv (\ s a -> s{_plsgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-plsgQuotaUser :: Lens' ProjectsLogsSinksGet' (Maybe Text)
-plsgQuotaUser
-  = lens _plsgQuotaUser
-      (\ s a -> s{_plsgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-plsgPrettyPrint :: Lens' ProjectsLogsSinksGet' Bool
-plsgPrettyPrint
-  = lens _plsgPrettyPrint
-      (\ s a -> s{_plsgPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 plsgUploadProtocol :: Lens' ProjectsLogsSinksGet' (Maybe Text)
@@ -208,18 +163,6 @@ plsgBearerToken
   = lens _plsgBearerToken
       (\ s a -> s{_plsgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-plsgKey :: Lens' ProjectsLogsSinksGet' (Maybe AuthKey)
-plsgKey = lens _plsgKey (\ s a -> s{_plsgKey = a})
-
--- | OAuth 2.0 token for the current user.
-plsgOAuthToken :: Lens' ProjectsLogsSinksGet' (Maybe OAuthToken)
-plsgOAuthToken
-  = lens _plsgOAuthToken
-      (\ s a -> s{_plsgOAuthToken = a})
-
 -- | Part of \`sinkName\`. The resource name of the log sink to return.
 plsgProjectsId :: Lens' ProjectsLogsSinksGet' Text
 plsgProjectsId
@@ -231,24 +174,14 @@ plsgSinksId :: Lens' ProjectsLogsSinksGet' Text
 plsgSinksId
   = lens _plsgSinksId (\ s a -> s{_plsgSinksId = a})
 
--- | Selector specifying which fields to include in a partial response.
-plsgFields :: Lens' ProjectsLogsSinksGet' (Maybe Text)
-plsgFields
-  = lens _plsgFields (\ s a -> s{_plsgFields = a})
-
 -- | JSONP
 plsgCallback :: Lens' ProjectsLogsSinksGet' (Maybe Text)
 plsgCallback
   = lens _plsgCallback (\ s a -> s{_plsgCallback = a})
 
-instance GoogleAuth ProjectsLogsSinksGet' where
-        _AuthKey = plsgKey . _Just
-        _AuthToken = plsgOAuthToken . _Just
-
 instance GoogleRequest ProjectsLogsSinksGet' where
         type Rs ProjectsLogsSinksGet' = LogSink
-        request = requestWith loggingRequest
-        requestWith rq ProjectsLogsSinksGet'{..}
+        requestClient ProjectsLogsSinksGet'{..}
           = go _plsgProjectsId _plsgLogsId _plsgSinksId
               _plsgXgafv
               _plsgUploadProtocol
@@ -257,13 +190,9 @@ instance GoogleRequest ProjectsLogsSinksGet' where
               _plsgUploadType
               _plsgBearerToken
               _plsgCallback
-              _plsgQuotaUser
-              (Just _plsgPrettyPrint)
-              _plsgFields
-              _plsgKey
-              _plsgOAuthToken
               (Just AltJSON)
+              loggingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsLogsSinksGetResource)
-                      rq
+                      mempty

@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference>
 module Network.Google.ProximityBeacon
     (
+    -- * Service Configuration
+      proximityBeaconService
+
     -- * API Declaration
-      ProximityBeaconAPI
+    , ProximityBeaconAPI
 
     -- * Resources
 

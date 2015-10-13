@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference>
 module Network.Google.FusionTables
     (
+    -- * Service Configuration
+      fusionTablesService
+
     -- * API Declaration
-      FusionTablesAPI
+    , FusionTablesAPI
 
     -- * Resources
 
@@ -254,12 +257,12 @@ module Network.Google.FusionTables
     -- ** Template
     , Template
     , template
-    , temeAutomaticColumnNames
-    , temeTemplateId
-    , temeKind
-    , temeBody
-    , temeName
-    , temeTableId
+    , ttAutomaticColumnNames
+    , ttTemplateId
+    , ttKind
+    , ttBody
+    , ttName
+    , ttTableId
 
     -- ** PointStyle
     , PointStyle
@@ -305,19 +308,19 @@ module Network.Google.FusionTables
     -- ** Table
     , Table
     , table
-    , tabIsExportable
-    , tabKind
-    , tabColumnPropertiesJSONSchema
-    , tabTablePropertiesJSONSchema
-    , tabName
-    , tabTablePropertiesJSON
-    , tabColumns
-    , tabBaseTableIds
-    , tabTableId
-    , tabSQL
-    , tabDescription
-    , tabAttribution
-    , tabAttributionLink
+    , tabaIsExportable
+    , tabaKind
+    , tabaColumnPropertiesJSONSchema
+    , tabaTablePropertiesJSONSchema
+    , tabaName
+    , tabaTablePropertiesJSON
+    , tabaColumns
+    , tabaBaseTableIds
+    , tabaTableId
+    , tabaSQL
+    , tabaDescription
+    , tabaAttribution
+    , tabaAttributionLink
 
     -- ** LineStyle
     , LineStyle

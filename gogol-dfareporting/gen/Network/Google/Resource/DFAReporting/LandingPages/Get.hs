@@ -33,15 +33,9 @@ module Network.Google.Resource.DFAReporting.LandingPages.Get
     , LandingPagesGet'
 
     -- * Request Lenses
-    , lpgQuotaUser
-    , lpgPrettyPrint
-    , lpgUserIP
     , lpgCampaignId
     , lpgProFileId
-    , lpgKey
     , lpgId
-    , lpgOAuthToken
-    , lpgFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -56,50 +50,26 @@ type LandingPagesGetResource =
            Capture "campaignId" Int64 :>
              "landingPages" :>
                Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] LandingPage
+                 QueryParam "alt" AltJSON :> Get '[JSON] LandingPage
 
 -- | Gets one campaign landing page by ID.
 --
 -- /See:/ 'landingPagesGet'' smart constructor.
 data LandingPagesGet' = LandingPagesGet'
-    { _lpgQuotaUser   :: !(Maybe Text)
-    , _lpgPrettyPrint :: !Bool
-    , _lpgUserIP      :: !(Maybe Text)
-    , _lpgCampaignId  :: !Int64
-    , _lpgProFileId   :: !Int64
-    , _lpgKey         :: !(Maybe AuthKey)
-    , _lpgId          :: !Int64
-    , _lpgOAuthToken  :: !(Maybe OAuthToken)
-    , _lpgFields      :: !(Maybe Text)
+    { _lpgCampaignId :: !Int64
+    , _lpgProFileId  :: !Int64
+    , _lpgId         :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lpgQuotaUser'
---
--- * 'lpgPrettyPrint'
---
--- * 'lpgUserIP'
---
 -- * 'lpgCampaignId'
 --
 -- * 'lpgProFileId'
 --
--- * 'lpgKey'
---
 -- * 'lpgId'
---
--- * 'lpgOAuthToken'
---
--- * 'lpgFields'
 landingPagesGet'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
@@ -107,35 +77,10 @@ landingPagesGet'
     -> LandingPagesGet'
 landingPagesGet' pLpgCampaignId_ pLpgProFileId_ pLpgId_ =
     LandingPagesGet'
-    { _lpgQuotaUser = Nothing
-    , _lpgPrettyPrint = True
-    , _lpgUserIP = Nothing
-    , _lpgCampaignId = pLpgCampaignId_
+    { _lpgCampaignId = pLpgCampaignId_
     , _lpgProFileId = pLpgProFileId_
-    , _lpgKey = Nothing
     , _lpgId = pLpgId_
-    , _lpgOAuthToken = Nothing
-    , _lpgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-lpgQuotaUser :: Lens' LandingPagesGet' (Maybe Text)
-lpgQuotaUser
-  = lens _lpgQuotaUser (\ s a -> s{_lpgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-lpgPrettyPrint :: Lens' LandingPagesGet' Bool
-lpgPrettyPrint
-  = lens _lpgPrettyPrint
-      (\ s a -> s{_lpgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-lpgUserIP :: Lens' LandingPagesGet' (Maybe Text)
-lpgUserIP
-  = lens _lpgUserIP (\ s a -> s{_lpgUserIP = a})
 
 -- | Landing page campaign ID.
 lpgCampaignId :: Lens' LandingPagesGet' Int64
@@ -148,44 +93,17 @@ lpgProFileId :: Lens' LandingPagesGet' Int64
 lpgProFileId
   = lens _lpgProFileId (\ s a -> s{_lpgProFileId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-lpgKey :: Lens' LandingPagesGet' (Maybe AuthKey)
-lpgKey = lens _lpgKey (\ s a -> s{_lpgKey = a})
-
 -- | Landing page ID.
 lpgId :: Lens' LandingPagesGet' Int64
 lpgId = lens _lpgId (\ s a -> s{_lpgId = a})
 
--- | OAuth 2.0 token for the current user.
-lpgOAuthToken :: Lens' LandingPagesGet' (Maybe OAuthToken)
-lpgOAuthToken
-  = lens _lpgOAuthToken
-      (\ s a -> s{_lpgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-lpgFields :: Lens' LandingPagesGet' (Maybe Text)
-lpgFields
-  = lens _lpgFields (\ s a -> s{_lpgFields = a})
-
-instance GoogleAuth LandingPagesGet' where
-        _AuthKey = lpgKey . _Just
-        _AuthToken = lpgOAuthToken . _Just
-
 instance GoogleRequest LandingPagesGet' where
         type Rs LandingPagesGet' = LandingPage
-        request = requestWith dFAReportingRequest
-        requestWith rq LandingPagesGet'{..}
+        requestClient LandingPagesGet'{..}
           = go _lpgProFileId _lpgCampaignId _lpgId
-              _lpgQuotaUser
-              (Just _lpgPrettyPrint)
-              _lpgUserIP
-              _lpgFields
-              _lpgKey
-              _lpgOAuthToken
               (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy LandingPagesGetResource)
-                      rq
+                      mempty

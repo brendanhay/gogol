@@ -33,15 +33,9 @@ module Network.Google.Resource.Drive.Revisions.Update
     , RevisionsUpdate'
 
     -- * Request Lenses
-    , ruQuotaUser
-    , ruPrettyPrint
-    , ruUserIP
     , ruPayload
-    , ruKey
     , ruFileId
-    , ruOAuthToken
     , ruRevisionId
-    , ruFields
     ) where
 
 import           Network.Google.Drive.Types
@@ -54,51 +48,27 @@ type RevisionsUpdateResource =
        Capture "fileId" Text :>
          "revisions" :>
            Capture "revisionId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Revision :> Put '[JSON] Revision
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Revision :> Put '[JSON] Revision
 
 -- | Updates a revision.
 --
 -- /See:/ 'revisionsUpdate'' smart constructor.
 data RevisionsUpdate' = RevisionsUpdate'
-    { _ruQuotaUser   :: !(Maybe Text)
-    , _ruPrettyPrint :: !Bool
-    , _ruUserIP      :: !(Maybe Text)
-    , _ruPayload     :: !Revision
-    , _ruKey         :: !(Maybe AuthKey)
-    , _ruFileId      :: !Text
-    , _ruOAuthToken  :: !(Maybe OAuthToken)
-    , _ruRevisionId  :: !Text
-    , _ruFields      :: !(Maybe Text)
+    { _ruPayload    :: !Revision
+    , _ruFileId     :: !Text
+    , _ruRevisionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RevisionsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ruQuotaUser'
---
--- * 'ruPrettyPrint'
---
--- * 'ruUserIP'
---
 -- * 'ruPayload'
---
--- * 'ruKey'
 --
 -- * 'ruFileId'
 --
--- * 'ruOAuthToken'
---
 -- * 'ruRevisionId'
---
--- * 'ruFields'
 revisionsUpdate'
     :: Revision -- ^ 'payload'
     -> Text -- ^ 'fileId'
@@ -106,81 +76,32 @@ revisionsUpdate'
     -> RevisionsUpdate'
 revisionsUpdate' pRuPayload_ pRuFileId_ pRuRevisionId_ =
     RevisionsUpdate'
-    { _ruQuotaUser = Nothing
-    , _ruPrettyPrint = True
-    , _ruUserIP = Nothing
-    , _ruPayload = pRuPayload_
-    , _ruKey = Nothing
+    { _ruPayload = pRuPayload_
     , _ruFileId = pRuFileId_
-    , _ruOAuthToken = Nothing
     , _ruRevisionId = pRuRevisionId_
-    , _ruFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ruQuotaUser :: Lens' RevisionsUpdate' (Maybe Text)
-ruQuotaUser
-  = lens _ruQuotaUser (\ s a -> s{_ruQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ruPrettyPrint :: Lens' RevisionsUpdate' Bool
-ruPrettyPrint
-  = lens _ruPrettyPrint
-      (\ s a -> s{_ruPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ruUserIP :: Lens' RevisionsUpdate' (Maybe Text)
-ruUserIP = lens _ruUserIP (\ s a -> s{_ruUserIP = a})
 
 -- | Multipart request metadata.
 ruPayload :: Lens' RevisionsUpdate' Revision
 ruPayload
   = lens _ruPayload (\ s a -> s{_ruPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ruKey :: Lens' RevisionsUpdate' (Maybe AuthKey)
-ruKey = lens _ruKey (\ s a -> s{_ruKey = a})
-
 -- | The ID for the file.
 ruFileId :: Lens' RevisionsUpdate' Text
 ruFileId = lens _ruFileId (\ s a -> s{_ruFileId = a})
-
--- | OAuth 2.0 token for the current user.
-ruOAuthToken :: Lens' RevisionsUpdate' (Maybe OAuthToken)
-ruOAuthToken
-  = lens _ruOAuthToken (\ s a -> s{_ruOAuthToken = a})
 
 -- | The ID for the revision.
 ruRevisionId :: Lens' RevisionsUpdate' Text
 ruRevisionId
   = lens _ruRevisionId (\ s a -> s{_ruRevisionId = a})
 
--- | Selector specifying which fields to include in a partial response.
-ruFields :: Lens' RevisionsUpdate' (Maybe Text)
-ruFields = lens _ruFields (\ s a -> s{_ruFields = a})
-
-instance GoogleAuth RevisionsUpdate' where
-        _AuthKey = ruKey . _Just
-        _AuthToken = ruOAuthToken . _Just
-
 instance GoogleRequest RevisionsUpdate' where
         type Rs RevisionsUpdate' = Revision
-        request = requestWith driveRequest
-        requestWith rq RevisionsUpdate'{..}
-          = go _ruFileId _ruRevisionId _ruQuotaUser
-              (Just _ruPrettyPrint)
-              _ruUserIP
-              _ruFields
-              _ruKey
-              _ruOAuthToken
-              (Just AltJSON)
+        requestClient RevisionsUpdate'{..}
+          = go _ruFileId _ruRevisionId (Just AltJSON)
               _ruPayload
+              driveService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy RevisionsUpdateResource)
-                      rq
+                      mempty

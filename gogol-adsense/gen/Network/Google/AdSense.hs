@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference>
 module Network.Google.AdSense
     (
+    -- * Service Configuration
+      adSenseService
+
     -- * API Declaration
-      AdSenseAPI
+    , AdSenseAPI
 
     -- * Resources
 

@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference>
 module Network.Google.Fitness
     (
+    -- * Service Configuration
+      fitnessService
+
     -- * API Declaration
-      FitnessAPI
+    , FitnessAPI
 
     -- * Resources
 

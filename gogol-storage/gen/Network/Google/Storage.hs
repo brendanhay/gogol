@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference>
 module Network.Google.Storage
     (
+    -- * Service Configuration
+      storageService
+
     -- * API Declaration
-      StorageAPI
+    , StorageAPI
 
     -- * Resources
 

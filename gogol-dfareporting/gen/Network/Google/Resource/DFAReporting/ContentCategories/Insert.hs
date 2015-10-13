@@ -33,14 +33,8 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Insert
     , ContentCategoriesInsert'
 
     -- * Request Lenses
-    , cciQuotaUser
-    , cciPrettyPrint
-    , cciUserIP
     , cciProFileId
     , cciPayload
-    , cciKey
-    , cciOAuthToken
-    , cciFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,83 +46,34 @@ type ContentCategoriesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "contentCategories" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ContentCategory :>
-                           Post '[JSON] ContentCategory
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] ContentCategory :>
+               Post '[JSON] ContentCategory
 
 -- | Inserts a new content category.
 --
 -- /See:/ 'contentCategoriesInsert'' smart constructor.
 data ContentCategoriesInsert' = ContentCategoriesInsert'
-    { _cciQuotaUser   :: !(Maybe Text)
-    , _cciPrettyPrint :: !Bool
-    , _cciUserIP      :: !(Maybe Text)
-    , _cciProFileId   :: !Int64
-    , _cciPayload     :: !ContentCategory
-    , _cciKey         :: !(Maybe AuthKey)
-    , _cciOAuthToken  :: !(Maybe OAuthToken)
-    , _cciFields      :: !(Maybe Text)
+    { _cciProFileId :: !Int64
+    , _cciPayload   :: !ContentCategory
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cciQuotaUser'
---
--- * 'cciPrettyPrint'
---
--- * 'cciUserIP'
---
 -- * 'cciProFileId'
 --
 -- * 'cciPayload'
---
--- * 'cciKey'
---
--- * 'cciOAuthToken'
---
--- * 'cciFields'
 contentCategoriesInsert'
     :: Int64 -- ^ 'profileId'
     -> ContentCategory -- ^ 'payload'
     -> ContentCategoriesInsert'
 contentCategoriesInsert' pCciProFileId_ pCciPayload_ =
     ContentCategoriesInsert'
-    { _cciQuotaUser = Nothing
-    , _cciPrettyPrint = True
-    , _cciUserIP = Nothing
-    , _cciProFileId = pCciProFileId_
+    { _cciProFileId = pCciProFileId_
     , _cciPayload = pCciPayload_
-    , _cciKey = Nothing
-    , _cciOAuthToken = Nothing
-    , _cciFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-cciQuotaUser :: Lens' ContentCategoriesInsert' (Maybe Text)
-cciQuotaUser
-  = lens _cciQuotaUser (\ s a -> s{_cciQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cciPrettyPrint :: Lens' ContentCategoriesInsert' Bool
-cciPrettyPrint
-  = lens _cciPrettyPrint
-      (\ s a -> s{_cciPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-cciUserIP :: Lens' ContentCategoriesInsert' (Maybe Text)
-cciUserIP
-  = lens _cciUserIP (\ s a -> s{_cciUserIP = a})
 
 -- | User profile ID associated with this request.
 cciProFileId :: Lens' ContentCategoriesInsert' Int64
@@ -140,40 +85,12 @@ cciPayload :: Lens' ContentCategoriesInsert' ContentCategory
 cciPayload
   = lens _cciPayload (\ s a -> s{_cciPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cciKey :: Lens' ContentCategoriesInsert' (Maybe AuthKey)
-cciKey = lens _cciKey (\ s a -> s{_cciKey = a})
-
--- | OAuth 2.0 token for the current user.
-cciOAuthToken :: Lens' ContentCategoriesInsert' (Maybe OAuthToken)
-cciOAuthToken
-  = lens _cciOAuthToken
-      (\ s a -> s{_cciOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cciFields :: Lens' ContentCategoriesInsert' (Maybe Text)
-cciFields
-  = lens _cciFields (\ s a -> s{_cciFields = a})
-
-instance GoogleAuth ContentCategoriesInsert' where
-        _AuthKey = cciKey . _Just
-        _AuthToken = cciOAuthToken . _Just
-
 instance GoogleRequest ContentCategoriesInsert' where
         type Rs ContentCategoriesInsert' = ContentCategory
-        request = requestWith dFAReportingRequest
-        requestWith rq ContentCategoriesInsert'{..}
-          = go _cciProFileId _cciQuotaUser
-              (Just _cciPrettyPrint)
-              _cciUserIP
-              _cciFields
-              _cciKey
-              _cciOAuthToken
-              (Just AltJSON)
-              _cciPayload
+        requestClient ContentCategoriesInsert'{..}
+          = go _cciProFileId (Just AltJSON) _cciPayload
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ContentCategoriesInsertResource)
-                      rq
+                      mempty

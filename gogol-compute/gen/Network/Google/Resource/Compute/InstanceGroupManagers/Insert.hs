@@ -34,15 +34,9 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Insert
     , InstanceGroupManagersInsert'
 
     -- * Request Lenses
-    , igmiQuotaUser
-    , igmiPrettyPrint
     , igmiProject
-    , igmiUserIP
     , igmiZone
     , igmiPayload
-    , igmiKey
-    , igmiOAuthToken
-    , igmiFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,53 +49,29 @@ type InstanceGroupManagersInsertResource =
        "zones" :>
          Capture "zone" Text :>
            "instanceGroupManagers" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] InstanceGroupManager :>
-                             Post '[JSON] Operation
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] InstanceGroupManager :>
+                 Post '[JSON] Operation
 
 -- | Creates a managed instance group resource in the specified project using
 -- the data that is included in the request.
 --
 -- /See:/ 'instanceGroupManagersInsert'' smart constructor.
 data InstanceGroupManagersInsert' = InstanceGroupManagersInsert'
-    { _igmiQuotaUser   :: !(Maybe Text)
-    , _igmiPrettyPrint :: !Bool
-    , _igmiProject     :: !Text
-    , _igmiUserIP      :: !(Maybe Text)
-    , _igmiZone        :: !Text
-    , _igmiPayload     :: !InstanceGroupManager
-    , _igmiKey         :: !(Maybe AuthKey)
-    , _igmiOAuthToken  :: !(Maybe OAuthToken)
-    , _igmiFields      :: !(Maybe Text)
+    { _igmiProject :: !Text
+    , _igmiZone    :: !Text
+    , _igmiPayload :: !InstanceGroupManager
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'igmiQuotaUser'
---
--- * 'igmiPrettyPrint'
---
 -- * 'igmiProject'
---
--- * 'igmiUserIP'
 --
 -- * 'igmiZone'
 --
 -- * 'igmiPayload'
---
--- * 'igmiKey'
---
--- * 'igmiOAuthToken'
---
--- * 'igmiFields'
 instanceGroupManagersInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
@@ -109,41 +79,15 @@ instanceGroupManagersInsert'
     -> InstanceGroupManagersInsert'
 instanceGroupManagersInsert' pIgmiProject_ pIgmiZone_ pIgmiPayload_ =
     InstanceGroupManagersInsert'
-    { _igmiQuotaUser = Nothing
-    , _igmiPrettyPrint = True
-    , _igmiProject = pIgmiProject_
-    , _igmiUserIP = Nothing
+    { _igmiProject = pIgmiProject_
     , _igmiZone = pIgmiZone_
     , _igmiPayload = pIgmiPayload_
-    , _igmiKey = Nothing
-    , _igmiOAuthToken = Nothing
-    , _igmiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-igmiQuotaUser :: Lens' InstanceGroupManagersInsert' (Maybe Text)
-igmiQuotaUser
-  = lens _igmiQuotaUser
-      (\ s a -> s{_igmiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-igmiPrettyPrint :: Lens' InstanceGroupManagersInsert' Bool
-igmiPrettyPrint
-  = lens _igmiPrettyPrint
-      (\ s a -> s{_igmiPrettyPrint = a})
 
 -- | The project ID for this request.
 igmiProject :: Lens' InstanceGroupManagersInsert' Text
 igmiProject
   = lens _igmiProject (\ s a -> s{_igmiProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-igmiUserIP :: Lens' InstanceGroupManagersInsert' (Maybe Text)
-igmiUserIP
-  = lens _igmiUserIP (\ s a -> s{_igmiUserIP = a})
 
 -- | The URL of the zone where the managed instance group is located.
 igmiZone :: Lens' InstanceGroupManagersInsert' Text
@@ -154,42 +98,14 @@ igmiPayload :: Lens' InstanceGroupManagersInsert' InstanceGroupManager
 igmiPayload
   = lens _igmiPayload (\ s a -> s{_igmiPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-igmiKey :: Lens' InstanceGroupManagersInsert' (Maybe AuthKey)
-igmiKey = lens _igmiKey (\ s a -> s{_igmiKey = a})
-
--- | OAuth 2.0 token for the current user.
-igmiOAuthToken :: Lens' InstanceGroupManagersInsert' (Maybe OAuthToken)
-igmiOAuthToken
-  = lens _igmiOAuthToken
-      (\ s a -> s{_igmiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-igmiFields :: Lens' InstanceGroupManagersInsert' (Maybe Text)
-igmiFields
-  = lens _igmiFields (\ s a -> s{_igmiFields = a})
-
-instance GoogleAuth InstanceGroupManagersInsert'
-         where
-        _AuthKey = igmiKey . _Just
-        _AuthToken = igmiOAuthToken . _Just
-
 instance GoogleRequest InstanceGroupManagersInsert'
          where
         type Rs InstanceGroupManagersInsert' = Operation
-        request = requestWith computeRequest
-        requestWith rq InstanceGroupManagersInsert'{..}
-          = go _igmiProject _igmiZone _igmiQuotaUser
-              (Just _igmiPrettyPrint)
-              _igmiUserIP
-              _igmiFields
-              _igmiKey
-              _igmiOAuthToken
-              (Just AltJSON)
+        requestClient InstanceGroupManagersInsert'{..}
+          = go _igmiProject _igmiZone (Just AltJSON)
               _igmiPayload
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy InstanceGroupManagersInsertResource)
-                      rq
+                      mempty

@@ -32,13 +32,6 @@ module Network.Google.Resource.Games.Metagame.GetMetagameConfig
     , metagameGetMetagameConfig'
     , MetagameGetMetagameConfig'
 
-    -- * Request Lenses
-    , mgmcQuotaUser
-    , mgmcPrettyPrint
-    , mgmcUserIP
-    , mgmcKey
-    , mgmcOAuthToken
-    , mgmcFields
     ) where
 
 import           Network.Google.Games.Types
@@ -48,107 +41,28 @@ import           Network.Google.Prelude
 -- 'MetagameGetMetagameConfig'' request conforms to.
 type MetagameGetMetagameConfigResource =
      "metagameConfig" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "fields" Text :>
-               QueryParam "key" AuthKey :>
-                 Header "Authorization" OAuthToken :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] MetagameConfig
+       QueryParam "alt" AltJSON :>
+         Get '[JSON] MetagameConfig
 
 -- | Return the metagame configuration data for the calling application.
 --
 -- /See:/ 'metagameGetMetagameConfig'' smart constructor.
-data MetagameGetMetagameConfig' = MetagameGetMetagameConfig'
-    { _mgmcQuotaUser   :: !(Maybe Text)
-    , _mgmcPrettyPrint :: !Bool
-    , _mgmcUserIP      :: !(Maybe Text)
-    , _mgmcKey         :: !(Maybe AuthKey)
-    , _mgmcOAuthToken  :: !(Maybe OAuthToken)
-    , _mgmcFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data MetagameGetMetagameConfig' =
+    MetagameGetMetagameConfig'
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetagameGetMetagameConfig'' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mgmcQuotaUser'
---
--- * 'mgmcPrettyPrint'
---
--- * 'mgmcUserIP'
---
--- * 'mgmcKey'
---
--- * 'mgmcOAuthToken'
---
--- * 'mgmcFields'
 metagameGetMetagameConfig'
     :: MetagameGetMetagameConfig'
-metagameGetMetagameConfig' =
-    MetagameGetMetagameConfig'
-    { _mgmcQuotaUser = Nothing
-    , _mgmcPrettyPrint = True
-    , _mgmcUserIP = Nothing
-    , _mgmcKey = Nothing
-    , _mgmcOAuthToken = Nothing
-    , _mgmcFields = Nothing
-    }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mgmcQuotaUser :: Lens' MetagameGetMetagameConfig' (Maybe Text)
-mgmcQuotaUser
-  = lens _mgmcQuotaUser
-      (\ s a -> s{_mgmcQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mgmcPrettyPrint :: Lens' MetagameGetMetagameConfig' Bool
-mgmcPrettyPrint
-  = lens _mgmcPrettyPrint
-      (\ s a -> s{_mgmcPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mgmcUserIP :: Lens' MetagameGetMetagameConfig' (Maybe Text)
-mgmcUserIP
-  = lens _mgmcUserIP (\ s a -> s{_mgmcUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mgmcKey :: Lens' MetagameGetMetagameConfig' (Maybe AuthKey)
-mgmcKey = lens _mgmcKey (\ s a -> s{_mgmcKey = a})
-
--- | OAuth 2.0 token for the current user.
-mgmcOAuthToken :: Lens' MetagameGetMetagameConfig' (Maybe OAuthToken)
-mgmcOAuthToken
-  = lens _mgmcOAuthToken
-      (\ s a -> s{_mgmcOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-mgmcFields :: Lens' MetagameGetMetagameConfig' (Maybe Text)
-mgmcFields
-  = lens _mgmcFields (\ s a -> s{_mgmcFields = a})
-
-instance GoogleAuth MetagameGetMetagameConfig' where
-        _AuthKey = mgmcKey . _Just
-        _AuthToken = mgmcOAuthToken . _Just
+metagameGetMetagameConfig' = MetagameGetMetagameConfig'
 
 instance GoogleRequest MetagameGetMetagameConfig'
          where
         type Rs MetagameGetMetagameConfig' = MetagameConfig
-        request = requestWith gamesRequest
-        requestWith rq MetagameGetMetagameConfig'{..}
-          = go _mgmcQuotaUser (Just _mgmcPrettyPrint)
-              _mgmcUserIP
-              _mgmcFields
-              _mgmcKey
-              _mgmcOAuthToken
-              (Just AltJSON)
+        requestClient MetagameGetMetagameConfig'{..}
+          = go (Just AltJSON) gamesService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy MetagameGetMetagameConfigResource)
-                      rq
+                      mempty

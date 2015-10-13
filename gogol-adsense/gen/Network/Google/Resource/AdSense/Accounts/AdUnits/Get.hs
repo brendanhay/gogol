@@ -34,15 +34,9 @@ module Network.Google.Resource.AdSense.Accounts.AdUnits.Get
     , AccountsAdUnitsGet'
 
     -- * Request Lenses
-    , aaugQuotaUser
-    , aaugPrettyPrint
-    , aaugUserIP
     , aaugAdUnitId
     , aaugAdClientId
     , aaugAccountId
-    , aaugKey
-    , aaugOAuthToken
-    , aaugFields
     ) where
 
 import           Network.Google.AdSense.Types
@@ -57,51 +51,27 @@ type AccountsAdUnitsGetResource =
            Capture "adClientId" Text :>
              "adunits" :>
                Capture "adUnitId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] AdUnit
+                 QueryParam "alt" AltJSON :> Get '[JSON] AdUnit
 
 -- | Gets the specified ad unit in the specified ad client for the specified
 -- account.
 --
 -- /See:/ 'accountsAdUnitsGet'' smart constructor.
 data AccountsAdUnitsGet' = AccountsAdUnitsGet'
-    { _aaugQuotaUser   :: !(Maybe Text)
-    , _aaugPrettyPrint :: !Bool
-    , _aaugUserIP      :: !(Maybe Text)
-    , _aaugAdUnitId    :: !Text
-    , _aaugAdClientId  :: !Text
-    , _aaugAccountId   :: !Text
-    , _aaugKey         :: !(Maybe AuthKey)
-    , _aaugOAuthToken  :: !(Maybe OAuthToken)
-    , _aaugFields      :: !(Maybe Text)
+    { _aaugAdUnitId   :: !Text
+    , _aaugAdClientId :: !Text
+    , _aaugAccountId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdUnitsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aaugQuotaUser'
---
--- * 'aaugPrettyPrint'
---
--- * 'aaugUserIP'
---
 -- * 'aaugAdUnitId'
 --
 -- * 'aaugAdClientId'
 --
 -- * 'aaugAccountId'
---
--- * 'aaugKey'
---
--- * 'aaugOAuthToken'
---
--- * 'aaugFields'
 accountsAdUnitsGet'
     :: Text -- ^ 'adUnitId'
     -> Text -- ^ 'adClientId'
@@ -109,36 +79,10 @@ accountsAdUnitsGet'
     -> AccountsAdUnitsGet'
 accountsAdUnitsGet' pAaugAdUnitId_ pAaugAdClientId_ pAaugAccountId_ =
     AccountsAdUnitsGet'
-    { _aaugQuotaUser = Nothing
-    , _aaugPrettyPrint = True
-    , _aaugUserIP = Nothing
-    , _aaugAdUnitId = pAaugAdUnitId_
+    { _aaugAdUnitId = pAaugAdUnitId_
     , _aaugAdClientId = pAaugAdClientId_
     , _aaugAccountId = pAaugAccountId_
-    , _aaugKey = Nothing
-    , _aaugOAuthToken = Nothing
-    , _aaugFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-aaugQuotaUser :: Lens' AccountsAdUnitsGet' (Maybe Text)
-aaugQuotaUser
-  = lens _aaugQuotaUser
-      (\ s a -> s{_aaugQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aaugPrettyPrint :: Lens' AccountsAdUnitsGet' Bool
-aaugPrettyPrint
-  = lens _aaugPrettyPrint
-      (\ s a -> s{_aaugPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-aaugUserIP :: Lens' AccountsAdUnitsGet' (Maybe Text)
-aaugUserIP
-  = lens _aaugUserIP (\ s a -> s{_aaugUserIP = a})
 
 -- | Ad unit to retrieve.
 aaugAdUnitId :: Lens' AccountsAdUnitsGet' Text
@@ -157,40 +101,13 @@ aaugAccountId
   = lens _aaugAccountId
       (\ s a -> s{_aaugAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aaugKey :: Lens' AccountsAdUnitsGet' (Maybe AuthKey)
-aaugKey = lens _aaugKey (\ s a -> s{_aaugKey = a})
-
--- | OAuth 2.0 token for the current user.
-aaugOAuthToken :: Lens' AccountsAdUnitsGet' (Maybe OAuthToken)
-aaugOAuthToken
-  = lens _aaugOAuthToken
-      (\ s a -> s{_aaugOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-aaugFields :: Lens' AccountsAdUnitsGet' (Maybe Text)
-aaugFields
-  = lens _aaugFields (\ s a -> s{_aaugFields = a})
-
-instance GoogleAuth AccountsAdUnitsGet' where
-        _AuthKey = aaugKey . _Just
-        _AuthToken = aaugOAuthToken . _Just
-
 instance GoogleRequest AccountsAdUnitsGet' where
         type Rs AccountsAdUnitsGet' = AdUnit
-        request = requestWith adSenseRequest
-        requestWith rq AccountsAdUnitsGet'{..}
+        requestClient AccountsAdUnitsGet'{..}
           = go _aaugAccountId _aaugAdClientId _aaugAdUnitId
-              _aaugQuotaUser
-              (Just _aaugPrettyPrint)
-              _aaugUserIP
-              _aaugFields
-              _aaugKey
-              _aaugOAuthToken
               (Just AltJSON)
+              adSenseService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsAdUnitsGetResource)
-                      rq
+                      mempty

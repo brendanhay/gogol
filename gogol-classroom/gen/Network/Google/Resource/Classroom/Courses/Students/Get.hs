@@ -38,8 +38,6 @@ module Network.Google.Resource.Classroom.Courses.Students.Get
 
     -- * Request Lenses
     , csgXgafv
-    , csgQuotaUser
-    , csgPrettyPrint
     , csgUploadProtocol
     , csgPp
     , csgCourseId
@@ -47,9 +45,6 @@ module Network.Google.Resource.Classroom.Courses.Students.Get
     , csgUploadType
     , csgUserId
     , csgBearerToken
-    , csgKey
-    , csgOAuthToken
-    , csgFields
     , csgCallback
     ) where
 
@@ -71,13 +66,7 @@ type CoursesStudentsGetResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] Student
+                             QueryParam "alt" AltJSON :> Get '[JSON] Student
 
 -- | Returns a student of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -88,8 +77,6 @@ type CoursesStudentsGetResource =
 -- /See:/ 'coursesStudentsGet'' smart constructor.
 data CoursesStudentsGet' = CoursesStudentsGet'
     { _csgXgafv          :: !(Maybe Text)
-    , _csgQuotaUser      :: !(Maybe Text)
-    , _csgPrettyPrint    :: !Bool
     , _csgUploadProtocol :: !(Maybe Text)
     , _csgPp             :: !Bool
     , _csgCourseId       :: !Text
@@ -97,9 +84,6 @@ data CoursesStudentsGet' = CoursesStudentsGet'
     , _csgUploadType     :: !(Maybe Text)
     , _csgUserId         :: !Text
     , _csgBearerToken    :: !(Maybe Text)
-    , _csgKey            :: !(Maybe AuthKey)
-    , _csgOAuthToken     :: !(Maybe OAuthToken)
-    , _csgFields         :: !(Maybe Text)
     , _csgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -108,10 +92,6 @@ data CoursesStudentsGet' = CoursesStudentsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'csgXgafv'
---
--- * 'csgQuotaUser'
---
--- * 'csgPrettyPrint'
 --
 -- * 'csgUploadProtocol'
 --
@@ -127,12 +107,6 @@ data CoursesStudentsGet' = CoursesStudentsGet'
 --
 -- * 'csgBearerToken'
 --
--- * 'csgKey'
---
--- * 'csgOAuthToken'
---
--- * 'csgFields'
---
 -- * 'csgCallback'
 coursesStudentsGet'
     :: Text -- ^ 'courseId'
@@ -141,8 +115,6 @@ coursesStudentsGet'
 coursesStudentsGet' pCsgCourseId_ pCsgUserId_ =
     CoursesStudentsGet'
     { _csgXgafv = Nothing
-    , _csgQuotaUser = Nothing
-    , _csgPrettyPrint = True
     , _csgUploadProtocol = Nothing
     , _csgPp = True
     , _csgCourseId = pCsgCourseId_
@@ -150,28 +122,12 @@ coursesStudentsGet' pCsgCourseId_ pCsgUserId_ =
     , _csgUploadType = Nothing
     , _csgUserId = pCsgUserId_
     , _csgBearerToken = Nothing
-    , _csgKey = Nothing
-    , _csgOAuthToken = Nothing
-    , _csgFields = Nothing
     , _csgCallback = Nothing
     }
 
 -- | V1 error format.
 csgXgafv :: Lens' CoursesStudentsGet' (Maybe Text)
 csgXgafv = lens _csgXgafv (\ s a -> s{_csgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-csgQuotaUser :: Lens' CoursesStudentsGet' (Maybe Text)
-csgQuotaUser
-  = lens _csgQuotaUser (\ s a -> s{_csgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-csgPrettyPrint :: Lens' CoursesStudentsGet' Bool
-csgPrettyPrint
-  = lens _csgPrettyPrint
-      (\ s a -> s{_csgPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 csgUploadProtocol :: Lens' CoursesStudentsGet' (Maybe Text)
@@ -215,36 +171,14 @@ csgBearerToken
   = lens _csgBearerToken
       (\ s a -> s{_csgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-csgKey :: Lens' CoursesStudentsGet' (Maybe AuthKey)
-csgKey = lens _csgKey (\ s a -> s{_csgKey = a})
-
--- | OAuth 2.0 token for the current user.
-csgOAuthToken :: Lens' CoursesStudentsGet' (Maybe OAuthToken)
-csgOAuthToken
-  = lens _csgOAuthToken
-      (\ s a -> s{_csgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-csgFields :: Lens' CoursesStudentsGet' (Maybe Text)
-csgFields
-  = lens _csgFields (\ s a -> s{_csgFields = a})
-
 -- | JSONP
 csgCallback :: Lens' CoursesStudentsGet' (Maybe Text)
 csgCallback
   = lens _csgCallback (\ s a -> s{_csgCallback = a})
 
-instance GoogleAuth CoursesStudentsGet' where
-        _AuthKey = csgKey . _Just
-        _AuthToken = csgOAuthToken . _Just
-
 instance GoogleRequest CoursesStudentsGet' where
         type Rs CoursesStudentsGet' = Student
-        request = requestWith classroomRequest
-        requestWith rq CoursesStudentsGet'{..}
+        requestClient CoursesStudentsGet'{..}
           = go _csgCourseId _csgUserId _csgXgafv
               _csgUploadProtocol
               (Just _csgPp)
@@ -252,13 +186,9 @@ instance GoogleRequest CoursesStudentsGet' where
               _csgUploadType
               _csgBearerToken
               _csgCallback
-              _csgQuotaUser
-              (Just _csgPrettyPrint)
-              _csgFields
-              _csgKey
-              _csgOAuthToken
               (Just AltJSON)
+              classroomService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CoursesStudentsGetResource)
-                      rq
+                      mempty

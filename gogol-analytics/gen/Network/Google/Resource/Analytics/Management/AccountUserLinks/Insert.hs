@@ -33,14 +33,8 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert
     , ManagementAccountUserLinksInsert'
 
     -- * Request Lenses
-    , mauliQuotaUser
-    , mauliPrettyPrint
-    , mauliUserIP
     , mauliPayload
     , mauliAccountId
-    , mauliKey
-    , mauliOAuthToken
-    , mauliFields
     ) where
 
 import           Network.Google.Analytics.Types
@@ -53,84 +47,34 @@ type ManagementAccountUserLinksInsertResource =
        "accounts" :>
          Capture "accountId" Text :>
            "entityUserLinks" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] EntityUserLink :>
-                             Post '[JSON] EntityUserLink
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] EntityUserLink :>
+                 Post '[JSON] EntityUserLink
 
 -- | Adds a new user to the given account.
 --
 -- /See:/ 'managementAccountUserLinksInsert'' smart constructor.
 data ManagementAccountUserLinksInsert' = ManagementAccountUserLinksInsert'
-    { _mauliQuotaUser   :: !(Maybe Text)
-    , _mauliPrettyPrint :: !Bool
-    , _mauliUserIP      :: !(Maybe Text)
-    , _mauliPayload     :: !EntityUserLink
-    , _mauliAccountId   :: !Text
-    , _mauliKey         :: !(Maybe AuthKey)
-    , _mauliOAuthToken  :: !(Maybe OAuthToken)
-    , _mauliFields      :: !(Maybe Text)
+    { _mauliPayload   :: !EntityUserLink
+    , _mauliAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mauliQuotaUser'
---
--- * 'mauliPrettyPrint'
---
--- * 'mauliUserIP'
---
 -- * 'mauliPayload'
 --
 -- * 'mauliAccountId'
---
--- * 'mauliKey'
---
--- * 'mauliOAuthToken'
---
--- * 'mauliFields'
 managementAccountUserLinksInsert'
     :: EntityUserLink -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementAccountUserLinksInsert'
 managementAccountUserLinksInsert' pMauliPayload_ pMauliAccountId_ =
     ManagementAccountUserLinksInsert'
-    { _mauliQuotaUser = Nothing
-    , _mauliPrettyPrint = False
-    , _mauliUserIP = Nothing
-    , _mauliPayload = pMauliPayload_
+    { _mauliPayload = pMauliPayload_
     , _mauliAccountId = pMauliAccountId_
-    , _mauliKey = Nothing
-    , _mauliOAuthToken = Nothing
-    , _mauliFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mauliQuotaUser :: Lens' ManagementAccountUserLinksInsert' (Maybe Text)
-mauliQuotaUser
-  = lens _mauliQuotaUser
-      (\ s a -> s{_mauliQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mauliPrettyPrint :: Lens' ManagementAccountUserLinksInsert' Bool
-mauliPrettyPrint
-  = lens _mauliPrettyPrint
-      (\ s a -> s{_mauliPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mauliUserIP :: Lens' ManagementAccountUserLinksInsert' (Maybe Text)
-mauliUserIP
-  = lens _mauliUserIP (\ s a -> s{_mauliUserIP = a})
 
 -- | Multipart request metadata.
 mauliPayload :: Lens' ManagementAccountUserLinksInsert' EntityUserLink
@@ -143,44 +87,15 @@ mauliAccountId
   = lens _mauliAccountId
       (\ s a -> s{_mauliAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mauliKey :: Lens' ManagementAccountUserLinksInsert' (Maybe AuthKey)
-mauliKey = lens _mauliKey (\ s a -> s{_mauliKey = a})
-
--- | OAuth 2.0 token for the current user.
-mauliOAuthToken :: Lens' ManagementAccountUserLinksInsert' (Maybe OAuthToken)
-mauliOAuthToken
-  = lens _mauliOAuthToken
-      (\ s a -> s{_mauliOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-mauliFields :: Lens' ManagementAccountUserLinksInsert' (Maybe Text)
-mauliFields
-  = lens _mauliFields (\ s a -> s{_mauliFields = a})
-
-instance GoogleAuth ManagementAccountUserLinksInsert'
-         where
-        _AuthKey = mauliKey . _Just
-        _AuthToken = mauliOAuthToken . _Just
-
 instance GoogleRequest
          ManagementAccountUserLinksInsert' where
         type Rs ManagementAccountUserLinksInsert' =
              EntityUserLink
-        request = requestWith analyticsRequest
-        requestWith rq ManagementAccountUserLinksInsert'{..}
-          = go _mauliAccountId _mauliQuotaUser
-              (Just _mauliPrettyPrint)
-              _mauliUserIP
-              _mauliFields
-              _mauliKey
-              _mauliOAuthToken
-              (Just AltJSON)
-              _mauliPayload
+        requestClient ManagementAccountUserLinksInsert'{..}
+          = go _mauliAccountId (Just AltJSON) _mauliPayload
+              analyticsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy ManagementAccountUserLinksInsertResource)
-                      rq
+                      mempty

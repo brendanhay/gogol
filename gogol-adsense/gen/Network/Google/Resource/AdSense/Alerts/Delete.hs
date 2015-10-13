@@ -34,13 +34,7 @@ module Network.Google.Resource.AdSense.Alerts.Delete
     , AlertsDelete'
 
     -- * Request Lenses
-    , adQuotaUser
-    , adPrettyPrint
-    , adUserIP
     , adAlertId
-    , adKey
-    , adOAuthToken
-    , adFields
     ) where
 
 import           Network.Google.AdSense.Types
@@ -51,111 +45,38 @@ import           Network.Google.Prelude
 type AlertsDeleteResource =
      "alerts" :>
        Capture "alertId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
+         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Dismiss (delete) the specified alert from the publisher\'s AdSense
 -- account.
 --
 -- /See:/ 'alertsDelete'' smart constructor.
-data AlertsDelete' = AlertsDelete'
-    { _adQuotaUser   :: !(Maybe Text)
-    , _adPrettyPrint :: !Bool
-    , _adUserIP      :: !(Maybe Text)
-    , _adAlertId     :: !Text
-    , _adKey         :: !(Maybe AuthKey)
-    , _adOAuthToken  :: !(Maybe OAuthToken)
-    , _adFields      :: !(Maybe Text)
+newtype AlertsDelete' = AlertsDelete'
+    { _adAlertId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AlertsDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'adQuotaUser'
---
--- * 'adPrettyPrint'
---
--- * 'adUserIP'
---
 -- * 'adAlertId'
---
--- * 'adKey'
---
--- * 'adOAuthToken'
---
--- * 'adFields'
 alertsDelete'
     :: Text -- ^ 'alertId'
     -> AlertsDelete'
 alertsDelete' pAdAlertId_ =
     AlertsDelete'
-    { _adQuotaUser = Nothing
-    , _adPrettyPrint = True
-    , _adUserIP = Nothing
-    , _adAlertId = pAdAlertId_
-    , _adKey = Nothing
-    , _adOAuthToken = Nothing
-    , _adFields = Nothing
+    { _adAlertId = pAdAlertId_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-adQuotaUser :: Lens' AlertsDelete' (Maybe Text)
-adQuotaUser
-  = lens _adQuotaUser (\ s a -> s{_adQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-adPrettyPrint :: Lens' AlertsDelete' Bool
-adPrettyPrint
-  = lens _adPrettyPrint
-      (\ s a -> s{_adPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-adUserIP :: Lens' AlertsDelete' (Maybe Text)
-adUserIP = lens _adUserIP (\ s a -> s{_adUserIP = a})
 
 -- | Alert to delete.
 adAlertId :: Lens' AlertsDelete' Text
 adAlertId
   = lens _adAlertId (\ s a -> s{_adAlertId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-adKey :: Lens' AlertsDelete' (Maybe AuthKey)
-adKey = lens _adKey (\ s a -> s{_adKey = a})
-
--- | OAuth 2.0 token for the current user.
-adOAuthToken :: Lens' AlertsDelete' (Maybe OAuthToken)
-adOAuthToken
-  = lens _adOAuthToken (\ s a -> s{_adOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-adFields :: Lens' AlertsDelete' (Maybe Text)
-adFields = lens _adFields (\ s a -> s{_adFields = a})
-
-instance GoogleAuth AlertsDelete' where
-        _AuthKey = adKey . _Just
-        _AuthToken = adOAuthToken . _Just
-
 instance GoogleRequest AlertsDelete' where
         type Rs AlertsDelete' = ()
-        request = requestWith adSenseRequest
-        requestWith rq AlertsDelete'{..}
-          = go _adAlertId _adQuotaUser (Just _adPrettyPrint)
-              _adUserIP
-              _adFields
-              _adKey
-              _adOAuthToken
-              (Just AltJSON)
+        requestClient AlertsDelete'{..}
+          = go _adAlertId (Just AltJSON) adSenseService
           where go
-                  = clientBuild (Proxy :: Proxy AlertsDeleteResource)
-                      rq
+                  = buildClient (Proxy :: Proxy AlertsDeleteResource)
+                      mempty

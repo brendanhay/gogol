@@ -34,19 +34,13 @@ module Network.Google.Resource.FusionTables.Table.ReplaceRows
     , TableReplaceRows'
 
     -- * Request Lenses
-    , trrQuotaUser
-    , trrPrettyPrint
-    , trrUserIP
     , trrStartLine
     , trrEndLine
     , trrMedia
-    , trrKey
-    , trrOAuthToken
     , trrTableId
     , trrDelimiter
     , trrEncoding
     , trrIsStrict
-    , trrFields
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -63,55 +57,33 @@ type TableReplaceRowsResource =
                QueryParam "delimiter" Text :>
                  QueryParam "encoding" Text :>
                    QueryParam "isStrict" Bool :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] Stream :>
-                                     Post '[JSON] Task
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[OctetStream] RequestBody :>
+                         Post '[JSON] Task
 
 -- | Replaces rows of an existing table. Current rows remain visible until
 -- all replacement rows are ready.
 --
 -- /See:/ 'tableReplaceRows'' smart constructor.
 data TableReplaceRows' = TableReplaceRows'
-    { _trrQuotaUser   :: !(Maybe Text)
-    , _trrPrettyPrint :: !Bool
-    , _trrUserIP      :: !(Maybe Text)
-    , _trrStartLine   :: !(Maybe Int32)
-    , _trrEndLine     :: !(Maybe Int32)
-    , _trrMedia       :: !Stream
-    , _trrKey         :: !(Maybe AuthKey)
-    , _trrOAuthToken  :: !(Maybe OAuthToken)
-    , _trrTableId     :: !Text
-    , _trrDelimiter   :: !(Maybe Text)
-    , _trrEncoding    :: !(Maybe Text)
-    , _trrIsStrict    :: !(Maybe Bool)
-    , _trrFields      :: !(Maybe Text)
+    { _trrStartLine :: !(Maybe Int32)
+    , _trrEndLine   :: !(Maybe Int32)
+    , _trrMedia     :: !Stream
+    , _trrTableId   :: !Text
+    , _trrDelimiter :: !(Maybe Text)
+    , _trrEncoding  :: !(Maybe Text)
+    , _trrIsStrict  :: !(Maybe Bool)
     }
 
 -- | Creates a value of 'TableReplaceRows'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'trrQuotaUser'
---
--- * 'trrPrettyPrint'
---
--- * 'trrUserIP'
---
 -- * 'trrStartLine'
 --
 -- * 'trrEndLine'
 --
 -- * 'trrMedia'
---
--- * 'trrKey'
---
--- * 'trrOAuthToken'
 --
 -- * 'trrTableId'
 --
@@ -120,47 +92,20 @@ data TableReplaceRows' = TableReplaceRows'
 -- * 'trrEncoding'
 --
 -- * 'trrIsStrict'
---
--- * 'trrFields'
 tableReplaceRows'
     :: Stream -- ^ 'media'
     -> Text -- ^ 'tableId'
     -> TableReplaceRows'
 tableReplaceRows' pTrrMedia_ pTrrTableId_ =
     TableReplaceRows'
-    { _trrQuotaUser = Nothing
-    , _trrPrettyPrint = True
-    , _trrUserIP = Nothing
-    , _trrStartLine = Nothing
+    { _trrStartLine = Nothing
     , _trrEndLine = Nothing
     , _trrMedia = pTrrMedia_
-    , _trrKey = Nothing
-    , _trrOAuthToken = Nothing
     , _trrTableId = pTrrTableId_
     , _trrDelimiter = Nothing
     , _trrEncoding = Nothing
     , _trrIsStrict = Nothing
-    , _trrFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-trrQuotaUser :: Lens' TableReplaceRows' (Maybe Text)
-trrQuotaUser
-  = lens _trrQuotaUser (\ s a -> s{_trrQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-trrPrettyPrint :: Lens' TableReplaceRows' Bool
-trrPrettyPrint
-  = lens _trrPrettyPrint
-      (\ s a -> s{_trrPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-trrUserIP :: Lens' TableReplaceRows' (Maybe Text)
-trrUserIP
-  = lens _trrUserIP (\ s a -> s{_trrUserIP = a})
 
 -- | The index of the first line from which to start importing, inclusive.
 -- Default is 0.
@@ -178,18 +123,6 @@ trrEndLine
 
 trrMedia :: Lens' TableReplaceRows' Stream
 trrMedia = lens _trrMedia (\ s a -> s{_trrMedia = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-trrKey :: Lens' TableReplaceRows' (Maybe AuthKey)
-trrKey = lens _trrKey (\ s a -> s{_trrKey = a})
-
--- | OAuth 2.0 token for the current user.
-trrOAuthToken :: Lens' TableReplaceRows' (Maybe OAuthToken)
-trrOAuthToken
-  = lens _trrOAuthToken
-      (\ s a -> s{_trrOAuthToken = a})
 
 -- | Table whose rows will be replaced.
 trrTableId :: Lens' TableReplaceRows' Text
@@ -216,32 +149,17 @@ trrIsStrict :: Lens' TableReplaceRows' (Maybe Bool)
 trrIsStrict
   = lens _trrIsStrict (\ s a -> s{_trrIsStrict = a})
 
--- | Selector specifying which fields to include in a partial response.
-trrFields :: Lens' TableReplaceRows' (Maybe Text)
-trrFields
-  = lens _trrFields (\ s a -> s{_trrFields = a})
-
-instance GoogleAuth TableReplaceRows' where
-        _AuthKey = trrKey . _Just
-        _AuthToken = trrOAuthToken . _Just
-
 instance GoogleRequest TableReplaceRows' where
         type Rs TableReplaceRows' = Task
-        request = requestWith fusionTablesRequest
-        requestWith rq TableReplaceRows'{..}
+        requestClient TableReplaceRows'{..}
           = go _trrTableId _trrStartLine _trrEndLine
               _trrDelimiter
               _trrEncoding
               _trrIsStrict
-              _trrQuotaUser
-              (Just _trrPrettyPrint)
-              _trrUserIP
-              _trrFields
-              _trrKey
-              _trrOAuthToken
               (Just AltJSON)
               _trrMedia
+              fusionTablesService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy TableReplaceRowsResource)
-                      rq
+                      mempty

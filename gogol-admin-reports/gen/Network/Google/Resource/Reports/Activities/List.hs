@@ -33,22 +33,16 @@ module Network.Google.Resource.Reports.Activities.List
     , ActivitiesList'
 
     -- * Request Lenses
-    , alQuotaUser
-    , alPrettyPrint
     , alStartTime
-    , alUserIP
     , alFilters
     , alCustomerId
     , alActorIPAddress
-    , alKey
     , alEndTime
     , alApplicationName
     , alPageToken
-    , alOAuthToken
     , alEventName
     , alUserKey
     , alMaxResults
-    , alFields
     ) where
 
 import           Network.Google.Prelude
@@ -70,48 +64,30 @@ type ActivitiesListResource =
                          QueryParam "pageToken" Text :>
                            QueryParam "eventName" Text :>
                              QueryParam "maxResults" Int32 :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "userIp" Text :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "key" AuthKey :>
-                                         Header "Authorization" OAuthToken :>
-                                           QueryParam "alt" AltJSON :>
-                                             Get '[JSON] Activities
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] Activities
 
 -- | Retrieves a list of activities for a specific customer and application.
 --
 -- /See:/ 'activitiesList'' smart constructor.
 data ActivitiesList' = ActivitiesList'
-    { _alQuotaUser       :: !(Maybe Text)
-    , _alPrettyPrint     :: !Bool
-    , _alStartTime       :: !(Maybe Text)
-    , _alUserIP          :: !(Maybe Text)
+    { _alStartTime       :: !(Maybe Text)
     , _alFilters         :: !(Maybe Text)
     , _alCustomerId      :: !(Maybe Text)
     , _alActorIPAddress  :: !(Maybe Text)
-    , _alKey             :: !(Maybe AuthKey)
     , _alEndTime         :: !(Maybe Text)
     , _alApplicationName :: !Text
     , _alPageToken       :: !(Maybe Text)
-    , _alOAuthToken      :: !(Maybe OAuthToken)
     , _alEventName       :: !(Maybe Text)
     , _alUserKey         :: !Text
     , _alMaxResults      :: !(Maybe Int32)
-    , _alFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'alQuotaUser'
---
--- * 'alPrettyPrint'
---
 -- * 'alStartTime'
---
--- * 'alUserIP'
 --
 -- * 'alFilters'
 --
@@ -119,69 +95,39 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'alActorIPAddress'
 --
--- * 'alKey'
---
 -- * 'alEndTime'
 --
 -- * 'alApplicationName'
 --
 -- * 'alPageToken'
 --
--- * 'alOAuthToken'
---
 -- * 'alEventName'
 --
 -- * 'alUserKey'
 --
 -- * 'alMaxResults'
---
--- * 'alFields'
 activitiesList'
     :: Text -- ^ 'applicationName'
     -> Text -- ^ 'userKey'
     -> ActivitiesList'
 activitiesList' pAlApplicationName_ pAlUserKey_ =
     ActivitiesList'
-    { _alQuotaUser = Nothing
-    , _alPrettyPrint = True
-    , _alStartTime = Nothing
-    , _alUserIP = Nothing
+    { _alStartTime = Nothing
     , _alFilters = Nothing
     , _alCustomerId = Nothing
     , _alActorIPAddress = Nothing
-    , _alKey = Nothing
     , _alEndTime = Nothing
     , _alApplicationName = pAlApplicationName_
     , _alPageToken = Nothing
-    , _alOAuthToken = Nothing
     , _alEventName = Nothing
     , _alUserKey = pAlUserKey_
     , _alMaxResults = Nothing
-    , _alFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-alQuotaUser :: Lens' ActivitiesList' (Maybe Text)
-alQuotaUser
-  = lens _alQuotaUser (\ s a -> s{_alQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-alPrettyPrint :: Lens' ActivitiesList' Bool
-alPrettyPrint
-  = lens _alPrettyPrint
-      (\ s a -> s{_alPrettyPrint = a})
 
 -- | Return events which occured at or after this time.
 alStartTime :: Lens' ActivitiesList' (Maybe Text)
 alStartTime
   = lens _alStartTime (\ s a -> s{_alStartTime = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-alUserIP :: Lens' ActivitiesList' (Maybe Text)
-alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | Event parameters in the form [parameter1 name][operator][parameter1
 -- value],[parameter2 name][operator][parameter2 value],...
@@ -201,12 +147,6 @@ alActorIPAddress
   = lens _alActorIPAddress
       (\ s a -> s{_alActorIPAddress = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-alKey :: Lens' ActivitiesList' (Maybe AuthKey)
-alKey = lens _alKey (\ s a -> s{_alKey = a})
-
 -- | Return events which occured at or before this time.
 alEndTime :: Lens' ActivitiesList' (Maybe Text)
 alEndTime
@@ -222,11 +162,6 @@ alApplicationName
 alPageToken :: Lens' ActivitiesList' (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-alOAuthToken :: Lens' ActivitiesList' (Maybe OAuthToken)
-alOAuthToken
-  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
 
 -- | Name of the event being queried.
 alEventName :: Lens' ActivitiesList' (Maybe Text)
@@ -245,18 +180,9 @@ alMaxResults :: Lens' ActivitiesList' (Maybe Int32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-alFields :: Lens' ActivitiesList' (Maybe Text)
-alFields = lens _alFields (\ s a -> s{_alFields = a})
-
-instance GoogleAuth ActivitiesList' where
-        _AuthKey = alKey . _Just
-        _AuthToken = alOAuthToken . _Just
-
 instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = Activities
-        request = requestWith reportsRequest
-        requestWith rq ActivitiesList'{..}
+        requestClient ActivitiesList'{..}
           = go _alUserKey _alApplicationName _alStartTime
               _alFilters
               _alCustomerId
@@ -265,13 +191,8 @@ instance GoogleRequest ActivitiesList' where
               _alPageToken
               _alEventName
               _alMaxResults
-              _alQuotaUser
-              (Just _alPrettyPrint)
-              _alUserIP
-              _alFields
-              _alKey
-              _alOAuthToken
               (Just AltJSON)
+              reportsService
           where go
-                  = clientBuild (Proxy :: Proxy ActivitiesListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ActivitiesListResource)
+                      mempty

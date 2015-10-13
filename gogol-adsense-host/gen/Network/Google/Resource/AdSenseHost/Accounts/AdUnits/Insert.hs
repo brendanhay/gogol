@@ -34,15 +34,9 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Insert
     , AccountsAdUnitsInsert'
 
     -- * Request Lenses
-    , aauiQuotaUser
-    , aauiPrettyPrint
-    , aauiUserIP
     , aauiPayload
     , aauiAdClientId
     , aauiAccountId
-    , aauiKey
-    , aauiOAuthToken
-    , aauiFields
     ) where
 
 import           Network.Google.AdSenseHost.Types
@@ -56,52 +50,28 @@ type AccountsAdUnitsInsertResource =
          "adclients" :>
            Capture "adClientId" Text :>
              "adunits" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] AdUnit :> Post '[JSON] AdUnit
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] AdUnit :> Post '[JSON] AdUnit
 
 -- | Insert the supplied ad unit into the specified publisher AdSense
 -- account.
 --
 -- /See:/ 'accountsAdUnitsInsert'' smart constructor.
 data AccountsAdUnitsInsert' = AccountsAdUnitsInsert'
-    { _aauiQuotaUser   :: !(Maybe Text)
-    , _aauiPrettyPrint :: !Bool
-    , _aauiUserIP      :: !(Maybe Text)
-    , _aauiPayload     :: !AdUnit
-    , _aauiAdClientId  :: !Text
-    , _aauiAccountId   :: !Text
-    , _aauiKey         :: !(Maybe AuthKey)
-    , _aauiOAuthToken  :: !(Maybe OAuthToken)
-    , _aauiFields      :: !(Maybe Text)
+    { _aauiPayload    :: !AdUnit
+    , _aauiAdClientId :: !Text
+    , _aauiAccountId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdUnitsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aauiQuotaUser'
---
--- * 'aauiPrettyPrint'
---
--- * 'aauiUserIP'
---
 -- * 'aauiPayload'
 --
 -- * 'aauiAdClientId'
 --
 -- * 'aauiAccountId'
---
--- * 'aauiKey'
---
--- * 'aauiOAuthToken'
---
--- * 'aauiFields'
 accountsAdUnitsInsert'
     :: AdUnit -- ^ 'payload'
     -> Text -- ^ 'adClientId'
@@ -109,36 +79,10 @@ accountsAdUnitsInsert'
     -> AccountsAdUnitsInsert'
 accountsAdUnitsInsert' pAauiPayload_ pAauiAdClientId_ pAauiAccountId_ =
     AccountsAdUnitsInsert'
-    { _aauiQuotaUser = Nothing
-    , _aauiPrettyPrint = True
-    , _aauiUserIP = Nothing
-    , _aauiPayload = pAauiPayload_
+    { _aauiPayload = pAauiPayload_
     , _aauiAdClientId = pAauiAdClientId_
     , _aauiAccountId = pAauiAccountId_
-    , _aauiKey = Nothing
-    , _aauiOAuthToken = Nothing
-    , _aauiFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-aauiQuotaUser :: Lens' AccountsAdUnitsInsert' (Maybe Text)
-aauiQuotaUser
-  = lens _aauiQuotaUser
-      (\ s a -> s{_aauiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aauiPrettyPrint :: Lens' AccountsAdUnitsInsert' Bool
-aauiPrettyPrint
-  = lens _aauiPrettyPrint
-      (\ s a -> s{_aauiPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-aauiUserIP :: Lens' AccountsAdUnitsInsert' (Maybe Text)
-aauiUserIP
-  = lens _aauiUserIP (\ s a -> s{_aauiUserIP = a})
 
 -- | Multipart request metadata.
 aauiPayload :: Lens' AccountsAdUnitsInsert' AdUnit
@@ -157,40 +101,13 @@ aauiAccountId
   = lens _aauiAccountId
       (\ s a -> s{_aauiAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aauiKey :: Lens' AccountsAdUnitsInsert' (Maybe AuthKey)
-aauiKey = lens _aauiKey (\ s a -> s{_aauiKey = a})
-
--- | OAuth 2.0 token for the current user.
-aauiOAuthToken :: Lens' AccountsAdUnitsInsert' (Maybe OAuthToken)
-aauiOAuthToken
-  = lens _aauiOAuthToken
-      (\ s a -> s{_aauiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-aauiFields :: Lens' AccountsAdUnitsInsert' (Maybe Text)
-aauiFields
-  = lens _aauiFields (\ s a -> s{_aauiFields = a})
-
-instance GoogleAuth AccountsAdUnitsInsert' where
-        _AuthKey = aauiKey . _Just
-        _AuthToken = aauiOAuthToken . _Just
-
 instance GoogleRequest AccountsAdUnitsInsert' where
         type Rs AccountsAdUnitsInsert' = AdUnit
-        request = requestWith adSenseHostRequest
-        requestWith rq AccountsAdUnitsInsert'{..}
-          = go _aauiAccountId _aauiAdClientId _aauiQuotaUser
-              (Just _aauiPrettyPrint)
-              _aauiUserIP
-              _aauiFields
-              _aauiKey
-              _aauiOAuthToken
-              (Just AltJSON)
+        requestClient AccountsAdUnitsInsert'{..}
+          = go _aauiAccountId _aauiAdClientId (Just AltJSON)
               _aauiPayload
+              adSenseHostService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsAdUnitsInsertResource)
-                      rq
+                      mempty

@@ -33,13 +33,7 @@ module Network.Google.Resource.Coordinate.Worker.List
     , WorkerList'
 
     -- * Request Lenses
-    , wlQuotaUser
-    , wlPrettyPrint
-    , wlUserIP
     , wlTeamId
-    , wlKey
-    , wlOAuthToken
-    , wlFields
     ) where
 
 import           Network.Google.MapsCoordinate.Types
@@ -51,109 +45,37 @@ type WorkerListResource =
      "teams" :>
        Capture "teamId" Text :>
          "workers" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] WorkerListResponse
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] WorkerListResponse
 
 -- | Retrieves a list of workers in a team.
 --
 -- /See:/ 'workerList'' smart constructor.
-data WorkerList' = WorkerList'
-    { _wlQuotaUser   :: !(Maybe Text)
-    , _wlPrettyPrint :: !Bool
-    , _wlUserIP      :: !(Maybe Text)
-    , _wlTeamId      :: !Text
-    , _wlKey         :: !(Maybe AuthKey)
-    , _wlOAuthToken  :: !(Maybe OAuthToken)
-    , _wlFields      :: !(Maybe Text)
+newtype WorkerList' = WorkerList'
+    { _wlTeamId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WorkerList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'wlQuotaUser'
---
--- * 'wlPrettyPrint'
---
--- * 'wlUserIP'
---
 -- * 'wlTeamId'
---
--- * 'wlKey'
---
--- * 'wlOAuthToken'
---
--- * 'wlFields'
 workerList'
     :: Text -- ^ 'teamId'
     -> WorkerList'
 workerList' pWlTeamId_ =
     WorkerList'
-    { _wlQuotaUser = Nothing
-    , _wlPrettyPrint = True
-    , _wlUserIP = Nothing
-    , _wlTeamId = pWlTeamId_
-    , _wlKey = Nothing
-    , _wlOAuthToken = Nothing
-    , _wlFields = Nothing
+    { _wlTeamId = pWlTeamId_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-wlQuotaUser :: Lens' WorkerList' (Maybe Text)
-wlQuotaUser
-  = lens _wlQuotaUser (\ s a -> s{_wlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-wlPrettyPrint :: Lens' WorkerList' Bool
-wlPrettyPrint
-  = lens _wlPrettyPrint
-      (\ s a -> s{_wlPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-wlUserIP :: Lens' WorkerList' (Maybe Text)
-wlUserIP = lens _wlUserIP (\ s a -> s{_wlUserIP = a})
 
 -- | Team ID
 wlTeamId :: Lens' WorkerList' Text
 wlTeamId = lens _wlTeamId (\ s a -> s{_wlTeamId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-wlKey :: Lens' WorkerList' (Maybe AuthKey)
-wlKey = lens _wlKey (\ s a -> s{_wlKey = a})
-
--- | OAuth 2.0 token for the current user.
-wlOAuthToken :: Lens' WorkerList' (Maybe OAuthToken)
-wlOAuthToken
-  = lens _wlOAuthToken (\ s a -> s{_wlOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-wlFields :: Lens' WorkerList' (Maybe Text)
-wlFields = lens _wlFields (\ s a -> s{_wlFields = a})
-
-instance GoogleAuth WorkerList' where
-        _AuthKey = wlKey . _Just
-        _AuthToken = wlOAuthToken . _Just
-
 instance GoogleRequest WorkerList' where
         type Rs WorkerList' = WorkerListResponse
-        request = requestWith mapsCoordinateRequest
-        requestWith rq WorkerList'{..}
-          = go _wlTeamId _wlQuotaUser (Just _wlPrettyPrint)
-              _wlUserIP
-              _wlFields
-              _wlKey
-              _wlOAuthToken
-              (Just AltJSON)
+        requestClient WorkerList'{..}
+          = go _wlTeamId (Just AltJSON) mapsCoordinateService
           where go
-                  = clientBuild (Proxy :: Proxy WorkerListResource) rq
+                  = buildClient (Proxy :: Proxy WorkerListResource)
+                      mempty

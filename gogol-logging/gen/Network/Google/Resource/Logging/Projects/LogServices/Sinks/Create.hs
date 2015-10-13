@@ -35,19 +35,14 @@ module Network.Google.Resource.Logging.Projects.LogServices.Sinks.Create
 
     -- * Request Lenses
     , plsscXgafv
-    , plsscQuotaUser
-    , plsscPrettyPrint
     , plsscUploadProtocol
     , plsscPp
     , plsscAccessToken
     , plsscUploadType
     , plsscPayload
     , plsscBearerToken
-    , plsscKey
     , plsscLogServicesId
-    , plsscOAuthToken
     , plsscProjectsId
-    , plsscFields
     , plsscCallback
     ) where
 
@@ -70,14 +65,8 @@ type ProjectsLogServicesSinksCreateResource =
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
                              QueryParam "callback" Text :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           ReqBody '[JSON] LogSink :>
-                                             Post '[JSON] LogSink
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] LogSink :> Post '[JSON] LogSink
 
 -- | Creates a log service sink. All log entries from a specified log service
 -- are written to the destination.
@@ -85,19 +74,14 @@ type ProjectsLogServicesSinksCreateResource =
 -- /See:/ 'projectsLogServicesSinksCreate'' smart constructor.
 data ProjectsLogServicesSinksCreate' = ProjectsLogServicesSinksCreate'
     { _plsscXgafv          :: !(Maybe Text)
-    , _plsscQuotaUser      :: !(Maybe Text)
-    , _plsscPrettyPrint    :: !Bool
     , _plsscUploadProtocol :: !(Maybe Text)
     , _plsscPp             :: !Bool
     , _plsscAccessToken    :: !(Maybe Text)
     , _plsscUploadType     :: !(Maybe Text)
     , _plsscPayload        :: !LogSink
     , _plsscBearerToken    :: !(Maybe Text)
-    , _plsscKey            :: !(Maybe AuthKey)
     , _plsscLogServicesId  :: !Text
-    , _plsscOAuthToken     :: !(Maybe OAuthToken)
     , _plsscProjectsId     :: !Text
-    , _plsscFields         :: !(Maybe Text)
     , _plsscCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -106,10 +90,6 @@ data ProjectsLogServicesSinksCreate' = ProjectsLogServicesSinksCreate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'plsscXgafv'
---
--- * 'plsscQuotaUser'
---
--- * 'plsscPrettyPrint'
 --
 -- * 'plsscUploadProtocol'
 --
@@ -123,15 +103,9 @@ data ProjectsLogServicesSinksCreate' = ProjectsLogServicesSinksCreate'
 --
 -- * 'plsscBearerToken'
 --
--- * 'plsscKey'
---
 -- * 'plsscLogServicesId'
 --
--- * 'plsscOAuthToken'
---
 -- * 'plsscProjectsId'
---
--- * 'plsscFields'
 --
 -- * 'plsscCallback'
 projectsLogServicesSinksCreate'
@@ -142,19 +116,14 @@ projectsLogServicesSinksCreate'
 projectsLogServicesSinksCreate' pPlsscPayload_ pPlsscLogServicesId_ pPlsscProjectsId_ =
     ProjectsLogServicesSinksCreate'
     { _plsscXgafv = Nothing
-    , _plsscQuotaUser = Nothing
-    , _plsscPrettyPrint = True
     , _plsscUploadProtocol = Nothing
     , _plsscPp = True
     , _plsscAccessToken = Nothing
     , _plsscUploadType = Nothing
     , _plsscPayload = pPlsscPayload_
     , _plsscBearerToken = Nothing
-    , _plsscKey = Nothing
     , _plsscLogServicesId = pPlsscLogServicesId_
-    , _plsscOAuthToken = Nothing
     , _plsscProjectsId = pPlsscProjectsId_
-    , _plsscFields = Nothing
     , _plsscCallback = Nothing
     }
 
@@ -162,20 +131,6 @@ projectsLogServicesSinksCreate' pPlsscPayload_ pPlsscLogServicesId_ pPlsscProjec
 plsscXgafv :: Lens' ProjectsLogServicesSinksCreate' (Maybe Text)
 plsscXgafv
   = lens _plsscXgafv (\ s a -> s{_plsscXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-plsscQuotaUser :: Lens' ProjectsLogServicesSinksCreate' (Maybe Text)
-plsscQuotaUser
-  = lens _plsscQuotaUser
-      (\ s a -> s{_plsscQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-plsscPrettyPrint :: Lens' ProjectsLogServicesSinksCreate' Bool
-plsscPrettyPrint
-  = lens _plsscPrettyPrint
-      (\ s a -> s{_plsscPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 plsscUploadProtocol :: Lens' ProjectsLogServicesSinksCreate' (Maybe Text)
@@ -210,23 +165,11 @@ plsscBearerToken
   = lens _plsscBearerToken
       (\ s a -> s{_plsscBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-plsscKey :: Lens' ProjectsLogServicesSinksCreate' (Maybe AuthKey)
-plsscKey = lens _plsscKey (\ s a -> s{_plsscKey = a})
-
 -- | Part of \`serviceName\`. See documentation of \`projectsId\`.
 plsscLogServicesId :: Lens' ProjectsLogServicesSinksCreate' Text
 plsscLogServicesId
   = lens _plsscLogServicesId
       (\ s a -> s{_plsscLogServicesId = a})
-
--- | OAuth 2.0 token for the current user.
-plsscOAuthToken :: Lens' ProjectsLogServicesSinksCreate' (Maybe OAuthToken)
-plsscOAuthToken
-  = lens _plsscOAuthToken
-      (\ s a -> s{_plsscOAuthToken = a})
 
 -- | Part of \`serviceName\`. The resource name of the log service to which
 -- the sink is bound.
@@ -235,27 +178,16 @@ plsscProjectsId
   = lens _plsscProjectsId
       (\ s a -> s{_plsscProjectsId = a})
 
--- | Selector specifying which fields to include in a partial response.
-plsscFields :: Lens' ProjectsLogServicesSinksCreate' (Maybe Text)
-plsscFields
-  = lens _plsscFields (\ s a -> s{_plsscFields = a})
-
 -- | JSONP
 plsscCallback :: Lens' ProjectsLogServicesSinksCreate' (Maybe Text)
 plsscCallback
   = lens _plsscCallback
       (\ s a -> s{_plsscCallback = a})
 
-instance GoogleAuth ProjectsLogServicesSinksCreate'
-         where
-        _AuthKey = plsscKey . _Just
-        _AuthToken = plsscOAuthToken . _Just
-
 instance GoogleRequest
          ProjectsLogServicesSinksCreate' where
         type Rs ProjectsLogServicesSinksCreate' = LogSink
-        request = requestWith loggingRequest
-        requestWith rq ProjectsLogServicesSinksCreate'{..}
+        requestClient ProjectsLogServicesSinksCreate'{..}
           = go _plsscProjectsId _plsscLogServicesId _plsscXgafv
               _plsscUploadProtocol
               (Just _plsscPp)
@@ -263,15 +195,11 @@ instance GoogleRequest
               _plsscUploadType
               _plsscBearerToken
               _plsscCallback
-              _plsscQuotaUser
-              (Just _plsscPrettyPrint)
-              _plsscFields
-              _plsscKey
-              _plsscOAuthToken
               (Just AltJSON)
               _plsscPayload
+              loggingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy ProjectsLogServicesSinksCreateResource)
-                      rq
+                      mempty

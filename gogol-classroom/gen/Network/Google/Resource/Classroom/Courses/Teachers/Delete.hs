@@ -40,8 +40,6 @@ module Network.Google.Resource.Classroom.Courses.Teachers.Delete
 
     -- * Request Lenses
     , ctdXgafv
-    , ctdQuotaUser
-    , ctdPrettyPrint
     , ctdUploadProtocol
     , ctdPp
     , ctdCourseId
@@ -49,9 +47,6 @@ module Network.Google.Resource.Classroom.Courses.Teachers.Delete
     , ctdUploadType
     , ctdUserId
     , ctdBearerToken
-    , ctdKey
-    , ctdOAuthToken
-    , ctdFields
     , ctdCallback
     ) where
 
@@ -73,13 +68,7 @@ type CoursesTeachersDeleteResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Delete '[JSON] Empty
+                             QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a teacher of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -92,8 +81,6 @@ type CoursesTeachersDeleteResource =
 -- /See:/ 'coursesTeachersDelete'' smart constructor.
 data CoursesTeachersDelete' = CoursesTeachersDelete'
     { _ctdXgafv          :: !(Maybe Text)
-    , _ctdQuotaUser      :: !(Maybe Text)
-    , _ctdPrettyPrint    :: !Bool
     , _ctdUploadProtocol :: !(Maybe Text)
     , _ctdPp             :: !Bool
     , _ctdCourseId       :: !Text
@@ -101,9 +88,6 @@ data CoursesTeachersDelete' = CoursesTeachersDelete'
     , _ctdUploadType     :: !(Maybe Text)
     , _ctdUserId         :: !Text
     , _ctdBearerToken    :: !(Maybe Text)
-    , _ctdKey            :: !(Maybe AuthKey)
-    , _ctdOAuthToken     :: !(Maybe OAuthToken)
-    , _ctdFields         :: !(Maybe Text)
     , _ctdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -112,10 +96,6 @@ data CoursesTeachersDelete' = CoursesTeachersDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ctdXgafv'
---
--- * 'ctdQuotaUser'
---
--- * 'ctdPrettyPrint'
 --
 -- * 'ctdUploadProtocol'
 --
@@ -131,12 +111,6 @@ data CoursesTeachersDelete' = CoursesTeachersDelete'
 --
 -- * 'ctdBearerToken'
 --
--- * 'ctdKey'
---
--- * 'ctdOAuthToken'
---
--- * 'ctdFields'
---
 -- * 'ctdCallback'
 coursesTeachersDelete'
     :: Text -- ^ 'courseId'
@@ -145,8 +119,6 @@ coursesTeachersDelete'
 coursesTeachersDelete' pCtdCourseId_ pCtdUserId_ =
     CoursesTeachersDelete'
     { _ctdXgafv = Nothing
-    , _ctdQuotaUser = Nothing
-    , _ctdPrettyPrint = True
     , _ctdUploadProtocol = Nothing
     , _ctdPp = True
     , _ctdCourseId = pCtdCourseId_
@@ -154,28 +126,12 @@ coursesTeachersDelete' pCtdCourseId_ pCtdUserId_ =
     , _ctdUploadType = Nothing
     , _ctdUserId = pCtdUserId_
     , _ctdBearerToken = Nothing
-    , _ctdKey = Nothing
-    , _ctdOAuthToken = Nothing
-    , _ctdFields = Nothing
     , _ctdCallback = Nothing
     }
 
 -- | V1 error format.
 ctdXgafv :: Lens' CoursesTeachersDelete' (Maybe Text)
 ctdXgafv = lens _ctdXgafv (\ s a -> s{_ctdXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ctdQuotaUser :: Lens' CoursesTeachersDelete' (Maybe Text)
-ctdQuotaUser
-  = lens _ctdQuotaUser (\ s a -> s{_ctdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ctdPrettyPrint :: Lens' CoursesTeachersDelete' Bool
-ctdPrettyPrint
-  = lens _ctdPrettyPrint
-      (\ s a -> s{_ctdPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 ctdUploadProtocol :: Lens' CoursesTeachersDelete' (Maybe Text)
@@ -219,36 +175,14 @@ ctdBearerToken
   = lens _ctdBearerToken
       (\ s a -> s{_ctdBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ctdKey :: Lens' CoursesTeachersDelete' (Maybe AuthKey)
-ctdKey = lens _ctdKey (\ s a -> s{_ctdKey = a})
-
--- | OAuth 2.0 token for the current user.
-ctdOAuthToken :: Lens' CoursesTeachersDelete' (Maybe OAuthToken)
-ctdOAuthToken
-  = lens _ctdOAuthToken
-      (\ s a -> s{_ctdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ctdFields :: Lens' CoursesTeachersDelete' (Maybe Text)
-ctdFields
-  = lens _ctdFields (\ s a -> s{_ctdFields = a})
-
 -- | JSONP
 ctdCallback :: Lens' CoursesTeachersDelete' (Maybe Text)
 ctdCallback
   = lens _ctdCallback (\ s a -> s{_ctdCallback = a})
 
-instance GoogleAuth CoursesTeachersDelete' where
-        _AuthKey = ctdKey . _Just
-        _AuthToken = ctdOAuthToken . _Just
-
 instance GoogleRequest CoursesTeachersDelete' where
         type Rs CoursesTeachersDelete' = Empty
-        request = requestWith classroomRequest
-        requestWith rq CoursesTeachersDelete'{..}
+        requestClient CoursesTeachersDelete'{..}
           = go _ctdCourseId _ctdUserId _ctdXgafv
               _ctdUploadProtocol
               (Just _ctdPp)
@@ -256,13 +190,9 @@ instance GoogleRequest CoursesTeachersDelete' where
               _ctdUploadType
               _ctdBearerToken
               _ctdCallback
-              _ctdQuotaUser
-              (Just _ctdPrettyPrint)
-              _ctdFields
-              _ctdKey
-              _ctdOAuthToken
               (Just AltJSON)
+              classroomService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CoursesTeachersDeleteResource)
-                      rq
+                      mempty

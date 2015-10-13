@@ -40,17 +40,12 @@ module Network.Google.Resource.StorageTransfer.GetGoogleServiceAccount
 
     -- * Request Lenses
     , ggsaXgafv
-    , ggsaQuotaUser
-    , ggsaPrettyPrint
     , ggsaUploadProtocol
     , ggsaPp
     , ggsaAccessToken
     , ggsaUploadType
     , ggsaBearerToken
-    , ggsaKey
     , ggsaProjectId
-    , ggsaOAuthToken
-    , ggsaFields
     , ggsaCallback
     ) where
 
@@ -69,13 +64,8 @@ type GetGoogleServiceAccountResource =
                  QueryParam "bearer_token" Text :>
                    QueryParam "projectId" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] GoogleServiceAccount
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] GoogleServiceAccount
 
 -- | Returns the Google service account that is used by Storage Transfer
 -- Service to access buckets in the project where transfers run or in other
@@ -88,17 +78,12 @@ type GetGoogleServiceAccountResource =
 -- /See:/ 'getGoogleServiceAccount'' smart constructor.
 data GetGoogleServiceAccount' = GetGoogleServiceAccount'
     { _ggsaXgafv          :: !(Maybe Text)
-    , _ggsaQuotaUser      :: !(Maybe Text)
-    , _ggsaPrettyPrint    :: !Bool
     , _ggsaUploadProtocol :: !(Maybe Text)
     , _ggsaPp             :: !Bool
     , _ggsaAccessToken    :: !(Maybe Text)
     , _ggsaUploadType     :: !(Maybe Text)
     , _ggsaBearerToken    :: !(Maybe Text)
-    , _ggsaKey            :: !(Maybe AuthKey)
     , _ggsaProjectId      :: !(Maybe Text)
-    , _ggsaOAuthToken     :: !(Maybe OAuthToken)
-    , _ggsaFields         :: !(Maybe Text)
     , _ggsaCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -107,10 +92,6 @@ data GetGoogleServiceAccount' = GetGoogleServiceAccount'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ggsaXgafv'
---
--- * 'ggsaQuotaUser'
---
--- * 'ggsaPrettyPrint'
 --
 -- * 'ggsaUploadProtocol'
 --
@@ -122,13 +103,7 @@ data GetGoogleServiceAccount' = GetGoogleServiceAccount'
 --
 -- * 'ggsaBearerToken'
 --
--- * 'ggsaKey'
---
 -- * 'ggsaProjectId'
---
--- * 'ggsaOAuthToken'
---
--- * 'ggsaFields'
 --
 -- * 'ggsaCallback'
 getGoogleServiceAccount'
@@ -136,17 +111,12 @@ getGoogleServiceAccount'
 getGoogleServiceAccount' =
     GetGoogleServiceAccount'
     { _ggsaXgafv = Nothing
-    , _ggsaQuotaUser = Nothing
-    , _ggsaPrettyPrint = True
     , _ggsaUploadProtocol = Nothing
     , _ggsaPp = True
     , _ggsaAccessToken = Nothing
     , _ggsaUploadType = Nothing
     , _ggsaBearerToken = Nothing
-    , _ggsaKey = Nothing
     , _ggsaProjectId = Nothing
-    , _ggsaOAuthToken = Nothing
-    , _ggsaFields = Nothing
     , _ggsaCallback = Nothing
     }
 
@@ -154,20 +124,6 @@ getGoogleServiceAccount' =
 ggsaXgafv :: Lens' GetGoogleServiceAccount' (Maybe Text)
 ggsaXgafv
   = lens _ggsaXgafv (\ s a -> s{_ggsaXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ggsaQuotaUser :: Lens' GetGoogleServiceAccount' (Maybe Text)
-ggsaQuotaUser
-  = lens _ggsaQuotaUser
-      (\ s a -> s{_ggsaQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ggsaPrettyPrint :: Lens' GetGoogleServiceAccount' Bool
-ggsaPrettyPrint
-  = lens _ggsaPrettyPrint
-      (\ s a -> s{_ggsaPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 ggsaUploadProtocol :: Lens' GetGoogleServiceAccount' (Maybe Text)
@@ -197,12 +153,6 @@ ggsaBearerToken
   = lens _ggsaBearerToken
       (\ s a -> s{_ggsaBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ggsaKey :: Lens' GetGoogleServiceAccount' (Maybe AuthKey)
-ggsaKey = lens _ggsaKey (\ s a -> s{_ggsaKey = a})
-
 -- | The ID of the Google Developers Console project that the Google service
 -- account is associated with. Required.
 ggsaProjectId :: Lens' GetGoogleServiceAccount' (Maybe Text)
@@ -210,44 +160,24 @@ ggsaProjectId
   = lens _ggsaProjectId
       (\ s a -> s{_ggsaProjectId = a})
 
--- | OAuth 2.0 token for the current user.
-ggsaOAuthToken :: Lens' GetGoogleServiceAccount' (Maybe OAuthToken)
-ggsaOAuthToken
-  = lens _ggsaOAuthToken
-      (\ s a -> s{_ggsaOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ggsaFields :: Lens' GetGoogleServiceAccount' (Maybe Text)
-ggsaFields
-  = lens _ggsaFields (\ s a -> s{_ggsaFields = a})
-
 -- | JSONP
 ggsaCallback :: Lens' GetGoogleServiceAccount' (Maybe Text)
 ggsaCallback
   = lens _ggsaCallback (\ s a -> s{_ggsaCallback = a})
 
-instance GoogleAuth GetGoogleServiceAccount' where
-        _AuthKey = ggsaKey . _Just
-        _AuthToken = ggsaOAuthToken . _Just
-
 instance GoogleRequest GetGoogleServiceAccount' where
         type Rs GetGoogleServiceAccount' =
              GoogleServiceAccount
-        request = requestWith storageTransferRequest
-        requestWith rq GetGoogleServiceAccount'{..}
+        requestClient GetGoogleServiceAccount'{..}
           = go _ggsaXgafv _ggsaUploadProtocol (Just _ggsaPp)
               _ggsaAccessToken
               _ggsaUploadType
               _ggsaBearerToken
               _ggsaProjectId
               _ggsaCallback
-              _ggsaQuotaUser
-              (Just _ggsaPrettyPrint)
-              _ggsaFields
-              _ggsaKey
-              _ggsaOAuthToken
               (Just AltJSON)
+              storageTransferService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy GetGoogleServiceAccountResource)
-                      rq
+                      mempty

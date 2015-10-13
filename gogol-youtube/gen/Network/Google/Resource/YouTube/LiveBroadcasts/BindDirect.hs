@@ -36,17 +36,11 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.BindDirect
     , LiveBroadcastsBindDirect'
 
     -- * Request Lenses
-    , lbbdQuotaUser
     , lbbdPart
-    , lbbdPrettyPrint
-    , lbbdUserIP
     , lbbdOnBehalfOfContentOwner
-    , lbbdKey
     , lbbdOnBehalfOfContentOwnerChannel
     , lbbdId
-    , lbbdOAuthToken
     , lbbdStreamId
-    , lbbdFields
     ) where
 
 import           Network.Google.Prelude
@@ -63,14 +57,8 @@ type LiveBroadcastsBindDirectResource =
                QueryParam "onBehalfOfContentOwner" Text :>
                  QueryParam "onBehalfOfContentOwnerChannel" Text :>
                    QueryParam "streamId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   Post '[JSON] LiveBroadcast
+                     QueryParam "alt" AltJSON :>
+                       Post '[JSON] LiveBroadcast
 
 -- | Binds a YouTube broadcast to a stream or removes an existing binding
 -- between a broadcast and a stream. A broadcast can only be bound to one
@@ -79,70 +67,38 @@ type LiveBroadcastsBindDirectResource =
 --
 -- /See:/ 'liveBroadcastsBindDirect'' smart constructor.
 data LiveBroadcastsBindDirect' = LiveBroadcastsBindDirect'
-    { _lbbdQuotaUser                     :: !(Maybe Text)
-    , _lbbdPart                          :: !Text
-    , _lbbdPrettyPrint                   :: !Bool
-    , _lbbdUserIP                        :: !(Maybe Text)
+    { _lbbdPart                          :: !Text
     , _lbbdOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lbbdKey                           :: !(Maybe AuthKey)
     , _lbbdOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbbdId                            :: !Text
-    , _lbbdOAuthToken                    :: !(Maybe OAuthToken)
     , _lbbdStreamId                      :: !(Maybe Text)
-    , _lbbdFields                        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsBindDirect'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lbbdQuotaUser'
---
 -- * 'lbbdPart'
 --
--- * 'lbbdPrettyPrint'
---
--- * 'lbbdUserIP'
---
 -- * 'lbbdOnBehalfOfContentOwner'
---
--- * 'lbbdKey'
 --
 -- * 'lbbdOnBehalfOfContentOwnerChannel'
 --
 -- * 'lbbdId'
 --
--- * 'lbbdOAuthToken'
---
 -- * 'lbbdStreamId'
---
--- * 'lbbdFields'
 liveBroadcastsBindDirect'
     :: Text -- ^ 'part'
     -> Text -- ^ 'id'
     -> LiveBroadcastsBindDirect'
 liveBroadcastsBindDirect' pLbbdPart_ pLbbdId_ =
     LiveBroadcastsBindDirect'
-    { _lbbdQuotaUser = Nothing
-    , _lbbdPart = pLbbdPart_
-    , _lbbdPrettyPrint = True
-    , _lbbdUserIP = Nothing
+    { _lbbdPart = pLbbdPart_
     , _lbbdOnBehalfOfContentOwner = Nothing
-    , _lbbdKey = Nothing
     , _lbbdOnBehalfOfContentOwnerChannel = Nothing
     , _lbbdId = pLbbdId_
-    , _lbbdOAuthToken = Nothing
     , _lbbdStreamId = Nothing
-    , _lbbdFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-lbbdQuotaUser :: Lens' LiveBroadcastsBindDirect' (Maybe Text)
-lbbdQuotaUser
-  = lens _lbbdQuotaUser
-      (\ s a -> s{_lbbdQuotaUser = a})
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- liveBroadcast resource properties that the API response will include.
@@ -150,18 +106,6 @@ lbbdQuotaUser
 -- snippet, contentDetails, and status.
 lbbdPart :: Lens' LiveBroadcastsBindDirect' Text
 lbbdPart = lens _lbbdPart (\ s a -> s{_lbbdPart = a})
-
--- | Returns response with indentations and line breaks.
-lbbdPrettyPrint :: Lens' LiveBroadcastsBindDirect' Bool
-lbbdPrettyPrint
-  = lens _lbbdPrettyPrint
-      (\ s a -> s{_lbbdPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-lbbdUserIP :: Lens' LiveBroadcastsBindDirect' (Maybe Text)
-lbbdUserIP
-  = lens _lbbdUserIP (\ s a -> s{_lbbdUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -177,12 +121,6 @@ lbbdOnBehalfOfContentOwner :: Lens' LiveBroadcastsBindDirect' (Maybe Text)
 lbbdOnBehalfOfContentOwner
   = lens _lbbdOnBehalfOfContentOwner
       (\ s a -> s{_lbbdOnBehalfOfContentOwner = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-lbbdKey :: Lens' LiveBroadcastsBindDirect' (Maybe AuthKey)
-lbbdKey = lens _lbbdKey (\ s a -> s{_lbbdKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
 -- This parameter is intended exclusively for YouTube content partners. The
@@ -210,12 +148,6 @@ lbbdOnBehalfOfContentOwnerChannel
 lbbdId :: Lens' LiveBroadcastsBindDirect' Text
 lbbdId = lens _lbbdId (\ s a -> s{_lbbdId = a})
 
--- | OAuth 2.0 token for the current user.
-lbbdOAuthToken :: Lens' LiveBroadcastsBindDirect' (Maybe OAuthToken)
-lbbdOAuthToken
-  = lens _lbbdOAuthToken
-      (\ s a -> s{_lbbdOAuthToken = a})
-
 -- | The streamId parameter specifies the unique ID of the video stream that
 -- is being bound to a broadcast. If this parameter is omitted, the API
 -- will remove any existing binding between the broadcast and a video
@@ -224,32 +156,17 @@ lbbdStreamId :: Lens' LiveBroadcastsBindDirect' (Maybe Text)
 lbbdStreamId
   = lens _lbbdStreamId (\ s a -> s{_lbbdStreamId = a})
 
--- | Selector specifying which fields to include in a partial response.
-lbbdFields :: Lens' LiveBroadcastsBindDirect' (Maybe Text)
-lbbdFields
-  = lens _lbbdFields (\ s a -> s{_lbbdFields = a})
-
-instance GoogleAuth LiveBroadcastsBindDirect' where
-        _AuthKey = lbbdKey . _Just
-        _AuthToken = lbbdOAuthToken . _Just
-
 instance GoogleRequest LiveBroadcastsBindDirect'
          where
         type Rs LiveBroadcastsBindDirect' = LiveBroadcast
-        request = requestWith youTubeRequest
-        requestWith rq LiveBroadcastsBindDirect'{..}
+        requestClient LiveBroadcastsBindDirect'{..}
           = go (Just _lbbdId) (Just _lbbdPart)
               _lbbdOnBehalfOfContentOwner
               _lbbdOnBehalfOfContentOwnerChannel
               _lbbdStreamId
-              _lbbdQuotaUser
-              (Just _lbbdPrettyPrint)
-              _lbbdUserIP
-              _lbbdFields
-              _lbbdKey
-              _lbbdOAuthToken
               (Just AltJSON)
+              youTubeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy LiveBroadcastsBindDirectResource)
-                      rq
+                      mempty

@@ -33,14 +33,8 @@ module Network.Google.Resource.Webmasters.Sitemaps.Get
     , SitemapsGet'
 
     -- * Request Lenses
-    , sgQuotaUser
-    , sgPrettyPrint
     , sgFeedpath
-    , sgUserIP
     , sgSiteURL
-    , sgKey
-    , sgOAuthToken
-    , sgFields
     ) where
 
 import           Network.Google.Prelude
@@ -53,75 +47,32 @@ type SitemapsGetResource =
        Capture "siteUrl" Text :>
          "sitemaps" :>
            Capture "feedpath" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] WmxSitemap
+             QueryParam "alt" AltJSON :> Get '[JSON] WmxSitemap
 
 -- | Retrieves information about a specific sitemap.
 --
 -- /See:/ 'sitemapsGet'' smart constructor.
 data SitemapsGet' = SitemapsGet'
-    { _sgQuotaUser   :: !(Maybe Text)
-    , _sgPrettyPrint :: !Bool
-    , _sgFeedpath    :: !Text
-    , _sgUserIP      :: !(Maybe Text)
-    , _sgSiteURL     :: !Text
-    , _sgKey         :: !(Maybe AuthKey)
-    , _sgOAuthToken  :: !(Maybe OAuthToken)
-    , _sgFields      :: !(Maybe Text)
+    { _sgFeedpath :: !Text
+    , _sgSiteURL  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitemapsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sgQuotaUser'
---
--- * 'sgPrettyPrint'
---
 -- * 'sgFeedpath'
 --
--- * 'sgUserIP'
---
 -- * 'sgSiteURL'
---
--- * 'sgKey'
---
--- * 'sgOAuthToken'
---
--- * 'sgFields'
 sitemapsGet'
     :: Text -- ^ 'feedpath'
     -> Text -- ^ 'siteUrl'
     -> SitemapsGet'
 sitemapsGet' pSgFeedpath_ pSgSiteURL_ =
     SitemapsGet'
-    { _sgQuotaUser = Nothing
-    , _sgPrettyPrint = True
-    , _sgFeedpath = pSgFeedpath_
-    , _sgUserIP = Nothing
+    { _sgFeedpath = pSgFeedpath_
     , _sgSiteURL = pSgSiteURL_
-    , _sgKey = Nothing
-    , _sgOAuthToken = Nothing
-    , _sgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-sgQuotaUser :: Lens' SitemapsGet' (Maybe Text)
-sgQuotaUser
-  = lens _sgQuotaUser (\ s a -> s{_sgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-sgPrettyPrint :: Lens' SitemapsGet' Bool
-sgPrettyPrint
-  = lens _sgPrettyPrint
-      (\ s a -> s{_sgPrettyPrint = a})
 
 -- | The URL of the actual sitemap. For example:
 -- http:\/\/www.example.com\/sitemap.xml
@@ -129,46 +80,17 @@ sgFeedpath :: Lens' SitemapsGet' Text
 sgFeedpath
   = lens _sgFeedpath (\ s a -> s{_sgFeedpath = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-sgUserIP :: Lens' SitemapsGet' (Maybe Text)
-sgUserIP = lens _sgUserIP (\ s a -> s{_sgUserIP = a})
-
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/
 sgSiteURL :: Lens' SitemapsGet' Text
 sgSiteURL
   = lens _sgSiteURL (\ s a -> s{_sgSiteURL = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-sgKey :: Lens' SitemapsGet' (Maybe AuthKey)
-sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
-
--- | OAuth 2.0 token for the current user.
-sgOAuthToken :: Lens' SitemapsGet' (Maybe OAuthToken)
-sgOAuthToken
-  = lens _sgOAuthToken (\ s a -> s{_sgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-sgFields :: Lens' SitemapsGet' (Maybe Text)
-sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
-
-instance GoogleAuth SitemapsGet' where
-        _AuthKey = sgKey . _Just
-        _AuthToken = sgOAuthToken . _Just
-
 instance GoogleRequest SitemapsGet' where
         type Rs SitemapsGet' = WmxSitemap
-        request = requestWith webmasterToolsRequest
-        requestWith rq SitemapsGet'{..}
-          = go _sgSiteURL _sgFeedpath _sgQuotaUser
-              (Just _sgPrettyPrint)
-              _sgUserIP
-              _sgFields
-              _sgKey
-              _sgOAuthToken
-              (Just AltJSON)
+        requestClient SitemapsGet'{..}
+          = go _sgSiteURL _sgFeedpath (Just AltJSON)
+              webmasterToolsService
           where go
-                  = clientBuild (Proxy :: Proxy SitemapsGetResource) rq
+                  = buildClient (Proxy :: Proxy SitemapsGetResource)
+                      mempty

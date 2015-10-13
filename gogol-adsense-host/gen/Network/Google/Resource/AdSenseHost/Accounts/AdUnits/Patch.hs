@@ -34,16 +34,10 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Patch
     , AccountsAdUnitsPatch'
 
     -- * Request Lenses
-    , aaupQuotaUser
-    , aaupPrettyPrint
-    , aaupUserIP
     , aaupAdUnitId
     , aaupPayload
     , aaupAdClientId
     , aaupAccountId
-    , aaupKey
-    , aaupOAuthToken
-    , aaupFields
     ) where
 
 import           Network.Google.AdSenseHost.Types
@@ -58,41 +52,23 @@ type AccountsAdUnitsPatchResource =
            Capture "adClientId" Text :>
              "adunits" :>
                QueryParam "adUnitId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] AdUnit :> Patch '[JSON] AdUnit
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] AdUnit :> Patch '[JSON] AdUnit
 
 -- | Update the supplied ad unit in the specified publisher AdSense account.
 -- This method supports patch semantics.
 --
 -- /See:/ 'accountsAdUnitsPatch'' smart constructor.
 data AccountsAdUnitsPatch' = AccountsAdUnitsPatch'
-    { _aaupQuotaUser   :: !(Maybe Text)
-    , _aaupPrettyPrint :: !Bool
-    , _aaupUserIP      :: !(Maybe Text)
-    , _aaupAdUnitId    :: !Text
-    , _aaupPayload     :: !AdUnit
-    , _aaupAdClientId  :: !Text
-    , _aaupAccountId   :: !Text
-    , _aaupKey         :: !(Maybe AuthKey)
-    , _aaupOAuthToken  :: !(Maybe OAuthToken)
-    , _aaupFields      :: !(Maybe Text)
+    { _aaupAdUnitId   :: !Text
+    , _aaupPayload    :: !AdUnit
+    , _aaupAdClientId :: !Text
+    , _aaupAccountId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdUnitsPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'aaupQuotaUser'
---
--- * 'aaupPrettyPrint'
---
--- * 'aaupUserIP'
 --
 -- * 'aaupAdUnitId'
 --
@@ -101,12 +77,6 @@ data AccountsAdUnitsPatch' = AccountsAdUnitsPatch'
 -- * 'aaupAdClientId'
 --
 -- * 'aaupAccountId'
---
--- * 'aaupKey'
---
--- * 'aaupOAuthToken'
---
--- * 'aaupFields'
 accountsAdUnitsPatch'
     :: Text -- ^ 'adUnitId'
     -> AdUnit -- ^ 'payload'
@@ -115,37 +85,11 @@ accountsAdUnitsPatch'
     -> AccountsAdUnitsPatch'
 accountsAdUnitsPatch' pAaupAdUnitId_ pAaupPayload_ pAaupAdClientId_ pAaupAccountId_ =
     AccountsAdUnitsPatch'
-    { _aaupQuotaUser = Nothing
-    , _aaupPrettyPrint = True
-    , _aaupUserIP = Nothing
-    , _aaupAdUnitId = pAaupAdUnitId_
+    { _aaupAdUnitId = pAaupAdUnitId_
     , _aaupPayload = pAaupPayload_
     , _aaupAdClientId = pAaupAdClientId_
     , _aaupAccountId = pAaupAccountId_
-    , _aaupKey = Nothing
-    , _aaupOAuthToken = Nothing
-    , _aaupFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-aaupQuotaUser :: Lens' AccountsAdUnitsPatch' (Maybe Text)
-aaupQuotaUser
-  = lens _aaupQuotaUser
-      (\ s a -> s{_aaupQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-aaupPrettyPrint :: Lens' AccountsAdUnitsPatch' Bool
-aaupPrettyPrint
-  = lens _aaupPrettyPrint
-      (\ s a -> s{_aaupPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-aaupUserIP :: Lens' AccountsAdUnitsPatch' (Maybe Text)
-aaupUserIP
-  = lens _aaupUserIP (\ s a -> s{_aaupUserIP = a})
 
 -- | Ad unit to get.
 aaupAdUnitId :: Lens' AccountsAdUnitsPatch' Text
@@ -169,42 +113,15 @@ aaupAccountId
   = lens _aaupAccountId
       (\ s a -> s{_aaupAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-aaupKey :: Lens' AccountsAdUnitsPatch' (Maybe AuthKey)
-aaupKey = lens _aaupKey (\ s a -> s{_aaupKey = a})
-
--- | OAuth 2.0 token for the current user.
-aaupOAuthToken :: Lens' AccountsAdUnitsPatch' (Maybe OAuthToken)
-aaupOAuthToken
-  = lens _aaupOAuthToken
-      (\ s a -> s{_aaupOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-aaupFields :: Lens' AccountsAdUnitsPatch' (Maybe Text)
-aaupFields
-  = lens _aaupFields (\ s a -> s{_aaupFields = a})
-
-instance GoogleAuth AccountsAdUnitsPatch' where
-        _AuthKey = aaupKey . _Just
-        _AuthToken = aaupOAuthToken . _Just
-
 instance GoogleRequest AccountsAdUnitsPatch' where
         type Rs AccountsAdUnitsPatch' = AdUnit
-        request = requestWith adSenseHostRequest
-        requestWith rq AccountsAdUnitsPatch'{..}
+        requestClient AccountsAdUnitsPatch'{..}
           = go _aaupAccountId _aaupAdClientId
               (Just _aaupAdUnitId)
-              _aaupQuotaUser
-              (Just _aaupPrettyPrint)
-              _aaupUserIP
-              _aaupFields
-              _aaupKey
-              _aaupOAuthToken
               (Just AltJSON)
               _aaupPayload
+              adSenseHostService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsAdUnitsPatchResource)
-                      rq
+                      mempty

@@ -33,14 +33,8 @@ module Network.Google.Resource.Compute.Projects.MoveDisk
     , ProjectsMoveDisk'
 
     -- * Request Lenses
-    , pmdQuotaUser
-    , pmdPrettyPrint
     , pmdProject
-    , pmdUserIP
     , pmdPayload
-    , pmdKey
-    , pmdOAuthToken
-    , pmdFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -51,127 +45,51 @@ import           Network.Google.Prelude
 type ProjectsMoveDiskResource =
      Capture "project" Text :>
        "moveDisk" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] DiskMoveRequest :>
-                         Post '[JSON] Operation
+         QueryParam "alt" AltJSON :>
+           ReqBody '[JSON] DiskMoveRequest :>
+             Post '[JSON] Operation
 
 -- | Moves a persistent disk from one zone to another.
 --
 -- /See:/ 'projectsMoveDisk'' smart constructor.
 data ProjectsMoveDisk' = ProjectsMoveDisk'
-    { _pmdQuotaUser   :: !(Maybe Text)
-    , _pmdPrettyPrint :: !Bool
-    , _pmdProject     :: !Text
-    , _pmdUserIP      :: !(Maybe Text)
-    , _pmdPayload     :: !DiskMoveRequest
-    , _pmdKey         :: !(Maybe AuthKey)
-    , _pmdOAuthToken  :: !(Maybe OAuthToken)
-    , _pmdFields      :: !(Maybe Text)
+    { _pmdProject :: !Text
+    , _pmdPayload :: !DiskMoveRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsMoveDisk'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pmdQuotaUser'
---
--- * 'pmdPrettyPrint'
---
 -- * 'pmdProject'
 --
--- * 'pmdUserIP'
---
 -- * 'pmdPayload'
---
--- * 'pmdKey'
---
--- * 'pmdOAuthToken'
---
--- * 'pmdFields'
 projectsMoveDisk'
     :: Text -- ^ 'project'
     -> DiskMoveRequest -- ^ 'payload'
     -> ProjectsMoveDisk'
 projectsMoveDisk' pPmdProject_ pPmdPayload_ =
     ProjectsMoveDisk'
-    { _pmdQuotaUser = Nothing
-    , _pmdPrettyPrint = True
-    , _pmdProject = pPmdProject_
-    , _pmdUserIP = Nothing
+    { _pmdProject = pPmdProject_
     , _pmdPayload = pPmdPayload_
-    , _pmdKey = Nothing
-    , _pmdOAuthToken = Nothing
-    , _pmdFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-pmdQuotaUser :: Lens' ProjectsMoveDisk' (Maybe Text)
-pmdQuotaUser
-  = lens _pmdQuotaUser (\ s a -> s{_pmdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pmdPrettyPrint :: Lens' ProjectsMoveDisk' Bool
-pmdPrettyPrint
-  = lens _pmdPrettyPrint
-      (\ s a -> s{_pmdPrettyPrint = a})
 
 -- | Project ID for this request.
 pmdProject :: Lens' ProjectsMoveDisk' Text
 pmdProject
   = lens _pmdProject (\ s a -> s{_pmdProject = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-pmdUserIP :: Lens' ProjectsMoveDisk' (Maybe Text)
-pmdUserIP
-  = lens _pmdUserIP (\ s a -> s{_pmdUserIP = a})
-
 -- | Multipart request metadata.
 pmdPayload :: Lens' ProjectsMoveDisk' DiskMoveRequest
 pmdPayload
   = lens _pmdPayload (\ s a -> s{_pmdPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pmdKey :: Lens' ProjectsMoveDisk' (Maybe AuthKey)
-pmdKey = lens _pmdKey (\ s a -> s{_pmdKey = a})
-
--- | OAuth 2.0 token for the current user.
-pmdOAuthToken :: Lens' ProjectsMoveDisk' (Maybe OAuthToken)
-pmdOAuthToken
-  = lens _pmdOAuthToken
-      (\ s a -> s{_pmdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pmdFields :: Lens' ProjectsMoveDisk' (Maybe Text)
-pmdFields
-  = lens _pmdFields (\ s a -> s{_pmdFields = a})
-
-instance GoogleAuth ProjectsMoveDisk' where
-        _AuthKey = pmdKey . _Just
-        _AuthToken = pmdOAuthToken . _Just
-
 instance GoogleRequest ProjectsMoveDisk' where
         type Rs ProjectsMoveDisk' = Operation
-        request = requestWith computeRequest
-        requestWith rq ProjectsMoveDisk'{..}
-          = go _pmdProject _pmdQuotaUser (Just _pmdPrettyPrint)
-              _pmdUserIP
-              _pmdFields
-              _pmdKey
-              _pmdOAuthToken
-              (Just AltJSON)
-              _pmdPayload
+        requestClient ProjectsMoveDisk'{..}
+          = go _pmdProject (Just AltJSON) _pmdPayload
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsMoveDiskResource)
-                      rq
+                      mempty

@@ -36,16 +36,11 @@ module Network.Google.Resource.Genomics.Referencesets.Get
     -- * Request Lenses
     , rReferenceSetId
     , rXgafv
-    , rQuotaUser
-    , rPrettyPrint
     , rUploadProtocol
     , rPp
     , rAccessToken
     , rUploadType
     , rBearerToken
-    , rKey
-    , rOAuthToken
-    , rFields
     , rCallback
     ) where
 
@@ -65,13 +60,7 @@ type ReferencesetsGetResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] ReferenceSet
+                         QueryParam "alt" AltJSON :> Get '[JSON] ReferenceSet
 
 -- | Gets a reference set. Implements
 -- [GlobalAllianceApi.getReferenceSet](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L83).
@@ -80,16 +69,11 @@ type ReferencesetsGetResource =
 data ReferencesetsGet' = ReferencesetsGet'
     { _rReferenceSetId :: !Text
     , _rXgafv          :: !(Maybe Text)
-    , _rQuotaUser      :: !(Maybe Text)
-    , _rPrettyPrint    :: !Bool
     , _rUploadProtocol :: !(Maybe Text)
     , _rPp             :: !Bool
     , _rAccessToken    :: !(Maybe Text)
     , _rUploadType     :: !(Maybe Text)
     , _rBearerToken    :: !(Maybe Text)
-    , _rKey            :: !(Maybe AuthKey)
-    , _rOAuthToken     :: !(Maybe OAuthToken)
-    , _rFields         :: !(Maybe Text)
     , _rCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -101,10 +85,6 @@ data ReferencesetsGet' = ReferencesetsGet'
 --
 -- * 'rXgafv'
 --
--- * 'rQuotaUser'
---
--- * 'rPrettyPrint'
---
 -- * 'rUploadProtocol'
 --
 -- * 'rPp'
@@ -115,12 +95,6 @@ data ReferencesetsGet' = ReferencesetsGet'
 --
 -- * 'rBearerToken'
 --
--- * 'rKey'
---
--- * 'rOAuthToken'
---
--- * 'rFields'
---
 -- * 'rCallback'
 referencesetsGet'
     :: Text -- ^ 'referenceSetId'
@@ -129,16 +103,11 @@ referencesetsGet' pRReferenceSetId_ =
     ReferencesetsGet'
     { _rReferenceSetId = pRReferenceSetId_
     , _rXgafv = Nothing
-    , _rQuotaUser = Nothing
-    , _rPrettyPrint = True
     , _rUploadProtocol = Nothing
     , _rPp = True
     , _rAccessToken = Nothing
     , _rUploadType = Nothing
     , _rBearerToken = Nothing
-    , _rKey = Nothing
-    , _rOAuthToken = Nothing
-    , _rFields = Nothing
     , _rCallback = Nothing
     }
 
@@ -151,18 +120,6 @@ rReferenceSetId
 -- | V1 error format.
 rXgafv :: Lens' ReferencesetsGet' (Maybe Text)
 rXgafv = lens _rXgafv (\ s a -> s{_rXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-rQuotaUser :: Lens' ReferencesetsGet' (Maybe Text)
-rQuotaUser
-  = lens _rQuotaUser (\ s a -> s{_rQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rPrettyPrint :: Lens' ReferencesetsGet' Bool
-rPrettyPrint
-  = lens _rPrettyPrint (\ s a -> s{_rPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 rUploadProtocol :: Lens' ReferencesetsGet' (Maybe Text)
@@ -189,47 +146,23 @@ rBearerToken :: Lens' ReferencesetsGet' (Maybe Text)
 rBearerToken
   = lens _rBearerToken (\ s a -> s{_rBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rKey :: Lens' ReferencesetsGet' (Maybe AuthKey)
-rKey = lens _rKey (\ s a -> s{_rKey = a})
-
--- | OAuth 2.0 token for the current user.
-rOAuthToken :: Lens' ReferencesetsGet' (Maybe OAuthToken)
-rOAuthToken
-  = lens _rOAuthToken (\ s a -> s{_rOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-rFields :: Lens' ReferencesetsGet' (Maybe Text)
-rFields = lens _rFields (\ s a -> s{_rFields = a})
-
 -- | JSONP
 rCallback :: Lens' ReferencesetsGet' (Maybe Text)
 rCallback
   = lens _rCallback (\ s a -> s{_rCallback = a})
 
-instance GoogleAuth ReferencesetsGet' where
-        _AuthKey = rKey . _Just
-        _AuthToken = rOAuthToken . _Just
-
 instance GoogleRequest ReferencesetsGet' where
         type Rs ReferencesetsGet' = ReferenceSet
-        request = requestWith genomicsRequest
-        requestWith rq ReferencesetsGet'{..}
+        requestClient ReferencesetsGet'{..}
           = go _rReferenceSetId _rXgafv _rUploadProtocol
               (Just _rPp)
               _rAccessToken
               _rUploadType
               _rBearerToken
               _rCallback
-              _rQuotaUser
-              (Just _rPrettyPrint)
-              _rFields
-              _rKey
-              _rOAuthToken
               (Just AltJSON)
+              genomicsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ReferencesetsGetResource)
-                      rq
+                      mempty

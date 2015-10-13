@@ -15,8 +15,11 @@
 --
 module Network.Google.ShoppingContent.Types
     (
-    -- * Service Request
-      shoppingContentRequest
+    -- * Service Configuration
+      shoppingContentService
+
+    -- * OAuth Scopes
+    , contentScope
 
     -- * OrdersAcknowledgeRequest
     , OrdersAcknowledgeRequest
@@ -319,11 +322,11 @@ module Network.Google.ShoppingContent.Types
     -- * AccountsCustomBatchRequestEntry
     , AccountsCustomBatchRequestEntry
     , accountsCustomBatchRequestEntry
-    , accMerchantId
-    , accAccount
-    , accAccountId
-    , accMethod
-    , accBatchId
+    , acbrecMerchantId
+    , acbrecAccount
+    , acbrecAccountId
+    , acbrecMethod
+    , acbrecBatchId
 
     -- * Weight
     , Weight
@@ -519,10 +522,10 @@ module Network.Google.ShoppingContent.Types
     -- * AccountstatusesCustomBatchRequestEntry
     , AccountstatusesCustomBatchRequestEntry
     , accountstatusesCustomBatchRequestEntry
-    , acbrecMerchantId
-    , acbrecAccountId
-    , acbrecMethod
-    , acbrecBatchId
+    , aaMerchantId
+    , aaAccountId
+    , aaMethod
+    , aaBatchId
 
     -- * ProductstatusesCustomBatchResponseEntry
     , ProductstatusesCustomBatchResponseEntry
@@ -559,11 +562,11 @@ module Network.Google.ShoppingContent.Types
     -- * AccountshippingCustomBatchRequestEntry
     , AccountshippingCustomBatchRequestEntry
     , accountshippingCustomBatchRequestEntry
-    , aaMerchantId
-    , aaAccountId
-    , aaMethod
-    , aaAccountShipping
-    , aaBatchId
+    , acccMerchantId
+    , acccAccountId
+    , acccMethod
+    , acccAccountShipping
+    , acccBatchId
 
     -- * AccountsCustomBatchRequest
     , AccountsCustomBatchRequest
@@ -990,9 +993,9 @@ module Network.Google.ShoppingContent.Types
     -- * AccountstatusesCustomBatchResponseEntry
     , AccountstatusesCustomBatchResponseEntry
     , accountstatusesCustomBatchResponseEntry
-    , acccAccountStatus
-    , acccErrors
-    , acccBatchId
+    , accAccountStatus
+    , accErrors
+    , accBatchId
 
     -- * InventorySetResponse
     , InventorySetResponse
@@ -1069,24 +1072,24 @@ module Network.Google.ShoppingContent.Types
     -- * Order
     , Order
     , order
-    , ordStatus
-    , ordMerchantId
-    , ordRefunds
-    , ordKind
-    , ordLineItems
-    , ordShipments
-    , ordNetAmount
-    , ordPlacedDate
-    , ordDeliveryDetails
-    , ordShippingOption
-    , ordMerchantOrderId
-    , ordAcknowledged
-    , ordShippingCostTax
-    , ordCustomer
-    , ordId
-    , ordPaymentMethod
-    , ordPaymentStatus
-    , ordShippingCost
+    , ooStatus
+    , ooMerchantId
+    , ooRefunds
+    , ooKind
+    , ooLineItems
+    , ooShipments
+    , ooNetAmount
+    , ooPlacedDate
+    , ooDeliveryDetails
+    , ooShippingOption
+    , ooMerchantOrderId
+    , ooAcknowledged
+    , ooShippingCostTax
+    , ooCustomer
+    , ooId
+    , ooPaymentMethod
+    , ooPaymentStatus
+    , ooShippingCost
 
     -- * InventoryCustomBatchResponse
     , InventoryCustomBatchResponse
@@ -1241,8 +1244,8 @@ module Network.Google.ShoppingContent.Types
     -- * OrdersCustomBatchResponse
     , OrdersCustomBatchResponse
     , ordersCustomBatchResponse
-    , ocbrcEntries
-    , ocbrcKind
+    , ordEntries
+    , ordKind
     ) where
 
 import           Network.Google.Prelude
@@ -1250,7 +1253,12 @@ import           Network.Google.ShoppingContent.Types.Product
 import           Network.Google.ShoppingContent.Types.Sum
 
 -- | Default request referring to version 'v2' of the Content API for Shopping. This contains the host and root path used as a starting point for constructing service requests.
-shoppingContentRequest :: RequestBuilder
-shoppingContentRequest
-  = defaultRequest "https://www.googleapis.com/"
+shoppingContentService :: Service
+shoppingContentService
+  = defaultService (ServiceId "content:v2")
+      "www.googleapis.com"
       "content/v2/"
+
+-- | Manage your product listings and accounts for Google Shopping
+contentScope :: OAuthScope
+contentScope = OAuthScope "https://www.googleapis.com/auth/content";

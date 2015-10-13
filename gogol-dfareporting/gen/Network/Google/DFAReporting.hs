@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference>
 module Network.Google.DFAReporting
     (
+    -- * Service Configuration
+      dFAReportingService
+
     -- * API Declaration
-      DFAReportingAPI
+    , DFAReportingAPI
 
     -- * Resources
 

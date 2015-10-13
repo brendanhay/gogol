@@ -37,17 +37,12 @@ module Network.Google.Resource.CloudBilling.Projects.GetBillingInfo
 
     -- * Request Lenses
     , pgbiXgafv
-    , pgbiQuotaUser
-    , pgbiPrettyPrint
     , pgbiUploadProtocol
     , pgbiPp
     , pgbiAccessToken
     , pgbiUploadType
     , pgbiBearerToken
-    , pgbiKey
     , pgbiName
-    , pgbiOAuthToken
-    , pgbiFields
     , pgbiCallback
     ) where
 
@@ -67,13 +62,8 @@ type ProjectsGetBillingInfoResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] ProjectBillingInfo
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ProjectBillingInfo
 
 -- | Gets the billing information for a project. The current authenticated
 -- user must have [permission to view the
@@ -83,17 +73,12 @@ type ProjectsGetBillingInfoResource =
 -- /See:/ 'projectsGetBillingInfo'' smart constructor.
 data ProjectsGetBillingInfo' = ProjectsGetBillingInfo'
     { _pgbiXgafv          :: !(Maybe Text)
-    , _pgbiQuotaUser      :: !(Maybe Text)
-    , _pgbiPrettyPrint    :: !Bool
     , _pgbiUploadProtocol :: !(Maybe Text)
     , _pgbiPp             :: !Bool
     , _pgbiAccessToken    :: !(Maybe Text)
     , _pgbiUploadType     :: !(Maybe Text)
     , _pgbiBearerToken    :: !(Maybe Text)
-    , _pgbiKey            :: !(Maybe AuthKey)
     , _pgbiName           :: !Text
-    , _pgbiOAuthToken     :: !(Maybe OAuthToken)
-    , _pgbiFields         :: !(Maybe Text)
     , _pgbiCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +87,6 @@ data ProjectsGetBillingInfo' = ProjectsGetBillingInfo'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pgbiXgafv'
---
--- * 'pgbiQuotaUser'
---
--- * 'pgbiPrettyPrint'
 --
 -- * 'pgbiUploadProtocol'
 --
@@ -117,13 +98,7 @@ data ProjectsGetBillingInfo' = ProjectsGetBillingInfo'
 --
 -- * 'pgbiBearerToken'
 --
--- * 'pgbiKey'
---
 -- * 'pgbiName'
---
--- * 'pgbiOAuthToken'
---
--- * 'pgbiFields'
 --
 -- * 'pgbiCallback'
 projectsGetBillingInfo'
@@ -132,17 +107,12 @@ projectsGetBillingInfo'
 projectsGetBillingInfo' pPgbiName_ =
     ProjectsGetBillingInfo'
     { _pgbiXgafv = Nothing
-    , _pgbiQuotaUser = Nothing
-    , _pgbiPrettyPrint = True
     , _pgbiUploadProtocol = Nothing
     , _pgbiPp = True
     , _pgbiAccessToken = Nothing
     , _pgbiUploadType = Nothing
     , _pgbiBearerToken = Nothing
-    , _pgbiKey = Nothing
     , _pgbiName = pPgbiName_
-    , _pgbiOAuthToken = Nothing
-    , _pgbiFields = Nothing
     , _pgbiCallback = Nothing
     }
 
@@ -150,20 +120,6 @@ projectsGetBillingInfo' pPgbiName_ =
 pgbiXgafv :: Lens' ProjectsGetBillingInfo' (Maybe Text)
 pgbiXgafv
   = lens _pgbiXgafv (\ s a -> s{_pgbiXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-pgbiQuotaUser :: Lens' ProjectsGetBillingInfo' (Maybe Text)
-pgbiQuotaUser
-  = lens _pgbiQuotaUser
-      (\ s a -> s{_pgbiQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pgbiPrettyPrint :: Lens' ProjectsGetBillingInfo' Bool
-pgbiPrettyPrint
-  = lens _pgbiPrettyPrint
-      (\ s a -> s{_pgbiPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 pgbiUploadProtocol :: Lens' ProjectsGetBillingInfo' (Maybe Text)
@@ -193,54 +149,28 @@ pgbiBearerToken
   = lens _pgbiBearerToken
       (\ s a -> s{_pgbiBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pgbiKey :: Lens' ProjectsGetBillingInfo' (Maybe AuthKey)
-pgbiKey = lens _pgbiKey (\ s a -> s{_pgbiKey = a})
-
 -- | The resource name of the project for which billing information is
 -- retrieved. For example, \`projects\/tokyo-rain-123\`.
 pgbiName :: Lens' ProjectsGetBillingInfo' Text
 pgbiName = lens _pgbiName (\ s a -> s{_pgbiName = a})
-
--- | OAuth 2.0 token for the current user.
-pgbiOAuthToken :: Lens' ProjectsGetBillingInfo' (Maybe OAuthToken)
-pgbiOAuthToken
-  = lens _pgbiOAuthToken
-      (\ s a -> s{_pgbiOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-pgbiFields :: Lens' ProjectsGetBillingInfo' (Maybe Text)
-pgbiFields
-  = lens _pgbiFields (\ s a -> s{_pgbiFields = a})
 
 -- | JSONP
 pgbiCallback :: Lens' ProjectsGetBillingInfo' (Maybe Text)
 pgbiCallback
   = lens _pgbiCallback (\ s a -> s{_pgbiCallback = a})
 
-instance GoogleAuth ProjectsGetBillingInfo' where
-        _AuthKey = pgbiKey . _Just
-        _AuthToken = pgbiOAuthToken . _Just
-
 instance GoogleRequest ProjectsGetBillingInfo' where
         type Rs ProjectsGetBillingInfo' = ProjectBillingInfo
-        request = requestWith billingRequest
-        requestWith rq ProjectsGetBillingInfo'{..}
+        requestClient ProjectsGetBillingInfo'{..}
           = go _pgbiName _pgbiXgafv _pgbiUploadProtocol
               (Just _pgbiPp)
               _pgbiAccessToken
               _pgbiUploadType
               _pgbiBearerToken
               _pgbiCallback
-              _pgbiQuotaUser
-              (Just _pgbiPrettyPrint)
-              _pgbiFields
-              _pgbiKey
-              _pgbiOAuthToken
               (Just AltJSON)
+              billingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsGetBillingInfoResource)
-                      rq
+                      mempty

@@ -15,8 +15,12 @@
 --
 module Network.Google.GamesManagement.Types
     (
-    -- * Service Request
-      gamesManagementRequest
+    -- * Service Configuration
+      gamesManagementService
+
+    -- * OAuth Scopes
+    , plusLoginScope
+    , gamesScope
 
     -- * GamesPlayerExperienceInfoResource
     , GamesPlayerExperienceInfoResource
@@ -128,7 +132,18 @@ import           Network.Google.GamesManagement.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1management' of the Google Play Game Services Management API. This contains the host and root path used as a starting point for constructing service requests.
-gamesManagementRequest :: RequestBuilder
-gamesManagementRequest
-  = defaultRequest "https://www.googleapis.com/"
+gamesManagementService :: Service
+gamesManagementService
+  = defaultService
+      (ServiceId "gamesManagement:v1management")
+      "www.googleapis.com"
       "games/v1management/"
+
+-- | Know your basic profile info and list of people in your circles.
+plusLoginScope :: OAuthScope
+plusLoginScope = OAuthScope "https://www.googleapis.com/auth/plus.login";
+
+-- | Share your Google+ profile information and view and manage your game
+-- activity
+gamesScope :: OAuthScope
+gamesScope = OAuthScope "https://www.googleapis.com/auth/games";

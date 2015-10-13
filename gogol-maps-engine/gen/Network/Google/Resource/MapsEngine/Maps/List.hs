@@ -33,25 +33,19 @@ module Network.Google.Resource.MapsEngine.Maps.List
     , MapsList'
 
     -- * Request Lenses
-    , mllCreatedAfter
-    , mllQuotaUser
-    , mllPrettyPrint
-    , mllUserIP
-    , mllCreatorEmail
-    , mllRole
-    , mllKey
-    , mllBbox
-    , mllProcessingStatus
-    , mllModifiedAfter
-    , mllModifiedBefore
-    , mllPageToken
-    , mllProjectId
-    , mllOAuthToken
-    , mllSearch
-    , mllMaxResults
-    , mllTags
-    , mllFields
-    , mllCreatedBefore
+    , mlCreatedAfter
+    , mlCreatorEmail
+    , mlRole
+    , mlBbox
+    , mlProcessingStatus
+    , mlModifiedAfter
+    , mlModifiedBefore
+    , mlPageToken
+    , mlProjectId
+    , mlSearch
+    , mlMaxResults
+    , mlTags
+    , mlCreatedBefore
     ) where
 
 import           Network.Google.MapsEngine.Types
@@ -76,254 +70,176 @@ type MapsListResource =
                            QueryParam "maxResults" Word32 :>
                              QueryParam "tags" Text :>
                                QueryParam "createdBefore" DateTime' :>
-                                 QueryParam "quotaUser" Text :>
-                                   QueryParam "prettyPrint" Bool :>
-                                     QueryParam "userIp" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "key" AuthKey :>
-                                           Header "Authorization" OAuthToken :>
-                                             QueryParam "alt" AltJSON :>
-                                               Get '[JSON] MapsListResponse
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] MapsListResponse
 
 -- | Return all maps readable by the current user.
 --
 -- /See:/ 'mapsList'' smart constructor.
 data MapsList' = MapsList'
-    { _mllCreatedAfter     :: !(Maybe DateTime')
-    , _mllQuotaUser        :: !(Maybe Text)
-    , _mllPrettyPrint      :: !Bool
-    , _mllUserIP           :: !(Maybe Text)
-    , _mllCreatorEmail     :: !(Maybe Text)
-    , _mllRole             :: !(Maybe MapsListRole)
-    , _mllKey              :: !(Maybe AuthKey)
-    , _mllBbox             :: !(Maybe Text)
-    , _mllProcessingStatus :: !(Maybe MapsListProcessingStatus)
-    , _mllModifiedAfter    :: !(Maybe DateTime')
-    , _mllModifiedBefore   :: !(Maybe DateTime')
-    , _mllPageToken        :: !(Maybe Text)
-    , _mllProjectId        :: !(Maybe Text)
-    , _mllOAuthToken       :: !(Maybe OAuthToken)
-    , _mllSearch           :: !(Maybe Text)
-    , _mllMaxResults       :: !(Maybe Word32)
-    , _mllTags             :: !(Maybe Text)
-    , _mllFields           :: !(Maybe Text)
-    , _mllCreatedBefore    :: !(Maybe DateTime')
+    { _mlCreatedAfter     :: !(Maybe DateTime')
+    , _mlCreatorEmail     :: !(Maybe Text)
+    , _mlRole             :: !(Maybe MapsListRole)
+    , _mlBbox             :: !(Maybe Text)
+    , _mlProcessingStatus :: !(Maybe MapsListProcessingStatus)
+    , _mlModifiedAfter    :: !(Maybe DateTime')
+    , _mlModifiedBefore   :: !(Maybe DateTime')
+    , _mlPageToken        :: !(Maybe Text)
+    , _mlProjectId        :: !(Maybe Text)
+    , _mlSearch           :: !(Maybe Text)
+    , _mlMaxResults       :: !(Maybe Word32)
+    , _mlTags             :: !(Maybe Text)
+    , _mlCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mllCreatedAfter'
+-- * 'mlCreatedAfter'
 --
--- * 'mllQuotaUser'
+-- * 'mlCreatorEmail'
 --
--- * 'mllPrettyPrint'
+-- * 'mlRole'
 --
--- * 'mllUserIP'
+-- * 'mlBbox'
 --
--- * 'mllCreatorEmail'
+-- * 'mlProcessingStatus'
 --
--- * 'mllRole'
+-- * 'mlModifiedAfter'
 --
--- * 'mllKey'
+-- * 'mlModifiedBefore'
 --
--- * 'mllBbox'
+-- * 'mlPageToken'
 --
--- * 'mllProcessingStatus'
+-- * 'mlProjectId'
 --
--- * 'mllModifiedAfter'
+-- * 'mlSearch'
 --
--- * 'mllModifiedBefore'
+-- * 'mlMaxResults'
 --
--- * 'mllPageToken'
+-- * 'mlTags'
 --
--- * 'mllProjectId'
---
--- * 'mllOAuthToken'
---
--- * 'mllSearch'
---
--- * 'mllMaxResults'
---
--- * 'mllTags'
---
--- * 'mllFields'
---
--- * 'mllCreatedBefore'
+-- * 'mlCreatedBefore'
 mapsList'
     :: MapsList'
 mapsList' =
     MapsList'
-    { _mllCreatedAfter = Nothing
-    , _mllQuotaUser = Nothing
-    , _mllPrettyPrint = True
-    , _mllUserIP = Nothing
-    , _mllCreatorEmail = Nothing
-    , _mllRole = Nothing
-    , _mllKey = Nothing
-    , _mllBbox = Nothing
-    , _mllProcessingStatus = Nothing
-    , _mllModifiedAfter = Nothing
-    , _mllModifiedBefore = Nothing
-    , _mllPageToken = Nothing
-    , _mllProjectId = Nothing
-    , _mllOAuthToken = Nothing
-    , _mllSearch = Nothing
-    , _mllMaxResults = Nothing
-    , _mllTags = Nothing
-    , _mllFields = Nothing
-    , _mllCreatedBefore = Nothing
+    { _mlCreatedAfter = Nothing
+    , _mlCreatorEmail = Nothing
+    , _mlRole = Nothing
+    , _mlBbox = Nothing
+    , _mlProcessingStatus = Nothing
+    , _mlModifiedAfter = Nothing
+    , _mlModifiedBefore = Nothing
+    , _mlPageToken = Nothing
+    , _mlProjectId = Nothing
+    , _mlSearch = Nothing
+    , _mlMaxResults = Nothing
+    , _mlTags = Nothing
+    , _mlCreatedBefore = Nothing
     }
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been created at or after this time.
-mllCreatedAfter :: Lens' MapsList' (Maybe UTCTime)
-mllCreatedAfter
-  = lens _mllCreatedAfter
-      (\ s a -> s{_mllCreatedAfter = a})
+mlCreatedAfter :: Lens' MapsList' (Maybe UTCTime)
+mlCreatedAfter
+  = lens _mlCreatedAfter
+      (\ s a -> s{_mlCreatedAfter = a})
       . mapping _DateTime
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mllQuotaUser :: Lens' MapsList' (Maybe Text)
-mllQuotaUser
-  = lens _mllQuotaUser (\ s a -> s{_mllQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mllPrettyPrint :: Lens' MapsList' Bool
-mllPrettyPrint
-  = lens _mllPrettyPrint
-      (\ s a -> s{_mllPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mllUserIP :: Lens' MapsList' (Maybe Text)
-mllUserIP
-  = lens _mllUserIP (\ s a -> s{_mllUserIP = a})
 
 -- | An email address representing a user. Returned assets that have been
 -- created by the user associated with the provided email address.
-mllCreatorEmail :: Lens' MapsList' (Maybe Text)
-mllCreatorEmail
-  = lens _mllCreatorEmail
-      (\ s a -> s{_mllCreatorEmail = a})
+mlCreatorEmail :: Lens' MapsList' (Maybe Text)
+mlCreatorEmail
+  = lens _mlCreatorEmail
+      (\ s a -> s{_mlCreatorEmail = a})
 
 -- | The role parameter indicates that the response should only contain
 -- assets where the current user has the specified level of access.
-mllRole :: Lens' MapsList' (Maybe MapsListRole)
-mllRole = lens _mllRole (\ s a -> s{_mllRole = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mllKey :: Lens' MapsList' (Maybe AuthKey)
-mllKey = lens _mllKey (\ s a -> s{_mllKey = a})
+mlRole :: Lens' MapsList' (Maybe MapsListRole)
+mlRole = lens _mlRole (\ s a -> s{_mlRole = a})
 
 -- | A bounding box, expressed as \"west,south,east,north\". If set, only
 -- assets which intersect this bounding box will be returned.
-mllBbox :: Lens' MapsList' (Maybe Text)
-mllBbox = lens _mllBbox (\ s a -> s{_mllBbox = a})
+mlBbox :: Lens' MapsList' (Maybe Text)
+mlBbox = lens _mlBbox (\ s a -> s{_mlBbox = a})
 
-mllProcessingStatus :: Lens' MapsList' (Maybe MapsListProcessingStatus)
-mllProcessingStatus
-  = lens _mllProcessingStatus
-      (\ s a -> s{_mllProcessingStatus = a})
+mlProcessingStatus :: Lens' MapsList' (Maybe MapsListProcessingStatus)
+mlProcessingStatus
+  = lens _mlProcessingStatus
+      (\ s a -> s{_mlProcessingStatus = a})
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been modified at or after this time.
-mllModifiedAfter :: Lens' MapsList' (Maybe UTCTime)
-mllModifiedAfter
-  = lens _mllModifiedAfter
-      (\ s a -> s{_mllModifiedAfter = a})
+mlModifiedAfter :: Lens' MapsList' (Maybe UTCTime)
+mlModifiedAfter
+  = lens _mlModifiedAfter
+      (\ s a -> s{_mlModifiedAfter = a})
       . mapping _DateTime
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been modified at or before this time.
-mllModifiedBefore :: Lens' MapsList' (Maybe UTCTime)
-mllModifiedBefore
-  = lens _mllModifiedBefore
-      (\ s a -> s{_mllModifiedBefore = a})
+mlModifiedBefore :: Lens' MapsList' (Maybe UTCTime)
+mlModifiedBefore
+  = lens _mlModifiedBefore
+      (\ s a -> s{_mlModifiedBefore = a})
       . mapping _DateTime
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
 -- nextPageToken from the previous response.
-mllPageToken :: Lens' MapsList' (Maybe Text)
-mllPageToken
-  = lens _mllPageToken (\ s a -> s{_mllPageToken = a})
+mlPageToken :: Lens' MapsList' (Maybe Text)
+mlPageToken
+  = lens _mlPageToken (\ s a -> s{_mlPageToken = a})
 
 -- | The ID of a Maps Engine project, used to filter the response. To list
 -- all available projects with their IDs, send a Projects: list request.
 -- You can also find your project ID as the value of the DashboardPlace:cid
 -- URL parameter when signed in to mapsengine.google.com.
-mllProjectId :: Lens' MapsList' (Maybe Text)
-mllProjectId
-  = lens _mllProjectId (\ s a -> s{_mllProjectId = a})
-
--- | OAuth 2.0 token for the current user.
-mllOAuthToken :: Lens' MapsList' (Maybe OAuthToken)
-mllOAuthToken
-  = lens _mllOAuthToken
-      (\ s a -> s{_mllOAuthToken = a})
+mlProjectId :: Lens' MapsList' (Maybe Text)
+mlProjectId
+  = lens _mlProjectId (\ s a -> s{_mlProjectId = a})
 
 -- | An unstructured search string used to filter the set of results based on
 -- asset metadata.
-mllSearch :: Lens' MapsList' (Maybe Text)
-mllSearch
-  = lens _mllSearch (\ s a -> s{_mllSearch = a})
+mlSearch :: Lens' MapsList' (Maybe Text)
+mlSearch = lens _mlSearch (\ s a -> s{_mlSearch = a})
 
 -- | The maximum number of items to include in a single response page. The
 -- maximum supported value is 100.
-mllMaxResults :: Lens' MapsList' (Maybe Word32)
-mllMaxResults
-  = lens _mllMaxResults
-      (\ s a -> s{_mllMaxResults = a})
+mlMaxResults :: Lens' MapsList' (Maybe Word32)
+mlMaxResults
+  = lens _mlMaxResults (\ s a -> s{_mlMaxResults = a})
 
 -- | A comma separated list of tags. Returned assets will contain all the
 -- tags from the list.
-mllTags :: Lens' MapsList' (Maybe Text)
-mllTags = lens _mllTags (\ s a -> s{_mllTags = a})
-
--- | Selector specifying which fields to include in a partial response.
-mllFields :: Lens' MapsList' (Maybe Text)
-mllFields
-  = lens _mllFields (\ s a -> s{_mllFields = a})
+mlTags :: Lens' MapsList' (Maybe Text)
+mlTags = lens _mlTags (\ s a -> s{_mlTags = a})
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been created at or before this time.
-mllCreatedBefore :: Lens' MapsList' (Maybe UTCTime)
-mllCreatedBefore
-  = lens _mllCreatedBefore
-      (\ s a -> s{_mllCreatedBefore = a})
+mlCreatedBefore :: Lens' MapsList' (Maybe UTCTime)
+mlCreatedBefore
+  = lens _mlCreatedBefore
+      (\ s a -> s{_mlCreatedBefore = a})
       . mapping _DateTime
-
-instance GoogleAuth MapsList' where
-        _AuthKey = mllKey . _Just
-        _AuthToken = mllOAuthToken . _Just
 
 instance GoogleRequest MapsList' where
         type Rs MapsList' = MapsListResponse
-        request = requestWith mapsEngineRequest
-        requestWith rq MapsList'{..}
-          = go _mllCreatedAfter _mllCreatorEmail _mllRole
-              _mllBbox
-              _mllProcessingStatus
-              _mllModifiedAfter
-              _mllModifiedBefore
-              _mllPageToken
-              _mllProjectId
-              _mllSearch
-              _mllMaxResults
-              _mllTags
-              _mllCreatedBefore
-              _mllQuotaUser
-              (Just _mllPrettyPrint)
-              _mllUserIP
-              _mllFields
-              _mllKey
-              _mllOAuthToken
+        requestClient MapsList'{..}
+          = go _mlCreatedAfter _mlCreatorEmail _mlRole _mlBbox
+              _mlProcessingStatus
+              _mlModifiedAfter
+              _mlModifiedBefore
+              _mlPageToken
+              _mlProjectId
+              _mlSearch
+              _mlMaxResults
+              _mlTags
+              _mlCreatedBefore
               (Just AltJSON)
+              mapsEngineService
           where go
-                  = clientBuild (Proxy :: Proxy MapsListResource) rq
+                  = buildClient (Proxy :: Proxy MapsListResource)
+                      mempty

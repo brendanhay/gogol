@@ -33,18 +33,12 @@ module Network.Google.Resource.AdSense.Accounts.CustomChannels.AdUnits.List
     , AccountsCustomChannelsAdUnitsList'
 
     -- * Request Lenses
-    , accaulQuotaUser
-    , accaulPrettyPrint
     , accaulIncludeInactive
     , accaulCustomChannelId
-    , accaulUserIP
     , accaulAdClientId
     , accaulAccountId
-    , accaulKey
     , accaulPageToken
-    , accaulOAuthToken
     , accaulMaxResults
-    , accaulFields
     ) where
 
 import           Network.Google.AdSense.Types
@@ -63,60 +57,35 @@ type AccountsCustomChannelsAdUnitsListResource =
                    QueryParam "includeInactive" Bool :>
                      QueryParam "pageToken" Text :>
                        QueryParam "maxResults" Int32 :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] AdUnits
+                         QueryParam "alt" AltJSON :> Get '[JSON] AdUnits
 
 -- | List all ad units in the specified custom channel.
 --
 -- /See:/ 'accountsCustomChannelsAdUnitsList'' smart constructor.
 data AccountsCustomChannelsAdUnitsList' = AccountsCustomChannelsAdUnitsList'
-    { _accaulQuotaUser       :: !(Maybe Text)
-    , _accaulPrettyPrint     :: !Bool
-    , _accaulIncludeInactive :: !(Maybe Bool)
+    { _accaulIncludeInactive :: !(Maybe Bool)
     , _accaulCustomChannelId :: !Text
-    , _accaulUserIP          :: !(Maybe Text)
     , _accaulAdClientId      :: !Text
     , _accaulAccountId       :: !Text
-    , _accaulKey             :: !(Maybe AuthKey)
     , _accaulPageToken       :: !(Maybe Text)
-    , _accaulOAuthToken      :: !(Maybe OAuthToken)
     , _accaulMaxResults      :: !(Maybe Int32)
-    , _accaulFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsCustomChannelsAdUnitsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'accaulQuotaUser'
---
--- * 'accaulPrettyPrint'
---
 -- * 'accaulIncludeInactive'
 --
 -- * 'accaulCustomChannelId'
---
--- * 'accaulUserIP'
 --
 -- * 'accaulAdClientId'
 --
 -- * 'accaulAccountId'
 --
--- * 'accaulKey'
---
 -- * 'accaulPageToken'
 --
--- * 'accaulOAuthToken'
---
 -- * 'accaulMaxResults'
---
--- * 'accaulFields'
 accountsCustomChannelsAdUnitsList'
     :: Text -- ^ 'customChannelId'
     -> Text -- ^ 'adClientId'
@@ -124,33 +93,13 @@ accountsCustomChannelsAdUnitsList'
     -> AccountsCustomChannelsAdUnitsList'
 accountsCustomChannelsAdUnitsList' pAccaulCustomChannelId_ pAccaulAdClientId_ pAccaulAccountId_ =
     AccountsCustomChannelsAdUnitsList'
-    { _accaulQuotaUser = Nothing
-    , _accaulPrettyPrint = True
-    , _accaulIncludeInactive = Nothing
+    { _accaulIncludeInactive = Nothing
     , _accaulCustomChannelId = pAccaulCustomChannelId_
-    , _accaulUserIP = Nothing
     , _accaulAdClientId = pAccaulAdClientId_
     , _accaulAccountId = pAccaulAccountId_
-    , _accaulKey = Nothing
     , _accaulPageToken = Nothing
-    , _accaulOAuthToken = Nothing
     , _accaulMaxResults = Nothing
-    , _accaulFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-accaulQuotaUser :: Lens' AccountsCustomChannelsAdUnitsList' (Maybe Text)
-accaulQuotaUser
-  = lens _accaulQuotaUser
-      (\ s a -> s{_accaulQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-accaulPrettyPrint :: Lens' AccountsCustomChannelsAdUnitsList' Bool
-accaulPrettyPrint
-  = lens _accaulPrettyPrint
-      (\ s a -> s{_accaulPrettyPrint = a})
 
 -- | Whether to include inactive ad units. Default: true.
 accaulIncludeInactive :: Lens' AccountsCustomChannelsAdUnitsList' (Maybe Bool)
@@ -164,12 +113,6 @@ accaulCustomChannelId
   = lens _accaulCustomChannelId
       (\ s a -> s{_accaulCustomChannelId = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-accaulUserIP :: Lens' AccountsCustomChannelsAdUnitsList' (Maybe Text)
-accaulUserIP
-  = lens _accaulUserIP (\ s a -> s{_accaulUserIP = a})
-
 -- | Ad client which contains the custom channel.
 accaulAdClientId :: Lens' AccountsCustomChannelsAdUnitsList' Text
 accaulAdClientId
@@ -182,13 +125,6 @@ accaulAccountId
   = lens _accaulAccountId
       (\ s a -> s{_accaulAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-accaulKey :: Lens' AccountsCustomChannelsAdUnitsList' (Maybe AuthKey)
-accaulKey
-  = lens _accaulKey (\ s a -> s{_accaulKey = a})
-
 -- | A continuation token, used to page through ad units. To retrieve the
 -- next page, set this parameter to the value of \"nextPageToken\" from the
 -- previous response.
@@ -197,12 +133,6 @@ accaulPageToken
   = lens _accaulPageToken
       (\ s a -> s{_accaulPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-accaulOAuthToken :: Lens' AccountsCustomChannelsAdUnitsList' (Maybe OAuthToken)
-accaulOAuthToken
-  = lens _accaulOAuthToken
-      (\ s a -> s{_accaulOAuthToken = a})
-
 -- | The maximum number of ad units to include in the response, used for
 -- paging.
 accaulMaxResults :: Lens' AccountsCustomChannelsAdUnitsList' (Maybe Int32)
@@ -210,35 +140,19 @@ accaulMaxResults
   = lens _accaulMaxResults
       (\ s a -> s{_accaulMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-accaulFields :: Lens' AccountsCustomChannelsAdUnitsList' (Maybe Text)
-accaulFields
-  = lens _accaulFields (\ s a -> s{_accaulFields = a})
-
-instance GoogleAuth
-         AccountsCustomChannelsAdUnitsList' where
-        _AuthKey = accaulKey . _Just
-        _AuthToken = accaulOAuthToken . _Just
-
 instance GoogleRequest
          AccountsCustomChannelsAdUnitsList' where
         type Rs AccountsCustomChannelsAdUnitsList' = AdUnits
-        request = requestWith adSenseRequest
-        requestWith rq AccountsCustomChannelsAdUnitsList'{..}
+        requestClient AccountsCustomChannelsAdUnitsList'{..}
           = go _accaulAccountId _accaulAdClientId
               _accaulCustomChannelId
               _accaulIncludeInactive
               _accaulPageToken
               _accaulMaxResults
-              _accaulQuotaUser
-              (Just _accaulPrettyPrint)
-              _accaulUserIP
-              _accaulFields
-              _accaulKey
-              _accaulOAuthToken
               (Just AltJSON)
+              adSenseService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy AccountsCustomChannelsAdUnitsListResource)
-                      rq
+                      mempty

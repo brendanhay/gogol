@@ -36,19 +36,14 @@ module Network.Google.Resource.ProximityBeacon.Beacons.List
 
     -- * Request Lenses
     , blXgafv
-    , blQuotaUser
-    , blPrettyPrint
     , blUploadProtocol
     , blPp
     , blAccessToken
     , blUploadType
     , blQ
     , blBearerToken
-    , blKey
     , blPageToken
-    , blOAuthToken
     , blPageSize
-    , blFields
     , blCallback
     ) where
 
@@ -70,13 +65,8 @@ type BeaconsListResource =
                        QueryParam "pageToken" Text :>
                          QueryParam "pageSize" Int32 :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] ListBeaconsResponse
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListBeaconsResponse
 
 -- | Searches the beacon registry for beacons that match the given search
 -- criteria. Only those beacons that the client has permission to list will
@@ -85,19 +75,14 @@ type BeaconsListResource =
 -- /See:/ 'beaconsList'' smart constructor.
 data BeaconsList' = BeaconsList'
     { _blXgafv          :: !(Maybe Text)
-    , _blQuotaUser      :: !(Maybe Text)
-    , _blPrettyPrint    :: !Bool
     , _blUploadProtocol :: !(Maybe Text)
     , _blPp             :: !Bool
     , _blAccessToken    :: !(Maybe Text)
     , _blUploadType     :: !(Maybe Text)
     , _blQ              :: !(Maybe Text)
     , _blBearerToken    :: !(Maybe Text)
-    , _blKey            :: !(Maybe AuthKey)
     , _blPageToken      :: !(Maybe Text)
-    , _blOAuthToken     :: !(Maybe OAuthToken)
     , _blPageSize       :: !(Maybe Int32)
-    , _blFields         :: !(Maybe Text)
     , _blCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -106,10 +91,6 @@ data BeaconsList' = BeaconsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'blXgafv'
---
--- * 'blQuotaUser'
---
--- * 'blPrettyPrint'
 --
 -- * 'blUploadProtocol'
 --
@@ -123,15 +104,9 @@ data BeaconsList' = BeaconsList'
 --
 -- * 'blBearerToken'
 --
--- * 'blKey'
---
 -- * 'blPageToken'
 --
--- * 'blOAuthToken'
---
 -- * 'blPageSize'
---
--- * 'blFields'
 --
 -- * 'blCallback'
 beaconsList'
@@ -139,38 +114,20 @@ beaconsList'
 beaconsList' =
     BeaconsList'
     { _blXgafv = Nothing
-    , _blQuotaUser = Nothing
-    , _blPrettyPrint = True
     , _blUploadProtocol = Nothing
     , _blPp = True
     , _blAccessToken = Nothing
     , _blUploadType = Nothing
     , _blQ = Nothing
     , _blBearerToken = Nothing
-    , _blKey = Nothing
     , _blPageToken = Nothing
-    , _blOAuthToken = Nothing
     , _blPageSize = Nothing
-    , _blFields = Nothing
     , _blCallback = Nothing
     }
 
 -- | V1 error format.
 blXgafv :: Lens' BeaconsList' (Maybe Text)
 blXgafv = lens _blXgafv (\ s a -> s{_blXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-blQuotaUser :: Lens' BeaconsList' (Maybe Text)
-blQuotaUser
-  = lens _blQuotaUser (\ s a -> s{_blQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-blPrettyPrint :: Lens' BeaconsList' Bool
-blPrettyPrint
-  = lens _blPrettyPrint
-      (\ s a -> s{_blPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 blUploadProtocol :: Lens' BeaconsList' (Maybe Text)
@@ -248,21 +205,10 @@ blBearerToken
   = lens _blBearerToken
       (\ s a -> s{_blBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-blKey :: Lens' BeaconsList' (Maybe AuthKey)
-blKey = lens _blKey (\ s a -> s{_blKey = a})
-
 -- | A pagination token obtained from a previous request to list beacons.
 blPageToken :: Lens' BeaconsList' (Maybe Text)
 blPageToken
   = lens _blPageToken (\ s a -> s{_blPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-blOAuthToken :: Lens' BeaconsList' (Maybe OAuthToken)
-blOAuthToken
-  = lens _blOAuthToken (\ s a -> s{_blOAuthToken = a})
 
 -- | The maximum number of records to return for this request, up to a
 -- server-defined upper limit.
@@ -270,23 +216,14 @@ blPageSize :: Lens' BeaconsList' (Maybe Int32)
 blPageSize
   = lens _blPageSize (\ s a -> s{_blPageSize = a})
 
--- | Selector specifying which fields to include in a partial response.
-blFields :: Lens' BeaconsList' (Maybe Text)
-blFields = lens _blFields (\ s a -> s{_blFields = a})
-
 -- | JSONP
 blCallback :: Lens' BeaconsList' (Maybe Text)
 blCallback
   = lens _blCallback (\ s a -> s{_blCallback = a})
 
-instance GoogleAuth BeaconsList' where
-        _AuthKey = blKey . _Just
-        _AuthToken = blOAuthToken . _Just
-
 instance GoogleRequest BeaconsList' where
         type Rs BeaconsList' = ListBeaconsResponse
-        request = requestWith proximityBeaconRequest
-        requestWith rq BeaconsList'{..}
+        requestClient BeaconsList'{..}
           = go _blXgafv _blUploadProtocol (Just _blPp)
               _blAccessToken
               _blUploadType
@@ -295,11 +232,8 @@ instance GoogleRequest BeaconsList' where
               _blPageToken
               _blPageSize
               _blCallback
-              _blQuotaUser
-              (Just _blPrettyPrint)
-              _blFields
-              _blKey
-              _blOAuthToken
               (Just AltJSON)
+              proximityBeaconService
           where go
-                  = clientBuild (Proxy :: Proxy BeaconsListResource) rq
+                  = buildClient (Proxy :: Proxy BeaconsListResource)
+                      mempty

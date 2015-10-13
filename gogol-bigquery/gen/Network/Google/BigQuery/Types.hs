@@ -15,8 +15,17 @@
 --
 module Network.Google.BigQuery.Types
     (
-    -- * Service Request
-      bigQueryRequest
+    -- * Service Configuration
+      bigQueryService
+
+    -- * OAuth Scopes
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , devstorageReadOnlyScope
+    , bigqueryInsertdataScope
+    , devstorageReadWriteScope
+    , bigqueryScope
+    , devstorageFullControlScope
 
     -- * JobReference
     , JobReference
@@ -465,7 +474,36 @@ import           Network.Google.BigQuery.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the BigQuery API. This contains the host and root path used as a starting point for constructing service requests.
-bigQueryRequest :: RequestBuilder
-bigQueryRequest
-  = defaultRequest "https://www.googleapis.com/"
+bigQueryService :: Service
+bigQueryService
+  = defaultService (ServiceId "bigquery:v2")
+      "www.googleapis.com"
       "bigquery/v2/"
+
+-- | View your data across Google Cloud Platform services
+cloudPlatformReadOnlyScope :: OAuthScope
+cloudPlatformReadOnlyScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform.read-only";
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: OAuthScope
+cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";
+
+-- | View your data in Google Cloud Storage
+devstorageReadOnlyScope :: OAuthScope
+devstorageReadOnlyScope = OAuthScope "https://www.googleapis.com/auth/devstorage.read_only";
+
+-- | Insert data into Google BigQuery
+bigqueryInsertdataScope :: OAuthScope
+bigqueryInsertdataScope = OAuthScope "https://www.googleapis.com/auth/bigquery.insertdata";
+
+-- | Manage your data in Google Cloud Storage
+devstorageReadWriteScope :: OAuthScope
+devstorageReadWriteScope = OAuthScope "https://www.googleapis.com/auth/devstorage.read_write";
+
+-- | View and manage your data in Google BigQuery
+bigqueryScope :: OAuthScope
+bigqueryScope = OAuthScope "https://www.googleapis.com/auth/bigquery";
+
+-- | Manage your data and permissions in Google Cloud Storage
+devstorageFullControlScope :: OAuthScope
+devstorageFullControlScope = OAuthScope "https://www.googleapis.com/auth/devstorage.full_control";

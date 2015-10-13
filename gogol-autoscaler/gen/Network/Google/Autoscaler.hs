@@ -19,8 +19,11 @@
 -- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference>
 module Network.Google.Autoscaler
     (
+    -- * Service Configuration
+      autoscalerService
+
     -- * API Declaration
-      AutoscalerAPI
+    , AutoscalerAPI
 
     -- * Resources
 

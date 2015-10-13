@@ -19,8 +19,11 @@
 -- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference>
 module Network.Google.Billing
     (
+    -- * Service Configuration
+      billingService
+
     -- * API Declaration
-      BillingAPI
+    , BillingAPI
 
     -- * Resources
 

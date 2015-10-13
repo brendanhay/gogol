@@ -33,13 +33,7 @@ module Network.Google.Resource.Compute.BackendServices.Delete
     , BackendServicesDelete'
 
     -- * Request Lenses
-    , bsdQuotaUser
-    , bsdPrettyPrint
     , bsdProject
-    , bsdUserIP
-    , bsdKey
-    , bsdOAuthToken
-    , bsdFields
     , bsdBackendService
     ) where
 
@@ -53,25 +47,13 @@ type BackendServicesDeleteResource =
        "global" :>
          "backendServices" :>
            Capture "backendService" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+             QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified BackendService resource.
 --
 -- /See:/ 'backendServicesDelete'' smart constructor.
 data BackendServicesDelete' = BackendServicesDelete'
-    { _bsdQuotaUser      :: !(Maybe Text)
-    , _bsdPrettyPrint    :: !Bool
-    , _bsdProject        :: !Text
-    , _bsdUserIP         :: !(Maybe Text)
-    , _bsdKey            :: !(Maybe AuthKey)
-    , _bsdOAuthToken     :: !(Maybe OAuthToken)
-    , _bsdFields         :: !(Maybe Text)
+    { _bsdProject        :: !Text
     , _bsdBackendService :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,19 +61,7 @@ data BackendServicesDelete' = BackendServicesDelete'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bsdQuotaUser'
---
--- * 'bsdPrettyPrint'
---
 -- * 'bsdProject'
---
--- * 'bsdUserIP'
---
--- * 'bsdKey'
---
--- * 'bsdOAuthToken'
---
--- * 'bsdFields'
 --
 -- * 'bsdBackendService'
 backendServicesDelete'
@@ -100,56 +70,14 @@ backendServicesDelete'
     -> BackendServicesDelete'
 backendServicesDelete' pBsdProject_ pBsdBackendService_ =
     BackendServicesDelete'
-    { _bsdQuotaUser = Nothing
-    , _bsdPrettyPrint = True
-    , _bsdProject = pBsdProject_
-    , _bsdUserIP = Nothing
-    , _bsdKey = Nothing
-    , _bsdOAuthToken = Nothing
-    , _bsdFields = Nothing
+    { _bsdProject = pBsdProject_
     , _bsdBackendService = pBsdBackendService_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-bsdQuotaUser :: Lens' BackendServicesDelete' (Maybe Text)
-bsdQuotaUser
-  = lens _bsdQuotaUser (\ s a -> s{_bsdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-bsdPrettyPrint :: Lens' BackendServicesDelete' Bool
-bsdPrettyPrint
-  = lens _bsdPrettyPrint
-      (\ s a -> s{_bsdPrettyPrint = a})
 
 -- | Name of the project scoping this request.
 bsdProject :: Lens' BackendServicesDelete' Text
 bsdProject
   = lens _bsdProject (\ s a -> s{_bsdProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-bsdUserIP :: Lens' BackendServicesDelete' (Maybe Text)
-bsdUserIP
-  = lens _bsdUserIP (\ s a -> s{_bsdUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-bsdKey :: Lens' BackendServicesDelete' (Maybe AuthKey)
-bsdKey = lens _bsdKey (\ s a -> s{_bsdKey = a})
-
--- | OAuth 2.0 token for the current user.
-bsdOAuthToken :: Lens' BackendServicesDelete' (Maybe OAuthToken)
-bsdOAuthToken
-  = lens _bsdOAuthToken
-      (\ s a -> s{_bsdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-bsdFields :: Lens' BackendServicesDelete' (Maybe Text)
-bsdFields
-  = lens _bsdFields (\ s a -> s{_bsdFields = a})
 
 -- | Name of the BackendService resource to delete.
 bsdBackendService :: Lens' BackendServicesDelete' Text
@@ -157,22 +85,12 @@ bsdBackendService
   = lens _bsdBackendService
       (\ s a -> s{_bsdBackendService = a})
 
-instance GoogleAuth BackendServicesDelete' where
-        _AuthKey = bsdKey . _Just
-        _AuthToken = bsdOAuthToken . _Just
-
 instance GoogleRequest BackendServicesDelete' where
         type Rs BackendServicesDelete' = Operation
-        request = requestWith computeRequest
-        requestWith rq BackendServicesDelete'{..}
-          = go _bsdProject _bsdBackendService _bsdQuotaUser
-              (Just _bsdPrettyPrint)
-              _bsdUserIP
-              _bsdFields
-              _bsdKey
-              _bsdOAuthToken
-              (Just AltJSON)
+        requestClient BackendServicesDelete'{..}
+          = go _bsdProject _bsdBackendService (Just AltJSON)
+              computeService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy BackendServicesDeleteResource)
-                      rq
+                      mempty

@@ -33,20 +33,14 @@ module Network.Google.Resource.Storage.Objects.WatchAll
     , ObjectsWatchAll'
 
     -- * Request Lenses
-    , owaQuotaUser
-    , owaPrettyPrint
     , owaPrefix
-    , owaUserIP
     , owaBucket
     , owaPayload
     , owaVersions
-    , owaKey
     , owaProjection
     , owaPageToken
-    , owaOAuthToken
     , owaDelimiter
     , owaMaxResults
-    , owaFields
     ) where
 
 import           Network.Google.Prelude
@@ -65,47 +59,28 @@ type ObjectsWatchAllResource =
                    QueryParam "pageToken" Text :>
                      QueryParam "delimiter" Text :>
                        QueryParam "maxResults" Word32 :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "key" AuthKey :>
-                                   Header "Authorization" OAuthToken :>
-                                     QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] Channel :>
-                                         Post '[JSON] Channel
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
 -- | Watch for changes on all objects in a bucket.
 --
 -- /See:/ 'objectsWatchAll'' smart constructor.
 data ObjectsWatchAll' = ObjectsWatchAll'
-    { _owaQuotaUser   :: !(Maybe Text)
-    , _owaPrettyPrint :: !Bool
-    , _owaPrefix      :: !(Maybe Text)
-    , _owaUserIP      :: !(Maybe Text)
-    , _owaBucket      :: !Text
-    , _owaPayload     :: !Channel
-    , _owaVersions    :: !(Maybe Bool)
-    , _owaKey         :: !(Maybe AuthKey)
-    , _owaProjection  :: !(Maybe ObjectsWatchAllProjection)
-    , _owaPageToken   :: !(Maybe Text)
-    , _owaOAuthToken  :: !(Maybe OAuthToken)
-    , _owaDelimiter   :: !(Maybe Text)
-    , _owaMaxResults  :: !(Maybe Word32)
-    , _owaFields      :: !(Maybe Text)
+    { _owaPrefix     :: !(Maybe Text)
+    , _owaBucket     :: !Text
+    , _owaPayload    :: !Channel
+    , _owaVersions   :: !(Maybe Bool)
+    , _owaProjection :: !(Maybe ObjectsWatchAllProjection)
+    , _owaPageToken  :: !(Maybe Text)
+    , _owaDelimiter  :: !(Maybe Text)
+    , _owaMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsWatchAll'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'owaQuotaUser'
---
--- * 'owaPrettyPrint'
---
 -- * 'owaPrefix'
---
--- * 'owaUserIP'
 --
 -- * 'owaBucket'
 --
@@ -113,64 +88,33 @@ data ObjectsWatchAll' = ObjectsWatchAll'
 --
 -- * 'owaVersions'
 --
--- * 'owaKey'
---
 -- * 'owaProjection'
 --
 -- * 'owaPageToken'
 --
--- * 'owaOAuthToken'
---
 -- * 'owaDelimiter'
 --
 -- * 'owaMaxResults'
---
--- * 'owaFields'
 objectsWatchAll'
     :: Text -- ^ 'bucket'
     -> Channel -- ^ 'payload'
     -> ObjectsWatchAll'
 objectsWatchAll' pOwaBucket_ pOwaPayload_ =
     ObjectsWatchAll'
-    { _owaQuotaUser = Nothing
-    , _owaPrettyPrint = True
-    , _owaPrefix = Nothing
-    , _owaUserIP = Nothing
+    { _owaPrefix = Nothing
     , _owaBucket = pOwaBucket_
     , _owaPayload = pOwaPayload_
     , _owaVersions = Nothing
-    , _owaKey = Nothing
     , _owaProjection = Nothing
     , _owaPageToken = Nothing
-    , _owaOAuthToken = Nothing
     , _owaDelimiter = Nothing
     , _owaMaxResults = Nothing
-    , _owaFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-owaQuotaUser :: Lens' ObjectsWatchAll' (Maybe Text)
-owaQuotaUser
-  = lens _owaQuotaUser (\ s a -> s{_owaQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-owaPrettyPrint :: Lens' ObjectsWatchAll' Bool
-owaPrettyPrint
-  = lens _owaPrettyPrint
-      (\ s a -> s{_owaPrettyPrint = a})
 
 -- | Filter results to objects whose names begin with this prefix.
 owaPrefix :: Lens' ObjectsWatchAll' (Maybe Text)
 owaPrefix
   = lens _owaPrefix (\ s a -> s{_owaPrefix = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-owaUserIP :: Lens' ObjectsWatchAll' (Maybe Text)
-owaUserIP
-  = lens _owaUserIP (\ s a -> s{_owaUserIP = a})
 
 -- | Name of the bucket in which to look for objects.
 owaBucket :: Lens' ObjectsWatchAll' Text
@@ -188,12 +132,6 @@ owaVersions :: Lens' ObjectsWatchAll' (Maybe Bool)
 owaVersions
   = lens _owaVersions (\ s a -> s{_owaVersions = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-owaKey :: Lens' ObjectsWatchAll' (Maybe AuthKey)
-owaKey = lens _owaKey (\ s a -> s{_owaKey = a})
-
 -- | Set of properties to return. Defaults to noAcl.
 owaProjection :: Lens' ObjectsWatchAll' (Maybe ObjectsWatchAllProjection)
 owaProjection
@@ -205,12 +143,6 @@ owaProjection
 owaPageToken :: Lens' ObjectsWatchAll' (Maybe Text)
 owaPageToken
   = lens _owaPageToken (\ s a -> s{_owaPageToken = a})
-
--- | OAuth 2.0 token for the current user.
-owaOAuthToken :: Lens' ObjectsWatchAll' (Maybe OAuthToken)
-owaOAuthToken
-  = lens _owaOAuthToken
-      (\ s a -> s{_owaOAuthToken = a})
 
 -- | Returns results in a directory-like mode. items will contain only
 -- objects whose names, aside from the prefix, do not contain delimiter.
@@ -229,33 +161,18 @@ owaMaxResults
   = lens _owaMaxResults
       (\ s a -> s{_owaMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-owaFields :: Lens' ObjectsWatchAll' (Maybe Text)
-owaFields
-  = lens _owaFields (\ s a -> s{_owaFields = a})
-
-instance GoogleAuth ObjectsWatchAll' where
-        _AuthKey = owaKey . _Just
-        _AuthToken = owaOAuthToken . _Just
-
 instance GoogleRequest ObjectsWatchAll' where
         type Rs ObjectsWatchAll' = Channel
-        request = requestWith storageRequest
-        requestWith rq ObjectsWatchAll'{..}
+        requestClient ObjectsWatchAll'{..}
           = go _owaBucket _owaPrefix _owaVersions
               _owaProjection
               _owaPageToken
               _owaDelimiter
               _owaMaxResults
-              _owaQuotaUser
-              (Just _owaPrettyPrint)
-              _owaUserIP
-              _owaFields
-              _owaKey
-              _owaOAuthToken
               (Just AltJSON)
               _owaPayload
+              storageService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ObjectsWatchAllResource)
-                      rq
+                      mempty

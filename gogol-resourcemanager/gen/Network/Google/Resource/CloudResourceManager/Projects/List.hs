@@ -36,19 +36,14 @@ module Network.Google.Resource.CloudResourceManager.Projects.List
 
     -- * Request Lenses
     , plXgafv
-    , plQuotaUser
-    , plPrettyPrint
     , plUploadProtocol
     , plPp
     , plAccessToken
     , plUploadType
     , plBearerToken
-    , plKey
     , plFilter
     , plPageToken
-    , plOAuthToken
     , plPageSize
-    , plFields
     , plCallback
     ) where
 
@@ -70,13 +65,8 @@ type ProjectsListResource =
                        QueryParam "pageToken" Text :>
                          QueryParam "pageSize" Int32 :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] ListProjectsResponse
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListProjectsResponse
 
 -- | Lists projects that are visible to the user and satisfy the specified
 -- filter. This method returns projects in an unspecified order. New
@@ -85,19 +75,14 @@ type ProjectsListResource =
 -- /See:/ 'projectsList'' smart constructor.
 data ProjectsList' = ProjectsList'
     { _plXgafv          :: !(Maybe Text)
-    , _plQuotaUser      :: !(Maybe Text)
-    , _plPrettyPrint    :: !Bool
     , _plUploadProtocol :: !(Maybe Text)
     , _plPp             :: !Bool
     , _plAccessToken    :: !(Maybe Text)
     , _plUploadType     :: !(Maybe Text)
     , _plBearerToken    :: !(Maybe Text)
-    , _plKey            :: !(Maybe AuthKey)
     , _plFilter         :: !(Maybe Text)
     , _plPageToken      :: !(Maybe Text)
-    , _plOAuthToken     :: !(Maybe OAuthToken)
     , _plPageSize       :: !(Maybe Int32)
-    , _plFields         :: !(Maybe Text)
     , _plCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -106,10 +91,6 @@ data ProjectsList' = ProjectsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'plXgafv'
---
--- * 'plQuotaUser'
---
--- * 'plPrettyPrint'
 --
 -- * 'plUploadProtocol'
 --
@@ -121,17 +102,11 @@ data ProjectsList' = ProjectsList'
 --
 -- * 'plBearerToken'
 --
--- * 'plKey'
---
 -- * 'plFilter'
 --
 -- * 'plPageToken'
 --
--- * 'plOAuthToken'
---
 -- * 'plPageSize'
---
--- * 'plFields'
 --
 -- * 'plCallback'
 projectsList'
@@ -139,38 +114,20 @@ projectsList'
 projectsList' =
     ProjectsList'
     { _plXgafv = Nothing
-    , _plQuotaUser = Nothing
-    , _plPrettyPrint = True
     , _plUploadProtocol = Nothing
     , _plPp = True
     , _plAccessToken = Nothing
     , _plUploadType = Nothing
     , _plBearerToken = Nothing
-    , _plKey = Nothing
     , _plFilter = Nothing
     , _plPageToken = Nothing
-    , _plOAuthToken = Nothing
     , _plPageSize = Nothing
-    , _plFields = Nothing
     , _plCallback = Nothing
     }
 
 -- | V1 error format.
 plXgafv :: Lens' ProjectsList' (Maybe Text)
 plXgafv = lens _plXgafv (\ s a -> s{_plXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-plQuotaUser :: Lens' ProjectsList' (Maybe Text)
-plQuotaUser
-  = lens _plQuotaUser (\ s a -> s{_plQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-plPrettyPrint :: Lens' ProjectsList' Bool
-plPrettyPrint
-  = lens _plPrettyPrint
-      (\ s a -> s{_plPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 plUploadProtocol :: Lens' ProjectsList' (Maybe Text)
@@ -199,12 +156,6 @@ plBearerToken
   = lens _plBearerToken
       (\ s a -> s{_plBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-plKey :: Lens' ProjectsList' (Maybe AuthKey)
-plKey = lens _plKey (\ s a -> s{_plKey = a})
-
 -- | An expression for filtering the results of the request. Filter rules are
 -- case insensitive. The fields eligible for filtering are: + \`name\` +
 -- \`id\` + labels.key where *key* is the name of a label Some examples of
@@ -226,11 +177,6 @@ plPageToken :: Lens' ProjectsList' (Maybe Text)
 plPageToken
   = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-plOAuthToken :: Lens' ProjectsList' (Maybe OAuthToken)
-plOAuthToken
-  = lens _plOAuthToken (\ s a -> s{_plOAuthToken = a})
-
 -- | The maximum number of Projects to return in the response. The server can
 -- return fewer projects than requested. If unspecified, server picks an
 -- appropriate default. Note: pagination is not yet supported; the server
@@ -239,23 +185,14 @@ plPageSize :: Lens' ProjectsList' (Maybe Int32)
 plPageSize
   = lens _plPageSize (\ s a -> s{_plPageSize = a})
 
--- | Selector specifying which fields to include in a partial response.
-plFields :: Lens' ProjectsList' (Maybe Text)
-plFields = lens _plFields (\ s a -> s{_plFields = a})
-
 -- | JSONP
 plCallback :: Lens' ProjectsList' (Maybe Text)
 plCallback
   = lens _plCallback (\ s a -> s{_plCallback = a})
 
-instance GoogleAuth ProjectsList' where
-        _AuthKey = plKey . _Just
-        _AuthToken = plOAuthToken . _Just
-
 instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ListProjectsResponse
-        request = requestWith resourceManagerRequest
-        requestWith rq ProjectsList'{..}
+        requestClient ProjectsList'{..}
           = go _plXgafv _plUploadProtocol (Just _plPp)
               _plAccessToken
               _plUploadType
@@ -264,12 +201,8 @@ instance GoogleRequest ProjectsList' where
               _plPageToken
               _plPageSize
               _plCallback
-              _plQuotaUser
-              (Just _plPrettyPrint)
-              _plFields
-              _plKey
-              _plOAuthToken
               (Just AltJSON)
+              resourceManagerService
           where go
-                  = clientBuild (Proxy :: Proxy ProjectsListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ProjectsListResource)
+                      mempty

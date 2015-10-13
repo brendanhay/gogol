@@ -34,11 +34,8 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.List
 
     -- * Request Lenses
     , pglPlacementStrategyIds
-    , pglQuotaUser
-    , pglPrettyPrint
     , pglContentCategoryIds
     , pglMaxEndDate
-    , pglUserIP
     , pglCampaignIds
     , pglPricingTypes
     , pglSearchString
@@ -47,18 +44,15 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.List
     , pglPlacementGroupType
     , pglDirectorySiteIds
     , pglSortOrder
-    , pglKey
     , pglSiteIds
     , pglPageToken
     , pglSortField
     , pglMaxStartDate
-    , pglOAuthToken
     , pglAdvertiserIds
     , pglMinStartDate
     , pglArchived
     , pglMaxResults
     , pglMinEndDate
-    , pglFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -96,35 +90,17 @@ type PlacementGroupsListResource =
                                            QueryParam "archived" Bool :>
                                              QueryParam "maxResults" Int32 :>
                                                QueryParam "minEndDate" Text :>
-                                                 QueryParam "quotaUser" Text :>
-                                                   QueryParam "prettyPrint" Bool
-                                                     :>
-                                                     QueryParam "userIp" Text :>
-                                                       QueryParam "fields" Text
-                                                         :>
-                                                         QueryParam "key"
-                                                           AuthKey
-                                                           :>
-                                                           Header
-                                                             "Authorization"
-                                                             OAuthToken
-                                                             :>
-                                                             QueryParam "alt"
-                                                               AltJSON
-                                                               :>
-                                                               Get '[JSON]
-                                                                 PlacementGroupsListResponse
+                                                 QueryParam "alt" AltJSON :>
+                                                   Get '[JSON]
+                                                     PlacementGroupsListResponse
 
 -- | Retrieves a list of placement groups, possibly filtered.
 --
 -- /See:/ 'placementGroupsList'' smart constructor.
 data PlacementGroupsList' = PlacementGroupsList'
     { _pglPlacementStrategyIds :: !(Maybe [Int64])
-    , _pglQuotaUser            :: !(Maybe Text)
-    , _pglPrettyPrint          :: !Bool
     , _pglContentCategoryIds   :: !(Maybe [Int64])
     , _pglMaxEndDate           :: !(Maybe Text)
-    , _pglUserIP               :: !(Maybe Text)
     , _pglCampaignIds          :: !(Maybe [Int64])
     , _pglPricingTypes         :: !(Maybe [PlacementGroupsListPricingTypes])
     , _pglSearchString         :: !(Maybe Text)
@@ -133,18 +109,15 @@ data PlacementGroupsList' = PlacementGroupsList'
     , _pglPlacementGroupType   :: !(Maybe PlacementGroupsListPlacementGroupType)
     , _pglDirectorySiteIds     :: !(Maybe [Int64])
     , _pglSortOrder            :: !(Maybe PlacementGroupsListSortOrder)
-    , _pglKey                  :: !(Maybe AuthKey)
     , _pglSiteIds              :: !(Maybe [Int64])
     , _pglPageToken            :: !(Maybe Text)
     , _pglSortField            :: !(Maybe PlacementGroupsListSortField)
     , _pglMaxStartDate         :: !(Maybe Text)
-    , _pglOAuthToken           :: !(Maybe OAuthToken)
     , _pglAdvertiserIds        :: !(Maybe [Int64])
     , _pglMinStartDate         :: !(Maybe Text)
     , _pglArchived             :: !(Maybe Bool)
     , _pglMaxResults           :: !(Maybe Int32)
     , _pglMinEndDate           :: !(Maybe Text)
-    , _pglFields               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementGroupsList'' with the minimum fields required to make a request.
@@ -153,15 +126,9 @@ data PlacementGroupsList' = PlacementGroupsList'
 --
 -- * 'pglPlacementStrategyIds'
 --
--- * 'pglQuotaUser'
---
--- * 'pglPrettyPrint'
---
 -- * 'pglContentCategoryIds'
 --
 -- * 'pglMaxEndDate'
---
--- * 'pglUserIP'
 --
 -- * 'pglCampaignIds'
 --
@@ -179,8 +146,6 @@ data PlacementGroupsList' = PlacementGroupsList'
 --
 -- * 'pglSortOrder'
 --
--- * 'pglKey'
---
 -- * 'pglSiteIds'
 --
 -- * 'pglPageToken'
@@ -188,8 +153,6 @@ data PlacementGroupsList' = PlacementGroupsList'
 -- * 'pglSortField'
 --
 -- * 'pglMaxStartDate'
---
--- * 'pglOAuthToken'
 --
 -- * 'pglAdvertiserIds'
 --
@@ -200,19 +163,14 @@ data PlacementGroupsList' = PlacementGroupsList'
 -- * 'pglMaxResults'
 --
 -- * 'pglMinEndDate'
---
--- * 'pglFields'
 placementGroupsList'
     :: Int64 -- ^ 'profileId'
     -> PlacementGroupsList'
 placementGroupsList' pPglProFileId_ =
     PlacementGroupsList'
     { _pglPlacementStrategyIds = Nothing
-    , _pglQuotaUser = Nothing
-    , _pglPrettyPrint = True
     , _pglContentCategoryIds = Nothing
     , _pglMaxEndDate = Nothing
-    , _pglUserIP = Nothing
     , _pglCampaignIds = Nothing
     , _pglPricingTypes = Nothing
     , _pglSearchString = Nothing
@@ -221,18 +179,15 @@ placementGroupsList' pPglProFileId_ =
     , _pglPlacementGroupType = Nothing
     , _pglDirectorySiteIds = Nothing
     , _pglSortOrder = Nothing
-    , _pglKey = Nothing
     , _pglSiteIds = Nothing
     , _pglPageToken = Nothing
     , _pglSortField = Nothing
     , _pglMaxStartDate = Nothing
-    , _pglOAuthToken = Nothing
     , _pglAdvertiserIds = Nothing
     , _pglMinStartDate = Nothing
     , _pglArchived = Nothing
     , _pglMaxResults = Nothing
     , _pglMinEndDate = Nothing
-    , _pglFields = Nothing
     }
 
 -- | Select only placement groups that are associated with these placement
@@ -243,19 +198,6 @@ pglPlacementStrategyIds
       (\ s a -> s{_pglPlacementStrategyIds = a})
       . _Default
       . _Coerce
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-pglQuotaUser :: Lens' PlacementGroupsList' (Maybe Text)
-pglQuotaUser
-  = lens _pglQuotaUser (\ s a -> s{_pglQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-pglPrettyPrint :: Lens' PlacementGroupsList' Bool
-pglPrettyPrint
-  = lens _pglPrettyPrint
-      (\ s a -> s{_pglPrettyPrint = a})
 
 -- | Select only placement groups that are associated with these content
 -- categories.
@@ -273,12 +215,6 @@ pglMaxEndDate :: Lens' PlacementGroupsList' (Maybe Text)
 pglMaxEndDate
   = lens _pglMaxEndDate
       (\ s a -> s{_pglMaxEndDate = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-pglUserIP :: Lens' PlacementGroupsList' (Maybe Text)
-pglUserIP
-  = lens _pglUserIP (\ s a -> s{_pglUserIP = a})
 
 -- | Select only placement groups that belong to these campaigns.
 pglCampaignIds :: Lens' PlacementGroupsList' [Int64]
@@ -345,12 +281,6 @@ pglSortOrder :: Lens' PlacementGroupsList' (Maybe PlacementGroupsListSortOrder)
 pglSortOrder
   = lens _pglSortOrder (\ s a -> s{_pglSortOrder = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-pglKey :: Lens' PlacementGroupsList' (Maybe AuthKey)
-pglKey = lens _pglKey (\ s a -> s{_pglKey = a})
-
 -- | Select only placement groups that are associated with these sites.
 pglSiteIds :: Lens' PlacementGroupsList' [Int64]
 pglSiteIds
@@ -375,12 +305,6 @@ pglMaxStartDate :: Lens' PlacementGroupsList' (Maybe Text)
 pglMaxStartDate
   = lens _pglMaxStartDate
       (\ s a -> s{_pglMaxStartDate = a})
-
--- | OAuth 2.0 token for the current user.
-pglOAuthToken :: Lens' PlacementGroupsList' (Maybe OAuthToken)
-pglOAuthToken
-  = lens _pglOAuthToken
-      (\ s a -> s{_pglOAuthToken = a})
 
 -- | Select only placement groups that belong to these advertisers.
 pglAdvertiserIds :: Lens' PlacementGroupsList' [Int64]
@@ -418,20 +342,10 @@ pglMinEndDate
   = lens _pglMinEndDate
       (\ s a -> s{_pglMinEndDate = a})
 
--- | Selector specifying which fields to include in a partial response.
-pglFields :: Lens' PlacementGroupsList' (Maybe Text)
-pglFields
-  = lens _pglFields (\ s a -> s{_pglFields = a})
-
-instance GoogleAuth PlacementGroupsList' where
-        _AuthKey = pglKey . _Just
-        _AuthToken = pglOAuthToken . _Just
-
 instance GoogleRequest PlacementGroupsList' where
         type Rs PlacementGroupsList' =
              PlacementGroupsListResponse
-        request = requestWith dFAReportingRequest
-        requestWith rq PlacementGroupsList'{..}
+        requestClient PlacementGroupsList'{..}
           = go _pglProFileId
               (_pglPlacementStrategyIds ^. _Default)
               (_pglContentCategoryIds ^. _Default)
@@ -452,14 +366,9 @@ instance GoogleRequest PlacementGroupsList' where
               _pglArchived
               _pglMaxResults
               _pglMinEndDate
-              _pglQuotaUser
-              (Just _pglPrettyPrint)
-              _pglUserIP
-              _pglFields
-              _pglKey
-              _pglOAuthToken
               (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy PlacementGroupsListResource)
-                      rq
+                      mempty

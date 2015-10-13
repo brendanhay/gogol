@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference>
 module Network.Google.Mirror
     (
+    -- * Service Configuration
+      mirrorService
+
     -- * API Declaration
-      MirrorAPI
+    , MirrorAPI
 
     -- * Resources
 

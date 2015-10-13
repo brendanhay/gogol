@@ -33,15 +33,9 @@ module Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
     , MyLibraryReadingPositionsGet'
 
     -- * Request Lenses
-    , mlrpgQuotaUser
-    , mlrpgPrettyPrint
-    , mlrpgUserIP
     , mlrpgContentVersion
-    , mlrpgKey
     , mlrpgVolumeId
     , mlrpgSource
-    , mlrpgOAuthToken
-    , mlrpgFields
     ) where
 
 import           Network.Google.Books.Types
@@ -55,98 +49,42 @@ type MyLibraryReadingPositionsGetResource =
          Capture "volumeId" Text :>
            QueryParam "contentVersion" Text :>
              QueryParam "source" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ReadingPosition
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] ReadingPosition
 
 -- | Retrieves my reading position information for a volume.
 --
 -- /See:/ 'myLibraryReadingPositionsGet'' smart constructor.
 data MyLibraryReadingPositionsGet' = MyLibraryReadingPositionsGet'
-    { _mlrpgQuotaUser      :: !(Maybe Text)
-    , _mlrpgPrettyPrint    :: !Bool
-    , _mlrpgUserIP         :: !(Maybe Text)
-    , _mlrpgContentVersion :: !(Maybe Text)
-    , _mlrpgKey            :: !(Maybe AuthKey)
+    { _mlrpgContentVersion :: !(Maybe Text)
     , _mlrpgVolumeId       :: !Text
     , _mlrpgSource         :: !(Maybe Text)
-    , _mlrpgOAuthToken     :: !(Maybe OAuthToken)
-    , _mlrpgFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyLibraryReadingPositionsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mlrpgQuotaUser'
---
--- * 'mlrpgPrettyPrint'
---
--- * 'mlrpgUserIP'
---
 -- * 'mlrpgContentVersion'
---
--- * 'mlrpgKey'
 --
 -- * 'mlrpgVolumeId'
 --
 -- * 'mlrpgSource'
---
--- * 'mlrpgOAuthToken'
---
--- * 'mlrpgFields'
 myLibraryReadingPositionsGet'
     :: Text -- ^ 'volumeId'
     -> MyLibraryReadingPositionsGet'
 myLibraryReadingPositionsGet' pMlrpgVolumeId_ =
     MyLibraryReadingPositionsGet'
-    { _mlrpgQuotaUser = Nothing
-    , _mlrpgPrettyPrint = True
-    , _mlrpgUserIP = Nothing
-    , _mlrpgContentVersion = Nothing
-    , _mlrpgKey = Nothing
+    { _mlrpgContentVersion = Nothing
     , _mlrpgVolumeId = pMlrpgVolumeId_
     , _mlrpgSource = Nothing
-    , _mlrpgOAuthToken = Nothing
-    , _mlrpgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mlrpgQuotaUser :: Lens' MyLibraryReadingPositionsGet' (Maybe Text)
-mlrpgQuotaUser
-  = lens _mlrpgQuotaUser
-      (\ s a -> s{_mlrpgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mlrpgPrettyPrint :: Lens' MyLibraryReadingPositionsGet' Bool
-mlrpgPrettyPrint
-  = lens _mlrpgPrettyPrint
-      (\ s a -> s{_mlrpgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mlrpgUserIP :: Lens' MyLibraryReadingPositionsGet' (Maybe Text)
-mlrpgUserIP
-  = lens _mlrpgUserIP (\ s a -> s{_mlrpgUserIP = a})
 
 -- | Volume content version for which this reading position is requested.
 mlrpgContentVersion :: Lens' MyLibraryReadingPositionsGet' (Maybe Text)
 mlrpgContentVersion
   = lens _mlrpgContentVersion
       (\ s a -> s{_mlrpgContentVersion = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mlrpgKey :: Lens' MyLibraryReadingPositionsGet' (Maybe AuthKey)
-mlrpgKey = lens _mlrpgKey (\ s a -> s{_mlrpgKey = a})
 
 -- | ID of volume for which to retrieve a reading position.
 mlrpgVolumeId :: Lens' MyLibraryReadingPositionsGet' Text
@@ -159,37 +97,15 @@ mlrpgSource :: Lens' MyLibraryReadingPositionsGet' (Maybe Text)
 mlrpgSource
   = lens _mlrpgSource (\ s a -> s{_mlrpgSource = a})
 
--- | OAuth 2.0 token for the current user.
-mlrpgOAuthToken :: Lens' MyLibraryReadingPositionsGet' (Maybe OAuthToken)
-mlrpgOAuthToken
-  = lens _mlrpgOAuthToken
-      (\ s a -> s{_mlrpgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-mlrpgFields :: Lens' MyLibraryReadingPositionsGet' (Maybe Text)
-mlrpgFields
-  = lens _mlrpgFields (\ s a -> s{_mlrpgFields = a})
-
-instance GoogleAuth MyLibraryReadingPositionsGet'
-         where
-        _AuthKey = mlrpgKey . _Just
-        _AuthToken = mlrpgOAuthToken . _Just
-
 instance GoogleRequest MyLibraryReadingPositionsGet'
          where
         type Rs MyLibraryReadingPositionsGet' =
              ReadingPosition
-        request = requestWith booksRequest
-        requestWith rq MyLibraryReadingPositionsGet'{..}
+        requestClient MyLibraryReadingPositionsGet'{..}
           = go _mlrpgVolumeId _mlrpgContentVersion _mlrpgSource
-              _mlrpgQuotaUser
-              (Just _mlrpgPrettyPrint)
-              _mlrpgUserIP
-              _mlrpgFields
-              _mlrpgKey
-              _mlrpgOAuthToken
               (Just AltJSON)
+              booksService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy MyLibraryReadingPositionsGetResource)
-                      rq
+                      mempty

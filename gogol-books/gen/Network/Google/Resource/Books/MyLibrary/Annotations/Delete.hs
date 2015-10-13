@@ -33,14 +33,8 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.Delete
     , MyLibraryAnnotationsDelete'
 
     -- * Request Lenses
-    , mladQuotaUser
-    , mladPrettyPrint
-    , mladUserIP
-    , mladKey
     , mladAnnotationId
     , mladSource
-    , mladOAuthToken
-    , mladFields
     ) where
 
 import           Network.Google.Books.Types
@@ -53,87 +47,31 @@ type MyLibraryAnnotationsDeleteResource =
        "annotations" :>
          Capture "annotationId" Text :>
            QueryParam "source" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fields" Text :>
-                     QueryParam "key" AuthKey :>
-                       Header "Authorization" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an annotation.
 --
 -- /See:/ 'myLibraryAnnotationsDelete'' smart constructor.
 data MyLibraryAnnotationsDelete' = MyLibraryAnnotationsDelete'
-    { _mladQuotaUser    :: !(Maybe Text)
-    , _mladPrettyPrint  :: !Bool
-    , _mladUserIP       :: !(Maybe Text)
-    , _mladKey          :: !(Maybe AuthKey)
-    , _mladAnnotationId :: !Text
+    { _mladAnnotationId :: !Text
     , _mladSource       :: !(Maybe Text)
-    , _mladOAuthToken   :: !(Maybe OAuthToken)
-    , _mladFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyLibraryAnnotationsDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mladQuotaUser'
---
--- * 'mladPrettyPrint'
---
--- * 'mladUserIP'
---
--- * 'mladKey'
---
 -- * 'mladAnnotationId'
 --
 -- * 'mladSource'
---
--- * 'mladOAuthToken'
---
--- * 'mladFields'
 myLibraryAnnotationsDelete'
     :: Text -- ^ 'annotationId'
     -> MyLibraryAnnotationsDelete'
 myLibraryAnnotationsDelete' pMladAnnotationId_ =
     MyLibraryAnnotationsDelete'
-    { _mladQuotaUser = Nothing
-    , _mladPrettyPrint = True
-    , _mladUserIP = Nothing
-    , _mladKey = Nothing
-    , _mladAnnotationId = pMladAnnotationId_
+    { _mladAnnotationId = pMladAnnotationId_
     , _mladSource = Nothing
-    , _mladOAuthToken = Nothing
-    , _mladFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mladQuotaUser :: Lens' MyLibraryAnnotationsDelete' (Maybe Text)
-mladQuotaUser
-  = lens _mladQuotaUser
-      (\ s a -> s{_mladQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mladPrettyPrint :: Lens' MyLibraryAnnotationsDelete' Bool
-mladPrettyPrint
-  = lens _mladPrettyPrint
-      (\ s a -> s{_mladPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mladUserIP :: Lens' MyLibraryAnnotationsDelete' (Maybe Text)
-mladUserIP
-  = lens _mladUserIP (\ s a -> s{_mladUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mladKey :: Lens' MyLibraryAnnotationsDelete' (Maybe AuthKey)
-mladKey = lens _mladKey (\ s a -> s{_mladKey = a})
 
 -- | The ID for the annotation to delete.
 mladAnnotationId :: Lens' MyLibraryAnnotationsDelete' Text
@@ -146,34 +84,13 @@ mladSource :: Lens' MyLibraryAnnotationsDelete' (Maybe Text)
 mladSource
   = lens _mladSource (\ s a -> s{_mladSource = a})
 
--- | OAuth 2.0 token for the current user.
-mladOAuthToken :: Lens' MyLibraryAnnotationsDelete' (Maybe OAuthToken)
-mladOAuthToken
-  = lens _mladOAuthToken
-      (\ s a -> s{_mladOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-mladFields :: Lens' MyLibraryAnnotationsDelete' (Maybe Text)
-mladFields
-  = lens _mladFields (\ s a -> s{_mladFields = a})
-
-instance GoogleAuth MyLibraryAnnotationsDelete' where
-        _AuthKey = mladKey . _Just
-        _AuthToken = mladOAuthToken . _Just
-
 instance GoogleRequest MyLibraryAnnotationsDelete'
          where
         type Rs MyLibraryAnnotationsDelete' = ()
-        request = requestWith booksRequest
-        requestWith rq MyLibraryAnnotationsDelete'{..}
-          = go _mladAnnotationId _mladSource _mladQuotaUser
-              (Just _mladPrettyPrint)
-              _mladUserIP
-              _mladFields
-              _mladKey
-              _mladOAuthToken
-              (Just AltJSON)
+        requestClient MyLibraryAnnotationsDelete'{..}
+          = go _mladAnnotationId _mladSource (Just AltJSON)
+              booksService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy MyLibraryAnnotationsDeleteResource)
-                      rq
+                      mempty

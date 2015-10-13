@@ -15,8 +15,11 @@
 --
 module Network.Google.AdExchangeBuyer.Types
     (
-    -- * Service Request
-      adExchangeBuyerRequest
+    -- * Service Configuration
+      adExchangeBuyerService
+
+    -- * OAuth Scopes
+    , adexchangeBuyerScope
 
     -- * BrandDTO
     , BrandDTO
@@ -812,26 +815,26 @@ module Network.Google.AdExchangeBuyer.Types
     -- * MarketplaceOrder
     , MarketplaceOrder
     , marketplaceOrder
-    , marBuyerPrivateData
-    , marIsSetupComplete
-    , marBuyerContacts
-    , marKind
-    , marOriginatorRole
-    , marRevisionNumber
-    , marBilledBuyer
-    , marIsRenegotiating
-    , marHasSellerSignedOff
-    , marSeller
-    , marOrderState
-    , marName
-    , marSellerContacts
-    , marLastUpdaterRole
-    , marLabels
-    , marRevisionTimeMs
-    , marOrderId
-    , marLastUpdaterOrCommentorRole
-    , marHasBuyerSignedOff
-    , marBuyer
+    , mBuyerPrivateData
+    , mIsSetupComplete
+    , mBuyerContacts
+    , mKind
+    , mOriginatorRole
+    , mRevisionNumber
+    , mBilledBuyer
+    , mIsRenegotiating
+    , mHasSellerSignedOff
+    , mSeller
+    , mOrderState
+    , mName
+    , mSellerContacts
+    , mLastUpdaterRole
+    , mLabels
+    , mRevisionTimeMs
+    , mOrderId
+    , mLastUpdaterOrCommentorRole
+    , mHasBuyerSignedOff
+    , mBuyer
 
     -- * AddOrderDealsRequest
     , AddOrderDealsRequest
@@ -853,7 +856,12 @@ import           Network.Google.AdExchangeBuyer.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1.4' of the Ad Exchange Buyer API. This contains the host and root path used as a starting point for constructing service requests.
-adExchangeBuyerRequest :: RequestBuilder
-adExchangeBuyerRequest
-  = defaultRequest "https://www.googleapis.com/"
+adExchangeBuyerService :: Service
+adExchangeBuyerService
+  = defaultService (ServiceId "adexchangebuyer:v1.4")
+      "www.googleapis.com"
       "adexchangebuyer/v1.4/"
+
+-- | Manage your Ad Exchange buyer account configuration
+adexchangeBuyerScope :: OAuthScope
+adexchangeBuyerScope = OAuthScope "https://www.googleapis.com/auth/adexchange.buyer";

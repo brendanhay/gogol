@@ -33,14 +33,8 @@ module Network.Google.Resource.DFAReporting.Creatives.Update
     , CreativesUpdate'
 
     -- * Request Lenses
-    , cuuQuotaUser
-    , cuuPrettyPrint
-    , cuuUserIP
     , cuuProFileId
     , cuuPayload
-    , cuuKey
-    , cuuOAuthToken
-    , cuuFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,82 +46,33 @@ type CreativesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creatives" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Creative :> Put '[JSON] Creative
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] Creative :> Put '[JSON] Creative
 
 -- | Updates an existing creative.
 --
 -- /See:/ 'creativesUpdate'' smart constructor.
 data CreativesUpdate' = CreativesUpdate'
-    { _cuuQuotaUser   :: !(Maybe Text)
-    , _cuuPrettyPrint :: !Bool
-    , _cuuUserIP      :: !(Maybe Text)
-    , _cuuProFileId   :: !Int64
-    , _cuuPayload     :: !Creative
-    , _cuuKey         :: !(Maybe AuthKey)
-    , _cuuOAuthToken  :: !(Maybe OAuthToken)
-    , _cuuFields      :: !(Maybe Text)
+    { _cuuProFileId :: !Int64
+    , _cuuPayload   :: !Creative
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cuuQuotaUser'
---
--- * 'cuuPrettyPrint'
---
--- * 'cuuUserIP'
---
 -- * 'cuuProFileId'
 --
 -- * 'cuuPayload'
---
--- * 'cuuKey'
---
--- * 'cuuOAuthToken'
---
--- * 'cuuFields'
 creativesUpdate'
     :: Int64 -- ^ 'profileId'
     -> Creative -- ^ 'payload'
     -> CreativesUpdate'
 creativesUpdate' pCuuProFileId_ pCuuPayload_ =
     CreativesUpdate'
-    { _cuuQuotaUser = Nothing
-    , _cuuPrettyPrint = True
-    , _cuuUserIP = Nothing
-    , _cuuProFileId = pCuuProFileId_
+    { _cuuProFileId = pCuuProFileId_
     , _cuuPayload = pCuuPayload_
-    , _cuuKey = Nothing
-    , _cuuOAuthToken = Nothing
-    , _cuuFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-cuuQuotaUser :: Lens' CreativesUpdate' (Maybe Text)
-cuuQuotaUser
-  = lens _cuuQuotaUser (\ s a -> s{_cuuQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cuuPrettyPrint :: Lens' CreativesUpdate' Bool
-cuuPrettyPrint
-  = lens _cuuPrettyPrint
-      (\ s a -> s{_cuuPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-cuuUserIP :: Lens' CreativesUpdate' (Maybe Text)
-cuuUserIP
-  = lens _cuuUserIP (\ s a -> s{_cuuUserIP = a})
 
 -- | User profile ID associated with this request.
 cuuProFileId :: Lens' CreativesUpdate' Int64
@@ -139,40 +84,12 @@ cuuPayload :: Lens' CreativesUpdate' Creative
 cuuPayload
   = lens _cuuPayload (\ s a -> s{_cuuPayload = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cuuKey :: Lens' CreativesUpdate' (Maybe AuthKey)
-cuuKey = lens _cuuKey (\ s a -> s{_cuuKey = a})
-
--- | OAuth 2.0 token for the current user.
-cuuOAuthToken :: Lens' CreativesUpdate' (Maybe OAuthToken)
-cuuOAuthToken
-  = lens _cuuOAuthToken
-      (\ s a -> s{_cuuOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cuuFields :: Lens' CreativesUpdate' (Maybe Text)
-cuuFields
-  = lens _cuuFields (\ s a -> s{_cuuFields = a})
-
-instance GoogleAuth CreativesUpdate' where
-        _AuthKey = cuuKey . _Just
-        _AuthToken = cuuOAuthToken . _Just
-
 instance GoogleRequest CreativesUpdate' where
         type Rs CreativesUpdate' = Creative
-        request = requestWith dFAReportingRequest
-        requestWith rq CreativesUpdate'{..}
-          = go _cuuProFileId _cuuQuotaUser
-              (Just _cuuPrettyPrint)
-              _cuuUserIP
-              _cuuFields
-              _cuuKey
-              _cuuOAuthToken
-              (Just AltJSON)
-              _cuuPayload
+        requestClient CreativesUpdate'{..}
+          = go _cuuProFileId (Just AltJSON) _cuuPayload
+              dFAReportingService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CreativesUpdateResource)
-                      rq
+                      mempty

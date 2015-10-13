@@ -36,17 +36,12 @@ module Network.Google.Resource.Partners.ClientMessages.Log
 
     -- * Request Lenses
     , cmlXgafv
-    , cmlQuotaUser
-    , cmlPrettyPrint
     , cmlUploadProtocol
     , cmlPp
     , cmlAccessToken
     , cmlUploadType
     , cmlPayload
     , cmlBearerToken
-    , cmlKey
-    , cmlOAuthToken
-    , cmlFields
     , cmlCallback
     ) where
 
@@ -65,14 +60,9 @@ type ClientMessagesLogResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] LogMessageRequest :>
-                                     Post '[JSON] LogMessageResponse
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] LogMessageRequest :>
+                           Post '[JSON] LogMessageResponse
 
 -- | Logs a generic message from the client, such as \`Failed to render
 -- component\`, \`Profile page is running slow\`, \`More than 500 users
@@ -81,17 +71,12 @@ type ClientMessagesLogResource =
 -- /See:/ 'clientMessagesLog'' smart constructor.
 data ClientMessagesLog' = ClientMessagesLog'
     { _cmlXgafv          :: !(Maybe Text)
-    , _cmlQuotaUser      :: !(Maybe Text)
-    , _cmlPrettyPrint    :: !Bool
     , _cmlUploadProtocol :: !(Maybe Text)
     , _cmlPp             :: !Bool
     , _cmlAccessToken    :: !(Maybe Text)
     , _cmlUploadType     :: !(Maybe Text)
     , _cmlPayload        :: !LogMessageRequest
     , _cmlBearerToken    :: !(Maybe Text)
-    , _cmlKey            :: !(Maybe AuthKey)
-    , _cmlOAuthToken     :: !(Maybe OAuthToken)
-    , _cmlFields         :: !(Maybe Text)
     , _cmlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -100,10 +85,6 @@ data ClientMessagesLog' = ClientMessagesLog'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cmlXgafv'
---
--- * 'cmlQuotaUser'
---
--- * 'cmlPrettyPrint'
 --
 -- * 'cmlUploadProtocol'
 --
@@ -117,12 +98,6 @@ data ClientMessagesLog' = ClientMessagesLog'
 --
 -- * 'cmlBearerToken'
 --
--- * 'cmlKey'
---
--- * 'cmlOAuthToken'
---
--- * 'cmlFields'
---
 -- * 'cmlCallback'
 clientMessagesLog'
     :: LogMessageRequest -- ^ 'payload'
@@ -130,36 +105,18 @@ clientMessagesLog'
 clientMessagesLog' pCmlPayload_ =
     ClientMessagesLog'
     { _cmlXgafv = Nothing
-    , _cmlQuotaUser = Nothing
-    , _cmlPrettyPrint = True
     , _cmlUploadProtocol = Nothing
     , _cmlPp = True
     , _cmlAccessToken = Nothing
     , _cmlUploadType = Nothing
     , _cmlPayload = pCmlPayload_
     , _cmlBearerToken = Nothing
-    , _cmlKey = Nothing
-    , _cmlOAuthToken = Nothing
-    , _cmlFields = Nothing
     , _cmlCallback = Nothing
     }
 
 -- | V1 error format.
 cmlXgafv :: Lens' ClientMessagesLog' (Maybe Text)
 cmlXgafv = lens _cmlXgafv (\ s a -> s{_cmlXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-cmlQuotaUser :: Lens' ClientMessagesLog' (Maybe Text)
-cmlQuotaUser
-  = lens _cmlQuotaUser (\ s a -> s{_cmlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cmlPrettyPrint :: Lens' ClientMessagesLog' Bool
-cmlPrettyPrint
-  = lens _cmlPrettyPrint
-      (\ s a -> s{_cmlPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 cmlUploadProtocol :: Lens' ClientMessagesLog' (Maybe Text)
@@ -194,49 +151,23 @@ cmlBearerToken
   = lens _cmlBearerToken
       (\ s a -> s{_cmlBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cmlKey :: Lens' ClientMessagesLog' (Maybe AuthKey)
-cmlKey = lens _cmlKey (\ s a -> s{_cmlKey = a})
-
--- | OAuth 2.0 token for the current user.
-cmlOAuthToken :: Lens' ClientMessagesLog' (Maybe OAuthToken)
-cmlOAuthToken
-  = lens _cmlOAuthToken
-      (\ s a -> s{_cmlOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cmlFields :: Lens' ClientMessagesLog' (Maybe Text)
-cmlFields
-  = lens _cmlFields (\ s a -> s{_cmlFields = a})
-
 -- | JSONP
 cmlCallback :: Lens' ClientMessagesLog' (Maybe Text)
 cmlCallback
   = lens _cmlCallback (\ s a -> s{_cmlCallback = a})
 
-instance GoogleAuth ClientMessagesLog' where
-        _AuthKey = cmlKey . _Just
-        _AuthToken = cmlOAuthToken . _Just
-
 instance GoogleRequest ClientMessagesLog' where
         type Rs ClientMessagesLog' = LogMessageResponse
-        request = requestWith partnersRequest
-        requestWith rq ClientMessagesLog'{..}
+        requestClient ClientMessagesLog'{..}
           = go _cmlXgafv _cmlUploadProtocol (Just _cmlPp)
               _cmlAccessToken
               _cmlUploadType
               _cmlBearerToken
               _cmlCallback
-              _cmlQuotaUser
-              (Just _cmlPrettyPrint)
-              _cmlFields
-              _cmlKey
-              _cmlOAuthToken
               (Just AltJSON)
               _cmlPayload
+              partnersService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ClientMessagesLogResource)
-                      rq
+                      mempty

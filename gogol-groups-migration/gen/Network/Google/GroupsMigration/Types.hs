@@ -15,8 +15,11 @@
 --
 module Network.Google.GroupsMigration.Types
     (
-    -- * Service Request
-      groupsMigrationRequest
+    -- * Service Configuration
+      groupsMigrationService
+
+    -- * OAuth Scopes
+    , appsGroupsMigrationScope
 
     -- * Groups
     , Groups
@@ -30,7 +33,12 @@ import           Network.Google.GroupsMigration.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Groups Migration API. This contains the host and root path used as a starting point for constructing service requests.
-groupsMigrationRequest :: RequestBuilder
-groupsMigrationRequest
-  = defaultRequest "https://www.googleapis.com/"
+groupsMigrationService :: Service
+groupsMigrationService
+  = defaultService (ServiceId "groupsmigration:v1")
+      "www.googleapis.com"
       "groups/v1/groups/"
+
+-- | Manage messages in groups on your domain
+appsGroupsMigrationScope :: OAuthScope
+appsGroupsMigrationScope = OAuthScope "https://www.googleapis.com/auth/apps.groups.migration";

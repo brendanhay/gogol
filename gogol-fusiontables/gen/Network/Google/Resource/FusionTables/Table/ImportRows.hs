@@ -33,19 +33,13 @@ module Network.Google.Resource.FusionTables.Table.ImportRows
     , TableImportRows'
 
     -- * Request Lenses
-    , tirQuotaUser
-    , tirPrettyPrint
-    , tirUserIP
     , tirStartLine
     , tirEndLine
     , tirMedia
-    , tirKey
-    , tirOAuthToken
     , tirTableId
     , tirDelimiter
     , tirEncoding
     , tirIsStrict
-    , tirFields
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -62,54 +56,32 @@ type TableImportRowsResource =
                QueryParam "delimiter" Text :>
                  QueryParam "encoding" Text :>
                    QueryParam "isStrict" Bool :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] Stream :>
-                                     Post '[JSON] Import
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[OctetStream] RequestBody :>
+                         Post '[JSON] Import
 
 -- | Imports more rows into a table.
 --
 -- /See:/ 'tableImportRows'' smart constructor.
 data TableImportRows' = TableImportRows'
-    { _tirQuotaUser   :: !(Maybe Text)
-    , _tirPrettyPrint :: !Bool
-    , _tirUserIP      :: !(Maybe Text)
-    , _tirStartLine   :: !(Maybe Int32)
-    , _tirEndLine     :: !(Maybe Int32)
-    , _tirMedia       :: !Stream
-    , _tirKey         :: !(Maybe AuthKey)
-    , _tirOAuthToken  :: !(Maybe OAuthToken)
-    , _tirTableId     :: !Text
-    , _tirDelimiter   :: !(Maybe Text)
-    , _tirEncoding    :: !(Maybe Text)
-    , _tirIsStrict    :: !(Maybe Bool)
-    , _tirFields      :: !(Maybe Text)
+    { _tirStartLine :: !(Maybe Int32)
+    , _tirEndLine   :: !(Maybe Int32)
+    , _tirMedia     :: !Stream
+    , _tirTableId   :: !Text
+    , _tirDelimiter :: !(Maybe Text)
+    , _tirEncoding  :: !(Maybe Text)
+    , _tirIsStrict  :: !(Maybe Bool)
     }
 
 -- | Creates a value of 'TableImportRows'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tirQuotaUser'
---
--- * 'tirPrettyPrint'
---
--- * 'tirUserIP'
---
 -- * 'tirStartLine'
 --
 -- * 'tirEndLine'
 --
 -- * 'tirMedia'
---
--- * 'tirKey'
---
--- * 'tirOAuthToken'
 --
 -- * 'tirTableId'
 --
@@ -118,47 +90,20 @@ data TableImportRows' = TableImportRows'
 -- * 'tirEncoding'
 --
 -- * 'tirIsStrict'
---
--- * 'tirFields'
 tableImportRows'
     :: Stream -- ^ 'media'
     -> Text -- ^ 'tableId'
     -> TableImportRows'
 tableImportRows' pTirMedia_ pTirTableId_ =
     TableImportRows'
-    { _tirQuotaUser = Nothing
-    , _tirPrettyPrint = True
-    , _tirUserIP = Nothing
-    , _tirStartLine = Nothing
+    { _tirStartLine = Nothing
     , _tirEndLine = Nothing
     , _tirMedia = pTirMedia_
-    , _tirKey = Nothing
-    , _tirOAuthToken = Nothing
     , _tirTableId = pTirTableId_
     , _tirDelimiter = Nothing
     , _tirEncoding = Nothing
     , _tirIsStrict = Nothing
-    , _tirFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tirQuotaUser :: Lens' TableImportRows' (Maybe Text)
-tirQuotaUser
-  = lens _tirQuotaUser (\ s a -> s{_tirQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tirPrettyPrint :: Lens' TableImportRows' Bool
-tirPrettyPrint
-  = lens _tirPrettyPrint
-      (\ s a -> s{_tirPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tirUserIP :: Lens' TableImportRows' (Maybe Text)
-tirUserIP
-  = lens _tirUserIP (\ s a -> s{_tirUserIP = a})
 
 -- | The index of the first line from which to start importing, inclusive.
 -- Default is 0.
@@ -176,18 +121,6 @@ tirEndLine
 
 tirMedia :: Lens' TableImportRows' Stream
 tirMedia = lens _tirMedia (\ s a -> s{_tirMedia = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tirKey :: Lens' TableImportRows' (Maybe AuthKey)
-tirKey = lens _tirKey (\ s a -> s{_tirKey = a})
-
--- | OAuth 2.0 token for the current user.
-tirOAuthToken :: Lens' TableImportRows' (Maybe OAuthToken)
-tirOAuthToken
-  = lens _tirOAuthToken
-      (\ s a -> s{_tirOAuthToken = a})
 
 -- | The table into which new rows are being imported.
 tirTableId :: Lens' TableImportRows' Text
@@ -213,32 +146,17 @@ tirIsStrict :: Lens' TableImportRows' (Maybe Bool)
 tirIsStrict
   = lens _tirIsStrict (\ s a -> s{_tirIsStrict = a})
 
--- | Selector specifying which fields to include in a partial response.
-tirFields :: Lens' TableImportRows' (Maybe Text)
-tirFields
-  = lens _tirFields (\ s a -> s{_tirFields = a})
-
-instance GoogleAuth TableImportRows' where
-        _AuthKey = tirKey . _Just
-        _AuthToken = tirOAuthToken . _Just
-
 instance GoogleRequest TableImportRows' where
         type Rs TableImportRows' = Import
-        request = requestWith fusionTablesRequest
-        requestWith rq TableImportRows'{..}
+        requestClient TableImportRows'{..}
           = go _tirTableId _tirStartLine _tirEndLine
               _tirDelimiter
               _tirEncoding
               _tirIsStrict
-              _tirQuotaUser
-              (Just _tirPrettyPrint)
-              _tirUserIP
-              _tirFields
-              _tirKey
-              _tirOAuthToken
               (Just AltJSON)
               _tirMedia
+              fusionTablesService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy TableImportRowsResource)
-                      rq
+                      mempty

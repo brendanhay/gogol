@@ -34,23 +34,17 @@ module Network.Google.Resource.MapsEngine.Tables.List
 
     -- * Request Lenses
     , tlCreatedAfter
-    , tlQuotaUser
-    , tlPrettyPrint
-    , tlUserIP
     , tlCreatorEmail
     , tlRole
-    , tlKey
     , tlBbox
     , tlProcessingStatus
     , tlModifiedAfter
     , tlModifiedBefore
     , tlPageToken
     , tlProjectId
-    , tlOAuthToken
     , tlSearch
     , tlMaxResults
     , tlTags
-    , tlFields
     , tlCreatedBefore
     ) where
 
@@ -76,37 +70,25 @@ type TablesListResource =
                            QueryParam "maxResults" Word32 :>
                              QueryParam "tags" Text :>
                                QueryParam "createdBefore" DateTime' :>
-                                 QueryParam "quotaUser" Text :>
-                                   QueryParam "prettyPrint" Bool :>
-                                     QueryParam "userIp" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "key" AuthKey :>
-                                           Header "Authorization" OAuthToken :>
-                                             QueryParam "alt" AltJSON :>
-                                               Get '[JSON] TablesListResponse
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] TablesListResponse
 
 -- | Return all tables readable by the current user.
 --
 -- /See:/ 'tablesList'' smart constructor.
 data TablesList' = TablesList'
     { _tlCreatedAfter     :: !(Maybe DateTime')
-    , _tlQuotaUser        :: !(Maybe Text)
-    , _tlPrettyPrint      :: !Bool
-    , _tlUserIP           :: !(Maybe Text)
     , _tlCreatorEmail     :: !(Maybe Text)
     , _tlRole             :: !(Maybe TablesListRole)
-    , _tlKey              :: !(Maybe AuthKey)
     , _tlBbox             :: !(Maybe Text)
     , _tlProcessingStatus :: !(Maybe TablesListProcessingStatus)
     , _tlModifiedAfter    :: !(Maybe DateTime')
     , _tlModifiedBefore   :: !(Maybe DateTime')
     , _tlPageToken        :: !(Maybe Text)
     , _tlProjectId        :: !(Maybe Text)
-    , _tlOAuthToken       :: !(Maybe OAuthToken)
     , _tlSearch           :: !(Maybe Text)
     , _tlMaxResults       :: !(Maybe Word32)
     , _tlTags             :: !(Maybe Text)
-    , _tlFields           :: !(Maybe Text)
     , _tlCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -116,17 +98,9 @@ data TablesList' = TablesList'
 --
 -- * 'tlCreatedAfter'
 --
--- * 'tlQuotaUser'
---
--- * 'tlPrettyPrint'
---
--- * 'tlUserIP'
---
 -- * 'tlCreatorEmail'
 --
 -- * 'tlRole'
---
--- * 'tlKey'
 --
 -- * 'tlBbox'
 --
@@ -140,15 +114,11 @@ data TablesList' = TablesList'
 --
 -- * 'tlProjectId'
 --
--- * 'tlOAuthToken'
---
 -- * 'tlSearch'
 --
 -- * 'tlMaxResults'
 --
 -- * 'tlTags'
---
--- * 'tlFields'
 --
 -- * 'tlCreatedBefore'
 tablesList'
@@ -156,23 +126,17 @@ tablesList'
 tablesList' =
     TablesList'
     { _tlCreatedAfter = Nothing
-    , _tlQuotaUser = Nothing
-    , _tlPrettyPrint = True
-    , _tlUserIP = Nothing
     , _tlCreatorEmail = Nothing
     , _tlRole = Nothing
-    , _tlKey = Nothing
     , _tlBbox = Nothing
     , _tlProcessingStatus = Nothing
     , _tlModifiedAfter = Nothing
     , _tlModifiedBefore = Nothing
     , _tlPageToken = Nothing
     , _tlProjectId = Nothing
-    , _tlOAuthToken = Nothing
     , _tlSearch = Nothing
     , _tlMaxResults = Nothing
     , _tlTags = Nothing
-    , _tlFields = Nothing
     , _tlCreatedBefore = Nothing
     }
 
@@ -183,24 +147,6 @@ tlCreatedAfter
   = lens _tlCreatedAfter
       (\ s a -> s{_tlCreatedAfter = a})
       . mapping _DateTime
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tlQuotaUser :: Lens' TablesList' (Maybe Text)
-tlQuotaUser
-  = lens _tlQuotaUser (\ s a -> s{_tlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tlPrettyPrint :: Lens' TablesList' Bool
-tlPrettyPrint
-  = lens _tlPrettyPrint
-      (\ s a -> s{_tlPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tlUserIP :: Lens' TablesList' (Maybe Text)
-tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 
 -- | An email address representing a user. Returned assets that have been
 -- created by the user associated with the provided email address.
@@ -213,12 +159,6 @@ tlCreatorEmail
 -- assets where the current user has the specified level of access.
 tlRole :: Lens' TablesList' (Maybe TablesListRole)
 tlRole = lens _tlRole (\ s a -> s{_tlRole = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tlKey :: Lens' TablesList' (Maybe AuthKey)
-tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | A bounding box, expressed as \"west,south,east,north\". If set, only
 -- assets which intersect this bounding box will be returned.
@@ -261,11 +201,6 @@ tlProjectId :: Lens' TablesList' (Maybe Text)
 tlProjectId
   = lens _tlProjectId (\ s a -> s{_tlProjectId = a})
 
--- | OAuth 2.0 token for the current user.
-tlOAuthToken :: Lens' TablesList' (Maybe OAuthToken)
-tlOAuthToken
-  = lens _tlOAuthToken (\ s a -> s{_tlOAuthToken = a})
-
 -- | An unstructured search string used to filter the set of results based on
 -- asset metadata.
 tlSearch :: Lens' TablesList' (Maybe Text)
@@ -282,10 +217,6 @@ tlMaxResults
 tlTags :: Lens' TablesList' (Maybe Text)
 tlTags = lens _tlTags (\ s a -> s{_tlTags = a})
 
--- | Selector specifying which fields to include in a partial response.
-tlFields :: Lens' TablesList' (Maybe Text)
-tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
-
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been created at or before this time.
 tlCreatedBefore :: Lens' TablesList' (Maybe UTCTime)
@@ -294,14 +225,9 @@ tlCreatedBefore
       (\ s a -> s{_tlCreatedBefore = a})
       . mapping _DateTime
 
-instance GoogleAuth TablesList' where
-        _AuthKey = tlKey . _Just
-        _AuthToken = tlOAuthToken . _Just
-
 instance GoogleRequest TablesList' where
         type Rs TablesList' = TablesListResponse
-        request = requestWith mapsEngineRequest
-        requestWith rq TablesList'{..}
+        requestClient TablesList'{..}
           = go _tlCreatedAfter _tlCreatorEmail _tlRole _tlBbox
               _tlProcessingStatus
               _tlModifiedAfter
@@ -312,12 +238,8 @@ instance GoogleRequest TablesList' where
               _tlMaxResults
               _tlTags
               _tlCreatedBefore
-              _tlQuotaUser
-              (Just _tlPrettyPrint)
-              _tlUserIP
-              _tlFields
-              _tlKey
-              _tlOAuthToken
               (Just AltJSON)
+              mapsEngineService
           where go
-                  = clientBuild (Proxy :: Proxy TablesListResource) rq
+                  = buildClient (Proxy :: Proxy TablesListResource)
+                      mempty

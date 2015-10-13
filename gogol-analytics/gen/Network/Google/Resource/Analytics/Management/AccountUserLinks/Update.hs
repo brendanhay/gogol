@@ -33,15 +33,9 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
     , ManagementAccountUserLinksUpdate'
 
     -- * Request Lenses
-    , mauluQuotaUser
-    , mauluPrettyPrint
-    , mauluUserIP
     , mauluPayload
     , mauluAccountId
-    , mauluKey
     , mauluLinkId
-    , mauluOAuthToken
-    , mauluFields
     ) where
 
 import           Network.Google.Analytics.Types
@@ -55,52 +49,28 @@ type ManagementAccountUserLinksUpdateResource =
          Capture "accountId" Text :>
            "entityUserLinks" :>
              Capture "linkId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] EntityUserLink :>
-                               Put '[JSON] EntityUserLink
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] EntityUserLink :>
+                   Put '[JSON] EntityUserLink
 
 -- | Updates permissions for an existing user on the given account.
 --
 -- /See:/ 'managementAccountUserLinksUpdate'' smart constructor.
 data ManagementAccountUserLinksUpdate' = ManagementAccountUserLinksUpdate'
-    { _mauluQuotaUser   :: !(Maybe Text)
-    , _mauluPrettyPrint :: !Bool
-    , _mauluUserIP      :: !(Maybe Text)
-    , _mauluPayload     :: !EntityUserLink
-    , _mauluAccountId   :: !Text
-    , _mauluKey         :: !(Maybe AuthKey)
-    , _mauluLinkId      :: !Text
-    , _mauluOAuthToken  :: !(Maybe OAuthToken)
-    , _mauluFields      :: !(Maybe Text)
+    { _mauluPayload   :: !EntityUserLink
+    , _mauluAccountId :: !Text
+    , _mauluLinkId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mauluQuotaUser'
---
--- * 'mauluPrettyPrint'
---
--- * 'mauluUserIP'
---
 -- * 'mauluPayload'
 --
 -- * 'mauluAccountId'
 --
--- * 'mauluKey'
---
 -- * 'mauluLinkId'
---
--- * 'mauluOAuthToken'
---
--- * 'mauluFields'
 managementAccountUserLinksUpdate'
     :: EntityUserLink -- ^ 'payload'
     -> Text -- ^ 'accountId'
@@ -108,36 +78,10 @@ managementAccountUserLinksUpdate'
     -> ManagementAccountUserLinksUpdate'
 managementAccountUserLinksUpdate' pMauluPayload_ pMauluAccountId_ pMauluLinkId_ =
     ManagementAccountUserLinksUpdate'
-    { _mauluQuotaUser = Nothing
-    , _mauluPrettyPrint = False
-    , _mauluUserIP = Nothing
-    , _mauluPayload = pMauluPayload_
+    { _mauluPayload = pMauluPayload_
     , _mauluAccountId = pMauluAccountId_
-    , _mauluKey = Nothing
     , _mauluLinkId = pMauluLinkId_
-    , _mauluOAuthToken = Nothing
-    , _mauluFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mauluQuotaUser :: Lens' ManagementAccountUserLinksUpdate' (Maybe Text)
-mauluQuotaUser
-  = lens _mauluQuotaUser
-      (\ s a -> s{_mauluQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mauluPrettyPrint :: Lens' ManagementAccountUserLinksUpdate' Bool
-mauluPrettyPrint
-  = lens _mauluPrettyPrint
-      (\ s a -> s{_mauluPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mauluUserIP :: Lens' ManagementAccountUserLinksUpdate' (Maybe Text)
-mauluUserIP
-  = lens _mauluUserIP (\ s a -> s{_mauluUserIP = a})
 
 -- | Multipart request metadata.
 mauluPayload :: Lens' ManagementAccountUserLinksUpdate' EntityUserLink
@@ -150,49 +94,21 @@ mauluAccountId
   = lens _mauluAccountId
       (\ s a -> s{_mauluAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mauluKey :: Lens' ManagementAccountUserLinksUpdate' (Maybe AuthKey)
-mauluKey = lens _mauluKey (\ s a -> s{_mauluKey = a})
-
 -- | Link ID to update the account-user link for.
 mauluLinkId :: Lens' ManagementAccountUserLinksUpdate' Text
 mauluLinkId
   = lens _mauluLinkId (\ s a -> s{_mauluLinkId = a})
 
--- | OAuth 2.0 token for the current user.
-mauluOAuthToken :: Lens' ManagementAccountUserLinksUpdate' (Maybe OAuthToken)
-mauluOAuthToken
-  = lens _mauluOAuthToken
-      (\ s a -> s{_mauluOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-mauluFields :: Lens' ManagementAccountUserLinksUpdate' (Maybe Text)
-mauluFields
-  = lens _mauluFields (\ s a -> s{_mauluFields = a})
-
-instance GoogleAuth ManagementAccountUserLinksUpdate'
-         where
-        _AuthKey = mauluKey . _Just
-        _AuthToken = mauluOAuthToken . _Just
-
 instance GoogleRequest
          ManagementAccountUserLinksUpdate' where
         type Rs ManagementAccountUserLinksUpdate' =
              EntityUserLink
-        request = requestWith analyticsRequest
-        requestWith rq ManagementAccountUserLinksUpdate'{..}
-          = go _mauluAccountId _mauluLinkId _mauluQuotaUser
-              (Just _mauluPrettyPrint)
-              _mauluUserIP
-              _mauluFields
-              _mauluKey
-              _mauluOAuthToken
-              (Just AltJSON)
+        requestClient ManagementAccountUserLinksUpdate'{..}
+          = go _mauluAccountId _mauluLinkId (Just AltJSON)
               _mauluPayload
+              analyticsService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy ManagementAccountUserLinksUpdateResource)
-                      rq
+                      mempty

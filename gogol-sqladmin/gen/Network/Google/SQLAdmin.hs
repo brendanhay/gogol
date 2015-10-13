@@ -18,8 +18,11 @@
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference>
 module Network.Google.SQLAdmin
     (
+    -- * Service Configuration
+      sQLAdminService
+
     -- * API Declaration
-      SQLAdminAPI
+    , SQLAdminAPI
 
     -- * Resources
 

@@ -34,17 +34,12 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Delete
 
     -- * Request Lenses
     , todXgafv
-    , todQuotaUser
-    , todPrettyPrint
     , todUploadProtocol
     , todPp
     , todAccessToken
     , todUploadType
     , todBearerToken
-    , todKey
     , todName
-    , todOAuthToken
-    , todFields
     , todCallback
     ) where
 
@@ -63,30 +58,19 @@ type TransferOperationsDeleteResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   Delete '[JSON] Empty
+                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | This method is not supported and the server returns \`UNIMPLEMENTED\`.
 --
 -- /See:/ 'transferOperationsDelete'' smart constructor.
 data TransferOperationsDelete' = TransferOperationsDelete'
     { _todXgafv          :: !(Maybe Text)
-    , _todQuotaUser      :: !(Maybe Text)
-    , _todPrettyPrint    :: !Bool
     , _todUploadProtocol :: !(Maybe Text)
     , _todPp             :: !Bool
     , _todAccessToken    :: !(Maybe Text)
     , _todUploadType     :: !(Maybe Text)
     , _todBearerToken    :: !(Maybe Text)
-    , _todKey            :: !(Maybe AuthKey)
     , _todName           :: !Text
-    , _todOAuthToken     :: !(Maybe OAuthToken)
-    , _todFields         :: !(Maybe Text)
     , _todCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -95,10 +79,6 @@ data TransferOperationsDelete' = TransferOperationsDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'todXgafv'
---
--- * 'todQuotaUser'
---
--- * 'todPrettyPrint'
 --
 -- * 'todUploadProtocol'
 --
@@ -110,13 +90,7 @@ data TransferOperationsDelete' = TransferOperationsDelete'
 --
 -- * 'todBearerToken'
 --
--- * 'todKey'
---
 -- * 'todName'
---
--- * 'todOAuthToken'
---
--- * 'todFields'
 --
 -- * 'todCallback'
 transferOperationsDelete'
@@ -125,36 +99,18 @@ transferOperationsDelete'
 transferOperationsDelete' pTodName_ =
     TransferOperationsDelete'
     { _todXgafv = Nothing
-    , _todQuotaUser = Nothing
-    , _todPrettyPrint = True
     , _todUploadProtocol = Nothing
     , _todPp = True
     , _todAccessToken = Nothing
     , _todUploadType = Nothing
     , _todBearerToken = Nothing
-    , _todKey = Nothing
     , _todName = pTodName_
-    , _todOAuthToken = Nothing
-    , _todFields = Nothing
     , _todCallback = Nothing
     }
 
 -- | V1 error format.
 todXgafv :: Lens' TransferOperationsDelete' (Maybe Text)
 todXgafv = lens _todXgafv (\ s a -> s{_todXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-todQuotaUser :: Lens' TransferOperationsDelete' (Maybe Text)
-todQuotaUser
-  = lens _todQuotaUser (\ s a -> s{_todQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-todPrettyPrint :: Lens' TransferOperationsDelete' Bool
-todPrettyPrint
-  = lens _todPrettyPrint
-      (\ s a -> s{_todPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 todUploadProtocol :: Lens' TransferOperationsDelete' (Maybe Text)
@@ -184,54 +140,28 @@ todBearerToken
   = lens _todBearerToken
       (\ s a -> s{_todBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-todKey :: Lens' TransferOperationsDelete' (Maybe AuthKey)
-todKey = lens _todKey (\ s a -> s{_todKey = a})
-
 -- | The name of the operation resource to be deleted.
 todName :: Lens' TransferOperationsDelete' Text
 todName = lens _todName (\ s a -> s{_todName = a})
-
--- | OAuth 2.0 token for the current user.
-todOAuthToken :: Lens' TransferOperationsDelete' (Maybe OAuthToken)
-todOAuthToken
-  = lens _todOAuthToken
-      (\ s a -> s{_todOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-todFields :: Lens' TransferOperationsDelete' (Maybe Text)
-todFields
-  = lens _todFields (\ s a -> s{_todFields = a})
 
 -- | JSONP
 todCallback :: Lens' TransferOperationsDelete' (Maybe Text)
 todCallback
   = lens _todCallback (\ s a -> s{_todCallback = a})
 
-instance GoogleAuth TransferOperationsDelete' where
-        _AuthKey = todKey . _Just
-        _AuthToken = todOAuthToken . _Just
-
 instance GoogleRequest TransferOperationsDelete'
          where
         type Rs TransferOperationsDelete' = Empty
-        request = requestWith storageTransferRequest
-        requestWith rq TransferOperationsDelete'{..}
+        requestClient TransferOperationsDelete'{..}
           = go _todName _todXgafv _todUploadProtocol
               (Just _todPp)
               _todAccessToken
               _todUploadType
               _todBearerToken
               _todCallback
-              _todQuotaUser
-              (Just _todPrettyPrint)
-              _todFields
-              _todKey
-              _todOAuthToken
               (Just AltJSON)
+              storageTransferService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy TransferOperationsDeleteResource)
-                      rq
+                      mempty

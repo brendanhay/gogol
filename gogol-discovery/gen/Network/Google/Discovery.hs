@@ -19,8 +19,11 @@
 -- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference>
 module Network.Google.Discovery
     (
+    -- * Service Configuration
+      discoveryService
+
     -- * API Declaration
-      DiscoveryAPI
+    , DiscoveryAPI
 
     -- * Resources
 

@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference>
 module Network.Google.IdentityToolkit
     (
+    -- * Service Configuration
+      identityToolkitService
+
     -- * API Declaration
-      IdentityToolkitAPI
+    , IdentityToolkitAPI
 
     -- * Resources
 

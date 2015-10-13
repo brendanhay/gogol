@@ -37,17 +37,11 @@ module Network.Google.Resource.CloudMonitoring.MetricDescriptors.List
     , MetricDescriptorsList'
 
     -- * Request Lenses
-    , mdlQuotaUser
-    , mdlPrettyPrint
     , mdlProject
-    , mdlUserIP
     , mdlCount
     , mdlPayload
-    , mdlKey
     , mdlQuery
     , mdlPageToken
-    , mdlOAuthToken
-    , mdlFields
     ) where
 
 import           Network.Google.Monitoring.Types
@@ -61,15 +55,9 @@ type MetricDescriptorsListResource =
          QueryParam "count" Int32 :>
            QueryParam "query" Text :>
              QueryParam "pageToken" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] ListMetricDescriptorsRequest :>
-                               Get '[JSON] ListMetricDescriptorsResponse
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] ListMetricDescriptorsRequest :>
+                   Get '[JSON] ListMetricDescriptorsResponse
 
 -- | List metric descriptors that match the query. If the query is not set,
 -- then all of the metric descriptors will be returned. Large responses
@@ -79,87 +67,44 @@ type MetricDescriptorsListResource =
 --
 -- /See:/ 'metricDescriptorsList'' smart constructor.
 data MetricDescriptorsList' = MetricDescriptorsList'
-    { _mdlQuotaUser   :: !(Maybe Text)
-    , _mdlPrettyPrint :: !Bool
-    , _mdlProject     :: !Text
-    , _mdlUserIP      :: !(Maybe Text)
-    , _mdlCount       :: !Int32
-    , _mdlPayload     :: !ListMetricDescriptorsRequest
-    , _mdlKey         :: !(Maybe AuthKey)
-    , _mdlQuery       :: !(Maybe Text)
-    , _mdlPageToken   :: !(Maybe Text)
-    , _mdlOAuthToken  :: !(Maybe OAuthToken)
-    , _mdlFields      :: !(Maybe Text)
+    { _mdlProject   :: !Text
+    , _mdlCount     :: !Int32
+    , _mdlPayload   :: !ListMetricDescriptorsRequest
+    , _mdlQuery     :: !(Maybe Text)
+    , _mdlPageToken :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetricDescriptorsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mdlQuotaUser'
---
--- * 'mdlPrettyPrint'
---
 -- * 'mdlProject'
---
--- * 'mdlUserIP'
 --
 -- * 'mdlCount'
 --
 -- * 'mdlPayload'
 --
--- * 'mdlKey'
---
 -- * 'mdlQuery'
 --
 -- * 'mdlPageToken'
---
--- * 'mdlOAuthToken'
---
--- * 'mdlFields'
 metricDescriptorsList'
     :: Text -- ^ 'project'
     -> ListMetricDescriptorsRequest -- ^ 'payload'
     -> MetricDescriptorsList'
 metricDescriptorsList' pMdlProject_ pMdlPayload_ =
     MetricDescriptorsList'
-    { _mdlQuotaUser = Nothing
-    , _mdlPrettyPrint = True
-    , _mdlProject = pMdlProject_
-    , _mdlUserIP = Nothing
+    { _mdlProject = pMdlProject_
     , _mdlCount = 100
     , _mdlPayload = pMdlPayload_
-    , _mdlKey = Nothing
     , _mdlQuery = Nothing
     , _mdlPageToken = Nothing
-    , _mdlOAuthToken = Nothing
-    , _mdlFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-mdlQuotaUser :: Lens' MetricDescriptorsList' (Maybe Text)
-mdlQuotaUser
-  = lens _mdlQuotaUser (\ s a -> s{_mdlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-mdlPrettyPrint :: Lens' MetricDescriptorsList' Bool
-mdlPrettyPrint
-  = lens _mdlPrettyPrint
-      (\ s a -> s{_mdlPrettyPrint = a})
 
 -- | The project id. The value can be the numeric project ID or string-based
 -- project name.
 mdlProject :: Lens' MetricDescriptorsList' Text
 mdlProject
   = lens _mdlProject (\ s a -> s{_mdlProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-mdlUserIP :: Lens' MetricDescriptorsList' (Maybe Text)
-mdlUserIP
-  = lens _mdlUserIP (\ s a -> s{_mdlUserIP = a})
 
 -- | Maximum number of metric descriptors per page. Used for pagination. If
 -- not specified, count = 100.
@@ -170,12 +115,6 @@ mdlCount = lens _mdlCount (\ s a -> s{_mdlCount = a})
 mdlPayload :: Lens' MetricDescriptorsList' ListMetricDescriptorsRequest
 mdlPayload
   = lens _mdlPayload (\ s a -> s{_mdlPayload = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-mdlKey :: Lens' MetricDescriptorsList' (Maybe AuthKey)
-mdlKey = lens _mdlKey (\ s a -> s{_mdlKey = a})
 
 -- | The query used to search against existing metrics. Separate keywords
 -- with a space; the service joins all keywords with AND, meaning that all
@@ -192,37 +131,16 @@ mdlPageToken :: Lens' MetricDescriptorsList' (Maybe Text)
 mdlPageToken
   = lens _mdlPageToken (\ s a -> s{_mdlPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-mdlOAuthToken :: Lens' MetricDescriptorsList' (Maybe OAuthToken)
-mdlOAuthToken
-  = lens _mdlOAuthToken
-      (\ s a -> s{_mdlOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-mdlFields :: Lens' MetricDescriptorsList' (Maybe Text)
-mdlFields
-  = lens _mdlFields (\ s a -> s{_mdlFields = a})
-
-instance GoogleAuth MetricDescriptorsList' where
-        _AuthKey = mdlKey . _Just
-        _AuthToken = mdlOAuthToken . _Just
-
 instance GoogleRequest MetricDescriptorsList' where
         type Rs MetricDescriptorsList' =
              ListMetricDescriptorsResponse
-        request = requestWith monitoringRequest
-        requestWith rq MetricDescriptorsList'{..}
+        requestClient MetricDescriptorsList'{..}
           = go _mdlProject (Just _mdlCount) _mdlQuery
               _mdlPageToken
-              _mdlQuotaUser
-              (Just _mdlPrettyPrint)
-              _mdlUserIP
-              _mdlFields
-              _mdlKey
-              _mdlOAuthToken
               (Just AltJSON)
               _mdlPayload
+              monitoringService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy MetricDescriptorsListResource)
-                      rq
+                      mempty

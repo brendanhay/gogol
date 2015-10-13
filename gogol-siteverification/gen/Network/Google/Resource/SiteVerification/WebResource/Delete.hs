@@ -33,13 +33,7 @@ module Network.Google.Resource.SiteVerification.WebResource.Delete
     , WebResourceDelete'
 
     -- * Request Lenses
-    , wrdQuotaUser
-    , wrdPrettyPrint
-    , wrdUserIP
-    , wrdKey
     , wrdId
-    , wrdOAuthToken
-    , wrdFields
     ) where
 
 import           Network.Google.Prelude
@@ -50,113 +44,37 @@ import           Network.Google.SiteVerification.Types
 type WebResourceDeleteResource =
      "webResource" :>
        Capture "id" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
+         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Relinquish ownership of a website or domain.
 --
 -- /See:/ 'webResourceDelete'' smart constructor.
-data WebResourceDelete' = WebResourceDelete'
-    { _wrdQuotaUser   :: !(Maybe Text)
-    , _wrdPrettyPrint :: !Bool
-    , _wrdUserIP      :: !(Maybe Text)
-    , _wrdKey         :: !(Maybe AuthKey)
-    , _wrdId          :: !Text
-    , _wrdOAuthToken  :: !(Maybe OAuthToken)
-    , _wrdFields      :: !(Maybe Text)
+newtype WebResourceDelete' = WebResourceDelete'
+    { _wrdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourceDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'wrdQuotaUser'
---
--- * 'wrdPrettyPrint'
---
--- * 'wrdUserIP'
---
--- * 'wrdKey'
---
 -- * 'wrdId'
---
--- * 'wrdOAuthToken'
---
--- * 'wrdFields'
 webResourceDelete'
     :: Text -- ^ 'id'
     -> WebResourceDelete'
 webResourceDelete' pWrdId_ =
     WebResourceDelete'
-    { _wrdQuotaUser = Nothing
-    , _wrdPrettyPrint = False
-    , _wrdUserIP = Nothing
-    , _wrdKey = Nothing
-    , _wrdId = pWrdId_
-    , _wrdOAuthToken = Nothing
-    , _wrdFields = Nothing
+    { _wrdId = pWrdId_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-wrdQuotaUser :: Lens' WebResourceDelete' (Maybe Text)
-wrdQuotaUser
-  = lens _wrdQuotaUser (\ s a -> s{_wrdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-wrdPrettyPrint :: Lens' WebResourceDelete' Bool
-wrdPrettyPrint
-  = lens _wrdPrettyPrint
-      (\ s a -> s{_wrdPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-wrdUserIP :: Lens' WebResourceDelete' (Maybe Text)
-wrdUserIP
-  = lens _wrdUserIP (\ s a -> s{_wrdUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-wrdKey :: Lens' WebResourceDelete' (Maybe AuthKey)
-wrdKey = lens _wrdKey (\ s a -> s{_wrdKey = a})
 
 -- | The id of a verified site or domain.
 wrdId :: Lens' WebResourceDelete' Text
 wrdId = lens _wrdId (\ s a -> s{_wrdId = a})
 
--- | OAuth 2.0 token for the current user.
-wrdOAuthToken :: Lens' WebResourceDelete' (Maybe OAuthToken)
-wrdOAuthToken
-  = lens _wrdOAuthToken
-      (\ s a -> s{_wrdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-wrdFields :: Lens' WebResourceDelete' (Maybe Text)
-wrdFields
-  = lens _wrdFields (\ s a -> s{_wrdFields = a})
-
-instance GoogleAuth WebResourceDelete' where
-        _AuthKey = wrdKey . _Just
-        _AuthToken = wrdOAuthToken . _Just
-
 instance GoogleRequest WebResourceDelete' where
         type Rs WebResourceDelete' = ()
-        request = requestWith siteVerificationRequest
-        requestWith rq WebResourceDelete'{..}
-          = go _wrdId _wrdQuotaUser (Just _wrdPrettyPrint)
-              _wrdUserIP
-              _wrdFields
-              _wrdKey
-              _wrdOAuthToken
-              (Just AltJSON)
+        requestClient WebResourceDelete'{..}
+          = go _wrdId (Just AltJSON) siteVerificationService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy WebResourceDeleteResource)
-                      rq
+                      mempty

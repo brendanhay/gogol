@@ -33,16 +33,10 @@ module Network.Google.Resource.Blogger.Comments.Get
     , CommentsGet'
 
     -- * Request Lenses
-    , cgQuotaUser
-    , cgPrettyPrint
-    , cgUserIP
     , cgBlogId
-    , cgKey
     , cgView
     , cgPostId
-    , cgOAuthToken
     , cgCommentId
-    , cgFields
     ) where
 
 import           Network.Google.Blogger.Types
@@ -58,53 +52,29 @@ type CommentsGetResource =
              "comments" :>
                Capture "commentId" Text :>
                  QueryParam "view" CommentsGetView :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :> Get '[JSON] Comment
+                   QueryParam "alt" AltJSON :> Get '[JSON] Comment
 
 -- | Gets one comment by ID.
 --
 -- /See:/ 'commentsGet'' smart constructor.
 data CommentsGet' = CommentsGet'
-    { _cgQuotaUser   :: !(Maybe Text)
-    , _cgPrettyPrint :: !Bool
-    , _cgUserIP      :: !(Maybe Text)
-    , _cgBlogId      :: !Text
-    , _cgKey         :: !(Maybe AuthKey)
-    , _cgView        :: !(Maybe CommentsGetView)
-    , _cgPostId      :: !Text
-    , _cgOAuthToken  :: !(Maybe OAuthToken)
-    , _cgCommentId   :: !Text
-    , _cgFields      :: !(Maybe Text)
+    { _cgBlogId    :: !Text
+    , _cgView      :: !(Maybe CommentsGetView)
+    , _cgPostId    :: !Text
+    , _cgCommentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cgQuotaUser'
---
--- * 'cgPrettyPrint'
---
--- * 'cgUserIP'
---
 -- * 'cgBlogId'
---
--- * 'cgKey'
 --
 -- * 'cgView'
 --
 -- * 'cgPostId'
 --
--- * 'cgOAuthToken'
---
 -- * 'cgCommentId'
---
--- * 'cgFields'
 commentsGet'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
@@ -112,45 +82,15 @@ commentsGet'
     -> CommentsGet'
 commentsGet' pCgBlogId_ pCgPostId_ pCgCommentId_ =
     CommentsGet'
-    { _cgQuotaUser = Nothing
-    , _cgPrettyPrint = True
-    , _cgUserIP = Nothing
-    , _cgBlogId = pCgBlogId_
-    , _cgKey = Nothing
+    { _cgBlogId = pCgBlogId_
     , _cgView = Nothing
     , _cgPostId = pCgPostId_
-    , _cgOAuthToken = Nothing
     , _cgCommentId = pCgCommentId_
-    , _cgFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-cgQuotaUser :: Lens' CommentsGet' (Maybe Text)
-cgQuotaUser
-  = lens _cgQuotaUser (\ s a -> s{_cgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cgPrettyPrint :: Lens' CommentsGet' Bool
-cgPrettyPrint
-  = lens _cgPrettyPrint
-      (\ s a -> s{_cgPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-cgUserIP :: Lens' CommentsGet' (Maybe Text)
-cgUserIP = lens _cgUserIP (\ s a -> s{_cgUserIP = a})
 
 -- | ID of the blog to containing the comment.
 cgBlogId :: Lens' CommentsGet' Text
 cgBlogId = lens _cgBlogId (\ s a -> s{_cgBlogId = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cgKey :: Lens' CommentsGet' (Maybe AuthKey)
-cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | Access level for the requested comment (default: READER). Note that some
 -- comments will require elevated permissions, for example comments where
@@ -163,35 +103,17 @@ cgView = lens _cgView (\ s a -> s{_cgView = a})
 cgPostId :: Lens' CommentsGet' Text
 cgPostId = lens _cgPostId (\ s a -> s{_cgPostId = a})
 
--- | OAuth 2.0 token for the current user.
-cgOAuthToken :: Lens' CommentsGet' (Maybe OAuthToken)
-cgOAuthToken
-  = lens _cgOAuthToken (\ s a -> s{_cgOAuthToken = a})
-
 -- | The ID of the comment to get.
 cgCommentId :: Lens' CommentsGet' Text
 cgCommentId
   = lens _cgCommentId (\ s a -> s{_cgCommentId = a})
 
--- | Selector specifying which fields to include in a partial response.
-cgFields :: Lens' CommentsGet' (Maybe Text)
-cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
-
-instance GoogleAuth CommentsGet' where
-        _AuthKey = cgKey . _Just
-        _AuthToken = cgOAuthToken . _Just
-
 instance GoogleRequest CommentsGet' where
         type Rs CommentsGet' = Comment
-        request = requestWith bloggerRequest
-        requestWith rq CommentsGet'{..}
+        requestClient CommentsGet'{..}
           = go _cgBlogId _cgPostId _cgCommentId _cgView
-              _cgQuotaUser
-              (Just _cgPrettyPrint)
-              _cgUserIP
-              _cgFields
-              _cgKey
-              _cgOAuthToken
               (Just AltJSON)
+              bloggerService
           where go
-                  = clientBuild (Proxy :: Proxy CommentsGetResource) rq
+                  = buildClient (Proxy :: Proxy CommentsGetResource)
+                      mempty

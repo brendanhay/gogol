@@ -37,13 +37,7 @@ module Network.Google.Resource.AppState.States.Delete
     , StatesDelete'
 
     -- * Request Lenses
-    , sdQuotaUser
-    , sdPrettyPrint
-    , sdUserIP
     , sdStateKey
-    , sdKey
-    , sdOAuthToken
-    , sdFields
     ) where
 
 import           Network.Google.AppState.Types
@@ -54,13 +48,7 @@ import           Network.Google.Prelude
 type StatesDeleteResource =
      "states" :>
        Capture "stateKey" Int32 :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
+         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a key and the data associated with it. The key is removed and no
 -- longer counts against the key quota. Note that since this method is not
@@ -69,99 +57,32 @@ type StatesDeleteResource =
 -- can result in data loss and data corruption.
 --
 -- /See:/ 'statesDelete'' smart constructor.
-data StatesDelete' = StatesDelete'
-    { _sdQuotaUser   :: !(Maybe Text)
-    , _sdPrettyPrint :: !Bool
-    , _sdUserIP      :: !(Maybe Text)
-    , _sdStateKey    :: !Int32
-    , _sdKey         :: !(Maybe AuthKey)
-    , _sdOAuthToken  :: !(Maybe OAuthToken)
-    , _sdFields      :: !(Maybe Text)
+newtype StatesDelete' = StatesDelete'
+    { _sdStateKey :: Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatesDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sdQuotaUser'
---
--- * 'sdPrettyPrint'
---
--- * 'sdUserIP'
---
 -- * 'sdStateKey'
---
--- * 'sdKey'
---
--- * 'sdOAuthToken'
---
--- * 'sdFields'
 statesDelete'
     :: Int32 -- ^ 'stateKey'
     -> StatesDelete'
 statesDelete' pSdStateKey_ =
     StatesDelete'
-    { _sdQuotaUser = Nothing
-    , _sdPrettyPrint = True
-    , _sdUserIP = Nothing
-    , _sdStateKey = pSdStateKey_
-    , _sdKey = Nothing
-    , _sdOAuthToken = Nothing
-    , _sdFields = Nothing
+    { _sdStateKey = pSdStateKey_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-sdQuotaUser :: Lens' StatesDelete' (Maybe Text)
-sdQuotaUser
-  = lens _sdQuotaUser (\ s a -> s{_sdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-sdPrettyPrint :: Lens' StatesDelete' Bool
-sdPrettyPrint
-  = lens _sdPrettyPrint
-      (\ s a -> s{_sdPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-sdUserIP :: Lens' StatesDelete' (Maybe Text)
-sdUserIP = lens _sdUserIP (\ s a -> s{_sdUserIP = a})
 
 -- | The key for the data to be retrieved.
 sdStateKey :: Lens' StatesDelete' Int32
 sdStateKey
   = lens _sdStateKey (\ s a -> s{_sdStateKey = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-sdKey :: Lens' StatesDelete' (Maybe AuthKey)
-sdKey = lens _sdKey (\ s a -> s{_sdKey = a})
-
--- | OAuth 2.0 token for the current user.
-sdOAuthToken :: Lens' StatesDelete' (Maybe OAuthToken)
-sdOAuthToken
-  = lens _sdOAuthToken (\ s a -> s{_sdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-sdFields :: Lens' StatesDelete' (Maybe Text)
-sdFields = lens _sdFields (\ s a -> s{_sdFields = a})
-
-instance GoogleAuth StatesDelete' where
-        _AuthKey = sdKey . _Just
-        _AuthToken = sdOAuthToken . _Just
-
 instance GoogleRequest StatesDelete' where
         type Rs StatesDelete' = ()
-        request = requestWith appStateRequest
-        requestWith rq StatesDelete'{..}
-          = go _sdStateKey _sdQuotaUser (Just _sdPrettyPrint)
-              _sdUserIP
-              _sdFields
-              _sdKey
-              _sdOAuthToken
-              (Just AltJSON)
+        requestClient StatesDelete'{..}
+          = go _sdStateKey (Just AltJSON) appStateService
           where go
-                  = clientBuild (Proxy :: Proxy StatesDeleteResource)
-                      rq
+                  = buildClient (Proxy :: Proxy StatesDeleteResource)
+                      mempty

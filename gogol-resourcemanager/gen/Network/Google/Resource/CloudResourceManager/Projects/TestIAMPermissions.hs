@@ -35,18 +35,13 @@ module Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
 
     -- * Request Lenses
     , ptipXgafv
-    , ptipQuotaUser
-    , ptipPrettyPrint
     , ptipUploadProtocol
     , ptipPp
     , ptipAccessToken
     , ptipUploadType
     , ptipPayload
     , ptipBearerToken
-    , ptipKey
     , ptipResource
-    , ptipOAuthToken
-    , ptipFields
     , ptipCallback
     ) where
 
@@ -66,15 +61,9 @@ type ProjectsTestIAMPermissionsResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] TestIAMPermissionsRequest
-                                       :>
-                                       Post '[JSON] TestIAMPermissionsResponse
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] TestIAMPermissionsRequest :>
+                             Post '[JSON] TestIAMPermissionsResponse
 
 -- | Tests the specified permissions against the IAM access control policy
 -- for the specified project.
@@ -82,18 +71,13 @@ type ProjectsTestIAMPermissionsResource =
 -- /See:/ 'projectsTestIAMPermissions'' smart constructor.
 data ProjectsTestIAMPermissions' = ProjectsTestIAMPermissions'
     { _ptipXgafv          :: !(Maybe Text)
-    , _ptipQuotaUser      :: !(Maybe Text)
-    , _ptipPrettyPrint    :: !Bool
     , _ptipUploadProtocol :: !(Maybe Text)
     , _ptipPp             :: !Bool
     , _ptipAccessToken    :: !(Maybe Text)
     , _ptipUploadType     :: !(Maybe Text)
     , _ptipPayload        :: !TestIAMPermissionsRequest
     , _ptipBearerToken    :: !(Maybe Text)
-    , _ptipKey            :: !(Maybe AuthKey)
     , _ptipResource       :: !Text
-    , _ptipOAuthToken     :: !(Maybe OAuthToken)
-    , _ptipFields         :: !(Maybe Text)
     , _ptipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +86,6 @@ data ProjectsTestIAMPermissions' = ProjectsTestIAMPermissions'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ptipXgafv'
---
--- * 'ptipQuotaUser'
---
--- * 'ptipPrettyPrint'
 --
 -- * 'ptipUploadProtocol'
 --
@@ -119,13 +99,7 @@ data ProjectsTestIAMPermissions' = ProjectsTestIAMPermissions'
 --
 -- * 'ptipBearerToken'
 --
--- * 'ptipKey'
---
 -- * 'ptipResource'
---
--- * 'ptipOAuthToken'
---
--- * 'ptipFields'
 --
 -- * 'ptipCallback'
 projectsTestIAMPermissions'
@@ -135,18 +109,13 @@ projectsTestIAMPermissions'
 projectsTestIAMPermissions' pPtipPayload_ pPtipResource_ =
     ProjectsTestIAMPermissions'
     { _ptipXgafv = Nothing
-    , _ptipQuotaUser = Nothing
-    , _ptipPrettyPrint = True
     , _ptipUploadProtocol = Nothing
     , _ptipPp = True
     , _ptipAccessToken = Nothing
     , _ptipUploadType = Nothing
     , _ptipPayload = pPtipPayload_
     , _ptipBearerToken = Nothing
-    , _ptipKey = Nothing
     , _ptipResource = pPtipResource_
-    , _ptipOAuthToken = Nothing
-    , _ptipFields = Nothing
     , _ptipCallback = Nothing
     }
 
@@ -154,20 +123,6 @@ projectsTestIAMPermissions' pPtipPayload_ pPtipResource_ =
 ptipXgafv :: Lens' ProjectsTestIAMPermissions' (Maybe Text)
 ptipXgafv
   = lens _ptipXgafv (\ s a -> s{_ptipXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ptipQuotaUser :: Lens' ProjectsTestIAMPermissions' (Maybe Text)
-ptipQuotaUser
-  = lens _ptipQuotaUser
-      (\ s a -> s{_ptipQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ptipPrettyPrint :: Lens' ProjectsTestIAMPermissions' Bool
-ptipPrettyPrint
-  = lens _ptipPrettyPrint
-      (\ s a -> s{_ptipPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 ptipUploadProtocol :: Lens' ProjectsTestIAMPermissions' (Maybe Text)
@@ -202,12 +157,6 @@ ptipBearerToken
   = lens _ptipBearerToken
       (\ s a -> s{_ptipBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ptipKey :: Lens' ProjectsTestIAMPermissions' (Maybe AuthKey)
-ptipKey = lens _ptipKey (\ s a -> s{_ptipKey = a})
-
 -- | REQUIRED: The resource for which policy detail is being requested.
 -- \`resource\` is usually specified as a path, such as,
 -- \`projects\/{project}\`.
@@ -215,46 +164,26 @@ ptipResource :: Lens' ProjectsTestIAMPermissions' Text
 ptipResource
   = lens _ptipResource (\ s a -> s{_ptipResource = a})
 
--- | OAuth 2.0 token for the current user.
-ptipOAuthToken :: Lens' ProjectsTestIAMPermissions' (Maybe OAuthToken)
-ptipOAuthToken
-  = lens _ptipOAuthToken
-      (\ s a -> s{_ptipOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ptipFields :: Lens' ProjectsTestIAMPermissions' (Maybe Text)
-ptipFields
-  = lens _ptipFields (\ s a -> s{_ptipFields = a})
-
 -- | JSONP
 ptipCallback :: Lens' ProjectsTestIAMPermissions' (Maybe Text)
 ptipCallback
   = lens _ptipCallback (\ s a -> s{_ptipCallback = a})
 
-instance GoogleAuth ProjectsTestIAMPermissions' where
-        _AuthKey = ptipKey . _Just
-        _AuthToken = ptipOAuthToken . _Just
-
 instance GoogleRequest ProjectsTestIAMPermissions'
          where
         type Rs ProjectsTestIAMPermissions' =
              TestIAMPermissionsResponse
-        request = requestWith resourceManagerRequest
-        requestWith rq ProjectsTestIAMPermissions'{..}
+        requestClient ProjectsTestIAMPermissions'{..}
           = go _ptipResource _ptipXgafv _ptipUploadProtocol
               (Just _ptipPp)
               _ptipAccessToken
               _ptipUploadType
               _ptipBearerToken
               _ptipCallback
-              _ptipQuotaUser
-              (Just _ptipPrettyPrint)
-              _ptipFields
-              _ptipKey
-              _ptipOAuthToken
               (Just AltJSON)
               _ptipPayload
+              resourceManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy ProjectsTestIAMPermissionsResource)
-                      rq
+                      mempty

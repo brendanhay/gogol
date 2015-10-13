@@ -15,8 +15,12 @@
 --
 module Network.Google.TaskQueue.Types
     (
-    -- * Service Request
-      taskQueueRequest
+    -- * Service Configuration
+      taskQueueService
+
+    -- * OAuth Scopes
+    , taskqueueConsumerScope
+    , taskqueueScope
 
     -- * Tasks2
     , Tasks2
@@ -72,7 +76,16 @@ import           Network.Google.TaskQueue.Types.Product
 import           Network.Google.TaskQueue.Types.Sum
 
 -- | Default request referring to version 'v1beta2' of the TaskQueue API. This contains the host and root path used as a starting point for constructing service requests.
-taskQueueRequest :: RequestBuilder
-taskQueueRequest
-  = defaultRequest "https://www.googleapis.com/"
+taskQueueService :: Service
+taskQueueService
+  = defaultService (ServiceId "taskqueue:v1beta2")
+      "www.googleapis.com"
       "taskqueue/v1beta2/projects/"
+
+-- | Consume Tasks from your Taskqueues
+taskqueueConsumerScope :: OAuthScope
+taskqueueConsumerScope = OAuthScope "https://www.googleapis.com/auth/taskqueue.consumer";
+
+-- | Manage your Tasks and Taskqueues
+taskqueueScope :: OAuthScope
+taskqueueScope = OAuthScope "https://www.googleapis.com/auth/taskqueue";

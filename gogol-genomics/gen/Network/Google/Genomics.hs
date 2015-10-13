@@ -19,8 +19,11 @@
 -- /See:/ < Genomics API Reference>
 module Network.Google.Genomics
     (
+    -- * Service Configuration
+      genomicsService
+
     -- * API Declaration
-      GenomicsAPI
+    , GenomicsAPI
 
     -- * Resources
 

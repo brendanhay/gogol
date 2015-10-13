@@ -19,8 +19,11 @@
 -- /See:/ <http://developers.google.com/qpx-express QPX Express API Reference>
 module Network.Google.QPXExpress
     (
+    -- * Service Configuration
+      qPXExpressService
+
     -- * API Declaration
-      QPXExpressAPI
+    , QPXExpressAPI
 
     -- * Resources
 

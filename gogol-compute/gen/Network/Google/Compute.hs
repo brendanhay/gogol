@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference>
 module Network.Google.Compute
     (
+    -- * Service Configuration
+      computeService
+
     -- * API Declaration
-      ComputeAPI
+    , ComputeAPI
 
     -- * Resources
 

@@ -15,8 +15,12 @@
 --
 module Network.Google.DataTransfer.Types
     (
-    -- * Service Request
-      dataTransferRequest
+    -- * Service Configuration
+      dataTransferService
+
+    -- * OAuth Scopes
+    , adminDatatransferReadonlyScope
+    , adminDatatransferScope
 
     -- * Application
     , Application
@@ -74,7 +78,16 @@ import           Network.Google.DataTransfer.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'datatransfer_v1' of the Admin Data Transfer API. This contains the host and root path used as a starting point for constructing service requests.
-dataTransferRequest :: RequestBuilder
-dataTransferRequest
-  = defaultRequest "https://www.googleapis.com/"
+dataTransferService :: Service
+dataTransferService
+  = defaultService (ServiceId "admin:datatransfer_v1")
+      "www.googleapis.com"
       "admin/datatransfer/v1/"
+
+-- | View data transfers between users in your organization
+adminDatatransferReadonlyScope :: OAuthScope
+adminDatatransferReadonlyScope = OAuthScope "https://www.googleapis.com/auth/admin.datatransfer.readonly";
+
+-- | View and manage data transfers between users in your organization
+adminDatatransferScope :: OAuthScope
+adminDatatransferScope = OAuthScope "https://www.googleapis.com/auth/admin.datatransfer";

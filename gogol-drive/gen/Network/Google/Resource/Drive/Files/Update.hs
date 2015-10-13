@@ -33,10 +33,7 @@ module Network.Google.Resource.Drive.Files.Update
     , FilesUpdate'
 
     -- * Request Lenses
-    , fuQuotaUser
     , fuNewRevision
-    , fuPrettyPrint
-    , fuUserIP
     , fuPinned
     , fuTimedTextLanguage
     , fuPayload
@@ -47,14 +44,11 @@ module Network.Google.Resource.Drive.Files.Update
     , fuMedia
     , fuTimedTextTrackName
     , fuOCRLanguage
-    , fuKey
     , fuConvert
     , fuSetModifiedDate
     , fuFileId
-    , fuOAuthToken
     , fuAddParents
     , fuOCR
-    , fuFields
     ) where
 
 import           Network.Google.Drive.Types
@@ -80,26 +74,15 @@ type FilesUpdateResource =
                              QueryParam "setModifiedDate" Bool :>
                                QueryParam "addParents" Text :>
                                  QueryParam "ocr" Bool :>
-                                   QueryParam "quotaUser" Text :>
-                                     QueryParam "prettyPrint" Bool :>
-                                       QueryParam "userIp" Text :>
-                                         QueryParam "fields" Text :>
-                                           QueryParam "key" AuthKey :>
-                                             Header "Authorization" OAuthToken
-                                               :>
-                                               QueryParam "alt" AltJSON :>
-                                                 MultipartRelated '[JSON] File
-                                                   Stream
-                                                   :> Put '[JSON] File
+                                   QueryParam "alt" AltJSON :>
+                                     MultipartRelated '[JSON] File Stream :>
+                                       Put '[JSON] File
 
 -- | Updates file metadata and\/or content.
 --
 -- /See:/ 'filesUpdate'' smart constructor.
 data FilesUpdate' = FilesUpdate'
-    { _fuQuotaUser                 :: !(Maybe Text)
-    , _fuNewRevision               :: !Bool
-    , _fuPrettyPrint               :: !Bool
-    , _fuUserIP                    :: !(Maybe Text)
+    { _fuNewRevision               :: !Bool
     , _fuPinned                    :: !Bool
     , _fuTimedTextLanguage         :: !(Maybe Text)
     , _fuPayload                   :: !File
@@ -110,27 +93,18 @@ data FilesUpdate' = FilesUpdate'
     , _fuMedia                     :: !Stream
     , _fuTimedTextTrackName        :: !(Maybe Text)
     , _fuOCRLanguage               :: !(Maybe Text)
-    , _fuKey                       :: !(Maybe AuthKey)
     , _fuConvert                   :: !Bool
     , _fuSetModifiedDate           :: !Bool
     , _fuFileId                    :: !Text
-    , _fuOAuthToken                :: !(Maybe OAuthToken)
     , _fuAddParents                :: !(Maybe Text)
     , _fuOCR                       :: !Bool
-    , _fuFields                    :: !(Maybe Text)
     }
 
 -- | Creates a value of 'FilesUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'fuQuotaUser'
---
 -- * 'fuNewRevision'
---
--- * 'fuPrettyPrint'
---
--- * 'fuUserIP'
 --
 -- * 'fuPinned'
 --
@@ -152,21 +126,15 @@ data FilesUpdate' = FilesUpdate'
 --
 -- * 'fuOCRLanguage'
 --
--- * 'fuKey'
---
 -- * 'fuConvert'
 --
 -- * 'fuSetModifiedDate'
 --
 -- * 'fuFileId'
 --
--- * 'fuOAuthToken'
---
 -- * 'fuAddParents'
 --
 -- * 'fuOCR'
---
--- * 'fuFields'
 filesUpdate'
     :: File -- ^ 'payload'
     -> Stream -- ^ 'media'
@@ -174,10 +142,7 @@ filesUpdate'
     -> FilesUpdate'
 filesUpdate' pFuPayload_ pFuMedia_ pFuFileId_ =
     FilesUpdate'
-    { _fuQuotaUser = Nothing
-    , _fuNewRevision = True
-    , _fuPrettyPrint = True
-    , _fuUserIP = Nothing
+    { _fuNewRevision = True
     , _fuPinned = False
     , _fuTimedTextLanguage = Nothing
     , _fuPayload = pFuPayload_
@@ -188,22 +153,12 @@ filesUpdate' pFuPayload_ pFuMedia_ pFuFileId_ =
     , _fuMedia = pFuMedia_
     , _fuTimedTextTrackName = Nothing
     , _fuOCRLanguage = Nothing
-    , _fuKey = Nothing
     , _fuConvert = False
     , _fuSetModifiedDate = False
     , _fuFileId = pFuFileId_
-    , _fuOAuthToken = Nothing
     , _fuAddParents = Nothing
     , _fuOCR = False
-    , _fuFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-fuQuotaUser :: Lens' FilesUpdate' (Maybe Text)
-fuQuotaUser
-  = lens _fuQuotaUser (\ s a -> s{_fuQuotaUser = a})
 
 -- | Whether a blob upload should create a new revision. If false, the blob
 -- data in the current head revision is replaced. If true or not set, a new
@@ -216,17 +171,6 @@ fuNewRevision :: Lens' FilesUpdate' Bool
 fuNewRevision
   = lens _fuNewRevision
       (\ s a -> s{_fuNewRevision = a})
-
--- | Returns response with indentations and line breaks.
-fuPrettyPrint :: Lens' FilesUpdate' Bool
-fuPrettyPrint
-  = lens _fuPrettyPrint
-      (\ s a -> s{_fuPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-fuUserIP :: Lens' FilesUpdate' (Maybe Text)
-fuUserIP = lens _fuUserIP (\ s a -> s{_fuUserIP = a})
 
 -- | Whether to pin the new revision. A file can have a maximum of 200 pinned
 -- revisions.
@@ -285,12 +229,6 @@ fuOCRLanguage
   = lens _fuOCRLanguage
       (\ s a -> s{_fuOCRLanguage = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-fuKey :: Lens' FilesUpdate' (Maybe AuthKey)
-fuKey = lens _fuKey (\ s a -> s{_fuKey = a})
-
 -- | This parameter is deprecated and has no function.
 fuConvert :: Lens' FilesUpdate' Bool
 fuConvert
@@ -306,11 +244,6 @@ fuSetModifiedDate
 fuFileId :: Lens' FilesUpdate' Text
 fuFileId = lens _fuFileId (\ s a -> s{_fuFileId = a})
 
--- | OAuth 2.0 token for the current user.
-fuOAuthToken :: Lens' FilesUpdate' (Maybe OAuthToken)
-fuOAuthToken
-  = lens _fuOAuthToken (\ s a -> s{_fuOAuthToken = a})
-
 -- | Comma-separated list of parent IDs to add.
 fuAddParents :: Lens' FilesUpdate' (Maybe Text)
 fuAddParents
@@ -320,18 +253,9 @@ fuAddParents
 fuOCR :: Lens' FilesUpdate' Bool
 fuOCR = lens _fuOCR (\ s a -> s{_fuOCR = a})
 
--- | Selector specifying which fields to include in a partial response.
-fuFields :: Lens' FilesUpdate' (Maybe Text)
-fuFields = lens _fuFields (\ s a -> s{_fuFields = a})
-
-instance GoogleAuth FilesUpdate' where
-        _AuthKey = fuKey . _Just
-        _AuthToken = fuOAuthToken . _Just
-
 instance GoogleRequest FilesUpdate' where
         type Rs FilesUpdate' = File
-        request = requestWith driveRequest
-        requestWith rq FilesUpdate'{..}
+        requestClient FilesUpdate'{..}
           = go _fuFileId (Just _fuNewRevision) (Just _fuPinned)
               _fuTimedTextLanguage
               (Just _fuUpdateViewedDate)
@@ -344,14 +268,10 @@ instance GoogleRequest FilesUpdate' where
               (Just _fuSetModifiedDate)
               _fuAddParents
               (Just _fuOCR)
-              _fuQuotaUser
-              (Just _fuPrettyPrint)
-              _fuUserIP
-              _fuFields
-              _fuKey
-              _fuOAuthToken
               (Just AltJSON)
               _fuPayload
               _fuMedia
+              driveService
           where go
-                  = clientBuild (Proxy :: Proxy FilesUpdateResource) rq
+                  = buildClient (Proxy :: Proxy FilesUpdateResource)
+                      mempty

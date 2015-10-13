@@ -34,18 +34,13 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set
 
     -- * Request Lenses
     , ddbsXgafv
-    , ddbsQuotaUser
-    , ddbsPrettyPrint
     , ddbsUploadProtocol
     , ddbsPp
     , ddbsAccessToken
     , ddbsUploadType
     , ddbsPayload
     , ddbsBearerToken
-    , ddbsKey
     , ddbsDebuggeeId
-    , ddbsOAuthToken
-    , ddbsFields
     , ddbsCallback
     ) where
 
@@ -68,32 +63,22 @@ type DebuggerDebuggeesBreakpointsSetResource =
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
                              QueryParam "callback" Text :>
-                               QueryParam "quotaUser" Text :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           ReqBody '[JSON] Breakpoint :>
-                                             Post '[JSON] SetBreakpointResponse
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Breakpoint :>
+                                   Post '[JSON] SetBreakpointResponse
 
 -- | Sets the breakpoint to the debuggee.
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsSet'' smart constructor.
 data DebuggerDebuggeesBreakpointsSet' = DebuggerDebuggeesBreakpointsSet'
     { _ddbsXgafv          :: !(Maybe Text)
-    , _ddbsQuotaUser      :: !(Maybe Text)
-    , _ddbsPrettyPrint    :: !Bool
     , _ddbsUploadProtocol :: !(Maybe Text)
     , _ddbsPp             :: !Bool
     , _ddbsAccessToken    :: !(Maybe Text)
     , _ddbsUploadType     :: !(Maybe Text)
     , _ddbsPayload        :: !Breakpoint
     , _ddbsBearerToken    :: !(Maybe Text)
-    , _ddbsKey            :: !(Maybe AuthKey)
     , _ddbsDebuggeeId     :: !Text
-    , _ddbsOAuthToken     :: !(Maybe OAuthToken)
-    , _ddbsFields         :: !(Maybe Text)
     , _ddbsCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,10 +87,6 @@ data DebuggerDebuggeesBreakpointsSet' = DebuggerDebuggeesBreakpointsSet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ddbsXgafv'
---
--- * 'ddbsQuotaUser'
---
--- * 'ddbsPrettyPrint'
 --
 -- * 'ddbsUploadProtocol'
 --
@@ -119,13 +100,7 @@ data DebuggerDebuggeesBreakpointsSet' = DebuggerDebuggeesBreakpointsSet'
 --
 -- * 'ddbsBearerToken'
 --
--- * 'ddbsKey'
---
 -- * 'ddbsDebuggeeId'
---
--- * 'ddbsOAuthToken'
---
--- * 'ddbsFields'
 --
 -- * 'ddbsCallback'
 debuggerDebuggeesBreakpointsSet'
@@ -135,18 +110,13 @@ debuggerDebuggeesBreakpointsSet'
 debuggerDebuggeesBreakpointsSet' pDdbsPayload_ pDdbsDebuggeeId_ =
     DebuggerDebuggeesBreakpointsSet'
     { _ddbsXgafv = Nothing
-    , _ddbsQuotaUser = Nothing
-    , _ddbsPrettyPrint = True
     , _ddbsUploadProtocol = Nothing
     , _ddbsPp = True
     , _ddbsAccessToken = Nothing
     , _ddbsUploadType = Nothing
     , _ddbsPayload = pDdbsPayload_
     , _ddbsBearerToken = Nothing
-    , _ddbsKey = Nothing
     , _ddbsDebuggeeId = pDdbsDebuggeeId_
-    , _ddbsOAuthToken = Nothing
-    , _ddbsFields = Nothing
     , _ddbsCallback = Nothing
     }
 
@@ -154,20 +124,6 @@ debuggerDebuggeesBreakpointsSet' pDdbsPayload_ pDdbsDebuggeeId_ =
 ddbsXgafv :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe Text)
 ddbsXgafv
   = lens _ddbsXgafv (\ s a -> s{_ddbsXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-ddbsQuotaUser :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe Text)
-ddbsQuotaUser
-  = lens _ddbsQuotaUser
-      (\ s a -> s{_ddbsQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-ddbsPrettyPrint :: Lens' DebuggerDebuggeesBreakpointsSet' Bool
-ddbsPrettyPrint
-  = lens _ddbsPrettyPrint
-      (\ s a -> s{_ddbsPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 ddbsUploadProtocol :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe Text)
@@ -202,60 +158,33 @@ ddbsBearerToken
   = lens _ddbsBearerToken
       (\ s a -> s{_ddbsBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ddbsKey :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe AuthKey)
-ddbsKey = lens _ddbsKey (\ s a -> s{_ddbsKey = a})
-
 -- | The debuggee id to set the breakpoint to.
 ddbsDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsSet' Text
 ddbsDebuggeeId
   = lens _ddbsDebuggeeId
       (\ s a -> s{_ddbsDebuggeeId = a})
 
--- | OAuth 2.0 token for the current user.
-ddbsOAuthToken :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe OAuthToken)
-ddbsOAuthToken
-  = lens _ddbsOAuthToken
-      (\ s a -> s{_ddbsOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-ddbsFields :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe Text)
-ddbsFields
-  = lens _ddbsFields (\ s a -> s{_ddbsFields = a})
-
 -- | JSONP
 ddbsCallback :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe Text)
 ddbsCallback
   = lens _ddbsCallback (\ s a -> s{_ddbsCallback = a})
 
-instance GoogleAuth DebuggerDebuggeesBreakpointsSet'
-         where
-        _AuthKey = ddbsKey . _Just
-        _AuthToken = ddbsOAuthToken . _Just
-
 instance GoogleRequest
          DebuggerDebuggeesBreakpointsSet' where
         type Rs DebuggerDebuggeesBreakpointsSet' =
              SetBreakpointResponse
-        request = requestWith debuggerRequest
-        requestWith rq DebuggerDebuggeesBreakpointsSet'{..}
+        requestClient DebuggerDebuggeesBreakpointsSet'{..}
           = go _ddbsDebuggeeId _ddbsXgafv _ddbsUploadProtocol
               (Just _ddbsPp)
               _ddbsAccessToken
               _ddbsUploadType
               _ddbsBearerToken
               _ddbsCallback
-              _ddbsQuotaUser
-              (Just _ddbsPrettyPrint)
-              _ddbsFields
-              _ddbsKey
-              _ddbsOAuthToken
               (Just AltJSON)
               _ddbsPayload
+              debuggerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy ::
                          Proxy DebuggerDebuggeesBreakpointsSetResource)
-                      rq
+                      mempty

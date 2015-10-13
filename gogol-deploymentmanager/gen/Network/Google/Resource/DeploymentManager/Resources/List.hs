@@ -33,16 +33,10 @@ module Network.Google.Resource.DeploymentManager.Resources.List
     , ResourcesList'
 
     -- * Request Lenses
-    , rlQuotaUser
-    , rlPrettyPrint
     , rlProject
-    , rlUserIP
-    , rlKey
     , rlFilter
     , rlPageToken
-    , rlOAuthToken
     , rlMaxResults
-    , rlFields
     , rlDeployment
     ) where
 
@@ -60,55 +54,31 @@ type ResourcesListResource =
                QueryParam "filter" Text :>
                  QueryParam "pageToken" Text :>
                    QueryParam "maxResults" Word32 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "key" AuthKey :>
-                               Header "Authorization" OAuthToken :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] ResourcesListResponse
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] ResourcesListResponse
 
 -- | Lists all resources in a given deployment.
 --
 -- /See:/ 'resourcesList'' smart constructor.
 data ResourcesList' = ResourcesList'
-    { _rlQuotaUser   :: !(Maybe Text)
-    , _rlPrettyPrint :: !Bool
-    , _rlProject     :: !Text
-    , _rlUserIP      :: !(Maybe Text)
-    , _rlKey         :: !(Maybe AuthKey)
-    , _rlFilter      :: !(Maybe Text)
-    , _rlPageToken   :: !(Maybe Text)
-    , _rlOAuthToken  :: !(Maybe OAuthToken)
-    , _rlMaxResults  :: !Word32
-    , _rlFields      :: !(Maybe Text)
-    , _rlDeployment  :: !Text
+    { _rlProject    :: !Text
+    , _rlFilter     :: !(Maybe Text)
+    , _rlPageToken  :: !(Maybe Text)
+    , _rlMaxResults :: !Word32
+    , _rlDeployment :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResourcesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rlQuotaUser'
---
--- * 'rlPrettyPrint'
---
 -- * 'rlProject'
---
--- * 'rlUserIP'
---
--- * 'rlKey'
 --
 -- * 'rlFilter'
 --
 -- * 'rlPageToken'
 --
--- * 'rlOAuthToken'
---
 -- * 'rlMaxResults'
---
--- * 'rlFields'
 --
 -- * 'rlDeployment'
 resourcesList'
@@ -117,47 +87,17 @@ resourcesList'
     -> ResourcesList'
 resourcesList' pRlProject_ pRlDeployment_ =
     ResourcesList'
-    { _rlQuotaUser = Nothing
-    , _rlPrettyPrint = True
-    , _rlProject = pRlProject_
-    , _rlUserIP = Nothing
-    , _rlKey = Nothing
+    { _rlProject = pRlProject_
     , _rlFilter = Nothing
     , _rlPageToken = Nothing
-    , _rlOAuthToken = Nothing
     , _rlMaxResults = 500
-    , _rlFields = Nothing
     , _rlDeployment = pRlDeployment_
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-rlQuotaUser :: Lens' ResourcesList' (Maybe Text)
-rlQuotaUser
-  = lens _rlQuotaUser (\ s a -> s{_rlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-rlPrettyPrint :: Lens' ResourcesList' Bool
-rlPrettyPrint
-  = lens _rlPrettyPrint
-      (\ s a -> s{_rlPrettyPrint = a})
 
 -- | The project ID for this request.
 rlProject :: Lens' ResourcesList' Text
 rlProject
   = lens _rlProject (\ s a -> s{_rlProject = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-rlUserIP :: Lens' ResourcesList' (Maybe Text)
-rlUserIP = lens _rlUserIP (\ s a -> s{_rlUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-rlKey :: Lens' ResourcesList' (Maybe AuthKey)
-rlKey = lens _rlKey (\ s a -> s{_rlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -180,42 +120,23 @@ rlPageToken :: Lens' ResourcesList' (Maybe Text)
 rlPageToken
   = lens _rlPageToken (\ s a -> s{_rlPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-rlOAuthToken :: Lens' ResourcesList' (Maybe OAuthToken)
-rlOAuthToken
-  = lens _rlOAuthToken (\ s a -> s{_rlOAuthToken = a})
-
 -- | Maximum count of results to be returned.
 rlMaxResults :: Lens' ResourcesList' Word32
 rlMaxResults
   = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
-
--- | Selector specifying which fields to include in a partial response.
-rlFields :: Lens' ResourcesList' (Maybe Text)
-rlFields = lens _rlFields (\ s a -> s{_rlFields = a})
 
 -- | The name of the deployment for this request.
 rlDeployment :: Lens' ResourcesList' Text
 rlDeployment
   = lens _rlDeployment (\ s a -> s{_rlDeployment = a})
 
-instance GoogleAuth ResourcesList' where
-        _AuthKey = rlKey . _Just
-        _AuthToken = rlOAuthToken . _Just
-
 instance GoogleRequest ResourcesList' where
         type Rs ResourcesList' = ResourcesListResponse
-        request = requestWith deploymentManagerRequest
-        requestWith rq ResourcesList'{..}
+        requestClient ResourcesList'{..}
           = go _rlProject _rlDeployment _rlFilter _rlPageToken
               (Just _rlMaxResults)
-              _rlQuotaUser
-              (Just _rlPrettyPrint)
-              _rlUserIP
-              _rlFields
-              _rlKey
-              _rlOAuthToken
               (Just AltJSON)
+              deploymentManagerService
           where go
-                  = clientBuild (Proxy :: Proxy ResourcesListResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ResourcesListResource)
+                      mempty

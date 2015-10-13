@@ -34,21 +34,15 @@ module Network.Google.Resource.MapsEngine.Tables.Features.List
 
     -- * Request Lenses
     , tflInclude
-    , tflQuotaUser
-    , tflPrettyPrint
     , tflWhere
     , tflOrderBy
-    , tflUserIP
-    , tflKey
     , tflVersion
     , tflId
     , tflLimit
     , tflPageToken
     , tflSelect
-    , tflOAuthToken
     , tflIntersects
     , tflMaxResults
-    , tflFields
     ) where
 
 import           Network.Google.MapsEngine.Types
@@ -69,35 +63,23 @@ type TablesFeaturesListResource =
                        QueryParam "select" Text :>
                          QueryParam "intersects" Text :>
                            QueryParam "maxResults" Word32 :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "userIp" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "key" AuthKey :>
-                                       Header "Authorization" OAuthToken :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] FeaturesListResponse
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] FeaturesListResponse
 
 -- | Return all features readable by the current user.
 --
 -- /See:/ 'tablesFeaturesList'' smart constructor.
 data TablesFeaturesList' = TablesFeaturesList'
-    { _tflInclude     :: !(Maybe Text)
-    , _tflQuotaUser   :: !(Maybe Text)
-    , _tflPrettyPrint :: !Bool
-    , _tflWhere       :: !(Maybe Text)
-    , _tflOrderBy     :: !(Maybe Text)
-    , _tflUserIP      :: !(Maybe Text)
-    , _tflKey         :: !(Maybe AuthKey)
-    , _tflVersion     :: !(Maybe TablesFeaturesListVersion)
-    , _tflId          :: !Text
-    , _tflLimit       :: !(Maybe Word32)
-    , _tflPageToken   :: !(Maybe Text)
-    , _tflSelect      :: !(Maybe Text)
-    , _tflOAuthToken  :: !(Maybe OAuthToken)
-    , _tflIntersects  :: !(Maybe Text)
-    , _tflMaxResults  :: !(Maybe Word32)
-    , _tflFields      :: !(Maybe Text)
+    { _tflInclude    :: !(Maybe Text)
+    , _tflWhere      :: !(Maybe Text)
+    , _tflOrderBy    :: !(Maybe Text)
+    , _tflVersion    :: !(Maybe TablesFeaturesListVersion)
+    , _tflId         :: !Text
+    , _tflLimit      :: !(Maybe Word32)
+    , _tflPageToken  :: !(Maybe Text)
+    , _tflSelect     :: !(Maybe Text)
+    , _tflIntersects :: !(Maybe Text)
+    , _tflMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesFeaturesList'' with the minimum fields required to make a request.
@@ -106,17 +88,9 @@ data TablesFeaturesList' = TablesFeaturesList'
 --
 -- * 'tflInclude'
 --
--- * 'tflQuotaUser'
---
--- * 'tflPrettyPrint'
---
 -- * 'tflWhere'
 --
 -- * 'tflOrderBy'
---
--- * 'tflUserIP'
---
--- * 'tflKey'
 --
 -- * 'tflVersion'
 --
@@ -128,34 +102,24 @@ data TablesFeaturesList' = TablesFeaturesList'
 --
 -- * 'tflSelect'
 --
--- * 'tflOAuthToken'
---
 -- * 'tflIntersects'
 --
 -- * 'tflMaxResults'
---
--- * 'tflFields'
 tablesFeaturesList'
     :: Text -- ^ 'id'
     -> TablesFeaturesList'
 tablesFeaturesList' pTflId_ =
     TablesFeaturesList'
     { _tflInclude = Nothing
-    , _tflQuotaUser = Nothing
-    , _tflPrettyPrint = True
     , _tflWhere = Nothing
     , _tflOrderBy = Nothing
-    , _tflUserIP = Nothing
-    , _tflKey = Nothing
     , _tflVersion = Nothing
     , _tflId = pTflId_
     , _tflLimit = Nothing
     , _tflPageToken = Nothing
     , _tflSelect = Nothing
-    , _tflOAuthToken = Nothing
     , _tflIntersects = Nothing
     , _tflMaxResults = Nothing
-    , _tflFields = Nothing
     }
 
 -- | A comma separated list of optional data to include. Optional data
@@ -163,19 +127,6 @@ tablesFeaturesList' pTflId_ =
 tflInclude :: Lens' TablesFeaturesList' (Maybe Text)
 tflInclude
   = lens _tflInclude (\ s a -> s{_tflInclude = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-tflQuotaUser :: Lens' TablesFeaturesList' (Maybe Text)
-tflQuotaUser
-  = lens _tflQuotaUser (\ s a -> s{_tflQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-tflPrettyPrint :: Lens' TablesFeaturesList' Bool
-tflPrettyPrint
-  = lens _tflPrettyPrint
-      (\ s a -> s{_tflPrettyPrint = a})
 
 -- | An SQL-like predicate used to filter results.
 tflWhere :: Lens' TablesFeaturesList' (Maybe Text)
@@ -186,18 +137,6 @@ tflWhere = lens _tflWhere (\ s a -> s{_tflWhere = a})
 tflOrderBy :: Lens' TablesFeaturesList' (Maybe Text)
 tflOrderBy
   = lens _tflOrderBy (\ s a -> s{_tflOrderBy = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-tflUserIP :: Lens' TablesFeaturesList' (Maybe Text)
-tflUserIP
-  = lens _tflUserIP (\ s a -> s{_tflUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-tflKey :: Lens' TablesFeaturesList' (Maybe AuthKey)
-tflKey = lens _tflKey (\ s a -> s{_tflKey = a})
 
 -- | The table version to access. See Accessing Public Data for information.
 tflVersion :: Lens' TablesFeaturesList' (Maybe TablesFeaturesListVersion)
@@ -226,12 +165,6 @@ tflSelect :: Lens' TablesFeaturesList' (Maybe Text)
 tflSelect
   = lens _tflSelect (\ s a -> s{_tflSelect = a})
 
--- | OAuth 2.0 token for the current user.
-tflOAuthToken :: Lens' TablesFeaturesList' (Maybe OAuthToken)
-tflOAuthToken
-  = lens _tflOAuthToken
-      (\ s a -> s{_tflOAuthToken = a})
-
 -- | A geometry literal that specifies the spatial restriction of the query.
 tflIntersects :: Lens' TablesFeaturesList' (Maybe Text)
 tflIntersects
@@ -245,19 +178,9 @@ tflMaxResults
   = lens _tflMaxResults
       (\ s a -> s{_tflMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-tflFields :: Lens' TablesFeaturesList' (Maybe Text)
-tflFields
-  = lens _tflFields (\ s a -> s{_tflFields = a})
-
-instance GoogleAuth TablesFeaturesList' where
-        _AuthKey = tflKey . _Just
-        _AuthToken = tflOAuthToken . _Just
-
 instance GoogleRequest TablesFeaturesList' where
         type Rs TablesFeaturesList' = FeaturesListResponse
-        request = requestWith mapsEngineRequest
-        requestWith rq TablesFeaturesList'{..}
+        requestClient TablesFeaturesList'{..}
           = go _tflId _tflInclude _tflWhere _tflOrderBy
               _tflVersion
               _tflLimit
@@ -265,14 +188,9 @@ instance GoogleRequest TablesFeaturesList' where
               _tflSelect
               _tflIntersects
               _tflMaxResults
-              _tflQuotaUser
-              (Just _tflPrettyPrint)
-              _tflUserIP
-              _tflFields
-              _tflKey
-              _tflOAuthToken
               (Just AltJSON)
+              mapsEngineService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy TablesFeaturesListResource)
-                      rq
+                      mempty

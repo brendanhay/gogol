@@ -18,8 +18,11 @@
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference>
 module Network.Google.Blogger
     (
+    -- * Service Configuration
+      bloggerService
+
     -- * API Declaration
-      BloggerAPI
+    , BloggerAPI
 
     -- * Resources
 

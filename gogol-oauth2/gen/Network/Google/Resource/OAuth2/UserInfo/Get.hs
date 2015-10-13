@@ -32,13 +32,6 @@ module Network.Google.Resource.OAuth2.UserInfo.Get
     , userInfoGet'
     , UserInfoGet'
 
-    -- * Request Lenses
-    , uigQuotaUser
-    , uigPrettyPrint
-    , uigUserIP
-    , uigKey
-    , uigOAuthToken
-    , uigFields
     ) where
 
 import           Network.Google.OAuth2.Types
@@ -50,100 +43,24 @@ type UserInfoGetResource =
      "oauth2" :>
        "v2" :>
          "userinfo" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "fields" Text :>
-                   QueryParam "key" AuthKey :>
-                     Header "Authorization" OAuthToken :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] UserInfoplus
+           QueryParam "alt" AltJSON :> Get '[JSON] UserInfoplus
 
 --
 -- /See:/ 'userInfoGet'' smart constructor.
-data UserInfoGet' = UserInfoGet'
-    { _uigQuotaUser   :: !(Maybe Text)
-    , _uigPrettyPrint :: !Bool
-    , _uigUserIP      :: !(Maybe Text)
-    , _uigKey         :: !(Maybe AuthKey)
-    , _uigOAuthToken  :: !(Maybe OAuthToken)
-    , _uigFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data UserInfoGet' =
+    UserInfoGet'
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserInfoGet'' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'uigQuotaUser'
---
--- * 'uigPrettyPrint'
---
--- * 'uigUserIP'
---
--- * 'uigKey'
---
--- * 'uigOAuthToken'
---
--- * 'uigFields'
 userInfoGet'
     :: UserInfoGet'
-userInfoGet' =
-    UserInfoGet'
-    { _uigQuotaUser = Nothing
-    , _uigPrettyPrint = True
-    , _uigUserIP = Nothing
-    , _uigKey = Nothing
-    , _uigOAuthToken = Nothing
-    , _uigFields = Nothing
-    }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-uigQuotaUser :: Lens' UserInfoGet' (Maybe Text)
-uigQuotaUser
-  = lens _uigQuotaUser (\ s a -> s{_uigQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-uigPrettyPrint :: Lens' UserInfoGet' Bool
-uigPrettyPrint
-  = lens _uigPrettyPrint
-      (\ s a -> s{_uigPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-uigUserIP :: Lens' UserInfoGet' (Maybe Text)
-uigUserIP
-  = lens _uigUserIP (\ s a -> s{_uigUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-uigKey :: Lens' UserInfoGet' (Maybe AuthKey)
-uigKey = lens _uigKey (\ s a -> s{_uigKey = a})
-
--- | OAuth 2.0 token for the current user.
-uigOAuthToken :: Lens' UserInfoGet' (Maybe OAuthToken)
-uigOAuthToken
-  = lens _uigOAuthToken
-      (\ s a -> s{_uigOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-uigFields :: Lens' UserInfoGet' (Maybe Text)
-uigFields
-  = lens _uigFields (\ s a -> s{_uigFields = a})
-
-instance GoogleAuth UserInfoGet' where
-        _AuthKey = uigKey . _Just
-        _AuthToken = uigOAuthToken . _Just
+userInfoGet' = UserInfoGet'
 
 instance GoogleRequest UserInfoGet' where
         type Rs UserInfoGet' = UserInfoplus
-        request = requestWith oAuth2Request
-        requestWith rq UserInfoGet'{..}
-          = go _uigQuotaUser (Just _uigPrettyPrint) _uigUserIP
-              _uigFields
-              _uigKey
-              _uigOAuthToken
-              (Just AltJSON)
+        requestClient UserInfoGet'{..}
+          = go (Just AltJSON) oAuth2Service
           where go
-                  = clientBuild (Proxy :: Proxy UserInfoGetResource) rq
+                  = buildClient (Proxy :: Proxy UserInfoGetResource)
+                      mempty

@@ -33,25 +33,19 @@ module Network.Google.Resource.Books.Layers.AnnotationData.List
     , LayersAnnotationDataList'
 
     -- * Request Lenses
-    , ladlQuotaUser
     , ladlW
-    , ladlPrettyPrint
     , ladlScale
-    , ladlUserIP
     , ladlLocale
     , ladlContentVersion
     , ladlUpdatedMax
-    , ladlKey
     , ladlUpdatedMin
     , ladlAnnotationDataId
     , ladlVolumeId
     , ladlSource
     , ladlH
     , ladlPageToken
-    , ladlOAuthToken
     , ladlLayerId
     , ladlMaxResults
-    , ladlFields
     ) where
 
 import           Network.Google.Books.Types
@@ -76,62 +70,41 @@ type LayersAnnotationDataListResource =
                                QueryParam "h" Int32 :>
                                  QueryParam "pageToken" Text :>
                                    QueryParam "maxResults" Word32 :>
-                                     QueryParam "quotaUser" Text :>
-                                       QueryParam "prettyPrint" Bool :>
-                                         QueryParam "userIp" Text :>
-                                           QueryParam "fields" Text :>
-                                             QueryParam "key" AuthKey :>
-                                               Header "Authorization" OAuthToken
-                                                 :>
-                                                 QueryParam "alt" AltJSON :>
-                                                   Get '[JSON] AnnotationsData
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] AnnotationsData
 
 -- | Gets the annotation data for a volume and layer.
 --
 -- /See:/ 'layersAnnotationDataList'' smart constructor.
 data LayersAnnotationDataList' = LayersAnnotationDataList'
-    { _ladlQuotaUser        :: !(Maybe Text)
-    , _ladlW                :: !(Maybe Int32)
-    , _ladlPrettyPrint      :: !Bool
+    { _ladlW                :: !(Maybe Int32)
     , _ladlScale            :: !(Maybe Int32)
-    , _ladlUserIP           :: !(Maybe Text)
     , _ladlLocale           :: !(Maybe Text)
     , _ladlContentVersion   :: !Text
     , _ladlUpdatedMax       :: !(Maybe Text)
-    , _ladlKey              :: !(Maybe AuthKey)
     , _ladlUpdatedMin       :: !(Maybe Text)
     , _ladlAnnotationDataId :: !(Maybe [Text])
     , _ladlVolumeId         :: !Text
     , _ladlSource           :: !(Maybe Text)
     , _ladlH                :: !(Maybe Int32)
     , _ladlPageToken        :: !(Maybe Text)
-    , _ladlOAuthToken       :: !(Maybe OAuthToken)
     , _ladlLayerId          :: !Text
     , _ladlMaxResults       :: !(Maybe Word32)
-    , _ladlFields           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersAnnotationDataList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ladlQuotaUser'
---
 -- * 'ladlW'
 --
--- * 'ladlPrettyPrint'
---
 -- * 'ladlScale'
---
--- * 'ladlUserIP'
 --
 -- * 'ladlLocale'
 --
 -- * 'ladlContentVersion'
 --
 -- * 'ladlUpdatedMax'
---
--- * 'ladlKey'
 --
 -- * 'ladlUpdatedMin'
 --
@@ -145,13 +118,9 @@ data LayersAnnotationDataList' = LayersAnnotationDataList'
 --
 -- * 'ladlPageToken'
 --
--- * 'ladlOAuthToken'
---
 -- * 'ladlLayerId'
 --
 -- * 'ladlMaxResults'
---
--- * 'ladlFields'
 layersAnnotationDataList'
     :: Text -- ^ 'contentVersion'
     -> Text -- ^ 'volumeId'
@@ -159,56 +128,30 @@ layersAnnotationDataList'
     -> LayersAnnotationDataList'
 layersAnnotationDataList' pLadlContentVersion_ pLadlVolumeId_ pLadlLayerId_ =
     LayersAnnotationDataList'
-    { _ladlQuotaUser = Nothing
-    , _ladlW = Nothing
-    , _ladlPrettyPrint = True
+    { _ladlW = Nothing
     , _ladlScale = Nothing
-    , _ladlUserIP = Nothing
     , _ladlLocale = Nothing
     , _ladlContentVersion = pLadlContentVersion_
     , _ladlUpdatedMax = Nothing
-    , _ladlKey = Nothing
     , _ladlUpdatedMin = Nothing
     , _ladlAnnotationDataId = Nothing
     , _ladlVolumeId = pLadlVolumeId_
     , _ladlSource = Nothing
     , _ladlH = Nothing
     , _ladlPageToken = Nothing
-    , _ladlOAuthToken = Nothing
     , _ladlLayerId = pLadlLayerId_
     , _ladlMaxResults = Nothing
-    , _ladlFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-ladlQuotaUser :: Lens' LayersAnnotationDataList' (Maybe Text)
-ladlQuotaUser
-  = lens _ladlQuotaUser
-      (\ s a -> s{_ladlQuotaUser = a})
 
 -- | The requested pixel width for any images. If width is provided height
 -- must also be provided.
 ladlW :: Lens' LayersAnnotationDataList' (Maybe Int32)
 ladlW = lens _ladlW (\ s a -> s{_ladlW = a})
 
--- | Returns response with indentations and line breaks.
-ladlPrettyPrint :: Lens' LayersAnnotationDataList' Bool
-ladlPrettyPrint
-  = lens _ladlPrettyPrint
-      (\ s a -> s{_ladlPrettyPrint = a})
-
 -- | The requested scale for the image.
 ladlScale :: Lens' LayersAnnotationDataList' (Maybe Int32)
 ladlScale
   = lens _ladlScale (\ s a -> s{_ladlScale = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-ladlUserIP :: Lens' LayersAnnotationDataList' (Maybe Text)
-ladlUserIP
-  = lens _ladlUserIP (\ s a -> s{_ladlUserIP = a})
 
 -- | The locale information for the data. ISO-639-1 language and ISO-3166-1
 -- country code. Ex: \'en_US\'.
@@ -228,12 +171,6 @@ ladlUpdatedMax :: Lens' LayersAnnotationDataList' (Maybe Text)
 ladlUpdatedMax
   = lens _ladlUpdatedMax
       (\ s a -> s{_ladlUpdatedMax = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-ladlKey :: Lens' LayersAnnotationDataList' (Maybe AuthKey)
-ladlKey = lens _ladlKey (\ s a -> s{_ladlKey = a})
 
 -- | RFC 3339 timestamp to restrict to items updated since this timestamp
 -- (inclusive).
@@ -272,12 +209,6 @@ ladlPageToken
   = lens _ladlPageToken
       (\ s a -> s{_ladlPageToken = a})
 
--- | OAuth 2.0 token for the current user.
-ladlOAuthToken :: Lens' LayersAnnotationDataList' (Maybe OAuthToken)
-ladlOAuthToken
-  = lens _ladlOAuthToken
-      (\ s a -> s{_ladlOAuthToken = a})
-
 -- | The ID for the layer to get the annotation data.
 ladlLayerId :: Lens' LayersAnnotationDataList' Text
 ladlLayerId
@@ -289,20 +220,10 @@ ladlMaxResults
   = lens _ladlMaxResults
       (\ s a -> s{_ladlMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-ladlFields :: Lens' LayersAnnotationDataList' (Maybe Text)
-ladlFields
-  = lens _ladlFields (\ s a -> s{_ladlFields = a})
-
-instance GoogleAuth LayersAnnotationDataList' where
-        _AuthKey = ladlKey . _Just
-        _AuthToken = ladlOAuthToken . _Just
-
 instance GoogleRequest LayersAnnotationDataList'
          where
         type Rs LayersAnnotationDataList' = AnnotationsData
-        request = requestWith booksRequest
-        requestWith rq LayersAnnotationDataList'{..}
+        requestClient LayersAnnotationDataList'{..}
           = go _ladlVolumeId _ladlLayerId
               (Just _ladlContentVersion)
               _ladlW
@@ -315,14 +236,9 @@ instance GoogleRequest LayersAnnotationDataList'
               _ladlH
               _ladlPageToken
               _ladlMaxResults
-              _ladlQuotaUser
-              (Just _ladlPrettyPrint)
-              _ladlUserIP
-              _ladlFields
-              _ladlKey
-              _ladlOAuthToken
               (Just AltJSON)
+              booksService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy LayersAnnotationDataListResource)
-                      rq
+                      mempty

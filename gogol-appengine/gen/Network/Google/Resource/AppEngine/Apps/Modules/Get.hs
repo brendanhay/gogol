@@ -34,18 +34,13 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Get
 
     -- * Request Lenses
     , amgXgafv
-    , amgQuotaUser
-    , amgPrettyPrint
     , amgUploadProtocol
     , amgPp
     , amgAccessToken
     , amgUploadType
     , amgModulesId
     , amgBearerToken
-    , amgKey
     , amgAppsId
-    , amgOAuthToken
-    , amgFields
     , amgCallback
     ) where
 
@@ -67,31 +62,20 @@ type AppsModulesGetResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
-                             QueryParam "quotaUser" Text :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "key" AuthKey :>
-                                     Header "Authorization" OAuthToken :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] Module
+                             QueryParam "alt" AltJSON :> Get '[JSON] Module
 
 -- | Gets the current configuration of the module.
 --
 -- /See:/ 'appsModulesGet'' smart constructor.
 data AppsModulesGet' = AppsModulesGet'
     { _amgXgafv          :: !(Maybe Text)
-    , _amgQuotaUser      :: !(Maybe Text)
-    , _amgPrettyPrint    :: !Bool
     , _amgUploadProtocol :: !(Maybe Text)
     , _amgPp             :: !Bool
     , _amgAccessToken    :: !(Maybe Text)
     , _amgUploadType     :: !(Maybe Text)
     , _amgModulesId      :: !Text
     , _amgBearerToken    :: !(Maybe Text)
-    , _amgKey            :: !(Maybe AuthKey)
     , _amgAppsId         :: !Text
-    , _amgOAuthToken     :: !(Maybe OAuthToken)
-    , _amgFields         :: !(Maybe Text)
     , _amgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -100,10 +84,6 @@ data AppsModulesGet' = AppsModulesGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'amgXgafv'
---
--- * 'amgQuotaUser'
---
--- * 'amgPrettyPrint'
 --
 -- * 'amgUploadProtocol'
 --
@@ -117,13 +97,7 @@ data AppsModulesGet' = AppsModulesGet'
 --
 -- * 'amgBearerToken'
 --
--- * 'amgKey'
---
 -- * 'amgAppsId'
---
--- * 'amgOAuthToken'
---
--- * 'amgFields'
 --
 -- * 'amgCallback'
 appsModulesGet'
@@ -133,37 +107,19 @@ appsModulesGet'
 appsModulesGet' pAmgModulesId_ pAmgAppsId_ =
     AppsModulesGet'
     { _amgXgafv = Nothing
-    , _amgQuotaUser = Nothing
-    , _amgPrettyPrint = True
     , _amgUploadProtocol = Nothing
     , _amgPp = True
     , _amgAccessToken = Nothing
     , _amgUploadType = Nothing
     , _amgModulesId = pAmgModulesId_
     , _amgBearerToken = Nothing
-    , _amgKey = Nothing
     , _amgAppsId = pAmgAppsId_
-    , _amgOAuthToken = Nothing
-    , _amgFields = Nothing
     , _amgCallback = Nothing
     }
 
 -- | V1 error format.
 amgXgafv :: Lens' AppsModulesGet' (Maybe Text)
 amgXgafv = lens _amgXgafv (\ s a -> s{_amgXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-amgQuotaUser :: Lens' AppsModulesGet' (Maybe Text)
-amgQuotaUser
-  = lens _amgQuotaUser (\ s a -> s{_amgQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-amgPrettyPrint :: Lens' AppsModulesGet' Bool
-amgPrettyPrint
-  = lens _amgPrettyPrint
-      (\ s a -> s{_amgPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 amgUploadProtocol :: Lens' AppsModulesGet' (Maybe Text)
@@ -198,42 +154,20 @@ amgBearerToken
   = lens _amgBearerToken
       (\ s a -> s{_amgBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-amgKey :: Lens' AppsModulesGet' (Maybe AuthKey)
-amgKey = lens _amgKey (\ s a -> s{_amgKey = a})
-
 -- | Part of \`name\`. Name of the resource requested. For example:
 -- \"apps\/myapp\/modules\/default\".
 amgAppsId :: Lens' AppsModulesGet' Text
 amgAppsId
   = lens _amgAppsId (\ s a -> s{_amgAppsId = a})
 
--- | OAuth 2.0 token for the current user.
-amgOAuthToken :: Lens' AppsModulesGet' (Maybe OAuthToken)
-amgOAuthToken
-  = lens _amgOAuthToken
-      (\ s a -> s{_amgOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-amgFields :: Lens' AppsModulesGet' (Maybe Text)
-amgFields
-  = lens _amgFields (\ s a -> s{_amgFields = a})
-
 -- | JSONP
 amgCallback :: Lens' AppsModulesGet' (Maybe Text)
 amgCallback
   = lens _amgCallback (\ s a -> s{_amgCallback = a})
 
-instance GoogleAuth AppsModulesGet' where
-        _AuthKey = amgKey . _Just
-        _AuthToken = amgOAuthToken . _Just
-
 instance GoogleRequest AppsModulesGet' where
         type Rs AppsModulesGet' = Module
-        request = requestWith appEngineRequest
-        requestWith rq AppsModulesGet'{..}
+        requestClient AppsModulesGet'{..}
           = go _amgAppsId _amgModulesId _amgXgafv
               _amgUploadProtocol
               (Just _amgPp)
@@ -241,12 +175,8 @@ instance GoogleRequest AppsModulesGet' where
               _amgUploadType
               _amgBearerToken
               _amgCallback
-              _amgQuotaUser
-              (Just _amgPrettyPrint)
-              _amgFields
-              _amgKey
-              _amgOAuthToken
               (Just AltJSON)
+              appEngineService
           where go
-                  = clientBuild (Proxy :: Proxy AppsModulesGetResource)
-                      rq
+                  = buildClient (Proxy :: Proxy AppsModulesGetResource)
+                      mempty

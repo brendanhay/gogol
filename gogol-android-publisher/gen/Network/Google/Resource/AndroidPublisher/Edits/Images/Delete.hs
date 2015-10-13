@@ -33,17 +33,11 @@ module Network.Google.Resource.AndroidPublisher.Edits.Images.Delete
     , EditsImagesDelete'
 
     -- * Request Lenses
-    , eidQuotaUser
-    , eidPrettyPrint
     , eidPackageName
-    , eidUserIP
     , eidImageType
-    , eidKey
     , eidImageId
     , eidLanguage
-    , eidOAuthToken
     , eidEditId
-    , eidFields
     ) where
 
 import           Network.Google.AndroidPublisher.Types
@@ -59,56 +53,32 @@ type EditsImagesDeleteResource =
              Capture "language" Text :>
                Capture "imageType" EditsImagesDeleteImageType :>
                  Capture "imageId" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the image (specified by id) from the edit.
 --
 -- /See:/ 'editsImagesDelete'' smart constructor.
 data EditsImagesDelete' = EditsImagesDelete'
-    { _eidQuotaUser   :: !(Maybe Text)
-    , _eidPrettyPrint :: !Bool
-    , _eidPackageName :: !Text
-    , _eidUserIP      :: !(Maybe Text)
+    { _eidPackageName :: !Text
     , _eidImageType   :: !EditsImagesDeleteImageType
-    , _eidKey         :: !(Maybe AuthKey)
     , _eidImageId     :: !Text
     , _eidLanguage    :: !Text
-    , _eidOAuthToken  :: !(Maybe OAuthToken)
     , _eidEditId      :: !Text
-    , _eidFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsImagesDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eidQuotaUser'
---
--- * 'eidPrettyPrint'
---
 -- * 'eidPackageName'
 --
--- * 'eidUserIP'
---
 -- * 'eidImageType'
---
--- * 'eidKey'
 --
 -- * 'eidImageId'
 --
 -- * 'eidLanguage'
 --
--- * 'eidOAuthToken'
---
 -- * 'eidEditId'
---
--- * 'eidFields'
 editsImagesDelete'
     :: Text -- ^ 'packageName'
     -> EditsImagesDeleteImageType -- ^ 'imageType'
@@ -118,31 +88,12 @@ editsImagesDelete'
     -> EditsImagesDelete'
 editsImagesDelete' pEidPackageName_ pEidImageType_ pEidImageId_ pEidLanguage_ pEidEditId_ =
     EditsImagesDelete'
-    { _eidQuotaUser = Nothing
-    , _eidPrettyPrint = True
-    , _eidPackageName = pEidPackageName_
-    , _eidUserIP = Nothing
+    { _eidPackageName = pEidPackageName_
     , _eidImageType = pEidImageType_
-    , _eidKey = Nothing
     , _eidImageId = pEidImageId_
     , _eidLanguage = pEidLanguage_
-    , _eidOAuthToken = Nothing
     , _eidEditId = pEidEditId_
-    , _eidFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-eidQuotaUser :: Lens' EditsImagesDelete' (Maybe Text)
-eidQuotaUser
-  = lens _eidQuotaUser (\ s a -> s{_eidQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-eidPrettyPrint :: Lens' EditsImagesDelete' Bool
-eidPrettyPrint
-  = lens _eidPrettyPrint
-      (\ s a -> s{_eidPrettyPrint = a})
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
@@ -151,21 +102,9 @@ eidPackageName
   = lens _eidPackageName
       (\ s a -> s{_eidPackageName = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-eidUserIP :: Lens' EditsImagesDelete' (Maybe Text)
-eidUserIP
-  = lens _eidUserIP (\ s a -> s{_eidUserIP = a})
-
 eidImageType :: Lens' EditsImagesDelete' EditsImagesDeleteImageType
 eidImageType
   = lens _eidImageType (\ s a -> s{_eidImageType = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-eidKey :: Lens' EditsImagesDelete' (Maybe AuthKey)
-eidKey = lens _eidKey (\ s a -> s{_eidKey = a})
 
 -- | Unique identifier an image within the set of images attached to this
 -- edit.
@@ -180,41 +119,20 @@ eidLanguage :: Lens' EditsImagesDelete' Text
 eidLanguage
   = lens _eidLanguage (\ s a -> s{_eidLanguage = a})
 
--- | OAuth 2.0 token for the current user.
-eidOAuthToken :: Lens' EditsImagesDelete' (Maybe OAuthToken)
-eidOAuthToken
-  = lens _eidOAuthToken
-      (\ s a -> s{_eidOAuthToken = a})
-
 -- | Unique identifier for this edit.
 eidEditId :: Lens' EditsImagesDelete' Text
 eidEditId
   = lens _eidEditId (\ s a -> s{_eidEditId = a})
 
--- | Selector specifying which fields to include in a partial response.
-eidFields :: Lens' EditsImagesDelete' (Maybe Text)
-eidFields
-  = lens _eidFields (\ s a -> s{_eidFields = a})
-
-instance GoogleAuth EditsImagesDelete' where
-        _AuthKey = eidKey . _Just
-        _AuthToken = eidOAuthToken . _Just
-
 instance GoogleRequest EditsImagesDelete' where
         type Rs EditsImagesDelete' = ()
-        request = requestWith androidPublisherRequest
-        requestWith rq EditsImagesDelete'{..}
+        requestClient EditsImagesDelete'{..}
           = go _eidPackageName _eidEditId _eidLanguage
               _eidImageType
               _eidImageId
-              _eidQuotaUser
-              (Just _eidPrettyPrint)
-              _eidUserIP
-              _eidFields
-              _eidKey
-              _eidOAuthToken
               (Just AltJSON)
+              androidPublisherService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy EditsImagesDeleteResource)
-                      rq
+                      mempty

@@ -33,12 +33,9 @@ module Network.Google.Resource.DFAReporting.Ads.List
     , AdsList'
 
     -- * Request Lenses
-    , adsQuotaUser
-    , adsPrettyPrint
     , adsRemarketingListIds
     , adsLandingPageIds
     , adsCreativeIds
-    , adsUserIP
     , adsAdvertiserId
     , adsCampaignIds
     , adsSearchString
@@ -49,20 +46,17 @@ module Network.Google.Resource.DFAReporting.Ads.List
     , adsSortOrder
     , adsActive
     , adsCreativeOptimizationConfigurationIds
-    , adsKey
     , adsPlacementIds
     , adsSSLRequired
     , adsOverriddenEventTagId
     , adsPageToken
     , adsSortField
     , adsType
-    , adsOAuthToken
     , adsCreativeType
     , adsDynamicClickTracker
     , adsCompatibility
     , adsArchived
     , adsMaxResults
-    , adsFields
     , adsAudienceSegmentIds
     ) where
 
@@ -118,48 +112,19 @@ type AdsListResource =
                                                            "audienceSegmentIds"
                                                            Int64
                                                            :>
-                                                           QueryParam
-                                                             "quotaUser"
-                                                             Text
+                                                           QueryParam "alt"
+                                                             AltJSON
                                                              :>
-                                                             QueryParam
-                                                               "prettyPrint"
-                                                               Bool
-                                                               :>
-                                                               QueryParam
-                                                                 "userIp"
-                                                                 Text
-                                                                 :>
-                                                                 QueryParam
-                                                                   "fields"
-                                                                   Text
-                                                                   :>
-                                                                   QueryParam
-                                                                     "key"
-                                                                     AuthKey
-                                                                     :>
-                                                                     Header
-                                                                       "Authorization"
-                                                                       OAuthToken
-                                                                       :>
-                                                                       QueryParam
-                                                                         "alt"
-                                                                         AltJSON
-                                                                         :>
-                                                                         Get
-                                                                           '[JSON]
-                                                                           AdsListResponse
+                                                             Get '[JSON]
+                                                               AdsListResponse
 
 -- | Retrieves a list of ads, possibly filtered.
 --
 -- /See:/ 'adsList'' smart constructor.
 data AdsList' = AdsList'
-    { _adsQuotaUser                            :: !(Maybe Text)
-    , _adsPrettyPrint                          :: !Bool
-    , _adsRemarketingListIds                   :: !(Maybe [Int64])
+    { _adsRemarketingListIds                   :: !(Maybe [Int64])
     , _adsLandingPageIds                       :: !(Maybe [Int64])
     , _adsCreativeIds                          :: !(Maybe [Int64])
-    , _adsUserIP                               :: !(Maybe Text)
     , _adsAdvertiserId                         :: !(Maybe Int64)
     , _adsCampaignIds                          :: !(Maybe [Int64])
     , _adsSearchString                         :: !(Maybe Text)
@@ -170,20 +135,17 @@ data AdsList' = AdsList'
     , _adsSortOrder                            :: !(Maybe AdsListSortOrder)
     , _adsActive                               :: !(Maybe Bool)
     , _adsCreativeOptimizationConfigurationIds :: !(Maybe [Int64])
-    , _adsKey                                  :: !(Maybe AuthKey)
     , _adsPlacementIds                         :: !(Maybe [Int64])
     , _adsSSLRequired                          :: !(Maybe Bool)
     , _adsOverriddenEventTagId                 :: !(Maybe Int64)
     , _adsPageToken                            :: !(Maybe Text)
     , _adsSortField                            :: !(Maybe AdsListSortField)
     , _adsType                                 :: !(Maybe [AdsListType])
-    , _adsOAuthToken                           :: !(Maybe OAuthToken)
     , _adsCreativeType                         :: !(Maybe AdsListCreativeType)
     , _adsDynamicClickTracker                  :: !(Maybe Bool)
     , _adsCompatibility                        :: !(Maybe AdsListCompatibility)
     , _adsArchived                             :: !(Maybe Bool)
     , _adsMaxResults                           :: !(Maybe Int32)
-    , _adsFields                               :: !(Maybe Text)
     , _adsAudienceSegmentIds                   :: !(Maybe [Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -191,17 +153,11 @@ data AdsList' = AdsList'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'adsQuotaUser'
---
--- * 'adsPrettyPrint'
---
 -- * 'adsRemarketingListIds'
 --
 -- * 'adsLandingPageIds'
 --
 -- * 'adsCreativeIds'
---
--- * 'adsUserIP'
 --
 -- * 'adsAdvertiserId'
 --
@@ -223,8 +179,6 @@ data AdsList' = AdsList'
 --
 -- * 'adsCreativeOptimizationConfigurationIds'
 --
--- * 'adsKey'
---
 -- * 'adsPlacementIds'
 --
 -- * 'adsSSLRequired'
@@ -237,8 +191,6 @@ data AdsList' = AdsList'
 --
 -- * 'adsType'
 --
--- * 'adsOAuthToken'
---
 -- * 'adsCreativeType'
 --
 -- * 'adsDynamicClickTracker'
@@ -249,20 +201,15 @@ data AdsList' = AdsList'
 --
 -- * 'adsMaxResults'
 --
--- * 'adsFields'
---
 -- * 'adsAudienceSegmentIds'
 adsList'
     :: Int64 -- ^ 'profileId'
     -> AdsList'
 adsList' pAdsProFileId_ =
     AdsList'
-    { _adsQuotaUser = Nothing
-    , _adsPrettyPrint = True
-    , _adsRemarketingListIds = Nothing
+    { _adsRemarketingListIds = Nothing
     , _adsLandingPageIds = Nothing
     , _adsCreativeIds = Nothing
-    , _adsUserIP = Nothing
     , _adsAdvertiserId = Nothing
     , _adsCampaignIds = Nothing
     , _adsSearchString = Nothing
@@ -273,35 +220,19 @@ adsList' pAdsProFileId_ =
     , _adsSortOrder = Nothing
     , _adsActive = Nothing
     , _adsCreativeOptimizationConfigurationIds = Nothing
-    , _adsKey = Nothing
     , _adsPlacementIds = Nothing
     , _adsSSLRequired = Nothing
     , _adsOverriddenEventTagId = Nothing
     , _adsPageToken = Nothing
     , _adsSortField = Nothing
     , _adsType = Nothing
-    , _adsOAuthToken = Nothing
     , _adsCreativeType = Nothing
     , _adsDynamicClickTracker = Nothing
     , _adsCompatibility = Nothing
     , _adsArchived = Nothing
     , _adsMaxResults = Nothing
-    , _adsFields = Nothing
     , _adsAudienceSegmentIds = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-adsQuotaUser :: Lens' AdsList' (Maybe Text)
-adsQuotaUser
-  = lens _adsQuotaUser (\ s a -> s{_adsQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-adsPrettyPrint :: Lens' AdsList' Bool
-adsPrettyPrint
-  = lens _adsPrettyPrint
-      (\ s a -> s{_adsPrettyPrint = a})
 
 -- | Select only ads whose list targeting expression use these remarketing
 -- list IDs.
@@ -327,12 +258,6 @@ adsCreativeIds
       (\ s a -> s{_adsCreativeIds = a})
       . _Default
       . _Coerce
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-adsUserIP :: Lens' AdsList' (Maybe Text)
-adsUserIP
-  = lens _adsUserIP (\ s a -> s{_adsUserIP = a})
 
 -- | Select only ads with this advertiser ID.
 adsAdvertiserId :: Lens' AdsList' (Maybe Int64)
@@ -402,12 +327,6 @@ adsCreativeOptimizationConfigurationIds
       . _Default
       . _Coerce
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-adsKey :: Lens' AdsList' (Maybe AuthKey)
-adsKey = lens _adsKey (\ s a -> s{_adsKey = a})
-
 -- | Select only ads with these placement IDs assigned.
 adsPlacementIds :: Lens' AdsList' [Int64]
 adsPlacementIds
@@ -443,12 +362,6 @@ adsType :: Lens' AdsList' [AdsListType]
 adsType
   = lens _adsType (\ s a -> s{_adsType = a}) . _Default
       . _Coerce
-
--- | OAuth 2.0 token for the current user.
-adsOAuthToken :: Lens' AdsList' (Maybe OAuthToken)
-adsOAuthToken
-  = lens _adsOAuthToken
-      (\ s a -> s{_adsOAuthToken = a})
 
 -- | Select only ads with the specified creativeType.
 adsCreativeType :: Lens' AdsList' (Maybe AdsListCreativeType)
@@ -486,11 +399,6 @@ adsMaxResults
   = lens _adsMaxResults
       (\ s a -> s{_adsMaxResults = a})
 
--- | Selector specifying which fields to include in a partial response.
-adsFields :: Lens' AdsList' (Maybe Text)
-adsFields
-  = lens _adsFields (\ s a -> s{_adsFields = a})
-
 -- | Select only ads with these audience segment IDs.
 adsAudienceSegmentIds :: Lens' AdsList' [Int64]
 adsAudienceSegmentIds
@@ -499,14 +407,9 @@ adsAudienceSegmentIds
       . _Default
       . _Coerce
 
-instance GoogleAuth AdsList' where
-        _AuthKey = adsKey . _Just
-        _AuthToken = adsOAuthToken . _Just
-
 instance GoogleRequest AdsList' where
         type Rs AdsList' = AdsListResponse
-        request = requestWith dFAReportingRequest
-        requestWith rq AdsList'{..}
+        requestClient AdsList'{..}
           = go _adsProFileId
               (_adsRemarketingListIds ^. _Default)
               (_adsLandingPageIds ^. _Default)
@@ -533,12 +436,7 @@ instance GoogleRequest AdsList' where
               _adsArchived
               _adsMaxResults
               (_adsAudienceSegmentIds ^. _Default)
-              _adsQuotaUser
-              (Just _adsPrettyPrint)
-              _adsUserIP
-              _adsFields
-              _adsKey
-              _adsOAuthToken
               (Just AltJSON)
+              dFAReportingService
           where go
-                  = clientBuild (Proxy :: Proxy AdsListResource) rq
+                  = buildClient (Proxy :: Proxy AdsListResource) mempty

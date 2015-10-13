@@ -37,16 +37,10 @@ module Network.Google.Resource.YouTube.Captions.Download
 
     -- * Request Lenses
     , capaOnBehalfOf
-    , capaQuotaUser
-    , capaPrettyPrint
-    , capaUserIP
     , capaTlang
     , capaOnBehalfOfContentOwner
-    , capaKey
     , capaId
     , capaTfmt
-    , capaOAuthToken
-    , capaFields
     ) where
 
 import           Network.Google.Prelude
@@ -61,13 +55,7 @@ type CaptionsDownloadResource =
            QueryParam "tlang" Text :>
              QueryParam "onBehalfOfContentOwner" Text :>
                QueryParam "tfmt" CaptionsDownloadTfmt :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "key" AuthKey :>
-                           Header "Authorization" OAuthToken :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] ()
+                 QueryParam "alt" AltJSON :> Get '[JSON] ()
        :<|>
        "captions" :>
          Capture "id" Text :>
@@ -75,14 +63,8 @@ type CaptionsDownloadResource =
              QueryParam "tlang" Text :>
                QueryParam "onBehalfOfContentOwner" Text :>
                  QueryParam "tfmt" CaptionsDownloadTfmt :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "key" AuthKey :>
-                             Header "Authorization" OAuthToken :>
-                               QueryParam "alt" AltMedia :>
-                                 Get '[OctetStream] Stream
+                   QueryParam "alt" AltMedia :>
+                     Get '[OctetStream] Stream
 
 -- | Downloads a caption track. The caption track is returned in its original
 -- format unless the request specifies a value for the tfmt parameter and
@@ -92,16 +74,10 @@ type CaptionsDownloadResource =
 -- /See:/ 'captionsDownload'' smart constructor.
 data CaptionsDownload' = CaptionsDownload'
     { _capaOnBehalfOf             :: !(Maybe Text)
-    , _capaQuotaUser              :: !(Maybe Text)
-    , _capaPrettyPrint            :: !Bool
-    , _capaUserIP                 :: !(Maybe Text)
     , _capaTlang                  :: !(Maybe Text)
     , _capaOnBehalfOfContentOwner :: !(Maybe Text)
-    , _capaKey                    :: !(Maybe AuthKey)
     , _capaId                     :: !Text
     , _capaTfmt                   :: !(Maybe CaptionsDownloadTfmt)
-    , _capaOAuthToken             :: !(Maybe OAuthToken)
-    , _capaFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionsDownload'' with the minimum fields required to make a request.
@@ -110,41 +86,23 @@ data CaptionsDownload' = CaptionsDownload'
 --
 -- * 'capaOnBehalfOf'
 --
--- * 'capaQuotaUser'
---
--- * 'capaPrettyPrint'
---
--- * 'capaUserIP'
---
 -- * 'capaTlang'
 --
 -- * 'capaOnBehalfOfContentOwner'
 --
--- * 'capaKey'
---
 -- * 'capaId'
 --
 -- * 'capaTfmt'
---
--- * 'capaOAuthToken'
---
--- * 'capaFields'
 captionsDownload'
     :: Text -- ^ 'id'
     -> CaptionsDownload'
 captionsDownload' pCapaId_ =
     CaptionsDownload'
     { _capaOnBehalfOf = Nothing
-    , _capaQuotaUser = Nothing
-    , _capaPrettyPrint = True
-    , _capaUserIP = Nothing
     , _capaTlang = Nothing
     , _capaOnBehalfOfContentOwner = Nothing
-    , _capaKey = Nothing
     , _capaId = pCapaId_
     , _capaTfmt = Nothing
-    , _capaOAuthToken = Nothing
-    , _capaFields = Nothing
     }
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
@@ -153,26 +111,6 @@ capaOnBehalfOf :: Lens' CaptionsDownload' (Maybe Text)
 capaOnBehalfOf
   = lens _capaOnBehalfOf
       (\ s a -> s{_capaOnBehalfOf = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-capaQuotaUser :: Lens' CaptionsDownload' (Maybe Text)
-capaQuotaUser
-  = lens _capaQuotaUser
-      (\ s a -> s{_capaQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-capaPrettyPrint :: Lens' CaptionsDownload' Bool
-capaPrettyPrint
-  = lens _capaPrettyPrint
-      (\ s a -> s{_capaPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-capaUserIP :: Lens' CaptionsDownload' (Maybe Text)
-capaUserIP
-  = lens _capaUserIP (\ s a -> s{_capaUserIP = a})
 
 -- | The tlang parameter specifies that the API response should return a
 -- translation of the specified caption track. The parameter value is an
@@ -198,12 +136,6 @@ capaOnBehalfOfContentOwner
   = lens _capaOnBehalfOfContentOwner
       (\ s a -> s{_capaOnBehalfOfContentOwner = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-capaKey :: Lens' CaptionsDownload' (Maybe AuthKey)
-capaKey = lens _capaKey (\ s a -> s{_capaKey = a})
-
 -- | The id parameter identifies the caption track that is being retrieved.
 -- The value is a caption track ID as identified by the id property in a
 -- caption resource.
@@ -216,56 +148,29 @@ capaId = lens _capaId (\ s a -> s{_capaId = a})
 capaTfmt :: Lens' CaptionsDownload' (Maybe CaptionsDownloadTfmt)
 capaTfmt = lens _capaTfmt (\ s a -> s{_capaTfmt = a})
 
--- | OAuth 2.0 token for the current user.
-capaOAuthToken :: Lens' CaptionsDownload' (Maybe OAuthToken)
-capaOAuthToken
-  = lens _capaOAuthToken
-      (\ s a -> s{_capaOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-capaFields :: Lens' CaptionsDownload' (Maybe Text)
-capaFields
-  = lens _capaFields (\ s a -> s{_capaFields = a})
-
-instance GoogleAuth CaptionsDownload' where
-        _AuthKey = capaKey . _Just
-        _AuthToken = capaOAuthToken . _Just
-
 instance GoogleRequest CaptionsDownload' where
         type Rs CaptionsDownload' = ()
-        request = requestWith youTubeRequest
-        requestWith rq CaptionsDownload'{..}
+        requestClient CaptionsDownload'{..}
           = go _capaId _capaOnBehalfOf _capaTlang
               _capaOnBehalfOfContentOwner
               _capaTfmt
-              _capaQuotaUser
-              (Just _capaPrettyPrint)
-              _capaUserIP
-              _capaFields
-              _capaKey
-              _capaOAuthToken
               (Just AltJSON)
+              youTubeService
           where go :<|> _
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CaptionsDownloadResource)
-                      rq
+                      mempty
 
 instance GoogleRequest
          (MediaDownload CaptionsDownload') where
         type Rs (MediaDownload CaptionsDownload') = Stream
-        request = requestWith youTubeRequest
-        requestWith rq (MediaDownload CaptionsDownload'{..})
+        requestClient (MediaDownload CaptionsDownload'{..})
           = go _capaId _capaOnBehalfOf _capaTlang
               _capaOnBehalfOfContentOwner
               _capaTfmt
-              _capaQuotaUser
-              (Just _capaPrettyPrint)
-              _capaUserIP
-              _capaFields
-              _capaKey
-              _capaOAuthToken
               (Just AltMedia)
+              youTubeService
           where _ :<|> go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy CaptionsDownloadResource)
-                      rq
+                      mempty

@@ -34,13 +34,6 @@ module Network.Google.Resource.GamesManagement.Scores.ResetAll
     , scoresResetAll'
     , ScoresResetAll'
 
-    -- * Request Lenses
-    , sraQuotaUser
-    , sraPrettyPrint
-    , sraUserIP
-    , sraKey
-    , sraOAuthToken
-    , sraFields
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -51,105 +44,28 @@ import           Network.Google.Prelude
 type ScoresResetAllResource =
      "scores" :>
        "reset" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fields" Text :>
-                 QueryParam "key" AuthKey :>
-                   Header "Authorization" OAuthToken :>
-                     QueryParam "alt" AltJSON :>
-                       Post '[JSON] PlayerScoreResetAllResponse
+         QueryParam "alt" AltJSON :>
+           Post '[JSON] PlayerScoreResetAllResponse
 
 -- | Resets all scores for all leaderboards for the currently authenticated
 -- players. This method is only accessible to whitelisted tester accounts
 -- for your application.
 --
 -- /See:/ 'scoresResetAll'' smart constructor.
-data ScoresResetAll' = ScoresResetAll'
-    { _sraQuotaUser   :: !(Maybe Text)
-    , _sraPrettyPrint :: !Bool
-    , _sraUserIP      :: !(Maybe Text)
-    , _sraKey         :: !(Maybe AuthKey)
-    , _sraOAuthToken  :: !(Maybe OAuthToken)
-    , _sraFields      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data ScoresResetAll' =
+    ScoresResetAll'
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresResetAll'' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sraQuotaUser'
---
--- * 'sraPrettyPrint'
---
--- * 'sraUserIP'
---
--- * 'sraKey'
---
--- * 'sraOAuthToken'
---
--- * 'sraFields'
 scoresResetAll'
     :: ScoresResetAll'
-scoresResetAll' =
-    ScoresResetAll'
-    { _sraQuotaUser = Nothing
-    , _sraPrettyPrint = True
-    , _sraUserIP = Nothing
-    , _sraKey = Nothing
-    , _sraOAuthToken = Nothing
-    , _sraFields = Nothing
-    }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-sraQuotaUser :: Lens' ScoresResetAll' (Maybe Text)
-sraQuotaUser
-  = lens _sraQuotaUser (\ s a -> s{_sraQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-sraPrettyPrint :: Lens' ScoresResetAll' Bool
-sraPrettyPrint
-  = lens _sraPrettyPrint
-      (\ s a -> s{_sraPrettyPrint = a})
-
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-sraUserIP :: Lens' ScoresResetAll' (Maybe Text)
-sraUserIP
-  = lens _sraUserIP (\ s a -> s{_sraUserIP = a})
-
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-sraKey :: Lens' ScoresResetAll' (Maybe AuthKey)
-sraKey = lens _sraKey (\ s a -> s{_sraKey = a})
-
--- | OAuth 2.0 token for the current user.
-sraOAuthToken :: Lens' ScoresResetAll' (Maybe OAuthToken)
-sraOAuthToken
-  = lens _sraOAuthToken
-      (\ s a -> s{_sraOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-sraFields :: Lens' ScoresResetAll' (Maybe Text)
-sraFields
-  = lens _sraFields (\ s a -> s{_sraFields = a})
-
-instance GoogleAuth ScoresResetAll' where
-        _AuthKey = sraKey . _Just
-        _AuthToken = sraOAuthToken . _Just
+scoresResetAll' = ScoresResetAll'
 
 instance GoogleRequest ScoresResetAll' where
         type Rs ScoresResetAll' = PlayerScoreResetAllResponse
-        request = requestWith gamesManagementRequest
-        requestWith rq ScoresResetAll'{..}
-          = go _sraQuotaUser (Just _sraPrettyPrint) _sraUserIP
-              _sraFields
-              _sraKey
-              _sraOAuthToken
-              (Just AltJSON)
+        requestClient ScoresResetAll'{..}
+          = go (Just AltJSON) gamesManagementService
           where go
-                  = clientBuild (Proxy :: Proxy ScoresResetAllResource)
-                      rq
+                  = buildClient (Proxy :: Proxy ScoresResetAllResource)
+                      mempty

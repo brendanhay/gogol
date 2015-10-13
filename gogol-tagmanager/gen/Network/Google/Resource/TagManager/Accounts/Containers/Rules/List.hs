@@ -33,14 +33,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Rules.List
     , AccountsContainersRulesList'
 
     -- * Request Lenses
-    , acrlQuotaUser
-    , acrlPrettyPrint
     , acrlContainerId
-    , acrlUserIP
     , acrlAccountId
-    , acrlKey
-    , acrlOAuthToken
-    , acrlFields
     ) where
 
 import           Network.Google.Prelude
@@ -54,77 +48,33 @@ type AccountsContainersRulesListResource =
          "containers" :>
            Capture "containerId" Text :>
              "rules" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "key" AuthKey :>
-                         Header "Authorization" OAuthToken :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ListRulesResponse
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] ListRulesResponse
 
 -- | Lists all GTM Rules of a Container.
 --
 -- /See:/ 'accountsContainersRulesList'' smart constructor.
 data AccountsContainersRulesList' = AccountsContainersRulesList'
-    { _acrlQuotaUser   :: !(Maybe Text)
-    , _acrlPrettyPrint :: !Bool
-    , _acrlContainerId :: !Text
-    , _acrlUserIP      :: !(Maybe Text)
+    { _acrlContainerId :: !Text
     , _acrlAccountId   :: !Text
-    , _acrlKey         :: !(Maybe AuthKey)
-    , _acrlOAuthToken  :: !(Maybe OAuthToken)
-    , _acrlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersRulesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acrlQuotaUser'
---
--- * 'acrlPrettyPrint'
---
 -- * 'acrlContainerId'
 --
--- * 'acrlUserIP'
---
 -- * 'acrlAccountId'
---
--- * 'acrlKey'
---
--- * 'acrlOAuthToken'
---
--- * 'acrlFields'
 accountsContainersRulesList'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
     -> AccountsContainersRulesList'
 accountsContainersRulesList' pAcrlContainerId_ pAcrlAccountId_ =
     AccountsContainersRulesList'
-    { _acrlQuotaUser = Nothing
-    , _acrlPrettyPrint = True
-    , _acrlContainerId = pAcrlContainerId_
-    , _acrlUserIP = Nothing
+    { _acrlContainerId = pAcrlContainerId_
     , _acrlAccountId = pAcrlAccountId_
-    , _acrlKey = Nothing
-    , _acrlOAuthToken = Nothing
-    , _acrlFields = Nothing
     }
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters. Overrides userIp if both are provided.
-acrlQuotaUser :: Lens' AccountsContainersRulesList' (Maybe Text)
-acrlQuotaUser
-  = lens _acrlQuotaUser
-      (\ s a -> s{_acrlQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-acrlPrettyPrint :: Lens' AccountsContainersRulesList' Bool
-acrlPrettyPrint
-  = lens _acrlPrettyPrint
-      (\ s a -> s{_acrlPrettyPrint = a})
 
 -- | The GTM Container ID.
 acrlContainerId :: Lens' AccountsContainersRulesList' Text
@@ -132,54 +82,20 @@ acrlContainerId
   = lens _acrlContainerId
       (\ s a -> s{_acrlContainerId = a})
 
--- | IP address of the site where the request originates. Use this if you
--- want to enforce per-user limits.
-acrlUserIP :: Lens' AccountsContainersRulesList' (Maybe Text)
-acrlUserIP
-  = lens _acrlUserIP (\ s a -> s{_acrlUserIP = a})
-
 -- | The GTM Account ID.
 acrlAccountId :: Lens' AccountsContainersRulesList' Text
 acrlAccountId
   = lens _acrlAccountId
       (\ s a -> s{_acrlAccountId = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-acrlKey :: Lens' AccountsContainersRulesList' (Maybe AuthKey)
-acrlKey = lens _acrlKey (\ s a -> s{_acrlKey = a})
-
--- | OAuth 2.0 token for the current user.
-acrlOAuthToken :: Lens' AccountsContainersRulesList' (Maybe OAuthToken)
-acrlOAuthToken
-  = lens _acrlOAuthToken
-      (\ s a -> s{_acrlOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-acrlFields :: Lens' AccountsContainersRulesList' (Maybe Text)
-acrlFields
-  = lens _acrlFields (\ s a -> s{_acrlFields = a})
-
-instance GoogleAuth AccountsContainersRulesList'
-         where
-        _AuthKey = acrlKey . _Just
-        _AuthToken = acrlOAuthToken . _Just
-
 instance GoogleRequest AccountsContainersRulesList'
          where
         type Rs AccountsContainersRulesList' =
              ListRulesResponse
-        request = requestWith tagManagerRequest
-        requestWith rq AccountsContainersRulesList'{..}
-          = go _acrlAccountId _acrlContainerId _acrlQuotaUser
-              (Just _acrlPrettyPrint)
-              _acrlUserIP
-              _acrlFields
-              _acrlKey
-              _acrlOAuthToken
-              (Just AltJSON)
+        requestClient AccountsContainersRulesList'{..}
+          = go _acrlAccountId _acrlContainerId (Just AltJSON)
+              tagManagerService
           where go
-                  = clientBuild
+                  = buildClient
                       (Proxy :: Proxy AccountsContainersRulesListResource)
-                      rq
+                      mempty

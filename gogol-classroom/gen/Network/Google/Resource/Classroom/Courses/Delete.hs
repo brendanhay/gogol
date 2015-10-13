@@ -38,17 +38,12 @@ module Network.Google.Resource.Classroom.Courses.Delete
 
     -- * Request Lenses
     , cdXgafv
-    , cdQuotaUser
-    , cdPrettyPrint
     , cdUploadProtocol
     , cdPp
     , cdAccessToken
     , cdUploadType
     , cdBearerToken
-    , cdKey
     , cdId
-    , cdOAuthToken
-    , cdFields
     , cdCallback
     ) where
 
@@ -68,13 +63,7 @@ type CoursesDeleteResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "key" AuthKey :>
-                                 Header "Authorization" OAuthToken :>
-                                   QueryParam "alt" AltJSON :>
-                                     Delete '[JSON] Empty
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to delete
@@ -85,17 +74,12 @@ type CoursesDeleteResource =
 -- /See:/ 'coursesDelete'' smart constructor.
 data CoursesDelete' = CoursesDelete'
     { _cdXgafv          :: !(Maybe Text)
-    , _cdQuotaUser      :: !(Maybe Text)
-    , _cdPrettyPrint    :: !Bool
     , _cdUploadProtocol :: !(Maybe Text)
     , _cdPp             :: !Bool
     , _cdAccessToken    :: !(Maybe Text)
     , _cdUploadType     :: !(Maybe Text)
     , _cdBearerToken    :: !(Maybe Text)
-    , _cdKey            :: !(Maybe AuthKey)
     , _cdId             :: !Text
-    , _cdOAuthToken     :: !(Maybe OAuthToken)
-    , _cdFields         :: !(Maybe Text)
     , _cdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -104,10 +88,6 @@ data CoursesDelete' = CoursesDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cdXgafv'
---
--- * 'cdQuotaUser'
---
--- * 'cdPrettyPrint'
 --
 -- * 'cdUploadProtocol'
 --
@@ -119,13 +99,7 @@ data CoursesDelete' = CoursesDelete'
 --
 -- * 'cdBearerToken'
 --
--- * 'cdKey'
---
 -- * 'cdId'
---
--- * 'cdOAuthToken'
---
--- * 'cdFields'
 --
 -- * 'cdCallback'
 coursesDelete'
@@ -134,36 +108,18 @@ coursesDelete'
 coursesDelete' pCdId_ =
     CoursesDelete'
     { _cdXgafv = Nothing
-    , _cdQuotaUser = Nothing
-    , _cdPrettyPrint = True
     , _cdUploadProtocol = Nothing
     , _cdPp = True
     , _cdAccessToken = Nothing
     , _cdUploadType = Nothing
     , _cdBearerToken = Nothing
-    , _cdKey = Nothing
     , _cdId = pCdId_
-    , _cdOAuthToken = Nothing
-    , _cdFields = Nothing
     , _cdCallback = Nothing
     }
 
 -- | V1 error format.
 cdXgafv :: Lens' CoursesDelete' (Maybe Text)
 cdXgafv = lens _cdXgafv (\ s a -> s{_cdXgafv = a})
-
--- | Available to use for quota purposes for server-side applications. Can be
--- any arbitrary string assigned to a user, but should not exceed 40
--- characters.
-cdQuotaUser :: Lens' CoursesDelete' (Maybe Text)
-cdQuotaUser
-  = lens _cdQuotaUser (\ s a -> s{_cdQuotaUser = a})
-
--- | Returns response with indentations and line breaks.
-cdPrettyPrint :: Lens' CoursesDelete' Bool
-cdPrettyPrint
-  = lens _cdPrettyPrint
-      (\ s a -> s{_cdPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 cdUploadProtocol :: Lens' CoursesDelete' (Maybe Text)
@@ -192,51 +148,27 @@ cdBearerToken
   = lens _cdBearerToken
       (\ s a -> s{_cdBearerToken = a})
 
--- | API key. Your API key identifies your project and provides you with API
--- access, quota, and reports. Required unless you provide an OAuth 2.0
--- token.
-cdKey :: Lens' CoursesDelete' (Maybe AuthKey)
-cdKey = lens _cdKey (\ s a -> s{_cdKey = a})
-
 -- | Identifier of the course to delete. This identifier can be either the
 -- Classroom-assigned identifier or an
 -- [alias][google.classroom.v1.CourseAlias].
 cdId :: Lens' CoursesDelete' Text
 cdId = lens _cdId (\ s a -> s{_cdId = a})
 
--- | OAuth 2.0 token for the current user.
-cdOAuthToken :: Lens' CoursesDelete' (Maybe OAuthToken)
-cdOAuthToken
-  = lens _cdOAuthToken (\ s a -> s{_cdOAuthToken = a})
-
--- | Selector specifying which fields to include in a partial response.
-cdFields :: Lens' CoursesDelete' (Maybe Text)
-cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
-
 -- | JSONP
 cdCallback :: Lens' CoursesDelete' (Maybe Text)
 cdCallback
   = lens _cdCallback (\ s a -> s{_cdCallback = a})
 
-instance GoogleAuth CoursesDelete' where
-        _AuthKey = cdKey . _Just
-        _AuthToken = cdOAuthToken . _Just
-
 instance GoogleRequest CoursesDelete' where
         type Rs CoursesDelete' = Empty
-        request = requestWith classroomRequest
-        requestWith rq CoursesDelete'{..}
+        requestClient CoursesDelete'{..}
           = go _cdId _cdXgafv _cdUploadProtocol (Just _cdPp)
               _cdAccessToken
               _cdUploadType
               _cdBearerToken
               _cdCallback
-              _cdQuotaUser
-              (Just _cdPrettyPrint)
-              _cdFields
-              _cdKey
-              _cdOAuthToken
               (Just AltJSON)
+              classroomService
           where go
-                  = clientBuild (Proxy :: Proxy CoursesDeleteResource)
-                      rq
+                  = buildClient (Proxy :: Proxy CoursesDeleteResource)
+                      mempty
