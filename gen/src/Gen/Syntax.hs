@@ -203,7 +203,7 @@ googleRequestDecl g n assoc alt p api url fields m pat prec =
 
         decls = BDecls
             [ patBind noLoc pat $
-                appFun (var "clientBuild") $
+                appFun (var "buildClient") $
                     [ ExpTypeSig noLoc (var "Proxy") $
                         TyApp (TyCon "Proxy") (TyCon (UnQual api))
                     , var "mempty"

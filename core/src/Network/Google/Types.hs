@@ -22,6 +22,7 @@
 --
 module Network.Google.Types where
 
+import           Control.Applicative
 import           Control.Exception.Lens       (exception)
 import           Control.Lens                 hiding (coerce)
 import           Control.Monad
@@ -38,13 +39,9 @@ import qualified Data.Conduit.List            as CL
 import           Data.Data
 import           Data.DList                   (DList)
 import qualified Data.DList                   as DList
-import           Data.Foldable                (foldMap, foldl')
-import           Data.List                    (intersperse)
-import           Data.Maybe
+import           Data.Foldable                (foldl')
 import           Data.Monoid
-import           Data.Proxy
 import           Data.Text                    (Text)
-import qualified Data.Text                    as Text
 import qualified Data.Text.Encoding           as Text
 import           Data.Text.Lazy.Builder       (Builder)
 import qualified Data.Text.Lazy.Builder       as Build
@@ -55,37 +52,40 @@ import           Network.HTTP.Media           hiding (Accept)
 import           Network.HTTP.Types           hiding (Header)
 import qualified Network.HTTP.Types           as HTTP
 import           Servant.API
-import           Servant.Utils.Links
 
 data AltJSON = AltJSON
-    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable)
+    deriving (Eq, Ord, Show, Read, Generic, Typeable)
 
 instance ToText AltJSON where
    toText = const "json"
 
 data AltMedia = AltMedia
-    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable)
+    deriving (Eq, Ord, Show, Read, Generic, Typeable)
 
 instance ToText AltMedia where
    toText = const "media"
 
 newtype AuthKey = AuthKey Text
-    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToText)
+    deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText)
 
 newtype OAuthToken = OAuthToken Text
-    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable)
+    deriving (Eq, Ord, Show, Read, Generic, Typeable)
 
 instance ToText OAuthToken where
-    toText (OAuthToken t) = "Bearer " <> t
+    toText (OAuthToken t) = t
+
+newtype OAuthScope = OAuthScope Text
+    deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText)
+
+newtype Bearer a = Bearer a
+
+instance ToText a => ToText (Bearer a) where
+    toText = mappend "Bearer " . toText
 
 newtype MediaDownload a = MediaDownload a
 
 _MediaDownload :: Iso' (MediaDownload a) a
 _MediaDownload = iso (\(MediaDownload x) -> x) MediaDownload
-
-instance GoogleAuth a => GoogleAuth (MediaDownload a) where
-    _AuthKey   = _MediaDownload . _AuthKey
-    _AuthToken = _MediaDownload . _AuthToken
 
 _Coerce :: (Coercible a b, Coercible b a) => Iso' a b
 _Coerce = iso coerce coerce
@@ -101,7 +101,7 @@ _Default = iso f Just
 type Stream = ResumableSource (ResourceT IO) ByteString
 
 newtype ServiceId = ServiceId Text
-    deriving (Eq, Show, Data, Typeable)
+    deriving (Eq, Show, Typeable)
 
 data Error
     = TransportError HttpException
@@ -168,6 +168,18 @@ data Service = Service
     , _svcPort    :: !Int
     , _svcSecure  :: !Bool
     , _svcTimeout :: !(Maybe Seconds)
+    , _svcScopes  :: ![OAuthScope]
+    }
+
+defaultService :: ServiceId -> ByteString -> Builder -> Service
+defaultService i h p = Service
+    { _svcId      = i
+    , _svcHost    = h
+    , _svcPath    = p
+    , _svcPort    = 443
+    , _svcSecure  = True
+    , _svcTimeout = Just 70
+    , _svcScopes  = []
     }
 
 -- | An intermediary request builder.
@@ -177,6 +189,14 @@ data Request = Request
     , _rqHeaders :: DList (HeaderName, ByteString)
     , _rqBody    :: Maybe (MediaType, RequestBody)
     }
+
+instance Monoid Request where
+    mempty      = Request mempty mempty mempty Nothing
+    mappend a b = Request
+        (_rqPath  a   <> "/" <> _rqPath b)
+        (_rqQuery a   <> _rqQuery b)
+        (_rqHeaders a <> _rqHeaders b)
+        (_rqBody b   <|> _rqBody a)
 
 appendPath :: Request -> Builder -> Request
 appendPath rq x = rq { _rqPath = _rqPath rq <> "/" <> x }
@@ -256,11 +276,7 @@ instance FromStream OctetStream Stream where
 instance FromJSON a => FromStream JSON a where
     fromStream Proxy = sinkLBS >=> pure . eitherDecode
 
-class GoogleAuth a where
-    _AuthKey   :: Traversal' a AuthKey
-    _AuthToken :: Traversal' a OAuthToken
-
-class GoogleAuth a => GoogleRequest a where
+class GoogleRequest a where
     type Rs a :: *
 
     requestClient :: a -> Client (Rs a)
