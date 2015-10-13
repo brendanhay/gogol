@@ -50,7 +50,7 @@ type WatermarksSetResource =
          QueryParam "channelId" Text :>
            QueryParam "onBehalfOfContentOwner" Text :>
              QueryParam "alt" AltJSON :>
-               MultipartRelated '[JSON] InvideoBranding Stream :>
+               MultipartRelated '[JSON] InvideoBranding Body :>
                  Post '[JSON] ()
 
 -- | Uploads a watermark image to YouTube and sets it for a channel.
@@ -59,7 +59,7 @@ type WatermarksSetResource =
 data WatermarksSet' = WatermarksSet'
     { _wsChannelId              :: !Text
     , _wsPayload                :: !InvideoBranding
-    , _wsMedia                  :: !Stream
+    , _wsMedia                  :: !Body
     , _wsOnBehalfOfContentOwner :: !(Maybe Text)
     }
 
@@ -77,7 +77,7 @@ data WatermarksSet' = WatermarksSet'
 watermarksSet'
     :: Text -- ^ 'channelId'
     -> InvideoBranding -- ^ 'payload'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> WatermarksSet'
 watermarksSet' pWsChannelId_ pWsPayload_ pWsMedia_ =
     WatermarksSet'
@@ -98,7 +98,7 @@ wsPayload :: Lens' WatermarksSet' InvideoBranding
 wsPayload
   = lens _wsPayload (\ s a -> s{_wsPayload = a})
 
-wsMedia :: Lens' WatermarksSet' Stream
+wsMedia :: Lens' WatermarksSet' Body
 wsMedia = lens _wsMedia (\ s a -> s{_wsMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content

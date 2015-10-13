@@ -60,7 +60,7 @@ type UsersMessagesImportResource =
                    UsersMessagesImportInternalDateSource
                    :>
                    QueryParam "alt" AltJSON :>
-                     MultipartRelated '[JSON] Message Stream :>
+                     MultipartRelated '[JSON] Message Body :>
                        Post '[JSON] Message
 
 -- | Imports a message into only this user\'s mailbox, with standard email
@@ -71,7 +71,7 @@ type UsersMessagesImportResource =
 data UsersMessagesImport' = UsersMessagesImport'
     { _uPayload            :: !Message
     , _uUserId             :: !Text
-    , _uMedia              :: !Stream
+    , _uMedia              :: !Body
     , _uProcessForCalendar :: !Bool
     , _uDeleted            :: !Bool
     , _uNeverMarkSpam      :: !Bool
@@ -98,7 +98,7 @@ data UsersMessagesImport' = UsersMessagesImport'
 usersMessagesImport'
     :: Message -- ^ 'payload'
     -> Text -- ^ 'media'
-    -> Stream
+    -> Body
     -> UsersMessagesImport'
 usersMessagesImport' pUPayload_ pUUserId_ pUMedia_ =
     UsersMessagesImport'
@@ -120,7 +120,7 @@ uPayload = lens _uPayload (\ s a -> s{_uPayload = a})
 uUserId :: Lens' UsersMessagesImport' Text
 uUserId = lens _uUserId (\ s a -> s{_uUserId = a})
 
-uMedia :: Lens' UsersMessagesImport' Stream
+uMedia :: Lens' UsersMessagesImport' Body
 uMedia = lens _uMedia (\ s a -> s{_uMedia = a})
 
 -- | Process calendar invites in the email and add any extracted meetings to

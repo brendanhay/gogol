@@ -59,7 +59,7 @@ projectsList' = ProjectsList'
 
 instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ProjectsListResponse
-        requestClient ProjectsList'{..}
+        requestClient ProjectsList'{}
           = go (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy ProjectsListResource)

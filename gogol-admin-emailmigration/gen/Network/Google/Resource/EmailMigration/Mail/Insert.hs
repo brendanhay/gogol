@@ -47,7 +47,7 @@ type MailInsertResource =
      Capture "userKey" Text :>
        "mail" :>
          QueryParam "alt" AltJSON :>
-           MultipartRelated '[JSON] MailItem Stream :>
+           MultipartRelated '[JSON] MailItem Body :>
              Post '[JSON] ()
 
 -- | Insert Mail into Google\'s Gmail backends
@@ -55,7 +55,7 @@ type MailInsertResource =
 -- /See:/ 'mailInsert'' smart constructor.
 data MailInsert' = MailInsert'
     { _miPayload :: !MailItem
-    , _miMedia   :: !Stream
+    , _miMedia   :: !Body
     , _miUserKey :: !Text
     }
 
@@ -70,7 +70,7 @@ data MailInsert' = MailInsert'
 -- * 'miUserKey'
 mailInsert'
     :: MailItem -- ^ 'payload'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> Text -- ^ 'userKey'
     -> MailInsert'
 mailInsert' pMiPayload_ pMiMedia_ pMiUserKey_ =
@@ -85,7 +85,7 @@ miPayload :: Lens' MailInsert' MailItem
 miPayload
   = lens _miPayload (\ s a -> s{_miPayload = a})
 
-miMedia :: Lens' MailInsert' Stream
+miMedia :: Lens' MailInsert' Body
 miMedia = lens _miMedia (\ s a -> s{_miMedia = a})
 
 -- | The email or immutable id of the user

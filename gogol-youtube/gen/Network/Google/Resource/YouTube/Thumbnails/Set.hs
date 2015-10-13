@@ -49,14 +49,14 @@ type ThumbnailsSetResource =
          QueryParam "videoId" Text :>
            QueryParam "onBehalfOfContentOwner" Text :>
              QueryParam "alt" AltJSON :>
-               ReqBody '[OctetStream] RequestBody :>
+               ReqBody '[OctetStream] Body :>
                  Post '[JSON] ThumbnailSetResponse
 
 -- | Uploads a custom video thumbnail to YouTube and sets it for a video.
 --
 -- /See:/ 'thumbnailsSet'' smart constructor.
 data ThumbnailsSet' = ThumbnailsSet'
-    { _tsMedia                  :: !Stream
+    { _tsMedia                  :: !Body
     , _tsOnBehalfOfContentOwner :: !(Maybe Text)
     , _tsVideoId                :: !Text
     }
@@ -71,7 +71,7 @@ data ThumbnailsSet' = ThumbnailsSet'
 --
 -- * 'tsVideoId'
 thumbnailsSet'
-    :: Stream -- ^ 'media'
+    :: Body -- ^ 'media'
     -> Text -- ^ 'videoId'
     -> ThumbnailsSet'
 thumbnailsSet' pTsMedia_ pTsVideoId_ =
@@ -81,7 +81,7 @@ thumbnailsSet' pTsMedia_ pTsVideoId_ =
     , _tsVideoId = pTsVideoId_
     }
 
-tsMedia :: Lens' ThumbnailsSet' Stream
+tsMedia :: Lens' ThumbnailsSet' Body
 tsMedia = lens _tsMedia (\ s a -> s{_tsMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content

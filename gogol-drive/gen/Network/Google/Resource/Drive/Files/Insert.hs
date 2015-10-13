@@ -61,7 +61,7 @@ type FilesInsertResource =
                    QueryParam "convert" Bool :>
                      QueryParam "ocr" Bool :>
                        QueryParam "alt" AltJSON :>
-                         MultipartRelated '[JSON] File Stream :>
+                         MultipartRelated '[JSON] File Body :>
                            Post '[JSON] File
 
 -- | Insert a new file.
@@ -73,7 +73,7 @@ data FilesInsert' = FilesInsert'
     , _fiTimedTextLanguage         :: !(Maybe Text)
     , _fiPayload                   :: !File
     , _fiUseContentAsIndexableText :: !Bool
-    , _fiMedia                     :: !Stream
+    , _fiMedia                     :: !Body
     , _fiTimedTextTrackName        :: !(Maybe Text)
     , _fiOCRLanguage               :: !(Maybe Text)
     , _fiConvert                   :: !Bool
@@ -105,7 +105,7 @@ data FilesInsert' = FilesInsert'
 -- * 'fiOCR'
 filesInsert'
     :: File -- ^ 'payload'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> FilesInsert'
 filesInsert' pFiPayload_ pFiMedia_ =
     FilesInsert'
@@ -149,7 +149,7 @@ fiUseContentAsIndexableText
   = lens _fiUseContentAsIndexableText
       (\ s a -> s{_fiUseContentAsIndexableText = a})
 
-fiMedia :: Lens' FilesInsert' Stream
+fiMedia :: Lens' FilesInsert' Body
 fiMedia = lens _fiMedia (\ s a -> s{_fiMedia = a})
 
 -- | The timed text track name.

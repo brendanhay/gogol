@@ -54,7 +54,7 @@ type EditsImagesUploadResource =
              Capture "language" Text :>
                Capture "imageType" EditsImagesUploadImageType :>
                  QueryParam "alt" AltJSON :>
-                   ReqBody '[OctetStream] RequestBody :>
+                   ReqBody '[OctetStream] Body :>
                      Post '[JSON] ImagesUploadResponse
 
 -- | Uploads a new image and adds it to the list of images for the specified
@@ -63,7 +63,7 @@ type EditsImagesUploadResource =
 -- /See:/ 'editsImagesUpload'' smart constructor.
 data EditsImagesUpload' = EditsImagesUpload'
     { _eiuPackageName :: !Text
-    , _eiuMedia       :: !Stream
+    , _eiuMedia       :: !Body
     , _eiuImageType   :: !EditsImagesUploadImageType
     , _eiuLanguage    :: !Text
     , _eiuEditId      :: !Text
@@ -84,7 +84,7 @@ data EditsImagesUpload' = EditsImagesUpload'
 -- * 'eiuEditId'
 editsImagesUpload'
     :: Text -- ^ 'packageName'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> EditsImagesUploadImageType -- ^ 'imageType'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
@@ -105,7 +105,7 @@ eiuPackageName
   = lens _eiuPackageName
       (\ s a -> s{_eiuPackageName = a})
 
-eiuMedia :: Lens' EditsImagesUpload' Stream
+eiuMedia :: Lens' EditsImagesUpload' Body
 eiuMedia = lens _eiuMedia (\ s a -> s{_eiuMedia = a})
 
 eiuImageType :: Lens' EditsImagesUpload' EditsImagesUploadImageType

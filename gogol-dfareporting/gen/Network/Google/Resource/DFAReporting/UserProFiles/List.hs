@@ -59,7 +59,7 @@ userProFilesList' = UserProFilesList'
 
 instance GoogleRequest UserProFilesList' where
         type Rs UserProFilesList' = UserProFileList
-        requestClient UserProFilesList'{..}
+        requestClient UserProFilesList'{}
           = go (Just AltJSON) dFAReportingService
           where go
                   = buildClient

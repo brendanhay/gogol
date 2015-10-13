@@ -75,7 +75,7 @@ type FilesUpdateResource =
                                QueryParam "addParents" Text :>
                                  QueryParam "ocr" Bool :>
                                    QueryParam "alt" AltJSON :>
-                                     MultipartRelated '[JSON] File Stream :>
+                                     MultipartRelated '[JSON] File Body :>
                                        Put '[JSON] File
 
 -- | Updates file metadata and\/or content.
@@ -90,7 +90,7 @@ data FilesUpdate' = FilesUpdate'
     , _fuRemoveParents             :: !(Maybe Text)
     , _fuModifiedDateBehavior      :: !(Maybe FilesUpdateModifiedDateBehavior)
     , _fuUseContentAsIndexableText :: !Bool
-    , _fuMedia                     :: !Stream
+    , _fuMedia                     :: !Body
     , _fuTimedTextTrackName        :: !(Maybe Text)
     , _fuOCRLanguage               :: !(Maybe Text)
     , _fuConvert                   :: !Bool
@@ -137,7 +137,7 @@ data FilesUpdate' = FilesUpdate'
 -- * 'fuOCR'
 filesUpdate'
     :: File -- ^ 'payload'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> Text -- ^ 'fileId'
     -> FilesUpdate'
 filesUpdate' pFuPayload_ pFuMedia_ pFuFileId_ =
@@ -213,7 +213,7 @@ fuUseContentAsIndexableText
   = lens _fuUseContentAsIndexableText
       (\ s a -> s{_fuUseContentAsIndexableText = a})
 
-fuMedia :: Lens' FilesUpdate' Stream
+fuMedia :: Lens' FilesUpdate' Body
 fuMedia = lens _fuMedia (\ s a -> s{_fuMedia = a})
 
 -- | The timed text track name.

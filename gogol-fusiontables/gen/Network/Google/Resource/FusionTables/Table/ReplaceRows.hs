@@ -58,8 +58,7 @@ type TableReplaceRowsResource =
                  QueryParam "encoding" Text :>
                    QueryParam "isStrict" Bool :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] RequestBody :>
-                         Post '[JSON] Task
+                       ReqBody '[OctetStream] Body :> Post '[JSON] Task
 
 -- | Replaces rows of an existing table. Current rows remain visible until
 -- all replacement rows are ready.
@@ -68,7 +67,7 @@ type TableReplaceRowsResource =
 data TableReplaceRows' = TableReplaceRows'
     { _trrStartLine :: !(Maybe Int32)
     , _trrEndLine   :: !(Maybe Int32)
-    , _trrMedia     :: !Stream
+    , _trrMedia     :: !Body
     , _trrTableId   :: !Text
     , _trrDelimiter :: !(Maybe Text)
     , _trrEncoding  :: !(Maybe Text)
@@ -93,7 +92,7 @@ data TableReplaceRows' = TableReplaceRows'
 --
 -- * 'trrIsStrict'
 tableReplaceRows'
-    :: Stream -- ^ 'media'
+    :: Body -- ^ 'media'
     -> Text -- ^ 'tableId'
     -> TableReplaceRows'
 tableReplaceRows' pTrrMedia_ pTrrTableId_ =
@@ -121,7 +120,7 @@ trrEndLine :: Lens' TableReplaceRows' (Maybe Int32)
 trrEndLine
   = lens _trrEndLine (\ s a -> s{_trrEndLine = a})
 
-trrMedia :: Lens' TableReplaceRows' Stream
+trrMedia :: Lens' TableReplaceRows' Body
 trrMedia = lens _trrMedia (\ s a -> s{_trrMedia = a})
 
 -- | Table whose rows will be replaced.

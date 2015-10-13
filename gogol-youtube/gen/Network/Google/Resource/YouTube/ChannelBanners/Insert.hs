@@ -56,7 +56,7 @@ type ChannelBannersInsertResource =
        "insert" :>
          QueryParam "onBehalfOfContentOwner" Text :>
            QueryParam "alt" AltJSON :>
-             MultipartRelated '[JSON] ChannelBannerResource Stream
+             MultipartRelated '[JSON] ChannelBannerResource Body
                :> Post '[JSON] ChannelBannerResource
 
 -- | Uploads a channel banner image to YouTube. This method represents the
@@ -72,7 +72,7 @@ type ChannelBannersInsertResource =
 -- /See:/ 'channelBannersInsert'' smart constructor.
 data ChannelBannersInsert' = ChannelBannersInsert'
     { _cbiPayload                :: !ChannelBannerResource
-    , _cbiMedia                  :: !Stream
+    , _cbiMedia                  :: !Body
     , _cbiOnBehalfOfContentOwner :: !(Maybe Text)
     }
 
@@ -87,7 +87,7 @@ data ChannelBannersInsert' = ChannelBannersInsert'
 -- * 'cbiOnBehalfOfContentOwner'
 channelBannersInsert'
     :: ChannelBannerResource -- ^ 'payload'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> ChannelBannersInsert'
 channelBannersInsert' pCbiPayload_ pCbiMedia_ =
     ChannelBannersInsert'
@@ -101,7 +101,7 @@ cbiPayload :: Lens' ChannelBannersInsert' ChannelBannerResource
 cbiPayload
   = lens _cbiPayload (\ s a -> s{_cbiPayload = a})
 
-cbiMedia :: Lens' ChannelBannersInsert' Stream
+cbiMedia :: Lens' ChannelBannersInsert' Body
 cbiMedia = lens _cbiMedia (\ s a -> s{_cbiMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content

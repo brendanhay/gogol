@@ -57,8 +57,7 @@ type TableImportRowsResource =
                  QueryParam "encoding" Text :>
                    QueryParam "isStrict" Bool :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] RequestBody :>
-                         Post '[JSON] Import
+                       ReqBody '[OctetStream] Body :> Post '[JSON] Import
 
 -- | Imports more rows into a table.
 --
@@ -66,7 +65,7 @@ type TableImportRowsResource =
 data TableImportRows' = TableImportRows'
     { _tirStartLine :: !(Maybe Int32)
     , _tirEndLine   :: !(Maybe Int32)
-    , _tirMedia     :: !Stream
+    , _tirMedia     :: !Body
     , _tirTableId   :: !Text
     , _tirDelimiter :: !(Maybe Text)
     , _tirEncoding  :: !(Maybe Text)
@@ -91,7 +90,7 @@ data TableImportRows' = TableImportRows'
 --
 -- * 'tirIsStrict'
 tableImportRows'
-    :: Stream -- ^ 'media'
+    :: Body -- ^ 'media'
     -> Text -- ^ 'tableId'
     -> TableImportRows'
 tableImportRows' pTirMedia_ pTirTableId_ =
@@ -119,7 +118,7 @@ tirEndLine :: Lens' TableImportRows' (Maybe Int32)
 tirEndLine
   = lens _tirEndLine (\ s a -> s{_tirEndLine = a})
 
-tirMedia :: Lens' TableImportRows' Stream
+tirMedia :: Lens' TableImportRows' Body
 tirMedia = lens _tirMedia (\ s a -> s{_tirMedia = a})
 
 -- | The table into which new rows are being imported.

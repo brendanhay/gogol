@@ -49,14 +49,13 @@ type EditsAPKsUploadResource =
          Capture "editId" Text :>
            "apks" :>
              QueryParam "alt" AltJSON :>
-               ReqBody '[OctetStream] RequestBody :>
-                 Post '[JSON] APK
+               ReqBody '[OctetStream] Body :> Post '[JSON] APK
 
 --
 -- /See:/ 'editsAPKsUpload'' smart constructor.
 data EditsAPKsUpload' = EditsAPKsUpload'
     { _eapkuPackageName :: !Text
-    , _eapkuMedia       :: !Stream
+    , _eapkuMedia       :: !Body
     , _eapkuEditId      :: !Text
     }
 
@@ -71,7 +70,7 @@ data EditsAPKsUpload' = EditsAPKsUpload'
 -- * 'eapkuEditId'
 editsAPKsUpload'
     :: Text -- ^ 'packageName'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> Text -- ^ 'editId'
     -> EditsAPKsUpload'
 editsAPKsUpload' pEapkuPackageName_ pEapkuMedia_ pEapkuEditId_ =
@@ -88,7 +87,7 @@ eapkuPackageName
   = lens _eapkuPackageName
       (\ s a -> s{_eapkuPackageName = a})
 
-eapkuMedia :: Lens' EditsAPKsUpload' Stream
+eapkuMedia :: Lens' EditsAPKsUpload' Body
 eapkuMedia
   = lens _eapkuMedia (\ s a -> s{_eapkuMedia = a})
 

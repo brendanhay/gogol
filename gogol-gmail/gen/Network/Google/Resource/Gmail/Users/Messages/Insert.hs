@@ -55,7 +55,7 @@ type UsersMessagesInsertResource =
              UsersMessagesInsertInternalDateSource
              :>
              QueryParam "alt" AltJSON :>
-               MultipartRelated '[JSON] Message Stream :>
+               MultipartRelated '[JSON] Message Body :>
                  Post '[JSON] Message
 
 -- | Directly inserts a message into only this user\'s mailbox similar to
@@ -66,7 +66,7 @@ type UsersMessagesInsertResource =
 data UsersMessagesInsert' = UsersMessagesInsert'
     { _umiPayload            :: !Message
     , _umiUserId             :: !Text
-    , _umiMedia              :: !Stream
+    , _umiMedia              :: !Body
     , _umiDeleted            :: !Bool
     , _umiInternalDateSource :: !UsersMessagesInsertInternalDateSource
     }
@@ -87,7 +87,7 @@ data UsersMessagesInsert' = UsersMessagesInsert'
 usersMessagesInsert'
     :: Message -- ^ 'payload'
     -> Text -- ^ 'media'
-    -> Stream
+    -> Body
     -> UsersMessagesInsert'
 usersMessagesInsert' pUmiPayload_ pUmiUserId_ pUmiMedia_ =
     UsersMessagesInsert'
@@ -109,7 +109,7 @@ umiUserId :: Lens' UsersMessagesInsert' Text
 umiUserId
   = lens _umiUserId (\ s a -> s{_umiUserId = a})
 
-umiMedia :: Lens' UsersMessagesInsert' Stream
+umiMedia :: Lens' UsersMessagesInsert' Body
 umiMedia = lens _umiMedia (\ s a -> s{_umiMedia = a})
 
 -- | Mark the email as permanently deleted (not TRASH) and only visible in

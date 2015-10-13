@@ -63,7 +63,7 @@ roomsResetForAllPlayers' = RoomsResetForAllPlayers'
 
 instance GoogleRequest RoomsResetForAllPlayers' where
         type Rs RoomsResetForAllPlayers' = ()
-        requestClient RoomsResetForAllPlayers'{..}
+        requestClient RoomsResetForAllPlayers'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

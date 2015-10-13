@@ -55,7 +55,7 @@ type CaptionsUpdateResource =
            QueryParam "onBehalfOfContentOwner" Text :>
              QueryParam "sync" Bool :>
                QueryParam "alt" AltJSON :>
-                 MultipartRelated '[JSON] Caption Stream :>
+                 MultipartRelated '[JSON] Caption Body :>
                    Put '[JSON] Caption
 
 -- | Updates a caption track. When updating a caption track, you can change
@@ -67,7 +67,7 @@ data CaptionsUpdate' = CaptionsUpdate'
     { _capOnBehalfOf             :: !(Maybe Text)
     , _capPart                   :: !Text
     , _capPayload                :: !Caption
-    , _capMedia                  :: !Stream
+    , _capMedia                  :: !Body
     , _capOnBehalfOfContentOwner :: !(Maybe Text)
     , _capSync                   :: !(Maybe Bool)
     }
@@ -90,7 +90,7 @@ data CaptionsUpdate' = CaptionsUpdate'
 captionsUpdate'
     :: Text -- ^ 'part'
     -> Caption -- ^ 'payload'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> CaptionsUpdate'
 captionsUpdate' pCapPart_ pCapPayload_ pCapMedia_ =
     CaptionsUpdate'
@@ -122,7 +122,7 @@ capPayload :: Lens' CaptionsUpdate' Caption
 capPayload
   = lens _capPayload (\ s a -> s{_capPayload = a})
 
-capMedia :: Lens' CaptionsUpdate' Stream
+capMedia :: Lens' CaptionsUpdate' Body
 capMedia = lens _capMedia (\ s a -> s{_capMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content

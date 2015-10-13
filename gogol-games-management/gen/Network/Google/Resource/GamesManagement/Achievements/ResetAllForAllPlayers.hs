@@ -62,7 +62,7 @@ achievementsResetAllForAllPlayers' = AchievementsResetAllForAllPlayers'
 instance GoogleRequest
          AchievementsResetAllForAllPlayers' where
         type Rs AchievementsResetAllForAllPlayers' = ()
-        requestClient AchievementsResetAllForAllPlayers'{..}
+        requestClient AchievementsResetAllForAllPlayers'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

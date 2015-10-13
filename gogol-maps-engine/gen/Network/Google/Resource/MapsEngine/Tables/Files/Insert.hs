@@ -52,7 +52,7 @@ type TablesFilesInsertResource =
          "files" :>
            QueryParam "filename" Text :>
              QueryParam "alt" AltJSON :>
-               ReqBody '[OctetStream] RequestBody :> Post '[JSON] ()
+               ReqBody '[OctetStream] Body :> Post '[JSON] ()
 
 -- | Upload a file to a placeholder table asset. See Table Upload in the
 -- Developer\'s Guide for more information. Supported file types are listed
@@ -61,7 +61,7 @@ type TablesFilesInsertResource =
 --
 -- /See:/ 'tablesFilesInsert'' smart constructor.
 data TablesFilesInsert' = TablesFilesInsert'
-    { _tfiMedia    :: !Stream
+    { _tfiMedia    :: !Body
     , _tfiId       :: !Text
     , _tfiFilename :: !Text
     }
@@ -76,7 +76,7 @@ data TablesFilesInsert' = TablesFilesInsert'
 --
 -- * 'tfiFilename'
 tablesFilesInsert'
-    :: Stream -- ^ 'media'
+    :: Body -- ^ 'media'
     -> Text -- ^ 'id'
     -> Text -- ^ 'filename'
     -> TablesFilesInsert'
@@ -87,7 +87,7 @@ tablesFilesInsert' pTfiMedia_ pTfiId_ pTfiFilename_ =
     , _tfiFilename = pTfiFilename_
     }
 
-tfiMedia :: Lens' TablesFilesInsert' Stream
+tfiMedia :: Lens' TablesFilesInsert' Body
 tfiMedia = lens _tfiMedia (\ s a -> s{_tfiMedia = a})
 
 -- | The ID of the table asset.

@@ -60,7 +60,7 @@ electionsElectionQuery' = ElectionsElectionQuery'
 instance GoogleRequest ElectionsElectionQuery' where
         type Rs ElectionsElectionQuery' =
              ElectionsQueryResponse
-        requestClient ElectionsElectionQuery'{..}
+        requestClient ElectionsElectionQuery'{}
           = go (Just AltJSON) civicInfoService
           where go
                   = buildClient

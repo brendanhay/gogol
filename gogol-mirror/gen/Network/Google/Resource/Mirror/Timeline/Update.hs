@@ -47,7 +47,7 @@ type TimelineUpdateResource =
      "timeline" :>
        Capture "id" Text :>
          QueryParam "alt" AltJSON :>
-           MultipartRelated '[JSON] TimelineItem Stream :>
+           MultipartRelated '[JSON] TimelineItem Body :>
              Put '[JSON] TimelineItem
 
 -- | Updates a timeline item in place.
@@ -55,7 +55,7 @@ type TimelineUpdateResource =
 -- /See:/ 'timelineUpdate'' smart constructor.
 data TimelineUpdate' = TimelineUpdate'
     { _tuPayload :: !TimelineItem
-    , _tuMedia   :: !Stream
+    , _tuMedia   :: !Body
     , _tuId      :: !Text
     }
 
@@ -70,7 +70,7 @@ data TimelineUpdate' = TimelineUpdate'
 -- * 'tuId'
 timelineUpdate'
     :: TimelineItem -- ^ 'payload'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> Text -- ^ 'id'
     -> TimelineUpdate'
 timelineUpdate' pTuPayload_ pTuMedia_ pTuId_ =
@@ -85,7 +85,7 @@ tuPayload :: Lens' TimelineUpdate' TimelineItem
 tuPayload
   = lens _tuPayload (\ s a -> s{_tuPayload = a})
 
-tuMedia :: Lens' TimelineUpdate' Stream
+tuMedia :: Lens' TimelineUpdate' Body
 tuMedia = lens _tuMedia (\ s a -> s{_tuMedia = a})
 
 -- | The ID of the timeline item.

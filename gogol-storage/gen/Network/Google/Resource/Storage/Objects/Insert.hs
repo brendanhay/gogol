@@ -65,7 +65,7 @@ type ObjectsInsertResource =
                        QueryParam "contentEncoding" Text :>
                          QueryParam "projection" ObjectsInsertProjection :>
                            QueryParam "alt" AltJSON :>
-                             MultipartRelated '[JSON] Object Stream :>
+                             MultipartRelated '[JSON] Object Body :>
                                Post '[JSON] Object
        :<|>
        "b" :>
@@ -81,7 +81,7 @@ type ObjectsInsertResource =
                          QueryParam "contentEncoding" Text :>
                            QueryParam "projection" ObjectsInsertProjection :>
                              QueryParam "alt" AltMedia :>
-                               MultipartRelated '[JSON] Object Stream :>
+                               MultipartRelated '[JSON] Object Body :>
                                  Post '[OctetStream] Stream
 
 -- | Stores a new object and metadata.
@@ -94,7 +94,7 @@ data ObjectsInsert' = ObjectsInsert'
     , _oiPredefinedACL            :: !(Maybe ObjectsInsertPredefinedACL)
     , _oiBucket                   :: !Text
     , _oiPayload                  :: !Object
-    , _oiMedia                    :: !Stream
+    , _oiMedia                    :: !Body
     , _oiName                     :: !(Maybe Text)
     , _oiIfMetagenerationNotMatch :: !(Maybe Int64)
     , _oiContentEncoding          :: !(Maybe Text)
@@ -129,7 +129,7 @@ data ObjectsInsert' = ObjectsInsert'
 objectsInsert'
     :: Text -- ^ 'bucket'
     -> Object -- ^ 'payload'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> ObjectsInsert'
 objectsInsert' pOiBucket_ pOiPayload_ pOiMedia_ =
     ObjectsInsert'
@@ -183,7 +183,7 @@ oiPayload :: Lens' ObjectsInsert' Object
 oiPayload
   = lens _oiPayload (\ s a -> s{_oiPayload = a})
 
-oiMedia :: Lens' ObjectsInsert' Stream
+oiMedia :: Lens' ObjectsInsert' Body
 oiMedia = lens _oiMedia (\ s a -> s{_oiMedia = a})
 
 -- | Name of the object. Required when the object metadata is not otherwise

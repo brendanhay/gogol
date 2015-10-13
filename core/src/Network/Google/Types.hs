@@ -47,7 +47,7 @@ import           Data.Text.Lazy.Builder       (Builder)
 import qualified Data.Text.Lazy.Builder       as Build
 import           GHC.Generics
 import           GHC.TypeLits
-import           Network.HTTP.Client          (HttpException, RequestBody (..))
+import           Network.HTTP.Client          (HttpException)
 import           Network.HTTP.Media           hiding (Accept)
 import           Network.HTTP.Types           hiding (Header)
 import qualified Network.HTTP.Types           as HTTP
@@ -98,6 +98,7 @@ _Default = iso f Just
     f (Just x) = x
     f Nothing  = mempty
 
+type Body   = Source IO ByteString
 type Stream = ResumableSource (ResourceT IO) ByteString
 
 newtype ServiceId = ServiceId Text
@@ -187,7 +188,7 @@ data Request = Request
     { _rqPath    :: Builder
     , _rqQuery   :: DList (ByteString, Maybe ByteString)
     , _rqHeaders :: DList (HeaderName, ByteString)
-    , _rqBody    :: Maybe (MediaType, RequestBody)
+    , _rqBody    :: Maybe (MediaType,  Body)
     }
 
 instance Monoid Request where
@@ -215,7 +216,7 @@ appendHeader rq k (Just v) = rq
     { _rqHeaders = DList.snoc (_rqHeaders rq) (CI.mk k, Text.encodeUtf8 v)
     }
 
-setBody :: Request -> MediaType -> RequestBody -> Request
+setBody :: Request -> MediaType -> Body -> Request
 setBody rq c x = rq { _rqBody = Just (c, x) }
 
 -- | A materialised 'http-client' request and associated response parser.
@@ -251,21 +252,25 @@ client f cs m ns rq s = Client
     }
 
 class Accept c => ToBody c a where
-    toBody :: Proxy c -> a -> RequestBody
+    toBody :: Proxy c -> a -> Body
 
-instance ToBody OctetStream RequestBody where
+instance ToBody OctetStream Body where
     toBody Proxy = id
 
-instance ToBody OctetStream ByteString     where toBody Proxy = RequestBodyBS
-instance ToBody OctetStream LBS.ByteString where toBody Proxy = RequestBodyLBS
-instance ToBody PlainText   ByteString     where toBody Proxy = RequestBodyBS
-instance ToBody PlainText   LBS.ByteString where toBody Proxy = RequestBodyLBS
+instance ToBody OctetStream ByteString where
+    toBody Proxy = CL.sourceList . (:[])
+
+instance ToBody OctetStream LBS.ByteString where
+    toBody Proxy = CL.sourceList . LBS.toChunks
+
+instance ToBody PlainText ByteString where
+    toBody Proxy = CL.sourceList . (:[])
+
+instance ToBody PlainText LBS.ByteString where
+    toBody Proxy = CL.sourceList . LBS.toChunks
 
 instance ToJSON a => ToBody JSON a where
-    toBody Proxy = RequestBodyLBS . encode
-
-instance ToBody JSON Value where
-    toBody Proxy = RequestBodyLBS . encode
+    toBody Proxy = CL.sourceList . LBS.toChunks . encode
 
 class Accept c => FromStream c a where
     fromStream :: Proxy c -> Stream -> ResourceT IO (Either String a)

@@ -51,14 +51,13 @@ type TableImportTableResource =
            QueryParam "delimiter" Text :>
              QueryParam "encoding" Text :>
                QueryParam "alt" AltJSON :>
-                 ReqBody '[OctetStream] RequestBody :>
-                   Post '[JSON] Table
+                 ReqBody '[OctetStream] Body :> Post '[JSON] Table
 
 -- | Imports a new table.
 --
 -- /See:/ 'tableImportTable'' smart constructor.
 data TableImportTable' = TableImportTable'
-    { _titMedia     :: !Stream
+    { _titMedia     :: !Body
     , _titName      :: !Text
     , _titDelimiter :: !(Maybe Text)
     , _titEncoding  :: !(Maybe Text)
@@ -76,7 +75,7 @@ data TableImportTable' = TableImportTable'
 --
 -- * 'titEncoding'
 tableImportTable'
-    :: Stream -- ^ 'media'
+    :: Body -- ^ 'media'
     -> Text -- ^ 'name'
     -> TableImportTable'
 tableImportTable' pTitMedia_ pTitName_ =
@@ -87,7 +86,7 @@ tableImportTable' pTitMedia_ pTitName_ =
     , _titEncoding = Nothing
     }
 
-titMedia :: Lens' TableImportTable' Stream
+titMedia :: Lens' TableImportTable' Body
 titMedia = lens _titMedia (\ s a -> s{_titMedia = a})
 
 -- | The name to be assigned to the new table.

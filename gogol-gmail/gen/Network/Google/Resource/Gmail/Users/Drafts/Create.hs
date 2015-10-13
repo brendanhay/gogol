@@ -47,7 +47,7 @@ type UsersDraftsCreateResource =
      Capture "userId" Text :>
        "drafts" :>
          QueryParam "alt" AltJSON :>
-           MultipartRelated '[JSON] Draft Stream :>
+           MultipartRelated '[JSON] Draft Body :>
              Post '[JSON] Draft
 
 -- | Creates a new draft with the DRAFT label.
@@ -56,7 +56,7 @@ type UsersDraftsCreateResource =
 data UsersDraftsCreate' = UsersDraftsCreate'
     { _udcPayload :: !Draft
     , _udcUserId  :: !Text
-    , _udcMedia   :: !Stream
+    , _udcMedia   :: !Body
     }
 
 -- | Creates a value of 'UsersDraftsCreate'' with the minimum fields required to make a request.
@@ -71,7 +71,7 @@ data UsersDraftsCreate' = UsersDraftsCreate'
 usersDraftsCreate'
     :: Draft -- ^ 'payload'
     -> Text -- ^ 'media'
-    -> Stream
+    -> Body
     -> UsersDraftsCreate'
 usersDraftsCreate' pUdcPayload_ pUdcUserId_ pUdcMedia_ =
     UsersDraftsCreate'
@@ -91,7 +91,7 @@ udcUserId :: Lens' UsersDraftsCreate' Text
 udcUserId
   = lens _udcUserId (\ s a -> s{_udcUserId = a})
 
-udcMedia :: Lens' UsersDraftsCreate' Stream
+udcMedia :: Lens' UsersDraftsCreate' Body
 udcMedia = lens _udcMedia (\ s a -> s{_udcMedia = a})
 
 instance GoogleRequest UsersDraftsCreate' where

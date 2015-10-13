@@ -46,14 +46,13 @@ type ArchiveInsertResource =
      Capture "groupId" Text :>
        "archive" :>
          QueryParam "alt" AltJSON :>
-           ReqBody '[OctetStream] RequestBody :>
-             Post '[JSON] Groups
+           ReqBody '[OctetStream] Body :> Post '[JSON] Groups
 
 -- | Inserts a new mail into the archive of the Google group.
 --
 -- /See:/ 'archiveInsert'' smart constructor.
 data ArchiveInsert' = ArchiveInsert'
-    { _aiMedia   :: !Stream
+    { _aiMedia   :: !Body
     , _aiGroupId :: !Text
     }
 
@@ -65,7 +64,7 @@ data ArchiveInsert' = ArchiveInsert'
 --
 -- * 'aiGroupId'
 archiveInsert'
-    :: Stream -- ^ 'media'
+    :: Body -- ^ 'media'
     -> Text -- ^ 'groupId'
     -> ArchiveInsert'
 archiveInsert' pAiMedia_ pAiGroupId_ =
@@ -74,7 +73,7 @@ archiveInsert' pAiMedia_ pAiGroupId_ =
     , _aiGroupId = pAiGroupId_
     }
 
-aiMedia :: Lens' ArchiveInsert' Stream
+aiMedia :: Lens' ArchiveInsert' Body
 aiMedia = lens _aiMedia (\ s a -> s{_aiMedia = a})
 
 -- | The group ID

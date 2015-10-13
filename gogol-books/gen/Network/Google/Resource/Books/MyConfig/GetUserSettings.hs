@@ -59,7 +59,7 @@ myConfigGetUserSettings' = MyConfigGetUserSettings'
 
 instance GoogleRequest MyConfigGetUserSettings' where
         type Rs MyConfigGetUserSettings' = Usersettings
-        requestClient MyConfigGetUserSettings'{..}
+        requestClient MyConfigGetUserSettings'{}
           = go (Just AltJSON) booksService
           where go
                   = buildClient

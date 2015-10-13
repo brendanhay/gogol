@@ -62,7 +62,7 @@ questsResetAllForAllPlayers' = QuestsResetAllForAllPlayers'
 instance GoogleRequest QuestsResetAllForAllPlayers'
          where
         type Rs QuestsResetAllForAllPlayers' = ()
-        requestClient QuestsResetAllForAllPlayers'{..}
+        requestClient QuestsResetAllForAllPlayers'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

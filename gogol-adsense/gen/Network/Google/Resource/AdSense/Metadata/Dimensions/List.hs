@@ -59,7 +59,7 @@ metadataDimensionsList' = MetadataDimensionsList'
 
 instance GoogleRequest MetadataDimensionsList' where
         type Rs MetadataDimensionsList' = Metadata
-        requestClient MetadataDimensionsList'{..}
+        requestClient MetadataDimensionsList'{}
           = go (Just AltJSON) adSenseService
           where go
                   = buildClient

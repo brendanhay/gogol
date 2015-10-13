@@ -61,7 +61,7 @@ billingInfoList' = BillingInfoList'
 
 instance GoogleRequest BillingInfoList' where
         type Rs BillingInfoList' = BillingInfoList
-        requestClient BillingInfoList'{..}
+        requestClient BillingInfoList'{}
           = go (Just AltJSON) adExchangeBuyerService
           where go
                   = buildClient

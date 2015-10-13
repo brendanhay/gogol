@@ -60,7 +60,7 @@ webResourceList' = WebResourceList'
 instance GoogleRequest WebResourceList' where
         type Rs WebResourceList' =
              SiteVerificationWebResourceListResponse
-        requestClient WebResourceList'{..}
+        requestClient WebResourceList'{}
           = go (Just AltJSON) siteVerificationService
           where go
                   = buildClient

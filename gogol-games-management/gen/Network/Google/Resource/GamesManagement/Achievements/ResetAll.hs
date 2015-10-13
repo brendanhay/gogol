@@ -65,7 +65,7 @@ achievementsResetAll' = AchievementsResetAll'
 instance GoogleRequest AchievementsResetAll' where
         type Rs AchievementsResetAll' =
              AchievementResetAllResponse
-        requestClient AchievementsResetAll'{..}
+        requestClient AchievementsResetAll'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

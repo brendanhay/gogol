@@ -62,7 +62,7 @@ scoresResetAllForAllPlayers' = ScoresResetAllForAllPlayers'
 instance GoogleRequest ScoresResetAllForAllPlayers'
          where
         type Rs ScoresResetAllForAllPlayers' = ()
-        requestClient ScoresResetAllForAllPlayers'{..}
+        requestClient ScoresResetAllForAllPlayers'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

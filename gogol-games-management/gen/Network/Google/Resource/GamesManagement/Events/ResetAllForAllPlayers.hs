@@ -64,7 +64,7 @@ eventsResetAllForAllPlayers' = EventsResetAllForAllPlayers'
 instance GoogleRequest EventsResetAllForAllPlayers'
          where
         type Rs EventsResetAllForAllPlayers' = ()
-        requestClient EventsResetAllForAllPlayers'{..}
+        requestClient EventsResetAllForAllPlayers'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

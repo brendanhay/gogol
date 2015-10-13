@@ -63,7 +63,7 @@ eventsResetAll' = EventsResetAll'
 
 instance GoogleRequest EventsResetAll' where
         type Rs EventsResetAll' = ()
-        requestClient EventsResetAll'{..}
+        requestClient EventsResetAll'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy EventsResetAllResource)

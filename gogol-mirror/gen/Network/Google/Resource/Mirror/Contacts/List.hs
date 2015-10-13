@@ -59,7 +59,7 @@ contactsList' = ContactsList'
 
 instance GoogleRequest ContactsList' where
         type Rs ContactsList' = ContactsListResponse
-        requestClient ContactsList'{..}
+        requestClient ContactsList'{}
           = go (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsListResource)

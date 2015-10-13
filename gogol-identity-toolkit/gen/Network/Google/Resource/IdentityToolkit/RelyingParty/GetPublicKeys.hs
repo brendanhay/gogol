@@ -62,7 +62,7 @@ instance GoogleRequest RelyingPartyGetPublicKeys'
          where
         type Rs RelyingPartyGetPublicKeys' =
              IdentitytoolkitRelyingPartyGetPublicKeysResponse
-        requestClient RelyingPartyGetPublicKeys'{..}
+        requestClient RelyingPartyGetPublicKeys'{}
           = go (Just AltJSON) identityToolkitService
           where go
                   = buildClient

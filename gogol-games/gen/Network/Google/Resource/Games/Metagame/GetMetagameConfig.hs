@@ -60,7 +60,7 @@ metagameGetMetagameConfig' = MetagameGetMetagameConfig'
 instance GoogleRequest MetagameGetMetagameConfig'
          where
         type Rs MetagameGetMetagameConfig' = MetagameConfig
-        requestClient MetagameGetMetagameConfig'{..}
+        requestClient MetagameGetMetagameConfig'{}
           = go (Just AltJSON) gamesService
           where go
                   = buildClient

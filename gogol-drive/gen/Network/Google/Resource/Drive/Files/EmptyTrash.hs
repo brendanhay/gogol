@@ -59,7 +59,7 @@ filesEmptyTrash' = FilesEmptyTrash'
 
 instance GoogleRequest FilesEmptyTrash' where
         type Rs FilesEmptyTrash' = ()
-        requestClient FilesEmptyTrash'{..}
+        requestClient FilesEmptyTrash'{}
           = go (Just AltJSON) driveService
           where go
                   = buildClient

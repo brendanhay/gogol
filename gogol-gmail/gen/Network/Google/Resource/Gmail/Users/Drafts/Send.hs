@@ -49,7 +49,7 @@ type UsersDraftsSendResource =
        "drafts" :>
          "send" :>
            QueryParam "alt" AltJSON :>
-             MultipartRelated '[JSON] Draft Stream :>
+             MultipartRelated '[JSON] Draft Body :>
                Post '[JSON] Message
 
 -- | Sends the specified, existing draft to the recipients in the To, Cc, and
@@ -59,7 +59,7 @@ type UsersDraftsSendResource =
 data UsersDraftsSend' = UsersDraftsSend'
     { _udsPayload :: !Draft
     , _udsUserId  :: !Text
-    , _udsMedia   :: !Stream
+    , _udsMedia   :: !Body
     }
 
 -- | Creates a value of 'UsersDraftsSend'' with the minimum fields required to make a request.
@@ -74,7 +74,7 @@ data UsersDraftsSend' = UsersDraftsSend'
 usersDraftsSend'
     :: Draft -- ^ 'payload'
     -> Text -- ^ 'media'
-    -> Stream
+    -> Body
     -> UsersDraftsSend'
 usersDraftsSend' pUdsPayload_ pUdsUserId_ pUdsMedia_ =
     UsersDraftsSend'
@@ -94,7 +94,7 @@ udsUserId :: Lens' UsersDraftsSend' Text
 udsUserId
   = lens _udsUserId (\ s a -> s{_udsUserId = a})
 
-udsMedia :: Lens' UsersDraftsSend' Stream
+udsMedia :: Lens' UsersDraftsSend' Body
 udsMedia = lens _udsMedia (\ s a -> s{_udsMedia = a})
 
 instance GoogleRequest UsersDraftsSend' where

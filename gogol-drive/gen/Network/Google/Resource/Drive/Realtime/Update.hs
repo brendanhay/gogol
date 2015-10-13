@@ -50,7 +50,7 @@ type RealtimeUpdateResource =
          "realtime" :>
            QueryParam "baseRevision" Text :>
              QueryParam "alt" AltJSON :>
-               ReqBody '[OctetStream] RequestBody :> Put '[JSON] ()
+               ReqBody '[OctetStream] Body :> Put '[JSON] ()
 
 -- | Overwrites the Realtime API data model associated with this file with
 -- the provided JSON data model.
@@ -58,7 +58,7 @@ type RealtimeUpdateResource =
 -- /See:/ 'realtimeUpdate'' smart constructor.
 data RealtimeUpdate' = RealtimeUpdate'
     { _rBaseRevision :: !(Maybe Text)
-    , _rMedia        :: !Stream
+    , _rMedia        :: !Body
     , _rFileId       :: !Text
     }
 
@@ -72,7 +72,7 @@ data RealtimeUpdate' = RealtimeUpdate'
 --
 -- * 'rFileId'
 realtimeUpdate'
-    :: Stream -- ^ 'media'
+    :: Body -- ^ 'media'
     -> Text -- ^ 'fileId'
     -> RealtimeUpdate'
 realtimeUpdate' pRMedia_ pRFileId_ =
@@ -92,7 +92,7 @@ rBaseRevision
   = lens _rBaseRevision
       (\ s a -> s{_rBaseRevision = a})
 
-rMedia :: Lens' RealtimeUpdate' Stream
+rMedia :: Lens' RealtimeUpdate' Body
 rMedia = lens _rMedia (\ s a -> s{_rMedia = a})
 
 -- | The ID of the file that the Realtime API data model is associated with.

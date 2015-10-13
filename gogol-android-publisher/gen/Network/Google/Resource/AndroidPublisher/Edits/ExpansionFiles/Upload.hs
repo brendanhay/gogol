@@ -56,7 +56,7 @@ type EditsExpansionFilesUploadResource =
                    EditsExpansionFilesUploadExpansionFileType
                    :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] RequestBody :>
+                     ReqBody '[OctetStream] Body :>
                        Post '[JSON] ExpansionFilesUploadResponse
 
 -- | Uploads and attaches a new Expansion File to the APK specified.
@@ -65,7 +65,7 @@ type EditsExpansionFilesUploadResource =
 data EditsExpansionFilesUpload' = EditsExpansionFilesUpload'
     { _eefuPackageName       :: !Text
     , _eefuAPKVersionCode    :: !Int32
-    , _eefuMedia             :: !Stream
+    , _eefuMedia             :: !Body
     , _eefuExpansionFileType :: !EditsExpansionFilesUploadExpansionFileType
     , _eefuEditId            :: !Text
     }
@@ -86,7 +86,7 @@ data EditsExpansionFilesUpload' = EditsExpansionFilesUpload'
 editsExpansionFilesUpload'
     :: Text -- ^ 'packageName'
     -> Int32 -- ^ 'apkVersionCode'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> EditsExpansionFilesUploadExpansionFileType -- ^ 'expansionFileType'
     -> Text -- ^ 'editId'
     -> EditsExpansionFilesUpload'
@@ -113,7 +113,7 @@ eefuAPKVersionCode
   = lens _eefuAPKVersionCode
       (\ s a -> s{_eefuAPKVersionCode = a})
 
-eefuMedia :: Lens' EditsExpansionFilesUpload' Stream
+eefuMedia :: Lens' EditsExpansionFilesUpload' Body
 eefuMedia
   = lens _eefuMedia (\ s a -> s{_eefuMedia = a})
 

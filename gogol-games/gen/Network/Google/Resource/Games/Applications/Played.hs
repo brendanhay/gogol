@@ -61,7 +61,7 @@ applicationsPlayed' = ApplicationsPlayed'
 
 instance GoogleRequest ApplicationsPlayed' where
         type Rs ApplicationsPlayed' = ()
-        requestClient ApplicationsPlayed'{..}
+        requestClient ApplicationsPlayed'{}
           = go (Just AltJSON) gamesService
           where go
                   = buildClient

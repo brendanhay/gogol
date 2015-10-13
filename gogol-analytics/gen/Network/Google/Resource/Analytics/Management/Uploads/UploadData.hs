@@ -54,8 +54,7 @@ type ManagementUploadsUploadDataResource =
                  Capture "customDataSourceId" Text :>
                    "uploads" :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] RequestBody :>
-                         Post '[JSON] Upload
+                       ReqBody '[OctetStream] Body :> Post '[JSON] Upload
 
 -- | Upload data for a custom data source.
 --
@@ -63,7 +62,7 @@ type ManagementUploadsUploadDataResource =
 data ManagementUploadsUploadData' = ManagementUploadsUploadData'
     { _muudWebPropertyId      :: !Text
     , _muudCustomDataSourceId :: !Text
-    , _muudMedia              :: !Stream
+    , _muudMedia              :: !Body
     , _muudAccountId          :: !Text
     }
 
@@ -81,7 +80,7 @@ data ManagementUploadsUploadData' = ManagementUploadsUploadData'
 managementUploadsUploadData'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'customDataSourceId'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> Text -- ^ 'accountId'
     -> ManagementUploadsUploadData'
 managementUploadsUploadData' pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudMedia_ pMuudAccountId_ =
@@ -104,7 +103,7 @@ muudCustomDataSourceId
   = lens _muudCustomDataSourceId
       (\ s a -> s{_muudCustomDataSourceId = a})
 
-muudMedia :: Lens' ManagementUploadsUploadData' Stream
+muudMedia :: Lens' ManagementUploadsUploadData' Body
 muudMedia
   = lens _muudMedia (\ s a -> s{_muudMedia = a})
 

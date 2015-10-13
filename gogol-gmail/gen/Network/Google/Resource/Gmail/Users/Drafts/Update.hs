@@ -49,7 +49,7 @@ type UsersDraftsUpdateResource =
        "drafts" :>
          Capture "id" Text :>
            QueryParam "alt" AltJSON :>
-             MultipartRelated '[JSON] Draft Stream :>
+             MultipartRelated '[JSON] Draft Body :>
                Put '[JSON] Draft
 
 -- | Replaces a draft\'s content.
@@ -58,7 +58,7 @@ type UsersDraftsUpdateResource =
 data UsersDraftsUpdate' = UsersDraftsUpdate'
     { _uduPayload :: !Draft
     , _uduUserId  :: !Text
-    , _uduMedia   :: !Stream
+    , _uduMedia   :: !Body
     , _uduId      :: !Text
     }
 
@@ -76,7 +76,7 @@ data UsersDraftsUpdate' = UsersDraftsUpdate'
 usersDraftsUpdate'
     :: Draft -- ^ 'payload'
     -> Text -- ^ 'media'
-    -> Stream -- ^ 'id'
+    -> Body -- ^ 'id'
     -> Text
     -> UsersDraftsUpdate'
 usersDraftsUpdate' pUduPayload_ pUduUserId_ pUduMedia_ pUduId_ =
@@ -98,7 +98,7 @@ uduUserId :: Lens' UsersDraftsUpdate' Text
 uduUserId
   = lens _uduUserId (\ s a -> s{_uduUserId = a})
 
-uduMedia :: Lens' UsersDraftsUpdate' Stream
+uduMedia :: Lens' UsersDraftsUpdate' Body
 uduMedia = lens _uduMedia (\ s a -> s{_uduMedia = a})
 
 -- | The ID of the draft to update.

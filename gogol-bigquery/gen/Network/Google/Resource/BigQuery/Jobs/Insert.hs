@@ -48,15 +48,14 @@ type JobsInsertResource =
        Capture "projectId" Text :>
          "jobs" :>
            QueryParam "alt" AltJSON :>
-             MultipartRelated '[JSON] Job Stream :>
-               Post '[JSON] Job
+             MultipartRelated '[JSON] Job Body :> Post '[JSON] Job
 
 -- | Starts a new asynchronous job. Requires the Can View project role.
 --
 -- /See:/ 'jobsInsert'' smart constructor.
 data JobsInsert' = JobsInsert'
     { _jiPayload   :: !Job
-    , _jiMedia     :: !Stream
+    , _jiMedia     :: !Body
     , _jiProjectId :: !Text
     }
 
@@ -71,7 +70,7 @@ data JobsInsert' = JobsInsert'
 -- * 'jiProjectId'
 jobsInsert'
     :: Job -- ^ 'payload'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> Text -- ^ 'projectId'
     -> JobsInsert'
 jobsInsert' pJiPayload_ pJiMedia_ pJiProjectId_ =
@@ -86,7 +85,7 @@ jiPayload :: Lens' JobsInsert' Job
 jiPayload
   = lens _jiPayload (\ s a -> s{_jiPayload = a})
 
-jiMedia :: Lens' JobsInsert' Stream
+jiMedia :: Lens' JobsInsert' Body
 jiMedia = lens _jiMedia (\ s a -> s{_jiMedia = a})
 
 -- | Project ID of the project that will be billed for the job

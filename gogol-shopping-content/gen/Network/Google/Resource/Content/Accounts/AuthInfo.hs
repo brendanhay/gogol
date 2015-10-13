@@ -60,7 +60,7 @@ accountsAuthInfo' = AccountsAuthInfo'
 
 instance GoogleRequest AccountsAuthInfo' where
         type Rs AccountsAuthInfo' = AccountsAuthInfoResponse
-        requestClient AccountsAuthInfo'{..}
+        requestClient AccountsAuthInfo'{}
           = go (Just AltJSON) shoppingContentService
           where go
                   = buildClient

@@ -53,7 +53,7 @@ type CaptionsInsertResource =
            QueryParam "onBehalfOfContentOwner" Text :>
              QueryParam "sync" Bool :>
                QueryParam "alt" AltJSON :>
-                 MultipartRelated '[JSON] Caption Stream :>
+                 MultipartRelated '[JSON] Caption Body :>
                    Post '[JSON] Caption
 
 -- | Uploads a caption track.
@@ -63,7 +63,7 @@ data CaptionsInsert' = CaptionsInsert'
     { _ciOnBehalfOf             :: !(Maybe Text)
     , _ciPart                   :: !Text
     , _ciPayload                :: !Caption
-    , _ciMedia                  :: !Stream
+    , _ciMedia                  :: !Body
     , _ciOnBehalfOfContentOwner :: !(Maybe Text)
     , _ciSync                   :: !(Maybe Bool)
     }
@@ -86,7 +86,7 @@ data CaptionsInsert' = CaptionsInsert'
 captionsInsert'
     :: Text -- ^ 'part'
     -> Caption -- ^ 'payload'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> CaptionsInsert'
 captionsInsert' pCiPart_ pCiPayload_ pCiMedia_ =
     CaptionsInsert'
@@ -114,7 +114,7 @@ ciPayload :: Lens' CaptionsInsert' Caption
 ciPayload
   = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
-ciMedia :: Lens' CaptionsInsert' Stream
+ciMedia :: Lens' CaptionsInsert' Body
 ciMedia = lens _ciMedia (\ s a -> s{_ciMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content

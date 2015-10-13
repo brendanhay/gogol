@@ -49,13 +49,13 @@ type RastersFilesInsertResource =
          "files" :>
            QueryParam "filename" Text :>
              QueryParam "alt" AltJSON :>
-               ReqBody '[OctetStream] RequestBody :> Post '[JSON] ()
+               ReqBody '[OctetStream] Body :> Post '[JSON] ()
 
 -- | Upload a file to a raster asset.
 --
 -- /See:/ 'rastersFilesInsert'' smart constructor.
 data RastersFilesInsert' = RastersFilesInsert'
-    { _rfiMedia    :: !Stream
+    { _rfiMedia    :: !Body
     , _rfiId       :: !Text
     , _rfiFilename :: !Text
     }
@@ -70,7 +70,7 @@ data RastersFilesInsert' = RastersFilesInsert'
 --
 -- * 'rfiFilename'
 rastersFilesInsert'
-    :: Stream -- ^ 'media'
+    :: Body -- ^ 'media'
     -> Text -- ^ 'id'
     -> Text -- ^ 'filename'
     -> RastersFilesInsert'
@@ -81,7 +81,7 @@ rastersFilesInsert' pRfiMedia_ pRfiId_ pRfiFilename_ =
     , _rfiFilename = pRfiFilename_
     }
 
-rfiMedia :: Lens' RastersFilesInsert' Stream
+rfiMedia :: Lens' RastersFilesInsert' Body
 rfiMedia = lens _rfiMedia (\ s a -> s{_rfiMedia = a})
 
 -- | The ID of the raster asset.

@@ -59,7 +59,7 @@ metadataMetricsList' = MetadataMetricsList'
 
 instance GoogleRequest MetadataMetricsList' where
         type Rs MetadataMetricsList' = Metadata
-        requestClient MetadataMetricsList'{..}
+        requestClient MetadataMetricsList'{}
           = go (Just AltJSON) adSenseService
           where go
                   = buildClient

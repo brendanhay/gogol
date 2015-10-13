@@ -62,7 +62,7 @@ subscriptionsList' = SubscriptionsList'
 instance GoogleRequest SubscriptionsList' where
         type Rs SubscriptionsList' =
              SubscriptionsListResponse
-        requestClient SubscriptionsList'{..}
+        requestClient SubscriptionsList'{}
           = go (Just AltJSON) mirrorService
           where go
                   = buildClient

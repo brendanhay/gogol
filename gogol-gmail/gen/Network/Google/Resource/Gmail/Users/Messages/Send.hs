@@ -49,7 +49,7 @@ type UsersMessagesSendResource =
        "messages" :>
          "send" :>
            QueryParam "alt" AltJSON :>
-             MultipartRelated '[JSON] Message Stream :>
+             MultipartRelated '[JSON] Message Body :>
                Post '[JSON] Message
 
 -- | Sends the specified message to the recipients in the To, Cc, and Bcc
@@ -59,7 +59,7 @@ type UsersMessagesSendResource =
 data UsersMessagesSend' = UsersMessagesSend'
     { _umsPayload :: !Message
     , _umsUserId  :: !Text
-    , _umsMedia   :: !Stream
+    , _umsMedia   :: !Body
     }
 
 -- | Creates a value of 'UsersMessagesSend'' with the minimum fields required to make a request.
@@ -74,7 +74,7 @@ data UsersMessagesSend' = UsersMessagesSend'
 usersMessagesSend'
     :: Message -- ^ 'payload'
     -> Text -- ^ 'media'
-    -> Stream
+    -> Body
     -> UsersMessagesSend'
 usersMessagesSend' pUmsPayload_ pUmsUserId_ pUmsMedia_ =
     UsersMessagesSend'
@@ -94,7 +94,7 @@ umsUserId :: Lens' UsersMessagesSend' Text
 umsUserId
   = lens _umsUserId (\ s a -> s{_umsUserId = a})
 
-umsMedia :: Lens' UsersMessagesSend' Stream
+umsMedia :: Lens' UsersMessagesSend' Body
 umsMedia = lens _umsMedia (\ s a -> s{_umsMedia = a})
 
 instance GoogleRequest UsersMessagesSend' where

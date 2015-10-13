@@ -51,7 +51,7 @@ type ImageConfigurationsUploadResource =
              ImageConfigurationsUploadImageType
              :>
              QueryParam "alt" AltJSON :>
-               ReqBody '[OctetStream] RequestBody :>
+               ReqBody '[OctetStream] Body :>
                  Post '[JSON] ImageConfiguration
 
 -- | Uploads an image for a resource with the given ID and image type.
@@ -59,7 +59,7 @@ type ImageConfigurationsUploadResource =
 -- /See:/ 'imageConfigurationsUpload'' smart constructor.
 data ImageConfigurationsUpload' = ImageConfigurationsUpload'
     { _icuResourceId :: !Text
-    , _icuMedia      :: !Stream
+    , _icuMedia      :: !Body
     , _icuImageType  :: !ImageConfigurationsUploadImageType
     }
 
@@ -74,7 +74,7 @@ data ImageConfigurationsUpload' = ImageConfigurationsUpload'
 -- * 'icuImageType'
 imageConfigurationsUpload'
     :: Text -- ^ 'resourceId'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> ImageConfigurationsUploadImageType -- ^ 'imageType'
     -> ImageConfigurationsUpload'
 imageConfigurationsUpload' pIcuResourceId_ pIcuMedia_ pIcuImageType_ =
@@ -90,7 +90,7 @@ icuResourceId
   = lens _icuResourceId
       (\ s a -> s{_icuResourceId = a})
 
-icuMedia :: Lens' ImageConfigurationsUpload' Stream
+icuMedia :: Lens' ImageConfigurationsUpload' Body
 icuMedia = lens _icuMedia (\ s a -> s{_icuMedia = a})
 
 -- | Selects which image in a resource for this method.

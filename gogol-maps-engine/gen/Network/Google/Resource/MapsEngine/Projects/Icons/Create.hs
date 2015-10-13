@@ -48,7 +48,7 @@ type ProjectsIconsCreateResource =
        Capture "projectId" Text :>
          "icons" :>
            QueryParam "alt" AltJSON :>
-             MultipartRelated '[JSON] Icon Stream :>
+             MultipartRelated '[JSON] Icon Body :>
                Post '[JSON] Icon
 
 -- | Create an icon.
@@ -56,7 +56,7 @@ type ProjectsIconsCreateResource =
 -- /See:/ 'projectsIconsCreate'' smart constructor.
 data ProjectsIconsCreate' = ProjectsIconsCreate'
     { _picPayload   :: !Icon
-    , _picMedia     :: !Stream
+    , _picMedia     :: !Body
     , _picProjectId :: !Text
     }
 
@@ -71,7 +71,7 @@ data ProjectsIconsCreate' = ProjectsIconsCreate'
 -- * 'picProjectId'
 projectsIconsCreate'
     :: Icon -- ^ 'payload'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> Text -- ^ 'projectId'
     -> ProjectsIconsCreate'
 projectsIconsCreate' pPicPayload_ pPicMedia_ pPicProjectId_ =
@@ -86,7 +86,7 @@ picPayload :: Lens' ProjectsIconsCreate' Icon
 picPayload
   = lens _picPayload (\ s a -> s{_picPayload = a})
 
-picMedia :: Lens' ProjectsIconsCreate' Stream
+picMedia :: Lens' ProjectsIconsCreate' Body
 picMedia = lens _picMedia (\ s a -> s{_picMedia = a})
 
 -- | The ID of the project.

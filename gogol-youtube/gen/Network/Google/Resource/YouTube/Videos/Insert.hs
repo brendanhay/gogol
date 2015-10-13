@@ -57,7 +57,7 @@ type VideosInsertResource =
                QueryParam "notifySubscribers" Bool :>
                  QueryParam "autoLevels" Bool :>
                    QueryParam "alt" AltJSON :>
-                     MultipartRelated '[JSON] Video Stream :>
+                     MultipartRelated '[JSON] Video Body :>
                        Post '[JSON] Video
 
 -- | Uploads a video to YouTube and optionally sets the video\'s metadata.
@@ -67,7 +67,7 @@ data VideosInsert' = VideosInsert'
     { _viPart                          :: !Text
     , _viStabilize                     :: !(Maybe Bool)
     , _viPayload                       :: !Video
-    , _viMedia                         :: !Stream
+    , _viMedia                         :: !Body
     , _viOnBehalfOfContentOwner        :: !(Maybe Text)
     , _viOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _viNotifySubscribers             :: !Bool
@@ -96,7 +96,7 @@ data VideosInsert' = VideosInsert'
 videosInsert'
     :: Text -- ^ 'part'
     -> Video -- ^ 'payload'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> VideosInsert'
 videosInsert' pViPart_ pViPayload_ pViMedia_ =
     VideosInsert'
@@ -132,7 +132,7 @@ viPayload :: Lens' VideosInsert' Video
 viPayload
   = lens _viPayload (\ s a -> s{_viPayload = a})
 
-viMedia :: Lens' VideosInsert' Stream
+viMedia :: Lens' VideosInsert' Body
 viMedia = lens _viMedia (\ s a -> s{_viMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content

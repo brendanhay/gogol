@@ -47,7 +47,7 @@ type TimelineAttachmentsInsertResource =
        Capture "itemId" Text :>
          "attachments" :>
            QueryParam "alt" AltJSON :>
-             ReqBody '[OctetStream] RequestBody :>
+             ReqBody '[OctetStream] Body :>
                Post '[JSON] Attachment
 
 -- | Adds a new attachment to a timeline item.
@@ -55,7 +55,7 @@ type TimelineAttachmentsInsertResource =
 -- /See:/ 'timelineAttachmentsInsert'' smart constructor.
 data TimelineAttachmentsInsert' = TimelineAttachmentsInsert'
     { _taiItemId :: !Text
-    , _taiMedia  :: !Stream
+    , _taiMedia  :: !Body
     }
 
 -- | Creates a value of 'TimelineAttachmentsInsert'' with the minimum fields required to make a request.
@@ -67,7 +67,7 @@ data TimelineAttachmentsInsert' = TimelineAttachmentsInsert'
 -- * 'taiMedia'
 timelineAttachmentsInsert'
     :: Text -- ^ 'itemId'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> TimelineAttachmentsInsert'
 timelineAttachmentsInsert' pTaiItemId_ pTaiMedia_ =
     TimelineAttachmentsInsert'
@@ -80,7 +80,7 @@ taiItemId :: Lens' TimelineAttachmentsInsert' Text
 taiItemId
   = lens _taiItemId (\ s a -> s{_taiItemId = a})
 
-taiMedia :: Lens' TimelineAttachmentsInsert' Stream
+taiMedia :: Lens' TimelineAttachmentsInsert' Body
 taiMedia = lens _taiMedia (\ s a -> s{_taiMedia = a})
 
 instance GoogleRequest TimelineAttachmentsInsert'

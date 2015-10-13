@@ -59,7 +59,7 @@ queriesListqueries' = QueriesListqueries'
 
 instance GoogleRequest QueriesListqueries' where
         type Rs QueriesListqueries' = ListQueriesResponse
-        requestClient QueriesListqueries'{..}
+        requestClient QueriesListqueries'{}
           = go (Just AltJSON) doubleClickBidsService
           where go
                   = buildClient

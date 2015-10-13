@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 type TimelineInsertResource =
      "timeline" :>
        QueryParam "alt" AltJSON :>
-         MultipartRelated '[JSON] TimelineItem Stream :>
+         MultipartRelated '[JSON] TimelineItem Body :>
            Post '[JSON] TimelineItem
 
 -- | Inserts a new item into the timeline.
@@ -53,7 +53,7 @@ type TimelineInsertResource =
 -- /See:/ 'timelineInsert'' smart constructor.
 data TimelineInsert' = TimelineInsert'
     { _tiPayload :: !TimelineItem
-    , _tiMedia   :: !Stream
+    , _tiMedia   :: !Body
     }
 
 -- | Creates a value of 'TimelineInsert'' with the minimum fields required to make a request.
@@ -65,7 +65,7 @@ data TimelineInsert' = TimelineInsert'
 -- * 'tiMedia'
 timelineInsert'
     :: TimelineItem -- ^ 'payload'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> TimelineInsert'
 timelineInsert' pTiPayload_ pTiMedia_ =
     TimelineInsert'
@@ -78,7 +78,7 @@ tiPayload :: Lens' TimelineInsert' TimelineItem
 tiPayload
   = lens _tiPayload (\ s a -> s{_tiPayload = a})
 
-tiMedia :: Lens' TimelineInsert' Stream
+tiMedia :: Lens' TimelineInsert' Body
 tiMedia = lens _tiMedia (\ s a -> s{_tiMedia = a})
 
 instance GoogleRequest TimelineInsert' where

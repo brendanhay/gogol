@@ -53,7 +53,7 @@ type MediaInsertResource =
          "media" :>
            Capture "collection" MediaInsertCollection :>
              QueryParam "alt" AltJSON :>
-               MultipartRelated '[JSON] Media Stream :>
+               MultipartRelated '[JSON] Media Body :>
                  Post '[JSON] Media
 
 -- | Add a new media item to an album. The current upload size limitations
@@ -66,7 +66,7 @@ data MediaInsert' = MediaInsert'
     { _miCollection :: !MediaInsertCollection
     , _miPayload    :: !Media
     , _miUserId     :: !Text
-    , _miMedia      :: !Stream
+    , _miMedia      :: !Body
     }
 
 -- | Creates a value of 'MediaInsert'' with the minimum fields required to make a request.
@@ -84,7 +84,7 @@ mediaInsert'
     :: MediaInsertCollection -- ^ 'collection'
     -> Media -- ^ 'payload'
     -> Text -- ^ 'userId'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> MediaInsert'
 mediaInsert' pMiCollection_ pMiPayload_ pMiUserId_ pMiMedia_ =
     MediaInsert'
@@ -107,7 +107,7 @@ miPayload
 miUserId :: Lens' MediaInsert' Text
 miUserId = lens _miUserId (\ s a -> s{_miUserId = a})
 
-miMedia :: Lens' MediaInsert' Stream
+miMedia :: Lens' MediaInsert' Body
 miMedia = lens _miMedia (\ s a -> s{_miMedia = a})
 
 instance GoogleRequest MediaInsert' where

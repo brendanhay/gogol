@@ -51,7 +51,7 @@ type CreativeAssetsInsertResource =
            Capture "advertiserId" Int64 :>
              "creativeAssets" :>
                QueryParam "alt" AltJSON :>
-                 MultipartRelated '[JSON] CreativeAssetMetadata Stream
+                 MultipartRelated '[JSON] CreativeAssetMetadata Body
                    :> Post '[JSON] CreativeAssetMetadata
 
 -- | Inserts a new creative asset.
@@ -61,7 +61,7 @@ data CreativeAssetsInsert' = CreativeAssetsInsert'
     { _caiAdvertiserId :: !Int64
     , _caiProFileId    :: !Int64
     , _caiPayload      :: !CreativeAssetMetadata
-    , _caiMedia        :: !Stream
+    , _caiMedia        :: !Body
     }
 
 -- | Creates a value of 'CreativeAssetsInsert'' with the minimum fields required to make a request.
@@ -79,7 +79,7 @@ creativeAssetsInsert'
     :: Int64 -- ^ 'advertiserId'
     -> Int64 -- ^ 'profileId'
     -> CreativeAssetMetadata -- ^ 'payload'
-    -> Stream -- ^ 'media'
+    -> Body -- ^ 'media'
     -> CreativeAssetsInsert'
 creativeAssetsInsert' pCaiAdvertiserId_ pCaiProFileId_ pCaiPayload_ pCaiMedia_ =
     CreativeAssetsInsert'
@@ -105,7 +105,7 @@ caiPayload :: Lens' CreativeAssetsInsert' CreativeAssetMetadata
 caiPayload
   = lens _caiPayload (\ s a -> s{_caiPayload = a})
 
-caiMedia :: Lens' CreativeAssetsInsert' Stream
+caiMedia :: Lens' CreativeAssetsInsert' Body
 caiMedia = lens _caiMedia (\ s a -> s{_caiMedia = a})
 
 instance GoogleRequest CreativeAssetsInsert' where
