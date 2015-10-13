@@ -54,7 +54,6 @@ newtype Fix f = Fix (f (Fix f))
 data Location
     = Query
     | Path
-    | Header
       deriving (Eq, Show)
 
 deriveJSON options ''Location
@@ -203,8 +202,6 @@ data Lit
     | Body
     | JSONValue
     | Alt Text
-    | Key
-    | OAuthToken
       deriving (Eq, Show)
 
 instance FromJSON Lit where
@@ -331,7 +328,7 @@ instance FromJSON a => FromJSON (Resource a) where
          <*> (o .:? "methods"   .!= mempty <&> keyless)
 
 newtype OAuth2 = OAuth2 { scopes :: Map Text Help }
-    deriving (Eq, Show)
+    deriving (Eq, Show, ToJSON)
 
 instance FromJSON OAuth2 where
     parseJSON = withObject "oauth2" $ \x -> do
@@ -436,4 +433,4 @@ instance HasDescription (Service a) a where
     description = sDescription
 
 urlName :: Service a -> Text
-urlName = (<> "Request") . lowerHead . _sCanonicalName
+urlName = (<> "Service") . toCamel . _sCanonicalName

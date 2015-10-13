@@ -34,15 +34,24 @@ import           Language.Haskell.Exts.SrcLoc
 import           Language.Haskell.Exts.Syntax hiding (Alt, Int, Lit)
 
 urlSig :: Name -> Decl
-urlSig n = TypeSig noLoc [n] (TyCon "RequestBuilder")
+urlSig n = TypeSig noLoc [n] (TyCon "Service")
 
 urlDecl :: Service a -> Name -> Decl
 urlDecl s n = sfun noLoc n [] (UnGuardedRhs rhs) noBinds
   where
-    rhs = appFun (var "defaultRequest")
-        [ str (s ^. dRootUrl)
+    rhs = appFun (var "defaultService")
+        [ app (var "ServiceId") (str (s ^. dId))
+        , str . stripSuffix "/" $ stripPrefix "https://" (s ^. dRootUrl)
         , str (s ^. dServicePath)
         ]
+
+scopeSig :: Name -> Decl
+scopeSig n = TypeSig noLoc [n] (TyCon "OAuthScope")
+
+scopeDecl :: Name -> Text -> Decl
+scopeDecl n s = sfun noLoc n [] (UnGuardedRhs rhs) noBinds
+  where
+    rhs = app (var "OAuthScope") (str s)
 
  -- type API = :<|> ...
 apiAlias :: Name -> [Name] -> Decl
@@ -97,8 +106,6 @@ verbAlias n m
            let t = terminalType (_type (_pParam x))
                n = sing (local k)
             in case _pLocation x of
-                Header | local k == "oauth_token"
-                       -> Just $ TyApp (TyApp (TyCon "Header") (sing "Authorization")) t
                 Query | x ^. iRepeated
                        -> Just $ TyApp (TyApp (TyCon "QueryParams") n) t
                 Query  -> Just $ TyApp (TyApp (TyCon "QueryParam")  n) t
@@ -188,21 +195,18 @@ googleRequestDecl g n assoc alt p api url fields m pat prec =
     InstDecl noLoc Nothing [] [] (unqual "GoogleRequest") [n]
         [ assoc
         , request
-        , requestWith
         ]
   where
-    request = funD "request" $ app (var "requestWith") (var url)
-
-    requestWith = InsDecl (FunBind [match])
+    request = InsDecl (FunBind [match])
       where
-        match = Match noLoc (name "requestWith") pats Nothing rhs decls
+        match = Match noLoc (name "requestClient") [prec] Nothing rhs decls
 
         decls = BDecls
             [ patBind noLoc pat $
                 appFun (var "clientBuild") $
                     [ ExpTypeSig noLoc (var "Proxy") $
                         TyApp (TyCon "Proxy") (TyCon (UnQual api))
-                    , var "rq"
+                    , var "mempty"
                     ]
             ]
 
@@ -210,6 +214,7 @@ googleRequestDecl g n assoc alt p api url fields m pat prec =
             ++ maybeToList (app (var "Just") <$> alt)
             ++ maybeToList (go <$> rq)
             ++ maybeToList (go <$> pay)
+            ++ [var url]
           where
             go l = case Map.lookup l ps of
                 Just p | _pLocation p == Query
@@ -239,18 +244,6 @@ googleRequestDecl g n assoc alt p api url fields m pat prec =
        . orderParams id (Map.keys (_mParameters m))
        . nub
        $ map fst (rights (extractPath (_mPath m))) ++ _mParameterOrder m
-
-    pats = [pvar "rq", prec]
-
-authDecl :: Global -> Prefix -> [Local] -> Decl
-authDecl g p fs = InstDecl noLoc Nothing [] [] (unqual "GoogleAuth") [tycon g]
-   [ method "_AuthKey" "key"
-   , method "_AuthToken" "oauth_token"
-   ]
-  where
-    method l f
-        | f `elem` fs = funD l (infixApp (var (lname p f)) "." (var "_Just"))
-        | otherwise   = funD l (app (var "const") (var "pure"))
 
 jsonDecls :: Global -> Prefix -> Map Local Solved -> [Decl]
 jsonDecls g p (Map.toList -> rs) = [from, to]
@@ -458,8 +451,6 @@ externalLit = \case
     Int64    -> TyCon "Int64"
 
     Alt t      -> TyCon (unqual (Text.unpack t))
-    Key        -> TyCon "AuthKey"
-    OAuthToken -> TyCon "OAuthToken"
     Body       -> TyCon "Stream"
     JSONValue  -> TyCon "JSONValue"
 
@@ -480,8 +471,6 @@ internalLit = \case
     Int64    -> TyCon "Int64"
 
     Alt t      -> TyCon (unqual (Text.unpack t))
-    Key        -> TyCon "AuthKey"
-    OAuthToken -> TyCon "OAuthToken"
     Body       -> TyCon "Stream"
     JSONValue  -> TyCon "JSONValue"
 

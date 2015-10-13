@@ -190,7 +190,7 @@ extractPath x = either (error . err) id $ A.parseOnly path x
   where
     err e = "Error parsing \"" <> Text.unpack x <> "\", " <> e
 
-    path = A.many1 (seg <|> repeat <|> var) <* A.endOfInput
+    path = A.many1 (seg <|> repeat <|> var') <* A.endOfInput
 
     seg = fmap Left $
         optional (A.char '/') *> A.takeWhile1 (A.notInClass "/{+*}")
@@ -200,7 +200,7 @@ extractPath x = either (error . err) id $ A.parseOnly path x
         (,Nothing) <$> fmap Local (A.takeWhile1 (/= '*'))
                     <* A.string "*}"
 
-    var = fmap Right $ do
+    var' = fmap Right $ do
         void $ optional (A.char '/') *> A.char '{' *> optional (A.char '+')
         (,) <$> fmap Local (A.takeWhile1 (A.notInClass "/{+*}:"))
              <* A.char '}'
@@ -222,8 +222,6 @@ orderParams f xs ys = orderBy f zs (del zs [] ++ global)
         , "prettyPrint"
         , "userIp"
         , "fields"
-        , "key"
-        , "oauth_token"
         , "alt"
         ]
 

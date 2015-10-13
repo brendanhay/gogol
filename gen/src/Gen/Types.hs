@@ -256,6 +256,7 @@ instance ToJSON Library where
        , "documentationLink"   .= (l ^. dDocumentationLink)
        , "labels"              .= (l ^. dLabels)
        , "features"            .= (l ^. dFeatures)
+       , "scopes"              .= (l ^. dAuth)
 
        -- API
        , "api"                 .= (l ^. lAPI)

@@ -12,8 +12,11 @@
 -- /See:/ <{{ documentationLink }} {{ title }} Reference>
 module {{ moduleName }}
     (
+    -- * Service Configuration
+      {{ api.url.name }}
+
     -- * API Declaration
-      {{ api.aliasName }}
+    , {{ api.aliasName }}
   {% for action in api.methods %}
     {% if action.first %}
 

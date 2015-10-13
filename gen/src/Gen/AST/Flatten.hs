@@ -38,10 +38,10 @@ import           Prelude              hiding (sum)
 
 flatten :: Service (Fix Schema) -> AST (Service Global)
 flatten s = do
-    ps <- Map.traverseWithKey globalParam  (s ^. dParameters)
+    ps <- kvTraverseMaybe     globalParam              (s ^. dParameters)
     rs <- Map.traverseWithKey (resource ps "Resource") (s ^. dResources)
     ms <- traverse            (method   ps "Method")   (s ^. dMethods)
-    _  <- Map.traverseWithKey globalSchema (s ^. dSchemas)
+    _  <- Map.traverseWithKey globalSchema             (s ^. dSchemas)
 
     -- The horror.
     ss <- use schemas
@@ -110,12 +110,16 @@ schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
                     format ("Unable to generate name for reserved schema: " % gid % ", " % shown % ", " % gid)
                            g ml p
 
-globalParam :: Local -> Param (Fix Schema) -> AST (Param Global)
+globalParam :: Local -> Param (Fix Schema) -> AST (Maybe (Param Global))
 globalParam l p = case l of
-    "alt"         -> overrideParam l (Alt alt) p
-    "key"         -> overrideParam l Key p
-    "oauth_token" -> overrideParam l OAuthToken (p & pLocation .~ Header)
-    _             -> localParam "" l p
+    "key"         -> pure Nothing
+    "oauth_token" -> pure Nothing
+    "prettyPrint" -> pure Nothing
+    "quotaUser"   -> pure Nothing
+    "fields"      -> pure Nothing
+    "userIp"      -> pure Nothing
+    "alt"         -> Just <$> overrideParam l (Alt alt) p
+    _             -> Just <$> localParam "" l p
   where
     alt = alternate $ fromMaybe "JSON" (p ^. iDefault)
 

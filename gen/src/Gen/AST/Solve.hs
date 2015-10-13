@@ -135,8 +135,6 @@ getDerive g = loc "getDerive" g $ memo derived g go
         Date       -> DRead : base
         Body       -> []
         Alt _      -> DRead : base
-        Key        -> DRead : base
-        OAuthToken -> DRead : base
         JSONValue  -> DRead : base
         -- FIXME: Add numeric cases
         _          -> [DRead, DNum, DIntegral, DReal] <> enum

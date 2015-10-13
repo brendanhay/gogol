@@ -33,6 +33,7 @@ import           Data.Semigroup               ((<>))
 import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
+import           Data.Text.Manipulate
 import           Debug.Trace
 import           Gen.AST.Solve                (getSolved)
 import           Gen.Formatting
@@ -106,13 +107,15 @@ renderAPI s = do
 
     d  <- pp Print $ apiAlias alias (map _actAliasName (rs <> ms))
 
-    API alias d rs ms <$> serviceURL
+    API alias d rs ms
+       <$> svc
+       <*> traverse scp (maybe mempty (Map.toList . scopes) (s ^. dAuth))
   where
     alias = aname (_sCanonicalName s)
 
     url = name (Text.unpack (urlName s))
 
-    serviceURL = Fun' url (Just (rawHelpText h))
+    svc = Fun' url (Just (rawHelpText h))
         <$> pp None  (urlSig url)
         <*> pp Print (urlDecl s url)
       where
@@ -120,16 +123,26 @@ renderAPI s = do
                      "@ of the " % stext % ". This contains the host and root path used as a starting point for constructing service requests.")
                      (s ^. dVersion) (s ^. dTitle)
 
+    scp (k, h) = Fun' n (Just h)
+        <$> pp None (scopeSig  n)
+        <*> pp None (scopeDecl n k)
+      where
+        n = name
+          . Text.unpack
+          . (<> "Scope")
+          . toCamel
+          . last
+          $ Text.split (== '/') k
+
 renderMethod :: Service a -> NS -> Suffix -> Method Solved -> AST Action
 renderMethod s root suf m@Method {..} = do
     x@Solved {..} <- getSolved typ
     Just d        <- renderSchema x
 
-    a  <- pp Print $ authDecl     _unique _prefix           (props _schema)
     i  <- pp Print $ requestDecl  _unique _prefix alias url (props _schema) m
     dl <- pp Print $ downloadDecl _unique _prefix alias url (props _schema) m
 
-    let is = a : i : [dl | _mSupportsMediaDownload]
+    let is = i : [dl | _mSupportsMediaDownload]
 
     Action _mId _unique (root <> mkNS ns) _mDescription alias
         <$> pp Print (verbAlias alias m)

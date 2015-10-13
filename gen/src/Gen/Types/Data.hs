@@ -121,6 +121,7 @@ data API = API
     , _apiResources :: [Action]
     , _apiMethods   :: [Action]
     , _apiURL       :: Fun
+    , _apuScopes    :: [Fun]
     }
 
 instance ToJSON API where
@@ -131,4 +132,5 @@ instance ToJSON API where
          , "resources" .= sortOn _actId _apiResources
          , "methods"   .= sortOn _actId _apiMethods
          , "url"       .= _apiURL
+         , "scopes"    .= _apuScopes
          ]
