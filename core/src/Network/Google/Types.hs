@@ -66,16 +66,13 @@ instance ToText AltMedia where
    toText = const "media"
 
 newtype AuthKey = AuthKey Text
-    deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText)
+    deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText, FromJSON, ToJSON)
 
 newtype OAuthToken = OAuthToken Text
-    deriving (Eq, Ord, Show, Read, Generic, Typeable)
-
-instance ToText OAuthToken where
-    toText (OAuthToken t) = t
+    deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText, FromJSON, ToJSON)
 
 newtype OAuthScope = OAuthScope Text
-    deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText)
+    deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText, FromJSON, ToJSON)
 
 newtype Bearer a = Bearer a
 

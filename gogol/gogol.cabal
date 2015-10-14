@@ -49,3 +49,10 @@ library
         , text               >= 1.1
         , transformers       >= 0.2
         , transformers-base  >= 0.4
+        , bytestring
+        , time
+        , aeson
+        , exceptions
+        , unordered-containers
+        , filepath
+        , directory
