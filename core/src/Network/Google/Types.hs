@@ -41,6 +41,7 @@ import           Data.DList                   (DList)
 import qualified Data.DList                   as DList
 import           Data.Foldable                (foldl')
 import           Data.Monoid
+import           Data.String
 import           Data.Text                    (Text)
 import qualified Data.Text.Encoding           as Text
 import           Data.Text.Lazy.Builder       (Builder)
@@ -69,10 +70,10 @@ newtype AuthKey = AuthKey Text
     deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText, FromJSON, ToJSON)
 
 newtype OAuthToken = OAuthToken { tokenToText :: Text }
-    deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText, FromJSON, ToJSON)
+    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
 newtype OAuthScope = OAuthScope { scopeToText :: Text }
-    deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText, FromJSON, ToJSON)
+    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
 newtype Bearer a = Bearer a
 
@@ -99,10 +100,10 @@ type Body   = Source IO ByteString
 type Stream = ResumableSource (ResourceT IO) ByteString
 
 newtype ClientId = ClientId { clientIdToText :: Text }
-    deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText, FromJSON, ToJSON)
+    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
 newtype ServiceId = ServiceId { serviceIdToText :: Text }
-    deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText, FromJSON, ToJSON)
+    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
 data Error
     = TransportError HttpException

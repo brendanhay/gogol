@@ -22,7 +22,8 @@ module Network.Google.Auth where
 
 import           Control.Concurrent
 import           Control.Concurrent.MVar
-import           Control.Exception
+import           Data.Char               (toLower)
+-- import           Control.Exception
 import           Control.Exception.Lens
 import           Control.Lens
 import           Control.Monad
@@ -40,7 +41,6 @@ import           Data.Time
 import           Data.Typeable
 import           Network.Google.Prelude
 import           Network.HTTP.Conduit
--- import qualified Network.HTTP.Client.Conduit as C
 import qualified Network.HTTP.Conduit    as Client
 import           Network.HTTP.Types
 import           System.Directory        (doesFileExist, getHomeDirectory)
@@ -48,28 +48,141 @@ import           System.Environment      (lookupEnv)
 import           System.FilePath         ((</>))
 import           System.Info             (os)
 
+data AuthError
+    = RetrievalError    HttpException
+    | MissingFileError  FilePath
+    | InvalidFileError  FilePath Text
+    | TokenRefreshError Status Text (Maybe Text)
+      deriving (Show, Typeable)
+
+instance Exception AuthError
+
+class AsAuthError a where
+    -- | A general authentication error.
+    _AuthError        :: Prism' a AuthError
+    {-# MINIMAL _AuthError #-}
+
+    -- | An error occured while communicating over HTTP with either then
+    -- local metadata or remote accounts.google.com endpoints.
+    _RetrievalError   :: Prism' a HttpException
+
+    -- | The specified default credentials file could not be found.
+    _MissingFileError :: Prism' a FilePath
+
+    -- | An error occured parsing the default credentials file.
+    _InvalidFileError :: Prism' a (FilePath, Text)
+
+    _RetrievalError   = _AuthError . _RetrievalError
+    _MissingFileError = _AuthError . _MissingFileError
+    _InvalidFileError = _AuthError . _InvalidFileError
+
+instance AsAuthError SomeException where
+    _AuthError = exception
+
+instance AsAuthError AuthError where
+    _AuthError = id
+
+    -- _RetrievalError = prism RetrievalError $ \case
+    --     RetrievalError   e -> Right e
+    --     x                  -> Left  x
+
+    -- _MissingEnvError = prism MissingEnvError $ \case
+    --     MissingEnvError  e -> Right e
+    --     x                  -> Left  x
+
+    -- _MissingFileError = prism MissingFileError $ \case
+    --     MissingFileError f -> Right f
+    --     x                  -> Left  x
+
+    -- _InvalidFileError = prism InvalidFileError $ \case
+    --     InvalidFileError e -> Right e
+    --     x                  -> Left  x
+
+accountsHost = "accounts.google.com"
+
+metadataHost          = "metadata.google.internal"
+metadataFlavorHeader  = "Metadata-Flavor"
+metadataFlavorDesired = "Google"
+
+noGCECheck = "NO_GCE_CHECK"
+
+detectGCE :: MonadIO m => Manager -> m Bool
+detectGCE m = liftIO $ do
+    p <- check <$> lookupEnv noGCECheck
+    if p
+        then (success <$> httpLbs rq m) `catch` failure
+        else pure False
+  where
+    check Nothing  = True
+    check (Just x) = map toLower x `notElem` ["1", "true", "yes", "on"]
+
+    success rs =
+           fromEnum (responseStatus rs) == 200
+        && (lookup metadataFlavorHeader (responseHeaders rs)
+               == Just metadataFlavorDesired)
+
+    failure :: HttpException -> IO Bool
+    failure = const (pure False)
+
+    rq = def
+        { Client.host            = metadataHost
+        , Client.checkStatus     = \_ _ _ -> Nothing
+        , Client.responseTimeout = Just 1000000
+        , Client.requestHeaders  =
+            [ (metadataFlavorHeader, metadataFlavorDesired)
+            ]
+        }
+
+-- | The environment variable name which can replace ~/.config if set.
+cloudSDKCredentialsDirVar = "CLOUDSDK_CONFIG"
+cloudSDKCredentialsDir    = "gcloud"
+cloudSDKCredentialsFile   = "application_default_credentials.json"
+
+cloudSDKCredentialsPath :: MonadIO m => m FilePath
+cloudSDKCredentialsPath = liftIO $ do
+    v <- lookupEnv cloudSDKCredentialsDirVar
+    h <- getHomeDirectory
+    let d = case v of
+            Nothing | os == "windows" -> h </> cloudSDKCredentialsDir
+            Nothing                   -> h </> ".config" </> cloudSDKCredentialsDir
+            Just x                    -> h </> x
+    pure $! d </> cloudSDKCredentialsFile
+
+-- | The environment variable pointing the file with local
+-- Application Default Credentials.
+defaultCredentialsFileVar = "GOOGLE_APPLICATION_CREDENTIALS"
+
+defaultCredentialsPath :: MonadIO m => m (Maybe FilePath)
+defaultCredentialsPath = liftIO (lookupEnv defaultCredentialsFileVar)
+
 data Credentials
-    = FromToken !OAuthToken
-    | FromFile  !FilePath
+    = FromToken   !OAuthToken
+    | FromFile    !FilePath
+    | FromAccount !ServiceId
     | Discover
       deriving (Eq, Show)
 
-getAuth :: MonadIO m => Manager -> Credentials -> m Auth
+getAuth :: (MonadIO m, MonadCatch m) => Manager -> Credentials -> m Auth
 getAuth m = \case
-    FromToken t -> pure (fromToken t)
-    FromFile  f -> fromFilePath m f
-    Discover    -> undefined
-        -- catching _MissingFileError fromFile $ \f -> do
-        --     p <- detectGCE m
-        --     unless p $
-        --         throwingM _MissingFileError f
-        --     fromMetadata m
+    FromToken   t -> pure (fromToken t)
+    FromFile    f -> fromFilePath m f
+    FromAccount s -> fromAccount  m s
+    Discover      ->
+        catching _MissingFileError (fromFile m) $ \f -> do
+            p <- detectGCE m
+            unless p $
+                throwingM _MissingFileError f
+            fromAccount m "default"
 
 fromToken :: OAuthToken -> Auth
 fromToken = Tok
 
 fromFile :: MonadIO m => Manager -> m Auth
-fromFile m = defaultCredentialsPath >>= fromFilePath m
+fromFile m = do
+    mf <- defaultCredentialsPath
+    case mf of
+        Just f  -> fromFilePath m f
+        Nothing -> cloudSDKCredentialsPath >>= fromFilePath m
 
 fromFilePath :: MonadIO m => Manager -> FilePath -> m Auth
 fromFilePath m f = liftIO $ do
@@ -81,8 +194,8 @@ fromFilePath m f = liftIO $ do
     !r <- refresh m u
     Ref m <$> newMVar (r :: Refresh User)
 
-fromMetadata :: MonadIO m => Manager -> ServiceId -> m Auth
-fromMetadata m s = liftIO $ do
+fromAccount :: MonadIO m => Manager -> ServiceId -> m Auth
+fromAccount m s = liftIO $ do
     !r <- refresh m s
     Ref m <$> newMVar (r :: Refresh ServiceId)
 
@@ -110,145 +223,6 @@ refreshToken (Ref m r) = do
 
 isValid :: Refresh a -> IO Bool
 isValid r = (< _rExpiry r) <$> getCurrentTime
-
--- GOOGLE_AUTH_URI = 'https://accounts.google.com/o/oauth2/auth'
--- GOOGLE_DEVICE_URI = 'https://accounts.google.com/o/oauth2/device/code'
--- GOOGLE_REVOKE_URI = 'https://accounts.google.com/o/oauth2/revoke'
--- GOOGLE_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
--- GOOGLE_TOKEN_INFO_URI = 'https://www.googleapis.com/oauth2/v2/tokeninfo'
-
--- -- | Which certs to use to validate id_tokens received.
--- ID_TOKEN_VERIFICATION_CERTS = "https://www.googleapis.com/oauth2/v1/certs"
-
--- -- | Google Data client libraries may need to set this to [401, 403].
--- REFRESH_STATUS_CODES = [401]
-
--- -- | The value representing user credentials.
--- AUTHORIZED_USER = "authorized_user"
-
--- -- | The value representing service account credentials.
--- SERVICE_ACCOUNT = "service_account"
-
--- -- | The environment variable pointing the file with local
--- -- Application Default Credentials.
--- GOOGLE_APPLICATION_CREDENTIALS = "GOOGLE_APPLICATION_CREDENTIALS"
-
-
--- _SERVER_SOFTWARE = 'SERVER_SOFTWARE'
--- _GCE_METADATA_HOST = '169.254.169.254'
--- _METADATA_FLAVOR_HEADER = 'Metadata-Flavor'
--- _DESIRED_METADATA_FLAVOR = 'Google'
-
--- NO_GCE_CHECK = os.environ.setdefault('NO_GCE_CHECK', 'False')
-
--- # The error message we show users when we can't find the Application
--- # Default Credentials.
--- ADC_HELP_MSG = (
---     'The Application Default Credentials are not available. They are '
---     'available if running in Google Compute Engine. Otherwise, the '
---     'environment variable ' +
---     GOOGLE_APPLICATION_CREDENTIALS +
---     ' must be defined pointing to a file defining the credentials. See '
---     'https://developers.google.com/accounts/docs/'
---     'application-default-credentials for more information.')
-
--- # The access token along with the seconds in which it expires.
--- AccessTokenInfo = collections.namedtuple(
---     'AccessTokenInfo', ['access_token', 'expires_in'])
-
--- DEFAULT_ENV_NAME = 'UNKNOWN'
-
-detectGCE :: MonadIO m => Manager -> m Bool
-detectGCE m = pure False
-
--- def _detect_gce_environment():
---     """Determine if the current environment is Compute Engine.
---     Returns:
---         Boolean indicating whether or not the current environment is Google
---         Compute Engine.
---     """
---     # NOTE: The explicit ``timeout`` is a workaround. The underlying
---     #       issue is that resolving an unknown host on some networks will take
---     #       20-30 seconds; making this timeout short fixes the issue, but
---     #       could lead to false negatives in the event that we are on GCE, but
---     #       the metadata resolution was particularly slow. The latter case is
---     #       "unlikely".
---     connection = six.moves.http_client.HTTPConnection(
---         _GCE_METADATA_HOST, timeout=1)
-
---     try:
---         headers = {_METADATA_FLAVOR_HEADER: _DESIRED_METADATA_FLAVOR}
---         connection.request('GET', '/', headers=headers)
---         response = connection.getresponse()
---         if response.status == 200:
---             return (response.getheader(_METADATA_FLAVOR_HEADER) ==
---                     _DESIRED_METADATA_FLAVOR)
---     except socket.error:  # socket.timeout or socket.error(64, 'Host is down')
---         logger.info('Timeout attempting to reach GCE metadata service.')
---         return False
---     finally:
---         connection.close()
-
--- isGAE :: MonadIO m => m Bool
--- isGAE = pure False
-    -- if SETTINGS.env_name is not None:
-    --     return SETTINGS.env_name in ('GAE_PRODUCTION', 'GAE_LOCAL')
-
-    -- try:
-    --     import google.appengine
-    --     server_software = os.environ.get(_SERVER_SOFTWARE, '')
-    --     if server_software.startswith('Google App Engine/'):
-    --         SETTINGS.env_name = 'GAE_PRODUCTION'
-    --         return True
-    --     elif server_software.startswith('Development/'):
-    --         SETTINGS.env_name = 'GAE_LOCAL'
-    --         return True
-    -- except ImportError:
-    --     pass
-
-    -- return False
-
--- isGCE :: MonadIO m => m Bool
--- isGCE = pure False
--- def _in_gce_environment():
---     """Detect if the code is running in the Compute Engine environment.
---     Returns:
---         True if running in the GCE environment, False otherwise.
---     """
---     if SETTINGS.env_name is not None:
---         return SETTINGS.env_name == 'GCE_PRODUCTION'
-
---     if NO_GCE_CHECK != 'True' and _detect_gce_environment():
---         SETTINGS.env_name = 'GCE_PRODUCTION'
---         return True
---     return False
-
-data AuthError
-    = RetrievalError    HttpException
-    | MissingFileError  FilePath
-    | InvalidFileError  FilePath Text
-    | TokenRefreshError Status Text (Maybe Text)
-      deriving (Show, Typeable)
-
-instance Exception AuthError
-
-parseLBS :: FromJSON a => LBS.ByteString -> Either Text a
-parseLBS = either (Left . Text.pack) Right . eitherDecode'
-
--- | The environment variable name which can replace ~/.config if set.
-cloudSDKConfigDirVar = "CLOUDSDK_CONFIG"
-cloudSDKConfigDir    = "gcloud"
-cloudSDKConfigFile   = "application_default_credentials.json"
-
-defaultCredentialsPath :: MonadIO m => m FilePath
-defaultCredentialsPath = liftIO $ do
-    v <- lookupEnv cloudSDKConfigDirVar
-    h <- getHomeDirectory
-    let d = case v of
-            Nothing | os == "windows" -> h </> cloudSDKConfigDir
-            Nothing                   -> h </> ".config" </> cloudSDKConfigDir
-            Just x                    -> h </> x
-    pure $! d </> cloudSDKConfigFile
 
 data User = User
     { _uId      :: !ClientId
@@ -287,25 +261,21 @@ instance FromJSON (UTCTime -> (Maybe Text -> a) -> Refresh a) where
             Refresh t (addUTCTime e ts) (f r)
 
 class RefreshToken a where
-    refresh :: Manager -> a -> IO (Refresh a)
+    refresh :: (MonadIO m, MonadCatch m) => Manager -> a -> m (Refresh a)
 
 instance RefreshToken User where
-    refresh m u@User {..} = do
-        rs <- httpLbs rq m
-        let bs = responseBody   rs
-            s  = responseStatus rs
-        if fromEnum s == 200 then success s bs else failure s bs
+    refresh m u@User {..} = perform m rq success failure
       where
-        failure s bs = do
-            RefreshError {..} <- parseErr s bs
-            refreshErr s _eError _eDescription
-
         success s bs = do
             f  <- parseErr s bs
-            ts <- getCurrentTime
+            ts <- liftIO getCurrentTime
             pure $! f ts $ \r ->
                 u { _uRefresh = fromMaybe _uRefresh r
                   }
+
+        failure s bs = do
+            RefreshError {..} <- parseErr s bs
+            refreshErr s _eError _eDescription
 
         parseErr s bs =
             case parseLBS bs of
@@ -315,7 +285,7 @@ instance RefreshToken User where
         refreshErr s e = throwM . TokenRefreshError s e
 
         rq = def
-            { Client.host            = "accounts.google.com"
+            { Client.host            = accountsHost
             , Client.port            = 443
             , Client.secure          = True
             , Client.checkStatus     = \_ _ _ -> Nothing
@@ -330,20 +300,16 @@ instance RefreshToken User where
             }
 
 instance RefreshToken ServiceId where
-    refresh m sid = do
-        rs <- httpLbs rq m
-        let bs = responseBody   rs
-            s  = responseStatus rs
-        if fromEnum s == 200 then success s bs else failure s
+    refresh m sid = perform m rq success failure
       where
-        failure s =
-            refreshErr s "Failure refreshing token from http://metadata.google.internal"
-                Nothing
-
         success s bs = do
             f  <- parseErr s bs
-            ts <- getCurrentTime
+            ts <- liftIO getCurrentTime
             pure $! f ts (const sid :: Maybe Text -> ServiceId)
+
+        failure s = const $
+            refreshErr s "Failure refreshing token from http://metadata.google.internal"
+                Nothing
 
         parseErr s bs =
             case parseLBS bs of
@@ -353,7 +319,7 @@ instance RefreshToken ServiceId where
         refreshErr s e = throwM . TokenRefreshError s e
 
         rq = def
-            { Client.host        = "metadata.google.internal"
+            { Client.host        = metadataHost
             , Client.port        = 80
             , Client.secure      = False
             , Client.checkStatus = \_ _ _ -> Nothing
@@ -362,3 +328,20 @@ instance RefreshToken ServiceId where
                 <> Text.encodeUtf8 (serviceIdToText sid)
                 <> "/token"
             }
+
+perform :: (MonadIO m, MonadCatch m)
+        => Manager
+        -> Client.Request
+        -> (Status -> LBS.ByteString -> m a)
+        -> (Status -> LBS.ByteString -> m a)
+        -> m a
+perform m rq success failure = do
+    rs <- liftIO (httpLbs rq m) `catch` (throwM . RetrievalError)
+    let bs = responseBody   rs
+        s  = responseStatus rs
+    if fromEnum s == 200
+        then success s bs
+        else failure s bs
+
+parseLBS :: FromJSON a => LBS.ByteString -> Either Text a
+parseLBS = either (Left . Text.pack) Right . eitherDecode'

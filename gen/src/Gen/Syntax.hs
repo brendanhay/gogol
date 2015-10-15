@@ -49,9 +49,7 @@ scopeSig :: Name -> Decl
 scopeSig n = TypeSig noLoc [n] (TyCon "OAuthScope")
 
 scopeDecl :: Name -> Text -> Decl
-scopeDecl n s = sfun noLoc n [] (UnGuardedRhs rhs) noBinds
-  where
-    rhs = app (var "OAuthScope") (str s)
+scopeDecl n s = sfun noLoc n [] (UnGuardedRhs (str s)) noBinds
 
  -- type API = :<|> ...
 apiAlias :: Name -> [Name] -> Decl
