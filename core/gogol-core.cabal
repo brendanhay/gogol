@@ -43,23 +43,24 @@ library
         , Network.Google.Types
 
     build-depends:
-          aeson              >= 0.8
-        , base               >= 4.7   && < 5
-        , bytestring         >= 0.9
-        , conduit            >= 1.1
-        , dlist              >= 0.7
-        , case-insensitive   >= 1.2
-        , exceptions         >= 0.6
-        , hashable           >= 1.2
-        , http-client        >= 0.4.4
-        , http-media         >= 0.6
-        , http-types         >= 0.8.6
-        , lens               >= 4.4
-        , resourcet          >= 1.1
-        , scientific         >= 0.3
-        , servant            >= 0.4.4
-        , text               >= 1.1
-        , unordered-containers
+          aeson                >= 0.8
+        , attoparsec           >= 0.11.3
+        , base                 >= 4.7    && < 5
+        , bytestring           >= 0.9
+        , case-insensitive     >= 1.2
+        , conduit              >= 1.1
+        , dlist                >= 0.7
+        , exceptions           >= 0.6
+        , hashable             >= 1.2
+        , http-client          >= 0.4.4
+        , http-media           >= 0.6
+        , http-types           >= 0.8.6
+        , lens                 >= 4.4
+        , resourcet            >= 1.1
+        , scientific           >= 0.3
+        , servant              >= 0.4.4
+        , text                 >= 1.1
+        , unordered-containers >= 0.2.5
 
     if !impl(ghc>=7.9)
         build-depends:

@@ -35,24 +35,23 @@ library
           Network.Google.Internal.HTTP
 
     build-depends:
-          base               >= 4.7 && < 5
-        , data-default-class >= 0.0.1
-        , exceptions         >= 0.6
-        , gogol-core         == 0.0.1.*
-        , http-conduit       >= 2.1.4
-        , http-media         >= 0.6
-        , http-types         >= 0.8.6
-        , lens               >= 4.4
-        , monad-control      >= 1
-        , mtl                >= 2.1.3.1
-        , resourcet          >= 1.1
-        , text               >= 1.1
-        , transformers       >= 0.2
-        , transformers-base  >= 0.4
-        , bytestring
-        , time
-        , aeson
-        , exceptions
-        , unordered-containers
-        , filepath
-        , directory
+          aeson                >= 0.8
+        , base                 >= 4.7 && < 5
+        , bytestring           >= 0.9
+        , data-default-class   >= 0.0.1
+        , directory            >= 1.2
+        , exceptions           >= 0.6
+        , filepath             >= 1.2
+        , gogol-core           == 0.0.1.*
+        , http-conduit         >= 2.1.4
+        , http-media           >= 0.6
+        , http-types           >= 0.8.6
+        , lens                 >= 4.4
+        , monad-control        >= 1
+        , mtl                  >= 2.1.3.1
+        , resourcet            >= 1.1
+        , text                 >= 1.1
+        , time                 >= 1.2
+        , transformers         >= 0.2
+        , transformers-base    >= 0.4
+        , unordered-containers >= 0.2.5
