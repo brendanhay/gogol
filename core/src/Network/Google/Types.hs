@@ -68,10 +68,10 @@ instance ToText AltMedia where
 newtype AuthKey = AuthKey Text
     deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText, FromJSON, ToJSON)
 
-newtype OAuthToken = OAuthToken Text
+newtype OAuthToken = OAuthToken { tokenToText :: Text }
     deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText, FromJSON, ToJSON)
 
-newtype OAuthScope = OAuthScope Text
+newtype OAuthScope = OAuthScope { scopeToText :: Text }
     deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText, FromJSON, ToJSON)
 
 newtype Bearer a = Bearer a
@@ -98,8 +98,11 @@ _Default = iso f Just
 type Body   = Source IO ByteString
 type Stream = ResumableSource (ResourceT IO) ByteString
 
-newtype ServiceId = ServiceId Text
-    deriving (Eq, Show, Typeable)
+newtype ClientId = ClientId { clientIdToText :: Text }
+    deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText, FromJSON, ToJSON)
+
+newtype ServiceId = ServiceId { serviceIdToText :: Text }
+    deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText, FromJSON, ToJSON)
 
 data Error
     = TransportError HttpException
