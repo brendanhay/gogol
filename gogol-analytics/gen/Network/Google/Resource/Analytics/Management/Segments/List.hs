@@ -89,7 +89,7 @@ instance GoogleRequest ManagementSegmentsList' where
         type Rs ManagementSegmentsList' = Segments
         requestClient ManagementSegmentsList'{..}
           = go _mslStartIndex _mslMaxResults (Just AltJSON)
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementSegmentsListResource)

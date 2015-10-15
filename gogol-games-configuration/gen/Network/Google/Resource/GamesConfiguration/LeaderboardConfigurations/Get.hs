@@ -81,7 +81,7 @@ instance GoogleRequest LeaderboardConfigurationsGet'
              LeaderboardConfiguration
         requestClient LeaderboardConfigurationsGet'{..}
           = go _lcgLeaderboardId (Just AltJSON)
-              gamesConfigurationService
+              gamesConfiguration
           where go
                   = buildClient
                       (Proxy :: Proxy LeaderboardConfigurationsGetResource)

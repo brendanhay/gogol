@@ -104,7 +104,7 @@ instance GoogleRequest EditsDetailsPatch' where
         requestClient EditsDetailsPatch'{..}
           = go _edpPackageName _edpEditId (Just AltJSON)
               _edpPayload
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy EditsDetailsPatchResource)

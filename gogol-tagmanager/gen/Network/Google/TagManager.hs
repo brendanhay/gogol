@@ -19,7 +19,7 @@
 module Network.Google.TagManager
     (
     -- * Service Configuration
-      tagManagerService
+      tagManager
 
     -- * API Declaration
     , TagManagerAPI

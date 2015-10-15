@@ -16,7 +16,7 @@
 module Network.Google.Storage.Types
     (
     -- * Service Configuration
-      storageService
+      storage
 
     -- * OAuth Scopes
     , cloudPlatformReadOnlyScope
@@ -341,28 +341,28 @@ import           Network.Google.Storage.Types.Product
 import           Network.Google.Storage.Types.Sum
 
 -- | Default request referring to version 'v1' of the Cloud Storage JSON API. This contains the host and root path used as a starting point for constructing service requests.
-storageService :: Service
-storageService
+storage :: Service
+storage
   = defaultService (ServiceId "storage:v1")
       "www.googleapis.com"
       "storage/v1/"
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: OAuthScope
-cloudPlatformReadOnlyScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform.read-only";
+cloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope
-cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
 
 -- | View your data in Google Cloud Storage
 devstorageReadOnlyScope :: OAuthScope
-devstorageReadOnlyScope = OAuthScope "https://www.googleapis.com/auth/devstorage.read_only";
+devstorageReadOnlyScope = "https://www.googleapis.com/auth/devstorage.read_only";
 
 -- | Manage your data in Google Cloud Storage
 devstorageReadWriteScope :: OAuthScope
-devstorageReadWriteScope = OAuthScope "https://www.googleapis.com/auth/devstorage.read_write";
+devstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
 
 -- | Manage your data and permissions in Google Cloud Storage
 devstorageFullControlScope :: OAuthScope
-devstorageFullControlScope = OAuthScope "https://www.googleapis.com/auth/devstorage.full_control";
+devstorageFullControlScope = "https://www.googleapis.com/auth/devstorage.full_control";

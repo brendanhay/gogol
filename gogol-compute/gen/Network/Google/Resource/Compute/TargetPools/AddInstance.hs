@@ -116,7 +116,7 @@ instance GoogleRequest TargetPoolsAddInstance' where
           = go _tpaiProject _tpaiRegion _tpaiTargetPool
               (Just AltJSON)
               _tpaiPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy TargetPoolsAddInstanceResource)

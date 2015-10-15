@@ -105,7 +105,7 @@ instance GoogleRequest InstancesUpdate' where
         type Rs InstancesUpdate' = Operation
         requestClient InstancesUpdate'{..}
           = go _iuProject _iuInstance (Just AltJSON) _iuPayload
-              sQLAdminService
+              sQLAdmin
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesUpdateResource)

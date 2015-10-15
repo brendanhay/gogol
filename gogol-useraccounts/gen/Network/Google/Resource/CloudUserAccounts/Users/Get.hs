@@ -86,8 +86,7 @@ ugUser = lens _ugUser (\ s a -> s{_ugUser = a})
 instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
         requestClient UsersGet'{..}
-          = go _ugProject _ugUser (Just AltJSON)
-              userAccountsService
+          = go _ugProject _ugUser (Just AltJSON) userAccounts
           where go
                   = buildClient (Proxy :: Proxy UsersGetResource)
                       mempty

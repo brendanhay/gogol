@@ -86,8 +86,7 @@ cUserId = lens _cUserId (\ s a -> s{_cUserId = a})
 instance GoogleRequest CirclesInsert' where
         type Rs CirclesInsert' = Circle
         requestClient CirclesInsert'{..}
-          = go _cUserId (Just AltJSON) _cPayload
-              plusDomainsService
+          = go _cUserId (Just AltJSON) _cPayload plusDomains
           where go
                   = buildClient (Proxy :: Proxy CirclesInsertResource)
                       mempty

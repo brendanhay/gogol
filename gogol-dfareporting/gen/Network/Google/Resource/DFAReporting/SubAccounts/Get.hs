@@ -86,8 +86,7 @@ sagId = lens _sagId (\ s a -> s{_sagId = a})
 instance GoogleRequest SubAccountsGet' where
         type Rs SubAccountsGet' = SubAccount
         requestClient SubAccountsGet'{..}
-          = go _sagProFileId _sagId (Just AltJSON)
-              dFAReportingService
+          = go _sagProFileId _sagId (Just AltJSON) dFAReporting
           where go
                   = buildClient (Proxy :: Proxy SubAccountsGetResource)
                       mempty

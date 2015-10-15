@@ -88,8 +88,7 @@ erLanguage
 instance GoogleRequest EventsRecord' where
         type Rs EventsRecord' = EventUpdateResponse
         requestClient EventsRecord'{..}
-          = go _erLanguage (Just AltJSON) _erPayload
-              gamesService
+          = go _erLanguage (Just AltJSON) _erPayload games
           where go
                   = buildClient (Proxy :: Proxy EventsRecordResource)
                       mempty

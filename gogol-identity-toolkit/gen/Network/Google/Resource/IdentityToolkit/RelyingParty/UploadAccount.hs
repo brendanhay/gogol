@@ -78,8 +78,7 @@ instance GoogleRequest RelyingPartyUploadAccount'
         type Rs RelyingPartyUploadAccount' =
              UploadAccountResponse
         requestClient RelyingPartyUploadAccount'{..}
-          = go (Just AltJSON) _rpuaPayload
-              identityToolkitService
+          = go (Just AltJSON) _rpuaPayload identityToolkit
           where go
                   = buildClient
                       (Proxy :: Proxy RelyingPartyUploadAccountResource)

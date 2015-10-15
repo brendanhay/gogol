@@ -187,7 +187,7 @@ instance GoogleRequest BeaconsUpdate' where
               _buCallback
               (Just AltJSON)
               _buPayload
-              proximityBeaconService
+              proximityBeacon
           where go
                   = buildClient (Proxy :: Proxy BeaconsUpdateResource)
                       mempty

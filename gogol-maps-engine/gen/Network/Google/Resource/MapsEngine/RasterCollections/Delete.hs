@@ -76,7 +76,7 @@ rcdId = lens _rcdId (\ s a -> s{_rcdId = a})
 instance GoogleRequest RasterCollectionsDelete' where
         type Rs RasterCollectionsDelete' = ()
         requestClient RasterCollectionsDelete'{..}
-          = go _rcdId (Just AltJSON) mapsEngineService
+          = go _rcdId (Just AltJSON) mapsEngine
           where go
                   = buildClient
                       (Proxy :: Proxy RasterCollectionsDeleteResource)

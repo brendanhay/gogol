@@ -77,7 +77,7 @@ instance GoogleRequest CustomFieldDefList' where
         type Rs CustomFieldDefList' =
              CustomFieldDefListResponse
         requestClient CustomFieldDefList'{..}
-          = go _cfdlTeamId (Just AltJSON) mapsCoordinateService
+          = go _cfdlTeamId (Just AltJSON) mapsCoordinate
           where go
                   = buildClient
                       (Proxy :: Proxy CustomFieldDefListResource)

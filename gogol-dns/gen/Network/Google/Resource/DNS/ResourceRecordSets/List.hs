@@ -144,7 +144,7 @@ instance GoogleRequest ResourceRecordSetsList' where
               _rrslType
               _rrslMaxResults
               (Just AltJSON)
-              dNSService
+              dNS
           where go
                   = buildClient
                       (Proxy :: Proxy ResourceRecordSetsListResource)

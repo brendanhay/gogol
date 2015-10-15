@@ -87,8 +87,7 @@ iPayload = lens _iPayload (\ s a -> s{_iPayload = a})
 instance GoogleRequest ImagesInsert' where
         type Rs ImagesInsert' = Operation
         requestClient ImagesInsert'{..}
-          = go _iProject (Just AltJSON) _iPayload
-              computeService
+          = go _iProject (Just AltJSON) _iPayload compute
           where go
                   = buildClient (Proxy :: Proxy ImagesInsertResource)
                       mempty

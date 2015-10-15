@@ -104,7 +104,7 @@ instance GoogleRequest InstallsList' where
         requestClient InstallsList'{..}
           = go _ilEnterpriseId _ilUserId _ilDeviceId
               (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient (Proxy :: Proxy InstallsListResource)
                       mempty

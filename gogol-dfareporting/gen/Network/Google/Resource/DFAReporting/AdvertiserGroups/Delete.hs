@@ -86,8 +86,7 @@ agdId = lens _agdId (\ s a -> s{_agdId = a})
 instance GoogleRequest AdvertiserGroupsDelete' where
         type Rs AdvertiserGroupsDelete' = ()
         requestClient AdvertiserGroupsDelete'{..}
-          = go _agdProFileId _agdId (Just AltJSON)
-              dFAReportingService
+          = go _agdProFileId _agdId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy AdvertiserGroupsDeleteResource)

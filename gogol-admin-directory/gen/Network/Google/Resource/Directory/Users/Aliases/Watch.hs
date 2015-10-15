@@ -99,7 +99,7 @@ instance GoogleRequest UsersAliasesWatch' where
         type Rs UsersAliasesWatch' = Channel
         requestClient UsersAliasesWatch'{..}
           = go _uawUserKey _uawEvent (Just AltJSON) _uawPayload
-              directoryService
+              directory
           where go
                   = buildClient
                       (Proxy :: Proxy UsersAliasesWatchResource)

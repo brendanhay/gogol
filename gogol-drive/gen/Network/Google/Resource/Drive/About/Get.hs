@@ -107,7 +107,7 @@ instance GoogleRequest AboutGet' where
           = go (Just _agIncludeSubscribed) _agStartChangeId
               (Just _agMaxChangeIdCount)
               (Just AltJSON)
-              driveService
+              drive
           where go
                   = buildClient (Proxy :: Proxy AboutGetResource)
                       mempty

@@ -74,7 +74,7 @@ rcgId = lens _rcgId (\ s a -> s{_rcgId = a})
 instance GoogleRequest RasterCollectionsGet' where
         type Rs RasterCollectionsGet' = RasterCollection
         requestClient RasterCollectionsGet'{..}
-          = go _rcgId (Just AltJSON) mapsEngineService
+          = go _rcgId (Just AltJSON) mapsEngine
           where go
                   = buildClient
                       (Proxy :: Proxy RasterCollectionsGetResource)

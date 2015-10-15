@@ -132,7 +132,7 @@ instance GoogleRequest RepliesList' where
               (Just _rllMaxResults)
               (Just _rllIncludeDeleted)
               (Just AltJSON)
-              driveService
+              drive
           where go
                   = buildClient (Proxy :: Proxy RepliesListResource)
                       mempty

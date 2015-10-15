@@ -140,7 +140,7 @@ instance GoogleRequest GroupsList' where
           = go _glProject _glOrderBy _glFilter _glPageToken
               (Just _glMaxResults)
               (Just AltJSON)
-              userAccountsService
+              userAccounts
           where go
                   = buildClient (Proxy :: Proxy GroupsListResource)
                       mempty

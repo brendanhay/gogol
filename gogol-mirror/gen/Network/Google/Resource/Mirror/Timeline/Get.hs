@@ -73,7 +73,7 @@ tgId = lens _tgId (\ s a -> s{_tgId = a})
 instance GoogleRequest TimelineGet' where
         type Rs TimelineGet' = TimelineItem
         requestClient TimelineGet'{..}
-          = go _tgId (Just AltJSON) mirrorService
+          = go _tgId (Just AltJSON) mirror
           where go
                   = buildClient (Proxy :: Proxy TimelineGetResource)
                       mempty

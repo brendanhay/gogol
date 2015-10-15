@@ -89,8 +89,7 @@ gaiPayload
 instance GoogleRequest GlobalAddressesInsert' where
         type Rs GlobalAddressesInsert' = Operation
         requestClient GlobalAddressesInsert'{..}
-          = go _gaiProject (Just AltJSON) _gaiPayload
-              computeService
+          = go _gaiProject (Just AltJSON) _gaiPayload compute
           where go
                   = buildClient
                       (Proxy :: Proxy GlobalAddressesInsertResource)

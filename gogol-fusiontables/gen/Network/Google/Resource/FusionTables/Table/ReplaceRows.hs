@@ -157,7 +157,7 @@ instance GoogleRequest TableReplaceRows' where
               _trrIsStrict
               (Just AltJSON)
               _trrMedia
-              fusionTablesService
+              fusionTables
           where go
                   = buildClient
                       (Proxy :: Proxy TableReplaceRowsResource)

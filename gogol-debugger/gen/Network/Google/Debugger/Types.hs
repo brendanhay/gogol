@@ -16,7 +16,7 @@
 module Network.Google.Debugger.Types
     (
     -- * Service Configuration
-      debuggerService
+      debugger
 
     -- * OAuth Scopes
     , cloudDebuggerScope
@@ -206,20 +206,20 @@ import           Network.Google.Debugger.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google Cloud Debugger API. This contains the host and root path used as a starting point for constructing service requests.
-debuggerService :: Service
-debuggerService
+debugger :: Service
+debugger
   = defaultService (ServiceId "clouddebugger:v2")
       "clouddebugger.googleapis.com"
       ""
 
 -- | Manage cloud debugger
 cloudDebuggerScope :: OAuthScope
-cloudDebuggerScope = OAuthScope "https://www.googleapis.com/auth/cloud_debugger";
+cloudDebuggerScope = "https://www.googleapis.com/auth/cloud_debugger";
 
 -- | Manage active breakpoints in cloud debugger
 cloudDebugletcontrollerScope :: OAuthScope
-cloudDebugletcontrollerScope = OAuthScope "https://www.googleapis.com/auth/cloud_debugletcontroller";
+cloudDebugletcontrollerScope = "https://www.googleapis.com/auth/cloud_debugletcontroller";
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope
-cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";

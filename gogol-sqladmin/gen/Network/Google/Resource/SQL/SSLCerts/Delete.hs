@@ -105,7 +105,7 @@ instance GoogleRequest SSLCertsDelete' where
         requestClient SSLCertsDelete'{..}
           = go _scdProject _scdInstance _scdSha1Fingerprint
               (Just AltJSON)
-              sQLAdminService
+              sQLAdmin
           where go
                   = buildClient (Proxy :: Proxy SSLCertsDeleteResource)
                       mempty

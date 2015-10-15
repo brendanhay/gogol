@@ -177,7 +177,7 @@ instance GoogleRequest ProjectsUpdate' where
               _puCallback
               (Just AltJSON)
               _puPayload
-              resourceManagerService
+              resourceManager
           where go
                   = buildClient (Proxy :: Proxy ProjectsUpdateResource)
                       mempty

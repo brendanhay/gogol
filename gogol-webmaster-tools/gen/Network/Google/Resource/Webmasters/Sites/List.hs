@@ -60,7 +60,7 @@ sitesList' = SitesList'
 instance GoogleRequest SitesList' where
         type Rs SitesList' = SitesListResponse
         requestClient SitesList'{}
-          = go (Just AltJSON) webmasterToolsService
+          = go (Just AltJSON) webmasterTools
           where go
                   = buildClient (Proxy :: Proxy SitesListResource)
                       mempty

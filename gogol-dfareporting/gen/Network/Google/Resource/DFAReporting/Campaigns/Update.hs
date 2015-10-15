@@ -88,7 +88,7 @@ instance GoogleRequest CampaignsUpdate' where
         type Rs CampaignsUpdate' = Campaign
         requestClient CampaignsUpdate'{..}
           = go _cuProFileId (Just AltJSON) _cuPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy CampaignsUpdateResource)

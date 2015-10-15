@@ -75,7 +75,7 @@ lgpId = lens _lgpId (\ s a -> s{_lgpId = a})
 instance GoogleRequest LayersGetPublished' where
         type Rs LayersGetPublished' = PublishedLayer
         requestClient LayersGetPublished'{..}
-          = go _lgpId (Just AltJSON) mapsEngineService
+          = go _lgpId (Just AltJSON) mapsEngine
           where go
                   = buildClient
                       (Proxy :: Proxy LayersGetPublishedResource)

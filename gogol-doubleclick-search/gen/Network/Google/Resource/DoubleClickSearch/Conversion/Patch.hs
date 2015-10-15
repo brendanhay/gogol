@@ -173,7 +173,7 @@ instance GoogleRequest ConversionPatch' where
               (Just _cpStartRow)
               (Just AltJSON)
               _cpPayload
-              doubleClickSearchService
+              doubleClickSearch
           where go
                   = buildClient
                       (Proxy :: Proxy ConversionPatchResource)

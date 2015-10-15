@@ -138,7 +138,7 @@ instance GoogleRequest MachineTypesList' where
           = go _mtlProject _mtlZone _mtlFilter _mtlPageToken
               (Just _mtlMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy MachineTypesListResource)

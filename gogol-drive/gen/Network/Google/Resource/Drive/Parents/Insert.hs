@@ -88,8 +88,7 @@ piiFileId
 instance GoogleRequest ParentsInsert' where
         type Rs ParentsInsert' = ParentReference
         requestClient ParentsInsert'{..}
-          = go _piiFileId (Just AltJSON) _piiPayload
-              driveService
+          = go _piiFileId (Just AltJSON) _piiPayload drive
           where go
                   = buildClient (Proxy :: Proxy ParentsInsertResource)
                       mempty

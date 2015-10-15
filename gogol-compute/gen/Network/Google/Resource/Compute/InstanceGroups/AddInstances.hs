@@ -119,7 +119,7 @@ instance GoogleRequest InstanceGroupsAddInstances'
           = go _igaiProject _igaiZone _igaiInstanceGroup
               (Just AltJSON)
               _igaiPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceGroupsAddInstancesResource)

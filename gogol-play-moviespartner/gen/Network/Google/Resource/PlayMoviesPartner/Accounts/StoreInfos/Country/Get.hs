@@ -198,7 +198,7 @@ instance GoogleRequest AccountsStoreInfosCountryGet'
               _asicgBearerToken
               _asicgCallback
               (Just AltJSON)
-              playMoviesPartnerService
+              playMoviesPartner
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsStoreInfosCountryGetResource)

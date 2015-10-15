@@ -105,7 +105,7 @@ instance GoogleRequest DeploymentsStop' where
         requestClient DeploymentsStop'{..}
           = go _dsProject _dsDeployment (Just AltJSON)
               _dsPayload
-              deploymentManagerService
+              deploymentManager
           where go
                   = buildClient
                       (Proxy :: Proxy DeploymentsStopResource)

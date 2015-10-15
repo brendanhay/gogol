@@ -116,7 +116,7 @@ instance GoogleRequest ZoneViewsAddResources' where
           = go _zvarProject _zvarZone _zvarResourceView
               (Just AltJSON)
               _zvarPayload
-              resourceViewsService
+              resourceViews
           where go
                   = buildClient
                       (Proxy :: Proxy ZoneViewsAddResourcesResource)

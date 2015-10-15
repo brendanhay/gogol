@@ -78,8 +78,7 @@ instance GoogleRequest RelyingPartyResetPassword'
         type Rs RelyingPartyResetPassword' =
              ResetPasswordResponse
         requestClient RelyingPartyResetPassword'{..}
-          = go (Just AltJSON) _rprpPayload
-              identityToolkitService
+          = go (Just AltJSON) _rprpPayload identityToolkit
           where go
                   = buildClient
                       (Proxy :: Proxy RelyingPartyResetPasswordResource)

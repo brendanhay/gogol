@@ -62,7 +62,7 @@ billingInfoList' = BillingInfoList'
 instance GoogleRequest BillingInfoList' where
         type Rs BillingInfoList' = BillingInfoList
         requestClient BillingInfoList'{}
-          = go (Just AltJSON) adExchangeBuyerService
+          = go (Just AltJSON) adExchangeBuyer
           where go
                   = buildClient
                       (Proxy :: Proxy BillingInfoListResource)

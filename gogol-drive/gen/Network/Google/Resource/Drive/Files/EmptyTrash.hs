@@ -60,7 +60,7 @@ filesEmptyTrash' = FilesEmptyTrash'
 instance GoogleRequest FilesEmptyTrash' where
         type Rs FilesEmptyTrash' = ()
         requestClient FilesEmptyTrash'{}
-          = go (Just AltJSON) driveService
+          = go (Just AltJSON) drive
           where go
                   = buildClient
                       (Proxy :: Proxy FilesEmptyTrashResource)

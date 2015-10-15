@@ -101,7 +101,7 @@ instance GoogleRequest UsersInsert' where
         type Rs UsersInsert' = Operation
         requestClient UsersInsert'{..}
           = go _uiProject _uiInstance (Just AltJSON) _uiPayload
-              sQLAdminService
+              sQLAdmin
           where go
                   = buildClient (Proxy :: Proxy UsersInsertResource)
                       mempty

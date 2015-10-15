@@ -89,8 +89,7 @@ instance GoogleRequest FloodlightConfigurationsGet'
         type Rs FloodlightConfigurationsGet' =
              FloodlightConfiguration
         requestClient FloodlightConfigurationsGet'{..}
-          = go _fcgProFileId _fcgId (Just AltJSON)
-              dFAReportingService
+          = go _fcgProFileId _fcgId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy FloodlightConfigurationsGetResource)

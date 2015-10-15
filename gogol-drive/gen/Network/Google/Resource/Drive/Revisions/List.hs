@@ -74,7 +74,7 @@ rlFileId = lens _rlFileId (\ s a -> s{_rlFileId = a})
 instance GoogleRequest RevisionsList' where
         type Rs RevisionsList' = RevisionList
         requestClient RevisionsList'{..}
-          = go _rlFileId (Just AltJSON) driveService
+          = go _rlFileId (Just AltJSON) drive
           where go
                   = buildClient (Proxy :: Proxy RevisionsListResource)
                       mempty

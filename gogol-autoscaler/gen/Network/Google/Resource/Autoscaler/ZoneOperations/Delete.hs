@@ -97,7 +97,7 @@ instance GoogleRequest ZoneOperationsDelete' where
         requestClient ZoneOperationsDelete'{..}
           = go _zodProject _zodZone _zodOperation
               (Just AltJSON)
-              autoscalerService
+              autoscaler
           where go
                   = buildClient
                       (Proxy :: Proxy ZoneOperationsDeleteResource)

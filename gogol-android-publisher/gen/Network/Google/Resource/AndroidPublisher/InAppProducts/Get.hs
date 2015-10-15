@@ -86,7 +86,7 @@ instance GoogleRequest InAppProductsGet' where
         type Rs InAppProductsGet' = InAppProduct
         requestClient InAppProductsGet'{..}
           = go _iapgPackageName _iapgSKU (Just AltJSON)
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy InAppProductsGetResource)

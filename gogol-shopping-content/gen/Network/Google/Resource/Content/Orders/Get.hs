@@ -87,7 +87,7 @@ instance GoogleRequest OrdersGet' where
         type Rs OrdersGet' = Order
         requestClient OrdersGet'{..}
           = go _ogMerchantId _ogOrderId (Just AltJSON)
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient (Proxy :: Proxy OrdersGetResource)
                       mempty

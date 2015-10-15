@@ -79,8 +79,7 @@ cldCalendarId
 instance GoogleRequest CalendarListDelete' where
         type Rs CalendarListDelete' = ()
         requestClient CalendarListDelete'{..}
-          = go _cldCalendarId (Just AltJSON)
-              appsCalendarService
+          = go _cldCalendarId (Just AltJSON) appsCalendar
           where go
                   = buildClient
                       (Proxy :: Proxy CalendarListDeleteResource)

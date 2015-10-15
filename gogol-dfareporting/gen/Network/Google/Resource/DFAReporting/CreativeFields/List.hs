@@ -175,7 +175,7 @@ instance GoogleRequest CreativeFieldsList' where
               (_cflAdvertiserIds ^. _Default)
               _cflMaxResults
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy CreativeFieldsListResource)

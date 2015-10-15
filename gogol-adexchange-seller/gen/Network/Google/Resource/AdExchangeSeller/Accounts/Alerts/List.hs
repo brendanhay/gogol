@@ -89,7 +89,7 @@ instance GoogleRequest AccountsAlertsList' where
         type Rs AccountsAlertsList' = Alerts
         requestClient AccountsAlertsList'{..}
           = go _aalAccountId _aalLocale (Just AltJSON)
-              adExchangeSellerService
+              adExchangeSeller
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsAlertsListResource)

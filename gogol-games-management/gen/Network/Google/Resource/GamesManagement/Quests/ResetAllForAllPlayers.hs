@@ -63,7 +63,7 @@ instance GoogleRequest QuestsResetAllForAllPlayers'
          where
         type Rs QuestsResetAllForAllPlayers' = ()
         requestClient QuestsResetAllForAllPlayers'{}
-          = go (Just AltJSON) gamesManagementService
+          = go (Just AltJSON) gamesManagement
           where go
                   = buildClient
                       (Proxy :: Proxy QuestsResetAllForAllPlayersResource)

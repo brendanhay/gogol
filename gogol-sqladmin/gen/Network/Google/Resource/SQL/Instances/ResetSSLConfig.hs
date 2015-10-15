@@ -95,7 +95,7 @@ instance GoogleRequest InstancesResetSSLConfig' where
         type Rs InstancesResetSSLConfig' = Operation
         requestClient InstancesResetSSLConfig'{..}
           = go _irscProject _irscInstance (Just AltJSON)
-              sQLAdminService
+              sQLAdmin
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesResetSSLConfigResource)

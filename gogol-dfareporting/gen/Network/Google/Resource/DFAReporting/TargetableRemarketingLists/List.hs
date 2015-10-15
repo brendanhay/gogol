@@ -181,7 +181,7 @@ instance GoogleRequest
               _trllSortField
               _trllMaxResults
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy ::

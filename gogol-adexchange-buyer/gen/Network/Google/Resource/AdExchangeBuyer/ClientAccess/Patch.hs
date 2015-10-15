@@ -101,7 +101,7 @@ instance GoogleRequest ClientAccessPatch' where
           = go _capClientAccountId (Just _capSponsorAccountId)
               (Just AltJSON)
               _capPayload
-              adExchangeBuyerService
+              adExchangeBuyer
           where go
                   = buildClient
                       (Proxy :: Proxy ClientAccessPatchResource)

@@ -104,7 +104,7 @@ instance GoogleRequest OrdersReturnlineitem' where
         requestClient OrdersReturnlineitem'{..}
           = go _orrMerchantId _orrOrderId (Just AltJSON)
               _orrPayload
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy OrdersReturnlineitemResource)

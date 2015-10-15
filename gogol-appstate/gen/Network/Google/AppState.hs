@@ -19,7 +19,7 @@
 module Network.Google.AppState
     (
     -- * Service Configuration
-      appStateService
+      appState
 
     -- * API Declaration
     , AppStateAPI

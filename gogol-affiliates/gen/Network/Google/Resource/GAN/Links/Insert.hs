@@ -98,7 +98,7 @@ instance GoogleRequest LinksInsert' where
         type Rs LinksInsert' = Link
         requestClient LinksInsert'{..}
           = go _liRole _liRoleId (Just AltJSON) _liPayload
-              affiliatesService
+              affiliates
           where go
                   = buildClient (Proxy :: Proxy LinksInsertResource)
                       mempty

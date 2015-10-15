@@ -73,7 +73,7 @@ wrdId = lens _wrdId (\ s a -> s{_wrdId = a})
 instance GoogleRequest WebResourceDelete' where
         type Rs WebResourceDelete' = ()
         requestClient WebResourceDelete'{..}
-          = go _wrdId (Just AltJSON) siteVerificationService
+          = go _wrdId (Just AltJSON) siteVerification
           where go
                   = buildClient
                       (Proxy :: Proxy WebResourceDeleteResource)

@@ -74,7 +74,7 @@ plFileId = lens _plFileId (\ s a -> s{_plFileId = a})
 instance GoogleRequest PropertiesList' where
         type Rs PropertiesList' = PropertyList
         requestClient PropertiesList'{..}
-          = go _plFileId (Just AltJSON) driveService
+          = go _plFileId (Just AltJSON) drive
           where go
                   = buildClient (Proxy :: Proxy PropertiesListResource)
                       mempty

@@ -90,7 +90,7 @@ instance GoogleRequest GroupsInsert' where
         type Rs GroupsInsert' = Operation
         requestClient GroupsInsert'{..}
           = go _giProject (Just AltJSON) _giPayload
-              userAccountsService
+              userAccounts
           where go
                   = buildClient (Proxy :: Proxy GroupsInsertResource)
                       mempty

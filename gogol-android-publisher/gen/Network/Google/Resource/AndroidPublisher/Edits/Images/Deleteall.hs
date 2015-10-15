@@ -120,7 +120,7 @@ instance GoogleRequest EditsImagesDeleteall' where
           = go _eidiPackageName _eidiEditId _eidiLanguage
               _eidiImageType
               (Just AltJSON)
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy EditsImagesDeleteallResource)

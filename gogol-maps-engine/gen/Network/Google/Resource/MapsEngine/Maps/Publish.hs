@@ -87,7 +87,7 @@ mId = lens _mId (\ s a -> s{_mId = a})
 instance GoogleRequest MapsPublish' where
         type Rs MapsPublish' = PublishResponse
         requestClient MapsPublish'{..}
-          = go _mId _mForce (Just AltJSON) mapsEngineService
+          = go _mId _mForce (Just AltJSON) mapsEngine
           where go
                   = buildClient (Proxy :: Proxy MapsPublishResource)
                       mempty

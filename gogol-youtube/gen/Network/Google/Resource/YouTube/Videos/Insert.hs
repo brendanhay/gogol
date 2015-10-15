@@ -200,7 +200,7 @@ instance GoogleRequest VideosInsert' where
               (Just AltJSON)
               _viPayload
               _viMedia
-              youTubeService
+              youTube
           where go
                   = buildClient (Proxy :: Proxy VideosInsertResource)
                       mempty

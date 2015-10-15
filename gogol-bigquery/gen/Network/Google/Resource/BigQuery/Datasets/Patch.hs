@@ -107,7 +107,7 @@ instance GoogleRequest DatasetsPatch' where
         requestClient DatasetsPatch'{..}
           = go _dpProjectId _dpDatasetId (Just AltJSON)
               _dpPayload
-              bigQueryService
+              bigQuery
           where go
                   = buildClient (Proxy :: Proxy DatasetsPatchResource)
                       mempty

@@ -144,7 +144,7 @@ instance GoogleRequest ScoresList' where
               _sllPageToken
               _sllMaxResults
               (Just AltJSON)
-              gamesService
+              games
           where go
                   = buildClient (Proxy :: Proxy ScoresListResource)
                       mempty

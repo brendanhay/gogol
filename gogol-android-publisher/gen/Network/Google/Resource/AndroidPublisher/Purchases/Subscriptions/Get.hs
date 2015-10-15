@@ -110,7 +110,7 @@ instance GoogleRequest PurchasesSubscriptionsGet'
         requestClient PurchasesSubscriptionsGet'{..}
           = go _psgPackageName _psgSubscriptionId _psgToken
               (Just AltJSON)
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy PurchasesSubscriptionsGetResource)

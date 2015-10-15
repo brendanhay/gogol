@@ -200,7 +200,7 @@ instance GoogleRequest LiveBroadcastsList' where
               _lblPageToken
               (Just _lblMaxResults)
               (Just AltJSON)
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy LiveBroadcastsListResource)

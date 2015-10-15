@@ -88,8 +88,7 @@ igInstance
 instance GoogleRequest InstancesGet' where
         type Rs InstancesGet' = DatabaseInstance
         requestClient InstancesGet'{..}
-          = go _igProject _igInstance (Just AltJSON)
-              sQLAdminService
+          = go _igProject _igInstance (Just AltJSON) sQLAdmin
           where go
                   = buildClient (Proxy :: Proxy InstancesGetResource)
                       mempty

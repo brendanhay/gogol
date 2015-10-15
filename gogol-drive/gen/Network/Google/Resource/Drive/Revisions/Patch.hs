@@ -102,7 +102,7 @@ instance GoogleRequest RevisionsPatch' where
         requestClient RevisionsPatch'{..}
           = go _rppFileId _rppRevisionId (Just AltJSON)
               _rppPayload
-              driveService
+              drive
           where go
                   = buildClient (Proxy :: Proxy RevisionsPatchResource)
                       mempty

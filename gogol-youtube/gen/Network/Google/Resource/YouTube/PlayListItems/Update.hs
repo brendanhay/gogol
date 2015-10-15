@@ -101,7 +101,7 @@ instance GoogleRequest PlayListItemsUpdate' where
         type Rs PlayListItemsUpdate' = PlayListItem
         requestClient PlayListItemsUpdate'{..}
           = go (Just _pliuPart) (Just AltJSON) _pliuPayload
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy PlayListItemsUpdateResource)

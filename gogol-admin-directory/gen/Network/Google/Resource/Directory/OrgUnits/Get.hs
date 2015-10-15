@@ -91,7 +91,7 @@ instance GoogleRequest OrgUnitsGet' where
         type Rs OrgUnitsGet' = OrgUnit
         requestClient OrgUnitsGet'{..}
           = go _ougCustomerId _ougOrgUnitPath (Just AltJSON)
-              directoryService
+              directory
           where go
                   = buildClient (Proxy :: Proxy OrgUnitsGetResource)
                       mempty

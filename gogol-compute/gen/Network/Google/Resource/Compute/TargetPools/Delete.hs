@@ -102,7 +102,7 @@ instance GoogleRequest TargetPoolsDelete' where
         requestClient TargetPoolsDelete'{..}
           = go _tpdProject _tpdRegion _tpdTargetPool
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy TargetPoolsDeleteResource)

@@ -207,7 +207,7 @@ instance GoogleRequest TasksList' where
               _tlPageToken
               _tlMaxResults
               (Just AltJSON)
-              appsTasksService
+              appsTasks
           where go
                   = buildClient (Proxy :: Proxy TasksListResource)
                       mempty

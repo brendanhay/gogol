@@ -88,7 +88,7 @@ instance GoogleRequest InAppProductsDelete' where
         type Rs InAppProductsDelete' = ()
         requestClient InAppProductsDelete'{..}
           = go _iapdPackageName _iapdSKU (Just AltJSON)
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy InAppProductsDeleteResource)

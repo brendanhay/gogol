@@ -78,7 +78,7 @@ tlUserKey
 instance GoogleRequest TokensList' where
         type Rs TokensList' = Tokens
         requestClient TokensList'{..}
-          = go _tlUserKey (Just AltJSON) directoryService
+          = go _tlUserKey (Just AltJSON) directory
           where go
                   = buildClient (Proxy :: Proxy TokensListResource)
                       mempty

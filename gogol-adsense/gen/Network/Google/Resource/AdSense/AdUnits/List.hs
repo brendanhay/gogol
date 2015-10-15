@@ -117,7 +117,7 @@ instance GoogleRequest AdUnitsList' where
           = go _aulAdClientId _aulIncludeInactive _aulPageToken
               _aulMaxResults
               (Just AltJSON)
-              adSenseService
+              adSense
           where go
                   = buildClient (Proxy :: Proxy AdUnitsListResource)
                       mempty

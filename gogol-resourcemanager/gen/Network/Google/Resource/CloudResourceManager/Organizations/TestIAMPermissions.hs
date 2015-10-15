@@ -180,7 +180,7 @@ instance GoogleRequest
               _otipCallback
               (Just AltJSON)
               _otipPayload
-              resourceManagerService
+              resourceManager
           where go
                   = buildClient
                       (Proxy ::

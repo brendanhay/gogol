@@ -129,7 +129,7 @@ instance GoogleRequest
               _igmsitInstanceGroupManager
               (Just AltJSON)
               _igmsitPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy ::

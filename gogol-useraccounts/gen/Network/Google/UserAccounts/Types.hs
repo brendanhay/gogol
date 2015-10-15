@@ -16,7 +16,7 @@
 module Network.Google.UserAccounts.Types
     (
     -- * Service Configuration
-      userAccountsService
+      userAccounts
 
     -- * OAuth Scopes
     , cloudPlatformReadOnlyScope
@@ -197,24 +197,24 @@ import           Network.Google.UserAccounts.Types.Product
 import           Network.Google.UserAccounts.Types.Sum
 
 -- | Default request referring to version 'beta' of the Cloud User Accounts API. This contains the host and root path used as a starting point for constructing service requests.
-userAccountsService :: Service
-userAccountsService
+userAccounts :: Service
+userAccounts
   = defaultService (ServiceId "clouduseraccounts:beta")
       "www.googleapis.com"
       "clouduseraccounts/beta/projects/"
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: OAuthScope
-cloudPlatformReadOnlyScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform.read-only";
+cloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope
-cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
 
 -- | Manage your Google Cloud User Accounts
 cloudUseraccountsScope :: OAuthScope
-cloudUseraccountsScope = OAuthScope "https://www.googleapis.com/auth/cloud.useraccounts";
+cloudUseraccountsScope = "https://www.googleapis.com/auth/cloud.useraccounts";
 
 -- | View your Google Cloud User Accounts
 cloudUseraccountsReadonlyScope :: OAuthScope
-cloudUseraccountsReadonlyScope = OAuthScope "https://www.googleapis.com/auth/cloud.useraccounts.readonly";
+cloudUseraccountsReadonlyScope = "https://www.googleapis.com/auth/cloud.useraccounts.readonly";

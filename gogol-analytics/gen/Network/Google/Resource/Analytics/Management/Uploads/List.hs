@@ -134,7 +134,7 @@ instance GoogleRequest ManagementUploadsList' where
               _mulStartIndex
               _mulMaxResults
               (Just AltJSON)
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementUploadsListResource)

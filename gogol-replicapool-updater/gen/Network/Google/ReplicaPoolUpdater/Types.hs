@@ -16,7 +16,7 @@
 module Network.Google.ReplicaPoolUpdater.Types
     (
     -- * Service Configuration
-      replicaPoolUpdaterService
+      replicaPoolUpdater
 
     -- * OAuth Scopes
     , cloudPlatformReadOnlyScope
@@ -166,8 +166,8 @@ import           Network.Google.ReplicaPoolUpdater.Types.Product
 import           Network.Google.ReplicaPoolUpdater.Types.Sum
 
 -- | Default request referring to version 'v1beta1' of the Google Compute Engine Instance Group Updater API. This contains the host and root path used as a starting point for constructing service requests.
-replicaPoolUpdaterService :: Service
-replicaPoolUpdaterService
+replicaPoolUpdater :: Service
+replicaPoolUpdater
   = defaultService
       (ServiceId "replicapoolupdater:v1beta1")
       "www.googleapis.com"
@@ -175,16 +175,16 @@ replicaPoolUpdaterService
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: OAuthScope
-cloudPlatformReadOnlyScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform.read-only";
+cloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope
-cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
 
 -- | View and manage replica pools
 replicapoolScope :: OAuthScope
-replicapoolScope = OAuthScope "https://www.googleapis.com/auth/replicapool";
+replicapoolScope = "https://www.googleapis.com/auth/replicapool";
 
 -- | View replica pools
 replicapoolReadonlyScope :: OAuthScope
-replicapoolReadonlyScope = OAuthScope "https://www.googleapis.com/auth/replicapool.readonly";
+replicapoolReadonlyScope = "https://www.googleapis.com/auth/replicapool.readonly";

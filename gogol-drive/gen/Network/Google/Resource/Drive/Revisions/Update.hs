@@ -100,7 +100,7 @@ instance GoogleRequest RevisionsUpdate' where
         requestClient RevisionsUpdate'{..}
           = go _ruFileId _ruRevisionId (Just AltJSON)
               _ruPayload
-              driveService
+              drive
           where go
                   = buildClient
                       (Proxy :: Proxy RevisionsUpdateResource)

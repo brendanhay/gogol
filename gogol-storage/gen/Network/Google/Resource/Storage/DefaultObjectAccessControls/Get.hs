@@ -94,8 +94,7 @@ instance GoogleRequest
         type Rs DefaultObjectAccessControlsGet' =
              ObjectAccessControl
         requestClient DefaultObjectAccessControlsGet'{..}
-          = go _doacgBucket _doacgEntity (Just AltJSON)
-              storageService
+          = go _doacgBucket _doacgEntity (Just AltJSON) storage
           where go
                   = buildClient
                       (Proxy ::

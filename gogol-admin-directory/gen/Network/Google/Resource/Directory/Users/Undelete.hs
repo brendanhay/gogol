@@ -85,8 +85,7 @@ uUserKey = lens _uUserKey (\ s a -> s{_uUserKey = a})
 instance GoogleRequest UsersUndelete' where
         type Rs UsersUndelete' = ()
         requestClient UsersUndelete'{..}
-          = go _uUserKey (Just AltJSON) _uPayload
-              directoryService
+          = go _uUserKey (Just AltJSON) _uPayload directory
           where go
                   = buildClient (Proxy :: Proxy UsersUndeleteResource)
                       mempty

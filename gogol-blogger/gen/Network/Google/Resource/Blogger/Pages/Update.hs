@@ -126,7 +126,7 @@ instance GoogleRequest PagesUpdate' where
           = go _puuBlogId _puuPageId _puuRevert _puuPublish
               (Just AltJSON)
               _puuPayload
-              bloggerService
+              blogger
           where go
                   = buildClient (Proxy :: Proxy PagesUpdateResource)
                       mempty

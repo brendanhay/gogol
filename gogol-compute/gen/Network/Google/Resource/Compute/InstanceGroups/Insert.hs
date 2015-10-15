@@ -102,7 +102,7 @@ instance GoogleRequest InstanceGroupsInsert' where
         type Rs InstanceGroupsInsert' = Operation
         requestClient InstanceGroupsInsert'{..}
           = go _igiProject _igiZone (Just AltJSON) _igiPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceGroupsInsertResource)

@@ -89,7 +89,7 @@ instance GoogleRequest RemarketingListsUpdate' where
         type Rs RemarketingListsUpdate' = RemarketingList
         requestClient RemarketingListsUpdate'{..}
           = go _rluProFileId (Just AltJSON) _rluPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy RemarketingListsUpdateResource)

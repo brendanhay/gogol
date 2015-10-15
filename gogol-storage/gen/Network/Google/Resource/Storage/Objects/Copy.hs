@@ -342,7 +342,7 @@ instance GoogleRequest ObjectsCopy' where
               _ocSourceGeneration
               (Just AltJSON)
               _ocPayload
-              storageService
+              storage
           where go :<|> _
                   = buildClient (Proxy :: Proxy ObjectsCopyResource)
                       mempty
@@ -367,7 +367,7 @@ instance GoogleRequest (MediaDownload ObjectsCopy')
               _ocSourceGeneration
               (Just AltMedia)
               _ocPayload
-              storageService
+              storage
           where _ :<|> go
                   = buildClient (Proxy :: Proxy ObjectsCopyResource)
                       mempty

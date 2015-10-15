@@ -126,7 +126,7 @@ instance GoogleRequest DevicesSetState' where
           = go _dssEnterpriseId _dssUserId _dssDeviceId
               (Just AltJSON)
               _dssPayload
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient
                       (Proxy :: Proxy DevicesSetStateResource)

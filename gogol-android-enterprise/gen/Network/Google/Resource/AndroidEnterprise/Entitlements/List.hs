@@ -90,7 +90,7 @@ instance GoogleRequest EntitlementsList' where
         type Rs EntitlementsList' = EntitlementsListResponse
         requestClient EntitlementsList'{..}
           = go _elEnterpriseId _elUserId (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient
                       (Proxy :: Proxy EntitlementsListResource)

@@ -237,7 +237,7 @@ instance GoogleRequest SubscriptionsList' where
               (Just _sOrder)
               (Just _sMaxResults)
               (Just AltJSON)
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy SubscriptionsListResource)

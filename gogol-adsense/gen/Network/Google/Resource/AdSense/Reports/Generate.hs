@@ -245,7 +245,7 @@ instance GoogleRequest ReportsGenerate' where
               _rgUseTimezoneReporting
               _rgMaxResults
               (Just AltJSON)
-              adSenseService
+              adSense
           where go :<|> _
                   = buildClient
                       (Proxy :: Proxy ReportsGenerateResource)
@@ -267,7 +267,7 @@ instance GoogleRequest
               _rgUseTimezoneReporting
               _rgMaxResults
               (Just AltMedia)
-              adSenseService
+              adSense
           where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy ReportsGenerateResource)

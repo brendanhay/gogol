@@ -122,7 +122,7 @@ instance GoogleRequest TableDataInsertAll' where
           = go _tdiaProjectId _tdiaDatasetId _tdiaTableId
               (Just AltJSON)
               _tdiaPayload
-              bigQueryService
+              bigQuery
           where go
                   = buildClient
                       (Proxy :: Proxy TableDataInsertAllResource)

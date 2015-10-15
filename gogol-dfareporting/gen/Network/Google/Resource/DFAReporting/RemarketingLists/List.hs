@@ -186,7 +186,7 @@ instance GoogleRequest RemarketingListsList' where
               _rllSortField
               _rllMaxResults
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy RemarketingListsListResource)

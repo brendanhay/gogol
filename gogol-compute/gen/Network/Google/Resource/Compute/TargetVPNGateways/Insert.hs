@@ -104,7 +104,7 @@ instance GoogleRequest TargetVPNGatewaysInsert' where
         requestClient TargetVPNGatewaysInsert'{..}
           = go _tvgiProject _tvgiRegion (Just AltJSON)
               _tvgiPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy TargetVPNGatewaysInsertResource)

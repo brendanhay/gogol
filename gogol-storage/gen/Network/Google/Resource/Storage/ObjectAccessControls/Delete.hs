@@ -122,7 +122,7 @@ instance GoogleRequest ObjectAccessControlsDelete'
           = go _oacdBucket _oacdObject _oacdEntity
               _oacdGeneration
               (Just AltJSON)
-              storageService
+              storage
           where go
                   = buildClient
                       (Proxy :: Proxy ObjectAccessControlsDeleteResource)

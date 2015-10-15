@@ -100,7 +100,7 @@ instance GoogleRequest StyleList' where
         requestClient StyleList'{..}
           = go _slTableId _slPageToken _slMaxResults
               (Just AltJSON)
-              fusionTablesService
+              fusionTables
           where go
                   = buildClient (Proxy :: Proxy StyleListResource)
                       mempty

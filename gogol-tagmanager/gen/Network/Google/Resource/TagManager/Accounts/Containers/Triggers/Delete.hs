@@ -106,7 +106,7 @@ instance GoogleRequest
         requestClient AccountsContainersTriggersDelete'{..}
           = go _actdAccountId _actdContainerId _actdTriggerId
               (Just AltJSON)
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy ::

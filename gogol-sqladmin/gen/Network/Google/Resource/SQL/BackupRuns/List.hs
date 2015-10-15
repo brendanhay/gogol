@@ -118,7 +118,7 @@ instance GoogleRequest BackupRunsList' where
           = go _brlProject _brlInstance _brlPageToken
               _brlMaxResults
               (Just AltJSON)
-              sQLAdminService
+              sQLAdmin
           where go
                   = buildClient (Proxy :: Proxy BackupRunsListResource)
                       mempty

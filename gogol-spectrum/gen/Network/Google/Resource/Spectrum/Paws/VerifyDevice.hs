@@ -79,7 +79,7 @@ pvdPayload
 instance GoogleRequest PawsVerifyDevice' where
         type Rs PawsVerifyDevice' = PawsVerifyDeviceResponse
         requestClient PawsVerifyDevice'{..}
-          = go (Just AltJSON) _pvdPayload spectrumService
+          = go (Just AltJSON) _pvdPayload spectrum
           where go
                   = buildClient
                       (Proxy :: Proxy PawsVerifyDeviceResource)

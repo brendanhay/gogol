@@ -163,7 +163,7 @@ instance GoogleRequest TransferOperationsGet' where
               _togBearerToken
               _togCallback
               (Just AltJSON)
-              storageTransferService
+              storageTransfer
           where go
                   = buildClient
                       (Proxy :: Proxy TransferOperationsGetResource)

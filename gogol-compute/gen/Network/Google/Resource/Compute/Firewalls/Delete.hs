@@ -87,8 +87,7 @@ fdFirewall
 instance GoogleRequest FirewallsDelete' where
         type Rs FirewallsDelete' = Operation
         requestClient FirewallsDelete'{..}
-          = go _fdProject _fdFirewall (Just AltJSON)
-              computeService
+          = go _fdProject _fdFirewall (Just AltJSON) compute
           where go
                   = buildClient
                       (Proxy :: Proxy FirewallsDeleteResource)

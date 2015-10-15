@@ -102,7 +102,7 @@ instance GoogleRequest TablesInsert' where
         requestClient TablesInsert'{..}
           = go _tiProjectId _tiDatasetId (Just AltJSON)
               _tiPayload
-              bigQueryService
+              bigQuery
           where go
                   = buildClient (Proxy :: Proxy TablesInsertResource)
                       mempty

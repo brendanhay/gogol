@@ -124,7 +124,7 @@ instance GoogleRequest ManagementProFilesList' where
               _mpflStartIndex
               _mpflMaxResults
               (Just AltJSON)
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementProFilesListResource)

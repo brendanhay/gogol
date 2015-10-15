@@ -115,7 +115,7 @@ instance GoogleRequest AccountshippingPatch' where
           = go _apMerchantId _apAccountId _apDryRun
               (Just AltJSON)
               _apPayload
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy AccountshippingPatchResource)

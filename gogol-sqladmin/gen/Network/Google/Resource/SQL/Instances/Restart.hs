@@ -88,8 +88,7 @@ irInstance
 instance GoogleRequest InstancesRestart' where
         type Rs InstancesRestart' = Operation
         requestClient InstancesRestart'{..}
-          = go _irProject _irInstance (Just AltJSON)
-              sQLAdminService
+          = go _irProject _irInstance (Just AltJSON) sQLAdmin
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesRestartResource)

@@ -233,7 +233,7 @@ instance GoogleRequest BeaconsList' where
               _blPageSize
               _blCallback
               (Just AltJSON)
-              proximityBeaconService
+              proximityBeacon
           where go
                   = buildClient (Proxy :: Proxy BeaconsListResource)
                       mempty

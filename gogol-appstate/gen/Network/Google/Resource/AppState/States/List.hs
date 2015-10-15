@@ -74,8 +74,7 @@ slIncludeData
 instance GoogleRequest StatesList' where
         type Rs StatesList' = ListResponse
         requestClient StatesList'{..}
-          = go (Just _slIncludeData) (Just AltJSON)
-              appStateService
+          = go (Just _slIncludeData) (Just AltJSON) appState
           where go
                   = buildClient (Proxy :: Proxy StatesListResource)
                       mempty

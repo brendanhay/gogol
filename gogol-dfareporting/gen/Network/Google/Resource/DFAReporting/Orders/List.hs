@@ -183,7 +183,7 @@ instance GoogleRequest OrdersList' where
               (_olSiteId ^. _Default)
               _olMaxResults
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient (Proxy :: Proxy OrdersListResource)
                       mempty

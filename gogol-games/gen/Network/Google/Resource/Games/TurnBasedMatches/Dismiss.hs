@@ -77,7 +77,7 @@ tbmdMatchId
 instance GoogleRequest TurnBasedMatchesDismiss' where
         type Rs TurnBasedMatchesDismiss' = ()
         requestClient TurnBasedMatchesDismiss'{..}
-          = go _tbmdMatchId (Just AltJSON) gamesService
+          = go _tbmdMatchId (Just AltJSON) games
           where go
                   = buildClient
                       (Proxy :: Proxy TurnBasedMatchesDismissResource)

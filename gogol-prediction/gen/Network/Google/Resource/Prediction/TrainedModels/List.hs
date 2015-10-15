@@ -100,7 +100,7 @@ instance GoogleRequest TrainedModelsList' where
         requestClient TrainedModelsList'{..}
           = go _tmlProject _tmlPageToken _tmlMaxResults
               (Just AltJSON)
-              predictionService
+              prediction
           where go
                   = buildClient
                       (Proxy :: Proxy TrainedModelsListResource)

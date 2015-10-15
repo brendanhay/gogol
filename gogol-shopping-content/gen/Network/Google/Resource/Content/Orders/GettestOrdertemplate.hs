@@ -96,7 +96,7 @@ instance GoogleRequest OrdersGettestOrdertemplate'
              OrdersGetTestOrderTemplateResponse
         requestClient OrdersGettestOrdertemplate'{..}
           = go _ogoMerchantId _ogoTemplateName (Just AltJSON)
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy OrdersGettestOrdertemplateResource)

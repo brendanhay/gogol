@@ -127,7 +127,7 @@ instance GoogleRequest PostsInsert' where
               _piiFetchImages
               (Just AltJSON)
               _piiPayload
-              bloggerService
+              blogger
           where go
                   = buildClient (Proxy :: Proxy PostsInsertResource)
                       mempty

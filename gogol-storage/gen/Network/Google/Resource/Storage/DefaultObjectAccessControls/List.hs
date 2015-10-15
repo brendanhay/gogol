@@ -107,7 +107,7 @@ instance GoogleRequest
           = go _doaclBucket _doaclIfMetagenerationMatch
               _doaclIfMetagenerationNotMatch
               (Just AltJSON)
-              storageService
+              storage
           where go
                   = buildClient
                       (Proxy ::

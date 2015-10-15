@@ -118,7 +118,7 @@ instance GoogleRequest EditsImagesList' where
           = go _eilPackageName _eilEditId _eilLanguage
               _eilImageType
               (Just AltJSON)
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy EditsImagesListResource)

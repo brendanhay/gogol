@@ -88,7 +88,7 @@ instance GoogleRequest UserRolesInsert' where
         type Rs UserRolesInsert' = UserRole
         requestClient UserRolesInsert'{..}
           = go _uriProFileId (Just AltJSON) _uriPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy UserRolesInsertResource)

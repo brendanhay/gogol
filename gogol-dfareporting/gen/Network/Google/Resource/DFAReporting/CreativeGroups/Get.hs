@@ -86,8 +86,7 @@ cggId = lens _cggId (\ s a -> s{_cggId = a})
 instance GoogleRequest CreativeGroupsGet' where
         type Rs CreativeGroupsGet' = CreativeGroup
         requestClient CreativeGroupsGet'{..}
-          = go _cggProFileId _cggId (Just AltJSON)
-              dFAReportingService
+          = go _cggProFileId _cggId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy CreativeGroupsGetResource)

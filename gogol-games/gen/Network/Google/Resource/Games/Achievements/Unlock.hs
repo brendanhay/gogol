@@ -78,7 +78,7 @@ instance GoogleRequest AchievementsUnlock' where
         type Rs AchievementsUnlock' =
              AchievementUnlockResponse
         requestClient AchievementsUnlock'{..}
-          = go _auAchievementId (Just AltJSON) gamesService
+          = go _auAchievementId (Just AltJSON) games
           where go
                   = buildClient
                       (Proxy :: Proxy AchievementsUnlockResource)

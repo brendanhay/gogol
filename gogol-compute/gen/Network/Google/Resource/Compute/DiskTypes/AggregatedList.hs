@@ -127,7 +127,7 @@ instance GoogleRequest DiskTypesAggregatedList' where
           = go _dtalProject _dtalFilter _dtalPageToken
               (Just _dtalMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy DiskTypesAggregatedListResource)

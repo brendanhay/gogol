@@ -108,7 +108,7 @@ instance GoogleRequest CreativeFieldValuesInsert'
           = go _cfviProFileId _cfviCreativeFieldId
               (Just AltJSON)
               _cfviPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy CreativeFieldValuesInsertResource)

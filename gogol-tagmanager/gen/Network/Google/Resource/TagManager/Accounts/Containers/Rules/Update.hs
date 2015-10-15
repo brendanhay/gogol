@@ -132,7 +132,7 @@ instance GoogleRequest AccountsContainersRulesUpdate'
               _acruFingerprint
               (Just AltJSON)
               _acruPayload
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy ::

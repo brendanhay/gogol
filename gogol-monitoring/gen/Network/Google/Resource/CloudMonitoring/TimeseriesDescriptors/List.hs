@@ -238,7 +238,7 @@ instance GoogleRequest TimeseriesDescriptorsList'
               _tdlPageToken
               (Just AltJSON)
               _tdlPayload
-              monitoringService
+              monitoring
           where go
                   = buildClient
                       (Proxy :: Proxy TimeseriesDescriptorsListResource)

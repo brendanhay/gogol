@@ -91,7 +91,7 @@ instance GoogleRequest AccountsCustombatch' where
              AccountsCustomBatchResponse
         requestClient AccountsCustombatch'{..}
           = go _accDryRun (Just AltJSON) _accPayload
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsCustombatchResource)

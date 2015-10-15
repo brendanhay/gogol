@@ -109,7 +109,7 @@ instance GoogleRequest SSLCertsCreateEphemeral' where
         requestClient SSLCertsCreateEphemeral'{..}
           = go _scceProject _scceInstance (Just AltJSON)
               _sccePayload
-              sQLAdminService
+              sQLAdmin
           where go
                   = buildClient
                       (Proxy :: Proxy SSLCertsCreateEphemeralResource)

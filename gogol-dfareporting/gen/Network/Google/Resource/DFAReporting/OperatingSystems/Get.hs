@@ -89,7 +89,7 @@ instance GoogleRequest OperatingSystemsGet' where
         type Rs OperatingSystemsGet' = OperatingSystem
         requestClient OperatingSystemsGet'{..}
           = go _osgProFileId _osgDartId (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy OperatingSystemsGetResource)

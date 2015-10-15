@@ -74,7 +74,7 @@ oiPayload
 instance GoogleRequest OffersInsert' where
         type Rs OffersInsert' = OfferDTO
         requestClient OffersInsert'{..}
-          = go (Just AltJSON) _oiPayload adExchangeBuyerService
+          = go (Just AltJSON) _oiPayload adExchangeBuyer
           where go
                   = buildClient (Proxy :: Proxy OffersInsertResource)
                       mempty

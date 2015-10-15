@@ -192,7 +192,7 @@ instance GoogleRequest
               _ptslPageSize
               _ptslCallback
               (Just AltJSON)
-              pubSubService
+              pubSub
           where go
                   = buildClient
                       (Proxy ::

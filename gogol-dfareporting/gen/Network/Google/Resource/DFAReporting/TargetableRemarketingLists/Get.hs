@@ -91,7 +91,7 @@ instance GoogleRequest TargetableRemarketingListsGet'
              TargetableRemarketingList
         requestClient TargetableRemarketingListsGet'{..}
           = go _trlgProFileId _trlgId (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy ::

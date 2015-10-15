@@ -88,7 +88,7 @@ instance GoogleRequest SitesInsert' where
         type Rs SitesInsert' = Site
         requestClient SitesInsert'{..}
           = go _siProFileId (Just AltJSON) _siPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient (Proxy :: Proxy SitesInsertResource)
                       mempty

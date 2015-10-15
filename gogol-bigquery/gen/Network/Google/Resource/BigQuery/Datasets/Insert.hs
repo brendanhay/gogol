@@ -87,8 +87,7 @@ diProjectId
 instance GoogleRequest DatasetsInsert' where
         type Rs DatasetsInsert' = Dataset
         requestClient DatasetsInsert'{..}
-          = go _diProjectId (Just AltJSON) _diPayload
-              bigQueryService
+          = go _diProjectId (Just AltJSON) _diPayload bigQuery
           where go
                   = buildClient (Proxy :: Proxy DatasetsInsertResource)
                       mempty

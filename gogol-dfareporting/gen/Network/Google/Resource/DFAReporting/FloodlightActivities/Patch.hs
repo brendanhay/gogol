@@ -105,7 +105,7 @@ instance GoogleRequest FloodlightActivitiesPatch'
         requestClient FloodlightActivitiesPatch'{..}
           = go _fapProFileId (Just _fapId) (Just AltJSON)
               _fapPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy FloodlightActivitiesPatchResource)

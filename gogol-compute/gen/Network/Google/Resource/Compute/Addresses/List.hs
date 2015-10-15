@@ -135,7 +135,7 @@ instance GoogleRequest AddressesList' where
           = go _alProject _alRegion _alFilter _alPageToken
               (Just _alMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient (Proxy :: Proxy AddressesListResource)
                       mempty

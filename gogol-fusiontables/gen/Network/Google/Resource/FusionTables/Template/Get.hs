@@ -89,7 +89,7 @@ instance GoogleRequest TemplateGet' where
         type Rs TemplateGet' = Template
         requestClient TemplateGet'{..}
           = go _tggTableId _tggTemplateId (Just AltJSON)
-              fusionTablesService
+              fusionTables
           where go
                   = buildClient (Proxy :: Proxy TemplateGetResource)
                       mempty

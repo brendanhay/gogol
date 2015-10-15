@@ -77,7 +77,7 @@ prPayload
 instance GoogleRequest PawsRegister' where
         type Rs PawsRegister' = PawsRegisterResponse
         requestClient PawsRegister'{..}
-          = go (Just AltJSON) _prPayload spectrumService
+          = go (Just AltJSON) _prPayload spectrum
           where go
                   = buildClient (Proxy :: Proxy PawsRegisterResource)
                       mempty

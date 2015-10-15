@@ -119,7 +119,7 @@ instance GoogleRequest InAppProductsUpdate' where
               _iapuAutoConvertMissingPrices
               (Just AltJSON)
               _iapuPayload
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy InAppProductsUpdateResource)

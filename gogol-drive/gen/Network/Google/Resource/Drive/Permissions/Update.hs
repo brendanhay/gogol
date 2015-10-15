@@ -117,7 +117,7 @@ instance GoogleRequest PermissionsUpdate' where
               (Just _puuTransferOwnership)
               (Just AltJSON)
               _puuPayload
-              driveService
+              drive
           where go
                   = buildClient
                       (Proxy :: Proxy PermissionsUpdateResource)

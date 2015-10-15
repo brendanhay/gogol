@@ -16,7 +16,7 @@
 module Network.Google.PubSub.Types
     (
     -- * Service Configuration
-      pubSubService
+      pubSub
 
     -- * OAuth Scopes
     , cloudPlatformScope
@@ -157,16 +157,16 @@ import           Network.Google.PubSub.Types.Product
 import           Network.Google.PubSub.Types.Sum
 
 -- | Default request referring to version 'v1' of the Google Cloud Pub/Sub API. This contains the host and root path used as a starting point for constructing service requests.
-pubSubService :: Service
-pubSubService
+pubSub :: Service
+pubSub
   = defaultService (ServiceId "pubsub:v1")
       "pubsub.googleapis.com"
       ""
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope
-cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
 
 -- | View and manage Pub\/Sub topics and subscriptions
 pubsubScope :: OAuthScope
-pubsubScope = OAuthScope "https://www.googleapis.com/auth/pubsub";
+pubsubScope = "https://www.googleapis.com/auth/pubsub";

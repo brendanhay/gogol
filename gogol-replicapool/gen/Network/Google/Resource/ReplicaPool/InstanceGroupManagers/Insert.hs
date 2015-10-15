@@ -116,7 +116,7 @@ instance GoogleRequest InstanceGroupManagersInsert'
           = go _igmiProject _igmiZone (Just _igmiSize)
               (Just AltJSON)
               _igmiPayload
-              replicaPoolService
+              replicaPool
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceGroupManagersInsertResource)

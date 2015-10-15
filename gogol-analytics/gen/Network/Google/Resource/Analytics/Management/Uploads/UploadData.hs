@@ -121,7 +121,7 @@ instance GoogleRequest ManagementUploadsUploadData'
               _muudCustomDataSourceId
               (Just AltJSON)
               _muudMedia
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementUploadsUploadDataResource)

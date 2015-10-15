@@ -91,7 +91,7 @@ instance GoogleRequest FloodlightActivityGroupsGet'
              FloodlightActivityGroup
         requestClient FloodlightActivityGroupsGet'{..}
           = go _faggProFileId _faggId (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy FloodlightActivityGroupsGetResource)

@@ -104,7 +104,7 @@ instance GoogleRequest DatabasesDelete' where
         requestClient DatabasesDelete'{..}
           = go _ddProject _ddInstance _ddDatabase
               (Just AltJSON)
-              sQLAdminService
+              sQLAdmin
           where go
                   = buildClient
                       (Proxy :: Proxy DatabasesDeleteResource)

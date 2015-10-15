@@ -122,7 +122,7 @@ instance GoogleRequest EntitlementsList' where
               _elProductId
               _elMaxResults
               (Just AltJSON)
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy EntitlementsListResource)

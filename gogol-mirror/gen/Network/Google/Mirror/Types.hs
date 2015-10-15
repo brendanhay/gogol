@@ -16,7 +16,7 @@
 module Network.Google.Mirror.Types
     (
     -- * Service Configuration
-      mirrorService
+      mirror
 
     -- * OAuth Scopes
     , glassTimelineScope
@@ -212,16 +212,16 @@ import           Network.Google.Mirror.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Mirror API. This contains the host and root path used as a starting point for constructing service requests.
-mirrorService :: Service
-mirrorService
+mirror :: Service
+mirror
   = defaultService (ServiceId "mirror:v1")
       "www.googleapis.com"
       "mirror/v1/"
 
 -- | View and manage your Glass timeline
 glassTimelineScope :: OAuthScope
-glassTimelineScope = OAuthScope "https://www.googleapis.com/auth/glass.timeline";
+glassTimelineScope = "https://www.googleapis.com/auth/glass.timeline";
 
 -- | View your location
 glassLocationScope :: OAuthScope
-glassLocationScope = OAuthScope "https://www.googleapis.com/auth/glass.location";
+glassLocationScope = "https://www.googleapis.com/auth/glass.location";

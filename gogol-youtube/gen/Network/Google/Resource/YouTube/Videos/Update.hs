@@ -125,7 +125,7 @@ instance GoogleRequest VideosUpdate' where
           = go (Just _vuPart) _vuOnBehalfOfContentOwner
               (Just AltJSON)
               _vuPayload
-              youTubeService
+              youTube
           where go
                   = buildClient (Proxy :: Proxy VideosUpdateResource)
                       mempty

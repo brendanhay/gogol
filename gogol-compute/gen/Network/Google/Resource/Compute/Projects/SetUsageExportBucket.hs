@@ -93,7 +93,7 @@ instance GoogleRequest ProjectsSetUsageExportBucket'
         type Rs ProjectsSetUsageExportBucket' = Operation
         requestClient ProjectsSetUsageExportBucket'{..}
           = go _psuebProject (Just AltJSON) _psuebPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsSetUsageExportBucketResource)

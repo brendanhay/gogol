@@ -88,7 +88,7 @@ instance GoogleRequest SitesUpdate' where
         type Rs SitesUpdate' = Site
         requestClient SitesUpdate'{..}
           = go _suProFileId (Just AltJSON) _suPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient (Proxy :: Proxy SitesUpdateResource)
                       mempty

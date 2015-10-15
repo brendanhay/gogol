@@ -94,8 +94,7 @@ udaUserId
 instance GoogleRequest UsersDatasetAggregate' where
         type Rs UsersDatasetAggregate' = AggregateResponse
         requestClient UsersDatasetAggregate'{..}
-          = go _udaUserId (Just AltJSON) _udaPayload
-              fitnessService
+          = go _udaUserId (Just AltJSON) _udaPayload fitness
           where go
                   = buildClient
                       (Proxy :: Proxy UsersDatasetAggregateResource)

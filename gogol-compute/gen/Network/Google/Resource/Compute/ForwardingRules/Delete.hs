@@ -102,7 +102,7 @@ instance GoogleRequest ForwardingRulesDelete' where
         requestClient ForwardingRulesDelete'{..}
           = go _frdProject _frdRegion _frdForwardingRule
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy ForwardingRulesDeleteResource)

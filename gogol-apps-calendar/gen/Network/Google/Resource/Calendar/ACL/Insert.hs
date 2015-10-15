@@ -90,7 +90,7 @@ instance GoogleRequest ACLInsert' where
         type Rs ACLInsert' = ACLRule
         requestClient ACLInsert'{..}
           = go _aiCalendarId (Just AltJSON) _aiPayload
-              appsCalendarService
+              appsCalendar
           where go
                   = buildClient (Proxy :: Proxy ACLInsertResource)
                       mempty

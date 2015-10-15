@@ -75,7 +75,7 @@ instance GoogleRequest EnterprisesList' where
         type Rs EnterprisesList' = EnterprisesListResponse
         requestClient EnterprisesList'{..}
           = go (Just _elDomain) (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient
                       (Proxy :: Proxy EnterprisesListResource)

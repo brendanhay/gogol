@@ -19,7 +19,7 @@
 module Network.Google.Mirror
     (
     -- * Service Configuration
-      mirrorService
+      mirror
 
     -- * API Declaration
     , MirrorAPI

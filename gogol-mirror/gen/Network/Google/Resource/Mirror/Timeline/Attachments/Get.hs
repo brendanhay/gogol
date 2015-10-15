@@ -96,7 +96,7 @@ instance GoogleRequest TimelineAttachmentsGet' where
         type Rs TimelineAttachmentsGet' = Attachment
         requestClient TimelineAttachmentsGet'{..}
           = go _tagItemId _tagAttachmentId (Just AltJSON)
-              mirrorService
+              mirror
           where go :<|> _
                   = buildClient
                       (Proxy :: Proxy TimelineAttachmentsGetResource)
@@ -109,7 +109,7 @@ instance GoogleRequest
         requestClient
           (MediaDownload TimelineAttachmentsGet'{..})
           = go _tagItemId _tagAttachmentId (Just AltMedia)
-              mirrorService
+              mirror
           where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy TimelineAttachmentsGetResource)

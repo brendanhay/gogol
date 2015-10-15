@@ -87,8 +87,7 @@ godOperation
 instance GoogleRequest GlobalOperationsDelete' where
         type Rs GlobalOperationsDelete' = ()
         requestClient GlobalOperationsDelete'{..}
-          = go _godProject _godOperation (Just AltJSON)
-              computeService
+          = go _godProject _godOperation (Just AltJSON) compute
           where go
                   = buildClient
                       (Proxy :: Proxy GlobalOperationsDeleteResource)

@@ -92,7 +92,7 @@ instance GoogleRequest VideoAbuseReportReasonsList'
              VideoAbuseReportReasonListResponse
         requestClient VideoAbuseReportReasonsList'{..}
           = go (Just _varrlPart) (Just _varrlHl) (Just AltJSON)
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy VideoAbuseReportReasonsListResource)

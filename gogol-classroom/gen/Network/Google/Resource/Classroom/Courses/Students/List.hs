@@ -201,7 +201,7 @@ instance GoogleRequest CoursesStudentsList' where
               _cslPageSize
               _cslCallback
               (Just AltJSON)
-              classroomService
+              classroom
           where go
                   = buildClient
                       (Proxy :: Proxy CoursesStudentsListResource)

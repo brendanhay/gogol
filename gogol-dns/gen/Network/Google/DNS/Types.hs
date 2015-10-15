@@ -16,7 +16,7 @@
 module Network.Google.DNS.Types
     (
     -- * Service Configuration
-      dNSService
+      dNS
 
     -- * OAuth Scopes
     , ndevClouddnsReadonlyScope
@@ -107,24 +107,24 @@ import           Network.Google.DNS.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Cloud DNS API. This contains the host and root path used as a starting point for constructing service requests.
-dNSService :: Service
-dNSService
+dNS :: Service
+dNS
   = defaultService (ServiceId "dns:v1")
       "www.googleapis.com"
       "dns/v1/projects/"
 
 -- | View your DNS records hosted by Google Cloud DNS
 ndevClouddnsReadonlyScope :: OAuthScope
-ndevClouddnsReadonlyScope = OAuthScope "https://www.googleapis.com/auth/ndev.clouddns.readonly";
+ndevClouddnsReadonlyScope = "https://www.googleapis.com/auth/ndev.clouddns.readonly";
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: OAuthScope
-cloudPlatformReadOnlyScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform.read-only";
+cloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
 
 -- | View and manage your DNS records hosted by Google Cloud DNS
 ndevClouddnsReadwriteScope :: OAuthScope
-ndevClouddnsReadwriteScope = OAuthScope "https://www.googleapis.com/auth/ndev.clouddns.readwrite";
+ndevClouddnsReadwriteScope = "https://www.googleapis.com/auth/ndev.clouddns.readwrite";
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope
-cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";

@@ -103,7 +103,7 @@ instance GoogleRequest CreativeGroupsPatch' where
         requestClient CreativeGroupsPatch'{..}
           = go _cgpProFileId (Just _cgpId) (Just AltJSON)
               _cgpPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy CreativeGroupsPatchResource)

@@ -115,7 +115,7 @@ instance GoogleRequest PlayersList' where
           = go _plCollection _plLanguage _plPageToken
               _plMaxResults
               (Just AltJSON)
-              gamesService
+              games
           where go
                   = buildClient (Proxy :: Proxy PlayersListResource)
                       mempty

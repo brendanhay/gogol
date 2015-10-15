@@ -91,7 +91,7 @@ instance GoogleRequest DirectorySiteContactsGet'
              DirectorySiteContact
         requestClient DirectorySiteContactsGet'{..}
           = go _dscgProFileId _dscgId (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy DirectorySiteContactsGetResource)

@@ -86,8 +86,7 @@ ptgId = lens _ptgId (\ s a -> s{_ptgId = a})
 instance GoogleRequest PlatformTypesGet' where
         type Rs PlatformTypesGet' = PlatformType
         requestClient PlatformTypesGet'{..}
-          = go _ptgProFileId _ptgId (Just AltJSON)
-              dFAReportingService
+          = go _ptgProFileId _ptgId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy PlatformTypesGetResource)

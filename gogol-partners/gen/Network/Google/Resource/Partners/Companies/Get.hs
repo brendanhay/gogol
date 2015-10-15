@@ -332,7 +332,7 @@ instance GoogleRequest CompaniesGet' where
               _cgRequestMetadataTrafficSourceTrafficSourceId
               _cgCallback
               (Just AltJSON)
-              partnersService
+              partners
           where go
                   = buildClient (Proxy :: Proxy CompaniesGetResource)
                       mempty

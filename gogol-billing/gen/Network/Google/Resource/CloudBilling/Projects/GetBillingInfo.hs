@@ -169,7 +169,7 @@ instance GoogleRequest ProjectsGetBillingInfo' where
               _pgbiBearerToken
               _pgbiCallback
               (Just AltJSON)
-              billingService
+              billing
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsGetBillingInfoResource)

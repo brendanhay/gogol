@@ -91,7 +91,7 @@ instance GoogleRequest CommentThreadsInsert' where
         type Rs CommentThreadsInsert' = CommentThread
         requestClient CommentThreadsInsert'{..}
           = go (Just _ctiPart) (Just AltJSON) _ctiPayload
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy CommentThreadsInsertResource)

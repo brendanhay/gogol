@@ -77,7 +77,7 @@ filFileId
 instance GoogleRequest FilesTrash' where
         type Rs FilesTrash' = File
         requestClient FilesTrash'{..}
-          = go _filFileId (Just AltJSON) driveService
+          = go _filFileId (Just AltJSON) drive
           where go
                   = buildClient (Proxy :: Proxy FilesTrashResource)
                       mempty

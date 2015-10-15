@@ -168,7 +168,7 @@ instance GoogleRequest ScoresGet' where
               _sgPageToken
               _sgMaxResults
               (Just AltJSON)
-              gamesService
+              games
           where go
                   = buildClient (Proxy :: Proxy ScoresGetResource)
                       mempty

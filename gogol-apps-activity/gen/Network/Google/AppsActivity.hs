@@ -19,7 +19,7 @@
 module Network.Google.AppsActivity
     (
     -- * Service Configuration
-      appsActivityService
+      appsActivity
 
     -- * API Declaration
     , AppsActivityAPI

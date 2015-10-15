@@ -74,7 +74,7 @@ ciPayload
 instance GoogleRequest CreativesInsert' where
         type Rs CreativesInsert' = Creative
         requestClient CreativesInsert'{..}
-          = go (Just AltJSON) _ciPayload adExchangeBuyerService
+          = go (Just AltJSON) _ciPayload adExchangeBuyer
           where go
                   = buildClient
                       (Proxy :: Proxy CreativesInsertResource)

@@ -88,8 +88,7 @@ tdUserKey
 instance GoogleRequest TokensDelete' where
         type Rs TokensDelete' = ()
         requestClient TokensDelete'{..}
-          = go _tdUserKey _tdClientId (Just AltJSON)
-              directoryService
+          = go _tdUserKey _tdClientId (Just AltJSON) directory
           where go
                   = buildClient (Proxy :: Proxy TokensDeleteResource)
                       mempty

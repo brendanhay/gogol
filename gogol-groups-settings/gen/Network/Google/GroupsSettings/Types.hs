@@ -16,7 +16,7 @@
 module Network.Google.GroupsSettings.Types
     (
     -- * Service Configuration
-      groupsSettingsService
+      groupsSettings
 
     -- * OAuth Scopes
     , appsGroupsSettingsScope
@@ -59,12 +59,12 @@ import           Network.Google.GroupsSettings.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Groups Settings API. This contains the host and root path used as a starting point for constructing service requests.
-groupsSettingsService :: Service
-groupsSettingsService
+groupsSettings :: Service
+groupsSettings
   = defaultService (ServiceId "groupssettings:v1")
       "www.googleapis.com"
       "groups/v1/groups/"
 
 -- | View and manage the settings of a Google Apps Group
 appsGroupsSettingsScope :: OAuthScope
-appsGroupsSettingsScope = OAuthScope "https://www.googleapis.com/auth/apps.groups.settings";
+appsGroupsSettingsScope = "https://www.googleapis.com/auth/apps.groups.settings";

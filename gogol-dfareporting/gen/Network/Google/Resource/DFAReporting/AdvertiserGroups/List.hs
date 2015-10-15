@@ -162,7 +162,7 @@ instance GoogleRequest AdvertiserGroupsList' where
               _aglSortField
               _aglMaxResults
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy AdvertiserGroupsListResource)

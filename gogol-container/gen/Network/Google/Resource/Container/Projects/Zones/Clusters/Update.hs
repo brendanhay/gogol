@@ -208,7 +208,7 @@ instance GoogleRequest ProjectsZonesClustersUpdate'
               _pzcuCallback
               (Just AltJSON)
               _pzcuPayload
-              containerService
+              container
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsZonesClustersUpdateResource)

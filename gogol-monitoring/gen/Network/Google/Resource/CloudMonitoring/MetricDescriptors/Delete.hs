@@ -88,8 +88,7 @@ instance GoogleRequest MetricDescriptorsDelete' where
         type Rs MetricDescriptorsDelete' =
              DeleteMetricDescriptorResponse
         requestClient MetricDescriptorsDelete'{..}
-          = go _mddProject _mddMetric (Just AltJSON)
-              monitoringService
+          = go _mddProject _mddMetric (Just AltJSON) monitoring
           where go
                   = buildClient
                       (Proxy :: Proxy MetricDescriptorsDeleteResource)

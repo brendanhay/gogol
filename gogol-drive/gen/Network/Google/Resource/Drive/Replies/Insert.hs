@@ -101,7 +101,7 @@ instance GoogleRequest RepliesInsert' where
         type Rs RepliesInsert' = CommentReply
         requestClient RepliesInsert'{..}
           = go _riFileId _riCommentId (Just AltJSON) _riPayload
-              driveService
+              drive
           where go
                   = buildClient (Proxy :: Proxy RepliesInsertResource)
                       mempty

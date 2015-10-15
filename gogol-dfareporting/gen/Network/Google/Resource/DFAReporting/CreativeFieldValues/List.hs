@@ -177,7 +177,7 @@ instance GoogleRequest CreativeFieldValuesList' where
               _cfvlSortField
               _cfvlMaxResults
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy CreativeFieldValuesListResource)

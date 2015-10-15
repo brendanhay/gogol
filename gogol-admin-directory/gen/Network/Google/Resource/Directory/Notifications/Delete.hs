@@ -90,7 +90,7 @@ instance GoogleRequest NotificationsDelete' where
         type Rs NotificationsDelete' = ()
         requestClient NotificationsDelete'{..}
           = go _ndCustomer _ndNotificationId (Just AltJSON)
-              directoryService
+              directory
           where go
                   = buildClient
                       (Proxy :: Proxy NotificationsDeleteResource)

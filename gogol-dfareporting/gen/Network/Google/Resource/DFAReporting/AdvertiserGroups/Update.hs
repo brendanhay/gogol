@@ -89,7 +89,7 @@ instance GoogleRequest AdvertiserGroupsUpdate' where
         type Rs AdvertiserGroupsUpdate' = AdvertiserGroup
         requestClient AdvertiserGroupsUpdate'{..}
           = go _aguProFileId (Just AltJSON) _aguPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy AdvertiserGroupsUpdateResource)

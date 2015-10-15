@@ -102,7 +102,7 @@ instance GoogleRequest ProductsList' where
         requestClient ProductsList'{..}
           = go _proMerchantId _proPageToken _proMaxResults
               (Just AltJSON)
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient (Proxy :: Proxy ProductsListResource)
                       mempty

@@ -100,7 +100,7 @@ instance GoogleRequest OrgUnitsList' where
         requestClient OrgUnitsList'{..}
           = go _oulCustomerId (Just _oulOrgUnitPath) _oulType
               (Just AltJSON)
-              directoryService
+              directory
           where go
                   = buildClient (Proxy :: Proxy OrgUnitsListResource)
                       mempty

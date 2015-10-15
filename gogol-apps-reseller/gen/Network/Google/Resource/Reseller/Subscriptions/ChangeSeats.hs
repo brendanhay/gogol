@@ -105,7 +105,7 @@ instance GoogleRequest SubscriptionsChangeSeats'
         requestClient SubscriptionsChangeSeats'{..}
           = go _scsCustomerId _scsSubscriptionId (Just AltJSON)
               _scsPayload
-              appsResellerService
+              appsReseller
           where go
                   = buildClient
                       (Proxy :: Proxy SubscriptionsChangeSeatsResource)

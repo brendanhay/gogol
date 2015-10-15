@@ -19,7 +19,7 @@
 module Network.Google.Classroom
     (
     -- * Service Configuration
-      classroomService
+      classroom
 
     -- * API Declaration
     , ClassroomAPI

@@ -142,7 +142,7 @@ instance GoogleRequest
               _mpfullStartIndex
               _mpfullMaxResults
               (Just AltJSON)
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy ::

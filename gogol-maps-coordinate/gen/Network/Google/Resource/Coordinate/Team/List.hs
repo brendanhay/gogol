@@ -95,7 +95,7 @@ instance GoogleRequest TeamList' where
         type Rs TeamList' = TeamListResponse
         requestClient TeamList'{..}
           = go _tlDispatcher _tlAdmin _tlWorker (Just AltJSON)
-              mapsCoordinateService
+              mapsCoordinate
           where go
                   = buildClient (Proxy :: Proxy TeamListResource)
                       mempty

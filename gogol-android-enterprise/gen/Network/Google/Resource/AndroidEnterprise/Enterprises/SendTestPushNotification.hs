@@ -84,7 +84,7 @@ instance GoogleRequest
         requestClient
           EnterprisesSendTestPushNotification'{..}
           = go _estpnEnterpriseId (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient
                       (Proxy ::

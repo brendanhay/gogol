@@ -87,8 +87,7 @@ rlgId = lens _rlgId (\ s a -> s{_rlgId = a})
 instance GoogleRequest RemarketingListsGet' where
         type Rs RemarketingListsGet' = RemarketingList
         requestClient RemarketingListsGet'{..}
-          = go _rlgProFileId _rlgId (Just AltJSON)
-              dFAReportingService
+          = go _rlgProFileId _rlgId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy RemarketingListsGetResource)

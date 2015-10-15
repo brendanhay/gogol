@@ -87,7 +87,7 @@ instance GoogleRequest ProductsCustombatch' where
              ProductsCustomBatchResponse
         requestClient ProductsCustombatch'{..}
           = go _pDryRun (Just AltJSON) _pPayload
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy ProductsCustombatchResource)

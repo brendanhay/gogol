@@ -196,7 +196,7 @@ instance GoogleRequest ProjectsLogServicesSinksGet'
               _plssgBearerToken
               _plssgCallback
               (Just AltJSON)
-              loggingService
+              logging
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsLogServicesSinksGetResource)

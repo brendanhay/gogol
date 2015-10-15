@@ -118,7 +118,7 @@ instance GoogleRequest PermissionsPatch' where
               (Just _pppTransferOwnership)
               (Just AltJSON)
               _pppPayload
-              driveService
+              drive
           where go
                   = buildClient
                       (Proxy :: Proxy PermissionsPatchResource)

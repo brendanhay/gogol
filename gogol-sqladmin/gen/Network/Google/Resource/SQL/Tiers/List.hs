@@ -78,7 +78,7 @@ tlProject
 instance GoogleRequest TiersList' where
         type Rs TiersList' = TiersListResponse
         requestClient TiersList'{..}
-          = go _tlProject (Just AltJSON) sQLAdminService
+          = go _tlProject (Just AltJSON) sQLAdmin
           where go
                   = buildClient (Proxy :: Proxy TiersListResource)
                       mempty

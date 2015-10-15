@@ -78,7 +78,7 @@ instance GoogleRequest
         type Rs ProvisioningCreateAccountTicket' =
              AccountTicket
         requestClient ProvisioningCreateAccountTicket'{..}
-          = go (Just AltJSON) _pcatPayload analyticsService
+          = go (Just AltJSON) _pcatPayload analytics
           where go
                   = buildClient
                       (Proxy ::

@@ -93,7 +93,7 @@ instance GoogleRequest StatesClear' where
         type Rs StatesClear' = WriteResult
         requestClient StatesClear'{..}
           = go _scStateKey _scCurrentDataVersion (Just AltJSON)
-              appStateService
+              appState
           where go
                   = buildClient (Proxy :: Proxy StatesClearResource)
                       mempty

@@ -87,7 +87,7 @@ instance GoogleRequest CountriesGet' where
         type Rs CountriesGet' = Country
         requestClient CountriesGet'{..}
           = go _cgProFileId _cgDartId (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient (Proxy :: Proxy CountriesGetResource)
                       mempty

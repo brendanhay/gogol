@@ -74,7 +74,7 @@ cdId = lens _cdId (\ s a -> s{_cdId = a})
 instance GoogleRequest CommentsDelete' where
         type Rs CommentsDelete' = ()
         requestClient CommentsDelete'{..}
-          = go (Just _cdId) (Just AltJSON) youTubeService
+          = go (Just _cdId) (Just AltJSON) youTube
           where go
                   = buildClient (Proxy :: Proxy CommentsDeleteResource)
                       mempty

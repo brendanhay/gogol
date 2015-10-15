@@ -161,7 +161,7 @@ instance GoogleRequest ReferencesetsGet' where
               _rBearerToken
               _rCallback
               (Just AltJSON)
-              genomicsService
+              genomics
           where go
                   = buildClient
                       (Proxy :: Proxy ReferencesetsGetResource)

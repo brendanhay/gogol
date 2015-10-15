@@ -77,8 +77,7 @@ instance GoogleRequest MarketplaceOrdersInsert' where
         type Rs MarketplaceOrdersInsert' =
              CreateOrdersResponse
         requestClient MarketplaceOrdersInsert'{..}
-          = go (Just AltJSON) _moiPayload
-              adExchangeBuyerService
+          = go (Just AltJSON) _moiPayload adExchangeBuyer
           where go
                   = buildClient
                       (Proxy :: Proxy MarketplaceOrdersInsertResource)

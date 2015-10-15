@@ -138,7 +138,7 @@ instance GoogleRequest RegionOperationsList' where
           = go _rolProject _rolRegion _rolFilter _rolPageToken
               (Just _rolMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy RegionOperationsListResource)

@@ -16,7 +16,7 @@
 module Network.Google.Reports.Types
     (
     -- * Service Configuration
-      reportsService
+      reports
 
     -- * OAuth Scopes
     , adminReportsUsageReadonlyScope
@@ -153,16 +153,16 @@ import           Network.Google.Reports.Types.Product
 import           Network.Google.Reports.Types.Sum
 
 -- | Default request referring to version 'reports_v1' of the Admin Reports API. This contains the host and root path used as a starting point for constructing service requests.
-reportsService :: Service
-reportsService
+reports :: Service
+reports
   = defaultService (ServiceId "admin:reports_v1")
       "www.googleapis.com"
       "admin/reports/v1/"
 
 -- | View usage reports of Google Apps for your domain
 adminReportsUsageReadonlyScope :: OAuthScope
-adminReportsUsageReadonlyScope = OAuthScope "https://www.googleapis.com/auth/admin.reports.usage.readonly";
+adminReportsUsageReadonlyScope = "https://www.googleapis.com/auth/admin.reports.usage.readonly";
 
 -- | View audit reports of Google Apps for your domain
 adminReportsAuditReadonlyScope :: OAuthScope
-adminReportsAuditReadonlyScope = OAuthScope "https://www.googleapis.com/auth/admin.reports.audit.readonly";
+adminReportsAuditReadonlyScope = "https://www.googleapis.com/auth/admin.reports.audit.readonly";

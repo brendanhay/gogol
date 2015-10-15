@@ -122,7 +122,7 @@ instance GoogleRequest RegionsList' where
           = go _rProject _rFilter _rPageToken
               (Just _rMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient (Proxy :: Proxy RegionsListResource)
                       mempty

@@ -165,7 +165,7 @@ instance GoogleRequest
               _mlbvlMaxResults
               _mlbvlShowPreOrders
               (Just AltJSON)
-              booksService
+              books
           where go
                   = buildClient
                       (Proxy ::

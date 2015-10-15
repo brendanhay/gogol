@@ -90,7 +90,7 @@ instance GoogleRequest WebResourcePatch' where
              SiteVerificationWebResourceResource
         requestClient WebResourcePatch'{..}
           = go _wrpId (Just AltJSON) _wrpPayload
-              siteVerificationService
+              siteVerification
           where go
                   = buildClient
                       (Proxy :: Proxy WebResourcePatchResource)

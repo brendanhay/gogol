@@ -151,7 +151,7 @@ instance GoogleRequest FilesWatch' where
               _fwRevisionId
               (Just AltJSON)
               _fwPayload
-              driveService
+              drive
           where go :<|> _
                   = buildClient (Proxy :: Proxy FilesWatchResource)
                       mempty
@@ -166,7 +166,7 @@ instance GoogleRequest (MediaDownload FilesWatch')
               _fwRevisionId
               (Just AltMedia)
               _fwPayload
-              driveService
+              drive
           where _ :<|> go
                   = buildClient (Proxy :: Proxy FilesWatchResource)
                       mempty

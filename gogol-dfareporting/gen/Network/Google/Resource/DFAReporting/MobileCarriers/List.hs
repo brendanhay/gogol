@@ -77,7 +77,7 @@ instance GoogleRequest MobileCarriersList' where
         type Rs MobileCarriersList' =
              MobileCarriersListResponse
         requestClient MobileCarriersList'{..}
-          = go _mclProFileId (Just AltJSON) dFAReportingService
+          = go _mclProFileId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy MobileCarriersListResource)

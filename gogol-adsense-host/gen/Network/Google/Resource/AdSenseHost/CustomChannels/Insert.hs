@@ -90,7 +90,7 @@ instance GoogleRequest CustomChannelsInsert' where
         type Rs CustomChannelsInsert' = CustomChannel
         requestClient CustomChannelsInsert'{..}
           = go _cciAdClientId (Just AltJSON) _cciPayload
-              adSenseHostService
+              adSenseHost
           where go
                   = buildClient
                       (Proxy :: Proxy CustomChannelsInsertResource)

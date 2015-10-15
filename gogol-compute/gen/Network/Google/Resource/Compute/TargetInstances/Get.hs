@@ -102,7 +102,7 @@ instance GoogleRequest TargetInstancesGet' where
         requestClient TargetInstancesGet'{..}
           = go _tigProject _tigZone _tigTargetInstance
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy TargetInstancesGetResource)

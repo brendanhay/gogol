@@ -200,7 +200,7 @@ instance GoogleRequest CoursesPatch' where
               _cpCallback
               (Just AltJSON)
               _cpPayload
-              classroomService
+              classroom
           where go
                   = buildClient (Proxy :: Proxy CoursesPatchResource)
                       mempty

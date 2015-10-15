@@ -149,7 +149,7 @@ instance GoogleRequest SchedulePatch' where
               _spDuration
               (Just AltJSON)
               _spPayload
-              mapsCoordinateService
+              mapsCoordinate
           where go
                   = buildClient (Proxy :: Proxy SchedulePatchResource)
                       mempty

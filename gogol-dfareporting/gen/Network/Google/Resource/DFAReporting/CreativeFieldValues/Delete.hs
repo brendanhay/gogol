@@ -104,7 +104,7 @@ instance GoogleRequest CreativeFieldValuesDelete'
         requestClient CreativeFieldValuesDelete'{..}
           = go _cfvdProFileId _cfvdCreativeFieldId _cfvdId
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy CreativeFieldValuesDeleteResource)

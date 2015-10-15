@@ -104,7 +104,7 @@ instance GoogleRequest URLChannelsList' where
         requestClient URLChannelsList'{..}
           = go _uclAdClientId _uclPageToken _uclMaxResults
               (Just AltJSON)
-              adSenseHostService
+              adSenseHost
           where go
                   = buildClient
                       (Proxy :: Proxy URLChannelsListResource)

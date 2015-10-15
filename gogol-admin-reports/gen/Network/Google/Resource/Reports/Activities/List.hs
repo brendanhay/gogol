@@ -192,7 +192,7 @@ instance GoogleRequest ActivitiesList' where
               _alEventName
               _alMaxResults
               (Just AltJSON)
-              reportsService
+              reports
           where go
                   = buildClient (Proxy :: Proxy ActivitiesListResource)
                       mempty

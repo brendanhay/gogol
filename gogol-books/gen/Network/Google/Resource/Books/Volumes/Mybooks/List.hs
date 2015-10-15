@@ -150,7 +150,7 @@ instance GoogleRequest VolumesMybooksList' where
               _vmlStartIndex
               _vmlMaxResults
               (Just AltJSON)
-              booksService
+              books
           where go
                   = buildClient
                       (Proxy :: Proxy VolumesMybooksListResource)

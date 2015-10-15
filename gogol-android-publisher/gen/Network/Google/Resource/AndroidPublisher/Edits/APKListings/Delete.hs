@@ -125,7 +125,7 @@ instance GoogleRequest EditsAPKListingsDelete' where
               _eapkldAPKVersionCode
               _eapkldLanguage
               (Just AltJSON)
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy EditsAPKListingsDeleteResource)

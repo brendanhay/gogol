@@ -85,8 +85,7 @@ rcpId = lens _rcpId (\ s a -> s{_rcpId = a})
 instance GoogleRequest RasterCollectionsPatch' where
         type Rs RasterCollectionsPatch' = ()
         requestClient RasterCollectionsPatch'{..}
-          = go _rcpId (Just AltJSON) _rcpPayload
-              mapsEngineService
+          = go _rcpId (Just AltJSON) _rcpPayload mapsEngine
           where go
                   = buildClient
                       (Proxy :: Proxy RasterCollectionsPatchResource)

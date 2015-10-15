@@ -119,7 +119,7 @@ instance GoogleRequest EditsTracksUpdate' where
           = go _etuPackageName _etuEditId _etuTrack
               (Just AltJSON)
               _etuPayload
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy EditsTracksUpdateResource)

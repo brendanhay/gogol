@@ -78,7 +78,7 @@ instance GoogleRequest BucketAccessControlsList'
         type Rs BucketAccessControlsList' =
              BucketAccessControls
         requestClient BucketAccessControlsList'{..}
-          = go _baclBucket (Just AltJSON) storageService
+          = go _baclBucket (Just AltJSON) storage
           where go
                   = buildClient
                       (Proxy :: Proxy BucketAccessControlsListResource)

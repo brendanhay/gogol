@@ -108,7 +108,7 @@ instance GoogleRequest HTTPHealthChecksPatch' where
           = go _httphcpProject _httphcpHTTPHealthCheck
               (Just AltJSON)
               _httphcpPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy HTTPHealthChecksPatchResource)

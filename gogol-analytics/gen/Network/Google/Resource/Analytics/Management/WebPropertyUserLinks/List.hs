@@ -127,7 +127,7 @@ instance GoogleRequest
               _mwpullStartIndex
               _mwpullMaxResults
               (Just AltJSON)
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy ::

@@ -154,7 +154,7 @@ instance GoogleRequest DeploymentsPatch' where
               (Just _dpPreview)
               (Just AltJSON)
               _dpPayload
-              deploymentManagerService
+              deploymentManager
           where go
                   = buildClient
                       (Proxy :: Proxy DeploymentsPatchResource)

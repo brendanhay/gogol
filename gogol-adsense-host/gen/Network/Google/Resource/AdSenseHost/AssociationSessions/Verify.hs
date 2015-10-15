@@ -79,8 +79,7 @@ instance GoogleRequest AssociationSessionsVerify'
         type Rs AssociationSessionsVerify' =
              AssociationSession
         requestClient AssociationSessionsVerify'{..}
-          = go (Just _asvToken) (Just AltJSON)
-              adSenseHostService
+          = go (Just _asvToken) (Just AltJSON) adSenseHost
           where go
                   = buildClient
                       (Proxy :: Proxy AssociationSessionsVerifyResource)

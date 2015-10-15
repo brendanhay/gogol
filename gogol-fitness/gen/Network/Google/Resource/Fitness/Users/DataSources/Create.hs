@@ -101,8 +101,7 @@ udscUserId
 instance GoogleRequest UsersDataSourcesCreate' where
         type Rs UsersDataSourcesCreate' = DataSource
         requestClient UsersDataSourcesCreate'{..}
-          = go _udscUserId (Just AltJSON) _udscPayload
-              fitnessService
+          = go _udscUserId (Just AltJSON) _udscPayload fitness
           where go
                   = buildClient
                       (Proxy :: Proxy UsersDataSourcesCreateResource)

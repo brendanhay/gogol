@@ -101,7 +101,7 @@ instance GoogleRequest AdvertisersPatch' where
         requestClient AdvertisersPatch'{..}
           = go _apProFileId (Just _apId) (Just AltJSON)
               _apPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy AdvertisersPatchResource)

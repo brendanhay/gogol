@@ -99,7 +99,7 @@ instance GoogleRequest ProjectsIconsCreate' where
         requestClient ProjectsIconsCreate'{..}
           = go _picProjectId (Just AltJSON) _picPayload
               _picMedia
-              mapsEngineService
+              mapsEngine
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsIconsCreateResource)

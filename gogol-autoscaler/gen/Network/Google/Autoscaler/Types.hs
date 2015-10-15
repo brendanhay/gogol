@@ -16,7 +16,7 @@
 module Network.Google.Autoscaler.Types
     (
     -- * Service Configuration
-      autoscalerService
+      autoscaler
 
     -- * OAuth Scopes
     , computeScope
@@ -174,16 +174,16 @@ import           Network.Google.Autoscaler.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1beta2' of the Google Compute Engine Autoscaler API. This contains the host and root path used as a starting point for constructing service requests.
-autoscalerService :: Service
-autoscalerService
+autoscaler :: Service
+autoscaler
   = defaultService (ServiceId "autoscaler:v1beta2")
       "www.googleapis.com"
       "autoscaler/v1beta2/"
 
 -- | View and manage your Google Compute Engine resources
 computeScope :: OAuthScope
-computeScope = OAuthScope "https://www.googleapis.com/auth/compute";
+computeScope = "https://www.googleapis.com/auth/compute";
 
 -- | View your Google Compute Engine resources
 computeReadonlyScope :: OAuthScope
-computeReadonlyScope = OAuthScope "https://www.googleapis.com/auth/compute.readonly";
+computeReadonlyScope = "https://www.googleapis.com/auth/compute.readonly";

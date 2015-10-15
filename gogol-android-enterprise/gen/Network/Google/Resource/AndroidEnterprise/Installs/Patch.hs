@@ -134,7 +134,7 @@ instance GoogleRequest InstallsPatch' where
               _ipInstallId
               (Just AltJSON)
               _ipPayload
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient (Proxy :: Proxy InstallsPatchResource)
                       mempty

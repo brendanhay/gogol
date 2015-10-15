@@ -168,7 +168,7 @@ instance GoogleRequest CoursesDelete' where
               _cdBearerToken
               _cdCallback
               (Just AltJSON)
-              classroomService
+              classroom
           where go
                   = buildClient (Proxy :: Proxy CoursesDeleteResource)
                       mempty

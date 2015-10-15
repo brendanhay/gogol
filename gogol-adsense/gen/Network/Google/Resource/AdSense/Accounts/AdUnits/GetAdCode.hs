@@ -108,7 +108,7 @@ instance GoogleRequest AccountsAdUnitsGetAdCode'
           = go _aaugacAccountId _aaugacAdClientId
               _aaugacAdUnitId
               (Just AltJSON)
-              adSenseService
+              adSense
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsAdUnitsGetAdCodeResource)

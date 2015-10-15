@@ -16,7 +16,7 @@
 module Network.Google.Compute.Types
     (
     -- * Service Configuration
-      computeService
+      compute
 
     -- * OAuth Scopes
     , computeScope
@@ -1771,32 +1771,32 @@ import           Network.Google.Compute.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Compute Engine API. This contains the host and root path used as a starting point for constructing service requests.
-computeService :: Service
-computeService
+compute :: Service
+compute
   = defaultService (ServiceId "compute:v1")
       "www.googleapis.com"
       "compute/v1/projects/"
 
 -- | View and manage your Google Compute Engine resources
 computeScope :: OAuthScope
-computeScope = OAuthScope "https://www.googleapis.com/auth/compute";
+computeScope = "https://www.googleapis.com/auth/compute";
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope
-cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
 
 -- | View your data in Google Cloud Storage
 devstorageReadOnlyScope :: OAuthScope
-devstorageReadOnlyScope = OAuthScope "https://www.googleapis.com/auth/devstorage.read_only";
+devstorageReadOnlyScope = "https://www.googleapis.com/auth/devstorage.read_only";
 
 -- | Manage your data in Google Cloud Storage
 devstorageReadWriteScope :: OAuthScope
-devstorageReadWriteScope = OAuthScope "https://www.googleapis.com/auth/devstorage.read_write";
+devstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
 
 -- | View your Google Compute Engine resources
 computeReadonlyScope :: OAuthScope
-computeReadonlyScope = OAuthScope "https://www.googleapis.com/auth/compute.readonly";
+computeReadonlyScope = "https://www.googleapis.com/auth/compute.readonly";
 
 -- | Manage your data and permissions in Google Cloud Storage
 devstorageFullControlScope :: OAuthScope
-devstorageFullControlScope = OAuthScope "https://www.googleapis.com/auth/devstorage.full_control";
+devstorageFullControlScope = "https://www.googleapis.com/auth/devstorage.full_control";

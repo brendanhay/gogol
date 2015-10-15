@@ -104,7 +104,7 @@ instance GoogleRequest ForwardingRulesInsert' where
         requestClient ForwardingRulesInsert'{..}
           = go _friProject _friRegion (Just AltJSON)
               _friPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy ForwardingRulesInsertResource)

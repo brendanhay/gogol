@@ -274,7 +274,7 @@ instance GoogleRequest
               _plsilIndexPrefix
               _plsilCallback
               (Just AltJSON)
-              loggingService
+              logging
           where go
                   = buildClient
                       (Proxy ::

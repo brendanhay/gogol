@@ -101,7 +101,7 @@ instance GoogleRequest RegionOperationsDelete' where
         requestClient RegionOperationsDelete'{..}
           = go _rodProject _rodRegion _rodOperation
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy RegionOperationsDeleteResource)

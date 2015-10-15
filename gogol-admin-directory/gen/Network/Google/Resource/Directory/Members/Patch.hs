@@ -105,7 +105,7 @@ instance GoogleRequest MembersPatch' where
         requestClient MembersPatch'{..}
           = go _mpGroupKey _mpMemberKey (Just AltJSON)
               _mpPayload
-              directoryService
+              directory
           where go
                   = buildClient (Proxy :: Proxy MembersPatchResource)
                       mempty

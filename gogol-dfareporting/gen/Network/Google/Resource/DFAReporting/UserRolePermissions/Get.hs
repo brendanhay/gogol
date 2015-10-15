@@ -89,7 +89,7 @@ instance GoogleRequest UserRolePermissionsGet' where
         type Rs UserRolePermissionsGet' = UserRolePermission
         requestClient UserRolePermissionsGet'{..}
           = go _urpgProFileId _urpgId (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy UserRolePermissionsGetResource)

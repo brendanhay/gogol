@@ -99,7 +99,7 @@ instance GoogleRequest InstancesGet' where
         type Rs InstancesGet' = Instance
         requestClient InstancesGet'{..}
           = go _igProject _igZone _igInstance (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient (Proxy :: Proxy InstancesGetResource)
                       mempty

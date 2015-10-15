@@ -62,7 +62,7 @@ instance GoogleRequest RelyingPartyGetRecaptchaParam'
         type Rs RelyingPartyGetRecaptchaParam' =
              GetRecaptchaParamResponse
         requestClient RelyingPartyGetRecaptchaParam'{}
-          = go (Just AltJSON) identityToolkitService
+          = go (Just AltJSON) identityToolkit
           where go
                   = buildClient
                       (Proxy ::

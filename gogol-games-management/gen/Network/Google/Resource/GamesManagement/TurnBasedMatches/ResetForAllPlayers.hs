@@ -65,7 +65,7 @@ instance GoogleRequest
          TurnBasedMatchesResetForAllPlayers' where
         type Rs TurnBasedMatchesResetForAllPlayers' = ()
         requestClient TurnBasedMatchesResetForAllPlayers'{}
-          = go (Just AltJSON) gamesManagementService
+          = go (Just AltJSON) gamesManagement
           where go
                   = buildClient
                       (Proxy ::

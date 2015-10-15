@@ -87,8 +87,7 @@ psgId = lens _psgId (\ s a -> s{_psgId = a})
 instance GoogleRequest PlacementStrategiesGet' where
         type Rs PlacementStrategiesGet' = PlacementStrategy
         requestClient PlacementStrategiesGet'{..}
-          = go _psgProFileId _psgId (Just AltJSON)
-              dFAReportingService
+          = go _psgProFileId _psgId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy PlacementStrategiesGetResource)

@@ -136,7 +136,7 @@ instance GoogleRequest ManagementCustomMetricsPatch'
               (Just _mcmpIgnoreCustomDataSourceLinks)
               (Just AltJSON)
               _mcmpPayload
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementCustomMetricsPatchResource)

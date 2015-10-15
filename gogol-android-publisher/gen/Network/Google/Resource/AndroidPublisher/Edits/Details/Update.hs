@@ -103,7 +103,7 @@ instance GoogleRequest EditsDetailsUpdate' where
         requestClient EditsDetailsUpdate'{..}
           = go _eduPackageName _eduEditId (Just AltJSON)
               _eduPayload
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy EditsDetailsUpdateResource)

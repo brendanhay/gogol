@@ -20,7 +20,7 @@
 module Network.Google.DoubleClickSearch
     (
     -- * Service Configuration
-      doubleClickSearchService
+      doubleClickSearch
 
     -- * API Declaration
     , DoubleClickSearchAPI

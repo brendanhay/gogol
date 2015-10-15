@@ -92,7 +92,7 @@ instance GoogleRequest UserRolePermissionsList' where
         requestClient UserRolePermissionsList'{..}
           = go _urplProFileId (_urplIds ^. _Default)
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy UserRolePermissionsListResource)

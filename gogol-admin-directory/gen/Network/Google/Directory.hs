@@ -21,7 +21,7 @@
 module Network.Google.Directory
     (
     -- * Service Configuration
-      directoryService
+      directory
 
     -- * API Declaration
     , DirectoryAPI

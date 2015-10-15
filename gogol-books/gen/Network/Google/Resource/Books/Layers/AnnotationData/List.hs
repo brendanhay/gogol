@@ -237,7 +237,7 @@ instance GoogleRequest LayersAnnotationDataList'
               _ladlPageToken
               _ladlMaxResults
               (Just AltJSON)
-              booksService
+              books
           where go
                   = buildClient
                       (Proxy :: Proxy LayersAnnotationDataListResource)

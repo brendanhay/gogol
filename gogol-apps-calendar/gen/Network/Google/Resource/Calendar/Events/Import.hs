@@ -107,7 +107,7 @@ instance GoogleRequest EventsImport' where
           = go _eCalendarId _eSupportsAttachments
               (Just AltJSON)
               _ePayload
-              appsCalendarService
+              appsCalendar
           where go
                   = buildClient (Proxy :: Proxy EventsImportResource)
                       mempty

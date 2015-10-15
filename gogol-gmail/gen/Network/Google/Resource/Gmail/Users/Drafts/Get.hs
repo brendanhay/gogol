@@ -99,7 +99,7 @@ instance GoogleRequest UsersDraftsGet' where
         requestClient UsersDraftsGet'{..}
           = go _udgUserId _udgId (Just _udgFormat)
               (Just AltJSON)
-              gmailService
+              gmail
           where go
                   = buildClient (Proxy :: Proxy UsersDraftsGetResource)
                       mempty

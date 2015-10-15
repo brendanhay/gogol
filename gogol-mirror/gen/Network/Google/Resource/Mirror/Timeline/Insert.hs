@@ -84,7 +84,7 @@ tiMedia = lens _tiMedia (\ s a -> s{_tiMedia = a})
 instance GoogleRequest TimelineInsert' where
         type Rs TimelineInsert' = TimelineItem
         requestClient TimelineInsert'{..}
-          = go (Just AltJSON) _tiPayload _tiMedia mirrorService
+          = go (Just AltJSON) _tiPayload _tiMedia mirror
           where go
                   = buildClient (Proxy :: Proxy TimelineInsertResource)
                       mempty

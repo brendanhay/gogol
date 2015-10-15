@@ -94,7 +94,7 @@ instance GoogleRequest AccountsContainersMacrosList'
              ListMacrosResponse
         requestClient AccountsContainersMacrosList'{..}
           = go _acmlAccountId _acmlContainerId (Just AltJSON)
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsContainersMacrosListResource)

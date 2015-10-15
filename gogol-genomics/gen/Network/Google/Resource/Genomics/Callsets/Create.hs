@@ -160,7 +160,7 @@ instance GoogleRequest CallsetsCreate' where
               _ccCallback
               (Just AltJSON)
               _ccPayload
-              genomicsService
+              genomics
           where go
                   = buildClient (Proxy :: Proxy CallsetsCreateResource)
                       mempty

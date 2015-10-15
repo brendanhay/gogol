@@ -178,7 +178,7 @@ instance GoogleRequest ProjectsTopicsCreate' where
               _ptcCallback
               (Just AltJSON)
               _ptcPayload
-              pubSubService
+              pubSub
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsTopicsCreateResource)

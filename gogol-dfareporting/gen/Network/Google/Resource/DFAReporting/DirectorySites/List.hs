@@ -252,7 +252,7 @@ instance GoogleRequest DirectorySitesList' where
               _dslParentId
               _dslDfpNetworkCode
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy DirectorySitesListResource)

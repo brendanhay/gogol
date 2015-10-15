@@ -20,7 +20,7 @@
 module Network.Google.Discovery
     (
     -- * Service Configuration
-      discoveryService
+      discovery
 
     -- * API Declaration
     , DiscoveryAPI

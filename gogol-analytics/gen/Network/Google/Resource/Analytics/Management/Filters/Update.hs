@@ -102,7 +102,7 @@ instance GoogleRequest ManagementFiltersUpdate' where
         requestClient ManagementFiltersUpdate'{..}
           = go _mfuAccountId _mfuFilterId (Just AltJSON)
               _mfuPayload
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementFiltersUpdateResource)

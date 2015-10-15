@@ -89,8 +89,7 @@ dcDatasetId
 instance GoogleRequest DatasetsCommit' where
         type Rs DatasetsCommit' = CommitResponse
         requestClient DatasetsCommit'{..}
-          = go _dcDatasetId (Just AltJSON) _dcPayload
-              datastoreService
+          = go _dcDatasetId (Just AltJSON) _dcPayload datastore
           where go
                   = buildClient (Proxy :: Proxy DatasetsCommitResource)
                       mempty

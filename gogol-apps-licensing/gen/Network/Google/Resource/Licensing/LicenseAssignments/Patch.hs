@@ -114,7 +114,7 @@ instance GoogleRequest LicenseAssignmentsPatch' where
           = go _lapProductId _lapSKUId _lapUserId
               (Just AltJSON)
               _lapPayload
-              appsLicensingService
+              appsLicensing
           where go
                   = buildClient
                       (Proxy :: Proxy LicenseAssignmentsPatchResource)

@@ -118,7 +118,7 @@ instance GoogleRequest InstanceGroupsSetNamedPorts'
           = go _igsnpProject _igsnpZone _igsnpInstanceGroup
               (Just AltJSON)
               _igsnpPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceGroupsSetNamedPortsResource)

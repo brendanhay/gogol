@@ -90,7 +90,7 @@ instance GoogleRequest AccountsSavedadstylesGet'
         type Rs AccountsSavedadstylesGet' = SavedAdStyle
         requestClient AccountsSavedadstylesGet'{..}
           = go _asgAccountId _asgSavedAdStyleId (Just AltJSON)
-              adSenseService
+              adSense
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsSavedadstylesGetResource)

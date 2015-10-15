@@ -113,7 +113,7 @@ instance GoogleRequest CommentsGet' where
         requestClient CommentsGet'{..}
           = go _cgBlogId _cgPostId _cgCommentId _cgView
               (Just AltJSON)
-              bloggerService
+              blogger
           where go
                   = buildClient (Proxy :: Proxy CommentsGetResource)
                       mempty

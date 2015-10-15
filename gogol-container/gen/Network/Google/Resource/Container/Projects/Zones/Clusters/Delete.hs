@@ -199,7 +199,7 @@ instance GoogleRequest ProjectsZonesClustersDelete'
               _pzcdBearerToken
               _pzcdCallback
               (Just AltJSON)
-              containerService
+              container
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsZonesClustersDeleteResource)

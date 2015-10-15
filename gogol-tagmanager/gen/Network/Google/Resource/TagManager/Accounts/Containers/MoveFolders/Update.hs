@@ -151,7 +151,7 @@ instance GoogleRequest
               (_acmfuVariableId ^. _Default)
               (_acmfuTagId ^. _Default)
               (Just AltJSON)
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy ::

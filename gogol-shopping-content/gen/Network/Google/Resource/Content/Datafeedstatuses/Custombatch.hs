@@ -77,7 +77,7 @@ instance GoogleRequest DatafeedstatusesCustombatch'
         type Rs DatafeedstatusesCustombatch' =
              DatafeedstatusesCustomBatchResponse
         requestClient DatafeedstatusesCustombatch'{..}
-          = go (Just AltJSON) _dcPayload shoppingContentService
+          = go (Just AltJSON) _dcPayload shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy DatafeedstatusesCustombatchResource)

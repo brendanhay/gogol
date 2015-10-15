@@ -139,7 +139,7 @@ instance GoogleRequest PlayListsInsert' where
               _pliOnBehalfOfContentOwnerChannel
               (Just AltJSON)
               _pliPayload
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy PlayListsInsertResource)

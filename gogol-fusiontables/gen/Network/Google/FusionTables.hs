@@ -19,7 +19,7 @@
 module Network.Google.FusionTables
     (
     -- * Service Configuration
-      fusionTablesService
+      fusionTables
 
     -- * API Declaration
     , FusionTablesAPI

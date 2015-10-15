@@ -84,7 +84,7 @@ rId = lens _rId (\ s a -> s{_rId = a})
 instance GoogleRequest RastersPatch' where
         type Rs RastersPatch' = ()
         requestClient RastersPatch'{..}
-          = go _rId (Just AltJSON) _rPayload mapsEngineService
+          = go _rId (Just AltJSON) _rPayload mapsEngine
           where go
                   = buildClient (Proxy :: Proxy RastersPatchResource)
                       mempty

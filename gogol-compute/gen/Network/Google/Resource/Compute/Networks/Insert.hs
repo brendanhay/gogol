@@ -89,8 +89,7 @@ niPayload
 instance GoogleRequest NetworksInsert' where
         type Rs NetworksInsert' = Operation
         requestClient NetworksInsert'{..}
-          = go _niProject (Just AltJSON) _niPayload
-              computeService
+          = go _niProject (Just AltJSON) _niPayload compute
           where go
                   = buildClient (Proxy :: Proxy NetworksInsertResource)
                       mempty

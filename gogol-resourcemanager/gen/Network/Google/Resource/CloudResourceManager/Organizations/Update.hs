@@ -177,7 +177,7 @@ instance GoogleRequest OrganizationsUpdate' where
               _ouCallback
               (Just AltJSON)
               _ouPayload
-              resourceManagerService
+              resourceManager
           where go
                   = buildClient
                       (Proxy :: Proxy OrganizationsUpdateResource)

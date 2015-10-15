@@ -76,7 +76,7 @@ updUserKey
 instance GoogleRequest UsersPhotosDelete' where
         type Rs UsersPhotosDelete' = ()
         requestClient UsersPhotosDelete'{..}
-          = go _updUserKey (Just AltJSON) directoryService
+          = go _updUserKey (Just AltJSON) directory
           where go
                   = buildClient
                       (Proxy :: Proxy UsersPhotosDeleteResource)

@@ -106,7 +106,7 @@ instance GoogleRequest EventsQuickAdd' where
           = go _eqaCalendarId (Just _eqaText)
               _eqaSendNotifications
               (Just AltJSON)
-              appsCalendarService
+              appsCalendar
           where go
                   = buildClient (Proxy :: Proxy EventsQuickAddResource)
                       mempty

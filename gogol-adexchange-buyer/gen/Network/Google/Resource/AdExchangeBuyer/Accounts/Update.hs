@@ -85,8 +85,7 @@ auId = lens _auId (\ s a -> s{_auId = a})
 instance GoogleRequest AccountsUpdate' where
         type Rs AccountsUpdate' = Account
         requestClient AccountsUpdate'{..}
-          = go _auId (Just AltJSON) _auPayload
-              adExchangeBuyerService
+          = go _auId (Just AltJSON) _auPayload adExchangeBuyer
           where go
                   = buildClient (Proxy :: Proxy AccountsUpdateResource)
                       mempty

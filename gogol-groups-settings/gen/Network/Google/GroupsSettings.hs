@@ -19,7 +19,7 @@
 module Network.Google.GroupsSettings
     (
     -- * Service Configuration
-      groupsSettingsService
+      groupsSettings
 
     -- * API Declaration
     , GroupsSettingsAPI

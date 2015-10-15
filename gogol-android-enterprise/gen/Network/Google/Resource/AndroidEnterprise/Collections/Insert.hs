@@ -89,7 +89,7 @@ instance GoogleRequest CollectionsInsert' where
         type Rs CollectionsInsert' = Collection
         requestClient CollectionsInsert'{..}
           = go _ciEnterpriseId (Just AltJSON) _ciPayload
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient
                       (Proxy :: Proxy CollectionsInsertResource)

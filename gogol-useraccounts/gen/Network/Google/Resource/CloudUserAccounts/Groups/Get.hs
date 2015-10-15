@@ -88,7 +88,7 @@ instance GoogleRequest GroupsGet' where
         type Rs GroupsGet' = Group
         requestClient GroupsGet'{..}
           = go _ggProject _ggGroupName (Just AltJSON)
-              userAccountsService
+              userAccounts
           where go
                   = buildClient (Proxy :: Proxy GroupsGetResource)
                       mempty

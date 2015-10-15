@@ -88,7 +88,7 @@ instance GoogleRequest PretargetingConfigDelete'
         type Rs PretargetingConfigDelete' = ()
         requestClient PretargetingConfigDelete'{..}
           = go _pcdAccountId _pcdConfigId (Just AltJSON)
-              adExchangeBuyerService
+              adExchangeBuyer
           where go
                   = buildClient
                       (Proxy :: Proxy PretargetingConfigDeleteResource)

@@ -99,7 +99,7 @@ instance GoogleRequest TasksUpdate' where
         type Rs TasksUpdate' = Task
         requestClient TasksUpdate'{..}
           = go _tuTaskList _tuTask (Just AltJSON) _tuPayload
-              appsTasksService
+              appsTasks
           where go
                   = buildClient (Proxy :: Proxy TasksUpdateResource)
                       mempty

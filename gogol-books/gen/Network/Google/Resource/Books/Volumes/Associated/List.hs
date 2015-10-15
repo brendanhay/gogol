@@ -131,7 +131,7 @@ instance GoogleRequest VolumesAssociatedList' where
               _valSource
               _valAssociation
               (Just AltJSON)
-              booksService
+              books
           where go
                   = buildClient
                       (Proxy :: Proxy VolumesAssociatedListResource)

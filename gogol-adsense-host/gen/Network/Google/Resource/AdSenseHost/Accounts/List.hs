@@ -78,8 +78,7 @@ alFilterAdClientId
 instance GoogleRequest AccountsList' where
         type Rs AccountsList' = Accounts
         requestClient AccountsList'{..}
-          = go _alFilterAdClientId (Just AltJSON)
-              adSenseHostService
+          = go _alFilterAdClientId (Just AltJSON) adSenseHost
           where go
                   = buildClient (Proxy :: Proxy AccountsListResource)
                       mempty

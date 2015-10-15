@@ -105,7 +105,7 @@ instance GoogleRequest AccountsContainersTagsDelete'
         requestClient AccountsContainersTagsDelete'{..}
           = go _actdcAccountId _actdcContainerId _actdcTagId
               (Just AltJSON)
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsContainersTagsDeleteResource)

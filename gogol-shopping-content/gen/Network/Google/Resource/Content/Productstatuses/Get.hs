@@ -88,7 +88,7 @@ instance GoogleRequest ProductstatusesGet' where
         type Rs ProductstatusesGet' = ProductStatus
         requestClient ProductstatusesGet'{..}
           = go _pggMerchantId _pggProductId (Just AltJSON)
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy ProductstatusesGetResource)

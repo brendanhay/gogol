@@ -164,7 +164,7 @@ instance GoogleRequest VariantsSearch' where
               _vsCallback
               (Just AltJSON)
               _vsPayload
-              genomicsService
+              genomics
           where go
                   = buildClient (Proxy :: Proxy VariantsSearchResource)
                       mempty

@@ -137,7 +137,7 @@ instance GoogleRequest
               _ccalPageToken
               _ccalMaxResults
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy ::

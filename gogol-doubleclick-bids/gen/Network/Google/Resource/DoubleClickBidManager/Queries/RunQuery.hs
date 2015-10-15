@@ -87,7 +87,7 @@ instance GoogleRequest QueriesRunQuery' where
         type Rs QueriesRunQuery' = ()
         requestClient QueriesRunQuery'{..}
           = go _qrqQueryId (Just AltJSON) _qrqPayload
-              doubleClickBidsService
+              doubleClickBids
           where go
                   = buildClient
                       (Proxy :: Proxy QueriesRunQueryResource)

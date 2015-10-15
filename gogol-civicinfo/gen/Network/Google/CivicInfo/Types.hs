@@ -16,7 +16,7 @@
 module Network.Google.CivicInfo.Types
     (
     -- * Service Configuration
-      civicInfoService
+      civicInfo
 
     -- * RepresentativeInfoResponseDivisions
     , RepresentativeInfoResponseDivisions
@@ -251,8 +251,8 @@ import           Network.Google.CivicInfo.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google Civic Information API. This contains the host and root path used as a starting point for constructing service requests.
-civicInfoService :: Service
-civicInfoService
+civicInfo :: Service
+civicInfo
   = defaultService (ServiceId "civicinfo:v2")
       "www.googleapis.com"
       "civicinfo/v2/"

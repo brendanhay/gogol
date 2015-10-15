@@ -538,7 +538,7 @@ instance GoogleRequest CompaniesList' where
               _clRequestMetadataTrafficSourceTrafficSourceId
               _clCallback
               (Just AltJSON)
-              partnersService
+              partners
           where go
                   = buildClient (Proxy :: Proxy CompaniesListResource)
                       mempty

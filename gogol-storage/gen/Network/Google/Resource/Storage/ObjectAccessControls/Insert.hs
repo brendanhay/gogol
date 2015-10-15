@@ -120,7 +120,7 @@ instance GoogleRequest ObjectAccessControlsInsert'
           = go _oaciBucket _oaciObject _oaciGeneration
               (Just AltJSON)
               _oaciPayload
-              storageService
+              storage
           where go
                   = buildClient
                       (Proxy :: Proxy ObjectAccessControlsInsertResource)

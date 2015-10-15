@@ -121,7 +121,7 @@ instance GoogleRequest EditsExpansionFilesGet' where
           = go _eefgPackageName _eefgEditId _eefgAPKVersionCode
               _eefgExpansionFileType
               (Just AltJSON)
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy EditsExpansionFilesGetResource)

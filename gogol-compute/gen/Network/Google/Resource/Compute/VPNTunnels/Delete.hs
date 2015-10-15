@@ -101,7 +101,7 @@ instance GoogleRequest VPNTunnelsDelete' where
         requestClient VPNTunnelsDelete'{..}
           = go _vtdProject _vtdRegion _vtdVPNTunnel
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy VPNTunnelsDeleteResource)

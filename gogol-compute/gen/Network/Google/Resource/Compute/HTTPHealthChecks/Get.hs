@@ -92,7 +92,7 @@ instance GoogleRequest HTTPHealthChecksGet' where
         requestClient HTTPHealthChecksGet'{..}
           = go _httphcgProject _httphcgHTTPHealthCheck
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy HTTPHealthChecksGetResource)

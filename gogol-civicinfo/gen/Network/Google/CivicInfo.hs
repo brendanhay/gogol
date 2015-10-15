@@ -19,7 +19,7 @@
 module Network.Google.CivicInfo
     (
     -- * Service Configuration
-      civicInfoService
+      civicInfo
 
     -- * API Declaration
     , CivicInfoAPI

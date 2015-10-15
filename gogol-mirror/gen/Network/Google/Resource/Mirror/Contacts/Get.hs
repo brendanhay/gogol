@@ -73,7 +73,7 @@ cgId = lens _cgId (\ s a -> s{_cgId = a})
 instance GoogleRequest ContactsGet' where
         type Rs ContactsGet' = Contact
         requestClient ContactsGet'{..}
-          = go _cgId (Just AltJSON) mirrorService
+          = go _cgId (Just AltJSON) mirror
           where go
                   = buildClient (Proxy :: Proxy ContactsGetResource)
                       mempty

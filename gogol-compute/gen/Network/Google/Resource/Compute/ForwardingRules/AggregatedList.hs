@@ -128,7 +128,7 @@ instance GoogleRequest ForwardingRulesAggregatedList'
           = go _fralProject _fralFilter _fralPageToken
               (Just _fralMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy ::

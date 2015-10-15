@@ -116,7 +116,7 @@ instance GoogleRequest MediaInsert' where
           = go _miUserId _miCollection (Just AltJSON)
               _miPayload
               _miMedia
-              plusDomainsService
+              plusDomains
           where go
                   = buildClient (Proxy :: Proxy MediaInsertResource)
                       mempty

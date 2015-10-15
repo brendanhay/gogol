@@ -128,7 +128,7 @@ instance GoogleRequest
           = go _goalProject _goalFilter _goalPageToken
               (Just _goalMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy ::

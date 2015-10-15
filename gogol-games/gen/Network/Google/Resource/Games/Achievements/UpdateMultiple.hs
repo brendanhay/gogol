@@ -78,7 +78,7 @@ instance GoogleRequest AchievementsUpdateMultiple'
         type Rs AchievementsUpdateMultiple' =
              AchievementUpdateMultipleResponse
         requestClient AchievementsUpdateMultiple'{..}
-          = go (Just AltJSON) _aumPayload gamesService
+          = go (Just AltJSON) _aumPayload games
           where go
                   = buildClient
                       (Proxy :: Proxy AchievementsUpdateMultipleResource)

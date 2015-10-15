@@ -121,7 +121,7 @@ instance GoogleRequest TablesPatch' where
           = go _tpProjectId _tpDatasetId _tpTableId
               (Just AltJSON)
               _tpPayload
-              bigQueryService
+              bigQuery
           where go
                   = buildClient (Proxy :: Proxy TablesPatchResource)
                       mempty

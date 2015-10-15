@@ -86,8 +86,7 @@ tmaId = lens _tmaId (\ s a -> s{_tmaId = a})
 instance GoogleRequest TrainedModelsAnalyze' where
         type Rs TrainedModelsAnalyze' = Analyze
         requestClient TrainedModelsAnalyze'{..}
-          = go _tmaProject _tmaId (Just AltJSON)
-              predictionService
+          = go _tmaProject _tmaId (Just AltJSON) prediction
           where go
                   = buildClient
                       (Proxy :: Proxy TrainedModelsAnalyzeResource)

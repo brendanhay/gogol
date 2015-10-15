@@ -87,8 +87,7 @@ pddPageId
 instance GoogleRequest PagesDelete' where
         type Rs PagesDelete' = ()
         requestClient PagesDelete'{..}
-          = go _pddBlogId _pddPageId (Just AltJSON)
-              bloggerService
+          = go _pddBlogId _pddPageId (Just AltJSON) blogger
           where go
                   = buildClient (Proxy :: Proxy PagesDeleteResource)
                       mempty

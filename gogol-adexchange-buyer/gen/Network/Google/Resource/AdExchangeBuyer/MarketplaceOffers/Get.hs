@@ -75,8 +75,7 @@ mogOfferId
 instance GoogleRequest MarketplaceOffersGet' where
         type Rs MarketplaceOffersGet' = MarketplaceOffer
         requestClient MarketplaceOffersGet'{..}
-          = go _mogOfferId (Just AltJSON)
-              adExchangeBuyerService
+          = go _mogOfferId (Just AltJSON) adExchangeBuyer
           where go
                   = buildClient
                       (Proxy :: Proxy MarketplaceOffersGetResource)

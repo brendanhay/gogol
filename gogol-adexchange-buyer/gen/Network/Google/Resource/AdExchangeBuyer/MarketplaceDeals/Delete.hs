@@ -91,7 +91,7 @@ instance GoogleRequest MarketplaceDealsDelete' where
              DeleteOrderDealsResponse
         requestClient MarketplaceDealsDelete'{..}
           = go _mddOrderId (Just AltJSON) _mddPayload
-              adExchangeBuyerService
+              adExchangeBuyer
           where go
                   = buildClient
                       (Proxy :: Proxy MarketplaceDealsDeleteResource)

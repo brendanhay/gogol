@@ -142,7 +142,7 @@ instance GoogleRequest LiveStreamsInsert' where
               _lsiOnBehalfOfContentOwnerChannel
               (Just AltJSON)
               _lsiPayload
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy LiveStreamsInsertResource)

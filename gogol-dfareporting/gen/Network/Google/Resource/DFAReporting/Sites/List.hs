@@ -281,7 +281,7 @@ instance GoogleRequest SitesList' where
               _sitAdWordsSite
               _sitMaxResults
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient (Proxy :: Proxy SitesListResource)
                       mempty

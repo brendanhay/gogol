@@ -89,7 +89,7 @@ instance GoogleRequest BackendServicesDelete' where
         type Rs BackendServicesDelete' = Operation
         requestClient BackendServicesDelete'{..}
           = go _bsdProject _bsdBackendService (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy BackendServicesDeleteResource)

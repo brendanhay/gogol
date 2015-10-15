@@ -88,7 +88,7 @@ instance GoogleRequest AdvertisersInsert' where
         type Rs AdvertisersInsert' = Advertiser
         requestClient AdvertisersInsert'{..}
           = go _aiiProFileId (Just AltJSON) _aiiPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy AdvertisersInsertResource)

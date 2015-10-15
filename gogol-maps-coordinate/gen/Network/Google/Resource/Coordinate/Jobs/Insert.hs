@@ -205,7 +205,7 @@ instance GoogleRequest JobsInsert' where
               (_jiCustomField ^. _Default)
               (Just AltJSON)
               _jiPayload
-              mapsCoordinateService
+              mapsCoordinate
           where go
                   = buildClient (Proxy :: Proxy JobsInsertResource)
                       mempty

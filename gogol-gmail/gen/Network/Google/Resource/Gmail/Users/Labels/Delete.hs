@@ -88,7 +88,7 @@ uldId = lens _uldId (\ s a -> s{_uldId = a})
 instance GoogleRequest UsersLabelsDelete' where
         type Rs UsersLabelsDelete' = ()
         requestClient UsersLabelsDelete'{..}
-          = go _uldUserId _uldId (Just AltJSON) gmailService
+          = go _uldUserId _uldId (Just AltJSON) gmail
           where go
                   = buildClient
                       (Proxy :: Proxy UsersLabelsDeleteResource)

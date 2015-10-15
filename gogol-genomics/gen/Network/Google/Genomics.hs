@@ -20,7 +20,7 @@
 module Network.Google.Genomics
     (
     -- * Service Configuration
-      genomicsService
+      genomics
 
     -- * API Declaration
     , GenomicsAPI

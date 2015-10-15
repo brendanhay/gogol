@@ -106,7 +106,7 @@ instance GoogleRequest BucketAccessControlsUpdate'
         requestClient BucketAccessControlsUpdate'{..}
           = go _bacuBucket _bacuEntity (Just AltJSON)
               _bacuPayload
-              storageService
+              storage
           where go
                   = buildClient
                       (Proxy :: Proxy BucketAccessControlsUpdateResource)

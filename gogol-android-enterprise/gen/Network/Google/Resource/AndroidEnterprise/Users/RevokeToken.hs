@@ -90,7 +90,7 @@ instance GoogleRequest UsersRevokeToken' where
         type Rs UsersRevokeToken' = ()
         requestClient UsersRevokeToken'{..}
           = go _urtEnterpriseId _urtUserId (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient
                       (Proxy :: Proxy UsersRevokeTokenResource)

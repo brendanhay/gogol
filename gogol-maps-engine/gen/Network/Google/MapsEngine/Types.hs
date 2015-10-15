@@ -16,7 +16,7 @@
 module Network.Google.MapsEngine.Types
     (
     -- * Service Configuration
-      mapsEngineService
+      mapsEngine
 
     -- * OAuth Scopes
     , mapsengineScope
@@ -763,16 +763,16 @@ import           Network.Google.MapsEngine.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Maps Engine API. This contains the host and root path used as a starting point for constructing service requests.
-mapsEngineService :: Service
-mapsEngineService
+mapsEngine :: Service
+mapsEngine
   = defaultService (ServiceId "mapsengine:v1")
       "www.googleapis.com"
       "mapsengine/v1/"
 
 -- | View and manage your Google My Maps data
 mapsengineScope :: OAuthScope
-mapsengineScope = OAuthScope "https://www.googleapis.com/auth/mapsengine";
+mapsengineScope = "https://www.googleapis.com/auth/mapsengine";
 
 -- | View your Google My Maps data
 mapsengineReadonlyScope :: OAuthScope
-mapsengineReadonlyScope = OAuthScope "https://www.googleapis.com/auth/mapsengine.readonly";
+mapsengineReadonlyScope = "https://www.googleapis.com/auth/mapsengine.readonly";

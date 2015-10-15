@@ -113,7 +113,7 @@ instance GoogleRequest CommentsSetModerationStatus'
           = go (Just _csmsId) (Just _csmsModerationStatus)
               (Just _csmsBanAuthor)
               (Just AltJSON)
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy CommentsSetModerationStatusResource)

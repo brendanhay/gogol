@@ -96,7 +96,7 @@ instance GoogleRequest ReportsGetFile' where
         type Rs ReportsGetFile' = ()
         requestClient ReportsGetFile'{..}
           = go _rgfReportId _rgfReportFragment (Just AltJSON)
-              doubleClickSearchService
+              doubleClickSearch
           where go :<|> _
                   = buildClient (Proxy :: Proxy ReportsGetFileResource)
                       mempty
@@ -106,7 +106,7 @@ instance GoogleRequest
         type Rs (MediaDownload ReportsGetFile') = Stream
         requestClient (MediaDownload ReportsGetFile'{..})
           = go _rgfReportId _rgfReportFragment (Just AltMedia)
-              doubleClickSearchService
+              doubleClickSearch
           where _ :<|> go
                   = buildClient (Proxy :: Proxy ReportsGetFileResource)
                       mempty

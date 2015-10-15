@@ -122,7 +122,7 @@ instance GoogleRequest CreativeFieldValuesPatch'
               (Just _cfvpId)
               (Just AltJSON)
               _cfvpPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy CreativeFieldValuesPatchResource)

@@ -160,7 +160,7 @@ instance GoogleRequest DatasetsGet' where
               _dgBearerToken
               _dgCallback
               (Just AltJSON)
-              genomicsService
+              genomics
           where go
                   = buildClient (Proxy :: Proxy DatasetsGetResource)
                       mempty

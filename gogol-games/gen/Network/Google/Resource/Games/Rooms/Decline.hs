@@ -87,8 +87,7 @@ rdLanguage
 instance GoogleRequest RoomsDecline' where
         type Rs RoomsDecline' = Room
         requestClient RoomsDecline'{..}
-          = go _rdRoomId _rdLanguage (Just AltJSON)
-              gamesService
+          = go _rdRoomId _rdLanguage (Just AltJSON) games
           where go
                   = buildClient (Proxy :: Proxy RoomsDeclineResource)
                       mempty

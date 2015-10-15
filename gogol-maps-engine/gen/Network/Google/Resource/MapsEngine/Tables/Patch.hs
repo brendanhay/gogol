@@ -85,8 +85,7 @@ tpId = lens _tpId (\ s a -> s{_tpId = a})
 instance GoogleRequest TablesPatch' where
         type Rs TablesPatch' = ()
         requestClient TablesPatch'{..}
-          = go _tpId (Just AltJSON) _tpPayload
-              mapsEngineService
+          = go _tpId (Just AltJSON) _tpPayload mapsEngine
           where go
                   = buildClient (Proxy :: Proxy TablesPatchResource)
                       mempty

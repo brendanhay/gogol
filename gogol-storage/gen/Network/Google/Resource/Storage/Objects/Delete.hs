@@ -160,7 +160,7 @@ instance GoogleRequest ObjectsDelete' where
               _odIfMetagenerationNotMatch
               _odGeneration
               (Just AltJSON)
-              storageService
+              storage
           where go
                   = buildClient (Proxy :: Proxy ObjectsDeleteResource)
                       mempty

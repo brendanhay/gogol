@@ -75,7 +75,7 @@ mPqlQuery
 instance GoogleRequest MarketplaceOrdersSearch' where
         type Rs MarketplaceOrdersSearch' = GetOrdersResponse
         requestClient MarketplaceOrdersSearch'{..}
-          = go _mPqlQuery (Just AltJSON) adExchangeBuyerService
+          = go _mPqlQuery (Just AltJSON) adExchangeBuyer
           where go
                   = buildClient
                       (Proxy :: Proxy MarketplaceOrdersSearchResource)

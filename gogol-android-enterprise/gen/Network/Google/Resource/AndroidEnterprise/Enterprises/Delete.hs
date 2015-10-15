@@ -82,7 +82,7 @@ instance GoogleRequest EnterprisesDelete' where
         type Rs EnterprisesDelete' = ()
         requestClient EnterprisesDelete'{..}
           = go _eddEnterpriseId (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient
                       (Proxy :: Proxy EnterprisesDeleteResource)

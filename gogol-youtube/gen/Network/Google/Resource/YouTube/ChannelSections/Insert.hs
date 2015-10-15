@@ -141,7 +141,7 @@ instance GoogleRequest ChannelSectionsInsert' where
               _csiOnBehalfOfContentOwnerChannel
               (Just AltJSON)
               _csiPayload
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy ChannelSectionsInsertResource)

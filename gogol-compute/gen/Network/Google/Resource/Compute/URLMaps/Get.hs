@@ -87,8 +87,7 @@ umgProject
 instance GoogleRequest URLMapsGet' where
         type Rs URLMapsGet' = URLMap
         requestClient URLMapsGet'{..}
-          = go _umgProject _umgURLMap (Just AltJSON)
-              computeService
+          = go _umgProject _umgURLMap (Just AltJSON) compute
           where go
                   = buildClient (Proxy :: Proxy URLMapsGetResource)
                       mempty

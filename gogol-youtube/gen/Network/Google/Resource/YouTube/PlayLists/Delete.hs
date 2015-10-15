@@ -98,7 +98,7 @@ instance GoogleRequest PlayListsDelete' where
         requestClient PlayListsDelete'{..}
           = go (Just _pldId) _pldOnBehalfOfContentOwner
               (Just AltJSON)
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy PlayListsDeleteResource)

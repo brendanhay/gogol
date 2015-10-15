@@ -170,7 +170,7 @@ instance GoogleRequest ProjectsSubscriptionsDelete'
               _psdBearerToken
               _psdCallback
               (Just AltJSON)
-              pubSubService
+              pubSub
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsSubscriptionsDeleteResource)

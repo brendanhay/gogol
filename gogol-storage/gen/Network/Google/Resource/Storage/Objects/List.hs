@@ -152,7 +152,7 @@ instance GoogleRequest ObjectsList' where
               _olDelimiter
               _olMaxResults
               (Just AltJSON)
-              storageService
+              storage
           where go
                   = buildClient (Proxy :: Proxy ObjectsListResource)
                       mempty

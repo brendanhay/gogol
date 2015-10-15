@@ -178,7 +178,7 @@ instance GoogleRequest InvitationsCreate' where
               _icCallback
               (Just AltJSON)
               _icPayload
-              classroomService
+              classroom
           where go
                   = buildClient
                       (Proxy :: Proxy InvitationsCreateResource)

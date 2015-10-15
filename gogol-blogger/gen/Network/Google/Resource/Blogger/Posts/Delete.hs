@@ -85,8 +85,7 @@ pdPostId = lens _pdPostId (\ s a -> s{_pdPostId = a})
 instance GoogleRequest PostsDelete' where
         type Rs PostsDelete' = ()
         requestClient PostsDelete'{..}
-          = go _pdBlogId _pdPostId (Just AltJSON)
-              bloggerService
+          = go _pdBlogId _pdPostId (Just AltJSON) blogger
           where go
                   = buildClient (Proxy :: Proxy PostsDeleteResource)
                       mempty

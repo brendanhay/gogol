@@ -103,7 +103,7 @@ instance GoogleRequest DatabasesInsert' where
         type Rs DatabasesInsert' = Operation
         requestClient DatabasesInsert'{..}
           = go _diProject _diInstance (Just AltJSON) _diPayload
-              sQLAdminService
+              sQLAdmin
           where go
                   = buildClient
                       (Proxy :: Proxy DatabasesInsertResource)

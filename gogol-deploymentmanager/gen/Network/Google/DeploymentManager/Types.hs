@@ -16,7 +16,7 @@
 module Network.Google.DeploymentManager.Types
     (
     -- * Service Configuration
-      deploymentManagerService
+      deploymentManager
 
     -- * OAuth Scopes
     , cloudPlatformReadOnlyScope
@@ -252,26 +252,26 @@ import           Network.Google.DeploymentManager.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google Cloud Deployment Manager API. This contains the host and root path used as a starting point for constructing service requests.
-deploymentManagerService :: Service
-deploymentManagerService
+deploymentManager :: Service
+deploymentManager
   = defaultService (ServiceId "deploymentmanager:v2")
       "www.googleapis.com"
       "deploymentmanager/v2/projects/"
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: OAuthScope
-cloudPlatformReadOnlyScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform.read-only";
+cloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope
-cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
 
 -- | View and manage your Google Cloud Platform management resources and
 -- deployment status information
 ndevCloudmanScope :: OAuthScope
-ndevCloudmanScope = OAuthScope "https://www.googleapis.com/auth/ndev.cloudman";
+ndevCloudmanScope = "https://www.googleapis.com/auth/ndev.cloudman";
 
 -- | View your Google Cloud Platform management resources and deployment
 -- status information
 ndevCloudmanReadonlyScope :: OAuthScope
-ndevCloudmanReadonlyScope = OAuthScope "https://www.googleapis.com/auth/ndev.cloudman.readonly";
+ndevCloudmanReadonlyScope = "https://www.googleapis.com/auth/ndev.cloudman.readonly";

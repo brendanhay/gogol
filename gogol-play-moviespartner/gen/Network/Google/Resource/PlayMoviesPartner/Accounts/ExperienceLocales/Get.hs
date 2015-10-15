@@ -183,7 +183,7 @@ instance GoogleRequest AccountsExperienceLocalesGet'
               _aelgBearerToken
               _aelgCallback
               (Just AltJSON)
-              playMoviesPartnerService
+              playMoviesPartner
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsExperienceLocalesGetResource)

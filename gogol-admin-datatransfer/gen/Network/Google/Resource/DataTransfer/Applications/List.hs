@@ -98,7 +98,7 @@ instance GoogleRequest ApplicationsList' where
         requestClient ApplicationsList'{..}
           = go _alCustomerId _alPageToken _alMaxResults
               (Just AltJSON)
-              dataTransferService
+              dataTransfer
           where go
                   = buildClient
                       (Proxy :: Proxy ApplicationsListResource)

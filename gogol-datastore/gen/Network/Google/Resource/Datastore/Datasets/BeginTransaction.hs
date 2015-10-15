@@ -90,7 +90,7 @@ instance GoogleRequest DatasetsBeginTransaction'
              BeginTransactionResponse
         requestClient DatasetsBeginTransaction'{..}
           = go _dbtDatasetId (Just AltJSON) _dbtPayload
-              datastoreService
+              datastore
           where go
                   = buildClient
                       (Proxy :: Proxy DatasetsBeginTransactionResource)

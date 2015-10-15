@@ -138,7 +138,7 @@ instance GoogleRequest UsersHistoryList' where
               _uhlLabelId
               (Just _uhlMaxResults)
               (Just AltJSON)
-              gmailService
+              gmail
           where go
                   = buildClient
                       (Proxy :: Proxy UsersHistoryListResource)

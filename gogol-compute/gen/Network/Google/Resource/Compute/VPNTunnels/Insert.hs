@@ -103,7 +103,7 @@ instance GoogleRequest VPNTunnelsInsert' where
         requestClient VPNTunnelsInsert'{..}
           = go _vtiProject _vtiRegion (Just AltJSON)
               _vtiPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy VPNTunnelsInsertResource)

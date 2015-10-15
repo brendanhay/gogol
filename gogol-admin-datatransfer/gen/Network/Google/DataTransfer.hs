@@ -20,7 +20,7 @@
 module Network.Google.DataTransfer
     (
     -- * Service Configuration
-      dataTransferService
+      dataTransfer
 
     -- * API Declaration
     , DataTransferAPI

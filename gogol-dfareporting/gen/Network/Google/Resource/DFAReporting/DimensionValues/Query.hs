@@ -115,7 +115,7 @@ instance GoogleRequest DimensionValuesQuery' where
           = go _dvqProFileId _dvqPageToken _dvqMaxResults
               (Just AltJSON)
               _dvqPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy DimensionValuesQueryResource)

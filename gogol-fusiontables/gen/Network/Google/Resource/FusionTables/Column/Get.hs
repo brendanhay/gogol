@@ -88,7 +88,7 @@ instance GoogleRequest ColumnGet' where
         type Rs ColumnGet' = Column
         requestClient ColumnGet'{..}
           = go _cgTableId _cgColumnId (Just AltJSON)
-              fusionTablesService
+              fusionTables
           where go
                   = buildClient (Proxy :: Proxy ColumnGetResource)
                       mempty

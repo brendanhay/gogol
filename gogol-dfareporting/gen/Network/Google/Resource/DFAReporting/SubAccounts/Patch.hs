@@ -101,7 +101,7 @@ instance GoogleRequest SubAccountsPatch' where
         requestClient SubAccountsPatch'{..}
           = go _sapProFileId (Just _sapId) (Just AltJSON)
               _sapPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy SubAccountsPatchResource)

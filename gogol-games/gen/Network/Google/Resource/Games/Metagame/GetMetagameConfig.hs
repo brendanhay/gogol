@@ -61,7 +61,7 @@ instance GoogleRequest MetagameGetMetagameConfig'
          where
         type Rs MetagameGetMetagameConfig' = MetagameConfig
         requestClient MetagameGetMetagameConfig'{}
-          = go (Just AltJSON) gamesService
+          = go (Just AltJSON) games
           where go
                   = buildClient
                       (Proxy :: Proxy MetagameGetMetagameConfigResource)

@@ -73,7 +73,7 @@ lgId = lens _lgId (\ s a -> s{_lgId = a})
 instance GoogleRequest LocationsGet' where
         type Rs LocationsGet' = Location
         requestClient LocationsGet'{..}
-          = go _lgId (Just AltJSON) mirrorService
+          = go _lgId (Just AltJSON) mirror
           where go
                   = buildClient (Proxy :: Proxy LocationsGetResource)
                       mempty

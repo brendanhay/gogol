@@ -104,7 +104,7 @@ instance GoogleRequest EditsListingsDelete' where
         requestClient EditsListingsDelete'{..}
           = go _eldPackageName _eldEditId _eldLanguage
               (Just AltJSON)
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy EditsListingsDeleteResource)

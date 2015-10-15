@@ -76,7 +76,7 @@ instance GoogleRequest RasterCollectionsProcess'
          where
         type Rs RasterCollectionsProcess' = ProcessResponse
         requestClient RasterCollectionsProcess'{..}
-          = go _rcpcId (Just AltJSON) mapsEngineService
+          = go _rcpcId (Just AltJSON) mapsEngine
           where go
                   = buildClient
                       (Proxy :: Proxy RasterCollectionsProcessResource)

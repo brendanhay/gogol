@@ -175,7 +175,7 @@ instance GoogleRequest FilesCopy' where
               (Just _fcOCR)
               (Just AltJSON)
               _fcPayload
-              driveService
+              drive
           where go
                   = buildClient (Proxy :: Proxy FilesCopyResource)
                       mempty

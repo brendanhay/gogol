@@ -166,7 +166,7 @@ instance GoogleRequest InvitationsDelete' where
               _idBearerToken
               _idCallback
               (Just AltJSON)
-              classroomService
+              classroom
           where go
                   = buildClient
                       (Proxy :: Proxy InvitationsDeleteResource)

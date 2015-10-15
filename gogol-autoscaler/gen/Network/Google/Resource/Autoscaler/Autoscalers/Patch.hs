@@ -115,7 +115,7 @@ instance GoogleRequest AutoscalersPatch' where
         requestClient AutoscalersPatch'{..}
           = go _apProject _apZone _apAutoscaler (Just AltJSON)
               _apPayload
-              autoscalerService
+              autoscaler
           where go
                   = buildClient
                       (Proxy :: Proxy AutoscalersPatchResource)

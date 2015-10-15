@@ -116,7 +116,7 @@ instance GoogleRequest TasksMove' where
         requestClient TasksMove'{..}
           = go _tmTaskList _tmTask _tmParent _tmPrevious
               (Just AltJSON)
-              appsTasksService
+              appsTasks
           where go
                   = buildClient (Proxy :: Proxy TasksMoveResource)
                       mempty

@@ -93,7 +93,7 @@ instance GoogleRequest SubscriptionsStartPaidService'
         requestClient SubscriptionsStartPaidService'{..}
           = go _sspsCustomerId _sspsSubscriptionId
               (Just AltJSON)
-              appsResellerService
+              appsReseller
           where go
                   = buildClient
                       (Proxy ::

@@ -103,7 +103,7 @@ instance GoogleRequest AdvertiserGroupsPatch' where
         requestClient AdvertiserGroupsPatch'{..}
           = go _agpProFileId (Just _agpId) (Just AltJSON)
               _agpPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy AdvertiserGroupsPatchResource)

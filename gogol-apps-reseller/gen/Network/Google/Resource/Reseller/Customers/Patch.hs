@@ -89,7 +89,7 @@ instance GoogleRequest CustomersPatch' where
         type Rs CustomersPatch' = Customer
         requestClient CustomersPatch'{..}
           = go _cpCustomerId (Just AltJSON) _cpPayload
-              appsResellerService
+              appsReseller
           where go
                   = buildClient (Proxy :: Proxy CustomersPatchResource)
                       mempty

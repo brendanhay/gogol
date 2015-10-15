@@ -92,7 +92,7 @@ instance GoogleRequest AccountsPermissionsDelete'
         type Rs AccountsPermissionsDelete' = ()
         requestClient AccountsPermissionsDelete'{..}
           = go _apdAccountId _apdPermissionId (Just AltJSON)
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsPermissionsDeleteResource)

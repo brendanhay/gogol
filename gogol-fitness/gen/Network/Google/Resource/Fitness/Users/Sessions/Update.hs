@@ -114,7 +114,7 @@ instance GoogleRequest UsersSessionsUpdate' where
           = go _usuUserId _usuSessionId _usuCurrentTimeMillis
               (Just AltJSON)
               _usuPayload
-              fitnessService
+              fitness
           where go
                   = buildClient
                       (Proxy :: Proxy UsersSessionsUpdateResource)

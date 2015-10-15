@@ -115,7 +115,7 @@ instance GoogleRequest VideoCategoriesList' where
           = go (Just _vclPart) _vclRegionCode (Just _vclHl)
               _vclId
               (Just AltJSON)
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy VideoCategoriesListResource)

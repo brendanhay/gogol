@@ -85,8 +85,7 @@ sSnapshotId
 instance GoogleRequest SnapshotsGet' where
         type Rs SnapshotsGet' = Snapshot
         requestClient SnapshotsGet'{..}
-          = go _sSnapshotId _sLanguage (Just AltJSON)
-              gamesService
+          = go _sSnapshotId _sLanguage (Just AltJSON) games
           where go
                   = buildClient (Proxy :: Proxy SnapshotsGetResource)
                       mempty

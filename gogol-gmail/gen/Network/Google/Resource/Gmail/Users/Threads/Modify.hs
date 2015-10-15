@@ -103,7 +103,7 @@ instance GoogleRequest UsersThreadsModify' where
         type Rs UsersThreadsModify' = Thread
         requestClient UsersThreadsModify'{..}
           = go _utmUserId _utmId (Just AltJSON) _utmPayload
-              gmailService
+              gmail
           where go
                   = buildClient
                       (Proxy :: Proxy UsersThreadsModifyResource)

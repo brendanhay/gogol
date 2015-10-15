@@ -101,7 +101,7 @@ instance GoogleRequest OrderDocumentsGet' where
         requestClient OrderDocumentsGet'{..}
           = go _odgProFileId _odgProjectId _odgId
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy OrderDocumentsGetResource)

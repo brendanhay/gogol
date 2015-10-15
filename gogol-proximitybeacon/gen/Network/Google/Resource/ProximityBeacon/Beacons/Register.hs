@@ -164,7 +164,7 @@ instance GoogleRequest BeaconsRegister' where
               _brCallback
               (Just AltJSON)
               _brPayload
-              proximityBeaconService
+              proximityBeacon
           where go
                   = buildClient
                       (Proxy :: Proxy BeaconsRegisterResource)

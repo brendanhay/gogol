@@ -75,7 +75,7 @@ instance GoogleRequest MyLibraryBookshelvesList'
          where
         type Rs MyLibraryBookshelvesList' = Bookshelves
         requestClient MyLibraryBookshelvesList'{..}
-          = go _mlblSource (Just AltJSON) booksService
+          = go _mlblSource (Just AltJSON) books
           where go
                   = buildClient
                       (Proxy :: Proxy MyLibraryBookshelvesListResource)

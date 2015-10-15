@@ -16,7 +16,7 @@
 module Network.Google.GamesConfiguration.Types
     (
     -- * Service Configuration
-      gamesConfigurationService
+      gamesConfiguration
 
     -- * OAuth Scopes
     , androidpublisherScope
@@ -126,8 +126,8 @@ import           Network.Google.GamesConfiguration.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1configuration' of the Google Play Game Services Publishing API. This contains the host and root path used as a starting point for constructing service requests.
-gamesConfigurationService :: Service
-gamesConfigurationService
+gamesConfiguration :: Service
+gamesConfiguration
   = defaultService
       (ServiceId "gamesConfiguration:v1configuration")
       "www.googleapis.com"
@@ -135,4 +135,4 @@ gamesConfigurationService
 
 -- | View and manage your Google Play Developer account
 androidpublisherScope :: OAuthScope
-androidpublisherScope = OAuthScope "https://www.googleapis.com/auth/androidpublisher";
+androidpublisherScope = "https://www.googleapis.com/auth/androidpublisher";

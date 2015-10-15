@@ -199,7 +199,7 @@ instance GoogleRequest
               _plssdBearerToken
               _plssdCallback
               (Just AltJSON)
-              loggingService
+              logging
           where go
                   = buildClient
                       (Proxy ::

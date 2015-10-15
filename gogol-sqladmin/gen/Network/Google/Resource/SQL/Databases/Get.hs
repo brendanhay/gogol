@@ -104,7 +104,7 @@ instance GoogleRequest DatabasesGet' where
         requestClient DatabasesGet'{..}
           = go _dgProject _dgInstance _dgDatabase
               (Just AltJSON)
-              sQLAdminService
+              sQLAdmin
           where go
                   = buildClient (Proxy :: Proxy DatabasesGetResource)
                       mempty

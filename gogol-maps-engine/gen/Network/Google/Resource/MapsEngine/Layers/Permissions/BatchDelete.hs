@@ -90,8 +90,7 @@ instance GoogleRequest LayersPermissionsBatchDelete'
         type Rs LayersPermissionsBatchDelete' =
              PermissionsBatchDeleteResponse
         requestClient LayersPermissionsBatchDelete'{..}
-          = go _lpbdId (Just AltJSON) _lpbdPayload
-              mapsEngineService
+          = go _lpbdId (Just AltJSON) _lpbdPayload mapsEngine
           where go
                   = buildClient
                       (Proxy :: Proxy LayersPermissionsBatchDeleteResource)

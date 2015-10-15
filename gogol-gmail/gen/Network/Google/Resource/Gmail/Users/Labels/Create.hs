@@ -87,8 +87,7 @@ ulcUserId
 instance GoogleRequest UsersLabelsCreate' where
         type Rs UsersLabelsCreate' = Label
         requestClient UsersLabelsCreate'{..}
-          = go _ulcUserId (Just AltJSON) _ulcPayload
-              gmailService
+          = go _ulcUserId (Just AltJSON) _ulcPayload gmail
           where go
                   = buildClient
                       (Proxy :: Proxy UsersLabelsCreateResource)

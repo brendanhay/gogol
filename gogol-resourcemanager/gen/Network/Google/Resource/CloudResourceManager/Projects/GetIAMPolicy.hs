@@ -177,7 +177,7 @@ instance GoogleRequest ProjectsGetIAMPolicy' where
               _pgipCallback
               (Just AltJSON)
               _pgipPayload
-              resourceManagerService
+              resourceManager
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsGetIAMPolicyResource)

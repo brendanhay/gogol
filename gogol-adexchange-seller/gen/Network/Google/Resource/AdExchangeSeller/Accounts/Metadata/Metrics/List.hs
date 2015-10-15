@@ -78,8 +78,7 @@ instance GoogleRequest AccountsMetadataMetricsList'
          where
         type Rs AccountsMetadataMetricsList' = Metadata
         requestClient AccountsMetadataMetricsList'{..}
-          = go _ammlAccountId (Just AltJSON)
-              adExchangeSellerService
+          = go _ammlAccountId (Just AltJSON) adExchangeSeller
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsMetadataMetricsListResource)

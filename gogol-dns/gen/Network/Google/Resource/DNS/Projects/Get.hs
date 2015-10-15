@@ -73,7 +73,7 @@ pgProject
 instance GoogleRequest ProjectsGet' where
         type Rs ProjectsGet' = Project
         requestClient ProjectsGet'{..}
-          = go _pgProject (Just AltJSON) dNSService
+          = go _pgProject (Just AltJSON) dNS
           where go
                   = buildClient (Proxy :: Proxy ProjectsGetResource)
                       mempty

@@ -130,7 +130,7 @@ instance GoogleRequest TargetHTTPProxiesList' where
           = go _thttpplProject _thttpplFilter _thttpplPageToken
               (Just _thttpplMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy TargetHTTPProxiesListResource)

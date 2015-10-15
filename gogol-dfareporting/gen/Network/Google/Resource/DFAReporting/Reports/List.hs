@@ -134,7 +134,7 @@ instance GoogleRequest ReportsList' where
               (Just _rSortField)
               _rMaxResults
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient (Proxy :: Proxy ReportsListResource)
                       mempty

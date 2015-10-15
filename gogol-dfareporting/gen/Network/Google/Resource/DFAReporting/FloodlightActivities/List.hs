@@ -271,7 +271,7 @@ instance GoogleRequest FloodlightActivitiesList'
               _falSortField
               _falMaxResults
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy FloodlightActivitiesListResource)

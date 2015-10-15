@@ -97,7 +97,7 @@ instance GoogleRequest PagesGet' where
         type Rs PagesGet' = Page
         requestClient PagesGet'{..}
           = go _pggBlogId _pggPageId _pggView (Just AltJSON)
-              bloggerService
+              blogger
           where go
                   = buildClient (Proxy :: Proxy PagesGetResource)
                       mempty

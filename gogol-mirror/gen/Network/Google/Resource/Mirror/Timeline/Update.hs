@@ -95,8 +95,7 @@ tuId = lens _tuId (\ s a -> s{_tuId = a})
 instance GoogleRequest TimelineUpdate' where
         type Rs TimelineUpdate' = TimelineItem
         requestClient TimelineUpdate'{..}
-          = go _tuId (Just AltJSON) _tuPayload _tuMedia
-              mirrorService
+          = go _tuId (Just AltJSON) _tuPayload _tuMedia mirror
           where go
                   = buildClient (Proxy :: Proxy TimelineUpdateResource)
                       mempty

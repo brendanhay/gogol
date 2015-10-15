@@ -90,8 +90,7 @@ itiPayload
 instance GoogleRequest InstanceTemplatesInsert' where
         type Rs InstanceTemplatesInsert' = Operation
         requestClient InstanceTemplatesInsert'{..}
-          = go _itiProject (Just AltJSON) _itiPayload
-              computeService
+          = go _itiProject (Just AltJSON) _itiPayload compute
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceTemplatesInsertResource)

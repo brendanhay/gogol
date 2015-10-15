@@ -125,7 +125,7 @@ instance GoogleRequest DisksAggregatedList' where
           = go _dalProject _dalFilter _dalPageToken
               (Just _dalMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy DisksAggregatedListResource)

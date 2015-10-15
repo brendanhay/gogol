@@ -75,7 +75,7 @@ olPayload
 instance GoogleRequest OffersList' where
         type Rs OffersList' = ListOffersResponse
         requestClient OffersList'{..}
-          = go (Just AltJSON) _olPayload adExchangeBuyerService
+          = go (Just AltJSON) _olPayload adExchangeBuyer
           where go
                   = buildClient (Proxy :: Proxy OffersListResource)
                       mempty

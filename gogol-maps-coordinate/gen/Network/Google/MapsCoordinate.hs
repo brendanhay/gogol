@@ -19,7 +19,7 @@
 module Network.Google.MapsCoordinate
     (
     -- * Service Configuration
-      mapsCoordinateService
+      mapsCoordinate
 
     -- * API Declaration
     , MapsCoordinateAPI

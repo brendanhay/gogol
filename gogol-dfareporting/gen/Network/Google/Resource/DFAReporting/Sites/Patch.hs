@@ -100,7 +100,7 @@ instance GoogleRequest SitesPatch' where
         requestClient SitesPatch'{..}
           = go _spProFileId (Just _spId) (Just AltJSON)
               _spPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient (Proxy :: Proxy SitesPatchResource)
                       mempty

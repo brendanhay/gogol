@@ -161,7 +161,7 @@ instance GoogleRequest OperationsGet' where
               _ogBearerToken
               _ogCallback
               (Just AltJSON)
-              genomicsService
+              genomics
           where go
                   = buildClient (Proxy :: Proxy OperationsGetResource)
                       mempty

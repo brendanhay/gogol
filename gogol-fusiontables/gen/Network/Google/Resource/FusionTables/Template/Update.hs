@@ -102,7 +102,7 @@ instance GoogleRequest TemplateUpdate' where
         requestClient TemplateUpdate'{..}
           = go _temTableId _temTemplateId (Just AltJSON)
               _temPayload
-              fusionTablesService
+              fusionTables
           where go
                   = buildClient (Proxy :: Proxy TemplateUpdateResource)
                       mempty

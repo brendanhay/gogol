@@ -230,7 +230,7 @@ instance GoogleRequest VideosList' where
               _vlPageToken
               (Just _vlMaxResults)
               (Just AltJSON)
-              youTubeService
+              youTube
           where go
                   = buildClient (Proxy :: Proxy VideosListResource)
                       mempty

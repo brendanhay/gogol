@@ -61,7 +61,7 @@ accountsAuthInfo' = AccountsAuthInfo'
 instance GoogleRequest AccountsAuthInfo' where
         type Rs AccountsAuthInfo' = AccountsAuthInfoResponse
         requestClient AccountsAuthInfo'{}
-          = go (Just AltJSON) shoppingContentService
+          = go (Just AltJSON) shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsAuthInfoResource)

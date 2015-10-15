@@ -123,7 +123,7 @@ instance GoogleRequest ProductsGenerateApprovalURL'
           = go _pgauEnterpriseId _pgauProductId
               _pgauLanguageCode
               (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient
                       (Proxy :: Proxy ProductsGenerateApprovalURLResource)

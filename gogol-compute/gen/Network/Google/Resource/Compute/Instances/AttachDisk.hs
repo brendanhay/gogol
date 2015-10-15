@@ -114,7 +114,7 @@ instance GoogleRequest InstancesAttachDisk' where
         requestClient InstancesAttachDisk'{..}
           = go _iadProject _iadZone _iadInstance (Just AltJSON)
               _iadPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesAttachDiskResource)

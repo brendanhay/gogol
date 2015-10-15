@@ -87,8 +87,7 @@ upUserKey
 instance GoogleRequest UsersPatch' where
         type Rs UsersPatch' = User
         requestClient UsersPatch'{..}
-          = go _upUserKey (Just AltJSON) _upPayload
-              directoryService
+          = go _upUserKey (Just AltJSON) _upPayload directory
           where go
                   = buildClient (Proxy :: Proxy UsersPatchResource)
                       mempty

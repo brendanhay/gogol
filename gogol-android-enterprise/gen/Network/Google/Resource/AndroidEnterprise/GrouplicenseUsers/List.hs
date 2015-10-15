@@ -97,7 +97,7 @@ instance GoogleRequest GrouplicenseUsersList' where
         requestClient GrouplicenseUsersList'{..}
           = go _gulEnterpriseId _gulGroupLicenseId
               (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient
                       (Proxy :: Proxy GrouplicenseUsersListResource)

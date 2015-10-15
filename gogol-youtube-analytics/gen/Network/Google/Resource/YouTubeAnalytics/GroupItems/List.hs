@@ -101,7 +101,7 @@ instance GoogleRequest GroupItemsList' where
         requestClient GroupItemsList'{..}
           = go (Just _gilGroupId) _gilOnBehalfOfContentOwner
               (Just AltJSON)
-              youTubeAnalyticsService
+              youTubeAnalytics
           where go
                   = buildClient (Proxy :: Proxy GroupItemsListResource)
                       mempty

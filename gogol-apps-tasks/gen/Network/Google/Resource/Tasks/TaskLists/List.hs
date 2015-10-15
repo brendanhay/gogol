@@ -89,7 +89,7 @@ instance GoogleRequest TaskListsList' where
         type Rs TaskListsList' = TaskLists
         requestClient TaskListsList'{..}
           = go _tllPageToken _tllMaxResults (Just AltJSON)
-              appsTasksService
+              appsTasks
           where go
                   = buildClient (Proxy :: Proxy TaskListsListResource)
                       mempty

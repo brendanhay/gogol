@@ -86,8 +86,7 @@ dsgId = lens _dsgId (\ s a -> s{_dsgId = a})
 instance GoogleRequest DirectorySitesGet' where
         type Rs DirectorySitesGet' = DirectorySite
         requestClient DirectorySitesGet'{..}
-          = go _dsgProFileId _dsgId (Just AltJSON)
-              dFAReportingService
+          = go _dsgProFileId _dsgId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy DirectorySitesGetResource)

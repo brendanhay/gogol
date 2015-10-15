@@ -89,7 +89,7 @@ instance GoogleRequest SubscriptionsGet' where
         type Rs SubscriptionsGet' = Subscription
         requestClient SubscriptionsGet'{..}
           = go _sgCustomerId _sgSubscriptionId (Just AltJSON)
-              appsResellerService
+              appsReseller
           where go
                   = buildClient
                       (Proxy :: Proxy SubscriptionsGetResource)

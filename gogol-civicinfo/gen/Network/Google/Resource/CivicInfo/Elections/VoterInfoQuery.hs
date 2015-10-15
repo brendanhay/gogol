@@ -106,7 +106,7 @@ instance GoogleRequest ElectionsVoterInfoQuery' where
           = go (Just _eviqAddress) (Just _eviqElectionId)
               (Just _eviqOfficialOnly)
               (Just AltJSON)
-              civicInfoService
+              civicInfo
           where go
                   = buildClient
                       (Proxy :: Proxy ElectionsVoterInfoQueryResource)

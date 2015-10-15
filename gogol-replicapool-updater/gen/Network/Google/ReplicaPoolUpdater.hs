@@ -20,7 +20,7 @@
 module Network.Google.ReplicaPoolUpdater
     (
     -- * Service Configuration
-      replicaPoolUpdaterService
+      replicaPoolUpdater
 
     -- * API Declaration
     , ReplicaPoolUpdaterAPI

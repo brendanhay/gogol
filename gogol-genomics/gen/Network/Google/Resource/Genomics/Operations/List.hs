@@ -200,7 +200,7 @@ instance GoogleRequest OperationsList' where
               _olPageSize
               _olCallback
               (Just AltJSON)
-              genomicsService
+              genomics
           where go
                   = buildClient (Proxy :: Proxy OperationsListResource)
                       mempty

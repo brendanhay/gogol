@@ -102,7 +102,7 @@ instance GoogleRequest ManagementFiltersPatch' where
         requestClient ManagementFiltersPatch'{..}
           = go _mfpAccountId _mfpFilterId (Just AltJSON)
               _mfpPayload
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementFiltersPatchResource)

@@ -90,7 +90,7 @@ instance GoogleRequest SitemapsDelete' where
         type Rs SitemapsDelete' = ()
         requestClient SitemapsDelete'{..}
           = go _sitSiteURL _sitFeedpath (Just AltJSON)
-              webmasterToolsService
+              webmasterTools
           where go
                   = buildClient (Proxy :: Proxy SitemapsDeleteResource)
                       mempty

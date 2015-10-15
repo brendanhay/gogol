@@ -119,7 +119,7 @@ instance GoogleRequest EventsMove' where
           = go _emCalendarId _emEventId (Just _emDestination)
               _emSendNotifications
               (Just AltJSON)
-              appsCalendarService
+              appsCalendar
           where go
                   = buildClient (Proxy :: Proxy EventsMoveResource)
                       mempty

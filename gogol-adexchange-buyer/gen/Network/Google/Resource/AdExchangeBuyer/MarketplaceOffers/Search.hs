@@ -75,8 +75,7 @@ mosPqlQuery
 instance GoogleRequest MarketplaceOffersSearch' where
         type Rs MarketplaceOffersSearch' = GetOffersResponse
         requestClient MarketplaceOffersSearch'{..}
-          = go _mosPqlQuery (Just AltJSON)
-              adExchangeBuyerService
+          = go _mosPqlQuery (Just AltJSON) adExchangeBuyer
           where go
                   = buildClient
                       (Proxy :: Proxy MarketplaceOffersSearchResource)

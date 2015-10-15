@@ -86,8 +86,7 @@ agId = lens _agId (\ s a -> s{_agId = a})
 instance GoogleRequest AdvertisersGet' where
         type Rs AdvertisersGet' = Advertiser
         requestClient AdvertisersGet'{..}
-          = go _agProFileId _agId (Just AltJSON)
-              dFAReportingService
+          = go _agProFileId _agId (Just AltJSON) dFAReporting
           where go
                   = buildClient (Proxy :: Proxy AdvertisersGetResource)
                       mempty

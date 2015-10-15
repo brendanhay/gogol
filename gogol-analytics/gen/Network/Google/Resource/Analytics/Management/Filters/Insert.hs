@@ -89,7 +89,7 @@ instance GoogleRequest ManagementFiltersInsert' where
         type Rs ManagementFiltersInsert' = Filter
         requestClient ManagementFiltersInsert'{..}
           = go _mfiAccountId (Just AltJSON) _mfiPayload
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementFiltersInsertResource)

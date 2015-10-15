@@ -102,7 +102,7 @@ instance GoogleRequest DevicesGet' where
         requestClient DevicesGet'{..}
           = go _dgEnterpriseId _dgUserId _dgDeviceId
               (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient (Proxy :: Proxy DevicesGetResource)
                       mempty

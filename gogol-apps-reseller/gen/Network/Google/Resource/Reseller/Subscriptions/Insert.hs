@@ -105,7 +105,7 @@ instance GoogleRequest SubscriptionsInsert' where
           = go _siCustomerId _siCustomerAuthToken
               (Just AltJSON)
               _siPayload
-              appsResellerService
+              appsReseller
           where go
                   = buildClient
                       (Proxy :: Proxy SubscriptionsInsertResource)

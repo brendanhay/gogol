@@ -90,7 +90,7 @@ instance GoogleRequest ReportsSavedList' where
         type Rs ReportsSavedList' = SavedReports
         requestClient ReportsSavedList'{..}
           = go _rslPageToken _rslMaxResults (Just AltJSON)
-              adSenseService
+              adSense
           where go
                   = buildClient
                       (Proxy :: Proxy ReportsSavedListResource)

@@ -135,7 +135,7 @@ instance GoogleRequest CustomChannelsAdUnitsList'
               _ccaulPageToken
               _ccaulMaxResults
               (Just AltJSON)
-              adSenseService
+              adSense
           where go
                   = buildClient
                       (Proxy :: Proxy CustomChannelsAdUnitsListResource)

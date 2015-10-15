@@ -16,7 +16,7 @@
 module Network.Google.MapsCoordinate.Types
     (
     -- * Service Configuration
-      mapsCoordinateService
+      mapsCoordinate
 
     -- * OAuth Scopes
     , coordinateScope
@@ -172,16 +172,16 @@ import           Network.Google.MapsCoordinate.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Maps Coordinate API. This contains the host and root path used as a starting point for constructing service requests.
-mapsCoordinateService :: Service
-mapsCoordinateService
+mapsCoordinate :: Service
+mapsCoordinate
   = defaultService (ServiceId "coordinate:v1")
       "www.googleapis.com"
       "coordinate/v1/"
 
 -- | View and manage your Google Maps Coordinate jobs
 coordinateScope :: OAuthScope
-coordinateScope = OAuthScope "https://www.googleapis.com/auth/coordinate";
+coordinateScope = "https://www.googleapis.com/auth/coordinate";
 
 -- | View your Google Coordinate jobs
 coordinateReadonlyScope :: OAuthScope
-coordinateReadonlyScope = OAuthScope "https://www.googleapis.com/auth/coordinate.readonly";
+coordinateReadonlyScope = "https://www.googleapis.com/auth/coordinate.readonly";

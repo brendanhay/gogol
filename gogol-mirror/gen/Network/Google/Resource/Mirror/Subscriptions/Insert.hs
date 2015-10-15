@@ -75,7 +75,7 @@ siPayload
 instance GoogleRequest SubscriptionsInsert' where
         type Rs SubscriptionsInsert' = Subscription
         requestClient SubscriptionsInsert'{..}
-          = go (Just AltJSON) _siPayload mirrorService
+          = go (Just AltJSON) _siPayload mirror
           where go
                   = buildClient
                       (Proxy :: Proxy SubscriptionsInsertResource)

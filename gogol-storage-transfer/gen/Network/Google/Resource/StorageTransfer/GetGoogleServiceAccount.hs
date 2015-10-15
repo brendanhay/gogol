@@ -176,7 +176,7 @@ instance GoogleRequest GetGoogleServiceAccount' where
               _ggsaProjectId
               _ggsaCallback
               (Just AltJSON)
-              storageTransferService
+              storageTransfer
           where go
                   = buildClient
                       (Proxy :: Proxy GetGoogleServiceAccountResource)

@@ -101,7 +101,7 @@ instance GoogleRequest TemplatePatch' where
         requestClient TemplatePatch'{..}
           = go _tpTableId _tpTemplateId (Just AltJSON)
               _tpPayload
-              fusionTablesService
+              fusionTables
           where go
                   = buildClient (Proxy :: Proxy TemplatePatchResource)
                       mempty

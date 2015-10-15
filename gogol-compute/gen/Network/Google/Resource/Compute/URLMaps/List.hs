@@ -126,7 +126,7 @@ instance GoogleRequest URLMapsList' where
           = go _umlProject _umlFilter _umlPageToken
               (Just _umlMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient (Proxy :: Proxy URLMapsListResource)
                       mempty

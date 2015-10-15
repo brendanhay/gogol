@@ -103,7 +103,7 @@ instance GoogleRequest CirclesList' where
         requestClient CirclesList'{..}
           = go _clUserId _clPageToken (Just _clMaxResults)
               (Just AltJSON)
-              plusDomainsService
+              plusDomains
           where go
                   = buildClient (Proxy :: Proxy CirclesListResource)
                       mempty

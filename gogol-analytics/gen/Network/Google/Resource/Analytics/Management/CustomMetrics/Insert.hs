@@ -107,7 +107,7 @@ instance GoogleRequest ManagementCustomMetricsInsert'
         requestClient ManagementCustomMetricsInsert'{..}
           = go _mcmiAccountId _mcmiWebPropertyId (Just AltJSON)
               _mcmiPayload
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy ::

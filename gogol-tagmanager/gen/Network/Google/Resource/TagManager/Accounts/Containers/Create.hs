@@ -89,7 +89,7 @@ instance GoogleRequest AccountsContainersCreate'
         type Rs AccountsContainersCreate' = Container
         requestClient AccountsContainersCreate'{..}
           = go _accAccountId (Just AltJSON) _accPayload
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsContainersCreateResource)

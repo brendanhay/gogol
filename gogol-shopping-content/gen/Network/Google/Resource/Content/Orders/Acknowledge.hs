@@ -103,7 +103,7 @@ instance GoogleRequest OrdersAcknowledge' where
         requestClient OrdersAcknowledge'{..}
           = go _oaMerchantId _oaOrderId (Just AltJSON)
               _oaPayload
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy OrdersAcknowledgeResource)

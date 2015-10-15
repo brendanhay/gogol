@@ -89,7 +89,7 @@ instance GoogleRequest CreativeGroupsInsert' where
         type Rs CreativeGroupsInsert' = CreativeGroup
         requestClient CreativeGroupsInsert'{..}
           = go _cgiProFileId (Just AltJSON) _cgiPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy CreativeGroupsInsertResource)

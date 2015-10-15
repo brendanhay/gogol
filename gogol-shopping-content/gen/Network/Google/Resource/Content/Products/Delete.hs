@@ -98,7 +98,7 @@ instance GoogleRequest ProductsDelete' where
         requestClient ProductsDelete'{..}
           = go _pdMerchantId _pdProductId _pdDryRun
               (Just AltJSON)
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient (Proxy :: Proxy ProductsDeleteResource)
                       mempty

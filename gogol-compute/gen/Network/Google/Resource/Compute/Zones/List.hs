@@ -121,7 +121,7 @@ instance GoogleRequest ZonesList' where
           = go _zlProject _zlFilter _zlPageToken
               (Just _zlMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient (Proxy :: Proxy ZonesListResource)
                       mempty

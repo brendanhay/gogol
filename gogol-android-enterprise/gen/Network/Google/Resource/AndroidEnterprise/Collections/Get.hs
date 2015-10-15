@@ -90,7 +90,7 @@ instance GoogleRequest CollectionsGet' where
         type Rs CollectionsGet' = Collection
         requestClient CollectionsGet'{..}
           = go _cggEnterpriseId _cggCollectionId (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient (Proxy :: Proxy CollectionsGetResource)
                       mempty

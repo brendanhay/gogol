@@ -182,7 +182,7 @@ instance GoogleRequest ProjectsTestIAMPermissions'
               _ptipCallback
               (Just AltJSON)
               _ptipPayload
-              resourceManagerService
+              resourceManager
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsTestIAMPermissionsResource)

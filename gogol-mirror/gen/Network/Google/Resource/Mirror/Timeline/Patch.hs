@@ -86,7 +86,7 @@ tpId = lens _tpId (\ s a -> s{_tpId = a})
 instance GoogleRequest TimelinePatch' where
         type Rs TimelinePatch' = TimelineItem
         requestClient TimelinePatch'{..}
-          = go _tpId (Just AltJSON) _tpPayload mirrorService
+          = go _tpId (Just AltJSON) _tpPayload mirror
           where go
                   = buildClient (Proxy :: Proxy TimelinePatchResource)
                       mempty

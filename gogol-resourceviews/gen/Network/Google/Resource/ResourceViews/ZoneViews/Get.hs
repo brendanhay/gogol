@@ -101,7 +101,7 @@ instance GoogleRequest ZoneViewsGet' where
         requestClient ZoneViewsGet'{..}
           = go _zvgProject _zvgZone _zvgResourceView
               (Just AltJSON)
-              resourceViewsService
+              resourceViews
           where go
                   = buildClient (Proxy :: Proxy ZoneViewsGetResource)
                       mempty

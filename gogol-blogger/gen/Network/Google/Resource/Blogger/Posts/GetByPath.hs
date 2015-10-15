@@ -113,7 +113,7 @@ instance GoogleRequest PostsGetByPath' where
           = go _pgbpBlogId (Just _pgbpPath) _pgbpMaxComments
               _pgbpView
               (Just AltJSON)
-              bloggerService
+              blogger
           where go
                   = buildClient (Proxy :: Proxy PostsGetByPathResource)
                       mempty

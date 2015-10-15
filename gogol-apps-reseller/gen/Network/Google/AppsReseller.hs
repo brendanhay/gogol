@@ -19,7 +19,7 @@
 module Network.Google.AppsReseller
     (
     -- * Service Configuration
-      appsResellerService
+      appsReseller
 
     -- * API Declaration
     , AppsResellerAPI

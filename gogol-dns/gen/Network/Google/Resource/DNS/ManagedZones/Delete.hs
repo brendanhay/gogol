@@ -88,8 +88,7 @@ mzdManagedZone
 instance GoogleRequest ManagedZonesDelete' where
         type Rs ManagedZonesDelete' = ()
         requestClient ManagedZonesDelete'{..}
-          = go _mzdProject _mzdManagedZone (Just AltJSON)
-              dNSService
+          = go _mzdProject _mzdManagedZone (Just AltJSON) dNS
           where go
                   = buildClient
                       (Proxy :: Proxy ManagedZonesDeleteResource)

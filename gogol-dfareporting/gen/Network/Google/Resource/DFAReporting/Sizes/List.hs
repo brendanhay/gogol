@@ -124,7 +124,7 @@ instance GoogleRequest SizesList' where
               _slWidth
               _slIabStandard
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient (Proxy :: Proxy SizesListResource)
                       mempty

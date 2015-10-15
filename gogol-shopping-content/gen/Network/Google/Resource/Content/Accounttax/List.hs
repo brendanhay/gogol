@@ -104,7 +104,7 @@ instance GoogleRequest AccounttaxList' where
         requestClient AccounttaxList'{..}
           = go _allMerchantId _allPageToken _allMaxResults
               (Just AltJSON)
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient (Proxy :: Proxy AccounttaxListResource)
                       mempty

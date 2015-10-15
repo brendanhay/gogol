@@ -87,8 +87,7 @@ gadAddress
 instance GoogleRequest GlobalAddressesDelete' where
         type Rs GlobalAddressesDelete' = Operation
         requestClient GlobalAddressesDelete'{..}
-          = go _gadProject _gadAddress (Just AltJSON)
-              computeService
+          = go _gadProject _gadAddress (Just AltJSON) compute
           where go
                   = buildClient
                       (Proxy :: Proxy GlobalAddressesDeleteResource)

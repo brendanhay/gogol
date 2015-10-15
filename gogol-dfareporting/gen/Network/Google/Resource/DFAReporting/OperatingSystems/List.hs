@@ -77,7 +77,7 @@ instance GoogleRequest OperatingSystemsList' where
         type Rs OperatingSystemsList' =
              OperatingSystemsListResponse
         requestClient OperatingSystemsList'{..}
-          = go _oslProFileId (Just AltJSON) dFAReportingService
+          = go _oslProFileId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy OperatingSystemsListResource)

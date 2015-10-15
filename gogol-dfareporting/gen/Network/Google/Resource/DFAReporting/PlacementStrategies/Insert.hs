@@ -91,7 +91,7 @@ instance GoogleRequest PlacementStrategiesInsert'
              PlacementStrategy
         requestClient PlacementStrategiesInsert'{..}
           = go _psiProFileId (Just AltJSON) _psiPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy PlacementStrategiesInsertResource)

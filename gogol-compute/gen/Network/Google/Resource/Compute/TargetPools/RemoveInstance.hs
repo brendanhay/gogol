@@ -117,7 +117,7 @@ instance GoogleRequest TargetPoolsRemoveInstance'
           = go _tpriProject _tpriRegion _tpriTargetPool
               (Just AltJSON)
               _tpriPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy TargetPoolsRemoveInstanceResource)

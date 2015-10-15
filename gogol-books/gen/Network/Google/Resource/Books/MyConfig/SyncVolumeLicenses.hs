@@ -162,7 +162,7 @@ instance GoogleRequest MyConfigSyncVolumeLicenses'
               (_mcsvlFeatures ^. _Default)
               _mcsvlShowPreOrders
               (Just AltJSON)
-              booksService
+              books
           where go
                   = buildClient
                       (Proxy :: Proxy MyConfigSyncVolumeLicensesResource)

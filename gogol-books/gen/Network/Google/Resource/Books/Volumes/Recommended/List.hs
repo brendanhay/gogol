@@ -104,7 +104,7 @@ instance GoogleRequest VolumesRecommendedList' where
           = go _vrlLocale _vrlMaxAllowedMaturityRating
               _vrlSource
               (Just AltJSON)
-              booksService
+              books
           where go
                   = buildClient
                       (Proxy :: Proxy VolumesRecommendedListResource)

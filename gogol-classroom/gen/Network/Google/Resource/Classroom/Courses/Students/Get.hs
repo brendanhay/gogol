@@ -187,7 +187,7 @@ instance GoogleRequest CoursesStudentsGet' where
               _csgBearerToken
               _csgCallback
               (Just AltJSON)
-              classroomService
+              classroom
           where go
                   = buildClient
                       (Proxy :: Proxy CoursesStudentsGetResource)

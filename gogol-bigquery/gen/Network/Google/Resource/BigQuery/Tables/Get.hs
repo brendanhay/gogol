@@ -106,7 +106,7 @@ instance GoogleRequest TablesGet' where
         requestClient TablesGet'{..}
           = go _tgProjectId _tgDatasetId _tgTableId
               (Just AltJSON)
-              bigQueryService
+              bigQuery
           where go
                   = buildClient (Proxy :: Proxy TablesGetResource)
                       mempty

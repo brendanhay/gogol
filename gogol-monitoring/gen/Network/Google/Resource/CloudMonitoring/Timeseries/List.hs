@@ -230,7 +230,7 @@ instance GoogleRequest TimeseriesList' where
               _tlPageToken
               (Just AltJSON)
               _tlPayload
-              monitoringService
+              monitoring
           where go
                   = buildClient (Proxy :: Proxy TimeseriesListResource)
                       mempty

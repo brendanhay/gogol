@@ -16,7 +16,7 @@
 module Network.Google.Spectrum.Types
     (
     -- * Service Configuration
-      spectrumService
+      spectrum
 
     -- * GeoLocationPolygon
     , GeoLocationPolygon
@@ -292,8 +292,8 @@ import           Network.Google.Spectrum.Types.Product
 import           Network.Google.Spectrum.Types.Sum
 
 -- | Default request referring to version 'v1explorer' of the Google Spectrum Database API. This contains the host and root path used as a starting point for constructing service requests.
-spectrumService :: Service
-spectrumService
+spectrum :: Service
+spectrum
   = defaultService (ServiceId "spectrum:v1explorer")
       "www.googleapis.com"
       "spectrum/v1explorer/paws/"

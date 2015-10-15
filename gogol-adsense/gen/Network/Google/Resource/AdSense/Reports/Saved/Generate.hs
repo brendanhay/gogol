@@ -118,7 +118,7 @@ instance GoogleRequest ReportsSavedGenerate' where
           = go _rsgSavedReportId _rsgLocale _rsgStartIndex
               _rsgMaxResults
               (Just AltJSON)
-              adSenseService
+              adSense
           where go
                   = buildClient
                       (Proxy :: Proxy ReportsSavedGenerateResource)

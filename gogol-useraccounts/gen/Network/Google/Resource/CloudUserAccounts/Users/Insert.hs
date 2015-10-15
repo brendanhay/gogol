@@ -90,7 +90,7 @@ instance GoogleRequest UsersInsert' where
         type Rs UsersInsert' = Operation
         requestClient UsersInsert'{..}
           = go _uiProject (Just AltJSON) _uiPayload
-              userAccountsService
+              userAccounts
           where go
                   = buildClient (Proxy :: Proxy UsersInsertResource)
                       mempty

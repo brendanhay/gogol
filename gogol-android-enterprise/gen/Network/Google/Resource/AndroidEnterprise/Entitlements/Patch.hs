@@ -134,7 +134,7 @@ instance GoogleRequest EntitlementsPatch' where
               _epInstall
               (Just AltJSON)
               _epPayload
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient
                       (Proxy :: Proxy EntitlementsPatchResource)

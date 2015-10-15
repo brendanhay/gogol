@@ -126,7 +126,7 @@ instance GoogleRequest AddressesAggregatedList' where
           = go _aalProject _aalFilter _aalPageToken
               (Just _aalMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy AddressesAggregatedListResource)

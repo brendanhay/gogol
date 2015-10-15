@@ -20,7 +20,7 @@
 module Network.Google.AndroidEnterprise
     (
     -- * Service Configuration
-      androidEnterpriseService
+      androidEnterprise
 
     -- * API Declaration
     , AndroidEnterpriseAPI

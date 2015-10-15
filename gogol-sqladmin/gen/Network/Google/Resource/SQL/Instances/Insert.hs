@@ -89,8 +89,7 @@ iiPayload
 instance GoogleRequest InstancesInsert' where
         type Rs InstancesInsert' = Operation
         requestClient InstancesInsert'{..}
-          = go _iiProject (Just AltJSON) _iiPayload
-              sQLAdminService
+          = go _iiProject (Just AltJSON) _iiPayload sQLAdmin
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesInsertResource)

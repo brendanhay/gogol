@@ -86,7 +86,7 @@ ciFileId = lens _ciFileId (\ s a -> s{_ciFileId = a})
 instance GoogleRequest CommentsInsert' where
         type Rs CommentsInsert' = Comment
         requestClient CommentsInsert'{..}
-          = go _ciFileId (Just AltJSON) _ciPayload driveService
+          = go _ciFileId (Just AltJSON) _ciPayload drive
           where go
                   = buildClient (Proxy :: Proxy CommentsInsertResource)
                       mempty

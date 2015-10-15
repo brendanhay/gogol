@@ -97,7 +97,7 @@ instance GoogleRequest CollectionviewersList' where
              CollectionViewersListResponse
         requestClient CollectionviewersList'{..}
           = go _clEnterpriseId _clCollectionId (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient
                       (Proxy :: Proxy CollectionviewersListResource)

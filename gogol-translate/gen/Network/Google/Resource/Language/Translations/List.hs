@@ -120,7 +120,7 @@ instance GoogleRequest TranslationsList' where
           = go _tlQ (Just _tlTarget) _tlFormat _tlSource
               (_tlCid ^. _Default)
               (Just AltJSON)
-              translateService
+              translate
           where go
                   = buildClient
                       (Proxy :: Proxy TranslationsListResource)

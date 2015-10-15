@@ -103,7 +103,7 @@ instance GoogleRequest ForwardingRulesGet' where
         requestClient ForwardingRulesGet'{..}
           = go _frgProject _frgRegion _frgForwardingRule
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy ForwardingRulesGetResource)

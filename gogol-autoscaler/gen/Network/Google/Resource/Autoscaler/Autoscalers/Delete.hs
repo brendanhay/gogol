@@ -100,7 +100,7 @@ instance GoogleRequest AutoscalersDelete' where
         type Rs AutoscalersDelete' = Operation
         requestClient AutoscalersDelete'{..}
           = go _adProject _adZone _adAutoscaler (Just AltJSON)
-              autoscalerService
+              autoscaler
           where go
                   = buildClient
                       (Proxy :: Proxy AutoscalersDeleteResource)

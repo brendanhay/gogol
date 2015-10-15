@@ -160,7 +160,7 @@ instance GoogleRequest DatasetsDelete' where
               _ddBearerToken
               _ddCallback
               (Just AltJSON)
-              genomicsService
+              genomics
           where go
                   = buildClient (Proxy :: Proxy DatasetsDeleteResource)
                       mempty

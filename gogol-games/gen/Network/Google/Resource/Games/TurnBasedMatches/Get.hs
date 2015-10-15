@@ -100,7 +100,7 @@ instance GoogleRequest TurnBasedMatchesGet' where
         requestClient TurnBasedMatchesGet'{..}
           = go _tbmgMatchId _tbmgIncludeMatchData _tbmgLanguage
               (Just AltJSON)
-              gamesService
+              games
           where go
                   = buildClient
                       (Proxy :: Proxy TurnBasedMatchesGetResource)

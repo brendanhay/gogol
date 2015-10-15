@@ -149,7 +149,7 @@ instance GoogleRequest FilesList' where
               _flPageToken
               (Just _flMaxResults)
               (Just AltJSON)
-              driveService
+              drive
           where go
                   = buildClient (Proxy :: Proxy FilesListResource)
                       mempty

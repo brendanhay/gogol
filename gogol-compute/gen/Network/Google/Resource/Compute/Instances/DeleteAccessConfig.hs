@@ -130,7 +130,7 @@ instance GoogleRequest InstancesDeleteAccessConfig'
               (Just _idacAccessConfig)
               (Just _idacNetworkInterface)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesDeleteAccessConfigResource)

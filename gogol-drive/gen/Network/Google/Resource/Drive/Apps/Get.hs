@@ -73,6 +73,6 @@ agAppId = lens _agAppId (\ s a -> s{_agAppId = a})
 instance GoogleRequest AppsGet' where
         type Rs AppsGet' = App
         requestClient AppsGet'{..}
-          = go _agAppId (Just AltJSON) driveService
+          = go _agAppId (Just AltJSON) drive
           where go
                   = buildClient (Proxy :: Proxy AppsGetResource) mempty

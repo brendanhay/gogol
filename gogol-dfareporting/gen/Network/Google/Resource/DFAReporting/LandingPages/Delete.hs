@@ -102,7 +102,7 @@ instance GoogleRequest LandingPagesDelete' where
         requestClient LandingPagesDelete'{..}
           = go _lpdProFileId _lpdCampaignId _lpdId
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy LandingPagesDeleteResource)

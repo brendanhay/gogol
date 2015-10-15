@@ -87,8 +87,7 @@ fgFirewall
 instance GoogleRequest FirewallsGet' where
         type Rs FirewallsGet' = Firewall
         requestClient FirewallsGet'{..}
-          = go _fgProject _fgFirewall (Just AltJSON)
-              computeService
+          = go _fgProject _fgFirewall (Just AltJSON) compute
           where go
                   = buildClient (Proxy :: Proxy FirewallsGetResource)
                       mempty

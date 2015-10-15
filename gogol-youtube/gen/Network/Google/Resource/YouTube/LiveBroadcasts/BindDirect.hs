@@ -165,7 +165,7 @@ instance GoogleRequest LiveBroadcastsBindDirect'
               _lbbdOnBehalfOfContentOwnerChannel
               _lbbdStreamId
               (Just AltJSON)
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy LiveBroadcastsBindDirectResource)

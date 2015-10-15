@@ -76,7 +76,7 @@ sgSetting
 instance GoogleRequest SettingsGet' where
         type Rs SettingsGet' = Setting
         requestClient SettingsGet'{..}
-          = go _sgSetting (Just AltJSON) appsCalendarService
+          = go _sgSetting (Just AltJSON) appsCalendar
           where go
                   = buildClient (Proxy :: Proxy SettingsGetResource)
                       mempty

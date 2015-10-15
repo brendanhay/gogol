@@ -154,7 +154,7 @@ instance GoogleRequest TableImportRows' where
               _tirIsStrict
               (Just AltJSON)
               _tirMedia
-              fusionTablesService
+              fusionTables
           where go
                   = buildClient
                       (Proxy :: Proxy TableImportRowsResource)

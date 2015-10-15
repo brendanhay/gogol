@@ -103,7 +103,7 @@ instance GoogleRequest TargetVPNGatewaysGet' where
         requestClient TargetVPNGatewaysGet'{..}
           = go _tvggProject _tvggRegion _tvggTargetVPNGateway
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy TargetVPNGatewaysGetResource)

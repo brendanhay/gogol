@@ -230,7 +230,7 @@ instance GoogleRequest ProjectsUpdateBillingInfo'
               _pubiCallback
               (Just AltJSON)
               _pubiPayload
-              billingService
+              billing
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsUpdateBillingInfoResource)

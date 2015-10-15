@@ -103,7 +103,7 @@ instance GoogleRequest RealtimeUpdate' where
         type Rs RealtimeUpdate' = ()
         requestClient RealtimeUpdate'{..}
           = go _rFileId _rBaseRevision (Just AltJSON) _rMedia
-              driveService
+              drive
           where go
                   = buildClient (Proxy :: Proxy RealtimeUpdateResource)
                       mempty

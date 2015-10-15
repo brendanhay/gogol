@@ -132,7 +132,7 @@ instance GoogleRequest InstanceGroupManagersList'
               _igmlPageToken
               (Just _igmlMaxResults)
               (Just AltJSON)
-              replicaPoolService
+              replicaPool
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceGroupManagersListResource)

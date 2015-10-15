@@ -103,7 +103,7 @@ instance GoogleRequest InstancesStart' where
         requestClient InstancesStart'{..}
           = go _insnProject _insnZone _insnInstance
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient (Proxy :: Proxy InstancesStartResource)
                       mempty

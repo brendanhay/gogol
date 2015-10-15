@@ -88,8 +88,7 @@ pagPageId
 instance GoogleRequest PagesRevert' where
         type Rs PagesRevert' = Page
         requestClient PagesRevert'{..}
-          = go _pagBlogId _pagPageId (Just AltJSON)
-              bloggerService
+          = go _pagBlogId _pagPageId (Just AltJSON) blogger
           where go
                   = buildClient (Proxy :: Proxy PagesRevertResource)
                       mempty

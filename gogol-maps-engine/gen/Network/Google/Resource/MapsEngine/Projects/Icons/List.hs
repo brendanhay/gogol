@@ -104,7 +104,7 @@ instance GoogleRequest ProjectsIconsList' where
         requestClient ProjectsIconsList'{..}
           = go _pilProjectId _pilPageToken _pilMaxResults
               (Just AltJSON)
-              mapsEngineService
+              mapsEngine
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsIconsListResource)

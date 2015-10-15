@@ -120,7 +120,7 @@ instance GoogleRequest ManagementExperimentsDelete'
           = go _medAccountId _medWebPropertyId _medProFileId
               _medExperimentId
               (Just AltJSON)
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementExperimentsDeleteResource)

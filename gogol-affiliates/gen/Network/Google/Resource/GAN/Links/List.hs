@@ -259,7 +259,7 @@ instance GoogleRequest LinksList' where
               _llStartDateMin
               _llMaxResults
               (Just AltJSON)
-              affiliatesService
+              affiliates
           where go
                   = buildClient (Proxy :: Proxy LinksListResource)
                       mempty

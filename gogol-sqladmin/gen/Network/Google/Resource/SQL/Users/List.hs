@@ -89,8 +89,7 @@ ulInstance
 instance GoogleRequest UsersList' where
         type Rs UsersList' = UsersListResponse
         requestClient UsersList'{..}
-          = go _ulProject _ulInstance (Just AltJSON)
-              sQLAdminService
+          = go _ulProject _ulInstance (Just AltJSON) sQLAdmin
           where go
                   = buildClient (Proxy :: Proxy UsersListResource)
                       mempty

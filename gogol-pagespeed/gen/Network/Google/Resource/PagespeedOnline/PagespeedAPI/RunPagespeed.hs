@@ -146,7 +146,7 @@ instance GoogleRequest PagespeedAPIRunPagespeed'
               _parpStrategy
               (_parpRule ^. _Default)
               (Just AltJSON)
-              pageSpeedService
+              pageSpeed
           where go
                   = buildClient
                       (Proxy :: Proxy PagespeedAPIRunPagespeedResource)

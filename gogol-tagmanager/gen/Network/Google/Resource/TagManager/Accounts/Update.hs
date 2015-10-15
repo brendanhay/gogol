@@ -101,7 +101,7 @@ instance GoogleRequest AccountsUpdate' where
         requestClient AccountsUpdate'{..}
           = go _auAccountId _auFingerprint (Just AltJSON)
               _auPayload
-              tagManagerService
+              tagManager
           where go
                   = buildClient (Proxy :: Proxy AccountsUpdateResource)
                       mempty

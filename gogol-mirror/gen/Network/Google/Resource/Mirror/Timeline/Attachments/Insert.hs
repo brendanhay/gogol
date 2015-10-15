@@ -87,8 +87,7 @@ instance GoogleRequest TimelineAttachmentsInsert'
          where
         type Rs TimelineAttachmentsInsert' = Attachment
         requestClient TimelineAttachmentsInsert'{..}
-          = go _taiItemId (Just AltJSON) _taiMedia
-              mirrorService
+          = go _taiItemId (Just AltJSON) _taiMedia mirror
           where go
                   = buildClient
                       (Proxy :: Proxy TimelineAttachmentsInsertResource)

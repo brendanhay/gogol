@@ -138,7 +138,7 @@ instance GoogleRequest
               (Just _lalfpaskuPageToken)
               (Just _lalfpaskuMaxResults)
               (Just AltJSON)
-              appsLicensingService
+              appsLicensing
           where go
                   = buildClient
                       (Proxy ::

@@ -86,8 +86,7 @@ udUser = lens _udUser (\ s a -> s{_udUser = a})
 instance GoogleRequest UsersDelete' where
         type Rs UsersDelete' = Operation
         requestClient UsersDelete'{..}
-          = go _udProject _udUser (Just AltJSON)
-              userAccountsService
+          = go _udProject _udUser (Just AltJSON) userAccounts
           where go
                   = buildClient (Proxy :: Proxy UsersDeleteResource)
                       mempty

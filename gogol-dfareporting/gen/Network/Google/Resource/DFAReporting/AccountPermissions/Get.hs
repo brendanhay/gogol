@@ -87,8 +87,7 @@ accId = lens _accId (\ s a -> s{_accId = a})
 instance GoogleRequest AccountPermissionsGet' where
         type Rs AccountPermissionsGet' = AccountPermission
         requestClient AccountPermissionsGet'{..}
-          = go _accProFileId _accId (Just AltJSON)
-              dFAReportingService
+          = go _accProFileId _accId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy AccountPermissionsGetResource)

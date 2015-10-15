@@ -107,7 +107,7 @@ instance GoogleRequest TablePatch' where
           = go _tppTableId _tppReplaceViewDefinition
               (Just AltJSON)
               _tppPayload
-              fusionTablesService
+              fusionTables
           where go
                   = buildClient (Proxy :: Proxy TablePatchResource)
                       mempty

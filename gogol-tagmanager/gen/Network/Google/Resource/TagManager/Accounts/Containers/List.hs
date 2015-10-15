@@ -77,7 +77,7 @@ instance GoogleRequest AccountsContainersList' where
         type Rs AccountsContainersList' =
              ListContainersResponse
         requestClient AccountsContainersList'{..}
-          = go _aclAccountId (Just AltJSON) tagManagerService
+          = go _aclAccountId (Just AltJSON) tagManager
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsContainersListResource)

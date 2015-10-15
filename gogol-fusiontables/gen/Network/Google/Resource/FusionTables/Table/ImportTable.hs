@@ -111,7 +111,7 @@ instance GoogleRequest TableImportTable' where
           = go (Just _titName) _titDelimiter _titEncoding
               (Just AltJSON)
               _titMedia
-              fusionTablesService
+              fusionTables
           where go
                   = buildClient
                       (Proxy :: Proxy TableImportTableResource)

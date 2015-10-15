@@ -126,7 +126,7 @@ instance GoogleRequest PagesPatch' where
           = go _pagaBlogId _pagaPageId _pagaRevert _pagaPublish
               (Just AltJSON)
               _pagaPayload
-              bloggerService
+              blogger
           where go
                   = buildClient (Proxy :: Proxy PagesPatchResource)
                       mempty

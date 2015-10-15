@@ -101,7 +101,7 @@ instance GoogleRequest BlogUserInfosGet' where
         requestClient BlogUserInfosGet'{..}
           = go _buigUserId _buigBlogId _buigMaxPosts
               (Just AltJSON)
-              bloggerService
+              blogger
           where go
                   = buildClient
                       (Proxy :: Proxy BlogUserInfosGetResource)

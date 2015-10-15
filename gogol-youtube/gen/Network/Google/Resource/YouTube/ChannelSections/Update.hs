@@ -113,7 +113,7 @@ instance GoogleRequest ChannelSectionsUpdate' where
           = go (Just _csuPart) _csuOnBehalfOfContentOwner
               (Just AltJSON)
               _csuPayload
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy ChannelSectionsUpdateResource)

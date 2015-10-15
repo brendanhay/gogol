@@ -172,7 +172,7 @@ instance GoogleRequest LiveBroadcastsTransition'
               _lbtOnBehalfOfContentOwner
               _lbtOnBehalfOfContentOwnerChannel
               (Just AltJSON)
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy LiveBroadcastsTransitionResource)

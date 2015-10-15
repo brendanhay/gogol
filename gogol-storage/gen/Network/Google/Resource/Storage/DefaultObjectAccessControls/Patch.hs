@@ -108,7 +108,7 @@ instance GoogleRequest
         requestClient DefaultObjectAccessControlsPatch'{..}
           = go _doacpBucket _doacpEntity (Just AltJSON)
               _doacpPayload
-              storageService
+              storage
           where go
                   = buildClient
                       (Proxy ::

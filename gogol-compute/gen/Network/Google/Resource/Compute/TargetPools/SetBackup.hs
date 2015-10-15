@@ -130,7 +130,7 @@ instance GoogleRequest TargetPoolsSetBackup' where
               _tpsbFailoverRatio
               (Just AltJSON)
               _tpsbPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy TargetPoolsSetBackupResource)

@@ -104,7 +104,7 @@ instance GoogleRequest EditsListingsGet' where
         requestClient EditsListingsGet'{..}
           = go _elgPackageName _elgEditId _elgLanguage
               (Just AltJSON)
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy EditsListingsGetResource)

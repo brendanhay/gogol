@@ -100,7 +100,7 @@ instance GoogleRequest UsersDataSourcesList' where
         requestClient UsersDataSourcesList'{..}
           = go _udslUserId (_udslDataTypeName ^. _Default)
               (Just AltJSON)
-              fitnessService
+              fitness
           where go
                   = buildClient
                       (Proxy :: Proxy UsersDataSourcesListResource)

@@ -89,8 +89,7 @@ turMatchId
 instance GoogleRequest TurnBasedMatchesLeave' where
         type Rs TurnBasedMatchesLeave' = TurnBasedMatch
         requestClient TurnBasedMatchesLeave'{..}
-          = go _turMatchId _turLanguage (Just AltJSON)
-              gamesService
+          = go _turMatchId _turLanguage (Just AltJSON) games
           where go
                   = buildClient
                       (Proxy :: Proxy TurnBasedMatchesLeaveResource)

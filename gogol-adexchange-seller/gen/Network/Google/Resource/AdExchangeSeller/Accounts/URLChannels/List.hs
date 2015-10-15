@@ -122,7 +122,7 @@ instance GoogleRequest AccountsURLChannelsList' where
           = go _auclAccountId _auclAdClientId _auclPageToken
               _auclMaxResults
               (Just AltJSON)
-              adExchangeSellerService
+              adExchangeSeller
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsURLChannelsListResource)

@@ -114,7 +114,7 @@ instance GoogleRequest EditsTestersPatch' where
           = go _etptPackageName _etptEditId _etptTrack
               (Just AltJSON)
               _etptPayload
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy EditsTestersPatchResource)

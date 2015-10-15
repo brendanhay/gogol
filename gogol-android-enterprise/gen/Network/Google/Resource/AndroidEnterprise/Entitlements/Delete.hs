@@ -103,7 +103,7 @@ instance GoogleRequest EntitlementsDelete' where
         requestClient EntitlementsDelete'{..}
           = go _edEnterpriseId _edUserId _edEntitlementId
               (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient
                       (Proxy :: Proxy EntitlementsDeleteResource)

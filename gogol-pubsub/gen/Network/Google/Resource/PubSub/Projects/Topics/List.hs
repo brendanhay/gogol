@@ -188,7 +188,7 @@ instance GoogleRequest ProjectsTopicsList' where
               _ptlPageSize
               _ptlCallback
               (Just AltJSON)
-              pubSubService
+              pubSub
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsTopicsListResource)

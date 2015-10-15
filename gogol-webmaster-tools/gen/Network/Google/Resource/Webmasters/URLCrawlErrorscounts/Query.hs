@@ -125,7 +125,7 @@ instance GoogleRequest URLCrawlErrorscountsQuery'
           = go _uceqSiteURL _uceqPlatform _uceqCategory
               (Just _uceqLatestCountsOnly)
               (Just AltJSON)
-              webmasterToolsService
+              webmasterTools
           where go
                   = buildClient
                       (Proxy :: Proxy URLCrawlErrorscountsQueryResource)

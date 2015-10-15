@@ -110,7 +110,7 @@ instance GoogleRequest UsersDraftsUpdate' where
         requestClient UsersDraftsUpdate'{..}
           = go _uduUserId _uduId (Just AltJSON) _uduPayload
               _uduMedia
-              gmailService
+              gmail
           where go
                   = buildClient
                       (Proxy :: Proxy UsersDraftsUpdateResource)

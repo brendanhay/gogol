@@ -86,8 +86,7 @@ urgId = lens _urgId (\ s a -> s{_urgId = a})
 instance GoogleRequest UserRolesGet' where
         type Rs UserRolesGet' = UserRole
         requestClient UserRolesGet'{..}
-          = go _urgProFileId _urgId (Just AltJSON)
-              dFAReportingService
+          = go _urgProFileId _urgId (Just AltJSON) dFAReporting
           where go
                   = buildClient (Proxy :: Proxy UserRolesGetResource)
                       mempty

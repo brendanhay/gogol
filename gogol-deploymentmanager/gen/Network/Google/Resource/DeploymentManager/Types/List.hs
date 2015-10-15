@@ -123,7 +123,7 @@ instance GoogleRequest TypesList' where
           = go _tlProject _tlFilter _tlPageToken
               (Just _tlMaxResults)
               (Just AltJSON)
-              deploymentManagerService
+              deploymentManager
           where go
                   = buildClient (Proxy :: Proxy TypesListResource)
                       mempty

@@ -74,7 +74,7 @@ crCircleId
 instance GoogleRequest CirclesRemove' where
         type Rs CirclesRemove' = ()
         requestClient CirclesRemove'{..}
-          = go _crCircleId (Just AltJSON) plusDomainsService
+          = go _crCircleId (Just AltJSON) plusDomains
           where go
                   = buildClient (Proxy :: Proxy CirclesRemoveResource)
                       mempty

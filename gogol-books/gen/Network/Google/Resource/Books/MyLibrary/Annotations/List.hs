@@ -195,7 +195,7 @@ instance GoogleRequest MyLibraryAnnotationsList'
               _mlalLayerId
               _mlalMaxResults
               (Just AltJSON)
-              booksService
+              books
           where go
                   = buildClient
                       (Proxy :: Proxy MyLibraryAnnotationsListResource)

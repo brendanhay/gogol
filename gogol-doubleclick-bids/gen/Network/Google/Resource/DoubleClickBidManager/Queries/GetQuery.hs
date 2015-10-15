@@ -74,8 +74,7 @@ qgqQueryId
 instance GoogleRequest QueriesGetQuery' where
         type Rs QueriesGetQuery' = Query
         requestClient QueriesGetQuery'{..}
-          = go _qgqQueryId (Just AltJSON)
-              doubleClickBidsService
+          = go _qgqQueryId (Just AltJSON) doubleClickBids
           where go
                   = buildClient
                       (Proxy :: Proxy QueriesGetQueryResource)

@@ -92,7 +92,7 @@ instance GoogleRequest AccountUserProFilesUpdate'
              AccountUserProFile
         requestClient AccountUserProFilesUpdate'{..}
           = go _aupfuProFileId (Just AltJSON) _aupfuPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy AccountUserProFilesUpdateResource)

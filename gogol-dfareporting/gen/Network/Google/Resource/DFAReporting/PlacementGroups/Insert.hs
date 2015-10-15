@@ -89,7 +89,7 @@ instance GoogleRequest PlacementGroupsInsert' where
         type Rs PlacementGroupsInsert' = PlacementGroup
         requestClient PlacementGroupsInsert'{..}
           = go _pgiProFileId (Just AltJSON) _pgiPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy PlacementGroupsInsertResource)

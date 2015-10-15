@@ -88,7 +88,7 @@ instance GoogleRequest ColumnInsert' where
         type Rs ColumnInsert' = Column
         requestClient ColumnInsert'{..}
           = go _ciTableId (Just AltJSON) _ciPayload
-              fusionTablesService
+              fusionTables
           where go
                   = buildClient (Proxy :: Proxy ColumnInsertResource)
                       mempty

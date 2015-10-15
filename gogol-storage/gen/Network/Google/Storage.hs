@@ -19,7 +19,7 @@
 module Network.Google.Storage
     (
     -- * Service Configuration
-      storageService
+      storage
 
     -- * API Declaration
     , StorageAPI

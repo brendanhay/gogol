@@ -106,7 +106,7 @@ instance GoogleRequest RasterCollectionsParentsList'
         requestClient RasterCollectionsParentsList'{..}
           = go _rcplId _rcplPageToken _rcplMaxResults
               (Just AltJSON)
-              mapsEngineService
+              mapsEngine
           where go
                   = buildClient
                       (Proxy :: Proxy RasterCollectionsParentsListResource)

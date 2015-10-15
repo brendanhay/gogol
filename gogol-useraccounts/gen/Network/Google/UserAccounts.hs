@@ -19,7 +19,7 @@
 module Network.Google.UserAccounts
     (
     -- * Service Configuration
-      userAccountsService
+      userAccounts
 
     -- * API Declaration
     , UserAccountsAPI

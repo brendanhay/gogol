@@ -100,8 +100,7 @@ instance GoogleRequest
              RasterCollectionsRastersBatchInsertResponse
         requestClient
           RasterCollectionsRastersBatchInsert'{..}
-          = go _rcrbiId (Just AltJSON) _rcrbiPayload
-              mapsEngineService
+          = go _rcrbiId (Just AltJSON) _rcrbiPayload mapsEngine
           where go
                   = buildClient
                       (Proxy ::

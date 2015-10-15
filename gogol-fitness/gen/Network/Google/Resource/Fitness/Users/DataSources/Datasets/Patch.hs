@@ -142,7 +142,7 @@ instance GoogleRequest UsersDataSourcesDatasetsPatch'
               _udsdpCurrentTimeMillis
               (Just AltJSON)
               _udsdpPayload
-              fitnessService
+              fitness
           where go
                   = buildClient
                       (Proxy ::

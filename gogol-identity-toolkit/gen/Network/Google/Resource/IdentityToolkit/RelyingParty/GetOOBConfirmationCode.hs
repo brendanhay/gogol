@@ -78,8 +78,7 @@ instance GoogleRequest
         type Rs RelyingPartyGetOOBConfirmationCode' =
              GetOOBConfirmationCodeResponse
         requestClient RelyingPartyGetOOBConfirmationCode'{..}
-          = go (Just AltJSON) _rpgoobccPayload
-              identityToolkitService
+          = go (Just AltJSON) _rpgoobccPayload identityToolkit
           where go
                   = buildClient
                       (Proxy ::

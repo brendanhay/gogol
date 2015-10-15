@@ -255,7 +255,7 @@ instance GoogleRequest CampaignsList' where
               _ccArchived
               _ccMaxResults
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient (Proxy :: Proxy CampaignsListResource)
                       mempty

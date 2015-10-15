@@ -148,7 +148,7 @@ instance GoogleRequest JobsList' where
               _jlAllUsers
               _jlMaxResults
               (Just AltJSON)
-              bigQueryService
+              bigQuery
           where go
                   = buildClient (Proxy :: Proxy JobsListResource)
                       mempty

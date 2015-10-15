@@ -89,7 +89,7 @@ instance GoogleRequest URLChannelsInsert' where
         type Rs URLChannelsInsert' = URLChannel
         requestClient URLChannelsInsert'{..}
           = go _uciAdClientId (Just AltJSON) _uciPayload
-              adSenseHostService
+              adSenseHost
           where go
                   = buildClient
                       (Proxy :: Proxy URLChannelsInsertResource)

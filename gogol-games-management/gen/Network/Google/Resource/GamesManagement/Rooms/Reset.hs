@@ -64,7 +64,7 @@ roomsReset' = RoomsReset'
 instance GoogleRequest RoomsReset' where
         type Rs RoomsReset' = ()
         requestClient RoomsReset'{}
-          = go (Just AltJSON) gamesManagementService
+          = go (Just AltJSON) gamesManagement
           where go
                   = buildClient (Proxy :: Proxy RoomsResetResource)
                       mempty

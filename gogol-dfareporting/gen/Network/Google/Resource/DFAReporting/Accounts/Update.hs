@@ -88,7 +88,7 @@ instance GoogleRequest AccountsUpdate' where
         type Rs AccountsUpdate' = Account
         requestClient AccountsUpdate'{..}
           = go _auProFileId (Just AltJSON) _auPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient (Proxy :: Proxy AccountsUpdateResource)
                       mempty

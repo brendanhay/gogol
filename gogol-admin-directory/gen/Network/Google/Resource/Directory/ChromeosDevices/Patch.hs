@@ -119,7 +119,7 @@ instance GoogleRequest ChromeosDevicesPatch' where
           = go _cdpCustomerId _cdpDeviceId _cdpProjection
               (Just AltJSON)
               _cdpPayload
-              directoryService
+              directory
           where go
                   = buildClient
                       (Proxy :: Proxy ChromeosDevicesPatchResource)

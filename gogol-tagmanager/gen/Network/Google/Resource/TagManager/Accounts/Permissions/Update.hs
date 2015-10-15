@@ -103,7 +103,7 @@ instance GoogleRequest AccountsPermissionsUpdate'
         requestClient AccountsPermissionsUpdate'{..}
           = go _apuAccountId _apuPermissionId (Just AltJSON)
               _apuPayload
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsPermissionsUpdateResource)

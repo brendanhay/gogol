@@ -220,7 +220,7 @@ instance GoogleRequest VolumesList' where
               _vlShowPreOrders
               _vlPrintType
               (Just AltJSON)
-              booksService
+              books
           where go
                   = buildClient (Proxy :: Proxy VolumesListResource)
                       mempty

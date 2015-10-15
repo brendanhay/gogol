@@ -196,7 +196,7 @@ instance GoogleRequest
               _pjwirsCallback
               (Just AltJSON)
               _pjwirsPayload
-              dataflowService
+              dataflow
           where go
                   = buildClient
                       (Proxy ::

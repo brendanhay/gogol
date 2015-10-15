@@ -78,7 +78,7 @@ instance GoogleRequest LineitemsUploadlineitems'
         type Rs LineitemsUploadlineitems' =
              UploadLineItemsResponse
         requestClient LineitemsUploadlineitems'{..}
-          = go (Just AltJSON) _luPayload doubleClickBidsService
+          = go (Just AltJSON) _luPayload doubleClickBids
           where go
                   = buildClient
                       (Proxy :: Proxy LineitemsUploadlineitemsResource)

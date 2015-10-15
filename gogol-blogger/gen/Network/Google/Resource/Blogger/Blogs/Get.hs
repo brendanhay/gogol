@@ -96,7 +96,7 @@ instance GoogleRequest BlogsGet' where
         type Rs BlogsGet' = Blog
         requestClient BlogsGet'{..}
           = go _bgBlogId _bgMaxPosts _bgView (Just AltJSON)
-              bloggerService
+              blogger
           where go
                   = buildClient (Proxy :: Proxy BlogsGetResource)
                       mempty

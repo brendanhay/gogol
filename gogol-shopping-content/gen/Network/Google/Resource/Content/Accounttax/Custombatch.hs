@@ -90,7 +90,7 @@ instance GoogleRequest AccounttaxCustombatch' where
              AccounttaxCustomBatchResponse
         requestClient AccounttaxCustombatch'{..}
           = go _acDryRun (Just AltJSON) _acPayload
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy AccounttaxCustombatchResource)

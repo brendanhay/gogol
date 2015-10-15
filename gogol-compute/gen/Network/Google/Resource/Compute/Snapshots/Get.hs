@@ -87,8 +87,7 @@ sgProject
 instance GoogleRequest SnapshotsGet' where
         type Rs SnapshotsGet' = Snapshot
         requestClient SnapshotsGet'{..}
-          = go _sgProject _sgSnapshot (Just AltJSON)
-              computeService
+          = go _sgProject _sgSnapshot (Just AltJSON) compute
           where go
                   = buildClient (Proxy :: Proxy SnapshotsGetResource)
                       mempty

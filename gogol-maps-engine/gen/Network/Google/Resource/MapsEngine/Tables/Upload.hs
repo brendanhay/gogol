@@ -83,7 +83,7 @@ tuPayload
 instance GoogleRequest TablesUpload' where
         type Rs TablesUpload' = Table
         requestClient TablesUpload'{..}
-          = go (Just AltJSON) _tuPayload mapsEngineService
+          = go (Just AltJSON) _tuPayload mapsEngine
           where go
                   = buildClient (Proxy :: Proxy TablesUploadResource)
                       mempty

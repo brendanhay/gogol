@@ -114,7 +114,7 @@ instance GoogleRequest RepliesPatch' where
         requestClient RepliesPatch'{..}
           = go _rpFileId _rpCommentId _rpReplyId (Just AltJSON)
               _rpPayload
-              driveService
+              drive
           where go
                   = buildClient (Proxy :: Proxy RepliesPatchResource)
                       mempty

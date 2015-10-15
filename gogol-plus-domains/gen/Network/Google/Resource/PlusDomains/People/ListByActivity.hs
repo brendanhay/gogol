@@ -123,7 +123,7 @@ instance GoogleRequest PeopleListByActivity' where
           = go _plbaActivityId _plbaCollection _plbaPageToken
               (Just _plbaMaxResults)
               (Just AltJSON)
-              plusDomainsService
+              plusDomains
           where go
                   = buildClient
                       (Proxy :: Proxy PeopleListByActivityResource)

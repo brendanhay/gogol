@@ -86,8 +86,7 @@ etdId = lens _etdId (\ s a -> s{_etdId = a})
 instance GoogleRequest EventTagsDelete' where
         type Rs EventTagsDelete' = ()
         requestClient EventTagsDelete'{..}
-          = go _etdProFileId _etdId (Just AltJSON)
-              dFAReportingService
+          = go _etdProFileId _etdId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy EventTagsDeleteResource)

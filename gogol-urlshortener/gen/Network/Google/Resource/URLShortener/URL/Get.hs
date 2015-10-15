@@ -86,6 +86,6 @@ instance GoogleRequest URLGet' where
         type Rs URLGet' = URL
         requestClient URLGet'{..}
           = go (Just _ugShortURL) _ugProjection (Just AltJSON)
-              uRLShortenerService
+              uRLShortener
           where go
                   = buildClient (Proxy :: Proxy URLGetResource) mempty

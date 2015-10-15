@@ -98,7 +98,7 @@ instance GoogleRequest DisksGet' where
         type Rs DisksGet' = Disk
         requestClient DisksGet'{..}
           = go _dgProject _dgZone _dgDisk (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient (Proxy :: Proxy DisksGetResource)
                       mempty

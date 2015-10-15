@@ -212,7 +212,7 @@ instance GoogleRequest PlayListsList' where
               _pllPageToken
               (Just _pllMaxResults)
               (Just AltJSON)
-              youTubeService
+              youTube
           where go
                   = buildClient (Proxy :: Proxy PlayListsListResource)
                       mempty

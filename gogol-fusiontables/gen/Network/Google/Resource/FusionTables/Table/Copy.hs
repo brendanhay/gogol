@@ -88,7 +88,7 @@ instance GoogleRequest TableCopy' where
         type Rs TableCopy' = Table
         requestClient TableCopy'{..}
           = go _tcTableId _tcCopyPresentation (Just AltJSON)
-              fusionTablesService
+              fusionTables
           where go
                   = buildClient (Proxy :: Proxy TableCopyResource)
                       mempty

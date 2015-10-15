@@ -101,7 +101,7 @@ instance GoogleRequest InventoryItemsGet' where
         requestClient InventoryItemsGet'{..}
           = go _iigProFileId _iigProjectId _iigId
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy InventoryItemsGetResource)

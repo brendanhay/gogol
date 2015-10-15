@@ -211,7 +211,7 @@ instance GoogleRequest ObjectsUpdate' where
               _ouGeneration
               (Just AltJSON)
               _ouPayload
-              storageService
+              storage
           where go :<|> _
                   = buildClient (Proxy :: Proxy ObjectsUpdateResource)
                       mempty
@@ -229,7 +229,7 @@ instance GoogleRequest (MediaDownload ObjectsUpdate')
               _ouGeneration
               (Just AltMedia)
               _ouPayload
-              storageService
+              storage
           where _ :<|> go
                   = buildClient (Proxy :: Proxy ObjectsUpdateResource)
                       mempty

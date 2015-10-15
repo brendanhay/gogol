@@ -166,7 +166,7 @@ instance GoogleRequest InvitationsGet' where
               _igBearerToken
               _igCallback
               (Just AltJSON)
-              classroomService
+              classroom
           where go
                   = buildClient (Proxy :: Proxy InvitationsGetResource)
                       mempty

@@ -131,7 +131,7 @@ instance GoogleRequest LayersVolumeAnnotationsGet'
               _lvagLocale
               _lvagSource
               (Just AltJSON)
-              booksService
+              books
           where go
                   = buildClient
                       (Proxy :: Proxy LayersVolumeAnnotationsGetResource)

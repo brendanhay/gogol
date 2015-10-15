@@ -106,7 +106,7 @@ instance GoogleRequest AchievementConfigurationsList'
         requestClient AchievementConfigurationsList'{..}
           = go _aclApplicationId _aclPageToken _aclMaxResults
               (Just AltJSON)
-              gamesConfigurationService
+              gamesConfiguration
           where go
                   = buildClient
                       (Proxy ::

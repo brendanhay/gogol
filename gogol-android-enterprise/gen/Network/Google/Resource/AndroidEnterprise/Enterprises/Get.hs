@@ -75,8 +75,7 @@ egEnterpriseId
 instance GoogleRequest EnterprisesGet' where
         type Rs EnterprisesGet' = Enterprise
         requestClient EnterprisesGet'{..}
-          = go _egEnterpriseId (Just AltJSON)
-              androidEnterpriseService
+          = go _egEnterpriseId (Just AltJSON) androidEnterprise
           where go
                   = buildClient (Proxy :: Proxy EnterprisesGetResource)
                       mempty

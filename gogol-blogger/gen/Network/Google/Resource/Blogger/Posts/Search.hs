@@ -114,7 +114,7 @@ instance GoogleRequest PostsSearch' where
           = go _psBlogId (Just _psQ) (Just _psOrderBy)
               (Just _psFetchBodies)
               (Just AltJSON)
-              bloggerService
+              blogger
           where go
                   = buildClient (Proxy :: Proxy PostsSearchResource)
                       mempty

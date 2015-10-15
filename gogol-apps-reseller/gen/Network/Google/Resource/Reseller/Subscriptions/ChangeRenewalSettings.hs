@@ -108,7 +108,7 @@ instance GoogleRequest
           = go _scrsCustomerId _scrsSubscriptionId
               (Just AltJSON)
               _scrsPayload
-              appsResellerService
+              appsReseller
           where go
                   = buildClient
                       (Proxy ::

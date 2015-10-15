@@ -101,7 +101,7 @@ instance GoogleRequest VPNTunnelsGet' where
         requestClient VPNTunnelsGet'{..}
           = go _vtgProject _vtgRegion _vtgVPNTunnel
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient (Proxy :: Proxy VPNTunnelsGetResource)
                       mempty

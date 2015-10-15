@@ -158,7 +158,7 @@ instance GoogleRequest SubAccountsList' where
               _salSortField
               _salMaxResults
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy SubAccountsListResource)

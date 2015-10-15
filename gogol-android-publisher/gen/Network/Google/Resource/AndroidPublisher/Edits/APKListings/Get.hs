@@ -125,7 +125,7 @@ instance GoogleRequest EditsAPKListingsGet' where
               _eapklgAPKVersionCode
               _eapklgLanguage
               (Just AltJSON)
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy EditsAPKListingsGetResource)

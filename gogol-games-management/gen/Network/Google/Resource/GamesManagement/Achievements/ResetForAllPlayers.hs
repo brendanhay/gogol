@@ -82,7 +82,7 @@ instance GoogleRequest
         type Rs AchievementsResetForAllPlayers' = ()
         requestClient AchievementsResetForAllPlayers'{..}
           = go _arfapAchievementId (Just AltJSON)
-              gamesManagementService
+              gamesManagement
           where go
                   = buildClient
                       (Proxy ::

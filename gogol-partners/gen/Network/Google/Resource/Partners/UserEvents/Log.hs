@@ -162,7 +162,7 @@ instance GoogleRequest UserEventsLog' where
               _uelCallback
               (Just AltJSON)
               _uelPayload
-              partnersService
+              partners
           where go
                   = buildClient (Proxy :: Proxy UserEventsLogResource)
                       mempty

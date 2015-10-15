@@ -76,7 +76,7 @@ alUserKey
 instance GoogleRequest AspsList' where
         type Rs AspsList' = Asps
         requestClient AspsList'{..}
-          = go _alUserKey (Just AltJSON) directoryService
+          = go _alUserKey (Just AltJSON) directory
           where go
                   = buildClient (Proxy :: Proxy AspsListResource)
                       mempty

@@ -77,7 +77,7 @@ instance GoogleRequest
         type Rs RasterCollectionsCancelProcessing' =
              ProcessResponse
         requestClient RasterCollectionsCancelProcessing'{..}
-          = go _rccpId (Just AltJSON) mapsEngineService
+          = go _rccpId (Just AltJSON) mapsEngine
           where go
                   = buildClient
                       (Proxy ::

@@ -86,8 +86,7 @@ rdRoute = lens _rdRoute (\ s a -> s{_rdRoute = a})
 instance GoogleRequest RoutesDelete' where
         type Rs RoutesDelete' = Operation
         requestClient RoutesDelete'{..}
-          = go _rdProject _rdRoute (Just AltJSON)
-              computeService
+          = go _rdProject _rdRoute (Just AltJSON) compute
           where go
                   = buildClient (Proxy :: Proxy RoutesDeleteResource)
                       mempty

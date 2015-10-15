@@ -117,7 +117,7 @@ instance GoogleRequest DatabasesUpdate' where
           = go _duProject _duInstance _duDatabase
               (Just AltJSON)
               _duPayload
-              sQLAdminService
+              sQLAdmin
           where go
                   = buildClient
                       (Proxy :: Proxy DatabasesUpdateResource)

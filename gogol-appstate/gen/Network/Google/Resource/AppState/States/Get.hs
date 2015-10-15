@@ -76,7 +76,7 @@ sgStateKey
 instance GoogleRequest StatesGet' where
         type Rs StatesGet' = GetResponse
         requestClient StatesGet'{..}
-          = go _sgStateKey (Just AltJSON) appStateService
+          = go _sgStateKey (Just AltJSON) appState
           where go
                   = buildClient (Proxy :: Proxy StatesGetResource)
                       mempty

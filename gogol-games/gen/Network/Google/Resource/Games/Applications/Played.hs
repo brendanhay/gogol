@@ -62,7 +62,7 @@ applicationsPlayed' = ApplicationsPlayed'
 instance GoogleRequest ApplicationsPlayed' where
         type Rs ApplicationsPlayed' = ()
         requestClient ApplicationsPlayed'{}
-          = go (Just AltJSON) gamesService
+          = go (Just AltJSON) games
           where go
                   = buildClient
                       (Proxy :: Proxy ApplicationsPlayedResource)

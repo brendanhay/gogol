@@ -189,7 +189,7 @@ instance GoogleRequest BeaconsAttachmentsCreate'
               _bacCallback
               (Just AltJSON)
               _bacPayload
-              proximityBeaconService
+              proximityBeacon
           where go
                   = buildClient
                       (Proxy :: Proxy BeaconsAttachmentsCreateResource)

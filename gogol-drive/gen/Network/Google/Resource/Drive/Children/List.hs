@@ -128,7 +128,7 @@ instance GoogleRequest ChildrenList' where
           = go _clFolderId _clOrderBy _clQ _clPageToken
               (Just _clMaxResults)
               (Just AltJSON)
-              driveService
+              drive
           where go
                   = buildClient (Proxy :: Proxy ChildrenListResource)
                       mempty

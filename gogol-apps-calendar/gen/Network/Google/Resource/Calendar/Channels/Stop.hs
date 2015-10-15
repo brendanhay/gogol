@@ -75,7 +75,7 @@ csPayload
 instance GoogleRequest ChannelsStop' where
         type Rs ChannelsStop' = ()
         requestClient ChannelsStop'{..}
-          = go (Just AltJSON) _csPayload appsCalendarService
+          = go (Just AltJSON) _csPayload appsCalendar
           where go
                   = buildClient (Proxy :: Proxy ChannelsStopResource)
                       mempty

@@ -97,7 +97,7 @@ instance GoogleRequest GroupsUpdate' where
         requestClient GroupsUpdate'{..}
           = go _guOnBehalfOfContentOwner (Just AltJSON)
               _guPayload
-              youTubeAnalyticsService
+              youTubeAnalytics
           where go
                   = buildClient (Proxy :: Proxy GroupsUpdateResource)
                       mempty

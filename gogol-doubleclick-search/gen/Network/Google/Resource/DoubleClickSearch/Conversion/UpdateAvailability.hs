@@ -80,8 +80,7 @@ instance GoogleRequest ConversionUpdateAvailability'
         type Rs ConversionUpdateAvailability' =
              UpdateAvailabilityResponse
         requestClient ConversionUpdateAvailability'{..}
-          = go (Just AltJSON) _cuaPayload
-              doubleClickSearchService
+          = go (Just AltJSON) _cuaPayload doubleClickSearch
           where go
                   = buildClient
                       (Proxy :: Proxy ConversionUpdateAvailabilityResource)

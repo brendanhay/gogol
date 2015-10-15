@@ -138,7 +138,7 @@ instance GoogleRequest BookshelvesVolumesList' where
               _bvlMaxResults
               _bvlShowPreOrders
               (Just AltJSON)
-              booksService
+              books
           where go
                   = buildClient
                       (Proxy :: Proxy BookshelvesVolumesListResource)

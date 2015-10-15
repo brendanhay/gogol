@@ -16,7 +16,7 @@
 module Network.Google.Books.Types
     (
     -- * Service Configuration
-      booksService
+      books
 
     -- * OAuth Scopes
     , booksScope
@@ -811,12 +811,12 @@ import           Network.Google.Books.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Books API. This contains the host and root path used as a starting point for constructing service requests.
-booksService :: Service
-booksService
+books :: Service
+books
   = defaultService (ServiceId "books:v1")
       "www.googleapis.com"
       "books/v1/"
 
 -- | Manage your books
 booksScope :: OAuthScope
-booksScope = OAuthScope "https://www.googleapis.com/auth/books";
+booksScope = "https://www.googleapis.com/auth/books";

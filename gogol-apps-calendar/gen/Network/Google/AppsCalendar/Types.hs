@@ -16,7 +16,7 @@
 module Network.Google.AppsCalendar.Types
     (
     -- * Service Configuration
-      appsCalendarService
+      appsCalendar
 
     -- * OAuth Scopes
     , calendarScope
@@ -388,16 +388,16 @@ import           Network.Google.AppsCalendar.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Calendar API. This contains the host and root path used as a starting point for constructing service requests.
-appsCalendarService :: Service
-appsCalendarService
+appsCalendar :: Service
+appsCalendar
   = defaultService (ServiceId "calendar:v3")
       "www.googleapis.com"
       "calendar/v3/"
 
 -- | Manage your calendars
 calendarScope :: OAuthScope
-calendarScope = OAuthScope "https://www.googleapis.com/auth/calendar";
+calendarScope = "https://www.googleapis.com/auth/calendar";
 
 -- | View your calendars
 calendarReadonlyScope :: OAuthScope
-calendarReadonlyScope = OAuthScope "https://www.googleapis.com/auth/calendar.readonly";
+calendarReadonlyScope = "https://www.googleapis.com/auth/calendar.readonly";

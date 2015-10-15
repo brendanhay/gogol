@@ -138,7 +138,7 @@ instance GoogleRequest InstanceGroupsList' where
           = go _iglProject _iglZone _iglFilter _iglPageToken
               (Just _iglMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceGroupsListResource)

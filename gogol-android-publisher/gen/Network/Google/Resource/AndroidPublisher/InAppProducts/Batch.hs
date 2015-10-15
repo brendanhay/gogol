@@ -76,8 +76,7 @@ instance GoogleRequest InAppProductsBatch' where
         type Rs InAppProductsBatch' =
              InAppProductsBatchResponse
         requestClient InAppProductsBatch'{..}
-          = go (Just AltJSON) _iapbPayload
-              androidPublisherService
+          = go (Just AltJSON) _iapbPayload androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy InAppProductsBatchResource)

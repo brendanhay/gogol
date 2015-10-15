@@ -91,7 +91,7 @@ instance GoogleRequest EditsTracksList' where
         type Rs EditsTracksList' = TracksListResponse
         requestClient EditsTracksList'{..}
           = go _etlPackageName _etlEditId (Just AltJSON)
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy EditsTracksListResource)

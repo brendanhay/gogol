@@ -77,7 +77,7 @@ mclReportType
 instance GoogleRequest MetadataColumnsList' where
         type Rs MetadataColumnsList' = Columns
         requestClient MetadataColumnsList'{..}
-          = go _mclReportType (Just AltJSON) analyticsService
+          = go _mclReportType (Just AltJSON) analytics
           where go
                   = buildClient
                       (Proxy :: Proxy MetadataColumnsListResource)

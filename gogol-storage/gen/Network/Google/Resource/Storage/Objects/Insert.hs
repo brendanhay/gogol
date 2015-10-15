@@ -230,7 +230,7 @@ instance GoogleRequest ObjectsInsert' where
               (Just AltJSON)
               _oiPayload
               _oiMedia
-              storageService
+              storage
           where go :<|> _
                   = buildClient (Proxy :: Proxy ObjectsInsertResource)
                       mempty
@@ -250,7 +250,7 @@ instance GoogleRequest (MediaDownload ObjectsInsert')
               (Just AltMedia)
               _oiPayload
               _oiMedia
-              storageService
+              storage
           where _ :<|> go
                   = buildClient (Proxy :: Proxy ObjectsInsertResource)
                       mempty

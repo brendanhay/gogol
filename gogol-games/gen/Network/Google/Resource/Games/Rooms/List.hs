@@ -99,7 +99,7 @@ instance GoogleRequest RoomsList' where
         requestClient RoomsList'{..}
           = go _rLanguage _rPageToken _rMaxResults
               (Just AltJSON)
-              gamesService
+              games
           where go
                   = buildClient (Proxy :: Proxy RoomsListResource)
                       mempty

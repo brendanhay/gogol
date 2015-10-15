@@ -173,7 +173,7 @@ instance GoogleRequest BeaconsAttachmentsDelete'
               _badBearerToken
               _badCallback
               (Just AltJSON)
-              proximityBeaconService
+              proximityBeacon
           where go
                   = buildClient
                       (Proxy :: Proxy BeaconsAttachmentsDeleteResource)

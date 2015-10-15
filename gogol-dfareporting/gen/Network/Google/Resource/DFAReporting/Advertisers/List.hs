@@ -241,7 +241,7 @@ instance GoogleRequest AdvertisersList' where
               (_allFloodlightConfigurationIds ^. _Default)
               _allMaxResults
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy AdvertisersListResource)

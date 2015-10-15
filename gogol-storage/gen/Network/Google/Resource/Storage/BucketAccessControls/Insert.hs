@@ -90,8 +90,7 @@ instance GoogleRequest BucketAccessControlsInsert'
         type Rs BucketAccessControlsInsert' =
              BucketAccessControl
         requestClient BucketAccessControlsInsert'{..}
-          = go _baciBucket (Just AltJSON) _baciPayload
-              storageService
+          = go _baciBucket (Just AltJSON) _baciPayload storage
           where go
                   = buildClient
                       (Proxy :: Proxy BucketAccessControlsInsertResource)

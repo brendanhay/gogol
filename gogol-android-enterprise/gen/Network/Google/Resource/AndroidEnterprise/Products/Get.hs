@@ -102,7 +102,7 @@ instance GoogleRequest ProductsGet' where
         requestClient ProductsGet'{..}
           = go _pEnterpriseId _pProductId _pLanguage
               (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient (Proxy :: Proxy ProductsGetResource)
                       mempty

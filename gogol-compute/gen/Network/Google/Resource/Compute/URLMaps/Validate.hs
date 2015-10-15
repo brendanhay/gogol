@@ -107,7 +107,7 @@ instance GoogleRequest URLMapsValidate' where
         requestClient URLMapsValidate'{..}
           = go _umvProject _umvURLMap (Just AltJSON)
               _umvPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy URLMapsValidateResource)

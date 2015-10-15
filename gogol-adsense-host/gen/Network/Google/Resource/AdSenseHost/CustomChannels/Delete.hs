@@ -92,7 +92,7 @@ instance GoogleRequest CustomChannelsDelete' where
         requestClient CustomChannelsDelete'{..}
           = go _ccdAdClientId _ccdCustomChannelId
               (Just AltJSON)
-              adSenseHostService
+              adSenseHost
           where go
                   = buildClient
                       (Proxy :: Proxy CustomChannelsDeleteResource)

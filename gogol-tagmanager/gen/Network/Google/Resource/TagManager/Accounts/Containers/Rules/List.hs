@@ -94,7 +94,7 @@ instance GoogleRequest AccountsContainersRulesList'
              ListRulesResponse
         requestClient AccountsContainersRulesList'{..}
           = go _acrlAccountId _acrlContainerId (Just AltJSON)
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsContainersRulesListResource)

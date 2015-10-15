@@ -74,7 +74,7 @@ fFileId = lens _fFileId (\ s a -> s{_fFileId = a})
 instance GoogleRequest FilesUntrash' where
         type Rs FilesUntrash' = File
         requestClient FilesUntrash'{..}
-          = go _fFileId (Just AltJSON) driveService
+          = go _fFileId (Just AltJSON) drive
           where go
                   = buildClient (Proxy :: Proxy FilesUntrashResource)
                       mempty

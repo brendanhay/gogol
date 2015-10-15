@@ -104,7 +104,7 @@ instance GoogleRequest DisksDelete' where
         type Rs DisksDelete' = Operation
         requestClient DisksDelete'{..}
           = go _ddProject _ddZone _ddDisk (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient (Proxy :: Proxy DisksDeleteResource)
                       mempty

@@ -189,7 +189,7 @@ instance GoogleRequest TablesFeaturesList' where
               _tflIntersects
               _tflMaxResults
               (Just AltJSON)
-              mapsEngineService
+              mapsEngine
           where go
                   = buildClient
                       (Proxy :: Proxy TablesFeaturesListResource)

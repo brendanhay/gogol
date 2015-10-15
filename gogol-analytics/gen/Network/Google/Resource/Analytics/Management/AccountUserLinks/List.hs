@@ -108,7 +108,7 @@ instance GoogleRequest
           = go _maullAccountId _maullStartIndex
               _maullMaxResults
               (Just AltJSON)
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy ::

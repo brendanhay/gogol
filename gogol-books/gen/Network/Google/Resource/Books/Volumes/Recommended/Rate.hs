@@ -116,7 +116,7 @@ instance GoogleRequest VolumesRecommendedRate' where
           = go (Just _vrrRating) (Just _vrrVolumeId) _vrrLocale
               _vrrSource
               (Just AltJSON)
-              booksService
+              books
           where go
                   = buildClient
                       (Proxy :: Proxy VolumesRecommendedRateResource)

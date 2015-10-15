@@ -187,7 +187,7 @@ instance GoogleRequest DatasetsPatch' where
               _dpCallback
               (Just AltJSON)
               _dpPayload
-              genomicsService
+              genomics
           where go
                   = buildClient (Proxy :: Proxy DatasetsPatchResource)
                       mempty

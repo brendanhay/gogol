@@ -80,8 +80,7 @@ instance GoogleRequest GrouplicensesList' where
         type Rs GrouplicensesList' =
              GroupLicensesListResponse
         requestClient GrouplicensesList'{..}
-          = go _glEnterpriseId (Just AltJSON)
-              androidEnterpriseService
+          = go _glEnterpriseId (Just AltJSON) androidEnterprise
           where go
                   = buildClient
                       (Proxy :: Proxy GrouplicensesListResource)

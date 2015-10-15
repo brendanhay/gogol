@@ -167,7 +167,7 @@ instance GoogleRequest BeaconInfoGetforObserved'
               _bigoCallback
               (Just AltJSON)
               _bigoPayload
-              proximityBeaconService
+              proximityBeacon
           where go
                   = buildClient
                       (Proxy :: Proxy BeaconInfoGetforObservedResource)

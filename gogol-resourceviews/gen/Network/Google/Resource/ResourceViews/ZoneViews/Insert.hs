@@ -100,7 +100,7 @@ instance GoogleRequest ZoneViewsInsert' where
         type Rs ZoneViewsInsert' = Operation
         requestClient ZoneViewsInsert'{..}
           = go _zviProject _zviZone (Just AltJSON) _zviPayload
-              resourceViewsService
+              resourceViews
           where go
                   = buildClient
                       (Proxy :: Proxy ZoneViewsInsertResource)

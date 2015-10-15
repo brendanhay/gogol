@@ -75,7 +75,7 @@ tiPayload
 instance GoogleRequest TransfersInsert' where
         type Rs TransfersInsert' = DataTransfer
         requestClient TransfersInsert'{..}
-          = go (Just AltJSON) _tiPayload dataTransferService
+          = go (Just AltJSON) _tiPayload dataTransfer
           where go
                   = buildClient
                       (Proxy :: Proxy TransfersInsertResource)

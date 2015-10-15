@@ -81,7 +81,7 @@ instance GoogleRequest BatchReportDefinitionsList'
         requestClient BatchReportDefinitionsList'{..}
           = go (Just _brdlOnBehalfOfContentOwner)
               (Just AltJSON)
-              youTubeAnalyticsService
+              youTubeAnalytics
           where go
                   = buildClient
                       (Proxy :: Proxy BatchReportDefinitionsListResource)

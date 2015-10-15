@@ -134,7 +134,7 @@ instance GoogleRequest AccountsReportsSavedGenerate'
               _arsgStartIndex
               _arsgMaxResults
               (Just AltJSON)
-              adSenseService
+              adSense
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsReportsSavedGenerateResource)

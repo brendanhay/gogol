@@ -74,7 +74,7 @@ ciPayload
 instance GoogleRequest CalendarsInsert' where
         type Rs CalendarsInsert' = Calendar
         requestClient CalendarsInsert'{..}
-          = go (Just AltJSON) _ciPayload appsCalendarService
+          = go (Just AltJSON) _ciPayload appsCalendar
           where go
                   = buildClient
                       (Proxy :: Proxy CalendarsInsertResource)

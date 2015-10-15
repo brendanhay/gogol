@@ -88,8 +88,7 @@ chiPayload
 instance GoogleRequest ChildrenInsert' where
         type Rs ChildrenInsert' = ChildReference
         requestClient ChildrenInsert'{..}
-          = go _chiFolderId (Just AltJSON) _chiPayload
-              driveService
+          = go _chiFolderId (Just AltJSON) _chiPayload drive
           where go
                   = buildClient (Proxy :: Proxy ChildrenInsertResource)
                       mempty

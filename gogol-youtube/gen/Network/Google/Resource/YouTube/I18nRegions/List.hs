@@ -87,7 +87,7 @@ instance GoogleRequest I18nRegionsList' where
         type Rs I18nRegionsList' = I18nRegionListResponse
         requestClient I18nRegionsList'{..}
           = go (Just _irlPart) (Just _irlHl) (Just AltJSON)
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy I18nRegionsListResource)

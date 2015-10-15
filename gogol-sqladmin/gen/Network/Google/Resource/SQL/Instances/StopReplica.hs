@@ -88,8 +88,7 @@ isrInstance
 instance GoogleRequest InstancesStopReplica' where
         type Rs InstancesStopReplica' = Operation
         requestClient InstancesStopReplica'{..}
-          = go _isrProject _isrInstance (Just AltJSON)
-              sQLAdminService
+          = go _isrProject _isrInstance (Just AltJSON) sQLAdmin
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesStopReplicaResource)

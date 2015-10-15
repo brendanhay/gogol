@@ -108,7 +108,7 @@ instance GoogleRequest CollectionviewersDelete' where
         requestClient CollectionviewersDelete'{..}
           = go _cddEnterpriseId _cddCollectionId _cddUserId
               (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient
                       (Proxy :: Proxy CollectionviewersDeleteResource)

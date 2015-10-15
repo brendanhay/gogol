@@ -109,7 +109,7 @@ instance GoogleRequest MembersList' where
         requestClient MembersList'{..}
           = go _mlGroupKey _mlRoles _mlPageToken _mlMaxResults
               (Just AltJSON)
-              directoryService
+              directory
           where go
                   = buildClient (Proxy :: Proxy MembersListResource)
                       mempty

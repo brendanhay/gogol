@@ -205,7 +205,7 @@ instance GoogleRequest CoursesStudentsCreate' where
               _cscCallback
               (Just AltJSON)
               _cscPayload
-              classroomService
+              classroom
           where go
                   = buildClient
                       (Proxy :: Proxy CoursesStudentsCreateResource)

@@ -97,7 +97,7 @@ instance GoogleRequest GroupItemsDelete' where
         requestClient GroupItemsDelete'{..}
           = go (Just _gidId) _gidOnBehalfOfContentOwner
               (Just AltJSON)
-              youTubeAnalyticsService
+              youTubeAnalytics
           where go
                   = buildClient
                       (Proxy :: Proxy GroupItemsDeleteResource)

@@ -20,7 +20,7 @@
 module Network.Google.Partners
     (
     -- * Service Configuration
-      partnersService
+      partners
 
     -- * API Declaration
     , PartnersAPI

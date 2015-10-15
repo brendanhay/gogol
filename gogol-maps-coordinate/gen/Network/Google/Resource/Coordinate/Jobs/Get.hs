@@ -85,7 +85,6 @@ jgTeamId = lens _jgTeamId (\ s a -> s{_jgTeamId = a})
 instance GoogleRequest JobsGet' where
         type Rs JobsGet' = Job
         requestClient JobsGet'{..}
-          = go _jgTeamId _jgJobId (Just AltJSON)
-              mapsCoordinateService
+          = go _jgTeamId _jgJobId (Just AltJSON) mapsCoordinate
           where go
                   = buildClient (Proxy :: Proxy JobsGetResource) mempty

@@ -19,7 +19,7 @@
 module Network.Google.Gmail
     (
     -- * Service Configuration
-      gmailService
+      gmail
 
     -- * API Declaration
     , GmailAPI

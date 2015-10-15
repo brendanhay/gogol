@@ -16,7 +16,7 @@
 module Network.Google.WebmasterTools.Types
     (
     -- * Service Configuration
-      webmasterToolsService
+      webmasterTools
 
     -- * OAuth Scopes
     , webmastersScope
@@ -165,16 +165,16 @@ import           Network.Google.WebmasterTools.Types.Product
 import           Network.Google.WebmasterTools.Types.Sum
 
 -- | Default request referring to version 'v3' of the Webmaster Tools API. This contains the host and root path used as a starting point for constructing service requests.
-webmasterToolsService :: Service
-webmasterToolsService
+webmasterTools :: Service
+webmasterTools
   = defaultService (ServiceId "webmasters:v3")
       "www.googleapis.com"
       "webmasters/v3/"
 
 -- | View and modify Webmaster Tools data for your verified sites
 webmastersScope :: OAuthScope
-webmastersScope = OAuthScope "https://www.googleapis.com/auth/webmasters";
+webmastersScope = "https://www.googleapis.com/auth/webmasters";
 
 -- | View Webmaster Tools data for your verified sites
 webmastersReadonlyScope :: OAuthScope
-webmastersReadonlyScope = OAuthScope "https://www.googleapis.com/auth/webmasters.readonly";
+webmastersReadonlyScope = "https://www.googleapis.com/auth/webmasters.readonly";

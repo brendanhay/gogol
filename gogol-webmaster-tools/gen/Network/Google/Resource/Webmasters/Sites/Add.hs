@@ -74,7 +74,7 @@ saSiteURL
 instance GoogleRequest SitesAdd' where
         type Rs SitesAdd' = ()
         requestClient SitesAdd'{..}
-          = go _saSiteURL (Just AltJSON) webmasterToolsService
+          = go _saSiteURL (Just AltJSON) webmasterTools
           where go
                   = buildClient (Proxy :: Proxy SitesAddResource)
                       mempty

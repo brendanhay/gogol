@@ -124,7 +124,7 @@ instance GoogleRequest
               _musriProFileId
               (Just AltJSON)
               _musriPayload
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy ::

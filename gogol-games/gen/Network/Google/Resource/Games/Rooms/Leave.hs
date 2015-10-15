@@ -100,7 +100,7 @@ instance GoogleRequest RoomsLeave' where
         type Rs RoomsLeave' = Room
         requestClient RoomsLeave'{..}
           = go _rlRoomId _rlLanguage (Just AltJSON) _rlPayload
-              gamesService
+              games
           where go
                   = buildClient (Proxy :: Proxy RoomsLeaveResource)
                       mempty

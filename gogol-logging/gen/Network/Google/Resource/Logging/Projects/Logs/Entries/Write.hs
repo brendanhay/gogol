@@ -205,7 +205,7 @@ instance GoogleRequest ProjectsLogsEntriesWrite'
               _plewCallback
               (Just AltJSON)
               _plewPayload
-              loggingService
+              logging
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsLogsEntriesWriteResource)

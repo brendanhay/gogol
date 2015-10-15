@@ -77,7 +77,7 @@ cmasId = lens _cmasId (\ s a -> s{_cmasId = a})
 instance GoogleRequest CommentsMarkAsSpam' where
         type Rs CommentsMarkAsSpam' = ()
         requestClient CommentsMarkAsSpam'{..}
-          = go (Just _cmasId) (Just AltJSON) youTubeService
+          = go (Just _cmasId) (Just AltJSON) youTube
           where go
                   = buildClient
                       (Proxy :: Proxy CommentsMarkAsSpamResource)

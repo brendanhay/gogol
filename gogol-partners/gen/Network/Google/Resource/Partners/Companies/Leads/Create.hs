@@ -176,7 +176,7 @@ instance GoogleRequest CompaniesLeadsCreate' where
               _clcCallback
               (Just AltJSON)
               _clcPayload
-              partnersService
+              partners
           where go
                   = buildClient
                       (Proxy :: Proxy CompaniesLeadsCreateResource)

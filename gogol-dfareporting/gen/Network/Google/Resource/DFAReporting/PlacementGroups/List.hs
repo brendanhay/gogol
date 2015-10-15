@@ -367,7 +367,7 @@ instance GoogleRequest PlacementGroupsList' where
               _pglMaxResults
               _pglMinEndDate
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy PlacementGroupsListResource)

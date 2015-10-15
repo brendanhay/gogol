@@ -134,7 +134,7 @@ instance GoogleRequest InstallsUpdate' where
               _iuInstallId
               (Just AltJSON)
               _iuPayload
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient (Proxy :: Proxy InstallsUpdateResource)
                       mempty

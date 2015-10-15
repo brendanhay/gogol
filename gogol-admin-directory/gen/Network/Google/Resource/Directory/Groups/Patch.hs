@@ -87,8 +87,7 @@ gpPayload
 instance GoogleRequest GroupsPatch' where
         type Rs GroupsPatch' = Group
         requestClient GroupsPatch'{..}
-          = go _gpGroupKey (Just AltJSON) _gpPayload
-              directoryService
+          = go _gpGroupKey (Just AltJSON) _gpPayload directory
           where go
                   = buildClient (Proxy :: Proxy GroupsPatchResource)
                       mempty

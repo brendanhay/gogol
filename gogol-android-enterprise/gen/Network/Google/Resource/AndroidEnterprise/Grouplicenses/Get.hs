@@ -91,7 +91,7 @@ instance GoogleRequest GrouplicensesGet' where
         type Rs GrouplicensesGet' = GroupLicense
         requestClient GrouplicensesGet'{..}
           = go _ggEnterpriseId _ggGroupLicenseId (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient
                       (Proxy :: Proxy GrouplicensesGetResource)

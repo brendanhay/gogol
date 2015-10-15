@@ -263,7 +263,7 @@ instance GoogleRequest UserStatesList' where
               _uslRequestMetadataTrafficSourceTrafficSourceId
               _uslCallback
               (Just AltJSON)
-              partnersService
+              partners
           where go
                   = buildClient (Proxy :: Proxy UserStatesListResource)
                       mempty

@@ -127,7 +127,7 @@ instance GoogleRequest BackendServicesList' where
           = go _bslProject _bslFilter _bslPageToken
               (Just _bslMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy BackendServicesListResource)

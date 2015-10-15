@@ -85,7 +85,7 @@ instance GoogleRequest TableList' where
         type Rs TableList' = TableList
         requestClient TableList'{..}
           = go _tPageToken _tMaxResults (Just AltJSON)
-              fusionTablesService
+              fusionTables
           where go
                   = buildClient (Proxy :: Proxy TableListResource)
                       mempty

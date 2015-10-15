@@ -75,7 +75,7 @@ nlPayload
 instance GoogleRequest NegotiationsList' where
         type Rs NegotiationsList' = GetNegotiationsResponse
         requestClient NegotiationsList'{..}
-          = go (Just AltJSON) _nlPayload adExchangeBuyerService
+          = go (Just AltJSON) _nlPayload adExchangeBuyer
           where go
                   = buildClient
                       (Proxy :: Proxy NegotiationsListResource)

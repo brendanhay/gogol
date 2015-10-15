@@ -88,7 +88,7 @@ instance GoogleRequest ReportsInsert' where
         type Rs ReportsInsert' = Report
         requestClient ReportsInsert'{..}
           = go _riProFileId (Just AltJSON) _riPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient (Proxy :: Proxy ReportsInsertResource)
                       mempty

@@ -93,7 +93,7 @@ instance GoogleRequest CalendarListInsert' where
         type Rs CalendarListInsert' = CalendarListEntry
         requestClient CalendarListInsert'{..}
           = go _cliColorRgbFormat (Just AltJSON) _cliPayload
-              appsCalendarService
+              appsCalendar
           where go
                   = buildClient
                       (Proxy :: Proxy CalendarListInsertResource)

@@ -86,8 +86,7 @@ ag1Id = lens _ag1Id (\ s a -> s{_ag1Id = a})
 instance GoogleRequest AccountsGet' where
         type Rs AccountsGet' = Account
         requestClient AccountsGet'{..}
-          = go _ag1ProFileId _ag1Id (Just AltJSON)
-              dFAReportingService
+          = go _ag1ProFileId _ag1Id (Just AltJSON) dFAReporting
           where go
                   = buildClient (Proxy :: Proxy AccountsGetResource)
                       mempty

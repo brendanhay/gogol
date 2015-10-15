@@ -108,7 +108,7 @@ instance GoogleRequest QuestMilestonesClaim' where
         requestClient QuestMilestonesClaim'{..}
           = go _qmcQuestId _qmcMilestoneId (Just _qmcRequestId)
               (Just AltJSON)
-              gamesService
+              games
           where go
                   = buildClient
                       (Proxy :: Proxy QuestMilestonesClaimResource)

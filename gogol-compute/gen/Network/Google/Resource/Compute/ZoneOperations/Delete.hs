@@ -100,7 +100,7 @@ instance GoogleRequest ZoneOperationsDelete' where
         requestClient ZoneOperationsDelete'{..}
           = go _zodProject _zodZone _zodOperation
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy ZoneOperationsDeleteResource)

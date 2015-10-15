@@ -84,7 +84,7 @@ instance GoogleRequest APIsList' where
         type Rs APIsList' = DirectoryList
         requestClient APIsList'{..}
           = go (Just _alPreferred) _alName (Just AltJSON)
-              discoveryService
+              discovery
           where go
                   = buildClient (Proxy :: Proxy APIsListResource)
                       mempty

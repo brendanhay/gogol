@@ -104,7 +104,7 @@ instance GoogleRequest CreativeFieldValuesGet' where
         requestClient CreativeFieldValuesGet'{..}
           = go _cfvgProFileId _cfvgCreativeFieldId _cfvgId
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy CreativeFieldValuesGetResource)

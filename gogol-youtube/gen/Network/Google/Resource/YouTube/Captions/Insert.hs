@@ -151,7 +151,7 @@ instance GoogleRequest CaptionsInsert' where
               (Just AltJSON)
               _ciPayload
               _ciMedia
-              youTubeService
+              youTube
           where go
                   = buildClient (Proxy :: Proxy CaptionsInsertResource)
                       mempty

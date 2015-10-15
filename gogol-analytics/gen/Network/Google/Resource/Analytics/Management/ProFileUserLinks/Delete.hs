@@ -122,7 +122,7 @@ instance GoogleRequest
               _mpfuldProFileId
               _mpfuldLinkId
               (Just AltJSON)
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy ::

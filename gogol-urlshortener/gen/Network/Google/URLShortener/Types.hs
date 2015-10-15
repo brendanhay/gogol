@@ -16,7 +16,7 @@
 module Network.Google.URLShortener.Types
     (
     -- * Service Configuration
-      uRLShortenerService
+      uRLShortener
 
     -- * OAuth Scopes
     , urlshortenerScope
@@ -77,12 +77,12 @@ import           Network.Google.URLShortener.Types.Product
 import           Network.Google.URLShortener.Types.Sum
 
 -- | Default request referring to version 'v1' of the URL Shortener API. This contains the host and root path used as a starting point for constructing service requests.
-uRLShortenerService :: Service
-uRLShortenerService
+uRLShortener :: Service
+uRLShortener
   = defaultService (ServiceId "urlshortener:v1")
       "www.googleapis.com"
       "urlshortener/v1/"
 
 -- | Manage your goo.gl short URLs
 urlshortenerScope :: OAuthScope
-urlshortenerScope = OAuthScope "https://www.googleapis.com/auth/urlshortener";
+urlshortenerScope = "https://www.googleapis.com/auth/urlshortener";

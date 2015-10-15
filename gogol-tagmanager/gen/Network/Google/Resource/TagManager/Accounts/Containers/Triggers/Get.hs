@@ -106,7 +106,7 @@ instance GoogleRequest AccountsContainersTriggersGet'
         requestClient AccountsContainersTriggersGet'{..}
           = go _actgAccountId _actgContainerId _actgTriggerId
               (Just AltJSON)
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy ::

@@ -108,7 +108,7 @@ instance GoogleRequest CreativeFieldValuesUpdate'
           = go _cfvuProFileId _cfvuCreativeFieldId
               (Just AltJSON)
               _cfvuPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy CreativeFieldValuesUpdateResource)

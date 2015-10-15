@@ -97,7 +97,7 @@ instance GoogleRequest DatafeedsInsert' where
         requestClient DatafeedsInsert'{..}
           = go _diMerchantId _diDryRun (Just AltJSON)
               _diPayload
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy DatafeedsInsertResource)

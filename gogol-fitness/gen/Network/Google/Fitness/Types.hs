@@ -16,7 +16,7 @@
 module Network.Google.Fitness.Types
     (
     -- * Service Configuration
-      fitnessService
+      fitness
 
     -- * OAuth Scopes
     , fitnessBodyReadScope
@@ -198,32 +198,32 @@ import           Network.Google.Fitness.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Fitness. This contains the host and root path used as a starting point for constructing service requests.
-fitnessService :: Service
-fitnessService
+fitness :: Service
+fitness
   = defaultService (ServiceId "fitness:v1")
       "www.googleapis.com"
       "fitness/v1/users/"
 
 -- | View body sensor information in Google Fit
 fitnessBodyReadScope :: OAuthScope
-fitnessBodyReadScope = OAuthScope "https://www.googleapis.com/auth/fitness.body.read";
+fitnessBodyReadScope = "https://www.googleapis.com/auth/fitness.body.read";
 
 -- | View your activity information in Google Fit
 fitnessActivityReadScope :: OAuthScope
-fitnessActivityReadScope = OAuthScope "https://www.googleapis.com/auth/fitness.activity.read";
+fitnessActivityReadScope = "https://www.googleapis.com/auth/fitness.activity.read";
 
 -- | View and store your activity information in Google Fit
 fitnessActivityWriteScope :: OAuthScope
-fitnessActivityWriteScope = OAuthScope "https://www.googleapis.com/auth/fitness.activity.write";
+fitnessActivityWriteScope = "https://www.googleapis.com/auth/fitness.activity.write";
 
 -- | View your stored location data in Google Fit
 fitnessLocationReadScope :: OAuthScope
-fitnessLocationReadScope = OAuthScope "https://www.googleapis.com/auth/fitness.location.read";
+fitnessLocationReadScope = "https://www.googleapis.com/auth/fitness.location.read";
 
 -- | View and store your location data in Google Fit
 fitnessLocationWriteScope :: OAuthScope
-fitnessLocationWriteScope = OAuthScope "https://www.googleapis.com/auth/fitness.location.write";
+fitnessLocationWriteScope = "https://www.googleapis.com/auth/fitness.location.write";
 
 -- | View and store body sensor data in Google Fit
 fitnessBodyWriteScope :: OAuthScope
-fitnessBodyWriteScope = OAuthScope "https://www.googleapis.com/auth/fitness.body.write";
+fitnessBodyWriteScope = "https://www.googleapis.com/auth/fitness.body.write";

@@ -85,8 +85,7 @@ layId = lens _layId (\ s a -> s{_layId = a})
 instance GoogleRequest LayersPatch' where
         type Rs LayersPatch' = ()
         requestClient LayersPatch'{..}
-          = go _layId (Just AltJSON) _layPayload
-              mapsEngineService
+          = go _layId (Just AltJSON) _layPayload mapsEngine
           where go
                   = buildClient (Proxy :: Proxy LayersPatchResource)
                       mempty

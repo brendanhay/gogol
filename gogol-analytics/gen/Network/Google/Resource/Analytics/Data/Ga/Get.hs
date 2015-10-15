@@ -223,7 +223,7 @@ instance GoogleRequest DataGaGet' where
               _dggMaxResults
               _dggSegment
               (Just AltJSON)
-              analyticsService
+              analytics
           where go
                   = buildClient (Proxy :: Proxy DataGaGetResource)
                       mempty

@@ -90,7 +90,7 @@ instance GoogleRequest GlobalForwardingRulesDelete'
         type Rs GlobalForwardingRulesDelete' = Operation
         requestClient GlobalForwardingRulesDelete'{..}
           = go _gfrdProject _gfrdForwardingRule (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy GlobalForwardingRulesDeleteResource)

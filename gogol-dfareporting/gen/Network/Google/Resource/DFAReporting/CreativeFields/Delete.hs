@@ -86,8 +86,7 @@ cfdId = lens _cfdId (\ s a -> s{_cfdId = a})
 instance GoogleRequest CreativeFieldsDelete' where
         type Rs CreativeFieldsDelete' = ()
         requestClient CreativeFieldsDelete'{..}
-          = go _cfdProFileId _cfdId (Just AltJSON)
-              dFAReportingService
+          = go _cfdProFileId _cfdId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy CreativeFieldsDeleteResource)

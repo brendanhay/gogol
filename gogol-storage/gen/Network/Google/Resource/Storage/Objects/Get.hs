@@ -181,7 +181,7 @@ instance GoogleRequest ObjectsGet' where
               _ogProjection
               _ogGeneration
               (Just AltJSON)
-              storageService
+              storage
           where go :<|> _
                   = buildClient (Proxy :: Proxy ObjectsGetResource)
                       mempty
@@ -197,7 +197,7 @@ instance GoogleRequest (MediaDownload ObjectsGet')
               _ogProjection
               _ogGeneration
               (Just AltMedia)
-              storageService
+              storage
           where _ :<|> go
                   = buildClient (Proxy :: Proxy ObjectsGetResource)
                       mempty

@@ -21,7 +21,7 @@
 module Network.Google.Container
     (
     -- * Service Configuration
-      containerService
+      container
 
     -- * API Declaration
     , ContainerAPI

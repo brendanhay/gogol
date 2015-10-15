@@ -100,7 +100,7 @@ instance GoogleRequest PlacementsPatch' where
         requestClient PlacementsPatch'{..}
           = go _ppProFileId (Just _ppId) (Just AltJSON)
               _ppPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy PlacementsPatchResource)

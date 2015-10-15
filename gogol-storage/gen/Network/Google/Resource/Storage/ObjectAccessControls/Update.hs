@@ -135,7 +135,7 @@ instance GoogleRequest ObjectAccessControlsUpdate'
               _oacuGeneration
               (Just AltJSON)
               _oacuPayload
-              storageService
+              storage
           where go
                   = buildClient
                       (Proxy :: Proxy ObjectAccessControlsUpdateResource)

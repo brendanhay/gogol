@@ -182,7 +182,7 @@ instance GoogleRequest ProjectsTopicsSetIAMPolicy'
               _ptsipCallback
               (Just AltJSON)
               _ptsipPayload
-              pubSubService
+              pubSub
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsTopicsSetIAMPolicyResource)

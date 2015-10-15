@@ -82,8 +82,7 @@ instance GoogleRequest
          QuestsResetMultipleForAllPlayers' where
         type Rs QuestsResetMultipleForAllPlayers' = ()
         requestClient QuestsResetMultipleForAllPlayers'{..}
-          = go (Just AltJSON) _qrmfapPayload
-              gamesManagementService
+          = go (Just AltJSON) _qrmfapPayload gamesManagement
           where go
                   = buildClient
                       (Proxy ::

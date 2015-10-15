@@ -90,7 +90,7 @@ instance GoogleRequest CommentThreadsUpdate' where
         type Rs CommentThreadsUpdate' = CommentThread
         requestClient CommentThreadsUpdate'{..}
           = go (Just _ctuPart) (Just AltJSON) _ctuPayload
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy CommentThreadsUpdateResource)

@@ -90,7 +90,7 @@ instance GoogleRequest NotificationsGet' where
         type Rs NotificationsGet' = Notification
         requestClient NotificationsGet'{..}
           = go _ngCustomer _ngNotificationId (Just AltJSON)
-              directoryService
+              directory
           where go
                   = buildClient
                       (Proxy :: Proxy NotificationsGetResource)

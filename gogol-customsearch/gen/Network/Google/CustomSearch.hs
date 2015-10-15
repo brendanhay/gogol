@@ -19,7 +19,7 @@
 module Network.Google.CustomSearch
     (
     -- * Service Configuration
-      customSearchService
+      customSearch
 
     -- * API Declaration
     , CustomSearchAPI

@@ -75,8 +75,7 @@ rgPayload
 instance GoogleRequest ReportsGenerate' where
         type Rs ReportsGenerate' = Report
         requestClient ReportsGenerate'{..}
-          = go (Just AltJSON) _rgPayload
-              doubleClickSearchService
+          = go (Just AltJSON) _rgPayload doubleClickSearch
           where go
                   = buildClient
                       (Proxy :: Proxy ReportsGenerateResource)

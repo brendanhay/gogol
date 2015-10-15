@@ -88,8 +88,7 @@ siPayload
 instance GoogleRequest SubscriptionsInsert' where
         type Rs SubscriptionsInsert' = Subscription
         requestClient SubscriptionsInsert'{..}
-          = go (Just _siPart) (Just AltJSON) _siPayload
-              youTubeService
+          = go (Just _siPart) (Just AltJSON) _siPayload youTube
           where go
                   = buildClient
                       (Proxy :: Proxy SubscriptionsInsertResource)

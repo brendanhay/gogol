@@ -103,7 +103,7 @@ instance GoogleRequest PlacementGroupsPatch' where
         requestClient PlacementGroupsPatch'{..}
           = go _pgpProFileId (Just _pgpId) (Just AltJSON)
               _pgpPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy PlacementGroupsPatchResource)

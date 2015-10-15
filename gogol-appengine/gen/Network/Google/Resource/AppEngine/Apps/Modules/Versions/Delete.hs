@@ -195,7 +195,7 @@ instance GoogleRequest AppsModulesVersionsDelete'
               _amvdBearerToken
               _amvdCallback
               (Just AltJSON)
-              appEngineService
+              appEngine
           where go
                   = buildClient
                       (Proxy :: Proxy AppsModulesVersionsDeleteResource)

@@ -82,8 +82,7 @@ srLeaderboardId
 instance GoogleRequest ScoresReset' where
         type Rs ScoresReset' = PlayerScoreResetResponse
         requestClient ScoresReset'{..}
-          = go _srLeaderboardId (Just AltJSON)
-              gamesManagementService
+          = go _srLeaderboardId (Just AltJSON) gamesManagement
           where go
                   = buildClient (Proxy :: Proxy ScoresResetResource)
                       mempty

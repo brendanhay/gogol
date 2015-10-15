@@ -77,7 +77,7 @@ instance GoogleRequest
         type Rs LeaderboardConfigurationsDelete' = ()
         requestClient LeaderboardConfigurationsDelete'{..}
           = go _lcdLeaderboardId (Just AltJSON)
-              gamesConfigurationService
+              gamesConfiguration
           where go
                   = buildClient
                       (Proxy ::

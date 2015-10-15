@@ -139,7 +139,7 @@ instance GoogleRequest
               _aaucclPageToken
               _aaucclMaxResults
               (Just AltJSON)
-              adSenseService
+              adSense
           where go
                   = buildClient
                       (Proxy ::

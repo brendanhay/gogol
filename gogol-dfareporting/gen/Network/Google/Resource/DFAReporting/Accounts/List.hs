@@ -169,7 +169,7 @@ instance GoogleRequest AccountsList' where
               _alSortField
               _alMaxResults
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient (Proxy :: Proxy AccountsListResource)
                       mempty

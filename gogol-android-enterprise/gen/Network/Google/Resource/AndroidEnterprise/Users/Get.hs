@@ -88,7 +88,7 @@ instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
         requestClient UsersGet'{..}
           = go _ugEnterpriseId _ugUserId (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient (Proxy :: Proxy UsersGetResource)
                       mempty

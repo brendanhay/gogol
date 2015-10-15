@@ -87,8 +87,7 @@ ngNetwork
 instance GoogleRequest NetworksGet' where
         type Rs NetworksGet' = Network
         requestClient NetworksGet'{..}
-          = go _ngProject _ngNetwork (Just AltJSON)
-              computeService
+          = go _ngProject _ngNetwork (Just AltJSON) compute
           where go
                   = buildClient (Proxy :: Proxy NetworksGetResource)
                       mempty

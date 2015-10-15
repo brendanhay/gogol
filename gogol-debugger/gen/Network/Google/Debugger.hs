@@ -20,7 +20,7 @@
 module Network.Google.Debugger
     (
     -- * Service Configuration
-      debuggerService
+      debugger
 
     -- * API Declaration
     , DebuggerAPI

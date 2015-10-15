@@ -74,7 +74,7 @@ ggGroupKey
 instance GoogleRequest GroupsGet' where
         type Rs GroupsGet' = Group
         requestClient GroupsGet'{..}
-          = go _ggGroupKey (Just AltJSON) directoryService
+          = go _ggGroupKey (Just AltJSON) directory
           where go
                   = buildClient (Proxy :: Proxy GroupsGetResource)
                       mempty

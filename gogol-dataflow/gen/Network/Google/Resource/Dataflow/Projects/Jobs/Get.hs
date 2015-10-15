@@ -185,7 +185,7 @@ instance GoogleRequest ProjectsJobsGet' where
               _pjgView
               _pjgCallback
               (Just AltJSON)
-              dataflowService
+              dataflow
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsJobsGetResource)

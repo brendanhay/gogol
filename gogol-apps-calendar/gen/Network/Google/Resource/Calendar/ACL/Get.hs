@@ -89,6 +89,6 @@ instance GoogleRequest ACLGet' where
         type Rs ACLGet' = ACLRule
         requestClient ACLGet'{..}
           = go _agCalendarId _agRuleId (Just AltJSON)
-              appsCalendarService
+              appsCalendar
           where go
                   = buildClient (Proxy :: Proxy ACLGetResource) mempty

@@ -118,7 +118,7 @@ instance GoogleRequest ActivitiesList' where
           = go _aUserId _aCollection _aPageToken
               (Just _aMaxResults)
               (Just AltJSON)
-              plusDomainsService
+              plusDomains
           where go
                   = buildClient (Proxy :: Proxy ActivitiesListResource)
                       mempty

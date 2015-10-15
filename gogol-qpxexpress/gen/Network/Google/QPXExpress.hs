@@ -20,7 +20,7 @@
 module Network.Google.QPXExpress
     (
     -- * Service Configuration
-      qPXExpressService
+      qPXExpress
 
     -- * API Declaration
     , QPXExpressAPI

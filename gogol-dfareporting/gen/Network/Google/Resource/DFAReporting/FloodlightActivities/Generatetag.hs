@@ -93,7 +93,7 @@ instance GoogleRequest
         requestClient FloodlightActivitiesGeneratetag'{..}
           = go _fagProFileId _fagFloodlightActivityId
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy ::

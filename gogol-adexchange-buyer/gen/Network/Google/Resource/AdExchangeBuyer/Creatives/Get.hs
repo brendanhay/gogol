@@ -90,7 +90,7 @@ instance GoogleRequest CreativesGet' where
         type Rs CreativesGet' = Creative
         requestClient CreativesGet'{..}
           = go _cgAccountId _cgBuyerCreativeId (Just AltJSON)
-              adExchangeBuyerService
+              adExchangeBuyer
           where go
                   = buildClient (Proxy :: Proxy CreativesGetResource)
                       mempty

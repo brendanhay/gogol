@@ -77,7 +77,7 @@ rooRoomId
 instance GoogleRequest RoomsDismiss' where
         type Rs RoomsDismiss' = ()
         requestClient RoomsDismiss'{..}
-          = go _rooRoomId (Just AltJSON) gamesService
+          = go _rooRoomId (Just AltJSON) games
           where go
                   = buildClient (Proxy :: Proxy RoomsDismissResource)
                       mempty

@@ -115,7 +115,7 @@ instance GoogleRequest AccountshippingUpdate' where
           = go _auuMerchantId _auuAccountId _auuDryRun
               (Just AltJSON)
               _auuPayload
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy AccountshippingUpdateResource)

@@ -115,7 +115,7 @@ instance GoogleRequest AccountsInsert' where
           = go _aiUserToken _aiAccountType _aiAccountName
               (Just AltJSON)
               _aiPayload
-              mirrorService
+              mirror
           where go
                   = buildClient (Proxy :: Proxy AccountsInsertResource)
                       mempty

@@ -100,7 +100,7 @@ instance GoogleRequest InstancesReset' where
         type Rs InstancesReset' = Operation
         requestClient InstancesReset'{..}
           = go _irrProject _irrZone _irrInstance (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient (Proxy :: Proxy InstancesResetResource)
                       mempty

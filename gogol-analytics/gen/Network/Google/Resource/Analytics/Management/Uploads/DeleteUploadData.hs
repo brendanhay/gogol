@@ -124,7 +124,7 @@ instance GoogleRequest
               _mududCustomDataSourceId
               (Just AltJSON)
               _mududPayload
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy ::

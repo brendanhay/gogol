@@ -16,7 +16,7 @@
 module Network.Google.AppsReseller.Types
     (
     -- * Service Configuration
-      appsResellerService
+      appsReseller
 
     -- * OAuth Scopes
     , appsOrderReadonlyScope
@@ -129,16 +129,16 @@ import           Network.Google.AppsReseller.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Enterprise Apps Reseller API. This contains the host and root path used as a starting point for constructing service requests.
-appsResellerService :: Service
-appsResellerService
+appsReseller :: Service
+appsReseller
   = defaultService (ServiceId "reseller:v1")
       "www.googleapis.com"
       "apps/reseller/v1/"
 
 -- | Manage users on your domain
 appsOrderReadonlyScope :: OAuthScope
-appsOrderReadonlyScope = OAuthScope "https://www.googleapis.com/auth/apps.order.readonly";
+appsOrderReadonlyScope = "https://www.googleapis.com/auth/apps.order.readonly";
 
 -- | Manage users on your domain
 appsOrderScope :: OAuthScope
-appsOrderScope = OAuthScope "https://www.googleapis.com/auth/apps.order";
+appsOrderScope = "https://www.googleapis.com/auth/apps.order";

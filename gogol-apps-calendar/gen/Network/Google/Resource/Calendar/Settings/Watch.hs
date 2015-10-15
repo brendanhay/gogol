@@ -121,7 +121,7 @@ instance GoogleRequest SettingsWatch' where
           = go _swSyncToken _swPageToken _swMaxResults
               (Just AltJSON)
               _swPayload
-              appsCalendarService
+              appsCalendar
           where go
                   = buildClient (Proxy :: Proxy SettingsWatchResource)
                       mempty

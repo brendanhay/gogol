@@ -16,7 +16,7 @@
 module Network.Google.OAuth2.Types
     (
     -- * Service Configuration
-      oAuth2Service
+      oAuth2
 
     -- * OAuth Scopes
     , userinfoProfileScope
@@ -73,24 +73,24 @@ import           Network.Google.OAuth2.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google OAuth2 API. This contains the host and root path used as a starting point for constructing service requests.
-oAuth2Service :: Service
-oAuth2Service
+oAuth2 :: Service
+oAuth2
   = defaultService (ServiceId "oauth2:v2")
       "www.googleapis.com"
       ""
 
 -- | View your basic profile info
 userinfoProfileScope :: OAuthScope
-userinfoProfileScope = OAuthScope "https://www.googleapis.com/auth/userinfo.profile";
+userinfoProfileScope = "https://www.googleapis.com/auth/userinfo.profile";
 
 -- | Know your basic profile info and list of people in your circles.
 plusLoginScope :: OAuthScope
-plusLoginScope = OAuthScope "https://www.googleapis.com/auth/plus.login";
+plusLoginScope = "https://www.googleapis.com/auth/plus.login";
 
 -- | View your email address
 userinfoEmailScope :: OAuthScope
-userinfoEmailScope = OAuthScope "https://www.googleapis.com/auth/userinfo.email";
+userinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
 
 -- | Know who you are on Google
 plusMeScope :: OAuthScope
-plusMeScope = OAuthScope "https://www.googleapis.com/auth/plus.me";
+plusMeScope = "https://www.googleapis.com/auth/plus.me";

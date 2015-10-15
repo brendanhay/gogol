@@ -105,7 +105,7 @@ instance GoogleRequest SubscriptionsChangePlan' where
         requestClient SubscriptionsChangePlan'{..}
           = go _scpCustomerId _scpSubscriptionId (Just AltJSON)
               _scpPayload
-              appsResellerService
+              appsReseller
           where go
                   = buildClient
                       (Proxy :: Proxy SubscriptionsChangePlanResource)

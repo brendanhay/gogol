@@ -76,7 +76,7 @@ ullUserId
 instance GoogleRequest UsersLabelsList' where
         type Rs UsersLabelsList' = ListLabelsResponse
         requestClient UsersLabelsList'{..}
-          = go _ullUserId (Just AltJSON) gmailService
+          = go _ullUserId (Just AltJSON) gmail
           where go
                   = buildClient
                       (Proxy :: Proxy UsersLabelsListResource)

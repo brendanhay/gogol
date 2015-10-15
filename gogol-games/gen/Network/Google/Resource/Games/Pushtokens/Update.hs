@@ -74,7 +74,7 @@ puPayload
 instance GoogleRequest PushtokensUpdate' where
         type Rs PushtokensUpdate' = ()
         requestClient PushtokensUpdate'{..}
-          = go (Just AltJSON) _puPayload gamesService
+          = go (Just AltJSON) _puPayload games
           where go
                   = buildClient
                       (Proxy :: Proxy PushtokensUpdateResource)

@@ -128,7 +128,7 @@ instance GoogleRequest ActivitiesSearch' where
               _asPageToken
               (Just _asMaxResults)
               (Just AltJSON)
-              plusService
+              plus
           where go
                   = buildClient
                       (Proxy :: Proxy ActivitiesSearchResource)

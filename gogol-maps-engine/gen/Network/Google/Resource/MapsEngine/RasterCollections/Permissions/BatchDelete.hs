@@ -92,8 +92,7 @@ instance GoogleRequest
              PermissionsBatchDeleteResponse
         requestClient
           RasterCollectionsPermissionsBatchDelete'{..}
-          = go _rcpbdId (Just AltJSON) _rcpbdPayload
-              mapsEngineService
+          = go _rcpbdId (Just AltJSON) _rcpbdPayload mapsEngine
           where go
                   = buildClient
                       (Proxy ::

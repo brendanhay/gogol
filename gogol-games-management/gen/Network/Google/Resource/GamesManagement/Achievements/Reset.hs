@@ -81,8 +81,7 @@ arAchievementId
 instance GoogleRequest AchievementsReset' where
         type Rs AchievementsReset' = AchievementResetResponse
         requestClient AchievementsReset'{..}
-          = go _arAchievementId (Just AltJSON)
-              gamesManagementService
+          = go _arAchievementId (Just AltJSON) gamesManagement
           where go
                   = buildClient
                       (Proxy :: Proxy AchievementsResetResource)

@@ -86,8 +86,7 @@ tgTask = lens _tgTask (\ s a -> s{_tgTask = a})
 instance GoogleRequest TasksGet' where
         type Rs TasksGet' = Task
         requestClient TasksGet'{..}
-          = go _tgTaskList _tgTask (Just AltJSON)
-              appsTasksService
+          = go _tgTaskList _tgTask (Just AltJSON) appsTasks
           where go
                   = buildClient (Proxy :: Proxy TasksGetResource)
                       mempty

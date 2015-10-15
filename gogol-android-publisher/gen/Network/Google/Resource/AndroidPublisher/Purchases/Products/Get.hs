@@ -105,7 +105,7 @@ instance GoogleRequest PurchasesProductsGet' where
         requestClient PurchasesProductsGet'{..}
           = go _ppgPackageName _ppgProductId _ppgToken
               (Just AltJSON)
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy PurchasesProductsGetResource)

@@ -104,7 +104,7 @@ instance GoogleRequest LandingPagesUpdate' where
         requestClient LandingPagesUpdate'{..}
           = go _lpuProFileId _lpuCampaignId (Just AltJSON)
               _lpuPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy LandingPagesUpdateResource)

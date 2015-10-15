@@ -271,7 +271,7 @@ instance GoogleRequest FilesUpdate' where
               (Just AltJSON)
               _fuPayload
               _fuMedia
-              driveService
+              drive
           where go
                   = buildClient (Proxy :: Proxy FilesUpdateResource)
                       mempty

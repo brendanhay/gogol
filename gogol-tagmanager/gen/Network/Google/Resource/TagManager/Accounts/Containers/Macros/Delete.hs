@@ -105,7 +105,7 @@ instance GoogleRequest
         requestClient AccountsContainersMacrosDelete'{..}
           = go _acmdAccountId _acmdContainerId _acmdMacroId
               (Just AltJSON)
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy ::

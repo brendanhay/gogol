@@ -85,8 +85,7 @@ tmgId = lens _tmgId (\ s a -> s{_tmgId = a})
 instance GoogleRequest TrainedModelsGet' where
         type Rs TrainedModelsGet' = Insert2
         requestClient TrainedModelsGet'{..}
-          = go _tmgProject _tmgId (Just AltJSON)
-              predictionService
+          = go _tmgProject _tmgId (Just AltJSON) prediction
           where go
                   = buildClient
                       (Proxy :: Proxy TrainedModelsGetResource)

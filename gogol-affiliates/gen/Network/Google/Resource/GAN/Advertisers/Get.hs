@@ -104,7 +104,7 @@ instance GoogleRequest AdvertisersGet' where
         type Rs AdvertisersGet' = Advertiser
         requestClient AdvertisersGet'{..}
           = go _agRole _agRoleId _agAdvertiserId (Just AltJSON)
-              affiliatesService
+              affiliates
           where go
                   = buildClient (Proxy :: Proxy AdvertisersGetResource)
                       mempty

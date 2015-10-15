@@ -108,7 +108,7 @@ instance GoogleRequest SSLCertsInsert' where
         requestClient SSLCertsInsert'{..}
           = go _sciProject _sciInstance (Just AltJSON)
               _sciPayload
-              sQLAdminService
+              sQLAdmin
           where go
                   = buildClient (Proxy :: Proxy SSLCertsInsertResource)
                       mempty

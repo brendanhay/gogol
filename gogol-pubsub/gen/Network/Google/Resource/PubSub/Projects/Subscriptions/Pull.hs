@@ -182,7 +182,7 @@ instance GoogleRequest ProjectsSubscriptionsPull'
               _pspCallback
               (Just AltJSON)
               _pspPayload
-              pubSubService
+              pubSub
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsSubscriptionsPullResource)

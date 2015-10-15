@@ -131,7 +131,7 @@ instance GoogleRequest
           = go _igmalProject _igmalFilter _igmalPageToken
               (Just _igmalMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy ::

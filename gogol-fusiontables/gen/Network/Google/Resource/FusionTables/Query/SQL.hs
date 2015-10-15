@@ -107,7 +107,7 @@ instance GoogleRequest QuerySQL' where
         requestClient QuerySQL'{..}
           = go (Just _qsqlSQL) _qsqlTyped _qsqlHdrs
               (Just AltJSON)
-              fusionTablesService
+              fusionTables
           where go :<|> _
                   = buildClient (Proxy :: Proxy QuerySQLResource)
                       mempty
@@ -118,7 +118,7 @@ instance GoogleRequest (MediaDownload QuerySQL')
         requestClient (MediaDownload QuerySQL'{..})
           = go (Just _qsqlSQL) _qsqlTyped _qsqlHdrs
               (Just AltMedia)
-              fusionTablesService
+              fusionTables
           where _ :<|> go
                   = buildClient (Proxy :: Proxy QuerySQLResource)
                       mempty

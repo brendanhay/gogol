@@ -74,7 +74,7 @@ gdGroupKey
 instance GoogleRequest GroupsDelete' where
         type Rs GroupsDelete' = ()
         requestClient GroupsDelete'{..}
-          = go _gdGroupKey (Just AltJSON) directoryService
+          = go _gdGroupKey (Just AltJSON) directory
           where go
                   = buildClient (Proxy :: Proxy GroupsDeleteResource)
                       mempty

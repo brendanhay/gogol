@@ -173,7 +173,7 @@ instance GoogleRequest TransferJobsGet' where
               _tjgProjectId
               _tjgCallback
               (Just AltJSON)
-              storageTransferService
+              storageTransfer
           where go
                   = buildClient
                       (Proxy :: Proxy TransferJobsGetResource)

@@ -100,7 +100,7 @@ instance GoogleRequest EventTagsPatch' where
         requestClient EventTagsPatch'{..}
           = go _etpProFileId (Just _etpId) (Just AltJSON)
               _etpPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient (Proxy :: Proxy EventTagsPatchResource)
                       mempty

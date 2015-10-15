@@ -91,7 +91,7 @@ instance GoogleRequest GlobalForwardingRulesGet'
         type Rs GlobalForwardingRulesGet' = ForwardingRule
         requestClient GlobalForwardingRulesGet'{..}
           = go _gfrgProject _gfrgForwardingRule (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy GlobalForwardingRulesGetResource)

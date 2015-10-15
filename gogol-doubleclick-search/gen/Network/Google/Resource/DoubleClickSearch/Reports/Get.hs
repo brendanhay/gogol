@@ -74,8 +74,7 @@ rgReportId
 instance GoogleRequest ReportsGet' where
         type Rs ReportsGet' = Report
         requestClient ReportsGet'{..}
-          = go _rgReportId (Just AltJSON)
-              doubleClickSearchService
+          = go _rgReportId (Just AltJSON) doubleClickSearch
           where go
                   = buildClient (Proxy :: Proxy ReportsGetResource)
                       mempty

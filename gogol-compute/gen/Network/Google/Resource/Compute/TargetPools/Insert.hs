@@ -103,7 +103,7 @@ instance GoogleRequest TargetPoolsInsert' where
         requestClient TargetPoolsInsert'{..}
           = go _tpiProject _tpiRegion (Just AltJSON)
               _tpiPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy TargetPoolsInsertResource)

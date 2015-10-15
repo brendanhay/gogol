@@ -183,7 +183,7 @@ instance GoogleRequest ReadgroupsetsExport' where
               _reCallback
               (Just AltJSON)
               _rePayload
-              genomicsService
+              genomics
           where go
                   = buildClient
                       (Proxy :: Proxy ReadgroupsetsExportResource)

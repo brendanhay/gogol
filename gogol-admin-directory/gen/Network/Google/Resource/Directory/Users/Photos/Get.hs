@@ -76,7 +76,7 @@ upgUserKey
 instance GoogleRequest UsersPhotosGet' where
         type Rs UsersPhotosGet' = UserPhoto
         requestClient UsersPhotosGet'{..}
-          = go _upgUserKey (Just AltJSON) directoryService
+          = go _upgUserKey (Just AltJSON) directory
           where go
                   = buildClient (Proxy :: Proxy UsersPhotosGetResource)
                       mempty

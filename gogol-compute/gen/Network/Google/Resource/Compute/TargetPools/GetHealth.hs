@@ -119,7 +119,7 @@ instance GoogleRequest TargetPoolsGetHealth' where
           = go _tpghProject _tpghRegion _tpghTargetPool
               (Just AltJSON)
               _tpghPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy TargetPoolsGetHealthResource)

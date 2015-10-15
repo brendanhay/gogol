@@ -111,7 +111,7 @@ instance GoogleRequest CalendarListPatch' where
         requestClient CalendarListPatch'{..}
           = go _clpCalendarId _clpColorRgbFormat (Just AltJSON)
               _clpPayload
-              appsCalendarService
+              appsCalendar
           where go
                   = buildClient
                       (Proxy :: Proxy CalendarListPatchResource)

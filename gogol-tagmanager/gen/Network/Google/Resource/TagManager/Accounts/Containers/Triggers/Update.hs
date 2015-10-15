@@ -133,7 +133,7 @@ instance GoogleRequest
               _actuFingerprint
               (Just AltJSON)
               _actuPayload
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy ::

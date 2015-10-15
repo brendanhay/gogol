@@ -128,7 +128,7 @@ instance GoogleRequest CommentsList' where
               (Just _cMaxResults)
               (Just _cIncludeDeleted)
               (Just AltJSON)
-              driveService
+              drive
           where go
                   = buildClient (Proxy :: Proxy CommentsListResource)
                       mempty

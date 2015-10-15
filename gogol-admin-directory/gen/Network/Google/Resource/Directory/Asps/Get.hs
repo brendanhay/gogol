@@ -87,7 +87,6 @@ agUserKey
 instance GoogleRequest AspsGet' where
         type Rs AspsGet' = Asp
         requestClient AspsGet'{..}
-          = go _agUserKey _agCodeId (Just AltJSON)
-              directoryService
+          = go _agUserKey _agCodeId (Just AltJSON) directory
           where go
                   = buildClient (Proxy :: Proxy AspsGetResource) mempty

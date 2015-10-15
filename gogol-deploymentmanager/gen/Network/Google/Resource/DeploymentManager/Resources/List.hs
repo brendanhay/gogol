@@ -136,7 +136,7 @@ instance GoogleRequest ResourcesList' where
           = go _rlProject _rlDeployment _rlFilter _rlPageToken
               (Just _rlMaxResults)
               (Just AltJSON)
-              deploymentManagerService
+              deploymentManager
           where go
                   = buildClient (Proxy :: Proxy ResourcesListResource)
                       mempty

@@ -98,7 +98,7 @@ instance GoogleRequest PagesInsert' where
         type Rs PagesInsert' = Page
         requestClient PagesInsert'{..}
           = go _piBlogId _piIsDraft (Just AltJSON) _piPayload
-              bloggerService
+              blogger
           where go
                   = buildClient (Proxy :: Proxy PagesInsertResource)
                       mempty

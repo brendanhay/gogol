@@ -75,7 +75,7 @@ galGroupKey
 instance GoogleRequest GroupsAliasesList' where
         type Rs GroupsAliasesList' = Aliases
         requestClient GroupsAliasesList'{..}
-          = go _galGroupKey (Just AltJSON) directoryService
+          = go _galGroupKey (Just AltJSON) directory
           where go
                   = buildClient
                       (Proxy :: Proxy GroupsAliasesListResource)

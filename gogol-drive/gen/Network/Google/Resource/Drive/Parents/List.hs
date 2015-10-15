@@ -74,7 +74,7 @@ pFileId = lens _pFileId (\ s a -> s{_pFileId = a})
 instance GoogleRequest ParentsList' where
         type Rs ParentsList' = ParentList
         requestClient ParentsList'{..}
-          = go _pFileId (Just AltJSON) driveService
+          = go _pFileId (Just AltJSON) drive
           where go
                   = buildClient (Proxy :: Proxy ParentsListResource)
                       mempty

@@ -89,8 +89,7 @@ fiPayload
 instance GoogleRequest FirewallsInsert' where
         type Rs FirewallsInsert' = Operation
         requestClient FirewallsInsert'{..}
-          = go _fiProject (Just AltJSON) _fiPayload
-              computeService
+          = go _fiProject (Just AltJSON) _fiPayload compute
           where go
                   = buildClient
                       (Proxy :: Proxy FirewallsInsertResource)

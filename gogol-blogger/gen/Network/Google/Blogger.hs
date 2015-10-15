@@ -19,7 +19,7 @@
 module Network.Google.Blogger
     (
     -- * Service Configuration
-      bloggerService
+      blogger
 
     -- * API Declaration
     , BloggerAPI

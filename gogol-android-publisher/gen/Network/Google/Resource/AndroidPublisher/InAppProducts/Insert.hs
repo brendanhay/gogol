@@ -106,7 +106,7 @@ instance GoogleRequest InAppProductsInsert' where
           = go _iapiPackageName _iapiAutoConvertMissingPrices
               (Just AltJSON)
               _iapiPayload
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy InAppProductsInsertResource)

@@ -97,7 +97,7 @@ instance GoogleRequest GroupsInsert' where
         requestClient GroupsInsert'{..}
           = go _giOnBehalfOfContentOwner (Just AltJSON)
               _giPayload
-              youTubeAnalyticsService
+              youTubeAnalytics
           where go
                   = buildClient (Proxy :: Proxy GroupsInsertResource)
                       mempty

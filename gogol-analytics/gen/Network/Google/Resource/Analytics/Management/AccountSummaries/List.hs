@@ -95,7 +95,7 @@ instance GoogleRequest
              AccountSummaries
         requestClient ManagementAccountSummariesList'{..}
           = go _maslStartIndex _maslMaxResults (Just AltJSON)
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy ::

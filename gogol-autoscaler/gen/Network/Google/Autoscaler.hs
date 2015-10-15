@@ -20,7 +20,7 @@
 module Network.Google.Autoscaler
     (
     -- * Service Configuration
-      autoscalerService
+      autoscaler
 
     -- * API Declaration
     , AutoscalerAPI

@@ -186,7 +186,7 @@ instance GoogleRequest ReportsGenerate' where
               _rgStartIndex
               _rgMaxResults
               (Just AltJSON)
-              adSenseHostService
+              adSenseHost
           where go
                   = buildClient
                       (Proxy :: Proxy ReportsGenerateResource)

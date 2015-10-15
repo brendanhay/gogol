@@ -182,7 +182,7 @@ instance GoogleRequest CoursesAliasesDelete' where
               _cadBearerToken
               _cadCallback
               (Just AltJSON)
-              classroomService
+              classroom
           where go
                   = buildClient
                       (Proxy :: Proxy CoursesAliasesDeleteResource)

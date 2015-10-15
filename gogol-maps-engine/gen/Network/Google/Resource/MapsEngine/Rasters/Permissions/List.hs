@@ -76,7 +76,7 @@ instance GoogleRequest RastersPermissionsList' where
         type Rs RastersPermissionsList' =
              PermissionsListResponse
         requestClient RastersPermissionsList'{..}
-          = go _rplId (Just AltJSON) mapsEngineService
+          = go _rplId (Just AltJSON) mapsEngine
           where go
                   = buildClient
                       (Proxy :: Proxy RastersPermissionsListResource)

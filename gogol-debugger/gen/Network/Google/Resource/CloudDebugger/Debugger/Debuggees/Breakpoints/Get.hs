@@ -182,7 +182,7 @@ instance GoogleRequest
               _ddbgBearerToken
               _ddbgCallback
               (Just AltJSON)
-              debuggerService
+              debugger
           where go
                   = buildClient
                       (Proxy ::

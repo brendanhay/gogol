@@ -74,8 +74,7 @@ bigAccountId
 instance GoogleRequest BillingInfoGet' where
         type Rs BillingInfoGet' = BillingInfo
         requestClient BillingInfoGet'{..}
-          = go _bigAccountId (Just AltJSON)
-              adExchangeBuyerService
+          = go _bigAccountId (Just AltJSON) adExchangeBuyer
           where go
                   = buildClient (Proxy :: Proxy BillingInfoGetResource)
                       mempty

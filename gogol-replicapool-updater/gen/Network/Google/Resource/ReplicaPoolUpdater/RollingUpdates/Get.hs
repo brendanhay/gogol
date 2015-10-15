@@ -101,7 +101,7 @@ instance GoogleRequest RollingUpdatesGet' where
         requestClient RollingUpdatesGet'{..}
           = go _rugProject _rugZone _rugRollingUpdate
               (Just AltJSON)
-              replicaPoolUpdaterService
+              replicaPoolUpdater
           where go
                   = buildClient
                       (Proxy :: Proxy RollingUpdatesGetResource)

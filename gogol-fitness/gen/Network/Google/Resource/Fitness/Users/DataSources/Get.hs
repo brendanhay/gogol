@@ -89,7 +89,7 @@ instance GoogleRequest UsersDataSourcesGet' where
         type Rs UsersDataSourcesGet' = DataSource
         requestClient UsersDataSourcesGet'{..}
           = go _udsgUserId _udsgDataSourceId (Just AltJSON)
-              fitnessService
+              fitness
           where go
                   = buildClient
                       (Proxy :: Proxy UsersDataSourcesGetResource)

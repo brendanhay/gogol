@@ -93,7 +93,7 @@ instance GoogleRequest FloodlightConfigurationsList'
         requestClient FloodlightConfigurationsList'{..}
           = go _fclProFileId (_fclIds ^. _Default)
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy FloodlightConfigurationsListResource)

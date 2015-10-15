@@ -180,7 +180,7 @@ instance GoogleRequest DatasetsGetIAMPolicy' where
               _dgipCallback
               (Just AltJSON)
               _dgipPayload
-              genomicsService
+              genomics
           where go
                   = buildClient
                       (Proxy :: Proxy DatasetsGetIAMPolicyResource)

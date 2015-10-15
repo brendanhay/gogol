@@ -92,7 +92,7 @@ instance GoogleRequest
              FloodlightActivityGroup
         requestClient FloodlightActivityGroupsUpdate'{..}
           = go _faguProFileId (Just AltJSON) _faguPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy ::

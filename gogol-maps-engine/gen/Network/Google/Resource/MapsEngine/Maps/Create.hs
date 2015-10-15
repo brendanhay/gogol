@@ -74,7 +74,7 @@ mcPayload
 instance GoogleRequest MapsCreate' where
         type Rs MapsCreate' = Map
         requestClient MapsCreate'{..}
-          = go (Just AltJSON) _mcPayload mapsEngineService
+          = go (Just AltJSON) _mcPayload mapsEngine
           where go
                   = buildClient (Proxy :: Proxy MapsCreateResource)
                       mempty

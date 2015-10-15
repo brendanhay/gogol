@@ -74,7 +74,7 @@ cgChangeId
 instance GoogleRequest ChangesGet' where
         type Rs ChangesGet' = Change
         requestClient ChangesGet'{..}
-          = go _cgChangeId (Just AltJSON) driveService
+          = go _cgChangeId (Just AltJSON) drive
           where go
                   = buildClient (Proxy :: Proxy ChangesGetResource)
                       mempty

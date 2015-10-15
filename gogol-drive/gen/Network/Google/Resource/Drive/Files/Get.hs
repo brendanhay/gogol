@@ -136,7 +136,7 @@ instance GoogleRequest FilesGet' where
               (Just _fgAcknowledgeAbuse)
               _fgRevisionId
               (Just AltJSON)
-              driveService
+              drive
           where go :<|> _
                   = buildClient (Proxy :: Proxy FilesGetResource)
                       mempty
@@ -150,7 +150,7 @@ instance GoogleRequest (MediaDownload FilesGet')
               (Just _fgAcknowledgeAbuse)
               _fgRevisionId
               (Just AltMedia)
-              driveService
+              drive
           where _ :<|> go
                   = buildClient (Proxy :: Proxy FilesGetResource)
                       mempty

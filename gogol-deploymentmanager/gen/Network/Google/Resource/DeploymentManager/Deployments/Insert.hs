@@ -108,7 +108,7 @@ instance GoogleRequest DeploymentsInsert' where
         type Rs DeploymentsInsert' = Operation
         requestClient DeploymentsInsert'{..}
           = go _diProject _diPreview (Just AltJSON) _diPayload
-              deploymentManagerService
+              deploymentManager
           where go
                   = buildClient
                       (Proxy :: Proxy DeploymentsInsertResource)

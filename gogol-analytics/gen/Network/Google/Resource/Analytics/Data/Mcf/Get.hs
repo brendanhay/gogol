@@ -200,7 +200,7 @@ instance GoogleRequest DataMcfGet' where
               _dmgStartIndex
               _dmgMaxResults
               (Just AltJSON)
-              analyticsService
+              analytics
           where go
                   = buildClient (Proxy :: Proxy DataMcfGetResource)
                       mempty

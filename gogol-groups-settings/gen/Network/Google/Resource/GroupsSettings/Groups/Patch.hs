@@ -87,7 +87,7 @@ instance GoogleRequest GroupsPatch' where
         type Rs GroupsPatch' = Groups
         requestClient GroupsPatch'{..}
           = go _gpGroupUniqueId (Just AltJSON) _gpPayload
-              groupsSettingsService
+              groupsSettings
           where go
                   = buildClient (Proxy :: Proxy GroupsPatchResource)
                       mempty

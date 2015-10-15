@@ -106,7 +106,7 @@ instance GoogleRequest PeopleListByCircle' where
           = go _plbcCircleId _plbcPageToken
               (Just _plbcMaxResults)
               (Just AltJSON)
-              plusDomainsService
+              plusDomains
           where go
                   = buildClient
                       (Proxy :: Proxy PeopleListByCircleResource)

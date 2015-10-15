@@ -191,7 +191,7 @@ instance GoogleRequest ReadgroupsetsPatch' where
               _rpCallback
               (Just AltJSON)
               _rpPayload
-              genomicsService
+              genomics
           where go
                   = buildClient
                       (Proxy :: Proxy ReadgroupsetsPatchResource)

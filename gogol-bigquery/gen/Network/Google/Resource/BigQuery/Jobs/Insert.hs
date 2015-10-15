@@ -97,7 +97,7 @@ instance GoogleRequest JobsInsert' where
         type Rs JobsInsert' = Job
         requestClient JobsInsert'{..}
           = go _jiProjectId (Just AltJSON) _jiPayload _jiMedia
-              bigQueryService
+              bigQuery
           where go
                   = buildClient (Proxy :: Proxy JobsInsertResource)
                       mempty

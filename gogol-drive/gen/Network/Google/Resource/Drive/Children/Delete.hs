@@ -87,8 +87,7 @@ cdChildId
 instance GoogleRequest ChildrenDelete' where
         type Rs ChildrenDelete' = ()
         requestClient ChildrenDelete'{..}
-          = go _cdFolderId _cdChildId (Just AltJSON)
-              driveService
+          = go _cdFolderId _cdChildId (Just AltJSON) drive
           where go
                   = buildClient (Proxy :: Proxy ChildrenDeleteResource)
                       mempty

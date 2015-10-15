@@ -118,7 +118,7 @@ instance GoogleRequest QuestsList' where
           = go _qlPlayerId _qlLanguage _qlPageToken
               _qlMaxResults
               (Just AltJSON)
-              gamesService
+              games
           where go
                   = buildClient (Proxy :: Proxy QuestsListResource)
                       mempty

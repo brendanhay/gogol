@@ -89,7 +89,7 @@ instance GoogleRequest MyLibraryAnnotationsDelete'
         type Rs MyLibraryAnnotationsDelete' = ()
         requestClient MyLibraryAnnotationsDelete'{..}
           = go _mladAnnotationId _mladSource (Just AltJSON)
-              booksService
+              books
           where go
                   = buildClient
                       (Proxy :: Proxy MyLibraryAnnotationsDeleteResource)

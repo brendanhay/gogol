@@ -80,8 +80,7 @@ instance GoogleRequest
          AccountsMetadataDimensionsList' where
         type Rs AccountsMetadataDimensionsList' = Metadata
         requestClient AccountsMetadataDimensionsList'{..}
-          = go _amdlAccountId (Just AltJSON)
-              adExchangeSellerService
+          = go _amdlAccountId (Just AltJSON) adExchangeSeller
           where go
                   = buildClient
                       (Proxy ::

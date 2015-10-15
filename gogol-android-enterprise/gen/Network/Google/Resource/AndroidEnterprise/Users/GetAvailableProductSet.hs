@@ -91,7 +91,7 @@ instance GoogleRequest UsersGetAvailableProductSet'
         type Rs UsersGetAvailableProductSet' = ProductSet
         requestClient UsersGetAvailableProductSet'{..}
           = go _ugapsEnterpriseId _ugapsUserId (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient
                       (Proxy :: Proxy UsersGetAvailableProductSetResource)

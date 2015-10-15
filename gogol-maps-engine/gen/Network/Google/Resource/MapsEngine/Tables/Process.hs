@@ -75,7 +75,7 @@ tId = lens _tId (\ s a -> s{_tId = a})
 instance GoogleRequest TablesProcess' where
         type Rs TablesProcess' = ProcessResponse
         requestClient TablesProcess'{..}
-          = go _tId (Just AltJSON) mapsEngineService
+          = go _tId (Just AltJSON) mapsEngine
           where go
                   = buildClient (Proxy :: Proxy TablesProcessResource)
                       mempty

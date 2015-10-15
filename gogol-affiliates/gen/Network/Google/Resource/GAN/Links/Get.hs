@@ -103,7 +103,7 @@ instance GoogleRequest LinksGet' where
         type Rs LinksGet' = Link
         requestClient LinksGet'{..}
           = go _lgRole _lgRoleId _lgLinkId (Just AltJSON)
-              affiliatesService
+              affiliates
           where go
                   = buildClient (Proxy :: Proxy LinksGetResource)
                       mempty

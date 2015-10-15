@@ -85,8 +85,7 @@ ualUserKey
 instance GoogleRequest UsersAliasesList' where
         type Rs UsersAliasesList' = Aliases
         requestClient UsersAliasesList'{..}
-          = go _ualUserKey _ualEvent (Just AltJSON)
-              directoryService
+          = go _ualUserKey _ualEvent (Just AltJSON) directory
           where go
                   = buildClient
                       (Proxy :: Proxy UsersAliasesListResource)

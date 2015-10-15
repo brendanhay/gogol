@@ -87,8 +87,7 @@ ccgId = lens _ccgId (\ s a -> s{_ccgId = a})
 instance GoogleRequest ContentCategoriesGet' where
         type Rs ContentCategoriesGet' = ContentCategory
         requestClient ContentCategoriesGet'{..}
-          = go _ccgProFileId _ccgId (Just AltJSON)
-              dFAReportingService
+          = go _ccgProFileId _ccgId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy ContentCategoriesGetResource)

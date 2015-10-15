@@ -60,7 +60,7 @@ getCertForOpenIdConnect' = GetCertForOpenIdConnect'
 instance GoogleRequest GetCertForOpenIdConnect' where
         type Rs GetCertForOpenIdConnect' = JWK
         requestClient GetCertForOpenIdConnect'{}
-          = go (Just AltJSON) oAuth2Service
+          = go (Just AltJSON) oAuth2
           where go
                   = buildClient
                       (Proxy :: Proxy GetCertForOpenIdConnectMethod)

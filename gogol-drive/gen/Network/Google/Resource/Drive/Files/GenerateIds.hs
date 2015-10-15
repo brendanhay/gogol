@@ -88,7 +88,7 @@ instance GoogleRequest FilesGenerateIds' where
         requestClient FilesGenerateIds'{..}
           = go (Just _fgiSpace) (Just _fgiMaxResults)
               (Just AltJSON)
-              driveService
+              drive
           where go
                   = buildClient
                       (Proxy :: Proxy FilesGenerateIdsResource)

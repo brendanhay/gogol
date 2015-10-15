@@ -103,7 +103,7 @@ instance GoogleRequest AchievementDefinitionsList'
         requestClient AchievementDefinitionsList'{..}
           = go _adlLanguage _adlPageToken _adlMaxResults
               (Just AltJSON)
-              gamesService
+              games
           where go
                   = buildClient
                       (Proxy :: Proxy AchievementDefinitionsListResource)

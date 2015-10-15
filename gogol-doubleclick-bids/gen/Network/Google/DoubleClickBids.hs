@@ -19,7 +19,7 @@
 module Network.Google.DoubleClickBids
     (
     -- * Service Configuration
-      doubleClickBidsService
+      doubleClickBids
 
     -- * API Declaration
     , DoubleClickBidsAPI

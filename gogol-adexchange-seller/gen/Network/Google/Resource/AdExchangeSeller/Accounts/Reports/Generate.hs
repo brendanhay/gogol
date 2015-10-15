@@ -218,7 +218,7 @@ instance GoogleRequest AccountsReportsGenerate' where
               _argStartIndex
               _argMaxResults
               (Just AltJSON)
-              adExchangeSellerService
+              adExchangeSeller
           where go :<|> _
                   = buildClient
                       (Proxy :: Proxy AccountsReportsGenerateResource)
@@ -240,7 +240,7 @@ instance GoogleRequest
               _argStartIndex
               _argMaxResults
               (Just AltMedia)
-              adExchangeSellerService
+              adExchangeSeller
           where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy AccountsReportsGenerateResource)

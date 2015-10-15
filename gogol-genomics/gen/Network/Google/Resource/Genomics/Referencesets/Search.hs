@@ -166,7 +166,7 @@ instance GoogleRequest ReferencesetsSearch' where
               _rssCallback
               (Just AltJSON)
               _rssPayload
-              genomicsService
+              genomics
           where go
                   = buildClient
                       (Proxy :: Proxy ReferencesetsSearchResource)

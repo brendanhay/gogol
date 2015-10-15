@@ -94,7 +94,7 @@ instance GoogleRequest AccountActiveAdSummariesGet'
         requestClient AccountActiveAdSummariesGet'{..}
           = go _aaasgProFileId _aaasgSummaryAccountId
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy AccountActiveAdSummariesGetResource)

@@ -86,8 +86,7 @@ gadAlias = lens _gadAlias (\ s a -> s{_gadAlias = a})
 instance GoogleRequest GroupsAliasesDelete' where
         type Rs GroupsAliasesDelete' = ()
         requestClient GroupsAliasesDelete'{..}
-          = go _gadGroupKey _gadAlias (Just AltJSON)
-              directoryService
+          = go _gadGroupKey _gadAlias (Just AltJSON) directory
           where go
                   = buildClient
                       (Proxy :: Proxy GroupsAliasesDeleteResource)

@@ -239,7 +239,7 @@ instance GoogleRequest MapsList' where
               _mlTags
               _mlCreatedBefore
               (Just AltJSON)
-              mapsEngineService
+              mapsEngine
           where go
                   = buildClient (Proxy :: Proxy MapsListResource)
                       mempty

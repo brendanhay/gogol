@@ -100,7 +100,7 @@ instance GoogleRequest UserRolesPatch' where
         requestClient UserRolesPatch'{..}
           = go _urpProFileId (Just _urpId) (Just AltJSON)
               _urpPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient (Proxy :: Proxy UserRolesPatchResource)
                       mempty

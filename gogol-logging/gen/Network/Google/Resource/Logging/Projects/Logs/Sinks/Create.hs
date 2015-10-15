@@ -194,7 +194,7 @@ instance GoogleRequest ProjectsLogsSinksCreate' where
               _plscCallback
               (Just AltJSON)
               _plscPayload
-              loggingService
+              logging
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsLogsSinksCreateResource)

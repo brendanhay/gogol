@@ -242,7 +242,7 @@ instance GoogleRequest RastersList' where
               _rlTags
               _rlCreatedBefore
               (Just AltJSON)
-              mapsEngineService
+              mapsEngine
           where go
                   = buildClient (Proxy :: Proxy RastersListResource)
                       mempty

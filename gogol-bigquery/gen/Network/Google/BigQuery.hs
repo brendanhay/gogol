@@ -19,7 +19,7 @@
 module Network.Google.BigQuery
     (
     -- * Service Configuration
-      bigQueryService
+      bigQuery
 
     -- * API Declaration
     , BigQueryAPI

@@ -73,7 +73,7 @@ tdId = lens _tdId (\ s a -> s{_tdId = a})
 instance GoogleRequest TimelineDelete' where
         type Rs TimelineDelete' = ()
         requestClient TimelineDelete'{..}
-          = go _tdId (Just AltJSON) mirrorService
+          = go _tdId (Just AltJSON) mirror
           where go
                   = buildClient (Proxy :: Proxy TimelineDeleteResource)
                       mempty

@@ -74,7 +74,7 @@ alLocale = lens _alLocale (\ s a -> s{_alLocale = a})
 instance GoogleRequest AlertsList' where
         type Rs AlertsList' = Alerts
         requestClient AlertsList'{..}
-          = go _alLocale (Just AltJSON) adSenseService
+          = go _alLocale (Just AltJSON) adSense
           where go
                   = buildClient (Proxy :: Proxy AlertsListResource)
                       mempty

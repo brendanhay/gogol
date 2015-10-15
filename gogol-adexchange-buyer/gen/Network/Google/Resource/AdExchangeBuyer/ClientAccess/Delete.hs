@@ -87,7 +87,7 @@ instance GoogleRequest ClientAccessDelete' where
         requestClient ClientAccessDelete'{..}
           = go _cadClientAccountId (Just _cadSponsorAccountId)
               (Just AltJSON)
-              adExchangeBuyerService
+              adExchangeBuyer
           where go
                   = buildClient
                       (Proxy :: Proxy ClientAccessDeleteResource)

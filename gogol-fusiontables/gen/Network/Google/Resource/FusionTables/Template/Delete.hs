@@ -89,7 +89,7 @@ instance GoogleRequest TemplateDelete' where
         type Rs TemplateDelete' = ()
         requestClient TemplateDelete'{..}
           = go _tddTableId _tddTemplateId (Just AltJSON)
-              fusionTablesService
+              fusionTables
           where go
                   = buildClient (Proxy :: Proxy TemplateDeleteResource)
                       mempty

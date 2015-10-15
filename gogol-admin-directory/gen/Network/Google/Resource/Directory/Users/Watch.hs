@@ -224,7 +224,7 @@ instance GoogleRequest UsersWatch' where
               _uwMaxResults
               (Just AltJSON)
               _uwPayload
-              directoryService
+              directory
           where go
                   = buildClient (Proxy :: Proxy UsersWatchResource)
                       mempty

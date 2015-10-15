@@ -187,7 +187,7 @@ instance GoogleRequest FilesInsert' where
               (Just AltJSON)
               _fiPayload
               _fiMedia
-              driveService
+              drive
           where go
                   = buildClient (Proxy :: Proxy FilesInsertResource)
                       mempty

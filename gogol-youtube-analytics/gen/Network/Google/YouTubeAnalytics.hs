@@ -19,7 +19,7 @@
 module Network.Google.YouTubeAnalytics
     (
     -- * Service Configuration
-      youTubeAnalyticsService
+      youTubeAnalytics
 
     -- * API Declaration
     , YouTubeAnalyticsAPI

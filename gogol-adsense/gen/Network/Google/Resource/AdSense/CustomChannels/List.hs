@@ -107,7 +107,7 @@ instance GoogleRequest CustomChannelsList' where
         requestClient CustomChannelsList'{..}
           = go _cclAdClientId _cclPageToken _cclMaxResults
               (Just AltJSON)
-              adSenseService
+              adSense
           where go
                   = buildClient
                       (Proxy :: Proxy CustomChannelsListResource)

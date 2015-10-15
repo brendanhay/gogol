@@ -190,7 +190,7 @@ instance GoogleRequest ProjectsSubscriptionsList'
               _pslPageSize
               _pslCallback
               (Just AltJSON)
-              pubSubService
+              pubSub
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsSubscriptionsListResource)

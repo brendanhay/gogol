@@ -85,7 +85,7 @@ zgZone = lens _zgZone (\ s a -> s{_zgZone = a})
 instance GoogleRequest ZonesGet' where
         type Rs ZonesGet' = Zone
         requestClient ZonesGet'{..}
-          = go _zgProject _zgZone (Just AltJSON) computeService
+          = go _zgProject _zgZone (Just AltJSON) compute
           where go
                   = buildClient (Proxy :: Proxy ZonesGetResource)
                       mempty

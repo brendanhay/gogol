@@ -77,7 +77,7 @@ sgId = lens _sgId (\ s a -> s{_sgId = a})
 instance GoogleRequest SettingsGet' where
         type Rs SettingsGet' = Setting
         requestClient SettingsGet'{..}
-          = go _sgId (Just AltJSON) mirrorService
+          = go _sgId (Just AltJSON) mirror
           where go
                   = buildClient (Proxy :: Proxy SettingsGetResource)
                       mempty

@@ -73,7 +73,7 @@ cdId = lens _cdId (\ s a -> s{_cdId = a})
 instance GoogleRequest ContactsDelete' where
         type Rs ContactsDelete' = ()
         requestClient ContactsDelete'{..}
-          = go _cdId (Just AltJSON) mirrorService
+          = go _cdId (Just AltJSON) mirror
           where go
                   = buildClient (Proxy :: Proxy ContactsDeleteResource)
                       mempty

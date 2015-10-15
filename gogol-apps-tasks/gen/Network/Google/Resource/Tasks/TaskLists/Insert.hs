@@ -78,7 +78,7 @@ tliPayload
 instance GoogleRequest TaskListsInsert' where
         type Rs TaskListsInsert' = TaskList
         requestClient TaskListsInsert'{..}
-          = go (Just AltJSON) _tliPayload appsTasksService
+          = go (Just AltJSON) _tliPayload appsTasks
           where go
                   = buildClient
                       (Proxy :: Proxy TaskListsInsertResource)

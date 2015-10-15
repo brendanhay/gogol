@@ -76,7 +76,7 @@ couProFileId
 instance GoogleRequest CountriesList' where
         type Rs CountriesList' = CountriesListResponse
         requestClient CountriesList'{..}
-          = go _couProFileId (Just AltJSON) dFAReportingService
+          = go _couProFileId (Just AltJSON) dFAReporting
           where go
                   = buildClient (Proxy :: Proxy CountriesListResource)
                       mempty

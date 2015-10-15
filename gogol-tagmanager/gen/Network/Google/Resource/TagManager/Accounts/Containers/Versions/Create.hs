@@ -108,7 +108,7 @@ instance GoogleRequest
         requestClient AccountsContainersVersionsCreate'{..}
           = go _acvcAccountId _acvcContainerId (Just AltJSON)
               _acvcPayload
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy ::

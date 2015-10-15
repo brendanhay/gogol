@@ -106,7 +106,7 @@ instance GoogleRequest ManagementWebPropertiesPatch'
         requestClient ManagementWebPropertiesPatch'{..}
           = go _mwppAccountId _mwppWebPropertyId (Just AltJSON)
               _mwppPayload
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementWebPropertiesPatchResource)

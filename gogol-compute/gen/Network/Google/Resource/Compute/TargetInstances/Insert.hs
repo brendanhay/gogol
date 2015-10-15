@@ -102,7 +102,7 @@ instance GoogleRequest TargetInstancesInsert' where
         type Rs TargetInstancesInsert' = Operation
         requestClient TargetInstancesInsert'{..}
           = go _tiiProject _tiiZone (Just AltJSON) _tiiPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy TargetInstancesInsertResource)

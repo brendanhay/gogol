@@ -87,8 +87,7 @@ dlDatasetId
 instance GoogleRequest DatasetsLookup' where
         type Rs DatasetsLookup' = LookupResponse
         requestClient DatasetsLookup'{..}
-          = go _dlDatasetId (Just AltJSON) _dlPayload
-              datastoreService
+          = go _dlDatasetId (Just AltJSON) _dlPayload datastore
           where go
                   = buildClient (Proxy :: Proxy DatasetsLookupResource)
                       mempty

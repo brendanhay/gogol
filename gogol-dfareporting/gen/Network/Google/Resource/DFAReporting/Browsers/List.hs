@@ -76,7 +76,7 @@ blProFileId
 instance GoogleRequest BrowsersList' where
         type Rs BrowsersList' = BrowsersListResponse
         requestClient BrowsersList'{..}
-          = go _blProFileId (Just AltJSON) dFAReportingService
+          = go _blProFileId (Just AltJSON) dFAReporting
           where go
                   = buildClient (Proxy :: Proxy BrowsersListResource)
                       mempty

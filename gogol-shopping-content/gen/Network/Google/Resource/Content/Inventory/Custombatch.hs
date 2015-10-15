@@ -92,7 +92,7 @@ instance GoogleRequest InventoryCustombatch' where
              InventoryCustomBatchResponse
         requestClient InventoryCustombatch'{..}
           = go _icDryRun (Just AltJSON) _icPayload
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy InventoryCustombatchResource)

@@ -102,7 +102,7 @@ instance GoogleRequest ClientAccessUpdate' where
           = go _cauClientAccountId (Just _cauSponsorAccountId)
               (Just AltJSON)
               _cauPayload
-              adExchangeBuyerService
+              adExchangeBuyer
           where go
                   = buildClient
                       (Proxy :: Proxy ClientAccessUpdateResource)

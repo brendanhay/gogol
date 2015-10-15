@@ -87,8 +87,7 @@ umdProject
 instance GoogleRequest URLMapsDelete' where
         type Rs URLMapsDelete' = Operation
         requestClient URLMapsDelete'{..}
-          = go _umdProject _umdURLMap (Just AltJSON)
-              computeService
+          = go _umdProject _umdURLMap (Just AltJSON) compute
           where go
                   = buildClient (Proxy :: Proxy URLMapsDeleteResource)
                       mempty

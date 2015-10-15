@@ -88,7 +88,7 @@ instance GoogleRequest SchemasGet' where
         type Rs SchemasGet' = Schema
         requestClient SchemasGet'{..}
           = go _sgCustomerId _sgSchemaKey (Just AltJSON)
-              directoryService
+              directory
           where go
                   = buildClient (Proxy :: Proxy SchemasGetResource)
                       mempty

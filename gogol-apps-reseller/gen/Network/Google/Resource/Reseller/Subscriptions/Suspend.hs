@@ -90,7 +90,7 @@ instance GoogleRequest SubscriptionsSuspend' where
         type Rs SubscriptionsSuspend' = Subscription
         requestClient SubscriptionsSuspend'{..}
           = go _ssCustomerId _ssSubscriptionId (Just AltJSON)
-              appsResellerService
+              appsReseller
           where go
                   = buildClient
                       (Proxy :: Proxy SubscriptionsSuspendResource)

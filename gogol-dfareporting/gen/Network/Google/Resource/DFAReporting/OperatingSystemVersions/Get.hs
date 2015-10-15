@@ -91,7 +91,7 @@ instance GoogleRequest OperatingSystemVersionsGet'
              OperatingSystemVersion
         requestClient OperatingSystemVersionsGet'{..}
           = go _osvgProFileId _osvgId (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy OperatingSystemVersionsGetResource)

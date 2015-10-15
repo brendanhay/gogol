@@ -100,7 +100,7 @@ instance GoogleRequest TemplateList' where
         requestClient TemplateList'{..}
           = go _tllTableId _tllPageToken _tllMaxResults
               (Just AltJSON)
-              fusionTablesService
+              fusionTables
           where go
                   = buildClient (Proxy :: Proxy TemplateListResource)
                       mempty

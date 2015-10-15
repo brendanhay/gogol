@@ -187,7 +187,7 @@ instance GoogleRequest CoursesStudentsDelete' where
               _csdBearerToken
               _csdCallback
               (Just AltJSON)
-              classroomService
+              classroom
           where go
                   = buildClient
                       (Proxy :: Proxy CoursesStudentsDeleteResource)

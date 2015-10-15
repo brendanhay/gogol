@@ -91,7 +91,7 @@ instance GoogleRequest
         type Rs ManagementAccountUserLinksDelete' = ()
         requestClient ManagementAccountUserLinksDelete'{..}
           = go _mauldAccountId _mauldLinkId (Just AltJSON)
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy ::

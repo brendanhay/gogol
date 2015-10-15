@@ -101,7 +101,7 @@ instance GoogleRequest ActivitiesInsert' where
         type Rs ActivitiesInsert' = Activity
         requestClient ActivitiesInsert'{..}
           = go _aiUserId _aiPreview (Just AltJSON) _aiPayload
-              plusDomainsService
+              plusDomains
           where go
                   = buildClient
                       (Proxy :: Proxy ActivitiesInsertResource)

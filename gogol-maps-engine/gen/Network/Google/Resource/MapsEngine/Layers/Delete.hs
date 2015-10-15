@@ -76,7 +76,7 @@ ldId = lens _ldId (\ s a -> s{_ldId = a})
 instance GoogleRequest LayersDelete' where
         type Rs LayersDelete' = ()
         requestClient LayersDelete'{..}
-          = go _ldId (Just AltJSON) mapsEngineService
+          = go _ldId (Just AltJSON) mapsEngine
           where go
                   = buildClient (Proxy :: Proxy LayersDeleteResource)
                       mempty

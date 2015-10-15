@@ -179,7 +179,7 @@ instance GoogleRequest OperationsCancel' where
               _ocCallback
               (Just AltJSON)
               _ocPayload
-              genomicsService
+              genomics
           where go
                   = buildClient
                       (Proxy :: Proxy OperationsCancelResource)

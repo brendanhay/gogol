@@ -76,7 +76,7 @@ rlProFileId
 instance GoogleRequest RegionsList' where
         type Rs RegionsList' = RegionsListResponse
         requestClient RegionsList'{..}
-          = go _rlProFileId (Just AltJSON) dFAReportingService
+          = go _rlProFileId (Just AltJSON) dFAReporting
           where go
                   = buildClient (Proxy :: Proxy RegionsListResource)
                       mempty

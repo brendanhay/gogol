@@ -89,7 +89,7 @@ instance GoogleRequest CalendarsUpdate' where
         type Rs CalendarsUpdate' = Calendar
         requestClient CalendarsUpdate'{..}
           = go _cuCalendarId (Just AltJSON) _cuPayload
-              appsCalendarService
+              appsCalendar
           where go
                   = buildClient
                       (Proxy :: Proxy CalendarsUpdateResource)

@@ -19,7 +19,7 @@
 module Network.Google.AppsLicensing
     (
     -- * Service Configuration
-      appsLicensingService
+      appsLicensing
 
     -- * API Declaration
     , AppsLicensingAPI

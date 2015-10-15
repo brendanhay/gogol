@@ -19,7 +19,7 @@
 module Network.Google.Drive
     (
     -- * Service Configuration
-      driveService
+      drive
 
     -- * API Declaration
     , DriveAPI

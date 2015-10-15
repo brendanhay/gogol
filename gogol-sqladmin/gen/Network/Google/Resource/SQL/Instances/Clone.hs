@@ -103,7 +103,7 @@ instance GoogleRequest InstancesClone' where
         type Rs InstancesClone' = Operation
         requestClient InstancesClone'{..}
           = go _icProject _icInstance (Just AltJSON) _icPayload
-              sQLAdminService
+              sQLAdmin
           where go
                   = buildClient (Proxy :: Proxy InstancesCloneResource)
                       mempty

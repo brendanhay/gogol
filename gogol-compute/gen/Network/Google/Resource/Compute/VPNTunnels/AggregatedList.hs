@@ -128,7 +128,7 @@ instance GoogleRequest VPNTunnelsAggregatedList'
           = go _vtalProject _vtalFilter _vtalPageToken
               (Just _vtalMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy VPNTunnelsAggregatedListResource)

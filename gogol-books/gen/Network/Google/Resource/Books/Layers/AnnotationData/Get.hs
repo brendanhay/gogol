@@ -192,7 +192,7 @@ instance GoogleRequest LayersAnnotationDataGet' where
               _ladgSource
               _ladgH
               (Just AltJSON)
-              booksService
+              books
           where go
                   = buildClient
                       (Proxy :: Proxy LayersAnnotationDataGetResource)

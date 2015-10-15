@@ -81,7 +81,7 @@ instance GoogleRequest MyConfigUpdateUserSettings'
          where
         type Rs MyConfigUpdateUserSettings' = Usersettings
         requestClient MyConfigUpdateUserSettings'{..}
-          = go (Just AltJSON) _mcuusPayload booksService
+          = go (Just AltJSON) _mcuusPayload books
           where go
                   = buildClient
                       (Proxy :: Proxy MyConfigUpdateUserSettingsResource)

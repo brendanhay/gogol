@@ -128,7 +128,7 @@ instance GoogleRequest
               (Just _ucesmafCategory)
               (Just _ucesmafPlatform)
               (Just AltJSON)
-              webmasterToolsService
+              webmasterTools
           where go
                   = buildClient
                       (Proxy ::

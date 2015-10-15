@@ -107,7 +107,7 @@ instance GoogleRequest CustomChannelsPatch' where
           = go _ccpAdClientId (Just _ccpCustomChannelId)
               (Just AltJSON)
               _ccpPayload
-              adSenseHostService
+              adSenseHost
           where go
                   = buildClient
                       (Proxy :: Proxy CustomChannelsPatchResource)

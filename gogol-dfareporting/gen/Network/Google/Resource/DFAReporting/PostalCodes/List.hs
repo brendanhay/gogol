@@ -76,7 +76,7 @@ pclProFileId
 instance GoogleRequest PostalCodesList' where
         type Rs PostalCodesList' = PostalCodesListResponse
         requestClient PostalCodesList'{..}
-          = go _pclProFileId (Just AltJSON) dFAReportingService
+          = go _pclProFileId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy PostalCodesListResource)

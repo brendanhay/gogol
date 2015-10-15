@@ -120,7 +120,7 @@ instance GoogleRequest ScoresSubmit' where
           = go _ssLeaderboardId (Just _ssScore) _ssScoreTag
               _ssLanguage
               (Just AltJSON)
-              gamesService
+              games
           where go
                   = buildClient (Proxy :: Proxy ScoresSubmitResource)
                       mempty

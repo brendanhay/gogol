@@ -98,7 +98,7 @@ instance GoogleRequest ProductsInsert' where
         requestClient ProductsInsert'{..}
           = go _piMerchantId _piDryRun (Just AltJSON)
               _piPayload
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient (Proxy :: Proxy ProductsInsertResource)
                       mempty

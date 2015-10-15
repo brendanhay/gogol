@@ -104,7 +104,7 @@ instance GoogleRequest UsersRemovePublicKey' where
         requestClient UsersRemovePublicKey'{..}
           = go _urpkProject _urpkUser (Just _urpkFingerprint)
               (Just AltJSON)
-              userAccountsService
+              userAccounts
           where go
                   = buildClient
                       (Proxy :: Proxy UsersRemovePublicKeyResource)

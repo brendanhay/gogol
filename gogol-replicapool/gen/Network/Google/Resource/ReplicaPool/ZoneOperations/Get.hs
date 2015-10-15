@@ -100,7 +100,7 @@ instance GoogleRequest ZoneOperationsGet' where
         requestClient ZoneOperationsGet'{..}
           = go _zogProject _zogZone _zogOperation
               (Just AltJSON)
-              replicaPoolService
+              replicaPool
           where go
                   = buildClient
                       (Proxy :: Proxy ZoneOperationsGetResource)

@@ -103,7 +103,7 @@ instance GoogleRequest OrdersShiplineitems' where
         requestClient OrdersShiplineitems'{..}
           = go _osMerchantId _osOrderId (Just AltJSON)
               _osPayload
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy OrdersShiplineitemsResource)

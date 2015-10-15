@@ -107,7 +107,7 @@ instance GoogleRequest ManagementProFilesDelete'
         requestClient ManagementProFilesDelete'{..}
           = go _mpfdAccountId _mpfdWebPropertyId _mpfdProFileId
               (Just AltJSON)
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementProFilesDeleteResource)

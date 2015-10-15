@@ -180,7 +180,7 @@ instance GoogleRequest OrganizationsGetIAMPolicy'
               _ogipCallback
               (Just AltJSON)
               _ogipPayload
-              resourceManagerService
+              resourceManager
           where go
                   = buildClient
                       (Proxy :: Proxy OrganizationsGetIAMPolicyResource)

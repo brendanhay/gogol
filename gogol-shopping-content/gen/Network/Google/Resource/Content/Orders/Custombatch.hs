@@ -77,8 +77,7 @@ instance GoogleRequest OrdersCustombatch' where
         type Rs OrdersCustombatch' =
              OrdersCustomBatchResponse
         requestClient OrdersCustombatch'{..}
-          = go (Just AltJSON) _ordPayload
-              shoppingContentService
+          = go (Just AltJSON) _ordPayload shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy OrdersCustombatchResource)

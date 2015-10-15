@@ -112,7 +112,7 @@ instance GoogleRequest PlayListItemsInsert' where
           = go (Just _pliiPart) _pliiOnBehalfOfContentOwner
               (Just AltJSON)
               _pliiPayload
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy PlayListItemsInsertResource)

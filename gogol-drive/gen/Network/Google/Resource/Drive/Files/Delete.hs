@@ -75,7 +75,7 @@ fdFileId = lens _fdFileId (\ s a -> s{_fdFileId = a})
 instance GoogleRequest FilesDelete' where
         type Rs FilesDelete' = ()
         requestClient FilesDelete'{..}
-          = go _fdFileId (Just AltJSON) driveService
+          = go _fdFileId (Just AltJSON) drive
           where go
                   = buildClient (Proxy :: Proxy FilesDeleteResource)
                       mempty

@@ -89,7 +89,7 @@ instance GoogleRequest UsersDataSourcesDelete' where
         type Rs UsersDataSourcesDelete' = DataSource
         requestClient UsersDataSourcesDelete'{..}
           = go _udsdUserId _udsdDataSourceId (Just AltJSON)
-              fitnessService
+              fitness
           where go
                   = buildClient
                       (Proxy :: Proxy UsersDataSourcesDeleteResource)

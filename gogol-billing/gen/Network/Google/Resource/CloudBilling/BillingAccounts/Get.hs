@@ -165,7 +165,7 @@ instance GoogleRequest BillingAccountsGet' where
               _bagBearerToken
               _bagCallback
               (Just AltJSON)
-              billingService
+              billing
           where go
                   = buildClient
                       (Proxy :: Proxy BillingAccountsGetResource)

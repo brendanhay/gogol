@@ -104,7 +104,7 @@ instance GoogleRequest OrgUnitsUpdate' where
         requestClient OrgUnitsUpdate'{..}
           = go _ouuCustomerId _ouuOrgUnitPath (Just AltJSON)
               _ouuPayload
-              directoryService
+              directory
           where go
                   = buildClient (Proxy :: Proxy OrgUnitsUpdateResource)
                       mempty

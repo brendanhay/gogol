@@ -75,7 +75,7 @@ instance GoogleRequest PermissionsGetIdForEmail'
          where
         type Rs PermissionsGetIdForEmail' = PermissionId
         requestClient PermissionsGetIdForEmail'{..}
-          = go _pgifeEmail (Just AltJSON) driveService
+          = go _pgifeEmail (Just AltJSON) drive
           where go
                   = buildClient
                       (Proxy :: Proxy PermissionsGetIdForEmailResource)

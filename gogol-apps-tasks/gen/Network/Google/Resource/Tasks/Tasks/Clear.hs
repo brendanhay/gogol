@@ -79,7 +79,7 @@ tcTaskList
 instance GoogleRequest TasksClear' where
         type Rs TasksClear' = ()
         requestClient TasksClear'{..}
-          = go _tcTaskList (Just AltJSON) appsTasksService
+          = go _tcTaskList (Just AltJSON) appsTasks
           where go
                   = buildClient (Proxy :: Proxy TasksClearResource)
                       mempty

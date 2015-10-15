@@ -116,7 +116,7 @@ instance GoogleRequest AccounttaxPatch' where
           = go _appMerchantId _appAccountId _appDryRun
               (Just AltJSON)
               _appPayload
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy AccounttaxPatchResource)

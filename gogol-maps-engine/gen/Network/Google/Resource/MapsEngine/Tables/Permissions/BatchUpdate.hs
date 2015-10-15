@@ -94,8 +94,7 @@ instance GoogleRequest TablesPermissionsBatchUpdate'
         type Rs TablesPermissionsBatchUpdate' =
              PermissionsBatchUpdateResponse
         requestClient TablesPermissionsBatchUpdate'{..}
-          = go _tpbuId (Just AltJSON) _tpbuPayload
-              mapsEngineService
+          = go _tpbuId (Just AltJSON) _tpbuPayload mapsEngine
           where go
                   = buildClient
                       (Proxy :: Proxy TablesPermissionsBatchUpdateResource)

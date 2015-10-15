@@ -179,7 +179,7 @@ instance GoogleRequest GoogleServiceAccountsGet'
               _gsagBearerToken
               _gsagCallback
               (Just AltJSON)
-              storageTransferService
+              storageTransfer
           where go
                   = buildClient
                       (Proxy :: Proxy GoogleServiceAccountsGetResource)

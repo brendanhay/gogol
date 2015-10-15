@@ -103,7 +103,7 @@ instance GoogleRequest GroupsRemoveMember' where
         requestClient GroupsRemoveMember'{..}
           = go _grmProject _grmGroupName (Just AltJSON)
               _grmPayload
-              userAccountsService
+              userAccounts
           where go
                   = buildClient
                       (Proxy :: Proxy GroupsRemoveMemberResource)

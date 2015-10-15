@@ -134,7 +134,7 @@ instance GoogleRequest FilesList' where
               (Just _flSortField)
               _flMaxResults
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient (Proxy :: Proxy FilesListResource)
                       mempty

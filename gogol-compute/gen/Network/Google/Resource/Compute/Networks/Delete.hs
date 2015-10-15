@@ -87,8 +87,7 @@ ndNetwork
 instance GoogleRequest NetworksDelete' where
         type Rs NetworksDelete' = Operation
         requestClient NetworksDelete'{..}
-          = go _ndProject _ndNetwork (Just AltJSON)
-              computeService
+          = go _ndProject _ndNetwork (Just AltJSON) compute
           where go
                   = buildClient (Proxy :: Proxy NetworksDeleteResource)
                       mempty

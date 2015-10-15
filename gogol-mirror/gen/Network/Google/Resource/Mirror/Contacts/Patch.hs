@@ -85,7 +85,7 @@ cpId = lens _cpId (\ s a -> s{_cpId = a})
 instance GoogleRequest ContactsPatch' where
         type Rs ContactsPatch' = Contact
         requestClient ContactsPatch'{..}
-          = go _cpId (Just AltJSON) _cpPayload mirrorService
+          = go _cpId (Just AltJSON) _cpPayload mirror
           where go
                   = buildClient (Proxy :: Proxy ContactsPatchResource)
                       mempty

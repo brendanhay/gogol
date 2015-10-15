@@ -87,8 +87,7 @@ instance GoogleRequest PlacementStrategiesDelete'
          where
         type Rs PlacementStrategiesDelete' = ()
         requestClient PlacementStrategiesDelete'{..}
-          = go _psdProFileId _psdId (Just AltJSON)
-              dFAReportingService
+          = go _psdProFileId _psdId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy PlacementStrategiesDeleteResource)

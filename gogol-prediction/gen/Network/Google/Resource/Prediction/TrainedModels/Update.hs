@@ -98,7 +98,7 @@ instance GoogleRequest TrainedModelsUpdate' where
         type Rs TrainedModelsUpdate' = Insert2
         requestClient TrainedModelsUpdate'{..}
           = go _tmuProject _tmuId (Just AltJSON) _tmuPayload
-              predictionService
+              prediction
           where go
                   = buildClient
                       (Proxy :: Proxy TrainedModelsUpdateResource)

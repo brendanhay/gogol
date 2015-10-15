@@ -19,7 +19,7 @@
 module Network.Google.OAuth2
     (
     -- * Service Configuration
-      oAuth2Service
+      oAuth2
 
     -- * API Declaration
     , OAuth2API

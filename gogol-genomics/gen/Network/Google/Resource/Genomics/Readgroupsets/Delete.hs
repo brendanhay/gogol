@@ -162,7 +162,7 @@ instance GoogleRequest ReadgroupsetsDelete' where
               _rdBearerToken
               _rdCallback
               (Just AltJSON)
-              genomicsService
+              genomics
           where go
                   = buildClient
                       (Proxy :: Proxy ReadgroupsetsDeleteResource)

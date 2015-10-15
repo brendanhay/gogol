@@ -104,7 +104,7 @@ instance GoogleRequest PlacementStrategiesPatch'
         requestClient PlacementStrategiesPatch'{..}
           = go _pspProFileId (Just _pspId) (Just AltJSON)
               _pspPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy PlacementStrategiesPatchResource)

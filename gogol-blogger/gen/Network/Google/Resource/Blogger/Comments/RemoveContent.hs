@@ -103,7 +103,7 @@ instance GoogleRequest CommentsRemoveContent' where
         requestClient CommentsRemoveContent'{..}
           = go _crcBlogId _crcPostId _crcCommentId
               (Just AltJSON)
-              bloggerService
+              blogger
           where go
                   = buildClient
                       (Proxy :: Proxy CommentsRemoveContentResource)

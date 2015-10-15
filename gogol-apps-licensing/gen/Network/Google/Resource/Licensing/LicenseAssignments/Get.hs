@@ -101,7 +101,7 @@ instance GoogleRequest LicenseAssignmentsGet' where
         requestClient LicenseAssignmentsGet'{..}
           = go _lagProductId _lagSKUId _lagUserId
               (Just AltJSON)
-              appsLicensingService
+              appsLicensing
           where go
                   = buildClient
                       (Proxy :: Proxy LicenseAssignmentsGetResource)

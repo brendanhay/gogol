@@ -119,7 +119,7 @@ instance GoogleRequest ManagementExperimentsInsert'
           = go _meiAccountId _meiWebPropertyId _meiProFileId
               (Just AltJSON)
               _meiPayload
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementExperimentsInsertResource)

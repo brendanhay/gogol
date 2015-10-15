@@ -121,7 +121,7 @@ instance GoogleRequest InAppProductsPatch' where
               _iAppAutoConvertMissingPrices
               (Just AltJSON)
               _iAppPayload
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy InAppProductsPatchResource)

@@ -88,7 +88,7 @@ instance GoogleRequest DatasetsGet' where
         type Rs DatasetsGet' = Dataset
         requestClient DatasetsGet'{..}
           = go _dgProjectId _dgDatasetId (Just AltJSON)
-              bigQueryService
+              bigQuery
           where go
                   = buildClient (Proxy :: Proxy DatasetsGetResource)
                       mempty

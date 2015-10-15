@@ -91,7 +91,7 @@ instance GoogleRequest AdUnitsGetAdCode' where
         type Rs AdUnitsGetAdCode' = AdCode
         requestClient AdUnitsGetAdCode'{..}
           = go _augacAdClientId _augacAdUnitId (Just AltJSON)
-              adSenseService
+              adSense
           where go
                   = buildClient
                       (Proxy :: Proxy AdUnitsGetAdCodeResource)

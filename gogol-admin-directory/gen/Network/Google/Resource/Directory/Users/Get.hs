@@ -112,7 +112,7 @@ instance GoogleRequest UsersGet' where
           = go _ugUserKey (Just _ugViewType) _ugCustomFieldMask
               (Just _ugProjection)
               (Just AltJSON)
-              directoryService
+              directory
           where go
                   = buildClient (Proxy :: Proxy UsersGetResource)
                       mempty

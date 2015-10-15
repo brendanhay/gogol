@@ -113,7 +113,7 @@ instance GoogleRequest UsersDataSourcesPatch' where
         requestClient UsersDataSourcesPatch'{..}
           = go _udspUserId _udspDataSourceId (Just AltJSON)
               _udspPayload
-              fitnessService
+              fitness
           where go
                   = buildClient
                       (Proxy :: Proxy UsersDataSourcesPatchResource)

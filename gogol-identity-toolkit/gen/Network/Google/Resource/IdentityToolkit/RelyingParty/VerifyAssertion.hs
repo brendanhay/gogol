@@ -78,8 +78,7 @@ instance GoogleRequest RelyingPartyVerifyAssertion'
         type Rs RelyingPartyVerifyAssertion' =
              VerifyAssertionResponse
         requestClient RelyingPartyVerifyAssertion'{..}
-          = go (Just AltJSON) _rpvaPayload
-              identityToolkitService
+          = go (Just AltJSON) _rpvaPayload identityToolkit
           where go
                   = buildClient
                       (Proxy :: Proxy RelyingPartyVerifyAssertionResource)

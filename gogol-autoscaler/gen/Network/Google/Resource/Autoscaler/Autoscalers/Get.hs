@@ -100,7 +100,7 @@ instance GoogleRequest AutoscalersGet' where
         type Rs AutoscalersGet' = Autoscaler
         requestClient AutoscalersGet'{..}
           = go _agProject _agZone _agAutoscaler (Just AltJSON)
-              autoscalerService
+              autoscaler
           where go
                   = buildClient (Proxy :: Proxy AutoscalersGetResource)
                       mempty

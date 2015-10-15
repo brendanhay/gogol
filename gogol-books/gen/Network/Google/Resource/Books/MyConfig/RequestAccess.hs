@@ -144,7 +144,7 @@ instance GoogleRequest MyConfigRequestAccess' where
               _mcraLocale
               _mcraLicenseTypes
               (Just AltJSON)
-              booksService
+              books
           where go
                   = buildClient
                       (Proxy :: Proxy MyConfigRequestAccessResource)

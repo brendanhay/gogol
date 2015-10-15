@@ -114,7 +114,7 @@ instance GoogleRequest UsersThreadsGet' where
           = go _utgUserId _utgId (Just _utgFormat)
               (_utgMetadataHeaders ^. _Default)
               (Just AltJSON)
-              gmailService
+              gmail
           where go
                   = buildClient
                       (Proxy :: Proxy UsersThreadsGetResource)

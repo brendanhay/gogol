@@ -87,8 +87,7 @@ mzcPayload
 instance GoogleRequest ManagedZonesCreate' where
         type Rs ManagedZonesCreate' = ManagedZone
         requestClient ManagedZonesCreate'{..}
-          = go _mzcProject (Just AltJSON) _mzcPayload
-              dNSService
+          = go _mzcProject (Just AltJSON) _mzcPayload dNS
           where go
                   = buildClient
                       (Proxy :: Proxy ManagedZonesCreateResource)

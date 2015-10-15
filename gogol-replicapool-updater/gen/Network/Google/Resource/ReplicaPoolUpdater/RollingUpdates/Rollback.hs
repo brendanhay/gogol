@@ -104,7 +104,7 @@ instance GoogleRequest RollingUpdatesRollback' where
         requestClient RollingUpdatesRollback'{..}
           = go _rurProject _rurZone _rurRollingUpdate
               (Just AltJSON)
-              replicaPoolUpdaterService
+              replicaPoolUpdater
           where go
                   = buildClient
                       (Proxy :: Proxy RollingUpdatesRollbackResource)

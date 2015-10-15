@@ -81,7 +81,7 @@ instance GoogleRequest AchievementConfigurationsGet'
              AchievementConfiguration
         requestClient AchievementConfigurationsGet'{..}
           = go _acgAchievementId (Just AltJSON)
-              gamesConfigurationService
+              gamesConfiguration
           where go
                   = buildClient
                       (Proxy :: Proxy AchievementConfigurationsGetResource)

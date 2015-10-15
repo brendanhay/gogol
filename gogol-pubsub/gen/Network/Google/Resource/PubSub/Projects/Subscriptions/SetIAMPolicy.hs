@@ -182,7 +182,7 @@ instance GoogleRequest
               _pssipCallback
               (Just AltJSON)
               _pssipPayload
-              pubSubService
+              pubSub
           where go
                   = buildClient
                       (Proxy ::

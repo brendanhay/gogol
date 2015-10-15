@@ -77,7 +77,7 @@ prPayload
 instance GoogleRequest PushtokensRemove' where
         type Rs PushtokensRemove' = ()
         requestClient PushtokensRemove'{..}
-          = go (Just AltJSON) _prPayload gamesService
+          = go (Just AltJSON) _prPayload games
           where go
                   = buildClient
                       (Proxy :: Proxy PushtokensRemoveResource)

@@ -195,7 +195,7 @@ instance GoogleRequest ObjectsPatch' where
               _opGeneration
               (Just AltJSON)
               _opPayload
-              storageService
+              storage
           where go
                   = buildClient (Proxy :: Proxy ObjectsPatchResource)
                       mempty

@@ -164,7 +164,7 @@ instance GoogleRequest ObjectsCompose' where
               _oIfGenerationMatch
               (Just AltJSON)
               _oPayload
-              storageService
+              storage
           where go :<|> _
                   = buildClient (Proxy :: Proxy ObjectsComposeResource)
                       mempty
@@ -179,7 +179,7 @@ instance GoogleRequest
               _oIfGenerationMatch
               (Just AltMedia)
               _oPayload
-              storageService
+              storage
           where _ :<|> go
                   = buildClient (Proxy :: Proxy ObjectsComposeResource)
                       mempty

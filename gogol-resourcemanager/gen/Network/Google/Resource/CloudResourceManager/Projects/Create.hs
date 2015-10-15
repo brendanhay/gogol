@@ -166,7 +166,7 @@ instance GoogleRequest ProjectsCreate' where
               _pcCallback
               (Just AltJSON)
               _pcPayload
-              resourceManagerService
+              resourceManager
           where go
                   = buildClient (Proxy :: Proxy ProjectsCreateResource)
                       mempty

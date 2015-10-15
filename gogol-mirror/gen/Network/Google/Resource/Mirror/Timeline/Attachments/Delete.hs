@@ -90,7 +90,7 @@ instance GoogleRequest TimelineAttachmentsDelete'
         type Rs TimelineAttachmentsDelete' = ()
         requestClient TimelineAttachmentsDelete'{..}
           = go _tadItemId _tadAttachmentId (Just AltJSON)
-              mirrorService
+              mirror
           where go
                   = buildClient
                       (Proxy :: Proxy TimelineAttachmentsDeleteResource)

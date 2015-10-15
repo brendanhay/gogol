@@ -181,7 +181,7 @@ instance GoogleRequest OrdersList' where
               _olPlacedDateStart
               _olMaxResults
               (Just AltJSON)
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient (Proxy :: Proxy OrdersListResource)
                       mempty

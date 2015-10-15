@@ -152,7 +152,7 @@ instance GoogleRequest NamespacesList' where
               _nlBearerToken
               _nlCallback
               (Just AltJSON)
-              proximityBeaconService
+              proximityBeacon
           where go
                   = buildClient (Proxy :: Proxy NamespacesListResource)
                       mempty

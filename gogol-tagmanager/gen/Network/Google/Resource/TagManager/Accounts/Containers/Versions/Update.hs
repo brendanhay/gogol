@@ -136,7 +136,7 @@ instance GoogleRequest
               _acvucFingerprint
               (Just AltJSON)
               _acvucPayload
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy ::

@@ -111,7 +111,7 @@ instance GoogleRequest ThumbnailsSet' where
           = go (Just _tsVideoId) _tsOnBehalfOfContentOwner
               (Just AltJSON)
               _tsMedia
-              youTubeService
+              youTube
           where go
                   = buildClient (Proxy :: Proxy ThumbnailsSetResource)
                       mempty

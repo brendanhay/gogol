@@ -19,7 +19,7 @@
 module Network.Google.LatencyTest
     (
     -- * Service Configuration
-      latencyTestService
+      latencyTest
 
     -- * API Declaration
     , LatencyTestAPI

@@ -91,7 +91,7 @@ instance GoogleRequest OrgUnitsDelete' where
         type Rs OrgUnitsDelete' = ()
         requestClient OrgUnitsDelete'{..}
           = go _oudCustomerId _oudOrgUnitPath (Just AltJSON)
-              directoryService
+              directory
           where go
                   = buildClient (Proxy :: Proxy OrgUnitsDeleteResource)
                       mempty

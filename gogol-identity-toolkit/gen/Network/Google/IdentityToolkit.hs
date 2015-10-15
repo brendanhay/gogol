@@ -19,7 +19,7 @@
 module Network.Google.IdentityToolkit
     (
     -- * Service Configuration
-      identityToolkitService
+      identityToolkit
 
     -- * API Declaration
     , IdentityToolkitAPI

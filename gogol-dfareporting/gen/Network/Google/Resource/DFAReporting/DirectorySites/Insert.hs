@@ -89,7 +89,7 @@ instance GoogleRequest DirectorySitesInsert' where
         type Rs DirectorySitesInsert' = DirectorySite
         requestClient DirectorySitesInsert'{..}
           = go _dsiProFileId (Just AltJSON) _dsiPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy DirectorySitesInsertResource)

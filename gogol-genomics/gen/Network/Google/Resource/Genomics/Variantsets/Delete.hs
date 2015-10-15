@@ -164,7 +164,7 @@ instance GoogleRequest VariantsetsDelete' where
               _vddBearerToken
               _vddCallback
               (Just AltJSON)
-              genomicsService
+              genomics
           where go
                   = buildClient
                       (Proxy :: Proxy VariantsetsDeleteResource)

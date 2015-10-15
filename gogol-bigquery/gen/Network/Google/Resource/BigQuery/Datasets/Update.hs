@@ -105,7 +105,7 @@ instance GoogleRequest DatasetsUpdate' where
         requestClient DatasetsUpdate'{..}
           = go _duProjectId _duDatasetId (Just AltJSON)
               _duPayload
-              bigQueryService
+              bigQuery
           where go
                   = buildClient (Proxy :: Proxy DatasetsUpdateResource)
                       mempty

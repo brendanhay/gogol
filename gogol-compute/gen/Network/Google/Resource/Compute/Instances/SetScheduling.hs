@@ -113,7 +113,7 @@ instance GoogleRequest InstancesSetScheduling' where
         requestClient InstancesSetScheduling'{..}
           = go _issProject _issZone _issInstance (Just AltJSON)
               _issPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesSetSchedulingResource)

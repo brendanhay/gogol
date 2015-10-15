@@ -75,7 +75,7 @@ aplAccountId
 instance GoogleRequest AccountsPaymentsList' where
         type Rs AccountsPaymentsList' = Payments
         requestClient AccountsPaymentsList'{..}
-          = go _aplAccountId (Just AltJSON) adSenseService
+          = go _aplAccountId (Just AltJSON) adSense
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsPaymentsListResource)

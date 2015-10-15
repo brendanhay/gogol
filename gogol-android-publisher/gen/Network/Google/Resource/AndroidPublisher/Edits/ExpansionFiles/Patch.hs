@@ -140,7 +140,7 @@ instance GoogleRequest EditsExpansionFilesPatch'
               _eefpExpansionFileType
               (Just AltJSON)
               _eefpPayload
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient
                       (Proxy :: Proxy EditsExpansionFilesPatchResource)

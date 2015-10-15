@@ -128,7 +128,7 @@ instance GoogleRequest
               _aFingerprint
               (Just AltJSON)
               _aPayload
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy ::

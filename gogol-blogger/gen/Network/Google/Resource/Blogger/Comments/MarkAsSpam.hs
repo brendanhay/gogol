@@ -104,7 +104,7 @@ instance GoogleRequest CommentsMarkAsSpam' where
         requestClient CommentsMarkAsSpam'{..}
           = go _cmasBlogId _cmasPostId _cmasCommentId
               (Just AltJSON)
-              bloggerService
+              blogger
           where go
                   = buildClient
                       (Proxy :: Proxy CommentsMarkAsSpamResource)

@@ -120,7 +120,7 @@ instance GoogleRequest AutoscalersList' where
           = go _alProject _alZone _alFilter _alPageToken
               (Just _alMaxResults)
               (Just AltJSON)
-              autoscalerService
+              autoscaler
           where go
                   = buildClient
                       (Proxy :: Proxy AutoscalersListResource)

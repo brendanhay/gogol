@@ -105,7 +105,7 @@ instance GoogleRequest ImagesDeprecate' where
         requestClient ImagesDeprecate'{..}
           = go _imamProject _imamImage (Just AltJSON)
               _imamPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy ImagesDeprecateResource)

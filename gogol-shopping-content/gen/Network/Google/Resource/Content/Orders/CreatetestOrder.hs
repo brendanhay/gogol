@@ -90,7 +90,7 @@ instance GoogleRequest OrdersCreatetestOrder' where
              OrdersCreateTestOrderResponse
         requestClient OrdersCreatetestOrder'{..}
           = go _ocoMerchantId (Just AltJSON) _ocoPayload
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient
                       (Proxy :: Proxy OrdersCreatetestOrderResource)

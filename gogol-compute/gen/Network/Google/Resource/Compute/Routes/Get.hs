@@ -86,8 +86,7 @@ rouRoute = lens _rouRoute (\ s a -> s{_rouRoute = a})
 instance GoogleRequest RoutesGet' where
         type Rs RoutesGet' = Route
         requestClient RoutesGet'{..}
-          = go _rouProject _rouRoute (Just AltJSON)
-              computeService
+          = go _rouProject _rouRoute (Just AltJSON) compute
           where go
                   = buildClient (Proxy :: Proxy RoutesGetResource)
                       mempty

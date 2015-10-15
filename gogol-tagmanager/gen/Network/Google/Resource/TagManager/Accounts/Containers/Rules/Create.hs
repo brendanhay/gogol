@@ -105,7 +105,7 @@ instance GoogleRequest AccountsContainersRulesCreate'
         requestClient AccountsContainersRulesCreate'{..}
           = go _acrcAccountId _acrcContainerId (Just AltJSON)
               _acrcPayload
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy ::

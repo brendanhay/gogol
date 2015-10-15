@@ -120,7 +120,7 @@ instance GoogleRequest ManagementUploadsGet' where
               _mugCustomDataSourceId
               _mugUploadId
               (Just AltJSON)
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementUploadsGetResource)

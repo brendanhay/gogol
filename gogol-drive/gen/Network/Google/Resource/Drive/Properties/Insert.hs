@@ -87,8 +87,7 @@ proFileId
 instance GoogleRequest PropertiesInsert' where
         type Rs PropertiesInsert' = Property
         requestClient PropertiesInsert'{..}
-          = go _proFileId (Just AltJSON) _proPayload
-              driveService
+          = go _proFileId (Just AltJSON) _proPayload drive
           where go
                   = buildClient
                       (Proxy :: Proxy PropertiesInsertResource)

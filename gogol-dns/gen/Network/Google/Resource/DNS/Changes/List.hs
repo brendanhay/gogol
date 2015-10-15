@@ -140,7 +140,7 @@ instance GoogleRequest ChangesList' where
               _clMaxResults
               (Just _clSortBy)
               (Just AltJSON)
-              dNSService
+              dNS
           where go
                   = buildClient (Proxy :: Proxy ChangesListResource)
                       mempty

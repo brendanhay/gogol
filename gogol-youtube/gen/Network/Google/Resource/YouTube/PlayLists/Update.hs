@@ -119,7 +119,7 @@ instance GoogleRequest PlayListsUpdate' where
           = go (Just _pluPart) _pluOnBehalfOfContentOwner
               (Just AltJSON)
               _pluPayload
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy PlayListsUpdateResource)

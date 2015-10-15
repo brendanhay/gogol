@@ -16,7 +16,7 @@
 module Network.Google.Genomics.Types
     (
     -- * Service Configuration
-      genomicsService
+      genomics
 
     -- * OAuth Scopes
     , genomicsScope
@@ -524,28 +524,28 @@ import           Network.Google.Genomics.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Genomics API. This contains the host and root path used as a starting point for constructing service requests.
-genomicsService :: Service
-genomicsService
+genomics :: Service
+genomics
   = defaultService (ServiceId "genomics:v1")
       "genomics.googleapis.com"
       ""
 
 -- | View and manage Genomics data
 genomicsScope :: OAuthScope
-genomicsScope = OAuthScope "https://www.googleapis.com/auth/genomics";
+genomicsScope = "https://www.googleapis.com/auth/genomics";
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope
-cloudPlatformScope = OAuthScope "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
 
 -- | View Genomics data
 genomicsReadonlyScope :: OAuthScope
-genomicsReadonlyScope = OAuthScope "https://www.googleapis.com/auth/genomics.readonly";
+genomicsReadonlyScope = "https://www.googleapis.com/auth/genomics.readonly";
 
 -- | Manage your data in Google Cloud Storage
 devstorageReadWriteScope :: OAuthScope
-devstorageReadWriteScope = OAuthScope "https://www.googleapis.com/auth/devstorage.read_write";
+devstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
 
 -- | View and manage your data in Google BigQuery
 bigqueryScope :: OAuthScope
-bigqueryScope = OAuthScope "https://www.googleapis.com/auth/bigquery";
+bigqueryScope = "https://www.googleapis.com/auth/bigquery";

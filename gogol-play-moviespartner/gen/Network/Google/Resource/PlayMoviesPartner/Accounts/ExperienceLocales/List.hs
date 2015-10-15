@@ -293,7 +293,7 @@ instance GoogleRequest AccountsExperienceLocalesList'
               _aellPageSize
               _aellCallback
               (Just AltJSON)
-              playMoviesPartnerService
+              playMoviesPartner
           where go
                   = buildClient
                       (Proxy ::

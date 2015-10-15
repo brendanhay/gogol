@@ -101,7 +101,7 @@ instance GoogleRequest InstanceGroupsDelete' where
         requestClient InstanceGroupsDelete'{..}
           = go _igdProject _igdZone _igdInstanceGroup
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceGroupsDeleteResource)

@@ -19,7 +19,7 @@
 module Network.Google.Spectrum
     (
     -- * Service Configuration
-      spectrumService
+      spectrum
 
     -- * API Declaration
     , SpectrumAPI

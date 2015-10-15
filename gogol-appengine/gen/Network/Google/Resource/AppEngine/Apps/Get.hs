@@ -176,6 +176,6 @@ instance GoogleRequest AppsGet' where
               _agEnsureResourcesExist
               _agCallback
               (Just AltJSON)
-              appEngineService
+              appEngine
           where go
                   = buildClient (Proxy :: Proxy AppsGetResource) mempty

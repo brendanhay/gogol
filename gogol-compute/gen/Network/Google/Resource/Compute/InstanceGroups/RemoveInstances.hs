@@ -118,7 +118,7 @@ instance GoogleRequest InstanceGroupsRemoveInstances'
           = go _igriProject _igriZone _igriInstanceGroup
               (Just AltJSON)
               _igriPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy ::

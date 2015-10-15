@@ -117,7 +117,7 @@ instance GoogleRequest InstallsGet' where
           = go _igEnterpriseId _igUserId _igDeviceId
               _igInstallId
               (Just AltJSON)
-              androidEnterpriseService
+              androidEnterprise
           where go
                   = buildClient (Proxy :: Proxy InstallsGetResource)
                       mempty

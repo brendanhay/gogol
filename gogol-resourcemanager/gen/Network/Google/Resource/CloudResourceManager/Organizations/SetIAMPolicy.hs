@@ -181,7 +181,7 @@ instance GoogleRequest OrganizationsSetIAMPolicy'
               _osipCallback
               (Just AltJSON)
               _osipPayload
-              resourceManagerService
+              resourceManager
           where go
                   = buildClient
                       (Proxy :: Proxy OrganizationsSetIAMPolicyResource)

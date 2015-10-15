@@ -64,7 +64,7 @@ questsResetAll' = QuestsResetAll'
 instance GoogleRequest QuestsResetAll' where
         type Rs QuestsResetAll' = ()
         requestClient QuestsResetAll'{}
-          = go (Just AltJSON) gamesManagementService
+          = go (Just AltJSON) gamesManagement
           where go
                   = buildClient (Proxy :: Proxy QuestsResetAllResource)
                       mempty

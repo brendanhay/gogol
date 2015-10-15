@@ -157,7 +157,7 @@ instance GoogleRequest CaptionsUpdate' where
               (Just AltJSON)
               _capPayload
               _capMedia
-              youTubeService
+              youTube
           where go
                   = buildClient (Proxy :: Proxy CaptionsUpdateResource)
                       mempty

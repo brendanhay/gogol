@@ -61,7 +61,7 @@ instance GoogleRequest WebResourceList' where
         type Rs WebResourceList' =
              SiteVerificationWebResourceListResponse
         requestClient WebResourceList'{}
-          = go (Just AltJSON) siteVerificationService
+          = go (Just AltJSON) siteVerification
           where go
                   = buildClient
                       (Proxy :: Proxy WebResourceListResource)

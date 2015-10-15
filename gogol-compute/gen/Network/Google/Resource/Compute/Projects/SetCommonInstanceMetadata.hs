@@ -91,7 +91,7 @@ instance GoogleRequest
              Operation
         requestClient ProjectsSetCommonInstanceMetadata'{..}
           = go _pscimProject (Just AltJSON) _pscimPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy ::

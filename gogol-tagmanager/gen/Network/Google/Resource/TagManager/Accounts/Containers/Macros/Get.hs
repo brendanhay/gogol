@@ -105,7 +105,7 @@ instance GoogleRequest AccountsContainersMacrosGet'
         requestClient AccountsContainersMacrosGet'{..}
           = go _acmgAccountId _acmgContainerId _acmgMacroId
               (Just AltJSON)
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsContainersMacrosGetResource)

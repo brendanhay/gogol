@@ -74,7 +74,7 @@ tcPayload
 instance GoogleRequest TablesCreate' where
         type Rs TablesCreate' = Table
         requestClient TablesCreate'{..}
-          = go (Just AltJSON) _tcPayload mapsEngineService
+          = go (Just AltJSON) _tcPayload mapsEngine
           where go
                   = buildClient (Proxy :: Proxy TablesCreateResource)
                       mempty

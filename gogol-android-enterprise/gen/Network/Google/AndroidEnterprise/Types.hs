@@ -16,7 +16,7 @@
 module Network.Google.AndroidEnterprise.Types
     (
     -- * Service Configuration
-      androidEnterpriseService
+      androidEnterprise
 
     -- * OAuth Scopes
     , androidenterpriseScope
@@ -251,12 +251,12 @@ import           Network.Google.AndroidEnterprise.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Play EMM API. This contains the host and root path used as a starting point for constructing service requests.
-androidEnterpriseService :: Service
-androidEnterpriseService
+androidEnterprise :: Service
+androidEnterprise
   = defaultService (ServiceId "androidenterprise:v1")
       "www.googleapis.com"
       "androidenterprise/v1/"
 
 -- | Manage corporate Android devices
 androidenterpriseScope :: OAuthScope
-androidenterpriseScope = OAuthScope "https://www.googleapis.com/auth/androidenterprise";
+androidenterpriseScope = "https://www.googleapis.com/auth/androidenterprise";

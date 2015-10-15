@@ -86,7 +86,7 @@ ulgId = lens _ulgId (\ s a -> s{_ulgId = a})
 instance GoogleRequest UsersLabelsGet' where
         type Rs UsersLabelsGet' = Label
         requestClient UsersLabelsGet'{..}
-          = go _ulgUserId _ulgId (Just AltJSON) gmailService
+          = go _ulgUserId _ulgId (Just AltJSON) gmail
           where go
                   = buildClient (Proxy :: Proxy UsersLabelsGetResource)
                       mempty

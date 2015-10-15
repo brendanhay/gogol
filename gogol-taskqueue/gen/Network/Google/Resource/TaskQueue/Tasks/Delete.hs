@@ -99,7 +99,7 @@ instance GoogleRequest TasksDelete' where
         type Rs TasksDelete' = ()
         requestClient TasksDelete'{..}
           = go _tdProject _tdTaskqueue _tdTask (Just AltJSON)
-              taskQueueService
+              taskQueue
           where go
                   = buildClient (Proxy :: Proxy TasksDeleteResource)
                       mempty

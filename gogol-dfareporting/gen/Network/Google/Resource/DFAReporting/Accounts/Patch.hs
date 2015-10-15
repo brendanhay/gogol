@@ -100,7 +100,7 @@ instance GoogleRequest AccountsPatch' where
         requestClient AccountsPatch'{..}
           = go _ap1ProFileId (Just _ap1Id) (Just AltJSON)
               _ap1Payload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient (Proxy :: Proxy AccountsPatchResource)
                       mempty

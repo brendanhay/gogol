@@ -107,7 +107,7 @@ instance GoogleRequest DeploymentsCancelPreview'
         requestClient DeploymentsCancelPreview'{..}
           = go _dcpProject _dcpDeployment (Just AltJSON)
               _dcpPayload
-              deploymentManagerService
+              deploymentManager
           where go
                   = buildClient
                       (Proxy :: Proxy DeploymentsCancelPreviewResource)

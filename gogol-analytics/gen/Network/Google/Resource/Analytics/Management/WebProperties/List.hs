@@ -107,7 +107,7 @@ instance GoogleRequest ManagementWebPropertiesList'
         requestClient ManagementWebPropertiesList'{..}
           = go _mwplAccountId _mwplStartIndex _mwplMaxResults
               (Just AltJSON)
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementWebPropertiesListResource)

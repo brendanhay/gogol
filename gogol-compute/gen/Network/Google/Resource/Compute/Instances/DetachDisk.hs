@@ -115,7 +115,7 @@ instance GoogleRequest InstancesDetachDisk' where
           = go _iddProject _iddZone _iddInstance
               (Just _iddDeviceName)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesDetachDiskResource)

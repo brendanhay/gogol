@@ -19,7 +19,7 @@
 module Network.Google.FreebaseSearch
     (
     -- * Service Configuration
-      freebaseSearchService
+      freebaseSearch
 
     -- * API Declaration
     , FreebaseSearchAPI

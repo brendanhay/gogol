@@ -77,7 +77,7 @@ instance GoogleRequest TimelineAttachmentsList' where
         type Rs TimelineAttachmentsList' =
              AttachmentsListResponse
         requestClient TimelineAttachmentsList'{..}
-          = go _talItemId (Just AltJSON) mirrorService
+          = go _talItemId (Just AltJSON) mirror
           where go
                   = buildClient
                       (Proxy :: Proxy TimelineAttachmentsListResource)

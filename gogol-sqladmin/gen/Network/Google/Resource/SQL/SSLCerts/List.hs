@@ -89,8 +89,7 @@ sclInstance
 instance GoogleRequest SSLCertsList' where
         type Rs SSLCertsList' = SSLCertsListResponse
         requestClient SSLCertsList'{..}
-          = go _sclProject _sclInstance (Just AltJSON)
-              sQLAdminService
+          = go _sclProject _sclInstance (Just AltJSON) sQLAdmin
           where go
                   = buildClient (Proxy :: Proxy SSLCertsListResource)
                       mempty

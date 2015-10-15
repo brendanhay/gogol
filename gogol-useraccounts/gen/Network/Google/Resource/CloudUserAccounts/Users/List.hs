@@ -140,7 +140,7 @@ instance GoogleRequest UsersList' where
           = go _ulProject _ulOrderBy _ulFilter _ulPageToken
               (Just _ulMaxResults)
               (Just AltJSON)
-              userAccountsService
+              userAccounts
           where go
                   = buildClient (Proxy :: Proxy UsersListResource)
                       mempty

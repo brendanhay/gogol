@@ -88,7 +88,7 @@ instance GoogleRequest StyleGet' where
         type Rs StyleGet' = StyleSetting
         requestClient StyleGet'{..}
           = go _sgTableId _sgStyleId (Just AltJSON)
-              fusionTablesService
+              fusionTables
           where go
                   = buildClient (Proxy :: Proxy StyleGetResource)
                       mempty

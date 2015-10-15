@@ -188,7 +188,7 @@ instance GoogleRequest ProjectsSubscriptionsCreate'
               _pscCallback
               (Just AltJSON)
               _pscPayload
-              pubSubService
+              pubSub
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsSubscriptionsCreateResource)

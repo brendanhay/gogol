@@ -141,7 +141,7 @@ instance GoogleRequest ChangesList' where
               (Just _chaMaxResults)
               (Just _chaIncludeDeleted)
               (Just AltJSON)
-              driveService
+              drive
           where go
                   = buildClient (Proxy :: Proxy ChangesListResource)
                       mempty

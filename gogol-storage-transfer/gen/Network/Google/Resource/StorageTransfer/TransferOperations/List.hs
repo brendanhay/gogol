@@ -205,7 +205,7 @@ instance GoogleRequest TransferOperationsList' where
               _tolPageSize
               _tolCallback
               (Just AltJSON)
-              storageTransferService
+              storageTransfer
           where go
                   = buildClient
                       (Proxy :: Proxy TransferOperationsListResource)

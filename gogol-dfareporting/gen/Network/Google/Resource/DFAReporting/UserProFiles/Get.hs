@@ -75,8 +75,7 @@ upfgProFileId
 instance GoogleRequest UserProFilesGet' where
         type Rs UserProFilesGet' = UserProFile
         requestClient UserProFilesGet'{..}
-          = go _upfgProFileId (Just AltJSON)
-              dFAReportingService
+          = go _upfgProFileId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy UserProFilesGetResource)

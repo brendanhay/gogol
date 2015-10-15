@@ -137,7 +137,7 @@ instance GoogleRequest TransfersList' where
               _tlPageToken
               _tlMaxResults
               (Just AltJSON)
-              dataTransferService
+              dataTransfer
           where go
                   = buildClient (Proxy :: Proxy TransfersListResource)
                       mempty

@@ -90,7 +90,7 @@ instance GoogleRequest EditsAPKsList' where
         type Rs EditsAPKsList' = APKsListResponse
         requestClient EditsAPKsList'{..}
           = go _eapklPackageName _eapklEditId (Just AltJSON)
-              androidPublisherService
+              androidPublisher
           where go
                   = buildClient (Proxy :: Proxy EditsAPKsListResource)
                       mempty

@@ -88,8 +88,7 @@ perPermissionId
 instance GoogleRequest PermissionsDelete' where
         type Rs PermissionsDelete' = ()
         requestClient PermissionsDelete'{..}
-          = go _perFileId _perPermissionId (Just AltJSON)
-              driveService
+          = go _perFileId _perPermissionId (Just AltJSON) drive
           where go
                   = buildClient
                       (Proxy :: Proxy PermissionsDeleteResource)

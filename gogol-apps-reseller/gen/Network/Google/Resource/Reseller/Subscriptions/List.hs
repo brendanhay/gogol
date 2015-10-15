@@ -129,7 +129,7 @@ instance GoogleRequest SubscriptionsList' where
               _slPageToken
               _slMaxResults
               (Just AltJSON)
-              appsResellerService
+              appsReseller
           where go
                   = buildClient
                       (Proxy :: Proxy SubscriptionsListResource)

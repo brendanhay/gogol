@@ -87,8 +87,7 @@ ctgId = lens _ctgId (\ s a -> s{_ctgId = a})
 instance GoogleRequest ConnectionTypesGet' where
         type Rs ConnectionTypesGet' = ConnectionType
         requestClient ConnectionTypesGet'{..}
-          = go _ctgProFileId _ctgId (Just AltJSON)
-              dFAReportingService
+          = go _ctgProFileId _ctgId (Just AltJSON) dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy ConnectionTypesGetResource)

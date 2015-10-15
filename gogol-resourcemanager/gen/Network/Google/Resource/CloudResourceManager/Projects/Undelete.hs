@@ -177,7 +177,7 @@ instance GoogleRequest ProjectsUndelete' where
               _proBearerToken
               _proCallback
               (Just AltJSON)
-              resourceManagerService
+              resourceManager
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsUndeleteResource)

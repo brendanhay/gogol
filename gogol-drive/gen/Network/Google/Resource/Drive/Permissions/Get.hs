@@ -88,8 +88,7 @@ pggPermissionId
 instance GoogleRequest PermissionsGet' where
         type Rs PermissionsGet' = Permission
         requestClient PermissionsGet'{..}
-          = go _pggFileId _pggPermissionId (Just AltJSON)
-              driveService
+          = go _pggFileId _pggPermissionId (Just AltJSON) drive
           where go
                   = buildClient (Proxy :: Proxy PermissionsGetResource)
                       mempty

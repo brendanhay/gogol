@@ -102,7 +102,7 @@ instance GoogleRequest OrdersCancel' where
         requestClient OrdersCancel'{..}
           = go _ocMerchantId _ocOrderId (Just AltJSON)
               _ocPayload
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient (Proxy :: Proxy OrdersCancelResource)
                       mempty

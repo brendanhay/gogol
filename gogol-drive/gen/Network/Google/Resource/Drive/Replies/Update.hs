@@ -116,7 +116,7 @@ instance GoogleRequest RepliesUpdate' where
           = go _repFileId _repCommentId _repReplyId
               (Just AltJSON)
               _repPayload
-              driveService
+              drive
           where go
                   = buildClient (Proxy :: Proxy RepliesUpdateResource)
                       mempty

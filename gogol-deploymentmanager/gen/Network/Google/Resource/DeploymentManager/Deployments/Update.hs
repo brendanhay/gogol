@@ -154,7 +154,7 @@ instance GoogleRequest DeploymentsUpdate' where
               (Just _duPreview)
               (Just AltJSON)
               _duPayload
-              deploymentManagerService
+              deploymentManager
           where go
                   = buildClient
                       (Proxy :: Proxy DeploymentsUpdateResource)

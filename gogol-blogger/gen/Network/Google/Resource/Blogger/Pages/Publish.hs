@@ -88,8 +88,7 @@ pppPageId
 instance GoogleRequest PagesPublish' where
         type Rs PagesPublish' = Page
         requestClient PagesPublish'{..}
-          = go _pppBlogId _pppPageId (Just AltJSON)
-              bloggerService
+          = go _pppBlogId _pppPageId (Just AltJSON) blogger
           where go
                   = buildClient (Proxy :: Proxy PagesPublishResource)
                       mempty

@@ -16,7 +16,7 @@
 module Network.Google.DoubleClickSearch.Types
     (
     -- * Service Configuration
-      doubleClickSearchService
+      doubleClickSearch
 
     -- * OAuth Scopes
     , doubleclicksearchScope
@@ -202,12 +202,12 @@ import           Network.Google.DoubleClickSearch.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the DoubleClick Search API. This contains the host and root path used as a starting point for constructing service requests.
-doubleClickSearchService :: Service
-doubleClickSearchService
+doubleClickSearch :: Service
+doubleClickSearch
   = defaultService (ServiceId "doubleclicksearch:v2")
       "www.googleapis.com"
       "doubleclicksearch/v2/"
 
 -- | View and manage your advertising data in DoubleClick Search
 doubleclicksearchScope :: OAuthScope
-doubleclicksearchScope = OAuthScope "https://www.googleapis.com/auth/doubleclicksearch";
+doubleclicksearchScope = "https://www.googleapis.com/auth/doubleclicksearch";

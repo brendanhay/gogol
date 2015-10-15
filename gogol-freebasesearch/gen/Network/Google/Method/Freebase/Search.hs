@@ -374,7 +374,7 @@ instance GoogleRequest Search' where
               _sPrefixed
               _sCallback
               (Just AltJSON)
-              freebaseSearchService
+              freebaseSearch
           where go :<|> _
                   = buildClient (Proxy :: Proxy SearchMethod) mempty
 
@@ -404,6 +404,6 @@ instance GoogleRequest (MediaDownload Search') where
               _sPrefixed
               _sCallback
               (Just AltMedia)
-              freebaseSearchService
+              freebaseSearch
           where _ :<|> go
                   = buildClient (Proxy :: Proxy SearchMethod) mempty

@@ -101,7 +101,7 @@ instance GoogleRequest URLMapsUpdate' where
         requestClient URLMapsUpdate'{..}
           = go _umuProject _umuURLMap (Just AltJSON)
               _umuPayload
-              computeService
+              compute
           where go
                   = buildClient (Proxy :: Proxy URLMapsUpdateResource)
                       mempty

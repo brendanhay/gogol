@@ -88,7 +88,7 @@ instance GoogleRequest SubAccountsUpdate' where
         type Rs SubAccountsUpdate' = SubAccount
         requestClient SubAccountsUpdate'{..}
           = go _sauProFileId (Just AltJSON) _sauPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy SubAccountsUpdateResource)

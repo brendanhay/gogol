@@ -84,7 +84,7 @@ blSource = lens _blSource (\ s a -> s{_blSource = a})
 instance GoogleRequest BookshelvesList' where
         type Rs BookshelvesList' = Bookshelves
         requestClient BookshelvesList'{..}
-          = go _blUserId _blSource (Just AltJSON) booksService
+          = go _blUserId _blSource (Just AltJSON) books
           where go
                   = buildClient
                       (Proxy :: Proxy BookshelvesListResource)

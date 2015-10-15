@@ -112,7 +112,7 @@ instance GoogleRequest DatasetsList' where
         requestClient DatasetsList'{..}
           = go _dlProjectId _dlAll _dlPageToken _dlMaxResults
               (Just AltJSON)
-              bigQueryService
+              bigQuery
           where go
                   = buildClient (Proxy :: Proxy DatasetsListResource)
                       mempty

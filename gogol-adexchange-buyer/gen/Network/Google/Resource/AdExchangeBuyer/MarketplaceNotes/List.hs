@@ -76,8 +76,7 @@ mnlOrderId
 instance GoogleRequest MarketplaceNotesList' where
         type Rs MarketplaceNotesList' = GetOrderNotesResponse
         requestClient MarketplaceNotesList'{..}
-          = go _mnlOrderId (Just AltJSON)
-              adExchangeBuyerService
+          = go _mnlOrderId (Just AltJSON) adExchangeBuyer
           where go
                   = buildClient
                       (Proxy :: Proxy MarketplaceNotesListResource)

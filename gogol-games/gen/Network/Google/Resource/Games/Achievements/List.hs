@@ -129,7 +129,7 @@ instance GoogleRequest AchievementsList' where
           = go _alPlayerId _alState _alLanguage _alPageToken
               _alMaxResults
               (Just AltJSON)
-              gamesService
+              games
           where go
                   = buildClient
                       (Proxy :: Proxy AchievementsListResource)

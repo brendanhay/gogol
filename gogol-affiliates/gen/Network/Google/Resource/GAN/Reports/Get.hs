@@ -249,7 +249,7 @@ instance GoogleRequest ReportsGet' where
               _rgStartIndex
               _rgMaxResults
               (Just AltJSON)
-              affiliatesService
+              affiliates
           where go
                   = buildClient (Proxy :: Proxy ReportsGetResource)
                       mempty

@@ -102,7 +102,7 @@ instance GoogleRequest LandingPagesGet' where
         requestClient LandingPagesGet'{..}
           = go _lpgProFileId _lpgCampaignId _lpgId
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy LandingPagesGetResource)

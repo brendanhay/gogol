@@ -86,8 +86,7 @@ prPostId = lens _prPostId (\ s a -> s{_prPostId = a})
 instance GoogleRequest PostsRevert' where
         type Rs PostsRevert' = Post'
         requestClient PostsRevert'{..}
-          = go _prBlogId _prPostId (Just AltJSON)
-              bloggerService
+          = go _prBlogId _prPostId (Just AltJSON) blogger
           where go
                   = buildClient (Proxy :: Proxy PostsRevertResource)
                       mempty

@@ -212,7 +212,7 @@ instance GoogleRequest ReportsQuery' where
               _rqStartIndex
               _rqMaxResults
               (Just AltJSON)
-              youTubeAnalyticsService
+              youTubeAnalytics
           where go
                   = buildClient (Proxy :: Proxy ReportsQueryResource)
                       mempty

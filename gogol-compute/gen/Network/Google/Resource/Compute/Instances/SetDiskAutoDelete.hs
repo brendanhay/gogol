@@ -132,7 +132,7 @@ instance GoogleRequest InstancesSetDiskAutoDelete'
               (Just _isdadAutoDelete)
               (Just _isdadDeviceName)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesSetDiskAutoDeleteResource)

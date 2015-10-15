@@ -16,7 +16,7 @@
 module Network.Google.YouTubeAnalytics.Types
     (
     -- * Service Configuration
-      youTubeAnalyticsService
+      youTubeAnalytics
 
     -- * OAuth Scopes
     , youtubeScope
@@ -139,29 +139,29 @@ import           Network.Google.YouTubeAnalytics.Types.Product
 import           Network.Google.YouTubeAnalytics.Types.Sum
 
 -- | Default request referring to version 'v1' of the YouTube Analytics API. This contains the host and root path used as a starting point for constructing service requests.
-youTubeAnalyticsService :: Service
-youTubeAnalyticsService
+youTubeAnalytics :: Service
+youTubeAnalytics
   = defaultService (ServiceId "youtubeAnalytics:v1")
       "www.googleapis.com"
       "youtube/analytics/v1/"
 
 -- | Manage your YouTube account
 youtubeScope :: OAuthScope
-youtubeScope = OAuthScope "https://www.googleapis.com/auth/youtube";
+youtubeScope = "https://www.googleapis.com/auth/youtube";
 
 -- | View YouTube Analytics reports for your YouTube content
 ytAnalyticsReadonlyScope :: OAuthScope
-ytAnalyticsReadonlyScope = OAuthScope "https://www.googleapis.com/auth/yt-analytics.readonly";
+ytAnalyticsReadonlyScope = "https://www.googleapis.com/auth/yt-analytics.readonly";
 
 -- | View and manage your assets and associated content on YouTube
 youtubepartnerScope :: OAuthScope
-youtubepartnerScope = OAuthScope "https://www.googleapis.com/auth/youtubepartner";
+youtubepartnerScope = "https://www.googleapis.com/auth/youtubepartner";
 
 -- | View monetary and non-monetary YouTube Analytics reports for your
 -- YouTube content
 ytAnalyticsMonetaryReadonlyScope :: OAuthScope
-ytAnalyticsMonetaryReadonlyScope = OAuthScope "https://www.googleapis.com/auth/yt-analytics-monetary.readonly";
+ytAnalyticsMonetaryReadonlyScope = "https://www.googleapis.com/auth/yt-analytics-monetary.readonly";
 
 -- | View your YouTube account
 youtubeReadonlyScope :: OAuthScope
-youtubeReadonlyScope = OAuthScope "https://www.googleapis.com/auth/youtube.readonly";
+youtubeReadonlyScope = "https://www.googleapis.com/auth/youtube.readonly";

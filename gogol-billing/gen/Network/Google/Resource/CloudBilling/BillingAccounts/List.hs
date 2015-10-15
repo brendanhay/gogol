@@ -180,7 +180,7 @@ instance GoogleRequest BillingAccountsList' where
               _balPageSize
               _balCallback
               (Just AltJSON)
-              billingService
+              billing
           where go
                   = buildClient
                       (Proxy :: Proxy BillingAccountsListResource)

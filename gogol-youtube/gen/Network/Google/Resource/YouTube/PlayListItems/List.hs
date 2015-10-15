@@ -178,7 +178,7 @@ instance GoogleRequest PlayListItemsList' where
               _plilPlayListId
               (Just _plilMaxResults)
               (Just AltJSON)
-              youTubeService
+              youTube
           where go
                   = buildClient
                       (Proxy :: Proxy PlayListItemsListResource)

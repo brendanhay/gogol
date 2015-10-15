@@ -117,7 +117,7 @@ instance GoogleRequest
           = go _mlbrvShelf (Just _mlbrvVolumeId) _mlbrvReason
               _mlbrvSource
               (Just AltJSON)
-              booksService
+              books
           where go
                   = buildClient
                       (Proxy ::

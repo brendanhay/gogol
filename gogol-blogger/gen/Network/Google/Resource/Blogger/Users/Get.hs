@@ -73,7 +73,7 @@ ugUserId = lens _ugUserId (\ s a -> s{_ugUserId = a})
 instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
         requestClient UsersGet'{..}
-          = go _ugUserId (Just AltJSON) bloggerService
+          = go _ugUserId (Just AltJSON) blogger
           where go
                   = buildClient (Proxy :: Proxy UsersGetResource)
                       mempty

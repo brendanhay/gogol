@@ -99,7 +99,7 @@ instance GoogleRequest CommentsUpdate' where
         type Rs CommentsUpdate' = Comment
         requestClient CommentsUpdate'{..}
           = go _cuFileId _cuCommentId (Just AltJSON) _cuPayload
-              driveService
+              drive
           where go
                   = buildClient (Proxy :: Proxy CommentsUpdateResource)
                       mempty

@@ -97,7 +97,7 @@ instance GoogleRequest MailInsert' where
         type Rs MailInsert' = ()
         requestClient MailInsert'{..}
           = go _miUserKey (Just AltJSON) _miPayload _miMedia
-              emailMigrationService
+              emailMigration
           where go
                   = buildClient (Proxy :: Proxy MailInsertResource)
                       mempty

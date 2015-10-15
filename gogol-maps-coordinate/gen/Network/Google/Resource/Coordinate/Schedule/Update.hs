@@ -147,7 +147,7 @@ instance GoogleRequest ScheduleUpdate' where
               _suDuration
               (Just AltJSON)
               _suPayload
-              mapsCoordinateService
+              mapsCoordinate
           where go
                   = buildClient (Proxy :: Proxy ScheduleUpdateResource)
                       mempty

@@ -125,7 +125,7 @@ instance GoogleRequest ManagementUnSampledReportsGet'
               _musrgProFileId
               _musrgUnSampledReportId
               (Just AltJSON)
-              analyticsService
+              analytics
           where go
                   = buildClient
                       (Proxy ::

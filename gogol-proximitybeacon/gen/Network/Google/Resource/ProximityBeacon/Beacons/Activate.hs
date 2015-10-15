@@ -165,7 +165,7 @@ instance GoogleRequest BeaconsActivate' where
               _baBearerToken
               _baCallback
               (Just AltJSON)
-              proximityBeaconService
+              proximityBeacon
           where go
                   = buildClient
                       (Proxy :: Proxy BeaconsActivateResource)

@@ -94,7 +94,7 @@ instance GoogleRequest RemarketingListSharesGet'
         requestClient RemarketingListSharesGet'{..}
           = go _rlsgProFileId _rlsgRemarketingListId
               (Just AltJSON)
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy RemarketingListSharesGetResource)

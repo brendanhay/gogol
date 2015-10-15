@@ -105,7 +105,7 @@ instance GoogleRequest CcOffersList' where
           = go _colPublisher (_colAdvertiser ^. _Default)
               _colProjection
               (Just AltJSON)
-              affiliatesService
+              affiliates
           where go
                   = buildClient (Proxy :: Proxy CcOffersListResource)
                       mempty

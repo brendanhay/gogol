@@ -76,7 +76,7 @@ rlQueryId
 instance GoogleRequest ReportsListreports' where
         type Rs ReportsListreports' = ListReportsResponse
         requestClient ReportsListreports'{..}
-          = go _rlQueryId (Just AltJSON) doubleClickBidsService
+          = go _rlQueryId (Just AltJSON) doubleClickBids
           where go
                   = buildClient
                       (Proxy :: Proxy ReportsListreportsResource)

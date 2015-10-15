@@ -132,7 +132,7 @@ instance GoogleRequest VolumesGet' where
               _vgProjection
               _vgUserLibraryConsistentRead
               (Just AltJSON)
-              booksService
+              books
           where go
                   = buildClient (Proxy :: Proxy VolumesGetResource)
                       mempty

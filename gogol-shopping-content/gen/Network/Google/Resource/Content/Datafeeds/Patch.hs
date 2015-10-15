@@ -111,7 +111,7 @@ instance GoogleRequest DatafeedsPatch' where
           = go _dpMerchantId _dpDatafeedId _dpDryRun
               (Just AltJSON)
               _dpPayload
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient (Proxy :: Proxy DatafeedsPatchResource)
                       mempty

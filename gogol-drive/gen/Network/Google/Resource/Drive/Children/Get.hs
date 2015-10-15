@@ -88,8 +88,7 @@ cgChildId
 instance GoogleRequest ChildrenGet' where
         type Rs ChildrenGet' = ChildReference
         requestClient ChildrenGet'{..}
-          = go _cgFolderId _cgChildId (Just AltJSON)
-              driveService
+          = go _cgFolderId _cgChildId (Just AltJSON) drive
           where go
                   = buildClient (Proxy :: Proxy ChildrenGetResource)
                       mempty

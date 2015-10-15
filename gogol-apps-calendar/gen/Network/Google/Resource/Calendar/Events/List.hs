@@ -341,7 +341,7 @@ instance GoogleRequest EventsList' where
               _elAlwaysIncludeEmail
               _elTimeMax
               (Just AltJSON)
-              appsCalendarService
+              appsCalendar
           where go
                   = buildClient (Proxy :: Proxy EventsListResource)
                       mempty

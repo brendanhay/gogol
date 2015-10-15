@@ -104,7 +104,7 @@ instance GoogleRequest AccountsSavedadstylesList'
         requestClient AccountsSavedadstylesList'{..}
           = go _aslAccountId _aslPageToken _aslMaxResults
               (Just AltJSON)
-              adSenseService
+              adSense
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsSavedadstylesListResource)

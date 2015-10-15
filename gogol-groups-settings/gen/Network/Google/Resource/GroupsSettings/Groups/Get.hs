@@ -74,8 +74,7 @@ ggGroupUniqueId
 instance GoogleRequest GroupsGet' where
         type Rs GroupsGet' = Groups
         requestClient GroupsGet'{..}
-          = go _ggGroupUniqueId (Just AltJSON)
-              groupsSettingsService
+          = go _ggGroupUniqueId (Just AltJSON) groupsSettings
           where go
                   = buildClient (Proxy :: Proxy GroupsGetResource)
                       mempty

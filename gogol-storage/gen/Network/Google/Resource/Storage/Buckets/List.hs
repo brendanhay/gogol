@@ -122,7 +122,7 @@ instance GoogleRequest BucketsList' where
               _blPageToken
               _blMaxResults
               (Just AltJSON)
-              storageService
+              storage
           where go
                   = buildClient (Proxy :: Proxy BucketsListResource)
                       mempty

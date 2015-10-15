@@ -103,7 +103,7 @@ instance GoogleRequest ContentCategoriesPatch' where
         requestClient ContentCategoriesPatch'{..}
           = go _ccpProFileId (Just _ccpId) (Just AltJSON)
               _ccpPayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy ContentCategoriesPatchResource)

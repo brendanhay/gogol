@@ -20,7 +20,7 @@
 module Network.Google.PubSub
     (
     -- * Service Configuration
-      pubSubService
+      pubSub
 
     -- * API Declaration
     , PubSubAPI

@@ -60,7 +60,7 @@ userInfoV2MeGet' = UserInfoV2MeGet'
 instance GoogleRequest UserInfoV2MeGet' where
         type Rs UserInfoV2MeGet' = UserInfoplus
         requestClient UserInfoV2MeGet'{}
-          = go (Just AltJSON) oAuth2Service
+          = go (Just AltJSON) oAuth2
           where go
                   = buildClient
                       (Proxy :: Proxy UserInfoV2MeGetResource)

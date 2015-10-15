@@ -106,7 +106,7 @@ instance GoogleRequest BackendServicesGetHealth'
         requestClient BackendServicesGetHealth'{..}
           = go _bsghProject _bsghBackendService (Just AltJSON)
               _bsghPayload
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy BackendServicesGetHealthResource)

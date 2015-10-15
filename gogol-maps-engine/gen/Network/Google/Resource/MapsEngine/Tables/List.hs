@@ -239,7 +239,7 @@ instance GoogleRequest TablesList' where
               _tlTags
               _tlCreatedBefore
               (Just AltJSON)
-              mapsEngineService
+              mapsEngine
           where go
                   = buildClient (Proxy :: Proxy TablesListResource)
                       mempty

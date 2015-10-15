@@ -123,7 +123,7 @@ instance GoogleRequest TurnBasedMatchesLeaveTurn'
               _tbmltLanguage
               _tbmltPendingParticipantId
               (Just AltJSON)
-              gamesService
+              games
           where go
                   = buildClient
                       (Proxy :: Proxy TurnBasedMatchesLeaveTurnResource)

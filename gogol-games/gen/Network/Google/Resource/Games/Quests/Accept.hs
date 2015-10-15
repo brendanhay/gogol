@@ -88,8 +88,7 @@ qaQuestId
 instance GoogleRequest QuestsAccept' where
         type Rs QuestsAccept' = Quest
         requestClient QuestsAccept'{..}
-          = go _qaQuestId _qaLanguage (Just AltJSON)
-              gamesService
+          = go _qaQuestId _qaLanguage (Just AltJSON) games
           where go
                   = buildClient (Proxy :: Proxy QuestsAcceptResource)
                       mempty

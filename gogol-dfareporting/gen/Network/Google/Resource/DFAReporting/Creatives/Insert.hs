@@ -88,7 +88,7 @@ instance GoogleRequest CreativesInsert' where
         type Rs CreativesInsert' = Creative
         requestClient CreativesInsert'{..}
           = go _creProFileId (Just AltJSON) _crePayload
-              dFAReportingService
+              dFAReporting
           where go
                   = buildClient
                       (Proxy :: Proxy CreativesInsertResource)

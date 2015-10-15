@@ -166,7 +166,7 @@ instance GoogleRequest ClientMessagesLog' where
               _cmlCallback
               (Just AltJSON)
               _cmlPayload
-              partnersService
+              partners
           where go
                   = buildClient
                       (Proxy :: Proxy ClientMessagesLogResource)

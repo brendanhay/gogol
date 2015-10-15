@@ -19,7 +19,7 @@
 module Network.Google.TaskQueue
     (
     -- * Service Configuration
-      taskQueueService
+      taskQueue
 
     -- * API Declaration
     , TaskQueueAPI

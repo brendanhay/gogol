@@ -102,7 +102,7 @@ instance GoogleRequest ManifestsGet' where
         requestClient ManifestsGet'{..}
           = go _mgProject _mgDeployment _mgManifest
               (Just AltJSON)
-              deploymentManagerService
+              deploymentManager
           where go
                   = buildClient (Proxy :: Proxy ManifestsGetResource)
                       mempty

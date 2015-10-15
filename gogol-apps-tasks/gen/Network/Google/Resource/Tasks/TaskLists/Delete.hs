@@ -76,7 +76,7 @@ tldTaskList
 instance GoogleRequest TaskListsDelete' where
         type Rs TaskListsDelete' = ()
         requestClient TaskListsDelete'{..}
-          = go _tldTaskList (Just AltJSON) appsTasksService
+          = go _tldTaskList (Just AltJSON) appsTasks
           where go
                   = buildClient
                       (Proxy :: Proxy TaskListsDeleteResource)

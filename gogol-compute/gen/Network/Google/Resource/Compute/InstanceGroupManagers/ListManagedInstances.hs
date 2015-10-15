@@ -111,7 +111,7 @@ instance GoogleRequest
           = go _igmlmiProject _igmlmiZone
               _igmlmiInstanceGroupManager
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy ::

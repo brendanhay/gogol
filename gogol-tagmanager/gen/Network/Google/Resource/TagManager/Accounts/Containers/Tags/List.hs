@@ -94,7 +94,7 @@ instance GoogleRequest AccountsContainersTagsList'
              ListTagsResponse
         requestClient AccountsContainersTagsList'{..}
           = go _actlcAccountId _actlcContainerId (Just AltJSON)
-              tagManagerService
+              tagManager
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsContainersTagsListResource)

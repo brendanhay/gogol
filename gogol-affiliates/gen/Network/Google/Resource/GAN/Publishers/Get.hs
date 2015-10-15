@@ -104,7 +104,7 @@ instance GoogleRequest PublishersGet' where
         type Rs PublishersGet' = Publisher
         requestClient PublishersGet'{..}
           = go _pgRole _pgRoleId _pgPublisherId (Just AltJSON)
-              affiliatesService
+              affiliates
           where go
                   = buildClient (Proxy :: Proxy PublishersGetResource)
                       mempty

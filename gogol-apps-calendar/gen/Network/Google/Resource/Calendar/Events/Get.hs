@@ -136,7 +136,7 @@ instance GoogleRequest EventsGet' where
               _egTimeZone
               _egAlwaysIncludeEmail
               (Just AltJSON)
-              appsCalendarService
+              appsCalendar
           where go
                   = buildClient (Proxy :: Proxy EventsGetResource)
                       mempty

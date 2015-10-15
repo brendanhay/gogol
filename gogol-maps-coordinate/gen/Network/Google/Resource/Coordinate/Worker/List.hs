@@ -75,7 +75,7 @@ wlTeamId = lens _wlTeamId (\ s a -> s{_wlTeamId = a})
 instance GoogleRequest WorkerList' where
         type Rs WorkerList' = WorkerListResponse
         requestClient WorkerList'{..}
-          = go _wlTeamId (Just AltJSON) mapsCoordinateService
+          = go _wlTeamId (Just AltJSON) mapsCoordinate
           where go
                   = buildClient (Proxy :: Proxy WorkerListResource)
                       mempty

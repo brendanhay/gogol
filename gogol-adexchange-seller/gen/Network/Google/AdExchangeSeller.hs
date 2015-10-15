@@ -20,7 +20,7 @@
 module Network.Google.AdExchangeSeller
     (
     -- * Service Configuration
-      adExchangeSellerService
+      adExchangeSeller
 
     -- * API Declaration
     , AdExchangeSellerAPI

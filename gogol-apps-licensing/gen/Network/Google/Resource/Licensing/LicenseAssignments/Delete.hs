@@ -101,7 +101,7 @@ instance GoogleRequest LicenseAssignmentsDelete'
         requestClient LicenseAssignmentsDelete'{..}
           = go _ladProductId _ladSKUId _ladUserId
               (Just AltJSON)
-              appsLicensingService
+              appsLicensing
           where go
                   = buildClient
                       (Proxy :: Proxy LicenseAssignmentsDeleteResource)

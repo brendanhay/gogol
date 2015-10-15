@@ -77,7 +77,7 @@ instance GoogleRequest CloudLoadingUpdateBook' where
         type Rs CloudLoadingUpdateBook' =
              BooksCloudLoadingResource
         requestClient CloudLoadingUpdateBook'{..}
-          = go (Just AltJSON) _clubPayload booksService
+          = go (Just AltJSON) _clubPayload books
           where go
                   = buildClient
                       (Proxy :: Proxy CloudLoadingUpdateBookResource)

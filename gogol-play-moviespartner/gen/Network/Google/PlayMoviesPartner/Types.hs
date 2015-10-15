@@ -16,7 +16,7 @@
 module Network.Google.PlayMoviesPartner.Types
     (
     -- * Service Configuration
-      playMoviesPartnerService
+      playMoviesPartner
 
     -- * OAuth Scopes
     , playmoviesPartnerReadonlyScope
@@ -170,12 +170,12 @@ import           Network.Google.PlayMoviesPartner.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Play Movies Partner API. This contains the host and root path used as a starting point for constructing service requests.
-playMoviesPartnerService :: Service
-playMoviesPartnerService
+playMoviesPartner :: Service
+playMoviesPartner
   = defaultService (ServiceId "playmoviespartner:v1")
       "playmoviespartner.googleapis.com"
       ""
 
 -- | View the digital assets you publish on Google Play Movies and TV
 playmoviesPartnerReadonlyScope :: OAuthScope
-playmoviesPartnerReadonlyScope = OAuthScope "https://www.googleapis.com/auth/playmovies_partner.readonly";
+playmoviesPartnerReadonlyScope = "https://www.googleapis.com/auth/playmovies_partner.readonly";

@@ -130,7 +130,7 @@ instance GoogleRequest GlobalForwardingRulesList'
           = go _gfrlProject _gfrlFilter _gfrlPageToken
               (Just _gfrlMaxResults)
               (Just AltJSON)
-              computeService
+              compute
           where go
                   = buildClient
                       (Proxy :: Proxy GlobalForwardingRulesListResource)

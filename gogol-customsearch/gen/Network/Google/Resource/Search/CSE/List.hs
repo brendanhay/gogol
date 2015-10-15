@@ -494,6 +494,6 @@ instance GoogleRequest CSEList' where
               _cselHq
               _cselHighRange
               (Just AltJSON)
-              customSearchService
+              customSearch
           where go
                   = buildClient (Proxy :: Proxy CSEListResource) mempty

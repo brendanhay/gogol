@@ -88,7 +88,7 @@ instance GoogleRequest AccounttaxGet' where
         type Rs AccounttaxGet' = AccountTax
         requestClient AccounttaxGet'{..}
           = go _aggMerchantId _aggAccountId (Just AltJSON)
-              shoppingContentService
+              shoppingContent
           where go
                   = buildClient (Proxy :: Proxy AccounttaxGetResource)
                       mempty

@@ -105,7 +105,7 @@ instance GoogleRequest ChromeosDevicesGet' where
         requestClient ChromeosDevicesGet'{..}
           = go _cdgCustomerId _cdgDeviceId _cdgProjection
               (Just AltJSON)
-              directoryService
+              directory
           where go
                   = buildClient
                       (Proxy :: Proxy ChromeosDevicesGetResource)
