@@ -184,6 +184,21 @@ defaultService i h p = Service
     , _svcScopes  = []
     }
 
+serviceHost :: Lens' Service ByteString
+serviceHost = lens _svcHost (\s a -> s { _svcHost = a })
+
+servicePath :: Lens' Service Builder
+servicePath = lens _svcPath (\s a -> s { _svcPath = a })
+
+servicePort :: Lens' Service Int
+servicePort = lens _svcPort (\s a -> s { _svcPort = a })
+
+serviceSecure :: Lens' Service Bool
+serviceSecure = lens _svcSecure (\s a -> s { _svcSecure = a })
+
+serviceTimeout :: Lens' Service (Maybe Seconds)
+serviceTimeout = lens _svcTimeout (\s a -> s { _svcTimeout = a })
+
 -- | An intermediary request builder.
 data Request = Request
     { _rqPath    :: Builder
@@ -229,6 +244,9 @@ data Client a = Client
     , _cliRequest  :: Request
     , _cliResponse :: Stream -> ResourceT IO (Either String a)
     }
+
+clientService :: Lens' (Client a) Service
+clientService = lens _cliService (\s a -> s { _cliService = a })
 
 mime :: FromStream c a => Proxy c -> Method -> [Int] -> Request -> Service -> Client a
 mime p = client (fromStream p) (Just (contentType p))
