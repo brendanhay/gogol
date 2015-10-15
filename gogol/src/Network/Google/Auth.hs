@@ -21,32 +21,56 @@
 module Network.Google.Auth where
 
 import           Control.Concurrent
-import           Control.Concurrent.MVar
-import           Data.Char               (toLower)
--- import           Control.Exception
 import           Control.Exception.Lens
 import           Control.Lens
 import           Control.Monad
 import           Control.Monad.Catch
 import           Control.Monad.IO.Class
 import           Data.Aeson
-import           Data.ByteString         (ByteString)
-import qualified Data.ByteString.Lazy    as LBS
-import           Data.Default.Class      (def)
-import qualified Data.HashMap.Strict     as Map
-import           Data.Text               (Text)
-import qualified Data.Text               as Text
-import qualified Data.Text.Encoding      as Text
+import           Data.ByteString        (ByteString)
+import qualified Data.ByteString.Lazy   as LBS
+import           Data.Char              (toLower)
+import           Data.Default.Class     (def)
+import qualified Data.Text              as Text
+import qualified Data.Text.Encoding     as Text
 import           Data.Time
 import           Data.Typeable
 import           Network.Google.Prelude
 import           Network.HTTP.Conduit
-import qualified Network.HTTP.Conduit    as Client
+import qualified Network.HTTP.Conduit   as Client
 import           Network.HTTP.Types
-import           System.Directory        (doesFileExist, getHomeDirectory)
-import           System.Environment      (lookupEnv)
-import           System.FilePath         ((</>))
-import           System.Info             (os)
+import           System.Directory       (doesFileExist, getHomeDirectory)
+import           System.Environment     (lookupEnv)
+import           System.FilePath        ((</>))
+import           System.Info            (os)
+
+accountsHost, metadataHost :: ByteString
+accountsHost = "accounts.google.com"
+metadataHost = "metadata.google.internal"
+
+metadataFlavorHeader :: HeaderName
+metadataFlavorHeader = "Metadata-Flavor"
+
+metadataFlavorDesired :: ByteString
+metadataFlavorDesired = "Google"
+
+noGCECheck :: String
+noGCECheck = "NO_GCE_CHECK"
+
+-- | The environment variable name which can replace ~/.config if set.
+cloudSDKCredentialsDirVar :: String
+cloudSDKCredentialsDirVar = "CLOUDSDK_CONFIG"
+
+cloudSDKCredentialsDir :: FilePath
+cloudSDKCredentialsDir = "gcloud"
+
+cloudSDKCredentialsFile :: FilePath
+cloudSDKCredentialsFile = "application_default_credentials.json"
+
+-- | The environment variable pointing the file with local
+-- Application Default Credentials.
+defaultCredentialsFileVar :: String
+defaultCredentialsFileVar = "GOOGLE_APPLICATION_CREDENTIALS"
 
 data AuthError
     = RetrievalError    HttpException
@@ -72,9 +96,13 @@ class AsAuthError a where
     -- | An error occured parsing the default credentials file.
     _InvalidFileError :: Prism' a (FilePath, Text)
 
-    _RetrievalError   = _AuthError . _RetrievalError
-    _MissingFileError = _AuthError . _MissingFileError
-    _InvalidFileError = _AuthError . _InvalidFileError
+    -- | An error occured when attempting to refresh a token.
+    _TokenRefreshError :: Prism' a (Status, Text, Maybe Text)
+
+    _RetrievalError    = _AuthError . _RetrievalError
+    _MissingFileError  = _AuthError . _MissingFileError
+    _InvalidFileError  = _AuthError . _InvalidFileError
+    _TokenRefreshError = _AuthError . _TokenRefreshError
 
 instance AsAuthError SomeException where
     _AuthError = exception
@@ -82,78 +110,25 @@ instance AsAuthError SomeException where
 instance AsAuthError AuthError where
     _AuthError = id
 
-    -- _RetrievalError = prism RetrievalError $ \case
-    --     RetrievalError   e -> Right e
-    --     x                  -> Left  x
+    _RetrievalError = prism RetrievalError $ \case
+        RetrievalError   e -> Right e
+        x                  -> Left  x
 
-    -- _MissingEnvError = prism MissingEnvError $ \case
-    --     MissingEnvError  e -> Right e
-    --     x                  -> Left  x
+    _MissingFileError = prism MissingFileError $ \case
+        MissingFileError f -> Right f
+        x                  -> Left  x
 
-    -- _MissingFileError = prism MissingFileError $ \case
-    --     MissingFileError f -> Right f
-    --     x                  -> Left  x
+    _InvalidFileError = prism
+        (uncurry InvalidFileError)
+        (\case
+            InvalidFileError f e -> Right (f, e)
+            x                    -> Left  x)
 
-    -- _InvalidFileError = prism InvalidFileError $ \case
-    --     InvalidFileError e -> Right e
-    --     x                  -> Left  x
-
-accountsHost = "accounts.google.com"
-
-metadataHost          = "metadata.google.internal"
-metadataFlavorHeader  = "Metadata-Flavor"
-metadataFlavorDesired = "Google"
-
-noGCECheck = "NO_GCE_CHECK"
-
-detectGCE :: MonadIO m => Manager -> m Bool
-detectGCE m = liftIO $ do
-    p <- check <$> lookupEnv noGCECheck
-    if p
-        then (success <$> httpLbs rq m) `catch` failure
-        else pure False
-  where
-    check Nothing  = True
-    check (Just x) = map toLower x `notElem` ["1", "true", "yes", "on"]
-
-    success rs =
-           fromEnum (responseStatus rs) == 200
-        && (lookup metadataFlavorHeader (responseHeaders rs)
-               == Just metadataFlavorDesired)
-
-    failure :: HttpException -> IO Bool
-    failure = const (pure False)
-
-    rq = def
-        { Client.host            = metadataHost
-        , Client.checkStatus     = \_ _ _ -> Nothing
-        , Client.responseTimeout = Just 1000000
-        , Client.requestHeaders  =
-            [ (metadataFlavorHeader, metadataFlavorDesired)
-            ]
-        }
-
--- | The environment variable name which can replace ~/.config if set.
-cloudSDKCredentialsDirVar = "CLOUDSDK_CONFIG"
-cloudSDKCredentialsDir    = "gcloud"
-cloudSDKCredentialsFile   = "application_default_credentials.json"
-
-cloudSDKCredentialsPath :: MonadIO m => m FilePath
-cloudSDKCredentialsPath = liftIO $ do
-    v <- lookupEnv cloudSDKCredentialsDirVar
-    h <- getHomeDirectory
-    let d = case v of
-            Nothing | os == "windows" -> h </> cloudSDKCredentialsDir
-            Nothing                   -> h </> ".config" </> cloudSDKCredentialsDir
-            Just x                    -> h </> x
-    pure $! d </> cloudSDKCredentialsFile
-
--- | The environment variable pointing the file with local
--- Application Default Credentials.
-defaultCredentialsFileVar = "GOOGLE_APPLICATION_CREDENTIALS"
-
-defaultCredentialsPath :: MonadIO m => m (Maybe FilePath)
-defaultCredentialsPath = liftIO (lookupEnv defaultCredentialsFileVar)
+    _TokenRefreshError = prism
+        (\(s, e, d) -> TokenRefreshError s e d)
+        (\case
+            TokenRefreshError s e d -> Right (s, e, d)
+            x                       -> Left  x)
 
 data Credentials
     = FromToken   !OAuthToken
@@ -223,6 +198,46 @@ refreshToken (Ref m r) = do
 
 isValid :: Refresh a -> IO Bool
 isValid r = (< _rExpiry r) <$> getCurrentTime
+
+cloudSDKCredentialsPath :: MonadIO m => m FilePath
+cloudSDKCredentialsPath = liftIO $ do
+    v <- lookupEnv cloudSDKCredentialsDirVar
+    h <- getHomeDirectory
+    let d = case v of
+            Nothing | os == "windows" -> h </> cloudSDKCredentialsDir
+            Nothing                   -> h </> ".config" </> cloudSDKCredentialsDir
+            Just x                    -> h </> x
+    pure $! d </> cloudSDKCredentialsFile
+
+defaultCredentialsPath :: MonadIO m => m (Maybe FilePath)
+defaultCredentialsPath = liftIO (lookupEnv defaultCredentialsFileVar)
+
+detectGCE :: MonadIO m => Manager -> m Bool
+detectGCE m = liftIO $ do
+    p <- check <$> lookupEnv noGCECheck
+    if p
+        then (success <$> httpLbs rq m) `catch` failure
+        else pure False
+  where
+    check Nothing  = True
+    check (Just x) = map toLower x `notElem` ["1", "true", "yes", "on"]
+
+    success rs =
+           fromEnum (responseStatus rs) == 200
+        && (lookup metadataFlavorHeader (responseHeaders rs)
+               == Just metadataFlavorDesired)
+
+    failure :: HttpException -> IO Bool
+    failure = const (pure False)
+
+    rq = def
+        { Client.host            = metadataHost
+        , Client.checkStatus     = \_ _ _ -> Nothing
+        , Client.responseTimeout = Just 1000000
+        , Client.requestHeaders  =
+            [ (metadataFlavorHeader, metadataFlavorDesired)
+            ]
+        }
 
 data User = User
     { _uId      :: !ClientId
