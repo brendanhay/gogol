@@ -118,7 +118,7 @@ instance GoogleRequest ChannelsUpdate' where
           = go (Just _chaPart) _chaOnBehalfOfContentOwner
               (Just AltJSON)
               _chaPayload
-              youTube
+              youTubeService
           where go
                   = buildClient (Proxy :: Proxy ChannelsUpdateResource)
                       mempty

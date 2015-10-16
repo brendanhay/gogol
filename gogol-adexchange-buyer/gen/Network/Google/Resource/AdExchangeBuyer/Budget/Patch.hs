@@ -104,7 +104,7 @@ instance GoogleRequest BudgetPatch' where
         requestClient BudgetPatch'{..}
           = go _bpAccountId _bpBillingId (Just AltJSON)
               _bpPayload
-              adExchangeBuyer
+              adExchangeBuyerService
           where go
                   = buildClient (Proxy :: Proxy BudgetPatchResource)
                       mempty

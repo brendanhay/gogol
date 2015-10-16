@@ -88,7 +88,7 @@ instance GoogleRequest SavedadstylesList' where
         type Rs SavedadstylesList' = SavedAdStyles
         requestClient SavedadstylesList'{..}
           = go _slPageToken _slMaxResults (Just AltJSON)
-              adSense
+              adSenseService
           where go
                   = buildClient
                       (Proxy :: Proxy SavedadstylesListResource)

@@ -75,7 +75,7 @@ sgSavedAdStyleId
 instance GoogleRequest SavedadstylesGet' where
         type Rs SavedadstylesGet' = SavedAdStyle
         requestClient SavedadstylesGet'{..}
-          = go _sgSavedAdStyleId (Just AltJSON) adSense
+          = go _sgSavedAdStyleId (Just AltJSON) adSenseService
           where go
                   = buildClient
                       (Proxy :: Proxy SavedadstylesGetResource)

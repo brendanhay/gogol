@@ -16,7 +16,7 @@
 module Network.Google.EmailMigration.Types
     (
     -- * Service Configuration
-      emailMigration
+      emailMigrationService
 
     -- * OAuth Scopes
     , emailMigrationScope
@@ -40,8 +40,8 @@ import           Network.Google.EmailMigration.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'email_migration_v2' of the Email Migration API v2. This contains the host and root path used as a starting point for constructing service requests.
-emailMigration :: Service
-emailMigration
+emailMigrationService :: Service
+emailMigrationService
   = defaultService
       (ServiceId "admin:email_migration_v2")
       "www.googleapis.com"

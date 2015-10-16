@@ -104,7 +104,7 @@ instance GoogleRequest EventsListByPlayer' where
         requestClient EventsListByPlayer'{..}
           = go _elbpLanguage _elbpPageToken _elbpMaxResults
               (Just AltJSON)
-              games
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy EventsListByPlayerResource)

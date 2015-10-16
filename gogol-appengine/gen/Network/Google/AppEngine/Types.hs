@@ -16,7 +16,7 @@
 module Network.Google.AppEngine.Types
     (
     -- * Service Configuration
-      appEngine
+      appEngineService
 
     -- * OAuth Scopes
     , cloudPlatformScope
@@ -321,8 +321,8 @@ import           Network.Google.AppEngine.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1beta4' of the Google App Engine Admin API. This contains the host and root path used as a starting point for constructing service requests.
-appEngine :: Service
-appEngine
+appEngineService :: Service
+appEngineService
   = defaultService (ServiceId "appengine:v1beta4")
       "appengine.googleapis.com"
       ""

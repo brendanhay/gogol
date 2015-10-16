@@ -106,7 +106,7 @@ instance GoogleRequest CirclesAddPeople' where
           = go _capCircleId (_capEmail ^. _Default)
               (_capUserId ^. _Default)
               (Just AltJSON)
-              plusDomains
+              plusDomainsService
           where go
                   = buildClient
                       (Proxy :: Proxy CirclesAddPeopleResource)

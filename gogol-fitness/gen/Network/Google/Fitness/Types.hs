@@ -16,7 +16,7 @@
 module Network.Google.Fitness.Types
     (
     -- * Service Configuration
-      fitness
+      fitnessService
 
     -- * OAuth Scopes
     , fitnessBodyReadScope
@@ -198,8 +198,8 @@ import           Network.Google.Fitness.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Fitness. This contains the host and root path used as a starting point for constructing service requests.
-fitness :: Service
-fitness
+fitnessService :: Service
+fitnessService
   = defaultService (ServiceId "fitness:v1")
       "www.googleapis.com"
       "fitness/v1/users/"

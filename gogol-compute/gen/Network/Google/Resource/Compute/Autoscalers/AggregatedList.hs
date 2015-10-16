@@ -128,7 +128,7 @@ instance GoogleRequest AutoscalersAggregatedList'
           = go _aalaProject _aalaFilter _aalaPageToken
               (Just _aalaMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy AutoscalersAggregatedListResource)

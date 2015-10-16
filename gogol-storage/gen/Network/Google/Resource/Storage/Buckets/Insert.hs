@@ -131,7 +131,7 @@ instance GoogleRequest BucketsInsert' where
               _biProjection
               (Just AltJSON)
               _biPayload
-              storage
+              storageService
           where go
                   = buildClient (Proxy :: Proxy BucketsInsertResource)
                       mempty

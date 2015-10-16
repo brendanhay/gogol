@@ -178,7 +178,7 @@ instance GoogleRequest TransferJobsPatch' where
               _tjpCallback
               (Just AltJSON)
               _tjpPayload
-              storageTransfer
+              storageTransferService
           where go
                   = buildClient
                       (Proxy :: Proxy TransferJobsPatchResource)

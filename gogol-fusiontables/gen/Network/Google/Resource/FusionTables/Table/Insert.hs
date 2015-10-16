@@ -73,7 +73,7 @@ tPayload = lens _tPayload (\ s a -> s{_tPayload = a})
 instance GoogleRequest TableInsert' where
         type Rs TableInsert' = Table
         requestClient TableInsert'{..}
-          = go (Just AltJSON) _tPayload fusionTables
+          = go (Just AltJSON) _tPayload fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TableInsertResource)
                       mempty

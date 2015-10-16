@@ -112,7 +112,7 @@ instance GoogleRequest TasksInsert' where
         requestClient TasksInsert'{..}
           = go _tiTaskList _tiParent _tiPrevious (Just AltJSON)
               _tiPayload
-              appsTasks
+              appsTasksService
           where go
                   = buildClient (Proxy :: Proxy TasksInsertResource)
                       mempty

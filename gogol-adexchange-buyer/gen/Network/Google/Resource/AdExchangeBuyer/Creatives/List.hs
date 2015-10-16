@@ -154,7 +154,7 @@ instance GoogleRequest CreativesList' where
               _clDealsStatusFilter
               _clMaxResults
               (Just AltJSON)
-              adExchangeBuyer
+              adExchangeBuyerService
           where go
                   = buildClient (Proxy :: Proxy CreativesListResource)
                       mempty

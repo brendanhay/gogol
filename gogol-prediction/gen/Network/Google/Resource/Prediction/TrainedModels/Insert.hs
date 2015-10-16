@@ -87,7 +87,7 @@ instance GoogleRequest TrainedModelsInsert' where
         type Rs TrainedModelsInsert' = Insert2
         requestClient TrainedModelsInsert'{..}
           = go _tmiProject (Just AltJSON) _tmiPayload
-              prediction
+              predictionService
           where go
                   = buildClient
                       (Proxy :: Proxy TrainedModelsInsertResource)

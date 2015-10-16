@@ -194,7 +194,7 @@ instance GoogleRequest ProjectsZonesClustersGet'
               _pzcgBearerToken
               _pzcgCallback
               (Just AltJSON)
-              container
+              containerService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsZonesClustersGetResource)

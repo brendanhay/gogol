@@ -127,7 +127,7 @@ instance GoogleRequest InstanceTemplatesList' where
           = go _itlProject _itlFilter _itlPageToken
               (Just _itlMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceTemplatesListResource)

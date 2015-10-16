@@ -162,7 +162,7 @@ instance GoogleRequest ContentCategoriesList' where
               _cclSortField
               _cclMaxResults
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy ContentCategoriesListResource)

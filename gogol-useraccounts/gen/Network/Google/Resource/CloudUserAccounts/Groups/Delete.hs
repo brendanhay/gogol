@@ -88,7 +88,7 @@ instance GoogleRequest GroupsDelete' where
         type Rs GroupsDelete' = Operation
         requestClient GroupsDelete'{..}
           = go _gdProject _gdGroupName (Just AltJSON)
-              userAccounts
+              userAccountsService
           where go
                   = buildClient (Proxy :: Proxy GroupsDeleteResource)
                       mempty

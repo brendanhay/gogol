@@ -105,7 +105,7 @@ instance GoogleRequest InstancesImport' where
         requestClient InstancesImport'{..}
           = go _insProject _insInstance (Just AltJSON)
               _insPayload
-              sQLAdmin
+              sQLAdminService
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesImportResource)

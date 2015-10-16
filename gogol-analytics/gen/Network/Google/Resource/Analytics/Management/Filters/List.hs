@@ -103,7 +103,7 @@ instance GoogleRequest ManagementFiltersList' where
         requestClient ManagementFiltersList'{..}
           = go _mflAccountId _mflStartIndex _mflMaxResults
               (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementFiltersListResource)

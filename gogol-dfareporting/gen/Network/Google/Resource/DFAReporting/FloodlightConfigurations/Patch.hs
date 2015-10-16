@@ -105,7 +105,7 @@ instance GoogleRequest FloodlightConfigurationsPatch'
         requestClient FloodlightConfigurationsPatch'{..}
           = go _fcpProFileId (Just _fcpId) (Just AltJSON)
               _fcpPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy ::

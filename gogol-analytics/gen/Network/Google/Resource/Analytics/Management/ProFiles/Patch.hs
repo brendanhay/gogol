@@ -121,7 +121,7 @@ instance GoogleRequest ManagementProFilesPatch' where
           = go _mpfpAccountId _mpfpWebPropertyId _mpfpProFileId
               (Just AltJSON)
               _mpfpPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementProFilesPatchResource)

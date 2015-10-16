@@ -75,7 +75,7 @@ ruPayload
 instance GoogleRequest RastersUpload' where
         type Rs RastersUpload' = Raster
         requestClient RastersUpload'{..}
-          = go (Just AltJSON) _ruPayload mapsEngine
+          = go (Just AltJSON) _ruPayload mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy RastersUploadResource)
                       mempty

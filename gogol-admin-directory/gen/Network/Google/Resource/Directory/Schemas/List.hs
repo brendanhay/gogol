@@ -75,7 +75,7 @@ slCustomerId
 instance GoogleRequest SchemasList' where
         type Rs SchemasList' = Schemas
         requestClient SchemasList'{..}
-          = go _slCustomerId (Just AltJSON) directory
+          = go _slCustomerId (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy SchemasListResource)
                       mempty

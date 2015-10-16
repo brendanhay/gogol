@@ -122,7 +122,7 @@ instance GoogleRequest CollectionviewersPatch' where
           = go _cpEnterpriseId _cpCollectionId _cpUserId
               (Just AltJSON)
               _cpPayload
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy :: Proxy CollectionviewersPatchResource)

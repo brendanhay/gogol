@@ -88,7 +88,7 @@ instance GoogleRequest NegotiationsGet' where
         type Rs NegotiationsGet' = NegotiationDTO
         requestClient NegotiationsGet'{..}
           = go _ngNegotiationId (Just AltJSON) _ngPayload
-              adExchangeBuyer
+              adExchangeBuyerService
           where go
                   = buildClient
                       (Proxy :: Proxy NegotiationsGetResource)

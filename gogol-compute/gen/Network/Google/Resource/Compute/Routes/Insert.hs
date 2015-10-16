@@ -89,7 +89,8 @@ riPayload
 instance GoogleRequest RoutesInsert' where
         type Rs RoutesInsert' = Operation
         requestClient RoutesInsert'{..}
-          = go _riProject (Just AltJSON) _riPayload compute
+          = go _riProject (Just AltJSON) _riPayload
+              computeService
           where go
                   = buildClient (Proxy :: Proxy RoutesInsertResource)
                       mempty

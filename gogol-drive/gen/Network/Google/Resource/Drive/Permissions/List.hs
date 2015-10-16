@@ -76,7 +76,7 @@ pllFileId
 instance GoogleRequest PermissionsList' where
         type Rs PermissionsList' = PermissionList
         requestClient PermissionsList'{..}
-          = go _pllFileId (Just AltJSON) drive
+          = go _pllFileId (Just AltJSON) driveService
           where go
                   = buildClient
                       (Proxy :: Proxy PermissionsListResource)

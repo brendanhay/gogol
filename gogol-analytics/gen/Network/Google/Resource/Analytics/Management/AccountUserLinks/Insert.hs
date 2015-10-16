@@ -93,7 +93,7 @@ instance GoogleRequest
              EntityUserLink
         requestClient ManagementAccountUserLinksInsert'{..}
           = go _mauliAccountId (Just AltJSON) _mauliPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

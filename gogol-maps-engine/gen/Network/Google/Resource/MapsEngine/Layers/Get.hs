@@ -87,7 +87,8 @@ lgId = lens _lgId (\ s a -> s{_lgId = a})
 instance GoogleRequest LayersGet' where
         type Rs LayersGet' = Layer
         requestClient LayersGet'{..}
-          = go _lgId _lgVersion (Just AltJSON) mapsEngine
+          = go _lgId _lgVersion (Just AltJSON)
+              mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy LayersGetResource)
                       mempty

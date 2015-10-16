@@ -75,7 +75,7 @@ mdId = lens _mdId (\ s a -> s{_mdId = a})
 instance GoogleRequest MapsDelete' where
         type Rs MapsDelete' = ()
         requestClient MapsDelete'{..}
-          = go _mdId (Just AltJSON) mapsEngine
+          = go _mdId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy MapsDeleteResource)
                       mempty

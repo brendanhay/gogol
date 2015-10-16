@@ -224,7 +224,7 @@ instance GoogleRequest CommentThreadsList' where
               (Just _ctlTextFormat)
               (Just _ctlMaxResults)
               (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy CommentThreadsListResource)

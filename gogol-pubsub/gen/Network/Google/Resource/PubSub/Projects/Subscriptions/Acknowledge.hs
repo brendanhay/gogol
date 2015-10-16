@@ -184,7 +184,7 @@ instance GoogleRequest
               _psaCallback
               (Just AltJSON)
               _psaPayload
-              pubSub
+              pubSubService
           where go
                   = buildClient
                       (Proxy ::

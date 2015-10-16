@@ -83,7 +83,7 @@ instance GoogleRequest ScoresResetForAllPlayers'
         type Rs ScoresResetForAllPlayers' = ()
         requestClient ScoresResetForAllPlayers'{..}
           = go _srfapLeaderboardId (Just AltJSON)
-              gamesManagement
+              gamesManagementService
           where go
                   = buildClient
                       (Proxy :: Proxy ScoresResetForAllPlayersResource)

@@ -108,7 +108,7 @@ instance GoogleRequest ProductsUpdatePermissions'
         requestClient ProductsUpdatePermissions'{..}
           = go _pupEnterpriseId _pupProductId (Just AltJSON)
               _pupPayload
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy :: Proxy ProductsUpdatePermissionsResource)

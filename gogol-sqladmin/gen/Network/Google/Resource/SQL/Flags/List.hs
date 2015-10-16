@@ -60,7 +60,7 @@ flagsList' = FlagsList'
 instance GoogleRequest FlagsList' where
         type Rs FlagsList' = FlagsListResponse
         requestClient FlagsList'{}
-          = go (Just AltJSON) sQLAdmin
+          = go (Just AltJSON) sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy FlagsListResource)
                       mempty

@@ -89,7 +89,7 @@ instance GoogleRequest CalendarsPatch' where
         type Rs CalendarsPatch' = Calendar
         requestClient CalendarsPatch'{..}
           = go _cpCalendarId (Just AltJSON) _cpPayload
-              appsCalendar
+              appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy CalendarsPatchResource)
                       mempty

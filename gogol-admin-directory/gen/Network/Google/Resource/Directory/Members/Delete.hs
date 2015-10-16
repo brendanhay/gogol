@@ -88,7 +88,7 @@ instance GoogleRequest MembersDelete' where
         type Rs MembersDelete' = ()
         requestClient MembersDelete'{..}
           = go _mdGroupKey _mdMemberKey (Just AltJSON)
-              directory
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy MembersDeleteResource)
                       mempty

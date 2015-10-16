@@ -195,7 +195,7 @@ instance GoogleRequest ProjectsJobsWorkItemsLease'
               _pjwilCallback
               (Just AltJSON)
               _pjwilPayload
-              dataflow
+              dataflowService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsJobsWorkItemsLeaseResource)

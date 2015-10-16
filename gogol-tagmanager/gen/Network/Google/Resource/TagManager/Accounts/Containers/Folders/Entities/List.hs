@@ -110,7 +110,7 @@ instance GoogleRequest
           AccountsContainersFoldersEntitiesList'{..}
           = go _acfelAccountId _acfelContainerId _acfelFolderId
               (Just AltJSON)
-              tagManager
+              tagManagerService
           where go
                   = buildClient
                       (Proxy ::

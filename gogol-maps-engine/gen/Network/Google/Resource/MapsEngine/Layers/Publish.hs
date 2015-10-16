@@ -87,7 +87,7 @@ lId = lens _lId (\ s a -> s{_lId = a})
 instance GoogleRequest LayersPublish' where
         type Rs LayersPublish' = PublishResponse
         requestClient LayersPublish'{..}
-          = go _lId _lForce (Just AltJSON) mapsEngine
+          = go _lId _lForce (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy LayersPublishResource)
                       mempty

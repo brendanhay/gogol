@@ -106,7 +106,7 @@ instance GoogleRequest FloodlightActivityGroupsPatch'
         requestClient FloodlightActivityGroupsPatch'{..}
           = go _fagpProFileId (Just _fagpId) (Just AltJSON)
               _fagpPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy ::

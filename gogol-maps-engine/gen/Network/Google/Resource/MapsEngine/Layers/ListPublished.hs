@@ -107,7 +107,7 @@ instance GoogleRequest LayersListPublished' where
         requestClient LayersListPublished'{..}
           = go _llpPageToken _llpProjectId _llpMaxResults
               (Just AltJSON)
-              mapsEngine
+              mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy LayersListPublishedResource)

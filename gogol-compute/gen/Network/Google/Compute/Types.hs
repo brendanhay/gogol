@@ -16,7 +16,7 @@
 module Network.Google.Compute.Types
     (
     -- * Service Configuration
-      compute
+      computeService
 
     -- * OAuth Scopes
     , computeScope
@@ -1771,8 +1771,8 @@ import           Network.Google.Compute.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Compute Engine API. This contains the host and root path used as a starting point for constructing service requests.
-compute :: Service
-compute
+computeService :: Service
+computeService
   = defaultService (ServiceId "compute:v1")
       "www.googleapis.com"
       "compute/v1/projects/"

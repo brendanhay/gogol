@@ -114,7 +114,7 @@ instance GoogleRequest EditsTestersUpdate' where
           = go _etutPackageName _etutEditId _etutTrack
               (Just AltJSON)
               _etutPayload
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy EditsTestersUpdateResource)

@@ -138,7 +138,7 @@ instance GoogleRequest
               _mpfuluLinkId
               (Just AltJSON)
               _mpfuluPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

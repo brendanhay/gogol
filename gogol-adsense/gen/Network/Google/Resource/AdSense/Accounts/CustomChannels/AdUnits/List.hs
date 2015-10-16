@@ -150,7 +150,7 @@ instance GoogleRequest
               _accaulPageToken
               _accaulMaxResults
               (Just AltJSON)
-              adSense
+              adSenseService
           where go
                   = buildClient
                       (Proxy ::

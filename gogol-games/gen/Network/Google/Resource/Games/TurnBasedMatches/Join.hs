@@ -87,7 +87,8 @@ tbmjMatchId
 instance GoogleRequest TurnBasedMatchesJoin' where
         type Rs TurnBasedMatchesJoin' = TurnBasedMatch
         requestClient TurnBasedMatchesJoin'{..}
-          = go _tbmjMatchId _tbmjLanguage (Just AltJSON) games
+          = go _tbmjMatchId _tbmjLanguage (Just AltJSON)
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy TurnBasedMatchesJoinResource)

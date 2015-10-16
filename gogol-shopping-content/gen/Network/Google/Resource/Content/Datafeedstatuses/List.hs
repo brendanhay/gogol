@@ -103,7 +103,7 @@ instance GoogleRequest DatafeedstatusesList' where
         requestClient DatafeedstatusesList'{..}
           = go _dllMerchantId _dllPageToken _dllMaxResults
               (Just AltJSON)
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy DatafeedstatusesListResource)

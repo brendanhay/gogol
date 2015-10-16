@@ -91,7 +91,7 @@ instance GoogleRequest MarketplaceNotesInsert' where
              AddOrderNotesResponse
         requestClient MarketplaceNotesInsert'{..}
           = go _mniOrderId (Just AltJSON) _mniPayload
-              adExchangeBuyer
+              adExchangeBuyerService
           where go
                   = buildClient
                       (Proxy :: Proxy MarketplaceNotesInsertResource)

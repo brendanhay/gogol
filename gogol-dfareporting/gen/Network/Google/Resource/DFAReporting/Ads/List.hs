@@ -437,6 +437,6 @@ instance GoogleRequest AdsList' where
               _adsMaxResults
               (_adsAudienceSegmentIds ^. _Default)
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy AdsListResource) mempty

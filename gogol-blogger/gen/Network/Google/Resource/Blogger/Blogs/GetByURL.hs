@@ -85,7 +85,8 @@ bgbuView = lens _bgbuView (\ s a -> s{_bgbuView = a})
 instance GoogleRequest BlogsGetByURL' where
         type Rs BlogsGetByURL' = Blog
         requestClient BlogsGetByURL'{..}
-          = go (Just _bgbuURL) _bgbuView (Just AltJSON) blogger
+          = go (Just _bgbuURL) _bgbuView (Just AltJSON)
+              bloggerService
           where go
                   = buildClient (Proxy :: Proxy BlogsGetByURLResource)
                       mempty

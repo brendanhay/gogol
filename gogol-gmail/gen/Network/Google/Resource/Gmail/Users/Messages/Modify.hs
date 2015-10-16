@@ -101,7 +101,7 @@ instance GoogleRequest UsersMessagesModify' where
         type Rs UsersMessagesModify' = Message
         requestClient UsersMessagesModify'{..}
           = go _ummUserId _ummId (Just AltJSON) _ummPayload
-              gmail
+              gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersMessagesModifyResource)

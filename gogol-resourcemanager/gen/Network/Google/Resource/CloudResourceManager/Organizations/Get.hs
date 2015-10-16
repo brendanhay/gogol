@@ -161,7 +161,7 @@ instance GoogleRequest OrganizationsGet' where
               _ogBearerToken
               _ogCallback
               (Just AltJSON)
-              resourceManager
+              resourceManagerService
           where go
                   = buildClient
                       (Proxy :: Proxy OrganizationsGetResource)

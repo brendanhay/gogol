@@ -90,7 +90,7 @@ instance GoogleRequest DevicesList' where
         type Rs DevicesList' = DevicesListResponse
         requestClient DevicesList'{..}
           = go _dlEnterpriseId _dlUserId (Just AltJSON)
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient (Proxy :: Proxy DevicesListResource)
                       mempty

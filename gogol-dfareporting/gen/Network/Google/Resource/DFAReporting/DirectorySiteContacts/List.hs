@@ -186,7 +186,7 @@ instance GoogleRequest DirectorySiteContactsList'
               _dsclSortField
               _dsclMaxResults
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy DirectorySiteContactsListResource)

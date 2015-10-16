@@ -77,7 +77,8 @@ cEnterpriseId
 instance GoogleRequest CollectionsList' where
         type Rs CollectionsList' = CollectionsListResponse
         requestClient CollectionsList'{..}
-          = go _cEnterpriseId (Just AltJSON) androidEnterprise
+          = go _cEnterpriseId (Just AltJSON)
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy :: Proxy CollectionsListResource)

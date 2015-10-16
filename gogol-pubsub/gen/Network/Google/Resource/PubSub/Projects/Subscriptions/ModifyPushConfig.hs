@@ -189,7 +189,7 @@ instance GoogleRequest
               _psmpcCallback
               (Just AltJSON)
               _psmpcPayload
-              pubSub
+              pubSubService
           where go
                   = buildClient
                       (Proxy ::

@@ -74,7 +74,7 @@ instance GoogleRequest StatscollectionUpdatestats'
          where
         type Rs StatscollectionUpdatestats' = StatsReply
         requestClient StatscollectionUpdatestats'{..}
-          = go (Just AltJSON) _sPayload latencyTest
+          = go (Just AltJSON) _sPayload latencyTestService
           where go
                   = buildClient
                       (Proxy :: Proxy StatscollectionUpdatestatsResource)

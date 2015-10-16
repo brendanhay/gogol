@@ -162,7 +162,7 @@ instance GoogleRequest TransferOperationsCancel'
               _tocBearerToken
               _tocCallback
               (Just AltJSON)
-              storageTransfer
+              storageTransferService
           where go
                   = buildClient
                       (Proxy :: Proxy TransferOperationsCancelResource)

@@ -19,7 +19,7 @@
 module Network.Google.DFAReporting
     (
     -- * Service Configuration
-      dFAReporting
+      dFAReportingService
 
     -- * API Declaration
     , DFAReportingAPI

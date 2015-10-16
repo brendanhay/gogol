@@ -100,7 +100,8 @@ twPayload
 instance GoogleRequest TimeseriesWrite' where
         type Rs TimeseriesWrite' = WriteTimeseriesResponse
         requestClient TimeseriesWrite'{..}
-          = go _twProject (Just AltJSON) _twPayload monitoring
+          = go _twProject (Just AltJSON) _twPayload
+              monitoringService
           where go
                   = buildClient
                       (Proxy :: Proxy TimeseriesWriteResource)

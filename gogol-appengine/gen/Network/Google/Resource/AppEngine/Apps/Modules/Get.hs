@@ -176,7 +176,7 @@ instance GoogleRequest AppsModulesGet' where
               _amgBearerToken
               _amgCallback
               (Just AltJSON)
-              appEngine
+              appEngineService
           where go
                   = buildClient (Proxy :: Proxy AppsModulesGetResource)
                       mempty

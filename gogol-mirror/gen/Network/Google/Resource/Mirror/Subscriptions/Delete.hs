@@ -73,7 +73,7 @@ sdId = lens _sdId (\ s a -> s{_sdId = a})
 instance GoogleRequest SubscriptionsDelete' where
         type Rs SubscriptionsDelete' = ()
         requestClient SubscriptionsDelete'{..}
-          = go _sdId (Just AltJSON) mirror
+          = go _sdId (Just AltJSON) mirrorService
           where go
                   = buildClient
                       (Proxy :: Proxy SubscriptionsDeleteResource)

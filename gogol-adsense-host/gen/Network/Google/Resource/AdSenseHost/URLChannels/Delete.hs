@@ -90,7 +90,7 @@ instance GoogleRequest URLChannelsDelete' where
         type Rs URLChannelsDelete' = URLChannel
         requestClient URLChannelsDelete'{..}
           = go _ucdAdClientId _ucdURLChannelId (Just AltJSON)
-              adSenseHost
+              adSenseHostService
           where go
                   = buildClient
                       (Proxy :: Proxy URLChannelsDeleteResource)

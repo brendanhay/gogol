@@ -90,7 +90,7 @@ instance GoogleRequest InstanceTemplatesGet' where
         type Rs InstanceTemplatesGet' = InstanceTemplate
         requestClient InstanceTemplatesGet'{..}
           = go _itgProject _itgInstanceTemplate (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceTemplatesGetResource)

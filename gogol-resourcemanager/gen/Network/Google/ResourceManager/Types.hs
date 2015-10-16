@@ -16,7 +16,7 @@
 module Network.Google.ResourceManager.Types
     (
     -- * Service Configuration
-      resourceManager
+      resourceManagerService
 
     -- * OAuth Scopes
     , cloudPlatformScope
@@ -109,8 +109,8 @@ import           Network.Google.ResourceManager.Types.Product
 import           Network.Google.ResourceManager.Types.Sum
 
 -- | Default request referring to version 'v1beta1' of the Google Cloud Resource Manager API. This contains the host and root path used as a starting point for constructing service requests.
-resourceManager :: Service
-resourceManager
+resourceManagerService :: Service
+resourceManagerService
   = defaultService
       (ServiceId "cloudresourcemanager:v1beta1")
       "cloudresourcemanager.googleapis.com"

@@ -109,7 +109,7 @@ instance GoogleRequest RemarketingListSharesPatch'
           = go _rlspProFileId (Just _rlspRemarketingListId)
               (Just AltJSON)
               _rlspPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy RemarketingListSharesPatchResource)

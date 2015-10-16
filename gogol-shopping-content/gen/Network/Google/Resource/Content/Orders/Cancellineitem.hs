@@ -100,7 +100,7 @@ instance GoogleRequest OrdersCancellineitem' where
              OrdersCancelLineItemResponse
         requestClient OrdersCancellineitem'{..}
           = go _oMerchantId _oOrderId (Just AltJSON) _oPayload
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy OrdersCancellineitemResource)

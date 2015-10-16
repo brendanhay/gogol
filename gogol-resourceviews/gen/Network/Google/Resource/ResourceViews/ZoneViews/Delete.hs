@@ -101,7 +101,7 @@ instance GoogleRequest ZoneViewsDelete' where
         requestClient ZoneViewsDelete'{..}
           = go _zvdProject _zvdZone _zvdResourceView
               (Just AltJSON)
-              resourceViews
+              resourceViewsService
           where go
                   = buildClient
                       (Proxy :: Proxy ZoneViewsDeleteResource)

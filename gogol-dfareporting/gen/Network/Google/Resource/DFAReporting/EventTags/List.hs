@@ -226,7 +226,7 @@ instance GoogleRequest EventTagsList' where
               _etlAdId
               _etlSortField
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy EventTagsListResource)
                       mempty

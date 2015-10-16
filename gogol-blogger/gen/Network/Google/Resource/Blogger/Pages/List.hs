@@ -136,7 +136,7 @@ instance GoogleRequest PagesList' where
               _plPageToken
               _plMaxResults
               (Just AltJSON)
-              blogger
+              bloggerService
           where go
                   = buildClient (Proxy :: Proxy PagesListResource)
                       mempty

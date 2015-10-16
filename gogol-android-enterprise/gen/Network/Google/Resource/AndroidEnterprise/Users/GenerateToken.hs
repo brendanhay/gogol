@@ -94,7 +94,7 @@ instance GoogleRequest UsersGenerateToken' where
         type Rs UsersGenerateToken' = UserToken
         requestClient UsersGenerateToken'{..}
           = go _ugtEnterpriseId _ugtUserId (Just AltJSON)
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersGenerateTokenResource)

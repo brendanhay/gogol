@@ -86,7 +86,7 @@ instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ProjectList
         requestClient ProjectsList'{..}
           = go _plPageToken _plMaxResults (Just AltJSON)
-              bigQuery
+              bigQueryService
           where go
                   = buildClient (Proxy :: Proxy ProjectsListResource)
                       mempty

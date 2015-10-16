@@ -126,7 +126,7 @@ instance GoogleRequest
               _igmstpInstanceGroupManager
               (Just AltJSON)
               _igmstpPayload
-              replicaPool
+              replicaPoolService
           where go
                   = buildClient
                       (Proxy ::

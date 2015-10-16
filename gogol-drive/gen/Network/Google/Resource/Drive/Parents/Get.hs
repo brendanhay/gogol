@@ -88,7 +88,8 @@ paraParentId
 instance GoogleRequest ParentsGet' where
         type Rs ParentsGet' = ParentReference
         requestClient ParentsGet'{..}
-          = go _paraFileId _paraParentId (Just AltJSON) drive
+          = go _paraFileId _paraParentId (Just AltJSON)
+              driveService
           where go
                   = buildClient (Proxy :: Proxy ParentsGetResource)
                       mempty

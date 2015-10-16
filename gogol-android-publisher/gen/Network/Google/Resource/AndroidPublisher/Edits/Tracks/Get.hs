@@ -104,7 +104,7 @@ instance GoogleRequest EditsTracksGet' where
         requestClient EditsTracksGet'{..}
           = go _etgPackageName _etgEditId _etgTrack
               (Just AltJSON)
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient (Proxy :: Proxy EditsTracksGetResource)
                       mempty

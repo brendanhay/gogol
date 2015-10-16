@@ -16,7 +16,7 @@
 module Network.Google.ReplicaPool.Types
     (
     -- * Service Configuration
-      replicaPool
+      replicaPoolService
 
     -- * OAuth Scopes
     , computeScope
@@ -158,8 +158,8 @@ import           Network.Google.ReplicaPool.Types.Product
 import           Network.Google.ReplicaPool.Types.Sum
 
 -- | Default request referring to version 'v1beta2' of the Google Compute Engine Instance Group Manager API. This contains the host and root path used as a starting point for constructing service requests.
-replicaPool :: Service
-replicaPool
+replicaPoolService :: Service
+replicaPoolService
   = defaultService (ServiceId "replicapool:v1beta2")
       "www.googleapis.com"
       "replicapool/v1beta2/projects/"

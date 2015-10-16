@@ -77,7 +77,7 @@ instance GoogleRequest
         type Rs AchievementConfigurationsDelete' = ()
         requestClient AchievementConfigurationsDelete'{..}
           = go _acdAchievementId (Just AltJSON)
-              gamesConfiguration
+              gamesConfigurationService
           where go
                   = buildClient
                       (Proxy ::

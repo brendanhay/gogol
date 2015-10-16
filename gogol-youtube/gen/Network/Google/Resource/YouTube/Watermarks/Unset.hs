@@ -99,7 +99,7 @@ instance GoogleRequest WatermarksUnset' where
         requestClient WatermarksUnset'{..}
           = go (Just _wuChannelId) _wuOnBehalfOfContentOwner
               (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy WatermarksUnsetResource)

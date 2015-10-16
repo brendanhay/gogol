@@ -16,7 +16,7 @@
 module Network.Google.Reports.Types
     (
     -- * Service Configuration
-      reports
+      reportsService
 
     -- * OAuth Scopes
     , adminReportsUsageReadonlyScope
@@ -153,8 +153,8 @@ import           Network.Google.Reports.Types.Product
 import           Network.Google.Reports.Types.Sum
 
 -- | Default request referring to version 'reports_v1' of the Admin Reports API. This contains the host and root path used as a starting point for constructing service requests.
-reports :: Service
-reports
+reportsService :: Service
+reportsService
   = defaultService (ServiceId "admin:reports_v1")
       "www.googleapis.com"
       "admin/reports/v1/"

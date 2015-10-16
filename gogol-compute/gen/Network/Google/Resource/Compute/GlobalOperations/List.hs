@@ -126,7 +126,7 @@ instance GoogleRequest GlobalOperationsList' where
           = go _golProject _golFilter _golPageToken
               (Just _golMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy GlobalOperationsListResource)

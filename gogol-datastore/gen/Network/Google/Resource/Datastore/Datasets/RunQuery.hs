@@ -88,7 +88,7 @@ instance GoogleRequest DatasetsRunQuery' where
         type Rs DatasetsRunQuery' = RunQueryResponse
         requestClient DatasetsRunQuery'{..}
           = go _drqDatasetId (Just AltJSON) _drqPayload
-              datastore
+              datastoreService
           where go
                   = buildClient
                       (Proxy :: Proxy DatasetsRunQueryResource)

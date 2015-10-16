@@ -59,7 +59,7 @@ accountsList' = AccountsList'
 instance GoogleRequest AccountsList' where
         type Rs AccountsList' = AccountsList
         requestClient AccountsList'{}
-          = go (Just AltJSON) adExchangeBuyer
+          = go (Just AltJSON) adExchangeBuyerService
           where go
                   = buildClient (Proxy :: Proxy AccountsListResource)
                       mempty

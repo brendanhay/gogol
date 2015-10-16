@@ -106,7 +106,7 @@ instance GoogleRequest
         requestClient ManagementAccountUserLinksUpdate'{..}
           = go _mauluAccountId _mauluLinkId (Just AltJSON)
               _mauluPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

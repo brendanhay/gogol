@@ -91,7 +91,8 @@ instance GoogleRequest GlobalForwardingRulesInsert'
          where
         type Rs GlobalForwardingRulesInsert' = Operation
         requestClient GlobalForwardingRulesInsert'{..}
-          = go _gfriProject (Just AltJSON) _gfriPayload compute
+          = go _gfriProject (Just AltJSON) _gfriPayload
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy GlobalForwardingRulesInsertResource)

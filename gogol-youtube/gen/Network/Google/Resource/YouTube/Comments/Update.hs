@@ -88,7 +88,8 @@ cuPayload
 instance GoogleRequest CommentsUpdate' where
         type Rs CommentsUpdate' = Comment
         requestClient CommentsUpdate'{..}
-          = go (Just _cuPart) (Just AltJSON) _cuPayload youTube
+          = go (Just _cuPart) (Just AltJSON) _cuPayload
+              youTubeService
           where go
                   = buildClient (Proxy :: Proxy CommentsUpdateResource)
                       mempty

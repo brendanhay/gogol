@@ -87,7 +87,8 @@ pmdPayload
 instance GoogleRequest ProjectsMoveDisk' where
         type Rs ProjectsMoveDisk' = Operation
         requestClient ProjectsMoveDisk'{..}
-          = go _pmdProject (Just AltJSON) _pmdPayload compute
+          = go _pmdProject (Just AltJSON) _pmdPayload
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsMoveDiskResource)

@@ -96,7 +96,7 @@ instance GoogleRequest ManagementWebPropertiesInsert'
         type Rs ManagementWebPropertiesInsert' = WebProperty
         requestClient ManagementWebPropertiesInsert'{..}
           = go _mwpiAccountId (Just AltJSON) _mwpiPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

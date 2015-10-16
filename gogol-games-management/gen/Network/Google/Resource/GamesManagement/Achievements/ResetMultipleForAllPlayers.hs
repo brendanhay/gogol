@@ -83,7 +83,8 @@ instance GoogleRequest
         type Rs AchievementsResetMultipleForAllPlayers' = ()
         requestClient
           AchievementsResetMultipleForAllPlayers'{..}
-          = go (Just AltJSON) _armfapPayload gamesManagement
+          = go (Just AltJSON) _armfapPayload
+              gamesManagementService
           where go
                   = buildClient
                       (Proxy ::

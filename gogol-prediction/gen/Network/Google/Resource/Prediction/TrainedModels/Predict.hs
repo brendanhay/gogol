@@ -99,7 +99,7 @@ instance GoogleRequest TrainedModelsPredict' where
         type Rs TrainedModelsPredict' = Output
         requestClient TrainedModelsPredict'{..}
           = go _tmpProject _tmpId (Just AltJSON) _tmpPayload
-              prediction
+              predictionService
           where go
                   = buildClient
                       (Proxy :: Proxy TrainedModelsPredictResource)

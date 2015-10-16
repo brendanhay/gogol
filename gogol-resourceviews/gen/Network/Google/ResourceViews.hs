@@ -20,7 +20,7 @@
 module Network.Google.ResourceViews
     (
     -- * Service Configuration
-      resourceViews
+      resourceViewsService
 
     -- * API Declaration
     , ResourceViewsAPI

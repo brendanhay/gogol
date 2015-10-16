@@ -98,7 +98,7 @@ instance GoogleRequest VideosDelete' where
         requestClient VideosDelete'{..}
           = go (Just _vdId) _vdOnBehalfOfContentOwner
               (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient (Proxy :: Proxy VideosDeleteResource)
                       mempty

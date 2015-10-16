@@ -155,7 +155,7 @@ instance GoogleRequest ChromeosDevicesList' where
               _cdlPageToken
               _cdlMaxResults
               (Just AltJSON)
-              directory
+              directoryService
           where go
                   = buildClient
                       (Proxy :: Proxy ChromeosDevicesListResource)

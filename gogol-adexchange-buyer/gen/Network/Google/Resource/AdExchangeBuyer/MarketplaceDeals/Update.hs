@@ -91,7 +91,7 @@ instance GoogleRequest MarketplaceDealsUpdate' where
              EditAllOrderDealsResponse
         requestClient MarketplaceDealsUpdate'{..}
           = go _mduOrderId (Just AltJSON) _mduPayload
-              adExchangeBuyer
+              adExchangeBuyerService
           where go
                   = buildClient
                       (Proxy :: Proxy MarketplaceDealsUpdateResource)

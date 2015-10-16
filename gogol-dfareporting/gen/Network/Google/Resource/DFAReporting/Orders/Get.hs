@@ -100,7 +100,7 @@ instance GoogleRequest OrdersGet' where
         type Rs OrdersGet' = Order
         requestClient OrdersGet'{..}
           = go _ogProFileId _ogProjectId _ogId (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy OrdersGetResource)
                       mempty

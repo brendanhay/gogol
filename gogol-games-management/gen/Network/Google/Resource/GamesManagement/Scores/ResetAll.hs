@@ -65,7 +65,7 @@ scoresResetAll' = ScoresResetAll'
 instance GoogleRequest ScoresResetAll' where
         type Rs ScoresResetAll' = PlayerScoreResetAllResponse
         requestClient ScoresResetAll'{}
-          = go (Just AltJSON) gamesManagement
+          = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy ScoresResetAllResource)
                       mempty

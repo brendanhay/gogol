@@ -74,7 +74,7 @@ mgpId = lens _mgpId (\ s a -> s{_mgpId = a})
 instance GoogleRequest MapsGetPublished' where
         type Rs MapsGetPublished' = PublishedMap
         requestClient MapsGetPublished'{..}
-          = go _mgpId (Just AltJSON) mapsEngine
+          = go _mgpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy MapsGetPublishedResource)

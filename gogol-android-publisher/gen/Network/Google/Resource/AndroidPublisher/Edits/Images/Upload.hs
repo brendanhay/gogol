@@ -131,7 +131,7 @@ instance GoogleRequest EditsImagesUpload' where
               _eiuImageType
               (Just AltJSON)
               _eiuMedia
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy EditsImagesUploadResource)

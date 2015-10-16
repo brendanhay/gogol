@@ -90,7 +90,7 @@ instance GoogleRequest PermissionsGet' where
         type Rs PermissionsGet' = Permission
         requestClient PermissionsGet'{..}
           = go _pgPermissionId _pgLanguage (Just AltJSON)
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient (Proxy :: Proxy PermissionsGetResource)
                       mempty

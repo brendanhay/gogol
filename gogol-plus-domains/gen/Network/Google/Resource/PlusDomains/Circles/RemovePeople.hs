@@ -104,7 +104,7 @@ instance GoogleRequest CirclesRemovePeople' where
           = go _crpCircleId (_crpEmail ^. _Default)
               (_crpUserId ^. _Default)
               (Just AltJSON)
-              plusDomains
+              plusDomainsService
           where go
                   = buildClient
                       (Proxy :: Proxy CirclesRemovePeopleResource)

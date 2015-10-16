@@ -194,7 +194,7 @@ instance GoogleRequest OrganizationsList' where
               _olPageSize
               _olCallback
               (Just AltJSON)
-              resourceManager
+              resourceManagerService
           where go
                   = buildClient
                       (Proxy :: Proxy OrganizationsListResource)

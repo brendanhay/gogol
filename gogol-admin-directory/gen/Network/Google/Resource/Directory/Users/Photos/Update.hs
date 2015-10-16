@@ -88,7 +88,8 @@ upuUserKey
 instance GoogleRequest UsersPhotosUpdate' where
         type Rs UsersPhotosUpdate' = UserPhoto
         requestClient UsersPhotosUpdate'{..}
-          = go _upuUserKey (Just AltJSON) _upuPayload directory
+          = go _upuUserKey (Just AltJSON) _upuPayload
+              directoryService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersPhotosUpdateResource)

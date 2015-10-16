@@ -146,7 +146,7 @@ instance GoogleRequest
               _ruliuPageToken
               (Just _ruliuMaxResults)
               (Just AltJSON)
-              replicaPoolUpdater
+              replicaPoolUpdaterService
           where go
                   = buildClient
                       (Proxy ::

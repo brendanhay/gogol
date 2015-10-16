@@ -105,7 +105,7 @@ instance GoogleRequest AccountsAdClientsList' where
         requestClient AccountsAdClientsList'{..}
           = go _aaclAccountId _aaclPageToken _aaclMaxResults
               (Just AltJSON)
-              adExchangeSeller
+              adExchangeSellerService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsAdClientsListResource)

@@ -82,7 +82,8 @@ instance GoogleRequest
          EventsResetMultipleForAllPlayers' where
         type Rs EventsResetMultipleForAllPlayers' = ()
         requestClient EventsResetMultipleForAllPlayers'{..}
-          = go (Just AltJSON) _ermfapPayload gamesManagement
+          = go (Just AltJSON) _ermfapPayload
+              gamesManagementService
           where go
                   = buildClient
                       (Proxy ::

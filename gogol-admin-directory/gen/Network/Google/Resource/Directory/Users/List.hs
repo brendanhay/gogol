@@ -209,7 +209,7 @@ instance GoogleRequest UsersList' where
               _ulPageToken
               _ulMaxResults
               (Just AltJSON)
-              directory
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy UsersListResource)
                       mempty

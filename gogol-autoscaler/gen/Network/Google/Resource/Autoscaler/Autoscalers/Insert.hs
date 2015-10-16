@@ -100,7 +100,7 @@ instance GoogleRequest AutoscalersInsert' where
         type Rs AutoscalersInsert' = Operation
         requestClient AutoscalersInsert'{..}
           = go _aiProject _aiZone (Just AltJSON) _aiPayload
-              autoscaler
+              autoscalerService
           where go
                   = buildClient
                       (Proxy :: Proxy AutoscalersInsertResource)

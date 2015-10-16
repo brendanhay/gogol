@@ -113,7 +113,7 @@ instance GoogleRequest AccountsPatch' where
           = go _ap1MerchantId _ap1AccountId _ap1DryRun
               (Just AltJSON)
               _ap1Payload
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy AccountsPatchResource)
                       mempty

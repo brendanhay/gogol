@@ -88,6 +88,6 @@ instance GoogleRequest AdsGet' where
         type Rs AdsGet' = Ad
         requestClient AdsGet'{..}
           = go _adsdProFileId _adsdId (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy AdsGetResource) mempty

@@ -109,7 +109,7 @@ instance GoogleRequest StatesUpdate' where
           = go _suStateKey _suCurrentStateVersion
               (Just AltJSON)
               _suPayload
-              appState
+              appStateService
           where go
                   = buildClient (Proxy :: Proxy StatesUpdateResource)
                       mempty

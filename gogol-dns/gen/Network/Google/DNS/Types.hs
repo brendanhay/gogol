@@ -16,7 +16,7 @@
 module Network.Google.DNS.Types
     (
     -- * Service Configuration
-      dNS
+      dNSService
 
     -- * OAuth Scopes
     , ndevClouddnsReadonlyScope
@@ -107,8 +107,8 @@ import           Network.Google.DNS.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Cloud DNS API. This contains the host and root path used as a starting point for constructing service requests.
-dNS :: Service
-dNS
+dNSService :: Service
+dNSService
   = defaultService (ServiceId "dns:v1")
       "www.googleapis.com"
       "dns/v1/projects/"

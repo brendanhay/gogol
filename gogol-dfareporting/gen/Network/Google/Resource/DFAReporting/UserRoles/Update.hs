@@ -88,7 +88,7 @@ instance GoogleRequest UserRolesUpdate' where
         type Rs UserRolesUpdate' = UserRole
         requestClient UserRolesUpdate'{..}
           = go _uruProFileId (Just AltJSON) _uruPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy UserRolesUpdateResource)

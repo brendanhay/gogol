@@ -109,7 +109,7 @@ instance GoogleRequest CalendarListUpdate' where
         requestClient CalendarListUpdate'{..}
           = go _cluCalendarId _cluColorRgbFormat (Just AltJSON)
               _cluPayload
-              appsCalendar
+              appsCalendarService
           where go
                   = buildClient
                       (Proxy :: Proxy CalendarListUpdateResource)

@@ -86,6 +86,6 @@ instance GoogleRequest URLList' where
         type Rs URLList' = URLHistory
         requestClient URLList'{..}
           = go _ulStartToken _ulProjection (Just AltJSON)
-              uRLShortener
+              uRLShortenerService
           where go
                   = buildClient (Proxy :: Proxy URLListResource) mempty

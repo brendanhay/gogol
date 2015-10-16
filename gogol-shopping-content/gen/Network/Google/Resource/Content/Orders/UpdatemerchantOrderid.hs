@@ -105,7 +105,7 @@ instance GoogleRequest OrdersUpdatemerchantOrderid'
         requestClient OrdersUpdatemerchantOrderid'{..}
           = go _ouoMerchantId _ouoOrderId (Just AltJSON)
               _ouoPayload
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy OrdersUpdatemerchantOrderidResource)

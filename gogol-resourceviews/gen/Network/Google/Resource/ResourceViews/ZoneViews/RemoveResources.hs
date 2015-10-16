@@ -117,7 +117,7 @@ instance GoogleRequest ZoneViewsRemoveResources'
           = go _zvrrProject _zvrrZone _zvrrResourceView
               (Just AltJSON)
               _zvrrPayload
-              resourceViews
+              resourceViewsService
           where go
                   = buildClient
                       (Proxy :: Proxy ZoneViewsRemoveResourcesResource)

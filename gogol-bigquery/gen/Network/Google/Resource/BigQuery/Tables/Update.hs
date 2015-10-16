@@ -119,7 +119,7 @@ instance GoogleRequest TablesUpdate' where
           = go _tuProjectId _tuDatasetId _tuTableId
               (Just AltJSON)
               _tuPayload
-              bigQuery
+              bigQueryService
           where go
                   = buildClient (Proxy :: Proxy TablesUpdateResource)
                       mempty

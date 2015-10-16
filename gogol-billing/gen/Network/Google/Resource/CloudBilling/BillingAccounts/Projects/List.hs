@@ -199,7 +199,7 @@ instance GoogleRequest BillingAccountsProjectsList'
               _baplPageSize
               _baplCallback
               (Just AltJSON)
-              billing
+              billingService
           where go
                   = buildClient
                       (Proxy :: Proxy BillingAccountsProjectsListResource)

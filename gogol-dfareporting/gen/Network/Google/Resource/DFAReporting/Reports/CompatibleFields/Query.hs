@@ -98,7 +98,7 @@ instance GoogleRequest ReportsCompatibleFieldsQuery'
              CompatibleFields
         requestClient ReportsCompatibleFieldsQuery'{..}
           = go _rcfqProFileId (Just AltJSON) _rcfqPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy ReportsCompatibleFieldsQueryResource)

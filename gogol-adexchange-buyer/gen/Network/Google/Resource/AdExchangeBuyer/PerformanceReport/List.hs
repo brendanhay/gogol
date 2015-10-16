@@ -133,7 +133,7 @@ instance GoogleRequest PerformanceReportList' where
               _prlPageToken
               _prlMaxResults
               (Just AltJSON)
-              adExchangeBuyer
+              adExchangeBuyerService
           where go
                   = buildClient
                       (Proxy :: Proxy PerformanceReportListResource)

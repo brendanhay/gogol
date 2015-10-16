@@ -91,7 +91,7 @@ instance GoogleRequest FloodlightActivitiesUpdate'
              FloodlightActivity
         requestClient FloodlightActivitiesUpdate'{..}
           = go _fauProFileId (Just AltJSON) _fauPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy FloodlightActivitiesUpdateResource)

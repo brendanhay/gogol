@@ -126,7 +126,7 @@ instance GoogleRequest UsersUpdate' where
               (Just _uuName)
               (Just AltJSON)
               _uuPayload
-              sQLAdmin
+              sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy UsersUpdateResource)
                       mempty

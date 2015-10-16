@@ -88,7 +88,7 @@ instance GoogleRequest StyleDelete' where
         type Rs StyleDelete' = ()
         requestClient StyleDelete'{..}
           = go _sdTableId _sdStyleId (Just AltJSON)
-              fusionTables
+              fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy StyleDeleteResource)
                       mempty

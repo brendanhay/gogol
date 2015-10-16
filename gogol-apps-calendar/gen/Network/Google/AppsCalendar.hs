@@ -19,7 +19,7 @@
 module Network.Google.AppsCalendar
     (
     -- * Service Configuration
-      appsCalendar
+      appsCalendarService
 
     -- * API Declaration
     , AppsCalendarAPI

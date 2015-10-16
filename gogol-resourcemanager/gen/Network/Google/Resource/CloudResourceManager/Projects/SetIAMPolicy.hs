@@ -182,7 +182,7 @@ instance GoogleRequest ProjectsSetIAMPolicy' where
               _psipCallback
               (Just AltJSON)
               _psipPayload
-              resourceManager
+              resourceManagerService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsSetIAMPolicyResource)

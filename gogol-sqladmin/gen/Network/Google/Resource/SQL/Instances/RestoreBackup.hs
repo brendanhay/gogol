@@ -103,7 +103,7 @@ instance GoogleRequest InstancesRestoreBackup' where
         requestClient InstancesRestoreBackup'{..}
           = go _irbProject _irbInstance (Just AltJSON)
               _irbPayload
-              sQLAdmin
+              sQLAdminService
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesRestoreBackupResource)

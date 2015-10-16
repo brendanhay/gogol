@@ -16,7 +16,7 @@
 module Network.Google.AppsLicensing.Types
     (
     -- * Service Configuration
-      appsLicensing
+      appsLicensingService
 
     -- * OAuth Scopes
     , appsLicensingScope
@@ -50,8 +50,8 @@ import           Network.Google.AppsLicensing.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Enterprise License Manager API. This contains the host and root path used as a starting point for constructing service requests.
-appsLicensing :: Service
-appsLicensing
+appsLicensingService :: Service
+appsLicensingService
   = defaultService (ServiceId "licensing:v1")
       "www.googleapis.com"
       "apps/licensing/v1/product/"

@@ -115,7 +115,7 @@ instance GoogleRequest MyLibraryAnnotationsInsert'
               _mlaiSource
               (Just AltJSON)
               _mlaiPayload
-              books
+              booksService
           where go
                   = buildClient
                       (Proxy :: Proxy MyLibraryAnnotationsInsertResource)

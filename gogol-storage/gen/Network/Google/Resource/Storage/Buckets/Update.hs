@@ -156,7 +156,7 @@ instance GoogleRequest BucketsUpdate' where
               _buProjection
               (Just AltJSON)
               _buPayload
-              storage
+              storageService
           where go
                   = buildClient (Proxy :: Proxy BucketsUpdateResource)
                       mempty

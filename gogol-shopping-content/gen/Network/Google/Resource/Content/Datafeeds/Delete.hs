@@ -96,7 +96,7 @@ instance GoogleRequest DatafeedsDelete' where
         requestClient DatafeedsDelete'{..}
           = go _ddMerchantId _ddDatafeedId _ddDryRun
               (Just AltJSON)
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy DatafeedsDeleteResource)

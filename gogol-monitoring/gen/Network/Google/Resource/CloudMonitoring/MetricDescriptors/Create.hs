@@ -89,7 +89,7 @@ instance GoogleRequest MetricDescriptorsCreate' where
         type Rs MetricDescriptorsCreate' = MetricDescriptor
         requestClient MetricDescriptorsCreate'{..}
           = go _mdcProject (Just AltJSON) _mdcPayload
-              monitoring
+              monitoringService
           where go
                   = buildClient
                       (Proxy :: Proxy MetricDescriptorsCreateResource)

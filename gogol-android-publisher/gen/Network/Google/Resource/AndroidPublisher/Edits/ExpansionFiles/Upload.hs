@@ -136,7 +136,7 @@ instance GoogleRequest EditsExpansionFilesUpload'
               _eefuExpansionFileType
               (Just AltJSON)
               _eefuMedia
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy EditsExpansionFilesUploadResource)

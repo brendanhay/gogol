@@ -90,7 +90,7 @@ instance GoogleRequest EditsGet' where
         type Rs EditsGet' = AppEdit
         requestClient EditsGet'{..}
           = go _egPackageName _egEditId (Just AltJSON)
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient (Proxy :: Proxy EditsGetResource)
                       mempty

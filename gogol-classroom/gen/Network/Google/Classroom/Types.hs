@@ -16,7 +16,7 @@
 module Network.Google.Classroom.Types
     (
     -- * Service Configuration
-      classroom
+      classroomService
 
     -- * OAuth Scopes
     , classroomRostersReadonlyScope
@@ -130,8 +130,8 @@ import           Network.Google.Classroom.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Classroom API. This contains the host and root path used as a starting point for constructing service requests.
-classroom :: Service
-classroom
+classroomService :: Service
+classroomService
   = defaultService (ServiceId "classroom:v1")
       "classroom.googleapis.com"
       ""

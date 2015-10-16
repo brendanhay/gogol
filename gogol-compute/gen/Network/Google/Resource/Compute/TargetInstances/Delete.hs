@@ -101,7 +101,7 @@ instance GoogleRequest TargetInstancesDelete' where
         requestClient TargetInstancesDelete'{..}
           = go _tidProject _tidZone _tidTargetInstance
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy TargetInstancesDeleteResource)

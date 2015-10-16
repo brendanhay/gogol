@@ -89,7 +89,8 @@ dlInstance
 instance GoogleRequest DatabasesList' where
         type Rs DatabasesList' = DatabasesListResponse
         requestClient DatabasesList'{..}
-          = go _dlProject _dlInstance (Just AltJSON) sQLAdmin
+          = go _dlProject _dlInstance (Just AltJSON)
+              sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy DatabasesListResource)
                       mempty

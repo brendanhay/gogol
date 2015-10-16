@@ -88,7 +88,7 @@ instance GoogleRequest ClientAccessGet' where
         requestClient ClientAccessGet'{..}
           = go _cagClientAccountId (Just _cagSponsorAccountId)
               (Just AltJSON)
-              adExchangeBuyer
+              adExchangeBuyerService
           where go
                   = buildClient
                       (Proxy :: Proxy ClientAccessGetResource)

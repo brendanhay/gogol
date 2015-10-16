@@ -20,7 +20,7 @@
 module Network.Google.Logging
     (
     -- * Service Configuration
-      logging
+      loggingService
 
     -- * API Declaration
     , LoggingAPI

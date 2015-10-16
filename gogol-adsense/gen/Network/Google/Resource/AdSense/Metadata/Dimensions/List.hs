@@ -60,7 +60,7 @@ metadataDimensionsList' = MetadataDimensionsList'
 instance GoogleRequest MetadataDimensionsList' where
         type Rs MetadataDimensionsList' = Metadata
         requestClient MetadataDimensionsList'{}
-          = go (Just AltJSON) adSense
+          = go (Just AltJSON) adSenseService
           where go
                   = buildClient
                       (Proxy :: Proxy MetadataDimensionsListResource)

@@ -87,7 +87,8 @@ parParentId
 instance GoogleRequest ParentsDelete' where
         type Rs ParentsDelete' = ()
         requestClient ParentsDelete'{..}
-          = go _parFileId _parParentId (Just AltJSON) drive
+          = go _parFileId _parParentId (Just AltJSON)
+              driveService
           where go
                   = buildClient (Proxy :: Proxy ParentsDeleteResource)
                       mempty

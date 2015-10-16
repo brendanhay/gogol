@@ -88,7 +88,7 @@ instance GoogleRequest CreativesGet' where
         type Rs CreativesGet' = Creative
         requestClient CreativesGet'{..}
           = go _crerProFileId _crerId (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy CreativesGetResource)
                       mempty

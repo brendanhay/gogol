@@ -125,7 +125,7 @@ instance GoogleRequest ChannelBannersInsert' where
           = go _cbiOnBehalfOfContentOwner (Just AltJSON)
               _cbiPayload
               _cbiMedia
-              youTube
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy ChannelBannersInsertResource)

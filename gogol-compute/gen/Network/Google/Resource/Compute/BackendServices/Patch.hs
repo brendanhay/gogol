@@ -105,7 +105,7 @@ instance GoogleRequest BackendServicesPatch' where
         requestClient BackendServicesPatch'{..}
           = go _bspProject _bspBackendService (Just AltJSON)
               _bspPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy BackendServicesPatchResource)

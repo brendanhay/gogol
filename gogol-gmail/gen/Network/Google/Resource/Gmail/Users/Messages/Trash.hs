@@ -87,7 +87,7 @@ umtId = lens _umtId (\ s a -> s{_umtId = a})
 instance GoogleRequest UsersMessagesTrash' where
         type Rs UsersMessagesTrash' = Message
         requestClient UsersMessagesTrash'{..}
-          = go _umtUserId _umtId (Just AltJSON) gmail
+          = go _umtUserId _umtId (Just AltJSON) gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersMessagesTrashResource)

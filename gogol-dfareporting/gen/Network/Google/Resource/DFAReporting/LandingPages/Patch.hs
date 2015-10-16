@@ -118,7 +118,7 @@ instance GoogleRequest LandingPagesPatch' where
           = go _lppProFileId _lppCampaignId (Just _lppId)
               (Just AltJSON)
               _lppPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy LandingPagesPatchResource)

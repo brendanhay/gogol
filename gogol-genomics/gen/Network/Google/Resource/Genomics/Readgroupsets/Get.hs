@@ -161,7 +161,7 @@ instance GoogleRequest ReadgroupsetsGet' where
               _rgBearerToken
               _rgCallback
               (Just AltJSON)
-              genomics
+              genomicsService
           where go
                   = buildClient
                       (Proxy :: Proxy ReadgroupsetsGetResource)

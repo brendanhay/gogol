@@ -85,7 +85,7 @@ instance GoogleRequest DatafeedsGet' where
         type Rs DatafeedsGet' = Datafeed
         requestClient DatafeedsGet'{..}
           = go _dgMerchantId _dgDatafeedId (Just AltJSON)
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy DatafeedsGetResource)
                       mempty

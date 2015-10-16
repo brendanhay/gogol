@@ -16,7 +16,7 @@
 module Network.Google.Prediction.Types
     (
     -- * Service Configuration
-      prediction
+      predictionService
 
     -- * OAuth Scopes
     , devstorageReadOnlyScope
@@ -212,8 +212,8 @@ import           Network.Google.Prediction.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1.6' of the Prediction API. This contains the host and root path used as a starting point for constructing service requests.
-prediction :: Service
-prediction
+predictionService :: Service
+predictionService
   = defaultService (ServiceId "prediction:v1.6")
       "www.googleapis.com"
       "prediction/v1.6/projects/"

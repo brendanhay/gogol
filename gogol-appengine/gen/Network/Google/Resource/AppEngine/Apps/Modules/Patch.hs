@@ -215,7 +215,7 @@ instance GoogleRequest AppsModulesPatch' where
               _ampCallback
               (Just AltJSON)
               _ampPayload
-              appEngine
+              appEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy AppsModulesPatchResource)

@@ -19,7 +19,7 @@
 module Network.Google.WebmasterTools
     (
     -- * Service Configuration
-      webmasterTools
+      webmasterToolsService
 
     -- * API Declaration
     , WebmasterToolsAPI

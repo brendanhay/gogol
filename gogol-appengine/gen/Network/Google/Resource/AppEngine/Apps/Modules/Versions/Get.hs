@@ -205,7 +205,7 @@ instance GoogleRequest AppsModulesVersionsGet' where
               _amvgView
               _amvgCallback
               (Just AltJSON)
-              appEngine
+              appEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy AppsModulesVersionsGetResource)

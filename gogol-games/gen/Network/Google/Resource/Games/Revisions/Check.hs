@@ -80,7 +80,8 @@ rcClientRevision
 instance GoogleRequest RevisionsCheck' where
         type Rs RevisionsCheck' = RevisionCheckResponse
         requestClient RevisionsCheck'{..}
-          = go (Just _rcClientRevision) (Just AltJSON) games
+          = go (Just _rcClientRevision) (Just AltJSON)
+              gamesService
           where go
                   = buildClient (Proxy :: Proxy RevisionsCheckResource)
                       mempty

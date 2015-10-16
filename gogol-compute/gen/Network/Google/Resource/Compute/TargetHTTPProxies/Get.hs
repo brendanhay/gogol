@@ -92,7 +92,7 @@ instance GoogleRequest TargetHTTPProxiesGet' where
         requestClient TargetHTTPProxiesGet'{..}
           = go _thttppgProject _thttppgTargetHTTPProxy
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy TargetHTTPProxiesGetResource)

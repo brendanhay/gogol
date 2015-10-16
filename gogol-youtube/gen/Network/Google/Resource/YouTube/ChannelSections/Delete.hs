@@ -98,7 +98,7 @@ instance GoogleRequest ChannelSectionsDelete' where
         requestClient ChannelSectionsDelete'{..}
           = go (Just _csdId) _csdOnBehalfOfContentOwner
               (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy ChannelSectionsDeleteResource)

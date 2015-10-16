@@ -19,7 +19,7 @@
 module Network.Google.Games
     (
     -- * Service Configuration
-      games
+      gamesService
 
     -- * API Declaration
     , GamesAPI

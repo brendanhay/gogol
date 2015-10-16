@@ -210,7 +210,7 @@ instance GoogleRequest ProjectsZonesClustersCreate'
               _pzccCallback
               (Just AltJSON)
               _pzccPayload
-              container
+              containerService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsZonesClustersCreateResource)

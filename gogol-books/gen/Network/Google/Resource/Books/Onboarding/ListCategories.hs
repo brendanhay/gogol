@@ -76,7 +76,7 @@ instance GoogleRequest OnboardingListCategories'
          where
         type Rs OnboardingListCategories' = Category
         requestClient OnboardingListCategories'{..}
-          = go _olcLocale (Just AltJSON) books
+          = go _olcLocale (Just AltJSON) booksService
           where go
                   = buildClient
                       (Proxy :: Proxy OnboardingListCategoriesResource)

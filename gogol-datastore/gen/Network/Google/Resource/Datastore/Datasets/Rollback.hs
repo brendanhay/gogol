@@ -87,7 +87,8 @@ drDatasetId
 instance GoogleRequest DatasetsRollback' where
         type Rs DatasetsRollback' = RollbackResponse
         requestClient DatasetsRollback'{..}
-          = go _drDatasetId (Just AltJSON) _drPayload datastore
+          = go _drDatasetId (Just AltJSON) _drPayload
+              datastoreService
           where go
                   = buildClient
                       (Proxy :: Proxy DatasetsRollbackResource)

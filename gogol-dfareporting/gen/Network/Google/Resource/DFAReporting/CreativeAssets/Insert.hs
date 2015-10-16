@@ -114,7 +114,7 @@ instance GoogleRequest CreativeAssetsInsert' where
           = go _caiProFileId _caiAdvertiserId (Just AltJSON)
               _caiPayload
               _caiMedia
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy CreativeAssetsInsertResource)

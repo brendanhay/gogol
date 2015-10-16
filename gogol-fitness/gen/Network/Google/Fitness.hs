@@ -19,7 +19,7 @@
 module Network.Google.Fitness
     (
     -- * Service Configuration
-      fitness
+      fitnessService
 
     -- * API Declaration
     , FitnessAPI

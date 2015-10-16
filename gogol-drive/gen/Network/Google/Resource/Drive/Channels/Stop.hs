@@ -75,7 +75,7 @@ csPayload
 instance GoogleRequest ChannelsStop' where
         type Rs ChannelsStop' = ()
         requestClient ChannelsStop'{..}
-          = go (Just AltJSON) _csPayload drive
+          = go (Just AltJSON) _csPayload driveService
           where go
                   = buildClient (Proxy :: Proxy ChannelsStopResource)
                       mempty

@@ -86,7 +86,8 @@ idProject
 instance GoogleRequest ImagesDelete' where
         type Rs ImagesDelete' = Operation
         requestClient ImagesDelete'{..}
-          = go _idProject _idImage (Just AltJSON) compute
+          = go _idProject _idImage (Just AltJSON)
+              computeService
           where go
                   = buildClient (Proxy :: Proxy ImagesDeleteResource)
                       mempty

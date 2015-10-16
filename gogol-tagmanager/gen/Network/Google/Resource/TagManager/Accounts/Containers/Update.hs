@@ -117,7 +117,7 @@ instance GoogleRequest AccountsContainersUpdate'
           = go _acuAccountId _acuContainerId _acuFingerprint
               (Just AltJSON)
               _acuPayload
-              tagManager
+              tagManagerService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsContainersUpdateResource)

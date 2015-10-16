@@ -177,7 +177,7 @@ instance GoogleRequest VariantsetsExport' where
               _veCallback
               (Just AltJSON)
               _vePayload
-              genomics
+              genomicsService
           where go
                   = buildClient
                       (Proxy :: Proxy VariantsetsExportResource)

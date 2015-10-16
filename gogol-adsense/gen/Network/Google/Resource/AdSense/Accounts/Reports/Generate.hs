@@ -249,7 +249,7 @@ instance GoogleRequest AccountsReportsGenerate' where
               _argUseTimezoneReporting
               _argMaxResults
               (Just AltJSON)
-              adSense
+              adSenseService
           where go :<|> _
                   = buildClient
                       (Proxy :: Proxy AccountsReportsGenerateResource)
@@ -273,7 +273,7 @@ instance GoogleRequest
               _argUseTimezoneReporting
               _argMaxResults
               (Just AltMedia)
-              adSense
+              adSenseService
           where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy AccountsReportsGenerateResource)

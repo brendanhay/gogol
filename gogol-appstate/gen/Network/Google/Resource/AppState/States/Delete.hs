@@ -82,7 +82,7 @@ sdStateKey
 instance GoogleRequest StatesDelete' where
         type Rs StatesDelete' = ()
         requestClient StatesDelete'{..}
-          = go _sdStateKey (Just AltJSON) appState
+          = go _sdStateKey (Just AltJSON) appStateService
           where go
                   = buildClient (Proxy :: Proxy StatesDeleteResource)
                       mempty

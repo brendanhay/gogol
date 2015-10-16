@@ -228,7 +228,7 @@ instance GoogleRequest ProjectsLogsList' where
               _pllPageSize
               _pllCallback
               (Just AltJSON)
-              logging
+              loggingService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsLogsListResource)

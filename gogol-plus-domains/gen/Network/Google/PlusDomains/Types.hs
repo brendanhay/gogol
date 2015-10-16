@@ -16,7 +16,7 @@
 module Network.Google.PlusDomains.Types
     (
     -- * Service Configuration
-      plusDomains
+      plusDomainsService
 
     -- * OAuth Scopes
     , userinfoProfileScope
@@ -543,8 +543,8 @@ import           Network.Google.PlusDomains.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google+ Domains API. This contains the host and root path used as a starting point for constructing service requests.
-plusDomains :: Service
-plusDomains
+plusDomainsService :: Service
+plusDomainsService
   = defaultService (ServiceId "plusDomains:v1")
       "www.googleapis.com"
       "plusDomains/v1/"

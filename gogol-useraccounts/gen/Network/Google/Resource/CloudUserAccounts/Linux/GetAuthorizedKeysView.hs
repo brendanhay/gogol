@@ -131,7 +131,7 @@ instance GoogleRequest LinuxGetAuthorizedKeysView'
               (Just _lgakvInstance)
               _lgakvLogin
               (Just AltJSON)
-              userAccounts
+              userAccountsService
           where go
                   = buildClient
                       (Proxy :: Proxy LinuxGetAuthorizedKeysViewResource)

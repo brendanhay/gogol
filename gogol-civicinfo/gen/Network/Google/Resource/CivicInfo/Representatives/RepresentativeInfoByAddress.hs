@@ -132,7 +132,7 @@ instance GoogleRequest
               (Just _rribaIncludeOffices)
               (_rribaLevels ^. _Default)
               (Just AltJSON)
-              civicInfo
+              civicInfoService
           where go
                   = buildClient
                       (Proxy ::

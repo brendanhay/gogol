@@ -98,7 +98,7 @@ instance GoogleRequest AccountsDelete' where
         requestClient AccountsDelete'{..}
           = go _adMerchantId _adAccountId _adDryRun
               (Just AltJSON)
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy AccountsDeleteResource)
                       mempty

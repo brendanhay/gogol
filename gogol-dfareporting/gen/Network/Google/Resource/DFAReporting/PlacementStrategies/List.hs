@@ -164,7 +164,7 @@ instance GoogleRequest PlacementStrategiesList' where
               _pslSortField
               _pslMaxResults
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy PlacementStrategiesListResource)

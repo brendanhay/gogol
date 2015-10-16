@@ -89,7 +89,7 @@ instance GoogleRequest AccountsPermissionsCreate'
         type Rs AccountsPermissionsCreate' = UserAccess
         requestClient AccountsPermissionsCreate'{..}
           = go _apcAccountId (Just AltJSON) _apcPayload
-              tagManager
+              tagManagerService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsPermissionsCreateResource)

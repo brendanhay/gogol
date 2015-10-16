@@ -125,7 +125,7 @@ instance GoogleRequest
               _mpffliProFileId
               (Just AltJSON)
               _mpffliPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

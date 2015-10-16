@@ -133,7 +133,7 @@ instance GoogleRequest UsersMessagesInsert' where
               (Just AltJSON)
               _umiPayload
               _umiMedia
-              gmail
+              gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersMessagesInsertResource)

@@ -106,7 +106,7 @@ instance GoogleRequest InstanceGroupManagersDelete'
         requestClient InstanceGroupManagersDelete'{..}
           = go _igmdProject _igmdZone _igmdInstanceGroupManager
               (Just AltJSON)
-              replicaPool
+              replicaPoolService
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceGroupManagersDeleteResource)

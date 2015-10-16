@@ -90,7 +90,7 @@ instance GoogleRequest SubscriptionsActivate' where
         type Rs SubscriptionsActivate' = Subscription
         requestClient SubscriptionsActivate'{..}
           = go _saCustomerId _saSubscriptionId (Just AltJSON)
-              appsReseller
+              appsResellerService
           where go
                   = buildClient
                       (Proxy :: Proxy SubscriptionsActivateResource)

@@ -115,7 +115,7 @@ instance GoogleRequest CommentsList' where
           = go _cActivityId (Just _cSortOrder) _cPageToken
               (Just _cMaxResults)
               (Just AltJSON)
-              plusDomains
+              plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy CommentsListResource)
                       mempty

@@ -127,7 +127,7 @@ instance GoogleRequest
               _igmsitInstanceGroupManager
               (Just AltJSON)
               _igmsitPayload
-              replicaPool
+              replicaPoolService
           where go
                   = buildClient
                       (Proxy ::

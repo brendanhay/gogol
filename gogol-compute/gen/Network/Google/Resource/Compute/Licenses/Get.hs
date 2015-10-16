@@ -87,7 +87,8 @@ lgLicense
 instance GoogleRequest LicensesGet' where
         type Rs LicensesGet' = License
         requestClient LicensesGet'{..}
-          = go _lgProject _lgLicense (Just AltJSON) compute
+          = go _lgProject _lgLicense (Just AltJSON)
+              computeService
           where go
                   = buildClient (Proxy :: Proxy LicensesGetResource)
                       mempty

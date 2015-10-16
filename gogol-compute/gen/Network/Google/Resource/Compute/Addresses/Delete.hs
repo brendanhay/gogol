@@ -101,7 +101,7 @@ instance GoogleRequest AddressesDelete' where
         requestClient AddressesDelete'{..}
           = go _addProject _addRegion _addAddress
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy AddressesDeleteResource)

@@ -90,7 +90,7 @@ instance GoogleRequest SitemapsSubmit' where
         type Rs SitemapsSubmit' = ()
         requestClient SitemapsSubmit'{..}
           = go _ssSiteURL _ssFeedpath (Just AltJSON)
-              webmasterTools
+              webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitemapsSubmitResource)
                       mempty

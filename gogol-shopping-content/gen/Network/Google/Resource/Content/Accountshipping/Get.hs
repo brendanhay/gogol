@@ -89,7 +89,7 @@ instance GoogleRequest AccountshippingGet' where
         type Rs AccountshippingGet' = AccountShipping
         requestClient AccountshippingGet'{..}
           = go _agMerchantId _agAccountId (Just AltJSON)
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountshippingGetResource)

@@ -87,7 +87,7 @@ instance GoogleRequest EnterprisesEnroll' where
         type Rs EnterprisesEnroll' = Enterprise
         requestClient EnterprisesEnroll'{..}
           = go (Just _eeToken) (Just AltJSON) _eePayload
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy :: Proxy EnterprisesEnrollResource)

@@ -108,7 +108,7 @@ instance GoogleRequest PurchasesSubscriptionsCancel'
         requestClient PurchasesSubscriptionsCancel'{..}
           = go _pscPackageName _pscSubscriptionId _pscToken
               (Just AltJSON)
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy PurchasesSubscriptionsCancelResource)

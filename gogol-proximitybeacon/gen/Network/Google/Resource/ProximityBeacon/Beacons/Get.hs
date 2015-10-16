@@ -159,7 +159,7 @@ instance GoogleRequest BeaconsGet' where
               _bgBearerToken
               _bgCallback
               (Just AltJSON)
-              proximityBeacon
+              proximityBeaconService
           where go
                   = buildClient (Proxy :: Proxy BeaconsGetResource)
                       mempty

@@ -105,7 +105,7 @@ instance GoogleRequest AccountshippingList' where
         requestClient AccountshippingList'{..}
           = go _al1MerchantId _al1PageToken _al1MaxResults
               (Just AltJSON)
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountshippingListResource)

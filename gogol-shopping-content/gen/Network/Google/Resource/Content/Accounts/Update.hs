@@ -111,7 +111,7 @@ instance GoogleRequest AccountsUpdate' where
           = go _auMerchantId _auAccountId _auDryRun
               (Just AltJSON)
               _auPayload
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy AccountsUpdateResource)
                       mempty

@@ -119,7 +119,7 @@ instance GoogleRequest ChromeosDevicesUpdate' where
           = go _cduCustomerId _cduDeviceId _cduProjection
               (Just AltJSON)
               _cduPayload
-              directory
+              directoryService
           where go
                   = buildClient
                       (Proxy :: Proxy ChromeosDevicesUpdateResource)

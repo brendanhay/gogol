@@ -99,7 +99,8 @@ aiPayload
 instance GoogleRequest ActivitiesInsert' where
         type Rs ActivitiesInsert' = Activity
         requestClient ActivitiesInsert'{..}
-          = go (Just _aiPart) (Just AltJSON) _aiPayload youTube
+          = go (Just _aiPart) (Just AltJSON) _aiPayload
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy ActivitiesInsertResource)

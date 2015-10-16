@@ -137,7 +137,7 @@ instance GoogleRequest InstancesList' where
           = go _illProject _illZone _illFilter _illPageToken
               (Just _illMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient (Proxy :: Proxy InstancesListResource)
                       mempty

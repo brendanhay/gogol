@@ -101,7 +101,7 @@ instance GoogleRequest AddressesInsert' where
         type Rs AddressesInsert' = Operation
         requestClient AddressesInsert'{..}
           = go _aiProject _aiRegion (Just AltJSON) _aiPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy AddressesInsertResource)

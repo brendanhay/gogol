@@ -167,7 +167,7 @@ instance GoogleRequest ProjectsTopicsDelete' where
               _ptdBearerToken
               _ptdCallback
               (Just AltJSON)
-              pubSub
+              pubSubService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsTopicsDeleteResource)

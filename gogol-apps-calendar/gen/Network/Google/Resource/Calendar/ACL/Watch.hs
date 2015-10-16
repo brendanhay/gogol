@@ -152,7 +152,7 @@ instance GoogleRequest ACLWatch' where
               _awMaxResults
               (Just AltJSON)
               _awPayload
-              appsCalendar
+              appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy ACLWatchResource)
                       mempty

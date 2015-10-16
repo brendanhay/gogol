@@ -132,7 +132,7 @@ instance GoogleRequest
               _rribdRecursive
               (_rribdLevels ^. _Default)
               (Just AltJSON)
-              civicInfo
+              civicInfoService
           where go
                   = buildClient
                       (Proxy ::

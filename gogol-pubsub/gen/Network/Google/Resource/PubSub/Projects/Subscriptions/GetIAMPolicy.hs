@@ -167,7 +167,7 @@ instance GoogleRequest
               _psgipBearerToken
               _psgipCallback
               (Just AltJSON)
-              pubSub
+              pubSubService
           where go
                   = buildClient
                       (Proxy ::

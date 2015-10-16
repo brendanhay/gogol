@@ -194,7 +194,7 @@ instance GoogleRequest ProjectsLogsSinksDelete' where
               _plsdBearerToken
               _plsdCallback
               (Just AltJSON)
-              logging
+              loggingService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsLogsSinksDeleteResource)

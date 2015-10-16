@@ -164,7 +164,7 @@ instance GoogleRequest ProjectsGet' where
               _pgBearerToken
               _pgCallback
               (Just AltJSON)
-              resourceManager
+              resourceManagerService
           where go
                   = buildClient (Proxy :: Proxy ProjectsGetResource)
                       mempty

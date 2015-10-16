@@ -89,7 +89,7 @@ instance GoogleRequest AdClientsList' where
         type Rs AdClientsList' = AdClients
         requestClient AdClientsList'{..}
           = go _aclPageToken _aclMaxResults (Just AltJSON)
-              adSense
+              adSenseService
           where go
                   = buildClient (Proxy :: Proxy AdClientsListResource)
                       mempty

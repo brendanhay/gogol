@@ -147,7 +147,7 @@ instance GoogleRequest GlobalAccountsOperationsList'
               _gaolPageToken
               (Just _gaolMaxResults)
               (Just AltJSON)
-              userAccounts
+              userAccountsService
           where go
                   = buildClient
                       (Proxy :: Proxy GlobalAccountsOperationsListResource)

@@ -88,7 +88,8 @@ cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
 instance GoogleRequest CommentsInsert' where
         type Rs CommentsInsert' = Comment
         requestClient CommentsInsert'{..}
-          = go (Just _cPart) (Just AltJSON) _cPayload youTube
+          = go (Just _cPart) (Just AltJSON) _cPayload
+              youTubeService
           where go
                   = buildClient (Proxy :: Proxy CommentsInsertResource)
                       mempty

@@ -90,7 +90,7 @@ instance GoogleRequest CollectionsDelete' where
         type Rs CollectionsDelete' = ()
         requestClient CollectionsDelete'{..}
           = go _cdEnterpriseId _cdCollectionId (Just AltJSON)
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy :: Proxy CollectionsDeleteResource)

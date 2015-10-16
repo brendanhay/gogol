@@ -100,7 +100,7 @@ instance GoogleRequest BackupRunsDelete' where
         type Rs BackupRunsDelete' = Operation
         requestClient BackupRunsDelete'{..}
           = go _brdProject _brdInstance _brdId (Just AltJSON)
-              sQLAdmin
+              sQLAdminService
           where go
                   = buildClient
                       (Proxy :: Proxy BackupRunsDeleteResource)

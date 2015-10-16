@@ -138,7 +138,7 @@ instance GoogleRequest PostsGet' where
               _pgMaxComments
               _pgView
               (Just AltJSON)
-              blogger
+              bloggerService
           where go
                   = buildClient (Proxy :: Proxy PostsGetResource)
                       mempty

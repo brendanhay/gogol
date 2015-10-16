@@ -105,7 +105,7 @@ instance GoogleRequest TableUpdate' where
           = go _tuTableId _tuReplaceViewDefinition
               (Just AltJSON)
               _tuPayload
-              fusionTables
+              fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TableUpdateResource)
                       mempty

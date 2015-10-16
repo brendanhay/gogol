@@ -176,7 +176,7 @@ instance GoogleRequest ScoresListWindow' where
               _slwPageToken
               _slwMaxResults
               (Just AltJSON)
-              games
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy ScoresListWindowResource)

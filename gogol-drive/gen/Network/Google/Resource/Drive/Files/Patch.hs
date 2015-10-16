@@ -262,7 +262,7 @@ instance GoogleRequest FilesPatch' where
               (Just _fpOCR)
               (Just AltJSON)
               _fpPayload
-              drive
+              driveService
           where go
                   = buildClient (Proxy :: Proxy FilesPatchResource)
                       mempty

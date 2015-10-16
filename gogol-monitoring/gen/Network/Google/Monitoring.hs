@@ -19,7 +19,7 @@
 module Network.Google.Monitoring
     (
     -- * Service Configuration
-      monitoring
+      monitoringService
 
     -- * API Declaration
     , MonitoringAPI

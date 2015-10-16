@@ -74,7 +74,7 @@ udUserKey
 instance GoogleRequest UsersDelete' where
         type Rs UsersDelete' = ()
         requestClient UsersDelete'{..}
-          = go _udUserKey (Just AltJSON) directory
+          = go _udUserKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy UsersDeleteResource)
                       mempty

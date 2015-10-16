@@ -16,7 +16,7 @@
 module Network.Google.Plus.Types
     (
     -- * Service Configuration
-      plus
+      plusService
 
     -- * OAuth Scopes
     , userinfoProfileScope
@@ -522,8 +522,8 @@ import           Network.Google.Plus.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google+ API. This contains the host and root path used as a starting point for constructing service requests.
-plus :: Service
-plus
+plusService :: Service
+plusService
   = defaultService (ServiceId "plus:v1")
       "www.googleapis.com"
       "plus/v1/"

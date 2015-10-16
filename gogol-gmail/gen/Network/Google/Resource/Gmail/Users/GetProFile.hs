@@ -75,7 +75,7 @@ ugpfUserId
 instance GoogleRequest UsersGetProFile' where
         type Rs UsersGetProFile' = ProFile
         requestClient UsersGetProFile'{..}
-          = go _ugpfUserId (Just AltJSON) gmail
+          = go _ugpfUserId (Just AltJSON) gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersGetProFileResource)

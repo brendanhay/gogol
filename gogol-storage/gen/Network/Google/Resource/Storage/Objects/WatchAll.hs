@@ -171,7 +171,7 @@ instance GoogleRequest ObjectsWatchAll' where
               _owaMaxResults
               (Just AltJSON)
               _owaPayload
-              storage
+              storageService
           where go
                   = buildClient
                       (Proxy :: Proxy ObjectsWatchAllResource)

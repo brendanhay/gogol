@@ -101,7 +101,7 @@ instance GoogleRequest StyleUpdate' where
         type Rs StyleUpdate' = StyleSetting
         requestClient StyleUpdate'{..}
           = go _suTableId _suStyleId (Just AltJSON) _suPayload
-              fusionTables
+              fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy StyleUpdateResource)
                       mempty

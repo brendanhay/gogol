@@ -87,7 +87,7 @@ uwUserId = lens _uwUserId (\ s a -> s{_uwUserId = a})
 instance GoogleRequest UsersWatch' where
         type Rs UsersWatch' = WatchResponse
         requestClient UsersWatch'{..}
-          = go _uwUserId (Just AltJSON) _uwPayload gmail
+          = go _uwUserId (Just AltJSON) _uwPayload gmailService
           where go
                   = buildClient (Proxy :: Proxy UsersWatchResource)
                       mempty

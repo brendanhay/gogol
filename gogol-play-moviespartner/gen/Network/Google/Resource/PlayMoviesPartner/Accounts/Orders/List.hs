@@ -259,7 +259,7 @@ instance GoogleRequest AccountsOrdersList' where
               _aolPageSize
               _aolCallback
               (Just AltJSON)
-              playMoviesPartner
+              playMoviesPartnerService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsOrdersListResource)

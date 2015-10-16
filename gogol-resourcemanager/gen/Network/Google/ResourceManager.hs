@@ -20,7 +20,7 @@
 module Network.Google.ResourceManager
     (
     -- * Service Configuration
-      resourceManager
+      resourceManagerService
 
     -- * API Declaration
     , ResourceManagerAPI

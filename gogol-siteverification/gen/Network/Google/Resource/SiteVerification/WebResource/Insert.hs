@@ -91,7 +91,7 @@ instance GoogleRequest WebResourceInsert' where
         requestClient WebResourceInsert'{..}
           = go (Just _wriVerificationMethod) (Just AltJSON)
               _wriPayload
-              siteVerification
+              siteVerificationService
           where go
                   = buildClient
                       (Proxy :: Proxy WebResourceInsertResource)

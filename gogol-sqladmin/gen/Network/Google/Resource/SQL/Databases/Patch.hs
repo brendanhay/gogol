@@ -117,7 +117,7 @@ instance GoogleRequest DatabasesPatch' where
           = go _dpProject _dpInstance _dpDatabase
               (Just AltJSON)
               _dpPayload
-              sQLAdmin
+              sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy DatabasesPatchResource)
                       mempty

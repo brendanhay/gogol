@@ -103,7 +103,7 @@ instance GoogleRequest UsersAddPublicKey' where
         requestClient UsersAddPublicKey'{..}
           = go _uapkProject _uapkUser (Just AltJSON)
               _uapkPayload
-              userAccounts
+              userAccountsService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersAddPublicKeyResource)

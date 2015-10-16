@@ -90,7 +90,7 @@ instance GoogleRequest SitemapsGet' where
         type Rs SitemapsGet' = WmxSitemap
         requestClient SitemapsGet'{..}
           = go _sgSiteURL _sgFeedpath (Just AltJSON)
-              webmasterTools
+              webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitemapsGetResource)
                       mempty

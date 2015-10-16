@@ -106,7 +106,7 @@ instance GoogleRequest
         requestClient AccountsContainersVariablesGet'{..}
           = go _acvgAccountId _acvgContainerId _acvgVariableId
               (Just AltJSON)
-              tagManager
+              tagManagerService
           where go
                   = buildClient
                       (Proxy ::

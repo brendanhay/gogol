@@ -93,7 +93,7 @@ instance GoogleRequest HTTPHealthChecksInsert' where
         type Rs HTTPHealthChecksInsert' = Operation
         requestClient HTTPHealthChecksInsert'{..}
           = go _httphciProject (Just AltJSON) _httphciPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy HTTPHealthChecksInsertResource)

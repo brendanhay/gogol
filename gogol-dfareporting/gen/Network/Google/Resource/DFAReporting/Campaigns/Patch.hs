@@ -100,7 +100,7 @@ instance GoogleRequest CampaignsPatch' where
         requestClient CampaignsPatch'{..}
           = go _cpProFileId (Just _cpId) (Just AltJSON)
               _cpPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy CampaignsPatchResource)
                       mempty

@@ -20,7 +20,7 @@
 module Network.Google.DeploymentManager
     (
     -- * Service Configuration
-      deploymentManager
+      deploymentManagerService
 
     -- * API Declaration
     , DeploymentManagerAPI

@@ -110,7 +110,7 @@ instance GoogleRequest PurchasesSubscriptionsRevoke'
         requestClient PurchasesSubscriptionsRevoke'{..}
           = go _psrPackageName _psrSubscriptionId _psrToken
               (Just AltJSON)
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy PurchasesSubscriptionsRevokeResource)

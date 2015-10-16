@@ -97,7 +97,7 @@ instance GoogleRequest GroupItemsInsert' where
         requestClient GroupItemsInsert'{..}
           = go _giiOnBehalfOfContentOwner (Just AltJSON)
               _giiPayload
-              youTubeAnalytics
+              youTubeAnalyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy GroupItemsInsertResource)

@@ -86,7 +86,7 @@ tMatchId = lens _tMatchId (\ s a -> s{_tMatchId = a})
 instance GoogleRequest TurnBasedMatchesDecline' where
         type Rs TurnBasedMatchesDecline' = TurnBasedMatch
         requestClient TurnBasedMatchesDecline'{..}
-          = go _tMatchId _tLanguage (Just AltJSON) games
+          = go _tMatchId _tLanguage (Just AltJSON) gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy TurnBasedMatchesDeclineResource)

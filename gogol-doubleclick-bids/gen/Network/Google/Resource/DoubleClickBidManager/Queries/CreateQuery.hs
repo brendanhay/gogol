@@ -74,7 +74,8 @@ qcqPayload
 instance GoogleRequest QueriesCreateQuery' where
         type Rs QueriesCreateQuery' = Query
         requestClient QueriesCreateQuery'{..}
-          = go (Just AltJSON) _qcqPayload doubleClickBids
+          = go (Just AltJSON) _qcqPayload
+              doubleClickBidsService
           where go
                   = buildClient
                       (Proxy :: Proxy QueriesCreateQueryResource)

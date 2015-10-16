@@ -116,7 +116,7 @@ instance GoogleRequest
           = go _acvrAccountId _acvrContainerId
               _acvrContainerVersionId
               (Just AltJSON)
-              tagManager
+              tagManagerService
           where go
                   = buildClient
                       (Proxy ::

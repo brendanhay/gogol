@@ -178,7 +178,7 @@ instance GoogleRequest ProjectsSinksDelete' where
               _psdBearerToken
               _psdCallback
               (Just AltJSON)
-              logging
+              loggingService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsSinksDeleteResource)

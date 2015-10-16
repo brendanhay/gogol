@@ -128,7 +128,7 @@ instance GoogleRequest InstanceGroupsAggregatedList'
           = go _igalProject _igalFilter _igalPageToken
               (Just _igalMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceGroupsAggregatedListResource)

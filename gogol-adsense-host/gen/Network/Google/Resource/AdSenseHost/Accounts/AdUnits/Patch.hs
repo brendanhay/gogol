@@ -120,7 +120,7 @@ instance GoogleRequest AccountsAdUnitsPatch' where
               (Just _aaupAdUnitId)
               (Just AltJSON)
               _aaupPayload
-              adSenseHost
+              adSenseHostService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsAdUnitsPatchResource)

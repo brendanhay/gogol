@@ -90,7 +90,7 @@ instance GoogleRequest
         type Rs GlobalAccountsOperationsDelete' = ()
         requestClient GlobalAccountsOperationsDelete'{..}
           = go _gaodProject _gaodOperation (Just AltJSON)
-              userAccounts
+              userAccountsService
           where go
                   = buildClient
                       (Proxy ::

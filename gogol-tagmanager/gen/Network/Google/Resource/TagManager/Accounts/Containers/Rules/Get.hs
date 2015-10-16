@@ -105,7 +105,7 @@ instance GoogleRequest AccountsContainersRulesGet'
         requestClient AccountsContainersRulesGet'{..}
           = go _acrgAccountId _acrgContainerId _acrgRuleId
               (Just AltJSON)
-              tagManager
+              tagManagerService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsContainersRulesGetResource)

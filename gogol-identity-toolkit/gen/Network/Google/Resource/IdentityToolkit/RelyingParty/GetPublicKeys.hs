@@ -63,7 +63,7 @@ instance GoogleRequest RelyingPartyGetPublicKeys'
         type Rs RelyingPartyGetPublicKeys' =
              IdentitytoolkitRelyingPartyGetPublicKeysResponse
         requestClient RelyingPartyGetPublicKeys'{}
-          = go (Just AltJSON) identityToolkit
+          = go (Just AltJSON) identityToolkitService
           where go
                   = buildClient
                       (Proxy :: Proxy RelyingPartyGetPublicKeysResource)

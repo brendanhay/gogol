@@ -132,7 +132,7 @@ instance GoogleRequest BlogsListByUser' where
               (_blbuRole ^. _Default)
               _blbuView
               (Just AltJSON)
-              blogger
+              bloggerService
           where go
                   = buildClient
                       (Proxy :: Proxy BlogsListByUserResource)

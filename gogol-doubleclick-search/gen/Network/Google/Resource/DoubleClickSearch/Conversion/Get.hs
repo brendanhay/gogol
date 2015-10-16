@@ -210,7 +210,7 @@ instance GoogleRequest ConversionGet' where
               _cgCriterionId
               _cgAdId
               (Just AltJSON)
-              doubleClickSearch
+              doubleClickSearchService
           where go
                   = buildClient (Proxy :: Proxy ConversionGetResource)
                       mempty

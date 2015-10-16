@@ -98,7 +98,7 @@ instance GoogleRequest RastersFilesInsert' where
         requestClient RastersFilesInsert'{..}
           = go _rfiId (Just _rfiFilename) (Just AltJSON)
               _rfiMedia
-              mapsEngine
+              mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy RastersFilesInsertResource)

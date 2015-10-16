@@ -88,7 +88,7 @@ instance GoogleRequest EditsCommit' where
         type Rs EditsCommit' = AppEdit
         requestClient EditsCommit'{..}
           = go _ecPackageName _ecEditId (Just AltJSON)
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient (Proxy :: Proxy EditsCommitResource)
                       mempty

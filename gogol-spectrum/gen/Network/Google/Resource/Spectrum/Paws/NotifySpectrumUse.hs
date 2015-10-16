@@ -82,7 +82,7 @@ instance GoogleRequest PawsNotifySpectrumUse' where
         type Rs PawsNotifySpectrumUse' =
              PawsNotifySpectrumUseResponse
         requestClient PawsNotifySpectrumUse'{..}
-          = go (Just AltJSON) _pnsuPayload spectrum
+          = go (Just AltJSON) _pnsuPayload spectrumService
           where go
                   = buildClient
                       (Proxy :: Proxy PawsNotifySpectrumUseResource)

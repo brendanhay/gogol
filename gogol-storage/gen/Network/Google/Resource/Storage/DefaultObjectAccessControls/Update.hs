@@ -106,7 +106,7 @@ instance GoogleRequest
         requestClient DefaultObjectAccessControlsUpdate'{..}
           = go _doacuBucket _doacuEntity (Just AltJSON)
               _doacuPayload
-              storage
+              storageService
           where go
                   = buildClient
                       (Proxy ::

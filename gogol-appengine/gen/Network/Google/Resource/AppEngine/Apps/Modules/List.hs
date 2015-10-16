@@ -188,7 +188,7 @@ instance GoogleRequest AppsModulesList' where
               _amlPageSize
               _amlCallback
               (Just AltJSON)
-              appEngine
+              appEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy AppsModulesListResource)

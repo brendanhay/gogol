@@ -162,7 +162,7 @@ instance GoogleRequest ProjectsSubscriptionsGet'
               _psgBearerToken
               _psgCallback
               (Just AltJSON)
-              pubSub
+              pubSubService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsSubscriptionsGetResource)

@@ -91,7 +91,7 @@ instance GoogleRequest TargetHTTPProxiesDelete' where
         requestClient TargetHTTPProxiesDelete'{..}
           = go _thttppdProject _thttppdTargetHTTPProxy
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy TargetHTTPProxiesDeleteResource)

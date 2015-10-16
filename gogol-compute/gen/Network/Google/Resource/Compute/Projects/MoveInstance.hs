@@ -89,7 +89,8 @@ pmiPayload
 instance GoogleRequest ProjectsMoveInstance' where
         type Rs ProjectsMoveInstance' = Operation
         requestClient ProjectsMoveInstance'{..}
-          = go _pmiProject (Just AltJSON) _pmiPayload compute
+          = go _pmiProject (Just AltJSON) _pmiPayload
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsMoveInstanceResource)

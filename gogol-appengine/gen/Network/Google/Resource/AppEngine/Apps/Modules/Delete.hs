@@ -177,7 +177,7 @@ instance GoogleRequest AppsModulesDelete' where
               _amdBearerToken
               _amdCallback
               (Just AltJSON)
-              appEngine
+              appEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy AppsModulesDeleteResource)

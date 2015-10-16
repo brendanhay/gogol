@@ -180,7 +180,7 @@ instance GoogleRequest AppsOperationsGet' where
               _aogBearerToken
               _aogCallback
               (Just AltJSON)
-              appEngine
+              appEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy AppsOperationsGetResource)

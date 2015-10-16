@@ -100,7 +100,7 @@ instance GoogleRequest RoomsJoin' where
         type Rs RoomsJoin' = Room
         requestClient RoomsJoin'{..}
           = go _rjRoomId _rjLanguage (Just AltJSON) _rjPayload
-              games
+              gamesService
           where go
                   = buildClient (Proxy :: Proxy RoomsJoinResource)
                       mempty

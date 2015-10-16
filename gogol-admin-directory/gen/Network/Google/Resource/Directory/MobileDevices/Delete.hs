@@ -91,7 +91,7 @@ instance GoogleRequest MobileDevicesDelete' where
         type Rs MobileDevicesDelete' = ()
         requestClient MobileDevicesDelete'{..}
           = go _mddCustomerId _mddResourceId (Just AltJSON)
-              directory
+              directoryService
           where go
                   = buildClient
                       (Proxy :: Proxy MobileDevicesDeleteResource)

@@ -74,7 +74,7 @@ uiPayload
 instance GoogleRequest URLInsert' where
         type Rs URLInsert' = URL
         requestClient URLInsert'{..}
-          = go (Just AltJSON) _uiPayload uRLShortener
+          = go (Just AltJSON) _uiPayload uRLShortenerService
           where go
                   = buildClient (Proxy :: Proxy URLInsertResource)
                       mempty

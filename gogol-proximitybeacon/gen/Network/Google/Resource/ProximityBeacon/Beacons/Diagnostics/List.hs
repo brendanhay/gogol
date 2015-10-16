@@ -208,7 +208,7 @@ instance GoogleRequest BeaconsDiagnosticsList' where
               _bdlAlertFilter
               _bdlCallback
               (Just AltJSON)
-              proximityBeacon
+              proximityBeaconService
           where go
                   = buildClient
                       (Proxy :: Proxy BeaconsDiagnosticsListResource)

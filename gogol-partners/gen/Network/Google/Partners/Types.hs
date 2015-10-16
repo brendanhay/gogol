@@ -16,7 +16,7 @@
 module Network.Google.Partners.Types
     (
     -- * Service Configuration
-      partners
+      partnersService
 
     -- * LatLng
     , LatLng
@@ -220,8 +220,8 @@ import           Network.Google.Partners.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google Partners API. This contains the host and root path used as a starting point for constructing service requests.
-partners :: Service
-partners
+partnersService :: Service
+partnersService
   = defaultService (ServiceId "partners:v2")
       "partners.googleapis.com"
       ""

@@ -187,7 +187,7 @@ instance GoogleRequest CallsetsPatch' where
               _cpCallback
               (Just AltJSON)
               _cpPayload
-              genomics
+              genomicsService
           where go
                   = buildClient (Proxy :: Proxy CallsetsPatchResource)
                       mempty

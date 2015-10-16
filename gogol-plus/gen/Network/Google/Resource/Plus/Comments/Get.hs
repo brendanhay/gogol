@@ -74,7 +74,7 @@ cgCommentId
 instance GoogleRequest CommentsGet' where
         type Rs CommentsGet' = Comment
         requestClient CommentsGet'{..}
-          = go _cgCommentId (Just AltJSON) plus
+          = go _cgCommentId (Just AltJSON) plusService
           where go
                   = buildClient (Proxy :: Proxy CommentsGetResource)
                       mempty

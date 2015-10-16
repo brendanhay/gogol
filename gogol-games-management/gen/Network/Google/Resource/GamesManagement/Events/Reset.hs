@@ -81,7 +81,7 @@ erEventId
 instance GoogleRequest EventsReset' where
         type Rs EventsReset' = ()
         requestClient EventsReset'{..}
-          = go _erEventId (Just AltJSON) gamesManagement
+          = go _erEventId (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy EventsResetResource)
                       mempty

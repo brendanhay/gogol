@@ -183,7 +183,7 @@ instance GoogleRequest ProjectsZonesOperationsList'
               _pzolBearerToken
               _pzolCallback
               (Just AltJSON)
-              container
+              containerService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsZonesOperationsListResource)

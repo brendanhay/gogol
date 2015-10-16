@@ -93,7 +93,7 @@ instance GoogleRequest TargetHTTPProxiesInsert' where
         type Rs TargetHTTPProxiesInsert' = Operation
         requestClient TargetHTTPProxiesInsert'{..}
           = go _thttppiProject (Just AltJSON) _thttppiPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy TargetHTTPProxiesInsertResource)

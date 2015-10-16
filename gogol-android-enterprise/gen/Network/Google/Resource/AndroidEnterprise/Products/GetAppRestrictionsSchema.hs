@@ -113,7 +113,7 @@ instance GoogleRequest
           = go _pgarsEnterpriseId _pgarsProductId
               _pgarsLanguage
               (Just AltJSON)
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy ::

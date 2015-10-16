@@ -103,7 +103,7 @@ instance GoogleRequest InstancesList' where
         requestClient InstancesList'{..}
           = go _ilProject _ilPageToken _ilMaxResults
               (Just AltJSON)
-              sQLAdmin
+              sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy InstancesListResource)
                       mempty

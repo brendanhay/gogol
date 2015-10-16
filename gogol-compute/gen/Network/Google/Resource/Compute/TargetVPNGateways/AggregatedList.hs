@@ -128,7 +128,7 @@ instance GoogleRequest
           = go _tvgalProject _tvgalFilter _tvgalPageToken
               (Just _tvgalMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy ::

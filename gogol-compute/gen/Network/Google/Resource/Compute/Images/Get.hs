@@ -86,7 +86,8 @@ imaProject
 instance GoogleRequest ImagesGet' where
         type Rs ImagesGet' = Image
         requestClient ImagesGet'{..}
-          = go _imaProject _imaImage (Just AltJSON) compute
+          = go _imaProject _imaImage (Just AltJSON)
+              computeService
           where go
                   = buildClient (Proxy :: Proxy ImagesGetResource)
                       mempty

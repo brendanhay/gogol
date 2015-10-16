@@ -78,7 +78,8 @@ instance GoogleRequest RelyingPartySetAccountInfo'
         type Rs RelyingPartySetAccountInfo' =
              SetAccountInfoResponse
         requestClient RelyingPartySetAccountInfo'{..}
-          = go (Just AltJSON) _rpsaiPayload identityToolkit
+          = go (Just AltJSON) _rpsaiPayload
+              identityToolkitService
           where go
                   = buildClient
                       (Proxy :: Proxy RelyingPartySetAccountInfoResource)

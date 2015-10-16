@@ -124,7 +124,7 @@ instance GoogleRequest
               _igmriInstanceGroupManager
               (Just AltJSON)
               _igmriPayload
-              replicaPool
+              replicaPoolService
           where go
                   = buildClient
                       (Proxy ::

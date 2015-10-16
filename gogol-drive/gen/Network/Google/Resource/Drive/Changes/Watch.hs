@@ -153,7 +153,7 @@ instance GoogleRequest ChangesWatch' where
               (Just _cwIncludeDeleted)
               (Just AltJSON)
               _cwPayload
-              drive
+              driveService
           where go
                   = buildClient (Proxy :: Proxy ChangesWatchResource)
                       mempty

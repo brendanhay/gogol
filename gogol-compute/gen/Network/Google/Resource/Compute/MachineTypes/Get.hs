@@ -101,7 +101,7 @@ instance GoogleRequest MachineTypesGet' where
         requestClient MachineTypesGet'{..}
           = go _mtgProject _mtgZone _mtgMachineType
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy MachineTypesGetResource)

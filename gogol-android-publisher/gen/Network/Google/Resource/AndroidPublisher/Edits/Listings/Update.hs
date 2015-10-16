@@ -117,7 +117,7 @@ instance GoogleRequest EditsListingsUpdate' where
           = go _eluPackageName _eluEditId _eluLanguage
               (Just AltJSON)
               _eluPayload
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy EditsListingsUpdateResource)

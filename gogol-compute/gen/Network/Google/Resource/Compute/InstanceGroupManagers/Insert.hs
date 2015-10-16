@@ -104,7 +104,7 @@ instance GoogleRequest InstanceGroupManagersInsert'
         requestClient InstanceGroupManagersInsert'{..}
           = go _igmiProject _igmiZone (Just AltJSON)
               _igmiPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceGroupManagersInsertResource)

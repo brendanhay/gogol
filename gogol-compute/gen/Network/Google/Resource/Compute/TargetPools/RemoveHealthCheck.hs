@@ -118,7 +118,7 @@ instance GoogleRequest TargetPoolsRemoveHealthCheck'
           = go _tprhcProject _tprhcRegion _tprhcTargetPool
               (Just AltJSON)
               _tprhcPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy TargetPoolsRemoveHealthCheckResource)

@@ -121,7 +121,7 @@ instance GoogleRequest CollectionviewersUpdate' where
           = go _cuuEnterpriseId _cuuCollectionId _cuuUserId
               (Just AltJSON)
               _cuuPayload
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy :: Proxy CollectionviewersUpdateResource)

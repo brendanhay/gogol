@@ -178,7 +178,7 @@ instance GoogleRequest DebuggerDebuggeesList' where
               _ddlBearerToken
               _ddlCallback
               (Just AltJSON)
-              debugger
+              debuggerService
           where go
                   = buildClient
                       (Proxy :: Proxy DebuggerDebuggeesListResource)

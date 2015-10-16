@@ -88,7 +88,7 @@ instance GoogleRequest TemplateInsert' where
         type Rs TemplateInsert' = Template
         requestClient TemplateInsert'{..}
           = go _tiTableId (Just AltJSON) _tiPayload
-              fusionTables
+              fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TemplateInsertResource)
                       mempty

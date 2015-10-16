@@ -100,7 +100,7 @@ instance GoogleRequest AccountsInsert' where
         requestClient AccountsInsert'{..}
           = go _aiiMerchantId _aiiDryRun (Just AltJSON)
               _aiiPayload
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy AccountsInsertResource)
                       mempty

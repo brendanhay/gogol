@@ -87,7 +87,8 @@ miPayload
 instance GoogleRequest MembersInsert' where
         type Rs MembersInsert' = Member
         requestClient MembersInsert'{..}
-          = go _miGroupKey (Just AltJSON) _miPayload directory
+          = go _miGroupKey (Just AltJSON) _miPayload
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy MembersInsertResource)
                       mempty

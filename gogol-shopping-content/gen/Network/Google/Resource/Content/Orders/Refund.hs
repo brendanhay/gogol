@@ -102,7 +102,7 @@ instance GoogleRequest OrdersRefund' where
         requestClient OrdersRefund'{..}
           = go _orMerchantId _orOrderId (Just AltJSON)
               _orPayload
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy OrdersRefundResource)
                       mempty

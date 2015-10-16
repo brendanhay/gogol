@@ -78,7 +78,7 @@ instance GoogleRequest PawsGetSpectrumBatch' where
         type Rs PawsGetSpectrumBatch' =
              PawsGetSpectrumBatchResponse
         requestClient PawsGetSpectrumBatch'{..}
-          = go (Just AltJSON) _pgsbPayload spectrum
+          = go (Just AltJSON) _pgsbPayload spectrumService
           where go
                   = buildClient
                       (Proxy :: Proxy PawsGetSpectrumBatchResource)

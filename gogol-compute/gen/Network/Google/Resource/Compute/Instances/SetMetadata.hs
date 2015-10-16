@@ -115,7 +115,7 @@ instance GoogleRequest InstancesSetMetadata' where
         requestClient InstancesSetMetadata'{..}
           = go _ismProject _ismZone _ismInstance (Just AltJSON)
               _ismPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesSetMetadataResource)

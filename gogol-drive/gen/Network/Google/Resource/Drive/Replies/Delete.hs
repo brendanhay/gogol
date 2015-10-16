@@ -102,7 +102,7 @@ instance GoogleRequest RepliesDelete' where
         requestClient RepliesDelete'{..}
           = go _rddFileId _rddCommentId _rddReplyId
               (Just AltJSON)
-              drive
+              driveService
           where go
                   = buildClient (Proxy :: Proxy RepliesDeleteResource)
                       mempty

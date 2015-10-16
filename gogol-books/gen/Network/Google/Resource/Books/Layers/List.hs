@@ -124,7 +124,7 @@ instance GoogleRequest LayersList' where
               _llPageToken
               _llMaxResults
               (Just AltJSON)
-              books
+              booksService
           where go
                   = buildClient (Proxy :: Proxy LayersListResource)
                       mempty

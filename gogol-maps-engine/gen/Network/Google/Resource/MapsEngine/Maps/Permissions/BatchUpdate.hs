@@ -94,7 +94,8 @@ instance GoogleRequest MapsPermissionsBatchUpdate'
         type Rs MapsPermissionsBatchUpdate' =
              PermissionsBatchUpdateResponse
         requestClient MapsPermissionsBatchUpdate'{..}
-          = go _mpbuId (Just AltJSON) _mpbuPayload mapsEngine
+          = go _mpbuId (Just AltJSON) _mpbuPayload
+              mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy MapsPermissionsBatchUpdateResource)

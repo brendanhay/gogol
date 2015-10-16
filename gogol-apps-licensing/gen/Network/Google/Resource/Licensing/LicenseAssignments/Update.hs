@@ -115,7 +115,7 @@ instance GoogleRequest LicenseAssignmentsUpdate'
           = go _lauProductId _lauSKUId _lauUserId
               (Just AltJSON)
               _lauPayload
-              appsLicensing
+              appsLicensingService
           where go
                   = buildClient
                       (Proxy :: Proxy LicenseAssignmentsUpdateResource)

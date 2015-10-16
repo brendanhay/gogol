@@ -16,7 +16,7 @@
 module Network.Google.WebmasterTools.Types
     (
     -- * Service Configuration
-      webmasterTools
+      webmasterToolsService
 
     -- * OAuth Scopes
     , webmastersScope
@@ -165,8 +165,8 @@ import           Network.Google.WebmasterTools.Types.Product
 import           Network.Google.WebmasterTools.Types.Sum
 
 -- | Default request referring to version 'v3' of the Webmaster Tools API. This contains the host and root path used as a starting point for constructing service requests.
-webmasterTools :: Service
-webmasterTools
+webmasterToolsService :: Service
+webmasterToolsService
   = defaultService (ServiceId "webmasters:v3")
       "www.googleapis.com"
       "webmasters/v3/"

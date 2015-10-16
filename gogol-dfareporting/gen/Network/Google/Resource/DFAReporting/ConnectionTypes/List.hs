@@ -77,7 +77,7 @@ instance GoogleRequest ConnectionTypesList' where
         type Rs ConnectionTypesList' =
              ConnectionTypesListResponse
         requestClient ConnectionTypesList'{..}
-          = go _ctlProFileId (Just AltJSON) dFAReporting
+          = go _ctlProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy ConnectionTypesListResource)

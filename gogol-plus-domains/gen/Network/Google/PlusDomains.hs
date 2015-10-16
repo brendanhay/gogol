@@ -20,7 +20,7 @@
 module Network.Google.PlusDomains
     (
     -- * Service Configuration
-      plusDomains
+      plusDomainsService
 
     -- * API Declaration
     , PlusDomainsAPI

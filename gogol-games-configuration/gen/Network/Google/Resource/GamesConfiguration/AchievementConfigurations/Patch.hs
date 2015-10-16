@@ -93,7 +93,7 @@ instance GoogleRequest
              AchievementConfiguration
         requestClient AchievementConfigurationsPatch'{..}
           = go _acpAchievementId (Just AltJSON) _acpPayload
-              gamesConfiguration
+              gamesConfigurationService
           where go
                   = buildClient
                       (Proxy ::

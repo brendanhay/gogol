@@ -211,7 +211,7 @@ instance GoogleRequest PostUserInfosList' where
               _puilPageToken
               _puilMaxResults
               (Just AltJSON)
-              blogger
+              bloggerService
           where go
                   = buildClient
                       (Proxy :: Proxy PostUserInfosListResource)

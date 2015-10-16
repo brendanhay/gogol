@@ -126,7 +126,7 @@ instance GoogleRequest JobsList' where
               _jlPageToken
               _jlMaxResults
               (Just AltJSON)
-              mapsCoordinate
+              mapsCoordinateService
           where go
                   = buildClient (Proxy :: Proxy JobsListResource)
                       mempty

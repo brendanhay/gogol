@@ -164,7 +164,7 @@ instance GoogleRequest PostsUpdate' where
               _puPublish
               (Just AltJSON)
               _puPayload
-              blogger
+              bloggerService
           where go
                   = buildClient (Proxy :: Proxy PostsUpdateResource)
                       mempty

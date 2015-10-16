@@ -105,7 +105,7 @@ instance GoogleRequest SubscriptionsDelete' where
           = go _sdCustomerId _sdSubscriptionId
               (Just _sdDeletionType)
               (Just AltJSON)
-              appsReseller
+              appsResellerService
           where go
                   = buildClient
                       (Proxy :: Proxy SubscriptionsDeleteResource)

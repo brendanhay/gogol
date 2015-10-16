@@ -146,7 +146,7 @@ instance GoogleRequest
               _udsddModifiedTimeMillis
               _udsddCurrentTimeMillis
               (Just AltJSON)
-              fitness
+              fitnessService
           where go
                   = buildClient
                       (Proxy ::

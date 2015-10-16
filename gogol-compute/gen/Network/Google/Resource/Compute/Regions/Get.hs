@@ -85,7 +85,8 @@ rgRegion = lens _rgRegion (\ s a -> s{_rgRegion = a})
 instance GoogleRequest RegionsGet' where
         type Rs RegionsGet' = Region
         requestClient RegionsGet'{..}
-          = go _rgProject _rgRegion (Just AltJSON) compute
+          = go _rgProject _rgRegion (Just AltJSON)
+              computeService
           where go
                   = buildClient (Proxy :: Proxy RegionsGetResource)
                       mempty

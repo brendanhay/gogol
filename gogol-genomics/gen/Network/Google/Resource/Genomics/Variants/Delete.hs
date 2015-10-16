@@ -160,7 +160,7 @@ instance GoogleRequest VariantsDelete' where
               _vdBearerToken
               _vdCallback
               (Just AltJSON)
-              genomics
+              genomicsService
           where go
                   = buildClient (Proxy :: Proxy VariantsDeleteResource)
                       mempty

@@ -193,7 +193,7 @@ instance GoogleRequest ProjectsJobsGetMetrics' where
               _pjgmBearerToken
               _pjgmCallback
               (Just AltJSON)
-              dataflow
+              dataflowService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsJobsGetMetricsResource)

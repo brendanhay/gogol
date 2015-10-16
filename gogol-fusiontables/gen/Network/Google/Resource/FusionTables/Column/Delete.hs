@@ -88,7 +88,7 @@ instance GoogleRequest ColumnDelete' where
         type Rs ColumnDelete' = ()
         requestClient ColumnDelete'{..}
           = go _cdTableId _cdColumnId (Just AltJSON)
-              fusionTables
+              fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy ColumnDeleteResource)
                       mempty

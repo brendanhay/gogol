@@ -74,7 +74,7 @@ ciPayload
 instance GoogleRequest ContactsInsert' where
         type Rs ContactsInsert' = Contact
         requestClient ContactsInsert'{..}
-          = go (Just AltJSON) _ciPayload mirror
+          = go (Just AltJSON) _ciPayload mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsInsertResource)
                       mempty

@@ -99,7 +99,7 @@ instance GoogleRequest CommentsPatch' where
         type Rs CommentsPatch' = Comment
         requestClient CommentsPatch'{..}
           = go _cpFileId _cpCommentId (Just AltJSON) _cpPayload
-              drive
+              driveService
           where go
                   = buildClient (Proxy :: Proxy CommentsPatchResource)
                       mempty

@@ -175,7 +175,7 @@ instance GoogleRequest CommentsList' where
               _clPageToken
               _clMaxResults
               (Just AltJSON)
-              blogger
+              bloggerService
           where go
                   = buildClient (Proxy :: Proxy CommentsListResource)
                       mempty

@@ -221,7 +221,7 @@ instance GoogleRequest ChangeLogsList' where
               (_cllObjectIds ^. _Default)
               _cllMaxResults
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy ChangeLogsListResource)
                       mempty

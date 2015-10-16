@@ -112,7 +112,7 @@ instance GoogleRequest CaptionsDelete' where
           = go (Just _cddId) _cddOnBehalfOf
               _cddOnBehalfOfContentOwner
               (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient (Proxy :: Proxy CaptionsDeleteResource)
                       mempty

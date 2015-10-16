@@ -75,7 +75,7 @@ lpId = lens _lpId (\ s a -> s{_lpId = a})
 instance GoogleRequest LayersProcess' where
         type Rs LayersProcess' = ProcessResponse
         requestClient LayersProcess'{..}
-          = go _lpId (Just AltJSON) mapsEngine
+          = go _lpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy LayersProcessResource)
                       mempty

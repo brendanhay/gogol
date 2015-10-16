@@ -76,7 +76,7 @@ mlProFileId
 instance GoogleRequest MetrosList' where
         type Rs MetrosList' = MetrosListResponse
         requestClient MetrosList'{..}
-          = go _mlProFileId (Just AltJSON) dFAReporting
+          = go _mlProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy MetrosListResource)
                       mempty

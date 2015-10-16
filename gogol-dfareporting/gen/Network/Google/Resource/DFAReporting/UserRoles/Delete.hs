@@ -86,7 +86,8 @@ urdId = lens _urdId (\ s a -> s{_urdId = a})
 instance GoogleRequest UserRolesDelete' where
         type Rs UserRolesDelete' = ()
         requestClient UserRolesDelete'{..}
-          = go _urdProFileId _urdId (Just AltJSON) dFAReporting
+          = go _urdProFileId _urdId (Just AltJSON)
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy UserRolesDeleteResource)

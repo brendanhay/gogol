@@ -226,7 +226,7 @@ instance GoogleRequest JobsPatch' where
               (_jpCustomField ^. _Default)
               (Just AltJSON)
               _jpPayload
-              mapsCoordinate
+              mapsCoordinateService
           where go
                   = buildClient (Proxy :: Proxy JobsPatchResource)
                       mempty

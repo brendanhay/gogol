@@ -75,7 +75,7 @@ sdSiteURL
 instance GoogleRequest SitesDelete' where
         type Rs SitesDelete' = ()
         requestClient SitesDelete'{..}
-          = go _sdSiteURL (Just AltJSON) webmasterTools
+          = go _sdSiteURL (Just AltJSON) webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitesDeleteResource)
                       mempty

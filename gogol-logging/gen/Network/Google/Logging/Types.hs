@@ -16,7 +16,7 @@
 module Network.Google.Logging.Types
     (
     -- * Service Configuration
-      logging
+      loggingService
 
     -- * OAuth Scopes
     , loggingAdminScope
@@ -229,8 +229,8 @@ import           Network.Google.Logging.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1beta3' of the Google Cloud Logging API. This contains the host and root path used as a starting point for constructing service requests.
-logging :: Service
-logging
+loggingService :: Service
+loggingService
   = defaultService (ServiceId "logging:v1beta3")
       "logging.googleapis.com"
       ""

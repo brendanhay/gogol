@@ -75,7 +75,7 @@ rpId = lens _rpId (\ s a -> s{_rpId = a})
 instance GoogleRequest RastersProcess' where
         type Rs RastersProcess' = ProcessResponse
         requestClient RastersProcess'{..}
-          = go _rpId (Just AltJSON) mapsEngine
+          = go _rpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy RastersProcessResource)
                       mempty

@@ -128,7 +128,7 @@ instance GoogleRequest TargetInstancesAggregatedList'
           = go _tialProject _tialFilter _tialPageToken
               (Just _tialMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy ::

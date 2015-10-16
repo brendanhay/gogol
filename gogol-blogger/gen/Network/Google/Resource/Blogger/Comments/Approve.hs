@@ -100,7 +100,7 @@ instance GoogleRequest CommentsApprove' where
         type Rs CommentsApprove' = Comment
         requestClient CommentsApprove'{..}
           = go _caBlogId _caPostId _caCommentId (Just AltJSON)
-              blogger
+              bloggerService
           where go
                   = buildClient
                       (Proxy :: Proxy CommentsApproveResource)

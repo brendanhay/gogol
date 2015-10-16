@@ -206,7 +206,7 @@ instance GoogleRequest AccountUserProFilesList' where
               _aupflSubAccountId
               _aupflMaxResults
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountUserProFilesListResource)

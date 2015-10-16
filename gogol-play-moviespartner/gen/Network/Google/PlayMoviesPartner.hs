@@ -20,7 +20,7 @@
 module Network.Google.PlayMoviesPartner
     (
     -- * Service Configuration
-      playMoviesPartner
+      playMoviesPartnerService
 
     -- * API Declaration
     , PlayMoviesPartnerAPI

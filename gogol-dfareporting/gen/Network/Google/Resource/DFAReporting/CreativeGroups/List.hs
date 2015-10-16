@@ -188,7 +188,7 @@ instance GoogleRequest CreativeGroupsList' where
               (_cglAdvertiserIds ^. _Default)
               _cglMaxResults
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy CreativeGroupsListResource)

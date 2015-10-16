@@ -113,7 +113,7 @@ instance GoogleRequest PropertiesUpdate' where
           = go _puFileId _puPropertyKey (Just _puVisibility)
               (Just AltJSON)
               _puPayload
-              drive
+              driveService
           where go
                   = buildClient
                       (Proxy :: Proxy PropertiesUpdateResource)

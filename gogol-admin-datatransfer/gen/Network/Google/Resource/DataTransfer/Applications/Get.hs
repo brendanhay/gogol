@@ -75,7 +75,8 @@ agApplicationId
 instance GoogleRequest ApplicationsGet' where
         type Rs ApplicationsGet' = Application
         requestClient ApplicationsGet'{..}
-          = go _agApplicationId (Just AltJSON) dataTransfer
+          = go _agApplicationId (Just AltJSON)
+              dataTransferService
           where go
                   = buildClient
                       (Proxy :: Proxy ApplicationsGetResource)

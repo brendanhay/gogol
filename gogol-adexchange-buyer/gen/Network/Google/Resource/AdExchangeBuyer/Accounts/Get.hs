@@ -73,7 +73,7 @@ agId = lens _agId (\ s a -> s{_agId = a})
 instance GoogleRequest AccountsGet' where
         type Rs AccountsGet' = Account
         requestClient AccountsGet'{..}
-          = go _agId (Just AltJSON) adExchangeBuyer
+          = go _agId (Just AltJSON) adExchangeBuyerService
           where go
                   = buildClient (Proxy :: Proxy AccountsGetResource)
                       mempty

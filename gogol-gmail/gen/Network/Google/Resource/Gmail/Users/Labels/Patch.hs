@@ -99,7 +99,7 @@ instance GoogleRequest UsersLabelsPatch' where
         type Rs UsersLabelsPatch' = Label
         requestClient UsersLabelsPatch'{..}
           = go _ulpUserId _ulpId (Just AltJSON) _ulpPayload
-              gmail
+              gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersLabelsPatchResource)

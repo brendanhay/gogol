@@ -89,7 +89,7 @@ instance GoogleRequest CustomersUpdate' where
         type Rs CustomersUpdate' = Customer
         requestClient CustomersUpdate'{..}
           = go _cuCustomerId (Just AltJSON) _cuPayload
-              appsReseller
+              appsResellerService
           where go
                   = buildClient
                       (Proxy :: Proxy CustomersUpdateResource)

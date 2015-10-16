@@ -111,7 +111,7 @@ instance GoogleRequest TaskList' where
           = go _tlTableId _tlPageToken _tlStartIndex
               _tlMaxResults
               (Just AltJSON)
-              fusionTables
+              fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TaskListResource)
                       mempty

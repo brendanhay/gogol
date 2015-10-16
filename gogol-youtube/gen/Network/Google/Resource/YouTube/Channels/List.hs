@@ -226,7 +226,7 @@ instance GoogleRequest ChannelsList' where
               _clManagedByMe
               (Just _clMaxResults)
               (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient (Proxy :: Proxy ChannelsListResource)
                       mempty

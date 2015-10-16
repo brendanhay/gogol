@@ -124,7 +124,7 @@ instance GoogleRequest RoutesList' where
           = go _rlProject _rlFilter _rlPageToken
               (Just _rlMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient (Proxy :: Proxy RoutesListResource)
                       mempty

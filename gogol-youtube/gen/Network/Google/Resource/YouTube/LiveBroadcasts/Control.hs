@@ -195,7 +195,7 @@ instance GoogleRequest LiveBroadcastsControl' where
               _lbcWalltime
               _lbcOffsetTimeMs
               (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy LiveBroadcastsControlResource)

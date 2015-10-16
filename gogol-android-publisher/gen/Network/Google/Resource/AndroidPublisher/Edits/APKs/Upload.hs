@@ -101,7 +101,7 @@ instance GoogleRequest EditsAPKsUpload' where
         requestClient EditsAPKsUpload'{..}
           = go _eapkuPackageName _eapkuEditId (Just AltJSON)
               _eapkuMedia
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy EditsAPKsUploadResource)

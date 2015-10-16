@@ -104,7 +104,7 @@ instance GoogleRequest LayersParentsList' where
         requestClient LayersParentsList'{..}
           = go _lplpId _lplpPageToken _lplpMaxResults
               (Just AltJSON)
-              mapsEngine
+              mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy LayersParentsListResource)

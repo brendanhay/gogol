@@ -121,7 +121,7 @@ instance GoogleRequest ManagementCustomMetricsList'
               _mcmlStartIndex
               _mcmlMaxResults
               (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementCustomMetricsListResource)

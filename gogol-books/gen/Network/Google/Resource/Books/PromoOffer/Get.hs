@@ -133,7 +133,7 @@ instance GoogleRequest PromoOfferGet' where
               _pogProduct
               _pogAndroidId
               (Just AltJSON)
-              books
+              booksService
           where go
                   = buildClient (Proxy :: Proxy PromoOfferGetResource)
                       mempty

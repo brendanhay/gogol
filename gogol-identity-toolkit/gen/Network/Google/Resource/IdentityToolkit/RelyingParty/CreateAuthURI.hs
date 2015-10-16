@@ -78,7 +78,8 @@ instance GoogleRequest RelyingPartyCreateAuthURI'
         type Rs RelyingPartyCreateAuthURI' =
              CreateAuthURIResponse
         requestClient RelyingPartyCreateAuthURI'{..}
-          = go (Just AltJSON) _rpcauPayload identityToolkit
+          = go (Just AltJSON) _rpcauPayload
+              identityToolkitService
           where go
                   = buildClient
                       (Proxy :: Proxy RelyingPartyCreateAuthURIResource)

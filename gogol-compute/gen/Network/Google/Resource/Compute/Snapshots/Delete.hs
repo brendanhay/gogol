@@ -95,7 +95,8 @@ sdProject
 instance GoogleRequest SnapshotsDelete' where
         type Rs SnapshotsDelete' = Operation
         requestClient SnapshotsDelete'{..}
-          = go _sdProject _sdSnapshot (Just AltJSON) compute
+          = go _sdProject _sdSnapshot (Just AltJSON)
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy SnapshotsDeleteResource)

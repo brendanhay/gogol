@@ -91,7 +91,7 @@ instance GoogleRequest LandingPagesList' where
         type Rs LandingPagesList' = LandingPagesListResponse
         requestClient LandingPagesList'{..}
           = go _lplProFileId _lplCampaignId (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy LandingPagesListResource)

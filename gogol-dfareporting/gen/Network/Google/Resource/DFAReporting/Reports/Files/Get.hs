@@ -111,7 +111,7 @@ instance GoogleRequest ReportsFilesGet' where
         requestClient ReportsFilesGet'{..}
           = go _rfgProFileId _rfgReportId _rfgFileId
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go :<|> _
                   = buildClient
                       (Proxy :: Proxy ReportsFilesGetResource)
@@ -123,7 +123,7 @@ instance GoogleRequest
         requestClient (MediaDownload ReportsFilesGet'{..})
           = go _rfgProFileId _rfgReportId _rfgFileId
               (Just AltMedia)
-              dFAReporting
+              dFAReportingService
           where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy ReportsFilesGetResource)

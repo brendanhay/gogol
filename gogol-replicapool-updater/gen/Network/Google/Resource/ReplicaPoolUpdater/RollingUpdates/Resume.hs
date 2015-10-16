@@ -102,7 +102,7 @@ instance GoogleRequest RollingUpdatesResume' where
         type Rs RollingUpdatesResume' = Operation
         requestClient RollingUpdatesResume'{..}
           = go _rProject _rZone _rRollingUpdate (Just AltJSON)
-              replicaPoolUpdater
+              replicaPoolUpdaterService
           where go
                   = buildClient
                       (Proxy :: Proxy RollingUpdatesResumeResource)

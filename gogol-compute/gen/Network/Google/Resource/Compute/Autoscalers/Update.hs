@@ -113,7 +113,7 @@ instance GoogleRequest AutoscalersUpdate' where
         requestClient AutoscalersUpdate'{..}
           = go _auProject _auZone _auAutoscaler (Just AltJSON)
               _auPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy AutoscalersUpdateResource)

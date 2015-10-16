@@ -96,7 +96,7 @@ instance GoogleRequest BookshelvesGet' where
         type Rs BookshelvesGet' = Bookshelf
         requestClient BookshelvesGet'{..}
           = go _bgUserId _bgShelf _bgSource (Just AltJSON)
-              books
+              booksService
           where go
                   = buildClient (Proxy :: Proxy BookshelvesGetResource)
                       mempty

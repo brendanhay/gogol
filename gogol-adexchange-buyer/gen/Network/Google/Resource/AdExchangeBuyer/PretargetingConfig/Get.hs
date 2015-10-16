@@ -88,7 +88,7 @@ instance GoogleRequest PretargetingConfigGet' where
         type Rs PretargetingConfigGet' = PretargetingConfig
         requestClient PretargetingConfigGet'{..}
           = go _pcgAccountId _pcgConfigId (Just AltJSON)
-              adExchangeBuyer
+              adExchangeBuyerService
           where go
                   = buildClient
                       (Proxy :: Proxy PretargetingConfigGetResource)

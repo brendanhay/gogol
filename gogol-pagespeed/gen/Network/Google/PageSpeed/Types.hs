@@ -16,7 +16,7 @@
 module Network.Google.PageSpeed.Types
     (
     -- * Service Configuration
-      pageSpeed
+      pageSpeedService
 
     -- * ResultFormattedResultsRuleResultsAdditionalURLBlocksItem
     , ResultFormattedResultsRuleResultsAdditionalURLBlocksItem
@@ -155,8 +155,8 @@ import           Network.Google.PageSpeed.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the PageSpeed Insights API. This contains the host and root path used as a starting point for constructing service requests.
-pageSpeed :: Service
-pageSpeed
+pageSpeedService :: Service
+pageSpeedService
   = defaultService (ServiceId "pagespeedonline:v2")
       "www.googleapis.com"
       "pagespeedonline/v2/"

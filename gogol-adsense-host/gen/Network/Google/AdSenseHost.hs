@@ -20,7 +20,7 @@
 module Network.Google.AdSenseHost
     (
     -- * Service Configuration
-      adSenseHost
+      adSenseHostService
 
     -- * API Declaration
     , AdSenseHostAPI

@@ -124,7 +124,7 @@ instance GoogleRequest ImagesList' where
           = go _ilProject _ilFilter _ilPageToken
               (Just _ilMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient (Proxy :: Proxy ImagesListResource)
                       mempty

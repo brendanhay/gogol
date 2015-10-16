@@ -148,7 +148,7 @@ instance GoogleRequest LiveStreamsUpdate' where
               _lsuOnBehalfOfContentOwnerChannel
               (Just AltJSON)
               _lsuPayload
-              youTube
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy LiveStreamsUpdateResource)

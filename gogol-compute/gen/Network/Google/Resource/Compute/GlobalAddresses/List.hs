@@ -124,7 +124,7 @@ instance GoogleRequest GlobalAddressesList' where
           = go _galProject _galFilter _galPageToken
               (Just _galMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy GlobalAddressesListResource)

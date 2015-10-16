@@ -19,7 +19,7 @@
 module Network.Google.Analytics
     (
     -- * Service Configuration
-      analytics
+      analyticsService
 
     -- * API Declaration
     , AnalyticsAPI

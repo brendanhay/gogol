@@ -157,7 +157,7 @@ instance GoogleRequest UserUsageReportGet' where
               _uurgPageToken
               _uurgMaxResults
               (Just AltJSON)
-              reports
+              reportsService
           where go
                   = buildClient
                       (Proxy :: Proxy UserUsageReportGetResource)

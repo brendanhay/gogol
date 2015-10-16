@@ -102,7 +102,7 @@ instance GoogleRequest VideosGetRating' where
         requestClient VideosGetRating'{..}
           = go (Just _vgrId) _vgrOnBehalfOfContentOwner
               (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy VideosGetRatingResource)

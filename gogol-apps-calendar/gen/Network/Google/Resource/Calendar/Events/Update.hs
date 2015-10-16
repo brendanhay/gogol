@@ -164,7 +164,7 @@ instance GoogleRequest EventsUpdate' where
               _euAlwaysIncludeEmail
               (Just AltJSON)
               _euPayload
-              appsCalendar
+              appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy EventsUpdateResource)
                       mempty

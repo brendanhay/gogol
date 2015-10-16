@@ -16,7 +16,7 @@
 module Network.Google.Analytics.Types
     (
     -- * Service Configuration
-      analytics
+      analyticsService
 
     -- * OAuth Scopes
     , analyticsManageUsersScope
@@ -1018,8 +1018,8 @@ import           Network.Google.Analytics.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Google Analytics API. This contains the host and root path used as a starting point for constructing service requests.
-analytics :: Service
-analytics
+analyticsService :: Service
+analyticsService
   = defaultService (ServiceId "analytics:v3")
       "www.googleapis.com"
       "analytics/v3/"

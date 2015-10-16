@@ -90,7 +90,7 @@ instance GoogleRequest CustomChannelsUpdate' where
         type Rs CustomChannelsUpdate' = CustomChannel
         requestClient CustomChannelsUpdate'{..}
           = go _ccuAdClientId (Just AltJSON) _ccuPayload
-              adSenseHost
+              adSenseHostService
           where go
                   = buildClient
                       (Proxy :: Proxy CustomChannelsUpdateResource)

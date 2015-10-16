@@ -94,7 +94,7 @@ instance GoogleRequest FilesGet' where
         type Rs FilesGet' = File
         requestClient FilesGet'{..}
           = go _fgReportId _fgFileId (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go :<|> _
                   = buildClient (Proxy :: Proxy FilesGetResource)
                       mempty
@@ -104,7 +104,7 @@ instance GoogleRequest (MediaDownload FilesGet')
         type Rs (MediaDownload FilesGet') = Stream
         requestClient (MediaDownload FilesGet'{..})
           = go _fgReportId _fgFileId (Just AltMedia)
-              dFAReporting
+              dFAReportingService
           where _ :<|> go
                   = buildClient (Proxy :: Proxy FilesGetResource)
                       mempty

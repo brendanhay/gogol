@@ -106,7 +106,7 @@ instance GoogleRequest ManagementWebPropertiesUpdate'
         requestClient ManagementWebPropertiesUpdate'{..}
           = go _mwpuAccountId _mwpuWebPropertyId (Just AltJSON)
               _mwpuPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

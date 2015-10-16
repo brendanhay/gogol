@@ -89,7 +89,7 @@ instance GoogleRequest ACLDelete' where
         type Rs ACLDelete' = ()
         requestClient ACLDelete'{..}
           = go _adCalendarId _adRuleId (Just AltJSON)
-              appsCalendar
+              appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy ACLDeleteResource)
                       mempty

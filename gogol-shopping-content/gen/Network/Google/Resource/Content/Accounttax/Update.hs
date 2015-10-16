@@ -109,7 +109,7 @@ instance GoogleRequest AccounttaxUpdate' where
         requestClient AccounttaxUpdate'{..}
           = go _aMerchantId _aAccountId _aDryRun (Just AltJSON)
               _aPayload
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy AccounttaxUpdateResource)

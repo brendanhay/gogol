@@ -102,7 +102,7 @@ instance GoogleRequest EventsListDefinitions' where
         requestClient EventsListDefinitions'{..}
           = go _eldLanguage _eldPageToken _eldMaxResults
               (Just AltJSON)
-              games
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy EventsListDefinitionsResource)

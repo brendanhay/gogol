@@ -75,7 +75,7 @@ plidId = lens _plidId (\ s a -> s{_plidId = a})
 instance GoogleRequest PlayListItemsDelete' where
         type Rs PlayListItemsDelete' = ()
         requestClient PlayListItemsDelete'{..}
-          = go (Just _plidId) (Just AltJSON) youTube
+          = go (Just _plidId) (Just AltJSON) youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy PlayListItemsDeleteResource)

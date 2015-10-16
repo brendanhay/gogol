@@ -76,7 +76,7 @@ adAlertId
 instance GoogleRequest AlertsDelete' where
         type Rs AlertsDelete' = ()
         requestClient AlertsDelete'{..}
-          = go _adAlertId (Just AltJSON) adSense
+          = go _adAlertId (Just AltJSON) adSenseService
           where go
                   = buildClient (Proxy :: Proxy AlertsDeleteResource)
                       mempty

@@ -180,7 +180,7 @@ instance GoogleRequest
               _pttipCallback
               (Just AltJSON)
               _pttipPayload
-              pubSub
+              pubSubService
           where go
                   = buildClient
                       (Proxy ::

@@ -75,7 +75,8 @@ instance GoogleRequest ClientAccessList' where
         type Rs ClientAccessList' =
              ListClientAccessCapabilitiesResponse
         requestClient ClientAccessList'{..}
-          = go (Just AltJSON) _calPayload adExchangeBuyer
+          = go (Just AltJSON) _calPayload
+              adExchangeBuyerService
           where go
                   = buildClient
                       (Proxy :: Proxy ClientAccessListResource)

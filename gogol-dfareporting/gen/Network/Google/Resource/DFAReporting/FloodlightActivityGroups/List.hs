@@ -214,7 +214,7 @@ instance GoogleRequest FloodlightActivityGroupsList'
               _faglType
               _faglMaxResults
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy FloodlightActivityGroupsListResource)

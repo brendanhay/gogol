@@ -206,7 +206,7 @@ instance GoogleRequest ProjectsDelete' where
               _pdBearerToken
               _pdCallback
               (Just AltJSON)
-              resourceManager
+              resourceManagerService
           where go
                   = buildClient (Proxy :: Proxy ProjectsDeleteResource)
                       mempty

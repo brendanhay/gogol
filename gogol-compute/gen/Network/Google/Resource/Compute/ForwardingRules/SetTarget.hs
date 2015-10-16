@@ -118,7 +118,7 @@ instance GoogleRequest ForwardingRulesSetTarget'
           = go _frstProject _frstRegion _frstForwardingRule
               (Just AltJSON)
               _frstPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy ForwardingRulesSetTargetResource)

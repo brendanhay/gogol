@@ -113,7 +113,7 @@ instance GoogleRequest EditsAPKsAddexternallyhosted'
         requestClient EditsAPKsAddexternallyhosted'{..}
           = go _eapkaPackageName _eapkaEditId (Just AltJSON)
               _eapkaPayload
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy EditsAPKsAddexternallyhostedResource)

@@ -103,7 +103,7 @@ instance GoogleRequest NotificationsPatch' where
         requestClient NotificationsPatch'{..}
           = go _npCustomer _npNotificationId (Just AltJSON)
               _npPayload
-              directory
+              directoryService
           where go
                   = buildClient
                       (Proxy :: Proxy NotificationsPatchResource)

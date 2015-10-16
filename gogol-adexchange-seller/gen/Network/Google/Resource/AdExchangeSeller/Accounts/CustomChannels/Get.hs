@@ -107,7 +107,7 @@ instance GoogleRequest AccountsCustomChannelsGet'
           = go _accgAccountId _accgAdClientId
               _accgCustomChannelId
               (Just AltJSON)
-              adExchangeSeller
+              adExchangeSellerService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsCustomChannelsGetResource)

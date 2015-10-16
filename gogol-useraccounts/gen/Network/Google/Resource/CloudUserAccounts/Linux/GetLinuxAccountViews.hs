@@ -176,7 +176,7 @@ instance GoogleRequest LinuxGetLinuxAccountViews'
               _lglavPageToken
               (Just _lglavMaxResults)
               (Just AltJSON)
-              userAccounts
+              userAccountsService
           where go
                   = buildClient
                       (Proxy :: Proxy LinuxGetLinuxAccountViewsResource)

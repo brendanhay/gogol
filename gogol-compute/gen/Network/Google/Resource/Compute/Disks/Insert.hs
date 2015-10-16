@@ -114,7 +114,7 @@ instance GoogleRequest DisksInsert' where
         requestClient DisksInsert'{..}
           = go _diProject _diZone _diSourceImage (Just AltJSON)
               _diPayload
-              compute
+              computeService
           where go
                   = buildClient (Proxy :: Proxy DisksInsertResource)
                       mempty

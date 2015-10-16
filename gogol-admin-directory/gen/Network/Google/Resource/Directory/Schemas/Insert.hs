@@ -88,7 +88,7 @@ instance GoogleRequest SchemasInsert' where
         type Rs SchemasInsert' = Schema
         requestClient SchemasInsert'{..}
           = go _siCustomerId (Just AltJSON) _siPayload
-              directory
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy SchemasInsertResource)
                       mempty

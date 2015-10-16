@@ -87,7 +87,7 @@ instance GoogleRequest CirclesUpdate' where
         type Rs CirclesUpdate' = Circle
         requestClient CirclesUpdate'{..}
           = go _cuCircleId (Just AltJSON) _cuPayload
-              plusDomains
+              plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy CirclesUpdateResource)
                       mempty

@@ -104,7 +104,7 @@ instance GoogleRequest InstanceGroupManagersGet'
         requestClient InstanceGroupManagersGet'{..}
           = go _igmgProject _igmgZone _igmgInstanceGroupManager
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceGroupManagersGetResource)

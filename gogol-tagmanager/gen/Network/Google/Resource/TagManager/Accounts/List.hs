@@ -60,7 +60,7 @@ accountsList' = AccountsList'
 instance GoogleRequest AccountsList' where
         type Rs AccountsList' = ListAccountsResponse
         requestClient AccountsList'{}
-          = go (Just AltJSON) tagManager
+          = go (Just AltJSON) tagManagerService
           where go
                   = buildClient (Proxy :: Proxy AccountsListResource)
                       mempty

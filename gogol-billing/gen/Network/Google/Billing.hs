@@ -20,7 +20,7 @@
 module Network.Google.Billing
     (
     -- * Service Configuration
-      billing
+      billingService
 
     -- * API Declaration
     , BillingAPI

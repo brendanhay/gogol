@@ -75,7 +75,7 @@ acgAdClientId
 instance GoogleRequest AdClientsGet' where
         type Rs AdClientsGet' = AdClient
         requestClient AdClientsGet'{..}
-          = go _acgAdClientId (Just AltJSON) adSenseHost
+          = go _acgAdClientId (Just AltJSON) adSenseHostService
           where go
                   = buildClient (Proxy :: Proxy AdClientsGetResource)
                       mempty

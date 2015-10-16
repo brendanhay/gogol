@@ -169,7 +169,7 @@ instance GoogleRequest BeaconsDeactivate' where
               _beaBearerToken
               _beaCallback
               (Just AltJSON)
-              proximityBeacon
+              proximityBeaconService
           where go
                   = buildClient
                       (Proxy :: Proxy BeaconsDeactivateResource)

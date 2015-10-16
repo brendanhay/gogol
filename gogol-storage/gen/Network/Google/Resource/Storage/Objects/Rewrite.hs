@@ -344,7 +344,7 @@ instance GoogleRequest ObjectsRewrite' where
               _orRewriteToken
               (Just AltJSON)
               _orPayload
-              storage
+              storageService
           where go
                   = buildClient (Proxy :: Proxy ObjectsRewriteResource)
                       mempty

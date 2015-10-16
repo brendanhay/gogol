@@ -112,7 +112,7 @@ instance GoogleRequest DisksCreateSnapshot' where
         requestClient DisksCreateSnapshot'{..}
           = go _dcsProject _dcsZone _dcsDisk (Just AltJSON)
               _dcsPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy DisksCreateSnapshotResource)

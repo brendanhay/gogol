@@ -98,7 +98,7 @@ instance GoogleRequest VideosReportAbuse' where
         requestClient VideosReportAbuse'{..}
           = go _vraOnBehalfOfContentOwner (Just AltJSON)
               _vraPayload
-              youTube
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy VideosReportAbuseResource)

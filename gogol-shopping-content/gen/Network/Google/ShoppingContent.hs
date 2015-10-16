@@ -20,7 +20,7 @@
 module Network.Google.ShoppingContent
     (
     -- * Service Configuration
-      shoppingContent
+      shoppingContentService
 
     -- * API Declaration
     , ShoppingContentAPI

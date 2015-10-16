@@ -108,7 +108,7 @@ instance GoogleRequest BucketAccessControlsPatch'
         requestClient BucketAccessControlsPatch'{..}
           = go _bacpBucket _bacpEntity (Just AltJSON)
               _bacpPayload
-              storage
+              storageService
           where go
                   = buildClient
                       (Proxy :: Proxy BucketAccessControlsPatchResource)

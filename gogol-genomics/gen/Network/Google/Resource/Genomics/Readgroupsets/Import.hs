@@ -179,7 +179,7 @@ instance GoogleRequest ReadgroupsetsImport' where
               _riCallback
               (Just AltJSON)
               _riPayload
-              genomics
+              genomicsService
           where go
                   = buildClient
                       (Proxy :: Proxy ReadgroupsetsImportResource)

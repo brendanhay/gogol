@@ -87,7 +87,8 @@ gogOperation
 instance GoogleRequest GlobalOperationsGet' where
         type Rs GlobalOperationsGet' = Operation
         requestClient GlobalOperationsGet'{..}
-          = go _gogProject _gogOperation (Just AltJSON) compute
+          = go _gogProject _gogOperation (Just AltJSON)
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy GlobalOperationsGetResource)

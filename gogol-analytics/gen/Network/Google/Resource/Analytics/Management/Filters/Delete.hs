@@ -89,7 +89,7 @@ instance GoogleRequest ManagementFiltersDelete' where
         type Rs ManagementFiltersDelete' = Filter
         requestClient ManagementFiltersDelete'{..}
           = go _mfdAccountId _mfdFilterId (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementFiltersDeleteResource)

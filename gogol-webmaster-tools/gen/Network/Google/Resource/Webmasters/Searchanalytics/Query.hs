@@ -102,7 +102,7 @@ instance GoogleRequest SearchanalyticsQuery' where
              SearchAnalyticsQueryResponse
         requestClient SearchanalyticsQuery'{..}
           = go _sqSiteURL (Just AltJSON) _sqPayload
-              webmasterTools
+              webmasterToolsService
           where go
                   = buildClient
                       (Proxy :: Proxy SearchanalyticsQueryResource)

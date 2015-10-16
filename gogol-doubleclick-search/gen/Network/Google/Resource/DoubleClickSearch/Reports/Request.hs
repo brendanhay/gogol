@@ -74,7 +74,8 @@ rrPayload
 instance GoogleRequest ReportsRequest' where
         type Rs ReportsRequest' = Report
         requestClient ReportsRequest'{..}
-          = go (Just AltJSON) _rrPayload doubleClickSearch
+          = go (Just AltJSON) _rrPayload
+              doubleClickSearchService
           where go
                   = buildClient (Proxy :: Proxy ReportsRequestResource)
                       mempty

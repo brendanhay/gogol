@@ -145,7 +145,7 @@ instance GoogleRequest CaptionsList' where
               _cllOnBehalfOfContentOwner
               _cllId
               (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient (Proxy :: Proxy CaptionsListResource)
                       mempty

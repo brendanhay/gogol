@@ -16,7 +16,7 @@
 module Network.Google.UserAccounts.Types
     (
     -- * Service Configuration
-      userAccounts
+      userAccountsService
 
     -- * OAuth Scopes
     , cloudPlatformReadOnlyScope
@@ -197,8 +197,8 @@ import           Network.Google.UserAccounts.Types.Product
 import           Network.Google.UserAccounts.Types.Sum
 
 -- | Default request referring to version 'beta' of the Cloud User Accounts API. This contains the host and root path used as a starting point for constructing service requests.
-userAccounts :: Service
-userAccounts
+userAccountsService :: Service
+userAccountsService
   = defaultService (ServiceId "clouduseraccounts:beta")
       "www.googleapis.com"
       "clouduseraccounts/beta/projects/"

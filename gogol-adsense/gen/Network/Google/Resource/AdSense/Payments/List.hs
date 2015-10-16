@@ -59,7 +59,7 @@ paymentsList' = PaymentsList'
 instance GoogleRequest PaymentsList' where
         type Rs PaymentsList' = Payments
         requestClient PaymentsList'{}
-          = go (Just AltJSON) adSense
+          = go (Just AltJSON) adSenseService
           where go
                   = buildClient (Proxy :: Proxy PaymentsListResource)
                       mempty

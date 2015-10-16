@@ -301,7 +301,7 @@ instance GoogleRequest EventsList' where
               _elProductCategory
               _elMaxResults
               (Just AltJSON)
-              affiliates
+              affiliatesService
           where go
                   = buildClient (Proxy :: Proxy EventsListResource)
                       mempty

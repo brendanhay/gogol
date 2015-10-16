@@ -87,7 +87,8 @@ umaUserKey
 instance GoogleRequest UsersMakeAdmin' where
         type Rs UsersMakeAdmin' = ()
         requestClient UsersMakeAdmin'{..}
-          = go _umaUserKey (Just AltJSON) _umaPayload directory
+          = go _umaUserKey (Just AltJSON) _umaPayload
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy UsersMakeAdminResource)
                       mempty

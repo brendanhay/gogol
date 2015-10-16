@@ -189,7 +189,7 @@ instance GoogleRequest VariantsetsPatch' where
               _vpCallback
               (Just AltJSON)
               _vpPayload
-              genomics
+              genomicsService
           where go
                   = buildClient
                       (Proxy :: Proxy VariantsetsPatchResource)

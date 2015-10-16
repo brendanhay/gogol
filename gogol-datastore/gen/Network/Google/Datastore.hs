@@ -19,7 +19,7 @@
 module Network.Google.Datastore
     (
     -- * Service Configuration
-      datastore
+      datastoreService
 
     -- * API Declaration
     , DatastoreAPI

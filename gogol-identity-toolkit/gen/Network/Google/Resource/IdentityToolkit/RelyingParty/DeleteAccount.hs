@@ -77,7 +77,7 @@ instance GoogleRequest RelyingPartyDeleteAccount'
         type Rs RelyingPartyDeleteAccount' =
              DeleteAccountResponse
         requestClient RelyingPartyDeleteAccount'{..}
-          = go (Just AltJSON) _rPayload identityToolkit
+          = go (Just AltJSON) _rPayload identityToolkitService
           where go
                   = buildClient
                       (Proxy :: Proxy RelyingPartyDeleteAccountResource)

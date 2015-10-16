@@ -109,7 +109,7 @@ instance GoogleRequest EditsAPKListingsList' where
           = go _eapkllPackageName _eapkllEditId
               _eapkllAPKVersionCode
               (Just AltJSON)
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy EditsAPKListingsListResource)

@@ -86,7 +86,8 @@ rdRevisionId
 instance GoogleRequest RevisionsDelete' where
         type Rs RevisionsDelete' = ()
         requestClient RevisionsDelete'{..}
-          = go _rdFileId _rdRevisionId (Just AltJSON) drive
+          = go _rdFileId _rdRevisionId (Just AltJSON)
+              driveService
           where go
                   = buildClient
                       (Proxy :: Proxy RevisionsDeleteResource)

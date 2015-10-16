@@ -91,7 +91,7 @@ instance GoogleRequest
              ObjectAccessControl
         requestClient DefaultObjectAccessControlsInsert'{..}
           = go _doaciBucket (Just AltJSON) _doaciPayload
-              storage
+              storageService
           where go
                   = buildClient
                       (Proxy ::

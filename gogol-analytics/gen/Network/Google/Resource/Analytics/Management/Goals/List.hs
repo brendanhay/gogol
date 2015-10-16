@@ -137,7 +137,7 @@ instance GoogleRequest ManagementGoalsList' where
               _mglStartIndex
               _mglMaxResults
               (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementGoalsListResource)

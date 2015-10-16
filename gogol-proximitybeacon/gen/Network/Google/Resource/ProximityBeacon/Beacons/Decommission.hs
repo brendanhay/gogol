@@ -165,7 +165,7 @@ instance GoogleRequest BeaconsDecommission' where
               _bdBearerToken
               _bdCallback
               (Just AltJSON)
-              proximityBeacon
+              proximityBeaconService
           where go
                   = buildClient
                       (Proxy :: Proxy BeaconsDecommissionResource)

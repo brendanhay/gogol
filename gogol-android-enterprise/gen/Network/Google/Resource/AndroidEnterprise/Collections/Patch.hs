@@ -104,7 +104,7 @@ instance GoogleRequest CollectionsPatch' where
         requestClient CollectionsPatch'{..}
           = go _colEnterpriseId _colCollectionId (Just AltJSON)
               _colPayload
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy :: Proxy CollectionsPatchResource)

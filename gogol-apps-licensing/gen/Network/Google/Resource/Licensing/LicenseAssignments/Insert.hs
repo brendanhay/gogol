@@ -102,7 +102,7 @@ instance GoogleRequest LicenseAssignmentsInsert'
         requestClient LicenseAssignmentsInsert'{..}
           = go _laiProductId _laiSKUId (Just AltJSON)
               _laiPayload
-              appsLicensing
+              appsLicensingService
           where go
                   = buildClient
                       (Proxy :: Proxy LicenseAssignmentsInsertResource)

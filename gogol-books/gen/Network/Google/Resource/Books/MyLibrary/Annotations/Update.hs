@@ -102,7 +102,7 @@ instance GoogleRequest MyLibraryAnnotationsUpdate'
         requestClient MyLibraryAnnotationsUpdate'{..}
           = go _mlauAnnotationId _mlauSource (Just AltJSON)
               _mlauPayload
-              books
+              booksService
           where go
                   = buildClient
                       (Proxy :: Proxy MyLibraryAnnotationsUpdateResource)

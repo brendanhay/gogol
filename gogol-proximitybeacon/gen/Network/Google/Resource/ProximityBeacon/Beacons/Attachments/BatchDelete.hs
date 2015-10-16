@@ -191,7 +191,7 @@ instance GoogleRequest BeaconsAttachmentsBatchDelete'
               _babdNamespacedType
               _babdCallback
               (Just AltJSON)
-              proximityBeacon
+              proximityBeaconService
           where go
                   = buildClient
                       (Proxy ::

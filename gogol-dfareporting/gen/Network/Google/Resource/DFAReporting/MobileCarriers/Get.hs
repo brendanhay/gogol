@@ -86,7 +86,8 @@ mcgId = lens _mcgId (\ s a -> s{_mcgId = a})
 instance GoogleRequest MobileCarriersGet' where
         type Rs MobileCarriersGet' = MobileCarrier
         requestClient MobileCarriersGet'{..}
-          = go _mcgProFileId _mcgId (Just AltJSON) dFAReporting
+          = go _mcgProFileId _mcgId (Just AltJSON)
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy MobileCarriersGetResource)

@@ -89,7 +89,7 @@ instance GoogleRequest InstanceTemplatesDelete' where
         type Rs InstanceTemplatesDelete' = Operation
         requestClient InstanceTemplatesDelete'{..}
           = go _itdProject _itdInstanceTemplate (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceTemplatesDeleteResource)

@@ -88,7 +88,8 @@ tgUserKey
 instance GoogleRequest TokensGet' where
         type Rs TokensGet' = Token
         requestClient TokensGet'{..}
-          = go _tgUserKey _tgClientId (Just AltJSON) directory
+          = go _tgUserKey _tgClientId (Just AltJSON)
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy TokensGetResource)
                       mempty

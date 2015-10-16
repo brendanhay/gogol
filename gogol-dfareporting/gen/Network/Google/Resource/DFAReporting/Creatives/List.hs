@@ -293,7 +293,7 @@ instance GoogleRequest CreativesList' where
               _clArchived
               _clMaxResults
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy CreativesListResource)
                       mempty

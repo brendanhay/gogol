@@ -16,7 +16,7 @@
 module Network.Google.TaskQueue.Types
     (
     -- * Service Configuration
-      taskQueue
+      taskQueueService
 
     -- * OAuth Scopes
     , taskqueueConsumerScope
@@ -76,8 +76,8 @@ import           Network.Google.TaskQueue.Types.Product
 import           Network.Google.TaskQueue.Types.Sum
 
 -- | Default request referring to version 'v1beta2' of the TaskQueue API. This contains the host and root path used as a starting point for constructing service requests.
-taskQueue :: Service
-taskQueue
+taskQueueService :: Service
+taskQueueService
   = defaultService (ServiceId "taskqueue:v1beta2")
       "www.googleapis.com"
       "taskqueue/v1beta2/projects/"

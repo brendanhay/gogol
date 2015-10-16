@@ -78,7 +78,8 @@ instance GoogleRequest RelyingPartyVerifyPassword'
         type Rs RelyingPartyVerifyPassword' =
              VerifyPasswordResponse
         requestClient RelyingPartyVerifyPassword'{..}
-          = go (Just AltJSON) _rpvpPayload identityToolkit
+          = go (Just AltJSON) _rpvpPayload
+              identityToolkitService
           where go
                   = buildClient
                       (Proxy :: Proxy RelyingPartyVerifyPasswordResource)

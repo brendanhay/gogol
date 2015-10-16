@@ -141,7 +141,7 @@ instance GoogleRequest TargetVPNGatewaysList' where
               _tvglPageToken
               (Just _tvglMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy TargetVPNGatewaysListResource)

@@ -16,7 +16,7 @@
 module Network.Google.Gmail.Types
     (
     -- * Service Configuration
-      gmail
+      gmailService
 
     -- * OAuth Scopes
     , gmailAllScope
@@ -221,8 +221,8 @@ import           Network.Google.Gmail.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Gmail API. This contains the host and root path used as a starting point for constructing service requests.
-gmail :: Service
-gmail
+gmailService :: Service
+gmailService
   = defaultService (ServiceId "gmail:v1")
       "www.googleapis.com"
       "gmail/v1/users/"

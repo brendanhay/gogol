@@ -85,7 +85,8 @@ tmdId = lens _tmdId (\ s a -> s{_tmdId = a})
 instance GoogleRequest TrainedModelsDelete' where
         type Rs TrainedModelsDelete' = ()
         requestClient TrainedModelsDelete'{..}
-          = go _tmdProject _tmdId (Just AltJSON) prediction
+          = go _tmdProject _tmdId (Just AltJSON)
+              predictionService
           where go
                   = buildClient
                       (Proxy :: Proxy TrainedModelsDeleteResource)

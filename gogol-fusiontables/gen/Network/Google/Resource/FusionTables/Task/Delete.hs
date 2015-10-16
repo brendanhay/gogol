@@ -87,7 +87,8 @@ tTableId = lens _tTableId (\ s a -> s{_tTableId = a})
 instance GoogleRequest TaskDelete' where
         type Rs TaskDelete' = ()
         requestClient TaskDelete'{..}
-          = go _tTableId _tTaskId (Just AltJSON) fusionTables
+          = go _tTableId _tTaskId (Just AltJSON)
+              fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TaskDeleteResource)
                       mempty

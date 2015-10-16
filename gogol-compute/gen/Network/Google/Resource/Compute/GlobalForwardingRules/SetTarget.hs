@@ -106,7 +106,7 @@ instance GoogleRequest
           = go _gfrstProject _gfrstForwardingRule
               (Just AltJSON)
               _gfrstPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy ::

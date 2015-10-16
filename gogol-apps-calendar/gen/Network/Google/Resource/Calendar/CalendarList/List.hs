@@ -157,7 +157,7 @@ instance GoogleRequest CalendarListList' where
               _cllPageToken
               _cllMaxResults
               (Just AltJSON)
-              appsCalendar
+              appsCalendarService
           where go
                   = buildClient
                       (Proxy :: Proxy CalendarListListResource)

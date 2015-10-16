@@ -85,7 +85,8 @@ mpId = lens _mpId (\ s a -> s{_mpId = a})
 instance GoogleRequest MapsPatch' where
         type Rs MapsPatch' = ()
         requestClient MapsPatch'{..}
-          = go _mpId (Just AltJSON) _mpPayload mapsEngine
+          = go _mpId (Just AltJSON) _mpPayload
+              mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy MapsPatchResource)
                       mempty

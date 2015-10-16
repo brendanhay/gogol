@@ -101,7 +101,7 @@ instance GoogleRequest RegionOperationsGet' where
         requestClient RegionOperationsGet'{..}
           = go _rogProject _rogRegion _rogOperation
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy RegionOperationsGetResource)

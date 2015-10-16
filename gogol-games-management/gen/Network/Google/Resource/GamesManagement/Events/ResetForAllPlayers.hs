@@ -80,7 +80,8 @@ instance GoogleRequest EventsResetForAllPlayers'
          where
         type Rs EventsResetForAllPlayers' = ()
         requestClient EventsResetForAllPlayers'{..}
-          = go _erfapEventId (Just AltJSON) gamesManagement
+          = go _erfapEventId (Just AltJSON)
+              gamesManagementService
           where go
                   = buildClient
                       (Proxy :: Proxy EventsResetForAllPlayersResource)

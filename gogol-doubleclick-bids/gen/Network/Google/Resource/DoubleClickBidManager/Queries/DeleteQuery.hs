@@ -74,7 +74,8 @@ qdqQueryId
 instance GoogleRequest QueriesDeleteQuery' where
         type Rs QueriesDeleteQuery' = ()
         requestClient QueriesDeleteQuery'{..}
-          = go _qdqQueryId (Just AltJSON) doubleClickBids
+          = go _qdqQueryId (Just AltJSON)
+              doubleClickBidsService
           where go
                   = buildClient
                       (Proxy :: Proxy QueriesDeleteQueryResource)

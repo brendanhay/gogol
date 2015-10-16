@@ -19,7 +19,7 @@
 module Network.Google.Fonts
     (
     -- * Service Configuration
-      fonts
+      fontsService
 
     -- * API Declaration
     , FontsAPI

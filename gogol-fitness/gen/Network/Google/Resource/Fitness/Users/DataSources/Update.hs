@@ -110,7 +110,7 @@ instance GoogleRequest UsersDataSourcesUpdate' where
         requestClient UsersDataSourcesUpdate'{..}
           = go _udsuUserId _udsuDataSourceId (Just AltJSON)
               _udsuPayload
-              fitness
+              fitnessService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersDataSourcesUpdateResource)

@@ -153,7 +153,7 @@ instance GoogleRequest MobileDevicesList' where
               _mdlPageToken
               _mdlMaxResults
               (Just AltJSON)
-              directory
+              directoryService
           where go
                   = buildClient
                       (Proxy :: Proxy MobileDevicesListResource)

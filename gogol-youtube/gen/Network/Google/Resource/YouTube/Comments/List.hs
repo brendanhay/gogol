@@ -147,7 +147,7 @@ instance GoogleRequest CommentsList' where
               (Just _comMaxResults)
               _comParentId
               (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient (Proxy :: Proxy CommentsListResource)
                       mempty

@@ -87,7 +87,8 @@ adUserKey
 instance GoogleRequest AspsDelete' where
         type Rs AspsDelete' = ()
         requestClient AspsDelete'{..}
-          = go _adUserKey _adCodeId (Just AltJSON) directory
+          = go _adUserKey _adCodeId (Just AltJSON)
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy AspsDeleteResource)
                       mempty

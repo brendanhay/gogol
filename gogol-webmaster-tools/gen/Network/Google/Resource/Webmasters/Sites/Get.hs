@@ -74,7 +74,7 @@ sSiteURL = lens _sSiteURL (\ s a -> s{_sSiteURL = a})
 instance GoogleRequest SitesGet' where
         type Rs SitesGet' = WmxSite
         requestClient SitesGet'{..}
-          = go _sSiteURL (Just AltJSON) webmasterTools
+          = go _sSiteURL (Just AltJSON) webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitesGetResource)
                       mempty

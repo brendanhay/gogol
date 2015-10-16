@@ -114,7 +114,7 @@ instance GoogleRequest URLCrawlErrorsSamplesList'
           = go _uceslSiteURL (Just _uceslCategory)
               (Just _uceslPlatform)
               (Just AltJSON)
-              webmasterTools
+              webmasterToolsService
           where go
                   = buildClient
                       (Proxy :: Proxy URLCrawlErrorsSamplesListResource)

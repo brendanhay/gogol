@@ -109,7 +109,7 @@ instance GoogleRequest EditsAPKListingsDeleteall'
           = go _eapkldaPackageName _eapkldaEditId
               _eapkldaAPKVersionCode
               (Just AltJSON)
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy EditsAPKListingsDeleteallResource)

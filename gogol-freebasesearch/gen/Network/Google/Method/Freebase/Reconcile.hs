@@ -136,6 +136,6 @@ instance GoogleRequest Reconcile' where
               (Just _rLimit)
               (_rProp ^. _Default)
               (Just AltJSON)
-              freebaseSearch
+              freebaseSearchService
           where go
                   = buildClient (Proxy :: Proxy ReconcileMethod) mempty

@@ -118,7 +118,7 @@ instance GoogleRequest MyConfigReleaseDownloadAccess'
               _mcrdaLocale
               _mcrdaSource
               (Just AltJSON)
-              books
+              booksService
           where go
                   = buildClient
                       (Proxy ::

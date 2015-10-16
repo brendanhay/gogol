@@ -87,7 +87,8 @@ uaiUserKey
 instance GoogleRequest UsersAliasesInsert' where
         type Rs UsersAliasesInsert' = Alias
         requestClient UsersAliasesInsert'{..}
-          = go _uaiUserKey (Just AltJSON) _uaiPayload directory
+          = go _uaiUserKey (Just AltJSON) _uaiPayload
+              directoryService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersAliasesInsertResource)

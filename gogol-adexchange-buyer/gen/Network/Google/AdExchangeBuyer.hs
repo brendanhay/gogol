@@ -21,7 +21,7 @@
 module Network.Google.AdExchangeBuyer
     (
     -- * Service Configuration
-      adExchangeBuyer
+      adExchangeBuyerService
 
     -- * API Declaration
     , AdExchangeBuyerAPI

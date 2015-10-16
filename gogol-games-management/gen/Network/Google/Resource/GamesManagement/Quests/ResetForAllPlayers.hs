@@ -80,7 +80,8 @@ instance GoogleRequest QuestsResetForAllPlayers'
          where
         type Rs QuestsResetForAllPlayers' = ()
         requestClient QuestsResetForAllPlayers'{..}
-          = go _qrfapQuestId (Just AltJSON) gamesManagement
+          = go _qrfapQuestId (Just AltJSON)
+              gamesManagementService
           where go
                   = buildClient
                       (Proxy :: Proxy QuestsResetForAllPlayersResource)

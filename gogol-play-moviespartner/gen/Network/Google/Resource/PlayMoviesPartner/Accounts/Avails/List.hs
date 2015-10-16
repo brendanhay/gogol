@@ -275,7 +275,7 @@ instance GoogleRequest AccountsAvailsList' where
               _aalPageSize
               _aalCallback
               (Just AltJSON)
-              playMoviesPartner
+              playMoviesPartnerService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsAvailsListResource)

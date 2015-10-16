@@ -123,7 +123,7 @@ instance GoogleRequest OperationsList' where
           = go _olProject _olFilter _olPageToken
               (Just _olMaxResults)
               (Just AltJSON)
-              deploymentManager
+              deploymentManagerService
           where go
                   = buildClient (Proxy :: Proxy OperationsListResource)
                       mempty

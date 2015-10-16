@@ -90,7 +90,8 @@ jqProjectId
 instance GoogleRequest JobsQuery' where
         type Rs JobsQuery' = QueryResponse
         requestClient JobsQuery'{..}
-          = go _jqProjectId (Just AltJSON) _jqPayload bigQuery
+          = go _jqProjectId (Just AltJSON) _jqPayload
+              bigQueryService
           where go
                   = buildClient (Proxy :: Proxy JobsQueryResource)
                       mempty

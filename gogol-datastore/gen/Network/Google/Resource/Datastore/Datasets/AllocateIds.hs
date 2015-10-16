@@ -90,7 +90,7 @@ instance GoogleRequest DatasetsAllocateIds' where
         type Rs DatasetsAllocateIds' = AllocateIdsResponse
         requestClient DatasetsAllocateIds'{..}
           = go _daiDatasetId (Just AltJSON) _daiPayload
-              datastore
+              datastoreService
           where go
                   = buildClient
                       (Proxy :: Proxy DatasetsAllocateIdsResource)

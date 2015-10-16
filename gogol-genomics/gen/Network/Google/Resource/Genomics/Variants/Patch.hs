@@ -191,7 +191,7 @@ instance GoogleRequest VariantsPatch' where
               _vppCallback
               (Just AltJSON)
               _vppPayload
-              genomics
+              genomicsService
           where go
                   = buildClient (Proxy :: Proxy VariantsPatchResource)
                       mempty

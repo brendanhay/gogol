@@ -118,7 +118,7 @@ instance GoogleRequest ManagementGoalsGet' where
           = go _mggAccountId _mggWebPropertyId _mggProFileId
               _mggGoalId
               (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementGoalsGetResource)

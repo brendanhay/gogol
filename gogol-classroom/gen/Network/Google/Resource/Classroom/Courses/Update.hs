@@ -181,7 +181,7 @@ instance GoogleRequest CoursesUpdate' where
               _cuCallback
               (Just AltJSON)
               _cuPayload
-              classroom
+              classroomService
           where go
                   = buildClient (Proxy :: Proxy CoursesUpdateResource)
                       mempty

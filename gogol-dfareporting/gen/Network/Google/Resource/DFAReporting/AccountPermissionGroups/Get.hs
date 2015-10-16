@@ -91,7 +91,7 @@ instance GoogleRequest AccountPermissionGroupsGet'
              AccountPermissionGroup
         requestClient AccountPermissionGroupsGet'{..}
           = go _apggProFileId _apggId (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountPermissionGroupsGetResource)

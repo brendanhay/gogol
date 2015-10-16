@@ -109,7 +109,7 @@ instance GoogleRequest AchievementsIncrement' where
           = go _aiAchievementId (Just _aiStepsToIncrement)
               _aiRequestId
               (Just AltJSON)
-              games
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy AchievementsIncrementResource)

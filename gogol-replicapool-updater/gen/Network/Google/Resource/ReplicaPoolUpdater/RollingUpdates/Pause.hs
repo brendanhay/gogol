@@ -104,7 +104,7 @@ instance GoogleRequest RollingUpdatesPause' where
         requestClient RollingUpdatesPause'{..}
           = go _rupProject _rupZone _rupRollingUpdate
               (Just AltJSON)
-              replicaPoolUpdater
+              replicaPoolUpdaterService
           where go
                   = buildClient
                       (Proxy :: Proxy RollingUpdatesPauseResource)

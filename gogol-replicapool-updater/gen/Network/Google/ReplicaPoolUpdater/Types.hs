@@ -16,7 +16,7 @@
 module Network.Google.ReplicaPoolUpdater.Types
     (
     -- * Service Configuration
-      replicaPoolUpdater
+      replicaPoolUpdaterService
 
     -- * OAuth Scopes
     , cloudPlatformReadOnlyScope
@@ -166,8 +166,8 @@ import           Network.Google.ReplicaPoolUpdater.Types.Product
 import           Network.Google.ReplicaPoolUpdater.Types.Sum
 
 -- | Default request referring to version 'v1beta1' of the Google Compute Engine Instance Group Updater API. This contains the host and root path used as a starting point for constructing service requests.
-replicaPoolUpdater :: Service
-replicaPoolUpdater
+replicaPoolUpdaterService :: Service
+replicaPoolUpdaterService
   = defaultService
       (ServiceId "replicapoolupdater:v1beta1")
       "www.googleapis.com"

@@ -90,7 +90,7 @@ instance GoogleRequest NegotiationRoundsInsert' where
              NegotiationRoundDTO
         requestClient NegotiationRoundsInsert'{..}
           = go _nriNegotiationId (Just AltJSON) _nriPayload
-              adExchangeBuyer
+              adExchangeBuyerService
           where go
                   = buildClient
                       (Proxy :: Proxy NegotiationRoundsInsertResource)

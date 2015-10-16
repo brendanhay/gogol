@@ -176,7 +176,7 @@ instance GoogleRequest ZoneViewsListResources' where
               _zvlrPageToken
               (Just _zvlrMaxResults)
               (Just AltJSON)
-              resourceViews
+              resourceViewsService
           where go
                   = buildClient
                       (Proxy :: Proxy ZoneViewsListResourcesResource)

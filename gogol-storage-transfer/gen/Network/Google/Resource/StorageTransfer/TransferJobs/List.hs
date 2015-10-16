@@ -192,7 +192,7 @@ instance GoogleRequest TransferJobsList' where
               _tjlPageSize
               _tjlCallback
               (Just AltJSON)
-              storageTransfer
+              storageTransferService
           where go
                   = buildClient
                       (Proxy :: Proxy TransferJobsListResource)

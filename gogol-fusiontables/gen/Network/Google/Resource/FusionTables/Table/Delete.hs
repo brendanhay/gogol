@@ -74,7 +74,7 @@ tdTableId
 instance GoogleRequest TableDelete' where
         type Rs TableDelete' = ()
         requestClient TableDelete'{..}
-          = go _tdTableId (Just AltJSON) fusionTables
+          = go _tdTableId (Just AltJSON) fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TableDeleteResource)
                       mempty

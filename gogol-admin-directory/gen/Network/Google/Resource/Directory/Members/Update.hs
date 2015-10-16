@@ -103,7 +103,7 @@ instance GoogleRequest MembersUpdate' where
         requestClient MembersUpdate'{..}
           = go _muGroupKey _muMemberKey (Just AltJSON)
               _muPayload
-              directory
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy MembersUpdateResource)
                       mempty

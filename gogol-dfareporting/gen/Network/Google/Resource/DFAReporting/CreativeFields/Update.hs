@@ -89,7 +89,7 @@ instance GoogleRequest CreativeFieldsUpdate' where
         type Rs CreativeFieldsUpdate' = CreativeField
         requestClient CreativeFieldsUpdate'{..}
           = go _cfuProFileId (Just AltJSON) _cfuPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy CreativeFieldsUpdateResource)

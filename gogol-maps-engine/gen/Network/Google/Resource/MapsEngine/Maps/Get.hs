@@ -87,6 +87,7 @@ mgId = lens _mgId (\ s a -> s{_mgId = a})
 instance GoogleRequest MapsGet' where
         type Rs MapsGet' = Map
         requestClient MapsGet'{..}
-          = go _mgId _mgVersion (Just AltJSON) mapsEngine
+          = go _mgId _mgVersion (Just AltJSON)
+              mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy MapsGetResource) mempty

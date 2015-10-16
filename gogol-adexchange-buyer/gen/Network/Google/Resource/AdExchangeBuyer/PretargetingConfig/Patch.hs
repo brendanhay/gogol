@@ -103,7 +103,7 @@ instance GoogleRequest PretargetingConfigPatch' where
         requestClient PretargetingConfigPatch'{..}
           = go _pcpAccountId _pcpConfigId (Just AltJSON)
               _pcpPayload
-              adExchangeBuyer
+              adExchangeBuyerService
           where go
                   = buildClient
                       (Proxy :: Proxy PretargetingConfigPatchResource)

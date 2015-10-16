@@ -104,7 +104,7 @@ instance GoogleRequest OrgUnitsPatch' where
         requestClient OrgUnitsPatch'{..}
           = go _oupCustomerId _oupOrgUnitPath (Just AltJSON)
               _oupPayload
-              directory
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy OrgUnitsPatchResource)
                       mempty

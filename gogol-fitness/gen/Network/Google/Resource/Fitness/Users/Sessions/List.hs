@@ -131,7 +131,7 @@ instance GoogleRequest UsersSessionsList' where
               _uslPageToken
               _uslIncludeDeleted
               (Just AltJSON)
-              fitness
+              fitnessService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersSessionsListResource)

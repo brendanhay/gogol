@@ -123,7 +123,7 @@ instance GoogleRequest PlacementsGeneratetags' where
               _pCampaignId
               (_pPlacementIds ^. _Default)
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy PlacementsGeneratetagsResource)

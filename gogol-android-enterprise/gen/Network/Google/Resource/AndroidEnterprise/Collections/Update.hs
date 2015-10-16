@@ -103,7 +103,7 @@ instance GoogleRequest CollectionsUpdate' where
         requestClient CollectionsUpdate'{..}
           = go _cuEnterpriseId _cuCollectionId (Just AltJSON)
               _cuPayload
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy :: Proxy CollectionsUpdateResource)

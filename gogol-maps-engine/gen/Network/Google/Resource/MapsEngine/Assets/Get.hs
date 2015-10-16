@@ -73,7 +73,7 @@ agId = lens _agId (\ s a -> s{_agId = a})
 instance GoogleRequest AssetsGet' where
         type Rs AssetsGet' = Asset
         requestClient AssetsGet'{..}
-          = go _agId (Just AltJSON) mapsEngine
+          = go _agId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy AssetsGetResource)
                       mempty

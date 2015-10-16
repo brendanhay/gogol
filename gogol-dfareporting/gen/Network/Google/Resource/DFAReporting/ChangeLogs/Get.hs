@@ -86,7 +86,8 @@ clgId = lens _clgId (\ s a -> s{_clgId = a})
 instance GoogleRequest ChangeLogsGet' where
         type Rs ChangeLogsGet' = ChangeLog
         requestClient ChangeLogsGet'{..}
-          = go _clgProFileId _clgId (Just AltJSON) dFAReporting
+          = go _clgProFileId _clgId (Just AltJSON)
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy ChangeLogsGetResource)
                       mempty

@@ -128,7 +128,7 @@ instance GoogleRequest RollingUpdatesList' where
           = go _rulProject _rulZone _rulFilter _rulPageToken
               (Just _rulMaxResults)
               (Just AltJSON)
-              replicaPoolUpdater
+              replicaPoolUpdaterService
           where go
                   = buildClient
                       (Proxy :: Proxy RollingUpdatesListResource)

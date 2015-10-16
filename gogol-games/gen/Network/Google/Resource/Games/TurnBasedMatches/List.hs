@@ -135,7 +135,7 @@ instance GoogleRequest TurnBasedMatchesList' where
               _tbmlPageToken
               _tbmlMaxResults
               (Just AltJSON)
-              games
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy TurnBasedMatchesListResource)

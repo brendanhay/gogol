@@ -117,7 +117,7 @@ instance GoogleRequest CustomerUsageReportsGet' where
           = go _curgDate _curgCustomerId _curgParameters
               _curgPageToken
               (Just AltJSON)
-              reports
+              reportsService
           where go
                   = buildClient
                       (Proxy :: Proxy CustomerUsageReportsGetResource)

@@ -88,7 +88,7 @@ utdId = lens _utdId (\ s a -> s{_utdId = a})
 instance GoogleRequest UsersThreadsDelete' where
         type Rs UsersThreadsDelete' = ()
         requestClient UsersThreadsDelete'{..}
-          = go _utdUserId _utdId (Just AltJSON) gmail
+          = go _utdUserId _utdId (Just AltJSON) gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersThreadsDeleteResource)

@@ -86,7 +86,8 @@ tdTask = lens _tdTask (\ s a -> s{_tdTask = a})
 instance GoogleRequest TasksDelete' where
         type Rs TasksDelete' = ()
         requestClient TasksDelete'{..}
-          = go _tdTaskList _tdTask (Just AltJSON) appsTasks
+          = go _tdTaskList _tdTask (Just AltJSON)
+              appsTasksService
           where go
                   = buildClient (Proxy :: Proxy TasksDeleteResource)
                       mempty

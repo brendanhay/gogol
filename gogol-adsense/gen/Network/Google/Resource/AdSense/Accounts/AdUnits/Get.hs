@@ -106,7 +106,7 @@ instance GoogleRequest AccountsAdUnitsGet' where
         requestClient AccountsAdUnitsGet'{..}
           = go _aaugAccountId _aaugAdClientId _aaugAdUnitId
               (Just AltJSON)
-              adSense
+              adSenseService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsAdUnitsGetResource)

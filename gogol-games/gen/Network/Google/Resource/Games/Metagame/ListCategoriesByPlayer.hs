@@ -139,7 +139,7 @@ instance GoogleRequest
               _mlcbpPageToken
               _mlcbpMaxResults
               (Just AltJSON)
-              games
+              gamesService
           where go
                   = buildClient
                       (Proxy ::

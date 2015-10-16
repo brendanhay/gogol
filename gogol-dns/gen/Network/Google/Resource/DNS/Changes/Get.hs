@@ -104,7 +104,7 @@ instance GoogleRequest ChangesGet' where
         requestClient ChangesGet'{..}
           = go _cgProject _cgManagedZone _cgChangeId
               (Just AltJSON)
-              dNS
+              dNSService
           where go
                   = buildClient (Proxy :: Proxy ChangesGetResource)
                       mempty

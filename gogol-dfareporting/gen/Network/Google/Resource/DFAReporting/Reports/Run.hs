@@ -102,7 +102,7 @@ instance GoogleRequest ReportsRun' where
         requestClient ReportsRun'{..}
           = go _rrProFileId _rrReportId _rrSynchronous
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy ReportsRunResource)
                       mempty

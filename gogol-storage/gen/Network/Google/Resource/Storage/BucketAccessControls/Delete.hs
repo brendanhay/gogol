@@ -92,7 +92,8 @@ instance GoogleRequest BucketAccessControlsDelete'
          where
         type Rs BucketAccessControlsDelete' = ()
         requestClient BucketAccessControlsDelete'{..}
-          = go _bacdBucket _bacdEntity (Just AltJSON) storage
+          = go _bacdBucket _bacdEntity (Just AltJSON)
+              storageService
           where go
                   = buildClient
                       (Proxy :: Proxy BucketAccessControlsDeleteResource)

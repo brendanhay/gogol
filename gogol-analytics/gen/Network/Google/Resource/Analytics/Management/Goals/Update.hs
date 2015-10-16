@@ -131,7 +131,7 @@ instance GoogleRequest ManagementGoalsUpdate' where
               _mguGoalId
               (Just AltJSON)
               _mguPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementGoalsUpdateResource)

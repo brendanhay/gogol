@@ -115,7 +115,7 @@ instance GoogleRequest PermissionsInsert' where
               (Just _piSendNotificationEmails)
               (Just AltJSON)
               _piPayload
-              drive
+              driveService
           where go
                   = buildClient
                       (Proxy :: Proxy PermissionsInsertResource)

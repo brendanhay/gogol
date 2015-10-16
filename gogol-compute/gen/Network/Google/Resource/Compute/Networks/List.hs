@@ -124,7 +124,7 @@ instance GoogleRequest NetworksList' where
           = go _nlProject _nlFilter _nlPageToken
               (Just _nlMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient (Proxy :: Proxy NetworksListResource)
                       mempty

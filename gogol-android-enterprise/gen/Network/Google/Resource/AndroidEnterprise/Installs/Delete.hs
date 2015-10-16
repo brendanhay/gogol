@@ -121,7 +121,7 @@ instance GoogleRequest InstallsDelete' where
           = go _idEnterpriseId _idUserId _idDeviceId
               _idInstallId
               (Just AltJSON)
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient (Proxy :: Proxy InstallsDeleteResource)
                       mempty

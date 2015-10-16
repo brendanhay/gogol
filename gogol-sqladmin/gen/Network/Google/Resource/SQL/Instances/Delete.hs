@@ -87,7 +87,8 @@ idInstance
 instance GoogleRequest InstancesDelete' where
         type Rs InstancesDelete' = Operation
         requestClient InstancesDelete'{..}
-          = go _idProject _idInstance (Just AltJSON) sQLAdmin
+          = go _idProject _idInstance (Just AltJSON)
+              sQLAdminService
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesDeleteResource)

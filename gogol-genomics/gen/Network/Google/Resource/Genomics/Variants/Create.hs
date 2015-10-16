@@ -161,7 +161,7 @@ instance GoogleRequest VariantsCreate' where
               _varCallback
               (Just AltJSON)
               _varPayload
-              genomics
+              genomicsService
           where go
                   = buildClient (Proxy :: Proxy VariantsCreateResource)
                       mempty

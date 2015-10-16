@@ -187,7 +187,7 @@ instance GoogleRequest ProjectsJobsUpdate' where
               _pjuCallback
               (Just AltJSON)
               _pjuPayload
-              dataflow
+              dataflowService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsJobsUpdateResource)

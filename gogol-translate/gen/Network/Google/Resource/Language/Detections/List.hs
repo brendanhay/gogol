@@ -75,7 +75,7 @@ dlQ = lens _dlQ (\ s a -> s{_dlQ = a}) . _Coerce
 instance GoogleRequest DetectionsList' where
         type Rs DetectionsList' = DetectionsListResponse
         requestClient DetectionsList'{..}
-          = go _dlQ (Just AltJSON) translate
+          = go _dlQ (Just AltJSON) translateService
           where go
                   = buildClient (Proxy :: Proxy DetectionsListResource)
                       mempty

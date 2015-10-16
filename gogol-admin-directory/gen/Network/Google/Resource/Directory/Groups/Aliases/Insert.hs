@@ -88,7 +88,7 @@ instance GoogleRequest GroupsAliasesInsert' where
         type Rs GroupsAliasesInsert' = Alias
         requestClient GroupsAliasesInsert'{..}
           = go _gaiGroupKey (Just AltJSON) _gaiPayload
-              directory
+              directoryService
           where go
                   = buildClient
                       (Proxy :: Proxy GroupsAliasesInsertResource)

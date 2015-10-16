@@ -217,7 +217,7 @@ instance GoogleRequest ReferencesBasesList' where
               _rblPageSize
               _rblCallback
               (Just AltJSON)
-              genomics
+              genomicsService
           where go
                   = buildClient
                       (Proxy :: Proxy ReferencesBasesListResource)

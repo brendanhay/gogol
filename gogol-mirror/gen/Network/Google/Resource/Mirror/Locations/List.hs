@@ -60,7 +60,7 @@ locationsList' = LocationsList'
 instance GoogleRequest LocationsList' where
         type Rs LocationsList' = LocationsListResponse
         requestClient LocationsList'{}
-          = go (Just AltJSON) mirror
+          = go (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy LocationsListResource)
                       mempty

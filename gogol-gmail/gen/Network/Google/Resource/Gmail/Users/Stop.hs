@@ -73,7 +73,7 @@ usUserId = lens _usUserId (\ s a -> s{_usUserId = a})
 instance GoogleRequest UsersStop' where
         type Rs UsersStop' = ()
         requestClient UsersStop'{..}
-          = go _usUserId (Just AltJSON) gmail
+          = go _usUserId (Just AltJSON) gmailService
           where go
                   = buildClient (Proxy :: Proxy UsersStopResource)
                       mempty

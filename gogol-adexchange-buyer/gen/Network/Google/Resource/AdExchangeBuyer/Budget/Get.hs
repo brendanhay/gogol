@@ -89,7 +89,7 @@ instance GoogleRequest BudgetGet' where
         type Rs BudgetGet' = Budget
         requestClient BudgetGet'{..}
           = go _bgAccountId _bgBillingId (Just AltJSON)
-              adExchangeBuyer
+              adExchangeBuyerService
           where go
                   = buildClient (Proxy :: Proxy BudgetGetResource)
                       mempty

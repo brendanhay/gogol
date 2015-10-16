@@ -83,7 +83,8 @@ tgId = lens _tgId (\ s a -> s{_tgId = a})
 instance GoogleRequest TablesGet' where
         type Rs TablesGet' = Table
         requestClient TablesGet'{..}
-          = go _tgId _tgVersion (Just AltJSON) mapsEngine
+          = go _tgId _tgVersion (Just AltJSON)
+              mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy TablesGetResource)
                       mempty

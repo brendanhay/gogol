@@ -20,7 +20,7 @@
 module Network.Google.AppEngine
     (
     -- * Service Configuration
-      appEngine
+      appEngineService
 
     -- * API Declaration
     , AppEngineAPI

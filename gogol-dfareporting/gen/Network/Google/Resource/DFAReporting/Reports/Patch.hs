@@ -101,7 +101,7 @@ instance GoogleRequest ReportsPatch' where
         requestClient ReportsPatch'{..}
           = go _rpProFileId _rpReportId (Just AltJSON)
               _rpPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy ReportsPatchResource)
                       mempty

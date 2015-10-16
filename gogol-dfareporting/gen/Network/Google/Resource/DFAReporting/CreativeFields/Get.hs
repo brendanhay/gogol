@@ -86,7 +86,8 @@ cfgId = lens _cfgId (\ s a -> s{_cfgId = a})
 instance GoogleRequest CreativeFieldsGet' where
         type Rs CreativeFieldsGet' = CreativeField
         requestClient CreativeFieldsGet'{..}
-          = go _cfgProFileId _cfgId (Just AltJSON) dFAReporting
+          = go _cfgProFileId _cfgId (Just AltJSON)
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy CreativeFieldsGetResource)

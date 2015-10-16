@@ -77,7 +77,7 @@ instance GoogleRequest AccountPermissionsList' where
         type Rs AccountPermissionsList' =
              AccountPermissionsListResponse
         requestClient AccountPermissionsList'{..}
-          = go _aplProFileId (Just AltJSON) dFAReporting
+          = go _aplProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountPermissionsListResource)

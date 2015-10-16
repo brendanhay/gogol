@@ -74,7 +74,7 @@ ftFileId = lens _ftFileId (\ s a -> s{_ftFileId = a})
 instance GoogleRequest FilesTouch' where
         type Rs FilesTouch' = File
         requestClient FilesTouch'{..}
-          = go _ftFileId (Just AltJSON) drive
+          = go _ftFileId (Just AltJSON) driveService
           where go
                   = buildClient (Proxy :: Proxy FilesTouchResource)
                       mempty

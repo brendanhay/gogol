@@ -59,7 +59,7 @@ colorsGet' = ColorsGet'
 instance GoogleRequest ColorsGet' where
         type Rs ColorsGet' = Colors
         requestClient ColorsGet'{}
-          = go (Just AltJSON) appsCalendar
+          = go (Just AltJSON) appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy ColorsGetResource)
                       mempty

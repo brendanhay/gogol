@@ -117,7 +117,7 @@ instance GoogleRequest SnapshotsList' where
           = go _slPlayerId _slLanguage _slPageToken
               _slMaxResults
               (Just AltJSON)
-              games
+              gamesService
           where go
                   = buildClient (Proxy :: Proxy SnapshotsListResource)
                       mempty

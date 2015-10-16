@@ -20,7 +20,7 @@
 module Network.Google.Reports
     (
     -- * Service Configuration
-      reports
+      reportsService
 
     -- * API Declaration
     , ReportsAPI

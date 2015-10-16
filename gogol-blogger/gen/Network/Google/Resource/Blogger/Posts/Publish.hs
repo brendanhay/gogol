@@ -108,7 +108,7 @@ instance GoogleRequest PostsPublish' where
         requestClient PostsPublish'{..}
           = go _posBlogId _posPostId _posPublishDate
               (Just AltJSON)
-              blogger
+              bloggerService
           where go
                   = buildClient (Proxy :: Proxy PostsPublishResource)
                       mempty

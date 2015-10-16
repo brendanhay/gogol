@@ -89,7 +89,7 @@ instance GoogleRequest UsersList' where
         type Rs UsersList' = UsersListResponse
         requestClient UsersList'{..}
           = go _ulEnterpriseId (Just _ulEmail) (Just AltJSON)
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient (Proxy :: Proxy UsersListResource)
                       mempty

@@ -92,7 +92,8 @@ jcProjectId
 instance GoogleRequest JobsCancel' where
         type Rs JobsCancel' = JobCancelResponse
         requestClient JobsCancel'{..}
-          = go _jcProjectId _jcJobId (Just AltJSON) bigQuery
+          = go _jcProjectId _jcJobId (Just AltJSON)
+              bigQueryService
           where go
                   = buildClient (Proxy :: Proxy JobsCancelResource)
                       mempty

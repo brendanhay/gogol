@@ -88,7 +88,7 @@ instance GoogleRequest SubAccountsInsert' where
         type Rs SubAccountsInsert' = SubAccount
         requestClient SubAccountsInsert'{..}
           = go _saiProFileId (Just AltJSON) _saiPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy SubAccountsInsertResource)

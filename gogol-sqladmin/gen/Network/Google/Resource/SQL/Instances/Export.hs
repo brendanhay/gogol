@@ -104,7 +104,7 @@ instance GoogleRequest InstancesExport' where
         type Rs InstancesExport' = Operation
         requestClient InstancesExport'{..}
           = go _ieProject _ieInstance (Just AltJSON) _iePayload
-              sQLAdmin
+              sQLAdminService
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesExportResource)

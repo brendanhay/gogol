@@ -93,7 +93,7 @@ instance GoogleRequest SitemapsList' where
         type Rs SitemapsList' = SitemapsListResponse
         requestClient SitemapsList'{..}
           = go _slSiteURL _slSitemapIndex (Just AltJSON)
-              webmasterTools
+              webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitemapsListResource)
                       mempty

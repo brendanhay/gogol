@@ -20,7 +20,7 @@
 module Network.Google.PageSpeed
     (
     -- * Service Configuration
-      pageSpeed
+      pageSpeedService
 
     -- * API Declaration
     , PageSpeedAPI

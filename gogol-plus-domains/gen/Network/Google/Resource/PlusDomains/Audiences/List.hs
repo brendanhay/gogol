@@ -103,7 +103,7 @@ instance GoogleRequest AudiencesList' where
         requestClient AudiencesList'{..}
           = go _alUserId _alPageToken (Just _alMaxResults)
               (Just AltJSON)
-              plusDomains
+              plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy AudiencesListResource)
                       mempty

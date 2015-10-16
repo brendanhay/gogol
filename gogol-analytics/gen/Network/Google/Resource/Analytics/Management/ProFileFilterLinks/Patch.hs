@@ -140,7 +140,7 @@ instance GoogleRequest
               _mpfflpLinkId
               (Just AltJSON)
               _mpfflpPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

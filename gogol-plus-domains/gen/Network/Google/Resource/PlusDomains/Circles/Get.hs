@@ -74,7 +74,7 @@ cgCircleId
 instance GoogleRequest CirclesGet' where
         type Rs CirclesGet' = Circle
         requestClient CirclesGet'{..}
-          = go _cgCircleId (Just AltJSON) plusDomains
+          = go _cgCircleId (Just AltJSON) plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy CirclesGetResource)
                       mempty

@@ -105,7 +105,7 @@ instance GoogleRequest MobileDevicesAction' where
         requestClient MobileDevicesAction'{..}
           = go _mdaCustomerId _mdaResourceId (Just AltJSON)
               _mdaPayload
-              directory
+              directoryService
           where go
                   = buildClient
                       (Proxy :: Proxy MobileDevicesActionResource)

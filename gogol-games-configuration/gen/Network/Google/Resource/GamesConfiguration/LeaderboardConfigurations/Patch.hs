@@ -93,7 +93,7 @@ instance GoogleRequest
              LeaderboardConfiguration
         requestClient LeaderboardConfigurationsPatch'{..}
           = go _lcpLeaderboardId (Just AltJSON) _lcpPayload
-              gamesConfiguration
+              gamesConfigurationService
           where go
                   = buildClient
                       (Proxy ::

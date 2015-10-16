@@ -102,7 +102,7 @@ instance GoogleRequest BucketsDelete' where
           = go _bdBucket _bdIfMetagenerationMatch
               _bdIfMetagenerationNotMatch
               (Just AltJSON)
-              storage
+              storageService
           where go
                   = buildClient (Proxy :: Proxy BucketsDeleteResource)
                       mempty

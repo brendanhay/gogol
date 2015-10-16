@@ -121,7 +121,7 @@ instance GoogleRequest MarketplaceOrdersPatch' where
           = go _mopOrderId _mopRevisionNumber _mopUpdateAction
               (Just AltJSON)
               _mopPayload
-              adExchangeBuyer
+              adExchangeBuyerService
           where go
                   = buildClient
                       (Proxy :: Proxy MarketplaceOrdersPatchResource)

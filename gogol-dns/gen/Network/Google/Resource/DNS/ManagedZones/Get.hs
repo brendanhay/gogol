@@ -88,7 +88,8 @@ mzgManagedZone
 instance GoogleRequest ManagedZonesGet' where
         type Rs ManagedZonesGet' = ManagedZone
         requestClient ManagedZonesGet'{..}
-          = go _mzgProject _mzgManagedZone (Just AltJSON) dNS
+          = go _mzgProject _mzgManagedZone (Just AltJSON)
+              dNSService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagedZonesGetResource)

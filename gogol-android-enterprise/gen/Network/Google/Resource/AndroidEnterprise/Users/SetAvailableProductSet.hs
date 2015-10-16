@@ -104,7 +104,7 @@ instance GoogleRequest UsersSetAvailableProductSet'
         requestClient UsersSetAvailableProductSet'{..}
           = go _usapsEnterpriseId _usapsUserId (Just AltJSON)
               _usapsPayload
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersSetAvailableProductSetResource)

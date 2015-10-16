@@ -91,7 +91,7 @@ instance GoogleRequest
              FloodlightConfiguration
         requestClient FloodlightConfigurationsUpdate'{..}
           = go _fcuProFileId (Just AltJSON) _fcuPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy ::

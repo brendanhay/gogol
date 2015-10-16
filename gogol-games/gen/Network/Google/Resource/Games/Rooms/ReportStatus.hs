@@ -105,7 +105,7 @@ instance GoogleRequest RoomsReportStatus' where
         requestClient RoomsReportStatus'{..}
           = go _rrsRoomId _rrsLanguage (Just AltJSON)
               _rrsPayload
-              games
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy RoomsReportStatusResource)

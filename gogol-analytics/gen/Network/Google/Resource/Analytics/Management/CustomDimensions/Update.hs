@@ -137,7 +137,7 @@ instance GoogleRequest
               (Just _mcduIgnoreCustomDataSourceLinks)
               (Just AltJSON)
               _mcduPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

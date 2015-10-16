@@ -141,7 +141,7 @@ instance GoogleRequest TasksLease' where
               _tlTag
               _tlGroupByTag
               (Just AltJSON)
-              taskQueue
+              taskQueueService
           where go
                   = buildClient (Proxy :: Proxy TasksLeaseResource)
                       mempty

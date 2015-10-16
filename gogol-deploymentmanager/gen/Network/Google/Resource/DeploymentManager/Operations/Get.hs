@@ -88,7 +88,7 @@ instance GoogleRequest OperationsGet' where
         type Rs OperationsGet' = Operation
         requestClient OperationsGet'{..}
           = go _ogProject _ogOperation (Just AltJSON)
-              deploymentManager
+              deploymentManagerService
           where go
                   = buildClient (Proxy :: Proxy OperationsGetResource)
                       mempty

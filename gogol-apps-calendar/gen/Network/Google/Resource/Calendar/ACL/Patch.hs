@@ -102,7 +102,7 @@ instance GoogleRequest ACLPatch' where
         requestClient ACLPatch'{..}
           = go _apCalendarId _apRuleId (Just AltJSON)
               _apPayload
-              appsCalendar
+              appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy ACLPatchResource)
                       mempty

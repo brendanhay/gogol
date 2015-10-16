@@ -104,7 +104,7 @@ instance GoogleRequest TablesFilesInsert' where
         requestClient TablesFilesInsert'{..}
           = go _tfiId (Just _tfiFilename) (Just AltJSON)
               _tfiMedia
-              mapsEngine
+              mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy TablesFilesInsertResource)

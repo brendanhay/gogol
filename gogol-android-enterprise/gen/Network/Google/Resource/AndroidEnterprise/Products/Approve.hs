@@ -106,7 +106,7 @@ instance GoogleRequest ProductsApprove' where
         requestClient ProductsApprove'{..}
           = go _paEnterpriseId _paProductId (Just AltJSON)
               _paPayload
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy :: Proxy ProductsApproveResource)

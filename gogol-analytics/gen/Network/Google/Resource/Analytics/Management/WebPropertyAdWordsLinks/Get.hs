@@ -111,7 +111,7 @@ instance GoogleRequest
           = go _mwpawlgAccountId _mwpawlgWebPropertyId
               _mwpawlgWebPropertyAdWordsLinkId
               (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

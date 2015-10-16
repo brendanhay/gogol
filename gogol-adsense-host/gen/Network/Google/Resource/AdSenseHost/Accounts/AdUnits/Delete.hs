@@ -106,7 +106,7 @@ instance GoogleRequest AccountsAdUnitsDelete' where
         requestClient AccountsAdUnitsDelete'{..}
           = go _aaudAccountId _aaudAdClientId _aaudAdUnitId
               (Just AltJSON)
-              adSenseHost
+              adSenseHostService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsAdUnitsDeleteResource)

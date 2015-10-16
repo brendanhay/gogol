@@ -155,7 +155,7 @@ instance GoogleRequest CaptionsDownload' where
               _capaOnBehalfOfContentOwner
               _capaTfmt
               (Just AltJSON)
-              youTube
+              youTubeService
           where go :<|> _
                   = buildClient
                       (Proxy :: Proxy CaptionsDownloadResource)
@@ -169,7 +169,7 @@ instance GoogleRequest
               _capaOnBehalfOfContentOwner
               _capaTfmt
               (Just AltMedia)
-              youTube
+              youTubeService
           where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy CaptionsDownloadResource)

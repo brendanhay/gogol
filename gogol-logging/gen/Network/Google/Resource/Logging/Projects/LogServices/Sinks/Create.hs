@@ -197,7 +197,7 @@ instance GoogleRequest
               _plsscCallback
               (Just AltJSON)
               _plsscPayload
-              logging
+              loggingService
           where go
                   = buildClient
                       (Proxy ::

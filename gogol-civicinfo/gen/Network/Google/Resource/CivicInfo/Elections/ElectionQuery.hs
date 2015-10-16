@@ -61,7 +61,7 @@ instance GoogleRequest ElectionsElectionQuery' where
         type Rs ElectionsElectionQuery' =
              ElectionsQueryResponse
         requestClient ElectionsElectionQuery'{}
-          = go (Just AltJSON) civicInfo
+          = go (Just AltJSON) civicInfoService
           where go
                   = buildClient
                       (Proxy :: Proxy ElectionsElectionQueryResource)

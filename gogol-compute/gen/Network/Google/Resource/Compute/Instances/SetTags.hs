@@ -115,7 +115,7 @@ instance GoogleRequest InstancesSetTags' where
         requestClient InstancesSetTags'{..}
           = go _istProject _istZone _istInstance (Just AltJSON)
               _istPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesSetTagsResource)

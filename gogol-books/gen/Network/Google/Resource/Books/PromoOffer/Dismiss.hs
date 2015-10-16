@@ -145,7 +145,7 @@ instance GoogleRequest PromoOfferDismiss' where
               _podProduct
               _podAndroidId
               (Just AltJSON)
-              books
+              booksService
           where go
                   = buildClient
                       (Proxy :: Proxy PromoOfferDismissResource)

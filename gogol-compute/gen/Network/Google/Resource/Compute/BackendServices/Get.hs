@@ -90,7 +90,7 @@ instance GoogleRequest BackendServicesGet' where
         type Rs BackendServicesGet' = BackendService
         requestClient BackendServicesGet'{..}
           = go _bsgProject _bsgBackendService (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy BackendServicesGetResource)

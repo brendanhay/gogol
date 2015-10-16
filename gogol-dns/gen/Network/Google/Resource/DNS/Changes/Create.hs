@@ -103,7 +103,7 @@ instance GoogleRequest ChangesCreate' where
         requestClient ChangesCreate'{..}
           = go _ccProject _ccManagedZone (Just AltJSON)
               _ccPayload
-              dNS
+              dNSService
           where go
                   = buildClient (Proxy :: Proxy ChangesCreateResource)
                       mempty

@@ -103,7 +103,7 @@ instance GoogleRequest CreativeFieldsPatch' where
         requestClient CreativeFieldsPatch'{..}
           = go _cfpProFileId (Just _cfpId) (Just AltJSON)
               _cfpPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy CreativeFieldsPatchResource)

@@ -172,7 +172,7 @@ instance GoogleRequest ProjectsList' where
               (_plAdvertiserIds ^. _Default)
               _plMaxResults
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy ProjectsListResource)
                       mempty

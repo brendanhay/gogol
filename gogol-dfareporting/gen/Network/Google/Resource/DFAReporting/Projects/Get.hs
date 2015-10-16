@@ -86,7 +86,8 @@ proId = lens _proId (\ s a -> s{_proId = a})
 instance GoogleRequest ProjectsGet' where
         type Rs ProjectsGet' = Project
         requestClient ProjectsGet'{..}
-          = go _proProFileId _proId (Just AltJSON) dFAReporting
+          = go _proProFileId _proId (Just AltJSON)
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy ProjectsGetResource)
                       mempty

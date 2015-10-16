@@ -87,7 +87,7 @@ uttId = lens _uttId (\ s a -> s{_uttId = a})
 instance GoogleRequest UsersThreadsTrash' where
         type Rs UsersThreadsTrash' = Thread
         requestClient UsersThreadsTrash'{..}
-          = go _uttUserId _uttId (Just AltJSON) gmail
+          = go _uttUserId _uttId (Just AltJSON) gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersThreadsTrashResource)

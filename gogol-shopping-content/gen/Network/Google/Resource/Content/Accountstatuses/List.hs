@@ -104,7 +104,7 @@ instance GoogleRequest AccountstatusesList' where
         requestClient AccountstatusesList'{..}
           = go _acc3MerchantId _acc3PageToken _acc3MaxResults
               (Just AltJSON)
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountstatusesListResource)

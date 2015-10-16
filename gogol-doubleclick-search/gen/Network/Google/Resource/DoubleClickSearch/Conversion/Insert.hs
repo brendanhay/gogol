@@ -75,7 +75,8 @@ ciPayload
 instance GoogleRequest ConversionInsert' where
         type Rs ConversionInsert' = ConversionList
         requestClient ConversionInsert'{..}
-          = go (Just AltJSON) _ciPayload doubleClickSearch
+          = go (Just AltJSON) _ciPayload
+              doubleClickSearchService
           where go
                   = buildClient
                       (Proxy :: Proxy ConversionInsertResource)

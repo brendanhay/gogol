@@ -19,7 +19,7 @@
 module Network.Google.AppsTasks
     (
     -- * Service Configuration
-      appsTasks
+      appsTasksService
 
     -- * API Declaration
     , AppsTasksAPI

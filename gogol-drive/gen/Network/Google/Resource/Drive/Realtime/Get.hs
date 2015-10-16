@@ -98,7 +98,8 @@ reaRevision
 instance GoogleRequest RealtimeGet' where
         type Rs RealtimeGet' = ()
         requestClient RealtimeGet'{..}
-          = go _reaFileId _reaRevision (Just AltJSON) drive
+          = go _reaFileId _reaRevision (Just AltJSON)
+              driveService
           where go :<|> _
                   = buildClient (Proxy :: Proxy RealtimeGetResource)
                       mempty
@@ -107,7 +108,8 @@ instance GoogleRequest (MediaDownload RealtimeGet')
          where
         type Rs (MediaDownload RealtimeGet') = Stream
         requestClient (MediaDownload RealtimeGet'{..})
-          = go _reaFileId _reaRevision (Just AltMedia) drive
+          = go _reaFileId _reaRevision (Just AltMedia)
+              driveService
           where _ :<|> go
                   = buildClient (Proxy :: Proxy RealtimeGetResource)
                       mempty

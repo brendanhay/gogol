@@ -88,7 +88,7 @@ instance GoogleRequest EventTagsInsert' where
         type Rs EventTagsInsert' = EventTag
         requestClient EventTagsInsert'{..}
           = go _etiProFileId (Just AltJSON) _etiPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy EventTagsInsertResource)

@@ -194,7 +194,7 @@ instance GoogleRequest AppsModulesVersionsCreate'
               _amvcCallback
               (Just AltJSON)
               _amvcPayload
-              appEngine
+              appEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy AppsModulesVersionsCreateResource)

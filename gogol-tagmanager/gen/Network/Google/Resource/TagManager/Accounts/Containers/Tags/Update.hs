@@ -132,7 +132,7 @@ instance GoogleRequest AccountsContainersTagsUpdate'
               _actucFingerprint
               (Just AltJSON)
               _actucPayload
-              tagManager
+              tagManagerService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsContainersTagsUpdateResource)

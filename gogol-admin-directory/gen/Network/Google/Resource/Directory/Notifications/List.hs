@@ -112,7 +112,7 @@ instance GoogleRequest NotificationsList' where
           = go _nlCustomer _nlLanguage _nlPageToken
               _nlMaxResults
               (Just AltJSON)
-              directory
+              directoryService
           where go
                   = buildClient
                       (Proxy :: Proxy NotificationsListResource)

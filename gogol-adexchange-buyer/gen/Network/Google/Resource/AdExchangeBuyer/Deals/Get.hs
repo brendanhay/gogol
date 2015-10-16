@@ -87,7 +87,7 @@ instance GoogleRequest DealsGet' where
         type Rs DealsGet' = NegotiationDTO
         requestClient DealsGet'{..}
           = go _dgDealId (Just AltJSON) _dgPayload
-              adExchangeBuyer
+              adExchangeBuyerService
           where go
                   = buildClient (Proxy :: Proxy DealsGetResource)
                       mempty

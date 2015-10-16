@@ -119,7 +119,7 @@ instance GoogleRequest
               (Just _mlbmvVolumePosition)
               _mlbmvSource
               (Just AltJSON)
-              books
+              booksService
           where go
                   = buildClient
                       (Proxy ::

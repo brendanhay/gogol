@@ -101,7 +101,7 @@ instance GoogleRequest UsersDraftsList' where
         requestClient UsersDraftsList'{..}
           = go _udlUserId _udlPageToken (Just _udlMaxResults)
               (Just AltJSON)
-              gmail
+              gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersDraftsListResource)

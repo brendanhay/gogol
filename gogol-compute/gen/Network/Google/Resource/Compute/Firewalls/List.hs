@@ -124,7 +124,7 @@ instance GoogleRequest FirewallsList' where
           = go _flProject _flFilter _flPageToken
               (Just _flMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient (Proxy :: Proxy FirewallsListResource)
                       mempty

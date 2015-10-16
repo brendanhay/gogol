@@ -107,7 +107,7 @@ instance GoogleRequest AccountsReportsSavedList'
         requestClient AccountsReportsSavedList'{..}
           = go _arslAccountId _arslPageToken _arslMaxResults
               (Just AltJSON)
-              adExchangeSeller
+              adExchangeSellerService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsReportsSavedListResource)

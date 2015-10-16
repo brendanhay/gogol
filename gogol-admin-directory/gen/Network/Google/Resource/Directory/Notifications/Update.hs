@@ -103,7 +103,7 @@ instance GoogleRequest NotificationsUpdate' where
         requestClient NotificationsUpdate'{..}
           = go _nuCustomer _nuNotificationId (Just AltJSON)
               _nuPayload
-              directory
+              directoryService
           where go
                   = buildClient
                       (Proxy :: Proxy NotificationsUpdateResource)

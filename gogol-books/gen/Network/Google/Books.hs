@@ -19,7 +19,7 @@
 module Network.Google.Books
     (
     -- * Service Configuration
-      books
+      booksService
 
     -- * API Declaration
     , BooksAPI

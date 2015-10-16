@@ -137,7 +137,7 @@ instance GoogleRequest EditsExpansionFilesUpdate'
               _eExpansionFileType
               (Just AltJSON)
               _ePayload
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy EditsExpansionFilesUpdateResource)

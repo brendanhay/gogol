@@ -89,7 +89,7 @@ instance GoogleRequest EditsInsert' where
         type Rs EditsInsert' = AppEdit
         requestClient EditsInsert'{..}
           = go _eiPackageName (Just AltJSON) _eiPayload
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient (Proxy :: Proxy EditsInsertResource)
                       mempty

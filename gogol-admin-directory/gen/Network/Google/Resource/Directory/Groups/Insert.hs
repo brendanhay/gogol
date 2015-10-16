@@ -74,7 +74,7 @@ giPayload
 instance GoogleRequest GroupsInsert' where
         type Rs GroupsInsert' = Group
         requestClient GroupsInsert'{..}
-          = go (Just AltJSON) _giPayload directory
+          = go (Just AltJSON) _giPayload directoryService
           where go
                   = buildClient (Proxy :: Proxy GroupsInsertResource)
                       mempty

@@ -114,7 +114,7 @@ instance GoogleRequest ManagedZonesList' where
           = go _mzlProject _mzlPageToken _mzlDNSName
               _mzlMaxResults
               (Just AltJSON)
-              dNS
+              dNSService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagedZonesListResource)

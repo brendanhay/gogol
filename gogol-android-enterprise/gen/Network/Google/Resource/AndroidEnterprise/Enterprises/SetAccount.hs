@@ -92,7 +92,7 @@ instance GoogleRequest EnterprisesSetAccount' where
         type Rs EnterprisesSetAccount' = EnterpriseAccount
         requestClient EnterprisesSetAccount'{..}
           = go _esaEnterpriseId (Just AltJSON) _esaPayload
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy :: Proxy EnterprisesSetAccountResource)

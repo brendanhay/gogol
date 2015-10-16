@@ -91,7 +91,7 @@ instance GoogleRequest ProductsGetPermissions' where
         type Rs ProductsGetPermissions' = ProductPermissions
         requestClient ProductsGetPermissions'{..}
           = go _pgpEnterpriseId _pgpProductId (Just AltJSON)
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy :: Proxy ProductsGetPermissionsResource)

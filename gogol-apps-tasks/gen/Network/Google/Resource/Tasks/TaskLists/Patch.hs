@@ -91,7 +91,7 @@ instance GoogleRequest TaskListsPatch' where
         type Rs TaskListsPatch' = TaskList
         requestClient TaskListsPatch'{..}
           = go _tlpTaskList (Just AltJSON) _tlpPayload
-              appsTasks
+              appsTasksService
           where go
                   = buildClient (Proxy :: Proxy TaskListsPatchResource)
                       mempty

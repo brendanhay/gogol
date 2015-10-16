@@ -94,7 +94,7 @@ instance GoogleRequest MyLibraryAnnotationsSummary'
         requestClient MyLibraryAnnotationsSummary'{..}
           = go _mlasLayerIds (Just _mlasVolumeId)
               (Just AltJSON)
-              books
+              booksService
           where go
                   = buildClient
                       (Proxy :: Proxy MyLibraryAnnotationsSummaryResource)

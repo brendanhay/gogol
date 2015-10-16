@@ -120,7 +120,7 @@ instance GoogleRequest ManagementProFilesUpdate'
           = go _mpfuAccountId _mpfuWebPropertyId _mpfuProFileId
               (Just AltJSON)
               _mpfuPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementProFilesUpdateResource)

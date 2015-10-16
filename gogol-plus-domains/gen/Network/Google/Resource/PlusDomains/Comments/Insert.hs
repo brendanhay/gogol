@@ -88,7 +88,7 @@ instance GoogleRequest CommentsInsert' where
         type Rs CommentsInsert' = Comment
         requestClient CommentsInsert'{..}
           = go _ciActivityId (Just AltJSON) _ciPayload
-              plusDomains
+              plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy CommentsInsertResource)
                       mempty

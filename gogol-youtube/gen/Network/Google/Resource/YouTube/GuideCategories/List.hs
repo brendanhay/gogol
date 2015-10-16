@@ -119,7 +119,7 @@ instance GoogleRequest GuideCategoriesList' where
           = go (Just _gclPart) _gclRegionCode (Just _gclHl)
               _gclId
               (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy GuideCategoriesListResource)

@@ -90,7 +90,7 @@ instance GoogleRequest GlobalAccountsOperationsGet'
         type Rs GlobalAccountsOperationsGet' = Operation
         requestClient GlobalAccountsOperationsGet'{..}
           = go _gaogProject _gaogOperation (Just AltJSON)
-              userAccounts
+              userAccountsService
           where go
                   = buildClient
                       (Proxy :: Proxy GlobalAccountsOperationsGetResource)

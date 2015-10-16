@@ -141,7 +141,7 @@ instance GoogleRequest DataRealtimeGet' where
               _drgDimensions
               _drgMaxResults
               (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy DataRealtimeGetResource)

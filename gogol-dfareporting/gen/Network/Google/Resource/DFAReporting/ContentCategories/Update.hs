@@ -89,7 +89,7 @@ instance GoogleRequest ContentCategoriesUpdate' where
         type Rs ContentCategoriesUpdate' = ContentCategory
         requestClient ContentCategoriesUpdate'{..}
           = go _ccuProFileId (Just AltJSON) _ccuPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy ContentCategoriesUpdateResource)

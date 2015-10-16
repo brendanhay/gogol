@@ -89,7 +89,7 @@ instance GoogleRequest AccountUserProFilesGet' where
         type Rs AccountUserProFilesGet' = AccountUserProFile
         requestClient AccountUserProFilesGet'{..}
           = go _aupfgProFileId _aupfgId (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountUserProFilesGetResource)

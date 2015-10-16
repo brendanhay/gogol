@@ -147,7 +147,7 @@ instance GoogleRequest UsersDataSourcesDatasetsGet'
               _udsdgLimit
               _udsdgPageToken
               (Just AltJSON)
-              fitness
+              fitnessService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersDataSourcesDatasetsGetResource)

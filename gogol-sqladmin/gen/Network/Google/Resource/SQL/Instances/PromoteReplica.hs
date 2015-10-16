@@ -90,7 +90,8 @@ iprInstance
 instance GoogleRequest InstancesPromoteReplica' where
         type Rs InstancesPromoteReplica' = Operation
         requestClient InstancesPromoteReplica'{..}
-          = go _iprProject _iprInstance (Just AltJSON) sQLAdmin
+          = go _iprProject _iprInstance (Just AltJSON)
+              sQLAdminService
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesPromoteReplicaResource)

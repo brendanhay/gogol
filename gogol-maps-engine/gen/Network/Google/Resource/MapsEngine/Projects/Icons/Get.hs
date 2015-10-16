@@ -93,7 +93,8 @@ pigProjectId
 instance GoogleRequest ProjectsIconsGet' where
         type Rs ProjectsIconsGet' = Icon
         requestClient ProjectsIconsGet'{..}
-          = go _pigProjectId _pigId (Just AltJSON) mapsEngine
+          = go _pigProjectId _pigId (Just AltJSON)
+              mapsEngineService
           where go :<|> _
                   = buildClient
                       (Proxy :: Proxy ProjectsIconsGetResource)
@@ -103,7 +104,8 @@ instance GoogleRequest
          (MediaDownload ProjectsIconsGet') where
         type Rs (MediaDownload ProjectsIconsGet') = Stream
         requestClient (MediaDownload ProjectsIconsGet'{..})
-          = go _pigProjectId _pigId (Just AltMedia) mapsEngine
+          = go _pigProjectId _pigId (Just AltMedia)
+              mapsEngineService
           where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy ProjectsIconsGetResource)

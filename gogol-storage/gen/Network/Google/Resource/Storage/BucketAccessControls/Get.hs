@@ -91,7 +91,8 @@ instance GoogleRequest BucketAccessControlsGet' where
         type Rs BucketAccessControlsGet' =
              BucketAccessControl
         requestClient BucketAccessControlsGet'{..}
-          = go _bacgBucket _bacgEntity (Just AltJSON) storage
+          = go _bacgBucket _bacgEntity (Just AltJSON)
+              storageService
           where go
                   = buildClient
                       (Proxy :: Proxy BucketAccessControlsGetResource)

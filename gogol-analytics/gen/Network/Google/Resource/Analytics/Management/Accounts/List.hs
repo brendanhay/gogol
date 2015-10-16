@@ -89,7 +89,7 @@ instance GoogleRequest ManagementAccountsList' where
         type Rs ManagementAccountsList' = Accounts
         requestClient ManagementAccountsList'{..}
           = go _malStartIndex _malMaxResults (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementAccountsListResource)

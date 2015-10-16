@@ -130,7 +130,7 @@ instance GoogleRequest HTTPHealthChecksList' where
           = go _httphclProject _httphclFilter _httphclPageToken
               (Just _httphclMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy HTTPHealthChecksListResource)

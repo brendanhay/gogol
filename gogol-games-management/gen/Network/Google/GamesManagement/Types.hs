@@ -16,7 +16,7 @@
 module Network.Google.GamesManagement.Types
     (
     -- * Service Configuration
-      gamesManagement
+      gamesManagementService
 
     -- * OAuth Scopes
     , plusLoginScope
@@ -132,8 +132,8 @@ import           Network.Google.GamesManagement.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1management' of the Google Play Game Services Management API. This contains the host and root path used as a starting point for constructing service requests.
-gamesManagement :: Service
-gamesManagement
+gamesManagementService :: Service
+gamesManagementService
   = defaultService
       (ServiceId "gamesManagement:v1management")
       "www.googleapis.com"

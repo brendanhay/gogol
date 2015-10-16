@@ -93,7 +93,7 @@ instance GoogleRequest OrdersGetbymerchantOrderid'
         requestClient OrdersGetbymerchantOrderid'{..}
           = go _ordMerchantId _ordMerchantOrderId
               (Just AltJSON)
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy OrdersGetbymerchantOrderidResource)

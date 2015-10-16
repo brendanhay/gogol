@@ -107,7 +107,7 @@ instance GoogleRequest ObjectAccessControlsList'
         requestClient ObjectAccessControlsList'{..}
           = go _oaclBucket _oaclObject _oaclGeneration
               (Just AltJSON)
-              storage
+              storageService
           where go
                   = buildClient
                       (Proxy :: Proxy ObjectAccessControlsListResource)

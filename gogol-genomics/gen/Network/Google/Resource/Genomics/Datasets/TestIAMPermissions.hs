@@ -180,7 +180,7 @@ instance GoogleRequest DatasetsTestIAMPermissions'
               _dtipCallback
               (Just AltJSON)
               _dtipPayload
-              genomics
+              genomicsService
           where go
                   = buildClient
                       (Proxy :: Proxy DatasetsTestIAMPermissionsResource)

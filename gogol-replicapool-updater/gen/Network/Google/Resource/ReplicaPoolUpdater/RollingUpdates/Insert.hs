@@ -100,7 +100,7 @@ instance GoogleRequest RollingUpdatesInsert' where
         type Rs RollingUpdatesInsert' = Operation
         requestClient RollingUpdatesInsert'{..}
           = go _ruiProject _ruiZone (Just AltJSON) _ruiPayload
-              replicaPoolUpdater
+              replicaPoolUpdaterService
           where go
                   = buildClient
                       (Proxy :: Proxy RollingUpdatesInsertResource)

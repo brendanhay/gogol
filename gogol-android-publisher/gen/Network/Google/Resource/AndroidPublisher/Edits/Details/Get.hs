@@ -92,7 +92,7 @@ instance GoogleRequest EditsDetailsGet' where
         type Rs EditsDetailsGet' = AppDetails
         requestClient EditsDetailsGet'{..}
           = go _edgPackageName _edgEditId (Just AltJSON)
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy EditsDetailsGetResource)

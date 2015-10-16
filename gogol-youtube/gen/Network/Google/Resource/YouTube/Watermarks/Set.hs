@@ -123,7 +123,7 @@ instance GoogleRequest WatermarksSet' where
               (Just AltJSON)
               _wsPayload
               _wsMedia
-              youTube
+              youTubeService
           where go
                   = buildClient (Proxy :: Proxy WatermarksSetResource)
                       mempty

@@ -16,7 +16,7 @@
 module Network.Google.DFAReporting.Types
     (
     -- * Service Configuration
-      dFAReporting
+      dFAReportingService
 
     -- * OAuth Scopes
     , dfareportingScope
@@ -2521,8 +2521,8 @@ import           Network.Google.DFAReporting.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2.2' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
-dFAReporting :: Service
-dFAReporting
+dFAReportingService :: Service
+dFAReportingService
   = defaultService (ServiceId "dfareporting:v2.2")
       "www.googleapis.com"
       "dfareporting/v2.2/"

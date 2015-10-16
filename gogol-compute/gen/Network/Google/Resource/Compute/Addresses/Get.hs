@@ -101,7 +101,7 @@ instance GoogleRequest AddressesGet' where
         requestClient AddressesGet'{..}
           = go _aggProject _aggRegion _aggAddress
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient (Proxy :: Proxy AddressesGetResource)
                       mempty

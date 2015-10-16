@@ -90,6 +90,7 @@ jgProjectId
 instance GoogleRequest JobsGet' where
         type Rs JobsGet' = Job
         requestClient JobsGet'{..}
-          = go _jgProjectId _jgJobId (Just AltJSON) bigQuery
+          = go _jgProjectId _jgJobId (Just AltJSON)
+              bigQueryService
           where go
                   = buildClient (Proxy :: Proxy JobsGetResource) mempty

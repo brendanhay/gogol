@@ -357,7 +357,7 @@ instance GoogleRequest EventsWatch' where
               _ewTimeMax
               (Just AltJSON)
               _ewPayload
-              appsCalendar
+              appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy EventsWatchResource)
                       mempty

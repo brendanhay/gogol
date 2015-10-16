@@ -75,7 +75,7 @@ fbqPayload
 instance GoogleRequest FreeBusyQuery' where
         type Rs FreeBusyQuery' = FreeBusyResponse
         requestClient FreeBusyQuery'{..}
-          = go (Just AltJSON) _fbqPayload appsCalendar
+          = go (Just AltJSON) _fbqPayload appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy FreeBusyQueryResource)
                       mempty

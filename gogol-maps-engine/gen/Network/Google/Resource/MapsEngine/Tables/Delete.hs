@@ -75,7 +75,7 @@ tdId = lens _tdId (\ s a -> s{_tdId = a})
 instance GoogleRequest TablesDelete' where
         type Rs TablesDelete' = ()
         requestClient TablesDelete'{..}
-          = go _tdId (Just AltJSON) mapsEngine
+          = go _tdId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy TablesDeleteResource)
                       mempty

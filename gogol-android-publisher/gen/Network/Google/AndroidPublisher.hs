@@ -19,7 +19,7 @@
 module Network.Google.AndroidPublisher
     (
     -- * Service Configuration
-      androidPublisher
+      androidPublisherService
 
     -- * API Declaration
     , AndroidPublisherAPI

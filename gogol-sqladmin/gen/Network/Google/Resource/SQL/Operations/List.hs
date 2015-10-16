@@ -116,7 +116,7 @@ instance GoogleRequest OperationsList' where
           = go _olProject (Just _olInstance) _olPageToken
               _olMaxResults
               (Just AltJSON)
-              sQLAdmin
+              sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy OperationsListResource)
                       mempty

@@ -206,7 +206,7 @@ instance GoogleRequest
               _cdbuCallback
               (Just AltJSON)
               _cdbuPayload
-              debugger
+              debuggerService
           where go
                   = buildClient
                       (Proxy ::

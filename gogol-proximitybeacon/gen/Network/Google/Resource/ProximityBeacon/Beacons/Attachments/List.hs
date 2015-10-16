@@ -189,7 +189,7 @@ instance GoogleRequest BeaconsAttachmentsList' where
               _balNamespacedType
               _balCallback
               (Just AltJSON)
-              proximityBeacon
+              proximityBeaconService
           where go
                   = buildClient
                       (Proxy :: Proxy BeaconsAttachmentsListResource)

@@ -107,7 +107,7 @@ instance GoogleRequest ApplicationsListHidden' where
         requestClient ApplicationsListHidden'{..}
           = go _alhApplicationId _alhPageToken _alhMaxResults
               (Just AltJSON)
-              gamesManagement
+              gamesManagementService
           where go
                   = buildClient
                       (Proxy :: Proxy ApplicationsListHiddenResource)

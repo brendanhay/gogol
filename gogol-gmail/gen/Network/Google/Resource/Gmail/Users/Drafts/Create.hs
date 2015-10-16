@@ -98,7 +98,7 @@ instance GoogleRequest UsersDraftsCreate' where
         type Rs UsersDraftsCreate' = Draft
         requestClient UsersDraftsCreate'{..}
           = go _udcUserId (Just AltJSON) _udcPayload _udcMedia
-              gmail
+              gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersDraftsCreateResource)

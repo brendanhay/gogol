@@ -89,7 +89,7 @@ instance GoogleRequest PageViewsGet' where
         requestClient PageViewsGet'{..}
           = go _pvgBlogId (_pvgRange ^. _Default)
               (Just AltJSON)
-              blogger
+              bloggerService
           where go
                   = buildClient (Proxy :: Proxy PageViewsGetResource)
                       mempty

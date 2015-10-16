@@ -411,7 +411,7 @@ instance GoogleRequest PlacementsList' where
               _plaMaxResults
               _plaMinEndDate
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy PlacementsListResource)
                       mempty

@@ -20,7 +20,7 @@
 module Network.Google.ProximityBeacon
     (
     -- * Service Configuration
-      proximityBeacon
+      proximityBeaconService
 
     -- * API Declaration
     , ProximityBeaconAPI

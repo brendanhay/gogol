@@ -146,7 +146,7 @@ instance GoogleRequest JobsGetQueryResults' where
               _jgqrStartIndex
               _jgqrMaxResults
               (Just AltJSON)
-              bigQuery
+              bigQueryService
           where go
                   = buildClient
                       (Proxy :: Proxy JobsGetQueryResultsResource)

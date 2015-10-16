@@ -78,7 +78,7 @@ instance GoogleRequest
              AggregatedStatsReply
         requestClient
           StatscollectionUpdateaggregatedstats'{..}
-          = go (Just AltJSON) _suPayload latencyTest
+          = go (Just AltJSON) _suPayload latencyTestService
           where go
                   = buildClient
                       (Proxy ::

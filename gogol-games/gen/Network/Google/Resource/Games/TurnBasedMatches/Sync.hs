@@ -142,7 +142,7 @@ instance GoogleRequest TurnBasedMatchesSync' where
               _tbmsPageToken
               _tbmsMaxResults
               (Just AltJSON)
-              games
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy TurnBasedMatchesSyncResource)

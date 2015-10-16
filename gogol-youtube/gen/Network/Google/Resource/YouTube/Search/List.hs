@@ -593,7 +593,7 @@ instance GoogleRequest SearchList' where
               _slVideoType
               _slVideoDimension
               (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient (Proxy :: Proxy SearchListResource)
                       mempty

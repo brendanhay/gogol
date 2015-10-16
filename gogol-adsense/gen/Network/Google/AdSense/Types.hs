@@ -16,7 +16,7 @@
 module Network.Google.AdSense.Types
     (
     -- * Service Configuration
-      adSense
+      adSenseService
 
     -- * OAuth Scopes
     , adsenseReadonlyScope
@@ -284,8 +284,8 @@ import           Network.Google.AdSense.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1.4' of the AdSense Management API. This contains the host and root path used as a starting point for constructing service requests.
-adSense :: Service
-adSense
+adSenseService :: Service
+adSenseService
   = defaultService (ServiceId "adsense:v1.4")
       "www.googleapis.com"
       "adsense/v1.4/"

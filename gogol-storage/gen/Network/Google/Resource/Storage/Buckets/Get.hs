@@ -114,7 +114,7 @@ instance GoogleRequest BucketsGet' where
               _bgIfMetagenerationNotMatch
               _bgProjection
               (Just AltJSON)
-              storage
+              storageService
           where go
                   = buildClient (Proxy :: Proxy BucketsGetResource)
                       mempty

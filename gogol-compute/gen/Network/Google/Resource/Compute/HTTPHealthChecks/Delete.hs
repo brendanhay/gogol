@@ -91,7 +91,7 @@ instance GoogleRequest HTTPHealthChecksDelete' where
         requestClient HTTPHealthChecksDelete'{..}
           = go _httphcdProject _httphcdHTTPHealthCheck
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy HTTPHealthChecksDeleteResource)

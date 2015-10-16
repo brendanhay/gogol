@@ -128,7 +128,7 @@ instance GoogleRequest TargetPoolsAggregatedList'
           = go _tpalProject _tpalFilter _tpalPageToken
               (Just _tpalMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy TargetPoolsAggregatedListResource)

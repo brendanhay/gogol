@@ -133,7 +133,7 @@ instance GoogleRequest CitiesList' where
               (_cCountryDartIds ^. _Default)
               (_cDartIds ^. _Default)
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy CitiesListResource)
                       mempty

@@ -138,7 +138,7 @@ instance GoogleRequest ReportsFilesList' where
               (Just _rflSortField)
               _rflMaxResults
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy ReportsFilesListResource)

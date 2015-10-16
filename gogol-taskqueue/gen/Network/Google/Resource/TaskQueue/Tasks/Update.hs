@@ -125,7 +125,7 @@ instance GoogleRequest TasksUpdate' where
               (Just _tuNewLeaseSeconds)
               (Just AltJSON)
               _tuPayload
-              taskQueue
+              taskQueueService
           where go
                   = buildClient (Proxy :: Proxy TasksUpdateResource)
                       mempty

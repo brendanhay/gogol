@@ -85,7 +85,7 @@ instance GoogleRequest ArchiveInsert' where
         type Rs ArchiveInsert' = Groups
         requestClient ArchiveInsert'{..}
           = go _aiGroupId (Just AltJSON) _aiMedia
-              groupsMigration
+              groupsMigrationService
           where go
                   = buildClient (Proxy :: Proxy ArchiveInsertResource)
                       mempty

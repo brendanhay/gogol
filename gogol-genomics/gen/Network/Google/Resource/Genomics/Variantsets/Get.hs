@@ -161,7 +161,7 @@ instance GoogleRequest VariantsetsGet' where
               _vgBearerToken
               _vgCallback
               (Just AltJSON)
-              genomics
+              genomicsService
           where go
                   = buildClient (Proxy :: Proxy VariantsetsGetResource)
                       mempty

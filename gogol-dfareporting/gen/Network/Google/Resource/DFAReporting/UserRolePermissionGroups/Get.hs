@@ -91,7 +91,7 @@ instance GoogleRequest UserRolePermissionGroupsGet'
              UserRolePermissionGroup
         requestClient UserRolePermissionGroupsGet'{..}
           = go _urpggProFileId _urpggId (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy UserRolePermissionGroupsGetResource)

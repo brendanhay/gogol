@@ -107,7 +107,7 @@ instance GoogleRequest PurchasesSubscriptionsRefund'
         requestClient PurchasesSubscriptionsRefund'{..}
           = go _pPackageName _pSubscriptionId _pToken
               (Just AltJSON)
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy PurchasesSubscriptionsRefundResource)

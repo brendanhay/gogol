@@ -76,7 +76,8 @@ euEnterpriseId
 instance GoogleRequest EnterprisesUnenroll' where
         type Rs EnterprisesUnenroll' = ()
         requestClient EnterprisesUnenroll'{..}
-          = go _euEnterpriseId (Just AltJSON) androidEnterprise
+          = go _euEnterpriseId (Just AltJSON)
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy :: Proxy EnterprisesUnenrollResource)

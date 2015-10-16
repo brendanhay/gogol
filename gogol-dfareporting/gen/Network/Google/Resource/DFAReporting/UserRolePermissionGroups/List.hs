@@ -79,7 +79,8 @@ instance GoogleRequest UserRolePermissionGroupsList'
         type Rs UserRolePermissionGroupsList' =
              UserRolePermissionGroupsListResponse
         requestClient UserRolePermissionGroupsList'{..}
-          = go _urpglProFileId (Just AltJSON) dFAReporting
+          = go _urpglProFileId (Just AltJSON)
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy UserRolePermissionGroupsListResource)

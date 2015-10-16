@@ -105,7 +105,7 @@ instance GoogleRequest TurnBasedMatchesFinish' where
         requestClient TurnBasedMatchesFinish'{..}
           = go _tbmfMatchId _tbmfLanguage (Just AltJSON)
               _tbmfPayload
-              games
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy TurnBasedMatchesFinishResource)

@@ -88,7 +88,7 @@ instance GoogleRequest PlacementsUpdate' where
         type Rs PlacementsUpdate' = Placement
         requestClient PlacementsUpdate'{..}
           = go _puProFileId (Just AltJSON) _puPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy PlacementsUpdateResource)

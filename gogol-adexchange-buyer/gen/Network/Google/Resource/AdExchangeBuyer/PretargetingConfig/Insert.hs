@@ -90,7 +90,7 @@ instance GoogleRequest PretargetingConfigInsert'
              PretargetingConfig
         requestClient PretargetingConfigInsert'{..}
           = go _pciAccountId (Just AltJSON) _pciPayload
-              adExchangeBuyer
+              adExchangeBuyerService
           where go
                   = buildClient
                       (Proxy :: Proxy PretargetingConfigInsertResource)

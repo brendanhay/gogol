@@ -174,7 +174,7 @@ instance GoogleRequest TransferOperationsResume'
               _torCallback
               (Just AltJSON)
               _torPayload
-              storageTransfer
+              storageTransferService
           where go
                   = buildClient
                       (Proxy :: Proxy TransferOperationsResumeResource)

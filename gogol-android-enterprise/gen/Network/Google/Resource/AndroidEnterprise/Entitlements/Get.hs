@@ -103,7 +103,7 @@ instance GoogleRequest EntitlementsGet' where
         requestClient EntitlementsGet'{..}
           = go _eEnterpriseId _eUserId _eEntitlementId
               (Just AltJSON)
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy :: Proxy EntitlementsGetResource)

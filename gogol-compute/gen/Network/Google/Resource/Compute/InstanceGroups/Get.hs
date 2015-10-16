@@ -101,7 +101,7 @@ instance GoogleRequest InstanceGroupsGet' where
         requestClient InstanceGroupsGet'{..}
           = go _iggProject _iggZone _iggInstanceGroup
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceGroupsGetResource)

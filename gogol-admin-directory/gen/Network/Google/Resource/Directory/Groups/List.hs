@@ -123,7 +123,7 @@ instance GoogleRequest GroupsList' where
           = go _glDomain _glCustomer _glPageToken _glUserKey
               _glMaxResults
               (Just AltJSON)
-              directory
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy GroupsListResource)
                       mempty

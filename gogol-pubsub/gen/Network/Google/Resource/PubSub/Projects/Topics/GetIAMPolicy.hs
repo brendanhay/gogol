@@ -167,7 +167,7 @@ instance GoogleRequest ProjectsTopicsGetIAMPolicy'
               _ptgipBearerToken
               _ptgipCallback
               (Just AltJSON)
-              pubSub
+              pubSubService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsTopicsGetIAMPolicyResource)

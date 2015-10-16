@@ -104,7 +104,7 @@ instance GoogleRequest LandingPagesInsert' where
         requestClient LandingPagesInsert'{..}
           = go _lpiProFileId _lpiCampaignId (Just AltJSON)
               _lpiPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy LandingPagesInsertResource)

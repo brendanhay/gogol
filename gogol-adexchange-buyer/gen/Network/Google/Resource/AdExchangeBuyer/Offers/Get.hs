@@ -73,7 +73,7 @@ ogOfferId
 instance GoogleRequest OffersGet' where
         type Rs OffersGet' = OfferDTO
         requestClient OffersGet'{..}
-          = go _ogOfferId (Just AltJSON) adExchangeBuyer
+          = go _ogOfferId (Just AltJSON) adExchangeBuyerService
           where go
                   = buildClient (Proxy :: Proxy OffersGetResource)
                       mempty

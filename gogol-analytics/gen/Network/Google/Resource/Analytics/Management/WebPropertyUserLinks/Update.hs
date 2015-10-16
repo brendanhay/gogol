@@ -124,7 +124,7 @@ instance GoogleRequest
               _mwpuluLinkId
               (Just AltJSON)
               _mwpuluPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

@@ -86,7 +86,7 @@ instance GoogleRequest DatafeedsCustombatch' where
              DatafeedsCustomBatchResponse
         requestClient DatafeedsCustombatch'{..}
           = go _dDryRun (Just AltJSON) _dPayload
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy DatafeedsCustombatchResource)

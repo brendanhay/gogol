@@ -189,7 +189,7 @@ instance GoogleRequest PublishersList' where
               _plPublisherCategory
               _plMaxResults
               (Just AltJSON)
-              affiliates
+              affiliatesService
           where go
                   = buildClient (Proxy :: Proxy PublishersListResource)
                       mempty

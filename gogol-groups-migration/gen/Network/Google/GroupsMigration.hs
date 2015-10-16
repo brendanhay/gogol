@@ -19,7 +19,7 @@
 module Network.Google.GroupsMigration
     (
     -- * Service Configuration
-      groupsMigration
+      groupsMigrationService
 
     -- * API Declaration
     , GroupsMigrationAPI

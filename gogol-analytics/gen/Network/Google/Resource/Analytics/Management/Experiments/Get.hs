@@ -120,7 +120,7 @@ instance GoogleRequest ManagementExperimentsGet'
           = go _megAccountId _megWebPropertyId _megProFileId
               _megExperimentId
               (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementExperimentsGetResource)

@@ -130,7 +130,7 @@ instance GoogleRequest InstancesAddAccessConfig'
               (Just _iaacNetworkInterface)
               (Just AltJSON)
               _iaacPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesAddAccessConfigResource)

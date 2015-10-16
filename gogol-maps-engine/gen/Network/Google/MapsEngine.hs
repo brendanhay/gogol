@@ -20,7 +20,7 @@
 module Network.Google.MapsEngine
     (
     -- * Service Configuration
-      mapsEngine
+      mapsEngineService
 
     -- * API Declaration
     , MapsEngineAPI

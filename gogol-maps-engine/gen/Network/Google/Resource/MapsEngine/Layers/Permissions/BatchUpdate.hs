@@ -94,7 +94,8 @@ instance GoogleRequest LayersPermissionsBatchUpdate'
         type Rs LayersPermissionsBatchUpdate' =
              PermissionsBatchUpdateResponse
         requestClient LayersPermissionsBatchUpdate'{..}
-          = go _lpbuId (Just AltJSON) _lpbuPayload mapsEngine
+          = go _lpbuId (Just AltJSON) _lpbuPayload
+              mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy LayersPermissionsBatchUpdateResource)

@@ -92,7 +92,8 @@ instance GoogleRequest
          DefaultObjectAccessControlsDelete' where
         type Rs DefaultObjectAccessControlsDelete' = ()
         requestClient DefaultObjectAccessControlsDelete'{..}
-          = go _doacdBucket _doacdEntity (Just AltJSON) storage
+          = go _doacdBucket _doacdEntity (Just AltJSON)
+              storageService
           where go
                   = buildClient
                       (Proxy ::

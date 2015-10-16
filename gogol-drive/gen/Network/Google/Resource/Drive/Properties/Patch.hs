@@ -113,7 +113,7 @@ instance GoogleRequest PropertiesPatch' where
           = go _ppFileId _ppPropertyKey (Just _ppVisibility)
               (Just AltJSON)
               _ppPayload
-              drive
+              driveService
           where go
                   = buildClient
                       (Proxy :: Proxy PropertiesPatchResource)

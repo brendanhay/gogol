@@ -16,7 +16,7 @@
 module Network.Google.Datastore.Types
     (
     -- * Service Configuration
-      datastore
+      datastoreService
 
     -- * OAuth Scopes
     , userinfoEmailScope
@@ -302,8 +302,8 @@ import           Network.Google.Datastore.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1beta2' of the Google Cloud Datastore API. This contains the host and root path used as a starting point for constructing service requests.
-datastore :: Service
-datastore
+datastoreService :: Service
+datastoreService
   = defaultService (ServiceId "datastore:v1beta2")
       "www.googleapis.com"
       "datastore/v1beta2/datasets/"

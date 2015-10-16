@@ -88,7 +88,7 @@ instance GoogleRequest ReportsDelete' where
         type Rs ReportsDelete' = ()
         requestClient ReportsDelete'{..}
           = go _rdProFileId _rdReportId (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy ReportsDeleteResource)
                       mempty

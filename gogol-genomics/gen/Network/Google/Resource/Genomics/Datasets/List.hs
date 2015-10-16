@@ -187,7 +187,7 @@ instance GoogleRequest DatasetsList' where
               _dlPageSize
               _dlCallback
               (Just AltJSON)
-              genomics
+              genomicsService
           where go
                   = buildClient (Proxy :: Proxy DatasetsListResource)
                       mempty

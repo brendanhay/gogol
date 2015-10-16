@@ -118,7 +118,7 @@ instance GoogleRequest CampaignsInsert' where
               (Just _ciDefaultLandingPageURL)
               (Just AltJSON)
               _ciPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy CampaignsInsertResource)

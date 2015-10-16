@@ -124,7 +124,7 @@ instance GoogleRequest SnapshotsList' where
           = go _slProject _slFilter _slPageToken
               (Just _slMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient (Proxy :: Proxy SnapshotsListResource)
                       mempty

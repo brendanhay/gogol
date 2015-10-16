@@ -86,7 +86,8 @@ sgId = lens _sgId (\ s a -> s{_sgId = a})
 instance GoogleRequest SitesGet' where
         type Rs SitesGet' = Site
         requestClient SitesGet'{..}
-          = go _sgProFileId _sgId (Just AltJSON) dFAReporting
+          = go _sgProFileId _sgId (Just AltJSON)
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy SitesGetResource)
                       mempty

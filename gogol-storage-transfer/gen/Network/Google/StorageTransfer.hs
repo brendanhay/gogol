@@ -20,7 +20,7 @@
 module Network.Google.StorageTransfer
     (
     -- * Service Configuration
-      storageTransfer
+      storageTransferService
 
     -- * API Declaration
     , StorageTransferAPI

@@ -89,7 +89,7 @@ instance GoogleRequest I18nLanguagesList' where
         type Rs I18nLanguagesList' = I18nLanguageListResponse
         requestClient I18nLanguagesList'{..}
           = go (Just _illPart) (Just _illHl) (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy I18nLanguagesListResource)

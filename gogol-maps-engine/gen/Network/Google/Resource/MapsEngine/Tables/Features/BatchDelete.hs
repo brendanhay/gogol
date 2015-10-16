@@ -89,7 +89,8 @@ instance GoogleRequest TablesFeaturesBatchDelete'
          where
         type Rs TablesFeaturesBatchDelete' = ()
         requestClient TablesFeaturesBatchDelete'{..}
-          = go _tfbdId (Just AltJSON) _tfbdPayload mapsEngine
+          = go _tfbdId (Just AltJSON) _tfbdPayload
+              mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy TablesFeaturesBatchDeleteResource)

@@ -86,7 +86,7 @@ suId = lens _suId (\ s a -> s{_suId = a})
 instance GoogleRequest SubscriptionsUpdate' where
         type Rs SubscriptionsUpdate' = Subscription
         requestClient SubscriptionsUpdate'{..}
-          = go _suId (Just AltJSON) _suPayload mirror
+          = go _suId (Just AltJSON) _suPayload mirrorService
           where go
                   = buildClient
                       (Proxy :: Proxy SubscriptionsUpdateResource)

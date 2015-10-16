@@ -16,7 +16,7 @@
 module Network.Google.MapsEngine.Types
     (
     -- * Service Configuration
-      mapsEngine
+      mapsEngineService
 
     -- * OAuth Scopes
     , mapsengineScope
@@ -763,8 +763,8 @@ import           Network.Google.MapsEngine.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Maps Engine API. This contains the host and root path used as a starting point for constructing service requests.
-mapsEngine :: Service
-mapsEngine
+mapsEngineService :: Service
+mapsEngineService
   = defaultService (ServiceId "mapsengine:v1")
       "www.googleapis.com"
       "mapsengine/v1/"

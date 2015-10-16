@@ -89,7 +89,7 @@ instance GoogleRequest AdUnitsGet' where
         type Rs AdUnitsGet' = AdUnit
         requestClient AdUnitsGet'{..}
           = go _augAdClientId _augAdUnitId (Just AltJSON)
-              adSense
+              adSenseService
           where go
                   = buildClient (Proxy :: Proxy AdUnitsGetResource)
                       mempty

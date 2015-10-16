@@ -106,7 +106,7 @@ instance GoogleRequest
         requestClient AccountsContainersVariablesDelete'{..}
           = go _acvdAccountId _acvdContainerId _acvdVariableId
               (Just AltJSON)
-              tagManager
+              tagManagerService
           where go
                   = buildClient
                       (Proxy ::

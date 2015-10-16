@@ -122,7 +122,7 @@ instance GoogleRequest AdUnitsCustomChannelsList'
           = go _aucclAdClientId _aucclAdUnitId _aucclPageToken
               _aucclMaxResults
               (Just AltJSON)
-              adSense
+              adSenseService
           where go
                   = buildClient
                       (Proxy :: Proxy AdUnitsCustomChannelsListResource)

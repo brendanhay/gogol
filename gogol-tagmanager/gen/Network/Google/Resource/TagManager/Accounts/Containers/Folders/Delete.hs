@@ -105,7 +105,7 @@ instance GoogleRequest
         requestClient AccountsContainersFoldersDelete'{..}
           = go _acfdAccountId _acfdContainerId _acfdFolderId
               (Just AltJSON)
-              tagManager
+              tagManagerService
           where go
                   = buildClient
                       (Proxy ::

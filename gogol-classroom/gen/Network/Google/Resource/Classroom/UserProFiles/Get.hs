@@ -170,7 +170,7 @@ instance GoogleRequest UserProFilesGet' where
               _upfgBearerToken
               _upfgCallback
               (Just AltJSON)
-              classroom
+              classroomService
           where go
                   = buildClient
                       (Proxy :: Proxy UserProFilesGetResource)

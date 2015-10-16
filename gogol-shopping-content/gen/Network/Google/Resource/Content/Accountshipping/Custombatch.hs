@@ -92,7 +92,7 @@ instance GoogleRequest AccountshippingCustombatch'
              AccountshippingCustomBatchResponse
         requestClient AccountshippingCustombatch'{..}
           = go _acccDryRun (Just AltJSON) _acccPayload
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountshippingCustombatchResource)

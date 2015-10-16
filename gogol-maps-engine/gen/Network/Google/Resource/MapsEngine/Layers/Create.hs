@@ -85,7 +85,8 @@ lcPayload
 instance GoogleRequest LayersCreate' where
         type Rs LayersCreate' = Layer
         requestClient LayersCreate'{..}
-          = go _lcProcess (Just AltJSON) _lcPayload mapsEngine
+          = go _lcProcess (Just AltJSON) _lcPayload
+              mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy LayersCreateResource)
                       mempty

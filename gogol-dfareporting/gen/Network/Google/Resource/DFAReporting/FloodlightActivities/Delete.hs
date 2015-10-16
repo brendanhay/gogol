@@ -87,7 +87,8 @@ instance GoogleRequest FloodlightActivitiesDelete'
          where
         type Rs FloodlightActivitiesDelete' = ()
         requestClient FloodlightActivitiesDelete'{..}
-          = go _fadProFileId _fadId (Just AltJSON) dFAReporting
+          = go _fadProFileId _fadId (Just AltJSON)
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy FloodlightActivitiesDeleteResource)

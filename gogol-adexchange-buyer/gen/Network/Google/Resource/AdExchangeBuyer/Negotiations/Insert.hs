@@ -75,7 +75,7 @@ niPayload
 instance GoogleRequest NegotiationsInsert' where
         type Rs NegotiationsInsert' = NegotiationDTO
         requestClient NegotiationsInsert'{..}
-          = go (Just AltJSON) _niPayload adExchangeBuyer
+          = go (Just AltJSON) _niPayload adExchangeBuyerService
           where go
                   = buildClient
                       (Proxy :: Proxy NegotiationsInsertResource)

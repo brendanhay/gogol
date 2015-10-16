@@ -126,7 +126,7 @@ instance GoogleRequest
               _igmaiInstanceGroupManager
               (Just AltJSON)
               _igmaiPayload
-              replicaPool
+              replicaPoolService
           where go
                   = buildClient
                       (Proxy ::

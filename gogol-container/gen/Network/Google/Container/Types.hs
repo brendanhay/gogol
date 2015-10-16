@@ -16,7 +16,7 @@
 module Network.Google.Container.Types
     (
     -- * Service Configuration
-      container
+      containerService
 
     -- * OAuth Scopes
     , cloudPlatformScope
@@ -110,8 +110,8 @@ import           Network.Google.Container.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Container Engine API. This contains the host and root path used as a starting point for constructing service requests.
-container :: Service
-container
+containerService :: Service
+containerService
   = defaultService (ServiceId "container:v1")
       "container.googleapis.com"
       ""

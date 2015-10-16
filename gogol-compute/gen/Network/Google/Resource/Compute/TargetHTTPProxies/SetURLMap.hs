@@ -107,7 +107,7 @@ instance GoogleRequest TargetHTTPProxiesSetURLMap'
           = go _thttppsumProject _thttppsumTargetHTTPProxy
               (Just AltJSON)
               _thttppsumPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy TargetHTTPProxiesSetURLMapResource)

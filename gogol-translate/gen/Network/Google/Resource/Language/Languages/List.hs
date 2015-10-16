@@ -75,7 +75,7 @@ llTarget = lens _llTarget (\ s a -> s{_llTarget = a})
 instance GoogleRequest LanguagesList' where
         type Rs LanguagesList' = LanguagesListResponse
         requestClient LanguagesList'{..}
-          = go _llTarget (Just AltJSON) translate
+          = go _llTarget (Just AltJSON) translateService
           where go
                   = buildClient (Proxy :: Proxy LanguagesListResource)
                       mempty

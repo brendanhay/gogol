@@ -116,7 +116,7 @@ instance GoogleRequest TablesList' where
           = go _tlProjectId _tlDatasetId _tlPageToken
               _tlMaxResults
               (Just AltJSON)
-              bigQuery
+              bigQueryService
           where go
                   = buildClient (Proxy :: Proxy TablesListResource)
                       mempty

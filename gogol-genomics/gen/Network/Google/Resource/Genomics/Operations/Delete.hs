@@ -159,7 +159,7 @@ instance GoogleRequest OperationsDelete' where
               _odBearerToken
               _odCallback
               (Just AltJSON)
-              genomics
+              genomicsService
           where go
                   = buildClient
                       (Proxy :: Proxy OperationsDeleteResource)

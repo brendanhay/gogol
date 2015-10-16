@@ -86,7 +86,8 @@ sgTeamId = lens _sgTeamId (\ s a -> s{_sgTeamId = a})
 instance GoogleRequest ScheduleGet' where
         type Rs ScheduleGet' = Schedule
         requestClient ScheduleGet'{..}
-          = go _sgTeamId _sgJobId (Just AltJSON) mapsCoordinate
+          = go _sgTeamId _sgJobId (Just AltJSON)
+              mapsCoordinateService
           where go
                   = buildClient (Proxy :: Proxy ScheduleGetResource)
                       mempty

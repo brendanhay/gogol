@@ -79,7 +79,7 @@ instance GoogleRequest AccountsPermissionsList' where
         type Rs AccountsPermissionsList' =
              ListAccountUsersResponse
         requestClient AccountsPermissionsList'{..}
-          = go _aplAccountId (Just AltJSON) tagManager
+          = go _aplAccountId (Just AltJSON) tagManagerService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsPermissionsListResource)

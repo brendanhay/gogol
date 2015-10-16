@@ -107,7 +107,7 @@ instance GoogleRequest SSLCertsGet' where
         requestClient SSLCertsGet'{..}
           = go _scgProject _scgInstance _scgSha1Fingerprint
               (Just AltJSON)
-              sQLAdmin
+              sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy SSLCertsGetResource)
                       mempty

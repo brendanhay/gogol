@@ -185,7 +185,7 @@ instance GoogleRequest UserRolesList' where
               _urlSubAccountId
               _urlMaxResults
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy UserRolesListResource)
                       mempty

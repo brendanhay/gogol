@@ -123,7 +123,7 @@ instance GoogleRequest
               _mcdlStartIndex
               _mcdlMaxResults
               (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

@@ -74,7 +74,7 @@ cgCustomerId
 instance GoogleRequest CustomersGet' where
         type Rs CustomersGet' = Customer
         requestClient CustomersGet'{..}
-          = go _cgCustomerId (Just AltJSON) appsReseller
+          = go _cgCustomerId (Just AltJSON) appsResellerService
           where go
                   = buildClient (Proxy :: Proxy CustomersGetResource)
                       mempty

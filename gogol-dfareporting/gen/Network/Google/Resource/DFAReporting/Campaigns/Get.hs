@@ -88,7 +88,7 @@ instance GoogleRequest CampaignsGet' where
         type Rs CampaignsGet' = Campaign
         requestClient CampaignsGet'{..}
           = go _camaProFileId _camaId (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy CampaignsGetResource)
                       mempty

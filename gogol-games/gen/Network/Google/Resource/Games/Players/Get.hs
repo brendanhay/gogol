@@ -88,7 +88,8 @@ pgPlayerId
 instance GoogleRequest PlayersGet' where
         type Rs PlayersGet' = Player
         requestClient PlayersGet'{..}
-          = go _pgPlayerId _pgLanguage (Just AltJSON) games
+          = go _pgPlayerId _pgLanguage (Just AltJSON)
+              gamesService
           where go
                   = buildClient (Proxy :: Proxy PlayersGetResource)
                       mempty

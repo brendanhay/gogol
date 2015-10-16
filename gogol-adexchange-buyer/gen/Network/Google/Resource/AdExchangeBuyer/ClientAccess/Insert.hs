@@ -100,7 +100,7 @@ instance GoogleRequest ClientAccessInsert' where
           = go _caiSponsorAccountId _caiClientAccountId
               (Just AltJSON)
               _caiPayload
-              adExchangeBuyer
+              adExchangeBuyerService
           where go
                   = buildClient
                       (Proxy :: Proxy ClientAccessInsertResource)

@@ -88,7 +88,8 @@ instance GoogleRequest
          MyLibraryBookshelvesClearVolumes' where
         type Rs MyLibraryBookshelvesClearVolumes' = ()
         requestClient MyLibraryBookshelvesClearVolumes'{..}
-          = go _mlbcvShelf _mlbcvSource (Just AltJSON) books
+          = go _mlbcvShelf _mlbcvSource (Just AltJSON)
+              booksService
           where go
                   = buildClient
                       (Proxy ::

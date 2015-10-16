@@ -129,7 +129,7 @@ instance GoogleRequest LocationList' where
               _llPageToken
               _llMaxResults
               (Just AltJSON)
-              mapsCoordinate
+              mapsCoordinateService
           where go
                   = buildClient (Proxy :: Proxy LocationListResource)
                       mempty

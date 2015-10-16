@@ -115,7 +115,7 @@ instance GoogleRequest InAppProductsList' where
           = go _iaplPackageName _iaplToken _iaplStartIndex
               _iaplMaxResults
               (Just AltJSON)
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy InAppProductsListResource)

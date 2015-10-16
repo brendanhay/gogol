@@ -100,7 +100,7 @@ instance GoogleRequest PropertiesDelete' where
         requestClient PropertiesDelete'{..}
           = go _pdFileId _pdPropertyKey (Just _pdVisibility)
               (Just AltJSON)
-              drive
+              driveService
           where go
                   = buildClient
                       (Proxy :: Proxy PropertiesDeleteResource)

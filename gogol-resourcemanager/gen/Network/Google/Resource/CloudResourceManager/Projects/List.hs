@@ -202,7 +202,7 @@ instance GoogleRequest ProjectsList' where
               _plPageSize
               _plCallback
               (Just AltJSON)
-              resourceManager
+              resourceManagerService
           where go
                   = buildClient (Proxy :: Proxy ProjectsListResource)
                       mempty

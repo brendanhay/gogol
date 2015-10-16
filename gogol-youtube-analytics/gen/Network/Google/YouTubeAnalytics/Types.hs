@@ -16,7 +16,7 @@
 module Network.Google.YouTubeAnalytics.Types
     (
     -- * Service Configuration
-      youTubeAnalytics
+      youTubeAnalyticsService
 
     -- * OAuth Scopes
     , youtubeScope
@@ -139,8 +139,8 @@ import           Network.Google.YouTubeAnalytics.Types.Product
 import           Network.Google.YouTubeAnalytics.Types.Sum
 
 -- | Default request referring to version 'v1' of the YouTube Analytics API. This contains the host and root path used as a starting point for constructing service requests.
-youTubeAnalytics :: Service
-youTubeAnalytics
+youTubeAnalyticsService :: Service
+youTubeAnalyticsService
   = defaultService (ServiceId "youtubeAnalytics:v1")
       "www.googleapis.com"
       "youtube/analytics/v1/"

@@ -16,7 +16,7 @@
 module Network.Google.Genomics.Types
     (
     -- * Service Configuration
-      genomics
+      genomicsService
 
     -- * OAuth Scopes
     , genomicsScope
@@ -524,8 +524,8 @@ import           Network.Google.Genomics.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Genomics API. This contains the host and root path used as a starting point for constructing service requests.
-genomics :: Service
-genomics
+genomicsService :: Service
+genomicsService
   = defaultService (ServiceId "genomics:v1")
       "genomics.googleapis.com"
       ""

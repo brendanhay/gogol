@@ -75,7 +75,7 @@ sdId = lens _sdId (\ s a -> s{_sdId = a})
 instance GoogleRequest SubscriptionsDelete' where
         type Rs SubscriptionsDelete' = ()
         requestClient SubscriptionsDelete'{..}
-          = go (Just _sdId) (Just AltJSON) youTube
+          = go (Just _sdId) (Just AltJSON) youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy SubscriptionsDeleteResource)

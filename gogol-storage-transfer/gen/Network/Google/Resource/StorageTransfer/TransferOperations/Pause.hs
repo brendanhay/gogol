@@ -173,7 +173,7 @@ instance GoogleRequest TransferOperationsPause' where
               _topCallback
               (Just AltJSON)
               _topPayload
-              storageTransfer
+              storageTransferService
           where go
                   = buildClient
                       (Proxy :: Proxy TransferOperationsPauseResource)

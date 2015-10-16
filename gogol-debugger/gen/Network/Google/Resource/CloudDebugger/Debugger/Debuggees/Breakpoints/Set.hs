@@ -182,7 +182,7 @@ instance GoogleRequest
               _ddbsCallback
               (Just AltJSON)
               _ddbsPayload
-              debugger
+              debuggerService
           where go
                   = buildClient
                       (Proxy ::

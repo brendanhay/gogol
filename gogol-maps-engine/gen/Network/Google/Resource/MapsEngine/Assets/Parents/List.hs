@@ -103,7 +103,7 @@ instance GoogleRequest AssetsParentsList' where
         requestClient AssetsParentsList'{..}
           = go _assId _assPageToken _assMaxResults
               (Just AltJSON)
-              mapsEngine
+              mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy AssetsParentsListResource)

@@ -100,7 +100,7 @@ instance GoogleRequest PropertiesGet' where
         requestClient PropertiesGet'{..}
           = go _pgFileId _pgPropertyKey (Just _pgVisibility)
               (Just AltJSON)
-              drive
+              driveService
           where go
                   = buildClient (Proxy :: Proxy PropertiesGetResource)
                       mempty

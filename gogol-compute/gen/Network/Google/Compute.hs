@@ -19,7 +19,7 @@
 module Network.Google.Compute
     (
     -- * Service Configuration
-      compute
+      computeService
 
     -- * API Declaration
     , ComputeAPI

@@ -142,7 +142,7 @@ instance GoogleRequest UsersThreadsList' where
               _utlPageToken
               (Just _utlMaxResults)
               (Just AltJSON)
-              gmail
+              gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersThreadsListResource)

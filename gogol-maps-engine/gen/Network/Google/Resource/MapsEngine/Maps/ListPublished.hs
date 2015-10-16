@@ -107,7 +107,7 @@ instance GoogleRequest MapsListPublished' where
         requestClient MapsListPublished'{..}
           = go _mlpPageToken _mlpProjectId _mlpMaxResults
               (Just AltJSON)
-              mapsEngine
+              mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy MapsListPublishedResource)

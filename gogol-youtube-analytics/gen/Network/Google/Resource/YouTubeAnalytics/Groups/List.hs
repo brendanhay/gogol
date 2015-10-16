@@ -113,7 +113,7 @@ instance GoogleRequest GroupsList' where
         requestClient GroupsList'{..}
           = go _glMine _glOnBehalfOfContentOwner _glId
               (Just AltJSON)
-              youTubeAnalytics
+              youTubeAnalyticsService
           where go
                   = buildClient (Proxy :: Proxy GroupsListResource)
                       mempty

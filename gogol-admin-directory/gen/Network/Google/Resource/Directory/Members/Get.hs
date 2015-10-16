@@ -88,7 +88,7 @@ instance GoogleRequest MembersGet' where
         type Rs MembersGet' = Member
         requestClient MembersGet'{..}
           = go _mgGroupKey _mgMemberKey (Just AltJSON)
-              directory
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy MembersGetResource)
                       mempty

@@ -106,7 +106,7 @@ instance GoogleRequest ManagementProFilesInsert'
         requestClient ManagementProFilesInsert'{..}
           = go _mpfiAccountId _mpfiWebPropertyId (Just AltJSON)
               _mpfiPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementProFilesInsertResource)

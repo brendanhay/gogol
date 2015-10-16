@@ -101,7 +101,7 @@ instance GoogleRequest TasksInsert' where
         requestClient TasksInsert'{..}
           = go _tiProject _tiTaskqueue (Just AltJSON)
               _tiPayload
-              taskQueue
+              taskQueueService
           where go
                   = buildClient (Proxy :: Proxy TasksInsertResource)
                       mempty

@@ -86,7 +86,8 @@ ccdId = lens _ccdId (\ s a -> s{_ccdId = a})
 instance GoogleRequest ContentCategoriesDelete' where
         type Rs ContentCategoriesDelete' = ()
         requestClient ContentCategoriesDelete'{..}
-          = go _ccdProFileId _ccdId (Just AltJSON) dFAReporting
+          = go _ccdProFileId _ccdId (Just AltJSON)
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy ContentCategoriesDeleteResource)

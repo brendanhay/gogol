@@ -88,7 +88,7 @@ instance GoogleRequest PlacementsInsert' where
         type Rs PlacementsInsert' = Placement
         requestClient PlacementsInsert'{..}
           = go _piProFileId (Just AltJSON) _piPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy PlacementsInsertResource)

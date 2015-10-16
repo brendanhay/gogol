@@ -100,7 +100,7 @@ instance GoogleRequest BackupRunsGet' where
         type Rs BackupRunsGet' = BackupRun
         requestClient BackupRunsGet'{..}
           = go _brgProject _brgInstance _brgId (Just AltJSON)
-              sQLAdmin
+              sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy BackupRunsGetResource)
                       mempty

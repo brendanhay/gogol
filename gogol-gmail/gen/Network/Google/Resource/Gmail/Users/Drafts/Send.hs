@@ -101,7 +101,7 @@ instance GoogleRequest UsersDraftsSend' where
         type Rs UsersDraftsSend' = Message
         requestClient UsersDraftsSend'{..}
           = go _udsUserId (Just AltJSON) _udsPayload _udsMedia
-              gmail
+              gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersDraftsSendResource)

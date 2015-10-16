@@ -76,7 +76,8 @@ mdlOrderId
 instance GoogleRequest MarketplaceDealsList' where
         type Rs MarketplaceDealsList' = GetOrderDealsResponse
         requestClient MarketplaceDealsList'{..}
-          = go _mdlOrderId (Just AltJSON) adExchangeBuyer
+          = go _mdlOrderId (Just AltJSON)
+              adExchangeBuyerService
           where go
                   = buildClient
                       (Proxy :: Proxy MarketplaceDealsListResource)

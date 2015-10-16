@@ -100,7 +100,7 @@ instance GoogleRequest AdsPatch' where
         requestClient AdsPatch'{..}
           = go _appProFileId (Just _appId) (Just AltJSON)
               _appPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy AdsPatchResource)
                       mempty

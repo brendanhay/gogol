@@ -139,7 +139,7 @@ instance GoogleRequest ForwardingRulesList' where
           = go _frlProject _frlRegion _frlFilter _frlPageToken
               (Just _frlMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy ForwardingRulesListResource)

@@ -136,7 +136,7 @@ instance GoogleRequest ManifestsList' where
           = go _mlProject _mlDeployment _mlFilter _mlPageToken
               (Just _mlMaxResults)
               (Just AltJSON)
-              deploymentManager
+              deploymentManagerService
           where go
                   = buildClient (Proxy :: Proxy ManifestsListResource)
                       mempty

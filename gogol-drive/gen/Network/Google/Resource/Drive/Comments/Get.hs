@@ -101,7 +101,7 @@ instance GoogleRequest CommentsGet' where
         requestClient CommentsGet'{..}
           = go _cgFileId _cgCommentId (Just _cgIncludeDeleted)
               (Just AltJSON)
-              drive
+              driveService
           where go
                   = buildClient (Proxy :: Proxy CommentsGetResource)
                       mempty

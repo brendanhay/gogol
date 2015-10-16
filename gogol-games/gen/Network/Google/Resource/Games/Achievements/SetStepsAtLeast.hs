@@ -99,7 +99,7 @@ instance GoogleRequest AchievementsSetStepsAtLeast'
         requestClient AchievementsSetStepsAtLeast'{..}
           = go _assalAchievementId (Just _assalSteps)
               (Just AltJSON)
-              games
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy AchievementsSetStepsAtLeastResource)

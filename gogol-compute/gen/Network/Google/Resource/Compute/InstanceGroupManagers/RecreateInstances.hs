@@ -124,7 +124,7 @@ instance GoogleRequest
               _igmriInstanceGroupManager
               (Just AltJSON)
               _igmriPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy ::

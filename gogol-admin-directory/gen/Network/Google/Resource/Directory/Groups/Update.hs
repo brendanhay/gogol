@@ -87,7 +87,8 @@ guPayload
 instance GoogleRequest GroupsUpdate' where
         type Rs GroupsUpdate' = Group
         requestClient GroupsUpdate'{..}
-          = go _guGroupKey (Just AltJSON) _guPayload directory
+          = go _guGroupKey (Just AltJSON) _guPayload
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy GroupsUpdateResource)
                       mempty

@@ -217,7 +217,7 @@ instance GoogleRequest AppsModulesVersionsList' where
               _amvlPageSize
               _amvlCallback
               (Just AltJSON)
-              appEngine
+              appEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy AppsModulesVersionsListResource)

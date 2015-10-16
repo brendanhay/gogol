@@ -16,7 +16,7 @@
 module Network.Google.OAuth2.Types
     (
     -- * Service Configuration
-      oAuth2
+      oAuth2Service
 
     -- * OAuth Scopes
     , userinfoProfileScope
@@ -73,8 +73,8 @@ import           Network.Google.OAuth2.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google OAuth2 API. This contains the host and root path used as a starting point for constructing service requests.
-oAuth2 :: Service
-oAuth2
+oAuth2Service :: Service
+oAuth2Service
   = defaultService (ServiceId "oauth2:v2")
       "www.googleapis.com"
       ""

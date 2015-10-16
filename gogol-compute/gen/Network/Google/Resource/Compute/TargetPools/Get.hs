@@ -102,7 +102,7 @@ instance GoogleRequest TargetPoolsGet' where
         requestClient TargetPoolsGet'{..}
           = go _tpgProject _tpgRegion _tpgTargetPool
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient (Proxy :: Proxy TargetPoolsGetResource)
                       mempty

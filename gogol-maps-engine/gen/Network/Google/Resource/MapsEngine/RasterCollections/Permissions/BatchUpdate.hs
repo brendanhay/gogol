@@ -96,7 +96,8 @@ instance GoogleRequest
              PermissionsBatchUpdateResponse
         requestClient
           RasterCollectionsPermissionsBatchUpdate'{..}
-          = go _rcpbuId (Just AltJSON) _rcpbuPayload mapsEngine
+          = go _rcpbuId (Just AltJSON) _rcpbuPayload
+              mapsEngineService
           where go
                   = buildClient
                       (Proxy ::

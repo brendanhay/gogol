@@ -104,7 +104,7 @@ instance GoogleRequest TablesDelete' where
         requestClient TablesDelete'{..}
           = go _tdProjectId _tdDatasetId _tdTableId
               (Just AltJSON)
-              bigQuery
+              bigQueryService
           where go
                   = buildClient (Proxy :: Proxy TablesDeleteResource)
                       mempty

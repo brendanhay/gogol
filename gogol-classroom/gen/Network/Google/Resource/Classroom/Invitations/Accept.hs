@@ -170,7 +170,7 @@ instance GoogleRequest InvitationsAccept' where
               _iaBearerToken
               _iaCallback
               (Just AltJSON)
-              classroom
+              classroomService
           where go
                   = buildClient
                       (Proxy :: Proxy InvitationsAcceptResource)

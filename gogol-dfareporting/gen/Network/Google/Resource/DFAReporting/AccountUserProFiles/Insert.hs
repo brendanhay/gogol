@@ -92,7 +92,7 @@ instance GoogleRequest AccountUserProFilesInsert'
              AccountUserProFile
         requestClient AccountUserProFilesInsert'{..}
           = go _aupfiProFileId (Just AltJSON) _aupfiPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountUserProFilesInsertResource)

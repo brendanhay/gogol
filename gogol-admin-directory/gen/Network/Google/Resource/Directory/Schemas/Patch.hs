@@ -101,7 +101,7 @@ instance GoogleRequest SchemasPatch' where
         requestClient SchemasPatch'{..}
           = go _spCustomerId _spSchemaKey (Just AltJSON)
               _spPayload
-              directory
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy SchemasPatchResource)
                       mempty

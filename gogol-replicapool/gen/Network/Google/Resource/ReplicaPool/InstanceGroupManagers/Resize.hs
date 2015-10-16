@@ -121,7 +121,7 @@ instance GoogleRequest InstanceGroupManagersResize'
           = go _igmrProject _igmrZone _igmrInstanceGroupManager
               (Just _igmrSize)
               (Just AltJSON)
-              replicaPool
+              replicaPoolService
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceGroupManagersResizeResource)

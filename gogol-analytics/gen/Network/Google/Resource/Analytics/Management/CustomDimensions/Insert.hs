@@ -108,7 +108,7 @@ instance GoogleRequest
         requestClient ManagementCustomDimensionsInsert'{..}
           = go _mcdiAccountId _mcdiWebPropertyId (Just AltJSON)
               _mcdiPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

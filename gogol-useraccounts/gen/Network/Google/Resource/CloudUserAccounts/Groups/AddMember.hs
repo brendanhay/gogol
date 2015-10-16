@@ -103,7 +103,7 @@ instance GoogleRequest GroupsAddMember' where
         requestClient GroupsAddMember'{..}
           = go _gamProject _gamGroupName (Just AltJSON)
               _gamPayload
-              userAccounts
+              userAccountsService
           where go
                   = buildClient
                       (Proxy :: Proxy GroupsAddMemberResource)

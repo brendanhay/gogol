@@ -109,7 +109,7 @@ instance GoogleRequest DatafeedsUpdate' where
           = go _duMerchantId _duDatafeedId _duDryRun
               (Just AltJSON)
               _duPayload
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy DatafeedsUpdateResource)

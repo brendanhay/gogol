@@ -110,7 +110,7 @@ instance GoogleRequest InstancesStop' where
         type Rs InstancesStop' = Operation
         requestClient InstancesStop'{..}
           = go _isProject _isZone _isInstance (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient (Proxy :: Proxy InstancesStopResource)
                       mempty

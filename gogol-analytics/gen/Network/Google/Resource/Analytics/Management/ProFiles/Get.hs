@@ -106,7 +106,7 @@ instance GoogleRequest ManagementProFilesGet' where
         requestClient ManagementProFilesGet'{..}
           = go _mpfgAccountId _mpfgWebPropertyId _mpfgProFileId
               (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementProFilesGetResource)

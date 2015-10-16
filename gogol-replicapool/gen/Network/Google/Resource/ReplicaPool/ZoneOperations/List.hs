@@ -127,7 +127,7 @@ instance GoogleRequest ZoneOperationsList' where
           = go _zolProject _zolZone _zolFilter _zolPageToken
               (Just _zolMaxResults)
               (Just AltJSON)
-              replicaPool
+              replicaPoolService
           where go
                   = buildClient
                       (Proxy :: Proxy ZoneOperationsListResource)

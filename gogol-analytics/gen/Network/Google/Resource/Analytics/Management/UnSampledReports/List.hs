@@ -141,7 +141,7 @@ instance GoogleRequest
               _musrlStartIndex
               _musrlMaxResults
               (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

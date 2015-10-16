@@ -178,7 +178,7 @@ instance GoogleRequest ControllerDebuggeesRegister'
               _cdrCallback
               (Just AltJSON)
               _cdrPayload
-              debugger
+              debuggerService
           where go
                   = buildClient
                       (Proxy :: Proxy ControllerDebuggeesRegisterResource)

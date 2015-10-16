@@ -240,7 +240,7 @@ instance GoogleRequest
               _ddblWaitToken
               _ddblCallback
               (Just AltJSON)
-              debugger
+              debuggerService
           where go
                   = buildClient
                       (Proxy ::

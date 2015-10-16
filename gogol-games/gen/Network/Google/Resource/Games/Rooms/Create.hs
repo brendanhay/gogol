@@ -89,7 +89,8 @@ rcLanguage
 instance GoogleRequest RoomsCreate' where
         type Rs RoomsCreate' = Room
         requestClient RoomsCreate'{..}
-          = go _rcLanguage (Just AltJSON) _rcPayload games
+          = go _rcLanguage (Just AltJSON) _rcPayload
+              gamesService
           where go
                   = buildClient (Proxy :: Proxy RoomsCreateResource)
                       mempty

@@ -133,7 +133,7 @@ instance GoogleRequest ManagementExperimentsUpdate'
               _meuExperimentId
               (Just AltJSON)
               _meuPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementExperimentsUpdateResource)

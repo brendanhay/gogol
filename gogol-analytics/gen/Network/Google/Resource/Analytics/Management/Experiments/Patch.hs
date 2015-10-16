@@ -134,7 +134,7 @@ instance GoogleRequest ManagementExperimentsPatch'
               _mepExperimentId
               (Just AltJSON)
               _mepPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementExperimentsPatchResource)

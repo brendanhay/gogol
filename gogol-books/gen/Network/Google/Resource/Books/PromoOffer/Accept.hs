@@ -156,7 +156,7 @@ instance GoogleRequest PromoOfferAccept' where
               _poaProduct
               _poaAndroidId
               (Just AltJSON)
-              books
+              booksService
           where go
                   = buildClient
                       (Proxy :: Proxy PromoOfferAcceptResource)

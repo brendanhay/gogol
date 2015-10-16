@@ -104,7 +104,7 @@ instance GoogleRequest EventsDelete' where
         requestClient EventsDelete'{..}
           = go _edCalendarId _edEventId _edSendNotifications
               (Just AltJSON)
-              appsCalendar
+              appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy EventsDeleteResource)
                       mempty

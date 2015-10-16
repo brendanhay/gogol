@@ -77,7 +77,7 @@ piPayload
 instance GoogleRequest PawsInit' where
         type Rs PawsInit' = PawsInitResponse
         requestClient PawsInit'{..}
-          = go (Just AltJSON) _piPayload spectrum
+          = go (Just AltJSON) _piPayload spectrumService
           where go
                   = buildClient (Proxy :: Proxy PawsInitResource)
                       mempty

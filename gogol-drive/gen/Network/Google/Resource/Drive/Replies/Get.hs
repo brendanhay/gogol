@@ -114,7 +114,7 @@ instance GoogleRequest RepliesGet' where
           = go _rgFileId _rgCommentId _rgReplyId
               (Just _rgIncludeDeleted)
               (Just AltJSON)
-              drive
+              driveService
           where go
                   = buildClient (Proxy :: Proxy RepliesGetResource)
                       mempty

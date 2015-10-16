@@ -77,7 +77,7 @@ instance GoogleRequest VerificationCodesGenerate'
          where
         type Rs VerificationCodesGenerate' = ()
         requestClient VerificationCodesGenerate'{..}
-          = go _vcgUserKey (Just AltJSON) directory
+          = go _vcgUserKey (Just AltJSON) directoryService
           where go
                   = buildClient
                       (Proxy :: Proxy VerificationCodesGenerateResource)

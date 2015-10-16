@@ -138,6 +138,6 @@ instance GoogleRequest ACLList' where
               _alPageToken
               _alMaxResults
               (Just AltJSON)
-              appsCalendar
+              appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy ACLListResource) mempty

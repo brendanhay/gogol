@@ -88,7 +88,7 @@ instance GoogleRequest SchemasDelete' where
         type Rs SchemasDelete' = ()
         requestClient SchemasDelete'{..}
           = go _sdCustomerId _sdSchemaKey (Just AltJSON)
-              directory
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy SchemasDeleteResource)
                       mempty

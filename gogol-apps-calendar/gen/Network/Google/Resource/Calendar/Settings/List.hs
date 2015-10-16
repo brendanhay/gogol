@@ -107,7 +107,7 @@ instance GoogleRequest SettingsList' where
         requestClient SettingsList'{..}
           = go _slSyncToken _slPageToken _slMaxResults
               (Just AltJSON)
-              appsCalendar
+              appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy SettingsListResource)
                       mempty

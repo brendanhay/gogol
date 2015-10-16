@@ -90,7 +90,8 @@ bsiPayload
 instance GoogleRequest BackendServicesInsert' where
         type Rs BackendServicesInsert' = Operation
         requestClient BackendServicesInsert'{..}
-          = go _bsiProject (Just AltJSON) _bsiPayload compute
+          = go _bsiProject (Just AltJSON) _bsiPayload
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy BackendServicesInsertResource)

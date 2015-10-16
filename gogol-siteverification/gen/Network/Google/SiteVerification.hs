@@ -20,7 +20,7 @@
 module Network.Google.SiteVerification
     (
     -- * Service Configuration
-      siteVerification
+      siteVerificationService
 
     -- * API Declaration
     , SiteVerificationAPI

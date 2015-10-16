@@ -103,7 +103,7 @@ instance GoogleRequest RemarketingListsPatch' where
         requestClient RemarketingListsPatch'{..}
           = go _rlpProFileId (Just _rlpId) (Just AltJSON)
               _rlpPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy RemarketingListsPatchResource)

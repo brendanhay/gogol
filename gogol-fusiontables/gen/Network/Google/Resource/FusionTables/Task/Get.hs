@@ -86,6 +86,7 @@ tgTableId
 instance GoogleRequest TaskGet' where
         type Rs TaskGet' = Task
         requestClient TaskGet'{..}
-          = go _tgTableId _tgTaskId (Just AltJSON) fusionTables
+          = go _tgTableId _tgTaskId (Just AltJSON)
+              fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TaskGetResource) mempty

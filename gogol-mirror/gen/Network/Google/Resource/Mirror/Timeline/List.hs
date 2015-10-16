@@ -148,7 +148,7 @@ instance GoogleRequest TimelineList' where
               _tlMaxResults
               _tlIncludeDeleted
               (Just AltJSON)
-              mirror
+              mirrorService
           where go
                   = buildClient (Proxy :: Proxy TimelineListResource)
                       mempty

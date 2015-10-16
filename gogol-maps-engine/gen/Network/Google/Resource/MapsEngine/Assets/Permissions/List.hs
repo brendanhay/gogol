@@ -76,7 +76,7 @@ instance GoogleRequest AssetsPermissionsList' where
         type Rs AssetsPermissionsList' =
              PermissionsListResponse
         requestClient AssetsPermissionsList'{..}
-          = go _aplId (Just AltJSON) mapsEngine
+          = go _aplId (Just AltJSON) mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy AssetsPermissionsListResource)

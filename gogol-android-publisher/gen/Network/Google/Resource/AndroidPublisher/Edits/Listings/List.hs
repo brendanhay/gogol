@@ -91,7 +91,7 @@ instance GoogleRequest EditsListingsList' where
         type Rs EditsListingsList' = ListingsListResponse
         requestClient EditsListingsList'{..}
           = go _ellPackageName _ellEditId (Just AltJSON)
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy EditsListingsListResource)

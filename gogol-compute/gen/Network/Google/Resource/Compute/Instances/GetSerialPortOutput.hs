@@ -118,7 +118,7 @@ instance GoogleRequest InstancesGetSerialPortOutput'
           = go _igspoProject _igspoZone _igspoInstance
               (Just _igspoPort)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesGetSerialPortOutputResource)

@@ -160,7 +160,7 @@ instance GoogleRequest
               _mlrpspAction
               _mlrpspSource
               (Just AltJSON)
-              books
+              booksService
           where go
                   = buildClient
                       (Proxy ::

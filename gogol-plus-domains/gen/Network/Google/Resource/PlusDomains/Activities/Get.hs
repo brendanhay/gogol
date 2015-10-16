@@ -74,7 +74,7 @@ agActivityId
 instance GoogleRequest ActivitiesGet' where
         type Rs ActivitiesGet' = Activity
         requestClient ActivitiesGet'{..}
-          = go _agActivityId (Just AltJSON) plusDomains
+          = go _agActivityId (Just AltJSON) plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy ActivitiesGetResource)
                       mempty

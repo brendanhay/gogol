@@ -146,7 +146,7 @@ instance GoogleRequest VolumesUserUploadedList' where
               _vuulStartIndex
               _vuulMaxResults
               (Just AltJSON)
-              books
+              booksService
           where go
                   = buildClient
                       (Proxy :: Proxy VolumesUserUploadedListResource)

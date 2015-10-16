@@ -114,7 +114,7 @@ instance GoogleRequest UsersMessagesGet' where
           = go _umgUserId _umgId (Just _umgFormat)
               (_umgMetadataHeaders ^. _Default)
               (Just AltJSON)
-              gmail
+              gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersMessagesGetResource)

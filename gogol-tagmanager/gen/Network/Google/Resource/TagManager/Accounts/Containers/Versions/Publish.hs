@@ -124,7 +124,7 @@ instance GoogleRequest
               _acvpContainerVersionId
               _acvpFingerprint
               (Just AltJSON)
-              tagManager
+              tagManagerService
           where go
                   = buildClient
                       (Proxy ::

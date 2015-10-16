@@ -113,7 +113,7 @@ instance GoogleRequest MomentsInsert' where
         requestClient MomentsInsert'{..}
           = go _miUserId _miCollection _miDebug (Just AltJSON)
               _miPayload
-              plus
+              plusService
           where go
                   = buildClient (Proxy :: Proxy MomentsInsertResource)
                       mempty

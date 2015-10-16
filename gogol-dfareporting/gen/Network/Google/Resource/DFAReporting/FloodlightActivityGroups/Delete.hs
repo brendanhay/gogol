@@ -89,7 +89,7 @@ instance GoogleRequest
         type Rs FloodlightActivityGroupsDelete' = ()
         requestClient FloodlightActivityGroupsDelete'{..}
           = go _fagdProFileId _fagdId (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy ::

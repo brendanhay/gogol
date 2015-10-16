@@ -107,7 +107,7 @@ instance GoogleRequest InstancesPatch' where
         type Rs InstancesPatch' = Operation
         requestClient InstancesPatch'{..}
           = go _ipProject _ipInstance (Just AltJSON) _ipPayload
-              sQLAdmin
+              sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy InstancesPatchResource)
                       mempty

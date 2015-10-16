@@ -102,7 +102,7 @@ instance GoogleRequest ACLUpdate' where
         requestClient ACLUpdate'{..}
           = go _auCalendarId _auRuleId (Just AltJSON)
               _auPayload
-              appsCalendar
+              appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy ACLUpdateResource)
                       mempty

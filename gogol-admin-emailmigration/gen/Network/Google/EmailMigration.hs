@@ -19,7 +19,7 @@
 module Network.Google.EmailMigration
     (
     -- * Service Configuration
-      emailMigration
+      emailMigrationService
 
     -- * API Declaration
     , EmailMigrationAPI

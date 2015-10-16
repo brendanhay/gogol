@@ -178,7 +178,7 @@ instance GoogleRequest DatasetsUndelete' where
               _duCallback
               (Just AltJSON)
               _duPayload
-              genomics
+              genomicsService
           where go
                   = buildClient
                       (Proxy :: Proxy DatasetsUndeleteResource)

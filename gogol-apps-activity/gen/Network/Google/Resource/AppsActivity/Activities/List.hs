@@ -165,7 +165,7 @@ instance GoogleRequest ActivitiesList' where
               _alPageToken
               (Just _alPageSize)
               (Just AltJSON)
-              appsActivity
+              appsActivityService
           where go
                   = buildClient (Proxy :: Proxy ActivitiesListResource)
                       mempty

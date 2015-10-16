@@ -135,7 +135,7 @@ instance GoogleRequest DisksList' where
           = go _dlProject _dlZone _dlFilter _dlPageToken
               (Just _dlMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient (Proxy :: Proxy DisksListResource)
                       mempty

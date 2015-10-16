@@ -89,7 +89,7 @@ instance GoogleRequest CustomersInsert' where
         type Rs CustomersInsert' = Customer
         requestClient CustomersInsert'{..}
           = go _ciCustomerAuthToken (Just AltJSON) _ciPayload
-              appsReseller
+              appsResellerService
           where go
                   = buildClient
                       (Proxy :: Proxy CustomersInsertResource)

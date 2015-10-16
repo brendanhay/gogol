@@ -102,7 +102,7 @@ instance GoogleRequest ResourcesGet' where
         requestClient ResourcesGet'{..}
           = go _rgProject _rgDeployment _rgResource
               (Just AltJSON)
-              deploymentManager
+              deploymentManagerService
           where go
                   = buildClient (Proxy :: Proxy ResourcesGetResource)
                       mempty

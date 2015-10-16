@@ -101,7 +101,7 @@ instance GoogleRequest UsersSessionsDelete' where
         requestClient UsersSessionsDelete'{..}
           = go _usdUserId _usdSessionId _usdCurrentTimeMillis
               (Just AltJSON)
-              fitness
+              fitnessService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersSessionsDeleteResource)

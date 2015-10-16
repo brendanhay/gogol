@@ -102,7 +102,7 @@ instance GoogleRequest TargetVPNGatewaysDelete' where
         requestClient TargetVPNGatewaysDelete'{..}
           = go _tvgdProject _tvgdRegion _tvgdTargetVPNGateway
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy TargetVPNGatewaysDeleteResource)

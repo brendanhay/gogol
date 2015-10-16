@@ -123,7 +123,7 @@ instance GoogleRequest PurchasesSubscriptionsDefer'
           = go _psdPackageName _psdSubscriptionId _psdToken
               (Just AltJSON)
               _psdPayload
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy PurchasesSubscriptionsDeferResource)

@@ -128,7 +128,7 @@ instance GoogleRequest MachineTypesAggregatedList'
           = go _mtalProject _mtalFilter _mtalPageToken
               (Just _mtalMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy MachineTypesAggregatedListResource)

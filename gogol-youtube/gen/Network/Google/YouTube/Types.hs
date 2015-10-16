@@ -16,7 +16,7 @@
 module Network.Google.YouTube.Types
     (
     -- * Service Configuration
-      youTube
+      youTubeService
 
     -- * OAuth Scopes
     , youtubeUploadScope
@@ -1859,8 +1859,8 @@ import           Network.Google.YouTube.Types.Product
 import           Network.Google.YouTube.Types.Sum
 
 -- | Default request referring to version 'v3' of the YouTube Data API. This contains the host and root path used as a starting point for constructing service requests.
-youTube :: Service
-youTube
+youTubeService :: Service
+youTubeService
   = defaultService (ServiceId "youtube:v3")
       "www.googleapis.com"
       "youtube/v3/"

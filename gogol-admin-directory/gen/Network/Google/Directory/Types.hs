@@ -16,7 +16,7 @@
 module Network.Google.Directory.Types
     (
     -- * Service Configuration
-      directory
+      directoryService
 
     -- * OAuth Scopes
     , adminDirectoryGroupReadonlyScope
@@ -602,8 +602,8 @@ import           Network.Google.Directory.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'directory_v1' of the Admin Directory API. This contains the host and root path used as a starting point for constructing service requests.
-directory :: Service
-directory
+directoryService :: Service
+directoryService
   = defaultService (ServiceId "admin:directory_v1")
       "www.googleapis.com"
       "admin/directory/v1/"

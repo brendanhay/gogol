@@ -105,7 +105,7 @@ instance GoogleRequest UsersMessagesAttachmentsGet'
         requestClient UsersMessagesAttachmentsGet'{..}
           = go _umagUserId _umagMessageId _umagId
               (Just AltJSON)
-              gmail
+              gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersMessagesAttachmentsGetResource)

@@ -80,7 +80,7 @@ instance GoogleRequest AchievementsReveal' where
         type Rs AchievementsReveal' =
              AchievementRevealResponse
         requestClient AchievementsReveal'{..}
-          = go _arAchievementId (Just AltJSON) games
+          = go _arAchievementId (Just AltJSON) gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy AchievementsRevealResource)

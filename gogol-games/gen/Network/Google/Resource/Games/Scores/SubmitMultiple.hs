@@ -88,7 +88,8 @@ instance GoogleRequest ScoresSubmitMultiple' where
         type Rs ScoresSubmitMultiple' =
              PlayerScoreListResponse
         requestClient ScoresSubmitMultiple'{..}
-          = go _ssmLanguage (Just AltJSON) _ssmPayload games
+          = go _ssmLanguage (Just AltJSON) _ssmPayload
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy ScoresSubmitMultipleResource)

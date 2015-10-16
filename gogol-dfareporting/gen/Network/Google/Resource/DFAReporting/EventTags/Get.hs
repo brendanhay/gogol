@@ -86,7 +86,8 @@ etgId = lens _etgId (\ s a -> s{_etgId = a})
 instance GoogleRequest EventTagsGet' where
         type Rs EventTagsGet' = EventTag
         requestClient EventTagsGet'{..}
-          = go _etgProFileId _etgId (Just AltJSON) dFAReporting
+          = go _etgProFileId _etgId (Just AltJSON)
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy EventTagsGetResource)
                       mempty

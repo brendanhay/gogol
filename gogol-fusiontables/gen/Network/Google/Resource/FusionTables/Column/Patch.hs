@@ -102,7 +102,7 @@ instance GoogleRequest ColumnPatch' where
         type Rs ColumnPatch' = Column
         requestClient ColumnPatch'{..}
           = go _cpTableId _cpColumnId (Just AltJSON) _cpPayload
-              fusionTables
+              fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy ColumnPatchResource)
                       mempty

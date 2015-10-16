@@ -89,7 +89,7 @@ instance GoogleRequest StyleInsert' where
         type Rs StyleInsert' = StyleSetting
         requestClient StyleInsert'{..}
           = go _siTableId (Just AltJSON) _siPayload
-              fusionTables
+              fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy StyleInsertResource)
                       mempty

@@ -199,7 +199,7 @@ instance GoogleRequest ProjectsJobsCreate' where
               _pjcCallback
               (Just AltJSON)
               _pjcPayload
-              dataflow
+              dataflowService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsJobsCreateResource)

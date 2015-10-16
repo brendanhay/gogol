@@ -74,7 +74,7 @@ tabTableId
 instance GoogleRequest TableGet' where
         type Rs TableGet' = Table
         requestClient TableGet'{..}
-          = go _tabTableId (Just AltJSON) fusionTables
+          = go _tabTableId (Just AltJSON) fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TableGetResource)
                       mempty

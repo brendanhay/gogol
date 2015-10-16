@@ -79,7 +79,7 @@ ccCalendarId
 instance GoogleRequest CalendarsClear' where
         type Rs CalendarsClear' = ()
         requestClient CalendarsClear'{..}
-          = go _ccCalendarId (Just AltJSON) appsCalendar
+          = go _ccCalendarId (Just AltJSON) appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy CalendarsClearResource)
                       mempty

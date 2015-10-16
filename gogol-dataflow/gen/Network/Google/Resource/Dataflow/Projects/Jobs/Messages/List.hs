@@ -249,7 +249,7 @@ instance GoogleRequest ProjectsJobsMessagesList'
               _pjmlPageSize
               _pjmlCallback
               (Just AltJSON)
-              dataflow
+              dataflowService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsJobsMessagesListResource)

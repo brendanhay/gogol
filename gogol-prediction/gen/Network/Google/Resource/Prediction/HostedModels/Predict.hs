@@ -102,7 +102,7 @@ instance GoogleRequest HostedModelsPredict' where
         requestClient HostedModelsPredict'{..}
           = go _hmpProject _hmpHostedModelName (Just AltJSON)
               _hmpPayload
-              prediction
+              predictionService
           where go
                   = buildClient
                       (Proxy :: Proxy HostedModelsPredictResource)

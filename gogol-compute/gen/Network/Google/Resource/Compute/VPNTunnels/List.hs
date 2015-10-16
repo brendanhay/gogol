@@ -138,7 +138,7 @@ instance GoogleRequest VPNTunnelsList' where
           = go _vtlProject _vtlRegion _vtlFilter _vtlPageToken
               (Just _vtlMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient (Proxy :: Proxy VPNTunnelsListResource)
                       mempty

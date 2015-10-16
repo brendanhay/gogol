@@ -132,7 +132,7 @@ instance GoogleRequest
               _acfuFingerprint
               (Just AltJSON)
               _acfuPayload
-              tagManager
+              tagManagerService
           where go
                   = buildClient
                       (Proxy ::

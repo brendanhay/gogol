@@ -139,7 +139,7 @@ instance GoogleRequest MetricDescriptorsList' where
               _mdlPageToken
               (Just AltJSON)
               _mdlPayload
-              monitoring
+              monitoringService
           where go
                   = buildClient
                       (Proxy :: Proxy MetricDescriptorsListResource)

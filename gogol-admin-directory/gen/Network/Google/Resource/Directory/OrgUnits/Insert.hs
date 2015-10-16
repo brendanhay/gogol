@@ -89,7 +89,7 @@ instance GoogleRequest OrgUnitsInsert' where
         type Rs OrgUnitsInsert' = OrgUnit
         requestClient OrgUnitsInsert'{..}
           = go _ouiCustomerId (Just AltJSON) _ouiPayload
-              directory
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy OrgUnitsInsertResource)
                       mempty

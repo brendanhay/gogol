@@ -105,7 +105,7 @@ instance GoogleRequest ApplicationsGet' where
         requestClient ApplicationsGet'{..}
           = go _agApplicationId _agPlatformType _agLanguage
               (Just AltJSON)
-              games
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy ApplicationsGetResource)

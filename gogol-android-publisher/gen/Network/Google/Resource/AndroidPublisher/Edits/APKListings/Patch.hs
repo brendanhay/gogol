@@ -140,7 +140,7 @@ instance GoogleRequest EditsAPKListingsPatch' where
               _eapklpLanguage
               (Just AltJSON)
               _eapklpPayload
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy EditsAPKListingsPatchResource)

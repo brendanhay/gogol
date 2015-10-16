@@ -19,7 +19,7 @@
 module Network.Google.SQLAdmin
     (
     -- * Service Configuration
-      sQLAdmin
+      sQLAdminService
 
     -- * API Declaration
     , SQLAdminAPI

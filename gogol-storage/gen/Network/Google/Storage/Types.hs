@@ -16,7 +16,7 @@
 module Network.Google.Storage.Types
     (
     -- * Service Configuration
-      storage
+      storageService
 
     -- * OAuth Scopes
     , cloudPlatformReadOnlyScope
@@ -341,8 +341,8 @@ import           Network.Google.Storage.Types.Product
 import           Network.Google.Storage.Types.Sum
 
 -- | Default request referring to version 'v1' of the Cloud Storage JSON API. This contains the host and root path used as a starting point for constructing service requests.
-storage :: Service
-storage
+storageService :: Service
+storageService
   = defaultService (ServiceId "storage:v1")
       "www.googleapis.com"
       "storage/v1/"

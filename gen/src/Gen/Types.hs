@@ -52,6 +52,7 @@ import           Data.List                  (sort)
 import           Data.Maybe
 import           Data.Ord
 import           Data.Semigroup             ((<>))
+import           Data.String
 import           Data.Text                  (Text)
 import qualified Data.Text                  as Text
 import qualified Data.Text.Lazy             as LText
@@ -329,7 +330,9 @@ initial :: Service (Fix Schema) -> Memo
 initial s = Memo s mempty mempty res core mempty mempty mempty
   where
     -- Top-level schema definitions with ids.
-    res = Set.fromList . mapMaybe (view iId) $ Map.elems (s ^. dSchemas)
+    res = Set.fromList
+        . mapMaybe (view iId)
+        $ Map.elems (s ^. dSchemas)
 
     -- Types available in Network.Google.Prelude.
     core = Map.fromList

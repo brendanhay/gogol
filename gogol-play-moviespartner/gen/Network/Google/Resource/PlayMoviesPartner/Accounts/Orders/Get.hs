@@ -177,7 +177,7 @@ instance GoogleRequest AccountsOrdersGet' where
               _aogBearerToken
               _aogCallback
               (Just AltJSON)
-              playMoviesPartner
+              playMoviesPartnerService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsOrdersGetResource)

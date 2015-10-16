@@ -101,7 +101,7 @@ instance GoogleRequest InstancesDelete' where
         type Rs InstancesDelete' = Operation
         requestClient InstancesDelete'{..}
           = go _insProject _insZone _insInstance (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesDeleteResource)

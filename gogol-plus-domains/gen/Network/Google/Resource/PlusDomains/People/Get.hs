@@ -74,7 +74,7 @@ pgUserId = lens _pgUserId (\ s a -> s{_pgUserId = a})
 instance GoogleRequest PeopleGet' where
         type Rs PeopleGet' = Person
         requestClient PeopleGet'{..}
-          = go _pgUserId (Just AltJSON) plusDomains
+          = go _pgUserId (Just AltJSON) plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy PeopleGetResource)
                       mempty

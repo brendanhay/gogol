@@ -111,7 +111,7 @@ instance GoogleRequest
         requestClient CampaignCreativeAssociationsInsert'{..}
           = go _ccaiProFileId _ccaiCampaignId (Just AltJSON)
               _ccaiPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy ::

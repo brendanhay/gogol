@@ -104,7 +104,7 @@ instance GoogleRequest MobileDevicesGet' where
         requestClient MobileDevicesGet'{..}
           = go _mdgCustomerId _mdgResourceId _mdgProjection
               (Just AltJSON)
-              directory
+              directoryService
           where go
                   = buildClient
                       (Proxy :: Proxy MobileDevicesGetResource)

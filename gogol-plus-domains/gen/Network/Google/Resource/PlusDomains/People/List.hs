@@ -127,7 +127,7 @@ instance GoogleRequest PeopleList' where
           = go _plUserId _plCollection _plOrderBy _plPageToken
               (Just _plMaxResults)
               (Just AltJSON)
-              plusDomains
+              plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy PeopleListResource)
                       mempty

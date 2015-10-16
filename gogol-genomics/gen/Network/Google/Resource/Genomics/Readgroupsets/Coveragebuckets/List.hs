@@ -264,7 +264,7 @@ instance GoogleRequest
               _rclPageSize
               _rclCallback
               (Just AltJSON)
-              genomics
+              genomicsService
           where go
                   = buildClient
                       (Proxy ::

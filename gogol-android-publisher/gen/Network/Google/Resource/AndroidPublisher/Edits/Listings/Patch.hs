@@ -119,7 +119,7 @@ instance GoogleRequest EditsListingsPatch' where
           = go _elpPackageName _elpEditId _elpLanguage
               (Just AltJSON)
               _elpPayload
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient
                       (Proxy :: Proxy EditsListingsPatchResource)

@@ -125,7 +125,7 @@ instance GoogleRequest AssociationSessionsStart'
               _assWebsiteLocale
               _assUserLocale
               (Just AltJSON)
-              adSenseHost
+              adSenseHostService
           where go
                   = buildClient
                       (Proxy :: Proxy AssociationSessionsStartResource)

@@ -86,7 +86,8 @@ sizId = lens _sizId (\ s a -> s{_sizId = a})
 instance GoogleRequest SizesGet' where
         type Rs SizesGet' = Size
         requestClient SizesGet'{..}
-          = go _sizProFileId _sizId (Just AltJSON) dFAReporting
+          = go _sizProFileId _sizId (Just AltJSON)
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy SizesGetResource)
                       mempty

@@ -94,6 +94,6 @@ instance GoogleRequest TokenInfo' where
         requestClient TokenInfo'{..}
           = go _tAccessToken _tTokenHandle _tIdToken
               (Just AltJSON)
-              oAuth2
+              oAuth2Service
           where go
                   = buildClient (Proxy :: Proxy TokenInfoMethod) mempty

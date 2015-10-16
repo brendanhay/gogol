@@ -106,7 +106,7 @@ instance GoogleRequest AccountUserProFilesPatch'
         requestClient AccountUserProFilesPatch'{..}
           = go _aupfpProFileId (Just _aupfpId) (Just AltJSON)
               _aupfpPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountUserProFilesPatchResource)

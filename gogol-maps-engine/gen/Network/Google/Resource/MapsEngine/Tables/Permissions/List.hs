@@ -76,7 +76,7 @@ instance GoogleRequest TablesPermissionsList' where
         type Rs TablesPermissionsList' =
              PermissionsListResponse
         requestClient TablesPermissionsList'{..}
-          = go _tplId (Just AltJSON) mapsEngine
+          = go _tplId (Just AltJSON) mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy TablesPermissionsListResource)

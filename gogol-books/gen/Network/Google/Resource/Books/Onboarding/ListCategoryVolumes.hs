@@ -133,7 +133,7 @@ instance GoogleRequest OnboardingListCategoryVolumes'
               _olcvPageToken
               _olcvPageSize
               (Just AltJSON)
-              books
+              booksService
           where go
                   = buildClient
                       (Proxy ::

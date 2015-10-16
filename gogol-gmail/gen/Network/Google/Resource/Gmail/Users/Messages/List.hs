@@ -142,7 +142,7 @@ instance GoogleRequest UsersMessagesList' where
               _umlPageToken
               (Just _umlMaxResults)
               (Just AltJSON)
-              gmail
+              gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersMessagesListResource)

@@ -87,7 +87,7 @@ instance GoogleRequest LeaderboardsGet' where
         type Rs LeaderboardsGet' = Leaderboard
         requestClient LeaderboardsGet'{..}
           = go _lgLeaderboardId _lgLanguage (Just AltJSON)
-              games
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy LeaderboardsGetResource)

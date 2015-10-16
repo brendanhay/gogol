@@ -194,7 +194,7 @@ instance GoogleRequest InventoryItemsList' where
               (_iilSiteId ^. _Default)
               _iilMaxResults
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy InventoryItemsListResource)

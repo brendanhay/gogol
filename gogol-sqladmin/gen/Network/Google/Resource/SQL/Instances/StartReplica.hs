@@ -87,7 +87,8 @@ iInstance
 instance GoogleRequest InstancesStartReplica' where
         type Rs InstancesStartReplica' = Operation
         requestClient InstancesStartReplica'{..}
-          = go _iProject _iInstance (Just AltJSON) sQLAdmin
+          = go _iProject _iInstance (Just AltJSON)
+              sQLAdminService
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesStartReplicaResource)

@@ -77,7 +77,7 @@ instance GoogleRequest PlatformTypesList' where
         type Rs PlatformTypesList' =
              PlatformTypesListResponse
         requestClient PlatformTypesList'{..}
-          = go _ptlProFileId (Just AltJSON) dFAReporting
+          = go _ptlProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy PlatformTypesListResource)

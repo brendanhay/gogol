@@ -111,7 +111,7 @@ instance GoogleRequest TablesFeaturesGet' where
         requestClient TablesFeaturesGet'{..}
           = go _tfgTableId _tfgId _tfgVersion _tfgSelect
               (Just AltJSON)
-              mapsEngine
+              mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy TablesFeaturesGetResource)

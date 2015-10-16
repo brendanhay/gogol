@@ -86,7 +86,8 @@ cdCommentId
 instance GoogleRequest CommentsDelete' where
         type Rs CommentsDelete' = ()
         requestClient CommentsDelete'{..}
-          = go _cdFileId _cdCommentId (Just AltJSON) drive
+          = go _cdFileId _cdCommentId (Just AltJSON)
+              driveService
           where go
                   = buildClient (Proxy :: Proxy CommentsDeleteResource)
                       mempty

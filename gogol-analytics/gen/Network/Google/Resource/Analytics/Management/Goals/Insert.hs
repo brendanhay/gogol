@@ -118,7 +118,7 @@ instance GoogleRequest ManagementGoalsInsert' where
           = go _mgiAccountId _mgiWebPropertyId _mgiProFileId
               (Just AltJSON)
               _mgiPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementGoalsInsertResource)

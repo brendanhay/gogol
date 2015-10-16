@@ -113,7 +113,7 @@ instance GoogleRequest UsersDelete' where
           = go _udProject _udInstance (Just _udHost)
               (Just _udName)
               (Just AltJSON)
-              sQLAdmin
+              sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy UsersDeleteResource)
                       mempty

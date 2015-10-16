@@ -79,7 +79,8 @@ instance GoogleRequest WebResourceGetToken' where
         type Rs WebResourceGetToken' =
              SiteVerificationWebResourceGettokenResponse
         requestClient WebResourceGetToken'{..}
-          = go (Just AltJSON) _wrgtPayload siteVerification
+          = go (Just AltJSON) _wrgtPayload
+              siteVerificationService
           where go
                   = buildClient
                       (Proxy :: Proxy WebResourceGetTokenResource)

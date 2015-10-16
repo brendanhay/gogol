@@ -88,7 +88,7 @@ instance GoogleRequest DeploymentsGet' where
         type Rs DeploymentsGet' = Deployment
         requestClient DeploymentsGet'{..}
           = go _dgProject _dgDeployment (Just AltJSON)
-              deploymentManager
+              deploymentManagerService
           where go
                   = buildClient (Proxy :: Proxy DeploymentsGetResource)
                       mempty

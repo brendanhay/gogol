@@ -131,7 +131,7 @@ instance GoogleRequest InventorySet' where
               _isDryRun
               (Just AltJSON)
               _isPayload
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy InventorySetResource)
                       mempty

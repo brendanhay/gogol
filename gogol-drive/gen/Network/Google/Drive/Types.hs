@@ -16,7 +16,7 @@
 module Network.Google.Drive.Types
     (
     -- * Service Configuration
-      drive
+      driveService
 
     -- * OAuth Scopes
     , driveMetadataReadonlyScope
@@ -551,8 +551,8 @@ import           Network.Google.Drive.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Drive API. This contains the host and root path used as a starting point for constructing service requests.
-drive :: Service
-drive
+driveService :: Service
+driveService
   = defaultService (ServiceId "drive:v2")
       "www.googleapis.com"
       "drive/v2/"

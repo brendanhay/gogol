@@ -142,7 +142,7 @@ instance GoogleRequest InstanceGroupManagersList'
               _igmlPageToken
               (Just _igmlMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceGroupManagersListResource)

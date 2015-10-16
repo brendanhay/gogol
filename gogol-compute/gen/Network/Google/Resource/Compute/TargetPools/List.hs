@@ -139,7 +139,7 @@ instance GoogleRequest TargetPoolsList' where
           = go _tplProject _tplRegion _tplFilter _tplPageToken
               (Just _tplMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy TargetPoolsListResource)

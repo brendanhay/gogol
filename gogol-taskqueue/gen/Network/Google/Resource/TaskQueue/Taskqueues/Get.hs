@@ -99,7 +99,7 @@ instance GoogleRequest TaskqueuesGet' where
         requestClient TaskqueuesGet'{..}
           = go _tasProject _tasTaskqueue _tasGetStats
               (Just AltJSON)
-              taskQueue
+              taskQueueService
           where go
                   = buildClient (Proxy :: Proxy TaskqueuesGetResource)
                       mempty

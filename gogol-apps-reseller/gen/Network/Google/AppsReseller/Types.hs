@@ -16,7 +16,7 @@
 module Network.Google.AppsReseller.Types
     (
     -- * Service Configuration
-      appsReseller
+      appsResellerService
 
     -- * OAuth Scopes
     , appsOrderReadonlyScope
@@ -129,8 +129,8 @@ import           Network.Google.AppsReseller.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Enterprise Apps Reseller API. This contains the host and root path used as a starting point for constructing service requests.
-appsReseller :: Service
-appsReseller
+appsResellerService :: Service
+appsResellerService
   = defaultService (ServiceId "reseller:v1")
       "www.googleapis.com"
       "apps/reseller/v1/"

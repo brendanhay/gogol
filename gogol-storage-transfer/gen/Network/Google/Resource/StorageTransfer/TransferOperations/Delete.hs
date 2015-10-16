@@ -160,7 +160,7 @@ instance GoogleRequest TransferOperationsDelete'
               _todBearerToken
               _todCallback
               (Just AltJSON)
-              storageTransfer
+              storageTransferService
           where go
                   = buildClient
                       (Proxy :: Proxy TransferOperationsDeleteResource)

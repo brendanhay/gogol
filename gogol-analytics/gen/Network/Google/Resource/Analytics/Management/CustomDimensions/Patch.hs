@@ -139,7 +139,7 @@ instance GoogleRequest
               (Just _mcdpIgnoreCustomDataSourceLinks)
               (Just AltJSON)
               _mcdpPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

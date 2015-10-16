@@ -92,7 +92,7 @@ instance GoogleRequest RemarketingListSharesUpdate'
              RemarketingListShare
         requestClient RemarketingListSharesUpdate'{..}
           = go _rlsuProFileId (Just AltJSON) _rlsuPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy RemarketingListSharesUpdateResource)

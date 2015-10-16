@@ -125,7 +125,7 @@ instance GoogleRequest AccountsAdUnitsGetAdCode'
               _aaugacAdUnitId
               (_aaugacHostCustomChannelId ^. _Default)
               (Just AltJSON)
-              adSenseHost
+              adSenseHostService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsAdUnitsGetAdCodeResource)

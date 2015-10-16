@@ -20,7 +20,7 @@
 module Network.Google.DNS
     (
     -- * Service Configuration
-      dNS
+      dNSService
 
     -- * API Declaration
     , DNSAPI

@@ -88,7 +88,7 @@ instance GoogleRequest AccountstatusesGet' where
         type Rs AccountstatusesGet' = AccountStatus
         requestClient AccountstatusesGet'{..}
           = go _accMerchantId _accAccountId (Just AltJSON)
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountstatusesGetResource)

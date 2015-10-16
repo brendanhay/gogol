@@ -224,7 +224,7 @@ instance GoogleRequest JobsUpdate' where
               (_juCustomField ^. _Default)
               (Just AltJSON)
               _juPayload
-              mapsCoordinate
+              mapsCoordinateService
           where go
                   = buildClient (Proxy :: Proxy JobsUpdateResource)
                       mempty

@@ -99,7 +99,7 @@ instance GoogleRequest CommentsDelete' where
         type Rs CommentsDelete' = ()
         requestClient CommentsDelete'{..}
           = go _cdBlogId _cdPostId _cdCommentId (Just AltJSON)
-              blogger
+              bloggerService
           where go
                   = buildClient (Proxy :: Proxy CommentsDeleteResource)
                       mempty

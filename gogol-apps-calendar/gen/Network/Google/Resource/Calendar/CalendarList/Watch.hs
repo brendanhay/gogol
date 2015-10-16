@@ -171,7 +171,7 @@ instance GoogleRequest CalendarListWatch' where
               _clwMaxResults
               (Just AltJSON)
               _clwPayload
-              appsCalendar
+              appsCalendarService
           where go
                   = buildClient
                       (Proxy :: Proxy CalendarListWatchResource)

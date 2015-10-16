@@ -117,7 +117,7 @@ instance GoogleRequest MyLibraryBookshelvesAddVolume'
           = go _mlbavShelf (Just _mlbavVolumeId) _mlbavReason
               _mlbavSource
               (Just AltJSON)
-              books
+              booksService
           where go
                   = buildClient
                       (Proxy ::

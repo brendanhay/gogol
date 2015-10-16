@@ -102,7 +102,7 @@ instance GoogleRequest FirewallsUpdate' where
         type Rs FirewallsUpdate' = Operation
         requestClient FirewallsUpdate'{..}
           = go _fuProject _fuFirewall (Just AltJSON) _fuPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy FirewallsUpdateResource)

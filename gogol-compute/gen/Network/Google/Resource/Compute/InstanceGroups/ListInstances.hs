@@ -173,7 +173,7 @@ instance GoogleRequest InstanceGroupsListInstances'
               (Just _igliMaxResults)
               (Just AltJSON)
               _igliPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy InstanceGroupsListInstancesResource)

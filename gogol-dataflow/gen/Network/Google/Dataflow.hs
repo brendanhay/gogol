@@ -19,7 +19,7 @@
 module Network.Google.Dataflow
     (
     -- * Service Configuration
-      dataflow
+      dataflowService
 
     -- * API Declaration
     , DataflowAPI

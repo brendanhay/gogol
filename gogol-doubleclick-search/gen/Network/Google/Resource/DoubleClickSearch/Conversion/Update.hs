@@ -75,7 +75,8 @@ cuPayload
 instance GoogleRequest ConversionUpdate' where
         type Rs ConversionUpdate' = ConversionList
         requestClient ConversionUpdate'{..}
-          = go (Just AltJSON) _cuPayload doubleClickSearch
+          = go (Just AltJSON) _cuPayload
+              doubleClickSearchService
           where go
                   = buildClient
                       (Proxy :: Proxy ConversionUpdateResource)

@@ -87,7 +87,8 @@ agrAPI = lens _agrAPI (\ s a -> s{_agrAPI = a})
 instance GoogleRequest APIsGetRest' where
         type Rs APIsGetRest' = RestDescription
         requestClient APIsGetRest'{..}
-          = go _agrAPI _agrVersion (Just AltJSON) discovery
+          = go _agrAPI _agrVersion (Just AltJSON)
+              discoveryService
           where go
                   = buildClient (Proxy :: Proxy APIsGetRestResource)
                       mempty

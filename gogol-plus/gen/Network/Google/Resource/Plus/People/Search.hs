@@ -116,7 +116,7 @@ instance GoogleRequest PeopleSearch' where
           = go (Just _psQuery) (Just _psLanguage) _psPageToken
               (Just _psMaxResults)
               (Just AltJSON)
-              plus
+              plusService
           where go
                   = buildClient (Proxy :: Proxy PeopleSearchResource)
                       mempty

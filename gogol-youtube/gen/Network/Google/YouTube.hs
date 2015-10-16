@@ -19,7 +19,7 @@
 module Network.Google.YouTube
     (
     -- * Service Configuration
-      youTube
+      youTubeService
 
     -- * API Declaration
     , YouTubeAPI

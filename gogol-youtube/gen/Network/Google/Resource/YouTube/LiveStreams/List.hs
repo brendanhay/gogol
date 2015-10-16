@@ -182,7 +182,7 @@ instance GoogleRequest LiveStreamsList' where
               _lslPageToken
               (Just _lslMaxResults)
               (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy LiveStreamsListResource)

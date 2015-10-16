@@ -16,7 +16,7 @@
 module Network.Google.BigQuery.Types
     (
     -- * Service Configuration
-      bigQuery
+      bigQueryService
 
     -- * OAuth Scopes
     , cloudPlatformReadOnlyScope
@@ -474,8 +474,8 @@ import           Network.Google.BigQuery.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the BigQuery API. This contains the host and root path used as a starting point for constructing service requests.
-bigQuery :: Service
-bigQuery
+bigQueryService :: Service
+bigQueryService
   = defaultService (ServiceId "bigquery:v2")
       "www.googleapis.com"
       "bigquery/v2/"

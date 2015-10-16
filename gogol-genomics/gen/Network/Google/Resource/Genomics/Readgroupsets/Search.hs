@@ -166,7 +166,7 @@ instance GoogleRequest ReadgroupsetsSearch' where
               _reaCallback
               (Just AltJSON)
               _reaPayload
-              genomics
+              genomicsService
           where go
                   = buildClient
                       (Proxy :: Proxy ReadgroupsetsSearchResource)

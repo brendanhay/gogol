@@ -125,7 +125,7 @@ instance GoogleRequest LiveStreamsDelete' where
           = go (Just _lsdId) _lsdOnBehalfOfContentOwner
               _lsdOnBehalfOfContentOwnerChannel
               (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy LiveStreamsDeleteResource)

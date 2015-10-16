@@ -112,7 +112,7 @@ instance GoogleRequest LayersGet' where
           = go _lgVolumeId _lgSummaryId _lgContentVersion
               _lgSource
               (Just AltJSON)
-              books
+              booksService
           where go
                   = buildClient (Proxy :: Proxy LayersGetResource)
                       mempty

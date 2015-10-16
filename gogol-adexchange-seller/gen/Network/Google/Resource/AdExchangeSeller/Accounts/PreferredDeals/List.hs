@@ -78,7 +78,8 @@ instance GoogleRequest AccountsPreferredDealsList'
          where
         type Rs AccountsPreferredDealsList' = PreferredDeals
         requestClient AccountsPreferredDealsList'{..}
-          = go _apdlAccountId (Just AltJSON) adExchangeSeller
+          = go _apdlAccountId (Just AltJSON)
+              adExchangeSellerService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsPreferredDealsListResource)

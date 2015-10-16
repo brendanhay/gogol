@@ -89,7 +89,7 @@ instance GoogleRequest ContentCategoriesInsert' where
         type Rs ContentCategoriesInsert' = ContentCategory
         requestClient ContentCategoriesInsert'{..}
           = go _cciProFileId (Just AltJSON) _cciPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy ContentCategoriesInsertResource)

@@ -74,7 +74,7 @@ uiPayload
 instance GoogleRequest UsersInsert' where
         type Rs UsersInsert' = User
         requestClient UsersInsert'{..}
-          = go (Just AltJSON) _uiPayload directory
+          = go (Just AltJSON) _uiPayload directoryService
           where go
                   = buildClient (Proxy :: Proxy UsersInsertResource)
                       mempty

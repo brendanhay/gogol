@@ -183,7 +183,7 @@ instance GoogleRequest VariantsImport' where
               _viCallback
               (Just AltJSON)
               _viPayload
-              genomics
+              genomicsService
           where go
                   = buildClient (Proxy :: Proxy VariantsImportResource)
                       mempty

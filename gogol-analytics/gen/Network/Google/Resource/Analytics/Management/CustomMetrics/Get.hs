@@ -108,7 +108,7 @@ instance GoogleRequest ManagementCustomMetricsGet'
           = go _mcmgAccountId _mcmgWebPropertyId
               _mcmgCustomMetricId
               (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementCustomMetricsGetResource)

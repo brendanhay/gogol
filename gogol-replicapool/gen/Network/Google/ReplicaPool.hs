@@ -20,7 +20,7 @@
 module Network.Google.ReplicaPool
     (
     -- * Service Configuration
-      replicaPool
+      replicaPoolService
 
     -- * API Declaration
     , ReplicaPoolAPI

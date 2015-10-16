@@ -161,7 +161,7 @@ instance GoogleRequest ChannelSectionsList' where
               _cslOnBehalfOfContentOwner
               _cslId
               (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy ChannelSectionsListResource)

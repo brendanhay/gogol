@@ -76,7 +76,8 @@ tgDataTransferId
 instance GoogleRequest TransfersGet' where
         type Rs TransfersGet' = DataTransfer
         requestClient TransfersGet'{..}
-          = go _tgDataTransferId (Just AltJSON) dataTransfer
+          = go _tgDataTransferId (Just AltJSON)
+              dataTransferService
           where go
                   = buildClient (Proxy :: Proxy TransfersGetResource)
                       mempty

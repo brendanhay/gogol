@@ -92,7 +92,7 @@ instance GoogleRequest EditsDelete' where
         type Rs EditsDelete' = ()
         requestClient EditsDelete'{..}
           = go _edPackageName _edEditId (Just AltJSON)
-              androidPublisher
+              androidPublisherService
           where go
                   = buildClient (Proxy :: Proxy EditsDeleteResource)
                       mempty

@@ -133,7 +133,7 @@ instance GoogleRequest ManagementExperimentsList'
               _melStartIndex
               _melMaxResults
               (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementExperimentsListResource)

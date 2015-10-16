@@ -178,7 +178,7 @@ instance GoogleRequest DatasetsSetIAMPolicy' where
               _dsipCallback
               (Just AltJSON)
               _dsipPayload
-              genomics
+              genomicsService
           where go
                   = buildClient
                       (Proxy :: Proxy DatasetsSetIAMPolicyResource)

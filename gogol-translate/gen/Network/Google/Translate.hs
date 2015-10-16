@@ -19,7 +19,7 @@
 module Network.Google.Translate
     (
     -- * Service Configuration
-      translate
+      translateService
 
     -- * API Declaration
     , TranslateAPI

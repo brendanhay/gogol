@@ -206,7 +206,7 @@ instance GoogleRequest ActivitiesList' where
               (Just _alMaxResults)
               _alPublishedBefore
               (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient (Proxy :: Proxy ActivitiesListResource)
                       mempty

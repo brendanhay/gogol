@@ -123,7 +123,7 @@ instance GoogleRequest DeploymentsList' where
           = go _dlProject _dlFilter _dlPageToken
               (Just _dlMaxResults)
               (Just AltJSON)
-              deploymentManager
+              deploymentManagerService
           where go
                   = buildClient
                       (Proxy :: Proxy DeploymentsListResource)

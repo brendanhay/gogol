@@ -92,7 +92,7 @@ instance GoogleRequest ManagementWebPropertiesGet'
         type Rs ManagementWebPropertiesGet' = WebProperty
         requestClient ManagementWebPropertiesGet'{..}
           = go _mwpgAccountId _mwpgWebPropertyId (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementWebPropertiesGetResource)

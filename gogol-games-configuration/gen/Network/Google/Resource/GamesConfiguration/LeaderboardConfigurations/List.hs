@@ -106,7 +106,7 @@ instance GoogleRequest LeaderboardConfigurationsList'
         requestClient LeaderboardConfigurationsList'{..}
           = go _lclApplicationId _lclPageToken _lclMaxResults
               (Just AltJSON)
-              gamesConfiguration
+              gamesConfigurationService
           where go
                   = buildClient
                       (Proxy ::

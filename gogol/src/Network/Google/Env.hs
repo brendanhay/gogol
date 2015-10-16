@@ -54,7 +54,7 @@ instance HasEnv Env where
 --
 -- To override a specific service, it's suggested you use
 -- either 'configure' or 'reconfigure' with a modified version of the default
--- service, such as @Network.Google.Gmail.gmail@.
+-- service, such as @Network.Google.Gmail.gmailService@.
 override :: HasEnv a => (Service -> Service) -> a -> a
 override f = envOverride <>~ Dual (Endo f)
 
@@ -62,7 +62,7 @@ override f = envOverride <>~ Dual (Endo f)
 -- supplied service will use this configuration instead of the default.
 --
 -- It's suggested you use a modified version of the default service, such
--- as @Network.Google.Gmail.gmail@.
+-- as @Network.Google.Gmail.gmailService@.
 --
 -- /See:/ 'reconfigure'.
 configure :: HasEnv a => Service -> a -> a
@@ -75,7 +75,7 @@ configure s = override f
 -- will use this configuration instead of the default.
 --
 -- It's suggested you use a modified version of the default service, such
--- as @Network.Google.Gmail.gmail@.
+-- as @Network.Google.Gmail.gmailService@.
 --
 -- /See:/ 'configure'.
 reconfigure :: (MonadReader r m, HasEnv r) => Service -> m a -> m a

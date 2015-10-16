@@ -87,7 +87,7 @@ instance GoogleRequest VideosRate' where
         type Rs VideosRate' = ()
         requestClient VideosRate'{..}
           = go (Just _vrId) (Just _vrRating) (Just AltJSON)
-              youTube
+              youTubeService
           where go
                   = buildClient (Proxy :: Proxy VideosRateResource)
                       mempty

@@ -88,7 +88,7 @@ instance GoogleRequest AccountsList' where
         type Rs AccountsList' = Accounts
         requestClient AccountsList'{..}
           = go _alPageToken _alMaxResults (Just AltJSON)
-              adSense
+              adSenseService
           where go
                   = buildClient (Proxy :: Proxy AccountsListResource)
                       mempty

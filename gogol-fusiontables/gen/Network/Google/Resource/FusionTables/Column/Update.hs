@@ -100,7 +100,7 @@ instance GoogleRequest ColumnUpdate' where
         type Rs ColumnUpdate' = Column
         requestClient ColumnUpdate'{..}
           = go _cuTableId _cuColumnId (Just AltJSON) _cuPayload
-              fusionTables
+              fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy ColumnUpdateResource)
                       mempty

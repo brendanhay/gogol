@@ -86,7 +86,8 @@ uadUserKey
 instance GoogleRequest UsersAliasesDelete' where
         type Rs UsersAliasesDelete' = ()
         requestClient UsersAliasesDelete'{..}
-          = go _uadUserKey _uadAlias (Just AltJSON) directory
+          = go _uadUserKey _uadAlias (Just AltJSON)
+              directoryService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersAliasesDeleteResource)

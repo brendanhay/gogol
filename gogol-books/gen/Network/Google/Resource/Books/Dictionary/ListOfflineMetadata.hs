@@ -76,7 +76,7 @@ instance GoogleRequest DictionaryListOfflineMetadata'
          where
         type Rs DictionaryListOfflineMetadata' = Metadata
         requestClient DictionaryListOfflineMetadata'{..}
-          = go (Just _dlomCpksver) (Just AltJSON) books
+          = go (Just _dlomCpksver) (Just AltJSON) booksService
           where go
                   = buildClient
                       (Proxy ::

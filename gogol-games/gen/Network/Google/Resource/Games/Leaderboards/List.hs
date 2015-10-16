@@ -100,7 +100,7 @@ instance GoogleRequest LeaderboardsList' where
         requestClient LeaderboardsList'{..}
           = go _llLanguage _llPageToken _llMaxResults
               (Just AltJSON)
-              games
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy LeaderboardsListResource)

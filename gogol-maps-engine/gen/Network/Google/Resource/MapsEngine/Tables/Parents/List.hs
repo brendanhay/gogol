@@ -103,7 +103,7 @@ instance GoogleRequest TablesParentsList' where
         requestClient TablesParentsList'{..}
           = go _tabId _tabPageToken _tabMaxResults
               (Just AltJSON)
-              mapsEngine
+              mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy TablesParentsListResource)

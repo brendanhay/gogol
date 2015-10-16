@@ -182,7 +182,7 @@ instance GoogleRequest ReadsSearch' where
               _rsCallback
               (Just AltJSON)
               _rsPayload
-              genomics
+              genomicsService
           where go
                   = buildClient (Proxy :: Proxy ReadsSearchResource)
                       mempty

@@ -16,7 +16,7 @@
 module Network.Google.Mirror.Types
     (
     -- * Service Configuration
-      mirror
+      mirrorService
 
     -- * OAuth Scopes
     , glassTimelineScope
@@ -212,8 +212,8 @@ import           Network.Google.Mirror.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Mirror API. This contains the host and root path used as a starting point for constructing service requests.
-mirror :: Service
-mirror
+mirrorService :: Service
+mirrorService
   = defaultService (ServiceId "mirror:v1")
       "www.googleapis.com"
       "mirror/v1/"

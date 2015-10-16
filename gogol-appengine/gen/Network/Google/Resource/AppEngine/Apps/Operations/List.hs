@@ -207,7 +207,7 @@ instance GoogleRequest AppsOperationsList' where
               _aolPageSize
               _aolCallback
               (Just AltJSON)
-              appEngine
+              appEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy AppsOperationsListResource)

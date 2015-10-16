@@ -88,7 +88,7 @@ instance GoogleRequest DeploymentsDelete' where
         type Rs DeploymentsDelete' = Operation
         requestClient DeploymentsDelete'{..}
           = go _ddProject _ddDeployment (Just AltJSON)
-              deploymentManager
+              deploymentManagerService
           where go
                   = buildClient
                       (Proxy :: Proxy DeploymentsDeleteResource)

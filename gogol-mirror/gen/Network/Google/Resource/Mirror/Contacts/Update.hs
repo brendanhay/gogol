@@ -85,7 +85,7 @@ cuId = lens _cuId (\ s a -> s{_cuId = a})
 instance GoogleRequest ContactsUpdate' where
         type Rs ContactsUpdate' = Contact
         requestClient ContactsUpdate'{..}
-          = go _cuId (Just AltJSON) _cuPayload mirror
+          = go _cuId (Just AltJSON) _cuPayload mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsUpdateResource)
                       mempty

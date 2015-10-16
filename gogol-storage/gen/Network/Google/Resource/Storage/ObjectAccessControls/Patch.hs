@@ -137,7 +137,7 @@ instance GoogleRequest ObjectAccessControlsPatch'
               _oacpGeneration
               (Just AltJSON)
               _oacpPayload
-              storage
+              storageService
           where go
                   = buildClient
                       (Proxy :: Proxy ObjectAccessControlsPatchResource)

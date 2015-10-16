@@ -87,7 +87,8 @@ tbmcLanguage
 instance GoogleRequest TurnBasedMatchesCreate' where
         type Rs TurnBasedMatchesCreate' = TurnBasedMatch
         requestClient TurnBasedMatchesCreate'{..}
-          = go _tbmcLanguage (Just AltJSON) _tbmcPayload games
+          = go _tbmcLanguage (Just AltJSON) _tbmcPayload
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy TurnBasedMatchesCreateResource)

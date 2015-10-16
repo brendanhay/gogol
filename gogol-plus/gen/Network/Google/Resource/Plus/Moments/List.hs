@@ -139,7 +139,7 @@ instance GoogleRequest MomentsList' where
               _mlType
               (Just _mlMaxResults)
               (Just AltJSON)
-              plus
+              plusService
           where go
                   = buildClient (Proxy :: Proxy MomentsListResource)
                       mempty

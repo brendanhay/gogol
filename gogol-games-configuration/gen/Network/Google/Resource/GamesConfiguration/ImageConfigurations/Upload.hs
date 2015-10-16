@@ -105,7 +105,7 @@ instance GoogleRequest ImageConfigurationsUpload'
         requestClient ImageConfigurationsUpload'{..}
           = go _icuResourceId _icuImageType (Just AltJSON)
               _icuMedia
-              gamesConfiguration
+              gamesConfigurationService
           where go
                   = buildClient
                       (Proxy :: Proxy ImageConfigurationsUploadResource)

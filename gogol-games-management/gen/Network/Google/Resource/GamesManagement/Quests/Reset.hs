@@ -79,7 +79,7 @@ qrQuestId
 instance GoogleRequest QuestsReset' where
         type Rs QuestsReset' = ()
         requestClient QuestsReset'{..}
-          = go _qrQuestId (Just AltJSON) gamesManagement
+          = go _qrQuestId (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy QuestsResetResource)
                       mempty

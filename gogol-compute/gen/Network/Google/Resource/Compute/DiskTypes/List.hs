@@ -137,7 +137,7 @@ instance GoogleRequest DiskTypesList' where
           = go _dtlProject _dtlZone _dtlFilter _dtlPageToken
               (Just _dtlMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient (Proxy :: Proxy DiskTypesListResource)
                       mempty

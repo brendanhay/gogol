@@ -87,7 +87,7 @@ instance GoogleRequest AdsUpdate' where
         type Rs AdsUpdate' = Ad
         requestClient AdsUpdate'{..}
           = go _aProFileId (Just AltJSON) _aPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy AdsUpdateResource)
                       mempty

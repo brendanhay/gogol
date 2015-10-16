@@ -16,7 +16,7 @@
 module Network.Google.ShoppingContent.Types
     (
     -- * Service Configuration
-      shoppingContent
+      shoppingContentService
 
     -- * OAuth Scopes
     , contentScope
@@ -1253,8 +1253,8 @@ import           Network.Google.ShoppingContent.Types.Product
 import           Network.Google.ShoppingContent.Types.Sum
 
 -- | Default request referring to version 'v2' of the Content API for Shopping. This contains the host and root path used as a starting point for constructing service requests.
-shoppingContent :: Service
-shoppingContent
+shoppingContentService :: Service
+shoppingContentService
   = defaultService (ServiceId "content:v2")
       "www.googleapis.com"
       "content/v2/"

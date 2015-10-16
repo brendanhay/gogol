@@ -110,7 +110,7 @@ instance GoogleRequest ManagementCustomDimensionsGet'
           = go _mcdgAccountId _mcdgWebPropertyId
               _mcdgCustomDimensionId
               (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

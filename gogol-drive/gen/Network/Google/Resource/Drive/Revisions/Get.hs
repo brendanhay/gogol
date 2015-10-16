@@ -88,7 +88,8 @@ revRevisionId
 instance GoogleRequest RevisionsGet' where
         type Rs RevisionsGet' = Revision
         requestClient RevisionsGet'{..}
-          = go _revFileId _revRevisionId (Just AltJSON) drive
+          = go _revFileId _revRevisionId (Just AltJSON)
+              driveService
           where go
                   = buildClient (Proxy :: Proxy RevisionsGetResource)
                       mempty

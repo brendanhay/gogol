@@ -87,7 +87,7 @@ instance GoogleRequest SizesInsert' where
         type Rs SizesInsert' = Size
         requestClient SizesInsert'{..}
           = go _sProFileId (Just AltJSON) _sPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy SizesInsertResource)
                       mempty

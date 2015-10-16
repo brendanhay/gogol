@@ -104,7 +104,7 @@ instance GoogleRequest MyLibraryReadingPositionsGet'
         requestClient MyLibraryReadingPositionsGet'{..}
           = go _mlrpgVolumeId _mlrpgContentVersion _mlrpgSource
               (Just AltJSON)
-              books
+              booksService
           where go
                   = buildClient
                       (Proxy :: Proxy MyLibraryReadingPositionsGetResource)

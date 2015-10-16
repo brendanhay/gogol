@@ -109,7 +109,7 @@ instance GoogleRequest AppsList' where
           = go _alLanguageCode (Just _alAppFilterExtensions)
               (Just _alAppFilterMimeTypes)
               (Just AltJSON)
-              drive
+              driveService
           where go
                   = buildClient (Proxy :: Proxy AppsListResource)
                       mempty

@@ -141,7 +141,7 @@ instance GoogleRequest TableDataList' where
               _tStartIndex
               _tMaxResults
               (Just AltJSON)
-              bigQuery
+              bigQueryService
           where go
                   = buildClient (Proxy :: Proxy TableDataListResource)
                       mempty

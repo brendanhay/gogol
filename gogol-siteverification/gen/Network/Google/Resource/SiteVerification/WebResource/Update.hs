@@ -88,7 +88,7 @@ instance GoogleRequest WebResourceUpdate' where
              SiteVerificationWebResourceResource
         requestClient WebResourceUpdate'{..}
           = go _wruId (Just AltJSON) _wruPayload
-              siteVerification
+              siteVerificationService
           where go
                   = buildClient
                       (Proxy :: Proxy WebResourceUpdateResource)

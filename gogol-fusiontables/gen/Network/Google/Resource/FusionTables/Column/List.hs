@@ -99,7 +99,7 @@ instance GoogleRequest ColumnList' where
         requestClient ColumnList'{..}
           = go _clTableId _clPageToken _clMaxResults
               (Just AltJSON)
-              fusionTables
+              fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy ColumnListResource)
                       mempty

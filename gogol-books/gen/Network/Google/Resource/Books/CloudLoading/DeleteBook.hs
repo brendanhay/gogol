@@ -75,7 +75,7 @@ cldbVolumeId
 instance GoogleRequest CloudLoadingDeleteBook' where
         type Rs CloudLoadingDeleteBook' = ()
         requestClient CloudLoadingDeleteBook'{..}
-          = go (Just _cldbVolumeId) (Just AltJSON) books
+          = go (Just _cldbVolumeId) (Just AltJSON) booksService
           where go
                   = buildClient
                       (Proxy :: Proxy CloudLoadingDeleteBookResource)

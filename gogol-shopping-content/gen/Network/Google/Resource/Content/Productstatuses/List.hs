@@ -101,7 +101,7 @@ instance GoogleRequest ProductstatusesList' where
         requestClient ProductstatusesList'{..}
           = go _plMerchantId _plPageToken _plMaxResults
               (Just AltJSON)
-              shoppingContent
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy ProductstatusesListResource)

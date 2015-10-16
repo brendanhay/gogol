@@ -89,7 +89,7 @@ instance GoogleRequest ManagementFiltersGet' where
         type Rs ManagementFiltersGet' = Filter
         requestClient ManagementFiltersGet'{..}
           = go _mfgAccountId _mfgFilterId (Just AltJSON)
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementFiltersGetResource)

@@ -100,7 +100,7 @@ instance GoogleRequest CreativesPatch' where
         requestClient CreativesPatch'{..}
           = go _cppProFileId (Just _cppId) (Just AltJSON)
               _cppPayload
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy CreativesPatchResource)
                       mempty

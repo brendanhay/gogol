@@ -19,7 +19,7 @@
 module Network.Google.URLShortener
     (
     -- * Service Configuration
-      uRLShortener
+      uRLShortenerService
 
     -- * API Declaration
     , URLShortenerAPI

@@ -215,7 +215,7 @@ instance GoogleRequest InvitationsList' where
               _ilPageSize
               _ilCallback
               (Just AltJSON)
-              classroom
+              classroomService
           where go
                   = buildClient
                       (Proxy :: Proxy InvitationsListResource)

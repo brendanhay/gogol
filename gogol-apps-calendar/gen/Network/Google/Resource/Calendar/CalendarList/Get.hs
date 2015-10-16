@@ -80,7 +80,8 @@ clgCalendarId
 instance GoogleRequest CalendarListGet' where
         type Rs CalendarListGet' = CalendarListEntry
         requestClient CalendarListGet'{..}
-          = go _clgCalendarId (Just AltJSON) appsCalendar
+          = go _clgCalendarId (Just AltJSON)
+              appsCalendarService
           where go
                   = buildClient
                       (Proxy :: Proxy CalendarListGetResource)

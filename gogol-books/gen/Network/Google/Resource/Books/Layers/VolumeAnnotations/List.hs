@@ -264,7 +264,7 @@ instance GoogleRequest LayersVolumeAnnotationsList'
               _lvalMaxResults
               _lvalStartPosition
               (Just AltJSON)
-              books
+              booksService
           where go
                   = buildClient
                       (Proxy :: Proxy LayersVolumeAnnotationsListResource)

@@ -135,7 +135,7 @@ instance GoogleRequest EventsInsert' where
               _eveSupportsAttachments
               (Just AltJSON)
               _evePayload
-              appsCalendar
+              appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy EventsInsertResource)
                       mempty

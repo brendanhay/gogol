@@ -60,7 +60,7 @@ myConfigGetUserSettings' = MyConfigGetUserSettings'
 instance GoogleRequest MyConfigGetUserSettings' where
         type Rs MyConfigGetUserSettings' = Usersettings
         requestClient MyConfigGetUserSettings'{}
-          = go (Just AltJSON) books
+          = go (Just AltJSON) booksService
           where go
                   = buildClient
                       (Proxy :: Proxy MyConfigGetUserSettingsResource)

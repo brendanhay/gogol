@@ -103,7 +103,7 @@ instance GoogleRequest URLMapsPatch' where
         requestClient URLMapsPatch'{..}
           = go _umpProject _umpURLMap (Just AltJSON)
               _umpPayload
-              compute
+              computeService
           where go
                   = buildClient (Proxy :: Proxy URLMapsPatchResource)
                       mempty

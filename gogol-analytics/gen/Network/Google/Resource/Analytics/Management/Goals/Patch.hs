@@ -133,7 +133,7 @@ instance GoogleRequest ManagementGoalsPatch' where
               _mgpGoalId
               (Just AltJSON)
               _mgpPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy :: Proxy ManagementGoalsPatchResource)

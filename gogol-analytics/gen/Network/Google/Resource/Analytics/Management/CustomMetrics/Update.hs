@@ -136,7 +136,7 @@ instance GoogleRequest ManagementCustomMetricsUpdate'
               (Just _mcmuIgnoreCustomDataSourceLinks)
               (Just AltJSON)
               _mcmuPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

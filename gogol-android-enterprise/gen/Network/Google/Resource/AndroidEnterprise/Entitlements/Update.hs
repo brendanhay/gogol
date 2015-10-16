@@ -133,7 +133,7 @@ instance GoogleRequest EntitlementsUpdate' where
               _entInstall
               (Just AltJSON)
               _entPayload
-              androidEnterprise
+              androidEnterpriseService
           where go
                   = buildClient
                       (Proxy :: Proxy EntitlementsUpdateResource)

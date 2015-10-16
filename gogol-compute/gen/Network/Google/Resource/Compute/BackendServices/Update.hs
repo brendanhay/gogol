@@ -103,7 +103,7 @@ instance GoogleRequest BackendServicesUpdate' where
         requestClient BackendServicesUpdate'{..}
           = go _bsuProject _bsuBackendService (Just AltJSON)
               _bsuPayload
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy BackendServicesUpdateResource)

@@ -102,7 +102,7 @@ instance GoogleRequest FirewallsPatch' where
         type Rs FirewallsPatch' = Operation
         requestClient FirewallsPatch'{..}
           = go _fpProject _fpFirewall (Just AltJSON) _fpPayload
-              compute
+              computeService
           where go
                   = buildClient (Proxy :: Proxy FirewallsPatchResource)
                       mempty

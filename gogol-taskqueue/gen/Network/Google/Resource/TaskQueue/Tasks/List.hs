@@ -86,7 +86,8 @@ tProject = lens _tProject (\ s a -> s{_tProject = a})
 instance GoogleRequest TasksList' where
         type Rs TasksList' = Tasks2
         requestClient TasksList'{..}
-          = go _tProject _tTaskqueue (Just AltJSON) taskQueue
+          = go _tProject _tTaskqueue (Just AltJSON)
+              taskQueueService
           where go
                   = buildClient (Proxy :: Proxy TasksListResource)
                       mempty

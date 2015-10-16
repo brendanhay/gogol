@@ -19,7 +19,7 @@
 module Network.Google.Affiliates
     (
     -- * Service Configuration
-      affiliates
+      affiliatesService
 
     -- * API Declaration
     , AffiliatesAPI

@@ -87,7 +87,8 @@ gagAddress
 instance GoogleRequest GlobalAddressesGet' where
         type Rs GlobalAddressesGet' = Address
         requestClient GlobalAddressesGet'{..}
-          = go _gagProject _gagAddress (Just AltJSON) compute
+          = go _gagProject _gagAddress (Just AltJSON)
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy GlobalAddressesGetResource)

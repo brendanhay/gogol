@@ -214,7 +214,7 @@ instance GoogleRequest OrderDocumentsList' where
               (_odlSiteId ^. _Default)
               _odlMaxResults
               (Just AltJSON)
-              dFAReporting
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy OrderDocumentsListResource)

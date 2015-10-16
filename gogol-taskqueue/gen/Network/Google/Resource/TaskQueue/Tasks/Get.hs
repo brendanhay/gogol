@@ -99,7 +99,7 @@ instance GoogleRequest TasksGet' where
         type Rs TasksGet' = Task
         requestClient TasksGet'{..}
           = go _tgProject _tgTaskqueue _tgTask (Just AltJSON)
-              taskQueue
+              taskQueueService
           where go
                   = buildClient (Proxy :: Proxy TasksGetResource)
                       mempty

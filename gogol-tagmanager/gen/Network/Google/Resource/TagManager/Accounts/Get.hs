@@ -74,7 +74,7 @@ agAccountId
 instance GoogleRequest AccountsGet' where
         type Rs AccountsGet' = Account
         requestClient AccountsGet'{..}
-          = go _agAccountId (Just AltJSON) tagManager
+          = go _agAccountId (Just AltJSON) tagManagerService
           where go
                   = buildClient (Proxy :: Proxy AccountsGetResource)
                       mempty

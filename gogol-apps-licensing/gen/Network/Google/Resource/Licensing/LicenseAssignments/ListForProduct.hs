@@ -122,7 +122,7 @@ instance GoogleRequest
               (Just _lalfpPageToken)
               (Just _lalfpMaxResults)
               (Just AltJSON)
-              appsLicensing
+              appsLicensingService
           where go
                   = buildClient
                       (Proxy ::

@@ -101,7 +101,8 @@ instance GoogleRequest TablesFeaturesBatchInsert'
          where
         type Rs TablesFeaturesBatchInsert' = ()
         requestClient TablesFeaturesBatchInsert'{..}
-          = go _tfbiId (Just AltJSON) _tfbiPayload mapsEngine
+          = go _tfbiId (Just AltJSON) _tfbiPayload
+              mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy TablesFeaturesBatchInsertResource)

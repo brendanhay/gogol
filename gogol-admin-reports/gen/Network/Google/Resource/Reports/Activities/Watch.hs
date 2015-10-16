@@ -206,7 +206,7 @@ instance GoogleRequest ActivitiesWatch' where
               _awMaxResults
               (Just AltJSON)
               _awPayload
-              reports
+              reportsService
           where go
                   = buildClient
                       (Proxy :: Proxy ActivitiesWatchResource)

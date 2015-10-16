@@ -91,7 +91,7 @@ instance GoogleRequest SavedColumnsList' where
         type Rs SavedColumnsList' = SavedColumnList
         requestClient SavedColumnsList'{..}
           = go _sclAgencyId _sclAdvertiserId (Just AltJSON)
-              doubleClickSearch
+              doubleClickSearchService
           where go
                   = buildClient
                       (Proxy :: Proxy SavedColumnsListResource)

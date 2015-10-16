@@ -20,7 +20,7 @@
 module Network.Google.Plus
     (
     -- * Service Configuration
-      plus
+      plusService
 
     -- * API Declaration
     , PlusAPI

@@ -16,7 +16,7 @@
 module Network.Google.Games.Types
     (
     -- * Service Configuration
-      games
+      gamesService
 
     -- * OAuth Scopes
     , plusLoginScope
@@ -922,8 +922,8 @@ import           Network.Google.Games.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Play Game Services API. This contains the host and root path used as a starting point for constructing service requests.
-games :: Service
-games
+gamesService :: Service
+gamesService
   = defaultService (ServiceId "games:v1")
       "www.googleapis.com"
       "games/v1/"

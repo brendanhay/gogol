@@ -16,7 +16,7 @@
 module Network.Google.GroupsSettings.Types
     (
     -- * Service Configuration
-      groupsSettings
+      groupsSettingsService
 
     -- * OAuth Scopes
     , appsGroupsSettingsScope
@@ -59,8 +59,8 @@ import           Network.Google.GroupsSettings.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Groups Settings API. This contains the host and root path used as a starting point for constructing service requests.
-groupsSettings :: Service
-groupsSettings
+groupsSettingsService :: Service
+groupsSettingsService
   = defaultService (ServiceId "groupssettings:v1")
       "www.googleapis.com"
       "groups/v1/groups/"

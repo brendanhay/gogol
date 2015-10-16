@@ -164,7 +164,7 @@ instance GoogleRequest VariantsetsCreate' where
               _vcCallback
               (Just AltJSON)
               _vcPayload
-              genomics
+              genomicsService
           where go
                   = buildClient
                       (Proxy :: Proxy VariantsetsCreateResource)

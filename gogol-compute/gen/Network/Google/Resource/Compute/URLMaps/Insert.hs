@@ -89,7 +89,8 @@ umiPayload
 instance GoogleRequest URLMapsInsert' where
         type Rs URLMapsInsert' = Operation
         requestClient URLMapsInsert'{..}
-          = go _umiProject (Just AltJSON) _umiPayload compute
+          = go _umiProject (Just AltJSON) _umiPayload
+              computeService
           where go
                   = buildClient (Proxy :: Proxy URLMapsInsertResource)
                       mempty

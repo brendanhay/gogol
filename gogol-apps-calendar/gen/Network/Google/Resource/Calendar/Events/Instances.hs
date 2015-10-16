@@ -221,7 +221,7 @@ instance GoogleRequest EventsInstances' where
               _eiAlwaysIncludeEmail
               _eiTimeMax
               (Just AltJSON)
-              appsCalendar
+              appsCalendarService
           where go
                   = buildClient
                       (Proxy :: Proxy EventsInstancesResource)

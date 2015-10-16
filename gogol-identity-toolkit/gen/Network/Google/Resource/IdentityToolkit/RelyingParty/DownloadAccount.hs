@@ -78,7 +78,8 @@ instance GoogleRequest RelyingPartyDownloadAccount'
         type Rs RelyingPartyDownloadAccount' =
              DownloadAccountResponse
         requestClient RelyingPartyDownloadAccount'{..}
-          = go (Just AltJSON) _rpdaPayload identityToolkit
+          = go (Just AltJSON) _rpdaPayload
+              identityToolkitService
           where go
                   = buildClient
                       (Proxy :: Proxy RelyingPartyDownloadAccountResource)

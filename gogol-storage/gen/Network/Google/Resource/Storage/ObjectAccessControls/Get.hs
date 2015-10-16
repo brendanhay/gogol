@@ -121,7 +121,7 @@ instance GoogleRequest ObjectAccessControlsGet' where
           = go _oacgBucket _oacgObject _oacgEntity
               _oacgGeneration
               (Just AltJSON)
-              storage
+              storageService
           where go
                   = buildClient
                       (Proxy :: Proxy ObjectAccessControlsGetResource)

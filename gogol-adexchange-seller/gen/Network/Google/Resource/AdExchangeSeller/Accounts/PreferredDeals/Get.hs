@@ -90,7 +90,7 @@ instance GoogleRequest AccountsPreferredDealsGet'
         type Rs AccountsPreferredDealsGet' = PreferredDeal
         requestClient AccountsPreferredDealsGet'{..}
           = go _apdgAccountId _apdgDealId (Just AltJSON)
-              adExchangeSeller
+              adExchangeSellerService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsPreferredDealsGetResource)

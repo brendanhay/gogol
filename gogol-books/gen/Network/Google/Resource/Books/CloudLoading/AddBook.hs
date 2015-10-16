@@ -113,7 +113,7 @@ instance GoogleRequest CloudLoadingAddBook' where
           = go _clabMimeType _clabUploadClientToken _clabName
               _clabDriveDocumentId
               (Just AltJSON)
-              books
+              booksService
           where go
                   = buildClient
                       (Proxy :: Proxy CloudLoadingAddBookResource)

@@ -95,7 +95,7 @@ instance GoogleRequest PlayersUnhide' where
         type Rs PlayersUnhide' = ()
         requestClient PlayersUnhide'{..}
           = go _puApplicationId _puPlayerId (Just AltJSON)
-              gamesManagement
+              gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy PlayersUnhideResource)
                       mempty

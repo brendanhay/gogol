@@ -126,7 +126,7 @@ instance GoogleRequest
               _mwpawluWebPropertyAdWordsLinkId
               (Just AltJSON)
               _mwpawluPayload
-              analytics
+              analyticsService
           where go
                   = buildClient
                       (Proxy ::

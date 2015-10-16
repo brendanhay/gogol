@@ -190,7 +190,7 @@ instance GoogleRequest AdvertisersList' where
               _alPageToken
               _alMaxResults
               (Just AltJSON)
-              affiliates
+              affiliatesService
           where go
                   = buildClient
                       (Proxy :: Proxy AdvertisersListResource)

@@ -101,7 +101,7 @@ instance GoogleRequest UsersMessagesSend' where
         type Rs UsersMessagesSend' = Message
         requestClient UsersMessagesSend'{..}
           = go _umsUserId (Just AltJSON) _umsPayload _umsMedia
-              gmail
+              gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersMessagesSendResource)

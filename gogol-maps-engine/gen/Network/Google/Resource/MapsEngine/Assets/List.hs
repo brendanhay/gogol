@@ -238,7 +238,7 @@ instance GoogleRequest AssetsList' where
               _alTags
               _alCreatedBefore
               (Just AltJSON)
-              mapsEngine
+              mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy AssetsListResource)
                       mempty

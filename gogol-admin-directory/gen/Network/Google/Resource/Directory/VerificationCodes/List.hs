@@ -79,7 +79,7 @@ vclUserKey
 instance GoogleRequest VerificationCodesList' where
         type Rs VerificationCodesList' = VerificationCodes
         requestClient VerificationCodesList'{..}
-          = go _vclUserKey (Just AltJSON) directory
+          = go _vclUserKey (Just AltJSON) directoryService
           where go
                   = buildClient
                       (Proxy :: Proxy VerificationCodesListResource)

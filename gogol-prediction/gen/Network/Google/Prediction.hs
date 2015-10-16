@@ -20,7 +20,7 @@
 module Network.Google.Prediction
     (
     -- * Service Configuration
-      prediction
+      predictionService
 
     -- * API Declaration
     , PredictionAPI

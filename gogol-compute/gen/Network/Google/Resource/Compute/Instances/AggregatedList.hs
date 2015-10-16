@@ -125,7 +125,7 @@ instance GoogleRequest InstancesAggregatedList' where
           = go _ialProject _ialFilter _ialPageToken
               (Just _ialMaxResults)
               (Just AltJSON)
-              compute
+              computeService
           where go
                   = buildClient
                       (Proxy :: Proxy InstancesAggregatedListResource)

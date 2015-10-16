@@ -159,7 +159,7 @@ instance GoogleRequest ProjectsTopicsGet' where
               _ptgBearerToken
               _ptgCallback
               (Just AltJSON)
-              pubSub
+              pubSubService
           where go
                   = buildClient
                       (Proxy :: Proxy ProjectsTopicsGetResource)

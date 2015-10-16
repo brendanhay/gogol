@@ -76,7 +76,7 @@ tlgTaskList
 instance GoogleRequest TaskListsGet' where
         type Rs TaskListsGet' = TaskList
         requestClient TaskListsGet'{..}
-          = go _tlgTaskList (Just AltJSON) appsTasks
+          = go _tlgTaskList (Just AltJSON) appsTasksService
           where go
                   = buildClient (Proxy :: Proxy TaskListsGetResource)
                       mempty

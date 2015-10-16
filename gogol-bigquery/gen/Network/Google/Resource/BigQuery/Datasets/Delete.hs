@@ -108,7 +108,7 @@ instance GoogleRequest DatasetsDelete' where
         requestClient DatasetsDelete'{..}
           = go _ddProjectId _ddDatasetId _ddDeleteContents
               (Just AltJSON)
-              bigQuery
+              bigQueryService
           where go
                   = buildClient (Proxy :: Proxy DatasetsDeleteResource)
                       mempty
