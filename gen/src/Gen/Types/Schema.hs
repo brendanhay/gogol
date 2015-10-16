@@ -435,7 +435,7 @@ instance HasDescription (Service a) a where
     description = sDescription
 
 serviceName :: Service a -> String
-serviceName = Text.unpack . toCamel . _sCanonicalName
+serviceName = Text.unpack . (<> "Service") . toCamel . _sCanonicalName
 
 scopeName :: Service a -> Text -> String
 scopeName s k =
