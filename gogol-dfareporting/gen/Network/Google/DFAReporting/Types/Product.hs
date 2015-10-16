@@ -2978,7 +2978,7 @@ dvrKind = lens _dvrKind (\ s a -> s{_dvrKind = a})
 
 -- | The end date of the date range for which to retrieve dimension values. A
 -- string of the format \"yyyy-MM-dd\".
-dvrEndDate :: Lens' DimensionValueRequest (Maybe LocalTime)
+dvrEndDate :: Lens' DimensionValueRequest (Maybe Day)
 dvrEndDate
   = lens _dvrEndDate (\ s a -> s{_dvrEndDate = a}) .
       mapping _Date
@@ -2992,7 +2992,7 @@ dvrFilters
 
 -- | The start date of the date range for which to retrieve dimension values.
 -- A string of the format \"yyyy-MM-dd\".
-dvrStartDate :: Lens' DimensionValueRequest (Maybe LocalTime)
+dvrStartDate :: Lens' DimensionValueRequest (Maybe Day)
 dvrStartDate
   = lens _dvrStartDate (\ s a -> s{_dvrStartDate = a})
       . mapping _Date
@@ -4472,7 +4472,7 @@ pAdvertiserId
       (\ s a -> s{_pAdvertiserId = a})
 
 -- | End date of the project.
-pEndDate :: Lens' Project (Maybe LocalTime)
+pEndDate :: Lens' Project (Maybe Day)
 pEndDate
   = lens _pEndDate (\ s a -> s{_pEndDate = a}) .
       mapping _Date
@@ -4489,7 +4489,7 @@ pTargetImpressions
       (\ s a -> s{_pTargetImpressions = a})
 
 -- | Start date of the project.
-pStartDate :: Lens' Project (Maybe LocalTime)
+pStartDate :: Lens' Project (Maybe Day)
 pStartDate
   = lens _pStartDate (\ s a -> s{_pStartDate = a}) .
       mapping _Date
@@ -4989,7 +4989,7 @@ pricingSchedule =
 
 -- | Testing start date of this placement. The hours, minutes, and seconds of
 -- the start date should not be set, as doing so will result in an error.
-psTestingStartDate :: Lens' PricingSchedule (Maybe LocalTime)
+psTestingStartDate :: Lens' PricingSchedule (Maybe Day)
 psTestingStartDate
   = lens _psTestingStartDate
       (\ s a -> s{_psTestingStartDate = a})
@@ -5008,7 +5008,7 @@ psFloodlightActivityId
 -- effective placement date is just that day only, 6\/25\/2015. The hours,
 -- minutes, and seconds of the end date should not be set, as doing so will
 -- result in an error. This field is required on insertion.
-psEndDate :: Lens' PricingSchedule (Maybe LocalTime)
+psEndDate :: Lens' PricingSchedule (Maybe Day)
 psEndDate
   = lens _psEndDate (\ s a -> s{_psEndDate = a}) .
       mapping _Date
@@ -5023,7 +5023,7 @@ psDisregardOverdelivery
 -- the campaign start date. The hours, minutes, and seconds of the start
 -- date should not be set, as doing so will result in an error. This field
 -- is required on insertion.
-psStartDate :: Lens' PricingSchedule (Maybe LocalTime)
+psStartDate :: Lens' PricingSchedule (Maybe Day)
 psStartDate
   = lens _psStartDate (\ s a -> s{_psStartDate = a}) .
       mapping _Date
@@ -5449,13 +5449,13 @@ pricing =
     }
 
 -- | End date of this inventory item.
-priEndDate :: Lens' Pricing (Maybe LocalTime)
+priEndDate :: Lens' Pricing (Maybe Day)
 priEndDate
   = lens _priEndDate (\ s a -> s{_priEndDate = a}) .
       mapping _Date
 
 -- | Start date of this inventory item.
-priStartDate :: Lens' Pricing (Maybe LocalTime)
+priStartDate :: Lens' Pricing (Maybe Day)
 priStartDate
   = lens _priStartDate (\ s a -> s{_priStartDate = a})
       . mapping _Date
@@ -5692,13 +5692,13 @@ fRateOrCost
   = lens _fRateOrCost (\ s a -> s{_fRateOrCost = a})
 
 -- | Inventory item flight end date.
-fEndDate :: Lens' Flight (Maybe LocalTime)
+fEndDate :: Lens' Flight (Maybe Day)
 fEndDate
   = lens _fEndDate (\ s a -> s{_fEndDate = a}) .
       mapping _Date
 
 -- | Inventory item flight start date.
-fStartDate :: Lens' Flight (Maybe LocalTime)
+fStartDate :: Lens' Flight (Maybe Day)
 fStartDate
   = lens _fStartDate (\ s a -> s{_fStartDate = a}) .
       mapping _Date
@@ -7759,14 +7759,14 @@ drKind = lens _drKind (\ s a -> s{_drKind = a})
 
 -- | The end date of the date range, inclusive. A string of the format:
 -- \"yyyy-MM-dd\".
-drEndDate :: Lens' DateRange (Maybe LocalTime)
+drEndDate :: Lens' DateRange (Maybe Day)
 drEndDate
   = lens _drEndDate (\ s a -> s{_drEndDate = a}) .
       mapping _Date
 
 -- | The start date of the date range, inclusive. A string of the format:
 -- \"yyyy-MM-dd\".
-drStartDate :: Lens' DateRange (Maybe LocalTime)
+drStartDate :: Lens' DateRange (Maybe Day)
 drStartDate
   = lens _drStartDate (\ s a -> s{_drStartDate = a}) .
       mapping _Date
@@ -8197,7 +8197,7 @@ camAdvertiserId
 -- day only, 6\/25\/2015. The hours, minutes, and seconds of the end date
 -- should not be set, as doing so will result in an error. This is a
 -- required field.
-camEndDate :: Lens' Campaign (Maybe LocalTime)
+camEndDate :: Lens' Campaign (Maybe Day)
 camEndDate
   = lens _camEndDate (\ s a -> s{_camEndDate = a}) .
       mapping _Date
@@ -8234,7 +8234,7 @@ camLookbackConfiguration
 -- | Date on which the campaign starts running. The start date can be any
 -- date. The hours, minutes, and seconds of the start date should not be
 -- set, as doing so will result in an error. This is a required field.
-camStartDate :: Lens' Campaign (Maybe LocalTime)
+camStartDate :: Lens' Campaign (Maybe Day)
 camStartDate
   = lens _camStartDate (\ s a -> s{_camStartDate = a})
       . mapping _Date
@@ -14189,7 +14189,7 @@ pricingSchedulePricingPeriod =
 -- the effective pricing period date is just that day only, 6\/25\/2015.
 -- The hours, minutes, and seconds of the end date should not be set, as
 -- doing so will result in an error.
-psppEndDate :: Lens' PricingSchedulePricingPeriod (Maybe LocalTime)
+psppEndDate :: Lens' PricingSchedulePricingPeriod (Maybe Day)
 psppEndDate
   = lens _psppEndDate (\ s a -> s{_psppEndDate = a}) .
       mapping _Date
@@ -14203,7 +14203,7 @@ psppRateOrCostNanos
 -- | Pricing period start date. This date must be later than, or the same day
 -- as, the placement start date. The hours, minutes, and seconds of the
 -- start date should not be set, as doing so will result in an error.
-psppStartDate :: Lens' PricingSchedulePricingPeriod (Maybe LocalTime)
+psppStartDate :: Lens' PricingSchedulePricingPeriod (Maybe Day)
 psppStartDate
   = lens _psppStartDate
       (\ s a -> s{_psppStartDate = a})
@@ -16163,13 +16163,13 @@ rsRepeats
   = lens _rsRepeats (\ s a -> s{_rsRepeats = a})
 
 -- | Start date of date range for which scheduled reports should be run.
-rsStartDate :: Lens' ReportSchedule (Maybe LocalTime)
+rsStartDate :: Lens' ReportSchedule (Maybe Day)
 rsStartDate
   = lens _rsStartDate (\ s a -> s{_rsStartDate = a}) .
       mapping _Date
 
 -- | The expiration date when the scheduled report stops running.
-rsExpirationDate :: Lens' ReportSchedule (Maybe LocalTime)
+rsExpirationDate :: Lens' ReportSchedule (Maybe Day)
 rsExpirationDate
   = lens _rsExpirationDate
       (\ s a -> s{_rsExpirationDate = a})
@@ -19143,7 +19143,7 @@ odLastSentRecipients
       . _Coerce
 
 -- | Effective date of this order document.
-odEffectiveDate :: Lens' OrderDocument (Maybe LocalTime)
+odEffectiveDate :: Lens' OrderDocument (Maybe Day)
 odEffectiveDate
   = lens _odEffectiveDate
       (\ s a -> s{_odEffectiveDate = a})

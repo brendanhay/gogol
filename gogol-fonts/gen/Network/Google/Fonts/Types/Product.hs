@@ -104,7 +104,7 @@ wSubsets
 
 -- | The date (format \"yyyy-MM-dd\") the font was modified for the last
 -- time.
-wLastModified :: Lens' Webfont (Maybe LocalTime)
+wLastModified :: Lens' Webfont (Maybe Day)
 wLastModified
   = lens _wLastModified
       (\ s a -> s{_wLastModified = a})

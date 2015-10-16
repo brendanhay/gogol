@@ -2416,7 +2416,7 @@ eventDateTime =
     }
 
 -- | The date, in the format \"yyyy-mm-dd\", if this is an all-day event.
-edtDate :: Lens' EventDateTime (Maybe LocalTime)
+edtDate :: Lens' EventDateTime (Maybe Day)
 edtDate
   = lens _edtDate (\ s a -> s{_edtDate = a}) .
       mapping _Date

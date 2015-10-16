@@ -297,7 +297,7 @@ blricNumNewerVersions
 -- | A date in RFC 3339 format with only the date part (for instance,
 -- \"2013-01-15\"). This condition is satisfied when an object is created
 -- before midnight of the specified date in UTC.
-blricCreatedBefore :: Lens' BucketLifecycleRuleItemCondition (Maybe LocalTime)
+blricCreatedBefore :: Lens' BucketLifecycleRuleItemCondition (Maybe Day)
 blricCreatedBefore
   = lens _blricCreatedBefore
       (\ s a -> s{_blricCreatedBefore = a})

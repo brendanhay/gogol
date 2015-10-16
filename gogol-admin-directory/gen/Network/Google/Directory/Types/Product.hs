@@ -3228,7 +3228,7 @@ chromeOSDeviceActiveTimeRangesItem =
     }
 
 -- | Date of usage
-codatriDate :: Lens' ChromeOSDeviceActiveTimeRangesItem (Maybe LocalTime)
+codatriDate :: Lens' ChromeOSDeviceActiveTimeRangesItem (Maybe Day)
 codatriDate
   = lens _codatriDate (\ s a -> s{_codatriDate = a}) .
       mapping _Date
