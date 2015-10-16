@@ -439,7 +439,7 @@ externalLit = \case
     Text     -> TyCon "Text"
     Bool     -> TyCon "Bool"
     Time     -> TyCon "TimeOfDay"
-    Date     -> TyCon "LocalTime"
+    Date     -> TyCon "Day"
     DateTime -> TyCon "UTCTime"
     Nat      -> TyCon "Natural"
     Float    -> TyCon "Float"
