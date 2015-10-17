@@ -33,6 +33,7 @@ library
 
     other-modules:
           Network.Google.Internal.HTTP
+        , Network.Google.Internal.Multipart
 
     build-depends:
           aeson                >= 0.8
@@ -55,3 +56,5 @@ library
         , transformers         >= 0.2
         , transformers-base    >= 0.4
         , unordered-containers >= 0.2.5
+        , http-client
+        , case-insensitive

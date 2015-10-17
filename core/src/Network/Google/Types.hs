@@ -23,35 +23,35 @@
 module Network.Google.Types where
 
 import           Control.Applicative
-import           Control.Exception.Lens       (exception)
-import           Control.Lens                 hiding (coerce)
+import           Control.Exception.Lens                (exception)
+import           Control.Lens                          hiding (coerce)
 import           Control.Monad
 import           Control.Monad.Catch
 import           Control.Monad.Trans.Resource
 import           Data.Aeson
-import           Data.ByteString              (ByteString)
-import qualified Data.ByteString.Char8        as BS8
-import qualified Data.ByteString.Lazy         as LBS
-import qualified Data.CaseInsensitive         as CI
+import           Data.ByteString                       (ByteString)
+import qualified Data.ByteString.Char8                 as BS8
+import qualified Data.ByteString.Lazy                  as LBS
+import qualified Data.CaseInsensitive                  as CI
 import           Data.Coerce
 import           Data.Conduit
-import qualified Data.Conduit.List            as CL
+import qualified Data.Conduit.List                     as CL
 import           Data.Data
-import           Data.DList                   (DList)
-import qualified Data.DList                   as DList
-import           Data.Foldable                (foldl')
+import           Data.DList                            (DList)
+import qualified Data.DList                            as DList
+import           Data.Foldable                         (foldl')
 import           Data.Monoid
 import           Data.String
-import           Data.Text                    (Text)
-import qualified Data.Text.Encoding           as Text
-import           Data.Text.Lazy.Builder       (Builder)
-import qualified Data.Text.Lazy.Builder       as Build
+import           Data.Text                             (Text)
+import qualified Data.Text.Encoding                    as Text
+import           Data.Text.Lazy.Builder                (Builder)
+import qualified Data.Text.Lazy.Builder                as Build
 import           GHC.Generics
 import           GHC.TypeLits
-import           Network.HTTP.Client          (HttpException)
-import           Network.HTTP.Media           hiding (Accept)
-import           Network.HTTP.Types           hiding (Header)
-import qualified Network.HTTP.Types           as HTTP
+import           Network.HTTP.Client                   (HttpException)
+import           Network.HTTP.Media                    hiding (Accept)
+import           Network.HTTP.Types                    hiding (Header)
+import qualified Network.HTTP.Types                    as HTTP
 import           Servant.API
 
 data AltJSON = AltJSON
@@ -199,21 +199,28 @@ serviceSecure = lens _svcSecure (\s a -> s { _svcSecure = a })
 serviceTimeout :: Lens' Service (Maybe Seconds)
 serviceTimeout = lens _svcTimeout (\s a -> s { _svcTimeout = a })
 
+-- | A single part of a multipart message.
+data Part = Part MediaType [(HeaderName, ByteString)] Body
+
+data Payload
+    = Body    !MediaType !Body
+    | Related ![Part]
+
 -- | An intermediary request builder.
 data Request = Request
-    { _rqPath    :: Builder
-    , _rqQuery   :: DList (ByteString, Maybe ByteString)
-    , _rqHeaders :: DList (HeaderName, ByteString)
-    , _rqBody    :: Maybe (MediaType,  Body)
+    { _rqPath    :: !Builder
+    , _rqQuery   :: !(DList (ByteString, Maybe ByteString))
+    , _rqHeaders :: !(DList (HeaderName, ByteString))
+    , _rqBody    :: !(Maybe Payload)
     }
 
 instance Monoid Request where
     mempty      = Request mempty mempty mempty Nothing
     mappend a b = Request
-        (_rqPath  a   <> "/" <> _rqPath b)
-        (_rqQuery a   <> _rqQuery b)
-        (_rqHeaders a <> _rqHeaders b)
-        (_rqBody b   <|> _rqBody a)
+        (_rqPath    a <>  "/" <> _rqPath b)
+        (_rqQuery   a <>  _rqQuery b)
+        (_rqHeaders a <>  _rqHeaders b)
+        (_rqBody b <|> _rqBody a)
 
 appendPath :: Request -> Builder -> Request
 appendPath rq x = rq { _rqPath = _rqPath rq <> "/" <> x }
@@ -233,16 +240,19 @@ appendHeader rq k (Just v) = rq
     }
 
 setBody :: Request -> MediaType -> Body -> Request
-setBody rq c x = rq { _rqBody = Just (c, x) }
+setBody rq c x = rq { _rqBody = Just (Body c x) }
+
+setRelated :: Request -> [Part] -> Request
+setRelated rq ps = rq { _rqBody = Just (Related ps) }
 
 -- | A materialised 'http-client' request and associated response parser.
 data Client a = Client
-    { _cliAccept   :: Maybe MediaType
-    , _cliMethod   :: Method
-    , _cliCheck    :: Status -> Bool
-    , _cliService  :: Service
-    , _cliRequest  :: Request
-    , _cliResponse :: Stream -> ResourceT IO (Either String a)
+    { _cliAccept   :: !(Maybe MediaType)
+    , _cliMethod   :: !Method
+    , _cliCheck    :: !(Status -> Bool)
+    , _cliService  :: !Service
+    , _cliRequest  :: !Request
+    , _cliResponse :: !(Stream -> ResourceT IO (Either String a))
     }
 
 clientService :: Lens' (Client a) Service
@@ -321,55 +331,20 @@ data CaptureMode (s :: Symbol) (m :: Symbol) a
 data MultipartRelated (cs :: [*]) m b
     deriving (Typeable)
 
-instance ( MimeRender   c m
+instance ( ToBody c m
+         , ToBody OctetStream b
          , GoogleClient fn
          ) => GoogleClient (MultipartRelated (c ': cs) m b :> fn) where
     type Fn (MultipartRelated (c ': cs) m b :> fn) = m -> b -> Fn fn
 
-    -- requestBuild Proxy rq m b = requestBuild (Proxy :: Proxy fn) $
-    --     mimeRender p m
-    --     mimeRender (Proxy :: Proxy OctetStream) b
-    --   where
-    --     p = Proxy :: Proxy c
-
--- POST /upload/drive/v2/files?uploadType=multipart HTTP/1.1
--- Host: www.googleapis.com
--- Authorization: Bearer your_auth_token
--- Content-Type: multipart/related; boundary="foo_bar_baz"
--- Content-Length: number_of_bytes_in_entire_request_body
---
--- --foo_bar_baz
--- Content-Type: application/json; charset=UTF-8
--- {
---   "title": "My File"
--- }
--- --foo_bar_baz
--- Content-Type: image/jpeg
--- JPEG data
--- --foo_bar_baz--
-
--- "mediaType" param also comes/calculated from the request body?
---
--- Resumable endpoints - Not supported to begin with, need to figure
--- out how to return session id etc.
---
--- Assume initially that every service supports multipart upload.
---
--- When downloading media you must set the alt query parameter
--- to media in the request URL.
---
--- "resumable" or "multipart" needs to go into the "uploadType" param
---
-
--- if c.protocol_ == "resumable" {
---     if c.mediaType_ == "" {
---         c.mediaType_ = googleapi.DetectMediaType(c.resumable_)
---     }
---     req.Header.Set("X-Upload-Content-Type", c.mediaType_)
---     req.Header.Set("Content-Type", "application/json; charset=utf-8")
--- } else {
---     req.Header.Set("Content-Type", ctype)
--- }
+    buildClient Proxy rq m b = buildClient (Proxy :: Proxy fn) $
+        setRelated rq
+            [ Part (contentType mc) [] (toBody mc m)
+            , Part (contentType mb) [] (toBody mb b)
+            ]
+          where
+            mc = Proxy :: Proxy c
+            mb = Proxy :: Proxy OctetStream
 
 instance (KnownSymbol s, GoogleClient fn) => GoogleClient (s :> fn) where
     type Fn (s :> fn) = Fn fn

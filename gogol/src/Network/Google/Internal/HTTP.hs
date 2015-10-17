@@ -17,16 +17,29 @@ import           Control.Monad.Catch
 import           Control.Monad.Trans.Resource
 import           Data.Default.Class
 import           Data.Monoid
-import qualified Data.Text.Encoding           as Text
-import qualified Data.Text.Lazy               as LText
-import qualified Data.Text.Lazy.Builder       as Build
-import           GHC.Exts                     (toList)
-import           Network.Google.Env           (Env (..))
+import qualified Data.Text.Encoding                as Text
+import qualified Data.Text.Lazy                    as LText
+import qualified Data.Text.Lazy.Builder            as Build
+import           GHC.Exts                          (toList)
+import           Network.Google.Env                (Env (..))
+import           Network.Google.Internal.Multipart
 import           Network.Google.Types
-import qualified Network.HTTP.Client.Conduit  as Client
+import qualified Network.HTTP.Client.Conduit       as Client
 import           Network.HTTP.Conduit
 import           Network.HTTP.Media
 import           Network.HTTP.Types
+
+-- FIXME: "mediaType" param also comes/calculated from the request body?
+--
+-- Resumable endpoints - Not supported to begin with, need to figure
+-- out how to return session id etc.
+--
+-- Assume initially that every service supports multipart upload.
+--
+-- When downloading media you must set the alt query parameter
+-- to media in the request URL.
+--
+-- "resumable" or "multipart" needs to go into the "uploadType" param
 
 perform :: (MonadCatch m, MonadResource m, GoogleRequest a)
         => Env
@@ -41,8 +54,9 @@ perform Env{..} x = catches go handlers
         & clientService %~ appEndo (getDual _envOverride)
 
     go = liftResourceT $ do
-        rs <- http rq _envManager
-        r  <- _cliResponse (responseBody rs)
+        (ct, b) <- content
+        rs      <- http (rq ct b) _envManager
+        r       <- _cliResponse (responseBody rs)
         pure $! case r of
             Right y -> Right y
             Left  e -> Left . SerializeError $ SerializeError'
@@ -52,7 +66,7 @@ perform Env{..} x = catches go handlers
                 , _serializeMessage = e
                 }
 
-    rq = def
+    rq ct b = def
         { Client.host            = _svcHost
         , Client.port            = _svcPort
         , Client.secure          = _svcSecure
@@ -61,20 +75,26 @@ perform Env{..} x = catches go handlers
         , Client.method          = _cliMethod
         , Client.path            = path
         , Client.queryString     = renderQuery True (toList _rqQuery)
-        , Client.requestHeaders  = accept (content (toList _rqHeaders))
-        , Client.requestBody     = body
+        , Client.requestHeaders  = accept (ct (toList _rqHeaders))
+        , Client.requestBody     = b
         }
 
     accept
          | Just t <- _cliAccept   = ((hAccept, renderHeader t) :)
          | otherwise              = id
 
-    content
-         | Just (t, _) <- _rqBody = ((hContentType, renderHeader t) :)
-         | otherwise              = id
-
-    body | Just (_, b) <- _rqBody = Client.requestBodySourceChunked b
-         | otherwise              = mempty
+    content =
+        case _rqBody of
+            Nothing           -> pure (id, mempty)
+            Just (Body t s)   -> pure
+                ( ((hContentType, renderHeader t) :)
+                , Client.requestBodySourceChunked s
+                )
+            Just (Related ps) -> do
+                b <- genBoundary
+                pure ( (multipartHeader b :)
+                     , renderParts b ps
+                     )
 
     path = Text.encodeUtf8
          . LText.toStrict
