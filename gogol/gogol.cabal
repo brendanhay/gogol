@@ -39,11 +39,13 @@ library
           aeson                >= 0.8
         , base                 >= 4.7 && < 5
         , bytestring           >= 0.9
+        , case-insensitive     >= 1.2
         , data-default-class   >= 0.0.1
         , directory            >= 1.2
         , exceptions           >= 0.6
         , filepath             >= 1.2
         , gogol-core           == 0.0.1.*
+        , http-client          >= 0.4.4
         , http-conduit         >= 2.1.4
         , http-media           >= 0.6
         , http-types           >= 0.8.6
@@ -56,5 +58,3 @@ library
         , transformers         >= 0.2
         , transformers-base    >= 0.4
         , unordered-containers >= 0.2.5
-        , http-client
-        , case-insensitive

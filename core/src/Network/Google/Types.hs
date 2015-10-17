@@ -69,16 +69,14 @@ instance ToText AltMedia where
 newtype AuthKey = AuthKey Text
     deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText, FromJSON, ToJSON)
 
-newtype OAuthToken = OAuthToken { tokenToText :: Text }
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
-
 newtype OAuthScope = OAuthScope { scopeToText :: Text }
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
-newtype Bearer a = Bearer a
+newtype OAuthToken = OAuthToken { tokenToText :: ByteString }
+    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable)
 
-instance ToText a => ToText (Bearer a) where
-    toText = mappend "Bearer " . toText
+instance FromJSON OAuthToken where
+    parseJSON = withText "oauth_token" (pure . OAuthToken . Text.encodeUtf8)
 
 newtype MediaDownload a = MediaDownload a
 

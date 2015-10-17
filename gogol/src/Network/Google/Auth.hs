@@ -178,12 +178,9 @@ data Auth where
     Tok :: OAuthToken                                    -> Auth
     Ref :: RefreshToken a => Manager -> MVar (Refresh a) -> Auth
 
-withToken :: MonadIO m => Auth -> (OAuthToken -> m a) -> m a
-withToken x f = liftIO (refreshToken x) >>= f
-
-refreshToken :: Auth -> IO OAuthToken
+refreshToken :: MonadIO m => Auth -> m OAuthToken
 refreshToken (Tok   t) = pure t
-refreshToken (Ref m r) = do
+refreshToken (Ref m r) = liftIO $ do
     x  <- readMVar r
     xv <- isValid x
     if xv

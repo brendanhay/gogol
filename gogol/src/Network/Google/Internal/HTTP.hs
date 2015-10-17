@@ -1,6 +1,8 @@
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE RecordWildCards  #-}
-{-# LANGUAGE TypeFamilies     #-}
+{-# LANGUAGE FlexibleContexts  #-}
+{-# LANGUAGE LambdaCase        #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 -- |
 -- Module      : Network.Google.Internal.HTTP
@@ -12,8 +14,10 @@
 --
 module Network.Google.Internal.HTTP where
 
+
 import           Control.Lens
 import           Control.Monad.Catch
+import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Resource
 import           Data.Default.Class
 import           Data.Monoid
@@ -21,6 +25,7 @@ import qualified Data.Text.Encoding                as Text
 import qualified Data.Text.Lazy                    as LText
 import qualified Data.Text.Lazy.Builder            as Build
 import           GHC.Exts                          (toList)
+import           Network.Google.Auth               (Auth, refreshToken)
 import           Network.Google.Env                (Env (..))
 import           Network.Google.Internal.Multipart
 import           Network.Google.Types
@@ -54,8 +59,9 @@ perform Env{..} x = catches go handlers
         & clientService %~ appEndo (getDual _envOverride)
 
     go = liftResourceT $ do
-        (ct, b) <- content
-        rs      <- http (rq ct b) _envManager
+        (ct, b) <- getContent _rqBody
+        auth    <- getAuthorisation _envAuth
+        rs      <- http (rq auth ct b) _envManager
         r       <- _cliResponse (responseBody rs)
         pure $! case r of
             Right y -> Right y
@@ -66,7 +72,7 @@ perform Env{..} x = catches go handlers
                 , _serializeMessage = e
                 }
 
-    rq ct b = def
+    rq auth ct b = def
         { Client.host            = _svcHost
         , Client.port            = _svcPort
         , Client.secure          = _svcSecure
@@ -75,26 +81,13 @@ perform Env{..} x = catches go handlers
         , Client.method          = _cliMethod
         , Client.path            = path
         , Client.queryString     = renderQuery True (toList _rqQuery)
-        , Client.requestHeaders  = accept (ct (toList _rqHeaders))
+        , Client.requestHeaders  = auth : accept (ct (toList _rqHeaders))
         , Client.requestBody     = b
         }
 
     accept
          | Just t <- _cliAccept   = ((hAccept, renderHeader t) :)
          | otherwise              = id
-
-    content =
-        case _rqBody of
-            Nothing           -> pure (id, mempty)
-            Just (Body t s)   -> pure
-                ( ((hContentType, renderHeader t) :)
-                , Client.requestBodySourceChunked s
-                )
-            Just (Related ps) -> do
-                b <- genBoundary
-                pure ( (multipartHeader b :)
-                     , renderParts b ps
-                     )
 
     path = Text.encodeUtf8
          . LText.toStrict
@@ -117,3 +110,25 @@ perform Env{..} x = catches go handlers
         ]
       where
         err e = return (Left e)
+
+getAuthorisation :: MonadIO m => Auth -> m Header
+getAuthorisation a = do
+    OAuthToken t <- refreshToken a
+    pure ( hAuthorization
+         , "Bearer " <> t
+         )
+
+getContent :: MonadIO m
+           => Maybe Payload
+           -> m ([Header] -> [Header], RequestBody)
+getContent = \case
+    Nothing           -> pure (id, mempty)
+    Just (Body t s)   -> pure
+        ( ((hContentType, renderHeader t) :)
+        , Client.requestBodySourceChunked s
+        )
+    Just (Related ps) -> do
+        b <- genBoundary
+        pure ( (multipartHeader b :)
+             , renderParts b ps
+             )
