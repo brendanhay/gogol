@@ -4,6 +4,7 @@ set -e
 
 docs=( documentation )
 core=( gogol-core gogol )
+examples=( amazonka-examples )
 
 priority_=( compute drive appengine storage oauth2 gmail )
 priority=${priority_[@]/#/gogol-}
@@ -39,9 +40,9 @@ TITLE
 }
 
 ghc_710=( 7.10.2 )
-# ghc_all=( 7.10.2 7.8.4 )
 
 matrix "Documentation" ghc_710[@] docs[@]
 matrix "Core" ghc_710[@] core[@]
 matrix "Priority" ghc_710[@] priority[@]
 matrix "Remainder" ghc_710[@] library[@]
+matrix "Examples" ghc_710[@] examples[@]

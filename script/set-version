@@ -11,9 +11,10 @@ if [ -z "$pvp" ] || [ -z "$semantic" ]; then
 fi
 
 specs=(
- gogol/gogol.cabal
- core/gogol-core.cabal
- gen/gogol-gen.cabal
+ gogol/*.cabal
+ core/*.cabal
+ gen/*.cabal
+ examples/*.cabal
 )
 
 echo "Bumping version to $pvp and dependencies to == $semantic ..."

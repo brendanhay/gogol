@@ -4,6 +4,7 @@ extra-deps: []
 packages:
   - core
   - gogol
+  - examples
   - gogol-adexchange-buyer
   - gogol-adexchange-seller
   - gogol-admin-datatransfer
