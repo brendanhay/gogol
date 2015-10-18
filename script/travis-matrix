@@ -4,7 +4,7 @@ set -e
 
 docs=( documentation )
 core=( gogol-core gogol )
-examples=( amazonka-examples )
+examples=( gogol-examples )
 
 priority_=( compute drive appengine storage oauth2 gmail )
 priority=${priority_[@]/#/gogol-}
