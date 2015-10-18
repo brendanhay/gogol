@@ -18,7 +18,52 @@
 --
 -- Explicitly specify your Google credentials, or retrieve them
 -- from the underlying OS.
-module Network.Google.Auth where
+module Network.Google.Auth
+   (
+   -- * Authentication
+   -- ** Retrieving Authentication
+     getAuth
+   , Credentials (..)
+   , Auth
+
+   -- ** Defaults
+   -- *** Metadata
+   , metadataHost
+   , metadataFlavorHeader
+   , metadataFlavorDesired
+
+   -- *** GCE
+   , checkGCEVar
+
+   -- *** Cloud SDK
+   , cloudSDKCredentialsDirVar
+   , cloudSDKCredentialsDir
+   , cloudSDKCredentialsFile
+   , cloudSDKCredentialsPath
+
+   -- *** Application Default Credentials
+   , defaultCredentialsFileVar
+   , defaultCredentialsPath
+
+   -- ** Credentials
+   , fromToken
+   , fromFile
+   , fromFilePath
+   , fromAccount
+
+   -- ** Authentication Tokens
+   , refreshToken
+
+   -- ** Handling Errors
+   , AsAuthError (..)
+   , AuthError   (..)
+
+   -- ** Re-exported Types
+   , OAuthScope  (..)
+   , OAuthToken  (..)
+   , ServiceId   (..)
+   , ClientId    (..)
+   ) where
 
 import           Control.Concurrent
 import           Control.Exception.Lens
@@ -44,8 +89,10 @@ import           System.Environment     (lookupEnv)
 import           System.FilePath        ((</>))
 import           System.Info            (os)
 
-accountsHost, metadataHost :: ByteString
+accountsHost :: ByteString
 accountsHost = "accounts.google.com"
+
+metadataHost :: ByteString
 metadataHost = "metadata.google.internal"
 
 metadataFlavorHeader :: HeaderName
@@ -54,8 +101,8 @@ metadataFlavorHeader = "Metadata-Flavor"
 metadataFlavorDesired :: ByteString
 metadataFlavorDesired = "Google"
 
-noGCECheck :: String
-noGCECheck = "NO_GCE_CHECK"
+checkGCEVar :: String
+checkGCEVar = "NO_GCE_CHECK"
 
 -- | The environment variable name which can replace ~/.config if set.
 cloudSDKCredentialsDirVar :: String
@@ -72,6 +119,7 @@ cloudSDKCredentialsFile = "application_default_credentials.json"
 defaultCredentialsFileVar :: String
 defaultCredentialsFileVar = "GOOGLE_APPLICATION_CREDENTIALS"
 
+-- | An error thrown when attempting to read AuthN/AuthZ information.
 data AuthError
     = RetrievalError    HttpException
     | MissingFileError  FilePath
@@ -130,13 +178,36 @@ instance AsAuthError AuthError where
             TokenRefreshError s e d -> Right (s, e, d)
             x                       -> Left  x)
 
+-- | Determines how AuthN/AuthZ information is retrieved.
 data Credentials
-    = FromToken   !OAuthToken
-    | FromFile    !FilePath
+    = FromToken !OAuthToken
+      -- ^ Supply an explicit access token. See 'fromToken'.
+
+    | FromFile !FilePath
+      -- ^ Load the Application Default Credentials from a specific filepath.
+
     | FromAccount !ServiceId
+      -- ^ Retrieve the Application Default Credentials using the speicfic
+      -- 'ServiceId' from the local metadata endpoint.
+
     | Discover
+      -- ^ Attempt credentials discovery via the following steps:
+      --
+      -- * Read the default credentials from a file specified by
+      -- the environment variable @GOOGLE_APPLICATION_CREDENTIALS@ if it exists.
+      --
+      -- * Read the platform equivalent of @~/.config/gcloud/application_default_credentials.json@ if it exists.
+      -- The @~/.config@ component of the path can be overriden by the environment
+      -- variable @CLOUDSDK_CONFIG@ if it exists.
+      --
+      -- * Retrieve the default service account application credentials if
+      -- running on GCE.
       deriving (Eq, Show)
 
+-- | Retrieve authentication information via the specified 'Credentials' mechanism.
+--
+-- Throws 'AuthError' when environment variables or service account information
+-- cannot be read, and credentials files are invalid or cannot be found.
 getAuth :: (MonadIO m, MonadCatch m) => Manager -> Credentials -> m Auth
 getAuth m = \case
     FromToken   t -> pure (fromToken t)
@@ -149,9 +220,21 @@ getAuth m = \case
                 throwingM _MissingFileError f
             fromAccount m "default"
 
+-- | An explicit access token.
 fromToken :: OAuthToken -> Auth
 fromToken = Tok
 
+-- | Try the two offical locations for the application credentials:
+--
+-- * Read the default credentials from a file specified by
+-- the environment variable @GOOGLE_APPLICATION_CREDENTIALS@ if it exists.
+--
+-- * Read the platform equivalent of @~/.config/gcloud/application_default_credentials.json@ if it exists.
+-- The @~/.config@ component of the path can be overriden by the environment
+-- variable @CLOUDSDK_CONFIG@ if it exists.
+--
+-- The read credentials will then be automatically refreshed to obtain a valid
+-- access token, eagerly, to ensure errors propagate promptly.
 fromFile :: MonadIO m => Manager -> m Auth
 fromFile m = do
     mf <- defaultCredentialsPath
@@ -159,6 +242,10 @@ fromFile m = do
         Just f  -> fromFilePath m f
         Nothing -> cloudSDKCredentialsPath >>= fromFilePath m
 
+-- | Read a specific file for the application credentials.
+--
+-- The read credentials will then be automatically refreshed to obtain a valid
+-- access token, eagerly, to ensure errors propagate promptly.
 fromFilePath :: MonadIO m => Manager -> FilePath -> m Auth
 fromFilePath m f = liftIO $ do
     p  <- doesFileExist f
@@ -169,6 +256,8 @@ fromFilePath m f = liftIO $ do
     !r <- refresh m u
     Ref m <$> newMVar (r :: Refresh User)
 
+-- | Retrieve the credentials from the @/computeMetadata/v1/instance/service-accounts/@
+-- endpoint using the specific service identifier.
 fromAccount :: MonadIO m => Manager -> ServiceId -> m Auth
 fromAccount m s = liftIO $ do
     !r <- refresh m s
@@ -178,6 +267,9 @@ data Auth where
     Tok :: OAuthToken                                    -> Auth
     Ref :: RefreshToken a => Manager -> MVar (Refresh a) -> Auth
 
+-- | Perform a safe refresh of the access token by performing a non-blocking
+-- read. Ensures there is only a single producer for the underlying authentication
+-- refresh, causing other readers to block during the refresh process.
 refreshToken :: MonadIO m => Auth -> m OAuthToken
 refreshToken (Tok   t) = pure t
 refreshToken (Ref m r) = liftIO $ do
@@ -193,25 +285,36 @@ refreshToken (Ref m r) = liftIO $ do
                     z <- refresh m (_rTarget y)
                     pure (z, _rToken z)
 
+-- | Check if the refresh context is still valid, that is, has not expired.
 isValid :: Refresh a -> IO Bool
 isValid r = (< _rExpiry r) <$> getCurrentTime
 
+-- | Return the filepath to the Cloud SDK well known file location such as
+-- @~/.config/gcloud/application_default_credentials.json@.
 cloudSDKCredentialsPath :: MonadIO m => m FilePath
 cloudSDKCredentialsPath = liftIO $ do
     v <- lookupEnv cloudSDKCredentialsDirVar
     h <- getHomeDirectory
     let d = case v of
-            Nothing | os == "windows" -> h </> cloudSDKCredentialsDir
-            Nothing                   -> h </> ".config" </> cloudSDKCredentialsDir
-            Just x                    -> h </> x
-    pure $! d </> cloudSDKCredentialsFile
+            Nothing | os == "windows" -> h
+            Nothing                   -> h </> ".config"
+            Just x                    -> x
+    pure $! d
+        </> cloudSDKCredentialsDir
+        </> cloudSDKCredentialsFile
 
+-- | Lookup the @GOOGLE_APPLICATION_CREDENTIALS@ environment variable for the
+-- default application credentials filepath.
 defaultCredentialsPath :: MonadIO m => m (Maybe FilePath)
 defaultCredentialsPath = liftIO (lookupEnv defaultCredentialsFileVar)
 
+-- | Detect if the underlying host is running on GCE.
+--
+-- The environment variable @NO_GCE_CHECK@ can be set to @1@, @true@, @yes@, or @on@
+-- to skip this check and always return @False@.
 detectGCE :: MonadIO m => Manager -> m Bool
 detectGCE m = liftIO $ do
-    p <- check <$> lookupEnv noGCECheck
+    p <- check <$> lookupEnv checkGCEVar
     if p
         then (success <$> httpLbs rq m) `catch` failure
         else pure False
