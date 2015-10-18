@@ -196,7 +196,7 @@ data Credentials
       -- * Read the default credentials from a file specified by
       -- the environment variable @GOOGLE_APPLICATION_CREDENTIALS@ if it exists.
       --
-      -- * Read the platform equivalent of @~/.config/gcloud/application_default_credentials.json@ if it exists.
+      -- * Read the platform equivalent of @~\/.config\/gcloud\/application_default_credentials.json@ if it exists.
       -- The @~/.config@ component of the path can be overriden by the environment
       -- variable @CLOUDSDK_CONFIG@ if it exists.
       --
@@ -290,7 +290,7 @@ isValid :: Refresh a -> IO Bool
 isValid r = (< _rExpiry r) <$> getCurrentTime
 
 -- | Return the filepath to the Cloud SDK well known file location such as
--- @~/.config/gcloud/application_default_credentials.json@.
+-- @~\/.config\/gcloud\/application_default_credentials.json@.
 cloudSDKCredentialsPath :: MonadIO m => m FilePath
 cloudSDKCredentialsPath = liftIO $ do
     v <- lookupEnv cloudSDKCredentialsDirVar
