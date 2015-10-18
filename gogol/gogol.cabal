@@ -14,7 +14,17 @@ extra-source-files:    README.md CHANGELOG.md
 cabal-version:         >= 1.10
 
 description:
-    Pending
+    This client library contains request and response logic to communicate
+    with Google Services compatible APIs using the types supplied by the
+    various @gogol-*@ service libraries. See the <http://hackage.haskell.org/packages/#cat:Google Google>
+    category on Hackage for supported services.
+    .
+    To get started, import the desired @gogol-*@ library (such as
+    <http://hackage.haskell.org/package/gogol-gmail/docs/Network-Google-Gmail.html Network.Google.Gmail>)
+    and @Network.Google@ from this package.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:              git

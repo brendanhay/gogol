@@ -219,3 +219,7 @@ matrix:
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-youtube-analytics
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
+
+    # Examples
+    - env: GHCVER=7.10.2 LIBRARY=amazonka-examples
+      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }

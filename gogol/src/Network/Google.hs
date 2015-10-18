@@ -6,6 +6,8 @@
 {-# LANGUAGE TypeFamilies               #-}
 {-# LANGUAGE UndecidableInstances       #-}
 
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google
 -- Copyright   : (c) 2015 Brendan Hay
@@ -14,10 +16,67 @@
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 --
-module Network.Google where
+-- This module provides a simple 'AWS' monad and a set of operations which
+-- can be performed against remote Google Service APIs, for use with the types
+-- supplied by the various @gogol-*@ libraries.
+--
+-- A 'MonadGoogle' typeclass is used as a function constraint to provide automatic
+-- lifting of functions when embedding 'Google' as a layer inside your own
+-- application stack.
+module Network.Google
+    (
+    -- * Running Google Actions
+      Google
+    , runGoogle
+    , runResourceT
+
+    -- * Authentication and Environment
+    , newEnv
+    , Env
+    , HasEnv (..)
+
+    -- ** Credential Discovery
+    , Credentials (..)
+
+    -- * Sending Requests
+    , send
+
+    -- ** Media Downloads
+    , download
+
+    -- ** Service Configuration
+    -- ** Overriding Defaults
+    , configure
+    , override
+
+    -- *** Scoped Actions
+    , reconfigure
+    , timeout
+
+    -- ** Media Uploads
+    , Body
+    , ToBody       (..)
+    , OctetStream
+    , PlainText
+    , JSON
+
+    -- * Running Asynchronous Actions
+    -- $async
+
+    -- * Handling Errors
+    , AsError      (..)
+    , AsAuthError  (..)
+
+    , trying
+    , catching
+
+    -- * Re-exported Types
+    , Proxy (..)
+    , module Network.Google.Types
+    ) where
 
 import           Control.Applicative
-import           Control.Exception.Lens       (throwingM)
+import           Control.Exception.Lens
 import           Control.Monad
 import           Control.Monad.Base
 import           Control.Monad.Catch
@@ -34,9 +93,11 @@ import           Control.Monad.Trans.Maybe    (MaybeT)
 import           Control.Monad.Trans.Resource
 import qualified Control.Monad.Writer.Lazy    as LW
 import qualified Control.Monad.Writer.Strict  as W
+import           Network.Google.Auth
 import           Network.Google.Env
 import           Network.Google.Internal.HTTP
 import           Network.Google.Prelude
+import           Network.Google.Types
 
 newtype Google a = Google { unGoogle :: ReaderT Env (ResourceT IO) a }
     deriving
@@ -93,19 +154,35 @@ instance (Monoid w, MonadGoogle m) => MonadGoogle (RW.RWST r w s m) where
 instance (Monoid w, MonadGoogle m) => MonadGoogle (LRW.RWST r w s m) where
     liftGoogle = lift . liftGoogle
 
+-- | Run a 'Google' aciton using the specified environment.
 runGoogle :: (MonadResource m, HasEnv r) => r -> Google a -> m a
 runGoogle e m = liftResourceT $ runReaderT (unGoogle m) (e ^. environment)
 
+-- | Send a request, returning the associated response if successful.
+--
+-- Throws 'Error'.
 send :: (MonadGoogle m, GoogleRequest a) => a -> m (Rs a)
 send x = liftGoogle $ do
     e <- ask
     r <- perform e x
     hoistError r
 
-media :: (MonadGoogle m, GoogleRequest (MediaDownload a))
-      => a
-      -> m (Rs (MediaDownload a))
-media = send . MediaDownload
+-- | Send a request returning the associated streaming media response if successful.
+--
+-- Some request data types have two possible responses, the JSON metadata and
+-- a streaming media response. Use 'send' to retrieve the metadata and 'download'
+-- to retrieve the streaming media.
+--
+-- Throws 'Error'.
+download :: (MonadGoogle m, GoogleRequest (MediaDownload a))
+         => a
+         -> m (Rs (MediaDownload a))
+download = send . MediaDownload
 
 hoistError :: MonadThrow m => Either Error a -> m a
 hoistError = either (throwingM _Error) return
+
+{- $async
+Requests can be sent asynchronously, but due to guarantees about resource closure
+require the use of <http://hackage.haskell.org/package/lifted-async lifted-async>.
+-}
