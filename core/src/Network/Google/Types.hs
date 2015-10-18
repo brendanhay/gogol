@@ -72,7 +72,7 @@ newtype AuthKey = AuthKey Text
 newtype OAuthScope = OAuthScope { scopeToText :: Text }
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
-newtype OAuthToken = OAuthToken { tokenToText :: ByteString }
+newtype OAuthToken = OAuthToken { tokenToBS :: ByteString }
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable)
 
 instance FromJSON OAuthToken where
