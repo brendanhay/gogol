@@ -25,6 +25,8 @@ description:
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
+    .
+    GHC 7.10.2 and higher is officially supported.
 
 source-repository head
     type:              git
