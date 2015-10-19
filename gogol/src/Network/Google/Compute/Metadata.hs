@@ -9,8 +9,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Google Compute Engine defines a set of default metadata entries that provide
--- information about your instance or project. Default metadata is always defined
--- and set by the server. You cannot manually edit any of these metadata pairs.
+-- information about your instance or project.
+--
+-- This module contains functions for retrieving various Compute metadata from an
+-- instance's local metadata endpoint using 'MonadIO' and not the Google monad.
 module Network.Google.Compute.Metadata
     (
     -- * Google Compute Instance Check
@@ -55,12 +57,15 @@ import qualified Network.HTTP.Conduit    as Client
 import           Network.HTTP.Types
 import           System.Environment      (lookupEnv)
 
+-- | @NO_GCE_CHECK@.
 checkGCEVar :: String
 checkGCEVar = "NO_GCE_CHECK"
 
+-- | The @Metadata-Flavor@ header.
 metadataFlavorHeader :: HeaderName
 metadataFlavorHeader = "Metadata-Flavor"
 
+-- | The desired metadata flavor.
 metadataFlavorDesired :: ByteString
 metadataFlavorDesired = "Google"
 

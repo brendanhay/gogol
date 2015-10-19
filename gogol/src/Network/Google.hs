@@ -27,13 +27,14 @@ module Network.Google
     (
     -- * Running Google Actions
       Google
+    , MonadGoogle (..)
     , runGoogle
     , runResourceT
 
     -- * Authentication and Environment
     , newEnv
     , Env
-    , HasEnv (..)
+    , HasEnv      (..)
 
     -- ** Credential Discovery
     , Credentials (..)
@@ -55,23 +56,23 @@ module Network.Google
 
     -- ** Media Uploads
     , Body
-    , ToBody       (..)
-    , OctetStream
-    , PlainText
-    , JSON
+    , ToBody      (..)
 
     -- * Running Asynchronous Actions
     -- $async
 
     -- * Handling Errors
-    , AsError      (..)
-    , AsAuthError  (..)
+    , AsError     (..)
+    , AsAuthError (..)
 
     , trying
     , catching
 
     -- * Re-exported Types
-    , Proxy (..)
+    , Proxy       (..)
+    , OctetStream
+    , PlainText
+    , JSON
     , module Network.Google.Types
     ) where
 
